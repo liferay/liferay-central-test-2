@@ -45,11 +45,14 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean Basic1Present = selenium.isVisible("link=\u00ab Basic");
 
@@ -65,9 +68,11 @@ public class TearDownTest extends BaseTestCase {
 			case 2:
 				selenium.type("_125_keywords",
 					RuntimeVariables.replace("selenium"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean UserPresent = selenium.isElementPresent("_125_rowIds");
 
@@ -83,6 +88,7 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to deactivate the selected users[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
 
 				boolean AdvancedPresent = selenium.isVisible(
 						"link=Advanced \u00bb");
@@ -114,17 +120,20 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.select("_125_active",
 					RuntimeVariables.replace("label=No"));
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("_125_allRowIds", RuntimeVariables.replace(""));
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to permanently delete the selected users[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
 
 				boolean Basic2Present = selenium.isVisible("link=\u00ab Basic");
 
@@ -156,9 +165,11 @@ public class TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Organizations",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean Basic3Present = selenium.isVisible("link=\u00ab Basic");
 
@@ -174,9 +185,11 @@ public class TearDownTest extends BaseTestCase {
 			case 6:
 				selenium.type("_126_keywords",
 					RuntimeVariables.replace("selenium"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean OrganizationPresent = selenium.isElementPresent(
 						"_126_rowIds");
@@ -193,6 +206,7 @@ public class TearDownTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
 
 			case 7:
 			case 100:

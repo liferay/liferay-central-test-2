@@ -40,6 +40,7 @@ public class Writer_ConfigureWCDPortletTest extends BaseTestCase {
 				selenium.clickAt("link=Back to Guest",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 			case 2:
 
@@ -60,21 +61,28 @@ public class Writer_ConfigureWCDPortletTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Web Content Display Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//img[@alt='Select Web Content']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.typeKeys("_86_keywords",
 					RuntimeVariables.replace("test"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_86_keywords", RuntimeVariables.replace("test"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Writer Permissions Web Content Test",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 			case 100:
 				label = -1;

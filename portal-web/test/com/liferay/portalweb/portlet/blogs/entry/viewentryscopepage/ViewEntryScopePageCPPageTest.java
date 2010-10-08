@@ -40,8 +40,10 @@ public class ViewEntryScopePageCPPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Scope Default"),
 			selenium.getText("//div[2]/span"));
 		selenium.clickAt("//div[2]/span/a", RuntimeVariables.replace("Default"));
@@ -63,6 +65,7 @@ public class ViewEntryScopePageCPPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Default"),
 			selenium.getText("//div[@class='lfr-panel-content']/ul/li[1]/a"));
 
@@ -83,13 +86,16 @@ public class ViewEntryScopePageCPPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//div[@class='lfr-panel-content']/ul/li[2]/a",
 			RuntimeVariables.replace("Blogs Page Scope Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Scope Blogs Page Scope Page"),
 			selenium.getText("//div[2]/span"));
 		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -109,6 +115,7 @@ public class ViewEntryScopePageCPPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Blogs"),
 			selenium.getText("//header/h1/span"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title Scope Page"),

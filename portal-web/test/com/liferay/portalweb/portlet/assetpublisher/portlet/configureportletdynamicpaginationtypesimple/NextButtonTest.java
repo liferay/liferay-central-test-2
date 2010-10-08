@@ -40,17 +40,21 @@ public class NextButtonTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent("link=Previous"));
 		assertTrue(selenium.isElementPresent("link=Next"));
 		selenium.click(RuntimeVariables.replace("link=Next"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Previous"));
 		assertTrue(selenium.isElementPresent("link=Next"));
 		selenium.click(RuntimeVariables.replace("link=Next"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Previous"));
 		assertFalse(selenium.isElementPresent("link=Next"));
 	}

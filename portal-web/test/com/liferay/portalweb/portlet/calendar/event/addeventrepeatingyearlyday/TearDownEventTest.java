@@ -45,11 +45,14 @@ public class TearDownEventTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Calendar Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Events", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -66,6 +69,8 @@ public class TearDownEventTest extends BaseTestCase {
 
 					Thread.sleep(1000);
 				}
+
+				selenium.saveScreenShotAndSource();
 
 				boolean event1Present = selenium.isElementPresent(
 						"//td[6]/ul/li/strong/a");
@@ -96,11 +101,13 @@ public class TearDownEventTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
 
 			case 2:
 
@@ -119,6 +126,8 @@ public class TearDownEventTest extends BaseTestCase {
 
 					Thread.sleep(1000);
 				}
+
+				selenium.saveScreenShotAndSource();
 
 				boolean event2Present = selenium.isElementPresent(
 						"//td[6]/ul/li/strong/a");
@@ -149,11 +158,13 @@ public class TearDownEventTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
 
 			case 3:
 
@@ -172,6 +183,8 @@ public class TearDownEventTest extends BaseTestCase {
 
 					Thread.sleep(1000);
 				}
+
+				selenium.saveScreenShotAndSource();
 
 				boolean event3Present = selenium.isElementPresent(
 						"//td[6]/ul/li/strong/a");
@@ -202,11 +215,13 @@ public class TearDownEventTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
 
 			case 4:
 
@@ -225,6 +240,8 @@ public class TearDownEventTest extends BaseTestCase {
 
 					Thread.sleep(1000);
 				}
+
+				selenium.saveScreenShotAndSource();
 
 				boolean event4Present = selenium.isElementPresent(
 						"//td[6]/ul/li/strong/a");
@@ -255,11 +272,13 @@ public class TearDownEventTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
 
 			case 5:
 
@@ -278,6 +297,8 @@ public class TearDownEventTest extends BaseTestCase {
 
 					Thread.sleep(1000);
 				}
+
+				selenium.saveScreenShotAndSource();
 
 				boolean event5Present = selenium.isElementPresent(
 						"//td[6]/ul/li/strong/a");
@@ -308,11 +329,13 @@ public class TearDownEventTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
 
 			case 6:
 			case 100:

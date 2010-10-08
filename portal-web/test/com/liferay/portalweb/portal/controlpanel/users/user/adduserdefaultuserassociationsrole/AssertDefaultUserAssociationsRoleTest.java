@@ -46,11 +46,14 @@ public class AssertDefaultUserAssociationsRoleTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
@@ -66,12 +69,15 @@ public class AssertDefaultUserAssociationsRoleTest extends BaseTestCase {
 			case 2:
 				selenium.type("_125_keywords",
 					RuntimeVariables.replace("selen01"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//td[2]/a",
 					RuntimeVariables.replace("User Name"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("rolesLink", RuntimeVariables.replace("Roles"));
 				assertEquals(RuntimeVariables.replace("Administrator"),
 					selenium.getText(

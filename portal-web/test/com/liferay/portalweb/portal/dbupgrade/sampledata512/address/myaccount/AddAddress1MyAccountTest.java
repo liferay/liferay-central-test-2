@@ -40,8 +40,10 @@ public class AddAddress1MyAccountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=My Account", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Addresses", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -60,13 +62,17 @@ public class AddAddress1MyAccountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//div[7]/div[1]/input", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_2_street1",
 			RuntimeVariables.replace("1220 Brea Canyon Rd"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_2_countryId",
 			RuntimeVariables.replace("label=United States"));
 		selenium.type("_2_street2", RuntimeVariables.replace("Ste 12"));
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -86,16 +92,21 @@ public class AddAddress1MyAccountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.select("_2_regionId",
 			RuntimeVariables.replace("label=California"));
 		selenium.type("_2_street3", RuntimeVariables.replace("Walnut"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_2_typeId", RuntimeVariables.replace("label=Business"));
 		selenium.type("_2_city", RuntimeVariables.replace("Los Angeles"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_2_mailingCheckbox", RuntimeVariables.replace(""));
 		selenium.clickAt("_2_primaryCheckbox", RuntimeVariables.replace(""));
 		selenium.type("_2_zip", RuntimeVariables.replace("91789"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//div[2]/div/div/div"));

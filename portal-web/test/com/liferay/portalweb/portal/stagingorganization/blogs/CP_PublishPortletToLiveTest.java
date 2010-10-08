@@ -46,12 +46,15 @@ public class CP_PublishPortletToLiveTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Blogs Staging Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=View Proposals",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//strong/a",
 					RuntimeVariables.replace("Actions"));
 
@@ -72,9 +75,11 @@ public class CP_PublishPortletToLiveTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Publish to Live']",
 					RuntimeVariables.replace(""));
 				Thread.sleep(5000);
@@ -94,6 +99,8 @@ public class CP_PublishPortletToLiveTest extends BaseTestCase {
 
 					Thread.sleep(1000);
 				}
+
+				selenium.saveScreenShotAndSource();
 
 				boolean optionsVisible = selenium.isVisible(
 						"_88_PORTLET_DATA_33Checkbox");
@@ -125,6 +132,7 @@ public class CP_PublishPortletToLiveTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("_88_PORTLET_DATA_33Checkbox",
 					RuntimeVariables.replace(""));
 				Thread.sleep(5000);
@@ -133,6 +141,7 @@ public class CP_PublishPortletToLiveTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to publish these pages[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));
 

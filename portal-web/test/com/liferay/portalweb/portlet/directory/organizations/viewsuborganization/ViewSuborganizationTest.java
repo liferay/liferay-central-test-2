@@ -45,12 +45,15 @@ public class ViewSuborganizationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Directory Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Organizations",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
@@ -66,9 +69,11 @@ public class ViewSuborganizationTest extends BaseTestCase {
 			case 2:
 				selenium.type("_11_keywords",
 					RuntimeVariables.replace("Diamond Bar"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//td[7]/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
@@ -89,9 +94,11 @@ public class ViewSuborganizationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isElementPresent("link=Test Child"));
 
 			case 100:

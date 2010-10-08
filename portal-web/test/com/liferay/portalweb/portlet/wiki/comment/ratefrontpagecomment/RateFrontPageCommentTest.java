@@ -40,8 +40,10 @@ public class RateFrontPageCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,6 +61,7 @@ public class RateFrontPageCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("0 (0 Votes)"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a[1]",
 			RuntimeVariables.replace(""));
@@ -79,6 +82,7 @@ public class RateFrontPageCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("+1 (1 Vote)"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a[1]",
 			RuntimeVariables.replace(""));
@@ -99,6 +103,7 @@ public class RateFrontPageCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("0 (0 Votes)"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a[2]",
 			RuntimeVariables.replace(""));
@@ -119,6 +124,7 @@ public class RateFrontPageCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("-1 (1 Vote)"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a[2]",
 			RuntimeVariables.replace(""));
@@ -139,6 +145,7 @@ public class RateFrontPageCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("0 (0 Votes)"));
 	}
 }

@@ -41,10 +41,13 @@ public class ViewEmailNotificationAccountCreatedTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("emailNotificationsLink", RuntimeVariables.replace(""));
 		selenium.clickAt("link=Account Created Notification",
 			RuntimeVariables.replace(""));
@@ -66,6 +69,7 @@ public class ViewEmailNotificationAccountCreatedTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
 				"_130_settings--admin.email.user.added.enabled--Checkbox"));
 		assertTrue(selenium.isTextPresent("Subject"));

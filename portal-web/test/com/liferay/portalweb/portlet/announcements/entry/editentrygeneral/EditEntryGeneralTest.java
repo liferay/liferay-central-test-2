@@ -40,9 +40,11 @@ public class EditEntryGeneralTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Announcements Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText("//div/h3",
 				"Announcements Entry Title"));
 		assertEquals(RuntimeVariables.replace(
@@ -54,14 +56,19 @@ public class EditEntryGeneralTest extends BaseTestCase {
 			selenium.getText("//p"));
 		selenium.clickAt("//td[1]/span/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_84_title",
 			RuntimeVariables.replace("Edited Announcements Entry Title"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_84_url",
 			RuntimeVariables.replace("http://www.alloyui.com"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_84_content",
 			RuntimeVariables.replace("Edited Announcements Entry Content"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText("//div/h3",
 				"Edited Announcements Entry Title"));
 		assertEquals(RuntimeVariables.replace(

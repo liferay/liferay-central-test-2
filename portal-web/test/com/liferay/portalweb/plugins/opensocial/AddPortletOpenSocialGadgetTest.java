@@ -40,9 +40,11 @@ public class AddPortletOpenSocialGadgetTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=OpenSocial Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 
@@ -62,8 +64,10 @@ public class AddPortletOpenSocialGadgetTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.typeKeys("layout_configuration_content",
 			RuntimeVariables.replace("g"));
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -82,6 +86,7 @@ public class AddPortletOpenSocialGadgetTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//div[@title='Google Hello World Sample']/p/a",
 			RuntimeVariables.replace(""));
 
@@ -101,6 +106,7 @@ public class AddPortletOpenSocialGadgetTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Google Hello World Sample"),
 			selenium.getText("//header/h1/span"));
 		Thread.sleep(5000);
@@ -108,5 +114,6 @@ public class AddPortletOpenSocialGadgetTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Hello, world!"),
 			selenium.getText("//body"));
 		selenium.selectFrame("relative=top");
+		selenium.saveScreenShotAndSource();
 	}
 }

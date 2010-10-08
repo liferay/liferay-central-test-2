@@ -40,11 +40,14 @@ public class CC_SendPortletProposalTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Blogs Staging Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=View Staged Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Propose Publication",
 			RuntimeVariables.replace(""));
 
@@ -64,15 +67,19 @@ public class CC_SendPortletProposalTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("_88_description",
 			RuntimeVariables.replace("This is a portlet proposal test."));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_88_reviewUserId",
 			RuntimeVariables.replace("label=Administrator Liferay"));
 		selenium.clickAt("//input[@value='Proceed']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=View Proposals", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Blogs Staging Test Page"));
 		assertTrue(selenium.isTextPresent("This is a portlet proposal test."));
 	}

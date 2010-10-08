@@ -40,12 +40,16 @@ public class Publisher_AssertCannotSearchWCSPreApprovalTest extends BaseTestCase
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content Search Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_77_keywords", RuntimeVariables.replace("test"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@type='image']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"No pages were found that matched the keywords: test."));
 	}

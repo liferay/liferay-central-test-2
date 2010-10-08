@@ -40,22 +40,31 @@ public class AddNullDescriptionPollTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Polls", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Question']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_25_title_en_US",
 			RuntimeVariables.replace("Null Description Poll Test Title"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_25_description_en_US", RuntimeVariables.replace(""));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_25_choiceDescriptiona_en_US",
 			RuntimeVariables.replace("Null Description Poll Test Choice A"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_25_choiceDescriptionb_en_US",
 			RuntimeVariables.replace("Null Description Poll Test Choice B"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again"));
 		assertTrue(selenium.isTextPresent("Please enter a valid description."));

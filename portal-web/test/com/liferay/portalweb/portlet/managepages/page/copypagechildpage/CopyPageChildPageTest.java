@@ -46,12 +46,15 @@ public class CopyPageChildPageTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Manage Pages Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Child Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("main-content", RuntimeVariables.replace(""));
 				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
 				selenium.clickAt("navigation", RuntimeVariables.replace(""));
@@ -66,6 +69,7 @@ public class CopyPageChildPageTest extends BaseTestCase {
 				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
 					RuntimeVariables.replace("Manage Pages"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -84,6 +88,8 @@ public class CopyPageChildPageTest extends BaseTestCase {
 
 					Thread.sleep(1000);
 				}
+
+				selenium.saveScreenShotAndSource();
 
 				boolean welcomePresent = selenium.isElementPresent(
 						"//li/ul/li[1]/div/div[3]/a");
@@ -115,6 +121,8 @@ public class CopyPageChildPageTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
+
 				boolean childPagePresent = selenium.isElementPresent(
 						"//li[2]/ul/li/div/div[3]/a");
 
@@ -145,9 +153,11 @@ public class CopyPageChildPageTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//li[2]/ul/li/div/div[3]/a",
 					RuntimeVariables.replace("Child Test Page"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.select("_88_type",
 					RuntimeVariables.replace("label=Portlet"));
 				assertEquals(RuntimeVariables.replace(
@@ -158,6 +168,7 @@ public class CopyPageChildPageTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//section/div/div/div/div"));
@@ -180,12 +191,15 @@ public class CopyPageChildPageTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Manage Pages Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Child Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Child Test Page"),
 					selenium.getText("//nav/ul/li[3]/span/a"));
 				assertEquals(RuntimeVariables.replace("Sign In"),

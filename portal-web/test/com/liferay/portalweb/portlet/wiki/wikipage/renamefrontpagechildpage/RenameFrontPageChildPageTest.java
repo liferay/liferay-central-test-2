@@ -40,23 +40,30 @@ public class RenameFrontPageChildPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Front Page Child Page Test"),
 			selenium.getText("//div[6]/ul/li/a"));
 		selenium.clickAt("//div[6]/ul/li/a",
 			RuntimeVariables.replace("Front Page Child Page Test"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//tr[9]/td/ul/li[3]/a/span",
 			RuntimeVariables.replace("Move"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_36_newTitle",
 			RuntimeVariables.replace("Front Page Child Page Rename"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Rename']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
@@ -86,8 +93,10 @@ public class RenameFrontPageChildPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Front Page Child Page Rename"),
 			selenium.getText("//div[6]/ul/li/a"));
 		assertFalse(selenium.isElementPresent("link=Front Page Child Page Test"));
@@ -109,10 +118,13 @@ public class RenameFrontPageChildPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=All Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Front Page Child Page Test"));
 		assertTrue(selenium.isElementPresent(
 				"link=Front Page Child Page Rename"));

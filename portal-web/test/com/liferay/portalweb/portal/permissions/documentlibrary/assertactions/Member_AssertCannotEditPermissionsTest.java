@@ -26,18 +26,22 @@ public class Member_AssertCannotEditPermissionsTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent("link=Permissions"));
 		selenium.clickAt("link=Permissions Edited Test Folder",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent("link=Permissions"));
 		selenium.clickAt("link=Permissions Test Subfolder",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent("link=Permissions"));
 		selenium.clickAt("//a/span/span",
 			RuntimeVariables.replace("Admin Permissions Edited Test Document"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent("link=Permissions"));
 	}
 }

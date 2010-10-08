@@ -40,20 +40,30 @@ public class AddUserTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//span[2]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_screenName", RuntimeVariables.replace("selenium"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_emailAddress",
 			RuntimeVariables.replace("selenium@liferay.com"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_firstName", RuntimeVariables.replace("selen01"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_middleName", RuntimeVariables.replace("lenn"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_lastName", RuntimeVariables.replace("nium01"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));

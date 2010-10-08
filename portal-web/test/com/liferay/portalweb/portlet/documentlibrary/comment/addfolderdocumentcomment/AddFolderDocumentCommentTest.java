@@ -40,13 +40,17 @@ public class AddFolderDocumentCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Document Library Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Be the first.", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -65,12 +69,15 @@ public class AddFolderDocumentCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("_20_postReplyBody0",
 			RuntimeVariables.replace("This is a test1 comment1."));
+		selenium.saveScreenShotAndSource();
 		selenium.keyPress("_20_postReplyBody0", RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_20_postReplyBody0", RuntimeVariables.replace("\\8"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Reply']"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));

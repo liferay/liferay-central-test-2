@@ -40,17 +40,23 @@ public class CancelAddFrontPageChildPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_36_title",
 			RuntimeVariables.replace("Front Page Child Page Test"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_36_content",
 			RuntimeVariables.replace("This is a front page child page test."));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Cancel']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertFalse(selenium.isElementPresent("link=Front Page Child Page Test"));
@@ -72,10 +78,13 @@ public class CancelAddFrontPageChildPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=All Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent("link=Front Page Child Page Test"));
 	}
 }

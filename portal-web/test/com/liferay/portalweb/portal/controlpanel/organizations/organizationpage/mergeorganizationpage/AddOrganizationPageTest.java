@@ -45,12 +45,15 @@ public class AddOrganizationPageTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Organizations",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
@@ -66,9 +69,11 @@ public class AddOrganizationPageTest extends BaseTestCase {
 			case 2:
 				selenium.type("_126_keywords",
 					RuntimeVariables.replace("Selenium"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				Thread.sleep(5000);
 				selenium.clickAt("//strong/a",
 					RuntimeVariables.replace("Actions"));
@@ -90,14 +95,18 @@ public class AddOrganizationPageTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_126_name_en_US",
 					RuntimeVariables.replace("Selenium Test Home Page"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Add Page']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				Thread.sleep(5000);
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
@@ -135,6 +144,7 @@ public class AddOrganizationPageTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Selenium Test Home Page"),
 					selenium.getText("//li/ul/li[1]/div/div[3]/a"));
 

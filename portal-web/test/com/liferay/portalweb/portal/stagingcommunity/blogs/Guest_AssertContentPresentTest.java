@@ -40,9 +40,11 @@ public class Guest_AssertContentPresentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Blogs Staging Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Staging Blogs Test Entry"));
 		assertTrue(selenium.isTextPresent("This is a staged blogs entry."));
 	}

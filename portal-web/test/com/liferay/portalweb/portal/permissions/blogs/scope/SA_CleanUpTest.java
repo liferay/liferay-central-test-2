@@ -41,6 +41,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 				selenium.clickAt("link=Blogs Scope Permissions Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean ScopePortletPresent = selenium.isElementPresent(
 						"//span[3]/a/img");
@@ -63,6 +64,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
 
 			case 2:
 
@@ -78,17 +80,20 @@ public class SA_CleanUpTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
 
 			case 3:
 				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
 
 			case 4:
 			case 5:
 				selenium.clickAt("link=Scope Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("main-content", RuntimeVariables.replace(""));
 				selenium.clickAt("navigation", RuntimeVariables.replace(""));
 				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
@@ -110,9 +115,11 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
 					RuntimeVariables.replace("Manage Pages"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("main-content", RuntimeVariables.replace(""));
 				selenium.clickAt("navigation", RuntimeVariables.replace(""));
 				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
@@ -134,6 +141,8 @@ public class SA_CleanUpTest extends BaseTestCase {
 
 					Thread.sleep(1000);
 				}
+
+				selenium.saveScreenShotAndSource();
 
 				boolean welcomePresent = selenium.isElementPresent(
 						"//li/ul/li[1]/div/div[3]/a");
@@ -167,6 +176,8 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
+
 				boolean scopeBlogsPagePresent = selenium.isElementPresent(
 						"//li[2]/div/div[3]/a");
 
@@ -178,14 +189,17 @@ public class SA_CleanUpTest extends BaseTestCase {
 
 				selenium.click(RuntimeVariables.replace("//li[2]/div/div[3]/a"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//td[2]/ul/li[1]/span/span/a",
 					RuntimeVariables.replace("Page"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
 
 			case 7:
 				selenium.open("/web/guest/home/");
@@ -207,9 +221,11 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Blogs Permissions Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean GuestPortletPresent = selenium.isElementPresent(
 						"//span[3]/a/img");
@@ -232,11 +248,13 @@ public class SA_CleanUpTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
 
 			case 8:
 				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
 
 			case 9:
 				selenium.clickAt("_145_addApplication",
@@ -259,8 +277,10 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.typeKeys("layout_configuration_content",
 					RuntimeVariables.replace("b"));
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -279,6 +299,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[@title='Blogs']/p/a",
 					RuntimeVariables.replace(""));
 
@@ -298,6 +319,8 @@ public class SA_CleanUpTest extends BaseTestCase {
 
 					Thread.sleep(1000);
 				}
+
+				selenium.saveScreenShotAndSource();
 
 			case 100:
 				label = -1;

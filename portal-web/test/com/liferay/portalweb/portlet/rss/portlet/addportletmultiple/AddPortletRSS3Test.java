@@ -40,8 +40,10 @@ public class AddPortletRSS3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=RSS Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 
@@ -61,8 +63,10 @@ public class AddPortletRSS3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.typeKeys("layout_configuration_content",
 			RuntimeVariables.replace("r"));
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -80,6 +84,7 @@ public class AddPortletRSS3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//div[@title='RSS']/p/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -98,6 +103,7 @@ public class AddPortletRSS3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isVisible("//section"));
 
 		for (int second = 0;; second++) {
@@ -116,6 +122,7 @@ public class AddPortletRSS3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isVisible("//div[2]/section"));
 
 		for (int second = 0;; second++) {
@@ -134,6 +141,7 @@ public class AddPortletRSS3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isVisible("//div[3]/section"));
 	}
 }

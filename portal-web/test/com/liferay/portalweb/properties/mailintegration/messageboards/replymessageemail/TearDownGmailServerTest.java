@@ -31,6 +31,7 @@ public class TearDownGmailServerTest extends BaseTestCase {
 					RuntimeVariables.replace("gmail"));
 				selenium.waitForPopUp("gmail", RuntimeVariables.replace(""));
 				selenium.selectWindow("gmail");
+				selenium.saveScreenShotAndSource();
 				Thread.sleep(5000);
 				Thread.sleep(5000);
 
@@ -64,10 +65,13 @@ public class TearDownGmailServerTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.type("Email",
 					RuntimeVariables.replace("liferay.qa.server.trunk"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("Passwd",
 					RuntimeVariables.replace("loveispatient"));
+				selenium.saveScreenShotAndSource();
 
 				boolean staySignedInChecked = selenium.isChecked(
 						"PersistentCookie");
@@ -84,6 +88,7 @@ public class TearDownGmailServerTest extends BaseTestCase {
 			case 3:
 				selenium.clickAt("signIn", RuntimeVariables.replace("Sign In"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -101,6 +106,7 @@ public class TearDownGmailServerTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@type='checkbox']",
 					RuntimeVariables.replace("All"));
 				Thread.sleep(5000);
@@ -122,6 +128,7 @@ public class TearDownGmailServerTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Delete"),
 					selenium.getText(
 						"//div/div/div/div[1]/div[1]/div[1]/div/div/div[2]/div[3]"));
@@ -146,12 +153,14 @@ public class TearDownGmailServerTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[4]/div/nobr/a[2]",
 					RuntimeVariables.replace("Sign Out"));
 				Thread.sleep(5000);
 				Thread.sleep(5000);
 				selenium.close();
 				selenium.selectWindow("null");
+				selenium.saveScreenShotAndSource();
 
 			case 100:
 				label = -1;

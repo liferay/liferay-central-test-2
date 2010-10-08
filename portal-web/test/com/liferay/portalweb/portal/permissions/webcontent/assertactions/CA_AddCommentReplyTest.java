@@ -41,9 +41,11 @@ public class CA_AddCommentReplyTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Post Reply", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -63,8 +65,10 @@ public class CA_AddCommentReplyTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("//table[2]/tbody/tr/td/div/textarea",
 			RuntimeVariables.replace("This is a ca test comment reply."));
+		selenium.saveScreenShotAndSource();
 		selenium.keyPress("//table[2]/tbody/tr/td/div/textarea",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("//table[2]/tbody/tr/td/div/textarea",
@@ -72,6 +76,7 @@ public class CA_AddCommentReplyTest extends BaseTestCase {
 		selenium.clickAt("//td[2]/table[2]/tbody/tr/td/input[1]",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("This is a ca test comment reply."));

@@ -40,9 +40,11 @@ public class DeleteEntryGeneralTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Announcements Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText("//div/h3",
 				"Announcements Entry Title"));
 		assertEquals(RuntimeVariables.replace(
@@ -51,6 +53,7 @@ public class DeleteEntryGeneralTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isTextPresent("Announcements Entry Title"));
 		assertFalse(selenium.isTextPresent(
 				"General Announcements Entry Content"));

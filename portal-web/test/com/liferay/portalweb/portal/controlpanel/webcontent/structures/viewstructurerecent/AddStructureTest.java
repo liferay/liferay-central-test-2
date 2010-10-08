@@ -40,37 +40,50 @@ public class AddStructureTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Structures", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Structure']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_15_newStructureId",
 			RuntimeVariables.replace("StructureID"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_15_name",
 			RuntimeVariables.replace("Web Content Structure Name"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_15_description",
 			RuntimeVariables.replace("Web Content Structure Description"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Row']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_15_structure_el0_name", RuntimeVariables.replace("Itp"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_15_structure_el0_type",
 			RuntimeVariables.replace("label=Link to Page"));
 		selenium.clickAt("//input[@value='Add Row']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_15_structure_el0_name",
 			RuntimeVariables.replace("title"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_15_structure_el0_type",
 			RuntimeVariables.replace("label=Text"));
 		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));

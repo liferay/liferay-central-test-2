@@ -45,17 +45,22 @@ public class AddPageMBTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Communities",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_134_name",
 					RuntimeVariables.replace("Tags Message Board Community"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -74,15 +79,19 @@ public class AddPageMBTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Manage Pages",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				Thread.sleep(5000);
 				selenium.type("_134_name_en_US",
 					RuntimeVariables.replace("Message Boards Page"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Add Page']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -99,6 +108,8 @@ public class AddPageMBTest extends BaseTestCase {
 
 					Thread.sleep(1000);
 				}
+
+				selenium.saveScreenShotAndSource();
 
 				boolean pagePresent = selenium.isElementPresent(
 						"//li/ul/li/div/div[3]/a");
@@ -129,6 +140,7 @@ public class AddPageMBTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Message Boards Page"),
 					selenium.getText("//li/ul/li/div/div[3]/a"));
 

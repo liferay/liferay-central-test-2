@@ -41,18 +41,23 @@ public class CompareVersionEditWikiFrontPageMinorChangeTest extends BaseTestCase
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=History", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.check("//tr[3]/td[1]/input");
 		selenium.check("//tr[4]/td[1]/input");
 		selenium.uncheck("//tr[5]/td[1]/input");
 		selenium.clickAt("//input[@value='Compare Versions']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Comparing Versions 1.1 and 1.2 (Last Version)"));
 		assertEquals(RuntimeVariables.replace(
@@ -75,8 +80,10 @@ public class CompareVersionEditWikiFrontPageMinorChangeTest extends BaseTestCase
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Text Mode", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(""),
 			selenium.getText("//td[@class='taglib-diff-context']"));
 		assertEquals(RuntimeVariables.replace(

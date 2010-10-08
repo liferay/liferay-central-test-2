@@ -40,8 +40,10 @@ public class AssertImportLARTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace("link=Breadcrumb Test Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Liferay"),
 			selenium.getText("//div[@class='portlet-body']/ul/li[1]"));
 		assertEquals(RuntimeVariables.replace("Breadcrumb Test Page"),

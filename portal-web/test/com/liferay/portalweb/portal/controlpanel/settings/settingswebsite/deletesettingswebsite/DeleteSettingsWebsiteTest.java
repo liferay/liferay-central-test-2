@@ -40,10 +40,13 @@ public class DeleteSettingsWebsiteTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("websitesLink", RuntimeVariables.replace(""));
 		assertEquals("http://www.liferay.com",
 			selenium.getValue("_130_websiteUrl0"));
@@ -64,6 +67,7 @@ public class DeleteSettingsWebsiteTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//button[2]", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -82,6 +86,7 @@ public class DeleteSettingsWebsiteTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isTextPresent("_130_websiteUrl0"));
 	}
 }

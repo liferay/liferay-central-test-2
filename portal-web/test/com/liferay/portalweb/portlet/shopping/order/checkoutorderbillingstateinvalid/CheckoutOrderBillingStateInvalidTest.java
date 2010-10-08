@@ -46,26 +46,35 @@ public class CheckoutOrderBillingStateInvalidTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Shopping Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Cart", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Checkout']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_34_billingStreet",
 					RuntimeVariables.replace("1234 Sesame Street"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_34_billingCity",
 					RuntimeVariables.replace("Gotham City"));
+				selenium.saveScreenShotAndSource();
 				selenium.select("_34_billingStateSel",
 					RuntimeVariables.replace("label=Outside US"));
 				selenium.type("_34_billingZip",
 					RuntimeVariables.replace("90028"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_34_billingCountry",
 					RuntimeVariables.replace("USA"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_34_billingPhone",
 					RuntimeVariables.replace("626-589-1453"));
+				selenium.saveScreenShotAndSource();
 
 				boolean sameAsBillingChecked = selenium.isChecked(
 						"_34_shipToBillingCheckbox");
@@ -84,13 +93,16 @@ public class CheckoutOrderBillingStateInvalidTest extends BaseTestCase {
 					RuntimeVariables.replace("label=Visa"));
 				selenium.type("_34_ccNumber",
 					RuntimeVariables.replace("4111111111111111"));
+				selenium.saveScreenShotAndSource();
 				selenium.select("_34_ccExpYear",
 					RuntimeVariables.replace("label=2011"));
 				selenium.type("_34_comments",
 					RuntimeVariables.replace("Please take care of my order."));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Continue']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("outside-us"),
 					selenium.getText("//tr[7]/td[2]"));
 				assertEquals(RuntimeVariables.replace("outside-us"),

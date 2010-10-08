@@ -47,15 +47,19 @@ public class RemovePortletPermissionsGuestViewTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Blogs Portlet Permissions Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//img[@alt='Configuration']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Permissions",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("_86_rowIds", RuntimeVariables.replace(""));
 				assertEquals(RuntimeVariables.replace("Guest"),
 					selenium.getText(
@@ -69,6 +73,7 @@ public class RemovePortletPermissionsGuestViewTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Update Permissions']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean viewPermissionsAvailable = selenium.isPartialText("_86_current_actions",
 						"View");
@@ -101,12 +106,14 @@ public class RemovePortletPermissionsGuestViewTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertFalse(selenium.isPartialText("_86_current_actions", "View"));
 
 			case 2:
 				selenium.clickAt("//input[@value='Finished']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));
 

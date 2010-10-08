@@ -25,6 +25,7 @@ public class Member_SearchPortletTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -42,10 +43,13 @@ public class Member_SearchPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("_20_keywords1", RuntimeVariables.replace("Permissions"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search File Entries']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
 				"link=Member Permissions Upload Edited"));
 		assertTrue(selenium.isElementPresent(

@@ -40,20 +40,27 @@ public class AddSettingsAddress1Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
 		selenium.type("_130_addressStreet1_0",
 			RuntimeVariables.replace("123. Liferay Ln."));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_130_addressCity0",
 			RuntimeVariables.replace("Rays of Light"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_130_addressZip0", RuntimeVariables.replace("12345"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_130_addressTypeId0",
 			RuntimeVariables.replace("label=Billing"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));
@@ -74,6 +81,7 @@ public class AddSettingsAddress1Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals("123. Liferay Ln.",
 			selenium.getValue("_130_addressStreet1_0"));
 		assertEquals("Rays of Light", selenium.getValue("_130_addressCity0"));

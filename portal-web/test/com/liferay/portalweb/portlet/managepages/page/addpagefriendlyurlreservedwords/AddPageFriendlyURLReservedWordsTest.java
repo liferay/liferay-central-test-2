@@ -49,9 +49,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
 					RuntimeVariables.replace("Manage Pages"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -71,6 +73,8 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
+
 				boolean welcomePresent = selenium.isElementPresent(
 						"//li/ul/li[1]/div/div[3]/a");
 
@@ -85,9 +89,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 
 			case 2:
 				selenium.type("_88_friendlyURL", RuntimeVariables.replace("/c"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -96,9 +102,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/combo"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -107,9 +115,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/delegate"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -118,9 +128,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/display_chart"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -129,9 +141,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/dtd"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -140,9 +154,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/facebook"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -151,9 +167,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/google_gadget"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -162,9 +180,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/group"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -173,9 +193,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/html"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -184,9 +206,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/image"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -195,9 +219,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/language"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -206,9 +232,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/netvibes"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -217,9 +245,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/page"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -228,9 +258,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/pbhs"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -239,9 +271,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/poller"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -250,9 +284,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/public"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -261,9 +297,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/private"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -272,9 +310,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/rss"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -283,9 +323,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/sharepoint"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -294,9 +336,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/sitemap.xml"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -305,9 +349,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/tags"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -316,9 +362,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/software_catalog"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -327,9 +375,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/_vti_"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -338,9 +388,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/wap"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -349,9 +401,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/web"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -360,9 +414,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/widget"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -371,9 +427,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/wsrp"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));
@@ -382,9 +440,11 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 					selenium.getText("//td[2]/div[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/xmlrpc"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div"));

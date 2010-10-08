@@ -40,9 +40,11 @@ public class AddBlogsEntryCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//td/a", RuntimeVariables.replace("Be the first."));
 
 		for (int second = 0;; second++) {
@@ -61,12 +63,15 @@ public class AddBlogsEntryCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("//textarea",
 			RuntimeVariables.replace("AP Blogs Entry Comment."));
+		selenium.saveScreenShotAndSource();
 		selenium.keyPress("//textarea", RuntimeVariables.replace("\\48"));
 		selenium.keyPress("//textarea", RuntimeVariables.replace("\\8"));
 		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));

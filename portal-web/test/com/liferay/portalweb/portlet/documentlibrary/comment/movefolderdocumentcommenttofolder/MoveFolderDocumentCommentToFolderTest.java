@@ -41,11 +41,14 @@ public class MoveFolderDocumentCommentToFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Document Library Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//a/strong", RuntimeVariables.replace("Test1 Folder1"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//td[5]/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
@@ -66,23 +69,28 @@ public class MoveFolderDocumentCommentToFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.click("//input[@value='Select']");
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=folder");
+		selenium.saveScreenShotAndSource();
 
 		String moveFolderURL = selenium.getLocation();
 		RuntimeVariables.setValue("moveFolderURL", moveFolderURL);
 		selenium.close();
 		selenium.selectWindow("null");
+		selenium.saveScreenShotAndSource();
 		selenium.openWindow(RuntimeVariables.getValue("moveFolderURL"),
 			RuntimeVariables.replace("folderSelectionWindow"));
 		Thread.sleep(5000);
 		selenium.waitForPopUp("folderSelectionWindow",
 			RuntimeVariables.replace(""));
 		selenium.selectWindow("name=folderSelectionWindow");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -100,8 +108,10 @@ public class MoveFolderDocumentCommentToFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//span/a", RuntimeVariables.replace("Documents Home"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -119,9 +129,11 @@ public class MoveFolderDocumentCommentToFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click("//tr[4]/td[4]/input");
 		Thread.sleep(5000);
 		selenium.selectWindow("null");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -141,10 +153,12 @@ public class MoveFolderDocumentCommentToFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Test2 Folder2"),
 			selenium.getText("_20_folderName"));
 		selenium.clickAt("//input[@value='Move']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -163,6 +177,7 @@ public class MoveFolderDocumentCommentToFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertFalse(selenium.isTextPresent("Test1 Document1"));
@@ -184,15 +199,19 @@ public class MoveFolderDocumentCommentToFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Document Library Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//tr[4]/td[1]/a[2]/strong",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Test1 Document1"));
 		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("This is a test1 comment1."),
 			selenium.getText("//td[2]/div[1]"));
 	}

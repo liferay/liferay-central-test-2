@@ -40,13 +40,17 @@ public class ActivateStagingOrganizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_79_keywords",
 			RuntimeVariables.replace("Web Content Display"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search Organizations']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//strong/span", RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -65,15 +69,19 @@ public class ActivateStagingOrganizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Manage Pages"),
 			selenium.getText("//li[3]/nobr/a"));
 		selenium.clickAt("//li[3]/nobr/a",
 			RuntimeVariables.replace("Manage Pages"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Staging", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -91,13 +99,17 @@ public class ActivateStagingOrganizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isChecked("_79_stagingEnabled"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_79_stagingEnabled",
 			RuntimeVariables.replace("Activate Staging"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//div[2]/div/div/div"));
 		assertTrue(selenium.isChecked("_79_stagingEnabled"));
+		selenium.saveScreenShotAndSource();
 	}
 }

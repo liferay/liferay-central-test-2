@@ -40,8 +40,10 @@ public class AddUserAnnouncementTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,14 +61,19 @@ public class AddUserAnnouncementTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_keywords", RuntimeVariables.replace("selen01"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("User Name"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("announcementsLink", RuntimeVariables.replace(""));
 		selenium.clickAt("_125_announcementsTypegeneralEmailCheckbox",
 			RuntimeVariables.replace(""));
@@ -79,17 +86,24 @@ public class AddUserAnnouncementTest extends BaseTestCase {
 		selenium.uncheck("_125_announcementsTypetestSmsCheckbox");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertTrue(selenium.isChecked(
 				"_125_announcementsTypegeneralEmailCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isChecked(
 				"_125_announcementsTypegeneralSmsCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isChecked(
 				"_125_announcementsTypenewsEmailCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isChecked("_125_announcementsTypenewsSmsCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isChecked("_125_announcementsTypetestEmailCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isChecked("_125_announcementsTypetestSmsCheckbox"));
+		selenium.saveScreenShotAndSource();
 	}
 }

@@ -40,8 +40,10 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Activities Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Add Application", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -61,6 +63,7 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//div[@id='Social-Activities']/p/a",
 			RuntimeVariables.replace(""));
 
@@ -80,6 +83,7 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]/div"));
 	}
 }

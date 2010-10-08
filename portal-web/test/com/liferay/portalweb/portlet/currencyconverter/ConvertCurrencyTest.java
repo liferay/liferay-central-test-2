@@ -41,9 +41,11 @@ public class ConvertCurrencyTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Currency Converter Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -61,12 +63,15 @@ public class ConvertCurrencyTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("_16_number", RuntimeVariables.replace("2.5"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_16_from", RuntimeVariables.replace("label=KRW"));
 		selenium.select("_16_to", RuntimeVariables.replace("label=BHD"));
 		selenium.clickAt("//input[@value='Convert']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals("2.5", selenium.getValue("//input[2]"));
 		assertTrue(selenium.isTextPresent("KRW"));
 		assertTrue(selenium.isTextPresent("BHD"));

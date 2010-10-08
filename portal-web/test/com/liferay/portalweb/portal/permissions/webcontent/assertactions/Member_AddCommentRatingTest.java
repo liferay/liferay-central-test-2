@@ -41,9 +41,11 @@ public class Member_AddCommentRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("0 (0 Votes)"));
 		selenium.clickAt("//table[1]/tbody/tr/td[1]/div/div/div/a[1]",
 			RuntimeVariables.replace(""));
@@ -64,6 +66,7 @@ public class Member_AddCommentRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("+1 (1 Vote)"));
 		selenium.clickAt("//table[1]/tbody/tr/td[1]/div/div/div/a[2]",
 			RuntimeVariables.replace(""));
@@ -84,6 +87,7 @@ public class Member_AddCommentRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("-1 (1 Vote)"));
 		selenium.clickAt("//table[1]/tbody/tr/td[1]/div/div/div/a[2]",
 			RuntimeVariables.replace(""));
@@ -104,6 +108,7 @@ public class Member_AddCommentRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("0 (0 Votes)"));
 	}
 }

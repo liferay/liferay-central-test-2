@@ -40,32 +40,44 @@ public class CreateAccountExpando1Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_134_name",
 			RuntimeVariables.replace("Expando Web Content Community"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//tr[@class='portlet-section-body results-row last']/td[1]/a",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content Display Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Create Account']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("//table[@class='lfr-table']/tbody/tr[1]/td[2]/input",
 			RuntimeVariables.replace("Michael"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("//table[@class='lfr-table']/tbody/tr[2]/td[2]/input",
 			RuntimeVariables.replace("Hashimoto"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("//table[@class='lfr-table']/tbody/tr[3]/td[2]/input",
 			RuntimeVariables.replace("100"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Michael"),
 			selenium.getText("//table[@class='lfr-table']/tbody/tr[2]/td[2]"));
 		assertEquals(RuntimeVariables.replace("Hashimoto"),

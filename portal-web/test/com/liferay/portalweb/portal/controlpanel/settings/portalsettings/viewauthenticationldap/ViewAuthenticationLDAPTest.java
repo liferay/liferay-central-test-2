@@ -40,10 +40,13 @@ public class ViewAuthenticationLDAPTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("authenticationLink", RuntimeVariables.replace(""));
 		selenium.clickAt("link=LDAP", RuntimeVariables.replace(""));
 
@@ -64,6 +67,7 @@ public class ViewAuthenticationLDAPTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
 				"_130_settings--ldap.auth.enabled--Checkbox"));
 		assertTrue(selenium.isElementPresent(
@@ -75,6 +79,7 @@ public class ViewAuthenticationLDAPTest extends BaseTestCase {
 		selenium.clickAt("//div/span/span/input",
 			RuntimeVariables.replace("Add"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals("ldap://localhost:10389",
 			selenium.getValue("_130_settings--ldap.base.provider.url--"));
 		selenium.clickAt("//input[@name='_130_defaultLdap' and @value='microsoft']",

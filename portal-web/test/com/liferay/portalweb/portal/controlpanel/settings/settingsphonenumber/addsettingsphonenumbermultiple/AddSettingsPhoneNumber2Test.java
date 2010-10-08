@@ -40,10 +40,13 @@ public class AddSettingsPhoneNumber2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("phoneNumbersLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -63,15 +66,19 @@ public class AddSettingsPhoneNumber2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//div[7]/fieldset/div[2]/div/span/span/button[1]",
 			RuntimeVariables.replace("Add Row"));
 		selenium.type("_130_phoneNumber2",
 			RuntimeVariables.replace("123-123-1234"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_130_phoneExtension2", RuntimeVariables.replace("123"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_130_phoneTypeId2",
 			RuntimeVariables.replace("label=Other"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));

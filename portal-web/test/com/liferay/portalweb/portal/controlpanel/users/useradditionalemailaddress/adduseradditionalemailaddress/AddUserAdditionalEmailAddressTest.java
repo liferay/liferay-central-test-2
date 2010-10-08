@@ -45,11 +45,14 @@ public class AddUserAdditionalEmailAddressTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
@@ -65,16 +68,20 @@ public class AddUserAdditionalEmailAddressTest extends BaseTestCase {
 			case 2:
 				selenium.type("_125_keywords",
 					RuntimeVariables.replace("selen01"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//td[2]/a",
 					RuntimeVariables.replace("User Name"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("additionalEmailAddressesLink",
 					RuntimeVariables.replace(""));
 				selenium.type("_125_emailAddressAddress0",
 					RuntimeVariables.replace("test01@selenium.com"));
+				selenium.saveScreenShotAndSource();
 				selenium.select("_125_emailAddressTypeId0",
 					RuntimeVariables.replace("label=E-mail"));
 				selenium.clickAt("_125_emailAddressPrimary0",
@@ -82,6 +89,7 @@ public class AddUserAdditionalEmailAddressTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//section/div/div/div/div[1]"));
@@ -90,6 +98,7 @@ public class AddUserAdditionalEmailAddressTest extends BaseTestCase {
 				assertEquals("E-mail",
 					selenium.getSelectedLabel("_125_emailAddressTypeId0"));
 				assertTrue(selenium.isChecked("_125_emailAddressPrimary0"));
+				selenium.saveScreenShotAndSource();
 
 			case 100:
 				label = -1;

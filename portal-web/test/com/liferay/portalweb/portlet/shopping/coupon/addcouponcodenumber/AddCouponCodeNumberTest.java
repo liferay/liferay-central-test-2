@@ -40,20 +40,29 @@ public class AddCouponCodeNumberTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Coupons", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Coupon']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_code", RuntimeVariables.replace("123456789"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_name", RuntimeVariables.replace("Coupon Test"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_description",
 			RuntimeVariables.replace("This is a coupon test."));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_discount", RuntimeVariables.replace("0.50"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent("Please enter a valid code."));

@@ -40,9 +40,11 @@ public class Member_AssertActionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Message Boards Permissions Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("//input[@value='Search']"));
 		assertEquals(RuntimeVariables.replace("RSS"),
 			selenium.getText("//div[2]/div/span/a/span[1]"));
@@ -55,6 +57,7 @@ public class Member_AssertActionsTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Permissions Test 1"));
 		selenium.clickAt("link=Permissions Test 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Test Thread 1"));
 		assertFalse(selenium.isElementPresent("link=Edit"));
 		assertFalse(selenium.isElementPresent("link=Move"));
@@ -63,6 +66,7 @@ public class Member_AssertActionsTest extends BaseTestCase {
 				"//input[@value='Post New Thread']"));
 		selenium.clickAt("link=Test Thread 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Reply"));
 		assertTrue(selenium.isElementPresent("link=Reply with Quote"));
 		assertFalse(selenium.isElementPresent("link=Delete"));

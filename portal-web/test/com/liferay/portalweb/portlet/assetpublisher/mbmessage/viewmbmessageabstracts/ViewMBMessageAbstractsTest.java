@@ -40,9 +40,11 @@ public class ViewMBMessageAbstractsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("AP MB Message Subject"),
 			selenium.getText("//h3[@class='asset-title']/a"));
 		assertEquals(RuntimeVariables.replace("AP MB Message Body."),
@@ -54,6 +56,7 @@ public class ViewMBMessageAbstractsTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"Read More About AP MB Message Subject \u00bb"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("AP MB Message Subject"),
 			selenium.getText("//h1[@class='header-title']"));
 		assertTrue(selenium.isPartialText("//div[@class='asset-content']",
@@ -63,6 +66,7 @@ public class ViewMBMessageAbstractsTest extends BaseTestCase {
 		selenium.clickAt("//div[@class='asset-more']/a",
 			RuntimeVariables.replace("View in Context \u00bb"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("AP MB Message Subject"),
 			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("AP MB Message Subject"),

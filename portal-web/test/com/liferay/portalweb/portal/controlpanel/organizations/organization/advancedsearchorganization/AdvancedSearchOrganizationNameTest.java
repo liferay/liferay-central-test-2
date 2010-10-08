@@ -45,12 +45,15 @@ public class AdvancedSearchOrganizationNameTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Organizations",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean advancedPresent = selenium.isVisible(
 						"link=Advanced \u00bb");
@@ -66,11 +69,14 @@ public class AdvancedSearchOrganizationNameTest extends BaseTestCase {
 
 			case 2:
 				selenium.type("_126_name", RuntimeVariables.replace("Selenium"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isElementPresent("link=Selenium"));
 				selenium.type("_126_name", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 
 				boolean basicPresent = selenium.isVisible("link=\u00ab Basic");
 

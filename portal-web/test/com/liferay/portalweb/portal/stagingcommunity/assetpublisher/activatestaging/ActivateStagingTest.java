@@ -34,6 +34,7 @@ public class ActivateStagingTest extends BaseTestCase {
 				selenium.clickAt("//div/div[3]/div/ul/li[5]/a",
 					RuntimeVariables.replace("ControlPanel"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -51,13 +52,17 @@ public class ActivateStagingTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Communities",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_134_name", RuntimeVariables.replace("Staging"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				Thread.sleep(5000);
 				selenium.click("//strong/a");
 
@@ -78,6 +83,7 @@ public class ActivateStagingTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.click(
 					"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
 
@@ -98,12 +104,15 @@ public class ActivateStagingTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//ul[1]/li[3]/span/span/a",
 					RuntimeVariables.replace("Settings"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//li[6]/span/span/a",
 					RuntimeVariables.replace("Staging"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.select("_134_stagingType",
 					RuntimeVariables.replace("label=Local Live"));
 
@@ -265,6 +274,7 @@ public class ActivateStagingTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to activate local staging for Staging[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//section/div/div/div/div"));

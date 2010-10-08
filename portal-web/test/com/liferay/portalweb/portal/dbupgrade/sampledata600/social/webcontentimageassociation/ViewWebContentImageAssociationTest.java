@@ -40,8 +40,10 @@ public class ViewWebContentImageAssociationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Activities Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=ImageGallery"));
 		assertTrue(selenium.isElementPresent(
 				"link=Web Content Image Association Community"));

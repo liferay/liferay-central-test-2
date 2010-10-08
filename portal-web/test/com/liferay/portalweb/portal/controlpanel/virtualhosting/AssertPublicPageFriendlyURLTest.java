@@ -30,6 +30,7 @@ public class AssertPublicPageFriendlyURLTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Public Page"));
 		selenium.clickAt("link=Public Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals("http://localhost:8080/web/alpha/public-page",
 			selenium.getLocation());
 	}

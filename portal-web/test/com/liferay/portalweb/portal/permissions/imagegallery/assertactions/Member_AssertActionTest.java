@@ -41,9 +41,11 @@ public class Member_AssertActionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent("link=Configuration"));
 		assertFalse(selenium.isElementPresent("link=Look and Feel"));
 		assertFalse(selenium.isElementPresent("link=Export / Import"));
@@ -54,6 +56,7 @@ public class Member_AssertActionTest extends BaseTestCase {
 		assertFalse(selenium.isElementPresent("//div[5]/ul/li[3]/a"));
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent("//input[@value='Add Subfolder']"));
 		assertEquals(RuntimeVariables.replace("Add Image"),
 			selenium.getText("//div[2]/ul/li[1]/a"));
@@ -76,14 +79,18 @@ public class Member_AssertActionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=My Images", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Edited Third Permissions Image"));
 		selenium.clickAt("link=Recent Images", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -102,6 +109,7 @@ public class Member_AssertActionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Second Permissions Image Test"));
 		assertTrue(selenium.isTextPresent("Edited Third Permissions Image"));
 	}

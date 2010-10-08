@@ -40,6 +40,7 @@ public class AddPageActivitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//a[@id='addPage']", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -58,7 +59,9 @@ public class AddPageActivitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("//input", RuntimeVariables.replace("Activities Page"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//span[@id='save']/span", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -77,7 +80,9 @@ public class AddPageActivitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Activities Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 	}
 }

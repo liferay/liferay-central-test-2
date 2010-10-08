@@ -41,9 +41,11 @@ public class ImportLARTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//strong", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -63,23 +65,32 @@ public class ImportLARTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace("link=Import"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_86_importFileName",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\messageboards\\lar\\importlar\\dependencies\\Message_Boards-Selenium.portlet.lar"));
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isChecked("_86_DELETE_PORTLET_DATACheckbox"));
+		selenium.saveScreenShotAndSource();
 		selenium.check("_86_DELETE_PORTLET_DATACheckbox");
 		assertTrue(selenium.isChecked("_86_DELETE_PORTLET_DATACheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isChecked("_86_PORTLET_DATACheckbox"));
+		selenium.saveScreenShotAndSource();
 		selenium.check("_86_PORTLET_DATACheckbox");
 		assertTrue(selenium.isChecked("_86_PORTLET_DATACheckbox"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Import']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));

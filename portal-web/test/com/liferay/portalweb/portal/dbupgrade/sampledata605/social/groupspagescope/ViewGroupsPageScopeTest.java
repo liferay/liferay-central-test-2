@@ -40,8 +40,10 @@ public class ViewGroupsPageScopeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Activities Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Joe wrote a new blog entry, Blogs Entry Scope Current Page, in Group Page Scope Community."));
 		assertTrue(selenium.isElementPresent(

@@ -40,6 +40,7 @@ public class Guest_ViewTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("_58_login"));
 		assertTrue(selenium.isElementPresent("//input[@value='Sign In']"));
 		assertTrue(selenium.isElementPresent("link=Sign In"));
@@ -61,14 +62,18 @@ public class Guest_ViewTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Message Boards Permissions Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Permissions Test 1"));
 		selenium.clickAt("link=Permissions Test 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Test Thread 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Test Thread Message 1"));
 		assertTrue(selenium.isTextPresent("Test Thread Message Reply 1"));
 	}

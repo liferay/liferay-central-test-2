@@ -45,11 +45,14 @@ public class AddUserPhoneNumberNumberInvalidTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
@@ -65,21 +68,26 @@ public class AddUserPhoneNumberNumberInvalidTest extends BaseTestCase {
 			case 2:
 				selenium.type("_125_keywords",
 					RuntimeVariables.replace("selen01"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//td[2]/a",
 					RuntimeVariables.replace("User Name"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("phoneNumbersLink",
 					RuntimeVariables.replace(""));
 				selenium.type("_125_phoneNumber0",
 					RuntimeVariables.replace("phone number"));
+				selenium.saveScreenShotAndSource();
 				selenium.select("_125_phoneTypeId0",
 					RuntimeVariables.replace("label=Business"));
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div[1]"));

@@ -40,19 +40,25 @@ public class AddSettingsPhoneNumberTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("phoneNumbersLink", RuntimeVariables.replace(""));
 		selenium.type("_130_phoneNumber0",
 			RuntimeVariables.replace("123-123-1234"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_130_phoneExtension0", RuntimeVariables.replace("123"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_130_phoneTypeId0",
 			RuntimeVariables.replace("label=Other"));
 		selenium.clickAt("_130_phonePrimary0", RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));
@@ -60,5 +66,6 @@ public class AddSettingsPhoneNumberTest extends BaseTestCase {
 		assertEquals("123", selenium.getValue("_130_phoneExtension0"));
 		assertEquals("Other", selenium.getSelectedLabel("_130_phoneTypeId0"));
 		assertTrue(selenium.isChecked("_130_phonePrimary0"));
+		selenium.saveScreenShotAndSource();
 	}
 }

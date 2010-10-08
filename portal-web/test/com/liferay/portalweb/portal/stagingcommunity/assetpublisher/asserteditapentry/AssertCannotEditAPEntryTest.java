@@ -40,9 +40,11 @@ public class AssertCannotEditAPEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 		assertFalse(selenium.isElementPresent("//div[1]/span/a/img"));
 		assertFalse(selenium.isElementPresent("link=Edit AP Blogs Entry Title"));

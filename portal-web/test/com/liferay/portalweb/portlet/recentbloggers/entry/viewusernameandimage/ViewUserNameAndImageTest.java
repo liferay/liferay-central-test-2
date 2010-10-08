@@ -40,9 +40,11 @@ public class ViewUserNameAndImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Recent Bloggers Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
 				"//div[@class='user-profile-image']/a/img[@alt='Joe Bloggs']"));
 		assertTrue(selenium.isElementPresent("//a[@class='user-name']"));

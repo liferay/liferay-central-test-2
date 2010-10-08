@@ -38,12 +38,15 @@ public class Writer_ConfigureWCLPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content List Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Please configure this portlet to make it visible to all users.",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.select("_86_groupId", RuntimeVariables.replace("label=Guest"));
 		selenium.select("_86_type", RuntimeVariables.replace("label=General"));
 	}

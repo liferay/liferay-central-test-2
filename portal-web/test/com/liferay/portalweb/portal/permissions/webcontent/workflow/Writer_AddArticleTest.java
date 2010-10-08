@@ -38,15 +38,20 @@ public class Writer_AddArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Web Content']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_15_title",
 			RuntimeVariables.replace("Writer Permissions Web Content Test"));
+		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -98,6 +103,7 @@ public class Writer_AddArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.selectFrame(
 			"//iframe[@id='_15_structure_el_TextAreaField_content']");
 		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
@@ -105,9 +111,11 @@ public class Writer_AddArticleTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"This is a writer permissions web content article!"));
 		selenium.selectFrame("relative=top");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent(

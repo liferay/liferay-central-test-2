@@ -40,14 +40,18 @@ public class InvoiceOrderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Orders", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
 			selenium.getText("//tr[3]/td[5]"));
 		selenium.clickAt("link=Checkout", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Please take care of my order."));
 
 		for (int second = 0;; second++) {
@@ -66,9 +70,11 @@ public class InvoiceOrderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Invoice']",
 			RuntimeVariables.replace(""));
 		selenium.selectWindow("undefined");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -86,8 +92,10 @@ public class InvoiceOrderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Invoice"));
 		selenium.close();
 		selenium.selectWindow("null");
+		selenium.saveScreenShotAndSource();
 	}
 }

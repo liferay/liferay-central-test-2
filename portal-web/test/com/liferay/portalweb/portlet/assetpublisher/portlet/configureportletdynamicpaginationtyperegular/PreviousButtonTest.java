@@ -40,11 +40,14 @@ public class PreviousButtonTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Last", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=First"));
 		assertTrue(selenium.isElementPresent("link=Previous"));
 		assertFalse(selenium.isElementPresent("link=Next"));
@@ -53,6 +56,7 @@ public class PreviousButtonTest extends BaseTestCase {
 			selenium.getSelectedLabel("//div[2]/span/span/span[1]/select"));
 		selenium.clickAt("link=Previous", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=First"));
 		assertTrue(selenium.isElementPresent("link=Previous"));
 		assertTrue(selenium.isElementPresent("link=Next"));
@@ -61,6 +65,7 @@ public class PreviousButtonTest extends BaseTestCase {
 			selenium.getSelectedLabel("//div[2]/span/span/span[1]/select"));
 		selenium.clickAt("link=Previous", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent("link=First"));
 		assertFalse(selenium.isElementPresent("link=Previous"));
 		assertTrue(selenium.isElementPresent("link=Next"));

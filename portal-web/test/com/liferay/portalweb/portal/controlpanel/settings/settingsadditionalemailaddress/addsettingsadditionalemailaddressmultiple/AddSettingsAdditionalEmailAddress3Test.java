@@ -41,10 +41,13 @@ public class AddSettingsAdditionalEmailAddress3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("additionalEmailAddressesLink",
 			RuntimeVariables.replace(""));
 
@@ -64,14 +67,17 @@ public class AddSettingsAdditionalEmailAddress3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//div[2]/span/span/button[1]",
 			RuntimeVariables.replace(""));
 		selenium.type("_130_emailAddressAddress3",
 			RuntimeVariables.replace("Admin@Liferay.com"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_130_emailAddressTypeId3",
 			RuntimeVariables.replace("label=E-mail"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));

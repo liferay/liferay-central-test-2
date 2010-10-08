@@ -41,11 +41,14 @@ public class Portlet_AssertAccessInControlPanelTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Image Gallery"));
 		selenium.clickAt("link=Image Gallery", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Images Home"),
 			selenium.getText("//div[1]/span[1]/span"));
 	}

@@ -40,10 +40,13 @@ public class EditPortalInstanceMailDomainTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Portal Instances", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("1"),
 			selenium.getText("//td[1]/a"));
 		assertEquals(RuntimeVariables.replace("liferay.com"),
@@ -56,9 +59,12 @@ public class EditPortalInstanceMailDomainTest extends BaseTestCase {
 			selenium.getText("//td[5]/a"));
 		selenium.clickAt("//td[4]/a", RuntimeVariables.replace("liferay.com"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_135_mx", RuntimeVariables.replace("gmail.com"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));

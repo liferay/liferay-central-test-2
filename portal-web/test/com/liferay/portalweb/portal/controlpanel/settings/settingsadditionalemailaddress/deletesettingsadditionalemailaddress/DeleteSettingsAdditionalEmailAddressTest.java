@@ -41,10 +41,13 @@ public class DeleteSettingsAdditionalEmailAddressTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("additionalEmailAddressesLink",
 			RuntimeVariables.replace(""));
 		assertEquals("Admin@Liferay.com",
@@ -66,6 +69,7 @@ public class DeleteSettingsAdditionalEmailAddressTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//button[2]", RuntimeVariables.replace(""));
 		assertFalse(selenium.isTextPresent("Admin@Liferay.com"));
 	}

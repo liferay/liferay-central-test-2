@@ -40,9 +40,11 @@ public class RateWDFrontPageCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Wiki Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -62,6 +64,7 @@ public class RateWDFrontPageCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText(
 				"//div[@class='taglib-ratings thumbs']/div/div/div",
 				"0 \\(0 Votes\\)"));
@@ -86,6 +89,7 @@ public class RateWDFrontPageCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText(
 				"//div[@class='taglib-ratings thumbs']/div/div/div",
 				"\\+1 \\(1 Vote\\)"));
@@ -110,6 +114,7 @@ public class RateWDFrontPageCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText(
 				"//div[@class='taglib-ratings thumbs']/div/div/div",
 				"0 \\(0 Votes\\)"));
@@ -134,6 +139,7 @@ public class RateWDFrontPageCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText(
 				"//div[@class='taglib-ratings thumbs']/div/div/div",
 				"-1 \\(1 Vote\\)"));
@@ -158,6 +164,7 @@ public class RateWDFrontPageCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText(
 				"//div[@class='taglib-ratings thumbs']/div/div/div",
 				"0 \\(0 Votes\\)"));

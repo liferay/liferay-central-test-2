@@ -40,8 +40,10 @@ public class EditFormTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Form Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Suggestions"),
 			selenium.getText("//legend/span"));
 		assertEquals(RuntimeVariables.replace(
@@ -75,6 +77,7 @@ public class EditFormTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
 
 		for (int second = 0;; second++) {
@@ -93,18 +96,25 @@ public class EditFormTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("_86_title_en_US", RuntimeVariables.replace("Feed Back"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_86_description_en_US",
 			RuntimeVariables.replace("Please let us know what you think!"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_86_fieldLabel1_en_US",
 			RuntimeVariables.replace("Your Name"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_86_fieldLabel2_en_US",
 			RuntimeVariables.replace("Rate Us!"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_86_fieldLabel3_en_US",
 			RuntimeVariables.replace("Additional Comments"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//div[2]/span[1]/span/input",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
@@ -126,8 +136,10 @@ public class EditFormTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Form Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Feed Back"),
 			selenium.getText("//legend/span"));
 		assertEquals(RuntimeVariables.replace(

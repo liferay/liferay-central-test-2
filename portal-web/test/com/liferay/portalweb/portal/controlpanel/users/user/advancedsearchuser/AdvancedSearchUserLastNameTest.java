@@ -45,11 +45,14 @@ public class AdvancedSearchUserLastNameTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean AdvancedPresent = selenium.isVisible(
 						"link=Advanced \u00bb");
@@ -65,16 +68,21 @@ public class AdvancedSearchUserLastNameTest extends BaseTestCase {
 
 			case 2:
 				selenium.type("_125_lastName", RuntimeVariables.replace("nium"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent("selenium01"));
 				selenium.type("_125_lastName", RuntimeVariables.replace("nium1"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertFalse(selenium.isTextPresent("selenium01"));
 				selenium.type("_125_lastName", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=\u00ab Basic",
 					RuntimeVariables.replace(""));
 

@@ -40,10 +40,13 @@ public class AddDuplicateTagTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Tags", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("add-tag-button", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -62,7 +65,9 @@ public class AddDuplicateTagTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("new-tag-name", RuntimeVariables.replace("selenium"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -83,6 +88,7 @@ public class AddDuplicateTagTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("That tag already exists."),
 			selenium.getText("tag-portlet-messages"));
 		assertFalse(selenium.isElementPresent("//li[2]/span/a"));

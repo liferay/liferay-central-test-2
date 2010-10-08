@@ -40,19 +40,25 @@ public class AddWDFrontPageChildPage1Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Wiki Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("//div/span[1]/span/span/input",
 			RuntimeVariables.replace("Front1 Page1 Child1 Page1 Test1"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("//textarea",
 			RuntimeVariables.replace(
 				"This is a front1 page1 child1 page1 test1."));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertEquals(RuntimeVariables.replace("Front1 Page1 Child1 Page1 Test1"),
@@ -60,6 +66,7 @@ public class AddWDFrontPageChildPage1Test extends BaseTestCase {
 		selenium.clickAt("link=Front1 Page1 Child1 Page1 Test1",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Front1 Page1 Child1 Page1 Test1"),
 			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace(

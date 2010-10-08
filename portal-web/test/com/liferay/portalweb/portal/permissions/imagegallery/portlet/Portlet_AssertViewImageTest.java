@@ -41,12 +41,15 @@ public class Portlet_AssertViewImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Portlet2 Temporary2 Folder2",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Portlet2 Temporary2 Image2"));
 		assertTrue(selenium.isElementPresent(
 				"//img[@alt='Portlet2 Temporary2 Image2 - ']"));
@@ -69,6 +72,7 @@ public class Portlet_AssertViewImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Portlet2 Temporary2 Image2 -"),
 			selenium.getText("//div/div[2]/div[1]"));
 		selenium.clickAt("//a[3]", RuntimeVariables.replace(""));
@@ -89,5 +93,7 @@ public class Portlet_AssertViewImageTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.saveScreenShotAndSource();
 	}
 }

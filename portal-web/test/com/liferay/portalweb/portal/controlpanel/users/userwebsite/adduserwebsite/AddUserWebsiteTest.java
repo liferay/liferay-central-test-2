@@ -45,11 +45,14 @@ public class AddUserWebsiteTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
@@ -65,15 +68,19 @@ public class AddUserWebsiteTest extends BaseTestCase {
 			case 2:
 				selenium.type("_125_keywords",
 					RuntimeVariables.replace("selen01"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//td[2]/a",
 					RuntimeVariables.replace("User Name"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("websitesLink", RuntimeVariables.replace(""));
 				selenium.type("_125_websiteUrl0",
 					RuntimeVariables.replace("http://www.selenium01.com"));
+				selenium.saveScreenShotAndSource();
 				selenium.select("_125_websiteTypeId0",
 					RuntimeVariables.replace("label=Personal"));
 				selenium.clickAt("_125_websitePrimary0",
@@ -81,6 +88,7 @@ public class AddUserWebsiteTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//section/div/div/div/div[1]"));
@@ -89,6 +97,7 @@ public class AddUserWebsiteTest extends BaseTestCase {
 				assertEquals("Personal",
 					selenium.getSelectedLabel("_125_websiteTypeId0"));
 				assertTrue(selenium.isChecked("_125_websitePrimary0"));
+				selenium.saveScreenShotAndSource();
 
 			case 100:
 				label = -1;

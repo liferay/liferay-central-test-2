@@ -41,13 +41,16 @@ public class RemoveBookingsPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace(
 				"link=Sample Icefaces IPC Ajax Push Test Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Sample ICEfaces IPC - Bookings"));
 		selenium.click("//img[@alt='Remove']");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isTextPresent("Sample ICEfaces IPC - Bookings"));
 	}
 }

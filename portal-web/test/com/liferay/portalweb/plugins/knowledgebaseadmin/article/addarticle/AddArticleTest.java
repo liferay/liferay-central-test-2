@@ -40,16 +40,21 @@ public class AddArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Knowledge Base Admin",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Article']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_1_WAR_knowledgebaseportlet_title",
 			RuntimeVariables.replace("Knowledge Base Admin Article Title"));
+		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 		selenium.selectFrame(
 			"//iframe[@id='_1_WAR_knowledgebaseportlet_editor']");
@@ -57,9 +62,11 @@ public class AddArticleTest extends BaseTestCase {
 		selenium.type("//body",
 			RuntimeVariables.replace("Knowledge Base Admin Article Content"));
 		selenium.selectFrame("relative=top");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));

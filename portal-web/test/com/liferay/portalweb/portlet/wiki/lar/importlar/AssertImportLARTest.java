@@ -40,8 +40,10 @@ public class AssertImportLARTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Test Wiki Article"));
 		assertTrue(selenium.isTextPresent("this is italics"));
 		assertTrue(selenium.isTextPresent("bold"));
@@ -51,6 +53,7 @@ public class AssertImportLARTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Test"));
 		selenium.clickAt("link=Test", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Test Child Article"));
 		assertTrue(selenium.isTextPresent("this is italics"));
 		assertTrue(selenium.isTextPresent("bold"));
@@ -60,6 +63,7 @@ public class AssertImportLARTest extends BaseTestCase {
 		selenium.clickAt("link=Second Edited Wiki Test",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Yes this is a second test article"));
 		assertTrue(selenium.isTextPresent(
 				"I love Liferay! This Wiki has been EDITED!"));
@@ -67,10 +71,12 @@ public class AssertImportLARTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Link Me 2"));
 		selenium.clickAt("link=Link Me 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Hi Administrator! Hope you are well! Please link me to another page!"));
 		selenium.clickAt("link=Link Me 2", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Hi Administrator!"));
 		assertTrue(selenium.isTextPresent(
 				"I made another mistake! Oh me. Please link this article to another!"));

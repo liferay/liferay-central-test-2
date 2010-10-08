@@ -24,8 +24,10 @@ public class AddLDAPServerTest extends BaseTestCase {
 	public void testAddLDAPServer() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Control Panel"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace("link=Settings"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.click("authenticationLink");
 
 		for (int second = 0;; second++) {
@@ -44,9 +46,11 @@ public class AddLDAPServerTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click("link=LDAP");
 		selenium.clickAt("//input[@value=\"Add\"]", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -64,13 +68,17 @@ public class AddLDAPServerTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("//span/input", RuntimeVariables.replace("Test LDAP 1"));
+		selenium.saveScreenShotAndSource();
 		selenium.click("//input[@name='_130_defaultLdap' and @value='apache']");
 		selenium.click("//input[@value='Reset Values']");
 		selenium.type("_130_settings--ldap.base.provider.url--",
 			RuntimeVariables.replace("ldap://[$VM_HOST$]:10389"));
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 	}

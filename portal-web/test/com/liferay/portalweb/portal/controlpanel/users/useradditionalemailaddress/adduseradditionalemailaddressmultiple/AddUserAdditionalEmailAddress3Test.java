@@ -45,11 +45,14 @@ public class AddUserAdditionalEmailAddress3Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
@@ -65,12 +68,15 @@ public class AddUserAdditionalEmailAddress3Test extends BaseTestCase {
 			case 2:
 				selenium.type("_125_keywords",
 					RuntimeVariables.replace("selen01"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//td[2]/a",
 					RuntimeVariables.replace("User Name"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("additionalEmailAddressesLink",
 					RuntimeVariables.replace(""));
 
@@ -90,6 +96,7 @@ public class AddUserAdditionalEmailAddress3Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span/span/button[1]",
 					RuntimeVariables.replace(""));
 
@@ -109,13 +116,16 @@ public class AddUserAdditionalEmailAddress3Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.type("_125_emailAddressAddress3",
 					RuntimeVariables.replace("test01@selenium.com"));
+				selenium.saveScreenShotAndSource();
 				selenium.select("_125_emailAddressTypeId3",
 					RuntimeVariables.replace("label=E-mail 3"));
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//section/div/div/div/div[1]"));

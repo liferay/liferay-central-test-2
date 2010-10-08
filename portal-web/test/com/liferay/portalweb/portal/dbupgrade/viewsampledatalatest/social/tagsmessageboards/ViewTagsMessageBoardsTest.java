@@ -40,8 +40,10 @@ public class ViewTagsMessageBoardsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Activities Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Message1 Tag1 Test1"));
 		assertTrue(selenium.isTextPresent(
 				"Joe wrote a new message board post, Message1 Tag1 Test1, in Tags Message Board Community."));

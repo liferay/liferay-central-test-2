@@ -41,9 +41,11 @@ public class Guest_AssertActionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent("link=Configuration"));
 		assertFalse(selenium.isElementPresent("link=Look and Feel"));
 		assertFalse(selenium.isElementPresent("link=Export / Import"));
@@ -54,13 +56,16 @@ public class Guest_AssertActionTest extends BaseTestCase {
 		assertFalse(selenium.isElementPresent("//div[5]/ul/li[3]/a"));
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent("//input[@value='Add Subfolder']"));
 		assertFalse(selenium.isElementPresent("//input[@value='Add Image']"));
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Recent Images", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Second Permissions Image Test"));
 	}
 }

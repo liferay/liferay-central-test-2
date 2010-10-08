@@ -38,15 +38,19 @@ public class TranslateGermanEnglishTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace("link=Translator Test Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.select("_26_id",
 			RuntimeVariables.replace("label=German to English"));
 		selenium.type("_26_text",
 			RuntimeVariables.replace(
 				"Mein Name ist \u00fcbersetzer von Liferay, flie?ender in mehr als 6 Millionen Kommunikationsformen."));
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace("//input[@value='Translate']"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"My name is a translator of Liferay, flie? more ender in more than 6 million communication forms."));
 	}

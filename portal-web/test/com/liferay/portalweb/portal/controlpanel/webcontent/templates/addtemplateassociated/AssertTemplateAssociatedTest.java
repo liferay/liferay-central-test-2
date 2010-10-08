@@ -45,15 +45,19 @@ public class AssertTemplateAssociatedTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Web Content",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Add Web Content']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				Thread.sleep(5000);
 
 				for (int second = 0;; second++) {
@@ -72,12 +76,15 @@ public class AssertTemplateAssociatedTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.click("_15_changeStructureBtn");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Selecting a new structure will change the available input fields and available templates[\\s\\S] Do you want to proceed[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
 				selenium.waitForPopUp("ChangeStructure",
 					RuntimeVariables.replace("30000"));
 				selenium.selectWindow("name=ChangeStructure");
+				selenium.saveScreenShotAndSource();
 				Thread.sleep(5000);
 
 				boolean templatePresentA = selenium.isElementPresent(
@@ -118,10 +125,12 @@ public class AssertTemplateAssociatedTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.click("link=STRUCTUREID");
 
 			case 3:
 				selenium.selectWindow("null");
+				selenium.saveScreenShotAndSource();
 				Thread.sleep(5000);
 				assertEquals(RuntimeVariables.replace(
 						"Web Content Structure Name (Use Default)"),

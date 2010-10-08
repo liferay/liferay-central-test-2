@@ -40,8 +40,10 @@ public class TearDownTimeZoneTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Joe Bloggs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -60,6 +62,7 @@ public class TearDownTimeZoneTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("displaySettingsLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -78,9 +81,11 @@ public class TearDownTimeZoneTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.select("_2_timeZoneId",
 			RuntimeVariables.replace("label=(UTC ) Coordinated Universal Time"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 	}
 }

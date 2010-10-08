@@ -40,12 +40,16 @@ public class EditSecondCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Second Test Entry", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.click("//td[4]/span/a/span");
 
 		for (int second = 0;; second++) {
@@ -64,13 +68,16 @@ public class EditSecondCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("_33_editReplyBody1",
 			RuntimeVariables.replace("This is an edited second entry comment."));
+		selenium.saveScreenShotAndSource();
 		selenium.keyPress("_33_editReplyBody1", RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_33_editReplyBody1", RuntimeVariables.replace("\\8"));
 		selenium.clickAt("//tr[2]/td/input[1]",
 			RuntimeVariables.replace("Publish"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isVisible("_33_editReplyBody1"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

@@ -40,9 +40,11 @@ public class Member_DismissAnnouncementTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Announcements Permissions Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Mark as Read", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -61,6 +63,7 @@ public class Member_DismissAnnouncementTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Show", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -79,6 +82,7 @@ public class Member_DismissAnnouncementTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Hide", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -96,5 +100,7 @@ public class Member_DismissAnnouncementTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.saveScreenShotAndSource();
 	}
 }

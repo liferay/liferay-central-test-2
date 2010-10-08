@@ -40,21 +40,27 @@ public class AddEventTypeConcertTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Calendar Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Event']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_8_title",
 			RuntimeVariables.replace("Caedmon's Call Concert."));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_8_description",
 			RuntimeVariables.replace(
 				"I love this band guys. Everyone should see them. I've never seen them before."));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_8_timeZoneSensitiveCheckbox",
 			RuntimeVariables.replace(""));
 		selenium.select("_8_type", RuntimeVariables.replace("label=Concert"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertEquals(RuntimeVariables.replace("Caedmon's Call Concert."),

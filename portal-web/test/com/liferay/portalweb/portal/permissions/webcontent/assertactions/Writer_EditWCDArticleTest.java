@@ -41,15 +41,19 @@ public class Writer_EditWCDArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//img[@alt='Edit Web Content']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_15_title",
 			RuntimeVariables.replace(
 				"CA Permissions WCD Article Edit by Writer"));
+		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -101,6 +105,7 @@ public class Writer_EditWCDArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.selectFrame(
 			"//iframe[@id='_15_structure_el_TextAreaField_content']");
 		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
@@ -108,9 +113,11 @@ public class Writer_EditWCDArticleTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"This is an edited ca permissions wcd article! By the writer..."));
 		selenium.selectFrame("relative=top");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"This is an edited ca permissions wcd article! By the writer..."));
 	}

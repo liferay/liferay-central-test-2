@@ -46,12 +46,15 @@ public class AdvancedSearchOrganizationAddressStreetTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Organizations",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean advancedPresent = selenium.isVisible(
 						"link=Advanced \u00bb");
@@ -68,10 +71,13 @@ public class AdvancedSearchOrganizationAddressStreetTest extends BaseTestCase {
 			case 2:
 				selenium.type("_126_street",
 					RuntimeVariables.replace("12345 Selenium St"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_126_street", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Selenium"),
 					selenium.getText("//td[2]/a"));
 

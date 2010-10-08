@@ -39,9 +39,11 @@ public class CA_EditConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Document Library Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("_20_keywords1"));
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
 
@@ -62,6 +64,7 @@ public class CA_EditConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
 
 		for (int second = 0;; second++) {
@@ -80,6 +83,7 @@ public class CA_EditConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("//input[@value='Select']"));
 		assertEquals(RuntimeVariables.replace("Folders Listing"),
 			selenium.getText("//div[@id='foldersListingPanel']/div[1]/div/span"));
@@ -90,10 +94,12 @@ public class CA_EditConfigurationTest extends BaseTestCase {
 			selenium.getText(
 				"//div[@id='documentsRatingsPanel']/div[1]/div/span"));
 		assertTrue(selenium.isChecked("_86_showFoldersSearchCheckbox"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_86_showFoldersSearchCheckbox",
 			RuntimeVariables.replace("Show Search"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -114,13 +120,16 @@ public class CA_EditConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
 		assertFalse(selenium.isChecked("_86_showFoldersSearchCheckbox"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Document Library Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent("_20_keywords1"));
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
 
@@ -141,6 +150,7 @@ public class CA_EditConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
 
 		for (int second = 0;; second++) {
@@ -159,11 +169,14 @@ public class CA_EditConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isChecked("_86_showFoldersSearchCheckbox"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_86_showFoldersSearchCheckbox",
 			RuntimeVariables.replace("Show Search"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -184,13 +197,16 @@ public class CA_EditConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
 		assertTrue(selenium.isChecked("_86_showFoldersSearchCheckbox"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Document Library Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("_20_keywords1"));
 	}
 }

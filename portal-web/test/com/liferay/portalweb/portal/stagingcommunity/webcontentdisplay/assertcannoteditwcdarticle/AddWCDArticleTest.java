@@ -29,6 +29,7 @@ public class AddWCDArticleTest extends BaseTestCase {
 		selenium.clickAt("//div/div[3]/div/ul/li[5]/a",
 			RuntimeVariables.replace("ControlPanel"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -46,13 +47,17 @@ public class AddWCDArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Web Content']"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("//table[@id='_15_articleHeaderEdit']/tbody/tr[2]/td/span/span/span/input",
 			RuntimeVariables.replace("WCD Staging Article Test"));
+		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -104,15 +109,18 @@ public class AddWCDArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.selectFrame(
 			"//iframe[@id='_15_structure_el_TextAreaField_content']");
 		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body",
 			RuntimeVariables.replace("This is an AP staging article test."));
 		selenium.selectFrame("relative=top");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("WCD Staging Article Test"),
 			selenium.getText("//td[3]/a"));
 	}

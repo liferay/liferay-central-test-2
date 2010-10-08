@@ -40,9 +40,11 @@ public class Guest_AssertNoPortletPrePublishTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Blogs Staging Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent("link=RSS (Opens New Window)"));
 		assertFalse(selenium.isTextPresent("Showing 0 results."));
 	}

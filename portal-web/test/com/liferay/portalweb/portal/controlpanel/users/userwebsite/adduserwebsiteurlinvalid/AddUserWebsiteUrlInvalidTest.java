@@ -40,23 +40,31 @@ public class AddUserWebsiteUrlInvalidTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_keywords", RuntimeVariables.replace("selen01"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("User Name"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("websitesLink", RuntimeVariables.replace(""));
 		selenium.type("_125_websiteUrl0",
 			RuntimeVariables.replace("www.selenium01.com"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_125_websiteTypeId0",
 			RuntimeVariables.replace("label=Business"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"You have entered invalid data. Please try again."),
 			selenium.getText("//section/div/div/div/div[1]"));

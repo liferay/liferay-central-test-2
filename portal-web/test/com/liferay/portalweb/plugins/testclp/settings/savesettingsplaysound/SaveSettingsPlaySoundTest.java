@@ -45,9 +45,11 @@ public class SaveSettingsPlaySoundTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Test CLP Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("true"),
 					selenium.getText(
 						"//div[@class='portlet-body']/table/tbody/tr[2]/td[8]"));
@@ -69,6 +71,8 @@ public class SaveSettingsPlaySoundTest extends BaseTestCase {
 
 					Thread.sleep(1000);
 				}
+
+				selenium.saveScreenShotAndSource();
 
 				boolean playSoundChecked = selenium.isChecked("playSound");
 
@@ -100,6 +104,7 @@ public class SaveSettingsPlaySoundTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertFalse(selenium.isElementPresent(
 						"//li[@class='chat-settings saved']"));
 				selenium.open("/web/guest/home/");
@@ -120,9 +125,11 @@ public class SaveSettingsPlaySoundTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Test CLP Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("false"),
 					selenium.getText(
 						"//div[@class='portlet-body']/table/tbody/tr[2]/td[8]"));

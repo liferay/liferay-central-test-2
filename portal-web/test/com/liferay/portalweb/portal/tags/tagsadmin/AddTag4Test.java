@@ -40,10 +40,13 @@ public class AddTag4Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Tags", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("add-tag-button", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -62,7 +65,9 @@ public class AddTag4Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("new-tag-name", RuntimeVariables.replace("Blue Car"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -84,6 +89,7 @@ public class AddTag4Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("tag-portlet-messages"));
@@ -104,6 +110,7 @@ public class AddTag4Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//td[2]/div[2]/div[3]/input[2]",
 			RuntimeVariables.replace(""));
 
@@ -123,6 +130,7 @@ public class AddTag4Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=blue car"));
 	}
 }

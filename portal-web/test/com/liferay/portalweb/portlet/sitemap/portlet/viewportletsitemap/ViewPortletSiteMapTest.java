@@ -40,13 +40,16 @@ public class ViewPortletSiteMapTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Site Map Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Welcome"),
 			selenium.getText("//section/div/div/div/ul/li[1]/a"));
 		selenium.clickAt("//section/div/div/div/ul/li[1]/a",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Sign In"),
 			selenium.getText("//h1/span[2]"));
 		assertEquals(RuntimeVariables.replace("Hello World"),
@@ -71,13 +74,16 @@ public class ViewPortletSiteMapTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Site Map Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Site Map Test Page"),
 			selenium.getText("//section/div/div/div/ul/li[2]/a"));
 		selenium.clickAt("//section/div/div/div/ul/li[2]/a",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Site Map"),
 			selenium.getText("//h1/span[2]"));
 		assertTrue(selenium.isVisible("//section"));
@@ -99,12 +105,15 @@ public class ViewPortletSiteMapTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Site Map Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Child Test Page"),
 			selenium.getText("//div/ul/li[2]/ul/li/a"));
 		selenium.clickAt("//div/ul/li[2]/ul/li/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent("//section"));
 	}
 }

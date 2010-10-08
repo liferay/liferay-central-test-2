@@ -40,13 +40,17 @@ public class AddSecondEntryCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//div[2]/span/a",
 			RuntimeVariables.replace("0 Comments"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//td/a", RuntimeVariables.replace("Be the first."));
 
 		for (int second = 0;; second++) {
@@ -65,12 +69,15 @@ public class AddSecondEntryCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("_33_postReplyBody0",
 			RuntimeVariables.replace("This is a second entry comment."));
+		selenium.saveScreenShotAndSource();
 		selenium.keyPress("_33_postReplyBody0", RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_33_postReplyBody0", RuntimeVariables.replace("\\8"));
 		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));

@@ -40,10 +40,13 @@ public class EditTagNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Tags", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -61,10 +64,12 @@ public class EditTagNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("selenium"),
 			selenium.getText("//div[4]/ul/li/span/a"));
 		selenium.clickAt("//div[4]/ul/li/span/a", RuntimeVariables.replace(""));
 		selenium.type("tag-name", RuntimeVariables.replace("selenium ide"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//div[3]/input[1]", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -85,6 +90,7 @@ public class EditTagNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("selenium ide"),
 			selenium.getText("//div[4]/ul/li/span/a"));
 	}

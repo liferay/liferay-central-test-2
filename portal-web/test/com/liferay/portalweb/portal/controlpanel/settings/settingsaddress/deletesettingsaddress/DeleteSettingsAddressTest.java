@@ -40,10 +40,13 @@ public class DeleteSettingsAddressTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
 		assertEquals("123. Liferay Ln.",
 			selenium.getValue("_130_addressStreet1_0"));
@@ -64,6 +67,7 @@ public class DeleteSettingsAddressTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//button[2]", RuntimeVariables.replace("Delete Row"));
 		assertFalse(selenium.isTextPresent("123. Liferay Ln."));
 	}

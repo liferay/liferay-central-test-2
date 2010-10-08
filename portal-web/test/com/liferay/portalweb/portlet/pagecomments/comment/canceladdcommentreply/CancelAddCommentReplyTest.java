@@ -40,9 +40,11 @@ public class CancelAddCommentReplyTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Page Comments Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Post Reply", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -61,9 +63,11 @@ public class CancelAddCommentReplyTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isVisible("_107_postReplyBody1"));
 		selenium.type("_107_postReplyBody1",
 			RuntimeVariables.replace("This is a test reply comment."));
+		selenium.saveScreenShotAndSource();
 		selenium.keyPress("_107_postReplyBody1",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_107_postReplyBody1", RuntimeVariables.replace("\\8"));

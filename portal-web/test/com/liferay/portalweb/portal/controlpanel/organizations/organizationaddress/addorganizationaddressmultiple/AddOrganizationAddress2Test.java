@@ -45,12 +45,15 @@ public class AddOrganizationAddress2Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Organizations",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
@@ -66,13 +69,16 @@ public class AddOrganizationAddress2Test extends BaseTestCase {
 			case 2:
 				selenium.type("_126_keywords",
 					RuntimeVariables.replace("Selenium"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Selenium"),
 					selenium.getText("//td[2]/a"));
 				selenium.clickAt("//td[2]/a", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -92,15 +98,19 @@ public class AddOrganizationAddress2Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/div/span/span/button[1]",
 					RuntimeVariables.replace("Add Row"));
 				Thread.sleep(5000);
 				selenium.type("_126_addressStreet1_2",
 					RuntimeVariables.replace("12345 Selenium St"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_126_addressCity2",
 					RuntimeVariables.replace("Diamond Bar"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_126_addressZip2",
 					RuntimeVariables.replace("41111"));
+				selenium.saveScreenShotAndSource();
 				selenium.select("_126_addressCountryId2",
 					RuntimeVariables.replace("label=United States"));
 				Thread.sleep(5000);
@@ -112,6 +122,7 @@ public class AddOrganizationAddress2Test extends BaseTestCase {
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//section/div/div/div/div[1]"));
@@ -132,6 +143,7 @@ public class AddOrganizationAddress2Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertEquals("12345 Selenium St",
 					selenium.getValue("_126_addressStreet1_1"));
 				assertEquals("Diamond Bar",

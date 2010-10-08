@@ -44,12 +44,15 @@ public class AddOrganizationWebsite3Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Organizations",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
@@ -65,13 +68,16 @@ public class AddOrganizationWebsite3Test extends BaseTestCase {
 			case 2:
 				selenium.type("_126_keywords",
 					RuntimeVariables.replace("Selenium"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Selenium"),
 					selenium.getText("//td[2]/a"));
 				selenium.clickAt("//td[2]/a", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("websitesLink", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -91,6 +97,7 @@ public class AddOrganizationWebsite3Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span/span/button[1]",
 					RuntimeVariables.replace("Add Row"));
 
@@ -110,8 +117,10 @@ public class AddOrganizationWebsite3Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.type("_126_websiteUrl3",
 					RuntimeVariables.replace("http://www.liferay.com"));
+				selenium.saveScreenShotAndSource();
 				selenium.select("_126_websiteTypeId3",
 					RuntimeVariables.replace("label=Public"));
 				selenium.clickAt("_126_websitePrimary3",
@@ -119,6 +128,7 @@ public class AddOrganizationWebsite3Test extends BaseTestCase {
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//section/div/div/div/div[1]"));
@@ -127,6 +137,7 @@ public class AddOrganizationWebsite3Test extends BaseTestCase {
 				assertEquals("Public",
 					selenium.getSelectedLabel("_126_websiteTypeId2"));
 				assertTrue(selenium.isChecked("_126_websitePrimary2"));
+				selenium.saveScreenShotAndSource();
 
 			case 100:
 				label = -1;

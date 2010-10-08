@@ -43,6 +43,7 @@ public class AddPageWDTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("addPage", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -61,8 +62,10 @@ public class AddPageWDTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("//input",
 			RuntimeVariables.replace("Wiki Display Test Page"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("save", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -81,6 +84,8 @@ public class AddPageWDTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -96,5 +101,7 @@ public class AddPageWDTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.saveScreenShotAndSource();
 	}
 }

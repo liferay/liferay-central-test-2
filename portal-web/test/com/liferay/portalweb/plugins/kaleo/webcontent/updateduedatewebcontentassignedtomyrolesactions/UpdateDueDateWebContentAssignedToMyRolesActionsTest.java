@@ -42,10 +42,13 @@ public class UpdateDueDateWebContentAssignedToMyRolesActionsTest
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=My Workflow Tasks", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to you."),
 			selenium.getText("//div[@id='myTasksPanel']/div[2]/div[1]"));
@@ -78,6 +81,7 @@ public class UpdateDueDateWebContentAssignedToMyRolesActionsTest
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
 
 		for (int second = 0;; second++) {
@@ -96,6 +100,7 @@ public class UpdateDueDateWebContentAssignedToMyRolesActionsTest
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.select("_153_dueDateMonth",
 			RuntimeVariables.replace("label=December"));
 		selenium.select("_153_dueDateDay", RuntimeVariables.replace("label=31"));
@@ -108,6 +113,7 @@ public class UpdateDueDateWebContentAssignedToMyRolesActionsTest
 		selenium.clickAt("//div[3]/div/button[1]",
 			RuntimeVariables.replace("OK"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));

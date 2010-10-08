@@ -25,12 +25,16 @@ public class AssertNotMergeOrganizationPageTest extends BaseTestCase {
 		selenium.open("/web/guest/home/");
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_126_keywords", RuntimeVariables.replace("Selenium"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -50,9 +54,11 @@ public class AssertNotMergeOrganizationPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='View Pages']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPopUp("", RuntimeVariables.replace("5000"));
@@ -61,6 +67,7 @@ public class AssertNotMergeOrganizationPageTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Selenium Test Home Page"));
 		selenium.close();
 		selenium.selectWindow("null");
+		selenium.saveScreenShotAndSource();
 		selenium.open("/web/guest/home/");
 		assertTrue(selenium.isElementPresent("link=Welcome"));
 		assertFalse(selenium.isElementPresent("link=Selenium Test Home Page"));

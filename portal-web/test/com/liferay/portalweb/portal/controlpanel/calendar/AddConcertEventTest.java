@@ -40,10 +40,13 @@ public class AddConcertEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Calendar", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -61,9 +64,11 @@ public class AddConcertEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Event']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -81,17 +86,21 @@ public class AddConcertEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("_8_title",
 			RuntimeVariables.replace("Caedmon's Call Concert!"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_8_description",
 			RuntimeVariables.replace(
 				"I love this band guys! Everyone should see them! I've never seen them before. :("));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_8_timeZoneSensitiveCheckbox",
 			RuntimeVariables.replace(""));
 		selenium.select("_8_type", RuntimeVariables.replace("label=Concert"));
 		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("Link=Caedmon's Call Concert!"));

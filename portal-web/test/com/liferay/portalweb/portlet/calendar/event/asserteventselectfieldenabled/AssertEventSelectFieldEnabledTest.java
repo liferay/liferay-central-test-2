@@ -40,11 +40,14 @@ public class AssertEventSelectFieldEnabledTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Calendar Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Event']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
 				"//select[@name='_8_startDateMonth']"));
 		assertTrue(selenium.isElementPresent(
@@ -81,6 +84,7 @@ public class AssertEventSelectFieldEnabledTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("//select[@name='_8_monthlyPos']"));
 		assertTrue(selenium.isElementPresent("//select[@name='_8_monthlyDay1']"));
 		assertTrue(selenium.isElementPresent("//select[@name='_8_monthlyDay1']"));
@@ -103,6 +107,7 @@ public class AssertEventSelectFieldEnabledTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
 				"//select[@name='_8_yearlyMonth0']"));
 		assertTrue(selenium.isElementPresent("//select[@name='_8_yearlyPos']"));
@@ -154,6 +159,7 @@ public class AssertEventSelectFieldEnabledTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent(
 				"//select[@name='_8_monthlyPos' and @disabled='']"));
 		assertFalse(selenium.isElementPresent(
@@ -179,6 +185,7 @@ public class AssertEventSelectFieldEnabledTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent(
 				"//select[@name='_8_yearlyMonth0' and @disabled='']"));
 		assertFalse(selenium.isElementPresent(

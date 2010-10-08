@@ -45,9 +45,11 @@ public class AddIGImageTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Asset Publisher Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div/ul/li/strong/a",
 					RuntimeVariables.replace("Add New"));
 
@@ -68,17 +70,20 @@ public class AddIGImageTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Image Gallery Image"),
 					selenium.getText(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Select']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPopUp("folder",
 					RuntimeVariables.replace("30000"));
 				selenium.selectWindow("name=folder");
+				selenium.saveScreenShotAndSource();
 				Thread.sleep(5000);
 
 				boolean choose1Present = selenium.isElementPresent(
@@ -92,6 +97,7 @@ public class AddIGImageTest extends BaseTestCase {
 
 				selenium.close();
 				selenium.selectWindow("null");
+				selenium.saveScreenShotAndSource();
 
 			case 2:
 
@@ -121,10 +127,12 @@ public class AddIGImageTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.click("//input[@value='Choose']");
 
 			case 3:
 				selenium.selectWindow("null");
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -144,16 +152,20 @@ public class AddIGImageTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Folder Name"),
 					selenium.getText("_31_folderName"));
 				selenium.type("_31_file",
 					RuntimeVariables.replace(
 						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\assetpublisher\\igimage\\viewigimageabstracts\\dependencies\\AP_test_image.jpg"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_31_name",
 					RuntimeVariables.replace("AP IG Image Name"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -173,6 +185,7 @@ public class AddIGImageTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("AP IG Image Name"),
 					selenium.getText("//h3[@class='asset-title']/a"));
 				assertTrue(selenium.isElementPresent(

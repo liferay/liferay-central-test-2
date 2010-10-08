@@ -40,48 +40,66 @@ public class CheckOutOrderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_134_name",
 			RuntimeVariables.replace("Shopping Order Community"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("Open"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Shopping Order Community",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Cart", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Checkout']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_billingStreet",
 			RuntimeVariables.replace("1234 Sesame Street"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_billingCity", RuntimeVariables.replace("Gotham City"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_34_billingStateSel",
 			RuntimeVariables.replace("label=California"));
 		selenium.type("_34_billingZip", RuntimeVariables.replace("90028"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_billingCountry", RuntimeVariables.replace("USA"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_billingPhone",
 			RuntimeVariables.replace("626-589-1453"));
+		selenium.saveScreenShotAndSource();
 		selenium.click("_34_shipToBillingCheckbox");
 		selenium.select("_34_ccType", RuntimeVariables.replace("label=Visa"));
 		selenium.type("_34_ccNumber",
 			RuntimeVariables.replace("4111111111111111"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_34_ccExpYear", RuntimeVariables.replace("label=2011"));
 		selenium.type("_34_comments",
 			RuntimeVariables.replace("Please take care of my order."));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Continue']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("1234 Sesame Street"),
 			selenium.getText("//tr[5]/td[2]"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Finished']"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Thank you for your purchase."),
 			selenium.getText("//div[2]/div/div/div"));
 		selenium.open("/web/guest/home/");
@@ -102,24 +120,33 @@ public class CheckOutOrderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_134_name",
 			RuntimeVariables.replace("Shopping Order Community"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("Open"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Shopping Order Community",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Orders", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("Order Number"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText("//form",
 				"Please take care of my order."));
 	}

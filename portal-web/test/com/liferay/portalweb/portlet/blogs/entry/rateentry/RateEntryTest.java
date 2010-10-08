@@ -40,8 +40,10 @@ public class RateEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,6 +61,8 @@ public class RateEntryTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.saveScreenShotAndSource();
 
 		String rateCount = selenium.getIncrementedText(
 				"xPath=(//div[@class='aui-rating-label-element'])[2]");
@@ -83,6 +87,7 @@ public class RateEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText(
 				"xPath=(//div[@class='aui-rating-label-element'])[2]",
 				RuntimeVariables.getValue("rateCount")));

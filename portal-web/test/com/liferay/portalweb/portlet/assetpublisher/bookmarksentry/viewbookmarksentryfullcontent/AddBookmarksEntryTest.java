@@ -45,9 +45,11 @@ public class AddBookmarksEntryTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Asset Publisher Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div/ul/li/strong/a",
 					RuntimeVariables.replace("Add New"));
 
@@ -68,17 +70,20 @@ public class AddBookmarksEntryTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Bookmarks Entry"),
 					selenium.getText(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Select']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPopUp("folder",
 					RuntimeVariables.replace("30000"));
 				selenium.selectWindow("name=folder");
+				selenium.saveScreenShotAndSource();
 				Thread.sleep(5000);
 
 				boolean choose1Present = selenium.isElementPresent(
@@ -92,6 +97,7 @@ public class AddBookmarksEntryTest extends BaseTestCase {
 
 				selenium.close();
 				selenium.selectWindow("null");
+				selenium.saveScreenShotAndSource();
 
 			case 2:
 
@@ -121,10 +127,12 @@ public class AddBookmarksEntryTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.click("//input[@value='Choose']");
 
 			case 3:
 				selenium.selectWindow("null");
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -144,15 +152,19 @@ public class AddBookmarksEntryTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Folder Name"),
 					selenium.getText("_28_folderName"));
 				selenium.type("_28_name",
 					RuntimeVariables.replace("AP Bookmarks Entry Name"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_28_url",
 					RuntimeVariables.replace("http://www.liferay.com"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("AP Bookmarks Entry Name"),
 					selenium.getText("//div[1]/h3/a"));
 

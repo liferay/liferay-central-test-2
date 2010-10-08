@@ -40,9 +40,11 @@ public class ViewDocumentCompletedGuestTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Asset Publisher Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("//section"));
 		assertEquals(RuntimeVariables.replace("Asset Publisher"),
 			selenium.getText("//h1/span[2]"));
@@ -54,6 +56,7 @@ public class ViewDocumentCompletedGuestTest extends BaseTestCase {
 		assertFalse(selenium.isTextPresent("There are no results."));
 		selenium.clickAt("//div[2]/a", RuntimeVariables.replace("Read More"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("test_document.txt"),
 			selenium.getText("//div[1]/h1/span"));
 		assertEquals(RuntimeVariables.replace("test_document.txt"),

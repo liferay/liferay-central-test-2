@@ -41,22 +41,32 @@ public class ConfigurePortletShippingPercentageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Shipping Calculation",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.select("_86_shippingFormula",
 			RuntimeVariables.replace("label=Percentage"));
 		selenium.type("_86_shipping0", RuntimeVariables.replace(".10"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_86_shipping1", RuntimeVariables.replace(".20"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_86_shipping2", RuntimeVariables.replace(".30"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_86_shipping3", RuntimeVariables.replace(".40"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_86_shipping4", RuntimeVariables.replace(".50"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div"));

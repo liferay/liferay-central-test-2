@@ -45,12 +45,15 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Web Content",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean webContentPresent = selenium.isElementPresent(
 						"_15_rowIds");
@@ -67,6 +70,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
 
 			case 2:
 				selenium.open("/web/guest/home/");
@@ -88,9 +92,11 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Web Content Display Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean wcdPortletPresent = selenium.isElementPresent(
 						"//section");
@@ -104,6 +110,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
 
 			case 3:
 				selenium.clickAt("_145_addApplication",
@@ -126,8 +133,10 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.typeKeys("layout_configuration_content",
 					RuntimeVariables.replace("w"));
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -146,6 +155,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[@title='Web Content Display']/p/a",
 					RuntimeVariables.replace(""));
 
@@ -165,6 +175,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isVisible("//section"));
 
 				for (int second = 0;; second++) {
@@ -184,9 +195,11 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Web Content List Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean wclPortletPresent = selenium.isElementPresent(
 						"//section");
@@ -200,6 +213,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
 
 			case 4:
 				selenium.clickAt("_145_addApplication",
@@ -222,8 +236,10 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.typeKeys("layout_configuration_content",
 					RuntimeVariables.replace("w"));
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -242,6 +258,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[@title='Web Content List']/p/a",
 					RuntimeVariables.replace(""));
 
@@ -261,6 +278,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isVisible("//section"));
 
 				for (int second = 0;; second++) {
@@ -280,9 +298,11 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Web Content Search Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean wcsPortletPresent = selenium.isElementPresent(
 						"//section");
@@ -296,6 +316,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
 
 			case 5:
 				selenium.clickAt("_145_addApplication",
@@ -318,8 +339,10 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.typeKeys("layout_configuration_content",
 					RuntimeVariables.replace("w"));
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -338,6 +361,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[@title='Web Content Search']/p/a",
 					RuntimeVariables.replace(""));
 
@@ -357,6 +381,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isElementPresent("//section"));
 
 			case 100:

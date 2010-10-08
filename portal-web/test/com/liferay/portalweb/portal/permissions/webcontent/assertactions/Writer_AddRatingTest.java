@@ -41,9 +41,11 @@ public class Writer_AddRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -61,6 +63,7 @@ public class Writer_AddRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Average (3 Votes)"));
 
 		for (int second = 0;; second++) {
@@ -79,6 +82,7 @@ public class Writer_AddRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//a[5]", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -97,6 +101,7 @@ public class Writer_AddRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Average (4 Votes)"));
 	}
 }

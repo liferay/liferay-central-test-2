@@ -41,9 +41,11 @@ public class Portlet_AssertCannotViewFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Document Library Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent(
 				"link=Portlet2 Temporary2 Folder2"));
 		assertFalse(selenium.isTextPresent("Portlet2 Temporary2 Folder2"));

@@ -40,9 +40,11 @@ public class Guest_AssertActionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Message Boards Permissions Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent("//input[@value='Add Category']"));
 		assertFalse(selenium.isElementPresent("//img[@alt='Edit']"));
 		assertFalse(selenium.isElementPresent("//img[@alt='Permissions']"));
@@ -51,6 +53,7 @@ public class Guest_AssertActionsTest extends BaseTestCase {
 		assertFalse(selenium.isElementPresent("link=Delete"));
 		selenium.clickAt("link=Permissions Test 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent(
 				"//input[@value='Add Subcategory']"));
 		assertFalse(selenium.isElementPresent("//img[@alt='Edit']"));
@@ -61,6 +64,7 @@ public class Guest_AssertActionsTest extends BaseTestCase {
 				"//input[@value='Post New Thread']"));
 		selenium.clickAt("link=Test Thread 1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Test Thread Message 1"));
 		assertTrue(selenium.isTextPresent("Test Thread Message Reply 1"));
 		assertFalse(selenium.isElementPresent("link=Edit"));

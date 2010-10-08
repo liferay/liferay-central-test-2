@@ -45,11 +45,14 @@ public class AddUserPhoneNumber2Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
@@ -65,12 +68,15 @@ public class AddUserPhoneNumber2Test extends BaseTestCase {
 			case 2:
 				selenium.type("_125_keywords",
 					RuntimeVariables.replace("selen01"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//td[2]/a",
 					RuntimeVariables.replace("User Name"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("phoneNumbersLink",
 					RuntimeVariables.replace(""));
 
@@ -91,17 +97,21 @@ public class AddUserPhoneNumber2Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[10]/fieldset/div[2]/div/span/span/button[1]",
 					RuntimeVariables.replace(""));
 				selenium.type("_125_phoneNumber2",
 					RuntimeVariables.replace("123-123-1234"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_125_phoneExtension2",
 					RuntimeVariables.replace("123"));
+				selenium.saveScreenShotAndSource();
 				selenium.select("_125_phoneTypeId2",
 					RuntimeVariables.replace("label=Business"));
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//section/div/div/div/div[1]"));

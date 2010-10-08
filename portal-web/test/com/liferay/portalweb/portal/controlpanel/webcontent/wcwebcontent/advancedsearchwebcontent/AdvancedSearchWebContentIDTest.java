@@ -45,12 +45,15 @@ public class AdvancedSearchWebContentIDTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Web Content",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				String webContentID = selenium.getText("//td[2]/a");
 				RuntimeVariables.setValue("webContentID", webContentID);
@@ -85,23 +88,30 @@ public class AdvancedSearchWebContentIDTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.type("_15_searchArticleId",
 					RuntimeVariables.replace(RuntimeVariables.getValue(
 							"webContentID")));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_15_searchArticleId",
 					RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Web Content Name"),
 					selenium.getText("//td[3]/a"));
 				selenium.type("_15_searchArticleId",
 					RuntimeVariables.replace("11111"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_15_searchArticleId",
 					RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				assertFalse(selenium.isElementPresent("link=Web Content Name"));
 				selenium.clickAt("link=\u00ab Basic",
 					RuntimeVariables.replace(""));

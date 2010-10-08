@@ -40,11 +40,14 @@ public class SA_AddCAAnnouncementTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Announcements Permissions Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Manage Entries", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -62,20 +65,27 @@ public class SA_AddCAAnnouncementTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.select("_84_distributionScope",
 			RuntimeVariables.replace("label=Community Admin"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Entry']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_84_title",
 			RuntimeVariables.replace("Test CA Announcement"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_84_url",
 			RuntimeVariables.replace("http://www.liferay.com"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_84_content",
 			RuntimeVariables.replace("This is a test CA Announcement."));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Test CA Announcement"));
 	}
 }

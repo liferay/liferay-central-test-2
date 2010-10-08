@@ -40,36 +40,50 @@ public class AssertDeleteChoiceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Polls", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Question']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_25_title_en_US",
 			RuntimeVariables.replace("Delete Choice Title Test"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_25_description_en_US",
 			RuntimeVariables.replace("Delete Choice Description Test"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_25_choiceDescriptiona_en_US",
 			RuntimeVariables.replace("Delete Choice A"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_25_choiceDescriptionb_en_US",
 			RuntimeVariables.replace("Delete Choice B"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Choice']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_25_choiceDescriptionc_en_US",
 			RuntimeVariables.replace("Delete Choice C"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Choice']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_25_choiceDescriptiond_en_US",
 			RuntimeVariables.replace("Delete Choice D"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Choice']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_25_choiceDescriptione_en_US",
 			RuntimeVariables.replace("Delete Choice E"));
+		selenium.saveScreenShotAndSource();
 		assertEquals("Delete Choice C",
 			selenium.getValue("_25_choiceDescriptionc_en_US"));
 		assertEquals("Delete Choice D",
@@ -79,6 +93,7 @@ public class AssertDeleteChoiceTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Delete']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals("Delete Choice C",
 			selenium.getValue("_25_choiceDescriptionc_en_US"));
 		assertEquals("Delete Choice D",
@@ -87,6 +102,7 @@ public class AssertDeleteChoiceTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Delete']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals("Delete Choice C",
 			selenium.getValue("_25_choiceDescriptionc_en_US"));
 		assertFalse(selenium.isElementPresent("_25_choiceDescriptiond_en_US"));
@@ -94,6 +110,7 @@ public class AssertDeleteChoiceTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Delete']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent("_25_choiceDescriptionc_en_US"));
 		assertFalse(selenium.isElementPresent("_25_choiceDescriptiond_en_US"));
 		assertFalse(selenium.isElementPresent("_25_choiceDescriptione_en_US"));

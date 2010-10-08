@@ -38,14 +38,19 @@ public class AddUserAdditionalEmailAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_keywords", RuntimeVariables.replace("selen01"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("User Name"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("additionalEmailAddressesLink",
 			RuntimeVariables.replace(""));
 
@@ -66,6 +71,7 @@ public class AddUserAdditionalEmailAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//div[11]/fieldset/div[2]/div/span/span/button[1]",
 			RuntimeVariables.replace(""));
 
@@ -85,12 +91,15 @@ public class AddUserAdditionalEmailAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_emailAddressAddress2",
 			RuntimeVariables.replace("testuser01@selenium.com"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_125_emailAddressTypeId2",
 			RuntimeVariables.replace("label=E-mail 2"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));

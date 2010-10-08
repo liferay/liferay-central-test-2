@@ -27,5 +27,6 @@ public class ConfirmEnglishTest extends BaseTestCase {
 		selenium.clickAt("//img[@alt='English (United States)']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 	}
 }

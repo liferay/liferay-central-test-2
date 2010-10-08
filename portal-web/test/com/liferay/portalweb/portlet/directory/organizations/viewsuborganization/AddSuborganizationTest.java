@@ -45,12 +45,15 @@ public class AddSuborganizationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Organizations",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
@@ -66,9 +69,11 @@ public class AddSuborganizationTest extends BaseTestCase {
 			case 2:
 				selenium.type("_126_keywords",
 					RuntimeVariables.replace("Test Organization"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -88,9 +93,11 @@ public class AddSuborganizationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Add Regular Organization",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -110,13 +117,16 @@ public class AddSuborganizationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Test Organization"),
 					selenium.getText("//td[1]/a"));
 				selenium.type("_126_name",
 					RuntimeVariables.replace("Test Child"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//section/div/div/div/div[1]"));
@@ -137,6 +147,7 @@ public class AddSuborganizationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -155,14 +166,18 @@ public class AddSuborganizationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.type("_126_addressStreet1_0",
 					RuntimeVariables.replace("11111 Main Street USA"));
+				selenium.saveScreenShotAndSource();
 				selenium.select("_126_addressTypeId0",
 					RuntimeVariables.replace("label=Billing"));
 				selenium.type("_126_addressZip0",
 					RuntimeVariables.replace("90210"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_126_addressCity0",
 					RuntimeVariables.replace("Cerritos"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("_126_addressPrimary0",
 					RuntimeVariables.replace(""));
 				selenium.select("_126_addressCountryId0",
@@ -189,11 +204,13 @@ public class AddSuborganizationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.select("_126_addressRegionId0",
 					RuntimeVariables.replace("label=Florida"));
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//section/div/div/div/div[1]"));

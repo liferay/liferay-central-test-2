@@ -40,10 +40,13 @@ public class DeleteSettingsPhoneNumberTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("phoneNumbersLink", RuntimeVariables.replace(""));
 		assertEquals("1231231234", selenium.getValue("_130_phoneNumber0"));
 
@@ -63,6 +66,7 @@ public class DeleteSettingsPhoneNumberTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//button[2]", RuntimeVariables.replace(""));
 		assertFalse(selenium.isTextPresent("1231231234"));
 	}

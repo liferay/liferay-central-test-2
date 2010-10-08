@@ -45,29 +45,38 @@ public class AddTemplateLocalizedTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Web Content",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Templates", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Add Template']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_15_newTemplateId",
 					RuntimeVariables.replace("LOCALIZED"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_15_name",
 					RuntimeVariables.replace("Test Localized Template"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_15_description",
 					RuntimeVariables.replace(
 						"This is a test localized template."));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Select']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPopUp("structure",
 					RuntimeVariables.replace("30000"));
 				selenium.selectWindow("structure");
+				selenium.saveScreenShotAndSource();
 				Thread.sleep(5000);
 
 				boolean localizedPresentA = selenium.isElementPresent(
@@ -81,6 +90,7 @@ public class AddTemplateLocalizedTest extends BaseTestCase {
 
 				selenium.close();
 				selenium.selectWindow("null");
+				selenium.saveScreenShotAndSource();
 
 			case 2:
 
@@ -95,6 +105,7 @@ public class AddTemplateLocalizedTest extends BaseTestCase {
 
 				selenium.click("link=LOCALIZED");
 				selenium.selectWindow("null");
+				selenium.saveScreenShotAndSource();
 
 			case 3:
 				Thread.sleep(5000);
@@ -103,10 +114,12 @@ public class AddTemplateLocalizedTest extends BaseTestCase {
 				selenium.type("_15_xsl",
 					RuntimeVariables.replace(
 						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\controlpanel\\webcontent\\wcwebcontent\\addwebcontentlocalized\\dependencies\\LocalizedTemplate.htm"));
+				selenium.saveScreenShotAndSource();
 				Thread.sleep(5000);
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));
 				assertTrue(selenium.isElementPresent("link=LOCALIZED"));

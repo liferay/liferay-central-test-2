@@ -40,18 +40,27 @@ public class EditGeneralTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("generalLink", RuntimeVariables.replace(""));
 		selenium.type("_130_legalId", RuntimeVariables.replace("LIFE"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_130_sicCode", RuntimeVariables.replace("1234"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_130_tickerSymbol", RuntimeVariables.replace("LFRY"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_130_industry", RuntimeVariables.replace("Web Portal"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_130_type", RuntimeVariables.replace("Open Source"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));

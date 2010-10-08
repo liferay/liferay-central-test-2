@@ -46,12 +46,15 @@ public class DisableInputTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Google Maps Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Configuration",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean MapChecked = selenium.isChecked(
 						"_86_mapInputEnabledCheckbox");
@@ -81,6 +84,7 @@ public class DisableInputTest extends BaseTestCase {
 			case 3:
 				selenium.clickAt("//form/input[2]", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have successfully updated the setup."),
 					selenium.getText("//div[@id='p_p_id_86_']/div/div"));

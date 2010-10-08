@@ -40,9 +40,11 @@ public class EditWDFrontPageCommentBodyTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Wiki Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"This is a wiki page test comment."),
 			selenium.getText("//td[2]/div[1]"));
@@ -64,9 +66,11 @@ public class EditWDFrontPageCommentBodyTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("//tr[2]/td/div/textarea",
 			RuntimeVariables.replace(
 				"This is a wiki page test comment. Edited."));
+		selenium.saveScreenShotAndSource();
 		selenium.keyPress("//tr[2]/td/div/textarea",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("//tr[2]/td/div/textarea",
@@ -74,6 +78,7 @@ public class EditWDFrontPageCommentBodyTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertEquals(RuntimeVariables.replace(

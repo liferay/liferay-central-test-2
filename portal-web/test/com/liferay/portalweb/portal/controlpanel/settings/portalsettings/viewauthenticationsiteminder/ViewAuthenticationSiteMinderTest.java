@@ -40,10 +40,13 @@ public class ViewAuthenticationSiteMinderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("authenticationLink", RuntimeVariables.replace(""));
 		selenium.clickAt("link=SiteMinder", RuntimeVariables.replace(""));
 
@@ -64,6 +67,7 @@ public class ViewAuthenticationSiteMinderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
 				"_130_settings--siteminder.auth.enabled--Checkbox"));
 		assertTrue(selenium.isElementPresent(

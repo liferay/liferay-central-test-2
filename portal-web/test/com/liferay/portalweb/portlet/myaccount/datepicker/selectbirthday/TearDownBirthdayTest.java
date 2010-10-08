@@ -40,8 +40,10 @@ public class TearDownBirthdayTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Joe Bloggs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,6 +61,7 @@ public class TearDownBirthdayTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.select("_2_birthdayMonth",
 			RuntimeVariables.replace("label=January"));
 		selenium.select("_2_birthdayDay", RuntimeVariables.replace("label=1"));
@@ -66,5 +69,6 @@ public class TearDownBirthdayTest extends BaseTestCase {
 			RuntimeVariables.replace("label=1970"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 	}
 }

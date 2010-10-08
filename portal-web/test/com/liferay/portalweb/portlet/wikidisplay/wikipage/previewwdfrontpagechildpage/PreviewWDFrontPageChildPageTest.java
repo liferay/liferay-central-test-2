@@ -40,24 +40,31 @@ public class PreviewWDFrontPageChildPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Wiki Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("//td[2]/input",
 			RuntimeVariables.replace("Front Page Child Page Test"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("//textarea",
 			RuntimeVariables.replace("This is a front page child page test."));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Preview']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"This is a front page child page test."),
 			selenium.getText("//div[@class='preview']/div"));
 		selenium.clickAt("//input[@value='Cancel']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertFalse(selenium.isElementPresent("Front Page Child Page Test"));

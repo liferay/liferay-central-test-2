@@ -40,24 +40,33 @@ public class AddEntryContentNullTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Announcements Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Manage Entries", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.select("_84_distributionScope",
 			RuntimeVariables.replace("label=General"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Entry']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_84_title",
 			RuntimeVariables.replace("Announcements Entry Title Null"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_84_url",
 			RuntimeVariables.replace("http://www.liferay.com"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_84_content", RuntimeVariables.replace(""));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"You have entered invalid data. Please try again."),
 			selenium.getText("//section/div/div/div/div"));

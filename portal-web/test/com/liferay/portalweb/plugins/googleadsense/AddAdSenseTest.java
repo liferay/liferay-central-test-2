@@ -40,23 +40,34 @@ public class AddAdSenseTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Google Adsense Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_86_adClient", RuntimeVariables.replace("pub-0000000000"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_86_adChannel", RuntimeVariables.replace("12345678"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_86_adType", RuntimeVariables.replace("label=Text"));
 		selenium.select("_86_adFormat",
 			RuntimeVariables.replace("label=(728 x 90) - Leaderboard"));
 		selenium.type("_86_colorBorder", RuntimeVariables.replace("FFFFFF"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_86_colorBg", RuntimeVariables.replace("0000FF"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_86_colorLink", RuntimeVariables.replace("FFFFFF"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_86_colorText", RuntimeVariables.replace("000000"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_86_colorUrl", RuntimeVariables.replace("008000"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//form/input[2]", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div"));

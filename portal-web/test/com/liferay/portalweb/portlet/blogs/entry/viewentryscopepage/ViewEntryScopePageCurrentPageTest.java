@@ -40,9 +40,11 @@ public class ViewEntryScopePageCurrentPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Blogs Page Scope Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Blogs (Blogs Page Scope Page)"),
 			selenium.getText("//h1[@class='portlet-title']/span[2]"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title Scope Page"),
@@ -68,6 +70,7 @@ public class ViewEntryScopePageCurrentPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
 
 		for (int second = 0;; second++) {
@@ -86,8 +89,10 @@ public class ViewEntryScopePageCurrentPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Scope", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -105,6 +110,7 @@ public class ViewEntryScopePageCurrentPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals("Current Page (Blogs Page Scope Page)",
 			selenium.getSelectedLabel("_86_scopeLayoutUuid"));
 	}

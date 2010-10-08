@@ -41,14 +41,18 @@ public class RevertChangeParentFrontPageChildPageToNoneTest extends BaseTestCase
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent("link=Front Page Child Page Test"));
 		selenium.clickAt("link=All Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Front Page Child Page Test",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Front Page Child Page Test"),
 			selenium.getText(
 				"//ul[@class='breadcrumbs lfr-component']/li[3]/span/a"));
@@ -57,14 +61,17 @@ public class RevertChangeParentFrontPageChildPageToNoneTest extends BaseTestCase
 				"//ul[@class='breadcrumbs lfr-component']/li[3]/span/a"));
 		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=History", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Changed parent from \"FrontPage.\""),
 			selenium.getText(
 				"//tr[@class='portlet-section-body results-row']/td[7]"));
 		selenium.clickAt("link=Revert", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Reverted to 1.0"),
 			selenium.getText(
 				"//tr[@class='portlet-section-body results-row']/td[7]"));
@@ -88,14 +95,18 @@ public class RevertChangeParentFrontPageChildPageToNoneTest extends BaseTestCase
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Front Page Child Page Test"));
 		selenium.clickAt("link=All Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Front Page Child Page Test",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("FrontPage"),
 			selenium.getText(
 				"//ul[@class='breadcrumbs lfr-component']/li[3]/span/a"));

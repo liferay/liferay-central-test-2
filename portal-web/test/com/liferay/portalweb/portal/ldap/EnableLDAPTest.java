@@ -24,8 +24,10 @@ public class EnableLDAPTest extends BaseTestCase {
 	public void testEnableLDAP() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Control Panel"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace("link=Settings"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.click("authenticationLink");
 
 		for (int second = 0;; second++) {
@@ -44,6 +46,7 @@ public class EnableLDAPTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click("link=LDAP");
 
 		for (int second = 0;; second++) {
@@ -63,9 +66,11 @@ public class EnableLDAPTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click("_130_settings--ldap.auth.enabled--Checkbox");
 		selenium.clickAt("//input[@value=\"Save\"]",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 	}
 }

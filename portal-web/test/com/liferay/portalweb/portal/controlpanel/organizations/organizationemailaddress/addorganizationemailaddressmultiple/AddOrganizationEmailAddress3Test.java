@@ -45,12 +45,15 @@ public class AddOrganizationEmailAddress3Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Organizations",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
@@ -66,13 +69,16 @@ public class AddOrganizationEmailAddress3Test extends BaseTestCase {
 			case 2:
 				selenium.type("_126_keywords",
 					RuntimeVariables.replace("Selenium"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Selenium"),
 					selenium.getText("//td[2]/a"));
 				selenium.clickAt("//td[2]/a", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("additionalEmailAddressesLink",
 					RuntimeVariables.replace(""));
 				selenium.clickAt("//div[2]/span/span/button[1]",
@@ -95,8 +101,10 @@ public class AddOrganizationEmailAddress3Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.type("_126_emailAddressAddress3",
 					RuntimeVariables.replace("Selenium@Selenium.com"));
+				selenium.saveScreenShotAndSource();
 				selenium.select("_126_emailAddressTypeId3",
 					RuntimeVariables.replace("label=E-mail"));
 				selenium.clickAt("_126_emailAddressPrimary3",
@@ -105,6 +113,7 @@ public class AddOrganizationEmailAddress3Test extends BaseTestCase {
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//section/div/div/div/div[1]"));
@@ -113,6 +122,7 @@ public class AddOrganizationEmailAddress3Test extends BaseTestCase {
 				assertEquals("E-mail",
 					selenium.getSelectedLabel("_126_emailAddressTypeId2"));
 				assertTrue(selenium.isChecked("_126_emailAddressPrimary2"));
+				selenium.saveScreenShotAndSource();
 
 			case 100:
 				label = -1;

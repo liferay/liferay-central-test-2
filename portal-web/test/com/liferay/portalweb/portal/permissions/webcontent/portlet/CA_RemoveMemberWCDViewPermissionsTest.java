@@ -42,9 +42,11 @@ public class CA_RemoveMemberWCDViewPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
 
 		for (int second = 0;; second++) {
@@ -64,6 +66,7 @@ public class CA_RemoveMemberWCDViewPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
 
 		for (int second = 0;; second++) {
@@ -82,8 +85,10 @@ public class CA_RemoveMemberWCDViewPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -101,16 +106,21 @@ public class CA_RemoveMemberWCDViewPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.uncheck("15_ACTION_VIEW");
 		selenium.uncheck("//tr[5]/td[4]/input");
 		selenium.uncheck("//tr[13]/td[4]/input");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
 		assertFalse(selenium.isChecked("15_ACTION_VIEW"));
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isChecked("//tr[5]/td[4]/input"));
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isChecked("//tr[13]/td[4]/input"));
+		selenium.saveScreenShotAndSource();
 	}
 }

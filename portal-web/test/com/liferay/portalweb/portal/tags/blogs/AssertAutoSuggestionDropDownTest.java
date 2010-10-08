@@ -40,9 +40,11 @@ public class AssertAutoSuggestionDropDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Blogs Tags Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -60,11 +62,14 @@ public class AssertAutoSuggestionDropDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Tags3 Blogs3 Test3 Entry3",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("main-content", RuntimeVariables.replace(""));
 		selenium.clickAt("navigation", RuntimeVariables.replace(""));
 		selenium.clickAt("dockbar", RuntimeVariables.replace(""));
@@ -86,9 +91,12 @@ public class AssertAutoSuggestionDropDownTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("//li[2]/span/span/input", RuntimeVariables.replace(""));
+		selenium.saveScreenShotAndSource();
 		selenium.typeKeys("//li[2]/span/span/input",
 			RuntimeVariables.replace("selenium"));
+		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("selenium1 liferay1"),
 			selenium.getText("//div[7]/div/div/ul/li[1]"));
@@ -100,6 +108,7 @@ public class AssertAutoSuggestionDropDownTest extends BaseTestCase {
 			selenium.getText("//div[7]/div/div/ul/li[4]"));
 		selenium.typeKeys("//li[2]/span/span/input",
 			RuntimeVariables.replace("2*"));
+		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("selenium2 liferay2"),
 			selenium.getText("//div[7]/div/div/ul/li[1]"));

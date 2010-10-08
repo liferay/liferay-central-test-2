@@ -40,20 +40,31 @@ public class ViewAnnouncementDeliveryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=My Account", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Alerts and Announcements",
 			RuntimeVariables.replace(""));
 		assertTrue(selenium.isChecked(
 				"_2_announcementsTypegeneralEmailCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isChecked("_2_announcementsTypegeneralSmsCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isChecked(
 				"_2_announcementsTypegeneralWebsiteCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isChecked("_2_announcementsTypenewsSmsCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isChecked("_2_announcementsTypenewsSmsCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isChecked("_2_announcementsTypenewsWebsiteCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isChecked("_2_announcementsTypetestEmailCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isChecked("_2_announcementsTypetestSmsCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isChecked("_2_announcementsTypetestWebsiteCheckbox"));
+		selenium.saveScreenShotAndSource();
 	}
 }

@@ -40,9 +40,11 @@ public class ViewBlogsEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Activities Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Joe wrote a new blog entry, Blogs Entry Title, in Liferay."),
 			selenium.getText("//td[2]/div[1]"));

@@ -40,9 +40,11 @@ public class AddCommentReply2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Page Comments Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//tr[5]/td[2]/table[1]/tbody/tr/td[2]/span/a/span",
 			RuntimeVariables.replace(""));
 
@@ -62,15 +64,18 @@ public class AddCommentReply2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isVisible("_107_postReplyBody2"));
 		selenium.type("_107_postReplyBody2",
 			RuntimeVariables.replace("This is a test reply2 comment2."));
+		selenium.saveScreenShotAndSource();
 		selenium.keyPress("_107_postReplyBody2",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_107_postReplyBody2", RuntimeVariables.replace("\\8"));
 		selenium.clickAt("//tr[5]/td[2]/table[2]/tbody/tr[1]/td/input[1]",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));

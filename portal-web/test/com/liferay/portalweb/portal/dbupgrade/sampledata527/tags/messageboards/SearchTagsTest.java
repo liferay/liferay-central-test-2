@@ -40,25 +40,34 @@ public class SearchTagsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_134_name",
 			RuntimeVariables.replace("Tags Message Board Community"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//tr[@class='portlet-section-body results-row last']/td[1]/a",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Message Boards Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_19_keywords1", RuntimeVariables.replace("selenium1"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search Categories']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Message1 Tag1 Test1"));
 		assertFalse(selenium.isElementPresent("link=Message2 Tag2 Test2"));
 		assertFalse(selenium.isElementPresent("link=Message3 Tag3 Test3"));
@@ -82,13 +91,17 @@ public class SearchTagsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Message Boards Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_19_keywords1", RuntimeVariables.replace("selenium2"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search Categories']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Message2 Tag2 Test2"));
 		assertFalse(selenium.isElementPresent("link=Message1 Tag1 Test1"));
 		assertFalse(selenium.isElementPresent("link=Message3 Tag3 Test3"));
@@ -112,13 +125,17 @@ public class SearchTagsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Message Boards Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_19_keywords1", RuntimeVariables.replace("selenium3"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search Categories']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Message3 Tag3 Test3"));
 		assertFalse(selenium.isElementPresent("link=Message1 Tag1 Test1"));
 		assertFalse(selenium.isElementPresent("link=Message2 Tag2 Test2"));
@@ -142,13 +159,17 @@ public class SearchTagsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Message Boards Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_19_keywords1", RuntimeVariables.replace("selenium"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search Categories']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=MessageA TagA TestA"));
 		assertTrue(selenium.isElementPresent("link=MessageB TagB TestB"));
 		assertTrue(selenium.isElementPresent("link=MessageC TagC TestC"));

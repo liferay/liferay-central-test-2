@@ -46,11 +46,14 @@ public class AdvancedSearchUsersTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Directory Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean advancedVisible = selenium.isVisible(
 						"link=Advanced \u00bb");
@@ -82,74 +85,101 @@ public class AdvancedSearchUsersTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.type("_11_firstName",
 					RuntimeVariables.replace("TestFirst"));
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isElementPresent("link=TestFirst1"));
 				selenium.type("_11_firstName",
 					RuntimeVariables.replace("TestFirstA"));
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertFalse(selenium.isElementPresent("link=TestFirst1"));
 				selenium.type("_11_firstName", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_11_middleName",
 					RuntimeVariables.replace("TestMiddle"));
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isElementPresent("link=TestFirst1"));
 				selenium.type("_11_middleName",
 					RuntimeVariables.replace("TestMiddleA"));
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertFalse(selenium.isElementPresent("link=TestFirst1"));
 				selenium.type("_11_middleName", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_11_lastName",
 					RuntimeVariables.replace("TestLast"));
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isElementPresent("link=TestFirst1"));
 				selenium.type("_11_lastName",
 					RuntimeVariables.replace("TestLastA"));
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertFalse(selenium.isElementPresent("link=TestFirst1"));
 				selenium.type("_11_lastName", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_11_screenName",
 					RuntimeVariables.replace("TestSN"));
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isElementPresent("link=TestFirst1"));
 				selenium.type("_11_screenName",
 					RuntimeVariables.replace("TestSNA"));
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertFalse(selenium.isElementPresent("link=TestFirst1"));
 				selenium.type("_11_screenName", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_11_emailAddress",
 					RuntimeVariables.replace("TestEMail1@liferay.com"));
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isElementPresent("link=TestFirst1"));
 				selenium.click(RuntimeVariables.replace(
 						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_11_emailAddress",
 					RuntimeVariables.replace("TestEMail@liferay.com"));
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"//div[2]/span[2]/span/input"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertFalse(selenium.isElementPresent("link=TestFirst1"));
 				selenium.type("_11_emailAddress", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=\u00ab Basic",
 					RuntimeVariables.replace(""));
 

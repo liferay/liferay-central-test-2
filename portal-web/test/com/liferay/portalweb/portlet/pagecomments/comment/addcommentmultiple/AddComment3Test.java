@@ -40,9 +40,11 @@ public class AddComment3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Page Comments Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Add Comment", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -61,14 +63,17 @@ public class AddComment3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isVisible("_107_postReplyBody0"));
 		selenium.type("_107_postReplyBody0",
 			RuntimeVariables.replace("This is a test page3 comment3."));
+		selenium.saveScreenShotAndSource();
 		selenium.keyPress("_107_postReplyBody0",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_107_postReplyBody0", RuntimeVariables.replace("\\8"));
 		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));

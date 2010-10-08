@@ -45,17 +45,21 @@ public class EditFrontPageMinorChangeTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Wiki Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"This is a wiki frontpage test."),
 					selenium.getText("//div[5]/div"));
 				selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_36_content",
 					RuntimeVariables.replace(
 						"This is a wiki frontpage test.Minor Edit"));
+				selenium.saveScreenShotAndSource();
 
 				boolean minorEditChecked = selenium.isChecked(
 						"_36_minorEditCheckbox");
@@ -73,6 +77,7 @@ public class EditFrontPageMinorChangeTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Publish']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//section/div/div/div/div[1]"));
@@ -97,13 +102,17 @@ public class EditFrontPageMinorChangeTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Wiki Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=History", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isElementPresent("link=1.2 (Minor Edit)"));
 				assertTrue(selenium.isElementPresent("link=1.1"));
 				assertTrue(selenium.isElementPresent("link=1.0 (Minor Edit)"));

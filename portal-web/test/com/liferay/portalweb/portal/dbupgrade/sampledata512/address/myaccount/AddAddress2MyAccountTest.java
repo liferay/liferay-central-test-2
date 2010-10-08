@@ -40,8 +40,10 @@ public class AddAddress2MyAccountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=My Account", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Addresses", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -60,11 +62,15 @@ public class AddAddress2MyAccountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//div[7]/div[1]/input", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_2_street1", RuntimeVariables.replace("123 Lets"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_2_countryId", RuntimeVariables.replace("label=Canada"));
 		selenium.type("_2_street2", RuntimeVariables.replace("897 Hope"));
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -84,13 +90,18 @@ public class AddAddress2MyAccountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.select("_2_regionId", RuntimeVariables.replace("label=Ontario"));
 		selenium.type("_2_street3", RuntimeVariables.replace("7896 This"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_2_typeId", RuntimeVariables.replace("label=Other"));
 		selenium.type("_2_city", RuntimeVariables.replace("Works"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_2_zip", RuntimeVariables.replace("00000"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//div[2]/div/div/div"));

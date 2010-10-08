@@ -40,8 +40,10 @@ public class AssertAdSensePresentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace("link=Google Adsense Test Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Public Service Ads by Google"),
 			selenium.getText("//td/font"));
 	}

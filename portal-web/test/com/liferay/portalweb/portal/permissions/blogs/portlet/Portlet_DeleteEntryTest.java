@@ -38,18 +38,22 @@ public class Portlet_DeleteEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Blogs Permissions Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText("//div[@class='entry-title']/a",
 				"Portlet1 Temporary1 Entry1"));
 		selenium.clickAt("//div[@class='entry-title']/a",
 			RuntimeVariables.replace("Portlet1 Temporary1 Entry1"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace("link=Delete"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent(
 				"link=Edited1 Portlet1 Temporary1 Entry1"));
 		assertFalse(selenium.isElementPresent("link=Portlet1 Temporary1 Entry1"));

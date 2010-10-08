@@ -40,10 +40,13 @@ public class AssertImportLARTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Test Web Content Article"),
 			selenium.getText("//td[3]/a"));
 		assertEquals(RuntimeVariables.replace("1.0"),
@@ -58,6 +61,7 @@ public class AssertImportLARTest extends BaseTestCase {
 			selenium.getText("//tr[4]/td[5]/a"));
 		selenium.clickAt("link=Structures", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("TEST"),
 			selenium.getText("//td[2]/a"));
 		assertEquals(RuntimeVariables.replace(
@@ -65,6 +69,7 @@ public class AssertImportLARTest extends BaseTestCase {
 			selenium.getText("//td[3]/a"));
 		selenium.clickAt("link=Templates", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("TEST"),
 			selenium.getText("//td[2]/a"));
 		assertEquals(RuntimeVariables.replace(

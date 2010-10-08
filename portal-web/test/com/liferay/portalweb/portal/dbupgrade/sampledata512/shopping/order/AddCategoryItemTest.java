@@ -40,35 +40,51 @@ public class AddCategoryItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Communities I Own", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_29_name",
 			RuntimeVariables.replace("Shopping Order Community"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search Communities']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("Open"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//td[1]/a", RuntimeVariables.replace("Category Test"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Item']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_sku", RuntimeVariables.replace("1112"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_name", RuntimeVariables.replace("Item Test"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_description",
 			RuntimeVariables.replace("This is an item test."));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_stockQuantity", RuntimeVariables.replace("50"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_properties",
 			RuntimeVariables.replace("Limited Time Only"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("_34_requiresShippingCheckbox"));
 		selenium.clickAt("_34_requiresShippingCheckbox",
 			RuntimeVariables.replace(""));
 		assertTrue(selenium.isChecked("_34_requiresShippingCheckbox"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_price0", RuntimeVariables.replace("$9.99"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_minQuantity0", RuntimeVariables.replace("1"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent(

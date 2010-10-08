@@ -40,10 +40,13 @@ public class ViewMailHostNamesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("mailHostNamesLink", RuntimeVariables.replace(""));
 		assertTrue(selenium.isTextPresent(
 				"Enter one mail host name per line for all additional mail host names besides liferay.com."));

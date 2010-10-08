@@ -40,10 +40,13 @@ public class AddRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText("//div[5]/div[2]/div/div", "0 Votes"));
 
 		for (int second = 0;; second++) {
@@ -62,6 +65,7 @@ public class AddRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//a[5]", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -80,6 +84,7 @@ public class AddRatingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText("//div[5]/div[2]/div/div", "1 Vote"));
 	}
 }

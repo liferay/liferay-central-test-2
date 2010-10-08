@@ -38,6 +38,7 @@ public class ExtendSessionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		Thread.sleep(30000);
 		Thread.sleep(15000);
 
@@ -57,6 +58,7 @@ public class ExtendSessionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click("//input[@value='Extend']");
 
 		for (int second = 0;; second++) {
@@ -74,5 +76,7 @@ public class ExtendSessionTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.saveScreenShotAndSource();
 	}
 }

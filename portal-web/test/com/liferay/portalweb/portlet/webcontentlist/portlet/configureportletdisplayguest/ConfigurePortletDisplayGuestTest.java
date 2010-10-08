@@ -40,9 +40,11 @@ public class ConfigurePortletDisplayGuestTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content List Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Please configure this portlet to make it visible to all users."));
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
@@ -63,6 +65,7 @@ public class ConfigurePortletDisplayGuestTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.select("_86_groupId", RuntimeVariables.replace("label=Liferay"));
 		selenium.select("_86_type",
 			RuntimeVariables.replace("label=Announcements"));
@@ -74,6 +77,7 @@ public class ConfigurePortletDisplayGuestTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Ascending"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -92,9 +96,11 @@ public class ConfigurePortletDisplayGuestTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content List Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Web Content Test"));
 	}
 }

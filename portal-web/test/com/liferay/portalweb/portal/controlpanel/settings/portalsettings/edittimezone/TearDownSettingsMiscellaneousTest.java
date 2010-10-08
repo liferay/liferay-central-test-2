@@ -40,16 +40,20 @@ public class TearDownSettingsMiscellaneousTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("displaySettingsLink", RuntimeVariables.replace(""));
 		selenium.select("_130_languageId",
 			RuntimeVariables.replace("label=English (United States)"));
 		selenium.type("_130_settings--locales--",
 			RuntimeVariables.replace(
 				"ar_SA,eu_ES,bg_BG,ca_AD,ca_ES,zh_CN,zh_TW,cs_CZ,nl_NL,en_US,et_EE,fi_FI,fr_FR,gl_ES,de_DE,el_GR,iw_IL,hi_IN,hu_HU,it_IT,ja_JP,ko_KR,nb_NO,fa_IR,pl_PL,pt_BR,pt_PT,ru_RU,sk_SK,es_ES,sv_SE,tr_TR,uk_UA,vi_VN"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_130_timeZoneId",
 			RuntimeVariables.replace("label=(UTC ) Coordinated Universal Time"));
 		selenium.select("_130_settings--default.regular.theme.id--",
@@ -61,9 +65,12 @@ public class TearDownSettingsMiscellaneousTest extends BaseTestCase {
 		selenium.clickAt("googleAppsLink", RuntimeVariables.replace(""));
 		selenium.type("_130_settings--google.apps.username--",
 			RuntimeVariables.replace(""));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_130_settings--google.apps.password--",
 			RuntimeVariables.replace(""));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 	}
 }

@@ -40,15 +40,20 @@ public class DefinePermissionsRoleCCBlogsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Roles", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_128_name",
 			RuntimeVariables.replace("Organization Content Creator"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Organization Content Creator"),
 			selenium.getText("//td[1]/a"));
 		assertEquals(RuntimeVariables.replace("Organization"),
@@ -75,12 +80,14 @@ public class DefinePermissionsRoleCCBlogsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Define Permissions"),
 			selenium.getText(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Organization Content Creator"),
 			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace(
@@ -88,9 +95,11 @@ public class DefinePermissionsRoleCCBlogsTest extends BaseTestCase {
 			selenium.getText("//label[@for='_128_add-permissions']"));
 		selenium.clickAt("link=Define Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.select("_128_add-permissions",
 			RuntimeVariables.replace("label=Blogs"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.check("//input[@value='com.liferay.portlet.blogsADD_ENTRY']");
 		selenium.uncheck(
 			"//input[@value='com.liferay.portlet.blogsPERMISSIONS']");
@@ -111,6 +120,7 @@ public class DefinePermissionsRoleCCBlogsTest extends BaseTestCase {
 			"//input[@value='com.liferay.portlet.blogs.model.BlogsEntryVIEW']");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"The role permissions were updated."),
 			selenium.getText("//section/div/div/div/div[3]"));

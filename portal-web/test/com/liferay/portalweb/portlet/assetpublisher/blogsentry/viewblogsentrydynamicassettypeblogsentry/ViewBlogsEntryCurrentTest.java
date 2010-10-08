@@ -40,9 +40,11 @@ public class ViewBlogsEntryCurrentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("AP Blogs Entry Title"),
 			selenium.getText("//div[1]/h3/a"));
 		assertEquals(RuntimeVariables.replace("AP Blogs Entry Content."),

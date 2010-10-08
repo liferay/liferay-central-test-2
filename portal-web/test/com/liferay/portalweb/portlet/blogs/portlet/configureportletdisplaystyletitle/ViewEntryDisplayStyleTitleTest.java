@@ -40,8 +40,10 @@ public class ViewEntryDisplayStyleTitleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Title"),
 			selenium.getText("//div[@class='entry-title']/a"));
 		assertEquals(RuntimeVariables.replace("Read More About Title \u00bb"),
@@ -50,6 +52,7 @@ public class ViewEntryDisplayStyleTitleTest extends BaseTestCase {
 		selenium.clickAt("//div[@class='entry-body']/a",
 			RuntimeVariables.replace("Read More About Title \u00bb"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Title"),
 			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("Content."),

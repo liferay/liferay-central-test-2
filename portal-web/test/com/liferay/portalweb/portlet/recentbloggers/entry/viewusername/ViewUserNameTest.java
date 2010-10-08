@@ -40,9 +40,11 @@ public class ViewUserNameTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Recent Bloggers Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("User"),
 			selenium.getText("//th[1]"));
 		assertEquals(RuntimeVariables.replace("Posts"),

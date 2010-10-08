@@ -41,13 +41,17 @@ public class SearchWCWebContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content Search Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_77_keywords",
 			RuntimeVariables.replace("WC Web Content Test"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@type='image']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("WC Web Content Test"));
 		assertTrue(selenium.isTextPresent("This is a test wc web content"));
 		selenium.open("/web/guest/home/");
@@ -69,13 +73,17 @@ public class SearchWCWebContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content Search Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_77_keywords",
 			RuntimeVariables.replace("WC1 Web1 Content1 Test1"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@type='image']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isTextPresent("WC Web Content Test"));
 		assertFalse(selenium.isTextPresent("This is a test wc web content"));
 	}

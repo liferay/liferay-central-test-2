@@ -41,10 +41,13 @@ public class UpdateDueDateWebContentAssignedToMeActionsTest extends BaseTestCase
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=My Workflow Tasks", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Review"),
 			selenium.getText("//td[1]/a"));
 		assertEquals(RuntimeVariables.replace("Web Content Name"),
@@ -77,6 +80,7 @@ public class UpdateDueDateWebContentAssignedToMeActionsTest extends BaseTestCase
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a");
 
 		for (int second = 0;; second++) {
@@ -95,6 +99,7 @@ public class UpdateDueDateWebContentAssignedToMeActionsTest extends BaseTestCase
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.select("_153_dueDateMonth",
 			RuntimeVariables.replace("label=December"));
 		selenium.select("_153_dueDateDay", RuntimeVariables.replace("label=31"));
@@ -107,6 +112,7 @@ public class UpdateDueDateWebContentAssignedToMeActionsTest extends BaseTestCase
 		selenium.clickAt("//div[3]/div/button[1]",
 			RuntimeVariables.replace("OK"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));

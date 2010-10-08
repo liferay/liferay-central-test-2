@@ -40,11 +40,14 @@ public class ViewFolderImageEditingWindowTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Image Gallery Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -64,6 +67,7 @@ public class ViewFolderImageEditingWindowTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//img[@alt='Test1 Image1 - This is Test1 Image1.']",
 			RuntimeVariables.replace(""));
 
@@ -83,6 +87,7 @@ public class ViewFolderImageEditingWindowTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 		assertTrue(selenium.isElementPresent("//img[@alt='Download (12.9k)']"));
 		assertTrue(selenium.isElementPresent("//img[@alt='View']"));

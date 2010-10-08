@@ -40,13 +40,16 @@ public class VoteQuestionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Polls Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//span[2]/span/span/input",
 			RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Vote']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Thank you for your vote."));
 		assertEquals(RuntimeVariables.replace("0%"),
 			selenium.getText("//tr[2]/td[1]"));

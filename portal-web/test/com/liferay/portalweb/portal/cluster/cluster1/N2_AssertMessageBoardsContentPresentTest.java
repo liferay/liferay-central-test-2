@@ -26,9 +26,12 @@ public class N2_AssertMessageBoardsContentPresentTest extends BaseTestCase {
 		selenium.open("/web/guest/home/");
 		Thread.sleep(5000);
 		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Test Category 1"));
 		assertEquals(RuntimeVariables.replace("Node: [$CLUSTER_NODE_2$]"),
 			selenium.getText("//div[@id='content']/div[3]"));

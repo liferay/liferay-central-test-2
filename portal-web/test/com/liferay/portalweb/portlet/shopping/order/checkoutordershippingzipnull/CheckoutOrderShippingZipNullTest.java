@@ -45,26 +45,35 @@ public class CheckoutOrderShippingZipNullTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Shopping Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Cart", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Checkout']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_34_billingStreet",
 					RuntimeVariables.replace("1234 Sesame Street"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_34_billingCity",
 					RuntimeVariables.replace("Gotham City"));
+				selenium.saveScreenShotAndSource();
 				selenium.select("_34_billingStateSel",
 					RuntimeVariables.replace("label=California"));
 				selenium.type("_34_billingZip",
 					RuntimeVariables.replace("90028"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_34_billingCountry",
 					RuntimeVariables.replace("USA"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_34_billingPhone",
 					RuntimeVariables.replace("626-589-1453"));
+				selenium.saveScreenShotAndSource();
 
 				boolean sameAsBillingChecked = selenium.isChecked(
 						"_34_shipToBillingCheckbox");
@@ -81,26 +90,34 @@ public class CheckoutOrderShippingZipNullTest extends BaseTestCase {
 			case 2:
 				selenium.type("_34_shippingStreet",
 					RuntimeVariables.replace("1234 Sesame Street"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_34_shippingCity",
 					RuntimeVariables.replace("Gotham City"));
+				selenium.saveScreenShotAndSource();
 				selenium.select("_34_shippingStateSel",
 					RuntimeVariables.replace("label=California"));
 				selenium.type("_34_shippingZip", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_34_shippingCountry",
 					RuntimeVariables.replace("USA"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_34_shippingPhone",
 					RuntimeVariables.replace("626-589-1453"));
+				selenium.saveScreenShotAndSource();
 				selenium.select("_34_ccType",
 					RuntimeVariables.replace("label=Visa"));
 				selenium.type("_34_ccNumber",
 					RuntimeVariables.replace("4111111111111111"));
+				selenium.saveScreenShotAndSource();
 				selenium.select("_34_ccExpYear",
 					RuntimeVariables.replace("label=2011"));
 				selenium.type("_34_comments",
 					RuntimeVariables.replace("Please take care of my order."));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Continue']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent(
 						"You have entered invalid data. Please try again."));
 				assertTrue(selenium.isTextPresent("Please enter a valid zip."));

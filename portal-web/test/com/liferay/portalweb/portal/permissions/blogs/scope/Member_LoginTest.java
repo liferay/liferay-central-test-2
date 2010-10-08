@@ -24,15 +24,21 @@ public class Member_LoginTest extends BaseTestCase {
 	public void testMember_Login() throws Exception {
 		selenium.clickAt("link=Welcome", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.typeKeys("_58_login",
 			RuntimeVariables.replace("member@lifera.com"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_58_login",
 			RuntimeVariables.replace("member@liferay.com"));
+		selenium.saveScreenShotAndSource();
 		selenium.typeKeys("_58_password", RuntimeVariables.replace("test"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_58_rememberMeCheckbox", RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Sign In']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 	}
 }

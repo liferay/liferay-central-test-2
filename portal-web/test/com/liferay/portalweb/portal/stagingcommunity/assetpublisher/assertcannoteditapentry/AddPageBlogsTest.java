@@ -34,6 +34,7 @@ public class AddPageBlogsTest extends BaseTestCase {
 				selenium.clickAt("//div/div[3]/div/ul/li[5]/a",
 					RuntimeVariables.replace("ControlPanel"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -51,13 +52,17 @@ public class AddPageBlogsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Communities",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_134_name", RuntimeVariables.replace("Staging"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				Thread.sleep(5000);
 				selenium.click("//strong/a");
 
@@ -78,6 +83,7 @@ public class AddPageBlogsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.click(
 					"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
 
@@ -99,6 +105,8 @@ public class AddPageBlogsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
+
 				boolean welcomePresent = selenium.isElementPresent(
 						"//li/ul/li[1]/div/div[3]/a");
 
@@ -114,11 +122,14 @@ public class AddPageBlogsTest extends BaseTestCase {
 			case 2:
 				selenium.clickAt("//div/div[3]/a", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_134_name_en_US",
 					RuntimeVariables.replace("Blogs Test Page"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Add Page']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//section/div/div/div/div"));
@@ -141,6 +152,7 @@ public class AddPageBlogsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Blogs Test Page"),
 					selenium.getText("//li/ul/li[2]/div/div[3]/a"));
 

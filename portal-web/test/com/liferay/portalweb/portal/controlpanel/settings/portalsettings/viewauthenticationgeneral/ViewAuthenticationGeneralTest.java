@@ -40,10 +40,13 @@ public class ViewAuthenticationGeneralTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("authenticationLink", RuntimeVariables.replace(""));
 		selenium.clickAt("link=General", RuntimeVariables.replace(""));
 
@@ -63,6 +66,7 @@ public class ViewAuthenticationGeneralTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("How do users authenticate?"));
 		assertTrue(selenium.isTextPresent("Allow users to automatically login?"));
 		assertTrue(selenium.isTextPresent(

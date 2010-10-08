@@ -45,12 +45,15 @@ public class AdvancedSearchOrganizationsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Directory Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Organizations",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean advancedVisible = selenium.isVisible(
 						"link=Advanced \u00bb");
@@ -82,61 +85,84 @@ public class AdvancedSearchOrganizationsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.type("_11_name", RuntimeVariables.replace("Test"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent("Diamond Bar"));
 				selenium.type("_11_name", RuntimeVariables.replace("Test1"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertFalse(selenium.isTextPresent("Diamond Bar"));
 				selenium.type("_11_name", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_11_street", RuntimeVariables.replace("Test"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent("Diamond Bar"));
 				selenium.type("_11_street", RuntimeVariables.replace("Test1"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertFalse(selenium.isTextPresent("Diamond Bar"));
 				selenium.type("_11_street", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_11_city", RuntimeVariables.replace("Diamond"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent("Diamond Bar"));
 				selenium.type("_11_city", RuntimeVariables.replace("Diamond1"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertFalse(selenium.isTextPresent("Diamond Bar"));
 				selenium.type("_11_city", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_11_zip", RuntimeVariables.replace("11111"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent("Diamond Bar"));
 				selenium.type("_11_zip", RuntimeVariables.replace("111111"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertFalse(selenium.isTextPresent("Diamond Bar"));
 				selenium.type("_11_zip", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.select("_11_type",
 					RuntimeVariables.replace("label=Regular Organization"));
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent("Diamond Bar"));
 				selenium.select("_11_type",
 					RuntimeVariables.replace("label=Location"));
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertFalse(selenium.isTextPresent("Diamond Bar"));
 				selenium.select("_11_type",
 					RuntimeVariables.replace("label=Any"));
@@ -145,12 +171,14 @@ public class AdvancedSearchOrganizationsTest extends BaseTestCase {
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent("Diamond Bar"));
 				selenium.select("_11_countryId",
 					RuntimeVariables.replace("label=United Kingdom"));
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertFalse(selenium.isTextPresent("Diamond Bar"));
 				selenium.select("_11_countryId",
 					RuntimeVariables.replace("label=United States"));
@@ -174,17 +202,20 @@ public class AdvancedSearchOrganizationsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.select("_11_regionId",
 					RuntimeVariables.replace("label=California"));
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent("Diamond Bar"));
 				selenium.select("_11_regionId",
 					RuntimeVariables.replace("label=Hawaii"));
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertFalse(selenium.isTextPresent("Diamond Bar"));
 				selenium.select("_11_countryId",
 					RuntimeVariables.replace("label="));

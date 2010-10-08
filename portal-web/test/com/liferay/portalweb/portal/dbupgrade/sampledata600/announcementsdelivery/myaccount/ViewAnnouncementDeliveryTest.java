@@ -40,21 +40,29 @@ public class ViewAnnouncementDeliveryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Joe Bloggs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 		selenium.clickAt("announcementsLink", RuntimeVariables.replace(""));
 		assertTrue(selenium.isChecked(
 				"_2_announcementsTypegeneralEmailCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isChecked("_2_announcementsTypegeneralSmsCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
 				"//input[@id='_2_announcementsTypegeneralWebsiteCheckbox' and @disabled='']"));
 		assertTrue(selenium.isChecked("_2_announcementsTypenewsSmsCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isChecked("_2_announcementsTypenewsSmsCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
 				"//input[@id='_2_announcementsTypenewsWebsiteCheckbox' and @disabled='']"));
 		assertTrue(selenium.isChecked("_2_announcementsTypetestEmailCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isChecked("_2_announcementsTypetestSmsCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
 				"//input[@id='_2_announcementsTypetestWebsiteCheckbox' and @disabled='']"));
 	}

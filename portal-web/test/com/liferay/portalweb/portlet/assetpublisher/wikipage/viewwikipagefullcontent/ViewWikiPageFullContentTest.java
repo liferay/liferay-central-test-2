@@ -40,9 +40,11 @@ public class ViewWikiPageFullContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("FrontPage"),
 			selenium.getText("//h1[@class='header-title']"));
 		assertTrue(selenium.isPartialText("//div[@class='asset-content']",
@@ -52,6 +54,7 @@ public class ViewWikiPageFullContentTest extends BaseTestCase {
 		selenium.clickAt("//div[@class='asset-more']/a",
 			RuntimeVariables.replace("View in Context \u00bb"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText("//h1[@class='header-title']/span",
 				"FrontPage"));
 		assertEquals(RuntimeVariables.replace("AP Wiki Page Body"),

@@ -40,8 +40,10 @@ public class AddUserScreenNameAnonymousTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,18 +61,26 @@ public class AddUserScreenNameAnonymousTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_screenName",
 			RuntimeVariables.replace("anonymous-guest"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_emailAddress",
 			RuntimeVariables.replace("testA@selenium.com"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_firstName", RuntimeVariables.replace("testA"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_lastName", RuntimeVariables.replace("testA"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"You have entered invalid data. Please try again."),
 			selenium.getText("//section/div/div/div/div[1]"));
@@ -78,8 +88,10 @@ public class AddUserScreenNameAnonymousTest extends BaseTestCase {
 				"Please enter a valid screen name."),
 			selenium.getText("//fieldset[1]/div/div"));
 		selenium.type("_125_screenName", RuntimeVariables.replace("guest"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"You have entered invalid data. Please try again."),
 			selenium.getText("//section/div/div/div/div[1]"));
@@ -87,8 +99,10 @@ public class AddUserScreenNameAnonymousTest extends BaseTestCase {
 				"Please enter a valid screen name."),
 			selenium.getText("//fieldset[1]/div/div"));
 		selenium.type("_125_screenName", RuntimeVariables.replace("ANONYMOUS"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"You have entered invalid data. Please try again."),
 			selenium.getText("//section/div/div/div/div[1]"));
@@ -96,8 +110,10 @@ public class AddUserScreenNameAnonymousTest extends BaseTestCase {
 				"Please enter a valid screen name."),
 			selenium.getText("//fieldset[1]/div/div"));
 		selenium.type("_125_screenName", RuntimeVariables.replace("<anonymous>"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"You have entered invalid data. Please try again."),
 			selenium.getText("//section/div/div/div/div[1]"));

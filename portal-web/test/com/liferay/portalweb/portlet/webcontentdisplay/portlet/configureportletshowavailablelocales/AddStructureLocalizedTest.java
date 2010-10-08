@@ -40,21 +40,29 @@ public class AddStructureLocalizedTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Structures", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Structure']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_15_newStructureId",
 			RuntimeVariables.replace("LOCALIZED"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_15_name",
 			RuntimeVariables.replace("Test Localized Structure"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_15_description",
 			RuntimeVariables.replace("This is a test localized structure."));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_15_editorButton", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -73,10 +81,12 @@ public class AddStructureLocalizedTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 		selenium.type("_15_xsdContent",
 			RuntimeVariables.replace(
 				"<root> \n\n <dynamic-element name='page-name' type='text'></dynamic-element> \n\n <dynamic-element name='page-description' type='text'></dynamic-element> \n\n</root>"));
+		selenium.saveScreenShotAndSource();
 		selenium.click("//input[@value='Update']");
 		Thread.sleep(5000);
 		assertEquals("page-name", selenium.getValue("_15_structure_el0_name"));
@@ -84,6 +94,7 @@ public class AddStructureLocalizedTest extends BaseTestCase {
 			selenium.getValue("_15_structure_el1_name"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=LOCALIZED"));
 		assertTrue(selenium.isTextPresent("Test Localized Structure"));
 	}

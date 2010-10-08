@@ -45,11 +45,14 @@ public class AddUserPhoneNumber3Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
@@ -65,12 +68,15 @@ public class AddUserPhoneNumber3Test extends BaseTestCase {
 			case 2:
 				selenium.type("_125_keywords",
 					RuntimeVariables.replace("selen01"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//td[2]/a",
 					RuntimeVariables.replace("User Name"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("phoneNumbersLink",
 					RuntimeVariables.replace(""));
 
@@ -91,17 +97,21 @@ public class AddUserPhoneNumber3Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/div[1]/span/span/button[1]",
 					RuntimeVariables.replace("Add Row"));
 				selenium.type("_125_phoneNumber3",
 					RuntimeVariables.replace("1231231234"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_125_phoneExtension3",
 					RuntimeVariables.replace("123"));
+				selenium.saveScreenShotAndSource();
 				selenium.select("_125_phoneTypeId3",
 					RuntimeVariables.replace("label=Business"));
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//section/div/div/div/div[1]"));

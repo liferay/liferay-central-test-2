@@ -45,14 +45,18 @@ public class AdvancedSearchStructureNameTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Web Content",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Structures", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean advancedVisible = selenium.isVisible(
 						"link=Advanced \u00bb");
@@ -84,20 +88,27 @@ public class AdvancedSearchStructureNameTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.type("_15_name",
 					RuntimeVariables.replace("web content structure name"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_15_name", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("STRUCTUREID"),
 					selenium.getText("//td[2]/a"));
 				selenium.type("_15_name",
 					RuntimeVariables.replace("web1 content1 structure1 name1"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_15_name", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				assertFalse(selenium.isElementPresent("link=STRUCTUREID"));
 				selenium.clickAt("link=\u00ab Basic",
 					RuntimeVariables.replace(""));

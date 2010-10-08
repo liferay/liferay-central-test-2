@@ -41,10 +41,13 @@ public class ViewEmailNotificationPasswordChangedTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("emailNotificationsLink", RuntimeVariables.replace(""));
 		selenium.clickAt("link=Password Changed Notification",
 			RuntimeVariables.replace(""));

@@ -40,9 +40,11 @@ public class HideEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Announcements Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Show"),
 			selenium.getText("//td[3]/a"));
 		selenium.clickAt("//td[3]/a", RuntimeVariables.replace(""));
@@ -64,6 +66,7 @@ public class HideEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Hide"),
 			selenium.getText("//td[3]/a"));
 		assertTrue(selenium.isVisible("//p"));
@@ -86,6 +89,7 @@ public class HideEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Show"),
 			selenium.getText("//td[3]/a"));
 		assertFalse(selenium.isVisible("//p"));

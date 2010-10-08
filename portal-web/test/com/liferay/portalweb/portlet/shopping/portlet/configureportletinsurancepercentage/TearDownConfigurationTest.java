@@ -45,15 +45,19 @@ public class TearDownConfigurationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Shopping Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Configuration",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Payment Settings",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -70,6 +74,8 @@ public class TearDownConfigurationTest extends BaseTestCase {
 
 					Thread.sleep(1000);
 				}
+
+				selenium.saveScreenShotAndSource();
 
 				boolean amexAvailable = selenium.isPartialText("_86_available_cc_types",
 						"American Express");
@@ -102,6 +108,8 @@ public class TearDownConfigurationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
+
 			case 2:
 
 				for (int second = 0;; second++) {
@@ -119,6 +127,8 @@ public class TearDownConfigurationTest extends BaseTestCase {
 
 					Thread.sleep(1000);
 				}
+
+				selenium.saveScreenShotAndSource();
 
 				boolean discoverAvailable = selenium.isPartialText("_86_available_cc_types",
 						"Discover");
@@ -151,6 +161,8 @@ public class TearDownConfigurationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
+
 			case 3:
 
 				for (int second = 0;; second++) {
@@ -168,6 +180,8 @@ public class TearDownConfigurationTest extends BaseTestCase {
 
 					Thread.sleep(1000);
 				}
+
+				selenium.saveScreenShotAndSource();
 
 				boolean masterCardAvailable = selenium.isPartialText("_86_available_cc_types",
 						"MasterCard");
@@ -200,6 +214,8 @@ public class TearDownConfigurationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
+
 			case 4:
 
 				for (int second = 0;; second++) {
@@ -217,6 +233,8 @@ public class TearDownConfigurationTest extends BaseTestCase {
 
 					Thread.sleep(1000);
 				}
+
+				selenium.saveScreenShotAndSource();
 
 				boolean visaAvailable = selenium.isPartialText("_86_available_cc_types",
 						"Visa");
@@ -249,42 +267,61 @@ public class TearDownConfigurationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
+
 			case 5:
 				selenium.select("_86_currencyId",
 					RuntimeVariables.replace("label=USD"));
 				selenium.select("_86_taxState",
 					RuntimeVariables.replace("label=California"));
 				selenium.type("_86_taxRate", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_86_minOrder", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[3]/span[1]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Shipping Calculation",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.select("_86_shippingFormula",
 					RuntimeVariables.replace("label=Flat Amount"));
 				selenium.type("_86_shipping0", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_86_shipping1", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_86_shipping2", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_86_shipping3", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_86_shipping4", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[1]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Insurance Calculation",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.select("_86_insuranceFormula",
 					RuntimeVariables.replace("label=Flat Amount"));
 				selenium.type("_86_insurance0", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_86_insurance1", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_86_insurance2", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_86_insurance3", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_86_insurance4", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[1]/span/input",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 			case 100:
 				label = -1;

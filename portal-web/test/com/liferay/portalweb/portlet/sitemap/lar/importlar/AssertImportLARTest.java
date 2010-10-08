@@ -40,8 +40,10 @@ public class AssertImportLARTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Site Map Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Welcome"),
 			selenium.getText("//section/div/div/div/ul/li[1]/a"));
 		assertEquals(RuntimeVariables.replace("Site Map Test Page"),

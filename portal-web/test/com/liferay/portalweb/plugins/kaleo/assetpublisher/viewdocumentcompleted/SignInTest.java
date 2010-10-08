@@ -40,8 +40,10 @@ public class SignInTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace("link=Sign In"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,13 +61,19 @@ public class SignInTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isChecked("_58_rememberMeCheckbox"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_58_rememberMeCheckbox", RuntimeVariables.replace(""));
 		assertTrue(selenium.isChecked("_58_rememberMeCheckbox"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Sign In']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 	}
 }

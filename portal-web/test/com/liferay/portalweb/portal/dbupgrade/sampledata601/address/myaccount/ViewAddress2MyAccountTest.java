@@ -40,10 +40,13 @@ public class ViewAddress2MyAccountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=My Account", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -63,6 +66,8 @@ public class ViewAddress2MyAccountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -80,6 +85,7 @@ public class ViewAddress2MyAccountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals("123 Lets", selenium.getValue("_2_addressStreet1_1"));
 		assertEquals("Other", selenium.getSelectedLabel("_2_addressTypeId1"));
 		assertEquals("897 Hope", selenium.getValue("_2_addressStreet2_1"));

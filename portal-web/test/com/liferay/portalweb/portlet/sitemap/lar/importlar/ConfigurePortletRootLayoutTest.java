@@ -40,8 +40,10 @@ public class ConfigurePortletRootLayoutTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Site Map Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Welcome"),
 			selenium.getText("//section/div/div/div/ul/li[1]/a"));
 		assertEquals(RuntimeVariables.replace("Site Map Test Page"),
@@ -50,11 +52,13 @@ public class ConfigurePortletRootLayoutTest extends BaseTestCase {
 			selenium.getText("//div/ul/li[2]/ul/li/a"));
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.select("_86_rootLayoutId",
 			RuntimeVariables.replace("label=regexp:-\\sSite Map Test Page"));
 		selenium.select("_86_displayDepth", RuntimeVariables.replace("label=1"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
@@ -76,8 +80,10 @@ public class ConfigurePortletRootLayoutTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Site Map Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Child Test Page"),
 			selenium.getText("//section/div/div/div/ul/li[1]/a"));
 	}

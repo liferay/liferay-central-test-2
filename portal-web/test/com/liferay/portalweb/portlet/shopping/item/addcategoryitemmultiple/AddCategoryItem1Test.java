@@ -40,31 +40,46 @@ public class AddCategoryItem1Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Categories", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Item']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_sku", RuntimeVariables.replace("1111"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_name", RuntimeVariables.replace("Jona Lyons - Wheel"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_description",
 			RuntimeVariables.replace("Sounds like: The middle of a vacation."));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_stockQuantity", RuntimeVariables.replace("50"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_properties",
 			RuntimeVariables.replace("Limited Time Only"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("_34_requiresShippingCheckbox"));
 		selenium.clickAt("_34_requiresShippingCheckbox",
 			RuntimeVariables.replace(""));
 		assertTrue(selenium.isChecked("_34_requiresShippingCheckbox"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_price0", RuntimeVariables.replace("$9.99"));
+		selenium.saveScreenShotAndSource();
 		selenium.typeKeys("_34_minQuantity0", RuntimeVariables.replace("1"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_34_minQuantity0", RuntimeVariables.replace("1"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent(

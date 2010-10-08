@@ -38,9 +38,11 @@ public class Portlet_AssertCannotViewEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Blogs Permissions Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isTextPresent("Portlet1 Temporary1 Entry1"));
 		assertFalse(selenium.isElementPresent("link=Portlet1 Temporary1 Entry1"));
 		assertFalse(selenium.isElementPresent("_33_keywords"));

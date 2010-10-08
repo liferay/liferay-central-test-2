@@ -40,10 +40,13 @@ public class ConvertUnitTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Unit Converter Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_27_fromValue", RuntimeVariables.replace("1.0"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_27_fromId", RuntimeVariables.replace("label=Inch"));
 		selenium.select("_27_toId", RuntimeVariables.replace("label=Centimeter"));
 		selenium.clickAt("//input[@value='Convert']",
@@ -67,6 +70,7 @@ public class ConvertUnitTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals("2.5399999187200026", selenium.getValue("_27_to_value"));
 	}
 }

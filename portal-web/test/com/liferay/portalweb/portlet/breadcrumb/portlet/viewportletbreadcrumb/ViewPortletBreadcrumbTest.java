@@ -40,9 +40,11 @@ public class ViewPortletBreadcrumbTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Breadcrumb Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Liferay"),
 			selenium.getText("//div[@class='portlet-body']/ul/li[1]"));
 		assertEquals(RuntimeVariables.replace("Breadcrumb Test Page"),
@@ -51,6 +53,7 @@ public class ViewPortletBreadcrumbTest extends BaseTestCase {
 				"//div[@class='portlet-body']/ul/li[3]"));
 		selenium.clickAt("link=Child Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Liferay"),
 			selenium.getText("//div[@class='portlet-body']/ul/li[1]"));
 		assertEquals(RuntimeVariables.replace("Breadcrumb Test Page"),

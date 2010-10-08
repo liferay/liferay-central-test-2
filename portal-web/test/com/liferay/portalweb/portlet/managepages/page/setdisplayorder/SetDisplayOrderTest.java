@@ -46,9 +46,11 @@ public class SetDisplayOrderTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Manage Pages Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Child1 Test1 Page1"),
 					selenium.getText(
 						"//nav[@id='navigation']/ul/li[2]/ul/li[1]"));
@@ -64,6 +66,7 @@ public class SetDisplayOrderTest extends BaseTestCase {
 				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
 					RuntimeVariables.replace("Manage Pages"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -82,6 +85,8 @@ public class SetDisplayOrderTest extends BaseTestCase {
 
 					Thread.sleep(1000);
 				}
+
+				selenium.saveScreenShotAndSource();
 
 				boolean welcomePresent = selenium.isElementPresent(
 						"//li/ul/li[1]/div/div[3]/a");
@@ -111,9 +116,11 @@ public class SetDisplayOrderTest extends BaseTestCase {
 			case 3:
 				selenium.clickAt("link=Children", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Display Order",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -134,6 +141,7 @@ public class SetDisplayOrderTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.select("_88_layoutIdsBox",
 					RuntimeVariables.replace("label=Child2 Test2 Page2"));
 				selenium.clickAt("//td[2]/a[1]/img",
@@ -158,12 +166,14 @@ public class SetDisplayOrderTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Child2 Test2 Page2 Child1 Test1 Page1 Child3 Test3 Page3"),
 					selenium.getText("_88_layoutIdsBox"));
 				selenium.clickAt("//input[@value='Update Display Order']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//section/div/div/div/div"));

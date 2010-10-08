@@ -41,9 +41,11 @@ public class RateWCDWebContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("(0 Votes)"));
 
 		for (int second = 0;; second++) {
@@ -62,6 +64,7 @@ public class RateWCDWebContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//a[5]", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -80,6 +83,7 @@ public class RateWCDWebContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("(1 Vote)"));
 	}
 }

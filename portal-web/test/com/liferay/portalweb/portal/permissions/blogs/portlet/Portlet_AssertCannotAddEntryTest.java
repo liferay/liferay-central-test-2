@@ -38,9 +38,11 @@ public class Portlet_AssertCannotAddEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Blogs Permissions Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent("_33_addEntryButton"));
 		assertFalse(selenium.isElementPresent(
 				"//input[@value='Add Blog Entry']"));

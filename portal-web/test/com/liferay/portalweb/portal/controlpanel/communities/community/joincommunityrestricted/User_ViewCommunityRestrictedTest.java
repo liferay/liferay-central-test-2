@@ -40,14 +40,18 @@ public class User_ViewCommunityRestrictedTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Communities I Have Joined",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_29_name",
 			RuntimeVariables.replace("Test Restricted Community"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//form/span/span[2]/span/input",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Test Restricted Community"),
 			selenium.getText("//div[1]/table/tbody/tr[3]/td[1]"));
 	}

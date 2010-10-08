@@ -31,6 +31,7 @@ public class ReplyMessageEmailTest extends BaseTestCase {
 					RuntimeVariables.replace("gmail"));
 				selenium.waitForPopUp("gmail", RuntimeVariables.replace(""));
 				selenium.selectWindow("gmail");
+				selenium.saveScreenShotAndSource();
 				Thread.sleep(60000);
 
 				boolean signedIn = selenium.isElementPresent(
@@ -63,10 +64,13 @@ public class ReplyMessageEmailTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.type("Email",
 					RuntimeVariables.replace("liferay.qa.testing.trunk"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("Passwd",
 					RuntimeVariables.replace("loveispatient"));
+				selenium.saveScreenShotAndSource();
 
 				boolean staySignedInChecked = selenium.isChecked(
 						"PersistentCookie");
@@ -101,6 +105,7 @@ public class ReplyMessageEmailTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Administrator"),
 					selenium.getText("//td[3]/div/span"));
 				selenium.clickAt("//td[3]/div/span",
@@ -125,6 +130,7 @@ public class ReplyMessageEmailTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"[MB Category Name] MB Message Subject"),
 					selenium.getText("//h1/span[1]"));
@@ -148,6 +154,7 @@ public class ReplyMessageEmailTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div/table/tbody/tr/td[1]/div/span",
 					RuntimeVariables.replace("Reply"));
 				Thread.sleep(5000);
@@ -156,6 +163,7 @@ public class ReplyMessageEmailTest extends BaseTestCase {
 				selenium.type("//body",
 					RuntimeVariables.replace("MB Message Email Reply"));
 				selenium.selectFrame("relative=top");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Send"),
 					selenium.getText("//div[3]/div/div/div/div[1]/b"));
 				selenium.clickAt("//div[3]/div/div/div/div[1]/b",
@@ -179,13 +187,16 @@ public class ReplyMessageEmailTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"//div[4]/div/nobr/a[2]"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				Thread.sleep(5000);
 				Thread.sleep(5000);
 				selenium.close();
 				selenium.selectWindow("null");
+				selenium.saveScreenShotAndSource();
 
 			case 100:
 				label = -1;

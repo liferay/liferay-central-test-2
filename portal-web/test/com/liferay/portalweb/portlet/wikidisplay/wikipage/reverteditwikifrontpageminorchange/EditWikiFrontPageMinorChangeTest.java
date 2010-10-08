@@ -46,17 +46,21 @@ public class EditWikiFrontPageMinorChangeTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"link=Wiki Display Test Page"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"This is a wiki frontpage article test."),
 					selenium.getText("//div[5]/div"));
 				selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("//textarea",
 					RuntimeVariables.replace(
 						"This is an edited wiki frontpage article test. Minor edit."));
+				selenium.saveScreenShotAndSource();
 
 				boolean minorEditChecked = selenium.isChecked("//span/input[2]");
 
@@ -72,6 +76,7 @@ public class EditWikiFrontPageMinorChangeTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Publish']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//section/div/div/div/div[1]"));
@@ -96,13 +101,17 @@ public class EditWikiFrontPageMinorChangeTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.click(RuntimeVariables.replace(
 						"link=Wiki Display Test Page"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=History", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isElementPresent("link=1.2 (Minor Edit)"));
 				assertTrue(selenium.isElementPresent("link=1.1"));
 				assertTrue(selenium.isElementPresent("link=1.0 (Minor Edit)"));

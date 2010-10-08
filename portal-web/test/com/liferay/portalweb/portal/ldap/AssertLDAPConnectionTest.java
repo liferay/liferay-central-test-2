@@ -24,8 +24,10 @@ public class AssertLDAPConnectionTest extends BaseTestCase {
 	public void testAssertLDAPConnection() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Control Panel"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace("link=Settings"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.click("authenticationLink");
 
 		for (int second = 0;; second++) {
@@ -44,6 +46,7 @@ public class AssertLDAPConnectionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click("link=LDAP");
 
 		for (int second = 0;; second++) {
@@ -63,6 +66,8 @@ public class AssertLDAPConnectionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -79,8 +84,10 @@ public class AssertLDAPConnectionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//span[3]/a/img", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.click("//input[@value='Test LDAP Connection']");
 		Thread.sleep(5000);
 
@@ -100,6 +107,7 @@ public class AssertLDAPConnectionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Liferay has successfully connected to the LDAP server."));
 		System.out.println(
@@ -121,6 +129,7 @@ public class AssertLDAPConnectionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click("//button");
 	}
 }

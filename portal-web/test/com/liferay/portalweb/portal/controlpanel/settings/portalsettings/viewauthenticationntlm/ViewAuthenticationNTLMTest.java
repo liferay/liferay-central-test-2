@@ -40,10 +40,13 @@ public class ViewAuthenticationNTLMTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("authenticationLink", RuntimeVariables.replace(""));
 		selenium.clickAt("link=NTLM", RuntimeVariables.replace(""));
 
@@ -64,6 +67,7 @@ public class ViewAuthenticationNTLMTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
 				"_130_settings--ntlm.auth.enabled--Checkbox"));
 		assertTrue(selenium.isTextPresent("Domain Controller"));

@@ -41,8 +41,10 @@ public class AssertConfigurePortletDisplayStyle2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace("link=Breadcrumb Test Page"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Liferay"),
 			selenium.getText("//div[@class='portlet-body']/li/span/a"));
 		assertEquals(RuntimeVariables.replace("Breadcrumb Test Page"),

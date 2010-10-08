@@ -40,9 +40,11 @@ public class AssertPriorityOrderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Announcements Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText("//div[1]/h3",
 				"Announcements Entry Title Priority Important"));
 		assertTrue(selenium.isPartialText("//div[2]/h3",

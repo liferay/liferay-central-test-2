@@ -40,9 +40,11 @@ public class ViewEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Blogs Aggregator Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
 			selenium.getText("//div/span[1]/a"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Content"),
@@ -50,6 +52,7 @@ public class ViewEntryTest extends BaseTestCase {
 		assertTrue(selenium.isPartialText("//div/div[3]/a", "Read More"));
 		selenium.clickAt("//div/div[3]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
 			selenium.getText("//div[1]/h1/span"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Content"),

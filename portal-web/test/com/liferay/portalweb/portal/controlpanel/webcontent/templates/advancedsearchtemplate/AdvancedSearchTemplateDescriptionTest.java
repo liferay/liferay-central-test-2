@@ -46,14 +46,18 @@ public class AdvancedSearchTemplateDescriptionTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Web Content",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Templates", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean advancedVisible = selenium.isVisible(
 						"link=Advanced \u00bb");
@@ -85,21 +89,28 @@ public class AdvancedSearchTemplateDescriptionTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.type("_15_description",
 					RuntimeVariables.replace("web content template description"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_15_description", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("TEMPLATEID"),
 					selenium.getText("//td[2]/a"));
 				selenium.type("_15_description",
 					RuntimeVariables.replace(
 						"web1 content1 template1 description1"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_15_description", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				assertFalse(selenium.isElementPresent("link=TEMPLATEID"));
 				selenium.clickAt("link=\u00ab Basic",
 					RuntimeVariables.replace(""));

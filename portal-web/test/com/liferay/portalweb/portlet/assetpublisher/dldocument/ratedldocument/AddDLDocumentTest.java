@@ -45,9 +45,11 @@ public class AddDLDocumentTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Asset Publisher Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div/ul/li/strong/a",
 					RuntimeVariables.replace("Add New"));
 
@@ -68,6 +70,7 @@ public class AddDLDocumentTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Document Library Document"),
 					selenium.getText(
@@ -75,11 +78,13 @@ public class AddDLDocumentTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a"));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Select']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPopUp("folder",
 					RuntimeVariables.replace("30000"));
 				selenium.selectWindow("name=folder");
+				selenium.saveScreenShotAndSource();
 				Thread.sleep(5000);
 
 				boolean choose1Present = selenium.isElementPresent(
@@ -93,6 +98,7 @@ public class AddDLDocumentTest extends BaseTestCase {
 
 				selenium.close();
 				selenium.selectWindow("null");
+				selenium.saveScreenShotAndSource();
 
 			case 2:
 
@@ -121,10 +127,12 @@ public class AddDLDocumentTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.click("//input[@value='Choose']");
 
 			case 3:
 				selenium.selectWindow("null");
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -144,16 +152,20 @@ public class AddDLDocumentTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Folder Name"),
 					selenium.getText("_20_folderName"));
 				selenium.type("_20_file",
 					RuntimeVariables.replace(
 						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\assetpublisher\\dldocument\\ratedldocument\\dependencies\\AP_test_document.txt"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_20_title",
 					RuntimeVariables.replace("AP DL Document Title"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Publish']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -173,6 +185,7 @@ public class AddDLDocumentTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("AP DL Document Title"),
 					selenium.getText("//h3[@class='asset-title']/a"));
 				assertEquals(RuntimeVariables.replace("AP DL Document Title"),

@@ -40,13 +40,17 @@ public class ViewWebContentLocalizedTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//td[3]/a",
 			RuntimeVariables.replace("Hello World Localized Article"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 		assertEquals("Hello World Page Name", selenium.getValue("page-name"));
 		assertEquals("Hello World Page Description",
@@ -54,6 +58,7 @@ public class ViewWebContentLocalizedTest extends BaseTestCase {
 		selenium.select("_15_languageId",
 			RuntimeVariables.replace("label=Chinese (China)"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 		assertEquals("\u4e16\u754c\u60a8\u597d Page Name",
 			selenium.getValue("page-name"));
@@ -62,5 +67,6 @@ public class ViewWebContentLocalizedTest extends BaseTestCase {
 		selenium.select("_15_languageId",
 			RuntimeVariables.replace("label=English (United States)"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 	}
 }

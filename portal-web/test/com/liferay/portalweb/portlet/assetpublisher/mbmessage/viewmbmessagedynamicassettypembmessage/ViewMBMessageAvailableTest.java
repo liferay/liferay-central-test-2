@@ -40,9 +40,11 @@ public class ViewMBMessageAvailableTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isTextPresent("AP MB Message Subject"));
 		assertFalse(selenium.isTextPresent("AP MB Message Body."));
 	}

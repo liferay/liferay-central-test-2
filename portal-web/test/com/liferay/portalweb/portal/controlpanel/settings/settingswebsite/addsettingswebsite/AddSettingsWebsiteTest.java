@@ -40,18 +40,23 @@ public class AddSettingsWebsiteTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("websitesLink", RuntimeVariables.replace(""));
 		selenium.type("_130_websiteUrl0",
 			RuntimeVariables.replace("http://www.liferay.com"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_130_websiteTypeId0",
 			RuntimeVariables.replace("label=Public"));
 		selenium.clickAt("_130_websitePrimary0", RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));

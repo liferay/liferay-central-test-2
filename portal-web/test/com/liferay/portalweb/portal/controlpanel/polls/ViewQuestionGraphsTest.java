@@ -40,17 +40,23 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Polls", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Test Poll Question", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Area", RuntimeVariables.replace(""));
 		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("viewChart");
+		selenium.saveScreenShotAndSource();
 		selenium.close();
 		selenium.selectWindow("null");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -68,11 +74,14 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Horizontal Bar", RuntimeVariables.replace(""));
 		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("viewChart");
+		selenium.saveScreenShotAndSource();
 		selenium.close();
 		selenium.selectWindow("null");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -90,11 +99,14 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Line", RuntimeVariables.replace(""));
 		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("viewChart");
+		selenium.saveScreenShotAndSource();
 		selenium.close();
 		selenium.selectWindow("null");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -112,11 +124,14 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Pie", RuntimeVariables.replace(""));
 		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("viewChart");
+		selenium.saveScreenShotAndSource();
 		selenium.close();
 		selenium.selectWindow("null");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -134,10 +149,13 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Vertical Bar", RuntimeVariables.replace(""));
 		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("viewChart");
+		selenium.saveScreenShotAndSource();
 		selenium.close();
 		selenium.selectWindow("null");
+		selenium.saveScreenShotAndSource();
 	}
 }

@@ -40,8 +40,10 @@ public class SelectBirthdayTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Joe Bloggs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -60,6 +62,7 @@ public class SelectBirthdayTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.select("_2_birthdayMonth",
 			RuntimeVariables.replace("label=April"));
 
@@ -79,6 +82,7 @@ public class SelectBirthdayTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.select("_2_birthdayYear",
 			RuntimeVariables.replace("label=1986"));
 
@@ -98,6 +102,7 @@ public class SelectBirthdayTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//button", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -116,6 +121,7 @@ public class SelectBirthdayTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 		selenium.clickAt("link=Prev", RuntimeVariables.replace(""));
 
@@ -135,6 +141,7 @@ public class SelectBirthdayTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=31", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -153,11 +160,13 @@ public class SelectBirthdayTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals("May", selenium.getSelectedLabel("_2_birthdayMonth"));
 		assertEquals("31", selenium.getSelectedLabel("_2_birthdayDay"));
 		assertEquals("1986", selenium.getSelectedLabel("_2_birthdayYear"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 
@@ -177,6 +186,8 @@ public class SelectBirthdayTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -192,6 +203,8 @@ public class SelectBirthdayTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -209,6 +222,7 @@ public class SelectBirthdayTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals("May", selenium.getSelectedLabel("_2_birthdayMonth"));
 		assertEquals("31", selenium.getSelectedLabel("_2_birthdayDay"));
 		assertEquals("1986", selenium.getSelectedLabel("_2_birthdayYear"));

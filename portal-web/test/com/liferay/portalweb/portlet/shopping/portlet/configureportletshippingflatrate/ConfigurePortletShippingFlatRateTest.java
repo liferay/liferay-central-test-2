@@ -41,10 +41,13 @@ public class ConfigurePortletShippingFlatRateTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Cart", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Shipping $0.00"),
 			selenium.getText("//fieldset/div/div[2]/div"));
 		selenium.open("/web/guest/home/");
@@ -65,22 +68,32 @@ public class ConfigurePortletShippingFlatRateTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Shipping Calculation",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.select("_86_shippingFormula",
 			RuntimeVariables.replace("label=Flat Amount"));
 		selenium.type("_86_shipping0", RuntimeVariables.replace("2.49"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_86_shipping1", RuntimeVariables.replace("5.49"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_86_shipping2", RuntimeVariables.replace("12.49"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_86_shipping3", RuntimeVariables.replace("19.99"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_86_shipping4", RuntimeVariables.replace("25.61"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
@@ -102,10 +115,13 @@ public class ConfigurePortletShippingFlatRateTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Shopping Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Cart", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Shipping $2.49"),
 			selenium.getText("//fieldset/div/div[2]/div"));
 	}

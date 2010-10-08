@@ -45,11 +45,14 @@ public class AddAnnouncementDeliveryTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=My Account", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("announcementsLink",
 					RuntimeVariables.replace(""));
 
@@ -69,6 +72,8 @@ public class AddAnnouncementDeliveryTest extends BaseTestCase {
 
 					Thread.sleep(1000);
 				}
+
+				selenium.saveScreenShotAndSource();
 
 				boolean generalEmailChecked = selenium.isChecked(
 						"_2_announcementsTypegeneralEmailCheckbox");
@@ -156,25 +161,32 @@ public class AddAnnouncementDeliveryTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//section/div/div/div/div"));
 				assertTrue(selenium.isChecked(
 						"_2_announcementsTypegeneralEmailCheckbox"));
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isChecked(
 						"_2_announcementsTypegeneralSmsCheckbox"));
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isElementPresent(
 						"//input[@id='_2_announcementsTypegeneralWebsiteCheckbox' and @disabled='']"));
 				assertTrue(selenium.isChecked(
 						"_2_announcementsTypenewsSmsCheckbox"));
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isChecked(
 						"_2_announcementsTypenewsSmsCheckbox"));
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isElementPresent(
 						"//input[@id='_2_announcementsTypenewsWebsiteCheckbox' and @disabled='']"));
 				assertTrue(selenium.isChecked(
 						"_2_announcementsTypetestEmailCheckbox"));
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isChecked(
 						"_2_announcementsTypetestSmsCheckbox"));
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isElementPresent(
 						"//input[@id='_2_announcementsTypetestWebsiteCheckbox' and @disabled='']"));
 

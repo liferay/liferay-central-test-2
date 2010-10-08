@@ -41,9 +41,11 @@ public class Portlet_AssertViewPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isTextPresent(
 				"You do not have the roles required to access this portlet."));
 		assertEquals(RuntimeVariables.replace("Images Home"),

@@ -40,15 +40,21 @@ public class AddOrganizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//span[2]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_126_name", RuntimeVariables.replace("Test Organization"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
@@ -69,6 +75,7 @@ public class AddOrganizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -87,13 +94,17 @@ public class AddOrganizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("_126_addressStreet1_0",
 			RuntimeVariables.replace("12345 Test Street"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_126_addressTypeId0",
 			RuntimeVariables.replace("label=Billing"));
 		selenium.type("_126_addressZip0", RuntimeVariables.replace("11111"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_126_addressCity0",
 			RuntimeVariables.replace("Diamond Bar"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_126_addressPrimary0", RuntimeVariables.replace(""));
 		selenium.select("_126_addressCountryId0",
 			RuntimeVariables.replace("label=United States"));
@@ -119,10 +130,12 @@ public class AddOrganizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.select("_126_addressRegionId0",
 			RuntimeVariables.replace("label=California"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));

@@ -40,8 +40,10 @@ public class SignOutTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace("link=Sign Out"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("_58_login"));
 		assertTrue(selenium.isElementPresent("_58_password"));
 		assertTrue(selenium.isElementPresent("_58_rememberMeCheckbox"));

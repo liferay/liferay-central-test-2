@@ -45,12 +45,15 @@ public class AddOrganizationPhoneNumber1Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Organizations",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
@@ -66,19 +69,24 @@ public class AddOrganizationPhoneNumber1Test extends BaseTestCase {
 			case 2:
 				selenium.type("_126_keywords",
 					RuntimeVariables.replace("Selenium"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Selenium"),
 					selenium.getText("//td[2]/a"));
 				selenium.clickAt("//td[2]/a", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("phoneNumbersLink",
 					RuntimeVariables.replace(""));
 				selenium.type("_126_phoneNumber0",
 					RuntimeVariables.replace("5628020523"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_126_phoneExtension0",
 					RuntimeVariables.replace("321"));
+				selenium.saveScreenShotAndSource();
 				selenium.select("_126_phoneTypeId0",
 					RuntimeVariables.replace("label=Toll-Free"));
 				selenium.clickAt("_126_phonePrimary0",
@@ -86,6 +94,7 @@ public class AddOrganizationPhoneNumber1Test extends BaseTestCase {
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//section/div/div/div/div[1]"));

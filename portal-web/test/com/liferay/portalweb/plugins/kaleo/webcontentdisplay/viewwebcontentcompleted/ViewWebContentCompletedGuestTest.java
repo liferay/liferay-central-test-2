@@ -40,9 +40,11 @@ public class ViewWebContentCompletedGuestTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content Display Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Web Content Display"),
 			selenium.getText("//h1/span[2]"));
 		assertEquals(RuntimeVariables.replace("Web Content Content"),

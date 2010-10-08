@@ -45,30 +45,39 @@ public class AddTemplateAssociatedTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Web Content",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Templates", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Add Template']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_15_newTemplateId",
 					RuntimeVariables.replace("TemplateIDAssociated"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_15_name",
 					RuntimeVariables.replace(
 						"Web Content Template Name Associated"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_15_description",
 					RuntimeVariables.replace(
 						"Web Content Template Description Associated"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Select']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPopUp("structure",
 					RuntimeVariables.replace("30000"));
 				selenium.selectWindow("name=structure");
+				selenium.saveScreenShotAndSource();
 				Thread.sleep(5000);
 
 				boolean templatePresentA = selenium.isElementPresent(
@@ -97,6 +106,7 @@ public class AddTemplateAssociatedTest extends BaseTestCase {
 
 			case 3:
 				selenium.selectWindow("null");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Web Content Structure Name"),
 					selenium.getText("_15_structureName"));
@@ -119,9 +129,11 @@ public class AddTemplateAssociatedTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.type("_15_xslContent",
 					RuntimeVariables.replace(
 						"<h1>$title.getData()</h1>\n\n<a href=\"$ltp.getUrl()\">See Page</a>"));
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -139,11 +151,13 @@ public class AddTemplateAssociatedTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.click("//input[@value='Update']");
 				Thread.sleep(5000);
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//section/div/div/div/div"));

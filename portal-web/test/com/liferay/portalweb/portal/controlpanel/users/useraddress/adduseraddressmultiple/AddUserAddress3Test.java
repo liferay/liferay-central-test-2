@@ -40,16 +40,22 @@ public class AddUserAddress3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_keywords", RuntimeVariables.replace("selen01"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("User Name"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -68,6 +74,7 @@ public class AddUserAddress3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//div[2]/span/span/button[1]",
 			RuntimeVariables.replace(""));
 
@@ -87,17 +94,23 @@ public class AddUserAddress3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_addressStreet1_3",
 			RuntimeVariables.replace("1220 Brea Canyon Rd"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_125_addressTypeId3",
 			RuntimeVariables.replace("label=Business"));
 		selenium.type("_125_addressStreet2_3",
 			RuntimeVariables.replace("Ste 12"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_addressZip3", RuntimeVariables.replace("91789"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_addressStreet3_3",
 			RuntimeVariables.replace("Walnut"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_addressCity3",
 			RuntimeVariables.replace("Los Angeles"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_125_addressCountryId3",
 			RuntimeVariables.replace("label=United States"));
 
@@ -120,11 +133,13 @@ public class AddUserAddress3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.select("_125_addressRegionId3",
 			RuntimeVariables.replace("label=California"));
 		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -143,6 +158,8 @@ public class AddUserAddress3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -160,6 +177,7 @@ public class AddUserAddress3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));

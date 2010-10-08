@@ -40,8 +40,10 @@ public class AddFrontPageCommentBodyNullTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Be the first.", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -60,7 +62,9 @@ public class AddFrontPageCommentBodyNullTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("_36_postReplyBody0", RuntimeVariables.replace(""));
+		selenium.saveScreenShotAndSource();
 		selenium.keyPress("_36_postReplyBody0", RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_36_postReplyBody0", RuntimeVariables.replace("\\8"));
 		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));

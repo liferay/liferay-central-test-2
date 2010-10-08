@@ -45,9 +45,12 @@ public class User_SignInTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.type("_58_login",
 					RuntimeVariables.replace("test01@selenium.com"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_58_password", RuntimeVariables.replace("test"));
+				selenium.saveScreenShotAndSource();
 
 				boolean rememberMeCheckboxVisible = selenium.isVisible(
 						"_58_rememberMeCheckbox");
@@ -66,6 +69,7 @@ public class User_SignInTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Sign In']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean iAgreeVisible = selenium.isElementPresent(
 						"//span/input");
@@ -79,6 +83,7 @@ public class User_SignInTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='I Agree']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 			case 3:
 
@@ -96,9 +101,11 @@ public class User_SignInTest extends BaseTestCase {
 					selenium.getText("//form/div[1]"));
 				selenium.type("reminderQueryAnswer",
 					RuntimeVariables.replace("test"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 			case 4:
 			case 100:

@@ -40,24 +40,33 @@ public class AddQuestion1Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Polls", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Question']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_25_title_en_US",
 			RuntimeVariables.replace("Test1 Poll1 Question1"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_25_description_en_US",
 			RuntimeVariables.replace("This is a test1 poll1 description1."));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_25_choiceDescriptiona_en_US",
 			RuntimeVariables.replace("Test1 Choice1 A1"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_25_choiceDescriptionb_en_US",
 			RuntimeVariables.replace("Test1 Choice1 B1"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Choice']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -75,10 +84,13 @@ public class AddQuestion1Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("_25_choiceDescriptionc_en_US",
 			RuntimeVariables.replace("Test1 Choice1 C1"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent("link=Test1 Poll1 Question1"));

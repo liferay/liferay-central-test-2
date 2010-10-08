@@ -41,9 +41,11 @@ public class CA_EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -62,15 +64,18 @@ public class CA_EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("//tr[2]/td/div/textarea",
 			RuntimeVariables.replace(
 				"This is a ca test WCD comment! That is now edited."));
+		selenium.saveScreenShotAndSource();
 		selenium.keyPress("//tr[2]/td/div/textarea",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("//tr[2]/td/div/textarea",
 			RuntimeVariables.replace("\\8"));
 		selenium.clickAt("//tr[2]/td/input[1]", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("This is a ca test WCD comment!"));

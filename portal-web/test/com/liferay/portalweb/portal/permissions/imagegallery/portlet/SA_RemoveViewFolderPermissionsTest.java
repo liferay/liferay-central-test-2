@@ -41,9 +41,11 @@ public class SA_RemoveViewFolderPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//td[4]/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
@@ -64,9 +66,11 @@ public class SA_RemoveViewFolderPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -84,14 +88,18 @@ public class SA_RemoveViewFolderPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.uncheck("15_ACTION_VIEW");
 		selenium.uncheck("//tr[7]/td[8]/input");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertFalse(selenium.isChecked("15_ACTION_VIEW"));
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isChecked("//tr[7]/td[8]/input"));
+		selenium.saveScreenShotAndSource();
 	}
 }

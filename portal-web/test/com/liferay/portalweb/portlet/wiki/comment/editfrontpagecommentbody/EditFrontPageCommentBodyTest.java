@@ -40,8 +40,10 @@ public class EditFrontPageCommentBodyTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"This is a wiki page test comment."),
 			selenium.getText("//td[2]/div[1]"));
@@ -49,11 +51,13 @@ public class EditFrontPageCommentBodyTest extends BaseTestCase {
 		selenium.type("_36_editReplyBody1",
 			RuntimeVariables.replace(
 				"This is a wiki page test comment. Edited."));
+		selenium.saveScreenShotAndSource();
 		selenium.keyPress("_36_editReplyBody1", RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_36_editReplyBody1", RuntimeVariables.replace("\\8"));
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));

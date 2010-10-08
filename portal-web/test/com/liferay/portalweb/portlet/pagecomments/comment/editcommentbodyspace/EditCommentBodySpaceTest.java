@@ -40,9 +40,11 @@ public class EditCommentBodySpaceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Page Comments Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("This is a test page comment."),
 			selenium.getText("//td[2]/div[1]"));
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
@@ -63,7 +65,9 @@ public class EditCommentBodySpaceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("_107_editReplyBody1", RuntimeVariables.replace(""));
+		selenium.saveScreenShotAndSource();
 		selenium.keyPress("_107_editReplyBody1",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_107_editReplyBody1", RuntimeVariables.replace("\\8"));
@@ -92,9 +96,11 @@ public class EditCommentBodySpaceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Page Comments Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("This is a test page comment."),
 			selenium.getText("//td[2]/div[1]"));
 	}

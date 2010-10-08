@@ -41,9 +41,11 @@ public class AddPortletStagingOrganizationJournalTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Page Staging Organization Journal",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Add Application", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 
@@ -63,8 +65,10 @@ public class AddPortletStagingOrganizationJournalTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.typeKeys("layout_configuration_content",
 			RuntimeVariables.replace("j"));
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -82,6 +86,7 @@ public class AddPortletStagingOrganizationJournalTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//div[@id='CMS-Journal']/p/a",
 			RuntimeVariables.replace(""));
 
@@ -101,6 +106,7 @@ public class AddPortletStagingOrganizationJournalTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isVisible("//td[1]/div"));
 	}
 }

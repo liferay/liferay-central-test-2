@@ -40,9 +40,11 @@ public class RateCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Page Comments Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -62,6 +64,7 @@ public class RateCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("0 (0 Votes)"),
 			selenium.getText("//div[@class='aui-rating-label-element']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a",
@@ -85,6 +88,7 @@ public class RateCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("+1 (1 Vote)"),
 			selenium.getText("//div[@class='aui-rating-label-element']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a",
@@ -108,6 +112,7 @@ public class RateCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("0 (0 Votes)"),
 			selenium.getText("//div[@class='aui-rating-label-element']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a[2]",
@@ -131,6 +136,7 @@ public class RateCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("-1 (1 Vote)"),
 			selenium.getText("//div[@class='aui-rating-label-element']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a[2]",
@@ -154,6 +160,7 @@ public class RateCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("0 (0 Votes)"),
 			selenium.getText("//div[@class='aui-rating-label-element']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a",
@@ -177,6 +184,7 @@ public class RateCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("+1 (1 Vote)"),
 			selenium.getText("//div[@class='aui-rating-label-element']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a[2]",
@@ -200,6 +208,7 @@ public class RateCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("-1 (1 Vote)"),
 			selenium.getText("//div[@class='aui-rating-label-element']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a[2]",
@@ -223,6 +232,7 @@ public class RateCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("0 (0 Votes)"),
 			selenium.getText("//div[@class='aui-rating-label-element']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a[2]",
@@ -246,6 +256,7 @@ public class RateCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("-1 (1 Vote)"),
 			selenium.getText("//div[@class='aui-rating-label-element']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a",
@@ -269,6 +280,7 @@ public class RateCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("+1 (1 Vote)"),
 			selenium.getText("//div[@class='aui-rating-label-element']"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a",
@@ -291,5 +303,7 @@ public class RateCommentTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.saveScreenShotAndSource();
 	}
 }

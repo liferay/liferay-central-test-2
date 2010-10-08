@@ -40,10 +40,13 @@ public class TearDownSettingsIdentificationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
 		selenium.clickAt("//button[2]", RuntimeVariables.replace("Delete Row"));
 		selenium.clickAt("phoneNumbersLink", RuntimeVariables.replace(""));
@@ -58,6 +61,7 @@ public class TearDownSettingsIdentificationTest extends BaseTestCase {
 			RuntimeVariables.replace("Delete Row"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));
@@ -79,10 +83,13 @@ public class TearDownSettingsIdentificationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
 		selenium.clickAt("//button[2]", RuntimeVariables.replace("Delete Row"));
 		selenium.clickAt("phoneNumbersLink", RuntimeVariables.replace(""));
@@ -97,6 +104,7 @@ public class TearDownSettingsIdentificationTest extends BaseTestCase {
 			RuntimeVariables.replace("Delete Row"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));
@@ -118,10 +126,13 @@ public class TearDownSettingsIdentificationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
 		selenium.clickAt("//button[2]", RuntimeVariables.replace("Delete Row"));
 		selenium.clickAt("phoneNumbersLink", RuntimeVariables.replace(""));
@@ -136,6 +147,7 @@ public class TearDownSettingsIdentificationTest extends BaseTestCase {
 			RuntimeVariables.replace("Delete Row"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));
@@ -157,10 +169,13 @@ public class TearDownSettingsIdentificationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
 		selenium.clickAt("//button[2]", RuntimeVariables.replace("Delete Row"));
 		selenium.clickAt("phoneNumbersLink", RuntimeVariables.replace(""));
@@ -175,6 +190,7 @@ public class TearDownSettingsIdentificationTest extends BaseTestCase {
 			RuntimeVariables.replace("Delete Row"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));
@@ -196,10 +212,13 @@ public class TearDownSettingsIdentificationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
 		selenium.clickAt("//button[2]", RuntimeVariables.replace("Delete Row"));
 		selenium.clickAt("phoneNumbersLink", RuntimeVariables.replace(""));
@@ -214,6 +233,7 @@ public class TearDownSettingsIdentificationTest extends BaseTestCase {
 			RuntimeVariables.replace("Delete Row"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));

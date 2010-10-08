@@ -47,9 +47,11 @@ public class ConfigurePortletShowFolderSubfoldersTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Document Library Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -69,6 +71,7 @@ public class ConfigurePortletShowFolderSubfoldersTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.click(
 					"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
 
@@ -88,6 +91,8 @@ public class ConfigurePortletShowFolderSubfoldersTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
+
 				boolean showSubfoldersChecked = selenium.isChecked(
 						"_86_showSubfoldersCheckbox");
 
@@ -104,6 +109,7 @@ public class ConfigurePortletShowFolderSubfoldersTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have successfully updated the setup."),
 					selenium.getText("//div[@id='p_p_id_86_']/div/div"));
@@ -126,9 +132,11 @@ public class ConfigurePortletShowFolderSubfoldersTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Document Library Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent("This is test1 folder1."));
 				assertTrue(selenium.isElementPresent("link=Test1 Subfolder1"));
 

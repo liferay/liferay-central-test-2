@@ -40,8 +40,10 @@ public class AddUser3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -59,17 +61,25 @@ public class AddUser3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.select("_125_prefixId", RuntimeVariables.replace("label=Mr."));
 		selenium.type("_125_screenName", RuntimeVariables.replace("selenium03"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_emailAddress",
 			RuntimeVariables.replace("test03@selenium.com"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_firstName", RuntimeVariables.replace("selen03"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_middleName", RuntimeVariables.replace("lenn"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_125_lastName", RuntimeVariables.replace("nium03"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_125_prefixId", RuntimeVariables.replace("label=Ms."));
 		selenium.select("_125_birthdayMonth",
 			RuntimeVariables.replace("label=August"));
@@ -79,6 +89,7 @@ public class AddUser3Test extends BaseTestCase {
 		selenium.select("_125_male", RuntimeVariables.replace("label=Female"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals("selenium03", selenium.getValue("_125_screenName"));
 		assertEquals("test03@selenium.com",
 			selenium.getValue("_125_emailAddress"));

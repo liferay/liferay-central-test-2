@@ -45,9 +45,11 @@ public class TearDownSettingsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Test CLP Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//ul[@class='chat-tabs']/li[2]/div[1]/span",
 					RuntimeVariables.replace(""));
 
@@ -67,7 +69,9 @@ public class TearDownSettingsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.type("statusMessage", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 
 				boolean onlineStatusChecked = selenium.isChecked("onlineStatus");
 
@@ -111,6 +115,7 @@ public class TearDownSettingsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("saveSettings", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -130,6 +135,7 @@ public class TearDownSettingsTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				assertFalse(selenium.isElementPresent(
 						"//li[@class='chat-settings saved']"));
 

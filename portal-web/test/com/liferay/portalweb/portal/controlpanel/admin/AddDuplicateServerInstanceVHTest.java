@@ -40,10 +40,13 @@ public class AddDuplicateServerInstanceVHTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Portal Instances", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -61,14 +64,21 @@ public class AddDuplicateServerInstanceVHTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.typeKeys("_135_webId", RuntimeVariables.replace("liferay1.com"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_135_webId", RuntimeVariables.replace("liferay1.com"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_135_virtualHost", RuntimeVariables.replace("localhost"));
+		selenium.saveScreenShotAndSource();
 		selenium.type("_135_mx", RuntimeVariables.replace("liferay1.com"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent("Please enter a valid virtual host."));

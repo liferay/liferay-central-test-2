@@ -41,9 +41,11 @@ public class EditWCDWebContentCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"This is a test wcd web content comment."),
 			selenium.getText("//td[2]/div[1]"));
@@ -51,12 +53,14 @@ public class EditWCDWebContentCommentTest extends BaseTestCase {
 		selenium.type("//tr[2]/td/div/textarea",
 			RuntimeVariables.replace(
 				"This is a test wcd web content comment. Edited."));
+		selenium.saveScreenShotAndSource();
 		selenium.keyPress("//tr[2]/td/div/textarea",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("//tr[2]/td/div/textarea",
 			RuntimeVariables.replace("\\8"));
 		selenium.click(RuntimeVariables.replace("//tr[2]/td/input[1]"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertEquals(RuntimeVariables.replace(

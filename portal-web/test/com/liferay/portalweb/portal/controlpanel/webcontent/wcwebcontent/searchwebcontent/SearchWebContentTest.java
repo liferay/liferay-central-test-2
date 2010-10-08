@@ -45,12 +45,15 @@ public class SearchWebContentTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Web Content",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
@@ -66,18 +69,24 @@ public class SearchWebContentTest extends BaseTestCase {
 			case 2:
 				selenium.type("_15_keywords",
 					RuntimeVariables.replace("web content"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_15_keywords", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Web Content Name"),
 					selenium.getText("//td[3]/a"));
 				selenium.type("_15_keywords",
 					RuntimeVariables.replace("web1 content1"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_15_keywords", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				assertFalse(selenium.isElementPresent("link=Web Content Name"));
 
 			case 100:

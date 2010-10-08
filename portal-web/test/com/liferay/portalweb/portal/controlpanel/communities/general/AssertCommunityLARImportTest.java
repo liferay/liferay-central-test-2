@@ -40,13 +40,16 @@ public class AssertCommunityLARImportTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace("//li[6]/a/span"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
 				"link=Community LAR Import Test Page"));
 		selenium.clickAt("link=Community LAR Import Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -64,14 +67,17 @@ public class AssertCommunityLARImportTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Message Boards"));
 		assertTrue(selenium.isElementPresent("link=LAR Import Test Category"));
 		selenium.clickAt("link=LAR Import Test Category",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Hello LAR Files"));
 		selenium.clickAt("link=Hello LAR Files", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"I hope that you are working. If you are not working. I will be sad."));
 	}

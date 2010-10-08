@@ -40,10 +40,13 @@ public class ViewAddress1MyAccountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=My Account", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -63,6 +66,8 @@ public class ViewAddress1MyAccountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -80,6 +85,7 @@ public class ViewAddress1MyAccountTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertEquals("1220 Brea Canyon Rd",
 			selenium.getValue("_2_addressStreet1_0"));
 		assertEquals("Ste 12", selenium.getValue("_2_addressStreet2_0"));
@@ -90,7 +96,9 @@ public class ViewAddress1MyAccountTest extends BaseTestCase {
 		assertEquals("United States",
 			selenium.getSelectedLabel("_2_addressCountryId0"));
 		assertTrue(selenium.isChecked("_2_addressPrimary0"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isChecked("_2_addressMailing0Checkbox"));
+		selenium.saveScreenShotAndSource();
 		assertEquals("California",
 			selenium.getSelectedLabel("_2_addressRegionId0"));
 	}

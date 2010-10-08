@@ -25,6 +25,7 @@ public class CA_AssertActionsTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Permissions Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Configuration"));
 		assertTrue(selenium.isElementPresent("//input[@value='Add Blog Entry']"));
 		assertTrue(selenium.isElementPresent("link=Edit"));
@@ -35,6 +36,7 @@ public class CA_AssertActionsTest extends BaseTestCase {
 		selenium.clickAt("link=Permissions Blogs Test Entry",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Edit"),
 			selenium.getText("//td[1]/span/a/span"));
 		assertEquals(RuntimeVariables.replace("Permissions"),

@@ -40,14 +40,19 @@ public class AddWebContentExpirationDateTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Web Content']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_15_title", RuntimeVariables.replace("Web Content Name"));
+		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -99,11 +104,13 @@ public class AddWebContentExpirationDateTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.selectFrame(
 			"//iframe[@id='_15_structure_el_TextAreaField_content']");
 		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body", RuntimeVariables.replace("Web Content Content"));
 		selenium.selectFrame("relative=top");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
 				"//select[@id='_15_expirationDateMonth' and @disabled='']"));
 		assertTrue(selenium.isElementPresent(
@@ -117,9 +124,11 @@ public class AddWebContentExpirationDateTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent(
 				"//select[@name='_15_expirationDateAmPm' and @disabled='disabled']"));
 		assertTrue(selenium.isChecked("_15_neverExpireCheckbox"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_15_neverExpireCheckbox",
 			RuntimeVariables.replace("Never Auto Expire"));
 		assertFalse(selenium.isChecked("_15_neverExpireCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent(
 				"//select[@id='_15_expirationDateMonth' and @disabled='']"));
 		assertFalse(selenium.isElementPresent(
@@ -147,6 +156,7 @@ public class AddWebContentExpirationDateTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));
@@ -159,8 +169,10 @@ public class AddWebContentExpirationDateTest extends BaseTestCase {
 		selenium.clickAt("//td[3]/a",
 			RuntimeVariables.replace("Web Content Name"));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 		assertFalse(selenium.isChecked("_15_neverExpireCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertEquals("December",
 			selenium.getSelectedLabel("_15_expirationDateMonth"));
 		assertEquals("31", selenium.getSelectedLabel("_15_expirationDateDay"));

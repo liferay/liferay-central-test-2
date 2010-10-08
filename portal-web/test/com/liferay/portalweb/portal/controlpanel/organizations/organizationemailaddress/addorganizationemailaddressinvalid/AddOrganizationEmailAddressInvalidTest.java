@@ -46,12 +46,15 @@ public class AddOrganizationEmailAddressInvalidTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Organizations",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
@@ -67,17 +70,21 @@ public class AddOrganizationEmailAddressInvalidTest extends BaseTestCase {
 			case 2:
 				selenium.type("_126_keywords",
 					RuntimeVariables.replace("Selenium"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Selenium"),
 					selenium.getText("//td[2]/a"));
 				selenium.clickAt("//td[2]/a", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("additionalEmailAddressesLink",
 					RuntimeVariables.replace(""));
 				selenium.type("_126_emailAddressAddress0",
 					RuntimeVariables.replace("SeleniumSelenium.com"));
+				selenium.saveScreenShotAndSource();
 				selenium.select("_126_emailAddressTypeId0",
 					RuntimeVariables.replace("label=E-mail"));
 				selenium.clickAt("_126_emailAddressPrimary0",
@@ -85,6 +92,7 @@ public class AddOrganizationEmailAddressInvalidTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"You have entered invalid data. Please try again."),
 					selenium.getText("//section/div/div/div/div[1]"));

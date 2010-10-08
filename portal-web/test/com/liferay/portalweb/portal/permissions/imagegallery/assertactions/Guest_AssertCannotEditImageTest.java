@@ -41,13 +41,17 @@ public class Guest_AssertCannotEditImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//img[@alt='Second Permissions Image Test - ']",
 			RuntimeVariables.replace(""));
 
@@ -67,6 +71,7 @@ public class Guest_AssertCannotEditImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("//img[@alt='Download (29.9k)']"));
 		assertTrue(selenium.isElementPresent("//img[@alt='View']"));
 		assertFalse(selenium.isElementPresent("//img[@alt='Edit']"));
@@ -90,5 +95,7 @@ public class Guest_AssertCannotEditImageTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.saveScreenShotAndSource();
 	}
 }

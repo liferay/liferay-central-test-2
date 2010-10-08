@@ -45,9 +45,11 @@ public class AssignMembersUserGroupTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=User Groups",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -66,11 +68,14 @@ public class AssignMembersUserGroupTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Assign Members",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Available", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
@@ -86,9 +91,11 @@ public class AssignMembersUserGroupTest extends BaseTestCase {
 			case 2:
 				selenium.type("_79_keywords",
 					RuntimeVariables.replace("Joe Bloggs"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search Users']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean userChecked = selenium.isChecked("_79_rowIds");
 
@@ -104,6 +111,7 @@ public class AssignMembersUserGroupTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Update Associations']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent(
 						"Your request processed successfully."));
 				assertEquals(RuntimeVariables.replace("Joe Bloggs"),

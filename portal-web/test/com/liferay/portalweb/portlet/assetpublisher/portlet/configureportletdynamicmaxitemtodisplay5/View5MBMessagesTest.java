@@ -40,9 +40,11 @@ public class View5MBMessagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("AP6 MB6 Message6 Subject6"),
 			selenium.getText("//div[1]/h3/a"));
 		assertEquals(RuntimeVariables.replace("AP5 MB5 Message5 Subject5"),

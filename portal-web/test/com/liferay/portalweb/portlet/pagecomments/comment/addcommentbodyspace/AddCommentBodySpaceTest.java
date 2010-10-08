@@ -40,9 +40,11 @@ public class AddCommentBodySpaceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Page Comments Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Be the first.", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -61,8 +63,10 @@ public class AddCommentBodySpaceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isVisible("_107_postReplyBody0"));
 		selenium.type("_107_postReplyBody0", RuntimeVariables.replace(""));
+		selenium.saveScreenShotAndSource();
 		selenium.keyPress("_107_postReplyBody0",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_107_postReplyBody0", RuntimeVariables.replace("\\8"));
@@ -88,9 +92,11 @@ public class AddCommentBodySpaceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Page Comments Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Be the first."));
 	}
 }

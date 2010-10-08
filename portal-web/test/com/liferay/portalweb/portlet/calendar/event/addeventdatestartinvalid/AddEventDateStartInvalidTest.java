@@ -40,13 +40,17 @@ public class AddEventDateStartInvalidTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Calendar Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Event']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_8_title",
 			RuntimeVariables.replace("Invalid Start Date Test Event"));
+		selenium.saveScreenShotAndSource();
 		selenium.select("_8_startDateMonth",
 			RuntimeVariables.replace("label=February"));
 		selenium.select("_8_startDateMonth",

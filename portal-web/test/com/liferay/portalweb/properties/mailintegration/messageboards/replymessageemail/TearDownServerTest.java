@@ -45,16 +45,22 @@ public class TearDownServerTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Server Administration",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Mail", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_137_pop3Host", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_137_pop3Port", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 
 				boolean popSecureChecked = selenium.isChecked(
 						"_137_pop3SecureCheckbox");
@@ -70,9 +76,13 @@ public class TearDownServerTest extends BaseTestCase {
 
 			case 2:
 				selenium.type("_137_pop3User", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_137_pop3Password", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_137_smtpHost", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_137_smtpPort", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 
 				boolean smtpSecureChecked = selenium.isChecked(
 						"_137_smtpSecureCheckbox");
@@ -88,22 +98,31 @@ public class TearDownServerTest extends BaseTestCase {
 
 			case 3:
 				selenium.type("_137_smtpUser", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_137_smtpPassword", RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Portal Instances",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//td[4]/a", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 				selenium.type("_135_virtualHost",
 					RuntimeVariables.replace("localhost"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_135_mx", RuntimeVariables.replace("liferay.com"));
+				selenium.saveScreenShotAndSource();
 				selenium.type("_135_maxUsers", RuntimeVariables.replace("0"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 			case 100:
 				label = -1;

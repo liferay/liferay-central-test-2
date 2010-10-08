@@ -40,10 +40,13 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Tags", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -61,9 +64,12 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("tags-admin-search-input", RuntimeVariables.replace(""));
+		selenium.saveScreenShotAndSource();
 		selenium.typeKeys("tags-admin-search-input",
 			RuntimeVariables.replace("blue"));
+		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 		assertTrue(selenium.isVisible("link=blue"));
 		assertTrue(selenium.isVisible("link=blue car"));
@@ -88,10 +94,13 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Tags", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -109,9 +118,12 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.type("tags-admin-search-input", RuntimeVariables.replace(""));
+		selenium.saveScreenShotAndSource();
 		selenium.typeKeys("tags-admin-search-input",
 			RuntimeVariables.replace("green"));
+		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 		assertFalse(selenium.isVisible("link=blue"));
 		assertFalse(selenium.isVisible("link=blue car"));

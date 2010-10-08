@@ -42,35 +42,49 @@ public class Writer_AddConfigurationWCDPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//img[@alt='Select Web Content']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isChecked("_86_showAvailableLocalesCheckbox"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_86_showAvailableLocalesCheckbox",
 			RuntimeVariables.replace(""));
 		assertFalse(selenium.isChecked("_86_enablePrintCheckbox"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_86_enablePrintCheckbox", RuntimeVariables.replace(""));
 		assertFalse(selenium.isChecked("_86_enableRatingsCheckbox"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_86_enableRatingsCheckbox",
 			RuntimeVariables.replace(""));
 		assertFalse(selenium.isChecked("_86_enableCommentsCheckbox"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_86_enableCommentsCheckbox",
 			RuntimeVariables.replace(""));
 		assertFalse(selenium.isChecked("_86_enableCommentRatingsCheckbox"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_86_enableCommentRatingsCheckbox",
 			RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
 		assertTrue(selenium.isChecked("_86_showAvailableLocalesCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isChecked("_86_enablePrintCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isChecked("_86_enableRatingsCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isChecked("_86_enableCommentsCheckbox"));
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isChecked("_86_enableCommentRatingsCheckbox"));
+		selenium.saveScreenShotAndSource();
 	}
 }

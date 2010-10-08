@@ -40,27 +40,36 @@ public class SendForm3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Communities I Own", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("_29_name",
 			RuntimeVariables.replace("Expando Web Form Community"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search Communities']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//tr[@class='portlet-section-body results-row']/td[1]/a",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Form Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		selenium.type("//input[@type='text']", RuntimeVariables.replace("Houn"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@type='checkbox']",
 			RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Male']", RuntimeVariables.replace(""));
 		selenium.select("//select", RuntimeVariables.replace("label=Excellent"));
 		selenium.type("//textarea",
 			RuntimeVariables.replace("This is a comment. Houn."));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Send']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent(
