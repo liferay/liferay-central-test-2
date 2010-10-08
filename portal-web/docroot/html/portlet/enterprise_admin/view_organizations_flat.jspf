@@ -18,7 +18,6 @@
 	rowChecker="<%= new RowChecker(renderResponse) %>"
 	searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
 >
-
 	<aui:input name="deleteOrganizationIds" type="hidden" />
 	<aui:input name="organizationsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
@@ -63,7 +62,6 @@
 		keyProperty="organizationId"
 		modelVar="organization"
 	>
-
 		<portlet:renderURL var="rowURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/view" />
 			<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
@@ -94,12 +92,10 @@
 	<c:if test="<%= PropsValues.ORGANIZATIONS_LIST_VIEWS.length > 1 %>">
 		<c:if test="<%= ArrayUtil.contains(PropsValues.ORGANIZATIONS_LIST_VIEWS, OrganizationConstants.LIST_VIEW_FLAT) %>">
 			<td class="organizations-list-view-icon">
-
-				<portlet:renderURL var="viewOrganization">
+				<portlet:renderURL var="viewOrganizationURL">
 					<portlet:param name="struts_action" value="/enterprise_admin/view" />
-					<portlet:param name="organizationsListView" value="<%= OrganizationConstants.LIST_VIEW_FLAT %>" />
-					<portlet:param name="saveOrganizationsListView" value="<%= Boolean.TRUE.toString() %>" />
 					<portlet:param name="tabs1" value="organizations" />
+					<portlet:param name="organizationsListView" value="<%= OrganizationConstants.LIST_VIEW_FLAT %>" />
 				</portlet:renderURL>
 
 				<liferay-ui:icon
@@ -107,19 +103,17 @@
 					image="../message_boards/thread_view_flat"
 					message="flat-view"
 					method="get"
-					url="<%= viewOrganization %>"
+					url="<%= viewOrganizationURL %>"
 				/>
 			</td>
 		</c:if>
 
 		<c:if test="<%= ArrayUtil.contains(PropsValues.ORGANIZATIONS_LIST_VIEWS, OrganizationConstants.LIST_VIEW_TREE) %>">
 			<td class="organizations-list-view-icon">
-
-				<portlet:renderURL var="viewOrganization">
+				<portlet:renderURL var="viewOrganizationURL">
 					<portlet:param name="struts_action" value="/enterprise_admin/view" />
-					<portlet:param name="organizationsListView" value="<%= OrganizationConstants.LIST_VIEW_TREE %>" />
-					<portlet:param name="saveOrganizationsListView" value="<%= Boolean.TRUE.toString() %>" />
 					<portlet:param name="tabs1" value="organizations" />
+					<portlet:param name="organizationsListView" value="<%= OrganizationConstants.LIST_VIEW_TREE %>" />
 				</portlet:renderURL>
 
 				<liferay-ui:icon
@@ -127,7 +121,7 @@
 					image="../message_boards/thread_view_tree"
 					message="tree-view"
 					method="get"
-					url="<%= viewOrganization %>"
+					url="<%= viewOrganizationURL %>"
 				/>
 			</td>
 		</c:if>

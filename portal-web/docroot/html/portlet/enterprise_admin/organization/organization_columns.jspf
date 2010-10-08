@@ -32,45 +32,43 @@
 	buffer.append("</strong>");
 	buffer.append("</a>");
 
-	if (showSuborganization) {
-		List suborganizations = OrganizationLocalServiceUtil.search(company.getCompanyId(), curOrganization.getOrganizationId(), null, null, null, null, organizationParams, 0, 5, searchContainer.getOrderByComparator());
+	List suborganizations = OrganizationLocalServiceUtil.search(company.getCompanyId(), curOrganization.getOrganizationId(), null, null, null, null, organizationParams, 0, 5, searchContainer.getOrderByComparator());
 
-		if (!suborganizations.isEmpty()) {
-			int suborganizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), curOrganization.getOrganizationId(), null, null, null, null, organizationParams);
+	if (!suborganizations.isEmpty()) {
+		int suborganizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), curOrganization.getOrganizationId(), null, null, null, null, organizationParams);
 
-			buffer.append("<br /><u>");
-			buffer.append(LanguageUtil.get(pageContext, "suborganizations"));
-			buffer.append("</u>: ");
+		buffer.append("<br /><u>");
+		buffer.append(LanguageUtil.get(pageContext, "suborganizations"));
+		buffer.append("</u>: ");
 
-			for (int k = 0; k < suborganizations.size(); k++) {
-				Organization suborganization = (Organization)suborganizations.get(k);
+		for (int k = 0; k < suborganizations.size(); k++) {
+			Organization suborganization = (Organization)suborganizations.get(k);
 
-				rowURL.setParameter("organizationId", String.valueOf(suborganization.getOrganizationId()));
+			rowURL.setParameter("organizationId", String.valueOf(suborganization.getOrganizationId()));
 
-				buffer.append("<a href=\"");
-				buffer.append(rowURL);
-				buffer.append("\">");
-				buffer.append(suborganization.getName());
-				buffer.append("</a>");
+			buffer.append("<a href=\"");
+			buffer.append(rowURL);
+			buffer.append("\">");
+			buffer.append(suborganization.getName());
+			buffer.append("</a>");
 
-				if ((k + 1) < suborganizations.size()) {
-					buffer.append(", ");
-				}
+			if ((k + 1) < suborganizations.size()) {
+				buffer.append(", ");
 			}
-
-			if (suborganizationsCount > suborganizations.size()) {
-				rowURL.setParameter("organizationId", String.valueOf(curOrganization.getOrganizationId()));
-
-				buffer.append(", <a href=\"");
-				buffer.append(rowURL);
-				buffer.append("\">");
-				buffer.append(LanguageUtil.get(pageContext, "more"));
-				buffer.append(" &raquo;");
-				buffer.append("</a>");
-			}
-
-			rowURL.setParameter("organizationId", String.valueOf(curOrganization.getOrganizationId()));
 		}
+
+		if (suborganizationsCount > suborganizations.size()) {
+			rowURL.setParameter("organizationId", String.valueOf(curOrganization.getOrganizationId()));
+
+			buffer.append(", <a href=\"");
+			buffer.append(rowURL);
+			buffer.append("\">");
+			buffer.append(LanguageUtil.get(pageContext, "more"));
+			buffer.append(" &raquo;");
+			buffer.append("</a>");
+		}
+
+		rowURL.setParameter("organizationId", String.valueOf(curOrganization.getOrganizationId()));
 	}
 	%>
 

@@ -19,13 +19,6 @@
 <%
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
-long organizationId = GetterUtil.getLong(request.getParameter("organizationId"), OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
-boolean saveOrganizationsListView = GetterUtil.getBoolean(request.getParameter("saveOrganizationsListView"));
-
-if (saveOrganizationsListView) {
-	portalPreferences.setValue(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS, "organizations-list-view", organizationsListView);
-}
-
 String viewOrganizationsRedirect = ParamUtil.getString(request, "viewOrganizationsRedirect");
 
 if (Validator.isNotNull(viewOrganizationsRedirect)) {
@@ -43,11 +36,26 @@ if (Validator.isNotNull(viewOrganizationsRedirect)) {
 	<aui:input name="viewOrganizationsRedirect" type="hidden" value="<%= viewOrganizationsRedirect %>" />
 </c:if>
 
+<%
+String organizationsListView = request.getParameter("organizationsListView");
+
+PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(renderRequest);
+
+if (organizationsListView == null) {
+	organizationsListView = portalPreferences.getValue(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS, "organizations-list-view", PropsValues.ORGANIZATIONS_LIST_VIEWS_DEFAULT);
+}
+else {
+	if (ArrayUtil.contains(PropsValues.ORGANIZATIONS_LIST_VIEWS, organizationsListView)) {
+		portalPreferences.setValue(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS, "organizations-list-view", organizationsListView);
+	}
+}
+%>
+
 <c:choose>
 	<c:when test="<%= organizationsListView.equals(OrganizationConstants.LIST_VIEW_FLAT) %>">
-		<%@ include file="/html/portlet/enterprise_admin/organization/view_organizations_flat.jspf" %>
+		<%@ include file="/html/portlet/enterprise_admin/view_organizations_flat.jspf" %>
 	</c:when>
 	<c:otherwise>
-		<%@ include file="/html/portlet/enterprise_admin/organization/view_organizations_tree.jspf" %>
+		<%@ include file="/html/portlet/enterprise_admin/view_organizations_tree.jspf" %>
 	</c:otherwise>
 </c:choose>
