@@ -543,7 +543,7 @@
 	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.findByUserGroupsAndOrganizations">
 		<![CDATA[
 			SELECT
-				*
+				TEMP_TABLE.*
 			FROM
 			(
 				SELECT
