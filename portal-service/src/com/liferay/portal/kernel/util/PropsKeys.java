@@ -815,6 +815,8 @@ public interface PropsKeys {
 
 	public static final String JSP_WRITER_BUFFER_SIZE = "jsp.writer.buffer.size";
 
+	public static final String LAYOUT_AUDIT_ENABLED = "layout.audit.enabled";
+
 	public static final String LAYOUT_CLONE_IMPL = "layout.clone.impl";
 
 	public static final String LAYOUT_COMMENTS_ENABLED = "layout.comments.enabled";
