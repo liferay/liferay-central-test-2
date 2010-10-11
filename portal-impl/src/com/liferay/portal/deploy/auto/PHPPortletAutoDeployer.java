@@ -66,6 +66,8 @@ public class PHPPortletAutoDeployer extends PortletAutoDeployer {
 		filterMap.put("portlet_title", pluginName);
 		filterMap.put("restore_current_view", "false");
 		filterMap.put("friendly_url_mapper_class", "");
+		filterMap.put("friendly_url_mapping", "");
+		filterMap.put("friendly_url_routes", "");
 		filterMap.put("init_param_name_0", "view-uri");
 		filterMap.put("init_param_value_0", "/index.php");
 		filterMap.put("init_param_name_1", "add-portlet-params");
