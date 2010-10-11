@@ -93,23 +93,23 @@ if (yearValue > 0) {
 					<c:choose>
 						<c:when test="<%= dateFormatOrder.equals(_DATE_FORMAT_ORDER_MDY) %>">
 							<%@ include file="select_month.jspf" %>
-			
+
 							<%@ include file="select_day.jspf" %>
-			
+
 							<%@ include file="select_year.jspf" %>
 						</c:when>
 						<c:when test="<%= dateFormatOrder.equals(_DATE_FORMAT_ORDER_YMD) %>">
 							<%@ include file="select_year.jspf" %>
-			
+
 							<%@ include file="select_month.jspf" %>
-			
+
 							<%@ include file="select_day.jspf" %>
 						</c:when>
 						<c:otherwise>
 							<%@ include file="select_day.jspf" %>
-			
+
 							<%@ include file="select_month.jspf" %>
-			
+
 							<%@ include file="select_year.jspf" %>
 						</c:otherwise>
 					</c:choose>
@@ -162,9 +162,9 @@ if (yearValue > 0) {
 </aui:script>
 
 <%!
-private static final String _DATE_FORMAT_ORDER_DMY = "['d', 'm', 'y']";
+private static final String _DATE_FORMAT_ORDER_DMY = "[\\'d\\', \\'m\\', \\'y\\']";
 
-private static final String _DATE_FORMAT_ORDER_MDY = "['m', 'd', 'y']";
+private static final String _DATE_FORMAT_ORDER_MDY = "[\\'m\\', \\'d\\', \\'y\\']";
 
-private static final String _DATE_FORMAT_ORDER_YMD = "['y', 'm', 'd']";
+private static final String _DATE_FORMAT_ORDER_YMD = "[\\'y\\', \\'m\\', \\'d\\']";
 %>
