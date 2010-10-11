@@ -66,11 +66,11 @@ public abstract class BaseExplodedTomcatListener implements AutoDeployListener {
 		try {
 			String content = FileUtil.read(file);
 
-			Document doc = SAXReaderUtil.read(content);
+			Document document = SAXReaderUtil.read(content);
 
-			Element root = doc.getRootElement();
+			Element rootElement = document.getRootElement();
 
-			docBase = root.attributeValue("docBase");
+			docBase = rootElement.attributeValue("docBase");
 		}
 		catch (Exception e) {
 			throw new AutoDeployException(e);
