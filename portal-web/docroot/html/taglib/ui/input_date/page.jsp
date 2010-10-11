@@ -42,10 +42,6 @@ int firstDayOfWeek = GetterUtil.getInteger((String)request.getAttribute("liferay
 String imageInputId = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-date:imageInputId"));
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:disabled"));
 
-final String DATE_FORMAT_MDY = "['m', 'd', 'y']";
-final String DATE_FORMAT_YMD = "['y', 'm', 'd']";
-final String DATE_FORMAT_DMY = "['d', 'm', 'y']";
-
 if (Validator.isNull(imageInputId)) {
 	imageInputId = randomNamespace + "imageInputId";
 }
@@ -55,13 +51,13 @@ else {
 
 String dateFormatPattern = ((SimpleDateFormat)(DateFormat.getDateInstance(DateFormat.SHORT, locale))).toPattern();
 
-String dateFormatOrder = DATE_FORMAT_MDY;
+String dateFormatOrder = _DATE_FORMAT_ORDER_MDY;
 
 if (dateFormatPattern.indexOf("y") == 0) {
-	dateFormatOrder = DATE_FORMAT_YMD;
+	dateFormatOrder = _DATE_FORMAT_ORDER_YMD;
 }
 else if (dateFormatPattern.indexOf("d") == 0) {
-	dateFormatOrder = DATE_FORMAT_DMY;
+	dateFormatOrder = _DATE_FORMAT_ORDER_DMY;
 }
 
 Date selectedDate = new Date();
@@ -95,7 +91,7 @@ if (yearValue > 0) {
 					%>
 
 					<c:choose>
-						<c:when test="<%= dateFormatOrder.equals(DATE_FORMAT_MDY) %>">
+						<c:when test="<%= dateFormatOrder.equals(_DATE_FORMAT_ORDER_MDY) %>">
 							<%@ include file="select_month.jspf" %>
 			
 							<%@ include file="select_day.jspf" %>
@@ -103,7 +99,7 @@ if (yearValue > 0) {
 							<%@ include file="select_year.jspf" %>
 						</c:when>
 	
-						<c:when test="<%= dateFormatOrder.equals(DATE_FORMAT_YMD) %>">
+						<c:when test="<%= dateFormatOrder.equals(_DATE_FORMAT_ORDER_YMD) %>">
 							<%@ include file="select_year.jspf" %>
 			
 							<%@ include file="select_month.jspf" %>
@@ -166,3 +162,11 @@ if (yearValue > 0) {
 		}
 	).render();
 </aui:script>
+
+<%!
+private static final String _DATE_FORMAT_ORDER_DMY = "['d', 'm', 'y']";
+
+private static final String _DATE_FORMAT_ORDER_MDY = "['m', 'd', 'y']";
+
+private static final String _DATE_FORMAT_ORDER_YMD = "['y', 'm', 'd']";
+%>
