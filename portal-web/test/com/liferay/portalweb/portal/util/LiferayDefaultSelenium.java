@@ -112,8 +112,7 @@ public class LiferayDefaultSelenium
 				String dirName = className.substring(
 					22, className.length());
 
-				dirName = StringUtil.replace(dirName, ".", "/");
-				dirName = dirName + "/";
+				dirName = StringUtil.replace(dirName, ".", "/") + "/";
 
 				String fileName = stackTraceElement.getFileName();
 				int lineNumber = stackTraceElement.getLineNumber();
@@ -130,6 +129,6 @@ public class LiferayDefaultSelenium
 	private static final String _OUTPUT_SCREENSHOTS_DIR =
 		TestPropsValues.OUTPUT_DIR + "screenshots/";
 
-	private static String _timeout = "30000";
+	private String _timeout = "30000";
 
 }

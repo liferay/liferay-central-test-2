@@ -210,9 +210,10 @@ public class SeleneseToJavaBuilder {
 		xml = xml.substring(x, y + 8);
 
 		Map<String, String> labels = new HashMap<String, String>();
-		Map<String, String> screenShots = new HashMap<String, String>();
 
 		int labelCount = 1;
+
+		Map<Integer, Boolean> takeScreenShots = new HashMap<Integer, Boolean>();
 
 		x = 0;
 		y = 0;
@@ -235,7 +236,15 @@ public class SeleneseToJavaBuilder {
 			String param1 = params[0];
 			String param2 = fixParam(params[1]);
 
-			if (param1.equals("label")) {
+			if (param1.equals("assertConfirmation")) {
+				int previousX = x - 6;
+
+				previousX = xml.lastIndexOf("<tr>", previousX - 1);
+				previousX += 6;
+
+				takeScreenShots.put(previousX, Boolean.FALSE);
+			}
+			else if (param1.equals("label")) {
 				String label = labels.get(param2);
 
 				if (label == null) {
@@ -243,26 +252,6 @@ public class SeleneseToJavaBuilder {
 
 					label = labels.put(param2, String.valueOf(labelCount));
 				}
-			}
-
-			int x2 = xml.indexOf("<tr>", x);
-			int y2 = xml.indexOf("\n</tr>", x2);
-
-			if ((x2 == -1) || (y2 == -1)) {
-				break;
-			}
-
-			x2 += 6;
-			y2++;
-
-			String step2 = xml.substring(x2, y2);
-
-			String[] params2 = getParams(step2);
-
-			String param2_1 = params2[0];
-
-			if (param2_1.equals("assertConfirmation")) {
-				String screenShot = screenShots.put(String.valueOf(x), "false");
 			}
 		}
 
@@ -927,12 +916,10 @@ public class SeleneseToJavaBuilder {
 				System.out.println(param1 + " was not translated");
 			}
 
-			boolean takeScreenShot = true;
+			Boolean takeScreenShot = takeScreenShots.get(x);
 
-			String screenShot = screenShots.get(String.valueOf(x));
-
-			if (screenShot != null) {
-				takeScreenShot = Boolean.parseBoolean(screenShot);
+			if (takeScreenShot == null) {
+				takeScreenShot = Boolean.TRUE;
 			}
 
 			if (takeScreenShot) {
