@@ -137,7 +137,7 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 
 						for (String footerPortalCss : portlet.getFooterPortalCss()) {
 							if (!HttpUtil.hasProtocol(footerPortalCss)) {
-								footerPortalCss = PortalUtil.getStaticResourceURL(request, request.getContextPath() + footerPortalCss, portlet.getTimestamp());
+								footerPortalCss = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + footerPortalCss, portlet.getTimestamp());
 							}
 
 							if (!footerPortalCssSet.contains(footerPortalCss)) {
@@ -149,7 +149,7 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 
 						for (String footerPortalJavaScript : portlet.getFooterPortalJavaScript()) {
 							if (!HttpUtil.hasProtocol(footerPortalJavaScript)) {
-								footerPortalJavaScript = PortalUtil.getStaticResourceURL(request, request.getContextPath() + footerPortalJavaScript, portlet.getTimestamp());
+								footerPortalJavaScript = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + footerPortalJavaScript, portlet.getTimestamp());
 							}
 
 							if (!footerPortalJavaScriptSet.contains(footerPortalJavaScript) && !themeDisplay.isIncludedJs(footerPortalJavaScript)) {
@@ -185,7 +185,7 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 
 						for (String headerPortalCss : portlet.getHeaderPortalCss()) {
 							if (!HttpUtil.hasProtocol(headerPortalCss)) {
-								headerPortalCss = PortalUtil.getStaticResourceURL(request, request.getContextPath() + headerPortalCss, portlet.getTimestamp());
+								headerPortalCss = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + headerPortalCss, portlet.getTimestamp());
 							}
 
 							if (!headerPortalCssSet.contains(headerPortalCss)) {
@@ -197,7 +197,7 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 
 						for (String headerPortalJavaScript : portlet.getHeaderPortalJavaScript()) {
 							if (!HttpUtil.hasProtocol(headerPortalJavaScript)) {
-								headerPortalJavaScript = PortalUtil.getStaticResourceURL(request, request.getContextPath() + headerPortalJavaScript, portlet.getTimestamp());
+								headerPortalJavaScript = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + headerPortalJavaScript, portlet.getTimestamp());
 							}
 
 							if (!headerPortalJavaScriptSet.contains(headerPortalJavaScript) && !themeDisplay.isIncludedJs(headerPortalJavaScript)) {
