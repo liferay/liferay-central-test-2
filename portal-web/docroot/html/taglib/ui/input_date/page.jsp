@@ -98,7 +98,6 @@ if (yearValue > 0) {
 			
 							<%@ include file="select_year.jspf" %>
 						</c:when>
-	
 						<c:when test="<%= dateFormatOrder.equals(_DATE_FORMAT_ORDER_YMD) %>">
 							<%@ include file="select_year.jspf" %>
 			
@@ -106,7 +105,6 @@ if (yearValue > 0) {
 			
 							<%@ include file="select_day.jspf" %>
 						</c:when>
-	
 						<c:otherwise>
 							<%@ include file="select_day.jspf" %>
 			
@@ -131,7 +129,7 @@ if (yearValue > 0) {
 <aui:script use="aui-datepicker-select">
 	var datePicker = new A.DatePickerSelect(
 		{
-			appendOrder: <%= dateFormatOrder %>,
+			appendOrder: '<%= dateFormatOrder %>',
 			boundingBox: '#<%= randomNamespace %>displayDate',
 			calendar: {
 				dates: [
