@@ -18,6 +18,7 @@
 <%@ page import="com.liferay.portal.kernel.util.HttpUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
 
 <%
 long plid = ParamUtil.getLong(request, "p_l_id");
