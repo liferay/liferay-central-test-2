@@ -109,11 +109,6 @@ public class VelocityEngineImpl implements VelocityEngine {
 				!PropsValues.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_ENABLED));
 
 		extendedProperties.setProperty(
-			org.apache.velocity.app.VelocityEngine.VM_PERM_ALLOW_INLINE,
-			String.valueOf(
-				!PropsValues.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_ENABLED));
-
-		extendedProperties.setProperty(
 			org.apache.velocity.app.VelocityEngine.
 				VM_PERM_ALLOW_INLINE_REPLACE_GLOBAL,
 			String.valueOf(
