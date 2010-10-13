@@ -518,6 +518,8 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 						/>
 					</aui:field-wrapper>
 				</c:if>
+
+				<aui:input inlineLabel="left" label="searchable" name="indexable" />
 			</div>
 
 			<br />
@@ -598,8 +600,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					<aui:input classPK="<%= classPK %>" name="categories" type="assetCategories" />
 
 					<aui:input classPK="<%= classPK %>" name="tags" type="assetTags" />
-
-					<aui:input inlineLabel="left" label="searchable" name="indexable" />
 				</aui:fieldset>
 			</liferay-ui:panel>
 
