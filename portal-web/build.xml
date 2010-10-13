@@ -411,6 +411,8 @@
 	</target>
 
 	<target name="build-selenium">
+		<delete dir="test-classes" />
+
 		<java
 			classname="com.liferay.portal.tools.SeleneseToJavaBuilder"
 			classpathref="project.classpath"
