@@ -196,7 +196,7 @@ int tabIndex = 1;
 				<table class="taglib-search-iterator">
 
 				<%
-				Document doc = SAXReaderUtil.read(xsd);
+				Document doc = SAXReaderUtil.read(JS.decodeURIComponent(xsd));
 
 				Element root = doc.getRootElement();
 
