@@ -15,6 +15,46 @@
 </tr>
 <tr>
 	<td>waitForVisible</td>
+	<td>link=Communities I Own</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Communities I Own</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[1]/section/div/div/div/form/div[3]</td>
+	<td>No communities were found.</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/user/selenium01/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Communities I Have Joined</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Communities I Have Joined</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[1]/section/div/div/div/form/div[3]</td>
+	<td>No communities were found.</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/user/selenium01/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
 	<td>link=Available Communities</td>
 	<td></td>
 </tr>
@@ -57,6 +97,11 @@
 	<td>assertText</td>
 	<td>//section/div/div/div/div</td>
 	<td>Your request processed successfully.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//section/div/div/div/div[2]</td>
+	<td>Your request was sent. You will receive a reply by email.</td>
 </tr>
 <tr>
 	<td>open</td>

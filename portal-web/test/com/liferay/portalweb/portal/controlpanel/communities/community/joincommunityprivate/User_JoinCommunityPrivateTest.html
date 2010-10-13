@@ -15,23 +15,13 @@
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>link=Available Communities</td>
+	<td>link=Communities I Own</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Available Communities</td>
+	<td>link=Communities I Own</td>
 	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>_29_name</td>
-	<td>Test Private Community</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//form/span/span[2]/span/input</td>
-	<td>Search</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -52,6 +42,36 @@
 	<td>clickAtAndWait</td>
 	<td>link=Communities I Have Joined</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[1]/section/div/div/div/form/div[3]</td>
+	<td>No communities were found.</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/user/selenium01/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Available Communities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Available Communities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_29_name</td>
+	<td>Test Private Community</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//form/span/span[2]/span/input</td>
+	<td>Search</td>
 </tr>
 <tr>
 	<td>assertText</td>

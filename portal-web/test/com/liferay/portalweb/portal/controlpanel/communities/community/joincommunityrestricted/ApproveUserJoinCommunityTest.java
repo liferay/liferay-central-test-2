@@ -47,47 +47,11 @@ public class ApproveUserJoinCommunityTest extends BaseTestCase {
 		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_134_name")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
 		selenium.type("_134_name", RuntimeVariables.replace("Restricted"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//strong/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
 
@@ -137,24 +101,6 @@ public class ApproveUserJoinCommunityTest extends BaseTestCase {
 		selenium.clickAt("//span/a/span", RuntimeVariables.replace("Reply"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_134_replyComments")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
 		selenium.type("_134_replyComments",
 			RuntimeVariables.replace("You are welcome"));
 		selenium.saveScreenShotAndSource();
@@ -167,6 +113,17 @@ public class ApproveUserJoinCommunityTest extends BaseTestCase {
 		selenium.clickAt("link=Approved", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent("selen01 lenn nium01"));
+		assertTrue(selenium.isElementPresent("//tr[3]/td[1]"));
+		assertEquals(RuntimeVariables.replace(
+				"selen01 lenn nium01 (test01@selenium.com)"),
+			selenium.getText("//tr[3]/td[2]"));
+		assertEquals(RuntimeVariables.replace(
+				"I want to join this really cool community please."),
+			selenium.getText("//tr[3]/td[3]"));
+		assertTrue(selenium.isElementPresent("//tr[3]/td[4]"));
+		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
+			selenium.getText("//tr[3]/td[5]"));
+		assertEquals(RuntimeVariables.replace("You are welcome"),
+			selenium.getText("//tr[3]/td[6]"));
 	}
 }

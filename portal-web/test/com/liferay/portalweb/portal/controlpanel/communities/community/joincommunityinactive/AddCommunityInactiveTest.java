@@ -54,44 +54,8 @@ public class AddCommunityInactiveTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isVisible("link=Add")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.saveScreenShotAndSource();
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isVisible("_134_name")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
 				selenium.saveScreenShotAndSource();
 				selenium.type("_134_name",
 					RuntimeVariables.replace("Test Inactive Community"));
@@ -101,10 +65,10 @@ public class AddCommunityInactiveTest extends BaseTestCase {
 						"This is an inactive test community!"));
 				selenium.saveScreenShotAndSource();
 
-				boolean activeVisible = selenium.isVisible(
+				boolean activeChecked = selenium.isChecked(
 						"_134_activeCheckbox");
 
-				if (!activeVisible) {
+				if (!activeChecked) {
 					label = 2;
 
 					continue;
@@ -114,13 +78,23 @@ public class AddCommunityInactiveTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 
 			case 2:
-				Thread.sleep(5000);
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
+				assertEquals(RuntimeVariables.replace(
+						"Your request processed successfully."),
+					selenium.getText("//section/div/div/div/div"));
+				assertEquals(RuntimeVariables.replace("Test Inactive Community"),
+					selenium.getText("//tr[4]/td[1]"));
+				assertEquals(RuntimeVariables.replace("Open"),
+					selenium.getText("//tr[4]/td[2]"));
+				assertEquals(RuntimeVariables.replace("1"),
+					selenium.getText("//tr[4]/td[3]"));
+				assertEquals(RuntimeVariables.replace("0"),
+					selenium.getText("//tr[4]/td[4]"));
+				assertEquals(RuntimeVariables.replace("No"),
+					selenium.getText("//tr[4]/td[5]"));
 
 			case 100:
 				label = -1;

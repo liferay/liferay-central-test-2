@@ -47,44 +47,8 @@ public class AddCommunityRestrictedTest extends BaseTestCase {
 		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("link=Add")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("_134_name")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.saveScreenShotAndSource();
 		selenium.type("_134_name",
 			RuntimeVariables.replace("Test Restricted Community"));
@@ -93,11 +57,21 @@ public class AddCommunityRestrictedTest extends BaseTestCase {
 			RuntimeVariables.replace("This is an restricted test community!"));
 		selenium.saveScreenShotAndSource();
 		selenium.select("_134_type", RuntimeVariables.replace("Restricted"));
-		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div"));
+		assertEquals(RuntimeVariables.replace("Test Restricted Community"),
+			selenium.getText("//tr[4]/td[1]"));
+		assertEquals(RuntimeVariables.replace("Restricted"),
+			selenium.getText("//tr[4]/td[2]"));
+		assertEquals(RuntimeVariables.replace("1"),
+			selenium.getText("//tr[4]/td[3]"));
+		assertEquals(RuntimeVariables.replace("0"),
+			selenium.getText("//tr[4]/td[4]"));
+		assertEquals(RuntimeVariables.replace("Yes"),
+			selenium.getText("//tr[4]/td[5]"));
 	}
 }

@@ -52,10 +52,10 @@ public class User_SignInTest extends BaseTestCase {
 				selenium.type("_58_password", RuntimeVariables.replace("test"));
 				selenium.saveScreenShotAndSource();
 
-				boolean rememberMeCheckboxVisible = selenium.isVisible(
+				boolean rememberMeCheckboxChecked = selenium.isChecked(
 						"_58_rememberMeCheckbox");
 
-				if (rememberMeCheckboxVisible) {
+				if (rememberMeCheckboxChecked) {
 					label = 2;
 
 					continue;
@@ -65,7 +65,6 @@ public class User_SignInTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 
 			case 2:
-				Thread.sleep(5000);
 				selenium.clickAt("//input[@value='Sign In']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");

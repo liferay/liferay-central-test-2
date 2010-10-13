@@ -54,6 +54,7 @@ public class User_JoinCommunityInactiveTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("No communities were found."),
 			selenium.getText("//div[1]/section/div/div/div/form/div[3]"));
+		assertFalse(selenium.isTextPresent("Test Inactive Community"));
 		selenium.open("/user/selenium01/home/");
 
 		for (int second = 0;; second++) {
@@ -79,5 +80,30 @@ public class User_JoinCommunityInactiveTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("No communities were found."),
 			selenium.getText("//div[1]/section/div/div/div/form/div[3]"));
+		assertFalse(selenium.isTextPresent("Test Inactive Community"));
+		selenium.open("/user/selenium01/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Available Communities")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("link=Available Communities",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
+		assertFalse(selenium.isTextPresent("Test Inactive Community"));
 	}
 }
