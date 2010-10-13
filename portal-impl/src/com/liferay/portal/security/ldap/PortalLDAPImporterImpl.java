@@ -523,11 +523,13 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 		String userMappingsGroup = userMappings.getProperty("group");
 
+		if (Validator.isNull(userMappingsGroup)) {
+			return;
+		}
+
 		Attribute userGroupAttribute = attributes.get(userMappingsGroup);
 
-		if (Validator.isNotNull(userMappingsGroup) &&
-			(userGroupAttribute == null)) {
-
+		if (userGroupAttribute == null) {
 			return;
 		}
 
