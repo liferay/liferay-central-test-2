@@ -80,8 +80,11 @@ public class NavItem implements Serializable {
 	}
 
 	public String getName() {
-		return HtmlUtil.escape(
-			_layout.getName(_vars.getThemeDisplay().getLocale()));
+		return HtmlUtil.escape(getUnescapedName());
+	}
+
+	public String getUnescapedName() {
+		return _layout.getName(_vars.getThemeDisplay().getLocale());
 	}
 
 	public String getTarget() {
