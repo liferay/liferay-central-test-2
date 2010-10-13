@@ -25,6 +25,10 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
@@ -163,6 +167,19 @@ public class DLIndexer extends BaseIndexer {
 
 				if (size > PropsValues.DL_FILE_INDEXING_MAX_SIZE) {
 					indexContent = false;
+				}
+			}
+
+			if (indexContent) {
+				String[] ignoreExtensions = PrefsPropsUtil.getStringArray(
+					companyId, PropsKeys.DL_FILE_INDEXING_IGNORE_EXTENSIONS,
+						StringPool.COMMA);
+
+				for (String ignoreExtension : ignoreExtensions) {
+					if (StringUtil.endsWith(fileName, ignoreExtension)) {
+						indexContent = false;
+						break;
+					}
 				}
 			}
 

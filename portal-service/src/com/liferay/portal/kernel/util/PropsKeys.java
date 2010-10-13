@@ -483,6 +483,8 @@ public interface PropsKeys {
 
 	public static final String DL_FILE_ICONS = "dl.file.icons";
 
+	public static final String DL_FILE_INDEXING_IGNORE_EXTENSIONS = "dl.file.indexing.ignore.extensions";
+
 	public static final String DL_FILE_INDEXING_MAX_SIZE = "dl.file.indexing.max.size";
 
 	public static final String DL_FILE_MAX_SIZE = "dl.file.max.size";
