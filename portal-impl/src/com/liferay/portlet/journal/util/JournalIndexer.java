@@ -423,6 +423,11 @@ public class JournalIndexer extends BaseIndexer {
 		Collection<Document> documents = new ArrayList<Document>();
 
 		for (JournalArticle article : articles) {
+
+			if(!article.isIndexable()){
+				continue;
+			}
+
 			Document document = getDocument(article);
 
 			documents.add(document);
