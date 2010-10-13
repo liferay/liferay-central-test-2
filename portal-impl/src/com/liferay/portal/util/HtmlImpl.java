@@ -188,9 +188,6 @@ public class HtmlImpl implements Html {
 			}
 		}
 
-		href = StringUtil.replace(href, StringPool.GREATER_THAN, "%3e");
-		href = StringUtil.replace(href, StringPool.LESS_THAN, "%3c");
-
 		return href;
 	}
 
