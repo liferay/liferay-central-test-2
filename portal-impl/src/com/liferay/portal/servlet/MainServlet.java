@@ -1110,8 +1110,7 @@ public class MainServlet extends ActionServlet {
 			return;
 		}
 
-		String redirect =
-			request.getContextPath() + Portal.PATH_MAIN + "/portal/login";
+		String redirect = PortalUtil.getPathMain().concat("/portal/login");
 
 		String currentURL = PortalUtil.getCurrentURL(request);
 
