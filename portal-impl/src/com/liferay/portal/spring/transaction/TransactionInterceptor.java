@@ -14,6 +14,7 @@
 
 package com.liferay.portal.spring.transaction;
 
+import com.liferay.portal.kernel.cache.transactional.TransactionalPortalCacheUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -23,6 +24,7 @@ import java.lang.reflect.Method;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.transaction.interceptor.TransactionAttribute;
 import org.springframework.transaction.interceptor.TransactionAttributeSource;
@@ -69,12 +71,25 @@ public class TransactionInterceptor
 			getTransactionManager(), transactionAttribute,
 			joinPointIdentification);
 
+		TransactionStatus transactionStatus =
+			transactionInfo.getTransactionStatus();
+
+		boolean newTransaction = transactionStatus.isNewTransaction();
+
+		if (newTransaction) {
+			TransactionalPortalCacheUtil.begin();
+		}
+
 		Object returnValue = null;
 
 		try {
 			returnValue = methodInvocation.proceed();
 		}
 		catch (Throwable throwable) {
+			if (newTransaction) {
+				TransactionalPortalCacheUtil.rollback();
+			}
+
 			completeTransactionAfterThrowing(transactionInfo, throwable);
 
 			throw throwable;
@@ -84,6 +99,10 @@ public class TransactionInterceptor
 		}
 
 		commitTransactionAfterReturning(transactionInfo);
+
+		if (newTransaction) {
+			TransactionalPortalCacheUtil.commit();
+		}
 
 		return returnValue;
 	}
