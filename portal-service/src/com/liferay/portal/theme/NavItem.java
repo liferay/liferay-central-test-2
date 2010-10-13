@@ -60,57 +60,6 @@ public class NavItem implements Serializable {
 		_layout = layout;
 	}
 
-	public Layout getLayout() {
-		return _layout;
-	}
-
-	public boolean isChildSelected() throws PortalException, SystemException {
-		ThemeDisplay themeDisplay = _vars.getThemeDisplay();
-
-		return _layout.isChildSelected(
-			themeDisplay.isTilesSelectable(), themeDisplay.getLayout());
-	}
-
-	public boolean isSelected() {
-		ThemeDisplay themeDisplay = _vars.getThemeDisplay();
-
-		return _layout.isSelected(
-			themeDisplay.isTilesSelectable(), themeDisplay.getLayout(),
-			_vars.getAncestorPlid());
-	}
-
-	public String getName() {
-		return HtmlUtil.escape(getUnescapedName());
-	}
-
-	public String getUnescapedName() {
-		return _layout.getName(_vars.getThemeDisplay().getLocale());
-	}
-
-	public String getTarget() {
-		return _layout.getTarget();
-	}
-
-	public String getTitle() {
-		return _layout.getTitle(_vars.getThemeDisplay().getLocale());
-	}
-
-	public String getURL() throws Exception {
-		return HtmlUtil.escapeHREF(getRegularURL());
-	}
-
-	public String getRegularURL() throws Exception {
-		return _layout.getRegularURL(_vars.getRequest());
-	}
-
-	public String getResetMaxStateURL() throws Exception {
-		return _layout.getResetMaxStateURL(_vars.getRequest());
-	}
-
-	public String getResetLayoutURL() throws Exception {
-		return _layout.getResetLayoutURL(_vars.getRequest());
-	}
-
 	public List<NavItem> getChildren() throws Exception {
 		if (_children == null) {
 			ThemeDisplay themeDisplay = _vars.getThemeDisplay();
@@ -122,6 +71,42 @@ public class NavItem implements Serializable {
 		}
 
 		return _children;
+	}
+
+	public Layout getLayout() {
+		return _layout;
+	}
+
+	public String getName() {
+		return HtmlUtil.escape(getUnescapedName());
+	}
+
+	public String getRegularURL() throws Exception {
+		return _layout.getRegularURL(_vars.getRequest());
+	}
+
+	public String getResetLayoutURL() throws Exception {
+		return _layout.getResetLayoutURL(_vars.getRequest());
+	}
+
+	public String getResetMaxStateURL() throws Exception {
+		return _layout.getResetMaxStateURL(_vars.getRequest());
+	}
+
+	public String getTarget() {
+		return _layout.getTarget();
+	}
+
+	public String getTitle() {
+		return _layout.getTitle(_vars.getThemeDisplay().getLocale());
+	}
+
+	public String getUnescapedName() {
+		return _layout.getName(_vars.getThemeDisplay().getLocale());
+	}
+
+	public String getURL() throws Exception {
+		return HtmlUtil.escapeHREF(getRegularURL());
 	}
 
 	public boolean hasChildren() throws Exception {
@@ -143,6 +128,21 @@ public class NavItem implements Serializable {
 			_VELOCITY_TAGLIB_LAYOUT_ICON_PARAMS);
 
 		method.invoke(velocityTaglib, _layout);
+	}
+
+	public boolean isChildSelected() throws PortalException, SystemException {
+		ThemeDisplay themeDisplay = _vars.getThemeDisplay();
+
+		return _layout.isChildSelected(
+			themeDisplay.isTilesSelectable(), themeDisplay.getLayout());
+	}
+
+	public boolean isSelected() {
+		ThemeDisplay themeDisplay = _vars.getThemeDisplay();
+
+		return _layout.isSelected(
+			themeDisplay.isTilesSelectable(), themeDisplay.getLayout(),
+			_vars.getAncestorPlid());
 	}
 
 	private static final String _VELOCITY_TAGLIB_CLASS =
