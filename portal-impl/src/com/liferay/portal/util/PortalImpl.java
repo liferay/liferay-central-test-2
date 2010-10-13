@@ -320,11 +320,15 @@ public class PortalImpl implements Portal {
 
 		// Paths
 
+		_pathProxy = PropsUtil.get(PropsKeys.PORTAL_PROXY_PATH);
+
 		_pathContext = PropsUtil.get(PropsKeys.PORTAL_CTX);
 
 		if (_pathContext.equals(StringPool.SLASH)) {
 			_pathContext = StringPool.BLANK;
 		}
+
+		_pathContext = _pathProxy.concat(_pathContext);
 
 		_pathFriendlyURLPrivateGroup =
 			_pathContext + _PRIVATE_GROUP_SERVLET_MAPPING;
@@ -2050,6 +2054,10 @@ public class PortalImpl implements Portal {
 
 	public String getPathMain() {
 		return _pathMain;
+	}
+
+	public String getPathProxy() {
+		return _pathProxy;
 	}
 
 	public long getPlidFromFriendlyURL(long companyId, String friendlyURL) {
@@ -4630,6 +4638,7 @@ public class PortalImpl implements Portal {
 	private String _pathFriendlyURLPublic;
 	private String _pathImage;
 	private String _pathMain;
+	private String _pathProxy;
 	private Map<String, Long> _plidToPortletIdCache =
 		new ConcurrentHashMap<String, Long>();
 	private String _portalLibDir;

@@ -251,6 +251,19 @@ public class LayoutTemplateImpl
 		}
 	}
 
+	public String getStaticResourcePath() {
+		String proxyPath = PortalUtil.getPathProxy();
+
+		String contextPath = getContextPath();
+
+		if (isWARFile()) {
+			return proxyPath.concat(contextPath);
+		}
+		else {
+			return contextPath;
+		}
+	}
+
 	public int compareTo(LayoutTemplate layoutTemplate) {
 		if (layoutTemplate == null) {
 			return -1;

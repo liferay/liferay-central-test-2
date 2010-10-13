@@ -262,6 +262,17 @@ public class HttpImpl implements Http {
 			sb.append(request.getQueryString());
 		}
 
+		String portalProxyPath = PortalUtil.getPathProxy();
+
+		if (Validator.isNotNull(portalProxyPath)) {
+			int pos1 = sb.indexOf(Http.PROTOCOL_DELIMITER) +
+				Http.PROTOCOL_DELIMITER.length();
+
+			int pos2 = sb.indexOf(StringPool.SLASH, pos1);
+
+			sb.insert(pos2, portalProxyPath);
+		}
+
 		String completeURL = sb.toString();
 
 		if (_log.isWarnEnabled()) {

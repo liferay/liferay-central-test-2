@@ -98,7 +98,7 @@ if (layout != null) {
 	for (Portlet portlet : portlets) {
 		for (String headerPortletCss : portlet.getHeaderPortletCss()) {
 			if (!HttpUtil.hasProtocol(headerPortletCss)) {
-				headerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + headerPortletCss, portlet.getTimestamp());
+				headerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + headerPortletCss, portlet.getTimestamp());
 			}
 
 			if (!headerPortletCssSet.contains(headerPortletCss)) {
@@ -149,7 +149,7 @@ if (layout != null) {
 	for (Portlet portlet : portlets) {
 		for (String headerPortletJavaScript : portlet.getHeaderPortletJavaScript()) {
 			if (!HttpUtil.hasProtocol(headerPortletJavaScript)) {
-				headerPortletJavaScript = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + headerPortletJavaScript, portlet.getTimestamp());
+				headerPortletJavaScript = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + headerPortletJavaScript, portlet.getTimestamp());
 			}
 
 			if (!headerPortletJavaScriptSet.contains(headerPortletJavaScript)) {

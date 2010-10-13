@@ -27,7 +27,7 @@ PluginPackage selPluginPackage = selTheme.getPluginPackage();
 	<div class="float-container lfr-current-theme">
 		<h3><liferay-ui:message key="current-theme" /></h3>
 
-		<img alt="<%= selTheme.getName() %>" class="theme-screenshot" src="<%= selTheme.getContextPath() %><%= selTheme.getImagesPath() %>/thumbnail.png" title="<%= selTheme.getName() %>" />
+		<img alt="<%= selTheme.getName() %>" class="theme-screenshot" src="<%= selTheme.getStaticResourcePath() %><%= selTheme.getImagesPath() %>/thumbnail.png" title="<%= selTheme.getName() %>" />
 
 		<div class="theme-details">
 			<h4 class="theme-title"><%= selTheme.getName() %></h4>
@@ -75,7 +75,7 @@ PluginPackage selPluginPackage = selTheme.getPluginPackage();
 										<%= curColorScheme.getName() %>
 									</span>
 
-									<img alt="<%= curColorScheme.getName() %>" class="theme-thumbnail" src="<%= selTheme.getContextPath() %><%= curColorScheme.getColorSchemeThumbnailPath() %>/thumbnail.png" title="<%= curColorScheme.getName() %>" />
+									<img alt="<%= curColorScheme.getName() %>" class="theme-thumbnail" src="<%= selTheme.getStaticResourcePath() %><%= curColorScheme.getColorSchemeThumbnailPath() %>/thumbnail.png" title="<%= curColorScheme.getName() %>" />
 								</a>
 							</li>
 
@@ -129,7 +129,7 @@ PluginPackage selPluginPackage = selTheme.getPluginPackage();
 									<%= curTheme.getName() %>
 								</span>
 
-								<img alt="<%= curTheme.getName() %>" class="theme-thumbnail" src="<%= curTheme.getContextPath() %><%= curTheme.getImagesPath() %>/thumbnail.png" title="<%= curTheme.getName() %>" />
+								<img alt="<%= curTheme.getName() %>" class="theme-thumbnail" src="<%= curTheme.getStaticResourcePath() %><%= curTheme.getImagesPath() %>/thumbnail.png" title="<%= curTheme.getName() %>" />
 							</a>
 						</li>
 

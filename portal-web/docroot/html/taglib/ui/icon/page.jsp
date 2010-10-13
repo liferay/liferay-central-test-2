@@ -72,7 +72,7 @@ if (themeDisplay.isThemeImagesFastLoad() && !auiImage) {
 					spriteFileName = StringUtil.replace(spriteFileName, ".png", ".gif");
 				}
 
-				spriteFileName = portlet.getContextPath().concat(spriteFileName);
+				spriteFileName = portlet.getStaticResourcePath().concat(spriteFileName);
 			}
 		}
 	}

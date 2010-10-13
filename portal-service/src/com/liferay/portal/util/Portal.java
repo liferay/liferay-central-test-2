@@ -373,6 +373,8 @@ public interface Portal {
 
 	public String getPathMain();
 
+	public String getPathProxy();
+
 	public long getPlidFromFriendlyURL(long companyId, String friendlyURL);
 
 	public long getPlidFromPortletId(

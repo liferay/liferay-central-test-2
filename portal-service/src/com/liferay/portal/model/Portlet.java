@@ -1853,6 +1853,13 @@ public interface Portlet extends PortletModel {
 	public java.lang.String getContextPath();
 
 	/**
+	* Gets the path for static resources served by this portlet.
+	*
+	* @return the path for static resources served by this portlet
+	*/
+	public java.lang.String getStaticResourcePath();
+
+	/**
 	* Get the application this portlet belongs to.
 	*
 	* @return the application this portlet belongs to

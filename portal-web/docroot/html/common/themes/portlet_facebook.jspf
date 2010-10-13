@@ -43,7 +43,7 @@ Set<String> headerPortletCssSet = new LinkedHashSet<String>();
 
 for (String headerPortletCss : portlet.getHeaderPortletCss()) {
 	if (!HttpUtil.hasProtocol(headerPortletCss)) {
-		headerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + headerPortletCss, portlet.getTimestamp());
+		headerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + headerPortletCss, portlet.getTimestamp());
 	}
 
 	if (!headerPortletCssSet.contains(headerPortletCss)) {
@@ -81,7 +81,7 @@ Set<String> footerPortletCssSet = new LinkedHashSet<String>();
 
 for (String footerPortletCss : portlet.getFooterPortletCss()) {
 	if (!HttpUtil.hasProtocol(footerPortletCss)) {
-		footerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getContextPath() + footerPortletCss, portlet.getTimestamp());
+		footerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + footerPortletCss, portlet.getTimestamp());
 	}
 
 	if (!footerPortletCssSet.contains(footerPortletCss)) {

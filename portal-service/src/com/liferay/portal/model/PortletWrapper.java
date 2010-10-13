@@ -2470,6 +2470,15 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
+	* Gets the path for static resources served by this portlet.
+	*
+	* @return the path for static resources served by this portlet
+	*/
+	public java.lang.String getStaticResourcePath() {
+		return _portlet.getStaticResourcePath();
+	}
+
+	/**
 	* Get the application this portlet belongs to.
 	*
 	* @return the application this portlet belongs to

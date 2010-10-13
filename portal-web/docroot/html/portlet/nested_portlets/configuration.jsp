@@ -56,7 +56,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</c:if>
 
 			<td align="center" width="<%= 100 / CELLS_PER_ROW %>%">
-				<img onclick="document.getElementById('<portlet:namespace />layoutTemplateId<%= i %>').checked = true;" src="<%= curLayoutTemplate.getContextPath() %><%= curLayoutTemplate.getThumbnailPath() %>" /><br />
+				<img onclick="document.getElementById('<portlet:namespace />layoutTemplateId<%= i %>').checked = true;" src="<%= curLayoutTemplate.getStaticResourcePath() %><%= curLayoutTemplate.getThumbnailPath() %>" /><br />
 
 				<aui:input checked="<%= layoutTemplateId.equals(curLayoutTemplate.getLayoutTemplateId()) %>" id='<%= "layoutTemplateId" + i %>' label="<%= curLayoutTemplate.getName() %>" name="layoutTemplateId" type="radio" value="<%= curLayoutTemplate.getLayoutTemplateId() %>" />
 			</td>

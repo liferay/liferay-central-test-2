@@ -115,6 +115,8 @@ public interface Theme extends Comparable<Theme>, Plugin, Serializable {
 
 	public boolean getLoadFromServletContext();
 
+	public String getStaticResourcePath();
+
 	public boolean isLoadFromServletContext();
 
 	public void setLoadFromServletContext(boolean loadFromServletContext);

@@ -378,10 +378,10 @@ portletDisplay.setCustomCSSClassName(customCSSClassName);
 String portletIcon = null;
 
 if (portletResourcePortlet != null) {
-	portletIcon = portletResourcePortlet.getContextPath() + portletResourcePortlet.getIcon();
+	portletIcon = portletResourcePortlet.getStaticResourcePath() + portletResourcePortlet.getIcon();
 }
 else {
-	portletIcon = portlet.getContextPath() + portlet.getIcon();
+	portletIcon = portlet.getStaticResourcePath() + portlet.getIcon();
 }
 
 portletDisplay.setURLPortlet(themeDisplay.getCDNHost() + portletIcon);

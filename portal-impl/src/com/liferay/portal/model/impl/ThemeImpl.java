@@ -300,12 +300,6 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	}
 
 	public String getContextPath() {
-		String virtualPath = getVirtualPath();
-
-		if (Validator.isNotNull(virtualPath)) {
-			return virtualPath;
-		}
-
 		if (isWARFile()) {
 			return StringPool.SLASH.concat(getServletContextName());
 		}
@@ -320,6 +314,25 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 		else {
 			return FreeMarkerTemplateLoader.THEME_LOADER_SEPARATOR;
+		}
+	}
+
+	public String getStaticResourcePath() {
+		String proxyPath = PortalUtil.getPathProxy();
+
+		String virtualPath = getVirtualPath();
+
+		if (Validator.isNotNull(virtualPath)) {
+			return proxyPath.concat(virtualPath);
+		}
+
+		String contextPath = getContextPath();
+
+		if (isWARFile()) {
+			return proxyPath.concat(contextPath);
+		}
+		else {
+			return contextPath;
 		}
 	}
 

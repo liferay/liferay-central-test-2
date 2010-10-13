@@ -87,4 +87,6 @@ public interface LayoutTemplate
 
 	public String getContextPath();
 
+	public String getStaticResourcePath();
+
 }

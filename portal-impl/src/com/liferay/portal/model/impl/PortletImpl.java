@@ -2800,17 +2800,35 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return the servlet context path of the portlet
 	 */
 	public String getContextPath() {
-		String virtualPath = getVirtualPath();
-
-		if (Validator.isNotNull(virtualPath)) {
-			return virtualPath;
-		}
-
 		if (_portletApp.isWARFile()) {
 			return StringPool.SLASH.concat(_portletApp.getServletContextName());
 		}
 		else {
 			return PortalUtil.getPathContext();
+		}
+	}
+
+	/**
+	 * Gets the path for static resources served by this portlet.
+	 *
+	 * @return the path for static resources served by this portlet
+	 */
+	public String getStaticResourcePath() {
+		String proxyPath = PortalUtil.getPathProxy();
+
+		String virtualPath = getVirtualPath();
+
+		if (Validator.isNotNull(virtualPath)) {
+			return proxyPath.concat(virtualPath);
+		}
+
+		String contextPath = getContextPath();
+
+		if (_portletApp.isWARFile()) {
+			return proxyPath.concat(contextPath);
+		}
+		else {
+			return contextPath;
 		}
 	}
 

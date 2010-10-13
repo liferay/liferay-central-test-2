@@ -652,6 +652,10 @@ public class PortalUtil {
 		return getPortal().getPathMain();
 	}
 
+	public static String getPathProxy() {
+		return getPortal().getPathProxy();
+	}
+
 	public static long getPlidFromFriendlyURL(
 		long companyId, String friendlyURL) {
 

@@ -50,8 +50,18 @@ public class RememberMeAutoLogin implements AutoLogin {
 
 			// LEP-5188
 
-			if (!PortalUtil.getPathContext().equals(request.getContextPath())) {
-				rememberMe = Boolean.TRUE.toString();
+			String portalProxyPath = PortalUtil.getPathProxy();
+			String portalContextPath = PortalUtil.getPathContext();
+
+			if (Validator.equals(portalProxyPath, portalContextPath)) {
+				if (Validator.isNotNull(request.getContextPath())) {
+					rememberMe = Boolean.TRUE.toString();
+				}
+			}
+			else {
+				if (!portalContextPath.equals(request.getContextPath())) {
+					rememberMe = Boolean.TRUE.toString();
+				}
 			}
 
 			if (Validator.isNotNull(autoUserId) &&

@@ -460,11 +460,7 @@ public class ThemeDisplay implements Serializable {
 		_colorScheme = colorScheme;
 
 		if ((theme != null) && (colorScheme != null)) {
-			String themeContextPath = contextPath;
-
-			if (theme.isWARFile()) {
-				themeContextPath = theme.getContextPath();
-			}
+			String themeStaticResourcePath = theme.getStaticResourcePath();
 
 			String host = getCDNHost();
 
@@ -473,16 +469,18 @@ public class ThemeDisplay implements Serializable {
 			}
 
 			setPathColorSchemeImages(
-				host + themeContextPath +
+				host + themeStaticResourcePath +
 					colorScheme.getColorSchemeImagesPath());
 
-			setPathThemeCss(host + themeContextPath + theme.getCssPath());
-			setPathThemeImages(host + themeContextPath + theme.getImagesPath());
+			setPathThemeCss(
+				host + themeStaticResourcePath + theme.getCssPath());
+			setPathThemeImages(
+				host + themeStaticResourcePath + theme.getImagesPath());
 			setPathThemeJavaScript(
-				host + themeContextPath + theme.getJavaScriptPath());
-			setPathThemeRoot(themeContextPath + theme.getRootPath());
+				host + themeStaticResourcePath + theme.getJavaScriptPath());
+			setPathThemeRoot(themeStaticResourcePath + theme.getRootPath());
 			setPathThemeTemplates(
-				host + themeContextPath + theme.getTemplatesPath());
+				host + themeStaticResourcePath + theme.getTemplatesPath());
 		}
 	}
 
