@@ -169,7 +169,7 @@ web.server.display.node=true</echo>
 					<equals arg1="${db.type}" arg2="mysql" />
 					<then>
 						<antcall target="prepare-root-xml" inheritAll="false">
-							<param name="db.url" value="jdbc:mysql://${db.mysql.host}/lportal?useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;amp;useFastDateParsing=false" />
+							<param name="db.url" value="jdbc:mysql://${db.mysql.host}/${db.mysql.schema}?useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;amp;useFastDateParsing=false" />
 						</antcall>
 					</then>
 					<else>

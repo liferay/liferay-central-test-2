@@ -1869,8 +1869,22 @@ file.
 				<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
 			</then>
 			<else>
+				<tstamp>
+					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+				</tstamp>
+
+				<property name="temp.dir" value="temp\${db.mysql.schema}\${tstamp.value}\" />
+
+				<copy file="${sql.dir}${sql.file}" tofile="${sql.file}" />
+
+				<replace file="${sql.file}">
+					<replacefilter token="drop database if exists lportal;" value="drop database if exists ${db.mysql.schema};"/>
+					<replacefilter token="create database lportal character set utf8;" value="create database ${db.mysql.schema} character set utf8;"/>
+					<replacefilter token="use lportal;" value="use ${db.mysql.schema};"/>
+				</replace>
+
 				<exec executable="cmd">
-					<arg line="/c mysql &lt; ${sql.dir}${sql.file}" />
+					<arg line="/c mysql &lt; ${sql.file}" />
 				</exec>
 
 				<delete file="${sql.file}" />
