@@ -26,9 +26,9 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.util.Encryptor;
 import com.liferay.util.PwdGenerator;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -107,7 +107,7 @@ public class SessionAuthToken implements AuthToken {
 				WebKeys.AUTHENTICATION_TOKEN);
 
 		if (sessionAuthenticationTokensMap == null) {
-			sessionAuthenticationTokensMap = new HashMap<String, String>();
+			sessionAuthenticationTokensMap = new ConcurrentHashMap<String, String>();
 
 			session.setAttribute(
 				WebKeys.AUTHENTICATION_TOKEN, sessionAuthenticationTokensMap);
