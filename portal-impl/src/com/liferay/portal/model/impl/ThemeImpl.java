@@ -308,15 +308,6 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 	}
 
-	public String getFreeMarkerTemplateLoader() {
-		if (_loadFromServletContext) {
-			return FreeMarkerTemplateLoader.SERVLET_SEPARATOR;
-		}
-		else {
-			return FreeMarkerTemplateLoader.THEME_LOADER_SEPARATOR;
-		}
-	}
-
 	public String getStaticResourcePath() {
 		String proxyPath = PortalUtil.getPathProxy();
 
@@ -333,6 +324,15 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 		else {
 			return contextPath;
+		}
+	}
+
+	public String getFreeMarkerTemplateLoader() {
+		if (_loadFromServletContext) {
+			return FreeMarkerTemplateLoader.SERVLET_SEPARATOR;
+		}
+		else {
+			return FreeMarkerTemplateLoader.THEME_LOADER_SEPARATOR;
 		}
 	}
 

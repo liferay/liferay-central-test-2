@@ -1325,8 +1325,6 @@ public interface PropsKeys {
 
 	public static final String PORTAL_CTX = "portal.ctx";
 
-	public static final String PORTAL_PROXY_PATH = "portal.proxy.path";
-
 	public static final String PORTAL_IMPERSONATION_ENABLE = "portal.impersonation.enable";
 
 	public static final String PORTAL_JAAS_ENABLE = "portal.jaas.enable";
@@ -1334,6 +1332,8 @@ public interface PropsKeys {
 	public static final String PORTAL_JAAS_IMPL = "portal.jaas.impl";
 
 	public static final String PORTAL_JAAS_STRICT_PASSWORD = "portal.jaas.strict.password";
+
+	public static final String PORTAL_PROXY_PATH = "portal.proxy.path";
 
 	public static final String PORTAL_SECURITY_MANAGER_ENABLE = "portal.security.manager.enable";
 
