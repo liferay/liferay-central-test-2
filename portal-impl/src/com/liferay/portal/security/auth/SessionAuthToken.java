@@ -107,7 +107,8 @@ public class SessionAuthToken implements AuthToken {
 				WebKeys.AUTHENTICATION_TOKEN);
 
 		if (sessionAuthenticationTokensMap == null) {
-			sessionAuthenticationTokensMap = new ConcurrentHashMap<String, String>();
+			sessionAuthenticationTokensMap =
+				new ConcurrentHashMap<String, String>();
 
 			session.setAttribute(
 				WebKeys.AUTHENTICATION_TOKEN, sessionAuthenticationTokensMap);
