@@ -70,6 +70,10 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 		};
 	}
 
+	public boolean isAlwaysExportable() {
+		return _ALWAYS_EXPORTABLE;
+	}
+
 	public boolean isPublishToLiveByDefault() {
 		return 	_PUBLISH_TO_LIVE_BY_DEFAULT;
 	}
@@ -400,6 +404,8 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 
 		return preferences;
 	}
+
+	private static final boolean _ALWAYS_EXPORTABLE = false;
 
 	private static final String _NAMESPACE = "rss";
 
