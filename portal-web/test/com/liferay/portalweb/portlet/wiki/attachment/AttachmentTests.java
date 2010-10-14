@@ -16,6 +16,9 @@ package com.liferay.portalweb.portlet.wiki.attachment;
 
 import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portlet.wiki.attachment.addfrontpageattachment.AddFrontPageAttachmentTests;
+import com.liferay.portalweb.portlet.wiki.attachment.addfrontpageemptyattachment.AddFrontPageEmptyAttachmentTests;
+import com.liferay.portalweb.portlet.wiki.attachment.addwikipageattachment.AddWikiPageAttachmentTests;
+import com.liferay.portalweb.portlet.wiki.attachment.addwikipageemptyattachment.AddWikiPageEmptyAttachmentTests;
 import com.liferay.portalweb.portlet.wiki.attachment.deletefrontpageattachment.DeleteFrontPageAttachmentTests;
 
 import junit.framework.Test;
@@ -30,6 +33,9 @@ public class AttachmentTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTest(AddFrontPageAttachmentTests.suite());
+		testSuite.addTest(AddFrontPageEmptyAttachmentTests.suite());
+		testSuite.addTest(AddWikiPageAttachmentTests.suite());
+		testSuite.addTest(AddWikiPageEmptyAttachmentTests.suite());
 		testSuite.addTest(DeleteFrontPageAttachmentTests.suite());
 
 		return testSuite;
