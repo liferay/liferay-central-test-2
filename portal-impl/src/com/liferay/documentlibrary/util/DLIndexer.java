@@ -172,12 +172,13 @@ public class DLIndexer extends BaseIndexer {
 
 			if (indexContent) {
 				String[] ignoreExtensions = PrefsPropsUtil.getStringArray(
-					companyId, PropsKeys.DL_FILE_INDEXING_IGNORE_EXTENSIONS,
-						StringPool.COMMA);
+					PropsKeys.DL_FILE_INDEXING_IGNORE_EXTENSIONS,
+					StringPool.COMMA);
 
 				for (String ignoreExtension : ignoreExtensions) {
 					if (StringUtil.endsWith(fileName, ignoreExtension)) {
 						indexContent = false;
+
 						break;
 					}
 				}
