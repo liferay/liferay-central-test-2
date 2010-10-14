@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -76,8 +77,8 @@ public class BlogsMessageListener implements MessageListener {
 				companyId, BlogsEntry.class.getName(), groupId);
 
 		sendEmail(
-			userId, fromName, fromAddress, subject, body, subscriptions, sent,
-			replyToAddress, mailId, htmlFormat);
+			userId, groupId, fromName, fromAddress, subject, body,
+			subscriptions, sent, replyToAddress, mailId, htmlFormat);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Finished sending notifications");
@@ -85,9 +86,10 @@ public class BlogsMessageListener implements MessageListener {
 	}
 
 	protected void sendEmail(
-			long userId, String fromName, String fromAddress, String subject,
-			String body, List<Subscription> subscriptions, Set<Long> sent,
-			String replyToAddress, String mailId, boolean htmlFormat)
+			long userId, long groupId, String fromName, String fromAddress,
+			String subject, String body, List<Subscription> subscriptions,
+			Set<Long> sent, String replyToAddress, String mailId,
+			boolean htmlFormat)
 		throws Exception {
 
 		for (Subscription subscription : subscriptions) {
@@ -118,6 +120,19 @@ public class BlogsMessageListener implements MessageListener {
 				user = UserLocalServiceUtil.getUserById(subscribedUserId);
 			}
 			catch (NoSuchUserException nsue) {
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Subscription " + subscription.getSubscriptionId() +
+							" is stale and will be deleted");
+				}
+
+				SubscriptionLocalServiceUtil.deleteSubscription(
+					subscription.getSubscriptionId());
+
+				continue;
+			}
+
+			if (!GroupLocalServiceUtil.hasUserGroup(userId, groupId)) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
 						"Subscription " + subscription.getSubscriptionId() +

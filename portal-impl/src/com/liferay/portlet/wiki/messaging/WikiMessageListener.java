@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.wiki.model.WikiNode;
@@ -52,6 +53,7 @@ public class WikiMessageListener implements MessageListener {
 	protected void doReceive(Message message) throws Exception {
 		long companyId = message.getLong("companyId");
 		long userId = message.getLong("userId");
+		long groupId = message.getLong("groupId");
 		long nodeId = message.getLong("nodeId");
 		long pageResourcePrimKey = message.getLong("pageResourcePrimKey");
 		String fromName = message.getString("fromName");
@@ -78,8 +80,8 @@ public class WikiMessageListener implements MessageListener {
 				companyId, WikiPage.class.getName(), pageResourcePrimKey);
 
 		sendEmail(
-			userId, fromName, fromAddress, subject, body, subscriptions, sent,
-			replyToAddress, mailId, htmlFormat);
+			userId, groupId, fromName, fromAddress, subject, body,
+			subscriptions, sent, replyToAddress, mailId, htmlFormat);
 
 		// Nodes
 
@@ -87,8 +89,8 @@ public class WikiMessageListener implements MessageListener {
 			companyId, WikiNode.class.getName(), nodeId);
 
 		sendEmail(
-			userId, fromName, fromAddress, subject, body, subscriptions, sent,
-			replyToAddress, mailId, htmlFormat);
+			userId, groupId, fromName, fromAddress, subject, body,
+			subscriptions, sent, replyToAddress, mailId, htmlFormat);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Finished sending notifications");
@@ -96,9 +98,10 @@ public class WikiMessageListener implements MessageListener {
 	}
 
 	protected void sendEmail(
-			long userId, String fromName, String fromAddress, String subject,
-			String body, List<Subscription> subscriptions, Set<Long> sent,
-			String replyToAddress, String mailId, boolean htmlFormat)
+			long userId, long groupId, String fromName, String fromAddress,
+			String subject, String body, List<Subscription> subscriptions,
+			Set<Long> sent, String replyToAddress, String mailId,
+			boolean htmlFormat)
 		throws Exception {
 
 		for (Subscription subscription : subscriptions) {
@@ -129,6 +132,19 @@ public class WikiMessageListener implements MessageListener {
 				user = UserLocalServiceUtil.getUserById(subscribedUserId);
 			}
 			catch (NoSuchUserException nsue) {
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Subscription " + subscription.getSubscriptionId() +
+							" is stale and will be deleted");
+				}
+
+				SubscriptionLocalServiceUtil.deleteSubscription(
+					subscription.getSubscriptionId());
+
+				continue;
+			}
+
+			if (!GroupLocalServiceUtil.hasUserGroup(userId, groupId)) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
 						"Subscription " + subscription.getSubscriptionId() +

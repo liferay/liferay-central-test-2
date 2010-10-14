@@ -1697,6 +1697,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		message.put("companyId", node.getCompanyId());
 		message.put("userId", node.getUserId());
+		message.put("groupId", node.getGroupId());
 		message.put("nodeId", node.getNodeId());
 		message.put("pageResourcePrimKey", page.getResourcePrimKey());
 		message.put("fromName", fromName);

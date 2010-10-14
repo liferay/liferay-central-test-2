@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.messageboards.NoSuchMailingListException;
@@ -96,8 +97,8 @@ public class MBMessageListener implements MessageListener {
 				companyId, MBThread.class.getName(), threadId);
 
 		sendEmail(
-			userId, fromName, fromAddress, subject, body, subscriptions, sent,
-			replyToAddress, mailId, inReplyTo, htmlFormat);
+			userId, groupId, fromName, fromAddress, subject, body,
+			subscriptions, sent, replyToAddress, mailId, inReplyTo, htmlFormat);
 
 		// Categories
 
@@ -112,8 +113,9 @@ public class MBMessageListener implements MessageListener {
 				companyId, MBCategory.class.getName(), categoryId);
 
 			sendEmail(
-				userId, fromName, fromAddress, subject, body, subscriptions,
-				sent, replyToAddress, mailId, inReplyTo, htmlFormat);
+				userId, groupId, fromName, fromAddress, subject, body,
+				subscriptions, sent, replyToAddress, mailId, inReplyTo,
+				htmlFormat);
 		}
 
 		// Mailing list
@@ -183,10 +185,10 @@ public class MBMessageListener implements MessageListener {
 	}
 
 	protected void sendEmail(
-			long userId, String fromName, String fromAddress, String subject,
-			String body, List<Subscription> subscriptions, Set<Long> sent,
-			String replyToAddress, String mailId, String inReplyTo,
-			boolean htmlFormat)
+			long userId, long groupId, String fromName, String fromAddress,
+			String subject, String body, List<Subscription> subscriptions,
+			Set<Long> sent, String replyToAddress, String mailId,
+			String inReplyTo, boolean htmlFormat)
 		throws Exception {
 
 		List<InternetAddress> addresses = new ArrayList<InternetAddress>();
@@ -219,6 +221,19 @@ public class MBMessageListener implements MessageListener {
 				user = UserLocalServiceUtil.getUserById(subscribedUserId);
 			}
 			catch (NoSuchUserException nsue) {
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Subscription " + subscription.getSubscriptionId() +
+							" is stale and will be deleted");
+				}
+
+				SubscriptionLocalServiceUtil.deleteSubscription(
+					subscription.getSubscriptionId());
+
+				continue;
+			}
+
+			if (!GroupLocalServiceUtil.hasUserGroup(userId, groupId)) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
 						"Subscription " + subscription.getSubscriptionId() +
