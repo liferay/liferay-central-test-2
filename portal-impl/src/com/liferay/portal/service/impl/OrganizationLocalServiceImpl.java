@@ -216,7 +216,7 @@ public class OrganizationLocalServiceImpl
 			privateLayoutSet.setLogo(false);
 			privateLayoutSet.setLogoId(0);
 
-			layoutSetPersistence.update(publicLayoutSet, false);
+			layoutSetPersistence.update(privateLayoutSet, false);
 
 			if (imageLocalService.getImage(logoId) != null) {
 				imageLocalService.deleteImage(logoId);
