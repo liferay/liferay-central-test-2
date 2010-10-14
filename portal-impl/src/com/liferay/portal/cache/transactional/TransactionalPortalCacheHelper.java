@@ -87,6 +87,10 @@ public class TransactionalPortalCacheHelper {
 	}
 
 	protected static Object get(PortalCache portalCache, String key) {
+		if (_layerCountThreadLocal.get() <= 0) {
+			return null;
+		}
+
 		Map<PortalCache, Map<String, Object>> portalCacheMap =
 			_peekPortalCacheMap();
 
@@ -102,20 +106,29 @@ public class TransactionalPortalCacheHelper {
 	protected static void put(
 		PortalCache portalCache, String key, Object value) {
 
-		Map<PortalCache, Map<String, Object>> cache = _peekPortalCacheMap();
+		if (_layerCountThreadLocal.get() <= 0) {
+			return;
+		}
 
-		Map<String, Object> uncommittedMap = cache.get(portalCache);
+		Map<PortalCache, Map<String, Object>> portalCacheMap =
+			_peekPortalCacheMap();
+
+		Map<String, Object> uncommittedMap = portalCacheMap.get(portalCache);
 
 		if (uncommittedMap == null) {
 			uncommittedMap = new HashMap<String, Object>();
 
-			cache.put(portalCache, uncommittedMap);
+			portalCacheMap.put(portalCache, uncommittedMap);
 		}
 
 		uncommittedMap.put(key, value);
 	}
 
 	protected static void remove(PortalCache portalCache, String key) {
+		if (_layerCountThreadLocal.get() <= 0) {
+			return;
+		}
+
 		Map<PortalCache, Map<String, Object>> portalCacheMap =
 			_peekPortalCacheMap();
 
@@ -127,6 +140,10 @@ public class TransactionalPortalCacheHelper {
 	}
 
 	protected static void removeAll(PortalCache portalCache) {
+		if (_layerCountThreadLocal.get() <= 0) {
+			return;
+		}
+
 		Map<PortalCache, Map<String, Object>> portalCacheMap =
 			_peekPortalCacheMap();
 
