@@ -40,6 +40,16 @@ portletURL.setPortletMode(PortletMode.VIEW);
 portletURL.setParameter("struts_action", "/search/search");
 %>
 
+<form action="<%= portletURL.toString() %>" method="post" name="<%= randomNamespace %><%= namespace %>fm" onSubmit="<%= randomNamespace %><%= namespace %>search(); return false;">
+<input name="<%= namespace %>keywords" size="30" type="text" value="<%= HtmlUtil.escapeAttribute(keywords) %>" />
+
+<select name="<%= namespace %>groupId">
+	<option value="0" <%= (groupId == 0) ? "selected" : "" %>><liferay-ui:message key="everything" /></option>
+	<option value="<%= group.getGroupId() %>" <%= (groupId != 0) ? "selected" : "" %>><liferay-ui:message key='<%= "this-" + (group.isOrganization() ? "organization" : "community") %>' /></option>
+</select>
+
+<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<liferay-ui:message key="search" />" type="image" />
+
 <aui:script>
 	function <%= randomNamespace %><%= namespace %>search() {
 		var keywords = document.<%= randomNamespace %><%= namespace %>fm.<%= namespace %>keywords.value;
@@ -51,13 +61,3 @@ portletURL.setParameter("struts_action", "/search/search");
 		}
 	}
 </aui:script>
-
-<form action="<%= portletURL.toString() %>" method="post" name="<%= randomNamespace %><%= namespace %>fm" onSubmit="<%= randomNamespace %><%= namespace %>search(); return false;">
-<input name="<%= namespace %>keywords" size="30" type="text" value="<%= HtmlUtil.escapeAttribute(keywords) %>" />
-
-<select name="<%= namespace %>groupId">
-	<option value="0" <%= (groupId == 0) ? "selected" : "" %>><liferay-ui:message key="everything" /></option>
-	<option value="<%= group.getGroupId() %>" <%= (groupId != 0) ? "selected" : "" %>><liferay-ui:message key='<%= "this-" + (group.isOrganization() ? "organization" : "community") %>' /></option>
-</select>
-
-<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<liferay-ui:message key="search" />" type="image" />
