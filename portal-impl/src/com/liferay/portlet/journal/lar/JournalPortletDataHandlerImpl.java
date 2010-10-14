@@ -292,9 +292,22 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static String exportDLFileEntries(
-		PortletDataContext context, Element foldersElement,
-		Element fileEntriesElement, Element fileRanksElement,
-		Element entityElement, String content, boolean checkDateRange) {
+			PortletDataContext context, Element foldersElement,
+			Element fileEntriesElement, Element fileRanksElement,
+			Element entityElement, String content, boolean checkDateRange)
+		throws Exception {
+
+		Group group = GroupLocalServiceUtil.getGroup(context.getGroupId());
+
+		if (group.isStagingGroup()) {
+			group = group.getLiveGroup();
+		}
+
+		if (group.isStaged() && !group.isStagedRemotely() &&
+			!group.isStagedPortlet(PortletKeys.DOCUMENT_LIBRARY)) {
+
+			return content;
+		}
 
 		StringBuilder sb = new StringBuilder(content);
 
@@ -478,9 +491,22 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static String exportIGImages(
-		PortletDataContext context, Element foldersElement,
-		Element imagesElement, Element entityElement, String content,
-		boolean checkDateRange) {
+			PortletDataContext context, Element foldersElement,
+			Element imagesElement, Element entityElement, String content,
+			boolean checkDateRange)
+		throws Exception {
+
+		Group group = GroupLocalServiceUtil.getGroup(context.getGroupId());
+
+		if (group.isStagingGroup()) {
+			group = group.getLiveGroup();
+		}
+
+		if (group.isStaged() && !group.isStagedRemotely() &&
+			!group.isStagedPortlet(PortletKeys.IMAGE_GALLERY)) {
+
+			return content;
+		}
 
 		StringBuilder sb = new StringBuilder(content);
 
