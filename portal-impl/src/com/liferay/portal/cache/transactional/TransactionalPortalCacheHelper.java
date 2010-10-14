@@ -141,14 +141,24 @@ public class TransactionalPortalCacheHelper {
 		List<Map<PortalCache, Map<String, Object>>> portalCacheList =
 			_portalCacheListThreadLocal.get();
 
-		return portalCacheList.get(portalCacheList.size() - 1);
+		if (!portalCacheList.isEmpty()) {
+			return portalCacheList.get(portalCacheList.size() - 1);
+		}
+		else {
+			return null;
+		}
 	}
 
 	private static Map<PortalCache, Map<String, Object>> _popPortalCacheMap() {
 		List<Map<PortalCache, Map<String, Object>>> portalCacheList =
 			_portalCacheListThreadLocal.get();
 
-		return portalCacheList.remove(portalCacheList.size() - 1);
+		if (!portalCacheList.isEmpty()) {
+			return portalCacheList.remove(portalCacheList.size() - 1);
+		}
+		else {
+			return null;
+		}
 	}
 
 	private static void _pushPortalCacheMap() {
