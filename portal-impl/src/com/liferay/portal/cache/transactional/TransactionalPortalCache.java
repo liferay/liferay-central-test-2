@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.cache.transactional;
+package com.liferay.portal.cache.transactional;
 
 import com.liferay.portal.kernel.cache.BasePortalCache;
 import com.liferay.portal.kernel.cache.PortalCache;
@@ -43,13 +43,12 @@ public class TransactionalPortalCache extends BasePortalCache {
 	}
 
 	public Object get(String key) {
-		Object result = null;
-		if (TransactionalPortalCacheUtil.enabled()) {
-			result = TransactionalPortalCacheUtil.get(_portalCache, key);
-			if (result == _nullHolder) {
-				return null;
-			}
+		Object result = TransactionalPortalCacheHelper.get(_portalCache, key);
+
+		if (result == _nullHolder) {
+			return null;
 		}
+
 		if (result == null) {
 			result = _portalCache.get(key);
 		}
@@ -58,70 +57,50 @@ public class TransactionalPortalCache extends BasePortalCache {
 	}
 
 	public void put(String key, Object obj) {
-		if (TransactionalPortalCacheUtil.enabled()) {
-			if (obj == null) {
-				obj = _nullHolder;
-			}
-			TransactionalPortalCacheUtil.put(_portalCache, key, obj);
+		if (obj == null) {
+			obj = _nullHolder;
 		}
-		else {
-			_portalCache.put(key, obj);
-		}
+
+		TransactionalPortalCacheHelper.put(_portalCache, key, obj);
 	}
 
 	public void put(String key, Object obj, int timeToLive) {
-		if (TransactionalPortalCacheUtil.enabled()) {
-			if (obj == null) {
-				obj = _nullHolder;
-			}
-			TransactionalPortalCacheUtil.put(_portalCache, key, obj);
+		if (obj == null) {
+			obj = _nullHolder;
 		}
-		else {
-			_portalCache.put(key, obj, timeToLive);
-		}
+
+		TransactionalPortalCacheHelper.put(_portalCache, key, obj);
 	}
 
 	public void put(String key, Serializable obj) {
-		if (TransactionalPortalCacheUtil.enabled()) {
-			if (obj == null) {
-				obj = _nullHolder;
-			}
-			TransactionalPortalCacheUtil.put(_portalCache, key, obj);
+		if (obj == null) {
+			obj = _nullHolder;
 		}
-		else {
-			_portalCache.put(key, obj);
-		}
+
+		TransactionalPortalCacheHelper.put(_portalCache, key, obj);
 	}
 
 	public void put(String key, Serializable obj, int timeToLive) {
-		if (TransactionalPortalCacheUtil.enabled()) {
-			if (obj == null) {
-				obj = _nullHolder;
-			}
-			TransactionalPortalCacheUtil.put(_portalCache, key, obj);
+		if (obj == null) {
+			obj = _nullHolder;
 		}
-		else {
-			_portalCache.put(key, obj, timeToLive);
-		}
+
+		TransactionalPortalCacheHelper.put(_portalCache, key, obj);
 	}
 
 	public void remove(String key) {
-		if (TransactionalPortalCacheUtil.enabled()) {
-			TransactionalPortalCacheUtil.remove(_portalCache, key);
-		}
+		TransactionalPortalCacheHelper.remove(_portalCache, key);
 
 		_portalCache.remove(key);
 	}
 
 	public void removeAll() {
-		if (TransactionalPortalCacheUtil.enabled()) {
-			TransactionalPortalCacheUtil.removeAll(_portalCache);
-		}
+		TransactionalPortalCacheHelper.removeAll(_portalCache);
 
 		_portalCache.removeAll();
 	}
 
-	private Serializable _nullHolder = new String();
+	private static Serializable _nullHolder = new String();
 
 	private PortalCache _portalCache;
 

@@ -14,7 +14,7 @@
 
 package com.liferay.portal.spring.transaction;
 
-import com.liferay.portal.kernel.cache.transactional.TransactionalPortalCacheUtil;
+import com.liferay.portal.cache.transactional.TransactionalPortalCacheHelper;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -77,7 +77,7 @@ public class TransactionInterceptor
 		boolean newTransaction = transactionStatus.isNewTransaction();
 
 		if (newTransaction) {
-			TransactionalPortalCacheUtil.begin();
+			TransactionalPortalCacheHelper.begin();
 		}
 
 		Object returnValue = null;
@@ -87,7 +87,7 @@ public class TransactionInterceptor
 		}
 		catch (Throwable throwable) {
 			if (newTransaction) {
-				TransactionalPortalCacheUtil.rollback();
+				TransactionalPortalCacheHelper.rollback();
 			}
 
 			completeTransactionAfterThrowing(transactionInfo, throwable);
@@ -101,7 +101,7 @@ public class TransactionInterceptor
 		commitTransactionAfterReturning(transactionInfo);
 
 		if (newTransaction) {
-			TransactionalPortalCacheUtil.commit();
+			TransactionalPortalCacheHelper.commit();
 		}
 
 		return returnValue;
