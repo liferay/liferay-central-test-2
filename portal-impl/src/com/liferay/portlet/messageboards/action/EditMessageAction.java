@@ -111,7 +111,7 @@ public class EditMessageAction extends PortletAction {
 					(workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT)) {
 
 					redirect = getSaveAndContinueRedirect(
-						actionRequest, actionResponse, message);
+						actionRequest, actionResponse, message, redirect);
 				}
 
 				sendRedirect(actionRequest, actionResponse, redirect);
@@ -177,7 +177,7 @@ public class EditMessageAction extends PortletAction {
 
 	protected String getSaveAndContinueRedirect(
 		ActionRequest actionRequest, ActionResponse actionResponse,
-		MBMessage message) {
+		MBMessage message, String redirect) {
 
 		boolean preview = ParamUtil.getBoolean(actionRequest, "preview");
 
@@ -189,6 +189,7 @@ public class EditMessageAction extends PortletAction {
 		portletURL.setParameter(
 			"messageId", String.valueOf(message.getMessageId()));
 		portletURL.setParameter("preview", String.valueOf(preview));
+		portletURL.setParameter("redirect", redirect);
 
 		return portletURL.toString();
 	}
