@@ -19,12 +19,11 @@ import com.liferay.portal.kernel.deploy.sandbox.SandboxDeployException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.util.TextFormatter;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,6 +37,7 @@ public abstract class BaseSandboxHandler implements SandboxHandler {
 	public BaseSandboxHandler(Deployer deployer) {
 		_deployer = deployer;
 		_engineHostDir = getEngineHostDir();
+		_pluginType = getPluginType();
 	}
 
 	public void createContextXml(File dir) throws IOException {
@@ -59,13 +59,12 @@ public abstract class BaseSandboxHandler implements SandboxHandler {
 		FileUtil.write(contextXml, sb.toString());
 	}
 
-	public void createPluginPackageProperties(
-			File dir, String pluginPackageName)
+	public void createPluginPackageProperties(File dir, String pluginName)
 		throws IOException {
 
 		StringBundler sb = new StringBundler(10);
 
-		sb.append("name=" + pluginPackageName + "\n");
+		sb.append("name=" + pluginName + "\n");
 		sb.append("module-group-id=liferay\n");
 		sb.append("module-incremental-version=1\n");
 		sb.append("tags=\n");
@@ -98,13 +97,13 @@ public abstract class BaseSandboxHandler implements SandboxHandler {
 				_log.info("Deploying " + dirName);
 			}
 
-			clonePlugin(dir);
+			String pluginName = getPluginName(dirName);
 
-			String pluginPackageName = getPluginPackageName(dirName);
-
-			createPluginPackageProperties(dir, pluginPackageName);
+			createPluginPackageProperties(dir, pluginName);
 
 			PluginPackage pluginPackage = _deployer.readPluginPackage(dir);
+
+			clonePlugin(dir, pluginPackage);
 
 			String displayName = getDisplayName(dirName);
 
@@ -128,28 +127,23 @@ public abstract class BaseSandboxHandler implements SandboxHandler {
 	}
 
 	public String getDisplayName(String dirName) {
-		String displayName = dirName.substring(0, dirName.length() - 6);
+		String displayName = dirName.substring(
+			0, dirName.length() - (_pluginType.length() + 1));
 
 		StringBundler sb = new StringBundler(5);
 
 		sb.append(displayName);
-		sb.append(CharPool.DASH);
 		sb.append(SANDBOX_MARKER);
-		sb.append(StringPool.DASH);
-		sb.append(getPluginType());
+		sb.append(_pluginType);
 
 		return sb.toString();
 	}
 
-	public String getPluginPackageName(String dirName) {
-		String pluginPackageName = dirName.substring(0, dirName.length() - 6);
+	public String getPluginName(String dirName) {
+		String pluginName = dirName.substring(
+			0, dirName.length() - (_pluginType.length() + 1));
 
-		pluginPackageName = StringUtil.replace(
-			pluginPackageName,
-			new String[] {StringPool.UNDERLINE, StringPool.MINUS},
-			new String[] {StringPool.SPACE, StringPool.SPACE});
-
-		return StringUtil.upperCaseFirstLetter(pluginPackageName);
+		return TextFormatter.format(pluginName, TextFormatter.J);
 	}
 
 	public boolean isEnabled(File dir) {
@@ -159,7 +153,7 @@ public abstract class BaseSandboxHandler implements SandboxHandler {
 
 		String dirName = dir.getName();
 
-		if (!dirName.endsWith(StringPool.DASH.concat(getPluginType()))) {
+		if (!dirName.endsWith(StringPool.DASH.concat(_pluginType))) {
 			return false;
 		}
 
@@ -185,7 +179,8 @@ public abstract class BaseSandboxHandler implements SandboxHandler {
 		}
 	}
 
-	protected abstract void clonePlugin(File dir);
+	protected abstract void clonePlugin(File dir, PluginPackage pluginPackage)
+		throws Exception;
 
 	protected File getEngineHostDir() {
 		if (!ServerDetector.isTomcat()) {
@@ -213,5 +208,6 @@ public abstract class BaseSandboxHandler implements SandboxHandler {
 
 	private Deployer _deployer;
 	private File _engineHostDir;
+	private String _pluginType;
 
 }

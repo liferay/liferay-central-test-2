@@ -24,7 +24,7 @@ import java.io.File;
  */
 public interface SandboxHandler {
 
-	public static final String SANDBOX_MARKER = "SANDBOX";
+	public static final String SANDBOX_MARKER = "-SANDBOX-";
 
 	public void deploy(File dir) throws SandboxDeployException;
 

@@ -15,6 +15,7 @@
 package com.liferay.portal.deploy.sandbox;
 
 import com.liferay.portal.kernel.deploy.Deployer;
+import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.ant.CopyTask;
 
@@ -30,7 +31,9 @@ public class ThemeSandboxHandler extends BaseSandboxHandler {
 		super(deployer);
 	}
 
-	protected void clonePlugin(File dir) {
+	protected void clonePlugin(File dir, PluginPackage pluginPackage)
+		throws Exception {
+
 		String portalWebDir = PortalUtil.getPortalWebDir();
 
 		CopyTask.copyDirectory(

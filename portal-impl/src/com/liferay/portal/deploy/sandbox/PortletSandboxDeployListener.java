@@ -16,9 +16,8 @@ package com.liferay.portal.deploy.sandbox;
 
 import com.liferay.portal.kernel.deploy.sandbox.SandboxDeployException;
 import com.liferay.portal.kernel.deploy.sandbox.SandboxDeployListener;
-import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.tools.deploy.ThemeDeployer;
+import com.liferay.portal.tools.deploy.PortletDeployer;
 import com.liferay.portal.util.PortalUtil;
 
 import java.io.File;
@@ -29,17 +28,23 @@ import java.util.ArrayList;
  * @author Igor Spasic
  * @author Brian Wing Shun Chan
  */
-public class ThemeSandboxDeployListener
-	extends ThemeDeployer implements SandboxDeployListener {
+public class PortletSandboxDeployListener
+	extends PortletDeployer implements SandboxDeployListener {
 
-	public ThemeSandboxDeployListener() {
-		_sandboxHandler = new ThemeSandboxHandler(this);
+	public PortletSandboxDeployListener() {
+		_sandboxHandler = new PortletSandboxHandler(this);
 
 		appServerType = ServerDetector.getServerId();
 
 		String portalWebDir = PortalUtil.getPortalWebDir();
 
+		auiTaglibDTD = portalWebDir + "/WEB-INF/tld/liferay-aui.tld";
+		portletTaglibDTD = portalWebDir + "/WEB-INF/tld/liferay-portlet.tld";
+		portletExtTaglibDTD =
+			portalWebDir + "/WEB-INF/tld/liferay-portlet-ext.tld";
+		securityTaglibDTD = portalWebDir + "/WEB-INF/tld/liferay-security.tld";
 		themeTaglibDTD = portalWebDir + "/WEB-INF/tld/liferay-theme.tld";
+		uiTaglibDTD = portalWebDir + "/WEB-INF/tld/liferay-ui.tld";
 		utilTaglibDTD = portalWebDir + "/WEB-INF/tld/liferay-util.tld";
 
 		jars = new ArrayList<String>();
@@ -48,19 +53,9 @@ public class ThemeSandboxDeployListener
 
 		jars.add(portalLibDir + "/commons-logging.jar");
 		jars.add(portalLibDir + "/log4j.jar");
+		jars.add(portalLibDir + "/util-bridges.jar");
 		jars.add(portalLibDir + "/util-java.jar");
 		jars.add(portalLibDir + "/util-taglib.jar");
-	}
-
-	public void copyXmls(
-			File srcFile, String displayName, PluginPackage pluginPackage)
-		throws Exception {
-
-		super.copyXmls(srcFile, displayName, pluginPackage);
-
-		if (appServerType.equals(ServerDetector.TOMCAT_ID)) {
-			copyDependencyXml("context.xml", srcFile + "/META-INF");
-		}
 	}
 
 	public void deploy(File dir) throws SandboxDeployException {

@@ -79,7 +79,6 @@ public class AlloyPortlet extends GenericPortlet {
 	}
 
 	protected Map<String, String> getDefaultRouteParameters() {
-		return _defaultRouteParameters;
 		/*Map<String, String> defaultRouteParameters =
 			new HashMap<String, String[]>();
 
@@ -87,6 +86,8 @@ public class AlloyPortlet extends GenericPortlet {
 		defaultRouteParameters.put("action", new String[] {"index"});
 
 		return defaultRouteParameters;*/
+
+		return _defaultRouteParameters;
 	}
 
 	protected String getPath(PortletRequest portletRequest) {

@@ -18,10 +18,24 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 
 import java.io.File;
 
+import java.util.Map;
+
 /**
  * @author Brian Wing Shun Chan
  */
 public interface Deployer {
+
+	public void copyDependencyXml(String fileName, String targetDir)
+		throws Exception;
+
+	public void copyDependencyXml(
+			String fileName, String targetDir, Map<String, String> filterMap)
+		throws Exception;
+
+	public void copyDependencyXml(
+			String fileName, String targetDir, Map<String, String> filterMap,
+			boolean overwrite)
+		throws Exception;
 
 	public void copyJars(File srcFile, PluginPackage pluginPackage)
 		throws Exception;

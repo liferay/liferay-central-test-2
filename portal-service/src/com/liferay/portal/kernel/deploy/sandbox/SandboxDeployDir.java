@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.deploy.sandbox;
 import com.liferay.portal.kernel.io.DirectoryFilter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 
 import java.io.File;
@@ -81,6 +82,16 @@ public class SandboxDeployDir {
 		if (_interval > 0) {
 			_existingDirs = ListUtil.fromArray(
 				_deployDir.listFiles(_directoryFilter));
+
+			Iterator<File> itr = _existingDirs.iterator();
+
+			while (itr.hasNext()) {
+				File dir = itr.next();
+
+				if (!FileUtil.exists(dir + "/WEB-INF/web.xml")) {
+					itr.remove();
+				}
+			}
 
 			try {
 				Thread currentThread = Thread.currentThread();
