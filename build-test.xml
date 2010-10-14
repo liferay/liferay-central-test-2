@@ -1826,8 +1826,6 @@ file.
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
 
-		<property name="temp.dir" value="temp\${db.db2.schema}\${tstamp.value}\" />
-
 		<copy file="${sql.dir}${sql.file}" tofile="${sql.file}" />
 
 		<replace file="${sql.file}">
@@ -1837,19 +1835,19 @@ file.
 		</replace>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.db2.host} cmd.exe /c mkdir C:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.db2.host} cmd.exe /c mkdir C:\${tstamp.value}" />
 		</exec>
 
 		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${sql.file} ${vm.username}@${db.db2.host}:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${sql.file} ${vm.username}@${db.db2.host}:\${tstamp.value}" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.db2.host} cmd.exe /c db2cmd /c /w /i /t db2 -f C:\${temp.dir}\${sql.file} -td;" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.db2.host} cmd.exe /c db2cmd /c /w /i /t db2 -f C:\${tstamp.value}\${sql.file} -td;" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.db2.host} cmd.exe /c rmdir /q /s C:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.db2.host} cmd.exe /c rmdir /q /s C:\${tstamp.value}" />
 		</exec>
 
 		<delete file="${sql.file}" />
@@ -1869,12 +1867,6 @@ file.
 				<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
 			</then>
 			<else>
-				<tstamp>
-					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-				</tstamp>
-
-				<property name="temp.dir" value="temp\${db.mysql.schema}\${tstamp.value}\" />
-
 				<copy file="${sql.dir}${sql.file}" tofile="${sql.file}" />
 
 				<replace file="${sql.file}">
@@ -1912,22 +1904,20 @@ file.
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
 
-		<property name="temp.dir" value="temp\${db.oracle.username}\${tstamp.value}" />
-
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.oracle.host} cmd.exe /c mkdir C:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.oracle.host} cmd.exe /c mkdir C:\${tstamp.value}" />
 		</exec>
 
 		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${sql.dir}${sql.file} ${vm.username}@${db.oracle.host}:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${sql.dir}${sql.file} ${vm.username}@${db.oracle.host}:\${tstamp.value}" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.oracle.host} sqlplus system/password @C:\${temp.dir}\${sql.file} ${db.oracle.username} ${db.oracle.password}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.oracle.host} sqlplus system/password @C:\${tstamp.value}\${sql.file} ${db.oracle.username} ${db.oracle.password}" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.oracle.host} cmd.exe /c rmdir /q /s C:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.oracle.host} cmd.exe /c rmdir /q /s C:\${tstamp.value}" />
 		</exec>
 	</target>
 
@@ -1951,8 +1941,6 @@ file.
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
 
-		<property name="temp.dir" value="temp\${db.postgresql.schema}\${tstamp.value}\" />
-
 		<copy file="${sql.dir}${sql.file}" tofile="${sql.file}" />
 
 		<replace file="${sql.file}">
@@ -1962,19 +1950,19 @@ file.
 		</replace>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.postgresql.host} cmd.exe /c mkdir C:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.postgresql.host} cmd.exe /c mkdir C:\${tstamp.value}" />
 		</exec>
 
 		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${sql.file} ${vm.username}@${db.postgresql.host}:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${sql.file} ${vm.username}@${db.postgresql.host}:\${tstamp.value}" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.postgresql.host} C:\Progra~1\PostgreSQL\8.4\bin\psql.exe -U ${db.postgresql.username} -f C:\${temp.dir}\${sql.file}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.postgresql.host} C:\Progra~1\PostgreSQL\8.4\bin\psql.exe -U ${db.postgresql.username} -f C:\${tstamp.value}\${sql.file}" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.postgresql.host} cmd.exe /c rmdir /q /s C:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.postgresql.host} cmd.exe /c rmdir /q /s C:\${tstamp.value}" />
 		</exec>
 
 		<delete file="${sql.file}" />
@@ -2000,8 +1988,6 @@ file.
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
 
-		<property name="temp.dir" value="temp\${db.sql-server.schema}\${tstamp.value}\" />
-
 		<copy file="${sql.dir}${sql.file}" tofile="${sql.file}" />
 
 		<replace file="${sql.file}">
@@ -2011,19 +1997,19 @@ file.
 		</replace>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.sql-server.host} cmd.exe /c mkdir C:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.sql-server.host} cmd.exe /c mkdir C:\${tstamp.value}" />
 		</exec>
 
 		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${sql.file} ${vm.username}@${db.sql-server.host}:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${sql.file} ${vm.username}@${db.sql-server.host}:\${tstamp.value}" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.sql-server.host} osql -n -U ${db.sql-server.username} -P ${db.sql-server.password} -i C:\${temp.dir}\${sql.file}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.sql-server.host} osql -n -U ${db.sql-server.username} -P ${db.sql-server.password} -i C:\${tstamp.value}\${sql.file}" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.sql-server.host} cmd.exe /c rmdir /q /s C:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.sql-server.host} cmd.exe /c rmdir /q /s C:\${tstamp.value}" />
 		</exec>
 
 		<delete file="${sql.file}" />
@@ -2049,8 +2035,6 @@ file.
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
 
-		<property name="temp.dir" value="temp\${db.sybase.schema}\${tstamp.value}\" />
-
 		<copy file="${sql.dir}${sql.file}" tofile="${sql.file}" />
 
 		<replace file="${sql.file}">
@@ -2061,19 +2045,19 @@ file.
 		</replace>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.sybase.host} cmd.exe /c mkdir C:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.sybase.host} cmd.exe /c mkdir C:\${tstamp.value}" />
 		</exec>
 
 		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${sql.file} ${vm.username}@${db.sybase.host}:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${sql.file} ${vm.username}@${db.sybase.host}:\${tstamp.value}" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.sybase.host} isql -U ${db.sybase.username} -P ${db.sybase.password} -i C:\${temp.dir}\${sql.file}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.sybase.host} isql -U ${db.sybase.username} -P ${db.sybase.password} -i C:\${tstamp.value}\${sql.file}" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.sybase.host} cmd.exe /c rmdir /q /s C:\${temp.dir}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.sybase.host} cmd.exe /c rmdir /q /s C:\${tstamp.value}" />
 		</exec>
 
 		<delete file="${sql.file}" />
