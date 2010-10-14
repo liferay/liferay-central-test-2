@@ -46,6 +46,7 @@ import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Theme;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
@@ -278,10 +279,20 @@ public class LayoutExporter {
 
 		Layout firstLayout = layouts.get(0);
 
+		Group group = GroupLocalServiceUtil.getGroup(context.getGroupId());
+
+		if (group.isStagingGroup()) {
+			group = group.getLiveGroup();
+		}
+
 		List<Portlet> portlets = getAlwaysExportablePortlets(companyId);
 
 		for (Portlet portlet : portlets) {
 			String portletId = portlet.getRootPortletId();
+
+			if (!group.isStagedPortlet(portletId)) {
+				continue;
+			}
 
 			if (portlet.isScopeable() && firstLayout.hasScopeGroup()) {
 				String key = PortletPermissionUtil.getPrimaryKey(

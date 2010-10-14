@@ -125,6 +125,10 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 				<liferay-ui:message key="staged-portlets-help" />
 			</div>
 
+			<div class="portlet-msg-info">
+				<liferay-ui:message key="always-exported-portlets-help" />
+			</div>
+
 			<%
 			List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId());
 
@@ -142,9 +146,15 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 				}
 
 				boolean isStaged = GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(StagingConstants.STAGED_PORTLET + curPortlet.getRootPortletId()), portletDataHandler.isPublishToLiveByDefault());
+
+				String includedInEveryPublish = StringPool.BLANK;
+
+				if (portletDataHandler.isAlwaysExportable()) {
+					includedInEveryPublish = " (*)";
+				}
 			%>
 
-				<aui:input disabled="<%= portletDataHandler.isAlwaysExportable() %>" inlineLabel="right" label="<%= PortalUtil.getPortletTitle(curPortlet, application, locale) %>" name='<%= StagingConstants.STAGED_PORTLET + curPortlet.getRootPortletId() %>' type="checkbox" value="<%= isStaged %>" />
+				<aui:input inlineLabel="right" label="<%= PortalUtil.getPortletTitle(curPortlet, application, locale) + includedInEveryPublish %>" name='<%= StagingConstants.STAGED_PORTLET + curPortlet.getRootPortletId() %>' type="checkbox" value="<%= isStaged %>" />
 
 			<%
 			}
