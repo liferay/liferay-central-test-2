@@ -45,6 +45,7 @@ if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDA
 	}
 
 	tabs2NamesList.add("sitemap");
+	tabs2NamesList.add("robots");
 	tabs2NamesList.add("monitoring");
 
 	Group guestGroup = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupConstants.GUEST);
@@ -299,6 +300,73 @@ if (!tabs2.equals("pages")) {
 				<aui:a href='<%= "https://siteexplorer.search.yahoo.com/submit/ping?sitemap=" + HtmlUtil.escapeURL(sitemapUrl) %>' target="_blank">Yahoo!</aui:a> (<liferay-ui:message key="requires-login" />)
 			</li>
 		</ul>
+	</c:when>
+	<c:when test='<%= tabs2.equals("robots") %>'>
+		<%
+		LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroupId, false);
+
+		String defaultPublicRobots = RobotsUtil.getRobots(publicLayoutSet);
+		String publicRobots = ParamUtil.getString(request, "robots", defaultPublicRobots);
+
+		LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroupId, true);
+
+		String defaultPrivateRobots = RobotsUtil.getRobots(privateLayoutSet);
+		String privateRobots = ParamUtil.getString(request, "robots", defaultPrivateRobots);
+		%>
+
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="set-the-robots-txt-for-public-pages" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<c:choose>
+					<c:when test="<%= Validator.isNotNull(publicLayoutSet.getVirtualHost()) %>">
+						<textarea name="<portlet:namespace />publicRobots" cols="60" rows="15"><%= HtmlUtil.escape(publicRobots) %></textarea>
+					</c:when>
+					<c:otherwise>
+						<div class="portlet-msg-info">
+							<liferay-ui:message key="please-set-the-virtual-host-before-you-set-the-robots-txt" />
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="set-the-robots-txt-for-private-pages" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<c:choose>
+					<c:when test="<%= Validator.isNotNull(privateLayoutSet.getVirtualHost()) %>">
+						<textarea name="<portlet:namespace />privateRobots" cols="60" rows="15"><%= HtmlUtil.escape(privateRobots) %></textarea>
+					</c:when>
+					<c:otherwise>
+						<div class="portlet-msg-info">
+							<liferay-ui:message key="please-set-the-virtual-host-before-you-set-the-robots-txt" />
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<br />
+			</td>
+		</tr>
+		</table>
+
+		<input type="button" value="<liferay-ui:message key="update-robots-txt" />" onClick="<portlet:namespace />updateRobots();" />
+
 	</c:when>
 	<c:when test='<%= tabs2.equals("monitoring") %>'>
 		<liferay-ui:message key="set-the-google-analytics-id-that-will-be-used-for-this-set-of-pages" />

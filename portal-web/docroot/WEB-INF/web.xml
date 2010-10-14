@@ -965,6 +965,11 @@
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet>
+		<servlet-name>Robots Servlet</servlet-name>
+		<servlet-class>com.liferay.portal.servlet.RobotsServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet>
 		<servlet-name>Sharepoint Document Workspace Servlet</servlet-name>
 		<servlet-class>com.liferay.portal.sharepoint.SharepointDocumentWorkspaceServlet</servlet-class>
 		<load-on-startup>2</load-on-startup>
@@ -1336,6 +1341,10 @@
 	<servlet-mapping>
 		<servlet-name>Portlet Bridge Servlet</servlet-name>
 		<url-pattern>/pbhs/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Robots Servlet</servlet-name>
+		<url-pattern>/robots.txt</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Sitemap Servlet</servlet-name>

@@ -571,6 +571,16 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 
 	Liferay.provide(
 		window,
+		'<portlet:namespace />updateRobots',
+		function() {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "robots";
+			submitForm(document.<portlet:namespace />fm);
+		},
+		['aui-base']
+	);
+
+	Liferay.provide(
+		window,
 		'<portlet:namespace />updateStaging',
 		function() {
 			var A = AUI();

@@ -47,6 +47,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutPrototype;
+import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -56,6 +57,7 @@ import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutPrototypeServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
+import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -154,6 +156,9 @@ public class EditPagesAction extends PortletAction {
 			}
 			else if (cmd.equals("publish_to_remote")) {
 				StagingUtil.publishToRemote(actionRequest);
+			}
+			else if (cmd.equals("robots")) {
+				updateRobots(actionRequest);
 			}
 			else if (cmd.equals("schedule_copy_from_live")) {
 				StagingUtil.scheduleCopyFromLive(actionRequest);
@@ -716,6 +721,37 @@ public class EditPagesAction extends PortletAction {
 		props.setProperty("googleAnalyticsId", googleAnalyticsId);
 
 		GroupServiceUtil.updateGroup(liveGroupId, liveGroup.getTypeSettings());
+	}
+
+	protected void updateRobots(ActionRequest actionRequest)
+		throws Exception {
+
+		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
+
+		String publicRobots = ParamUtil.getString(actionRequest, "publicRobots");
+		String privateRobots = ParamUtil.getString(
+			actionRequest, "privateRobots");
+
+		updateRobots(liveGroupId, false, publicRobots);
+		updateRobots(liveGroupId, true, privateRobots);
+	}
+
+	protected void updateRobots(
+			long groupId, boolean privateLayout, String robots)
+		throws Exception {
+
+		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+				groupId, privateLayout);
+
+		UnicodeProperties settingsProperties =
+			layoutSet.getSettingsProperties();
+
+		settingsProperties.setProperty(privateLayout +"-robots.txt", robots);
+
+		layoutSet.setSettingsProperties(settingsProperties);
+
+		LayoutSetLocalServiceUtil.updateSettings(
+			groupId, privateLayout, layoutSet.getSettings());
 	}
 
 	protected void updateVirtualHost(ActionRequest actionRequest)
