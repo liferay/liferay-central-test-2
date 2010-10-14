@@ -46,6 +46,7 @@
 <%@ page import="com.liferay.portal.OrganizationParentException" %>
 <%@ page import="com.liferay.portal.PasswordPolicyNameException" %>
 <%@ page import="com.liferay.portal.PhoneNumberException" %>
+<%@ page import="com.liferay.portal.RequiredGroupException" %>
 <%@ page import="com.liferay.portal.RequiredOrganizationException" %>
 <%@ page import="com.liferay.portal.RequiredRoleException" %>
 <%@ page import="com.liferay.portal.RequiredUserException" %>
