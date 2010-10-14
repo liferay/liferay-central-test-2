@@ -68,9 +68,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public MBMessage addDiscussionMessage(
 			long groupId, String className, long classPK,
-			String permissionClassName, long permissionClassPK, long threadId,
-			long parentMessageId, String subject, String body,
-			ServiceContext serviceContext)
+			String permissionClassName, long permissionClassPK,
+			long permissionOwnerId, long threadId, long parentMessageId,
+			String subject, String body, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		User user = getGuestOrUser();
@@ -78,7 +78,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		MBDiscussionPermission.check(
 			getPermissionChecker(), user.getCompanyId(),
 			serviceContext.getScopeGroupId(), permissionClassName,
-			permissionClassPK, ActionKeys.ADD_DISCUSSION);
+			permissionClassPK, permissionOwnerId, ActionKeys.ADD_DISCUSSION);
 
 		return mbMessageLocalService.addDiscussionMessage(
 			user.getUserId(), null, groupId, className, classPK, threadId,
@@ -153,7 +153,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public void deleteDiscussionMessage(
 			long groupId, String className, long classPK,
-			String permissionClassName, long permissionClassPK, long messageId)
+			String permissionClassName, long permissionClassPK, long messageId,
+			long permissionOwnerId)
 		throws PortalException, SystemException {
 
 		User user = getUser();
@@ -161,7 +162,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		MBDiscussionPermission.check(
 			getPermissionChecker(), user.getCompanyId(), groupId,
 			permissionClassName, permissionClassPK, messageId,
-			ActionKeys.DELETE_DISCUSSION);
+			permissionOwnerId, ActionKeys.DELETE_DISCUSSION);
 
 		mbMessageLocalService.deleteDiscussionMessage(messageId);
 	}
@@ -526,8 +527,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public MBMessage updateDiscussionMessage(
 			String className, long classPK, String permissionClassName,
-			long permissionClassPK, long messageId, String subject, String body,
-			ServiceContext serviceContext)
+			long permissionClassPK, long messageId, long permissionOwnerId,
+			String subject, String body, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		User user = getUser();
@@ -535,7 +536,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		MBDiscussionPermission.check(
 			getPermissionChecker(), user.getCompanyId(),
 			serviceContext.getScopeGroupId(), permissionClassName,
-			permissionClassPK, messageId, ActionKeys.UPDATE_DISCUSSION);
+			permissionClassPK, messageId, permissionOwnerId,
+			ActionKeys.UPDATE_DISCUSSION);
 
 		return mbMessageLocalService.updateDiscussionMessage(
 			getUserId(), messageId, subject, body,

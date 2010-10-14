@@ -57,8 +57,8 @@ public class MBMessageServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String className,
 		long classPK, java.lang.String permissionClassName,
-		long permissionClassPK, long threadId, long parentMessageId,
-		java.lang.String subject, java.lang.String body,
+		long permissionClassPK, long permissionOwnerId, long threadId,
+		long parentMessageId, java.lang.String subject, java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -68,7 +68,8 @@ public class MBMessageServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					className, classPK, permissionClassName, permissionClassPK,
-					threadId, parentMessageId, subject, body, serviceContext);
+					permissionOwnerId, threadId, parentMessageId, subject,
+					body, serviceContext);
 
 			Object returnObj = null;
 
@@ -186,7 +187,7 @@ public class MBMessageServiceHttp {
 	public static void deleteDiscussionMessage(HttpPrincipal httpPrincipal,
 		long groupId, java.lang.String className, long classPK,
 		java.lang.String permissionClassName, long permissionClassPK,
-		long messageId)
+		long messageId, long permissionOwnerId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -196,7 +197,7 @@ public class MBMessageServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					className, classPK, permissionClassName, permissionClassPK,
-					messageId);
+					messageId, permissionOwnerId);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
@@ -739,7 +740,8 @@ public class MBMessageServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
 		HttpPrincipal httpPrincipal, java.lang.String className, long classPK,
 		java.lang.String permissionClassName, long permissionClassPK,
-		long messageId, java.lang.String subject, java.lang.String body,
+		long messageId, long permissionOwnerId, java.lang.String subject,
+		java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -750,7 +752,7 @@ public class MBMessageServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK, permissionClassName, permissionClassPK,
-					messageId, subject, body, serviceContext);
+					messageId, permissionOwnerId, subject, body, serviceContext);
 
 			Object returnObj = null;
 
@@ -825,7 +827,7 @@ public class MBMessageServiceHttp {
 	private static final Class<?>[] _addDiscussionMessageParameterTypes0 = new Class[] {
 			long.class, java.lang.String.class, long.class,
 			java.lang.String.class, long.class, long.class, long.class,
-			java.lang.String.class, java.lang.String.class,
+			long.class, java.lang.String.class, java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addMessageParameterTypes1 = new Class[] {
@@ -843,7 +845,7 @@ public class MBMessageServiceHttp {
 		};
 	private static final Class<?>[] _deleteDiscussionMessageParameterTypes3 = new Class[] {
 			long.class, java.lang.String.class, long.class,
-			java.lang.String.class, long.class, long.class
+			java.lang.String.class, long.class, long.class, long.class
 		};
 	private static final Class<?>[] _deleteMessageParameterTypes4 = new Class[] {
 			long.class
@@ -899,7 +901,7 @@ public class MBMessageServiceHttp {
 		};
 	private static final Class<?>[] _updateDiscussionMessageParameterTypes18 = new Class[] {
 			java.lang.String.class, long.class, java.lang.String.class,
-			long.class, long.class, java.lang.String.class,
+			long.class, long.class, long.class, java.lang.String.class,
 			java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};

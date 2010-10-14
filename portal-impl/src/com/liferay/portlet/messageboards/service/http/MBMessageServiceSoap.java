@@ -68,14 +68,15 @@ public class MBMessageServiceSoap {
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap addDiscussionMessage(
 		long groupId, java.lang.String className, long classPK,
 		java.lang.String permissionClassName, long permissionClassPK,
-		long threadId, long parentMessageId, java.lang.String subject,
-		java.lang.String body,
+		long permissionOwnerId, long threadId, long parentMessageId,
+		java.lang.String subject, java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addDiscussionMessage(groupId,
 					className, classPK, permissionClassName, permissionClassPK,
-					threadId, parentMessageId, subject, body, serviceContext);
+					permissionOwnerId, threadId, parentMessageId, subject,
+					body, serviceContext);
 
 			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
 		}
@@ -133,10 +134,11 @@ public class MBMessageServiceSoap {
 	public static void deleteDiscussionMessage(long groupId,
 		java.lang.String className, long classPK,
 		java.lang.String permissionClassName, long permissionClassPK,
-		long messageId) throws RemoteException {
+		long messageId, long permissionOwnerId) throws RemoteException {
 		try {
 			MBMessageServiceUtil.deleteDiscussionMessage(groupId, className,
-				classPK, permissionClassName, permissionClassPK, messageId);
+				classPK, permissionClassName, permissionClassPK, messageId,
+				permissionOwnerId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -261,13 +263,14 @@ public class MBMessageServiceSoap {
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap updateDiscussionMessage(
 		java.lang.String className, long classPK,
 		java.lang.String permissionClassName, long permissionClassPK,
-		long messageId, java.lang.String subject, java.lang.String body,
+		long messageId, long permissionOwnerId, java.lang.String subject,
+		java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateDiscussionMessage(className,
 					classPK, permissionClassName, permissionClassPK, messageId,
-					subject, body, serviceContext);
+					permissionOwnerId, subject, body, serviceContext);
 
 			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
 		}

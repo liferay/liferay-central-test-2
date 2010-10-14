@@ -102,7 +102,7 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 				permissionChecker, _message.getCompanyId(),
 				_message.getGroupId(), _message.getClassName(),
 				_message.getClassPK(), _message.getMessageId(),
-				ActionKeys.UPDATE);
+				_message.getUserId(), ActionKeys.UPDATE);
 		}
 		else {
 			return MBMessagePermission.contains(
@@ -118,7 +118,7 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 				permissionChecker, _message.getCompanyId(),
 				_message.getGroupId(), _message.getClassName(),
 				_message.getClassPK(), _message.getMessageId(),
-				ActionKeys.VIEW);
+				_message.getUserId(), ActionKeys.VIEW);
 		}
 		else {
 			return MBMessagePermission.contains(

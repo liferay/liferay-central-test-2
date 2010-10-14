@@ -131,12 +131,14 @@ public class EditDiscussionAction extends PortletAction {
 			actionRequest, "permissionClassName");
 		long permissionClassPK = ParamUtil.getLong(
 			actionRequest, "permissionClassPK");
+		long permissionOwnerId = ParamUtil.getLong(
+			actionRequest, "permissionOwnerId");
 
 		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
 		MBMessageServiceUtil.deleteDiscussionMessage(
 			groupId, className, classPK, permissionClassName, permissionClassPK,
-			messageId);
+			messageId, permissionOwnerId);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {
@@ -152,6 +154,8 @@ public class EditDiscussionAction extends PortletAction {
 			actionRequest, "permissionClassName");
 		long permissionClassPK = ParamUtil.getLong(
 			actionRequest, "permissionClassPK");
+		long permissionOwnerId = ParamUtil.getLong(
+			actionRequest, "permissionOwnerId");
 
 		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
@@ -172,8 +176,8 @@ public class EditDiscussionAction extends PortletAction {
 
 			message = MBMessageServiceUtil.addDiscussionMessage(
 				serviceContext.getScopeGroupId(), className, classPK,
-				permissionClassName, permissionClassPK, threadId,
-				parentMessageId, subject, body, serviceContext);
+				permissionClassName, permissionClassPK, permissionOwnerId,
+				threadId, parentMessageId, subject, body, serviceContext);
 		}
 		else {
 
@@ -181,7 +185,7 @@ public class EditDiscussionAction extends PortletAction {
 
 			message = MBMessageServiceUtil.updateDiscussionMessage(
 				className, classPK, permissionClassName, permissionClassPK,
-				messageId, subject, body, serviceContext);
+				messageId, permissionOwnerId, subject, body, serviceContext);
 		}
 
 		return message;

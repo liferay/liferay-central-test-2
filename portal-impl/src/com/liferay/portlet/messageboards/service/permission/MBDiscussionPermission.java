@@ -33,12 +33,13 @@ public class MBDiscussionPermission {
 
 	public static void check(
 			PermissionChecker permissionChecker, long companyId, long groupId,
-			String className, long classPK, long messageId, String actionId)
+			String className, long classPK, long messageId, long ownerId,
+			String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(
 				permissionChecker, companyId, groupId, className, classPK,
-				messageId, actionId)) {
+				messageId, ownerId, actionId)) {
 
 			throw new PrincipalException();
 		}
@@ -46,12 +47,12 @@ public class MBDiscussionPermission {
 
 	public static void check(
 			PermissionChecker permissionChecker, long companyId, long groupId,
-			String className, long classPK, String actionId)
+			String className, long classPK, long ownerId, String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(
 				permissionChecker, companyId, groupId, className, classPK,
-				actionId)) {
+				ownerId, actionId)) {
 
 			throw new PrincipalException();
 		}
@@ -59,7 +60,8 @@ public class MBDiscussionPermission {
 
 	public static boolean contains(
 			PermissionChecker permissionChecker, long companyId, long groupId,
-			String className, long classPK, long messageId, String actionId)
+			String className, long classPK, long messageId, long ownerId,
+			String actionId)
 		throws PortalException, SystemException {
 
 		MBMessage message = MBMessageLocalServiceUtil.getMessage(
@@ -77,13 +79,13 @@ public class MBDiscussionPermission {
 		}
 
 		return contains(
-			permissionChecker, companyId, groupId, className, classPK,
+			permissionChecker, companyId, groupId, className, classPK, ownerId,
 			actionId);
 	}
 
 	public static boolean contains(
 			PermissionChecker permissionChecker, long companyId, long groupId,
-			String className, long classPK, String actionId)
+			String className, long classPK, long ownerId, String actionId)
 		throws SystemException {
 
 		List<String> resourceActions = ResourceActionsUtil.getResourceActions(
@@ -97,6 +99,12 @@ public class MBDiscussionPermission {
 				groupId, permissionChecker.getUserId())) {
 
 			return false;
+		}
+
+		if ((ownerId > 0) && permissionChecker.hasOwnerPermission(
+				companyId, className, classPK, ownerId, actionId)) {
+
+			return true;
 		}
 
 		return permissionChecker.hasPermission(

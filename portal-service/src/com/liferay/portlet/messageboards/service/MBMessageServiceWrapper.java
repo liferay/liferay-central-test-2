@@ -31,14 +31,14 @@ public class MBMessageServiceWrapper implements MBMessageService {
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		long groupId, java.lang.String className, long classPK,
 		java.lang.String permissionClassName, long permissionClassPK,
-		long threadId, long parentMessageId, java.lang.String subject,
-		java.lang.String body,
+		long permissionOwnerId, long threadId, long parentMessageId,
+		java.lang.String subject, java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageService.addDiscussionMessage(groupId, className,
-			classPK, permissionClassName, permissionClassPK, threadId,
-			parentMessageId, subject, body, serviceContext);
+			classPK, permissionClassName, permissionClassPK, permissionOwnerId,
+			threadId, parentMessageId, subject, body, serviceContext);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
@@ -70,11 +70,11 @@ public class MBMessageServiceWrapper implements MBMessageService {
 	public void deleteDiscussionMessage(long groupId,
 		java.lang.String className, long classPK,
 		java.lang.String permissionClassName, long permissionClassPK,
-		long messageId)
+		long messageId, long permissionOwnerId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_mbMessageService.deleteDiscussionMessage(groupId, className, classPK,
-			permissionClassName, permissionClassPK, messageId);
+			permissionClassName, permissionClassPK, messageId, permissionOwnerId);
 	}
 
 	public void deleteMessage(long messageId)
@@ -198,13 +198,14 @@ public class MBMessageServiceWrapper implements MBMessageService {
 	public com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
 		java.lang.String className, long classPK,
 		java.lang.String permissionClassName, long permissionClassPK,
-		long messageId, java.lang.String subject, java.lang.String body,
+		long messageId, long permissionOwnerId, java.lang.String subject,
+		java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageService.updateDiscussionMessage(className, classPK,
-			permissionClassName, permissionClassPK, messageId, subject, body,
-			serviceContext);
+			permissionClassName, permissionClassPK, messageId,
+			permissionOwnerId, subject, body, serviceContext);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
