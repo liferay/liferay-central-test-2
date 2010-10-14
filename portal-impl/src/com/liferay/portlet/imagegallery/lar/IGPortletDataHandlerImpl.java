@@ -173,7 +173,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	public boolean isPublishToLiveByDefault() {
-		return PropsValues.DL_PUBLISH_TO_LIVE_BY_DEFAULT;
+		return PropsValues.IG_PUBLISH_TO_LIVE_BY_DEFAULT;
 	}
 
 	protected static void importFolder(
