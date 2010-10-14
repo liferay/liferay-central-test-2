@@ -97,6 +97,8 @@ public interface PropsKeys {
 
 	public static final String ASSET_VOCABULARY_DEFAULT = "asset.vocabulary.default";
 
+	public static final String AUDIT_MESSAGE_COM_LIFERAY_PORTAL_MODEL_LAYOUT_VIEW = "audit.message.com.liferay.portal.model.Layout.VIEW";
+
 	public static final String AUTH_FAILURE = "auth.failure";
 
 	public static final String AUTH_FORWARD_BY_LAST_PATH = "auth.forward.by.last.path";
@@ -816,8 +818,6 @@ public interface PropsKeys {
 	public static final String JSON_SERVICE_INVALID_CLASS_NAMES = "json.service.invalid.class.names";
 
 	public static final String JSP_WRITER_BUFFER_SIZE = "jsp.writer.buffer.size";
-
-	public static final String LAYOUT_AUDIT_ENABLED = "layout.audit.enabled";
 
 	public static final String LAYOUT_CLONE_IMPL = "layout.clone.impl";
 

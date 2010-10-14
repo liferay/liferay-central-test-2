@@ -72,6 +72,8 @@ public class PropsValues {
 
 	public static final String ASSET_VOCABULARY_DEFAULT = PropsUtil.get(PropsKeys.ASSET_VOCABULARY_DEFAULT);
 
+	public static final boolean AUDIT_MESSAGE_COM_LIFERAY_PORTAL_MODEL_LAYOUT_VIEW = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.AUDIT_MESSAGE_COM_LIFERAY_PORTAL_MODEL_LAYOUT_VIEW));
+
 	public static final String[] AUTH_FAILURE = PropsUtil.getArray(PropsKeys.AUTH_FAILURE);
 
 	public static boolean AUTH_FORWARD_BY_LAST_PATH = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.AUTH_FORWARD_BY_LAST_PATH));
@@ -557,8 +559,6 @@ public class PropsValues {
 	public static final String JPA_PROVIDER = PropsUtil.get(PropsKeys.JPA_PROVIDER);
 
 	public static final String[] JSON_SERVICE_INVALID_CLASS_NAMES = PropsUtil.getArray(PropsKeys.JSON_SERVICE_INVALID_CLASS_NAMES);
-
-	public static final boolean LAYOUT_AUDIT_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LAYOUT_AUDIT_ENABLED));
 
 	public static final String LAYOUT_CLONE_IMPL = PropsUtil.get(PropsKeys.LAYOUT_CLONE_IMPL);
 

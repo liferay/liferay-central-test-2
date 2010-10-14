@@ -543,8 +543,9 @@ public class LayoutAction extends Action {
 				session.setAttribute(WebKeys.PREVIOUS_LAYOUT, layout);
 
 				if (themeDisplay.isSignedIn() &&
-					MessageBusUtil.hasMessageListener(DestinationNames.AUDIT) &&
-					PropsValues.LAYOUT_AUDIT_ENABLED) {
+					PropsValues.
+						AUDIT_MESSAGE_COM_LIFERAY_PORTAL_MODEL_LAYOUT_VIEW &&
+					MessageBusUtil.hasMessageListener(DestinationNames.AUDIT)) {
 
 					User user = themeDisplay.getUser();
 
