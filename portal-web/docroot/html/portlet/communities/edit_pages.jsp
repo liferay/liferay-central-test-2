@@ -504,6 +504,11 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		submitForm(document.<portlet:namespace />fm);
 	}
 
+	function <portlet:namespace />updateRobots() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "robots";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
 	Liferay.provide(
 		window,
 		'<portlet:namespace />removePage',
@@ -564,16 +569,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 				document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value += "&" + sectionParam + "=" + sectionName;
 			}
 
-			submitForm(document.<portlet:namespace />fm);
-		},
-		['aui-base']
-	);
-
-	Liferay.provide(
-		window,
-		'<portlet:namespace />updateRobots',
-		function() {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "robots";
 			submitForm(document.<portlet:namespace />fm);
 		},
 		['aui-base']
