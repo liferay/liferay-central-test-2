@@ -25,6 +25,7 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 import com.liferay.portlet.imagegallery.model.IGImage;
@@ -124,6 +125,10 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 		catch (Exception e) {
 			throw new FCKException(e);
 		}
+	}
+
+	protected boolean isStagedData(Group group) {
+		return group.isStagedPortlet(PortletKeys.IMAGE_GALLERY);
 	}
 
 	private void _getFiles(CommandArgument arg, Document doc, Node root)

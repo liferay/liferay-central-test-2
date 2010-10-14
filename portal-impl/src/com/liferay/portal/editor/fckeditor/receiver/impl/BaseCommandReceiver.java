@@ -276,7 +276,15 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			if (group.hasStagingGroup()) {
 				Group stagingGroup = group.getStagingGroup();
 
-				if (stagingGroup.getGroupId() == scopeGroupId) {
+				if (!group.isStagedRemotely() && !isStagedData(group)) {
+					folderEl.setAttribute(
+						"name",
+						group.getGroupId() + " - " +
+							HtmlUtil.escape(stagingGroup.getDescriptiveName()));
+
+					setNameAttribute = true;
+				}
+				else if (stagingGroup.getGroupId() == scopeGroupId) {
 					folderEl.setAttribute(
 						"name",
 						stagingGroup.getGroupId() + " - " +
@@ -305,6 +313,10 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 
 	protected String getSize(long size) {
 		return String.valueOf(Math.ceil(size / 1000));
+	}
+
+	protected boolean isStagedData(Group group) {
+		return true;
 	}
 
 	private Document _createDocument() {

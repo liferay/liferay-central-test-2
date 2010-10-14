@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
@@ -121,6 +122,10 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		catch (Exception e) {
 			throw new FCKException(e);
 		}
+	}
+
+	protected boolean isStagedData(Group group) {
+		return group.isStagedPortlet(PortletKeys.DOCUMENT_LIBRARY);
 	}
 
 	private void _getFiles(CommandArgument arg, Document doc, Node root)
