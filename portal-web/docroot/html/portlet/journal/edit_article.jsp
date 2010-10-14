@@ -511,6 +511,8 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					</c:otherwise>
 				</c:choose>
 
+				<aui:input inlineLabel="left" label="searchable" name="indexable" />
+
 				<c:if test="<%= article == null %>">
 					<aui:field-wrapper cssClass="journal-article-permissions" label="permissions">
 						<liferay-ui:input-permissions
@@ -518,8 +520,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 						/>
 					</aui:field-wrapper>
 				</c:if>
-
-				<aui:input inlineLabel="left" label="searchable" name="indexable" />
 			</div>
 
 			<br />
