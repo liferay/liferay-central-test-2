@@ -27,7 +27,6 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 }
 %>
 
-<liferay-ui:error exception="<%= RequiredGroupException.class %>" message="the-user-related-group-cannot-be-deleted-because-you-are-accessing-the-group" />
 <liferay-ui:error exception="<%= RequiredUserException.class %>" message="you-cannot-delete-or-deactivate-yourself" />
 
 <liferay-util:include page="/html/portlet/enterprise_admin/user/toolbar.jsp">

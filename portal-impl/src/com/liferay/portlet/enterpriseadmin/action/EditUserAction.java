@@ -29,7 +29,6 @@ import com.liferay.portal.NoSuchListTypeException;
 import com.liferay.portal.NoSuchRegionException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PhoneNumberException;
-import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.RequiredUserException;
 import com.liferay.portal.ReservedUserEmailAddressException;
 import com.liferay.portal.ReservedUserScreenNameException;
@@ -223,7 +222,6 @@ public class EditUserAction extends PortletAction {
 					 e instanceof NoSuchListTypeException ||
 					 e instanceof NoSuchRegionException ||
 					 e instanceof PhoneNumberException ||
-					 e instanceof RequiredGroupException ||
 					 e instanceof RequiredUserException ||
 					 e instanceof ReservedUserEmailAddressException ||
 					 e instanceof ReservedUserScreenNameException ||
@@ -246,8 +244,7 @@ public class EditUserAction extends PortletAction {
 					SessionErrors.add(actionRequest, e.getClass().getName(), e);
 				}
 
-				if (e instanceof RequiredGroupException ||
-					e instanceof RequiredUserException) {
+				if (e instanceof RequiredUserException) {
 					actionResponse.sendRedirect(
 						ParamUtil.getString(actionRequest, "redirect"));
 				}
@@ -421,14 +418,6 @@ public class EditUserAction extends PortletAction {
 				UserServiceUtil.updateActive(deleteUserIds[i], active);
 			}
 			else {
-				long scopeGroupId = PortalUtil.getScopeGroupId(actionRequest);
-				Group group = UserServiceUtil.getUserById(deleteUserIds[i])
-					.getGroup();
-
-				if (group != null && scopeGroupId == group.getGroupId()) {
-					throw new RequiredGroupException();
-				}
-				
 				UserServiceUtil.deleteUser(deleteUserIds[i]);
 			}
 		}
