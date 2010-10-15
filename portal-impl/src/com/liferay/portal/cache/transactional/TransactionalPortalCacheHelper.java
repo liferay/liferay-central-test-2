@@ -71,7 +71,7 @@ public class TransactionalPortalCacheHelper {
 		List<Map<PortalCache, Map<String, Object>>> portalCacheList =
 			_portalCacheListThreadLocal.get();
 
-		return !_portalCacheListThreadLocal.isEmpty();
+		return !portalCacheList.isEmpty();
 	}
 
 	public static void rollback() {
