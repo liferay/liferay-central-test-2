@@ -34,6 +34,14 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("categoryId", "0");
 portletURL.setParameter("nodeName", node.getName());
+
+String wikiBaseUrl = "";
+if (strutsAction.length() > 0) {
+	int ndx = strutsAction.indexOf('/', 1);
+	if (ndx != -1) {
+		wikiBaseUrl = strutsAction.substring(0, ndx);
+	}
+}
 %>
 
 <c:if test="<%= portletName.equals(PortletKeys.WIKI_ADMIN) %>">
@@ -89,7 +97,7 @@ portletURL.setParameter("nodeName", node.getName());
 					image="../aui/home"
 					label="<%= true %>"
 					message="<%= WikiPageConstants.FRONT_PAGE %>"
-					url='<%= wikiPage != null && (wikiPage.getTitle().equals(WikiPageConstants.FRONT_PAGE)) ? StringPool.BLANK : frontPageURL.toString() %>'
+					url='<%=strutsAction.length() == 0 || strutsAction.equals(wikiBaseUrl + "/view") ? StringPool.BLANK : frontPageURL.toString() %>'
 				/>
 
 				<%
@@ -101,7 +109,7 @@ portletURL.setParameter("nodeName", node.getName());
 					image="../aui/clock"
 					label="<%= true %>"
 					message="recent-changes"
-					url='<%= strutsAction.equals("/wiki/view_recent_changes") ? StringPool.BLANK : portletURL.toString() %>'
+					url='<%= strutsAction.equals(wikiBaseUrl + "/view_recent_changes") ? StringPool.BLANK : portletURL.toString() %>'
 				/>
 
 				<%
@@ -111,7 +119,7 @@ portletURL.setParameter("nodeName", node.getName());
 				<liferay-ui:icon
 					cssClass="top-link"
 					image="../aui/document" label="<%= true %>"
-					message="all-pages" url='<%= strutsAction.equals("/wiki/view_all_pages") ? StringPool.BLANK : portletURL.toString() %>'
+					message="all-pages" url='<%= strutsAction.equals(wikiBaseUrl + "/view_all_pages") ? StringPool.BLANK : portletURL.toString() %>'
 				/>
 
 				<%
@@ -123,7 +131,7 @@ portletURL.setParameter("nodeName", node.getName());
 					image="../aui/document-b"
 					label="<%= true %>"
 					message="orphan-pages"
-					url='<%= strutsAction.equals("/wiki/view_orphan_pages") ? StringPool.BLANK : portletURL.toString() %>'
+					url='<%= strutsAction.equals(wikiBaseUrl + "/view_orphan_pages") ? StringPool.BLANK : portletURL.toString() %>'
 				/>
 
 				<%
@@ -135,7 +143,7 @@ portletURL.setParameter("nodeName", node.getName());
 					image="../aui/document-b"
 					label="<%= true %>"
 					message="draft-pages"
-					url='<%= strutsAction.equals("/wiki/view_draft") ? StringPool.BLANK : portletURL.toString() %>'
+					url='<%= strutsAction.equals(wikiBaseUrl + "/view_draft_pages") ? StringPool.BLANK : portletURL.toString() %>'
 				/>
 			</div>
 
