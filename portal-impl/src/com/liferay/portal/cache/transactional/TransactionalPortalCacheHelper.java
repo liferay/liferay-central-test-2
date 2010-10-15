@@ -34,10 +34,6 @@ public class TransactionalPortalCacheHelper {
 		}
 
 		_pushPortalCacheMap();
-
-		int layerCount = _layerCountThreadLocal.get() + 1;
-
-		_layerCountThreadLocal.set(layerCount);
 	}
 
 	public static void commit() {
@@ -65,10 +61,16 @@ public class TransactionalPortalCacheHelper {
 		}
 
 		portalCacheMap.clear();
+	}
 
-		int layerCount = _layerCountThreadLocal.get() - 1;
-
-		_layerCountThreadLocal.set(layerCount);
+	public static boolean enabled() {
+		if (PropsValues.TRANSACTIONAL_CACHE_ENABLED &&
+			_portalCacheListThreadLocal.get().size() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public static void rollback() {
@@ -80,17 +82,9 @@ public class TransactionalPortalCacheHelper {
 			_popPortalCacheMap();
 
 		portalCacheMap.clear();
-
-		int layerCount = _layerCountThreadLocal.get() - 1;
-
-		_layerCountThreadLocal.set(layerCount);
 	}
 
 	protected static Object get(PortalCache portalCache, String key) {
-		if (_layerCountThreadLocal.get() <= 0) {
-			return null;
-		}
-
 		Map<PortalCache, Map<String, Object>> portalCacheMap =
 			_peekPortalCacheMap();
 
@@ -106,29 +100,20 @@ public class TransactionalPortalCacheHelper {
 	protected static void put(
 		PortalCache portalCache, String key, Object value) {
 
-		if (_layerCountThreadLocal.get() <= 0) {
-			return;
-		}
+		Map<PortalCache, Map<String, Object>> cache = _peekPortalCacheMap();
 
-		Map<PortalCache, Map<String, Object>> portalCacheMap =
-			_peekPortalCacheMap();
-
-		Map<String, Object> uncommittedMap = portalCacheMap.get(portalCache);
+		Map<String, Object> uncommittedMap = cache.get(portalCache);
 
 		if (uncommittedMap == null) {
 			uncommittedMap = new HashMap<String, Object>();
 
-			portalCacheMap.put(portalCache, uncommittedMap);
+			cache.put(portalCache, uncommittedMap);
 		}
 
 		uncommittedMap.put(key, value);
 	}
 
 	protected static void remove(PortalCache portalCache, String key) {
-		if (_layerCountThreadLocal.get() <= 0) {
-			return;
-		}
-
 		Map<PortalCache, Map<String, Object>> portalCacheMap =
 			_peekPortalCacheMap();
 
@@ -140,10 +125,6 @@ public class TransactionalPortalCacheHelper {
 	}
 
 	protected static void removeAll(PortalCache portalCache) {
-		if (_layerCountThreadLocal.get() <= 0) {
-			return;
-		}
-
 		Map<PortalCache, Map<String, Object>> portalCacheMap =
 			_peekPortalCacheMap();
 
@@ -158,24 +139,14 @@ public class TransactionalPortalCacheHelper {
 		List<Map<PortalCache, Map<String, Object>>> portalCacheList =
 			_portalCacheListThreadLocal.get();
 
-		if (!portalCacheList.isEmpty()) {
-			return portalCacheList.get(portalCacheList.size() - 1);
-		}
-		else {
-			return null;
-		}
+		return portalCacheList.get(portalCacheList.size() - 1);
 	}
 
 	private static Map<PortalCache, Map<String, Object>> _popPortalCacheMap() {
 		List<Map<PortalCache, Map<String, Object>>> portalCacheList =
 			_portalCacheListThreadLocal.get();
 
-		if (!portalCacheList.isEmpty()) {
-			return portalCacheList.remove(portalCacheList.size() - 1);
-		}
-		else {
-			return null;
-		}
+		return portalCacheList.remove(portalCacheList.size() - 1);
 	}
 
 	private static void _pushPortalCacheMap() {
@@ -185,12 +156,7 @@ public class TransactionalPortalCacheHelper {
 		portalCacheList.add(new HashMap<PortalCache, Map<String, Object>>());
 	}
 
-	private static ThreadLocal<Integer> _layerCountThreadLocal =
-		new InitialThreadLocal<Integer>(
-			TransactionalPortalCacheHelper.class.getName() +
-				"._layerCountThreadLocal",
-			0);
-	private static ThreadLocal <List<Map<PortalCache, Map<String, Object>>>>
+	private static ThreadLocal<List<Map<PortalCache, Map<String, Object>>>>
 		_portalCacheListThreadLocal =
 			new InitialThreadLocal<List<Map<PortalCache, Map<String, Object>>>>(
 				TransactionalPortalCacheHelper.class.getName() +

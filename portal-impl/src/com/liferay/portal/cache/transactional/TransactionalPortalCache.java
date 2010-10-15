@@ -43,10 +43,14 @@ public class TransactionalPortalCache extends BasePortalCache {
 	}
 
 	public Object get(String key) {
-		Object result = TransactionalPortalCacheHelper.get(_portalCache, key);
+		Object result = null;
 
-		if (result == _nullHolder) {
-			return null;
+		if (TransactionalPortalCacheHelper.enabled()) {
+			result = TransactionalPortalCacheHelper.get(_portalCache, key);
+
+			if (result == _nullHolder) {
+				return null;
+			}
 		}
 
 		if (result == null) {
@@ -57,45 +61,69 @@ public class TransactionalPortalCache extends BasePortalCache {
 	}
 
 	public void put(String key, Object obj) {
-		if (obj == null) {
-			obj = _nullHolder;
-		}
+		if (TransactionalPortalCacheHelper.enabled()) {
+			if (obj == null) {
+				obj = _nullHolder;
+			}
 
-		TransactionalPortalCacheHelper.put(_portalCache, key, obj);
+			TransactionalPortalCacheHelper.put(_portalCache, key, obj);
+		}
+		else {
+			_portalCache.put(key, obj);
+		}
 	}
 
 	public void put(String key, Object obj, int timeToLive) {
-		if (obj == null) {
-			obj = _nullHolder;
-		}
+		if (TransactionalPortalCacheHelper.enabled()) {
+			if (obj == null) {
+				obj = _nullHolder;
+			}
 
-		TransactionalPortalCacheHelper.put(_portalCache, key, obj);
+			TransactionalPortalCacheHelper.put(_portalCache, key, obj);
+		}
+		else {
+			_portalCache.put(key, obj, timeToLive);
+		}
 	}
 
 	public void put(String key, Serializable obj) {
-		if (obj == null) {
-			obj = _nullHolder;
-		}
+		if (TransactionalPortalCacheHelper.enabled()) {
+			if (obj == null) {
+				obj = _nullHolder;
+			}
 
-		TransactionalPortalCacheHelper.put(_portalCache, key, obj);
+			TransactionalPortalCacheHelper.put(_portalCache, key, obj);
+		}
+		else {
+			_portalCache.put(key, obj);
+		}
 	}
 
 	public void put(String key, Serializable obj, int timeToLive) {
-		if (obj == null) {
-			obj = _nullHolder;
-		}
+		if (TransactionalPortalCacheHelper.enabled()) {
+			if (obj == null) {
+				obj = _nullHolder;
+			}
 
-		TransactionalPortalCacheHelper.put(_portalCache, key, obj);
+			TransactionalPortalCacheHelper.put(_portalCache, key, obj);
+		}
+		else {
+			_portalCache.put(key, obj, timeToLive);
+		}
 	}
 
 	public void remove(String key) {
-		TransactionalPortalCacheHelper.remove(_portalCache, key);
+		if (TransactionalPortalCacheHelper.enabled()) {
+			TransactionalPortalCacheHelper.remove(_portalCache, key);
+		}
 
 		_portalCache.remove(key);
 	}
 
 	public void removeAll() {
-		TransactionalPortalCacheHelper.removeAll(_portalCache);
+		if (TransactionalPortalCacheHelper.enabled()) {
+			TransactionalPortalCacheHelper.removeAll(_portalCache);
+		}
 
 		_portalCache.removeAll();
 	}
