@@ -18,6 +18,8 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.util.MethodCache;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import java.io.File;
@@ -67,6 +69,11 @@ public class DLLocalServiceUtil {
 		if (_service == null) {
 			_service = (DLLocalService)PortalBeanLocatorUtil.locate(
 				DLLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(
+				DLLocalServiceUtil.class, "_service");
+
+			MethodCache.remove(DLLocalService.class);
 		}
 
 		return _service;
@@ -144,6 +151,11 @@ public class DLLocalServiceUtil {
 
 	public void setService(DLLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(
+			DLLocalServiceUtil.class, "_service");
+
+		MethodCache.remove(DLLocalService.class);
 	}
 
 	private static DLLocalService _service;

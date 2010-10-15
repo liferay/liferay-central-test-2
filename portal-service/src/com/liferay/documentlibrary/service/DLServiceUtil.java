@@ -17,6 +17,8 @@ package com.liferay.documentlibrary.service;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.MethodCache;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import java.io.File;
@@ -116,6 +118,11 @@ public class DLServiceUtil {
 		if (_service == null) {
 			_service = (DLService)PortalBeanLocatorUtil.locate(
 				DLService.class.getName());
+
+			ReferenceRegistry.registerReference(
+				DLServiceUtil.class, "_service");
+
+			MethodCache.remove(DLService.class);
 		}
 
 		return _service;
@@ -169,6 +176,10 @@ public class DLServiceUtil {
 
 	public void setService(DLService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(DLServiceUtil.class, "_service");
+
+		MethodCache.remove(DLService.class);
 	}
 
 	private static DLService _service;

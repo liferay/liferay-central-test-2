@@ -16,6 +16,8 @@ package com.liferay.mail.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.MethodCache;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Alexander Chow
@@ -33,6 +35,11 @@ public class CyrusServiceUtil {
 		if (_service == null) {
 			_service = (CyrusService)PortalBeanLocatorUtil.locate(
 				CyrusService.class.getName());
+
+			ReferenceRegistry.registerReference(
+				CyrusServiceUtil.class, "_service");
+
+			MethodCache.remove(CyrusService.class);
 		}
 
 		return _service;
@@ -64,6 +71,10 @@ public class CyrusServiceUtil {
 
 	public void setService(CyrusService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(CyrusServiceUtil.class, "_service");
+
+		MethodCache.remove(CyrusService.class);
 	}
 
 	private static CyrusService _service;
