@@ -308,6 +308,17 @@ if (!access) {
 }
 
 long previousScopeGroupId = themeDisplay.getScopeGroupId();
+long previousParentGroupId = themeDisplay.getParentGroupId();
+
+Group parentGroup = GroupLocalServiceUtil.getGroup(themeDisplay.getParentGroupId());
+
+if (parentGroup.isStagingGroup()) {
+	parentGroup = parentGroup.getLiveGroup();
+}
+
+if (parentGroup.isStaged() && !parentGroup.isStagedRemotely() && !parentGroup.isStagedPortlet(portletId)) {
+	themeDisplay.setParentGroupId(parentGroup.getGroupId());
+}
 
 if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION) && (portletResourcePortlet != null)) {
 	themeDisplay.setScopeGroupId(PortalUtil.getScopeGroupId(request, portletResourcePortlet.getPortletId()));
@@ -933,6 +944,7 @@ else {
 
 <%
 themeDisplay.setScopeGroupId(previousScopeGroupId);
+themeDisplay.setParentGroupId(previousParentGroupId);
 
 if (showPortletCssIcon) {
 	themeDisplay.setIncludePortletCssJs(true);
