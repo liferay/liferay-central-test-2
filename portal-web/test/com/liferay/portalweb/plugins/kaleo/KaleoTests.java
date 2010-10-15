@@ -21,6 +21,7 @@ import com.liferay.portalweb.plugins.kaleo.scope.ScopeTests;
 import com.liferay.portalweb.plugins.kaleo.webcontent.WebContentTests;
 import com.liferay.portalweb.plugins.kaleo.webcontentdisplay.WebContentDisplayTests;
 import com.liferay.portalweb.plugins.kaleo.workflow.WorkflowTests;
+import com.liferay.portalweb.plugins.kaleo.workflowconfiguration.WorkflowConfigurationTests;
 import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
@@ -41,6 +42,7 @@ public class KaleoTests extends BaseTests {
 		testSuite.addTest(WebContentTests.suite());
 		testSuite.addTest(WebContentDisplayTests.suite());
 		testSuite.addTest(WorkflowTests.suite());
+		testSuite.addTest(WorkflowConfigurationTests.suite());
 
 		return testSuite;
 	}
