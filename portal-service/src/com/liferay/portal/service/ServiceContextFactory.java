@@ -43,15 +43,14 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ServiceContextFactory {
 
-	public static ServiceContext getInstance(
-			String className, PortletRequest portletRequest)
+	public static ServiceContext getInstance(HttpServletRequest request)
 		throws PortalException, SystemException {
 
 		ServiceContext serviceContext = new ServiceContext();
 
 		// Theme display
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		serviceContext.setCompanyId(themeDisplay.getCompanyId());
@@ -61,11 +60,69 @@ public class ServiceContextFactory {
 		serviceContext.setLayoutURL(PortalUtil.getLayoutURL(themeDisplay));
 		serviceContext.setPathMain(PortalUtil.getPathMain());
 		serviceContext.setPlid(themeDisplay.getPlid());
-		serviceContext.setPortalURL(PortalUtil.getPortalURL(portletRequest));
+		serviceContext.setPortalURL(PortalUtil.getPortalURL(request));
 		serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
 		serviceContext.setUserDisplayURL(
 			themeDisplay.getUser().getDisplayURL(themeDisplay));
 		serviceContext.setUserId(themeDisplay.getUserId());
+
+		// Attributes
+
+		Map<String, Serializable> attributes =
+			new HashMap<String, Serializable>();
+
+		Enumeration<String> enu = request.getParameterNames();
+
+		while (enu.hasMoreElements()) {
+			String param = enu.nextElement();
+
+			String[] values = request.getParameterValues(param);
+
+			if ((values != null) && (values.length > 0)) {
+				if (values.length == 1) {
+					attributes.put(param, values[0]);
+				}
+				else {
+					attributes.put(param, values);
+				}
+			}
+		}
+
+		serviceContext.setAttributes(attributes);
+
+		return serviceContext;
+	}
+
+	public static ServiceContext getInstance(PortletRequest portletRequest)
+		throws PortalException, SystemException {
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)portletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
+
+		if (serviceContext != null) {
+			serviceContext = (ServiceContext)serviceContext.clone();
+		}
+		else {
+			serviceContext = new ServiceContext();
+
+			serviceContext.setCompanyId(themeDisplay.getCompanyId());
+			serviceContext.setLanguageId(themeDisplay.getLanguageId());
+			serviceContext.setLayoutFullURL(
+				PortalUtil.getLayoutFullURL(themeDisplay));
+			serviceContext.setLayoutURL(PortalUtil.getLayoutURL(themeDisplay));
+			serviceContext.setPathMain(PortalUtil.getPathMain());
+			serviceContext.setPlid(themeDisplay.getPlid());
+			serviceContext.setPortalURL(
+				PortalUtil.getPortalURL(portletRequest));
+			serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
+			serviceContext.setUserDisplayURL(
+				themeDisplay.getUser().getDisplayURL(themeDisplay));
+			serviceContext.setUserId(themeDisplay.getUserId());
+		}
 
 		// Attributes
 
@@ -96,16 +153,6 @@ public class ServiceContextFactory {
 		String cmd = ParamUtil.getString(portletRequest, Constants.CMD);
 
 		serviceContext.setCommand(cmd);
-
-		// Expando
-
-		Map<String, Serializable> expandoBridgeAttributes =
-			PortalUtil.getExpandoBridgeAttributes(
-				ExpandoBridgeFactoryUtil.getExpandoBridge(
-					themeDisplay.getCompanyId(), className),
-				portletRequest);
-
-		serviceContext.setExpandoBridgeAttributes(expandoBridgeAttributes);
 
 		// Permissions
 
@@ -152,6 +199,23 @@ public class ServiceContextFactory {
 			portletRequest, "workflowAction", WorkflowConstants.ACTION_PUBLISH);
 
 		serviceContext.setWorkflowAction(workflowAction);
+
+		return serviceContext;
+	}
+
+	public static ServiceContext getInstance(
+			String className, PortletRequest portletRequest)
+		throws PortalException, SystemException {
+
+		ServiceContext serviceContext = getInstance(portletRequest);
+
+		Map<String, Serializable> expandoBridgeAttributes =
+			PortalUtil.getExpandoBridgeAttributes(
+				ExpandoBridgeFactoryUtil.getExpandoBridge(
+					serviceContext.getCompanyId(), className),
+				portletRequest);
+
+		serviceContext.setExpandoBridgeAttributes(expandoBridgeAttributes);
 
 		return serviceContext;
 	}

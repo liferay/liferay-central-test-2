@@ -73,6 +73,8 @@ import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
@@ -1766,6 +1768,11 @@ public class ServicePreAction extends Action {
 		themeDisplay.setURLUpdateManager(updateManagerURL);
 
 		request.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			request);
+
+		ServiceContextThreadLocal.pushServiceContext(serviceContext);
 
 		// Parallel render
 

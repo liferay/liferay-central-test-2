@@ -268,18 +268,15 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	public T update(T model, boolean merge, ServiceContext serviceContext)
 		throws SystemException {
 
-		ServiceContext previousServiceContext =
-			ServiceContextThreadLocal.getServiceContext();
-
 		try {
-			ServiceContextThreadLocal.setServiceContext(serviceContext);
+			ServiceContextThreadLocal.pushServiceContext(serviceContext);
 
 			update(model, merge);
 
 			return model;
 		}
 		finally {
-			ServiceContextThreadLocal.setServiceContext(previousServiceContext);
+			ServiceContextThreadLocal.popServiceContext();
 		}
 	}
 

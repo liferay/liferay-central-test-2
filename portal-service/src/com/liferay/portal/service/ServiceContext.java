@@ -37,6 +37,37 @@ public class ServiceContext implements Serializable {
 		_expandoBridgeAttributes = new LinkedHashMap<String, Serializable>();
 	}
 
+	protected Object clone() {
+		ServiceContext clone = new ServiceContext();
+
+		clone.setAddCommunityPermissions(getAddCommunityPermissions());
+		clone.setAddGuestPermissions(getAddGuestPermissions());
+		clone.setAssetCategoryIds(getAssetCategoryIds());
+		clone.setAssetTagNames(getAssetTagNames());
+		clone.setAttributes(getAttributes());
+		clone.setCommand(getCommand());
+		clone.setCommunityPermissions(getCommunityPermissions());
+		clone.setCompanyId(getCompanyId());
+		clone.setCreateDate(getCreateDate());
+		clone.setExpandoBridgeAttributes(getExpandoBridgeAttributes());
+		clone.setGuestPermissions(getGuestPermissions());
+		clone.setLanguageId(getLanguageId());
+		clone.setLayoutFullURL(getLayoutFullURL());
+		clone.setLayoutURL(getLayoutURL());
+		clone.setModifiedDate(getModifiedDate());
+		clone.setPathMain(getPathMain());
+		clone.setPlid(getPlid());
+		clone.setPortalURL(getPortalURL());
+		clone.setPortletPreferencesIds(getPortletPreferencesIds());
+		clone.setScopeGroupId(getScopeGroupId());
+		clone.setUserDisplayURL(getUserDisplayURL());
+		clone.setUserId(getUserId());
+		clone.setUuid(getUuid());
+		clone.setWorkflowAction(getWorkflowAction());
+
+		return clone;
+	}
+
 	public boolean getAddCommunityPermissions() {
 		return _addCommunityPermissions;
 	}

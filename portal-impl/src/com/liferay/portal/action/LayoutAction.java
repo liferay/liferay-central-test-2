@@ -56,6 +56,9 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.StrutsUtil;
@@ -767,6 +770,11 @@ public class LayoutAction extends Action {
 				actionRequestImpl.defineObjects(
 					portletConfig, actionResponseImpl);
 
+				ServiceContext serviceContext =
+					ServiceContextFactory.getInstance(actionRequestImpl);
+
+				ServiceContextThreadLocal.pushServiceContext(serviceContext);
+
 				invokerPortlet.processAction(
 					actionRequestImpl, actionResponseImpl);
 
@@ -807,6 +815,8 @@ public class LayoutAction extends Action {
 				if (uploadRequest != null) {
 					uploadRequest.cleanUp();
 				}
+
+				ServiceContextThreadLocal.popServiceContext();
 			}
 		}
 		else if (lifecycle.equals(PortletRequest.RENDER_PHASE) ||
@@ -846,8 +856,18 @@ public class LayoutAction extends Action {
 			resourceRequestImpl.defineObjects(
 				portletConfig, resourceResponseImpl);
 
-			invokerPortlet.serveResource(
-				resourceRequestImpl, resourceResponseImpl);
+			try {
+				ServiceContext serviceContext =
+					ServiceContextFactory.getInstance(resourceRequestImpl);
+
+				ServiceContextThreadLocal.pushServiceContext(serviceContext);
+
+				invokerPortlet.serveResource(
+					resourceRequestImpl, resourceResponseImpl);
+			}
+			finally {
+				ServiceContextThreadLocal.popServiceContext();
+			}
 		}
 
 		return portlet;
