@@ -72,7 +72,7 @@ String defaultControlPanelThemeId = ParamUtil.getString(request, "settings--" + 
 	String taglibEditURL = "javascript:" + renderResponse.getNamespace() + "openEditCompanyLogoWindow('" + editCompanyLogoURL + "');";
 	%>
 
-	<aui:a cssClass="change-company-logo" href="<%= taglibEditURL %>">
+	<aui:a cssClass="lfr-change-logo" href="<%= taglibEditURL %>">
 		<img alt="<liferay-ui:message key="logo" />" class="avatar" id="<portlet:namespace />avatar" src="<%= themeDisplay.getPathImage() %>/company_logo?img_id=<%= deleteLogo ? 0 : company.getLogoId() %>&t=<%= ImageServletTokenUtil.getToken(company.getLogoId()) %>" />
 	</aui:a>
 

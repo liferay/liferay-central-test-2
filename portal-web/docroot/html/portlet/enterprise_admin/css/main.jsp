@@ -58,13 +58,7 @@
 	margin: 10px auto;
 }
 
-.portlet-enterprise-admin .change-company-logo {
-	background: url(<%= themeImagesPath %>/common/checkerboard.png);
-	display: block;
-	margin-bottom: 10px;
-}
-
-.portlet-enterprise-admin .change-company-logo img {
+.portlet-enterprise-admin .lfr-change-logo img {
 	border-width: 0;
 	display: block;
 	width: auto;

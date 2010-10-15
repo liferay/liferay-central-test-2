@@ -405,9 +405,9 @@ if (!tabs2.equals("pages")) {
 		<br /><br />
 
 		<c:if test="<%= layoutSet.isLogo() %>">
-			<img alt="<liferay-ui:message key="logo" />" src="<%= themeDisplay.getPathImage() %>/layout_set_logo?img_id=<%= layoutSet.getLogoId() %>&t=<%= ImageServletTokenUtil.getToken(layoutSet.getLogoId()) %>" />
-
-			<br /><br />
+			<span class="lfr-change-logo">
+				<img alt="<liferay-ui:message key="logo" />" src="<%= themeDisplay.getPathImage() %>/layout_set_logo?img_id=<%= layoutSet.getLogoId() %>&t=<%= ImageServletTokenUtil.getToken(layoutSet.getLogoId()) %>" />
+			</span>
 		</c:if>
 
 		<table class="lfr-table">
