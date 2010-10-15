@@ -176,11 +176,11 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 		_registerCacheStatistics = registerCacheStatistics;
 	}
 
-	private Configuration getConfiguration() {
+	protected Configuration getConfiguration() {
 		URL url = getClass().getResource(PropsUtil.get(_configPropertyKey));
 
-		Configuration configuration =
-			ConfigurationFactory.parseConfiguration(url);
+		Configuration configuration = ConfigurationFactory.parseConfiguration(
+			url);
 
 		if (PropsValues.EHCACHE_CLUSTER_LINK_REPLICATION_ENABLED) {
 			configuration.getCacheManagerPeerProviderFactoryConfiguration().
@@ -190,10 +190,12 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 			CacheConfiguration defaultCacheConfiguration =
 				configuration.getDefaultCacheConfiguration();
+
 			processCacheConfiguration(defaultCacheConfiguration);
 
-			for(CacheConfiguration cacheConfiguration :
-				configuration.getCacheConfigurations().values()) {
+			for (CacheConfiguration cacheConfiguration :
+					configuration.getCacheConfigurations().values()) {
+
 				processCacheConfiguration(cacheConfiguration);
 			}
 		}
@@ -201,14 +203,19 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 		return configuration;
 	}
 
-	private void processCacheConfiguration(
+	protected void processCacheConfiguration(
 		CacheConfiguration cacheConfiguration) {
+
 		cacheConfiguration.addBootstrapCacheLoaderFactory(null);
+
 		cacheConfiguration.getCacheEventListenerConfigurations().clear();
+
 		CacheEventListenerFactoryConfiguration configuration =
 			new CacheEventListenerFactoryConfiguration();
+
 		configuration.setClass(
 			EhcachePortalCacheClusterReplicatorFactory.class.getName());
+
 		cacheConfiguration.addCacheEventListenerFactory(configuration);
 	}
 

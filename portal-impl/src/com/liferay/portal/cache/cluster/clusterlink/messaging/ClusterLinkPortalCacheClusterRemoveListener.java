@@ -38,9 +38,11 @@ public class ClusterLinkPortalCacheClusterRemoveListener
 		throws SystemException {
 
 		_hibernateCacheManager = EhCacheProvider.getCacheManager();
+
 		EhcachePortalCacheManager ehcachePortalCacheManager =
-			(EhcachePortalCacheManager) PortalBeanLocatorUtil.locate(
+			(EhcachePortalCacheManager)PortalBeanLocatorUtil.locate(
 				_MULTI_VM_PORTAL_CACHE_MANAGER_BEAN_NAME);
+
 		_portalCacheManager = ehcachePortalCacheManager.getEhcacheManager();
 	}
 
