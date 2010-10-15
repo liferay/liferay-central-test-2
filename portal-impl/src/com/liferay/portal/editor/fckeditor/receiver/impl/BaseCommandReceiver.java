@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -266,6 +267,10 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 
 		long scopeGroupId = themeDisplay.getScopeGroupId();
 
+		HttpServletRequest request = argument.getHttpServletRequest();
+
+		String portletId = ParamUtil.getString(request, "p_p_id");
+
 		for (Group group : groups) {
 			Element folderEl = doc.createElement("Folder");
 
@@ -276,19 +281,15 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			if (group.hasStagingGroup()) {
 				Group stagingGroup = group.getStagingGroup();
 
-				if (!group.isStagedRemotely() && !isStagedData(group)) {
-					folderEl.setAttribute(
-						"name",
-						group.getGroupId() + " - " +
-							HtmlUtil.escape(stagingGroup.getDescriptiveName()));
+				if ((stagingGroup.getGroupId() == scopeGroupId) &&
+					group.isStagedPortlet(portletId) &&
+					!group.isStagedRemotely() && isStagedData(group)) {
 
-					setNameAttribute = true;
-				}
-				else if (stagingGroup.getGroupId() == scopeGroupId) {
 					folderEl.setAttribute(
 						"name",
 						stagingGroup.getGroupId() + " - " +
-							HtmlUtil.escape(stagingGroup.getDescriptiveName()));
+							HtmlUtil.escape(
+								stagingGroup.getDescriptiveName()));
 
 					setNameAttribute = true;
 				}

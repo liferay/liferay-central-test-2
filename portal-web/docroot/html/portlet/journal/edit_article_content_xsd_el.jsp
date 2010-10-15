@@ -21,6 +21,12 @@ String languageId = LanguageUtil.getLanguageId(request);
 
 long groupId = GetterUtil.getLong((String)request.getAttribute(WebKeys.JOURNAL_ARTICLE_GROUP_ID));
 
+Group liveGroup = GroupLocalServiceUtil.getGroup(groupId);
+
+if (liveGroup.isStagingGroup()) {
+	liveGroup = liveGroup.getLiveGroup();
+}
+
 Element el = (Element)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL);
 IntegerWrapper count = (IntegerWrapper)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_COUNT);
 Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH);
@@ -152,9 +158,17 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 				<c:if test='<%= elType.equals("image_gallery") %>'>
 					<aui:input cssClass="lfr-input-text-container" inlineField="<%= true %>" label="" name="journalImagegallery" size="55" type="text" value="<%= elContent %>" />
 
+					<%
+					long igScopeGroup = groupId;
+
+					if (liveGroup.isStaged() && !liveGroup.isStagedRemotely() && !liveGroup.isStagedPortlet(PortletKeys.IMAGE_GALLERY)) {
+						igScopeGroup = liveGroup.getGroupId();
+					}
+					%>
+
 					<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectIGURL">
 						<portlet:param name="struts_action" value="/journal/select_image_gallery" />
-						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+						<portlet:param name="groupId" value="<%= String.valueOf(igScopeGroup) %>" />
 					</portlet:renderURL>
 
 					<%
@@ -169,9 +183,17 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 				<c:if test='<%= elType.equals("document_library") %>'>
 					<aui:input cssClass="lfr-input-text-container" inlineField="<%= true %>" label="" name="journalDocumentlibrary" size="55" type="text" value="<%= elContent %>" />
 
+					<%
+					long dlScopeGroup = groupId;
+
+					if (liveGroup.isStaged() && !liveGroup.isStagedRemotely() && !liveGroup.isStagedPortlet(PortletKeys.DOCUMENT_LIBRARY)) {
+						dlScopeGroup = liveGroup.getGroupId();
+					}
+					%>
+
 					<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectDLURL">
 						<portlet:param name="struts_action" value="/journal/select_document_library" />
-						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+						<portlet:param name="groupId" value="<%= String.valueOf(dlScopeGroup) %>" />
 					</portlet:renderURL>
 
 					<%

@@ -23,8 +23,10 @@
 
 <%
 long plid = ParamUtil.getLong(request, "p_l_id");
+String portletId = ParamUtil.getString(request, "p_p_id");
 String mainPath = ParamUtil.getString(request, "p_main_path");
 String doAsUserId = ParamUtil.getString(request, "doAsUserId");
+String doAsGroupId = ParamUtil.getString(request, "doAsGroupId");
 String initMethod =	ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METHOD);
 String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 String toolbarSet = ParamUtil.getString(request, "toolbarSet", "liferay");
@@ -51,7 +53,7 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 			textArea.value = parent.<%= HtmlUtil.escape(initMethod) %>();
 
 			CKEDITOR.config.toolbar = '<%= TextFormatter.format(HtmlUtil.escape(toolbarSet), TextFormatter.M) %>';
-			CKEDITOR.config.customConfig = '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/ckconfig.jsp?p_l_id=<%= plid %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>';
+			CKEDITOR.config.customConfig = '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/ckconfig.jsp?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(doAsGroupId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>';
 
 			ckEditor.on(
 				'instanceReady',
@@ -118,7 +120,7 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 <script type="text/javascript">
 
 	<%
-	String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId));
+	String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&p_p_id=" + HttpUtil.encodeURL(portletId) + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId) + "&doAsGroupId=" + HttpUtil.encodeURL(doAsGroupId));
 	%>
 
 	CKEDITOR.replace(

@@ -40,6 +40,12 @@ StringBundler sb = new StringBundler();
 sb.append(themeDisplay.getPathContext());
 sb.append("/html/js/editor/editor.jsp?p_l_id=");
 sb.append(plid);
+
+if (Validator.isNotNull(themeDisplay.getPortletDisplay().getRootPortletId())) {
+	sb.append("&amp;p_p_id=");
+	sb.append(HttpUtil.encodeURL(themeDisplay.getPortletDisplay().getRootPortletId()));
+}
+
 sb.append("&amp;p_main_path=");
 sb.append(HttpUtil.encodeURL(themeDisplay.getPathMain()));
 sb.append("&amp;doAsUserId=");
@@ -52,6 +58,8 @@ if (Validator.isNull(doAsUserId)) {
 
 sb.append(HttpUtil.encodeURL(doAsUserId));
 
+sb.append("&amp;doAsGroupId=");
+sb.append(themeDisplay.getDoAsGroupId());
 sb.append("&amp;editorImpl=");
 sb.append(editorImpl);
 

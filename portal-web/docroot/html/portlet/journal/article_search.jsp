@@ -77,7 +77,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 
 						<%
 						for (Group myPlace : myPlaces) {
-							if (myPlace.hasStagingGroup()) {
+							if (myPlace.hasStagingGroup() && !myPlace.isStagedRemotely() && myPlace.isStagedPortlet(PortletKeys.JOURNAL)) {
 								myPlace = myPlace.getStagingGroup();
 							}
 						%>
