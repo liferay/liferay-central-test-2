@@ -59,6 +59,15 @@ public class StringUtilTest extends TestCase {
 		assertEquals(expected, actual);
 	}
 
+	public void testReplaceEmptyString() throws Exception {
+		String original = "Hello World HELLO WORLD Hello World";
+		String expected = "Hello World HELLO WORLD Hello World";
+
+		String actual = StringUtil.replaceFirst(original, "", "Aloha");
+
+		assertEquals(expected, actual);
+	}
+
 	public void testReplaceLastChar() throws Exception {
 		String original = "127.0.0.1";
 		String expected = "127.0.0_1";

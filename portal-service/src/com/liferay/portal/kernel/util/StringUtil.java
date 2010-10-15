@@ -716,6 +716,10 @@ public class StringUtil {
 			return null;
 		}
 
+		if (oldSub.equals(StringPool.BLANK)) {
+			return s;
+		}
+
 		int y = s.indexOf(oldSub, fromIndex);
 
 		if (y >= 0) {
