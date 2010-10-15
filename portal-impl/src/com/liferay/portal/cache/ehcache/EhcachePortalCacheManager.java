@@ -14,6 +14,7 @@
 
 package com.liferay.portal.cache.ehcache;
 
+import com.liferay.portal.cache.cluster.EhcachePortalCacheClusterReplicatorFactory;
 import com.liferay.portal.kernel.cache.BlockingPortalCache;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.PortalCacheManager;
@@ -32,6 +33,10 @@ import javax.management.MBeanServer;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.ObjectExistsException;
+import net.sf.ehcache.config.CacheConfiguration.CacheEventListenerFactoryConfiguration;
+import net.sf.ehcache.config.CacheConfiguration;
+import net.sf.ehcache.config.Configuration;
+import net.sf.ehcache.config.ConfigurationFactory;
 import net.sf.ehcache.management.ManagementService;
 import net.sf.ehcache.util.FailSafeTimer;
 
@@ -39,13 +44,14 @@ import net.sf.ehcache.util.FailSafeTimer;
  * @author Joseph Shum
  * @author Raymond Augé
  * @author Michael C. Han
+ * @author Shuyang Zhou
  */
 public class EhcachePortalCacheManager implements PortalCacheManager {
 
 	public void afterPropertiesSet() {
-		URL url = getClass().getResource(PropsUtil.get(_configPropertyKey));
+		Configuration configuration = getConfiguration();
 
-		_cacheManager = new CacheManager(url);
+		_cacheManager = new CacheManager(configuration);
 
 		FailSafeTimer failSafeTimer = _cacheManager.getTimer();
 
@@ -168,6 +174,42 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 	public void setRegisterCacheStatistics(boolean registerCacheStatistics) {
 		_registerCacheStatistics = registerCacheStatistics;
+	}
+
+	private Configuration getConfiguration() {
+		URL url = getClass().getResource(PropsUtil.get(_configPropertyKey));
+
+		Configuration configuration =
+			ConfigurationFactory.parseConfiguration(url);
+
+		if (PropsValues.EHCACHE_CLUSTER_LINK_REPLICATION_ENABLED) {
+			configuration.getCacheManagerPeerProviderFactoryConfiguration().
+				clear();
+			configuration.getCacheManagerPeerListenerFactoryConfigurations().
+				clear();
+
+			CacheConfiguration defaultCacheConfiguration =
+				configuration.getDefaultCacheConfiguration();
+			processCacheConfiguration(defaultCacheConfiguration);
+
+			for(CacheConfiguration cacheConfiguration :
+				configuration.getCacheConfigurations().values()) {
+				processCacheConfiguration(cacheConfiguration);
+			}
+		}
+
+		return configuration;
+	}
+
+	private void processCacheConfiguration(
+		CacheConfiguration cacheConfiguration) {
+		cacheConfiguration.addBootstrapCacheLoaderFactory(null);
+		cacheConfiguration.getCacheEventListenerConfigurations().clear();
+		CacheEventListenerFactoryConfiguration configuration =
+			new CacheEventListenerFactoryConfiguration();
+		configuration.setClass(
+			EhcachePortalCacheClusterReplicatorFactory.class.getName());
+		cacheConfiguration.addCacheEventListenerFactory(configuration);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

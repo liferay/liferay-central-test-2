@@ -16,6 +16,7 @@ package com.liferay.portal.cache.cluster.clusterlink.messaging;
 
 import com.liferay.portal.cache.ehcache.EhcachePortalCacheManager;
 import com.liferay.portal.dao.orm.hibernate.EhCacheProvider;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.cache.cluster.PortalCacheClusterEvent;
 import com.liferay.portal.kernel.cache.cluster.PortalCacheClusterEventType;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -33,11 +34,13 @@ import net.sf.ehcache.CacheManager;
 public class ClusterLinkPortalCacheClusterRemoveListener
 	implements MessageListener {
 
-	public ClusterLinkPortalCacheClusterRemoveListener(
-			EhcachePortalCacheManager ehcachePortalCacheManager)
+	public ClusterLinkPortalCacheClusterRemoveListener()
 		throws SystemException {
 
 		_hibernateCacheManager = EhCacheProvider.getCacheManager();
+		EhcachePortalCacheManager ehcachePortalCacheManager =
+			(EhcachePortalCacheManager) PortalBeanLocatorUtil.locate(
+				_MULTI_VM_PORTAL_CACHE_MANAGER_BEAN_NAME);
 		_portalCacheManager = ehcachePortalCacheManager.getEhcacheManager();
 	}
 
@@ -75,6 +78,9 @@ public class ClusterLinkPortalCacheClusterRemoveListener
 			}
 		}
 	}
+
+	private static final String _MULTI_VM_PORTAL_CACHE_MANAGER_BEAN_NAME =
+		"com.liferay.portal.kernel.cache.MultiVMPortalCacheManager";
 
 	private static Log _log = LogFactoryUtil.getLog(
 		ClusterLinkPortalCacheClusterRemoveListener.class);
