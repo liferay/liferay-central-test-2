@@ -126,7 +126,9 @@
 			<aop:around pointcut="bean(com.liferay.portal.service.CompanyLocalService)" method="invokeCompanyService" />
 			<aop:around pointcut="bean(*Persistence) || bean(*Finder)" method="invokePersistence" />
 			<aop:around pointcut="execution(void com.liferay.portal.convert.messaging.ConvertProcessMessageListener.receive(..))" method="invokeGlobally" />
-			<aop:around pointcut="execution(void com.liferay.portal.events.StartupHelper.*(..))" method="invokeGlobally" />
+			<aop:around pointcut="execution(void com.liferay.portal.events.StartupHelper.updateIndexes())" method="invokeGlobally" />
+			<aop:around pointcut="execution(void com.liferay.portal.events.StartupHelper.upgradeProcess(int))" method="invokeGlobally" />
+			<aop:around pointcut="execution(void com.liferay.portal.events.StartupHelper.verifyProcess(boolean))" method="invokeIteratively" />
 			<aop:around pointcut="execution(void com.liferay.portal.service.impl.ReleaseLocalServiceImpl.createTablesAndPopulate())" method="invokeGlobally" />
 			<aop:around pointcut="execution(void com.liferay.portal.service.impl.ServiceComponentLocalServiceImpl.upgradeDB(..))" method="invokeGlobally" />
 			<aop:around pointcut="execution(* com.liferay.portal.service.impl.AccountLocalServiceImpl.getAccount(long, long))" method="invokeByParameter" />

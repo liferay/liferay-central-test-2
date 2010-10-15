@@ -21,6 +21,8 @@ import javax.sql.DataSource;
  */
 public interface Shard {
 
+	public String getCurrentShardName();
+
 	public DataSource getDataSource();
 
 	public boolean isEnabled();

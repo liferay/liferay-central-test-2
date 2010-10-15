@@ -170,6 +170,12 @@ public class ShardAdvice {
 		return returnValue;
 	}
 
+	/**
+	 * Invoke a join point across all shards while ignoring the company service
+	 * stack.
+	 *
+	 * @see #invokeIteratively
+	 */
 	public Object invokeGlobally(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
 
@@ -191,6 +197,35 @@ public class ShardAdvice {
 		}
 		finally {
 			_globalCall.set(null);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Invoke a join point across all shards while using the company service
+	 * stack.
+	 *
+	 * @see #invokeGlobally
+	 */
+	public Object invokeIteratively(ProceedingJoinPoint proceedingJoinPoint)
+		throws Throwable {
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Iterating through all shards for " +
+					_getSignature(proceedingJoinPoint));
+		}
+
+		for (String shardName : PropsValues.SHARD_AVAILABLE_NAMES) {
+			pushCompanyService(shardName);
+
+			try {
+				proceedingJoinPoint.proceed();
+			}
+			finally {
+				popCompanyService();
+			}
 		}
 
 		return null;
@@ -259,6 +294,16 @@ public class ShardAdvice {
 		ShardSessionFactoryTargetSource shardSessionFactoryTargetSource) {
 
 		_shardSessionFactoryTargetSource = shardSessionFactoryTargetSource;
+	}
+
+	protected String getCurrentShardName() {
+		String shardName = _getCompanyServiceStack().peek();
+
+		if (shardName == null) {
+			shardName = PropsValues.SHARD_DEFAULT_NAME;
+		}
+
+		return shardName;
 	}
 
 	protected DataSource getDataSource() {

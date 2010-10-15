@@ -21,6 +21,14 @@ import javax.sql.DataSource;
  */
 public class ShardUtil {
 
+	public static String getCurrentShardName() {
+		if (_shard != null) {
+			return _shard.getCurrentShardName();
+		}
+
+		return null;
+	}
+
 	public static DataSource getDataSource() {
 		if (_shard != null) {
 			return _shard.getDataSource();

@@ -15,6 +15,7 @@
 package com.liferay.portal.verify;
 
 import com.liferay.portal.GroupFriendlyURLException;
+import com.liferay.portal.kernel.dao.shard.ShardUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -42,8 +43,14 @@ public class VerifyGroup extends VerifyProcess {
 	protected void verifyCompanyGroups() throws Exception {
 		List<Company> companies = CompanyLocalServiceUtil.getCompanies();
 
+		String currentShardName = ShardUtil.getCurrentShardName();
+
 		for (Company company : companies) {
-			GroupLocalServiceUtil.checkCompanyGroup(company.getCompanyId());
+			if (!ShardUtil.isEnabled() ||
+				company.getShardName().equals(currentShardName)) {
+
+				GroupLocalServiceUtil.checkCompanyGroup(company.getCompanyId());
+			}
 		}
 	}
 

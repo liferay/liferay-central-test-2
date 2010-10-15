@@ -23,6 +23,10 @@ import javax.sql.DataSource;
  */
 public class ShardImpl implements Shard {
 
+	public String getCurrentShardName() {
+		return _shardAdvice.getCurrentShardName();
+	}
+
 	public DataSource getDataSource() {
 		return _shardAdvice.getDataSource();
 	}
