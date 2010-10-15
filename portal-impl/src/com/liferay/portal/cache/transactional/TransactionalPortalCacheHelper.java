@@ -63,14 +63,15 @@ public class TransactionalPortalCacheHelper {
 		portalCacheMap.clear();
 	}
 
-	public static boolean enabled() {
-		if (PropsValues.TRANSACTIONAL_CACHE_ENABLED &&
-			_portalCacheListThreadLocal.get().size() > 0) {
-			return true;
-		}
-		else {
+	public static boolean isEnabled() {
+		if (!PropsValues.TRANSACTIONAL_CACHE_ENABLED) {
 			return false;
 		}
+
+		List<Map<PortalCache, Map<String, Object>>> portalCacheList =
+			_portalCacheListThreadLocal.get();
+
+		return !_portalCacheListThreadLocal.isEmpty();
 	}
 
 	public static void rollback() {
@@ -100,14 +101,15 @@ public class TransactionalPortalCacheHelper {
 	protected static void put(
 		PortalCache portalCache, String key, Object value) {
 
-		Map<PortalCache, Map<String, Object>> cache = _peekPortalCacheMap();
+		Map<PortalCache, Map<String, Object>> portalCacheMap =
+			_peekPortalCacheMap();
 
-		Map<String, Object> uncommittedMap = cache.get(portalCache);
+		Map<String, Object> uncommittedMap = portalCacheMap.get(portalCache);
 
 		if (uncommittedMap == null) {
 			uncommittedMap = new HashMap<String, Object>();
 
-			cache.put(portalCache, uncommittedMap);
+			portalCacheMap.put(portalCache, uncommittedMap);
 		}
 
 		uncommittedMap.put(key, value);

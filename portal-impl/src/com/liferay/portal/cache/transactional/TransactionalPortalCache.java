@@ -45,7 +45,7 @@ public class TransactionalPortalCache extends BasePortalCache {
 	public Object get(String key) {
 		Object result = null;
 
-		if (TransactionalPortalCacheHelper.enabled()) {
+		if (TransactionalPortalCacheHelper.isEnabled()) {
 			result = TransactionalPortalCacheHelper.get(_portalCache, key);
 
 			if (result == _nullHolder) {
@@ -61,7 +61,7 @@ public class TransactionalPortalCache extends BasePortalCache {
 	}
 
 	public void put(String key, Object obj) {
-		if (TransactionalPortalCacheHelper.enabled()) {
+		if (TransactionalPortalCacheHelper.isEnabled()) {
 			if (obj == null) {
 				obj = _nullHolder;
 			}
@@ -74,7 +74,7 @@ public class TransactionalPortalCache extends BasePortalCache {
 	}
 
 	public void put(String key, Object obj, int timeToLive) {
-		if (TransactionalPortalCacheHelper.enabled()) {
+		if (TransactionalPortalCacheHelper.isEnabled()) {
 			if (obj == null) {
 				obj = _nullHolder;
 			}
@@ -87,7 +87,7 @@ public class TransactionalPortalCache extends BasePortalCache {
 	}
 
 	public void put(String key, Serializable obj) {
-		if (TransactionalPortalCacheHelper.enabled()) {
+		if (TransactionalPortalCacheHelper.isEnabled()) {
 			if (obj == null) {
 				obj = _nullHolder;
 			}
@@ -100,7 +100,7 @@ public class TransactionalPortalCache extends BasePortalCache {
 	}
 
 	public void put(String key, Serializable obj, int timeToLive) {
-		if (TransactionalPortalCacheHelper.enabled()) {
+		if (TransactionalPortalCacheHelper.isEnabled()) {
 			if (obj == null) {
 				obj = _nullHolder;
 			}
@@ -113,7 +113,7 @@ public class TransactionalPortalCache extends BasePortalCache {
 	}
 
 	public void remove(String key) {
-		if (TransactionalPortalCacheHelper.enabled()) {
+		if (TransactionalPortalCacheHelper.isEnabled()) {
 			TransactionalPortalCacheHelper.remove(_portalCache, key);
 		}
 
@@ -121,7 +121,7 @@ public class TransactionalPortalCache extends BasePortalCache {
 	}
 
 	public void removeAll() {
-		if (TransactionalPortalCacheHelper.enabled()) {
+		if (TransactionalPortalCacheHelper.isEnabled()) {
 			TransactionalPortalCacheHelper.removeAll(_portalCache);
 		}
 
