@@ -63,7 +63,7 @@ public class StringUtilTest extends TestCase {
 		String original = "Hello World HELLO WORLD Hello World";
 		String expected = "Hello World HELLO WORLD Hello World";
 
-		String actual = StringUtil.replaceFirst(original, "", "Aloha");
+		String actual = StringUtil.replace(original, "", "Aloha");
 
 		assertEquals(expected, actual);
 	}
