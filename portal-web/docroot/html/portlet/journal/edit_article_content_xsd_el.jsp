@@ -21,7 +21,9 @@ String languageId = LanguageUtil.getLanguageId(request);
 
 long groupId = GetterUtil.getLong((String)request.getAttribute(WebKeys.JOURNAL_ARTICLE_GROUP_ID));
 
-Group liveGroup = GroupLocalServiceUtil.getGroup(groupId);
+Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+Group liveGroup = group;
 
 if (liveGroup.isStagingGroup()) {
 	liveGroup = liveGroup.getLiveGroup();
@@ -159,16 +161,16 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 					<aui:input cssClass="lfr-input-text-container" inlineField="<%= true %>" label="" name="journalImagegallery" size="55" type="text" value="<%= elContent %>" />
 
 					<%
-					long igScopeGroup = groupId;
+					long igScopeGroupId = groupId;
 
 					if (liveGroup.isStaged() && !liveGroup.isStagedRemotely() && !liveGroup.isStagedPortlet(PortletKeys.IMAGE_GALLERY)) {
-						igScopeGroup = liveGroup.getGroupId();
+						igScopeGroupId = liveGroup.getGroupId();
 					}
 					%>
 
 					<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectIGURL">
 						<portlet:param name="struts_action" value="/journal/select_image_gallery" />
-						<portlet:param name="groupId" value="<%= String.valueOf(igScopeGroup) %>" />
+						<portlet:param name="groupId" value="<%= String.valueOf(igScopeGroupId) %>" />
 					</portlet:renderURL>
 
 					<%
@@ -184,16 +186,16 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 					<aui:input cssClass="lfr-input-text-container" inlineField="<%= true %>" label="" name="journalDocumentlibrary" size="55" type="text" value="<%= elContent %>" />
 
 					<%
-					long dlScopeGroup = groupId;
+					long dlScopeGroupId = groupId;
 
 					if (liveGroup.isStaged() && !liveGroup.isStagedRemotely() && !liveGroup.isStagedPortlet(PortletKeys.DOCUMENT_LIBRARY)) {
-						dlScopeGroup = liveGroup.getGroupId();
+						dlScopeGroupId = liveGroup.getGroupId();
 					}
 					%>
 
 					<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectDLURL">
 						<portlet:param name="struts_action" value="/journal/select_document_library" />
-						<portlet:param name="groupId" value="<%= String.valueOf(dlScopeGroup) %>" />
+						<portlet:param name="groupId" value="<%= String.valueOf(dlScopeGroupId) %>" />
 					</portlet:renderURL>
 
 					<%

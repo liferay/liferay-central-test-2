@@ -41,13 +41,14 @@ sb.append(themeDisplay.getPathContext());
 sb.append("/html/js/editor/editor.jsp?p_l_id=");
 sb.append(plid);
 
-if (Validator.isNotNull(themeDisplay.getPortletDisplay().getRootPortletId())) {
+if (Validator.isNotNull(portletDisplay.getRootPortletId())) {
 	sb.append("&amp;p_p_id=");
-	sb.append(HttpUtil.encodeURL(themeDisplay.getPortletDisplay().getRootPortletId()));
+	sb.append(HttpUtil.encodeURL(portletDisplay.getRootPortletId()));
 }
 
 sb.append("&amp;p_main_path=");
 sb.append(HttpUtil.encodeURL(themeDisplay.getPathMain()));
+
 sb.append("&amp;doAsUserId=");
 
 String doAsUserId = themeDisplay.getDoAsUserId();
@@ -60,6 +61,7 @@ sb.append(HttpUtil.encodeURL(doAsUserId));
 
 sb.append("&amp;doAsGroupId=");
 sb.append(themeDisplay.getDoAsGroupId());
+
 sb.append("&amp;editorImpl=");
 sb.append(editorImpl);
 
