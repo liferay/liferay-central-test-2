@@ -230,12 +230,40 @@ public class HttpImpl implements Http {
 			return StringPool.BLANK;
 		}
 
+		int leadingSlashCount = 0;
+		int tailingSlashCount = 0;
+
 		if (leading) {
-			path = path.replaceAll("^/+", StringPool.BLANK);
+			for(int i = 0; i < path.length(); i++) {
+				if (path.charAt(i) == CharPool.SLASH) {
+					leadingSlashCount++;
+				}
+				else {
+					break;
+				}
+			}
 		}
 
 		if (trailing) {
-			path = path.replaceAll("/+$", StringPool.BLANK);
+			for(int i = path.length() - 1; i >=0; i--) {
+				if (path.charAt(i) == CharPool.SLASH) {
+					tailingSlashCount++;
+				}
+				else {
+					break;
+				}
+			}
+		}
+
+		int slashCount = leadingSlashCount + tailingSlashCount;
+
+		if (slashCount > path.length()) {
+			return StringPool.BLANK;
+		}
+
+		if (slashCount > 0) {
+			path = path.substring(leadingSlashCount,
+				path.length() - tailingSlashCount);
 		}
 
 		return path;
