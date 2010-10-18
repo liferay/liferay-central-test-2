@@ -15,7 +15,6 @@
 package com.liferay.portalweb.portal.util;
 
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import com.thoughtworks.selenium.CommandProcessor;
@@ -74,7 +73,7 @@ public class LiferayDefaultSelenium
 		}
 
 		if (TestPropsValues.SAVE_SOURCE) {
-			String content = HttpUtil.URLtoString(getLocation());
+			String content = getHtmlSource();
 
 			screenShotName = getScreenshotFileName();
 
