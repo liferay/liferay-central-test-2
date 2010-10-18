@@ -132,6 +132,10 @@ public class JournalMessageListener implements MessageListener {
 				continue;
 			}
 
+			if (!user.isActive()) {
+				continue;
+			}
+
 			if (!GroupLocalServiceUtil.hasUserGroup(userId, groupId)) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
@@ -142,10 +146,6 @@ public class JournalMessageListener implements MessageListener {
 				SubscriptionLocalServiceUtil.deleteSubscription(
 					subscription.getSubscriptionId());
 
-				continue;
-			}
-
-			if (!user.isActive()) {
 				continue;
 			}
 
