@@ -46,9 +46,9 @@ public class VerifyGroup extends VerifyProcess {
 		String currentShardName = ShardUtil.getCurrentShardName();
 
 		for (Company company : companies) {
-			if (!ShardUtil.isEnabled() ||
-				company.getShardName().equals(currentShardName)) {
+			String shardName = company.getShardName();
 
+			if (!ShardUtil.isEnabled() || shardName.equals(currentShardName)) {
 				GroupLocalServiceUtil.checkCompanyGroup(company.getCompanyId());
 			}
 		}
