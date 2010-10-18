@@ -40,12 +40,15 @@ Layout rootLayout = null;
 long rootLayoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 
 if (Validator.isNotNull(rootLayoutUuid)) {
-	includeRootInTree = false;
 
 	rootLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(rootLayoutUuid, scopeGroupId);
 
 	if (rootLayout != null) {
 		rootLayoutId = rootLayout.getLayoutId();
 	}
+}
+
+if (rootLayoutId == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
+	includeRootInTree = false;
 }
 %>
