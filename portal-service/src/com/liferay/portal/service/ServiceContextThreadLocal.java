@@ -16,7 +16,6 @@ package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 
-import java.util.EmptyStackException;
 import java.util.Stack;
 
 /**
@@ -25,30 +24,38 @@ import java.util.Stack;
 public class ServiceContextThreadLocal {
 
 	public static ServiceContext getServiceContext() {
-		try {
-			return _serviceContextThreadLocal.get().peek();
-		}
-		catch (EmptyStackException ese) {
+		Stack<ServiceContext> serviceContextStack =
+			_serviceContextThreadLocal.get();
+
+		if (serviceContextStack.isEmpty()) {
 			return null;
 		}
+
+		return serviceContextStack.peek();
 	}
 
 	public static ServiceContext popServiceContext() {
-		try {
-			return _serviceContextThreadLocal.get().pop();
-		}
-		catch (EmptyStackException ese) {
+		Stack<ServiceContext> serviceContextStack =
+			_serviceContextThreadLocal.get();
+
+		if (serviceContextStack.isEmpty()) {
 			return null;
 		}
+
+		return serviceContextStack.pop();
 	}
 
 	public static void pushServiceContext(ServiceContext serviceContext) {
-		_serviceContextThreadLocal.get().push(serviceContext);
+		Stack<ServiceContext> serviceContextStack =
+			_serviceContextThreadLocal.get();
+
+		serviceContextStack.push(serviceContext);
 	}
 
-	private static ThreadLocal<Stack<ServiceContext>> _serviceContextThreadLocal =
-		new AutoResetThreadLocal<Stack<ServiceContext>>(
-			ServiceContextThreadLocal.class + "._serviceContextThreadLocal",
-			new Stack<ServiceContext>());
+	private static ThreadLocal<Stack<ServiceContext>>
+		_serviceContextThreadLocal =
+			new AutoResetThreadLocal<Stack<ServiceContext>>(
+				ServiceContextThreadLocal.class + "._serviceContextThreadLocal",
+				new Stack<ServiceContext>());
 
 }

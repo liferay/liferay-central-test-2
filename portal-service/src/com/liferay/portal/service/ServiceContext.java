@@ -30,42 +30,42 @@ import java.util.Map;
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  */
-public class ServiceContext implements Serializable {
+public class ServiceContext implements Cloneable, Serializable {
 
 	public ServiceContext() {
 		_attributes = new LinkedHashMap<String, Serializable>();
 		_expandoBridgeAttributes = new LinkedHashMap<String, Serializable>();
 	}
 
-	protected Object clone() {
-		ServiceContext clone = new ServiceContext();
+	public Object clone() {
+		ServiceContext serviceContext = new ServiceContext();
 
-		clone.setAddCommunityPermissions(getAddCommunityPermissions());
-		clone.setAddGuestPermissions(getAddGuestPermissions());
-		clone.setAssetCategoryIds(getAssetCategoryIds());
-		clone.setAssetTagNames(getAssetTagNames());
-		clone.setAttributes(getAttributes());
-		clone.setCommand(getCommand());
-		clone.setCommunityPermissions(getCommunityPermissions());
-		clone.setCompanyId(getCompanyId());
-		clone.setCreateDate(getCreateDate());
-		clone.setExpandoBridgeAttributes(getExpandoBridgeAttributes());
-		clone.setGuestPermissions(getGuestPermissions());
-		clone.setLanguageId(getLanguageId());
-		clone.setLayoutFullURL(getLayoutFullURL());
-		clone.setLayoutURL(getLayoutURL());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setPathMain(getPathMain());
-		clone.setPlid(getPlid());
-		clone.setPortalURL(getPortalURL());
-		clone.setPortletPreferencesIds(getPortletPreferencesIds());
-		clone.setScopeGroupId(getScopeGroupId());
-		clone.setUserDisplayURL(getUserDisplayURL());
-		clone.setUserId(getUserId());
-		clone.setUuid(getUuid());
-		clone.setWorkflowAction(getWorkflowAction());
+		serviceContext.setAddCommunityPermissions(getAddCommunityPermissions());
+		serviceContext.setAddGuestPermissions(getAddGuestPermissions());
+		serviceContext.setAssetCategoryIds(getAssetCategoryIds());
+		serviceContext.setAssetTagNames(getAssetTagNames());
+		serviceContext.setAttributes(getAttributes());
+		serviceContext.setCommand(getCommand());
+		serviceContext.setCommunityPermissions(getCommunityPermissions());
+		serviceContext.setCompanyId(getCompanyId());
+		serviceContext.setCreateDate(getCreateDate());
+		serviceContext.setExpandoBridgeAttributes(getExpandoBridgeAttributes());
+		serviceContext.setGuestPermissions(getGuestPermissions());
+		serviceContext.setLanguageId(getLanguageId());
+		serviceContext.setLayoutFullURL(getLayoutFullURL());
+		serviceContext.setLayoutURL(getLayoutURL());
+		serviceContext.setModifiedDate(getModifiedDate());
+		serviceContext.setPathMain(getPathMain());
+		serviceContext.setPlid(getPlid());
+		serviceContext.setPortalURL(getPortalURL());
+		serviceContext.setPortletPreferencesIds(getPortletPreferencesIds());
+		serviceContext.setScopeGroupId(getScopeGroupId());
+		serviceContext.setUserDisplayURL(getUserDisplayURL());
+		serviceContext.setUserId(getUserId());
+		serviceContext.setUuid(getUuid());
+		serviceContext.setWorkflowAction(getWorkflowAction());
 
-		return clone;
+		return serviceContext;
 	}
 
 	public boolean getAddCommunityPermissions() {

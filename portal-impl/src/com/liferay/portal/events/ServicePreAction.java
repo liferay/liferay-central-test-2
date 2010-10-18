@@ -1356,7 +1356,7 @@ public class ServicePreAction extends Action {
 			scopeGroupId = guestGroup.getGroupId();
 			doAsGroupId = scopeGroupId;
 			parentGroupId = PortalUtil.getParentGroupId(scopeGroupId);
-			refererPlid = 0;		
+			refererPlid = 0;
 		}
 
 		// Theme and color scheme
@@ -1780,6 +1780,8 @@ public class ServicePreAction extends Action {
 		themeDisplay.setURLUpdateManager(updateManagerURL);
 
 		request.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
+
+		// Service context
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			request);

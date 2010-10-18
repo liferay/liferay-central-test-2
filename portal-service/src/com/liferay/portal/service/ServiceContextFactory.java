@@ -96,10 +96,6 @@ public class ServiceContextFactory {
 	public static ServiceContext getInstance(PortletRequest portletRequest)
 		throws PortalException, SystemException {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)portletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
@@ -108,6 +104,12 @@ public class ServiceContextFactory {
 		}
 		else {
 			serviceContext = new ServiceContext();
+
+			// Theme display
+
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)portletRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
 
 			serviceContext.setCompanyId(themeDisplay.getCompanyId());
 			serviceContext.setLanguageId(themeDisplay.getLanguageId());
@@ -208,6 +210,8 @@ public class ServiceContextFactory {
 		throws PortalException, SystemException {
 
 		ServiceContext serviceContext = getInstance(portletRequest);
+
+		// Expando
 
 		Map<String, Serializable> expandoBridgeAttributes =
 			PortalUtil.getExpandoBridgeAttributes(
