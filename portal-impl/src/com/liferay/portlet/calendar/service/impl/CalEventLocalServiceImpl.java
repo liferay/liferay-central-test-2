@@ -1270,15 +1270,15 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			"-//Liferay Inc//Liferay Portal " + ReleaseInfo.getVersion() +
 			"//EN");
 
-		PropertyList props = iCal.getProperties();
+		PropertyList propertiesList = iCal.getProperties();
 
-		props.add(prodId);
-		props.add(Version.VERSION_2_0);
-		props.add(CalScale.GREGORIAN);
+		propertiesList.add(prodId);
+		propertiesList.add(Version.VERSION_2_0);
+		propertiesList.add(CalScale.GREGORIAN);
 
 		// LPS-6058
 
-		props.add(Method.PUBLISH);
+		propertiesList.add(Method.PUBLISH);
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		TimeZone timeZone = user.getTimeZone();

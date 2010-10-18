@@ -80,7 +80,7 @@ public class PropertiesTransformerListener extends TransformerListener {
 			return s;
 		}
 
-		Properties props = new Properties();
+		Properties properties = new Properties();
 
 		try {
 			Map<String, String> newTokens = new HashMap<String, String>();
@@ -94,7 +94,7 @@ public class PropertiesTransformerListener extends TransformerListener {
 			String script = JournalUtil.getTemplateScript(
 				groupId, _GLOBAL_PROPERTIES, newTokens, getLanguageId());
 
-			PropertiesUtil.load(props, script);
+			PropertiesUtil.load(properties, script);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -102,22 +102,23 @@ public class PropertiesTransformerListener extends TransformerListener {
 			}
 		}
 
-		if (props.size() == 0) {
+		if (properties.size() == 0) {
 			return s;
 		}
 
-		String[] escapedKeys = new String[props.size()];
-		String[] escapedValues = new String[props.size()];
+		String[] escapedKeys = new String[properties.size()];
+		String[] escapedValues = new String[properties.size()];
 
-		String[] keys = new String[props.size()];
-		String[] values = new String[props.size()];
+		String[] keys = new String[properties.size()];
+		String[] values = new String[properties.size()];
 
-		String[] tempEscapedKeys = new String[props.size()];
-		String[] tempEscapedValues = new String[props.size()];
+		String[] tempEscapedKeys = new String[properties.size()];
+		String[] tempEscapedValues = new String[properties.size()];
 
 		int counter = 0;
 
-		Iterator<Map.Entry<Object, Object>> itr = props.entrySet().iterator();
+		Iterator<Map.Entry<Object, Object>> itr =
+			properties.entrySet().iterator();
 
 		while (itr.hasNext()) {
 			Map.Entry<Object, Object> entry = itr.next();

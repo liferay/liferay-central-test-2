@@ -973,9 +973,11 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		Group group = groupPersistence.findByPrimaryKey(groupId);
 
-		UnicodeProperties props = group.getTypeSettingsProperties();
+		UnicodeProperties typeSettingsProperties =
+			group.getTypeSettingsProperties();
 
-		props.setProperty("workflowEnabled", String.valueOf(workflowEnabled));
+		typeSettingsProperties.setProperty(
+			"workflowEnabled", String.valueOf(workflowEnabled));
 
 		if (workflowEnabled) {
 			if (workflowStages < PropsValues.TASKS_DEFAULT_STAGES) {
@@ -986,8 +988,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				workflowRoleNames = PropsValues.TASKS_DEFAULT_ROLE_NAMES;
 			}
 
-			props.setProperty("workflowStages", String.valueOf(workflowStages));
-			props.setProperty("workflowRoleNames", workflowRoleNames);
+			typeSettingsProperties.setProperty(
+				"workflowStages", String.valueOf(workflowStages));
+			typeSettingsProperties.setProperty(
+				"workflowRoleNames", workflowRoleNames);
 		}
 
 		group.setTypeSettings(group.getTypeSettings());

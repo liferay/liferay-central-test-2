@@ -2739,10 +2739,11 @@ public class ServiceBuilder {
 		long buildNumber = 1;
 
 		if (propsFile.exists()) {
-			Properties props = PropertiesUtil.load(FileUtil.read(propsFile));
+			Properties properties = PropertiesUtil.load(
+				FileUtil.read(propsFile));
 
 			buildNumber = GetterUtil.getLong(
-				props.getProperty("build.number")) + 1;
+				properties.getProperty("build.number")) + 1;
 		}
 
 		Map<String, Object> context = _getContext();
