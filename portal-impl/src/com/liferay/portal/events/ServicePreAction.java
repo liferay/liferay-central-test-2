@@ -797,10 +797,11 @@ public class ServicePreAction extends Action {
 		if (layoutGroupId != guestGroup.getGroupId()) {
 			Group layoutGroup = GroupLocalServiceUtil.getGroup(layoutGroupId);
 
-			UnicodeProperties props = layoutGroup.getTypeSettingsProperties();
+			UnicodeProperties typeSettingsProperties =
+				layoutGroup.getTypeSettingsProperties();
 
 			boolean mergeGuestPublicPages = GetterUtil.getBoolean(
-				props.getProperty("mergeGuestPublicPages"));
+				typeSettingsProperties.getProperty("mergeGuestPublicPages"));
 
 			if (!mergeGuestPublicPages) {
 				return layouts;
@@ -840,11 +841,12 @@ public class ServicePreAction extends Action {
 					return layouts;
 				}
 
-				UnicodeProperties props =
+				UnicodeProperties typeSettingsProperties =
 					previousGroup.getTypeSettingsProperties();
 
 				boolean mergeGuestPublicPages = GetterUtil.getBoolean(
-					props.getProperty("mergeGuestPublicPages"));
+					typeSettingsProperties.getProperty(
+						"mergeGuestPublicPages"));
 
 				if (!mergeGuestPublicPages) {
 					return layouts;
@@ -1296,29 +1298,31 @@ public class ServicePreAction extends Action {
 				String typeSettings = layoutClone.get(request, plid);
 
 				if (typeSettings != null) {
-					UnicodeProperties props = new UnicodeProperties(true);
+					UnicodeProperties typeSettingsProperties =
+						new UnicodeProperties(true);
 
-					props.load(typeSettings);
+					typeSettingsProperties.load(typeSettings);
 
-					String stateMax = props.getProperty(
+					String stateMax = typeSettingsProperties.getProperty(
 						LayoutTypePortletConstants.STATE_MAX);
-					String stateMin = props.getProperty(
+					String stateMin = typeSettingsProperties.getProperty(
 						LayoutTypePortletConstants.STATE_MIN);
-					String modeAbout = props.getProperty(
+					String modeAbout = typeSettingsProperties.getProperty(
 						LayoutTypePortletConstants.MODE_ABOUT);
-					String modeConfig = props.getProperty(
+					String modeConfig = typeSettingsProperties.getProperty(
 						LayoutTypePortletConstants.MODE_CONFIG);
-					String modeEdit = props.getProperty(
+					String modeEdit = typeSettingsProperties.getProperty(
 						LayoutTypePortletConstants.MODE_EDIT);
-					String modeEditDefaults = props.getProperty(
-						LayoutTypePortletConstants.MODE_EDIT_DEFAULTS);
-					String modeEditGuest = props.getProperty(
+					String modeEditDefaults =
+						typeSettingsProperties.getProperty(
+							LayoutTypePortletConstants.MODE_EDIT_DEFAULTS);
+					String modeEditGuest = typeSettingsProperties.getProperty(
 						LayoutTypePortletConstants.MODE_EDIT_GUEST);
-					String modeHelp = props.getProperty(
+					String modeHelp = typeSettingsProperties.getProperty(
 						LayoutTypePortletConstants.MODE_HELP);
-					String modePreview = props.getProperty(
+					String modePreview = typeSettingsProperties.getProperty(
 						LayoutTypePortletConstants.MODE_PREVIEW);
-					String modePrint = props.getProperty(
+					String modePrint = typeSettingsProperties.getProperty(
 						LayoutTypePortletConstants.MODE_PRINT);
 
 					layoutTypePortlet.setStateMax(stateMax);
