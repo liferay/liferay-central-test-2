@@ -71,7 +71,7 @@ public interface MBMessageService {
 	public void deleteDiscussionMessage(long groupId,
 		java.lang.String className, long classPK,
 		java.lang.String permissionClassName, long permissionClassPK,
-		long messageId, long permissionOwnerId)
+		long permissionOwnerId, long messageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -168,7 +168,7 @@ public interface MBMessageService {
 	public com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
 		java.lang.String className, long classPK,
 		java.lang.String permissionClassName, long permissionClassPK,
-		long messageId, long permissionOwnerId, java.lang.String subject,
+		long permissionOwnerId, long messageId, java.lang.String subject,
 		java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,

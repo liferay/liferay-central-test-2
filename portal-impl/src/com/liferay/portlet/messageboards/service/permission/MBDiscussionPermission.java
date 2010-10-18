@@ -101,7 +101,8 @@ public class MBDiscussionPermission {
 			return false;
 		}
 
-		if ((ownerId > 0) && permissionChecker.hasOwnerPermission(
+		if ((ownerId > 0) &&
+			permissionChecker.hasOwnerPermission(
 				companyId, className, classPK, ownerId, actionId)) {
 
 			return true;

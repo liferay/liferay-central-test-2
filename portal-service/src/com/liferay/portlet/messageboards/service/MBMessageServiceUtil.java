@@ -81,12 +81,12 @@ public class MBMessageServiceUtil {
 	public static void deleteDiscussionMessage(long groupId,
 		java.lang.String className, long classPK,
 		java.lang.String permissionClassName, long permissionClassPK,
-		long messageId, long permissionOwnerId)
+		long permissionOwnerId, long messageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.deleteDiscussionMessage(groupId, className, classPK,
-			permissionClassName, permissionClassPK, messageId, permissionOwnerId);
+			permissionClassName, permissionClassPK, permissionOwnerId, messageId);
 	}
 
 	public static void deleteMessage(long messageId)
@@ -215,15 +215,15 @@ public class MBMessageServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
 		java.lang.String className, long classPK,
 		java.lang.String permissionClassName, long permissionClassPK,
-		long messageId, long permissionOwnerId, java.lang.String subject,
+		long permissionOwnerId, long messageId, java.lang.String subject,
 		java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateDiscussionMessage(className, classPK,
-			permissionClassName, permissionClassPK, messageId,
-			permissionOwnerId, subject, body, serviceContext);
+			permissionClassName, permissionClassPK, permissionOwnerId,
+			messageId, subject, body, serviceContext);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(

@@ -153,8 +153,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public void deleteDiscussionMessage(
 			long groupId, String className, long classPK,
-			String permissionClassName, long permissionClassPK, long messageId,
-			long permissionOwnerId)
+			String permissionClassName, long permissionClassPK,
+			long permissionOwnerId, long messageId)
 		throws PortalException, SystemException {
 
 		User user = getUser();
@@ -527,7 +527,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public MBMessage updateDiscussionMessage(
 			String className, long classPK, String permissionClassName,
-			long permissionClassPK, long messageId, long permissionOwnerId,
+			long permissionClassPK, long permissionOwnerId, long messageId,
 			String subject, String body, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 

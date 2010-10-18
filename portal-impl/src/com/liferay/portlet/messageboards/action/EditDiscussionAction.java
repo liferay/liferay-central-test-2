@@ -138,7 +138,7 @@ public class EditDiscussionAction extends PortletAction {
 
 		MBMessageServiceUtil.deleteDiscussionMessage(
 			groupId, className, classPK, permissionClassName, permissionClassPK,
-			messageId, permissionOwnerId);
+			permissionOwnerId, messageId);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {
@@ -185,7 +185,7 @@ public class EditDiscussionAction extends PortletAction {
 
 			message = MBMessageServiceUtil.updateDiscussionMessage(
 				className, classPK, permissionClassName, permissionClassPK,
-				messageId, permissionOwnerId, subject, body, serviceContext);
+				permissionOwnerId, messageId, subject, body, serviceContext);
 		}
 
 		return message;

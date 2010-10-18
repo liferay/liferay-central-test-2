@@ -187,7 +187,7 @@ public class MBMessageServiceHttp {
 	public static void deleteDiscussionMessage(HttpPrincipal httpPrincipal,
 		long groupId, java.lang.String className, long classPK,
 		java.lang.String permissionClassName, long permissionClassPK,
-		long messageId, long permissionOwnerId)
+		long permissionOwnerId, long messageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -197,7 +197,7 @@ public class MBMessageServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					className, classPK, permissionClassName, permissionClassPK,
-					messageId, permissionOwnerId);
+					permissionOwnerId, messageId);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
@@ -740,7 +740,7 @@ public class MBMessageServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
 		HttpPrincipal httpPrincipal, java.lang.String className, long classPK,
 		java.lang.String permissionClassName, long permissionClassPK,
-		long messageId, long permissionOwnerId, java.lang.String subject,
+		long permissionOwnerId, long messageId, java.lang.String subject,
 		java.lang.String body,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -752,7 +752,7 @@ public class MBMessageServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK, permissionClassName, permissionClassPK,
-					messageId, permissionOwnerId, subject, body, serviceContext);
+					permissionOwnerId, messageId, subject, body, serviceContext);
 
 			Object returnObj = null;
 
