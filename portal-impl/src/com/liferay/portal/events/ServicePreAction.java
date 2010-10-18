@@ -1345,7 +1345,19 @@ public class ServicePreAction extends Action {
 		// Scope
 
 		long scopeGroupId = PortalUtil.getScopeGroupId(request);
-		long parentGroupId = PortalUtil.getParentGroupId(scopeGroupId);
+		long parentGroupId;
+		try {
+			parentGroupId = PortalUtil.getParentGroupId(scopeGroupId);
+		}
+		catch (NoSuchGroupException e) {
+			Group guestGroup = GroupLocalServiceUtil.getGroup(
+				group.getCompanyId(), GroupConstants.GUEST);
+
+			scopeGroupId = guestGroup.getGroupId();
+			doAsGroupId = scopeGroupId;
+			parentGroupId = PortalUtil.getParentGroupId(scopeGroupId);
+			refererPlid = 0;		
+		}
 
 		// Theme and color scheme
 
