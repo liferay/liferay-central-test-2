@@ -72,7 +72,8 @@ public class SitemapUtil {
 
 			if (PortalUtil.isLayoutSitemapable(layout) && !layout.isHidden() &&
 				GetterUtil.getBoolean(
-					typeSettingsProperties.getProperty("sitemap-include"), true)) {
+					typeSettingsProperties.getProperty("sitemap-include"),
+					true)) {
 
 				Element url = element.addElement("url");
 
