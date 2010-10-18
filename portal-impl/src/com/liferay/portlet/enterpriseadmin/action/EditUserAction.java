@@ -198,6 +198,11 @@ public class EditUserAction extends PortletAction {
 					user.getUserId());
 			}
 
+			if (actionRequest.getAttribute("deleteScopeGroup") != null){
+				redirect = HttpUtil.setParameter(redirect, "doAsGroupId" , 0);
+				redirect = HttpUtil.setParameter(redirect, "refererPlid" , 0);
+			}
+
 			sendRedirect(actionRequest, actionResponse, redirect);
 		}
 		catch (Exception e) {
@@ -418,6 +423,13 @@ public class EditUserAction extends PortletAction {
 				UserServiceUtil.updateActive(deleteUserIds[i], active);
 			}
 			else {
+				User user = UserServiceUtil.getUserById(deleteUserIds[i]);
+				Group group = user.getGroup();
+				if (group != null && group.getGroupId() ==
+					PortalUtil.getScopeGroupId(actionRequest)) {
+						actionRequest.setAttribute("deleteScopeGroup", true);
+				}
+
 				UserServiceUtil.deleteUser(deleteUserIds[i]);
 			}
 		}
