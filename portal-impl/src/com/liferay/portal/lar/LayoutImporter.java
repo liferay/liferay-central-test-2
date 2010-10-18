@@ -1016,6 +1016,9 @@ public class LayoutImporter {
 			String layoutTemplateId = newProperties.getProperty(
 				LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID);
 
+			previousProperties.setProperty(
+				LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID, layoutTemplateId);
+
 			LayoutTemplate newLayoutTemplate =
 				LayoutTemplateLocalServiceUtil.getLayoutTemplate(
 					layoutTemplateId, false, null);
