@@ -67,11 +67,12 @@ public class SitemapUtil {
 		throws PortalException, SystemException {
 
 		for (Layout layout : layouts) {
-			UnicodeProperties props = layout.getTypeSettingsProperties();
+			UnicodeProperties typeSettingsProperties =
+				layout.getTypeSettingsProperties();
 
 			if (PortalUtil.isLayoutSitemapable(layout) && !layout.isHidden() &&
 				GetterUtil.getBoolean(
-					props.getProperty("sitemap-include"), true)) {
+					typeSettingsProperties.getProperty("sitemap-include"), true)) {
 
 				Element url = element.addElement("url");
 
@@ -80,13 +81,15 @@ public class SitemapUtil {
 
 				url.addElement("loc").addText(encodeXML(layoutFullURL));
 
-				String changefreq = props.getProperty("sitemap-changefreq");
+				String changefreq = typeSettingsProperties.getProperty(
+					"sitemap-changefreq");
 
 				if (Validator.isNotNull(changefreq)) {
 					url.addElement("changefreq").addText(changefreq);
 				}
 
-				String priority = props.getProperty("sitemap-priority");
+				String priority = typeSettingsProperties.getProperty(
+					"sitemap-priority");
 
 				if (Validator.isNotNull(priority)) {
 					url.addElement("priority").addText(priority);
