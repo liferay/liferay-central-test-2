@@ -185,7 +185,7 @@ if (Validator.isNotNull(historyKey)) {
 />
 
 <%
-String taglibOnSubmit = renderResponse.getNamespace() + "saveUser('" + ((selUser == null) ? Constants.ADD : Constants.UPDATE) + "');";
+String taglibOnSubmit = "event.preventDefault(); " + renderResponse.getNamespace() + "saveUser('" + ((selUser == null) ? Constants.ADD : Constants.UPDATE) + "');";
 %>
 
 <aui:form method="post" name="fm" onSubmit="<%= taglibOnSubmit %>">
