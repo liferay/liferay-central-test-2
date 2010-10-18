@@ -231,10 +231,10 @@ public class HttpImpl implements Http {
 		}
 
 		int leadingSlashCount = 0;
-		int tailingSlashCount = 0;
+		int trailingSlashCount = 0;
 
 		if (leading) {
-			for(int i = 0; i < path.length(); i++) {
+			for (int i = 0; i < path.length(); i++) {
 				if (path.charAt(i) == CharPool.SLASH) {
 					leadingSlashCount++;
 				}
@@ -245,9 +245,9 @@ public class HttpImpl implements Http {
 		}
 
 		if (trailing) {
-			for(int i = path.length() - 1; i >=0; i--) {
+			for (int i = path.length() - 1; i >=0; i--) {
 				if (path.charAt(i) == CharPool.SLASH) {
-					tailingSlashCount++;
+					trailingSlashCount++;
 				}
 				else {
 					break;
@@ -255,15 +255,15 @@ public class HttpImpl implements Http {
 			}
 		}
 
-		int slashCount = leadingSlashCount + tailingSlashCount;
+		int slashCount = leadingSlashCount + trailingSlashCount;
 
 		if (slashCount > path.length()) {
 			return StringPool.BLANK;
 		}
 
 		if (slashCount > 0) {
-			path = path.substring(leadingSlashCount,
-				path.length() - tailingSlashCount);
+			path = path.substring(
+				leadingSlashCount, path.length() - trailingSlashCount);
 		}
 
 		return path;
