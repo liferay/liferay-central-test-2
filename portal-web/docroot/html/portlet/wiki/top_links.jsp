@@ -19,6 +19,16 @@
 <%
 String strutsAction = ParamUtil.getString(request, "struts_action");
 
+String strutsPath = StringPool.BLANK;
+
+if (Validator.isNotNull(strutsAction)) {
+	int pos = strutsAction.indexOf(StringPool.SLASH, 1);
+
+	if (pos != -1) {
+		strutsPath = strutsAction.substring(0, pos);
+	}
+}
+
 String redirect = ParamUtil.getString(request, "redirect");
 
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
@@ -34,14 +44,6 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("categoryId", "0");
 portletURL.setParameter("nodeName", node.getName());
-
-String wikiBaseUrl = "";
-if (strutsAction.length() > 0) {
-	int ndx = strutsAction.indexOf('/', 1);
-	if (ndx != -1) {
-		wikiBaseUrl = strutsAction.substring(0, ndx);
-	}
-}
 %>
 
 <c:if test="<%= portletName.equals(PortletKeys.WIKI_ADMIN) %>">
@@ -97,7 +99,7 @@ if (strutsAction.length() > 0) {
 					image="../aui/home"
 					label="<%= true %>"
 					message="<%= WikiPageConstants.FRONT_PAGE %>"
-					url='<%=strutsAction.length() == 0 || strutsAction.equals(wikiBaseUrl + "/view") ? StringPool.BLANK : frontPageURL.toString() %>'
+					url='<%= Validator.isNull(strutsAction) || strutsAction.equals(strutsPath + "/view") ? StringPool.BLANK : frontPageURL.toString() %>'
 				/>
 
 				<%
@@ -109,7 +111,7 @@ if (strutsAction.length() > 0) {
 					image="../aui/clock"
 					label="<%= true %>"
 					message="recent-changes"
-					url='<%= strutsAction.equals(wikiBaseUrl + "/view_recent_changes") ? StringPool.BLANK : portletURL.toString() %>'
+					url='<%= strutsAction.equals(strutsPath + "/view_recent_changes") ? StringPool.BLANK : portletURL.toString() %>'
 				/>
 
 				<%
@@ -119,7 +121,7 @@ if (strutsAction.length() > 0) {
 				<liferay-ui:icon
 					cssClass="top-link"
 					image="../aui/document" label="<%= true %>"
-					message="all-pages" url='<%= strutsAction.equals(wikiBaseUrl + "/view_all_pages") ? StringPool.BLANK : portletURL.toString() %>'
+					message="all-pages" url='<%= strutsAction.equals(strutsPath + "/view_all_pages") ? StringPool.BLANK : portletURL.toString() %>'
 				/>
 
 				<%
@@ -131,7 +133,7 @@ if (strutsAction.length() > 0) {
 					image="../aui/document-b"
 					label="<%= true %>"
 					message="orphan-pages"
-					url='<%= strutsAction.equals(wikiBaseUrl + "/view_orphan_pages") ? StringPool.BLANK : portletURL.toString() %>'
+					url='<%= strutsAction.equals(strutsPath + "/view_orphan_pages") ? StringPool.BLANK : portletURL.toString() %>'
 				/>
 
 				<%
@@ -143,7 +145,7 @@ if (strutsAction.length() > 0) {
 					image="../aui/document-b"
 					label="<%= true %>"
 					message="draft-pages"
-					url='<%= strutsAction.equals(wikiBaseUrl + "/view_draft_pages") ? StringPool.BLANK : portletURL.toString() %>'
+					url='<%= strutsAction.equals(strutsPath + "/view_draft_pages") ? StringPool.BLANK : portletURL.toString() %>'
 				/>
 			</div>
 
