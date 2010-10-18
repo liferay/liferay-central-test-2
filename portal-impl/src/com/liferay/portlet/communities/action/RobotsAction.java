@@ -51,7 +51,8 @@ public class RobotsAction extends Action {
 			try {
 				layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(virtualHost);
 			}
-			catch (NoSuchLayoutSetException nslse) {}
+			catch (NoSuchLayoutSetException nslse) {
+			}
 
 			String robots = RobotsUtil.getRobots(layoutSet);
 
@@ -72,5 +73,6 @@ public class RobotsAction extends Action {
 		return null;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SitemapAction.class);
+	private static Log _log = LogFactoryUtil.getLog(RobotsAction.class);
+
 }

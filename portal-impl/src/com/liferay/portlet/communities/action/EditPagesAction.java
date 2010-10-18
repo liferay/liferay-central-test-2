@@ -698,9 +698,10 @@ public class EditPagesAction extends PortletAction {
 
 		Group liveGroup = GroupLocalServiceUtil.getGroup(liveGroupId);
 
-		UnicodeProperties props = liveGroup.getTypeSettingsProperties();
+		UnicodeProperties typeSettingsProperties =
+			liveGroup.getTypeSettingsProperties();
 
-		props.setProperty(
+		typeSettingsProperties.setProperty(
 			"mergeGuestPublicPages", String.valueOf(mergeGuestPublicPages));
 
 		GroupServiceUtil.updateGroup(liveGroupId, liveGroup.getTypeSettings());
@@ -716,9 +717,11 @@ public class EditPagesAction extends PortletAction {
 
 		Group liveGroup = GroupLocalServiceUtil.getGroup(liveGroupId);
 
-		UnicodeProperties props = liveGroup.getTypeSettingsProperties();
+		UnicodeProperties typeSettingsProperties =
+			liveGroup.getTypeSettingsProperties();
 
-		props.setProperty("googleAnalyticsId", googleAnalyticsId);
+		typeSettingsProperties.setProperty(
+			"googleAnalyticsId", googleAnalyticsId);
 
 		GroupServiceUtil.updateGroup(liveGroupId, liveGroup.getTypeSettings());
 	}
@@ -728,7 +731,8 @@ public class EditPagesAction extends PortletAction {
 
 		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
 
-		String publicRobots = ParamUtil.getString(actionRequest, "publicRobots");
+		String publicRobots = ParamUtil.getString(
+			actionRequest, "publicRobots");
 		String privateRobots = ParamUtil.getString(
 			actionRequest, "privateRobots");
 
@@ -741,12 +745,12 @@ public class EditPagesAction extends PortletAction {
 		throws Exception {
 
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-				groupId, privateLayout);
+			groupId, privateLayout);
 
 		UnicodeProperties settingsProperties =
 			layoutSet.getSettingsProperties();
 
-		settingsProperties.setProperty(privateLayout +"-robots.txt", robots);
+		settingsProperties.setProperty(privateLayout + "-robots.txt", robots);
 
 		layoutSet.setSettingsProperties(settingsProperties);
 

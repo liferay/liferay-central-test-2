@@ -14,8 +14,6 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutSet;
@@ -25,9 +23,20 @@ import com.liferay.portal.model.LayoutSet;
  */
 public class RobotsUtil {
 
-	public static String getRobots(LayoutSet layoutSet)
-		throws PortalException, SystemException {
-	
+	public static String getDefaultRobots() {
+		return getDefaultRobots(null);
+	}
+
+	public static String getDefaultRobots(String virtualHost) {
+		if (Validator.isNotNull(virtualHost)) {
+			return _DEFAULT_ROBOTS_TXT.replace(
+				"$HOSTS$", virtualHost);
+		}
+
+		return _DEFAULT_ROBOTS_TXT_WITHOUT_SITEMAP;
+	}
+
+	public static String getRobots(LayoutSet layoutSet) {
 		if (layoutSet != null) {
 			return GetterUtil.get(
 				layoutSet.getSettingsProperty(
@@ -37,26 +46,11 @@ public class RobotsUtil {
 
 		return getDefaultRobots(null);
 	}
-	
-	public static String getDefaultRobots() {
 
-		return  getDefaultRobots(null);
-	}
+	private static String _DEFAULT_ROBOTS_TXT =
+		"User-Agent: *\nDisallow:\nSitemap: http://$HOSTS$/sitemap.xml";
 
-	public static String getDefaultRobots(String virtualHost) {
-
-		if (Validator.isNotNull(virtualHost)) {
-			return DEFAULT_ROBOTS_TXT.replace(
-				"$HOSTS$", virtualHost);
-		}
-
-		return DEFAULT_ROBOTS_TXT_WITHOUT_SITEMAP;
-	}
-
-	private static String DEFAULT_ROBOTS_TXT =
-		"User-agent: *\nDisallow:\nSitemap: http://$HOSTS$/sitemap.xml";
-
-	private static String DEFAULT_ROBOTS_TXT_WITHOUT_SITEMAP =
-		"User-agent: *\nDisallow:";
+	private static String _DEFAULT_ROBOTS_TXT_WITHOUT_SITEMAP =
+		"User-Agent: *\nDisallow:";
 
 }

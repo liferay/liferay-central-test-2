@@ -302,15 +302,18 @@ if (!tabs2.equals("pages")) {
 		</ul>
 	</c:when>
 	<c:when test='<%= tabs2.equals("robots") %>'>
+
 		<%
 		LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroupId, false);
 
 		String defaultPublicRobots = RobotsUtil.getRobots(publicLayoutSet);
+
 		String publicRobots = ParamUtil.getString(request, "robots", defaultPublicRobots);
 
 		LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroupId, true);
 
 		String defaultPrivateRobots = RobotsUtil.getRobots(privateLayoutSet);
+
 		String privateRobots = ParamUtil.getString(request, "robots", defaultPrivateRobots);
 		%>
 
@@ -324,7 +327,7 @@ if (!tabs2.equals("pages")) {
 			<td>
 				<c:choose>
 					<c:when test="<%= Validator.isNotNull(publicLayoutSet.getVirtualHost()) %>">
-						<textarea name="<portlet:namespace />publicRobots" cols="60" rows="15"><%= HtmlUtil.escape(publicRobots) %></textarea>
+						<textarea cols="60" name="<portlet:namespace />publicRobots" rows="15"><%= HtmlUtil.escape(publicRobots) %></textarea>
 					</c:when>
 					<c:otherwise>
 						<div class="portlet-msg-info">
@@ -348,7 +351,7 @@ if (!tabs2.equals("pages")) {
 			<td>
 				<c:choose>
 					<c:when test="<%= Validator.isNotNull(privateLayoutSet.getVirtualHost()) %>">
-						<textarea name="<portlet:namespace />privateRobots" cols="60" rows="15"><%= HtmlUtil.escape(privateRobots) %></textarea>
+						<textarea cols="60" name="<portlet:namespace />privateRobots" rows="15"><%= HtmlUtil.escape(privateRobots) %></textarea>
 					</c:when>
 					<c:otherwise>
 						<div class="portlet-msg-info">
@@ -365,8 +368,7 @@ if (!tabs2.equals("pages")) {
 		</tr>
 		</table>
 
-		<input type="button" value="<liferay-ui:message key="update-robots-txt" />" onClick="<portlet:namespace />updateRobots();" />
-
+		<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />updateRobots();" />
 	</c:when>
 	<c:when test='<%= tabs2.equals("monitoring") %>'>
 		<liferay-ui:message key="set-the-google-analytics-id-that-will-be-used-for-this-set-of-pages" />
