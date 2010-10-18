@@ -23,6 +23,7 @@ import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
+import org.apache.lucene.util.Version;
 
 /**
  * @author Bruno Farache
@@ -66,6 +67,8 @@ public interface LuceneHelper {
 			int fragmentLength, String fragmentSuffix, String preTag,
 			String postTag)
 		throws IOException;
+
+	public Version getVersion();
 
 	public void shutdown();
 

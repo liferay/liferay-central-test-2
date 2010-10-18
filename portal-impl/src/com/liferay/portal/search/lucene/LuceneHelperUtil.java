@@ -27,6 +27,7 @@ import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
+import org.apache.lucene.util.Version;
 
 /**
  * @author Brian Wing Shun Chan
@@ -295,6 +296,10 @@ public class LuceneHelperUtil {
 		return getLuceneHelper().getSnippet(
 			query, field, s, maxNumFragments, fragmentLength, fragmentSuffix,
 			preTag, postTag);
+	}
+
+	public static Version getVersion() {
+		return getLuceneHelper().getVersion();
 	}
 
 	public static void updateDocument(

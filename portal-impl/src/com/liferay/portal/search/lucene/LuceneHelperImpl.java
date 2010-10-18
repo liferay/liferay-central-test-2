@@ -56,6 +56,7 @@ import org.apache.lucene.search.highlight.QueryTermExtractor;
 import org.apache.lucene.search.highlight.SimpleFragmenter;
 import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 import org.apache.lucene.search.highlight.WeightedTerm;
+import org.apache.lucene.util.Version;
 
 /**
  * @author Brian Wing Shun Chan
@@ -149,7 +150,8 @@ public class LuceneHelperImpl implements LuceneHelper {
 			booleanQuery.add(wildcardQuery, BooleanClause.Occur.SHOULD);
 		}
 		else {
-			QueryParser queryParser = new QueryParser(field, getAnalyzer());
+			QueryParser queryParser = new QueryParser(
+				_version, field, getAnalyzer());
 
 			try {
 				Query query = queryParser.parse(value);
@@ -263,6 +265,10 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 	}
 
+	public Version getVersion() {
+		return _version;
+	}
+
 	public void updateDocument(long companyId, Term term, Document document)
 		throws IOException {
 
@@ -310,7 +316,9 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 	private static Log _log = LogFactoryUtil.getLog(LuceneHelperImpl.class);
 
-	private Class<?> _analyzerClass = WhitespaceAnalyzer.class;
+	private static Class<?> _analyzerClass = WhitespaceAnalyzer.class;
+	private static Version _version = Version.LUCENE_24;
+
 	private Map<Long, IndexAccessor> _indexAccessorMap =
 		new ConcurrentHashMap<Long, IndexAccessor>();
 

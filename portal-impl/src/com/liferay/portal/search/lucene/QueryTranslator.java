@@ -37,7 +37,8 @@ public class QueryTranslator {
 		}
 		else if (query instanceof StringQueryImpl) {
 			QueryParser parser = new QueryParser(
-				StringPool.BLANK, LuceneHelperUtil.getAnalyzer());
+				LuceneHelperUtil.getVersion(), StringPool.BLANK,
+				LuceneHelperUtil.getAnalyzer());
 
 			return parser.parse(query.toString());
 		}
