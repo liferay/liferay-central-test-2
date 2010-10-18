@@ -719,19 +719,21 @@ public class LayoutTypePortletImpl
 	}
 
 	public void removeNestedColumns(String portletId) {
-		UnicodeProperties props = getTypeSettingsProperties();
+		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties();
 
-		UnicodeProperties newProps = new UnicodeProperties();
+		UnicodeProperties newTypeSettingsProperties = new UnicodeProperties();
 
-		for (Map.Entry<String, String> entry : props.entrySet()) {
+		for (Map.Entry<String, String> entry :
+				typeSettingsProperties.entrySet()) {
+
 			String key = entry.getKey();
 
 			if (!key.startsWith(portletId)) {
-				newProps.setProperty(key, entry.getValue());
+				newTypeSettingsProperties.setProperty(key, entry.getValue());
 			}
 		}
 
-		getLayout().setTypeSettingsProperties(newProps);
+		getLayout().setTypeSettingsProperties(newTypeSettingsProperties);
 
 		String nestedColumnIds = GetterUtil.getString(
 			getTypeSettingsProperties().getProperty(
@@ -1174,9 +1176,12 @@ public class LayoutTypePortletImpl
 		}
 
 		if (portlet.getRootPortletId().equals(PortletKeys.NESTED_PORTLETS)) {
-			UnicodeProperties props = getTypeSettingsProperties();
+			UnicodeProperties typeSettingsProperties =
+				getTypeSettingsProperties();
 
-			for (Map.Entry<String, String> entry : props.entrySet()) {
+			for (Map.Entry<String, String> entry :
+					typeSettingsProperties.entrySet()) {
+
 				String key = entry.getKey();
 
 				if (key.startsWith(portlet.getPortletId())) {

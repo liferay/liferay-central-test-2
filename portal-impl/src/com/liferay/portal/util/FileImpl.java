@@ -690,15 +690,15 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	public Properties toProperties(FileInputStream fis) {
-		Properties props = new Properties();
+		Properties properties = new Properties();
 
 		try {
-			props.load(fis);
+			properties.load(fis);
 		}
 		catch (IOException ioe) {
 		}
 
-		return props;
+		return properties;
 	}
 
 	public Properties toProperties(String fileName) {

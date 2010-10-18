@@ -668,13 +668,14 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			String typeSettings = layoutClone.get(request, getPlid());
 
 			if (typeSettings != null) {
-				UnicodeProperties props = new UnicodeProperties(true);
+				UnicodeProperties typeSettingsProperties =
+					new UnicodeProperties(true);
 
-				props.load(typeSettings);
+				typeSettingsProperties.load(typeSettings);
 
-				String stateMax = props.getProperty(
+				String stateMax = typeSettingsProperties.getProperty(
 					LayoutTypePortletConstants.STATE_MAX);
-				String stateMin = props.getProperty(
+				String stateMin = typeSettingsProperties.getProperty(
 					LayoutTypePortletConstants.STATE_MIN);
 
 				Layout layout = (Layout)this.clone();

@@ -125,15 +125,15 @@ public class PluginsSummaryBuilder {
 		String licenses = StringPool.BLANK;
 
 		if (file.endsWith(".properties")) {
-			Properties props = PropertiesUtil.load(content);
+			Properties properties = PropertiesUtil.load(content);
 
-			name = _readProperty(props, "name");
-			tags = _readProperty(props, "tags");
-			shortDescription = _readProperty(props, "short-description");
-			changeLog = _readProperty(props, "change-log");
-			pageURL = _readProperty(props, "page-url");
-			author = _readProperty(props, "author");
-			licenses = _readProperty(props, "licenses");
+			name = _readProperty(properties, "name");
+			tags = _readProperty(properties, "tags");
+			shortDescription = _readProperty(properties, "short-description");
+			changeLog = _readProperty(properties, "change-log");
+			pageURL = _readProperty(properties, "page-url");
+			author = _readProperty(properties, "author");
+			licenses = _readProperty(properties, "licenses");
 		}
 		else {
 			Document doc = SAXReaderUtil.read(content);
@@ -208,8 +208,8 @@ public class PluginsSummaryBuilder {
 		return sb.toString();
 	}
 
-	public String _readProperty(Properties props, String key) {
-		return GetterUtil.getString(props.getProperty(key));
+	public String _readProperty(Properties properties, String key) {
+		return GetterUtil.getString(properties.getProperty(key));
 	}
 
 	private Set<String> _distinctAuthors = new TreeSet<String>();
