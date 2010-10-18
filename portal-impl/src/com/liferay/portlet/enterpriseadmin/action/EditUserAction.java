@@ -63,6 +63,7 @@ import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -140,13 +141,13 @@ public class EditUserAction extends PortletAction {
 				user = updateLockout(actionRequest);
 			}
 
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)actionRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
+
 			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 			if (user != null) {
-				ThemeDisplay themeDisplay =
-					(ThemeDisplay)actionRequest.getAttribute(
-						WebKeys.THEME_DISPLAY);
-
 				if (Validator.isNotNull(oldScreenName)) {
 
 					// This will fix the redirect if the user is on his personal
@@ -196,6 +197,20 @@ public class EditUserAction extends PortletAction {
 				redirect = HttpUtil.setParameter(
 					redirect, actionResponse.getNamespace() + "p_u_i_d",
 					user.getUserId());
+			}
+
+			Group scopeGroup = themeDisplay.getScopeGroup();
+
+			if (scopeGroup.isUser()) {
+				try {
+					UserLocalServiceUtil.getUserById(scopeGroup.getClassPK());
+				}
+				catch (NoSuchUserException nsue) {
+					redirect = HttpUtil.setParameter(
+						redirect, "doAsGroupId" , 0);
+					redirect = HttpUtil.setParameter(
+						redirect, "refererPlid" , 0);
+				}
 			}
 
 			sendRedirect(actionRequest, actionResponse, redirect);
