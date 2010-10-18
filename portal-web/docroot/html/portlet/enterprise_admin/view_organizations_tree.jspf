@@ -193,16 +193,15 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 	</liferay-util:buffer>
 
 	<liferay-util:buffer var="organizationsTree">
-		<c:if test="<%= organizationsCount > 0 %>">
-			<aui:input name="deleteOrganizationIds" type="hidden" />
-			<aui:input name="organizationsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
+		<aui:input name="deleteOrganizationIds" type="hidden" />
+		<aui:input name="organizationsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
+		<c:if test="<%= organizationsCount > 0 %>">
 			<%
 			String keywords = ParamUtil.getString(request, "keywords");
 
-			SearchContainer organizationSearch = new OrganizationSearch(renderRequest, portletURL);
+			SearchContainer organizationSearch = new OrganizationSearch(renderRequest, currentURLObj);
 
-			organizationSearch.setIteratorURL(portletURL);
 			organizationSearch.setRowChecker(new RowChecker(renderResponse));
 			%>
 
@@ -250,6 +249,7 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 												<portlet:param name="struts_action" value="/enterprise_admin/view" />
 												<portlet:param name="tabs1" value="organizations" />
 												<portlet:param name="organizationsListView" value="<%= OrganizationConstants.LIST_VIEW_FLAT %>" />
+												<portlet:param name="saveOrganizationsListView" value="<%= Boolean.TRUE.toString() %>" />
 											</portlet:renderURL>
 
 											<liferay-ui:icon
@@ -268,6 +268,7 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 												<portlet:param name="struts_action" value="/enterprise_admin/view" />
 												<portlet:param name="tabs1" value="organizations" />
 												<portlet:param name="organizationsListView" value="<%= OrganizationConstants.LIST_VIEW_TREE %>" />
+												<portlet:param name="saveOrganizationsListView" value="<%= Boolean.TRUE.toString() %>" />
 											</portlet:renderURL>
 
 											<liferay-ui:icon

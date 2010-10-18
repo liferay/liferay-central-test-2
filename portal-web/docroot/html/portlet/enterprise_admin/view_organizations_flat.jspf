@@ -96,6 +96,7 @@
 					<portlet:param name="struts_action" value="/enterprise_admin/view" />
 					<portlet:param name="tabs1" value="organizations" />
 					<portlet:param name="organizationsListView" value="<%= OrganizationConstants.LIST_VIEW_FLAT %>" />
+					<portlet:param name="saveOrganizationsListView" value="<%= Boolean.TRUE.toString() %>" />
 				</portlet:renderURL>
 
 				<liferay-ui:icon
@@ -114,6 +115,7 @@
 					<portlet:param name="struts_action" value="/enterprise_admin/view" />
 					<portlet:param name="tabs1" value="organizations" />
 					<portlet:param name="organizationsListView" value="<%= OrganizationConstants.LIST_VIEW_TREE %>" />
+					<portlet:param name="saveOrganizationsListView" value="<%= Boolean.TRUE.toString() %>" />
 				</portlet:renderURL>
 
 				<liferay-ui:icon

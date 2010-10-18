@@ -18,12 +18,6 @@
 
 <%
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
-
-String viewOrganizationsRedirect = ParamUtil.getString(request, "viewOrganizationsRedirect");
-
-if (Validator.isNotNull(viewOrganizationsRedirect)) {
-	portletURL.setParameter("viewOrganizationsRedirect", viewOrganizationsRedirect);
-}
 %>
 
 <liferay-ui:error exception="<%= RequiredOrganizationException.class %>" message="you-cannot-delete-organizations-that-have-suborganizations-or-users" />
@@ -32,12 +26,10 @@ if (Validator.isNotNull(viewOrganizationsRedirect)) {
 	<liferay-util:param name="toolbarItem" value="view-all" />
 </liferay-util:include>
 
-<c:if test="<%= Validator.isNotNull(viewOrganizationsRedirect) %>">
-	<aui:input name="viewOrganizationsRedirect" type="hidden" value="<%= viewOrganizationsRedirect %>" />
-</c:if>
-
 <%
 String organizationsListView = request.getParameter("organizationsListView");
+
+boolean saveOrganizationsListView = GetterUtil.getBoolean(request.getParameter("saveOrganizationsListView"));
 
 PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(renderRequest);
 
@@ -45,7 +37,7 @@ if (organizationsListView == null) {
 	organizationsListView = portalPreferences.getValue(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS, "organizations-list-view", PropsValues.ORGANIZATIONS_LIST_VIEWS_DEFAULT);
 }
 else {
-	if (ArrayUtil.contains(PropsValues.ORGANIZATIONS_LIST_VIEWS, organizationsListView)) {
+	if (saveOrganizationsListView && ArrayUtil.contains(PropsValues.ORGANIZATIONS_LIST_VIEWS, organizationsListView)) {
 		portalPreferences.setValue(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS, "organizations-list-view", organizationsListView);
 	}
 }

@@ -19,8 +19,6 @@
 <%
 themeDisplay.setIncludeServiceJs(true);
 
-String viewOrganizationsRedirect = ParamUtil.getString(request, "viewOrganizationsRedirect");
-
 OrganizationSearch searchContainer = (OrganizationSearch)request.getAttribute("liferay-ui:search:searchContainer");
 
 OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContainer.getDisplayTerms();
@@ -37,22 +35,6 @@ if (displayTerms.getParentOrganizationId() > 0) {
 	}
 }
 %>
-
-<c:if test="<%= organization != null %>">
-	<aui:input name="<%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
-
-	<liferay-ui:header
-		title='<%= LanguageUtil.format(pageContext, "suborganizations-of-x", HtmlUtil.escape(organization.getName())) %>'
-		backURL="<%= viewOrganizationsRedirect %>"
-	/>
-
-	<%
-	EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
-
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "suborganizations"), currentURL);
-	%>
-
-</c:if>
 
 <liferay-ui:search-toggle
 	id="toggle_id_enterprise_admin_organization_search"
