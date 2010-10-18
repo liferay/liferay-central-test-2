@@ -30,6 +30,15 @@ public class StringUtilTest extends TestCase {
 		assertEquals(expected, actual);
 	}
 
+	public void testReplaceEmptyString() throws Exception {
+		String original = "Hello World HELLO WORLD Hello World";
+		String expected = "Hello World HELLO WORLD Hello World";
+
+		String actual = StringUtil.replace(original, "", "Aloha");
+
+		assertEquals(expected, actual);
+	}
+
 	public void testReplaceFirstChar() throws Exception {
 		String original = "127.0.0.1";
 		String expected = "127_0.0.1";
@@ -55,15 +64,6 @@ public class StringUtilTest extends TestCase {
 		String actual = StringUtil.replaceFirst(
 			original, new String[] {"Hello", "HELLO"},
 			new String[] {"Aloha", "ALOHA"});
-
-		assertEquals(expected, actual);
-	}
-
-	public void testReplaceEmptyString() throws Exception {
-		String original = "Hello World HELLO WORLD Hello World";
-		String expected = "Hello World HELLO WORLD Hello World";
-
-		String actual = StringUtil.replace(original, "", "Aloha");
 
 		assertEquals(expected, actual);
 	}
