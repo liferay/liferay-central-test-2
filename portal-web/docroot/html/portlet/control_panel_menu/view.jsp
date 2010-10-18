@@ -16,6 +16,8 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+<%@ page import="com.liferay.portlet.journal.service.permission.JournalPermission" %>
+
 <h1 class="user-greeting">
 	<liferay-ui:message key="control-panel" />
 </h1>
@@ -185,7 +187,7 @@
 					</c:if>
 
 					<%
-					boolean showGlobal = permissionChecker.isCompanyAdmin();
+					boolean showGlobal = permissionChecker.isCompanyAdmin() || JournalPermission.contains(permissionChecker, themeDisplay.getCompanyGroupId(), ActionKeys.ADD_ARTICLE);
 					boolean showMyCommunity = user.getGroup().hasPrivateLayouts() || user.getGroup().hasPublicLayouts();
 					%>
 
