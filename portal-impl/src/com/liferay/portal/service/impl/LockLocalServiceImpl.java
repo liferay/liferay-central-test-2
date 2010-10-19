@@ -169,14 +169,11 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 
 		List<Lock> locks = lockPersistence.findByUuid(uuid);
 
-		Lock lock = null;
-
-		if (locks.size() > 0) {
-			lock = locks.get(0);
-		}
-		else {
+		if (locks.isEmpty()) {
 			throw new NoSuchLockException();
 		}
+
+		Lock lock = locks.get(0);
 
 		lock.setCreateDate(now);
 
