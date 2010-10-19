@@ -117,6 +117,28 @@ import javax.portlet.PortletPreferences;
  */
 public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
+	public PortletDataHandlerControl[] getExportControls() {
+		return new PortletDataHandlerControl[] {
+			_articles, _structuresTemplatesAndFeeds, _embeddedAssets, _images,
+			_categories, _comments, _ratings, _tags
+		};
+	}
+
+	public PortletDataHandlerControl[] getImportControls() {
+		return new PortletDataHandlerControl[] {
+			_articles, _structuresTemplatesAndFeeds, _images, _categories,
+			_comments, _ratings, _tags
+		};
+	}
+
+	public boolean isAlwaysExportable() {
+		return _ALWAYS_EXPORTABLE;
+	}
+
+	public boolean isPublishToLiveByDefault() {
+		return PropsValues.JOURNAL_PUBLISH_TO_LIVE_BY_DEFAULT;
+	}
+
 	protected static void exportArticle(
 			PortletDataContext context, Element articlesElement,
 			Element structuresElement, Element templatesElement,
@@ -1874,28 +1896,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 							existingTemplate.getTemplateId());
 			}
 		}
-	}
-
-	public PortletDataHandlerControl[] getExportControls() {
-		return new PortletDataHandlerControl[] {
-			_articles, _structuresTemplatesAndFeeds, _embeddedAssets, _images,
-			_categories, _comments, _ratings, _tags
-		};
-	}
-
-	public PortletDataHandlerControl[] getImportControls() {
-		return new PortletDataHandlerControl[] {
-			_articles, _structuresTemplatesAndFeeds, _images, _categories,
-			_comments, _ratings, _tags
-		};
-	}
-
-	public boolean isAlwaysExportable() {
-		return _ALWAYS_EXPORTABLE;
-	}
-
-	public boolean isPublishToLiveByDefault() {
-		return PropsValues.JOURNAL_PUBLISH_TO_LIVE_BY_DEFAULT;
 	}
 
 	protected PortletPreferences doDeleteData(
