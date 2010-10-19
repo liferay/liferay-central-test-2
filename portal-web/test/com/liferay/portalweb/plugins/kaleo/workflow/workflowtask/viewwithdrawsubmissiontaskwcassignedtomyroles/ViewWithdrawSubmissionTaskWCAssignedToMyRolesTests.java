@@ -31,7 +31,7 @@ public class ViewWithdrawSubmissionTaskWCAssignedToMyRolesTests
 		testSuite.addTestSuite(ConfigureWebContentSingleApproverTest.class);
 		testSuite.addTestSuite(AddWebContentSingleApproverTest.class);
 		testSuite.addTestSuite(
-			WithdrawSubmissionTaskWebContentAssignedToMyRolesTest.class);
+			WithdrawSubmissionTaskWCAssignedToMyRolesDetailsTest.class);
 		testSuite.addTestSuite(
 			ViewWithdrawSubmissionTaskWCAssignedToMyRolesTest.class);
 		testSuite.addTestSuite(TearDownWebContentTest.class);

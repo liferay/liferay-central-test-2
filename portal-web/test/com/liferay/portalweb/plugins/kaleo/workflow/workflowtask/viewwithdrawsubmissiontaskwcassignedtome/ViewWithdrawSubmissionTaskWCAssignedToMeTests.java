@@ -31,7 +31,7 @@ public class ViewWithdrawSubmissionTaskWCAssignedToMeTests extends BaseTests {
 		testSuite.addTestSuite(AddWebContentSingleApproverTest.class);
 		testSuite.addTestSuite(AssignToMeTaskWebContentDetailsTest.class);
 		testSuite.addTestSuite(
-			WithdrawSubmissionTaskWebContentAssignedToMeTest.class);
+			WithdrawSubmissionTaskWCAssignedToMeDetailsTest.class);
 		testSuite.addTestSuite(
 			ViewWithdrawSubmissionTaskWCAssignedToMeTest.class);
 		testSuite.addTestSuite(TearDownWebContentTest.class);

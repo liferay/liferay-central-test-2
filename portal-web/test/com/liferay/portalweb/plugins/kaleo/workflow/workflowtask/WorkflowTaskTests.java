@@ -23,9 +23,12 @@ import com.liferay.portalweb.plugins.kaleo.workflow.workflowtask.viewpaginationt
 import com.liferay.portalweb.plugins.kaleo.workflow.workflowtask.viewtaskwebcontentassignedtouser.ViewTaskWebContentAssignedToUserTests;
 import com.liferay.portalweb.plugins.kaleo.workflow.workflowtask.viewwithdrawsubmissiontaskwcassignedtome.ViewWithdrawSubmissionTaskWCAssignedToMeTests;
 import com.liferay.portalweb.plugins.kaleo.workflow.workflowtask.viewwithdrawsubmissiontaskwcassignedtomyroles.ViewWithdrawSubmissionTaskWCAssignedToMyRolesTests;
-import com.liferay.portalweb.plugins.kaleo.workflow.workflowtask.withdrawsubmissiontaskwebcontentassignedtome.WithdrawSubmissionTaskWebContentAssignedToMeTests;
-import com.liferay.portalweb.plugins.kaleo.workflow.workflowtask.withdrawsubmissiontaskwebcontentassignedtomyroles.WithdrawSubmissionTaskWebContentAssignedToMyRolesTests;
-import com.liferay.portalweb.plugins.kaleo.workflow.workflowtask.withdrawsubmissiontaskwebcontentcompleted.WithdrawSubmissionTaskWebContentCompletedTests;
+import com.liferay.portalweb.plugins.kaleo.workflow.workflowtask.withdrawsubmissiontaskwcassignedtomeactions.WithdrawSubmissionTaskWCAssignedToMeActionsTests;
+import com.liferay.portalweb.plugins.kaleo.workflow.workflowtask.withdrawsubmissiontaskwcassignedtomedetails.WithdrawSubmissionTaskWCAssignedToMeDetailsTests;
+import com.liferay.portalweb.plugins.kaleo.workflow.workflowtask.withdrawsubmissiontaskwcassignedtomyrolesactions.WithdrawSubmissionTaskWCAssignedToMyRolesActionsTests;
+import com.liferay.portalweb.plugins.kaleo.workflow.workflowtask.withdrawsubmissiontaskwcassignedtomyrolesdetails.WithdrawSubmissionTaskWCAssignedToMyRolesDetailsTests;
+import com.liferay.portalweb.plugins.kaleo.workflow.workflowtask.withdrawsubmissiontaskwccompletedactions.WithdrawSubmissionTaskWCCompletedActionsTests;
+import com.liferay.portalweb.plugins.kaleo.workflow.workflowtask.withdrawsubmissiontaskwccompleteddetails.WithdrawSubmissionTaskWCCompletedDetailsTests;
 import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
@@ -51,11 +54,17 @@ public class WorkflowTaskTests extends BaseTests {
 		testSuite.addTest(
 			ViewWithdrawSubmissionTaskWCAssignedToMyRolesTests.suite());
 		testSuite.addTest(
-			WithdrawSubmissionTaskWebContentAssignedToMeTests.suite());
+			WithdrawSubmissionTaskWCAssignedToMeActionsTests.suite());
 		testSuite.addTest(
-			WithdrawSubmissionTaskWebContentAssignedToMyRolesTests.suite());
+			WithdrawSubmissionTaskWCAssignedToMeDetailsTests.suite());
 		testSuite.addTest(
-			WithdrawSubmissionTaskWebContentCompletedTests.suite());
+			WithdrawSubmissionTaskWCAssignedToMyRolesActionsTests.suite());
+		testSuite.addTest(
+			WithdrawSubmissionTaskWCAssignedToMyRolesDetailsTests.suite());
+		testSuite.addTest(
+			WithdrawSubmissionTaskWCCompletedActionsTests.suite());
+		testSuite.addTest(
+			WithdrawSubmissionTaskWCCompletedDetailsTests.suite());
 
 		return testSuite;
 	}
