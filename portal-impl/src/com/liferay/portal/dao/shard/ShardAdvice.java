@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.InitialThreadLocal;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Shard;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
@@ -282,6 +283,68 @@ public class ShardAdvice {
 		else {
 			return proceedingJoinPoint.proceed();
 		}
+	}
+
+	public Object invokePortletService(ProceedingJoinPoint proceedingJoinPoint)
+		throws Throwable {
+
+		String methodName = proceedingJoinPoint.getSignature().getName();
+		Object[] arguments = proceedingJoinPoint.getArgs();
+
+		if (arguments.length == 0) {
+			return proceedingJoinPoint.proceed();
+		}
+
+		Object argument = arguments[0];
+
+		long companyId = -1;
+
+		if (argument instanceof Long) {
+			if (methodName.equals("checkPortlets") ||
+				methodName.equals("clonePortlet") ||
+				methodName.equals("getPortletById") ||
+				methodName.equals("getPortletByStrutsPath") ||
+				methodName.equals("getPortlets") ||
+				methodName.equals("hasPortlet") ||
+				methodName.equals("updatePortlet")) {
+
+				companyId = (Long) argument;
+			}
+		}
+		else if (argument instanceof Portlet) {
+			if (methodName.equals("checkPortlet") ||
+				methodName.equals("deployRemotePortlet") ||
+				methodName.equals("destroyPortlet") ||
+				methodName.equals("destroyRemotePortlet")) {
+
+				Portlet portlet = (Portlet)argument;
+
+				companyId = portlet.getCompanyId();
+			}
+		}
+
+		if (companyId <= 0) {
+			return proceedingJoinPoint.proceed();
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Company service being set to shard of companyId " +
+					companyId + " for " + _getSignature(proceedingJoinPoint));
+		}
+
+		Object returnValue = null;
+
+		pushCompanyService(companyId);
+
+		try {
+			returnValue = proceedingJoinPoint.proceed(arguments);
+		}
+		finally {
+			popCompanyService();
+		}
+
+		return returnValue;
 	}
 
 	public void setShardDataSourceTargetSource(
