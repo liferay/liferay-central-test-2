@@ -571,7 +571,7 @@ numberFormat.setMinimumIntegerDigits(2);
 				<%
 				String language = ParamUtil.getString(renderRequest, "language", "javascript");
 
-				String script = "// ### Javascript Sample ###\n// ### Use 'out' variable of type java.io.PrintWriter to generate visible output ###\n// number = Packages.com.liferay.portal.service.UserLocalServiceUtil.getUsersCount();\n// out.println(number);";
+				String script = "// ### Javascript Sample ###\n\nnumber = Packages.com.liferay.portal.service.UserLocalServiceUtil.getUsersCount();\n\nout.println(number);";
 
 				if (SessionMessages.contains(renderRequest, "script")) {
 					script = (String)SessionMessages.get(renderRequest, "script");

@@ -316,8 +316,8 @@ public class EditServerAction extends PortletAction {
 		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 			new UnsyncByteArrayOutputStream();
 
-		UnsyncPrintWriter unsyncPrintWriter =
-			new UnsyncPrintWriter(unsyncByteArrayOutputStream);
+		UnsyncPrintWriter unsyncPrintWriter = new UnsyncPrintWriter(
+			unsyncByteArrayOutputStream);
 
 		portletObjects.put("out", unsyncPrintWriter);
 
