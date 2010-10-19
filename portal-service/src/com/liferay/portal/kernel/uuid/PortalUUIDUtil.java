@@ -14,24 +14,10 @@
 
 package com.liferay.portal.kernel.uuid;
 
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
-
 /**
  * @author Brian Wing Shun Chan
  */
 public class PortalUUIDUtil {
-
-	public static String fromSafeUuid(String safeUuid) {
-		String uuid =
-			StringUtil.replace(
-				safeUuid,
-				new String[] {StringPool.UNDERLINE + StringPool.UNDERLINE},
-				new String[] {StringPool.DASH});
-
-		return uuid;
-	}
-
 
 	public static String generate() {
 		return getPortalUUID().generate();
@@ -43,16 +29,6 @@ public class PortalUUIDUtil {
 
 	public void setPortalUUID(PortalUUID portalJNDI) {
 		_portalJNDI = portalJNDI;
-	}
-	
-	public static String toSafeUuid(String uuid) {
-		String safeName =
-			StringUtil.replace(
-				uuid,
-				new String[] {StringPool.DASH},
-				new String[] {StringPool.UNDERLINE + StringPool.UNDERLINE});
-
-		return safeName;
 	}
 
 	private static PortalUUID _portalJNDI;
