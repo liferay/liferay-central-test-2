@@ -19,6 +19,7 @@ import com.liferay.taglib.util.IncludeTag;
 import com.liferay.util.PwdGenerator;
 import com.liferay.util.TextFormatter;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -161,6 +162,7 @@ public class InputTag extends IncludeTag {
 		_title = null;
 		_type = null;
 		_value = null;
+		_validators = null;
 	}
 
 	protected String getPage() {
@@ -240,6 +242,16 @@ public class InputTag extends IncludeTag {
 		request.setAttribute("aui:input:value", _value);
 	}
 
+	protected void addValidatorTag(
+		String validatorName, ValidatorTag validatorTag) {
+
+		if (_validators == null) {
+			_validators = new HashMap<String, ValidatorTag> ();
+		}
+
+		_validators.put(validatorName, validatorTag);
+	}
+
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
 	private static final String _PAGE = "/html/taglib/aui/input/page.jsp";
@@ -270,5 +282,6 @@ public class InputTag extends IncludeTag {
 	private String _title;
 	private String _type;
 	private Object _value;
+	private Map<String, ValidatorTag> _validators;
 
 }
