@@ -210,6 +210,12 @@ public class InputTag extends IncludeTag {
 				"aui:model-context:model");
 		}
 
+		boolean required = false;
+
+		if (_validators != null && _validators.get("required") != null) {
+			required = true;
+		}
+
 		request.setAttribute("aui:input:bean", bean);
 		request.setAttribute(
 			"aui:input:changesContext", String.valueOf(_changesContext));
@@ -236,6 +242,7 @@ public class InputTag extends IncludeTag {
 		request.setAttribute("aui:input:onChange", _onChange);
 		request.setAttribute("aui:input:onClick", _onClick);
 		request.setAttribute("aui:input:prefix", _prefix);
+		request.setAttribute("aui:input:required", String.valueOf(required));
 		request.setAttribute("aui:input:suffix", _suffix);
 		request.setAttribute("aui:input:title", _title);
 		request.setAttribute("aui:input:type", _type);

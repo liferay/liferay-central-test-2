@@ -42,6 +42,7 @@ String name = GetterUtil.getString((String)request.getAttribute("aui:input:name"
 String onChange = GetterUtil.getString((String)request.getAttribute("aui:input:onChange"));
 String onClick = GetterUtil.getString((String)request.getAttribute("aui:input:onClick"));
 String prefix = GetterUtil.getString((String)request.getAttribute("aui:input:prefix"));
+boolean required = GetterUtil.getBoolean((String)request.getAttribute("aui:input:required"));
 String suffix = GetterUtil.getString((String)request.getAttribute("aui:input:suffix"));
 String title = GetterUtil.getString((String)request.getAttribute("aui:input:title"));
 String type = GetterUtil.getString((String)request.getAttribute("aui:input:type"));
@@ -114,6 +115,10 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 			<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
 				<label <%= labelTag %>>
 					<liferay-ui:message key="<%= label %>" />
+
+					<c:if test="<%= required %>">
+						<span class="aui-label-required">(<liferay-ui:message key="required" />)</span>
+					</c:if>
 
 					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
 						<liferay-ui:icon-help message="<%= helpMessage %>" />
@@ -268,6 +273,10 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 			<c:if test='<%= Validator.isNotNull(label) && inlineLabel.equals("right") %>'>
 				<label <%= labelTag %>>
 					<liferay-ui:message key="<%= label %>" />
+
+					<c:if test="<%= required %>">
+						<span class="aui-label-required">(<liferay-ui:message key="required" />)</span>
+					</c:if>
 
 					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
 						<liferay-ui:icon-help message="<%= helpMessage %>" />
