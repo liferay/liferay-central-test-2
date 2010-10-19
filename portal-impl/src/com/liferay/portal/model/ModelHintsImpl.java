@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReader;
@@ -151,6 +152,20 @@ public class ModelHintsImpl implements ModelHints {
 		}
 		else {
 			return (String)fields.get(field + _TYPE_SUFFIX);
+		}
+	}
+
+	public List<Tuple> getValidators(String model, String field) {
+		Map<String, Object> fields =
+			(Map<String, Object>)_modelFields.get(model);
+
+		if ((fields == null) ||
+			(fields.get(field + _VALIDATORS_SUFFIX) == null)) {
+
+			return null;
+		}
+		else {
+			return (List<Tuple>)fields.get(field + _VALIDATORS_SUFFIX);
 		}
 	}
 
@@ -299,6 +314,31 @@ public class ModelHintsImpl implements ModelHints {
 					fieldHints.put(hintName, hintValue);
 				}
 
+				List<Tuple> fieldValidators = new ArrayList<Tuple>();
+
+				itr3 = field.elements("validator").iterator();
+
+				while (itr3.hasNext()) {
+					Element validator = itr3.next();
+
+					String validatorName =	validator.attributeValue("name");
+
+					if (Validator.isNull(validatorName)) {
+						continue;
+					}
+
+					String validatorErrorMessage = validator.attributeValue(
+						"errorMessage");
+
+					String validatorValue = validator.getText();
+
+					Tuple fieldValidator = new Tuple(
+						fieldName, validatorName, validatorErrorMessage,
+						validatorValue);
+
+					fieldValidators.add(fieldValidator);
+				}
+
 				Tuple fieldSanitize = null;
 
 				Element sanitize = field.element("sanitize");
@@ -315,6 +355,10 @@ public class ModelHintsImpl implements ModelHints {
 				fields.put(fieldName + _TYPE_SUFFIX, fieldType);
 				fields.put(fieldName + _LOCALIZATION_SUFFIX, fieldLocalized);
 				fields.put(fieldName + _HINTS_SUFFIX, fieldHints);
+
+				if (!fieldValidators.isEmpty()) {
+					fields.put(fieldName + _VALIDATORS_SUFFIX, fieldValidators);
+				}
 
 				if (fieldSanitize != null) {
 					fields.put(fieldName + _SANITIZE_SUFFIX, fieldSanitize);
@@ -360,6 +404,8 @@ public class ModelHintsImpl implements ModelHints {
 	private static final String _SANITIZE_SUFFIX = "_SANITIZE_SUFFIX";
 
 	private static final String _TYPE_SUFFIX = "_TYPE";
+
+	private static final String _VALIDATORS_SUFFIX = "_VALIDATORS";
 
 	private static Log _log = LogFactoryUtil.getLog(ModelHintsImpl.class);
 
