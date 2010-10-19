@@ -52,9 +52,14 @@ public class LiferayDefaultSelenium
 			"getCurrentYear", new String[0]);
 	}
 
-	public String getIncrementedText(String locator) {
+	public String getFirstNumber(String locator) {
 		return commandProcessor.getString(
-			"getIncrementedText", new String[] {locator,});
+			"getFirstNumber", new String[] {locator,});
+	}
+
+	public String getFirstNumberIncrement(String locator) {
+		return commandProcessor.getString(
+			"getFirstNumberIncrement", new String[] {locator,});
 	}
 
 	public boolean isPartialText(String locator, String value) {

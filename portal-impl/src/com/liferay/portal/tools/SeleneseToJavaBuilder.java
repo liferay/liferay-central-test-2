@@ -700,10 +700,23 @@ public class SeleneseToJavaBuilder {
 				sb.append(param2);
 				sb.append(");");
 			}
-			else if (param1.equals("storeIncrementedText")) {
+			else if (param1.equals("storeFirstNumber")) {
 				sb.append("String ");
 				sb.append(param3);
-				sb.append(" = selenium.getIncrementedText(\"");
+				sb.append(" = selenium.getFirstNumber(\"");
+				sb.append(param2);
+				sb.append("\");");
+
+				sb.append("RuntimeVariables.setValue(\"");
+				sb.append(param3);
+				sb.append("\", ");
+				sb.append(param3);
+				sb.append(");");
+			}
+			else if (param1.equals("storeFirstNumberIncrement")) {
+				sb.append("String ");
+				sb.append(param3);
+				sb.append(" = selenium.getFirstNumberIncrement(\"");
 				sb.append(param2);
 				sb.append("\");");
 

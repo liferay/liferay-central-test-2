@@ -27,7 +27,9 @@ public interface LiferaySelenium extends Selenium {
 
 	public String getCurrentYear();
 
-	public String getIncrementedText(String locator);
+	public String getFirstNumber(String locator);
+
+	public String getFirstNumberIncrement(String locator);
 
 	public boolean isPartialText(String locator, String value);
 

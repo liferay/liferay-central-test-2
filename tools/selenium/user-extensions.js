@@ -1,3 +1,7 @@
+Selenium.prototype.firstNumber = function(value) {
+	return parseInt(value.replace(/.*?(\d+).*$/, '$1'), 10);
+};
+
 Selenium.prototype.getCurrentDay = function() {
 	var date = new Date();
 
@@ -31,14 +35,16 @@ Selenium.prototype.getCurrentYear = function() {
 	return date.getFullYear();
 };
 
-Selenium.prototype.getFirstNumber = function(value) {
-	return parseInt(value.replace(/.*?(\d+).*$/, '$1'), 10);
-};
-
-Selenium.prototype.getIncrementedText = function(locator) {
+Selenium.prototype.getFirstNumber = function(locator) {
 	var locationValue = this.getText(locator);
 
-	return this.getFirstNumber(locationValue) + 1;
+	return this.firstNumber(locationValue);
+};
+
+Selenium.prototype.getFirstNumberIncrement = function(locator) {
+	var locationValue = this.getText(locator);
+
+	return this.firstNumber(locationValue) + 1;
 };
 
 Selenium.prototype.isPartialText = function(locator, value) {
