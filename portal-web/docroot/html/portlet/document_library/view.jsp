@@ -67,6 +67,8 @@ portletURL.setParameter("struts_action", "/document_library/view");
 portletURL.setParameter("topLink", topLink);
 portletURL.setParameter("folderId", String.valueOf(folderId));
 
+request.setAttribute("view.jsp-defaultFolderId", String.valueOf(defaultFolderId));
+
 request.setAttribute("view.jsp-folder", folder);
 
 request.setAttribute("view.jsp-folderId", String.valueOf(folderId));

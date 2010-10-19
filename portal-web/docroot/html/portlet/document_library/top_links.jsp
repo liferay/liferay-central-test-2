@@ -22,6 +22,8 @@
 		<%
 		String topLink = ParamUtil.getString(request, "topLink", "documents-home");
 
+		long defaultFolderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-defaultFolderId"));
+
 		long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
 
 		boolean viewFolder = GetterUtil.getBoolean((String)request.getAttribute("view.jsp-viewFolder"));
@@ -47,9 +49,8 @@
 						image="../aui/home"
 						label="<%= true %>"
 						message="documents-home"
-						url='<%= (topLink.equals("documents-home") && folderId == 0 && viewFolder && !useAssetEntryQuery) ? StringPool.BLANK : portletURL.toString() %>'
+						url='<%= (topLink.equals("documents-home") && folderId == defaultFolderId && viewFolder && !useAssetEntryQuery) ? StringPool.BLANK : portletURL.toString() %>'
 					/>
-
 
 					<%
 					portletURL.setParameter("topLink", "recent-documents");
