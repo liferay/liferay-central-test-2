@@ -33,10 +33,12 @@ import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.base.ResourcePermissionLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.ResourcePermissionsThreadLocal;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.locks.Lock;
 
 /**
@@ -154,9 +156,22 @@ public class ResourcePermissionLocalServiceImpl
 			String actionId)
 		throws PortalException, SystemException {
 
-		ResourcePermission resourcePermission =
+		/*ResourcePermission resourcePermission =
 			resourcePermissionPersistence.fetchByC_N_S_P_R(
-				companyId, name, scope, primKey, roleId);
+				companyId, name, scope, primKey, roleId);*/
+
+		ResourcePermission resourcePermission = null;
+
+		for (ResourcePermission curResourcePermission :
+				resourcePermissionPersistence.findByC_N_S_P(
+					companyId, name, scope, primKey)) {
+
+			if (curResourcePermission.getRoleId() == roleId) {
+				resourcePermission = curResourcePermission;
+
+				break;
+			}
+		}
 
 		if (resourcePermission == null) {
 			return false;
@@ -308,9 +323,18 @@ public class ResourcePermissionLocalServiceImpl
 			String[] actionIds, int operator)
 		throws PortalException, SystemException {
 
-		ResourcePermission resourcePermission =
-			resourcePermissionPersistence.fetchByC_N_S_P_R(
+		ResourcePermission resourcePermission = null;
+
+		Map<Long, ResourcePermission> resourcePermissions =
+			ResourcePermissionsThreadLocal.getResourcePermissions();
+
+		if (resourcePermissions != null) {
+			resourcePermission = resourcePermissions.get(roleId);
+		}
+		else {
+			resourcePermission = resourcePermissionPersistence.fetchByC_N_S_P_R(
 				companyId, name, scope, primKey, roleId);
+		}
 
 		long oldActionIds = 0;
 

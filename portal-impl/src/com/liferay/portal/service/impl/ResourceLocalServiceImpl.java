@@ -36,6 +36,7 @@ import com.liferay.portal.security.permission.PermissionsListFilterFactory;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.base.ResourceLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.ResourcePermissionsThreadLocal;
 import com.liferay.portal.util.comparator.ResourceComparator;
 
 import java.util.Iterator;
@@ -188,31 +189,44 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		// Permissions
 
-		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-			addResources_6(
-				companyId, groupId, userId, resource, portletActions);
+		List<ResourcePermission> resourcePermissions =
+			resourcePermissionPersistence.findByC_N_S_P(
+				companyId, name, ResourceConstants.SCOPE_INDIVIDUAL, primKey);
+
+		ResourcePermissionsThreadLocal.setResourcePermissions(
+			resourcePermissions);
+
+		try {
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+				addResources_6(
+					companyId, groupId, userId, resource, portletActions);
+			}
+			else {
+				addResources_1to5(
+					companyId, groupId, userId, resource, portletActions);
+			}
+
+			// Community permissions
+
+			if ((groupId > 0) && addCommunityPermissions) {
+				addCommunityPermissions(
+					companyId, groupId, userId, name, resource, portletActions);
+			}
+
+			// Guest permissions
+
+			if (addGuestPermissions) {
+
+				// Don't add guest permissions when you've already added
+				// community permissions and the given community is the guest
+				// community.
+
+				addGuestPermissions(
+					companyId, groupId, userId, name, resource, portletActions);
+			}
 		}
-		else {
-			addResources_1to5(
-				companyId, groupId, userId, resource, portletActions);
-		}
-
-		// Community permissions
-
-		if ((groupId > 0) && addCommunityPermissions) {
-			addCommunityPermissions(
-				companyId, groupId, userId, name, resource, portletActions);
-		}
-
-		// Guest permissions
-
-		if (addGuestPermissions) {
-
-			// Don't add guest permissions when you've already added community
-			// permissions and the given community is the guest community.
-
-			addGuestPermissions(
-				companyId, groupId, userId, name, resource, portletActions);
+		finally {
+			ResourcePermissionsThreadLocal.setResourcePermissions(null);
 		}
 	}
 
