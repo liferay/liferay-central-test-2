@@ -1491,17 +1491,15 @@ public class StringUtil {
 			return s;
 		}
 
-		if (s.startsWith(StringPool.APOSTROPHE) &&
-			s.endsWith(StringPool.APOSTROPHE)) {
+		if ((s.charAt(0) == CharPool.APOSTROPHE) &&
+			(s.charAt(s.length() - 1) == CharPool.APOSTROPHE)) {
 
-			s = s.replaceAll("'$", StringPool.BLANK);
-			s = s.replaceAll("^'", StringPool.BLANK);
+			return s.substring(1, s.length() - 1);
 		}
-		else if (s.startsWith(StringPool.QUOTE) &&
-				 s.endsWith(StringPool.QUOTE)) {
+		else if ((s.charAt(0) == CharPool.QUOTE) &&
+				 (s.charAt(s.length() - 1) == CharPool.QUOTE)) {
 
-			s = s.replaceAll("\"$", StringPool.BLANK);
-			s = s.replaceAll("^\"", StringPool.BLANK);
+			return s.substring(1, s.length() - 1);
 		}
 
 		return s;
