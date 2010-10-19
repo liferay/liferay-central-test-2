@@ -144,8 +144,8 @@ public class ModelHintsImpl implements ModelHints {
 	}
 
 	public String getType(String model, String field) {
-		Map<String, Object> fields =
-			(Map<String, Object>)_modelFields.get(model);
+		Map<String, Object> fields = (Map<String, Object>)_modelFields.get(
+			model);
 
 		if (fields == null) {
 			return null;
@@ -156,8 +156,8 @@ public class ModelHintsImpl implements ModelHints {
 	}
 
 	public List<Tuple> getValidators(String model, String field) {
-		Map<String, Object> fields =
-			(Map<String, Object>)_modelFields.get(model);
+		Map<String, Object> fields = (Map<String, Object>)_modelFields.get(
+			model);
 
 		if ((fields == null) ||
 			(fields.get(field + _VALIDATORS_SUFFIX) == null)) {
@@ -266,8 +266,8 @@ public class ModelHintsImpl implements ModelHints {
 				}
 			}
 
-			Map<String, Object> fields =
-				(Map<String, Object>)_modelFields.get(name);
+			Map<String, Object> fields = (Map<String, Object>)_modelFields.get(
+				name);
 
 			if (fields == null) {
 				fields = new LinkedHashMap<String, Object>();
@@ -314,31 +314,6 @@ public class ModelHintsImpl implements ModelHints {
 					fieldHints.put(hintName, hintValue);
 				}
 
-				List<Tuple> fieldValidators = new ArrayList<Tuple>();
-
-				itr3 = field.elements("validator").iterator();
-
-				while (itr3.hasNext()) {
-					Element validator = itr3.next();
-
-					String validatorName =	validator.attributeValue("name");
-
-					if (Validator.isNull(validatorName)) {
-						continue;
-					}
-
-					String validatorErrorMessage = validator.attributeValue(
-						"errorMessage");
-
-					String validatorValue = validator.getText();
-
-					Tuple fieldValidator = new Tuple(
-						fieldName, validatorName, validatorErrorMessage,
-						validatorValue);
-
-					fieldValidators.add(fieldValidator);
-				}
-
 				Tuple fieldSanitize = null;
 
 				Element sanitize = field.element("sanitize");
@@ -351,17 +326,40 @@ public class ModelHintsImpl implements ModelHints {
 					fieldSanitize = new Tuple(fieldName, contentType, modes);
 				}
 
+				List<Tuple> fieldValidators = new ArrayList<Tuple>();
+
+				itr3 = field.elements("validator").iterator();
+
+				while (itr3.hasNext()) {
+					Element validator = itr3.next();
+
+					String validatorName = validator.attributeValue("name");
+
+					if (Validator.isNull(validatorName)) {
+						continue;
+					}
+
+					String errorMessage = validator.attributeValue(
+						"error-message");
+
+					Tuple fieldValidator = new Tuple(
+						fieldName, validatorName, errorMessage,
+						validator.getText());
+
+					fieldValidators.add(fieldValidator);
+				}
+
 				fields.put(fieldName + _ELEMENTS_SUFFIX, field);
 				fields.put(fieldName + _TYPE_SUFFIX, fieldType);
 				fields.put(fieldName + _LOCALIZATION_SUFFIX, fieldLocalized);
 				fields.put(fieldName + _HINTS_SUFFIX, fieldHints);
 
-				if (!fieldValidators.isEmpty()) {
-					fields.put(fieldName + _VALIDATORS_SUFFIX, fieldValidators);
-				}
-
 				if (fieldSanitize != null) {
 					fields.put(fieldName + _SANITIZE_SUFFIX, fieldSanitize);
+				}
+
+				if (!fieldValidators.isEmpty()) {
+					fields.put(fieldName + _VALIDATORS_SUFFIX, fieldValidators);
 				}
 			}
 		}

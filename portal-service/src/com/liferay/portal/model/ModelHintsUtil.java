@@ -57,9 +57,7 @@ public class ModelHintsUtil {
 		return getModelHints().getType(model, field);
 	}
 
-	public static List<Tuple> getValidators(
-		String model, String field) {
-
+	public static List<Tuple> getValidators(String model, String field) {
 		return getModelHints().getValidators(model, field);
 	}
 
