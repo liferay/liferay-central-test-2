@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.captcha.Captcha;
 import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.Account;
@@ -315,12 +316,17 @@ public class EditServerAction extends PortletAction {
 		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 			new UnsyncByteArrayOutputStream();
 
-		portletObjects.put("out", unsyncByteArrayOutputStream);
+		UnsyncPrintWriter unsyncPrintWriter =
+			new UnsyncPrintWriter(unsyncByteArrayOutputStream);
+
+		portletObjects.put("out", unsyncPrintWriter);
 
 		try {
 			SessionMessages.add(actionRequest, "script", script);
 
 			ScriptingUtil.exec(null, portletObjects, language, script);
+
+			unsyncPrintWriter.flush();
 
 			SessionMessages.add(
 				actionRequest, "script_output",
