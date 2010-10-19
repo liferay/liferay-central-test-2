@@ -255,7 +255,17 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		throws SystemException {
 
 		return getGroupFileEntries(
-			groupId, userId, start, end, new FileEntryModifiedDateComparator());
+			groupId, userId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, start,
+			end, new FileEntryModifiedDateComparator());
+	}
+
+	public List<DLFileEntry> getGroupFileEntries(
+			long groupId, long userId, long rootFolderId, int start, int end)
+		throws SystemException {
+
+		return getGroupFileEntries(
+			groupId, userId, rootFolderId, start, end,
+			new FileEntryModifiedDateComparator());
 	}
 
 	public List<DLFileEntry> getGroupFileEntries(
@@ -263,8 +273,17 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			OrderByComparator obc)
 		throws SystemException {
 
-		long[] folderIds = dlFolderService.getFolderIds(
-			groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+		return getGroupFileEntries(
+			groupId, userId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, start,
+			end, obc);
+	}
+
+	public List<DLFileEntry> getGroupFileEntries(
+			long groupId, long userId, long rootFolderId, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		long[] folderIds = dlFolderService.getFolderIds(groupId, rootFolderId);
 
 		if (folderIds.length == 0) {
 			return Collections.EMPTY_LIST;
@@ -282,8 +301,15 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	public int getGroupFileEntriesCount(long groupId, long userId)
 		throws SystemException {
 
-		long[] folderIds = dlFolderService.getFolderIds(
-			groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+		return getGroupFileEntriesCount(
+			groupId, userId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+	}
+
+	public int getGroupFileEntriesCount(
+			long groupId, long userId, long rootFolderId)
+		throws SystemException {
+
+		long[] folderIds = dlFolderService.getFolderIds(groupId, rootFolderId);
 
 		if (folderIds.length == 0) {
 			return 0;
