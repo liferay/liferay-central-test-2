@@ -50,7 +50,7 @@ private static List<JournalArticle> _getResults(Hits hits) throws Exception {
 	List<com.liferay.portal.kernel.search.Document> hitsList = hits.toList();
 
 	for (com.liferay.portal.kernel.search.Document doc : hitsList) {
-		long groupId = GetterUtil.getLong(doc.get(Field.GROUP_ID));
+		long groupId = GetterUtil.getLong(doc.get(Field.SCOPE_GROUP_ID));
 		String articleId = doc.get(Field.ENTRY_CLASS_PK);
 
 		try {

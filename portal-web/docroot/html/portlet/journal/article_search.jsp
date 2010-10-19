@@ -70,6 +70,20 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 
 					<%
 					List<Group> myPlaces = user.getMyPlaces();
+
+					List<Layout> scopeLayouts = new ArrayList<Layout>();
+
+					for (Layout curGroupLayout : LayoutLocalServiceUtil.getLayouts(themeDisplay.getParentGroupId(), false)) {
+						if (curGroupLayout.hasScopeGroup()) {
+							scopeLayouts.add(curGroupLayout);
+						}
+					}
+
+					for (Layout curGroupLayout : LayoutLocalServiceUtil.getLayouts(themeDisplay.getParentGroupId(), true)) {
+						if (curGroupLayout.hasScopeGroup()) {
+							scopeLayouts.add(curGroupLayout);
+						}
+					}
 					%>
 
 					<aui:select label="my-places" name="<%= displayTerms.GROUP_ID %>">
@@ -88,13 +102,28 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 						}
 						%>
 
-						<c:if test="<%= layout.hasScopeGroup() %>">
+						<c:if test="<%= !scopeLayouts.isEmpty() %>">
 
 							<%
-							Group scopeGroup = layout.getScopeGroup();
+							for (Layout curScopeLayout : scopeLayouts) {
 							%>
 
-							<aui:option label='<%= LanguageUtil.get(pageContext, "current-page") + " (" + HtmlUtil.escape(layout.getName(locale)) + ")" %>' selected="<%= displayTerms.getGroupId() == scopeGroup.getGroupId() %>" value="<%= scopeGroup.getGroupId() %>" />
+								<%
+								Group scopeGroup = curScopeLayout.getScopeGroup();
+
+								String label = HtmlUtil.escape(curScopeLayout.getName(locale));
+
+								if (curScopeLayout.equals(layout)) {
+									label = LanguageUtil.get(pageContext, "current-page") + " (" + label + ")";
+								}
+								%>
+
+								<aui:option label='<%= label %>' selected="<%= displayTerms.getGroupId() == scopeGroup.getGroupId() %>" value="<%= scopeGroup.getGroupId() %>" />
+
+							<%
+							}
+							%>
+
 						</c:if>
 					</aui:select>
 				</c:otherwise>

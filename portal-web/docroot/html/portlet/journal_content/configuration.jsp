@@ -36,7 +36,7 @@ try {
 catch (NoSuchArticleException nsae) {
 }
 
-groupId = ParamUtil.getLong(request, "groupId", groupId);
+groupId = ParamUtil.getLong(request, "groupId", themeDisplay.getScopeGroupId());
 type = ParamUtil.getString(request, "type", type);
 %>
 
