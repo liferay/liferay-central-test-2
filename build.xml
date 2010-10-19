@@ -567,9 +567,12 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 			<equals arg1="${app.server.type}" arg2="tomcat" />
 			<then>
 				<if>
-					<not>
-						<available file="${app.server.bin.dir}/setenv.bat" />
-					</not>
+					<or>
+						<isset property="jdk.windows.version" />
+						<not>
+							<available file="${app.server.bin.dir}/setenv.bat" />
+						</not>
+					</or>
 					<then>
 						<copy
 							file="tools/servers/tomcat/bin/setenv.bat"
@@ -583,9 +586,12 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 				</if>
 
 				<if>
-					<not>
-						<available file="${app.server.bin.dir}/setenv.sh" />
-					</not>
+					<or>
+						<isset property="jdk.windows.version" />
+						<not>
+							<available file="${app.server.bin.dir}/setenv.sh" />
+						</not>
+					</or>
 					<then>
 						<copy
 							file="tools/servers/tomcat/bin/setenv.sh"
