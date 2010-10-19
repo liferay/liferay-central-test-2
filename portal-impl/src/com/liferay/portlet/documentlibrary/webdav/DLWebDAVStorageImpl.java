@@ -651,10 +651,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 					WorkflowConstants.ACTION_SAVE_DRAFT);
 			}
 
-			HttpServletRequest httpServletRequest =
-				webDavRequest.getHttpServletRequest();
 			long contentLength = GetterUtil.getLong(
-				httpServletRequest.getHeader(HttpHeaders.CONTENT_LENGTH));
+				request.getHeader(HttpHeaders.CONTENT_LENGTH));
 
 			try {
 				DLFileEntry fileEntry =
