@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/control_panel_menu/init.jsp" %>
+<%@ include file="/html/portlet/control_panel_menu/init.jsp" %>
 
 <h1 class="user-greeting">
 	<liferay-ui:message key="control-panel" />
