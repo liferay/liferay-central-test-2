@@ -64,7 +64,8 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 		Map<MethodInvocation, MethodTargetClassKey> methodTargetClassKeyMap =
 			null;
 
-		if (_methodTargetClassKeyThreadLocalCache != null) {
+		if (_methodTargetClassKeyThreadLocalCache != null &&
+			ThreadLocalFilter.isUnderThreadLocalFilter()) {
 			methodTargetClassKeyMap =
 				_methodTargetClassKeyThreadLocalCache.get();
 		}

@@ -15,6 +15,7 @@
 package com.liferay.portal.servlet.filters.threadlocal;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.InitialThreadLocal;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ThreadLocalRegistry;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
@@ -31,18 +32,32 @@ public class ThreadLocalFilter extends BasePortalFilter {
 	public static final boolean ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(ThreadLocalFilter.class.getName()));
 
+	public static boolean isUnderThreadLocalFilter() {
+		if (_enterCount.get() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
 		throws Exception {
 
+		_enterCount.set(_enterCount.get() + 1);
 		try {
 			processFilter(
 				ThreadLocalFilter.class, request, response, filterChain);
 		}
 		finally {
 			ThreadLocalRegistry.resetThreadLocals();
+			_enterCount.set(_enterCount.get() - 1);
 		}
 	}
+
+	private static ThreadLocal<Long> _enterCount = new InitialThreadLocal<Long>(
+		ThreadLocalFilter.class + "_enterCount", 0L);
 
 }
