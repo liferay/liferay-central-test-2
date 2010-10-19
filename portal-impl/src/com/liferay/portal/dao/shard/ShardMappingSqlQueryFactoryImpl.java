@@ -29,8 +29,7 @@ public class ShardMappingSqlQueryFactoryImpl implements MappingSqlQueryFactory {
 		DataSource dataSource, String sql, int[] types,
 		RowMapper<T> rowMapper) {
 
-		return new ShardMappingSqlQueryImpl<T>(
-			dataSource, sql, types, rowMapper);
+		return new ShardMappingSqlQueryImpl<T>(sql, types, rowMapper);
 	}
 
 }

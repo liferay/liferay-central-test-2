@@ -16,11 +16,6 @@ package com.liferay.portal.dao.shard;
 
 import com.liferay.portal.dao.jdbc.spring.MappingSqlQueryImpl;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
-import com.liferay.portal.kernel.dao.shard.ShardUtil;
-
-import java.util.List;
-
-import javax.sql.DataSource;
 
 /**
  * @author Alexander Chow
@@ -28,16 +23,9 @@ import javax.sql.DataSource;
 public class ShardMappingSqlQueryImpl<T> extends MappingSqlQueryImpl<T> {
 
 	public ShardMappingSqlQueryImpl(
-		DataSource dataSource, String sql, int[] types,
-		RowMapper<T> rowMapper) {
+		String sql, int[] types, RowMapper<T> rowMapper) {
 
-		super(dataSource, sql, types, rowMapper);
-	}
-
-	public List<T> execute(Object... params) {
-		setDataSource(ShardUtil.getDataSource());
-
-		return super.execute(params);
+		super(ShardDataSource.getInstance(), sql, types, rowMapper);
 	}
 
 }

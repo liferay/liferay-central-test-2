@@ -27,7 +27,7 @@ public class ShardSqlUpdateFactoryImpl implements SqlUpdateFactory {
 	public SqlUpdate getSqlUpdate(
 		DataSource dataSource, String sql, int[] types) {
 
-		return new ShardSqlUpdateImpl(dataSource, sql, types);
+		return new ShardSqlUpdateImpl(sql, types);
 	}
 
 }
