@@ -29,14 +29,14 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 <%
 String organizationsListView = request.getParameter("organizationsListView");
 
-boolean saveOrganizationsListView = GetterUtil.getBoolean(request.getParameter("saveOrganizationsListView"));
-
 PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(renderRequest);
 
 if (organizationsListView == null) {
 	organizationsListView = portalPreferences.getValue(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS, "organizations-list-view", PropsValues.ORGANIZATIONS_LIST_VIEWS_DEFAULT);
 }
 else {
+	boolean saveOrganizationsListView = ParamUtil.getBoolean(request, "saveOrganizationsListView");
+
 	if (saveOrganizationsListView && ArrayUtil.contains(PropsValues.ORGANIZATIONS_LIST_VIEWS, organizationsListView)) {
 		portalPreferences.setValue(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS, "organizations-list-view", organizationsListView);
 	}
