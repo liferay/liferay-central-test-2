@@ -1002,46 +1002,52 @@ public class LayoutImporter {
 		Layout layout, String newTypeSettings, String portletsMergeMode) {
 
 		try {
-			UnicodeProperties previousProperties =
+			UnicodeProperties previousTypeSettingsProperties =
 				layout.getTypeSettingsProperties();
+
 			LayoutTypePortlet previousLayoutType =
 				(LayoutTypePortlet)layout.getLayoutType();
-			List<String> previousColumns =
-				previousLayoutType.getLayoutTemplate().getColumns();
 
-			UnicodeProperties newProperties = new UnicodeProperties(true);
+			LayoutTemplate previousLayoutTemplate =
+				previousLayoutType.getLayoutTemplate();
 
-			newProperties.load(newTypeSettings);
+			List<String> previousColumns = previousLayoutTemplate.getColumns();
 
-			String layoutTemplateId = newProperties.getProperty(
+			UnicodeProperties newTypeSettingsProperties = new UnicodeProperties(
+				true);
+
+			newTypeSettingsProperties.load(newTypeSettings);
+
+			String layoutTemplateId = newTypeSettingsProperties.getProperty(
 				LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID);
 
-			previousProperties.setProperty(
-				LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID, layoutTemplateId);
+			previousTypeSettingsProperties.setProperty(
+				LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID,
+				layoutTemplateId);
 
 			LayoutTemplate newLayoutTemplate =
 				LayoutTemplateLocalServiceUtil.getLayoutTemplate(
 					layoutTemplateId, false, null);
 
-			String[] lostPortletIds = new String[0];
+			String[] newPortletIds = new String[0];
 
 			for (String columnId : newLayoutTemplate.getColumns()) {
-				String columnValue = newProperties.getProperty(columnId);
+				String columnValue = newTypeSettingsProperties.getProperty(
+					columnId);
 
 				String[] portletIds = StringUtil.split(columnValue);
 
 				if (!previousColumns.contains(columnId)) {
-					lostPortletIds = ArrayUtil.append(
-						lostPortletIds, portletIds);
+					newPortletIds = ArrayUtil.append(newPortletIds, portletIds);
 				}
 				else {
 					String[] previousPortletIds = StringUtil.split(
-						previousProperties.getProperty(columnId));
+						previousTypeSettingsProperties.getProperty(columnId));
 
 					portletIds = appendPortletIds(
 						previousPortletIds, portletIds, portletsMergeMode);
 
-					previousProperties.setProperty(
+					previousTypeSettingsProperties.setProperty(
 						columnId, StringUtil.merge(portletIds));
 				}
 			}
@@ -1051,14 +1057,14 @@ public class LayoutImporter {
 			String columnId = previousColumns.get(0);
 
 			String[] portletIds = StringUtil.split(
-				previousProperties.getProperty(columnId));
+				previousTypeSettingsProperties.getProperty(columnId));
 
-			appendPortletIds(portletIds, lostPortletIds, portletsMergeMode);
+			appendPortletIds(portletIds, newPortletIds, portletsMergeMode);
 
-			previousProperties.setProperty(
+			previousTypeSettingsProperties.setProperty(
 				columnId, StringUtil.merge(portletIds));
 
-			layout.setTypeSettings(previousProperties.toString());
+			layout.setTypeSettings(previousTypeSettingsProperties.toString());
 		}
 		catch (IOException ioe) {
 			layout.setTypeSettings(newTypeSettings);
