@@ -16,9 +16,12 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
+<%@ page import="com.liferay.taglib.aui.ValidatorTag" %>
+
 <%
 String name = GetterUtil.getString((String)request.getAttribute("aui:form:name"));
 String onSubmit = GetterUtil.getString((String)request.getAttribute("aui:form:onSubmit"));
+Map<String, List<ValidatorTag>> validatorTagsMap = (Map<String, List<ValidatorTag>>)request.getAttribute("aui:form:validatorTagsMap");
 %>
 
 </form>
@@ -32,6 +35,37 @@ String onSubmit = GetterUtil.getString((String)request.getAttribute("aui:form:on
 				, onSubmit: function(event) {
 					<%= onSubmit %>
 				}
+			</c:if>
+
+			<c:if test="<%= validatorTagsMap != null %>">
+				,fieldRules: [
+
+				<%
+				int i = 0;
+
+				for (String fieldName : validatorTagsMap.keySet()) {
+					List<ValidatorTag> validatorTags = validatorTagsMap.get(fieldName);
+
+					for (ValidatorTag validatorTag : validatorTags) {
+				%>
+
+						<%= i != 0 ? StringPool.COMMA : StringPool.BLANK %>
+
+						{
+							fieldName: '<%= namespace + fieldName %>',
+							validatorName: '<%= validatorTag.getName() %>',
+							errorMessage: '<%= validatorTag.getErrorMessage() %>',
+							body: <%= validatorTag.getBody() %>,
+							isCustom: <%= validatorTag.isCustom() %>
+						}
+
+				<%
+						i++;
+					}
+				}
+				%>
+
+				]
 			</c:if>
 		}
 	);

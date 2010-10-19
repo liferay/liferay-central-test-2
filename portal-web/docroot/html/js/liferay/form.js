@@ -1,11 +1,56 @@
 AUI().add(
 	'liferay-form',
 	function(A) {
+		var DEFAULTS_FORM_VALIDATOR = AUI.defaults.FormValidator;
+
+		var defaultAcceptFiles = DEFAULTS_FORM_VALIDATOR.RULES.acceptFiles;
+
+		var acceptFiles = function(val, node, ruleValue) {
+			if (ruleValue == "*") {
+				return true;
+			}
+
+			return defaultAcceptFiles(val, node, ruleValue);
+		}
+
+		A.mix(
+			DEFAULTS_FORM_VALIDATOR.RULES,
+			{
+				acceptFiles: acceptFiles
+			},
+			true
+		);
+
+		A.mix(
+			DEFAULTS_FORM_VALIDATOR.STRINGS,
+			{
+				DEFAULT: Liferay.Language.get('please-fix-this-field'),
+				acceptFiles: Liferay.Language.get('please-enter-a-file-with-a-valid-extension-x'),
+				alpha: Liferay.Language.get('please-enter-only-alpha-characters'),
+				alphanum: Liferay.Language.get('please-enter-only-alphanumeric-characters'),
+				date: Liferay.Language.get('please-enter-a-valid-date'),
+				digits: Liferay.Language.get('please-enter-only-digits'),
+				email: Liferay.Language.get('please-enter-a-valid-email-address'),
+				equalTo: Liferay.Language.get('please-enter-the-same-value-again'),
+				max: Liferay.Language.get('please-enter-a-value-less-than-or-equal-to-x'),
+				maxLength: Liferay.Language.get('please-enter-no-more-than-x-characters'),
+				min: Liferay.Language.get('please-enter-a-value-greater-than-or-equal-to-x'),
+				minLength: Liferay.Language.get('please-enter-at-list-x-characters'),
+				number: Liferay.Language.get('please-enter-a-valid-number'),
+				range: Liferay.Language.get('please-enter-a-value-between-x-and-x'),
+				rangeLength: Liferay.Language.get('please-enter-a-value-between-x-and-x-characters-long'),
+				required: Liferay.Language.get('this-field-is-required'),
+				url: Liferay.Language.get('please-enter-a-valid-url')
+			},
+			true
+		);
+
 		var Form = A.Component.create(
 			{
 				ATTRS: {
 					id: {},
 					namespace: {},
+					fieldRules: {},
 					onSubmit: {
 						valueFn: function() {
 							var instance = this;
@@ -23,6 +68,15 @@ AUI().add(
 
 						var id = instance.get('id');
 
+						var fieldRules = instance.get('fieldRules');
+
+						var rules = {};
+						var fieldStrings = {};
+
+						for (var rule in fieldRules) {
+							instance._processFieldRule(rules, fieldStrings, fieldRules[rule]);
+						}
+
 						var form = document[id];
 						var formNode = A.one(form);
 
@@ -30,7 +84,54 @@ AUI().add(
 						instance.formNode = formNode;
 
 						if (formNode) {
+							var formValidator = new A.FormValidator(
+							{
+								boundingBox: formNode,
+								rules: rules,
+								fieldStrings: fieldStrings
+							});
+
+							instance.formValidator = formValidator;
+
 							instance._bindForm();
+						}
+					},
+
+					_processFieldRule: function(rules, strings, rule) {
+						var instance = this;
+
+						var value = true;
+
+						if (rule.body && !rule.isCustom) {
+							value = rule.body;
+						}
+
+						var fieldRules = rules[rule.fieldName];
+
+						if (!fieldRules) {
+							fieldRules = {};
+
+							rules[rule.fieldName] = fieldRules;
+						}
+
+						fieldRules[rule.validatorName] = value;
+
+						if (rule.isCustom) {
+							DEFAULTS_FORM_VALIDATOR.RULES[rule.validatorName] = rule.body;
+						}
+
+						var errorMessage = rule.errorMessage;
+
+						if (errorMessage) {
+							var fieldStrings = strings[rule.fieldName];
+
+							if (!fieldStrings) {
+								fieldStrings = {};
+
+								strings[rule.fieldName] = fieldStrings;
+							}
+
+							fieldStrings[rule.validatorName] = errorMessage;
 						}
 					},
 
@@ -38,10 +139,11 @@ AUI().add(
 						var instance = this;
 
 						var formNode = instance.formNode;
+						var formValidator = instance.formValidator;
 
 						var onSubmit = instance.get('onSubmit');
 
-						formNode.on('submit', onSubmit, instance);
+						formValidator.on('submit', onSubmit, instance);
 
 						formNode.delegate('blur', instance._onFieldFocusChange, 'button,input,select,textarea', instance);
 						formNode.delegate('focus', instance._onFieldFocusChange, 'button,input,select,textarea', instance);
@@ -97,7 +199,7 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-base'],
+		requires: ['aui-base', 'aui-form-validator'],
 		use: []
 	}
 );
