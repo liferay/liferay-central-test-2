@@ -36,7 +36,9 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="parentAccountId" type="long" />
-		<field name="name" type="String" />
+		<field name="name" type="String">
+			<validator name="required" />
+		</field>
 		<field name="legalName" type="String" />
 		<field name="legalId" type="String" />
 		<field name="legalType" type="String" />
@@ -96,8 +98,12 @@
 		<field name="key" type="String">
 			<hint-collection name="CLOB" />
 		</field>
-		<field name="virtualHost" type="String" />
-		<field name="mx" type="String" />
+		<field name="virtualHost" type="String">
+			<validator name="required" />
+		</field>
+		<field name="mx" type="String">
+			<validator name="required" />
+		</field>
 		<field name="homeURL" type="String">
 			<hint-collection name="URL" />
 		</field>
@@ -166,6 +172,7 @@
 		<field name="classPK" type="long" />
 		<field name="address" type="String">
 			<hint name="display-width">150</hint>
+			<validator name="email" />
 		</field>
 		<field name="typeId" type="int" />
 		<field name="primary" type="boolean" />
@@ -180,6 +187,7 @@
 		<field name="liveGroupId" type="long" />
 		<field name="name" type="String">
 			<hint name="display-width">150</hint>
+			<validator name="required" />
 		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
@@ -214,6 +222,7 @@
 		<field name="parentLayoutId" type="long" />
 		<field name="name" type="String">
 			<hint-collection name="TEXTAREA" />
+			<validator name="required" />
 		</field>
 		<field name="title" type="String">
 			<hint-collection name="TEXTAREA" />
@@ -245,7 +254,9 @@
 	<model name="com.liferay.portal.model.LayoutPrototype">
 		<field name="layoutPrototypeId" type="long" />
 		<field name="companyId" type="long" />
-		<field name="name" type="String" localized="true" />
+		<field name="name" type="String" localized="true">
+			<validator name="required" />
+		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
@@ -280,6 +291,7 @@
 		<field name="companyId" type="long" />
 		<field name="name" type="String" localized="true">
 			<hint name="max-length">4000</hint>
+			<validator name="required" />
 		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
@@ -334,6 +346,7 @@
 		<field name="name" type="String">
 			<hint name="display-width">150</hint>
 			<hint name="max-length">100</hint>
+			<validator name="required" />
 		</field>
 		<field name="type" type="String">
 			<hint name="auto-escape">false</hint>
@@ -569,6 +582,7 @@
 		<field name="classPK" type="long" />
 		<field name="name" type="String">
 			<hint name="display-width">150</hint>
+			<validator name="required" />
 		</field>
 		<field name="title" type="String" localized="true">
 			<hint name="max-length">4000</hint>
@@ -648,8 +662,13 @@
 		<field name="reminderQueryQuestion" type="String" />
 		<field name="reminderQueryAnswer" type="String" />
 		<field name="graceLoginCount" type="int" />
-		<field name="screenName" type="String" />
-		<field name="emailAddress" type="String" />
+		<field name="screenName" type="String">
+			<validator name="required" />
+		</field>
+		<field name="emailAddress" type="String">
+			<validator name="required" />
+			<validator name="email" />
+		</field>
 		<field name="facebookId" type="long" />
 		<field name="openId" type="String">
 			<hint name="max-length">1024</hint>
@@ -665,9 +684,13 @@
 			<hint-collection name="TEXTAREA" />
 			<hint name="display-width">400</hint>
 		</field>
-		<field name="firstName" type="String" />
+		<field name="firstName" type="String" >
+			<validator name="required" />
+		</field>
 		<field name="middleName" type="String" />
-		<field name="lastName" type="String" />
+		<field name="lastName" type="String" >
+			<validator name="required" />
+		</field>
 		<field name="jobTitle" type="String">
 			<hint name="max-length">100</hint>
 		</field>
@@ -688,6 +711,7 @@
 		<field name="parentUserGroupId" type="long" />
 		<field name="name" type="String">
 			<hint name="display-width">150</hint>
+			<validator name="required" />
 		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
@@ -755,6 +779,7 @@
 		<field name="url" type="String">
 			<hint-collection name="URL" />
 			<hint name="display-width">150</hint>
+			<validator name="url" />
 		</field>
 		<field name="typeId" type="int" />
 		<field name="primary" type="boolean" />
@@ -952,6 +977,7 @@
 		<field name="title" type="String">
 			<hint name="max-length">150</hint>
 			<sanitize content-type="text/plain" modes="ALL" />
+			<validator name="required" />
 		</field>
 		<field name="urlTitle" type="String">
 			<hint name="max-length">150</hint>
@@ -996,6 +1022,8 @@
 		</field>
 		<field name="url" type="String">
 			<hint-collection name="URL" />
+			<validator name="required" />
+			<validator name="url" />
 		</field>
 		<field name="comments" type="String">
 			<hint-collection name="TEXTAREA" />
@@ -1014,7 +1042,9 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="parentFolderId" type="long" />
-		<field name="name" type="String" />
+		<field name="name" type="String">
+			<validator name="required" />
+		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
@@ -1144,6 +1174,7 @@
 		<field name="parentFolderId" type="long" />
 		<field name="name" type="String">
 			<hint name="max-length">100</hint>
+			<validator name="required" />
 		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
@@ -1154,7 +1185,9 @@
 		<field name="columnId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="tableId" type="long" />
-		<field name="name" type="String" />
+		<field name="name" type="String">
+			<validator name="required" />
+		</field>
 		<field name="type" type="int" />
 		<field name="defaultData" type="String">
 			<hint-collection name="TEXTAREA" />
@@ -1196,7 +1229,9 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="parentFolderId" type="long" />
-		<field name="name" type="String" />
+		<field name="name" type="String">
+			<validator name="required" />
+		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
@@ -1236,6 +1271,7 @@
 		<field name="version" type="double" />
 		<field name="title" type="String">
 			<hint name="max-length">300</hint>
+			<validator name="required" />
 		</field>
 		<field name="urlTitle" type="String">
 			<hint name="max-length">150</hint>
@@ -1309,9 +1345,12 @@
 		<field name="feedId" type="String">
 			<hint name="auto-escape">false</hint>
 		</field>
-		<field name="name" type="String" />
+		<field name="name" type="String">
+			<validator name="required" />
+		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
+			<validator name="required" />
 		</field>
 		<field name="type" type="String" />
 		<field name="structureId" type="String">
@@ -1328,6 +1367,7 @@
 		<field name="orderByType" type="String" />
 		<field name="targetLayoutFriendlyUrl" type="String">
 			<hint name="max-length">255</hint>
+			<validator name="required" />
 		</field>
 		<field name="targetPortletId" type="String" />
 		<field name="contentField" type="String" />
@@ -1348,9 +1388,12 @@
 			<hint name="auto-escape">false</hint>
 		</field>
 		<field name="parentStructureId" type="String" />
-		<field name="name" type="String" />
+		<field name="name" type="String">
+			<validator name="required" />
+		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
+			<validator name="required" />
 		</field>
 		<field name="xsd" type="String">
 			<hint-collection name="CLOB" />
@@ -1372,9 +1415,12 @@
 		<field name="structureId" type="String">
 			<hint name="auto-escape">false</hint>
 		</field>
-		<field name="name" type="String" />
+		<field name="name" type="String">
+			<validator name="required" />
+		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
+			<validator name="required" />
 		</field>
 		<field name="xsl" type="String">
 			<hint-collection name="CLOB" />
@@ -1407,7 +1453,9 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="parentCategoryId" type="long" />
-		<field name="name" type="String" />
+		<field name="name" type="String">
+			<validator name="required" />
+		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
@@ -1467,9 +1515,12 @@
 		<field name="threadId" type="long" />
 		<field name="rootMessageId" type="long" />
 		<field name="parentMessageId" type="long" />
-		<field name="subject" type="String" />
+		<field name="subject" type="String">
+			<validator name="required" />
+		</field>
 		<field name="body" type="String">
 			<hint-collection name="CLOB" />
+			<validator name="required" />
 		</field>
 		<field name="format" type="String" />
 		<field name="attachments" type="boolean" />
@@ -1531,9 +1582,11 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="title" type="String" localized="true">
 			<hint name="max-length">500</hint>
+			<validator name="required" />
 		</field>
 		<field name="description" type="String" localized="true">
 			<hint-collection name="TEXTAREA" />
+			<validator name="required" />
 		</field>
 		<field name="expirationDate" type="Date" />
 		<field name="lastVoteDate" type="Date" />
@@ -1920,7 +1973,9 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="name" type="String" />
+		<field name="name" type="String">
+			<validator name="required" />
+		</field>
 		<field name="type" type="String" />
 		<field name="tags" type="String">
 			<hint name="max-length">255</hint>
@@ -1928,6 +1983,7 @@
 		<field name="shortDescription" type="String">
 			<hint-collection name="TEXTAREA" />
 			<hint name="display-height">70</hint>
+			<validator name="required" />
 		</field>
 		<field name="longDescription" type="String">
 			<hint-collection name="TEXTAREA" />
@@ -1935,8 +1991,12 @@
 		</field>
 		<field name="pageURL" type="String">
 			<hint-collection name="URL" />
+			<validator name="required" />
+			<validator name="url" />
 		</field>
-		<field name="author" type="String" />
+		<field name="author" type="String">
+			<validator name="required" />
+		</field>
 		<field name="repoGroupId" type="String" />
 		<field name="repoArtifactId" type="String" />
 	</model>
@@ -2013,7 +2073,9 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="name" type="String" />
+		<field name="name" type="String">
+			<validator name="required" />
+		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
@@ -2032,6 +2094,7 @@
 		<field name="nodeId" type="long" />
 		<field name="title" type="String">
 			<hint name="max-length">255</hint>
+			<validator name="required" />
 		</field>
 		<field name="version" type="double" />
 		<field name="minorEdit" type="boolean" />
