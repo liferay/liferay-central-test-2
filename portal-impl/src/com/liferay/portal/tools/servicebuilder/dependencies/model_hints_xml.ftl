@@ -38,6 +38,10 @@
 						<#assign closeField = true>
 					</#if>
 
+					<#if modelHintsUtil.getValidators(modelName, column.name)??>
+						<#assign closeField = true>
+					</#if>
+
 					<#if closeField>
 						>
 
@@ -61,6 +65,26 @@
 							<#assign modes = sanitizeTuple.getObject(2)>
 
 							<sanitize content-type="${contentType}" modes="${modes}" />
+						</#if>
+
+					    <#if modelHintsUtil.getValidators(modelName, column.name)??>
+							<#assign validatorTuple = modelHintsUtil.getValidators(modelName, column.name)>
+
+							<#assign name = validatorTuple.getObject(1)>
+							<#assign errorMessage = validatorTuple.getObject(2)>
+							<#assign value = validatorTuple.getObject(3)>
+
+							<validator error-message="" name="${name}"
+
+							<#if value>
+								>
+
+							    	${value}
+
+								</validator>
+						    <#else>
+						    	/>
+							</#if>
 						</#if>
 
 						</field>
