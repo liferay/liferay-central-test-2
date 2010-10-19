@@ -32,8 +32,8 @@ public class ThreadLocalFilter extends BasePortalFilter {
 	public static final boolean ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(ThreadLocalFilter.class.getName()));
 
-	public static boolean isUnderThreadLocalFilter() {
-		if (_enterCount.get() > 0) {
+	public static boolean isInUse() {
+		if (_useCountThreadLocal.get() > 0) {
 			return true;
 		}
 		else {
@@ -46,18 +46,21 @@ public class ThreadLocalFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		_enterCount.set(_enterCount.get() + 1);
+		_useCountThreadLocal.set(_useCountThreadLocal.get() + 1);
+
 		try {
 			processFilter(
 				ThreadLocalFilter.class, request, response, filterChain);
 		}
 		finally {
+			_useCountThreadLocal.set(_useCountThreadLocal.get() - 1);
+
 			ThreadLocalRegistry.resetThreadLocals();
-			_enterCount.set(_enterCount.get() - 1);
 		}
 	}
 
-	private static ThreadLocal<Long> _enterCount = new InitialThreadLocal<Long>(
-		ThreadLocalFilter.class + "_enterCount", 0L);
+	private static ThreadLocal<Long> _useCountThreadLocal =
+		new InitialThreadLocal<Long>(
+			ThreadLocalFilter.class + "_useCountThreadLocal", 0L);
 
 }
