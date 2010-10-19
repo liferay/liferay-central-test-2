@@ -35,6 +35,7 @@ import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.comparator.FileEntryModifiedDateComparator;
 
 import java.io.File;
+import java.io.InputStream;
 
 import java.util.Collections;
 import java.util.List;
@@ -70,6 +71,20 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		return dlFileEntryLocalService.addFileEntry(
 			getUserId(), groupId, folderId, name, title, description, changeLog,
 			extraSettings, file, serviceContext);
+	}
+
+	public DLFileEntry addFileEntry(
+			long groupId, long folderId, String name, String title,
+			String description, String changeLog, String extraSettings,
+			InputStream is, long size, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DLFolderPermission.check(
+			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
+
+		return dlFileEntryLocalService.addFileEntry(
+			getUserId(), groupId, folderId, name, title, description, changeLog,
+			extraSettings, is, size, serviceContext);
 	}
 
 	public void deleteFileEntry(long groupId, long folderId, String name)
@@ -475,6 +490,45 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			fileEntry = dlFileEntryLocalService.updateFileEntry(
 				getUserId(), groupId, folderId, name, sourceFileName, title,
 				description, changeLog, majorVersion, extraSettings, file,
+				serviceContext);
+		}
+		finally {
+			if (!hasLock) {
+
+				// Unlock
+
+				unlockFileEntry(groupId, folderId, name);
+			}
+		}
+
+		return fileEntry;
+	}
+
+	public DLFileEntry updateFileEntry(
+			long groupId, long folderId, String name,
+			String sourceFileName, String title, String description,
+			String changeLog, boolean majorVersion, String extraSettings,
+			InputStream is, long size, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), groupId, folderId, name, ActionKeys.UPDATE);
+
+		boolean hasLock = hasFileEntryLock(groupId, folderId, name);
+
+		if (!hasLock) {
+
+			// Lock
+
+			lockFileEntry(groupId, folderId, name);
+		}
+
+		DLFileEntry fileEntry = null;
+
+		try {
+			fileEntry = dlFileEntryLocalService.updateFileEntry(
+				getUserId(), groupId, folderId, name, sourceFileName, title,
+				description, changeLog, majorVersion, extraSettings, is, size,
 				serviceContext);
 		}
 		finally {

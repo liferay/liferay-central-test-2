@@ -21,7 +21,9 @@ import com.liferay.portal.NoSuchLockException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -649,6 +651,11 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 					WorkflowConstants.ACTION_SAVE_DRAFT);
 			}
 
+			HttpServletRequest httpServletRequest =
+				webDavRequest.getHttpServletRequest();
+			long contentLength = GetterUtil.getLong(
+				httpServletRequest.getHeader(HttpHeaders.CONTENT_LENGTH));
+
 			try {
 				DLFileEntry fileEntry =
 					DLFileEntryServiceUtil.getFileEntryByTitle(
@@ -667,22 +674,40 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 				serviceContext.setAssetTagNames(assetTagNames);
 
-				file = FileUtil.createTempFile(FileUtil.getExtension(name));
+				if (contentLength > 0) {
+					DLFileEntryServiceUtil.updateFileEntry(
+						groupId, parentFolderId, name, title, title,
+						description, changeLog, false, extraSettings,
+						request.getInputStream(), contentLength,
+						serviceContext);
+				}
+				else {
+					file = FileUtil.createTempFile(FileUtil.getExtension(name));
 
-				FileUtil.write(file, request.getInputStream());
+					FileUtil.write(file, request.getInputStream());
 
-				DLFileEntryServiceUtil.updateFileEntry(
-					groupId, parentFolderId, name, title, title, description,
-					changeLog, false, extraSettings, file, serviceContext);
+					DLFileEntryServiceUtil.updateFileEntry(
+						groupId, parentFolderId, name, title, title,
+						description, changeLog, false, extraSettings, file,
+						serviceContext);
+				}
 			}
 			catch (NoSuchFileEntryException nsfee) {
-				file = FileUtil.createTempFile(FileUtil.getExtension(name));
+				if (contentLength > 0) {
+					DLFileEntryServiceUtil.addFileEntry(
+						groupId, parentFolderId, name, title, description,
+						changeLog, extraSettings, request.getInputStream(),
+						contentLength, serviceContext);
+				}
+				else {
+					file = FileUtil.createTempFile(FileUtil.getExtension(name));
 
-				FileUtil.write(file, request.getInputStream());
+					FileUtil.write(file, request.getInputStream());
 
-				DLFileEntryServiceUtil.addFileEntry(
-					groupId, parentFolderId, name, title, description,
-					changeLog, extraSettings, file, serviceContext);
+					DLFileEntryServiceUtil.addFileEntry(
+						groupId, parentFolderId, name, title, description,
+						changeLog, extraSettings, file, serviceContext);
+				}
 			}
 
 			if (_log.isInfoEnabled()) {
