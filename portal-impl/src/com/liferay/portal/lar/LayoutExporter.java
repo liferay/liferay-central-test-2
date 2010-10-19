@@ -255,6 +255,7 @@ public class LayoutExporter {
 		headerElement.addAttribute("theme-id", layoutSet.getThemeId());
 		headerElement.addAttribute(
 			"color-scheme-id", layoutSet.getColorSchemeId());
+		headerElement.addElement("css").addCDATA(layoutSet.getCss());
 
 		// Layout configuration portlet
 

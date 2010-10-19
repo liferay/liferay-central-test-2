@@ -250,6 +250,14 @@ public class LayoutImporter {
 		String themeId = headerElement.attributeValue("theme-id");
 		String colorSchemeId = headerElement.attributeValue("color-scheme-id");
 
+		String css = StringPool.BLANK;
+
+		Element cssElement = headerElement.element("css");
+
+		if (cssElement != null) {
+			css = cssElement.getText();
+		}
+
 		boolean useThemeZip = false;
 
 		if (themeZip != null) {
@@ -272,8 +280,7 @@ public class LayoutImporter {
 		boolean wapTheme = false;
 
 		LayoutSetLocalServiceUtil.updateLookAndFeel(
-			groupId, privateLayout, themeId, colorSchemeId, StringPool.BLANK,
-			wapTheme);
+			groupId, privateLayout, themeId, colorSchemeId, css, wapTheme);
 
 		// Read categories, comments, locks, permissions, ratings, and tags to
 		// make them available to the data handlers through the context
