@@ -14,6 +14,7 @@
 
 package com.liferay.taglib.aui;
 
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelHintsUtil;
@@ -39,6 +40,14 @@ public class InputTag extends IncludeTag {
 		addModelValidators();
 
 		return super.doStartTag();
+	}
+
+	public int doEndTag() throws JspException {
+		if (_validators != null) {
+			updateFormValidators();
+		}
+
+		return super.doEndTag();
 	}
 
 	public void setBean(Object bean) {
@@ -305,6 +314,20 @@ public class InputTag extends IncludeTag {
 				}
 			}
 		}
+	}
+
+	protected void updateFormValidators() {
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
+
+		Map<String, List<ValidatorTag>> validatorTagsMap =
+			(Map<String, List<ValidatorTag>>)request.getAttribute(
+				"aui:form:validatorTagsMap");
+
+		List<ValidatorTag> validatorTags = ListUtil.fromCollection(
+			_validators.values());
+
+		validatorTagsMap.put(_name, validatorTags);
 	}
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;

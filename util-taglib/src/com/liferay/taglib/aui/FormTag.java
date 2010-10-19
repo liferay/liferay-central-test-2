@@ -17,6 +17,10 @@ package com.liferay.taglib.aui;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.taglib.util.IncludeTag;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
@@ -70,6 +74,16 @@ public class FormTag extends IncludeTag {
 		_name = "fm";
 		_onSubmit = null;
 		_useNamespace = true;
+
+		if (_validatorTagsMap != null) {
+			for (List<ValidatorTag> list : _validatorTagsMap.values()) {
+				for (ValidatorTag validatorTag: list) {
+					validatorTag.cleanUp();
+				}
+			}
+
+			_validatorTagsMap = new HashMap<String, List<ValidatorTag>>();
+		}
 	}
 
 	protected String getEndPage() {
@@ -101,6 +115,7 @@ public class FormTag extends IncludeTag {
 		request.setAttribute("aui:form:onSubmit", _onSubmit);
 		request.setAttribute(
 			"aui:form:useNamespace", String.valueOf(_useNamespace));
+		request.setAttribute("aui:form:validatorTagsMap", _validatorTagsMap);
 	}
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
@@ -116,5 +131,7 @@ public class FormTag extends IncludeTag {
 	private String _name = "fm";
 	private String _onSubmit;
 	private boolean _useNamespace = true;
+	private Map<String, List<ValidatorTag>> _validatorTagsMap =
+		new HashMap<String, List<ValidatorTag>>();
 
 }
