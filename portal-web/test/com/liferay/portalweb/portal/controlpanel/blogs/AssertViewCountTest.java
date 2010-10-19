@@ -51,7 +51,7 @@ public class AssertViewCountTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 
-		String Count = selenium.getIncrementedText("//div[2]/span[1]");
+		String Count = selenium.getFirstNumberIncrement("//div[2]/span[1]");
 		RuntimeVariables.setValue("Count", Count);
 		selenium.open("/web/guest/home/");
 

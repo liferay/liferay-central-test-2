@@ -68,7 +68,7 @@ public class RateEntryEntryDetailsTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 
-		String rateCount = selenium.getIncrementedText(
+		String rateCount = selenium.getFirstNumberIncrement(
 				"xPath=(//div[@class='aui-rating-label-element'])[2]");
 		RuntimeVariables.setValue("rateCount", rateCount);
 		selenium.clickAt("//a[5]", RuntimeVariables.replace(""));

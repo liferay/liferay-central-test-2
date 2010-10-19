@@ -75,7 +75,7 @@ public class ViewCountEntryEntryDetailsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 
-		String viewCount = selenium.getIncrementedText(
+		String viewCount = selenium.getFirstNumberIncrement(
 				"//span[@class='view-count']");
 		RuntimeVariables.setValue("viewCount", viewCount);
 		selenium.open("/web/guest/home/");

@@ -46,7 +46,7 @@ public class ViewCountWikiPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 
-		String viewCount = selenium.getIncrementedText(
+		String viewCount = selenium.getFirstNumberIncrement(
 				"//span[@class='metadata-entry metadata-view-count']");
 		RuntimeVariables.setValue("viewCount", viewCount);
 		selenium.open("/web/guest/home/");
@@ -76,7 +76,7 @@ public class ViewCountWikiPageTest extends BaseTestCase {
 				"//span[@class='metadata-entry metadata-view-count']",
 				RuntimeVariables.getValue("viewCount")));
 
-		String viewCount2 = selenium.getIncrementedText(
+		String viewCount2 = selenium.getFirstNumberIncrement(
 				"//span[@class='metadata-entry metadata-view-count']");
 		RuntimeVariables.setValue("viewCount2", viewCount2);
 		selenium.open("/web/guest/home/");
@@ -104,7 +104,8 @@ public class ViewCountWikiPageTest extends BaseTestCase {
 		assertTrue(selenium.isPartialText("//div[@class='stats']",
 				RuntimeVariables.getValue("viewCount2")));
 
-		String viewCount3 = selenium.getIncrementedText("//div[@class='stats']");
+		String viewCount3 = selenium.getFirstNumberIncrement(
+				"//div[@class='stats']");
 		RuntimeVariables.setValue("viewCount3", viewCount3);
 		selenium.open("/web/guest/home/");
 

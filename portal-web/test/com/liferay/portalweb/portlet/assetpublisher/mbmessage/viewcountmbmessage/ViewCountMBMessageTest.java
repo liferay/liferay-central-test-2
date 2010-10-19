@@ -51,7 +51,7 @@ public class ViewCountMBMessageTest extends BaseTestCase {
 				"AP MB Message Body. View in Context \u00bb"),
 			selenium.getText("//div[@class='asset-content']"));
 
-		String viewCount = selenium.getIncrementedText(
+		String viewCount = selenium.getFirstNumberIncrement(
 				"//span[@class='metadata-entry metadata-view-count']");
 		RuntimeVariables.setValue("viewCount", viewCount);
 		selenium.open("/web/guest/home/");

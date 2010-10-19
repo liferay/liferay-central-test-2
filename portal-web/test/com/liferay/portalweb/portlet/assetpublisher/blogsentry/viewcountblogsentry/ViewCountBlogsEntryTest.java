@@ -46,7 +46,7 @@ public class ViewCountBlogsEntryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 
-		String viewCount = selenium.getIncrementedText(
+		String viewCount = selenium.getFirstNumberIncrement(
 				"//span[@class='metadata-entry metadata-view-count']");
 		RuntimeVariables.setValue("viewCount", viewCount);
 		selenium.open("/web/guest/home/");
@@ -76,7 +76,7 @@ public class ViewCountBlogsEntryTest extends BaseTestCase {
 				"//span[@class='metadata-entry metadata-view-count']",
 				RuntimeVariables.getValue("viewCount")));
 
-		String viewCount2 = selenium.getIncrementedText(
+		String viewCount2 = selenium.getFirstNumberIncrement(
 				"//span[@class='metadata-entry metadata-view-count']");
 		RuntimeVariables.setValue("viewCount2", viewCount2);
 		selenium.open("/web/guest/home/");
