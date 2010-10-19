@@ -14,15 +14,19 @@
 
 package com.liferay.taglib.aui;
 
+import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.taglib.util.IncludeTag;
 import com.liferay.util.PwdGenerator;
 import com.liferay.util.TextFormatter;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.JspException;
 
 /**
  * @author Julio Camarero
@@ -30,6 +34,12 @@ import javax.servlet.http.HttpServletRequest;
  * @author Brian Wing Shun Chan
  */
 public class InputTag extends IncludeTag {
+
+	public int doStartTag() throws JspException {
+		addModelValidators();
+
+		return super.doStartTag();
+	}
 
 	public void setBean(Object bean) {
 		_bean = bean;
@@ -257,6 +267,44 @@ public class InputTag extends IncludeTag {
 		}
 
 		_validators.put(validatorName, validatorTag);
+	}
+
+	protected void addModelValidators() {
+		Class<?> model = _model;
+
+		if (model == null) {
+			model = (Class<?>)pageContext.getAttribute(
+				"aui:model-context:model");
+		}
+
+		if ((model != null) && Validator.isNull(_type)) {
+			String field = _field;
+
+			if (Validator.isNull(field)) {
+				field = _name;
+			}
+
+			List<Tuple> modelValidators = ModelHintsUtil.getValidators(
+				model.getName(), field);
+
+			//fieldName | validatorName | validatorErrorMessage | validatorValue
+
+			if (modelValidators != null) {
+				for (Tuple modelValidator : modelValidators) {
+					String validatorName =
+						(String)modelValidator.getObject(1);
+					String validatorErrorMessage =
+						(String)modelValidator.getObject(2);
+					String validatorValue =
+						(String)modelValidator.getObject(3);
+
+					ValidatorTag validatorTag = new ValidatorTag(
+						validatorName, validatorErrorMessage, validatorValue);
+
+					addValidatorTag(validatorName, validatorTag);
+				}
+			}
+		}
 	}
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
