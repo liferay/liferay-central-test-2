@@ -72,14 +72,14 @@
 
 							<#list validators as validator>
 								<#assign validatorName = validator.getObject(1)>
-								<#assign errorMessage = validator.getObject(2)>
-								<#assign validatorText = validator.getObject(3)>
+								<#assign validatorErrorMessage = validator.getObject(2)>
+								<#assign validatorValue = validator.getObject(3)>
 
-								<validator error-message="" name="${validatorName}"
+								<validator error-message="${validatorErrorMessage}" name="${validatorName}"
 
 								<#if value>
 									>
-										${validatorText}
+										${validatorValue}
 									</validator>
 								<#else>
 									/>

@@ -30,9 +30,9 @@ public class ValidatorTag extends BaseBodyTagSupport {
 	}
 
 	public ValidatorTag(String name, String errorMessage, String body) {
-		_body = body;
-		_errorMessage = errorMessage;
 		_name = name;
+		_errorMessage = errorMessage;
+		_body = body;
 
 		processCustom();
 	}
@@ -49,7 +49,7 @@ public class ValidatorTag extends BaseBodyTagSupport {
 	}
 
 	public String getBody() {
-		String body = StringPool.APOSTROPHE + StringPool.APOSTROPHE;
+		String body = StringPool.DOUBLE_APOSTROPHE;
 
 		if (Validator.isNotNull(_body)) {
 			body = _body;
@@ -74,7 +74,7 @@ public class ValidatorTag extends BaseBodyTagSupport {
 	}
 
 	public boolean isCustom() {
-		return _isCustom;
+		return _custom;
 	}
 
 	public void setBody(String body) {
@@ -91,23 +91,23 @@ public class ValidatorTag extends BaseBodyTagSupport {
 
 	protected void cleanUp() {
 		_body = null;
+		_custom = false;
 		_errorMessage = null;
-		_isCustom = false;
 		_name = null;
 	}
 
-	private void processCustom() {
+	protected void processCustom() {
 		if (_name.equals("custom")) {
-			_isCustom = true;
+			_custom = true;
 
-			_name += StringPool.UNDERLINE +
-				PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+			_name = _name.concat(StringPool.UNDERLINE).concat(
+				PwdGenerator.getPassword(PwdGenerator.KEY3, 4));
 		}
 	}
 
 	private String _body;
+	private boolean _custom = false;
 	private String _errorMessage;
-	private boolean _isCustom = false;
 	private String _name;
 
 }

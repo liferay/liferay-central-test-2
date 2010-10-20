@@ -76,13 +76,15 @@ public class FormTag extends IncludeTag {
 		_useNamespace = true;
 
 		if (_validatorTagsMap != null) {
-			for (List<ValidatorTag> list : _validatorTagsMap.values()) {
-				for (ValidatorTag validatorTag: list) {
+			for (List<ValidatorTag> validatorTags :
+					_validatorTagsMap.values()) {
+
+				for (ValidatorTag validatorTag : validatorTags) {
 					validatorTag.cleanUp();
 				}
 			}
 
-			_validatorTagsMap = new HashMap<String, List<ValidatorTag>>();
+			_validatorTagsMap.clear();
 		}
 	}
 

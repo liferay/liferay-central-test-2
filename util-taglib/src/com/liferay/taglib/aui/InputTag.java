@@ -36,18 +36,16 @@ import javax.servlet.jsp.JspException;
  */
 public class InputTag extends IncludeTag {
 
+	public int doEndTag() throws JspException {
+		updateFormValidators();
+
+		return super.doEndTag();
+	}
+
 	public int doStartTag() throws JspException {
 		addModelValidators();
 
 		return super.doStartTag();
-	}
-
-	public int doEndTag() throws JspException {
-		if (_validators != null) {
-			updateFormValidators();
-		}
-
-		return super.doEndTag();
 	}
 
 	public void setBean(Object bean) {
@@ -154,6 +152,53 @@ public class InputTag extends IncludeTag {
 		_value = value;
 	}
 
+	protected void addModelValidators() {
+		Class<?> model = _model;
+
+		if (model == null) {
+			model = (Class<?>)pageContext.getAttribute(
+				"aui:model-context:model");
+		}
+
+		if ((model == null) || Validator.isNotNull(_type)) {
+			return;
+		}
+
+		String field = _field;
+
+		if (Validator.isNull(field)) {
+			field = _name;
+		}
+
+		List<Tuple> modelValidators = ModelHintsUtil.getValidators(
+			model.getName(), field);
+
+		if (modelValidators == null) {
+			return;
+		}
+
+		for (Tuple modelValidator : modelValidators) {
+			String validatorName = (String)modelValidator.getObject(1);
+			String validatorErrorMessage = (String)modelValidator.getObject(2);
+			String validatorValue = (String)modelValidator.getObject(3);
+
+			ValidatorTag validatorTag = new ValidatorTag(
+				validatorName, validatorErrorMessage, validatorValue);
+
+			addValidatorTag(validatorName, validatorTag);
+		}
+	}
+
+	protected void addValidatorTag(
+		String validatorName, ValidatorTag validatorTag) {
+
+		if (_validators == null) {
+			_validators = new HashMap<String, ValidatorTag>();
+		}
+
+		_validators.put(validatorName, validatorTag);
+	}
+
 	protected void cleanUp() {
 		_bean = null;
 		_changesContext = false;
@@ -180,8 +225,8 @@ public class InputTag extends IncludeTag {
 		_suffix = null;
 		_title = null;
 		_type = null;
-		_value = null;
 		_validators = null;
+		_value = null;
 	}
 
 	protected String getPage() {
@@ -231,7 +276,7 @@ public class InputTag extends IncludeTag {
 
 		boolean required = false;
 
-		if (_validators != null && _validators.get("required") != null) {
+		if ((_validators != null) && (_validators.get("required") != null)) {
 			required = true;
 		}
 
@@ -268,55 +313,11 @@ public class InputTag extends IncludeTag {
 		request.setAttribute("aui:input:value", _value);
 	}
 
-	protected void addValidatorTag(
-		String validatorName, ValidatorTag validatorTag) {
-
-		if (_validators == null) {
-			_validators = new HashMap<String, ValidatorTag> ();
-		}
-
-		_validators.put(validatorName, validatorTag);
-	}
-
-	protected void addModelValidators() {
-		Class<?> model = _model;
-
-		if (model == null) {
-			model = (Class<?>)pageContext.getAttribute(
-				"aui:model-context:model");
-		}
-
-		if ((model != null) && Validator.isNull(_type)) {
-			String field = _field;
-
-			if (Validator.isNull(field)) {
-				field = _name;
-			}
-
-			List<Tuple> modelValidators = ModelHintsUtil.getValidators(
-				model.getName(), field);
-
-			//fieldName | validatorName | validatorErrorMessage | validatorValue
-
-			if (modelValidators != null) {
-				for (Tuple modelValidator : modelValidators) {
-					String validatorName =
-						(String)modelValidator.getObject(1);
-					String validatorErrorMessage =
-						(String)modelValidator.getObject(2);
-					String validatorValue =
-						(String)modelValidator.getObject(3);
-
-					ValidatorTag validatorTag = new ValidatorTag(
-						validatorName, validatorErrorMessage, validatorValue);
-
-					addValidatorTag(validatorName, validatorTag);
-				}
-			}
-		}
-	}
-
 	protected void updateFormValidators() {
+		if (_validators == null) {
+			return;
+		}
+
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
@@ -359,7 +360,7 @@ public class InputTag extends IncludeTag {
 	private String _suffix;
 	private String _title;
 	private String _type;
-	private Object _value;
 	private Map<String, ValidatorTag> _validators;
+	private Object _value;
 
 }

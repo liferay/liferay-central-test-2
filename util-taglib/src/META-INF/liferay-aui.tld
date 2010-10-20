@@ -625,13 +625,13 @@
 		<tag-class>com.liferay.taglib.aui.ValidatorTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<name>name</name>
-			<required>true</required>
+			<name>errorMessage</name>
+			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>errorMessage</name>
-			<required>false</required>
+			<name>name</name>
+			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
