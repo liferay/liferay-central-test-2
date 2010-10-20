@@ -17,22 +17,29 @@ package com.liferay.portlet.enterpriseadmin.action;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.EmailAddress;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.service.AddressServiceUtil;
 import com.liferay.portal.service.EmailAddressServiceUtil;
 import com.liferay.portal.service.OrgLaborServiceUtil;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.OrganizationServiceUtil;
 import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.PhoneServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.RoleServiceUtil;
+import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.service.WebsiteServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
@@ -190,10 +197,71 @@ public class ActionUtil {
 
 		long roleId = ParamUtil.getLong(request, "roleId");
 
+		Group group = (Group)request.getAttribute(WebKeys.GROUP);
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
+
+		long userId = themeDisplay.getUserId();
+
 		Role role = null;
 
-		if (roleId > 0) {
-			role = RoleServiceUtil.getRole(roleId);
+		if (group.isCommunity()) {
+			if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+					userId, group.getGroupId(),
+					RoleConstants.COMMUNITY_ADMINISTRATOR, true) ||
+				UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+					userId, group.getGroupId(),
+					RoleConstants.COMMUNITY_OWNER, true)) {
+
+				if (roleId > 0) {
+					role = RoleLocalServiceUtil.getRole(roleId);
+				}
+			}
+			else {
+				if (roleId > 0) {
+					role = RoleServiceUtil.getRole(roleId);
+				}
+			}
+		}
+		else if (group.isOrganization()) {
+			long organizationId = group.getOrganizationId();
+
+			while (organizationId !=
+				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
+				Organization organization =
+					OrganizationLocalServiceUtil.getOrganization(
+						organizationId);
+
+				Group organizationGroup = organization.getGroup();
+
+				long organizationGroupId = organizationGroup.getGroupId();
+
+				if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+						userId, organizationGroupId,
+						RoleConstants.ORGANIZATION_ADMINISTRATOR, true) ||
+					UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+						userId, organizationGroupId,
+						RoleConstants.ORGANIZATION_OWNER, true)) {
+
+					if (roleId > 0) {
+						role = RoleLocalServiceUtil.getRole(roleId);
+					}
+
+					break;
+				}
+
+				organizationId = organization.getParentOrganizationId();
+			}
+
+			if (roleId > 0 && role == null) {
+				role = RoleServiceUtil.getRole(roleId);
+			}
+		}
+		else {
+			if (roleId > 0) {
+				role = RoleServiceUtil.getRole(roleId);
+			}
 		}
 
 		request.setAttribute(WebKeys.ROLE, role);
