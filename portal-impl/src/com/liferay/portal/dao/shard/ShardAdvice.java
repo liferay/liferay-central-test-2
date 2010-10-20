@@ -308,7 +308,7 @@ public class ShardAdvice {
 				methodName.equals("hasPortlet") ||
 				methodName.equals("updatePortlet")) {
 
-				companyId = (Long) argument;
+				companyId = (Long)argument;
 			}
 		}
 		else if (argument instanceof Portlet) {
