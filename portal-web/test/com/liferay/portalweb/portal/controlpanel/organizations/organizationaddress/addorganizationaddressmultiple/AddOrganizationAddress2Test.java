@@ -75,8 +75,33 @@ public class AddOrganizationAddress2Test extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Selenium"),
-					selenium.getText("//td[2]/a"));
-				selenium.clickAt("//td[2]/a", RuntimeVariables.replace(""));
+					selenium.getText("//td[2]/a/strong"));
+				selenium.clickAt("//strong/a",
+					RuntimeVariables.replace("Actions"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("Edit"),
+					selenium.getText(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
+				selenium.click(RuntimeVariables.replace(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("addressesLink", RuntimeVariables.replace(""));

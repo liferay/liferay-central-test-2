@@ -47,7 +47,7 @@ public class DeleteInvalidCommunityTest extends BaseTestCase {
 		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("_134_name", RuntimeVariables.replace("Guest"));
+		selenium.type("_134_name", RuntimeVariables.replace("Liferay"));
 		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
@@ -105,6 +105,6 @@ public class DeleteInvalidCommunityTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent(
-				"The group cannot be deleted because it is a required system group."));
+				"The group cannot be deleted or deactivated because it is a required system group. "));
 	}
 }

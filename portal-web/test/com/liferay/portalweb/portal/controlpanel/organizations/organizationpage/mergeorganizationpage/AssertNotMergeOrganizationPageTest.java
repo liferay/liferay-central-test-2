@@ -43,7 +43,7 @@ public class AssertNotMergeOrganizationPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
+				if (selenium.isVisible(
 							"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
 					break;
 				}
@@ -55,6 +55,9 @@ public class AssertNotMergeOrganizationPageTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Manage Pages"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");

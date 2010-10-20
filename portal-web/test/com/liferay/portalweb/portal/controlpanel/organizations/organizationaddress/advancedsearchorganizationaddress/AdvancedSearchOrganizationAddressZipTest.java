@@ -78,7 +78,7 @@ public class AdvancedSearchOrganizationAddressZipTest extends BaseTestCase {
 				selenium.type("_126_zip", RuntimeVariables.replace(""));
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Selenium"),
-					selenium.getText("//td[2]/a"));
+					selenium.getText("//td[2]/a/strong"));
 
 				boolean basicPresent = selenium.isVisible("link=\u00ab Basic");
 

@@ -79,7 +79,7 @@ public class AdvancedSearchOrganizationAddressStreetTest extends BaseTestCase {
 				selenium.type("_126_street", RuntimeVariables.replace(""));
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Selenium"),
-					selenium.getText("//td[2]/a"));
+					selenium.getText("//td[2]/a/strong"));
 
 				boolean basicPresent = selenium.isVisible("link=\u00ab Basic");
 
