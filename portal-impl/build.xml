@@ -805,7 +805,7 @@ ${exception.message}
 			<then>
 				<unzip
 					dest="${portal-impl.classes.dir}"
-					src="${project.dir}/tools/jamwiki-0.9.2-src.zip"
+					src="${project.dir}/tools/jamwiki-0.9.3-src.zip"
 				>
 					<patternset
 						includes="**/main/resources/ApplicationResources.properties,**/main/resources/jamwiki-configuration.xml,**/main/resources/logging.properties,**/main/resources/interwiki.properties"
@@ -814,19 +814,19 @@ ${exception.message}
 
 				<move todir="${portal-impl.classes.dir}">
 					<fileset
-						dir="${portal-impl.classes.dir}/jamwiki-0.9.2/main/resources"
+						dir="${portal-impl.classes.dir}/jamwiki-0.9.3/main/resources"
 						excludes="logging.properties"
 					/>
 				</move>
 
 				<concat destfile="${portal-impl.classes.dir}/logging.properties.new">
 					<fileset file="${portal-impl.classes.dir}/logging.properties" />
-					<fileset file="${portal-impl.classes.dir}/jamwiki-0.9.2/main/resources/logging.properties" />
+					<fileset file="${portal-impl.classes.dir}/jamwiki-0.9.3/main/resources/logging.properties" />
 				</concat>
 
 				<move file="${portal-impl.classes.dir}/logging.properties.new" tofile="${portal-impl.classes.dir}/logging.properties" />
 
-				<delete dir="${portal-impl.classes.dir}/jamwiki-0.9.2" />
+				<delete dir="${portal-impl.classes.dir}/jamwiki-0.9.3" />
 
 				<echo file="${portal-impl.classes.dir}/jamwiki.properties">
 					database-type=com.liferay.portlet.wiki.engines.mediawiki.LiferayDataHandler

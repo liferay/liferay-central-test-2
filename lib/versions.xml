@@ -1754,7 +1754,7 @@
 	</library>
 	<library>
 		<file-name>portal/jamwiki-core.jar</file-name>
-		<version>0.9.2</version>
+		<version>0.9.3</version>
 		<project-name>JAMWiki</project-name>
 		<project-url>http://jamwiki.org</project-url>
 		<licenses>
@@ -1762,10 +1762,6 @@
 				<license-name>LGPL 2.1</license-name>
 			</license>
 		</licenses>
-		<comments>
-			This includes a public patch from
-			http://jamwiki.org/wiki/en/Bug_Reports#Null_Pointer_Exception_on_retrieveDefaultRelativeUploadDirectory%28%29.
-		</comments>
 	</library>
 	<library>
 		<file-name>portal/java-diff.jar</file-name>
