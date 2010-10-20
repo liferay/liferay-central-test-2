@@ -20,7 +20,6 @@ import java.io.PrintWriter;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.SQLFeatureNotSupportedException;
 
 import java.util.logging.Logger;
 
@@ -53,11 +52,11 @@ public class ShardDataSource implements DataSource {
 		return getDataSource().getLogWriter();
 	}
 
-	public Logger getParentLogger() throws SQLFeatureNotSupportedException {
+	public Logger getParentLogger() {
 
 		// JDK 7
 
-		throw new SQLFeatureNotSupportedException();
+		throw new UnsupportedOperationException();
 	}
 
 	public boolean isWrapperFor(Class<?> clazz) {
