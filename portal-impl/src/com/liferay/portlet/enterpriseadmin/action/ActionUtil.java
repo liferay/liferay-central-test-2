@@ -195,23 +195,21 @@ public class ActionUtil {
 	public static void getRole(HttpServletRequest request)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		long roleId = ParamUtil.getLong(request, "roleId");
-
-		Group group = (Group)request.getAttribute(WebKeys.GROUP);
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
-
-		long userId = themeDisplay.getUserId();
 
 		Role role = null;
 
+		Group group = (Group)request.getAttribute(WebKeys.GROUP);
+
 		if (group.isCommunity()) {
 			if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-					userId, group.getGroupId(),
+					themeDisplay.getUserId(), group.getGroupId(),
 					RoleConstants.COMMUNITY_ADMINISTRATOR, true) ||
 				UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-					userId, group.getGroupId(),
+					themeDisplay.getUserId(), group.getGroupId(),
 					RoleConstants.COMMUNITY_OWNER, true)) {
 
 				if (roleId > 0) {
@@ -228,7 +226,8 @@ public class ActionUtil {
 			long organizationId = group.getOrganizationId();
 
 			while (organizationId !=
-				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
+						OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
+
 				Organization organization =
 					OrganizationLocalServiceUtil.getOrganization(
 						organizationId);
@@ -238,10 +237,10 @@ public class ActionUtil {
 				long organizationGroupId = organizationGroup.getGroupId();
 
 				if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-						userId, organizationGroupId,
+						themeDisplay.getUserId(), organizationGroupId,
 						RoleConstants.ORGANIZATION_ADMINISTRATOR, true) ||
 					UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-						userId, organizationGroupId,
+						themeDisplay.getUserId(), organizationGroupId,
 						RoleConstants.ORGANIZATION_OWNER, true)) {
 
 					if (roleId > 0) {
@@ -254,7 +253,7 @@ public class ActionUtil {
 				organizationId = organization.getParentOrganizationId();
 			}
 
-			if (roleId > 0 && role == null) {
+			if (roleId > 0 && (role == null)) {
 				role = RoleServiceUtil.getRole(roleId);
 			}
 		}
