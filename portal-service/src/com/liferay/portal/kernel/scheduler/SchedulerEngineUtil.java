@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.lang.reflect.Proxy;
 
@@ -29,6 +30,7 @@ import java.util.List;
 /**
  * @author Bruno Farache
  * @author Shuyang Zhou
+ * @author Tina Tian
  */
 public class SchedulerEngineUtil {
 
@@ -61,17 +63,24 @@ public class SchedulerEngineUtil {
 			throw new SchedulerException(e);
 		}
 
+		String messageListenerUUID = PortalUUIDUtil.generate();
+		String className = schedulerEntry.getEventListenerClass();
+
 		schedulerEventListener = new SchedulerEventMessageListenerWrapper(
-			schedulerEventListener, schedulerEntry.getEventListenerClass());
+			schedulerEventListener, messageListenerUUID, className);
 
 		schedulerEntry.setEventListener(schedulerEventListener);
 
 		MessageBusUtil.registerMessageListener(
 			DestinationNames.SCHEDULER_DISPATCH, schedulerEventListener);
 
+		Message message = new Message();
+
+		message.put(SchedulerEngine.MESSAGE_LISTENER_UUID, messageListenerUUID);
+
 		schedule(
 			schedulerEntry.getTrigger(), schedulerEntry.getDescription(),
-			DestinationNames.SCHEDULER_DISPATCH, null);
+			DestinationNames.SCHEDULER_DISPATCH, message);
 	}
 
 	public static void schedule(

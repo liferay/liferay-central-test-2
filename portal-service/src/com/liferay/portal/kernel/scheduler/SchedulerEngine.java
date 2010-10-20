@@ -23,6 +23,7 @@ import java.util.List;
  * @author Michael C. Han
  * @author Bruno Farache
  * @author Shuyang Zhou
+ * @author Tina Tian
  */
 public interface SchedulerEngine {
 
@@ -39,6 +40,8 @@ public interface SchedulerEngine {
 	public static final int JOB_NAME_MAX_LENGTH = 80;
 
 	public static final String MESSAGE = "message";
+
+	public static final String MESSAGE_LISTENER_UUID = "message_listener_uuid";
 
 	public static final String RECEIVER_KEY = "receiver_key";
 

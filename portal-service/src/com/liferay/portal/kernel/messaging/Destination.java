@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.messaging;
 
+import java.util.Set;
+
 /**
  * @author Michael C. Han
  */
@@ -33,6 +35,8 @@ public interface Destination {
 	public DestinationStatistics getDestinationStatistics();
 
 	public int getMessageListenerCount();
+
+	public Set<MessageListener> getMessageListeners();
 
 	public String getName();
 

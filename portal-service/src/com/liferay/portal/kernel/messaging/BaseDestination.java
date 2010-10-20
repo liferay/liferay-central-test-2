@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -127,6 +128,10 @@ public abstract class BaseDestination implements Destination {
 
 	public int getMessageListenerCount() {
 		return _messageListeners.size();
+	}
+
+	public Set<MessageListener> getMessageListeners() {
+		return Collections.unmodifiableSet(_messageListeners);
 	}
 
 	public String getName() {

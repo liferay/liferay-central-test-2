@@ -27,9 +27,11 @@ import com.liferay.portal.kernel.util.StringPool;
 public class SchedulerEventMessageListenerWrapper implements MessageListener {
 
 	public SchedulerEventMessageListenerWrapper(
-		MessageListener messageListener, String className) {
+		MessageListener messageListener, String messageListenerUUID,
+		String className) {
 
 		_messageListener = messageListener;
+		_messageListenerUUID = messageListenerUUID;
 
 		String jobName = className;
 
@@ -46,6 +48,10 @@ public class SchedulerEventMessageListenerWrapper implements MessageListener {
 		}
 
 		_key = jobName.concat(StringPool.COLON).concat(groupName);
+	}
+
+	public String getMessageListenerUUID() {
+		return _messageListenerUUID;
 	}
 
 	public void receive(Message message) {
@@ -69,5 +75,6 @@ public class SchedulerEventMessageListenerWrapper implements MessageListener {
 
 	private String _key;
 	private MessageListener _messageListener;
+	private String _messageListenerUUID;
 
 }
