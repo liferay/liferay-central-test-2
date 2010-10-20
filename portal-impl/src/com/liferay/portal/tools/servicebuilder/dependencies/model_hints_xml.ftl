@@ -68,23 +68,23 @@
 						</#if>
 
 					    <#if modelHintsUtil.getValidators(modelName, column.name)??>
-							<#assign validatorTuple = modelHintsUtil.getValidators(modelName, column.name)>
+							<#assign validators = modelHintsUtil.getValidators(modelName, column.name)>
 
-							<#assign name = validatorTuple.getObject(1)>
-							<#assign errorMessage = validatorTuple.getObject(2)>
-							<#assign value = validatorTuple.getObject(3)>
+							<#list validators as validator>
+								<#assign validatorName = validator.getObject(1)>
+								<#assign errorMessage = validator.getObject(2)>
+								<#assign validatorText = validator.getObject(3)>
 
-							<validator error-message="" name="${name}"
+								<validator error-message="" name="${validatorName}"
 
-							<#if value>
-								>
-
-							    	${value}
-
-								</validator>
-						    <#else>
-						    	/>
-							</#if>
+								<#if value>
+									>
+										${validatorText}
+									</validator>
+								<#else>
+									/>
+								</#if>
+							</#list>
 						</#if>
 
 						</field>
