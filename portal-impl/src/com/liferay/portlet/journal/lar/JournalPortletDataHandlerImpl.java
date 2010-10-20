@@ -1449,8 +1449,17 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		for (Element dlReferenceElement : dlReferenceElements) {
 			String dlReferencePath = dlReferenceElement.attributeValue("path");
 
-			DLFileEntry fileEntry = (DLFileEntry)context.getZipEntryAsObject(
-				dlReferencePath);
+			DLFileEntry fileEntry = null;
+
+			try {
+				fileEntry = (DLFileEntry)context.getZipEntryAsObject(
+					dlReferencePath);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e);
+				}
+			}
 
 			if (fileEntry == null) {
 				continue;
@@ -1619,8 +1628,16 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		for (Element igReferenceElement : igReferenceElements) {
 			String igReferencePath = igReferenceElement.attributeValue("path");
 
-			IGImage image = (IGImage)context.getZipEntryAsObject(
-				igReferencePath);
+			IGImage image = null;
+
+			try {
+				image = (IGImage)context.getZipEntryAsObject(igReferencePath);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e);
+				}
+			}
 
 			if (image == null) {
 				continue;
