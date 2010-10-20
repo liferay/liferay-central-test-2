@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.assertnoactionstaskdetails;
+package com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.resubmittaskwebcontentdetails;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AssertNoResubmitTaskDetailsTest extends BaseTestCase {
-	public void testAssertNoResubmitTaskDetails() throws Exception {
+public class ResubmitTaskWebContentDetailsTest extends BaseTestCase {
+	public void testResubmitTaskWebContentDetails() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -65,7 +65,66 @@ public class AssertNoResubmitTaskDetailsTest extends BaseTestCase {
 			RuntimeVariables.replace("Web Content Name"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertFalse(selenium.isElementPresent("link=Actions"));
-		assertFalse(selenium.isElementPresent("link=Resubmit"));
+		assertEquals(RuntimeVariables.replace("Update"),
+			selenium.getText("//tr[3]/td[1]"));
+		assertEquals(RuntimeVariables.replace("Never"),
+			selenium.getText("//tr[3]/td[2]"));
+		assertEquals(RuntimeVariables.replace("No"),
+			selenium.getText("//tr[3]/td[3]"));
+		assertEquals(RuntimeVariables.replace("Resubmit"),
+			selenium.getText("//span/a/span"));
+		selenium.clickAt("//span/a/span", RuntimeVariables.replace("Resubmit"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//div/button[1]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("//div/button[1]", RuntimeVariables.replace("OK"));
+		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace(
+							"Your request processed successfully.")
+										.equals(selenium.getText(
+								"//div[@class='portlet-msg-success']"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//div[@class='portlet-msg-success']"));
+		assertEquals(RuntimeVariables.replace(
+				"Task initially assigned to the Portal Content Reviewer role."),
+			selenium.getText(
+				"xPath=(//div[@class='task-activity task-type-1'])[4]/div[2]"));
+		assertEquals(RuntimeVariables.replace("Assigned initial task."),
+			selenium.getText(
+				"xPath=(//div[@class='task-activity task-type-1'])[4]/div[3]"));
 	}
 }

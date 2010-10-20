@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.assertnoactionstaskdetails;
+package com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.assertnoactionstaskrmenu;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AssertNoRejectTaskDetailsTest extends BaseTestCase {
-	public void testAssertNoRejectTaskDetails() throws Exception {
+public class AssertNoResubmitTaskRMenuTest extends BaseTestCase {
+	public void testAssertNoResubmitTaskRMenu() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -56,16 +56,17 @@ public class AssertNoRejectTaskDetailsTest extends BaseTestCase {
 			selenium.getText("//td[2]/a"));
 		assertEquals(RuntimeVariables.replace("Web Content"),
 			selenium.getText("//td[3]/a"));
-		assertEquals(RuntimeVariables.replace("Review"),
+		assertEquals(RuntimeVariables.replace("Update"),
 			selenium.getText("//td[4]/a"));
 		assertTrue(selenium.isElementPresent("//td[5]/a"));
 		assertEquals(RuntimeVariables.replace("Never"),
 			selenium.getText("//td[6]/a"));
-		selenium.clickAt("//td[2]/a",
-			RuntimeVariables.replace("Web Content Name"));
+		selenium.clickAt("//td[1]/a",
+			RuntimeVariables.replace("Single Approver"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertFalse(selenium.isElementPresent("link=Actions"));
-		assertFalse(selenium.isElementPresent("link=Reject"));
+		assertFalse(selenium.isPartialText(
+				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']",
+				"Resubmit"));
 	}
 }

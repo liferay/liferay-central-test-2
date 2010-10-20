@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.assertnoactionstaskdetails;
+package com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.assertnoactionstaskrmenu;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,9 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AssertNoApproveTaskDetailsTest extends BaseTestCase {
-	public void testAssertNoApproveTaskDetails() throws Exception {
+public class ConfigureWebContentSingleApproverTest extends BaseTestCase {
+	public void testConfigureWebContentSingleApprover()
+		throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -41,31 +42,22 @@ public class AssertNoApproveTaskDetailsTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("link=Control Panel"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=My Submissions", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("link=Workflow Configuration"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Pending", RuntimeVariables.replace(""));
+		selenium.select("_152_workflowDefinitionName@com.liferay.portlet.journal.model.JournalArticle",
+			RuntimeVariables.replace("label=Single Approver (Version 1)"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Single Approver"),
-			selenium.getText("//td[1]/a"));
-		assertEquals(RuntimeVariables.replace("Web Content Name"),
-			selenium.getText("//td[2]/a"));
-		assertEquals(RuntimeVariables.replace("Web Content"),
-			selenium.getText("//td[3]/a"));
-		assertEquals(RuntimeVariables.replace("Review"),
-			selenium.getText("//td[4]/a"));
-		assertTrue(selenium.isElementPresent("//td[5]/a"));
-		assertEquals(RuntimeVariables.replace("Never"),
-			selenium.getText("//td[6]/a"));
-		selenium.clickAt("//td[2]/a",
-			RuntimeVariables.replace("Web Content Name"));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		assertFalse(selenium.isElementPresent("link=Actions"));
-		assertFalse(selenium.isElementPresent("link=Approve"));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//div[@class='portlet-msg-success']"));
+		assertEquals("Single Approver (Version 1)",
+			selenium.getSelectedLabel(
+				"_152_workflowDefinitionName@com.liferay.portlet.journal.model.JournalArticle"));
 	}
 }

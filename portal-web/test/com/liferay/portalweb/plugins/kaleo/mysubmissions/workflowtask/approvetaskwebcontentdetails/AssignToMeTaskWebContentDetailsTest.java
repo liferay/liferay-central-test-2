@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.assertnoactionstaskdetails;
+package com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.approvetaskwebcontentdetails;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class RejectTaskWebContentDetailsTest extends BaseTestCase {
-	public void testRejectTaskWebContentDetails() throws Exception {
+public class AssignToMeTaskWebContentDetailsTest extends BaseTestCase {
+	public void testAssignToMeTaskWebContentDetails() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -44,7 +44,10 @@ public class RejectTaskWebContentDetailsTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=My Submissions", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Workflow", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("link=Submissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Pending", RuntimeVariables.replace(""));
@@ -72,28 +75,11 @@ public class RejectTaskWebContentDetailsTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("No"),
 			selenium.getText("//tr[3]/td[3]"));
 		assertFalse(selenium.isTextPresent(
-				"Joe Bloggs completed the task Review."));
-		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
-		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
+				"Joe Bloggs assigned the task to himself."));
+		assertEquals(RuntimeVariables.replace("Assign to Me"),
+			selenium.getText("//span/a/span"));
+		selenium.clickAt("//span/a/span",
+			RuntimeVariables.replace("Assign to Me"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -139,7 +125,7 @@ public class RejectTaskWebContentDetailsTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
-		assertEquals(RuntimeVariables.replace("Update"),
+		assertEquals(RuntimeVariables.replace("Review"),
 			selenium.getText("//tr[3]/td[1]"));
 		assertEquals(RuntimeVariables.replace("Never"),
 			selenium.getText("//tr[3]/td[2]"));
@@ -148,9 +134,9 @@ public class RejectTaskWebContentDetailsTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Joe Bloggs assigned the task to himself."),
 			selenium.getText(
-				"xPath=(//div[@class='task-activity task-type-1'])[3]/div[2]"));
-		assertEquals(RuntimeVariables.replace("Assigned initial task."),
+				"xPath=(//div[@class='task-activity task-type-1'])[2]/div[2]"));
+		assertEquals(RuntimeVariables.replace(""),
 			selenium.getText(
-				"xPath=(//div[@class='task-activity task-type-1'])[3]/div[3]"));
+				"xPath=(//div[@class='task-activity task-type-1'])[2]/div[3]"));
 	}
 }

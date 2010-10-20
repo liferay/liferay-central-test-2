@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.assertnoactionstaskdetails;
+package com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.approvetaskwebcontentdetails;
 
 import com.liferay.portalweb.portal.BaseTests;
 
@@ -22,18 +22,15 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AssertNoActionsTaskDetailsTests extends BaseTests {
+public class ApproveTaskWebContentDetailsTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(ConfigureWebContentSingleApproverTest.class);
 		testSuite.addTestSuite(AddWebContentSingleApproverTest.class);
-		testSuite.addTestSuite(AssertNoAssignToMeTaskDetailsTest.class);
 		testSuite.addTestSuite(AssignToMeTaskWebContentDetailsTest.class);
-		testSuite.addTestSuite(RejectTaskWebContentDetailsTest.class);
-		testSuite.addTestSuite(ResubmitTaskWebContentDetailsTest.class);
-		testSuite.addTestSuite(AssertNoAssignToMeTaskDetailsTest.class);
+		testSuite.addTestSuite(ApproveTaskWebContentDetailsTest.class);
 		testSuite.addTestSuite(TearDownWebContentTest.class);
 		testSuite.addTestSuite(TearDownWorkflowConfigurationTest.class);
 

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.assertnoactionstaskdetails;
+package com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.approvetaskwebcontentdetails;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class RejectTaskWebContentDetailsTest extends BaseTestCase {
-	public void testRejectTaskWebContentDetails() throws Exception {
+public class ApproveTaskWebContentDetailsTest extends BaseTestCase {
+	public void testApproveTaskWebContentDetails() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -82,7 +82,7 @@ public class RejectTaskWebContentDetailsTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -93,7 +93,7 @@ public class RejectTaskWebContentDetailsTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
+		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -139,18 +139,10 @@ public class RejectTaskWebContentDetailsTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
-		assertEquals(RuntimeVariables.replace("Update"),
-			selenium.getText("//tr[3]/td[1]"));
-		assertEquals(RuntimeVariables.replace("Never"),
-			selenium.getText("//tr[3]/td[2]"));
-		assertEquals(RuntimeVariables.replace("No"),
-			selenium.getText("//tr[3]/td[3]"));
 		assertEquals(RuntimeVariables.replace(
-				"Joe Bloggs assigned the task to himself."),
-			selenium.getText(
-				"xPath=(//div[@class='task-activity task-type-1'])[3]/div[2]"));
-		assertEquals(RuntimeVariables.replace("Assigned initial task."),
-			selenium.getText(
-				"xPath=(//div[@class='task-activity task-type-1'])[3]/div[3]"));
+				"Joe Bloggs completed the task Review."),
+			selenium.getText("//div[@class='task-activity task-type-3']/div[2]"));
+		assertEquals(RuntimeVariables.replace(""),
+			selenium.getText("//div[@class='task-activity task-type-3']/div[3]"));
 	}
 }

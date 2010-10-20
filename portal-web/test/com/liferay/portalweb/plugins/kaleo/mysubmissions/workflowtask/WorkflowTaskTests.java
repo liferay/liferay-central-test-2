@@ -14,8 +14,12 @@
 
 package com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask;
 
+import com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.approvetaskwebcontentdetails.ApproveTaskWebContentDetailsTests;
 import com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.assertnoactionstaskactions.AssertNoActionsTaskActionsTests;
 import com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.assertnoactionstaskdetails.AssertNoActionsTaskDetailsTests;
+import com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.assertnoactionstaskrmenu.AssertNoActionsTaskRMenuTests;
+import com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.rejecttaskwebcontentdetails.RejectTaskWebContentDetailsTests;
+import com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.resubmittaskwebcontentdetails.ResubmitTaskWebContentDetailsTests;
 import com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.viewpaginationtaskmbmessage.ViewPaginationTaskMBMessageTests;
 import com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.viewtaskwebcontentassignedtouser.ViewTaskWebContentAssignedToUserTests;
 import com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.viewwithdrawsubmissiontaskwcassignedtome.ViewWithdrawSubmissionTaskWCAssignedToMeTests;
@@ -39,8 +43,12 @@ public class WorkflowTaskTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
+		testSuite.addTest(ApproveTaskWebContentDetailsTests.suite());
 		testSuite.addTest(AssertNoActionsTaskActionsTests.suite());
 		testSuite.addTest(AssertNoActionsTaskDetailsTests.suite());
+		testSuite.addTest(AssertNoActionsTaskRMenuTests.suite());
+		testSuite.addTest(RejectTaskWebContentDetailsTests.suite());
+		testSuite.addTest(ResubmitTaskWebContentDetailsTests.suite());
 		testSuite.addTest(ViewPaginationTaskMBMessageTests.suite());
 		testSuite.addTest(ViewTaskWebContentAssignedToUserTests.suite());
 		testSuite.addTest(

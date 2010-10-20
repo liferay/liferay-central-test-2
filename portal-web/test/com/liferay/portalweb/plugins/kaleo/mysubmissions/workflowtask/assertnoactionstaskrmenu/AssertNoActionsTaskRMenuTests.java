@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.assertnoactionstaskdetails;
+package com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtask.assertnoactionstaskrmenu;
 
 import com.liferay.portalweb.portal.BaseTests;
 
@@ -22,18 +22,19 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AssertNoActionsTaskDetailsTests extends BaseTests {
+public class AssertNoActionsTaskRMenuTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(ConfigureWebContentSingleApproverTest.class);
 		testSuite.addTestSuite(AddWebContentSingleApproverTest.class);
-		testSuite.addTestSuite(AssertNoAssignToMeTaskDetailsTest.class);
+		testSuite.addTestSuite(AssertNoAssignToMeTaskRMenuTest.class);
 		testSuite.addTestSuite(AssignToMeTaskWebContentDetailsTest.class);
+		testSuite.addTestSuite(AssertNoApproveTaskRMenuTest.class);
+		testSuite.addTestSuite(AssertNoRejectTaskRMenuTest.class);
 		testSuite.addTestSuite(RejectTaskWebContentDetailsTest.class);
-		testSuite.addTestSuite(ResubmitTaskWebContentDetailsTest.class);
-		testSuite.addTestSuite(AssertNoAssignToMeTaskDetailsTest.class);
+		testSuite.addTestSuite(AssertNoResubmitTaskRMenuTest.class);
 		testSuite.addTestSuite(TearDownWebContentTest.class);
 		testSuite.addTestSuite(TearDownWorkflowConfigurationTest.class);
 

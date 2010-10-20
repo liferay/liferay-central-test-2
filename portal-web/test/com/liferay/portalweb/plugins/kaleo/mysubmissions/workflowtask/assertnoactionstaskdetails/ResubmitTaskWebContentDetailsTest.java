@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class RejectTaskWebContentDetailsTest extends BaseTestCase {
-	public void testRejectTaskWebContentDetails() throws Exception {
+public class ResubmitTaskWebContentDetailsTest extends BaseTestCase {
+	public void testResubmitTaskWebContentDetails() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -56,7 +56,7 @@ public class RejectTaskWebContentDetailsTest extends BaseTestCase {
 			selenium.getText("//td[2]/a"));
 		assertEquals(RuntimeVariables.replace("Web Content"),
 			selenium.getText("//td[3]/a"));
-		assertEquals(RuntimeVariables.replace("Review"),
+		assertEquals(RuntimeVariables.replace("Update"),
 			selenium.getText("//td[4]/a"));
 		assertTrue(selenium.isElementPresent("//td[5]/a"));
 		assertEquals(RuntimeVariables.replace("Never"),
@@ -65,35 +65,15 @@ public class RejectTaskWebContentDetailsTest extends BaseTestCase {
 			RuntimeVariables.replace("Web Content Name"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Review"),
+		assertEquals(RuntimeVariables.replace("Update"),
 			selenium.getText("//tr[3]/td[1]"));
 		assertEquals(RuntimeVariables.replace("Never"),
 			selenium.getText("//tr[3]/td[2]"));
 		assertEquals(RuntimeVariables.replace("No"),
 			selenium.getText("//tr[3]/td[3]"));
-		assertFalse(selenium.isTextPresent(
-				"Joe Bloggs completed the task Review."));
-		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
-		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
+		assertEquals(RuntimeVariables.replace("Resubmit"),
+			selenium.getText("//span/a/span"));
+		selenium.clickAt("//span/a/span", RuntimeVariables.replace("Resubmit"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -139,18 +119,12 @@ public class RejectTaskWebContentDetailsTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
-		assertEquals(RuntimeVariables.replace("Update"),
-			selenium.getText("//tr[3]/td[1]"));
-		assertEquals(RuntimeVariables.replace("Never"),
-			selenium.getText("//tr[3]/td[2]"));
-		assertEquals(RuntimeVariables.replace("No"),
-			selenium.getText("//tr[3]/td[3]"));
 		assertEquals(RuntimeVariables.replace(
-				"Joe Bloggs assigned the task to himself."),
+				"Task initially assigned to the Portal Content Reviewer role."),
 			selenium.getText(
-				"xPath=(//div[@class='task-activity task-type-1'])[3]/div[2]"));
+				"xPath=(//div[@class='task-activity task-type-1'])[4]/div[2]"));
 		assertEquals(RuntimeVariables.replace("Assigned initial task."),
 			selenium.getText(
-				"xPath=(//div[@class='task-activity task-type-1'])[3]/div[3]"));
+				"xPath=(//div[@class='task-activity task-type-1'])[4]/div[3]"));
 	}
 }
