@@ -67,8 +67,8 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 		<#if modelHintsUtil.getHints(modelName, column.name)??>
 			<#assign hints = modelHintsUtil.getHints(modelName, column.name)>
 
-			<#if hints.get("auto-escape")??>
-				<#assign autoEscapeHintValue = hints.get("auto-escape")>
+			<#if hints["auto-escape"]??>
+				<#assign autoEscapeHintValue = hints["auto-escape"]>
 
 				<#if autoEscapeHintValue == "false">
 					<#assign autoEscape = false>
