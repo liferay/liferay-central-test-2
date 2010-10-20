@@ -249,14 +249,7 @@ public class LayoutImporter {
 
 		String themeId = headerElement.attributeValue("theme-id");
 		String colorSchemeId = headerElement.attributeValue("color-scheme-id");
-
-		String css = StringPool.BLANK;
-
-		Element cssElement = headerElement.element("css");
-
-		if (cssElement != null) {
-			css = cssElement.getText();
-		}
+		String css = GetterUtil.getString(headerElement.elementText("css"));
 
 		boolean useThemeZip = false;
 
