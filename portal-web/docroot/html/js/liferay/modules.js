@@ -26,7 +26,7 @@
 			'auto-fields': ['aui-base', 'aui-data-set', 'aui-io-request', 'aui-parse-content', 'aui-sortable', 'base', 'liferay-undo-manager'],
 			'dockbar': ['aui-button-item', 'aui-io-plugin', 'aui-io-request', 'aui-overlay-context', 'aui-overlay-manager', 'node-focusmanager'],
 			'dynamic-select': ['aui-base'],
-			'form': ['aui-base'],
+			'form': ['aui-base', 'aui-form-validator'],
 			'hudcrumbs': ['aui-base', 'plugin'],
 			'icon': ['aui-base'],
 			'input-move-boxes': ['aui-base', 'aui-toolbar'],

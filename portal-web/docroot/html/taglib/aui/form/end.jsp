@@ -52,11 +52,11 @@ Map<String, List<ValidatorTag>> validatorTagsMap = (Map<String, List<ValidatorTa
 						<%= i != 0 ? StringPool.COMMA : StringPool.BLANK %>
 
 						{
-							fieldName: '<%= namespace + fieldName %>',
-							validatorName: '<%= validatorTag.getName() %>',
-							errorMessage: '<%= validatorTag.getErrorMessage() %>',
 							body: <%= validatorTag.getBody() %>,
-							isCustom: <%= validatorTag.isCustom() %>
+							errorMessage: '<%= validatorTag.getErrorMessage() %>',
+							fieldName: '<%= namespace + fieldName %>',
+							isCustom: <%= validatorTag.isCustom() %>,
+							validatorName: '<%= validatorTag.getName() %>'
 						}
 
 				<%

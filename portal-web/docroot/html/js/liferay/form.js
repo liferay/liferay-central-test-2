@@ -6,12 +6,12 @@ AUI().add(
 		var defaultAcceptFiles = DEFAULTS_FORM_VALIDATOR.RULES.acceptFiles;
 
 		var acceptFiles = function(val, node, ruleValue) {
-			if (ruleValue == "*") {
+			if (ruleValue == '*') {
 				return true;
 			}
 
 			return defaultAcceptFiles(val, node, ruleValue);
-		}
+		};
 
 		A.mix(
 			DEFAULTS_FORM_VALIDATOR.RULES,
@@ -85,53 +85,16 @@ AUI().add(
 
 						if (formNode) {
 							var formValidator = new A.FormValidator(
-							{
-								boundingBox: formNode,
-								rules: rules,
-								fieldStrings: fieldStrings
-							});
+								{
+									boundingBox: formNode,
+									fieldStrings: fieldStrings,
+									rules: rules
+								}
+							);
 
 							instance.formValidator = formValidator;
 
 							instance._bindForm();
-						}
-					},
-
-					_processFieldRule: function(rules, strings, rule) {
-						var instance = this;
-
-						var value = true;
-
-						if (rule.body && !rule.isCustom) {
-							value = rule.body;
-						}
-
-						var fieldRules = rules[rule.fieldName];
-
-						if (!fieldRules) {
-							fieldRules = {};
-
-							rules[rule.fieldName] = fieldRules;
-						}
-
-						fieldRules[rule.validatorName] = value;
-
-						if (rule.isCustom) {
-							DEFAULTS_FORM_VALIDATOR.RULES[rule.validatorName] = rule.body;
-						}
-
-						var errorMessage = rule.errorMessage;
-
-						if (errorMessage) {
-							var fieldStrings = strings[rule.fieldName];
-
-							if (!fieldStrings) {
-								fieldStrings = {};
-
-								strings[rule.fieldName] = fieldStrings;
-							}
-
-							fieldStrings[rule.validatorName] = errorMessage;
 						}
 					},
 
@@ -141,9 +104,7 @@ AUI().add(
 						var formNode = instance.formNode;
 						var formValidator = instance.formValidator;
 
-						var onSubmit = instance.get('onSubmit');
-
-						formValidator.on('submit', onSubmit, instance);
+						formValidator.on('submit', instance._onValidatorSubmit, instance);
 
 						formNode.delegate('blur', instance._onFieldFocusChange, 'button,input,select,textarea', instance);
 						formNode.delegate('focus', instance._onFieldFocusChange, 'button,input,select,textarea', instance);
@@ -178,6 +139,55 @@ AUI().add(
 							},
 							0
 						);
+					},
+
+					_onValidatorSubmit: function(event) {
+						var instance = this;
+
+						var onSubmit = instance.get('onSubmit');
+
+						onSubmit.call(instance, event.validator.formEvent);
+					},
+
+					_processFieldRule: function(rules, strings, rule) {
+						var instance = this;
+
+						var value = true;
+
+						var fieldName = rule.fieldName;
+						var validatorName = rule.validatorName;
+
+						if (rule.body && !rule.isCustom) {
+							value = rule.body;
+						}
+
+						var fieldRules = rules[fieldName];
+
+						if (!fieldRules) {
+							fieldRules = {};
+
+							rules[fieldName] = fieldRules;
+						}
+
+						fieldRules[validatorName] = value;
+
+						if (rule.isCustom) {
+							DEFAULTS_FORM_VALIDATOR.RULES[validatorName] = rule.body;
+						}
+
+						var errorMessage = rule.errorMessage;
+
+						if (errorMessage) {
+							var fieldStrings = strings[fieldName];
+
+							if (!fieldStrings) {
+								fieldStrings = {};
+
+								strings[fieldName] = fieldStrings;
+							}
+
+							fieldStrings[validatorName] = errorMessage;
+						}
 					}
 				},
 
