@@ -50,8 +50,8 @@ public class ShardDataSource implements DataSource {
 		return getDataSource().getLogWriter();
 	}
 
-	public boolean isWrapperFor(Class<?> clazz) throws SQLException {
-		return getDataSource().isWrapperFor(clazz);
+	public boolean isWrapperFor(Class<?> clazz) {
+		return DataSource.class.equals(clazz);
 	}
 
 	public void setLoginTimeout(int seconds) throws SQLException {
@@ -63,7 +63,11 @@ public class ShardDataSource implements DataSource {
 	}
 
 	public <T> T unwrap(Class<T> clazz) throws SQLException {
-		return getDataSource().unwrap(clazz);
+		if (!DataSource.class.equals(clazz)) {
+			throw new SQLException("Invalid class " + clazz);
+		}
+
+		return (T)this;
 	}
 
 	protected DataSource getDataSource() {
