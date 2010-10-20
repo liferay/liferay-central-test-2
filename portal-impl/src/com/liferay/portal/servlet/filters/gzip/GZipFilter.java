@@ -16,7 +16,6 @@ package com.liferay.portal.servlet.filters.gzip;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -64,30 +63,6 @@ public class GZipFilter extends BasePortalFilter {
 		}
 	}
 
-	protected boolean isCompress(HttpServletRequest request) {
-		if (!ParamUtil.get(request, _COMPRESS, true)) {
-			return false;
-		}
-		else {
-
-			// Modifying binary content through a servlet filter under certain
-			// conditions is bad on performance the user will not start
-			// downloading the content until the entire content is modified.
-
-			String lifecycle = ParamUtil.getString(request, "p_p_lifecycle");
-
-			if ((lifecycle.equals("1") &&
-				 LiferayWindowState.isExclusive(request)) ||
-				lifecycle.equals("2")) {
-
-				return false;
-			}
-			else {
-				return true;
-			}
-		}
-	}
-
 	protected boolean isFilterEnabled() {
 		return _filterEnabled;
 	}
@@ -109,7 +84,7 @@ public class GZipFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		if (isCompress(request) && !isInclude(request) &&
+		if (ParamUtil.get(request, _COMPRESS, true) && !isInclude(request) &&
 			BrowserSnifferUtil.acceptsGzip(request) &&
 			!isAlreadyFiltered(request)) {
 

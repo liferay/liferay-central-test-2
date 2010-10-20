@@ -15,6 +15,9 @@
 package com.liferay.portal.servlet.filters.gzip;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
@@ -28,6 +31,7 @@ import javax.servlet.http.HttpServletResponseWrapper;
 /**
  * @author Jayson Falkner
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class GZipResponse extends HttpServletResponseWrapper {
 
@@ -35,6 +39,13 @@ public class GZipResponse extends HttpServletResponseWrapper {
 		super(response);
 
 		_response = response;
+
+		// Clear previous content length setting.
+		// Gzip response does not buffer output to get final Content-Length.
+		// The response to client will be in chunked model, unless higher level
+		// filters buffer the output to calculate content length.
+		_response.setContentLength(-1);
+		_response.addHeader(HttpHeaders.CONTENT_ENCODING, _GZIP);
 	}
 
 	public void finishResponse() {
@@ -62,7 +73,7 @@ public class GZipResponse extends HttpServletResponseWrapper {
 		}
 
 		if (_stream == null) {
-			_stream = _createOutputStream();
+			_stream = new GZipServletOutputStream(_response.getOutputStream());
 		}
 
 		return _stream;
@@ -77,7 +88,13 @@ public class GZipResponse extends HttpServletResponseWrapper {
 			throw new IllegalStateException();
 		}
 
-		_stream = _createOutputStream();
+		if (_log.isWarnEnabled()) {
+			_log.warn("GZipFilter should work at byte level, it should not use "
+				+ "Writer to do output. GZipResponse can tolerate this, but it "
+				+ "will sacrifice performance.");
+		}
+
+		_stream = new GZipServletOutputStream(_response.getOutputStream());
 
 		_writer = new UnsyncPrintWriter(new OutputStreamWriter(
 			//_stream, _res.getCharacterEncoding()));
@@ -86,9 +103,13 @@ public class GZipResponse extends HttpServletResponseWrapper {
 		return _writer;
 	}
 
-	private ServletOutputStream _createOutputStream() throws IOException {
-		return new GZipStream(_response);
+	public void setContentLength(int i) {
+		// Do nothing to stop code underneath GZipFilter setting content length
 	}
+
+	private static final String _GZIP = "gzip";
+
+	private static final Log _log = LogFactoryUtil.getLog(GZipResponse.class);
 
 	private HttpServletResponse _response;
 	private ServletOutputStream _stream;
