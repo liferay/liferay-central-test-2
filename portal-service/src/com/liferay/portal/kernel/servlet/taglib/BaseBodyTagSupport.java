@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.servlet.taglib;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BodyContentWrapper;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -41,7 +42,7 @@ public class BaseBodyTagSupport extends BodyTagSupport {
 			return bodyContentWrapper.getStringBundler();
 		}
 		else {
-			if (_log.isWarnEnabled()) {
+			if (ServerDetector.isTomcat() && _log.isWarnEnabled()) {
 				_log.warn(
 					"BodyContent is not BodyContentWrapper. Check " +
 						"JspFactorySwapper.");
