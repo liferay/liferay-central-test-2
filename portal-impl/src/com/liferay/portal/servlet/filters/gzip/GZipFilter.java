@@ -63,6 +63,15 @@ public class GZipFilter extends BasePortalFilter {
 		}
 	}
 
+	protected boolean isCompress(HttpServletRequest request) {
+		if (!ParamUtil.get(request, _COMPRESS, true)) {
+			return false;
+		}
+		else {
+			return false;
+		}
+	}
+
 	protected boolean isFilterEnabled() {
 		return _filterEnabled;
 	}
@@ -84,7 +93,7 @@ public class GZipFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		if (ParamUtil.get(request, _COMPRESS, true) && !isInclude(request) &&
+		if (isCompress(request) && !isInclude(request) &&
 			BrowserSnifferUtil.acceptsGzip(request) &&
 			!isAlreadyFiltered(request)) {
 

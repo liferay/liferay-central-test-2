@@ -28,29 +28,32 @@ public class GZipServletOutputStream extends ServletOutputStream {
 
 	public GZipServletOutputStream(OutputStream outputStream)
 		throws IOException {
-		_gzipOutputStream = new GZIPOutputStream(outputStream);
+
+		_gZipOutputStream = new GZIPOutputStream(outputStream);
 	}
 
 	public void close() throws IOException {
-		_gzipOutputStream.close();
+		_gZipOutputStream.close();
 	}
 
 	public void flush() throws IOException {
-		_gzipOutputStream.flush();
+		_gZipOutputStream.flush();
 	}
 
-	public void write(byte[] b) throws IOException {
-		_gzipOutputStream.write(b);
+	public void write(byte[] byteArray) throws IOException {
+		_gZipOutputStream.write(byteArray);
 	}
 
-	public void write(byte[] b, int off, int len) throws IOException {
-		_gzipOutputStream.write(b, off, len);
+	public void write(byte[] byteArray, int offset, int length)
+		throws IOException {
+
+		_gZipOutputStream.write(byteArray, offset, length);
 	}
 
 	public void write(int b) throws IOException {
-		_gzipOutputStream.write(b);
+		_gZipOutputStream.write(b);
 	}
 
-	private GZIPOutputStream _gzipOutputStream;
+	private GZIPOutputStream _gZipOutputStream;
 
 }

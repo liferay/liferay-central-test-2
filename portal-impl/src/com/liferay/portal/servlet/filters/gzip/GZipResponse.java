@@ -40,11 +40,12 @@ public class GZipResponse extends HttpServletResponseWrapper {
 
 		_response = response;
 
-		// Clear previous content length setting.
-		// Gzip response does not buffer output to get final Content-Length.
-		// The response to client will be in chunked model, unless higher level
-		// filters buffer the output to calculate content length.
+		// Clear previous content length setting. GZip response does not buffer
+		// output to get final content length. The response will be chunked
+		// unless an outer filter calculates the content length.
+
 		_response.setContentLength(-1);
+
 		_response.addHeader(HttpHeaders.CONTENT_ENCODING, _GZIP);
 	}
 
@@ -89,9 +90,7 @@ public class GZipResponse extends HttpServletResponseWrapper {
 		}
 
 		if (_log.isWarnEnabled()) {
-			_log.warn("GZipFilter should work at byte level, it should not use "
-				+ "Writer to do output. GZipResponse can tolerate this, but it "
-				+ "will sacrifice performance.");
+			_log.warn("Use getOutputStream for optimum performance");
 		}
 
 		_stream = new GZipServletOutputStream(_response.getOutputStream());
@@ -103,8 +102,7 @@ public class GZipResponse extends HttpServletResponseWrapper {
 		return _writer;
 	}
 
-	public void setContentLength(int i) {
-		// Do nothing to stop code underneath GZipFilter setting content length
+	public void setContentLength(int contentLength) {
 	}
 
 	private static final String _GZIP = "gzip";
