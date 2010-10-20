@@ -75,9 +75,15 @@
 								<#assign validatorErrorMessage = validator.getObject(2)>
 								<#assign validatorValue = validator.getObject(3)>
 
-								<validator error-message="${validatorErrorMessage}" name="${validatorName}"
+								<validator
 
-								<#if value>
+								<#if validatorErrorMessage != "">
+									error-message="${validatorErrorMessage}"
+								</#if>
+
+								name="${validatorName}"
+
+								<#if validatorValue != "">
 									>
 										${validatorValue}
 									</validator>

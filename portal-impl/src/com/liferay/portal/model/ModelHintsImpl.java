@@ -38,6 +38,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 /**
@@ -326,7 +327,8 @@ public class ModelHintsImpl implements ModelHints {
 					fieldSanitize = new Tuple(fieldName, contentType, modes);
 				}
 
-				List<Tuple> fieldValidators = new ArrayList<Tuple>();
+				Map<String, Tuple> fieldValidators =
+					new TreeMap<String, Tuple>();
 
 				itr3 = field.elements("validator").iterator();
 
@@ -339,14 +341,16 @@ public class ModelHintsImpl implements ModelHints {
 						continue;
 					}
 
-					String errorMessage = validator.attributeValue(
-						"error-message");
-
-					Tuple fieldValidator = new Tuple(
-						fieldName, validatorName, errorMessage,
+					String validatorErrorMessage = GetterUtil.getString(
+						validator.attributeValue("error-message"));
+					String validatorValue = GetterUtil.getString(
 						validator.getText());
 
-					fieldValidators.add(fieldValidator);
+					Tuple fieldValidator = new Tuple(
+						fieldName, validatorName, validatorErrorMessage,
+						validatorValue);
+
+					fieldValidators.put(validatorName, fieldValidator);
 				}
 
 				fields.put(fieldName + _ELEMENTS_SUFFIX, field);
@@ -359,7 +363,9 @@ public class ModelHintsImpl implements ModelHints {
 				}
 
 				if (!fieldValidators.isEmpty()) {
-					fields.put(fieldName + _VALIDATORS_SUFFIX, fieldValidators);
+					fields.put(
+						fieldName + _VALIDATORS_SUFFIX,
+						ListUtil.fromCollection(fieldValidators.values()));
 				}
 			}
 		}
