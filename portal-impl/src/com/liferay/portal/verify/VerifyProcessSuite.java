@@ -27,6 +27,7 @@ public class VerifyProcessSuite extends VerifyProcess {
 		verify(new VerifyCounter());
 		verify(new VerifyUUID());
 
+		verify(new VerifyPermission());
 		verify(new VerifyRole());
 
 		verify(new VerifyBlogs());
