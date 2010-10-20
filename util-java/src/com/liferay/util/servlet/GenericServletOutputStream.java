@@ -24,22 +24,24 @@ import javax.servlet.ServletOutputStream;
  */
 public class GenericServletOutputStream extends ServletOutputStream {
 
-	public GenericServletOutputStream(OutputStream os) {
-		_os = os;
+	public GenericServletOutputStream(OutputStream outputStream) {
+		_outputStream = outputStream;
+	}
+
+	public void write(byte[] byteArray) throws IOException {
+		_outputStream.write(byteArray);
+	}
+
+	public void write(byte[] byteArray, int offset, int length)
+		throws IOException {
+
+		_outputStream.write(byteArray, offset, length);
 	}
 
 	public void write(int b) throws IOException {
-		_os.write(b);
+		_outputStream.write(b);
 	}
 
-	public void write(byte[] b) throws IOException {
-		_os.write(b);
-	}
-
-	public void write(byte[] b, int off, int len) throws IOException {
-		_os.write(b, off, len);
-	}
-
-	private OutputStream _os;
+	private OutputStream _outputStream;
 
 }
