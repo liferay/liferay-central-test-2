@@ -37,6 +37,8 @@ public class PortletKeys {
 
 	public static final String BLOGS = "33";
 
+	public static final String BLOGS_ADMIN = "161";
+
 	public static final String BLOGS_AGGREGATOR = "115";
 
 	public static final String BOOKMARKS = "28";

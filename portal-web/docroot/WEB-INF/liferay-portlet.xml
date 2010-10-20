@@ -374,8 +374,6 @@
 		<portlet-data-handler-class>com.liferay.portlet.blogs.lar.BlogsPortletDataHandlerImpl</portlet-data-handler-class>
 		<social-activity-interpreter-class>com.liferay.portlet.blogs.social.BlogsActivityInterpreter</social-activity-interpreter-class>
 		<xml-rpc-method-class>com.liferay.portlet.blogs.util.PingbackMethodImpl</xml-rpc-method-class>
-		<control-panel-entry-category>content</control-panel-entry-category>
-		<control-panel-entry-weight>7.0</control-panel-entry-weight>
 		<asset-renderer-factory>com.liferay.portlet.blogs.asset.BlogsEntryAssetRendererFactory</asset-renderer-factory>
 		<custom-attributes-display>com.liferay.portlet.blogs.BlogsEntryCustomAttributesDisplay</custom-attributes-display>
 		<workflow-handler>com.liferay.portlet.blogs.workflow.BlogsEntryWorkflowHandler</workflow-handler>
@@ -1584,6 +1582,20 @@
 		<render-weight>50</render-weight>
 		<add-default-resource>true</add-default-resource>
 		<system>true</system>
+	</portlet>
+	<portlet>
+		<portlet-name>161</portlet-name>
+		<icon>/html/icons/blogs.png</icon>
+		<struts-path>blogs_admin</struts-path>
+		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<control-panel-entry-category>content</control-panel-entry-category>
+		<control-panel-entry-weight>7.0</control-panel-entry-weight>
+		<use-default-template>false</use-default-template>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>50</render-weight>
+		<header-portlet-css>/html/portlet/blogs/css/main.jsp</header-portlet-css>
+		<css-class-wrapper>portlet-blogs</css-class-wrapper>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

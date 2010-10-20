@@ -71,6 +71,7 @@ import org.apache.struts.action.ActionMapping;
  * @author Brian Wing Shun Chan
  * @author Wilson S. Man
  * @author Thiago Moreira
+ * @author Juan Fernández
  */
 public class EditEntryAction extends PortletAction {
 
@@ -92,7 +93,7 @@ public class EditEntryAction extends PortletAction {
 				oldUrlTitle = ((String)returnValue[1]);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteEntry(actionRequest);
+				deleteEntries(actionRequest);
 			}
 			else if (cmd.equals(Constants.SUBSCRIBE)) {
 				subscribe(actionRequest);
@@ -244,10 +245,22 @@ public class EditEntryAction extends PortletAction {
 			getForward(renderRequest, "portlet.blogs.edit_entry"));
 	}
 
-	protected void deleteEntry(ActionRequest actionRequest) throws Exception {
-		long entryId = ParamUtil.getLong(actionRequest, "entryId");
+	protected void deleteEntries(ActionRequest actionRequest) throws Exception {
+		String deleteEntryIds =
+			ParamUtil.getString(actionRequest, "deleteEntryIds");
 
-		BlogsEntryServiceUtil.deleteEntry(entryId);
+		if (Validator.isNotNull(deleteEntryIds)) {
+			long[] entryIds = StringUtil.split(deleteEntryIds, 0L);
+
+			for (int i = 0; i < entryIds.length; i++) {
+				BlogsEntryServiceUtil.deleteEntry(entryIds[i]);
+			}
+		}
+		else {
+			long entryId = ParamUtil.getLong(actionRequest, "entryId");
+
+			BlogsEntryServiceUtil.deleteEntry(entryId);
+		}
 	}
 
 	protected void subscribe(ActionRequest actionRequest) throws Exception {
