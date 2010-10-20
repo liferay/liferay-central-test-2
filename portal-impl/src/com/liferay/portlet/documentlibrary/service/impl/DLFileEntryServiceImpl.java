@@ -226,6 +226,14 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		return fileEntry;
 	}
 
+	public Lock getFileEntryLock(long groupId, long folderId, String name)
+		throws PortalException, SystemException {
+
+		String lockId = DLUtil.getLockId(groupId, folderId, name);
+
+		return lockLocalService.getLock(DLFileEntry.class.getName(), lockId);
+	}
+
 	public int getFoldersFileEntriesCount(
 			long groupId, List<Long> folderIds, int status)
 		throws SystemException {
@@ -260,15 +268,6 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	}
 
 	public List<DLFileEntry> getGroupFileEntries(
-			long groupId, long userId, long rootFolderId, int start, int end)
-		throws SystemException {
-
-		return getGroupFileEntries(
-			groupId, userId, rootFolderId, start, end,
-			new FileEntryModifiedDateComparator());
-	}
-
-	public List<DLFileEntry> getGroupFileEntries(
 			long groupId, long userId, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
@@ -276,6 +275,15 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		return getGroupFileEntries(
 			groupId, userId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, start,
 			end, obc);
+	}
+
+	public List<DLFileEntry> getGroupFileEntries(
+			long groupId, long userId, long rootFolderId, int start, int end)
+		throws SystemException {
+
+		return getGroupFileEntries(
+			groupId, userId, rootFolderId, start, end,
+			new FileEntryModifiedDateComparator());
 	}
 
 	public List<DLFileEntry> getGroupFileEntries(
@@ -321,14 +329,6 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			return dlFileEntryPersistence.filterCountByG_U_F(
 				groupId, userId, folderIds);
 		}
-	}
-
-	public Lock getFileEntryLock(long groupId, long folderId, String name)
-		throws PortalException, SystemException {
-
-		String lockId = DLUtil.getLockId(groupId, folderId, name);
-
-		return lockLocalService.getLock(DLFileEntry.class.getName(), lockId);
 	}
 
 	public boolean hasFileEntryLock(long groupId, long folderId, String name)
