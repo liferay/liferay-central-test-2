@@ -51,6 +51,10 @@ public class ShardDataSource implements DataSource {
 	}
 
 	public boolean isWrapperFor(Class<?> clazz) {
+
+		// Directly implement this method for JDK 5 compatibility. Logic is
+		// copied from org.springframework.jdbc.datasource.AbstractDataSource.
+
 		return DataSource.class.equals(clazz);
 	}
 
@@ -63,6 +67,10 @@ public class ShardDataSource implements DataSource {
 	}
 
 	public <T> T unwrap(Class<T> clazz) throws SQLException {
+
+		// Directly implement this method for JDK 5 compatibility. Logic is
+		// copied from org.springframework.jdbc.datasource.AbstractDataSource.
+
 		if (!DataSource.class.equals(clazz)) {
 			throw new SQLException("Invalid class " + clazz);
 		}
