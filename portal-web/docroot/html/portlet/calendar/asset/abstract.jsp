@@ -22,7 +22,7 @@ int abstractLength = (Integer)request.getAttribute(WebKeys.ASSET_PUBLISHER_ABSTR
 CalEvent event = (CalEvent)request.getAttribute(WebKeys.CALENDAR_EVENT);
 %>
 
-<%= HtmlUtil.escape(StringUtil.shorten(event.getDescription(), abstractLength)) %><br />
+<%= StringUtil.shorten(event.getDescription(), abstractLength) %><br />
 
 <liferay-ui:icon
 	image="../common/calendar"
