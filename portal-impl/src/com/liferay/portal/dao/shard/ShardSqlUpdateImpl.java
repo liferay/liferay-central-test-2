@@ -15,7 +15,6 @@
 package com.liferay.portal.dao.shard;
 
 import com.liferay.portal.dao.jdbc.spring.SqlUpdateImpl;
-import com.liferay.portal.kernel.dao.shard.ShardUtil;
 
 /**
  * @author Alexander Chow
@@ -23,7 +22,7 @@ import com.liferay.portal.kernel.dao.shard.ShardUtil;
 public class ShardSqlUpdateImpl extends SqlUpdateImpl {
 
 	public ShardSqlUpdateImpl(String sql, int[] types) {
-		super(ShardUtil.getDataSource(), sql, types);
+		super(ShardDataSource.getInstance(), sql, types);
 	}
 
 }
