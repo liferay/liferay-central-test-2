@@ -32,30 +32,6 @@ public class ShardDataSource implements DataSource {
 		return _instance;
 	}
 
-	public PrintWriter getLogWriter() throws SQLException {
-		return getDataSource().getLogWriter();
-	}
-
-	public void setLogWriter(PrintWriter out) throws SQLException {
-		getDataSource().setLogWriter(out);
-	}
-
-	public void setLoginTimeout(int seconds) throws SQLException {
-		getDataSource().setLoginTimeout(seconds);
-	}
-
-	public int getLoginTimeout() throws SQLException {
-		return getDataSource().getLoginTimeout();
-	}
-
-	public <T> T unwrap(Class<T> iface) throws SQLException {
-		return getDataSource().unwrap(iface);
-	}
-
-	public boolean isWrapperFor(Class<?> iface) throws SQLException {
-		return getDataSource().isWrapperFor(iface);
-	}
-
 	public Connection getConnection() throws SQLException {
 		return getDataSource().getConnection();
 	}
@@ -64,6 +40,30 @@ public class ShardDataSource implements DataSource {
 		throws SQLException {
 
 		return getDataSource().getConnection(username, password);
+	}
+
+	public int getLoginTimeout() throws SQLException {
+		return getDataSource().getLoginTimeout();
+	}
+
+	public PrintWriter getLogWriter() throws SQLException {
+		return getDataSource().getLogWriter();
+	}
+
+	public boolean isWrapperFor(Class<?> clazz) throws SQLException {
+		return getDataSource().isWrapperFor(clazz);
+	}
+
+	public void setLoginTimeout(int seconds) throws SQLException {
+		getDataSource().setLoginTimeout(seconds);
+	}
+
+	public void setLogWriter(PrintWriter printWriter) throws SQLException {
+		getDataSource().setLogWriter(printWriter);
+	}
+
+	public <T> T unwrap(Class<T> clazz) throws SQLException {
+		return getDataSource().unwrap(clazz);
 	}
 
 	protected DataSource getDataSource() {
