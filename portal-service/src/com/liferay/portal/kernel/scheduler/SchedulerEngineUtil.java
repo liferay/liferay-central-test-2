@@ -64,10 +64,10 @@ public class SchedulerEngineUtil {
 		}
 
 		String messageListenerUUID = PortalUUIDUtil.generate();
-		String className = schedulerEntry.getEventListenerClass();
 
 		schedulerEventListener = new SchedulerEventMessageListenerWrapper(
-			schedulerEventListener, messageListenerUUID, className);
+			schedulerEventListener, messageListenerUUID,
+			schedulerEntry.getEventListenerClass());
 
 		schedulerEntry.setEventListener(schedulerEventListener);
 
