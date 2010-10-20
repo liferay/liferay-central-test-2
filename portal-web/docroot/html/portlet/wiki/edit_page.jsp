@@ -286,7 +286,7 @@ if (Validator.isNull(redirect)) {
 						<%
 						for (int i = 0; i < attachments.length; i++) {
 							String fileName = FileUtil.getShortFileName(attachments[i]);
-							long fileSize = DLServiceUtil.getFileSize(company.getCompanyId(), CompanyConstants.SYSTEM, attachments[i]);
+							long fileSize = DLLocalServiceUtil.getFileSize(company.getCompanyId(), CompanyConstants.SYSTEM, attachments[i]);
 						%>
 
 							<portlet:actionURL var="getPageAttachmentURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">

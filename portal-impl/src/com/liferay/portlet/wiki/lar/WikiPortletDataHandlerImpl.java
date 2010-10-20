@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.wiki.lar;
 
-import com.liferay.documentlibrary.service.DLServiceUtil;
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
@@ -402,7 +402,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 					attachmentEl.addAttribute("name", name);
 					attachmentEl.addAttribute("bin-path", binPath);
 
-					byte[] bytes = DLServiceUtil.getFile(
+					byte[] bytes = DLLocalServiceUtil.getFile(
 						context.getCompanyId(), CompanyConstants.SYSTEM,
 						attachment);
 

@@ -27,9 +27,25 @@ import java.util.Date;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
 @Transactional(rollbackFor = {PortalException.class, SystemException.class})
 public interface DLLocalService {
+
+	public void addDirectory(long companyId, long repositoryId, String dirName)
+		throws PortalException, SystemException;
+
+	public void addFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, long fileEntryId, String properties,
+			Date modifiedDate, ServiceContext serviceContext, File file)
+		throws PortalException, SystemException;
+
+	public void addFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, long fileEntryId, String properties,
+			Date modifiedDate, ServiceContext serviceContext, byte[] bytes)
+		throws PortalException, SystemException;
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
@@ -40,6 +56,28 @@ public interface DLLocalService {
 
 	public void checkRoot(long companyId) throws SystemException;
 
+	public void deleteDirectory(
+			long companyId, String portletId, long repositoryId, String dirName)
+		throws PortalException, SystemException;
+
+	public void deleteFile(
+			long companyId, String portletId, long repositoryId,
+			String fileName, String versionNumber)
+		throws PortalException, SystemException;
+
+	public void deleteFile(
+			long companyId, String portletId, long repositoryId,
+			String fileName)
+		throws PortalException, SystemException;
+
+	public byte[] getFile(
+			long companyId, long repositoryId, String fileName,
+			String versionNumber)
+		throws PortalException, SystemException;
+
+	public byte[] getFile(long companyId, long repositoryId, String fileName)
+		throws PortalException, SystemException;
+
 	public InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException;
@@ -47,6 +85,13 @@ public interface DLLocalService {
 	public InputStream getFileAsStream(
 			long companyId, long repositoryId, String fileName,
 			String versionNumber)
+		throws PortalException, SystemException;
+
+	public long getFileSize(long companyId, long repositoryId, String fileName)
+		throws PortalException, SystemException;
+
+	public String[] getFileNames(
+			long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException;
 
 	public boolean hasFile(
@@ -61,6 +106,30 @@ public interface DLLocalService {
 			long userId, long[] repositoryIds, String keywords, int start,
 			int end)
 		throws SystemException;
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String newFileName, boolean reindex)
+		throws PortalException, SystemException;
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String versionNumber, String sourceFileName,
+			long fileEntryId, String properties, Date modifiedDate,
+			ServiceContext serviceContext, File file)
+		throws PortalException, SystemException;
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String versionNumber, String sourceFileName,
+			long fileEntryId, String properties, Date modifiedDate,
+			ServiceContext serviceContext, byte[] bytes)
+		throws PortalException, SystemException;
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			long newRepositoryId, String fileName, long fileEntryId)
+		throws PortalException, SystemException;
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,

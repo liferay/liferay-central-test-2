@@ -16,7 +16,6 @@ package com.liferay.portal.image;
 
 import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
-import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -43,7 +42,7 @@ public class DLHook extends BaseHook {
 		String fileName = getFileName(image.getImageId(), image.getType());
 
 		try {
-			DLServiceUtil.deleteFile(
+			DLLocalServiceUtil.deleteFile(
 				_COMPANY_ID, _PORTLET_ID, _REPOSITORY_ID, fileName);
 		}
 		catch (NoSuchFileException nsfe) {
@@ -90,7 +89,7 @@ public class DLHook extends BaseHook {
 		if (DLLocalServiceUtil.hasFile(
 			_COMPANY_ID, _REPOSITORY_ID, fileName, _VERSION_NUMBER)) {
 
-			DLServiceUtil.deleteFile(
+			DLLocalServiceUtil.deleteFile(
 				_COMPANY_ID, _PORTLET_ID, _REPOSITORY_ID, fileName);
 		}
 

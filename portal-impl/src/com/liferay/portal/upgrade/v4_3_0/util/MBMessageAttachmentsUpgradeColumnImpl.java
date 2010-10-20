@@ -15,7 +15,6 @@
 package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
-import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
@@ -52,7 +51,7 @@ public class MBMessageAttachmentsUpgradeColumnImpl
 			Long newThreadId = (Long)_threadIdColumn.getNewValue();
 
 			try {
-				DLServiceUtil.addDirectory(
+				DLLocalServiceUtil.addDirectory(
 					newCompanyId.longValue(), CompanyConstants.SYSTEM,
 					"messageboards/" + newThreadId);
 

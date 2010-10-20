@@ -27,6 +27,9 @@ import java.util.Date;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
+ *
+ * @deprecated {@link DLLocalServiceUtil}
  */
 public class DLServiceUtil {
 

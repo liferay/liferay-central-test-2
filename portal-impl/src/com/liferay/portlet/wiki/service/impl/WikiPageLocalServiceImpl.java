@@ -234,7 +234,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		long repositoryId = CompanyConstants.SYSTEM;
 
 		try {
-			dlService.addDirectory(companyId, repositoryId, dirName);
+			dlLocalService.addDirectory(companyId, repositoryId, dirName);
 		}
 		catch (DuplicateDirectoryException dde) {
 		}
@@ -263,7 +263,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String dirName = page.getAttachmentsDir();
 
 		try {
-			dlService.addDirectory(companyId, repositoryId, dirName);
+			dlLocalService.addDirectory(companyId, repositoryId, dirName);
 		}
 		catch (DuplicateDirectoryException dde) {
 		}
@@ -278,7 +278,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				continue;
 			}
 
-			dlService.addFile(
+			dlLocalService.addFile(
 				companyId, portletId, groupId, repositoryId,
 				dirName + "/" + fileName, 0, StringPool.BLANK,
 				page.getModifiedDate(), new ServiceContext(), bytes);
@@ -420,7 +420,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String dirName = page.getAttachmentsDir();
 
 		try {
-			dlService.deleteDirectory(
+			dlLocalService.deleteDirectory(
 				companyId, portletId, repositoryId, dirName);
 		}
 		catch (NoSuchDirectoryException nsde) {
@@ -502,7 +502,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		long repositoryId = CompanyConstants.SYSTEM;
 
 		try {
-			dlService.deleteFile(companyId, portletId, repositoryId, fileName);
+			dlLocalService.deleteFile(
+				companyId, portletId, repositoryId, fileName);
 		}
 		catch (NoSuchFileException nsfe) {
 		}

@@ -15,7 +15,6 @@
 package com.liferay.portlet.messageboards.action;
 
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
-import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.CompanyConstants;
@@ -98,7 +97,7 @@ public class GetMessageAttachmentAction extends PortletAction {
 
 		InputStream is = DLLocalServiceUtil.getFileAsStream(
 			message.getCompanyId(), CompanyConstants.SYSTEM, path);
-		int contentLength = (int)DLServiceUtil.getFileSize(
+		int contentLength = (int)DLLocalServiceUtil.getFileSize(
 			message.getCompanyId(), CompanyConstants.SYSTEM, path);
 		String contentType = MimeTypesUtil.getContentType(fileName);
 

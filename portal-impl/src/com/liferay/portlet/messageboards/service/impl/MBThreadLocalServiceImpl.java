@@ -73,7 +73,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		String dirName = thread.getAttachmentsDir();
 
 		try {
-			dlService.deleteDirectory(
+			dlLocalService.deleteDirectory(
 				companyId, portletId, repositoryId, dirName);
 		}
 		catch (NoSuchDirectoryException nsde) {
@@ -604,29 +604,31 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		String newAttachmentsDir = message.getAttachmentsDir();
 
 		try {
-			dlService.addDirectory(companyId, repositoryId, newAttachmentsDir);
+			dlLocalService.addDirectory(
+				companyId, repositoryId, newAttachmentsDir);
 		}
 		catch (DuplicateDirectoryException dde) {
 		}
 
-		String[] fileNames = dlService.getFileNames(
+		String[] fileNames = dlLocalService.getFileNames(
 			companyId, repositoryId, oldAttachmentsDir);
 
 		for (String fileName : fileNames) {
 			String name = StringUtil.extractLast(fileName, StringPool.SLASH);
-			byte[] fileBytes = dlService.getFile(
+			byte[] fileBytes = dlLocalService.getFile(
 				companyId, repositoryId, fileName);
 
-			dlService.addFile(
+			dlLocalService.addFile(
 				companyId, portletId, groupId, repositoryId,
 				newAttachmentsDir + "/" + name, 0, StringPool.BLANK,
 				message.getModifiedDate(), new ServiceContext(), fileBytes);
 
-			dlService.deleteFile(companyId, portletId, repositoryId, fileName);
+			dlLocalService.deleteFile(
+				companyId, portletId, repositoryId, fileName);
 		}
 
 		try {
-			dlService.deleteDirectory(
+			dlLocalService.deleteDirectory(
 				companyId, portletId, repositoryId, oldAttachmentsDir);
 		}
 		catch (NoSuchDirectoryException nsde) {

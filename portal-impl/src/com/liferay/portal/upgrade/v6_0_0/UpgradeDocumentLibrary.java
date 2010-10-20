@@ -15,7 +15,7 @@
 package com.liferay.portal.upgrade.v6_0_0;
 
 import com.liferay.documentlibrary.NoSuchFileException;
-import com.liferay.documentlibrary.service.DLServiceUtil;
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -129,7 +129,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 				if (!newName.equals(name)) {
 					try {
-						DLServiceUtil.updateFile(
+						DLLocalServiceUtil.updateFile(
 							companyId, portletId, groupId, repositoryId, name,
 							newName, false);
 					}

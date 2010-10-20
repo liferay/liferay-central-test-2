@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.messageboards.lar;
 
-import com.liferay.documentlibrary.service.DLServiceUtil;
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
@@ -349,7 +349,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 					attachmentElement.addAttribute("name", name);
 					attachmentElement.addAttribute("bin-path", binPath);
 
-					byte[] bytes = DLServiceUtil.getFile(
+					byte[] bytes = DLLocalServiceUtil.getFile(
 						context.getCompanyId(), CompanyConstants.SYSTEM,
 						attachment);
 

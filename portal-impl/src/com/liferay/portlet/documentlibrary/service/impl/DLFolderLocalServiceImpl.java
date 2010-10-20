@@ -238,7 +238,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		// Directory
 
 		try {
-			dlService.deleteDirectory(
+			dlLocalService.deleteDirectory(
 				folder.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 				folder.getFolderId(), StringPool.BLANK);
 		}

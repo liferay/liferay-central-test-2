@@ -15,7 +15,7 @@
 package com.liferay.portlet.messageboards.model.impl;
 
 import com.liferay.documentlibrary.NoSuchDirectoryException;
-import com.liferay.documentlibrary.service.DLServiceUtil;
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -59,7 +59,7 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		String[] fileNames = new String[0];
 
 		try {
-			fileNames = DLServiceUtil.getFileNames(
+			fileNames = DLLocalServiceUtil.getFileNames(
 				getCompanyId(), CompanyConstants.SYSTEM, getAttachmentsDir());
 		}
 		catch (NoSuchDirectoryException nsde) {

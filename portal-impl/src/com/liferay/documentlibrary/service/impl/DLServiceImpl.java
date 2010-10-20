@@ -14,10 +14,8 @@
 
 package com.liferay.documentlibrary.service.impl;
 
-import com.liferay.documentlibrary.DirectoryNameException;
 import com.liferay.documentlibrary.service.DLLocalService;
 import com.liferay.documentlibrary.service.DLService;
-import com.liferay.documentlibrary.util.Hook;
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -30,6 +28,9 @@ import java.util.Date;
 /**
  * @author Brian Wing Shun Chan
  * @author Michael Young
+ * @author Alexander Chow
+ *
+ * @deprecated {@link DLLocalServiceImpl}
  */
 public class DLServiceImpl implements DLService {
 
@@ -40,28 +41,7 @@ public class DLServiceImpl implements DLService {
 	public void addDirectory(long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
 
-		if ((dirName == null || dirName.equals("/")) ||
-			(dirName.indexOf("\\\\") != -1) ||
-			(dirName.indexOf("//") != -1) ||
-			(dirName.indexOf(":") != -1) ||
-			(dirName.indexOf("*") != -1) ||
-			(dirName.indexOf("?") != -1) ||
-			(dirName.indexOf("\"") != -1) ||
-			(dirName.indexOf("<") != -1) ||
-			(dirName.indexOf(">") != -1) ||
-			(dirName.indexOf("|") != -1) ||
-			(dirName.indexOf("[") != -1) ||
-			(dirName.indexOf("]") != -1) ||
-			(dirName.indexOf("'") != -1) ||
-			(dirName.indexOf("..\\") != -1) ||
-			(dirName.indexOf("../") != -1) ||
-			(dirName.indexOf("\\..") != -1) ||
-			(dirName.indexOf("/..") != -1)) {
-
-			throw new DirectoryNameException(dirName);
-		}
-
-		hook.addDirectory(companyId, repositoryId, dirName);
+		dlLocalService.addDirectory(companyId, repositoryId, dirName);
 	}
 
 	public void addFile(
@@ -70,9 +50,7 @@ public class DLServiceImpl implements DLService {
 			Date modifiedDate, ServiceContext serviceContext, byte[] bytes)
 		throws PortalException, SystemException {
 
-		dlLocalService.validate(fileName, true, bytes);
-
-		hook.addFile(
+		dlLocalService.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
 			properties, modifiedDate, serviceContext, bytes);
 	}
@@ -83,9 +61,7 @@ public class DLServiceImpl implements DLService {
 			Date modifiedDate, ServiceContext serviceContext, File file)
 		throws PortalException, SystemException {
 
-		dlLocalService.validate(fileName, true, file);
-
-		hook.addFile(
+		dlLocalService.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
 			properties, modifiedDate, serviceContext, file);
 	}
@@ -94,7 +70,8 @@ public class DLServiceImpl implements DLService {
 			long companyId, String portletId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
 
-		hook.deleteDirectory(companyId, portletId, repositoryId, dirName);
+		dlLocalService.deleteDirectory(
+			companyId, portletId, repositoryId, dirName);
 	}
 
 	public void deleteFile(
@@ -102,7 +79,7 @@ public class DLServiceImpl implements DLService {
 			String fileName)
 		throws PortalException, SystemException {
 
-		hook.deleteFile(companyId, portletId, repositoryId, fileName);
+		dlLocalService.deleteFile(companyId, portletId, repositoryId, fileName);
 	}
 
 	public void deleteFile(
@@ -110,14 +87,14 @@ public class DLServiceImpl implements DLService {
 			String fileName, String versionNumber)
 		throws PortalException, SystemException {
 
-		hook.deleteFile(
+		dlLocalService.deleteFile(
 			companyId, portletId, repositoryId, fileName, versionNumber);
 	}
 
 	public byte[] getFile(long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
 
-		return hook.getFile(companyId, repositoryId, fileName);
+		return dlLocalService.getFile(companyId, repositoryId, fileName);
 	}
 
 	public byte[] getFile(
@@ -125,21 +102,22 @@ public class DLServiceImpl implements DLService {
 			String versionNumber)
 		throws PortalException, SystemException {
 
-		return hook.getFile(companyId, repositoryId, fileName, versionNumber);
+		return dlLocalService.getFile(
+			companyId, repositoryId, fileName, versionNumber);
 	}
 
 	public String[] getFileNames(
 			long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
 
-		return hook.getFileNames(companyId, repositoryId, dirName);
+		return dlLocalService.getFileNames(companyId, repositoryId, dirName);
 	}
 
 	public long getFileSize(
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
 
-		return hook.getFileSize(companyId, repositoryId, fileName);
+		return dlLocalService.getFileSize(companyId, repositoryId, fileName);
 	}
 
 	public void updateFile(
@@ -147,7 +125,7 @@ public class DLServiceImpl implements DLService {
 			long newRepositoryId, String fileName, long fileEntryId)
 		throws PortalException, SystemException {
 
-		hook.updateFile(
+		dlLocalService.updateFile(
 			companyId, portletId, groupId, repositoryId, newRepositoryId,
 			fileName, fileEntryId);
 	}
@@ -159,9 +137,7 @@ public class DLServiceImpl implements DLService {
 			ServiceContext serviceContext, byte[] bytes)
 		throws PortalException, SystemException {
 
-		dlLocalService.validate(fileName, true, bytes);
-
-		hook.updateFile(
+		dlLocalService.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
 			versionNumber, sourceFileName, fileEntryId, properties,
 			modifiedDate, serviceContext, bytes);
@@ -174,9 +150,7 @@ public class DLServiceImpl implements DLService {
 			ServiceContext serviceContext, File file)
 		throws PortalException, SystemException {
 
-		dlLocalService.validate(fileName, true, file);
-
-		hook.updateFile(
+		dlLocalService.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
 			versionNumber, sourceFileName, fileEntryId, properties,
 			modifiedDate, serviceContext, file);
@@ -187,15 +161,12 @@ public class DLServiceImpl implements DLService {
 			String fileName, String newFileName, boolean reindex)
 		throws PortalException, SystemException {
 
-		hook.updateFile(
+		dlLocalService.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName, newFileName,
 			reindex);
 	}
 
 	@BeanReference(type = DLLocalService.class)
 	protected DLLocalService dlLocalService;
-
-	@BeanReference(type = Hook.class)
-	protected Hook hook;
 
 }

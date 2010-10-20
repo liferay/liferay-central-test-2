@@ -15,7 +15,6 @@
 package com.liferay.portlet.wiki.action;
 
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
-import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -108,7 +107,7 @@ public class GetPageAttachmentAction extends PortletAction {
 
 		InputStream is = DLLocalServiceUtil.getFileAsStream(
 			page.getCompanyId(), CompanyConstants.SYSTEM, path);
-		int contentLength = (int)DLServiceUtil.getFileSize(
+		int contentLength = (int)DLLocalServiceUtil.getFileSize(
 			page.getCompanyId(), CompanyConstants.SYSTEM, path);
 		String contentType = MimeTypesUtil.getContentType(fileName);
 

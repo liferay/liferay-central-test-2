@@ -14,7 +14,7 @@
 
 package com.liferay.portal.upgrade.v5_2_8_to_6_0_5;
 
-import com.liferay.documentlibrary.service.DLServiceUtil;
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
@@ -73,7 +73,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 					name);
 
 				if (!newName.equals(name)) {
-					DLServiceUtil.updateFile(
+					DLLocalServiceUtil.updateFile(
 						companyId, portletId, groupId, repositoryId, name,
 						newName, false);
 				}

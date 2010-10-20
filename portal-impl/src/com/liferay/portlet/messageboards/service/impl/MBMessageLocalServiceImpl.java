@@ -314,7 +314,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String dirName = message.getAttachmentsDir();
 
 			try {
-				dlService.deleteDirectory(
+				dlLocalService.deleteDirectory(
 					companyId, portletId, repositoryId, dirName);
 			}
 			catch (NoSuchDirectoryException nsde) {
@@ -323,7 +323,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				}
 			}
 
-			dlService.addDirectory(companyId, repositoryId, dirName);
+			dlLocalService.addDirectory(companyId, repositoryId, dirName);
 
 			for (int i = 0; i < files.size(); i++) {
 				ObjectValuePair<String, byte[]> ovp = files.get(i);
@@ -332,7 +332,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				byte[] bytes = ovp.getValue();
 
 				try {
-					dlService.addFile(
+					dlLocalService.addFile(
 						companyId, portletId, dlGroupId, repositoryId,
 						dirName + "/" + fileName, 0, StringPool.BLANK,
 						message.getModifiedDate(), new ServiceContext(), bytes);
@@ -529,7 +529,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String dirName = message.getAttachmentsDir();
 
 			try {
-				dlService.deleteDirectory(
+				dlLocalService.deleteDirectory(
 					companyId, portletId, repositoryId, dirName);
 			}
 			catch (NoSuchDirectoryException nsde) {
@@ -565,7 +565,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String dirName = message.getThreadAttachmentsDir();
 
 			try {
-				dlService.deleteDirectory(
+				dlLocalService.deleteDirectory(
 					companyId, portletId, repositoryId, dirName);
 			}
 			catch (NoSuchDirectoryException nsde) {
@@ -1262,17 +1262,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		if (!files.isEmpty() || !existingFiles.isEmpty()) {
 			try {
-				dlService.addDirectory(companyId, repositoryId, dirName);
+				dlLocalService.addDirectory(companyId, repositoryId, dirName);
 			}
 			catch (DuplicateDirectoryException dde) {
 			}
 
-			String[] fileNames = dlService.getFileNames(
+			String[] fileNames = dlLocalService.getFileNames(
 				companyId, repositoryId, dirName);
 
 			for (String fileName: fileNames) {
 				if (!existingFiles.contains(fileName)) {
-					dlService.deleteFile(
+					dlLocalService.deleteFile(
 						companyId, portletId, repositoryId, fileName);
 				}
 			}
@@ -1284,7 +1284,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				byte[] bytes = ovp.getValue();
 
 				try {
-					dlService.addFile(
+					dlLocalService.addFile(
 						companyId, portletId, groupId, repositoryId,
 						dirName + "/" + fileName, 0, StringPool.BLANK,
 						message.getModifiedDate(), new ServiceContext(), bytes);
@@ -1295,7 +1295,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 		else {
 			try {
-				dlService.deleteDirectory(
+				dlLocalService.deleteDirectory(
 					companyId, portletId, repositoryId, dirName);
 			}
 			catch (NoSuchDirectoryException nsde) {

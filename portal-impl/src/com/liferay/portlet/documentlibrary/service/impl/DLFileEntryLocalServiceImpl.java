@@ -400,7 +400,7 @@ public class DLFileEntryLocalServiceImpl
 		// File
 
 		try {
-			dlService.deleteFile(
+			dlLocalService.deleteFile(
 				fileEntry.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 				fileEntry.getRepositoryId(), fileEntry.getName());
 		}
@@ -426,7 +426,7 @@ public class DLFileEntryLocalServiceImpl
 
 		if (Validator.isNotNull(version)) {
 			try {
-				dlService.deleteFile(
+				dlLocalService.deleteFile(
 					fileEntry.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 					fileEntry.getRepositoryId(), fileEntry.getName(), version);
 			}
@@ -831,7 +831,7 @@ public class DLFileEntryLocalServiceImpl
 
 		// File
 
-		dlService.updateFile(
+		dlLocalService.updateFile(
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 			newFileEntry.getGroupId(), fileEntry.getRepositoryId(),
 			newFileEntry.getRepositoryId(), name, newFileEntryId);
@@ -1091,7 +1091,7 @@ public class DLFileEntryLocalServiceImpl
 
 		if (is != null) {
 			try {
-				dlService.deleteFile(
+				dlLocalService.deleteFile(
 					user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 					fileEntry.getRepositoryId(), fileEntry.getName(), version);
 			}
