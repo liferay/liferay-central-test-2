@@ -27,22 +27,22 @@ public class ClusterLinkPortalCacheClusterChannel
 	extends BasePortalCacheClusterChannel {
 
 	public ClusterLinkPortalCacheClusterChannel(
-		String destination, Priority priority) {
+		String destinationName, Priority priority) {
 
-		_destination = destination;
+		_destinationName = destinationName;
 		_priority = priority;
 	}
 
 	public void dispatchEvent(PortalCacheClusterEvent portalCacheClusterEvent) {
 		Message message = new Message();
 
-		message.setDestinationName(_destination);
+		message.setDestinationName(_destinationName);
 		message.setPayload(portalCacheClusterEvent);
 
 		ClusterLinkUtil.sendMulticastMessage(message, _priority);
 	}
 
-	private String _destination;
+	private String _destinationName;
 	private Priority _priority;
 
 }

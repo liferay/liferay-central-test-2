@@ -29,16 +29,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ClusterLinkPortalCacheClusterChannelFactory
 	implements PortalCacheClusterChannelFactory {
 
-	public ClusterLinkPortalCacheClusterChannelFactory(
-		String destination, List<Priority> priorities) {
-
-		_counter = new AtomicInteger(0);
-		_destination = destination;
-		_priorities = priorities;
-
-		Collections.sort(priorities);
-	}
-
 	public PortalCacheClusterChannel createPortalCacheClusterChannel()
 		throws PortalCacheClusterException {
 
@@ -50,11 +40,21 @@ public class ClusterLinkPortalCacheClusterChannelFactory
 		}
 
 		return new ClusterLinkPortalCacheClusterChannel(
-			_destination, _priorities.get(count));
+			_destinationName, _priorities.get(count));
 	}
 
-	private AtomicInteger _counter;
-	private String _destination;
+	public void setDestinationName(String destinationName) {
+		_destinationName = destinationName;
+	}
+
+	public void setPriorities(List<Priority> priorities) {
+		_priorities = priorities;
+
+		Collections.sort(priorities);
+	}
+
+	private AtomicInteger _counter = new AtomicInteger(0);
+	private String _destinationName;
 	private List<Priority> _priorities;
 
 }
