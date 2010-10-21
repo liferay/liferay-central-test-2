@@ -142,9 +142,10 @@ public class UpgradeAsset extends UpgradeProcess {
 	}
 
 	protected void addProperty(
-			String tableName, String pkName, long propertyId, long companyId,
-			long userId, String userName, Timestamp createDate,
-			Timestamp modifiedDate, long categoryId, String key, String value)
+			String tableName, String pkName, String assocationPKName,
+			long propertyId, long companyId, long userId, String userName,
+			Timestamp createDate, Timestamp modifiedDate, long categoryId,
+			String key, String value)
 		throws Exception {
 
 		Connection con = null;
@@ -161,15 +162,8 @@ public class UpgradeAsset extends UpgradeProcess {
 			sb.append(pkName);
 			sb.append(", companyId, userId, userName, createDate, ");
 			sb.append("modifiedDate, ");
-
-			if (tableName.equalsIgnoreCase("AssetCategoryProperty")) {
-				sb.append("categoryId, ");
-			}
-			else if (tableName.equalsIgnoreCase("AssetTagProperty")) {
-				sb.append("tagId, ");
-			}
-
-			sb.append("key_, value) values (?, ?, ?, ");
+			sb.append(assocationPKName);
+			sb.append(", key_, value) values (?, ?, ?, ");
 			sb.append("?, ?, ?, ?, ?, ?)");
 
 			String sql = sb.toString();
@@ -337,7 +331,8 @@ public class UpgradeAsset extends UpgradeProcess {
 					entryId, "AssetEntries_AssetCategories", "categoryId");
 
 				copyProperties(
-					entryId, "AssetCategoryProperty", "categoryPropertyId");
+					entryId, "AssetCategoryProperty", "categoryPropertyId",
+					"categoryId");
 
 				String resourceName = AssetCategory.class.getName();
 
@@ -353,7 +348,8 @@ public class UpgradeAsset extends UpgradeProcess {
 	}
 
 	protected void copyProperties(
-			long categoryId, String tableName, String pkName)
+			long categoryId, String tableName, String pkName,
+			String assocationPKName)
 		throws Exception {
 
 		Connection con = null;
@@ -381,8 +377,9 @@ public class UpgradeAsset extends UpgradeProcess {
 				String value = rs.getString("value");
 
 				addProperty(
-					tableName, pkName, propertyId, companyId, userId, userName,
-					createDate, modifiedDate, categoryId, key, value);
+					tableName, pkName, assocationPKName, propertyId, companyId,
+					userId, userName, createDate, modifiedDate, categoryId, key,
+					value);
 			}
 		}
 		finally {
@@ -518,7 +515,8 @@ public class UpgradeAsset extends UpgradeProcess {
 
 				copyAssociations(entryId, "AssetEntries_AssetTags", "tagId");
 
-				copyProperties(entryId, "AssetTagProperty", "tagPropertyId");
+				copyProperties(
+					entryId, "AssetTagProperty", "tagPropertyId", "tagId");
 			}
 		}
 		finally {
