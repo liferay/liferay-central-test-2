@@ -24,6 +24,8 @@ import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressService;
+import com.liferay.portal.service.BranchLocalService;
+import com.liferay.portal.service.BranchService;
 import com.liferay.portal.service.BrowserTrackerLocalService;
 import com.liferay.portal.service.ClassNameLocalService;
 import com.liferay.portal.service.ClassNameService;
@@ -110,6 +112,7 @@ import com.liferay.portal.service.WorkflowDefinitionLinkLocalService;
 import com.liferay.portal.service.WorkflowInstanceLinkLocalService;
 import com.liferay.portal.service.persistence.AccountPersistence;
 import com.liferay.portal.service.persistence.AddressPersistence;
+import com.liferay.portal.service.persistence.BranchPersistence;
 import com.liferay.portal.service.persistence.BrowserTrackerPersistence;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
 import com.liferay.portal.service.persistence.ClusterGroupPersistence;
@@ -379,6 +382,60 @@ public abstract class GroupServiceBaseImpl extends PrincipalBean
 	 */
 	public void setAddressPersistence(AddressPersistence addressPersistence) {
 		this.addressPersistence = addressPersistence;
+	}
+
+	/**
+	 * Gets the branch local service.
+	 *
+	 * @return the branch local service
+	 */
+	public BranchLocalService getBranchLocalService() {
+		return branchLocalService;
+	}
+
+	/**
+	 * Sets the branch local service.
+	 *
+	 * @param branchLocalService the branch local service
+	 */
+	public void setBranchLocalService(BranchLocalService branchLocalService) {
+		this.branchLocalService = branchLocalService;
+	}
+
+	/**
+	 * Gets the branch remote service.
+	 *
+	 * @return the branch remote service
+	 */
+	public BranchService getBranchService() {
+		return branchService;
+	}
+
+	/**
+	 * Sets the branch remote service.
+	 *
+	 * @param branchService the branch remote service
+	 */
+	public void setBranchService(BranchService branchService) {
+		this.branchService = branchService;
+	}
+
+	/**
+	 * Gets the branch persistence.
+	 *
+	 * @return the branch persistence
+	 */
+	public BranchPersistence getBranchPersistence() {
+		return branchPersistence;
+	}
+
+	/**
+	 * Sets the branch persistence.
+	 *
+	 * @param branchPersistence the branch persistence
+	 */
+	public void setBranchPersistence(BranchPersistence branchPersistence) {
+		this.branchPersistence = branchPersistence;
 	}
 
 	/**
@@ -4612,6 +4669,12 @@ public abstract class GroupServiceBaseImpl extends PrincipalBean
 	protected AddressService addressService;
 	@BeanReference(type = AddressPersistence.class)
 	protected AddressPersistence addressPersistence;
+	@BeanReference(type = BranchLocalService.class)
+	protected BranchLocalService branchLocalService;
+	@BeanReference(type = BranchService.class)
+	protected BranchService branchService;
+	@BeanReference(type = BranchPersistence.class)
+	protected BranchPersistence branchPersistence;
 	@BeanReference(type = BrowserTrackerLocalService.class)
 	protected BrowserTrackerLocalService browserTrackerLocalService;
 	@BeanReference(type = BrowserTrackerPersistence.class)

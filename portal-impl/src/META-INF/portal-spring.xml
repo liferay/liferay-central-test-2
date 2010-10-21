@@ -7,6 +7,9 @@
 	<bean id="com.liferay.portal.service.AddressLocalService" class="com.liferay.portal.service.impl.AddressLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.AddressService" class="com.liferay.portal.service.impl.AddressServiceImpl" />
 	<bean id="com.liferay.portal.service.persistence.AddressPersistence" class="com.liferay.portal.service.persistence.AddressPersistenceImpl2" parent="basePersistence" />
+	<bean id="com.liferay.portal.service.BranchLocalService" class="com.liferay.portal.service.impl.BranchLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.BranchService" class="com.liferay.portal.service.impl.BranchServiceImpl" />
+	<bean id="com.liferay.portal.service.persistence.BranchPersistence" class="com.liferay.portal.service.persistence.BranchPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.BrowserTrackerLocalService" class="com.liferay.portal.service.impl.BrowserTrackerLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.persistence.BrowserTrackerPersistence" class="com.liferay.portal.service.persistence.BrowserTrackerPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.ClassNameLocalService" class="com.liferay.portal.service.impl.ClassNameLocalServiceImpl" />

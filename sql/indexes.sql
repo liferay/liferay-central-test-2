@@ -102,6 +102,9 @@ create index IX_967799C0 on BookmarksFolder (groupId, parentFolderId);
 create index IX_451E7AE3 on BookmarksFolder (uuid_);
 create unique index IX_DC2F8927 on BookmarksFolder (uuid_, groupId);
 
+create index IX_24ACF0A2 on Branch (groupId);
+create index IX_A984BEE1 on Branch (groupId, name);
+
 create unique index IX_E7B95510 on BrowserTracker (userId);
 
 create index IX_D6FD9496 on CalEvent (companyId);
