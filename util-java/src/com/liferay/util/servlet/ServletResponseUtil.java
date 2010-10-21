@@ -30,10 +30,15 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 import java.net.SocketException;
+
+import java.nio.channels.Channels;
+import java.nio.channels.FileChannel;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -222,6 +227,25 @@ public class ServletResponseUtil {
 			else {
 				throw ioe;
 			}
+		}
+	}
+
+	public static void write(
+			HttpServletResponse response, File file)
+		throws IOException {
+
+		FileChannel fileChannel = new FileInputStream(file).getChannel();
+
+		try {
+			int contentLength = (int) fileChannel.size();
+			response.setContentLength(contentLength);
+
+			fileChannel.transferTo(
+				0, contentLength,
+				Channels.newChannel(response.getOutputStream()));
+		}
+		finally {
+			fileChannel.close();
 		}
 	}
 

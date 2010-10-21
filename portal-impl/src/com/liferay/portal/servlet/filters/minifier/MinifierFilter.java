@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -153,7 +154,7 @@ public class MinifierFilter extends BasePortalFilter {
 		return sb.toString();
 	}
 
-	protected String getMinifiedBundleContent(
+	protected ObjectValuePair<String, File> getMinifiedBundleContent(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
 
@@ -215,7 +216,7 @@ public class MinifierFilter extends BasePortalFilter {
 			if (!staleCache) {
 				response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 
-				return FileUtil.read(cacheFile);
+				return new ObjectValuePair<String, File>(null, cacheFile);
 			}
 		}
 
@@ -246,10 +247,10 @@ public class MinifierFilter extends BasePortalFilter {
 
 		FileUtil.write(cacheFile, minifiedContent);
 
-		return minifiedContent;
+		return new ObjectValuePair<String, File>(minifiedContent, null);
 	}
 
-	protected String getMinifiedContent(
+	protected ObjectValuePair<String, File> getMinifiedContent(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
 		throws Exception {
@@ -293,8 +294,6 @@ public class MinifierFilter extends BasePortalFilter {
 			return null;
 		}
 
-		String minifiedContent = null;
-
 		StringBundler sb = new StringBundler(4);
 
 		sb.append(_tempDir);
@@ -316,15 +315,16 @@ public class MinifierFilter extends BasePortalFilter {
 		if ((cacheDataFile.exists()) &&
 			(cacheDataFile.lastModified() >= file.lastModified())) {
 
-			minifiedContent = FileUtil.read(cacheDataFile);
-
 			if (cacheContentTypeFile.exists()) {
 				String contentType = FileUtil.read(cacheContentTypeFile);
 
 				response.setContentType(contentType);
 			}
+			return new ObjectValuePair<String, File>(null, cacheDataFile);
 		}
 		else {
+			String minifiedContent = null;
+
 			if (realPath.endsWith(_CSS_EXTENSION)) {
 				if (_log.isInfoEnabled()) {
 					_log.info("Minifying CSS " + file);
@@ -381,9 +381,9 @@ public class MinifierFilter extends BasePortalFilter {
 			}
 
 			FileUtil.write(cacheDataFile, minifiedContent);
-		}
 
-		return minifiedContent;
+			return new ObjectValuePair<String, File>(minifiedContent, null);
+		}
 	}
 
 	protected String minifyCss(HttpServletRequest request, File file)
@@ -423,18 +423,26 @@ public class MinifierFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		String minifiedContent = getMinifiedContent(
-			request, response, filterChain);
+		ObjectValuePair<String, File> minifiedResult =
+			getMinifiedContent(request, response, filterChain);
 
-		if (Validator.isNull(minifiedContent)) {
-			minifiedContent = getMinifiedBundleContent(request, response);
+		if (minifiedResult == null) {
+			minifiedResult = getMinifiedBundleContent(request, response);
 		}
 
-		if (Validator.isNull(minifiedContent)) {
+		if (minifiedResult == null) {
 			processFilter(MinifierFilter.class, request, response, filterChain);
 		}
 		else {
-			ServletResponseUtil.write(response, minifiedContent);
+			String minifiedContent = minifiedResult.getKey();
+			File minifiedContentFile = minifiedResult.getValue();
+
+			if (minifiedContent != null) {
+				ServletResponseUtil.write(response, minifiedContent);
+			}
+			else {
+				ServletResponseUtil.write(response, minifiedContentFile);
+			}
 		}
 	}
 
