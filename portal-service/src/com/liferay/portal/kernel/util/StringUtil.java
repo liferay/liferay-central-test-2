@@ -1487,7 +1487,7 @@ public class StringUtil {
 	}
 
 	public static String unquote(String s) {
-		if (s == null) {
+		if (Validator.isNull(s)) {
 			return s;
 		}
 
