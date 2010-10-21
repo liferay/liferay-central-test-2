@@ -31,14 +31,46 @@
 	cursor: auto;
 }
 
+.aui-field-element {
+	display: inline-block;
+}
+
 .aui-form-validator-error-container {
-	background: url(<%= themeImagesPath %>/messages/error.png) no-repeat scroll 6px 50% #FDD;
-	border: 1px solid #F00;
+	color: #900;
+}
+
+.aui-form-validator-stack-error {
+	font-size: 0.9em;
+}
+
+.aui-form-validator-error-container .aui-field-element {
+	background: url(<%= themeImagesPath %>/messages/error.png) no-repeat scroll 100% 50%;
+	padding-right: 20px;
+}
+
+[class~="aui-form-validator-message"] {
+	background-color: #333;
+	clip: rect(0 0 0 0);
+	color: #fff;
 	display: block;
-	font-weight: normal;
-	margin: 3px 0;
-	padding: 6px;
-	padding-left: 30px;
+	margin-top: 2px;
+	padding: 5px;
+	position: absolute;
+	top: 100%;
+	width: 100%;
+	z-index: 5;
+}
+
+.aui-form-validator-error-container:hover .aui-form-validator-message {
+	clip: rect(auto auto auto auto);
+}
+
+.aui-form-validator-error-container:hover .aui-field-element {
+	position: relative;
+}
+
+.ie6 .aui-form-validator-message {
+	color: #777;
 }
 
 .lfr-input-text, .aui-form .aui-fieldset .aui-field.lfr-input-text-container input {
