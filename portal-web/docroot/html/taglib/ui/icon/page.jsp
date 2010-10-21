@@ -59,7 +59,11 @@ if (themeDisplay.isThemeImagesFastLoad() && !auiImage) {
 
 			imageFileName = src;
 
-			if (portletApp.isWARFile() && imageFileName.startsWith(portlet.getContextPath())) {
+			// LPS-12843
+			// if there is any context is set to portal.ctx with exception of the default /
+			// the "portal level" icons which come from the /html/icons folder isn't "sprited".
+
+			if (((portletApp.isWARFile() || !portlet.getContextPath().equals(StringPool.SLASH)) && imageFileName.startsWith(portlet.getContextPath()))) {
 				imageFileName = imageFileName.substring(portlet.getContextPath().length());
 			}
 
