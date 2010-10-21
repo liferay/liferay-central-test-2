@@ -52,8 +52,10 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
@@ -78,9 +80,16 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class WebServerServlet extends HttpServlet {
 
+	/**
+	 * @see com.liferay.portal.servlet.filters.virtualhost.VirtualHostFilter
+	 */
 	public static boolean hasFiles(HttpServletRequest request) {
 		try {
-			User user = PortalUtil.getUser(request);
+
+			// Do not use permission checking since this may be called from
+			// other contexts that are also managing the principal
+
+			User user = _getUser(request);
 
 			String path = HttpUtil.fixPath(request.getPathInfo());
 
@@ -98,7 +107,7 @@ public class WebServerServlet extends HttpServlet {
 
 				for (int i = 1; i < pathArray.length; i++) {
 					try {
-						DLFolder dlFolder = DLFolderServiceUtil.getFolder(
+						DLFolder dlFolder = DLFolderLocalServiceUtil.getFolder(
 							groupId, dlFolderId, pathArray[i]);
 
 						dlFolderId = dlFolder.getFolderId();
@@ -130,15 +139,7 @@ public class WebServerServlet extends HttpServlet {
 		throws IOException, ServletException {
 
 		try {
-			long companyId = PortalUtil.getCompanyId(request);
-
-			User user = PortalUtil.getUser(request);
-
-			if (user == null) {
-				Company company = CompanyLocalServiceUtil.getCompany(companyId);
-
-				user = company.getDefaultUser();
-			}
+			User user = _getUser(request);
 
 			PrincipalThreadLocal.setName(user.getUserId());
 
@@ -173,6 +174,33 @@ public class WebServerServlet extends HttpServlet {
 		}
 		catch (Exception e) {
 			PortalUtil.sendError(e, request, response);
+		}
+	}
+
+	protected DLFileEntry getDLFileEntry(String[] pathArray) throws Exception {
+		if (pathArray.length == 1) {
+			long dlFileShortcutId = GetterUtil.getLong(pathArray[0]);
+
+			DLFileShortcut dlFileShortcut =
+				DLFileShortcutServiceUtil.getFileShortcut(dlFileShortcutId);
+
+			return DLFileEntryServiceUtil.getFileEntry(
+				dlFileShortcut.getGroupId(), dlFileShortcut.getToFolderId(),
+				dlFileShortcut.getToName());
+		}
+		else if (pathArray.length == 2) {
+			long groupId = GetterUtil.getLong(pathArray[0]);
+
+			return DLFileEntryServiceUtil.getFileEntryByUuidAndGroupId(
+				pathArray[1], groupId);
+		}
+		else {
+			long groupId = GetterUtil.getLong(pathArray[0]);
+			long dlFolderId = GetterUtil.getLong(pathArray[1]);
+			String fileName = HttpUtil.decodeURL(pathArray[2], true);
+
+			return DLFileEntryServiceUtil.getFileEntryByTitle(
+				groupId, dlFolderId, fileName);
 		}
 	}
 
@@ -264,7 +292,7 @@ public class WebServerServlet extends HttpServlet {
 			User user, String[] pathArray)
 		throws Exception {
 
-		DLFileEntry dlFileEntry = _getDLFileEntry(pathArray);
+		DLFileEntry dlFileEntry = getDLFileEntry(pathArray);
 
 		if (dlFileEntry == null) {
 			throw new NoSuchFileEntryException();
@@ -419,16 +447,17 @@ public class WebServerServlet extends HttpServlet {
 			long dlFileShortcutId = GetterUtil.getLong(pathArray[0]);
 
 			DLFileShortcut dlFileShortcut =
-				DLFileShortcutServiceUtil.getFileShortcut(dlFileShortcutId);
+				DLFileShortcutLocalServiceUtil.getFileShortcut(
+					dlFileShortcutId);
 
-			return DLFileEntryServiceUtil.getFileEntry(
+			return DLFileEntryLocalServiceUtil.getFileEntry(
 				dlFileShortcut.getGroupId(), dlFileShortcut.getToFolderId(),
 				dlFileShortcut.getToName());
 		}
 		else if (pathArray.length == 2) {
 			long groupId = GetterUtil.getLong(pathArray[0]);
 
-			return DLFileEntryServiceUtil.getFileEntryByUuidAndGroupId(
+			return DLFileEntryLocalServiceUtil.getFileEntryByUuidAndGroupId(
 				pathArray[1], groupId);
 		}
 		else {
@@ -436,7 +465,7 @@ public class WebServerServlet extends HttpServlet {
 			long dlFolderId = GetterUtil.getLong(pathArray[1]);
 			String fileName = HttpUtil.decodeURL(pathArray[2], true);
 
-			return DLFileEntryServiceUtil.getFileEntryByTitle(
+			return DLFileEntryLocalServiceUtil.getFileEntryByTitle(
 				groupId, dlFolderId, fileName);
 		}
 	}
@@ -458,6 +487,20 @@ public class WebServerServlet extends HttpServlet {
 		Group group = user.getGroup();
 
 		return group.getGroupId();
+	}
+
+	private static User _getUser(HttpServletRequest request) throws Exception {
+		User user = PortalUtil.getUser(request);
+
+		if (user == null) {
+			long companyId = PortalUtil.getCompanyId(request);
+
+			Company company = CompanyLocalServiceUtil.getCompany(companyId);
+
+			user = company.getDefaultUser();
+		}
+
+		return user;
 	}
 
 	private static final String _DATE_FORMAT_PATTERN = "d MMM yyyy HH:mm z";
