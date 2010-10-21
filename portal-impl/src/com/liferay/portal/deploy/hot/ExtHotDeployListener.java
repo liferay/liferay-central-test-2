@@ -126,8 +126,9 @@ public class ExtHotDeployListener extends BaseHotDeployListener {
 			_log.debug("Invoking deploy for " + servletContextName);
 		}
 
-		String xml = HttpUtil.URLtoString(servletContext.getResource(
-			"/WEB-INF/ext-" + servletContextName + ".xml"));
+		String xml = HttpUtil.URLtoString(
+			servletContext.getResource(
+				"/WEB-INF/ext-" + servletContextName + ".xml"));
 
 		if (xml == null) {
 			return;
@@ -199,6 +200,14 @@ public class ExtHotDeployListener extends BaseHotDeployListener {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking undeploy for " + servletContextName);
+		}
+
+		String xml = HttpUtil.URLtoString(
+			servletContext.getResource(
+				"/WEB-INF/ext-" + servletContextName + ".xml"));
+
+		if (xml == null) {
+			return;
 		}
 
 		if (_log.isInfoEnabled()) {
