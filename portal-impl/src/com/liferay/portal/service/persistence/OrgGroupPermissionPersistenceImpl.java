@@ -1371,8 +1371,6 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	protected AccountPersistence accountPersistence;
 	@BeanReference(type = AddressPersistence.class)
 	protected AddressPersistence addressPersistence;
-	@BeanReference(type = BranchPersistence.class)
-	protected BranchPersistence branchPersistence;
 	@BeanReference(type = BrowserTrackerPersistence.class)
 	protected BrowserTrackerPersistence browserTrackerPersistence;
 	@BeanReference(type = ClassNamePersistence.class)

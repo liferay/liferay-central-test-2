@@ -25,18 +25,6 @@
 		<property name="service" ref="com.liferay.portal.service.AddressService" />
 		<property name="serviceInterface" value="com.liferay.portal.service.AddressService" />
 	</bean>
-	<bean name="/com_liferay_portal_service_spring_BranchService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.BranchService" />
-		<property name="serviceInterface" value="com.liferay.portal.service.BranchService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_BranchService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.BranchService" />
-		<property name="serviceInterface" value="com.liferay.portal.service.BranchService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_BranchService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.BranchService" />
-		<property name="serviceInterface" value="com.liferay.portal.service.BranchService" />
-	</bean>
 	<bean name="/com_liferay_portal_service_spring_ClassNameService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.ClassNameService" />
 		<property name="serviceInterface" value="com.liferay.portal.service.ClassNameService" />

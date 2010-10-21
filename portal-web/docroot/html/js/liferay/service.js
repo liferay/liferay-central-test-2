@@ -12,16 +12,6 @@ Liferay.Service.registerClass(
 );
 
 Liferay.Service.registerClass(
-	Liferay.Service.Portal, "Branch",
-	{
-		addBranch: true,
-		deleteBranch: true,
-		getBranches: true,
-		updateBranch: true
-	}
-);
-
-Liferay.Service.registerClass(
 	Liferay.Service.Portal, "ClassName",
 	{
 		getClassName: true,
