@@ -67,8 +67,9 @@ public class LayoutTemplateHotDeployListener extends BaseHotDeployListener {
 		}
 
 		String[] xmls = new String[] {
-			HttpUtil.URLtoString(servletContext.getResource(
-				"/WEB-INF/liferay-layout-templates.xml"))
+			HttpUtil.URLtoString(
+				servletContext.getResource(
+					"/WEB-INF/liferay-layout-templates.xml"))
 		};
 
 		if (xmls[0] == null) {

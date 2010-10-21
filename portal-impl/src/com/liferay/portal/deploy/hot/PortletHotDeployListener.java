@@ -204,12 +204,14 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		// Initialize portlets
 
 		String[] xmls = new String[] {
-			HttpUtil.URLtoString(servletContext.getResource(
-				"/WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_STANDARD)),
-			HttpUtil.URLtoString(servletContext.getResource(
-				"/WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_CUSTOM)),
-			HttpUtil.URLtoString(servletContext.getResource(
-				"/WEB-INF/liferay-portlet.xml")),
+			HttpUtil.URLtoString(
+				servletContext.getResource(
+					"/WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_STANDARD)),
+			HttpUtil.URLtoString(
+				servletContext.getResource(
+					"/WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_CUSTOM)),
+			HttpUtil.URLtoString(
+				servletContext.getResource("/WEB-INF/liferay-portlet.xml")),
 			HttpUtil.URLtoString(servletContext.getResource("/WEB-INF/web.xml"))
 		};
 
@@ -283,8 +285,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		// Portlet display
 
-		String xml = HttpUtil.URLtoString(servletContext.getResource(
-			"/WEB-INF/liferay-display.xml"));
+		String xml = HttpUtil.URLtoString(
+			servletContext.getResource("/WEB-INF/liferay-display.xml"));
 
 		PortletCategory newPortletCategory =
 			PortletLocalServiceUtil.getWARDisplay(servletContextName, xml);

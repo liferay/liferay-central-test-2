@@ -66,8 +66,9 @@ public class ThemeHotDeployListener extends BaseHotDeployListener {
 		}
 
 		String[] xmls = new String[] {
-			HttpUtil.URLtoString(servletContext.getResource(
-				"/WEB-INF/liferay-look-and-feel.xml"))
+			HttpUtil.URLtoString(
+				servletContext.getResource(
+					"/WEB-INF/liferay-look-and-feel.xml"))
 		};
 
 		if (xmls[0] == null) {
