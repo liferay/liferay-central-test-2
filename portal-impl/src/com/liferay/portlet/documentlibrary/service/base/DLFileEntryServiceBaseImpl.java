@@ -17,7 +17,6 @@ package com.liferay.portlet.documentlibrary.service.base;
 import com.liferay.counter.service.CounterLocalService;
 
 import com.liferay.documentlibrary.service.DLLocalService;
-import com.liferay.documentlibrary.service.DLService;
 
 import com.liferay.portal.kernel.annotation.BeanReference;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
@@ -440,24 +439,6 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 	 */
 	public void setDLLocalService(DLLocalService dlLocalService) {
 		this.dlLocalService = dlLocalService;
-	}
-
-	/**
-	 * Gets the d l remote service.
-	 *
-	 * @return the d l remote service
-	 */
-	public DLService getDLService() {
-		return dlService;
-	}
-
-	/**
-	 * Sets the d l remote service.
-	 *
-	 * @param dlService the d l remote service
-	 */
-	public void setDLService(DLService dlService) {
-		this.dlService = dlService;
 	}
 
 	/**
@@ -1349,8 +1330,6 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = DLLocalService.class)
 	protected DLLocalService dlLocalService;
-	@BeanReference(type = DLService.class)
-	protected DLService dlService;
 	@BeanReference(type = LockLocalService.class)
 	protected LockLocalService lockLocalService;
 	@BeanReference(type = LockPersistence.class)

@@ -3,5 +3,5 @@
 
 <service-builder package-path="com.liferay.documentlibrary">
 	<namespace>DL</namespace>
-	<entity name="DL" local-service="true" remote-service="true" />
+	<entity name="DL" local-service="true" remote-service="false" />
 </service-builder>
