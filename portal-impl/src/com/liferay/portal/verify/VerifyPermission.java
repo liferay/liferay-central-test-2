@@ -33,11 +33,11 @@ public class VerifyPermission extends VerifyProcess {
 		List<String> modelNames = ResourceActionsUtil.getModelNames();
 
 		for (String modelName : modelNames) {
-			List<String> defaultActionIds =
+			List<String> actionIds =
 				ResourceActionsUtil.getModelResourceActions(modelName);
 
 			ResourceActionLocalServiceUtil.checkResourceActions(
-				modelName, defaultActionIds);
+				modelName, actionIds);
 		}
 	}
 
