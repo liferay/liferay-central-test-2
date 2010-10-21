@@ -64,24 +64,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 	public void addDirectory(long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
 
-		if ((dirName == null || dirName.equals("/")) ||
-			(dirName.indexOf("\\\\") != -1) ||
-			(dirName.indexOf("//") != -1) ||
-			(dirName.indexOf(":") != -1) ||
-			(dirName.indexOf("*") != -1) ||
-			(dirName.indexOf("?") != -1) ||
-			(dirName.indexOf("\"") != -1) ||
-			(dirName.indexOf("<") != -1) ||
-			(dirName.indexOf(">") != -1) ||
-			(dirName.indexOf("|") != -1) ||
-			(dirName.indexOf("[") != -1) ||
-			(dirName.indexOf("]") != -1) ||
-			(dirName.indexOf("'") != -1) ||
-			(dirName.indexOf("..\\") != -1) ||
-			(dirName.indexOf("../") != -1) ||
-			(dirName.indexOf("\\..") != -1) ||
-			(dirName.indexOf("/..") != -1)) {
-
+		if (!isValid(dirName) || dirName.equals("/")) {
 			throw new DirectoryNameException(dirName);
 		}
 
@@ -360,23 +343,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 	public void validate(String fileName, boolean validateFileExtension)
 		throws PortalException, SystemException {
 
-		if ((fileName.indexOf("\\\\") != -1) ||
-			(fileName.indexOf("//") != -1) ||
-			(fileName.indexOf(":") != -1) ||
-			(fileName.indexOf("*") != -1) ||
-			(fileName.indexOf("?") != -1) ||
-			(fileName.indexOf("\"") != -1) ||
-			(fileName.indexOf("<") != -1) ||
-			(fileName.indexOf(">") != -1) ||
-			(fileName.indexOf("|") != -1) ||
-			(fileName.indexOf("[") != -1) ||
-			(fileName.indexOf("]") != -1) ||
-			(fileName.indexOf("'") != -1) ||
-			(fileName.indexOf("..\\") != -1) ||
-			(fileName.indexOf("../") != -1) ||
-			(fileName.indexOf("\\..") != -1) ||
-			(fileName.indexOf("/..") != -1)) {
-
+		if (!isValid(fileName)) {
 			throw new FileNameException(fileName);
 		}
 
@@ -482,6 +449,31 @@ public class DLLocalServiceImpl implements DLLocalService {
 		catch (IOException ioe) {
 			throw new FileSizeException(ioe.getMessage());
 		}
+	}
+
+	protected boolean isValid(String name) {
+		if ((name == null) ||
+			(name.contains("\\\\")) ||
+			(name.contains("//")) ||
+			(name.contains(":")) ||
+			(name.contains("*")) ||
+			(name.contains("?")) ||
+			(name.contains("\"")) ||
+			(name.contains("<")) ||
+			(name.contains(">")) ||
+			(name.contains("|")) ||
+			(name.contains("[")) ||
+			(name.contains("]")) ||
+			(name.contains("'")) ||
+			(name.contains("..\\")) ||
+			(name.contains("../")) ||
+			(name.contains("\\..")) ||
+			(name.contains("/.."))) {
+
+			return false;
+		}
+
+		return true;
 	}
 
 	private static final String[] _KEYWORDS_FIELDS = {
