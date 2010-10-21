@@ -2717,8 +2717,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 	protected ResourceCodePersistence resourceCodePersistence;
 	@BeanReference(type = ResourcePermissionPersistence.class)
 	protected ResourcePermissionPersistence resourcePermissionPersistence;
-	@BeanReference(type = RevisionPersistence.class)
-	protected RevisionPersistence revisionPersistence;
 	@BeanReference(type = RolePersistence.class)
 	protected RolePersistence rolePersistence;
 	@BeanReference(type = ServiceComponentPersistence.class)

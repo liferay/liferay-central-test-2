@@ -88,8 +88,6 @@ import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourcePermissionLocalService;
 import com.liferay.portal.service.ResourcePermissionService;
 import com.liferay.portal.service.ResourceService;
-import com.liferay.portal.service.RevisionLocalService;
-import com.liferay.portal.service.RevisionService;
 import com.liferay.portal.service.RoleLocalService;
 import com.liferay.portal.service.RoleService;
 import com.liferay.portal.service.ServiceComponentLocalService;
@@ -163,7 +161,6 @@ import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourcePermissionFinder;
 import com.liferay.portal.service.persistence.ResourcePermissionPersistence;
 import com.liferay.portal.service.persistence.ResourcePersistence;
-import com.liferay.portal.service.persistence.RevisionPersistence;
 import com.liferay.portal.service.persistence.RoleFinder;
 import com.liferay.portal.service.persistence.RolePersistence;
 import com.liferay.portal.service.persistence.ServiceComponentPersistence;
@@ -2446,61 +2443,6 @@ public abstract class LayoutSetPrototypeLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the revision local service.
-	 *
-	 * @return the revision local service
-	 */
-	public RevisionLocalService getRevisionLocalService() {
-		return revisionLocalService;
-	}
-
-	/**
-	 * Sets the revision local service.
-	 *
-	 * @param revisionLocalService the revision local service
-	 */
-	public void setRevisionLocalService(
-		RevisionLocalService revisionLocalService) {
-		this.revisionLocalService = revisionLocalService;
-	}
-
-	/**
-	 * Gets the revision remote service.
-	 *
-	 * @return the revision remote service
-	 */
-	public RevisionService getRevisionService() {
-		return revisionService;
-	}
-
-	/**
-	 * Sets the revision remote service.
-	 *
-	 * @param revisionService the revision remote service
-	 */
-	public void setRevisionService(RevisionService revisionService) {
-		this.revisionService = revisionService;
-	}
-
-	/**
-	 * Gets the revision persistence.
-	 *
-	 * @return the revision persistence
-	 */
-	public RevisionPersistence getRevisionPersistence() {
-		return revisionPersistence;
-	}
-
-	/**
-	 * Sets the revision persistence.
-	 *
-	 * @param revisionPersistence the revision persistence
-	 */
-	public void setRevisionPersistence(RevisionPersistence revisionPersistence) {
-		this.revisionPersistence = revisionPersistence;
-	}
-
-	/**
 	 * Gets the role local service.
 	 *
 	 * @return the role local service
@@ -3647,12 +3589,6 @@ public abstract class LayoutSetPrototypeLocalServiceBaseImpl
 	protected ResourcePermissionPersistence resourcePermissionPersistence;
 	@BeanReference(type = ResourcePermissionFinder.class)
 	protected ResourcePermissionFinder resourcePermissionFinder;
-	@BeanReference(type = RevisionLocalService.class)
-	protected RevisionLocalService revisionLocalService;
-	@BeanReference(type = RevisionService.class)
-	protected RevisionService revisionService;
-	@BeanReference(type = RevisionPersistence.class)
-	protected RevisionPersistence revisionPersistence;
 	@BeanReference(type = RoleLocalService.class)
 	protected RoleLocalService roleLocalService;
 	@BeanReference(type = RoleService.class)

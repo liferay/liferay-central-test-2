@@ -45,7 +45,6 @@
 	<import class="com.liferay.portal.model.ResourceAction" />
 	<import class="com.liferay.portal.model.ResourceCode" />
 	<import class="com.liferay.portal.model.ResourcePermission" />
-	<import class="com.liferay.portal.model.Revision" />
 	<import class="com.liferay.portal.model.Role" />
 	<import class="com.liferay.portal.model.ServiceComponent" />
 	<import class="com.liferay.portal.model.Shard" />
@@ -685,37 +684,6 @@
 		<property name="primKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="roleId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="actionIds" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-	</class>
-	<class name="com.liferay.portal.model.impl.RevisionImpl" table="Revision">
-		<cache usage="read-write" />
-		<id name="revisionId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="createDate" type="org.hibernate.type.TimestampType" />
-		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="branchId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="plid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="parentRevisionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="head" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="typeSettings" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="iconImage" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="iconImageId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="themeId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="colorSchemeId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="wapThemeId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="wapColorSchemeId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="css" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="statusDate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.RoleImpl" table="Role_">
 		<cache usage="read-write" />

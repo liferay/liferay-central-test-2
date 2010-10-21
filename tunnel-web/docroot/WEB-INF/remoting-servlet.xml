@@ -337,18 +337,6 @@
 		<property name="service" ref="com.liferay.portal.service.ResourcePermissionService" />
 		<property name="serviceInterface" value="com.liferay.portal.service.ResourcePermissionService" />
 	</bean>
-	<bean name="/com_liferay_portal_service_spring_RevisionService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.RevisionService" />
-		<property name="serviceInterface" value="com.liferay.portal.service.RevisionService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_RevisionService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.RevisionService" />
-		<property name="serviceInterface" value="com.liferay.portal.service.RevisionService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_RevisionService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.RevisionService" />
-		<property name="serviceInterface" value="com.liferay.portal.service.RevisionService" />
-	</bean>
 	<bean name="/com_liferay_portal_service_spring_RoleService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.RoleService" />
 		<property name="serviceInterface" value="com.liferay.portal.service.RoleService" />
