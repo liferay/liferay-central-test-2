@@ -1561,13 +1561,16 @@ public class StringUtil {
 			String token = st.nextToken();
 
 			Matcher matcher = pattern.matcher(token);
-			
-			while (matcher.find()) {
-				token = token.replaceAll(matcher.group(),
-					highlight1 + matcher.group() + highlight2);
-			}
 
-			sb.append(token);
+			if (matcher.find()) {
+				String highlightedToken = matcher.replaceAll(
+					highlight1 + matcher.group() + highlight2);
+
+				sb.append(highlightedToken);
+			}
+			else {
+				sb.append(token);
+			}
 
 			if (st.hasMoreTokens()) {
 				sb.append(StringPool.SPACE);
