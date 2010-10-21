@@ -160,7 +160,16 @@ public class UpgradeAsset extends UpgradeProcess {
 			sb.append(" (");
 			sb.append(pkName);
 			sb.append(", companyId, userId, userName, createDate, ");
-			sb.append("modifiedDate, tagId, key_, value) values (?, ?, ?, ");
+			sb.append("modifiedDate, ");
+
+			if (tableName.equalsIgnoreCase("AssetCategoryProperty")) {
+				sb.append("categoryId, ");
+			}
+			else if (tableName.equalsIgnoreCase("AssetTagProperty")) {
+				sb.append("tagId, ");
+			}
+
+			sb.append("key_, value) values (?, ?, ?, ");
 			sb.append("?, ?, ?, ?, ?, ?)");
 
 			String sql = sb.toString();
