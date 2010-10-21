@@ -95,45 +95,6 @@
 			<finder-column name="primary" />
 		</finder>
 	</entity>
-	<entity name="Branch" local-service="true" remote-service="true">
-
-		<!-- PK fields -->
-
-		<column name="branchId" type="long" primary="true" />
-
-		<!-- Group Instance -->
-
-		<column name="groupId" type="long" />
-
-		<!-- Audit fields -->
-
-		<column name="companyId" type="long" />
-		<column name="userId" type="long" />
-		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
-
-		<!-- Other fields -->
-
-		<column name="name" type="String" />
-		<column name="description" type="String" />
-
-		<!-- Order -->
-
-		<order by="asc">
-			<order-column name="name" />
-		</order>
-
-		<!-- Finder methods -->
-
-		<finder name="G" return-type="Collection">
-			<finder-column name="groupId" />
-		</finder>
-		<finder name="G_N" return-type="Branch">
-			<finder-column name="groupId" />
-			<finder-column name="name" />
-		</finder>
-	</entity>
 	<entity name="BrowserTracker" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
@@ -2088,7 +2049,6 @@
 		<exception>AddressCity</exception>
 		<exception>AddressStreet</exception>
 		<exception>AddressZip</exception>
-		<exception>BranchName</exception>
 		<exception>CompanyMaxUsers</exception>
 		<exception>CompanyMx</exception>
 		<exception>CompanyVirtualHost</exception>
@@ -2143,7 +2103,6 @@
 		<exception>RegionCode</exception>
 		<exception>RegionName</exception>
 		<exception>RemoteExport</exception>
-		<exception>RequiredBranch</exception>
 		<exception>RequiredGroup</exception>
 		<exception>RequiredLayout</exception>
 		<exception>RequiredOrganization</exception>
