@@ -18,6 +18,7 @@
 
 <%@ page import="com.liferay.portal.ResourcePrimKeyException" %>
 <%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
+<%@ page import="com.liferay.portal.service.permission.PortalPermissionUtil" %>
 <%@ page import="com.liferay.portlet.blogs.model.BlogsEntry" %>
 <%@ page import="com.liferay.portlet.bookmarks.model.BookmarksEntry" %>
 <%@ page import="com.liferay.portlet.bookmarks.model.BookmarksFolder" %>

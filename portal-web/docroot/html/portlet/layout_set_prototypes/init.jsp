@@ -19,3 +19,4 @@
 <%@ page import="com.liferay.portal.NoSuchLayoutSetPrototypeException" %>
 <%@ page import="com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.service.permission.LayoutSetPrototypePermissionUtil" %>
+<%@ page import="com.liferay.portal.service.permission.PortalPermissionUtil" %>
