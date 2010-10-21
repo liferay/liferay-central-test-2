@@ -31,41 +31,41 @@ Map<String, List<ValidatorTag>> validatorTagsMap = (Map<String, List<ValidatorTa
 		{
 			id: '<%= namespace + name %>'
 
+			<c:if test="<%= validatorTagsMap != null %>">
+				, fieldRules: [
+
+					<%
+					int i = 0;
+
+					for (String fieldName : validatorTagsMap.keySet()) {
+						List<ValidatorTag> validatorTags = validatorTagsMap.get(fieldName);
+
+						for (ValidatorTag validatorTag : validatorTags) {
+					%>
+
+							<%= i != 0 ? StringPool.COMMA : StringPool.BLANK %>
+
+							{
+								body: <%= validatorTag.getBody() %>,
+								errorMessage: '<%= validatorTag.getErrorMessage() %>',
+								fieldName: '<%= namespace + fieldName %>',
+								isCustom: <%= validatorTag.isCustom() %>,
+								validatorName: '<%= validatorTag.getName() %>'
+							}
+
+					<%
+							i++;
+						}
+					}
+					%>
+
+				]
+			</c:if>
+
 			<c:if test="<%= Validator.isNotNull(onSubmit) %>">
 				, onSubmit: function(event) {
 					<%= onSubmit %>
 				}
-			</c:if>
-
-			<c:if test="<%= validatorTagsMap != null %>">
-				,fieldRules: [
-
-				<%
-				int i = 0;
-
-				for (String fieldName : validatorTagsMap.keySet()) {
-					List<ValidatorTag> validatorTags = validatorTagsMap.get(fieldName);
-
-					for (ValidatorTag validatorTag : validatorTags) {
-				%>
-
-						<%= i != 0 ? StringPool.COMMA : StringPool.BLANK %>
-
-						{
-							body: <%= validatorTag.getBody() %>,
-							errorMessage: '<%= validatorTag.getErrorMessage() %>',
-							fieldName: '<%= namespace + fieldName %>',
-							isCustom: <%= validatorTag.isCustom() %>,
-							validatorName: '<%= validatorTag.getName() %>'
-						}
-
-				<%
-						i++;
-					}
-				}
-				%>
-
-				]
 			</c:if>
 		}
 	);
