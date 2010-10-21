@@ -37,8 +37,9 @@ public interface DLLocalService {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, long fileEntryId, String properties,
-			Date modifiedDate, ServiceContext serviceContext, File file)
+			String fileName, boolean validateFileExtension, long fileEntryId,
+			String properties, Date modifiedDate, ServiceContext serviceContext,
+			InputStream is)
 		throws PortalException, SystemException;
 
 	public void addFile(
@@ -49,9 +50,8 @@ public interface DLLocalService {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, boolean validateFileExtension, long fileEntryId,
-			String properties, Date modifiedDate, ServiceContext serviceContext,
-			InputStream is)
+			String fileName, long fileEntryId, String properties,
+			Date modifiedDate, ServiceContext serviceContext, File file)
 		throws PortalException, SystemException;
 
 	public void checkRoot(long companyId) throws SystemException;
@@ -62,20 +62,20 @@ public interface DLLocalService {
 
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
-			String fileName, String versionNumber)
+			String fileName)
 		throws PortalException, SystemException;
 
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
-			String fileName)
+			String fileName, String versionNumber)
+		throws PortalException, SystemException;
+
+	public byte[] getFile(long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException;
 
 	public byte[] getFile(
 			long companyId, long repositoryId, String fileName,
 			String versionNumber)
-		throws PortalException, SystemException;
-
-	public byte[] getFile(long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException;
 
 	public InputStream getFileAsStream(
@@ -87,11 +87,11 @@ public interface DLLocalService {
 			String versionNumber)
 		throws PortalException, SystemException;
 
-	public long getFileSize(long companyId, long repositoryId, String fileName)
-		throws PortalException, SystemException;
-
 	public String[] getFileNames(
 			long companyId, long repositoryId, String dirName)
+		throws PortalException, SystemException;
+
+	public long getFileSize(long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException;
 
 	public boolean hasFile(
@@ -109,14 +109,20 @@ public interface DLLocalService {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
+			long newRepositoryId, String fileName, long fileEntryId)
+		throws PortalException, SystemException;
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String newFileName, boolean reindex)
 		throws PortalException, SystemException;
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String versionNumber, String sourceFileName,
-			long fileEntryId, String properties, Date modifiedDate,
-			ServiceContext serviceContext, File file)
+			String fileName, String fileExtension,
+			boolean validateFileExtension, String versionNumber,
+			String sourceFileName, long fileEntryId, String properties,
+			Date modifiedDate, ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException;
 
 	public void updateFile(
@@ -128,15 +134,9 @@ public interface DLLocalService {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
-			long newRepositoryId, String fileName, long fileEntryId)
-		throws PortalException, SystemException;
-
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String fileExtension,
-			boolean validateFileExtension, String versionNumber,
-			String sourceFileName, long fileEntryId, String properties,
-			Date modifiedDate, ServiceContext serviceContext, InputStream is)
+			String fileName, String versionNumber, String sourceFileName,
+			long fileEntryId, String properties, Date modifiedDate,
+			ServiceContext serviceContext, File file)
 		throws PortalException, SystemException;
 
 	public void validate(

@@ -90,6 +90,20 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, boolean validateFileExtension, long fileEntryId,
+			String properties, Date modifiedDate, ServiceContext serviceContext,
+			InputStream is)
+		throws PortalException, SystemException {
+
+		validate(fileName, validateFileExtension, is);
+
+		hook.addFile(
+			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
+			properties, modifiedDate, serviceContext, is);
+	}
+
+	public void addFile(
+			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, long fileEntryId, String properties,
 			Date modifiedDate, ServiceContext serviceContext, byte[] bytes)
 		throws PortalException, SystemException {
@@ -112,20 +126,6 @@ public class DLLocalServiceImpl implements DLLocalService {
 		hook.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
 			properties, modifiedDate, serviceContext, file);
-	}
-
-	public void addFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, boolean validateFileExtension, long fileEntryId,
-			String properties, Date modifiedDate, ServiceContext serviceContext,
-			InputStream is)
-		throws PortalException, SystemException {
-
-		validate(fileName, validateFileExtension, is);
-
-		hook.addFile(
-			companyId, portletId, groupId, repositoryId, fileName, fileEntryId,
-			properties, modifiedDate, serviceContext, is);
 	}
 
 	public void checkRoot(long companyId) throws SystemException {
@@ -302,6 +302,33 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String newFileName, boolean reindex)
+		throws PortalException, SystemException {
+
+		hook.updateFile(
+			companyId, portletId, groupId, repositoryId, fileName, newFileName,
+			reindex);
+	}
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String fileName, String fileExtension,
+			boolean validateFileExtension, String versionNumber,
+			String sourceFileName, long fileEntryId, String properties,
+			Date modifiedDate, ServiceContext serviceContext, InputStream is)
+		throws PortalException, SystemException {
+
+		validate(
+			fileName, fileExtension, sourceFileName, validateFileExtension, is);
+
+		hook.updateFile(
+			companyId, portletId, groupId, repositoryId, fileName,
+			versionNumber, sourceFileName, fileEntryId, properties,
+			modifiedDate, serviceContext, is);
+	}
+
+	public void updateFile(
+			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String versionNumber, String sourceFileName,
 			long fileEntryId, String properties, Date modifiedDate,
 			ServiceContext serviceContext, byte[] bytes)
@@ -328,33 +355,6 @@ public class DLLocalServiceImpl implements DLLocalService {
 			companyId, portletId, groupId, repositoryId, fileName,
 			versionNumber, sourceFileName, fileEntryId, properties,
 			modifiedDate, serviceContext, file);
-	}
-
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String newFileName, boolean reindex)
-		throws PortalException, SystemException {
-
-		hook.updateFile(
-			companyId, portletId, groupId, repositoryId, fileName, newFileName,
-			reindex);
-	}
-
-	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String fileExtension,
-			boolean validateFileExtension, String versionNumber,
-			String sourceFileName, long fileEntryId, String properties,
-			Date modifiedDate, ServiceContext serviceContext, InputStream is)
-		throws PortalException, SystemException {
-
-		validate(
-			fileName, fileExtension, sourceFileName, validateFileExtension, is);
-
-		hook.updateFile(
-			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, fileEntryId, properties,
-			modifiedDate, serviceContext, is);
 	}
 
 	public void validate(String fileName, boolean validateFileExtension)
@@ -484,17 +484,17 @@ public class DLLocalServiceImpl implements DLLocalService {
 		}
 	}
 
-	@BeanReference(type = GroupLocalService.class)
-	protected GroupLocalService groupLocalService;
+	private static final String[] _KEYWORDS_FIELDS = {
+		Field.ASSET_TAG_NAMES, Field.CONTENT, Field.PROPERTIES
+	};
 
 	@BeanReference(type = DLFolderService.class)
 	protected DLFolderService dlFolderService;
 
+	@BeanReference(type = GroupLocalService.class)
+	protected GroupLocalService groupLocalService;
+
 	@BeanReference(type = Hook.class)
 	protected Hook hook;
-
-	private static final String[] _KEYWORDS_FIELDS = {
-		Field.ASSET_TAG_NAMES, Field.CONTENT, Field.PROPERTIES
-	};
 
 }
