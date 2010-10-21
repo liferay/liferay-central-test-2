@@ -922,6 +922,12 @@ public class UserLocalServiceUtil {
 			emailAddress2);
 	}
 
+	public static void updateFacebookId(long userId, long facebookId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().updateFacebookId(userId, facebookId);
+	}
+
 	public static void updateGroups(long userId, long[] newGroupIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

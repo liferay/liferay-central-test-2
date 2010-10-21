@@ -898,6 +898,12 @@ public class UserLocalServiceWrapper implements UserLocalService {
 			emailAddress1, emailAddress2);
 	}
 
+	public void updateFacebookId(long userId, long facebookId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_userLocalService.updateFacebookId(userId, facebookId);
+	}
+
 	public void updateGroups(long userId, long[] newGroupIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

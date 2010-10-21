@@ -1972,6 +1972,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return user;
 	}
 
+	public void updateFacebookId(long userId, long facebookId)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		user.setFacebookId(facebookId);
+
+		userPersistence.update(user, false);
+	}
+
 	public void updateGroups(long userId, long[] newGroupIds)
 		throws PortalException, SystemException {
 
