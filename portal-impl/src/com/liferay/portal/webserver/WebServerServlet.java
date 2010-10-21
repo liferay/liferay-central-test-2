@@ -80,7 +80,7 @@ public class WebServerServlet extends HttpServlet {
 
 	public static boolean hasFiles(HttpServletRequest request) {
 		try {
-			User user = initPrincipal(request);
+			User user = PortalUtil.getUser(request);
 
 			String path = HttpUtil.fixPath(request.getPathInfo());
 
@@ -130,7 +130,22 @@ public class WebServerServlet extends HttpServlet {
 		throws IOException, ServletException {
 
 		try {
-			User user = initPrincipal(request);
+			long companyId = PortalUtil.getCompanyId(request);
+
+			User user = PortalUtil.getUser(request);
+
+			if (user == null) {
+				Company company = CompanyLocalServiceUtil.getCompany(companyId);
+
+				user = company.getDefaultUser();
+			}
+
+			PrincipalThreadLocal.setName(user.getUserId());
+
+			PermissionChecker permissionChecker =
+				PermissionCheckerFactoryUtil.create(user, true);
+
+			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
 			String path = HttpUtil.fixPath(request.getPathInfo());
 			String[] pathArray = StringUtil.split(path, StringPool.SLASH);
@@ -159,29 +174,6 @@ public class WebServerServlet extends HttpServlet {
 		catch (Exception e) {
 			PortalUtil.sendError(e, request, response);
 		}
-	}
-
-	protected static User initPrincipal(HttpServletRequest request)
-		throws Exception {
-
-		long companyId = PortalUtil.getCompanyId(request);
-
-		User user = PortalUtil.getUser(request);
-
-		if (user == null) {
-			Company company = CompanyLocalServiceUtil.getCompany(companyId);
-
-			user = company.getDefaultUser();
-		}
-
-		PrincipalThreadLocal.setName(user.getUserId());
-
-		PermissionChecker permissionChecker =
-			PermissionCheckerFactoryUtil.create(user, true);
-
-		PermissionThreadLocal.setPermissionChecker(permissionChecker);
-
-		return user;
 	}
 
 	protected void sendDocumentLibrary(
