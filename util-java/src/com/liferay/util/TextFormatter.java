@@ -364,12 +364,14 @@ public class TextFormatter {
 			if (Character.isUpperCase(charArray[i]) && (i > 0) &&
 				((i + 1) < charArray.length)) {
 
-				if (Character.isUpperCase(charArray[i - 1]) &&
+				if (Character.isUpperCase(charArray[i]) &&
 					Character.isLowerCase(charArray[i + 1])) {
 
 					sb.append(CharPool.DASH);
 				}
-				else if (Character.isUpperCase(charArray[i])) {
+				else if (Character.isLowerCase(charArray[i - 1]) &&
+					Character.isUpperCase(charArray[i])) {
+
 					sb.append(CharPool.DASH);
 				}
 			}
