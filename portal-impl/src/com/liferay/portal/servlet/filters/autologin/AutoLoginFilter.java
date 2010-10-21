@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
@@ -33,8 +32,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
@@ -54,11 +53,7 @@ public class AutoLoginFilter extends BasePortalFilter {
 			return;
 		}
 
-		List<AutoLogin> autoLogins = ListUtil.fromArray(_autoLogins);
-
-		autoLogins.add(autoLogin);
-
-		_autoLogins = autoLogins.toArray(new AutoLogin[autoLogins.size()]);
+		_autoLogins.add(autoLogin);
 	}
 
 	public static void unregisterAutoLogin(AutoLogin autoLogin) {
@@ -68,24 +63,18 @@ public class AutoLoginFilter extends BasePortalFilter {
 			return;
 		}
 
-		List<AutoLogin> autoLogins = ListUtil.fromArray(_autoLogins);
-
-		if (autoLogins.remove(autoLogin)) {
-			_autoLogins = autoLogins.toArray(new AutoLogin[autoLogins.size()]);
-		}
+		_autoLogins.remove(autoLogin);
 	}
 
 	public AutoLoginFilter() {
-		List<AutoLogin> autoLogins = new ArrayList<AutoLogin>();
+		_autoLogins = new CopyOnWriteArrayList<AutoLogin>();
 
 		for (String autoLoginClassName : PropsValues.AUTO_LOGIN_HOOKS) {
 			AutoLogin autoLogin = (AutoLogin)InstancePool.get(
 				autoLoginClassName);
 
-			autoLogins.add(autoLogin);
+			_autoLogins.add(autoLogin);
 		}
-
-		_autoLogins = autoLogins.toArray(new AutoLogin[autoLogins.size()]);
 	}
 
 	protected String getLoginRemoteUser(
@@ -260,6 +249,6 @@ public class AutoLoginFilter extends BasePortalFilter {
 
 	private static Log _log = LogFactoryUtil.getLog(AutoLoginFilter.class);
 
-	private static AutoLogin[] _autoLogins;
+	private static List<AutoLogin> _autoLogins;
 
 }
