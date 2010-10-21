@@ -692,6 +692,45 @@
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.RevisionModelImpl">
+		<attributes>
+			<id name="revisionId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="branchId" />
+			<basic name="plid" />
+			<basic name="parentRevisionId" />
+			<basic name="head" />
+			<basic name="name" />
+			<basic name="title" />
+			<basic name="description" />
+			<basic name="typeSettings" />
+			<basic name="iconImage" />
+			<basic name="iconImageId" />
+			<basic name="themeId" />
+			<basic name="colorSchemeId" />
+			<basic name="wapThemeId" />
+			<basic name="wapColorSchemeId" />
+			<basic name="css" />
+			<basic name="status" />
+			<basic name="statusByUserId" />
+			<basic name="statusByUserName" />
+			<basic name="statusDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="primaryKey" />
+			<transient name="statusByUserUuid" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.RoleModelImpl">
 		<attributes>
 			<id name="roleId" />
@@ -2956,6 +2995,10 @@
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ResourcePermissionImpl" name="ResourcePermission">
 		<table name="ResourcePermission" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.portal.model.impl.RevisionImpl" name="Revision">
+		<table name="Revision" />
 		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.RoleImpl" name="Role">

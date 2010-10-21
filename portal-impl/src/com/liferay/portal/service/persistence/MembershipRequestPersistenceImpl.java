@@ -1906,6 +1906,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	protected ResourceCodePersistence resourceCodePersistence;
 	@BeanReference(type = ResourcePermissionPersistence.class)
 	protected ResourcePermissionPersistence resourcePermissionPersistence;
+	@BeanReference(type = RevisionPersistence.class)
+	protected RevisionPersistence revisionPersistence;
 	@BeanReference(type = RolePersistence.class)
 	protected RolePersistence rolePersistence;
 	@BeanReference(type = ServiceComponentPersistence.class)

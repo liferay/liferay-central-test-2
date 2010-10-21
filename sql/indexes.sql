@@ -463,6 +463,12 @@ create index IX_2F80C17C on ResourcePermission (roleId, scope);
 create index IX_2578FBD3 on Resource_ (codeId);
 create unique index IX_67DE7856 on Resource_ (codeId, primKey);
 
+create index IX_2C88C5D2 on Revision (branchId);
+create index IX_9F9ACE9D on Revision (branchId, plid);
+create unique index IX_138AC6B1 on Revision (branchId, plid, head);
+create index IX_ED232083 on Revision (branchId, plid, status);
+create index IX_D17DB68C on Revision (plid);
+
 create index IX_449A10B9 on Role_ (companyId);
 create unique index IX_A88E424E on Role_ (companyId, classNameId, classPK);
 create unique index IX_EBC931B8 on Role_ (companyId, name);
