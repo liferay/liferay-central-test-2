@@ -246,20 +246,20 @@ public class EditEntryAction extends PortletAction {
 	}
 
 	protected void deleteEntries(ActionRequest actionRequest) throws Exception {
-		String deleteEntryIds =
-			ParamUtil.getString(actionRequest, "deleteEntryIds");
+		long entryId = ParamUtil.getLong(actionRequest, "entryId");
 
-		if (Validator.isNotNull(deleteEntryIds)) {
+		if (entryId > 0) {
+			BlogsEntryServiceUtil.deleteEntry(entryId);
+		}
+		else {
+			String deleteEntryIds = ParamUtil.getString(
+				actionRequest, "deleteEntryIds");
+
 			long[] entryIds = StringUtil.split(deleteEntryIds, 0L);
 
 			for (int i = 0; i < entryIds.length; i++) {
 				BlogsEntryServiceUtil.deleteEntry(entryIds[i]);
 			}
-		}
-		else {
-			long entryId = ParamUtil.getLong(actionRequest, "entryId");
-
-			BlogsEntryServiceUtil.deleteEntry(entryId);
 		}
 	}
 

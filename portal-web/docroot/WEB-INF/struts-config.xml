@@ -287,7 +287,7 @@
 			<forward name="portlet.blogs.error" path="portlet.blogs.error" />
 		</action>
 
-		<!-- Blogs Administrator -->
+		<!-- Blogs Admin -->
 
 		<action path="/blogs_admin/edit_entry" type="com.liferay.portlet.blogs.action.EditEntryAction">
 			<forward name="portlet.blogs.edit_entry" path="portlet.blogs.edit_entry" />

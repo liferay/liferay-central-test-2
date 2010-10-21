@@ -27,7 +27,6 @@ BlogsEntry entry = (BlogsEntry)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
-
 	<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) %>">
 		<portlet:renderURL var="viewEntryURL">
 			<portlet:param name="struts_action" value="/blogs_admin/view_entry" />
@@ -74,7 +73,7 @@ BlogsEntry entry = (BlogsEntry)row.getObject();
 			<portlet:param name="struts_action" value="/blogs_admin/edit_entry" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
-			<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />			
+			<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon-delete url="<%= deleteEntryURL %>" />

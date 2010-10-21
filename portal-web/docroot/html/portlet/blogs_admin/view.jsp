@@ -37,7 +37,6 @@ portletURL.setParameter("struts_action", "/blogs_admin/view");
 		headerNames="title,author,createDate,status"
 		emptyResultsMessage="no-entries-were-found"
 	>
-
 		<liferay-ui:search-container-results>
 			<%@ include file="/html/portlet/blogs_admin/entry_search_results_database.jspf" %>
 		</liferay-ui:search-container-results>
@@ -68,7 +67,7 @@ portletURL.setParameter("struts_action", "/blogs_admin/view");
 		<aui:button onClick="<%= taglibOnClick %>" value="delete" />
 
 		<div class="separator"><!-- --></div>
-		
+
 		<liferay-ui:search-iterator />
 	</liferay-ui:search-container>
 </aui:form>

@@ -205,7 +205,7 @@
 		<put name="portlet_content" value="/portlet/blogs/view_entry.jsp" />
 	</definition>
 
-	<!-- Blogs Administrator -->
+	<!-- Blogs Admin -->
 
 	<definition name="portlet.blogs_admin.view" extends="portlet">
 			<put name="portlet_content" value="/portlet/blogs_admin/view.jsp" />

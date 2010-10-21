@@ -2312,6 +2312,9 @@
 			<mime-type>text/html</mime-type>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
 	</portlet>
 	<custom-window-state>
 		<window-state>exclusive</window-state>

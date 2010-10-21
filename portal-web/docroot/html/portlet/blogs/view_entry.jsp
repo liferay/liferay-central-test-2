@@ -74,8 +74,8 @@ request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 			<c:when test="<%= previousEntry != null %>">
 				<portlet:renderURL var="previousEntryURL">
 					<portlet:param name="struts_action" value="/blogs/view_entry" />
-					<portlet:param name="entryId" value="<%= String.valueOf(previousEntry.getEntryId()) %>" />
 					<portlet:param name="redirect" value="<%= redirect %>" />
+					<portlet:param name="entryId" value="<%= String.valueOf(previousEntry.getEntryId()) %>" />
 				</portlet:renderURL>
 
 				<aui:a cssClass="previous" href="<%= previousEntryURL %>" label="previous" />
@@ -89,8 +89,8 @@ request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 			<c:when test="<%= nextEntry != null %>">
 				<portlet:renderURL var="nextEntryURL">
 					<portlet:param name="struts_action" value="/blogs/view_entry" />
+					<portlet:param name="redirect" value="<%= redirect %>" />
 					<portlet:param name="entryId" value="<%= String.valueOf(nextEntry.getEntryId()) %>" />
-					<portlet:param name="redirect" value="<%= redirect %>" />					
 				</portlet:renderURL>
 
 				<aui:a cssClass="next" href="<%= nextEntryURL %>" label="next" />
