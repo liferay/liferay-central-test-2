@@ -29,9 +29,14 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
+import java.nio.channels.Channels;
+import java.nio.channels.FileChannel;
 
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletRequest;
@@ -202,6 +207,32 @@ public class PortletResponseUtil {
 			for (byte[] bytes : bytesArray) {
 				outputStream.write(bytes);
 			}
+		}
+	}
+
+	public static void write(MimeResponse mimeResponse, File file)
+		throws IOException {
+
+		FileInputStream fileInputStream = new FileInputStream(file);
+
+		FileChannel fileChannel = fileInputStream.getChannel();
+
+		try {
+			int contentLength = (int)fileChannel.size();
+
+			if (mimeResponse instanceof ResourceResponse) {
+				ResourceResponse resourceResponse =
+					(ResourceResponse)mimeResponse;
+
+				resourceResponse.setContentLength(contentLength);
+			}
+
+			fileChannel.transferTo(
+				0, contentLength,
+				Channels.newChannel(mimeResponse.getPortletOutputStream()));
+		}
+		finally {
+			fileChannel.close();
 		}
 	}
 

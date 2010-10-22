@@ -230,14 +230,16 @@ public class ServletResponseUtil {
 		}
 	}
 
-	public static void write(
-			HttpServletResponse response, File file)
+	public static void write(HttpServletResponse response, File file)
 		throws IOException {
 
-		FileChannel fileChannel = new FileInputStream(file).getChannel();
+		FileInputStream fileInputStream = new FileInputStream(file);
+
+		FileChannel fileChannel = fileInputStream.getChannel();
 
 		try {
-			int contentLength = (int) fileChannel.size();
+			int contentLength = (int)fileChannel.size();
+
 			response.setContentLength(contentLength);
 
 			fileChannel.transferTo(

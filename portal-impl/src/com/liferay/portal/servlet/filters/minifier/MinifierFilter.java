@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -154,7 +153,7 @@ public class MinifierFilter extends BasePortalFilter {
 		return sb.toString();
 	}
 
-	protected ObjectValuePair<String, File> getMinifiedBundleContent(
+	protected Object getMinifiedBundleContent(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
 
@@ -216,7 +215,7 @@ public class MinifierFilter extends BasePortalFilter {
 			if (!staleCache) {
 				response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 
-				return new ObjectValuePair<String, File>(null, cacheFile);
+				return cacheFile;
 			}
 		}
 
@@ -247,10 +246,10 @@ public class MinifierFilter extends BasePortalFilter {
 
 		FileUtil.write(cacheFile, minifiedContent);
 
-		return new ObjectValuePair<String, File>(minifiedContent, null);
+		return minifiedContent;
 	}
 
-	protected ObjectValuePair<String, File> getMinifiedContent(
+	protected Object getMinifiedContent(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
 		throws Exception {
@@ -320,7 +319,8 @@ public class MinifierFilter extends BasePortalFilter {
 
 				response.setContentType(contentType);
 			}
-			return new ObjectValuePair<String, File>(null, cacheDataFile);
+
+			return cacheDataFile;
 		}
 		else {
 			String minifiedContent = null;
@@ -382,7 +382,7 @@ public class MinifierFilter extends BasePortalFilter {
 
 			FileUtil.write(cacheDataFile, minifiedContent);
 
-			return new ObjectValuePair<String, File>(minifiedContent, null);
+			return minifiedContent;
 		}
 	}
 
@@ -423,25 +423,22 @@ public class MinifierFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		ObjectValuePair<String, File> minifiedResult =
-			getMinifiedContent(request, response, filterChain);
+		Object minifiedContent = getMinifiedContent(
+			request, response, filterChain);
 
-		if (minifiedResult == null) {
-			minifiedResult = getMinifiedBundleContent(request, response);
+		if (minifiedContent == null) {
+			minifiedContent = getMinifiedBundleContent(request, response);
 		}
 
-		if (minifiedResult == null) {
+		if (minifiedContent == null) {
 			processFilter(MinifierFilter.class, request, response, filterChain);
 		}
 		else {
-			String minifiedContent = minifiedResult.getKey();
-			File minifiedContentFile = minifiedResult.getValue();
-
-			if (minifiedContent != null) {
-				ServletResponseUtil.write(response, minifiedContent);
+			if (minifiedContent instanceof File) {
+				ServletResponseUtil.write(response, (File)minifiedContent);
 			}
-			else {
-				ServletResponseUtil.write(response, minifiedContentFile);
+			else if (minifiedContent instanceof String) {
+				ServletResponseUtil.write(response, (String)minifiedContent);
 			}
 		}
 	}
