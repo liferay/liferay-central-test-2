@@ -246,7 +246,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		Attributes attributes = PortalLDAPUtil.getUserAttributes(
 			ldapServerId, companyId, ldapContext, fullUserDN);
 
-		User user = PortalLDAPImporterUtil.importLDAPUser(
+		User user = importLDAPUser(
 			ldapServerId, companyId, ldapContext, attributes, StringPool.BLANK);
 
 		ldapContext.close();
