@@ -64,7 +64,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 	public void addDirectory(long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
 
-		if (!isValid(dirName) || dirName.equals("/")) {
+		if (!isValidName(dirName) || dirName.equals("/")) {
 			throw new DirectoryNameException(dirName);
 		}
 
@@ -343,7 +343,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 	public void validate(String fileName, boolean validateFileExtension)
 		throws PortalException, SystemException {
 
-		if (!isValid(fileName)) {
+		if (!isValidName(fileName)) {
 			throw new FileNameException(fileName);
 		}
 
@@ -451,7 +451,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 		}
 	}
 
-	protected boolean isValid(String name) {
+	protected boolean isValidName(String name) {
 		if ((name == null) ||
 			(name.contains("\\\\")) ||
 			(name.contains("//")) ||
