@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.upgrade.v5_2_8_to_6_0_5.util.DLFileEntryTable;
 import com.liferay.portal.upgrade.v5_2_8_to_6_0_5.util.DLFileVersionTable;
 import com.liferay.portal.upgrade.v6_0_0.util.DLFileEntryNameUpgradeColumnImpl;
@@ -128,7 +129,11 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			DLFileVersionTable.TABLE_NAME, DLFileVersionTable.TABLE_COLUMNS,
 			nameColumn, versionColumn);
 
-		upgradeTable.setCreateSQL(DLFileVersionTable.TABLE_SQL_CREATE);
+		upgradeTable.setCreateSQL(
+			StringUtil.replace(
+				DLFileVersionTable.TABLE_SQL_CREATE,
+				",title VARCHAR(75) null",
+				",title VARCHAR(255) null"));
 
 		upgradeTable.updateTable();
 

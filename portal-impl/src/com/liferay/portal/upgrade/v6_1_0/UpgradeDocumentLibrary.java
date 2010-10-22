@@ -12,26 +12,34 @@
  * details.
  */
 
-package com.liferay.portal.upgrade;
+package com.liferay.portal.upgrade.v6_1_0;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.upgrade.v6_1_0.UpgradeDocumentLibrary;
-import com.liferay.portal.upgrade.v6_1_0.UpgradeSchema;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
+import com.liferay.portal.upgrade.v6_1_0.util.DLFileVersionTable;
 
 /**
- * @author Jorge Ferrer
- * @author Juan Fernández
+ * @author Brian Wing Shun Chan
  */
-public class UpgradeProcess_6_1_0 extends UpgradeProcess {
-
-	public int getThreshold() {
-		return ReleaseInfo.RELEASE_6_1_0_BUILD_NUMBER;
-	}
+public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		upgrade(UpgradeSchema.class);
-		upgrade(UpgradeDocumentLibrary.class);
+		try {
+			runSQL("alter_column_type DLFileVersion title VARCHAR(255)");
+		}
+		catch (Exception e) {
+
+			// DLFileVersion
+
+			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
+				DLFileVersionTable.TABLE_NAME,
+				DLFileVersionTable.TABLE_COLUMNS);
+
+			upgradeTable.setCreateSQL(DLFileVersionTable.TABLE_SQL_CREATE);
+
+			upgradeTable.updateTable();
+		}
 	}
 
 }
