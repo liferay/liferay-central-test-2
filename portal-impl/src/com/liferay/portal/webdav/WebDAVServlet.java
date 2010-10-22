@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webdav.WebDAVException;
 import com.liferay.portal.kernel.webdav.WebDAVRequest;
@@ -177,24 +178,25 @@ public class WebDAVServlet extends HttpServlet {
 		}
 
 		for (String ignore : PropsValues.WEBDAV_IGNORE) {
-			String[] ignoreArray = ignore.split("/");
+			String[] ignoreArray = ignore.split(StringPool.SLASH);
 
 			if (ignoreArray.length > pathArray.length) {
 				continue;
 			}
 
-			boolean matched = true;
+			boolean match = true;
 
 			for (int i = 1; i <= ignoreArray.length; i++) {
 				if (!pathArray[pathArray.length - i].equals(
-					ignoreArray[ignoreArray.length - i])) {
+						ignoreArray[ignoreArray.length - i])) {
 
-					matched = false;
+					match = false;
+
 					break;
 				}
 			}
 
-			if (matched) {
+			if (match) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
 						"Skipping over " + request.getMethod() + " " +
