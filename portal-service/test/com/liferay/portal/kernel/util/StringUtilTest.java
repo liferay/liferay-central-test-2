@@ -30,16 +30,6 @@ public class StringUtilTest extends TestCase {
 
 		String actual = StringUtil.highlight(original, queryTerms);
 		assertEquals(expected, actual);	
-
-		//Chinaese
-		original = "一二三四五";
-		expected = "<span class=\"highlight\">一</span>二" +
-				"<span class=\"highlight\">三</span>四五";
-
-		queryTerms = new String[]{"一","三"};
-
-		actual = StringUtil.highlight(original, queryTerms);
-		assertEquals(expected, actual);	
 	}
 
 	public void testReplaceChar() throws Exception {
