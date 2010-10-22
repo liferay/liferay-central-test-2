@@ -54,14 +54,14 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 		Hits hits = null;
 
-		org.apache.lucene.search.IndexSearcher searcher = null;
+		org.apache.lucene.search.IndexSearcher indexSearcher = null;
 		org.apache.lucene.search.Sort luceneSort = null;
 
 		try {
-			searcher = LuceneHelperUtil.getSearcher(companyId, true);
+			indexSearcher = LuceneHelperUtil.getSearcher(companyId, true);
 
 			if (sorts != null) {
-				searcher.setDefaultFieldSortScoring(true, true);
+				indexSearcher.setDefaultFieldSortScoring(true, true);
 
 				SortField[] sortFields = new SortField[sorts.length];
 
@@ -77,7 +77,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 			long startTime = System.currentTimeMillis();
 
-			org.apache.lucene.search.Hits luceneHits = searcher.search(
+			org.apache.lucene.search.Hits luceneHits = indexSearcher.search(
 				QueryTranslator.translate(query), luceneSort);
 
 			long endTime = System.currentTimeMillis();
@@ -94,7 +94,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			try {
 				long startTime = System.currentTimeMillis();
 
-				org.apache.lucene.search.Hits luceneHits = searcher.search(
+				org.apache.lucene.search.Hits luceneHits = indexSearcher.search(
 					QueryTranslator.translate(query), luceneSort);
 
 				long endTime = System.currentTimeMillis();
@@ -121,8 +121,8 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		}
 		finally {
 			try {
-				if (searcher != null) {
-					searcher.close();
+				if (indexSearcher != null) {
+					indexSearcher.close();
 				}
 			}
 			catch (IOException ioe) {
@@ -226,7 +226,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 		Hits subset = new HitsImpl();
 
-		if ((start > - 1) && (start <= end)) {
+		if ((start > -1) && (start <= end)) {
 			if (end > length) {
 				end = length;
 			}
