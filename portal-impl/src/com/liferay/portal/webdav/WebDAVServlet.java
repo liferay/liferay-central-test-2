@@ -176,10 +176,25 @@ public class WebDAVServlet extends HttpServlet {
 			return false;
 		}
 
-		String resourceName = pathArray[pathArray.length - 1];
-
 		for (String ignore : PropsValues.WEBDAV_IGNORE) {
-			if (ignore.equals(resourceName)) {
+			String[] ignoreArray = ignore.split("/");
+
+			if (ignoreArray.length > pathArray.length) {
+				continue;
+			}
+
+			boolean matched = true;
+
+			for (int i = 1; i <= ignoreArray.length; i++) {
+				if (!pathArray[pathArray.length - i].equals(
+					ignoreArray[ignoreArray.length - i])) {
+
+					matched = false;
+					break;
+				}
+			}
+
+			if (matched) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
 						"Skipping over " + request.getMethod() + " " +
