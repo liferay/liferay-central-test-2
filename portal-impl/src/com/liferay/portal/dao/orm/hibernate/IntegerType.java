@@ -21,8 +21,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
+import org.hibernate.type.StandardBasicTypes;
 import org.hibernate.usertype.UserType;
 
 /**
@@ -51,7 +51,7 @@ public class IntegerType implements Serializable, UserType {
 		if (x == y) {
 			return true;
 		}
-		else if (x == null || y == null) {
+		else if ((x == null) || (y == null)) {
 			return false;
 		}
 		else {
@@ -67,13 +67,13 @@ public class IntegerType implements Serializable, UserType {
 		return false;
 	}
 
-	public Object nullSafeGet(ResultSet rs, String[] names, Object obj)
+	public Object nullSafeGet(ResultSet rs, String[] names, Object owner)
 		throws HibernateException {
 
 		Integer value = null;
 
 		try {
-			value = (Integer)Hibernate.INTEGER.nullSafeGet(rs, names[0]);
+			value = StandardBasicTypes.INTEGER.nullSafeGet(rs, names[0]);
 		}
 		catch (SQLException sqle) {
 		}
@@ -87,13 +87,13 @@ public class IntegerType implements Serializable, UserType {
 	}
 
 	public void nullSafeSet(PreparedStatement ps, Object obj, int index)
-		throws HibernateException, SQLException {
+		throws SQLException {
 
 		if (obj == null) {
 			obj = new Integer(DEFAULT_VALUE);
 		}
 
-		Hibernate.INTEGER.nullSafeSet(ps, obj, index);
+		ps.setInt(index, (Integer)obj);
 	}
 
 	public Object replace(Object original, Object target, Object owner) {

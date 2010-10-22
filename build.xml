@@ -679,7 +679,7 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 				<copy todir="${app.server.lib.global.dir}">
 					<fileset
 						dir="lib/development"
-						includes="activation.jar,jms.jar,jta.jar,mail.jar"
+						includes="activation.jar,jms.jar,jta.jar,mail.jar,persistence.jar"
 					/>
 				</copy>
 

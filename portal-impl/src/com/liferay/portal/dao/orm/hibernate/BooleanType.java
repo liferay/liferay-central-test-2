@@ -21,8 +21,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import org.hibernate.Hibernate;
-import org.hibernate.HibernateException;
+import org.hibernate.type.StandardBasicTypes;
 import org.hibernate.usertype.UserType;
 
 /**
@@ -50,7 +49,7 @@ public class BooleanType implements Serializable, UserType {
 		if (x == y) {
 			return true;
 		}
-		else if (x == null || y == null) {
+		else if ((x == null) || (y == null)) {
 			return false;
 		}
 		else {
@@ -66,10 +65,10 @@ public class BooleanType implements Serializable, UserType {
 		return false;
 	}
 
-	public Object nullSafeGet(ResultSet rs, String[] names, Object obj)
-		throws HibernateException, SQLException {
+	public Object nullSafeGet(ResultSet rs, String[] names, Object owner)
+		throws SQLException {
 
-		Boolean value = (Boolean)Hibernate.BOOLEAN.nullSafeGet(rs, names[0]);
+		Boolean value = StandardBasicTypes.BOOLEAN.nullSafeGet(rs, names[0]);
 
 		if (value == null) {
 			return Boolean.valueOf(DEFAULT_VALUE);
@@ -80,13 +79,13 @@ public class BooleanType implements Serializable, UserType {
 	}
 
 	public void nullSafeSet(PreparedStatement ps, Object obj, int index)
-		throws HibernateException, SQLException {
+		throws SQLException {
 
 		if (obj == null) {
 			obj = Boolean.valueOf(DEFAULT_VALUE);
 		}
 
-		Hibernate.BOOLEAN.nullSafeSet(ps, obj, index);
+		ps.setBoolean(index, (Boolean)obj);
 	}
 
 	public Object replace(Object original, Object target, Object owner) {

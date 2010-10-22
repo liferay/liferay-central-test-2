@@ -21,8 +21,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import org.hibernate.Hibernate;
-import org.hibernate.HibernateException;
+import org.hibernate.type.StandardBasicTypes;
 import org.hibernate.usertype.UserType;
 
 /**
@@ -50,7 +49,7 @@ public class FloatType implements Serializable, UserType {
 		if (x == y) {
 			return true;
 		}
-		else if (x == null || y == null) {
+		else if ((x == null) || (y == null)) {
 			return false;
 		}
 		else {
@@ -66,10 +65,10 @@ public class FloatType implements Serializable, UserType {
 		return false;
 	}
 
-	public Object nullSafeGet(ResultSet rs, String[] names, Object obj)
-		throws HibernateException, SQLException {
+	public Object nullSafeGet(ResultSet rs, String[] names, Object owner)
+		throws SQLException {
 
-		Float value = (Float)Hibernate.FLOAT.nullSafeGet(rs, names[0]);
+		Float value = StandardBasicTypes.FLOAT.nullSafeGet(rs, names[0]);
 
 		if (value == null) {
 			return new Float(DEFAULT_VALUE);
@@ -80,13 +79,13 @@ public class FloatType implements Serializable, UserType {
 	}
 
 	public void nullSafeSet(PreparedStatement ps, Object obj, int index)
-		throws HibernateException, SQLException {
+		throws SQLException {
 
 		if (obj == null) {
 			obj = new Float(DEFAULT_VALUE);
 		}
 
-		Hibernate.FLOAT.nullSafeSet(ps, obj, index);
+		ps.setFloat(index, (Float)obj);
 	}
 
 	public Object replace(Object original, Object target, Object owner) {
