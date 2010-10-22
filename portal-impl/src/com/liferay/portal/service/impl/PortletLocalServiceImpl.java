@@ -1958,8 +1958,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 		}
 
-		String spriteFileName = ".sprite.png";
-		String spritePropertiesFileName = ".sprite.properties";
+		String spriteFileName = PropsValues.SPRITE_FILE_NAME;
+		String spritePropertiesFileName =
+			PropsValues.SPRITE_PROPERTIES_FILE_NAME;
 		String spritePropertiesRootPath = ServletContextUtil.getRealPath(
 			servletContext, StringPool.SLASH);
 

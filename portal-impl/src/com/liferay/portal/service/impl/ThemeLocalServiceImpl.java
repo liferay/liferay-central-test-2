@@ -44,6 +44,7 @@ import com.liferay.portal.theme.ThemeCompanyLimit;
 import com.liferay.portal.theme.ThemeGroupId;
 import com.liferay.portal.theme.ThemeGroupLimit;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.ContextReplace;
 
 import java.io.File;
@@ -728,8 +729,9 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 			}
 		}
 
-		String spriteFileName = ".sprite.png";
-		String spritePropertiesFileName = ".sprite.properties";
+		String spriteFileName = PropsValues.SPRITE_FILE_NAME;
+		String spritePropertiesFileName =
+			PropsValues.SPRITE_PROPERTIES_FILE_NAME;
 		String spritePropertiesRootPath = ServletContextUtil.getRealPath(
 			servletContext, theme.getImagesPath());
 
