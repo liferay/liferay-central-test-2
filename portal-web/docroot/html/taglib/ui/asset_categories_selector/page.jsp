@@ -70,7 +70,7 @@ if (Validator.isNotNull(curCategoryIds)) {
 	new Liferay.AssetCategoriesSelector(
 		{
 			contentBox: '#<%= namespace + randomNamespace %>assetCategoriesSelector',
-			curEntries: '<%= curCategoryNames %>',
+			curEntries: '<%= HtmlUtil.escapeJS(curCategoryNames) %>',
 			curEntryIds: '<%= curCategoryIds %>',
 			hiddenInput: '#<%= namespace + hiddenInput %>',
 			instanceVar: '<%= namespace + randomNamespace %>'
