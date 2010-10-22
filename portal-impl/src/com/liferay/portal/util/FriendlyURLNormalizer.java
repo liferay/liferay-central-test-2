@@ -17,8 +17,6 @@ package com.liferay.portal.util;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.Normalizer;
 
@@ -57,22 +55,6 @@ public class FriendlyURLNormalizer {
 			if (oldChar != newChar) {
 				charArray[i] = newChar;
 			}
-		}
-
-		friendlyURL = new String(charArray);
-
-		while (friendlyURL.contains(StringPool.DASH + StringPool.DASH)) {
-			friendlyURL = StringUtil.replace(
-				friendlyURL, StringPool.DASH + StringPool.DASH,
-				StringPool.DASH);
-		}
-
-		if (friendlyURL.startsWith(StringPool.DASH)) {
-			friendlyURL = friendlyURL.substring(1, friendlyURL.length());
-		}
-
-		if (friendlyURL.endsWith(StringPool.DASH)) {
-			friendlyURL = friendlyURL.substring(0, friendlyURL.length() - 1);
 		}
 
 		return friendlyURL;
