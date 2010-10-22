@@ -1253,7 +1253,7 @@
 	</library>
 	<library>
 		<file-name>portal/commons-fileupload.jar</file-name>
-		<version>1.2.1</version>
+		<version>1.2.2</version>
 		<project-name>Commons FileUpload</project-name>
 		<project-url>http://commons.apache.org/fileupload</project-url>
 		<licenses>
