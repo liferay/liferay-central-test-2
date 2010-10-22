@@ -20,16 +20,17 @@ import com.liferay.portal.kernel.test.TestCase;
  * @author Alexander Chow
  */
 public class StringUtilTest extends TestCase {
-	
-	public void testHighlight() throws Exception {
 
+	public void testHighlight() throws Exception {
 		String original = "Hello World Liferay";
-		String[] queryTerms = new String[]{"Hello","Liferay"};
-		String expected = "<span class=\"highlight\">Hello</span> World " +
+		String expected =
+			"<span class=\"highlight\">Hello</span> World " +
 				"<span class=\"highlight\">Liferay</span>";
 
-		String actual = StringUtil.highlight(original, queryTerms);
-		assertEquals(expected, actual);	
+		String actual = StringUtil.highlight(
+			original, new String[] {"Hello","Liferay"});
+
+		assertEquals(expected, actual);
 	}
 
 	public void testReplaceChar() throws Exception {
