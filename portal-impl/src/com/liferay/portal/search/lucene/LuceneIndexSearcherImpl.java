@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
 
@@ -38,6 +39,7 @@ import org.apache.lucene.document.NumericField;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.SortField;
+import org.apache.lucene.search.TopFieldDocs;
 
 /**
  * @author Bruno Farache
@@ -77,14 +79,17 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 			long startTime = System.currentTimeMillis();
 
-			org.apache.lucene.search.Hits luceneHits = indexSearcher.search(
-				QueryTranslator.translate(query), luceneSort);
+			TopFieldDocs topFieldDocs = indexSearcher.search(
+				QueryTranslator.translate(query), null,
+				PropsValues.INDEX_SEARCH_LIMIT, luceneSort);
 
 			long endTime = System.currentTimeMillis();
 
 			float searchTime = (float)(endTime - startTime) / Time.SECOND;
 
-			hits = subset(luceneHits, query, startTime, searchTime, start, end);
+			hits = toHits(
+				indexSearcher, topFieldDocs, query, startTime, searchTime,
+				start, end);
 		}
 		catch (BooleanQuery.TooManyClauses tmc) {
 			int maxClauseCount = BooleanQuery.getMaxClauseCount();
@@ -94,15 +99,17 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			try {
 				long startTime = System.currentTimeMillis();
 
-				org.apache.lucene.search.Hits luceneHits = indexSearcher.search(
-					QueryTranslator.translate(query), luceneSort);
+				TopFieldDocs topFieldDocs = indexSearcher.search(
+					QueryTranslator.translate(query), null,
+					PropsValues.INDEX_SEARCH_LIMIT, luceneSort);
 
 				long endTime = System.currentTimeMillis();
 
 				float searchTime = (float)(endTime - startTime) / Time.SECOND;
 
-				hits = subset(
-					luceneHits, query, startTime, searchTime, start, end);
+				hits = toHits(
+					indexSearcher, topFieldDocs, query, startTime, searchTime,
+					start, end);
 			}
 			catch (Exception e) {
 				throw new SearchException(e);
@@ -210,12 +217,13 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		return snippet;
 	}
 
-	protected Hits subset(
-			org.apache.lucene.search.Hits luceneHits, Query query,
-			long startTime, float searchTime, int start, int end)
+	protected Hits toHits(
+			org.apache.lucene.search.IndexSearcher indexSearcher,
+			TopFieldDocs topFieldDocs, Query query, long startTime,
+			float searchTime, int start, int end)
 		throws IOException {
 
-		int length = luceneHits.length();
+		int length = topFieldDocs.totalHits;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS)) {
 			start = 0;
@@ -224,7 +232,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 		String[] queryTerms = getQueryTerms(query);
 
-		Hits subset = new HitsImpl();
+		Hits hits = new HitsImpl();
 
 		if ((start > -1) && (start <= end)) {
 			if (end > length) {
@@ -240,24 +248,24 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			int j = 0;
 
 			for (int i = start; i < end; i++, j++) {
-				org.apache.lucene.document.Document document = luceneHits.doc(
-					i);
+				org.apache.lucene.document.Document document =
+					indexSearcher.doc(topFieldDocs.scoreDocs[i].doc);
 
 				subsetDocs[j] = getDocument(document);
 				subsetSnippets[j] = getSnippet(document, query, Field.CONTENT);
-				subsetScores[j] = luceneHits.score(i);
+				subsetScores[j] = topFieldDocs.scoreDocs[i].score;
 			}
 
-			subset.setStart(startTime);
-			subset.setSearchTime(searchTime);
-			subset.setQueryTerms(queryTerms);
-			subset.setDocs(subsetDocs);
-			subset.setLength(length);
-			subset.setSnippets(subsetSnippets);
-			subset.setScores(subsetScores);
+			hits.setStart(startTime);
+			hits.setSearchTime(searchTime);
+			hits.setQueryTerms(queryTerms);
+			hits.setDocs(subsetDocs);
+			hits.setLength(length);
+			hits.setSnippets(subsetSnippets);
+			hits.setScores(subsetScores);
 		}
 
-		return subset;
+		return hits;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

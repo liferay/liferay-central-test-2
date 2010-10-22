@@ -667,6 +667,8 @@ public interface PropsKeys {
 
 	public static final String INDEX_READ_ONLY = "index.read.only";
 
+	public static final String INDEX_SEARCH_LIMIT = "index.search.limit";
+
 	public static final String INDEX_WITH_THREAD = "index.with.thread";
 
 	public static final String INVITATION_EMAIL_MAX_RECIPIENTS = "invitation.email.max.recipients";

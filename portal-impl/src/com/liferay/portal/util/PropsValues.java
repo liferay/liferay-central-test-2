@@ -506,6 +506,8 @@ public class PropsValues {
 
 	public static boolean INDEX_READ_ONLY = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.INDEX_READ_ONLY));
 
+	public static final int INDEX_SEARCH_LIMIT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.INDEX_SEARCH_LIMIT));
+
 	public static final boolean JAVASCRIPT_BAREBONE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.JAVASCRIPT_BAREBONE_ENABLED));
 
 	public static final String[] JAVASCRIPT_BUNDLE_IDS = PropsUtil.getArray(PropsKeys.JAVASCRIPT_BUNDLE_IDS);
