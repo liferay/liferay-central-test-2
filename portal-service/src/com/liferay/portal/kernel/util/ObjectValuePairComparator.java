@@ -37,25 +37,25 @@ public class ObjectValuePairComparator<K, V>
 
 	public int compare(ObjectValuePair<K, V> ovp1, ObjectValuePair<K, V> ovp2) {
 		if (_byKey) {
-			Comparable key1 = (Comparable)ovp1.getKey();
-			Comparable key2 = (Comparable)ovp2.getKey();
+			Comparable<K> key1 = (Comparable<K>)ovp1.getKey();
+			Comparable<K> key2 = (Comparable<K>)ovp2.getKey();
 
 			if (_ascending) {
-				return key1.compareTo(key2);
+				return key1.compareTo((K)key2);
 			}
 			else {
-				return -(key1.compareTo(key2));
+				return -(key1.compareTo((K)key2));
 			}
 		}
 		else {
-			Comparable value1 = (Comparable)ovp1.getValue();
-			Comparable value2 = (Comparable)ovp2.getValue();
+			Comparable<V> value1 = (Comparable<V>)ovp1.getValue();
+			Comparable<V> value2 = (Comparable<V>)ovp2.getValue();
 
 			if (_ascending) {
-				return value1.compareTo(value2);
+				return value1.compareTo((V)value2);
 			}
 			else {
-				return -(value1.compareTo(value2));
+				return -(value1.compareTo((V)value2));
 			}
 		}
 	}

@@ -65,7 +65,7 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 		}
 	}
 
-	public int doAfterBody() throws JspException {
+	public int doAfterBody() {
 		if (!_headerNamesAssigned) {
 			SearchContainerTag parentTag =
 				(SearchContainerTag)findAncestorWithClass(
@@ -242,18 +242,17 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 	}
 
 	public void setServletContext(ServletContext servletContext) {
-		_servletContext = servletContext;
 	}
 
 	public void setStringKey(boolean stringKey) {
 		_stringKey = stringKey;
 	}
 
-	protected void processRow() throws JspException {
+	protected void processRow() {
 		Object model = _results.get(_rowIndex);
 
 		if (isEscapedModel()) {
-			BaseModel baseModel = (BaseModel)model;
+			BaseModel<?> baseModel = (BaseModel<?>)model;
 
 			model = baseModel.toEscapedModel();
 		}
@@ -303,7 +302,6 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 	private int _rowIndex;
 	private String _rowVar = DEFAULT_ROW_VAR;
 	private ResultRow _row;
-	private ServletContext _servletContext;
 	private boolean _stringKey = false;
 
 }
