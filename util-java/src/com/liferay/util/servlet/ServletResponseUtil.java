@@ -157,14 +157,6 @@ public class ServletResponseUtil {
 	}
 
 	public static void write(
-			HttpServletResponse response, ByteBuffer byteBuffer)
-		throws IOException {
-
-		write(response, byteBuffer.array(), byteBuffer.position(),
-			byteBuffer.limit());
-	}
-
-	public static void write(
 			HttpServletResponse response, byte[] bytes, int offset,
 			int contentLength)
 		throws IOException {
@@ -241,6 +233,25 @@ public class ServletResponseUtil {
 		}
 	}
 
+	public static void write(
+			HttpServletResponse response, ByteBuffer byteBuffer)
+		throws IOException {
+
+		write(
+			response, byteBuffer.array(), byteBuffer.position(),
+			byteBuffer.limit());
+	}
+
+	public static void write(
+			HttpServletResponse response,
+			ByteBufferServletResponse byteBufferResponse)
+		throws IOException {
+
+		ByteBuffer byteBuffer = byteBufferResponse.getByteBuffer();
+
+		write(response, byteBuffer);
+	}
+
 	public static void write(HttpServletResponse response, File file)
 		throws IOException {
 
@@ -287,15 +298,6 @@ public class ServletResponseUtil {
 		throws IOException {
 
 		write(response, s.getBytes(StringPool.UTF8));
-	}
-
-	public static void write(
-			HttpServletResponse response,
-			ByteBufferServletResponse byteBufferResponse)
-		throws IOException {
-
-		ByteBuffer byteBuffer = byteBufferResponse.getByteBuffer();
-		write(response, byteBuffer);
 	}
 
 	public static void write(

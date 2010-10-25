@@ -41,7 +41,7 @@ public class CacheResponseData implements Serializable {
 		return _attributes.get(name);
 	}
 
-	public ByteBuffer getBuffer() {
+	public ByteBuffer getByteBuffer() {
 		return _byteBuffer;
 	}
 

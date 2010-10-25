@@ -122,8 +122,9 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 	}
 
 	public void recycle() {
-		status = SC_OK;
 		_string = null;
+
+		setStatus(SC_OK);
 
 		resetBuffer();
 	}

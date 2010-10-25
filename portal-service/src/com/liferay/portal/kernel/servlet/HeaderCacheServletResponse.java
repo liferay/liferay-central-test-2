@@ -95,7 +95,7 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public String getContentType() {
-		return contentType;
+		return _contentType;
 	}
 
 	public String getHeader(String name) {
@@ -115,17 +115,17 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public int getStatus() {
-		return status;
+		return _status;
 	}
 
 	public void sendError(int status) throws IOException {
-		this.status = status;
+		_status = status;
 
 		super.sendError(status);
 	}
 
 	public void sendError(int status, String msg) throws IOException {
-		this.status = status;
+		_status = status;
 
 		super.sendError(status, msg);
 	}
@@ -137,7 +137,7 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public void setContentType(String contentType) {
-		this.contentType = contentType;
+		_contentType = contentType;
 
 		super.setContentType(contentType);
 	}
@@ -192,15 +192,14 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public void setStatus(int status) {
-		this.status = status;
+		_status = status;
 
-		super.setStatus(this.status);
+		super.setStatus(status);
 	}
 
-	protected String contentType;
-	protected int status = SC_OK;
-
+	private String _contentType;
 	private Map<String, List<Header>> _headers =
 		new HashMap<String, List<Header>>();
+	private int _status = SC_OK;
 
 }

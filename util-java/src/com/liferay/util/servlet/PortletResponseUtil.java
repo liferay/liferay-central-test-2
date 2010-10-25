@@ -150,11 +150,12 @@ public class PortletResponseUtil {
 	public static void write(MimeResponse mimeResponse, byte[] bytes)
 		throws IOException {
 
-		write(mimeResponse, bytes, 0);
+		write(mimeResponse, bytes, 0, 0);
 	}
 
 	public static void write(
-			MimeResponse mimeResponse, byte[] bytes, int contentLength)
+			MimeResponse mimeResponse, byte[] bytes, int offset,
+			int contentLength)
 		throws IOException {
 
 		// LEP-3122
@@ -176,7 +177,7 @@ public class PortletResponseUtil {
 
 			OutputStream outputStream = mimeResponse.getPortletOutputStream();
 
-			outputStream.write(bytes, 0, contentLength);
+			outputStream.write(bytes, offset, contentLength);
 		}
 	}
 

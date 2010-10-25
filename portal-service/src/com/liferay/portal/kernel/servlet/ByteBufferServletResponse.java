@@ -17,7 +17,6 @@ package com.liferay.portal.kernel.servlet;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 
 import java.nio.ByteBuffer;
@@ -43,7 +42,7 @@ public class ByteBufferServletResponse extends HeaderCacheServletResponse {
 		}
 	}
 
-	public ServletOutputStream getOutputStream() throws IOException {
+	public ServletOutputStream getOutputStream() {
 		if (_printWriter != null) {
 			throw new IllegalStateException(
 				"Cannot obtain OutputStream because Writer is already in use");
@@ -58,7 +57,7 @@ public class ByteBufferServletResponse extends HeaderCacheServletResponse {
 		return _servletOutputStream;
 	}
 
-	public PrintWriter getWriter() throws IOException {
+	public PrintWriter getWriter() {
 		if (_printWriter != null) {
 			return _printWriter;
 		}

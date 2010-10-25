@@ -63,6 +63,7 @@ public class ETagUtil {
 		ByteBufferServletResponse byteBufferResponse) {
 
 		ByteBuffer byteBuffer = byteBufferResponse.getByteBuffer();
+
 		return processETag(
 			request, response, byteBuffer.array(), byteBuffer.position(),
 			byteBuffer.limit());
