@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 
+import java.nio.ByteBuffer;
+
 /**
  * <p>
  * See http://issues.liferay.com/browse/LPS-6648.
@@ -63,6 +65,10 @@ public class UnsyncByteArrayOutputStream extends OutputStream {
 
 	public byte[] unsafeGetByteArray() {
 		return buffer;
+	}
+
+	public ByteBuffer unsafeGetByteBuffer() {
+		return ByteBuffer.wrap(buffer, 0, index);
 	}
 
 	public void write(byte[] byteArray) {

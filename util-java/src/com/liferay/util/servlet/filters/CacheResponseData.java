@@ -14,11 +14,8 @@
 
 package com.liferay.util.servlet.filters;
 
-import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
-import com.liferay.portal.kernel.nio.charset.CharsetEncoderUtil;
+import com.liferay.portal.kernel.servlet.ByteBufferServletResponse;
 import com.liferay.portal.kernel.servlet.Header;
-import com.liferay.portal.kernel.servlet.StringServletResponse;
-import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
 
@@ -30,51 +27,22 @@ import java.util.Map;
 
 /**
  * @author Michael Young
+ * @author Shuyang Zhou
  */
 public class CacheResponseData implements Serializable {
 
-	public CacheResponseData(StringServletResponse stringResponse) {
-		if (stringResponse.isCalledGetOutputStream()) {
-			UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
-				stringResponse.getUnsyncByteArrayOutputStream();
-
-			_content = unsyncByteArrayOutputStream.unsafeGetByteArray();
-			_contentLength = unsyncByteArrayOutputStream.size();
-		}
-		else {
-			String content = stringResponse.getString();
-
-			ByteBuffer contentByteBuffer = CharsetEncoderUtil.encode(
-				StringPool.UTF8, content);
-
-			_content = contentByteBuffer.array();
-			_contentLength = contentByteBuffer.limit();
-		}
-
-		_contentType = stringResponse.getContentType();
-		_headers = stringResponse.getHeaders();
-	}
-
-	public CacheResponseData(
-		byte[] content, int contentLength, String contentType,
-		Map<String, List<Header>> headers) {
-
-		_content = content;
-		_contentLength = contentLength;
-		_contentType = contentType;
-		_headers = headers;
+	public CacheResponseData(ByteBufferServletResponse byteBufferResponse) {
+		_byteBuffer = byteBufferResponse.getByteBuffer();
+		_contentType = byteBufferResponse.getContentType();
+		_headers = byteBufferResponse.getHeaders();
 	}
 
 	public Object getAttribute(String name) {
 		return _attributes.get(name);
 	}
 
-	public byte[] getContent() {
-		return _content;
-	}
-
-	public int getContentLength() {
-		return _contentLength;
+	public ByteBuffer getBuffer() {
+		return _byteBuffer;
 	}
 
 	public String getContentType() {
@@ -90,8 +58,7 @@ public class CacheResponseData implements Serializable {
 	}
 
 	private Map<String, Object> _attributes = new HashMap<String, Object>();
-	private byte[] _content;
-	private int _contentLength;
+	private ByteBuffer _byteBuffer;
 	private String _contentType;
 	private Map<String, List<Header>> _headers;
 

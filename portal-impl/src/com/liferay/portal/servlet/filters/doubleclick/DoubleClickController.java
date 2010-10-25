@@ -14,7 +14,7 @@
 
 package com.liferay.portal.servlet.filters.doubleclick;
 
-import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.servlet.ByteBufferServletResponse;
 import com.liferay.util.servlet.filters.CacheResponseData;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
 
@@ -39,29 +39,29 @@ public class DoubleClickController implements Serializable {
 
 		boolean firstRequest = false;
 
-		StringServletResponse stringResponse = null;
+		ByteBufferServletResponse byteBufferResponse = null;
 
 		synchronized (this) {
-			if (_stringResponse == null) {
+			if (_byteBufferResponse == null) {
 				firstRequest = true;
 
-				_stringResponse = new StringServletResponse(response);
+				_byteBufferResponse = new ByteBufferServletResponse(response);
 				_throwable = null;
 			}
 
-			stringResponse = _stringResponse;
+			byteBufferResponse = _byteBufferResponse;
 		}
 
 		if (firstRequest) {
 			try {
-				filterChain.doFilter(request, _stringResponse);
+				filterChain.doFilter(request, _byteBufferResponse);
 			}
 			catch (Throwable t) {
 				_throwable = t;
 			}
 			finally {
 				synchronized (this) {
-					_stringResponse = null;
+					_byteBufferResponse = null;
 
 					notifyAll();
 				}
@@ -69,7 +69,7 @@ public class DoubleClickController implements Serializable {
 		}
 		else {
 			synchronized (this) {
-				while (_stringResponse != null) {
+				while (_byteBufferResponse != null) {
 					try {
 						wait();
 					}
@@ -104,12 +104,12 @@ public class DoubleClickController implements Serializable {
 		}
 
 		CacheResponseData cacheResponseData = new CacheResponseData(
-			stringResponse);
+			byteBufferResponse);
 
 		CacheResponseUtil.write(response, cacheResponseData);
 	}
 
-	private StringServletResponse _stringResponse;
+	private ByteBufferServletResponse _byteBufferResponse;
 	private Throwable _throwable;
 
 }

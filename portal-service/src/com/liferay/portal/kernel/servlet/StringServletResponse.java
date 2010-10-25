@@ -44,10 +44,6 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 		return _bufferSize;
 	}
 
-	public String getContentType() {
-		return _contentType;
-	}
-
 	public void flushBuffer() throws IOException {
 		if (_servletOutputStream != null) {
 			_unsyncByteArrayOutputStream.flush();
@@ -70,10 +66,6 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 		}
 
 		return _servletOutputStream;
-	}
-
-	public int getStatus() {
-		return _status;
 	}
 
 	public String getString() {
@@ -130,7 +122,7 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 	}
 
 	public void recycle() {
-		_status = SC_OK;
+		status = SC_OK;
 		_string = null;
 
 		resetBuffer();
@@ -145,35 +137,11 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 		}
 	}
 
-	public void sendError(int status) throws IOException {
-		_status = status;
-
-		super.sendError(status);
-	}
-
-	public void sendError(int status, String msg) throws IOException {
-		_status = status;
-
-		super.sendError(status, msg);
-	}
-
 	public void setBufferSize(int bufferSize) {
 		_bufferSize = bufferSize;
 	}
 
-	public void setContentType(String contentType) {
-		_contentType = contentType;
-
-		super.setContentType(contentType);
-	}
-
 	public void setLocale(Locale locale) {
-	}
-
-	public void setStatus(int status) {
-		_status = status;
-
-		super.setStatus(_status);
 	}
 
 	public void setString(String string) {
@@ -184,10 +152,8 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 		StringServletResponse.class);
 
 	private int _bufferSize;
-	private String _contentType;
 	private PrintWriter _printWriter;
 	private ServletOutputStream _servletOutputStream;
-	private int _status = SC_OK;
 	private String _string;
 	private UnsyncByteArrayOutputStream _unsyncByteArrayOutputStream;
 	private UnsyncStringWriter _unsyncStringWriter;

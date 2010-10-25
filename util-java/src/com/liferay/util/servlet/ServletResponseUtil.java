@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
+import com.liferay.portal.kernel.servlet.ByteBufferServletResponse;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -37,6 +38,7 @@ import java.io.InputStream;
 
 import java.net.SocketException;
 
+import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 
@@ -151,11 +153,20 @@ public class ServletResponseUtil {
 	public static void write(HttpServletResponse response, byte[] bytes)
 		throws IOException {
 
-		write(response, bytes, 0);
+		write(response, bytes, 0, 0);
 	}
 
 	public static void write(
-			HttpServletResponse response, byte[] bytes, int contentLength)
+			HttpServletResponse response, ByteBuffer byteBuffer)
+		throws IOException {
+
+		write(response, byteBuffer.array(), byteBuffer.position(),
+			byteBuffer.limit());
+	}
+
+	public static void write(
+			HttpServletResponse response, byte[] bytes, int offset,
+			int contentLength)
 		throws IOException {
 
 		try {
@@ -175,7 +186,7 @@ public class ServletResponseUtil {
 				ServletOutputStream servletOutputStream =
 					response.getOutputStream();
 
-				servletOutputStream.write(bytes, 0, contentLength);
+				servletOutputStream.write(bytes, offset, contentLength);
 			}
 		}
 		catch (IOException ioe) {
@@ -279,16 +290,26 @@ public class ServletResponseUtil {
 	}
 
 	public static void write(
+			HttpServletResponse response,
+			ByteBufferServletResponse byteBufferResponse)
+		throws IOException {
+
+		ByteBuffer byteBuffer = byteBufferResponse.getByteBuffer();
+		write(response, byteBuffer);
+	}
+
+	public static void write(
 			HttpServletResponse response, StringServletResponse stringResponse)
 		throws IOException {
 
 		if (stringResponse.isCalledGetOutputStream()) {
-			UnsyncByteArrayOutputStream unsyncByteArrayInputStream =
+			UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 				stringResponse.getUnsyncByteArrayOutputStream();
 
-			write(
-				response, unsyncByteArrayInputStream.unsafeGetByteArray(),
-				unsyncByteArrayInputStream.size());
+			ByteBuffer byteBuffer =
+				unsyncByteArrayOutputStream.unsafeGetByteBuffer();
+
+			write(response, byteBuffer);
 		}
 		else {
 			write(response, stringResponse.getString());

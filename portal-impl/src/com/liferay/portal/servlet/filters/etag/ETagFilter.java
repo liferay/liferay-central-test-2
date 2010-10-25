@@ -14,7 +14,7 @@
 
 package com.liferay.portal.servlet.filters.etag;
 
-import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.servlet.ByteBufferServletResponse;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -39,14 +39,14 @@ public class ETagFilter extends BasePortalFilter {
 		boolean etag = ParamUtil.getBoolean(request, _ETAG, true);
 
 		if (etag) {
-			StringServletResponse stringResponse =
-				new StringServletResponse(response);
+			ByteBufferServletResponse byteBufferResponse =
+				new ByteBufferServletResponse(response);
 
 			processFilter(
-				ETagFilter.class, request, stringResponse, filterChain);
+				ETagFilter.class, request, byteBufferResponse, filterChain);
 
-			if (!ETagUtil.processETag(request, response, stringResponse)) {
-				ServletResponseUtil.write(response, stringResponse);
+			if (!ETagUtil.processETag(request, response, byteBufferResponse)) {
+				ServletResponseUtil.write(response, byteBufferResponse);
 			}
 		}
 		else {

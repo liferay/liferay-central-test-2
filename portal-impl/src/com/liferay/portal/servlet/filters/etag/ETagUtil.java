@@ -14,10 +14,11 @@
 
 package com.liferay.portal.servlet.filters.etag;
 
-import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import com.liferay.portal.kernel.servlet.ByteBufferServletResponse;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
-import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.StringPool;
+
+import java.nio.ByteBuffer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,20 +60,12 @@ public class ETagUtil {
 
 	public static boolean processETag(
 		HttpServletRequest request, HttpServletResponse response,
-		StringServletResponse stringResponse) {
+		ByteBufferServletResponse byteBufferResponse) {
 
-		if (stringResponse.isCalledGetOutputStream()) {
-			UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
-				stringResponse.getUnsyncByteArrayOutputStream();
-
-			return processETag(
-				request, response,
-				unsyncByteArrayOutputStream.unsafeGetByteArray(),
-				unsyncByteArrayOutputStream.size());
-		}
-		else {
-			return processETag(request, response, stringResponse.getString());
-		}
+		ByteBuffer byteBuffer = byteBufferResponse.getByteBuffer();
+		return processETag(
+			request, response, byteBuffer.array(), byteBuffer.position(),
+			byteBuffer.limit());
 	}
 
 	private static int _hashCode(byte[] data, int offset, int length) {

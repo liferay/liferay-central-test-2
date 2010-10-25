@@ -20,8 +20,8 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
+import com.liferay.portal.kernel.servlet.ByteBufferServletResponse;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
-import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.struts.LastPath;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -337,9 +337,9 @@ public class CacheFilter extends BasePortalFilter {
 	}
 
 	protected boolean isCacheableResponse(
-		StringServletResponse stringResponse) {
+		ByteBufferServletResponse byteBufferResponse) {
 
-		if (stringResponse.getStatus() == HttpServletResponse.SC_OK) {
+		if (byteBufferResponse.getStatus() == HttpServletResponse.SC_OK) {
 			return true;
 		}
 		else {
@@ -392,13 +392,14 @@ public class CacheFilter extends BasePortalFilter {
 					_log.info("Caching request " + key);
 				}
 
-				StringServletResponse stringResponse =
-					new StringServletResponse(response);
+				ByteBufferServletResponse byteBufferResponse =
+					new ByteBufferServletResponse(response);
 
 				processFilter(
-					CacheFilter.class, request, stringResponse, filterChain);
+					CacheFilter.class, request, byteBufferResponse,
+					filterChain);
 
-				cacheResponseData = new CacheResponseData(stringResponse);
+				cacheResponseData = new CacheResponseData(byteBufferResponse);
 
 				LastPath lastPath = (LastPath)request.getAttribute(
 					WebKeys.LAST_PATH);
@@ -413,7 +414,7 @@ public class CacheFilter extends BasePortalFilter {
 				// after the initial test.
 
 				if (isCacheableRequest(request) &&
-					isCacheableResponse(stringResponse)) {
+					isCacheableResponse(byteBufferResponse)) {
 
 					CacheUtil.putCacheResponseData(
 						companyId, key, cacheResponseData);

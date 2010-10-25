@@ -60,9 +60,7 @@ public class CacheResponseUtil {
 
 		response.setContentType(cacheResponseData.getContentType());
 
-		ServletResponseUtil.write(
-			response, cacheResponseData.getContent(),
-			cacheResponseData.getContentLength());
+		ServletResponseUtil.write(response, cacheResponseData.getBuffer());
 	}
 
 }
