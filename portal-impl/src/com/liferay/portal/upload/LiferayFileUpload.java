@@ -59,6 +59,7 @@ public class LiferayFileUpload extends ServletFileUpload {
 	/**
 	 * @deprecated
 	 */
+	@SuppressWarnings("rawtypes")
 	protected FileItem createItem(Map headers, boolean formField)
 		throws FileUploadException {
 

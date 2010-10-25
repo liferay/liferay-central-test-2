@@ -35,6 +35,7 @@ import java.util.Map;
  */
 public class TableOfContents extends com.ecyrd.jspwiki.plugin.TableOfContents {
 
+	@SuppressWarnings("rawtypes")
 	public String execute(WikiContext context, Map params)
 		throws PluginException {
 
