@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Brian Wing Shun Chan
  */
-public class SearchSpeedTag extends SearchFormTag {
+public class SearchSpeedTag<R> extends SearchFormTag<R> {
 
 	public void setHits(Hits hits) {
 		_hits = hits;

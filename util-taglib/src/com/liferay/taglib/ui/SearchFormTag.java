@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Brian Wing Shun Chan
  */
-public class SearchFormTag extends IncludeTag {
+public class SearchFormTag<R> extends IncludeTag {
 
 	public void setSearchContainer(SearchContainer<?> searchContainer) {
 		_searchContainer = searchContainer;
@@ -38,8 +38,8 @@ public class SearchFormTag extends IncludeTag {
 	}
 
 	protected void setAttributes(HttpServletRequest request) {
-		SearchContainerTag parentTag =
-			(SearchContainerTag)findAncestorWithClass(
+		SearchContainerTag<R> parentTag =
+			(SearchContainerTag<R>)findAncestorWithClass(
 				this, SearchContainerTag.class);
 
 		if (parentTag != null) {

@@ -36,7 +36,7 @@ import javax.servlet.jsp.JspException;
 /**
  * @author Raymond Augé
  */
-public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
+public class SearchContainerRowTag<R> extends ParamAndPropertyAncestorTagImpl {
 
 	public static final String DEFAULT_INDEX_VAR = "index";
 
@@ -67,11 +67,11 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 
 	public int doAfterBody() {
 		if (!_headerNamesAssigned) {
-			SearchContainerTag parentTag =
-				(SearchContainerTag)findAncestorWithClass(
+			SearchContainerTag<R> parentTag =
+				(SearchContainerTag<R>)findAncestorWithClass(
 					this, SearchContainerTag.class);
 
-			SearchContainer searchContainer = parentTag.getSearchContainer();
+			SearchContainer<R> searchContainer = parentTag.getSearchContainer();
 
 			searchContainer.setHeaderNames(_headerNames);
 			searchContainer.setOrderableHeaders(_orderableHeaders);
@@ -116,8 +116,8 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 	}
 
 	public int doStartTag() throws JspException {
-		SearchContainerTag parentTag =
-			(SearchContainerTag)findAncestorWithClass(
+		SearchContainerTag<R> parentTag =
+			(SearchContainerTag<R>)findAncestorWithClass(
 				this, SearchContainerTag.class);
 
 		if (parentTag == null) {
@@ -297,7 +297,7 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 	private String _keyProperty;
 	private String _modelVar = DEFAULT_MODEL_VAR;
 	private Map<String, String> _orderableHeaders;
-	private List _results;
+	private List<R> _results;
 	private List<ResultRow> _resultRows;
 	private int _rowIndex;
 	private String _rowVar = DEFAULT_ROW_VAR;

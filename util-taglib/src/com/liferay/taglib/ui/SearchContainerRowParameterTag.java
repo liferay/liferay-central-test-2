@@ -24,12 +24,12 @@ import javax.servlet.jsp.tagext.TagSupport;
 /**
  * @author Brian Wing Shun Chan
  */
-public class SearchContainerRowParameterTag extends TagSupport {
+public class SearchContainerRowParameterTag<R> extends TagSupport {
 
 	public int doStartTag() throws JspException {
-		SearchContainerRowTag parentRowTag =
-			(SearchContainerRowTag)findAncestorWithClass(
-			this, SearchContainerRowTag.class);
+		SearchContainerRowTag<R> parentRowTag =
+			(SearchContainerRowTag<R>)findAncestorWithClass(
+				this, SearchContainerRowTag.class);
 
 		if (parentRowTag == null) {
 			throw new JspTagException(

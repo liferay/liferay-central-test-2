@@ -34,12 +34,12 @@ import javax.servlet.jsp.tagext.BodyContent;
 /**
  * @author Raymond Augé
  */
-public class SearchContainerColumnTextTag extends SearchContainerColumnTag {
+public class SearchContainerColumnTextTag<R> extends SearchContainerColumnTag {
 
 	public int doEndTag() {
 		try {
-			SearchContainerRowTag parentTag =
-				(SearchContainerRowTag)findAncestorWithClass(
+			SearchContainerRowTag<R> parentTag =
+				(SearchContainerRowTag<R>)findAncestorWithClass(
 					this, SearchContainerRowTag.class);
 
 			ResultRow row = parentTag.getRow();
@@ -106,8 +106,9 @@ public class SearchContainerColumnTextTag extends SearchContainerColumnTag {
 			_orderableProperty = name;
 		}
 
-		SearchContainerRowTag parentRowTag = (SearchContainerRowTag)
-			findAncestorWithClass(this, SearchContainerRowTag.class);
+		SearchContainerRowTag<R> parentRowTag =
+			(SearchContainerRowTag<R>)findAncestorWithClass(
+				this, SearchContainerRowTag.class);
 
 		if (parentRowTag == null) {
 			throw new JspTagException(

@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Brian Wing Shun Chan
  */
-public class SearchIteratorTag extends SearchPaginatorTag {
+public class SearchIteratorTag<R> extends SearchPaginatorTag<R> {
 
 	public void setPaginate(boolean paginate) {
 		_paginate = paginate;

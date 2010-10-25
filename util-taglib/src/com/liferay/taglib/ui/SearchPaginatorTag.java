@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Brian Wing Shun Chan
  */
-public class SearchPaginatorTag extends SearchFormTag {
+public class SearchPaginatorTag<R> extends SearchFormTag<R> {
 
 	public void setType(String type) {
 		_type = type;

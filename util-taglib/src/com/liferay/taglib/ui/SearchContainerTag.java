@@ -38,7 +38,7 @@ import javax.servlet.jsp.JspException;
 /**
  * @author Raymond Augé
  */
-public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
+public class SearchContainerTag<R> extends ParamAndPropertyAncestorTagImpl {
 
 	public static final String DEFAULT_VAR = "searchContainer";
 
@@ -86,7 +86,7 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 			}
 
 			if (_searchContainer == null) {
-				_searchContainer = new SearchContainer(
+				_searchContainer = new SearchContainer<R>(
 					portletRequest, _displayTerms, _searchTerms, getCurParam(),
 					getDelta(), _iteratorURL, null, _emptyResultsMessage);
 			}
@@ -181,7 +181,7 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 		return _rowChecker;
 	}
 
-	public SearchContainer getSearchContainer() {
+	public SearchContainer<R> getSearchContainer() {
 		return _searchContainer;
 	}
 
@@ -273,7 +273,7 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 		_rowChecker = rowChecker;
 	}
 
-	public void setSearchContainer(SearchContainer searchContainer) {
+	public void setSearchContainer(SearchContainer<R> searchContainer) {
 		_searchContainer = searchContainer;
 	}
 
@@ -305,7 +305,7 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 	private String _orderByTypeParam =
 		SearchContainer.DEFAULT_ORDER_BY_TYPE_PARAM;
 	private RowChecker _rowChecker;
-	private SearchContainer _searchContainer;
+	private SearchContainer<R> _searchContainer;
 	private DisplayTerms _searchTerms;
 	private String _var = DEFAULT_VAR;
 

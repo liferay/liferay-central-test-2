@@ -27,7 +27,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 /**
  * @author Raymond Augé
  */
-public class SearchContainerResultsTag extends TagSupport {
+public class SearchContainerResultsTag<R> extends TagSupport {
 
 	public static final String DEFAULT_RESULTS_VAR = "results";
 
@@ -36,7 +36,7 @@ public class SearchContainerResultsTag extends TagSupport {
 	public int doEndTag() throws JspException {
 		try {
 			if (_results == null) {
-				_results = (List)pageContext.getAttribute(_resultsVar);
+				_results = (List<R>)pageContext.getAttribute(_resultsVar);
 				_total = (Integer)pageContext.getAttribute(_totalVar);
 			}
 
@@ -46,11 +46,11 @@ public class SearchContainerResultsTag extends TagSupport {
 				}
 			}
 
-			SearchContainerTag parentTag =
-				(SearchContainerTag)findAncestorWithClass(
+			SearchContainerTag<R> parentTag =
+				(SearchContainerTag<R>)findAncestorWithClass(
 					this, SearchContainerTag.class);
 
-			SearchContainer searchContainer = parentTag.getSearchContainer();
+			SearchContainer<R> searchContainer = parentTag.getSearchContainer();
 
 			searchContainer.setResults(_results);
 			searchContainer.setTotal(_total);
@@ -76,8 +76,8 @@ public class SearchContainerResultsTag extends TagSupport {
 	}
 
 	public int doStartTag() throws JspException {
-		SearchContainerTag parentTag =
-			(SearchContainerTag)findAncestorWithClass(
+		SearchContainerTag<R> parentTag =
+			(SearchContainerTag<R>)findAncestorWithClass(
 				this, SearchContainerTag.class);
 
 		if (parentTag == null) {
@@ -85,14 +85,14 @@ public class SearchContainerResultsTag extends TagSupport {
 		}
 
 		if (_results == null) {
-			pageContext.setAttribute(_resultsVar, new ArrayList());
+			pageContext.setAttribute(_resultsVar, new ArrayList<R>());
 			pageContext.setAttribute(_totalVar, 0);
 		}
 
 		return EVAL_BODY_INCLUDE;
 	}
 
-	public List getResults() {
+	public List<R> getResults() {
 		return _results;
 	}
 
@@ -108,7 +108,7 @@ public class SearchContainerResultsTag extends TagSupport {
 		return _totalVar;
 	}
 
-	public void setResults(List results) {
+	public void setResults(List<R> results) {
 		_results = results;
 	}
 
@@ -124,7 +124,7 @@ public class SearchContainerResultsTag extends TagSupport {
 		_totalVar = totalVar;
 	}
 
-	private List _results;
+	private List<R> _results;
 	private String _resultsVar = DEFAULT_RESULTS_VAR;
 	private int _total;
 	private String _totalVar = DEFAULT_TOTAL_VAR;

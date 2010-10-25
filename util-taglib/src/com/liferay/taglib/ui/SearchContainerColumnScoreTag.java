@@ -25,14 +25,14 @@ import javax.servlet.jsp.JspTagException;
 /**
  * @author Raymond Augé
  */
-public class SearchContainerColumnScoreTag extends SearchContainerColumnTag {
+public class SearchContainerColumnScoreTag<R> extends SearchContainerColumnTag {
 
 	private static final String DEFAULT_NAME = "score";
 
 	public int doEndTag() {
 		try {
-			SearchContainerRowTag parentTag =
-				(SearchContainerRowTag)findAncestorWithClass(
+			SearchContainerRowTag<R> parentTag =
+				(SearchContainerRowTag<R>)findAncestorWithClass(
 					this, SearchContainerRowTag.class);
 
 			ResultRow row = parentTag.getRow();
@@ -56,8 +56,8 @@ public class SearchContainerColumnScoreTag extends SearchContainerColumnTag {
 	}
 
 	public int doStartTag() throws JspException {
-		SearchContainerRowTag parentRowTag =
-			(SearchContainerRowTag)findAncestorWithClass(
+		SearchContainerRowTag<R> parentRowTag =
+			(SearchContainerRowTag<R>)findAncestorWithClass(
 				this, SearchContainerRowTag.class);
 
 		if (parentRowTag == null) {
