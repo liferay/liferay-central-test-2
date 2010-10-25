@@ -47,7 +47,6 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -136,26 +135,26 @@ public class ServiceComponentLocalServiceImpl
 		}
 
 		try {
-			Document doc = SAXReaderUtil.createDocument(StringPool.UTF8);
+			Document document = SAXReaderUtil.createDocument(StringPool.UTF8);
 
-			Element data = doc.addElement("data");
+			Element dataElement = document.addElement("data");
 
 			String tablesSQL = HttpUtil.URLtoString(servletContext.getResource(
 				"/WEB-INF/sql/tables.sql"));
 
-			data.addElement("tables-sql").addCDATA(tablesSQL);
+			dataElement.addElement("tables-sql").addCDATA(tablesSQL);
 
 			String sequencesSQL = HttpUtil.URLtoString(
 				servletContext.getResource("/WEB-INF/sql/sequences.sql"));
 
-			data.addElement("sequences-sql").addCDATA(sequencesSQL);
+			dataElement.addElement("sequences-sql").addCDATA(sequencesSQL);
 
 			String indexesSQL = HttpUtil.URLtoString(servletContext.getResource(
 				"/WEB-INF/sql/indexes.sql"));
 
-			data.addElement("indexes-sql").addCDATA(indexesSQL);
+			dataElement.addElement("indexes-sql").addCDATA(indexesSQL);
 
-			String dataXML = doc.formattedString();
+			String dataXML = document.formattedString();
 
 			serviceComponent.setData(dataXML);
 
@@ -267,21 +266,21 @@ public class ServiceComponentLocalServiceImpl
 	protected void clearCacheRegistry(ServletContext servletContext)
 		throws DocumentException {
 
-		InputStream is = servletContext.getResourceAsStream(
+		InputStream inputStream = servletContext.getResourceAsStream(
 			"/WEB-INF/classes/META-INF/portlet-hbm.xml");
 
-		if (is == null) {
+		if (inputStream == null) {
 			return;
 		}
 
-		Document doc = SAXReaderUtil.read(is);
+		Document document = SAXReaderUtil.read(inputStream);
 
-		Element root = doc.getRootElement();
+		Element rootElement = document.getRootElement();
 
-		List<Element> classEls = root.elements("class");
+		List<Element> classElements = rootElement.elements("class");
 
-		for (Element classEl : classEls) {
-			String name = classEl.attributeValue("name");
+		for (Element classElement : classElements) {
+			String name = classElement.attributeValue("name");
 
 			CacheRegistryUtil.unregister(name);
 		}
@@ -322,16 +321,14 @@ public class ServiceComponentLocalServiceImpl
 	protected List<String> getModels(String xml) throws DocumentException {
 		List<String> models = new ArrayList<String>();
 
-		Document doc = SAXReaderUtil.read(xml);
+		Document document = SAXReaderUtil.read(xml);
 
-		Element root = doc.getRootElement();
+		Element rootElement = document.getRootElement();
 
-		Iterator<Element> itr = root.elements("model").iterator();
+		List<Element> modelElements = rootElement.elements("model");
 
-		while (itr.hasNext()) {
-			Element modelEl = itr.next();
-
-			String name = modelEl.attributeValue("name");
+		for (Element modelElement : modelElements) {
+			String name = modelElement.attributeValue("name");
 
 			models.add(name);
 		}
