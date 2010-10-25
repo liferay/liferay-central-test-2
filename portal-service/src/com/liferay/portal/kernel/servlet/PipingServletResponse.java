@@ -125,8 +125,8 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 
 	public PrintWriter getWriter() {
 		if (_printWriter == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
+			if (_log.isDebugEnabled()) {
+				_log.debug(
 					"Getting a writer when an output stream is available is " +
 						"not recommended because it is slow");
 			}
