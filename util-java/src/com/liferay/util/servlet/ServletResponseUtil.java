@@ -177,9 +177,10 @@ public class ServletResponseUtil {
 				response.setContentLength(contentLength);
 
 				if (response instanceof ByteBufferServletResponse) {
-					ByteBufferServletResponse targetByteBufferResponse =
+					ByteBufferServletResponse byteBufferResponse =
 						(ByteBufferServletResponse)response;
-					targetByteBufferResponse.setByteBuffer(
+
+					byteBufferResponse.setByteBuffer(
 						ByteBuffer.wrap(bytes, offset, contentLength));
 				}
 				else {
@@ -247,9 +248,10 @@ public class ServletResponseUtil {
 		throws IOException {
 
 		if (response instanceof ByteBufferServletResponse) {
-			ByteBufferServletResponse targetByteBufferResponse =
+			ByteBufferServletResponse byteBufferResponse =
 				(ByteBufferServletResponse)response;
-			targetByteBufferResponse.setByteBuffer(byteBuffer);
+
+			byteBufferResponse.setByteBuffer(byteBuffer);
 		}
 		else {
 			write(
@@ -261,17 +263,21 @@ public class ServletResponseUtil {
 	public static void write(HttpServletResponse response, File file)
 		throws IOException {
 
-		if (response instanceof StringServletResponse) {
-			StringServletResponse targetStringResponse =
-				(StringServletResponse)response;
-			String content = FileUtil.read(file);
-			targetStringResponse.setString(content);
-		}
-		else if (response instanceof ByteBufferServletResponse) {
-			ByteBufferServletResponse targetByteBufferResponse =
+		if (response instanceof ByteBufferServletResponse) {
+			ByteBufferServletResponse byteBufferResponse =
 				(ByteBufferServletResponse)response;
+
 			ByteBuffer byteBuffer = ByteBuffer.wrap(FileUtil.getBytes(file));
-			targetByteBufferResponse.setByteBuffer(byteBuffer);
+
+			byteBufferResponse.setByteBuffer(byteBuffer);
+		}
+		else if (response instanceof StringServletResponse) {
+			StringServletResponse stringResponse =
+				(StringServletResponse)response;
+
+			String s = FileUtil.read(file);
+
+			stringResponse.setString(s);
 		}
 		else {
 			FileInputStream fileInputStream = new FileInputStream(file);
@@ -318,13 +324,15 @@ public class ServletResponseUtil {
 		throws IOException {
 
 		if (response instanceof StringServletResponse) {
-			StringServletResponse targetStringResponse =
+			StringServletResponse stringResponse =
 				(StringServletResponse)response;
-			targetStringResponse.setString(s);
+
+			stringResponse.setString(s);
 		}
 		else {
-			ByteBuffer byteBuffer =
-				CharsetEncoderUtil.encode(StringPool.UTF8, s);
+			ByteBuffer byteBuffer = CharsetEncoderUtil.encode(
+				StringPool.UTF8, s);
+
 			write(response, byteBuffer);
 		}
 	}
