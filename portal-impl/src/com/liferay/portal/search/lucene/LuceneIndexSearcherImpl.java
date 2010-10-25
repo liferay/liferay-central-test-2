@@ -76,6 +76,9 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 				luceneSort = new org.apache.lucene.search.Sort(sortFields);
 			}
+			else {
+				luceneSort = new org.apache.lucene.search.Sort();
+			}
 
 			long startTime = System.currentTimeMillis();
 
