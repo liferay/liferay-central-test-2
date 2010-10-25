@@ -541,7 +541,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.updateDiscussionMessage(
 			getUserId(), messageId, subject, body,
-			serviceContext.getWorkflowAction());
+			className, classPK, serviceContext.getWorkflowAction());
 	}
 
 	public MBMessage updateMessage(

@@ -721,6 +721,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 							MBMessageLocalServiceUtil.updateDiscussionMessage(
 								userId, existingMessage.getMessageId(),
 								message.getSubject(), message.getBody(),
+								classObj.getName(), newClassPK,
 								WorkflowConstants.ACTION_PUBLISH);
 					}
 				}
