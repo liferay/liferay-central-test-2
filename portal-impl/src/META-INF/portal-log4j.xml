@@ -256,6 +256,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.kernel.servlet.PipingServletResponse">
+		<priority value="WARN" />
+	</category>
+
 	<category name="com.liferay.portal.kernel.servlet.PortletContextListener">
 		<priority value="INFO" />
 	</category>
