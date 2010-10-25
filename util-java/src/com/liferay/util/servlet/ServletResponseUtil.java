@@ -17,6 +17,7 @@ package com.liferay.util.servlet;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.nio.charset.CharsetEncoderUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.ByteBufferServletResponse;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
@@ -175,10 +176,18 @@ public class ServletResponseUtil {
 
 				response.setContentLength(contentLength);
 
-				ServletOutputStream servletOutputStream =
-					response.getOutputStream();
+				if (response instanceof ByteBufferServletResponse) {
+					ByteBufferServletResponse targetByteBufferResponse =
+						(ByteBufferServletResponse)response;
+					targetByteBufferResponse.setByteBuffer(
+						ByteBuffer.wrap(bytes, offset, contentLength));
+				}
+				else {
+					ServletOutputStream servletOutputStream =
+						response.getOutputStream();
 
-				servletOutputStream.write(bytes, offset, contentLength);
+					servletOutputStream.write(bytes, offset, contentLength);
+				}
 			}
 		}
 		catch (IOException ioe) {
@@ -237,39 +246,50 @@ public class ServletResponseUtil {
 			HttpServletResponse response, ByteBuffer byteBuffer)
 		throws IOException {
 
-		write(
-			response, byteBuffer.array(), byteBuffer.position(),
-			byteBuffer.limit());
-	}
-
-	public static void write(
-			HttpServletResponse response,
-			ByteBufferServletResponse byteBufferResponse)
-		throws IOException {
-
-		ByteBuffer byteBuffer = byteBufferResponse.getByteBuffer();
-
-		write(response, byteBuffer);
+		if (response instanceof ByteBufferServletResponse) {
+			ByteBufferServletResponse targetByteBufferResponse =
+				(ByteBufferServletResponse)response;
+			targetByteBufferResponse.setByteBuffer(byteBuffer);
+		}
+		else {
+			write(
+				response, byteBuffer.array(), byteBuffer.position(),
+				byteBuffer.limit());
+		}
 	}
 
 	public static void write(HttpServletResponse response, File file)
 		throws IOException {
 
-		FileInputStream fileInputStream = new FileInputStream(file);
-
-		FileChannel fileChannel = fileInputStream.getChannel();
-
-		try {
-			int contentLength = (int)fileChannel.size();
-
-			response.setContentLength(contentLength);
-
-			fileChannel.transferTo(
-				0, contentLength,
-				Channels.newChannel(response.getOutputStream()));
+		if (response instanceof StringServletResponse) {
+			StringServletResponse targetStringResponse =
+				(StringServletResponse)response;
+			String content = FileUtil.read(file);
+			targetStringResponse.setString(content);
 		}
-		finally {
-			fileChannel.close();
+		else if (response instanceof ByteBufferServletResponse) {
+			ByteBufferServletResponse targetByteBufferResponse =
+				(ByteBufferServletResponse)response;
+			ByteBuffer byteBuffer = ByteBuffer.wrap(FileUtil.getBytes(file));
+			targetByteBufferResponse.setByteBuffer(byteBuffer);
+		}
+		else {
+			FileInputStream fileInputStream = new FileInputStream(file);
+
+			FileChannel fileChannel = fileInputStream.getChannel();
+
+			try {
+				int contentLength = (int)fileChannel.size();
+
+				response.setContentLength(contentLength);
+
+				fileChannel.transferTo(
+					0, contentLength,
+					Channels.newChannel(response.getOutputStream()));
+			}
+			finally {
+				fileChannel.close();
+			}
 		}
 	}
 
@@ -297,7 +317,16 @@ public class ServletResponseUtil {
 	public static void write(HttpServletResponse response, String s)
 		throws IOException {
 
-		write(response, s.getBytes(StringPool.UTF8));
+		if (response instanceof StringServletResponse) {
+			StringServletResponse targetStringResponse =
+				(StringServletResponse)response;
+			targetStringResponse.setString(s);
+		}
+		else {
+			ByteBuffer byteBuffer =
+				CharsetEncoderUtil.encode(StringPool.UTF8, s);
+			write(response, byteBuffer);
+		}
 	}
 
 	public static void write(

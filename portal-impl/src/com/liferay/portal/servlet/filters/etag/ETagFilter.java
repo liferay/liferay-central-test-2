@@ -46,7 +46,8 @@ public class ETagFilter extends BasePortalFilter {
 				ETagFilter.class, request, byteBufferResponse, filterChain);
 
 			if (!ETagUtil.processETag(request, response, byteBufferResponse)) {
-				ServletResponseUtil.write(response, byteBufferResponse);
+				ServletResponseUtil.write(
+					response, byteBufferResponse.getByteBuffer());
 			}
 		}
 		else {
