@@ -48,6 +48,8 @@ import com.liferay.portal.service.LayoutBranchService;
 import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutPrototypeLocalService;
 import com.liferay.portal.service.LayoutPrototypeService;
+import com.liferay.portal.service.LayoutRevisionLocalService;
+import com.liferay.portal.service.LayoutRevisionService;
 import com.liferay.portal.service.LayoutService;
 import com.liferay.portal.service.LayoutSetLocalService;
 import com.liferay.portal.service.LayoutSetPrototypeLocalService;
@@ -130,6 +132,7 @@ import com.liferay.portal.service.persistence.LayoutBranchPersistence;
 import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutPersistence;
 import com.liferay.portal.service.persistence.LayoutPrototypePersistence;
+import com.liferay.portal.service.persistence.LayoutRevisionPersistence;
 import com.liferay.portal.service.persistence.LayoutSetPersistence;
 import com.liferay.portal.service.persistence.LayoutSetPrototypePersistence;
 import com.liferay.portal.service.persistence.ListTypePersistence;
@@ -1137,6 +1140,63 @@ public abstract class PluginSettingLocalServiceBaseImpl
 	public void setLayoutPrototypePersistence(
 		LayoutPrototypePersistence layoutPrototypePersistence) {
 		this.layoutPrototypePersistence = layoutPrototypePersistence;
+	}
+
+	/**
+	 * Gets the layout revision local service.
+	 *
+	 * @return the layout revision local service
+	 */
+	public LayoutRevisionLocalService getLayoutRevisionLocalService() {
+		return layoutRevisionLocalService;
+	}
+
+	/**
+	 * Sets the layout revision local service.
+	 *
+	 * @param layoutRevisionLocalService the layout revision local service
+	 */
+	public void setLayoutRevisionLocalService(
+		LayoutRevisionLocalService layoutRevisionLocalService) {
+		this.layoutRevisionLocalService = layoutRevisionLocalService;
+	}
+
+	/**
+	 * Gets the layout revision remote service.
+	 *
+	 * @return the layout revision remote service
+	 */
+	public LayoutRevisionService getLayoutRevisionService() {
+		return layoutRevisionService;
+	}
+
+	/**
+	 * Sets the layout revision remote service.
+	 *
+	 * @param layoutRevisionService the layout revision remote service
+	 */
+	public void setLayoutRevisionService(
+		LayoutRevisionService layoutRevisionService) {
+		this.layoutRevisionService = layoutRevisionService;
+	}
+
+	/**
+	 * Gets the layout revision persistence.
+	 *
+	 * @return the layout revision persistence
+	 */
+	public LayoutRevisionPersistence getLayoutRevisionPersistence() {
+		return layoutRevisionPersistence;
+	}
+
+	/**
+	 * Sets the layout revision persistence.
+	 *
+	 * @param layoutRevisionPersistence the layout revision persistence
+	 */
+	public void setLayoutRevisionPersistence(
+		LayoutRevisionPersistence layoutRevisionPersistence) {
+		this.layoutRevisionPersistence = layoutRevisionPersistence;
 	}
 
 	/**
@@ -3449,6 +3509,12 @@ public abstract class PluginSettingLocalServiceBaseImpl
 	protected LayoutPrototypeService layoutPrototypeService;
 	@BeanReference(type = LayoutPrototypePersistence.class)
 	protected LayoutPrototypePersistence layoutPrototypePersistence;
+	@BeanReference(type = LayoutRevisionLocalService.class)
+	protected LayoutRevisionLocalService layoutRevisionLocalService;
+	@BeanReference(type = LayoutRevisionService.class)
+	protected LayoutRevisionService layoutRevisionService;
+	@BeanReference(type = LayoutRevisionPersistence.class)
+	protected LayoutRevisionPersistence layoutRevisionPersistence;
 	@BeanReference(type = LayoutSetLocalService.class)
 	protected LayoutSetLocalService layoutSetLocalService;
 	@BeanReference(type = LayoutSetService.class)

@@ -300,6 +300,12 @@ create index IX_ABC44457 on LayoutBranch (groupId, name);
 create index IX_30616AAA on LayoutPrototype (companyId);
 create index IX_557A639F on LayoutPrototype (companyId, active_);
 
+create index IX_4806241C on LayoutRevision (branchId);
+create index IX_3DA6CD67 on LayoutRevision (branchId, plid);
+create index IX_E9CB05FB on LayoutRevision (branchId, plid, head);
+create index IX_3450B54D on LayoutRevision (branchId, plid, status);
+create index IX_9329C9D6 on LayoutRevision (plid);
+
 create index IX_A40B8BEC on LayoutSet (groupId);
 create unique index IX_48550691 on LayoutSet (groupId, privateLayout);
 create index IX_5ABC2905 on LayoutSet (virtualHost);
