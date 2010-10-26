@@ -72,29 +72,29 @@
 		<java
 			classname="com.liferay.portal.tools.DBLoader"
 			classpathref="project.classpath"
-			fork="true"
+			fork="${java.fork}"
 			maxmemory="256m"
 			newenvironment="true"
 		>
-			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<jvmarg value="-Dfile.encoding=UTF-8" />
-			<arg value="hypersonic" />
-			<arg value="${database.name}" />
-			<arg value="portal${minimal.suffix}/portal${minimal.suffix}-hypersonic.sql" />
+			<arg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<arg value="-Dfile.encoding=UTF-8" />
+			<arg value="database.type=hypersonic" />
+			<arg value="database.name=${database.name}" />
+			<arg value="file.name=${basedir}/portal${minimal.suffix}/portal${minimal.suffix}-hypersonic.sql" />
 		</java>
 
 		<java
 			classname="com.liferay.portal.tools.DBLoader"
 			classpathref="project.classpath"
-			fork="true"
+			fork="${java.fork}"
 			maxmemory="256m"
 			newenvironment="true"
 		>
-			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<jvmarg value="-Dfile.encoding=UTF-8" />
-			<arg value="hypersonic" />
-			<arg value="${database.name}" />
-			<arg value="indexes.sql" />
+			<arg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<arg value="-Dfile.encoding=UTF-8" />
+			<arg value="database.type=hypersonic" />
+			<arg value="database.name=${database.name}" />
+			<arg value="file.name=${basedir}/indexes.sql" />
 		</java>
 	</target>
 

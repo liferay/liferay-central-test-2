@@ -29,6 +29,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 
+import java.util.Map;
+
 import org.apache.derby.tools.ij;
 
 /**
@@ -37,15 +39,13 @@ import org.apache.derby.tools.ij;
 public class DBLoader {
 
 	public static void main(String[] args) {
-		if (args.length == 2) {
-			new DBLoader(args[0], args[1], StringPool.BLANK);
-		}
-		else if (args.length == 3) {
-			new DBLoader(args[0], args[1], args[2]);
-		}
-		else {
-			throw new IllegalArgumentException();
-		}
+		Map<String, String> arguments = ArgumentUtil.getArguments(args);
+
+		String databaseType = arguments.get("database.type");
+		String databaseName = arguments.get("database.name");
+		String fileName = arguments.get("file.name");
+
+		new DBLoader(databaseType, databaseName, fileName);
 	}
 
 	public DBLoader(String databaseType, String databaseName, String fileName) {
