@@ -43,6 +43,8 @@ import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.ImageService;
+import com.liferay.portal.service.LayoutBranchLocalService;
+import com.liferay.portal.service.LayoutBranchService;
 import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutPrototypeLocalService;
 import com.liferay.portal.service.LayoutPrototypeService;
@@ -124,6 +126,7 @@ import com.liferay.portal.service.persistence.EmailAddressPersistence;
 import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.ImagePersistence;
+import com.liferay.portal.service.persistence.LayoutBranchPersistence;
 import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutPersistence;
 import com.liferay.portal.service.persistence.LayoutPrototypePersistence;
@@ -1016,6 +1019,62 @@ public abstract class CompanyLocalServiceBaseImpl implements CompanyLocalService
 	 */
 	public void setLayoutFinder(LayoutFinder layoutFinder) {
 		this.layoutFinder = layoutFinder;
+	}
+
+	/**
+	 * Gets the layout branch local service.
+	 *
+	 * @return the layout branch local service
+	 */
+	public LayoutBranchLocalService getLayoutBranchLocalService() {
+		return layoutBranchLocalService;
+	}
+
+	/**
+	 * Sets the layout branch local service.
+	 *
+	 * @param layoutBranchLocalService the layout branch local service
+	 */
+	public void setLayoutBranchLocalService(
+		LayoutBranchLocalService layoutBranchLocalService) {
+		this.layoutBranchLocalService = layoutBranchLocalService;
+	}
+
+	/**
+	 * Gets the layout branch remote service.
+	 *
+	 * @return the layout branch remote service
+	 */
+	public LayoutBranchService getLayoutBranchService() {
+		return layoutBranchService;
+	}
+
+	/**
+	 * Sets the layout branch remote service.
+	 *
+	 * @param layoutBranchService the layout branch remote service
+	 */
+	public void setLayoutBranchService(LayoutBranchService layoutBranchService) {
+		this.layoutBranchService = layoutBranchService;
+	}
+
+	/**
+	 * Gets the layout branch persistence.
+	 *
+	 * @return the layout branch persistence
+	 */
+	public LayoutBranchPersistence getLayoutBranchPersistence() {
+		return layoutBranchPersistence;
+	}
+
+	/**
+	 * Sets the layout branch persistence.
+	 *
+	 * @param layoutBranchPersistence the layout branch persistence
+	 */
+	public void setLayoutBranchPersistence(
+		LayoutBranchPersistence layoutBranchPersistence) {
+		this.layoutBranchPersistence = layoutBranchPersistence;
 	}
 
 	/**
@@ -3373,6 +3432,12 @@ public abstract class CompanyLocalServiceBaseImpl implements CompanyLocalService
 	protected LayoutPersistence layoutPersistence;
 	@BeanReference(type = LayoutFinder.class)
 	protected LayoutFinder layoutFinder;
+	@BeanReference(type = LayoutBranchLocalService.class)
+	protected LayoutBranchLocalService layoutBranchLocalService;
+	@BeanReference(type = LayoutBranchService.class)
+	protected LayoutBranchService layoutBranchService;
+	@BeanReference(type = LayoutBranchPersistence.class)
+	protected LayoutBranchPersistence layoutBranchPersistence;
 	@BeanReference(type = LayoutPrototypeLocalService.class)
 	protected LayoutPrototypeLocalService layoutPrototypeLocalService;
 	@BeanReference(type = LayoutPrototypeService.class)

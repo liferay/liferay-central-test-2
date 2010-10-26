@@ -277,6 +277,25 @@
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.LayoutBranchModelImpl">
+		<attributes>
+			<id name="branchId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="name" />
+			<basic name="description" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.LayoutPrototypeModelImpl">
 		<attributes>
 			<id name="layoutPrototypeId" />
@@ -2734,6 +2753,10 @@
 		<attributes>
 			<transient name="typeSettingsProperties" />
 		</attributes>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.LayoutBranchImpl" name="LayoutBranch">
+		<table name="LayoutBranch" />
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.LayoutPrototypeImpl" name="LayoutPrototype">
 		<table name="LayoutPrototype" />

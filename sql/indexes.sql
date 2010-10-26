@@ -294,6 +294,9 @@ create index IX_23922F7D on Layout (iconImageId);
 create index IX_D0822724 on Layout (uuid_);
 create unique index IX_CED31606 on Layout (uuid_, groupId);
 
+create index IX_98834698 on LayoutBranch (groupId);
+create index IX_ABC44457 on LayoutBranch (groupId, name);
+
 create index IX_30616AAA on LayoutPrototype (companyId);
 create index IX_557A639F on LayoutPrototype (companyId, active_);
 
