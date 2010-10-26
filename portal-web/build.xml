@@ -449,7 +449,6 @@
 								<java
 									classname="com.liferay.portal.tools.ThumbnailBuilder"
 									classpathref="project.classpath"
-									fork="false"
 								>
 									<arg value="thumbnail.original.file=@{file}" />
 									<arg value="thumbnail.thumbnail.file=${thumbnail.file}" />
