@@ -24,28 +24,7 @@ import java.util.Calendar;
  * @author Douglas Wong
  */
 public class RecurrenceMonthlyByDayTest extends RecurrenceTestCase {
-
-	public void testDtStart() {
-		Recurrence recurrence = getRecurrence(
-			dtStart, durationOneHour, FRIDAY, 3, 1);
-
-		Calendar beforeDtStart = getCalendar(2008, FEBRUARY, 5, 22, 9);
-
-		assertRecurrenceEquals(false, recurrence, beforeDtStart);
-
-		Calendar duringDtStart1 = getCalendar(2008, FEBRUARY, 5, 22, 10);
-		Calendar duringDtStart2 = getCalendar(2008, FEBRUARY, 5, 23, 9);
-
-		assertRecurrenceEquals(true, recurrence, duringDtStart1);
-		assertRecurrenceEquals(true, recurrence, duringDtStart2);
-
-		Calendar afterDtStart1 = getCalendar(2008, FEBRUARY, 5, 23, 10);
-		Calendar afterDtStart2 = getCalendar(2009, FEBRUARY, 5, 22, 10);
-
-		assertRecurrenceEquals(false, recurrence, afterDtStart1);
-		assertRecurrenceEquals(false, recurrence, afterDtStart2);
-	}
-
+	
 	public void testRecurrence() {
 		Recurrence recurrence = getRecurrence(
 			dtStart, durationOneHour, FRIDAY, 3, 1);
