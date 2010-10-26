@@ -92,7 +92,7 @@ public class ${entity.name}ServiceSoap {
 				<#elseif entity.hasColumns()>
 					${soapModelName}[]
 				<#else>
-					java.util.List
+					${returnTypeGenericsName}
 				</#if>
 			<#else>
 				${returnTypeGenericsName}
