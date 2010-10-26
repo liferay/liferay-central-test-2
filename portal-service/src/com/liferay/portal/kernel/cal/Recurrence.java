@@ -558,18 +558,6 @@ public class Recurrence implements Serializable {
 			return false;
 		}
 
-		if (myCurrent.getTime().getTime()
-			< dtStart.getTime().getTime() + duration.getInterval()) {
-
-			// We are within "duration" of dtStart.
-
-			if (debug) {
-				System.err.println("within duration of start");
-			}
-
-			return true;
-		}
-
 		Calendar candidate = getCandidateStartTime(myCurrent);
 
 		/* Loop over ranges for the duration. */
