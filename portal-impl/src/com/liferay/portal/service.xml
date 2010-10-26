@@ -540,6 +540,45 @@
 		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
 		<reference package-path="com.liferay.portlet.tasks" entity="TasksProposal" />
 	</entity>
+	<entity name="LayoutBranch" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="branchId" type="long" primary="true" />
+
+		<!-- Group Instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" />
+		<column name="description" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="name" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="G" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="G_N" return-type="LayoutBranch">
+			<finder-column name="groupId" />
+			<finder-column name="name" />
+		</finder>
+	</entity>
 	<entity name="LayoutPrototype" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
@@ -2079,6 +2118,7 @@
 		<exception>InvalidLock</exception>
 		<exception>LARFile</exception>
 		<exception>LARType</exception>
+		<exception>LayoutBranchName</exception>
 		<exception>LayoutFriendlyURL</exception>
 		<exception>LayoutHidden</exception>
 		<exception>LayoutImport</exception>
@@ -2105,6 +2145,7 @@
 		<exception>RemoteExport</exception>
 		<exception>RequiredGroup</exception>
 		<exception>RequiredLayout</exception>
+		<exception>RequiredLayoutBranch</exception>
 		<exception>RequiredOrganization</exception>
 		<exception>RequiredPasswordPolicy</exception>
 		<exception>RequiredReminderQuery</exception>

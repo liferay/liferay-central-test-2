@@ -341,6 +341,7 @@
 		</portlet-ref>
 		<permissions>
 			<supports>
+				<action-key>ADD_BRANCH</action-key>
 				<action-key>APPROVE_PROPOSAL</action-key>
 				<action-key>ASSIGN_MEMBERS</action-key>
 				<action-key>ASSIGN_REVIEWER</action-key>
@@ -359,6 +360,7 @@
 			<community-defaults />
 			<guest-defaults />
 			<guest-unsupported>
+				<action-key>ADD_BRANCH</action-key>
 				<action-key>APPROVE_PROPOSAL</action-key>
 				<action-key>ASSIGN_MEMBERS</action-key>
 				<action-key>ASSIGN_REVIEWER</action-key>
@@ -372,6 +374,27 @@
 				<action-key>PERMISSIONS</action-key>
 				<action-key>PUBLISH_STAGING</action-key>
 				<action-key>PUBLISH_TO_REMOTE</action-key>
+				<action-key>UPDATE</action-key>
+			</guest-unsupported>
+		</permissions>
+	</model-resource>
+	<model-resource>
+		<model-name>com.liferay.portal.model.LayoutBranch</model-name>
+		<portlet-ref>
+			<portlet-name>126</portlet-name>
+			<portlet-name>134</portlet-name>
+		</portlet-ref>
+		<permissions>
+			<supports>
+				<action-key>DELETE</action-key>
+				<action-key>PERMISSIONS</action-key>
+				<action-key>UPDATE</action-key>
+			</supports>
+			<community-defaults />
+			<guest-defaults />
+			<guest-unsupported>
+				<action-key>DELETE</action-key>
+				<action-key>PERMISSIONS</action-key>
 				<action-key>UPDATE</action-key>
 			</guest-unsupported>
 		</permissions>
@@ -429,6 +452,7 @@
 		</portlet-ref>
 		<permissions>
 			<supports>
+				<action-key>ADD_BRANCH</action-key>
 				<action-key>APPROVE_PROPOSAL</action-key>
 				<action-key>ASSIGN_MEMBERS</action-key>
 				<action-key>ASSIGN_REVIEWER</action-key>
@@ -449,6 +473,7 @@
 			<community-defaults />
 			<guest-defaults />
 			<guest-unsupported>
+				<action-key>ADD_BRANCH</action-key>
 				<action-key>APPROVE_PROPOSAL</action-key>
 				<action-key>ASSIGN_MEMBERS</action-key>
 				<action-key>ASSIGN_REVIEWER</action-key>

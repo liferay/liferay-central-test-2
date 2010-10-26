@@ -29,6 +29,8 @@ public class ActionKeys {
 
 	public static final String ADD_ATTACHMENT = "ADD_ATTACHMENT";
 
+	public static final String ADD_BRANCH = "ADD_BRANCH";
+
 	public static final String ADD_CATEGORY = "ADD_CATEGORY";
 
 	public static final String ADD_COMMUNITY = "ADD_COMMUNITY";
