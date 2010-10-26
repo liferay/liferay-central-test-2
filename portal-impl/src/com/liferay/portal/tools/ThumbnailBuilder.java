@@ -22,6 +22,8 @@ import java.awt.image.RenderedImage;
 
 import java.io.File;
 
+import java.util.Map;
+
 import javax.imageio.ImageIO;
 
 /**
@@ -30,16 +32,15 @@ import javax.imageio.ImageIO;
 public class ThumbnailBuilder {
 
 	public static void main(String[] args) {
-		File originalFile = new File(
-			System.getProperty("thumbnail.original.file"));
+		Map<String, String> arguments = ArgumentUtil.getArguments(args);
+
+		File originalFile = new File(arguments.get("thumbnail.original.file"));
 		File thumbnailFile = new File(
-			System.getProperty("thumbnail.thumbnail.file"));
-		int height = GetterUtil.getInteger(
-			System.getProperty("thumbnail.height"));
-		int width = GetterUtil.getInteger(
-			System.getProperty("thumbnail.width"));
+			arguments.get("thumbnail.thumbnail.file"));
+		int height = GetterUtil.getInteger(arguments.get("thumbnail.height"));
+		int width = GetterUtil.getInteger(arguments.get("thumbnail.width"));
 		boolean overwrite = GetterUtil.getBoolean(
-			System.getProperty("thumbnail.overwrite"));
+			arguments.get("thumbnail.overwrite"));
 
 		new ThumbnailBuilder(
 			originalFile, thumbnailFile, height, width, overwrite);
