@@ -96,6 +96,12 @@ public class ServiceContextFactory {
 	public static ServiceContext getInstance(PortletRequest portletRequest)
 		throws PortalException, SystemException {
 
+		// Theme display
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)portletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
@@ -104,12 +110,6 @@ public class ServiceContextFactory {
 		}
 		else {
 			serviceContext = new ServiceContext();
-
-			// Theme display
-
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)portletRequest.getAttribute(
-					WebKeys.THEME_DISPLAY);
 
 			serviceContext.setCompanyId(themeDisplay.getCompanyId());
 			serviceContext.setLanguageId(themeDisplay.getLanguageId());
@@ -120,11 +120,12 @@ public class ServiceContextFactory {
 			serviceContext.setPlid(themeDisplay.getPlid());
 			serviceContext.setPortalURL(
 				PortalUtil.getPortalURL(portletRequest));
-			serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
 			serviceContext.setUserDisplayURL(
 				themeDisplay.getUser().getDisplayURL(themeDisplay));
 			serviceContext.setUserId(themeDisplay.getUserId());
 		}
+
+		serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
 
 		// Attributes
 
