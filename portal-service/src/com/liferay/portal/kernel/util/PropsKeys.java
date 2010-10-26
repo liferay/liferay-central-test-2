@@ -1395,6 +1395,8 @@ public interface PropsKeys {
 
 	public static final String ROLES_REGULAR_SUBTYPES = "roles.regular.subtypes";
 
+	public static final String RSS_CONNECTION_TIMEOUT = "rss.connection.timeout";
+
 	public static final String SANDBOX_DEPLOY_DIR = "sandbox.deploy.dir";
 
 	public static final String SANDBOX_DEPLOY_ENABLED = "sandbox.deploy.enabled";

@@ -974,6 +974,8 @@ public class PropsValues {
 
 	public static final String[] ROLES_REGULAR_SUBTYPES = PropsUtil.getArray(PropsKeys.ROLES_REGULAR_SUBTYPES);
 
+	public static final int RSS_CONNECTION_TIMEOUT = GetterUtil.getInteger(PropsKeys.RSS_CONNECTION_TIMEOUT);
+
 	public static final String SANDBOX_DEPLOY_DIR = PropsUtil.get(PropsKeys.SANDBOX_DEPLOY_DIR);
 
 	public static final boolean SANDBOX_DEPLOY_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SANDBOX_DEPLOY_ENABLED));

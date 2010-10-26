@@ -14,15 +14,21 @@
 
 package com.liferay.portlet.rss.util;
 
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
+import com.liferay.portal.util.HttpImpl;
+import com.liferay.portal.util.PropsValues;
 
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 
-import java.net.URL;
+import org.apache.commons.httpclient.HostConfiguration;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.params.HttpClientParams;
 
 /**
  * @author Brian Wing Shun Chan
@@ -53,9 +59,26 @@ public class RSSWebCacheItem implements WebCacheItem {
 
 			channel = FeedParser.parse(builder, reader);*/
 
+			HttpImpl httpImpl = (HttpImpl)HttpUtil.getHttp();
+
+			HostConfiguration hostConfig = httpImpl.getHostConfig(_url);
+
+			HttpClient client = httpImpl.getClient(hostConfig);
+
+			HttpClientParams params = client.getParams();
+
+			params.setConnectionManagerTimeout(
+				PropsValues.RSS_CONNECTION_TIMEOUT);
+			params.setSoTimeout(PropsValues.RSS_CONNECTION_TIMEOUT);
+
+			GetMethod getMethod = new GetMethod(_url);
+
+			client.executeMethod(hostConfig, getMethod);
+
 			SyndFeedInput input = new SyndFeedInput();
 
-			feed = input.build(new XmlReader(new URL(_url)));
+			feed = input.build(
+				new XmlReader(getMethod.getResponseBodyAsStream()));
 		}
 		catch (Exception e) {
 			throw new WebCacheException(_url + " " + e.toString());
