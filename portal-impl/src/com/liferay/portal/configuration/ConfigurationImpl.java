@@ -120,6 +120,7 @@ public class ConfigurationImpl
 			}
 		}
 
+		EasyConf.refreshAll();
 		if (webId != null) {
 			_componentConfiguration = EasyConf.getConfiguration(
 				webId, getFileName(classLoader, name));

@@ -127,9 +127,19 @@ public class InitUtil {
 	}
 
 	public synchronized static void initWithSpring() {
+		initWithSpring(false);
+	}
+
+	public synchronized static void initWithSpring(boolean force) {
+		if (force) {
+			_initialized = false;
+		}
+
 		if (_initialized) {
 			return;
 		}
+
+		PropsUtil.reload();
 
 		init();
 

@@ -72,6 +72,10 @@ public class PropsUtil {
 		return _instance._getProperties(prefix, removePrefix);
 	}
 
+	public static void reload() {
+		_instance = new PropsUtil();
+	}
+
 	public static void removeProperties(Properties properties) {
 		_instance._removeProperties(properties);
 	}
