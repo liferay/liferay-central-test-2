@@ -210,6 +210,13 @@ body #banner .logo a {
 	background: #020509 url(../images/navigation/bullet_selected.png) no-repeat 5px 50%;
 }
 
+.nav-menu.nav-menu-style-dots ul{
+}
+
+.nav-menu.nav-menu-style-arrows ul {
+	list-style-image: url(../images/navigation/bullet_selected.png);
+}
+
 /* ---------- Portlet wrapper and icons ---------- */
 
 .portlet {

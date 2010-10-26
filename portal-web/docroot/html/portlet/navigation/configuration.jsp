@@ -57,7 +57,7 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 			for (int i = 0; i < bulletStyleOptions.length; i++) {
 			%>
 
-				<aui:option label="<%= bulletStyleOptions[i] %>" selected="<%= bulletStyleOptions[i].equals(bulletStyle) %>" />
+				<aui:option label="<%= LanguageUtil.get(pageContext, bulletStyleOptions[i]) %>" selected="<%= bulletStyleOptions[i].equals(bulletStyle) %>" />
 
 			<%
 			}
