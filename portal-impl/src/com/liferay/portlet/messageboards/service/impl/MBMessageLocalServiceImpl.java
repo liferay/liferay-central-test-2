@@ -1202,8 +1202,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public MBMessage updateDiscussionMessage(
-			long userId, long messageId, String subject, String body,
-			String className, long classPK, int workflowAction)
+			long userId, long messageId, String className, long classPK,
+			String subject, String body, int workflowAction)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(subject)) {
