@@ -106,7 +106,7 @@ if (!paginationType.equals("none")) {
 	</h1>
 
 	<%
-	PortalUtil.addPortletBreadcrumbEntry(request, assetTagName, currentURL);
+	AssetUtil.addPortletBreadcrumbEntry(request, assetTagName, currentURL);
 	%>
 
 </c:if>
