@@ -23,14 +23,11 @@ import java.sql.ResultSet;
 
 /**
  * @author Julio Camarero
- * @author Brett Swain
+ * @author Brett Swaim
  */
 public class UpgradeLayout extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		long groupId = 0;
-		long liveGroupId = 0;
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -39,27 +36,24 @@ public class UpgradeLayout extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select groupId, liveGroupId from Group_ " +
-					"where liveGroupId != 0");
+				"select groupId, liveGroupId from Group_ where liveGroupId " +
+					"!= 0");
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				groupId = rs.getLong("groupId");
-				liveGroupId = rs.getLong("liveGroupId");
+				long groupId = rs.getLong("groupId");
+				long liveGroupId = rs.getLong("liveGroupId");
 
-				upgradeStagedLayoutUUID(groupId, liveGroupId);
+				updateUUID(groupId, liveGroupId);
 			}
-		}
-		catch (Exception e) {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
 	}
 
-	protected void upgradeStagedLayoutUUID(long groupId, long liveGroupId)
+	protected void updateUUID(long groupId, long liveGroupId)
 		throws Exception {
 
 		Connection con = null;
@@ -78,16 +72,14 @@ public class UpgradeLayout extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
+				long plid = rs.getLong("plid");
 				boolean privateLayout = rs.getBoolean("privateLayout");
 				long layoutId = rs.getLong("layoutId");
-				long plid = rs.getLong("plid");
 				String friendlyURL = rs.getString("friendlyURL");
 
 				updateUUID(
-					liveGroupId, plid, layoutId, privateLayout, friendlyURL);
+					plid, liveGroupId, privateLayout, layoutId, friendlyURL);
 			}
-		}
-		catch (Exception e) {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
@@ -95,9 +87,8 @@ public class UpgradeLayout extends UpgradeProcess {
 	}
 
 	protected void updateUUID(
-		long liveGroupId, long plid, long layoutId, boolean privateLayout,
-		String friendlyURL)
-
+			long plid, long groupId, boolean privateLayout, long layoutId,
+			String friendlyURL)
 		throws Exception {
 
 		Connection con = null;
@@ -108,22 +99,22 @@ public class UpgradeLayout extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select uuid_ from Layout where groupId = ? " +
-					"AND friendlyURL = ?");
+				"select uuid_ from Layout where groupId = ? and friendlyURL " +
+					" = ?");
 
-			ps.setLong(1, liveGroupId);
+			ps.setLong(1, groupId);
 			ps.setString(2, friendlyURL);
 
 			rs = ps.executeQuery();
 
 			if (!rs.next()) {
 				ps = con.prepareStatement(
-				  "select uuid_ from Layout where groupId = ? " +
-					  "AND layoutId = ? AND privateLayout = ?");
+					"select uuid_ from Layout where groupId = ? and " +
+				 		"privateLayout = ? and layoutId = ?");
 
-				ps.setLong(1, liveGroupId);
-				ps.setLong(2, layoutId);
-				ps.setBoolean(3, privateLayout);
+				ps.setLong(1, groupId);
+				ps.setBoolean(2, privateLayout);
+				ps.setLong(3, layoutId);
 
 				rs = ps.executeQuery();
 
@@ -133,10 +124,8 @@ public class UpgradeLayout extends UpgradeProcess {
 			String uuid = rs.getString("uuid_");
 
 			runSQL(
-				"update Layout set uuid_ = '" + uuid + "' where" +
-					" plid = '" + plid + "';");
-		}
-		catch (Exception e) {
+				"update Layout set uuid_ = '" + uuid + "' where plid = " +
+					plid);
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
