@@ -67,6 +67,7 @@ import com.liferay.portal.service.http.GroupServiceHttp;
 import com.liferay.portal.service.http.LayoutServiceHttp;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.communities.messaging.LayoutsLocalPublisherRequest;
@@ -606,12 +607,30 @@ public class StagingImpl implements Staging {
 
 		Layout sourceLayout = LayoutLocalServiceUtil.getLayout(plid);
 
-		Group stagingGroup = sourceLayout.getGroup();
-		Group liveGroup = stagingGroup.getLiveGroup();
+		Group stagingGroup = null;
+		Group liveGroup = null;
 
-		Layout targetLayout = LayoutLocalServiceUtil.getLayout(
-			liveGroup.getGroupId(), sourceLayout.isPrivateLayout(),
-			sourceLayout.getLayoutId());
+		Layout targetLayout = null;
+
+		long scopeGroupId = PortalUtil.getScopeGroupId(portletRequest);
+
+		if (sourceLayout.hasScopeGroup() &&
+			(sourceLayout.getScopeGroup().getGroupId() == scopeGroupId)) {
+
+			stagingGroup = sourceLayout.getScopeGroup();
+			liveGroup = stagingGroup.getLiveGroup();
+
+			targetLayout = LayoutLocalServiceUtil.getLayout(
+				liveGroup.getClassPK());
+		}
+		else {
+			stagingGroup = sourceLayout.getGroup();
+			liveGroup = stagingGroup.getLiveGroup();
+
+			targetLayout = LayoutLocalServiceUtil.getLayout(
+				liveGroup.getGroupId(), sourceLayout.isPrivateLayout(),
+				sourceLayout.getLayoutId());
+		}
 
 		copyPortlet(
 			portletRequest, stagingGroup.getGroupId(), liveGroup.getGroupId(),

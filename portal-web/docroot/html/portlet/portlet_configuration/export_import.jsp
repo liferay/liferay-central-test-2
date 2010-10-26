@@ -62,6 +62,13 @@ if (layout.isTypeControlPanel()) {
 		if (themeDisplay.getScopeGroup().isStagingGroup()) {
 			tabs2Names += ",staging";
 		}
+		else if (themeDisplay.getScopeGroup().isLayout()) {
+			Group scopeGroupParent = GroupServiceUtil.getGroup(themeDisplay.getScopeGroup().getParentGroupId());
+
+			if (scopeGroupParent.isStagingGroup()) {
+				tabs2Names += ",staging";
+			}
+		}
 		%>
 
 		<liferay-ui:tabs
@@ -132,37 +139,63 @@ if (layout.isTypeControlPanel()) {
 					Layout targetLayout = null;
 
 					if (!controlPanel) {
-						try {
-							targetLayout = LayoutLocalServiceUtil.getLayout(liveGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
-						}
-						catch (NoSuchLayoutException nsle) {
+						if (liveGroup == null) {
 							errorMessageKey = "this-portlet-is-placed-in-a-page-that-does-not-exist-in-the-live-site-publish-the-page-first";
 						}
-
-						if (targetLayout != null) {
-							LayoutType layoutType = targetLayout.getLayoutType();
-
-							if (!(layoutType instanceof LayoutTypePortlet) || !((LayoutTypePortlet)layoutType).hasPortletId(selPortlet.getPortletId())) {
-								errorMessageKey = "this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first";
+						else {
+							try {
+								if (stagingGroup.isLayout()) {
+									targetLayout = LayoutLocalServiceUtil.getLayout(liveGroup.getClassPK());
+								}
+								else {
+									targetLayout = LayoutLocalServiceUtil.getLayout(liveGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
+								}
+							}
+							catch (NoSuchLayoutException nsle) {
+								errorMessageKey = "this-portlet-is-placed-in-a-page-that-does-not-exist-in-the-live-site-publish-the-page-first";
+							}
+	
+							if (targetLayout != null) {
+								LayoutType layoutType = targetLayout.getLayoutType();
+	
+								if (!(layoutType instanceof LayoutTypePortlet) || !((LayoutTypePortlet)layoutType).hasPortletId(selPortlet.getPortletId())) {
+									errorMessageKey = "this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first";
+								}
 							}
 						}
 					}
-
-					boolean workflowEnabled = liveGroup.isWorkflowEnabled();
-
-					TasksProposal proposal = null;
-
-					if (workflowEnabled) {
-						try {
-							proposal = TasksProposalLocalServiceUtil.getProposal(Portlet.class.getName(), selPortletPrimaryKey);
+					else if (stagingGroup.isLayout()) {
+						if (liveGroup == null) {
+							errorMessageKey = "some-portlet-is-placed-in-this-page-of-scope-that-does-not-exist-in-the-live-site-publish-the-page-first";
 						}
-						catch (NoSuchProposalException nspe) {
+						else {
+							try {
+								targetLayout = LayoutLocalServiceUtil.getLayout(liveGroup.getClassPK());
+							}
+							catch (NoSuchLayoutException nsle) {
+								errorMessageKey = "some-portlet-is-placed-in-this-page-of-scope-that-does-not-exist-in-the-live-site-publish-the-page-first";
+							}
 						}
 					}
 					%>
 
 					<c:choose>
 						<c:when test="<%= Validator.isNull(errorMessageKey) %>">
+
+						<%
+						boolean workflowEnabled = liveGroup.isWorkflowEnabled();
+
+						TasksProposal proposal = null;
+
+						if (workflowEnabled) {
+							try {
+								proposal = TasksProposalLocalServiceUtil.getProposal(Portlet.class.getName(), selPortletPrimaryKey);
+							}
+							catch (NoSuchProposalException nspe) {
+							}
+						}
+						%>
+
 							<aui:fieldset>
 								<aui:field-wrapper label="what-would-you-like-to-copy-from-live-or-publish-to-live">
 									<%@ include file="/html/portlet/portlet_configuration/export_import_options.jspf" %>

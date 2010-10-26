@@ -17,6 +17,7 @@ package com.liferay.portal.lar;
 import com.liferay.portal.LARFileException;
 import com.liferay.portal.LARTypeException;
 import com.liferay.portal.LayoutImportException;
+import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.PortletIdException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -616,6 +617,30 @@ public class PortletImporter {
 					scopeGroup = GroupLocalServiceUtil.addGroup(
 						context.getUserId(null), Layout.class.getName(),
 						scopeLayout.getPlid(), name, null, 0, null, true, null);
+				}
+
+				try {
+					long oldPlid = context.getOldPlid();
+
+					if (oldPlid == 0) {
+						oldPlid = GetterUtil.getLong(
+							portletDataRefEl.getParent().attributeValue(
+								"old-plid"));
+					}
+
+					Layout oldLayout = LayoutLocalServiceUtil.getLayout(
+						oldPlid);
+
+					Group oldScopeGroup = oldLayout.getScopeGroup();
+
+					oldScopeGroup.setLiveGroupId(scopeGroup.getGroupId());
+
+					GroupLocalServiceUtil.updateGroup(oldScopeGroup, true);
+				}
+				catch (NoSuchLayoutException nsle) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(nsle);
+					}
 				}
 
 				context.setScopeGroupId(scopeGroup.getGroupId());
