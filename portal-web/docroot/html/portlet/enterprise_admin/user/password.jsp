@@ -82,7 +82,7 @@ boolean passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordRese
 
 	<aui:input autocomplete="off" label="enter-again" name="password2" size="30" type="password">
 		<aui:validator name="equalTo">
-			'<portlet:namespace />password1'
+			'#<portlet:namespace />password1'
 		</aui:validator>
 	</aui:input>
 
