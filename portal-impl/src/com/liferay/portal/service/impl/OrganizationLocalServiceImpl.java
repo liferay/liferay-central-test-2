@@ -305,6 +305,8 @@ public class OrganizationLocalServiceImpl
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(Organization.class);
 
+		indexer.delete(organization);
+
 		indexer.reindex(
 			new String[] {String.valueOf(organization.getCompanyId())});
 	}
