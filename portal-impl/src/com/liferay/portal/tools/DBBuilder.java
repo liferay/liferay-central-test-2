@@ -17,10 +17,13 @@ package com.liferay.portal.tools;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.InitUtil;
 
 import java.io.IOException;
+
+import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
@@ -30,27 +33,31 @@ import java.io.IOException;
 public class DBBuilder {
 
 	public static void main(String[] args) {
-		InitUtil.initWithSpring();
+		Map<String, String> arguments = ArgumentUtil.getArguments(args);
+		InitUtil.initWithSpring(true);
 
-		if (args.length == 1) {
-			new DBBuilder(args[0], DB.TYPE_ALL);
-		}
-		else if (args.length == 2) {
-			new DBBuilder(args[0], StringUtil.split(args[1]));
+		String sqlDir = GetterUtil.get(arguments.get("sql.dir"), "../sql");
+		String databaseName = arguments.get("database.name");
+		String databaseTypesString = arguments.get("database.types");
+
+		String[] databaseTypes = null;
+		if (databaseTypesString == null) {
+			databaseTypes = DB.TYPE_ALL;
 		}
 		else {
-			throw new IllegalArgumentException();
+			databaseTypes = StringUtil.split(databaseTypesString);
 		}
+
+		new DBBuilder(databaseName, databaseTypes, sqlDir);
 
 		System.exit(0);
 	}
 
-	public DBBuilder(String databaseName, String[] databaseTypes) {
+	public DBBuilder(
+		String databaseName, String[] databaseTypes, String sqlDir) {
 		try {
 			_databaseName = databaseName;
 			_databaseTypes = databaseTypes;
-
-			String sqlDir = System.getProperty("sql.dir", "../sql");
 
 			_buildSQLFile(sqlDir, "portal");
 			_buildSQLFile(sqlDir, "portal-minimal");

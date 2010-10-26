@@ -9,14 +9,14 @@
 		<java
 			classname="com.liferay.portal.tools.DBBuilder"
 			classpathref="project.classpath"
-			fork="true"
+			fork="${java.fork}"
 			maxmemory="384m"
 			newenvironment="true"
 		>
-			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<jvmarg value="-Dsql.dir=../sql" />
-			<arg value="${database.name}" />
-			<arg value="${database.types}" />
+			<arg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<arg value="sql.dir=../sql" />
+			<arg value="database.name=${database.name}" />
+			<arg value="database.types=${database.types}" />
 		</java>
 
 		<delete file="velocity.log" quiet="true" />
