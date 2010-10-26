@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -965,6 +966,14 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		rootElement.addAttribute(
 			"group-id", String.valueOf(context.getScopeGroupId()));
 
+		long rootFolderId = GetterUtil.getLong(
+			preferences.getValue("rootFolderId", null));
+
+		if (rootFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			rootElement.addAttribute(
+				"root-folder-id", String.valueOf(rootFolderId));
+		}
+
 		Element foldersElement = rootElement.addElement("folders");
 		Element fileEntriesElement = rootElement.addElement("file-entries");
 		Element fileShortcutsElement = rootElement.addElement("file-shortcuts");
@@ -1042,7 +1051,20 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
-		return null;
+		long rootFolderId = GetterUtil.getLong(
+			rootElement.attributeValue("root-folder-id"));
+
+		if (rootFolderId > 0) {
+			Map<Long, Long> folderPKs =
+				(Map<Long, Long>)context.getNewPrimaryKeysMap(DLFolder.class);
+
+			rootFolderId = MapUtil.getLong(
+				folderPKs, rootFolderId, rootFolderId);
+
+			preferences.setValue("rootFolderId", String.valueOf(rootFolderId));
+		}
+
+		return preferences;
 	}
 
 	private static final boolean _ALWAYS_EXPORTABLE = true;
