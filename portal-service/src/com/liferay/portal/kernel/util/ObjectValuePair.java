@@ -65,7 +65,8 @@ public class ObjectValuePair<K, V> implements Serializable {
 	public int hashCode() {
 		if (_key == null) {
 			return 0;
-		} else {
+		}
+		else {
 			return _key.hashCode();
 		}
 	}
