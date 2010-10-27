@@ -37,8 +37,11 @@ public class ByteBufferServletResponse extends HeaderCacheServletResponse {
 		if (_byteBuffer != null) {
 			return _byteBuffer;
 		}
-		else {
+		else if (_unsyncByteArrayOutputStream != null) {
 			return _unsyncByteArrayOutputStream.unsafeGetByteBuffer();
+		}
+		else {
+			return ByteBuffer.wrap(new byte[0]);
 		}
 	}
 
