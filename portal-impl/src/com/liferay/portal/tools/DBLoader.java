@@ -27,6 +27,7 @@ import com.liferay.portal.util.FileImpl;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import java.util.Map;
@@ -75,7 +76,8 @@ public class DBLoader {
 		Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
 
 		Connection con = DriverManager.getConnection(
-			"jdbc:derby:" + _databaseName + ";create=true", "", "");
+			"jdbc:derby:" + _sqlDir + "/" + _databaseName + ";create=true", "",
+			"");
 
 		if (Validator.isNull(_fileName)) {
 			_loadDerby(con, _sqlDir + "/portal/portal-derby.sql");
@@ -83,6 +85,22 @@ public class DBLoader {
 		}
 		else {
 			_loadDerby(con, _sqlDir + "/" + _fileName);
+		}
+
+		con.close();
+
+		try {
+			con = DriverManager.getConnection(
+				"jdbc:derby:" + _sqlDir + "/" + _databaseName +
+					";shutdown=true",
+				"", "");
+		}
+		catch (SQLException sqle) {
+			String sqlState = sqle.getSQLState();
+
+			if (!sqlState.equals("08006")) {
+				throw sqle;
+			}
 		}
 	}
 
