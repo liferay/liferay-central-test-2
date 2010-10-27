@@ -220,15 +220,15 @@ public class SCProductVersionLocalServiceImpl
 		try {
 			HttpImpl httpImpl = (HttpImpl)HttpUtil.getHttp();
 
-			HostConfiguration hostConfig = httpImpl.getHostConfig(
+			HostConfiguration hostConfiguration = httpImpl.getHostConfiguration(
 				directDownloadURL);
 
-			HttpClient client = httpImpl.getClient(hostConfig);
+			HttpClient httpClient = httpImpl.getClient(hostConfiguration);
 
 			GetMethod getFileMethod = new GetMethod(directDownloadURL);
 
-			int responseCode = client.executeMethod(
-				hostConfig, getFileMethod);
+			int responseCode = httpClient.executeMethod(
+				hostConfiguration, getFileMethod);
 
 			if (responseCode != HttpServletResponse.SC_OK) {
 				throw new UnavailableProductVersionDirectDownloadURLException();

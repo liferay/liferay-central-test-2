@@ -609,18 +609,18 @@ public class PluginPackageUtil {
 		try {
 			HttpImpl httpImpl = (HttpImpl)HttpUtil.getHttp();
 
-			HostConfiguration hostConfig = httpImpl.getHostConfig(
+			HostConfiguration hostConfiguration = httpImpl.getHostConfiguration(
 				pluginsXmlURL);
 
-			HttpClient client = httpImpl.getClient(hostConfig);
+			HttpClient httpClient = httpImpl.getClient(hostConfiguration);
 
 			GetMethod getFileMethod = new GetMethod(pluginsXmlURL);
 
 			byte[] bytes = null;
 
 			try {
-				int responseCode = client.executeMethod(
-					hostConfig, getFileMethod);
+				int responseCode = httpClient.executeMethod(
+					hostConfiguration, getFileMethod);
 
 				if (responseCode != HttpServletResponse.SC_OK) {
 					if (_log.isDebugEnabled()) {
@@ -644,8 +644,8 @@ public class PluginPackageUtil {
 
 					getFileMethod = new GetMethod(pluginsXmlURL);
 
-					responseCode = client.executeMethod(
-						hostConfig, getFileMethod);
+					responseCode = httpClient.executeMethod(
+						hostConfiguration, getFileMethod);
 
 					if (responseCode != HttpServletResponse.SC_OK) {
 						throw new PluginPackageException(

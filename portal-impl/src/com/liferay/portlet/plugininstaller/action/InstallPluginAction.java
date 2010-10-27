@@ -343,9 +343,10 @@ public class InstallPluginAction extends PortletAction {
 		try {
 			HttpImpl httpImpl = (HttpImpl)HttpUtil.getHttp();
 
-			HostConfiguration hostConfig = httpImpl.getHostConfig(url);
+			HostConfiguration hostConfiguration = httpImpl.getHostConfiguration(
+				url);
 
-			HttpClient client = httpImpl.getClient(hostConfig);
+			HttpClient httpClient = httpImpl.getClient(hostConfiguration);
 
 			getMethod = new GetMethod(url);
 
@@ -368,7 +369,8 @@ public class InstallPluginAction extends PortletAction {
 			PluginPackageUtil.registerPluginPackageInstallation(
 				deploymentContext);
 
-			responseCode = client.executeMethod(hostConfig, getMethod);
+			responseCode = httpClient.executeMethod(
+				hostConfiguration, getMethod);
 
 			if (responseCode != HttpServletResponse.SC_OK) {
 				if (failOnError) {

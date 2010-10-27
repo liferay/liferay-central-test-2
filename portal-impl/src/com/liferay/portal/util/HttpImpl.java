@@ -104,17 +104,18 @@ public class HttpImpl implements Http {
 		MultiThreadedHttpConnectionManager httpConnectionManager =
 			new MultiThreadedHttpConnectionManager();
 
-		HttpConnectionParams params = httpConnectionManager.getParams();
+		HttpConnectionParams httpConnectionParams =
+			httpConnectionManager.getParams();
 
-		params.setParameter(
+		httpConnectionParams.setParameter(
 			"maxConnectionsPerHost", new Integer(_MAX_CONNECTIONS_PER_HOST));
-		params.setParameter(
+		httpConnectionParams.setParameter(
 			"maxTotalConnections", new Integer(_MAX_TOTAL_CONNECTIONS));
-		params.setConnectionTimeout(_TIMEOUT);
-		params.setSoTimeout(_TIMEOUT);
+		httpConnectionParams.setConnectionTimeout(_TIMEOUT);
+		httpConnectionParams.setSoTimeout(_TIMEOUT);
 
-		_client.setHttpConnectionManager(httpConnectionManager);
-		_proxyClient.setHttpConnectionManager(httpConnectionManager);
+		_httpClient.setHttpConnectionManager(httpConnectionManager);
+		_proxyHttpClient.setHttpConnectionManager(httpConnectionManager);
 
 		if (hasProxyConfig() && Validator.isNotNull(_PROXY_USERNAME)) {
 			if (_PROXY_AUTH_TYPE.equals("username-password")) {
@@ -132,7 +133,7 @@ public class HttpImpl implements Http {
 				authPrefs.add(AuthPolicy.BASIC);
 				authPrefs.add(AuthPolicy.DIGEST);
 
-				_proxyClient.getParams().setParameter(
+				_proxyHttpClient.getParams().setParameter(
 					AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
 			}
 		}
@@ -271,10 +272,10 @@ public class HttpImpl implements Http {
 
 	public HttpClient getClient(HostConfiguration hostConfig) {
 		if (isProxyHost(hostConfig.getHost())) {
-			return _proxyClient;
+			return _proxyHttpClient;
 		}
 		else {
-			return _client;
+			return _httpClient;
 		}
 	}
 
@@ -329,20 +330,29 @@ public class HttpImpl implements Http {
 		}
 	}
 
+	/**
+	 * @deprecated {@link #getHostConfiguration(String)}
+	 */
 	public HostConfiguration getHostConfig(String location) throws IOException {
+		return getHostConfiguration(location);
+	}
+
+	public HostConfiguration getHostConfiguration(String location)
+		throws IOException {
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("Location is " + location);
 		}
 
-		HostConfiguration hostConfig = new HostConfiguration();
+		HostConfiguration hostConfiguration = new HostConfiguration();
 
-		hostConfig.setHost(new URI(location, false));
+		hostConfiguration.setHost(new URI(location, false));
 
-		if (isProxyHost(hostConfig.getHost())) {
-			hostConfig.setProxy(_PROXY_HOST, _PROXY_PORT);
+		if (isProxyHost(hostConfiguration.getHost())) {
+			hostConfiguration.setProxy(_PROXY_HOST, _PROXY_PORT);
 		}
 
-		return hostConfig;
+		return hostConfiguration;
 	}
 
 	public String getIpAddress(String url) {
@@ -1144,9 +1154,9 @@ public class HttpImpl implements Http {
 
 	private static ThreadLocal<Cookie[]> _cookies = new ThreadLocal<Cookie[]>();
 
-	private HttpClient _client = new HttpClient();
+	private HttpClient _httpClient = new HttpClient();
 	private Pattern _nonProxyHostsPattern;
-	private HttpClient _proxyClient = new HttpClient();
 	private Credentials _proxyCredentials;
+	private HttpClient _proxyHttpClient = new HttpClient();
 
 }
