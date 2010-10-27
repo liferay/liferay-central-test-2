@@ -61,19 +61,20 @@ public class RSSWebCacheItem implements WebCacheItem {
 
 			HttpImpl httpImpl = (HttpImpl)HttpUtil.getHttp();
 
-			HostConfiguration hostConfig = httpImpl.getHostConfig(_url);
+			HostConfiguration hostConfiguration = httpImpl.getHostConfiguration(
+				_url);
 
-			HttpClient client = httpImpl.getClient(hostConfig);
+			HttpClient httpClient = httpImpl.getClient(hostConfiguration);
 
-			HttpClientParams params = client.getParams();
+			HttpClientParams httpClientParams = httpClient.getParams();
 
-			params.setConnectionManagerTimeout(
+			httpClientParams.setConnectionManagerTimeout(
 				PropsValues.RSS_CONNECTION_TIMEOUT);
-			params.setSoTimeout(PropsValues.RSS_CONNECTION_TIMEOUT);
+			httpClientParams.setSoTimeout(PropsValues.RSS_CONNECTION_TIMEOUT);
 
 			GetMethod getMethod = new GetMethod(_url);
 
-			client.executeMethod(hostConfig, getMethod);
+			httpClient.executeMethod(hostConfiguration, getMethod);
 
 			SyndFeedInput input = new SyndFeedInput();
 
