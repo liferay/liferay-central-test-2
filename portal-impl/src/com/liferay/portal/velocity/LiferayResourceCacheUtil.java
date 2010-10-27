@@ -46,20 +46,16 @@ public class LiferayResourceCacheUtil {
 
 	public static Resource get(String key) {
 		if (_localCacheAvailable) {
-			Object result = null;
+			Map<String, Object> localCache = _localCache.get();
 
-			Map<String, Object> localCache = null;
-
-			localCache = _localCache.get();
-
-			result = localCache.get(key);
+			Object result = localCache.get(key);
 
 			if ((result != null) && (result instanceof Resource)) {
-				Resource resource = (Resource) result;
+				Resource resource = (Resource)result;
 
-				Object lastModified = _portalCache.get(key);
+				Long lastModified = (Long)_portalCache.get(key);
 
-				if (lastModified != null &&
+				if ((lastModified != null) &&
 					lastModified.equals(resource.getLastModified())) {
 
 					return resource;
@@ -94,9 +90,10 @@ public class LiferayResourceCacheUtil {
 		_portalCache.remove(key);
 	}
 
-
 	private static ThreadLocal<LRUMap> _localCache;
 	private static boolean _localCacheAvailable;
+	private static PortalCache _portalCache = MultiVMPoolUtil.getCache(
+		CACHE_NAME);
 
 	static {
 		if (PropsValues.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_ENABLED &&
@@ -110,8 +107,5 @@ public class LiferayResourceCacheUtil {
 			_localCacheAvailable = true;
 		}
 	}
-
-	private static PortalCache _portalCache = MultiVMPoolUtil.getCache(
-		CACHE_NAME);
 
 }
