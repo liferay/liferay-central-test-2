@@ -16,12 +16,7 @@ package com.liferay.portal.velocity;
 
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.kernel.util.AutoResetThreadLocal;
-import com.liferay.portal.util.PropsValues;
 
-import java.util.Map;
-
-import org.apache.commons.collections.map.LRUMap;
 import org.apache.velocity.runtime.resource.Resource;
 
 /**
@@ -33,79 +28,43 @@ public class LiferayResourceCacheUtil {
 		LiferayResourceCacheUtil.class.getName();
 
 	public static void clear() {
-		clearLocalCache();
-
-		_portalCache.removeAll();
-	}
-
-	public static void clearLocalCache() {
-		if (_localCacheAvailable) {
-			_localCache.remove();
-		}
+		_multiVMPortalCache.removeAll();
+		_singleVMPortalCache.removeAll();
 	}
 
 	public static Resource get(String key) {
-		if (_localCacheAvailable) {
-			Map<String, Object> localCache = _localCache.get();
+		Object obj = _singleVMPortalCache.get(key);
 
-			Object result = localCache.get(key);
+		if ((obj != null) && (obj instanceof Resource)) {
+			Resource resource = (Resource)obj;
 
-			if ((result != null) && (result instanceof Resource)) {
-				Resource resource = (Resource)result;
+			Long lastModified = (Long)_multiVMPortalCache.get(key);
 
-				Long lastModified = (Long)_portalCache.get(key);
+			if ((lastModified != null) &&
+				lastModified.equals(resource.getLastModified())) {
 
-				if ((lastModified != null) &&
-					lastModified.equals(resource.getLastModified())) {
-
-					return resource;
-				}
-
-				localCache.remove(key);
+				return resource;
 			}
+
+			_singleVMPortalCache.remove(key);
 		}
 
 		return null;
 	}
 
 	public static void put(String key, Resource resource) {
-		if (_localCacheAvailable) {
-			Map<String, Object> localCache = _localCache.get();
-
-			localCache.put(key, resource);
-		}
-
-		Long lastModified = resource.getLastModified();
-
-		_portalCache.put(key, lastModified);
+		_multiVMPortalCache.put(key, resource.getLastModified());
+		_singleVMPortalCache.put(key, resource);
 	}
 
 	public static void remove(String key) {
-		if (_localCacheAvailable) {
-			Map<String, Object> localCache = _localCache.get();
-
-			localCache.remove(key);
-		}
-
-		_portalCache.remove(key);
+		_multiVMPortalCache.remove(key);
+		_singleVMPortalCache.remove(key);
 	}
 
-	private static ThreadLocal<LRUMap> _localCache;
-	private static boolean _localCacheAvailable;
-	private static PortalCache _portalCache = MultiVMPoolUtil.getCache(
+	private static PortalCache _multiVMPortalCache = MultiVMPoolUtil.getCache(
 		CACHE_NAME);
-
-	static {
-		if (PropsValues.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_ENABLED &&
-			PropsValues.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_MAX_SIZE > 0) {
-
-			_localCache = new AutoResetThreadLocal<LRUMap>(
-				LiferayResourceCacheUtil.class + "._localCache",
-				new LRUMap(
-					PropsValues.
-						VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_MAX_SIZE));
-			_localCacheAvailable = true;
-		}
-	}
+	private static PortalCache _singleVMPortalCache = MultiVMPoolUtil.getCache(
+		CACHE_NAME);
 
 }

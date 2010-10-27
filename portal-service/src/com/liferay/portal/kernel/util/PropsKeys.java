@@ -1723,8 +1723,6 @@ public interface PropsKeys {
 
 	public static final String VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_ENABLED = "velocity.engine.resource.manager.cache.enabled";
 
-	public static final String VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_MAX_SIZE = "velocity.engine.resource.manager.cache.max.size";
-
 	public static final String VELOCITY_ENGINE_RESOURCE_MANAGER_MODIFICATION_CHECK_INTERVAL = "velocity.engine.resource.manager.modification.check.interval";
 
 	public static final String VELOCITY_ENGINE_VELOCIMACRO_LIBRARY = "velocity.engine.velocimacro.library";
