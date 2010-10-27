@@ -177,17 +177,29 @@ public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 		attributes.put(objectClass);
 
 		addAttributeMapping(
-			userMappings.getProperty(UserConverterKeys.FIRST_NAME),
-			user.getFirstName(), attributes);
-		addAttributeMapping(
-			userMappings.getProperty(UserConverterKeys.LAST_NAME),
-			user.getLastName(), attributes);
+			userMappings.getProperty(UserConverterKeys.SCREEN_NAME),
+			user.getScreenName(), attributes);
 		addAttributeMapping(
 			userMappings.getProperty(UserConverterKeys.PASSWORD),
 			user.getPasswordUnencrypted(), attributes);
 		addAttributeMapping(
 			userMappings.getProperty(UserConverterKeys.EMAIL_ADDRESS),
 			user.getEmailAddress(), attributes);
+		addAttributeMapping(
+			userMappings.getProperty(UserConverterKeys.FULL_NAME),
+			user.getFullName(), attributes);
+		addAttributeMapping(
+			userMappings.getProperty(UserConverterKeys.FIRST_NAME),
+			user.getFirstName(), attributes);
+		addAttributeMapping(
+			userMappings.getProperty(UserConverterKeys.MIDDLE_NAME),
+			user.getMiddleName(), attributes);
+		addAttributeMapping(
+			userMappings.getProperty(UserConverterKeys.LAST_NAME),
+			user.getLastName(), attributes);
+		addAttributeMapping(
+			userMappings.getProperty(UserConverterKeys.JOB_TITLE),
+			user.getJobTitle(), attributes);
 
 		return attributes;
 	}
