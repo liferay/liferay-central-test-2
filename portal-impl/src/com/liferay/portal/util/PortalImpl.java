@@ -549,7 +549,8 @@ public class PortalImpl implements Portal {
 		if (portletBreadcrumbs == null) {
 			portletBreadcrumbs = new ArrayList<KeyValuePair>();
 
-			request.setAttribute(WebKeys.PORTLET_BREADCRUMBS, portletBreadcrumbs);
+			request.setAttribute(
+				WebKeys.PORTLET_BREADCRUMBS, portletBreadcrumbs);
 		}
 
 		portletBreadcrumbs.add(new KeyValuePair(title, url));
