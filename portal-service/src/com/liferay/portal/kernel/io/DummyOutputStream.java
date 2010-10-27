@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.io;
 import java.io.OutputStream;
 
 /**
- * <a href="DummyOutputStream.java.html"><b><i>View Source</i></b></a>
- *
  * @author Brian Wing Shun Chan
  */
 public class DummyOutputStream extends OutputStream {

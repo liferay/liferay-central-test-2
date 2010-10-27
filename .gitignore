@@ -130,7 +130,6 @@
 /sql/create
 /sql/create-sharded
 /sql/create-minimal
-/sql/derby.log
 /sql/indexes
 /sql/legacy
 /sql/log
