@@ -632,6 +632,20 @@ public class StringUtil {
 		return sb.toString().trim();
 	}
 
+	public static void readLines(InputStream is, Collection<String> strings)
+		throws IOException {
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new InputStreamReader(is));
+
+		String line = null;
+
+		while ((line = unsyncBufferedReader.readLine()) != null) {
+			strings.add(line);
+		}
+
+		unsyncBufferedReader.close();
+	}
+
 	public static String remove(String s, char remove) {
 		if (s == null) {
 			return null;

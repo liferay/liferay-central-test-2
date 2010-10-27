@@ -481,14 +481,23 @@ public class ServiceBuilder {
 		_tplSpringXml = _getTplProperty("spring_xml", _tplSpringXml);
 
 		try {
-			_badTableNames = SetUtil.fromString(StringUtil.read(
-				getClass().getClassLoader(), _tplBadTableNames));
-			_badAliasNames = SetUtil.fromString(StringUtil.read(
-				getClass().getClassLoader(), _tplBadAliasNames));
-			_badColumnNames = SetUtil.fromString(StringUtil.read(
-				getClass().getClassLoader(), _tplBadColumnNames));
-			_badJsonTypes = SetUtil.fromString(StringUtil.read(
-				getClass().getClassLoader(), _tplBadJsonTypes));
+			ClassLoader classLoader = getClass().getClassLoader();
+			_badTableNames = new HashSet<String>();
+			StringUtil.readLines(
+				classLoader.getResourceAsStream(_tplBadTableNames), 
+				_badTableNames);
+			_badAliasNames = new HashSet<String>();
+			StringUtil.readLines(
+				classLoader.getResourceAsStream(_tplBadAliasNames), 
+				_badAliasNames);
+			_badColumnNames = new HashSet<String>();
+			StringUtil.readLines(
+				classLoader.getResourceAsStream(_tplBadColumnNames), 
+				_badColumnNames);
+			_badJsonTypes = new HashSet<String>();
+			StringUtil.readLines(
+				classLoader.getResourceAsStream(_tplBadJsonTypes), 
+				_badJsonTypes);
 			_hbmFileName = hbmFileName;
 			_ormFileName = ormFileName;
 			_modelHintsFileName = modelHintsFileName;
