@@ -31,7 +31,7 @@
 	cursor: auto;
 }
 
-.aui-field-element {
+.aui-form-validator-error-container .aui-field-element {
 	display: inline-block;
 }
 
