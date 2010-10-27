@@ -24,7 +24,7 @@ import java.util.Calendar;
  * @author Douglas Wong
  */
 public class RecurrenceYearlyByMonthAndDayTest extends RecurrenceTestCase {
-	
+
 	public void testRecurrence() {
 		Recurrence recurrence = getRecurrence(
 			dtStart, durationOneHour, FEBRUARY, FRIDAY, 3, 1);
