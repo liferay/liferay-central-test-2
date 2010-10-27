@@ -31,6 +31,44 @@ import java.util.List;
  */
 public class SchedulerEngineProxy implements SchedulerEngine {
 
+	public List<SchedulerRequest> getAllScheduledJobs()
+		throws SchedulerException {
+
+		try {
+			SchedulerRequest schedulerRequest =
+				SchedulerRequest.createRetrieveRequest();
+
+			List<SchedulerRequest> schedulerRequests =
+				(List<SchedulerRequest>)MessageBusUtil.sendSynchronousMessage(
+					DestinationNames.SCHEDULER_ENGINE, schedulerRequest,
+					DestinationNames.SCHEDULER_ENGINE_RESPONSE);
+
+			return schedulerRequests;
+		}
+		catch (Exception e) {
+			throw new SchedulerException(e);
+		}
+	}
+
+	public SchedulerRequest getScheduledJob(String jobName, String groupName)
+		throws SchedulerException {
+
+		try {
+			SchedulerRequest schedulerRequest =
+				SchedulerRequest.createRetrieveRequest(jobName, groupName);
+
+			SchedulerRequest schedulerResponse =
+				(SchedulerRequest)MessageBusUtil.sendSynchronousMessage(
+					DestinationNames.SCHEDULER_ENGINE, schedulerRequest,
+					DestinationNames.SCHEDULER_ENGINE_RESPONSE);
+
+			return schedulerResponse;
+		}
+		catch (Exception e) {
+			throw new SchedulerException(e);
+		}
+	}
+
 	public List<SchedulerRequest> getScheduledJobs(String groupName)
 		throws SchedulerException {
 
@@ -48,6 +86,16 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 		catch (Exception e) {
 			throw new SchedulerException(e);
 		}
+	}
+
+	public void suppressError(String jobName, String groupName)
+		throws SchedulerException {
+
+		SchedulerRequest schedulerRequest =
+			SchedulerRequest.createSuppressErrorRequest(jobName, groupName);
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
 	}
 
 	public void schedule(

@@ -23,8 +23,6 @@ import com.liferay.portal.kernel.messaging.sender.MessageSender;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 
-import java.util.List;
-
 /**
  * @author Michael C. Han
  * @author Bruno Farache
@@ -85,6 +83,10 @@ public class SchedulerMessageListener implements MessageListener {
 		else if (command.equals(SchedulerRequest.COMMAND_STARTUP)) {
 			_schedulerEngine.start();
 		}
+		else if (command.equals(SchedulerRequest.COMMAND_SUPPRESS_ERROR)) {
+			_schedulerEngine.suppressError(
+				schedulerRequest.getJobName(), schedulerRequest.getGroupName());
+		}
 		else if (command.equals(SchedulerRequest.COMMAND_UNREGISTER)) {
 			_schedulerEngine.unschedule(
 				schedulerRequest.getJobName(), schedulerRequest.getGroupName());
@@ -95,11 +97,30 @@ public class SchedulerMessageListener implements MessageListener {
 			Message message, SchedulerRequest schedulerRequest)
 		throws Exception {
 
-		List<SchedulerRequest> schedulerRequests =
-			_schedulerEngine.getScheduledJobs(schedulerRequest.getGroupName());
+		Object schedulerResponse = null;
+
+		String jobName = schedulerRequest.getJobName();
+		String groupName = schedulerRequest.getGroupName();
+
+		if (groupName == null) {
+			schedulerResponse = _schedulerEngine.getAllScheduledJobs();
+		}
+		else if (jobName == null) {
+			schedulerResponse = _schedulerEngine.getScheduledJobs(
+				groupName);
+		}
+		else {
+			schedulerResponse = _schedulerEngine.getScheduledJob(
+				jobName, groupName);
+
+			if (schedulerRequest == null) {
+				schedulerResponse =
+					SchedulerRequest.createRetrieveResponseRequest();
+			}
+		}
 
 		Message responseMessage = MessageBusUtil.createResponseMessage(
-			message, schedulerRequests);
+			message, schedulerResponse);
 
 		_messageSender.send(
 			responseMessage.getDestinationName(), responseMessage);

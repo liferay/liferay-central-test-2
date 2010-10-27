@@ -34,6 +34,29 @@ import java.util.List;
  */
 public class SchedulerEngineUtil {
 
+	public static List<SchedulerRequest> getAllScheduledJobs()
+		throws SchedulerException {
+
+		return _instance._getAllScheduledJobs();
+	}
+
+	public static SchedulerRequest getScheduledJob(
+			String jobName, String groupName)
+		throws SchedulerException {
+
+		SchedulerRequest schedulerRequest = _instance._getScheduledJob(
+			jobName, groupName);
+
+		if (schedulerRequest.getTrigger() == null &&
+			schedulerRequest.getJobName() == null &&
+			schedulerRequest.getGroupName() == null) {
+
+			return null;
+		}
+
+		return schedulerRequest;
+	}
+
 	public static List<SchedulerRequest> getScheduledJobs(String groupName)
 		throws SchedulerException {
 
@@ -111,6 +134,12 @@ public class SchedulerEngineUtil {
 		_instance._start();
 	}
 
+	public static void suppressError(String jobName, String groupName)
+		throws SchedulerException {
+
+		_instance._suppressError(jobName, groupName);
+	}
+
 	public static void unschedule(SchedulerEntry schedulerEntry)
 		throws SchedulerException {
 
@@ -129,6 +158,18 @@ public class SchedulerEngineUtil {
 		throws SchedulerException {
 
 		_instance._unschedule(jobName, groupName);
+	}
+
+	private List<SchedulerRequest> _getAllScheduledJobs()
+		throws SchedulerException {
+
+		return _schedulerEngine.getAllScheduledJobs();
+	}
+
+	private SchedulerRequest _getScheduledJob(String jobName, String groupName)
+		throws SchedulerException {
+
+		return _schedulerEngine.getScheduledJob(jobName, groupName);
 	}
 
 	/**
@@ -163,6 +204,12 @@ public class SchedulerEngineUtil {
 
 	private void _start() throws SchedulerException {
 		_schedulerEngine.start();
+	}
+
+	private void _suppressError(String jobName, String groupName)
+		throws SchedulerException {
+
+		_schedulerEngine.suppressError(jobName, groupName);
 	}
 
 	private void _unschedule(String jobName, String groupName)

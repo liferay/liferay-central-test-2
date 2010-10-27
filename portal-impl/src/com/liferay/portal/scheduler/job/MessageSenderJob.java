@@ -26,6 +26,8 @@ import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerContext;
 
 /**
  * @author Michael C. Han
@@ -50,6 +52,13 @@ public class MessageSenderJob implements Job {
 			Date scheduledFireTime = jobExecutionContext.getScheduledFireTime();
 
 			message.put("scheduledFireTime", scheduledFireTime);
+
+			String fullJobName = jobDetail.getFullName();
+			Scheduler scheduler = jobExecutionContext.getScheduler();
+			SchedulerContext schedulerContext = scheduler.getContext();
+
+			message.put(
+				SchedulerEngine.JOB_STATE, schedulerContext.get(fullJobName));
 
 			if (jobExecutionContext.getNextFireTime() == null) {
 				message.put(SchedulerEngine.DISABLE, true);

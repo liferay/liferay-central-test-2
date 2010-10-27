@@ -35,6 +35,10 @@ public interface SchedulerEngine {
 
 	public static final String DISABLE = "disable";
 
+	public static final String EXCEPTION = "exception";
+
+	public static final String JOB_STATE = "job_state";
+
 	public static final int GROUP_NAME_MAX_LENGTH = 80;
 
 	public static final int JOB_NAME_MAX_LENGTH = 80;
@@ -44,6 +48,12 @@ public interface SchedulerEngine {
 	public static final String MESSAGE_LISTENER_UUID = "message_listener_uuid";
 
 	public static final String RECEIVER_KEY = "receiver_key";
+
+	public List<SchedulerRequest> getAllScheduledJobs()
+		throws SchedulerException;
+
+	public SchedulerRequest getScheduledJob(String jobName, String groupName)
+		throws SchedulerException;
 
 	public List<SchedulerRequest> getScheduledJobs(String groupName)
 		throws SchedulerException;
@@ -56,6 +66,9 @@ public interface SchedulerEngine {
 	public void shutdown() throws SchedulerException;
 
 	public void start() throws SchedulerException;
+
+	public void suppressError(String jobName, String groupName)
+		throws SchedulerException;
 
 	public void unschedule(String jobName, String groupName)
 		throws SchedulerException;

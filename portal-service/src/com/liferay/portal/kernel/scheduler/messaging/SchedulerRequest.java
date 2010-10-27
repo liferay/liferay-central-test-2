@@ -26,6 +26,8 @@ import java.io.Serializable;
  */
 public class SchedulerRequest implements Serializable {
 
+	public static final String COMMAND_SUPPRESS_ERROR = "SUPPRESS_ERROR";
+
 	public static final String COMMAND_REGISTER = "REGISTER";
 
 	public static final String COMMAND_RETRIEVE = "RETRIEVE";
@@ -51,6 +53,14 @@ public class SchedulerRequest implements Serializable {
 		return schedulerRequest;
 	}
 
+	public static SchedulerRequest createRetrieveRequest() {
+		SchedulerRequest schedulerRequest = new SchedulerRequest();
+
+		schedulerRequest.setCommand(COMMAND_RETRIEVE);
+
+		return schedulerRequest;
+	}
+
 	public static SchedulerRequest createRetrieveRequest(String groupName) {
 		SchedulerRequest schedulerRequest = new SchedulerRequest();
 
@@ -65,6 +75,37 @@ public class SchedulerRequest implements Serializable {
 	 */
 	public static SchedulerRequest createRetrieveRequest(Trigger trigger) {
 		return createRetrieveRequest(trigger.getGroupName());
+	}
+
+	public static SchedulerRequest createRetrieveRequest(
+		String jobName, String groupName) {
+
+		SchedulerRequest schedulerRequest = new SchedulerRequest();
+
+		schedulerRequest.setCommand(COMMAND_RETRIEVE);
+		schedulerRequest.setGroupName(groupName);
+		schedulerRequest.setJobName(jobName);
+
+		return schedulerRequest;
+	}
+
+	public static SchedulerRequest createRetrieveResponseRequest() {
+		SchedulerRequest schedulerRequest = new SchedulerRequest();
+
+		return schedulerRequest;
+	}
+
+	public static SchedulerRequest createRetrieveResponseRequest(
+		String jobName, String groupName, String description, Message message) {
+
+		SchedulerRequest schedulerRequest = new SchedulerRequest();
+
+		schedulerRequest.setDescription(description);
+		schedulerRequest.setGroupName(groupName);
+		schedulerRequest.setJobName(jobName);
+		schedulerRequest.setMessage(message);
+
+		return schedulerRequest;
 	}
 
 	public static SchedulerRequest createRetrieveResponseRequest(
@@ -91,6 +132,18 @@ public class SchedulerRequest implements Serializable {
 		SchedulerRequest schedulerRequest = new SchedulerRequest();
 
 		schedulerRequest.setCommand(COMMAND_STARTUP);
+
+		return schedulerRequest;
+	}
+
+	public static SchedulerRequest createSuppressErrorRequest(
+		String jobName, String groupName) {
+
+		SchedulerRequest schedulerRequest = new SchedulerRequest();
+
+		schedulerRequest.setCommand(COMMAND_SUPPRESS_ERROR);
+		schedulerRequest.setGroupName(groupName);
+		schedulerRequest.setJobName(jobName);
 
 		return schedulerRequest;
 	}
