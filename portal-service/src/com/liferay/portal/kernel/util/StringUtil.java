@@ -632,6 +632,31 @@ public class StringUtil {
 		return sb.toString().trim();
 	}
 
+	public static String remove(String s, char remove) {
+		if (s == null) {
+			return null;
+		}
+
+		int index = s.indexOf(remove);
+		if (index < 0) {
+			return s;
+		}
+
+		int lastIndex = 0;
+
+		StringBuilder sb = new StringBuilder(s.length());
+
+		while (index >= 0) {
+			sb.append(s.subSequence(lastIndex, index));
+			lastIndex = index + 1;
+			index = s.indexOf(remove, lastIndex);
+		}
+
+		sb.append(s.substring(lastIndex));
+
+		return sb.toString();
+	}
+
 	public static String remove(String s, String remove) {
 		return remove(s, remove, StringPool.COMMA);
 	}

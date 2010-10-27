@@ -15,7 +15,6 @@
 package com.liferay.util;
 
 import com.liferay.portal.kernel.util.CharPool;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -209,8 +208,7 @@ public class TextFormatter {
 	}
 
 	private static String _formatB(String s) {
-		return StringUtil.replace(
-			s.toLowerCase(), StringPool.SPACE, StringPool.BLANK);
+		return StringUtil.remove(s.toLowerCase(), CharPool.SPACE);
 	}
 
 	private static String _formatC(String s) {
@@ -219,7 +217,7 @@ public class TextFormatter {
 	}
 
 	private static String _formatD(String s) {
-		return StringUtil.replace(s, StringPool.SPACE, StringPool.BLANK);
+		return StringUtil.remove(s, CharPool.SPACE);
 	}
 
 	private static String _formatE(String s) {
@@ -227,28 +225,32 @@ public class TextFormatter {
 	}
 
 	private static String _formatF(String s) {
-		s = StringUtil.replace(s, StringPool.SPACE, StringPool.BLANK);
-		s = Character.toLowerCase(s.charAt(0)) + s.substring(1, s.length());
+		s = StringUtil.remove(s, CharPool.SPACE);
 
+		if (Character.isUpperCase(s.charAt(0))) {
+			s = s.substring(0, 1).toLowerCase().concat(s.substring(1));
+		}
 		return s;
 	}
 
 	private static String _formatG(String s) {
-		return s.substring(0, 1).toUpperCase() + s.substring(1, s.length());
+		if (Character.isLowerCase(s.charAt(0))) {
+			s = s.substring(0, 1).toUpperCase().concat(s.substring(1));
+		}
+		return s;
 	}
 
 	private static String _formatH(String s) {
-		char[] charArray = s.toCharArray();
+		StringBuilder sb = new StringBuilder(s.length() * 2);
 
-		StringBuilder sb = new StringBuilder(charArray.length * 2);
-
-		for (int i = 0; i < charArray.length; i++) {
-			if (Character.isUpperCase(charArray[i])) {
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if (Character.isUpperCase(c)) {
 				sb.append(CharPool.SPACE);
-				sb.append(Character.toLowerCase(charArray[i]));
+				sb.append(Character.toLowerCase(c));
 			}
 			else {
-				sb.append(charArray[i]);
+				sb.append(c);
 			}
 		}
 
@@ -267,24 +269,20 @@ public class TextFormatter {
 		if (Character.isUpperCase(s.charAt(0)) &&
 			Character.isLowerCase(s.charAt(1))) {
 
-			return Character.toLowerCase(s.charAt(0)) +
-				s.substring(1, s.length());
+			return s = s.substring(0, 1).toLowerCase().concat(s.substring(1));
 		}
 
-		char[] charArray = s.toCharArray();
+		StringBuilder sb = new StringBuilder(s);
 
-		StringBuilder sb = new StringBuilder(charArray.length);
-
-		for (int i = 0; i < charArray.length; i++) {
-			if ((i + 1 != charArray.length) &&
-				(Character.isLowerCase(charArray[i + 1]))) {
-
-				sb.append(s.substring(i, charArray.length));
+		for (int i = 0; i < s.length(); i++) {
+			if ((i + 1 != s.length()) &&
+				(Character.isLowerCase(s.charAt(i + 1)))) {
 
 				break;
 			}
 			else {
-				sb.append(Character.toLowerCase(charArray[i]));
+				char c = Character.toLowerCase(s.charAt(i));
+				sb.setCharAt(i, c);
 			}
 		}
 
@@ -295,16 +293,11 @@ public class TextFormatter {
 		s = StringUtil.replace(s, CharPool.DASH, CharPool.SPACE);
 		s = StringUtil.replace(s, CharPool.UNDERLINE, CharPool.SPACE);
 
-		char[] charArray = s.toCharArray();
+		StringBuilder sb = new StringBuilder(s.toLowerCase());
 
-		StringBuilder sb = new StringBuilder(charArray.length);
-
-		for (int i = 0; i < charArray.length; i++) {
-			if ((i == 0) || (charArray[i - 1] == ' ')) {
-				sb.append(Character.toUpperCase(charArray[i]));
-			}
-			else {
-				sb.append(Character.toLowerCase(charArray[i]));
+		for (int i = 0; i < s.length(); i++) {
+			if ((i == 0) || (s.charAt(i - 1) == ' ')) {
+				sb.setCharAt(i, Character.toUpperCase(s.charAt(i)));
 			}
 		}
 
@@ -322,29 +315,29 @@ public class TextFormatter {
 		if (s.length() == 1) {
 			return s.toLowerCase();
 		}
-		else if (Character.isUpperCase(s.charAt(0)) &&
-				 Character.isUpperCase(s.charAt(1))) {
+		else if (Character.isLowerCase(s.charAt(0)) ||
+			(Character.isUpperCase(s.charAt(0)) &&
+			Character.isUpperCase(s.charAt(1)))) {
 
 			return s;
 		}
 		else {
-			return Character.toLowerCase(s.charAt(0)) + s.substring(1);
+			return s = s.substring(0, 1).toLowerCase().concat(s.substring(1));
 		}
 	}
 
 	private static String _formatM(String s) {
-		char[] charArray = s.toCharArray();
+		StringBuilder sb = new StringBuilder(s.length());
 
-		StringBuilder sb = new StringBuilder(charArray.length);
-
-		for (int i = 0; i < charArray.length; i++) {
-			if (charArray[i] == '-') {
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if (c == '-') {
 			}
-			else if ((i > 0) && (charArray[i - 1] == '-')) {
-				sb.append(Character.toUpperCase(charArray[i]));
+			else if ((i > 0) && (s.charAt(i - 1) == '-')) {
+				sb.append(Character.toUpperCase(c));
 			}
 			else {
-				sb.append(charArray[i]);
+				sb.append(c);
 			}
 		}
 
@@ -360,27 +353,24 @@ public class TextFormatter {
 	}
 
 	private static String _formatP(String s) {
-		char[] charArray = s.toCharArray();
+		StringBuilder sb = new StringBuilder(s.toLowerCase());
 
-		StringBuilder sb = new StringBuilder(charArray.length * 2);
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if (Character.isUpperCase(c) && (i > 0) &&
+				((i + 1) < s.length())) {
 
-		for (int i = 0; i < charArray.length; i++) {
-			if (Character.isUpperCase(charArray[i]) && (i > 0) &&
-				((i + 1) < charArray.length)) {
+				if (Character.isUpperCase(c) &&
+					Character.isLowerCase(s.charAt(i + 1))) {
 
-				if (Character.isUpperCase(charArray[i]) &&
-					Character.isLowerCase(charArray[i + 1])) {
-
-					sb.append(CharPool.DASH);
+					sb.insert(i, CharPool.DASH);
 				}
-				else if (Character.isLowerCase(charArray[i - 1]) &&
-						 Character.isUpperCase(charArray[i])) {
+				else if (Character.isLowerCase(s.charAt(i - 1)) &&
+						 Character.isUpperCase(c)) {
 
-					sb.append(CharPool.DASH);
+					sb.insert(i, CharPool.DASH);
 				}
 			}
-
-			sb.append(Character.toLowerCase(charArray[i]));
 		}
 
 		return sb.toString();
