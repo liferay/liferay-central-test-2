@@ -260,6 +260,10 @@ public class TextFormatter {
 			return s.toLowerCase();
 		}
 
+		if (Character.isLowerCase(s.charAt(0))) {
+			return s;
+		}
+
 		if (Character.isUpperCase(s.charAt(0)) &&
 			Character.isLowerCase(s.charAt(1))) {
 
