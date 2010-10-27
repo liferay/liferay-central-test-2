@@ -29,6 +29,7 @@ import java.util.List;
  * @author Michael C. Han
  * @author Bruno Farache
  * @author Shuyang Zhou
+ * @author Tina Tian
  */
 public class SchedulerMessageListener implements MessageListener {
 
@@ -85,7 +86,8 @@ public class SchedulerMessageListener implements MessageListener {
 			_schedulerEngine.start();
 		}
 		else if (command.equals(SchedulerRequest.COMMAND_UNREGISTER)) {
-			_schedulerEngine.unschedule(schedulerRequest.getTrigger());
+			_schedulerEngine.unschedule(
+				schedulerRequest.getJobName(), schedulerRequest.getGroupName());
 		}
 	}
 
@@ -94,8 +96,7 @@ public class SchedulerMessageListener implements MessageListener {
 		throws Exception {
 
 		List<SchedulerRequest> schedulerRequests =
-			_schedulerEngine.getScheduledJobs(
-				schedulerRequest.getTrigger().getGroupName());
+			_schedulerEngine.getScheduledJobs(schedulerRequest.getGroupName());
 
 		Message responseMessage = MessageBusUtil.createResponseMessage(
 			message, schedulerRequests);

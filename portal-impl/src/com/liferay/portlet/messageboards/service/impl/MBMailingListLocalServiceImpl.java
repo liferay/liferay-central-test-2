@@ -242,7 +242,10 @@ public class MBMailingListLocalServiceImpl
 			SchedulerEngineUtil.getScheduledJobs(groupName);
 
 		for (SchedulerRequest schedulerRequest : schedulerRequests) {
-			SchedulerEngineUtil.unschedule(schedulerRequest.getTrigger());
+			Trigger trigger = schedulerRequest.getTrigger();
+
+			SchedulerEngineUtil.unschedule(
+				trigger.getJobName(), trigger.getGroupName());
 		}
 	}
 

@@ -51,6 +51,7 @@ import org.quartz.impl.StdSchedulerFactory;
  * @author Bruno Farache
  * @author Shuyang Zhou
  * @author Wesley Gong
+ * @author Tina Tian
  */
 public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
@@ -277,16 +278,12 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 	}
 
-	public void unschedule(
-			com.liferay.portal.kernel.scheduler.Trigger trigger)
+	public void unschedule(String jobName, String groupName)
 		throws SchedulerException {
 
 		if (!PropsValues.SCHEDULER_ENABLED) {
 			return;
 		}
-
-		String jobName = trigger.getJobName();
-		String groupName = trigger.getGroupName();
 
 		try {
 			_scheduler.unscheduleJob(jobName, groupName);

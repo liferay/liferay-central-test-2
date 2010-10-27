@@ -41,35 +41,49 @@ public class SchedulerRequest implements Serializable {
 		Message message) {
 
 		return new SchedulerRequest(
-			COMMAND_REGISTER, trigger, description, destination, message);
+			COMMAND_REGISTER, trigger, null, null, description, destination,
+			message);
 	}
 
-	public static SchedulerRequest createRetrieveRequest(Trigger trigger) {
+	public static SchedulerRequest createRetrieveRequest(String groupName) {
 		return new SchedulerRequest(
-			COMMAND_RETRIEVE, trigger, null, null, null);
+			COMMAND_RETRIEVE, null, groupName, null, null, null, null);
 	}
 
 	public static SchedulerRequest createRetrieveResponseRequest(
 		Trigger trigger, String description, Message message) {
 
-		return new SchedulerRequest(null, trigger, description, null, message);
+		return new SchedulerRequest(
+			null, trigger, null, null, description, null, message);
 	}
 
 	public static SchedulerRequest createShutdownRequest() {
-		return new SchedulerRequest(COMMAND_SHUTDOWN, null, null, null, null);
+		return new SchedulerRequest(
+			COMMAND_SHUTDOWN, null, null, null, null, null, null);
 	}
 
 	public static SchedulerRequest createStartupRequest() {
-		return new SchedulerRequest(COMMAND_STARTUP, null, null, null, null);
+		return new SchedulerRequest(
+			COMMAND_STARTUP, null, null, null, null, null, null);
 	}
 
-	public static SchedulerRequest createUnregisterRequest(Trigger trigger) {
+	public static SchedulerRequest createUnregisterRequest(
+		String jobName, String groupName) {
+
 		return new SchedulerRequest(
-			COMMAND_UNREGISTER, trigger, null, null, null);
+			COMMAND_UNREGISTER, null, jobName, groupName, null, null, null);
 	}
 
 	public String getCommand() {
 		return _command;
+	}
+
+	public String getGroupName() {
+		return _groupName;
+	}
+
+	public String getJobName() {
+		return _jobName;
 	}
 
 	public String getDescription() {
@@ -92,6 +106,14 @@ public class SchedulerRequest implements Serializable {
 		_command = command;
 	}
 
+	public void setGroupName(String groupName) {
+		_groupName = groupName;
+	}
+
+	public void setJobName(String jobName) {
+		_jobName = jobName;
+	}
+
 	public void setDescription(String description) {
 		_description = description;
 	}
@@ -109,19 +131,24 @@ public class SchedulerRequest implements Serializable {
 	}
 
 	private SchedulerRequest(
-		String command, Trigger trigger, String description, String destination,
-		Message message) {
+		String command, Trigger trigger, String jobName, String groupName,
+		String description, String destination, Message message) {
 
 		_command = command;
+		_jobName = jobName;
+		_groupName = groupName;
 		_trigger = trigger;
 		_description = description;
 		_destination = destination;
 		_message = message;
+
 	}
 
 	private String _command;
 	private String _description;
 	private String _destination;
+	private String _groupName;
+	private String _jobName;
 	private Message _message;
 	private Trigger _trigger;
 

@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
+import com.liferay.portal.kernel.scheduler.Trigger;
 
 import java.util.HashMap;
 import java.util.List;
@@ -98,7 +99,10 @@ public abstract class AbstractSchedulingConfigurator
 	protected void destroySchedulerEntry(SchedulerEntry schedulerEntry)
 		throws Exception {
 
-		_schedulerEngine.unschedule(schedulerEntry.getTrigger());
+		Trigger trigger = schedulerEntry.getTrigger();
+
+		_schedulerEngine.unschedule(
+			trigger.getJobName(), trigger.getGroupName());
 	}
 
 	protected void initSchedulerEntry(

@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.CharPool;
@@ -1264,7 +1265,9 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				SchedulerEngineUtil.getScheduledJobs(groupName);
 
 			for (SchedulerRequest schedulerRequest : schedulerRequests) {
-				SchedulerEngineUtil.unschedule(schedulerRequest.getTrigger());
+				SchedulerEngineUtil.unschedule(
+					schedulerRequest.getJobName(),
+					schedulerRequest.getGroupName());
 			}
 
 			long liveGroupId = 0;
@@ -1292,8 +1295,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 					groupName);
 
 				for (SchedulerRequest schedulerRequest : schedulerRequests) {
+					Trigger trigger = schedulerRequest.getTrigger();
+
 					SchedulerEngineUtil.unschedule(
-						schedulerRequest.getTrigger());
+						trigger.getJobName(), trigger.getGroupName());
 				}
 
 				// Copy from live
@@ -1305,8 +1310,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 					groupName);
 
 				for (SchedulerRequest schedulerRequest : schedulerRequests) {
+					Trigger trigger = schedulerRequest.getTrigger();
+
 					SchedulerEngineUtil.unschedule(
-						schedulerRequest.getTrigger());
+						trigger.getJobName(), trigger.getGroupName());
 				}
 			}
 		}

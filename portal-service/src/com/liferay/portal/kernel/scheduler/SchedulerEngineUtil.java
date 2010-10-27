@@ -120,11 +120,15 @@ public class SchedulerEngineUtil {
 		MessageBusUtil.unregisterMessageListener(
 			DestinationNames.SCHEDULER_DISPATCH, schedulerEventListener);
 
-		unschedule(schedulerEntry.getTrigger());
+		Trigger trigger = schedulerEntry.getTrigger();
+
+		unschedule(trigger.getJobName(), trigger.getGroupName());
 	}
 
-	public static void unschedule(Trigger trigger) throws SchedulerException {
-		_instance._unschedule(trigger);
+	public static void unschedule(String jobName, String groupName)
+		throws SchedulerException {
+
+		_instance._unschedule(jobName, groupName);
 	}
 
 	private List<SchedulerRequest> _getScheduledJobs(String groupName)
@@ -154,8 +158,10 @@ public class SchedulerEngineUtil {
 		_schedulerEngine.start();
 	}
 
-	private void _unschedule(Trigger trigger) throws SchedulerException {
-		_schedulerEngine.unschedule(trigger);
+	private void _unschedule(String jobName, String groupName)
+		throws SchedulerException {
+
+		_schedulerEngine.unschedule(jobName, groupName);
 	}
 
 	private static SchedulerEngineUtil _instance = new SchedulerEngineUtil();

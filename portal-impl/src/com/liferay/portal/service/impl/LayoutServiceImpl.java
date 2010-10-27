@@ -383,8 +383,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			throw new PrincipalException();
 		}
 
-		SchedulerEngineUtil.unschedule(
-			new CronTrigger(jobName, groupName, null));
+		SchedulerEngineUtil.unschedule(jobName, groupName);
 	}
 
 	public void unschedulePublishToRemote(
@@ -412,8 +411,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 				permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS);
 		}
 
-		SchedulerEngineUtil.unschedule(
-			new CronTrigger(jobName, groupName, null));
+		SchedulerEngineUtil.unschedule(jobName, groupName);
 	}
 
 	public Layout updateLayout(

@@ -57,6 +57,7 @@ public interface SchedulerEngine {
 
 	public void start() throws SchedulerException;
 
-	public void unschedule(Trigger trigger) throws SchedulerException;
+	public void unschedule(String jobName, String groupName)
+		throws SchedulerException;
 
 }

@@ -17,7 +17,6 @@ package com.liferay.portal.scheduler;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.scheduler.CronTrigger;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.Trigger;
@@ -28,6 +27,7 @@ import java.util.List;
 /**
  * @author Bruno Farache
  * @author Shuyang Zhou
+ * @author Tina Tian
  */
 public class SchedulerEngineProxy implements SchedulerEngine {
 
@@ -36,8 +36,7 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 
 		try {
 			SchedulerRequest schedulerRequest =
-				SchedulerRequest.createRetrieveRequest(
-					new CronTrigger(groupName, groupName, null));
+				SchedulerRequest.createRetrieveRequest(groupName);
 
 			List<SchedulerRequest> schedulerRequests =
 				(List<SchedulerRequest>)MessageBusUtil.sendSynchronousMessage(
@@ -75,9 +74,9 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 			SchedulerRequest.createStartupRequest());
 	}
 
-	public void unschedule(Trigger trigger) {
+	public void unschedule(String jobName, String groupName) {
 		SchedulerRequest schedulerRequest =
-			SchedulerRequest.createUnregisterRequest(trigger);
+			SchedulerRequest.createUnregisterRequest(jobName, groupName);
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
