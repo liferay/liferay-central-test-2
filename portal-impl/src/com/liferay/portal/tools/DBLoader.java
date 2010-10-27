@@ -39,19 +39,24 @@ import org.apache.derby.tools.ij;
 public class DBLoader {
 
 	public static void main(String[] args) {
-		Map<String, String> arguments = ArgumentUtil.getArguments(args);
+		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
 
-		String databaseType = arguments.get("database.type");
-		String databaseName = arguments.get("database.name");
-		String fileName = arguments.get("file.name");
+		String databaseName = arguments.get("db.database.name");
+		String databaseType = arguments.get("db.database.type");
+		String sqlDir = arguments.get("db.sql.dir");
+		String fileName = arguments.get("db.file.name");
 
-		new DBLoader(databaseType, databaseName, fileName);
+		new DBLoader(databaseName, databaseType, sqlDir, fileName);
 	}
 
-	public DBLoader(String databaseType, String databaseName, String fileName) {
+	public DBLoader(
+		String databaseName, String databaseType, String sqlDir,
+		String fileName) {
+
 		try {
-			_databaseType = databaseType;
 			_databaseName = databaseName;
+			_databaseType = databaseType;
+			_sqlDir = sqlDir;
 			_fileName = fileName;
 
 			if (_databaseType.equals("derby")) {
@@ -73,11 +78,11 @@ public class DBLoader {
 			"jdbc:derby:" + _databaseName + ";create=true", "", "");
 
 		if (Validator.isNull(_fileName)) {
-			_loadDerby(con, "../sql/portal/portal-derby.sql");
-			_loadDerby(con, "../sql/indexes.sql");
+			_loadDerby(con, _sqlDir + "/portal/portal-derby.sql");
+			_loadDerby(con, _sqlDir + "/indexes.sql");
 		}
 		else {
-			_loadDerby(con, _fileName);
+			_loadDerby(con, _sqlDir + "/" + _fileName);
 		}
 	}
 
@@ -144,14 +149,15 @@ public class DBLoader {
 		// guarantees that ${_databaseName}.log is purged.
 
 		Connection con = DriverManager.getConnection(
-			"jdbc:hsqldb:" + _databaseName + ";shutdown=true", "sa", "");
+			"jdbc:hsqldb:" + _sqlDir + "/" + _databaseName + ";shutdown=true",
+			"sa", "");
 
 		if (Validator.isNull(_fileName)) {
-			_loadHypersonic(con, "../sql/portal/portal-hypersonic.sql");
-			_loadHypersonic(con, "../sql/indexes.sql");
+			_loadHypersonic(con, _sqlDir + "/portal/portal-hypersonic.sql");
+			_loadHypersonic(con, _sqlDir + "/indexes.sql");
 		}
 		else {
-			_loadHypersonic(con, _fileName);
+			_loadHypersonic(con, _sqlDir + "/" + _fileName);
 		}
 
 		// Shutdown Hypersonic
@@ -167,11 +173,12 @@ public class DBLoader {
 		// Hypersonic will encode unicode characters twice, this will undo
 		// it
 
-		String content = _fileUtil.read(_databaseName + ".script");
+		String content = _fileUtil.read(
+			_sqlDir + "/" + _databaseName + ".script");
 
 		content = StringUtil.replace(content, "\\u005cu", "\\u");
 
-		_fileUtil.write(_databaseName + ".script", content);
+		_fileUtil.write(_sqlDir + "/" + _databaseName + ".script", content);
 	}
 
 	private void _loadHypersonic(Connection con, String fileName)
@@ -223,8 +230,9 @@ public class DBLoader {
 
 	private static FileImpl _fileUtil = FileImpl.getInstance();
 
-	private String _databaseType;
 	private String _databaseName;
+	private String _databaseType;
 	private String _fileName;
+	private String _sqlDir;
 
 }

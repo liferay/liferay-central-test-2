@@ -32,7 +32,7 @@ import javax.imageio.ImageIO;
 public class ThumbnailBuilder {
 
 	public static void main(String[] args) {
-		Map<String, String> arguments = ArgumentUtil.getArguments(args);
+		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
 
 		File originalFile = new File(arguments.get("thumbnail.original.file"));
 		File thumbnailFile = new File(

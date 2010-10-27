@@ -17,7 +17,6 @@ package com.liferay.portal.tools;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.InitUtil;
 
@@ -33,20 +32,24 @@ import java.util.Map;
 public class DBBuilder {
 
 	public static void main(String[] args) {
-		Map<String, String> arguments = ArgumentUtil.getArguments(args);
+		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
+
 		InitUtil.initWithSpring(true);
 
-		String sqlDir = GetterUtil.get(arguments.get("sql.dir"), "../sql");
-		String databaseName = arguments.get("database.name");
-		String databaseTypesString = arguments.get("database.types");
+		String databaseName = arguments.get("db.database.name");
+
+		String databaseTypesString = arguments.get("db.database.types");
 
 		String[] databaseTypes = null;
+
 		if (databaseTypesString == null) {
 			databaseTypes = DB.TYPE_ALL;
 		}
 		else {
 			databaseTypes = StringUtil.split(databaseTypesString);
 		}
+
+		String sqlDir = arguments.get("db.sql.dir");
 
 		new DBBuilder(databaseName, databaseTypes, sqlDir);
 
@@ -55,6 +58,7 @@ public class DBBuilder {
 
 	public DBBuilder(
 		String databaseName, String[] databaseTypes, String sqlDir) {
+
 		try {
 			_databaseName = databaseName;
 			_databaseTypes = databaseTypes;

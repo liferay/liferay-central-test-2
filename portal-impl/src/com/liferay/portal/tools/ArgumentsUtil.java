@@ -20,9 +20,9 @@ import java.util.Map;
 /**
  * @author Shuyang Zhou
  */
-public class ArgumentUtil {
+public class ArgumentsUtil {
 
-	public static Map<String, String> getArguments(String[] args) {
+	public static Map<String, String> parseArguments(String[] args) {
 		Map<String, String> arguments = new HashMap<String, String>();
 
 		for (String arg : args) {

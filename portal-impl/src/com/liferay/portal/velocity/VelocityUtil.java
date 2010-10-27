@@ -15,13 +15,16 @@
 package com.liferay.portal.velocity;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PropsUtil;
 
 import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
+import org.apache.velocity.runtime.RuntimeConstants;
 
 /**
  * @author Brian Wing Shun Chan
@@ -34,6 +37,14 @@ public class VelocityUtil {
 
 	public static String evaluate(String input, Map<String, Object> variables)
 		throws Exception {
+
+		Velocity.setProperty(
+			RuntimeConstants.RUNTIME_LOG_LOGSYSTEM_CLASS,
+			PropsUtil.get(PropsKeys.VELOCITY_ENGINE_LOGGER));
+
+		Velocity.setProperty(
+			RuntimeConstants.RUNTIME_LOG_LOGSYSTEM + ".log4j.category",
+			PropsUtil.get(PropsKeys.VELOCITY_ENGINE_LOGGER_CATEGORY));
 
 		Velocity.init();
 

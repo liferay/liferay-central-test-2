@@ -9,17 +9,12 @@
 		<java
 			classname="com.liferay.portal.tools.DBBuilder"
 			classpathref="project.classpath"
-			fork="${java.fork}"
-			maxmemory="384m"
-			newenvironment="true"
 		>
 			<arg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<arg value="sql.dir=../sql" />
-			<arg value="database.name=${database.name}" />
-			<arg value="database.types=${database.types}" />
+			<arg value="db.database.name=${database.name}" />
+			<arg value="db.database.types=${database.types}" />
+			<arg value="db.sql.dir=${basedir}" />
 		</java>
-
-		<delete file="velocity.log" quiet="true" />
 	</target>
 
 	<target name="export-oracle">
@@ -72,29 +67,25 @@
 		<java
 			classname="com.liferay.portal.tools.DBLoader"
 			classpathref="project.classpath"
-			fork="${java.fork}"
-			maxmemory="256m"
-			newenvironment="true"
 		>
 			<arg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<arg value="-Dfile.encoding=UTF-8" />
-			<arg value="database.type=hypersonic" />
-			<arg value="database.name=${database.name}" />
-			<arg value="file.name=${basedir}/portal${minimal.suffix}/portal${minimal.suffix}-hypersonic.sql" />
+			<arg value="db.database.name=${database.name}" />
+			<arg value="db.database.type=hypersonic" />
+			<arg value="db.sql.dir=${basedir}" />
+			<arg value="db.file.name=portal${minimal.suffix}/portal${minimal.suffix}-hypersonic.sql" />
 		</java>
 
 		<java
 			classname="com.liferay.portal.tools.DBLoader"
 			classpathref="project.classpath"
-			fork="${java.fork}"
-			maxmemory="256m"
-			newenvironment="true"
 		>
 			<arg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<arg value="-Dfile.encoding=UTF-8" />
-			<arg value="database.type=hypersonic" />
-			<arg value="database.name=${database.name}" />
-			<arg value="file.name=${basedir}/indexes.sql" />
+			<arg value="db.database.name=${database.name}" />
+			<arg value="db.database.type=hypersonic" />
+			<arg value="db.sql.dir=${basedir}" />
+			<arg value="db.file.name=indexes.sql" />
 		</java>
 	</target>
 
