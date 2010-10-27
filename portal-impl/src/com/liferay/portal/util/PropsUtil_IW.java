@@ -57,6 +57,10 @@ public class PropsUtil_IW {
 		return PropsUtil.getProperties(prefix, removePrefix);
 	}
 
+	public void reload() {
+		PropsUtil.reload();
+	}
+
 	public void removeProperties(java.util.Properties properties) {
 		PropsUtil.removeProperties(properties);
 	}

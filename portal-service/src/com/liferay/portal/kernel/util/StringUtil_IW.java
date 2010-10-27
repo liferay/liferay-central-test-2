@@ -205,6 +205,12 @@ public class StringUtil_IW {
 		return StringUtil.read(is);
 	}
 
+	public void readLines(java.io.InputStream is,
+		java.util.Collection<java.lang.String> strings)
+		throws java.io.IOException {
+		StringUtil.readLines(is, strings);
+	}
+
 	public java.lang.String remove(java.lang.String s, java.lang.String remove) {
 		return StringUtil.remove(s, remove);
 	}
@@ -396,6 +402,10 @@ public class StringUtil_IW {
 
 	public int startsWithWeight(java.lang.String s1, java.lang.String s2) {
 		return StringUtil.startsWithWeight(s1, s2);
+	}
+
+	public java.lang.String strip(java.lang.String s, char remove) {
+		return StringUtil.strip(s, remove);
 	}
 
 	public java.lang.String stripBetween(java.lang.String s,
