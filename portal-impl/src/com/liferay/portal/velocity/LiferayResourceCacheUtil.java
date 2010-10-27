@@ -16,7 +16,12 @@ package com.liferay.portal.velocity;
 
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.util.AutoResetThreadLocal;
+import com.liferay.portal.util.PropsValues;
 
+import java.util.Map;
+
+import org.apache.commons.collections.map.LRUMap;
 import org.apache.velocity.runtime.resource.Resource;
 
 /**
@@ -28,25 +33,82 @@ public class LiferayResourceCacheUtil {
 		LiferayResourceCacheUtil.class.getName();
 
 	public static void clear() {
+		clearLocalCache();
+
 		_portalCache.removeAll();
 	}
 
-	public static Resource get(String key) {
-		Object resource = _portalCache.get(key);
+	public static void clearLocalCache() {
+		if (_localCacheAvailable) {
+			_localCache.remove();
+		}
+	}
 
-		if ((resource != null) && (resource instanceof Resource)) {
-			return (Resource)resource;
+	public static Resource get(String key) {
+		if (_localCacheAvailable) {
+			Object result = null;
+
+			Map<String, Object> localCache = null;
+
+			localCache = _localCache.get();
+
+			result = localCache.get(key);
+
+			if ((result != null) && (result instanceof Resource)) {
+				Resource resource = (Resource) result;
+
+				Object lastModified = _portalCache.get(key);
+
+				if (lastModified != null &&
+					lastModified.equals(resource.getLastModified())) {
+
+					return resource;
+				}
+
+				localCache.remove(key);
+			}
 		}
 
 		return null;
 	}
 
 	public static void put(String key, Resource resource) {
-		_portalCache.put(key, resource);
+		if (_localCacheAvailable) {
+			Map<String, Object> localCache = _localCache.get();
+
+			localCache.put(key, resource);
+		}
+
+		Long lastModified = resource.getLastModified();
+
+		_portalCache.put(key, lastModified);
 	}
 
 	public static void remove(String key) {
+		if (_localCacheAvailable) {
+			Map<String, Object> localCache = _localCache.get();
+
+			localCache.remove(key);
+		}
+
 		_portalCache.remove(key);
+	}
+
+
+	private static ThreadLocal<LRUMap> _localCache;
+	private static boolean _localCacheAvailable;
+
+	static {
+		if (PropsValues.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_ENABLED &&
+			PropsValues.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_MAX_SIZE > 0) {
+
+			_localCache = new AutoResetThreadLocal<LRUMap>(
+				LiferayResourceCacheUtil.class + "._localCache",
+				new LRUMap(
+					PropsValues.
+						VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_MAX_SIZE));
+			_localCacheAvailable = true;
+		}
 	}
 
 	private static PortalCache _portalCache = MultiVMPoolUtil.getCache(
