@@ -33,6 +33,7 @@ public class CacheResponseData implements Serializable {
 
 	public CacheResponseData(ByteBufferServletResponse byteBufferResponse) {
 		_byteBuffer = byteBufferResponse.getByteBuffer();
+		_content = _byteBuffer.array();
 		_contentType = byteBufferResponse.getContentType();
 		_headers = byteBufferResponse.getHeaders();
 	}
@@ -42,6 +43,10 @@ public class CacheResponseData implements Serializable {
 	}
 
 	public ByteBuffer getByteBuffer() {
+		if (_byteBuffer == null) {
+			_byteBuffer = ByteBuffer.wrap(_content);
+		}
+
 		return _byteBuffer;
 	}
 
@@ -58,7 +63,8 @@ public class CacheResponseData implements Serializable {
 	}
 
 	private Map<String, Object> _attributes = new HashMap<String, Object>();
-	private ByteBuffer _byteBuffer;
+	private transient ByteBuffer _byteBuffer;
+	private byte[] _content;
 	private String _contentType;
 	private Map<String, List<Header>> _headers;
 
