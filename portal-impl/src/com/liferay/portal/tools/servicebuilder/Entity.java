@@ -38,14 +38,13 @@ public class Entity {
 	public static EntityColumn getColumn(
 		String name, List<EntityColumn> columnList) {
 
-		int pos = columnList.indexOf(new EntityColumn(name));
+		for (EntityColumn entityColumn : columnList) {
+			if (entityColumn.getName().equals(name)) {
+				return entityColumn;
+			}
+		}
 
-		if (pos != -1) {
-			return columnList.get(pos);
-		}
-		else {
-			throw new RuntimeException("Column " + name + " not found");
-		}
+		throw new RuntimeException("Column " + name + " not found");
 	}
 
 	public static boolean hasColumn(
