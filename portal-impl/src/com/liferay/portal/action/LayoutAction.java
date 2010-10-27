@@ -991,23 +991,24 @@ public class LayoutAction extends Action {
 			return event;
 		}
 
-		Class valueClass = value.getClass();
+		Class<?> valueClass = value.getClass();
+
 		String valueClassName = valueClass.getName();
 
 		try {
-			Class loadedValueClass = portletClassLoader.loadClass(
+			Class<?> loadedValueClass = portletClassLoader.loadClass(
 				valueClassName);
 
 			if (loadedValueClass.equals(valueClass)) {
 				return event;
 			}
 		}
-		catch (ClassNotFoundException e) {
+		catch (ClassNotFoundException cnfe) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					portletClassLoader.toString() + " does not contain " +
-					valueClassName,
-					e);
+						valueClassName,
+					cnfe);
 			}
 		}
 
