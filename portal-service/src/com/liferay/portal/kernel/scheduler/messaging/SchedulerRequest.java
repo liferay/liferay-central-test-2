@@ -40,50 +40,82 @@ public class SchedulerRequest implements Serializable {
 		Trigger trigger, String description, String destination,
 		Message message) {
 
-		return new SchedulerRequest(
-			COMMAND_REGISTER, trigger, null, null, description, destination,
-			message);
+		SchedulerRequest schedulerRequest = new SchedulerRequest();
+
+		schedulerRequest.setDescription(description);
+		schedulerRequest.setDestination(destination);
+		schedulerRequest.setMessage(message);
+		schedulerRequest.setTrigger(trigger);
+
+		return schedulerRequest;
 	}
 
 	public static SchedulerRequest createRetrieveRequest(String groupName) {
-		return new SchedulerRequest(
-			COMMAND_RETRIEVE, null, groupName, null, null, null, null);
+		SchedulerRequest schedulerRequest = new SchedulerRequest();
+
+		schedulerRequest.setCommand(COMMAND_RETRIEVE);
+		schedulerRequest.setGroupName(groupName);
+
+		return schedulerRequest;
+	}
+
+	/**
+	 * @deprecated {@link #createRetrieveRequest(String)}
+	 */
+	public static SchedulerRequest createRetrieveRequest(Trigger trigger) {
+		return createRetrieveRequest(trigger.getGroupName());
 	}
 
 	public static SchedulerRequest createRetrieveResponseRequest(
 		Trigger trigger, String description, Message message) {
 
-		return new SchedulerRequest(
-			null, trigger, null, null, description, null, message);
+		SchedulerRequest schedulerRequest = new SchedulerRequest();
+
+		schedulerRequest.setDescription(description);
+		schedulerRequest.setMessage(message);
+		schedulerRequest.setTrigger(trigger);
+
+		return schedulerRequest;
 	}
 
 	public static SchedulerRequest createShutdownRequest() {
-		return new SchedulerRequest(
-			COMMAND_SHUTDOWN, null, null, null, null, null, null);
+		SchedulerRequest schedulerRequest = new SchedulerRequest();
+
+		schedulerRequest.setCommand(COMMAND_SHUTDOWN);
+
+		return schedulerRequest;
 	}
 
 	public static SchedulerRequest createStartupRequest() {
-		return new SchedulerRequest(
-			COMMAND_STARTUP, null, null, null, null, null, null);
+		SchedulerRequest schedulerRequest = new SchedulerRequest();
+
+		schedulerRequest.setCommand(COMMAND_STARTUP);
+
+		return schedulerRequest;
 	}
 
 	public static SchedulerRequest createUnregisterRequest(
 		String jobName, String groupName) {
 
-		return new SchedulerRequest(
-			COMMAND_UNREGISTER, null, jobName, groupName, null, null, null);
+		SchedulerRequest schedulerRequest = new SchedulerRequest();
+
+		schedulerRequest.setCommand(COMMAND_UNREGISTER);
+		schedulerRequest.setGroupName(groupName);
+		schedulerRequest.setJobName(jobName);
+
+		return schedulerRequest;
+	}
+
+	/**
+	 * @deprecated {@link #createUnregisterRequest(String, String)}
+	 */
+	public static SchedulerRequest createUnregisterRequest(Trigger trigger) {
+		return createUnregisterRequest(
+			trigger.getJobName(), trigger.getGroupName());
 	}
 
 	public String getCommand() {
 		return _command;
-	}
-
-	public String getGroupName() {
-		return _groupName;
-	}
-
-	public String getJobName() {
-		return _jobName;
 	}
 
 	public String getDescription() {
@@ -92,6 +124,14 @@ public class SchedulerRequest implements Serializable {
 
 	public String getDestination() {
 		return _destination;
+	}
+
+	public String getGroupName() {
+		return _groupName;
+	}
+
+	public String getJobName() {
+		return _jobName;
 	}
 
 	public Message getMessage() {
@@ -106,20 +146,20 @@ public class SchedulerRequest implements Serializable {
 		_command = command;
 	}
 
-	public void setGroupName(String groupName) {
-		_groupName = groupName;
-	}
-
-	public void setJobName(String jobName) {
-		_jobName = jobName;
-	}
-
 	public void setDescription(String description) {
 		_description = description;
 	}
 
 	public void setDestination(String destination) {
 		_destination = destination;
+	}
+
+	public void setGroupName(String groupName) {
+		_groupName = groupName;
+	}
+
+	public void setJobName(String jobName) {
+		_jobName = jobName;
 	}
 
 	public void setMessage(Message message) {
@@ -130,18 +170,7 @@ public class SchedulerRequest implements Serializable {
 		_trigger = trigger;
 	}
 
-	private SchedulerRequest(
-		String command, Trigger trigger, String jobName, String groupName,
-		String description, String destination, Message message) {
-
-		_command = command;
-		_jobName = jobName;
-		_groupName = groupName;
-		_trigger = trigger;
-		_description = description;
-		_destination = destination;
-		_message = message;
-
+	private SchedulerRequest() {
 	}
 
 	private String _command;

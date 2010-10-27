@@ -82,4 +82,15 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
 	}
 
+	/**
+	 * @deprecated {@link #unschedule(String, String)}
+	 */
+	public void unschedule(Trigger trigger) {
+		SchedulerRequest schedulerRequest =
+			SchedulerRequest.createUnregisterRequest(trigger);
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
+	}
+
 }

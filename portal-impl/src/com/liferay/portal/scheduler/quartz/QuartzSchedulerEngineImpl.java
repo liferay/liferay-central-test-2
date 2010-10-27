@@ -296,6 +296,15 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 	}
 
+	/**
+	 * @deprecated {@link #unschedule(String, String)}
+	 */
+	public void unschedule(com.liferay.portal.kernel.scheduler.Trigger trigger)
+		throws SchedulerException {
+
+		unschedule(trigger.getJobName(), trigger.getGroupName());
+	}
+
 	protected void schedule(
 			Trigger trigger, String description,
 			String destination, Message message)

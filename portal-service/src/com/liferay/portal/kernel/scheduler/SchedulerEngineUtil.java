@@ -131,6 +131,13 @@ public class SchedulerEngineUtil {
 		_instance._unschedule(jobName, groupName);
 	}
 
+	/**
+	 * @deprecated {@link #unschedule(String, String)}
+	 */
+	public static void unschedule(Trigger trigger) throws SchedulerException {
+		_instance._unschedule(trigger);
+	}
+
 	private List<SchedulerRequest> _getScheduledJobs(String groupName)
 		throws SchedulerException {
 
@@ -162,6 +169,13 @@ public class SchedulerEngineUtil {
 		throws SchedulerException {
 
 		_schedulerEngine.unschedule(jobName, groupName);
+	}
+
+	/**
+	 * @deprecated {@link #_unschedule(String, String)}
+	 */
+	private void _unschedule(Trigger trigger) throws SchedulerException {
+		_schedulerEngine.unschedule(trigger);
 	}
 
 	private static SchedulerEngineUtil _instance = new SchedulerEngineUtil();
