@@ -48,7 +48,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lar.LayoutExporter;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutBranchConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
@@ -59,12 +58,10 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.GroupServiceUtil;
-import com.liferay.portal.service.LayoutBranchLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.http.GroupServiceHttp;
 import com.liferay.portal.service.http.LayoutServiceHttp;
@@ -747,19 +744,16 @@ public class StagingImpl implements Staging {
 			throw new PrincipalException();
 		}
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			portletRequest);
-
 		int stagingType = ParamUtil.getInteger(portletRequest, "stagingType");
 
 		if (stagingType == StagingConstants.TYPE_NOT_STAGED) {
 			disableStaging(portletRequest, liveGroupId);
 		}
 		else if (stagingType == StagingConstants.TYPE_LOCAL_STAGING) {
-			enableLocalStaging(portletRequest, liveGroupId, serviceContext);
+			enableLocalStaging(portletRequest, liveGroupId);
 		}
 		else if (stagingType == StagingConstants.TYPE_REMOTE_STAGING) {
-			enableRemoteStaging(portletRequest, liveGroupId, serviceContext);
+			enableRemoteStaging(portletRequest, liveGroupId);
 		}
 	}
 
@@ -807,8 +801,6 @@ public class StagingImpl implements Staging {
 				(ThemeDisplay)portletRequest.getAttribute(
 					WebKeys.THEME_DISPLAY);
 
-			Group stagingGroup = liveGroup.getStagingGroup();
-
 			if (themeDisplay.getScopeGroupId() != liveGroup.getGroupId()) {
 				String redirect = ParamUtil.getString(
 					portletRequest, "pagesRedirect");
@@ -822,16 +814,11 @@ public class StagingImpl implements Staging {
 				portletRequest.setAttribute(WebKeys.REDIRECT, redirect);
 			}
 
-			LayoutBranchLocalServiceUtil.deleteBranches(
-				stagingGroup.getGroupId());
-
-			GroupLocalServiceUtil.deleteGroup(stagingGroup.getGroupId());
+			GroupLocalServiceUtil.deleteGroup(
+				liveGroup.getStagingGroup().getGroupId());
 
 			TasksProposalLocalServiceUtil.deleteProposals(
 				liveGroup.getGroupId());
-		}
-		else {
-			LayoutBranchLocalServiceUtil.deleteBranches(liveGroup.getGroupId());
 		}
 
 		GroupLocalServiceUtil.updateGroup(
@@ -839,8 +826,7 @@ public class StagingImpl implements Staging {
 	}
 
 	protected void enableLocalStaging(
-			PortletRequest portletRequest, long liveGroupId,
-			ServiceContext serviceContext)
+			PortletRequest portletRequest, long liveGroupId)
 		throws Exception {
 
 		Group liveGroup = GroupServiceUtil.getGroup(liveGroupId);
@@ -861,6 +847,8 @@ public class StagingImpl implements Staging {
 			portletRequest, liveGroup, typeSettingsProperties);
 
 		if (!liveGroup.hasStagingGroup()) {
+			ServiceContext serviceContext = new ServiceContext();
+
 			serviceContext.setAttribute("staging", String.valueOf(true));
 
 			Group stagingGroup = GroupLocalServiceUtil.addGroup(
@@ -888,12 +876,6 @@ public class StagingImpl implements Staging {
 					liveGroup.getGroupId(), stagingGroup.getGroupId(), false,
 					parameterMap, null, null);
 			}
-
-			LayoutBranchLocalServiceUtil.addBranch(
-				LayoutBranchConstants.MASTER_BRANCH_NAME,
-				LayoutBranchConstants.MASTER_BRANCH_NAME.concat(
-					" branch of ").concat(stagingGroup.getDescriptiveName()),
-				serviceContext);
 		}
 		else {
 			GroupServiceUtil.updateGroup(
@@ -902,8 +884,7 @@ public class StagingImpl implements Staging {
 	}
 
 	protected void enableRemoteStaging(
-			PortletRequest portletRequest, long liveGroupId,
-			ServiceContext serviceContext)
+			PortletRequest portletRequest, long liveGroupId)
 		throws Exception {
 
 		Group liveGroup = GroupServiceUtil.getGroup(liveGroupId);
@@ -937,12 +918,6 @@ public class StagingImpl implements Staging {
 
 		setCommonStagingOptions(
 			portletRequest, liveGroup, typeSettingsProperties);
-
-		LayoutBranchLocalServiceUtil.addBranch(
-			LayoutBranchConstants.MASTER_BRANCH_NAME,
-			LayoutBranchConstants.MASTER_BRANCH_NAME.concat(
-				" branch of ").concat(liveGroup.getDescriptiveName()),
-			serviceContext);
 
 		GroupServiceUtil.updateGroup(
 			liveGroup.getGroupId(), typeSettingsProperties.toString());

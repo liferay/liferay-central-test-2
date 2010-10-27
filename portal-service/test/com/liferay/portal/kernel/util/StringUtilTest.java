@@ -33,15 +33,6 @@ public class StringUtilTest extends TestCase {
 		assertEquals(expected, actual);
 	}
 
-	public void testRemoveChar() {
-		String original = " a  b   c    d     ef      ghi       ";
-		String expected = "abcdefghi";
-
-		String actual = StringUtil.remove(original, ' ');
-
-		assertEquals(expected, actual);
-	}
-
 	public void testReplaceChar() throws Exception {
 		String original = "127.0.0.1";
 		String expected = "127_0_0_1";
@@ -134,6 +125,15 @@ public class StringUtilTest extends TestCase {
 		String actual = StringUtil.replace(
 			original, new String[] {"Hello", "HELLO"},
 			new String[] {"Aloha", "ALOHA"});
+
+		assertEquals(expected, actual);
+	}
+
+	public void testStripChar() {
+		String original = " a b  c   d";
+		String expected = "abcd";
+
+		String actual = StringUtil.strip(original, ' ');
 
 		assertEquals(expected, actual);
 	}

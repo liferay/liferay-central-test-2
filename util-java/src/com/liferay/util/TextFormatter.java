@@ -208,7 +208,7 @@ public class TextFormatter {
 	}
 
 	private static String _formatB(String s) {
-		return StringUtil.remove(s.toLowerCase(), CharPool.SPACE);
+		return StringUtil.strip(s.toLowerCase(), CharPool.SPACE);
 	}
 
 	private static String _formatC(String s) {
@@ -217,7 +217,7 @@ public class TextFormatter {
 	}
 
 	private static String _formatD(String s) {
-		return StringUtil.remove(s, CharPool.SPACE);
+		return StringUtil.strip(s, CharPool.SPACE);
 	}
 
 	private static String _formatE(String s) {
@@ -225,11 +225,12 @@ public class TextFormatter {
 	}
 
 	private static String _formatF(String s) {
-		s = StringUtil.remove(s, CharPool.SPACE);
+		s = StringUtil.strip(s, CharPool.SPACE);
 
 		if (Character.isUpperCase(s.charAt(0))) {
 			s = s.substring(0, 1).toLowerCase().concat(s.substring(1));
 		}
+
 		return s;
 	}
 
@@ -237,6 +238,7 @@ public class TextFormatter {
 		if (Character.isLowerCase(s.charAt(0))) {
 			s = s.substring(0, 1).toUpperCase().concat(s.substring(1));
 		}
+
 		return s;
 	}
 
@@ -245,6 +247,7 @@ public class TextFormatter {
 
 		for (int i = 0; i < s.length(); i++) {
 			char c = s.charAt(i);
+
 			if (Character.isUpperCase(c)) {
 				sb.append(CharPool.SPACE);
 				sb.append(Character.toLowerCase(c));
@@ -282,6 +285,7 @@ public class TextFormatter {
 			}
 			else {
 				char c = Character.toLowerCase(s.charAt(i));
+
 				sb.setCharAt(i, c);
 			}
 		}
@@ -316,8 +320,8 @@ public class TextFormatter {
 			return s.toLowerCase();
 		}
 		else if (Character.isLowerCase(s.charAt(0)) ||
-			(Character.isUpperCase(s.charAt(0)) &&
-			Character.isUpperCase(s.charAt(1)))) {
+				 (Character.isUpperCase(s.charAt(0)) &&
+				  Character.isUpperCase(s.charAt(1)))) {
 
 			return s;
 		}
@@ -331,6 +335,7 @@ public class TextFormatter {
 
 		for (int i = 0; i < s.length(); i++) {
 			char c = s.charAt(i);
+
 			if (c == '-') {
 			}
 			else if ((i > 0) && (s.charAt(i - 1) == '-')) {
@@ -357,6 +362,7 @@ public class TextFormatter {
 
 		for (int i = 0; i < s.length(); i++) {
 			char c = s.charAt(i);
+
 			if (Character.isUpperCase(c) && (i > 0) &&
 				((i + 1) < s.length())) {
 

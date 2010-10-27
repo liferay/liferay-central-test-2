@@ -646,31 +646,6 @@ public class StringUtil {
 		unsyncBufferedReader.close();
 	}
 
-	public static String remove(String s, char remove) {
-		if (s == null) {
-			return null;
-		}
-
-		int index = s.indexOf(remove);
-		if (index < 0) {
-			return s;
-		}
-
-		int lastIndex = 0;
-
-		StringBuilder sb = new StringBuilder(s.length());
-
-		while (index >= 0) {
-			sb.append(s.subSequence(lastIndex, index));
-			lastIndex = index + 1;
-			index = s.indexOf(remove, lastIndex);
-		}
-
-		sb.append(s.substring(lastIndex));
-
-		return sb.toString();
-	}
-
 	public static String remove(String s, String remove) {
 		return remove(s, remove, StringPool.COMMA);
 	}
@@ -1325,6 +1300,34 @@ public class StringUtil {
 		}
 
 		return i;
+	}
+
+	public static String strip(String s, char remove) {
+		if (s == null) {
+			return null;
+		}
+
+		int x = s.indexOf(remove);
+
+		if (x < 0) {
+			return s;
+		}
+
+		int y = 0;
+
+		StringBuilder sb = new StringBuilder(s.length());
+
+		while (x >= 0) {
+			sb.append(s.subSequence(y, x));
+
+			y = x + 1;
+
+			x = s.indexOf(remove, y);
+		}
+
+		sb.append(s.substring(y));
+
+		return sb.toString();
 	}
 
 	public static String stripBetween(String s, String begin, String end) {
