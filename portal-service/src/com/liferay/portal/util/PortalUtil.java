@@ -732,10 +732,19 @@ public class PortalUtil {
 		return getPortal().getPortletAddDefaultResourceCheckWhitelist();
 	}
 
+	/**
+	 * @deprecated {@link #getPortletBreadcrumbs(HttpServletRequest)}
+	 */
 	public static List<KeyValuePair> getPortletBreadcrumbList(
 		HttpServletRequest request) {
 
 		return getPortal().getPortletBreadcrumbList(request);
+	}
+
+	public static List<KeyValuePair> getPortletBreadcrumbs(
+		HttpServletRequest request) {
+
+		return getPortal().getPortletBreadcrumbs(request);
 	}
 
 	public static String getPortletDescription(

@@ -408,8 +408,13 @@ public interface Portal {
 
 	public Set<String> getPortletAddDefaultResourceCheckWhitelist();
 
+	/**
+	 * @deprecated {@link #getPortletBreadcrumbs(HttpServletRequest)}
+	 */
 	public List<KeyValuePair> getPortletBreadcrumbList(
 		HttpServletRequest request);
+
+	public List<KeyValuePair> getPortletBreadcrumbs(HttpServletRequest request);
 
 	public String getPortletDescription(
 		Portlet portlet, ServletContext servletContext, Locale locale);

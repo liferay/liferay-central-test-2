@@ -542,18 +542,17 @@ public class PortalImpl implements Portal {
 	public void addPortletBreadcrumbEntry(
 		HttpServletRequest request, String title, String url) {
 
-		List<KeyValuePair> portletBreadcrumbList =
+		List<KeyValuePair> portletBreadcrumbs =
 			(List<KeyValuePair>)request.getAttribute(
-				WebKeys.PORTLET_BREADCRUMB_MAP);
+				WebKeys.PORTLET_BREADCRUMBS);
 
-		if (portletBreadcrumbList == null) {
-			portletBreadcrumbList = new ArrayList<KeyValuePair>();
+		if (portletBreadcrumbs == null) {
+			portletBreadcrumbs = new ArrayList<KeyValuePair>();
 
-			request.setAttribute(
-				WebKeys.PORTLET_BREADCRUMB_MAP, portletBreadcrumbList);
+			request.setAttribute(WebKeys.PORTLET_BREADCRUMBS, portletBreadcrumbs);
 		}
 
-		portletBreadcrumbList.add(new KeyValuePair(title, url));
+		portletBreadcrumbs.add(new KeyValuePair(title, url));
 	}
 
 	public void addPortletDefaultResource(
@@ -2318,11 +2317,20 @@ public class PortalImpl implements Portal {
 		return _portletAddDefaultResourceCheckWhitelist;
 	}
 
+	/**
+	 * @deprecated {@link #getPortletBreadcrumbs(HttpServletRequest)}
+	 */
 	public List<KeyValuePair> getPortletBreadcrumbList(
 		HttpServletRequest request) {
 
+		return getPortletBreadcrumbs(request);
+	}
+
+	public List<KeyValuePair> getPortletBreadcrumbs(
+		HttpServletRequest request) {
+
 		return (List<KeyValuePair>)request.getAttribute(
-			WebKeys.PORTLET_BREADCRUMB_MAP);
+			WebKeys.PORTLET_BREADCRUMBS);
 	}
 
 	public String getPortletDescription(

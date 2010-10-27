@@ -105,12 +105,12 @@ public class AssetUtil {
 			HttpServletRequest request, String title, String url)
 		throws Exception {
 
-		List<KeyValuePair> portletBreadcrumbList =
+		List<KeyValuePair> portletBreadcrumbs =
 			(List<KeyValuePair>)request.getAttribute(
-				WebKeys.PORTLET_BREADCRUMB_MAP);
+				WebKeys.PORTLET_BREADCRUMBS);
 
-		if (portletBreadcrumbList != null) {
-			for (KeyValuePair portletBreadcrumb : portletBreadcrumbList) {
+		if (portletBreadcrumbs != null) {
+			for (KeyValuePair portletBreadcrumb : portletBreadcrumbs) {
 				if (title.equals(portletBreadcrumb.getKey())){
 					return;
 				}
