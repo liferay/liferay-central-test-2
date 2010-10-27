@@ -198,15 +198,11 @@ JkShmFile logs/jk-runtime-status</echo>
 			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-1} cmd.exe /c net start Apache2.2" />
 		</exec>
 
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-1} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.29\bin\startup.bat" />
-		</exec>
+		<antcall target="startup-tomcat-cluster-node-1" />
 
 		<sleep seconds="60" />
 
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-2} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.29\bin\startup.bat" />
-		</exec>
+		<antcall target="startup-tomcat-cluster-node-2" />
 
 		<sleep seconds="60" />
 
@@ -228,9 +224,7 @@ JkShmFile logs/jk-runtime-status</echo>
 
 		<antcall target="stop-selenium" />
 
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-2} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.29\bin\shutdown.bat" />
-		</exec>
+		<antcall target="shutdown-tomcat-cluster-node-2" />
 
 		<sleep seconds="30" />
 
@@ -246,13 +240,9 @@ JkShmFile logs/jk-runtime-status</echo>
 
 		<antcall target="stop-selenium" />
 
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-2} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.29\bin\startup.bat" />
-		</exec>
+		<antcall target="startup-tomcat-cluster-node-2" />
 
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host.cluster-node-1} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.29\bin\shutdown.bat" />
-		</exec>
+		<antcall target="shutdown-tomcat-cluster-node-1" />
 
 		<sleep seconds="30" />
 
@@ -277,5 +267,53 @@ JkShmFile logs/jk-runtime-status</echo>
 		<exec dir="${vm.drive}/${vm.host.cluster-node-2}" executable="${vmware-cmd.executable}">
 			<arg line="${vm.drive}\${vm.host.cluster-node-2}\${vm.host.cluster-node-2}.vmx stop hard" />
 		</exec>
+	</target>
+
+	<target name="shutdown-tomcat-cluster-node-1">
+		<echo file="execute-remote-command.bat">
+			cd C:\liferay-portal-${lp.version}\tomcat-6.0.29\bin
+
+			shutdown.bat
+		</echo>
+
+		<antcall target="execute-remote-command">
+			<param name="vm.host" value="${vm.host.cluster-node-1}" />
+		</antcall>
+	</target>
+
+	<target name="shutdown-tomcat-cluster-node-2">
+		<echo file="execute-remote-command.bat">
+			cd C:\liferay-portal-${lp.version}\tomcat-6.0.29\bin
+
+			shutdown.bat
+		</echo>
+
+		<antcall target="execute-remote-command">
+			<param name="vm.host" value="${vm.host.cluster-node-1}" />
+		</antcall>
+	</target>
+
+	<target name="startup-tomcat-cluster-node-1">
+		<echo file="execute-remote-command.bat">
+			cd C:\liferay-portal-${lp.version}\tomcat-6.0.29\bin
+
+			startup.bat
+		</echo>
+
+		<antcall target="execute-remote-command">
+			<param name="vm.host" value="${vm.host.cluster-node-1}" />
+		</antcall>
+	</target>
+
+	<target name="startup-tomcat-cluster-node-2">
+		<echo file="execute-remote-command.bat">
+			cd C:\liferay-portal-${lp.version}\tomcat-6.0.29\bin
+
+			startup.bat
+		</echo>
+
+		<antcall target="execute-remote-command">
+			<param name="vm.host" value="${vm.host.cluster-node-2}" />
+		</antcall>
 	</target>
 </project>
