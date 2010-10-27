@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -57,6 +58,7 @@ import com.liferay.util.EncryptorException;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
 import java.security.Key;
@@ -1095,30 +1097,17 @@ public class PortletURLImpl
 
 		Portlet portlet = getPortlet();
 
-		Key key = null;
-
-		try {
-			if (_encrypt) {
-				Company company = PortalUtil.getCompany(_request);
-
-				key = company.getKeyObj();
-			}
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-
 		sb.append("wsrp-urlType");
 		sb.append(StringPool.EQUAL);
 
 		if (_lifecycle.equals(PortletRequest.ACTION_PHASE)) {
-			sb.append(processValue(key, "blockingAction"));
+			sb.append(HttpUtil.encodeURL("blockingAction"));
 		}
 		else if (_lifecycle.equals(PortletRequest.RENDER_PHASE)) {
-			sb.append(processValue(key, "render"));
+			sb.append(HttpUtil.encodeURL("render"));
 		}
 		else if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-			sb.append(processValue(key, "resource"));
+			sb.append(HttpUtil.encodeURL("resource"));
 		}
 
 		sb.append(StringPool.AMPERSAND);
@@ -1126,28 +1115,28 @@ public class PortletURLImpl
 		if (_windowState != null) {
 			sb.append("wsrp-windowState");
 			sb.append(StringPool.EQUAL);
-			sb.append(processValue(key, "wsrp:" + _windowState.toString()));
+			sb.append(HttpUtil.encodeURL("wsrp:" + _windowState.toString()));
 			sb.append(StringPool.AMPERSAND);
 		}
 
 		if (_portletMode != null) {
 			sb.append("wsrp-mode");
 			sb.append(StringPool.EQUAL);
-			sb.append(processValue(key, "wsrp:" + _portletMode.toString()));
+			sb.append(HttpUtil.encodeURL("wsrp:" + _portletMode.toString()));
 			sb.append(StringPool.AMPERSAND);
 		}
 
 		if (_resourceID != null) {
 			sb.append("wsrp-resourceID");
 			sb.append(StringPool.EQUAL);
-			sb.append(processValue(key, _resourceID));
+			sb.append(HttpUtil.encodeURL(_resourceID));
 			sb.append(StringPool.AMPERSAND);
 		}
 
 		if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 			sb.append("wsrp-resourceCacheability");
 			sb.append(StringPool.EQUAL);
-			sb.append(processValue(key, _cacheability));
+			sb.append(HttpUtil.encodeURL(_cacheability));
 			sb.append(StringPool.AMPERSAND);
 		}
 
@@ -1250,7 +1239,7 @@ public class PortletURLImpl
 
 				parameterSb.append(name);
 				parameterSb.append(StringPool.EQUAL);
-				parameterSb.append(processValue(key, values[i]));
+				parameterSb.append(HttpUtil.encodeURL(values[i]));
 
 				if ((i + 1 < values.length) || itr.hasNext()) {
 					parameterSb.append(StringPool.AMPERSAND);
@@ -1258,13 +1247,29 @@ public class PortletURLImpl
 			}
 		}
 
-		if (_encrypt) {
-			parameterSb.append(StringPool.AMPERSAND + WebKeys.ENCRYPT + "=1");
-		}
-
 		sb.append("wsrp-navigationalState");
 		sb.append(StringPool.EQUAL);
-		sb.append(HttpUtil.encodeURL(parameterSb.toString()));
+
+		byte[] parameterBytes = null;
+
+		try {
+			parameterBytes = parameterSb.toString().getBytes(StringPool.UTF8);
+		}
+		catch (UnsupportedEncodingException uee) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(uee, uee);
+			}
+		}
+
+		String navigationalState = Base64.encode(parameterBytes);
+
+		// Make Base64 encoding url compatible
+
+		navigationalState = navigationalState.replace('+', '-');
+		navigationalState = navigationalState.replace('=', '*');
+		navigationalState = navigationalState.replace('/', '_');
+
+		sb.append(navigationalState);
 
 		sb.append("/wsrp_rewrite");
 
