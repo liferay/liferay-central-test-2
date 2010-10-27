@@ -164,8 +164,11 @@ public class EditCategoryAction extends PortletAction {
 	protected void updateCategory(ActionRequest actionRequest)
 		throws Exception {
 
-		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
+		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
+		long groupId = themeDisplay.getScopeGroupId();
 		long parentCategoryId = ParamUtil.getLong(
 			actionRequest, "parentCategoryId");
 		String name = ParamUtil.getString(actionRequest, "name");
@@ -200,6 +203,8 @@ public class EditCategoryAction extends PortletAction {
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			MBCategory.class.getName(), actionRequest);
+
+		serviceContext.setScopeGroupId(groupId);
 
 		if (categoryId <= 0) {
 			if (PropsValues.
