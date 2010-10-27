@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
-import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -481,23 +480,10 @@ public class ServiceBuilder {
 		_tplSpringXml = _getTplProperty("spring_xml", _tplSpringXml);
 
 		try {
-			ClassLoader classLoader = getClass().getClassLoader();
-			_badTableNames = new HashSet<String>();
-			StringUtil.readLines(
-				classLoader.getResourceAsStream(_tplBadTableNames), 
-				_badTableNames);
-			_badAliasNames = new HashSet<String>();
-			StringUtil.readLines(
-				classLoader.getResourceAsStream(_tplBadAliasNames), 
-				_badAliasNames);
-			_badColumnNames = new HashSet<String>();
-			StringUtil.readLines(
-				classLoader.getResourceAsStream(_tplBadColumnNames), 
-				_badColumnNames);
-			_badJsonTypes = new HashSet<String>();
-			StringUtil.readLines(
-				classLoader.getResourceAsStream(_tplBadJsonTypes), 
-				_badJsonTypes);
+			_badTableNames = _readLines(_tplBadTableNames);
+			_badAliasNames = _readLines(_tplBadAliasNames);
+			_badColumnNames = _readLines(_tplBadColumnNames);
+			_badJsonTypes = _readLines(_tplBadJsonTypes);
 			_hbmFileName = hbmFileName;
 			_ormFileName = ormFileName;
 			_modelHintsFileName = modelHintsFileName;
@@ -4453,6 +4439,16 @@ public class ServiceBuilder {
 
 		return StringUtil.replace(
 			FreeMarkerUtil.process(name, context), '\r', "");
+	}
+
+	private Set<String> _readLines(String fileName) throws Exception {
+		ClassLoader classLoader = getClass().getClassLoader();
+
+		Set<String> lines = new HashSet<String>();
+
+		StringUtil.readLines(classLoader.getResourceAsStream(fileName), lines);
+
+		return lines;
 	}
 
 	private static final int _SESSION_TYPE_REMOTE = 0;

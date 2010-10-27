@@ -632,15 +632,16 @@ public class StringUtil {
 		return sb.toString().trim();
 	}
 
-	public static void readLines(InputStream is, Collection<String> strings)
+	public static void readLines(InputStream is, Collection<String> lines)
 		throws IOException {
+
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new InputStreamReader(is));
 
 		String line = null;
 
 		while ((line = unsyncBufferedReader.readLine()) != null) {
-			strings.add(line);
+			lines.add(line);
 		}
 
 		unsyncBufferedReader.close();
