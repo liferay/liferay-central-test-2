@@ -42,6 +42,7 @@ public class SchedulerRequest implements Serializable {
 
 		SchedulerRequest schedulerRequest = new SchedulerRequest();
 
+		schedulerRequest.setCommand(COMMAND_REGISTER);
 		schedulerRequest.setDescription(description);
 		schedulerRequest.setDestination(destination);
 		schedulerRequest.setMessage(message);
