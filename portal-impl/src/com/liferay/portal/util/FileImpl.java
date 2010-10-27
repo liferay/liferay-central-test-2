@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.nio.charset.CharsetEncoderUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileComparator;
@@ -46,6 +47,9 @@ import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.Writer;
+
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -527,6 +531,59 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		inputStream.close();
 
 		return ascii;
+	}
+
+	public boolean isSameContent(File file, String content) {
+		ByteBuffer byteContent = CharsetEncoderUtil.encode(
+			StringPool.UTF8, content);
+		return isSameContent(file, byteContent.array(), byteContent.limit());
+	}
+
+	public boolean isSameContent(File file, byte[] content, int length) {
+		FileChannel fileChannel = null;
+
+		try {
+			FileInputStream fileInputStream = new FileInputStream(file);
+
+			fileChannel = fileInputStream.getChannel();
+			if (fileChannel.size() != length) {
+				return false;
+			}
+
+			byte[] readBuffer = new byte[1024];
+			ByteBuffer byteBuffer = ByteBuffer.wrap(readBuffer);
+
+			int index = 0;
+			int len = -1;
+			while (((len = fileChannel.read(byteBuffer)) > 0) &&
+				(index < length)) {
+				for (int i = 0; i < len; i++) {
+					if (readBuffer[i] != content[index++]) {
+						return false;
+					}
+				}
+				byteBuffer.clear();
+			}
+
+			if ((index != length) || (len != -1)) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+		catch (Exception e) {
+			return false;
+		}
+		finally {
+			if (fileChannel != null) {
+				try {
+					fileChannel.close();
+				}
+				catch (IOException ex) {
+				}
+			}
+		}
 	}
 
 	public String[] listDirs(String fileName) {

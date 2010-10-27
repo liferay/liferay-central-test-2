@@ -84,6 +84,10 @@ public interface File {
 
 	public boolean isAscii(java.io.File file) throws IOException;
 
+	public boolean isSameContent(java.io.File file, String content);
+
+	public boolean isSameContent(java.io.File file, byte[] content, int length);
+
 	public String[] listDirs(String fileName);
 
 	public String[] listDirs(java.io.File file);
