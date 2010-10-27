@@ -98,12 +98,12 @@ public class ServiceContextFactory {
 
 		// Theme display
 
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
+
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)portletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
-
-		ServiceContext serviceContext =
-			ServiceContextThreadLocal.getServiceContext();
 
 		if (serviceContext != null) {
 			serviceContext = (ServiceContext)serviceContext.clone();
