@@ -16,6 +16,7 @@ package com.liferay.portal.velocity;
 
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
 
 import org.apache.velocity.runtime.resource.Resource;
 
@@ -64,7 +65,7 @@ public class LiferayResourceCacheUtil {
 
 	private static PortalCache _multiVMPortalCache = MultiVMPoolUtil.getCache(
 		CACHE_NAME);
-	private static PortalCache _singleVMPortalCache = MultiVMPoolUtil.getCache(
+	private static PortalCache _singleVMPortalCache = SingleVMPoolUtil.getCache(
 		CACHE_NAME);
 
 }
