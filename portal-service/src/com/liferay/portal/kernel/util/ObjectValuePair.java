@@ -54,7 +54,7 @@ public class ObjectValuePair<K, V> implements Serializable {
 
 		K key = ovp.getKey();
 
-		if (_key.equals(key)) {
+		if (_key == key || (_key != null && _key.equals(key))) {
 			return true;
 		}
 		else {
@@ -63,7 +63,11 @@ public class ObjectValuePair<K, V> implements Serializable {
 	}
 
 	public int hashCode() {
-		return _key.hashCode();
+		if (_key == null) {
+			return 0;
+		} else {
+			return _key.hashCode();
+		}
 	}
 
 	private K _key;
