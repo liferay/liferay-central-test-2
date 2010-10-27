@@ -59,13 +59,15 @@ if (layout.isTypeControlPanel()) {
 		<%
 		String tabs2Names = "export,import";
 
-		if (themeDisplay.getScopeGroup().isStagingGroup()) {
+		Group scopeGroup = themeDisplay.getScopeGroup();
+
+		if (scopeGroup.isStagingGroup()) {
 			tabs2Names += ",staging";
 		}
-		else if (themeDisplay.getScopeGroup().isLayout()) {
-			Group scopeGroupParent = GroupServiceUtil.getGroup(themeDisplay.getScopeGroup().getParentGroupId());
+		else if (scopeGroup.isLayout()) {
+			Group parentScopeGroup = GroupServiceUtil.getGroup(scopeGroup.getParentGroupId());
 
-			if (scopeGroupParent.isStagingGroup()) {
+			if (parentScopeGroup.isStagingGroup()) {
 				tabs2Names += ",staging";
 			}
 		}
@@ -166,14 +168,14 @@ if (layout.isTypeControlPanel()) {
 					}
 					else if (stagingGroup.isLayout()) {
 						if (liveGroup == null) {
-							errorMessageKey = "some-portlet-is-placed-in-this-page-of-scope-that-does-not-exist-in-the-live-site-publish-the-page-first";
+							errorMessageKey = "a-portlet-is-placed-in-this-page-of-scope-that-does-not-exist-in-the-live-site-publish-the-page-first";
 						}
 						else {
 							try {
 								targetLayout = LayoutLocalServiceUtil.getLayout(liveGroup.getClassPK());
 							}
 							catch (NoSuchLayoutException nsle) {
-								errorMessageKey = "some-portlet-is-placed-in-this-page-of-scope-that-does-not-exist-in-the-live-site-publish-the-page-first";
+								errorMessageKey = "a-portlet-is-placed-in-this-page-of-scope-that-does-not-exist-in-the-live-site-publish-the-page-first";
 							}
 						}
 					}
