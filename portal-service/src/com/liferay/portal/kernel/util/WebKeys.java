@@ -38,12 +38,12 @@ public interface WebKeys {
 	public static final String LAYOUTS = "LAYOUTS";
 
 	/**
-	 * @deprecated Use <code>VISITED_GROUP_ID_PREVIOUS</code>.
+	 * @deprecated {@link #VISITED_GROUP_ID_PREVIOUS}
 	 */
 	public static final String LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS = "LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS";
 
 	/**
-	 * @deprecated Use <code>VISITED_GROUP_ID_RECENT</code>.
+	 * @deprecated {@link #VISITED_GROUP_ID_RECENT}
 	 */
 	public static final String LIFERAY_SHARED_VISITED_GROUP_ID_RECENT = "LIFERAY_SHARED_VISITED_GROUP_ID_RECENT";
 
