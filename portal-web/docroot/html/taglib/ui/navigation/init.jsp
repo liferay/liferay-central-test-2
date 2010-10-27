@@ -28,6 +28,8 @@ boolean nestedChildren = true;
 
 String[] displayStyleDefinition = _getDisplayStyleDefinition(displayStyle);
 
+bulletStyle = bulletStyle.toLowerCase();
+
 if ((displayStyleDefinition != null) && (displayStyleDefinition.length != 0)) {
 	headerType = displayStyleDefinition[0];
 	rootLayoutType = displayStyleDefinition[1];
