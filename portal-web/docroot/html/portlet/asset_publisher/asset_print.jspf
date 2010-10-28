@@ -22,6 +22,15 @@ printAssetURL.setWindowState(LiferayWindowState.POP_UP);
 printAssetURL.setParameter("struts_action", "/asset_publisher/view_content");
 printAssetURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
 printAssetURL.setParameter("viewMode", Constants.PRINT);
+printAssetURL.setParameter("type", assetRendererFactory.getType());
+
+if (Validator.isNotNull(assetRenderer.getUrlTitle())) {
+	if (assetRenderer.getGroupId() != scopeGroupId) {
+		printAssetURL.setParameter("groupId", String.valueOf(assetRenderer.getGroupId()));
+	}
+
+	printAssetURL.setParameter("urlTitle", assetRenderer.getUrlTitle());
+}
 %>
 
 <c:choose>
