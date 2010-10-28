@@ -22,7 +22,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 String keywords = ParamUtil.getString(request, "keywords");
 %>
 
-<liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/blogs/search" /></liferay-portlet:renderURL>
+<liferay-portlet:renderURL varImpl="searchURL">
+	<portlet:param name="struts_action" value="/blogs/search" />
+</liferay-portlet:renderURL>
 
 <aui:form action="<%= searchURL %>" method="get" name="fm">
 	<liferay-portlet:renderURLParams varImpl="searchURL" />
