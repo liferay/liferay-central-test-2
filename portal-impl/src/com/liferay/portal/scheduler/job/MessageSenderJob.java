@@ -39,8 +39,8 @@ public class MessageSenderJob implements Job {
 
 			JobDataMap jobDataMap = jobDetail.getJobDataMap();
 
-			String destination = jobDataMap.getString(
-				SchedulerEngine.DESTINATION);
+			String destinationName = jobDataMap.getString(
+				SchedulerEngine.DESTINATION_NAME);
 
 			Message message = (Message)jobDataMap.get(SchedulerEngine.MESSAGE);
 
@@ -64,7 +64,7 @@ public class MessageSenderJob implements Job {
 				message.put(SchedulerEngine.DISABLE, true);
 			}
 
-			MessageBusUtil.sendMessage(destination, message);
+			MessageBusUtil.sendMessage(destinationName, message);
 		}
 		catch (Exception e) {
 			_log.error("Unable to execute job", e);
