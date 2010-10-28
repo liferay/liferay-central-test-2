@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil_IW;
+import com.liferay.portal.tools.ArgumentsUtil;
 import com.liferay.portal.tools.SourceFormatter;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsValues;
@@ -104,107 +105,69 @@ public class ServiceBuilder {
 	public static final String AUTHOR = "Brian Wing Shun Chan";
 
 	public static void main(String[] args) {
-		InitUtil.initWithSpring();
+		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
 
-		ServiceBuilder serviceBuilder = null;
+		InitUtil.initWithSpring(true);
 
-		if (args.length == 7) {
-			String fileName = args[0];
-			String hbmFileName = args[1];
-			String ormFileName = "src/META-INF/portal-orm.xml";
-			String modelHintsFileName = args[2];
-			String springFileName = args[3];
-			String springBaseFileName = "";
-			String springClusterFileName = "";
-			String springDynamicDataSourceFileName = "";
-			String springHibernateFileName = "";
-			String springInfrastructureFileName = "";
-			String springShardDataSourceFileName = "";
-			String apiDir = args[5];
-			String implDir = "src";
-			String jsonFileName = args[6];
-			String remotingFileName = "../tunnel-web/docroot/WEB-INF/remoting-servlet.xml";
-			String sqlDir = "../sql";
-			String sqlFileName = "portal-tables.sql";
-			String sqlIndexesFileName = "indexes.sql";
-			String sqlIndexesPropertiesFileName = "indexes.properties";
-			String sqlSequencesFileName = "sequences.sql";
-			boolean autoNamespaceTables = false;
-			String beanLocatorUtil = "com.liferay.portal.kernel.bean.BeanLocatorUtil";
-			String propsUtil = "com.liferay.portal.util.PropsUtil";
-			String pluginName = "";
-			String testDir = "";
+		String fileName = arguments.get("service.input.file");
+		String hbmFileName = arguments.get("service.hbm.file");
+		String ormFileName = arguments.get("service.orm.file");
+		String modelHintsFileName = arguments.get("service.model.hints.file");
+		String springFileName = arguments.get("service.spring.file");
+		String springBaseFileName = arguments.get("service.spring.base.file");
+		String springClusterFileName = arguments.get("service.spring.cluster.file");
+		String springDynamicDataSourceFileName = arguments.get("service.spring.dynamic.data.source.file");
+		String springHibernateFileName = arguments.get("service.spring.hibernate.file");
+		String springInfrastructureFileName = arguments.get("service.spring.infrastructure.file");
+		String springShardDataSourceFileName = arguments.get("service.spring.shard.data.source.file");
+		String apiDir = arguments.get("service.api.dir");
+		String implDir = arguments.get("service.impl.dir");
+		String jsonFileName = arguments.get("service.json.file");
+		String remotingFileName = arguments.get("service.remoting.file");
+		String sqlDir = arguments.get("service.sql.dir");
+		String sqlFileName = arguments.get("service.sql.file");
+		String sqlIndexesFileName = arguments.get("service.sql.indexes.file");
+		String sqlIndexesPropertiesFileName = arguments.get("service.sql.indexes.properties.file");
+		String sqlSequencesFileName = arguments.get("service.sql.sequences.file");
+		boolean autoNamespaceTables = GetterUtil.getBoolean(arguments.get("service.auto.namespace.tables"));
+		String beanLocatorUtil = arguments.get("service.bean.locator.util");
+		String propsUtil = arguments.get("service.props.util");
+		String pluginName = arguments.get("service.plugin.name");
+		String testDir = arguments.get("service.test.dir");
 
-			serviceBuilder = new ServiceBuilder(
-				fileName, hbmFileName, ormFileName, modelHintsFileName,
-				springFileName, springBaseFileName, springClusterFileName,
-				springDynamicDataSourceFileName, springHibernateFileName,
-				springInfrastructureFileName, springShardDataSourceFileName,
-				apiDir, implDir, jsonFileName, remotingFileName, sqlDir,
-				sqlFileName, sqlIndexesFileName, sqlIndexesPropertiesFileName,
-				sqlSequencesFileName, autoNamespaceTables, beanLocatorUtil,
-				propsUtil, pluginName, testDir);
+		try {
+			new ServiceBuilder(
+					fileName, hbmFileName, ormFileName, modelHintsFileName,
+					springFileName,	springBaseFileName, springClusterFileName,
+					springDynamicDataSourceFileName, springHibernateFileName,
+					springInfrastructureFileName, springShardDataSourceFileName,
+					apiDir, implDir, jsonFileName, remotingFileName, sqlDir,
+					sqlFileName, sqlIndexesFileName, sqlIndexesPropertiesFileName,
+					sqlSequencesFileName, autoNamespaceTables, beanLocatorUtil,
+					propsUtil, pluginName, testDir);
 		}
-		else if (args.length == 0) {
-			String fileName = System.getProperty("service.input.file");
-			String hbmFileName = System.getProperty("service.hbm.file");
-			String ormFileName = System.getProperty("service.orm.file");
-			String modelHintsFileName = System.getProperty("service.model.hints.file");
-			String springFileName = System.getProperty("service.spring.file");
-			String springBaseFileName = System.getProperty("service.spring.base.file");
-			String springClusterFileName = System.getProperty("service.spring.cluster.file");
-			String springDynamicDataSourceFileName = System.getProperty("service.spring.dynamic.data.source.file");
-			String springHibernateFileName = System.getProperty("service.spring.hibernate.file");
-			String springInfrastructureFileName = System.getProperty("service.spring.infrastructure.file");
-			String springShardDataSourceFileName = System.getProperty("service.spring.shard.data.source.file");
-			String apiDir = System.getProperty("service.api.dir");
-			String implDir = System.getProperty("service.impl.dir");
-			String jsonFileName = System.getProperty("service.json.file");
-			String remotingFileName = System.getProperty("service.remoting.file");
-			String sqlDir = System.getProperty("service.sql.dir");
-			String sqlFileName = System.getProperty("service.sql.file");
-			String sqlIndexesFileName = System.getProperty("service.sql.indexes.file");
-			String sqlIndexesPropertiesFileName = System.getProperty("service.sql.indexes.properties.file");
-			String sqlSequencesFileName = System.getProperty("service.sql.sequences.file");
-			boolean autoNamespaceTables = GetterUtil.getBoolean(System.getProperty("service.auto.namespace.tables"));
-			String beanLocatorUtil = System.getProperty("service.bean.locator.util");
-			String propsUtil = System.getProperty("service.props.util");
-			String pluginName = System.getProperty("service.plugin.name");
-			String testDir = System.getProperty("service.test.dir");
-
-			serviceBuilder = new ServiceBuilder(
-				fileName, hbmFileName, ormFileName, modelHintsFileName,
-				springFileName,	springBaseFileName, springClusterFileName,
-				springDynamicDataSourceFileName, springHibernateFileName,
-				springInfrastructureFileName, springShardDataSourceFileName,
-				apiDir, implDir, jsonFileName, remotingFileName, sqlDir,
-				sqlFileName, sqlIndexesFileName, sqlIndexesPropertiesFileName,
-				sqlSequencesFileName, autoNamespaceTables, beanLocatorUtil,
-				propsUtil, pluginName, testDir);
-		}
-
-		if (serviceBuilder == null) {
+		catch(RuntimeException re) {
 			System.out.println(
-				"Please set these required system properties. Sample values are:\n" +
+				"Please set these required arguments. Sample values are:\n" +
 				"\n" +
-				"\t-Dservice.input.file=${service.file}\n" +
-				"\t-Dservice.hbm.file=src/META-INF/portal-hbm.xml\n" +
-				"\t-Dservice.orm.file=src/META-INF/portal-orm.xml\n" +
-				"\t-Dservice.model.hints.file=src/META-INF/portal-model-hints.xml\n" +
-				"\t-Dservice.spring.file=src/META-INF/portal-spring.xml\n" +
-				"\t-Dservice.api.dir=${project.dir}/portal-service/src\n" +
-				"\t-Dservice.impl.dir=src\n" +
-				"\t-Dservice.json.file=${project.dir}/portal-web/docroot/html/js/liferay/service_unpacked.js\n" +
-				"\t-Dservice.remoting.file=${project.dir}/tunnel-web/docroot/WEB-INF/remoting-servlet.xml\n" +
-				"\t-Dservice.sql.dir=../sql\n" +
-				"\t-Dservice.sql.file=portal-tables.sql\n" +
-				"\t-Dservice.sql.indexes.file=indexes.sql\n" +
-				"\t-Dservice.sql.indexes.properties.file=indexes.properties\n" +
-				"\t-Dservice.sql.sequences.file=sequences.sql\n" +
-				"\t-Dservice.bean.locator.util.package=com.liferay.portal.kernel.bean\n" +
-				"\t-Dservice.props.util.package=com.liferay.portal.util\n" +
+				"\tservice.input.file=${service.file}\n" +
+				"\tservice.hbm.file=src/META-INF/portal-hbm.xml\n" +
+				"\tservice.orm.file=src/META-INF/portal-orm.xml\n" +
+				"\tservice.model.hints.file=src/META-INF/portal-model-hints.xml\n" +
+				"\tservice.spring.file=src/META-INF/portal-spring.xml\n" +
+				"\tservice.api.dir=${project.dir}/portal-service/src\n" +
+				"\tservice.impl.dir=src\n" +
+				"\tservice.json.file=${project.dir}/portal-web/docroot/html/js/liferay/service_unpacked.js\n" +
+				"\tservice.remoting.file=${project.dir}/tunnel-web/docroot/WEB-INF/remoting-servlet.xml\n" +
+				"\tservice.sql.dir=../sql\n" +
+				"\tservice.sql.file=portal-tables.sql\n" +
+				"\tservice.sql.indexes.file=indexes.sql\n" +
+				"\tservice.sql.indexes.properties.file=indexes.properties\n" +
+				"\tservice.sql.sequences.file=sequences.sql\n" +
+				"\tservice.bean.locator.util.package=com.liferay.portal.kernel.bean\n" +
+				"\tservice.props.util.package=com.liferay.portal.util\n" +
 				"\n" +
-				"You can also customize the generated code by overriding the default templates with these optional properties:\n" +
+				"You can also customize the generated code by overriding the default templates with these optional system properties:\n" +
 				"\n" +
 				"\t-Dservice.tpl.bad_alias_names=" + _TPL_ROOT + "bad_alias_names.txt\n"+
 				"\t-Dservice.tpl.bad_column_names=" + _TPL_ROOT + "bad_column_names.txt\n"+
@@ -249,6 +212,8 @@ public class ServiceBuilder {
 				"\t-Dservice.tpl.spring_infrastructure_xml=" + _TPL_ROOT + "spring_infrastructure_xml.ftl\n"+
 				"\t-Dservice.tpl.spring_xml=" + _TPL_ROOT + "spring_xml.ftl\n"+
 				"\t-Dservice.tpl.spring_xml_session=" + _TPL_ROOT + "spring_xml_session.ftl");
+
+			throw re;
 		}
 	}
 

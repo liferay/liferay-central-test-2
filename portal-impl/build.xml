@@ -245,29 +245,26 @@
 		<java
 			classname="com.liferay.portal.tools.servicebuilder.ServiceBuilder"
 			classpathref="project.classpath"
-			fork="true"
-			maxmemory="512m"
-			newenvironment="true"
 		>
-			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
-			<jvmarg value="-Dservice.input.file=${service.file}" />
-			<jvmarg value="-Dservice.hbm.file=src/META-INF/portal-hbm.xml" />
-			<jvmarg value="-Dservice.orm.file=src/META-INF/portal-orm.xml" />
-			<jvmarg value="-Dservice.model.hints.file=src/META-INF/portal-model-hints.xml" />
-			<jvmarg value="-Dservice.spring.file=src/META-INF/portal-spring.xml" />
-			<jvmarg value="-Dservice.api.dir=${project.dir}/portal-service/src" />
-			<jvmarg value="-Dservice.impl.dir=src" />
-			<jvmarg value="-Dservice.json.file=${project.dir}/portal-web/docroot/html/js/liferay/service.js" />
-			<jvmarg value="-Dservice.remoting.file=${project.dir}/tunnel-web/docroot/WEB-INF/remoting-servlet.xml" />
-			<jvmarg value="-Dservice.sql.dir=../sql" />
-			<jvmarg value="-Dservice.sql.file=portal-tables.sql" />
-			<jvmarg value="-Dservice.sql.indexes.file=indexes.sql" />
-			<jvmarg value="-Dservice.sql.indexes.properties.file=indexes.properties" />
-			<jvmarg value="-Dservice.sql.sequences.file=sequences.sql" />
-			<jvmarg value="-Dservice.bean.locator.util=com.liferay.portal.kernel.bean.PortalBeanLocatorUtil" />
-			<jvmarg value="-Dservice.props.util=com.liferay.portal.util.PropsUtil" />
-			<jvmarg value="-Dservice.test.dir=test" />
+			<arg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<arg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
+			<arg value="service.input.file=${service.file}" />
+			<arg value="service.hbm.file=src/META-INF/portal-hbm.xml" />
+			<arg value="service.orm.file=src/META-INF/portal-orm.xml" />
+			<arg value="service.model.hints.file=src/META-INF/portal-model-hints.xml" />
+			<arg value="service.spring.file=src/META-INF/portal-spring.xml" />
+			<arg value="service.api.dir=${project.dir}/portal-service/src" />
+			<arg value="service.impl.dir=src" />
+			<arg value="service.json.file=${project.dir}/portal-web/docroot/html/js/liferay/service.js" />
+			<arg value="service.remoting.file=${project.dir}/tunnel-web/docroot/WEB-INF/remoting-servlet.xml" />
+			<arg value="service.sql.dir=../sql" />
+			<arg value="service.sql.file=portal-tables.sql" />
+			<arg value="service.sql.indexes.file=indexes.sql" />
+			<arg value="service.sql.indexes.properties.file=indexes.properties" />
+			<arg value="service.sql.sequences.file=sequences.sql" />
+			<arg value="service.bean.locator.util=com.liferay.portal.kernel.bean.PortalBeanLocatorUtil" />
+			<arg value="service.props.util=com.liferay.portal.util.PropsUtil" />
+			<arg value="service.test.dir=test" />
 		</java>
 
 		<delete file="ServiceBuilder.temp" />
@@ -495,6 +492,30 @@
 				</java>
 			</then>
 		</if>
+	</target>
+
+	<target name="build-velocity">
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<unzip src="${project.dir}/tools/velocity-1.6.3.zip" dest="${tstamp.value}" />
+
+		<replace file="${tstamp.value}/velocity-1.6.3/src/java/org/apache/velocity/Template.java">
+			<replacetoken><![CDATA[BufferedReader br = new BufferedReader( new InputStreamReader( is, encoding ) );]]></replacetoken>
+			<replacevalue></replacevalue>
+		</replace>
+
+		<replace file="${tstamp.value}/velocity-1.6.3/src/java/org/apache/velocity/Template.java">
+			<replacetoken><![CDATA[data = rsvc.parse( br, name);]]></replacetoken>
+			<replacevalue><![CDATA[data = rsvc.parse( new InputStreamReader( is, encoding ), name);]]></replacevalue>
+		</replace>
+
+		<ant dir="${tstamp.value}/velocity-1.6.3" antfile="build/build.xml" target="jar" inheritAll="false" />
+
+		<move file="${tstamp.value}/velocity-1.6.3/bin/velocity-1.6.3.jar" tofile="${project.dir}/lib/portal/velocity.jar.new" />
+
+		<delete dir="${tstamp.value}" />
 	</target>
 
 	<target name="build-wsdd" depends="compile">
