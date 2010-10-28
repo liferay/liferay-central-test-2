@@ -27,10 +27,10 @@ public class DummyOutputStream extends OutputStream {
 	public void flush() {
 	}
 
-	public void write(byte[] byteArray) {
+	public void write(byte[] bytes) {
 	}
 
-	public void write(byte[] byteArray, int offset, int length) {
+	public void write(byte[] bytes, int offset, int length) {
 	}
 
 	public void write(int b) {

@@ -32,13 +32,13 @@ public class SanitizerWrapper implements Sanitizer {
 
 	public byte[] sanitize(
 			long companyId, long groupId, long userId, String className,
-			long classPK, String contentType, String[] modes, byte[] byteArray,
+			long classPK, String contentType, String[] modes, byte[] bytes,
 			Map<String, Object> options)
 		throws SanitizerException {
 
 		return _sanitizer.sanitize(
 			companyId, groupId, userId, className, classPK, contentType, modes,
-			byteArray, options);
+			bytes, options);
 	}
 
 	public void sanitize(

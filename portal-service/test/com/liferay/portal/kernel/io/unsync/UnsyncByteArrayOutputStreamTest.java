@@ -82,15 +82,15 @@ public class UnsyncByteArrayOutputStreamTest extends TestCase {
 
 		unsyncByteArrayOutputStream.write(_BUFFER);
 
-		byte[] byteArray1 = unsyncByteArrayOutputStream.toByteArray();
+		byte[] bytes1 = unsyncByteArrayOutputStream.toByteArray();
 
-		assertTrue(Arrays.equals(_BUFFER, byteArray1));
+		assertTrue(Arrays.equals(_BUFFER, bytes1));
 
-		byte[] byteArray2 = unsyncByteArrayOutputStream.toByteArray();
+		byte[] bytes2 = unsyncByteArrayOutputStream.toByteArray();
 
-		assertTrue(Arrays.equals(_BUFFER, byteArray2));
+		assertTrue(Arrays.equals(_BUFFER, bytes2));
 
-		assertNotSame(byteArray1, byteArray2);
+		assertNotSame(bytes1, bytes2);
 	}
 
 	public void testToString() throws UnsupportedEncodingException {
@@ -122,16 +122,16 @@ public class UnsyncByteArrayOutputStreamTest extends TestCase {
 
 		unsyncByteArrayOutputStream.write(_BUFFER);
 
-		byte[] byteArray1 = unsyncByteArrayOutputStream.unsafeGetByteArray();
+		byte[] bytes1 = unsyncByteArrayOutputStream.unsafeGetByteArray();
 
-		assertTrue(Arrays.equals(_BUFFER, byteArray1));
-		assertSame(unsyncByteArrayOutputStream.buffer, byteArray1);
+		assertTrue(Arrays.equals(_BUFFER, bytes1));
+		assertSame(unsyncByteArrayOutputStream.buffer, bytes1);
 
-		byte[] byteArray2 = unsyncByteArrayOutputStream.unsafeGetByteArray();
+		byte[] bytes2 = unsyncByteArrayOutputStream.unsafeGetByteArray();
 
-		assertTrue(Arrays.equals(_BUFFER, byteArray2));
+		assertTrue(Arrays.equals(_BUFFER, bytes2));
 
-		assertSame(byteArray1, byteArray2);
+		assertSame(bytes1, bytes2);
 	}
 
 	public void testWrite() {

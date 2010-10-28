@@ -98,17 +98,17 @@ public class WriterOutputStream extends OutputStream {
 		return _charsetName;
 	}
 
-	public void write(byte[] byteArray) throws IOException {
-		write(byteArray, 0, byteArray.length);
+	public void write(byte[] bytes) throws IOException {
+		write(bytes, 0, bytes.length);
 	}
 
-	public void write(byte[] byteArray, int offset, int length)
+	public void write(byte[] bytes, int offset, int length)
 		throws IOException {
 
 		while (length > 0) {
 			int blockSize = Math.min(length, _inputBuffer.remaining());
 
-			_inputBuffer.put(byteArray, offset, blockSize);
+			_inputBuffer.put(bytes, offset, blockSize);
 
 			_doDecode(false);
 

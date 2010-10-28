@@ -50,14 +50,14 @@ public class UnsyncFilterInputStream extends InputStream {
 		return inputStream.read();
 	}
 
-	public int read(byte[] byteArray) throws IOException {
-		return inputStream.read(byteArray);
+	public int read(byte[] bytes) throws IOException {
+		return inputStream.read(bytes);
 	}
 
-	public int read(byte[] byteArray, int offset, int length)
+	public int read(byte[] bytes, int offset, int length)
 		throws IOException {
 
-		return inputStream.read(byteArray, offset, length);
+		return inputStream.read(bytes, offset, length);
 	}
 
 	public void reset() throws IOException {

@@ -49,16 +49,16 @@ public class UnsyncByteArrayInputStreamWrapper extends ServletInputStream {
 		return _unsyncByteArrayInputStream.read();
 	}
 
-	public int read(byte[] byteArray) {
-		return _unsyncByteArrayInputStream.read(byteArray);
+	public int read(byte[] bytes) {
+		return _unsyncByteArrayInputStream.read(bytes);
 	}
 
-	public int read(byte[] byteArray, int offset, int length) {
-		return _unsyncByteArrayInputStream.read(byteArray, offset, length);
+	public int read(byte[] bytes, int offset, int length) {
+		return _unsyncByteArrayInputStream.read(bytes, offset, length);
 	}
 
-	public int readLine(byte[] byteArray, int offset, int length) {
-		return _unsyncByteArrayInputStream.read(byteArray, offset, length);
+	public int readLine(byte[] bytes, int offset, int length) {
+		return _unsyncByteArrayInputStream.read(bytes, offset, length);
 	}
 
 	public void reset() {

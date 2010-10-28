@@ -79,11 +79,11 @@ public class UnsyncBufferedInputStream extends UnsyncFilterInputStream {
 		return buffer[index++] & 0xff;
 	}
 
-	public int read(byte[] byteArray) throws IOException {
-		return read(byteArray, 0, byteArray.length);
+	public int read(byte[] bytes) throws IOException {
+		return read(bytes, 0, bytes.length);
 	}
 
-	public int read(byte[] byteArray, int offset, int length)
+	public int read(byte[] bytes, int offset, int length)
 		throws IOException {
 
 		if (inputStream == null) {
@@ -105,8 +105,7 @@ public class UnsyncBufferedInputStream extends UnsyncFilterInputStream {
 
 				int leftSize = length - read;
 
-				System.arraycopy(
-					buffer, index, byteArray, offset + read, leftSize);
+				System.arraycopy(buffer, index, bytes, offset + read, leftSize);
 
 				index += leftSize;
 
@@ -138,7 +137,7 @@ public class UnsyncBufferedInputStream extends UnsyncFilterInputStream {
 				// Copy all in-memory data, continue reading
 
 				System.arraycopy(
-					buffer, index, byteArray, offset + read, available);
+					buffer, index, bytes, offset + read, available);
 
 				index += available;
 				read += available;

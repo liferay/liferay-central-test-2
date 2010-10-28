@@ -59,11 +59,11 @@ public class UnsyncByteArrayInputStream extends InputStream {
 		}
 	}
 
-	public int read(byte[] byteArray) {
-		return read(byteArray, 0, byteArray.length);
+	public int read(byte[] bytes) {
+		return read(bytes, 0, bytes.length);
 	}
 
-	public int read(byte[] byteArray, int offset, int length) {
+	public int read(byte[] bytes, int offset, int length) {
 		if (length <= 0) {
 			return 0;
 		}
@@ -78,7 +78,7 @@ public class UnsyncByteArrayInputStream extends InputStream {
 			read = capacity - index;
 		}
 
-		System.arraycopy(buffer, index, byteArray, offset, read);
+		System.arraycopy(buffer, index, bytes, offset, read);
 
 		index += read;
 

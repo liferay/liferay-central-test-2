@@ -71,11 +71,11 @@ public class UnsyncByteArrayOutputStream extends OutputStream {
 		return ByteBuffer.wrap(buffer, 0, index);
 	}
 
-	public void write(byte[] byteArray) {
-		write(byteArray, 0, byteArray.length);
+	public void write(byte[] bytes) {
+		write(bytes, 0, bytes.length);
 	}
 
-	public void write(byte[] byteArray, int offset, int length) {
+	public void write(byte[] bytes, int offset, int length) {
 		if (length <= 0) {
 			return;
 		}
@@ -92,7 +92,7 @@ public class UnsyncByteArrayOutputStream extends OutputStream {
 			buffer = newBuffer;
 		}
 
-		System.arraycopy(byteArray, offset, buffer, index, length);
+		System.arraycopy(bytes, offset, buffer, index, length);
 
 		index = newIndex;
 	}

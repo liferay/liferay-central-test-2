@@ -26,14 +26,14 @@ import java.nio.charset.CodingErrorAction;
  */
 public class CharsetDecoderUtil {
 
-	public static CharBuffer decode(String charsetName, byte[] byteArray) {
-		return decode(charsetName, ByteBuffer.wrap(byteArray));
+	public static CharBuffer decode(String charsetName, byte[] bytes) {
+		return decode(charsetName, ByteBuffer.wrap(bytes));
 	}
 
 	public static CharBuffer decode(
-		String charsetName, byte[] byteArray, int offset, int length) {
+		String charsetName, byte[] bytes, int offset, int length) {
 
-		return decode(charsetName, ByteBuffer.wrap(byteArray, offset, length));
+		return decode(charsetName, ByteBuffer.wrap(bytes, offset, length));
 	}
 
 	public static CharBuffer decode(String charsetName, ByteBuffer byteBuffer) {

@@ -40,14 +40,14 @@ public class GZipServletOutputStream extends ServletOutputStream {
 		_gZipOutputStream.flush();
 	}
 
-	public void write(byte[] byteArray) throws IOException {
-		_gZipOutputStream.write(byteArray);
+	public void write(byte[] bytes) throws IOException {
+		_gZipOutputStream.write(bytes);
 	}
 
-	public void write(byte[] byteArray, int offset, int length)
+	public void write(byte[] bytes, int offset, int length)
 		throws IOException {
 
-		_gZipOutputStream.write(byteArray, offset, length);
+		_gZipOutputStream.write(bytes, offset, length);
 	}
 
 	public void write(int b) throws IOException {

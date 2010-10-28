@@ -46,9 +46,7 @@ public class UnsyncBufferedOutputStream extends UnsyncFilterOutputStream {
 		outputStream.flush();
 	}
 
-	public void write(byte[] byteArray, int offset, int length)
-		throws IOException {
-
+	public void write(byte[] bytes, int offset, int length) throws IOException {
 		if (length >= buffer.length) {
 			if (count > 0) {
 				outputStream.write(buffer, 0, count);
@@ -56,7 +54,7 @@ public class UnsyncBufferedOutputStream extends UnsyncFilterOutputStream {
 				count = 0;
 			}
 
-			outputStream.write(byteArray, offset, length);
+			outputStream.write(bytes, offset, length);
 
 			return;
 		}
@@ -67,13 +65,13 @@ public class UnsyncBufferedOutputStream extends UnsyncFilterOutputStream {
 			count = 0;
 		}
 
-		System.arraycopy(byteArray, offset, buffer, count, length);
+		System.arraycopy(bytes, offset, buffer, count, length);
 
 		count += length;
 	}
 
-	public void write(byte[] byteArray) throws IOException {
-		write(byteArray, 0, byteArray.length);
+	public void write(byte[] bytes) throws IOException {
+		write(bytes, 0, bytes.length);
 	}
 
 	public void write(int b) throws IOException {

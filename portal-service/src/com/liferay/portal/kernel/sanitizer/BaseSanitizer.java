@@ -29,7 +29,7 @@ public abstract class BaseSanitizer implements Sanitizer {
 
 	public byte[] sanitize(
 			long companyId, long groupId, long userId, String className,
-			long classPK, String contentType, String[] modes, byte[] byteArray,
+			long classPK, String contentType, String[] modes, byte[] bytes,
 			Map<String, Object> options)
 		throws SanitizerException {
 
@@ -38,7 +38,7 @@ public abstract class BaseSanitizer implements Sanitizer {
 
 		sanitize(
 			companyId, groupId, userId, className, classPK, contentType,
-			modes, new ByteArrayInputStream(byteArray), byteArrayOutputStream,
+			modes, new ByteArrayInputStream(bytes), byteArrayOutputStream,
 			options);
 
 		return byteArrayOutputStream.toByteArray();

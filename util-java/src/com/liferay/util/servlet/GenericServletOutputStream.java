@@ -28,14 +28,14 @@ public class GenericServletOutputStream extends ServletOutputStream {
 		_outputStream = outputStream;
 	}
 
-	public void write(byte[] byteArray) throws IOException {
-		_outputStream.write(byteArray);
+	public void write(byte[] bytes) throws IOException {
+		_outputStream.write(bytes);
 	}
 
-	public void write(byte[] byteArray, int offset, int length)
+	public void write(byte[] bytes, int offset, int length)
 		throws IOException {
 
-		_outputStream.write(byteArray, offset, length);
+		_outputStream.write(bytes, offset, length);
 	}
 
 	public void write(int b) throws IOException {

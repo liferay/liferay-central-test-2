@@ -50,16 +50,16 @@ public class ByteArrayInputStreamWrapper extends ServletInputStream {
 		return _byteArrayInputStream.read();
 	}
 
-	public int read(byte[] byteArray) throws IOException {
-		return _byteArrayInputStream.read(byteArray);
+	public int read(byte[] bytes) throws IOException {
+		return _byteArrayInputStream.read(bytes);
 	}
 
-	public int read(byte[] byteArray, int offset, int length) {
-		return _byteArrayInputStream.read(byteArray, offset, length);
+	public int read(byte[] bytes, int offset, int length) {
+		return _byteArrayInputStream.read(bytes, offset, length);
 	}
 
-	public int readLine(byte[] byteArray, int offset, int length) {
-		return _byteArrayInputStream.read(byteArray, offset, length);
+	public int readLine(byte[] bytes, int offset, int length) {
+		return _byteArrayInputStream.read(bytes, offset, length);
 	}
 
 	public void reset() {
