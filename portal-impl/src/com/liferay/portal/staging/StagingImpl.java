@@ -75,7 +75,6 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.communities.messaging.LayoutsLocalPublisherRequest;
 import com.liferay.portlet.communities.messaging.LayoutsRemotePublisherRequest;
-import com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil;
 
 import java.io.File;
 
@@ -747,10 +746,10 @@ public class StagingImpl implements Staging {
 			throw new PrincipalException();
 		}
 
+		int stagingType = ParamUtil.getInteger(portletRequest, "stagingType");
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			portletRequest);
-
-		int stagingType = ParamUtil.getInteger(portletRequest, "stagingType");
 
 		if (stagingType == StagingConstants.TYPE_NOT_STAGED) {
 			disableStaging(portletRequest, liveGroupId);
@@ -774,6 +773,9 @@ public class StagingImpl implements Staging {
 	protected void disableStaging(
 			PortletRequest portletRequest, long liveGroupId)
 		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Group liveGroup = GroupLocalServiceUtil.getGroup(liveGroupId);
 
@@ -803,12 +805,6 @@ public class StagingImpl implements Staging {
 		}
 
 		if (liveGroup.hasStagingGroup()) {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)portletRequest.getAttribute(
-					WebKeys.THEME_DISPLAY);
-
-			Group stagingGroup = liveGroup.getStagingGroup();
-
 			if (themeDisplay.getScopeGroupId() != liveGroup.getGroupId()) {
 				String redirect = ParamUtil.getString(
 					portletRequest, "pagesRedirect");
@@ -822,16 +818,13 @@ public class StagingImpl implements Staging {
 				portletRequest.setAttribute(WebKeys.REDIRECT, redirect);
 			}
 
-			LayoutBranchLocalServiceUtil.deleteBranches(
-				stagingGroup.getGroupId());
+			Group stagingGroup = liveGroup.getStagingGroup();
 
 			GroupLocalServiceUtil.deleteGroup(stagingGroup.getGroupId());
-
-			TasksProposalLocalServiceUtil.deleteProposals(
-				liveGroup.getGroupId());
 		}
 		else {
-			LayoutBranchLocalServiceUtil.deleteBranches(liveGroup.getGroupId());
+			LayoutBranchLocalServiceUtil.deleteLayoutBranches(
+				liveGroup.getGroupId());
 		}
 
 		GroupLocalServiceUtil.updateGroup(
@@ -842,6 +835,9 @@ public class StagingImpl implements Staging {
 			PortletRequest portletRequest, long liveGroupId,
 			ServiceContext serviceContext)
 		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Group liveGroup = GroupServiceUtil.getGroup(liveGroupId);
 
@@ -889,7 +885,8 @@ public class StagingImpl implements Staging {
 					parameterMap, null, null);
 			}
 
-			LayoutBranchLocalServiceUtil.addBranch(
+			LayoutBranchLocalServiceUtil.addLayoutBranch(
+				themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
 				LayoutBranchConstants.MASTER_BRANCH_NAME,
 				LayoutBranchConstants.MASTER_BRANCH_NAME.concat(
 					" branch of ").concat(stagingGroup.getDescriptiveName()),
@@ -905,6 +902,9 @@ public class StagingImpl implements Staging {
 			PortletRequest portletRequest, long liveGroupId,
 			ServiceContext serviceContext)
 		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Group liveGroup = GroupServiceUtil.getGroup(liveGroupId);
 
@@ -938,7 +938,8 @@ public class StagingImpl implements Staging {
 		setCommonStagingOptions(
 			portletRequest, liveGroup, typeSettingsProperties);
 
-		LayoutBranchLocalServiceUtil.addBranch(
+		LayoutBranchLocalServiceUtil.addLayoutBranch(
+			themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
 			LayoutBranchConstants.MASTER_BRANCH_NAME,
 			LayoutBranchConstants.MASTER_BRANCH_NAME.concat(
 				" branch of ").concat(liveGroup.getDescriptiveName()),
@@ -1090,6 +1091,9 @@ public class StagingImpl implements Staging {
 			boolean timeZoneSensitive)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		int dateMonth = ParamUtil.getInteger(
 			portletRequest, paramPrefix + "Month");
 		int dateDay = ParamUtil.getInteger(portletRequest, paramPrefix + "Day");
@@ -1110,10 +1114,6 @@ public class StagingImpl implements Staging {
 		TimeZone timeZone = null;
 
 		if (timeZoneSensitive) {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)portletRequest.getAttribute(
-					WebKeys.THEME_DISPLAY);
-
 			locale = themeDisplay.getLocale();
 			timeZone = themeDisplay.getTimeZone();
 		}
@@ -1176,8 +1176,8 @@ public class StagingImpl implements Staging {
 			boolean schedule)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)portletRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		String tabs1 = ParamUtil.getString(portletRequest, "tabs1");
 
@@ -1324,8 +1324,8 @@ public class StagingImpl implements Staging {
 			PortletRequest portletRequest, boolean schedule)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)portletRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		String tabs1 = ParamUtil.getString(portletRequest, "tabs1");
 

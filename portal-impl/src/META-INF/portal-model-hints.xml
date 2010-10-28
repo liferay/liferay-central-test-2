@@ -252,7 +252,7 @@
 		<field name="dlFolderId" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.LayoutBranch">
-		<field name="branchId" type="long" />
+		<field name="layoutBranchId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
@@ -279,17 +279,17 @@
 		<field name="active" type="boolean" />
 	</model>
 	<model name="com.liferay.portal.model.LayoutRevision">
-		<field name="revisionId" type="long" />
+		<field name="layoutRevisionId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="branchId" type="long" />
-		<field name="plid" type="long" />
-		<field name="parentRevisionId" type="long" />
+		<field name="layoutBranchId" type="long" />
+		<field name="parentLayoutRevisionId" type="long" />
 		<field name="head" type="boolean" />
+		<field name="plid" type="long" />
 		<field name="name" type="String">
 			<hint-collection name="TEXTAREA" />
 			<validator name="required" />

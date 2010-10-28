@@ -339,6 +339,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			throw new RequiredGroupException(String.valueOf(groupId));
 		}
 
+		// Layout branches
+
+		layoutBranchLocalService.deleteLayoutBranches(groupId);
+
 		// Layout sets
 
 		try {
@@ -442,6 +446,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		scFrameworkVersionLocalService.deleteFrameworkVersions(groupId);
 		scProductEntryLocalService.deleteProductEntries(groupId);
+
+		// Tasks
+
+		tasksProposalLocalService.deleteProposals(groupId);
 
 		// Wiki
 

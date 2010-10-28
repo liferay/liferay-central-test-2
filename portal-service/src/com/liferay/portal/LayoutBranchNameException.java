@@ -21,20 +21,20 @@ import com.liferay.portal.kernel.exception.PortalException;
  */
 public class LayoutBranchNameException extends PortalException {
 
-	public LayoutBranchNameException() {
-		super();
+	public static final int DUPLICATE = 1;
+
+	public static final int TOO_LONG = 2;
+
+	public static final int TOO_SHORT = 3;
+
+	private int _type;
+
+	public LayoutBranchNameException(int type) {
+		_type = type;
 	}
 
-	public LayoutBranchNameException(String msg) {
-		super(msg);
-	}
-
-	public LayoutBranchNameException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-
-	public LayoutBranchNameException(Throwable cause) {
-		super(cause);
+	public int getType() {
+		return _type;
 	}
 
 }

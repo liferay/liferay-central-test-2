@@ -3,8 +3,8 @@
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
- * Software Foundation; either revision 2.1 of the License, or (at your option)
- * any later revision.
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
  *
  * This library is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
@@ -14,11 +14,10 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.NoSuchLayoutRevisionException;
+import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.Layout;
@@ -30,424 +29,442 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.LayoutRevisionLocalServiceBaseImpl;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 /**
- * The implementation of the revision local service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.portal.service.RevisionLocalService} interface.
- * </p>
- *
- * <p>
- * Never reference this interface directly. Always use {@link com.liferay.portal.service.RevisionLocalServiceUtil} to access the revision local service.
- * </p>
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
- *
+ * @author Raymond Augé
  * @author Brian Wing Shun Chan
- * @see com.liferay.portal.service.base.RevisionLocalServiceBaseImpl
- * @see com.liferay.portal.service.RevisionLocalServiceUtil
  */
 public class LayoutRevisionLocalServiceImpl
 	extends LayoutRevisionLocalServiceBaseImpl {
 
-	public LayoutRevision addRevision(
-			long branchId, long plid, long groupId, String name, String title,
+	public LayoutRevision addLayoutRevision(
+			long userId, long layoutBranchId, long parentLayoutRevisionId,
+			boolean head, long plid, String name, String title,
 			String description, String typeSettings, boolean iconImage,
 			long iconImageId, String themeId, String colorSchemeId,
 			String wapThemeId, String wapColorSchemeId, String css,
-			boolean head, ServiceContext serviceContext)
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		User user = userLocalService.getUserById(serviceContext.getUserId());
+		// Layout revision
 
-		long revisionId = counterLocalService.increment();
-
-		LayoutRevision revision = layoutRevisionPersistence.create(revisionId);
-
-		long parentRevisionId = LayoutRevisionConstants.DEFAULT_PARENT_REVISION_ID;
-
-		LayoutRevision parentRevision = getParentRevision(
-			branchId, plid, serviceContext);
-
-		if (parentRevision != null) {
-			parentRevisionId = parentRevision.getRevisionId();
-		}
-
+		User user = userLocalService.getUserById(userId);
+		LayoutBranch layoutBranch = layoutBranchPersistence.findByPrimaryKey(
+			layoutBranchId);
+		parentLayoutRevisionId = getParentLayoutRevisionId(
+			layoutBranchId, parentLayoutRevisionId, plid);
 		Date now = new Date();
 
-		revision.setGroupId(groupId);
-		revision.setCompanyId(user.getCompanyId());
-		revision.setUserId(user.getUserId());
-		revision.setUserName(user.getFullName());
-		revision.setCreateDate(serviceContext.getCreateDate(now));
-		revision.setModifiedDate(serviceContext.getModifiedDate(now));
-		revision.setBranchId(branchId);
-		revision.setPlid(plid);
-		revision.setParentRevisionId(parentRevisionId);
-		revision.setHead(head);
+		long layoutRevisionId = counterLocalService.increment();
 
-		revision.setName(name);
-		revision.setTitle(title);
-		revision.setDescription(description);
-		revision.setTypeSettings(typeSettings);
+		LayoutRevision layoutRevision = layoutRevisionPersistence.create(
+			layoutRevisionId);
+
+		layoutRevision.setGroupId(layoutBranch.getGroupId());
+		layoutRevision.setCompanyId(user.getCompanyId());
+		layoutRevision.setUserId(user.getUserId());
+		layoutRevision.setUserName(user.getFullName());
+		layoutRevision.setCreateDate(serviceContext.getCreateDate(now));
+		layoutRevision.setModifiedDate(serviceContext.getModifiedDate(now));
+		layoutRevision.setLayoutBranchId(layoutBranchId);
+		layoutRevision.setParentLayoutRevisionId(parentLayoutRevisionId);
+		layoutRevision.setHead(head);
+		layoutRevision.setPlid(plid);
+		layoutRevision.setName(name);
+		layoutRevision.setTitle(title);
+		layoutRevision.setDescription(description);
+		layoutRevision.setTypeSettings(typeSettings);
 
 		if (iconImage) {
-			revision.setIconImage(iconImage);
-			revision.setIconImageId(iconImageId);
+			layoutRevision.setIconImage(iconImage);
+			layoutRevision.setIconImageId(iconImageId);
 		}
 
-		revision.setThemeId(themeId);
-		revision.setColorSchemeId(colorSchemeId);
-		revision.setWapThemeId(wapThemeId);
-		revision.setWapColorSchemeId(wapColorSchemeId);
-		revision.setCss(css);
+		layoutRevision.setThemeId(themeId);
+		layoutRevision.setColorSchemeId(colorSchemeId);
+		layoutRevision.setWapThemeId(wapThemeId);
+		layoutRevision.setWapColorSchemeId(wapColorSchemeId);
+		layoutRevision.setCss(css);
 
-		revision.setStatus(WorkflowConstants.STATUS_DRAFT);
+		layoutRevision.setStatus(WorkflowConstants.STATUS_DRAFT);
 
-		if (parentRevision != null) {
-			copyPreferences(
-				user.getCompanyId(), parentRevisionId, revision.getRevisionId(),
-				serviceContext);
+		layoutRevisionPersistence.update(layoutRevision, false);
+
+		// Portlet preferences
+
+		if (parentLayoutRevisionId !=
+				LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID) {
+
+			copyPortletPreferences(layoutRevision, serviceContext);
 		}
+
+		// Workflow
 
 		WorkflowHandlerRegistryUtil.startWorkflowInstance(
-			user.getCompanyId(), groupId, user.getUserId(),
-			Layout.class.getName(), revision.getRevisionId(), revision,
-			serviceContext);
+			user.getCompanyId(), layoutRevision.getGroupId(), user.getUserId(),
+			Layout.class.getName(), layoutRevision.getLayoutRevisionId(),
+			layoutRevision, serviceContext);
 
-		return revision;
+		return layoutRevision;
 	}
 
-	public void deleteRevision(long revisionId)
+	public LayoutRevision checkLatestLayoutRevision(
+			long layoutRevisionId, long layoutBranchId, long plid,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		LayoutRevision revision = layoutRevisionPersistence.findByPrimaryKey(revisionId);
+		LayoutBranch layoutBranch = layoutBranchPersistence.findByPrimaryKey(
+			layoutBranchId);
 
-		deleteRevision(revision);
-	}
+		LayoutRevision layoutRevision = null;
 
-	public void deleteRevision(LayoutRevision revision)
-		throws SystemException {
-
-		List<PortletPreferences> preferences =
-			portletPreferencesLocalService.getPortletPreferencesByPlid(
-				revision.getRevisionId());
-
-		for (PortletPreferences preference : preferences) {
-			try {
-				portletPreferencesLocalService.deletePortletPreferences(
-					preference.getPortletPreferencesId());
-			}
-			catch (PortalException e) {
-			}
+		if (layoutRevisionId > 0) {
+			layoutRevision = layoutRevisionPersistence.fetchByPrimaryKey(
+				layoutRevisionId);
 		}
 
-		layoutRevisionPersistence.remove(revision);
-	}
+		List<LayoutRevision> layoutRevisions = null;
 
-	public void deleteRevisionsByBranch(long branchId)
-		throws PortalException, SystemException {
+		if (layoutRevision == null) {
+			layoutRevisions = layoutRevisionPersistence.findByL_P(
+				layoutBranchId, plid, 0 , 1);
 
-		List<LayoutRevision> revisions = layoutRevisionPersistence.findByBranchId(
-			branchId);
-
-		for (LayoutRevision revision : revisions) {
-			deleteRevision(revision);
-		}
-	}
-
-	public void deleteRevisionsByLayout(long plid)
-		throws PortalException, SystemException {
-
-		for (LayoutRevision revision : getRevisions(plid)) {
-			deleteRevision(revision);
-		}
-	}
-
-	public void deleteRevisions(long branchId, long plid)
-		throws PortalException, SystemException {
-
-		for (LayoutRevision revision : getRevisions(branchId, plid)) {
-			deleteRevision(revision);
-		}
-	}
-
-	public LayoutRevision checkLatestRevision(
-			long branchId, long plid, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		LayoutRevision revision = null;
-		List<LayoutRevision> revisions = Collections.EMPTY_LIST;
-
-		LayoutBranch branch = layoutBranchPersistence.findByPrimaryKey(branchId);
-
-		long revisionId = ParamUtil.getLong(serviceContext, "revisionId");
-
-		if (revisionId > 0) {
-			revision = layoutRevisionPersistence.findByPrimaryKey(revisionId);
-		}
-
-		if (revision == null) {
-			revisions = layoutRevisionPersistence.findByB_P(branchId, plid, 0 , 1);
-
-			if (!revisions.isEmpty()) {
-				revision = revisions.get(0);
+			if (!layoutRevisions.isEmpty()) {
+				layoutRevision = layoutRevisions.get(0);
 			}
 		}
 
-		if (revision == null) {
-			Layout layout = layoutPersistence.findByPrimaryKey(plid);
+		if (layoutRevision != null) {
+			return layoutRevision;
+		}
 
-			revision = layoutRevisionLocalService.addRevision(
-				branch.getBranchId(), plid, layout.getGroupId(),
-				layout.getName(), layout.getTitle(),
+		Layout layout = layoutPersistence.findByPrimaryKey(plid);
+
+		layoutRevision = addLayoutRevision(
+			layoutBranch.getUserId(), layoutBranch.getLayoutBranchId(),
+			LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID, false,
+			plid, layout.getName(), layout.getTitle(), layout.getDescription(),
+			layout.getTypeSettings(), layout.isIconImage(),
+			layout.getIconImageId(), layout.getThemeId(),
+			layout.getColorSchemeId(), layout.getWapThemeId(),
+			layout.getWapColorSchemeId(), layout.getCss(), serviceContext);
+
+		if (layoutBranch.isMaster()) {
+			return layoutRevision;
+		}
+
+		layoutBranch = layoutBranchLocalService.getMasterLayoutBranch(
+			layoutBranch.getGroupId());
+
+		layoutRevisions = layoutRevisionPersistence.findByL_P(
+			layoutBranch.getLayoutBranchId(), plid, 0 , 1);
+
+		if (layoutRevisions.isEmpty()) {
+			addLayoutRevision(
+				layoutBranch.getUserId(), layoutBranch.getLayoutBranchId(),
+				LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID,
+				false, plid, layout.getName(), layout.getTitle(),
 				layout.getDescription(), layout.getTypeSettings(),
-				layout.getIconImage(), layout.getIconImageId(),
+				layout.isIconImage(), layout.getIconImageId(),
 				layout.getThemeId(), layout.getColorSchemeId(),
 				layout.getWapThemeId(), layout.getWapColorSchemeId(),
-				layout.getCss(), false, serviceContext);
+				layout.getCss(), serviceContext);
+		}
 
-			if (!branch.isMaster()) {
-				branch = layoutBranchLocalService.getMasterBranch(
-					branch.getGroupId());
+		return layoutRevision;
+	}
 
-				revisions = layoutRevisionPersistence.findByB_P(
-					branch.getBranchId(), plid, 0 , 1);
+	public void deleteLayoutBranchLayoutRevisions(long layoutBranchId)
+		throws PortalException, SystemException {
 
-				if (revisions.isEmpty()) {
-					layoutRevisionLocalService.addRevision(
-						branch.getBranchId(), plid, layout.getGroupId(),
-						layout.getName(), layout.getTitle(),
-						layout.getDescription(), layout.getTypeSettings(),
-						layout.getIconImage(), layout.getIconImageId(),
-						layout.getThemeId(), layout.getColorSchemeId(),
-						layout.getWapThemeId(), layout.getWapColorSchemeId(),
-						layout.getCss(), false, serviceContext);
-				}
+		List<LayoutRevision> layoutRevisions =
+			layoutRevisionPersistence.findByLayoutBranchId(
+				layoutBranchId);
+
+		for (LayoutRevision layoutRevision : layoutRevisions) {
+			deleteLayoutRevision(layoutRevision);
+		}
+	}
+
+	public void deleteLayoutLayoutRevisions(long plid)
+		throws PortalException, SystemException {
+
+		for (LayoutRevision layoutRevision : getLayoutRevisions(plid)) {
+			deleteLayoutRevision(layoutRevision);
+		}
+	}
+
+	public void deleteLayoutRevision(LayoutRevision layoutRevision)
+		throws PortalException, SystemException {
+
+		List<PortletPreferences> portletPreferences =
+			portletPreferencesLocalService.getPortletPreferencesByPlid(
+				layoutRevision.getLayoutRevisionId());
+
+		for (PortletPreferences portletPreference : portletPreferences) {
+			try {
+				portletPreferencesLocalService.deletePortletPreferences(
+					portletPreference.getPortletPreferencesId());
+			}
+			catch (NoSuchPortletPreferencesException nsppe) {
 			}
 		}
 
-		return revision;
+		layoutRevisionPersistence.remove(layoutRevision);
 	}
 
-	public LayoutRevision getHeadRevision(long branchId, long plid)
+	public void deleteLayoutRevision(long layoutRevisionId)
 		throws PortalException, SystemException {
 
-		List<LayoutRevision> revisions = layoutRevisionPersistence.findByB_P_S(
-			branchId, plid, WorkflowConstants.STATUS_APPROVED, 0, 1);
+		LayoutRevision layoutRevision =
+			layoutRevisionPersistence.findByPrimaryKey(layoutRevisionId);
 
-		if (!revisions.isEmpty()) {
-			return revisions.get(0);
+		deleteLayoutRevision(layoutRevision);
+	}
+
+	public void deleteLayoutRevisions(long layoutBranchId, long plid)
+		throws PortalException, SystemException {
+
+		for (LayoutRevision layoutRevision : getLayoutRevisions(
+				layoutBranchId, plid)) {
+
+			deleteLayoutRevision(layoutRevision);
+		}
+	}
+
+	public LayoutRevision getHeadLayoutRevision(long layoutBranchId, long plid)
+		throws PortalException, SystemException {
+
+		List<LayoutRevision> layoutRevisions =
+			layoutRevisionPersistence.findByL_P_S(
+				layoutBranchId, plid, WorkflowConstants.STATUS_APPROVED, 0, 1);
+
+		if (!layoutRevisions.isEmpty()) {
+			return layoutRevisions.get(0);
 		}
 		else {
-			return null;
+			throw new NoSuchLayoutRevisionException();
 		}
 	}
 
-	public LayoutRevision getRevision(long revisionId)
+	public LayoutRevision getLayoutRevision(long layoutRevisionId)
 		throws PortalException, SystemException {
 
-		return layoutRevisionPersistence.findByPrimaryKey(revisionId);
+		return layoutRevisionPersistence.findByPrimaryKey(layoutRevisionId);
 	}
 
-	public List<LayoutRevision> getRevisions(long plid)
-		throws PortalException, SystemException {
+	public List<LayoutRevision> getLayoutRevisions(long plid)
+		throws SystemException {
 
 		return layoutRevisionPersistence.findByPlid(plid);
 	}
 
-	public List<LayoutRevision> getRevisions(long branchId, long plid)
-		throws PortalException, SystemException {
+	public List<LayoutRevision> getLayoutRevisions(
+			long layoutBranchId, long plid)
+		throws SystemException {
 
-		return layoutRevisionPersistence.findByB_P(branchId, plid);
+		return layoutRevisionPersistence.findByL_P(layoutBranchId, plid);
 	}
 
-	public List<LayoutRevision> getRevisions(long branchId, long plid, int status)
-		throws PortalException, SystemException {
+	public List<LayoutRevision> getLayoutRevisions(
+			long layoutBranchId, long plid, int status)
+		throws SystemException {
 
-		return layoutRevisionPersistence.findByB_P_S(branchId, plid, status);
+		return layoutRevisionPersistence.findByL_P_S(
+			layoutBranchId, plid, status);
 	}
 
-	public LayoutRevision revertToRevision(long revisionId)
+	public LayoutRevision revertToLayoutRevision(long layoutRevisionId)
 		throws PortalException, SystemException {
 
-		LayoutRevision revision = layoutRevisionPersistence.findByPrimaryKey(revisionId);
+		LayoutRevision layoutRevision =
+			layoutRevisionPersistence.findByPrimaryKey(layoutRevisionId);
 
-		List<LayoutRevision> revisions = layoutRevisionPersistence.findByB_P(
-			revision.getBranchId(), revision.getPlid());
+		List<LayoutRevision> layoutRevisions =
+			layoutRevisionPersistence.findByL_P(
+				layoutRevision.getLayoutBranchId(), layoutRevision.getPlid());
 
-		for (LayoutRevision curRevision : revisions) {
-			if (curRevision.getRevisionId() > revision.getRevisionId()) {
-				//deleteRevision(curRevision.getRevisionId());
+		for (LayoutRevision curLayoutRevision : layoutRevisions) {
+			if (curLayoutRevision.getLayoutRevisionId() >
+					layoutRevision.getLayoutRevisionId()) {
+
+				deleteLayoutRevision(curLayoutRevision.getLayoutRevisionId());
 			}
 		}
 
-		return revision;
+		return layoutRevision;
 	}
 
-	public LayoutRevision updateRevision(
-			long revisionId, String name, String title, String description,
-			String typeSettings, boolean iconImage, long iconImageId,
-			String themeId, String colorSchemeId, String wapThemeId,
-			String wapColorSchemeId, String css, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		User user = userPersistence.findByPrimaryKey(
-			serviceContext.getUserId());
-
-		LayoutRevision oldRevision = layoutRevisionPersistence.fetchByPrimaryKey(
-			revisionId);
-
-		Date now = new Date();
-
-		LayoutRevision revision = layoutRevisionPersistence.create(revisionId);
-
-		revision.setGroupId(oldRevision.getGroupId());
-		revision.setCompanyId(oldRevision.getCompanyId());
-		revision.setUserId(user.getUserId());
-		revision.setUserName(user.getFullName());
-		revision.setCreateDate(serviceContext.getCreateDate(now));
-		revision.setModifiedDate(serviceContext.getModifiedDate(now));
-		revision.setBranchId(oldRevision.getBranchId());
-		revision.setPlid(oldRevision.getPlid());
-		revision.setParentRevisionId(oldRevision.getRevisionId());
-		revision.setHead(false);
-
-		revision.setName(name);
-		revision.setTitle(title);
-		revision.setDescription(description);
-		revision.setTypeSettings(typeSettings);
-
-		if (iconImage) {
-			revision.setIconImage(iconImage);
-			revision.setIconImageId(iconImageId);
-		}
-
-		revision.setThemeId(themeId);
-		revision.setColorSchemeId(colorSchemeId);
-		revision.setWapThemeId(wapThemeId);
-		revision.setWapColorSchemeId(wapColorSchemeId);
-		revision.setCss(css);
-
-		layoutRevisionPersistence.update(revision, false);
-
-		copyPreferences(
-			user.getCompanyId(), revision.getParentRevisionId(),
-			revision.getRevisionId(), serviceContext);
-
-		WorkflowHandlerRegistryUtil.startWorkflowInstance(
-			revision.getCompanyId(), revision.getGroupId(),
-			serviceContext.getUserId(), Layout.class.getName(),
-			revision.getRevisionId(), revision, serviceContext);
-
-		return revision;
-	}
-
-	public LayoutRevision updateStatus(
-			long userId, long revisionId, int status,
+	public LayoutRevision updateLayoutRevision(
+			long userId, long layoutRevisionId, String name, String title,
+			String description, String typeSettings, boolean iconImage,
+			long iconImageId, String themeId, String colorSchemeId,
+			String wapThemeId, String wapColorSchemeId, String css,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		// Entry
+		// Layout revision
+
+		User user = userPersistence.findByPrimaryKey(userId);
+		LayoutRevision layoutRevision =
+			layoutRevisionPersistence.findByPrimaryKey(layoutRevisionId);
+		Date now = new Date();
+
+		LayoutRevision newLayoutRevision = layoutRevisionPersistence.create(
+			layoutRevisionId);
+
+		newLayoutRevision.setGroupId(layoutRevision.getGroupId());
+		newLayoutRevision.setCompanyId(layoutRevision.getCompanyId());
+		newLayoutRevision.setUserId(user.getUserId());
+		newLayoutRevision.setUserName(user.getFullName());
+		newLayoutRevision.setCreateDate(serviceContext.getCreateDate(now));
+		newLayoutRevision.setModifiedDate(serviceContext.getModifiedDate(now));
+		newLayoutRevision.setLayoutBranchId(layoutRevision.getLayoutBranchId());
+		newLayoutRevision.setParentLayoutRevisionId(
+			layoutRevision.getLayoutRevisionId());
+		newLayoutRevision.setHead(false);
+		newLayoutRevision.setPlid(layoutRevision.getPlid());
+		newLayoutRevision.setName(name);
+		newLayoutRevision.setTitle(title);
+		newLayoutRevision.setDescription(description);
+		newLayoutRevision.setTypeSettings(typeSettings);
+
+		if (iconImage) {
+			newLayoutRevision.setIconImage(iconImage);
+			newLayoutRevision.setIconImageId(iconImageId);
+		}
+
+		newLayoutRevision.setThemeId(themeId);
+		newLayoutRevision.setColorSchemeId(colorSchemeId);
+		newLayoutRevision.setWapThemeId(wapThemeId);
+		newLayoutRevision.setWapColorSchemeId(wapColorSchemeId);
+		newLayoutRevision.setCss(css);
+
+		layoutRevisionPersistence.update(newLayoutRevision, false);
+
+		// Portlet preferences
+
+		copyPortletPreferences(newLayoutRevision, serviceContext);
+
+		// Workflow
+
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(
+			newLayoutRevision.getCompanyId(), newLayoutRevision.getGroupId(),
+			userId, Layout.class.getName(),
+			newLayoutRevision.getLayoutRevisionId(), newLayoutRevision,
+			serviceContext);
+
+		return newLayoutRevision;
+	}
+
+	public LayoutRevision updateStatus(
+			long userId, long layoutRevisionId, int status,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
-		LayoutRevision revision = layoutRevisionPersistence.findByPrimaryKey(revisionId);
+		LayoutRevision layoutRevision =
+			layoutRevisionPersistence.findByPrimaryKey(layoutRevisionId);
 
-		revision.setModifiedDate(serviceContext.getModifiedDate(now));
-		revision.setStatus(status);
-		revision.setStatusByUserId(user.getUserId());
-		revision.setStatusByUserName(user.getFullName());
-		revision.setStatusDate(serviceContext.getModifiedDate(now));
+		layoutRevision.setModifiedDate(serviceContext.getModifiedDate(now));
+		layoutRevision.setStatus(status);
+		layoutRevision.setStatusByUserId(user.getUserId());
+		layoutRevision.setStatusByUserName(user.getFullName());
+		layoutRevision.setStatusDate(serviceContext.getModifiedDate(now));
 
 		if (status == WorkflowConstants.STATUS_APPROVED) {
-			revision.setHead(true);
+			layoutRevision.setHead(true);
 
-			List<LayoutRevision> revisions = layoutRevisionPersistence.findByB_P(
-				revision.getBranchId(), revision.getPlid());
+			List<LayoutRevision> layoutRevisions =
+				layoutRevisionPersistence.findByL_P(
+					layoutRevision.getLayoutBranchId(),
+					layoutRevision.getPlid());
 
-			for (LayoutRevision curRevision : revisions) {
-				if (curRevision.getRevisionId() != revision.getRevisionId()) {
-					curRevision.setHead(false);
+			for (LayoutRevision curLayoutRevision : layoutRevisions) {
+				if (curLayoutRevision.getLayoutRevisionId() !=
+						layoutRevision.getLayoutRevisionId()) {
 
-					layoutRevisionPersistence.update(curRevision, false);
+					curLayoutRevision.setHead(false);
+
+					layoutRevisionPersistence.update(curLayoutRevision, false);
 				}
 			}
 		}
 		else {
-			revision.setHead(false);
+			layoutRevision.setHead(false);
 
-			List<LayoutRevision> revisions = layoutRevisionPersistence.findByB_P_S(
-				revision.getBranchId(), revision.getPlid(),
-				WorkflowConstants.STATUS_APPROVED);
+			List<LayoutRevision> layoutRevisions =
+				layoutRevisionPersistence.findByL_P_S(
+					layoutRevision.getLayoutBranchId(),
+					layoutRevision.getPlid(),
+					WorkflowConstants.STATUS_APPROVED);
 
-			for (LayoutRevision curRevision : revisions) {
-				if (curRevision.getRevisionId() != revision.getRevisionId()) {
-					curRevision.setHead(true);
+			for (LayoutRevision curLayoutRevision : layoutRevisions) {
+				if (curLayoutRevision.getLayoutRevisionId() !=
+						layoutRevision.getLayoutRevisionId()) {
 
-					layoutRevisionPersistence.update(curRevision, false);
+					curLayoutRevision.setHead(true);
+
+					layoutRevisionPersistence.update(curLayoutRevision, false);
 
 					break;
 				}
 			}
 		}
 
-		layoutRevisionPersistence.update(revision, false);
+		layoutRevisionPersistence.update(layoutRevision, false);
 
-		return revision;
+		return layoutRevision;
 	}
 
-	protected void copyPreferences(
-			long companyId, long plid, long revisionId,
-			ServiceContext serviceContext)
+	protected void copyPortletPreferences(
+			LayoutRevision layoutRevision, ServiceContext serviceContext)
 		throws SystemException {
 
-		List<PortletPreferences> preferences =
+		List<PortletPreferences> portletPreferences =
 			portletPreferencesLocalService.getPortletPreferencesByPlid(
-				plid);
+				layoutRevision.getPlid());
 
-		for (PortletPreferences preference : preferences) {
+		for (PortletPreferences portletPreference : portletPreferences) {
 			portletPreferencesLocalService.addPortletPreferences(
-				companyId, preference.getOwnerId(), preference.getOwnerType(),
-				revisionId, preference.getPortletId(), null,
-				preference.getPreferences());
+				layoutRevision.getCompanyId(), portletPreference.getOwnerId(),
+				portletPreference.getOwnerType(),
+				layoutRevision.getLayoutRevisionId(),
+				portletPreference.getPortletId(), null,
+				portletPreference.getPreferences());
 		}
 	}
 
-	protected LayoutRevision getParentRevision(
-			long branchId, long plid, ServiceContext serviceContext)
-		throws PortalException, SystemException  {
+	protected long getParentLayoutRevisionId(
+			long layoutBranchId, long parentLayoutRevisionId, long plid)
+		throws SystemException {
 
-		long parentRevisionId = ParamUtil.getLong(
-			serviceContext, "parentRevisionId");
+		LayoutRevision parentLayoutRevision = null;
 
-		LayoutRevision parentRevision = null;
-
-		if (parentRevisionId > 0) {
-			parentRevision = layoutRevisionPersistence.findByPrimaryKey(
-				parentRevisionId);
+		if (parentLayoutRevisionId > 0) {
+			parentLayoutRevision = layoutRevisionPersistence.fetchByPrimaryKey(
+				parentLayoutRevisionId);
 		}
 
-		if (parentRevision == null) {
-			List<LayoutRevision> revisions = layoutRevisionPersistence.findByB_P(
-				branchId, plid, 0, 1);
+		if (parentLayoutRevision == null) {
+			List<LayoutRevision> layoutRevisions =
+				layoutRevisionPersistence.findByL_P(
+					layoutBranchId, plid, 0, 1);
 
-			if (!revisions.isEmpty()) {
-				parentRevision = revisions.get(0);
+			if (!layoutRevisions.isEmpty()) {
+				parentLayoutRevision = layoutRevisions.get(0);
 			}
 		}
 
-		return parentRevision;
-	}
+		if (parentLayoutRevision != null) {
+			return parentLayoutRevision.getParentLayoutRevisionId();
+		}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		LayoutRevisionLocalServiceImpl.class);
+		return LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID;
+	}
 
 }

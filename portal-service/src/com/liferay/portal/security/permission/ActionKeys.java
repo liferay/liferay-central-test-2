@@ -29,8 +29,6 @@ public class ActionKeys {
 
 	public static final String ADD_ATTACHMENT = "ADD_ATTACHMENT";
 
-	public static final String ADD_BRANCH = "ADD_BRANCH";
-
 	public static final String ADD_CATEGORY = "ADD_CATEGORY";
 
 	public static final String ADD_COMMUNITY = "ADD_COMMUNITY";
@@ -59,9 +57,11 @@ public class ActionKeys {
 
 	public static final String ADD_IMAGE = "ADD_IMAGE";
 
+	public static final String ADD_INSTANCE = "ADD_INSTANCE";
+
 	public static final String ADD_ITEM = "ADD_ITEM";
 
-	public static final String ADD_INSTANCE = "ADD_INSTANCE";
+	public static final String ADD_LAYOUT_BRANCH = "ADD_LAYOUT_BRANCH";
 
 	public static final String ADD_LAYOUT_PROTOTYPE = "ADD_LAYOUT_PROTOTYPE";
 

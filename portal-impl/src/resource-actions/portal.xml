@@ -341,7 +341,7 @@
 		</portlet-ref>
 		<permissions>
 			<supports>
-				<action-key>ADD_BRANCH</action-key>
+				<action-key>ADD_LAYOUT_BRANCH</action-key>
 				<action-key>APPROVE_PROPOSAL</action-key>
 				<action-key>ASSIGN_MEMBERS</action-key>
 				<action-key>ASSIGN_REVIEWER</action-key>
@@ -360,7 +360,7 @@
 			<community-defaults />
 			<guest-defaults />
 			<guest-unsupported>
-				<action-key>ADD_BRANCH</action-key>
+				<action-key>ADD_LAYOUT_BRANCH</action-key>
 				<action-key>APPROVE_PROPOSAL</action-key>
 				<action-key>ASSIGN_MEMBERS</action-key>
 				<action-key>ASSIGN_REVIEWER</action-key>
@@ -452,7 +452,7 @@
 		</portlet-ref>
 		<permissions>
 			<supports>
-				<action-key>ADD_BRANCH</action-key>
+				<action-key>ADD_LAYOUT_BRANCH</action-key>
 				<action-key>APPROVE_PROPOSAL</action-key>
 				<action-key>ASSIGN_MEMBERS</action-key>
 				<action-key>ASSIGN_REVIEWER</action-key>
@@ -473,7 +473,7 @@
 			<community-defaults />
 			<guest-defaults />
 			<guest-unsupported>
-				<action-key>ADD_BRANCH</action-key>
+				<action-key>ADD_LAYOUT_BRANCH</action-key>
 				<action-key>APPROVE_PROPOSAL</action-key>
 				<action-key>ASSIGN_MEMBERS</action-key>
 				<action-key>ASSIGN_REVIEWER</action-key>

@@ -17,79 +17,56 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.LayoutBranch;
-import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.LayoutBranchServiceBaseImpl;
-import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portal.service.permission.LayoutBranchPermissionUtil;
 
 import java.util.List;
 
 /**
- * The implementation of the layout branch remote service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.portal.service.LayoutBranchService} interface.
- * </p>
- *
- * <p>
- * Never reference this interface directly. Always use {@link com.liferay.portal.service.LayoutBranchServiceUtil} to access the layout branch remote service.
- * </p>
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
- *
+ * @author Raymond Augé
  * @author Brian Wing Shun Chan
- * @see com.liferay.portal.service.base.LayoutBranchServiceBaseImpl
- * @see com.liferay.portal.service.LayoutBranchServiceUtil
  */
 public class LayoutBranchServiceImpl extends LayoutBranchServiceBaseImpl {
 
-	public LayoutBranch addBranch(
+	public LayoutBranch addLayoutBranch(
 			long groupId, String name, String description,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.ADD_BRANCH);
+		LayoutBranchPermissionUtil.check(
+			getPermissionChecker(), groupId, 0, ActionKeys.ADD_LAYOUT_BRANCH);
 
-		return layoutBranchLocalService.addBranch(name, description, serviceContext);
+		return layoutBranchLocalService.addLayoutBranch(
+			getUserId(), groupId, name, description, serviceContext);
 	}
 
-	public void deleteBranch(long groupId, long branchId)
+	public void deleteLayoutBranch(long groupId, long layoutBranchId)
 		throws PortalException, SystemException {
 
-		if (!getPermissionChecker().hasPermission(
-				groupId, LayoutBranch.class.getName(), branchId,
-				ActionKeys.DELETE)) {
+		LayoutBranchPermissionUtil.check(
+			getPermissionChecker(), groupId, layoutBranchId, ActionKeys.DELETE);
 
-			throw new PrincipalException();
-		}
-
-		layoutBranchLocalService.deleteBranch(branchId);
+		layoutBranchLocalService.deleteLayoutBranch(layoutBranchId);
 	}
 
-	public List<LayoutBranch> getBranches(long groupId)
-		throws PortalException, SystemException {
+	public List<LayoutBranch> getLayoutBranches(long groupId)
+		throws SystemException {
 
-		return layoutBranchLocalService.getBranches(groupId);
+		return layoutBranchLocalService.getLayoutBranches(groupId);
 	}
 
-	public LayoutBranch updateBranch(
-			long groupId, long branchId, String name, String description,
+	public LayoutBranch updateLayoutBranch(
+			long groupId, long layoutBranchId, String name, String description,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		if (!getPermissionChecker().hasPermission(
-				groupId, LayoutBranch.class.getName(), branchId,
-				ActionKeys.UPDATE)) {
+		LayoutBranchPermissionUtil.check(
+			getPermissionChecker(), groupId, layoutBranchId, ActionKeys.UPDATE);
 
-			throw new PrincipalException();
-		}
-
-		return layoutBranchLocalService.updateBranch(
-			branchId, name, description, serviceContext);
+		return layoutBranchLocalService.updateLayoutBranch(
+			layoutBranchId, name, description, serviceContext);
 	}
 
 }

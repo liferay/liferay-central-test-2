@@ -544,9 +544,9 @@
 
 		<!-- PK fields -->
 
-		<column name="branchId" type="long" primary="true" />
+		<column name="layoutBranchId" type="long" primary="true" />
 
-		<!-- Group Instance -->
+		<!-- Group instance -->
 
 		<column name="groupId" type="long" />
 
@@ -571,10 +571,10 @@
 
 		<!-- Finder methods -->
 
-		<finder name="G" return-type="Collection">
+		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="G_N" return-type="LayoutBranch">
+		<finder name="G_N" return-type="LayoutBranch" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="name" />
 		</finder>
@@ -610,9 +610,9 @@
 
 		<!-- PK fields -->
 
-		<column name="revisionId" type="long" primary="true" />
+		<column name="layoutRevisionId" type="long" primary="true" />
 
-		<!-- Group Instance -->
+		<!-- Group instance -->
 
 		<column name="groupId" type="long" />
 
@@ -626,11 +626,10 @@
 
 		<!-- Other fields -->
 
-		<column name="branchId" type="long" />
-		<column name="plid" type="long" />
-		<column name="parentRevisionId" type="long" />
+		<column name="layoutBranchId" type="long" />
+		<column name="parentLayoutRevisionId" type="long" />
 		<column name="head" type="boolean" />
-
+		<column name="plid" type="long" />
 		<column name="name" type="String" />
 		<column name="title" type="String" />
 		<column name="description" type="String" />
@@ -642,7 +641,6 @@
 		<column name="wapThemeId" type="String" />
 		<column name="wapColorSchemeId" type="String" />
 		<column name="css" type="String" />
-
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />
@@ -651,28 +649,28 @@
 		<!-- Order -->
 
 		<order by="desc">
-			<order-column name="revisionId" />
+			<order-column name="layoutRevisionId" />
 		</order>
 
 		<!-- Finder methods -->
 
-		<finder name="BranchId" return-type="Collection">
-			<finder-column name="branchId" />
+		<finder name="LayoutBranchId" return-type="Collection">
+			<finder-column name="layoutBranchId" />
 		</finder>
 		<finder name="Plid" return-type="Collection">
 			<finder-column name="plid" />
 		</finder>
-		<finder name="B_P" return-type="Collection">
-			<finder-column name="branchId" />
+		<finder name="L_P" return-type="Collection">
+			<finder-column name="layoutBranchId" />
 			<finder-column name="plid" />
 		</finder>
-		<finder name="B_P_H" return-type="LayoutRevision">
-			<finder-column name="branchId" />
-			<finder-column name="plid" />
+		<finder name="L_H_P" return-type="LayoutRevision" unique="true">
+			<finder-column name="layoutBranchId" />
 			<finder-column name="head" />
+			<finder-column name="plid" />
 		</finder>
-		<finder name="B_P_S" return-type="Collection">
-			<finder-column name="branchId" />
+		<finder name="L_P_S" return-type="Collection">
+			<finder-column name="layoutBranchId" />
 			<finder-column name="plid" />
 			<finder-column name="status" />
 		</finder>

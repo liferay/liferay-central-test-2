@@ -17,20 +17,12 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.model.LayoutRevision;
 
 /**
- * The model implementation for the LayoutRevision service. Represents a row in the &quot;LayoutRevision&quot; database table, with each column mapped to a property of this class.
- *
- * <p>
- * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.portal.model.LayoutRevision} interface.
- * </p>
- *
- * <p>
- * Never reference this class directly. All methods that expect a layout revision model instance should use the {@link LayoutRevision} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  */
-public class LayoutRevisionImpl extends LayoutRevisionModelImpl
-	implements LayoutRevision {
+public class LayoutRevisionImpl
+	extends LayoutRevisionModelImpl implements LayoutRevision {
+
 	public LayoutRevisionImpl() {
 	}
+
 }

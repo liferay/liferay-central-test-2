@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutBranch;
 import com.liferay.portal.model.LayoutBranchConstants;
+import com.liferay.portal.model.LayoutRevisionConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
@@ -31,173 +32,156 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * The implementation of the layout branch local service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.portal.service.LayoutBranchLocalService} interface.
- * </p>
- *
- * <p>
- * Never reference this interface directly. Always use {@link com.liferay.portal.service.LayoutBranchLocalServiceUtil} to access the layout branch local service.
- * </p>
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
- *
+ * @author Raymond Augé
  * @author Brian Wing Shun Chan
- * @see com.liferay.portal.service.base.LayoutBranchLocalServiceBaseImpl
- * @see com.liferay.portal.service.LayoutBranchLocalServiceUtil
  */
 public class LayoutBranchLocalServiceImpl
 	extends LayoutBranchLocalServiceBaseImpl {
 
-	public LayoutBranch addBranch(
-			String name, String description, ServiceContext serviceContext)
+	public LayoutBranch addLayoutBranch(
+			long userId, long groupId, String name, String description,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		User user = userLocalService.getUserById(serviceContext.getUserId());
+		// Layout branch
 
-		validate(serviceContext.getScopeGroupId(), name);
-
-		long branchId = counterLocalService.increment();
-
-		LayoutBranch branch =
-			layoutBranchPersistence.create(branchId);
-
+		User user = userLocalService.getUserById(userId);
 		Date now = new Date();
 
-		branch.setGroupId(serviceContext.getScopeGroupId());
-		branch.setCompanyId(user.getCompanyId());
-		branch.setUserId(user.getUserId());
-		branch.setUserName(user.getFullName());
-		branch.setCreateDate(serviceContext.getCreateDate(now));
-		branch.setModifiedDate(serviceContext.getModifiedDate(now));
-		branch.setName(name);
-		branch.setDescription(description);
+		validate(groupId, name);
 
-		layoutBranchPersistence.update(branch, false);
+		long layoutBranchId = counterLocalService.increment();
+
+		LayoutBranch layoutBranch = layoutBranchPersistence.create(
+			layoutBranchId);
+
+		layoutBranch.setGroupId(groupId);
+		layoutBranch.setCompanyId(user.getCompanyId());
+		layoutBranch.setUserId(user.getUserId());
+		layoutBranch.setUserName(user.getFullName());
+		layoutBranch.setCreateDate(serviceContext.getCreateDate(now));
+		layoutBranch.setModifiedDate(serviceContext.getModifiedDate(now));
+		layoutBranch.setName(name);
+		layoutBranch.setDescription(description);
+
+		layoutBranchPersistence.update(layoutBranch, false);
 
 		// Resources
 
 		resourceLocalService.addResources(
-			user.getCompanyId(), branch.getGroupId(), user.getUserId(),
-			LayoutBranch.class.getName(), branch.getBranchId(), false, true, false);
-
-		// When creating the initial branch we checkout each existing Layout,
-		// creating a revision for each
-
-		if (branch.getName().equals(LayoutBranchConstants.MASTER_BRANCH_NAME)) {
-			for (Layout layout : layoutLocalService.getLayouts(
-					branch.getGroupId(), false)) {
-
-//				revisionLocalService.addRevision(
-//					branch.getBranchId(), layout.getPlid(), layout.getGroupId(),
-//					layout.getName(), layout.getTitle(),
-//					layout.getDescription(), layout.getTypeSettings(),
-//					layout.getIconImage(), layout.getIconImageId(),
-//					layout.getThemeId(), layout.getColorSchemeId(),
-//					layout.getWapThemeId(), layout.getWapColorSchemeId(),
-//					layout.getCss(), true, serviceContext);
-			}
-
-			for (Layout layout : layoutLocalService.getLayouts(
-					branch.getGroupId(), true)) {
-
-//				revisionLocalService.addRevision(
-//					branch.getBranchId(), layout.getPlid(), layout.getGroupId(),
-//					layout.getName(), layout.getTitle(),
-//					layout.getDescription(), layout.getTypeSettings(),
-//					layout.getIconImage(), layout.getIconImageId(),
-//					layout.getThemeId(), layout.getColorSchemeId(),
-//					layout.getWapThemeId(), layout.getWapColorSchemeId(),
-//					layout.getCss(), true, serviceContext);
-			}
-		}
-
-		return branch;
-	}
-
-	public void deleteBranch(long branchId)
-		throws PortalException, SystemException {
-
-		LayoutBranch branch =
-			layoutBranchPersistence.findByPrimaryKey(branchId);
-
-		deleteBranch(branch);
-	}
-
-	public void deleteBranch(LayoutBranch branch)
-		throws PortalException, SystemException {
+			user.getCompanyId(), layoutBranch.getGroupId(), user.getUserId(),
+			LayoutBranch.class.getName(), layoutBranch.getLayoutBranchId(),
+			false, true, false);
 
 		// Revisions
 
-		//layoutRevisionLocalService.deleteRevisionsByBranch(branch.getBranchId());
+		if (layoutBranch.isMaster()) {
+			List<Layout> layouts = layoutPersistence.findByGroupId(
+				layoutBranch.getGroupId());
+
+			for (Layout layout : layouts) {
+				layoutRevisionLocalService.addLayoutRevision(
+					userId, layoutBranchId,
+					LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID,
+					true, layout.getPlid(), layout.getName(), layout.getTitle(),
+					layout.getDescription(), layout.getTypeSettings(),
+					layout.isIconImage(), layout.getIconImageId(),
+					layout.getThemeId(), layout.getColorSchemeId(),
+					layout.getWapThemeId(), layout.getWapColorSchemeId(),
+					layout.getCss(), serviceContext);
+			}
+		}
+
+		return layoutBranch;
+	}
+
+	public void deleteLayoutBranch(LayoutBranch layoutBranch)
+		throws PortalException, SystemException {
+
+		// Layout branch
+
+		layoutBranchPersistence.remove(layoutBranch);
 
 		// Resources
 
 		resourceLocalService.deleteResource(
-			branch.getCompanyId(), LayoutBranch.class.getName(),
-			ResourceConstants.SCOPE_INDIVIDUAL, branch.getBranchId());
+			layoutBranch.getCompanyId(), LayoutBranch.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL,
+			layoutBranch.getLayoutBranchId());
 
-		layoutBranchPersistence.remove(branch);
+		// Revisions
+
+		layoutRevisionLocalService.deleteLayoutBranchLayoutRevisions(
+			layoutBranch.getLayoutBranchId());
 	}
 
-	public void deleteBranches(long groupId)
+	public void deleteLayoutBranch(long layoutBranchId)
 		throws PortalException, SystemException {
 
-		List<LayoutBranch> branches = layoutBranchPersistence.findByG(groupId);
+		LayoutBranch layoutBranch = layoutBranchPersistence.findByPrimaryKey(
+			layoutBranchId);
 
-		for (LayoutBranch branch : branches) {
-			deleteBranch(branch);
+		deleteLayoutBranch(layoutBranch);
+	}
+
+	public void deleteLayoutBranches(long groupId)
+		throws PortalException, SystemException {
+
+		List<LayoutBranch> layoutBranches =
+			layoutBranchPersistence.findByGroupId(groupId);
+
+		for (LayoutBranch layoutBranch : layoutBranches) {
+			deleteLayoutBranch(layoutBranch);
 		}
 	}
 
-	public LayoutBranch getMasterBranch(long groupId)
+	public List<LayoutBranch> getLayoutBranches(long groupId)
+		throws SystemException {
+
+		return layoutBranchPersistence.findByGroupId(groupId);
+	}
+
+	public LayoutBranch getMasterLayoutBranch(long groupId)
 		throws PortalException, SystemException {
 
 		return layoutBranchPersistence.findByG_N(
 			groupId, LayoutBranchConstants.MASTER_BRANCH_NAME);
 	}
 
-	public List<LayoutBranch> getBranches(long groupId)
-		throws PortalException, SystemException {
-
-		return layoutBranchPersistence.findByG(groupId);
-	}
-
-	public LayoutBranch updateBranch(
-			long branchId, String name, String description,
+	public LayoutBranch updateLayoutBranch(
+			long layoutBranchId, String name, String description,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		LayoutBranch branch =
-			layoutBranchPersistence.fetchByPrimaryKey(branchId);
+		LayoutBranch layoutBranch = layoutBranchPersistence.findByPrimaryKey(
+			layoutBranchId);
 
-		branch.setName(name);
-		branch.setDescription(description);
+		layoutBranch.setName(name);
+		layoutBranch.setDescription(description);
 
-		layoutBranchPersistence.update(branch, false);
+		layoutBranchPersistence.update(layoutBranch, false);
 
-		return branch;
+		return layoutBranch;
 	}
 
 	protected void validate(long groupId, String name)
 		throws PortalException, SystemException {
 
-		if (Validator.isNull(name) || name.length() < 4) {
-			throw new LayoutBranchNameException("name-is-too-short");
+		if (Validator.isNull(name) || (name.length() < 4)) {
+			throw new LayoutBranchNameException(
+				LayoutBranchNameException.TOO_SHORT);
 		}
 
 		if (name.length() > 100) {
 			throw new LayoutBranchNameException(
-				"name-is-too-long-try-less-than-100-characters");
+				LayoutBranchNameException.TOO_LONG);
 		}
 
 		try {
 			layoutBranchPersistence.findByG_N(groupId, name);
 
-			throw new LayoutBranchNameException("name-is-already-used");
+			throw new LayoutBranchNameException(
+				LayoutBranchNameException.DUPLICATE);
 		}
 		catch (NoSuchLayoutBranchException nsbe) {
 		}
