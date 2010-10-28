@@ -124,7 +124,7 @@ public class Base64InputStream extends InputStream {
 
 		int intValue = 0;
 
-		for(int next = 0; next < 4; next++) {
+		for (int next = 0; next < 4; next++) {
 			intValue <<= 6;
 			intValue |= bytes[next];
 		}
