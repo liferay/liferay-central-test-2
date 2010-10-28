@@ -46,28 +46,29 @@ public class ObjectValuePair<K, V> implements Serializable {
 	}
 
 	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-
-		ObjectValuePair<K, V> ovp = (ObjectValuePair<K, V>)obj;
-
-		K key = ovp.getKey();
-
-		if (_key == key || (_key != null && _key.equals(key))) {
+		if (this == obj) {
 			return true;
 		}
-		else {
+
+		if (!(obj instanceof ObjectValuePair<?, ?>)) {
 			return false;
 		}
+
+		ObjectValuePair<K, V> kvp = (ObjectValuePair<K, V>)obj;
+
+		if (Validator.equals(_key, kvp._key)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public int hashCode() {
-		if (_key == null) {
-			return 0;
+		if (_key != null) {
+			return _key.hashCode();
 		}
 		else {
-			return _key.hashCode();
+			return 0;
 		}
 	}
 

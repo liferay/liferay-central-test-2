@@ -51,24 +51,30 @@ public class KeyValuePair implements Comparable<KeyValuePair>, Serializable {
 	}
 
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof KeyValuePair)) {
 			return false;
 		}
 
 		KeyValuePair kvp = (KeyValuePair)obj;
 
-		String key = kvp.getKey();
-
-		if (_key.equals(key)) {
+		if (Validator.equals(_key, kvp._key)) {
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
 	public int hashCode() {
-		return _key.hashCode();
+		if (_key != null) {
+			return _key.hashCode();
+		}
+		else {
+			return 0;
+		}
 	}
 
 	private String _key;
