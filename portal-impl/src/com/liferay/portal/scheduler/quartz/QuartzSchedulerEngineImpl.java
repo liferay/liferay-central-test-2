@@ -96,6 +96,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			JobDataMap jobDataMap = jobDetail.getJobDataMap();
 
 			String description = jobDataMap.getString(DESCRIPTION);
+			String destination = jobDataMap.getString(DESTINATION);
 			Message message = (Message)jobDataMap.get(MESSAGE);
 
 			SchedulerRequest schedulerRequest = null;
@@ -107,7 +108,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			if (trigger == null) {
 				schedulerRequest =
 					SchedulerRequest.createRetrieveResponseRequest(
-						jobName, groupName, description, message);
+						jobName, groupName, description, destination, message);
 			}
 			else {
 				if (CronTrigger.class.isAssignableFrom(trigger.getClass())) {
@@ -119,7 +120,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 								jobName, groupName, cronTrigger.getStartTime(),
 								cronTrigger.getEndTime(),
 								cronTrigger.getCronExpression()),
-							description, message);
+							description, destination, message);
 				}
 				else if (SimpleTrigger.class.isAssignableFrom(
 							trigger.getClass())) {
@@ -134,7 +135,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 								simpleTrigger.getStartTime(),
 								simpleTrigger.getEndTime(),
 								simpleTrigger.getRepeatInterval()),
-							description, message);
+							description, destination, message);
 				}
 			}
 
@@ -303,6 +304,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 
 		try {
+			clearJobs();
 			_scheduler.shutdown(false);
 		}
 		catch (org.quartz.SchedulerException se) {
@@ -317,6 +319,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 		try {
 			_scheduler.start();
+			clearJobs();
 		}
 		catch (org.quartz.SchedulerException se) {
 			throw new SchedulerException("Unable to start scheduler", se);
@@ -382,6 +385,23 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 	}
 
+	protected void clearJobs() throws SchedulerException {
+		try {
+			String[] groups = _scheduler.getJobGroupNames();
+
+			for(String groupName : groups) {
+				String[] jobNames = _scheduler.getJobNames(groupName);
+
+				for (String jobName : jobNames) {
+					_scheduler.deleteJob(jobName, groupName);
+				}
+			}
+		}
+		catch (org.quartz.SchedulerException se) {
+			throw new SchedulerException("Unable to delete jobs", se);
+		}
+	}
+
 	protected ObjectValuePair<TriggerState, Exception> getJobState(
 			String jobFullName)
 		throws SchedulerException {
@@ -406,6 +426,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 		ObjectValuePair<TriggerState, Exception> jobState = getJobState(
 			fullName);
+
+		if (jobState == null) {
+			return;
+		}
 
 		Exception exception = jobState.getValue();
 

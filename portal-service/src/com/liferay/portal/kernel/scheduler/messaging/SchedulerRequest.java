@@ -94,11 +94,13 @@ public class SchedulerRequest implements Serializable {
 	}
 
 	public static SchedulerRequest createRetrieveResponseRequest(
-		String jobName, String groupName, String description, Message message) {
+		String jobName, String groupName, String description,
+		String destination, Message message) {
 
 		SchedulerRequest schedulerRequest = new SchedulerRequest();
 
 		schedulerRequest.setDescription(description);
+		schedulerRequest.setDestination(destination);
 		schedulerRequest.setGroupName(groupName);
 		schedulerRequest.setJobName(jobName);
 		schedulerRequest.setMessage(message);
@@ -107,11 +109,13 @@ public class SchedulerRequest implements Serializable {
 	}
 
 	public static SchedulerRequest createRetrieveResponseRequest(
-		Trigger trigger, String description, Message message) {
+		Trigger trigger, String description, String destination,
+		Message message) {
 
 		SchedulerRequest schedulerRequest = new SchedulerRequest();
 
 		schedulerRequest.setDescription(description);
+		schedulerRequest.setDestination(destination);
 		schedulerRequest.setMessage(message);
 		schedulerRequest.setTrigger(trigger);
 
