@@ -137,16 +137,16 @@ public class ServiceBuilder {
 
 		try {
 			new ServiceBuilder(
-					fileName, hbmFileName, ormFileName, modelHintsFileName,
-					springFileName,	springBaseFileName, springClusterFileName,
-					springDynamicDataSourceFileName, springHibernateFileName,
-					springInfrastructureFileName, springShardDataSourceFileName,
-					apiDir, implDir, jsonFileName, remotingFileName, sqlDir,
-					sqlFileName, sqlIndexesFileName, sqlIndexesPropertiesFileName,
-					sqlSequencesFileName, autoNamespaceTables, beanLocatorUtil,
-					propsUtil, pluginName, testDir);
+				fileName, hbmFileName, ormFileName, modelHintsFileName,
+				springFileName,	springBaseFileName, springClusterFileName,
+				springDynamicDataSourceFileName, springHibernateFileName,
+				springInfrastructureFileName, springShardDataSourceFileName,
+				apiDir, implDir, jsonFileName, remotingFileName, sqlDir,
+				sqlFileName, sqlIndexesFileName, sqlIndexesPropertiesFileName,
+				sqlSequencesFileName, autoNamespaceTables, beanLocatorUtil,
+				propsUtil, pluginName, testDir);
 		}
-		catch(RuntimeException re) {
+		catch (RuntimeException re) {
 			System.out.println(
 				"Please set these required arguments. Sample values are:\n" +
 				"\n" +
