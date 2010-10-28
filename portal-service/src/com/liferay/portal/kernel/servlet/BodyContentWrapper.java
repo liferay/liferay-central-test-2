@@ -152,8 +152,8 @@ public class BodyContentWrapper extends BodyContent {
 		_bodyContent.println(c);
 	}
 
-	public void println(char[] charArray) throws IOException {
-		_bodyContent.println(charArray);
+	public void println(char[] chars) throws IOException {
+		_bodyContent.println(chars);
 	}
 
 	public void println(double d) throws IOException {
@@ -180,14 +180,14 @@ public class BodyContentWrapper extends BodyContent {
 		_bodyContent.println(string);
 	}
 
-	public void write(char[] charArray) throws IOException {
-		_bodyContent.write(charArray);
+	public void write(char[] chars) throws IOException {
+		_bodyContent.write(chars);
 	}
 
-	public void write(char[] charArray, int offset, int length)
+	public void write(char[] chars, int offset, int length)
 		throws IOException {
 
-		_bodyContent.write(charArray, offset, length);
+		_bodyContent.write(chars, offset, length);
 	}
 
 	public void write(int c) throws IOException {

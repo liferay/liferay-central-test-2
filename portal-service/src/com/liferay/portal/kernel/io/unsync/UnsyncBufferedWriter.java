@@ -77,7 +77,7 @@ public class UnsyncBufferedWriter extends Writer {
 		write(_LINE_SEPARATOR);
 	}
 
-	public void write(char[] charArray, int offset, int length)
+	public void write(char[] chars, int offset, int length)
 		throws IOException {
 
 		if (writer == null) {
@@ -91,7 +91,7 @@ public class UnsyncBufferedWriter extends Writer {
 				count = 0;
 			}
 
-			writer.write(charArray, offset, length);
+			writer.write(chars, offset, length);
 
 			return;
 		}
@@ -102,7 +102,7 @@ public class UnsyncBufferedWriter extends Writer {
 			count = 0;
 		}
 
-		System.arraycopy(charArray, offset, buffer, count, length);
+		System.arraycopy(chars, offset, buffer, count, length);
 
 		count += length;
 	}

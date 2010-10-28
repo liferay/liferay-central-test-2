@@ -52,11 +52,9 @@ public class OutputStreamWriter extends Writer {
 		return _charsetName;
 	}
 
-	public void write(char[] charArray, int offset, int length)
-		throws IOException {
-
+	public void write(char[] chars, int offset, int length) throws IOException {
 		ByteBuffer byteBuffer = _charsetEncoder.encode(
-			CharBuffer.wrap(charArray, offset, length));
+			CharBuffer.wrap(chars, offset, length));
 
 		_outputStream.write(byteBuffer.array(), 0, byteBuffer.limit());
 	}

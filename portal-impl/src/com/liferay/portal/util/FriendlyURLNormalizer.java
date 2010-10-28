@@ -40,10 +40,10 @@ public class FriendlyURLNormalizer {
 		friendlyURL = friendlyURL.toLowerCase();
 		friendlyURL = Normalizer.normalizeToAscii(friendlyURL);
 
-		char[] charArray = friendlyURL.toCharArray();
+		char[] chars = friendlyURL.toCharArray();
 
-		for (int i = 0; i < charArray.length; i++) {
-			char oldChar = charArray[i];
+		for (int i = 0; i < chars.length; i++) {
+			char oldChar = chars[i];
 
 			char newChar = oldChar;
 
@@ -55,11 +55,11 @@ public class FriendlyURLNormalizer {
 			}
 
 			if (oldChar != newChar) {
-				charArray[i] = newChar;
+				chars[i] = newChar;
 			}
 		}
 
-		friendlyURL = new String(charArray);
+		friendlyURL = new String(chars);
 
 		while (friendlyURL.contains(StringPool.DASH + StringPool.DASH)) {
 			friendlyURL = StringUtil.replace(

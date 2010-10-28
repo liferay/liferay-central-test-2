@@ -60,11 +60,11 @@ public class UnsyncStringReader extends Reader {
 		return string.charAt(index++);
 	}
 
-	public int read(char[] charArray) throws IOException {
-		return read(charArray, 0, charArray.length);
+	public int read(char[] chars) throws IOException {
+		return read(chars, 0, chars.length);
 	}
 
-	public int read(char[] charArray, int offset, int length)
+	public int read(char[] chars, int offset, int length)
 		throws IOException {
 
 		if (string == null) {
@@ -85,7 +85,7 @@ public class UnsyncStringReader extends Reader {
 			read = stringLength - index;
 		}
 
-		string.getChars(index, index + read, charArray, offset);
+		string.getChars(index, index + read, chars, offset);
 
 		index += read;
 
@@ -95,12 +95,12 @@ public class UnsyncStringReader extends Reader {
 	public int read(CharBuffer charBuffer) throws IOException {
 		int remaining = charBuffer.remaining();
 
-		char[] charArray = new char[remaining];
+		char[] chars = new char[remaining];
 
-		int read = read(charArray, 0, remaining);
+		int read = read(chars, 0, remaining);
 
 		if (read > 0) {
-			charBuffer.put(charArray, 0, read);
+			charBuffer.put(chars, 0, read);
 		}
 
 		return read;

@@ -27,9 +27,9 @@ import java.nio.charset.CodingErrorAction;
 public class CharsetEncoderUtil {
 
 	public static ByteBuffer encode(
-		String charsetName, char[] charArray, int offset, int length) {
+		String charsetName, char[] chars, int offset, int length) {
 
-		return encode(charsetName, CharBuffer.wrap(charArray, offset, length));
+		return encode(charsetName, CharBuffer.wrap(chars, offset, length));
 	}
 
 	public static ByteBuffer encode(String charsetName, CharBuffer charBuffer) {

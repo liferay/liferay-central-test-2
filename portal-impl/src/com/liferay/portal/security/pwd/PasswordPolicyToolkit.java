@@ -218,33 +218,33 @@ public class PasswordPolicyToolkit extends BasicToolkit {
 		return PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_STATIC;
 	}
 
-	protected String getRandomString(int count, char[] charArray) {
+	protected String getRandomString(int count, char[] chars) {
 		StringBundler sb = new StringBundler(count);
 
 		Randomizer randomizer = Randomizer.getInstance();
 
 		for (int i = 0; i < count; i++) {
-			int index = randomizer.nextInt(charArray.length);
+			int index = randomizer.nextInt(chars.length);
 
-			sb.append(charArray[index]);
+			sb.append(chars[index]);
 		}
 
 		return sb.toString();
 	}
 
 	protected char[] getSortedCharArray(String s) {
-		char[] charArray = s.toCharArray();
+		char[] chars = s.toCharArray();
 
-		Arrays.sort(charArray);
+		Arrays.sort(chars);
 
-		return charArray;
+		return chars;
 	}
 
-	protected int getUsageCount(String s, char[] charArray) {
+	protected int getUsageCount(String s, char[] chars) {
 		int count = 0;
 
 		for (int i = 0; i < s.length(); i++) {
-			if (Arrays.binarySearch(charArray, s.charAt(i)) >= 0) {
+			if (Arrays.binarySearch(chars, s.charAt(i)) >= 0) {
 				count++;
 			}
 		}

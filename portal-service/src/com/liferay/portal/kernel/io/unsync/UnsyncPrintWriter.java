@@ -192,8 +192,8 @@ public class UnsyncPrintWriter extends PrintWriter {
 		write(c);
 	}
 
-	public void print(char[] charArray) {
-		write(charArray);
+	public void print(char[] chars) {
+		write(chars);
 	}
 
 	public void print(double d) {
@@ -267,8 +267,8 @@ public class UnsyncPrintWriter extends PrintWriter {
 		println();
 	}
 
-	public void println(char[] charArray) {
-		print(charArray);
+	public void println(char[] chars) {
+		print(chars);
 		println();
 	}
 
@@ -302,17 +302,17 @@ public class UnsyncPrintWriter extends PrintWriter {
 		println();
 	}
 
-	public void write(char[] charArray) {
-		write(charArray, 0, charArray.length);
+	public void write(char[] chars) {
+		write(chars, 0, chars.length);
 	}
 
-	public void write(char[] charArray, int offset, int length) {
+	public void write(char[] chars, int offset, int length) {
 		if (_writer == null) {
 			_hasError = true;
 		}
 		else {
 			try {
-				_writer.write(charArray, offset, length);
+				_writer.write(chars, offset, length);
 			}
 			catch (InterruptedIOException iioe) {
 				Thread currentThread = Thread.currentThread();

@@ -160,7 +160,7 @@ public class UnsyncPrintWriterTest extends TestCase {
 
 		assertEquals("ab", stringWriter.toString());
 
-		// write(char[] charArray)
+		// write(char[] chars)
 
 		unsyncPrintWriter.write(new char[] {'c', 'd'});
 
@@ -170,7 +170,7 @@ public class UnsyncPrintWriterTest extends TestCase {
 
 		assertEquals("abcdef", stringWriter.toString());
 
-		// write(char[] charArray, int offset, int length)
+		// write(char[] chars, int offset, int length)
 
 		unsyncPrintWriter.write(
 			new char[] {'e', 'f', 'g', 'h', 'i', 'j'}, 2, 2);

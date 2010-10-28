@@ -24,15 +24,15 @@ import java.nio.CharBuffer;
  */
 public class UnsyncCharArrayReader extends Reader {
 
-	public UnsyncCharArrayReader(char[] charArray) {
-		buffer = charArray;
-		capacity = charArray.length;
+	public UnsyncCharArrayReader(char[] chars) {
+		buffer = chars;
+		capacity = chars.length;
 		index = 0;
 	}
 
-	public UnsyncCharArrayReader(char[] charArray, int offset, int length) {
-		buffer = charArray;
-		capacity = Math.min(charArray.length, offset + length);
+	public UnsyncCharArrayReader(char[] chars, int offset, int length) {
+		buffer = chars;
+		capacity = Math.min(chars.length, offset + length);
 		index = offset;
 		markIndex = offset;
 	}
@@ -65,11 +65,11 @@ public class UnsyncCharArrayReader extends Reader {
 		}
 	}
 
-	public int read(char[] charArray) throws IOException {
-		return read(charArray, 0, charArray.length);
+	public int read(char[] chars) throws IOException {
+		return read(chars, 0, chars.length);
 	}
 
-	public int read(char[] charArray, int offset, int length)
+	public int read(char[] chars, int offset, int length)
 		throws IOException {
 
 		if (buffer == null) {
@@ -90,7 +90,7 @@ public class UnsyncCharArrayReader extends Reader {
 			read = capacity - index;
 		}
 
-		System.arraycopy(buffer, index, charArray, offset, read);
+		System.arraycopy(buffer, index, chars, offset, read);
 
 		index += read;
 

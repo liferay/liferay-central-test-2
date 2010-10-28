@@ -80,12 +80,12 @@ public class StringBundler {
 		return append(String.valueOf(c));
 	}
 
-	public StringBundler append(char[] charArray) {
-		if (charArray == null) {
+	public StringBundler append(char[] chars) {
+		if (chars == null) {
 			return append("null");
 		}
 		else {
-			return append(new String(charArray));
+			return append(new String(chars));
 		}
 	}
 

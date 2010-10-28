@@ -95,11 +95,11 @@ public class UnsyncCharArrayWriter extends Writer {
 		return new String(buffer, 0, index);
 	}
 
-	public void write(char[] charArray) {
-		write(charArray, 0, charArray.length);
+	public void write(char[] chars) {
+		write(chars, 0, chars.length);
 	}
 
-	public void write(char[] charArray, int offset, int length) {
+	public void write(char[] chars, int offset, int length) {
 		if (length <= 0) {
 			return;
 		}
@@ -116,7 +116,7 @@ public class UnsyncCharArrayWriter extends Writer {
 			buffer = newBuffer;
 		}
 
-		System.arraycopy(charArray, offset, buffer, index, length);
+		System.arraycopy(chars, offset, buffer, index, length);
 
 		index = newIndex;
 	}

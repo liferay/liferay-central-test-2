@@ -70,8 +70,8 @@ public class PipingJspWriter extends JspWriter {
 		_printWriter.print(c);
 	}
 
-	public void print(char[] charArray) {
-		_printWriter.print(charArray);
+	public void print(char[] chars) {
+		_printWriter.print(chars);
 	}
 
 	public void print(double d) {
@@ -110,8 +110,8 @@ public class PipingJspWriter extends JspWriter {
 		_printWriter.println(c);
 	}
 
-	public void println(char[] charArray) {
-		_printWriter.println(charArray);
+	public void println(char[] chars) {
+		_printWriter.println(chars);
 	}
 
 	public void println(double d) {
@@ -138,12 +138,12 @@ public class PipingJspWriter extends JspWriter {
 		_printWriter.println(string);
 	}
 
-	public void write(char[] charArray) {
-		_printWriter.write(charArray);
+	public void write(char[] chars) {
+		_printWriter.write(chars);
 	}
 
-	public void write(char[] charArray, int offset, int length) {
-		_printWriter.write(charArray, offset, length);
+	public void write(char[] chars, int offset, int length) {
+		_printWriter.write(chars, offset, length);
 	}
 
 	public void write(int c) {

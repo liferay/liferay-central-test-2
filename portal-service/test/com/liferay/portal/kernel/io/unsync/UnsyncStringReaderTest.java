@@ -29,18 +29,18 @@ public class UnsyncStringReaderTest extends TestCase {
 		UnsyncStringReader unsyncStringReader = new UnsyncStringReader(
 			"abcdefg");
 
-		char[] charArray = new char[4];
+		char[] chars = new char[4];
 
-		assertEquals(4, unsyncStringReader.read(charArray));
+		assertEquals(4, unsyncStringReader.read(chars));
 		assertEquals(4, unsyncStringReader.index);
-		assertTrue(Arrays.equals("abcd".toCharArray(), charArray));
+		assertTrue(Arrays.equals("abcd".toCharArray(), chars));
 
-		assertEquals(3, unsyncStringReader.read(charArray));
-		assertEquals('e', charArray[0]);
-		assertEquals('f', charArray[1]);
-		assertEquals('g', charArray[2]);
+		assertEquals(3, unsyncStringReader.read(chars));
+		assertEquals('e', chars[0]);
+		assertEquals('f', chars[1]);
+		assertEquals('g', chars[2]);
 
-		assertEquals(-1, unsyncStringReader.read(charArray));
+		assertEquals(-1, unsyncStringReader.read(chars));
 	}
 
 	public void testClose() {

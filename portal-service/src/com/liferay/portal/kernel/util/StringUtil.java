@@ -177,11 +177,11 @@ public class StringUtil {
 
 		StringBuilder sb = new StringBuilder();
 
-		char[] charArray = s.toCharArray();
+		char[] chars = s.toCharArray();
 
-		for (int i = 0; i < charArray.length; i++) {
-			if (Validator.isChar(charArray[i])) {
-				sb.append(charArray[i]);
+		for (int i = 0; i < chars.length; i++) {
+			if (Validator.isChar(chars[i])) {
+				sb.append(chars[i]);
 			}
 		}
 
@@ -195,11 +195,11 @@ public class StringUtil {
 
 		StringBuilder sb = new StringBuilder();
 
-		char[] charArray = s.toCharArray();
+		char[] chars = s.toCharArray();
 
-		for (int i = 0; i < charArray.length; i++) {
-			if (Validator.isDigit(charArray[i])) {
-				sb.append(charArray[i]);
+		for (int i = 0; i < chars.length; i++) {
+			if (Validator.isDigit(chars[i])) {
+				sb.append(chars[i]);
 			}
 		}
 
@@ -706,9 +706,9 @@ public class StringUtil {
 
 		StringBuilder sb = new StringBuilder(s.length() + 5 * newSub.length());
 
-		char[] charArray = s.toCharArray();
+		char[] chars = s.toCharArray();
 
-		for (char c : charArray) {
+		for (char c : chars) {
 			if (c == oldSub) {
 				sb.append(newSub);
 			}
@@ -1011,11 +1011,11 @@ public class StringUtil {
 			return null;
 		}
 
-		char[] charArray = s.toCharArray();
-		char[] reverse = new char[charArray.length];
+		char[] chars = s.toCharArray();
+		char[] reverse = new char[chars.length];
 
-		for (int i = 0; i < charArray.length; i++) {
-			reverse[i] = charArray[charArray.length - i - 1];
+		for (int i = 0; i < chars.length; i++) {
+			reverse[i] = chars[chars.length - i - 1];
 		}
 
 		return new String(reverse);
@@ -1289,13 +1289,13 @@ public class StringUtil {
 			return 0;
 		}
 
-		char[] charArray1 = s1.toCharArray();
-		char[] charArray2 = s2.toCharArray();
+		char[] chars1 = s1.toCharArray();
+		char[] chars2 = s2.toCharArray();
 
 		int i = 0;
 
-		for (; (i < charArray1.length) && (i < charArray2.length); i++) {
-			if (charArray1[i] != charArray2[i]) {
+		for (; (i < chars1.length) && (i < chars2.length); i++) {
+			if (chars1[i] != chars2[i]) {
 				break;
 			}
 		}
@@ -1414,15 +1414,15 @@ public class StringUtil {
 			return null;
 		}
 
-		char[] charArray = s.toCharArray();
+		char[] chars = s.toCharArray();
 
-		int len = charArray.length;
+		int len = chars.length;
 
 		int x = 0;
-		int y = charArray.length;
+		int y = chars.length;
 
 		for (int i = 0; i < len; i++) {
-			char c = charArray[i];
+			char c = chars[i];
 
 			if (_isTrimable(c, exceptions)) {
 				x = i + 1;
@@ -1433,7 +1433,7 @@ public class StringUtil {
 		}
 
 		for (int i = len - 1; i >= 0; i--) {
-			char c = charArray[i];
+			char c = chars[i];
 
 			if (_isTrimable(c, exceptions)) {
 				y = i;
@@ -1464,15 +1464,15 @@ public class StringUtil {
 			return null;
 		}
 
-		char[] charArray = s.toCharArray();
+		char[] chars = s.toCharArray();
 
-		int len = charArray.length;
+		int len = chars.length;
 
 		int x = 0;
-		int y = charArray.length;
+		int y = chars.length;
 
 		for (int i = 0; i < len; i++) {
-			char c = charArray[i];
+			char c = chars[i];
 
 			if (_isTrimable(c, exceptions)) {
 				x = i + 1;
@@ -1503,15 +1503,15 @@ public class StringUtil {
 			return null;
 		}
 
-		char[] charArray = s.toCharArray();
+		char[] chars = s.toCharArray();
 
-		int len = charArray.length;
+		int len = chars.length;
 
 		int x = 0;
-		int y = charArray.length;
+		int y = chars.length;
 
 		for (int i = len - 1; i >= 0; i--) {
-			char c = charArray[i];
+			char c = chars[i];
 
 			if (_isTrimable(c, exceptions)) {
 				y = i;
@@ -1558,13 +1558,13 @@ public class StringUtil {
 	}
 
 	public static String upperCaseFirstLetter(String s) {
-		char[] charArray = s.toCharArray();
+		char[] chars = s.toCharArray();
 
-		if ((charArray[0] >= 97) && (charArray[0] <= 122)) {
-			charArray[0] = (char)(charArray[0] - 32);
+		if ((chars[0] >= 97) && (chars[0] <= 122)) {
+			chars[0] = (char)(chars[0] - 32);
 		}
 
-		return new String(charArray);
+		return new String(chars);
 	}
 
 	public static String valueOf(Object obj) {

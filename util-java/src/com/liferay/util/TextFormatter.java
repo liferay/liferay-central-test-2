@@ -169,19 +169,19 @@ public class TextFormatter {
 			return name;
 		}
 
-		char[] charArray = name.toLowerCase().trim().toCharArray();
+		char[] chars = name.toLowerCase().trim().toCharArray();
 
-		if (charArray.length > 0) {
-			charArray[0] = Character.toUpperCase(charArray[0]);
+		if (chars.length > 0) {
+			chars[0] = Character.toUpperCase(chars[0]);
 		}
 
-		for (int i = 0; i < charArray.length; i++) {
-			if (charArray[i] == ' ') {
-				charArray[i + 1] = Character.toUpperCase(charArray[i + 1]);
+		for (int i = 0; i < chars.length; i++) {
+			if (chars[i] == ' ') {
+				chars[i + 1] = Character.toUpperCase(chars[i + 1]);
 			}
 		}
 
-		return new String(charArray);
+		return new String(chars);
 	}
 
 	public static String formatPlural(String s) {

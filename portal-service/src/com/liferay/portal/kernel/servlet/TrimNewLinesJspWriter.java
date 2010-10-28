@@ -90,8 +90,8 @@ public class TrimNewLinesJspWriter extends JspWriter {
 		}
 	}
 
-	public void print(char[] charArray) {
-		_printWriter.print(charArray);
+	public void print(char[] chars) {
+		_printWriter.print(chars);
 
 		_lastNewLine = false;
 	}
@@ -156,8 +156,8 @@ public class TrimNewLinesJspWriter extends JspWriter {
 		_lastNewLine = true;
 	}
 
-	public void println(char[] charArray) {
-		_printWriter.println(charArray);
+	public void println(char[] chars) {
+		_printWriter.println(chars);
 
 		_lastNewLine = true;
 	}
@@ -202,14 +202,14 @@ public class TrimNewLinesJspWriter extends JspWriter {
 		}
 	}
 
-	public void write(char[] charArray) {
-		_printWriter.write(charArray);
+	public void write(char[] chars) {
+		_printWriter.write(chars);
 
 		_lastNewLine = false;
 	}
 
-	public void write(char[] charArray, int offset, int length) {
-		_printWriter.write(charArray, offset, length);
+	public void write(char[] chars, int offset, int length) {
+		_printWriter.write(chars, offset, length);
 
 		_lastNewLine = false;
 	}

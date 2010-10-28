@@ -39,10 +39,10 @@ public class DummyWriter extends Writer {
 	public void flush() {
 	}
 
-	public void write(char[] charArray) {
+	public void write(char[] chars) {
 	}
 
-	public void write(char[] charArray, int offset, int length) {
+	public void write(char[] chars, int offset, int length) {
 	}
 
 	public void write(int c) {

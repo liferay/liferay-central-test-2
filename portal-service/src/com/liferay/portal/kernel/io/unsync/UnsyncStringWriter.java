@@ -115,21 +115,21 @@ public class UnsyncStringWriter extends Writer {
 		}
 	}
 
-	public void write(char[] charArray, int offset, int length) {
+	public void write(char[] chars, int offset, int length) {
 		if (length <= 0) {
 			return;
 		}
 
 		if (stringBundler != null) {
-			stringBundler.append(new String(charArray, offset, length));
+			stringBundler.append(new String(chars, offset, length));
 		}
 		else {
-			stringBuilder.append(charArray, offset, length);
+			stringBuilder.append(chars, offset, length);
 		}
 	}
 
-	public void write(char[] charArray) {
-		write(charArray, 0, charArray.length);
+	public void write(char[] chars) {
+		write(chars, 0, chars.length);
 
 	}
 

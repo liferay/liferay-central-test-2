@@ -36,7 +36,7 @@ public class IdReplacer {
 			return s;
 		}
 
-		char[] charArray = s.toCharArray();
+		char[] chars = s.toCharArray();
 
 		StringBundler sb = new StringBundler();
 
@@ -44,7 +44,7 @@ public class IdReplacer {
 
 		while (true) {
 			int x = s.indexOf(begin, pos);
-			int y = _getEndPos(charArray, x + begin.length());
+			int y = _getEndPos(chars, x + begin.length());
 
 			if ((x == -1) || (y == -1)) {
 				sb.append(s.substring(pos, s.length()));
@@ -137,13 +137,13 @@ public class IdReplacer {
 		return sb.toString();
 	}
 
-	private static int _getEndPos(char[] charArray, int pos) {
+	private static int _getEndPos(char[] chars, int pos) {
 		while (true) {
-			if (pos >= charArray.length) {
+			if (pos >= chars.length) {
 				break;
 			}
 
-			if (!Character.isDigit(charArray[pos])) {
+			if (!Character.isDigit(chars[pos])) {
 				break;
 			}
 

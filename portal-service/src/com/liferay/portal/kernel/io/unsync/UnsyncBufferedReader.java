@@ -77,11 +77,11 @@ public class UnsyncBufferedReader extends Reader {
 		return buffer[index++];
 	}
 
-	public int read(char[] charArray) throws IOException {
-		return read(charArray, 0, charArray.length);
+	public int read(char[] chars) throws IOException {
+		return read(chars, 0, chars.length);
 	}
 
-	public int read(char[] charArray, int offset, int length)
+	public int read(char[] chars, int offset, int length)
 		throws IOException {
 
 		if (reader == null) {
@@ -103,7 +103,7 @@ public class UnsyncBufferedReader extends Reader {
 
 				int leftSize = length - read;
 
-				System.arraycopy(buffer, index, charArray, read, leftSize);
+				System.arraycopy(buffer, index, chars, read, leftSize);
 
 				index += leftSize;
 
@@ -134,7 +134,7 @@ public class UnsyncBufferedReader extends Reader {
 
 				// Copy all in-memory data, continue reading
 
-				System.arraycopy(buffer, index, charArray, read, available);
+				System.arraycopy(buffer, index, chars, read, available);
 
 				index += available;
 				read += available;

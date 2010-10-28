@@ -44,28 +44,28 @@ public class Scrambler {
 		return _words.toArray(new String[_words.size()]);
 	}
 
-	private void _rotate(char[] charArray, int start) {
-		char temp = charArray[start];
+	private void _rotate(char[] chars, int start) {
+		char temp = chars[start];
 
-		for (int i = charArray.length - start -1; i > 0; i--) {
-			charArray[start] = charArray[++start];
+		for (int i = chars.length - start -1; i > 0; i--) {
+			chars[start] = chars[++start];
 		}
 
-		charArray[start] = temp;
+		chars[start] = temp;
 	}
 
-	private void _scramble(int start, int length, char[] charArray) {
+	private void _scramble(int start, int length, char[] chars) {
 		if (length == 0) {
-			String word = new String(charArray);
+			String word = new String(chars);
 
-			for (int i = 3; i <= charArray.length; i++) {
+			for (int i = 3; i <= chars.length; i++) {
 				_words.add(word.substring(0, i));
 			}
 		}
 		else {
 			for (int i = 0; i < length; i++) {
-				_scramble(start + 1, length - 1, charArray);
-				_rotate(charArray, start);
+				_scramble(start + 1, length - 1, chars);
+				_rotate(chars, start);
 			}
 		}
 	}
