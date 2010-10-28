@@ -74,7 +74,7 @@ import org.apache.commons.httpclient.methods.PutMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.params.HttpClientParams;
-import org.apache.commons.httpclient.params.HttpConnectionParams;
+import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
 
 /**
  * @author Brian Wing Shun Chan
@@ -104,15 +104,15 @@ public class HttpImpl implements Http {
 		MultiThreadedHttpConnectionManager httpConnectionManager =
 			new MultiThreadedHttpConnectionManager();
 
-		HttpConnectionParams httpConnectionParams =
+		HttpConnectionManagerParams httpConnectionManagerParams =
 			httpConnectionManager.getParams();
 
-		httpConnectionParams.setParameter(
-			"maxConnectionsPerHost", new Integer(_MAX_CONNECTIONS_PER_HOST));
-		httpConnectionParams.setParameter(
-			"maxTotalConnections", new Integer(_MAX_TOTAL_CONNECTIONS));
-		httpConnectionParams.setConnectionTimeout(_TIMEOUT);
-		httpConnectionParams.setSoTimeout(_TIMEOUT);
+		httpConnectionManagerParams.setSoTimeout(_TIMEOUT);
+		httpConnectionManagerParams.setDefaultMaxConnectionsPerHost(
+			new Integer(_MAX_CONNECTIONS_PER_HOST));
+		httpConnectionManagerParams.setMaxTotalConnections(
+			new Integer(_MAX_TOTAL_CONNECTIONS));
+		httpConnectionManagerParams.setConnectionTimeout(_TIMEOUT);
 
 		_httpClient.setHttpConnectionManager(httpConnectionManager);
 		_proxyHttpClient.setHttpConnectionManager(httpConnectionManager);
