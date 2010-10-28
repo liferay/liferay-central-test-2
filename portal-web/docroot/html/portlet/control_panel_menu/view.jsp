@@ -277,7 +277,7 @@
 	</liferay-ui:panel-container>
 </div>
 
-<aui:script use="lfr-panel-floating">
+<aui:script use="liferay-panel-floating">
 	var groupSelectorPanel = Liferay.Panel.get('groupSelectorPanel');
 
 	if (groupSelectorPanel) {
