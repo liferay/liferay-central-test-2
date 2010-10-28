@@ -107,12 +107,12 @@ public class HttpImpl implements Http {
 		HttpConnectionManagerParams httpConnectionManagerParams =
 			httpConnectionManager.getParams();
 
-		httpConnectionManagerParams.setSoTimeout(_TIMEOUT);
+		httpConnectionManagerParams.setConnectionTimeout(_TIMEOUT);
 		httpConnectionManagerParams.setDefaultMaxConnectionsPerHost(
 			new Integer(_MAX_CONNECTIONS_PER_HOST));
 		httpConnectionManagerParams.setMaxTotalConnections(
 			new Integer(_MAX_TOTAL_CONNECTIONS));
-		httpConnectionManagerParams.setConnectionTimeout(_TIMEOUT);
+		httpConnectionManagerParams.setSoTimeout(_TIMEOUT);
 
 		_httpClient.setHttpConnectionManager(httpConnectionManager);
 		_proxyHttpClient.setHttpConnectionManager(httpConnectionManager);
