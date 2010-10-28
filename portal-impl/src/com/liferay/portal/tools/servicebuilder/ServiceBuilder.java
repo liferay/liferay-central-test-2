@@ -1113,38 +1113,38 @@ public class ServiceBuilder {
 		String name = type.getValue();
 
 		if (dimensions > 0) {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			for (int i = 0; i < dimensions; i++) {
 				sb.append("[");
 			}
 
 			if (name.equals("boolean")) {
-				return sb.toString() + "Z";
+				return sb.append("Z").toString();
 			}
 			else if (name.equals("byte")) {
-				return sb.toString() + "B";
+				return sb.append("B").toString();
 			}
 			else if (name.equals("char")) {
-				return sb.toString() + "C";
+				return sb.append("C").toString();
 			}
 			else if (name.equals("double")) {
-				return sb.toString() + "D";
+				return sb.append("D").toString();
 			}
 			else if (name.equals("float")) {
-				return sb.toString() + "F";
+				return sb.append("F").toString();
 			}
 			else if (name.equals("int")) {
-				return sb.toString() + "I";
+				return sb.append("I").toString();
 			}
 			else if (name.equals("long")) {
-				return sb.toString() + "J";
+				return sb.append("J").toString();
 			}
 			else if (name.equals("short")) {
-				return sb.toString() + "S";
+				return sb.append("S").toString();
 			}
 			else {
-				return sb.toString() + "L" + name + ";";
+				return sb.append("L").append(name).append(";").toString();
 			}
 		}
 
@@ -1440,7 +1440,7 @@ public class ServiceBuilder {
 	}
 
 	public String getTypeGenericsName(Type type) {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		sb.append(type.getValue());
 
@@ -1722,7 +1722,7 @@ public class ServiceBuilder {
 	public boolean isDuplicateMethod(
 		JavaMethod method, Map<String, Object> tempMap) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		sb.append("isDuplicateMethod ");
 		sb.append(getTypeGenericsName(method.getReturns()));
@@ -2202,7 +2202,7 @@ public class ServiceBuilder {
 			}
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		if (_ejbList.size() > 0) {
 			sb.append(_processTemplate(_tplJsonJs));
@@ -2748,7 +2748,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createRemotingXml() throws Exception {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		Document doc = SAXReaderUtil.read(new File(_springFileName));
 
@@ -3445,7 +3445,7 @@ public class ServiceBuilder {
 				EntityFinder finder = finderList.get(j);
 
 				if (finder.isDBIndex()) {
-					StringBuilder sb = new StringBuilder();
+					StringBundler sb = new StringBundler();
 
 					sb.append(entity.getTable() + " (");
 
@@ -3470,7 +3470,7 @@ public class ServiceBuilder {
 
 					String indexName = "IX_" + indexHash;
 
-					sb = new StringBuilder();
+					sb.setIndex(0);
 
 					sb.append("create ");
 
@@ -3500,7 +3500,7 @@ public class ServiceBuilder {
 			_getCreateMappingTableIndex(entityMapping, indexSQLs, indexProps);
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		Iterator<String> itr = indexSQLs.values().iterator();
 
@@ -3534,7 +3534,7 @@ public class ServiceBuilder {
 
 		// indexes.properties
 
-		sb = new StringBuilder();
+		sb.setIndex(0);
 
 		itr = indexProps.keySet().iterator();
 
@@ -3592,7 +3592,7 @@ public class ServiceBuilder {
 			}
 		}
 		else if (addMissingTables) {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(new UnsyncStringReader(content));
@@ -3671,7 +3671,7 @@ public class ServiceBuilder {
 				EntityColumn column = columnList.get(j);
 
 				if ("sequence".equals(column.getIdType())) {
-					StringBuilder sb = new StringBuilder();
+					StringBundler sb = new StringBundler();
 
 					String sequenceName = column.getIdParam();
 
@@ -3690,7 +3690,7 @@ public class ServiceBuilder {
 			}
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		Iterator<String> itr = sequenceSQLs.iterator();
 
@@ -3785,7 +3785,7 @@ public class ServiceBuilder {
 			}
 		}
 		else if (addMissingTables) {
-			StringBuilder sb = new StringBuilder();
+			StringBundler sb = new StringBundler();
 
 			UnsyncBufferedReader unsyncBufferedReader =
 				new UnsyncBufferedReader(new UnsyncStringReader(content));
@@ -3822,7 +3822,7 @@ public class ServiceBuilder {
 	}
 
 	private String _fixHbmXml(String content) throws IOException {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(content));
@@ -3868,7 +3868,7 @@ public class ServiceBuilder {
 	private String _formatComment(
 		String comment, DocletTag[] tags, String indentation) {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		if (Validator.isNull(comment) && (tags.length <= 0)) {
 			return sb.toString();
@@ -4011,9 +4011,11 @@ public class ServiceBuilder {
 
 				String indexName = "IX_" + indexHash;
 
-				StringBuilder sb = new StringBuilder();
+				StringBundler sb = new StringBundler();
 
-				sb.append("create index " + indexName + " on ");
+				sb.append("create index ");
+				sb.append(indexName);
+				sb.append(" on ");
 				sb.append(indexSpec);
 
 				indexSQLs.put(indexSpec, sb.toString());
@@ -4039,9 +4041,11 @@ public class ServiceBuilder {
 			}
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
-		sb.append(_SQL_CREATE_TABLE + entityMapping.getTable() + " (\n");
+		sb.append(_SQL_CREATE_TABLE);
+		sb.append(entityMapping.getTable());
+		sb.append(" (\n");
 
 		for (Entity entity : entities) {
 			List<EntityColumn> pkList = entity.getPKList();
@@ -4146,9 +4150,11 @@ public class ServiceBuilder {
 			return null;
 		}
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
-		sb.append(_SQL_CREATE_TABLE + entity.getTable() + " (\n");
+		sb.append(_SQL_CREATE_TABLE);
+		sb.append(entity.getTable());
+		sb.append(" (\n");
 
 		for (int i = 0; i < regularColList.size(); i++) {
 			EntityColumn col = regularColList.get(i);
@@ -4431,8 +4437,7 @@ public class ServiceBuilder {
 	private String _processTemplate(String name, Map<String, Object> context)
 		throws Exception {
 
-		return StringUtil.replace(
-			FreeMarkerUtil.process(name, context), '\r', "");
+		return StringUtil.strip(FreeMarkerUtil.process(name, context), '\r');
 	}
 
 	private Set<String> _readLines(String fileName) throws Exception {
