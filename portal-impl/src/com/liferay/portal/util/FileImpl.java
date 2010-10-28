@@ -533,39 +533,38 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		return ascii;
 	}
 
-	public boolean isSameContent(File file, String content) {
-		ByteBuffer byteContent = CharsetEncoderUtil.encode(
-			StringPool.UTF8, content);
-		return isSameContent(file, byteContent.array(), byteContent.limit());
-	}
-
-	public boolean isSameContent(File file, byte[] content, int length) {
+	public boolean isSameContent(File file, byte[] bytes, int length) {
 		FileChannel fileChannel = null;
 
 		try {
 			FileInputStream fileInputStream = new FileInputStream(file);
 
 			fileChannel = fileInputStream.getChannel();
+
 			if (fileChannel.size() != length) {
 				return false;
 			}
 
-			byte[] readBuffer = new byte[1024];
-			ByteBuffer byteBuffer = ByteBuffer.wrap(readBuffer);
+			byte[] buffer = new byte[1024];
 
-			int index = 0;
-			int len = -1;
-			while (((len = fileChannel.read(byteBuffer)) > 0) &&
-				(index < length)) {
-				for (int i = 0; i < len; i++) {
-					if (readBuffer[i] != content[index++]) {
+			ByteBuffer byteBuffer = ByteBuffer.wrap(buffer);
+
+			int bufferIndex = 0;
+			int bufferLength = -1;
+
+			while (((bufferLength = fileChannel.read(byteBuffer)) > 0) &&
+				   (bufferIndex < length)) {
+
+				for (int i = 0; i < bufferLength; i++) {
+					if (buffer[i] != bytes[bufferIndex++]) {
 						return false;
 					}
 				}
+
 				byteBuffer.clear();
 			}
 
-			if ((index != length) || (len != -1)) {
+			if ((bufferIndex != length) || (bufferLength != -1)) {
 				return false;
 			}
 			else {
@@ -580,10 +579,16 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 				try {
 					fileChannel.close();
 				}
-				catch (IOException ex) {
+				catch (IOException ioe) {
 				}
 			}
 		}
+	}
+
+	public boolean isSameContent(File file, String s) {
+		ByteBuffer byteBuffer = CharsetEncoderUtil.encode(StringPool.UTF8, s);
+
+		return isSameContent(file, byteBuffer.array(), byteBuffer.limit());
 	}
 
 	public String[] listDirs(String fileName) {

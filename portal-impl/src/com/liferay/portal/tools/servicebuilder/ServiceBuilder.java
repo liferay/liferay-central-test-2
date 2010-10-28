@@ -364,7 +364,7 @@ public class ServiceBuilder {
 
 		// Write file if and only if the file has changed
 
-		if ((!file.exists()) || !(FileUtil.isSameContent(file, newContent))) {
+		if (!file.exists() || !FileUtil.isSameContent(file, newContent)) {
 			FileUtil.write(file, newContent);
 
 			System.out.println("Writing " + file);

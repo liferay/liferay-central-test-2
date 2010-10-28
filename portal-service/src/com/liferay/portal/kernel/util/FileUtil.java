@@ -162,12 +162,12 @@ public class FileUtil {
 		return getFile().isAscii(file);
 	}
 
-	public static boolean isSameContent(File file, String content) {
-		return getFile().isSameContent(file, content);
+	public static boolean isSameContent(File file, byte[] bytes, int length) {
+		return getFile().isSameContent(file, bytes, length);
 	}
 
-	public static boolean isSameContent(File file, byte[] content, int length) {
-		return getFile().isSameContent(file, content, length);
+	public static boolean isSameContent(File file, String s) {
+		return getFile().isSameContent(file, s);
 	}
 
 	public static String[] listDirs(String fileName) {
