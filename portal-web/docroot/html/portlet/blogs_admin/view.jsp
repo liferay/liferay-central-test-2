@@ -20,9 +20,15 @@
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/blogs_admin/view");
+
+PortletURL searchURL = renderResponse.createRenderURL();
+
+searchURL.setParameter("struts_action", "/blogs_admin/search");
+
+pageContext.setAttribute("portletURL", portletURL);
 %>
 
-<aui:form action="<%= portletURL.toString() %>" method="get" name="fm">
+<aui:form action="<%= searchURL.toString() %>" method="get" name="fm">
 	<liferay-portlet:renderURLParams varImpl="portletURL" />
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
@@ -34,11 +40,19 @@ portletURL.setParameter("struts_action", "/blogs_admin/view");
 
 	<liferay-ui:search-container
 		rowChecker="<%= new RowChecker(renderResponse) %>"
-		headerNames="title,author,createDate,status"
-		emptyResultsMessage="no-entries-were-found"
+		searchContainer="<%= new EntrySearch(renderRequest, portletURL) %>"
 	>
+		<%
+		EntryDisplayTerms displayTerms = (EntryDisplayTerms)searchContainer.getDisplayTerms();
+		EntrySearchTerms searchTerms = (EntrySearchTerms)searchContainer.getSearchTerms();
+		%>
+		
+		<liferay-ui:search-form
+			page="/html/portlet/blogs_admin/entry_search.jsp"
+		/>
+
 		<liferay-ui:search-container-results>
-			<%@ include file="/html/portlet/blogs_admin/entry_search_results_database.jspf" %>
+			<%@ include file="/html/portlet/blogs_admin/entry_search_results.jspf" %>
 		</liferay-ui:search-container-results>
 
 		<liferay-ui:search-container-row

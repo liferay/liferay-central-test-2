@@ -14,10 +14,12 @@
  */
 --%>
 
-<%	
-results = BlogsEntryLocalServiceUtil.getGroupEntries(scopeGroupId, WorkflowConstants.STATUS_ANY, searchContainer.getStart(), searchContainer.getEnd());
-total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId, WorkflowConstants.STATUS_ANY);
-	
-pageContext.setAttribute("results", results);
-pageContext.setAttribute("total", total);
-%>
+<%@ include file="/html/portlet/blogs_admin/init.jsp" %>
+
+<span class="aui-search-bar">
+	<aui:input inlineField="<%= true %>" label="" name="keywords" size="30" title="search-entries" type="text" />
+
+	<aui:button type="submit" value="search" />
+</span>
+
+<br /><br />

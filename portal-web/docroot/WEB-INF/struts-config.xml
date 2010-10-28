@@ -298,6 +298,8 @@
 			<forward name="portlet.message_boards.error" path="portlet.blogs.error" />
 		</action>
 
+		<action path="/blogs_admin/search" forward="portlet.blogs.search" />
+
 		<action path="/blogs_admin/view" forward="portlet.blogs_admin.view" />
 
 		<action path="/blogs_admin/view_entry" type="com.liferay.portlet.blogs.action.EditEntryAction">
