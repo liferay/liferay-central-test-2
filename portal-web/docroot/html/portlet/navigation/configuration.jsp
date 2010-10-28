@@ -20,6 +20,7 @@
 String redirect = ParamUtil.getString(request, "redirect");
 
 String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSetting("bullet-style-options"));
+String[] displayStyleOptions = PropsUtil.getArray("navigation.display.style.options");
 %>
 
 <liferay-portlet:preview
@@ -35,29 +36,32 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-	<aui:fieldset>
+	<aui:fieldset column="<%= true %>">
 		<aui:select name="displayStyle">
-
-			<%
-			for (int i = 1; i <= 6; i++) {
-			%>
-
-				<aui:option label="<%= i %>" selected="<%= displayStyle.equals(String.valueOf(i)) %>" />
-
-			<%
-			}
-			%>
-
 			<aui:option label="custom" selected='<%= displayStyle.equals("[custom]") %>' value="[custom]" />
+
+			<optgroup label='<liferay-ui:message key="predefined" />'>
+
+				<%
+				for (String currentDisplayStyle: displayStyleOptions) {
+				%>
+
+					<aui:option label="<%= currentDisplayStyle %>" selected="<%= displayStyle.equals(currentDisplayStyle) %>" />
+
+				<%
+				}
+				%>
+
+			</optgroup>
 		</aui:select>
 
 		<aui:select name="bulletStyle">
 
 			<%
-			for (int i = 0; i < bulletStyleOptions.length; i++) {
+			for (String currentBulletStyle : bulletStyleOptions) {
 			%>
 
-				<aui:option label="<%= LanguageUtil.get(pageContext, bulletStyleOptions[i]) %>" selected="<%= bulletStyleOptions[i].equals(bulletStyle) %>" />
+				<aui:option label="<%= LanguageUtil.get(pageContext, currentBulletStyle) %>" selected="<%= currentBulletStyle.equals(bulletStyle) %>" />
 
 			<%
 			}
@@ -69,7 +73,7 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 		</aui:select>
 	</aui:fieldset>
 
-	<aui:fieldset>
+	<aui:fieldset column="<%= true %>">
 		<div id="<portlet:namespace />customDisplayOptions">
 			<aui:select label="header" name="headerType">
 				<aui:option label="none" selected='<%= headerType.equals("none") %>' />

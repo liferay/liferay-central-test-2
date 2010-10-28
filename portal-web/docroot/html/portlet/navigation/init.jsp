@@ -26,7 +26,7 @@ if (Validator.isNotNull(portletResource)) {
 }
 
 String bulletStyle = GetterUtil.getString(preferences.getValue("bullet-style", null), "dots");
-String displayStyle = GetterUtil.getString(preferences.getValue("display-style", null), "1");
+String displayStyle = GetterUtil.getString(preferences.getValue("display-style", null), "relative-with-breadcrumb");
 
 String headerType = GetterUtil.getString(preferences.getValue("header-type", null), "root-layout");
 
