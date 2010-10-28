@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.messaging.Destination;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.InvokerMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper;
@@ -84,15 +85,11 @@ public class SchedulerEngineUtil {
 	}
 
 	public static void shutdown() throws SchedulerException {
-		unschedule();
-
 		_instance._shutdown();
 	}
 
 	public static void start() throws SchedulerException {
 		_instance._start();
-
-		unschedule();
 	}
 
 	public static void suppressError(String jobName, String groupName)
@@ -102,26 +99,7 @@ public class SchedulerEngineUtil {
 	}
 
 	public static void unschedule() throws SchedulerException {
-		List<SchedulerRequest> scheduledJobs = getScheduledJobs();
-
-		for (SchedulerRequest scheduledJob : scheduledJobs) {
-			String destinationName = scheduledJob.getDestination();
-
-			if (destinationName.equals(DestinationNames.SCHEDULER_DISPATCH)) {
-				String messageListenerUUID =
-					(String)scheduledJob.getMessage().get(
-						SchedulerEngine.MESSAGE_LISTENER_UUID);
-
-				_instance._unregisterMessageListener(messageListenerUUID);
-			}
-
-			Trigger trigger = scheduledJob.getTrigger();
-
-			if (trigger != null) {
-				_instance._unschedule(
-						trigger.getJobName(), trigger.getGroupName());
-			}
-		}
+		_instance._unschedule();
 	}
 
 	public static void unschedule(SchedulerEntry schedulerEntry)
@@ -140,8 +118,7 @@ public class SchedulerEngineUtil {
 			String jobName, String groupName, String messageListenerUUID)
 		throws SchedulerException {
 
-		_instance._unregisterMessageListener(messageListenerUUID);
-		_instance._unschedule(jobName, groupName);
+		_instance._unschedule(jobName, groupName, messageListenerUUID);
 	}
 
 	/**
@@ -245,11 +222,15 @@ public class SchedulerEngineUtil {
 	}
 
 	private void _shutdown() throws SchedulerException {
+		_unschedule();
+
 		_schedulerEngine.shutdown();
 	}
 
 	private void _start() throws SchedulerException {
 		_schedulerEngine.start();
+
+		_unschedule();
 	}
 
 	private void _suppressError(String jobName, String groupName)
@@ -258,16 +239,14 @@ public class SchedulerEngineUtil {
 		_schedulerEngine.suppressError(jobName, groupName);
 	}
 
-	private void _unregisterMessageListener(String messageListenerUUID)
-		throws SchedulerException {
+	private void _unregisterMessageListener(String messageListenerUUID) {
+		MessageBus messageBus = MessageBusUtil.getMessageBus();
 
-		Destination destination = MessageBusUtil.getMessageBus().getDestination(
+		Destination destination = messageBus.getDestination(
 			DestinationNames.SCHEDULER_DISPATCH);
 
 		Set<MessageListener> messageListeners =
 			destination.getMessageListeners();
-
-		MessageListener targetMessageListener = null;
 
 		for (MessageListener messageListener : messageListeners) {
 			InvokerMessageListener invokerMessageListener =
@@ -275,20 +254,40 @@ public class SchedulerEngineUtil {
 
 			SchedulerEventMessageListenerWrapper schedulerMessageListener =
 				(SchedulerEventMessageListenerWrapper)
-				invokerMessageListener.getMessageListener();
+					invokerMessageListener.getMessageListener();
 
-			String uuid = schedulerMessageListener.getMessageListenerUUID();
+			if (messageListenerUUID.equals(
+					schedulerMessageListener.getMessageListenerUUID())) {
 
-			if (uuid.equals(messageListenerUUID)) {
-				targetMessageListener = schedulerMessageListener;
+				MessageBusUtil.unregisterMessageListener(
+					DestinationNames.SCHEDULER_DISPATCH,
+					schedulerMessageListener);
 
-				break;
+				return;
 			}
 		}
+	}
 
-		if (targetMessageListener != null) {
-			MessageBusUtil.unregisterMessageListener(
-				DestinationNames.SCHEDULER_DISPATCH, targetMessageListener);
+	private void _unschedule() throws SchedulerException {
+		List<SchedulerRequest> scheduledRequests = getScheduledJobs();
+
+		for (SchedulerRequest scheduledRequest : scheduledRequests) {
+			String destinationName = scheduledRequest.getDestinationName();
+
+			if (destinationName.equals(DestinationNames.SCHEDULER_DISPATCH)) {
+				Message message = scheduledRequest.getMessage();
+
+				String messageListenerUUID = (String)message.get(
+					SchedulerEngine.MESSAGE_LISTENER_UUID);
+
+				_unregisterMessageListener(messageListenerUUID);
+			}
+
+			Trigger trigger = scheduledRequest.getTrigger();
+
+			if (trigger != null) {
+				_unschedule(trigger.getJobName(), trigger.getGroupName());
+			}
 		}
 	}
 
@@ -310,6 +309,14 @@ public class SchedulerEngineUtil {
 		throws SchedulerException {
 
 		_schedulerEngine.unschedule(jobName, groupName);
+	}
+
+	private void _unschedule(
+			String jobName, String groupName, String messageListenerUUID)
+		throws SchedulerException {
+
+		_unregisterMessageListener(messageListenerUUID);
+		_unschedule(jobName, groupName);
 	}
 
 	/**

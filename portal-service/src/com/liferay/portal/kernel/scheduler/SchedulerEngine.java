@@ -31,7 +31,7 @@ public interface SchedulerEngine {
 
 	public static final int DESCRIPTION_MAX_LENGTH = 120;
 
-	public static final String DESTINATION = "destination";
+	public static final String DESTINATION_NAME = "destinationName";
 
 	public static final String DISABLE = "disable";
 

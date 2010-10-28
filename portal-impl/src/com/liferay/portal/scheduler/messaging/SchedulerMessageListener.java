@@ -71,7 +71,7 @@ public class SchedulerMessageListener implements MessageListener {
 			_schedulerEngine.schedule(
 				schedulerRequest.getTrigger(),
 				schedulerRequest.getDescription(),
-				schedulerRequest.getDestination(),
+				schedulerRequest.getDestinationName(),
 				schedulerRequest.getMessage());
 		}
 		else if (command.equals(SchedulerRequest.COMMAND_RETRIEVE)) {

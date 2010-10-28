@@ -39,14 +39,14 @@ public class SchedulerRequest implements Serializable {
 	public static final String COMMAND_UNREGISTER = "UNREGISTER";
 
 	public static SchedulerRequest createRegisterRequest(
-		Trigger trigger, String description, String destination,
+		Trigger trigger, String description, String destinationName,
 		Message message) {
 
 		SchedulerRequest schedulerRequest = new SchedulerRequest();
 
 		schedulerRequest.setCommand(COMMAND_REGISTER);
 		schedulerRequest.setDescription(description);
-		schedulerRequest.setDestination(destination);
+		schedulerRequest.setDestinationName(destinationName);
 		schedulerRequest.setMessage(message);
 		schedulerRequest.setTrigger(trigger);
 
@@ -95,12 +95,12 @@ public class SchedulerRequest implements Serializable {
 
 	public static SchedulerRequest createRetrieveResponseRequest(
 		String jobName, String groupName, String description,
-		String destination, Message message) {
+		String destinationName, Message message) {
 
 		SchedulerRequest schedulerRequest = new SchedulerRequest();
 
 		schedulerRequest.setDescription(description);
-		schedulerRequest.setDestination(destination);
+		schedulerRequest.setDestinationName(destinationName);
 		schedulerRequest.setGroupName(groupName);
 		schedulerRequest.setJobName(jobName);
 		schedulerRequest.setMessage(message);
@@ -109,13 +109,13 @@ public class SchedulerRequest implements Serializable {
 	}
 
 	public static SchedulerRequest createRetrieveResponseRequest(
-		Trigger trigger, String description, String destination,
+		Trigger trigger, String description, String destinationName,
 		Message message) {
 
 		SchedulerRequest schedulerRequest = new SchedulerRequest();
 
 		schedulerRequest.setDescription(description);
-		schedulerRequest.setDestination(destination);
+		schedulerRequest.setDestinationName(destinationName);
 		schedulerRequest.setMessage(message);
 		schedulerRequest.setTrigger(trigger);
 
@@ -178,8 +178,8 @@ public class SchedulerRequest implements Serializable {
 		return _description;
 	}
 
-	public String getDestination() {
-		return _destination;
+	public String getDestinationName() {
+		return _destinationName;
 	}
 
 	public String getGroupName() {
@@ -206,8 +206,8 @@ public class SchedulerRequest implements Serializable {
 		_description = description;
 	}
 
-	public void setDestination(String destination) {
-		_destination = destination;
+	public void setDestinationName(String destinationName) {
+		_destinationName = destinationName;
 	}
 
 	public void setGroupName(String groupName) {
@@ -231,7 +231,7 @@ public class SchedulerRequest implements Serializable {
 
 	private String _command;
 	private String _description;
-	private String _destination;
+	private String _destinationName;
 	private String _groupName;
 	private String _jobName;
 	private Message _message;
