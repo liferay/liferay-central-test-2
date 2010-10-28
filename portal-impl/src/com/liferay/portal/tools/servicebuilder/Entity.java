@@ -38,9 +38,9 @@ public class Entity {
 	public static EntityColumn getColumn(
 		String name, List<EntityColumn> columnList) {
 
-		for (EntityColumn entityColumn : columnList) {
-			if (entityColumn.getName().equals(name)) {
-				return entityColumn;
+		for (EntityColumn col : columnList) {
+			if (name.equals(col.getName())) {
+				return col;
 			}
 		}
 
