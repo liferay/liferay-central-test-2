@@ -21,19 +21,19 @@ if (Validator.isNull(searchTerms.getKeywords())) {
 }
 else {
 	Indexer indexer = IndexerRegistryUtil.getIndexer(BlogsEntry.class);
+
 	SearchContext searchContext = SearchContextFactory.getInstance(request);
 
 	searchContext.setEnd(searchContainer.getEnd());
 	searchContext.setKeywords(searchTerms.getKeywords());
 	searchContext.setStart(searchContainer.getStart());
 
-	Hits indexResults = indexer.search(searchContext);
-	total = indexResults.getLength();
+	Hits hits = indexer.search(searchContext);
 
-	for (int i = 0; i < indexResults.getDocs().length; i++) {
-		Document doc = indexResults.doc(i);
+	total = hits.getLength();
 
-		// Entry
+	for (int i = 0; i < hits.getDocs().length; i++) {
+		Document doc = hits.doc(i);
 
 		long entryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 

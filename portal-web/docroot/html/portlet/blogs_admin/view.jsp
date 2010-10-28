@@ -20,13 +20,11 @@
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/blogs_admin/view");
-
-PortletURL searchURL = renderResponse.createRenderURL();
-
-searchURL.setParameter("struts_action", "/blogs_admin/search");
-
-pageContext.setAttribute("portletURL", portletURL);
 %>
+
+<liferay-portlet:renderURL varImpl="searchURL">
+	<portlet:param name="struts_action" value="/blogs_admin/search" />
+</liferay-portlet:renderURL>
 
 <aui:form action="<%= searchURL.toString() %>" method="get" name="fm">
 	<liferay-portlet:renderURLParams varImpl="portletURL" />
