@@ -17,7 +17,7 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String bulletStyle = (String)request.getAttribute("liferay-ui:navigation:bulletStyle");
+String bulletStyle = ((String)request.getAttribute("liferay-ui:navigation:bulletStyle")).toLowerCase();
 String displayStyle = (String)request.getAttribute("liferay-ui:navigation:displayStyle");
 
 String headerType = null;
@@ -27,8 +27,6 @@ String includedLayouts = null;
 boolean nestedChildren = true;
 
 String[] displayStyleDefinition = _getDisplayStyleDefinition(displayStyle);
-
-bulletStyle = bulletStyle.toLowerCase();
 
 if ((displayStyleDefinition != null) && (displayStyleDefinition.length != 0)) {
 	headerType = displayStyleDefinition[0];
