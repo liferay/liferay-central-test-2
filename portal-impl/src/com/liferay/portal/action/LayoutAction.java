@@ -502,7 +502,7 @@ public class LayoutAction extends Action {
 			javax.xml.namespace.QName qName = event.getQName();
 
 			for (LayoutTypePortlet layoutTypePortlet : layoutTypePortlets) {
-				List<Portlet> portlets = layoutTypePortlet.getPortlets();
+				List<Portlet> portlets = layoutTypePortlet.getAllPortlets();
 
 				for (Portlet portlet : portlets) {
 					QName processingQName = portlet.getProcessingEvent(
