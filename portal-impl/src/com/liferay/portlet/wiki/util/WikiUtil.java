@@ -301,7 +301,7 @@ public class WikiUtil {
 			preferences.getValue("hidden-nodes", StringPool.BLANK));
 		Arrays.sort(hiddenNodes);
 
-		for(WikiNode node : nodes) {
+		for (WikiNode node : nodes) {
 			if ((Arrays.binarySearch(hiddenNodes, node.getName()) < 0) &&
 				(WikiNodePermission.contains(permissionChecker, node,
 					ActionKeys.VIEW))) {
