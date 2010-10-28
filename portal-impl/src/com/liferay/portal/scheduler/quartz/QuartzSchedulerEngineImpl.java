@@ -78,25 +78,6 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 	}
 
-	public List<SchedulerRequest> getAllScheduledJobs()
-		throws SchedulerException {
-
-		try {
-			String[] groups = _scheduler.getJobGroupNames();
-
-			List<SchedulerRequest> requests = new ArrayList<SchedulerRequest>();
-
-			for (String groupName : groups) {
-				requests.addAll(getScheduledJobs(groupName));
-			}
-
-			return requests;
-		}
-		catch (org.quartz.SchedulerException ex) {
-			throw new SchedulerException("Unable to get all groups", ex);
-		}
-	}
-
 	public SchedulerRequest getScheduledJob(String jobName, String groupName)
 		throws SchedulerException {
 
@@ -120,9 +101,8 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			SchedulerRequest schedulerRequest = null;
 
 			Trigger trigger = _scheduler.getTrigger(jobName, groupName);
-			String fullName = jobDetail.getFullName();
 
-			handleJobState(fullName, message, trigger);
+			handleJobState(jobDetail.getFullName(), message, trigger);
 
 			if (trigger == null) {
 				schedulerRequest =
@@ -153,15 +133,33 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 								jobName, groupName,
 								simpleTrigger.getStartTime(),
 								simpleTrigger.getEndTime(),
-								simpleTrigger.getRepeatInterval()), description,
-								message);
+								simpleTrigger.getRepeatInterval()),
+							description, message);
 				}
 			}
 
 			return schedulerRequest;
 		}
 		catch (org.quartz.SchedulerException se) {
-			throw new SchedulerException("Unable to retrieve job", se);
+			throw new SchedulerException("Unable to get job", se);
+		}
+	}
+
+	public List<SchedulerRequest> getScheduledJobs() throws SchedulerException {
+		try {
+			String[] groupNames = _scheduler.getJobGroupNames();
+
+			List<SchedulerRequest> schedulerRequests =
+				new ArrayList<SchedulerRequest>();
+
+			for (String groupName : groupNames) {
+				schedulerRequests.addAll(getScheduledJobs(groupName));
+			}
+
+			return schedulerRequests;
+		}
+		catch (org.quartz.SchedulerException se) {
+			throw new SchedulerException("Unable to get jobs", se);
 		}
 	}
 
@@ -169,7 +167,8 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		throws SchedulerException {
 
 		try {
-			List<SchedulerRequest> requests = new ArrayList<SchedulerRequest>();
+			List<SchedulerRequest> schedulerRequests =
+				new ArrayList<SchedulerRequest>();
 
 			String[] jobNames = _scheduler.getJobNames(groupName);
 
@@ -178,14 +177,14 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 					jobName, groupName);
 
 				if (schedulerRequest != null) {
-					requests.add(schedulerRequest);
+					schedulerRequests.add(schedulerRequest);
 				}
 			}
 
-			return requests;
+			return schedulerRequests;
 		}
 		catch (org.quartz.SchedulerException se) {
-			throw new SchedulerException("Unable to retrieve job", se);
+			throw new SchedulerException("Unable to get jobs", se);
 		}
 	}
 
@@ -334,19 +333,26 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				return;
 			}
 
-			String jobFullName = jobDetail.getFullName();
-
 			ObjectValuePair<TriggerState, Exception> jobState = getJobState(
-				jobFullName);
+				jobDetail.getFullName());
 
 			if (jobState.getValue() != null) {
-				setJobState(jobFullName, TriggerState.NORMAL, null);
+				setJobState(jobDetail.getFullName(), TriggerState.NORMAL, null);
 			}
 		}
 		catch (org.quartz.SchedulerException se) {
 			throw new SchedulerException(
 				"Unable to suppress error for job", se);
 		}
+	}
+
+	/**
+	 * @deprecated {@link #unschedule(String, String)}
+	 */
+	public void unschedule(com.liferay.portal.kernel.scheduler.Trigger trigger)
+		throws SchedulerException {
+
+		unschedule(trigger.getJobName(), trigger.getGroupName());
 	}
 
 	public void unschedule(String jobName, String groupName)
@@ -363,9 +369,8 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				return;
 			}
 
-			String jobFullName = jobDetail.getFullName();
-
-			setJobState(jobFullName, TriggerState.UNSCHEDULED, null);
+			setJobState(
+				jobDetail.getFullName(), TriggerState.UNSCHEDULED, null);
 
 			_scheduler.unscheduleJob(jobName, groupName);
 		}
@@ -418,7 +423,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 					triggerState = TriggerState.COMPLETE;
 				}
 				else if (!triggerState.equals(TriggerState.UNSCHEDULED) &&
-					!triggerState.equals(TriggerState.ERROR)) {
+						 !triggerState.equals(TriggerState.ERROR)) {
 
 					triggerState = TriggerState.COMPLETE;
 				}
@@ -427,23 +432,21 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				int quartzTriggerState = _scheduler.getTriggerState(
 					trigger.getName(), trigger.getGroup());
 
-				switch (quartzTriggerState) {
-					case Trigger.STATE_ERROR :
-						triggerState = TriggerState.ERROR;
-						break;
-					case Trigger.STATE_NORMAL :
-						triggerState = TriggerState.NORMAL;
-						break;
-					case Trigger.STATE_PAUSED :
-						triggerState = TriggerState.PAUSED;
-						break;
-					default :
-						triggerState = TriggerState.ERROR;
+				if (quartzTriggerState == Trigger.STATE_ERROR) {
+					triggerState = TriggerState.ERROR;
+				}
+				else if (quartzTriggerState == Trigger.STATE_NORMAL) {
+					triggerState = TriggerState.NORMAL;
+				}
+				else if (quartzTriggerState == Trigger.STATE_PAUSED) {
+					triggerState = TriggerState.PAUSED;
+				}
+				else {
+					triggerState = TriggerState.ERROR;
 
-						exception =
-							new SchedulerException(
-								"Unable to handle quartz job state :" +
-								quartzTriggerState);
+					exception = new SchedulerException(
+						"Unable to handle Quartz job state " +
+							quartzTriggerState);
 				}
 			}
 
@@ -456,21 +459,12 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			}
 
 			jobState = setJobState(fullName, triggerState, exception);
-	
+
 			message.put(JOB_STATE, jobState);
 		}
 		catch (org.quartz.SchedulerException se) {
 			throw new SchedulerException("Unable to handle job state", se);
 		}
-	}
-
-	/**
-	 * @deprecated {@link #unschedule(String, String)}
-	 */
-	public void unschedule(com.liferay.portal.kernel.scheduler.Trigger trigger)
-		throws SchedulerException {
-
-		unschedule(trigger.getJobName(), trigger.getGroupName());
 	}
 
 	protected void schedule(
@@ -486,16 +480,18 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				jobName, groupName, MessageSenderJob.class);
 
 			jobDetail.setDurability(true);
+
 			JobDataMap jobDataMap = jobDetail.getJobDataMap();
-			String fullJobName = jobDetail.getFullName();
 
 			jobDataMap.put(DESCRIPTION, description);
 			jobDataMap.put(DESTINATION, destination);
 			jobDataMap.put(MESSAGE, message);
 
 			SchedulerContext schedulerContext = _scheduler.getContext();
+
 			schedulerContext.put(
-				fullJobName, new ObjectValuePair<TriggerState, Exception>());
+				jobDetail.getFullName(),
+				new ObjectValuePair<TriggerState, Exception>());
 
 			synchronized (this) {
 				_scheduler.deleteJob(jobName, groupName);
@@ -508,7 +504,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			}
 		}
 		catch (org.quartz.SchedulerException se) {
-			throw new SchedulerException("Unable to scheduled job", se);
+			throw new SchedulerException("Unable to schedule job", se);
 		}
 	}
 
@@ -528,7 +524,8 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 	@BeanReference(name = "com.liferay.portal.service.QuartzLocalService")
 	protected QuartzLocalService quartzLocalService;
 
-	private Log _log = LogFactoryUtil.getLog(QuartzSchedulerEngineImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		QuartzSchedulerEngineImpl.class);
 
 	private Scheduler _scheduler;
 

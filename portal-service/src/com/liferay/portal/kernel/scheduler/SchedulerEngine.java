@@ -49,10 +49,10 @@ public interface SchedulerEngine {
 
 	public static final String RECEIVER_KEY = "receiver_key";
 
-	public List<SchedulerRequest> getAllScheduledJobs()
+	public SchedulerRequest getScheduledJob(String jobName, String groupName)
 		throws SchedulerException;
 
-	public SchedulerRequest getScheduledJob(String jobName, String groupName)
+	public List<SchedulerRequest> getScheduledJobs()
 		throws SchedulerException;
 
 	public List<SchedulerRequest> getScheduledJobs(String groupName)

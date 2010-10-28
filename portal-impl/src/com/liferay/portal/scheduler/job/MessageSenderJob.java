@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 
-import java.util.Date;
-
 import org.quartz.Job;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
@@ -43,22 +41,24 @@ public class MessageSenderJob implements Job {
 
 			String destination = jobDataMap.getString(
 				SchedulerEngine.DESTINATION);
+
 			Message message = (Message)jobDataMap.get(SchedulerEngine.MESSAGE);
 
 			if (message == null) {
 				message = new Message();
 			}
 
-			Date scheduledFireTime = jobExecutionContext.getScheduledFireTime();
+			message.put(
+				"scheduledFireTime",
+				jobExecutionContext.getScheduledFireTime());
 
-			message.put("scheduledFireTime", scheduledFireTime);
-
-			String fullJobName = jobDetail.getFullName();
 			Scheduler scheduler = jobExecutionContext.getScheduler();
+
 			SchedulerContext schedulerContext = scheduler.getContext();
 
 			message.put(
-				SchedulerEngine.JOB_STATE, schedulerContext.get(fullJobName));
+				SchedulerEngine.JOB_STATE,
+				schedulerContext.get(jobDetail.getFullName()));
 
 			if (jobExecutionContext.getNextFireTime() == null) {
 				message.put(SchedulerEngine.DISABLE, true);

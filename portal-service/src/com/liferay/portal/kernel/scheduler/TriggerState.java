@@ -15,11 +15,10 @@
 package com.liferay.portal.kernel.scheduler;
 
 /**
- *
  * @author Tina Tian
  */
 public enum TriggerState {
 
-	NORMAL, PAUSED, COMPLETE, ERROR, UNSCHEDULED
+	COMPLETE, ERROR, NORMAL, PAUSED, UNSCHEDULED
 
 }

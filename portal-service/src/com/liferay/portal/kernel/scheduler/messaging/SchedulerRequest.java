@@ -26,8 +26,6 @@ import java.io.Serializable;
  */
 public class SchedulerRequest implements Serializable {
 
-	public static final String COMMAND_SUPPRESS_ERROR = "SUPPRESS_ERROR";
-
 	public static final String COMMAND_REGISTER = "REGISTER";
 
 	public static final String COMMAND_RETRIEVE = "RETRIEVE";
@@ -35,6 +33,8 @@ public class SchedulerRequest implements Serializable {
 	public static final String COMMAND_SHUTDOWN = "SHUTDOWN";
 
 	public static final String COMMAND_STARTUP = "STARTUP";
+
+	public static final String COMMAND_SUPPRESS_ERROR = "SUPPRESS_ERROR";
 
 	public static final String COMMAND_UNREGISTER = "UNREGISTER";
 
@@ -70,13 +70,6 @@ public class SchedulerRequest implements Serializable {
 		return schedulerRequest;
 	}
 
-	/**
-	 * @deprecated {@link #createRetrieveRequest(String)}
-	 */
-	public static SchedulerRequest createRetrieveRequest(Trigger trigger) {
-		return createRetrieveRequest(trigger.getGroupName());
-	}
-
 	public static SchedulerRequest createRetrieveRequest(
 		String jobName, String groupName) {
 
@@ -89,10 +82,15 @@ public class SchedulerRequest implements Serializable {
 		return schedulerRequest;
 	}
 
-	public static SchedulerRequest createRetrieveResponseRequest() {
-		SchedulerRequest schedulerRequest = new SchedulerRequest();
+	/**
+	 * @deprecated {@link #createRetrieveRequest(String)}
+	 */
+	public static SchedulerRequest createRetrieveRequest(Trigger trigger) {
+		return createRetrieveRequest(trigger.getGroupName());
+	}
 
-		return schedulerRequest;
+	public static SchedulerRequest createRetrieveResponseRequest() {
+		return new SchedulerRequest();
 	}
 
 	public static SchedulerRequest createRetrieveResponseRequest(

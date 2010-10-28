@@ -31,25 +31,6 @@ import java.util.List;
  */
 public class SchedulerEngineProxy implements SchedulerEngine {
 
-	public List<SchedulerRequest> getAllScheduledJobs()
-		throws SchedulerException {
-
-		try {
-			SchedulerRequest schedulerRequest =
-				SchedulerRequest.createRetrieveRequest();
-
-			List<SchedulerRequest> schedulerRequests =
-				(List<SchedulerRequest>)MessageBusUtil.sendSynchronousMessage(
-					DestinationNames.SCHEDULER_ENGINE, schedulerRequest,
-					DestinationNames.SCHEDULER_ENGINE_RESPONSE);
-
-			return schedulerRequests;
-		}
-		catch (Exception e) {
-			throw new SchedulerException(e);
-		}
-	}
-
 	public SchedulerRequest getScheduledJob(String jobName, String groupName)
 		throws SchedulerException {
 
@@ -63,6 +44,25 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 					DestinationNames.SCHEDULER_ENGINE_RESPONSE);
 
 			return schedulerResponse;
+		}
+		catch (Exception e) {
+			throw new SchedulerException(e);
+		}
+	}
+
+	public List<SchedulerRequest> getScheduledJobs()
+		throws SchedulerException {
+
+		try {
+			SchedulerRequest schedulerRequest =
+				SchedulerRequest.createRetrieveRequest();
+
+			List<SchedulerRequest> schedulerRequests =
+				(List<SchedulerRequest>)MessageBusUtil.sendSynchronousMessage(
+					DestinationNames.SCHEDULER_ENGINE, schedulerRequest,
+					DestinationNames.SCHEDULER_ENGINE_RESPONSE);
+
+			return schedulerRequests;
 		}
 		catch (Exception e) {
 			throw new SchedulerException(e);
@@ -88,16 +88,6 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 		}
 	}
 
-	public void suppressError(String jobName, String groupName)
-		throws SchedulerException {
-
-		SchedulerRequest schedulerRequest =
-			SchedulerRequest.createSuppressErrorRequest(jobName, groupName);
-
-		MessageBusUtil.sendMessage(
-			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
-	}
-
 	public void schedule(
 		Trigger trigger, String description, String destinationName,
 		Message message) {
@@ -120,6 +110,14 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 		MessageBusUtil.sendMessage(
 			DestinationNames.SCHEDULER_ENGINE,
 			SchedulerRequest.createStartupRequest());
+	}
+
+	public void suppressError(String jobName, String groupName) {
+		SchedulerRequest schedulerRequest =
+			SchedulerRequest.createSuppressErrorRequest(jobName, groupName);
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
 	}
 
 	public void unschedule(String jobName, String groupName) {

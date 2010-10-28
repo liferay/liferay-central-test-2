@@ -82,7 +82,7 @@ public class SchedulerEventMessageListenerWrapper implements MessageListener {
 		}
 	}
 
-	private void handleException(Message message, Exception exception) {
+	protected void handleException(Message message, Exception exception) {
 		ObjectValuePair<TriggerState, Exception> jobState =
 			(ObjectValuePair<TriggerState, Exception>)message.get(
 				SchedulerEngine.JOB_STATE);

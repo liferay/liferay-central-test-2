@@ -34,27 +34,17 @@ import java.util.List;
  */
 public class SchedulerEngineUtil {
 
-	public static List<SchedulerRequest> getAllScheduledJobs()
-		throws SchedulerException {
-
-		return _instance._getAllScheduledJobs();
-	}
-
 	public static SchedulerRequest getScheduledJob(
 			String jobName, String groupName)
 		throws SchedulerException {
 
-		SchedulerRequest schedulerRequest = _instance._getScheduledJob(
-			jobName, groupName);
+		return _instance._getScheduledJob(jobName, groupName);
+	}
 
-		if (schedulerRequest.getTrigger() == null &&
-			schedulerRequest.getJobName() == null &&
-			schedulerRequest.getGroupName() == null) {
+	public static List<SchedulerRequest> getScheduledJobs()
+		throws SchedulerException {
 
-			return null;
-		}
-
-		return schedulerRequest;
+		return _instance._getScheduledJobs();
 	}
 
 	public static List<SchedulerRequest> getScheduledJobs(String groupName)
@@ -68,6 +58,94 @@ public class SchedulerEngineUtil {
 	}
 
 	public static void schedule(
+			SchedulerEntry schedulerEntry, ClassLoader classLoader)
+		throws SchedulerException {
+
+		_instance._schedule(schedulerEntry, classLoader);
+	}
+
+	public static void schedule(
+			Trigger trigger, String description, String destinationName,
+			Message message)
+		throws SchedulerException {
+
+		_instance._schedule(trigger, description, destinationName, message);
+	}
+
+	public static void schedule(
+			Trigger trigger, String description, String destinationName,
+			Object payload)
+		throws SchedulerException {
+
+		_instance._schedule(trigger, description, destinationName, payload);
+	}
+
+	public static void shutdown() throws SchedulerException {
+		_instance._shutdown();
+	}
+
+	public static void start() throws SchedulerException {
+		_instance._start();
+	}
+
+	public static void suppressError(String jobName, String groupName)
+		throws SchedulerException {
+
+		_instance._suppressError(jobName, groupName);
+	}
+
+	public static void unschedule(SchedulerEntry schedulerEntry)
+		throws SchedulerException {
+
+		_instance._unschedule(schedulerEntry);
+	}
+
+	public static void unschedule(String jobName, String groupName)
+		throws SchedulerException {
+
+		_instance._unschedule(jobName, groupName);
+	}
+
+	/**
+	 * @deprecated {@link #unschedule(String, String)}
+	 */
+	public static void unschedule(Trigger trigger) throws SchedulerException {
+		_instance._unschedule(trigger);
+	}
+
+	private SchedulerRequest _getScheduledJob(String jobName, String groupName)
+		throws SchedulerException {
+
+		SchedulerRequest schedulerRequest = _schedulerEngine.getScheduledJob(
+			jobName, groupName);
+
+		if ((schedulerRequest.getGroupName() == null) &&
+			(schedulerRequest.getJobName() == null) &&
+			(schedulerRequest.getTrigger() == null)) {
+
+			return null;
+		}
+
+		return schedulerRequest;
+	}
+
+	private List<SchedulerRequest> _getScheduledJobs()
+		throws SchedulerException {
+
+		return _schedulerEngine.getScheduledJobs();
+	}
+
+	private List<SchedulerRequest> _getScheduledJobs(String groupName)
+		throws SchedulerException {
+
+		return _schedulerEngine.getScheduledJobs(groupName);
+	}
+
+	private void _init(SchedulerEngine schedulerEngine) {
+		_schedulerEngine = schedulerEngine;
+	}
+
+	private void _schedule(
 			SchedulerEntry schedulerEntry, ClassLoader classLoader)
 		throws SchedulerException {
 
@@ -101,20 +179,21 @@ public class SchedulerEngineUtil {
 
 		message.put(SchedulerEngine.MESSAGE_LISTENER_UUID, messageListenerUUID);
 
-		schedule(
+		_schedule(
 			schedulerEntry.getTrigger(), schedulerEntry.getDescription(),
 			DestinationNames.SCHEDULER_DISPATCH, message);
 	}
 
-	public static void schedule(
+	private void _schedule(
 			Trigger trigger, String description, String destinationName,
 			Message message)
 		throws SchedulerException {
 
-		_instance._schedule(trigger, description, destinationName, message);
+		_schedulerEngine.schedule(
+			trigger, description, destinationName, message);
 	}
 
-	public static void schedule(
+	private void _schedule(
 			Trigger trigger, String description, String destinationName,
 			Object payload)
 		throws SchedulerException {
@@ -122,77 +201,6 @@ public class SchedulerEngineUtil {
 		Message message = new Message();
 
 		message.setPayload(payload);
-
-		_instance._schedule(trigger, description, destinationName, message);
-	}
-
-	public static void shutdown() throws SchedulerException {
-		_instance._shutdown();
-	}
-
-	public static void start() throws SchedulerException {
-		_instance._start();
-	}
-
-	public static void suppressError(String jobName, String groupName)
-		throws SchedulerException {
-
-		_instance._suppressError(jobName, groupName);
-	}
-
-	public static void unschedule(SchedulerEntry schedulerEntry)
-		throws SchedulerException {
-
-		MessageListener schedulerEventListener =
-			schedulerEntry.getEventListener();
-
-		MessageBusUtil.unregisterMessageListener(
-			DestinationNames.SCHEDULER_DISPATCH, schedulerEventListener);
-
-		Trigger trigger = schedulerEntry.getTrigger();
-
-		unschedule(trigger.getJobName(), trigger.getGroupName());
-	}
-
-	public static void unschedule(String jobName, String groupName)
-		throws SchedulerException {
-
-		_instance._unschedule(jobName, groupName);
-	}
-
-	private List<SchedulerRequest> _getAllScheduledJobs()
-		throws SchedulerException {
-
-		return _schedulerEngine.getAllScheduledJobs();
-	}
-
-	private SchedulerRequest _getScheduledJob(String jobName, String groupName)
-		throws SchedulerException {
-
-		return _schedulerEngine.getScheduledJob(jobName, groupName);
-	}
-
-	/**
-	 * @deprecated {@link #unschedule(String, String)}
-	 */
-	public static void unschedule(Trigger trigger) throws SchedulerException {
-		_instance._unschedule(trigger);
-	}
-
-	private List<SchedulerRequest> _getScheduledJobs(String groupName)
-		throws SchedulerException {
-
-		return _schedulerEngine.getScheduledJobs(groupName);
-	}
-
-	private void _init(SchedulerEngine schedulerEngine) {
-		_schedulerEngine = schedulerEngine;
-	}
-
-	private void _schedule(
-			Trigger trigger, String description, String destinationName,
-			Message message)
-		throws SchedulerException {
 
 		_schedulerEngine.schedule(
 			trigger, description, destinationName, message);
@@ -210,6 +218,20 @@ public class SchedulerEngineUtil {
 		throws SchedulerException {
 
 		_schedulerEngine.suppressError(jobName, groupName);
+	}
+
+	private void _unschedule(SchedulerEntry schedulerEntry)
+		throws SchedulerException {
+
+		MessageListener schedulerEventListener =
+			schedulerEntry.getEventListener();
+
+		MessageBusUtil.unregisterMessageListener(
+			DestinationNames.SCHEDULER_DISPATCH, schedulerEventListener);
+
+		Trigger trigger = schedulerEntry.getTrigger();
+
+		_unschedule(trigger.getJobName(), trigger.getGroupName());
 	}
 
 	private void _unschedule(String jobName, String groupName)

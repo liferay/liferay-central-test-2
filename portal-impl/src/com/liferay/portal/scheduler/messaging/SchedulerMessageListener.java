@@ -103,7 +103,7 @@ public class SchedulerMessageListener implements MessageListener {
 		String groupName = schedulerRequest.getGroupName();
 
 		if (groupName == null) {
-			schedulerResponse = _schedulerEngine.getAllScheduledJobs();
+			schedulerResponse = _schedulerEngine.getScheduledJobs();
 		}
 		else if (jobName == null) {
 			schedulerResponse = _schedulerEngine.getScheduledJobs(
