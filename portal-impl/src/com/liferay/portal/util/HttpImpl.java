@@ -14,6 +14,7 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -73,8 +74,8 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
-import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
+import org.apache.commons.httpclient.params.HttpConnectionParams;
 
 /**
  * @author Brian Wing Shun Chan
@@ -352,6 +353,36 @@ public class HttpImpl implements Http {
 			hostConfiguration.setProxy(_PROXY_HOST, _PROXY_PORT);
 		}
 
+		HttpConnectionManagerParams httpConnectionManagerParams =
+			_httpClient.getHttpConnectionManager().getParams();
+
+		int currentMaxConnectionsPerHost =
+			httpConnectionManagerParams.getMaxConnectionsPerHost(
+				hostConfiguration);
+
+		int maxConnectionsPerHost = GetterUtil.getInteger(
+			PropsUtil.get(
+				_MAX_CONNECTIONS_PER_HOST_KEY,
+				new Filter(hostConfiguration.getHost())));
+
+		if ((maxConnectionsPerHost > 0) &&
+			(maxConnectionsPerHost != currentMaxConnectionsPerHost)) {
+
+			httpConnectionManagerParams.setMaxConnectionsPerHost(
+				hostConfiguration, maxConnectionsPerHost);
+		}
+
+		int timeout = GetterUtil.getInteger(
+			PropsUtil.get(
+				_TIMEOUT_KEY, new Filter(hostConfiguration.getHost())));
+
+		if (timeout > 0) {
+			hostConfiguration.getParams().setIntParameter(
+				HttpConnectionParams.CONNECTION_TIMEOUT, timeout);
+			hostConfiguration.getParams().setIntParameter(
+				HttpConnectionParams.SO_TIMEOUT, timeout);
+		}
+
 		return hostConfiguration;
 	}
 
@@ -389,8 +420,8 @@ public class HttpImpl implements Http {
 				params = StringUtil.split(parts[1], StringPool.AMPERSAND);
 			}
 
-			for (int i = 0; i < params.length; i++) {
-				String[] kvp = StringUtil.split(params[i], StringPool.EQUAL);
+			for (String param : params) {
+				String[] kvp = StringUtil.split(param, StringPool.EQUAL);
 
 				if ((kvp.length == 2) && kvp[0].equals(name)) {
 					return kvp[1];
@@ -925,7 +956,7 @@ public class HttpImpl implements Http {
 				location = Http.HTTP_WITH_SLASH + location;
 			}
 
-			HostConfiguration hostConfig = getHostConfig(location);
+			HostConfiguration hostConfig = getHostConfiguration(location);
 
 			HttpClient httpClient = getClient(hostConfig);
 
@@ -1006,9 +1037,6 @@ public class HttpImpl implements Http {
 				httpMethod.addRequestHeader(
 					HttpHeaders.USER_AGENT, _DEFAULT_USER_AGENT);
 			}
-
-			httpMethod.getParams().setIntParameter(
-				HttpClientParams.SO_TIMEOUT, 0);
 
 			httpState = new HttpState();
 
@@ -1113,6 +1141,9 @@ public class HttpImpl implements Http {
 	private static final String _DEFAULT_USER_AGENT =
 		"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)";
 
+	private static final String _MAX_CONNECTIONS_PER_HOST_KEY =
+		HttpImpl.class.getName() + ".max.connections.per.host";
+
 	private static final int _MAX_CONNECTIONS_PER_HOST = GetterUtil.getInteger(
 		PropsUtil.get(HttpImpl.class.getName() + ".max.connections.per.host"),
 		2);
@@ -1146,6 +1177,9 @@ public class HttpImpl implements Http {
 		PropsUtil.get(HttpImpl.class.getName() + ".proxy.username"));
 
 	private static final String _TEMP_SLASH = "_LIFERAY_TEMP_SLASH_";
+
+	private static final String _TIMEOUT_KEY =
+		HttpImpl.class.getName() + ".timeout";
 
 	private static final int _TIMEOUT = GetterUtil.getInteger(
 		PropsUtil.get(HttpImpl.class.getName() + ".timeout"), 5000);
