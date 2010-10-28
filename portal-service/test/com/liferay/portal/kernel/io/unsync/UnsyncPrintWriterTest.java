@@ -189,7 +189,6 @@ public class UnsyncPrintWriterTest extends TestCase {
 
 	static {
 		try {
-
 			_writerField = UnsyncPrintWriter.class.getDeclaredField("_writer");
 
 			_writerField.setAccessible(true);
