@@ -98,10 +98,12 @@ portletURL.setParameter("struts_action", "/blogs_admin/view");
 			}
 
 			if (deleteEntries) {
-				document.<portlet:namespace />fm.method = "post";
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
-				document.<portlet:namespace />fm.<portlet:namespace />deleteEntryIds.value = deleteEntryIds;
-				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/blogs_admin/edit_entry" /></portlet:actionURL>");
+				if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-entries") %>')) {
+					document.<portlet:namespace />fm.method = "post";
+					document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
+					document.<portlet:namespace />fm.<portlet:namespace />deleteEntryIds.value = deleteEntryIds;
+					submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/blogs_admin/edit_entry" /></portlet:actionURL>");
+				}
 			}
 		},
 		['liferay-util-list-fields']
