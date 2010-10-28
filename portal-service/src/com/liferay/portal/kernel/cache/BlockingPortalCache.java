@@ -173,7 +173,10 @@ public class BlockingPortalCache implements PortalCache {
 
 	public void remove(String key) {
 		_portalCache.remove(key);
-		_competeLatchMap.remove(key);
+		CompeteLatch competeLatch = _competeLatchMap.remove(key);
+		if (competeLatch != null) {
+			competeLatch.done();
+		}
 	}
 
 	public void removeAll() {
