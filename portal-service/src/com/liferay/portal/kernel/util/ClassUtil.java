@@ -49,7 +49,8 @@ public class ClassUtil {
 			fileName = fileName.substring(0, fileName.length() - 5);
 		}
 
-		return getClasses(new FileReader(file), fileName);
+		return getClasses(
+			new UnsyncBufferedReader(new FileReader(file)), fileName);
 	}
 
 	public static Set<String> getClasses(Reader reader, String className)
@@ -57,8 +58,7 @@ public class ClassUtil {
 
 		Set<String> classes = new HashSet<String>();
 
-		StreamTokenizer st = new StreamTokenizer(
-			new UnsyncBufferedReader(reader));
+		StreamTokenizer st = new StreamTokenizer(reader);
 
 		_setupParseTableForAnnotationProcessing(st);
 
