@@ -213,7 +213,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 		<aui:input cssClass="lfr-input-text-container" label="email-address" name="userMappingEmailAddress" type="text" value="<%= userMappingEmailAddress %>" />
 
-		<aui:input cssClass="lfr-input-text-container" helpMessage="the-full-name-attribute-is" label="full-name" name="userMappingFullName" type="text" value="<%= userMappingFullName %>" />
+		<aui:input cssClass="lfr-input-text-container" helpMessage="ldap-full-name-attribute-help" label="full-name" name="userMappingFullName" type="text" value="<%= userMappingFullName %>" />
 
 		<aui:input cssClass="lfr-input-text-container" label="first-name" name="userMappingFirstName" type="text" value="<%= userMappingFirstName %>" />
 
