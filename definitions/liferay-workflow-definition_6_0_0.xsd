@@ -128,6 +128,7 @@
 	<xs:element name="script-language">
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
+				<xs:enumeration value="bsh" />
 				<xs:enumeration value="groovy" />
 				<xs:enumeration value="javascript" />
 				<xs:enumeration value="python" />

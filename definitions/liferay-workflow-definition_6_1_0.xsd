@@ -137,6 +137,7 @@
 	<xs:element name="script-language">
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
+				<xs:enumeration value="beanshell" />
 				<xs:enumeration value="drl" />
 				<xs:enumeration value="groovy" />
 				<xs:enumeration value="javascript" />
