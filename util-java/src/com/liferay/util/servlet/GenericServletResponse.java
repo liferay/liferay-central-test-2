@@ -63,7 +63,7 @@ public class GenericServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public PrintWriter getWriter() {
-		return new UnsyncPrintWriter(getOutputStream(), true);
+		return new UnsyncPrintWriter(getOutputStream());
 	}
 
 	private int _contentLength;

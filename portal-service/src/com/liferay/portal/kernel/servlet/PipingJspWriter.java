@@ -36,7 +36,7 @@ public class PipingJspWriter extends JspWriter {
 	public PipingJspWriter(Writer writer) {
 		super(NO_BUFFER, false);
 
-		_printWriter = new UnsyncPrintWriter(writer, true);
+		_printWriter = new UnsyncPrintWriter(writer);
 	}
 
 	public void clear() throws IOException {

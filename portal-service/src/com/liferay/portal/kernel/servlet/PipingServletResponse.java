@@ -77,7 +77,7 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 			throw new NullPointerException("Writer is null");
 		}
 
-		_printWriter = new UnsyncPrintWriter(writer, true);
+		_printWriter = new UnsyncPrintWriter(writer);
 	}
 
 	public PipingServletResponse(PageContext pageContext) {
@@ -99,11 +99,10 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 				pageContextWrapper.getWrappedPageContext();
 
 			_printWriter = new UnsyncPrintWriter(
-				new TrimNewLinesJspWriter(wrappedPageContext.getOut()),
-				true);
+				new TrimNewLinesJspWriter(wrappedPageContext.getOut()));
 		}
 		else {
-			_printWriter = new UnsyncPrintWriter(pageContext.getOut(), true);
+			_printWriter = new UnsyncPrintWriter(pageContext.getOut());
 		}
 	}
 

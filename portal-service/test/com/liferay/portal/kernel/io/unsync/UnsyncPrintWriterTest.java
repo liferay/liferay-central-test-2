@@ -14,12 +14,12 @@
 
 package com.liferay.portal.kernel.io.unsync;
 
+import com.liferay.portal.kernel.io.OutputStreamWriter;
 import com.liferay.portal.kernel.test.TestCase;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 
@@ -44,7 +44,6 @@ public class UnsyncPrintWriterTest extends TestCase {
 			new File(_TEST_FILE_NAME));
 
 		assertTrue(_getOut(unsyncPrintWriter) instanceof FileWriter);
-		assertFalse(_isAutoFlush(unsyncPrintWriter));
 
 		// UnsyncPrintWriter(File file, String charSequence)
 
@@ -52,7 +51,6 @@ public class UnsyncPrintWriterTest extends TestCase {
 			new File(_TEST_FILE_NAME), "UTF8");
 
 		assertTrue(_getOut(unsyncPrintWriter) instanceof OutputStreamWriter);
-		assertFalse(_isAutoFlush(unsyncPrintWriter));
 
 		OutputStreamWriter outputStreamWriter = (OutputStreamWriter)_getOut(
 			unsyncPrintWriter);
@@ -67,33 +65,18 @@ public class UnsyncPrintWriterTest extends TestCase {
 		unsyncPrintWriter = new UnsyncPrintWriter(byteArrayOutputStream);
 
 		assertTrue(_getOut(unsyncPrintWriter) instanceof OutputStreamWriter);
-		assertFalse(_isAutoFlush(unsyncPrintWriter));
-
-		// UnsyncPrintWriter(OutputStream outputStream, boolean autoFlush)
-
-		unsyncPrintWriter = new UnsyncPrintWriter(byteArrayOutputStream, false);
-
-		assertTrue(_getOut(unsyncPrintWriter) instanceof OutputStreamWriter);
-		assertFalse(_isAutoFlush(unsyncPrintWriter));
-
-		unsyncPrintWriter = new UnsyncPrintWriter(byteArrayOutputStream, true);
-
-		assertTrue(_getOut(unsyncPrintWriter) instanceof OutputStreamWriter);
-		assertTrue(_isAutoFlush(unsyncPrintWriter));
 
 		// UnsyncPrintWriter(String fileName)
 
 		unsyncPrintWriter = new UnsyncPrintWriter(_TEST_FILE_NAME);
 
 		assertTrue(_getOut(unsyncPrintWriter) instanceof FileWriter);
-		assertFalse(_isAutoFlush(unsyncPrintWriter));
 
 		// UnsyncPrintWriter(String fileName, String csn)
 
 		unsyncPrintWriter = new UnsyncPrintWriter(_TEST_FILE_NAME, "UTF8");
 
 		assertTrue(_getOut(unsyncPrintWriter) instanceof OutputStreamWriter);
-		assertFalse(_isAutoFlush(unsyncPrintWriter));
 
 		outputStreamWriter = (OutputStreamWriter)_getOut(unsyncPrintWriter);
 
@@ -106,19 +89,6 @@ public class UnsyncPrintWriterTest extends TestCase {
 		unsyncPrintWriter = new UnsyncPrintWriter(stringWriter);
 
 		assertEquals(stringWriter, _getOut(unsyncPrintWriter));
-		assertFalse(_isAutoFlush(unsyncPrintWriter));
-
-		// UnsyncPrintWriter(Writer writer, boolean autoFlush)
-
-		unsyncPrintWriter = new UnsyncPrintWriter(stringWriter, false);
-
-		assertEquals(stringWriter, _getOut(unsyncPrintWriter));
-		assertFalse(_isAutoFlush(unsyncPrintWriter));
-
-		unsyncPrintWriter = new UnsyncPrintWriter(stringWriter, true);
-
-		assertEquals(stringWriter, _getOut(unsyncPrintWriter));
-		assertTrue(_isAutoFlush(unsyncPrintWriter));
 	}
 
 	public void testFormat() {
@@ -212,27 +182,13 @@ public class UnsyncPrintWriterTest extends TestCase {
 		}
 	}
 
-	private static boolean _isAutoFlush(UnsyncPrintWriter unsyncPrintWriter) {
-		try {
-			return _autoFlushField.getBoolean(unsyncPrintWriter);
-		}
-		catch (Throwable t) {
-			throw new RuntimeException(t);
-		}
-	}
-
 	private static final String _TEST_FILE_NAME =
 		"UnsyncPrintWriterTest.testFilename";
 
-	private static Field _autoFlushField;
 	private static Field _writerField;
 
 	static {
 		try {
-			_autoFlushField = UnsyncPrintWriter.class.getDeclaredField(
-				"_autoFlush");
-
-			_autoFlushField.setAccessible(true);
 
 			_writerField = UnsyncPrintWriter.class.getDeclaredField("_writer");
 

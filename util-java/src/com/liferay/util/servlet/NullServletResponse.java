@@ -31,7 +31,7 @@ public class NullServletResponse extends HttpServletResponseWrapper {
 		super(response);
 
 		_servletOutputStream = new NullServletOutputStream();
-		_printWriter = new UnsyncPrintWriter(_servletOutputStream, true);
+		_printWriter = new UnsyncPrintWriter(_servletOutputStream);
 	}
 
 	public ServletOutputStream getOutputStream() {

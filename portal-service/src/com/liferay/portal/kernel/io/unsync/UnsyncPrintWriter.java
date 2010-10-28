@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.io.unsync;
 
+import com.liferay.portal.kernel.io.OutputStreamWriter;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.File;
@@ -23,7 +24,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
@@ -41,43 +41,33 @@ import java.util.Locale;
 public class UnsyncPrintWriter extends PrintWriter {
 
 	public UnsyncPrintWriter(File file) throws IOException {
-		this(new FileWriter(file), false);
+		this(new FileWriter(file));
 	}
 
 	public UnsyncPrintWriter(File file, String csn)
 		throws FileNotFoundException, UnsupportedEncodingException {
 
-		this(new OutputStreamWriter(new FileOutputStream(file), csn), false);
+		this(new OutputStreamWriter(new FileOutputStream(file), csn));
 	}
 
 	public UnsyncPrintWriter(OutputStream outputStream) {
-		this(outputStream, false);
-	}
-
-	public UnsyncPrintWriter(OutputStream outputStream, boolean autoFlush) {
-		this(new OutputStreamWriter(outputStream), autoFlush);
+		this(new OutputStreamWriter(outputStream));
 	}
 
 	public UnsyncPrintWriter(String fileName) throws IOException {
-		this(new FileWriter(fileName), false);
+		this(new FileWriter(fileName));
 	}
 
 	public UnsyncPrintWriter(String fileName, String csn)
 		throws FileNotFoundException, UnsupportedEncodingException {
 
-		this(
-			new OutputStreamWriter(new FileOutputStream(fileName), csn), false);
+		this(new OutputStreamWriter(new FileOutputStream(fileName), csn));
 	}
 
 	public UnsyncPrintWriter(Writer writer) {
-		this(writer, false);
-	}
-
-	public UnsyncPrintWriter(Writer writer, boolean autoFlush) {
 		super(writer);
 
 		_writer = writer;
-		_autoFlush = autoFlush;
 	}
 
 	public PrintWriter append(char c) {
@@ -151,25 +141,11 @@ public class UnsyncPrintWriter extends PrintWriter {
 			_hasError = true;
 		}
 		else {
-			try {
-				if ((_formatter == null) || (_formatter.locale() != locale)) {
-					_formatter = new Formatter(this, locale);
-				}
-
-				_formatter.format(locale, format, arguments);
-
-				if (_autoFlush) {
-					_writer.flush();
-				}
+			if ((_formatter == null) || (_formatter.locale() != locale)) {
+				_formatter = new Formatter(this, locale);
 			}
-			catch (InterruptedIOException iioe) {
-				Thread currentThread = Thread.currentThread();
 
-				currentThread.interrupt();
-			}
-			catch (IOException ioe) {
-				_hasError = true;
-			}
+			_formatter.format(locale, format, arguments);
 		}
 
 		return this;
@@ -241,10 +217,6 @@ public class UnsyncPrintWriter extends PrintWriter {
 		else {
 			try {
 				_writer.write(_LINE_SEPARATOR);
-
-				if (_autoFlush) {
-					_writer.flush();
-				}
 			}
 			catch (InterruptedIOException iioe) {
 				Thread currentThread = Thread.currentThread();
@@ -385,7 +357,6 @@ public class UnsyncPrintWriter extends PrintWriter {
 	private static String _LINE_SEPARATOR = System.getProperty(
 		"line.separator");
 
-	private boolean _autoFlush;
 	private Formatter _formatter;
 	private boolean _hasError;
 	private Writer _writer;

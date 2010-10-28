@@ -38,7 +38,7 @@ public class TrimNewLinesJspWriter extends JspWriter {
 	public TrimNewLinesJspWriter(Writer writer) {
 		super(NO_BUFFER, false);
 
-		_printWriter = new UnsyncPrintWriter(writer, true);
+		_printWriter = new UnsyncPrintWriter(writer);
 	}
 
 	public void clear() throws IOException {
