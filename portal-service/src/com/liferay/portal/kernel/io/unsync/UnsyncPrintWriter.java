@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
 import java.util.Formatter;
@@ -45,7 +44,7 @@ public class UnsyncPrintWriter extends PrintWriter {
 	}
 
 	public UnsyncPrintWriter(File file, String csn)
-		throws FileNotFoundException, UnsupportedEncodingException {
+		throws FileNotFoundException {
 
 		this(new OutputStreamWriter(new FileOutputStream(file), csn));
 	}
@@ -59,7 +58,7 @@ public class UnsyncPrintWriter extends PrintWriter {
 	}
 
 	public UnsyncPrintWriter(String fileName, String csn)
-		throws FileNotFoundException, UnsupportedEncodingException {
+		throws FileNotFoundException {
 
 		this(new OutputStreamWriter(new FileOutputStream(fileName), csn));
 	}
