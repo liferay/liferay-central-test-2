@@ -279,7 +279,7 @@
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.LayoutBranchModelImpl">
 		<attributes>
-			<id name="branchId" />
+			<id name="layoutBranchId" />
 			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
@@ -314,7 +314,7 @@
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.LayoutRevisionModelImpl">
 		<attributes>
-			<id name="revisionId" />
+			<id name="layoutRevisionId" />
 			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
@@ -325,10 +325,10 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="branchId" />
-			<basic name="plid" />
-			<basic name="parentRevisionId" />
+			<basic name="layoutBranchId" />
+			<basic name="parentLayoutRevisionId" />
 			<basic name="head" />
+			<basic name="plid" />
 			<basic name="name" />
 			<basic name="title" />
 			<basic name="description" />

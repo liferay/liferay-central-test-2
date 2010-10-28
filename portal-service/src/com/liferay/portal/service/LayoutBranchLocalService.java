@@ -54,20 +54,20 @@ public interface LayoutBranchLocalService {
 	/**
 	* Creates a new layout branch with the primary key. Does not add the layout branch to the database.
 	*
-	* @param branchId the primary key for the new layout branch
+	* @param layoutBranchId the primary key for the new layout branch
 	* @return the new layout branch
 	*/
 	public com.liferay.portal.model.LayoutBranch createLayoutBranch(
-		long branchId);
+		long layoutBranchId);
 
 	/**
 	* Deletes the layout branch with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param branchId the primary key of the layout branch to delete
+	* @param layoutBranchId the primary key of the layout branch to delete
 	* @throws PortalException if a layout branch with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteLayoutBranch(long branchId)
+	public void deleteLayoutBranch(long layoutBranchId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -79,7 +79,8 @@ public interface LayoutBranchLocalService {
 	*/
 	public void deleteLayoutBranch(
 		com.liferay.portal.model.LayoutBranch layoutBranch)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
@@ -146,13 +147,14 @@ public interface LayoutBranchLocalService {
 	/**
 	* Gets the layout branch with the primary key.
 	*
-	* @param branchId the primary key of the layout branch to get
+	* @param layoutBranchId the primary key of the layout branch to get
 	* @return the layout branch
 	* @throws PortalException if a layout branch with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.model.LayoutBranch getLayoutBranch(long branchId)
+	public com.liferay.portal.model.LayoutBranch getLayoutBranch(
+		long layoutBranchId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -206,37 +208,30 @@ public interface LayoutBranchLocalService {
 		com.liferay.portal.model.LayoutBranch layoutBranch, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.LayoutBranch addBranch(
-		java.lang.String name, java.lang.String description,
+	public com.liferay.portal.model.LayoutBranch addLayoutBranch(long userId,
+		long groupId, java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteBranch(long branchId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public void deleteBranch(com.liferay.portal.model.LayoutBranch branch)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public void deleteBranches(long groupId)
+	public void deleteLayoutBranches(long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.model.LayoutBranch getMasterBranch(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+	public java.util.List<com.liferay.portal.model.LayoutBranch> getLayoutBranches(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portal.model.LayoutBranch> getBranches(
+	public com.liferay.portal.model.LayoutBranch getMasterLayoutBranch(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.LayoutBranch updateBranch(long branchId,
-		java.lang.String name, java.lang.String description,
+	public com.liferay.portal.model.LayoutBranch updateLayoutBranch(
+		long layoutBranchId, java.lang.String name,
+		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

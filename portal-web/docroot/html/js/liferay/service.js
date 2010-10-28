@@ -111,10 +111,10 @@ Liferay.Service.registerClass(
 Liferay.Service.registerClass(
 	Liferay.Service.Portal, "LayoutBranch",
 	{
-		addBranch: true,
-		deleteBranch: true,
-		getBranches: true,
-		updateBranch: true
+		addLayoutBranch: true,
+		deleteLayoutBranch: true,
+		getLayoutBranches: true,
+		updateLayoutBranch: true
 	}
 );
 

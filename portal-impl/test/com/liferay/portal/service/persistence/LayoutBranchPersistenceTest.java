@@ -77,8 +77,8 @@ public class LayoutBranchPersistenceTest extends BasePersistenceTestCase {
 
 		LayoutBranch existingLayoutBranch = _persistence.findByPrimaryKey(newLayoutBranch.getPrimaryKey());
 
-		assertEquals(existingLayoutBranch.getBranchId(),
-			newLayoutBranch.getBranchId());
+		assertEquals(existingLayoutBranch.getLayoutBranchId(),
+			newLayoutBranch.getLayoutBranchId());
 		assertEquals(existingLayoutBranch.getGroupId(),
 			newLayoutBranch.getGroupId());
 		assertEquals(existingLayoutBranch.getCompanyId(),
@@ -141,8 +141,8 @@ public class LayoutBranchPersistenceTest extends BasePersistenceTestCase {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutBranch.class,
 				LayoutBranch.class.getClassLoader());
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("branchId",
-				newLayoutBranch.getBranchId()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("layoutBranchId",
+				newLayoutBranch.getLayoutBranchId()));
 
 		List<LayoutBranch> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -157,7 +157,7 @@ public class LayoutBranchPersistenceTest extends BasePersistenceTestCase {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutBranch.class,
 				LayoutBranch.class.getClassLoader());
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("branchId", nextLong()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("layoutBranchId", nextLong()));
 
 		List<LayoutBranch> result = _persistence.findWithDynamicQuery(dynamicQuery);
 

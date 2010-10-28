@@ -34,7 +34,7 @@ public class LayoutBranchSoap implements Serializable {
 	public static LayoutBranchSoap toSoapModel(LayoutBranch model) {
 		LayoutBranchSoap soapModel = new LayoutBranchSoap();
 
-		soapModel.setBranchId(model.getBranchId());
+		soapModel.setLayoutBranchId(model.getLayoutBranchId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -88,19 +88,19 @@ public class LayoutBranchSoap implements Serializable {
 	}
 
 	public long getPrimaryKey() {
-		return _branchId;
+		return _layoutBranchId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setBranchId(pk);
+		setLayoutBranchId(pk);
 	}
 
-	public long getBranchId() {
-		return _branchId;
+	public long getLayoutBranchId() {
+		return _layoutBranchId;
 	}
 
-	public void setBranchId(long branchId) {
-		_branchId = branchId;
+	public void setLayoutBranchId(long layoutBranchId) {
+		_layoutBranchId = layoutBranchId;
 	}
 
 	public long getGroupId() {
@@ -167,7 +167,7 @@ public class LayoutBranchSoap implements Serializable {
 		_description = description;
 	}
 
-	private long _branchId;
+	private long _layoutBranchId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;

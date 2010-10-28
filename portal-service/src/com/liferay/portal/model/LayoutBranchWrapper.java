@@ -47,21 +47,21 @@ public class LayoutBranchWrapper implements LayoutBranch {
 	}
 
 	/**
-	* Gets the branch id of this layout branch.
+	* Gets the layout branch id of this layout branch.
 	*
-	* @return the branch id of this layout branch
+	* @return the layout branch id of this layout branch
 	*/
-	public long getBranchId() {
-		return _layoutBranch.getBranchId();
+	public long getLayoutBranchId() {
+		return _layoutBranch.getLayoutBranchId();
 	}
 
 	/**
-	* Sets the branch id of this layout branch.
+	* Sets the layout branch id of this layout branch.
 	*
-	* @param branchId the branch id of this layout branch
+	* @param layoutBranchId the layout branch id of this layout branch
 	*/
-	public void setBranchId(long branchId) {
-		_layoutBranch.setBranchId(branchId);
+	public void setLayoutBranchId(long layoutBranchId) {
+		_layoutBranch.setLayoutBranchId(layoutBranchId);
 	}
 
 	/**

@@ -57,18 +57,18 @@ public interface LayoutBranchModel extends BaseModel<LayoutBranch> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the branch id of this layout branch.
+	 * Gets the layout branch id of this layout branch.
 	 *
-	 * @return the branch id of this layout branch
+	 * @return the layout branch id of this layout branch
 	 */
-	public long getBranchId();
+	public long getLayoutBranchId();
 
 	/**
-	 * Sets the branch id of this layout branch.
+	 * Sets the layout branch id of this layout branch.
 	 *
-	 * @param branchId the branch id of this layout branch
+	 * @param layoutBranchId the layout branch id of this layout branch
 	 */
-	public void setBranchId(long branchId);
+	public void setLayoutBranchId(long layoutBranchId);
 
 	/**
 	 * Gets the group id of this layout branch.

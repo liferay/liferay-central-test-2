@@ -31,7 +31,7 @@ public class LayoutBranchJSONSerializer {
 	public static JSONObject toJSONObject(LayoutBranch model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("branchId", model.getBranchId());
+		jsonObj.put("layoutBranchId", model.getLayoutBranchId());
 		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());

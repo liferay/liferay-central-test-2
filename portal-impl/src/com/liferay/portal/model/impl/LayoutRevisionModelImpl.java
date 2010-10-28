@@ -60,17 +60,17 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	implements LayoutRevisionModel {
 	public static final String TABLE_NAME = "LayoutRevision";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "revisionId", new Integer(Types.BIGINT) },
+			{ "layoutRevisionId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "branchId", new Integer(Types.BIGINT) },
-			{ "plid", new Integer(Types.BIGINT) },
-			{ "parentRevisionId", new Integer(Types.BIGINT) },
+			{ "layoutBranchId", new Integer(Types.BIGINT) },
+			{ "parentLayoutRevisionId", new Integer(Types.BIGINT) },
 			{ "head", new Integer(Types.BOOLEAN) },
+			{ "plid", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "title", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
@@ -87,10 +87,10 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 			{ "statusByUserName", new Integer(Types.VARCHAR) },
 			{ "statusDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table LayoutRevision (revisionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,branchId LONG,plid LONG,parentRevisionId LONG,head BOOLEAN,name STRING null,title STRING null,description STRING null,typeSettings TEXT null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table LayoutRevision (layoutRevisionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,layoutBranchId LONG,parentLayoutRevisionId LONG,head BOOLEAN,plid LONG,name STRING null,title STRING null,description STRING null,typeSettings TEXT null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table LayoutRevision";
-	public static final String ORDER_BY_JPQL = " ORDER BY layoutRevision.revisionId DESC";
-	public static final String ORDER_BY_SQL = " ORDER BY LayoutRevision.revisionId DESC";
+	public static final String ORDER_BY_JPQL = " ORDER BY layoutRevision.layoutRevisionId DESC";
+	public static final String ORDER_BY_SQL = " ORDER BY LayoutRevision.layoutRevisionId DESC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -110,17 +110,17 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	public static LayoutRevision toModel(LayoutRevisionSoap soapModel) {
 		LayoutRevision model = new LayoutRevisionImpl();
 
-		model.setRevisionId(soapModel.getRevisionId());
+		model.setLayoutRevisionId(soapModel.getLayoutRevisionId());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setBranchId(soapModel.getBranchId());
-		model.setPlid(soapModel.getPlid());
-		model.setParentRevisionId(soapModel.getParentRevisionId());
+		model.setLayoutBranchId(soapModel.getLayoutBranchId());
+		model.setParentLayoutRevisionId(soapModel.getParentLayoutRevisionId());
 		model.setHead(soapModel.getHead());
+		model.setPlid(soapModel.getPlid());
 		model.setName(soapModel.getName());
 		model.setTitle(soapModel.getTitle());
 		model.setDescription(soapModel.getDescription());
@@ -163,23 +163,23 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	}
 
 	public long getPrimaryKey() {
-		return _revisionId;
+		return _layoutRevisionId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setRevisionId(pk);
+		setLayoutRevisionId(pk);
 	}
 
 	public Serializable getPrimaryKeyObj() {
-		return new Long(_revisionId);
+		return new Long(_layoutRevisionId);
 	}
 
-	public long getRevisionId() {
-		return _revisionId;
+	public long getLayoutRevisionId() {
+		return _layoutRevisionId;
 	}
 
-	public void setRevisionId(long revisionId) {
-		_revisionId = revisionId;
+	public void setLayoutRevisionId(long layoutRevisionId) {
+		_layoutRevisionId = layoutRevisionId;
 	}
 
 	public long getGroupId() {
@@ -243,48 +243,30 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getBranchId() {
-		return _branchId;
+	public long getLayoutBranchId() {
+		return _layoutBranchId;
 	}
 
-	public void setBranchId(long branchId) {
-		_branchId = branchId;
+	public void setLayoutBranchId(long layoutBranchId) {
+		_layoutBranchId = layoutBranchId;
 
-		if (!_setOriginalBranchId) {
-			_setOriginalBranchId = true;
+		if (!_setOriginalLayoutBranchId) {
+			_setOriginalLayoutBranchId = true;
 
-			_originalBranchId = branchId;
+			_originalLayoutBranchId = layoutBranchId;
 		}
 	}
 
-	public long getOriginalBranchId() {
-		return _originalBranchId;
+	public long getOriginalLayoutBranchId() {
+		return _originalLayoutBranchId;
 	}
 
-	public long getPlid() {
-		return _plid;
+	public long getParentLayoutRevisionId() {
+		return _parentLayoutRevisionId;
 	}
 
-	public void setPlid(long plid) {
-		_plid = plid;
-
-		if (!_setOriginalPlid) {
-			_setOriginalPlid = true;
-
-			_originalPlid = plid;
-		}
-	}
-
-	public long getOriginalPlid() {
-		return _originalPlid;
-	}
-
-	public long getParentRevisionId() {
-		return _parentRevisionId;
-	}
-
-	public void setParentRevisionId(long parentRevisionId) {
-		_parentRevisionId = parentRevisionId;
+	public void setParentLayoutRevisionId(long parentLayoutRevisionId) {
+		_parentLayoutRevisionId = parentLayoutRevisionId;
 	}
 
 	public boolean getHead() {
@@ -307,6 +289,24 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 
 	public boolean getOriginalHead() {
 		return _originalHead;
+	}
+
+	public long getPlid() {
+		return _plid;
+	}
+
+	public void setPlid(long plid) {
+		_plid = plid;
+
+		if (!_setOriginalPlid) {
+			_setOriginalPlid = true;
+
+			_originalPlid = plid;
+		}
+	}
+
+	public long getOriginalPlid() {
+		return _originalPlid;
 	}
 
 	public String getName() {
@@ -562,17 +562,17 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	public Object clone() {
 		LayoutRevisionImpl clone = new LayoutRevisionImpl();
 
-		clone.setRevisionId(getRevisionId());
+		clone.setLayoutRevisionId(getLayoutRevisionId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
-		clone.setBranchId(getBranchId());
-		clone.setPlid(getPlid());
-		clone.setParentRevisionId(getParentRevisionId());
+		clone.setLayoutBranchId(getLayoutBranchId());
+		clone.setParentLayoutRevisionId(getParentLayoutRevisionId());
 		clone.setHead(getHead());
+		clone.setPlid(getPlid());
 		clone.setName(getName());
 		clone.setTitle(getTitle());
 		clone.setDescription(getDescription());
@@ -595,10 +595,10 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	public int compareTo(LayoutRevision layoutRevision) {
 		int value = 0;
 
-		if (getRevisionId() < layoutRevision.getRevisionId()) {
+		if (getLayoutRevisionId() < layoutRevision.getLayoutRevisionId()) {
 			value = -1;
 		}
-		else if (getRevisionId() > layoutRevision.getRevisionId()) {
+		else if (getLayoutRevisionId() > layoutRevision.getLayoutRevisionId()) {
 			value = 1;
 		}
 		else {
@@ -645,8 +645,8 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	public String toString() {
 		StringBundler sb = new StringBundler(53);
 
-		sb.append("{revisionId=");
-		sb.append(getRevisionId());
+		sb.append("{layoutRevisionId=");
+		sb.append(getLayoutRevisionId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
 		sb.append(", companyId=");
@@ -659,14 +659,14 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", branchId=");
-		sb.append(getBranchId());
-		sb.append(", plid=");
-		sb.append(getPlid());
-		sb.append(", parentRevisionId=");
-		sb.append(getParentRevisionId());
+		sb.append(", layoutBranchId=");
+		sb.append(getLayoutBranchId());
+		sb.append(", parentLayoutRevisionId=");
+		sb.append(getParentLayoutRevisionId());
 		sb.append(", head=");
 		sb.append(getHead());
+		sb.append(", plid=");
+		sb.append(getPlid());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", title=");
@@ -710,8 +710,8 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		sb.append("</model-name>");
 
 		sb.append(
-			"<column><column-name>revisionId</column-name><column-value><![CDATA[");
-		sb.append(getRevisionId());
+			"<column><column-name>layoutRevisionId</column-name><column-value><![CDATA[");
+		sb.append(getLayoutRevisionId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
@@ -738,20 +738,20 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>branchId</column-name><column-value><![CDATA[");
-		sb.append(getBranchId());
+			"<column><column-name>layoutBranchId</column-name><column-value><![CDATA[");
+		sb.append(getLayoutBranchId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>plid</column-name><column-value><![CDATA[");
-		sb.append(getPlid());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>parentRevisionId</column-name><column-value><![CDATA[");
-		sb.append(getParentRevisionId());
+			"<column><column-name>parentLayoutRevisionId</column-name><column-value><![CDATA[");
+		sb.append(getParentLayoutRevisionId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>head</column-name><column-value><![CDATA[");
 		sb.append(getHead());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>plid</column-name><column-value><![CDATA[");
+		sb.append(getPlid());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
@@ -819,7 +819,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		return sb.toString();
 	}
 
-	private long _revisionId;
+	private long _layoutRevisionId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
@@ -827,16 +827,16 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _branchId;
-	private long _originalBranchId;
-	private boolean _setOriginalBranchId;
-	private long _plid;
-	private long _originalPlid;
-	private boolean _setOriginalPlid;
-	private long _parentRevisionId;
+	private long _layoutBranchId;
+	private long _originalLayoutBranchId;
+	private boolean _setOriginalLayoutBranchId;
+	private long _parentLayoutRevisionId;
 	private boolean _head;
 	private boolean _originalHead;
 	private boolean _setOriginalHead;
+	private long _plid;
+	private long _originalPlid;
+	private boolean _setOriginalPlid;
 	private String _name;
 	private String _title;
 	private String _description;

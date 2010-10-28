@@ -295,15 +295,15 @@ create index IX_D0822724 on Layout (uuid_);
 create unique index IX_CED31606 on Layout (uuid_, groupId);
 
 create index IX_98834698 on LayoutBranch (groupId);
-create index IX_ABC44457 on LayoutBranch (groupId, name);
+create unique index IX_ABC44457 on LayoutBranch (groupId, name);
 
 create index IX_30616AAA on LayoutPrototype (companyId);
 create index IX_557A639F on LayoutPrototype (companyId, active_);
 
-create index IX_4806241C on LayoutRevision (branchId);
-create index IX_3DA6CD67 on LayoutRevision (branchId, plid);
-create index IX_E9CB05FB on LayoutRevision (branchId, plid, head);
-create index IX_3450B54D on LayoutRevision (branchId, plid, status);
+create index IX_AD55C126 on LayoutRevision (layoutBranchId);
+create unique index IX_98A8D945 on LayoutRevision (layoutBranchId, head, plid);
+create index IX_6F0AFAF1 on LayoutRevision (layoutBranchId, plid);
+create index IX_B61BB8D7 on LayoutRevision (layoutBranchId, plid, status);
 create index IX_9329C9D6 on LayoutRevision (plid);
 
 create index IX_A40B8BEC on LayoutSet (groupId);

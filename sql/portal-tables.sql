@@ -746,7 +746,7 @@ create table Layout (
 );
 
 create table LayoutBranch (
-	branchId LONG not null primary key,
+	layoutBranchId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
@@ -767,17 +767,17 @@ create table LayoutPrototype (
 );
 
 create table LayoutRevision (
-	revisionId LONG not null primary key,
+	layoutRevisionId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	branchId LONG,
-	plid LONG,
-	parentRevisionId LONG,
+	layoutBranchId LONG,
+	parentLayoutRevisionId LONG,
 	head BOOLEAN,
+	plid LONG,
 	name STRING null,
 	title STRING null,
 	description STRING null,

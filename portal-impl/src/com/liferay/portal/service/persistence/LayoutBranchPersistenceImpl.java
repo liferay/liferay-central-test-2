@@ -70,18 +70,18 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 	public static final String FINDER_CLASS_NAME_ENTITY = LayoutBranchImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
-	public static final FinderPath FINDER_PATH_FIND_BY_G = new FinderPath(LayoutBranchModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(LayoutBranchModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutBranchModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG",
+			"findByGroupId",
 			new String[] {
 				Long.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_G = new FinderPath(LayoutBranchModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(LayoutBranchModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutBranchModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByG", new String[] { Long.class.getName() });
+			"countByGroupId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FETCH_BY_G_N = new FinderPath(LayoutBranchModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutBranchModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_ENTITY, "fetchByG_N",
@@ -166,14 +166,14 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 	/**
 	 * Creates a new layout branch with the primary key. Does not add the layout branch to the database.
 	 *
-	 * @param branchId the primary key for the new layout branch
+	 * @param layoutBranchId the primary key for the new layout branch
 	 * @return the new layout branch
 	 */
-	public LayoutBranch create(long branchId) {
+	public LayoutBranch create(long layoutBranchId) {
 		LayoutBranch layoutBranch = new LayoutBranchImpl();
 
 		layoutBranch.setNew(true);
-		layoutBranch.setPrimaryKey(branchId);
+		layoutBranch.setPrimaryKey(layoutBranchId);
 
 		return layoutBranch;
 	}
@@ -194,12 +194,12 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 	/**
 	 * Removes the layout branch with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param branchId the primary key of the layout branch to remove
+	 * @param layoutBranchId the primary key of the layout branch to remove
 	 * @return the layout branch that was removed
 	 * @throws com.liferay.portal.NoSuchLayoutBranchException if a layout branch with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public LayoutBranch remove(long branchId)
+	public LayoutBranch remove(long layoutBranchId)
 		throws NoSuchLayoutBranchException, SystemException {
 		Session session = null;
 
@@ -207,15 +207,16 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 			session = openSession();
 
 			LayoutBranch layoutBranch = (LayoutBranch)session.get(LayoutBranchImpl.class,
-					new Long(branchId));
+					new Long(layoutBranchId));
 
 			if (layoutBranch == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + branchId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+						layoutBranchId);
 				}
 
 				throw new NoSuchLayoutBranchException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					branchId);
+					layoutBranchId);
 			}
 
 			return remove(layoutBranch);
@@ -333,7 +334,7 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 		layoutBranchImpl.setNew(layoutBranch.isNew());
 		layoutBranchImpl.setPrimaryKey(layoutBranch.getPrimaryKey());
 
-		layoutBranchImpl.setBranchId(layoutBranch.getBranchId());
+		layoutBranchImpl.setLayoutBranchId(layoutBranch.getLayoutBranchId());
 		layoutBranchImpl.setGroupId(layoutBranch.getGroupId());
 		layoutBranchImpl.setCompanyId(layoutBranch.getCompanyId());
 		layoutBranchImpl.setUserId(layoutBranch.getUserId());
@@ -362,22 +363,22 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 	/**
 	 * Finds the layout branch with the primary key or throws a {@link com.liferay.portal.NoSuchLayoutBranchException} if it could not be found.
 	 *
-	 * @param branchId the primary key of the layout branch to find
+	 * @param layoutBranchId the primary key of the layout branch to find
 	 * @return the layout branch
 	 * @throws com.liferay.portal.NoSuchLayoutBranchException if a layout branch with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public LayoutBranch findByPrimaryKey(long branchId)
+	public LayoutBranch findByPrimaryKey(long layoutBranchId)
 		throws NoSuchLayoutBranchException, SystemException {
-		LayoutBranch layoutBranch = fetchByPrimaryKey(branchId);
+		LayoutBranch layoutBranch = fetchByPrimaryKey(layoutBranchId);
 
 		if (layoutBranch == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + branchId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + layoutBranchId);
 			}
 
 			throw new NoSuchLayoutBranchException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				branchId);
+				layoutBranchId);
 		}
 
 		return layoutBranch;
@@ -398,14 +399,14 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 	/**
 	 * Finds the layout branch with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param branchId the primary key of the layout branch to find
+	 * @param layoutBranchId the primary key of the layout branch to find
 	 * @return the layout branch, or <code>null</code> if a layout branch with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public LayoutBranch fetchByPrimaryKey(long branchId)
+	public LayoutBranch fetchByPrimaryKey(long layoutBranchId)
 		throws SystemException {
 		LayoutBranch layoutBranch = (LayoutBranch)EntityCacheUtil.getResult(LayoutBranchModelImpl.ENTITY_CACHE_ENABLED,
-				LayoutBranchImpl.class, branchId, this);
+				LayoutBranchImpl.class, layoutBranchId, this);
 
 		if (layoutBranch == null) {
 			Session session = null;
@@ -414,7 +415,7 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 				session = openSession();
 
 				layoutBranch = (LayoutBranch)session.get(LayoutBranchImpl.class,
-						new Long(branchId));
+						new Long(layoutBranchId));
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -438,8 +439,9 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 	 * @return the matching layout branchs
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<LayoutBranch> findByG(long groupId) throws SystemException {
-		return findByG(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<LayoutBranch> findByGroupId(long groupId)
+		throws SystemException {
+		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
@@ -455,9 +457,9 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 	 * @return the range of matching layout branchs
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<LayoutBranch> findByG(long groupId, int start, int end)
+	public List<LayoutBranch> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
-		return findByG(groupId, start, end, null);
+		return findByGroupId(groupId, start, end, null);
 	}
 
 	/**
@@ -474,7 +476,7 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 	 * @return the ordered range of matching layout branchs
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<LayoutBranch> findByG(long groupId, int start, int end,
+	public List<LayoutBranch> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				groupId,
@@ -483,7 +485,7 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 				String.valueOf(orderByComparator)
 			};
 
-		List<LayoutBranch> list = (List<LayoutBranch>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G,
+		List<LayoutBranch> list = (List<LayoutBranch>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -499,7 +501,7 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 
 			query.append(_SQL_SELECT_LAYOUTBRANCH_WHERE);
 
-			query.append(_FINDER_COLUMN_G_GROUPID_2);
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -536,8 +538,8 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G, finderArgs,
-					list);
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
+					finderArgs, list);
 
 				closeSession(session);
 			}
@@ -559,10 +561,10 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 	 * @throws com.liferay.portal.NoSuchLayoutBranchException if a matching layout branch could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public LayoutBranch findByG_First(long groupId,
+	public LayoutBranch findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchLayoutBranchException, SystemException {
-		List<LayoutBranch> list = findByG(groupId, 0, 1, orderByComparator);
+		List<LayoutBranch> list = findByGroupId(groupId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -594,12 +596,12 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 	 * @throws com.liferay.portal.NoSuchLayoutBranchException if a matching layout branch could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public LayoutBranch findByG_Last(long groupId,
+	public LayoutBranch findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchLayoutBranchException, SystemException {
-		int count = countByG(groupId);
+		int count = countByGroupId(groupId);
 
-		List<LayoutBranch> list = findByG(groupId, count - 1, count,
+		List<LayoutBranch> list = findByGroupId(groupId, count - 1, count,
 				orderByComparator);
 
 		if (list.isEmpty()) {
@@ -626,17 +628,17 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param branchId the primary key of the current layout branch
+	 * @param layoutBranchId the primary key of the current layout branch
 	 * @param groupId the group id to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next layout branch
 	 * @throws com.liferay.portal.NoSuchLayoutBranchException if a layout branch with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public LayoutBranch[] findByG_PrevAndNext(long branchId, long groupId,
-		OrderByComparator orderByComparator)
+	public LayoutBranch[] findByGroupId_PrevAndNext(long layoutBranchId,
+		long groupId, OrderByComparator orderByComparator)
 		throws NoSuchLayoutBranchException, SystemException {
-		LayoutBranch layoutBranch = findByPrimaryKey(branchId);
+		LayoutBranch layoutBranch = findByPrimaryKey(layoutBranchId);
 
 		Session session = null;
 
@@ -645,12 +647,12 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 
 			LayoutBranch[] array = new LayoutBranchImpl[3];
 
-			array[0] = getByG_PrevAndNext(session, layoutBranch, groupId,
+			array[0] = getByGroupId_PrevAndNext(session, layoutBranch, groupId,
 					orderByComparator, true);
 
 			array[1] = layoutBranch;
 
-			array[2] = getByG_PrevAndNext(session, layoutBranch, groupId,
+			array[2] = getByGroupId_PrevAndNext(session, layoutBranch, groupId,
 					orderByComparator, false);
 
 			return array;
@@ -663,7 +665,7 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 		}
 	}
 
-	protected LayoutBranch getByG_PrevAndNext(Session session,
+	protected LayoutBranch getByGroupId_PrevAndNext(Session session,
 		LayoutBranch layoutBranch, long groupId,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
@@ -678,7 +680,7 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 
 		query.append(_SQL_SELECT_LAYOUTBRANCH_WHERE);
 
-		query.append(_FINDER_COLUMN_G_GROUPID_2);
+		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -774,9 +776,10 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 	 * @return the matching layout branchs that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<LayoutBranch> filterFindByG(long groupId)
+	public List<LayoutBranch> filterFindByGroupId(long groupId)
 		throws SystemException {
-		return filterFindByG(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
@@ -792,9 +795,9 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 	 * @return the range of matching layout branchs that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<LayoutBranch> filterFindByG(long groupId, int start, int end)
-		throws SystemException {
-		return filterFindByG(groupId, start, end, null);
+	public List<LayoutBranch> filterFindByGroupId(long groupId, int start,
+		int end) throws SystemException {
+		return filterFindByGroupId(groupId, start, end, null);
 	}
 
 	/**
@@ -811,10 +814,10 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 	 * @return the ordered range of matching layout branchs that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<LayoutBranch> filterFindByG(long groupId, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+	public List<LayoutBranch> filterFindByGroupId(long groupId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return findByG(groupId, start, end, orderByComparator);
+			return findByGroupId(groupId, start, end, orderByComparator);
 		}
 
 		StringBundler query = null;
@@ -834,7 +837,7 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 			query.append(_FILTER_SQL_SELECT_LAYOUTBRANCH_NO_INLINE_DISTINCT_WHERE);
 		}
 
-		query.append(_FINDER_COLUMN_G_GROUPID_2);
+		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		if (orderByComparator != null) {
 			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1138,8 +1141,8 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 	 * @param groupId the group id to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByG(long groupId) throws SystemException {
-		for (LayoutBranch layoutBranch : findByG(groupId)) {
+	public void removeByGroupId(long groupId) throws SystemException {
+		for (LayoutBranch layoutBranch : findByGroupId(groupId)) {
 			remove(layoutBranch);
 		}
 	}
@@ -1176,10 +1179,10 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 	 * @return the number of matching layout branchs
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByG(long groupId) throws SystemException {
+	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
 				finderArgs, this);
 
 		if (count == null) {
@@ -1187,7 +1190,7 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 
 			query.append(_SQL_COUNT_LAYOUTBRANCH_WHERE);
 
-			query.append(_FINDER_COLUMN_G_GROUPID_2);
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 			String sql = query.toString();
 
@@ -1212,8 +1215,8 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G, finderArgs,
-					count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
+					finderArgs, count);
 
 				closeSession(session);
 			}
@@ -1229,16 +1232,16 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 	 * @return the number of matching layout branchs that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int filterCountByG(long groupId) throws SystemException {
+	public int filterCountByGroupId(long groupId) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return countByG(groupId);
+			return countByGroupId(groupId);
 		}
 
 		StringBundler query = new StringBundler(2);
 
 		query.append(_FILTER_SQL_COUNT_LAYOUTBRANCH_WHERE);
 
-		query.append(_FINDER_COLUMN_G_GROUPID_2);
+		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
 				LayoutBranch.class.getName(), _FILTER_COLUMN_PK,
@@ -1527,16 +1530,16 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 	private static final String _SQL_SELECT_LAYOUTBRANCH_WHERE = "SELECT layoutBranch FROM LayoutBranch layoutBranch WHERE ";
 	private static final String _SQL_COUNT_LAYOUTBRANCH = "SELECT COUNT(layoutBranch) FROM LayoutBranch layoutBranch";
 	private static final String _SQL_COUNT_LAYOUTBRANCH_WHERE = "SELECT COUNT(layoutBranch) FROM LayoutBranch layoutBranch WHERE ";
-	private static final String _FINDER_COLUMN_G_GROUPID_2 = "layoutBranch.groupId = ?";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "layoutBranch.groupId = ?";
 	private static final String _FINDER_COLUMN_G_N_GROUPID_2 = "layoutBranch.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_N_NAME_1 = "layoutBranch.name IS NULL";
 	private static final String _FINDER_COLUMN_G_N_NAME_2 = "layoutBranch.name = ?";
 	private static final String _FINDER_COLUMN_G_N_NAME_3 = "(layoutBranch.name IS NULL OR layoutBranch.name = ?)";
 	private static final String _FILTER_SQL_SELECT_LAYOUTBRANCH_WHERE = "SELECT DISTINCT {layoutBranch.*} FROM LayoutBranch layoutBranch WHERE ";
 	private static final String _FILTER_SQL_SELECT_LAYOUTBRANCH_NO_INLINE_DISTINCT_WHERE =
-		"SELECT {layoutBranch.*} FROM (SELECT DISTINCT branchId FROM LayoutBranch) layoutBranch2 INNER JOIN LayoutBranch layoutBranch ON (layoutBranch2.branchId = layoutBranch.branchId) WHERE ";
-	private static final String _FILTER_SQL_COUNT_LAYOUTBRANCH_WHERE = "SELECT COUNT(DISTINCT layoutBranch.branchId) AS COUNT_VALUE FROM LayoutBranch layoutBranch WHERE ";
-	private static final String _FILTER_COLUMN_PK = "layoutBranch.branchId";
+		"SELECT {layoutBranch.*} FROM (SELECT DISTINCT layoutBranchId FROM LayoutBranch) layoutBranch2 INNER JOIN LayoutBranch layoutBranch ON (layoutBranch2.layoutBranchId = layoutBranch.layoutBranchId) WHERE ";
+	private static final String _FILTER_SQL_COUNT_LAYOUTBRANCH_WHERE = "SELECT COUNT(DISTINCT layoutBranch.layoutBranchId) AS COUNT_VALUE FROM LayoutBranch layoutBranch WHERE ";
+	private static final String _FILTER_COLUMN_PK = "layoutBranch.layoutBranchId";
 	private static final String _FILTER_COLUMN_USERID = "layoutBranch.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "layoutBranch";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "layoutBranch.";

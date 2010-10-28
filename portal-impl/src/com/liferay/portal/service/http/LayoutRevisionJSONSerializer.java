@@ -31,7 +31,7 @@ public class LayoutRevisionJSONSerializer {
 	public static JSONObject toJSONObject(LayoutRevision model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("revisionId", model.getRevisionId());
+		jsonObj.put("layoutRevisionId", model.getLayoutRevisionId());
 		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
@@ -56,10 +56,10 @@ public class LayoutRevisionJSONSerializer {
 		}
 
 		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("branchId", model.getBranchId());
-		jsonObj.put("plid", model.getPlid());
-		jsonObj.put("parentRevisionId", model.getParentRevisionId());
+		jsonObj.put("layoutBranchId", model.getLayoutBranchId());
+		jsonObj.put("parentLayoutRevisionId", model.getParentLayoutRevisionId());
 		jsonObj.put("head", model.getHead());
+		jsonObj.put("plid", model.getPlid());
 		jsonObj.put("name", model.getName());
 		jsonObj.put("title", model.getTitle());
 		jsonObj.put("description", model.getDescription());

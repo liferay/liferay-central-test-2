@@ -36,36 +36,36 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * @generated
  */
 public class LayoutBranchServiceUtil {
-	public static com.liferay.portal.model.LayoutBranch addBranch(
+	public static com.liferay.portal.model.LayoutBranch addLayoutBranch(
 		long groupId, java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().addBranch(groupId, name, description, serviceContext);
+		return getService()
+				   .addLayoutBranch(groupId, name, description, serviceContext);
 	}
 
-	public static void deleteBranch(long groupId, long branchId)
+	public static void deleteLayoutBranch(long groupId, long layoutBranchId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteBranch(groupId, branchId);
+		getService().deleteLayoutBranch(groupId, layoutBranchId);
 	}
 
-	public static java.util.List<com.liferay.portal.model.LayoutBranch> getBranches(
+	public static java.util.List<com.liferay.portal.model.LayoutBranch> getLayoutBranches(
 		long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getBranches(groupId);
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getLayoutBranches(groupId);
 	}
 
-	public static com.liferay.portal.model.LayoutBranch updateBranch(
-		long groupId, long branchId, java.lang.String name,
+	public static com.liferay.portal.model.LayoutBranch updateLayoutBranch(
+		long groupId, long layoutBranchId, java.lang.String name,
 		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateBranch(groupId, branchId, name, description,
-			serviceContext);
+				   .updateLayoutBranch(groupId, layoutBranchId, name,
+			description, serviceContext);
 	}
 
 	public static LayoutBranchService getService() {

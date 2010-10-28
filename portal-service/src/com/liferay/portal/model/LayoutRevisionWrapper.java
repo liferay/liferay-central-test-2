@@ -47,21 +47,21 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	}
 
 	/**
-	* Gets the revision id of this layout revision.
+	* Gets the layout revision id of this layout revision.
 	*
-	* @return the revision id of this layout revision
+	* @return the layout revision id of this layout revision
 	*/
-	public long getRevisionId() {
-		return _layoutRevision.getRevisionId();
+	public long getLayoutRevisionId() {
+		return _layoutRevision.getLayoutRevisionId();
 	}
 
 	/**
-	* Sets the revision id of this layout revision.
+	* Sets the layout revision id of this layout revision.
 	*
-	* @param revisionId the revision id of this layout revision
+	* @param layoutRevisionId the layout revision id of this layout revision
 	*/
-	public void setRevisionId(long revisionId) {
-		_layoutRevision.setRevisionId(revisionId);
+	public void setLayoutRevisionId(long layoutRevisionId) {
+		_layoutRevision.setLayoutRevisionId(layoutRevisionId);
 	}
 
 	/**
@@ -193,57 +193,39 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	}
 
 	/**
-	* Gets the branch id of this layout revision.
+	* Gets the layout branch id of this layout revision.
 	*
-	* @return the branch id of this layout revision
+	* @return the layout branch id of this layout revision
 	*/
-	public long getBranchId() {
-		return _layoutRevision.getBranchId();
+	public long getLayoutBranchId() {
+		return _layoutRevision.getLayoutBranchId();
 	}
 
 	/**
-	* Sets the branch id of this layout revision.
+	* Sets the layout branch id of this layout revision.
 	*
-	* @param branchId the branch id of this layout revision
+	* @param layoutBranchId the layout branch id of this layout revision
 	*/
-	public void setBranchId(long branchId) {
-		_layoutRevision.setBranchId(branchId);
+	public void setLayoutBranchId(long layoutBranchId) {
+		_layoutRevision.setLayoutBranchId(layoutBranchId);
 	}
 
 	/**
-	* Gets the plid of this layout revision.
+	* Gets the parent layout revision id of this layout revision.
 	*
-	* @return the plid of this layout revision
+	* @return the parent layout revision id of this layout revision
 	*/
-	public long getPlid() {
-		return _layoutRevision.getPlid();
+	public long getParentLayoutRevisionId() {
+		return _layoutRevision.getParentLayoutRevisionId();
 	}
 
 	/**
-	* Sets the plid of this layout revision.
+	* Sets the parent layout revision id of this layout revision.
 	*
-	* @param plid the plid of this layout revision
+	* @param parentLayoutRevisionId the parent layout revision id of this layout revision
 	*/
-	public void setPlid(long plid) {
-		_layoutRevision.setPlid(plid);
-	}
-
-	/**
-	* Gets the parent revision id of this layout revision.
-	*
-	* @return the parent revision id of this layout revision
-	*/
-	public long getParentRevisionId() {
-		return _layoutRevision.getParentRevisionId();
-	}
-
-	/**
-	* Sets the parent revision id of this layout revision.
-	*
-	* @param parentRevisionId the parent revision id of this layout revision
-	*/
-	public void setParentRevisionId(long parentRevisionId) {
-		_layoutRevision.setParentRevisionId(parentRevisionId);
+	public void setParentLayoutRevisionId(long parentLayoutRevisionId) {
+		_layoutRevision.setParentLayoutRevisionId(parentLayoutRevisionId);
 	}
 
 	/**
@@ -271,6 +253,24 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	*/
 	public void setHead(boolean head) {
 		_layoutRevision.setHead(head);
+	}
+
+	/**
+	* Gets the plid of this layout revision.
+	*
+	* @return the plid of this layout revision
+	*/
+	public long getPlid() {
+		return _layoutRevision.getPlid();
+	}
+
+	/**
+	* Sets the plid of this layout revision.
+	*
+	* @param plid the plid of this layout revision
+	*/
+	public void setPlid(long plid) {
+		_layoutRevision.setPlid(plid);
 	}
 
 	/**

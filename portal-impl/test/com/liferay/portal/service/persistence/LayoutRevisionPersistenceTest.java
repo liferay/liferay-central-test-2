@@ -70,10 +70,10 @@ public class LayoutRevisionPersistenceTest extends BasePersistenceTestCase {
 		newLayoutRevision.setUserName(randomString());
 		newLayoutRevision.setCreateDate(nextDate());
 		newLayoutRevision.setModifiedDate(nextDate());
-		newLayoutRevision.setBranchId(nextLong());
-		newLayoutRevision.setPlid(nextLong());
-		newLayoutRevision.setParentRevisionId(nextLong());
+		newLayoutRevision.setLayoutBranchId(nextLong());
+		newLayoutRevision.setParentLayoutRevisionId(nextLong());
 		newLayoutRevision.setHead(randomBoolean());
+		newLayoutRevision.setPlid(nextLong());
 		newLayoutRevision.setName(randomString());
 		newLayoutRevision.setTitle(randomString());
 		newLayoutRevision.setDescription(randomString());
@@ -94,8 +94,8 @@ public class LayoutRevisionPersistenceTest extends BasePersistenceTestCase {
 
 		LayoutRevision existingLayoutRevision = _persistence.findByPrimaryKey(newLayoutRevision.getPrimaryKey());
 
-		assertEquals(existingLayoutRevision.getRevisionId(),
-			newLayoutRevision.getRevisionId());
+		assertEquals(existingLayoutRevision.getLayoutRevisionId(),
+			newLayoutRevision.getLayoutRevisionId());
 		assertEquals(existingLayoutRevision.getGroupId(),
 			newLayoutRevision.getGroupId());
 		assertEquals(existingLayoutRevision.getCompanyId(),
@@ -110,14 +110,14 @@ public class LayoutRevisionPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(Time.getShortTimestamp(
 				existingLayoutRevision.getModifiedDate()),
 			Time.getShortTimestamp(newLayoutRevision.getModifiedDate()));
-		assertEquals(existingLayoutRevision.getBranchId(),
-			newLayoutRevision.getBranchId());
-		assertEquals(existingLayoutRevision.getPlid(),
-			newLayoutRevision.getPlid());
-		assertEquals(existingLayoutRevision.getParentRevisionId(),
-			newLayoutRevision.getParentRevisionId());
+		assertEquals(existingLayoutRevision.getLayoutBranchId(),
+			newLayoutRevision.getLayoutBranchId());
+		assertEquals(existingLayoutRevision.getParentLayoutRevisionId(),
+			newLayoutRevision.getParentLayoutRevisionId());
 		assertEquals(existingLayoutRevision.getHead(),
 			newLayoutRevision.getHead());
+		assertEquals(existingLayoutRevision.getPlid(),
+			newLayoutRevision.getPlid());
 		assertEquals(existingLayoutRevision.getName(),
 			newLayoutRevision.getName());
 		assertEquals(existingLayoutRevision.getTitle(),
@@ -193,8 +193,8 @@ public class LayoutRevisionPersistenceTest extends BasePersistenceTestCase {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutRevision.class,
 				LayoutRevision.class.getClassLoader());
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("revisionId",
-				newLayoutRevision.getRevisionId()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("layoutRevisionId",
+				newLayoutRevision.getLayoutRevisionId()));
 
 		List<LayoutRevision> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -209,7 +209,8 @@ public class LayoutRevisionPersistenceTest extends BasePersistenceTestCase {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutRevision.class,
 				LayoutRevision.class.getClassLoader());
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("revisionId", nextLong()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("layoutRevisionId",
+				nextLong()));
 
 		List<LayoutRevision> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -227,10 +228,10 @@ public class LayoutRevisionPersistenceTest extends BasePersistenceTestCase {
 		layoutRevision.setUserName(randomString());
 		layoutRevision.setCreateDate(nextDate());
 		layoutRevision.setModifiedDate(nextDate());
-		layoutRevision.setBranchId(nextLong());
-		layoutRevision.setPlid(nextLong());
-		layoutRevision.setParentRevisionId(nextLong());
+		layoutRevision.setLayoutBranchId(nextLong());
+		layoutRevision.setParentLayoutRevisionId(nextLong());
 		layoutRevision.setHead(randomBoolean());
+		layoutRevision.setPlid(nextLong());
 		layoutRevision.setName(randomString());
 		layoutRevision.setTitle(randomString());
 		layoutRevision.setDescription(randomString());

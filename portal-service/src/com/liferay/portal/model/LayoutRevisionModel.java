@@ -57,18 +57,18 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the revision id of this layout revision.
+	 * Gets the layout revision id of this layout revision.
 	 *
-	 * @return the revision id of this layout revision
+	 * @return the layout revision id of this layout revision
 	 */
-	public long getRevisionId();
+	public long getLayoutRevisionId();
 
 	/**
-	 * Sets the revision id of this layout revision.
+	 * Sets the layout revision id of this layout revision.
 	 *
-	 * @param revisionId the revision id of this layout revision
+	 * @param layoutRevisionId the layout revision id of this layout revision
 	 */
-	public void setRevisionId(long revisionId);
+	public void setLayoutRevisionId(long layoutRevisionId);
 
 	/**
 	 * Gets the group id of this layout revision.
@@ -171,46 +171,32 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the branch id of this layout revision.
+	 * Gets the layout branch id of this layout revision.
 	 *
-	 * @return the branch id of this layout revision
+	 * @return the layout branch id of this layout revision
 	 */
-	public long getBranchId();
+	public long getLayoutBranchId();
 
 	/**
-	 * Sets the branch id of this layout revision.
+	 * Sets the layout branch id of this layout revision.
 	 *
-	 * @param branchId the branch id of this layout revision
+	 * @param layoutBranchId the layout branch id of this layout revision
 	 */
-	public void setBranchId(long branchId);
+	public void setLayoutBranchId(long layoutBranchId);
 
 	/**
-	 * Gets the plid of this layout revision.
+	 * Gets the parent layout revision id of this layout revision.
 	 *
-	 * @return the plid of this layout revision
+	 * @return the parent layout revision id of this layout revision
 	 */
-	public long getPlid();
+	public long getParentLayoutRevisionId();
 
 	/**
-	 * Sets the plid of this layout revision.
+	 * Sets the parent layout revision id of this layout revision.
 	 *
-	 * @param plid the plid of this layout revision
+	 * @param parentLayoutRevisionId the parent layout revision id of this layout revision
 	 */
-	public void setPlid(long plid);
-
-	/**
-	 * Gets the parent revision id of this layout revision.
-	 *
-	 * @return the parent revision id of this layout revision
-	 */
-	public long getParentRevisionId();
-
-	/**
-	 * Sets the parent revision id of this layout revision.
-	 *
-	 * @param parentRevisionId the parent revision id of this layout revision
-	 */
-	public void setParentRevisionId(long parentRevisionId);
+	public void setParentLayoutRevisionId(long parentLayoutRevisionId);
 
 	/**
 	 * Gets the head of this layout revision.
@@ -232,6 +218,20 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	 * @param head the head of this layout revision
 	 */
 	public void setHead(boolean head);
+
+	/**
+	 * Gets the plid of this layout revision.
+	 *
+	 * @return the plid of this layout revision
+	 */
+	public long getPlid();
+
+	/**
+	 * Sets the plid of this layout revision.
+	 *
+	 * @param plid the plid of this layout revision
+	 */
+	public void setPlid(long plid);
 
 	/**
 	 * Gets the name of this layout revision.

@@ -226,23 +226,23 @@ public abstract class LayoutBranchLocalServiceBaseImpl
 	/**
 	 * Creates a new layout branch with the primary key. Does not add the layout branch to the database.
 	 *
-	 * @param branchId the primary key for the new layout branch
+	 * @param layoutBranchId the primary key for the new layout branch
 	 * @return the new layout branch
 	 */
-	public LayoutBranch createLayoutBranch(long branchId) {
-		return layoutBranchPersistence.create(branchId);
+	public LayoutBranch createLayoutBranch(long layoutBranchId) {
+		return layoutBranchPersistence.create(layoutBranchId);
 	}
 
 	/**
 	 * Deletes the layout branch with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param branchId the primary key of the layout branch to delete
+	 * @param layoutBranchId the primary key of the layout branch to delete
 	 * @throws PortalException if a layout branch with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteLayoutBranch(long branchId)
+	public void deleteLayoutBranch(long layoutBranchId)
 		throws PortalException, SystemException {
-		layoutBranchPersistence.remove(branchId);
+		layoutBranchPersistence.remove(layoutBranchId);
 	}
 
 	/**
@@ -252,7 +252,7 @@ public abstract class LayoutBranchLocalServiceBaseImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteLayoutBranch(LayoutBranch layoutBranch)
-		throws SystemException {
+		throws PortalException, SystemException {
 		layoutBranchPersistence.remove(layoutBranch);
 	}
 
@@ -325,14 +325,14 @@ public abstract class LayoutBranchLocalServiceBaseImpl
 	/**
 	 * Gets the layout branch with the primary key.
 	 *
-	 * @param branchId the primary key of the layout branch to get
+	 * @param layoutBranchId the primary key of the layout branch to get
 	 * @return the layout branch
 	 * @throws PortalException if a layout branch with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public LayoutBranch getLayoutBranch(long branchId)
+	public LayoutBranch getLayoutBranch(long layoutBranchId)
 		throws PortalException, SystemException {
-		return layoutBranchPersistence.findByPrimaryKey(branchId);
+		return layoutBranchPersistence.findByPrimaryKey(layoutBranchId);
 	}
 
 	/**

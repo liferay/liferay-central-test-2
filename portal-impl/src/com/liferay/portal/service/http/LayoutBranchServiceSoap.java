@@ -64,12 +64,12 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class LayoutBranchServiceSoap {
-	public static com.liferay.portal.model.LayoutBranchSoap addBranch(
+	public static com.liferay.portal.model.LayoutBranchSoap addLayoutBranch(
 		long groupId, java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portal.model.LayoutBranch returnValue = LayoutBranchServiceUtil.addBranch(groupId,
+			com.liferay.portal.model.LayoutBranch returnValue = LayoutBranchServiceUtil.addLayoutBranch(groupId,
 					name, description, serviceContext);
 
 			return com.liferay.portal.model.LayoutBranchSoap.toSoapModel(returnValue);
@@ -81,10 +81,10 @@ public class LayoutBranchServiceSoap {
 		}
 	}
 
-	public static void deleteBranch(long groupId, long branchId)
+	public static void deleteLayoutBranch(long groupId, long layoutBranchId)
 		throws RemoteException {
 		try {
-			LayoutBranchServiceUtil.deleteBranch(groupId, branchId);
+			LayoutBranchServiceUtil.deleteLayoutBranch(groupId, layoutBranchId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -93,10 +93,10 @@ public class LayoutBranchServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.LayoutBranchSoap[] getBranches(
+	public static com.liferay.portal.model.LayoutBranchSoap[] getLayoutBranches(
 		long groupId) throws RemoteException {
 		try {
-			java.util.List<com.liferay.portal.model.LayoutBranch> returnValue = LayoutBranchServiceUtil.getBranches(groupId);
+			java.util.List<com.liferay.portal.model.LayoutBranch> returnValue = LayoutBranchServiceUtil.getLayoutBranches(groupId);
 
 			return com.liferay.portal.model.LayoutBranchSoap.toSoapModels(returnValue);
 		}
@@ -107,14 +107,14 @@ public class LayoutBranchServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.LayoutBranchSoap updateBranch(
-		long groupId, long branchId, java.lang.String name,
+	public static com.liferay.portal.model.LayoutBranchSoap updateLayoutBranch(
+		long groupId, long layoutBranchId, java.lang.String name,
 		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portal.model.LayoutBranch returnValue = LayoutBranchServiceUtil.updateBranch(groupId,
-					branchId, name, description, serviceContext);
+			com.liferay.portal.model.LayoutBranch returnValue = LayoutBranchServiceUtil.updateLayoutBranch(groupId,
+					layoutBranchId, name, description, serviceContext);
 
 			return com.liferay.portal.model.LayoutBranchSoap.toSoapModel(returnValue);
 		}

@@ -34,17 +34,17 @@ public class LayoutRevisionSoap implements Serializable {
 	public static LayoutRevisionSoap toSoapModel(LayoutRevision model) {
 		LayoutRevisionSoap soapModel = new LayoutRevisionSoap();
 
-		soapModel.setRevisionId(model.getRevisionId());
+		soapModel.setLayoutRevisionId(model.getLayoutRevisionId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setBranchId(model.getBranchId());
-		soapModel.setPlid(model.getPlid());
-		soapModel.setParentRevisionId(model.getParentRevisionId());
+		soapModel.setLayoutBranchId(model.getLayoutBranchId());
+		soapModel.setParentLayoutRevisionId(model.getParentLayoutRevisionId());
 		soapModel.setHead(model.getHead());
+		soapModel.setPlid(model.getPlid());
 		soapModel.setName(model.getName());
 		soapModel.setTitle(model.getTitle());
 		soapModel.setDescription(model.getDescription());
@@ -105,19 +105,19 @@ public class LayoutRevisionSoap implements Serializable {
 	}
 
 	public long getPrimaryKey() {
-		return _revisionId;
+		return _layoutRevisionId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setRevisionId(pk);
+		setLayoutRevisionId(pk);
 	}
 
-	public long getRevisionId() {
-		return _revisionId;
+	public long getLayoutRevisionId() {
+		return _layoutRevisionId;
 	}
 
-	public void setRevisionId(long revisionId) {
-		_revisionId = revisionId;
+	public void setLayoutRevisionId(long layoutRevisionId) {
+		_layoutRevisionId = layoutRevisionId;
 	}
 
 	public long getGroupId() {
@@ -168,28 +168,20 @@ public class LayoutRevisionSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getBranchId() {
-		return _branchId;
+	public long getLayoutBranchId() {
+		return _layoutBranchId;
 	}
 
-	public void setBranchId(long branchId) {
-		_branchId = branchId;
+	public void setLayoutBranchId(long layoutBranchId) {
+		_layoutBranchId = layoutBranchId;
 	}
 
-	public long getPlid() {
-		return _plid;
+	public long getParentLayoutRevisionId() {
+		return _parentLayoutRevisionId;
 	}
 
-	public void setPlid(long plid) {
-		_plid = plid;
-	}
-
-	public long getParentRevisionId() {
-		return _parentRevisionId;
-	}
-
-	public void setParentRevisionId(long parentRevisionId) {
-		_parentRevisionId = parentRevisionId;
+	public void setParentLayoutRevisionId(long parentLayoutRevisionId) {
+		_parentLayoutRevisionId = parentLayoutRevisionId;
 	}
 
 	public boolean getHead() {
@@ -202,6 +194,14 @@ public class LayoutRevisionSoap implements Serializable {
 
 	public void setHead(boolean head) {
 		_head = head;
+	}
+
+	public long getPlid() {
+		return _plid;
+	}
+
+	public void setPlid(long plid) {
+		_plid = plid;
 	}
 
 	public String getName() {
@@ -328,17 +328,17 @@ public class LayoutRevisionSoap implements Serializable {
 		_statusDate = statusDate;
 	}
 
-	private long _revisionId;
+	private long _layoutRevisionId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _branchId;
-	private long _plid;
-	private long _parentRevisionId;
+	private long _layoutBranchId;
+	private long _parentLayoutRevisionId;
 	private boolean _head;
+	private long _plid;
 	private String _name;
 	private String _title;
 	private String _description;

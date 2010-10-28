@@ -59,7 +59,7 @@ public class LayoutBranchModelImpl extends BaseModelImpl<LayoutBranch>
 	implements LayoutBranchModel {
 	public static final String TABLE_NAME = "LayoutBranch";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "branchId", new Integer(Types.BIGINT) },
+			{ "layoutBranchId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
@@ -69,7 +69,7 @@ public class LayoutBranchModelImpl extends BaseModelImpl<LayoutBranch>
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table LayoutBranch (branchId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description STRING null)";
+	public static final String TABLE_SQL_CREATE = "create table LayoutBranch (layoutBranchId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table LayoutBranch";
 	public static final String ORDER_BY_JPQL = " ORDER BY layoutBranch.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY LayoutBranch.name ASC";
@@ -92,7 +92,7 @@ public class LayoutBranchModelImpl extends BaseModelImpl<LayoutBranch>
 	public static LayoutBranch toModel(LayoutBranchSoap soapModel) {
 		LayoutBranch model = new LayoutBranchImpl();
 
-		model.setBranchId(soapModel.getBranchId());
+		model.setLayoutBranchId(soapModel.getLayoutBranchId());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
@@ -128,23 +128,23 @@ public class LayoutBranchModelImpl extends BaseModelImpl<LayoutBranch>
 	}
 
 	public long getPrimaryKey() {
-		return _branchId;
+		return _layoutBranchId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setBranchId(pk);
+		setLayoutBranchId(pk);
 	}
 
 	public Serializable getPrimaryKeyObj() {
-		return new Long(_branchId);
+		return new Long(_layoutBranchId);
 	}
 
-	public long getBranchId() {
-		return _branchId;
+	public long getLayoutBranchId() {
+		return _layoutBranchId;
 	}
 
-	public void setBranchId(long branchId) {
-		_branchId = branchId;
+	public void setLayoutBranchId(long layoutBranchId) {
+		_layoutBranchId = layoutBranchId;
 	}
 
 	public long getGroupId() {
@@ -279,7 +279,7 @@ public class LayoutBranchModelImpl extends BaseModelImpl<LayoutBranch>
 	public Object clone() {
 		LayoutBranchImpl clone = new LayoutBranchImpl();
 
-		clone.setBranchId(getBranchId());
+		clone.setLayoutBranchId(getLayoutBranchId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
@@ -335,8 +335,8 @@ public class LayoutBranchModelImpl extends BaseModelImpl<LayoutBranch>
 	public String toString() {
 		StringBundler sb = new StringBundler(19);
 
-		sb.append("{branchId=");
-		sb.append(getBranchId());
+		sb.append("{layoutBranchId=");
+		sb.append(getLayoutBranchId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
 		sb.append(", companyId=");
@@ -366,8 +366,8 @@ public class LayoutBranchModelImpl extends BaseModelImpl<LayoutBranch>
 		sb.append("</model-name>");
 
 		sb.append(
-			"<column><column-name>branchId</column-name><column-value><![CDATA[");
-		sb.append(getBranchId());
+			"<column><column-name>layoutBranchId</column-name><column-value><![CDATA[");
+		sb.append(getLayoutBranchId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
@@ -407,7 +407,7 @@ public class LayoutBranchModelImpl extends BaseModelImpl<LayoutBranch>
 		return sb.toString();
 	}
 
-	private long _branchId;
+	private long _layoutBranchId;
 	private long _groupId;
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;

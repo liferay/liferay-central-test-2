@@ -46,25 +46,25 @@ public class LayoutRevisionLocalServiceWrapper
 	/**
 	* Creates a new layout revision with the primary key. Does not add the layout revision to the database.
 	*
-	* @param revisionId the primary key for the new layout revision
+	* @param layoutRevisionId the primary key for the new layout revision
 	* @return the new layout revision
 	*/
 	public com.liferay.portal.model.LayoutRevision createLayoutRevision(
-		long revisionId) {
-		return _layoutRevisionLocalService.createLayoutRevision(revisionId);
+		long layoutRevisionId) {
+		return _layoutRevisionLocalService.createLayoutRevision(layoutRevisionId);
 	}
 
 	/**
 	* Deletes the layout revision with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param revisionId the primary key of the layout revision to delete
+	* @param layoutRevisionId the primary key of the layout revision to delete
 	* @throws PortalException if a layout revision with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteLayoutRevision(long revisionId)
+	public void deleteLayoutRevision(long layoutRevisionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_layoutRevisionLocalService.deleteLayoutRevision(revisionId);
+		_layoutRevisionLocalService.deleteLayoutRevision(layoutRevisionId);
 	}
 
 	/**
@@ -75,7 +75,8 @@ public class LayoutRevisionLocalServiceWrapper
 	*/
 	public void deleteLayoutRevision(
 		com.liferay.portal.model.LayoutRevision layoutRevision)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_layoutRevisionLocalService.deleteLayoutRevision(layoutRevision);
 	}
 
@@ -153,16 +154,16 @@ public class LayoutRevisionLocalServiceWrapper
 	/**
 	* Gets the layout revision with the primary key.
 	*
-	* @param revisionId the primary key of the layout revision to get
+	* @param layoutRevisionId the primary key of the layout revision to get
 	* @return the layout revision
 	* @throws PortalException if a layout revision with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portal.model.LayoutRevision getLayoutRevision(
-		long revisionId)
+		long layoutRevisionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _layoutRevisionLocalService.getLayoutRevision(revisionId);
+		return _layoutRevisionLocalService.getLayoutRevision(layoutRevisionId);
 	}
 
 	/**
@@ -222,102 +223,9 @@ public class LayoutRevisionLocalServiceWrapper
 			merge);
 	}
 
-	public com.liferay.portal.model.LayoutRevision addRevision(long branchId,
-		long plid, long groupId, java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String typeSettings,
-		boolean iconImage, long iconImageId, java.lang.String themeId,
-		java.lang.String colorSchemeId, java.lang.String wapThemeId,
-		java.lang.String wapColorSchemeId, java.lang.String css, boolean head,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layoutRevisionLocalService.addRevision(branchId, plid, groupId,
-			name, title, description, typeSettings, iconImage, iconImageId,
-			themeId, colorSchemeId, wapThemeId, wapColorSchemeId, css, head,
-			serviceContext);
-	}
-
-	public void deleteRevision(long revisionId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_layoutRevisionLocalService.deleteRevision(revisionId);
-	}
-
-	public void deleteRevision(com.liferay.portal.model.LayoutRevision revision)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		_layoutRevisionLocalService.deleteRevision(revision);
-	}
-
-	public void deleteRevisionsByBranch(long branchId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_layoutRevisionLocalService.deleteRevisionsByBranch(branchId);
-	}
-
-	public void deleteRevisionsByLayout(long plid)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_layoutRevisionLocalService.deleteRevisionsByLayout(plid);
-	}
-
-	public void deleteRevisions(long branchId, long plid)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_layoutRevisionLocalService.deleteRevisions(branchId, plid);
-	}
-
-	public com.liferay.portal.model.LayoutRevision checkLatestRevision(
-		long branchId, long plid,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layoutRevisionLocalService.checkLatestRevision(branchId, plid,
-			serviceContext);
-	}
-
-	public com.liferay.portal.model.LayoutRevision getHeadRevision(
-		long branchId, long plid)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layoutRevisionLocalService.getHeadRevision(branchId, plid);
-	}
-
-	public com.liferay.portal.model.LayoutRevision getRevision(long revisionId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layoutRevisionLocalService.getRevision(revisionId);
-	}
-
-	public java.util.List<com.liferay.portal.model.LayoutRevision> getRevisions(
-		long plid)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layoutRevisionLocalService.getRevisions(plid);
-	}
-
-	public java.util.List<com.liferay.portal.model.LayoutRevision> getRevisions(
-		long branchId, long plid)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layoutRevisionLocalService.getRevisions(branchId, plid);
-	}
-
-	public java.util.List<com.liferay.portal.model.LayoutRevision> getRevisions(
-		long branchId, long plid, int status)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layoutRevisionLocalService.getRevisions(branchId, plid, status);
-	}
-
-	public com.liferay.portal.model.LayoutRevision revertToRevision(
-		long revisionId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layoutRevisionLocalService.revertToRevision(revisionId);
-	}
-
-	public com.liferay.portal.model.LayoutRevision updateRevision(
-		long revisionId, java.lang.String name, java.lang.String title,
+	public com.liferay.portal.model.LayoutRevision addLayoutRevision(
+		long userId, long layoutBranchId, long parentLayoutRevisionId,
+		boolean head, long plid, java.lang.String name, java.lang.String title,
 		java.lang.String description, java.lang.String typeSettings,
 		boolean iconImage, long iconImageId, java.lang.String themeId,
 		java.lang.String colorSchemeId, java.lang.String wapThemeId,
@@ -325,18 +233,96 @@ public class LayoutRevisionLocalServiceWrapper
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _layoutRevisionLocalService.updateRevision(revisionId, name,
-			title, description, typeSettings, iconImage, iconImageId, themeId,
+		return _layoutRevisionLocalService.addLayoutRevision(userId,
+			layoutBranchId, parentLayoutRevisionId, head, plid, name, title,
+			description, typeSettings, iconImage, iconImageId, themeId,
 			colorSchemeId, wapThemeId, wapColorSchemeId, css, serviceContext);
 	}
 
-	public com.liferay.portal.model.LayoutRevision updateStatus(long userId,
-		long revisionId, int status,
+	public com.liferay.portal.model.LayoutRevision checkLatestLayoutRevision(
+		long layoutRevisionId, long layoutBranchId, long plid,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _layoutRevisionLocalService.updateStatus(userId, revisionId,
-			status, serviceContext);
+		return _layoutRevisionLocalService.checkLatestLayoutRevision(layoutRevisionId,
+			layoutBranchId, plid, serviceContext);
+	}
+
+	public void deleteLayoutBranchLayoutRevisions(long layoutBranchId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_layoutRevisionLocalService.deleteLayoutBranchLayoutRevisions(layoutBranchId);
+	}
+
+	public void deleteLayoutLayoutRevisions(long plid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_layoutRevisionLocalService.deleteLayoutLayoutRevisions(plid);
+	}
+
+	public void deleteLayoutRevisions(long layoutBranchId, long plid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_layoutRevisionLocalService.deleteLayoutRevisions(layoutBranchId, plid);
+	}
+
+	public com.liferay.portal.model.LayoutRevision getHeadLayoutRevision(
+		long layoutBranchId, long plid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutRevisionLocalService.getHeadLayoutRevision(layoutBranchId,
+			plid);
+	}
+
+	public java.util.List<com.liferay.portal.model.LayoutRevision> getLayoutRevisions(
+		long plid) throws com.liferay.portal.kernel.exception.SystemException {
+		return _layoutRevisionLocalService.getLayoutRevisions(plid);
+	}
+
+	public java.util.List<com.liferay.portal.model.LayoutRevision> getLayoutRevisions(
+		long layoutBranchId, long plid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _layoutRevisionLocalService.getLayoutRevisions(layoutBranchId,
+			plid);
+	}
+
+	public java.util.List<com.liferay.portal.model.LayoutRevision> getLayoutRevisions(
+		long layoutBranchId, long plid, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _layoutRevisionLocalService.getLayoutRevisions(layoutBranchId,
+			plid, status);
+	}
+
+	public com.liferay.portal.model.LayoutRevision revertToLayoutRevision(
+		long layoutRevisionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutRevisionLocalService.revertToLayoutRevision(layoutRevisionId);
+	}
+
+	public com.liferay.portal.model.LayoutRevision updateLayoutRevision(
+		long userId, long layoutRevisionId, java.lang.String name,
+		java.lang.String title, java.lang.String description,
+		java.lang.String typeSettings, boolean iconImage, long iconImageId,
+		java.lang.String themeId, java.lang.String colorSchemeId,
+		java.lang.String wapThemeId, java.lang.String wapColorSchemeId,
+		java.lang.String css,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutRevisionLocalService.updateLayoutRevision(userId,
+			layoutRevisionId, name, title, description, typeSettings,
+			iconImage, iconImageId, themeId, colorSchemeId, wapThemeId,
+			wapColorSchemeId, css, serviceContext);
+	}
+
+	public com.liferay.portal.model.LayoutRevision updateStatus(long userId,
+		long layoutRevisionId, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutRevisionLocalService.updateStatus(userId,
+			layoutRevisionId, status, serviceContext);
 	}
 
 	public LayoutRevisionLocalService getWrappedLayoutRevisionLocalService() {

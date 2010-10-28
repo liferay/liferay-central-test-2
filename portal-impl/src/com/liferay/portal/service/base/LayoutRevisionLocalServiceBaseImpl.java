@@ -226,23 +226,23 @@ public abstract class LayoutRevisionLocalServiceBaseImpl
 	/**
 	 * Creates a new layout revision with the primary key. Does not add the layout revision to the database.
 	 *
-	 * @param revisionId the primary key for the new layout revision
+	 * @param layoutRevisionId the primary key for the new layout revision
 	 * @return the new layout revision
 	 */
-	public LayoutRevision createLayoutRevision(long revisionId) {
-		return layoutRevisionPersistence.create(revisionId);
+	public LayoutRevision createLayoutRevision(long layoutRevisionId) {
+		return layoutRevisionPersistence.create(layoutRevisionId);
 	}
 
 	/**
 	 * Deletes the layout revision with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param revisionId the primary key of the layout revision to delete
+	 * @param layoutRevisionId the primary key of the layout revision to delete
 	 * @throws PortalException if a layout revision with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteLayoutRevision(long revisionId)
+	public void deleteLayoutRevision(long layoutRevisionId)
 		throws PortalException, SystemException {
-		layoutRevisionPersistence.remove(revisionId);
+		layoutRevisionPersistence.remove(layoutRevisionId);
 	}
 
 	/**
@@ -252,7 +252,7 @@ public abstract class LayoutRevisionLocalServiceBaseImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteLayoutRevision(LayoutRevision layoutRevision)
-		throws SystemException {
+		throws PortalException, SystemException {
 		layoutRevisionPersistence.remove(layoutRevision);
 	}
 
@@ -325,14 +325,14 @@ public abstract class LayoutRevisionLocalServiceBaseImpl
 	/**
 	 * Gets the layout revision with the primary key.
 	 *
-	 * @param revisionId the primary key of the layout revision to get
+	 * @param layoutRevisionId the primary key of the layout revision to get
 	 * @return the layout revision
 	 * @throws PortalException if a layout revision with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public LayoutRevision getLayoutRevision(long revisionId)
+	public LayoutRevision getLayoutRevision(long layoutRevisionId)
 		throws PortalException, SystemException {
-		return layoutRevisionPersistence.findByPrimaryKey(revisionId);
+		return layoutRevisionPersistence.findByPrimaryKey(layoutRevisionId);
 	}
 
 	/**
