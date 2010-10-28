@@ -1253,7 +1253,9 @@ public class PortletURLImpl
 		byte[] parameterBytes = null;
 
 		try {
-			parameterBytes = parameterSb.toString().getBytes(StringPool.UTF8);
+			String parameterString = parameterSb.toString();
+
+			parameterBytes = parameterString.getBytes(StringPool.UTF8);
 		}
 		catch (UnsupportedEncodingException uee) {
 			if (_log.isWarnEnabled()) {
@@ -1261,13 +1263,8 @@ public class PortletURLImpl
 			}
 		}
 
-		String navigationalState = Base64.encode(parameterBytes);
-
-		// Make Base64 encoding url compatible
-
-		navigationalState = navigationalState.replace('+', '-');
-		navigationalState = navigationalState.replace('=', '*');
-		navigationalState = navigationalState.replace('/', '_');
+		String navigationalState = Base64.toURLSafe(
+			Base64.encode(parameterBytes));
 
 		sb.append(navigationalState);
 

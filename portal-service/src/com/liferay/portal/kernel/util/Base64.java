@@ -152,6 +152,21 @@ public class Base64 {
 		return raw;
 	}
 
+	public static String fromURLSafe(String base64) {
+		return StringUtil.replace(
+			base64,
+			new String[] {
+				StringPool.MINUS,
+				StringPool.STAR,
+				StringPool.UNDERLINE
+			},
+			new String[] {
+				StringPool.PLUS,
+				StringPool.EQUAL,
+				StringPool.SLASH
+			});
+	}
+
 	public static String objectToString(Object o) {
 		if (o == null) {
 			return null;
@@ -205,6 +220,21 @@ public class Base64 {
 		}
 
 		return null;
+	}
+
+	public static String toURLSafe(String base64) {
+		return StringUtil.replace(
+			base64,
+			new String[] {
+				StringPool.PLUS,
+				StringPool.EQUAL,
+				StringPool.SLASH
+			},
+			new String[] {
+				StringPool.MINUS,
+				StringPool.STAR,
+				StringPool.UNDERLINE
+			});
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(Base64.class);
