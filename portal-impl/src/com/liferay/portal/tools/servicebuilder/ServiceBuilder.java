@@ -4286,17 +4286,24 @@ public class ServiceBuilder {
 		String className = StringUtil.replace(
 			srcFile.substring(0, srcFile.length() - 5), "/", ".");
 
-		JavaDocBuilder builder = new JavaDocBuilder();
+		JavaClass javaClass = _javaClassCache.get(className);
+		
+		if(javaClass == null) {
+			JavaDocBuilder builder = new JavaDocBuilder();
 
-		File file = new File(fileName);
+			File file = new File(fileName);
 
-		if (!file.exists()) {
-			return null;
+			if (!file.exists()) {
+				return null;
+			}
+
+			builder.addSource(file);
+			javaClass = builder.getClassByName(className);
+		
+			_javaClassCache.put(className, javaClass);
 		}
 
-		builder.addSource(file);
-
-		return builder.getClassByName(className);
+		return javaClass;
 	}
 
 	private JavaMethod[] _getMethods(JavaClass javaClass) {
@@ -4557,5 +4564,7 @@ public class ServiceBuilder {
 	private List<Entity> _ejbList;
 	private Map<String, EntityMapping> _entityMappings;
 	private Map<String, Entity> _entityPool = new HashMap<String, Entity>();
+	private Map<String, JavaClass> _javaClassCache = 
+			new HashMap<String, JavaClass>();
 
 }
