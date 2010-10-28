@@ -834,18 +834,29 @@ public class LayoutImporter {
 				Node linkedLayoutNode = rootElement.selectSingleNode(
 					"./layouts/layout[@layout-id='" + linkToLayoutId + "']");
 
-				importLayout(
-					context, user, layoutCache, previousLayouts, newLayouts,
-					newLayoutsMap, newLayoutIds, portletsMergeMode, themeId,
-					colorSchemeId, layoutsImportMode, privateLayout,
-					importPermissions, importUserPermissions, useThemeZip,
-					rootElement, (Element)linkedLayoutNode);
+				if (linkedLayoutNode != null) {
+					importLayout(
+						context, user, layoutCache, previousLayouts, newLayouts,
+						newLayoutsMap, newLayoutIds, portletsMergeMode, themeId,
+						colorSchemeId, layoutsImportMode, privateLayout,
+						importPermissions, importUserPermissions, useThemeZip,
+						rootElement, (Element)linkedLayoutNode);
 
-				Layout linkedLayout = newLayoutsMap.get(linkToLayoutId);
+					Layout linkedLayout = newLayoutsMap.get(linkToLayoutId);
 
-				typeSettingsProperties.setProperty(
-					"linkToLayoutId",
-					String.valueOf(linkedLayout.getLayoutId()));
+					typeSettingsProperties.setProperty(
+						"linkToLayoutId",
+						String.valueOf(linkedLayout.getLayoutId()));
+				}
+				else {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to link layout with friendURL: " +
+							layout.getFriendlyURL() + " and layoutId:" +
+							layout.getLayoutId() +
+							" to layout with layoutId: " + linkToLayoutId);
+					}
+				}
 			}
 
 			importedLayout.setTypeSettings(layout.getTypeSettings());
