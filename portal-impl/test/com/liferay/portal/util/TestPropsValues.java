@@ -32,9 +32,6 @@ public class TestPropsValues {
 
 	public static final String PORTAL_URL = TestPropsUtil.get("portal.url");
 
-	public static final String RESOURCE_BASE_PATH = TestPropsUtil.get(
-		"resource.base.path");
-
 	public static final long USER_ID = GetterUtil.getLong(
 		TestPropsUtil.get("user.id"));
 

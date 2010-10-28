@@ -12,12 +12,14 @@
  * details.
  */
 
-package com.liferay.portal.service;
+package com.liferay.portal.servlet;
 
-import com.liferay.portal.servlet.MainServlet;
-import com.liferay.portal.util.TestPropsValues;
+import com.liferay.portal.service.ServiceTestUtil;
+
+import java.io.File;
 
 import junit.extensions.TestSetup;
+
 import junit.framework.Test;
 
 import org.springframework.core.io.FileSystemResourceLoader;
@@ -25,9 +27,8 @@ import org.springframework.mock.web.MockServletConfig;
 import org.springframework.mock.web.MockServletContext;
 
 /**
- * <a href="MainServletTestSetup.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
+ * @author Brian Wing Shun Chan
  */
 public class MainServletTestSetup extends TestSetup {
 
@@ -40,20 +41,26 @@ public class MainServletTestSetup extends TestSetup {
 		ServiceTestUtil.initPermissions();
 
 		MockServletContext mockServletContext = new MockServletContext(
-			TestPropsValues.RESOURCE_BASE_PATH, new FileSystemResourceLoader());
+			getResourceBasePath(), new FileSystemResourceLoader());
 
 		MockServletConfig mockServletConfig = new MockServletConfig(
 			mockServletContext);
 
-		_mainServlet = new MainServlet(mockServletConfig);
+		_mainServlet = new MainServlet();
 
-		_mainServlet.init();
+		_mainServlet.init(mockServletConfig);
 	}
 
 	public void tearDown() throws Exception {
 		_mainServlet.destroy();
 
 		ServiceTestUtil.destroyServices();
+	}
+
+	protected String getResourceBasePath() {
+		File file = new File("portal-web");
+
+		return file.getAbsolutePath();
 	}
 
 	private MainServlet _mainServlet;

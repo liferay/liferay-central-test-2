@@ -104,7 +104,6 @@ import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -123,16 +122,8 @@ import org.apache.struts.tiles.TilesUtilImpl;
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  * @author Brian Myunghun Kim
- * @author Raymond Augé
  */
 public class MainServlet extends ActionServlet {
-
-	public MainServlet() {
-	}
-
-	public MainServlet(ServletConfig servletConfig) {
-		_servletConfig = servletConfig;
-	}
 
 	public void destroy() {
 		if (_log.isDebugEnabled()) {
@@ -369,22 +360,6 @@ public class MainServlet extends ActionServlet {
 		}
 	}
 
-	public ServletConfig getServletConfig() {
-		if (_servletConfig != null) {
-			return _servletConfig;
-		}
-
-		return super.getServletConfig();
-	}
-
-	public ServletContext getServletContext() {
-		if (_servletConfig != null) {
-			return _servletConfig.getServletContext();
-		}
-
-		return super.getServletContext();
-	}
-
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
@@ -613,8 +588,8 @@ public class MainServlet extends ActionServlet {
 	protected void destroyCompanies() throws Exception {
 		long[] companyIds = PortalInstances.getCompanyIds();
 
-		for (long companyId : companyIds) {
-			destroyCompany(companyId);
+		for (int i = 0; i < companyIds.length; i++) {
+			destroyCompany(companyIds[i]);
 		}
 	}
 
@@ -781,8 +756,8 @@ public class MainServlet extends ActionServlet {
 
 		String[] webIds = PortalInstances.getWebIds();
 
-		for (String webId : webIds) {
-			PortalInstances.initCompany(servletContext, webId);
+		for (int i = 0; i < webIds.length; i++) {
+			PortalInstances.initCompany(servletContext, webIds[i]);
 		}
 	}
 
@@ -1240,7 +1215,5 @@ public class MainServlet extends ActionServlet {
 		"Liferay-Portal";
 
 	private static Log _log = LogFactoryUtil.getLog(MainServlet.class);
-
-	private ServletConfig _servletConfig;
 
 }
