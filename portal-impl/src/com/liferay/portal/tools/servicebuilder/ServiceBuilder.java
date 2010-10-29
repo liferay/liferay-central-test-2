@@ -46,6 +46,7 @@ import com.liferay.util.TextFormatter;
 import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.qdox.JavaDocBuilder;
+import com.thoughtworks.qdox.model.ClassLibrary;
 import com.thoughtworks.qdox.model.DocletTag;
 import com.thoughtworks.qdox.model.JavaClass;
 import com.thoughtworks.qdox.model.JavaMethod;
@@ -4254,7 +4255,11 @@ public class ServiceBuilder {
 		JavaClass javaClass = _javaClasses.get(className);
 
 		if (javaClass == null) {
-			JavaDocBuilder builder = new JavaDocBuilder();
+			ClassLibrary classLibrary = new ClassLibrary();
+
+			classLibrary.addClassLoader(getClass().getClassLoader());
+
+			JavaDocBuilder builder = new JavaDocBuilder(classLibrary);
 
 			File file = new File(fileName);
 
