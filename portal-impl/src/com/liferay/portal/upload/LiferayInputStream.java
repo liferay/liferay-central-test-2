@@ -62,7 +62,7 @@ public class LiferayInputStream extends ServletInputStreamWrapper {
 			_log.debug(bytesRead + "/" + _totalRead + "=" + percent);
 		}
 
-		if (_totalSize < THRESHOLD_SIZE) {
+		if ((_totalSize > 0) && (_totalSize < THRESHOLD_SIZE)) {
 			_cachedBytes.write(b, off, bytesRead);
 		}
 
