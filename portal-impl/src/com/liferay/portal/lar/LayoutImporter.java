@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -850,11 +851,16 @@ public class LayoutImporter {
 				}
 				else {
 					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Unable to link layout with friendURL: " +
-							layout.getFriendlyURL() + " and layoutId:" +
-							layout.getLayoutId() +
-							" to layout with layoutId: " + linkToLayoutId);
+						StringBundler sb = new StringBundler();
+
+						sb.append("Unable to link layout with friendly URL ");
+						sb.append(layout.getFriendlyURL());
+						sb.append(" and layout id ");
+						sb.append(layout.getLayoutId());
+						sb.append(" to layout with layout id ");
+						sb.append(linkToLayoutId);
+
+						_log.warn(sb.toString());
 					}
 				}
 			}
