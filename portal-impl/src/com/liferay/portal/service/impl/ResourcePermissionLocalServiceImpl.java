@@ -333,7 +333,7 @@ public class ResourcePermissionLocalServiceImpl
 		}
 		else {
 			resourcePermission = resourcePermissionPersistence.fetchByC_N_S_P_R(
-				companyId, name, scope, primKey, roleId);
+				companyId, name, scope, primKey, roleId, false);
 		}
 
 		long oldActionIds = 0;
