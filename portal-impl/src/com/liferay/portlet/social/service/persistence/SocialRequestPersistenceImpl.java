@@ -731,13 +731,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialRequest>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_UUID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1115,8 +1117,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-						finderArgs, new ArrayList<SocialRequest>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1234,13 +1236,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialRequest>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_COMPANYID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1572,13 +1576,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialRequest>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_USERID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1911,13 +1917,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialRequest>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_RECEIVERUSERID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_RECEIVERUSERID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_RECEIVERUSERID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2257,13 +2265,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialRequest>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_U_S,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_S, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_S,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2617,13 +2627,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialRequest>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_R_S,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_R_S, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_R_S,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -3029,8 +3041,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_C_C_T_R,
-						finderArgs, new ArrayList<SocialRequest>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_C_C_T_R,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -3179,13 +3191,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialRequest>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_U_C_C_T_S,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_C_C_T_S,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_C_C_T_S,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -3605,13 +3619,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialRequest>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_C_C_T_R_S,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_T_R_S,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_T_R_S,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -3993,12 +4009,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialRequest>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

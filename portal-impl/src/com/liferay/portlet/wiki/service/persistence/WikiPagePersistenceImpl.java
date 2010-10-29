@@ -910,13 +910,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WikiPage>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_UUID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1294,8 +1296,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-						finderArgs, new ArrayList<WikiPage>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1411,13 +1413,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WikiPage>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_NODEID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_NODEID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_NODEID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1759,13 +1763,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WikiPage>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_FORMAT,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_FORMAT,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_FORMAT,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2117,13 +2123,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WikiPage>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_R_N,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_R_N, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_R_N,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2488,13 +2496,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WikiPage>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_N_T,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_T, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_T,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2858,13 +2868,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WikiPage>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_N_H,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_H, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_H,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -3228,13 +3240,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WikiPage>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_N_P,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_P, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_P,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -3612,13 +3626,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WikiPage>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_N_R,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_R, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_R,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -3983,13 +3999,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WikiPage>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_N_S,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_S, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_S,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -4366,8 +4384,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_R_N_V,
-						finderArgs, new ArrayList<WikiPage>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_N_V,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -4500,13 +4518,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WikiPage>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_R_N_S,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_R_N_S,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_R_N_S,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -4881,13 +4901,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WikiPage>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_U_N_S,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_N_S,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_N_S,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -5291,8 +5313,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T_V,
-						finderArgs, new ArrayList<WikiPage>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T_V,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -5437,13 +5459,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WikiPage>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_N_T_H,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_T_H,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_T_H,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -5841,13 +5865,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WikiPage>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_N_T_S,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_T_S,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_T_S,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -6245,13 +6271,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WikiPage>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_N_H_P,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_H_P,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_H_P,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -6637,13 +6665,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WikiPage>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_N_H_S,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_H_S,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_H_S,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -7037,13 +7067,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WikiPage>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_N_H_P_S,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_H_P_S,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_H_P_S,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -7417,12 +7449,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<WikiPage>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

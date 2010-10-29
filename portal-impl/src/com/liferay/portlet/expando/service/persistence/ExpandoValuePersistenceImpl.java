@@ -675,13 +675,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<ExpandoValue>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_TABLEID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TABLEID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TABLEID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1013,13 +1015,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<ExpandoValue>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_COLUMNID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COLUMNID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COLUMNID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1350,13 +1354,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<ExpandoValue>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_ROWID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ROWID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ROWID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1695,13 +1701,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<ExpandoValue>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_T_C,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_T_C, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_T_C,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2055,13 +2063,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<ExpandoValue>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_T_CPK,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_T_CPK,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_T_CPK,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2414,13 +2424,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<ExpandoValue>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_T_R,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_T_R, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_T_R,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2787,8 +2799,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_R,
-						finderArgs, new ArrayList<ExpandoValue>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_R,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -2914,13 +2926,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<ExpandoValue>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_C_C,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -3298,8 +3312,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_C_C,
-						finderArgs, new ArrayList<ExpandoValue>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C_C,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -3444,13 +3458,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<ExpandoValue>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_T_C_D,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_T_C_D,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_T_C_D,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -3811,12 +3827,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<ExpandoValue>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

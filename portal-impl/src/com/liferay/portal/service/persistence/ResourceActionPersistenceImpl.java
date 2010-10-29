@@ -536,13 +536,15 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<ResourceAction>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_NAME,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_NAME, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_NAME,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -933,8 +935,8 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_A,
-						finderArgs, new ArrayList<ResourceAction>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_A,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1042,12 +1044,15 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<ResourceAction>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

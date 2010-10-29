@@ -541,13 +541,15 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<ServiceComponent>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_BUILDNAMESPACE,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_BUILDNAMESPACE,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_BUILDNAMESPACE,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -931,8 +933,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BNS_BNU,
-						finderArgs, new ArrayList<ServiceComponent>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BNS_BNU,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1040,12 +1042,15 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<ServiceComponent>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

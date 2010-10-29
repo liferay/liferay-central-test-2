@@ -584,13 +584,15 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<BlogsStatsUser>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_GROUPID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -922,13 +924,15 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<BlogsStatsUser>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_USERID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1281,8 +1285,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
-						finderArgs, new ArrayList<BlogsStatsUser>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1408,13 +1412,15 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<BlogsStatsUser>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_NOTE,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_NOTE,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_NOTE,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1768,13 +1774,15 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<BlogsStatsUser>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_C_NOTE,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_NOTE,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_NOTE,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2135,13 +2143,15 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<BlogsStatsUser>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_U_L,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_L, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_L,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2484,12 +2494,15 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<BlogsStatsUser>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

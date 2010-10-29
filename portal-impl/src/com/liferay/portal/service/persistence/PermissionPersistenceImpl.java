@@ -552,13 +552,15 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Permission>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_RESOURCEID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_RESOURCEID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_RESOURCEID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -919,8 +921,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A_R,
-						finderArgs, new ArrayList<Permission>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_A_R,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1028,12 +1030,15 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Permission>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}
@@ -1339,13 +1344,15 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<com.liferay.portal.model.Group>();
+					FinderCacheUtil.removeResult(FINDER_PATH_GET_GROUPS,
+						finderArgs);
 				}
+				else {
+					groupPersistence.cacheResult(list);
 
-				groupPersistence.cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_GROUPS, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_GET_GROUPS,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1802,13 +1809,15 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<com.liferay.portal.model.Role>();
+					FinderCacheUtil.removeResult(FINDER_PATH_GET_ROLES,
+						finderArgs);
 				}
+				else {
+					rolePersistence.cacheResult(list);
 
-				rolePersistence.cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_ROLES, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_GET_ROLES,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2263,13 +2272,15 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<com.liferay.portal.model.User>();
+					FinderCacheUtil.removeResult(FINDER_PATH_GET_USERS,
+						finderArgs);
 				}
+				else {
+					userPersistence.cacheResult(list);
 
-				userPersistence.cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_USERS, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_GET_USERS,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}

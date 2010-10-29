@@ -628,13 +628,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Role>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_COMPANYID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1079,13 +1081,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Role>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_SUBTYPE,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_SUBTYPE,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_SUBTYPE,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1579,8 +1583,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
-						finderArgs, new ArrayList<Role>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1716,13 +1720,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Role>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_T_S,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_T_S, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_T_S,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2234,8 +2240,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_C,
-						finderArgs, new ArrayList<Role>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_C,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -2342,12 +2348,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Role>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}
@@ -3062,13 +3071,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<com.liferay.portal.model.Group>();
+					FinderCacheUtil.removeResult(FINDER_PATH_GET_GROUPS,
+						finderArgs);
 				}
+				else {
+					groupPersistence.cacheResult(list);
 
-				groupPersistence.cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_GROUPS, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_GET_GROUPS,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -3525,13 +3536,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<com.liferay.portal.model.Permission>();
+					FinderCacheUtil.removeResult(FINDER_PATH_GET_PERMISSIONS,
+						finderArgs);
 				}
+				else {
+					permissionPersistence.cacheResult(list);
 
-				permissionPersistence.cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_PERMISSIONS,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_GET_PERMISSIONS,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -3997,13 +4010,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<com.liferay.portal.model.User>();
+					FinderCacheUtil.removeResult(FINDER_PATH_GET_USERS,
+						finderArgs);
 				}
+				else {
+					userPersistence.cacheResult(list);
 
-				userPersistence.cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_USERS, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_GET_USERS,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}

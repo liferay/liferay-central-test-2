@@ -679,8 +679,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
-						finderArgs, new ArrayList<ShoppingItem>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -808,8 +808,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_MEDIUMIMAGEID,
-						finderArgs, new ArrayList<ShoppingItem>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_MEDIUMIMAGEID,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -937,8 +937,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LARGEIMAGEID,
-						finderArgs, new ArrayList<ShoppingItem>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LARGEIMAGEID,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1064,13 +1064,15 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<ShoppingItem>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_C,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1565,8 +1567,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_S,
-						finderArgs, new ArrayList<ShoppingItem>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_S,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1674,12 +1676,15 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<ShoppingItem>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}
@@ -2246,13 +2251,15 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<com.liferay.portlet.shopping.model.ShoppingItemPrice>();
+					FinderCacheUtil.removeResult(FINDER_PATH_GET_SHOPPINGITEMPRICES,
+						finderArgs);
 				}
+				else {
+					shoppingItemPricePersistence.cacheResult(list);
 
-				shoppingItemPricePersistence.cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_SHOPPINGITEMPRICES,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_GET_SHOPPINGITEMPRICES,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}

@@ -537,13 +537,15 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AssetTagStats>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_TAGID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TAGID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TAGID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -875,13 +877,15 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AssetTagStats>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_CLASSNAMEID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CLASSNAMEID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CLASSNAMEID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1235,8 +1239,8 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_C,
-						finderArgs, new ArrayList<AssetTagStats>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1344,12 +1348,15 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AssetTagStats>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

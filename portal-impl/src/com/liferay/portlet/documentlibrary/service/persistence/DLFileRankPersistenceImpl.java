@@ -577,13 +577,15 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<DLFileRank>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_USERID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -922,13 +924,15 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<DLFileRank>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_U,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_U, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_U,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1293,13 +1297,15 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<DLFileRank>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_F_N,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_F_N, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_F_N,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1714,8 +1720,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_F_N,
-						finderArgs, new ArrayList<DLFileRank>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_F_N,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1823,12 +1829,15 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<DLFileRank>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

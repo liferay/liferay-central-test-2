@@ -578,13 +578,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<PortletItem>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_C,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -949,13 +951,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<PortletItem>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_P_C,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P_C,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_P_C,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1393,8 +1397,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N_P_C,
-						finderArgs, new ArrayList<PortletItem>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N_P_C,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1502,12 +1506,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<PortletItem>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

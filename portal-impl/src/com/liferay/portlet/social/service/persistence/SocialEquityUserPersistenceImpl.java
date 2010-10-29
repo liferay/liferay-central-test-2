@@ -578,13 +578,15 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialEquityUser>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_GROUPID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -909,13 +911,15 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialEquityUser>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_GROUPRANKED,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPRANKED,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPRANKED,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1239,13 +1243,15 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialEquityUser>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_USERID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1569,13 +1575,15 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialEquityUser>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_RANK,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_RANK, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_RANK,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1922,8 +1930,8 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
-						finderArgs, new ArrayList<SocialEquityUser>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -2044,13 +2052,15 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialEquityUser>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_R,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_R, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_R,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2382,12 +2392,15 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialEquityUser>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

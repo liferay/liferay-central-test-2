@@ -579,13 +579,15 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<PortletPreferences>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_PLID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PLID, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PLID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -930,13 +932,15 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<PortletPreferences>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_P_P,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_P, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_P,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1302,13 +1306,15 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<PortletPreferences>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_O_O_P,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_O_O_P,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_O_O_P,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1721,8 +1727,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_O_O_P_P,
-						finderArgs, new ArrayList<PortletPreferences>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_O_O_P_P,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1830,12 +1836,15 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<PortletPreferences>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

@@ -519,8 +519,8 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ASSETENTRYID,
-						finderArgs, new ArrayList<SocialEquityAssetEntry>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ASSETENTRYID,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -628,12 +628,15 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialEquityAssetEntry>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

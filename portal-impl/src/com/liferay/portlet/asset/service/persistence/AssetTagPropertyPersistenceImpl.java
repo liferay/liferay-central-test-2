@@ -565,13 +565,15 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AssetTagProperty>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_COMPANYID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -903,13 +905,15 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AssetTagProperty>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_TAGID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TAGID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TAGID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1261,13 +1265,15 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AssetTagProperty>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_C_K,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_K, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_K,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1659,8 +1665,8 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_K,
-						finderArgs, new ArrayList<AssetTagProperty>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_K,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1768,12 +1774,15 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AssetTagProperty>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

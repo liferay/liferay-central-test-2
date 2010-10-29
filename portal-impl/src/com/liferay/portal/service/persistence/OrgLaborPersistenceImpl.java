@@ -476,13 +476,15 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<OrgLabor>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_ORGANIZATIONID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ORGANIZATIONID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ORGANIZATIONID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -804,12 +806,15 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<OrgLabor>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

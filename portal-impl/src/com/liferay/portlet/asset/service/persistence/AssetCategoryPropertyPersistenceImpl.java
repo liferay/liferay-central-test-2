@@ -570,13 +570,15 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AssetCategoryProperty>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_COMPANYID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -911,13 +913,15 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AssetCategoryProperty>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_CATEGORYID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CATEGORYID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CATEGORYID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1271,13 +1275,15 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AssetCategoryProperty>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_C_K,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_K, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_K,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1671,8 +1677,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CA_K,
-						finderArgs, new ArrayList<AssetCategoryProperty>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CA_K,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1780,12 +1786,15 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AssetCategoryProperty>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

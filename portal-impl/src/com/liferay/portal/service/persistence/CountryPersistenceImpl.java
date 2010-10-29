@@ -581,8 +581,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
-						finderArgs, new ArrayList<Country>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -722,8 +722,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A2,
-						finderArgs, new ArrayList<Country>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_A2,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -863,8 +863,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A3,
-						finderArgs, new ArrayList<Country>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_A3,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -979,13 +979,15 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Country>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_ACTIVE,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ACTIVE,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ACTIVE,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1305,12 +1307,15 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Country>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

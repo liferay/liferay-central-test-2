@@ -546,13 +546,15 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SCProductVersion>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_PRODUCTENTRYID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PRODUCTENTRYID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PRODUCTENTRYID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -911,8 +913,8 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
-						finderArgs, new ArrayList<SCProductVersion>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1020,12 +1022,15 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SCProductVersion>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}
@@ -1329,13 +1334,15 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion>();
+					FinderCacheUtil.removeResult(FINDER_PATH_GET_SCFRAMEWORKVERSIONS,
+						finderArgs);
 				}
+				else {
+					scFrameworkVersionPersistence.cacheResult(list);
 
-				scFrameworkVersionPersistence.cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_SCFRAMEWORKVERSIONS,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_GET_SCFRAMEWORKVERSIONS,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}

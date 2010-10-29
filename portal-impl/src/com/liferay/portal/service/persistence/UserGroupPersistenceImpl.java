@@ -560,13 +560,15 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<UserGroup>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_COMPANYID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1013,13 +1015,15 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<UserGroup>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_C_P,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_P, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_P,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1514,8 +1518,8 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
-						finderArgs, new ArrayList<UserGroup>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1623,12 +1627,15 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<UserGroup>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}
@@ -2109,13 +2116,15 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<com.liferay.portal.model.Group>();
+					FinderCacheUtil.removeResult(FINDER_PATH_GET_GROUPS,
+						finderArgs);
 				}
+				else {
+					groupPersistence.cacheResult(list);
 
-				groupPersistence.cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_GROUPS, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_GET_GROUPS,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2571,13 +2580,15 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<com.liferay.portal.model.User>();
+					FinderCacheUtil.removeResult(FINDER_PATH_GET_USERS,
+						finderArgs);
 				}
+				else {
+					userPersistence.cacheResult(list);
 
-				userPersistence.cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_USERS, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_GET_USERS,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}

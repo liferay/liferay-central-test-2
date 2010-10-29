@@ -521,13 +521,15 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<UserGroupGroupRole>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_USERGROUPID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERGROUPID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERGROUPID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -852,13 +854,15 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<UserGroupGroupRole>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_GROUPID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1183,13 +1187,15 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<UserGroupGroupRole>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_ROLEID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ROLEID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ROLEID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1523,13 +1529,15 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<UserGroupGroupRole>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_U_G,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_G, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_G,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1876,13 +1884,15 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<UserGroupGroupRole>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_R,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_R, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_R,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2215,12 +2225,15 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<UserGroupGroupRole>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

@@ -543,13 +543,15 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Lock>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_UUID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -888,13 +890,15 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Lock>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_LTEXPIRATIONDATE,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_LTEXPIRATIONDATE,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_LTEXPIRATIONDATE,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1275,8 +1279,8 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_K,
-						finderArgs, new ArrayList<Lock>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_K,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1383,12 +1387,15 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Lock>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

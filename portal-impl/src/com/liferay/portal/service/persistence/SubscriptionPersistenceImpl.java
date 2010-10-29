@@ -567,13 +567,15 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Subscription>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_USERID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_USERID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -905,13 +907,15 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Subscription>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_U_C,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_C, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_C,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1264,13 +1268,15 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Subscription>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_C_C_C,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_C,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_C_C,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1672,8 +1678,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_C_C,
-						finderArgs, new ArrayList<Subscription>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_C_C,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1781,12 +1787,15 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Subscription>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

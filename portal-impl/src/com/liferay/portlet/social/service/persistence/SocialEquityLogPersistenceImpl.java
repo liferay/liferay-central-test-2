@@ -665,13 +665,15 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialEquityLog>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_AEI_T_A,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_AEI_T_A,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_AEI_T_A,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1057,13 +1059,15 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialEquityLog>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_U_AID_A_T,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_AID_A_T,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_AID_A_T,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1477,13 +1481,15 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialEquityLog>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_AEI_AID_A_T,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_AEI_AID_A_T,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_AEI_AID_A_T,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1909,13 +1915,15 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialEquityLog>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_U_AID_AD_A_T,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_AID_AD_A_T,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_AID_AD_A_T,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2355,13 +2363,15 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialEquityLog>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_AEI_AID_AD_A_T,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_AEI_AID_AD_A_T,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_AEI_AID_AD_A_T,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2845,8 +2855,8 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T,
-						finderArgs, new ArrayList<SocialEquityLog>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -2954,12 +2964,15 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<SocialEquityLog>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

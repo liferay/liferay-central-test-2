@@ -582,13 +582,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<MBThread>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_GROUPID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -927,13 +929,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<MBThread>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_C,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1311,13 +1315,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<MBThread>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_C,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1436,13 +1442,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<MBThread>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_NOTC,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_NOTC,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_NOTC,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1795,13 +1803,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<MBThread>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_S,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_S, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_S,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2154,13 +2164,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<MBThread>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_C_P,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_P, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_P,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2528,13 +2540,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<MBThread>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_C_L,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C_L,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C_L,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2915,13 +2929,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<MBThread>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_C_S,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C_S,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C_S,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -3325,13 +3341,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<MBThread>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_C_S,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C_S,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_C_S,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -3457,13 +3475,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<MBThread>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_NOTC_S,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_NOTC_S,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_NOTC_S,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -3811,12 +3831,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<MBThread>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

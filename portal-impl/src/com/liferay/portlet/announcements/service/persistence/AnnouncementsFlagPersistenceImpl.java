@@ -539,13 +539,15 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AnnouncementsFlag>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_ENTRYID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ENTRYID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ENTRYID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -911,8 +913,8 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_E_V,
-						finderArgs, new ArrayList<AnnouncementsFlag>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_E_V,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1020,12 +1022,15 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AnnouncementsFlag>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

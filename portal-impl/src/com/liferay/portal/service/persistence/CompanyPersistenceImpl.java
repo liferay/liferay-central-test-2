@@ -609,8 +609,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_WEBID,
-						finderArgs, new ArrayList<Company>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_WEBID,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -749,8 +749,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-						finderArgs, new ArrayList<Company>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -888,8 +888,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_MX,
-						finderArgs, new ArrayList<Company>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_MX,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1014,8 +1014,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LOGOID,
-						finderArgs, new ArrayList<Company>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LOGOID,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1126,13 +1126,15 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Company>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_SYSTEM,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_SYSTEM,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_SYSTEM,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1448,12 +1450,15 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Company>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

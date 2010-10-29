@@ -509,13 +509,15 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Resource>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_CODEID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CODEID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_CODEID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -875,8 +877,8 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
-						finderArgs, new ArrayList<Resource>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -983,12 +985,15 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Resource>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

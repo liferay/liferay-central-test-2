@@ -612,8 +612,8 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_DP,
-						finderArgs, new ArrayList<PasswordPolicy>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_DP,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -763,8 +763,8 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
-						finderArgs, new ArrayList<PasswordPolicy>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -872,12 +872,15 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<PasswordPolicy>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

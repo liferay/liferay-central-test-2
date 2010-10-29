@@ -506,8 +506,8 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VALUE,
-						finderArgs, new ArrayList<ClassName>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VALUE,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -615,12 +615,15 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<ClassName>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}

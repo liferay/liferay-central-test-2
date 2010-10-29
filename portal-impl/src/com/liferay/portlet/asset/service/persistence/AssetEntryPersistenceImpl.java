@@ -630,13 +630,15 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AssetEntry>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_COMPANYID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -997,8 +999,8 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_CU,
-						finderArgs, new ArrayList<AssetEntry>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_CU,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1135,8 +1137,8 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
-						finderArgs, new ArrayList<AssetEntry>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1244,12 +1246,15 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AssetEntry>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}
@@ -1629,13 +1634,15 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<com.liferay.portlet.asset.model.AssetCategory>();
+					FinderCacheUtil.removeResult(FINDER_PATH_GET_ASSETCATEGORIES,
+						finderArgs);
 				}
+				else {
+					assetCategoryPersistence.cacheResult(list);
 
-				assetCategoryPersistence.cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_ASSETCATEGORIES,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_GET_ASSETCATEGORIES,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2103,13 +2110,15 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<com.liferay.portlet.asset.model.AssetTag>();
+					FinderCacheUtil.removeResult(FINDER_PATH_GET_ASSETTAGS,
+						finderArgs);
 				}
+				else {
+					assetTagPersistence.cacheResult(list);
 
-				assetTagPersistence.cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_ASSETTAGS,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_GET_ASSETTAGS,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}

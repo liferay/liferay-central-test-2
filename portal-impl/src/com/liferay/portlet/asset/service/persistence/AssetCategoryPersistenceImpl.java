@@ -731,13 +731,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AssetCategory>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_UUID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_UUID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1115,8 +1117,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-						finderArgs, new ArrayList<AssetCategory>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1233,13 +1235,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AssetCategory>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_GROUPID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1680,13 +1684,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AssetCategory>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_PARENTCATEGORYID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PARENTCATEGORYID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_PARENTCATEGORYID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2019,13 +2025,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AssetCategory>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_VOCABULARYID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_VOCABULARYID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_VOCABULARYID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2378,13 +2386,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AssetCategory>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_P_N,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_N, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_N,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2750,13 +2760,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AssetCategory>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_P_V,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_V, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_P_V,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -3123,13 +3135,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AssetCategory>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_N_V,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_V, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_N_V,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -3533,8 +3547,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_P_N_V,
-						finderArgs, new ArrayList<AssetCategory>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_P_N_V,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -3642,12 +3656,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<AssetCategory>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}
@@ -4549,13 +4566,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<com.liferay.portlet.asset.model.AssetEntry>();
+					FinderCacheUtil.removeResult(FINDER_PATH_GET_ASSETENTRIES,
+						finderArgs);
 				}
+				else {
+					assetEntryPersistence.cacheResult(list);
 
-				assetEntryPersistence.cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_ASSETENTRIES,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_GET_ASSETENTRIES,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}

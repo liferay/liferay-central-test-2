@@ -874,13 +874,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Group>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_COMPANYID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1220,8 +1222,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LIVEGROUPID,
-						finderArgs, new ArrayList<Group>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LIVEGROUPID,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1373,8 +1375,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
-						finderArgs, new ArrayList<Group>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1526,8 +1528,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_F,
-						finderArgs, new ArrayList<Group>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_F,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -1651,13 +1653,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Group>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_T_A,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_T_A, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_T_A,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2034,8 +2038,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_C,
-						finderArgs, new ArrayList<Group>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_C,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -2198,8 +2202,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_L_N,
-						finderArgs, new ArrayList<Group>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_L_N,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -2377,8 +2381,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_L_N,
-						finderArgs, new ArrayList<Group>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_L_N,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -2485,12 +2489,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<Group>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}
@@ -3288,13 +3295,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<com.liferay.portal.model.Organization>();
+					FinderCacheUtil.removeResult(FINDER_PATH_GET_ORGANIZATIONS,
+						finderArgs);
 				}
+				else {
+					organizationPersistence.cacheResult(list);
 
-				organizationPersistence.cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_ORGANIZATIONS,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_GET_ORGANIZATIONS,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -3762,13 +3771,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<com.liferay.portal.model.Permission>();
+					FinderCacheUtil.removeResult(FINDER_PATH_GET_PERMISSIONS,
+						finderArgs);
 				}
+				else {
+					permissionPersistence.cacheResult(list);
 
-				permissionPersistence.cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_PERMISSIONS,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_GET_PERMISSIONS,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -4234,13 +4245,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<com.liferay.portal.model.Role>();
+					FinderCacheUtil.removeResult(FINDER_PATH_GET_ROLES,
+						finderArgs);
 				}
+				else {
+					rolePersistence.cacheResult(list);
 
-				rolePersistence.cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_ROLES, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_GET_ROLES,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -4695,13 +4708,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<com.liferay.portal.model.UserGroup>();
+					FinderCacheUtil.removeResult(FINDER_PATH_GET_USERGROUPS,
+						finderArgs);
 				}
+				else {
+					userGroupPersistence.cacheResult(list);
 
-				userGroupPersistence.cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_USERGROUPS,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_GET_USERGROUPS,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -5165,13 +5180,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<com.liferay.portal.model.User>();
+					FinderCacheUtil.removeResult(FINDER_PATH_GET_USERS,
+						finderArgs);
 				}
+				else {
+					userPersistence.cacheResult(list);
 
-				userPersistence.cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_USERS, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_GET_USERS,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}

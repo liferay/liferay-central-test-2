@@ -613,13 +613,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<ResourcePermission>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_ROLEID,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ROLEID,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_ROLEID,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -953,13 +955,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<ResourcePermission>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_R_S,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_R_S, finderArgs,
-					list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_R_S,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1325,13 +1329,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<ResourcePermission>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_C_N_S,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_N_S,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_N_S,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -1742,13 +1748,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<ResourcePermission>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_C_N_S_P,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_N_S_P,
-					finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_N_S_P,
+						finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2225,8 +2233,8 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S_P_R,
-						finderArgs, new ArrayList<ResourcePermission>());
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S_P_R,
+						finderArgs);
 				}
 
 				closeSession(session);
@@ -2334,12 +2342,15 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<ResourcePermission>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
 
 				closeSession(session);
 			}
