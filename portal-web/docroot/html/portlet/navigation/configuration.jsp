@@ -40,13 +40,13 @@ String[] displayStyleOptions = PropsUtil.getArray("navigation.display.style.opti
 		<aui:select name="displayStyle">
 			<aui:option label="custom" selected='<%= displayStyle.equals("[custom]") %>' value="[custom]" />
 
-			<optgroup label='<liferay-ui:message key="predefined" />'>
+			<optgroup label="<liferay-ui:message key="predefined" />">
 
 				<%
-				for (String currentDisplayStyle: displayStyleOptions) {
+				for (String displayStyleOption : displayStyleOptions) {
 				%>
 
-					<aui:option label="<%= currentDisplayStyle %>" selected="<%= displayStyle.equals(currentDisplayStyle) %>" />
+					<aui:option label="<%= displayStyleOption %>" selected="<%= displayStyle.equals(displayStyleOption) %>" />
 
 				<%
 				}
@@ -58,10 +58,10 @@ String[] displayStyleOptions = PropsUtil.getArray("navigation.display.style.opti
 		<aui:select name="bulletStyle">
 
 			<%
-			for (String currentBulletStyle : bulletStyleOptions) {
+			for (String bulletStyleOption : bulletStyleOptions) {
 			%>
 
-				<aui:option label="<%= LanguageUtil.get(pageContext, currentBulletStyle) %>" selected="<%= currentBulletStyle.equals(bulletStyle) %>" />
+				<aui:option label="<%= LanguageUtil.get(pageContext, bulletStyleOption) %>" selected="<%= bulletStyle.equals(bulletStyleOption) %>" />
 
 			<%
 			}
