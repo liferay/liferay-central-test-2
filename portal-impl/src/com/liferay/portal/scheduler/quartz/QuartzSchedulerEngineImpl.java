@@ -308,8 +308,6 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 
 		try {
-			clearJobs();
-
 			_scheduler.shutdown(false);
 		}
 		catch (Exception e) {
@@ -324,8 +322,6 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 		try {
 			_scheduler.start();
-
-			clearJobs();
 		}
 		catch (Exception e) {
 			throw new SchedulerException("Unable to start scheduler", e);
@@ -388,18 +384,6 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				"Unable to unschedule job {jobName=" + jobName +
 					", groupName=" + groupName + "}",
 				e);
-		}
-	}
-
-	protected void clearJobs() throws Exception {
-		String[] groupNames = _scheduler.getJobGroupNames();
-
-		for (String groupName : groupNames) {
-			String[] jobNames = _scheduler.getJobNames(groupName);
-
-			for (String jobName : jobNames) {
-				_scheduler.deleteJob(jobName, groupName);
-			}
 		}
 	}
 

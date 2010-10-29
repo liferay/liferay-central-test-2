@@ -135,6 +135,17 @@ public class MainServlet extends ActionServlet {
 		List<Portlet> portlets = PortletLocalServiceUtil.getPortlets();
 
 		if (_log.isDebugEnabled()) {
+			_log.debug("Destroy schedulers");
+		}
+
+		try {
+			destroySchedulers(portlets);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		if (_log.isDebugEnabled()) {
 			_log.debug("Destroy portlets");
 		}
 
@@ -605,6 +616,29 @@ public class MainServlet extends ActionServlet {
 			Portlet portlet = itr.next();
 
 			PortletInstanceFactoryUtil.destroy(portlet);
+		}
+	}
+
+	protected void destroySchedulers(List<Portlet> portlets) throws Exception {
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return;
+		}
+
+		for (Portlet portlet : portlets) {
+			if (!portlet.isActive()) {
+				continue;
+			}
+
+			List<SchedulerEntry> schedulerEntries =
+				portlet.getSchedulerEntries();
+
+			if ((schedulerEntries == null) || schedulerEntries.isEmpty()) {
+				continue;
+			}
+
+			for (SchedulerEntry schedulerEntry : schedulerEntries) {
+				SchedulerEngineUtil.unschedule(schedulerEntry);
+			}
 		}
 	}
 

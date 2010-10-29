@@ -98,10 +98,6 @@ public class SchedulerEngineUtil {
 		_instance._suppressError(jobName, groupName);
 	}
 
-	public static void unschedule() throws SchedulerException {
-		_instance._unschedule();
-	}
-
 	public static void unschedule(SchedulerEntry schedulerEntry)
 		throws SchedulerException {
 
@@ -222,15 +218,11 @@ public class SchedulerEngineUtil {
 	}
 
 	private void _shutdown() throws SchedulerException {
-		_unschedule();
-
 		_schedulerEngine.shutdown();
 	}
 
 	private void _start() throws SchedulerException {
 		_schedulerEngine.start();
-
-		_unschedule();
 	}
 
 	private void _suppressError(String jobName, String groupName)
@@ -264,29 +256,6 @@ public class SchedulerEngineUtil {
 					schedulerMessageListener);
 
 				return;
-			}
-		}
-	}
-
-	private void _unschedule() throws SchedulerException {
-		List<SchedulerRequest> scheduledRequests = getScheduledJobs();
-
-		for (SchedulerRequest scheduledRequest : scheduledRequests) {
-			String destinationName = scheduledRequest.getDestinationName();
-
-			if (destinationName.equals(DestinationNames.SCHEDULER_DISPATCH)) {
-				Message message = scheduledRequest.getMessage();
-
-				String messageListenerUUID = (String)message.get(
-					SchedulerEngine.MESSAGE_LISTENER_UUID);
-
-				_unregisterMessageListener(messageListenerUUID);
-			}
-
-			Trigger trigger = scheduledRequest.getTrigger();
-
-			if (trigger != null) {
-				_unschedule(trigger.getJobName(), trigger.getGroupName());
 			}
 		}
 	}
