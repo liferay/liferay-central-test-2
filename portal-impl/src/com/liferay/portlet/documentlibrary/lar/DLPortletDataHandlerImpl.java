@@ -258,15 +258,13 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				folderPKs, fileEntry.getFolderId(), fileEntry.getFolderId());
 		}
 
+		fileEntry.setFolderId(folderId);
+
 		DLFileEntry importedFileEntry = null;
 
 		String nameWithExtension =
 			fileEntry.getName().concat(StringPool.PERIOD).concat(
 				fileEntry.getExtension());
-
-		//override folderId of the imported LAR file with the
-		//folderId of the actual imported folder
-		fileEntry.setFolderId(folderId);
 
 		if (context.isDataStrategyMirror()) {
 			DLFileEntry existingFileEntry = DLFileEntryUtil.fetchByUUID_G(
