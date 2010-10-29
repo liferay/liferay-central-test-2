@@ -24,22 +24,22 @@ public interface UpgradeColumn {
 
 	public String getName();
 
-	public long increment() throws SystemException;
+	public Integer getNewColumnType(Integer defaultType);
 
-	public boolean isApplicable(String name);
+	public Object getNewValue();
+
+	public Object getNewValue(Object oldValue) throws Exception;
 
 	public Integer getOldColumnType(Integer defaultType);
 
 	public Object getOldValue();
 
-	public void setOldValue(Object oldValue);
+	public long increment() throws SystemException;
 
-	public Integer getNewColumnType(Integer defaultType);
-
-	public Object getNewValue(Object oldValue) throws Exception;
-
-	public Object getNewValue();
+	public boolean isApplicable(String name);
 
 	public void setNewValue(Object newValue);
+
+	public void setOldValue(Object oldValue);
 
 }

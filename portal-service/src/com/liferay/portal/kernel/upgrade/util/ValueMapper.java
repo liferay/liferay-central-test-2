@@ -22,13 +22,13 @@ import java.util.Iterator;
  */
 public interface ValueMapper {
 
-	public Object getNewValue(Object oldValue) throws Exception;
-
-	public void mapValue(Object oldValue, Object newValue) throws Exception;
-
 	public void appendException(Object exception);
 
+	public Object getNewValue(Object oldValue) throws Exception;
+
 	public Iterator<Object> iterator() throws Exception;
+
+	public void mapValue(Object oldValue, Object newValue) throws Exception;
 
 	public int size() throws Exception;
 
