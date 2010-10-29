@@ -889,12 +889,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					}
 					finally {
 						if (list == null) {
-							list = new ArrayList<${entity.name}>();
+							FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_${finder.name?upper_case}, finderArgs);
 						}
+						else {
+							cacheResult(list);
 
-						cacheResult(list);
-
-						FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_${finder.name?upper_case}, finderArgs, list);
+							FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_${finder.name?upper_case}, finderArgs, list);
+						}
 
 						closeSession(session);
 					}
@@ -1364,12 +1365,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						}
 						finally {
 							if (list == null) {
-								list = new ArrayList<${entity.name}>();
+								FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_${finder.name?upper_case}, finderArgs);
 							}
+							else {
+								cacheResult(list);
 
-							cacheResult(list);
-
-							FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_${finder.name?upper_case}, finderArgs, list);
+								FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_${finder.name?upper_case}, finderArgs, list);
+							}
 
 							closeSession(session);
 						}
@@ -1888,7 +1890,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					}
 					finally {
 						if (result == null) {
-							FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_${finder.name?upper_case}, finderArgs, new ArrayList<${entity.name}>());
+							FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_${finder.name?upper_case}, finderArgs);
 						}
 
 						closeSession(session);
@@ -1992,12 +1994,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			}
 			finally {
 				if (list == null) {
-					list = new ArrayList<${entity.name}>();
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL, finderArgs);
 				}
+				else {
+					cacheResult(list);
 
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs, list);
+				}
 
 				closeSession(session);
 			}
@@ -2548,12 +2551,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					}
 					finally {
 						if (list == null) {
-							list = new ArrayList<${tempEntity.packagePath}.model.${tempEntity.name}>();
+							FinderCacheUtil.removeResult(FINDER_PATH_GET_${tempEntity.names?upper_case}, finderArgs);
 						}
+						else {
+							${tempEntity.varName}Persistence.cacheResult(list);
 
-						${tempEntity.varName}Persistence.cacheResult(list);
-
-						FinderCacheUtil.putResult(FINDER_PATH_GET_${tempEntity.names?upper_case}, finderArgs, list);
+							FinderCacheUtil.putResult(FINDER_PATH_GET_${tempEntity.names?upper_case}, finderArgs, list);
+						}
 
 						closeSession(session);
 					}
