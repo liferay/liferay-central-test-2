@@ -25,5 +25,5 @@ if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-int displayStyle = GetterUtil.getInteger(preferences.getValue("display-style", StringPool.BLANK));
+String displayStyle = GetterUtil.getString(preferences.getValue("display-style", null), "1");
 %>

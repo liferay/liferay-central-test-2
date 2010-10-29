@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class BreadcrumbTag extends IncludeTag {
 
-	public void setDisplayStyle(int displayStyle) {
+	public void setDisplayStyle(String displayStyle) {
 		_displayStyle = displayStyle;
 	}
 
@@ -78,8 +78,7 @@ public class BreadcrumbTag extends IncludeTag {
 
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
-			"liferay-ui:breadcrumb:displayStyle",
-			String.valueOf(_displayStyle));
+			"liferay-ui:breadcrumb:displayStyle", _displayStyle);
 		request.setAttribute("liferay-ui:breadcrumb:portletURL", _portletURL);
 		request.setAttribute("liferay-ui:breadcrumb:selLayout", _selLayout);
 		request.setAttribute(
@@ -97,7 +96,7 @@ public class BreadcrumbTag extends IncludeTag {
 			String.valueOf(_showPortletBreadcrumb));
 	}
 
-	private static final int _DISPLAY_STYLE = 0;
+	private static final String _DISPLAY_STYLE = "0";
 
 	private static final String _PAGE = "/html/taglib/ui/breadcrumb/page.jsp";
 
@@ -107,7 +106,7 @@ public class BreadcrumbTag extends IncludeTag {
 	private static final boolean _SHOW_PARENT_GROUPS = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.BREADCRUMB_SHOW_PARENT_GROUPS));
 
-	private int _displayStyle = _DISPLAY_STYLE;
+	private String _displayStyle = _DISPLAY_STYLE;
 	private PortletURL _portletURL;
 	private Layout _selLayout;
 	private String _selLayoutParam;

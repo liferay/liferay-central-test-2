@@ -26,10 +26,10 @@ if (selLayout == null) {
 String selLayoutParam = (String)request.getAttribute("liferay-ui:breadcrumb:selLayoutParam");
 PortletURL portletURL = (PortletURL)request.getAttribute("liferay-ui:breadcrumb:portletURL");
 
-int displayStyle = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:breadcrumb:displayStyle"));
+String displayStyle = GetterUtil.getString((String)request.getAttribute("liferay-ui:breadcrumb:displayStyle"));
 
-if (displayStyle == 0) {
-	displayStyle = 1;
+if (displayStyle.equals("0")) {
+	displayStyle = "1";
 }
 
 boolean showGuestGroup = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:breadcrumb:showGuestGroup"));
