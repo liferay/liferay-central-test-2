@@ -56,6 +56,7 @@ import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpConnectionManager;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
@@ -74,6 +75,7 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.PutMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
+import org.apache.commons.httpclient.params.HostParams;
 import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
 import org.apache.commons.httpclient.params.HttpConnectionParams;
 
@@ -271,8 +273,8 @@ public class HttpImpl implements Http {
 		return path;
 	}
 
-	public HttpClient getClient(HostConfiguration hostConfig) {
-		if (isProxyHost(hostConfig.getHost())) {
+	public HttpClient getClient(HostConfiguration hostConfiguration) {
+		if (isProxyHost(hostConfiguration.getHost())) {
 			return _proxyHttpClient;
 		}
 		else {
@@ -353,20 +355,23 @@ public class HttpImpl implements Http {
 			hostConfiguration.setProxy(_PROXY_HOST, _PROXY_PORT);
 		}
 
-		HttpConnectionManagerParams httpConnectionManagerParams =
-			_httpClient.getHttpConnectionManager().getParams();
+		HttpConnectionManager httpConnectionManager =
+			_httpClient.getHttpConnectionManager();
 
-		int currentMaxConnectionsPerHost =
+		HttpConnectionManagerParams httpConnectionManagerParams =
+			httpConnectionManager.getParams();
+
+		int defaultMaxConnectionsPerHost =
 			httpConnectionManagerParams.getMaxConnectionsPerHost(
 				hostConfiguration);
 
 		int maxConnectionsPerHost = GetterUtil.getInteger(
 			PropsUtil.get(
-				_MAX_CONNECTIONS_PER_HOST_KEY,
+				HttpImpl.class.getName() + ".max.connections.per.host",
 				new Filter(hostConfiguration.getHost())));
 
 		if ((maxConnectionsPerHost > 0) &&
-			(maxConnectionsPerHost != currentMaxConnectionsPerHost)) {
+			(maxConnectionsPerHost != defaultMaxConnectionsPerHost)) {
 
 			httpConnectionManagerParams.setMaxConnectionsPerHost(
 				hostConfiguration, maxConnectionsPerHost);
@@ -374,12 +379,15 @@ public class HttpImpl implements Http {
 
 		int timeout = GetterUtil.getInteger(
 			PropsUtil.get(
-				_TIMEOUT_KEY, new Filter(hostConfiguration.getHost())));
+				HttpImpl.class.getName() + ".timeout",
+				new Filter(hostConfiguration.getHost())));
 
 		if (timeout > 0) {
-			hostConfiguration.getParams().setIntParameter(
+			HostParams hostParams = hostConfiguration.getParams();
+
+			hostParams.setIntParameter(
 				HttpConnectionParams.CONNECTION_TIMEOUT, timeout);
-			hostConfiguration.getParams().setIntParameter(
+			hostParams.setIntParameter(
 				HttpConnectionParams.SO_TIMEOUT, timeout);
 		}
 
@@ -956,9 +964,10 @@ public class HttpImpl implements Http {
 				location = Http.HTTP_WITH_SLASH + location;
 			}
 
-			HostConfiguration hostConfig = getHostConfiguration(location);
+			HostConfiguration hostConfiguration = getHostConfiguration(
+				location);
 
-			HttpClient httpClient = getClient(hostConfig);
+			HttpClient httpClient = getClient(hostConfiguration);
 
 			if ((method == Http.Method.POST) ||
 				(method == Http.Method.PUT)) {
@@ -1060,9 +1069,9 @@ public class HttpImpl implements Http {
 						auth.getUsername(), auth.getPassword()));
 			}
 
-			proxifyState(httpState, hostConfig);
+			proxifyState(httpState, hostConfiguration);
 
-			httpClient.executeMethod(hostConfig, httpMethod, httpState);
+			httpClient.executeMethod(hostConfiguration, httpMethod, httpState);
 
 			Header locationHeader = httpMethod.getResponseHeader("location");
 
@@ -1141,9 +1150,6 @@ public class HttpImpl implements Http {
 	private static final String _DEFAULT_USER_AGENT =
 		"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)";
 
-	private static final String _MAX_CONNECTIONS_PER_HOST_KEY =
-		HttpImpl.class.getName() + ".max.connections.per.host";
-
 	private static final int _MAX_CONNECTIONS_PER_HOST = GetterUtil.getInteger(
 		PropsUtil.get(HttpImpl.class.getName() + ".max.connections.per.host"),
 		2);
@@ -1177,9 +1183,6 @@ public class HttpImpl implements Http {
 		PropsUtil.get(HttpImpl.class.getName() + ".proxy.username"));
 
 	private static final String _TEMP_SLASH = "_LIFERAY_TEMP_SLASH_";
-
-	private static final String _TIMEOUT_KEY =
-		HttpImpl.class.getName() + ".timeout";
 
 	private static final int _TIMEOUT = GetterUtil.getInteger(
 		PropsUtil.get(HttpImpl.class.getName() + ".timeout"), 5000);
