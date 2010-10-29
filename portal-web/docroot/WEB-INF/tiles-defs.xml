@@ -887,6 +887,14 @@
 		<put name="portlet_content" value="/portlet/message_boards/view_message.jsp" />
 	</definition>
 
+	<!-- Message Boards Admin-->
+
+	<definition name="portlet.message_boards_admin" extends="portlet" />
+
+	<definition name="portlet.message_boards_admin.view" extends="portlet.message_boards_admin">
+		<put name="portlet_content" value="/portlet/message_boards_admin/view.jsp" />
+	</definition>
+
 	<!-- My Account -->
 
 	<definition name="portlet.my_account" extends="portlet" />

@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -87,13 +88,13 @@ public class EditMessageAction extends PortletAction {
 				deleteMessage(actionRequest);
 			}
 			else if (cmd.equals(Constants.LOCK)) {
-				lockThread(actionRequest);
+				lockThreads(actionRequest);
 			}
 			else if (cmd.equals(Constants.SUBSCRIBE)) {
 				subscribeMessage(actionRequest);
 			}
 			else if (cmd.equals(Constants.UNLOCK)) {
-				unlockThread(actionRequest);
+				unlockThreads(actionRequest);
 			}
 			else if (cmd.equals(Constants.UNSUBSCRIBE)) {
 				unsubscribeMessage(actionRequest);
@@ -196,10 +197,22 @@ public class EditMessageAction extends PortletAction {
 		return portletURL.toString();
 	}
 
-	protected void lockThread(ActionRequest actionRequest) throws Exception {
-		long threadId = ParamUtil.getLong(actionRequest, "threadId");
+	protected void lockThreads(ActionRequest actionRequest) throws Exception {
+		String lockThreadIds =
+			ParamUtil.getString(actionRequest, "threadIds");
 
-		MBThreadServiceUtil.lockThread(threadId);
+		if (Validator.isNotNull(lockThreadIds)) {
+			long[] threadIds = StringUtil.split(lockThreadIds, 0L);
+
+			for (int i = 0; i < threadIds.length; i++) {
+				MBThreadServiceUtil.lockThread(threadIds[i]);
+			}
+		}
+		else {
+			long threadId = ParamUtil.getLong(actionRequest, "threadId");
+
+			MBThreadServiceUtil.lockThread(threadId);
+		}
 	}
 
 	protected void subscribeMessage(ActionRequest actionRequest)
@@ -210,10 +223,22 @@ public class EditMessageAction extends PortletAction {
 		MBMessageServiceUtil.subscribeMessage(messageId);
 	}
 
-	protected void unlockThread(ActionRequest actionRequest) throws Exception {
-		long threadId = ParamUtil.getLong(actionRequest, "threadId");
+	protected void unlockThreads(ActionRequest actionRequest) throws Exception {
+		String unlockThreadIds =
+			ParamUtil.getString(actionRequest, "threadIds");
 
-		MBThreadServiceUtil.unlockThread(threadId);
+		if (Validator.isNotNull(unlockThreadIds)) {
+			long[] threadIds = StringUtil.split(unlockThreadIds, 0L);
+
+			for (int i = 0; i < threadIds.length; i++) {
+				MBThreadServiceUtil.unlockThread(threadIds[i]);
+			}
+		}
+		else {
+			long threadId = ParamUtil.getLong(actionRequest, "threadId");
+
+			MBThreadServiceUtil.unlockThread(threadId);
+		}
 	}
 
 	protected void unsubscribeMessage(ActionRequest actionRequest)

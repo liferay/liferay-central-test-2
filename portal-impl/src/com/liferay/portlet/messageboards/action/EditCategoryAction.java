@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -64,7 +66,7 @@ public class EditCategoryAction extends PortletAction {
 				updateCategory(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteCategory(actionRequest);
+				deleteCategories(actionRequest);
 			}
 			else if (cmd.equals(Constants.SUBSCRIBE)) {
 				subscribeCategory(actionRequest);
@@ -125,16 +127,29 @@ public class EditCategoryAction extends PortletAction {
 			getForward(renderRequest, "portlet.message_boards.edit_category"));
 	}
 
-	protected void deleteCategory(ActionRequest actionRequest)
+	protected void deleteCategories(ActionRequest actionRequest)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		long groupId = themeDisplay.getScopeGroupId();
-		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 
-		MBCategoryServiceUtil.deleteCategory(groupId, categoryId);
+		String deleteCategoryIds =
+			ParamUtil.getString(actionRequest, "deleteCategoryIds");
+
+		if (Validator.isNotNull(deleteCategoryIds)) {
+			long[] categoryIds = StringUtil.split(deleteCategoryIds, 0L);
+
+			for (int i = 0; i < categoryIds.length; i++) {
+				MBCategoryServiceUtil.deleteCategory(groupId, categoryIds[i]);
+			}
+		}
+		else {
+			long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
+
+			MBCategoryServiceUtil.deleteCategory(groupId, categoryId);
+		}
 	}
 
 	protected void subscribeCategory(ActionRequest actionRequest)

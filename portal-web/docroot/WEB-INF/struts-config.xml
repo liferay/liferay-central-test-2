@@ -1457,6 +1457,68 @@
 			<forward name="portlet.message_boards.view_message" path="portlet.message_boards.view_message" />
 		</action>
 
+		<!-- Message Boards Admin -->
+
+		<action path="/message_boards_admin/ban_user" type="com.liferay.portlet.messageboards.action.BanUserAction">
+			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
+		</action>
+
+		<action path="/message_boards_admin/captcha" type="com.liferay.portal.captcha.CaptchaPortletAction" />
+
+		<action path="/message_boards_admin/delete_thread" type="com.liferay.portlet.messageboards.action.DeleteThreadAction">
+			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
+		</action>
+
+		<action path="/message_boards_admin/edit_category" type="com.liferay.portlet.messageboards.action.EditCategoryAction">
+			<forward name="portlet.message_boards.edit_category" path="portlet.message_boards.edit_category" />
+			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
+		</action>
+
+        <action path="/message_boards_admin/edit_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
+            <forward name="portlet.message_boards.edit_discussion" path="portlet.message_boards.edit_discussion" />
+            <forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
+        </action>
+
+		<action path="/message_boards_admin/edit_message" type="com.liferay.portlet.messageboards.action.EditMessageAction">
+			<forward name="portlet.message_boards.edit_message" path="portlet.message_boards.edit_message" />
+			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
+		</action>
+
+		<action path="/message_boards_admin/find_category" type="com.liferay.portlet.messageboards.action.FindCategoryAction" />
+
+		<action path="/message_boards_admin/find_message" type="com.liferay.portlet.messageboards.action.FindMessageAction" />
+
+		<action path="/message_boards_admin/find_thread" type="com.liferay.portlet.messageboards.action.FindThreadAction" />
+
+		<action path="/message_boards_admin/get_message_attachment" type="com.liferay.portlet.messageboards.action.GetMessageAttachmentAction" />
+
+		<action path="/message_boards_admin/move_thread" type="com.liferay.portlet.messageboards.action.MoveThreadAction">
+			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
+			<forward name="portlet.message_boards.move_thread" path="portlet.message_boards.move_thread" />
+		</action>
+		                                          
+		<action path="/message_boards_admin/search" forward="portlet.message_boards.search" />
+
+		<action path="/message_boards_admin/select_category" type="com.liferay.portlet.messageboards.action.EditCategoryAction">
+			<forward name="portlet.message_boards.edit_category" path="portlet.message_boards.select_category" />
+			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
+		</action>
+
+		<action path="/message_boards_admin/split_thread" type="com.liferay.portlet.messageboards.action.SplitThreadAction">
+			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
+			<forward name="portlet.message_boards.split_thread" path="portlet.message_boards.split_thread" />
+		</action>
+
+		<action path="/message_boards_admin/view" type="com.liferay.portlet.messageboards.action.ViewAction">
+			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
+			<forward name="portlet.message_boards.view" path="portlet.message_boards_admin.view" />
+		</action>
+
+		<action path="/message_boards_admin/view_message" type="com.liferay.portlet.messageboards.action.ViewMessageAction">
+			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
+			<forward name="portlet.message_boards.view_message" path="portlet.message_boards.view_message" />
+		</action>
+
 		<!-- My Account -->
 
 		<action path="/my_account/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction">
