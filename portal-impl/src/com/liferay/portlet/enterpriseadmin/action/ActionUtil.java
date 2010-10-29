@@ -204,7 +204,7 @@ public class ActionUtil {
 
 		Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
-		if (group.isCommunity()) {
+		if ((group != null) && group.isCommunity()) {
 			if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 					themeDisplay.getUserId(), group.getGroupId(),
 					RoleConstants.COMMUNITY_ADMINISTRATOR, true) ||
@@ -222,7 +222,7 @@ public class ActionUtil {
 				}
 			}
 		}
-		else if (group.isOrganization()) {
+		else if ((group != null) && group.isOrganization()) {
 			long organizationId = group.getOrganizationId();
 
 			while (organizationId !=
