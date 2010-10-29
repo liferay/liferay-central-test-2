@@ -24,6 +24,7 @@ import com.liferay.portlet.PortletPreferencesSerializer;
  * @author Julio Camarero
  */
 public class UpgradeNavigation extends BaseUpgradePortletPreferences {
+
 	protected String getUpdatePortletPreferencesWhereClause() {
 		return "portletId like '71_INSTANCE_%'";
 	}
@@ -42,21 +43,20 @@ public class UpgradeNavigation extends BaseUpgradePortletPreferences {
 		if (Validator.isNumber(displayStyle)) {
 			int index = GetterUtil.getInteger(displayStyle);
 
-			if (index > 6 || index < 0) {
+			if ((index < 0) || (index > 6)) {
 				index = 0;
 			}
 
-			String newDisplayStyle = displayStyles[index];
-
-			preferences.setValue("display-style", newDisplayStyle);
+			preferences.setValue("display-style", _DISPLAY_STYLES[index]);
 		}
 
 		return PortletPreferencesSerializer.toXML(preferences);
 	}
 
-	private String[] displayStyles = {
+	private static final String[] _DISPLAY_STYLES = {
 		"", "relative-with-breadcrumb", "from-level-2-with-title",
 		"from-level-1-with-title", "from-level-1",
-		"from-level-1-to-all-sublevels", "from-level-0"};
+		"from-level-1-to-all-sublevels", "from-level-0"
+	};
 
 }
