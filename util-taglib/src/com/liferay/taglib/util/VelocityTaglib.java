@@ -156,8 +156,9 @@ public class VelocityTaglib {
 	}
 
 	public void breadcrumb(
-			int displayStyle, boolean showGuestGroup, boolean showParentGroups,
-			boolean showLayout, boolean showPortletBreadcrumb)
+			String displayStyle, boolean showGuestGroup,
+			boolean showParentGroups, boolean showLayout,
+			boolean showPortletBreadcrumb)
 		throws Exception {
 
 		BreadcrumbTag breadcrumbTag = new BreadcrumbTag();
