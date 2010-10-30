@@ -18,9 +18,6 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
-
-String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSetting("bullet-style-options"));
-String[] displayStyleOptions = PropsUtil.getArray("navigation.display.style.options");
 %>
 
 <liferay-portlet:preview
@@ -43,7 +40,7 @@ String[] displayStyleOptions = PropsUtil.getArray("navigation.display.style.opti
 			<optgroup label="<liferay-ui:message key="predefined" />">
 
 				<%
-				for (String displayStyleOption : displayStyleOptions) {
+				for (String displayStyleOption : PropsValues.NAVIGATION_DISPLAY_STYLE_OPTIONS) {
 				%>
 
 					<aui:option label="<%= displayStyleOption %>" selected="<%= displayStyle.equals(displayStyleOption) %>" />
@@ -58,6 +55,8 @@ String[] displayStyleOptions = PropsUtil.getArray("navigation.display.style.opti
 		<aui:select name="bulletStyle">
 
 			<%
+			String[] bulletStyleOptions = StringUtil.split(theme.getSetting("bullet-style-options"));
+
 			for (String bulletStyleOption : bulletStyleOptions) {
 			%>
 

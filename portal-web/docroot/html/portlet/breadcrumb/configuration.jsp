@@ -18,8 +18,6 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
-
-String[] displayStyleOptions = PropsUtil.getArray("breadcrumb.display.style.options");	
 %>
 
 <liferay-portlet:preview
@@ -39,7 +37,7 @@ String[] displayStyleOptions = PropsUtil.getArray("breadcrumb.display.style.opti
 		<aui:select name="displayStyle">
 
 			<%
-			for (String displayStyleOption : displayStyleOptions) {
+			for (String displayStyleOption : PropsValues.BREADCRUMB_DISPLAY_STYLE_OPTIONS) {
 			%>
 
 				<aui:option label="<%= displayStyleOption %>" selected="<%= displayStyle.equals(displayStyleOption) %>" />
@@ -47,6 +45,7 @@ String[] displayStyleOptions = PropsUtil.getArray("breadcrumb.display.style.opti
 			<%
 			}
 			%>
+
 		</aui:select>
 	</aui:fieldset>
 
