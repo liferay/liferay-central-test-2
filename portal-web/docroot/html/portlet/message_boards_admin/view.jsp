@@ -195,9 +195,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 							<br>
 
-							<% String taglibOnClick = renderResponse.getNamespace() + "deleteCategories('" + Constants.DELETE + "');"; %>
-
-							<aui:button onClick="<%= taglibOnClick %>" value="delete" />
+							<aui:button onClick='<%= renderResponse.getNamespace() + "deleteCategories();" %>' value="delete" />
 
 							<div class="separator"><!-- --></div>
 
@@ -361,18 +359,12 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 						</liferay-ui:search-container-row>
 
 						<br>
-						
-						<% 
-						String taglibOnClickDelete = renderResponse.getNamespace() + "deleteThreads('" + Constants.DELETE + "');";
-						String taglibOnClickLock = renderResponse.getNamespace() + "lockThreads('" + Constants.LOCK + "');";
-						String taglibOnClickUnlock = renderResponse.getNamespace() + "unlockThreads('" + Constants.UNLOCK + "');";
-						%>
 
-						<aui:button onClick="<%= taglibOnClickDelete %>" value="delete" />
+						<aui:button onClick='<%= renderResponse.getNamespace() + "deleteThreads();" %>' value="delete" />
 
-						<aui:button onClick="<%= taglibOnClickLock%>" value="lock" />
+						<aui:button onClick='<%= renderResponse.getNamespace() + "lockThreads();" %>' value="lock" />
 
-						<aui:button onClick="<%= taglibOnClickUnlock%>" value="unlock" />
+						<aui:button onClick='<%= renderResponse.getNamespace() + "unlockThreads();" %>' value="unlock" />
 
 						<div class="separator"><!-- --></div>
 
@@ -541,17 +533,11 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 				<br>
 
-				<%
-				String taglibOnClickDelete = renderResponse.getNamespace() + "deleteThreads('" + Constants.DELETE + "');";
-				String taglibOnClickLock = renderResponse.getNamespace() + "lockThreads('" + Constants.LOCK + "');";
-				String taglibOnClickUnlock = renderResponse.getNamespace() + "unlockThreads('" + Constants.UNLOCK + "');";
-				%>
+				<aui:button onClick='<%= renderResponse.getNamespace() + "deleteThreads();" %>' value="delete" />
 
-				<aui:button onClick="<%= taglibOnClickDelete %>" value="delete" />
+				<aui:button onClick='<%= renderResponse.getNamespace() + "lockThreads();" %>' value="lock" />
 
-				<aui:button onClick="<%= taglibOnClickLock%>" value="lock" />
-
-				<aui:button onClick="<%= taglibOnClickUnlock%>" value="unlock" />
+				<aui:button onClick='<%= renderResponse.getNamespace() + "unlockThreads();" %>' value="unlock" />
 
 				<div class="separator"><!-- --></div>
 
@@ -704,22 +690,12 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 	Liferay.provide(
 		window,
 		'<portlet:namespace />deleteThreads',
-		function(cmd) {
-			var deleteThreads = true;
-
-			var deleteThreadIds = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm1, "<portlet:namespace />allRowIds");
-
-			if (!deleteThreadIds) {
-				deleteThreads = false;
-			}
-
-			if (deleteThreads) {
-				if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this") %>')) {
-					document.<portlet:namespace />fm1.method = "post";
-					document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
-					document.<portlet:namespace />fm1.<portlet:namespace />threadIds.value = deleteThreadIds;
-					submitForm(document.<portlet:namespace />fm1, "<portlet:actionURL><portlet:param name="struts_action" value="/message_boards_admin/delete_thread" /></portlet:actionURL>");
-				}
+		function() {
+			if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this") %>')) {
+				document.<portlet:namespace />fm1.method = "post";
+				document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
+				document.<portlet:namespace />fm1.<portlet:namespace />threadIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm1, "<portlet:namespace />allRowIds");
+				submitForm(document.<portlet:namespace />fm1, "<portlet:actionURL><portlet:param name="struts_action" value="/message_boards_admin/delete_thread" /></portlet:actionURL>");
 			}
 		},
 		['liferay-util-list-fields']
@@ -728,21 +704,11 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 	Liferay.provide(
 		window,
 		'<portlet:namespace />lockThreads',
-		function(cmd) {
-			var lockThreads = true;
-
-			var lockThreadIds = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm1, "<portlet:namespace />allRowIds");
-
-			if (!lockThreadIds) {
-				lockThreads = false;
-			}
-
-			if (lockThreads) {
-				document.<portlet:namespace />fm1.method = "post";
-				document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
-				document.<portlet:namespace />fm1.<portlet:namespace />threadIds.value = lockThreadIds;
-				submitForm(document.<portlet:namespace />fm1, "<portlet:actionURL><portlet:param name="struts_action" value="/message_boards_admin/edit_message" /></portlet:actionURL>");
-			}
+		function() {
+			document.<portlet:namespace />fm1.method = "post";
+			document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.LOCK %>";
+			document.<portlet:namespace />fm1.<portlet:namespace />threadIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm1, "<portlet:namespace />allRowIds");
+			submitForm(document.<portlet:namespace />fm1, "<portlet:actionURL><portlet:param name="struts_action" value="/message_boards_admin/edit_message" /></portlet:actionURL>");
 		},
 		['liferay-util-list-fields']
 	);
@@ -750,21 +716,11 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 	Liferay.provide(
 		window,
 		'<portlet:namespace />unlockThreads',
-		function(cmd) {
-			var unlockThreads = true;
-
-			var unlockThreadIds = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm1, "<portlet:namespace />allRowIds");
-
-			if (!unlockThreadIds) {
-				unlockThreads = false;
-			}
-
-			if (unlockThreads) {
-				document.<portlet:namespace />fm1.method = "post";
-				document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
-				document.<portlet:namespace />fm1.<portlet:namespace />threadIds.value = unlockThreadIds;
-				submitForm(document.<portlet:namespace />fm1, "<portlet:actionURL><portlet:param name="struts_action" value="/message_boards_admin/edit_message" /></portlet:actionURL>");
-			}
+		function() {
+			document.<portlet:namespace />fm1.method = "post";
+			document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UNLOCK %>";
+			document.<portlet:namespace />fm1.<portlet:namespace />threadIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm1, "<portlet:namespace />allRowIds");
+			submitForm(document.<portlet:namespace />fm1, "<portlet:actionURL><portlet:param name="struts_action" value="/message_boards_admin/edit_message" /></portlet:actionURL>");
 		},
 		['liferay-util-list-fields']
 	);

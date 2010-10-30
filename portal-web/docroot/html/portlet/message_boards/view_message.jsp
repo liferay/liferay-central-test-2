@@ -30,6 +30,7 @@ MBThread thread = messageDisplay.getThread();
 
 <c:choose>
 	<c:when test="<%= portletName.equals(PortletKeys.MESSAGE_BOARDS_ADMIN) %>">
+
 		<%
 		PortletURL portletURL = renderResponse.createRenderURL();
 

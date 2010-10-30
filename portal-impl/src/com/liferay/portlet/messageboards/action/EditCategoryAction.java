@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -133,22 +132,20 @@ public class EditCategoryAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long groupId = themeDisplay.getScopeGroupId();
+		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 
-		String deleteCategoryIds =
-			ParamUtil.getString(actionRequest, "deleteCategoryIds");
-
-		if (Validator.isNotNull(deleteCategoryIds)) {
-			long[] categoryIds = StringUtil.split(deleteCategoryIds, 0L);
-
-			for (int i = 0; i < categoryIds.length; i++) {
-				MBCategoryServiceUtil.deleteCategory(groupId, categoryIds[i]);
-			}
+		if (categoryId > 0) {
+			MBCategoryServiceUtil.deleteCategory(
+				themeDisplay.getScopeGroupId(), categoryId);
 		}
 		else {
-			long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
+			long[] deleteCategoryIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "deleteCategoryIds"), 0L);
 
-			MBCategoryServiceUtil.deleteCategory(groupId, categoryId);
+			for (int i = 0; i < deleteCategoryIds.length; i++) {
+				MBCategoryServiceUtil.deleteCategory(
+					themeDisplay.getScopeGroupId(), deleteCategoryIds[i]);
+			}
 		}
 	}
 
@@ -158,10 +155,10 @@ public class EditCategoryAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long groupId = themeDisplay.getScopeGroupId();
 		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 
-		MBCategoryServiceUtil.subscribeCategory(groupId, categoryId);
+		MBCategoryServiceUtil.subscribeCategory(
+			themeDisplay.getScopeGroupId(), categoryId);
 	}
 
 	protected void unsubscribeCategory(ActionRequest actionRequest)
@@ -170,10 +167,10 @@ public class EditCategoryAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long groupId = themeDisplay.getScopeGroupId();
 		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 
-		MBCategoryServiceUtil.unsubscribeCategory(groupId, categoryId);
+		MBCategoryServiceUtil.unsubscribeCategory(
+			themeDisplay.getScopeGroupId(), categoryId);
 	}
 
 	protected void updateCategory(ActionRequest actionRequest)

@@ -198,20 +198,18 @@ public class EditMessageAction extends PortletAction {
 	}
 
 	protected void lockThreads(ActionRequest actionRequest) throws Exception {
-		String lockThreadIds =
-			ParamUtil.getString(actionRequest, "threadIds");
+		long threadId = ParamUtil.getLong(actionRequest, "threadId");
 
-		if (Validator.isNotNull(lockThreadIds)) {
-			long[] threadIds = StringUtil.split(lockThreadIds, 0L);
+		if (threadId > 0) {
+			MBThreadServiceUtil.lockThread(threadId);
+		}
+		else {
+			long[] threadIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "threadIds"), 0L);
 
 			for (int i = 0; i < threadIds.length; i++) {
 				MBThreadServiceUtil.lockThread(threadIds[i]);
 			}
-		}
-		else {
-			long threadId = ParamUtil.getLong(actionRequest, "threadId");
-
-			MBThreadServiceUtil.lockThread(threadId);
 		}
 	}
 
@@ -224,20 +222,18 @@ public class EditMessageAction extends PortletAction {
 	}
 
 	protected void unlockThreads(ActionRequest actionRequest) throws Exception {
-		String unlockThreadIds =
-			ParamUtil.getString(actionRequest, "threadIds");
+		long threadId = ParamUtil.getLong(actionRequest, "threadId");
 
-		if (Validator.isNotNull(unlockThreadIds)) {
-			long[] threadIds = StringUtil.split(unlockThreadIds, 0L);
+		if (threadId > 0) {
+			MBThreadServiceUtil.unlockThread(threadId);
+		}
+		else {
+			long[] threadIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "threadIds"), 0L);
 
 			for (int i = 0; i < threadIds.length; i++) {
 				MBThreadServiceUtil.unlockThread(threadIds[i]);
 			}
-		}
-		else {
-			long threadId = ParamUtil.getLong(actionRequest, "threadId");
-
-			MBThreadServiceUtil.unlockThread(threadId);
 		}
 	}
 

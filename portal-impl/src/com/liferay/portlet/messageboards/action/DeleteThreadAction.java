@@ -17,7 +17,6 @@ package com.liferay.portlet.messageboards.action;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.messageboards.service.MBThreadServiceUtil;
@@ -61,20 +60,18 @@ public class DeleteThreadAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String deleteThreadIds =
-			ParamUtil.getString(actionRequest, "threadIds");
+		long threadId = ParamUtil.getLong(actionRequest, "threadId");
 
-		if (Validator.isNotNull(deleteThreadIds)) {
-			long[] threadIds = StringUtil.split(deleteThreadIds, 0L);
-
-			for (int i = 0; i < threadIds.length; i++) {
-				MBThreadServiceUtil.deleteThread(threadIds[i]);
-			}
+		if (threadId > 0) {
+			MBThreadServiceUtil.deleteThread(threadId);
 		}
 		else {
-			long threadId = ParamUtil.getLong(actionRequest, "threadId");
+			long[] deleteThreadIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "deleteThreadIds"), 0L);
 
-			MBThreadServiceUtil.deleteThread(threadId);
+			for (int i = 0; i < deleteThreadIds.length; i++) {
+				MBThreadServiceUtil.deleteThread(deleteThreadIds[i]);
+			}
 		}
 	}
 
