@@ -33,7 +33,7 @@ if (category != null) {
 		title="message-boards-home"
 	/>
 
-	<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showParentGroups="<%= false %>" showLayout="<%= false %>" />
+	<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showLayout="<%= false %>" showParentGroups="<%= false %>" />
 
 	<%
 	PortletURL portletURL = renderResponse.createRenderURL();

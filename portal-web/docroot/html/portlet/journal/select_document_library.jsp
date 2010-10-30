@@ -39,7 +39,7 @@ if (folder != null) {
 		title="folders"
 	/>
 
-	<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showParentGroups="<%= false %>" showLayout="<%= false %>" />
+	<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showLayout="<%= false %>" showParentGroups="<%= false %>" />
 
 	<%
 	List<String> headerNames = new ArrayList<String>();
