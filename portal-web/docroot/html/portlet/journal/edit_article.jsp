@@ -339,7 +339,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 						</td>
 						<td>
 							<c:if test="<%= (article != null) && !languageId.equals(defaultLanguageId) %>">
-								<aui:button name="removeArticleLocaleButton" onClick='<%= renderResponse.getNamespace() + "removeArticleLocale();" %>' type="button" value="remove" />
+								<aui:button name="removeArticleLocaleButton" onClick='<%= renderResponse.getNamespace() + "removeArticleLocale();" %>' value="remove" />
 							</c:if>
 						</td>
 						<td>
@@ -427,9 +427,9 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 											<div class="journal-article-buttons">
 												<aui:input cssClass="journal-article-variable-name" inlineField="<%= true %>" id="TextAreaFieldvariableName" label="variable-name" name="variableName" size="25" type="text" value="content" />
 
-												<aui:button cssClass="edit-button" type="button" value="edit-options" />
+												<aui:button cssClass="edit-button" value="edit-options" />
 
-												<aui:button cssClass="repeatable-button aui-helper-hidden" type="button" value="repeat" />
+												<aui:button cssClass="repeatable-button aui-helper-hidden" value="repeat" />
 											</div>
 										</div>
 

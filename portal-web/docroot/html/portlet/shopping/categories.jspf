@@ -131,7 +131,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 								<portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" />
 							</portlet:renderURL>
 
-							<aui:button onClick="<%= addCategoriesURL %>" type="button" value='<%= (category == null) ? "add-category" : "add-subcategory" %>' />
+							<aui:button onClick="<%= addCategoriesURL %>" value='<%= (category == null) ? "add-category" : "add-subcategory" %>' />
 						</c:if>
 
 						<c:if test="<%= showPermissionsButton %>">
@@ -155,7 +155,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 								var="permissionsURL"
 							/>
 
-							<aui:button onClick="<%= permissionsURL %>" type="button" value="permissions" />
+							<aui:button onClick="<%= permissionsURL %>" value="permissions" />
 						</c:if>
 					</aui:button-row>
 				</c:if>
@@ -339,7 +339,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 								<portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" />
 							</portlet:renderURL>
 
-							<aui:button onClick="<%= addItemURL %>" type="button" value="add-item" />
+							<aui:button onClick="<%= addItemURL %>" value="add-item" />
 
 							<portlet:renderURL var="addBooksURL">
 								<portlet:param name="struts_action" value="/shopping/add_book_items" />
@@ -347,7 +347,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 								<portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" />
 							</portlet:renderURL>
 
-							<aui:button onClick="<%= addBooksURL %>" type="button" value="add-books" />
+							<aui:button onClick="<%= addBooksURL %>" value="add-books" />
 						</c:if>
 					</aui:button-row>
 				</c:if>

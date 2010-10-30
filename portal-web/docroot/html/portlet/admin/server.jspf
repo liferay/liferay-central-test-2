@@ -83,7 +83,7 @@ numberFormat.setMinimumIntegerDigits(2);
 							String taglibAddLogLevel = renderResponse.getNamespace() + "saveServer('addLogLevel');";
 							%>
 
-							<aui:button type="button" onClick="<%= taglibAddLogLevel %>" value="save" />
+							<aui:button onClick="<%= taglibAddLogLevel %>" value="save" />
 						</aui:button-row>
 					</c:when>
 					<c:otherwise>
@@ -203,7 +203,7 @@ numberFormat.setMinimumIntegerDigits(2);
 							String taglibUpdateLogLevels = renderResponse.getNamespace() + "saveServer('updateLogLevels');";
 							%>
 
-							<aui:button type="button" onClick="<%= taglibUpdateLogLevels %>" value="save" />
+							<aui:button onClick="<%= taglibUpdateLogLevels %>" value="save" />
 						</aui:button-row>
 					</c:otherwise>
 				</c:choose>
@@ -329,7 +329,7 @@ numberFormat.setMinimumIntegerDigits(2);
 					String taglibUpdateCaptcha = renderResponse.getNamespace() + "saveServer('updateCaptcha');";
 					%>
 
-					<aui:button type="button" onClick="<%= taglibUpdateCaptcha %>" value="save" />
+					<aui:button onClick="<%= taglibUpdateCaptcha %>" value="save" />
 				</aui:button-row>
 			</c:when>
 			<c:when test='<%= tabs2.equals("data-migration") %>'>
@@ -419,7 +419,7 @@ numberFormat.setMinimumIntegerDigits(2);
 										String taglibConvertProcess = renderResponse.getNamespace() + "saveServer('convertProcess." + convertProcess.getClass().getName() + "');";
 										%>
 
-										<aui:button type="button" onClick="<%= taglibConvertProcess %>" value="execute" />
+										<aui:button onClick="<%= taglibConvertProcess %>" value="execute" />
 									</aui:button-row>
 								</liferay-ui:panel>
 							</liferay-ui:panel-container>
@@ -505,7 +505,7 @@ numberFormat.setMinimumIntegerDigits(2);
 					String taglibUpdateFileUploads = renderResponse.getNamespace() + "saveServer('updateFileUploads');";
 					%>
 
-					<aui:button type="button" onClick="<%= taglibUpdateFileUploads %>" value="save" />
+					<aui:button onClick="<%= taglibUpdateFileUploads %>" value="save" />
 				</aui:button-row>
 			</c:when>
 			<c:when test='<%= tabs2.equals("mail") %>'>
@@ -543,7 +543,7 @@ numberFormat.setMinimumIntegerDigits(2);
 					String taglibUpdateMail = renderResponse.getNamespace() + "saveServer('updateMail');";
 					%>
 
-					<aui:button type="button" onClick="<%= taglibUpdateMail %>" value="save" />
+					<aui:button onClick="<%= taglibUpdateMail %>" value="save" />
 				</aui:button-row>
 			</c:when>
 			<c:when test='<%= tabs2.equals("OpenOffice") %>'>
@@ -563,7 +563,7 @@ numberFormat.setMinimumIntegerDigits(2);
 					String taglibUpdateOpenOffice = renderResponse.getNamespace() + "saveServer('updateOpenOffice');";
 					%>
 
-					<aui:button type="button" onClick="<%= taglibUpdateOpenOffice %>" value="save" />
+					<aui:button onClick="<%= taglibUpdateOpenOffice %>" value="save" />
 				</aui:button-row>
 			</c:when>
 			<c:when test='<%= tabs2.equals("script") %>'>
@@ -611,7 +611,7 @@ numberFormat.setMinimumIntegerDigits(2);
 					String taglibRunScript = renderResponse.getNamespace() + "saveServer('runScript');";
 					%>
 
-					<aui:button type="button" onClick="<%= taglibRunScript %>" value="execute" />
+					<aui:button onClick="<%= taglibRunScript %>" value="execute" />
 				</aui:button-row>
 			</c:when>
 			<c:when test='<%= tabs2.equals("shutdown") %>'>
@@ -627,7 +627,7 @@ numberFormat.setMinimumIntegerDigits(2);
 					String taglibShutdown = renderResponse.getNamespace() + "saveServer('shutdown');";
 					%>
 
-					<aui:button type="button" onClick="<%= taglibShutdown %>" value="shutdown" />
+					<aui:button onClick="<%= taglibShutdown %>" value="shutdown" />
 
 					<c:if test="<%= ShutdownUtil.isInProcess() %>">
 
@@ -635,7 +635,7 @@ numberFormat.setMinimumIntegerDigits(2);
 						String taglibCancelShutdown = "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "minutes.value = 0;" + renderResponse.getNamespace() + "saveServer('shutdown');";
 						%>
 
-						<aui:button type="button" onClick="<%= taglibCancelShutdown %>" value="cancel-shutdown" />
+						<aui:button onClick="<%= taglibCancelShutdown %>" value="cancel-shutdown" />
 					</c:if>
 				</aui:button-row>
 			</c:when>

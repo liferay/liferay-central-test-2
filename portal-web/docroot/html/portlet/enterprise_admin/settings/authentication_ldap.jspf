@@ -119,7 +119,7 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0) && Validator.isNull(PrefsProp
 	String taglibOnClick = "location.href = '" + addServerURL.toString() + "'";
 	%>
 
-	<aui:button name="addButton" onClick="<%= taglibOnClick %>" type="button" value="add" />
+	<aui:button name="addButton" onClick="<%= taglibOnClick %>" value="add" />
 </aui:button-row>
 
 <aui:fieldset>

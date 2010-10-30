@@ -169,9 +169,9 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 								<%= HtmlUtil.escape(headerArticle.getTitle()) %>
 							</c:if>
 
-							<aui:button name="selectButton" onClick='<%= renderResponse.getNamespace() + "selectionForHeader();" %>' type="button" value="select" />
+							<aui:button name="selectButton" onClick='<%= renderResponse.getNamespace() + "selectionForHeader();" %>' value="select" />
 
-							<aui:button name="removeButton" onClick='<%= renderResponse.getNamespace() + "removeSelectionForHeader();" %>' type="button" value="remove" />
+							<aui:button name="removeButton" onClick='<%= renderResponse.getNamespace() + "removeSelectionForHeader();" %>' value="remove" />
 						</aui:field-wrapper>
 
 						<aui:field-wrapper label="footer-web-content">
@@ -184,9 +184,9 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 								<%= HtmlUtil.escape(footerArticle.getTitle()) %>
 							</c:if>
 
-							<aui:button name="selectButton" onClick='<%= renderResponse.getNamespace() + "selectionForFooter();" %>' type="button" value="select" />
+							<aui:button name="selectButton" onClick='<%= renderResponse.getNamespace() + "selectionForFooter();" %>' value="select" />
 
-							<aui:button name="removeButton" onClick='<%= renderResponse.getNamespace() + "removeSelectionForFooter();" %>' type="button" value="remove" />
+							<aui:button name="removeButton" onClick='<%= renderResponse.getNamespace() + "removeSelectionForFooter();" %>' value="remove" />
 						</aui:field-wrapper>
 					</aui:fieldset>
 				</liferay-ui:panel>

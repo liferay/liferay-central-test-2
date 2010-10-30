@@ -59,7 +59,7 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 <aui:button-row>
 	<aui:button type="submit" value="search" />
 
-	<aui:button onClick='<%= renderResponse.getNamespace() + "addCoupon();" %>' type="button" value="add-coupon" />
+	<aui:button onClick='<%= renderResponse.getNamespace() + "addCoupon();" %>' value="add-coupon" />
 </aui:button-row>
 
 <aui:script>

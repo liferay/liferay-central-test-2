@@ -539,7 +539,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 	<c:if test="<%= !windowState.equals(LiferayWindowState.POP_UP) %>">
 		<aui:button-row>
 			<c:if test="<%= shoppingPrefs.usePayPal() %>">
-				<aui:button onClick='<%= renderResponse.getNamespace() + "saveOrder();" %>' type="button" value="save" />
+				<aui:button onClick='<%= renderResponse.getNamespace() + "saveOrder();" %>' value="save" />
 			</c:if>
 
 			<portlet:renderURL var="viewInvoiceURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
@@ -551,22 +551,22 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 			String taglibOpenInvoiceWindow = "window.open('" + viewInvoiceURL + "');";
 			%>
 
-			<aui:button onClick="<%= taglibOpenInvoiceWindow %>" type="button" value="invoice" />
+			<aui:button onClick="<%= taglibOpenInvoiceWindow %>" value="invoice" />
 
 			<%
 			String taglibSendEmailConfirmation = renderResponse.getNamespace() + "sendEmail('confirmation');";
 			%>
 
-			<aui:button onClick="<%= taglibSendEmailConfirmation %>" type="button" value='<%= LanguageUtil.get(pageContext, (order.isSendOrderEmail() ? "" : "re") + "send-confirmation-email") %>' />
+			<aui:button onClick="<%= taglibSendEmailConfirmation %>" value='<%= LanguageUtil.get(pageContext, (order.isSendOrderEmail() ? "" : "re") + "send-confirmation-email") %>' />
 
 			<%
 			String taglibSendEmailShipping = renderResponse.getNamespace() + "sendEmail('shipping');";
 			%>
 
-			<aui:button onClick="<%= taglibSendEmailShipping %>" type="button" value='<%= LanguageUtil.get(pageContext, (order.isSendShippingEmail() ? "" : "re") + "send-shipping-email") %>' />
+			<aui:button onClick="<%= taglibSendEmailShipping %>" value='<%= LanguageUtil.get(pageContext, (order.isSendShippingEmail() ? "" : "re") + "send-shipping-email") %>' />
 
 			<c:if test="<%= ShoppingOrderPermission.contains(permissionChecker, scopeGroupId, order, ActionKeys.DELETE) %>">
-				<aui:button onClick='<%= renderResponse.getNamespace() + "deleteOrder();" %>' type="button" value="delete" />
+				<aui:button onClick='<%= renderResponse.getNamespace() + "deleteOrder();" %>' value="delete" />
 			</c:if>
 
 			<aui:button onClick="<%= redirect %>" type="cancel" />

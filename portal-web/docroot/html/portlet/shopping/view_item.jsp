@@ -191,7 +191,7 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 			}
 			%>
 
-			<aui:button onClick='<%= renderResponse.getNamespace() + "addToCart();" %>' type="button" value="add-to-shopping-cart" />
+			<aui:button onClick='<%= renderResponse.getNamespace() + "addToCart();" %>' value="add-to-shopping-cart" />
 
 			<aui:button-row>
 				<c:if test="<%= (prevAndNext[0] != null) || (prevAndNext[2] != null) %>">
@@ -201,7 +201,7 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 							<portlet:param name="itemId" value="<%= String.valueOf(prevAndNext[0].getItemId()) %>" />
 						</portlet:renderURL>
 
-						<aui:button onClick="<%= viewPreviousPageURL %>" type="button" value="previous" />
+						<aui:button onClick="<%= viewPreviousPageURL %>" value="previous" />
 					</c:if>
 
 					<c:if test="<%= prevAndNext[2] != null %>">
@@ -210,7 +210,7 @@ ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(it
 							<portlet:param name="itemId" value="<%= String.valueOf(prevAndNext[2].getItemId()) %>" />
 						</portlet:renderURL>
 
-						<aui:button onClick="<%= viewNextPageURL %>" type="button" value="next" />
+						<aui:button onClick="<%= viewNextPageURL %>" value="next" />
 					</c:if>
 				</c:if>
 			</aui:button-row>

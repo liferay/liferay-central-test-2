@@ -118,7 +118,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 					</aui:field-wrapper>
 
 					<aui:button-row>
-						<aui:button onClick='<%= renderResponse.getNamespace() + "importPages();" %>' type="button" value="import" />
+						<aui:button onClick='<%= renderResponse.getNamespace() + "importPages();" %>' value="import" />
 
 						<aui:button onClick="<%= redirect %>" type="cancel" />
 					</aui:button-row>

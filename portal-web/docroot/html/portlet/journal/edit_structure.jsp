@@ -151,9 +151,9 @@ int tabIndex = 1;
 				</c:otherwise>
 			</c:choose>
 
-			<aui:button onClick='<%= renderResponse.getNamespace() + "openParentStructureSelector();" %>'  type="button" value="select" />
+			<aui:button onClick='<%= renderResponse.getNamespace() + "openParentStructureSelector();" %>' value="select" />
 
-			<aui:button name="removeParentStructureButton" onClick='<%= renderResponse.getNamespace() + "removeParentStructure();" %>' type="button" value="remove" />
+			<aui:button name="removeParentStructureButton" onClick='<%= renderResponse.getNamespace() + "removeParentStructure();" %>' value="remove" />
 		</aui:field-wrapper>
 
 		<c:if test="<%= structure != null %>">
@@ -186,12 +186,12 @@ int tabIndex = 1;
 				String taglibEditElement = renderResponse.getNamespace() + "editElement('add', -1);";
 				%>
 
-				<aui:button onClick="<%= taglibEditElement %>" type="button" value="add-row" />
+				<aui:button onClick="<%= taglibEditElement %>" value="add-row" />
 
-				<aui:button name="editorButton" type="button" value="launch-editor" />
+				<aui:button name="editorButton" value="launch-editor" />
 
 				<c:if test="<%= structure != null %>">
-					<aui:button onClick='<%= renderResponse.getNamespace() + "downloadStructureContent();" %>' type="button" value="download" />
+					<aui:button onClick='<%= renderResponse.getNamespace() + "downloadStructureContent();" %>' value="download" />
 				</c:if>
 
 				<table class="taglib-search-iterator">
@@ -223,7 +223,7 @@ int tabIndex = 1;
 	<aui:button-row>
 		<aui:button type="submit" />
 
-		<aui:button onClick='<%= renderResponse.getNamespace() + "saveAndContinueStructure();" %>' type="button" value="save-and-continue" />
+		<aui:button onClick='<%= renderResponse.getNamespace() + "saveAndContinueStructure();" %>' value="save-and-continue" />
 
 		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>

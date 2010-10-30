@@ -177,9 +177,9 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 			</c:choose>
 
 			<c:if test="<%= (template == null) || (Validator.isNull(template.getStructureId())) %>">
-				<aui:button onClick='<%= renderResponse.getNamespace() + "openStructureSelector();" %>'  type="button" value="select" />
+				<aui:button onClick='<%= renderResponse.getNamespace() + "openStructureSelector();" %>' value="select" />
 
-				<aui:button disabled="<%= Validator.isNull(structureId) %>" name="removeStructureButton" onClick='<%= renderResponse.getNamespace() + "removeStructure();" %>' type="button" value="remove" />
+				<aui:button disabled="<%= Validator.isNull(structureId) %>" name="removeStructureButton" onClick='<%= renderResponse.getNamespace() + "removeStructure();" %>' value="remove" />
 			</c:if>
 		</aui:field-wrapper>
 
@@ -200,10 +200,10 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		<aui:field-wrapper label="script">
 			<aui:input label="" name="xsl" type="file" />
 
-			<aui:button name="editorButton" type="button" value="launch-editor" />
+			<aui:button name="editorButton" value="launch-editor" />
 
 			<c:if test="<%= template != null %>">
-				<aui:button onClick='<%= renderResponse.getNamespace() + "downloadTemplateContent();" %>' type="button" value="download" />
+				<aui:button onClick='<%= renderResponse.getNamespace() + "downloadTemplateContent();" %>' value="download" />
 			</c:if>
 		</aui:field-wrapper>
 
@@ -229,7 +229,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 	<aui:button-row>
 		<aui:button type="submit" />
 
-		<aui:button onClick='<%= renderResponse.getNamespace() + "saveAndContinueTemplate();" %>' type="button" value="save-and-continue" />
+		<aui:button onClick='<%= renderResponse.getNamespace() + "saveAndContinueTemplate();" %>' value="save-and-continue" />
 
 		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>

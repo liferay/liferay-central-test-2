@@ -82,11 +82,11 @@
 			<aui:input name="required" type="checkbox" value="<%= true %>" />
 
 			<aui:button-row>
-				<aui:button cssClass="save-button" name="save" type="button" value="save" />
+				<aui:button cssClass="save-button" name="save" value="save" />
 
-				<aui:button cssClass="cancel-button" name="cancel" type="button" value="cancel" />
+				<aui:button cssClass="cancel-button" name="cancel" value="cancel" />
 
-				<aui:button cssClass="close-button" name="close" type="button" value="close" />
+				<aui:button cssClass="close-button" name="close" value="close" />
 			</aui:button-row>
 		</div>
 	</aui:form>
@@ -261,9 +261,9 @@
 </div>
 
 <div class="aui-html-template" id="<portlet:namespace />editBtnTemplate">
-	<aui:button cssClass="edit-button" type="button" value="edit-options" />
+	<aui:button cssClass="edit-button" value="edit-options" />
 </div>
 
 <div class="aui-html-template" id="<portlet:namespace />repeatableBtnTemplate">
-	<aui:button cssClass="repeatable-button aui-helper-hidden" type="button" value="repeat" />
+	<aui:button cssClass="repeatable-button aui-helper-hidden" value="repeat" />
 </div>

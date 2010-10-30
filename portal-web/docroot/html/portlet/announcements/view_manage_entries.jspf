@@ -43,7 +43,7 @@ if ((classNameId == 0) && (classPK == 0) && !permissionChecker.isOmniadmin()) {
 
 	</aui:fieldset>
 
-	<aui:button type="button" onClick='<%= renderResponse.getNamespace() + "addEntry()" %>' value="add-entry" />
+	<aui:button onClick='<%= renderResponse.getNamespace() + "addEntry()" %>' value="add-entry" />
 
 	<c:if test="<%= Validator.isNotNull(distributionScope) %>">
 		<div class="separator"><!-- --></div>

@@ -268,7 +268,7 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 	</div>
 
 	<aui:button-row>
-		<aui:button last="true" name="saveButton" onClick='<%= renderResponse.getNamespace() + "updateStaging();" %>' type="button" value="save" />
+		<aui:button last="true" name="saveButton" onClick='<%= renderResponse.getNamespace() + "updateStaging();" %>' value="save" />
 	</aui:button-row>
 
 	<aui:script>

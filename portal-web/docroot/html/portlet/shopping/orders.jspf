@@ -61,7 +61,7 @@ portletURL.setParameter("tabs1", tabs1);
 	<div class="separator"><!-- --></div>
 
 	<aui:button-row>
-		<aui:button onClick='<%= renderResponse.getNamespace() + "deleteOrders();" %>' type="button" value="delete" />
+		<aui:button onClick='<%= renderResponse.getNamespace() + "deleteOrders();" %>' value="delete" />
 	</aui:button-row>
 
 	<%

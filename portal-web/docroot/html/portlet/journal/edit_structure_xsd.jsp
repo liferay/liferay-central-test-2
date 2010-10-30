@@ -47,13 +47,13 @@ boolean useEditorCodepress = editorType.equals("codepress");
 	</aui:fieldset>
 
 	<aui:button-row>
-		<aui:button onClick='<%= renderResponse.getNamespace() + "updateStructureXsd();" %>' type="button" value="update" />
+		<aui:button onClick='<%= renderResponse.getNamespace() + "updateStructureXsd();" %>' value="update" />
 
 		<c:if test="<%= !useEditorCodepress %>">
-			<aui:button onClick='<%= "Liferay.Util.selectAndCopy(document." + renderResponse.getNamespace() + "editorForm." + renderResponse.getNamespace() + "xsdContent);" %>' type="button" value="select-and-copy" />
+			<aui:button onClick='<%= "Liferay.Util.selectAndCopy(document." + renderResponse.getNamespace() + "editorForm." + renderResponse.getNamespace() + "xsdContent);" %>' value="select-and-copy" />
 		</c:if>
 
-		<aui:button onClick="AUI().DialogManager.closeByChild(this);" type="button" value="cancel" />
+		<aui:button onClick="AUI().DialogManager.closeByChild(this);" value="cancel" />
 	</aui:button-row>
 </aui:form>
 

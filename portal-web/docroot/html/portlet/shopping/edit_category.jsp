@@ -83,9 +83,9 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 				String taglibOpenCategoryWindow = "var categoryWindow = window.open('" + selectCategoryURL + "', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void('');categoryWindow.focus();";
 				%>
 
-				<aui:button onClick="<%= taglibOpenCategoryWindow %>" type="button" value="select" />
+				<aui:button onClick="<%= taglibOpenCategoryWindow %>" value="select" />
 
-				<aui:button onClick='<%= renderResponse.getNamespace() + "removeCategory();" %>' type="button" value="remove" />
+				<aui:button onClick='<%= renderResponse.getNamespace() + "removeCategory();" %>' value="remove" />
 
 				<div id="<portlet:namespace />merge-with-parent-checkbox-div"
 					<c:if test="<%= category.getParentCategoryId() == ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID %>">

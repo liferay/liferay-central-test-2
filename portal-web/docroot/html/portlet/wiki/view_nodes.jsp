@@ -102,7 +102,7 @@ searchContainer.setResults(results);
 						<portlet:param name="nodeId" value="0" />
 					</portlet:renderURL>
 
-					<aui:button name="addNodeButton" onClick="<%= addNodeURL %>" type="button" value="add-wiki" />
+					<aui:button name="addNodeButton" onClick="<%= addNodeURL %>" value="add-wiki" />
 				</c:if>
 
 				<c:if test="<%= showPermissionsButton %>">
@@ -113,7 +113,7 @@ searchContainer.setResults(results);
 						var="permissionsURL"
 					/>
 
-					<aui:button name="permissionsButton" onClick="<%= permissionsURL %>" type="button" value="permissions" />
+					<aui:button name="permissionsButton" onClick="<%= permissionsURL %>" value="permissions" />
 				</c:if>
 			</aui:button-row>
 		</c:if>

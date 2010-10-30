@@ -367,7 +367,7 @@ if (Validator.isNull(redirect)) {
 			</div>
 		</c:if>
 
-		<aui:button name="saveButton" onClick='<%= renderResponse.getNamespace() + "saveMessage(true);" %>' type="button" value="<%= saveButtonLabel %>" />
+		<aui:button name="saveButton" onClick='<%= renderResponse.getNamespace() + "saveMessage(true);" %>' value="<%= saveButtonLabel %>" />
 
 		<aui:button disabled="<%= pending %>" name="publishButton" type="submit" value="<%= publishButtonLabel %>" />
 

@@ -146,7 +146,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 							<aui:input name="journalImageDelete" type="hidden" value="" />
 
-							<aui:input name="journalImageDeleteButton" type="button" value="Delete" />
+							<aui:input name="journalImageDeleteButton" value="Delete" />
 
 							<br /><br />
 
@@ -369,9 +369,9 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 			<div class="journal-article-buttons">
 				<aui:input cssClass="journal-article-variable-name" inlineField="<%= true %>" id='<%= elInstanceId + "variableName" %>' label="variable-name" name="variableName" size="25" type="text" value="<%= elName %>" />
 
-				<aui:button cssClass="edit-button" type="button" value="edit-options" />
+				<aui:button cssClass="edit-button" value="edit-options" />
 
-				<aui:button cssClass="repeatable-button aui-helper-hidden" type="button" value="repeat" />
+				<aui:button cssClass="repeatable-button aui-helper-hidden" value="repeat" />
 			</div>
 
 			<c:if test="<%= elRepeatable %>">

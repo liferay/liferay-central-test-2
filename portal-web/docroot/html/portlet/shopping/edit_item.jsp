@@ -138,9 +138,9 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 				String taglibOpenCategoryWindow = "var categoryWindow = window.open('" + selectCateforyURL + "', 'category', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); categoryWindow.focus();";
 				%>
 
-				<aui:button onClick="<%= taglibOpenCategoryWindow %>" type="button" value="select" />
+				<aui:button onClick="<%= taglibOpenCategoryWindow %>" value="select" />
 
-				<aui:button onClick='<%= renderResponse.getNamespace() + "removeCategory();" %>' type="button" value="remove" />
+				<aui:button onClick='<%= renderResponse.getNamespace() + "removeCategory();" %>' value="remove" />
 			</aui:field-wrapper>
 		</c:if>
 
@@ -231,7 +231,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 
 					<c:if test="<%= fieldsCount > 0 %>">
 						<td>
-							<aui:button onClick='<%= renderResponse.getNamespace() + "deleteField(" + i + ");" %>' type="button" value="delete" />
+							<aui:button onClick='<%= renderResponse.getNamespace() + "deleteField(" + i + ");" %>' value="delete" />
 						</td>
 					</c:if>
 				</tr>
@@ -246,10 +246,10 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 				<br />
 			</c:if>
 
-			<aui:button onClick='<%= renderResponse.getNamespace() + "addField();" %>' type="button" value="add-field" />
+			<aui:button onClick='<%= renderResponse.getNamespace() + "addField();" %>' value="add-field" />
 
 			<c:if test="<%= fieldsCount > 0 %>">
-				<aui:button onClick='<%= renderResponse.getNamespace() + "editItemQuantities();" %>' type="button" value="edit-stock-quantity" />
+				<aui:button onClick='<%= renderResponse.getNamespace() + "editItemQuantities();" %>' value="edit-stock-quantity" />
 			</c:if>
 
 			<br /><br />
@@ -404,7 +404,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 
 								<c:if test="<%= pricesCount > 1 %>">
 									<td>
-										<aui:button onClick='<%= renderResponse.getNamespace() + "deletePrice(" + i + ");" %>' type="button" value="delete" />
+										<aui:button onClick='<%= renderResponse.getNamespace() + "deletePrice(" + i + ");" %>' value="delete" />
 									</td>
 								</c:if>
 							</tr>
@@ -423,7 +423,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 				</table>
 			</aui:fieldset>
 
-			<aui:button onClick='<%= renderResponse.getNamespace() + "addPrice();" %>' type="button" value="add-price" />
+			<aui:button onClick='<%= renderResponse.getNamespace() + "addPrice();" %>' value="add-price" />
 		</liferay-ui:panel>
 
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "images") %>'>

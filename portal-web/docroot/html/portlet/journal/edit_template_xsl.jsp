@@ -51,13 +51,13 @@ String defaultContent = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE
 	</aui:fieldset>
 
 	<aui:button-row>
-		<aui:button onClick='<%= renderResponse.getNamespace() + "updateTemplateXsl();" %>' type="button" value="update" />
+		<aui:button onClick='<%= renderResponse.getNamespace() + "updateTemplateXsl();" %>' value="update" />
 
 		<c:if test="<%= !useEditorCodepress %>">
-			<aui:button onClick='<%= "Liferay.Util.selectAndCopy(document." + renderResponse.getNamespace() + "editorForm." + renderResponse.getNamespace() + "xslContent);" %>' type="button" value="select-and-copy" />
+			<aui:button onClick='<%= "Liferay.Util.selectAndCopy(document." + renderResponse.getNamespace() + "editorForm." + renderResponse.getNamespace() + "xslContent);" %>' value="select-and-copy" />
 		</c:if>
 
-		<aui:button onClick="AUI().DialogManager.closeByChild(this);" type="button" value="cancel" />
+		<aui:button onClick="AUI().DialogManager.closeByChild(this);" value="cancel" />
 	</aui:button-row>
 </aui:form>
 

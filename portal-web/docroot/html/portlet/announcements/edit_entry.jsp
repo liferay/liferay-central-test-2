@@ -132,7 +132,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 	<aui:button-row>
 		<aui:button type="submit" />
 
-		<aui:button onClick='<%= renderResponse.getNamespace() + "previewEntry();" %>' type="button" value="preview" />
+		<aui:button onClick='<%= renderResponse.getNamespace() + "previewEntry();" %>' value="preview" />
 
 		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
