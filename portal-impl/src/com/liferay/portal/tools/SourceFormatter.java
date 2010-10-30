@@ -1051,14 +1051,25 @@ public class SourceFormatter {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(content));
 
+		int lineCount = 0;
+
 		String line = null;
 
 		while ((line = unsyncBufferedReader.readLine()) != null) {
+			lineCount++;
+
 			if (line.trim().length() == 0) {
 				line = StringPool.BLANK;
 			}
 
 			line = StringUtil.trimTrailing(line);
+
+			if (line.contains("<aui:button ") &&
+				line.contains("type=\"button\"")) {
+
+				_sourceFormatterHelper.printError(
+					fileName, "aui:button " + fileName + " " + lineCount);
+			}
 
 			sb.append(line);
 			sb.append("\n");
