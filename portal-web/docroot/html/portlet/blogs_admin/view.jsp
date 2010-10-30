@@ -40,11 +40,12 @@ portletURL.setParameter("struts_action", "/blogs_admin/view");
 		rowChecker="<%= new RowChecker(renderResponse) %>"
 		searchContainer="<%= new EntrySearch(renderRequest, portletURL) %>"
 	>
+
 		<%
 		EntryDisplayTerms displayTerms = (EntryDisplayTerms)searchContainer.getDisplayTerms();
 		EntrySearchTerms searchTerms = (EntrySearchTerms)searchContainer.getSearchTerms();
 		%>
-		
+
 		<liferay-ui:search-form
 			page="/html/portlet/blogs_admin/entry_search.jsp"
 		/>
@@ -71,12 +72,9 @@ portletURL.setParameter("struts_action", "/blogs_admin/view");
 				align="right"
 				path="/html/portlet/blogs_admin/entry_action.jsp"
 			/>
-
 		</liferay-ui:search-container-row>
 
-		<% String taglibOnClick = renderResponse.getNamespace() + "deleteEntries('" + Constants.DELETE + "');"; %>
-
-		<aui:button onClick="<%= taglibOnClick %>" value="delete" />
+		<aui:button onClick='<%= renderResponse.getNamespace() + "deleteEntries();" %>' value="delete" />
 
 		<div class="separator"><!-- --></div>
 
@@ -88,22 +86,12 @@ portletURL.setParameter("struts_action", "/blogs_admin/view");
 	Liferay.provide(
 		window,
 		'<portlet:namespace />deleteEntries',
-		function(cmd) {
-			var deleteEntries = true;
-
-			var deleteEntryIds = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-
-			if (!deleteEntryIds) {
-				deleteEntries = false;
-			}
-
-			if (deleteEntries) {
-				if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-entries") %>')) {
-					document.<portlet:namespace />fm.method = "post";
-					document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
-					document.<portlet:namespace />fm.<portlet:namespace />deleteEntryIds.value = deleteEntryIds;
-					submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/blogs_admin/edit_entry" /></portlet:actionURL>");
-				}
+		function() {
+			if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-entries") %>')) {
+				document.<portlet:namespace />fm.method = "post";
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
+				document.<portlet:namespace />fm.<portlet:namespace />deleteEntryIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/blogs_admin/edit_entry" /></portlet:actionURL>");
 			}
 		},
 		['liferay-util-list-fields']
