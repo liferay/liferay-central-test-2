@@ -997,7 +997,7 @@ public class SourceFormatter {
 				}
 				else {
 					newContent = StringUtil.replace(
-						content, "<%\n" + copyright + "\n%>",
+						newContent, "<%\n" + copyright + "\n%>",
 						"<%--\n" + copyright + "\n--%>");
 				}
 			}
@@ -1041,7 +1041,6 @@ public class SourceFormatter {
 				_sourceFormatterHelper.printError(files[i], file);
 			}
 		}
-
 	}
 
 	private static String _formatJSPContent(String fileName, String content)
