@@ -33,6 +33,8 @@ public class ReleaseInfo {
 
 	static String build = "6100";
 
+	static int buildNumber = Integer.parseInt(build);
+
 	static String date = "October 14, 2010";
 
 	static String releaseInfoPrefix = System.getProperty(
@@ -112,7 +114,7 @@ public class ReleaseInfo {
 	}
 
 	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
+		return buildNumber;
 	}
 
 	public static final Date getBuildDate() {

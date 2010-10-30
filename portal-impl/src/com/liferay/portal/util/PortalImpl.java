@@ -2970,6 +2970,7 @@ public class PortalImpl implements Portal {
 
 			sb.append("&t=");
 			sb.append(timestamp);
+			sb.append(ReleaseInfo.getBuildNumber());
 		}
 
 		String url = sb.toString();
