@@ -156,10 +156,10 @@ if (layout.isTypeControlPanel()) {
 							catch (NoSuchLayoutException nsle) {
 								errorMessageKey = "this-portlet-is-placed-in-a-page-that-does-not-exist-in-the-live-site-publish-the-page-first";
 							}
-	
+
 							if (targetLayout != null) {
 								LayoutType layoutType = targetLayout.getLayoutType();
-	
+
 								if (!(layoutType instanceof LayoutTypePortlet) || !((LayoutTypePortlet)layoutType).hasPortletId(selPortlet.getPortletId())) {
 									errorMessageKey = "this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first";
 								}

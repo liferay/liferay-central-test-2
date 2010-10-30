@@ -91,7 +91,7 @@ if (row == null) {
 		/>
 	</c:if>
 
-	<c:if test='<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_TEAMS)%>'>
+	<c:if test='<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_TEAMS) %>'>
 		<portlet:renderURL var="manageTeamsURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/view_teams" />
 			<portlet:param name="redirect" value="<%= redirect %>" />

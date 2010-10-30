@@ -44,5 +44,5 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="modelResource" value="<%= BlogsEntry.class.getName() %>" />
 		</liferay-portlet:renderURL>
-	</c:if>	
+	</c:if>
 </div>

@@ -252,13 +252,11 @@ public class EditEntryAction extends PortletAction {
 			BlogsEntryServiceUtil.deleteEntry(entryId);
 		}
 		else {
-			String deleteEntryIds = ParamUtil.getString(
-				actionRequest, "deleteEntryIds");
+			long[] deleteEntryIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "deleteEntryIds"), 0L);
 
-			long[] entryIds = StringUtil.split(deleteEntryIds, 0L);
-
-			for (int i = 0; i < entryIds.length; i++) {
-				BlogsEntryServiceUtil.deleteEntry(entryIds[i]);
+			for (int i = 0; i < deleteEntryIds.length; i++) {
+				BlogsEntryServiceUtil.deleteEntry(deleteEntryIds[i]);
 			}
 		}
 	}

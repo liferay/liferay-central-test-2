@@ -101,7 +101,7 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 					</portlet:renderURL>
 
 					<c:choose>
-						<c:when test="<%= usersCount > 0 %>" >
+						<c:when test="<%= usersCount > 0 %>">
 							<aui:a href="<%= viewUsersURL %>"> <%= usersCount %> <liferay-ui:message key='<%= (usersCount == 1) ? "user" : "users" %>' /></aui:a>
 						</c:when>
 						<c:otherwise>
@@ -118,7 +118,7 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 					</portlet:renderURL>
 
 					<c:choose>
-						<c:when test="<%= teamsCount > 0 %>" >
+						<c:when test="<%= teamsCount > 0 %>">
 							<aui:a href="<%= manageTeamsURL %>"> <%= teamsCount %> <liferay-ui:message key='<%= (usersCount == 1) ? "team" : "teams" %>' /></aui:a>
 						</c:when>
 						<c:otherwise>
@@ -223,7 +223,7 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 				%>
 
 				<c:choose>
-					<c:when test="<%= Validator.isNull(keywords) %>" >
+					<c:when test="<%= Validator.isNull(keywords) %>">
 						<liferay-ui:search-container-results>
 							<c:choose>
 								<c:when test="<%= PropsValues.ORGANIZATIONS_SEARCH_WITH_INDEX %>">
