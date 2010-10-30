@@ -54,4 +54,5 @@ public class EntryDisplayTerms extends DisplayTerms {
 	protected String author;
 	protected String status;
 	protected String title;
+
 }
