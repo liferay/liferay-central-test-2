@@ -257,14 +257,22 @@ public class ServiceBuilder {
 		jalopy.setInput(tempFile);
 		jalopy.setOutput(sb);
 
-		try {
-			Jalopy.setConvention("../tools/jalopy.xml");
+		File jalopyXmlFile = new File("../tools/jalopy.xml");
+
+		if (!jalopyXmlFile.exists()) {
+			jalopyXmlFile = new File("misc/jalopy.xml");
 		}
-		catch (FileNotFoundException fnne) {
+
+		if (!jalopyXmlFile.exists()) {
+			jalopyXmlFile = new File("../misc/jalopy.xml");
+		}
+
+		if (!jalopyXmlFile.exists()) {
+			jalopyXmlFile = new File("../../misc/jalopy.xml");
 		}
 
 		try {
-			Jalopy.setConvention("../../misc/jalopy.xml");
+			Jalopy.setConvention(jalopyXmlFile);
 		}
 		catch (FileNotFoundException fnne) {
 		}
