@@ -2945,6 +2945,11 @@ public class PortalImpl implements Portal {
 		sb.append("&languageId=");
 		sb.append(themeDisplay.getLanguageId());
 
+		// Build number
+
+		sb.append("&b=");
+		sb.append(ReleaseInfo.getBuildNumber());
+
 		// Timestamp
 
 		if ((parameterMap == null) || !parameterMap.containsKey("t")) {
@@ -2970,7 +2975,6 @@ public class PortalImpl implements Portal {
 
 			sb.append("&t=");
 			sb.append(timestamp);
-			sb.append(ReleaseInfo.getBuildNumber());
 		}
 
 		String url = sb.toString();
