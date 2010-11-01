@@ -71,6 +71,7 @@ public class LayoutRevisionLocalServiceWrapper
 	* Deletes the layout revision from the database. Also notifies the appropriate model listeners.
 	*
 	* @param layoutRevision the layout revision to delete
+	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteLayoutRevision(

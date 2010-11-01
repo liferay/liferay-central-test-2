@@ -249,6 +249,7 @@ public abstract class LayoutBranchLocalServiceBaseImpl
 	 * Deletes the layout branch from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param layoutBranch the layout branch to delete
+	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteLayoutBranch(LayoutBranch layoutBranch)
