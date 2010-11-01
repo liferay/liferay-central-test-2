@@ -104,6 +104,12 @@ public class LuceneServlet extends HttpServlet {
 	}
 
 	public void destroy() {
+		try {
+			SchedulerEngineUtil.unschedule(_schedulerEntry);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 
 		// Wait for indexer to be gracefully interrupted
 
@@ -131,13 +137,6 @@ public class LuceneServlet extends HttpServlet {
 			}
 		}
 
-		try {
-			SchedulerEngineUtil.unschedule(_schedulerEntry);
-		}
-		catch (Exception e) {
-			_log.error("Unable to unscheduler job", e);
-		}
-
 		// Parent
 
 		super.destroy();
@@ -153,7 +152,6 @@ public class LuceneServlet extends HttpServlet {
 
 	private List<ObjectValuePair<LuceneIndexer, Thread>> _indexers =
 		new ArrayList<ObjectValuePair<LuceneIndexer, Thread>>();
-
 	private SchedulerEntry _schedulerEntry;
 
 }
