@@ -235,7 +235,7 @@ public class SchedulerEngineUtil {
 		if (messageListenerUUID == null) {
 			return;
 		}
-		
+
 		MessageBus messageBus = MessageBusUtil.getMessageBus();
 
 		Destination destination = messageBus.getDestination(
