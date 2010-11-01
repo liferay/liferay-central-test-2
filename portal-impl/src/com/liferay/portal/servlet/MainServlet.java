@@ -26,11 +26,13 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
 import com.liferay.portal.kernel.scheduler.TimeUnit;
 import com.liferay.portal.kernel.scheduler.TriggerType;
+import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
@@ -140,6 +142,7 @@ public class MainServlet extends ActionServlet {
 
 		try {
 			destroySchedulers(portlets);
+			destroySocialEquityLogScheduler();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -639,6 +642,35 @@ public class MainServlet extends ActionServlet {
 			for (SchedulerEntry schedulerEntry : schedulerEntries) {
 				SchedulerEngineUtil.unschedule(schedulerEntry);
 			}
+		}
+	}
+
+	protected void destroySocialEquityLogScheduler() throws Exception {
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return;
+		}
+
+		SchedulerRequest schedulerRequest = SchedulerEngineUtil.getScheduledJob(
+			CheckEquityLogMessageListener.class.getName(),
+			CheckEquityLogMessageListener.class.getName());
+
+		if (schedulerRequest == null) {
+			return;
+		}
+
+		if (schedulerRequest.getTrigger() != null) {
+			SchedulerEngineUtil.unschedule(
+				schedulerRequest.getTrigger().getJobName(),
+				schedulerRequest.getTrigger().getGroupName(),
+				schedulerRequest.getMessage().getString(
+					SchedulerEngine.MESSAGE_LISTENER_UUID));
+		}
+		else {
+			SchedulerEngineUtil.unschedule(
+				schedulerRequest.getJobName(),
+				schedulerRequest.getGroupName(),
+				schedulerRequest.getMessage().getString(
+					SchedulerEngine.MESSAGE_LISTENER_UUID));
 		}
 	}
 
