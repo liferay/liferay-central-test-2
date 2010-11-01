@@ -12,12 +12,8 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.kaleo.assetpublisher;
+package com.liferay.portalweb.plugins.kaleo.assetpublisher.dldocument.viewdocumentassignedtome;
 
-import com.liferay.portalweb.plugins.kaleo.assetpublisher.blogsentry.BlogsEntryTests;
-import com.liferay.portalweb.plugins.kaleo.assetpublisher.dldocument.DLDocumentTests;
-import com.liferay.portalweb.plugins.kaleo.assetpublisher.mbmessage.MBMessageTests;
-import com.liferay.portalweb.plugins.kaleo.assetpublisher.wcwebcontent.WCWebContentTests;
 import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
@@ -26,15 +22,23 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AssetPublisherTests extends BaseTests {
+public class ViewDocumentAssignedToMeTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(BlogsEntryTests.suite());
-		testSuite.addTest(DLDocumentTests.suite());
-		testSuite.addTest(MBMessageTests.suite());
-		testSuite.addTest(WCWebContentTests.suite());
+		testSuite.addTestSuite(ConfigureDocumentSingleApproverTest.class);
+		testSuite.addTestSuite(AddPageAPTest.class);
+		testSuite.addTestSuite(AddPortletAPTest.class);
+		testSuite.addTestSuite(AddAPDocumentTest.class);
+		testSuite.addTestSuite(AssignToMeDocumentActionsTest.class);
+		testSuite.addTestSuite(ViewDocumentAssignedToMeTest.class);
+		testSuite.addTestSuite(SignOutTest.class);
+		testSuite.addTestSuite(ViewDocumentAssignedToMeGuestTest.class);
+		testSuite.addTestSuite(SignInTest.class);
+		testSuite.addTestSuite(TearDownDocumentTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
+		testSuite.addTestSuite(TearDownWorkflowConfigurationTest.class);
 
 		return testSuite;
 	}

@@ -12,12 +12,8 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.kaleo.assetpublisher;
+package com.liferay.portalweb.plugins.kaleo.assetpublisher.blogsentry.viewblogsentryassignedtomyroles;
 
-import com.liferay.portalweb.plugins.kaleo.assetpublisher.blogsentry.BlogsEntryTests;
-import com.liferay.portalweb.plugins.kaleo.assetpublisher.dldocument.DLDocumentTests;
-import com.liferay.portalweb.plugins.kaleo.assetpublisher.mbmessage.MBMessageTests;
-import com.liferay.portalweb.plugins.kaleo.assetpublisher.wcwebcontent.WCWebContentTests;
 import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
@@ -26,15 +22,22 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AssetPublisherTests extends BaseTests {
+public class ViewBlogsEntryAssignedToMyRolesTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(BlogsEntryTests.suite());
-		testSuite.addTest(DLDocumentTests.suite());
-		testSuite.addTest(MBMessageTests.suite());
-		testSuite.addTest(WCWebContentTests.suite());
+		testSuite.addTestSuite(ConfigureBlogsEntrySingleApproverTest.class);
+		testSuite.addTestSuite(AddPageAPTest.class);
+		testSuite.addTestSuite(AddPortletAPTest.class);
+		testSuite.addTestSuite(AddAPBlogsEntryTest.class);
+		testSuite.addTestSuite(ViewBlogsEntryAssignedToMyRolesTest.class);
+		testSuite.addTestSuite(SignOutTest.class);
+		testSuite.addTestSuite(ViewBlogsEntryAssignedToMyRolesGuestTest.class);
+		testSuite.addTestSuite(SignInTest.class);
+		testSuite.addTestSuite(TearDownBlogsEntryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
+		testSuite.addTestSuite(TearDownWorkflowConfigurationTest.class);
 
 		return testSuite;
 	}
