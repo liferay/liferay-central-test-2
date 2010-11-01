@@ -232,6 +232,10 @@ public class SchedulerEngineUtil {
 	}
 
 	private void _unregisterMessageListener(String messageListenerUUID) {
+		if (messageListenerUUID == null) {
+			return;
+		}
+		
 		MessageBus messageBus = MessageBusUtil.getMessageBus();
 
 		Destination destination = messageBus.getDestination(
