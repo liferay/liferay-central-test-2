@@ -59,11 +59,11 @@ import org.quartz.impl.StdSchedulerFactory;
 public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 	public void afterPropertiesSet() {
-		try {
-			if (!PropsValues.SCHEDULER_ENABLED) {
-				return;
-			}
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return;
+		}
 
+		try {
 			StdSchedulerFactory schedulerFactory = new StdSchedulerFactory();
 
 			schedulerFactory.initialize(
@@ -148,6 +148,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 	}
 
 	public List<SchedulerRequest> getScheduledJobs() throws SchedulerException {
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return null;
+		}
+
 		try {
 			String[] groupNames = _scheduler.getJobGroupNames();
 
@@ -167,6 +171,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 	public List<SchedulerRequest> getScheduledJobs(String groupName)
 		throws SchedulerException {
+
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return null;
+		}
 
 		try {
 			List<SchedulerRequest> schedulerRequests =
@@ -330,6 +338,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 	public void suppressError(String jobName, String groupName)
 		throws SchedulerException {
+
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return null;
+		}
 
 		try {
 			JobDetail jobDetail = _scheduler.getJobDetail(jobName, groupName);
