@@ -26,13 +26,11 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
-import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
 import com.liferay.portal.kernel.scheduler.TimeUnit;
 import com.liferay.portal.kernel.scheduler.TriggerType;
-import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
@@ -134,6 +132,17 @@ public class MainServlet extends ActionServlet {
 
 		PortalLifecycleUtil.flushDestroys();
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Destroy social equity log scheduler");
+		}
+
+		try {
+			destroySocialEquityLogScheduler();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
 		List<Portlet> portlets = PortletLocalServiceUtil.getPortlets();
 
 		if (_log.isDebugEnabled()) {
@@ -142,7 +151,6 @@ public class MainServlet extends ActionServlet {
 
 		try {
 			destroySchedulers(portlets);
-			destroySocialEquityLogScheduler();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -271,7 +279,7 @@ public class MainServlet extends ActionServlet {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize social log scheduler");
+			_log.debug("Initialize social equity log scheduler");
 		}
 
 		try {
@@ -646,31 +654,13 @@ public class MainServlet extends ActionServlet {
 	}
 
 	protected void destroySocialEquityLogScheduler() throws Exception {
-		if (!PropsValues.SCHEDULER_ENABLED) {
-			return;
+		try {
+			if (_socialEquityLogSchedulerEntry != null) {
+				SchedulerEngineUtil.unschedule(_socialEquityLogSchedulerEntry);
+			}
 		}
-
-		SchedulerRequest schedulerRequest = SchedulerEngineUtil.getScheduledJob(
-			CheckEquityLogMessageListener.class.getName(),
-			CheckEquityLogMessageListener.class.getName());
-
-		if (schedulerRequest == null) {
-			return;
-		}
-
-		if (schedulerRequest.getTrigger() != null) {
-			SchedulerEngineUtil.unschedule(
-				schedulerRequest.getTrigger().getJobName(),
-				schedulerRequest.getTrigger().getGroupName(),
-				schedulerRequest.getMessage().getString(
-					SchedulerEngine.MESSAGE_LISTENER_UUID));
-		}
-		else {
-			SchedulerEngineUtil.unschedule(
-				schedulerRequest.getJobName(),
-				schedulerRequest.getGroupName(),
-				schedulerRequest.getMessage().getString(
-					SchedulerEngine.MESSAGE_LISTENER_UUID));
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 	}
 
@@ -966,17 +956,18 @@ public class MainServlet extends ActionServlet {
 	}
 
 	protected void initSocialEquityLogScheduler() throws Exception {
-		SchedulerEntry schedulerEntry = new SchedulerEntryImpl();
+		_socialEquityLogSchedulerEntry = new SchedulerEntryImpl();
 
-		schedulerEntry.setEventListenerClass(
+		_socialEquityLogSchedulerEntry.setEventListenerClass(
 			CheckEquityLogMessageListener.class.getName());
-		schedulerEntry.setTimeUnit(TimeUnit.MINUTE);
-		schedulerEntry.setTriggerType(TriggerType.SIMPLE);
-		schedulerEntry.setTriggerValue(
+		_socialEquityLogSchedulerEntry.setTimeUnit(TimeUnit.MINUTE);
+		_socialEquityLogSchedulerEntry.setTriggerType(TriggerType.SIMPLE);
+		_socialEquityLogSchedulerEntry.setTriggerValue(
 			PropsValues.SOCIAL_EQUITY_EQUITY_LOG_CHECK_INTERVAL);
 
 		SchedulerEngineUtil.schedule(
-			schedulerEntry, PortalClassLoaderUtil.getClassLoader());
+			_socialEquityLogSchedulerEntry,
+			PortalClassLoaderUtil.getClassLoader());
 	}
 
 	protected void initThemes(
@@ -1247,5 +1238,7 @@ public class MainServlet extends ActionServlet {
 		"Liferay-Portal";
 
 	private static Log _log = LogFactoryUtil.getLog(MainServlet.class);
+
+	private SchedulerEntry _socialEquityLogSchedulerEntry;
 
 }
