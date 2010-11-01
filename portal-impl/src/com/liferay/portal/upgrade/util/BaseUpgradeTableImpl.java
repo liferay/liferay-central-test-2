@@ -53,6 +53,12 @@ public abstract class BaseUpgradeTableImpl extends Table {
 		try {
 			DB db = DBFactoryUtil.getDB();
 
+			if (Validator.isNotNull(tempFileName)) {
+				String deleteSQL = getDeleteSQL();
+
+				db.runSQL(deleteSQL);
+			}
+
 			String createSQL = getCreateSQL();
 
 			if (Validator.isNotNull(createSQL)) {
@@ -62,12 +68,6 @@ public abstract class BaseUpgradeTableImpl extends Table {
 			}
 
 			if (Validator.isNotNull(tempFileName)) {
-				if (Validator.isNull(createSQL)) {
-					String deleteSQL = getDeleteSQL();
-
-					db.runSQL(deleteSQL);
-				}
-
 				populateTable(tempFileName);
 			}
 		}
