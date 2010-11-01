@@ -82,18 +82,19 @@ public class LuceneServlet extends HttpServlet {
 			}
 
 			if (PropsValues.LUCENE_STORE_JDBC_AUTO_CLEAN_UP_ENABLED) {
-				SchedulerEntry schedulerEntry = new SchedulerEntryImpl();
+				_schedulerEntry = new SchedulerEntryImpl();
 
-				schedulerEntry.setEventListenerClass(
+				_schedulerEntry.setEventListenerClass(
 					CleanUpMessageListener.class.getName());
-				schedulerEntry.setTimeUnit(TimeUnit.MINUTE);
-				schedulerEntry.setTriggerType(TriggerType.SIMPLE);
-				schedulerEntry.setTriggerValue(
+				_schedulerEntry.setTimeUnit(TimeUnit.MINUTE);
+				_schedulerEntry.setTriggerType(TriggerType.SIMPLE);
+				_schedulerEntry.setTriggerValue(
 					PropsValues.LUCENE_STORE_JDBC_AUTO_CLEAN_UP_INTERVAL);
 
 				try {
 					SchedulerEngineUtil.schedule(
-						schedulerEntry, PortalClassLoaderUtil.getClassLoader());
+						_schedulerEntry,
+						PortalClassLoaderUtil.getClassLoader());
 				}
 				catch (Exception e) {
 					_log.error(e, e);
@@ -130,6 +131,13 @@ public class LuceneServlet extends HttpServlet {
 			}
 		}
 
+		try {
+			SchedulerEngineUtil.unschedule(_schedulerEntry);
+		}
+		catch (Exception e) {
+			_log.error("Unable to unscheduler job", e);
+		}
+
 		// Parent
 
 		super.destroy();
@@ -145,5 +153,7 @@ public class LuceneServlet extends HttpServlet {
 
 	private List<ObjectValuePair<LuceneIndexer, Thread>> _indexers =
 		new ArrayList<ObjectValuePair<LuceneIndexer, Thread>>();
+
+	private SchedulerEntry _schedulerEntry;
 
 }
