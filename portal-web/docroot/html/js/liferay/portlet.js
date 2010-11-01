@@ -488,15 +488,15 @@
 
 				if (index > -1) {
 					list.splice(index, 1);
-				}
 
-				if (!list.length) {
-					Liferay.fire(
-						'allPortletsReady',
-						{
-							portletId: portletId
-						}
-					);
+					if (!list.length) {
+						Liferay.fire(
+							'allPortletsReady',
+							{
+								portletId: portletId
+							}
+						);
+					}
 				}
 			}
 		},
@@ -683,6 +683,13 @@
 		'closePortlet',
 		{
 			defaultFn: Portlet._defCloseFn
+		}
+	);
+
+	Liferay.publish(
+		'allPortletsReady',
+		{
+			fireOnce: true
 		}
 	);
 
