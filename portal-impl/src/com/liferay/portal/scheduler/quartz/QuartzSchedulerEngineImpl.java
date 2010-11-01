@@ -340,7 +340,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		throws SchedulerException {
 
 		if (!PropsValues.SCHEDULER_ENABLED) {
-			return null;
+			return;
 		}
 
 		try {
