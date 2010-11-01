@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
+import com.liferay.portal.kernel.scheduler.TriggerState;
+import com.liferay.portal.kernel.util.ObjectValuePair;
 
 import org.quartz.Job;
 import org.quartz.JobDataMap;
@@ -56,9 +58,19 @@ public class MessageSenderJob implements Job {
 
 			SchedulerContext schedulerContext = scheduler.getContext();
 
-			message.put(
-				SchedulerEngine.JOB_STATE,
-				schedulerContext.get(jobDetail.getFullName()));
+			String jobFullName = jobDetail.getFullName();
+
+			ObjectValuePair<TriggerState, Exception> jobState =
+				(ObjectValuePair<TriggerState, Exception>)
+					schedulerContext.get(jobFullName);
+
+			if (jobState == null) {
+				jobState = new ObjectValuePair<TriggerState, Exception>();
+				
+				schedulerContext.put(jobFullName, jobState);
+			}
+
+			message.put(SchedulerEngine.JOB_STATE, jobState);
 
 			if (jobExecutionContext.getNextFireTime() == null) {
 				message.put(SchedulerEngine.DISABLE, true);

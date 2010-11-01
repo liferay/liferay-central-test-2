@@ -494,12 +494,6 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			jobDataMap.put(DESTINATION_NAME, destinationName);
 			jobDataMap.put(MESSAGE, message);
 
-			SchedulerContext schedulerContext = _scheduler.getContext();
-
-			schedulerContext.put(
-				jobDetail.getFullName(),
-				new ObjectValuePair<TriggerState, Exception>());
-
 			synchronized (this) {
 				_scheduler.deleteJob(jobName, groupName);
 				_scheduler.scheduleJob(jobDetail, trigger);
