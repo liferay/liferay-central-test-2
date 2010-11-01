@@ -105,7 +105,9 @@ public class LuceneServlet extends HttpServlet {
 
 	public void destroy() {
 		try {
-			SchedulerEngineUtil.unschedule(_schedulerEntry);
+			if (_schedulerEntry != null) {
+				SchedulerEngineUtil.unschedule(_schedulerEntry);
+			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
