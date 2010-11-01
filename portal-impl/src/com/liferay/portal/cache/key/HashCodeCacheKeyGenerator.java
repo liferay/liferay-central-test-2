@@ -34,9 +34,16 @@ public class HashCodeCacheKeyGenerator extends BaseCacheKeyGenerator {
 
 	public String getCacheKey(String[] keys) {
 		int hashCode = 0;
+		int weight = 1;
 
-		for (String key : keys) {
-			hashCode = 31 * hashCode + key.hashCode();
+		for (int i = keys.length - 1; i >= 0; i--) {
+			String s = keys[i];
+
+			hashCode = hashCode * weight + s.hashCode();
+
+			for (int j = 0; j < s.length(); j++) {
+				weight *= 31;
+			}
 		}
 
 		return StringUtil.toHexString(hashCode);
@@ -44,9 +51,16 @@ public class HashCodeCacheKeyGenerator extends BaseCacheKeyGenerator {
 
 	public String getCacheKey(StringBundler sb) {
 		int hashCode = 0;
+		int weight = 1;
 
-		for (int i = 0; i < sb.index(); i++) {
-			hashCode = 31 * hashCode + sb.stringAt(i).hashCode();
+		for (int i = sb.index() - 1; i >= 0; i--) {
+			String s = sb.stringAt(i);
+
+			hashCode = hashCode * weight + s.hashCode();
+
+			for (int j = 0; j < s.length(); j++) {
+				weight *= 31;
+			}
 		}
 
 		return StringUtil.toHexString(hashCode);
