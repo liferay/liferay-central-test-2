@@ -75,13 +75,25 @@
 	<bean id="messageListener.flags" class="com.liferay.portlet.flags.messaging.FlagsRequestMessageListener" />
 	<bean id="messageListener.hot_deploy" class="com.liferay.portal.deploy.hot.messaging.HotDeployMessageListener" />
 	<bean id="messageListener.journal" class="com.liferay.portlet.journal.messaging.JournalMessageListener" />
-	<bean id="messageListener.layouts_local_publisher" class="com.liferay.portlet.communities.messaging.LayoutsLocalPublisherMessageListener">
-		<property name="responseSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
-		<property name="statusSender" ref="messageSender.service_request_status" />
+	<bean id="messageListener.layouts_local_publisher" class="com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper">
+		<constructor-arg index="0">
+			<bean class="com.liferay.portlet.communities.messaging.LayoutsLocalPublisherMessageListener">
+				<property name="responseSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
+				<property name="statusSender" ref="messageSender.service_request_status" />
+			</bean>
+		</constructor-arg>
+		<constructor-arg index="1" value="messageListener_layouts_local_publisher" />
+		<constructor-arg index="2" value="com.liferay.portlet.communities.messaging.LayoutsLocalPublisherMessageListener" />
 	</bean>
-	<bean id="messageListener.layouts_remote_publisher" class="com.liferay.portlet.communities.messaging.LayoutsRemotePublisherMessageListener">
-		<property name="responseSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
-		<property name="statusSender" ref="messageSender.service_request_status" />
+	<bean id="messageListener.layouts_remote_publisher" class="com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper">
+		<constructor-arg index="0">
+			<bean class="com.liferay.portlet.communities.messaging.LayoutsRemotePublisherMessageListener">
+				<property name="responseSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
+				<property name="statusSender" ref="messageSender.service_request_status" />
+			</bean>
+		</constructor-arg>
+		<constructor-arg index="1" value="messageListener_layouts_remote_publisher" />
+		<constructor-arg index="2" value="com.liferay.portlet.communities.messaging.LayoutsRemotePublisherMessageListener" />
 	</bean>
 	<bean id="messageListener.live_users" class="com.liferay.portal.liveusers.messaging.LiveUsersMessageListener" />
 	<bean id="messageListener.live_users_cluster" class="com.liferay.portal.kernel.cluster.messaging.ClusterBridgeMessageListener">
@@ -90,7 +102,13 @@
 		</property>
 	</bean>
 	<bean id="messageListener.message_boards" class="com.liferay.portlet.messageboards.messaging.MBMessageListener" />
-	<bean id="messageListener.message_boards_mailing_list" class="com.liferay.portlet.messageboards.messaging.MailingListMessageListener" />
+	<bean id="messageListener.message_boards_mailing_list" class="com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper">
+		<constructor-arg index="0">
+			<bean class="com.liferay.portlet.messageboards.messaging.MailingListMessageListener" />
+		</constructor-arg>
+		<constructor-arg index="1" value="messageListener_message_boards_mailing_list" />
+		<constructor-arg index="2" value="com.liferay.portlet.messageboards.messaging.MailingListMessageListener" />
+	</bean>
 	<bean id="messageListener.wiki" class="com.liferay.portlet.wiki.messaging.WikiMessageListener" />
 
 	<!-- Configurator -->
