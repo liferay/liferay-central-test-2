@@ -547,6 +547,16 @@ public interface ExpandoValueLocalService {
 		java.lang.String columnName, java.lang.String data, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* @deprecated {@link #getColumnValues(long, String, String, String, String,
+	int, int)}
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
+		java.lang.String className, java.lang.String tableName,
+		java.lang.String columnName, java.lang.String data, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getColumnValuesCount(long columnId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -569,6 +579,16 @@ public interface ExpandoValueLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getColumnValuesCount(long companyId, java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName,
+		java.lang.String data)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @deprecated {@link #getColumnValuesCount(long, String, String, String,
+	String)}
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getColumnValuesCount(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName,
 		java.lang.String data)
 		throws com.liferay.portal.kernel.exception.SystemException;

@@ -974,6 +974,21 @@ public class ExpandoValueLocalServiceImpl
 			companyId, classNameId, tableName, columnName, data, start, end);
 	}
 
+	/**
+	 * @deprecated {@link #getColumnValues(long, String, String, String, String,
+	 *			   int, int)}
+	 */
+	public List<ExpandoValue> getColumnValues(
+			String className, String tableName, String columnName, String data,
+			int start, int end)
+		throws SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getColumnValues(
+			companyId, className, tableName, columnName, data, start, end);
+	}
+
 	public int getColumnValuesCount(long columnId) throws SystemException {
 		return expandoValuePersistence.countByColumnId(columnId);
 	}
@@ -1044,6 +1059,20 @@ public class ExpandoValueLocalServiceImpl
 
 		return getColumnValuesCount(
 			companyId, classNameId, tableName, columnName, data);
+	}
+
+	/**
+	 * @deprecated {@link #getColumnValuesCount(long, String, String, String,
+	 *			   String)}
+	 */
+	public int getColumnValuesCount(
+			String className, String tableName, String columnName, String data)
+		throws SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getColumnValuesCount(
+			companyId, className, tableName, columnName, data);
 	}
 
 	public Serializable getData(
