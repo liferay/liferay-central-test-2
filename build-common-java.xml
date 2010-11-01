@@ -33,17 +33,37 @@
 			<fileset dir="src" excludes="**/*.java" />
 		</copy>
 
-		<javac
-			classpathref="project.classpath"
-			compiler="${javac.compiler}"
-			debug="${javac.debug}"
-			deprecation="${javac.deprecation}"
-			destdir="classes"
-			encoding="${javac.encoding}"
-			includeAntRuntime="false"
-			nowarn="${javac.nowarn}"
-			srcdir="src"
-		/>
+		<if>
+			<equals arg1="${javac.compiler}" arg2="modern" />
+			<then>
+				<javac
+					classpathref="project.classpath"
+					compiler="${javac.compiler}"
+					debug="${javac.debug}"
+					deprecation="${javac.deprecation}"
+					destdir="classes"
+					encoding="${javac.encoding}"
+					fork="${javac.fork}"
+					includeAntRuntime="false"
+					memoryMaximumSize="${javac.memoryMaximumSize}"
+					nowarn="${javac.nowarn}"
+					srcdir="src"
+				/>
+			</then>
+			<else>
+				<javac
+					classpathref="project.classpath"
+					compiler="${javac.compiler}"
+					debug="${javac.debug}"
+					deprecation="${javac.deprecation}"
+					destdir="classes"
+					encoding="${javac.encoding}"
+					includeAntRuntime="false"
+					nowarn="${javac.nowarn}"
+					srcdir="src"
+				/>
+			</else>
+		</if>
 	</target>
 
 	<target name="deploy" depends="jar">
