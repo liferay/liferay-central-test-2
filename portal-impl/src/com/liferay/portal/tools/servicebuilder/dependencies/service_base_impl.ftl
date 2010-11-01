@@ -88,14 +88,22 @@ import javax.sql.DataSource;
 </#if>
 
 <#if sessionTypeName == "Local" && entity.hasColumns()>
+	<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "add" + entity.name, [packagePath + ".model." + entity.name], ["SystemException"])>
+
 	/**
 	 * Adds the ${entity.humanName} to the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param ${entity.varName} the ${entity.humanName} to add
 	 * @return the ${entity.humanName} that was added
+	<#list serviceBaseExceptions as exception>
+	<#if exception == "SystemException">
 	 * @throws SystemException if a system exception occurred
+	<#else>
+	 * @throws ${exception}
+	</#if>
+	</#list>
 	 */
-	public ${entity.name} add${entity.name}(${entity.name} ${entity.varName}) ${serviceBuilder.getServiceBaseThrowsExceptions(methods, "add" + entity.name, [packagePath + ".model." + entity.name], ["SystemException"])} {
+	public ${entity.name} add${entity.name}(${entity.name} ${entity.varName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
 		${entity.varName}.setNew(true);
 
 		return ${entity.varName}Persistence.update(${entity.varName}, false);
@@ -111,24 +119,41 @@ import javax.sql.DataSource;
 		return ${entity.varName}Persistence.create(${entity.PKVarName});
 	}
 
+	<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "delete" + entity.name, [entity.PKClassName], ["PortalException", "SystemException"])>
+
 	/**
 	 * Deletes the ${entity.humanName} with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param ${entity.PKVarName} the primary key of the ${entity.humanName} to delete
+	<#list serviceBaseExceptions as exception>
+	<#if exception == "PortalException">
 	 * @throws PortalException if a ${entity.humanName} with the primary key could not be found
+	<#elseif exception == "SystemException">
 	 * @throws SystemException if a system exception occurred
+	<#else>
+	 * @throws ${exception}
+	</#if>
+	</#list>
 	 */
-	public void delete${entity.name}(${entity.PKClassName} ${entity.PKVarName}) ${serviceBuilder.getServiceBaseThrowsExceptions(methods, "delete" + entity.name, [entity.PKClassName], ["PortalException", "SystemException"])} {
+	public void delete${entity.name}(${entity.PKClassName} ${entity.PKVarName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
 		${entity.varName}Persistence.remove(${entity.PKVarName});
 	}
+
+	<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "delete" + entity.name, [packagePath + ".model." + entity.name], ["SystemException"])>
 
 	/**
 	 * Deletes the ${entity.humanName} from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param ${entity.varName} the ${entity.humanName} to delete
+	<#list serviceBaseExceptions as exception>
+	<#if exception == "SystemException">
 	 * @throws SystemException if a system exception occurred
+	<#else>
+	 * @throws ${exception}
+	</#if>
+	</#list>
 	 */
-	public void delete${entity.name}(${entity.name} ${entity.varName}) ${serviceBuilder.getServiceBaseThrowsExceptions(methods, "delete" + entity.name, [packagePath + ".model." + entity.name], ["SystemException"])} {
+	public void delete${entity.name}(${entity.name} ${entity.varName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
 		${entity.varName}Persistence.remove(${entity.varName});
 	}
 
@@ -192,15 +217,24 @@ import javax.sql.DataSource;
 		return ${entity.varName}Persistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "get" + entity.name, [entity.PKClassName], ["PortalException", "SystemException"])>
+
 	/**
 	 * Gets the ${entity.humanName} with the primary key.
 	 *
 	 * @param ${entity.PKVarName} the primary key of the ${entity.humanName} to get
 	 * @return the ${entity.humanName}
+	<#list serviceBaseExceptions as exception>
+	<#if exception == "PortalException">
 	 * @throws PortalException if a ${entity.humanName} with the primary key could not be found
+	<#elseif exception == "SystemException">
 	 * @throws SystemException if a system exception occurred
+	<#else>
+	 * @throws ${exception}
+	</#if>
+	</#list>
 	 */
-	public ${entity.name} get${entity.name}(${entity.PKClassName} ${entity.PKVarName}) ${serviceBuilder.getServiceBaseThrowsExceptions(methods, "get" + entity.name, [entity.PKClassName], ["PortalException", "SystemException"])} {
+	public ${entity.name} get${entity.name}(${entity.PKClassName} ${entity.PKVarName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
 		return ${entity.varName}Persistence.findByPrimaryKey(${entity.PKVarName});
 	}
 
@@ -211,10 +245,17 @@ import javax.sql.DataSource;
 		 * @param uuid the UUID of ${entity.humanName} to get
 		 * @param groupId the group id of the ${entity.humanName} to get
 		 * @return the ${entity.humanName}
+		<#list serviceBaseExceptions as exception>
+		<#if exception == "PortalException">
 		 * @throws PortalException if a ${entity.humanName} with the UUID and group id could not be found
+		<#elseif exception == "SystemException">
 		 * @throws SystemException if a system exception occurred
+		<#else>
+		 * @throws ${exception}
+		</#if>
+		</#list>
 		 */
-		public ${entity.name} get${entity.name}ByUuidAndGroupId(String uuid, long groupId) ${serviceBuilder.getServiceBaseThrowsExceptions(methods, "get" + entity.name, [entity.PKClassName], ["PortalException", "SystemException"])} {
+		public ${entity.name} get${entity.name}ByUuidAndGroupId(String uuid, long groupId) throws ${stringUtil.merge(serviceBaseExceptions)} {
 			return ${entity.varName}Persistence.findByUUID_G(uuid, groupId);
 		}
 	</#if>
@@ -245,14 +286,22 @@ import javax.sql.DataSource;
 		return ${entity.varName}Persistence.countAll();
 	}
 
+	<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "update" + entity.name, [packagePath + ".model." + entity.name], ["SystemException"])>
+
 	/**
 	 * Updates the ${entity.humanName} in the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param ${entity.varName} the ${entity.humanName} to update
 	 * @return the ${entity.humanName} that was updated
+	<#list serviceBaseExceptions as exception>
+	<#if exception == "SystemException">
 	 * @throws SystemException if a system exception occurred
+	<#else>
+	 * @throws ${exception}
+	</#if>
+	</#list>
 	 */
-	public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}) ${serviceBuilder.getServiceBaseThrowsExceptions(methods, "update" + entity.name, [packagePath + ".model." + entity.name], ["SystemException"])} {
+	public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
 		${entity.varName}.setNew(false);
 
 		return ${entity.varName}Persistence.update(${entity.varName}, true);
@@ -264,9 +313,15 @@ import javax.sql.DataSource;
 	 * @param ${entity.varName} the ${entity.humanName} to update
 	 * @param merge whether to merge the ${entity.humanName} with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
 	 * @return the ${entity.humanName} that was updated
+	<#list serviceBaseExceptions as exception>
+	<#if exception == "SystemException">
 	 * @throws SystemException if a system exception occurred
+	<#else>
+	 * @throws ${exception}
+	</#if>
+	</#list>
 	 */
-	public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}, boolean merge) ${serviceBuilder.getServiceBaseThrowsExceptions(methods, "update" + entity.name, [packagePath + ".model." + entity.name, "boolean"], ["SystemException"])} {
+	public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}, boolean merge) throws ${stringUtil.merge(serviceBaseExceptions)} {
 		${entity.varName}.setNew(false);
 
 		return ${entity.varName}Persistence.update(${entity.varName}, merge);

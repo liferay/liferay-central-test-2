@@ -1439,7 +1439,7 @@ public class ServiceBuilder {
 		return sb.toString();
 	}
 
-	public String getServiceBaseThrowsExceptions(
+	public List<String> getServiceBaseExceptions(
 		List<JavaMethod> methods, String methodName, List<String> args,
 		List<String> exceptions) {
 
@@ -1496,10 +1496,10 @@ public class ServiceBuilder {
 		}
 
 		if (!exceptions.isEmpty()) {
-			return "throws " + StringUtil.merge(exceptions);
+			return exceptions;
 		}
 		else {
-			return StringPool.BLANK;
+			return Collections.EMPTY_LIST;
 		}
 	}
 
