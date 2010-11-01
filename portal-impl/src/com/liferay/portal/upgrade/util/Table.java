@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.SystemProperties;
@@ -179,7 +180,7 @@ public class Table {
 	}
 
 	public String getInsertSQL() throws Exception {
-		String sql = "INSERT INTO " + _tableName + " (";
+		String sql = "INSERT INTO " + getInsertTableName() + " (";
 
 		for (int i = 0; i < _order.length; i++) {
 			int pos = _order[i];
@@ -206,6 +207,29 @@ public class Table {
 		}
 
 		return sql;
+	}
+
+	public String getInsertTableName() throws Exception {
+		String createSQL = getCreateSQL();
+
+		if (Validator.isNotNull(createSQL)) {
+			String createSQLLowerCase = createSQL.toLowerCase();
+
+			int x = createSQLLowerCase.indexOf("create table ");
+
+			if (x == -1) {
+				return _tableName;
+			}
+
+			x += 13;
+
+			int y = createSQL.indexOf(" ", x);
+
+			return createSQL.substring(x, y).trim();
+		}
+		else {
+			return _tableName;
+		}
 	}
 
 	public int[] getOrder() {

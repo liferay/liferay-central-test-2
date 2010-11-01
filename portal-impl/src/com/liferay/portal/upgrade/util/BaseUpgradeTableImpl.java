@@ -62,9 +62,11 @@ public abstract class BaseUpgradeTableImpl extends Table {
 			}
 
 			if (Validator.isNotNull(tempFileName)) {
-				String deleteSQL = getDeleteSQL();
+				if (Validator.isNull(createSQL)) {
+					String deleteSQL = getDeleteSQL();
 
-				db.runSQL(deleteSQL);
+					db.runSQL(deleteSQL);
+				}
 
 				populateTable(tempFileName);
 			}
