@@ -90,12 +90,14 @@ AUI().add(
 
 					var focusManager = contentBox.focusManager;
 
+					contentBox.all('li').addClass('aui-menu-item');
+
 					contentBox.delegate(
 						'mouseenter',
 						function (event) {
 							focusManager.focus(event.currentTarget.one('a'));
 						},
-						'li'
+						'.aui-menu-item'
 					);
 
 					contentBox.delegate(
@@ -103,7 +105,7 @@ AUI().add(
 						function (event) {
 							focusManager.blur(event.currentTarget.one('a'));
 						},
-						'li'
+						'.aui-menu-item'
 					);
 
 					var MenuManager = Dockbar.MenuManager;
@@ -365,7 +367,11 @@ AUI().add(
 						}
 					);
 
-					addContent.get('boundingBox').delegate(
+					var addContentBoundingBox = addContent.get('boundingBox');
+
+					addContentBoundingBox.one('.common-items').removeClass('aui-menu-item');
+
+					addContentBoundingBox.delegate(
 						'click',
 						function(event) {
 							var item = event.currentTarget;
