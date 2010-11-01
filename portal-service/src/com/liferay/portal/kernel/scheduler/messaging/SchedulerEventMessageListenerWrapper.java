@@ -22,34 +22,33 @@ import com.liferay.portal.kernel.scheduler.TriggerState;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 /**
  * @author Shuyang Zhou
  */
 public class SchedulerEventMessageListenerWrapper implements MessageListener {
 
-	public SchedulerEventMessageListenerWrapper(
-		MessageListener messageListener, String messageListenerUUID,
-		String className) {
+	public void afterPropertiesSet() {
+		String jobName = _className;
 
-		_messageListener = messageListener;
-		_messageListenerUUID = messageListenerUUID;
-
-		String jobName = className;
-
-		if (className.length() > SchedulerEngine.JOB_NAME_MAX_LENGTH) {
-			jobName = className.substring(
+		if (_className.length() > SchedulerEngine.JOB_NAME_MAX_LENGTH) {
+			jobName = _className.substring(
 				0, SchedulerEngine.JOB_NAME_MAX_LENGTH);
 		}
 
-		String groupName = className;
+		String groupName = _className;
 
-		if (className.length() > SchedulerEngine.GROUP_NAME_MAX_LENGTH) {
-			groupName = className.substring(
+		if (_className.length() > SchedulerEngine.GROUP_NAME_MAX_LENGTH) {
+			groupName = _className.substring(
 				0, SchedulerEngine.GROUP_NAME_MAX_LENGTH);
 		}
 
 		_key = jobName.concat(StringPool.COLON).concat(groupName);
+
+		if (_messageListenerUUID == null) {
+			_messageListenerUUID = PortalUUIDUtil.generate();
+		}
 	}
 
 	public String getMessageListenerUUID() {
@@ -82,6 +81,18 @@ public class SchedulerEventMessageListenerWrapper implements MessageListener {
 		}
 	}
 
+	public void setClassName(String className) {
+		_className = className;
+	}
+
+	public void setMessageListener(MessageListener messageListener) {
+		_messageListener = messageListener;
+	}
+
+	public void setMessageListenerUUID(String messageListenerUUID) {
+		_messageListenerUUID = messageListenerUUID;
+	}
+
 	protected void handleException(Message message, Exception exception) {
 		ObjectValuePair<TriggerState, Exception> jobState =
 			(ObjectValuePair<TriggerState, Exception>)message.get(
@@ -91,6 +102,7 @@ public class SchedulerEventMessageListenerWrapper implements MessageListener {
 		jobState.setValue(exception);
 	}
 
+	private String _className;
 	private String _key;
 	private MessageListener _messageListener;
 	private String _messageListenerUUID;

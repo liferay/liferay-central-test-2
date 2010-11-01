@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
-import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.lang.reflect.Proxy;
 
@@ -152,6 +151,25 @@ public class SchedulerEngineUtil {
 		return _schedulerEngine.getScheduledJobs(groupName);
 	}
 
+	private MessageListener _getSchedulerEventListener(
+			SchedulerEntry schedulerEntry, ClassLoader classLoader)
+		throws SchedulerException {
+
+		try {
+			MessageListener schedulerEventListener =
+				(MessageListener)classLoader.loadClass(
+					schedulerEntry.getEventListenerClass()).newInstance();
+
+			return (MessageListener)Proxy.newProxyInstance(
+				classLoader, new Class[] {MessageListener.class},
+				new ClassLoaderBeanHandler(
+					schedulerEventListener, classLoader));
+		}
+		catch (Exception e) {
+			throw new SchedulerException(e);
+		}
+	}
+
 	private void _init(SchedulerEngine schedulerEngine) {
 		_schedulerEngine = schedulerEngine;
 	}
@@ -160,35 +178,26 @@ public class SchedulerEngineUtil {
 			SchedulerEntry schedulerEntry, ClassLoader classLoader)
 		throws SchedulerException {
 
-		MessageListener schedulerEventListener = null;
+		SchedulerEventMessageListenerWrapper schedulerEventListenerWrapper =
+			new SchedulerEventMessageListenerWrapper();
 
-		try {
-			schedulerEventListener = (MessageListener)classLoader.loadClass(
-				schedulerEntry.getEventListenerClass()).newInstance();
-
-			schedulerEventListener = (MessageListener)Proxy.newProxyInstance(
-				classLoader, new Class[] {MessageListener.class},
-				new ClassLoaderBeanHandler(
-					schedulerEventListener, classLoader));
-		}
-		catch (Exception e) {
-			throw new SchedulerException(e);
-		}
-
-		String messageListenerUUID = PortalUUIDUtil.generate();
-
-		schedulerEventListener = new SchedulerEventMessageListenerWrapper(
-			schedulerEventListener, messageListenerUUID,
+		schedulerEventListenerWrapper.setClassName(
 			schedulerEntry.getEventListenerClass());
+		schedulerEventListenerWrapper.setMessageListener(
+			_getSchedulerEventListener(schedulerEntry, classLoader));
 
-		schedulerEntry.setEventListener(schedulerEventListener);
+		schedulerEventListenerWrapper.afterPropertiesSet();
+
+		schedulerEntry.setEventListener(schedulerEventListenerWrapper);
 
 		MessageBusUtil.registerMessageListener(
-			DestinationNames.SCHEDULER_DISPATCH, schedulerEventListener);
+			DestinationNames.SCHEDULER_DISPATCH, schedulerEventListenerWrapper);
 
 		Message message = new Message();
 
-		message.put(SchedulerEngine.MESSAGE_LISTENER_UUID, messageListenerUUID);
+		message.put(
+			SchedulerEngine.MESSAGE_LISTENER_UUID,
+			schedulerEventListenerWrapper.getMessageListenerUUID());
 
 		_schedule(
 			schedulerEntry.getTrigger(), schedulerEntry.getDescription(),
