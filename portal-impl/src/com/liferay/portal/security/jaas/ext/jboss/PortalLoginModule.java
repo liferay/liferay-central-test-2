@@ -43,6 +43,14 @@ public class PortalLoginModule extends BasicLoginModule {
 			Set<Principal> principals = subject.getPrincipals();
 
 			principals.add(group);
+
+			PortalGroup callerPrincipalGroup =
+					new PortalGroup("CallerPrincipal");
+
+			callerPrincipalGroup.addMember(getPrincipal());
+
+			principals.add(callerPrincipalGroup);
+
 		}
 
 		return commitValue;
