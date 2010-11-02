@@ -67,6 +67,7 @@ public class ConfigurePortletHideFolderColumnsTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

@@ -67,6 +67,7 @@ public class ConfigurePortletRootFolderSelectFolderTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -144,10 +145,7 @@ public class ConfigurePortletRootFolderSelectFolderTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Test1 Folder1"),
 			selenium.getText("//h4"));
-		selenium.clickAt("link=Documents Home", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Test1 Folder1"),
-			selenium.getText("//h4"));
+		assertTrue(selenium.isTextPresent("Documents Home"));
+		assertFalse(selenium.isElementPresent("link=Documents Home"));
 	}
 }

@@ -52,6 +52,7 @@ public class ConfigurePortletShowFolderSubfoldersTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
+				assertFalse(selenium.isElementPresent("link=Test1 Subfolder1"));
 				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -74,6 +75,7 @@ public class ConfigurePortletShowFolderSubfoldersTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				selenium.click(
 					"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
+				Thread.sleep(5000);
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -137,8 +139,10 @@ public class ConfigurePortletShowFolderSubfoldersTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				assertTrue(selenium.isTextPresent("This is test1 folder1."));
-				assertTrue(selenium.isElementPresent("link=Test1 Subfolder1"));
+				assertEquals(RuntimeVariables.replace("Subfolders"),
+					selenium.getText("//u"));
+				assertEquals(RuntimeVariables.replace("Test1 Subfolder1"),
+					selenium.getText("//a[3]"));
 
 			case 100:
 				label = -1;

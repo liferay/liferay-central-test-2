@@ -33,8 +33,9 @@ public class ConfigurePortletShowDocumentColumnsTests extends BaseTests {
 		testSuite.addTestSuite(AddFolderDocumentTest.class);
 		testSuite.addTestSuite(ConfigurePortletHideDocumentColumnsTest.class);
 		testSuite.addTestSuite(ConfigurePortletShowDocumentColumnsTest.class);
+		testSuite.addTestSuite(TearDownDLConfigurationTest.class);
 		testSuite.addTestSuite(TearDownDLFolderTest.class);
-		testSuite.addTestSuite(TearDownDocumentTest.class);
+		testSuite.addTestSuite(TearDownDLDocumentTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

@@ -39,6 +39,11 @@
 	<td>Configuration</td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForVisible</td>
 	<td>//input[@value='Select']</td>
 	<td></td>
@@ -110,38 +115,23 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//nav/ul/li[4]/span/a</td>
+	<td>//div[@class='lfr-asset-name']/h4</td>
 	<td>Test1 Subfolder1</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Test1 Subfolder1</td>
-	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//nav/ul/li[4]/span/a</td>
-	<td>Test1 Subfolder1</td>
+	<td>//div[@class='lfr-asset-description']</td>
+	<td>This is test1 subfolder1.</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Test1 Folder1</td>
+	<td>assertTextPresent</td>
+	<td>Documents Home</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//nav/ul/li[4]/span/a</td>
-	<td>Test1 Subfolder1</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Document Home</td>
+	<td>assertElementNotPresent</td>
+	<td>link=Documents Home</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//nav/ul/li[4]/span/a</td>
-	<td>Test1 Subfolder1</td>
 </tr>
 
 </tbody></table>

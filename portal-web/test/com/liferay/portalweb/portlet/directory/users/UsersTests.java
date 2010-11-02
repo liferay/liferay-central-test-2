@@ -15,8 +15,8 @@
 package com.liferay.portalweb.portlet.directory.users;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.directory.users.advancedsearchusers.AdvancedSearchUsersTests;
-import com.liferay.portalweb.portlet.directory.users.searchusers.SearchUsersTests;
+import com.liferay.portalweb.portlet.directory.users.advancedsearchuser.AdvancedSearchUserTests;
+import com.liferay.portalweb.portlet.directory.users.searchuser.SearchUserTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -29,8 +29,8 @@ public class UsersTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(SearchUsersTests.suite());
-		testSuite.addTest(AdvancedSearchUsersTests.suite());
+		testSuite.addTest(AdvancedSearchUserTests.suite());
+		testSuite.addTest(SearchUserTests.suite());
 
 		return testSuite;
 	}

@@ -93,8 +93,7 @@ public class TearDownUserGroupTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("_127_tabs2TabsBack",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("_127_TabsBack", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
@@ -164,8 +163,7 @@ public class TearDownUserGroupTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("_127_tabs2TabsBack",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("_127_TabsBack", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
@@ -235,8 +233,7 @@ public class TearDownUserGroupTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("_127_tabs2TabsBack",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("_127_TabsBack", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
@@ -306,8 +303,7 @@ public class TearDownUserGroupTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("_127_tabs2TabsBack",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("_127_TabsBack", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
@@ -377,8 +373,7 @@ public class TearDownUserGroupTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("_127_tabs2TabsBack",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("_127_TabsBack", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));

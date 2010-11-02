@@ -129,8 +129,7 @@ public class TearDownOrganizationTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("_126_tabs2TabsBack",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("_126_TabsBack", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				selenium.click("_126_rowIds");
@@ -185,8 +184,7 @@ public class TearDownOrganizationTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("_126_tabs2TabsBack",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("_126_TabsBack", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				selenium.click("_126_rowIds");
@@ -241,8 +239,7 @@ public class TearDownOrganizationTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("_126_tabs2TabsBack",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("_126_TabsBack", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				selenium.click("_126_rowIds");
@@ -297,8 +294,7 @@ public class TearDownOrganizationTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("_126_tabs2TabsBack",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("_126_TabsBack", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				selenium.click("_126_rowIds");
@@ -353,8 +349,7 @@ public class TearDownOrganizationTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("_126_tabs2TabsBack",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("_126_TabsBack", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				selenium.click("_126_rowIds");

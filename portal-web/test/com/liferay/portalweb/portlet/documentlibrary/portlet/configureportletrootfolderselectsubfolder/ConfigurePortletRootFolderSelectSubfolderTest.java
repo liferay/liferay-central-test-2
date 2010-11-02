@@ -67,6 +67,7 @@ public class ConfigurePortletRootFolderSelectSubfolderTest extends BaseTestCase 
 
 		selenium.saveScreenShotAndSource();
 		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -146,21 +147,10 @@ public class ConfigurePortletRootFolderSelectSubfolderTest extends BaseTestCase 
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Test1 Subfolder1"),
-			selenium.getText("//nav/ul/li[4]/span/a"));
-		selenium.clickAt("link=Test1 Subfolder1", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Test1 Subfolder1"),
-			selenium.getText("//nav/ul/li[4]/span/a"));
-		selenium.clickAt("link=Test1 Folder1", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Test1 Subfolder1"),
-			selenium.getText("//nav/ul/li[4]/span/a"));
-		selenium.clickAt("link=Document Home", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Test1 Subfolder1"),
-			selenium.getText("//nav/ul/li[4]/span/a"));
+			selenium.getText("//div[@class='lfr-asset-name']/h4"));
+		assertEquals(RuntimeVariables.replace("This is test1 subfolder1."),
+			selenium.getText("//div[@class='lfr-asset-description']"));
+		assertTrue(selenium.isTextPresent("Documents Home"));
+		assertFalse(selenium.isElementPresent("link=Documents Home"));
 	}
 }

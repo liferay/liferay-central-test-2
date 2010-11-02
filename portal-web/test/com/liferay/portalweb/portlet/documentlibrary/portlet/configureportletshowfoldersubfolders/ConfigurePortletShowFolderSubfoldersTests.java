@@ -33,6 +33,7 @@ public class ConfigurePortletShowFolderSubfoldersTests extends BaseTests {
 		testSuite.addTestSuite(AddSubfolderTest.class);
 		testSuite.addTestSuite(ConfigurePortletHideFolderSubfoldersTest.class);
 		testSuite.addTestSuite(ConfigurePortletShowFolderSubfoldersTest.class);
+		testSuite.addTestSuite(TearDownDLConfigurationTest.class);
 		testSuite.addTestSuite(TearDownDLFolderTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 

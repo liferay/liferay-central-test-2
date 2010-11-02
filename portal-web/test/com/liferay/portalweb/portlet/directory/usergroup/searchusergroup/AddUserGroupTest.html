@@ -30,7 +30,7 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//span[2]/a</td>
+	<td>link=Add</td>
 	<td></td>
 </tr>
 <tr>
@@ -49,14 +49,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//div[@class='portlet-msg-success']</td>
 	<td>Your request processed successfully.</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=Test User Group</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//td[2]/a</td>
+	<td>Test User Group</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[3]/a</td>
+	<td>This is a test user group!</td>
 </tr>
 
 </tbody></table>

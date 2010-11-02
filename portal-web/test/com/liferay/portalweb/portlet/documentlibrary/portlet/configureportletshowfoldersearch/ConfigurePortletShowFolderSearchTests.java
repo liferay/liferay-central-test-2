@@ -32,6 +32,7 @@ public class ConfigurePortletShowFolderSearchTests extends BaseTests {
 		testSuite.addTestSuite(AddFolderTest.class);
 		testSuite.addTestSuite(ConfigurePortletHideFolderSearchTest.class);
 		testSuite.addTestSuite(ConfigurePortletShowFolderSearchTest.class);
+		testSuite.addTestSuite(TearDownDLConfigurationTest.class);
 		testSuite.addTestSuite(TearDownDLFolderTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 

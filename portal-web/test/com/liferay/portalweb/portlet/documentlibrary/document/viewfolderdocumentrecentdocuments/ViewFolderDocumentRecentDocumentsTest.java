@@ -52,8 +52,7 @@ public class ViewFolderDocumentRecentDocumentsTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Test1 Document1 This is test1 document1."),
 			selenium.getText("//td[1]/a"));
-		assertEquals(RuntimeVariables.replace("0.6k"),
-			selenium.getText("//td[2]/a"));
+		assertTrue(selenium.isElementPresent("//td[2]/a"));
 		assertEquals(RuntimeVariables.replace("0"),
 			selenium.getText("//td[3]/a"));
 		assertEquals(RuntimeVariables.replace("No"),

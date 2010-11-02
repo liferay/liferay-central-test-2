@@ -136,6 +136,9 @@ public class TearDownUserTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 
 			case 4:
+				selenium.clickAt("link=\u00ab Basic",
+					RuntimeVariables.replace(""));
+
 			case 100:
 				label = -1;
 			}

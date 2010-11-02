@@ -39,6 +39,11 @@
 	<td>Configuration</td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForVisible</td>
 	<td>//input[@value='Select']</td>
 	<td></td>
@@ -109,14 +114,14 @@
 	<td>Test1 Folder1</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Documents Home</td>
+	<td>assertTextPresent</td>
+	<td>Documents Home</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//h4</td>
-	<td>Test1 Folder1</td>
+	<td>assertElementNotPresent</td>
+	<td>link=Documents Home</td>
+	<td></td>
 </tr>
 
 </tbody></table>

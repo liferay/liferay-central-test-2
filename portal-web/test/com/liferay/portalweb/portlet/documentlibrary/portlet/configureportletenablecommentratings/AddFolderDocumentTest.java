@@ -136,6 +136,28 @@ public class AddFolderDocumentTest extends BaseTestCase {
 			}
 
 			try {
+				if (RuntimeVariables.replace("Test1 Document1")
+										.equals(selenium.getText(
+								"//a/span/span"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Test1 Document1"),
+			selenium.getText("//a/span/span"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (RuntimeVariables.replace("This is test1 document1.")
 										.equals(selenium.getText("//a/div"))) {
 					break;

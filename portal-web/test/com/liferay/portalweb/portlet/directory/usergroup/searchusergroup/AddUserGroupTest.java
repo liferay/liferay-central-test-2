@@ -47,7 +47,7 @@ public class AddUserGroupTest extends BaseTestCase {
 		selenium.clickAt("link=User Groups", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//span[2]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.type("_127_name", RuntimeVariables.replace("Test User Group"));
@@ -58,8 +58,12 @@ public class AddUserGroupTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent("link=Test User Group"));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//div[@class='portlet-msg-success']"));
+		assertEquals(RuntimeVariables.replace("Test User Group"),
+			selenium.getText("//td[2]/a"));
+		assertEquals(RuntimeVariables.replace("This is a test user group!"),
+			selenium.getText("//td[3]/a"));
 	}
 }

@@ -15,8 +15,8 @@
 package com.liferay.portalweb.portlet.directory.organizations;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.directory.organizations.advancedsearchorganizations.AdvancedSearchOrganizationsTests;
-import com.liferay.portalweb.portlet.directory.organizations.searchorganizations.SearchOrganizationsTests;
+import com.liferay.portalweb.portlet.directory.organizations.advancedsearchorganization.AdvancedSearchOrganizationTests;
+import com.liferay.portalweb.portlet.directory.organizations.searchorganization.SearchOrganizationTests;
 import com.liferay.portalweb.portlet.directory.organizations.vieworganizationuser.ViewOrganizationUserTests;
 import com.liferay.portalweb.portlet.directory.organizations.viewsuborganization.ViewSuborganizationTests;
 
@@ -31,8 +31,8 @@ public class OrganizationsTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(SearchOrganizationsTests.suite());
-		testSuite.addTest(AdvancedSearchOrganizationsTests.suite());
+		testSuite.addTest(AdvancedSearchOrganizationTests.suite());
+		testSuite.addTest(SearchOrganizationTests.suite());
 		testSuite.addTest(ViewOrganizationUserTests.suite());
 		testSuite.addTest(ViewSuborganizationTests.suite());
 

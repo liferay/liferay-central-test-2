@@ -48,5 +48,15 @@ public class ViewFolderTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Test1 Folder1"),
 			selenium.getText("//a/strong"));
+		assertEquals(RuntimeVariables.replace(
+				"Test1 Folder1\nThis is test1 folder1."),
+			selenium.getText("//td[1]/a[2]"));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace("Test1 Folder1"));
+		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Test1 Folder1"),
+			selenium.getText("//h1[@class='header-title']/span"));
+		assertEquals(RuntimeVariables.replace("This is test1 folder1."),
+			selenium.getText("//div[@class='lfr-asset-description']"));
 	}
 }

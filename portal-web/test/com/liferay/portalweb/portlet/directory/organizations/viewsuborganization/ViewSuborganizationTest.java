@@ -68,14 +68,26 @@ public class ViewSuborganizationTest extends BaseTestCase {
 
 			case 2:
 				selenium.type("_11_keywords",
-					RuntimeVariables.replace("Diamond Bar"));
+					RuntimeVariables.replace("Test Organization"));
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("Test Organization"),
+					selenium.getText("//td[1]/a"));
+				assertEquals(RuntimeVariables.replace(""),
+					selenium.getText("//td[2]/a"));
+				assertEquals(RuntimeVariables.replace("Regular Organization"),
+					selenium.getText("//td[3]/a"));
+				assertEquals(RuntimeVariables.replace("Diamond Bar"),
+					selenium.getText("//td[4]/a"));
+				assertEquals(RuntimeVariables.replace("California"),
+					selenium.getText("//td[5]/a"));
+				assertEquals(RuntimeVariables.replace("United States"),
+					selenium.getText("//td[6]/a"));
 				selenium.clickAt("//td[7]/ul/li/strong/a",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -95,11 +107,43 @@ public class ViewSuborganizationTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("View Suborganizations"),
+					selenium.getText(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				assertTrue(selenium.isElementPresent("link=Test Child"));
+				assertEquals(RuntimeVariables.replace("Test Child"),
+					selenium.getText("//td[1]/a"));
+				assertEquals(RuntimeVariables.replace("Test Organization"),
+					selenium.getText("//td[2]/a"));
+				assertEquals(RuntimeVariables.replace("Regular Organization"),
+					selenium.getText("//td[3]/a"));
+				assertEquals(RuntimeVariables.replace("Cerritos"),
+					selenium.getText("//td[4]/a"));
+				assertEquals(RuntimeVariables.replace("Florida"),
+					selenium.getText("//td[5]/a"));
+				assertEquals(RuntimeVariables.replace("United States"),
+					selenium.getText("//td[6]/a"));
+				selenium.clickAt("//td[1]/a",
+					RuntimeVariables.replace("Test Child"));
+				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("Test Child"),
+					selenium.getText(
+						"//div[@class='organization-information']/div[1]/h2"));
+				assertEquals(RuntimeVariables.replace("Type"),
+					selenium.getText("//dl[@class='property-list']/dt[1]"));
+				assertEquals(RuntimeVariables.replace("Regular Organization"),
+					selenium.getText("//dl[@class='property-list']/dd[1]"));
+				assertEquals(RuntimeVariables.replace("Parent Organization"),
+					selenium.getText("//dl[@class='property-list']/dt[2]"));
+				assertEquals(RuntimeVariables.replace("Test Organization"),
+					selenium.getText("//dl[@class='property-list']/dd[2]"));
+				assertEquals(RuntimeVariables.replace(
+						"Billing 11111 Main Street USA\n 90210, Cerritos (Mailing)"),
+					selenium.getText("//li[@class='primary']"));
 
 			case 100:
 				label = -1;

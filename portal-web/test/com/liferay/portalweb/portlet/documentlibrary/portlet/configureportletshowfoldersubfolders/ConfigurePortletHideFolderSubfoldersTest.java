@@ -52,6 +52,10 @@ public class ConfigurePortletHideFolderSubfoldersTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("Subfolders"),
+					selenium.getText("//u"));
+				assertEquals(RuntimeVariables.replace("Test1 Subfolder1"),
+					selenium.getText("//a[3]"));
 				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -74,6 +78,7 @@ public class ConfigurePortletHideFolderSubfoldersTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				selenium.click(
 					"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
+				Thread.sleep(5000);
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -137,7 +142,6 @@ public class ConfigurePortletHideFolderSubfoldersTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				assertFalse(selenium.isTextPresent("This is test1 folder1."));
 				assertFalse(selenium.isElementPresent("link=Test1 Subfolder1"));
 
 			case 100:

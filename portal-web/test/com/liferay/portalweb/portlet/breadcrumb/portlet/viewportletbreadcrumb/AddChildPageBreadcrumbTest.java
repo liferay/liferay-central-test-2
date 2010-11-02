@@ -45,6 +45,9 @@ public class AddChildPageBreadcrumbTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
+		selenium.clickAt("main-content", RuntimeVariables.replace(""));
+		selenium.clickAt("navigation", RuntimeVariables.replace(""));
+		selenium.clickAt("dockbar", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -64,7 +67,7 @@ public class AddChildPageBreadcrumbTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
-			RuntimeVariables.replace(""));
+			RuntimeVariables.replace("Manage Pages"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 
@@ -74,7 +77,7 @@ public class AddChildPageBreadcrumbTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace("Guest")
+				if (RuntimeVariables.replace("Liferay")
 										.equals(selenium.getText(
 								"//div/div[3]/a"))) {
 					break;
@@ -97,7 +100,7 @@ public class AddChildPageBreadcrumbTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace("Guest")
+				if (RuntimeVariables.replace("Liferay")
 										.equals(selenium.getText(
 								"//div/div[3]/a"))) {
 					break;
@@ -117,8 +120,9 @@ public class AddChildPageBreadcrumbTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//div[@class='portlet-msg-success']"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -142,24 +146,6 @@ public class AddChildPageBreadcrumbTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Child Test Page"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Child Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Child Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

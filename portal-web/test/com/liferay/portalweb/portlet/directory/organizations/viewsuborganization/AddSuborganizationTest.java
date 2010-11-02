@@ -74,7 +74,8 @@ public class AddSuborganizationTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+				selenium.clickAt("//strong/a",
+					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -82,8 +83,8 @@ public class AddSuborganizationTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"link=Add Regular Organization")) {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[8]/a")) {
 							break;
 						}
 					}
@@ -94,8 +95,12 @@ public class AddSuborganizationTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("link=Add Regular Organization",
-					RuntimeVariables.replace(""));
+				assertEquals(RuntimeVariables.replace(
+						"Add Regular Organization"),
+					selenium.getText(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[8]/a"));
+				selenium.click(RuntimeVariables.replace(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[8]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 
@@ -129,7 +134,7 @@ public class AddSuborganizationTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
-					selenium.getText("//section/div/div/div/div[1]"));
+					selenium.getText("//div[@class='portlet-msg-success']"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -191,10 +196,8 @@ public class AddSuborganizationTest extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace(
-									"AlabamaAlaskaArizonaArkansasCaliforniaColoradoConnecticutDelawareDistrict of ColumbiaFloridaGeorgiaHawaiiIdahoIllinoisIndianaIowaKansasKentucky Louisiana MaineMarylandMassachusettsMichiganMinnesotaMississippiMissouriMontanaNebraskaNevadaNew HampshireNew JerseyNew MexicoNew YorkNorth CarolinaNorth DakotaOhioOklahoma OregonPennsylvaniaPuerto RicoRhode IslandSouth CarolinaSouth DakotaTennesseeTexasUtahVermontVirginiaWashingtonWest VirginiaWisconsinWyoming")
-												.equals(selenium.getText(
-										"_126_addressRegionId0"))) {
+						if (selenium.isPartialText("_126_addressRegionId0",
+									"Florida")) {
 							break;
 						}
 					}
@@ -213,7 +216,7 @@ public class AddSuborganizationTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
-					selenium.getText("//section/div/div/div/div[1]"));
+					selenium.getText("//div[@class='portlet-msg-success']"));
 
 			case 100:
 				label = -1;

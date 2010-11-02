@@ -29,14 +29,84 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>//tr[3]/td[1]</td>
+	<td>Test User Group</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[3]/td[2]</td>
+	<td>This is a test user group!</td>
+</tr>
+<tr>
 	<td>clickAtAndWait</td>
-	<td>link=View Users</td>
+	<td>//span/a/span</td>
+	<td>View Users</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[1]/a</td>
+	<td>TestFirst1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[2]/a</td>
+	<td>TestLast1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[3]/a</td>
+	<td>testsn1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[4]/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=TestFirst1</td>
+	<td>assertText</td>
+	<td>//td[5]/a</td>
 	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//td[1]/a</td>
+	<td>TestFirst1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='user-information']/div[1]/h2</td>
+	<td>TestFirst1 TestMiddle1 TestLast1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//dl[@class='property-list']/dt[1]</td>
+	<td>Email Address</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//dl[@class='property-list']/dd[1]</td>
+	<td>testemail1@liferay.com</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//dl[@class='property-list']/dt[2]</td>
+	<td>Birthday</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//dl[@class='property-list']/dd[2]</td>
+	<td>1/1/70</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//dl[@class='property-list']/dt[3]</td>
+	<td>Gender</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//dl[@class='property-list']/dd[3]</td>
+	<td>Male</td>
 </tr>
 
 </tbody></table>

@@ -59,27 +59,11 @@ public class AddEventTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace("Test Event")
-										.equals(selenium.getText(
-								"//tr[3]/td[2]/a"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
+		assertTrue(selenium.isElementPresent(
+				"//div[1]/table/tbody/tr[3]/td[1]/a"));
 		assertEquals(RuntimeVariables.replace("Test Event"),
-			selenium.getText("//tr[3]/td[2]/a"));
+			selenium.getText("//div[1]/table/tbody/tr[3]/td[2]/a"));
+		assertEquals(RuntimeVariables.replace("Anniversary"),
+			selenium.getText("//div[1]/table/tbody/tr[3]/td[3]/a"));
 	}
 }

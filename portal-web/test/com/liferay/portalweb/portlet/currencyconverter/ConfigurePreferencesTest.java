@@ -64,7 +64,7 @@ public class ConfigurePreferencesTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -72,7 +72,8 @@ public class ConfigurePreferencesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Preferences")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a")) {
 					break;
 				}
 			}
@@ -83,9 +84,10 @@ public class ConfigurePreferencesTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Preferences", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Preferences"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a"));
+		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -93,7 +95,7 @@ public class ConfigurePreferencesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_16_available_actions")) {
+				if (selenium.isVisible("_16_available_actions")) {
 					break;
 				}
 			}
@@ -106,8 +108,26 @@ public class ConfigurePreferencesTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.addSelection("_16_available_actions",
 			RuntimeVariables.replace("label=Korean Won"));
-		selenium.clickAt("//div/table/tbody/tr/td[2]/a[2]/img",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/div/span/span/button[2]",
+			RuntimeVariables.replace("Left Arrow"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isPartialText("_16_current_actions", "Korean Won")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -136,8 +156,10 @@ public class ConfigurePreferencesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"You have successfully updated your preferences.")) {
+				if (RuntimeVariables.replace(
+							"You have successfully updated your preferences.")
+										.equals(selenium.getText(
+								"//div[@class='portlet-msg-success']"))) {
 					break;
 				}
 			}
@@ -148,7 +170,8 @@ public class ConfigurePreferencesTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You have successfully updated your preferences."));
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated your preferences."),
+			selenium.getText("//div[@class='portlet-msg-success']"));
 	}
 }

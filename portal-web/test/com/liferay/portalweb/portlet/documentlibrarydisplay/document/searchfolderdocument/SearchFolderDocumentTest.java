@@ -46,19 +46,21 @@ public class SearchFolderDocumentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("//span/input", RuntimeVariables.replace("test1"));
+		selenium.type("//input[@title='Search Documents']",
+			RuntimeVariables.replace("Test1 Document1"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Test1 Document1"));
-		selenium.type("//span/input", RuntimeVariables.replace("test2"));
+		selenium.type("//input[@title='Search Documents']",
+			RuntimeVariables.replace("Test2 Document2"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertFalse(selenium.isElementPresent("link=Test1 Document1"));
+		assertFalse(selenium.isTextPresent("Test1 Document1"));
 	}
 }

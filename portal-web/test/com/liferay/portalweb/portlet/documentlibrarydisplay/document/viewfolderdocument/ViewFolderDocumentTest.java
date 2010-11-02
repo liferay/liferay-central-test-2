@@ -46,11 +46,22 @@ public class ViewFolderDocumentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace("Test1 Folder1"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace(
-				"Test1 Document1\nThis is test1 document1."),
-			selenium.getText("//td[1]/a"));
+		assertEquals(RuntimeVariables.replace("Test1 Document1"),
+			selenium.getText("//a/span/span"));
+		assertEquals(RuntimeVariables.replace("This is test1 document1."),
+			selenium.getText("//div[@class='file-entry-list-description']"));
+		selenium.clickAt("//a/span/span",
+			RuntimeVariables.replace("Test1 Document1"));
+		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Version: 1.0"),
+			selenium.getText("//span[@class='workflow-version']"));
+		assertEquals(RuntimeVariables.replace("Test1 Document1"),
+			selenium.getText("//h1[@class='header-title']/span"));
+		assertEquals(RuntimeVariables.replace("This is test1 document1."),
+			selenium.getText("//div[@class='lfr-asset-description']"));
 	}
 }
