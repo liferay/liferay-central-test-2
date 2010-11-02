@@ -14,8 +14,8 @@
 
 package com.liferay.portal.monitoring.jmx;
 
-import com.liferay.portal.monitoring.Level;
-import com.liferay.portal.monitoring.MonitoringProcessor;
+import com.liferay.portal.kernel.monitoring.Level;
+import com.liferay.portal.kernel.monitoring.MonitoringProcessor;
 
 import java.util.Set;
 

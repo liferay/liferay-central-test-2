@@ -12,14 +12,20 @@
  * details.
  */
 
-package com.liferay.portal.monitoring;
+package com.liferay.portal.kernel.monitoring;
+
+import java.util.Set;
 
 /**
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */
-public enum RequestStatus {
+public interface MonitoringProcessor {
 
-	ERROR, SUCCESS, TIMEOUT
+	public Level getLevel(String namespace);
+
+	public Set<String> getNamespaces();
+
+	public void setLevel(String namespace, Level level);
 
 }

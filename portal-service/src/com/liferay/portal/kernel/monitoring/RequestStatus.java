@@ -12,20 +12,14 @@
  * details.
  */
 
-package com.liferay.portal.monitoring.statistics;
+package com.liferay.portal.kernel.monitoring;
 
 /**
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */
-public interface Statistics {
+public enum RequestStatus {
 
-	public String getDescription();
-
-	public String getName();
-
-	public void reset();
-
-	public void setDescription(String description);
+	ERROR, SUCCESS, TIMEOUT
 
 }

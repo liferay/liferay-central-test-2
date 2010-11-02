@@ -14,9 +14,9 @@
 
 package com.liferay.portal.monitoring.statistics.portal;
 
+import com.liferay.portal.kernel.monitoring.MonitoringException;
+import com.liferay.portal.kernel.monitoring.statistics.DataSampleProcessor;
 import com.liferay.portal.model.Company;
-import com.liferay.portal.monitoring.MonitoringException;
-import com.liferay.portal.monitoring.statistics.DataSampleProcessor;
 import com.liferay.portal.service.CompanyLocalService;
 
 import java.util.HashSet;

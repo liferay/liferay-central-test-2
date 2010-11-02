@@ -14,7 +14,7 @@
 		<property name="companyLocalService" ref="com.liferay.portal.service.CompanyLocalService" />
 	</bean>
 	<bean id="serviceStatistics" class="com.liferay.portal.monitoring.statistics.service.ServerStatistics" />
-	<bean id="com.liferay.portal.monitoring.MonitoringProcessor" class="com.liferay.portal.monitoring.DefaultMonitoringProcessor">
+	<bean id="com.liferay.portal.monitoring.MonitoringProcessor" class="com.liferay.portal.kernel.monitoring.DefaultMonitoringProcessor">
 		<property name="dataSampleProcessors">
 			<map>
 				<entry key="com.liferay.monitoring.Portal">

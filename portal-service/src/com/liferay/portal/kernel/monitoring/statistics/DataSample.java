@@ -12,14 +12,28 @@
  * details.
  */
 
-package com.liferay.portal.monitoring;
+package com.liferay.portal.kernel.monitoring.statistics;
+
+import com.liferay.portal.kernel.monitoring.RequestStatus;
 
 /**
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */
-public enum Level {
+public interface DataSample {
 
-	HIGH, LOW, MEDIUM, OFF
+	public long getCompanyId();
+
+	public String getDescription();
+
+	public long getDuration();
+
+	public String getName();
+
+	public String getNamespace();
+
+	public RequestStatus getRequestStatus();
+
+	public String getUser();
 
 }

@@ -15,8 +15,8 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
-import com.liferay.portal.monitoring.RequestStatus;
-import com.liferay.portal.monitoring.statistics.DataSampleThreadLocal;
+import com.liferay.portal.kernel.monitoring.RequestStatus;
+import com.liferay.portal.kernel.monitoring.statistics.DataSampleThreadLocal;
 import com.liferay.portal.monitoring.statistics.portlet.PortletRequestDataSample;
 import com.liferay.portal.monitoring.statistics.portlet.PortletRequestType;
 import com.liferay.portal.util.PropsValues;

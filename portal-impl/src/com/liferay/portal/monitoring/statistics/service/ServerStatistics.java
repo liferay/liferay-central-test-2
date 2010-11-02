@@ -15,8 +15,8 @@
 package com.liferay.portal.monitoring.statistics.service;
 
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.monitoring.statistics.DataSampleProcessor;
 import com.liferay.portal.kernel.util.MethodKey;
-import com.liferay.portal.monitoring.statistics.DataSampleProcessor;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

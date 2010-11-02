@@ -14,7 +14,8 @@
 
 package com.liferay.portal.monitoring.jmx;
 
-import com.liferay.portal.monitoring.statistics.DataSampleThreadLocal;
+import com.liferay.portal.kernel.monitoring.statistics.DataSampleThreadLocal;
+import com.liferay.portal.util.PropsValues;
 
 /**
  * @author Michael C. Han
@@ -22,6 +23,13 @@ import com.liferay.portal.monitoring.statistics.DataSampleThreadLocal;
  */
 public class DataSampleThreadLocalManager
 	implements DataSampleThreadLocalManagerMBean {
+
+	public DataSampleThreadLocalManager() {
+		boolean monitoringDataSampleThreadLocal =
+			PropsValues.MONITORING_DATA_SAMPLE_THREAD_LOCAL;
+
+		setMonitoringDataSampleThreadLocal(monitoringDataSampleThreadLocal);
+	}
 
 	public boolean isMonitoringDataSampleThreadLocal() {
 		return DataSampleThreadLocal.isMonitoringDataSampleThreadLocal();

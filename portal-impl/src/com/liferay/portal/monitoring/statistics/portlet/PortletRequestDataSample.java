@@ -14,10 +14,10 @@
 
 package com.liferay.portal.monitoring.statistics.portlet;
 
+import com.liferay.portal.monitoring.statistics.BaseDataSample;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.monitoring.MonitorNames;
-import com.liferay.portal.monitoring.statistics.BaseDataSample;
 import com.liferay.portlet.PortletResponseImpl;
 
 import javax.portlet.PortletRequest;

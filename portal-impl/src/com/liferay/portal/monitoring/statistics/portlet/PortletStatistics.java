@@ -14,10 +14,10 @@
 
 package com.liferay.portal.monitoring.statistics.portlet;
 
-import com.liferay.portal.monitoring.MonitoringException;
-import com.liferay.portal.monitoring.RequestStatus;
-import com.liferay.portal.monitoring.statistics.DataSampleProcessor;
-import com.liferay.portal.monitoring.statistics.RequestStatistics;
+import com.liferay.portal.kernel.monitoring.MonitoringException;
+import com.liferay.portal.kernel.monitoring.RequestStatus;
+import com.liferay.portal.kernel.monitoring.statistics.DataSampleProcessor;
+import com.liferay.portal.kernel.monitoring.statistics.RequestStatistics;
 
 import java.util.HashMap;
 import java.util.Map;

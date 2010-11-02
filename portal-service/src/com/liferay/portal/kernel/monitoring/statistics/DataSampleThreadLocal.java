@@ -12,10 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.monitoring.statistics;
+package com.liferay.portal.kernel.monitoring.statistics;
 
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
-import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -81,10 +80,9 @@ public class DataSampleThreadLocal implements Cloneable {
 		new AutoResetThreadLocal<DataSampleThreadLocal>(
 			DataSampleThreadLocal.class + "._dataSampleThreadLocal",
 			new DataSampleThreadLocal());
-	private static boolean _monitoringDataSampleThreadLocal =
-		PropsValues.MONITORING_DATA_SAMPLE_THREAD_LOCAL;
+
+	private static boolean _monitoringDataSampleThreadLocal;
 
 	private List<DataSample> _dataSamples = new ArrayList<DataSample>();
 	private long _monitorTime;
-
 }

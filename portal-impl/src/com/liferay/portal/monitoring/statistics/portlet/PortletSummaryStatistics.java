@@ -14,8 +14,8 @@
 
 package com.liferay.portal.monitoring.statistics.portlet;
 
-import com.liferay.portal.monitoring.MonitoringException;
-import com.liferay.portal.monitoring.statistics.SummaryStatistics;
+import com.liferay.portal.kernel.monitoring.MonitoringException;
+import com.liferay.portal.kernel.monitoring.statistics.SummaryStatistics;
 
 /**
  * @author Michael C. Han

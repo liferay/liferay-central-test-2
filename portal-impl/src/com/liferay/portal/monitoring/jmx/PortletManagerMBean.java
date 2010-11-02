@@ -14,7 +14,7 @@
 
 package com.liferay.portal.monitoring.jmx;
 
-import com.liferay.portal.monitoring.MonitoringException;
+import com.liferay.portal.kernel.monitoring.MonitoringException;
 import com.liferay.portal.monitoring.statistics.portlet.PortletSummaryStatistics;
 
 /**

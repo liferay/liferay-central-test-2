@@ -12,20 +12,46 @@
  * details.
  */
 
-package com.liferay.portal.monitoring;
-
-import java.util.Set;
+package com.liferay.portal.kernel.monitoring.statistics;
 
 /**
- * @author Michael C. Han
+ * @author Rajesh Thiagarajan
  * @author Brian Wing Shun Chan
  */
-public interface MonitoringProcessor {
+public class CountStatistics extends BaseStatistics {
 
-	public Level getLevel(String namespace);
+	public CountStatistics(String name) {
+		super(name);
+	}
 
-	public Set<String> getNamespaces();
+	public void decrementCount() {
+		_count--;
 
-	public void setLevel(String namespace, Level level);
+		setLastSampleTime(System.currentTimeMillis());
+	}
+
+	public long getCount() {
+		return _count;
+	}
+
+	public void incrementCount() {
+		_count++;
+
+		setLastSampleTime(System.currentTimeMillis());
+	}
+
+	public void reset() {
+		super.reset();
+
+		_count = 0;
+	}
+
+	public void setCount(long count) {
+		_count = count;
+
+		setLastSampleTime(System.currentTimeMillis());
+	}
+
+	private long _count;
 
 }

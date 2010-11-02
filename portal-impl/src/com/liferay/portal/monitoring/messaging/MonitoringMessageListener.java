@@ -16,8 +16,8 @@ package com.liferay.portal.monitoring.messaging;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.monitoring.statistics.DataSample;
-import com.liferay.portal.monitoring.statistics.DataSampleProcessor;
+import com.liferay.portal.kernel.monitoring.statistics.DataSample;
+import com.liferay.portal.kernel.monitoring.statistics.DataSampleProcessor;
 
 /**
  * @author Michael C. Han

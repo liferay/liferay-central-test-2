@@ -12,46 +12,16 @@
  * details.
  */
 
-package com.liferay.portal.monitoring.statistics;
+package com.liferay.portal.kernel.monitoring.statistics;
+
+import com.liferay.portal.kernel.monitoring.MonitoringException;
 
 /**
- * @author Rajesh Thiagarajan
+ * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */
-public class CountStatistics extends BaseStatistics {
+public interface DataSampleProcessor<T extends DataSample> {
 
-	public CountStatistics(String name) {
-		super(name);
-	}
-
-	public void decrementCount() {
-		_count--;
-
-		setLastSampleTime(System.currentTimeMillis());
-	}
-
-	public long getCount() {
-		return _count;
-	}
-
-	public void incrementCount() {
-		_count++;
-
-		setLastSampleTime(System.currentTimeMillis());
-	}
-
-	public void reset() {
-		super.reset();
-
-		_count = 0;
-	}
-
-	public void setCount(long count) {
-		_count = count;
-
-		setLastSampleTime(System.currentTimeMillis());
-	}
-
-	private long _count;
+	public void processDataSample(T dataSample) throws MonitoringException;
 
 }

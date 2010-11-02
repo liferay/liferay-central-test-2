@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.monitoring.statistics;
+package com.liferay.portal.kernel.monitoring.statistics;
 
-import com.liferay.portal.monitoring.MonitoringException;
+import com.liferay.portal.kernel.monitoring.MonitoringException;
 
 /**
  * @author Michael C. Han

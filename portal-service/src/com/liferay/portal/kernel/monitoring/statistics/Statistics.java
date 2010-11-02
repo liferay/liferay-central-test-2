@@ -12,28 +12,20 @@
  * details.
  */
 
-package com.liferay.portal.monitoring.statistics;
-
-import com.liferay.portal.monitoring.RequestStatus;
+package com.liferay.portal.kernel.monitoring.statistics;
 
 /**
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */
-public interface DataSample {
-
-	public long getCompanyId();
+public interface Statistics {
 
 	public String getDescription();
 
-	public long getDuration();
-
 	public String getName();
 
-	public String getNamespace();
+	public void reset();
 
-	public RequestStatus getRequestStatus();
-
-	public String getUser();
+	public void setDescription(String description);
 
 }

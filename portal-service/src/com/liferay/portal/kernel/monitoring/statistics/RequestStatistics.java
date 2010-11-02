@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.monitoring.statistics;
+package com.liferay.portal.kernel.monitoring.statistics;
 
 /**
  * @author Michael C. Han
@@ -21,6 +21,12 @@ package com.liferay.portal.monitoring.statistics;
 public class RequestStatistics implements Statistics {
 
 	public RequestStatistics(String name) {
+		try {
+			Thread.currentThread().sleep(5000);
+		}
+		catch (InterruptedException e) {
+			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+		}
 		_name = name;
 		_errorStatistics = new CountStatistics(name);
 		_successStatistics = new AverageStatistics(name);

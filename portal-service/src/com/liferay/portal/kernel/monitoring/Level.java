@@ -12,16 +12,14 @@
  * details.
  */
 
-package com.liferay.portal.monitoring.statistics;
-
-import com.liferay.portal.monitoring.MonitoringException;
+package com.liferay.portal.kernel.monitoring;
 
 /**
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */
-public interface DataSampleProcessor<T extends DataSample> {
+public enum Level {
 
-	public void processDataSample(T dataSample) throws MonitoringException;
+	HIGH, LOW, MEDIUM, OFF
 
 }

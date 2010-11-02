@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.portal.monitoring;
+package com.liferay.portal.kernel.monitoring;
 
-import com.liferay.portal.monitoring.statistics.DataSample;
-import com.liferay.portal.monitoring.statistics.DataSampleProcessor;
+import com.liferay.portal.kernel.monitoring.statistics.DataSample;
+import com.liferay.portal.kernel.monitoring.statistics.DataSampleProcessor;
 
 import java.util.ArrayList;
 import java.util.List;

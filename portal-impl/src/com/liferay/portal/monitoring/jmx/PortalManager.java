@@ -14,9 +14,9 @@
 
 package com.liferay.portal.monitoring.jmx;
 
+import com.liferay.portal.kernel.monitoring.MonitoringException;
+import com.liferay.portal.kernel.monitoring.statistics.SummaryStatistics;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.monitoring.MonitoringException;
-import com.liferay.portal.monitoring.statistics.SummaryStatistics;
 import com.liferay.portal.monitoring.statistics.portal.ServerStatistics;
 
 import java.util.Set;
