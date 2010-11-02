@@ -64,8 +64,8 @@ public class UpgradeLayout extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-			  "select plid, privateLayout, layoutId, friendlyURL from Layout " +
-				  "where groupId = ?");
+				"select plid, privateLayout, layoutId, friendlyURL from " +
+					"Layout where groupId = ?");
 
 			ps.setLong(1, groupId);
 
@@ -100,7 +100,7 @@ public class UpgradeLayout extends UpgradeProcess {
 
 			ps = con.prepareStatement(
 				"select uuid_ from Layout where groupId = ? and friendlyURL " +
-					" = ?");
+					"= ?");
 
 			ps.setLong(1, groupId);
 			ps.setString(2, friendlyURL);
@@ -110,7 +110,7 @@ public class UpgradeLayout extends UpgradeProcess {
 			if (!rs.next()) {
 				ps = con.prepareStatement(
 					"select uuid_ from Layout where groupId = ? and " +
-				 		"privateLayout = ? and layoutId = ?");
+						"privateLayout = ? and layoutId = ?");
 
 				ps.setLong(1, groupId);
 				ps.setBoolean(2, privateLayout);
