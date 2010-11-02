@@ -19,6 +19,7 @@ import com.liferay.portal.ContactBirthdayException;
 import com.liferay.portal.ContactFirstNameException;
 import com.liferay.portal.ContactFullNameException;
 import com.liferay.portal.ContactLastNameException;
+import com.liferay.portal.DuplicateFriendlyURLException;
 import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.DuplicateUserScreenNameException;
 import com.liferay.portal.GroupFriendlyURLException;
@@ -3400,7 +3401,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		Group group = groupPersistence.fetchByC_F(companyId, friendlyURL);
 
 		if (group != null) {
-			throw new DuplicateUserScreenNameException();
+			throw new DuplicateFriendlyURLException();
 		}
 
 		int exceptionType = LayoutImpl.validateFriendlyURL(friendlyURL);

@@ -2169,6 +2169,7 @@
 		<exception>CountryIdd</exception>
 		<exception>CountryName</exception>
 		<exception>CountryNumber</exception>
+		<exception>DuplicateFriendlyURL</exception>
 		<exception>DuplicateGroup</exception>
 		<exception>DuplicateLock</exception>
 		<exception>DuplicateOrganization</exception>

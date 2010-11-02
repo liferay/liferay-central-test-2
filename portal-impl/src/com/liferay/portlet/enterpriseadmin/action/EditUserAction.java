@@ -21,6 +21,7 @@ import com.liferay.portal.CompanyMaxUsersException;
 import com.liferay.portal.ContactFirstNameException;
 import com.liferay.portal.ContactFullNameException;
 import com.liferay.portal.ContactLastNameException;
+import com.liferay.portal.DuplicateFriendlyURLException;
 import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.DuplicateUserScreenNameException;
 import com.liferay.portal.EmailAddressException;
@@ -230,6 +231,7 @@ public class EditUserAction extends PortletAction {
 					 e instanceof ContactFirstNameException ||
 					 e instanceof ContactFullNameException ||
 					 e instanceof ContactLastNameException ||
+					 e instanceof DuplicateFriendlyURLException ||
 					 e instanceof DuplicateUserEmailAddressException ||
 					 e instanceof DuplicateUserScreenNameException ||
 					 e instanceof EmailAddressException ||

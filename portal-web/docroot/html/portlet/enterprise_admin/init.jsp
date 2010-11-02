@@ -26,6 +26,7 @@
 <%@ page import="com.liferay.portal.ContactFirstNameException" %>
 <%@ page import="com.liferay.portal.ContactFullNameException" %>
 <%@ page import="com.liferay.portal.ContactLastNameException" %>
+<%@ page import="com.liferay.portal.DuplicateFriendlyURLException" %>
 <%@ page import="com.liferay.portal.DuplicateOrganizationException" %>
 <%@ page import="com.liferay.portal.DuplicatePasswordPolicyException" %>
 <%@ page import="com.liferay.portal.DuplicateRoleException" %>
