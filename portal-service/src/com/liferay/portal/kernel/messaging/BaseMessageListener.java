@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.sender.MessageSender;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
+import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 
 /**
  * @author Michael C. Han
@@ -49,6 +50,8 @@ public abstract class BaseMessageListener implements MessageListener {
 		catch (Exception e) {
 			_log.error(
 				"Unable to process request " + message.getDestinationName(), e);
+
+			message.put(SchedulerEngine.EXCEPTION, e);
 
 			messageStatus.setException(e);
 		}

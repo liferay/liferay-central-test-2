@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.Account;
 import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.PermissionCheckerUtil;
@@ -74,6 +75,8 @@ public class MailingListMessageListener implements MessageListener {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
+
+			message.put(SchedulerEngine.EXCEPTION, e);
 		}
 		finally {
 			if ((folder != null) && folder.isOpen()) {

@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.Account;
 import com.liferay.portal.kernel.pop.MessageListener;
+import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -49,6 +50,8 @@ public class POPNotificationsMessageListener
 		}
 		catch (Exception e) {
 			_log.error("Unable to process message " + message, e);
+
+			message.put(SchedulerEngine.EXCEPTION, e);
 		}
 	}
 
