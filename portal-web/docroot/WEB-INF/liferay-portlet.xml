@@ -1586,6 +1586,7 @@
 		<icon>/html/icons/blogs.png</icon>
 		<struts-path>blogs_admin</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<portlet-data-handler-class>com.liferay.portlet.blogs.lar.BlogsPortletDataHandlerImpl</portlet-data-handler-class>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>7.0</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
