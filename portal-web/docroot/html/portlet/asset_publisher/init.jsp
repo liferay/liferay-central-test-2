@@ -234,7 +234,7 @@ String[] assetEntryXmls = preferences.getValues("asset-entry-xml", new String[0]
 boolean viewInContext = assetLinkBehaviour.equals("viewInPortlet");
 
 boolean showPortletWithNoResults = false;
-boolean groupByClass = (assetVocabularyId == -1);
+boolean groupByClass = (assetVocabularyId == 0);
 boolean allowEmptyResults = false;
 
 Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
