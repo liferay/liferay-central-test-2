@@ -34,8 +34,6 @@ public class ByteBufferServletResponse extends HeaderCacheServletResponse {
 	}
 
 	public void flushBuffer() {
-		// Do nothing to stop wrapped response being setted to committed from
-		// super class code.
 	}
 
 	public ByteBuffer getByteBuffer() {
