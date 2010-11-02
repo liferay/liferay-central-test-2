@@ -79,7 +79,7 @@ else {
 					sb.append(themeDisplay.getPathMain());
 					sb.append("/blogs/find_entry?entryId=");
 					sb.append(entry.getEntryId());
-					sb.append("&showAllEntries=1");
+					sb.append("&showAllEntries=0");
 
 					String rowHREF = sb.toString();
 
