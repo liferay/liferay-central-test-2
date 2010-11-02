@@ -1702,6 +1702,14 @@ public class JournalArticleLocalServiceImpl
 				new ArticleExpirationDateException());
 		}
 
+		boolean expired = false;
+
+		Date now = new Date();
+
+		if ((expirationDate != null) && expirationDate.before(now)) {
+			expired = true;
+		}
+
 		Date reviewDate = null;
 
 		if (!neverReview) {
@@ -1719,8 +1727,6 @@ public class JournalArticleLocalServiceImpl
 		catch (IOException ioe) {
 		}
 
-		Date now = new Date();
-
 		validate(
 			user.getCompanyId(), groupId, title, content, type, structureId,
 			templateId, smallImage, smallImageURL, smallFile, smallBytes);
@@ -1736,7 +1742,15 @@ public class JournalArticleLocalServiceImpl
 		if (imported) {
 			oldArticle = getArticle(groupId, articleId, version);
 			oldVersion = version;
-			incrementVersion = true;
+
+			if (!expired) {
+				incrementVersion = true;
+			}
+			else {
+				return expireArticle(
+						userId, groupId, articleId, version, articleURL,
+						serviceContext);
+			}
 		}
 		else {
 			oldArticle = getLatestArticle(
@@ -1794,7 +1808,7 @@ public class JournalArticleLocalServiceImpl
 		if (oldArticle.isPending()) {
 			article.setStatus(oldArticle.getStatus());
 		}
-		else if ((expirationDate == null) || expirationDate.after(now)) {
+		else if (!expired) {
 			article.setStatus(WorkflowConstants.STATUS_DRAFT);
 		}
 		else {

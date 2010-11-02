@@ -154,7 +154,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		if (article.getStatus() != WorkflowConstants.STATUS_APPROVED) {
+		if ((article.getStatus() != WorkflowConstants.STATUS_APPROVED) &&
+			(article.getStatus() != WorkflowConstants.STATUS_EXPIRED)) {
+
 			return;
 		}
 
@@ -1995,9 +1997,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		Element articlesElement = rootElement.addElement("articles");
 
 		if (context.getBooleanParameter(_NAMESPACE, "articles")) {
-			List<JournalArticle> articles = JournalArticleUtil.findByG_ST(
-				context.getScopeGroupId(), WorkflowConstants.STATUS_APPROVED,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			List<JournalArticle> articles = JournalArticleUtil.findByGroupId(
+				context.getScopeGroupId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 				new ArticleIDComparator(true));
 
 			for (JournalArticle article : articles) {
