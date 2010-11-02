@@ -16,9 +16,9 @@ package com.liferay.portal.poller.messaging;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.poller.PollerException;
 import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.poller.PollerRequest;
@@ -29,9 +29,9 @@ import com.liferay.portal.poller.PollerProcessorUtil;
 /**
  * @author Michael C. Han
  */
-public class PollerMessageListener implements MessageListener {
+public class PollerMessageListener extends BaseMessageListener {
 
-	public void receive(Message message) {
+	protected void doReceive(Message message) throws Exception {
 		PollerResponse pollerResponse = null;
 
 		try {

@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.Account;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.mail.SMTPAccount;
-import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Subscription;
@@ -48,16 +48,7 @@ import javax.mail.internet.InternetAddress;
  * @author Brian Wing Shun Chan
  * @author Thiago Moreira
  */
-public class MBMessageListener implements MessageListener {
-
-	public void receive(com.liferay.portal.kernel.messaging.Message message) {
-		try {
-			doReceive(message);
-		}
-		catch (Exception e) {
-			_log.error("Unable to process message " + message, e);
-		}
-	}
+public class MBMessageListener extends BaseMessageListener {
 
 	protected void doReceive(
 			com.liferay.portal.kernel.messaging.Message message)

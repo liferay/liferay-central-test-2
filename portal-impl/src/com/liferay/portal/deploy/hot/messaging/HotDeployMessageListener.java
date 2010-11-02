@@ -16,23 +16,14 @@ package com.liferay.portal.deploy.hot.messaging;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageListener;
 
 /**
  * @author Brian Wing Shun Chan
  * @author Eduardo Lundgren
  */
-public class HotDeployMessageListener implements MessageListener {
-
-	public void receive(Message message) {
-		try {
-			doReceive(message);
-		}
-		catch (Exception e) {
-			_log.error("Unable to process message " + message, e);
-		}
-	}
+public class HotDeployMessageListener extends BaseMessageListener {
 
 	protected void doReceive(Message message) throws Exception {
 		String command = message.getString("command");

@@ -14,32 +14,19 @@
 
 package com.liferay.portal.messaging.async;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageListener;
 
 /**
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */
-public class AsyncMessageListener implements MessageListener {
-
-	public void receive(Message message) {
-		try {
-			doReceive(message);
-		}
-		catch (Exception e) {
-			_log.error("Unable to process message " + message, e);
-		}
-	}
+public class AsyncMessageListener extends BaseMessageListener {
 
 	protected void doReceive(Message message) throws Exception {
 		Runnable runnable = (Runnable)message.getPayload();
 
 		runnable.run();
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(AsyncMessageListener.class);
 
 }

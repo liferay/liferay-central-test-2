@@ -18,7 +18,7 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.Account;
-import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.PermissionCheckerUtil;
@@ -49,9 +49,12 @@ import javax.mail.internet.InternetAddress;
 /**
  * @author Thiago Moreira
  */
-public class MailingListMessageListener implements MessageListener {
+public class MailingListMessageListener extends BaseMessageListener {
 
-	public void receive(com.liferay.portal.kernel.messaging.Message message) {
+	protected void doReceive(
+			com.liferay.portal.kernel.messaging.Message message)
+		throws Exception {
+
 		MailingListRequest mailingListRequest =
 			(MailingListRequest)message.getPayload();
 
@@ -71,9 +74,6 @@ public class MailingListMessageListener implements MessageListener {
 			messages = folder.getMessages();
 
 			processMessages(mailingListRequest, messages);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
 		}
 		finally {
 			if ((folder != null) && folder.isOpen()) {

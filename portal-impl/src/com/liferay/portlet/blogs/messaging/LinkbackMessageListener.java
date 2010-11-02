@@ -14,10 +14,8 @@
 
 package com.liferay.portlet.blogs.messaging;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portlet.blogs.util.LinkbackConsumerUtil;
 import com.liferay.portlet.blogs.util.LinkbackProducerUtil;
 
@@ -25,23 +23,11 @@ import com.liferay.portlet.blogs.util.LinkbackProducerUtil;
  * @author Alexander Chow
  * @author Tina Tian
  */
-public class LinkbackMessageListener implements MessageListener {
-
-	public void receive(Message message) {
-		try {
-			doReceive(message);
-		}
-		catch (Exception e) {
-			_log.error("Unable to process message " + message, e);
-		}
-	}
+public class LinkbackMessageListener extends BaseMessageListener {
 
 	protected void doReceive(Message message) throws Exception {
 		LinkbackConsumerUtil.verifyNewTrackbacks();
 		LinkbackProducerUtil.sendQueuedPingbacks();
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		LinkbackMessageListener.class);
 
 }

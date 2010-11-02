@@ -21,16 +21,26 @@ import com.liferay.portal.kernel.bi.reporting.ReportRequest;
 import com.liferay.portal.kernel.bi.reporting.ReportResultContainer;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.MessageListener;
 
 /**
  * @author Michael C. Han
  */
-public class ReportCompilerRequestMessageListener implements MessageListener {
+public class ReportCompilerRequestMessageListener extends BaseMessageListener {
 
-	public void receive(Message message) {
+	public void setReportEngine(ReportEngine reportEngine) {
+		_reportEngine = reportEngine;
+	}
+
+	public void setReportResultContainer(
+		ReportResultContainer reportResultContainer) {
+
+		_reportResultContainer = reportResultContainer;
+	}
+
+	protected void doReceive(Message message) throws Exception {
 		ReportRequest reportRequest = (ReportRequest)message.getPayload();
 
 		ReportDesignRetriever reportDesignRetriever =
@@ -56,16 +66,6 @@ public class ReportCompilerRequestMessageListener implements MessageListener {
 			MessageBusUtil.sendMessage(
 				responseMessage.getDestinationName(), responseMessage);
 		}
-	}
-
-	public void setReportEngine(ReportEngine reportEngine) {
-		_reportEngine = reportEngine;
-	}
-
-	public void setReportResultContainer(
-		ReportResultContainer reportResultContainer) {
-
-		_reportResultContainer = reportResultContainer;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

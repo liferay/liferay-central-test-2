@@ -14,32 +14,18 @@
 
 package com.liferay.portlet.messageboards.messaging;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 
 /**
  * @author Michael Young
  * @author Tina Tian
  */
-public class ExpireBanMessageListener implements MessageListener {
-
-	public void receive(Message message) {
-		try {
-			doReceive(message);
-		}
-		catch (Exception e) {
-			_log.error("Unable to process message " + message, e);
-		}
-	}
+public class ExpireBanMessageListener extends BaseMessageListener {
 
 	protected void doReceive(Message message) throws Exception {
 		MBBanLocalServiceUtil.expireBans();
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		ExpireBanMessageListener.class);
 
 }

@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.search.messaging;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.IndexWriter;
@@ -27,15 +25,6 @@ import java.util.Collection;
  */
 public class SearchWriterMessageListener
 	extends BaseSearchEngineMessageListener {
-
-	public void receive(Message message) {
-		try {
-			doReceive(message);
-		}
-		catch (Exception e) {
-			_log.error("Unable to process message " + message, e);
-		}
-	}
 
 	protected void doReceive(Message message) throws Exception {
 		Object payload = message.getPayload();
@@ -91,8 +80,5 @@ public class SearchWriterMessageListener
 			indexWriter.updateDocuments(companyId, documents);
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		SearchWriterMessageListener.class);
 
 }

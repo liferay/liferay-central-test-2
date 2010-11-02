@@ -14,14 +14,14 @@
 
 package com.liferay.portal.kernel.search.messaging;
 
-import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.search.SearchEngine;
 
 /**
  * @author Michael C. Han
  */
 public abstract class BaseSearchEngineMessageListener
-	implements MessageListener {
+	extends BaseMessageListener {
 
 	public String getSearchEngineName() {
 		return searchEngine.getName();

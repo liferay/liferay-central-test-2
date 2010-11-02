@@ -21,8 +21,8 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -59,16 +59,7 @@ import javax.mail.internet.InternetAddress;
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */
-public class FlagsRequestMessageListener implements MessageListener {
-
-	public void receive(Message message) {
-		try {
-			doReceive(message);
-		}
-		catch (Exception e) {
-			_log.error("Unable to process message " + message, e);
-		}
-	}
+public class FlagsRequestMessageListener extends BaseMessageListener {
 
 	protected void doReceive(Message message) throws Exception {
 		FlagsRequest flagsRequest = (FlagsRequest)message.getPayload();

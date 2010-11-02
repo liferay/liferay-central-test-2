@@ -14,32 +14,18 @@
 
 package com.liferay.portlet.social.messaging;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portlet.social.service.SocialEquityLogLocalServiceUtil;
 
 /**
  * @author Zsolt Berentey
  * @author Brian Wing Shun Chan
  */
-public class CheckEquityLogMessageListener implements MessageListener {
-
-	public void receive(Message message) {
-		try {
-			doReceive(message);
-		}
-		catch (Exception e) {
-			_log.error("Unable to process message " + message, e);
-		}
-	}
+public class CheckEquityLogMessageListener extends BaseMessageListener {
 
 	protected void doReceive(Message message) throws Exception {
 		SocialEquityLogLocalServiceUtil.checkEquityLogs();
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		CheckEquityLogMessageListener.class);
 
 }

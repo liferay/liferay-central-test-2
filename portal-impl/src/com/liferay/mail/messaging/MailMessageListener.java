@@ -15,11 +15,9 @@
 package com.liferay.mail.messaging;
 
 import com.liferay.mail.util.HookFactory;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.security.auth.EmailAddressGenerator;
@@ -36,16 +34,7 @@ import javax.mail.internet.InternetAddress;
  * @author Brian Wing Shun Chan
  * @author Wesley Gong
  */
-public class MailMessageListener implements MessageListener {
-
-	public void receive(Message message) {
-		try {
-			doReceive(message);
-		}
-		catch (Exception e) {
-			_log.error("Unable to process message " + message, e);
-		}
-	}
+public class MailMessageListener extends BaseMessageListener {
 
 	protected void doMailMessage(MailMessage mailMessage) throws Exception {
 		InternetAddress[] auditTrail = InternetAddress.parse(
@@ -154,7 +143,5 @@ public class MailMessageListener implements MessageListener {
 		return filteredInternetAddresses.toArray(
 			new InternetAddress[filteredInternetAddresses.size()]);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(MailMessageListener.class);
 
 }

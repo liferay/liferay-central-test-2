@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.search.messaging;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.Hits;
@@ -25,15 +23,6 @@ import com.liferay.portal.kernel.search.Hits;
  */
 public class SearchReaderMessageListener
 	extends BaseSearchEngineMessageListener {
-
-	public void receive(Message message) {
-		try {
-			doReceive(message);
-		}
-		catch (Exception e) {
-			_log.error("Unable to process message " + message, e);
-		}
-	}
 
 	protected void doCommandSearch(Message message, SearchRequest searchRequest)
 		throws Exception {
@@ -66,8 +55,5 @@ public class SearchReaderMessageListener
 			doCommandSearch(message, searchRequest);
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		SearchReaderMessageListener.class);
 
 }

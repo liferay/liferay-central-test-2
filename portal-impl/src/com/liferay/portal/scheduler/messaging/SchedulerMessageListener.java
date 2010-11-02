@@ -14,11 +14,9 @@
 
 package com.liferay.portal.scheduler.messaging;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.messaging.sender.MessageSender;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
@@ -29,29 +27,7 @@ import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
  * @author Shuyang Zhou
  * @author Tina Tian
  */
-public class SchedulerMessageListener implements MessageListener {
-
-	public SchedulerMessageListener() {
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public SchedulerMessageListener(
-		MessageSender messageSender, SchedulerEngine schedulerEngine) {
-
-		_messageSender = messageSender;
-		_schedulerEngine = schedulerEngine;
-	}
-
-	public void receive(Message message) {
-		try {
-			doReceive(message);
-		}
-		catch (Exception e) {
-			_log.error("Unable to process message " + message, e);
-		}
-	}
+public class SchedulerMessageListener extends BaseMessageListener {
 
 	public void setMessageSender(MessageSender messageSender) {
 		_messageSender = messageSender;
@@ -125,9 +101,6 @@ public class SchedulerMessageListener implements MessageListener {
 		_messageSender.send(
 			responseMessage.getDestinationName(), responseMessage);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		SchedulerMessageListener.class);
 
 	private MessageSender _messageSender;
 	private SchedulerEngine _schedulerEngine;

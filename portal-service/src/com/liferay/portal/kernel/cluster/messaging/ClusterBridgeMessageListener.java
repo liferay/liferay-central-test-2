@@ -19,15 +19,23 @@ import com.liferay.portal.kernel.cluster.ClusterLinkUtil;
 import com.liferay.portal.kernel.cluster.Priority;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageListener;
 
 /**
  * @author Shuyang Zhou
  */
-public class ClusterBridgeMessageListener implements MessageListener {
+public class ClusterBridgeMessageListener extends BaseMessageListener {
 
-	public void receive(Message message) {
+	public void setActive(boolean active) {
+		_active = active;
+	}
+
+	public void setPriority(Priority priority) {
+		_priority = priority;
+	}
+
+	protected void doReceive(Message message) throws Exception {
 		if (!_active) {
 			return;
 		}
@@ -54,14 +62,6 @@ public class ClusterBridgeMessageListener implements MessageListener {
 
 			ClusterLinkUtil.sendUnicastMessage(address, message, _priority);
 		}
-	}
-
-	public void setActive(boolean active) {
-		_active = active;
-	}
-
-	public void setPriority(Priority priority) {
-		_priority = priority;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

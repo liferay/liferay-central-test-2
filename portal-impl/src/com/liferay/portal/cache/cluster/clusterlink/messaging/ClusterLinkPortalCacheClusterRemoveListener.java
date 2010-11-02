@@ -22,8 +22,8 @@ import com.liferay.portal.kernel.cache.cluster.PortalCacheClusterEventType;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageListener;
 
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
@@ -32,7 +32,7 @@ import net.sf.ehcache.CacheManager;
  * @author Shuyang Zhou
  */
 public class ClusterLinkPortalCacheClusterRemoveListener
-	implements MessageListener {
+	extends BaseMessageListener {
 
 	public ClusterLinkPortalCacheClusterRemoveListener()
 		throws SystemException {
@@ -46,7 +46,7 @@ public class ClusterLinkPortalCacheClusterRemoveListener
 		_portalCacheManager = ehcachePortalCacheManager.getEhcacheManager();
 	}
 
-	public void receive(Message message) {
+	protected void doReceive(Message message) throws Exception {
 		PortalCacheClusterEvent portalCacheClusterEvent =
 			(PortalCacheClusterEvent)message.getPayload();
 

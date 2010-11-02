@@ -41,16 +41,7 @@ import javax.mail.internet.InternetAddress;
  * @author Brian Wing Shun Chan
  */
 public class POPNotificationsMessageListener
-	implements com.liferay.portal.kernel.messaging.MessageListener {
-
-	public void receive(com.liferay.portal.kernel.messaging.Message message) {
-		try {
-			doReceive(message);
-		}
-		catch (Exception e) {
-			_log.error("Unable to process message " + message, e);
-		}
-	}
+	extends com.liferay.portal.kernel.messaging.BaseMessageListener {
 
 	protected void doReceive(
 			com.liferay.portal.kernel.messaging.Message message)

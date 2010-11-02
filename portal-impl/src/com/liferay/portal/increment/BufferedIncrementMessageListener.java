@@ -17,23 +17,13 @@ package com.liferay.portal.increment;
 import com.liferay.portal.kernel.concurrent.BatchablePipe;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageListener;
 
 /**
  * @author Shuyang Zhou
  */
-public class BufferedIncrementMessageListener implements MessageListener {
-
-	public void receive(Message message) {
-		try {
-			doReceive(message);
-		}
-		catch (Exception e) {
-			_log.error("Unable to process message " + message, e);
-		}
-
-	}
+public class BufferedIncrementMessageListener extends BaseMessageListener {
 
 	@SuppressWarnings("rawtypes")
 	protected void doReceive(Message message) throws Exception {
