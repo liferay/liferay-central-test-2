@@ -67,7 +67,7 @@ public class DeleteThreadAction extends PortletAction {
 		}
 		else {
 			long[] deleteThreadIds = StringUtil.split(
-				ParamUtil.getString(actionRequest, "deleteThreadIds"), 0L);
+				ParamUtil.getString(actionRequest, "threadIds"), 0L);
 
 			for (int i = 0; i < deleteThreadIds.length; i++) {
 				MBThreadServiceUtil.deleteThread(deleteThreadIds[i]);

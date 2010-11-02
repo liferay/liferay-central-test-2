@@ -52,7 +52,7 @@ Set<Long> categorySubscriptionClassPKs = (Set<Long>)row.getParameter("categorySu
 		/>
 	</c:if>
 
-	<c:if test="<%= portletName.equals(PortletKeys.MESSAGE_BOARDS_ADMIN) %>">
+	<c:if test="<%= portletName.equals(PortletKeys.MESSAGE_BOARDS) %>">
 		<liferay-ui:icon
 			image="rss"
 			method="get"

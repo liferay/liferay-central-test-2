@@ -22,7 +22,12 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 Object[] objArray = (Object[])row.getObject();
 
 MBMessage message = (MBMessage)objArray[0];
-Set<Long> threadSubscriptionClassPKs = (Set<Long>)objArray[1];
+
+Set<Long> threadSubscriptionClassPKs = null;
+
+if (portletName.equals(PortletKeys.MESSAGE_BOARDS)) {
+	threadSubscriptionClassPKs = (Set<Long>)objArray[1];
+}
 
 MBCategory category = message.getCategory();
 MBThread thread = message.getThread();
@@ -56,7 +61,7 @@ MBThread thread = message.getThread();
 		/>
 	</c:if>
 
-	<c:if test="<%= portletName.equals(PortletKeys.MESSAGE_BOARDS_ADMIN) %>">
+	<c:if test="<%= portletName.equals(PortletKeys.MESSAGE_BOARDS) %>">
 		<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.VIEW) %>">
 			<liferay-ui:icon
 				image="rss"
