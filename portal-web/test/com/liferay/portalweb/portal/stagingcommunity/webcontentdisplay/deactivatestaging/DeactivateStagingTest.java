@@ -78,7 +78,13 @@ public class DeactivateStagingTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
+		assertEquals(RuntimeVariables.replace("Manage Pages"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
+		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -101,7 +107,7 @@ public class DeactivateStagingTest extends BaseTestCase {
 			RuntimeVariables.replace("Settings"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//li[6]/span/span/a",
+		selenium.clickAt("//li[7]/span/span/a",
 			RuntimeVariables.replace("Staging"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

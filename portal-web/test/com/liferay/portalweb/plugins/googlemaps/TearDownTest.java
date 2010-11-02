@@ -32,9 +32,10 @@ public class TearDownTest extends BaseTestCase {
 				selenium.clickAt("navigation", RuntimeVariables.replace(""));
 				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
 
-				String guestCommunity = selenium.getText(
-						"//nav[@class='site-breadcrumbs']/ul/li[1]/span/a");
-				RuntimeVariables.setValue("guestCommunity", guestCommunity);
+				String guestCommunityName = selenium.getText(
+						"//nav[@id='breadcrumbs']/ul/li/span/a");
+				RuntimeVariables.setValue("guestCommunityName",
+					guestCommunityName);
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -68,7 +69,7 @@ public class TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace("${guestCommunity}")
+						if (RuntimeVariables.replace("${guestCommunityName}")
 												.equals(selenium.getText(
 										"//div/div[3]/a"))) {
 							break;
@@ -91,7 +92,7 @@ public class TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//li/div/div[1]",
+				selenium.clickAt("//div[2]/ul/li/div/div[1]",
 					RuntimeVariables.replace("Drop Down Arrow"));
 
 			case 2:

@@ -135,14 +135,16 @@ public class CP_PublishContentToLiveTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("_88_PORTLET_DATA_33Checkbox",
 					RuntimeVariables.replace(""));
+				Thread.sleep(5000);
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Publish']"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to publish these pages[\\s\\S]$"));
 				selenium.saveScreenShotAndSource();
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
+				assertEquals(RuntimeVariables.replace(
+						"No proposals were found."),
+					selenium.getText("//div[@class='portlet-msg-info']"));
 
 			case 100:
 				label = -1;

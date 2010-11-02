@@ -262,7 +262,7 @@ public class SA_TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//li/div/div[1]",
+				selenium.clickAt("//div[2]/ul/li/div/div[1]",
 					RuntimeVariables.replace("Drop Down Arrow"));
 
 			case 7:

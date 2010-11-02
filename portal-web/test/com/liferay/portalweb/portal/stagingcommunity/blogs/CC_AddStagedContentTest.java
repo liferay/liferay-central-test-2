@@ -118,7 +118,8 @@ public class CC_AddStagedContentTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isElementPresent("link=Staging Blogs Test Entry"));
 		assertTrue(selenium.isTextPresent("This is a staged blogs entry."));
+		assertTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
 }

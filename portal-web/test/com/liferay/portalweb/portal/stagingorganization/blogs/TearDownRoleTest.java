@@ -53,8 +53,8 @@ public class TearDownRoleTest extends BaseTestCase {
 				selenium.clickAt("link=Roles", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.type("_128_name",
-					RuntimeVariables.replace("Organization Content"));
+				selenium.type("_128_keywords",
+					RuntimeVariables.replace("Content"));
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));

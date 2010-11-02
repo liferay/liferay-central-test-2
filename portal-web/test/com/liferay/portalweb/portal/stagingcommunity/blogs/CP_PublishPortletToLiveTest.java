@@ -142,8 +142,9 @@ public class CP_PublishPortletToLiveTest extends BaseTestCase {
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to publish these pages[\\s\\S]$"));
 				selenium.saveScreenShotAndSource();
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
+				assertEquals(RuntimeVariables.replace(
+						"No proposals were found."),
+					selenium.getText("//div[@class='portlet-msg-info']"));
 
 			case 100:
 				label = -1;

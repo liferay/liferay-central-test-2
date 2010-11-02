@@ -48,21 +48,15 @@ public class DefinePermissionsRoleCPOrganizationTest extends BaseTestCase {
 		selenium.clickAt("link=Roles", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("_128_name",
-			RuntimeVariables.replace("Organization Content Publisher"));
-		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Organization Content Publisher"),
-			selenium.getText("//td[1]/a"));
+			selenium.getText("//tr[11]/td[1]/a"));
 		assertEquals(RuntimeVariables.replace("Organization"),
-			selenium.getText("//td[2]/a"));
+			selenium.getText("//tr[11]/td[2]/a"));
 		assertEquals(RuntimeVariables.replace(
 				"This is the Content Publisher Role."),
-			selenium.getText("//td[3]/a"));
-		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
+			selenium.getText("//tr[11]/td[3]/a"));
+		selenium.clickAt("//tr[11]/td[4]/ul/li/strong/a",
+			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -98,7 +92,7 @@ public class DefinePermissionsRoleCPOrganizationTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.select("_128_add-permissions",
-			RuntimeVariables.replace("label=organization-administration"));
+			RuntimeVariables.replace("label=Organization Administration"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.check(

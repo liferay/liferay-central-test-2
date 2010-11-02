@@ -47,21 +47,15 @@ public class DefinePermissionsRoleCCBlogsTest extends BaseTestCase {
 		selenium.clickAt("link=Roles", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("_128_name",
-			RuntimeVariables.replace("Organization Content Creator"));
-		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Organization Content Creator"),
-			selenium.getText("//td[1]/a"));
+			selenium.getText("//tr[10]/td[1]/a"));
 		assertEquals(RuntimeVariables.replace("Organization"),
-			selenium.getText("//td[2]/a"));
+			selenium.getText("//tr[10]/td[2]/a"));
 		assertEquals(RuntimeVariables.replace(
 				"This is the Content Creator Role."),
-			selenium.getText("//td[3]/a"));
-		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
+			selenium.getText("//tr[10]/td[3]/a"));
+		selenium.clickAt("//tr[10]/td[4]/ul/li/strong/a",
+			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
