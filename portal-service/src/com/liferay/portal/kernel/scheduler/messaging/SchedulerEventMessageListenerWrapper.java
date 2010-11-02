@@ -70,8 +70,8 @@ public class SchedulerEventMessageListenerWrapper implements MessageListener {
 					handleException(message, exception);
 				}
 			}
-			catch (RuntimeException e) {
-				handleException(message, e);
+			catch (RuntimeException re) {
+				handleException(message, re);
 			}
 			finally {
 				if (message.getBoolean(SchedulerEngine.DISABLE)) {

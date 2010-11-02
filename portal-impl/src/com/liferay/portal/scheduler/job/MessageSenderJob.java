@@ -50,31 +50,25 @@ public class MessageSenderJob implements Job {
 				message = new Message();
 			}
 
-			message.put(
-				"scheduledFireTime",
-				jobExecutionContext.getScheduledFireTime());
+			if (jobExecutionContext.getNextFireTime() == null) {
+				message.put(SchedulerEngine.DISABLE, true);
+			}
 
 			Scheduler scheduler = jobExecutionContext.getScheduler();
 
 			SchedulerContext schedulerContext = scheduler.getContext();
 
-			String jobFullName = jobDetail.getFullName();
-
 			ObjectValuePair<TriggerState, Exception> jobState =
 				(ObjectValuePair<TriggerState, Exception>)
-					schedulerContext.get(jobFullName);
+					schedulerContext.get(jobDetail.getFullName());
 
 			if (jobState == null) {
 				jobState = new ObjectValuePair<TriggerState, Exception>();
-				
-				schedulerContext.put(jobFullName, jobState);
+
+				schedulerContext.put(jobDetail.getFullName(), jobState);
 			}
 
 			message.put(SchedulerEngine.JOB_STATE, jobState);
-
-			if (jobExecutionContext.getNextFireTime() == null) {
-				message.put(SchedulerEngine.DISABLE, true);
-			}
 
 			MessageBusUtil.sendMessage(destinationName, message);
 		}
