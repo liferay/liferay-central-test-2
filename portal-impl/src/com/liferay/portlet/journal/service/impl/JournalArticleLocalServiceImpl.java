@@ -1702,9 +1702,9 @@ public class JournalArticleLocalServiceImpl
 				new ArticleExpirationDateException());
 		}
 
-		boolean expired = false;
-
 		Date now = new Date();
+
+		boolean expired = false;
 
 		if ((expirationDate != null) && expirationDate.before(now)) {
 			expired = true;
@@ -1748,8 +1748,8 @@ public class JournalArticleLocalServiceImpl
 			}
 			else {
 				return expireArticle(
-						userId, groupId, articleId, version, articleURL,
-						serviceContext);
+					userId, groupId, articleId, version, articleURL,
+					serviceContext);
 			}
 		}
 		else {
