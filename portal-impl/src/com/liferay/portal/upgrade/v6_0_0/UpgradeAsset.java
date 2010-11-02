@@ -546,17 +546,17 @@ public class UpgradeAsset extends UpgradeProcess {
 		// Algorithm 1-5
 
 		runSQL(
-			"update Resource_ set codeId = '" + newCodeId + "' where " +
-				"codeId = '" + oldCodeId + "' and primKey = '" + categoryId +
+			"update Resource_ set codeId = " + newCodeId + " where " +
+				"codeId = " + oldCodeId + " and primKey = '" + categoryId +
 					"';");
 
 		// Algorithm 6
 
 		runSQL(
 			"update ResourcePermission set name = '" + newName + "' where " +
-				"companyId = '" + companyId + "' and name = '" + oldName +
-					"' and scope = '" + ResourceConstants.SCOPE_INDIVIDUAL +
-						"' and primKey = '" + categoryId + "';");
+				"companyId = " + companyId + " and name = '" + oldName +
+					"' and scope = " + ResourceConstants.SCOPE_INDIVIDUAL +
+						" and primKey = '" + categoryId + "';");
 	}
 
 	protected void updateResourceCodes() throws Exception {
