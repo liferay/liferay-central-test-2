@@ -61,6 +61,8 @@ if (assetVocabularyId > 0) {
 		}
 
 		assetEntryQuery.setAllCategoryIds(oldAllCategoryIds);
+		assetEntryQuery.setEnd(searchContainer.getEnd());
+		assetEntryQuery.setStart(searchContainer.getStart());
 	}
 }
 else if (!groupByClass) {
