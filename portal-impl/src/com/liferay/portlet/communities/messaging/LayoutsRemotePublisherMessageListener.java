@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.communities.messaging;
 
-import com.liferay.portal.kernel.messaging.BaseMessageListener;
+import com.liferay.portal.kernel.messaging.BaseMessageStatusMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageStatus;
 import com.liferay.portal.kernel.messaging.sender.MessageSender;
@@ -35,7 +35,8 @@ import java.util.Map;
 /**
  * @author Bruno Farache
  */
-public class LayoutsRemotePublisherMessageListener extends BaseMessageListener {
+public class LayoutsRemotePublisherMessageListener
+	extends BaseMessageStatusMessageListener {
 
 	public LayoutsRemotePublisherMessageListener() {
 	}

@@ -14,70 +14,24 @@
 
 package com.liferay.portal.kernel.messaging;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.messaging.sender.MessageSender;
-import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
-
 /**
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  */
 public abstract class BaseMessageListener implements MessageListener {
 
-	public BaseMessageListener() {
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public BaseMessageListener(
-		SingleDestinationMessageSender statusSender,
-		MessageSender responseSender) {
-
-		_statusSender = statusSender;
-		_responseSender = responseSender;
-	}
-
-	public void receive(Message message) {
-		MessageStatus messageStatus = new MessageStatus();
-
-		messageStatus.startTimer();
-
+	public void receive(Message message) throws MessageListenerException {
 		try {
-			doReceive(message, messageStatus);
+			doReceive(message);
+		}
+		catch (MessageListenerException mle) {
+			throw mle;
 		}
 		catch (Exception e) {
-			_log.error(
-				"Unable to process request " + message.getDestinationName(), e);
-
-			messageStatus.setException(e);
-		}
-		finally {
-			messageStatus.stopTimer();
-
-			_statusSender.send(messageStatus);
+			throw new MessageListenerException(e);
 		}
 	}
 
-	public void setResponseSender(MessageSender responseSender) {
-		_responseSender = responseSender;
-	}
-
-	public void setStatusSender(SingleDestinationMessageSender statusSender) {
-		_statusSender = statusSender;
-	}
-
-	protected abstract void doReceive(
-			Message message, MessageStatus messageStatus)
-		throws Exception;
-
-	protected MessageSender getResponseSender() {
-		return _responseSender;
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(BaseMessageListener.class);
-
-	private MessageSender _responseSender;
-	private SingleDestinationMessageSender _statusSender;
+	protected abstract void doReceive(Message message) throws Exception;
 
 }
