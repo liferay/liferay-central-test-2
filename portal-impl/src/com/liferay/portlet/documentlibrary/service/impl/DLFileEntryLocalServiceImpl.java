@@ -1208,7 +1208,8 @@ public class DLFileEntryLocalServiceImpl
 			// Social
 
 			socialActivityLocalService.addUniqueActivity(
-				latestFileVersion.getUserId(), latestFileVersion.getGroupId(),
+				latestFileVersion.getStatusByUserId(),
+				latestFileVersion.getGroupId(),
 				latestFileVersion.getCreateDate(), DLFileEntry.class.getName(),
 				fileEntryId, DLActivityKeys.ADD_FILE_ENTRY,
 				StringPool.BLANK, 0);
