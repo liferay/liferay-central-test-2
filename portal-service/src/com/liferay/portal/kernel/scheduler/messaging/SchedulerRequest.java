@@ -26,7 +26,11 @@ import java.io.Serializable;
  */
 public class SchedulerRequest implements Serializable {
 
+	public static final String COMMAND_PAUSE = "PAUSE";
+
 	public static final String COMMAND_REGISTER = "REGISTER";
+
+	public static final String COMMAND_RESUME = "RESUME";
 
 	public static final String COMMAND_RETRIEVE = "RETRIEVE";
 
@@ -37,6 +41,28 @@ public class SchedulerRequest implements Serializable {
 	public static final String COMMAND_SUPPRESS_ERROR = "SUPPRESS_ERROR";
 
 	public static final String COMMAND_UNREGISTER = "UNREGISTER";
+
+	public static SchedulerRequest createPauseRequest(String groupName) {
+
+		SchedulerRequest schedulerRequest = new SchedulerRequest();
+
+		schedulerRequest.setCommand(COMMAND_PAUSE);
+		schedulerRequest.setGroupName(groupName);
+
+		return schedulerRequest;
+	}
+
+	public static SchedulerRequest createPauseRequest(
+		String jobName, String groupName) {
+
+		SchedulerRequest schedulerRequest = new SchedulerRequest();
+
+		schedulerRequest.setCommand(COMMAND_PAUSE);
+		schedulerRequest.setGroupName(groupName);
+		schedulerRequest.setJobName(jobName);
+
+		return schedulerRequest;
+	}
 
 	public static SchedulerRequest createRegisterRequest(
 		Trigger trigger, String description, String destinationName,
@@ -49,6 +75,28 @@ public class SchedulerRequest implements Serializable {
 		schedulerRequest.setDestinationName(destinationName);
 		schedulerRequest.setMessage(message);
 		schedulerRequest.setTrigger(trigger);
+
+		return schedulerRequest;
+	}
+
+	public static SchedulerRequest createResumeRequest(String groupName) {
+
+		SchedulerRequest schedulerRequest = new SchedulerRequest();
+
+		schedulerRequest.setCommand(COMMAND_RESUME);
+		schedulerRequest.setGroupName(groupName);
+
+		return schedulerRequest;
+	}
+
+	public static SchedulerRequest createResumeRequest(
+		String jobName, String groupName) {
+
+		SchedulerRequest schedulerRequest = new SchedulerRequest();
+
+		schedulerRequest.setCommand(COMMAND_RESUME);
+		schedulerRequest.setGroupName(groupName);
+		schedulerRequest.setJobName(jobName);
 
 		return schedulerRequest;
 	}

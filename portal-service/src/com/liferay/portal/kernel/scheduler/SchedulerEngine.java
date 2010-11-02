@@ -56,6 +56,16 @@ public interface SchedulerEngine {
 	public List<SchedulerRequest> getScheduledJobs(String groupName)
 		throws SchedulerException;
 
+	public void pause(String groupName) throws SchedulerException;
+
+	public void pause(String jobName, String groupName)
+		throws SchedulerException;
+
+	public void resume(String groupName) throws SchedulerException;
+
+	public void resume(String jobName, String groupName)
+		throws SchedulerException;
+
 	public void schedule(
 			Trigger trigger, String description, String destinationName,
 			Message message)

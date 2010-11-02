@@ -60,6 +60,26 @@ public class SchedulerEngineUtil {
 		_instance._init(defaultScheduler);
 	}
 
+	public static void pause(String groupName) throws SchedulerException {
+		_instance._pause(groupName);
+	}
+
+	public static void pause(String jobName, String groupName)
+		throws SchedulerException {
+
+		_instance._pause(jobName, groupName);
+	}
+
+	public static void resume(String groupName) throws SchedulerException {
+		_instance._resume(groupName);
+	}
+
+	public static void resume(String jobName, String groupName)
+		throws SchedulerException {
+
+		_instance._resume(jobName, groupName);
+	}
+
 	public static void schedule(
 			SchedulerEntry schedulerEntry, ClassLoader classLoader)
 		throws SchedulerException {
@@ -172,6 +192,26 @@ public class SchedulerEngineUtil {
 
 	private void _init(SchedulerEngine schedulerEngine) {
 		_schedulerEngine = schedulerEngine;
+	}
+
+	private void _pause(String groupName) throws SchedulerException {
+		_schedulerEngine.pause(groupName);
+	}
+
+	private void _pause(String jobName, String groupName)
+		throws SchedulerException {
+
+		_schedulerEngine.pause(jobName, groupName);
+	}
+
+	private void _resume(String groupName) throws SchedulerException {
+		_schedulerEngine.resume(groupName);
+	}
+
+	private void _resume(String jobName, String groupName)
+		throws SchedulerException {
+
+		_schedulerEngine.resume(jobName, groupName);
 	}
 
 	private void _schedule(

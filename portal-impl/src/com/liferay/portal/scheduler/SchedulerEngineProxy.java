@@ -88,6 +88,42 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 		}
 	}
 
+	public void pause(String groupName) throws SchedulerException {
+		SchedulerRequest schedulerRequest =
+			SchedulerRequest.createPauseRequest(groupName);
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
+	}
+
+	public void pause(String jobName, String groupName)
+		throws SchedulerException {
+
+		SchedulerRequest schedulerRequest =
+			SchedulerRequest.createPauseRequest(jobName, groupName);
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
+	}
+
+	public void resume(String groupName) throws SchedulerException {
+		SchedulerRequest schedulerRequest =
+			SchedulerRequest.createResumeRequest(groupName);
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
+	}
+
+	public void resume(String jobName, String groupName)
+		throws SchedulerException {
+
+		SchedulerRequest schedulerRequest =
+			SchedulerRequest.createResumeRequest(jobName, groupName);
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
+	}
+
 	public void schedule(
 		Trigger trigger, String description, String destinationName,
 		Message message) {

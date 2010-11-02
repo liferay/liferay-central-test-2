@@ -43,12 +43,18 @@ public class SchedulerMessageListener extends BaseMessageListener {
 
 		String command = schedulerRequest.getCommand();
 
-		if (command.equals(SchedulerRequest.COMMAND_REGISTER)) {
+		if (command.equals(SchedulerRequest.COMMAND_PAUSE)) {
+			doCommandPause(schedulerRequest);
+		}
+		else if (command.equals(SchedulerRequest.COMMAND_REGISTER)) {
 			_schedulerEngine.schedule(
 				schedulerRequest.getTrigger(),
 				schedulerRequest.getDescription(),
 				schedulerRequest.getDestinationName(),
 				schedulerRequest.getMessage());
+		}
+		else if (command.equals(SchedulerRequest.COMMAND_RESUME)) {
+			doCommandResume(schedulerRequest);
 		}
 		else if (command.equals(SchedulerRequest.COMMAND_RETRIEVE)) {
 			doCommandRetrieve(message, schedulerRequest);
@@ -66,6 +72,40 @@ public class SchedulerMessageListener extends BaseMessageListener {
 		else if (command.equals(SchedulerRequest.COMMAND_UNREGISTER)) {
 			_schedulerEngine.unschedule(
 				schedulerRequest.getJobName(), schedulerRequest.getGroupName());
+		}
+	}
+
+	protected void doCommandPause(SchedulerRequest schedulerRequest)
+		throws Exception {
+
+		String jobName = schedulerRequest.getJobName();
+		String groupName = schedulerRequest.getGroupName();
+
+		if (groupName == null) {
+			return;
+		}
+		else if (jobName == null) {
+			_schedulerEngine.pause(groupName);
+		}
+		else {
+			_schedulerEngine.pause(jobName, groupName);
+		}
+	}
+
+	protected void doCommandResume(SchedulerRequest schedulerRequest)
+		throws Exception {
+
+		String jobName = schedulerRequest.getJobName();
+		String groupName = schedulerRequest.getGroupName();
+
+		if (groupName == null) {
+			return;
+		}
+		else if (jobName == null) {
+			_schedulerEngine.resume(groupName);
+		}
+		else {
+			_schedulerEngine.resume(jobName, groupName);
 		}
 	}
 

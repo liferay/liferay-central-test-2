@@ -198,6 +198,62 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 	}
 
+	public void pause(String groupName) throws SchedulerException {
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return;
+		}
+
+		try {
+			_scheduler.pauseJobGroup(groupName);
+		}
+		catch (Exception e) {
+			throw new SchedulerException("Unable to pause jobs", e);
+		}
+	}
+
+	public void pause(String jobName, String groupName)
+		throws SchedulerException {
+
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return;
+		}
+
+		try {
+			_scheduler.pauseJob(jobName, groupName);
+		}
+		catch (Exception e) {
+			throw new SchedulerException("Unable to pause job", e);
+		}
+	}
+
+	public void resume(String groupName) throws SchedulerException {
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return;
+		}
+
+		try {
+			_scheduler.resumeJobGroup(groupName);
+		}
+		catch (Exception e) {
+			throw new SchedulerException("Unable to resume jobs", e);
+		}
+	}
+
+	public void resume(String jobName, String groupName)
+		throws SchedulerException {
+
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return;
+		}
+
+		try {
+			_scheduler.resumeJob(jobName, groupName);
+		}
+		catch (Exception e) {
+			throw new SchedulerException("Unable to resume job", e);
+		}
+	}
+
 	public void schedule(
 			com.liferay.portal.kernel.scheduler.Trigger trigger,
 			String description, String destination, Message message)
