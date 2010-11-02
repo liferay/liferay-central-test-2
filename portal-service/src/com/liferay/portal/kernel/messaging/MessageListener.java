@@ -19,6 +19,6 @@ package com.liferay.portal.kernel.messaging;
  */
 public interface MessageListener {
 
-	public void receive(Message message);
+	public void receive(Message message) throws MessageListenerException;
 
 }

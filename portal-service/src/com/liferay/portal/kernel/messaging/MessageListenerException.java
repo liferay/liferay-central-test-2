@@ -19,21 +19,21 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Brian Wing Shun Chan
  */
-public class MessageBusException extends PortalException {
+public class MessageListenerException extends PortalException {
 
-	public MessageBusException() {
+	public MessageListenerException() {
 		super();
 	}
 
-	public MessageBusException(String msg) {
+	public MessageListenerException(String msg) {
 		super(msg);
 	}
 
-	public MessageBusException(String msg, Throwable cause) {
+	public MessageListenerException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public MessageBusException(Throwable cause) {
+	public MessageListenerException(Throwable cause) {
 		super(cause);
 	}
 

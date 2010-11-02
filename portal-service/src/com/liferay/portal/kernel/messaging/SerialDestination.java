@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.messaging;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ThreadLocalRegistry;
 
 import java.util.Set;
@@ -53,7 +55,13 @@ public class SerialDestination extends BaseDestination {
 			public void run() {
 				try {
 					for (MessageListener messageListener : messageListeners) {
-						messageListener.receive(message);
+						try {
+							messageListener.receive(message);
+						}
+						catch (MessageListenerException mle) {
+							_log.error(
+								"Unable to process message " + message, mle);
+						}
 					}
 				}
 				finally {
@@ -69,5 +77,7 @@ public class SerialDestination extends BaseDestination {
 	private static final int _WORKERS_CORE_SIZE = 1;
 
 	private static final int _WORKERS_MAX_SIZE = 1;
+
+	private static Log _log = LogFactoryUtil.getLog(SerialDestination.class);
 
 }

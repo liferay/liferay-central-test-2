@@ -62,16 +62,9 @@ public class SchedulerEventMessageListenerWrapper implements MessageListener {
 		if (receiverKey.equals(_key)) {
 			try{
 				_messageListener.receive(message);
-
-				Exception exception = (Exception)message.get(
-					SchedulerEngine.EXCEPTION);
-
-				if (exception != null) {
-					handleException(message, exception);
-				}
 			}
-			catch (RuntimeException re) {
-				handleException(message, re);
+			catch (Exception e) {
+				handleException(message, e);
 			}
 			finally {
 				if (message.getBoolean(SchedulerEngine.DISABLE)) {

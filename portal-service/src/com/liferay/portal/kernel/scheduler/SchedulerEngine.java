@@ -35,8 +35,6 @@ public interface SchedulerEngine {
 
 	public static final String DISABLE = "disable";
 
-	public static final String EXCEPTION = "exception";
-
 	public static final String JOB_STATE = "job_state";
 
 	public static final int GROUP_NAME_MAX_LENGTH = 80;

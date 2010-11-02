@@ -52,7 +52,7 @@ public class InvokerMessageListener implements MessageListener {
 		return _messageListener.hashCode();
 	}
 
-	public void receive(Message message) {
+	public void receive(Message message) throws MessageListenerException {
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
