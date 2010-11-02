@@ -101,18 +101,6 @@ public class Member_MoveImageTest extends BaseTestCase {
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=folder");
 		selenium.saveScreenShotAndSource();
-
-		String folderWindow = selenium.getLocation();
-		RuntimeVariables.setValue("folderWindow", folderWindow);
-		selenium.close();
-		selenium.selectWindow("null");
-		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
-		selenium.openWindow(RuntimeVariables.getValue("folderWindow"),
-			RuntimeVariables.replace("FolderWindow"));
-		selenium.waitForPopUp("FolderWindow", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("name=FolderWindow");
-		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -188,9 +176,8 @@ public class Member_MoveImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace("")
-										.equals(selenium.getText(
-								"Your request processed successfully."))) {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
 					break;
 				}
 			}

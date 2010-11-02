@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.permissions.blogs.portlet;
+package com.liferay.portalweb.portal.permissions.imagegallery.portlet;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,16 +20,20 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class SA_AllowAccessInControlPanelPermissionsTest extends BaseTestCase {
-	public void testSA_AllowAccessInControlPanelPermissions()
+public class SA_DisableAllowAccessInControlPanelPermissionsTest
+	extends BaseTestCase {
+	public void testSA_DisableAllowAccessInControlPanelPermissions()
 		throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs Permissions Page")) {
+				if (selenium.isElementPresent(
+							"link=Image Gallery Permissions Test Page")) {
 					break;
 				}
 			}
@@ -40,7 +44,7 @@ public class SA_AllowAccessInControlPanelPermissionsTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Blogs Permissions Page",
+		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -72,7 +76,7 @@ public class SA_AllowAccessInControlPanelPermissionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Permissions")) {
+				if (selenium.isVisible("//tr[7]/td[2]/input")) {
 					break;
 				}
 			}
@@ -83,35 +87,19 @@ public class SA_AllowAccessInControlPanelPermissionsTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent(
+				"//tr[7]/td[2]/input[@disabled='']"));
+		assertFalse(selenium.isChecked("//tr[7]/td[2]/input[@disabled='']"));
 		selenium.saveScreenShotAndSource();
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
-		selenium.check("//tr[7]/td[2]/input");
+		selenium.clickAt("//tr[7]/td[2]/input[@disabled='']",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
-		assertTrue(selenium.isChecked("//tr[7]/td[2]/input"));
+		assertFalse(selenium.isChecked("//tr[7]/td[2]/input[@disabled='']"));
 		selenium.saveScreenShotAndSource();
 	}
 }

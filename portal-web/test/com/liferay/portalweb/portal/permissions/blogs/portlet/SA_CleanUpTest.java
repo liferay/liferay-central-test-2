@@ -103,7 +103,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
-				selenium.type("layout_configuration_content",
+				selenium.typeKeys("layout_configuration_content",
 					RuntimeVariables.replace("b"));
 				selenium.saveScreenShotAndSource();
 

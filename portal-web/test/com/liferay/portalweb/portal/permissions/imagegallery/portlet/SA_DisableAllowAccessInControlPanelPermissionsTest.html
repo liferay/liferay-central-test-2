@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>SA_AllowAccessInControlPanelPermissionsTest</title>
+<title>SA_DisableAllowAccessInControlPanelPermissionsTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">SA_AllowAccessInControlPanelPermissionsTest</td></tr>
+<tr><td rowspan="1" colspan="3">SA_DisableAllowAccessInControlPanelPermissionsTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -15,12 +15,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Document Library Permissions Test Page</td>
+	<td>link=Image Gallery Permissions Test Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Document Library Permissions Test Page</td>
+	<td>link=Image Gallery Permissions Test Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -40,17 +40,22 @@
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//li[@id='_86_tabs1permissionsTabsId']/span/span/a</td>
-	<td>Permissions</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//li[@id='_86_tabs1permissionsTabsId']/span/span/a</td>
-	<td>Permissions</td>
-</tr>
-<tr>
-	<td>check</td>
 	<td>//tr[7]/td[2]/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//tr[7]/td[2]/input[@disabled='']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotChecked</td>
+	<td>//tr[7]/td[2]/input[@disabled='']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//tr[7]/td[2]/input[@disabled='']</td>
 	<td></td>
 </tr>
 <tr>
@@ -64,8 +69,8 @@
 	<td>Your request processed successfully.</td>
 </tr>
 <tr>
-	<td>assertChecked</td>
-	<td>//tr[7]/td[2]/input</td>
+	<td>assertNotChecked</td>
+	<td>//tr[7]/td[2]/input[@disabled='']</td>
 	<td></td>
 </tr>
 

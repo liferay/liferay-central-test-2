@@ -54,21 +54,12 @@ public class PortletTests extends BaseTests {
 		testSuite.addTestSuite(SA_LoginTest.class);
 		testSuite.addTestSuite(SA_RemoveConfigurePortletPermissionsTest.class);
 		testSuite.addTestSuite(
-			SA_RemoveAccessInControlPanelPermissionsTest.class);
+			SA_DisableAllowAccessInControlPanelPermissionsTest.class);
 		testSuite.addTestSuite(SA_LogoutTest.class);
 		testSuite.addTestSuite(Portlet_LoginTest.class);
 		testSuite.addTestSuite(Portlet_AssertNoAccessInControlPanelTest.class);
 		testSuite.addTestSuite(Portlet_LogoutTest.class);
 		testSuite.addTestSuite(SA_LoginTest.class);
-		testSuite.addTestSuite(
-			SA_AllowAccessInControlPanelPermissionsTest.class);
-		testSuite.addTestSuite(SA_LogoutTest.class);
-		testSuite.addTestSuite(Portlet_LoginTest.class);
-		testSuite.addTestSuite(Portlet_AssertAccessInControlPanelTest.class);
-		testSuite.addTestSuite(Portlet_LogoutTest.class);
-		testSuite.addTestSuite(SA_LoginTest.class);
-		testSuite.addTestSuite(
-			SA_RemoveAccessInControlPanelPermissionsTest.class);
 		testSuite.addTestSuite(SA_AddTemporaryFolderTest.class);
 		testSuite.addTestSuite(SA_RemoveViewFolderPermissionsTest.class);
 		testSuite.addTestSuite(SA_LogoutTest.class);

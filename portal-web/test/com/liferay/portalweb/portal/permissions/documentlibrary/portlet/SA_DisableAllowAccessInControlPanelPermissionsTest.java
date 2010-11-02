@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.permissions.imagegallery.portlet;
+package com.liferay.portalweb.portal.permissions.documentlibrary.portlet;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,9 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class SA_RemoveAccessInControlPanelPermissionsTest extends BaseTestCase {
-	public void testSA_RemoveAccessInControlPanelPermissions()
+public class SA_DisableAllowAccessInControlPanelPermissionsTest
+	extends BaseTestCase {
+	public void testSA_DisableAllowAccessInControlPanelPermissions()
 		throws Exception {
 		selenium.open("/web/guest/home/");
 
@@ -32,7 +33,7 @@ public class SA_RemoveAccessInControlPanelPermissionsTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"link=Image Gallery Permissions Test Page")) {
+							"link=Document Library Permissions Test Page")) {
 					break;
 				}
 			}
@@ -43,7 +44,7 @@ public class SA_RemoveAccessInControlPanelPermissionsTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Image Gallery Permissions Test Page",
+		selenium.clickAt("link=Document Library Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -75,6 +76,29 @@ public class SA_RemoveAccessInControlPanelPermissionsTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isVisible(
+							"//li[@id='_86_tabs1permissionsTabsId']/span/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("//li[@id='_86_tabs1permissionsTabsId']/span/span/a",
+			RuntimeVariables.replace("Permissions"));
+		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isVisible("//tr[7]/td[2]/input")) {
 					break;
 				}
@@ -86,14 +110,19 @@ public class SA_RemoveAccessInControlPanelPermissionsTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.uncheck("//tr[7]/td[2]/input");
+		assertTrue(selenium.isElementPresent(
+				"//tr[7]/td[2]/input[@disabled='']"));
+		assertFalse(selenium.isChecked("//tr[7]/td[2]/input[@disabled='']"));
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("//tr[7]/td[2]/input[@disabled='']",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
-		assertFalse(selenium.isChecked("//tr[7]/td[2]/input"));
+		assertFalse(selenium.isChecked("//tr[7]/td[2]/input[@disabled='']"));
 		selenium.saveScreenShotAndSource();
 	}
 }
