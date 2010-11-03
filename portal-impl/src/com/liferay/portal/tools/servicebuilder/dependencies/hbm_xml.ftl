@@ -78,10 +78,12 @@
 
 					<#if column.isPrimitiveType() || column.type == "String">
 						type="com.liferay.portal.dao.orm.hibernate.${serviceBuilder.getPrimitiveObj("${column.type}")}Type"
-					</#if>
-
-					<#if column.type == "Date">
-						type="org.hibernate.type.TimestampType"
+					<#else>
+						<#if column.type == "Date">
+							type="org.hibernate.type.TimestampType"
+						<#else>
+							type="org.hibernate.type.${column.type}Type"
+						</#if>
 					</#if>
 
 					/>
