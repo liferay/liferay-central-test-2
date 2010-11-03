@@ -35,7 +35,10 @@ public class SQLTransformer {
 	private SQLTransformer() {
 		DB db = DBFactoryUtil.getDB();
 
-		if (db.getType().equals(DB.TYPE_DERBY)) {
+		if (db.getType().equals(DB.TYPE_DB2)) {
+			_vendorDB2 = true;
+		}
+		else if (db.getType().equals(DB.TYPE_DERBY)) {
 			_vendorDerby = true;
 		}
 		else if (db.getType().equals(DB.TYPE_MYSQL)) {
@@ -95,7 +98,10 @@ public class SQLTransformer {
 	private String _replaceCastText(String sql) {
 		Matcher matcher = _castTextPattern.matcher(sql);
 
-		if (_vendorDerby) {
+		if (_vendorDB2) {
+			return matcher.replaceAll("CHAR($1)");
+		}
+		else if (_vendorDerby) {
 			return matcher.replaceAll("CAST($1 AS CHAR(254))");
 		}
 		else if (_vendorPostgreSQL) {
@@ -167,6 +173,7 @@ public class SQLTransformer {
 	private static Pattern _unionAllPattern = Pattern.compile(
 		"SELECT \\* FROM(.*)TEMP_TABLE(.*)", Pattern.CASE_INSENSITIVE);
 
+	private boolean _vendorDB2;
 	private boolean _vendorDerby;
 	private boolean _vendorMySQL;
 	private boolean _vendorPostgreSQL;

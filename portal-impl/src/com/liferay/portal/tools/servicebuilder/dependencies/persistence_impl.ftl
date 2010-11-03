@@ -3500,9 +3500,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 			<#if finderCol.type == "String" && !finderCol.isCaseSensitive()>
 				<#if entity.hasCompoundPK() && finderCol.isPrimary()>
-					<#assign finderColExpression = "lower(" + entity.alias + ".id." + finderCol.name + ") " + finderCol.comparator + " lower(?)">
+					<#assign finderColExpression = "lower(" + entity.alias + ".id." + finderCol.name + ") " + finderCol.comparator + " lower(CAST_TEXT(?))">
 				<#else>
-					<#assign finderColExpression = "lower(" + entity.alias + "." + finderCol.name + ") " + finderCol.comparator + " lower(?)">
+					<#assign finderColExpression = "lower(" + entity.alias + "." + finderCol.name + ") " + finderCol.comparator + " lower(CAST_TEXT(?))">
 				</#if>
 			<#else>
 				<#if entity.hasCompoundPK() && finderCol.isPrimary()>
