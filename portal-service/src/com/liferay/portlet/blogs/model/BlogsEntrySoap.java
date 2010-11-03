@@ -45,10 +45,14 @@ public class BlogsEntrySoap implements Serializable {
 		soapModel.setTitle(model.getTitle());
 		soapModel.setUrlTitle(model.getUrlTitle());
 		soapModel.setContent(model.getContent());
+		soapModel.setDescription(model.getDescription());
 		soapModel.setDisplayDate(model.getDisplayDate());
 		soapModel.setAllowPingbacks(model.getAllowPingbacks());
 		soapModel.setAllowTrackbacks(model.getAllowTrackbacks());
 		soapModel.setTrackbacks(model.getTrackbacks());
+		soapModel.setSmallImage(model.getSmallImage());
+		soapModel.setSmallImageId(model.getSmallImageId());
+		soapModel.setSmallImageURL(model.getSmallImageURL());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setStatusByUserId(model.getStatusByUserId());
 		soapModel.setStatusByUserName(model.getStatusByUserName());
@@ -193,6 +197,14 @@ public class BlogsEntrySoap implements Serializable {
 		_content = content;
 	}
 
+	public String getDescription() {
+		return _description;
+	}
+
+	public void setDescription(String description) {
+		_description = description;
+	}
+
 	public Date getDisplayDate() {
 		return _displayDate;
 	}
@@ -231,6 +243,34 @@ public class BlogsEntrySoap implements Serializable {
 
 	public void setTrackbacks(String trackbacks) {
 		_trackbacks = trackbacks;
+	}
+
+	public boolean getSmallImage() {
+		return _smallImage;
+	}
+
+	public boolean isSmallImage() {
+		return _smallImage;
+	}
+
+	public void setSmallImage(boolean smallImage) {
+		_smallImage = smallImage;
+	}
+
+	public long getSmallImageId() {
+		return _smallImageId;
+	}
+
+	public void setSmallImageId(long smallImageId) {
+		_smallImageId = smallImageId;
+	}
+
+	public String getSmallImageURL() {
+		return _smallImageURL;
+	}
+
+	public void setSmallImageURL(String smallImageURL) {
+		_smallImageURL = smallImageURL;
 	}
 
 	public int getStatus() {
@@ -276,10 +316,14 @@ public class BlogsEntrySoap implements Serializable {
 	private String _title;
 	private String _urlTitle;
 	private String _content;
+	private String _description;
 	private Date _displayDate;
 	private boolean _allowPingbacks;
 	private boolean _allowTrackbacks;
 	private String _trackbacks;
+	private boolean _smallImage;
+	private long _smallImageId;
+	private String _smallImageURL;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserName;

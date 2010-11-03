@@ -24,6 +24,8 @@ import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
+import com.liferay.portal.service.ImageLocalService;
+import com.liferay.portal.service.ImageService;
 import com.liferay.portal.service.OrganizationLocalService;
 import com.liferay.portal.service.OrganizationService;
 import com.liferay.portal.service.PortletPreferencesLocalService;
@@ -37,6 +39,7 @@ import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupPersistence;
+import com.liferay.portal.service.persistence.ImagePersistence;
 import com.liferay.portal.service.persistence.OrganizationFinder;
 import com.liferay.portal.service.persistence.OrganizationPersistence;
 import com.liferay.portal.service.persistence.PortletPreferencesFinder;
@@ -371,6 +374,60 @@ public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
 	 */
 	public void setGroupFinder(GroupFinder groupFinder) {
 		this.groupFinder = groupFinder;
+	}
+
+	/**
+	 * Gets the image local service.
+	 *
+	 * @return the image local service
+	 */
+	public ImageLocalService getImageLocalService() {
+		return imageLocalService;
+	}
+
+	/**
+	 * Sets the image local service.
+	 *
+	 * @param imageLocalService the image local service
+	 */
+	public void setImageLocalService(ImageLocalService imageLocalService) {
+		this.imageLocalService = imageLocalService;
+	}
+
+	/**
+	 * Gets the image remote service.
+	 *
+	 * @return the image remote service
+	 */
+	public ImageService getImageService() {
+		return imageService;
+	}
+
+	/**
+	 * Sets the image remote service.
+	 *
+	 * @param imageService the image remote service
+	 */
+	public void setImageService(ImageService imageService) {
+		this.imageService = imageService;
+	}
+
+	/**
+	 * Gets the image persistence.
+	 *
+	 * @return the image persistence
+	 */
+	public ImagePersistence getImagePersistence() {
+		return imagePersistence;
+	}
+
+	/**
+	 * Sets the image persistence.
+	 *
+	 * @param imagePersistence the image persistence
+	 */
+	public void setImagePersistence(ImagePersistence imagePersistence) {
+		this.imagePersistence = imagePersistence;
 	}
 
 	/**
@@ -1183,6 +1240,12 @@ public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
 	protected GroupPersistence groupPersistence;
 	@BeanReference(type = GroupFinder.class)
 	protected GroupFinder groupFinder;
+	@BeanReference(type = ImageLocalService.class)
+	protected ImageLocalService imageLocalService;
+	@BeanReference(type = ImageService.class)
+	protected ImageService imageService;
+	@BeanReference(type = ImagePersistence.class)
+	protected ImagePersistence imagePersistence;
 	@BeanReference(type = OrganizationLocalService.class)
 	protected OrganizationLocalService organizationLocalService;
 	@BeanReference(type = OrganizationService.class)

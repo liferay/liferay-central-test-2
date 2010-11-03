@@ -41,10 +41,12 @@ import com.liferay.portal.kernel.exception.SystemException;
 	PortalException.class, SystemException.class})
 public interface BlogsEntryService {
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		java.lang.String title, java.lang.String content, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, boolean allowPingbacks, boolean allowTrackbacks,
-		java.lang.String[] trackbacks,
+		java.lang.String title, java.lang.String content,
+		java.lang.String description, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		boolean allowPingbacks, boolean allowTrackbacks,
+		java.lang.String[] trackbacks, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -125,9 +127,11 @@ public interface BlogsEntryService {
 
 	public com.liferay.portlet.blogs.model.BlogsEntry updateEntry(
 		long entryId, java.lang.String title, java.lang.String content,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, boolean allowPingbacks,
-		boolean allowTrackbacks, java.lang.String[] trackbacks,
+		java.lang.String description, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		boolean allowPingbacks, boolean allowTrackbacks,
+		java.lang.String[] trackbacks, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

@@ -56,10 +56,12 @@ import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 public class BlogsEntryServiceHttp {
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		HttpPrincipal httpPrincipal, java.lang.String title,
-		java.lang.String content, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean allowPingbacks, boolean allowTrackbacks,
-		java.lang.String[] trackbacks,
+		java.lang.String content, java.lang.String description,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, boolean allowPingbacks,
+		boolean allowTrackbacks, java.lang.String[] trackbacks,
+		boolean smallImage, java.lang.String smallImageURL,
+		java.io.File smallFile,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -68,9 +70,10 @@ public class BlogsEntryServiceHttp {
 					"addEntry", _addEntryParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, title,
-					content, displayDateMonth, displayDateDay, displayDateYear,
-					displayDateHour, displayDateMinute, allowPingbacks,
-					allowTrackbacks, trackbacks, serviceContext);
+					content, description, displayDateMonth, displayDateDay,
+					displayDateYear, displayDateHour, displayDateMinute,
+					allowPingbacks, allowTrackbacks, trackbacks, smallImage,
+					smallImageURL, smallFile, serviceContext);
 
 			Object returnObj = null;
 
@@ -537,10 +540,12 @@ public class BlogsEntryServiceHttp {
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateEntry(
 		HttpPrincipal httpPrincipal, long entryId, java.lang.String title,
-		java.lang.String content, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean allowPingbacks, boolean allowTrackbacks,
-		java.lang.String[] trackbacks,
+		java.lang.String content, java.lang.String description,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, boolean allowPingbacks,
+		boolean allowTrackbacks, java.lang.String[] trackbacks,
+		boolean smallImage, java.lang.String smallImageURL,
+		java.io.File smallFile,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -549,9 +554,11 @@ public class BlogsEntryServiceHttp {
 					"updateEntry", _updateEntryParameterTypes13);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId,
-					title, content, displayDateMonth, displayDateDay,
-					displayDateYear, displayDateHour, displayDateMinute,
-					allowPingbacks, allowTrackbacks, trackbacks, serviceContext);
+					title, content, description, displayDateMonth,
+					displayDateDay, displayDateYear, displayDateHour,
+					displayDateMinute, allowPingbacks, allowTrackbacks,
+					trackbacks, smallImage, smallImageURL, smallFile,
+					serviceContext);
 
 			Object returnObj = null;
 
@@ -581,9 +588,10 @@ public class BlogsEntryServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(BlogsEntryServiceHttp.class);
 	private static final Class<?>[] _addEntryParameterTypes0 = new Class[] {
-			java.lang.String.class, java.lang.String.class, int.class, int.class,
-			int.class, int.class, int.class, boolean.class, boolean.class,
-			java.lang.String[].class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, int.class, int.class, int.class, int.class,
+			int.class, boolean.class, boolean.class, java.lang.String[].class,
+			boolean.class, java.lang.String.class, java.io.File.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteEntryParameterTypes1 = new Class[] {
@@ -630,8 +638,9 @@ public class BlogsEntryServiceHttp {
 		};
 	private static final Class<?>[] _updateEntryParameterTypes13 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
-			int.class, int.class, int.class, int.class, int.class, boolean.class,
-			boolean.class, java.lang.String[].class,
+			java.lang.String.class, int.class, int.class, int.class, int.class,
+			int.class, boolean.class, boolean.class, java.lang.String[].class,
+			boolean.class, java.lang.String.class, java.io.File.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 }

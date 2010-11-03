@@ -29,17 +29,19 @@ public class BlogsEntryServiceWrapper implements BlogsEntryService {
 	}
 
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		java.lang.String title, java.lang.String content, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, boolean allowPingbacks, boolean allowTrackbacks,
-		java.lang.String[] trackbacks,
+		java.lang.String title, java.lang.String content,
+		java.lang.String description, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		boolean allowPingbacks, boolean allowTrackbacks,
+		java.lang.String[] trackbacks, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _blogsEntryService.addEntry(title, content, displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour,
+		return _blogsEntryService.addEntry(title, content, description,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, allowPingbacks, allowTrackbacks, trackbacks,
-			serviceContext);
+			smallImage, smallImageURL, smallFile, serviceContext);
 	}
 
 	public void deleteEntry(long entryId)
@@ -137,15 +139,18 @@ public class BlogsEntryServiceWrapper implements BlogsEntryService {
 
 	public com.liferay.portlet.blogs.model.BlogsEntry updateEntry(
 		long entryId, java.lang.String title, java.lang.String content,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, boolean allowPingbacks,
-		boolean allowTrackbacks, java.lang.String[] trackbacks,
+		java.lang.String description, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		boolean allowPingbacks, boolean allowTrackbacks,
+		java.lang.String[] trackbacks, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _blogsEntryService.updateEntry(entryId, title, content,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, allowPingbacks, allowTrackbacks, trackbacks,
+			description, displayDateMonth, displayDateDay, displayDateYear,
+			displayDateHour, displayDateMinute, allowPingbacks,
+			allowTrackbacks, trackbacks, smallImage, smallImageURL, smallFile,
 			serviceContext);
 	}
 

@@ -47,6 +47,7 @@ import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.GroupPersistence;
+import com.liferay.portal.service.persistence.ImagePersistence;
 import com.liferay.portal.service.persistence.OrganizationPersistence;
 import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
 import com.liferay.portal.service.persistence.ResourcePersistence;
@@ -640,10 +641,14 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		blogsEntryImpl.setTitle(blogsEntry.getTitle());
 		blogsEntryImpl.setUrlTitle(blogsEntry.getUrlTitle());
 		blogsEntryImpl.setContent(blogsEntry.getContent());
+		blogsEntryImpl.setDescription(blogsEntry.getDescription());
 		blogsEntryImpl.setDisplayDate(blogsEntry.getDisplayDate());
 		blogsEntryImpl.setAllowPingbacks(blogsEntry.isAllowPingbacks());
 		blogsEntryImpl.setAllowTrackbacks(blogsEntry.isAllowTrackbacks());
 		blogsEntryImpl.setTrackbacks(blogsEntry.getTrackbacks());
+		blogsEntryImpl.setSmallImage(blogsEntry.isSmallImage());
+		blogsEntryImpl.setSmallImageId(blogsEntry.getSmallImageId());
+		blogsEntryImpl.setSmallImageURL(blogsEntry.getSmallImageURL());
 		blogsEntryImpl.setStatus(blogsEntry.getStatus());
 		blogsEntryImpl.setStatusByUserId(blogsEntry.getStatusByUserId());
 		blogsEntryImpl.setStatusByUserName(blogsEntry.getStatusByUserName());
@@ -9039,6 +9044,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	protected CompanyPersistence companyPersistence;
 	@BeanReference(type = GroupPersistence.class)
 	protected GroupPersistence groupPersistence;
+	@BeanReference(type = ImagePersistence.class)
+	protected ImagePersistence imagePersistence;
 	@BeanReference(type = OrganizationPersistence.class)
 	protected OrganizationPersistence organizationPersistence;
 	@BeanReference(type = PortletPreferencesPersistence.class)

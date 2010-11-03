@@ -232,6 +232,21 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry> {
 	public void setContent(String content);
 
 	/**
+	 * Gets the description of this blogs entry.
+	 *
+	 * @return the description of this blogs entry
+	 */
+	@AutoEscape
+	public String getDescription();
+
+	/**
+	 * Sets the description of this blogs entry.
+	 *
+	 * @param description the description of this blogs entry
+	 */
+	public void setDescription(String description);
+
+	/**
 	 * Gets the display date of this blogs entry.
 	 *
 	 * @return the display date of this blogs entry
@@ -301,6 +316,56 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry> {
 	 * @param trackbacks the trackbacks of this blogs entry
 	 */
 	public void setTrackbacks(String trackbacks);
+
+	/**
+	 * Gets the small image of this blogs entry.
+	 *
+	 * @return the small image of this blogs entry
+	 */
+	public boolean getSmallImage();
+
+	/**
+	 * Determines if this blogs entry is small image.
+	 *
+	 * @return <code>true</code> if this blogs entry is small image; <code>false</code> otherwise
+	 */
+	public boolean isSmallImage();
+
+	/**
+	 * Sets whether this blogs entry is small image.
+	 *
+	 * @param smallImage the small image of this blogs entry
+	 */
+	public void setSmallImage(boolean smallImage);
+
+	/**
+	 * Gets the small image id of this blogs entry.
+	 *
+	 * @return the small image id of this blogs entry
+	 */
+	public long getSmallImageId();
+
+	/**
+	 * Sets the small image id of this blogs entry.
+	 *
+	 * @param smallImageId the small image id of this blogs entry
+	 */
+	public void setSmallImageId(long smallImageId);
+
+	/**
+	 * Gets the small image u r l of this blogs entry.
+	 *
+	 * @return the small image u r l of this blogs entry
+	 */
+	@AutoEscape
+	public String getSmallImageURL();
+
+	/**
+	 * Sets the small image u r l of this blogs entry.
+	 *
+	 * @param smallImageURL the small image u r l of this blogs entry
+	 */
+	public void setSmallImageURL(String smallImageURL);
 
 	/**
 	 * Gets the status of this blogs entry.

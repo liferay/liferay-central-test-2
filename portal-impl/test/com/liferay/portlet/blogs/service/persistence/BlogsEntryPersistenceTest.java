@@ -75,10 +75,14 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 		newBlogsEntry.setTitle(randomString());
 		newBlogsEntry.setUrlTitle(randomString());
 		newBlogsEntry.setContent(randomString());
+		newBlogsEntry.setDescription(randomString());
 		newBlogsEntry.setDisplayDate(nextDate());
 		newBlogsEntry.setAllowPingbacks(randomBoolean());
 		newBlogsEntry.setAllowTrackbacks(randomBoolean());
 		newBlogsEntry.setTrackbacks(randomString());
+		newBlogsEntry.setSmallImage(randomBoolean());
+		newBlogsEntry.setSmallImageId(nextLong());
+		newBlogsEntry.setSmallImageURL(randomString());
 		newBlogsEntry.setStatus(nextInt());
 		newBlogsEntry.setStatusByUserId(nextLong());
 		newBlogsEntry.setStatusByUserName(randomString());
@@ -105,6 +109,8 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingBlogsEntry.getUrlTitle(),
 			newBlogsEntry.getUrlTitle());
 		assertEquals(existingBlogsEntry.getContent(), newBlogsEntry.getContent());
+		assertEquals(existingBlogsEntry.getDescription(),
+			newBlogsEntry.getDescription());
 		assertEquals(Time.getShortTimestamp(existingBlogsEntry.getDisplayDate()),
 			Time.getShortTimestamp(newBlogsEntry.getDisplayDate()));
 		assertEquals(existingBlogsEntry.getAllowPingbacks(),
@@ -113,6 +119,12 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 			newBlogsEntry.getAllowTrackbacks());
 		assertEquals(existingBlogsEntry.getTrackbacks(),
 			newBlogsEntry.getTrackbacks());
+		assertEquals(existingBlogsEntry.getSmallImage(),
+			newBlogsEntry.getSmallImage());
+		assertEquals(existingBlogsEntry.getSmallImageId(),
+			newBlogsEntry.getSmallImageId());
+		assertEquals(existingBlogsEntry.getSmallImageURL(),
+			newBlogsEntry.getSmallImageURL());
 		assertEquals(existingBlogsEntry.getStatus(), newBlogsEntry.getStatus());
 		assertEquals(existingBlogsEntry.getStatusByUserId(),
 			newBlogsEntry.getStatusByUserId());
@@ -203,10 +215,14 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 		blogsEntry.setTitle(randomString());
 		blogsEntry.setUrlTitle(randomString());
 		blogsEntry.setContent(randomString());
+		blogsEntry.setDescription(randomString());
 		blogsEntry.setDisplayDate(nextDate());
 		blogsEntry.setAllowPingbacks(randomBoolean());
 		blogsEntry.setAllowTrackbacks(randomBoolean());
 		blogsEntry.setTrackbacks(randomString());
+		blogsEntry.setSmallImage(randomBoolean());
+		blogsEntry.setSmallImageId(nextLong());
+		blogsEntry.setSmallImageURL(randomString());
 		blogsEntry.setStatus(nextInt());
 		blogsEntry.setStatusByUserId(nextLong());
 		blogsEntry.setStatusByUserName(randomString());

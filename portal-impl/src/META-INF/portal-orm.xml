@@ -1307,12 +1307,16 @@
 			<basic name="title" />
 			<basic name="urlTitle" />
 			<basic name="content" />
+			<basic name="description" />
 			<basic name="displayDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="allowPingbacks" />
 			<basic name="allowTrackbacks" />
 			<basic name="trackbacks" />
+			<basic name="smallImage" />
+			<basic name="smallImageId" />
+			<basic name="smallImageURL" />
 			<basic name="status" />
 			<basic name="statusByUserId" />
 			<basic name="statusByUserName" />
@@ -3118,7 +3122,9 @@
 	</entity>
 	<entity class="com.liferay.portlet.blogs.model.impl.BlogsEntryImpl" name="BlogsEntry">
 		<table name="BlogsEntry" />
-		<attributes />
+		<attributes>
+			<transient name="smallImageType" />
+		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl" name="BlogsStatsUser">
 		<table name="BlogsStatsUser" />

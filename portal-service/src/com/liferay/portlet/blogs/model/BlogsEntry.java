@@ -32,4 +32,9 @@ package com.liferay.portlet.blogs.model;
  * @generated
  */
 public interface BlogsEntry extends BlogsEntryModel {
+	public java.lang.String getSmallImageType()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void setSmallImageType(java.lang.String smallImageType);
 }

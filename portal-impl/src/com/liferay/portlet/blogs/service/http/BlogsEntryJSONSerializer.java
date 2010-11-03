@@ -61,6 +61,7 @@ public class BlogsEntryJSONSerializer {
 		jsonObj.put("title", model.getTitle());
 		jsonObj.put("urlTitle", model.getUrlTitle());
 		jsonObj.put("content", model.getContent());
+		jsonObj.put("description", model.getDescription());
 
 		Date displayDate = model.getDisplayDate();
 
@@ -74,6 +75,9 @@ public class BlogsEntryJSONSerializer {
 		jsonObj.put("allowPingbacks", model.getAllowPingbacks());
 		jsonObj.put("allowTrackbacks", model.getAllowTrackbacks());
 		jsonObj.put("trackbacks", model.getTrackbacks());
+		jsonObj.put("smallImage", model.getSmallImage());
+		jsonObj.put("smallImageId", model.getSmallImageId());
+		jsonObj.put("smallImageURL", model.getSmallImageURL());
 		jsonObj.put("status", model.getStatus());
 		jsonObj.put("statusByUserId", model.getStatusByUserId());
 		jsonObj.put("statusByUserName", model.getStatusByUserName());

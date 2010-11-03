@@ -533,15 +533,13 @@ Liferay.Service.register("Liferay.Service.Blogs", "com.liferay.portlet.blogs.ser
 Liferay.Service.registerClass(
 	Liferay.Service.Blogs, "BlogsEntry",
 	{
-		addEntry: true,
 		deleteEntry: true,
 		getCompanyEntries: true,
 		getEntry: true,
 		getGroupEntries: true,
 		getGroupEntriesCount: true,
 		getGroupsEntries: true,
-		getOrganizationEntries: true,
-		updateEntry: true
+		getOrganizationEntries: true
 	}
 );
 

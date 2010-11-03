@@ -265,6 +265,24 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
+	* Gets the description of this blogs entry.
+	*
+	* @return the description of this blogs entry
+	*/
+	public java.lang.String getDescription() {
+		return _blogsEntry.getDescription();
+	}
+
+	/**
+	* Sets the description of this blogs entry.
+	*
+	* @param description the description of this blogs entry
+	*/
+	public void setDescription(java.lang.String description) {
+		_blogsEntry.setDescription(description);
+	}
+
+	/**
 	* Gets the display date of this blogs entry.
 	*
 	* @return the display date of this blogs entry
@@ -352,6 +370,69 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	*/
 	public void setTrackbacks(java.lang.String trackbacks) {
 		_blogsEntry.setTrackbacks(trackbacks);
+	}
+
+	/**
+	* Gets the small image of this blogs entry.
+	*
+	* @return the small image of this blogs entry
+	*/
+	public boolean getSmallImage() {
+		return _blogsEntry.getSmallImage();
+	}
+
+	/**
+	* Determines if this blogs entry is small image.
+	*
+	* @return <code>true</code> if this blogs entry is small image; <code>false</code> otherwise
+	*/
+	public boolean isSmallImage() {
+		return _blogsEntry.isSmallImage();
+	}
+
+	/**
+	* Sets whether this blogs entry is small image.
+	*
+	* @param smallImage the small image of this blogs entry
+	*/
+	public void setSmallImage(boolean smallImage) {
+		_blogsEntry.setSmallImage(smallImage);
+	}
+
+	/**
+	* Gets the small image id of this blogs entry.
+	*
+	* @return the small image id of this blogs entry
+	*/
+	public long getSmallImageId() {
+		return _blogsEntry.getSmallImageId();
+	}
+
+	/**
+	* Sets the small image id of this blogs entry.
+	*
+	* @param smallImageId the small image id of this blogs entry
+	*/
+	public void setSmallImageId(long smallImageId) {
+		_blogsEntry.setSmallImageId(smallImageId);
+	}
+
+	/**
+	* Gets the small image u r l of this blogs entry.
+	*
+	* @return the small image u r l of this blogs entry
+	*/
+	public java.lang.String getSmallImageURL() {
+		return _blogsEntry.getSmallImageURL();
+	}
+
+	/**
+	* Sets the small image u r l of this blogs entry.
+	*
+	* @param smallImageURL the small image u r l of this blogs entry
+	*/
+	public void setSmallImageURL(java.lang.String smallImageURL) {
+		_blogsEntry.setSmallImageURL(smallImageURL);
 	}
 
 	/**
@@ -548,6 +629,16 @@ public class BlogsEntryWrapper implements BlogsEntry {
 
 	public java.lang.String toXmlString() {
 		return _blogsEntry.toXmlString();
+	}
+
+	public java.lang.String getSmallImageType()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _blogsEntry.getSmallImageType();
+	}
+
+	public void setSmallImageType(java.lang.String smallImageType) {
+		_blogsEntry.setSmallImageType(smallImageType);
 	}
 
 	public BlogsEntry getWrappedBlogsEntry() {

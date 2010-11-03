@@ -73,16 +73,20 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 			{ "title", new Integer(Types.VARCHAR) },
 			{ "urlTitle", new Integer(Types.VARCHAR) },
 			{ "content", new Integer(Types.CLOB) },
+			{ "description", new Integer(Types.VARCHAR) },
 			{ "displayDate", new Integer(Types.TIMESTAMP) },
 			{ "allowPingbacks", new Integer(Types.BOOLEAN) },
 			{ "allowTrackbacks", new Integer(Types.BOOLEAN) },
 			{ "trackbacks", new Integer(Types.CLOB) },
+			{ "smallImage", new Integer(Types.BOOLEAN) },
+			{ "smallImageId", new Integer(Types.BIGINT) },
+			{ "smallImageURL", new Integer(Types.VARCHAR) },
 			{ "status", new Integer(Types.INTEGER) },
 			{ "statusByUserId", new Integer(Types.BIGINT) },
 			{ "statusByUserName", new Integer(Types.VARCHAR) },
 			{ "statusDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table BlogsEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(150) null,urlTitle VARCHAR(150) null,content TEXT null,displayDate DATE null,allowPingbacks BOOLEAN,allowTrackbacks BOOLEAN,trackbacks TEXT null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table BlogsEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(150) null,urlTitle VARCHAR(150) null,content TEXT null,description VARCHAR(75) null,displayDate DATE null,allowPingbacks BOOLEAN,allowTrackbacks BOOLEAN,trackbacks TEXT null,smallImage BOOLEAN,smallImageId LONG,smallImageURL VARCHAR(75) null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table BlogsEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY blogsEntry.displayDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY BlogsEntry.displayDate DESC";
@@ -116,10 +120,14 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		model.setTitle(soapModel.getTitle());
 		model.setUrlTitle(soapModel.getUrlTitle());
 		model.setContent(soapModel.getContent());
+		model.setDescription(soapModel.getDescription());
 		model.setDisplayDate(soapModel.getDisplayDate());
 		model.setAllowPingbacks(soapModel.getAllowPingbacks());
 		model.setAllowTrackbacks(soapModel.getAllowTrackbacks());
 		model.setTrackbacks(soapModel.getTrackbacks());
+		model.setSmallImage(soapModel.getSmallImage());
+		model.setSmallImageId(soapModel.getSmallImageId());
+		model.setSmallImageURL(soapModel.getSmallImageURL());
 		model.setStatus(soapModel.getStatus());
 		model.setStatusByUserId(soapModel.getStatusByUserId());
 		model.setStatusByUserName(soapModel.getStatusByUserName());
@@ -309,6 +317,19 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		_content = content;
 	}
 
+	public String getDescription() {
+		if (_description == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _description;
+		}
+	}
+
+	public void setDescription(String description) {
+		_description = description;
+	}
+
 	public Date getDisplayDate() {
 		return _displayDate;
 	}
@@ -352,6 +373,39 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 
 	public void setTrackbacks(String trackbacks) {
 		_trackbacks = trackbacks;
+	}
+
+	public boolean getSmallImage() {
+		return _smallImage;
+	}
+
+	public boolean isSmallImage() {
+		return _smallImage;
+	}
+
+	public void setSmallImage(boolean smallImage) {
+		_smallImage = smallImage;
+	}
+
+	public long getSmallImageId() {
+		return _smallImageId;
+	}
+
+	public void setSmallImageId(long smallImageId) {
+		_smallImageId = smallImageId;
+	}
+
+	public String getSmallImageURL() {
+		if (_smallImageURL == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _smallImageURL;
+		}
+	}
+
+	public void setSmallImageURL(String smallImageURL) {
+		_smallImageURL = smallImageURL;
 	}
 
 	public int getStatus() {
@@ -481,10 +535,14 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		clone.setTitle(getTitle());
 		clone.setUrlTitle(getUrlTitle());
 		clone.setContent(getContent());
+		clone.setDescription(getDescription());
 		clone.setDisplayDate(getDisplayDate());
 		clone.setAllowPingbacks(getAllowPingbacks());
 		clone.setAllowTrackbacks(getAllowTrackbacks());
 		clone.setTrackbacks(getTrackbacks());
+		clone.setSmallImage(getSmallImage());
+		clone.setSmallImageId(getSmallImageId());
+		clone.setSmallImageURL(getSmallImageURL());
 		clone.setStatus(getStatus());
 		clone.setStatusByUserId(getStatusByUserId());
 		clone.setStatusByUserName(getStatusByUserName());
@@ -536,7 +594,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(39);
+		StringBundler sb = new StringBundler(47);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -560,6 +618,8 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		sb.append(getUrlTitle());
 		sb.append(", content=");
 		sb.append(getContent());
+		sb.append(", description=");
+		sb.append(getDescription());
 		sb.append(", displayDate=");
 		sb.append(getDisplayDate());
 		sb.append(", allowPingbacks=");
@@ -568,6 +628,12 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		sb.append(getAllowTrackbacks());
 		sb.append(", trackbacks=");
 		sb.append(getTrackbacks());
+		sb.append(", smallImage=");
+		sb.append(getSmallImage());
+		sb.append(", smallImageId=");
+		sb.append(getSmallImageId());
+		sb.append(", smallImageURL=");
+		sb.append(getSmallImageURL());
 		sb.append(", status=");
 		sb.append(getStatus());
 		sb.append(", statusByUserId=");
@@ -582,7 +648,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(61);
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.blogs.model.BlogsEntry");
@@ -633,6 +699,10 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		sb.append(getContent());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>description</column-name><column-value><![CDATA[");
+		sb.append(getDescription());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>displayDate</column-name><column-value><![CDATA[");
 		sb.append(getDisplayDate());
 		sb.append("]]></column-value></column>");
@@ -647,6 +717,18 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		sb.append(
 			"<column><column-name>trackbacks</column-name><column-value><![CDATA[");
 		sb.append(getTrackbacks());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>smallImage</column-name><column-value><![CDATA[");
+		sb.append(getSmallImage());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>smallImageId</column-name><column-value><![CDATA[");
+		sb.append(getSmallImageId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>smallImageURL</column-name><column-value><![CDATA[");
+		sb.append(getSmallImageURL());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>status</column-name><column-value><![CDATA[");
@@ -686,10 +768,14 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 	private String _urlTitle;
 	private String _originalUrlTitle;
 	private String _content;
+	private String _description;
 	private Date _displayDate;
 	private boolean _allowPingbacks;
 	private boolean _allowTrackbacks;
 	private String _trackbacks;
+	private boolean _smallImage;
+	private long _smallImageId;
+	private String _smallImageURL;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserUuid;
