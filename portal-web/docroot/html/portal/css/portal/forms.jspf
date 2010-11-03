@@ -61,11 +61,11 @@
 	z-index: 5;
 }
 
-.aui-form-validator-error-container:hover .aui-form-validator-message {
+.aui-field-focused .aui-form-validator-message, .aui-form-validator-error-container:hover .aui-form-validator-message {
 	clip: rect(auto auto auto auto);
 }
 
-.aui-form-validator-error-container:hover .aui-field-element {
+.aui-field-focused .aui-field-element, .aui-form-validator-error-container:hover .aui-field-element {
 	position: relative;
 }
 
