@@ -546,7 +546,7 @@
 		<antcall target="build-test-ant-script-db-upgrade-smoke">
 			<param name="test.ant.script.command" value="db-upgrade-smoke" />
 			<param name="test.ant.script.dbs" value="db2,mysql,oracle,postgresql,sql-server,sybase" />
-			<param name="test.ant.script.versions" value="5.1.2,5.2.3,5.2.7,5.2.8" />
+			<param name="test.ant.script.versions" value="5.1.2,5.2.3,5.2.7,5.2.8,6.0.5" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-ldap">
