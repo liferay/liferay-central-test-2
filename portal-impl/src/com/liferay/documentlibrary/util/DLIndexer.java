@@ -123,6 +123,10 @@ public class DLIndexer extends BaseIndexer {
 			return null;
 		}
 
+		String extension = fileEntry.getExtension();
+		String title = fileEntry.getTitle();
+		String description = fileEntry.getDescription();
+
 		if (userId == 0) {
 			userId = fileEntry.getUserId();
 		}
@@ -227,6 +231,9 @@ public class DLIndexer extends BaseIndexer {
 			}
 		}
 
+		document.addKeyword("extension", extension);
+		document.addText(Field.TITLE, title);
+		document.addText(Field.DESCRIPTION, description);
 		document.addText(Field.PROPERTIES, properties);
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
