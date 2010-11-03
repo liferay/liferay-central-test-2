@@ -316,6 +316,9 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			if (end > length) {
 				end = length;
 			}
+			if (start > length) {
+				start = length;
+			}
 
 			filteredEntries = filteredEntries.subList(start, end);
 		}
