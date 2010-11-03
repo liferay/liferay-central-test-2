@@ -174,7 +174,7 @@ AUI().add(
 			},
 
 			bindDragDropListeners: function() {
-				var layoutHandler = Layout.layoutHandler;
+				var layoutHandler = Layout.getLayoutHandler();
 
 				layoutHandler.on('drag:end', A.bind(Layout._onPortletDragEnd, Layout));
 				layoutHandler.on('drag:start', A.bind(Layout._onPortletDragStart, Layout));
@@ -240,11 +240,19 @@ AUI().add(
 			},
 
 			fire: function() {
-				var layoutHandler = Layout.layoutHandler;
+				var layoutHandler = Layout.getLayoutHandler();
 
 				if (layoutHandler) {
 					return layoutHandler.fire.apply(layoutHandler, arguments);
 				}
+			},
+
+			getLayoutHandler: function() {
+				if (!Layout.layoutHandler) {
+					Liferay.fire('initLayout');
+				}
+
+				return Layout.layoutHandler;
 			},
 
 			getPortlets: function() {
@@ -325,7 +333,7 @@ AUI().add(
 			},
 
 			on: function() {
-				var layoutHandler = Layout.layoutHandler;
+				var layoutHandler = Layout.getLayoutHandler();
 
 				if (layoutHandler) {
 					return layoutHandler.on.apply(layoutHandler, arguments);
@@ -333,11 +341,11 @@ AUI().add(
 			},
 
 			refresh: function(portlet) {
-				var layoutHandler = Layout.layoutHandler;
+				var layoutHandler = Layout.getLayoutHandler();
 
 				portlet = A.one(portlet);
 
-				if (portlet) {
+				if (portlet && layoutHandler) {
 					layoutHandler.delegate.syncTargets();
 
 					Layout.updatePortletDropZones(portlet);
@@ -451,9 +459,11 @@ AUI().add(
 				var options = Layout.options;
 				var portletDropNodes = portletBoundary.all(options.dropNodes);
 
+				var layoutHandler = Layout.getLayoutHandler();
+
 				portletDropNodes.each(
 					function(item) {
-						Layout.layoutHandler.addDropNode(item);
+						layoutHandler.addDropNode(item);
 					}
 				);
 			},

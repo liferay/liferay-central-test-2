@@ -14,6 +14,9 @@
 			return (id in instance._staticPortlets);
 		},
 
+		refreshLayout: function(portletBoundary){
+		},
+
 		_defCloseFn: function(event) {
 			var instance = this;
 

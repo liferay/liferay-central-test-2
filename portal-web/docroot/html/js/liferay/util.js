@@ -483,7 +483,7 @@
 								var Layout = Liferay.Layout;
 
 								if (Layout) {
-									instance._dragListener = Layout.layoutHandler.on(
+									instance._dragListener = Layout.getLayoutHandler().on(
 										'drag:start',
 										function(event) {
 											instance.fire('save');
