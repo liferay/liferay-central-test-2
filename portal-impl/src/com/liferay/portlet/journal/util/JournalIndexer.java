@@ -33,14 +33,20 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
+import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -117,6 +123,8 @@ public class JournalIndexer extends BaseIndexer {
 		String description = article.getDescription();
 		String content = article.getContent();
 		String type = article.getType();
+		String structureId = article.getStructureId();
+		String templateId = article.getTemplateId();
 		int status = article.getStatus();
 		Date displayDate = article.getDisplayDate();
 		Date modifiedDate = article.getModifiedDate();
@@ -128,6 +136,25 @@ public class JournalIndexer extends BaseIndexer {
 				JournalArticle.class.getName(), resourcePrimKey);
 		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 			JournalArticle.class.getName(), resourcePrimKey);
+
+		JournalStructure structure = null;
+
+		if (Validator.isNotNull(structureId)) {
+			try {
+				structure = JournalStructureLocalServiceUtil.getStructure(
+					groupId, structureId);
+			}
+			catch (NoSuchStructureException nsse1) {
+				Group group = GroupLocalServiceUtil.getCompanyGroup(companyId);
+
+				try {
+					structure = JournalStructureLocalServiceUtil.getStructure(
+						group.getGroupId(), structureId);
+				}
+				catch (NoSuchStructureException nsse2) {
+				}
+			}
+		}
 
 		ExpandoBridge expandoBridge = article.getExpandoBridge();
 
@@ -144,7 +171,8 @@ public class JournalIndexer extends BaseIndexer {
 		document.addKeyword(Field.USER_ID, userId);
 
 		document.addText(Field.TITLE, title);
-		document.addText(Field.CONTENT, processContent(document, content));
+		document.addText(
+			Field.CONTENT, processContent(structure, document, content));
 		document.addText(Field.DESCRIPTION, description);
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
@@ -156,6 +184,8 @@ public class JournalIndexer extends BaseIndexer {
 		document.addKeyword(Field.ROOT_ENTRY_CLASS_PK, resourcePrimKey);
 		document.addKeyword(Field.VERSION, version);
 		document.addKeyword(Field.TYPE, type);
+		document.addKeyword("structureId", structureId);
+		document.addKeyword("templateId", templateId);
 		document.addKeyword("status", status);
 		document.addDate("displayDate", displayDate);
 
@@ -194,7 +224,9 @@ public class JournalIndexer extends BaseIndexer {
 		return _FIELD_NAMESPACE.concat(StringPool.FORWARD_SLASH).concat(name);
 	}
 
-	protected String getIndexableContent(Document document, Element rootElement)
+	protected String getIndexableContent(
+			com.liferay.portal.kernel.xml.Document structureDocument,
+			Document document, Element rootElement)
 		throws Exception {
 
 		StringBundler sb = new StringBundler();
@@ -205,20 +237,55 @@ public class JournalIndexer extends BaseIndexer {
 		Element element = null;
 
 		while ((element = queue.poll()) != null) {
+			String name = element.getName();
+			String elName = element.attributeValue("name", StringPool.BLANK);
 			String elType = element.attributeValue("type", StringPool.BLANK);
 			String elIndexType = element.attributeValue(
 				"index-type", StringPool.BLANK);
 
-			if (elType.equals("text") || elType.equals("text_box") ||
-				elType.equals("text_area")) {
+			if (structureDocument != null) {
+				String path = element.getPath().concat("[@name='").concat(elName).concat("']");
+				Node structureNode = structureDocument.selectSingleNode(path);
 
-				indexField(document, element, elType, elIndexType);
+				if (structureNode != null) {
+					Element structureElement = (Element)structureNode;
+
+					elType = structureElement.attributeValue(
+						"type", StringPool.BLANK);
+					elIndexType = structureElement.attributeValue(
+						"index-type", StringPool.BLANK);
+				}
 			}
-			else if (element.getName().equals("static-content")) {
+
+			if (name.equals("static-content")) {
 				String text = element.getText();
 
 				sb.append(text);
 				sb.append(StringPool.SPACE);
+			}
+			else if (Validator.isNotNull(elType)) {
+				indexField(document, element, elType, elIndexType);
+
+				for (Element dynamicContent : element.elements(
+						"dynamic-content")) {
+
+					if (elType.equals("list") || elType.equals("multi-list")) {
+						for (Element option : dynamicContent.elements(
+								"option")) {
+
+							String text = option.getText();
+
+							sb.append(text);
+							sb.append(StringPool.SPACE);
+						}
+					}
+					else {
+						String text = dynamicContent.getText();
+
+						sb.append(text);
+						sb.append(StringPool.SPACE);
+					}
+				}
 			}
 
 			queue.addAll(element.elements());
@@ -227,14 +294,22 @@ public class JournalIndexer extends BaseIndexer {
 		return sb.toString();
 	}
 
-	protected String getIndexableContent(Document document, String content) {
+	protected String getIndexableContent(
+		JournalStructure structure, Document document, String content) {
+
 		try {
+			com.liferay.portal.kernel.xml.Document structureDocument = null;
+
+			if (structure != null) {
+				structureDocument = SAXReaderUtil.read(structure.getXsd());
+			}
+
 			com.liferay.portal.kernel.xml.Document contentDocument =
 				SAXReaderUtil.read(content);
 
 			Element rootElement = contentDocument.getRootElement();
 
-			return getIndexableContent(document, rootElement);
+			return getIndexableContent(structureDocument, document, rootElement);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -259,7 +334,8 @@ public class JournalIndexer extends BaseIndexer {
 		String[] value = new String[] {dynamicContentElement.getText()};
 
 		if (elType.equals("multi-list")) {
-			List<Element> optionElements = dynamicContentElement.elements();
+			List<Element> optionElements = dynamicContentElement.elements(
+				"option");
 
 			value = new String[optionElements.size()];
 
@@ -268,12 +344,13 @@ public class JournalIndexer extends BaseIndexer {
 			}
 		}
 
+		String name = encodeFieldName(element.attributeValue("name"));
+
 		if (elIndexType.equals("keyword")) {
-			document.addKeyword(Field.CONTENT, value);
+			document.addKeyword(name, value);
 		}
 		else if (elIndexType.equals("text")) {
-			document.addText(
-				Field.CONTENT, StringUtil.merge(value, StringPool.SPACE));
+			document.addText(name, StringUtil.merge(value, StringPool.SPACE));
 		}
 	}
 
@@ -374,12 +451,14 @@ public class JournalIndexer extends BaseIndexer {
 		}
 	}
 
-	protected String processContent(Document document, String content) {
+	protected String processContent(
+		JournalStructure structure, Document document, String content) {
+
 		if ((content != null) &&
 			((content.indexOf("<dynamic-content") != -1) ||
 			 (content.indexOf("<static-content") != -1))) {
 
-			content = getIndexableContent(document, content);
+			content = getIndexableContent(structure, document, content);
 
 			content = StringUtil.replace(
 				content, "<![CDATA[", StringPool.BLANK);
