@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -39,6 +40,8 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.ActionRequestImpl;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.blogs.EntryContentException;
@@ -61,8 +64,10 @@ import java.util.Calendar;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -85,6 +90,9 @@ public class EditEntryAction extends PortletAction {
 		throws Exception {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+		int workflowAction = ParamUtil.getInteger(
+			actionRequest, "workflowAction",
+			WorkflowConstants.ACTION_SAVE_DRAFT);
 
 		try {
 			BlogsEntry entry = null;
@@ -143,48 +151,56 @@ public class EditEntryAction extends PortletAction {
 				updateRedirect = true;
 			}
 
-			if ((entry != null) &&
-				(actionRequest.getWindowState().equals(
-					LiferayWindowState.EXCLUSIVE))) {
+			if (entry != null) {
+				if (actionRequest.getWindowState().equals(
+					LiferayWindowState.EXCLUSIVE)) {
 
-				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+					JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-				jsonObj.put("entryId", entry.getEntryId());
-				jsonObj.put("redirect", redirect);
-				jsonObj.put("updateRedirect", updateRedirect);
+					jsonObj.put("entryId", entry.getEntryId());
+					jsonObj.put("redirect", redirect);
+					jsonObj.put("updateRedirect", updateRedirect);
 
-				HttpServletRequest request = PortalUtil.getHttpServletRequest(
-					actionRequest);
-				HttpServletResponse response =
-					PortalUtil.getHttpServletResponse(actionResponse);
-				InputStream is = new UnsyncByteArrayInputStream(
-					jsonObj.toString().getBytes());
-				String contentType = ContentTypes.TEXT_JAVASCRIPT;
+					HttpServletRequest request =
+						PortalUtil.getHttpServletRequest(actionRequest);
+					HttpServletResponse response =
+						PortalUtil.getHttpServletResponse(actionResponse);
+					InputStream is = new UnsyncByteArrayInputStream(
+						jsonObj.toString().getBytes());
+					String contentType = ContentTypes.TEXT_JAVASCRIPT;
 
-				ServletResponseUtil.sendFile(
-					request, response, null, is, contentType);
+					ServletResponseUtil.sendFile(
+						request, response, null, is, contentType);
 
-				setForward(actionRequest, ActionConstants.COMMON_NULL);
-			}
-			else {
-				ThemeDisplay themeDisplay =
-					(ThemeDisplay)actionRequest.getAttribute(
-						WebKeys.THEME_DISPLAY);
+					setForward(actionRequest, ActionConstants.COMMON_NULL);
+				}
+				else if (
+					workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT) {
 
-				LayoutTypePortlet layoutTypePortlet =
-					themeDisplay.getLayoutTypePortlet();
-
-				if (layoutTypePortlet.hasPortletId(
-						portletConfig.getPortletName())) {
+					redirect = getSaveAndContinueRedirect(
+						portletConfig, actionRequest, entry, redirect);
 
 					sendRedirect(actionRequest, actionResponse, redirect);
 				}
 				else {
-					actionResponse.sendRedirect(redirect);
+					ThemeDisplay themeDisplay =
+						(ThemeDisplay)actionRequest.getAttribute(
+							WebKeys.THEME_DISPLAY);
+
+					LayoutTypePortlet layoutTypePortlet =
+						themeDisplay.getLayoutTypePortlet();
+
+					if (layoutTypePortlet.hasPortletId(
+							portletConfig.getPortletName())) {
+
+						sendRedirect(actionRequest, actionResponse, redirect);
+					}
+					else {
+						actionResponse.sendRedirect(redirect);
+					}
 				}
 			}
-		}
-		catch (Exception e) {
+		}catch (Exception e) {
 			if (e instanceof NoSuchEntryException ||
 				e instanceof PrincipalException) {
 
@@ -392,6 +408,31 @@ public class EditEntryAction extends PortletAction {
 		}
 
 		return new Object[] {entry, oldUrlTitle};
+	}
+
+	protected String getSaveAndContinueRedirect(
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			BlogsEntry entry, String redirect)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		PortletURLImpl portletURL = new PortletURLImpl(
+			(ActionRequestImpl)actionRequest, portletConfig.getPortletName(),
+			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
+
+		portletURL.setWindowState(WindowState.MAXIMIZED);
+
+		portletURL.setParameter("struts_action", "/blogs_admin/edit_entry");
+		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
+		portletURL.setParameter("redirect", redirect, false);
+		portletURL.setParameter(
+			"groupId", String.valueOf(entry.getGroupId()), false);
+		portletURL.setParameter(
+			"entryId", String.valueOf(entry.getEntryId()), false);
+
+		return portletURL.toString();
 	}
 
 }
