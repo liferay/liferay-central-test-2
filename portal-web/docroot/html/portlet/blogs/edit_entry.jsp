@@ -299,35 +299,41 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 								var message = instance.get('responseData');
 
-								document.<portlet:namespace />fm.<portlet:namespace />entryId.value = message.entryId;
-								document.<portlet:namespace />fm.<portlet:namespace />redirect.value = message.redirect;
+								if (message) {
+									document.<portlet:namespace />fm.<portlet:namespace />entryId.value = message.entryId;
+									document.<portlet:namespace />fm.<portlet:namespace />redirect.value = message.redirect;
+
+									var tabs1BackButton = A.one('#<portlet:namespace />tabs1TabsBack');
+
+									if (tabs1BackButton) {
+										tabs1BackButton.attr('href', message.redirect);
+									}
+
+									if (cancelButton) {
+										cancelButton.detach('click');
+
+										cancelButton.on(
+											'click',
+											function() {
+												location.href = message.redirect;
+											}
+										);
+									}
+
+									var now = saveText.replace(/\[TIME\]/gim, (new Date()).toString());
+
+									if (saveStatus) {
+										saveStatus.set('className', 'save-status portlet-msg-success');
+										saveStatus.html(now);
+									}
+								}
+								else {
+									saveStatus.set('className', 'save-status');
+									saveStatus.html('');
+								}
 
 								if (publishButton) {
 									publishButton.attr('disabled', false);
-								}
-
-								var tabs1BackButton = A.one('#<portlet:namespace />tabs1TabsBack');
-
-								if (tabs1BackButton) {
-									tabs1BackButton.attr('href', message.redirect);
-								}
-
-								if (cancelButton) {
-									cancelButton.detach('click');
-
-									cancelButton.on(
-										'click',
-										function() {
-											location.href = message.redirect;
-										}
-									);
-								}
-
-								var now = saveText.replace(/\[TIME\]/gim, (new Date()).toString());
-
-								if (saveStatus) {
-									saveStatus.set('className', 'save-status portlet-msg-success');
-									saveStatus.html(now);
 								}
 							}
 						}
