@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
-import com.liferay.portlet.wiki.util.WikiUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -204,7 +203,7 @@ public class LiferayPageProvider implements WikiPageProvider {
 
 		try {
 			if (WikiPageLocalServiceUtil.getPagesCount(
-					_nodeId, WikiUtil.decodeJSPWikiName(title), true) > 0) {
+				_nodeId, JSPWikiEngine.decodeJSPWikiName(title), true) > 0) {
 
 				return true;
 			}

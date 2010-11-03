@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portlet.wiki.util.WikiUtil;
 
 import java.util.Properties;
 
@@ -67,32 +66,35 @@ public class LiferayURLConstructor implements URLConstructor {
 
 		if (context.equals(WikiContext.EDIT)) {
 			path =
-				"[$BEGIN_PAGE_TITLE_EDIT$]" + WikiUtil.decodeJSPWikiName(name) +
-					"[$END_PAGE_TITLE_EDIT$]";
-			}
+				"[$BEGIN_PAGE_TITLE_EDIT$]" +
+					JSPWikiEngine.decodeJSPWikiName(name) +
+						"[$END_PAGE_TITLE_EDIT$]";
+		}
 		else if (context.equals(WikiContext.VIEW)) {
 			path =
-				"[$BEGIN_PAGE_TITLE$]" + WikiUtil.decodeJSPWikiName(name) +
+				"[$BEGIN_PAGE_TITLE$]" + JSPWikiEngine.decodeJSPWikiName(name) +
 					"[$END_PAGE_TITLE$]";
 		}
 		else if (context.equals(WikiContext.ATTACH)) {
 			if (name.indexOf(CharPool.SLASH) == -1) {
 				path =
 					"[$ATTACHMENT_URL_PREFIX$][$WIKI_PAGE_NAME$]/" +
-						HttpUtil.encodeURL(WikiUtil.decodeJSPWikiName(name));
+						HttpUtil.encodeURL(
+							JSPWikiEngine.decodeJSPWikiName(name));
 			}
 			else {
 				path =
 					"[$ATTACHMENT_URL_PREFIX$]" +
-						HttpUtil.encodeURL(WikiUtil.decodeJSPWikiName(name));
+						HttpUtil.encodeURL(
+							JSPWikiEngine.decodeJSPWikiName(name));
 			}
 		}
 		else {
-			path = WikiUtil.decodeJSPWikiName(name);
+			path = JSPWikiEngine.decodeJSPWikiName(name);
 		}
 
 		return path + parameters;
- 	}
+	}
 
 	public String parsePage(
 		String context, HttpServletRequest request, String encoding) {

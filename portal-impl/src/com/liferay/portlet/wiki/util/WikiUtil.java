@@ -83,11 +83,6 @@ public class WikiUtil {
 			page, viewPageURL, editPageURL, attachmentURLPrefix);
 	}
 
-	public static String decodeJSPWikiName(String jspWikiName) {
-		return StringUtil.replace(
-			jspWikiName, _JSP_WIKI_NAME_2, _JSP_WIKI_NAME_1);
-	}
-
 	public static String diffHtml (
 			WikiPage sourcePage, WikiPage targetPage, PortletURL viewPageURL,
 			PortletURL editPageURL, String attachmentURLPrefix)
@@ -109,41 +104,6 @@ public class WikiUtil {
 		return DiffHtmlUtil.diff(
 			new UnsyncStringReader(sourceContent),
 			new UnsyncStringReader(targetContent));
-	}
-
-	public static String encodeJSPWikiContent(String content) {
-		String newContent = content;
-
-		Matcher matcher = _wikiLinkPattern.matcher(content);
-
-		while (matcher.find()) {
-			String link = matcher.group();
-			String linkValues = matcher.group(1);
-
-			int index = linkValues.indexOf(CharPool.PIPE);
-
-			String name = linkValues;
-			String url = linkValues;
-
-			if (index != -1) {
-				name = linkValues.substring(index + 1, linkValues.length());
-				url = linkValues.substring(0, index);
-			}
-
-			String newLink = "[[" + encodeJSPWikiName(url) + "|" + name + "]]";
-
-			newContent = StringUtil.replace(newContent, link, newLink);
-		}
-
-		return newContent;
-	}
-
-	public static String encodeJSPWikiName(String name) {
-		if (name == null) {
-			return StringPool.BLANK;
-		}
-
-		return StringUtil.replace(name, _JSP_WIKI_NAME_1, _JSP_WIKI_NAME_2);
 	}
 
 	public static String getEditPage(String format) {
@@ -460,11 +420,6 @@ public class WikiUtil {
 		return _instance._validate(nodeId, content, format);
 	}
 
-	private static String _decodeJSPWikiContent(String jspWikiContent) {
-		return StringUtil.replace(
-			jspWikiContent, _JSP_WIKI_NAME_2, _JSP_WIKI_NAME_1);
-	}
-
 	private String _convert(
 			WikiPage page, PortletURL viewPageURL, PortletURL editPageURL,
 			String attachmentURLPrefix)
@@ -510,8 +465,6 @@ public class WikiUtil {
 
 		content = _replaceAttachments(
 			content, page.getTitle(), attachmentURLPrefix);
-
-		content = _decodeJSPWikiContent(content);
 
 		return content;
 	}
@@ -662,18 +615,6 @@ public class WikiUtil {
 		return _getEngine(format).validate(nodeId, content);
 	}
 
-	private static final String[] _JSP_WIKI_NAME_1 = {
-		StringPool.APOSTROPHE, StringPool.AT, StringPool.CARET,
-		StringPool.EXCLAMATION, StringPool.INVERTED_EXCLAMATION,
-		StringPool.INVERTED_QUESTION, StringPool.GRAVE_ACCENT,
-		StringPool.QUESTION, StringPool.SLASH, StringPool.STAR
-	};
-
-	private static final String[] _JSP_WIKI_NAME_2 = {
-		"__APO__", "__AT__", "__CAR__", "__EXM__", "__INE__", "__INQ__",
-		"__GRA__", "__QUE__", "__SLA__", "__STA__"
-	};
-
 	private static final String _WIKI_FRIENDLY_URL_MAPPING = "-/wiki/";
 
 	private static WikiUtil _instance = new WikiUtil();
@@ -683,8 +624,6 @@ public class WikiUtil {
 			"\\[\\$END_PAGE_TITLE_EDIT\\$\\]");
 	private static Pattern _viewPageURLPattern = Pattern.compile(
 		"\\[\\$BEGIN_PAGE_TITLE\\$\\](.*?)\\[\\$END_PAGE_TITLE\\$\\]");
-	private static Pattern _wikiLinkPattern = Pattern.compile(
-		"[\\[]{2,2}(.+?)[\\]]{2,2}");
 
 	private Map<String, WikiEngine> _engines =
 		new ConcurrentHashMap<String, WikiEngine>();

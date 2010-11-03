@@ -22,12 +22,14 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.engines.WikiEngine;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
-import com.liferay.portlet.wiki.util.WikiUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,6 +40,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.portlet.PortletURL;
 
@@ -45,6 +49,11 @@ import javax.portlet.PortletURL;
  * @author Jorge Ferrer
  */
 public class JSPWikiEngine implements WikiEngine {
+
+	public static String decodeJSPWikiName(String jspWikiName) {
+		return StringUtil.replace(
+			jspWikiName, _JSP_WIKI_NAME_2, _JSP_WIKI_NAME_1);
+	}
 
 	public String convert(
 			com.liferay.portlet.wiki.model.WikiPage page,
@@ -75,7 +84,7 @@ public class JSPWikiEngine implements WikiEngine {
 				page, engine);
 
 			Collection<String> titles = engine.scanWikiLinks(
-				jspWikiPage, WikiUtil.encodeJSPWikiContent(page.getContent()));
+				jspWikiPage, _encodeJSPWikiContent(page.getContent()));
 
 			Map<String, Boolean> links = new HashMap<String, Boolean>();
 
@@ -134,7 +143,7 @@ public class JSPWikiEngine implements WikiEngine {
 	protected String convert(com.liferay.portlet.wiki.model.WikiPage page)
 		throws WikiException {
 
-		String content = WikiUtil.encodeJSPWikiContent(page.getContent());
+		String content = _encodeJSPWikiContent(page.getContent());
 
 		if (Validator.isNull(content)) {
 			return StringPool.BLANK;
@@ -146,7 +155,7 @@ public class JSPWikiEngine implements WikiEngine {
 
 		WikiContext wikiContext = new WikiContext(engine, jspWikiPage);
 
-		return engine.textToHTML(wikiContext, content);
+		return _decodeJSPWikiContent(engine.textToHTML(wikiContext, content));
 	}
 
 	protected LiferayJSPWikiEngine getEngine(long nodeId)
@@ -197,10 +206,96 @@ public class JSPWikiEngine implements WikiEngine {
 		}
 	}
 
+	private static String _decodeJSPWikiContent(String jspWikiContent) {
+		return StringUtil.replace(
+			jspWikiContent, _JSP_WIKI_NAME_2, _JSP_WIKI_NAME_1);
+	}
+
+	private static String _encodeJSPWikiContent(String content) {
+
+		StringBundler encodedContent = new StringBundler();
+
+		Matcher commentMatcher = _wikiCommentPattern.matcher(content);
+
+		int start = 0;
+		int end = 0;
+
+		String oldContent = "";
+		String newContent = "";
+
+		while (commentMatcher.find()) {
+			end = commentMatcher.start();
+			oldContent = content.substring(start, end);
+
+			Matcher wikiLinkMatcher = _wikiLinkPattern.matcher(oldContent);
+
+			newContent = oldContent;
+
+			while (wikiLinkMatcher.find()) {
+				String link = wikiLinkMatcher.group();
+				String linkValues = wikiLinkMatcher.group(1);
+
+				int index = linkValues.indexOf(CharPool.PIPE);
+
+				String name = linkValues;
+				String url = linkValues;
+
+				if (index != -1) {
+					name = linkValues.substring(index + 1, linkValues.length());
+					url = linkValues.substring(0, index);
+				}
+
+				String newLink =
+					"[[" + _encodeJSPWikiName(url) + "|" + name + "]]";
+
+				newContent = StringUtil.replace(newContent, link, newLink);
+			}
+
+			encodedContent.append(newContent);
+			encodedContent.append(
+				content.substring(
+					commentMatcher.start(), commentMatcher.end()));
+
+			start = commentMatcher.end();
+		}
+
+		if (start != content.length()) {
+			encodedContent.append(content.substring(start));
+		}
+
+		return encodedContent.toString();
+	}
+
+	private static String _encodeJSPWikiName(String name) {
+		if (name == null) {
+			return StringPool.BLANK;
+		}
+
+		return StringUtil.replace(name, _JSP_WIKI_NAME_1, _JSP_WIKI_NAME_2);
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(JSPWikiEngine.class);
 
 	private Map<Long, LiferayJSPWikiEngine> _engines =
 		new ConcurrentHashMap<Long, LiferayJSPWikiEngine>();
 	private Properties _properties;
+
+	private static Pattern _wikiCommentPattern = Pattern.compile(
+		"[\\{]{3,3}(.*?)[\\}]{3,3}", Pattern.DOTALL);
+
+	private static Pattern _wikiLinkPattern = Pattern.compile(
+		"[\\[]{2,2}(.+?)[\\]]{2,2}", Pattern.DOTALL);
+
+	private static final String[] _JSP_WIKI_NAME_1 = {
+		StringPool.APOSTROPHE, StringPool.AT, StringPool.CARET,
+		StringPool.EXCLAMATION, StringPool.INVERTED_EXCLAMATION,
+		StringPool.INVERTED_QUESTION, StringPool.GRAVE_ACCENT,
+		StringPool.QUESTION, StringPool.SLASH, StringPool.STAR
+	};
+
+	private static final String[] _JSP_WIKI_NAME_2 = {
+		"__APO__", "__AT__", "__CAR__", "__EXM__", "__INE__", "__INQ__",
+		"__GRA__", "__QUE__", "__SLA__", "__STA__"
+	};
 
 }
