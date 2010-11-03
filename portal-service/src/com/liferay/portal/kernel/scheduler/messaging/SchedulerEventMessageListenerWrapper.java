@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.scheduler.messaging;
 
+import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
@@ -56,23 +57,30 @@ public class SchedulerEventMessageListenerWrapper implements MessageListener {
 	}
 
 	public void receive(Message message) {
-		String receiverKey = GetterUtil.getString(
-			message.getString(SchedulerEngine.RECEIVER_KEY));
+		String destinationName = GetterUtil.getString(
+			message.getString(SchedulerEngine.DESTINATION_NAME));
 
-		if (receiverKey.equals(_key)) {
-			try{
-				_messageListener.receive(message);
-			}
-			catch (Exception e) {
-				handleException(message, e);
-			}
-			finally {
-				if (message.getBoolean(SchedulerEngine.DISABLE)) {
-					String destinationName = message.getDestinationName();
+		if (destinationName.equals(DestinationNames.SCHEDULER_DISPATCH)) {
+			String receiverKey = GetterUtil.getString(
+				message.getString(SchedulerEngine.RECEIVER_KEY));
 
-					MessageBusUtil.unregisterMessageListener(
-						destinationName, this);
-				}
+			if (!receiverKey.equals(_key)) {
+				return;
+			}
+		}
+
+		try{
+			_messageListener.receive(message);
+		}
+		catch (Exception e) {
+			handleException(message, e);
+		}
+		finally {
+			if (message.getBoolean(SchedulerEngine.DISABLE) &&
+				destinationName.equals(DestinationNames.SCHEDULER_DISPATCH)) {
+
+				MessageBusUtil.unregisterMessageListener(
+					destinationName, this);
 			}
 		}
 	}

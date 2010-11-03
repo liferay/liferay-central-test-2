@@ -50,6 +50,8 @@ public class MessageSenderJob implements Job {
 				message = new Message();
 			}
 
+			message.put(SchedulerEngine.DESTINATION_NAME, destinationName);
+
 			if (jobExecutionContext.getNextFireTime() == null) {
 				message.put(SchedulerEngine.DISABLE, true);
 			}
