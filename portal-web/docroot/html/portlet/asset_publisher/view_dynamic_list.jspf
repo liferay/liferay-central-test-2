@@ -15,14 +15,17 @@
 --%>
 
 <%
+int end = searchContainer.getEnd();
+int start = searchContainer.getStart();
+
 assetEntryQuery.setGroupIds(groupIds);
-assetEntryQuery.setEnd(searchContainer.getEnd());
+assetEntryQuery.setEnd(end);
 assetEntryQuery.setExcludeZeroViewCount(excludeZeroViewCount);
 assetEntryQuery.setOrderByCol1(orderByColumn1);
 assetEntryQuery.setOrderByCol2(orderByColumn2);
 assetEntryQuery.setOrderByType1(orderByType1);
 assetEntryQuery.setOrderByType2(orderByType2);
-assetEntryQuery.setStart(searchContainer.getStart());
+assetEntryQuery.setStart(start);
 
 int total = 0;
 
@@ -42,15 +45,12 @@ if (assetVocabularyId > 0) {
 
 		total += groupTotal;
 
-		searchContainer.setTotal(groupTotal);
-
 		List results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
 
-		searchContainer.setResults(results);
-
-		request.setAttribute("view.jsp-results", results);
-
 		if (!results.isEmpty()) {
+			searchContainer.setResults(results);
+
+			request.setAttribute("view.jsp-results", results);
 %>
 
 			<h3 class="asset-entries-group-label"><%= assetCategory.getName() %></h3>
@@ -60,10 +60,28 @@ if (assetVocabularyId > 0) {
 <%
 		}
 
+		if (groupTotal > 0) {
+			if (end > 0 && end > groupTotal) {
+				end -= groupTotal;
+			}
+			else {
+				end = 0;
+			}
+
+			if (start > 0 && start > groupTotal) {
+				start -= groupTotal;
+			}
+			else {
+				start = 0;
+			}
+		}
+
 		assetEntryQuery.setAllCategoryIds(oldAllCategoryIds);
-		assetEntryQuery.setEnd(searchContainer.getEnd());
-		assetEntryQuery.setStart(searchContainer.getStart());
+		assetEntryQuery.setEnd(end);
+		assetEntryQuery.setStart(start);
 	}
+
+	searchContainer.setTotal(total);
 }
 else if (!groupByClass) {
 	if(!anyAssetType) {
