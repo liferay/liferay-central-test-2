@@ -127,7 +127,8 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 			String template)
 		throws Exception {
 
-		if (template.equals(TEMPLATE_FULL_CONTENT)) {
+		if (template.equals(TEMPLATE_ABSTRACT) ||
+			template.equals(TEMPLATE_FULL_CONTENT)) {
 			renderRequest.setAttribute(WebKeys.BLOGS_ENTRY, _entry);
 
 			return "/html/portlet/blogs/asset/" + template + ".jsp";

@@ -48,7 +48,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	<portlet:param name="struts_action" value="/blogs/edit_entry" />
 </portlet:actionURL>
 
-<aui:form action="<%= editEntryURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveEntry(false);" %>'>
+<aui:form enctype="multipart/form-data" action="<%= editEntryURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
@@ -114,10 +114,6 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 			</c:if>
 		</c:if>
 
-		<aui:input name="categories" type="assetCategories" />
-
-		<aui:input name="tags" type="assetTags" />
-
 		<c:if test="<%= (entry == null) || (entry.getStatus() == WorkflowConstants.STATUS_DRAFT) %>">
 			<aui:field-wrapper label="permissions">
 				<liferay-ui:input-permissions
@@ -125,6 +121,41 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 				/>
 			</aui:field-wrapper>
 		</c:if>
+
+		<br />
+
+		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="entryAbstractPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "abstract") %>'>
+			<liferay-ui:error exception="<%= EntrySmallImageNameException.class %>">
+
+			<%
+			String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.BLOGS_IMAGE_EXTENSIONS, StringPool.COMMA);
+			%>
+
+			<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
+			</liferay-ui:error>
+
+			<liferay-ui:error exception="<%= EntrySmallImageSizeException.class %>" message="please-enter-a-small-image-with-a-valid-file-size" />
+
+			<aui:fieldset>
+				<aui:input label="description" name="description" />
+
+				<aui:input inlineLabel="left" label="use-small-image" name="smallImage" />
+
+				<aui:input label="small-image-url" name="smallImageURL" />
+
+				<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span>
+
+				<aui:input cssClass="lfr-input-text-container" label="small-image" name="smallFile" type="file" />
+			</aui:fieldset>
+		</liferay-ui:panel>
+
+		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="entryCategorizationPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "categorization") %>'>
+			<aui:fieldset>
+				<aui:input name="categories" type="assetCategories" />
+
+				<aui:input name="tags" type="assetTags" />
+			</aui:fieldset>
+		</liferay-ui:panel>
 
 		<%
 		boolean pending = false;
@@ -162,9 +193,9 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 				</div>
 			</c:if>
 
-			<aui:button name="saveButton" onClick='<%= renderResponse.getNamespace() + "saveEntry(true);" %>' value="<%= saveButtonLabel %>" />
+			<aui:button name="saveButton" onClick='<%= renderResponse.getNamespace() + "saveEntry(true, false);" %>' type="submit" value="<%= saveButtonLabel %>" />
 
-			<aui:button disabled="<%= pending %>" name="publishButton" type="submit" value="<%= publishButtonLabel %>" />
+			<aui:button disabled="<%= pending %>" name="publishButton" onClick='<%= renderResponse.getNamespace() + "saveEntry(false, false);" %>' type="submit" value="<%= publishButtonLabel %>" />
 
 			<aui:button name="cancelButton" onClick="<%= redirect %>" type="cancel" />
 		</aui:button-row>
@@ -198,7 +229,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	Liferay.provide(
 		window,
 		'<portlet:namespace />saveEntry',
-		function(draft) {
+		function(draft, ajax) {
 			var A = AUI();
 
 			var title = document.<portlet:namespace />fm.<portlet:namespace />title.value;
@@ -210,7 +241,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 			var saveStatus = A.one('#<portlet:namespace />saveStatus');
 			var saveText = '<%= UnicodeLanguageUtil.format(pageContext, ((entry != null) && entry.isPending()) ? "entry-saved-at-x" : "draft-saved-at-x", "[TIME]", false) %>';
 
-			if (draft) {
+			if (draft && ajax) {
 				if ((title == '') || (content == '')) {
 					return;
 				}
@@ -308,7 +339,14 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= (entry == null) ? Constants.ADD : Constants.UPDATE %>";
 				document.<portlet:namespace />fm.<portlet:namespace />content.value = content;
-				document.<portlet:namespace />fm.<portlet:namespace />workflowAction.value = <%= WorkflowConstants.ACTION_PUBLISH %>;
+
+				if (draft) {
+					document.<portlet:namespace />fm.<portlet:namespace />workflowAction.value = <%= WorkflowConstants.ACTION_SAVE_DRAFT %>;
+				}
+				else {
+					document.<portlet:namespace />fm.<portlet:namespace />workflowAction.value = <%= WorkflowConstants.ACTION_PUBLISH %>;
+				}
+
 				submitForm(document.<portlet:namespace />fm);
 			}
 		},
@@ -335,7 +373,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	}
 
 	<c:if test="<%= (entry == null) || (entry.getStatus() == WorkflowConstants.STATUS_DRAFT) %>">
-		<portlet:namespace />saveDraftIntervalId = setInterval('<portlet:namespace />saveEntry(true)', 30000);
+		<portlet:namespace />saveDraftIntervalId = setInterval('<portlet:namespace />saveEntry(true, true)', 30000);
 		<portlet:namespace />oldTitle = document.<portlet:namespace />fm.<portlet:namespace />title.value;
 		<portlet:namespace />oldContent = <portlet:namespace />initEditor();
 	</c:if>

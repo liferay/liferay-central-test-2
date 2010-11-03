@@ -14,14 +14,36 @@
 
 package com.liferay.portlet.blogs.model.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.Image;
+import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Juan Fernández
  */
 public class BlogsEntryImpl extends BlogsEntryModelImpl implements BlogsEntry {
 
 	public BlogsEntryImpl() {
 	}
+
+	public String getSmallImageType() throws PortalException, SystemException {
+		if (_smallImageType == null && isSmallImage()) {
+			Image smallImage =  ImageLocalServiceUtil.getImage(
+				getSmallImageId());
+
+			_smallImageType = smallImage.getType();
+		}
+
+		return _smallImageType;
+	}
+
+	public void setSmallImageType(String smallImageType) {
+		_smallImageType = smallImageType;
+	}
+
+	private String _smallImageType;
 
 }

@@ -46,6 +46,8 @@ import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
 import com.sun.syndication.io.FeedException;
 
+import java.io.File;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -57,11 +59,11 @@ import java.util.List;
 public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 	public BlogsEntry addEntry(
-			String title, String content, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, boolean allowPingbacks,
-			boolean allowTrackbacks, String[] trackbacks,
-			ServiceContext serviceContext)
+			String title, String content, String description,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, boolean allowPingbacks,
+			boolean allowTrackbacks, String[] trackbacks, boolean smallImage,
+			String smallImageURL, File smallFile, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		BlogsPermission.check(
@@ -69,9 +71,10 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			ActionKeys.ADD_ENTRY);
 
 		return blogsEntryLocalService.addEntry(
-			getUserId(), title, content, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
-			allowPingbacks, allowTrackbacks, trackbacks, serviceContext);
+			getUserId(), title, content, description, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			allowPingbacks, allowTrackbacks, trackbacks, smallImage,
+			smallImageURL, smallFile, serviceContext);
 	}
 
 	public void deleteEntry(long entryId)
@@ -297,20 +300,22 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 	}
 
 	public BlogsEntry updateEntry(
-			long entryId, String title, String content, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, boolean allowPingbacks,
-			boolean allowTrackbacks, String[] trackbacks,
-			ServiceContext serviceContext)
+			long entryId, String title, String content,
+			String description, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			boolean allowPingbacks,	boolean allowTrackbacks,
+			String[] trackbacks, boolean smallImage, String smallImageURL,
+			File smallFile, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		BlogsEntryPermission.check(
 			getPermissionChecker(), entryId, ActionKeys.UPDATE);
 
 		return blogsEntryLocalService.updateEntry(
-			getUserId(), entryId, title, content, displayDateMonth,
+			getUserId(), entryId, title, content, description, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			allowPingbacks, allowTrackbacks, trackbacks, serviceContext);
+			allowPingbacks, allowTrackbacks, trackbacks, smallImage,
+			smallImageURL, smallFile, serviceContext);
 	}
 
 	protected String exportToRSS(

@@ -17,14 +17,15 @@ package com.liferay.portlet.blogs.action;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -42,6 +43,8 @@ import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.blogs.EntryContentException;
 import com.liferay.portlet.blogs.EntryDisplayDateException;
+import com.liferay.portlet.blogs.EntrySmallImageNameException;
+import com.liferay.portlet.blogs.EntrySmallImageSizeException;
 import com.liferay.portlet.blogs.EntryTitleException;
 import com.liferay.portlet.blogs.NoSuchEntryException;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -50,6 +53,7 @@ import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.portlet.blogs.service.permission.BlogsPermission;
 import com.liferay.util.servlet.ServletResponseUtil;
 
+import java.io.File;
 import java.io.InputStream;
 
 import java.util.Calendar;
@@ -139,11 +143,9 @@ public class EditEntryAction extends PortletAction {
 				updateRedirect = true;
 			}
 
-			int workflowAction = ParamUtil.getInteger(
-				actionRequest, "workflowAction");
-
 			if ((entry != null) &&
-				(workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT)) {
+				(actionRequest.getWindowState().equals(
+					LiferayWindowState.EXCLUSIVE))) {
 
 				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
@@ -192,6 +194,8 @@ public class EditEntryAction extends PortletAction {
 			}
 			else if (e instanceof EntryContentException ||
 					 e instanceof EntryDisplayDateException ||
+					 e instanceof EntrySmallImageNameException ||
+					 e instanceof EntrySmallImageSizeException ||
 					 e instanceof EntryTitleException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
@@ -302,6 +306,7 @@ public class EditEntryAction extends PortletAction {
 
 		String title = ParamUtil.getString(actionRequest, "title");
 		String content = ParamUtil.getString(actionRequest, "content");
+		String description = ParamUtil.getString(actionRequest, "description");
 
 		int displayDateMonth = ParamUtil.getInteger(
 			actionRequest, "displayDateMonth");
@@ -327,6 +332,22 @@ public class EditEntryAction extends PortletAction {
 		String[] trackbacks = StringUtil.split(
 			ParamUtil.getString(actionRequest, "trackbacks"));
 
+		boolean	smallImage = false;
+		String smallImageURL = null;
+		File smallFile = null;
+
+		if (!actionRequest.getWindowState().equals(
+				LiferayWindowState.EXCLUSIVE)) {
+
+			UploadPortletRequest uploadRequest =
+				PortalUtil.getUploadPortletRequest(actionRequest);
+
+			smallImage = ParamUtil.getBoolean(uploadRequest, "smallImage");
+			smallImageURL = ParamUtil.getString(
+				uploadRequest, "smallImageURL");
+			smallFile = uploadRequest.getFile("smallFile");
+		}
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			BlogsEntry.class.getName(), actionRequest);
 
@@ -338,9 +359,10 @@ public class EditEntryAction extends PortletAction {
 			// Add entry
 
 			entry = BlogsEntryServiceUtil.addEntry(
-				title, content, displayDateMonth, displayDateDay,
+				title, content, description, displayDateMonth, displayDateDay,
 				displayDateYear, displayDateHour, displayDateMinute,
-				allowPingbacks, allowTrackbacks, trackbacks, serviceContext);
+				allowPingbacks, allowTrackbacks, trackbacks, smallImage,
+				smallImageURL, smallFile, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, BlogsEntry.class.getName(), entry.getEntryId(),
@@ -355,9 +377,10 @@ public class EditEntryAction extends PortletAction {
 			String tempOldUrlTitle = entry.getUrlTitle();
 
 			entry = BlogsEntryServiceUtil.updateEntry(
-				entryId, title, content, displayDateMonth, displayDateDay,
-				displayDateYear, displayDateHour, displayDateMinute,
-				allowPingbacks, allowTrackbacks, trackbacks, serviceContext);
+				entryId, title, content, description, displayDateMonth,
+				displayDateDay, displayDateYear, displayDateHour,
+				displayDateMinute, allowPingbacks, allowTrackbacks, trackbacks,
+				smallImage, smallImageURL, smallFile, serviceContext);
 
 			if (!tempOldUrlTitle.equals(entry.getUrlTitle())) {
 				oldUrlTitle = tempOldUrlTitle;

@@ -1,3 +1,8 @@
+alter table BlogsEntry add description STRING null;
+alter table BlogsEntry add smallImage BOOLEAN null;
+alter table BlogsEntry add smallImageId VARCHAR(75) null;
+alter table BlogsEntry add smallImageURL STRING null;
+
 create table LayoutBranch (
 	layoutBranchId LONG not null primary key,
 	groupId LONG,

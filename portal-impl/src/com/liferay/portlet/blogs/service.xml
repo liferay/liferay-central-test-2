@@ -26,10 +26,14 @@
 		<column name="title" type="String" />
 		<column name="urlTitle" type="String" />
 		<column name="content" type="String" />
+		<column name="description" type="String" />
 		<column name="displayDate" type="Date" />
 		<column name="allowPingbacks" type="boolean" />
 		<column name="allowTrackbacks" type="boolean" />
 		<column name="trackbacks" type="String" />
+		<column name="smallImage" type="boolean" />
+		<column name="smallImageId" type="long" />
+		<column name="smallImageURL" type="String" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />
@@ -110,6 +114,7 @@
 
 		<reference package-path="com.liferay.portal" entity="Company" />
 		<reference package-path="com.liferay.portal" entity="Group" />
+		<reference package-path="com.liferay.portal" entity="Image" />
 		<reference package-path="com.liferay.portal" entity="Organization" />
 		<reference package-path="com.liferay.portal" entity="PortletPreferences" />
 		<reference package-path="com.liferay.portal" entity="WorkflowInstanceLink" />
@@ -182,6 +187,8 @@
 	<exceptions>
 		<exception>EntryContent</exception>
 		<exception>EntryDisplayDate</exception>
+		<exception>EntrySmallImageName</exception>
+		<exception>EntrySmallImageSize</exception>
 		<exception>EntryTitle</exception>
 	</exceptions>
 </service-builder>

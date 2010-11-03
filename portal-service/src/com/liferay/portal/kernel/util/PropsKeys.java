@@ -197,6 +197,10 @@ public interface PropsKeys {
 
 	public static final String BLOGS_ENTRY_PREVIOUS_AND_NEXT_NAVIGATION_ENABLED = "blogs.entry.previous.and.next.navigation.enabled";
 
+	public static final String BLOGS_IMAGE_EXTENSIONS = "blogs.image.extensions";
+
+	public static final String BLOGS_IMAGE_SMALL_MAX_SIZE = "blogs.image.small.max.size";
+
 	public static final String BLOGS_LINKBACK_EXCERPT_LENGTH = "blogs.linkback.excerpt.length";
 
 	public static final String BLOGS_LINKBACK_JOB_INTERVAL = "blogs.linkback.job.interval";
