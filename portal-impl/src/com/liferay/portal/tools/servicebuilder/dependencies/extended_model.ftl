@@ -7,10 +7,6 @@ package ${packagePath}.model;
  * Never modify this interface directly. Add methods to {@link ${packagePath}.model.impl.${entity.name}Impl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a ${entity.humanName} model instance should use the {@link ${entity.name}} interface instead.
- * </p>
- *
  * @author ${author}
  * @see ${entity.name}Model
  * @see ${packagePath}.model.impl.${entity.name}Impl
@@ -18,6 +14,11 @@ package ${packagePath}.model;
  * @generated
  */
 public interface ${entity.name} extends ${entity.name}Model {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a ${entity.humanName} model instance should use the {@link ${entity.name}} interface instead.
+	 */
 
 	<#list methods as method>
 		<#if !method.isConstructor() && !method.isStatic() && method.isPublic()>

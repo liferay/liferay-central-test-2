@@ -9,13 +9,14 @@ import ${packagePath}.model.${entity.name};
  * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link ${packagePath}.model.${entity.name}} interface.
  * </p>
  *
- * <p>
- * Never reference this class directly. All methods that expect a ${entity.humanName} model instance should use the {@link ${entity.name}} interface instead.
- * </p>
- *
  * @author ${author}
  */
 public class ${entity.name}Impl extends ${entity.name}ModelImpl implements ${entity.name} {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this class directly. All methods that expect a ${entity.humanName} model instance should use the {@link ${entity.name}} interface instead.
+	 */
 
 	public ${entity.name}Impl() {
 	}

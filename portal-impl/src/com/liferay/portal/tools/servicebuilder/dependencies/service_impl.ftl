@@ -9,11 +9,6 @@ import ${packagePath}.service.base.${entity.name}${sessionTypeName}ServiceBaseIm
  *
  * <p>
  * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link ${packagePath}.service.${entity.name}LocalService} interface.
- * </p>
- *
- * <p>
- * Never reference this interface directly. Always use {@link ${packagePath}.service.${entity.name}LocalServiceUtil} to access the ${entity.humanName} local service.
- * </p>
  *
  * <p>
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
@@ -29,11 +24,6 @@ import ${packagePath}.service.base.${entity.name}${sessionTypeName}ServiceBaseIm
  *
  * <p>
  * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link ${packagePath}.service.${entity.name}Service} interface.
- * </p>
- *
- * <p>
- * Never reference this interface directly. Always use {@link ${packagePath}.service.${entity.name}ServiceUtil} to access the ${entity.humanName} remote service.
- * </p>
  *
  * <p>
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
@@ -45,4 +35,13 @@ import ${packagePath}.service.base.${entity.name}${sessionTypeName}ServiceBaseIm
  */
 </#if>
 public class ${entity.name}${sessionTypeName}ServiceImpl extends ${entity.name}${sessionTypeName}ServiceBaseImpl {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+<#if sessionTypeName == "Local">
+	 * Never reference this interface directly. Always use {@link ${packagePath}.service.${entity.name}LocalServiceUtil} to access the ${entity.humanName} local service.
+<#else>
+	 * Never reference this interface directly. Always use {@link ${packagePath}.service.${entity.name}ServiceUtil} to access the ${entity.humanName} remote service.
+</#if>
+	 */
 }
