@@ -123,19 +123,8 @@ public class JournalIndexer extends BaseIndexer {
 		String description = article.getDescription();
 		String content = article.getContent();
 		String type = article.getType();
-		String structureId = article.getStructureId();
-		String templateId = article.getTemplateId();
-		int status = article.getStatus();
-		Date displayDate = article.getDisplayDate();
-		Date modifiedDate = article.getModifiedDate();
 
-		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
-			JournalArticle.class.getName(), resourcePrimKey);
-		String[] assetCategoryNames =
-			AssetCategoryLocalServiceUtil.getCategoryNames(
-				JournalArticle.class.getName(), resourcePrimKey);
-		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
-			JournalArticle.class.getName(), resourcePrimKey);
+		String structureId = article.getStructureId();
 
 		JournalStructure structure = null;
 
@@ -155,6 +144,19 @@ public class JournalIndexer extends BaseIndexer {
 				}
 			}
 		}
+
+		String templateId = article.getTemplateId();
+		int status = article.getStatus();
+		Date displayDate = article.getDisplayDate();
+		Date modifiedDate = article.getModifiedDate();
+
+		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
+			JournalArticle.class.getName(), resourcePrimKey);
+		String[] assetCategoryNames =
+			AssetCategoryLocalServiceUtil.getCategoryNames(
+				JournalArticle.class.getName(), resourcePrimKey);
+		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
+			JournalArticle.class.getName(), resourcePrimKey);
 
 		ExpandoBridge expandoBridge = article.getExpandoBridge();
 
@@ -184,10 +186,11 @@ public class JournalIndexer extends BaseIndexer {
 		document.addKeyword(Field.ROOT_ENTRY_CLASS_PK, resourcePrimKey);
 		document.addKeyword(Field.VERSION, version);
 		document.addKeyword(Field.TYPE, type);
+
 		document.addKeyword("structureId", structureId);
 		document.addKeyword("templateId", templateId);
-		document.addKeyword("status", status);
 		document.addDate("displayDate", displayDate);
+		document.addKeyword("status", status);
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
@@ -238,13 +241,16 @@ public class JournalIndexer extends BaseIndexer {
 
 		while ((element = queue.poll()) != null) {
 			String name = element.getName();
+
 			String elName = element.attributeValue("name", StringPool.BLANK);
 			String elType = element.attributeValue("type", StringPool.BLANK);
 			String elIndexType = element.attributeValue(
 				"index-type", StringPool.BLANK);
 
 			if (structureDocument != null) {
-				String path = element.getPath().concat("[@name='").concat(elName).concat("']");
+				String path = element.getPath().concat(
+					"[@name='").concat(elName).concat("']");
+
 				Node structureNode = structureDocument.selectSingleNode(path);
 
 				if (structureNode != null) {
@@ -266,21 +272,21 @@ public class JournalIndexer extends BaseIndexer {
 			else if (Validator.isNotNull(elType)) {
 				indexField(document, element, elType, elIndexType);
 
-				for (Element dynamicContent : element.elements(
+				for (Element dynamicContentElement : element.elements(
 						"dynamic-content")) {
 
 					if (elType.equals("list") || elType.equals("multi-list")) {
-						for (Element option : dynamicContent.elements(
-								"option")) {
+						for (Element optionElement :
+								dynamicContentElement.elements("option")) {
 
-							String text = option.getText();
+							String text = optionElement.getText();
 
 							sb.append(text);
 							sb.append(StringPool.SPACE);
 						}
 					}
 					else {
-						String text = dynamicContent.getText();
+						String text = dynamicContentElement.getText();
 
 						sb.append(text);
 						sb.append(StringPool.SPACE);
@@ -309,7 +315,8 @@ public class JournalIndexer extends BaseIndexer {
 
 			Element rootElement = contentDocument.getRootElement();
 
-			return getIndexableContent(structureDocument, document, rootElement);
+			return getIndexableContent(
+				structureDocument, document, rootElement);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -329,6 +336,8 @@ public class JournalIndexer extends BaseIndexer {
 			return;
 		}
 
+		String name = encodeFieldName(element.attributeValue("name"));
+
 		Element dynamicContentElement = element.element("dynamic-content");
 
 		String[] value = new String[] {dynamicContentElement.getText()};
@@ -343,8 +352,6 @@ public class JournalIndexer extends BaseIndexer {
 				value[i] = optionElements.get(i).getText();
 			}
 		}
-
-		String name = encodeFieldName(element.attributeValue("name"));
 
 		if (elIndexType.equals("keyword")) {
 			document.addKeyword(name, value);
