@@ -34,18 +34,18 @@ public class PortalLoginModule extends BasicLoginModule {
 		boolean commitValue = super.commit();
 
 		if (commitValue) {
-			PortalGroup group = new PortalGroup("Roles");
+			PortalGroup rolesPortalGroup = new PortalGroup("Roles");
 
-			group.addMember(new PortalPrincipal("users"));
+			rolesPortalGroup.addMember(new PortalPrincipal("users"));
 
 			Subject subject = getSubject();
 
 			Set<Principal> principals = subject.getPrincipals();
 
-			principals.add(group);
+			principals.add(rolesPortalGroup);
 
-			PortalGroup callerPrincipalGroup =
-					new PortalGroup("CallerPrincipal");
+			PortalGroup callerPrincipalGroup = new PortalGroup(
+				"CallerPrincipal");
 
 			callerPrincipalGroup.addMember(getPrincipal());
 
