@@ -238,7 +238,7 @@ public class PortletPreferencesFactoryImpl
 
 				if (portlet.isPreferencesOwnedByGroup()) {
 					long scopeGroupId = PortalUtil.getScopeGroupId(
-						layout, portletId);
+						request, portletId);
 
 					ownerId = scopeGroupId;
 					ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
