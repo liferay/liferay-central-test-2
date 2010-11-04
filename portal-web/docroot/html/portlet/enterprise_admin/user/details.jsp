@@ -60,7 +60,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 		GroupFriendlyURLException gfurle = (GroupFriendlyURLException)errorException;
 		%>
 
-		<c:if test="<%= gfurle.getType() == LayoutFriendlyURLException.DUPLICATE %>">
+		<c:if test="<%= gfurle.getType() == GroupFriendlyURLException.DUPLICATE %>">
 			<liferay-ui:message key="the-screen-name-you-requested-is-associated-with-an-existing-friendly-url" />
 		</c:if>
 	</liferay-ui:error>
