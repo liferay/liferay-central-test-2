@@ -50,6 +50,8 @@ public class VoteQuestionTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Vote']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Thank you for your vote."),
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertTrue(selenium.isTextPresent("Thank you for your vote."));
 		assertEquals(RuntimeVariables.replace("0%"),
 			selenium.getText("//tr[2]/td[1]"));

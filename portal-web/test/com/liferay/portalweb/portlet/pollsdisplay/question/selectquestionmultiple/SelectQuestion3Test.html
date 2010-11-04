@@ -24,9 +24,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Configuration</td>
-	<td></td>
+	<td>clickAt</td>
+	<td>//strong/a</td>
+	<td>Options</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_86_questionId</td>
+	<td>Question</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -40,8 +60,13 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@id='p_p_id_86_']/div/div</td>
+	<td>//div[@class='portlet-msg-success']</td>
 	<td>You have successfully updated the setup.</td>
+</tr>
+<tr>
+	<td>assertSelectedLabel</td>
+	<td>_86_questionId</td>
+	<td>Test3 Poll3 Question3</td>
 </tr>
 <tr>
 	<td>open</td>

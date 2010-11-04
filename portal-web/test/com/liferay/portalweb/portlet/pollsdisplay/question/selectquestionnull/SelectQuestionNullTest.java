@@ -45,8 +45,47 @@ public class SelectQuestionNullTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Configuration"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
+		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_86_questionId")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.saveScreenShotAndSource();
 		selenium.select("_86_questionId", RuntimeVariables.replace("label="));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
@@ -54,9 +93,9 @@ public class SelectQuestionNullTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"You have entered invalid data. Please try again."),
-			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
+			selenium.getText("//div[@class='portlet-msg-error']"));
 		assertEquals(RuntimeVariables.replace(
 				"The question could not be found."),
-			selenium.getText("//form[@id='_86_fm']/div[1]"));
+			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[2]"));
 	}
 }

@@ -64,7 +64,7 @@ public class SelectBirthdayTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		selenium.select("_2_birthdayMonth",
-			RuntimeVariables.replace("label=April"));
+			RuntimeVariables.replace("label=March"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -72,7 +72,7 @@ public class SelectBirthdayTest extends BaseTestCase {
 			}
 
 			try {
-				if ("April".equals(selenium.getSelectedLabel("_2_birthdayMonth"))) {
+				if ("March".equals(selenium.getSelectedLabel("_2_birthdayMonth"))) {
 					break;
 				}
 			}
@@ -124,6 +124,45 @@ public class SelectBirthdayTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 		selenium.clickAt("link=Prev", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isPartialText("//div[2]/div/div[1]/div/div",
+							"April 1986")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("link=Prev", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isPartialText("//div[2]/div/div[1]/div/div",
+							"May 1986")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

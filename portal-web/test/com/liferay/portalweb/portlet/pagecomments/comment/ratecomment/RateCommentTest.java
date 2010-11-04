@@ -52,9 +52,9 @@ public class RateCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace("0 (0 Votes)")
-										.equals(selenium.getText(
-								"//div[@class='aui-rating-label-element']"))) {
+				if (selenium.isPartialText(
+							"//div[@class='aui-rating-label-element']",
+							"0 Votes")) {
 					break;
 				}
 			}
@@ -65,8 +65,8 @@ public class RateCommentTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("0 (0 Votes)"),
-			selenium.getText("//div[@class='aui-rating-label-element']"));
+		assertTrue(selenium.isPartialText(
+				"//div[@class='aui-rating-label-element']", "0 Votes"));
 		selenium.clickAt("//div[@class='taglib-ratings thumbs']/div/div/a",
 			RuntimeVariables.replace(""));
 

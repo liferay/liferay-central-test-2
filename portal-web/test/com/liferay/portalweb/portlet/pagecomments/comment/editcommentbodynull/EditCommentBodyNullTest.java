@@ -71,13 +71,13 @@ public class EditCommentBodyNullTest extends BaseTestCase {
 		selenium.keyPress("_107_editReplyBody1",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_107_editReplyBody1", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("//input[@value='Update']",
+		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isVisible("_107_editReplyBody1"));
-		assertTrue(selenium.isVisible("//input[@value='Update']"));
+		assertTrue(selenium.isVisible("//input[@value='Publish']"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

@@ -24,9 +24,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Configuration</td>
-	<td></td>
+	<td>clickAt</td>
+	<td>//strong/a</td>
+	<td>Options</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_86_questionId</td>
+	<td>Question</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -40,12 +60,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@id='p_p_id_86_']/div/div</td>
+	<td>//div[@class='portlet-msg-error']</td>
 	<td>You have entered invalid data. Please try again.</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//form[@id='_86_fm']/div[1]</td>
+	<td>xPath=(//div[@class='portlet-msg-error'])[2]</td>
 	<td>The question could not be found.</td>
 </tr>
 

@@ -72,7 +72,7 @@ public class EditCommentBodyTest extends BaseTestCase {
 		selenium.keyPress("_107_editReplyBody1",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_107_editReplyBody1", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("//input[@value='Update']",
+		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

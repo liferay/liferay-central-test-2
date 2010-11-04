@@ -48,6 +48,7 @@ public class VoteQuestionNullTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Vote']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent("Please select an option."));
+		assertEquals(RuntimeVariables.replace("Please select an option."),
+			selenium.getText("//div[@class='portlet-msg-error']"));
 	}
 }

@@ -79,12 +79,14 @@ public class ImportLARTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isChecked("_86_DELETE_PORTLET_DATACheckbox"));
 		selenium.saveScreenShotAndSource();
-		selenium.check("_86_DELETE_PORTLET_DATACheckbox");
+		selenium.clickAt("_86_DELETE_PORTLET_DATACheckbox",
+			RuntimeVariables.replace(""));
 		assertTrue(selenium.isChecked("_86_DELETE_PORTLET_DATACheckbox"));
 		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isChecked("_86_PORTLET_DATACheckbox"));
 		selenium.saveScreenShotAndSource();
-		selenium.check("_86_PORTLET_DATACheckbox");
+		selenium.clickAt("_86_PORTLET_DATACheckbox",
+			RuntimeVariables.replace(""));
 		assertTrue(selenium.isChecked("_86_PORTLET_DATACheckbox"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Import']",
