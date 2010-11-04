@@ -109,8 +109,16 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 				long resultGroupId = GetterUtil.getLong(
 					result.get(Field.GROUP_ID));
 
+				if (resultGroupId == 0) {
+					resultGroupId = themeDisplay.getScopeGroupId();
+				}
+
 				long resultScopeGroupId = GetterUtil.getLong(
 					result.get(Field.SCOPE_GROUP_ID));
+
+				if (resultScopeGroupId == 0) {
+					resultScopeGroupId = themeDisplay.getScopeGroupId();
+				}
 
 				PortletURL portletURL = getPortletURL(
 					request, portletId, resultGroupId);
