@@ -14,6 +14,9 @@
 
 package com.liferay.portal.kernel.monitoring.statistics;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 /**
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
@@ -22,11 +25,14 @@ public class RequestStatistics implements Statistics {
 
 	public RequestStatistics(String name) {
 		try {
-			Thread.currentThread().sleep(5000);
+			Thread currentThread = Thread.currentThread();
+
+			currentThread.sleep(5000);
 		}
-		catch (InterruptedException e) {
-			e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+		catch (InterruptedException ie) {
+			_log.error(ie, ie);
 		}
+
 		_name = name;
 		_errorStatistics = new CountStatistics(name);
 		_successStatistics = new AverageStatistics(name);
@@ -90,6 +96,8 @@ public class RequestStatistics implements Statistics {
 	public void setDescription(String description) {
 		_description = description;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(RequestStatistics.class);
 
 	private String _description;
 	private CountStatistics _errorStatistics;

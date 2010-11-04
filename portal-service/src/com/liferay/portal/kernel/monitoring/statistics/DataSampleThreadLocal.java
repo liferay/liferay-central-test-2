@@ -80,9 +80,9 @@ public class DataSampleThreadLocal implements Cloneable {
 		new AutoResetThreadLocal<DataSampleThreadLocal>(
 			DataSampleThreadLocal.class + "._dataSampleThreadLocal",
 			new DataSampleThreadLocal());
-
 	private static boolean _monitoringDataSampleThreadLocal;
 
 	private List<DataSample> _dataSamples = new ArrayList<DataSample>();
 	private long _monitorTime;
+
 }

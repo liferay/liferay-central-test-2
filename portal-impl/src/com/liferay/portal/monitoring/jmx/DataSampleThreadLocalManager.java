@@ -25,10 +25,8 @@ public class DataSampleThreadLocalManager
 	implements DataSampleThreadLocalManagerMBean {
 
 	public DataSampleThreadLocalManager() {
-		boolean monitoringDataSampleThreadLocal =
-			PropsValues.MONITORING_DATA_SAMPLE_THREAD_LOCAL;
-
-		setMonitoringDataSampleThreadLocal(monitoringDataSampleThreadLocal);
+		setMonitoringDataSampleThreadLocal(
+			PropsValues.MONITORING_DATA_SAMPLE_THREAD_LOCAL);
 	}
 
 	public boolean isMonitoringDataSampleThreadLocal() {
