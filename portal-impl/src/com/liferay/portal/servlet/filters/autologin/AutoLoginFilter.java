@@ -47,28 +47,14 @@ import javax.servlet.http.HttpSession;
 public class AutoLoginFilter extends BasePortalFilter {
 
 	public static void registerAutoLogin(AutoLogin autoLogin) {
-		if (_autoLogins == null) {
-			_log.info("AutoLoginFilter is not initialized yet");
-
-			_autoLogins = new CopyOnWriteArrayList<AutoLogin>();
-
-			_autoLogins.add(autoLogin);
-
-		}
-		else {
-			_autoLogins.add(autoLogin);
-		}
+		_autoLogins.add(autoLogin);
 	}
 
 	public static void unregisterAutoLogin(AutoLogin autoLogin) {
-		if (_autoLogins == null) {
-			_log.error("AutoLoginFilter is not initialized yet");
-
-			return;
-		}
-
 		for (int i = 0; i < _autoLogins.size(); i++) {
-			if (autoLogin == _autoLogins.get(i)) {
+			AutoLogin curAutoLogin = _autoLogins.get(i);
+
+			if (autoLogin == curAutoLogin) {
 				_autoLogins.remove(i);
 
 				break;
@@ -77,10 +63,6 @@ public class AutoLoginFilter extends BasePortalFilter {
 	}
 
 	public AutoLoginFilter() {
-		if (_autoLogins == null) {
-			_autoLogins = new CopyOnWriteArrayList<AutoLogin>();
-		}
-
 		for (String autoLoginClassName : PropsValues.AUTO_LOGIN_HOOKS) {
 			AutoLogin autoLogin = (AutoLogin)InstancePool.get(
 				autoLoginClassName);
@@ -261,6 +243,7 @@ public class AutoLoginFilter extends BasePortalFilter {
 
 	private static Log _log = LogFactoryUtil.getLog(AutoLoginFilter.class);
 
-	private static List<AutoLogin> _autoLogins;
+	private static List<AutoLogin> _autoLogins =
+		new CopyOnWriteArrayList<AutoLogin>();
 
 }
