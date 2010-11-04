@@ -220,11 +220,12 @@ public class JSPWikiEngine implements WikiEngine {
 		int start = 0;
 		int end = 0;
 
-		String oldContent = "";
-		String newContent = "";
+		String oldContent = StringPool.BLANK;
+		String newContent = StringPool.BLANK;
 
 		while (commentMatcher.find()) {
 			end = commentMatcher.start();
+
 			oldContent = content.substring(start, end);
 
 			Matcher wikiLinkMatcher = _wikiLinkPattern.matcher(oldContent);
@@ -235,14 +236,14 @@ public class JSPWikiEngine implements WikiEngine {
 				String link = wikiLinkMatcher.group();
 				String linkValues = wikiLinkMatcher.group(1);
 
-				int index = linkValues.indexOf(CharPool.PIPE);
-
 				String name = linkValues;
 				String url = linkValues;
 
-				if (index != -1) {
-					name = linkValues.substring(index + 1, linkValues.length());
-					url = linkValues.substring(0, index);
+				int pos = linkValues.indexOf(CharPool.PIPE);
+
+				if (pos != -1) {
+					name = linkValues.substring(pos + 1, linkValues.length());
+					url = linkValues.substring(0, pos);
 				}
 
 				String newLink =
@@ -274,18 +275,6 @@ public class JSPWikiEngine implements WikiEngine {
 		return StringUtil.replace(name, _JSP_WIKI_NAME_1, _JSP_WIKI_NAME_2);
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(JSPWikiEngine.class);
-
-	private Map<Long, LiferayJSPWikiEngine> _engines =
-		new ConcurrentHashMap<Long, LiferayJSPWikiEngine>();
-	private Properties _properties;
-
-	private static Pattern _wikiCommentPattern = Pattern.compile(
-		"[\\{]{3,3}(.*?)[\\}]{3,3}", Pattern.DOTALL);
-
-	private static Pattern _wikiLinkPattern = Pattern.compile(
-		"[\\[]{2,2}(.+?)[\\]]{2,2}", Pattern.DOTALL);
-
 	private static final String[] _JSP_WIKI_NAME_1 = {
 		StringPool.APOSTROPHE, StringPool.AT, StringPool.CARET,
 		StringPool.EXCLAMATION, StringPool.INVERTED_EXCLAMATION,
@@ -297,5 +286,16 @@ public class JSPWikiEngine implements WikiEngine {
 		"__APO__", "__AT__", "__CAR__", "__EXM__", "__INE__", "__INQ__",
 		"__GRA__", "__QUE__", "__SLA__", "__STA__"
 	};
+
+	private static Log _log = LogFactoryUtil.getLog(JSPWikiEngine.class);
+
+	private static Pattern _wikiCommentPattern = Pattern.compile(
+		"[\\{]{3,3}(.*?)[\\}]{3,3}", Pattern.DOTALL);
+	private static Pattern _wikiLinkPattern = Pattern.compile(
+		"[\\[]{2,2}(.+?)[\\]]{2,2}", Pattern.DOTALL);
+
+	private Map<Long, LiferayJSPWikiEngine> _engines =
+		new ConcurrentHashMap<Long, LiferayJSPWikiEngine>();
+	private Properties _properties;
 
 }
