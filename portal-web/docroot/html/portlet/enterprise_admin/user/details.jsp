@@ -52,8 +52,19 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 <aui:fieldset column="<%= true %>" cssClass="aui-w50">
 	<aui:select bean="<%= selContact %>" label="title[person]" model="<%= Contact.class %>" name="prefixId" listType="<%= ListTypeConstants.CONTACT_PREFIX %>" listTypeFieldName="prefixId" showEmptyOption="<%= true %>" />
 
-	<liferay-ui:error exception="<%= DuplicateFriendlyURLException.class %>" message="the-generated-friendlyurl-from-your-requested-screen-name-is-already-taken" />
 	<liferay-ui:error exception="<%= DuplicateUserScreenNameException.class %>" message="the-screen-name-you-requested-is-already-taken" />
+
+	<liferay-ui:error exception="<%= GroupFriendlyURLException.class %>">
+
+		<%
+		GroupFriendlyURLException gfurle = (GroupFriendlyURLException)errorException;
+		%>
+
+		<c:if test="<%= gfurle.getType() == LayoutFriendlyURLException.DUPLICATE %>">
+			<liferay-ui:message key="the-screen-name-you-requested-is-associated-with-an-existing-friendly-url" />
+		</c:if>
+	</liferay-ui:error>
+
 	<liferay-ui:error exception="<%= ReservedUserScreenNameException.class %>" message="the-screen-name-you-requested-is-reserved" />
 	<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
 
