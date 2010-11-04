@@ -88,7 +88,7 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 		}
 	}
 
-	public void pause(String groupName) throws SchedulerException {
+	public void pause(String groupName) {
 		SchedulerRequest schedulerRequest =
 			SchedulerRequest.createPauseRequest(groupName);
 
@@ -96,9 +96,7 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
 	}
 
-	public void pause(String jobName, String groupName)
-		throws SchedulerException {
-
+	public void pause(String jobName, String groupName) {
 		SchedulerRequest schedulerRequest =
 			SchedulerRequest.createPauseRequest(jobName, groupName);
 
@@ -106,7 +104,7 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
 	}
 
-	public void resume(String groupName) throws SchedulerException {
+	public void resume(String groupName) {
 		SchedulerRequest schedulerRequest =
 			SchedulerRequest.createResumeRequest(groupName);
 
@@ -114,9 +112,7 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
 	}
 
-	public void resume(String jobName, String groupName)
-		throws SchedulerException {
-
+	public void resume(String jobName, String groupName) {
 		SchedulerRequest schedulerRequest =
 			SchedulerRequest.createResumeRequest(jobName, groupName);
 

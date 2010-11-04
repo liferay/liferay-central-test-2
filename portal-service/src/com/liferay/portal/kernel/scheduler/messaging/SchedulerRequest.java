@@ -80,7 +80,6 @@ public class SchedulerRequest implements Serializable {
 	}
 
 	public static SchedulerRequest createResumeRequest(String groupName) {
-
 		SchedulerRequest schedulerRequest = new SchedulerRequest();
 
 		schedulerRequest.setCommand(COMMAND_RESUME);
