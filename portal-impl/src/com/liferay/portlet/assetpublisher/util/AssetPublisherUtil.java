@@ -179,7 +179,7 @@ public class AssetPublisherUtil {
 				long[] assetCategoryIds = GetterUtil.getLongValues(queryValues);
 
 				if (queryContains &&
-					(queryAndOperator || assetCategoryIds.length == 1)) {
+					(queryAndOperator || (assetCategoryIds.length == 1))) {
 
 					allAssetCategoryIds = assetCategoryIds;
 				}
@@ -251,8 +251,9 @@ public class AssetPublisherUtil {
 			String queryName = preferences.getValue(
 				"queryName" + i, StringPool.BLANK);
 
-			if (!Validator.equals(queryName, "assetCategories") && queryContains
-				&& (queryAndOperator || queryValues.length == 1)) {
+			if (!Validator.equals(queryName, "assetCategories") &&
+				queryContains &&
+				(queryAndOperator || (queryValues.length == 1))) {
 
 				allAssetTagNames = queryValues;
 			}
