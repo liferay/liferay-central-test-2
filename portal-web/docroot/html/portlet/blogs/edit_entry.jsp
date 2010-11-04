@@ -328,8 +328,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 									}
 								}
 								else {
-									saveStatus.set('className', 'save-status');
-									saveStatus.html('');
+									saveStatus.hide();
 								}
 
 								if (publishButton) {
