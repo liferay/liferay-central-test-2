@@ -48,12 +48,16 @@ public class AutoLoginFilter extends BasePortalFilter {
 
 	public static void registerAutoLogin(AutoLogin autoLogin) {
 		if (_autoLogins == null) {
-			_log.error("AutoLoginFilter is not initialized yet");
+			_log.info("AutoLoginFilter is not initialized yet");
 
-			return;
+			_autoLogins = new CopyOnWriteArrayList<AutoLogin>();
+
+			_autoLogins.add(autoLogin);
+
 		}
-
-		_autoLogins.add(autoLogin);
+		else {
+			_autoLogins.add(autoLogin);
+		}
 	}
 
 	public static void unregisterAutoLogin(AutoLogin autoLogin) {
@@ -67,7 +71,9 @@ public class AutoLoginFilter extends BasePortalFilter {
 	}
 
 	public AutoLoginFilter() {
-		_autoLogins = new CopyOnWriteArrayList<AutoLogin>();
+		if (_autoLogins == null) {
+			_autoLogins = new CopyOnWriteArrayList<AutoLogin>();
+		}
 
 		for (String autoLoginClassName : PropsValues.AUTO_LOGIN_HOOKS) {
 			AutoLogin autoLogin = (AutoLogin)InstancePool.get(
