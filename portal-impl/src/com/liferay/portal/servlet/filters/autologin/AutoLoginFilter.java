@@ -67,7 +67,13 @@ public class AutoLoginFilter extends BasePortalFilter {
 			return;
 		}
 
-		_autoLogins.remove(autoLogin);
+		for (int i = 0; i < _autoLogins.size(); i++) {
+			if (autoLogin == _autoLogins.get(i)) {
+				_autoLogins.remove(i);
+
+				break;
+			}
+		}
 	}
 
 	public AutoLoginFilter() {
