@@ -51,7 +51,7 @@ Group group = (Group)request.getAttribute(WebKeys.GROUP);
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/communities/reply_membership_request");
+portletURL.setParameter("struts_action", "/communities/view_membership_requests");
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
