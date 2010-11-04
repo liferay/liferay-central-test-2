@@ -95,7 +95,11 @@ if (article != null) {
 	}
 }
 
-String type = BeanParamUtil.getString(article, request, "type", "general");
+String type = BeanParamUtil.getString(article, request, "type");
+
+if (Validator.isNull(type)) {
+	type = "general";
+}
 
 String structureId = BeanParamUtil.getString(article, request, "structureId");
 
