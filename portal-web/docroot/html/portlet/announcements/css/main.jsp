@@ -37,14 +37,17 @@
 
 .portlet-alerts .entry-type-general {
 	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
+	clear: both;
 }
 
 .portlet-alerts .entry-type-news {
 	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
+	clear: both;
 }
 
 .portlet-alerts .entry-type-test {
 	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
+	clear: both;
 }
 
 .portlet-announcements {
@@ -87,9 +90,9 @@
 }
 
 .portlet-announcements .edit-actions, .portlet-alerts .edit-actions {
+	float: right;
 	font-size: 0.7em;
 	font-weight: normal;
-	position: absolute;
 	right: 0;
 	top: 0;
 }
@@ -100,12 +103,15 @@
 
 .portlet-announcements .entry-type-general {
 	background: #fff url('<%= themeImagesPath %>/common/all_pages.png') 4px 4px no-repeat;
+	clear: both;
 }
 
 .portlet-announcements .entry-type-news {
 	background: #fff url('<%= themeImagesPath %>/common/page.png') 4px 4px no-repeat;
+	clear: both;
 }
 
 .portlet-announcements .entry-type-test {
 	background: #fff url('<%= themeImagesPath %>/common/page.png') 4px 4px no-repeat;
+	clear: both;
 }
