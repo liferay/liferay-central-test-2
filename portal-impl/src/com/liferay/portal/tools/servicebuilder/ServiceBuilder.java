@@ -3940,9 +3940,7 @@ public class ServiceBuilder {
 		context.put("serviceBuilder", this);
 
 		context.put("arrayUtil", ArrayUtil_IW.getInstance());
-		context.put(
-			"modelHintsUtil",
-			staticModels.get("com.liferay.portal.model.ModelHintsUtil"));
+		context.put("modelHintsUtil", ModelHintsUtil.getModelHints());
 		context.put(
 			"resourceActionsUtil", ResourceActionsUtil_IW.getInstance());
 		context.put("stringUtil", StringUtil_IW.getInstance());
