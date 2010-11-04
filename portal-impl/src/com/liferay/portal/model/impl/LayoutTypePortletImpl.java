@@ -294,7 +294,7 @@ public class LayoutTypePortletImpl
 		List<Portlet> list = new ArrayList<Portlet>(
 			portlets.size() + startPortlets.size() + endPortlets.size());
 
-		if (startPortlets != null) {
+		if (!startPortlets.isEmpty()) {
 			list.addAll(startPortlets);
 		}
 
@@ -310,7 +310,7 @@ public class LayoutTypePortletImpl
 			}
 		}
 
-		if (endPortlets != null) {
+		if (!endPortlets.isEmpty()) {
 			list.addAll(endPortlets);
 		}
 
@@ -331,7 +331,10 @@ public class LayoutTypePortletImpl
 
 		}
 
-		return portlets;
+		List<Portlet> startPortlets = getStaticPortlets(
+				PropsKeys.LAYOUT_STATIC_PORTLETS_ALL);
+
+		return addStaticPortlets(portlets, startPortlets, null);
 	}
 
 	public List<Portlet> getAllPortlets(String columnId)
