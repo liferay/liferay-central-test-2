@@ -328,13 +328,12 @@ public class LayoutTypePortletImpl
 			String columnId = columns.get(i);
 
 			portlets.addAll(getAllPortlets(columnId));
-
 		}
 
-		List<Portlet> startPortlets = getStaticPortlets(
-				PropsKeys.LAYOUT_STATIC_PORTLETS_ALL);
+		List<Portlet> staticPortlets = getStaticPortlets(
+			PropsKeys.LAYOUT_STATIC_PORTLETS_ALL);
 
-		return addStaticPortlets(portlets, startPortlets, null);
+		return addStaticPortlets(portlets, staticPortlets, null);
 	}
 
 	public List<Portlet> getAllPortlets(String columnId)
