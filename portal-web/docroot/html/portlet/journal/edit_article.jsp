@@ -785,9 +785,9 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		function(date, checked) {
 			var A = AUI();
 
-			document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Year"].disabled = checked;
 			document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Month"].disabled = checked;
 			document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Day"].disabled = checked;
+			document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Year"].disabled = checked;
 			document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Hour"].disabled = checked;
 			document.<portlet:namespace />fm1["<portlet:namespace />" + date + "Minute"].disabled = checked;
 			document.<portlet:namespace />fm1["<portlet:namespace />" + date + "AmPm"].disabled = checked;
