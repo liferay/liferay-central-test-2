@@ -25,7 +25,6 @@
 </templates>
 </javadoc>
 <remove>
-<multiline>true</multiline>
 <singleline>true</singleline>
 </remove>
 </comments>
