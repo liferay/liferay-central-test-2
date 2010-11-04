@@ -169,6 +169,14 @@ public class OrganizationIndexer extends BaseIndexer {
 		document.addKeyword(Field.COMPANY_ID, companyId);
 		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		document.addKeyword(Field.ORGANIZATION_ID, organizationId);
+
+		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
+		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
+
+		document.addKeyword(
+			Field.ENTRY_CLASS_NAME, Organization.class.getName());
+		document.addKeyword(Field.ENTRY_CLASS_PK, organizationId);
+
 		document.addKeyword("parentOrganizationId", parentOrganizationId);
 		document.addNumber("leftOrganizationId", leftOrganizationId);
 		document.addNumber("rightOrganizationId", rightOrganizationId);
@@ -184,13 +192,6 @@ public class OrganizationIndexer extends BaseIndexer {
 			"region", regions.toArray(new String[regions.size()]));
 		document.addKeyword(
 			"country", countries.toArray(new String[countries.size()]));
-
-		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
-		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
-
-		document.addKeyword(
-			Field.ENTRY_CLASS_NAME, Organization.class.getName());
-		document.addKeyword(Field.ENTRY_CLASS_PK, organizationId);
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 

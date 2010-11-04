@@ -166,6 +166,12 @@ public class UserIndexer extends BaseIndexer {
 		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		document.addKeyword(Field.USER_ID, userId);
 
+		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
+		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
+
+		document.addKeyword(Field.ENTRY_CLASS_NAME, User.class.getName());
+		document.addKeyword(Field.ENTRY_CLASS_PK, userId);
+
 		document.addKeyword("screenName", screenName);
 		document.addKeyword("emailAddress", emailAddress);
 		document.addKeyword("firstName", firstName, true);
@@ -181,12 +187,6 @@ public class UserIndexer extends BaseIndexer {
 		document.addKeyword("roleIds", roleIds);
 		document.addKeyword("teamIds", teamIds);
 		document.addKeyword("userGroupIds", userGroupIds);
-
-		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
-		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
-
-		document.addKeyword(Field.ENTRY_CLASS_NAME, User.class.getName());
-		document.addKeyword(Field.ENTRY_CLASS_PK, userId);
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 

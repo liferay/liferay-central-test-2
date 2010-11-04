@@ -192,11 +192,12 @@ public class MBIndexer extends BaseIndexer {
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
 		document.addKeyword(Field.CATEGORY_ID, categoryId);
-		document.addKeyword("threadId", threadId);
 		document.addKeyword(Field.ENTRY_CLASS_NAME, MBMessage.class.getName());
 		document.addKeyword(Field.ENTRY_CLASS_PK, messageId);
 		document.addKeyword(
 			Field.ROOT_ENTRY_CLASS_PK, message.getRootMessageId());
+
+		document.addKeyword("threadId", threadId);
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 

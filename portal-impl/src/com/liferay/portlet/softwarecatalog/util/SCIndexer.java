@@ -165,6 +165,7 @@ public class SCIndexer extends BaseIndexer {
 		document.addKeyword(
 			Field.ENTRY_CLASS_NAME, SCProductEntry.class.getName());
 		document.addKeyword(Field.ENTRY_CLASS_PK, productEntryId);
+
 		document.addKeyword("version", version);
 		document.addKeyword("type", type);
 		document.addText("shortDescription", shortDescription);
