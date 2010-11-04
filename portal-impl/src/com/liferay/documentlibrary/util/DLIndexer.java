@@ -123,13 +123,13 @@ public class DLIndexer extends BaseIndexer {
 			return null;
 		}
 
-		String extension = fileEntry.getExtension();
-		String title = fileEntry.getTitle();
-		String description = fileEntry.getDescription();
-
 		if (userId == 0) {
 			userId = fileEntry.getUserId();
 		}
+
+		String extension = fileEntry.getExtension();
+		String title = fileEntry.getTitle();
+		String description = fileEntry.getDescription();
 
 		if (properties == null) {
 			properties = fileEntry.getLuceneProperties();
@@ -231,7 +231,6 @@ public class DLIndexer extends BaseIndexer {
 			}
 		}
 
-		document.addKeyword("extension", extension);
 		document.addText(Field.TITLE, title);
 		document.addText(Field.DESCRIPTION, description);
 		document.addText(Field.PROPERTIES, properties);
@@ -240,11 +239,13 @@ public class DLIndexer extends BaseIndexer {
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
 		document.addKeyword(Field.FOLDER_ID, folderId);
-		document.addKeyword("repositoryId", repositoryId);
-		document.addKeyword("path", fileName);
 		document.addKeyword(
 			Field.ENTRY_CLASS_NAME, DLFileEntry.class.getName());
 		document.addKeyword(Field.ENTRY_CLASS_PK, fileEntry.getFileEntryId());
+
+		document.addKeyword("repositoryId", repositoryId);
+		document.addKeyword("path", fileName);
+		document.addKeyword("extension", extension);
 
 		DLFileVersion fileVersion = fileEntry.getFileVersion();
 
