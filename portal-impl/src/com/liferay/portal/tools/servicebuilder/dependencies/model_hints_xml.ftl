@@ -3,13 +3,13 @@
 
 	<#if entity.hasColumns()>
 		<model name="${modelName}">
-			<#assign defaultHints = modelHintsUtil.getDefaultHints(modelName)>
+			<#if modelHintsUtil.getDefaultHints(modelName)??>
+				<#assign defaultHints = modelHintsUtil.getDefaultHints(modelName).entrySet()>
 
-			<#if defaultHints??>
-				<#if defaultHints?keys?size gt 0>
+				<#if defaultHints?size gt 0>
 					<default-hints>
-						<#list defaultHints?keys as defaultHintKey>
-							<hint name="${defaultHintKey}">${defaultHints[defaultHintKey]}</hint>
+						<#list defaultHints as defaultHint>
+							<hint name="${defaultHint.key}">${defaultHint.value}</hint>
 						</#list>
 					</default-hints>
 				</#if>
