@@ -34,6 +34,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 %>
 
 <liferay-ui:error exception="<%= ImageTypeException.class %>" message="please-enter-a-file-with-a-valid-file-type" />
+
 <liferay-ui:error exception="<%= LayoutFriendlyURLException.class %>">
 
 	<%
