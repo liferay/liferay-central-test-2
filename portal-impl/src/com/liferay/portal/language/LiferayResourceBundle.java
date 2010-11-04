@@ -12,7 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.kernel.util;
+package com.liferay.portal.language;
+
+import com.liferay.portal.kernel.util.PropertiesUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,6 +24,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -29,20 +32,28 @@ import java.util.Set;
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */
-public class PropertyResourceBundle extends ResourceBundle {
+public class LiferayResourceBundle extends ResourceBundle {
 
 	@SuppressWarnings("rawtypes")
-	public PropertyResourceBundle(String string, String charsetName)
+	public LiferayResourceBundle(String string, String charsetName)
 		throws IOException {
 
-		_map = new HashMap(PropertiesUtil.load(string, charsetName));
+		_map = new HashMap<String, String>();
+
+		Properties properties = PropertiesUtil.load(string, charsetName);
+
+		LanguageResources.fixValues(_map, properties);
 	}
 
 	@SuppressWarnings("rawtypes")
-	public PropertyResourceBundle(InputStream inputStream, String charsetName)
+	public LiferayResourceBundle(InputStream inputStream, String charsetName)
 		throws IOException {
 
-		_map = new HashMap(PropertiesUtil.load(inputStream, charsetName));
+		_map = new HashMap<String, String>();
+
+		Properties properties = PropertiesUtil.load(inputStream, charsetName);
+
+		LanguageResources.fixValues(_map, properties);
 	}
 
 	public Object handleGetObject(String key) {

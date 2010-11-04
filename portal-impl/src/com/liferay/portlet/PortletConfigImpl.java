@@ -19,16 +19,12 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
-import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.PropertyResourceBundle;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletConstants;
-import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.PublicRenderParameter;
 
 import java.util.ArrayList;
@@ -130,44 +126,17 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 	public ResourceBundle getResourceBundle(Locale locale) {
 		String resourceBundleClassName = _portlet.getResourceBundle();
 
+		ResourceBundle resourceBundle = null;
+
 		if (Validator.isNull(resourceBundleClassName)) {
 			String resourceBundleId = _portlet.getPortletId();
 
-			ResourceBundle resourceBundle = _resourceBundles.get(
+			resourceBundle = _resourceBundles.get(
 				resourceBundleId);
 
 			if (resourceBundle == null) {
-				StringBundler sb = new StringBundler(16);
-
-				try {
-					PortletInfo portletInfo = _portlet.getPortletInfo();
-
-					sb.append(JavaConstants.JAVAX_PORTLET_TITLE);
-					sb.append(StringPool.EQUAL);
-					sb.append(portletInfo.getTitle());
-					sb.append(StringPool.NEW_LINE);
-
-					sb.append(JavaConstants.JAVAX_PORTLET_SHORT_TITLE);
-					sb.append(StringPool.EQUAL);
-					sb.append(portletInfo.getShortTitle());
-					sb.append(StringPool.NEW_LINE);
-
-					sb.append(JavaConstants.JAVAX_PORTLET_KEYWORDS);
-					sb.append(StringPool.EQUAL);
-					sb.append(portletInfo.getKeywords());
-					sb.append(StringPool.NEW_LINE);
-
-					sb.append(JavaConstants.JAVAX_PORTLET_DESCRIPTION);
-					sb.append(StringPool.EQUAL);
-					sb.append(portletInfo.getDescription());
-					sb.append(StringPool.NEW_LINE);
-
-					resourceBundle = new PropertyResourceBundle(
-						sb.toString(), StringPool.UTF8);
-				}
-				catch (Exception e) {
-					_log.error(e, e);
-				}
+				resourceBundle = new PortletResourceBundle(
+					_portlet.getPortletInfo());
 
 				_resourceBundles.put(resourceBundleId, resourceBundle);
 			}
@@ -184,7 +153,7 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 
 			String resourceBundleId = sb.toString();
 
-			ResourceBundle resourceBundle = _resourceBundles.get(
+			resourceBundle = _resourceBundles.get(
 				resourceBundleId);
 
 			if (resourceBundle == null) {

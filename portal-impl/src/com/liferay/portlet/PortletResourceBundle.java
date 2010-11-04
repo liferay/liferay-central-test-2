@@ -28,6 +28,10 @@ import java.util.ResourceBundle;
  */
 public class PortletResourceBundle extends ResourceBundle {
 
+	public PortletResourceBundle(PortletInfo portletInfo) {
+		this(null, portletInfo);
+	}
+
 	public PortletResourceBundle(
 		ResourceBundle parentResourceBundle, PortletInfo portletInfo) {
 

@@ -43,6 +43,8 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyFactory;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webdav.WebDAVStorage;
@@ -53,6 +55,8 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.xmlrpc.Method;
+import com.liferay.portal.language.LanguageResources;
+import com.liferay.portal.language.LiferayResourceBundle;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.poller.PollerProcessorUtil;
@@ -72,12 +76,13 @@ import com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceU
 import com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceUtil;
 import com.liferay.util.portlet.PortletProps;
 
+import java.io.InputStream;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -251,7 +256,11 @@ public class PortletBagFactory {
 
 		Map<String, ResourceBundle> resourceBundles = null;
 
-		if (Validator.isNotNull(portlet.getResourceBundle())) {
+		String resourceBundle = portlet.getResourceBundle();
+		if (Validator.isNotNull(resourceBundle) &&
+			!resourceBundle.equals(
+				"com.liferay.portlet.StrutsResourceBundle")) {
+
 			resourceBundles = new HashMap<String, ResourceBundle>();
 
 			initResourceBundle(
@@ -318,19 +327,75 @@ public class PortletBagFactory {
 		return (String)method.invoke(null, propertyKey);
 	}
 
+	protected InputStream getResourceBundleInputStream(
+		String resourceBundleName, Locale locale) {
+
+		resourceBundleName = resourceBundleName.replace(
+				StringPool.PERIOD, StringPool.SLASH);
+
+		Locale newLocale = locale;
+
+		InputStream inputStream = null;
+
+		while (inputStream == null) {
+			locale = newLocale;
+
+			StringBundler sb = new StringBundler(4);
+
+			sb.append(resourceBundleName);
+
+			String localeName = locale.toString();
+
+			if (localeName.length() > 0) {
+				sb.append(StringPool.UNDERLINE);
+				sb.append(localeName);
+			}
+
+			sb.append(".properties");
+
+			String localizedResourceBundleName = sb.toString();
+
+			if (_log.isInfoEnabled()) {
+				_log.info("Attempting to load " + localizedResourceBundleName);
+			}
+
+			inputStream = _classLoader.getResourceAsStream(
+				localizedResourceBundleName);
+
+			newLocale = LanguageResources.getSuperLocale(locale);
+
+			if (newLocale == null) {
+				break;
+			}
+
+			if (newLocale.equals(locale)) {
+				break;
+			}
+		}
+
+		return inputStream;
+	}
+
 	protected void initResourceBundle(
 		Map<String, ResourceBundle> resourceBundles, Portlet portlet,
 		Locale locale) {
 
-		try {
-			ResourceBundle resourceBundle = ResourceBundle.getBundle(
-				portlet.getResourceBundle(), locale, _classLoader);
+		InputStream inputStream = getResourceBundleInputStream(
+			portlet.getResourceBundle(), locale);
 
-			resourceBundles.put(
-				LocaleUtil.toLanguageId(locale), resourceBundle);
+		try {
+			if (inputStream != null) {
+				ResourceBundle resourceBundle =
+					new LiferayResourceBundle(inputStream, StringPool.UTF8);
+
+				inputStream.close();
+
+				resourceBundles.put(
+					LocaleUtil.toLanguageId(locale), resourceBundle);
+			}
 		}
-		catch (MissingResourceException mre) {
-			_log.warn(mre.getMessage());
+		catch (Exception e) {
+			_log.warn(e.getMessage());
 		}
 	}
 

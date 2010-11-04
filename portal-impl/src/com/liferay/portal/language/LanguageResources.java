@@ -55,6 +55,19 @@ public class LanguageResources {
 		return value;
 	}
 
+	public static void fixValues(
+		Map<String, String> languageMap, Properties properties) {
+
+		for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+			String key = (String)entry.getKey();
+			String value = (String)entry.getValue();
+
+			value = fixValue(value);
+
+			languageMap.put(key, value);
+		}
+	}
+
 	public static String getMessage(Locale locale, String key) {
 		if (locale == null) {
 			return null;
@@ -69,11 +82,38 @@ public class LanguageResources {
 		String value = languageMap.get(key);
 
 		if (value == null) {
-			return getMessage(_getSuperLocale(locale), key);
+			return getMessage(getSuperLocale(locale), key);
 		}
 		else {
 			return value;
 		}
+	}
+
+	public static Locale getSuperLocale(Locale locale) {
+		if (Validator.isNotNull(locale.getVariant())) {
+			return new Locale(locale.getLanguage(), locale.getCountry());
+		}
+
+		if (Validator.isNotNull(locale.getCountry())) {
+			if (LanguageUtil.isDuplicateLanguageCode(locale.getLanguage())) {
+				Locale priorityLocale = LanguageUtil.getLocale(
+					locale.getLanguage());
+
+				if (!locale.equals(priorityLocale)) {
+					return new Locale(
+						priorityLocale.getLanguage(),
+						priorityLocale.getCountry());
+				}
+			}
+
+			return new Locale(locale.getLanguage());
+		}
+
+		if (Validator.isNotNull(locale.getLanguage())) {
+			return new Locale(StringPool.BLANK);
+		}
+
+		return null;
 	}
 
 	public static Map<String, String> putLanguageMap(
@@ -103,33 +143,6 @@ public class LanguageResources {
 		_config = config;
 	}
 
-	private static Locale _getSuperLocale(Locale locale) {
-		if (Validator.isNotNull(locale.getVariant())) {
-			return new Locale(locale.getLanguage(), locale.getCountry());
-		}
-
-		if (Validator.isNotNull(locale.getCountry())) {
-			if (LanguageUtil.isDuplicateLanguageCode(locale.getLanguage())) {
-				Locale priorityLocale = LanguageUtil.getLocale(
-					locale.getLanguage());
-
-				if (!locale.equals(priorityLocale)) {
-					return new Locale(
-						priorityLocale.getLanguage(),
-						priorityLocale.getCountry());
-				}
-			}
-
-			return new Locale(locale.getLanguage());
-		}
-
-		if (Validator.isNotNull(locale.getLanguage())) {
-			return new Locale(StringPool.BLANK);
-		}
-
-		return null;
-	}
-
 	private static Map<String, String> _loadLocale(Locale locale) {
 		String[] names = StringUtil.split(
 			_config.replace(StringPool.PERIOD, StringPool.SLASH));
@@ -155,14 +168,7 @@ public class LanguageResources {
 
 				Properties properties = _loadProperties(sb.toString());
 
-				for (Map.Entry<Object, Object> entry : properties.entrySet()) {
-					String key = (String)entry.getKey();
-					String value = (String)entry.getValue();
-
-					value = fixValue(value);
-
-					languageMap.put(key, value);
-				}
+				fixValues(languageMap, properties);
 			}
 		}
 		else {
