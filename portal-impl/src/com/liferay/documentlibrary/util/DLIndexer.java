@@ -219,6 +219,8 @@ public class DLIndexer extends BaseIndexer {
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 		document.addKeyword(Field.USER_ID, userId);
 
+		document.addText(Field.TITLE, title);
+
 		if (indexContent) {
 			try {
 				document.addFile(Field.CONTENT, is, fileEntry.getTitle());
@@ -231,7 +233,6 @@ public class DLIndexer extends BaseIndexer {
 			}
 		}
 
-		document.addText(Field.TITLE, title);
 		document.addText(Field.DESCRIPTION, description);
 		document.addText(Field.PROPERTIES, properties);
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
