@@ -278,11 +278,11 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 	protected Object[] filterQuery(AssetEntryQuery entryQuery)
 		throws PortalException, SystemException {
 
-		int start = entryQuery.getStart();
 		int end = entryQuery.getEnd();
+		int start = entryQuery.getStart();
 
-		entryQuery.setStart(0);
 		entryQuery.setEnd(end + PropsValues.ASSET_FILTER_SEARCH_LIMIT);
+		entryQuery.setStart(0);
 
 		List<AssetEntry> entries = assetEntryLocalService.getEntries(
 			entryQuery);
@@ -312,10 +312,11 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 
 		int length = filteredEntries.size();
 
-		if ((start != QueryUtil.ALL_POS) && (end != QueryUtil.ALL_POS)) {
+		if ((end != QueryUtil.ALL_POS) && (start != QueryUtil.ALL_POS)) {
 			if (end > length) {
 				end = length;
 			}
+
 			if (start > length) {
 				start = length;
 			}
@@ -323,8 +324,8 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			filteredEntries = filteredEntries.subList(start, end);
 		}
 
-		entryQuery.setStart(start);
 		entryQuery.setEnd(end);
+		entryQuery.setStart(start);
 
 		return new Object[] {filteredEntries, length};
 	}

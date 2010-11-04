@@ -61,14 +61,14 @@ if (assetVocabularyId > 0) {
 		}
 
 		if (groupTotal > 0) {
-			if (end > 0 && end > groupTotal) {
+			if ((end > 0) && (end > groupTotal)) {
 				end -= groupTotal;
 			}
 			else {
 				end = 0;
 			}
 
-			if (start > 0 && start > groupTotal) {
+			if ((start > 0) && (start > groupTotal)) {
 				start -= groupTotal;
 			}
 			else {
