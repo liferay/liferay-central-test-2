@@ -31,6 +31,7 @@ import java.util.Map;
  * @generated
  */
 public interface ${entity.name}Model extends BaseModel<${entity.name}> {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

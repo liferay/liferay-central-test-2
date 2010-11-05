@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.exception.SystemException;
  */
 </#if>
 public interface ${entity.name}${sessionTypeName}Service {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

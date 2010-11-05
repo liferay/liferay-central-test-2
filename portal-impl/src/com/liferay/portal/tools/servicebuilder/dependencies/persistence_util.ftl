@@ -26,6 +26,7 @@ import java.util.List;
  * @generated
  */
 public class ${entity.name}Util {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

@@ -12,6 +12,7 @@ import ${packagePath}.model.${entity.name};
  * @author ${author}
  */
 public class ${entity.name}Impl extends ${entity.name}ModelImpl implements ${entity.name} {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

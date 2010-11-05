@@ -35,6 +35,7 @@ import ${packagePath}.service.base.${entity.name}${sessionTypeName}ServiceBaseIm
  */
 </#if>
 public class ${entity.name}${sessionTypeName}ServiceImpl extends ${entity.name}${sessionTypeName}ServiceBaseImpl {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

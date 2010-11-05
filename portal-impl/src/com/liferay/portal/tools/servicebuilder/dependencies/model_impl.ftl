@@ -60,6 +60,7 @@ import java.util.Map;
  * @generated
  */
 public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> implements ${entity.name}Model {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

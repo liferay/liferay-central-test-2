@@ -63,6 +63,7 @@ import javax.sql.DataSource;
  * @generated
  */
 	public abstract class ${entity.name}LocalServiceBaseImpl implements ${entity.name}LocalService {
+
 		/*
 		 * NOTE FOR DEVELOPERS:
 		 *
@@ -81,6 +82,7 @@ import javax.sql.DataSource;
  * @generated
  */
 	public abstract class ${entity.name}ServiceBaseImpl extends PrincipalBean implements ${entity.name}Service {
+
 		/*
 		 * NOTE FOR DEVELOPERS:
 		 *

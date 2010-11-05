@@ -14,6 +14,7 @@ package ${packagePath}.model;
  * @generated
  */
 public interface ${entity.name} extends ${entity.name}Model {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

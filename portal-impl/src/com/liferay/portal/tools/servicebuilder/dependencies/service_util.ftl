@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  */
 </#if>
 public class ${entity.name}${sessionTypeName}ServiceUtil {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

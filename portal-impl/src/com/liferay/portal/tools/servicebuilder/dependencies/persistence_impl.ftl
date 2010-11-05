@@ -87,6 +87,7 @@ import java.util.Set;
  * @generated
  */
 public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.name}> implements ${entity.name}Persistence {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

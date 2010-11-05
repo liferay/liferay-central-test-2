@@ -23,6 +23,7 @@ import java.util.Date;
  * @generated
  */
 public interface ${entity.name}Persistence extends BasePersistence<${entity.name}> {
+
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
