@@ -55,8 +55,7 @@ public class SelectWebContentLocalizedTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=Hello World Localized Article")) {
+				if (selenium.isVisible("link=Hello World Localized Article")) {
 					break;
 				}
 			}

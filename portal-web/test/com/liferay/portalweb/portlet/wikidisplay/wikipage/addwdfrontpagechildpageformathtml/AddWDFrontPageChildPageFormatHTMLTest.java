@@ -74,7 +74,7 @@ public class AddWDFrontPageChildPageFormatHTMLTest extends BaseTestCase {
 		selenium.type("//div/span[1]/span/span/input",
 			RuntimeVariables.replace("WD Wiki Page Format HTML Test"));
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("cke_40", RuntimeVariables.replace("Source"));
+		selenium.clickAt("cke_42_label", RuntimeVariables.replace("Source"));
 		selenium.type("//td[@id='cke_contents_CKEditor1']/textarea",
 			RuntimeVariables.replace(
 				"<a href=http://www.liferay.com>Welcome to LIFERAY</a>"));
@@ -82,7 +82,7 @@ public class AddWDFrontPageChildPageFormatHTMLTest extends BaseTestCase {
 		selenium.selectFrame("relative=top");
 		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
-		selenium.clickAt("cke_40", RuntimeVariables.replace("Source"));
+		selenium.clickAt("cke_42_label", RuntimeVariables.replace("Source"));
 		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));

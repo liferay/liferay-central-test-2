@@ -30,13 +30,28 @@
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>link=Configuration</td>
-	<td></td>
+	<td>//strong/a</td>
+	<td>Options</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
 	<td>_86_groupId</td>
-	<td>label=Liferay</td>
+	<td></td>
 </tr>
 <tr>
 	<td>select</td>
@@ -72,6 +87,11 @@
 	<td>clickAtAndWait</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='portlet-msg-success']</td>
+	<td>You have successfully updated the setup.</td>
 </tr>
 <tr>
 	<td>open</td>

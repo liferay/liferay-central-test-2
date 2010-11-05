@@ -109,10 +109,6 @@ public class AddWikiPageEmptyAttachmentTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\wiki\\wikipage\\addfrontpagecreoleimage\\dependencies\\Wiki_Attachment.jpg"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_36_file1",
-			RuntimeVariables.replace(
-				"L:\\projects\\6.0.x\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\wiki\\wikipage\\addfrontpagecreoleimage\\dependencies\\Wiki_Attachment.jpg"));
-		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
