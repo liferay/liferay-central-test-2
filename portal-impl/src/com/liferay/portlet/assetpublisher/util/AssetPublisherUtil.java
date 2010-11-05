@@ -49,7 +49,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.portlet.ActionRequest;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
@@ -62,12 +61,12 @@ import javax.servlet.http.HttpSession;
 public class AssetPublisherUtil {
 
 	public static void addAndStoreSelection(
-			ActionRequest actionRequest, String className, long classPK,
+			PortletRequest portletRequest, String className, long classPK,
 			int assetEntryOrder)
 		throws Exception {
 
-		String referringPortletResource =
-			ParamUtil.getString(actionRequest, "referringPortletResource");
+		String referringPortletResource = ParamUtil.getString(
+			portletRequest, "referringPortletResource");
 
 		if (Validator.isNull(referringPortletResource)) {
 			return;
@@ -75,7 +74,7 @@ public class AssetPublisherUtil {
 
 		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-				actionRequest, referringPortletResource);
+				portletRequest, referringPortletResource);
 
 		String selectionStyle = preferences.getValue(
 			"selection-style", "dynamic");
@@ -100,14 +99,14 @@ public class AssetPublisherUtil {
 	}
 
 	public static void addSelection(
-			ActionRequest actionRequest, PortletPreferences preferences)
+			PortletRequest portletRequest, PortletPreferences preferences)
 		throws Exception {
 
 		String assetEntryType = ParamUtil.getString(
-			actionRequest, "assetEntryType");
-		long assetEntryId = ParamUtil.getLong(actionRequest, "assetEntryId");
+			portletRequest, "assetEntryType");
+		long assetEntryId = ParamUtil.getLong(portletRequest, "assetEntryId");
 		int assetEntryOrder = ParamUtil.getInteger(
-			actionRequest, "assetEntryOrder");
+			portletRequest, "assetEntryOrder");
 
 		addSelection(
 			assetEntryType, assetEntryId, assetEntryOrder, preferences);
