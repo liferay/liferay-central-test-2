@@ -19,6 +19,10 @@ package com.liferay.portal.kernel.uuid;
  */
 public interface PortalUUID {
 
+	public String fromSafeUuid(String safeUuid);
+
 	public String generate();
+
+	public String toSafeUuid(String uuid);
 
 }

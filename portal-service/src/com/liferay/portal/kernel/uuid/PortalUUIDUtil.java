@@ -19,18 +19,26 @@ package com.liferay.portal.kernel.uuid;
  */
 public class PortalUUIDUtil {
 
+	public static String fromSafeUuid(String safeUuid) {
+		return _portalUUID.fromSafeUuid(safeUuid);
+	}
+
 	public static String generate() {
 		return getPortalUUID().generate();
 	}
 
 	public static PortalUUID getPortalUUID() {
-		return _portalJNDI;
+		return _portalUUID;
 	}
 
-	public void setPortalUUID(PortalUUID portalJNDI) {
-		_portalJNDI = portalJNDI;
+	public static String toSafeUuid(String uuid) {
+		return _portalUUID.toSafeUuid(uuid);
 	}
 
-	private static PortalUUID _portalJNDI;
+	public void setPortalUUID(PortalUUID portalUUID) {
+		_portalUUID = portalUUID;
+	}
+
+	private static PortalUUID _portalUUID;
 
 }

@@ -77,6 +77,8 @@ public class StringPool {
 
 	public static final String DOUBLE_SPACE = "  ";
 
+	public static final String DOUBLE_UNDERSCORE = "__";
+
 	public static final String EXCLAMATION = "!";
 
 	public static final String EQUAL = "=";

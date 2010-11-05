@@ -14,6 +14,8 @@
 
 package com.liferay.portal.uuid;
 
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.uuid.PortalUUID;
 
 import java.util.UUID;
@@ -23,8 +25,18 @@ import java.util.UUID;
  */
 public class PortalUUIDImpl implements PortalUUID {
 
+	public String fromSafeUuid(String safeUuid) {
+		return StringUtil.replace(
+			safeUuid, StringPool.DOUBLE_UNDERSCORE, StringPool.DASH);
+	}
+
 	public String generate() {
 		return UUID.randomUUID().toString();
+	}
+
+	public String toSafeUuid(String uuid) {
+		return StringUtil.replace(
+			uuid, StringPool.DASH, StringPool.DOUBLE_UNDERSCORE);
 	}
 
 }
