@@ -219,21 +219,6 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry> {
 	public void setUrlTitle(String urlTitle);
 
 	/**
-	 * Gets the content of this blogs entry.
-	 *
-	 * @return the content of this blogs entry
-	 */
-	@AutoEscape
-	public String getContent();
-
-	/**
-	 * Sets the content of this blogs entry.
-	 *
-	 * @param content the content of this blogs entry
-	 */
-	public void setContent(String content);
-
-	/**
 	 * Gets the description of this blogs entry.
 	 *
 	 * @return the description of this blogs entry
@@ -247,6 +232,21 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry> {
 	 * @param description the description of this blogs entry
 	 */
 	public void setDescription(String description);
+
+	/**
+	 * Gets the content of this blogs entry.
+	 *
+	 * @return the content of this blogs entry
+	 */
+	@AutoEscape
+	public String getContent();
+
+	/**
+	 * Sets the content of this blogs entry.
+	 *
+	 * @param content the content of this blogs entry
+	 */
+	public void setContent(String content);
 
 	/**
 	 * Gets the display date of this blogs entry.

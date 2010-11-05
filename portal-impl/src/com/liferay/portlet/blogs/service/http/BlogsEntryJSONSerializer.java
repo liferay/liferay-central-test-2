@@ -60,8 +60,8 @@ public class BlogsEntryJSONSerializer {
 		jsonObj.put("modifiedDate", modifiedDateJSON);
 		jsonObj.put("title", model.getTitle());
 		jsonObj.put("urlTitle", model.getUrlTitle());
-		jsonObj.put("content", model.getContent());
 		jsonObj.put("description", model.getDescription());
+		jsonObj.put("content", model.getContent());
 
 		Date displayDate = model.getDisplayDate();
 

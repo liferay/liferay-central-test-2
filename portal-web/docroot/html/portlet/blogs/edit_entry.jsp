@@ -48,7 +48,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	<portlet:param name="struts_action" value="/blogs/edit_entry" />
 </portlet:actionURL>
 
-<aui:form enctype="multipart/form-data" action="<%= editEntryURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault();" %>'>
+<aui:form action="<%= editEntryURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
@@ -124,14 +124,14 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 		<br />
 
-		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="entryAbstractPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "abstract") %>'>
+		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="blogsEntryAbstractPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "abstract") %>'>
 			<liferay-ui:error exception="<%= EntrySmallImageNameException.class %>">
 
-			<%
-			String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.BLOGS_IMAGE_EXTENSIONS, StringPool.COMMA);
-			%>
+				<%
+				String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.BLOGS_IMAGE_EXTENSIONS, StringPool.COMMA);
+				%>
 
-			<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
+				<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
 			</liferay-ui:error>
 
 			<liferay-ui:error exception="<%= EntrySmallImageSizeException.class %>" message="please-enter-a-small-image-with-a-valid-file-size" />
@@ -149,7 +149,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="entryCategorizationPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "categorization") %>'>
+		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="blogsEntryCategorizationPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "categorization") %>'>
 			<aui:fieldset>
 				<aui:input name="categories" type="assetCategories" />
 

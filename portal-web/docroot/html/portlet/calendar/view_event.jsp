@@ -217,7 +217,7 @@ request.setAttribute("view_event.jsp-event", event);
 
 <c:if test="<%= enableComments %>">
 	<liferay-ui:panel-container extended="<%= false %>" id="commentsPanelContainer" persistState="<%= true %>">
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="commentsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "comments") %>'>
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="calendarEventCommentsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "comments") %>'>
 			<portlet:actionURL var="discussionURL">
 				<portlet:param name="struts_action" value="/calendar/edit_event_discussion" />
 			</portlet:actionURL>

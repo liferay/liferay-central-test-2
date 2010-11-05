@@ -74,8 +74,8 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 		newBlogsEntry.setModifiedDate(nextDate());
 		newBlogsEntry.setTitle(randomString());
 		newBlogsEntry.setUrlTitle(randomString());
-		newBlogsEntry.setContent(randomString());
 		newBlogsEntry.setDescription(randomString());
+		newBlogsEntry.setContent(randomString());
 		newBlogsEntry.setDisplayDate(nextDate());
 		newBlogsEntry.setAllowPingbacks(randomBoolean());
 		newBlogsEntry.setAllowTrackbacks(randomBoolean());
@@ -108,9 +108,9 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingBlogsEntry.getTitle(), newBlogsEntry.getTitle());
 		assertEquals(existingBlogsEntry.getUrlTitle(),
 			newBlogsEntry.getUrlTitle());
-		assertEquals(existingBlogsEntry.getContent(), newBlogsEntry.getContent());
 		assertEquals(existingBlogsEntry.getDescription(),
 			newBlogsEntry.getDescription());
+		assertEquals(existingBlogsEntry.getContent(), newBlogsEntry.getContent());
 		assertEquals(Time.getShortTimestamp(existingBlogsEntry.getDisplayDate()),
 			Time.getShortTimestamp(newBlogsEntry.getDisplayDate()));
 		assertEquals(existingBlogsEntry.getAllowPingbacks(),
@@ -214,8 +214,8 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 		blogsEntry.setModifiedDate(nextDate());
 		blogsEntry.setTitle(randomString());
 		blogsEntry.setUrlTitle(randomString());
-		blogsEntry.setContent(randomString());
 		blogsEntry.setDescription(randomString());
+		blogsEntry.setContent(randomString());
 		blogsEntry.setDisplayDate(nextDate());
 		blogsEntry.setAllowPingbacks(randomBoolean());
 		blogsEntry.setAllowTrackbacks(randomBoolean());

@@ -247,24 +247,6 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the content of this blogs entry.
-	*
-	* @return the content of this blogs entry
-	*/
-	public java.lang.String getContent() {
-		return _blogsEntry.getContent();
-	}
-
-	/**
-	* Sets the content of this blogs entry.
-	*
-	* @param content the content of this blogs entry
-	*/
-	public void setContent(java.lang.String content) {
-		_blogsEntry.setContent(content);
-	}
-
-	/**
 	* Gets the description of this blogs entry.
 	*
 	* @return the description of this blogs entry
@@ -280,6 +262,24 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	*/
 	public void setDescription(java.lang.String description) {
 		_blogsEntry.setDescription(description);
+	}
+
+	/**
+	* Gets the content of this blogs entry.
+	*
+	* @return the content of this blogs entry
+	*/
+	public java.lang.String getContent() {
+		return _blogsEntry.getContent();
+	}
+
+	/**
+	* Sets the content of this blogs entry.
+	*
+	* @param content the content of this blogs entry
+	*/
+	public void setContent(java.lang.String content) {
+		_blogsEntry.setContent(content);
 	}
 
 	/**

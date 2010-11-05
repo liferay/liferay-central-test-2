@@ -17,7 +17,6 @@ package com.liferay.portlet.blogs.action;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
@@ -89,10 +88,10 @@ public class EditEntryAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-		int workflowAction = ParamUtil.getInteger(
-			actionRequest, "workflowAction",
-			WorkflowConstants.ACTION_SAVE_DRAFT);
 
 		try {
 			BlogsEntry entry = null;
@@ -152,30 +151,32 @@ public class EditEntryAction extends PortletAction {
 			}
 
 			if (entry != null) {
-				if (actionRequest.getWindowState().equals(
-					LiferayWindowState.EXCLUSIVE)) {
+				int workflowAction = ParamUtil.getInteger(
+					actionRequest, "workflowAction",
+					WorkflowConstants.ACTION_SAVE_DRAFT);
 
-					JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+				if (themeDisplay.isStateExclusive()) {
+					JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-					jsonObj.put("entryId", entry.getEntryId());
-					jsonObj.put("redirect", redirect);
-					jsonObj.put("updateRedirect", updateRedirect);
+					jsonObject.put("entryId", entry.getEntryId());
+					jsonObject.put("redirect", redirect);
+					jsonObject.put("updateRedirect", updateRedirect);
 
 					HttpServletRequest request =
 						PortalUtil.getHttpServletRequest(actionRequest);
 					HttpServletResponse response =
 						PortalUtil.getHttpServletResponse(actionResponse);
-					InputStream is = new UnsyncByteArrayInputStream(
-						jsonObj.toString().getBytes());
+					InputStream inputStream = new UnsyncByteArrayInputStream(
+						jsonObject.toString().getBytes());
 					String contentType = ContentTypes.TEXT_JAVASCRIPT;
 
 					ServletResponseUtil.sendFile(
-						request, response, null, is, contentType);
+						request, response, null, inputStream, contentType);
 
 					setForward(actionRequest, ActionConstants.COMMON_NULL);
 				}
-				else if (
-					workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT) {
+				else if (workflowAction ==
+							WorkflowConstants.ACTION_SAVE_DRAFT) {
 
 					redirect = getSaveAndContinueRedirect(
 						portletConfig, actionRequest, entry, redirect);
@@ -183,10 +184,6 @@ public class EditEntryAction extends PortletAction {
 					sendRedirect(actionRequest, actionResponse, redirect);
 				}
 				else {
-					ThemeDisplay themeDisplay =
-						(ThemeDisplay)actionRequest.getAttribute(
-							WebKeys.THEME_DISPLAY);
-
 					LayoutTypePortlet layoutTypePortlet =
 						themeDisplay.getLayoutTypePortlet();
 
@@ -200,7 +197,8 @@ public class EditEntryAction extends PortletAction {
 					}
 				}
 			}
-		}catch (Exception e) {
+		}
+		catch (Exception e) {
 			if (e instanceof NoSuchEntryException ||
 				e instanceof PrincipalException) {
 
@@ -281,6 +279,31 @@ public class EditEntryAction extends PortletAction {
 		}
 	}
 
+	protected String getSaveAndContinueRedirect(
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			BlogsEntry entry, String redirect)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		PortletURLImpl portletURL = new PortletURLImpl(
+			(ActionRequestImpl)actionRequest, portletConfig.getPortletName(),
+			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
+
+		portletURL.setWindowState(WindowState.MAXIMIZED);
+
+		portletURL.setParameter("struts_action", "/blogs_admin/edit_entry");
+		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
+		portletURL.setParameter("redirect", redirect, false);
+		portletURL.setParameter(
+			"groupId", String.valueOf(entry.getGroupId()), false);
+		portletURL.setParameter(
+			"entryId", String.valueOf(entry.getEntryId()), false);
+
+		return portletURL.toString();
+	}
+
 	protected void subscribe(ActionRequest actionRequest) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -318,46 +341,47 @@ public class EditEntryAction extends PortletAction {
 	protected Object[] updateEntry(ActionRequest actionRequest)
 		throws Exception {
 
-		long entryId = ParamUtil.getLong(actionRequest, "entryId");
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
+			actionRequest);
 
-		String title = ParamUtil.getString(actionRequest, "title");
-		String content = ParamUtil.getString(actionRequest, "content");
-		String description = ParamUtil.getString(actionRequest, "description");
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long entryId = ParamUtil.getLong(uploadRequest, "entryId");
+
+		String title = ParamUtil.getString(uploadRequest, "title");
+		String description = ParamUtil.getString(uploadRequest, "description");
+		String content = ParamUtil.getString(uploadRequest, "content");
 
 		int displayDateMonth = ParamUtil.getInteger(
-			actionRequest, "displayDateMonth");
+			uploadRequest, "displayDateMonth");
 		int displayDateDay = ParamUtil.getInteger(
-			actionRequest, "displayDateDay");
+			uploadRequest, "displayDateDay");
 		int displayDateYear = ParamUtil.getInteger(
-			actionRequest, "displayDateYear");
+			uploadRequest, "displayDateYear");
 		int displayDateHour = ParamUtil.getInteger(
-			actionRequest, "displayDateHour");
+			uploadRequest, "displayDateHour");
 		int displayDateMinute = ParamUtil.getInteger(
-			actionRequest, "displayDateMinute");
+			uploadRequest, "displayDateMinute");
 		int displayDateAmPm = ParamUtil.getInteger(
-			actionRequest, "displayDateAmPm");
+			uploadRequest, "displayDateAmPm");
 
 		if (displayDateAmPm == Calendar.PM) {
 			displayDateHour += 12;
 		}
 
 		boolean allowPingbacks = ParamUtil.getBoolean(
-			actionRequest, "allowPingbacks");
+			uploadRequest, "allowPingbacks");
 		boolean allowTrackbacks = ParamUtil.getBoolean(
-			actionRequest, "allowTrackbacks");
+			uploadRequest, "allowTrackbacks");
 		String[] trackbacks = StringUtil.split(
-			ParamUtil.getString(actionRequest, "trackbacks"));
+			ParamUtil.getString(uploadRequest, "trackbacks"));
 
 		boolean	smallImage = false;
 		String smallImageURL = null;
 		File smallFile = null;
 
-		if (!actionRequest.getWindowState().equals(
-				LiferayWindowState.EXCLUSIVE)) {
-
-			UploadPortletRequest uploadRequest =
-				PortalUtil.getUploadPortletRequest(actionRequest);
-
+		if (!themeDisplay.isStateExclusive()) {
 			smallImage = ParamUtil.getBoolean(uploadRequest, "smallImage");
 			smallImageURL = ParamUtil.getString(
 				uploadRequest, "smallImageURL");
@@ -375,7 +399,7 @@ public class EditEntryAction extends PortletAction {
 			// Add entry
 
 			entry = BlogsEntryServiceUtil.addEntry(
-				title, content, description, displayDateMonth, displayDateDay,
+				title, description, content, displayDateMonth, displayDateDay,
 				displayDateYear, displayDateHour, displayDateMinute,
 				allowPingbacks, allowTrackbacks, trackbacks, smallImage,
 				smallImageURL, smallFile, serviceContext);
@@ -393,7 +417,7 @@ public class EditEntryAction extends PortletAction {
 			String tempOldUrlTitle = entry.getUrlTitle();
 
 			entry = BlogsEntryServiceUtil.updateEntry(
-				entryId, title, content, description, displayDateMonth,
+				entryId, title, description, content, displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
 				displayDateMinute, allowPingbacks, allowTrackbacks, trackbacks,
 				smallImage, smallImageURL, smallFile, serviceContext);
@@ -408,31 +432,6 @@ public class EditEntryAction extends PortletAction {
 		}
 
 		return new Object[] {entry, oldUrlTitle};
-	}
-
-	protected String getSaveAndContinueRedirect(
-			PortletConfig portletConfig, ActionRequest actionRequest,
-			BlogsEntry entry, String redirect)
-		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		PortletURLImpl portletURL = new PortletURLImpl(
-			(ActionRequestImpl)actionRequest, portletConfig.getPortletName(),
-			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
-
-		portletURL.setWindowState(WindowState.MAXIMIZED);
-
-		portletURL.setParameter("struts_action", "/blogs_admin/edit_entry");
-		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
-		portletURL.setParameter("redirect", redirect, false);
-		portletURL.setParameter(
-			"groupId", String.valueOf(entry.getGroupId()), false);
-		portletURL.setParameter(
-			"entryId", String.valueOf(entry.getEntryId()), false);
-
-		return portletURL.toString();
 	}
 
 }

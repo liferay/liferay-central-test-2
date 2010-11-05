@@ -29,8 +29,8 @@ public class BlogsEntryServiceWrapper implements BlogsEntryService {
 	}
 
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		java.lang.String title, java.lang.String content,
-		java.lang.String description, int displayDateMonth, int displayDateDay,
+		java.lang.String title, java.lang.String description,
+		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		boolean allowPingbacks, boolean allowTrackbacks,
 		java.lang.String[] trackbacks, boolean smallImage,
@@ -38,7 +38,7 @@ public class BlogsEntryServiceWrapper implements BlogsEntryService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _blogsEntryService.addEntry(title, content, description,
+		return _blogsEntryService.addEntry(title, description, content,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, allowPingbacks, allowTrackbacks, trackbacks,
 			smallImage, smallImageURL, smallFile, serviceContext);
@@ -138,8 +138,8 @@ public class BlogsEntryServiceWrapper implements BlogsEntryService {
 	}
 
 	public com.liferay.portlet.blogs.model.BlogsEntry updateEntry(
-		long entryId, java.lang.String title, java.lang.String content,
-		java.lang.String description, int displayDateMonth, int displayDateDay,
+		long entryId, java.lang.String title, java.lang.String description,
+		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		boolean allowPingbacks, boolean allowTrackbacks,
 		java.lang.String[] trackbacks, boolean smallImage,
@@ -147,8 +147,8 @@ public class BlogsEntryServiceWrapper implements BlogsEntryService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _blogsEntryService.updateEntry(entryId, title, content,
-			description, displayDateMonth, displayDateDay, displayDateYear,
+		return _blogsEntryService.updateEntry(entryId, title, description,
+			content, displayDateMonth, displayDateDay, displayDateYear,
 			displayDateHour, displayDateMinute, allowPingbacks,
 			allowTrackbacks, trackbacks, smallImage, smallImageURL, smallFile,
 			serviceContext);

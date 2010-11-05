@@ -641,8 +641,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		blogsEntryImpl.setModifiedDate(blogsEntry.getModifiedDate());
 		blogsEntryImpl.setTitle(blogsEntry.getTitle());
 		blogsEntryImpl.setUrlTitle(blogsEntry.getUrlTitle());
-		blogsEntryImpl.setContent(blogsEntry.getContent());
 		blogsEntryImpl.setDescription(blogsEntry.getDescription());
+		blogsEntryImpl.setContent(blogsEntry.getContent());
 		blogsEntryImpl.setDisplayDate(blogsEntry.getDisplayDate());
 		blogsEntryImpl.setAllowPingbacks(blogsEntry.isAllowPingbacks());
 		blogsEntryImpl.setAllowTrackbacks(blogsEntry.isAllowTrackbacks());

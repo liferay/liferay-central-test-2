@@ -238,8 +238,8 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService {
 	}
 
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long userId,
-		java.lang.String title, java.lang.String content,
-		java.lang.String description, int displayDateMonth, int displayDateDay,
+		java.lang.String title, java.lang.String description,
+		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		boolean allowPingbacks, boolean allowTrackbacks,
 		java.lang.String[] trackbacks, boolean smallImage,
@@ -247,8 +247,8 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _blogsEntryLocalService.addEntry(userId, title, content,
-			description, displayDateMonth, displayDateDay, displayDateYear,
+		return _blogsEntryLocalService.addEntry(userId, title, description,
+			content, displayDateMonth, displayDateDay, displayDateYear,
 			displayDateHour, displayDateMinute, allowPingbacks,
 			allowTrackbacks, trackbacks, smallImage, smallImageURL, smallFile,
 			serviceContext);
@@ -424,8 +424,8 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService {
 	}
 
 	public com.liferay.portlet.blogs.model.BlogsEntry updateEntry(long userId,
-		long entryId, java.lang.String title, java.lang.String content,
-		java.lang.String description, int displayDateMonth, int displayDateDay,
+		long entryId, java.lang.String title, java.lang.String description,
+		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		boolean allowPingbacks, boolean allowTrackbacks,
 		java.lang.String[] trackbacks, boolean smallImage,
@@ -434,7 +434,7 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _blogsEntryLocalService.updateEntry(userId, entryId, title,
-			content, description, displayDateMonth, displayDateDay,
+			description, content, displayDateMonth, displayDateDay,
 			displayDateYear, displayDateHour, displayDateMinute,
 			allowPingbacks, allowTrackbacks, trackbacks, smallImage,
 			smallImageURL, smallFile, serviceContext);

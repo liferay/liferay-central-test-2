@@ -73,8 +73,8 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "title", new Integer(Types.VARCHAR) },
 			{ "urlTitle", new Integer(Types.VARCHAR) },
-			{ "content", new Integer(Types.CLOB) },
 			{ "description", new Integer(Types.VARCHAR) },
+			{ "content", new Integer(Types.CLOB) },
 			{ "displayDate", new Integer(Types.TIMESTAMP) },
 			{ "allowPingbacks", new Integer(Types.BOOLEAN) },
 			{ "allowTrackbacks", new Integer(Types.BOOLEAN) },
@@ -87,7 +87,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 			{ "statusByUserName", new Integer(Types.VARCHAR) },
 			{ "statusDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table BlogsEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(150) null,urlTitle VARCHAR(150) null,content TEXT null,description VARCHAR(75) null,displayDate DATE null,allowPingbacks BOOLEAN,allowTrackbacks BOOLEAN,trackbacks TEXT null,smallImage BOOLEAN,smallImageId LONG,smallImageURL VARCHAR(75) null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table BlogsEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(150) null,urlTitle VARCHAR(150) null,description VARCHAR(75) null,content TEXT null,displayDate DATE null,allowPingbacks BOOLEAN,allowTrackbacks BOOLEAN,trackbacks TEXT null,smallImage BOOLEAN,smallImageId LONG,smallImageURL VARCHAR(75) null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table BlogsEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY blogsEntry.displayDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY BlogsEntry.displayDate DESC";
@@ -120,8 +120,8 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setTitle(soapModel.getTitle());
 		model.setUrlTitle(soapModel.getUrlTitle());
-		model.setContent(soapModel.getContent());
 		model.setDescription(soapModel.getDescription());
+		model.setContent(soapModel.getContent());
 		model.setDisplayDate(soapModel.getDisplayDate());
 		model.setAllowPingbacks(soapModel.getAllowPingbacks());
 		model.setAllowTrackbacks(soapModel.getAllowTrackbacks());
@@ -305,19 +305,6 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		return GetterUtil.getString(_originalUrlTitle);
 	}
 
-	public String getContent() {
-		if (_content == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _content;
-		}
-	}
-
-	public void setContent(String content) {
-		_content = content;
-	}
-
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -329,6 +316,19 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 
 	public void setDescription(String description) {
 		_description = description;
+	}
+
+	public String getContent() {
+		if (_content == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _content;
+		}
+	}
+
+	public void setContent(String content) {
+		_content = content;
 	}
 
 	public Date getDisplayDate() {
@@ -535,8 +535,8 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		clone.setModifiedDate(getModifiedDate());
 		clone.setTitle(getTitle());
 		clone.setUrlTitle(getUrlTitle());
-		clone.setContent(getContent());
 		clone.setDescription(getDescription());
+		clone.setContent(getContent());
 		clone.setDisplayDate(getDisplayDate());
 		clone.setAllowPingbacks(getAllowPingbacks());
 		clone.setAllowTrackbacks(getAllowTrackbacks());
@@ -617,10 +617,10 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		sb.append(getTitle());
 		sb.append(", urlTitle=");
 		sb.append(getUrlTitle());
-		sb.append(", content=");
-		sb.append(getContent());
 		sb.append(", description=");
 		sb.append(getDescription());
+		sb.append(", content=");
+		sb.append(getContent());
 		sb.append(", displayDate=");
 		sb.append(getDisplayDate());
 		sb.append(", allowPingbacks=");
@@ -696,12 +696,12 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		sb.append(getUrlTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>content</column-name><column-value><![CDATA[");
-		sb.append(getContent());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>description</column-name><column-value><![CDATA[");
 		sb.append(getDescription());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>content</column-name><column-value><![CDATA[");
+		sb.append(getContent());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>displayDate</column-name><column-value><![CDATA[");
@@ -768,8 +768,8 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 	private String _title;
 	private String _urlTitle;
 	private String _originalUrlTitle;
-	private String _content;
 	private String _description;
+	private String _content;
 	private Date _displayDate;
 	private boolean _allowPingbacks;
 	private boolean _allowTrackbacks;

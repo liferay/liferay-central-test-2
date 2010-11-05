@@ -129,6 +129,7 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 
 		if (template.equals(TEMPLATE_ABSTRACT) ||
 			template.equals(TEMPLATE_FULL_CONTENT)) {
+
 			renderRequest.setAttribute(WebKeys.BLOGS_ENTRY, _entry);
 
 			return "/html/portlet/blogs/asset/" + template + ".jsp";

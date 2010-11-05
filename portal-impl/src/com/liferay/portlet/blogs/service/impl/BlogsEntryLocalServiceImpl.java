@@ -88,7 +88,7 @@ import net.htmlparser.jericho.StartTag;
 public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public BlogsEntry addEntry(
-			long userId, String title, String content, String description,
+			long userId, String title, String description, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, boolean allowPingbacks,
 			boolean allowTrackbacks, String[] trackbacks, boolean smallImage,
@@ -131,14 +131,14 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setModifiedDate(serviceContext.getModifiedDate(now));
 		entry.setTitle(title);
 		entry.setUrlTitle(getUniqueUrlTitle(entryId, groupId, title));
-		entry.setContent(content);
 		entry.setDescription(description);
+		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
 		entry.setAllowPingbacks(allowPingbacks);
 		entry.setAllowTrackbacks(allowTrackbacks);
 		entry.setSmallImage(smallImage);
-		entry.setSmallImageURL(smallImageURL);
 		entry.setSmallImageId(counterLocalService.increment());
+		entry.setSmallImageURL(smallImageURL);
 		entry.setStatus(WorkflowConstants.STATUS_DRAFT);
 		entry.setStatusDate(serviceContext.getModifiedDate(now));
 		entry.setExpandoBridgeAttributes(serviceContext);
@@ -259,6 +259,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			entry.getCompanyId(), BlogsEntry.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, entry.getEntryId());
 
+		// Image
+
+		imageLocalService.deleteImage(entry.getSmallImageId());
+
 		// Statistics
 
 		blogsStatsUserLocalService.updateStatsUser(
@@ -273,10 +277,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		expandoValueLocalService.deleteValues(
 			BlogsEntry.class.getName(), entry.getEntryId());
-
-		// Image
-
-		imageLocalService.deleteImage(entry.getSmallImageId());
 
 		// Message boards
 
@@ -511,8 +511,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public BlogsEntry updateEntry(
-			long userId, long entryId, String title, String content,
-			String description, int displayDateMonth, int displayDateDay,
+			long userId, long entryId, String title, String description,
+			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
 			boolean allowPingbacks,	boolean allowTrackbacks,
 			String[] trackbacks, boolean smallImage, String smallImageURL,
@@ -547,20 +547,19 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setTitle(title);
 		entry.setUrlTitle(
 			getUniqueUrlTitle(entryId, entry.getGroupId(), title));
-		entry.setContent(content);
 		entry.setDescription(description);
+		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
 		entry.setAllowPingbacks(allowPingbacks);
 		entry.setAllowTrackbacks(allowTrackbacks);
-		entry.setExpandoBridgeAttributes(serviceContext);
-
 		entry.setSmallImage(smallImage);
-		entry.setSmallImageURL(smallImageURL);
-		entry.setSmallImageId(entry.getSmallImageId());
 
 		if (entry.getSmallImageId() == 0) {
 			entry.setSmallImageId(counterLocalService.increment());
 		}
+
+		entry.setSmallImageURL(smallImageURL);
+		entry.setExpandoBridgeAttributes(serviceContext);
 
 		blogsEntryPersistence.update(entry, false);
 

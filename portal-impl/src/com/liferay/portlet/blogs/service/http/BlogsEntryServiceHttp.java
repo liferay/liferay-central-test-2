@@ -56,7 +56,7 @@ import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 public class BlogsEntryServiceHttp {
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		HttpPrincipal httpPrincipal, java.lang.String title,
-		java.lang.String content, java.lang.String description,
+		java.lang.String description, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
 		int displayDateHour, int displayDateMinute, boolean allowPingbacks,
 		boolean allowTrackbacks, java.lang.String[] trackbacks,
@@ -70,7 +70,7 @@ public class BlogsEntryServiceHttp {
 					"addEntry", _addEntryParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, title,
-					content, description, displayDateMonth, displayDateDay,
+					description, content, displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
 					allowPingbacks, allowTrackbacks, trackbacks, smallImage,
 					smallImageURL, smallFile, serviceContext);
@@ -540,7 +540,7 @@ public class BlogsEntryServiceHttp {
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateEntry(
 		HttpPrincipal httpPrincipal, long entryId, java.lang.String title,
-		java.lang.String content, java.lang.String description,
+		java.lang.String description, java.lang.String content,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
 		int displayDateHour, int displayDateMinute, boolean allowPingbacks,
 		boolean allowTrackbacks, java.lang.String[] trackbacks,
@@ -554,7 +554,7 @@ public class BlogsEntryServiceHttp {
 					"updateEntry", _updateEntryParameterTypes13);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId,
-					title, content, description, displayDateMonth,
+					title, description, content, displayDateMonth,
 					displayDateDay, displayDateYear, displayDateHour,
 					displayDateMinute, allowPingbacks, allowTrackbacks,
 					trackbacks, smallImage, smallImageURL, smallFile,
