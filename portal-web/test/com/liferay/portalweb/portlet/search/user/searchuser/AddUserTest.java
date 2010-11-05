@@ -47,7 +47,7 @@ public class AddUserTest extends BaseTestCase {
 		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//span[2]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.type("_125_screenName", RuntimeVariables.replace("selenium"));

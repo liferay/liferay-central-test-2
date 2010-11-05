@@ -35,6 +35,7 @@ public class RestoreArchivedSetupTests extends BaseTests {
 		testSuite.addTestSuite(RestoreArchivedSetupTest.class);
 		testSuite.addTestSuite(AssertRestoreArchivedSetupTest.class);
 		testSuite.addTestSuite(TearDownArchivedSetupTest.class);
+		testSuite.addTestSuite(TearDownConfigurationTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

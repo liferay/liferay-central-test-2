@@ -50,9 +50,49 @@ public class TearDownConfigurationTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("link=Configuration",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("//strong/a",
+					RuntimeVariables.replace("Options"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("Configuration"),
+					selenium.getText(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
+				selenium.click(
+					"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("link=Payment Settings")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Payment Settings",
 					RuntimeVariables.replace(""));
@@ -88,8 +128,27 @@ public class TearDownConfigurationTest extends BaseTestCase {
 
 				selenium.addSelection("_86_available_cc_types",
 					RuntimeVariables.replace("label=American Express"));
-				selenium.clickAt("//div/table/tbody/tr/td[2]/a[2]/img",
-					RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//div[2]/div/span/span/button[2]")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.saveScreenShotAndSource();
+				selenium.clickAt("//div[2]/div/span/span/button[2]",
+					RuntimeVariables.replace("Left Arrow"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -141,8 +200,27 @@ public class TearDownConfigurationTest extends BaseTestCase {
 
 				selenium.addSelection("_86_available_cc_types",
 					RuntimeVariables.replace("label=Discover"));
-				selenium.clickAt("//div/table/tbody/tr/td[2]/a[2]/img",
-					RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//div[2]/div/span/span/button[2]")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.saveScreenShotAndSource();
+				selenium.clickAt("//div[2]/div/span/span/button[2]",
+					RuntimeVariables.replace("Left Arrow"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -194,8 +272,27 @@ public class TearDownConfigurationTest extends BaseTestCase {
 
 				selenium.addSelection("_86_available_cc_types",
 					RuntimeVariables.replace("label=MasterCard"));
-				selenium.clickAt("//div/table/tbody/tr/td[2]/a[2]/img",
-					RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//div[2]/div/span/span/button[2]")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.saveScreenShotAndSource();
+				selenium.clickAt("//div[2]/div/span/span/button[2]",
+					RuntimeVariables.replace("Left Arrow"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -247,8 +344,27 @@ public class TearDownConfigurationTest extends BaseTestCase {
 
 				selenium.addSelection("_86_available_cc_types",
 					RuntimeVariables.replace("label=Visa"));
-				selenium.clickAt("//div/table/tbody/tr/td[2]/a[2]/img",
-					RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//div[2]/div/span/span/button[2]")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.saveScreenShotAndSource();
+				selenium.clickAt("//div[2]/div/span/span/button[2]",
+					RuntimeVariables.replace("Left Arrow"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -298,7 +414,7 @@ public class TearDownConfigurationTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				selenium.type("_86_shipping4", RuntimeVariables.replace(""));
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("//div[2]/span[1]/span/input",
+				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
@@ -318,7 +434,7 @@ public class TearDownConfigurationTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				selenium.type("_86_insurance4", RuntimeVariables.replace(""));
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("//div[2]/span[1]/span/input",
+				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();

@@ -24,44 +24,69 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Configuration</td>
-	<td></td>
+	<td>clickAt</td>
+	<td>//strong/a</td>
+	<td>Options</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//span[@class='taglib-text']</td>
+	<td>Archive/Restore Setup</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Archived</td>
-	<td></td>
+	<td>//span[@class='taglib-text']</td>
+	<td>Archive/Restore Setup</td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>//tr[@class='portlet-section-body results-row last']/td[1]</td>
+	<td>assertText</td>
+	<td>//tr[3]/td[1]</td>
 	<td>Current Setup Test</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[@class='portlet-section-body results-row last']/td[1]</td>
-	<td>Current Setup Test</td>
+	<td>//tr[3]/td[2]</td>
+	<td>Joe Bloggs</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//tr[3]/td[3]</td>
+	<td>Modified Date</td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//strong/a</td>
-	<td></td>
+	<td>//tr[3]/td[4]/ul/li/strong/a</td>
+	<td>Actions</td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>//tr[@class='portlet-section-body results-row last']/td[4]/ul/li/strong/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
-	<td></td>
+	<td>Delete</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
-	<td></td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>
@@ -70,7 +95,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@id='p_p_id_86_']/div/div</td>
+	<td>//div[@class='portlet-msg-success']</td>
 	<td>Your request processed successfully.</td>
 </tr>
 <tr>

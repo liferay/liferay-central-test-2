@@ -24,14 +24,54 @@
 	<td></td>
 </tr>
 <tr>
+	<td>storeText</td>
+	<td>//nav[@class='site-breadcrumbs']/ul/li[1]/span/a</td>
+	<td>guestCommunity</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>main-content</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>navigation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>dockbar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div/div[3]/div/ul/li[1]/a</td>
+	<td>Manage Pages</td>
+</tr>
+<tr>
 	<td>clickAtAndWait</td>
 	<td>//div/div[3]/div/ul/li[1]/a</td>
+	<td>Manage Pages</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>main-content</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>navigation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>dockbar</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForText</td>
 	<td>//div/div[3]/a</td>
-	<td>Guest</td>
+	<td>${guestCommunity}</td>
 </tr>
 <tr>
 	<td>store</td>
@@ -45,8 +85,8 @@
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//li/div/div[1]</td>
-	<td></td>
+	<td>//div[2]/ul/li/div/div[1]</td>
+	<td>Drop Down Arrow</td>
 </tr>
 <tr>
 	<td>label</td>
@@ -70,7 +110,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//section/div/div/div/div</td>
+	<td>//div[@class='portlet-msg-success']</td>
 	<td>Your request processed successfully.</td>
 </tr>
 <tr>

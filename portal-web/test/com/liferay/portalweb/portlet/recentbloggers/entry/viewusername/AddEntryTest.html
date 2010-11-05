@@ -25,7 +25,7 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>_33_addEntryButton</td>
+	<td>//input[@value='Add Blog Entry']</td>
 	<td></td>
 </tr>
 <tr>
@@ -75,13 +75,13 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>_33_saveButton</td>
+	<td>//input[@value='Publish']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//div[@class='portlet-msg-success']</td>
 	<td>Your request processed successfully.</td>
-	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>

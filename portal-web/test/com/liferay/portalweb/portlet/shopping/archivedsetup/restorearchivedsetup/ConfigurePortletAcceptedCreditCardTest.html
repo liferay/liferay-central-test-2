@@ -24,8 +24,28 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Configuration</td>
+	<td>clickAt</td>
+	<td>//strong/a</td>
+	<td>Options</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_86_current_cc_types</td>
 	<td></td>
 </tr>
 <tr>
@@ -34,9 +54,19 @@
 	<td>label=MasterCard</td>
 </tr>
 <tr>
+	<td>waitForVisible</td>
+	<td>//div[2]/div/span/span/button[1]</td>
+	<td>Right Arrow</td>
+</tr>
+<tr>
 	<td>clickAt</td>
-	<td>//div/table/tbody/tr/td[2]/a[1]/img</td>
-	<td></td>
+	<td>//div[2]/div/span/span/button[1]</td>
+	<td>Right Arrow</td>
+</tr>
+<tr>
+	<td>waitForPartialText</td>
+	<td>_86_available_cc_types</td>
+	<td>MasterCard</td>
 </tr>
 <tr>
 	<td>addSelection</td>
@@ -45,13 +75,13 @@
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//div/table/tbody/tr/td[2]/a[1]/img</td>
-	<td></td>
+	<td>//div[2]/div/span/span/button[1]</td>
+	<td>Right Arrow</td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
+	<td>waitForPartialText</td>
+	<td>_86_available_cc_types</td>
+	<td>American Express</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -60,7 +90,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@id='p_p_id_86_']/div/div</td>
+	<td>//div[@class='portlet-msg-success']</td>
 	<td>You have successfully updated the setup.</td>
 </tr>
 <tr>
