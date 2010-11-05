@@ -131,8 +131,7 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 		if (Validator.isNull(resourceBundleClassName)) {
 			String resourceBundleId = _portlet.getPortletId();
 
-			resourceBundle = _resourceBundles.get(
-				resourceBundleId);
+			resourceBundle = _resourceBundles.get(resourceBundleId);
 
 			if (resourceBundle == null) {
 				resourceBundle = new PortletResourceBundle(
@@ -153,8 +152,7 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 
 			String resourceBundleId = sb.toString();
 
-			resourceBundle = _resourceBundles.get(
-				resourceBundleId);
+			resourceBundle = _resourceBundles.get(resourceBundleId);
 
 			if (resourceBundle == null) {
 				if (!_portletApp.isWARFile() &&

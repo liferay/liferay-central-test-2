@@ -257,9 +257,9 @@ public class PortletBagFactory {
 		Map<String, ResourceBundle> resourceBundles = null;
 
 		String resourceBundle = portlet.getResourceBundle();
+
 		if (Validator.isNotNull(resourceBundle) &&
-			!resourceBundle.equals(
-				"com.liferay.portlet.StrutsResourceBundle")) {
+			!resourceBundle.equals(StrutsResourceBundle.class.getName())) {
 
 			resourceBundles = new HashMap<String, ResourceBundle>();
 
@@ -331,7 +331,7 @@ public class PortletBagFactory {
 		String resourceBundleName, Locale locale) {
 
 		resourceBundleName = resourceBundleName.replace(
-				StringPool.PERIOD, StringPool.SLASH);
+			StringPool.PERIOD, StringPool.SLASH);
 
 		Locale newLocale = locale;
 
@@ -380,13 +380,13 @@ public class PortletBagFactory {
 		Map<String, ResourceBundle> resourceBundles, Portlet portlet,
 		Locale locale) {
 
-		InputStream inputStream = getResourceBundleInputStream(
-			portlet.getResourceBundle(), locale);
-
 		try {
+			InputStream inputStream = getResourceBundleInputStream(
+				portlet.getResourceBundle(), locale);
+
 			if (inputStream != null) {
-				ResourceBundle resourceBundle =
-					new LiferayResourceBundle(inputStream, StringPool.UTF8);
+				ResourceBundle resourceBundle = new LiferayResourceBundle(
+					inputStream, StringPool.UTF8);
 
 				inputStream.close();
 
