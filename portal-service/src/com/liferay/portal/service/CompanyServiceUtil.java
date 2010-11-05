@@ -22,10 +22,6 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * The utility for the company remote service. This utility wraps {@link com.liferay.portal.service.impl.CompanyServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
  *
  * <p>
- * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.CompanyServiceImpl} and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
@@ -36,6 +32,11 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * @generated
  */
 public class CompanyServiceUtil {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.CompanyServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 */
 	public static com.liferay.portal.model.Company addCompany(
 		java.lang.String webId, java.lang.String virtualHost,
 		java.lang.String mx, java.lang.String shardName, boolean system,

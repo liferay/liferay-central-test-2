@@ -20,10 +20,6 @@ import com.liferay.portal.model.UserGroupRole;
  * The persistence interface for the user group role service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link UserGroupRoleUtil} to access the user group role persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -33,6 +29,12 @@ import com.liferay.portal.model.UserGroupRole;
  * @generated
  */
 public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link UserGroupRoleUtil} to access the user group role persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the user group role in the entity cache if it is enabled.
 	*

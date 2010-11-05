@@ -57,10 +57,6 @@ import java.util.List;
  * The persistence implementation for the blogs stats user service.
  *
  * <p>
- * Never modify or reference this class directly. Always use {@link BlogsStatsUserUtil} to access the blogs stats user persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -71,6 +67,11 @@ import java.util.List;
  */
 public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStatsUser>
 	implements BlogsStatsUserPersistence {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Always use {@link BlogsStatsUserUtil} to access the blogs stats user persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = BlogsStatsUserImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";

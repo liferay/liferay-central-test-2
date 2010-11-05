@@ -22,10 +22,6 @@ import com.liferay.portlet.tasks.model.TasksProposal;
  * The persistence interface for the tasks proposal service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link TasksProposalUtil} to access the tasks proposal persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.tasks.model.TasksProposal;
  * @generated
  */
 public interface TasksProposalPersistence extends BasePersistence<TasksProposal> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link TasksProposalUtil} to access the tasks proposal persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the tasks proposal in the entity cache if it is enabled.
 	*

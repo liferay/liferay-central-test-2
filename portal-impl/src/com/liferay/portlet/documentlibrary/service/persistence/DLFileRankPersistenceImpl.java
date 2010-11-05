@@ -56,10 +56,6 @@ import java.util.List;
  * The persistence implementation for the d l file rank service.
  *
  * <p>
- * Never modify or reference this class directly. Always use {@link DLFileRankUtil} to access the d l file rank persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -70,6 +66,11 @@ import java.util.List;
  */
 public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	implements DLFileRankPersistence {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Always use {@link DLFileRankUtil} to access the d l file rank persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = DLFileRankImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";

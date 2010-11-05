@@ -21,10 +21,6 @@ package com.liferay.portlet.social.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.social.model.impl.SocialEquityGroupSettingImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a social equity group setting model instance should use the {@link SocialEquityGroupSetting} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see SocialEquityGroupSettingModel
  * @see com.liferay.portlet.social.model.impl.SocialEquityGroupSettingImpl
@@ -32,4 +28,9 @@ package com.liferay.portlet.social.model;
  * @generated
  */
 public interface SocialEquityGroupSetting extends SocialEquityGroupSettingModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a social equity group setting model instance should use the {@link SocialEquityGroupSetting} interface instead.
+	 */
 }

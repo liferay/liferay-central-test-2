@@ -21,10 +21,6 @@ package com.liferay.portal.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.LockImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a lock model instance should use the {@link Lock} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see LockModel
  * @see com.liferay.portal.model.impl.LockImpl
@@ -32,6 +28,11 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface Lock extends LockModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a lock model instance should use the {@link Lock} interface instead.
+	 */
 	public long getExpirationTime();
 
 	public boolean isExpired();

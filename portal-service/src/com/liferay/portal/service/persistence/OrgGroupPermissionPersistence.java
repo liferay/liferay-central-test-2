@@ -20,10 +20,6 @@ import com.liferay.portal.model.OrgGroupPermission;
  * The persistence interface for the org group permission service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link OrgGroupPermissionUtil} to access the org group permission persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -33,6 +29,12 @@ import com.liferay.portal.model.OrgGroupPermission;
  * @generated
  */
 public interface OrgGroupPermissionPersistence extends BasePersistence<OrgGroupPermission> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link OrgGroupPermissionUtil} to access the org group permission persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the org group permission in the entity cache if it is enabled.
 	*

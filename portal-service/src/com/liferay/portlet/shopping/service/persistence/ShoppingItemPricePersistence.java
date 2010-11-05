@@ -22,10 +22,6 @@ import com.liferay.portlet.shopping.model.ShoppingItemPrice;
  * The persistence interface for the shopping item price service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link ShoppingItemPriceUtil} to access the shopping item price persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.shopping.model.ShoppingItemPrice;
  * @generated
  */
 public interface ShoppingItemPricePersistence extends BasePersistence<ShoppingItemPrice> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link ShoppingItemPriceUtil} to access the shopping item price persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the shopping item price in the entity cache if it is enabled.
 	*

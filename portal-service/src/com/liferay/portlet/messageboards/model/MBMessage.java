@@ -21,10 +21,6 @@ package com.liferay.portlet.messageboards.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.messageboards.model.impl.MBMessageImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a message-boards message model instance should use the {@link MBMessage} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see MBMessageModel
  * @see com.liferay.portlet.messageboards.model.impl.MBMessageImpl
@@ -32,6 +28,11 @@ package com.liferay.portlet.messageboards.model;
  * @generated
  */
 public interface MBMessage extends MBMessageModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a message-boards message model instance should use the {@link MBMessage} interface instead.
+	 */
 	public java.lang.String[] getAssetTagNames()
 		throws com.liferay.portal.kernel.exception.SystemException;
 

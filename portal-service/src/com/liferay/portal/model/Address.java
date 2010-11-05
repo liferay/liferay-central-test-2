@@ -21,10 +21,6 @@ package com.liferay.portal.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.AddressImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a address model instance should use the {@link Address} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see AddressModel
  * @see com.liferay.portal.model.impl.AddressImpl
@@ -32,6 +28,11 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface Address extends AddressModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a address model instance should use the {@link Address} interface instead.
+	 */
 	public com.liferay.portal.model.Region getRegion();
 
 	public com.liferay.portal.model.Country getCountry();

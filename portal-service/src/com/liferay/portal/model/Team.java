@@ -21,10 +21,6 @@ package com.liferay.portal.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.TeamImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a team model instance should use the {@link Team} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see TeamModel
  * @see com.liferay.portal.model.impl.TeamImpl
@@ -32,6 +28,11 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface Team extends TeamModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a team model instance should use the {@link Team} interface instead.
+	 */
 	public com.liferay.portal.model.Role getRole()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

@@ -22,10 +22,6 @@ import com.liferay.portlet.messageboards.model.MBBan;
  * The persistence interface for the message boards ban service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link MBBanUtil} to access the message boards ban persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.messageboards.model.MBBan;
  * @generated
  */
 public interface MBBanPersistence extends BasePersistence<MBBan> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link MBBanUtil} to access the message boards ban persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the message boards ban in the entity cache if it is enabled.
 	*

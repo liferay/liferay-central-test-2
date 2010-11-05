@@ -22,10 +22,6 @@ import com.liferay.portlet.messageboards.model.MBMailingList;
  * The persistence interface for the message boards mailing list service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link MBMailingListUtil} to access the message boards mailing list persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.messageboards.model.MBMailingList;
  * @generated
  */
 public interface MBMailingListPersistence extends BasePersistence<MBMailingList> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link MBMailingListUtil} to access the message boards mailing list persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the message boards mailing list in the entity cache if it is enabled.
 	*

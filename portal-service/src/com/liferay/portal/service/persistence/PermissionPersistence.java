@@ -20,10 +20,6 @@ import com.liferay.portal.model.Permission;
  * The persistence interface for the permission service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link PermissionUtil} to access the permission persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -33,6 +29,12 @@ import com.liferay.portal.model.Permission;
  * @generated
  */
 public interface PermissionPersistence extends BasePersistence<Permission> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link PermissionUtil} to access the permission persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the permission in the entity cache if it is enabled.
 	*

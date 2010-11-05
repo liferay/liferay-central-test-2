@@ -20,10 +20,6 @@ import com.liferay.portal.model.WorkflowDefinitionLink;
  * The persistence interface for the workflow definition link service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link WorkflowDefinitionLinkUtil} to access the workflow definition link persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -33,6 +29,12 @@ import com.liferay.portal.model.WorkflowDefinitionLink;
  * @generated
  */
 public interface WorkflowDefinitionLinkPersistence extends BasePersistence<WorkflowDefinitionLink> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link WorkflowDefinitionLinkUtil} to access the workflow definition link persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the workflow definition link in the entity cache if it is enabled.
 	*

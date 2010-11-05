@@ -22,10 +22,6 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
  * The persistence interface for the blogs entry service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link BlogsEntryUtil} to access the blogs entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
  * @generated
  */
 public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link BlogsEntryUtil} to access the blogs entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the blogs entry in the entity cache if it is enabled.
 	*

@@ -22,10 +22,6 @@ import com.liferay.portlet.journal.model.JournalTemplate;
  * The persistence interface for the journal template service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link JournalTemplateUtil} to access the journal template persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.journal.model.JournalTemplate;
  * @generated
  */
 public interface JournalTemplatePersistence extends BasePersistence<JournalTemplate> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link JournalTemplateUtil} to access the journal template persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the journal template in the entity cache if it is enabled.
 	*

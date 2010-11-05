@@ -22,10 +22,6 @@ import com.liferay.portlet.softwarecatalog.model.SCLicense;
  * The persistence interface for the s c license service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link SCLicenseUtil} to access the s c license persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.softwarecatalog.model.SCLicense;
  * @generated
  */
 public interface SCLicensePersistence extends BasePersistence<SCLicense> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link SCLicenseUtil} to access the s c license persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the s c license in the entity cache if it is enabled.
 	*

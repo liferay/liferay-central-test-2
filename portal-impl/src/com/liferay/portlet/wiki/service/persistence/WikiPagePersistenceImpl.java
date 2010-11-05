@@ -68,10 +68,6 @@ import java.util.List;
  * The persistence implementation for the wiki page service.
  *
  * <p>
- * Never modify or reference this class directly. Always use {@link WikiPageUtil} to access the wiki page persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -82,6 +78,11 @@ import java.util.List;
  */
 public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	implements WikiPagePersistence {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Always use {@link WikiPageUtil} to access the wiki page persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = WikiPageImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
@@ -9152,18 +9153,18 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	private static final String _FINDER_COLUMN_R_N_NODEID_2 = "wikiPage.nodeId = ?";
 	private static final String _FINDER_COLUMN_N_T_NODEID_2 = "wikiPage.nodeId = ? AND ";
 	private static final String _FINDER_COLUMN_N_T_TITLE_1 = "wikiPage.title IS NULL";
-	private static final String _FINDER_COLUMN_N_T_TITLE_2 = "lower(wikiPage.title) = lower(?)";
-	private static final String _FINDER_COLUMN_N_T_TITLE_3 = "(wikiPage.title IS NULL OR lower(wikiPage.title) = lower(?))";
+	private static final String _FINDER_COLUMN_N_T_TITLE_2 = "lower(wikiPage.title) = lower(CAST_TEXT(?))";
+	private static final String _FINDER_COLUMN_N_T_TITLE_3 = "(wikiPage.title IS NULL OR lower(wikiPage.title) = lower(CAST_TEXT(?)))";
 	private static final String _FINDER_COLUMN_N_H_NODEID_2 = "wikiPage.nodeId = ? AND ";
 	private static final String _FINDER_COLUMN_N_H_HEAD_2 = "wikiPage.head = ?";
 	private static final String _FINDER_COLUMN_N_P_NODEID_2 = "wikiPage.nodeId = ? AND ";
 	private static final String _FINDER_COLUMN_N_P_PARENTTITLE_1 = "wikiPage.parentTitle IS NULL";
-	private static final String _FINDER_COLUMN_N_P_PARENTTITLE_2 = "lower(wikiPage.parentTitle) = lower(?)";
-	private static final String _FINDER_COLUMN_N_P_PARENTTITLE_3 = "(wikiPage.parentTitle IS NULL OR lower(wikiPage.parentTitle) = lower(?))";
+	private static final String _FINDER_COLUMN_N_P_PARENTTITLE_2 = "lower(wikiPage.parentTitle) = lower(CAST_TEXT(?))";
+	private static final String _FINDER_COLUMN_N_P_PARENTTITLE_3 = "(wikiPage.parentTitle IS NULL OR lower(wikiPage.parentTitle) = lower(CAST_TEXT(?)))";
 	private static final String _FINDER_COLUMN_N_R_NODEID_2 = "wikiPage.nodeId = ? AND ";
 	private static final String _FINDER_COLUMN_N_R_REDIRECTTITLE_1 = "wikiPage.redirectTitle IS NULL";
-	private static final String _FINDER_COLUMN_N_R_REDIRECTTITLE_2 = "lower(wikiPage.redirectTitle) = lower(?)";
-	private static final String _FINDER_COLUMN_N_R_REDIRECTTITLE_3 = "(wikiPage.redirectTitle IS NULL OR lower(wikiPage.redirectTitle) = lower(?))";
+	private static final String _FINDER_COLUMN_N_R_REDIRECTTITLE_2 = "lower(wikiPage.redirectTitle) = lower(CAST_TEXT(?))";
+	private static final String _FINDER_COLUMN_N_R_REDIRECTTITLE_3 = "(wikiPage.redirectTitle IS NULL OR lower(wikiPage.redirectTitle) = lower(CAST_TEXT(?)))";
 	private static final String _FINDER_COLUMN_N_S_NODEID_2 = "wikiPage.nodeId = ? AND ";
 	private static final String _FINDER_COLUMN_N_S_STATUS_2 = "wikiPage.status = ?";
 	private static final String _FINDER_COLUMN_R_N_V_RESOURCEPRIMKEY_2 = "wikiPage.resourcePrimKey = ? AND ";
@@ -9177,32 +9178,32 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	private static final String _FINDER_COLUMN_U_N_S_STATUS_2 = "wikiPage.status = ?";
 	private static final String _FINDER_COLUMN_N_T_V_NODEID_2 = "wikiPage.nodeId = ? AND ";
 	private static final String _FINDER_COLUMN_N_T_V_TITLE_1 = "wikiPage.title IS NULL AND ";
-	private static final String _FINDER_COLUMN_N_T_V_TITLE_2 = "lower(wikiPage.title) = lower(?) AND ";
-	private static final String _FINDER_COLUMN_N_T_V_TITLE_3 = "(wikiPage.title IS NULL OR lower(wikiPage.title) = lower(?)) AND ";
+	private static final String _FINDER_COLUMN_N_T_V_TITLE_2 = "lower(wikiPage.title) = lower(CAST_TEXT(?)) AND ";
+	private static final String _FINDER_COLUMN_N_T_V_TITLE_3 = "(wikiPage.title IS NULL OR lower(wikiPage.title) = lower(CAST_TEXT(?))) AND ";
 	private static final String _FINDER_COLUMN_N_T_V_VERSION_2 = "wikiPage.version = ?";
 	private static final String _FINDER_COLUMN_N_T_H_NODEID_2 = "wikiPage.nodeId = ? AND ";
 	private static final String _FINDER_COLUMN_N_T_H_TITLE_1 = "wikiPage.title IS NULL AND ";
-	private static final String _FINDER_COLUMN_N_T_H_TITLE_2 = "lower(wikiPage.title) = lower(?) AND ";
-	private static final String _FINDER_COLUMN_N_T_H_TITLE_3 = "(wikiPage.title IS NULL OR lower(wikiPage.title) = lower(?)) AND ";
+	private static final String _FINDER_COLUMN_N_T_H_TITLE_2 = "lower(wikiPage.title) = lower(CAST_TEXT(?)) AND ";
+	private static final String _FINDER_COLUMN_N_T_H_TITLE_3 = "(wikiPage.title IS NULL OR lower(wikiPage.title) = lower(CAST_TEXT(?))) AND ";
 	private static final String _FINDER_COLUMN_N_T_H_HEAD_2 = "wikiPage.head = ?";
 	private static final String _FINDER_COLUMN_N_T_S_NODEID_2 = "wikiPage.nodeId = ? AND ";
 	private static final String _FINDER_COLUMN_N_T_S_TITLE_1 = "wikiPage.title IS NULL AND ";
-	private static final String _FINDER_COLUMN_N_T_S_TITLE_2 = "lower(wikiPage.title) = lower(?) AND ";
-	private static final String _FINDER_COLUMN_N_T_S_TITLE_3 = "(wikiPage.title IS NULL OR lower(wikiPage.title) = lower(?)) AND ";
+	private static final String _FINDER_COLUMN_N_T_S_TITLE_2 = "lower(wikiPage.title) = lower(CAST_TEXT(?)) AND ";
+	private static final String _FINDER_COLUMN_N_T_S_TITLE_3 = "(wikiPage.title IS NULL OR lower(wikiPage.title) = lower(CAST_TEXT(?))) AND ";
 	private static final String _FINDER_COLUMN_N_T_S_STATUS_2 = "wikiPage.status = ?";
 	private static final String _FINDER_COLUMN_N_H_P_NODEID_2 = "wikiPage.nodeId = ? AND ";
 	private static final String _FINDER_COLUMN_N_H_P_HEAD_2 = "wikiPage.head = ? AND ";
 	private static final String _FINDER_COLUMN_N_H_P_PARENTTITLE_1 = "wikiPage.parentTitle IS NULL";
-	private static final String _FINDER_COLUMN_N_H_P_PARENTTITLE_2 = "lower(wikiPage.parentTitle) = lower(?)";
-	private static final String _FINDER_COLUMN_N_H_P_PARENTTITLE_3 = "(wikiPage.parentTitle IS NULL OR lower(wikiPage.parentTitle) = lower(?))";
+	private static final String _FINDER_COLUMN_N_H_P_PARENTTITLE_2 = "lower(wikiPage.parentTitle) = lower(CAST_TEXT(?))";
+	private static final String _FINDER_COLUMN_N_H_P_PARENTTITLE_3 = "(wikiPage.parentTitle IS NULL OR lower(wikiPage.parentTitle) = lower(CAST_TEXT(?)))";
 	private static final String _FINDER_COLUMN_N_H_S_NODEID_2 = "wikiPage.nodeId = ? AND ";
 	private static final String _FINDER_COLUMN_N_H_S_HEAD_2 = "wikiPage.head = ? AND ";
 	private static final String _FINDER_COLUMN_N_H_S_STATUS_2 = "wikiPage.status = ?";
 	private static final String _FINDER_COLUMN_N_H_P_S_NODEID_2 = "wikiPage.nodeId = ? AND ";
 	private static final String _FINDER_COLUMN_N_H_P_S_HEAD_2 = "wikiPage.head = ? AND ";
 	private static final String _FINDER_COLUMN_N_H_P_S_PARENTTITLE_1 = "wikiPage.parentTitle IS NULL AND ";
-	private static final String _FINDER_COLUMN_N_H_P_S_PARENTTITLE_2 = "lower(wikiPage.parentTitle) = lower(?) AND ";
-	private static final String _FINDER_COLUMN_N_H_P_S_PARENTTITLE_3 = "(wikiPage.parentTitle IS NULL OR lower(wikiPage.parentTitle) = lower(?)) AND ";
+	private static final String _FINDER_COLUMN_N_H_P_S_PARENTTITLE_2 = "lower(wikiPage.parentTitle) = lower(CAST_TEXT(?)) AND ";
+	private static final String _FINDER_COLUMN_N_H_P_S_PARENTTITLE_3 = "(wikiPage.parentTitle IS NULL OR lower(wikiPage.parentTitle) = lower(CAST_TEXT(?))) AND ";
 	private static final String _FINDER_COLUMN_N_H_P_S_STATUS_2 = "wikiPage.status = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "wikiPage.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No WikiPage exists with the primary key ";

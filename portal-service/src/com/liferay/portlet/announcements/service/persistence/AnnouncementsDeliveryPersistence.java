@@ -22,10 +22,6 @@ import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
  * The persistence interface for the announcements delivery service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link AnnouncementsDeliveryUtil} to access the announcements delivery persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
  * @generated
  */
 public interface AnnouncementsDeliveryPersistence extends BasePersistence<AnnouncementsDelivery> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link AnnouncementsDeliveryUtil} to access the announcements delivery persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the announcements delivery in the entity cache if it is enabled.
 	*

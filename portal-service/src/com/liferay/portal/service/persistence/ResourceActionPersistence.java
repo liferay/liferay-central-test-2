@@ -20,10 +20,6 @@ import com.liferay.portal.model.ResourceAction;
  * The persistence interface for the resource action service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link ResourceActionUtil} to access the resource action persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -33,6 +29,12 @@ import com.liferay.portal.model.ResourceAction;
  * @generated
  */
 public interface ResourceActionPersistence extends BasePersistence<ResourceAction> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link ResourceActionUtil} to access the resource action persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the resource action in the entity cache if it is enabled.
 	*

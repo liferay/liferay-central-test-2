@@ -55,10 +55,6 @@ import java.util.List;
  * The persistence implementation for the expando table service.
  *
  * <p>
- * Never modify or reference this class directly. Always use {@link ExpandoTableUtil} to access the expando table persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -69,6 +65,11 @@ import java.util.List;
  */
 public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTable>
 	implements ExpandoTablePersistence {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Always use {@link ExpandoTableUtil} to access the expando table persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = ExpandoTableImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";

@@ -21,10 +21,6 @@ package com.liferay.portlet.ratings.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.ratings.model.impl.RatingsEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a ratings entry model instance should use the {@link RatingsEntry} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see RatingsEntryModel
  * @see com.liferay.portlet.ratings.model.impl.RatingsEntryImpl
@@ -32,4 +28,9 @@ package com.liferay.portlet.ratings.model;
  * @generated
  */
 public interface RatingsEntry extends RatingsEntryModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a ratings entry model instance should use the {@link RatingsEntry} interface instead.
+	 */
 }

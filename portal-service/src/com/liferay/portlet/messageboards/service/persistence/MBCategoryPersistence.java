@@ -22,10 +22,6 @@ import com.liferay.portlet.messageboards.model.MBCategory;
  * The persistence interface for the message boards category service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link MBCategoryUtil} to access the message boards category persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.messageboards.model.MBCategory;
  * @generated
  */
 public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link MBCategoryUtil} to access the message boards category persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the message boards category in the entity cache if it is enabled.
 	*

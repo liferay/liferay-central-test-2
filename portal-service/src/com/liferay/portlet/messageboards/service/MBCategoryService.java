@@ -24,10 +24,6 @@ import com.liferay.portal.kernel.exception.SystemException;
  * The interface for the message boards category remote service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link MBCategoryServiceUtil} to access the message boards category remote service. Add custom service methods to {@link com.liferay.portlet.messageboards.service.impl.MBCategoryServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
- * <p>
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
@@ -40,6 +36,11 @@ import com.liferay.portal.kernel.exception.SystemException;
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface MBCategoryService {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link MBCategoryServiceUtil} to access the message boards category remote service. Add custom service methods to {@link com.liferay.portlet.messageboards.service.impl.MBCategoryServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	public com.liferay.portlet.messageboards.model.MBCategory addCategory(
 		long parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String emailAddress,

@@ -22,10 +22,6 @@ import com.liferay.portlet.journal.model.JournalArticleResource;
  * The persistence interface for the journal article resource service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link JournalArticleResourceUtil} to access the journal article resource persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.journal.model.JournalArticleResource;
  * @generated
  */
 public interface JournalArticleResourcePersistence extends BasePersistence<JournalArticleResource> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link JournalArticleResourceUtil} to access the journal article resource persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the journal article resource in the entity cache if it is enabled.
 	*

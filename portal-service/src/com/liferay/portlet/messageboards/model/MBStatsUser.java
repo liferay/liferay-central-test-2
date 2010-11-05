@@ -21,10 +21,6 @@ package com.liferay.portlet.messageboards.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a message boards stats user model instance should use the {@link MBStatsUser} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see MBStatsUserModel
  * @see com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl
@@ -32,4 +28,9 @@ package com.liferay.portlet.messageboards.model;
  * @generated
  */
 public interface MBStatsUser extends MBStatsUserModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a message boards stats user model instance should use the {@link MBStatsUser} interface instead.
+	 */
 }

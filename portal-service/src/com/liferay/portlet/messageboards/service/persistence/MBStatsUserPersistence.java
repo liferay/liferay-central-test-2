@@ -22,10 +22,6 @@ import com.liferay.portlet.messageboards.model.MBStatsUser;
  * The persistence interface for the message boards stats user service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link MBStatsUserUtil} to access the message boards stats user persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.messageboards.model.MBStatsUser;
  * @generated
  */
 public interface MBStatsUserPersistence extends BasePersistence<MBStatsUser> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link MBStatsUserUtil} to access the message boards stats user persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the message boards stats user in the entity cache if it is enabled.
 	*

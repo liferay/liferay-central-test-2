@@ -56,10 +56,6 @@ import java.util.List;
  * The persistence implementation for the d l file version service.
  *
  * <p>
- * Never modify or reference this class directly. Always use {@link DLFileVersionUtil} to access the d l file version persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -70,6 +66,11 @@ import java.util.List;
  */
 public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVersion>
 	implements DLFileVersionPersistence {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Always use {@link DLFileVersionUtil} to access the d l file version persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = DLFileVersionImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";

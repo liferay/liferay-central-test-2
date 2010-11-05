@@ -22,10 +22,6 @@ import com.liferay.portlet.social.model.SocialEquityAssetEntry;
  * The persistence interface for the social equity asset entry service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link SocialEquityAssetEntryUtil} to access the social equity asset entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.social.model.SocialEquityAssetEntry;
  * @generated
  */
 public interface SocialEquityAssetEntryPersistence extends BasePersistence<SocialEquityAssetEntry> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link SocialEquityAssetEntryUtil} to access the social equity asset entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the social equity asset entry in the entity cache if it is enabled.
 	*

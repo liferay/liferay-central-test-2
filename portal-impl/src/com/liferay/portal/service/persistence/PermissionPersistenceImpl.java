@@ -59,10 +59,6 @@ import java.util.Set;
  * The persistence implementation for the permission service.
  *
  * <p>
- * Never modify or reference this class directly. Always use {@link PermissionUtil} to access the permission persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -73,6 +69,11 @@ import java.util.Set;
  */
 public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	implements PermissionPersistence {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Always use {@link PermissionUtil} to access the permission persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = PermissionImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";

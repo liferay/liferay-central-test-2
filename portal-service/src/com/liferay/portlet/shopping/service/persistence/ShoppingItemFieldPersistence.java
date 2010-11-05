@@ -22,10 +22,6 @@ import com.liferay.portlet.shopping.model.ShoppingItemField;
  * The persistence interface for the shopping item field service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link ShoppingItemFieldUtil} to access the shopping item field persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.shopping.model.ShoppingItemField;
  * @generated
  */
 public interface ShoppingItemFieldPersistence extends BasePersistence<ShoppingItemField> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link ShoppingItemFieldUtil} to access the shopping item field persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the shopping item field in the entity cache if it is enabled.
 	*

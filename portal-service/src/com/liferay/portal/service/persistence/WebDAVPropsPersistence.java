@@ -20,10 +20,6 @@ import com.liferay.portal.model.WebDAVProps;
  * The persistence interface for the web d a v props service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link WebDAVPropsUtil} to access the web d a v props persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -33,6 +29,12 @@ import com.liferay.portal.model.WebDAVProps;
  * @generated
  */
 public interface WebDAVPropsPersistence extends BasePersistence<WebDAVProps> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link WebDAVPropsUtil} to access the web d a v props persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the web d a v props in the entity cache if it is enabled.
 	*

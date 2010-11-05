@@ -21,10 +21,6 @@ package com.liferay.portlet.journal.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.journal.model.impl.JournalTemplateImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a journal template model instance should use the {@link JournalTemplate} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see JournalTemplateModel
  * @see com.liferay.portlet.journal.model.impl.JournalTemplateImpl
@@ -32,6 +28,11 @@ package com.liferay.portlet.journal.model;
  * @generated
  */
 public interface JournalTemplate extends JournalTemplateModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a journal template model instance should use the {@link JournalTemplate} interface instead.
+	 */
 	public java.lang.String getSmallImageType()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

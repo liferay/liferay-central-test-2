@@ -21,10 +21,6 @@ package com.liferay.portlet.shopping.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.shopping.model.impl.ShoppingCartImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a shopping cart model instance should use the {@link ShoppingCart} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see ShoppingCartModel
  * @see com.liferay.portlet.shopping.model.impl.ShoppingCartImpl
@@ -32,6 +28,11 @@ package com.liferay.portlet.shopping.model;
  * @generated
  */
 public interface ShoppingCart extends ShoppingCartModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a shopping cart model instance should use the {@link ShoppingCart} interface instead.
+	 */
 	public void addItemId(long itemId, java.lang.String fields);
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon()

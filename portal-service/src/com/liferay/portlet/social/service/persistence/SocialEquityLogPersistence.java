@@ -22,10 +22,6 @@ import com.liferay.portlet.social.model.SocialEquityLog;
  * The persistence interface for the social equity log service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link SocialEquityLogUtil} to access the social equity log persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.social.model.SocialEquityLog;
  * @generated
  */
 public interface SocialEquityLogPersistence extends BasePersistence<SocialEquityLog> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link SocialEquityLogUtil} to access the social equity log persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the social equity log in the entity cache if it is enabled.
 	*

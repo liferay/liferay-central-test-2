@@ -24,10 +24,6 @@ import com.liferay.portal.kernel.exception.SystemException;
  * The interface for the wiki page remote service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link WikiPageServiceUtil} to access the wiki page remote service. Add custom service methods to {@link com.liferay.portlet.wiki.service.impl.WikiPageServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
- * <p>
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
@@ -40,6 +36,11 @@ import com.liferay.portal.kernel.exception.SystemException;
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface WikiPageService {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link WikiPageServiceUtil} to access the wiki page remote service. Add custom service methods to {@link com.liferay.portlet.wiki.service.impl.WikiPageServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	public com.liferay.portlet.wiki.model.WikiPage addPage(long nodeId,
 		java.lang.String title, java.lang.String content,
 		java.lang.String summary, boolean minorEdit,

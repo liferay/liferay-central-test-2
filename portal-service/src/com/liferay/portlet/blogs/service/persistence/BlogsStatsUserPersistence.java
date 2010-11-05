@@ -22,10 +22,6 @@ import com.liferay.portlet.blogs.model.BlogsStatsUser;
  * The persistence interface for the blogs stats user service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link BlogsStatsUserUtil} to access the blogs stats user persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.blogs.model.BlogsStatsUser;
  * @generated
  */
 public interface BlogsStatsUserPersistence extends BasePersistence<BlogsStatsUser> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link BlogsStatsUserUtil} to access the blogs stats user persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the blogs stats user in the entity cache if it is enabled.
 	*

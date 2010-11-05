@@ -22,10 +22,6 @@ import com.liferay.portlet.documentlibrary.model.DLFileVersion;
  * The persistence interface for the d l file version service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link DLFileVersionUtil} to access the d l file version persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.documentlibrary.model.DLFileVersion;
  * @generated
  */
 public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link DLFileVersionUtil} to access the d l file version persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the d l file version in the entity cache if it is enabled.
 	*

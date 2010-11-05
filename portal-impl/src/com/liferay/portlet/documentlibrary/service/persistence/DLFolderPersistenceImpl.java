@@ -63,10 +63,6 @@ import java.util.List;
  * The persistence implementation for the d l folder service.
  *
  * <p>
- * Never modify or reference this class directly. Always use {@link DLFolderUtil} to access the d l folder persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -77,6 +73,11 @@ import java.util.List;
  */
 public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	implements DLFolderPersistence {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Always use {@link DLFolderUtil} to access the d l folder persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = DLFolderImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";

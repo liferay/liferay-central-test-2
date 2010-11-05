@@ -21,10 +21,6 @@ package com.liferay.portlet.blogs.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.blogs.model.impl.BlogsEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a blogs entry model instance should use the {@link BlogsEntry} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see BlogsEntryModel
  * @see com.liferay.portlet.blogs.model.impl.BlogsEntryImpl
@@ -32,6 +28,11 @@ package com.liferay.portlet.blogs.model;
  * @generated
  */
 public interface BlogsEntry extends BlogsEntryModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a blogs entry model instance should use the {@link BlogsEntry} interface instead.
+	 */
 	public java.lang.String getSmallImageType()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

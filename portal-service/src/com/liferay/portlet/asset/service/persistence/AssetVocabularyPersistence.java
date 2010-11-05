@@ -22,10 +22,6 @@ import com.liferay.portlet.asset.model.AssetVocabulary;
  * The persistence interface for the asset vocabulary service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link AssetVocabularyUtil} to access the asset vocabulary persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.asset.model.AssetVocabulary;
  * @generated
  */
 public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabulary> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link AssetVocabularyUtil} to access the asset vocabulary persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the asset vocabulary in the entity cache if it is enabled.
 	*

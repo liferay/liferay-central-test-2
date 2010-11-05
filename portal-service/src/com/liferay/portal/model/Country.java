@@ -21,10 +21,6 @@ package com.liferay.portal.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.CountryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a country model instance should use the {@link Country} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see CountryModel
  * @see com.liferay.portal.model.impl.CountryImpl
@@ -32,4 +28,9 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface Country extends CountryModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a country model instance should use the {@link Country} interface instead.
+	 */
 }

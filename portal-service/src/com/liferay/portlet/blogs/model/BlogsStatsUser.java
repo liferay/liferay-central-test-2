@@ -21,10 +21,6 @@ package com.liferay.portlet.blogs.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a blogs stats user model instance should use the {@link BlogsStatsUser} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see BlogsStatsUserModel
  * @see com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl
@@ -32,4 +28,9 @@ package com.liferay.portlet.blogs.model;
  * @generated
  */
 public interface BlogsStatsUser extends BlogsStatsUserModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a blogs stats user model instance should use the {@link BlogsStatsUser} interface instead.
+	 */
 }

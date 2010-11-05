@@ -21,10 +21,6 @@ package com.liferay.portlet.shopping.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a shopping category model instance should use the {@link ShoppingCategory} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see ShoppingCategoryModel
  * @see com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl
@@ -32,5 +28,10 @@ package com.liferay.portlet.shopping.model;
  * @generated
  */
 public interface ShoppingCategory extends ShoppingCategoryModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a shopping category model instance should use the {@link ShoppingCategory} interface instead.
+	 */
 	public boolean isRoot();
 }

@@ -22,10 +22,6 @@ import com.liferay.portlet.messageboards.model.MBMessageFlag;
  * The persistence interface for the message boards message flag service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link MBMessageFlagUtil} to access the message boards message flag persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.messageboards.model.MBMessageFlag;
  * @generated
  */
 public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link MBMessageFlagUtil} to access the message boards message flag persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the message boards message flag in the entity cache if it is enabled.
 	*

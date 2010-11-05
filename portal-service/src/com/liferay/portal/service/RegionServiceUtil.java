@@ -22,10 +22,6 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * The utility for the region remote service. This utility wraps {@link com.liferay.portal.service.impl.RegionServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
  *
  * <p>
- * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.RegionServiceImpl} and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
@@ -36,6 +32,11 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * @generated
  */
 public class RegionServiceUtil {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.RegionServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 */
 	public static com.liferay.portal.model.Region addRegion(long countryId,
 		java.lang.String regionCode, java.lang.String name, boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException,

@@ -22,10 +22,6 @@ import com.liferay.portlet.announcements.model.AnnouncementsEntry;
  * The persistence interface for the announcements entry service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link AnnouncementsEntryUtil} to access the announcements entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.announcements.model.AnnouncementsEntry;
  * @generated
  */
 public interface AnnouncementsEntryPersistence extends BasePersistence<AnnouncementsEntry> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link AnnouncementsEntryUtil} to access the announcements entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the announcements entry in the entity cache if it is enabled.
 	*

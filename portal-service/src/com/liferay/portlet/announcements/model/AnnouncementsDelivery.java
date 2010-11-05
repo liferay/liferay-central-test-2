@@ -21,10 +21,6 @@ package com.liferay.portlet.announcements.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a announcements delivery model instance should use the {@link AnnouncementsDelivery} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see AnnouncementsDeliveryModel
  * @see com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl
@@ -32,4 +28,9 @@ package com.liferay.portlet.announcements.model;
  * @generated
  */
 public interface AnnouncementsDelivery extends AnnouncementsDeliveryModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a announcements delivery model instance should use the {@link AnnouncementsDelivery} interface instead.
+	 */
 }

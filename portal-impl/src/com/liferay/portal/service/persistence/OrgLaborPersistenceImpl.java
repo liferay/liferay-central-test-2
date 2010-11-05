@@ -50,10 +50,6 @@ import java.util.List;
  * The persistence implementation for the org labor service.
  *
  * <p>
- * Never modify or reference this class directly. Always use {@link OrgLaborUtil} to access the org labor persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -64,6 +60,11 @@ import java.util.List;
  */
 public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	implements OrgLaborPersistence {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Always use {@link OrgLaborUtil} to access the org labor persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = OrgLaborImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";

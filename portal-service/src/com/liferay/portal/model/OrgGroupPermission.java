@@ -21,10 +21,6 @@ package com.liferay.portal.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.OrgGroupPermissionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a org group permission model instance should use the {@link OrgGroupPermission} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see OrgGroupPermissionModel
  * @see com.liferay.portal.model.impl.OrgGroupPermissionImpl
@@ -32,6 +28,11 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface OrgGroupPermission extends OrgGroupPermissionModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a org group permission model instance should use the {@link OrgGroupPermission} interface instead.
+	 */
 	public boolean containsGroup(
 		java.util.List<com.liferay.portal.model.Group> groups);
 

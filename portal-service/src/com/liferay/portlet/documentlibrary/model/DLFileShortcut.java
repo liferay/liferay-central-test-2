@@ -21,10 +21,6 @@ package com.liferay.portlet.documentlibrary.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a d l file shortcut model instance should use the {@link DLFileShortcut} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see DLFileShortcutModel
  * @see com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl
@@ -32,6 +28,11 @@ package com.liferay.portlet.documentlibrary.model;
  * @generated
  */
 public interface DLFileShortcut extends DLFileShortcutModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a d l file shortcut model instance should use the {@link DLFileShortcut} interface instead.
+	 */
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder();
 
 	public java.lang.String getToTitle();

@@ -22,10 +22,6 @@ import com.liferay.portlet.journal.model.JournalStructure;
  * The persistence interface for the journal structure service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link JournalStructureUtil} to access the journal structure persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.journal.model.JournalStructure;
  * @generated
  */
 public interface JournalStructurePersistence extends BasePersistence<JournalStructure> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link JournalStructureUtil} to access the journal structure persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the journal structure in the entity cache if it is enabled.
 	*

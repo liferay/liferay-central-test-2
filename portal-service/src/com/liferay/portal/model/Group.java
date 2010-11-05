@@ -21,10 +21,6 @@ package com.liferay.portal.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.GroupImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a group model instance should use the {@link Group} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see GroupModel
  * @see com.liferay.portal.model.impl.GroupImpl
@@ -32,6 +28,11 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface Group extends GroupModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a group model instance should use the {@link Group} interface instead.
+	 */
 	public long getDefaultPrivatePlid();
 
 	public long getDefaultPublicPlid();

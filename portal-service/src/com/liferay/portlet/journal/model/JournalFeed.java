@@ -21,10 +21,6 @@ package com.liferay.portlet.journal.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.journal.model.impl.JournalFeedImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a journal feed model instance should use the {@link JournalFeed} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see JournalFeedModel
  * @see com.liferay.portlet.journal.model.impl.JournalFeedImpl
@@ -32,4 +28,9 @@ package com.liferay.portlet.journal.model;
  * @generated
  */
 public interface JournalFeed extends JournalFeedModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a journal feed model instance should use the {@link JournalFeed} interface instead.
+	 */
 }

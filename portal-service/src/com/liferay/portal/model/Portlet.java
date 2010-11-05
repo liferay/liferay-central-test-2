@@ -21,10 +21,6 @@ package com.liferay.portal.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.PortletImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a portlet model instance should use the {@link Portlet} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see PortletModel
  * @see com.liferay.portal.model.impl.PortletImpl
@@ -32,6 +28,12 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface Portlet extends PortletModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a portlet model instance should use the {@link Portlet} interface instead.
+	 */
+
 	/**
 	* Gets the root portlet id of the portlet.
 	*

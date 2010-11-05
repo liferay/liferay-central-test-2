@@ -21,10 +21,6 @@ package com.liferay.portal.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.LayoutSetImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a layout set model instance should use the {@link LayoutSet} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see LayoutSetModel
  * @see com.liferay.portal.model.impl.LayoutSetImpl
@@ -32,6 +28,11 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface LayoutSet extends LayoutSetModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a layout set model instance should use the {@link LayoutSet} interface instead.
+	 */
 	public com.liferay.portal.model.Theme getTheme()
 		throws com.liferay.portal.kernel.exception.SystemException;
 

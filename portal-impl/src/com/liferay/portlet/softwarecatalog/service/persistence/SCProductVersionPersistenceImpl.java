@@ -63,10 +63,6 @@ import java.util.Set;
  * The persistence implementation for the s c product version service.
  *
  * <p>
- * Never modify or reference this class directly. Always use {@link SCProductVersionUtil} to access the s c product version persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -77,6 +73,11 @@ import java.util.Set;
  */
 public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProductVersion>
 	implements SCProductVersionPersistence {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Always use {@link SCProductVersionUtil} to access the s c product version persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = SCProductVersionImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
@@ -1969,9 +1970,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 	private static final String _FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_1 =
 		"scProductVersion.directDownloadURL IS NULL";
 	private static final String _FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_2 =
-		"lower(scProductVersion.directDownloadURL) = lower(?)";
+		"lower(scProductVersion.directDownloadURL) = lower(CAST_TEXT(?))";
 	private static final String _FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_3 =
-		"(scProductVersion.directDownloadURL IS NULL OR lower(scProductVersion.directDownloadURL) = lower(?))";
+		"(scProductVersion.directDownloadURL IS NULL OR lower(scProductVersion.directDownloadURL) = lower(CAST_TEXT(?)))";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "scProductVersion.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SCProductVersion exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SCProductVersion exists with the key {";

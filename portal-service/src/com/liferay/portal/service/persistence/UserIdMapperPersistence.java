@@ -20,10 +20,6 @@ import com.liferay.portal.model.UserIdMapper;
  * The persistence interface for the user id mapper service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link UserIdMapperUtil} to access the user id mapper persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -33,6 +29,12 @@ import com.liferay.portal.model.UserIdMapper;
  * @generated
  */
 public interface UserIdMapperPersistence extends BasePersistence<UserIdMapper> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link UserIdMapperUtil} to access the user id mapper persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the user id mapper in the entity cache if it is enabled.
 	*

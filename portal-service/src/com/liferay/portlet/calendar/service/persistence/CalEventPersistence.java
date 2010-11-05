@@ -22,10 +22,6 @@ import com.liferay.portlet.calendar.model.CalEvent;
  * The persistence interface for the cal event service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link CalEventUtil} to access the cal event persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.calendar.model.CalEvent;
  * @generated
  */
 public interface CalEventPersistence extends BasePersistence<CalEvent> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CalEventUtil} to access the cal event persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the cal event in the entity cache if it is enabled.
 	*

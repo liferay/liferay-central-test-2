@@ -22,10 +22,6 @@ import com.liferay.portlet.polls.model.PollsQuestion;
  * The persistence interface for the polls question service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link PollsQuestionUtil} to access the polls question persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.polls.model.PollsQuestion;
  * @generated
  */
 public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link PollsQuestionUtil} to access the polls question persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the polls question in the entity cache if it is enabled.
 	*

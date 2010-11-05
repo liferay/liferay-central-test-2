@@ -21,10 +21,6 @@ package com.liferay.portlet.messageboards.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a message boards discussion model instance should use the {@link MBDiscussion} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see MBDiscussionModel
  * @see com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl
@@ -32,4 +28,9 @@ package com.liferay.portlet.messageboards.model;
  * @generated
  */
 public interface MBDiscussion extends MBDiscussionModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a message boards discussion model instance should use the {@link MBDiscussion} interface instead.
+	 */
 }

@@ -63,10 +63,6 @@ import java.util.Set;
  * The persistence implementation for the s c framework version service.
  *
  * <p>
- * Never modify or reference this class directly. Always use {@link SCFrameworkVersionUtil} to access the s c framework version persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -77,6 +73,11 @@ import java.util.Set;
  */
 public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFrameworkVersion>
 	implements SCFrameworkVersionPersistence {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Always use {@link SCFrameworkVersionUtil} to access the s c framework version persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = SCFrameworkVersionImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";

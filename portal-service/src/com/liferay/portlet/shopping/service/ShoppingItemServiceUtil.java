@@ -22,10 +22,6 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * The utility for the shopping item remote service. This utility wraps {@link com.liferay.portlet.shopping.service.impl.ShoppingItemServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
  *
  * <p>
- * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.shopping.service.impl.ShoppingItemServiceImpl} and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
@@ -36,6 +32,11 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * @generated
  */
 public class ShoppingItemServiceUtil {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.shopping.service.impl.ShoppingItemServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 */
 	public static void addBookItems(long groupId, long categoryId,
 		java.lang.String[] isbns)
 		throws com.liferay.portal.kernel.exception.PortalException,

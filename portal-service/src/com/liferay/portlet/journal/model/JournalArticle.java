@@ -21,10 +21,6 @@ package com.liferay.portlet.journal.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.journal.model.impl.JournalArticleImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a journal article model instance should use the {@link JournalArticle} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see JournalArticleModel
  * @see com.liferay.portlet.journal.model.impl.JournalArticleImpl
@@ -32,6 +28,11 @@ package com.liferay.portlet.journal.model;
  * @generated
  */
 public interface JournalArticle extends JournalArticleModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a journal article model instance should use the {@link JournalArticle} interface instead.
+	 */
 	public com.liferay.portlet.journal.model.JournalArticleResource getArticleResource()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

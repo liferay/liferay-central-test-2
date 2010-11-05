@@ -22,10 +22,6 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
  * The persistence interface for the d l file entry service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link DLFileEntryUtil} to access the d l file entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
  * @generated
  */
 public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link DLFileEntryUtil} to access the d l file entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the d l file entry in the entity cache if it is enabled.
 	*

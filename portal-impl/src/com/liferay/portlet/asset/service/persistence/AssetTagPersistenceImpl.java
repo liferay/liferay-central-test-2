@@ -63,10 +63,6 @@ import java.util.Set;
  * The persistence implementation for the asset tag service.
  *
  * <p>
- * Never modify or reference this class directly. Always use {@link AssetTagUtil} to access the asset tag persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -77,6 +73,11 @@ import java.util.Set;
  */
 public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	implements AssetTagPersistence {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Always use {@link AssetTagUtil} to access the asset tag persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = AssetTagImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";

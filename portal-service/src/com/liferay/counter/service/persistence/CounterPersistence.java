@@ -22,10 +22,6 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * The persistence interface for the counter service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link CounterUtil} to access the counter persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * @generated
  */
 public interface CounterPersistence extends BasePersistence<Counter> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CounterUtil} to access the counter persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the counter in the entity cache if it is enabled.
 	*

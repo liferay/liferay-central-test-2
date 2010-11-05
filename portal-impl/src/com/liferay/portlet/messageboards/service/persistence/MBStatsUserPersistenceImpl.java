@@ -54,10 +54,6 @@ import java.util.List;
  * The persistence implementation for the message boards stats user service.
  *
  * <p>
- * Never modify or reference this class directly. Always use {@link MBStatsUserUtil} to access the message boards stats user persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -68,6 +64,11 @@ import java.util.List;
  */
 public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 	implements MBStatsUserPersistence {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Always use {@link MBStatsUserUtil} to access the message boards stats user persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = MBStatsUserImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";

@@ -21,10 +21,6 @@ package com.liferay.portlet.announcements.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a announcements entry model instance should use the {@link AnnouncementsEntry} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see AnnouncementsEntryModel
  * @see com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl
@@ -32,6 +28,11 @@ package com.liferay.portlet.announcements.model;
  * @generated
  */
 public interface AnnouncementsEntry extends AnnouncementsEntryModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a announcements entry model instance should use the {@link AnnouncementsEntry} interface instead.
+	 */
 	public long getGroupId()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

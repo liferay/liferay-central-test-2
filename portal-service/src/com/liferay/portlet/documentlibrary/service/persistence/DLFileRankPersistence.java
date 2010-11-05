@@ -22,10 +22,6 @@ import com.liferay.portlet.documentlibrary.model.DLFileRank;
  * The persistence interface for the d l file rank service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link DLFileRankUtil} to access the d l file rank persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.documentlibrary.model.DLFileRank;
  * @generated
  */
 public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link DLFileRankUtil} to access the d l file rank persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the d l file rank in the entity cache if it is enabled.
 	*

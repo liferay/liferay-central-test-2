@@ -21,10 +21,6 @@ package com.liferay.portlet.softwarecatalog.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a s c product version model instance should use the {@link SCProductVersion} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see SCProductVersionModel
  * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl
@@ -32,6 +28,11 @@ package com.liferay.portlet.softwarecatalog.model;
  * @generated
  */
 public interface SCProductVersion extends SCProductVersionModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a s c product version model instance should use the {@link SCProductVersion} interface instead.
+	 */
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions()
 		throws com.liferay.portal.kernel.exception.SystemException;
 

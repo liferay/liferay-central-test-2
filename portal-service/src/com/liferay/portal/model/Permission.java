@@ -21,10 +21,6 @@ package com.liferay.portal.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.PermissionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a permission model instance should use the {@link Permission} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see PermissionModel
  * @see com.liferay.portal.model.impl.PermissionImpl
@@ -32,6 +28,11 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface Permission extends PermissionModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a permission model instance should use the {@link Permission} interface instead.
+	 */
 	public java.lang.String getName();
 
 	public java.lang.String getPrimKey();

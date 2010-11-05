@@ -20,10 +20,6 @@ import com.liferay.portal.model.Phone;
  * The persistence interface for the phone service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link PhoneUtil} to access the phone persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -33,6 +29,12 @@ import com.liferay.portal.model.Phone;
  * @generated
  */
 public interface PhonePersistence extends BasePersistence<Phone> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link PhoneUtil} to access the phone persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the phone in the entity cache if it is enabled.
 	*

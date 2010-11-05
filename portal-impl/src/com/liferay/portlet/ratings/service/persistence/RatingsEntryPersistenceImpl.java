@@ -57,10 +57,6 @@ import java.util.List;
  * The persistence implementation for the ratings entry service.
  *
  * <p>
- * Never modify or reference this class directly. Always use {@link RatingsEntryUtil} to access the ratings entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -71,6 +67,11 @@ import java.util.List;
  */
 public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntry>
 	implements RatingsEntryPersistence {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Always use {@link RatingsEntryUtil} to access the ratings entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = RatingsEntryImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";

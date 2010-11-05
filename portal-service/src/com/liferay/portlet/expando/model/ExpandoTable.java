@@ -21,10 +21,6 @@ package com.liferay.portlet.expando.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.expando.model.impl.ExpandoTableImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a expando table model instance should use the {@link ExpandoTable} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see ExpandoTableModel
  * @see com.liferay.portlet.expando.model.impl.ExpandoTableImpl
@@ -32,5 +28,10 @@ package com.liferay.portlet.expando.model;
  * @generated
  */
 public interface ExpandoTable extends ExpandoTableModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a expando table model instance should use the {@link ExpandoTable} interface instead.
+	 */
 	public boolean isDefaultTable();
 }

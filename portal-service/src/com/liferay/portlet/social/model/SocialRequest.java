@@ -21,10 +21,6 @@ package com.liferay.portlet.social.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.social.model.impl.SocialRequestImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a social request model instance should use the {@link SocialRequest} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see SocialRequestModel
  * @see com.liferay.portlet.social.model.impl.SocialRequestImpl
@@ -32,4 +28,9 @@ package com.liferay.portlet.social.model;
  * @generated
  */
 public interface SocialRequest extends SocialRequestModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a social request model instance should use the {@link SocialRequest} interface instead.
+	 */
 }

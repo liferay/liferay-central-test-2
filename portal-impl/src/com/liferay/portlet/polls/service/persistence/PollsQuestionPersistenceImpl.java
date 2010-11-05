@@ -58,10 +58,6 @@ import java.util.List;
  * The persistence implementation for the polls question service.
  *
  * <p>
- * Never modify or reference this class directly. Always use {@link PollsQuestionUtil} to access the polls question persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -72,6 +68,11 @@ import java.util.List;
  */
 public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuestion>
 	implements PollsQuestionPersistence {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Always use {@link PollsQuestionUtil} to access the polls question persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = PollsQuestionImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";

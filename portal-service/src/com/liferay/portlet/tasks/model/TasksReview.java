@@ -21,10 +21,6 @@ package com.liferay.portlet.tasks.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.tasks.model.impl.TasksReviewImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a tasks review model instance should use the {@link TasksReview} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see TasksReviewModel
  * @see com.liferay.portlet.tasks.model.impl.TasksReviewImpl
@@ -32,4 +28,9 @@ package com.liferay.portlet.tasks.model;
  * @generated
  */
 public interface TasksReview extends TasksReviewModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a tasks review model instance should use the {@link TasksReview} interface instead.
+	 */
 }

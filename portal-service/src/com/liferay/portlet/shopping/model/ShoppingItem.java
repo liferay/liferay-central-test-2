@@ -21,10 +21,6 @@ package com.liferay.portlet.shopping.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.shopping.model.impl.ShoppingItemImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a shopping item model instance should use the {@link ShoppingItem} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see ShoppingItemModel
  * @see com.liferay.portlet.shopping.model.impl.ShoppingItemImpl
@@ -32,6 +28,11 @@ package com.liferay.portlet.shopping.model;
  * @generated
  */
 public interface ShoppingItem extends ShoppingItemModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a shopping item model instance should use the {@link ShoppingItem} interface instead.
+	 */
 	public int compareTo(com.liferay.portlet.shopping.model.ShoppingItem item);
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory getCategory();

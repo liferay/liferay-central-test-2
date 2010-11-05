@@ -21,10 +21,6 @@ package com.liferay.portal.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.CompanyImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a company model instance should use the {@link Company} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see CompanyModel
  * @see com.liferay.portal.model.impl.CompanyImpl
@@ -32,6 +28,11 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface Company extends CompanyModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a company model instance should use the {@link Company} interface instead.
+	 */
 	public int compareTo(com.liferay.portal.model.Company company);
 
 	public com.liferay.portal.model.Account getAccount()

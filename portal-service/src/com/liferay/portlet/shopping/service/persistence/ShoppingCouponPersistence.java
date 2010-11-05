@@ -22,10 +22,6 @@ import com.liferay.portlet.shopping.model.ShoppingCoupon;
  * The persistence interface for the shopping coupon service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link ShoppingCouponUtil} to access the shopping coupon persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.shopping.model.ShoppingCoupon;
  * @generated
  */
 public interface ShoppingCouponPersistence extends BasePersistence<ShoppingCoupon> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link ShoppingCouponUtil} to access the shopping coupon persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the shopping coupon in the entity cache if it is enabled.
 	*

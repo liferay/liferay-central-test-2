@@ -22,10 +22,6 @@ import com.liferay.portlet.wiki.model.WikiPageResource;
  * The persistence interface for the wiki page resource service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link WikiPageResourceUtil} to access the wiki page resource persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.wiki.model.WikiPageResource;
  * @generated
  */
 public interface WikiPageResourcePersistence extends BasePersistence<WikiPageResource> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link WikiPageResourceUtil} to access the wiki page resource persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the wiki page resource in the entity cache if it is enabled.
 	*

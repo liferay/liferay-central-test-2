@@ -21,10 +21,6 @@ package com.liferay.portlet.messageboards.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.messageboards.model.impl.MBMailingListImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a message boards mailing list model instance should use the {@link MBMailingList} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see MBMailingListModel
  * @see com.liferay.portlet.messageboards.model.impl.MBMailingListImpl
@@ -32,4 +28,9 @@ package com.liferay.portlet.messageboards.model;
  * @generated
  */
 public interface MBMailingList extends MBMailingListModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a message boards mailing list model instance should use the {@link MBMailingList} interface instead.
+	 */
 }

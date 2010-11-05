@@ -21,10 +21,6 @@ package com.liferay.portal.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.LayoutBranchImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a layout branch model instance should use the {@link LayoutBranch} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see LayoutBranchModel
  * @see com.liferay.portal.model.impl.LayoutBranchImpl
@@ -32,5 +28,10 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface LayoutBranch extends LayoutBranchModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a layout branch model instance should use the {@link LayoutBranch} interface instead.
+	 */
 	public boolean isMaster();
 }

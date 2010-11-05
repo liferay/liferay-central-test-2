@@ -21,10 +21,6 @@ package com.liferay.portlet.journal.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.journal.model.impl.JournalContentSearchImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a journal content search model instance should use the {@link JournalContentSearch} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see JournalContentSearchModel
  * @see com.liferay.portlet.journal.model.impl.JournalContentSearchImpl
@@ -32,4 +28,9 @@ package com.liferay.portlet.journal.model;
  * @generated
  */
 public interface JournalContentSearch extends JournalContentSearchModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a journal content search model instance should use the {@link JournalContentSearch} interface instead.
+	 */
 }

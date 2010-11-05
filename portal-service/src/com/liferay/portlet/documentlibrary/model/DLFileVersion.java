@@ -21,10 +21,6 @@ package com.liferay.portlet.documentlibrary.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a d l file version model instance should use the {@link DLFileVersion} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see DLFileVersionModel
  * @see com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl
@@ -32,6 +28,11 @@ package com.liferay.portlet.documentlibrary.model;
  * @generated
  */
 public interface DLFileVersion extends DLFileVersionModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a d l file version model instance should use the {@link DLFileVersion} interface instead.
+	 */
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge();
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry()

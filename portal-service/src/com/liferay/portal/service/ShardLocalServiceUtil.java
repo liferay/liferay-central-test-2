@@ -22,10 +22,6 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * The utility for the shard local service. This utility wraps {@link com.liferay.portal.service.impl.ShardLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
  *
  * <p>
- * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.ShardLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
@@ -36,6 +32,12 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * @generated
  */
 public class ShardLocalServiceUtil {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.ShardLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 */
+
 	/**
 	* Adds the shard to the database. Also notifies the appropriate model listeners.
 	*

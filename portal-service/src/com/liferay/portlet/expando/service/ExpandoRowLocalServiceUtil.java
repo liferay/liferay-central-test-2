@@ -22,10 +22,6 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * The utility for the expando row local service. This utility wraps {@link com.liferay.portlet.expando.service.impl.ExpandoRowLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
  *
  * <p>
- * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.expando.service.impl.ExpandoRowLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
@@ -36,6 +32,12 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * @generated
  */
 public class ExpandoRowLocalServiceUtil {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.expando.service.impl.ExpandoRowLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 */
+
 	/**
 	* Adds the expando row to the database. Also notifies the appropriate model listeners.
 	*

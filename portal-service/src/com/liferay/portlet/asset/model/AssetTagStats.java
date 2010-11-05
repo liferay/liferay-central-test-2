@@ -21,10 +21,6 @@ package com.liferay.portlet.asset.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.asset.model.impl.AssetTagStatsImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a asset tag stats model instance should use the {@link AssetTagStats} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see AssetTagStatsModel
  * @see com.liferay.portlet.asset.model.impl.AssetTagStatsImpl
@@ -32,4 +28,9 @@ package com.liferay.portlet.asset.model;
  * @generated
  */
 public interface AssetTagStats extends AssetTagStatsModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a asset tag stats model instance should use the {@link AssetTagStats} interface instead.
+	 */
 }

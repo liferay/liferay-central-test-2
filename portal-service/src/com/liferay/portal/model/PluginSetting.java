@@ -21,10 +21,6 @@ package com.liferay.portal.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.PluginSettingImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a plugin setting model instance should use the {@link PluginSetting} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see PluginSettingModel
  * @see com.liferay.portal.model.impl.PluginSettingImpl
@@ -32,6 +28,12 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface PluginSetting extends PluginSettingModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a plugin setting model instance should use the {@link PluginSetting} interface instead.
+	 */
+
 	/**
 	* Adds a role to the list of roles.
 	*/

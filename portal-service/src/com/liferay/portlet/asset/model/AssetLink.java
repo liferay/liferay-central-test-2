@@ -21,10 +21,6 @@ package com.liferay.portlet.asset.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.asset.model.impl.AssetLinkImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a asset link model instance should use the {@link AssetLink} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see AssetLinkModel
  * @see com.liferay.portlet.asset.model.impl.AssetLinkImpl
@@ -32,4 +28,9 @@ package com.liferay.portlet.asset.model;
  * @generated
  */
 public interface AssetLink extends AssetLinkModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a asset link model instance should use the {@link AssetLink} interface instead.
+	 */
 }

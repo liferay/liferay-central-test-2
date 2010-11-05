@@ -20,10 +20,6 @@ import com.liferay.portal.model.LayoutSet;
  * The persistence interface for the layout set service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link LayoutSetUtil} to access the layout set persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -33,6 +29,12 @@ import com.liferay.portal.model.LayoutSet;
  * @generated
  */
 public interface LayoutSetPersistence extends BasePersistence<LayoutSet> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link LayoutSetUtil} to access the layout set persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the layout set in the entity cache if it is enabled.
 	*

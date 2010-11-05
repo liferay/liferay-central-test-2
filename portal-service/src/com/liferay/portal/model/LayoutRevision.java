@@ -21,10 +21,6 @@ package com.liferay.portal.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.LayoutRevisionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a layout revision model instance should use the {@link LayoutRevision} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see LayoutRevisionModel
  * @see com.liferay.portal.model.impl.LayoutRevisionImpl
@@ -32,4 +28,9 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface LayoutRevision extends LayoutRevisionModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a layout revision model instance should use the {@link LayoutRevision} interface instead.
+	 */
 }

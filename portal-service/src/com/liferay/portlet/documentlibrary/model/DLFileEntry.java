@@ -21,10 +21,6 @@ package com.liferay.portlet.documentlibrary.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a d l file entry model instance should use the {@link DLFileEntry} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see DLFileEntryModel
  * @see com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl
@@ -32,6 +28,11 @@ package com.liferay.portlet.documentlibrary.model;
  * @generated
  */
 public interface DLFileEntry extends DLFileEntryModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a d l file entry model instance should use the {@link DLFileEntry} interface instead.
+	 */
 	public java.lang.String getExtraSettings();
 
 	public com.liferay.portal.kernel.util.UnicodeProperties getExtraSettingsProperties();

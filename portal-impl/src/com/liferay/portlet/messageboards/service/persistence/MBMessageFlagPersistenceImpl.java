@@ -54,10 +54,6 @@ import java.util.List;
  * The persistence implementation for the message boards message flag service.
  *
  * <p>
- * Never modify or reference this class directly. Always use {@link MBMessageFlagUtil} to access the message boards message flag persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -68,6 +64,11 @@ import java.util.List;
  */
 public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageFlag>
 	implements MBMessageFlagPersistence {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Always use {@link MBMessageFlagUtil} to access the message boards message flag persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = MBMessageFlagImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";

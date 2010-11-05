@@ -22,10 +22,6 @@ import com.liferay.portlet.asset.model.AssetLink;
  * The persistence interface for the asset link service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link AssetLinkUtil} to access the asset link persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.asset.model.AssetLink;
  * @generated
  */
 public interface AssetLinkPersistence extends BasePersistence<AssetLink> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link AssetLinkUtil} to access the asset link persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the asset link in the entity cache if it is enabled.
 	*

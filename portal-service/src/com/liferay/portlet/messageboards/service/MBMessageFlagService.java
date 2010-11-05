@@ -23,10 +23,6 @@ import com.liferay.portal.kernel.exception.SystemException;
  * The interface for the message boards message flag remote service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link MBMessageFlagServiceUtil} to access the message boards message flag remote service. Add custom service methods to {@link com.liferay.portlet.messageboards.service.impl.MBMessageFlagServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
- * <p>
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
@@ -39,6 +35,11 @@ import com.liferay.portal.kernel.exception.SystemException;
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface MBMessageFlagService {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link MBMessageFlagServiceUtil} to access the message boards message flag remote service. Add custom service methods to {@link com.liferay.portlet.messageboards.service.impl.MBMessageFlagServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	public void addAnswerFlag(long messageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

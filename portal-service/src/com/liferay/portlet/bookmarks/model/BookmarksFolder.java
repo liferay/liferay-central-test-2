@@ -21,10 +21,6 @@ package com.liferay.portlet.bookmarks.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a bookmarks folder model instance should use the {@link BookmarksFolder} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see BookmarksFolderModel
  * @see com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl
@@ -32,6 +28,11 @@ package com.liferay.portlet.bookmarks.model;
  * @generated
  */
 public interface BookmarksFolder extends BookmarksFolderModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a bookmarks folder model instance should use the {@link BookmarksFolder} interface instead.
+	 */
 	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> getAncestors()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

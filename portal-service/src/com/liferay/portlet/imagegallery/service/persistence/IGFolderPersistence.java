@@ -22,10 +22,6 @@ import com.liferay.portlet.imagegallery.model.IGFolder;
  * The persistence interface for the i g folder service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link IGFolderUtil} to access the i g folder persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.imagegallery.model.IGFolder;
  * @generated
  */
 public interface IGFolderPersistence extends BasePersistence<IGFolder> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link IGFolderUtil} to access the i g folder persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the i g folder in the entity cache if it is enabled.
 	*

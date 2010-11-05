@@ -21,10 +21,6 @@ package com.liferay.portlet.social.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.social.model.impl.SocialEquityLogImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a social equity log model instance should use the {@link SocialEquityLog} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see SocialEquityLogModel
  * @see com.liferay.portlet.social.model.impl.SocialEquityLogImpl
@@ -32,5 +28,10 @@ package com.liferay.portlet.social.model;
  * @generated
  */
 public interface SocialEquityLog extends SocialEquityLogModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a social equity log model instance should use the {@link SocialEquityLog} interface instead.
+	 */
 	public int getLifespan();
 }

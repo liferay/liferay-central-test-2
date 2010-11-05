@@ -21,10 +21,6 @@ package com.liferay.portlet.shopping.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a shopping order model instance should use the {@link ShoppingOrder} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see ShoppingOrderModel
  * @see com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl
@@ -32,4 +28,9 @@ package com.liferay.portlet.shopping.model;
  * @generated
  */
 public interface ShoppingOrder extends ShoppingOrderModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a shopping order model instance should use the {@link ShoppingOrder} interface instead.
+	 */
 }

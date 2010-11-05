@@ -21,10 +21,6 @@ package com.liferay.portlet.imagegallery.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.imagegallery.model.impl.IGImageImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a i g image model instance should use the {@link IGImage} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see IGImageModel
  * @see com.liferay.portlet.imagegallery.model.impl.IGImageImpl
@@ -32,6 +28,11 @@ package com.liferay.portlet.imagegallery.model;
  * @generated
  */
 public interface IGImage extends IGImageModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a i g image model instance should use the {@link IGImage} interface instead.
+	 */
 	public com.liferay.portlet.imagegallery.model.IGFolder getFolder();
 
 	public int getImageSize();

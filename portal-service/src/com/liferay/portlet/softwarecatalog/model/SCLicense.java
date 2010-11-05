@@ -21,10 +21,6 @@ package com.liferay.portlet.softwarecatalog.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a s c license model instance should use the {@link SCLicense} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see SCLicenseModel
  * @see com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl
@@ -32,4 +28,9 @@ package com.liferay.portlet.softwarecatalog.model;
  * @generated
  */
 public interface SCLicense extends SCLicenseModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a s c license model instance should use the {@link SCLicense} interface instead.
+	 */
 }

@@ -21,10 +21,6 @@ package com.liferay.portlet.polls.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.polls.model.impl.PollsChoiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a polls choice model instance should use the {@link PollsChoice} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see PollsChoiceModel
  * @see com.liferay.portlet.polls.model.impl.PollsChoiceImpl
@@ -32,6 +28,11 @@ package com.liferay.portlet.polls.model;
  * @generated
  */
 public interface PollsChoice extends PollsChoiceModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a polls choice model instance should use the {@link PollsChoice} interface instead.
+	 */
 	public int getVotesCount()
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

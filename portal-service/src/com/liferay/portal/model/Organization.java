@@ -21,10 +21,6 @@ package com.liferay.portal.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.OrganizationImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a organization model instance should use the {@link Organization} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see OrganizationModel
  * @see com.liferay.portal.model.impl.OrganizationImpl
@@ -32,6 +28,11 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface Organization extends OrganizationModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a organization model instance should use the {@link Organization} interface instead.
+	 */
 	public java.util.List<com.liferay.portal.model.Organization> getAncestors()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

@@ -22,10 +22,6 @@ import com.liferay.portlet.messageboards.model.MBThread;
  * The persistence interface for the message boards thread service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link MBThreadUtil} to access the message boards thread persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.messageboards.model.MBThread;
  * @generated
  */
 public interface MBThreadPersistence extends BasePersistence<MBThread> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link MBThreadUtil} to access the message boards thread persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the message boards thread in the entity cache if it is enabled.
 	*

@@ -68,10 +68,6 @@ import java.util.Set;
  * The persistence implementation for the s c product entry service.
  *
  * <p>
- * Never modify or reference this class directly. Always use {@link SCProductEntryUtil} to access the s c product entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -82,6 +78,11 @@ import java.util.Set;
  */
 public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProductEntry>
 	implements SCProductEntryPersistence {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Always use {@link SCProductEntryUtil} to access the s c product entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = SCProductEntryImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
@@ -3217,11 +3218,11 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "scProductEntry.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_U_USERID_2 = "scProductEntry.userId = ?";
 	private static final String _FINDER_COLUMN_RG_RA_REPOGROUPID_1 = "scProductEntry.repoGroupId IS NULL AND ";
-	private static final String _FINDER_COLUMN_RG_RA_REPOGROUPID_2 = "lower(scProductEntry.repoGroupId) = lower(?) AND ";
-	private static final String _FINDER_COLUMN_RG_RA_REPOGROUPID_3 = "(scProductEntry.repoGroupId IS NULL OR lower(scProductEntry.repoGroupId) = lower(?)) AND ";
+	private static final String _FINDER_COLUMN_RG_RA_REPOGROUPID_2 = "lower(scProductEntry.repoGroupId) = lower(CAST_TEXT(?)) AND ";
+	private static final String _FINDER_COLUMN_RG_RA_REPOGROUPID_3 = "(scProductEntry.repoGroupId IS NULL OR lower(scProductEntry.repoGroupId) = lower(CAST_TEXT(?))) AND ";
 	private static final String _FINDER_COLUMN_RG_RA_REPOARTIFACTID_1 = "scProductEntry.repoArtifactId IS NULL";
-	private static final String _FINDER_COLUMN_RG_RA_REPOARTIFACTID_2 = "lower(scProductEntry.repoArtifactId) = lower(?)";
-	private static final String _FINDER_COLUMN_RG_RA_REPOARTIFACTID_3 = "(scProductEntry.repoArtifactId IS NULL OR lower(scProductEntry.repoArtifactId) = lower(?))";
+	private static final String _FINDER_COLUMN_RG_RA_REPOARTIFACTID_2 = "lower(scProductEntry.repoArtifactId) = lower(CAST_TEXT(?))";
+	private static final String _FINDER_COLUMN_RG_RA_REPOARTIFACTID_3 = "(scProductEntry.repoArtifactId IS NULL OR lower(scProductEntry.repoArtifactId) = lower(CAST_TEXT(?)))";
 	private static final String _FILTER_SQL_SELECT_SCPRODUCTENTRY_WHERE = "SELECT DISTINCT {scProductEntry.*} FROM SCProductEntry scProductEntry WHERE ";
 	private static final String _FILTER_SQL_SELECT_SCPRODUCTENTRY_NO_INLINE_DISTINCT_WHERE =
 		"SELECT {scProductEntry.*} FROM (SELECT DISTINCT productEntryId FROM SCProductEntry) scProductEntry2 INNER JOIN SCProductEntry scProductEntry ON (scProductEntry2.productEntryId = scProductEntry.productEntryId) WHERE ";

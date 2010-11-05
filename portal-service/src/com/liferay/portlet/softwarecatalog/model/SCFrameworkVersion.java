@@ -21,10 +21,6 @@ package com.liferay.portlet.softwarecatalog.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a s c framework version model instance should use the {@link SCFrameworkVersion} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see SCFrameworkVersionModel
  * @see com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl
@@ -32,4 +28,9 @@ package com.liferay.portlet.softwarecatalog.model;
  * @generated
  */
 public interface SCFrameworkVersion extends SCFrameworkVersionModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a s c framework version model instance should use the {@link SCFrameworkVersion} interface instead.
+	 */
 }

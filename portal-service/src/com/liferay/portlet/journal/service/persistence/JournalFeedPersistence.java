@@ -22,10 +22,6 @@ import com.liferay.portlet.journal.model.JournalFeed;
  * The persistence interface for the journal feed service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link JournalFeedUtil} to access the journal feed persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.journal.model.JournalFeed;
  * @generated
  */
 public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link JournalFeedUtil} to access the journal feed persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the journal feed in the entity cache if it is enabled.
 	*

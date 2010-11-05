@@ -20,10 +20,6 @@ import com.liferay.portal.model.Subscription;
  * The persistence interface for the subscription service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link SubscriptionUtil} to access the subscription persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -33,6 +29,12 @@ import com.liferay.portal.model.Subscription;
  * @generated
  */
 public interface SubscriptionPersistence extends BasePersistence<Subscription> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link SubscriptionUtil} to access the subscription persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the subscription in the entity cache if it is enabled.
 	*

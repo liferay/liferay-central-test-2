@@ -22,10 +22,6 @@ import com.liferay.portlet.announcements.model.AnnouncementsFlag;
  * The persistence interface for the announcements flag service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link AnnouncementsFlagUtil} to access the announcements flag persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.announcements.model.AnnouncementsFlag;
  * @generated
  */
 public interface AnnouncementsFlagPersistence extends BasePersistence<AnnouncementsFlag> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link AnnouncementsFlagUtil} to access the announcements flag persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the announcements flag in the entity cache if it is enabled.
 	*

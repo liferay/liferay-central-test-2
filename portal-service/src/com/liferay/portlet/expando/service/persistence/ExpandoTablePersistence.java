@@ -22,10 +22,6 @@ import com.liferay.portlet.expando.model.ExpandoTable;
  * The persistence interface for the expando table service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link ExpandoTableUtil} to access the expando table persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.expando.model.ExpandoTable;
  * @generated
  */
 public interface ExpandoTablePersistence extends BasePersistence<ExpandoTable> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link ExpandoTableUtil} to access the expando table persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the expando table in the entity cache if it is enabled.
 	*

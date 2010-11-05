@@ -22,10 +22,6 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
  * The persistence interface for the bookmarks folder service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link BookmarksFolderUtil} to access the bookmarks folder persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
  * @generated
  */
 public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFolder> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link BookmarksFolderUtil} to access the bookmarks folder persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the bookmarks folder in the entity cache if it is enabled.
 	*

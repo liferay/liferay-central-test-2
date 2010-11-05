@@ -21,10 +21,6 @@ package com.liferay.portal.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.ResourceActionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a resource action model instance should use the {@link ResourceAction} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see ResourceActionModel
  * @see com.liferay.portal.model.impl.ResourceActionImpl
@@ -32,4 +28,9 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface ResourceAction extends ResourceActionModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a resource action model instance should use the {@link ResourceAction} interface instead.
+	 */
 }

@@ -22,10 +22,6 @@ import com.liferay.portlet.polls.model.PollsVote;
  * The persistence interface for the polls vote service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link PollsVoteUtil} to access the polls vote persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.polls.model.PollsVote;
  * @generated
  */
 public interface PollsVotePersistence extends BasePersistence<PollsVote> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link PollsVoteUtil} to access the polls vote persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the polls vote in the entity cache if it is enabled.
 	*

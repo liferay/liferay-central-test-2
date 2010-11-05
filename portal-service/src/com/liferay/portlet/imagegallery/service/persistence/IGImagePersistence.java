@@ -22,10 +22,6 @@ import com.liferay.portlet.imagegallery.model.IGImage;
  * The persistence interface for the i g image service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link IGImageUtil} to access the i g image persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.imagegallery.model.IGImage;
  * @generated
  */
 public interface IGImagePersistence extends BasePersistence<IGImage> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link IGImageUtil} to access the i g image persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the i g image in the entity cache if it is enabled.
 	*

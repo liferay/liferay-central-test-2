@@ -21,10 +21,6 @@ package com.liferay.portlet.asset.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.asset.model.impl.AssetVocabularyImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a asset vocabulary model instance should use the {@link AssetVocabulary} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see AssetVocabularyModel
  * @see com.liferay.portlet.asset.model.impl.AssetVocabularyImpl
@@ -32,6 +28,11 @@ package com.liferay.portlet.asset.model;
  * @generated
  */
 public interface AssetVocabulary extends AssetVocabularyModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a asset vocabulary model instance should use the {@link AssetVocabulary} interface instead.
+	 */
 	public java.lang.String getTitle(java.lang.String languageId);
 
 	public java.lang.String getTitle(java.lang.String languageId,

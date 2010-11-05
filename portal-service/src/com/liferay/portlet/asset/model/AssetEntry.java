@@ -21,10 +21,6 @@ package com.liferay.portlet.asset.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.asset.model.impl.AssetEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a asset entry model instance should use the {@link AssetEntry} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see AssetEntryModel
  * @see com.liferay.portlet.asset.model.impl.AssetEntryImpl
@@ -32,6 +28,11 @@ package com.liferay.portlet.asset.model;
  * @generated
  */
 public interface AssetEntry extends AssetEntryModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a asset entry model instance should use the {@link AssetEntry} interface instead.
+	 */
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getCategories()
 		throws com.liferay.portal.kernel.exception.SystemException;
 

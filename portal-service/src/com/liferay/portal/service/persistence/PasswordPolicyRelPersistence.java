@@ -20,10 +20,6 @@ import com.liferay.portal.model.PasswordPolicyRel;
  * The persistence interface for the password policy rel service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link PasswordPolicyRelUtil} to access the password policy rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -33,6 +29,12 @@ import com.liferay.portal.model.PasswordPolicyRel;
  * @generated
  */
 public interface PasswordPolicyRelPersistence extends BasePersistence<PasswordPolicyRel> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link PasswordPolicyRelUtil} to access the password policy rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the password policy rel in the entity cache if it is enabled.
 	*

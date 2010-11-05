@@ -22,10 +22,6 @@ import com.liferay.portlet.social.model.SocialRequest;
  * The persistence interface for the social request service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link SocialRequestUtil} to access the social request persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.social.model.SocialRequest;
  * @generated
  */
 public interface SocialRequestPersistence extends BasePersistence<SocialRequest> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link SocialRequestUtil} to access the social request persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the social request in the entity cache if it is enabled.
 	*

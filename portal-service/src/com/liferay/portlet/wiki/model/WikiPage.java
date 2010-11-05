@@ -21,10 +21,6 @@ package com.liferay.portlet.wiki.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.wiki.model.impl.WikiPageImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a wiki page model instance should use the {@link WikiPage} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see WikiPageModel
  * @see com.liferay.portlet.wiki.model.impl.WikiPageImpl
@@ -32,6 +28,11 @@ package com.liferay.portlet.wiki.model;
  * @generated
  */
 public interface WikiPage extends WikiPageModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a wiki page model instance should use the {@link WikiPage} interface instead.
+	 */
 	public java.lang.String getAttachmentsDir();
 
 	public java.lang.String[] getAttachmentsFiles()

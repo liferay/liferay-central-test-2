@@ -20,10 +20,6 @@ import com.liferay.portal.model.LayoutBranch;
  * The persistence interface for the layout branch service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link LayoutBranchUtil} to access the layout branch persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -33,6 +29,12 @@ import com.liferay.portal.model.LayoutBranch;
  * @generated
  */
 public interface LayoutBranchPersistence extends BasePersistence<LayoutBranch> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link LayoutBranchUtil} to access the layout branch persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the layout branch in the entity cache if it is enabled.
 	*

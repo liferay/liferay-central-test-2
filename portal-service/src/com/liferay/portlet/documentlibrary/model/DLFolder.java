@@ -21,10 +21,6 @@ package com.liferay.portlet.documentlibrary.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a d l folder model instance should use the {@link DLFolder} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see DLFolderModel
  * @see com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl
@@ -32,6 +28,11 @@ package com.liferay.portlet.documentlibrary.model;
  * @generated
  */
 public interface DLFolder extends DLFolderModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a d l folder model instance should use the {@link DLFolder} interface instead.
+	 */
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getAncestors()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

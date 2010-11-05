@@ -21,10 +21,6 @@ package com.liferay.portal.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.UserGroupRoleImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a user group role model instance should use the {@link UserGroupRole} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see UserGroupRoleModel
  * @see com.liferay.portal.model.impl.UserGroupRoleImpl
@@ -32,6 +28,11 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface UserGroupRole extends UserGroupRoleModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a user group role model instance should use the {@link UserGroupRole} interface instead.
+	 */
 	public com.liferay.portal.model.Group getGroup()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

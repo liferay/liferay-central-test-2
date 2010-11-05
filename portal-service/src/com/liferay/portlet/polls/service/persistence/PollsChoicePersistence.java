@@ -22,10 +22,6 @@ import com.liferay.portlet.polls.model.PollsChoice;
  * The persistence interface for the polls choice service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link PollsChoiceUtil} to access the polls choice persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.polls.model.PollsChoice;
  * @generated
  */
 public interface PollsChoicePersistence extends BasePersistence<PollsChoice> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link PollsChoiceUtil} to access the polls choice persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the polls choice in the entity cache if it is enabled.
 	*

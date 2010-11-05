@@ -22,10 +22,6 @@ import com.liferay.portlet.shopping.model.ShoppingOrder;
  * The persistence interface for the shopping order service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link ShoppingOrderUtil} to access the shopping order persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.shopping.model.ShoppingOrder;
  * @generated
  */
 public interface ShoppingOrderPersistence extends BasePersistence<ShoppingOrder> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link ShoppingOrderUtil} to access the shopping order persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the shopping order in the entity cache if it is enabled.
 	*

@@ -21,10 +21,6 @@ package com.liferay.portlet.wiki.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * <p>
- * Never reference this interface directly. All methods that expect a wiki page resource model instance should use the {@link WikiPageResource} interface instead.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see WikiPageResourceModel
  * @see com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl
@@ -32,4 +28,9 @@ package com.liferay.portlet.wiki.model;
  * @generated
  */
 public interface WikiPageResource extends WikiPageResourceModel {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. All methods that expect a wiki page resource model instance should use the {@link WikiPageResource} interface instead.
+	 */
 }

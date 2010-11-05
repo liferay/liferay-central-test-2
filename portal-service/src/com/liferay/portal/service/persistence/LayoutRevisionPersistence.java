@@ -20,10 +20,6 @@ import com.liferay.portal.model.LayoutRevision;
  * The persistence interface for the layout revision service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link LayoutRevisionUtil} to access the layout revision persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -33,6 +29,12 @@ import com.liferay.portal.model.LayoutRevision;
  * @generated
  */
 public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevision> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link LayoutRevisionUtil} to access the layout revision persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the layout revision in the entity cache if it is enabled.
 	*

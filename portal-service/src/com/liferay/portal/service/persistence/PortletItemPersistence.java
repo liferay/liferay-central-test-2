@@ -20,10 +20,6 @@ import com.liferay.portal.model.PortletItem;
  * The persistence interface for the portlet item service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link PortletItemUtil} to access the portlet item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -33,6 +29,12 @@ import com.liferay.portal.model.PortletItem;
  * @generated
  */
 public interface PortletItemPersistence extends BasePersistence<PortletItem> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link PortletItemUtil} to access the portlet item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the portlet item in the entity cache if it is enabled.
 	*

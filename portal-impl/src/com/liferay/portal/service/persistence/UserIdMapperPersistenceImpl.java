@@ -51,10 +51,6 @@ import java.util.List;
  * The persistence implementation for the user id mapper service.
  *
  * <p>
- * Never modify or reference this class directly. Always use {@link UserIdMapperUtil} to access the user id mapper persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -65,6 +61,11 @@ import java.util.List;
  */
 public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMapper>
 	implements UserIdMapperPersistence {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Always use {@link UserIdMapperUtil} to access the user id mapper persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = UserIdMapperImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";

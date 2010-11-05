@@ -22,10 +22,6 @@ import com.liferay.portlet.expando.model.ExpandoValue;
  * The persistence interface for the expando value service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link ExpandoValueUtil} to access the expando value persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.expando.model.ExpandoValue;
  * @generated
  */
 public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link ExpandoValueUtil} to access the expando value persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the expando value in the entity cache if it is enabled.
 	*

@@ -20,10 +20,6 @@ import com.liferay.portal.model.MembershipRequest;
  * The persistence interface for the membership request service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link MembershipRequestUtil} to access the membership request persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -33,6 +29,12 @@ import com.liferay.portal.model.MembershipRequest;
  * @generated
  */
 public interface MembershipRequestPersistence extends BasePersistence<MembershipRequest> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link MembershipRequestUtil} to access the membership request persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the membership request in the entity cache if it is enabled.
 	*

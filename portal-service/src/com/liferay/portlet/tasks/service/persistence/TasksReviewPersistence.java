@@ -22,10 +22,6 @@ import com.liferay.portlet.tasks.model.TasksReview;
  * The persistence interface for the tasks review service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link TasksReviewUtil} to access the tasks review persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.tasks.model.TasksReview;
  * @generated
  */
 public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link TasksReviewUtil} to access the tasks review persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the tasks review in the entity cache if it is enabled.
 	*

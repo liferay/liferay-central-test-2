@@ -22,10 +22,6 @@ import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
  * The persistence interface for the s c framework version service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link SCFrameworkVersionUtil} to access the s c framework version persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
  * @generated
  */
 public interface SCFrameworkVersionPersistence extends BasePersistence<SCFrameworkVersion> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link SCFrameworkVersionUtil} to access the s c framework version persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the s c framework version in the entity cache if it is enabled.
 	*

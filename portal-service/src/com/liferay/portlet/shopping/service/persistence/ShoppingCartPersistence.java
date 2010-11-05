@@ -22,10 +22,6 @@ import com.liferay.portlet.shopping.model.ShoppingCart;
  * The persistence interface for the shopping cart service.
  *
  * <p>
- * Never modify or reference this interface directly. Always use {@link ShoppingCartUtil} to access the shopping cart persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
@@ -35,6 +31,12 @@ import com.liferay.portlet.shopping.model.ShoppingCart;
  * @generated
  */
 public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link ShoppingCartUtil} to access the shopping cart persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 */
+
 	/**
 	* Caches the shopping cart in the entity cache if it is enabled.
 	*
