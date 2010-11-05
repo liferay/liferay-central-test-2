@@ -3030,7 +3030,7 @@ public class JournalArticleLocalServiceImpl
 			PropsKeys.JOURNAL_IMAGE_EXTENSIONS, StringPool.COMMA);
 
 		if (smallImage && Validator.isNull(smallImageURL) &&
-			smallFile != null && smallBytes != null) {
+			(smallFile != null) && (smallBytes != null)) {
 
 			String smallImageName = smallFile.getName();
 
