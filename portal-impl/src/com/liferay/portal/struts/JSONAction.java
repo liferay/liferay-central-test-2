@@ -67,11 +67,11 @@ public abstract class JSONAction extends Action {
 			response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 			response.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
 
-			PrintWriter pw = response.getWriter();
+			PrintWriter printWriter = response.getWriter();
 
-			pw.write(json);
+			printWriter.write(json);
 
-			pw.close();
+			printWriter.close();
 		}
 
 		return null;
