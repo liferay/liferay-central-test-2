@@ -1618,8 +1618,7 @@ public class PortalImpl implements Portal {
 				String portalDomain = HttpUtil.getDomain(
 					themeDisplay.getPortalURL());
 
-				if (virtualHost.indexOf(portalDomain) != -1) {
-
+				if (virtualHost.contains(portalDomain)) {
 					if (themeDisplay.isWidget()) {
 						layoutFriendlyURL =
 							PropsValues.WIDGET_SERVLET_MAPPING +
