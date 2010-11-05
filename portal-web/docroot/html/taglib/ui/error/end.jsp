@@ -34,7 +34,7 @@ String rowBreak = (String)request.getAttribute("liferay-ui:error:rowBreak");
 	<c:when test="<%= key == null %>">
 		<c:if test="<%= !SessionErrors.isEmpty(portletRequest) %>">
 			<div class="portlet-msg-error">
-				<liferay-ui:message key="you-have-entered-invalid-data" />
+				<liferay-ui:message key="your-request-failed-to-complete" />
 			</div>
 
 			<%= rowBreak %>
