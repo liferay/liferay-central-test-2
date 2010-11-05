@@ -72,7 +72,7 @@
 	<c:if test='<%= !displayStyle.equals("title") %>'>
 		<div class="abstract">
 			<c:if test='<%= displayStyle.endsWith("-image") %>'>
-				<a href="<%= viewAllEntriesURL %>"><img align="left" border="0" hspace="0" src="<%= themeDisplay.getPathImage() %>/user_<%= user2.isFemale() ? "female" : "male" %>_portrait?img_id=<%= user2.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user2.getPortraitId()) %>" width="65" /></a>
+				<a href="<%= viewAllEntriesURL %>"><img align="left" border="0" hspace="0" src="<%= user2.getPortraitURL(themeDisplay) %>" width="65" /></a>
 			</c:if>
 			<c:choose>
 				<c:when test='<%= displayStyle.startsWith("abstract") %>'>

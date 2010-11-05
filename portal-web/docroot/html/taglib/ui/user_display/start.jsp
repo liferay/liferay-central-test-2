@@ -17,14 +17,6 @@
 <%@ include file="/html/taglib/ui/user_display/init.jsp" %>
 
 <%
-long portraitId = 0;
-String tokenId = StringPool.BLANK;
-
-if (userDisplay != null) {
-	portraitId = userDisplay.getPortraitId();
-	tokenId = ImageServletTokenUtil.getToken(userDisplay.getPortraitId());
-}
-
 if (Validator.isNull(url) && (userDisplay != null)) {
 	url = userDisplay.getDisplayURL(themeDisplay);
 }
@@ -46,7 +38,15 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 
 		<%
 		String taglibAlt = (userDisplay != null) ? HtmlUtil.escapeAttribute(userDisplay.getFullName()) : LanguageUtil.get(pageContext, "generic-portrait");
-		String taglibSrc = themeDisplay.getPathImage() + "/user_" + ((userDisplay != null) && userDisplay.isFemale() ? "female" : "male") + "_portrait?img_id=" + portraitId + "&t=" + tokenId;
+
+		String taglibSrc = null;
+
+		if (userDisplay != null) {
+			taglibSrc = userDisplay.getPortraitURL(themeDisplay);
+		}
+		else {
+			taglibSrc = UserConstants.getPortraitURL(themeDisplay.getPathImage(), true, 0);
+		}
 		%>
 
 		<aui:a href="<%= url %>">

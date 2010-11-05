@@ -128,7 +128,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 			String taglibEditURL = "javascript:" + renderResponse.getNamespace() + "openEditUserPortraitWindow('" + editUserPortraitURL + "');";
 			%>
 
-			<aui:a cssClass="change-avatar" href="<%= taglibEditURL %>"><img alt="<liferay-ui:message key="avatar" />" class="avatar" id="<portlet:namespace />avatar" src='<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= deletePortrait ? 0 : selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>' /></aui:a>
+			<aui:a cssClass="change-avatar" href="<%= taglibEditURL %>"><img alt="<liferay-ui:message key="avatar" />" class="avatar" id="<portlet:namespace />avatar" src="<%= selUser.getPortraitURL(themeDisplay) %>" /></aui:a>
 
 			<div class="portrait-icons">
 				<liferay-ui:icon
@@ -141,7 +141,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 				<c:if test="<%= selUser.getPortraitId() > 0 %>">
 
 					<%
-					String taglibDeleteURL = "javascript:" + renderResponse.getNamespace() + "deletePortrait('" + themeDisplay.getPathImage() + "/user_" + (selUser.isFemale() ? "female" : "male") + "_portrait?img_id=0');";
+					String taglibDeleteURL = "javascript:" + renderResponse.getNamespace() + "deletePortrait('" + UserConstants.getPortraitURL(themeDisplay.getPathImage(), selUser.isMale(), 0) + "');";
 					%>
 
 					<liferay-ui:icon

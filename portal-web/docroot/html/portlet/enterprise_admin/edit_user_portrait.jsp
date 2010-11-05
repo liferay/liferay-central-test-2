@@ -24,7 +24,7 @@ User selUser = PortalUtil.getSelectedUser(request);
 	<c:when test='<%= SessionMessages.contains(renderRequest, "request_processed") %>'>
 		<aui:script>
 			window.close();
-			opener.<portlet:namespace />changePortrait('<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>');
+			opener.<portlet:namespace />changePortrait('<%= selUser.getPortraitURL(themeDisplay) %>');
 		</aui:script>
 	</c:when>
 	<c:otherwise>

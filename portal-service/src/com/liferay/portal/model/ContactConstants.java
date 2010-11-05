@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -27,22 +28,20 @@ public class ContactConstants {
 	public static String getFullName(
 		String firstName, String middleName, String lastName) {
 
-		StringBuilder sb = new StringBuilder();
-
 		if (Validator.isNull(middleName)) {
-			sb.append(firstName);
-			sb.append(StringPool.SPACE);
-			sb.append(lastName);
+			return firstName.concat(StringPool.SPACE).concat(lastName);
 		}
 		else {
+			StringBundler sb = new StringBundler(5);
+
 			sb.append(firstName);
 			sb.append(StringPool.SPACE);
 			sb.append(middleName);
 			sb.append(StringPool.SPACE);
 			sb.append(lastName);
-		}
 
-		return sb.toString();
+			return sb.toString();
+		}
 	}
 
 }

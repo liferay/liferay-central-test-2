@@ -118,6 +118,11 @@ public interface User extends UserModel {
 
 	public java.lang.String getPasswordUnencrypted();
 
+	public java.lang.String getPortraitURL(
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public int getPrivateLayoutsPageCount()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

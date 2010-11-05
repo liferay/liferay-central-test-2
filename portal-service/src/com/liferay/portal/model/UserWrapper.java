@@ -994,6 +994,13 @@ public class UserWrapper implements User {
 		return _user.getPasswordUnencrypted();
 	}
 
+	public java.lang.String getPortraitURL(
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _user.getPortraitURL(themeDisplay);
+	}
+
 	public int getPrivateLayoutsPageCount()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

@@ -250,7 +250,7 @@ String taglibOnSubmit = "event.preventDefault(); " + renderResponse.getNamespace
 					<div class="user-info">
 						<p class="float-container">
 							<c:if test="<%= selUser != null %>">
-								<img alt="<%= HtmlUtil.escape(selUser.getFullName()) %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>" />
+								<img alt="<%= HtmlUtil.escape(selUser.getFullName()) %>" class="avatar" src="<%= selUser.getPortraitURL(themeDisplay) %>" />
 
 								<span><%= HtmlUtil.escape(selUser.getFullName()) %></span>
 							</c:if>

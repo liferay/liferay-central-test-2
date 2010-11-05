@@ -43,6 +43,7 @@ import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.Team;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserConstants;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.auth.EmailAddressGenerator;
 import com.liferay.portal.security.auth.EmailAddressGeneratorFactory;
@@ -387,6 +388,13 @@ public class UserImpl extends UserModelImpl implements User {
 
 	public String getPasswordUnencrypted() {
 		return _passwordUnencrypted;
+	}
+
+	public String getPortraitURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return UserConstants.getPortraitURL(
+			themeDisplay.getPathImage(), isMale(), getPortraitId());
 	}
 
 	public int getPrivateLayoutsPageCount()

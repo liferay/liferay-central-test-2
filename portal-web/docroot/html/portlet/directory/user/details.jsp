@@ -35,7 +35,7 @@ for (int i = 1; i<organizations.size(); i++) {
 <h2><%= HtmlUtil.escape(selUser.getFullName()) %></h2>
 
 <div class="details">
-	<img alt="<liferay-ui:message key="avatar" />" class="avatar" id="<portlet:namespace />avatar" src='<%= themeDisplay.getPathImage() %>/user_<%= selUser.isFemale() ? "female" : "male" %>_portrait?img_id=<%= selUser.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(selUser.getPortraitId()) %>' />
+	<img alt="<liferay-ui:message key="avatar" />" class="avatar" id="<portlet:namespace />avatar" src="<%= selUser.getPortraitURL(themeDisplay) %>" />
 
 	<dl class="property-list">
 		<c:if test="<%= Validator.isNotNull(selUser.getDisplayEmailAddress()) %>">

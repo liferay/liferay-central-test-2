@@ -65,20 +65,7 @@
 					buffer.append("<img alt=\"");
 					buffer.append(HtmlUtil.escape(assigneeUser.getFullName()));
 					buffer.append("\" class=\"user-avatar\" src=\"");
-					buffer.append(themeDisplay.getPathImage());
-					buffer.append("/user_");
-
-					if (assigneeUser.isFemale()) {
-						buffer.append("female");
-					}
-					else {
-						buffer.append("male");
-					}
-
-					buffer.append("_portrait?img_id=");
-					buffer.append(assigneeUser.getPortraitId());
-					buffer.append("&t=");
-					buffer.append(ImageServletTokenUtil.getToken(assigneeUser.getPortraitId()));
+					buffer.append(assigneeUser.getPortraitURL(themeDisplay));
 					buffer.append("\" title=\"");
 					buffer.append(HtmlUtil.escape(assigneeUser.getFullName()));
 					buffer.append("\" />");
