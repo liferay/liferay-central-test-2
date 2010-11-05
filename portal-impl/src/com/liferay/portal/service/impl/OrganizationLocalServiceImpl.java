@@ -347,8 +347,14 @@ public class OrganizationLocalServiceImpl
 			long companyId, long parentOrganizationId)
 		throws SystemException {
 
-		return organizationPersistence.findByC_P(
-			companyId, parentOrganizationId);
+		if (parentOrganizationId ==
+				OrganizationConstants.ANY_PARENT_ORGANIZATION_ID) {
+			return organizationPersistence.findByCompanyId(companyId);
+		}
+		else {
+			return organizationPersistence.findByC_P(
+				companyId, parentOrganizationId);
+		}
 	}
 
 	public List<Organization> getOrganizations(
@@ -377,8 +383,14 @@ public class OrganizationLocalServiceImpl
 	public int getOrganizationsCount(long companyId, long parentOrganizationId)
 		throws SystemException {
 
-		return organizationPersistence.countByC_P(
-			companyId, parentOrganizationId);
+		if (parentOrganizationId ==
+				OrganizationConstants.ANY_PARENT_ORGANIZATION_ID) {
+			return organizationPersistence.countByCompanyId(companyId);
+		}
+		else {
+			return organizationPersistence.countByC_P(
+				companyId, parentOrganizationId);
+		}
 	}
 
 	public List<Organization> getParentOrganizations(long organizationId)
