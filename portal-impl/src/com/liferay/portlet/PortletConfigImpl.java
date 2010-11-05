@@ -14,8 +14,6 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
@@ -210,8 +208,6 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 
 		return javaxQNames;
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(PortletConfigImpl.class);
 
 	private Portlet _portlet;
 	private PortletApp _portletApp;

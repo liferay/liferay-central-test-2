@@ -34,7 +34,6 @@ import java.util.Set;
  */
 public class LiferayResourceBundle extends ResourceBundle {
 
-	@SuppressWarnings("rawtypes")
 	public LiferayResourceBundle(String string, String charsetName)
 		throws IOException {
 
@@ -45,7 +44,6 @@ public class LiferayResourceBundle extends ResourceBundle {
 		LanguageResources.fixValues(_map, properties);
 	}
 
-	@SuppressWarnings("rawtypes")
 	public LiferayResourceBundle(InputStream inputStream, String charsetName)
 		throws IOException {
 
