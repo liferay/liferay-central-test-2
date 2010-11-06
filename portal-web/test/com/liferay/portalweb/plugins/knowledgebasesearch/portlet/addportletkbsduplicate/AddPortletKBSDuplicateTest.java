@@ -75,8 +75,7 @@ public class AddPortletKBSDuplicateTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//div[@title='Knowledge Base Search']/p/a")) {
+				if (selenium.isVisible("//div[@title='Knowledge Base Search']")) {
 					break;
 				}
 			}

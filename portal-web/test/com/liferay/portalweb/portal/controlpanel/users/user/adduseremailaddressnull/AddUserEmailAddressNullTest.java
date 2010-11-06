@@ -81,9 +81,9 @@ public class AddUserEmailAddressNullTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"You have entered invalid data. Please try again."),
-			selenium.getText("//section/div/div/div/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-error']"));
 		assertEquals(RuntimeVariables.replace(
 				"Please enter a valid email address."),
-			selenium.getText("//fieldset[1]/div/div"));
+			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[2]"));
 	}
 }

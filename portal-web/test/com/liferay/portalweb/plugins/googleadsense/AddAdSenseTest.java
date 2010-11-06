@@ -45,8 +45,47 @@ public class AddAdSenseTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Configuration"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
+		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_86_adClient")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.saveScreenShotAndSource();
 		selenium.type("_86_adClient", RuntimeVariables.replace("pub-0000000000"));
 		selenium.saveScreenShotAndSource();
@@ -65,11 +104,30 @@ public class AddAdSenseTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("_86_colorUrl", RuntimeVariables.replace("008000"));
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//form/input[2]", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace(
+							"You have successfully updated the setup.")
+										.equals(selenium.getText(
+								"//div[@class='portlet-msg-success']"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
-			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 	}
 }
