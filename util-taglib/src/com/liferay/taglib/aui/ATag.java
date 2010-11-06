@@ -14,19 +14,153 @@
 
 package com.liferay.taglib.aui;
 
-import com.liferay.taglib.util.IncludeTag;
+import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 
-import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.portlet.PortletResponse;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.tagext.BodyTagSupport;
+import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
- * @author Julio Camarero
- * @author Jorge Ferrer
- * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
-public class ATag extends IncludeTag {
+public class ATag extends BodyTagSupport implements DynamicAttributes {
+
+	public int doEndTag() throws JspException {
+		JspWriter jspWriter = pageContext.getOut();
+
+		try {
+			if (Validator.isNotNull(_href)) {
+				if (_target.equals("_blank") || _target.equals("_new")) {
+					jspWriter.append(
+						"<span class=\"opens-new-window-accessible\">");
+					jspWriter.append(LanguageUtil.format(
+						pageContext, "opens-new-window", (Object[]) null,
+						true));
+					jspWriter.append("</span>");
+				}
+				jspWriter.append("</a>");
+			}
+			else {
+				jspWriter.append("</span>");
+			}
+		}
+		catch (IOException ioe) {
+			throw new JspException(ioe);
+		}
+
+		return EVAL_PAGE;
+	}
+
+	public int doStartTag() throws JspException {
+		ServletRequest request = pageContext.getRequest();
+
+		PortletResponse portletResponse = (PortletResponse)request.getAttribute(
+			JavaConstants.JAVAX_PORTLET_RESPONSE);
+		String namespace = StringPool.BLANK;
+		boolean useNamespace = GetterUtil.getBoolean(
+			(String)request.getAttribute("aui:form:useNamespace"), true);
+
+		if ((portletResponse != null) && useNamespace) {
+			namespace = portletResponse.getNamespace();
+		}
+
+		JspWriter jspWriter = pageContext.getOut();
+
+		try {
+			if (Validator.isNotNull(_href)) {
+				jspWriter.append("<a ");
+
+				if (Validator.isNotNull(_cssClass)) {
+					jspWriter.append("class=\"");
+					jspWriter.append(_cssClass);
+					jspWriter.append("\" ");
+				}
+
+				jspWriter.append("href=\"");
+				jspWriter.append(HtmlUtil.escape(_href));
+				jspWriter.append("\" ");
+
+				if (Validator.isNotNull(_id)) {
+					jspWriter.append("id=\"");
+					jspWriter.append(namespace);
+					jspWriter.append(_id);
+					jspWriter.append("\" ");
+				}
+
+				if (Validator.isNotNull(_lang)) {
+					jspWriter.append("lang=\"");
+					jspWriter.append(_lang);
+					jspWriter.append("\" ");
+				}
+
+				if (Validator.isNotNull(_target)) {
+					jspWriter.append("target=\"");
+					jspWriter.append(_target);
+					jspWriter.append("\" ");
+				}
+
+				_insertDynamicAttributes(jspWriter);
+
+				jspWriter.append(">");
+
+				if (Validator.isNotNull(_label)) {
+					jspWriter.append(LanguageUtil.format(
+						pageContext, _label, (Object[]) null, true));
+				}
+			}
+			else {
+				jspWriter.append("<span ");
+				if (Validator.isNotNull(_cssClass)) {
+					jspWriter.append("class=\"");
+					jspWriter.append(_cssClass);
+					jspWriter.append("\" ");
+				}
+				if (Validator.isNotNull(_id)) {
+					jspWriter.append("id=\"");
+					jspWriter.append(namespace);
+					jspWriter.append(_id);
+					jspWriter.append("\" ");
+				}
+				if (Validator.isNotNull(_lang)) {
+					jspWriter.append("lang=\"");
+					jspWriter.append(_lang);
+					jspWriter.append("\" ");
+				}
+
+				_insertDynamicAttributes(jspWriter);
+
+				jspWriter.append(">");
+			}
+		}
+		catch (IOException ioe) {
+			throw new JspException(ioe);
+		}
+
+		return EVAL_BODY_INCLUDE;
+	}
 
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
+	}
+
+	public void setDynamicAttribute(
+		String uri, String localName, Object value) {
+
+		_dynamicAttributes.put(localName, value);
 	}
 
 	public void setHref(String href) {
@@ -49,56 +183,33 @@ public class ATag extends IncludeTag {
 		_target = target;
 	}
 
-	protected void cleanUp() {
-		_cssClass = null;
-		_href = null;
-		_id = null;
-		_label = null;
-		_lang = null;
-		_target = null;
+	private void _insertDynamicAttributes(JspWriter jspWriter)
+		throws IOException {
+		if ((_dynamicAttributes == null) || _dynamicAttributes.isEmpty()) {
+			return;
+		}
+
+		for (Map.Entry<String, Object> entry : _dynamicAttributes.entrySet()) {
+			String key = entry.getKey();
+			String value = String.valueOf(entry.getValue());
+
+			if (!key.equals("class")) {
+				jspWriter.append(key);
+				jspWriter.append("=\"");
+				jspWriter.append(value);
+				jspWriter.append("\" ");
+			}
+		}
+
 	}
 
-	protected String getEndPage() {
-		return _END_PAGE;
-	}
-
-	protected String getStartPage() {
-		return _START_PAGE;
-	}
-
-	protected boolean isCleanUpSetAttributes() {
-		return _CLEAN_UP_SET_ATTRIBUTES;
-	}
-
-	protected boolean isTrimNewLines() {
-		return _TRIM_NEW_LINES;
-	}
-
-	protected void setAttributes(HttpServletRequest request) {
-		request.setAttribute("aui:a:cssClass", _cssClass);
-		request.setAttribute("aui:a:dynamicAttributes", getDynamicAttributes());
-		request.setAttribute("aui:a:href", _href);
-		request.setAttribute("aui:a:id", _id);
-		request.setAttribute("aui:a:label", _label);
-		request.setAttribute("aui:a:lang", _lang);
-		request.setAttribute("aui:a:target", _target);
-	}
-
-	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
-
-	private static final boolean _TRIM_NEW_LINES = true;
-
-	private static final String _END_PAGE =
-		"/html/taglib/aui/a/end.jsp";
-
-	private static final String _START_PAGE =
-		"/html/taglib/aui/a/start.jsp";
-
-	private String _cssClass;
-	private String _href;
-	private String _id;
-	private String _label;
-	private String _lang;
-	private String _target;
+	private String _cssClass = StringPool.BLANK;
+	private Map<String, Object> _dynamicAttributes =
+			new HashMap<String, Object>();
+	private String _href = StringPool.BLANK;
+	private String _id = StringPool.BLANK;
+	private String _label = StringPool.BLANK;
+	private String _lang = StringPool.BLANK;
+	private String _target = StringPool.BLANK;
 
 }
