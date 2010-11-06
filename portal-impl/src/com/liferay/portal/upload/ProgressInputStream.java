@@ -119,14 +119,18 @@ public class ProgressInputStream extends InputStream {
 		if (bytesRead > 0) {
 			_totalRead += bytesRead;
 		}
-		else {
+		else if (_totalSize > 0) {
 			_totalRead = _totalSize;
 		}
 
-		int percent = (int) ((_totalRead * 100) / _totalSize);
+		int percent = 0;
+
+		if (_totalSize > 0) {
+			percent = (int) ((_totalRead * 100) / _totalSize);
+		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug(bytesRead + "/" + _totalRead + "=" + percent);
+			_log.debug(_totalRead + "/" + _totalSize + "=" + percent);
 		}
 
 		Integer curPercent = (Integer)_portletSession.getAttribute(
