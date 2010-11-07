@@ -23,21 +23,16 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.portlet.PortletResponse;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.tagext.BodyTagSupport;
-import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * @author Shuyang Zhou
  */
-public class ATag extends BodyTagSupport implements DynamicAttributes {
+public class ATag extends BaseInlineTag {
 
 	public int doEndTag() throws JspException {
 		JspWriter jspWriter = pageContext.getOut();
@@ -45,17 +40,17 @@ public class ATag extends BodyTagSupport implements DynamicAttributes {
 		try {
 			if (Validator.isNotNull(_href)) {
 				if (_target.equals("_blank") || _target.equals("_new")) {
-					jspWriter.append(
+					jspWriter.write(
 						"<span class=\"opens-new-window-accessible\">");
-					jspWriter.append(LanguageUtil.format(
+					jspWriter.write(LanguageUtil.format(
 						pageContext, "opens-new-window", (Object[]) null,
 						true));
-					jspWriter.append("</span>");
+					jspWriter.write("</span>");
 				}
-				jspWriter.append("</a>");
+				jspWriter.write("</a>");
 			}
 			else {
-				jspWriter.append("</span>");
+				jspWriter.write("</span>");
 			}
 		}
 		catch (IOException ioe) {
@@ -82,68 +77,68 @@ public class ATag extends BodyTagSupport implements DynamicAttributes {
 
 		try {
 			if (Validator.isNotNull(_href)) {
-				jspWriter.append("<a ");
+				jspWriter.write("<a ");
 
 				if (Validator.isNotNull(_cssClass)) {
-					jspWriter.append("class=\"");
-					jspWriter.append(_cssClass);
-					jspWriter.append("\" ");
+					jspWriter.write("class=\"");
+					jspWriter.write(_cssClass);
+					jspWriter.write("\" ");
 				}
 
-				jspWriter.append("href=\"");
-				jspWriter.append(HtmlUtil.escape(_href));
-				jspWriter.append("\" ");
+				jspWriter.write("href=\"");
+				jspWriter.write(HtmlUtil.escape(_href));
+				jspWriter.write("\" ");
 
 				if (Validator.isNotNull(_id)) {
-					jspWriter.append("id=\"");
-					jspWriter.append(namespace);
-					jspWriter.append(_id);
-					jspWriter.append("\" ");
+					jspWriter.write("id=\"");
+					jspWriter.write(namespace);
+					jspWriter.write(_id);
+					jspWriter.write("\" ");
 				}
 
 				if (Validator.isNotNull(_lang)) {
-					jspWriter.append("lang=\"");
-					jspWriter.append(_lang);
-					jspWriter.append("\" ");
+					jspWriter.write("lang=\"");
+					jspWriter.write(_lang);
+					jspWriter.write("\" ");
 				}
 
 				if (Validator.isNotNull(_target)) {
-					jspWriter.append("target=\"");
-					jspWriter.append(_target);
-					jspWriter.append("\" ");
+					jspWriter.write("target=\"");
+					jspWriter.write(_target);
+					jspWriter.write("\" ");
 				}
 
-				_insertDynamicAttributes(jspWriter);
+				insertDynamicAttributes(jspWriter);
 
-				jspWriter.append(">");
+				jspWriter.write(">");
 
 				if (Validator.isNotNull(_label)) {
-					jspWriter.append(LanguageUtil.format(
+					jspWriter.write(LanguageUtil.format(
 						pageContext, _label, (Object[]) null, true));
 				}
 			}
 			else {
-				jspWriter.append("<span ");
+				jspWriter.write("<span ");
 				if (Validator.isNotNull(_cssClass)) {
-					jspWriter.append("class=\"");
-					jspWriter.append(_cssClass);
-					jspWriter.append("\" ");
+					jspWriter.write("class=\"");
+					jspWriter.write(_cssClass);
+					jspWriter.write("\" ");
 				}
 				if (Validator.isNotNull(_id)) {
-					jspWriter.append("id=\"");
-					jspWriter.append(namespace);
-					jspWriter.append(_id);
-					jspWriter.append("\" ");
+					jspWriter.write("id=\"");
+					jspWriter.write(namespace);
+					jspWriter.write(_id);
+					jspWriter.write("\" ");
 				}
 				if (Validator.isNotNull(_lang)) {
-					jspWriter.append("lang=\"");
-					jspWriter.append(_lang);
-					jspWriter.append("\" ");
+					jspWriter.write("lang=\"");
+					jspWriter.write(_lang);
+					jspWriter.write("\" ");
 				}
 
-				_insertDynamicAttributes(jspWriter);
+				insertDynamicAttributes(jspWriter);
 
-				jspWriter.append(">");
+				jspWriter.write(">");
 			}
 		}
 		catch (IOException ioe) {
@@ -155,12 +150,6 @@ public class ATag extends BodyTagSupport implements DynamicAttributes {
 
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
-	}
-
-	public void setDynamicAttribute(
-		String uri, String localName, Object value) {
-
-		_dynamicAttributes.put(localName, value);
 	}
 
 	public void setHref(String href) {
@@ -183,29 +172,7 @@ public class ATag extends BodyTagSupport implements DynamicAttributes {
 		_target = target;
 	}
 
-	private void _insertDynamicAttributes(JspWriter jspWriter)
-		throws IOException {
-		if ((_dynamicAttributes == null) || _dynamicAttributes.isEmpty()) {
-			return;
-		}
-
-		for (Map.Entry<String, Object> entry : _dynamicAttributes.entrySet()) {
-			String key = entry.getKey();
-			String value = String.valueOf(entry.getValue());
-
-			if (!key.equals("class")) {
-				jspWriter.append(key);
-				jspWriter.append("=\"");
-				jspWriter.append(value);
-				jspWriter.append("\" ");
-			}
-		}
-
-	}
-
 	private String _cssClass = StringPool.BLANK;
-	private Map<String, Object> _dynamicAttributes =
-			new HashMap<String, Object>();
 	private String _href = StringPool.BLANK;
 	private String _id = StringPool.BLANK;
 	private String _label = StringPool.BLANK;
