@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.messaging.MessageListenerException;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.TriggerState;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -56,7 +57,7 @@ public class SchedulerEventMessageListenerWrapper implements MessageListener {
 		return _messageListenerUUID;
 	}
 
-	public void receive(Message message) {
+	public void receive(Message message) throws MessageListenerException {
 		String destinationName = GetterUtil.getString(
 			message.getString(SchedulerEngine.DESTINATION_NAME));
 
@@ -74,6 +75,13 @@ public class SchedulerEventMessageListenerWrapper implements MessageListener {
 		}
 		catch (Exception e) {
 			handleException(message, e);
+
+			if (e instanceof MessageListenerException) {
+				throw (MessageListenerException)e;
+			}
+			else {
+				throw new MessageListenerException(e);
+			}
 		}
 		finally {
 			if (message.getBoolean(SchedulerEngine.DISABLE) &&
