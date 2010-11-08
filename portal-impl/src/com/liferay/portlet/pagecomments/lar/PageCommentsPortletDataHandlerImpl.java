@@ -38,36 +38,37 @@ public class PageCommentsPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected PortletPreferences doDeleteData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
 		MBMessageLocalServiceUtil.deleteDiscussionMessages(
-			Layout.class.getName(), context.getPlid());
+			Layout.class.getName(), portletDataContext.getPlid());
 
 		return null;
 	}
 
 	protected String doExportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
-		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
-			context.addComments(Layout.class, context.getPlid());
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "comments")) {
+			portletDataContext.addComments(
+				Layout.class, portletDataContext.getPlid());
 		}
 
-		return String.valueOf(context.getPlid());
+		return String.valueOf(portletDataContext.getPlid());
 	}
 
 	protected PortletPreferences doImportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences, String data)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences, String data)
 		throws Exception {
 
-		context.importComments(
-			Layout.class, GetterUtil.getLong(data), context.getPlid(),
-			context.getScopeGroupId());
+		portletDataContext.importComments(
+			Layout.class, GetterUtil.getLong(data),
+			portletDataContext.getPlid(), portletDataContext.getScopeGroupId());
 
 		return null;
 	}

@@ -57,14 +57,15 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	public PortletPreferences importData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences, String data)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences, String data)
 		throws PortletDataException {
 
 		WikiCacheThreadLocal.setClearCache(false);
 
 		try {
-			return super.importData(context, portletId, preferences, data);
+			return super.importData(
+				portletDataContext, portletId, portletPreferences, data);
 		}
 		finally {
 			WikiCacheThreadLocal.setClearCache(true);
@@ -72,23 +73,23 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected PortletPreferences doDeleteData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
-		preferences.setValue("title", StringPool.BLANK);
-		preferences.setValue("node-id", StringPool.BLANK);
+		portletPreferences.setValue("title", StringPool.BLANK);
+		portletPreferences.setValue("node-id", StringPool.BLANK);
 
-		return preferences;
+		return portletPreferences;
 	}
 
 	protected String doExportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
 		long nodeId = GetterUtil.getLong(
-			preferences.getValue("node-id", StringPool.BLANK));
+			portletPreferences.getValue("node-id", StringPool.BLANK));
 
 		if (nodeId <= 0) {
 			if (_log.isWarnEnabled()) {
@@ -99,7 +100,7 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 			return StringPool.BLANK;
 		}
 
-		String title = preferences.getValue("title", null);
+		String title = portletPreferences.getValue("title", null);
 
 		if (title == null) {
 			if (_log.isWarnEnabled()) {
@@ -123,33 +124,33 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
-		context.addPermissions(
-			"com.liferay.portlet.wiki", context.getScopeGroupId());
+		portletDataContext.addPermissions(
+			"com.liferay.portlet.wiki", portletDataContext.getScopeGroupId());
 
 		Document document = SAXReaderUtil.createDocument();
 
 		Element rootElement = document.addElement("wiki-display-data");
 
 		rootElement.addAttribute(
-			"group-id", String.valueOf(context.getScopeGroupId()));
+			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));
 
 		Element nodesElement = rootElement.addElement("nodes");
 		Element pagesElement = rootElement.addElement("pages");
 
 		WikiPortletDataHandlerImpl.exportNode(
-			context, nodesElement, pagesElement, node);
+			portletDataContext, nodesElement, pagesElement, node);
 
 		return document.formattedString();
 	}
 
 	protected PortletPreferences doImportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences, String data)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences, String data)
 		throws Exception {
 
-		context.importPermissions(
-			"com.liferay.portlet.wiki", context.getSourceGroupId(),
-			context.getScopeGroupId());
+		portletDataContext.importPermissions(
+			"com.liferay.portlet.wiki", portletDataContext.getSourceGroupId(),
+			portletDataContext.getScopeGroupId());
 
 		if (Validator.isNull(data)) {
 			return null;
@@ -164,13 +165,14 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		for (Element nodeElement : nodesElement.elements("node")) {
 			String path = nodeElement.attributeValue("path");
 
-			if (!context.isPathNotProcessed(path)) {
+			if (!portletDataContext.isPathNotProcessed(path)) {
 				continue;
 			}
 
-			WikiNode node = (WikiNode)context.getZipEntryAsObject(path);
+			WikiNode node = (WikiNode)portletDataContext.getZipEntryAsObject(
+				path);
 
-			WikiPortletDataHandlerImpl.importNode(context, node);
+			WikiPortletDataHandlerImpl.importNode(portletDataContext, node);
 		}
 
 		Element pagesElement = rootElement.element("pages");
@@ -178,32 +180,35 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		for (Element pageElement : pagesElement.elements("page")) {
 			String path = pageElement.attributeValue("path");
 
-			if (!context.isPathNotProcessed(path)) {
+			if (!portletDataContext.isPathNotProcessed(path)) {
 				continue;
 			}
 
-			WikiPage page = (WikiPage)context.getZipEntryAsObject(path);
+			WikiPage page = (WikiPage)portletDataContext.getZipEntryAsObject(
+				path);
 
-			WikiPortletDataHandlerImpl.importPage(context, pageElement, page);
+			WikiPortletDataHandlerImpl.importPage(
+				portletDataContext, pageElement, page);
 		}
 
 		Map<Long, Long> nodePKs =
-			(Map<Long, Long>)context.getNewPrimaryKeysMap(WikiNode.class);
+			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
+				WikiNode.class);
 
 		for (long nodeId : nodePKs.values()) {
 			WikiCacheUtil.clearCache(nodeId);
 		}
 
 		long nodeId = GetterUtil.getLong(
-			preferences.getValue("node-id", StringPool.BLANK));
+			portletPreferences.getValue("node-id", StringPool.BLANK));
 
 		if (nodeId > 0) {
 			nodeId = MapUtil.getLong(nodePKs, nodeId, nodeId);
 
-			preferences.setValue("node-id", String.valueOf(nodeId));
+			portletPreferences.setValue("node-id", String.valueOf(nodeId));
 		}
 
-		return preferences;
+		return portletPreferences;
 	}
 
 	private static final String _NAMESPACE = "wiki";

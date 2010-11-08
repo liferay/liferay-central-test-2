@@ -60,52 +60,55 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected PortletPreferences doDeleteData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
-		if (!context.addPrimaryKey(
+		if (!portletDataContext.addPrimaryKey(
 				CalendarPortletDataHandlerImpl.class, "deleteData")) {
 
-			CalEventLocalServiceUtil.deleteEvents(context.getScopeGroupId());
+			CalEventLocalServiceUtil.deleteEvents(
+				portletDataContext.getScopeGroupId());
 		}
 
 		return null;
 	}
 
 	protected String doExportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
-		context.addPermissions(
-			"com.liferay.portlet.calendar", context.getScopeGroupId());
+		portletDataContext.addPermissions(
+			"com.liferay.portlet.calendar",
+			portletDataContext.getScopeGroupId());
 
 		Document document = SAXReaderUtil.createDocument();
 
 		Element rootElement = document.addElement("calendar-data");
 
 		rootElement.addAttribute(
-			"group-id", String.valueOf(context.getScopeGroupId()));
+			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));
 
 		List<CalEvent> events = CalEventUtil.findByGroupId(
-			context.getScopeGroupId());
+			portletDataContext.getScopeGroupId());
 
 		for (CalEvent event : events) {
-			exportEvent(context, rootElement, event);
+			exportEvent(portletDataContext, rootElement, event);
 		}
 
 		return document.formattedString();
 	}
 
 	protected PortletPreferences doImportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences, String data)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences, String data)
 		throws Exception {
 
-		context.importPermissions(
-			"com.liferay.portlet.calendar", context.getSourceGroupId(),
-			context.getScopeGroupId());
+		portletDataContext.importPermissions(
+			"com.liferay.portlet.calendar",
+			portletDataContext.getSourceGroupId(),
+			portletDataContext.getScopeGroupId());
 
 		Document document = SAXReaderUtil.read(data);
 
@@ -114,29 +117,31 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 		for (Element eventElement : rootElement.elements("event")) {
 			String path = eventElement.attributeValue("path");
 
-			if (!context.isPathNotProcessed(path)) {
+			if (!portletDataContext.isPathNotProcessed(path)) {
 				continue;
 			}
 
-			CalEvent event = (CalEvent)context.getZipEntryAsObject(path);
+			CalEvent event = (CalEvent)portletDataContext.getZipEntryAsObject(
+				path);
 
-			importEvent(context, event);
+			importEvent(portletDataContext, event);
 		}
 
 		return null;
 	}
 
 	protected void exportEvent(
-			PortletDataContext context, Element rootElement, CalEvent event)
+			PortletDataContext portletDataContext, Element rootElement,
+			CalEvent event)
 		throws PortalException, SystemException {
 
-		if (!context.isWithinDateRange(event.getModifiedDate())) {
+		if (!portletDataContext.isWithinDateRange(event.getModifiedDate())) {
 			return;
 		}
 
-		String path = getEventPath(context, event);
+		String path = getEventPath(portletDataContext, event);
 
-		if (!context.isPathNotProcessed(path)) {
+		if (!portletDataContext.isPathNotProcessed(path)) {
 			return;
 		}
 
@@ -146,27 +151,30 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		event.setUserUuid(event.getUserUuid());
 
-		context.addPermissions(CalEvent.class, event.getEventId());
+		portletDataContext.addPermissions(CalEvent.class, event.getEventId());
 
-		if (context.getBooleanParameter(_NAMESPACE, "categories")) {
-			context.addAssetCategories(CalEvent.class, event.getEventId());
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "categories")) {
+			portletDataContext.addAssetCategories(
+				CalEvent.class, event.getEventId());
 		}
 
-		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
-			context.addComments(CalEvent.class, event.getEventId());
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "comments")) {
+			portletDataContext.addComments(CalEvent.class, event.getEventId());
 		}
 
-		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-			context.addAssetTags(CalEvent.class, event.getEventId());
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags")) {
+			portletDataContext.addAssetTags(CalEvent.class, event.getEventId());
 		}
 
-		context.addZipEntry(path, event);
+		portletDataContext.addZipEntry(path, event);
 	}
 
-	protected String getEventPath(PortletDataContext context, CalEvent event) {
+	protected String getEventPath(
+		PortletDataContext portletDataContext, CalEvent event) {
+
 		StringBundler sb = new StringBundler(4);
 
-		sb.append(context.getPortletPath(PortletKeys.CALENDAR));
+		sb.append(portletDataContext.getPortletPath(PortletKeys.CALENDAR));
 		sb.append("/events/");
 		sb.append(event.getEventId());
 		sb.append(".xml");
@@ -174,10 +182,11 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
-	protected void importEvent(PortletDataContext context, CalEvent event)
+	protected void importEvent(
+			PortletDataContext portletDataContext, CalEvent event)
 		throws Exception {
 
-		long userId = context.getUserId(event.getUserUuid());
+		long userId = portletDataContext.getUserId(event.getUserUuid());
 
 		Date startDate = event.getStartDate();
 
@@ -222,13 +231,13 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 		long[] assetCategoryIds = null;
 		String[] assetTagNames = null;
 
-		if (context.getBooleanParameter(_NAMESPACE, "categories")) {
-			assetCategoryIds = context.getAssetCategoryIds(
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "categories")) {
+			assetCategoryIds = portletDataContext.getAssetCategoryIds(
 				CalEvent.class, event.getEventId());
 		}
 
-		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-			assetTagNames = context.getAssetTagNames(
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags")) {
+			assetTagNames = portletDataContext.getAssetTagNames(
 				CalEvent.class, event.getEventId());
 		}
 
@@ -240,13 +249,13 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setCreateDate(event.getCreateDate());
 		serviceContext.setModifiedDate(event.getModifiedDate());
-		serviceContext.setScopeGroupId(context.getScopeGroupId());
+		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
 
 		CalEvent importedEvent = null;
 
-		if (context.isDataStrategyMirror()) {
+		if (portletDataContext.isDataStrategyMirror()) {
 			CalEvent existingEvent = CalEventUtil.fetchByUUID_G(
-				event.getUuid(), context.getScopeGroupId());
+				event.getUuid(), portletDataContext.getScopeGroupId());
 
 			if (existingEvent == null) {
 				serviceContext.setUuid(event.getUuid());
@@ -287,13 +296,13 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 				event.getSecondReminder(), serviceContext);
 		}
 
-		context.importPermissions(
+		portletDataContext.importPermissions(
 			CalEvent.class, event.getEventId(), importedEvent.getEventId());
 
-		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
-			context.importComments(
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "comments")) {
+			portletDataContext.importComments(
 				CalEvent.class, event.getEventId(), importedEvent.getEventId(),
-				context.getScopeGroupId());
+				portletDataContext.getScopeGroupId());
 		}
 	}
 

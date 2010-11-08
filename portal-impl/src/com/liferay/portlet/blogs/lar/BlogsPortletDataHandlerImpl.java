@@ -63,52 +63,53 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected PortletPreferences doDeleteData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
-		if (!context.addPrimaryKey(
+		if (!portletDataContext.addPrimaryKey(
 				BlogsPortletDataHandlerImpl.class, "deleteData")) {
 
-			BlogsEntryLocalServiceUtil.deleteEntries(context.getScopeGroupId());
+			BlogsEntryLocalServiceUtil.deleteEntries(
+				portletDataContext.getScopeGroupId());
 		}
 
 		return null;
 	}
 
 	protected String doExportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
-		context.addPermissions(
-			"com.liferay.portlet.blogs", context.getScopeGroupId());
+		portletDataContext.addPermissions(
+			"com.liferay.portlet.blogs", portletDataContext.getScopeGroupId());
 
 		Document document = SAXReaderUtil.createDocument();
 
 		Element rootElement = document.addElement("blogs-data");
 
 		rootElement.addAttribute(
-			"group-id", String.valueOf(context.getScopeGroupId()));
+			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));
 
 		List<BlogsEntry> entries = BlogsEntryUtil.findByGroupId(
-			context.getScopeGroupId());
+			portletDataContext.getScopeGroupId());
 
 		for (BlogsEntry entry : entries) {
-			exportEntry(context, rootElement, entry);
+			exportEntry(portletDataContext, rootElement, entry);
 		}
 
 		return document.formattedString();
 	}
 
 	protected PortletPreferences doImportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences, String data)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences, String data)
 		throws Exception {
 
-		context.importPermissions(
-			"com.liferay.portlet.blogs", context.getSourceGroupId(),
-			context.getScopeGroupId());
+		portletDataContext.importPermissions(
+			"com.liferay.portlet.blogs", portletDataContext.getSourceGroupId(),
+			portletDataContext.getScopeGroupId());
 
 		Document document = SAXReaderUtil.read(data);
 
@@ -117,27 +118,29 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		for (Element entryElement : rootElement.elements("entry")) {
 			String path = entryElement.attributeValue("path");
 
-			if (!context.isPathNotProcessed(path)) {
+			if (!portletDataContext.isPathNotProcessed(path)) {
 				continue;
 			}
 
-			BlogsEntry entry = (BlogsEntry)context.getZipEntryAsObject(path);
+			BlogsEntry entry =
+				(BlogsEntry)portletDataContext.getZipEntryAsObject(path);
 
-			importEntry(context, entryElement, entry);
+			importEntry(portletDataContext, entryElement, entry);
 		}
 
-		if (context.getBooleanParameter(_NAMESPACE, "wordpress")) {
-			WordPressImporter.importData(context);
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "wordpress")) {
+			WordPressImporter.importData(portletDataContext);
 		}
 
 		return null;
 	}
 
 	protected void exportEntry(
-			PortletDataContext context, Element root, BlogsEntry entry)
+			PortletDataContext portletDataContext, Element rootElement,
+			BlogsEntry entry)
 		throws Exception {
 
-		if (!context.isWithinDateRange(entry.getModifiedDate())) {
+		if (!portletDataContext.isWithinDateRange(entry.getModifiedDate())) {
 			return;
 		}
 
@@ -145,13 +148,13 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		String path = getEntryPath(context, entry);
+		String path = getEntryPath(portletDataContext, entry);
 
-		if (!context.isPathNotProcessed(path)) {
+		if (!portletDataContext.isPathNotProcessed(path)) {
 			return;
 		}
 
-		Element entryElement = root.addElement("entry");
+		Element entryElement = rootElement.addElement("entry");
 
 		entryElement.addAttribute("path", path);
 
@@ -160,42 +163,48 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		Image smallImage = ImageUtil.fetchByPrimaryKey(entry.getSmallImageId());
 
 		if (entry.isSmallImage() && (smallImage != null)) {
-			String smallImagePath = getEntrySmallImagePath(context, entry);
+			String smallImagePath = getEntrySmallImagePath(
+				portletDataContext, entry);
 
 			entryElement.addAttribute("small-image-path", smallImagePath);
 
 			entry.setSmallImageType(smallImage.getType());
 
-			context.addZipEntry(smallImagePath, smallImage.getTextObj());
+			portletDataContext.addZipEntry(
+				smallImagePath, smallImage.getTextObj());
 		}
 
-		context.addPermissions(BlogsEntry.class, entry.getEntryId());
+		portletDataContext.addPermissions(BlogsEntry.class, entry.getEntryId());
 
-		if (context.getBooleanParameter(_NAMESPACE, "categories")) {
-			context.addAssetCategories(BlogsEntry.class, entry.getEntryId());
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "categories")) {
+			portletDataContext.addAssetCategories(
+				BlogsEntry.class, entry.getEntryId());
 		}
 
-		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
-			context.addComments(BlogsEntry.class, entry.getEntryId());
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "comments")) {
+			portletDataContext.addComments(
+				BlogsEntry.class, entry.getEntryId());
 		}
 
-		if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
-			context.addRatingsEntries(BlogsEntry.class, entry.getEntryId());
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "ratings")) {
+			portletDataContext.addRatingsEntries(
+				BlogsEntry.class, entry.getEntryId());
 		}
 
-		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-			context.addAssetTags(BlogsEntry.class, entry.getEntryId());
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags")) {
+			portletDataContext.addAssetTags(
+				BlogsEntry.class, entry.getEntryId());
 		}
 
-		context.addZipEntry(path, entry);
+		portletDataContext.addZipEntry(path, entry);
 	}
 
 	protected String getEntryPath(
-		PortletDataContext context, BlogsEntry entry) {
+		PortletDataContext portletDataContext, BlogsEntry entry) {
 
 		StringBundler sb = new StringBundler(4);
 
-		sb.append(context.getPortletPath(PortletKeys.BLOGS));
+		sb.append(portletDataContext.getPortletPath(PortletKeys.BLOGS));
 		sb.append("/entries/");
 		sb.append(entry.getEntryId());
 		sb.append(".xml");
@@ -204,12 +213,12 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static String getEntrySmallImagePath(
-			PortletDataContext context, BlogsEntry entry)
+			PortletDataContext portletDataContext, BlogsEntry entry)
 		throws Exception {
 
 		StringBundler sb = new StringBundler(6);
 
-		sb.append(context.getPortletPath(PortletKeys.BLOGS));
+		sb.append(portletDataContext.getPortletPath(PortletKeys.BLOGS));
 		sb.append("/entries/");
 		sb.append(entry.getUuid());
 		sb.append("/thumbnail");
@@ -220,10 +229,11 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected void importEntry(
-			PortletDataContext context, Element entryElement, BlogsEntry entry)
+			PortletDataContext portletDataContext, Element entryElement,
+			BlogsEntry entry)
 		throws Exception {
 
-		long userId = context.getUserId(entry.getUserUuid());
+		long userId = portletDataContext.getUserId(entry.getUserUuid());
 
 		Calendar displayDateCal = CalendarFactoryUtil.getCalendar();
 
@@ -247,13 +257,13 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		long[] assetCategoryIds = null;
 		String[] assetTagNames = null;
 
-		if (context.getBooleanParameter(_NAMESPACE, "categories")) {
-			assetCategoryIds = context.getAssetCategoryIds(
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "categories")) {
+			assetCategoryIds = portletDataContext.getAssetCategoryIds(
 				BlogsEntry.class, entry.getEntryId());
 		}
 
-		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-			assetTagNames = context.getAssetTagNames(
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags")) {
+			assetTagNames = portletDataContext.getAssetTagNames(
 				BlogsEntry.class, entry.getEntryId());
 		}
 
@@ -265,7 +275,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setCreateDate(entry.getCreateDate());
 		serviceContext.setModifiedDate(entry.getModifiedDate());
-		serviceContext.setScopeGroupId(context.getScopeGroupId());
+		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
 
 		if (status != WorkflowConstants.STATUS_APPROVED) {
 			serviceContext.setWorkflowAction(
@@ -277,7 +287,8 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		String smallImagePath = entryElement.attributeValue("small-image-path");
 
 		if (entry.isSmallImage() && Validator.isNotNull(smallImagePath)) {
-			byte[] bytes = context.getZipEntryAsByteArray(smallImagePath);
+			byte[] bytes = portletDataContext.getZipEntryAsByteArray(
+				smallImagePath);
 
 			smallFile = File.createTempFile(
 				String.valueOf(entry.getSmallImageId()),
@@ -288,9 +299,9 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		BlogsEntry importedEntry = null;
 
-		if (context.isDataStrategyMirror()) {
+		if (portletDataContext.isDataStrategyMirror()) {
 			BlogsEntry existingEntry = BlogsEntryUtil.fetchByUUID_G(
-				entry.getUuid(), context.getScopeGroupId());
+				entry.getUuid(), portletDataContext.getScopeGroupId());
 
 			if (existingEntry == null) {
 				serviceContext.setUuid(entry.getUuid());
@@ -323,17 +334,18 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 				serviceContext);
 		}
 
-		context.importPermissions(
+		portletDataContext.importPermissions(
 			BlogsEntry.class, entry.getEntryId(), importedEntry.getEntryId());
 
-		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
-			context.importComments(
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "comments")) {
+			portletDataContext.importComments(
 				BlogsEntry.class, entry.getEntryId(),
-				importedEntry.getEntryId(), context.getScopeGroupId());
+				importedEntry.getEntryId(),
+				portletDataContext.getScopeGroupId());
 		}
 
-		if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
-			context.importRatingsEntries(
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "ratings")) {
+			portletDataContext.importRatingsEntries(
 				BlogsEntry.class, entry.getEntryId(),
 				importedEntry.getEntryId());
 		}

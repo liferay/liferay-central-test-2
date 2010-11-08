@@ -79,34 +79,36 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 	}
 
 	protected PortletPreferences doDeleteData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
-		preferences.setValue("footer-article-values", StringPool.BLANK);
-		preferences.setValue("header-article-values", StringPool.BLANK);
-		preferences.setValue("urls", StringPool.BLANK);
-		preferences.setValue("titles", StringPool.BLANK);
-		preferences.setValue("items-per-channel", StringPool.BLANK);
-		preferences.setValue("expanded-items-per-channel", StringPool.BLANK);
-		preferences.setValue("show-feed-title", StringPool.BLANK);
-		preferences.setValue("show-feed-published-date", StringPool.BLANK);
-		preferences.setValue("show-feed-description", StringPool.BLANK);
-		preferences.setValue("show-feed-image", StringPool.BLANK);
-		preferences.setValue("feed-image-alignment", StringPool.BLANK);
-		preferences.setValue("show-feed-item-author", StringPool.BLANK);
+		portletPreferences.setValue("footer-article-values", StringPool.BLANK);
+		portletPreferences.setValue("header-article-values", StringPool.BLANK);
+		portletPreferences.setValue("urls", StringPool.BLANK);
+		portletPreferences.setValue("titles", StringPool.BLANK);
+		portletPreferences.setValue("items-per-channel", StringPool.BLANK);
+		portletPreferences.setValue(
+			"expanded-items-per-channel", StringPool.BLANK);
+		portletPreferences.setValue("show-feed-title", StringPool.BLANK);
+		portletPreferences.setValue(
+			"show-feed-published-date", StringPool.BLANK);
+		portletPreferences.setValue("show-feed-description", StringPool.BLANK);
+		portletPreferences.setValue("show-feed-image", StringPool.BLANK);
+		portletPreferences.setValue("feed-image-alignment", StringPool.BLANK);
+		portletPreferences.setValue("show-feed-item-author", StringPool.BLANK);
 
-		return preferences;
+		return portletPreferences;
 	}
 
 	protected String doExportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
-		String[] footerArticleValues = preferences.getValues(
+		String[] footerArticleValues = portletPreferences.getValues(
 			"footer-article-values", new String[] {"0", ""});
-		String[] headerArticleValues = preferences.getValues(
+		String[] headerArticleValues = portletPreferences.getValues(
 			"header-article-values", new String[] {"0", ""});
 
 		String footerArticleId = footerArticleValues[1];
@@ -191,7 +193,7 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 
 		for (JournalArticle article : articles) {
 			String path = JournalPortletDataHandlerImpl.getArticlePath(
-				context, article);
+				portletDataContext, article);
 
 			Element articleElement = null;
 
@@ -205,7 +207,7 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 			articleElement.addAttribute("path", path);
 
 			JournalPortletDataHandlerImpl.exportArticle(
-				context, rootElement, rootElement, rootElement,
+				portletDataContext, rootElement, rootElement, rootElement,
 				dlFoldersElement, dlFilesElement, dlFileRanksElement,
 				igFoldersElement, igImagesElement, article, false);
 
@@ -227,7 +229,7 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 				}
 
 				JournalPortletDataHandlerImpl.exportStructure(
-					context, rootElement, structure);
+					portletDataContext, rootElement, structure);
 			}
 
 			String templateId = article.getTemplateId();
@@ -237,7 +239,7 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 
 				try {
 					template = JournalTemplateLocalServiceUtil.getTemplate(
-						context.getScopeGroupId(), templateId);
+						portletDataContext.getScopeGroupId(), templateId);
 				}
 				catch (NoSuchTemplateException nste) {
 					template = JournalTemplateLocalServiceUtil.getTemplate(
@@ -245,9 +247,9 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 				}
 
 				JournalPortletDataHandlerImpl.exportTemplate(
-					context, rootElement, dlFoldersElement, dlFilesElement,
-					dlFileRanksElement, igFoldersElement, igImagesElement,
-					template, false);
+					portletDataContext, rootElement, dlFoldersElement,
+					dlFilesElement, dlFileRanksElement, igFoldersElement,
+					igImagesElement, template, false);
 			}
 		}
 
@@ -255,8 +257,8 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 	}
 
 	protected PortletPreferences doImportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences, String data)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences, String data)
 		throws Exception {
 
 		if (Validator.isNull(data)) {
@@ -276,7 +278,8 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 		}
 
 		for (Element folderElement : dlFolderElements) {
-			DLPortletDataHandlerImpl.importFolder(context, folderElement);
+			DLPortletDataHandlerImpl.importFolder(
+				portletDataContext, folderElement);
 		}
 
 		Element dlFileEntriesElement = rootElement.element("dl-file-entries");
@@ -288,7 +291,8 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 		}
 
 		for (Element fileEntryElement : dlFileEntryElements) {
-			DLPortletDataHandlerImpl.importFileEntry(context, fileEntryElement);
+			DLPortletDataHandlerImpl.importFileEntry(
+				portletDataContext, fileEntryElement);
 		}
 
 		Element dlFileRanksElement = rootElement.element("dl-file-ranks");
@@ -300,7 +304,8 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 		}
 
 		for (Element fileRankElement : dlFileRankElements) {
-			DLPortletDataHandlerImpl.importFileRank(context, fileRankElement);
+			DLPortletDataHandlerImpl.importFileRank(
+				portletDataContext, fileRankElement);
 		}
 
 		Element igFoldersElement = rootElement.element("ig-folders");
@@ -312,7 +317,8 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 		}
 
 		for (Element folderElement : igFolderElements) {
-			IGPortletDataHandlerImpl.importFolder(context, folderElement);
+			IGPortletDataHandlerImpl.importFolder(
+				portletDataContext, folderElement);
 		}
 
 		Element igImagesElement = rootElement.element("ig-images");
@@ -324,38 +330,39 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 		}
 
 		for (Element imageElement : igImageElements) {
-			IGPortletDataHandlerImpl.importImage(context, imageElement);
+			IGPortletDataHandlerImpl.importImage(
+				portletDataContext, imageElement);
 		}
 
 		List<Element> structureElements = rootElement.elements("structure");
 
 		for (Element structureElement : structureElements) {
 			JournalPortletDataHandlerImpl.importStructure(
-				context, structureElement);
+				portletDataContext, structureElement);
 		}
 
 		List<Element> templateElements = rootElement.elements("template");
 
 		for (Element templateElement : templateElements) {
 			JournalPortletDataHandlerImpl.importTemplate(
-				context, templateElement);
+				portletDataContext, templateElement);
 		}
 
 		Map<String, String> articleIds =
-			(Map<String, String>)context.getNewPrimaryKeysMap(
+			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
 				JournalArticle.class);
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(
-			context.getPlid());
+			portletDataContext.getPlid());
 
 		Element footerArticleElement = rootElement.element("footer-article");
 
 		if (footerArticleElement != null) {
 			JournalPortletDataHandlerImpl.importArticle(
-				context, footerArticleElement);
+				portletDataContext, footerArticleElement);
 		}
 
-		String[] footerArticleValues = preferences.getValues(
+		String[] footerArticleValues = portletPreferences.getValues(
 			"footer-article-values", new String[] {"0", ""});
 
 		String footerArticleId = footerArticleValues[1];
@@ -364,14 +371,15 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 			footerArticleId = MapUtil.getString(
 				articleIds, footerArticleId, footerArticleId);
 
-			preferences.setValues(
+			portletPreferences.setValues(
 				"footer-article-values",
 				new String[] {
-					String.valueOf(context.getScopeGroupId()), footerArticleId
+					String.valueOf(portletDataContext.getScopeGroupId()),
+					footerArticleId
 				});
 
 			JournalContentSearchLocalServiceUtil.updateContentSearch(
-				context.getScopeGroupId(), layout.isPrivateLayout(),
+				portletDataContext.getScopeGroupId(), layout.isPrivateLayout(),
 				layout.getLayoutId(), portletId, footerArticleId, true);
 		}
 
@@ -379,10 +387,10 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 
 		if (headerArticleElement != null) {
 			JournalPortletDataHandlerImpl.importArticle(
-				context, headerArticleElement);
+				portletDataContext, headerArticleElement);
 		}
 
-		String[] headerArticleValues = preferences.getValues(
+		String[] headerArticleValues = portletPreferences.getValues(
 			"header-article-values", new String[] {"0", ""});
 
 		String headerArticleId = headerArticleValues[1];
@@ -391,18 +399,19 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 			headerArticleId = MapUtil.getString(
 				articleIds, headerArticleId, headerArticleId);
 
-			preferences.setValues(
+			portletPreferences.setValues(
 				"header-article-values",
 				new String[] {
-					String.valueOf(context.getScopeGroupId()), headerArticleId
+					String.valueOf(portletDataContext.getScopeGroupId()),
+					headerArticleId
 				});
 
 			JournalContentSearchLocalServiceUtil.updateContentSearch(
-				context.getScopeGroupId(), layout.isPrivateLayout(),
+				portletDataContext.getScopeGroupId(), layout.isPrivateLayout(),
 				layout.getLayoutId(), portletId, headerArticleId, true);
 		}
 
-		return preferences;
+		return portletPreferences;
 	}
 
 	private static final boolean _ALWAYS_EXPORTABLE = false;

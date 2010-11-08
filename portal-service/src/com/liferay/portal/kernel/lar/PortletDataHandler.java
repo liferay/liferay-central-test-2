@@ -37,16 +37,16 @@ public interface PortletDataHandler {
 	 * version of <code>preferences</code> if it contains reference to data that
 	 * does not exist anymore.
 	 *
-	 * @param  context the context of the data deletion
+	 * @param  portletDataContext the context of the data deletion
 	 * @param  portletId the portlet id of the portlet
-	 * @param  preferences the portlet preferences of the portlet
-	 * @return A modified version of preferences that should be saved.
-	 *		   <code>Null</code> if the preferences were unmodified by this data
-	 *		   handler.
+	 * @param  portletPreferences the portlet preferences of the portlet
+	 * @return A modified version of portlet preferences that should be saved.
+	 *		   <code>Null</code> if the portlet preferences were unmodified by
+	 *		   this data handler.
 	 */
 	public PortletPreferences deleteData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws PortletDataException;
 
 	/**
@@ -54,16 +54,16 @@ public interface PortletDataHandler {
 	 * of the LAR file. This data will be passed as the <code>data</code>
 	 * parameter of <code>importData()</code>.
 	 *
-	 * @param  context the context of the data export
+	 * @param  portletDataContext the context of the data export
 	 * @param  portletId the portlet id of the portlet
-	 * @param  preferences the portlet preferences of the portlet
+	 * @param  portletPreferences the portlet preferences of the portlet
 	 * @return A string of data to be placed in the LAR. It may be XML, but not
 	 *		   necessarily. <code>Null</code> should be returned if no portlet
 	 *		   data is to be written out.
 	 */
 	public String exportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws PortletDataException;
 
 	/**
@@ -91,18 +91,18 @@ public interface PortletDataHandler {
 	 * into a new layout. Can optionally return a modified version of
 	 * <code>preferences</code> to be saved in the new portlet.
 	 *
-	 * @param  context the context of the data import
+	 * @param  portletDataContext the context of the data import
 	 * @param  portletId the portlet id of the portlet
-	 * @param  preferences the portlet preferences of the portlet
+	 * @param  portletPreferences the portlet preferences of the portlet
 	 * @param  data the string data that was returned by
 	 *		   <code>exportData()</code>
-	 * @return A modified version of preferences that should be saved.
-	 *		   <code>Null</code> if the preferences were unmodified by this data
-	 *		   handler.
+	 * @return A modified version of portlet preferences that should be saved.
+	 *		   <code>Null</code> if the portlet preferences were unmodified by
+	 *		   this data handler.
 	 */
 	public PortletPreferences importData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences, String data)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences, String data)
 		throws PortletDataException;
 
 	/**

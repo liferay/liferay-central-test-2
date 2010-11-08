@@ -55,34 +55,35 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected PortletPreferences doDeleteData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
-		preferences.setValue("rootFolderId", StringPool.BLANK);
-		preferences.setValue("showBreadcrumbs", StringPool.BLANK);
-		preferences.setValue("showFoldersSearch", StringPool.BLANK);
-		preferences.setValue("showSubfolders", StringPool.BLANK);
-		preferences.setValue("foldersPerPage", StringPool.BLANK);
-		preferences.setValue("folderColumns", StringPool.BLANK);
-		preferences.setValue("showFileEntriesSearch", StringPool.BLANK);
-		preferences.setValue("fileEntriesPerPage", StringPool.BLANK);
-		preferences.setValue("fileEntryColumns", StringPool.BLANK);
-		preferences.setValue("enable-comment-ratings", StringPool.BLANK);
+		portletPreferences.setValue("rootFolderId", StringPool.BLANK);
+		portletPreferences.setValue("showBreadcrumbs", StringPool.BLANK);
+		portletPreferences.setValue("showFoldersSearch", StringPool.BLANK);
+		portletPreferences.setValue("showSubfolders", StringPool.BLANK);
+		portletPreferences.setValue("foldersPerPage", StringPool.BLANK);
+		portletPreferences.setValue("folderColumns", StringPool.BLANK);
+		portletPreferences.setValue("showFileEntriesSearch", StringPool.BLANK);
+		portletPreferences.setValue("fileEntriesPerPage", StringPool.BLANK);
+		portletPreferences.setValue("fileEntryColumns", StringPool.BLANK);
+		portletPreferences.setValue("enable-comment-ratings", StringPool.BLANK);
 
-		return preferences;
+		return portletPreferences;
 	}
 
 	protected String doExportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
-		context.addPermissions(
-			"com.liferay.portlet.documentlibrary", context.getScopeGroupId());
+		portletDataContext.addPermissions(
+			"com.liferay.portlet.documentlibrary",
+			portletDataContext.getScopeGroupId());
 
 		long rootFolderId = GetterUtil.getLong(
-			preferences.getValue("rootFolderId", null));
+			portletPreferences.getValue("rootFolderId", null));
 
 		Document document = SAXReaderUtil.createDocument();
 
@@ -96,11 +97,11 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		if (rootFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			List<DLFolder> folders = DLFolderUtil.findByGroupId(
-				context.getScopeGroupId());
+				portletDataContext.getScopeGroupId());
 
 			for (DLFolder folder : folders) {
 				DLPortletDataHandlerImpl.exportFolder(
-					context, foldersElement, fileEntriesElement,
+					portletDataContext, foldersElement, fileEntriesElement,
 					fileShortcutsElement, fileRanksElement, folder);
 			}
 		}
@@ -111,7 +112,7 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 				"root-folder-id", String.valueOf(folder.getFolderId()));
 
 			DLPortletDataHandlerImpl.exportFolder(
-				context, foldersElement, fileEntriesElement,
+				portletDataContext, foldersElement, fileEntriesElement,
 				fileShortcutsElement, fileRanksElement, folder);
 		}
 
@@ -119,13 +120,14 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected PortletPreferences doImportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences, String data)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences, String data)
 		throws Exception {
 
-		context.importPermissions(
+		portletDataContext.importPermissions(
 			"com.liferay.portlet.documentlibrary",
-			context.getSourceGroupId(), context.getScopeGroupId());
+			portletDataContext.getSourceGroupId(),
+			portletDataContext.getScopeGroupId());
 
 		Document document = SAXReaderUtil.read(data);
 
@@ -136,7 +138,8 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		List<Element> folderElements = foldersElement.elements("folder");
 
 		for (Element folderElement : folderElements) {
-			DLPortletDataHandlerImpl.importFolder(context, folderElement);
+			DLPortletDataHandlerImpl.importFolder(
+				portletDataContext, folderElement);
 		}
 
 		Element fileEntriesElement = rootElement.element("file-entries");
@@ -145,20 +148,21 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 			"file-entry");
 
 		for (Element fileEntryElement : fileEntryElements) {
-			DLPortletDataHandlerImpl.importFileEntry(context, fileEntryElement);
+			DLPortletDataHandlerImpl.importFileEntry(
+				portletDataContext, fileEntryElement);
 		}
 
-		if (context.getBooleanParameter(_NAMESPACE, "shortcuts")) {
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "shortcuts")) {
 			List<Element> fileShortcutElements = rootElement.element(
 				"file-shortcuts").elements("file-shortcut");
 
 			for (Element fileShortcutElement : fileShortcutElements) {
 				DLPortletDataHandlerImpl.importFileShortcut(
-					context, fileShortcutElement);
+					portletDataContext, fileShortcutElement);
 			}
 		}
 
-		if (context.getBooleanParameter(_NAMESPACE, "ranks")) {
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "ranks")) {
 			Element fileRanksElement = rootElement.element("file-ranks");
 
 			List<Element> fileRankElements = fileRanksElement.elements(
@@ -166,7 +170,7 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			for (Element fileRankElement : fileRankElements) {
 				DLPortletDataHandlerImpl.importFileRank(
-					context, fileRankElement);
+					portletDataContext, fileRankElement);
 			}
 		}
 
@@ -175,15 +179,17 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		if (rootFolderId > 0) {
 			Map<Long, Long> folderPKs =
-				(Map<Long, Long>)context.getNewPrimaryKeysMap(DLFolder.class);
+				(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
+					DLFolder.class);
 
 			rootFolderId = MapUtil.getLong(
 				folderPKs, rootFolderId, rootFolderId);
 
-			preferences.setValue("rootFolderId", String.valueOf(rootFolderId));
+			portletPreferences.setValue(
+				"rootFolderId", String.valueOf(rootFolderId));
 		}
 
-		return preferences;
+		return portletPreferences;
 	}
 
 	private static final String _NAMESPACE = "document_library";

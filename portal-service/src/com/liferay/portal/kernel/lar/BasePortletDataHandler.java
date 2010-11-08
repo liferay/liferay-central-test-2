@@ -22,12 +22,13 @@ import javax.portlet.PortletPreferences;
 public abstract class BasePortletDataHandler implements PortletDataHandler {
 
 	public PortletPreferences deleteData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws PortletDataException {
 
 		try {
-			return doDeleteData(context, portletId, preferences);
+			return doDeleteData(
+				portletDataContext, portletId, portletPreferences);
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -35,12 +36,13 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 	}
 
 	public String exportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws PortletDataException {
 
 		try {
-			return doExportData(context, portletId, preferences);
+			return doExportData(
+				portletDataContext, portletId, portletPreferences);
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -64,12 +66,13 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 	}
 
 	public PortletPreferences importData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences, String data)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences, String data)
 		throws PortletDataException {
 
 		try {
-			return doImportData(context, portletId, preferences, data);
+			return doImportData(
+				portletDataContext, portletId, portletPreferences, data);
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -77,24 +80,24 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 	}
 
 	protected PortletPreferences doDeleteData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
 		return null;
 	}
 
 	protected String doExportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
 		return null;
 	}
 
 	protected PortletPreferences doImportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences, String data)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences, String data)
 		throws Exception {
 
 		return null;

@@ -55,22 +55,22 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected PortletPreferences doDeleteData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
-		preferences.setValue("question-id", StringPool.BLANK);
+		portletPreferences.setValue("question-id", StringPool.BLANK);
 
-		return preferences;
+		return portletPreferences;
 	}
 
 	protected String doExportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
 		long questionId = GetterUtil.getLong(
-			preferences.getValue("question-id", StringPool.BLANK));
+			portletPreferences.getValue("question-id", StringPool.BLANK));
 
 		if (questionId <= 0) {
 			if (_log.isWarnEnabled()) {
@@ -95,34 +95,35 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 			return StringPool.BLANK;
 		}
 
-		context.addPermissions(
-			"com.liferay.portlet.polls", context.getScopeGroupId());
+		portletDataContext.addPermissions(
+			"com.liferay.portlet.polls", portletDataContext.getScopeGroupId());
 
 		Document document = SAXReaderUtil.createDocument();
 
 		Element rootElement = document.addElement("polls-display-data");
 
 		rootElement.addAttribute(
-			"group-id", String.valueOf(context.getScopeGroupId()));
+			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));
 
 		Element questionsElement = rootElement.addElement("questions");
 		Element choicesElement = rootElement.addElement("choices");
 		Element votesElement = rootElement.addElement("votes");
 
 		PollsPortletDataHandlerImpl.exportQuestion(
-			context, questionsElement, choicesElement, votesElement, question);
+			portletDataContext, questionsElement, choicesElement, votesElement,
+			question);
 
 		return document.formattedString();
 	}
 
 	protected PortletPreferences doImportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences, String data)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences, String data)
 		throws Exception {
 
-		context.importPermissions(
-			"com.liferay.portlet.polls", context.getSourceGroupId(),
-			context.getScopeGroupId());
+		portletDataContext.importPermissions(
+			"com.liferay.portlet.polls", portletDataContext.getSourceGroupId(),
+			portletDataContext.getScopeGroupId());
 
 		if (Validator.isNull(data)) {
 			return null;
@@ -137,14 +138,15 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		for (Element questionEl : questionsElement.elements("question")) {
 			String path = questionEl.attributeValue("path");
 
-			if (!context.isPathNotProcessed(path)) {
+			if (!portletDataContext.isPathNotProcessed(path)) {
 				continue;
 			}
 
-			PollsQuestion question = (PollsQuestion)context.getZipEntryAsObject(
-				path);
+			PollsQuestion question =
+				(PollsQuestion)portletDataContext.getZipEntryAsObject(path);
 
-			PollsPortletDataHandlerImpl.importQuestion(context, question);
+			PollsPortletDataHandlerImpl.importQuestion(
+				portletDataContext, question);
 		}
 
 		Element choicesElement = rootElement.element("choices");
@@ -152,46 +154,51 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		for (Element choiceElement : choicesElement.elements("choice")) {
 			String path = choiceElement.attributeValue("path");
 
-			if (!context.isPathNotProcessed(path)) {
+			if (!portletDataContext.isPathNotProcessed(path)) {
 				continue;
 			}
 
-			PollsChoice choice = (PollsChoice)context.getZipEntryAsObject(path);
+			PollsChoice choice =
+				(PollsChoice)portletDataContext.getZipEntryAsObject(path);
 
-			PollsPortletDataHandlerImpl.importChoice(context, choice);
+			PollsPortletDataHandlerImpl.importChoice(
+				portletDataContext, choice);
 		}
 
-		if (context.getBooleanParameter(_NAMESPACE, "votes")) {
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "votes")) {
 			Element votesElement = rootElement.element("votes");
 
 			for (Element voteElement : votesElement.elements("vote")) {
 				String path = voteElement.attributeValue("path");
 
-				if (!context.isPathNotProcessed(path)) {
+				if (!portletDataContext.isPathNotProcessed(path)) {
 					continue;
 				}
 
-				PollsVote vote = (PollsVote)context.getZipEntryAsObject(path);
+				PollsVote vote =
+					(PollsVote)portletDataContext.getZipEntryAsObject(path);
 
-				PollsPortletDataHandlerImpl.importVote(context, vote);
+				PollsPortletDataHandlerImpl.importVote(
+					portletDataContext, vote);
 			}
 		}
 
 		long questionId = GetterUtil.getLong(
-			preferences.getValue("question-id", StringPool.BLANK));
+			portletPreferences.getValue("question-id", StringPool.BLANK));
 
 		if (questionId > 0) {
 			Map<Long, Long> questionPKs =
-				(Map<Long, Long>)context.getNewPrimaryKeysMap(
+				(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 					PollsQuestion.class);
 
 			questionId = MapUtil.getLong(
 				questionPKs, questionId, questionId);
 
-			preferences.setValue("question-id", String.valueOf(questionId));
+			portletPreferences.setValue(
+				"question-id", String.valueOf(questionId));
 		}
 
-		return preferences;
+		return portletPreferences;
 	}
 
 	private static final String _NAMESPACE = "polls";

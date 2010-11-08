@@ -63,13 +63,13 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static void exportChoice(
-			PortletDataContext context, Element questionsElement,
+			PortletDataContext portletDataContext, Element questionsElement,
 			PollsChoice choice)
 		throws Exception {
 
-		String path = getChoicePath(context, choice);
+		String path = getChoicePath(portletDataContext, choice);
 
-		if (!context.isPathNotProcessed(path)) {
+		if (!portletDataContext.isPathNotProcessed(path)) {
 			return;
 		}
 
@@ -77,22 +77,22 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		choiceElement.addAttribute("path", path);
 
-		context.addZipEntry(path, choice);
+		portletDataContext.addZipEntry(path, choice);
 	}
 
 	protected static void exportQuestion(
-			PortletDataContext context, Element questionsElement,
+			PortletDataContext portletDataContext, Element questionsElement,
 			Element choicesElement, Element votesElement,
 			PollsQuestion question)
 		throws Exception {
 
-		if (!context.isWithinDateRange(question.getModifiedDate())) {
+		if (!portletDataContext.isWithinDateRange(question.getModifiedDate())) {
 			return;
 		}
 
-		String path = getQuestionPath(context, question);
+		String path = getQuestionPath(portletDataContext, question);
 
-		if (!context.isPathNotProcessed(path)) {
+		if (!portletDataContext.isPathNotProcessed(path)) {
 			return;
 		}
 
@@ -106,31 +106,32 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 			question.getQuestionId());
 
 		for (PollsChoice choice : choices) {
-			exportChoice(context, choicesElement, choice);
+			exportChoice(portletDataContext, choicesElement, choice);
 		}
 
-		if (context.getBooleanParameter(_NAMESPACE, "votes")) {
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "votes")) {
 			List<PollsVote> votes = PollsVoteUtil.findByQuestionId(
 				question.getQuestionId());
 
 			for (PollsVote vote : votes) {
-				exportVote(context, votesElement, vote);
+				exportVote(portletDataContext, votesElement, vote);
 			}
 		}
 
-		context.addPermissions(PollsQuestion.class, question.getQuestionId());
+		portletDataContext.addPermissions(
+			PollsQuestion.class, question.getQuestionId());
 
-		context.addZipEntry(path, question);
+		portletDataContext.addZipEntry(path, question);
 	}
 
 	protected static void exportVote(
-			PortletDataContext context, Element questionsElement,
+			PortletDataContext portletDataContext, Element questionsElement,
 			PollsVote vote)
 		throws Exception {
 
-		String path = getVotePath(context, vote);
+		String path = getVotePath(portletDataContext, vote);
 
-		if (!context.isPathNotProcessed(path)) {
+		if (!portletDataContext.isPathNotProcessed(path)) {
 			return;
 		}
 
@@ -138,15 +139,15 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		voteEl.addAttribute("path", path);
 
-		context.addZipEntry(path, vote);
+		portletDataContext.addZipEntry(path, vote);
 	}
 
 	protected static String getChoicePath(
-		PortletDataContext context, PollsChoice choice) {
+		PortletDataContext portletDataContext, PollsChoice choice) {
 
 		StringBundler sb = new StringBundler(6);
 
-		sb.append(context.getPortletPath(PortletKeys.POLLS));
+		sb.append(portletDataContext.getPortletPath(PortletKeys.POLLS));
 		sb.append("/questions/");
 		sb.append(choice.getQuestionId());
 		sb.append("/choices/");
@@ -157,11 +158,11 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static String getQuestionPath(
-		PortletDataContext context, PollsQuestion question) {
+		PortletDataContext portletDataContext, PollsQuestion question) {
 
 		StringBundler sb = new StringBundler(4);
 
-		sb.append(context.getPortletPath(PortletKeys.POLLS));
+		sb.append(portletDataContext.getPortletPath(PortletKeys.POLLS));
 		sb.append("/questions/");
 		sb.append(question.getQuestionId());
 		sb.append(".xml");
@@ -170,11 +171,11 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static String getVotePath(
-		PortletDataContext context, PollsVote vote) {
+		PortletDataContext portletDataContext, PollsVote vote) {
 
 		StringBundler sb = new StringBundler(6);
 
-		sb.append(context.getPortletPath(PortletKeys.POLLS));
+		sb.append(portletDataContext.getPortletPath(PortletKeys.POLLS));
 		sb.append("/questions/");
 		sb.append(vote.getQuestionId());
 		sb.append("/votes/");
@@ -185,20 +186,21 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static void importChoice(
-			PortletDataContext context, PollsChoice choice)
+			PortletDataContext portletDataContext, PollsChoice choice)
 		throws Exception {
 
 		Map<Long, Long> questionPKs =
-			(Map<Long, Long>)context.getNewPrimaryKeysMap(PollsQuestion.class);
+			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
+				PollsQuestion.class);
 
 		long questionId = MapUtil.getLong(
 			questionPKs, choice.getQuestionId(), choice.getQuestionId());
 
 		PollsChoice importedChoice = null;
 
-		if (context.isDataStrategyMirror()) {
+		if (portletDataContext.isDataStrategyMirror()) {
 			PollsChoice existingChoice = PollsChoiceFinderUtil.fetchByUUID_G(
-				choice.getUuid(), context.getScopeGroupId());
+				choice.getUuid(), portletDataContext.getScopeGroupId());
 
 			if (existingChoice == null) {
 				ServiceContext serviceContext = new ServiceContext();
@@ -222,20 +224,21 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		Map<Long, Long> choicePKs =
-			(Map<Long, Long>)context.getNewPrimaryKeysMap(PollsChoice.class);
+			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
+				PollsChoice.class);
 
 		choicePKs.put(choice.getChoiceId(), importedChoice.getChoiceId());
 
-		context.importPermissions(
+		portletDataContext.importPermissions(
 			PollsChoice.class, choice.getChoiceId(),
 			importedChoice.getChoiceId());
 	}
 
 	protected static void importQuestion(
-			PortletDataContext context, PollsQuestion question)
+			PortletDataContext portletDataContext, PollsQuestion question)
 		throws Exception {
 
-		long userId = context.getUserId(question.getUserUuid());
+		long userId = portletDataContext.getUserId(question.getUserUuid());
 
 		Date expirationDate = question.getExpirationDate();
 
@@ -269,13 +272,13 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setCreateDate(question.getCreateDate());
 		serviceContext.setModifiedDate(question.getModifiedDate());
-		serviceContext.setScopeGroupId(context.getScopeGroupId());
+		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
 
 		PollsQuestion importedQuestion = null;
 
-		if (context.isDataStrategyMirror()) {
+		if (portletDataContext.isDataStrategyMirror()) {
 			PollsQuestion existingQuestion =  PollsQuestionUtil.fetchByUUID_G(
-				question.getUuid(), context.getScopeGroupId());
+				question.getUuid(), portletDataContext.getScopeGroupId());
 
 			if (existingQuestion == null) {
 				serviceContext.setUuid(question.getUuid());
@@ -303,29 +306,33 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		Map<Long, Long> questionPKs =
-			(Map<Long, Long>)context.getNewPrimaryKeysMap(PollsQuestion.class);
+			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
+				PollsQuestion.class);
 
 		questionPKs.put(
 			question.getQuestionId(), importedQuestion.getQuestionId());
 
-		context.importPermissions(
+		portletDataContext.importPermissions(
 			PollsQuestion.class, question.getQuestionId(),
 			importedQuestion.getQuestionId());
 	}
 
-	protected static void importVote(PortletDataContext context, PollsVote vote)
+	protected static void importVote(
+			PortletDataContext portletDataContext, PollsVote vote)
 		throws Exception {
 
-		long userId = context.getUserId(vote.getUserUuid());
+		long userId = portletDataContext.getUserId(vote.getUserUuid());
 
 		Map<Long, Long> questionPKs =
-			(Map<Long, Long>)context.getNewPrimaryKeysMap(PollsQuestion.class);
+			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
+				PollsQuestion.class);
 
 		long questionId = MapUtil.getLong(
 			questionPKs, vote.getQuestionId(), vote.getQuestionId());
 
 		Map<Long, Long> choicePKs =
-			(Map<Long, Long>)context.getNewPrimaryKeysMap(PollsChoice.class);
+			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
+				PollsChoice.class);
 
 		long choiceId = MapUtil.getLong(
 			choicePKs, vote.getChoiceId(), vote.getChoiceId());
@@ -339,59 +346,59 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected PortletPreferences doDeleteData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
-		if (!context.addPrimaryKey(
+		if (!portletDataContext.addPrimaryKey(
 				PollsPortletDataHandlerImpl.class, "deleteData")) {
 
 			PollsQuestionLocalServiceUtil.deleteQuestions(
-				context.getScopeGroupId());
+				portletDataContext.getScopeGroupId());
 		}
 
 		return null;
 	}
 
 	protected String doExportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
-		context.addPermissions(
-			"com.liferay.portlet.polls", context.getScopeGroupId());
+		portletDataContext.addPermissions(
+			"com.liferay.portlet.polls", portletDataContext.getScopeGroupId());
 
 		Document document = SAXReaderUtil.createDocument();
 
 		Element rootElement = document.addElement("polls-data");
 
 		rootElement.addAttribute(
-			"group-id", String.valueOf(context.getScopeGroupId()));
+			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));
 
 		Element questionsElement = rootElement.addElement("questions");
 		Element choicesElement = rootElement.addElement("choices");
 		Element votesElement = rootElement.addElement("votes");
 
 		List<PollsQuestion> questions = PollsQuestionUtil.findByGroupId(
-			context.getScopeGroupId());
+			portletDataContext.getScopeGroupId());
 
 		for (PollsQuestion question : questions) {
 			exportQuestion(
-				context, questionsElement, choicesElement, votesElement,
-				question);
+				portletDataContext, questionsElement, choicesElement,
+				votesElement, question);
 		}
 
 		return document.formattedString();
 	}
 
 	protected PortletPreferences doImportData(
-			PortletDataContext context, String portletId,
-			PortletPreferences preferences, String data)
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences, String data)
 		throws Exception {
 
-		context.importPermissions(
-			"com.liferay.portlet.polls", context.getSourceGroupId(),
-			context.getScopeGroupId());
+		portletDataContext.importPermissions(
+			"com.liferay.portlet.polls", portletDataContext.getSourceGroupId(),
+			portletDataContext.getScopeGroupId());
 
 		Document document = SAXReaderUtil.read(data);
 
@@ -402,14 +409,14 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 		for (Element questionElement : questionsElement.elements("question")) {
 			String path = questionElement.attributeValue("path");
 
-			if (!context.isPathNotProcessed(path)) {
+			if (!portletDataContext.isPathNotProcessed(path)) {
 				continue;
 			}
 
-			PollsQuestion question = (PollsQuestion)context.getZipEntryAsObject(
-				path);
+			PollsQuestion question =
+				(PollsQuestion)portletDataContext.getZipEntryAsObject(path);
 
-			importQuestion(context, question);
+			importQuestion(portletDataContext, question);
 		}
 
 		Element choicesElement = rootElement.element("choices");
@@ -417,28 +424,30 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 		for (Element choiceElement : choicesElement.elements("choice")) {
 			String path = choiceElement.attributeValue("path");
 
-			if (!context.isPathNotProcessed(path)) {
+			if (!portletDataContext.isPathNotProcessed(path)) {
 				continue;
 			}
 
-			PollsChoice choice = (PollsChoice)context.getZipEntryAsObject(path);
+			PollsChoice choice =
+				(PollsChoice)portletDataContext.getZipEntryAsObject(path);
 
-			importChoice(context, choice);
+			importChoice(portletDataContext, choice);
 		}
 
-		if (context.getBooleanParameter(_NAMESPACE, "votes")) {
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "votes")) {
 			Element votesElement = rootElement.element("votes");
 
 			for (Element voteElement : votesElement.elements("vote")) {
 				String path = voteElement.attributeValue("path");
 
-				if (!context.isPathNotProcessed(path)) {
+				if (!portletDataContext.isPathNotProcessed(path)) {
 					continue;
 				}
 
-				PollsVote vote = (PollsVote)context.getZipEntryAsObject(path);
+				PollsVote vote =
+					(PollsVote)portletDataContext.getZipEntryAsObject(path);
 
-				importVote(context, vote);
+				importVote(portletDataContext, vote);
 			}
 		}
 
