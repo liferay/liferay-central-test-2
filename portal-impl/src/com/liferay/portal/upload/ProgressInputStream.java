@@ -26,6 +26,8 @@ import javax.portlet.PortletSession;
 
 /**
  * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
+ * @author Minhchau Dang
  */
 public class ProgressInputStream extends InputStream {
 
@@ -126,7 +128,7 @@ public class ProgressInputStream extends InputStream {
 		int percent = 0;
 
 		if (_totalSize > 0) {
-			percent = (int) ((_totalRead * 100) / _totalSize);
+			percent = (int)((_totalRead * 100) / _totalSize);
 		}
 
 		if (_log.isDebugEnabled()) {
