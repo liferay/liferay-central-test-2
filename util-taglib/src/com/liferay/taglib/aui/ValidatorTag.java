@@ -21,7 +21,6 @@ import com.liferay.util.PwdGenerator;
 
 /**
  * @author Julio Camarero
-
  * @author Brian Wing Shun Chan
  */
 public class ValidatorTag extends BaseBodyTagSupport {
