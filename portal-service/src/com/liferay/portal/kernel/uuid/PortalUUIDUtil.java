@@ -19,8 +19,8 @@ package com.liferay.portal.kernel.uuid;
  */
 public class PortalUUIDUtil {
 
-	public static String fromSafeUuid(String safeUuid) {
-		return _portalUUID.fromSafeUuid(safeUuid);
+	public static String fromJsSafeUuid(String jsSafeUuid) {
+		return _portalUUID.fromJsSafeUuid(jsSafeUuid);
 	}
 
 	public static String generate() {
@@ -31,8 +31,8 @@ public class PortalUUIDUtil {
 		return _portalUUID;
 	}
 
-	public static String toSafeUuid(String uuid) {
-		return _portalUUID.toSafeUuid(uuid);
+	public static String toJsSafeUuid(String uuid) {
+		return _portalUUID.toJsSafeUuid(uuid);
 	}
 
 	public void setPortalUUID(PortalUUID portalUUID) {

@@ -25,18 +25,18 @@ import java.util.UUID;
  */
 public class PortalUUIDImpl implements PortalUUID {
 
-	public String fromSafeUuid(String safeUuid) {
+	public String fromJsSafeUuid(String jsSafeUuid) {
 		return StringUtil.replace(
-			safeUuid, StringPool.DOUBLE_UNDERSCORE, StringPool.DASH);
+			jsSafeUuid, StringPool.DOUBLE_UNDERLINE, StringPool.DASH);
 	}
 
 	public String generate() {
 		return UUID.randomUUID().toString();
 	}
 
-	public String toSafeUuid(String uuid) {
+	public String toJsSafeUuid(String uuid) {
 		return StringUtil.replace(
-			uuid, StringPool.DASH, StringPool.DOUBLE_UNDERSCORE);
+			uuid, StringPool.DASH, StringPool.DOUBLE_UNDERLINE);
 	}
 
 }
