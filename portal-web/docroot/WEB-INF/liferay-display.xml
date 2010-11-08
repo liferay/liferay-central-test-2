@@ -37,6 +37,7 @@
 		<portlet id="107" />
 		<portlet id="108" />
 		<portlet id="143" />
+		<portlet id="163" />
 	</category>
 	<category name="category.entertainment">
 		<portlet id="37" />

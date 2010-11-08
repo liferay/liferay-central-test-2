@@ -1496,7 +1496,7 @@
 			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
 			<forward name="portlet.message_boards.move_thread" path="portlet.message_boards.move_thread" />
 		</action>
-		                                          
+
 		<action path="/message_boards_admin/search" forward="portlet.message_boards.search" />
 
 		<action path="/message_boards_admin/select_category" type="com.liferay.portlet.messageboards.action.EditCategoryAction">
@@ -1546,6 +1546,12 @@
 			<forward name="portlet.my_account.edit_user" path="portlet.enterprise_admin.edit_user" />
 			<forward name="portlet.my_account.view" path="portlet.my_account.view" />
 		</action>
+
+		<!-- My Organizations -->
+
+		<action path="/my_organizations/page" type="com.liferay.portlet.myplaces.action.ViewAction" />
+
+		<action path="/my_organizations/view" forward="portlet.my_organizations.view" />
 
 		<!-- My Pages -->
 
