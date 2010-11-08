@@ -47,6 +47,14 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		}
 	}
 
+	public PortletDataHandlerControl[] getExportControls() {
+		return new PortletDataHandlerControl[0];
+	}
+
+	public PortletDataHandlerControl[] getImportControls() {
+		return new PortletDataHandlerControl[0];
+	}
+
 	public boolean isAlwaysExportable() {
 		return _ALWAYS_EXPORTABLE;
 	}
