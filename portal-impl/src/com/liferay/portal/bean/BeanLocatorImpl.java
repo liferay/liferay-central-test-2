@@ -51,6 +51,19 @@ public class BeanLocatorImpl implements BeanLocator {
 		return _classLoader;
 	}
 
+	public String[] getNames() {
+		return _applicationContext.getBeanDefinitionNames();
+	}
+
+	public Class<?> getType(String name) {
+		try {
+			return _applicationContext.getType(name);
+		}
+		catch (Exception e) {
+			throw new BeanLocatorException(e);
+		}
+	}
+
 	public Object locate(String name) throws BeanLocatorException {
 		try {
 			return doLocate(name);
@@ -108,8 +121,8 @@ public class BeanLocatorImpl implements BeanLocator {
 
 	private static Log _log = LogFactoryUtil.getLog(BeanLocatorImpl.class);
 
-	private ClassLoader _classLoader;
 	private ApplicationContext _applicationContext;
+	private ClassLoader _classLoader;
 	private Map<String, Object> _velocityBeans =
 		new ConcurrentHashMap<String, Object>();
 

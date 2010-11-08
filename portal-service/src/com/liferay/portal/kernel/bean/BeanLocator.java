@@ -21,6 +21,10 @@ public interface BeanLocator {
 
 	public ClassLoader getClassLoader();
 
+	public String[] getNames();
+
+	public Class<?> getType(String name) throws BeanLocatorException;
+
 	public Object locate(String name) throws BeanLocatorException;
 
 }
