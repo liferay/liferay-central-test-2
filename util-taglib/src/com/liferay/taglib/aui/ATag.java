@@ -20,133 +20,20 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-
-import java.io.IOException;
+import com.liferay.taglib.util.InlineTag;
 
 import javax.portlet.PortletResponse;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.jsp.JspException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspWriter;
 
 /**
+ * @author Julio Camarero
+ * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */
-public class ATag extends BaseInlineTag {
-
-	public int doEndTag() throws JspException {
-		JspWriter jspWriter = pageContext.getOut();
-
-		try {
-			if (Validator.isNotNull(_href)) {
-				if (_target.equals("_blank") || _target.equals("_new")) {
-					jspWriter.write(
-						"<span class=\"opens-new-window-accessible\">");
-					jspWriter.write(LanguageUtil.format(
-						pageContext, "opens-new-window", (Object[]) null,
-						true));
-					jspWriter.write("</span>");
-				}
-				jspWriter.write("</a>");
-			}
-			else {
-				jspWriter.write("</span>");
-			}
-		}
-		catch (IOException ioe) {
-			throw new JspException(ioe);
-		}
-
-		return EVAL_PAGE;
-	}
-
-	public int doStartTag() throws JspException {
-		ServletRequest request = pageContext.getRequest();
-
-		PortletResponse portletResponse = (PortletResponse)request.getAttribute(
-			JavaConstants.JAVAX_PORTLET_RESPONSE);
-		String namespace = StringPool.BLANK;
-		boolean useNamespace = GetterUtil.getBoolean(
-			(String)request.getAttribute("aui:form:useNamespace"), true);
-
-		if ((portletResponse != null) && useNamespace) {
-			namespace = portletResponse.getNamespace();
-		}
-
-		JspWriter jspWriter = pageContext.getOut();
-
-		try {
-			if (Validator.isNotNull(_href)) {
-				jspWriter.write("<a ");
-
-				if (Validator.isNotNull(_cssClass)) {
-					jspWriter.write("class=\"");
-					jspWriter.write(_cssClass);
-					jspWriter.write("\" ");
-				}
-
-				jspWriter.write("href=\"");
-				jspWriter.write(HtmlUtil.escape(_href));
-				jspWriter.write("\" ");
-
-				if (Validator.isNotNull(_id)) {
-					jspWriter.write("id=\"");
-					jspWriter.write(namespace);
-					jspWriter.write(_id);
-					jspWriter.write("\" ");
-				}
-
-				if (Validator.isNotNull(_lang)) {
-					jspWriter.write("lang=\"");
-					jspWriter.write(_lang);
-					jspWriter.write("\" ");
-				}
-
-				if (Validator.isNotNull(_target)) {
-					jspWriter.write("target=\"");
-					jspWriter.write(_target);
-					jspWriter.write("\" ");
-				}
-
-				insertDynamicAttributes(jspWriter);
-
-				jspWriter.write(">");
-
-				if (Validator.isNotNull(_label)) {
-					jspWriter.write(LanguageUtil.format(
-						pageContext, _label, (Object[]) null, true));
-				}
-			}
-			else {
-				jspWriter.write("<span ");
-				if (Validator.isNotNull(_cssClass)) {
-					jspWriter.write("class=\"");
-					jspWriter.write(_cssClass);
-					jspWriter.write("\" ");
-				}
-				if (Validator.isNotNull(_id)) {
-					jspWriter.write("id=\"");
-					jspWriter.write(namespace);
-					jspWriter.write(_id);
-					jspWriter.write("\" ");
-				}
-				if (Validator.isNotNull(_lang)) {
-					jspWriter.write("lang=\"");
-					jspWriter.write(_lang);
-					jspWriter.write("\" ");
-				}
-
-				insertDynamicAttributes(jspWriter);
-
-				jspWriter.write(">");
-			}
-		}
-		catch (IOException ioe) {
-			throw new JspException(ioe);
-		}
-
-		return EVAL_BODY_INCLUDE;
-	}
+public class ATag extends InlineTag {
 
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
@@ -171,6 +58,151 @@ public class ATag extends BaseInlineTag {
 	public void setTarget(String target) {
 		_target = target;
 	}
+
+	protected void cleanUp() {
+		_cssClass = StringPool.BLANK;
+		_href = StringPool.BLANK;
+		_id = StringPool.BLANK;
+		_label = StringPool.BLANK;
+		_lang = StringPool.BLANK;
+		_target = StringPool.BLANK;
+	}
+
+	protected boolean isCleanUpSetAttributes() {
+		return _CLEAN_UP_SET_ATTRIBUTES;
+	}
+
+	protected boolean isTrimNewLines() {
+		return _TRIM_NEW_LINES;
+	}
+
+	protected int processEndTag() throws Exception {
+		JspWriter jspWriter = pageContext.getOut();
+
+		if (Validator.isNotNull(_href)) {
+			if (_target.equals("_blank") || _target.equals("_new")) {
+				jspWriter.write("<span class=\"opens-new-window-accessible\">");
+				jspWriter.write(
+					LanguageUtil.get(pageContext, "opens-new-window"));
+				jspWriter.write("</span>");
+			}
+
+			jspWriter.write("</a>");
+		}
+		else {
+			jspWriter.write("</span>");
+		}
+
+		return EVAL_PAGE;
+	}
+
+	protected int processStartTag() throws Exception {
+		JspWriter jspWriter = pageContext.getOut();
+
+		String namespace = _getNamespace();
+
+		if (Validator.isNotNull(_href)) {
+			jspWriter.write("<a ");
+
+			if (Validator.isNotNull(_cssClass)) {
+				jspWriter.write("class=\"");
+				jspWriter.write(_cssClass);
+				jspWriter.write("\" ");
+			}
+
+			jspWriter.write("href=\"");
+			jspWriter.write(HtmlUtil.escape(_href));
+			jspWriter.write("\" ");
+
+			if (Validator.isNotNull(_id)) {
+				jspWriter.write("id=\"");
+				jspWriter.write(namespace);
+				jspWriter.write(_id);
+				jspWriter.write("\" ");
+			}
+
+			if (Validator.isNotNull(_lang)) {
+				jspWriter.write("lang=\"");
+				jspWriter.write(_lang);
+				jspWriter.write("\" ");
+			}
+
+			if (Validator.isNotNull(_target)) {
+				jspWriter.write("target=\"");
+				jspWriter.write(_target);
+				jspWriter.write("\" ");
+			}
+
+			writeDynamicAttributes(jspWriter);
+
+			jspWriter.write(">");
+
+			if (Validator.isNotNull(_label)) {
+				jspWriter.write(LanguageUtil.get(pageContext, _label));
+			}
+		}
+		else {
+			jspWriter.write("<span ");
+
+			if (Validator.isNotNull(_cssClass)) {
+				jspWriter.write("class=\"");
+				jspWriter.write(_cssClass);
+				jspWriter.write("\" ");
+			}
+
+			if (Validator.isNotNull(_id)) {
+				jspWriter.write("id=\"");
+				jspWriter.write(namespace);
+				jspWriter.write(_id);
+				jspWriter.write("\" ");
+			}
+
+			if (Validator.isNotNull(_lang)) {
+				jspWriter.write("lang=\"");
+				jspWriter.write(_lang);
+				jspWriter.write("\" ");
+			}
+
+			writeDynamicAttributes(jspWriter);
+
+			jspWriter.write(">");
+		}
+
+		return EVAL_BODY_INCLUDE;
+	}
+
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute("aui:a:cssClass", _cssClass);
+		request.setAttribute("aui:a:dynamicAttributes", getDynamicAttributes());
+		request.setAttribute("aui:a:href", _href);
+		request.setAttribute("aui:a:id", _id);
+		request.setAttribute("aui:a:label", _label);
+		request.setAttribute("aui:a:lang", _lang);
+		request.setAttribute("aui:a:target", _target);
+	}
+
+	private String _getNamespace() {
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
+
+		PortletResponse portletResponse = (PortletResponse)request.getAttribute(
+			JavaConstants.JAVAX_PORTLET_RESPONSE);
+
+		String namespace = StringPool.BLANK;
+
+		boolean useNamespace = GetterUtil.getBoolean(
+			(String)request.getAttribute("aui:form:useNamespace"), true);
+
+		if ((portletResponse != null) && useNamespace) {
+			namespace = portletResponse.getNamespace();
+		}
+
+		return namespace;
+	}
+
+	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
+
+	private static final boolean _TRIM_NEW_LINES = true;
 
 	private String _cssClass = StringPool.BLANK;
 	private String _href = StringPool.BLANK;

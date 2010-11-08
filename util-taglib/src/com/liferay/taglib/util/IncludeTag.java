@@ -46,19 +46,13 @@ public class IncludeTag
 
 	public int doEndTag() throws JspException {
 		try {
-			String page = getPage();
-
-			if (Validator.isNull(page)) {
-				page = getEndPage();
-			}
-
-			_callSetAttributes();
-
-			if (Validator.isNotNull(page)) {
-				_doInclude(page);
-			}
-
-			return EVAL_PAGE;
+			return processEndTag();
+		}
+		catch (JspException jspe) {
+			throw jspe;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
 		}
 		finally {
 			_dynamicAttributes.clear();
@@ -77,17 +71,15 @@ public class IncludeTag
 	}
 
 	public int doStartTag() throws JspException {
-		String page = getStartPage();
-
-		if (Validator.isNull(page)) {
-			return EVAL_BODY_BUFFERED;
+		try {
+			return processStartTag();
 		}
-
-		_callSetAttributes();
-
-		_doInclude(page);
-
-		return EVAL_BODY_INCLUDE;
+		catch (JspException jspe) {
+			throw jspe;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public void setDynamicAttribute(
@@ -182,6 +174,36 @@ public class IncludeTag
 
 	protected boolean isTrimNewLines() {
 		return _TRIM_NEW_LINES;
+	}
+
+	protected int processEndTag() throws Exception {
+		String page = getPage();
+
+		if (Validator.isNull(page)) {
+			page = getEndPage();
+		}
+
+		_callSetAttributes();
+
+		if (Validator.isNotNull(page)) {
+			_doInclude(page);
+		}
+
+		return EVAL_PAGE;
+	}
+
+	protected int processStartTag() throws Exception {
+		String page = getStartPage();
+
+		if (Validator.isNull(page)) {
+			return EVAL_BODY_BUFFERED;
+		}
+
+		_callSetAttributes();
+
+		_doInclude(page);
+
+		return EVAL_BODY_INCLUDE;
 	}
 
 	protected void setAttributes(HttpServletRequest request) {

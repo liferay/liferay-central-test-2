@@ -12,35 +12,29 @@
  * details.
  */
 
-package com.liferay.taglib.aui;
+package com.liferay.taglib.util;
 
 import java.io.IOException;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.tagext.BodyTagSupport;
-import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
- * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
-public class BaseInlineTag extends BodyTagSupport implements DynamicAttributes {
+public class InlineTag extends IncludeTag {
 
-	public void setDynamicAttribute(
-		String uri, String localName, Object value) {
-
-		_dynamicAttributes.put(localName, value);
-	}
-
-	protected void insertDynamicAttributes(JspWriter jspWriter)
+	protected void writeDynamicAttributes(JspWriter jspWriter)
 		throws IOException {
-		if ((_dynamicAttributes == null) || _dynamicAttributes.isEmpty()) {
+
+		Map<String, Object> dynamicAttributes = getDynamicAttributes();
+
+		if ((dynamicAttributes == null) || dynamicAttributes.isEmpty()) {
 			return;
 		}
 
-		for (Map.Entry<String, Object> entry : _dynamicAttributes.entrySet()) {
+		for (Map.Entry<String, Object> entry : dynamicAttributes.entrySet()) {
 			String key = entry.getKey();
 			String value = String.valueOf(entry.getValue());
 
@@ -51,10 +45,6 @@ public class BaseInlineTag extends BodyTagSupport implements DynamicAttributes {
 				jspWriter.write("\" ");
 			}
 		}
-
 	}
-
-	private Map<String, Object> _dynamicAttributes =
-			new HashMap<String, Object>();
 
 }
