@@ -48,7 +48,6 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
@@ -159,7 +158,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			DLFileEntry fileEntry = (DLFileEntry)resource.getModel();
 
 			long groupId = WebDAVUtil.getGroupId(companyId, destination);
-			long userId = webDavRequest.getUserId();
 			String name = WebDAVUtil.getResourceName(destinationArray);
 			String title = WebDAVUtil.getResourceName(destinationArray);
 			String description = fileEntry.getDescription();
@@ -169,9 +167,9 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			file = FileUtil.createTempFile(
 				FileUtil.getExtension(fileEntry.getName()));
 
-			InputStream is = DLFileEntryLocalServiceUtil.getFileAsStream(
-				fileEntry.getCompanyId(), userId, fileEntry.getGroupId(),
-				fileEntry.getFolderId(), fileEntry.getName());
+			InputStream is = DLFileEntryServiceUtil.getFileAsStream(
+				fileEntry.getGroupId(), fileEntry.getFolderId(),
+				fileEntry.getName());
 
 			FileUtil.write(file, is);
 
@@ -530,7 +528,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			long companyId = webDavRequest.getCompanyId();
 			long groupId = WebDAVUtil.getGroupId(companyId, destinationArray);
-			long userId = webDavRequest.getUserId();
 			long parentFolderId = getParentFolderId(
 				companyId, destinationArray);
 			String name = fileEntry.getName();
@@ -569,8 +566,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 							groupId, parentFolderId, title);
 
 					InputStream is =
-						DLFileEntryLocalServiceUtil.getFileAsStream(
-							fileEntry.getCompanyId(), userId,
+						DLFileEntryServiceUtil.getFileAsStream(
 							fileEntry.getGroupId(), fileEntry.getFolderId(),
 							fileEntry.getName());
 
@@ -974,12 +970,12 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			isAddCommunityPermissions(fileEntry.getGroupId()));
 		serviceContext.setAddGuestPermissions(true);
 
-		DLFileEntryLocalServiceUtil.updateFileEntry(
-			latestFileVersion.getUserId(), latestFileVersion.getGroupId(),
-			latestFileVersion.getFolderId(), latestFileVersion.getName(),
-			fileEntry.getTitle(), fileEntry.getTitle(),
-			fileEntry.getDescription(), latestFileVersion.getDescription(),
-			true, fileEntry.getExtraSettings(), null, 0, serviceContext);
+		DLFileEntryServiceUtil.updateFileEntry(
+			latestFileVersion.getGroupId(), latestFileVersion.getFolderId(),
+			latestFileVersion.getName(), fileEntry.getTitle(),
+			fileEntry.getTitle(), fileEntry.getDescription(),
+			latestFileVersion.getDescription(), true,
+			fileEntry.getExtraSettings(), null, 0, serviceContext);
 	}
 
 	protected Resource toResource(

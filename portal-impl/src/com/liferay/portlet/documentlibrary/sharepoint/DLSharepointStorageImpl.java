@@ -28,7 +28,6 @@ import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 
@@ -98,8 +97,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 		DLFileEntry fileEntry = getFileEntry(sharepointRequest);
 
-		return DLFileEntryLocalServiceUtil.getFileAsStream(
-			sharepointRequest.getCompanyId(), sharepointRequest.getUserId(),
+		return DLFileEntryServiceUtil.getFileAsStream(
 			fileEntry.getGroupId(), fileEntry.getFolderId(),
 			fileEntry.getName());
 	}
@@ -252,8 +250,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			String changeLog = StringPool.BLANK;
 			String extraSettings = fileEntry.getExtraSettings();
 
-			InputStream is = DLFileEntryLocalServiceUtil.getFileAsStream(
-				sharepointRequest.getCompanyId(), sharepointRequest.getUserId(),
+			InputStream is = DLFileEntryServiceUtil.getFileAsStream(
 				fileEntry.getGroupId(), fileEntry.getFolderId(),
 				fileEntry.getName());
 

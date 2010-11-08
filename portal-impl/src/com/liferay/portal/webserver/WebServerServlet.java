@@ -332,9 +332,8 @@ public class WebServerServlet extends HttpServlet {
 			fileName += StringPool.PERIOD + dlFileVersion.getExtension();
 		}
 
-		InputStream inputStream = DLFileEntryLocalServiceUtil.getFileAsStream(
-			user.getCompanyId(), user.getUserId(), groupId, dlFolderId, name,
-			version);
+		InputStream inputStream = DLFileEntryServiceUtil.getFileAsStream(
+			groupId, dlFolderId, name, version);
 
 		boolean converted = false;
 
@@ -390,9 +389,8 @@ public class WebServerServlet extends HttpServlet {
 		String contentType = MimeTypesUtil.getContentType(
 			dlFileEntry.getTitle());
 
-		InputStream inputStream = DLFileEntryLocalServiceUtil.getFileAsStream(
-			user.getCompanyId(), user.getUserId(), groupId, folderId,
-			dlFileEntry.getName());
+		InputStream inputStream = DLFileEntryServiceUtil.getFileAsStream(
+			groupId, folderId, dlFileEntry.getName());
 
 		response.setContentType(contentType);
 

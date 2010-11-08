@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Lock;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsValues;
@@ -190,6 +191,32 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			getPermissionChecker(), groupId, folderId, ActionKeys.VIEW);
 
 		return dlFileEntryPersistence.filterCountByG_F(groupId, folderId);
+	}
+
+	public InputStream getFileAsStream(long groupId, long folderId, String name)
+		throws PortalException, SystemException {
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), groupId, folderId, name, ActionKeys.VIEW);
+
+		User user = getUser();
+
+		return dlFileEntryLocalService.getFileAsStream(
+			user.getCompanyId(), user.getUserId(), groupId, folderId, name);
+	}
+
+	public InputStream getFileAsStream(
+			long groupId, long folderId, String name, String version)
+		throws PortalException, SystemException {
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), groupId, folderId, name, ActionKeys.VIEW);
+
+		User user = getUser();
+
+		return dlFileEntryLocalService.getFileAsStream(
+			user.getCompanyId(), user.getUserId(), groupId, folderId, name,
+			version);
 	}
 
 	public DLFileEntry getFileEntry(long groupId, long folderId, String name)

@@ -114,6 +114,21 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService {
 		return _dlFileEntryService.getFileEntriesCount(groupId, folderId);
 	}
 
+	public java.io.InputStream getFileAsStream(long groupId, long folderId,
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntryService.getFileAsStream(groupId, folderId, name);
+	}
+
+	public java.io.InputStream getFileAsStream(long groupId, long folderId,
+		java.lang.String name, java.lang.String version)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntryService.getFileAsStream(groupId, folderId, name,
+			version);
+	}
+
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
 		long groupId, long folderId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,

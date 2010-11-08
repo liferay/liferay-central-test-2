@@ -28,7 +28,6 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
@@ -147,9 +146,6 @@ public class GetFileAction extends PortletAction {
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		long companyId = themeDisplay.getCompanyId();
-		long userId = themeDisplay.getUserId();
-
 		if (name.startsWith("DLFE-")) {
 			name = name.substring("DLFE-".length());
 		}
@@ -191,7 +187,7 @@ public class GetFileAction extends PortletAction {
 			folderId = fileShortcut.getToFolderId();
 			name = fileShortcut.getToName();
 
-			fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+			fileEntry = DLFileEntryServiceUtil.getFileEntry(
 				groupId, folderId, name);
 		}
 
@@ -204,8 +200,8 @@ public class GetFileAction extends PortletAction {
 			}
 		}
 
-		InputStream is = DLFileEntryLocalServiceUtil.getFileAsStream(
-			companyId, userId, groupId, folderId, name, version);
+		InputStream is = DLFileEntryServiceUtil.getFileAsStream(
+			groupId, folderId, name, version);
 
 		boolean converted = false;
 

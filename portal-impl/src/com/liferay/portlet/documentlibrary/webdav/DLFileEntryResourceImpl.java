@@ -23,7 +23,6 @@ import com.liferay.portal.model.Lock;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
 
@@ -98,8 +97,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 				version = fileVersion.getVersion();
 			}
 
-			return DLFileEntryLocalServiceUtil.getFileAsStream(
-				_webDavRequest.getCompanyId(), _webDavRequest.getUserId(),
+			return DLFileEntryServiceUtil.getFileAsStream(
 				_fileEntry.getGroupId(), _fileEntry.getFolderId(),
 				_fileEntry.getName(), version);
 		}

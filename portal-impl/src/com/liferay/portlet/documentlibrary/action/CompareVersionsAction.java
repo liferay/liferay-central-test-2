@@ -25,15 +25,13 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 
 import java.io.InputStream;
@@ -84,18 +82,11 @@ public class CompareVersionsAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long companyId = themeDisplay.getCompanyId();
-		long userId = themeDisplay.getUserId();
-
 		long fileEntryId = ParamUtil.getLong(renderRequest, "fileEntryId");
 
 		long groupId = themeDisplay.getScopeGroupId();
 		long folderId = ParamUtil.getLong(renderRequest, "folderId");
 		String name = ParamUtil.getString(renderRequest, "name");
-
-		DLFileEntryPermission.check(
-			themeDisplay.getPermissionChecker(), groupId, folderId, name,
-			ActionKeys.VIEW);
 
 		String extension = FileUtil.getExtension(name);
 
@@ -107,10 +98,10 @@ public class CompareVersionsAction extends PortletAction {
 		String targetVersion = ParamUtil.getString(
 			renderRequest, "targetVersion");
 
-		InputStream sourceIs = DLFileEntryLocalServiceUtil.getFileAsStream(
-			companyId, userId, groupId, folderId, name, sourceVersion);
-		InputStream targetIs = DLFileEntryLocalServiceUtil.getFileAsStream(
-			companyId, userId, groupId, folderId, name, targetVersion);
+		InputStream sourceIs = DLFileEntryServiceUtil.getFileAsStream(
+			groupId, folderId, name, sourceVersion);
+		InputStream targetIs = DLFileEntryServiceUtil.getFileAsStream(
+			groupId, folderId, name, targetVersion);
 
 		if (extension.equals("htm") || extension.equals("html") ||
 			extension.equals("xml")) {

@@ -125,6 +125,20 @@ public class DLFileEntryServiceUtil {
 		return getService().getFileEntriesCount(groupId, folderId);
 	}
 
+	public static java.io.InputStream getFileAsStream(long groupId,
+		long folderId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFileAsStream(groupId, folderId, name);
+	}
+
+	public static java.io.InputStream getFileAsStream(long groupId,
+		long folderId, java.lang.String name, java.lang.String version)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFileAsStream(groupId, folderId, name, version);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
 		long groupId, long folderId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,
