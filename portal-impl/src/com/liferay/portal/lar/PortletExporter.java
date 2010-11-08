@@ -779,10 +779,8 @@ public class PortletExporter {
 				PortletItem portletItem =
 					PortletItemLocalServiceUtil.getPortletItem(ownerId);
 
-				User user = UserLocalServiceUtil.getUserById(
-					portletItem.getUserId());
-
-				root.addAttribute("archive-user-uuid", user.getUuid());
+				root.addAttribute(
+					"archive-user-uuid", portletItem.getUserUuid());
 				root.addAttribute("archive-name", portletItem.getName());
 			}
 
