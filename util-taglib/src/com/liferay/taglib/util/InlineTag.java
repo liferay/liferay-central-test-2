@@ -14,10 +14,13 @@
 
 package com.liferay.taglib.util;
 
+import com.liferay.portal.kernel.util.ServerDetector;
+
 import java.io.IOException;
 
 import java.util.Map;
 
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 
 /**
@@ -25,14 +28,62 @@ import javax.servlet.jsp.JspWriter;
  */
 public class InlineTag extends IncludeTag {
 
+	public int doEndTag() throws JspException {
+		try {
+			callSetAttributes();
+
+			return processEndTag();
+		}
+		catch (JspException jspe) {
+			throw jspe;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
+		finally {
+			Map<String, Object> dynamicAttributes = getDynamicAttributes();
+
+			dynamicAttributes.clear();
+
+			clearParams();
+			clearProperties();
+
+			cleanUpSetAttributes();
+
+			if (!ServerDetector.isResin()) {
+				setPage(null);
+
+				cleanUp();
+			}
+		}
+	}
+
+	public int doStartTag() throws JspException {
+		try {
+			callSetAttributes();
+
+			return processStartTag();
+		}
+		catch (JspException jspe) {
+			throw jspe;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
+	}
+
+	protected int processEndTag() throws Exception {
+		return EVAL_PAGE;
+	}
+
+	protected int processStartTag() throws Exception {
+		return EVAL_BODY_BUFFERED;
+	}
+
 	protected void writeDynamicAttributes(JspWriter jspWriter)
 		throws IOException {
 
 		Map<String, Object> dynamicAttributes = getDynamicAttributes();
-
-		if ((dynamicAttributes == null) || dynamicAttributes.isEmpty()) {
-			return;
-		}
 
 		for (Map.Entry<String, Object> entry : dynamicAttributes.entrySet()) {
 			String key = entry.getKey();

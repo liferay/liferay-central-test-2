@@ -46,13 +46,19 @@ public class IncludeTag
 
 	public int doEndTag() throws JspException {
 		try {
-			return processEndTag();
-		}
-		catch (JspException jspe) {
-			throw jspe;
-		}
-		catch (Exception e) {
-			throw new JspException(e);
+			String page = getPage();
+
+			if (Validator.isNull(page)) {
+				page = getEndPage();
+			}
+
+			callSetAttributes();
+
+			if (Validator.isNotNull(page)) {
+				_doInclude(page);
+			}
+
+			return EVAL_PAGE;
 		}
 		finally {
 			_dynamicAttributes.clear();
@@ -60,10 +66,10 @@ public class IncludeTag
 			clearParams();
 			clearProperties();
 
-			_cleanUpSetAttributes();
+			cleanUpSetAttributes();
 
 			if (!ServerDetector.isResin()) {
-				_page = null;
+				setPage(null);
 
 				cleanUp();
 			}
@@ -71,15 +77,17 @@ public class IncludeTag
 	}
 
 	public int doStartTag() throws JspException {
-		try {
-			return processStartTag();
+		String page = getStartPage();
+
+		if (Validator.isNull(page)) {
+			return EVAL_BODY_BUFFERED;
 		}
-		catch (JspException jspe) {
-			throw jspe;
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
+
+		callSetAttributes();
+
+		_doInclude(page);
+
+		return EVAL_BODY_INCLUDE;
 	}
 
 	public void setDynamicAttribute(
@@ -109,7 +117,38 @@ public class IncludeTag
 		doEndTag();
 	}
 
+	protected void callSetAttributes() {
+		if (_calledSetAttributes) {
+			return;
+		}
+
+		_calledSetAttributes = true;
+
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
+
+		if (isCleanUpSetAttributes()) {
+			_trackedRequest = new TrackedServletRequest(request);
+
+			request = _trackedRequest;
+		}
+
+		setAttributes(request);
+	}
+
 	protected void cleanUp() {
+	}
+
+	protected void cleanUpSetAttributes() {
+		_calledSetAttributes = false;
+
+		if (isCleanUpSetAttributes()) {
+			for (String name : _trackedRequest.getSetAttributes()) {
+				_trackedRequest.removeAttribute(name);
+			}
+
+			_trackedRequest = null;
+		}
 	}
 
 	protected Map<String, Object> getDynamicAttributes() {
@@ -176,68 +215,7 @@ public class IncludeTag
 		return _TRIM_NEW_LINES;
 	}
 
-	protected int processEndTag() throws Exception {
-		String page = getPage();
-
-		if (Validator.isNull(page)) {
-			page = getEndPage();
-		}
-
-		_callSetAttributes();
-
-		if (Validator.isNotNull(page)) {
-			_doInclude(page);
-		}
-
-		return EVAL_PAGE;
-	}
-
-	protected int processStartTag() throws Exception {
-		String page = getStartPage();
-
-		if (Validator.isNull(page)) {
-			return EVAL_BODY_BUFFERED;
-		}
-
-		_callSetAttributes();
-
-		_doInclude(page);
-
-		return EVAL_BODY_INCLUDE;
-	}
-
 	protected void setAttributes(HttpServletRequest request) {
-	}
-
-	private void _callSetAttributes() {
-		if (_calledSetAttributes) {
-			return;
-		}
-
-		_calledSetAttributes = true;
-
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		if (isCleanUpSetAttributes()) {
-			_trackedRequest = new TrackedServletRequest(request);
-
-			request = _trackedRequest;
-		}
-
-		setAttributes(request);
-	}
-
-	private void _cleanUpSetAttributes() {
-		_calledSetAttributes = false;
-
-		if (isCleanUpSetAttributes()) {
-			for (String name : _trackedRequest.getSetAttributes()) {
-				_trackedRequest.removeAttribute(name);
-			}
-
-			_trackedRequest = null;
-		}
 	}
 
 	private void _doInclude(String page) throws JspException {
