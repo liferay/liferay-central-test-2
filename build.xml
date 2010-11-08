@@ -331,6 +331,12 @@ JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -Djb
 
 				<move
 					failonerror="false"
+					file="${app.server.dir}/common/lib/hibernate-validator.jar"
+					tofile="${app.server.dir}/common/lib/hibernate-validator.jar.bak"
+				/>
+
+				<move
+					failonerror="false"
 					file="${app.server.dir}/common/lib/slf4j-jboss-logging.jar"
 					tofile="${app.server.dir}/common/lib/slf4j-jboss-logging.jar.bak"
 				/>

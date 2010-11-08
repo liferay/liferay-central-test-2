@@ -19,7 +19,7 @@
 		<copy todir="${tstamp.value}">
 			<fileset
 				dir="lib/development"
-				includes="hsql.jar,jtds.jar,mysql.jar,postgresql.jar"
+				includes="hsql.jar,jtds.jar,mysql.jar,persistence.jar,postgresql.jar"
 			/>
 		</copy>
 
