@@ -349,6 +349,7 @@ public class OrganizationLocalServiceImpl
 
 		if (parentOrganizationId ==
 				OrganizationConstants.ANY_PARENT_ORGANIZATION_ID) {
+
 			return organizationPersistence.findByCompanyId(companyId);
 		}
 		else {
@@ -385,6 +386,7 @@ public class OrganizationLocalServiceImpl
 
 		if (parentOrganizationId ==
 				OrganizationConstants.ANY_PARENT_ORGANIZATION_ID) {
+
 			return organizationPersistence.countByCompanyId(companyId);
 		}
 		else {
