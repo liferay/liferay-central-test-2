@@ -21,7 +21,7 @@ tck.url=true</echo>
 
 		<delete dir="tools/tck" />
 
-		<unzip src="tools/portlet-tck070508.zip" dest="tools/tck" />
+		<unzip src="${portlet.tck.zip}" dest="tools/tck" />
 
 		<replace file="tools/tck/bin/ts.jte">
 			<replacefilter token="http://localhost:8080/pluto/tck" value="http://localhost:8080/c/portal/tck" />
