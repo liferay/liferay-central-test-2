@@ -23,8 +23,8 @@ import com.liferay.portal.model.Lock;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 
 import java.io.InputStream;
 
@@ -55,7 +55,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 
 	public Lock getLock() {
 		try {
-			return DLFileEntryServiceUtil.getFileEntryLock(
+			return DLAppServiceUtil.getFileEntryLock(
 				_fileEntry.getGroupId(), _fileEntry.getFolderId(),
 				_fileEntry.getName());
 		}
@@ -67,7 +67,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 
 	public boolean isLocked() {
 		try {
-			return DLFileEntryServiceUtil.hasFileEntryLock(
+			return DLAppServiceUtil.hasFileEntryLock(
 				_fileEntry.getGroupId(), _fileEntry.getFolderId(),
 				_fileEntry.getName());
 		}
@@ -90,14 +90,14 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 				// Get last version regardless of status
 
 				DLFileVersion fileVersion =
-					DLFileVersionLocalServiceUtil.getLatestFileVersion(
+					DLAppLocalServiceUtil.getLatestFileVersion(
 						_fileEntry.getGroupId(), _fileEntry.getFolderId(),
 						_fileEntry.getName());
 
 				version = fileVersion.getVersion();
 			}
 
-			return DLFileEntryServiceUtil.getFileAsStream(
+			return DLAppServiceUtil.getFileAsStream(
 				_fileEntry.getGroupId(), _fileEntry.getFolderId(),
 				_fileEntry.getName(), version);
 		}

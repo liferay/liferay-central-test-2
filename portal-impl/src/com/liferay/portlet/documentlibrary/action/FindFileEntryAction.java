@@ -24,7 +24,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
@@ -65,7 +65,7 @@ public class FindFileEntryAction extends Action {
 			portletURL.setParameter(
 				"struts_action", "/document_library/view_file_entry");
 
-			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+			DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(
 				fileEntryId);
 
 			portletURL.setParameter(
@@ -101,7 +101,7 @@ public class FindFileEntryAction extends Action {
 			}
 		}
 
-		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+		DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(
 			fileEntryId);
 
 		plid = PortalUtil.getPlidFromPortletId(

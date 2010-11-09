@@ -581,6 +581,51 @@ Liferay.Service.registerClass(
 Liferay.Service.register("Liferay.Service.DL", "com.liferay.portlet.documentlibrary.service");
 
 Liferay.Service.registerClass(
+	Liferay.Service.DL, "DLApp",
+	{
+		addFileShortcut: true,
+		addFolder: true,
+		copyFolder: true,
+		deleteFileEntry: true,
+		deleteFileEntryByTitle: true,
+		deleteFileShortcut: true,
+		deleteFolder: true,
+		getFileEntries: true,
+		getFileEntriesAndFileShortcutsCount: true,
+		getFileEntriesCount: true,
+		getFileEntry: true,
+		getFileEntryByTitle: true,
+		getFileEntryByUuidAndGroupId: true,
+		getFileEntryLock: true,
+		getFileShortcut: true,
+		getFolder: true,
+		getFolderId: true,
+		getFolderIds: true,
+		getFolders: true,
+		getFoldersAndFileEntriesAndFileShortcutsCount: true,
+		getFoldersCount: true,
+		getFoldersFileEntriesCount: true,
+		getGroupFileEntries: true,
+		getGroupFileEntriesCount: true,
+		getSubfolderIds: true,
+		hasFileEntryLock: true,
+		hasInheritableLock: true,
+		lockFileEntry: true,
+		lockFolder: true,
+		moveFileEntry: true,
+		refreshFileEntryLock: true,
+		refreshFolderLock: true,
+		unlockFileEntry: true,
+		unlockFolder: true,
+		updateFileShortcut: true,
+		updateFileVersionDescription: true,
+		updateFolder: true,
+		verifyFileEntryLock: true,
+		verifyInheritableLock: true
+	}
+);
+
+Liferay.Service.registerClass(
 	Liferay.Service.DL, "DLFileEntry",
 	{
 		deleteFileEntry: true,

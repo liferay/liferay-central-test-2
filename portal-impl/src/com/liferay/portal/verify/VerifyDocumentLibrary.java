@@ -17,7 +17,7 @@ package com.liferay.portal.verify;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 
 	protected void doVerify() throws Exception {
 		List<DLFileEntry> fileEntries =
-			DLFileEntryLocalServiceUtil.getNoAssetFileEntries();
+			DLAppLocalServiceUtil.getNoAssetFileEntries();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -38,7 +38,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 
 		for (DLFileEntry fileEntry : fileEntries) {
 			try {
-				DLFileEntryLocalServiceUtil.updateAsset(
+				DLAppLocalServiceUtil.updateAsset(
 					fileEntry.getUserId(), fileEntry, null, null, null);
 			}
 			catch (Exception e) {

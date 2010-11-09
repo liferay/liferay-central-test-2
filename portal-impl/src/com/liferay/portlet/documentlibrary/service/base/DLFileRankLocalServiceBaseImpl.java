@@ -23,20 +23,18 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.service.LayoutLocalService;
-import com.liferay.portal.service.LayoutService;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
-import com.liferay.portal.service.persistence.LayoutFinder;
-import com.liferay.portal.service.persistence.LayoutPersistence;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalService;
+import com.liferay.portlet.documentlibrary.service.DLAppService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
@@ -258,6 +256,42 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		dlFileRank.setNew(false);
 
 		return dlFileRankPersistence.update(dlFileRank, merge);
+	}
+
+	/**
+	 * Gets the d l app local service.
+	 *
+	 * @return the d l app local service
+	 */
+	public DLAppLocalService getDLAppLocalService() {
+		return dlAppLocalService;
+	}
+
+	/**
+	 * Sets the d l app local service.
+	 *
+	 * @param dlAppLocalService the d l app local service
+	 */
+	public void setDLAppLocalService(DLAppLocalService dlAppLocalService) {
+		this.dlAppLocalService = dlAppLocalService;
+	}
+
+	/**
+	 * Gets the d l app remote service.
+	 *
+	 * @return the d l app remote service
+	 */
+	public DLAppService getDLAppService() {
+		return dlAppService;
+	}
+
+	/**
+	 * Sets the d l app remote service.
+	 *
+	 * @param dlAppService the d l app remote service
+	 */
+	public void setDLAppService(DLAppService dlAppService) {
+		this.dlAppService = dlAppService;
 	}
 
 	/**
@@ -578,78 +612,6 @@ public abstract class DLFileRankLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the layout local service.
-	 *
-	 * @return the layout local service
-	 */
-	public LayoutLocalService getLayoutLocalService() {
-		return layoutLocalService;
-	}
-
-	/**
-	 * Sets the layout local service.
-	 *
-	 * @param layoutLocalService the layout local service
-	 */
-	public void setLayoutLocalService(LayoutLocalService layoutLocalService) {
-		this.layoutLocalService = layoutLocalService;
-	}
-
-	/**
-	 * Gets the layout remote service.
-	 *
-	 * @return the layout remote service
-	 */
-	public LayoutService getLayoutService() {
-		return layoutService;
-	}
-
-	/**
-	 * Sets the layout remote service.
-	 *
-	 * @param layoutService the layout remote service
-	 */
-	public void setLayoutService(LayoutService layoutService) {
-		this.layoutService = layoutService;
-	}
-
-	/**
-	 * Gets the layout persistence.
-	 *
-	 * @return the layout persistence
-	 */
-	public LayoutPersistence getLayoutPersistence() {
-		return layoutPersistence;
-	}
-
-	/**
-	 * Sets the layout persistence.
-	 *
-	 * @param layoutPersistence the layout persistence
-	 */
-	public void setLayoutPersistence(LayoutPersistence layoutPersistence) {
-		this.layoutPersistence = layoutPersistence;
-	}
-
-	/**
-	 * Gets the layout finder.
-	 *
-	 * @return the layout finder
-	 */
-	public LayoutFinder getLayoutFinder() {
-		return layoutFinder;
-	}
-
-	/**
-	 * Sets the layout finder.
-	 *
-	 * @param layoutFinder the layout finder
-	 */
-	public void setLayoutFinder(LayoutFinder layoutFinder) {
-		this.layoutFinder = layoutFinder;
-	}
-
-	/**
 	 * Gets the resource local service.
 	 *
 	 * @return the resource local service
@@ -813,6 +775,10 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		}
 	}
 
+	@BeanReference(type = DLAppLocalService.class)
+	protected DLAppLocalService dlAppLocalService;
+	@BeanReference(type = DLAppService.class)
+	protected DLAppService dlAppService;
 	@BeanReference(type = DLFileEntryLocalService.class)
 	protected DLFileEntryLocalService dlFileEntryLocalService;
 	@BeanReference(type = DLFileEntryService.class)
@@ -847,14 +813,6 @@ public abstract class DLFileRankLocalServiceBaseImpl
 	protected DLFolderFinder dlFolderFinder;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
-	@BeanReference(type = LayoutLocalService.class)
-	protected LayoutLocalService layoutLocalService;
-	@BeanReference(type = LayoutService.class)
-	protected LayoutService layoutService;
-	@BeanReference(type = LayoutPersistence.class)
-	protected LayoutPersistence layoutPersistence;
-	@BeanReference(type = LayoutFinder.class)
-	protected LayoutFinder layoutFinder;
 	@BeanReference(type = ResourceLocalService.class)
 	protected ResourceLocalService resourceLocalService;
 	@BeanReference(type = ResourceService.class)

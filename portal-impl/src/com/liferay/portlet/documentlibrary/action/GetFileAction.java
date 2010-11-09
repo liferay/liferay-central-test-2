@@ -28,9 +28,8 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -156,7 +155,7 @@ public class GetFileAction extends PortletAction {
 
 		if (Validator.isNotNull(uuid) && (groupId > 0)) {
 			try {
-				fileEntry = DLFileEntryServiceUtil.getFileEntryByUuidAndGroupId(
+				fileEntry = DLAppServiceUtil.getFileEntryByUuidAndGroupId(
 					uuid, groupId);
 
 				folderId = fileEntry.getFolderId();
@@ -168,26 +167,26 @@ public class GetFileAction extends PortletAction {
 
 		if (fileShortcutId <= 0) {
 			if (Validator.isNotNull(name)) {
-				fileEntry = DLFileEntryServiceUtil.getFileEntry(
+				fileEntry = DLAppServiceUtil.getFileEntry(
 					groupId, folderId, name);
 
 				title = fileEntry.getTitle();
 			}
 			else if (Validator.isNotNull(title)) {
-				fileEntry = DLFileEntryServiceUtil.getFileEntryByTitle(
+				fileEntry = DLAppServiceUtil.getFileEntryByTitle(
 					groupId, folderId, title);
 
 				name = fileEntry.getName();
 			}
 		}
 		else {
-			DLFileShortcut fileShortcut =
-				DLFileShortcutServiceUtil.getFileShortcut(fileShortcutId);
+			DLFileShortcut fileShortcut = DLAppServiceUtil.getFileShortcut(
+				fileShortcutId);
 
 			folderId = fileShortcut.getToFolderId();
 			name = fileShortcut.getToName();
 
-			fileEntry = DLFileEntryServiceUtil.getFileEntry(
+			fileEntry = DLAppServiceUtil.getFileEntry(
 				groupId, folderId, name);
 		}
 
@@ -200,7 +199,7 @@ public class GetFileAction extends PortletAction {
 			}
 		}
 
-		InputStream is = DLFileEntryServiceUtil.getFileAsStream(
+		InputStream is = DLAppServiceUtil.getFileAsStream(
 			groupId, folderId, name, version);
 
 		boolean converted = false;
@@ -235,7 +234,7 @@ public class GetFileAction extends PortletAction {
 			}
 			else {
 				DLFileVersion fileVersion =
-					DLFileVersionLocalServiceUtil.getFileVersion(
+					DLAppLocalServiceUtil.getFileVersion(
 						groupId, folderId, name, version);
 
 				contentLength = (int)fileVersion.getSize();

@@ -219,6 +219,8 @@
 	<bean id="com.liferay.portlet.calendar.service.CalEventService" class="com.liferay.portlet.calendar.service.impl.CalEventServiceImpl" />
 	<bean id="com.liferay.portlet.calendar.service.persistence.CalEventPersistence" class="com.liferay.portlet.calendar.service.persistence.CalEventPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.calendar.service.persistence.CalEventFinder" class="com.liferay.portlet.calendar.service.persistence.CalEventFinderImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.documentlibrary.service.DLAppLocalService" class="com.liferay.portlet.documentlibrary.service.impl.DLAppLocalServiceImpl" />
+	<bean id="com.liferay.portlet.documentlibrary.service.DLAppService" class="com.liferay.portlet.documentlibrary.service.impl.DLAppServiceImpl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService" class="com.liferay.portlet.documentlibrary.service.impl.DLFileEntryLocalServiceImpl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryService" class="com.liferay.portlet.documentlibrary.service.impl.DLFileEntryServiceImpl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistenceImpl" parent="basePersistence" />

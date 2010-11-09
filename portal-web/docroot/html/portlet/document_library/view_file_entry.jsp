@@ -76,7 +76,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 	StringBuilder sb = new StringBuilder();
 
 	if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-		DLFolder curFolder = DLFolderLocalServiceUtil.getFolder(folderId);
+		DLFolder curFolder = DLAppLocalServiceUtil.getFolder(folderId);
 
 		while (true) {
 			sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
@@ -86,7 +86,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 				break;
 			}
 			else {
-				curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+				curFolder = DLAppLocalServiceUtil.getFolder(curFolder.getParentFolderId());
 			}
 		}
 	}
@@ -361,7 +361,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 				status = WorkflowConstants.STATUS_ANY;
 			}
 
-			List results = DLFileVersionLocalServiceUtil.getFileVersions(scopeGroupId, folderId, name, status);
+			List results = DLAppLocalServiceUtil.getFileVersions(scopeGroupId, folderId, name, status);
 			List resultRows = searchContainer.getResultRows();
 
 			for (int i = 0; i < results.size(); i++) {

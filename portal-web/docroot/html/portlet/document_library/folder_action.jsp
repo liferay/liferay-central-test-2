@@ -177,7 +177,7 @@ if (row == null) {
 						break;
 					}
 					else {
-						curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+						curFolder = DLAppLocalServiceUtil.getFolder(curFolder.getParentFolderId());
 					}
 				}
 			}

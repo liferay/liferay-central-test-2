@@ -240,53 +240,6 @@ public class DLFileEntryLocalServiceImpl
 		return fileEntry;
 	}
 
-	public void addFileEntryResources(
-			DLFileEntry fileEntry, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		resourceLocalService.addResources(
-			fileEntry.getCompanyId(), fileEntry.getGroupId(),
-			fileEntry.getUserId(), DLFileEntry.class.getName(),
-			fileEntry.getFileEntryId(), false, addCommunityPermissions,
-			addGuestPermissions);
-	}
-
-	public void addFileEntryResources(
-			DLFileEntry fileEntry, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		resourceLocalService.addModelResources(
-			fileEntry.getCompanyId(), fileEntry.getGroupId(),
-			fileEntry.getUserId(), DLFileEntry.class.getName(),
-			fileEntry.getFileEntryId(), communityPermissions, guestPermissions);
-	}
-
-	public void addFileEntryResources(
-			long fileEntryId, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		DLFileEntry fileEntry = dlFileEntryPersistence.findByPrimaryKey(
-			fileEntryId);
-
-		addFileEntryResources(
-			fileEntry, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addFileEntryResources(
-			long fileEntryId, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		DLFileEntry fileEntry = dlFileEntryPersistence.findByPrimaryKey(
-			fileEntryId);
-
-		addFileEntryResources(
-			fileEntry, communityPermissions, guestPermissions);
-	}
-
 	public DLFileEntry addOrOverwriteFileEntry(
 			long userId, long groupId, long folderId, String name,
 			String sourceName, String title, String description,
@@ -1262,6 +1215,53 @@ public class DLFileEntryLocalServiceImpl
 		}
 
 		return fileEntry;
+	}
+
+	protected void addFileEntryResources(
+			DLFileEntry fileEntry, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		resourceLocalService.addResources(
+			fileEntry.getCompanyId(), fileEntry.getGroupId(),
+			fileEntry.getUserId(), DLFileEntry.class.getName(),
+			fileEntry.getFileEntryId(), false, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	protected void addFileEntryResources(
+			DLFileEntry fileEntry, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		resourceLocalService.addModelResources(
+			fileEntry.getCompanyId(), fileEntry.getGroupId(),
+			fileEntry.getUserId(), DLFileEntry.class.getName(),
+			fileEntry.getFileEntryId(), communityPermissions, guestPermissions);
+	}
+
+	protected void addFileEntryResources(
+			long fileEntryId, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		DLFileEntry fileEntry = dlFileEntryPersistence.findByPrimaryKey(
+			fileEntryId);
+
+		addFileEntryResources(
+			fileEntry, addCommunityPermissions, addGuestPermissions);
+	}
+
+	protected void addFileEntryResources(
+			long fileEntryId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		DLFileEntry fileEntry = dlFileEntryPersistence.findByPrimaryKey(
+			fileEntryId);
+
+		addFileEntryResources(
+			fileEntry, communityPermissions, guestPermissions);
 	}
 
 	protected DLFileVersion addFileVersion(

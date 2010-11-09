@@ -48,7 +48,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil;
 import com.liferay.portlet.imagegallery.lar.IGPortletDataHandlerImpl;
 import com.liferay.portlet.imagegallery.model.IGImage;
@@ -439,7 +439,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 						groupId = portletDataContext.getScopeGroupId();
 					}
 
-					fileEntry = DLFileEntryLocalServiceUtil.
+					fileEntry = DLAppLocalServiceUtil.
 						getFileEntryByUuidAndGroupId(uuid, groupId);
 				}
 				else {
@@ -458,7 +458,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 						}
 
 						fileEntry =
-							DLFileEntryLocalServiceUtil.getFileEntryByTitle(
+							DLAppLocalServiceUtil.getFileEntryByTitle(
 								groupId, folderId, name);
 					}
 				}

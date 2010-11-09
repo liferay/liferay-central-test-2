@@ -42,8 +42,8 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 
 import java.io.File;
 
@@ -188,7 +188,7 @@ public class EditFileEntryAction extends PortletAction {
 		String name = ParamUtil.getString(actionRequest, "name");
 		String version = ParamUtil.getString(actionRequest, "version");
 
-		DLFileEntryServiceUtil.deleteFileEntry(
+		DLAppServiceUtil.deleteFileEntry(
 			groupId, folderId, name, version);
 	}
 
@@ -200,7 +200,7 @@ public class EditFileEntryAction extends PortletAction {
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 		String name = ParamUtil.getString(actionRequest, "name");
 
-		DLFileEntryServiceUtil.lockFileEntry(groupId, folderId, name);
+		DLAppServiceUtil.lockFileEntry(groupId, folderId, name);
 	}
 
 	protected void moveFileEntry(ActionRequest actionRequest) throws Exception {
@@ -215,7 +215,7 @@ public class EditFileEntryAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLFileEntry.class.getName(), actionRequest);
 
-		DLFileEntryServiceUtil.moveFileEntry(
+		DLAppServiceUtil.moveFileEntry(
 			groupId, folderId, newFolderId, name, serviceContext);
 	}
 
@@ -230,14 +230,14 @@ public class EditFileEntryAction extends PortletAction {
 		String name = ParamUtil.getString(actionRequest, "name");
 
 		DLFileVersion fileVersion =
-			DLFileVersionLocalServiceUtil.getLatestFileVersion(
+			DLAppLocalServiceUtil.getLatestFileVersion(
 				groupId, folderId, name);
 
 		if (fileVersion.getStatus() != WorkflowConstants.STATUS_DRAFT) {
 			return;
 		}
 
-		DLFileEntryServiceUtil.deleteFileEntry(
+		DLAppServiceUtil.deleteFileEntry(
 			groupId, folderId, name, fileVersion.getVersion());
 	}
 
@@ -251,7 +251,7 @@ public class EditFileEntryAction extends PortletAction {
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 		String name = ParamUtil.getString(actionRequest, "name");
 
-		DLFileEntryServiceUtil.unlockFileEntry(groupId, folderId, name);
+		DLAppServiceUtil.unlockFileEntry(groupId, folderId, name);
 	}
 
 	protected void updateFileEntry(
@@ -297,7 +297,7 @@ public class EditFileEntryAction extends PortletAction {
 
 			// Add file entry
 
-			DLFileEntry fileEntry = DLFileEntryServiceUtil.addFileEntry(
+			DLFileEntry fileEntry = DLAppServiceUtil.addFileEntry(
 				groupId, folderId, sourceFileName, title, description,
 				changeLog, extraSettings, file, serviceContext);
 
@@ -309,7 +309,7 @@ public class EditFileEntryAction extends PortletAction {
 
 			// Update file entry
 
-			DLFileEntryServiceUtil.updateFileEntry(
+			DLAppServiceUtil.updateFileEntry(
 				groupId, folderId, name, sourceFileName, title, description,
 				changeLog, majorVersion, extraSettings, file,
 				serviceContext);

@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -75,7 +75,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		if (rootFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			try {
-				DLFolderLocalServiceUtil.getFolder(rootFolderId);
+				DLAppLocalServiceUtil.getFolder(rootFolderId);
 			}
 			catch (NoSuchFolderException e) {
 				SessionErrors.add(actionRequest, "rootFolderIdInvalid");

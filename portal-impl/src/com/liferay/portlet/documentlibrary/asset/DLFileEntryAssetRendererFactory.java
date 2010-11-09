@@ -29,8 +29,7 @@ import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.service.permission.DLPermission;
 
@@ -54,7 +53,7 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 		DLFileVersion fileVersion = null;
 
 		try {
-			fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(classPK);
+			fileEntry = DLAppLocalServiceUtil.getFileEntry(classPK);
 
 			if (type == TYPE_LATEST) {
 				fileVersion = fileEntry.getLatestFileVersion();
@@ -64,7 +63,7 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 			}
 		}
 		catch (NoSuchFileEntryException nsfee) {
-			fileVersion = DLFileVersionLocalServiceUtil.getFileVersion(classPK);
+			fileVersion = DLAppLocalServiceUtil.getFileVersion(classPK);
 			fileEntry = fileVersion.getFileEntry();
 		}
 

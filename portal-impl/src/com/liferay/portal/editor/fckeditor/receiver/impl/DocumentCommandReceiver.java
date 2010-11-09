@@ -27,8 +27,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 
 import java.io.File;
 
@@ -60,7 +59,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			serviceContext.setAddCommunityPermissions(true);
 			serviceContext.setAddGuestPermissions(true);
 
-			DLFolderServiceUtil.addFolder(
+			DLAppServiceUtil.addFolder(
 				group.getGroupId(), parentFolderId, name, description,
 				serviceContext);
 		}
@@ -92,7 +91,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			serviceContext.setAddCommunityPermissions(true);
 			serviceContext.setAddGuestPermissions(true);
 
-			DLFileEntryServiceUtil.addFileEntry(
+			DLAppServiceUtil.addFileEntry(
 				group.getGroupId(), folderId, name, title, description,
 				changeLog, extraSettings, file, serviceContext);
 		}
@@ -144,7 +143,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		DLFolder folder = _getFolder(
 			group.getGroupId(), arg.getCurrentFolder());
 
-		List<DLFileEntry> fileEntries = DLFileEntryServiceUtil.getFileEntries(
+		List<DLFileEntry> fileEntries = DLAppServiceUtil.getFileEntries(
 			folder.getGroupId(), folder.getFolderId());
 
 		for (DLFileEntry fileEntry : fileEntries) {
@@ -187,7 +186,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		while (st.hasMoreTokens()) {
 			String curFolderName = st.nextToken();
 
-			List<DLFolder> folders = DLFolderServiceUtil.getFolders(
+			List<DLFolder> folders = DLAppServiceUtil.getFolders(
 				groupId, folder.getFolderId());
 
 			for (DLFolder curFolder : folders) {
@@ -218,7 +217,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			DLFolder folder = _getFolder(
 				group.getGroupId(), arg.getCurrentFolder());
 
-			List<DLFolder> folders = DLFolderServiceUtil.getFolders(
+			List<DLFolder> folders = DLAppServiceUtil.getFolders(
 				group.getGroupId(), folder.getFolderId());
 
 			for (DLFolder curFolder : folders) {

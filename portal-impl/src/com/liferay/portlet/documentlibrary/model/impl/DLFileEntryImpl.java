@@ -29,8 +29,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 
 import java.io.IOException;
@@ -93,7 +92,7 @@ public class DLFileEntryImpl
 	public DLFileVersion getFileVersion()
 		throws PortalException, SystemException {
 
-		return DLFileVersionLocalServiceUtil.getFileVersion(
+		return DLAppLocalServiceUtil.getFileVersion(
 			getGroupId(), getFolderId(), getName(), getVersion());
 	}
 
@@ -102,7 +101,7 @@ public class DLFileEntryImpl
 
 		if (getFolderId() > 0) {
 			try {
-				folder = DLFolderLocalServiceUtil.getFolder(getFolderId());
+				folder = DLAppLocalServiceUtil.getFolder(getFolderId());
 			}
 			catch (Exception e) {
 				folder = new DLFolderImpl();
@@ -124,7 +123,7 @@ public class DLFileEntryImpl
 	public DLFileVersion getLatestFileVersion()
 		throws PortalException, SystemException {
 
-		return DLFileVersionLocalServiceUtil.getLatestFileVersion(
+		return DLAppLocalServiceUtil.getLatestFileVersion(
 			getGroupId(), getFolderId(), getName());
 	}
 

@@ -225,7 +225,7 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 					long folderId = GetterUtil.getLong(HttpUtil.getParameter(entryHref, "_20_folderId", false));
 					String name = GetterUtil.getString(HttpUtil.getParameter(entryHref, "_20_name", false));
 
-					DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(entryScopeGroupId, folderId, name);
+					DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(entryScopeGroupId, folderId, name);
 
 					entryTitle = fileEntry.getTitle();
 

@@ -31,10 +31,10 @@ if (row != null) {
 		AssetEntry assetEntry = (AssetEntry)result;
 
 		if (assetEntry.getClassName().equals(DLFileEntry.class.getName())) {
-			fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(assetEntry.getClassPK());
+			fileEntry = DLAppLocalServiceUtil.getFileEntry(assetEntry.getClassPK());
 		}
 		else {
-			fileShortcut = DLFileShortcutLocalServiceUtil.getFileShortcut(assetEntry.getClassPK());
+			fileShortcut = DLAppLocalServiceUtil.getFileShortcut(assetEntry.getClassPK());
 		}
 	}
 	else if (result instanceof DLFileEntry) {
@@ -147,7 +147,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 		<c:otherwise>
 
 			<%
-			fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileShortcut.getGroupId(), fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
+			fileEntry = DLAppLocalServiceUtil.getFileEntry(fileShortcut.getGroupId(), fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
 			%>
 
 			<c:if test="<%= DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.VIEW) %>">

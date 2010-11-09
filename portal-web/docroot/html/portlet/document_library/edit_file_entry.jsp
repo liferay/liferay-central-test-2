@@ -205,7 +205,7 @@ portletURL.setParameter("name", name);
 		String folderName = StringPool.BLANK;
 
 		if (folderId > 0) {
-			folder = DLFolderLocalServiceUtil.getFolder(folderId);
+			folder = DLAppLocalServiceUtil.getFolder(folderId);
 
 			folder = folder.toEscapedModel();
 

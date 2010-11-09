@@ -19,8 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 
 /**
  * @author Brian Wing Shun Chan
@@ -36,7 +35,7 @@ public class DLFileShortcutImpl
 
 		if (getFolderId() > 0) {
 			try {
-				folder = DLFolderLocalServiceUtil.getFolder(getFolderId());
+				folder = DLAppLocalServiceUtil.getFolder(getFolderId());
 			}
 			catch (Exception e) {
 				folder = new DLFolderImpl();
@@ -55,7 +54,7 @@ public class DLFileShortcutImpl
 		String toTitle = null;
 
 		try {
-			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+			DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(
 				getGroupId(), getToFolderId(), getToName());
 
 			toTitle = fileEntry.getTitle();

@@ -23,16 +23,16 @@ if (result instanceof AssetEntry) {
 	AssetEntry assetEntry = (AssetEntry)result;
 
 	if (assetEntry.getClassName().equals(DLFileEntry.class.getName())) {
-		fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(assetEntry.getClassPK());
+		fileEntry = DLAppLocalServiceUtil.getFileEntry(assetEntry.getClassPK());
 
 		fileEntry = fileEntry.toEscapedModel();
 	}
 	else {
-		fileShortcut = DLFileShortcutLocalServiceUtil.getFileShortcut(assetEntry.getClassPK());
+		fileShortcut = DLAppLocalServiceUtil.getFileShortcut(assetEntry.getClassPK());
 
 		fileShortcut = fileShortcut.toEscapedModel();
 
-		fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileShortcut.getGroupId(), fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
+		fileEntry = DLAppLocalServiceUtil.getFileEntry(fileShortcut.getGroupId(), fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
 
 		fileEntry = fileEntry.toEscapedModel();
 	}
@@ -52,7 +52,7 @@ else {
 
 	fileShortcut = fileShortcut.toEscapedModel();
 
-	fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileShortcut.getGroupId(), fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
+	fileEntry = DLAppLocalServiceUtil.getFileEntry(fileShortcut.getGroupId(), fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
 
 	fileEntry = fileEntry.toEscapedModel();
 }

@@ -54,26 +54,26 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 		serviceContext.setAddGuestPermissions(true);
 
 		try {
-			DLFolderServiceUtil.deleteFolder(
+			DLAppServiceUtil.deleteFolder(
 				groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, name);
 		}
 		catch (NoSuchFolderException nsfe) {
 		}
 
-		_folder = DLFolderServiceUtil.addFolder(
+		_folder = DLAppServiceUtil.addFolder(
 			groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			name, description, serviceContext);
 	}
 
 	public void tearDown() throws Exception {
 		if (_fileEntry != null) {
-			DLFileEntryServiceUtil.deleteFileEntry(
+			DLAppServiceUtil.deleteFileEntry(
 				_fileEntry.getGroupId(), _fileEntry.getFolderId(),
 				_fileEntry.getName());
 		}
 
 		if (_folder != null) {
-			DLFolderServiceUtil.deleteFolder(_folder.getFolderId());
+			DLAppServiceUtil.deleteFolder(_folder.getFolderId());
 		}
 
 		super.tearDown();
@@ -133,7 +133,7 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
-		_fileEntry = DLFileEntryServiceUtil.addFileEntry(
+		_fileEntry = DLAppServiceUtil.addFileEntry(
 			groupId, folderId, fileName, fileName, description, changeLog,
 			extraSettings, bytes, serviceContext);
 	}

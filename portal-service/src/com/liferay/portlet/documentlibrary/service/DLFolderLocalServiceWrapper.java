@@ -247,42 +247,6 @@ public class DLFolderLocalServiceWrapper implements DLFolderLocalService {
 			name, description, serviceContext);
 	}
 
-	public void addFolderResources(
-		com.liferay.portlet.documentlibrary.model.DLFolder folder,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlFolderLocalService.addFolderResources(folder,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addFolderResources(
-		com.liferay.portlet.documentlibrary.model.DLFolder folder,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlFolderLocalService.addFolderResources(folder, communityPermissions,
-			guestPermissions);
-	}
-
-	public void addFolderResources(long folderId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlFolderLocalService.addFolderResources(folderId,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addFolderResources(long folderId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlFolderLocalService.addFolderResources(folderId,
-			communityPermissions, guestPermissions);
-	}
-
 	public void deleteFolder(
 		com.liferay.portlet.documentlibrary.model.DLFolder folder)
 		throws com.liferay.portal.kernel.exception.PortalException,

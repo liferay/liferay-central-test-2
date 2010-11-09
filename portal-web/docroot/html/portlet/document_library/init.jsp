@@ -56,13 +56,8 @@
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFolderConstants" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl" %>
-<%@ page import="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil" %>
-<%@ page import="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil" %>
-<%@ page import="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil" %>
+<%@ page import="com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.documentlibrary.service.DLAppServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFileShortcutPermission" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission" %>
@@ -92,7 +87,7 @@ String rootFolderName = StringPool.BLANK;
 
 if (rootFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 	try {
-		rootFolder = DLFolderLocalServiceUtil.getFolder(rootFolderId);
+		rootFolder = DLAppLocalServiceUtil.getFolder(rootFolderId);
 
 		rootFolderName = rootFolder.getName();
 	}

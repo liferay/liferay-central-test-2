@@ -37,11 +37,11 @@ DLFileEntry toFileEntry = null;
 
 if (Validator.isNotNull(toName)) {
 	try {
-		toFileEntry = DLFileEntryLocalServiceUtil.getFileEntry(scopeGroupId, toFolderId, toName);
+		toFileEntry = DLAppLocalServiceUtil.getFileEntry(scopeGroupId, toFolderId, toName);
 		toGroup = GroupLocalServiceUtil.getGroup(toFileEntry.getGroupId());
 
 		if (toFolderId > 0) {
-			toFolder = DLFolderLocalServiceUtil.getFolder(toFolderId);
+			toFolder = DLAppLocalServiceUtil.getFolder(toFolderId);
 		}
 	}
 	catch (Exception e) {
@@ -49,7 +49,7 @@ if (Validator.isNotNull(toName)) {
 }
 else if (toFolderId > 0) {
 	try {
-		toFolder = DLFolderLocalServiceUtil.getFolder(toFolderId);
+		toFolder = DLAppLocalServiceUtil.getFolder(toFolderId);
 		toGroup = GroupLocalServiceUtil.getGroup(toFolder.getGroupId());
 	}
 	catch (Exception e) {
@@ -272,7 +272,7 @@ if (Validator.isNotNull(folder.getName())) {
 				status = WorkflowConstants.STATUS_ANY;
 			}
 
-			List results = DLFileVersionLocalServiceUtil.getFileVersions(scopeGroupId, toFileEntry.getFolderId(), toFileEntry.getName(), status);
+			List results = DLAppLocalServiceUtil.getFileVersions(scopeGroupId, toFileEntry.getFolderId(), toFileEntry.getName(), status);
 			List resultRows = searchContainer.getResultRows();
 
 			for (int i = 0; i < results.size(); i++) {

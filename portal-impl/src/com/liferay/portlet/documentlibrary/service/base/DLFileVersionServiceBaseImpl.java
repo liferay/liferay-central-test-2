@@ -34,6 +34,8 @@ import com.liferay.portlet.asset.service.AssetEntryLocalService;
 import com.liferay.portlet.asset.service.AssetEntryService;
 import com.liferay.portlet.asset.service.persistence.AssetEntryFinder;
 import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalService;
+import com.liferay.portlet.documentlibrary.service.DLAppService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
@@ -71,6 +73,42 @@ public abstract class DLFileVersionServiceBaseImpl extends PrincipalBean
 	 *
 	 * Never modify or reference this class directly. Always use {@link com.liferay.portlet.documentlibrary.service.DLFileVersionServiceUtil} to access the d l file version remote service.
 	 */
+
+	/**
+	 * Gets the d l app local service.
+	 *
+	 * @return the d l app local service
+	 */
+	public DLAppLocalService getDLAppLocalService() {
+		return dlAppLocalService;
+	}
+
+	/**
+	 * Sets the d l app local service.
+	 *
+	 * @param dlAppLocalService the d l app local service
+	 */
+	public void setDLAppLocalService(DLAppLocalService dlAppLocalService) {
+		this.dlAppLocalService = dlAppLocalService;
+	}
+
+	/**
+	 * Gets the d l app remote service.
+	 *
+	 * @return the d l app remote service
+	 */
+	public DLAppService getDLAppService() {
+		return dlAppService;
+	}
+
+	/**
+	 * Sets the d l app remote service.
+	 *
+	 * @param dlAppService the d l app remote service
+	 */
+	public void setDLAppService(DLAppService dlAppService) {
+		this.dlAppService = dlAppService;
+	}
 
 	/**
 	 * Gets the d l file entry local service.
@@ -627,6 +665,10 @@ public abstract class DLFileVersionServiceBaseImpl extends PrincipalBean
 		}
 	}
 
+	@BeanReference(type = DLAppLocalService.class)
+	protected DLAppLocalService dlAppLocalService;
+	@BeanReference(type = DLAppService.class)
+	protected DLAppService dlAppService;
 	@BeanReference(type = DLFileEntryLocalService.class)
 	protected DLFileEntryLocalService dlFileEntryLocalService;
 	@BeanReference(type = DLFileEntryService.class)

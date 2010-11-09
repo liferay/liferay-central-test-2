@@ -50,13 +50,8 @@ import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -107,7 +102,7 @@ public class WebServerServlet extends HttpServlet {
 
 				for (int i = 1; i < pathArray.length; i++) {
 					try {
-						DLFolder dlFolder = DLFolderLocalServiceUtil.getFolder(
+						DLFolder dlFolder = DLAppLocalServiceUtil.getFolder(
 							groupId, dlFolderId, pathArray[i]);
 
 						dlFolderId = dlFolder.getFolderId();
@@ -182,16 +177,16 @@ public class WebServerServlet extends HttpServlet {
 			long dlFileShortcutId = GetterUtil.getLong(pathArray[0]);
 
 			DLFileShortcut dlFileShortcut =
-				DLFileShortcutServiceUtil.getFileShortcut(dlFileShortcutId);
+				DLAppServiceUtil.getFileShortcut(dlFileShortcutId);
 
-			return DLFileEntryServiceUtil.getFileEntry(
+			return DLAppServiceUtil.getFileEntry(
 				dlFileShortcut.getGroupId(), dlFileShortcut.getToFolderId(),
 				dlFileShortcut.getToName());
 		}
 		else if (pathArray.length == 2) {
 			long groupId = GetterUtil.getLong(pathArray[0]);
 
-			return DLFileEntryServiceUtil.getFileEntryByUuidAndGroupId(
+			return DLAppServiceUtil.getFileEntryByUuidAndGroupId(
 				pathArray[1], groupId);
 		}
 		else {
@@ -199,7 +194,7 @@ public class WebServerServlet extends HttpServlet {
 			long dlFolderId = GetterUtil.getLong(pathArray[1]);
 			String fileName = HttpUtil.decodeURL(pathArray[2], true);
 
-			return DLFileEntryServiceUtil.getFileEntryByTitle(
+			return DLAppServiceUtil.getFileEntryByTitle(
 				groupId, dlFolderId, fileName);
 		}
 	}
@@ -216,7 +211,7 @@ public class WebServerServlet extends HttpServlet {
 			String name = pathArray[i];
 
 			try {
-				DLFolder folder = DLFolderServiceUtil.getFolder(
+				DLFolder folder = DLAppServiceUtil.getFolder(
 					groupId, dlFolderId, name);
 
 				dlFolderId = folder.getFolderId();
@@ -262,7 +257,7 @@ public class WebServerServlet extends HttpServlet {
 
 		webServerEntries.add(new WebServerEntry(path, "../"));
 
-		List<DLFolder> dlFolders = DLFolderServiceUtil.getFolders(
+		List<DLFolder> dlFolders = DLAppServiceUtil.getFolders(
 			groupId, dlFolderId);
 
 		for (DLFolder dlFolder : dlFolders) {
@@ -273,7 +268,7 @@ public class WebServerServlet extends HttpServlet {
 					dlFolder.getDescription(), 0));
 		}
 
-		List<DLFileEntry> dlFileEntries = DLFileEntryServiceUtil.getFileEntries(
+		List<DLFileEntry> dlFileEntries = DLAppServiceUtil.getFileEntries(
 			groupId, dlFolderId);
 
 		for (DLFileEntry dlFileEntry : dlFileEntries) {
@@ -317,9 +312,8 @@ public class WebServerServlet extends HttpServlet {
 			}
 		}
 
-		DLFileVersion dlFileVersion =
-			DLFileVersionLocalServiceUtil.getFileVersion(
-				groupId, dlFolderId, name, version);
+		DLFileVersion dlFileVersion = DLAppLocalServiceUtil.getFileVersion(
+			groupId, dlFolderId, name, version);
 
 		fileName = dlFileVersion.getTitle();
 
@@ -332,7 +326,7 @@ public class WebServerServlet extends HttpServlet {
 			fileName += StringPool.PERIOD + dlFileVersion.getExtension();
 		}
 
-		InputStream inputStream = DLFileEntryServiceUtil.getFileAsStream(
+		InputStream inputStream = DLAppServiceUtil.getFileAsStream(
 			groupId, dlFolderId, name, version);
 
 		boolean converted = false;
@@ -383,13 +377,13 @@ public class WebServerServlet extends HttpServlet {
 			long folderId, String title)
 		throws Exception {
 
-		DLFileEntry dlFileEntry = DLFileEntryServiceUtil.getFileEntryByTitle(
+		DLFileEntry dlFileEntry = DLAppServiceUtil.getFileEntryByTitle(
 			groupId, folderId, title);
 
 		String contentType = MimeTypesUtil.getContentType(
 			dlFileEntry.getTitle());
 
-		InputStream inputStream = DLFileEntryServiceUtil.getFileAsStream(
+		InputStream inputStream = DLAppServiceUtil.getFileAsStream(
 			groupId, folderId, dlFileEntry.getName());
 
 		response.setContentType(contentType);
@@ -445,17 +439,16 @@ public class WebServerServlet extends HttpServlet {
 			long dlFileShortcutId = GetterUtil.getLong(pathArray[0]);
 
 			DLFileShortcut dlFileShortcut =
-				DLFileShortcutLocalServiceUtil.getFileShortcut(
-					dlFileShortcutId);
+				DLAppLocalServiceUtil.getFileShortcut(dlFileShortcutId);
 
-			return DLFileEntryLocalServiceUtil.getFileEntry(
+			return DLAppLocalServiceUtil.getFileEntry(
 				dlFileShortcut.getGroupId(), dlFileShortcut.getToFolderId(),
 				dlFileShortcut.getToName());
 		}
 		else if (pathArray.length == 2) {
 			long groupId = GetterUtil.getLong(pathArray[0]);
 
-			return DLFileEntryLocalServiceUtil.getFileEntryByUuidAndGroupId(
+			return DLAppServiceUtil.getFileEntryByUuidAndGroupId(
 				pathArray[1], groupId);
 		}
 		else {
@@ -463,7 +456,7 @@ public class WebServerServlet extends HttpServlet {
 			long dlFolderId = GetterUtil.getLong(pathArray[1]);
 			String fileName = HttpUtil.decodeURL(pathArray[2], true);
 
-			return DLFileEntryLocalServiceUtil.getFileEntryByTitle(
+			return DLAppLocalServiceUtil.getFileEntryByTitle(
 				groupId, dlFolderId, fileName);
 		}
 	}

@@ -24,7 +24,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
@@ -99,7 +99,7 @@ public class FindFolderAction extends Action {
 		}
 
 		if (groupId <= 0) {
-			DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
+			DLFolder folder = DLAppLocalServiceUtil.getFolder(folderId);
 
 			groupId = folder.getGroupId();
 		}

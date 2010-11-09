@@ -24,9 +24,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 
 import javax.portlet.PortletRequest;
 
@@ -53,7 +51,7 @@ public class ActionUtil {
 
 		if (Validator.isNotNull(name)) {
 			try {
-				fileEntry = DLFileEntryServiceUtil.getFileEntry(
+				fileEntry = DLAppServiceUtil.getFileEntry(
 					groupId, folderId, name);
 			}
 			catch (NoSuchFileEntryException nsfe) {
@@ -61,7 +59,7 @@ public class ActionUtil {
 				// This only happens when you're moving a file to a different
 				// folder
 
-				fileEntry = DLFileEntryServiceUtil.getFileEntry(
+				fileEntry = DLAppServiceUtil.getFileEntry(
 					groupId, newFolderId, name);
 			}
 		}
@@ -86,8 +84,7 @@ public class ActionUtil {
 		DLFileShortcut fileShortcut = null;
 
 		if (fileShortcutId > 0) {
-			fileShortcut = DLFileShortcutServiceUtil.getFileShortcut(
-				fileShortcutId);
+			fileShortcut = DLAppServiceUtil.getFileShortcut(fileShortcutId);
 		}
 
 		request.setAttribute(
@@ -111,7 +108,7 @@ public class ActionUtil {
 		if ((folderId > 0) &&
 			(folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
 
-			folder = DLFolderServiceUtil.getFolder(folderId);
+			folder = DLAppServiceUtil.getFolder(folderId);
 		}
 
 		request.setAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER, folder);

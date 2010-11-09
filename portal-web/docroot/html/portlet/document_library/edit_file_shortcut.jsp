@@ -37,8 +37,8 @@ DLFileEntry toFileEntry = null;
 
 if ((toFolderId > 0) && Validator.isNotNull(toName)) {
 	try {
-		toFileEntry = DLFileEntryLocalServiceUtil.getFileEntry(toGroupId, toFolderId, toName);
-		toFolder = DLFolderLocalServiceUtil.getFolder(toFolderId);
+		toFileEntry = DLAppLocalServiceUtil.getFileEntry(toGroupId, toFolderId, toName);
+		toFolder = DLAppLocalServiceUtil.getFolder(toFolderId);
 		toGroup = GroupLocalServiceUtil.getGroup(toFolder.getGroupId());
 	}
 	catch (Exception e) {
@@ -46,7 +46,7 @@ if ((toFolderId > 0) && Validator.isNotNull(toName)) {
 }
 else if ((toFolderId > 0)) {
 	try {
-		toFolder = DLFolderLocalServiceUtil.getFolder(toFolderId);
+		toFolder = DLAppLocalServiceUtil.getFolder(toFolderId);
 		toGroup = GroupLocalServiceUtil.getGroup(toFolder.getGroupId());
 	}
 	catch (Exception e) {

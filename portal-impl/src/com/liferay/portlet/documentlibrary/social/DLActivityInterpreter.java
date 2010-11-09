@@ -22,7 +22,7 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.social.model.BaseSocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialActivity;
@@ -44,7 +44,7 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(
+		DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(
 			activity.getClassPK());
 
 		if (!DLFileEntryPermission.contains(

@@ -36,7 +36,7 @@ else {
 
 	folderIds.add(new Long(folderId));
 
-	DLFolderServiceUtil.getSubfolderIds(folderIds, scopeGroupId, searchFolderIds);
+	DLAppServiceUtil.getSubfolderIds(folderIds, scopeGroupId, searchFolderIds);
 
 	folderIdsArray = StringUtil.split(StringUtil.merge(folderIds), 0L);
 }
@@ -120,7 +120,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 			DLFileEntry fileEntry = null;
 
 			try {
-				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(scopeGroupId, folderId, fileName);
+				fileEntry = DLAppLocalServiceUtil.getFileEntry(scopeGroupId, folderId, fileName);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {

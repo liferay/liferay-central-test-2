@@ -46,7 +46,6 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLFolderService;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 
 import java.io.File;
@@ -479,9 +478,6 @@ public class DLLocalServiceImpl implements DLLocalService {
 	private static final String[] _KEYWORDS_FIELDS = {
 		Field.ASSET_TAG_NAMES, Field.CONTENT, Field.PROPERTIES
 	};
-
-	@BeanReference(type = DLFolderService.class)
-	protected DLFolderService dlFolderService;
 
 	@BeanReference(type = GroupLocalService.class)
 	protected GroupLocalService groupLocalService;

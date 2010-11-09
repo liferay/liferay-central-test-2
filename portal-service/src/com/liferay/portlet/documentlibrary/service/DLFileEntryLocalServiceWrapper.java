@@ -276,42 +276,6 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 			serviceContext);
 	}
 
-	public void addFileEntryResources(
-		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlFileEntryLocalService.addFileEntryResources(fileEntry,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addFileEntryResources(
-		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlFileEntryLocalService.addFileEntryResources(fileEntry,
-			communityPermissions, guestPermissions);
-	}
-
-	public void addFileEntryResources(long fileEntryId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlFileEntryLocalService.addFileEntryResources(fileEntryId,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addFileEntryResources(long fileEntryId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlFileEntryLocalService.addFileEntryResources(fileEntryId,
-			communityPermissions, guestPermissions);
-	}
-
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addOrOverwriteFileEntry(
 		long userId, long groupId, long folderId, java.lang.String name,
 		java.lang.String sourceName, java.lang.String title,

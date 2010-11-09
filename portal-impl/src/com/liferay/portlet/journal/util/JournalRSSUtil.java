@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -144,7 +144,7 @@ public class JournalRSSUtil {
 					parameters.get("folderId")[0]);
 				String name = parameters.get("name")[0];
 
-				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+				fileEntry = DLAppLocalServiceUtil.getFileEntry(
 					groupId, folderId, name);
 			}
 			catch (Exception e) {
@@ -161,7 +161,7 @@ public class JournalRSSUtil {
 				long groupId = GetterUtil.getLong(parameters.get("groupId")[0]);
 
 				fileEntry =
-					DLFileEntryLocalServiceUtil.getFileEntryByUuidAndGroupId(
+					DLAppLocalServiceUtil.getFileEntryByUuidAndGroupId(
 						uuid, groupId);
 			}
 			catch (Exception e) {

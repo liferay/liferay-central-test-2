@@ -155,49 +155,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		return folder;
 	}
 
-	public void addFolderResources(
-			DLFolder folder, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		resourceLocalService.addResources(
-			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
-			DLFolder.class.getName(), folder.getFolderId(), false,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addFolderResources(
-			DLFolder folder, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		resourceLocalService.addModelResources(
-			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
-			DLFolder.class.getName(), folder.getFolderId(),
-			communityPermissions, guestPermissions);
-	}
-
-	public void addFolderResources(
-			long folderId, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
-
-		addFolderResources(
-			folder, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addFolderResources(
-			long folderId, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
-
-		addFolderResources(folder, communityPermissions, guestPermissions);
-	}
-
 	public void deleteFolder(DLFolder folder)
 		throws PortalException, SystemException {
 
@@ -454,6 +411,49 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		}
 
 		return folder;
+	}
+
+	protected void addFolderResources(
+			DLFolder folder, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		resourceLocalService.addResources(
+			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
+			DLFolder.class.getName(), folder.getFolderId(), false,
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	protected void addFolderResources(
+			DLFolder folder, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		resourceLocalService.addModelResources(
+			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
+			DLFolder.class.getName(), folder.getFolderId(),
+			communityPermissions, guestPermissions);
+	}
+
+	protected void addFolderResources(
+			long folderId, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
+
+		addFolderResources(
+			folder, addCommunityPermissions, addGuestPermissions);
+	}
+
+	protected void addFolderResources(
+			long folderId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
+
+		addFolderResources(folder, communityPermissions, guestPermissions);
 	}
 
 	protected long getParentFolderId(DLFolder folder, long parentFolderId)

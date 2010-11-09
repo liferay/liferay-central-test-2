@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/recent_documents/init.jsp" %>
 
 <%
-List fileRanks = DLFileRankLocalServiceUtil.getFileRanks(scopeGroupId, user.getUserId(), 0, SearchContainer.DEFAULT_DELTA);
+List fileRanks = DLAppLocalServiceUtil.getFileRanks(scopeGroupId, user.getUserId(), 0, SearchContainer.DEFAULT_DELTA);
 %>
 
 <c:choose>
@@ -32,7 +32,7 @@ List fileRanks = DLFileRankLocalServiceUtil.getFileRanks(scopeGroupId, user.getU
 			DLFileRank fileRank = (DLFileRank)fileRanks.get(i);
 
 			try {
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(scopeGroupId, fileRank.getFolderId(), fileRank.getName());
+				DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(scopeGroupId, fileRank.getFolderId(), fileRank.getName());
 
 				fileEntry = fileEntry.toEscapedModel();
 

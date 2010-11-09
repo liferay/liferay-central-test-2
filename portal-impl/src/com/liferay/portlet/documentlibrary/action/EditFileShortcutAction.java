@@ -29,7 +29,7 @@ import com.liferay.portlet.documentlibrary.FileShortcutPermissionException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
-import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -113,7 +113,7 @@ public class EditFileShortcutAction extends PortletAction {
 		long fileShortcutId = ParamUtil.getLong(
 			actionRequest, "fileShortcutId");
 
-		DLFileShortcutServiceUtil.deleteFileShortcut(fileShortcutId);
+		DLAppServiceUtil.deleteFileShortcut(fileShortcutId);
 	}
 
 	protected void updateFileShortcut(ActionRequest actionRequest)
@@ -138,8 +138,7 @@ public class EditFileShortcutAction extends PortletAction {
 
 			// Add file shortcut
 
-			DLFileShortcut fileShortcut =
-				DLFileShortcutServiceUtil.addFileShortcut(
+			DLFileShortcut fileShortcut = DLAppServiceUtil.addFileShortcut(
 					groupId, folderId, toFolderId, toName, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
@@ -150,7 +149,7 @@ public class EditFileShortcutAction extends PortletAction {
 
 			// Update file shortcut
 
-			DLFileShortcutServiceUtil.updateFileShortcut(
+			DLAppServiceUtil.updateFileShortcut(
 				fileShortcutId, folderId, toFolderId, toName, serviceContext);
 
 			AssetPublisherUtil.addRecentFolderId(

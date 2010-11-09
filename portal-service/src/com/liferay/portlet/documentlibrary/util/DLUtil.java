@@ -32,7 +32,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -108,7 +108,7 @@ public class DLUtil {
 		throws Exception {
 
 		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
+			DLFolder folder = DLAppLocalServiceUtil.getFolder(folderId);
 
 			if (folder.getFolderId() !=
 					DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {

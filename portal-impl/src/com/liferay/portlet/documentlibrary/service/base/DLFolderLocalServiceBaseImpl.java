@@ -47,6 +47,8 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalService;
+import com.liferay.portlet.documentlibrary.service.DLAppService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
@@ -281,6 +283,42 @@ public abstract class DLFolderLocalServiceBaseImpl
 		dlFolder.setNew(false);
 
 		return dlFolderPersistence.update(dlFolder, merge);
+	}
+
+	/**
+	 * Gets the d l app local service.
+	 *
+	 * @return the d l app local service
+	 */
+	public DLAppLocalService getDLAppLocalService() {
+		return dlAppLocalService;
+	}
+
+	/**
+	 * Sets the d l app local service.
+	 *
+	 * @param dlAppLocalService the d l app local service
+	 */
+	public void setDLAppLocalService(DLAppLocalService dlAppLocalService) {
+		this.dlAppLocalService = dlAppLocalService;
+	}
+
+	/**
+	 * Gets the d l app remote service.
+	 *
+	 * @return the d l app remote service
+	 */
+	public DLAppService getDLAppService() {
+		return dlAppService;
+	}
+
+	/**
+	 * Sets the d l app remote service.
+	 *
+	 * @param dlAppService the d l app remote service
+	 */
+	public void setDLAppService(DLAppService dlAppService) {
+		this.dlAppService = dlAppService;
 	}
 
 	/**
@@ -1056,6 +1094,10 @@ public abstract class DLFolderLocalServiceBaseImpl
 		}
 	}
 
+	@BeanReference(type = DLAppLocalService.class)
+	protected DLAppLocalService dlAppLocalService;
+	@BeanReference(type = DLAppService.class)
+	protected DLAppService dlAppService;
 	@BeanReference(type = DLFileEntryLocalService.class)
 	protected DLFileEntryLocalService dlFileEntryLocalService;
 	@BeanReference(type = DLFileEntryService.class)

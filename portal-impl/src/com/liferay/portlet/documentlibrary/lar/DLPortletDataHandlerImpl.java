@@ -42,11 +42,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil;
@@ -82,8 +78,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		DLFileVersion fileVersion =
-			DLFileVersionLocalServiceUtil.getFileVersion(
+		DLFileVersion fileVersion = DLAppLocalServiceUtil.getFileVersion(
 				portletDataContext.getScopeGroupId(), fileEntry.getFolderId(),
 				fileEntry.getName(), fileEntry.getVersion());
 
@@ -293,7 +288,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 					if (portletDataContext.
 							isDataStrategyMirrorWithOverwritting()) {
 
-						DLFileEntryLocalServiceUtil.deleteDLFileEntry(
+						DLAppLocalServiceUtil.deleteFileEntry(
 							existingTitleFileEntry);
 					}
 					else {
@@ -318,7 +313,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				serviceContext.setUuid(fileEntry.getUuid());
 
 				importedFileEntry =
-					DLFileEntryLocalServiceUtil.addFileEntry(
+					DLAppLocalServiceUtil.addFileEntry(
 						userId, portletDataContext.getScopeGroupId(), folderId,
 						nameWithExtension, fileEntryTitle,
 						fileEntry.getDescription(), null,
@@ -326,7 +321,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 						serviceContext);
 			}
 			else if (!isDuplicateFileEntry(fileEntry, existingFileEntry)) {
-				importedFileEntry = DLFileEntryLocalServiceUtil.updateFileEntry(
+				importedFileEntry = DLAppLocalServiceUtil.updateFileEntry(
 					userId, portletDataContext.getScopeGroupId(),
 					existingFileEntry.getFolderId(),
 					existingFileEntry.getName(), fileEntry.getTitle(),
@@ -336,11 +331,11 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 			else {
 				DLFileVersion latestFileVersion =
-					DLFileVersionLocalServiceUtil.getLatestFileVersion(
+					DLAppLocalServiceUtil.getLatestFileVersion(
 						portletDataContext.getScopeGroupId(), folderId,
 						existingFileEntry.getName());
 
-				DLFileEntryLocalServiceUtil.updateAsset(
+				DLAppLocalServiceUtil.updateAsset(
 					userId, existingFileEntry, latestFileVersion,
 					assetCategoryIds, assetTagNames);
 
@@ -357,7 +352,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			try {
 				importedFileEntry =
-					DLFileEntryLocalServiceUtil.addFileEntry(
+					DLAppLocalServiceUtil.addFileEntry(
 						userId, portletDataContext.getScopeGroupId(), folderId,
 						nameWithExtension, title, fileEntry.getDescription(),
 						null, fileEntry.getExtraSettings(), is,
@@ -373,7 +368,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 
 				importedFileEntry =
-					DLFileEntryLocalServiceUtil.addFileEntry(
+					DLAppLocalServiceUtil.addFileEntry(
 						userId, portletDataContext.getScopeGroupId(), folderId,
 						nameWithExtension, title, fileEntry.getDescription(),
 						null, fileEntry.getExtraSettings(), is,
@@ -756,7 +751,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				folderPKs, rank.getFolderId(), rank.getFolderId());
 		}
 
-		DLFileRankLocalServiceUtil.updateFileRank(
+		DLAppLocalServiceUtil.updateFileRank(
 			portletDataContext.getScopeGroupId(),
 			portletDataContext.getCompanyId(), userId, folderId, name,
 			serviceContext);
@@ -787,7 +782,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
 
-		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+		DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(
 			folder.getGroupId(), toFolderId, toName);
 
 		long[] assetCategoryIds = null;
@@ -825,20 +820,20 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				serviceContext.setUuid(fileShortcut.getUuid());
 
 				importedFileShortcut =
-					DLFileShortcutLocalServiceUtil.addFileShortcut(
+					DLAppLocalServiceUtil.addFileShortcut(
 						userId, folder.getGroupId(), folderId, toFolderId,
 						toName, serviceContext);
 			}
 			else {
 				importedFileShortcut =
-					DLFileShortcutLocalServiceUtil.updateFileShortcut(
+					DLAppLocalServiceUtil.updateFileShortcut(
 						userId, existingFileShortcut.getFileShortcutId(),
 						folderId, toFolderId, toName, serviceContext);
 			}
 		}
 		else {
 			importedFileShortcut =
-				DLFileShortcutLocalServiceUtil.addFileShortcut(
+				DLAppLocalServiceUtil.addFileShortcut(
 					userId, folder.getGroupId(), folderId, toFolderId, toName,
 					serviceContext);
 		}
@@ -914,7 +909,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				serviceContext.setUuid(folder.getUuid());
 
-				importedFolder = DLFolderLocalServiceUtil.addFolder(
+				importedFolder = DLAppLocalServiceUtil.addFolder(
 					userId, portletDataContext.getScopeGroupId(),
 					parentFolderId, name, folder.getDescription(),
 					serviceContext);
@@ -925,7 +920,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 					portletDataContext.getScopeGroupId(), parentFolderId,
 					folder.getName(), 2);
 
-				importedFolder = DLFolderLocalServiceUtil.updateFolder(
+				importedFolder = DLAppLocalServiceUtil.updateFolder(
 					existingFolder.getFolderId(), parentFolderId, name,
 					folder.getDescription(), serviceContext);
 			}
@@ -936,7 +931,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				portletDataContext.getScopeGroupId(), parentFolderId,
 				folder.getName(), 2);
 
-			importedFolder = DLFolderLocalServiceUtil.addFolder(
+			importedFolder = DLAppLocalServiceUtil.addFolder(
 				userId, portletDataContext.getScopeGroupId(), parentFolderId,
 				name, folder.getDescription(), serviceContext);
 		}
@@ -980,10 +975,10 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (!portletDataContext.addPrimaryKey(
 				DLPortletDataHandlerImpl.class, "deleteData")) {
 
-			DLFolderLocalServiceUtil.deleteFolders(
+			DLAppLocalServiceUtil.deleteFolders(
 				portletDataContext.getScopeGroupId());
 
-			DLFileEntryLocalServiceUtil.deleteFileEntries(
+			DLAppLocalServiceUtil.deleteFileEntries(
 				portletDataContext.getScopeGroupId(),
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 		}

@@ -30,7 +30,7 @@ import com.liferay.portlet.documentlibrary.FolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -113,7 +113,7 @@ public class EditFolderAction extends PortletAction {
 	protected void deleteFolder(ActionRequest actionRequest) throws Exception {
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 
-		DLFolderServiceUtil.deleteFolder(folderId);
+		DLAppServiceUtil.deleteFolder(folderId);
 
 		AssetPublisherUtil.removeRecentFolderId(
 			actionRequest, DLFileEntry.class.getName(), folderId);
@@ -137,7 +137,7 @@ public class EditFolderAction extends PortletAction {
 
 			// Add folder
 
-			DLFolderServiceUtil.addFolder(
+			DLAppServiceUtil.addFolder(
 				themeDisplay.getScopeGroupId(), parentFolderId, name,
 				description, serviceContext);
 		}
@@ -145,7 +145,7 @@ public class EditFolderAction extends PortletAction {
 
 			// Update folder
 
-			DLFolderServiceUtil.updateFolder(
+			DLAppServiceUtil.updateFolder(
 				folderId, parentFolderId, name, description, serviceContext);
 		}
 	}
