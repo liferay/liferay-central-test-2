@@ -954,18 +954,18 @@ public class LayoutAction extends Action {
 				JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		StringServletResponse stringResponse =
-			(StringServletResponse)renderRequestImpl.getAttribute(
+			(StringServletResponse)request.getAttribute(
 				WebKeys.STRING_SERVLET_RESPONSE);
 
 		if (stringResponse == null) {
-			stringResponse = (StringServletResponse)renderResponseImpl
-				.getHttpServletResponse();
+			stringResponse = (StringServletResponse)
+				renderResponseImpl.getHttpServletResponse();
 
 			Portlet portlet = processPortletRequest(
 				request, response, PortletRequest.RENDER_PHASE);
 
-			InvokerPortlet invokerPortlet =
-					PortletInstanceFactoryUtil.create(portlet, null);
+			InvokerPortlet invokerPortlet = PortletInstanceFactoryUtil.create(
+				portlet, null);
 
 			invokerPortlet.render(renderRequestImpl, renderResponseImpl);
 
