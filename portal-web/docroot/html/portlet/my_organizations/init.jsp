@@ -16,8 +16,8 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearchTerms" %>
-<%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearch" %>
 <%@ page import="com.liferay.portal.NoSuchGroupException" %>
 <%@ page import="com.liferay.portal.NoSuchLayoutSetException" %>
 <%@ page import="com.liferay.portal.RequiredGroupException" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearch" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearchTerms" %>

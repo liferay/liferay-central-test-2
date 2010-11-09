@@ -46,6 +46,7 @@ pageContext.setAttribute("portletURL", portletURL);
 
 	<%
 	OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
+
 	LinkedHashMap organizationParams = new LinkedHashMap();
 
 	if (tabs1.equals("my-organizations")) {
@@ -54,8 +55,6 @@ pageContext.setAttribute("portletURL", portletURL);
 
 	List<Organization> results = new ArrayList<Organization>();
 
-	int total = 0;
-
 	if (searchTerms.isAdvancedSearch()) {
 		results = OrganizationLocalServiceUtil.search(company.getCompanyId(), OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 	}
@@ -63,7 +62,7 @@ pageContext.setAttribute("portletURL", portletURL);
 		results = OrganizationLocalServiceUtil.search(company.getCompanyId(), OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, searchTerms.getKeywords(), searchTerms.getType(), searchTerms.getRegionIdObj(), searchTerms.getCountryIdObj(), organizationParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 	}
 
-	total = results.size();
+	int total = results.size();
 
 	searchContainer.setTotal(total);
 	searchContainer.setResults(results);
@@ -130,8 +129,7 @@ pageContext.setAttribute("portletURL", portletURL);
 				sb.append(" (0)");
 			}
 
-			if ((stagingGroup != null) && (tabs1.equals("my-organizations"))
-					&& GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
+			if ((stagingGroup != null) && (tabs1.equals("my-organizations")) && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
 				rowURL.setParameter("groupId", String.valueOf(stagingGroup.getGroupId()));
 				rowURL.setParameter("privateLayout", Boolean.FALSE.toString());
 
@@ -169,8 +167,7 @@ pageContext.setAttribute("portletURL", portletURL);
 				}
 			}
 
-			if ((stagingGroup != null) && (tabs1.equals("my-organizations")) &&
-					GroupPermissionUtil.contains(permissionChecker, organization.getGroup().getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
+			if ((stagingGroup != null) && (tabs1.equals("my-organizations")) && GroupPermissionUtil.contains(permissionChecker, organization.getGroup().getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
 				rowURL.setParameter("groupId", String.valueOf(stagingGroup.getGroupId()));
 				rowURL.setParameter("privateLayout", Boolean.TRUE.toString());
 
