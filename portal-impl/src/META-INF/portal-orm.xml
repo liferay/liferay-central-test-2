@@ -273,7 +273,6 @@
 			<basic name="css" />
 			<basic name="priority" />
 			<basic name="layoutPrototypeId" />
-			<basic name="dlFolderId" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

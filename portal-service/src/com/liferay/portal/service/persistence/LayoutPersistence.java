@@ -495,39 +495,6 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the layout where dlFolderId = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
-	*
-	* @param dlFolderId the dl folder id to search with
-	* @return the matching layout
-	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.Layout findByDLFolderId(long dlFolderId)
-		throws com.liferay.portal.NoSuchLayoutException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Finds the layout where dlFolderId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param dlFolderId the dl folder id to search with
-	* @return the matching layout, or <code>null</code> if a matching layout could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.Layout fetchByDLFolderId(long dlFolderId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Finds the layout where dlFolderId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param dlFolderId the dl folder id to search with
-	* @return the matching layout, or <code>null</code> if a matching layout could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.Layout fetchByDLFolderId(long dlFolderId,
-		boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Finds the layout where iconImageId = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
 	*
 	* @param iconImageId the icon image id to search with
@@ -1229,16 +1196,6 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Removes the layout where dlFolderId = &#63; from the database.
-	*
-	* @param dlFolderId the dl folder id to search with
-	* @throws SystemException if a system exception occurred
-	*/
-	public void removeByDLFolderId(long dlFolderId)
-		throws com.liferay.portal.NoSuchLayoutException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Removes the layout where iconImageId = &#63; from the database.
 	*
 	* @param iconImageId the icon image id to search with
@@ -1364,16 +1321,6 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByCompanyId(long companyId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Counts all the layouts where dlFolderId = &#63;.
-	*
-	* @param dlFolderId the dl folder id to search with
-	* @return the number of matching layouts
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByDLFolderId(long dlFolderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

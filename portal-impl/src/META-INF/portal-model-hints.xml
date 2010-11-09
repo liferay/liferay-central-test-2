@@ -249,7 +249,6 @@
 		</field>
 		<field name="priority" type="int" />
 		<field name="layoutPrototypeId" type="long" />
-		<field name="dlFolderId" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.LayoutBranch">
 		<field name="layoutBranchId" type="long" />

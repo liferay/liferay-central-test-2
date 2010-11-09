@@ -56,7 +56,6 @@ public class LayoutSoap implements Serializable {
 		soapModel.setCss(model.getCss());
 		soapModel.setPriority(model.getPriority());
 		soapModel.setLayoutPrototypeId(model.getLayoutPrototypeId());
-		soapModel.setDlFolderId(model.getDlFolderId());
 
 		return soapModel;
 	}
@@ -305,14 +304,6 @@ public class LayoutSoap implements Serializable {
 		_layoutPrototypeId = layoutPrototypeId;
 	}
 
-	public long getDlFolderId() {
-		return _dlFolderId;
-	}
-
-	public void setDlFolderId(long dlFolderId) {
-		_dlFolderId = dlFolderId;
-	}
-
 	private String _uuid;
 	private long _plid;
 	private long _groupId;
@@ -336,5 +327,4 @@ public class LayoutSoap implements Serializable {
 	private String _css;
 	private int _priority;
 	private long _layoutPrototypeId;
-	private long _dlFolderId;
 }

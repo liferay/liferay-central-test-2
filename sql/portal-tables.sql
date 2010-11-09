@@ -745,8 +745,7 @@ create table Layout (
 	wapColorSchemeId VARCHAR(75) null,
 	css STRING null,
 	priority INTEGER,
-	layoutPrototypeId LONG,
-	dlFolderId LONG
+	layoutPrototypeId LONG
 );
 
 create table LayoutBranch (

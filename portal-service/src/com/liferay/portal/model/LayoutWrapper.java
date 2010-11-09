@@ -487,24 +487,6 @@ public class LayoutWrapper implements Layout {
 		_layout.setLayoutPrototypeId(layoutPrototypeId);
 	}
 
-	/**
-	* Gets the dl folder id of this layout.
-	*
-	* @return the dl folder id of this layout
-	*/
-	public long getDlFolderId() {
-		return _layout.getDlFolderId();
-	}
-
-	/**
-	* Sets the dl folder id of this layout.
-	*
-	* @param dlFolderId the dl folder id of this layout
-	*/
-	public void setDlFolderId(long dlFolderId) {
-		_layout.setDlFolderId(dlFolderId);
-	}
-
 	public boolean isNew() {
 		return _layout.isNew();
 	}

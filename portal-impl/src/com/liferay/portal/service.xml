@@ -483,7 +483,6 @@
 		<column name="css" type="String" />
 		<column name="priority" type="int" />
 		<column name="layoutPrototypeId" type="long" />
-		<column name="dlFolderId" type="long" />
 
 		<!-- Order -->
 
@@ -499,9 +498,6 @@
 		</finder>
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
-		</finder>
-		<finder name="DLFolderId" return-type="Layout">
-			<finder-column name="dlFolderId" />
 		</finder>
 		<finder name="IconImageId" return-type="Layout">
 			<finder-column name="iconImageId" />
@@ -533,7 +529,6 @@
 
 		<!-- References -->
 
-		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFolder" />
 		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 		<reference package-path="com.liferay.portlet.journal" entity="JournalContentSearch" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />

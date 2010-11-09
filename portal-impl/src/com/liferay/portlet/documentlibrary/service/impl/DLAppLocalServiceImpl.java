@@ -330,9 +330,6 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 
 
 
-
-
-
 	public DLFileEntry getFileEntryByUuidAndGroupId(
 			String uuid, long groupId)
 		throws PortalException, SystemException {

@@ -515,12 +515,6 @@ public interface PropsKeys {
 
 	public static final String DL_HOOK_S3_SECRET_KEY = "dl.hook.s3.secret.key";
 
-	public static final String DL_LAYOUTS_SYNC_ENABLED = "dl.layouts.sync.enabled";
-
-	public static final String DL_LAYOUTS_SYNC_PRIVATE_FOLDER = "dl.layouts.sync.private.folder";
-
-	public static final String DL_LAYOUTS_SYNC_PUBLIC_FOLDER = "dl.layouts.sync.public.folder";
-
 	public static final String DL_PUBLISH_TO_LIVE_BY_DEFAULT = "dl.publish.to.live.by.default";
 
 	public static final String DL_WEBDAV_HOLD_LOCK = "dl.webdav.hold.lock";

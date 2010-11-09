@@ -410,20 +410,6 @@ public interface LayoutModel extends BaseModel<Layout> {
 	 */
 	public void setLayoutPrototypeId(long layoutPrototypeId);
 
-	/**
-	 * Gets the dl folder id of this layout.
-	 *
-	 * @return the dl folder id of this layout
-	 */
-	public long getDlFolderId();
-
-	/**
-	 * Sets the dl folder id of this layout.
-	 *
-	 * @param dlFolderId the dl folder id of this layout
-	 */
-	public void setDlFolderId(long dlFolderId);
-
 	public boolean isNew();
 
 	public void setNew(boolean n);

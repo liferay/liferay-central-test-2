@@ -16,23 +16,15 @@ package com.liferay.portlet.documentlibrary.service.impl;
 
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
-import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.util.AssetUtil;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.FolderNameException;
@@ -93,52 +85,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			addFolderResources(
 				folder, serviceContext.getCommunityPermissions(),
 				serviceContext.getGuestPermissions());
-		}
-
-		// Layout
-
-		if (PropsValues.DL_LAYOUTS_SYNC_ENABLED &&
-			(parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
-
-			String[] pathArray = folder.getPathArray();
-
-			String layoutsSyncPrivateFolder = GetterUtil.getString(
-				PropsUtil.get(PropsKeys.DL_LAYOUTS_SYNC_PRIVATE_FOLDER));
-			String layoutsSyncPublicFolder = GetterUtil.getString(
-				PropsUtil.get(PropsKeys.DL_LAYOUTS_SYNC_PUBLIC_FOLDER));
-
-			if (pathArray[0].equals(layoutsSyncPrivateFolder) ||
-				pathArray[0].equals(layoutsSyncPublicFolder)) {
-
-				boolean privateLayout = true;
-
-				if (pathArray[0].equals(layoutsSyncPublicFolder)) {
-					privateLayout = false;
-				}
-
-				long parentLayoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
-				String title = StringPool.BLANK;
-				String layoutDescription = StringPool.BLANK;
-				String type = LayoutConstants.TYPE_PORTLET;
-				boolean hidden = false;
-				String friendlyURL = StringPool.BLANK;
-
-				Layout dlFolderLayout = null;
-
-				try {
-					dlFolderLayout = layoutLocalService.getDLFolderLayout(
-						folder.getParentFolderId());
-
-					parentLayoutId = dlFolderLayout.getLayoutId();
-				}
-				catch (NoSuchLayoutException nsle) {
-				}
-
-				layoutLocalService.addLayout(
-					userId, groupId, privateLayout, parentLayoutId, name, title,
-					layoutDescription, type, hidden, friendlyURL,
-					folder.getFolderId(), new ServiceContext());
-			}
 		}
 
 		// Parent folder
@@ -384,31 +330,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		folder.setExpandoBridgeAttributes(serviceContext);
 
 		dlFolderPersistence.update(folder, false);
-
-		// Layout
-
-		if (PropsValues.DL_LAYOUTS_SYNC_ENABLED) {
-			String privateFolder = GetterUtil.getString(PropsUtil.get(
-				PropsKeys.DL_LAYOUTS_SYNC_PRIVATE_FOLDER));
-
-			boolean privateLayout = false;
-
-			String[] path = folder.getPathArray();
-
-			if (path[0].equals(privateFolder)) {
-				privateLayout = true;
-			}
-
-			Layout layout = layoutLocalService.getDLFolderLayout(
-				folder.getFolderId());
-
-			layout.setName(folder.getName());
-
-			layoutLocalService.updateName(
-				folder.getGroupId(), privateLayout, layout.getLayoutId(),
-				folder.getName(),
-				LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
-		}
 
 		return folder;
 	}

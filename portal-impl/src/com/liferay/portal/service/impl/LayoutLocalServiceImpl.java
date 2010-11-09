@@ -57,10 +57,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.LayoutComparator;
 import com.liferay.portal.util.comparator.LayoutPriorityComparator;
-import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
-import com.liferay.portlet.documentlibrary.NoSuchFolderException;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.File;
@@ -103,7 +99,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			long userId, long groupId, boolean privateLayout,
 			long parentLayoutId, Map<Locale, String> localeNamesMap,
 			Map<Locale, String> localeTitlesMap, String description,
-			String type, boolean hidden, String friendlyURL, long dlFolderId,
+			String type, boolean hidden, String friendlyURL,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -137,7 +133,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layout.setHidden(hidden);
 		layout.setFriendlyURL(friendlyURL);
 		layout.setPriority(priority);
-		layout.setDlFolderId(dlFolderId);
 
 		setLocalizedAttributes(layout, localeNamesMap, localeTitlesMap);
 
@@ -176,39 +171,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		return layout;
-	}
-
-	public Layout addLayout(
-			long userId, long groupId, boolean privateLayout,
-			long parentLayoutId, Map<Locale, String> localeNamesMap,
-			Map<Locale, String> localeTitlesMap, String description,
-			String type, boolean hidden, String friendlyURL,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addLayout(
-			userId, groupId, privateLayout, parentLayoutId, localeNamesMap,
-			localeTitlesMap, description, type, hidden, friendlyURL,
-			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, serviceContext);
-	}
-
-	public Layout addLayout(
-			long userId, long groupId, boolean privateLayout,
-			long parentLayoutId, String name, String title, String description,
-			String type, boolean hidden, String friendlyURL, long dlFolderId,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		Map<Locale, String> localeNamesMap = new HashMap<Locale, String>();
-
-		Locale defaultLocale = LocaleUtil.getDefault();
-
-		localeNamesMap.put(defaultLocale, name);
-
-		return addLayout(
-			userId, groupId, privateLayout, parentLayoutId, localeNamesMap,
-			null, description, type, hidden, friendlyURL, dlFolderId,
-			serviceContext);
 	}
 
 	public Layout addLayout(
@@ -503,12 +465,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		return LayoutConstants.DEFAULT_PLID;
-	}
-
-	public Layout getDLFolderLayout(long dlFolderId)
-		throws PortalException, SystemException {
-
-		return layoutPersistence.findByDLFolderId(dlFolderId);
 	}
 
 	public Layout getFriendlyURLLayout(
@@ -885,28 +841,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 		}
 
-		// Document library
-
-		try {
-			if (layout.getDlFolderId() > 0) {
-				DLFolder folder = dlFolderLocalService.getFolder(
-					layout.getDlFolderId());
-
-				if (!name.equals(folder.getName())) {
-					dlFolderLocalService.updateFolder(
-						folder.getFolderId(), folder.getParentFolderId(), name,
-						folder.getDescription(), new ServiceContext());
-				}
-			}
-		}
-		catch (DuplicateFolderNameException dfne) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(dfne);
-			}
-		}
-		catch (NoSuchFolderException nsfe) {
-		}
-
 		// Expando
 
 		ExpandoBridge expandoBridge = layout.getExpandoBridge();
@@ -976,22 +910,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layout.setName(name, LocaleUtil.fromLanguageId(languageId));
 
 		layoutPersistence.update(layout, false);
-
-		try {
-			if (layout.getDlFolderId() > 0) {
-				DLFolder folder = dlFolderLocalService.getFolder(
-					layout.getDlFolderId());
-
-				ServiceContext serviceContext = new ServiceContext();
-
-				dlFolderLocalService.updateFolder(
-					folder.getFolderId(), folder.getParentFolderId(),
-					layout.getName(LocaleUtil.getDefault()),
-					folder.getDescription(), serviceContext);
-			}
-		}
-		catch (NoSuchFolderException nsfe) {
-		}
 
 		return layout;
 	}

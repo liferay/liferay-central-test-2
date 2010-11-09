@@ -346,7 +346,6 @@
 		<property name="css" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="priority" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="layoutPrototypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="dlFolderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.LayoutBranchImpl" table="LayoutBranch">
 		<cache usage="read-write" />

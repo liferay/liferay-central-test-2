@@ -294,8 +294,6 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 
 
 
-
-
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
 			long groupId, long folderId, int status, int start, int end)
 		throws PortalException, SystemException {

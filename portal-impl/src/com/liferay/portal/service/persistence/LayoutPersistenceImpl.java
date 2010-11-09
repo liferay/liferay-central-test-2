@@ -44,7 +44,6 @@ import com.liferay.portal.model.impl.LayoutModelImpl;
 import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
-import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
@@ -123,12 +122,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByCompanyId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FETCH_BY_DLFOLDERID = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
-			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
-			"fetchByDLFolderId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_COUNT_BY_DLFOLDERID = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
-			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByDLFolderId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FETCH_BY_ICONIMAGEID = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
 			"fetchByIconImageId", new String[] { Long.class.getName() });
@@ -230,9 +223,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			new Object[] { layout.getUuid(), new Long(layout.getGroupId()) },
 			layout);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DLFOLDERID,
-			new Object[] { new Long(layout.getDlFolderId()) }, layout);
-
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ICONIMAGEID,
 			new Object[] { new Long(layout.getIconImageId()) }, layout);
 
@@ -294,9 +284,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] { layout.getUuid(), new Long(layout.getGroupId()) });
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DLFOLDERID,
-			new Object[] { new Long(layout.getDlFolderId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ICONIMAGEID,
 			new Object[] { new Long(layout.getIconImageId()) });
@@ -415,9 +402,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				new Long(layoutModelImpl.getOriginalGroupId())
 			});
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DLFOLDERID,
-			new Object[] { new Long(layoutModelImpl.getOriginalDlFolderId()) });
-
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ICONIMAGEID,
 			new Object[] { new Long(layoutModelImpl.getOriginalIconImageId()) });
 
@@ -495,18 +479,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] { layout.getUuid(), new Long(layout.getGroupId()) },
 				layout);
-		}
-
-		if (!isNew &&
-				(layout.getDlFolderId() != layoutModelImpl.getOriginalDlFolderId())) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DLFOLDERID,
-				new Object[] { new Long(layoutModelImpl.getOriginalDlFolderId()) });
-		}
-
-		if (isNew ||
-				(layout.getDlFolderId() != layoutModelImpl.getOriginalDlFolderId())) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DLFOLDERID,
-				new Object[] { new Long(layout.getDlFolderId()) }, layout);
 		}
 
 		if (!isNew &&
@@ -609,7 +581,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		layoutImpl.setCss(layout.getCss());
 		layoutImpl.setPriority(layout.getPriority());
 		layoutImpl.setLayoutPrototypeId(layout.getLayoutPrototypeId());
-		layoutImpl.setDlFolderId(layout.getDlFolderId());
 
 		return layoutImpl;
 	}
@@ -1986,134 +1957,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 		else {
 			return null;
-		}
-	}
-
-	/**
-	 * Finds the layout where dlFolderId = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
-	 *
-	 * @param dlFolderId the dl folder id to search with
-	 * @return the matching layout
-	 * @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public Layout findByDLFolderId(long dlFolderId)
-		throws NoSuchLayoutException, SystemException {
-		Layout layout = fetchByDLFolderId(dlFolderId);
-
-		if (layout == null) {
-			StringBundler msg = new StringBundler(4);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("dlFolderId=");
-			msg.append(dlFolderId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchLayoutException(msg.toString());
-		}
-
-		return layout;
-	}
-
-	/**
-	 * Finds the layout where dlFolderId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param dlFolderId the dl folder id to search with
-	 * @return the matching layout, or <code>null</code> if a matching layout could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public Layout fetchByDLFolderId(long dlFolderId) throws SystemException {
-		return fetchByDLFolderId(dlFolderId, true);
-	}
-
-	/**
-	 * Finds the layout where dlFolderId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param dlFolderId the dl folder id to search with
-	 * @return the matching layout, or <code>null</code> if a matching layout could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public Layout fetchByDLFolderId(long dlFolderId, boolean retrieveFromCache)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { dlFolderId };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_DLFOLDERID,
-					finderArgs, this);
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_SELECT_LAYOUT_WHERE);
-
-			query.append(_FINDER_COLUMN_DLFOLDERID_DLFOLDERID_2);
-
-			query.append(LayoutModelImpl.ORDER_BY_JPQL);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(dlFolderId);
-
-				List<Layout> list = q.list();
-
-				result = list;
-
-				Layout layout = null;
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DLFOLDERID,
-						finderArgs, list);
-				}
-				else {
-					layout = list.get(0);
-
-					cacheResult(layout);
-
-					if ((layout.getDlFolderId() != dlFolderId)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DLFOLDERID,
-							finderArgs, layout);
-					}
-				}
-
-				return layout;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (result == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DLFOLDERID,
-						finderArgs);
-				}
-
-				closeSession(session);
-			}
-		}
-		else {
-			if (result instanceof List<?>) {
-				return null;
-			}
-			else {
-				return (Layout)result;
-			}
 		}
 	}
 
@@ -4242,19 +4085,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	/**
-	 * Removes the layout where dlFolderId = &#63; from the database.
-	 *
-	 * @param dlFolderId the dl folder id to search with
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void removeByDLFolderId(long dlFolderId)
-		throws NoSuchLayoutException, SystemException {
-		Layout layout = findByDLFolderId(dlFolderId);
-
-		remove(layout);
-	}
-
-	/**
 	 * Removes the layout where iconImageId = &#63; from the database.
 	 *
 	 * @param iconImageId the icon image id to search with
@@ -4633,59 +4463,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
-					finderArgs, count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	/**
-	 * Counts all the layouts where dlFolderId = &#63;.
-	 *
-	 * @param dlFolderId the dl folder id to search with
-	 * @return the number of matching layouts
-	 * @throws SystemException if a system exception occurred
-	 */
-	public int countByDLFolderId(long dlFolderId) throws SystemException {
-		Object[] finderArgs = new Object[] { dlFolderId };
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_DLFOLDERID,
-				finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(2);
-
-			query.append(_SQL_COUNT_LAYOUT_WHERE);
-
-			query.append(_FINDER_COLUMN_DLFOLDERID_DLFOLDERID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(dlFolderId);
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_DLFOLDERID,
 					finderArgs, count);
 
 				closeSession(session);
@@ -5456,8 +5233,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	protected WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(type = WorkflowInstanceLinkPersistence.class)
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
-	@BeanReference(type = DLFolderPersistence.class)
-	protected DLFolderPersistence dlFolderPersistence;
 	@BeanReference(type = ExpandoValuePersistence.class)
 	protected ExpandoValuePersistence expandoValuePersistence;
 	@BeanReference(type = JournalContentSearchPersistence.class)
@@ -5481,7 +5256,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "layout.groupId = ?";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "layout.groupId = ?";
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "layout.companyId = ?";
-	private static final String _FINDER_COLUMN_DLFOLDERID_DLFOLDERID_2 = "layout.dlFolderId = ?";
 	private static final String _FINDER_COLUMN_ICONIMAGEID_ICONIMAGEID_2 = "layout.iconImageId = ?";
 	private static final String _FINDER_COLUMN_G_P_GROUPID_2 = "layout.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_P_PRIVATELAYOUT_2 = "layout.privateLayout = ?";

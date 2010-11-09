@@ -79,10 +79,9 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 			{ "wapColorSchemeId", new Integer(Types.VARCHAR) },
 			{ "css", new Integer(Types.VARCHAR) },
 			{ "priority", new Integer(Types.INTEGER) },
-			{ "layoutPrototypeId", new Integer(Types.BIGINT) },
-			{ "dlFolderId", new Integer(Types.BIGINT) }
+			{ "layoutPrototypeId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Layout (uuid_ VARCHAR(75) null,plid LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,parentLayoutId LONG,name STRING null,title STRING null,description STRING null,type_ VARCHAR(75) null,typeSettings TEXT null,hidden_ BOOLEAN,friendlyURL VARCHAR(255) null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,priority INTEGER,layoutPrototypeId LONG,dlFolderId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Layout (uuid_ VARCHAR(75) null,plid LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,parentLayoutId LONG,name STRING null,title STRING null,description STRING null,type_ VARCHAR(75) null,typeSettings TEXT null,hidden_ BOOLEAN,friendlyURL VARCHAR(255) null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,priority INTEGER,layoutPrototypeId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Layout";
 	public static final String ORDER_BY_JPQL = " ORDER BY layout.parentLayoutId ASC, layout.priority ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Layout.parentLayoutId ASC, Layout.priority ASC";
@@ -128,7 +127,6 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		model.setCss(soapModel.getCss());
 		model.setPriority(soapModel.getPriority());
 		model.setLayoutPrototypeId(soapModel.getLayoutPrototypeId());
-		model.setDlFolderId(soapModel.getDlFolderId());
 
 		return model;
 	}
@@ -479,24 +477,6 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_layoutPrototypeId = layoutPrototypeId;
 	}
 
-	public long getDlFolderId() {
-		return _dlFolderId;
-	}
-
-	public void setDlFolderId(long dlFolderId) {
-		_dlFolderId = dlFolderId;
-
-		if (!_setOriginalDlFolderId) {
-			_setOriginalDlFolderId = true;
-
-			_originalDlFolderId = dlFolderId;
-		}
-	}
-
-	public long getOriginalDlFolderId() {
-		return _originalDlFolderId;
-	}
-
 	public Layout toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Layout)this;
@@ -546,7 +526,6 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		clone.setCss(getCss());
 		clone.setPriority(getPriority());
 		clone.setLayoutPrototypeId(getLayoutPrototypeId());
-		clone.setDlFolderId(getDlFolderId());
 
 		return clone;
 	}
@@ -614,7 +593,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(47);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -662,15 +641,13 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		sb.append(getPriority());
 		sb.append(", layoutPrototypeId=");
 		sb.append(getLayoutPrototypeId());
-		sb.append(", dlFolderId=");
-		sb.append(getDlFolderId());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(76);
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Layout");
@@ -768,10 +745,6 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 			"<column><column-name>layoutPrototypeId</column-name><column-value><![CDATA[");
 		sb.append(getLayoutPrototypeId());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>dlFolderId</column-name><column-value><![CDATA[");
-		sb.append(getDlFolderId());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -811,8 +784,5 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	private String _css;
 	private int _priority;
 	private long _layoutPrototypeId;
-	private long _dlFolderId;
-	private long _originalDlFolderId;
-	private boolean _setOriginalDlFolderId;
 	private transient ExpandoBridge _expandoBridge;
 }
