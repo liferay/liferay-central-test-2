@@ -15,6 +15,7 @@
 package com.liferay.portlet.xslcontent.action;
 
 import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -29,6 +30,7 @@ import javax.portlet.RenderResponse;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Hugo Huijser
  */
 public class ConfigurationActionImpl extends BaseConfigurationAction {
 
@@ -53,13 +55,22 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletResource);
 
-		preferences.setValue("xml-url", xmlURL);
-		preferences.setValue("xsl-url", xslURL);
+		if (xmlURL.startsWith("file:/")) {
+			SessionErrors.add(actionRequest, "xmlURL");
+		}
+		if (xslURL.startsWith("file:/")) {
+			SessionErrors.add(actionRequest, "xslURL");
+		}
 
-		preferences.store();
+		if (SessionErrors.isEmpty(actionRequest)) {
+			preferences.setValue("xml-url", xmlURL);
+			preferences.setValue("xsl-url", xslURL);
 
-		SessionMessages.add(
-			actionRequest, portletConfig.getPortletName() + ".doConfigure");
+			preferences.store();
+
+			SessionMessages.add(
+				actionRequest, portletConfig.getPortletName() + ".doConfigure");
+		}
 	}
 
 	public String render(
