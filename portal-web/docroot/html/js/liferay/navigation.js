@@ -431,45 +431,47 @@ AUI().add(
 					_makeSortable: function() {
 						var instance = this;
 
-						var navBlock = instance.get('navBlock');
+						if (instance.get('isSortable')) {
+							var navBlock = instance.get('navBlock');
 
-						var sortable = new A.Sortable(
-							{
-								container: navBlock,
-								moveType: 'move',
-								nodes: 'li',
-								opacity: '.5',
-								opacityNode: 'currentNode'
-							}
-						);
+							var sortable = new A.Sortable(
+								{
+									container: navBlock,
+									moveType: 'move',
+									nodes: 'li',
+									opacity: '.5',
+									opacityNode: 'currentNode'
+								}
+							);
 
-						sortable.delegate.on(
-							'drag:end',
-							function(event) {
-								var dragNode = event.target.get('node');
+							sortable.delegate.on(
+								'drag:end',
+								function(event) {
+									var dragNode = event.target.get('node');
 
-								instance._saveSortables(dragNode);
+									instance._saveSortables(dragNode);
 
-								Liferay.fire(
-									'navigation',
-									{
-										item: dragNode.getDOM(),
-										type: 'sort'
-									}
-								);
-							}
-						);
+									Liferay.fire(
+										'navigation',
+										{
+											item: dragNode.getDOM(),
+											type: 'sort'
+										}
+									);
+								}
+							);
 
-						sortable.delegate.on(
-							'drag:start',
-							function(event) {
-								var dragNode = event.target.get('dragNode');
+							sortable.delegate.on(
+								'drag:start',
+								function(event) {
+									var dragNode = event.target.get('dragNode');
 
-								dragNode.addClass('lfr-navigation-proxy');
-							}
-						);
+									dragNode.addClass('lfr-navigation-proxy');
+								}
+							);
 
-						sortable.delegate.dd.removeInvalid('a');
+							sortable.delegate.dd.removeInvalid('a');
+						}
 					},
 
 					_onKeypress: function(event) {
