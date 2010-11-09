@@ -37,6 +37,7 @@
 		maxElementsInMemory="10000"
 		name="com.liferay.portal.kernel.dao.orm.EntityCache"
 		timeToIdleSeconds="600"
+		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
@@ -50,6 +51,7 @@
 		maxElementsInMemory="10000"
 		name="com.liferay.portal.kernel.dao.orm.FinderCache"
 		timeToIdleSeconds="600"
+		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
@@ -63,6 +65,7 @@
 		maxElementsInMemory="10000"
 		name="com.liferay.portal.security.permission.PermissionCacheUtil"
 		timeToIdleSeconds="600"
+		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
@@ -76,6 +79,7 @@
 		maxElementsInMemory="0"
 		name="com.liferay.portal.service.impl.PortletLocalServiceImpl"
 		timeToIdleSeconds="0"
+		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
@@ -89,6 +93,7 @@
 		maxElementsInMemory="10000"
 		name="com.liferay.portal.service.impl.PortletPreferencesLocalUtil"
 		timeToIdleSeconds="600"
+		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
@@ -102,6 +107,7 @@
 		maxElementsInMemory="1000"
 		name="com.liferay.portal.servlet.filters.cache.CacheUtil"
 		timeToLiveSeconds="3600"
+		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
@@ -115,6 +121,7 @@
 		maxElementsInMemory="10000"
 		name="com.liferay.portal.velocity.LiferayResourceCacheUtil"
 		timeToIdleSeconds="3600"
+		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
@@ -128,6 +135,7 @@
 		maxElementsInMemory="10000"
 		name="com.liferay.portlet.calendar.service.impl.CalEventLocalUtil"
 		timeToIdleSeconds="600"
+		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
@@ -141,6 +149,7 @@
 		maxElementsInMemory="1000"
 		name="com.liferay.portlet.journalcontent.util.JournalContent"
 		timeToLiveSeconds="3600"
+		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
@@ -154,6 +163,7 @@
 		maxElementsInMemory="10000"
 		name="com.liferay.portlet.social.service.impl.SocialEquitySettingLocalServiceImpl"
 		timeToIdleSeconds="600"
+		overflowToDisk="false"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"

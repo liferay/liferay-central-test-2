@@ -22,11 +22,13 @@
 		eternal="false"
 		maxElementsInMemory="1000"
 		name="com.liferay.portal.util.WebCachePool"
+		overflowToDisk="false"
 	/>
 	<cache
 		eternal="false"
 		maxElementsInMemory="10000"
 		name="com.liferay.portal.velocity.LiferayResourceCacheUtil"
 		timeToIdleSeconds="3600"
+		overflowToDisk="false"
 	/>
 </ehcache>

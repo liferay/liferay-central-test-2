@@ -16,6 +16,7 @@
 		eternal="false"
 		maxElementsInMemory="10000"
 		timeToIdleSeconds="600"
+		overflowToDisk="false"
 	/>
 
 	<!--
@@ -30,6 +31,7 @@
 		eternal="true"
 		maxElementsInMemory="5000"
 		name="org.hibernate.cache.UpdateTimestampsCache"
+		overflowToDisk="false"
 	/>
 
 	<!--
@@ -42,5 +44,6 @@
 		maxElementsInMemory="10000"
 		name="com.liferay.portal.model.impl.UserImpl"
 		timeToIdleSeconds="600"
+		overflowToDisk="false"
 	/>
 </ehcache>
