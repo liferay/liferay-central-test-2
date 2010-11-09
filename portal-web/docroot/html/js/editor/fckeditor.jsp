@@ -60,7 +60,7 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 
 			// LEP-3563
 
-			if ((window.frameElement == undefined) || (!document.all && window.frameElement.clientWidth == 0)) {
+			if (!window.frameElement || (!document.all && window.frameElement.clientWidth == 0)) {
 
 				// This is hack since FCKEditor doesn't initialize properly in
 				// Gecko if the editor is hidden.
