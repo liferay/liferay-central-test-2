@@ -185,13 +185,15 @@ public class PluginPackageUtil {
 	}
 
 	public static PluginPackage readPluginPackageProperties(
-		String displayName, Properties props) {
+		String displayName, Properties properties) {
 
-		return _instance._readPluginPackageProperties(displayName, props);
+		return _instance._readPluginPackageProperties(displayName, properties);
 	}
 
-	public static PluginPackage readPluginPackageXml(Element pluginPackageEl) {
-		return _instance._readPluginPackageXml(pluginPackageEl);
+	public static PluginPackage readPluginPackageXml(
+		Element pluginPackageElement) {
+
+		return _instance._readPluginPackageXml(pluginPackageElement);
 	}
 
 	public static PluginPackage readPluginPackageXml(String xml)
@@ -728,10 +730,10 @@ public class PluginPackageUtil {
 		Iterator<Element> itr1 = root.elements("plugin-package").iterator();
 
 		while (itr1.hasNext()) {
-			Element pluginPackageEl = itr1.next();
+			Element pluginPackageElement = itr1.next();
 
 			PluginPackage pluginPackage = _readPluginPackageXml(
-				pluginPackageEl);
+				pluginPackageElement);
 
 			if (!_isCurrentVersionSupported(
 					pluginPackage.getLiferayVersions())) {
@@ -789,26 +791,22 @@ public class PluginPackageUtil {
 		return GetterUtil.getString(text);
 	}
 
-	private List<License> _readLicenseList(Element parentEL, String name) {
+	private List<License> _readLicenseList(Element parentElement, String name) {
 		List<License> licenses = new ArrayList<License>();
 
-		Iterator<Element> itr = parentEL.elements(name).iterator();
-
-		while (itr.hasNext()) {
-			Element licenseEl = itr.next();
-
+		for (Element licenseElement : parentElement.elements(name)) {
 			License license = new License();
 
-			license.setName(licenseEl.getText());
+			license.setName(licenseElement.getText());
 
-			Attribute osiApproved = licenseEl.attribute("osi-approved");
+			Attribute osiApproved = licenseElement.attribute("osi-approved");
 
 			if (osiApproved != null) {
 				license.setOsiApproved(
 					GetterUtil.getBoolean(osiApproved.getText()));
 			}
 
-			Attribute url = licenseEl.attribute("url");
+			Attribute url = licenseElement.attribute("url");
 
 			if (url != null) {
 				license.setUrl(url.getText());
@@ -819,23 +817,23 @@ public class PluginPackageUtil {
 
 		return licenses;
 	}
-	private List<String> _readList(Element parentEl, String name) {
-		List<String> result = new ArrayList<String>();
 
-		if (parentEl != null) {
-			Iterator<Element> itr = parentEl.elements(name).iterator();
+	private List<String> _readList(Element parentElement, String name) {
+		List<String> list = new ArrayList<String>();
 
-			while (itr.hasNext()) {
-				Element el = itr.next();
-
-				String text = el.getText().trim().toLowerCase();
-
-				result.add(text);
-			}
+		if (parentElement == null) {
+			return list;
 		}
 
-		return result;
+		for (Element element : parentElement.elements(name)) {
+			String text = element.getText().trim().toLowerCase();
+
+			list.add(text);
+		}
+
+		return list;
 	}
+
 	private PluginPackage _readPluginPackageProperties(
 		String displayName, Properties properties) {
 
@@ -977,55 +975,61 @@ public class PluginPackageUtil {
 
 		return pluginPackage;
 	}
-	private PluginPackage _readPluginPackageXml(Element pluginPackageEl) {
-		String name = pluginPackageEl.elementText("name");
+
+	private PluginPackage _readPluginPackageXml(Element pluginPackageElement) {
+		String name = pluginPackageElement.elementText("name");
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Reading pluginPackage definition " + name);
 		}
 
 		PluginPackage pluginPackage = new PluginPackageImpl(
-			GetterUtil.getString(pluginPackageEl.elementText("module-id")));
+			GetterUtil.getString(
+				pluginPackageElement.elementText("module-id")));
 
 		List<String> liferayVersions = _readList(
-			pluginPackageEl.element("liferay-versions"), "liferay-version");
+			pluginPackageElement.element("liferay-versions"),
+			"liferay-version");
 
 		List<String> types = _readList(
-			pluginPackageEl.element("types"), "type");
+			pluginPackageElement.element("types"), "type");
 
 		pluginPackage.setName(_readText(name));
 		pluginPackage.setRecommendedDeploymentContext(
 			_readText(
-				pluginPackageEl.elementText("recommended-deployment-context")));
+				pluginPackageElement.elementText(
+					"recommended-deployment-context")));
 		pluginPackage.setModifiedDate(
-			_readDate(pluginPackageEl.elementText("modified-date")));
+			_readDate(pluginPackageElement.elementText("modified-date")));
 		pluginPackage.setAuthor(
-			_readText(pluginPackageEl.elementText("author")));
+			_readText(pluginPackageElement.elementText("author")));
 		pluginPackage.setTypes(types);
 		pluginPackage.setLicenses(
 			_readLicenseList(
-				pluginPackageEl.element("licenses"), "license"));
+				pluginPackageElement.element("licenses"), "license"));
 		pluginPackage.setLiferayVersions(liferayVersions);
 		pluginPackage.setTags(
-			_readList(pluginPackageEl.element("tags"), "tag"));
+			_readList(pluginPackageElement.element("tags"), "tag"));
 		pluginPackage.setShortDescription(
-			_readText(pluginPackageEl.elementText("short-description")));
+			_readText(pluginPackageElement.elementText("short-description")));
 		pluginPackage.setLongDescription(
-			_readHtml(pluginPackageEl.elementText("long-description")));
+			_readHtml(pluginPackageElement.elementText("long-description")));
 		pluginPackage.setChangeLog(
-			_readHtml(pluginPackageEl.elementText("change-log")));
+			_readHtml(pluginPackageElement.elementText("change-log")));
 		pluginPackage.setScreenshots(
-			_readScreenshots(pluginPackageEl.element("screenshots")));
+			_readScreenshots(pluginPackageElement.element("screenshots")));
 		pluginPackage.setPageURL(
-			_readText(pluginPackageEl.elementText("page-url")));
+			_readText(pluginPackageElement.elementText("page-url")));
 		pluginPackage.setDownloadURL(
-			_readText(pluginPackageEl.elementText("download-url")));
+			_readText(pluginPackageElement.elementText("download-url")));
 		pluginPackage.setDeploymentSettings(
 			_readProperties(
-				pluginPackageEl.element("deployment-settings"), "setting"));
+				pluginPackageElement.element("deployment-settings"),
+				"setting"));
 
 		return pluginPackage;
 	}
+
 	private PluginPackage _readPluginPackageXml(String xml)
 		throws DocumentException {
 
@@ -1035,42 +1039,39 @@ public class PluginPackageUtil {
 
 		return _readPluginPackageXml(root);
 	}
-	private Properties _readProperties(Element parentEl, String name) {
-		Properties result = new Properties();
 
-		if (parentEl != null) {
-			Iterator<Element> itr = parentEl.elements(name).iterator();
+	private Properties _readProperties(Element parentElement, String name) {
+		Properties properties = new Properties();
 
-			while (itr.hasNext()) {
-				Element el = itr.next();
-
-				result.setProperty(
-					el.attribute("name").getValue(),
-					el.attribute("value").getValue());
-			}
+		if (parentElement == null) {
+			return properties;
 		}
 
-		return result;
+		for (Element element : parentElement.elements(name)) {
+			properties.setProperty(
+				element.attributeValue("name"),
+				element.attributeValue("value"));
+		}
+
+		return properties;
 	}
 
-	private List<Screenshot> _readScreenshots(Element parentEl) {
+	private List<Screenshot> _readScreenshots(Element parentElement) {
 		List<Screenshot> screenshots = new ArrayList<Screenshot>();
 
-		if (parentEl != null) {
-			Iterator<Element> itr = parentEl.elements("screenshot").iterator();
+		if (parentElement == null) {
+			return screenshots;
+		}
 
-			while (itr.hasNext()) {
-				Element screenshotEl = itr.next();
+		for (Element screenshotElement : parentElement.elements("screenshot")) {
+			Screenshot screenshot = new Screenshot();
 
-				Screenshot screenshot = new Screenshot();
+			screenshot.setThumbnailURL(
+				screenshotElement.elementText("thumbnail-url"));
+			screenshot.setLargeImageURL(
+				screenshotElement.elementText("large-image-url"));
 
-				screenshot.setThumbnailURL(
-					screenshotEl.element("thumbnail-url").getText());
-				screenshot.setLargeImageURL(
-					screenshotEl.element("large-image-url").getText());
-
-				screenshots.add(screenshot);
-			}
+			screenshots.add(screenshot);
 		}
 
 		return screenshots;
@@ -1084,8 +1085,7 @@ public class PluginPackageUtil {
 		_updateAvailable = null;
 	}
 
-	private void _registerInstalledPluginPackage(
-			PluginPackage pluginPackage)
+	private void _registerInstalledPluginPackage(PluginPackage pluginPackage)
 		throws PortalException {
 
 		_installedPluginPackages.addPluginPackage(pluginPackage);
@@ -1095,9 +1095,7 @@ public class PluginPackageUtil {
 		_indexPluginPackage(pluginPackage);
 	}
 
-	private void _registerPluginPackageInstallation(
-		String preliminaryContext) {
-
+	private void _registerPluginPackageInstallation(String preliminaryContext) {
 		_installedPluginPackages.registerPluginPackageInstallation(
 			preliminaryContext);
 	}
