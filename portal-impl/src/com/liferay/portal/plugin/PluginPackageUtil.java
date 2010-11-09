@@ -990,7 +990,7 @@ public class PluginPackageUtil {
 
 	private PluginPackage _readPluginPackageServletManifest(
 			ServletContext servletContext)
-		throws DocumentException, IOException {
+		throws IOException {
 			Attributes attributes = null;
 
 		String servletContextName = servletContext.getServletContextName();
