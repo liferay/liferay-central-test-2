@@ -17,6 +17,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Phone;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.base.PhoneServiceBaseImpl;
 import com.liferay.portal.service.permission.CommonPermissionUtil;
@@ -71,8 +72,10 @@ public class PhoneServiceImpl extends PhoneServiceBaseImpl {
 		CommonPermissionUtil.check(
 			getPermissionChecker(), className, classPK, ActionKeys.VIEW);
 
+		User user = getUser();
+
 		return phoneLocalService.getPhones(
-			getUser().getCompanyId(), className, classPK);
+			user.getCompanyId(), className, classPK);
 	}
 
 	public Phone updatePhone(

@@ -17,6 +17,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.EmailAddress;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.base.EmailAddressServiceBaseImpl;
 import com.liferay.portal.service.permission.CommonPermissionUtil;
@@ -73,8 +74,10 @@ public class EmailAddressServiceImpl extends EmailAddressServiceBaseImpl {
 		CommonPermissionUtil.check(
 			getPermissionChecker(), className, classPK, ActionKeys.VIEW);
 
+		User user = getUser();
+
 		return emailAddressLocalService.getEmailAddresses(
-			getUser().getCompanyId(), className, classPK);
+			user.getCompanyId(), className, classPK);
 	}
 
 	public EmailAddress updateEmailAddress(

@@ -161,8 +161,10 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		checkPermission(
 			getPermissionChecker(), groupId, Role.class.getName(), roleId);
 
+		User user = getUser();
+
 		permissionLocalService.setRolePermission(
-			roleId, getUser().getCompanyId(), name, scope, primKey, actionId);
+			roleId, user.getCompanyId(), name, scope, primKey, actionId);
 	}
 
 	public void setRolePermissions(
@@ -203,8 +205,10 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		checkPermission(
 			getPermissionChecker(), groupId, Role.class.getName(), roleId);
 
+		User user = getUser();
+
 		permissionLocalService.unsetRolePermission(
-			roleId, getUser().getCompanyId(), name, scope, primKey, actionId);
+			roleId, user.getCompanyId(), name, scope, primKey, actionId);
 	}
 
 	public void unsetRolePermissions(
@@ -214,8 +218,10 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		checkPermission(
 			getPermissionChecker(), groupId, Role.class.getName(), roleId);
 
+		User user = getUser();
+
 		permissionLocalService.unsetRolePermissions(
-			roleId, getUser().getCompanyId(), name, scope, actionId);
+			roleId, user.getCompanyId(), name, scope, actionId);
 	}
 
 	public void unsetUserPermissions(

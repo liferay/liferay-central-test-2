@@ -73,8 +73,10 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 	public UserGroup getUserGroup(String name)
 		throws PortalException, SystemException {
 
+		User user = getUser();
+
 		UserGroup userGroup = userGroupLocalService.getUserGroup(
-			getUser().getCompanyId(), name);
+			user.getCompanyId(), name);
 
 		long userGroupId = userGroup.getUserGroupId();
 
@@ -106,8 +108,10 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 		UserGroupPermissionUtil.check(
 			getPermissionChecker(), userGroupId, ActionKeys.UPDATE);
 
+		User user = getUser();
+
 		return userGroupLocalService.updateUserGroup(
-			getUser().getCompanyId(), userGroupId, name, description);
+			user.getCompanyId(), userGroupId, name, description);
 	}
 
 }

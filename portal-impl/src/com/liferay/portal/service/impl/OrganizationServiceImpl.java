@@ -23,6 +23,7 @@ import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.Phone;
+import com.liferay.portal.model.User;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -314,8 +315,10 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 		OrganizationPermissionUtil.check(
 			getPermissionChecker(), organizationId, ActionKeys.UPDATE);
 
+		User user = getUser();
+
 		return organizationLocalService.updateOrganization(
-			getUser().getCompanyId(), organizationId, parentOrganizationId,
+			user.getCompanyId(), organizationId, parentOrganizationId,
 			name, type, recursable, regionId, countryId, statusId, comments,
 			serviceContext);
 	}

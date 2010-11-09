@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Lock;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -323,6 +324,8 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			long expirationTime)
 		throws PortalException, RemoteException, SystemException {
 
+		User user = getUser();
+
 		if ((expirationTime <= 0) ||
 			(expirationTime > DLFolderImpl.LOCK_EXPIRATION_TIME)) {
 
@@ -330,7 +333,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		}
 
 		Lock lock = lockLocalService.lock(
-			getUser().getUserId(), DLFolder.class.getName(), folderId, owner,
+			user.getUserId(), DLFolder.class.getName(), folderId, owner,
 			inheritable, expirationTime);
 
 		Set<String> fileNames = new HashSet<String>();

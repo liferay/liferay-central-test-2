@@ -38,9 +38,9 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 			int type)
 		throws PortalException, SystemException {
 
-		User user = getUser();
-
 		PortalPermissionUtil.check(getPermissionChecker(), ActionKeys.ADD_ROLE);
+
+		User user = getUser();
 
 		return roleLocalService.addRole(
 			user.getUserId(), user.getCompanyId(), name, titleMap, description,

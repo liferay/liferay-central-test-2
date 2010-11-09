@@ -388,16 +388,18 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			long expirationTime)
 		throws PortalException, SystemException {
 
+		User user = getUser();
+
+		String lockId = DLUtil.getLockId(groupId, folderId, name);
+
 		if ((expirationTime <= 0) ||
 			(expirationTime > DLFileEntryImpl.LOCK_EXPIRATION_TIME)) {
 
 			expirationTime = DLFileEntryImpl.LOCK_EXPIRATION_TIME;
 		}
 
-		String lockId = DLUtil.getLockId(groupId, folderId, name);
-
 		return lockLocalService.lock(
-			getUser().getUserId(), DLFileEntry.class.getName(), lockId, owner,
+			user.getUserId(), DLFileEntry.class.getName(), lockId, owner,
 			false, expirationTime);
 	}
 

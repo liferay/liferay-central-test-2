@@ -41,10 +41,10 @@ public class LayoutSetPrototypeServiceImpl
 			boolean active)
 		throws PortalException, SystemException {
 
-		User user = getUser();
-
 		PortalPermissionUtil.check(
 			getPermissionChecker(), ActionKeys.ADD_LAYOUT_PROTOTYPE);
+
+		User user = getUser();
 
 		return layoutSetPrototypeLocalService.addLayoutSetPrototype(
 			user.getUserId(), user.getCompanyId(), nameMap, description,

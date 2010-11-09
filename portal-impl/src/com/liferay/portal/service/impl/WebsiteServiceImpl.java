@@ -16,6 +16,7 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.User;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.base.WebsiteServiceBaseImpl;
@@ -70,8 +71,10 @@ public class WebsiteServiceImpl extends WebsiteServiceBaseImpl {
 		CommonPermissionUtil.check(
 			getPermissionChecker(), className, classPK, ActionKeys.VIEW);
 
+		User user = getUser();
+
 		return websiteLocalService.getWebsites(
-			getUser().getCompanyId(), className, classPK);
+			user.getCompanyId(), className, classPK);
 	}
 
 	public Website updateWebsite(
