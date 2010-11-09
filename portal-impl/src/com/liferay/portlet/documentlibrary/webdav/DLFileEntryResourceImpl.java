@@ -45,7 +45,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 		setClassName(DLFileEntry.class.getName());
 		setPrimaryKey(fileEntry.getPrimaryKey());
 
-		_webDavRequest = webDavRequest;
+		//_webDavRequest = webDavRequest;
 		_fileEntry = fileEntry;
 	}
 
@@ -106,7 +106,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 		}
 	}
 
-	private WebDAVRequest _webDavRequest;
 	private DLFileEntry _fileEntry;
+	//private WebDAVRequest _webDavRequest;
 
 }
