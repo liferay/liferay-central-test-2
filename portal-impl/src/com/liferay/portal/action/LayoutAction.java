@@ -957,6 +957,23 @@ public class LayoutAction extends Action {
 			(StringServletResponse)renderRequestImpl.getAttribute(
 				WebKeys.STRING_SERVLET_RESPONSE);
 
+		if (stringResponse == null) {
+			stringResponse = (StringServletResponse)renderResponseImpl
+				.getHttpServletResponse();
+
+			Portlet portlet = processPortletRequest(
+				request, response, PortletRequest.RENDER_PHASE);
+
+			InvokerPortlet invokerPortlet =
+					PortletInstanceFactoryUtil.create(portlet, null);
+
+			invokerPortlet.render(renderRequestImpl, renderResponseImpl);
+
+			if (Validator.isNull(stringResponse.getString())) {
+				stringResponse.setString(null);
+			}
+		}
+
 		renderResponseImpl.transferHeaders(response);
 
 		if (stringResponse.isCalledGetOutputStream()) {
