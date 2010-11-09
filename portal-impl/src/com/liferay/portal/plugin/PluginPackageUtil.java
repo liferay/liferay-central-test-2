@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -52,6 +53,7 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 
 import java.net.MalformedURLException;
@@ -70,7 +72,10 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.jar.Attributes;
+import java.util.jar.Manifest;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.httpclient.HostConfiguration;
@@ -188,6 +193,13 @@ public class PluginPackageUtil {
 		String displayName, Properties properties) {
 
 		return _instance._readPluginPackageProperties(displayName, properties);
+	}
+
+	public static PluginPackage readPluginPackageServletContext(
+			ServletContext servletContext)
+		throws DocumentException, IOException {
+
+		return _instance._readPluginPackageServletContext(servletContext);
 	}
 
 	public static PluginPackage readPluginPackageXml(
@@ -972,6 +984,141 @@ public class PluginPackageUtil {
 		pluginPackage.setPageURL(pageURL);
 		pluginPackage.setDownloadURL(downloadURL);
 		//pluginPackage.setDeploymentSettings(null);
+
+		return pluginPackage;
+	}
+
+	private PluginPackage _readPluginPackageServletManifest(
+			ServletContext servletContext)
+		throws DocumentException, IOException {
+			Attributes attributes = null;
+
+		String servletContextName = servletContext.getServletContextName();
+
+		InputStream inputStream = servletContext.getResourceAsStream(
+			"/META-INF/MANIFEST.MF");
+
+		if (inputStream != null) {
+			Manifest manifest = new Manifest(inputStream);
+
+			attributes = manifest.getMainAttributes();
+		}
+		else {
+			attributes = new Attributes();
+		}
+
+		String artifactGroupId = attributes.getValue(
+			"Implementation-Vendor-Id");
+
+		if (Validator.isNull(artifactGroupId)) {
+			artifactGroupId = attributes.getValue("Implementation-Vendor");
+		}
+
+		if (Validator.isNull(artifactGroupId)) {
+			artifactGroupId = GetterUtil.getString(
+				attributes.getValue("Bundle-Vendor"), servletContextName);
+		}
+
+		String artifactId = attributes.getValue("Implementation-Title");
+
+		if (Validator.isNull(artifactId)) {
+			artifactId = GetterUtil.getString(
+				attributes.getValue("Bundle-Name"), servletContextName);
+		}
+
+		String version = attributes.getValue("Implementation-Version");
+
+		if (Validator.isNull(version)) {
+			version = GetterUtil.getString(
+				attributes.getValue("Bundle-Version"), Version.UNKNOWN);
+		}
+
+		if (version.equals(Version.UNKNOWN) && _log.isWarnEnabled()) {
+			_log.warn(
+				"Plugin package on context " + servletContextName +
+					" cannot be tracked because this WAR does not contain a " +
+						"liferay-plugin-package.xml file");
+		}
+
+		PluginPackage pluginPackage = new PluginPackageImpl(
+			artifactGroupId + StringPool.SLASH + artifactId + StringPool.SLASH +
+				version + StringPool.SLASH + "war");
+
+		pluginPackage.setName(artifactId);
+
+		String shortDescription = attributes.getValue("Bundle-Description");
+
+		if (Validator.isNotNull(shortDescription)) {
+			pluginPackage.setShortDescription(shortDescription);
+		}
+
+		String pageURL = attributes.getValue("Bundle-DocURL");
+
+		if (Validator.isNotNull(pageURL)) {
+			pluginPackage.setPageURL(pageURL);
+		}
+
+		return pluginPackage;
+	}
+
+	private PluginPackage _readPluginPackageServletContext(
+			ServletContext servletContext)
+		throws DocumentException, IOException {
+
+		String servletContextName = servletContext.getServletContextName();
+
+		String xml = HttpUtil.URLtoString(
+			servletContext.getResource("/WEB-INF/liferay-plugin-package.xml"));
+
+		if (_log.isInfoEnabled()) {
+			if (servletContextName == null) {
+				_log.info("Reading plugin package for the root context");
+			}
+			else {
+				_log.info("Reading plugin package for " + servletContextName);
+			}
+		}
+
+		PluginPackage pluginPackage = null;
+
+		if (xml == null) {
+			String propertiesString = HttpUtil.URLtoString(
+				servletContext.getResource(
+					"/WEB-INF/liferay-plugin-package.properties"));
+
+			if (propertiesString == null) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Reading plugin package from MANIFEST.MF");
+				}
+
+				pluginPackage =_readPluginPackageServletManifest(
+					servletContext);
+			}
+			else {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Reading plugin package from " +
+							"liferay-plugin-package.properties");
+				}
+
+				Properties properties = PropertiesUtil.load(propertiesString);
+
+				String displayName = servletContextName.substring(1);
+
+				pluginPackage = _readPluginPackageProperties(
+					displayName, properties);
+			}
+		}
+		else {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Reading plugin package from liferay-plugin-package.xml");
+			}
+
+			pluginPackage = _readPluginPackageXml(xml);
+		}
+
+		pluginPackage.setContext(servletContextName);
 
 		return pluginPackage;
 	}

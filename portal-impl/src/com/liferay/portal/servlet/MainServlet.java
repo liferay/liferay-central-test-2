@@ -15,7 +15,6 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchLayoutException;
-import com.liferay.portal.deploy.hot.PluginPackageHotDeployListener;
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.events.StartupAction;
 import com.liferay.portal.kernel.cache.Lifecycle;
@@ -58,6 +57,7 @@ import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.model.User;
 import com.liferay.portal.plugin.PluginPackageIndexer;
+import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
@@ -813,7 +813,8 @@ public class MainServlet extends ActionServlet {
 
 		IndexerRegistryUtil.register(new PluginPackageIndexer());
 
-		return PluginPackageHotDeployListener.readPluginPackage(servletContext);
+		return PluginPackageUtil.readPluginPackageServletContext(
+			servletContext);
 	}
 
 	protected void initPlugins() throws Exception {

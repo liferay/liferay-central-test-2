@@ -22,24 +22,14 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
-import com.liferay.portal.kernel.plugin.Version;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.xml.DocumentException;
-import com.liferay.portal.plugin.PluginPackageImpl;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.service.ServiceComponentLocalServiceUtil;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import java.util.Properties;
-import java.util.jar.Attributes;
-import java.util.jar.Manifest;
 
 import javax.servlet.ServletContext;
 
@@ -47,111 +37,6 @@ import javax.servlet.ServletContext;
  * @author Jorge Ferrer
  */
 public class PluginPackageHotDeployListener extends BaseHotDeployListener {
-
-	public static PluginPackage readPluginPackage(ServletContext servletContext)
-		throws DocumentException, IOException {
-
-		PluginPackage pluginPackage = null;
-
-		String servletContextName = servletContext.getServletContextName();
-
-		String xml = HttpUtil.URLtoString(
-			servletContext.getResource("/WEB-INF/liferay-plugin-package.xml"));
-
-		if (_log.isInfoEnabled()) {
-			if (servletContextName == null) {
-				_log.info("Reading plugin package for the root context");
-			}
-			else {
-				_log.info("Reading plugin package for " + servletContextName);
-			}
-		}
-
-		if (xml == null) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Reading plugin package from MANIFEST.MF");
-			}
-
-			Attributes attributes = null;
-
-			InputStream is = servletContext.getResourceAsStream(
-				"/META-INF/MANIFEST.MF");
-
-			if (is != null) {
-				Manifest manifest = new Manifest(is);
-
-				attributes = manifest.getMainAttributes();
-			}
-			else {
-				attributes = new Attributes();
-			}
-
-			String artifactGroupId = attributes.getValue(
-				"Implementation-Vendor-Id");
-
-			if (Validator.isNull(artifactGroupId)) {
-				artifactGroupId = attributes.getValue("Implementation-Vendor");
-			}
-
-			if (Validator.isNull(artifactGroupId)) {
-				artifactGroupId = GetterUtil.getString(
-					attributes.getValue("Bundle-Vendor"), servletContextName);
-			}
-
-			String artifactId = attributes.getValue("Implementation-Title");
-
-			if (Validator.isNull(artifactId)) {
-				artifactId = GetterUtil.getString(
-					attributes.getValue("Bundle-Name"), servletContextName);
-			}
-
-			String version = attributes.getValue("Implementation-Version");
-
-			if (Validator.isNull(version)) {
-				version = GetterUtil.getString(
-					attributes.getValue("Bundle-Version"), Version.UNKNOWN);
-			}
-
-			if (version.equals(Version.UNKNOWN) && _log.isWarnEnabled()) {
-				_log.warn(
-					"Plugin package on context " + servletContextName +
-						" cannot be tracked because this WAR does not " +
-							"contain a liferay-plugin-package.xml file");
-			}
-
-			pluginPackage =
-				new PluginPackageImpl(
-					artifactGroupId + StringPool.SLASH + artifactId +
-						StringPool.SLASH + version + StringPool.SLASH +
-							"war");
-
-			pluginPackage.setName(artifactId);
-
-			String shortDescription = attributes.getValue("Bundle-Description");
-
-			if (Validator.isNotNull(shortDescription)) {
-				pluginPackage.setShortDescription(shortDescription);
-			}
-
-			String pageURL = attributes.getValue("Bundle-DocURL");
-
-			if (Validator.isNotNull(pageURL)) {
-				pluginPackage.setPageURL(pageURL);
-			}
-		}
-		else {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Reading plugin package from liferay-plugin-package.xml");
-			}
-
-			pluginPackage = PluginPackageUtil.readPluginPackageXml(xml);
-		}
-
-		pluginPackage.setContext(servletContextName);
-
-		return pluginPackage;
-	}
 
 	public void invokeDeploy(HotDeployEvent event) throws HotDeployException {
 		try {
@@ -195,7 +80,8 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 			return;
 		}
 
-		PluginPackage pluginPackage = readPluginPackage(servletContext);
+		PluginPackage pluginPackage =
+			PluginPackageUtil.readPluginPackageServletContext(servletContext);
 
 		if (pluginPackage == null) {
 			return;
@@ -234,7 +120,8 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 			_log.debug("Invoking deploy for " + servletContextName);
 		}
 
-		PluginPackage pluginPackage = readPluginPackage(servletContext);
+		PluginPackage pluginPackage =
+			PluginPackageUtil.readPluginPackageServletContext(servletContext);
 
 		if (pluginPackage == null) {
 			return;
