@@ -63,8 +63,8 @@
 		eternal="false"
 		maxElementsInMemory="10000"
 		name="com.liferay.portal.model.impl.UserImpl"
-		timeToIdleSeconds="600"
 		overflowToDisk="false"
+		timeToIdleSeconds="600"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"

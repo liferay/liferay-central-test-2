@@ -28,7 +28,7 @@
 		eternal="false"
 		maxElementsInMemory="10000"
 		name="com.liferay.portal.velocity.LiferayResourceCacheUtil"
-		timeToIdleSeconds="3600"
 		overflowToDisk="false"
+		timeToIdleSeconds="3600"
 	/>
 </ehcache>

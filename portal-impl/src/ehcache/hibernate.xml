@@ -15,8 +15,8 @@
 	<defaultCache
 		eternal="false"
 		maxElementsInMemory="10000"
-		timeToIdleSeconds="600"
 		overflowToDisk="false"
+		timeToIdleSeconds="600"
 	/>
 
 	<!--
@@ -43,7 +43,7 @@
 		eternal="false"
 		maxElementsInMemory="10000"
 		name="com.liferay.portal.model.impl.UserImpl"
-		timeToIdleSeconds="600"
 		overflowToDisk="false"
+		timeToIdleSeconds="600"
 	/>
 </ehcache>
