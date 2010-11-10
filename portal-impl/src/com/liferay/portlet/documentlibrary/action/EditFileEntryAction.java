@@ -188,8 +188,7 @@ public class EditFileEntryAction extends PortletAction {
 		String name = ParamUtil.getString(actionRequest, "name");
 		String version = ParamUtil.getString(actionRequest, "version");
 
-		DLAppServiceUtil.deleteFileEntry(
-			groupId, folderId, name, version);
+		DLAppServiceUtil.deleteFileEntry(groupId, folderId, name, version);
 	}
 
 	protected void lockFileEntry(ActionRequest actionRequest) throws Exception {
@@ -229,9 +228,8 @@ public class EditFileEntryAction extends PortletAction {
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 		String name = ParamUtil.getString(actionRequest, "name");
 
-		DLFileVersion fileVersion =
-			DLAppLocalServiceUtil.getLatestFileVersion(
-				groupId, folderId, name);
+		DLFileVersion fileVersion = DLAppLocalServiceUtil.getLatestFileVersion(
+			groupId, folderId, name);
 
 		if (fileVersion.getStatus() != WorkflowConstants.STATUS_DRAFT) {
 			return;

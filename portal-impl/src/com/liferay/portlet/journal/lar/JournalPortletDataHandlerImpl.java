@@ -439,8 +439,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 						groupId = portletDataContext.getScopeGroupId();
 					}
 
-					fileEntry = DLAppLocalServiceUtil.
-						getFileEntryByUuidAndGroupId(uuid, groupId);
+					fileEntry =
+						DLAppLocalServiceUtil.getFileEntryByUuidAndGroupId(
+							uuid, groupId);
 				}
 				else {
 					String folderIdString = map.get("folderId");
@@ -457,9 +458,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 							groupId = portletDataContext.getScopeGroupId();
 						}
 
-						fileEntry =
-							DLAppLocalServiceUtil.getFileEntryByTitle(
-								groupId, folderId, name);
+						fileEntry = DLAppLocalServiceUtil.getFileEntryByTitle(
+							groupId, folderId, name);
 					}
 				}
 

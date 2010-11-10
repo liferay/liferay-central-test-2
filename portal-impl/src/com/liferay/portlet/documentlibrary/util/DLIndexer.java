@@ -122,8 +122,7 @@ public class DLIndexer extends BaseIndexer {
 	}
 
 	protected void doReindex(String className, long classPK) throws Exception {
-		DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(
-			classPK);
+		DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(classPK);
 
 		doReindex(fileEntry);
 	}

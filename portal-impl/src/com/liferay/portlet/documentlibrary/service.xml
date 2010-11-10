@@ -4,7 +4,7 @@
 <service-builder package-path="com.liferay.portlet.documentlibrary">
 	<namespace>DL</namespace>
 	<entity name="DLApp" local-service="true" remote-service="true"> 
-		
+
 		<!-- References -->
 
 		<reference package-path="com.liferay.documentlibrary" entity="DL" />
@@ -16,7 +16,7 @@
 		<reference package-path="com.liferay.portlet.asset" entity="AssetCategory" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetTag" />
-		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />	
+		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBDiscussion" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
 		<reference package-path="com.liferay.portlet.ratings" entity="RatingsEntry" />

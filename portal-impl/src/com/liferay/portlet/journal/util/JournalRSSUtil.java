@@ -160,9 +160,8 @@ public class JournalRSSUtil {
 				String uuid = parameters.get("uuid")[0];
 				long groupId = GetterUtil.getLong(parameters.get("groupId")[0]);
 
-				fileEntry =
-					DLAppLocalServiceUtil.getFileEntryByUuidAndGroupId(
-						uuid, groupId);
+				fileEntry = DLAppLocalServiceUtil.getFileEntryByUuidAndGroupId(
+					uuid, groupId);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {

@@ -176,8 +176,8 @@ public class WebServerServlet extends HttpServlet {
 		if (pathArray.length == 1) {
 			long dlFileShortcutId = GetterUtil.getLong(pathArray[0]);
 
-			DLFileShortcut dlFileShortcut =
-				DLAppServiceUtil.getFileShortcut(dlFileShortcutId);
+			DLFileShortcut dlFileShortcut = DLAppServiceUtil.getFileShortcut(
+				dlFileShortcutId);
 
 			return DLAppServiceUtil.getFileEntry(
 				dlFileShortcut.getGroupId(), dlFileShortcut.getToFolderId(),

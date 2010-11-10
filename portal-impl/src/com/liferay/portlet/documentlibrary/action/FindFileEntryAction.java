@@ -101,8 +101,7 @@ public class FindFileEntryAction extends Action {
 			}
 		}
 
-		DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(
-			fileEntryId);
+		DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(fileEntryId);
 
 		plid = PortalUtil.getPlidFromPortletId(
 			fileEntry.getGroupId(), PortletKeys.DOCUMENT_LIBRARY);

@@ -312,13 +312,12 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				serviceContext.setUuid(fileEntry.getUuid());
 
-				importedFileEntry =
-					DLAppLocalServiceUtil.addFileEntry(
-						userId, portletDataContext.getScopeGroupId(), folderId,
-						nameWithExtension, fileEntryTitle,
-						fileEntry.getDescription(), null,
-						fileEntry.getExtraSettings(), is, fileEntry.getSize(),
-						serviceContext);
+				importedFileEntry = DLAppLocalServiceUtil.addFileEntry(
+					userId, portletDataContext.getScopeGroupId(), folderId,
+					nameWithExtension, fileEntryTitle,
+					fileEntry.getDescription(), null,
+					fileEntry.getExtraSettings(), is, fileEntry.getSize(),
+					serviceContext);
 			}
 			else if (!isDuplicateFileEntry(fileEntry, existingFileEntry)) {
 				importedFileEntry = DLAppLocalServiceUtil.updateFileEntry(
@@ -351,12 +350,11 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			String title = fileEntry.getTitle();
 
 			try {
-				importedFileEntry =
-					DLAppLocalServiceUtil.addFileEntry(
-						userId, portletDataContext.getScopeGroupId(), folderId,
-						nameWithExtension, title, fileEntry.getDescription(),
-						null, fileEntry.getExtraSettings(), is,
-						fileEntry.getSize(), serviceContext);
+				importedFileEntry = DLAppLocalServiceUtil.addFileEntry(
+					userId, portletDataContext.getScopeGroupId(), folderId,
+					nameWithExtension, title, fileEntry.getDescription(), null,
+					fileEntry.getExtraSettings(), is, fileEntry.getSize(),
+					serviceContext);
 			}
 			catch (DuplicateFileException dfe) {
 				String[] titleParts = title.split("\\.", 2);
@@ -367,12 +365,11 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 					title += StringPool.PERIOD + titleParts[1];
 				}
 
-				importedFileEntry =
-					DLAppLocalServiceUtil.addFileEntry(
-						userId, portletDataContext.getScopeGroupId(), folderId,
-						nameWithExtension, title, fileEntry.getDescription(),
-						null, fileEntry.getExtraSettings(), is,
-						fileEntry.getSize(), serviceContext);
+				importedFileEntry = DLAppLocalServiceUtil.addFileEntry(
+					userId, portletDataContext.getScopeGroupId(), folderId,
+					nameWithExtension, title, fileEntry.getDescription(), null,
+					fileEntry.getExtraSettings(), is, fileEntry.getSize(),
+					serviceContext);
 			}
 		}
 
@@ -819,23 +816,20 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (existingFileShortcut == null) {
 				serviceContext.setUuid(fileShortcut.getUuid());
 
-				importedFileShortcut =
-					DLAppLocalServiceUtil.addFileShortcut(
-						userId, folder.getGroupId(), folderId, toFolderId,
-						toName, serviceContext);
+				importedFileShortcut = DLAppLocalServiceUtil.addFileShortcut(
+					userId, folder.getGroupId(), folderId, toFolderId, toName,
+					serviceContext);
 			}
 			else {
-				importedFileShortcut =
-					DLAppLocalServiceUtil.updateFileShortcut(
-						userId, existingFileShortcut.getFileShortcutId(),
-						folderId, toFolderId, toName, serviceContext);
+				importedFileShortcut = DLAppLocalServiceUtil.updateFileShortcut(
+					userId, existingFileShortcut.getFileShortcutId(), folderId,
+					toFolderId, toName, serviceContext);
 			}
 		}
 		else {
-			importedFileShortcut =
-				DLAppLocalServiceUtil.addFileShortcut(
-					userId, folder.getGroupId(), folderId, toFolderId, toName,
-					serviceContext);
+			importedFileShortcut = DLAppLocalServiceUtil.addFileShortcut(
+				userId, folder.getGroupId(), folderId, toFolderId, toName,
+				serviceContext);
 		}
 
 		portletDataContext.importPermissions(

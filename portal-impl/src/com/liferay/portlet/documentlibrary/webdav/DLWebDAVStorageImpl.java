@@ -564,10 +564,9 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 						DLAppServiceUtil.getFileEntryByTitle(
 							groupId, parentFolderId, title);
 
-					InputStream is =
-						DLAppServiceUtil.getFileAsStream(
-							fileEntry.getGroupId(), fileEntry.getFolderId(),
-							fileEntry.getName());
+					InputStream is = DLAppServiceUtil.getFileAsStream(
+						fileEntry.getGroupId(), fileEntry.getFolderId(),
+						fileEntry.getName());
 
 					bytes = FileUtil.getBytes(is);
 
@@ -650,9 +649,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				request.getHeader(HttpHeaders.CONTENT_LENGTH));
 
 			try {
-				DLFileEntry fileEntry =
-					DLAppServiceUtil.getFileEntryByTitle(
-						groupId, parentFolderId, name);
+				DLFileEntry fileEntry = DLAppServiceUtil.getFileEntryByTitle(
+					groupId, parentFolderId, name);
 
 				if (isLocked(fileEntry, webDavRequest.getLockUuid())) {
 					return WebDAVUtil.SC_LOCKED;
@@ -818,9 +816,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 		catch (NoSuchFolderException nsfe) {
 			try {
-				DLFileEntry fileEntry =
-					DLAppServiceUtil.getFileEntryByTitle(
-						groupId, parentFolderId, name);
+				DLFileEntry fileEntry = DLAppServiceUtil.getFileEntryByTitle(
+					groupId, parentFolderId, name);
 
 				if (isLocked(fileEntry, lockUuid)) {
 					throw new LockException();

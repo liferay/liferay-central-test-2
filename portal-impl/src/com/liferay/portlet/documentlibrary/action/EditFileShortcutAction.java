@@ -139,7 +139,7 @@ public class EditFileShortcutAction extends PortletAction {
 			// Add file shortcut
 
 			DLFileShortcut fileShortcut = DLAppServiceUtil.addFileShortcut(
-					groupId, folderId, toFolderId, toName, serviceContext);
+				groupId, folderId, toFolderId, toName, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, DLFileShortcut.class.getName(),

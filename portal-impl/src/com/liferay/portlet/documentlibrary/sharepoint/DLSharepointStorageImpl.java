@@ -125,8 +125,8 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 		if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			List<DLFileEntry> fileEntries =
-				DLAppServiceUtil.getFileEntries(groupId, parentFolderId);
+			List<DLFileEntry> fileEntries = DLAppServiceUtil.getFileEntries(
+				groupId, parentFolderId);
 
 			for (DLFileEntry fileEntry : fileEntries) {
 				documentsTree.addChild(

@@ -104,8 +104,7 @@ public class DLIndexer extends BaseIndexer {
 
 		try {
 			if (fileEntryId > 0) {
-				fileEntry = DLAppLocalServiceUtil.getFileEntry(
-					fileEntryId);
+				fileEntry = DLAppLocalServiceUtil.getFileEntry(fileEntryId);
 			}
 			else {
 				fileEntry = DLAppLocalServiceUtil.getFileEntry(
