@@ -30,6 +30,7 @@ public class MiscTestSuite extends TestSuite {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
+		testSuite.addTestSuite(FileImplExtractTest.class);
 		testSuite.addTestSuite(FileMultiValueMapTest.class);
 		testSuite.addTestSuite(ImageProcessorImplTest.class);
 		testSuite.addTestSuite(MemoryMultiValueMapTest.class);
