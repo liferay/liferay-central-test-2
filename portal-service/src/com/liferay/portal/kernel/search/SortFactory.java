@@ -14,8 +14,11 @@
 
 package com.liferay.portal.kernel.search;
 
+import java.util.ArrayList;
+
 /**
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  */
 public interface SortFactory {
 
@@ -24,5 +27,7 @@ public interface SortFactory {
 	public Sort create(String fieldName, int type, boolean reverse);
 
 	public Sort[] getDefaultSorts();
+
+	public Sort[] toArray(ArrayList sorts);
 
 }

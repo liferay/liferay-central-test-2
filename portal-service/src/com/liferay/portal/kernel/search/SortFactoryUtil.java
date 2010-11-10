@@ -14,8 +14,11 @@
 
 package com.liferay.portal.kernel.search;
 
+import java.util.ArrayList;
+
 /**
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  */
 public class SortFactoryUtil {
 
@@ -33,6 +36,10 @@ public class SortFactoryUtil {
 
 	public static SortFactory getSortFactory() {
 		return _sortFactory;
+	}
+
+	public static Sort[] toArray(ArrayList sorts) {
+		return getSortFactory().toArray(sorts);
 	}
 
 	public void setSortFactory(SortFactory sortFactory) {
