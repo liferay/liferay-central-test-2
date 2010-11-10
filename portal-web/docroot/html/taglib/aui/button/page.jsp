@@ -32,8 +32,8 @@ if (onClick.startsWith(Http.HTTP_WITH_SLASH) || onClick.startsWith(Http.HTTPS_WI
 }
 %>
 
-<span class="<%= _buildCss(BUTTON_PREFIX, type, false, disabled, false, false, false, cssClass) %>">
+<span class="<%= TaglibUtil.buildCss(TaglibUtil.BUTTON_PREFIX, type, false, disabled, false, false, false, cssClass) %>">
 	<span class="aui-button-content">
-		<input class="<%= _buildCss(BUTTON_INPUT_PREFIX, type, false, false, false, false, false, inputCssClass) %>" <%= disabled ? "disabled" : StringPool.BLANK %> <%= Validator.isNotNull(name) ? "id=\"" + namespace + name + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> type='<%= type.equals("cancel") ? "button" : type %>' value="<%= LanguageUtil.get(pageContext, value) %>" <%= _buildData(data) %> <%= _buildDynamicAttributes(dynamicAttributes) %> />
+		<input class="<%= TaglibUtil.buildCss(TaglibUtil.BUTTON_INPUT_PREFIX, type, false, false, false, false, false, inputCssClass) %>" <%= disabled ? "disabled" : StringPool.BLANK %> <%= Validator.isNotNull(name) ? "id=\"" + namespace + name + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> type='<%= type.equals("cancel") ? "button" : type %>' value="<%= LanguageUtil.get(pageContext, value) %>" <%= TaglibUtil.buildData(data) %> <%= TaglibUtil.buildDynamicAttributes(dynamicAttributes) %> />
 	</span>
 </span>

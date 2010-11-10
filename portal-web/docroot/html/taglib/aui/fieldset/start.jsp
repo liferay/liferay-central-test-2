@@ -23,7 +23,7 @@ Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribut
 String label = GetterUtil.getString((String)request.getAttribute("aui:fieldset:label"));
 %>
 
-<fieldset class="aui-fieldset <%= cssClass %> <%= column ? "aui-column aui-form-column" : StringPool.BLANK %>" <%= _buildDynamicAttributes(dynamicAttributes) %>>
+<fieldset class="aui-fieldset <%= cssClass %> <%= column ? "aui-column aui-form-column" : StringPool.BLANK %>" <%= TaglibUtil.buildDynamicAttributes(dynamicAttributes) %>>
 	<c:if test="<%= Validator.isNotNull(label) %>">
 		<aui:legend label="<%= label %>" />
 	</c:if>

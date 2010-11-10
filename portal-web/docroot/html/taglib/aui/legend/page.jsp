@@ -22,4 +22,4 @@ Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribut
 String label = GetterUtil.getString((String)request.getAttribute("aui:legend:label"));
 %>
 
-<legend class="aui-fieldset-legend" <%= _buildDynamicAttributes(dynamicAttributes) %>><span class="aui-legend <%= cssClass %>"><liferay-ui:message key="<%= label %>" /></span></legend>
+<legend class="aui-fieldset-legend" <%= TaglibUtil.buildDynamicAttributes(dynamicAttributes) %>><span class="aui-legend <%= cssClass %>"><liferay-ui:message key="<%= label %>" /></span></legend>

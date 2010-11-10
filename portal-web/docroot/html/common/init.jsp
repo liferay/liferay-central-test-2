@@ -186,6 +186,7 @@
 <%@ page import="com.liferay.portlet.RenderResponseImpl" %>
 <%@ page import="com.liferay.portlet.UserAttributes" %>
 <%@ page import="com.liferay.portlet.portletconfiguration.util.PortletConfigurationUtil" %>
+<%@ page import="com.liferay.taglib.TaglibUtil" %>
 <%@ page import="com.liferay.util.CreditCard" %>
 <%@ page import="com.liferay.util.Encryptor" %>
 <%@ page import="com.liferay.util.JS" %>

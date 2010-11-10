@@ -56,14 +56,14 @@ else if (Validator.isNotNull(title)) {
 	title = LanguageUtil.get(pageContext, title);
 }
 
-String fieldCss = _buildCss(FIELD_PREFIX, "select", inlineField, disabled, false, first, last, cssClass);
-String inputCss = _buildCss(INPUT_PREFIX, "select", false, false, false, false, false, inputCssClass);
+String fieldCss = TaglibUtil.buildCss(TaglibUtil.FIELD_PREFIX, "select", inlineField, disabled, false, first, last, cssClass);
+String inputCss = TaglibUtil.buildCss(TaglibUtil.INPUT_PREFIX, "select", false, false, false, false, false, inputCssClass);
 %>
 
 <span class="<%= fieldCss %>">
 	<span class="aui-field-content">
 		<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
-			<label <%= _buildLabel(inlineLabel, true, id) %>>
+			<label <%= TaglibUtil.buildLabel(inlineLabel, true, id) %>>
 				<liferay-ui:message key="<%= label %>" />
 
 				<c:if test="<%= Validator.isNotNull(helpMessage) %>">
@@ -83,7 +83,7 @@ String inputCss = _buildCss(INPUT_PREFIX, "select", false, false, false, false, 
 		</c:if>
 
 		<span class='aui-field-element <%= Validator.isNotNull(label) && inlineLabel.equals("right") ? "aui-field-label-right" : StringPool.BLANK %>'>
-			<select class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" <%= multiple ? "multiple" : StringPool.BLANK %> name="<%= namespace + name %>" <%= Validator.isNotNull(onChange) ? "onChange=\"" + onChange + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(title) ? "title=\"" + title + "\"" : StringPool.BLANK %> <%= _buildData(data) %> <%= _buildDynamicAttributes(dynamicAttributes) %>>
+			<select class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" <%= multiple ? "multiple" : StringPool.BLANK %> name="<%= namespace + name %>" <%= Validator.isNotNull(onChange) ? "onChange=\"" + onChange + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(title) ? "title=\"" + title + "\"" : StringPool.BLANK %> <%= TaglibUtil.buildData(data) %> <%= TaglibUtil.buildDynamicAttributes(dynamicAttributes) %>>
 				<c:if test="<%= showEmptyOption %>">
 					<aui:option />
 				</c:if>
