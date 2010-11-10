@@ -14,37 +14,25 @@
 
 package com.liferay.portal.search;
 
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.search.messaging.SearchRequest;
 
 /**
  * @author Bruno Farache
+ * @author Tina Tian
  */
-public class IndexSearcherImpl implements IndexSearcher {
+public class IndexSearcherProxyBean
+	extends BaseProxyBean implements IndexSearcher {
 
 	public Hits search(
 			long companyId, Query query, Sort[] sorts, int start, int end)
 		throws SearchException {
 
-		try {
-			SearchRequest searchRequest = SearchRequest.search(
-				companyId, query, sorts, start, end);
-
-			Hits hits = (Hits)MessageBusUtil.sendSynchronousMessage(
-				DestinationNames.SEARCH_READER, searchRequest,
-				DestinationNames.SEARCH_READER_RESPONSE);
-
-			return hits;
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
-		}
+		throw new UnsupportedOperationException();
 	}
 
 }

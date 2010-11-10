@@ -14,71 +14,14 @@
 
 package com.liferay.portal.kernel.search.messaging;
 
-import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.IndexWriter;
-
-import java.util.Collection;
-
 /**
  * @author Bruno Farache
  */
 public class SearchWriterMessageListener
 	extends BaseSearchEngineMessageListener {
 
-	protected void doReceive(Message message) throws Exception {
-		Object payload = message.getPayload();
-
-		if (!(payload instanceof SearchRequest)) {
-			return;
-		}
-
-		SearchRequest searchRequest = (SearchRequest)payload;
-
-		SearchEngineCommand searchEngineCommand =
-			searchRequest.getSearchEngineCommand();
-
-		long companyId = searchRequest.getCompanyId();
-		Document document = searchRequest.getDocument();
-		Collection<Document> documents = searchRequest.getDocuments();
-		String id = searchRequest.getId();
-		Collection<String> ids = searchRequest.getIds();
-
-		IndexWriter indexWriter = searchEngine.getWriter();
-
-		if (searchEngineCommand.equals(SearchEngineCommand.ADD_DOCUMENT)) {
-			indexWriter.addDocument(companyId, document);
-		}
-		else if (searchEngineCommand.equals(
-					SearchEngineCommand.ADD_DOCUMENTS)) {
-
-			indexWriter.addDocuments(companyId, documents);
-		}
-		else if (searchEngineCommand.equals(
-					SearchEngineCommand.DELETE_DOCUMENT)) {
-
-			indexWriter.deleteDocument(companyId, id);
-		}
-		else if (searchEngineCommand.equals(
-					SearchEngineCommand.DELETE_DOCUMENTS)) {
-
-			indexWriter.deleteDocuments(companyId, ids);
-		}
-		else if (searchEngineCommand.equals(
-					SearchEngineCommand.DELETE_PORTLET_DOCUMENTS)) {
-
-			indexWriter.deletePortletDocuments(companyId, id);
-		}
-		else if (searchEngineCommand.equals(
-					SearchEngineCommand.UPDATE_DOCUMENT)) {
-
-			indexWriter.updateDocument(companyId, document);
-		}
-		else if (searchEngineCommand.equals(
-					SearchEngineCommand.UPDATE_DOCUMENTS)) {
-
-			indexWriter.updateDocuments(companyId, documents);
-		}
+	public void afterPropertiesSet() {
+		setManager(searchEngine.getWriter());
 	}
 
 }

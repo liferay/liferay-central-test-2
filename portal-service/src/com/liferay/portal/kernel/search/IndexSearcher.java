@@ -14,9 +14,13 @@
 
 package com.liferay.portal.kernel.search;
 
+import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
+import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
+
 /**
  * @author Bruno Farache
  */
+@MessagingProxy(mode = ProxyMode.SYNC)
 public interface IndexSearcher {
 
 	public Hits search(

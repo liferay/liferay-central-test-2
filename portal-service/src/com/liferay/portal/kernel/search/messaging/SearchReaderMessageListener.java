@@ -14,46 +14,14 @@
 
 package com.liferay.portal.kernel.search.messaging;
 
-import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.search.Hits;
-
 /**
  * @author Bruno Farache
  */
 public class SearchReaderMessageListener
 	extends BaseSearchEngineMessageListener {
 
-	protected void doCommandSearch(Message message, SearchRequest searchRequest)
-		throws Exception {
-
-		Hits hits = searchEngine.getSearcher().search(
-			searchRequest.getCompanyId(), searchRequest.getQuery(),
-			searchRequest.getSorts(), searchRequest.getStart(),
-			searchRequest.getEnd());
-
-		Message responseMessage = MessageBusUtil.createResponseMessage(
-			message, hits);
-
-		MessageBusUtil.sendMessage(
-			responseMessage.getDestinationName(), responseMessage);
-	}
-
-	protected void doReceive(Message message) throws Exception {
-		Object payload = message.getPayload();
-
-		if (!(payload instanceof SearchRequest)) {
-			return;
-		}
-
-		SearchRequest searchRequest = (SearchRequest)payload;
-
-		SearchEngineCommand searchEnginecommand =
-			searchRequest.getSearchEngineCommand();
-
-		if (searchEnginecommand.equals(SearchEngineCommand.SEARCH)) {
-			doCommandSearch(message, searchRequest);
-		}
+	public void afterPropertiesSet() {
+		setManager(searchEngine.getSearcher());
 	}
 
 }
