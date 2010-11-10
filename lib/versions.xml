@@ -2742,6 +2742,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/tagsoup.jar</file-name>
+		<version>1.2</version>
+		<project-name>TagSoup</project-name>
+		<project-url>http://home.ccil.org/~cowan/XML/tagsoup/</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/tika-core.jar</file-name>
 		<version>0.7</version>
 		<project-name>Tika</project-name>
