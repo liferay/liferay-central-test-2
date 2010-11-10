@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.LayoutBranch;
+import com.liferay.portal.model.LayoutSetBranch;
 
 import java.util.Date;
 import java.util.List;
@@ -27,11 +27,11 @@ import java.util.List;
  * @author    Brian Wing Shun Chan
  * @generated
  */
-public class LayoutBranchJSONSerializer {
-	public static JSONObject toJSONObject(LayoutBranch model) {
+public class LayoutSetBranchJSONSerializer {
+	public static JSONObject toJSONObject(LayoutSetBranch model) {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("layoutBranchId", model.getLayoutBranchId());
+		jsonObj.put("layoutSetBranchId", model.getLayoutSetBranchId());
 		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
@@ -56,6 +56,7 @@ public class LayoutBranchJSONSerializer {
 		}
 
 		jsonObj.put("modifiedDate", modifiedDateJSON);
+		jsonObj.put("privateLayout", model.getPrivateLayout());
 		jsonObj.put("name", model.getName());
 		jsonObj.put("description", model.getDescription());
 
@@ -63,10 +64,10 @@ public class LayoutBranchJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
-		com.liferay.portal.model.LayoutBranch[] models) {
+		com.liferay.portal.model.LayoutSetBranch[] models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		for (LayoutBranch model : models) {
+		for (LayoutSetBranch model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 
@@ -74,10 +75,10 @@ public class LayoutBranchJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
-		com.liferay.portal.model.LayoutBranch[][] models) {
+		com.liferay.portal.model.LayoutSetBranch[][] models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		for (LayoutBranch[] model : models) {
+		for (LayoutSetBranch[] model : models) {
 			jsonArray.put(toJSONArray(model));
 		}
 
@@ -85,10 +86,10 @@ public class LayoutBranchJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
-		List<com.liferay.portal.model.LayoutBranch> models) {
+		List<com.liferay.portal.model.LayoutSetBranch> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		for (LayoutBranch model : models) {
+		for (LayoutSetBranch model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

@@ -12,27 +12,26 @@
  * details.
  */
 
-package com.liferay.portal;
+package com.liferay.portal.model.impl;
+
+import com.liferay.portal.model.LayoutSetBranch;
+import com.liferay.portal.model.LayoutSetBranchConstants;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  */
-public class NoSuchLayoutBranchException extends NoSuchModelException {
+public class LayoutSetBranchImpl
+	extends LayoutSetBranchModelImpl implements LayoutSetBranch {
 
-	public NoSuchLayoutBranchException() {
-		super();
+	public LayoutSetBranchImpl() {
 	}
 
-	public NoSuchLayoutBranchException(String msg) {
-		super(msg);
-	}
+	public boolean isMaster() {
+		if (getName().equals(LayoutSetBranchConstants.MASTER_BRANCH_NAME)) {
+			return true;
+		}
 
-	public NoSuchLayoutBranchException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-
-	public NoSuchLayoutBranchException(Throwable cause) {
-		super(cause);
+		return false;
 	}
 
 }

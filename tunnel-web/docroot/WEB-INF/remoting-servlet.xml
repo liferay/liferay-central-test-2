@@ -121,18 +121,6 @@
 		<property name="service" ref="com.liferay.portal.service.LayoutService" />
 		<property name="serviceInterface" value="com.liferay.portal.service.LayoutService" />
 	</bean>
-	<bean name="/com_liferay_portal_service_spring_LayoutBranchService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.LayoutBranchService" />
-		<property name="serviceInterface" value="com.liferay.portal.service.LayoutBranchService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_LayoutBranchService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.LayoutBranchService" />
-		<property name="serviceInterface" value="com.liferay.portal.service.LayoutBranchService" />
-	</bean>
-	<bean name="/com_liferay_portal_service_spring_LayoutBranchService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portal.service.LayoutBranchService" />
-		<property name="serviceInterface" value="com.liferay.portal.service.LayoutBranchService" />
-	</bean>
 	<bean name="/com_liferay_portal_service_spring_LayoutPrototypeService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.LayoutPrototypeService" />
 		<property name="serviceInterface" value="com.liferay.portal.service.LayoutPrototypeService" />
@@ -168,6 +156,18 @@
 	<bean name="/com_liferay_portal_service_spring_LayoutSetService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.LayoutSetService" />
 		<property name="serviceInterface" value="com.liferay.portal.service.LayoutSetService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_LayoutSetBranchService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.LayoutSetBranchService" />
+		<property name="serviceInterface" value="com.liferay.portal.service.LayoutSetBranchService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_LayoutSetBranchService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.LayoutSetBranchService" />
+		<property name="serviceInterface" value="com.liferay.portal.service.LayoutSetBranchService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_LayoutSetBranchService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.LayoutSetBranchService" />
+		<property name="serviceInterface" value="com.liferay.portal.service.LayoutSetBranchService" />
 	</bean>
 	<bean name="/com_liferay_portal_service_spring_LayoutSetPrototypeService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.LayoutSetPrototypeService" />

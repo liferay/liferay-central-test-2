@@ -23,32 +23,33 @@ import java.util.List;
 /**
  * <p>
  * This class is used by
- * {@link com.liferay.portal.service.http.LayoutBranchServiceSoap}.
+ * {@link com.liferay.portal.service.http.LayoutSetBranchServiceSoap}.
  * </p>
  *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portal.service.http.LayoutBranchServiceSoap
+ * @see       com.liferay.portal.service.http.LayoutSetBranchServiceSoap
  * @generated
  */
-public class LayoutBranchSoap implements Serializable {
-	public static LayoutBranchSoap toSoapModel(LayoutBranch model) {
-		LayoutBranchSoap soapModel = new LayoutBranchSoap();
+public class LayoutSetBranchSoap implements Serializable {
+	public static LayoutSetBranchSoap toSoapModel(LayoutSetBranch model) {
+		LayoutSetBranchSoap soapModel = new LayoutSetBranchSoap();
 
-		soapModel.setLayoutBranchId(model.getLayoutBranchId());
+		soapModel.setLayoutSetBranchId(model.getLayoutSetBranchId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setPrivateLayout(model.getPrivateLayout());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
 
 		return soapModel;
 	}
 
-	public static LayoutBranchSoap[] toSoapModels(LayoutBranch[] models) {
-		LayoutBranchSoap[] soapModels = new LayoutBranchSoap[models.length];
+	public static LayoutSetBranchSoap[] toSoapModels(LayoutSetBranch[] models) {
+		LayoutSetBranchSoap[] soapModels = new LayoutSetBranchSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -57,14 +58,15 @@ public class LayoutBranchSoap implements Serializable {
 		return soapModels;
 	}
 
-	public static LayoutBranchSoap[][] toSoapModels(LayoutBranch[][] models) {
-		LayoutBranchSoap[][] soapModels = null;
+	public static LayoutSetBranchSoap[][] toSoapModels(
+		LayoutSetBranch[][] models) {
+		LayoutSetBranchSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new LayoutBranchSoap[models.length][models[0].length];
+			soapModels = new LayoutSetBranchSoap[models.length][models[0].length];
 		}
 		else {
-			soapModels = new LayoutBranchSoap[0][0];
+			soapModels = new LayoutSetBranchSoap[0][0];
 		}
 
 		for (int i = 0; i < models.length; i++) {
@@ -74,33 +76,34 @@ public class LayoutBranchSoap implements Serializable {
 		return soapModels;
 	}
 
-	public static LayoutBranchSoap[] toSoapModels(List<LayoutBranch> models) {
-		List<LayoutBranchSoap> soapModels = new ArrayList<LayoutBranchSoap>(models.size());
+	public static LayoutSetBranchSoap[] toSoapModels(
+		List<LayoutSetBranch> models) {
+		List<LayoutSetBranchSoap> soapModels = new ArrayList<LayoutSetBranchSoap>(models.size());
 
-		for (LayoutBranch model : models) {
+		for (LayoutSetBranch model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new LayoutBranchSoap[soapModels.size()]);
+		return soapModels.toArray(new LayoutSetBranchSoap[soapModels.size()]);
 	}
 
-	public LayoutBranchSoap() {
+	public LayoutSetBranchSoap() {
 	}
 
 	public long getPrimaryKey() {
-		return _layoutBranchId;
+		return _layoutSetBranchId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setLayoutBranchId(pk);
+		setLayoutSetBranchId(pk);
 	}
 
-	public long getLayoutBranchId() {
-		return _layoutBranchId;
+	public long getLayoutSetBranchId() {
+		return _layoutSetBranchId;
 	}
 
-	public void setLayoutBranchId(long layoutBranchId) {
-		_layoutBranchId = layoutBranchId;
+	public void setLayoutSetBranchId(long layoutSetBranchId) {
+		_layoutSetBranchId = layoutSetBranchId;
 	}
 
 	public long getGroupId() {
@@ -151,6 +154,18 @@ public class LayoutBranchSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
+	public boolean getPrivateLayout() {
+		return _privateLayout;
+	}
+
+	public boolean isPrivateLayout() {
+		return _privateLayout;
+	}
+
+	public void setPrivateLayout(boolean privateLayout) {
+		_privateLayout = privateLayout;
+	}
+
 	public String getName() {
 		return _name;
 	}
@@ -167,13 +182,14 @@ public class LayoutBranchSoap implements Serializable {
 		_description = description;
 	}
 
-	private long _layoutBranchId;
+	private long _layoutSetBranchId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private boolean _privateLayout;
 	private String _name;
 	private String _description;
 }

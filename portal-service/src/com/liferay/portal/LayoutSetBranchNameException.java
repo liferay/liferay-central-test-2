@@ -12,26 +12,29 @@
  * details.
  */
 
-package com.liferay.portal.model.impl;
+package com.liferay.portal;
 
-import com.liferay.portal.model.LayoutBranch;
-import com.liferay.portal.model.LayoutBranchConstants;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * @author Raymond Augé
+ * @author Brian Wing Shun Chan
  */
-public class LayoutBranchImpl
-	extends LayoutBranchModelImpl implements LayoutBranch {
+public class LayoutSetBranchNameException extends PortalException {
 
-	public LayoutBranchImpl() {
+	public static final int DUPLICATE = 1;
+
+	public static final int TOO_LONG = 2;
+
+	public static final int TOO_SHORT = 3;
+
+	private int _type;
+
+	public LayoutSetBranchNameException(int type) {
+		_type = type;
 	}
 
-	public boolean isMaster() {
-		if (getName().equals(LayoutBranchConstants.MASTER_BRANCH_NAME)) {
-			return true;
-		}
-
-		return false;
+	public int getType() {
+		return _type;
 	}
 
 }

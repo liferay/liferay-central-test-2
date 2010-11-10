@@ -15,23 +15,23 @@
 package com.liferay.portal.model;
 
 /**
- * The model interface for the LayoutBranch service. Represents a row in the &quot;LayoutBranch&quot; database table, with each column mapped to a property of this class.
+ * The model interface for the LayoutSetBranch service. Represents a row in the &quot;LayoutSetBranch&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.LayoutBranchImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.LayoutSetBranchImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see LayoutBranchModel
- * @see com.liferay.portal.model.impl.LayoutBranchImpl
- * @see com.liferay.portal.model.impl.LayoutBranchModelImpl
+ * @see LayoutSetBranchModel
+ * @see com.liferay.portal.model.impl.LayoutSetBranchImpl
+ * @see com.liferay.portal.model.impl.LayoutSetBranchModelImpl
  * @generated
  */
-public interface LayoutBranch extends LayoutBranchModel {
+public interface LayoutSetBranch extends LayoutSetBranchModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a layout branch model instance should use the {@link LayoutBranch} interface instead.
+	 * Never reference this interface directly. All methods that expect a layout set branch model instance should use the {@link LayoutSetBranch} interface instead.
 	 */
 	public boolean isMaster();
 }

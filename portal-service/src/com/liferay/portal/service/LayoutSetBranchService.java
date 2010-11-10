@@ -21,43 +21,44 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
- * The interface for the layout branch remote service.
+ * The interface for the layout set branch remote service.
  *
  * <p>
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see LayoutBranchServiceUtil
- * @see com.liferay.portal.service.base.LayoutBranchServiceBaseImpl
- * @see com.liferay.portal.service.impl.LayoutBranchServiceImpl
+ * @see LayoutSetBranchServiceUtil
+ * @see com.liferay.portal.service.base.LayoutSetBranchServiceBaseImpl
+ * @see com.liferay.portal.service.impl.LayoutSetBranchServiceImpl
  * @generated
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface LayoutBranchService {
+public interface LayoutSetBranchService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link LayoutBranchServiceUtil} to access the layout branch remote service. Add custom service methods to {@link com.liferay.portal.service.impl.LayoutBranchServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link LayoutSetBranchServiceUtil} to access the layout set branch remote service. Add custom service methods to {@link com.liferay.portal.service.impl.LayoutSetBranchServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public com.liferay.portal.model.LayoutBranch addLayoutBranch(long groupId,
-		java.lang.String name, java.lang.String description,
+	public com.liferay.portal.model.LayoutSetBranch addLayoutSetBranch(
+		long groupId, boolean privateLayout, java.lang.String name,
+		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteLayoutBranch(long groupId, long layoutBranchId)
+	public void deleteLayoutSetBranch(long groupId, long layoutSetBranchId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portal.model.LayoutBranch> getLayoutBranches(
-		long groupId)
+	public java.util.List<com.liferay.portal.model.LayoutSetBranch> getLayoutSetBranches(
+		long groupId, boolean privateLayout)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.LayoutBranch updateLayoutBranch(
-		long groupId, long layoutBranchId, java.lang.String name,
+	public com.liferay.portal.model.LayoutSetBranch updateLayoutSetBranch(
+		long groupId, long layoutSetBranchId, java.lang.String name,
 		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,

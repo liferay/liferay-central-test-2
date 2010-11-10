@@ -21,67 +21,67 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
- * The interface for the layout branch local service.
+ * The interface for the layout set branch local service.
  *
  * <p>
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see LayoutBranchLocalServiceUtil
- * @see com.liferay.portal.service.base.LayoutBranchLocalServiceBaseImpl
- * @see com.liferay.portal.service.impl.LayoutBranchLocalServiceImpl
+ * @see LayoutSetBranchLocalServiceUtil
+ * @see com.liferay.portal.service.base.LayoutSetBranchLocalServiceBaseImpl
+ * @see com.liferay.portal.service.impl.LayoutSetBranchLocalServiceImpl
  * @generated
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface LayoutBranchLocalService {
+public interface LayoutSetBranchLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link LayoutBranchLocalServiceUtil} to access the layout branch local service. Add custom service methods to {@link com.liferay.portal.service.impl.LayoutBranchLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link LayoutSetBranchLocalServiceUtil} to access the layout set branch local service. Add custom service methods to {@link com.liferay.portal.service.impl.LayoutSetBranchLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 
 	/**
-	* Adds the layout branch to the database. Also notifies the appropriate model listeners.
+	* Adds the layout set branch to the database. Also notifies the appropriate model listeners.
 	*
-	* @param layoutBranch the layout branch to add
-	* @return the layout branch that was added
+	* @param layoutSetBranch the layout set branch to add
+	* @return the layout set branch that was added
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portal.model.LayoutBranch addLayoutBranch(
-		com.liferay.portal.model.LayoutBranch layoutBranch)
+	public com.liferay.portal.model.LayoutSetBranch addLayoutSetBranch(
+		com.liferay.portal.model.LayoutSetBranch layoutSetBranch)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Creates a new layout branch with the primary key. Does not add the layout branch to the database.
+	* Creates a new layout set branch with the primary key. Does not add the layout set branch to the database.
 	*
-	* @param layoutBranchId the primary key for the new layout branch
-	* @return the new layout branch
+	* @param layoutSetBranchId the primary key for the new layout set branch
+	* @return the new layout set branch
 	*/
-	public com.liferay.portal.model.LayoutBranch createLayoutBranch(
-		long layoutBranchId);
+	public com.liferay.portal.model.LayoutSetBranch createLayoutSetBranch(
+		long layoutSetBranchId);
 
 	/**
-	* Deletes the layout branch with the primary key from the database. Also notifies the appropriate model listeners.
+	* Deletes the layout set branch with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param layoutBranchId the primary key of the layout branch to delete
-	* @throws PortalException if a layout branch with the primary key could not be found
+	* @param layoutSetBranchId the primary key of the layout set branch to delete
+	* @throws PortalException if a layout set branch with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteLayoutBranch(long layoutBranchId)
+	public void deleteLayoutSetBranch(long layoutSetBranchId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Deletes the layout branch from the database. Also notifies the appropriate model listeners.
+	* Deletes the layout set branch from the database. Also notifies the appropriate model listeners.
 	*
-	* @param layoutBranch the layout branch to delete
+	* @param layoutSetBranch the layout set branch to delete
 	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteLayoutBranch(
-		com.liferay.portal.model.LayoutBranch layoutBranch)
+	public void deleteLayoutSetBranch(
+		com.liferay.portal.model.LayoutSetBranch layoutSetBranch)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -148,92 +148,110 @@ public interface LayoutBranchLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the layout branch with the primary key.
+	* Gets the layout set branch with the primary key.
 	*
-	* @param layoutBranchId the primary key of the layout branch to get
-	* @return the layout branch
-	* @throws PortalException if a layout branch with the primary key could not be found
+	* @param layoutSetBranchId the primary key of the layout set branch to get
+	* @return the layout set branch
+	* @throws PortalException if a layout set branch with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.model.LayoutBranch getLayoutBranch(
-		long layoutBranchId)
+	public com.liferay.portal.model.LayoutSetBranch getLayoutSetBranch(
+		long layoutSetBranchId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the layout branchs.
+	* Gets a range of all the layout set branchs.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of layout branchs to return
-	* @param end the upper bound of the range of layout branchs to return (not inclusive)
-	* @return the range of layout branchs
+	* @param start the lower bound of the range of layout set branchs to return
+	* @param end the upper bound of the range of layout set branchs to return (not inclusive)
+	* @return the range of layout set branchs
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portal.model.LayoutBranch> getLayoutBranchs(
+	public java.util.List<com.liferay.portal.model.LayoutSetBranch> getLayoutSetBranchs(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of layout branchs.
+	* Gets the number of layout set branchs.
 	*
-	* @return the number of layout branchs
+	* @return the number of layout set branchs
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getLayoutBranchsCount()
+	public int getLayoutSetBranchsCount()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Updates the layout branch in the database. Also notifies the appropriate model listeners.
+	* Updates the layout set branch in the database. Also notifies the appropriate model listeners.
 	*
-	* @param layoutBranch the layout branch to update
-	* @return the layout branch that was updated
+	* @param layoutSetBranch the layout set branch to update
+	* @return the layout set branch that was updated
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portal.model.LayoutBranch updateLayoutBranch(
-		com.liferay.portal.model.LayoutBranch layoutBranch)
+	public com.liferay.portal.model.LayoutSetBranch updateLayoutSetBranch(
+		com.liferay.portal.model.LayoutSetBranch layoutSetBranch)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Updates the layout branch in the database. Also notifies the appropriate model listeners.
+	* Updates the layout set branch in the database. Also notifies the appropriate model listeners.
 	*
-	* @param layoutBranch the layout branch to update
-	* @param merge whether to merge the layout branch with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
-	* @return the layout branch that was updated
+	* @param layoutSetBranch the layout set branch to update
+	* @param merge whether to merge the layout set branch with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the layout set branch that was updated
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portal.model.LayoutBranch updateLayoutBranch(
-		com.liferay.portal.model.LayoutBranch layoutBranch, boolean merge)
+	public com.liferay.portal.model.LayoutSetBranch updateLayoutSetBranch(
+		com.liferay.portal.model.LayoutSetBranch layoutSetBranch, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.LayoutBranch addLayoutBranch(long userId,
-		long groupId, java.lang.String name, java.lang.String description,
+	public com.liferay.portal.model.LayoutSetBranch addLayoutSetBranch(
+		long userId, long groupId, boolean privateLayout,
+		java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteLayoutBranches(long groupId)
+	public void deleteLayoutSetBranch(
+		com.liferay.portal.model.LayoutSetBranch layoutSetBranch,
+		boolean includeMaster)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteLayoutSetBranches(long groupId, boolean privateLayout)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteLayoutSetBranches(long groupId, boolean privateLayout,
+		boolean includeMaster)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portal.model.LayoutBranch> getLayoutBranches(
-		long groupId)
+	public java.util.List<com.liferay.portal.model.LayoutSetBranch> getLayoutSetBranches(
+		long groupId, boolean privateLayout)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.model.LayoutBranch getMasterLayoutBranch(
-		long groupId)
+	public com.liferay.portal.model.LayoutSetBranch getLayoutSetBranch(
+		long groupId, boolean privateLayout, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.LayoutBranch updateLayoutBranch(
-		long layoutBranchId, java.lang.String name,
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.LayoutSetBranch getMasterLayoutSetBranch(
+		long groupId, boolean privateLayout)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.LayoutSetBranch updateLayoutSetBranch(
+		long layoutSetBranchId, java.lang.String name,
 		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,

@@ -535,45 +535,6 @@
 		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
 		<reference package-path="com.liferay.portlet.tasks" entity="TasksProposal" />
 	</entity>
-	<entity name="LayoutBranch" local-service="true" remote-service="true">
-
-		<!-- PK fields -->
-
-		<column name="layoutBranchId" type="long" primary="true" />
-
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
-		<!-- Audit fields -->
-
-		<column name="companyId" type="long" />
-		<column name="userId" type="long" />
-		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
-
-		<!-- Other fields -->
-
-		<column name="name" type="String" />
-		<column name="description" type="String" />
-
-		<!-- Order -->
-
-		<order by="asc">
-			<order-column name="name" />
-		</order>
-
-		<!-- Finder methods -->
-
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
-		</finder>
-		<finder name="G_N" return-type="LayoutBranch" unique="true">
-			<finder-column name="groupId" />
-			<finder-column name="name" />
-		</finder>
-	</entity>
 	<entity name="LayoutPrototype" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
@@ -621,7 +582,7 @@
 
 		<!-- Other fields -->
 
-		<column name="layoutBranchId" type="long" />
+		<column name="layoutSetBranchId" type="long" />
 		<column name="parentLayoutRevisionId" type="long" />
 		<column name="head" type="boolean" />
 		<column name="plid" type="long" />
@@ -649,23 +610,23 @@
 
 		<!-- Finder methods -->
 
-		<finder name="LayoutBranchId" return-type="Collection">
-			<finder-column name="layoutBranchId" />
+		<finder name="LayoutSetBranchId" return-type="Collection">
+			<finder-column name="layoutSetBranchId" />
 		</finder>
 		<finder name="Plid" return-type="Collection">
 			<finder-column name="plid" />
 		</finder>
 		<finder name="L_P" return-type="Collection">
-			<finder-column name="layoutBranchId" />
+			<finder-column name="layoutSetBranchId" />
 			<finder-column name="plid" />
 		</finder>
-		<finder name="L_H_P" return-type="LayoutRevision" unique="true">
-			<finder-column name="layoutBranchId" />
+		<finder name="L_H_P" return-type="LayoutRevision">
+			<finder-column name="layoutSetBranchId" />
 			<finder-column name="head" />
 			<finder-column name="plid" />
 		</finder>
 		<finder name="L_P_S" return-type="Collection">
-			<finder-column name="layoutBranchId" />
+			<finder-column name="layoutSetBranchId" />
 			<finder-column name="plid" />
 			<finder-column name="status" />
 		</finder>
@@ -710,6 +671,51 @@
 		<finder name="G_P" return-type="LayoutSet" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="privateLayout" />
+		</finder>
+	</entity>
+	<entity name="LayoutSetBranch" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="layoutSetBranchId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="privateLayout" type="boolean" />
+		<column name="name" type="String" />
+		<column name="description" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="name" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="G_P" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="privateLayout" />
+		</finder>
+		<finder name="G_P_N" return-type="LayoutSetBranch" unique="true">
+			<finder-column name="groupId" />
+			<finder-column name="privateLayout" />
+			<finder-column name="name" />
 		</finder>
 	</entity>
 	<entity name="LayoutSetPrototype" local-service="true" remote-service="true">
@@ -2182,7 +2188,7 @@
 		<exception>InvalidLock</exception>
 		<exception>LARFile</exception>
 		<exception>LARType</exception>
-		<exception>LayoutBranchName</exception>
+		<exception>LayoutSetBranchName</exception>
 		<exception>LayoutFriendlyURL</exception>
 		<exception>LayoutHidden</exception>
 		<exception>LayoutImport</exception>
@@ -2209,7 +2215,7 @@
 		<exception>RemoteExport</exception>
 		<exception>RequiredGroup</exception>
 		<exception>RequiredLayout</exception>
-		<exception>RequiredLayoutBranch</exception>
+		<exception>RequiredLayoutSetBranch</exception>
 		<exception>RequiredOrganization</exception>
 		<exception>RequiredPasswordPolicy</exception>
 		<exception>RequiredReminderQuery</exception>

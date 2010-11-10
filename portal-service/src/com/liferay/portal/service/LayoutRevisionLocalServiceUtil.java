@@ -232,7 +232,7 @@ public class LayoutRevisionLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.LayoutRevision addLayoutRevision(
-		long userId, long layoutBranchId, long parentLayoutRevisionId,
+		long userId, long layoutSetBranchId, long parentLayoutRevisionId,
 		boolean head, long plid, java.lang.String name, java.lang.String title,
 		java.lang.String description, java.lang.String typeSettings,
 		boolean iconImage, long iconImageId, java.lang.String themeId,
@@ -242,26 +242,27 @@ public class LayoutRevisionLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addLayoutRevision(userId, layoutBranchId,
+				   .addLayoutRevision(userId, layoutSetBranchId,
 			parentLayoutRevisionId, head, plid, name, title, description,
 			typeSettings, iconImage, iconImageId, themeId, colorSchemeId,
 			wapThemeId, wapColorSchemeId, css, serviceContext);
 	}
 
 	public static com.liferay.portal.model.LayoutRevision checkLatestLayoutRevision(
-		long layoutRevisionId, long layoutBranchId, long plid,
+		long layoutRevisionId, long layoutSetBranchId, long plid,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .checkLatestLayoutRevision(layoutRevisionId, layoutBranchId,
-			plid, serviceContext);
+				   .checkLatestLayoutRevision(layoutRevisionId,
+			layoutSetBranchId, plid, serviceContext);
 	}
 
-	public static void deleteLayoutBranchLayoutRevisions(long layoutBranchId)
+	public static void deleteLayoutSetBranchLayoutRevisions(
+		long layoutSetBranchId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteLayoutBranchLayoutRevisions(layoutBranchId);
+		getService().deleteLayoutSetBranchLayoutRevisions(layoutSetBranchId);
 	}
 
 	public static void deleteLayoutLayoutRevisions(long plid)
@@ -270,17 +271,17 @@ public class LayoutRevisionLocalServiceUtil {
 		getService().deleteLayoutLayoutRevisions(plid);
 	}
 
-	public static void deleteLayoutRevisions(long layoutBranchId, long plid)
+	public static void deleteLayoutRevisions(long layoutSetBranchId, long plid)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteLayoutRevisions(layoutBranchId, plid);
+		getService().deleteLayoutRevisions(layoutSetBranchId, plid);
 	}
 
-	public static com.liferay.portal.model.LayoutRevision getHeadLayoutRevision(
-		long layoutBranchId, long plid)
+	public static com.liferay.portal.model.LayoutRevision getLayoutRevision(
+		long layoutSetBranchId, long plid, boolean head)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getHeadLayoutRevision(layoutBranchId, plid);
+		return getService().getLayoutRevision(layoutSetBranchId, plid, head);
 	}
 
 	public static java.util.List<com.liferay.portal.model.LayoutRevision> getLayoutRevisions(
@@ -289,22 +290,15 @@ public class LayoutRevisionLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.LayoutRevision> getLayoutRevisions(
-		long layoutBranchId, long plid)
+		long layoutSetBranchId, long plid)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getLayoutRevisions(layoutBranchId, plid);
+		return getService().getLayoutRevisions(layoutSetBranchId, plid);
 	}
 
 	public static java.util.List<com.liferay.portal.model.LayoutRevision> getLayoutRevisions(
-		long layoutBranchId, long plid, int status)
+		long layoutSetBranchId, long plid, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getLayoutRevisions(layoutBranchId, plid, status);
-	}
-
-	public static com.liferay.portal.model.LayoutRevision revertToLayoutRevision(
-		long layoutRevisionId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().revertToLayoutRevision(layoutRevisionId);
+		return getService().getLayoutRevisions(layoutSetBranchId, plid, status);
 	}
 
 	public static com.liferay.portal.model.LayoutRevision updateLayoutRevision(

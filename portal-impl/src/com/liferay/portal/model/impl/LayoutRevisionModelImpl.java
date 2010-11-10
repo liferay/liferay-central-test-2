@@ -68,7 +68,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "layoutBranchId", new Integer(Types.BIGINT) },
+			{ "layoutSetBranchId", new Integer(Types.BIGINT) },
 			{ "parentLayoutRevisionId", new Integer(Types.BIGINT) },
 			{ "head", new Integer(Types.BOOLEAN) },
 			{ "plid", new Integer(Types.BIGINT) },
@@ -88,7 +88,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 			{ "statusByUserName", new Integer(Types.VARCHAR) },
 			{ "statusDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table LayoutRevision (layoutRevisionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,layoutBranchId LONG,parentLayoutRevisionId LONG,head BOOLEAN,plid LONG,name STRING null,title STRING null,description STRING null,typeSettings TEXT null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table LayoutRevision (layoutRevisionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,layoutSetBranchId LONG,parentLayoutRevisionId LONG,head BOOLEAN,plid LONG,name STRING null,title STRING null,description STRING null,typeSettings TEXT null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table LayoutRevision";
 	public static final String ORDER_BY_JPQL = " ORDER BY layoutRevision.layoutRevisionId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY LayoutRevision.layoutRevisionId DESC";
@@ -118,7 +118,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setLayoutBranchId(soapModel.getLayoutBranchId());
+		model.setLayoutSetBranchId(soapModel.getLayoutSetBranchId());
 		model.setParentLayoutRevisionId(soapModel.getParentLayoutRevisionId());
 		model.setHead(soapModel.getHead());
 		model.setPlid(soapModel.getPlid());
@@ -244,22 +244,22 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getLayoutBranchId() {
-		return _layoutBranchId;
+	public long getLayoutSetBranchId() {
+		return _layoutSetBranchId;
 	}
 
-	public void setLayoutBranchId(long layoutBranchId) {
-		_layoutBranchId = layoutBranchId;
+	public void setLayoutSetBranchId(long layoutSetBranchId) {
+		_layoutSetBranchId = layoutSetBranchId;
 
-		if (!_setOriginalLayoutBranchId) {
-			_setOriginalLayoutBranchId = true;
+		if (!_setOriginalLayoutSetBranchId) {
+			_setOriginalLayoutSetBranchId = true;
 
-			_originalLayoutBranchId = layoutBranchId;
+			_originalLayoutSetBranchId = layoutSetBranchId;
 		}
 	}
 
-	public long getOriginalLayoutBranchId() {
-		return _originalLayoutBranchId;
+	public long getOriginalLayoutSetBranchId() {
+		return _originalLayoutSetBranchId;
 	}
 
 	public long getParentLayoutRevisionId() {
@@ -570,7 +570,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
-		clone.setLayoutBranchId(getLayoutBranchId());
+		clone.setLayoutSetBranchId(getLayoutSetBranchId());
 		clone.setParentLayoutRevisionId(getParentLayoutRevisionId());
 		clone.setHead(getHead());
 		clone.setPlid(getPlid());
@@ -660,8 +660,8 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", layoutBranchId=");
-		sb.append(getLayoutBranchId());
+		sb.append(", layoutSetBranchId=");
+		sb.append(getLayoutSetBranchId());
 		sb.append(", parentLayoutRevisionId=");
 		sb.append(getParentLayoutRevisionId());
 		sb.append(", head=");
@@ -739,8 +739,8 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>layoutBranchId</column-name><column-value><![CDATA[");
-		sb.append(getLayoutBranchId());
+			"<column><column-name>layoutSetBranchId</column-name><column-value><![CDATA[");
+		sb.append(getLayoutSetBranchId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>parentLayoutRevisionId</column-name><column-value><![CDATA[");
@@ -828,9 +828,9 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _layoutBranchId;
-	private long _originalLayoutBranchId;
-	private boolean _setOriginalLayoutBranchId;
+	private long _layoutSetBranchId;
+	private long _originalLayoutSetBranchId;
+	private boolean _setOriginalLayoutSetBranchId;
 	private long _parentLayoutRevisionId;
 	private boolean _head;
 	private boolean _originalHead;

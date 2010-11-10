@@ -193,21 +193,21 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	}
 
 	/**
-	* Gets the layout branch id of this layout revision.
+	* Gets the layout set branch id of this layout revision.
 	*
-	* @return the layout branch id of this layout revision
+	* @return the layout set branch id of this layout revision
 	*/
-	public long getLayoutBranchId() {
-		return _layoutRevision.getLayoutBranchId();
+	public long getLayoutSetBranchId() {
+		return _layoutRevision.getLayoutSetBranchId();
 	}
 
 	/**
-	* Sets the layout branch id of this layout revision.
+	* Sets the layout set branch id of this layout revision.
 	*
-	* @param layoutBranchId the layout branch id of this layout revision
+	* @param layoutSetBranchId the layout set branch id of this layout revision
 	*/
-	public void setLayoutBranchId(long layoutBranchId) {
-		_layoutRevision.setLayoutBranchId(layoutBranchId);
+	public void setLayoutSetBranchId(long layoutSetBranchId) {
+		_layoutRevision.setLayoutSetBranchId(layoutSetBranchId);
 	}
 
 	/**

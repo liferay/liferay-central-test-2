@@ -12,29 +12,15 @@
  * details.
  */
 
-package com.liferay.portal;
-
-import com.liferay.portal.kernel.exception.PortalException;
+package com.liferay.portal.model;
 
 /**
- * @author Brian Wing Shun Chan
+ * <a href="BranchConstants.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Raymond Augé
  */
-public class RequiredLayoutBranchException extends PortalException {
+public class LayoutSetBranchConstants {
 
-	public RequiredLayoutBranchException() {
-		super();
-	}
-
-	public RequiredLayoutBranchException(String msg) {
-		super(msg);
-	}
-
-	public RequiredLayoutBranchException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-
-	public RequiredLayoutBranchException(Throwable cause) {
-		super(cause);
-	}
+	public static final String MASTER_BRANCH_NAME = "master";
 
 }

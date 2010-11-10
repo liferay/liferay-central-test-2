@@ -19,22 +19,22 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Brian Wing Shun Chan
  */
-public class LayoutBranchNameException extends PortalException {
+public class RequiredLayoutSetBranchException extends PortalException {
 
-	public static final int DUPLICATE = 1;
-
-	public static final int TOO_LONG = 2;
-
-	public static final int TOO_SHORT = 3;
-
-	private int _type;
-
-	public LayoutBranchNameException(int type) {
-		_type = type;
+	public RequiredLayoutSetBranchException() {
+		super();
 	}
 
-	public int getType() {
-		return _type;
+	public RequiredLayoutSetBranchException(String msg) {
+		super(msg);
+	}
+
+	public RequiredLayoutSetBranchException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public RequiredLayoutSetBranchException(Throwable cause) {
+		super(cause);
 	}
 
 }

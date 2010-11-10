@@ -173,18 +173,18 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the layout branch id of this layout revision.
+	 * Gets the layout set branch id of this layout revision.
 	 *
-	 * @return the layout branch id of this layout revision
+	 * @return the layout set branch id of this layout revision
 	 */
-	public long getLayoutBranchId();
+	public long getLayoutSetBranchId();
 
 	/**
-	 * Sets the layout branch id of this layout revision.
+	 * Sets the layout set branch id of this layout revision.
 	 *
-	 * @param layoutBranchId the layout branch id of this layout revision
+	 * @param layoutSetBranchId the layout set branch id of this layout revision
 	 */
-	public void setLayoutBranchId(long layoutBranchId);
+	public void setLayoutSetBranchId(long layoutSetBranchId);
 
 	/**
 	 * Gets the parent layout revision id of this layout revision.

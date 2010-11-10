@@ -109,16 +109,6 @@ Liferay.Service.registerClass(
 );
 
 Liferay.Service.registerClass(
-	Liferay.Service.Portal, "LayoutBranch",
-	{
-		addLayoutBranch: true,
-		deleteLayoutBranch: true,
-		getLayoutBranches: true,
-		updateLayoutBranch: true
-	}
-);
-
-Liferay.Service.registerClass(
 	Liferay.Service.Portal, "LayoutPrototype",
 	{
 		addLayoutPrototype: true,
@@ -135,6 +125,16 @@ Liferay.Service.registerClass(
 		updateLookAndFeel: true,
 		updateSettings: true,
 		updateVirtualHost: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.Portal, "LayoutSetBranch",
+	{
+		addLayoutSetBranch: true,
+		deleteLayoutSetBranch: true,
+		getLayoutSetBranches: true,
+		updateLayoutSetBranch: true
 	}
 );
 

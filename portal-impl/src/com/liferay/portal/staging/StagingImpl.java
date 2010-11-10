@@ -48,8 +48,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lar.LayoutExporter;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutBranchConstants;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.LayoutSetBranchConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -59,9 +59,9 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.GroupServiceUtil;
-import com.liferay.portal.service.LayoutBranchLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
+import com.liferay.portal.service.LayoutSetBranchLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -87,8 +87,8 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map.Entry;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TimeZone;
 
@@ -823,8 +823,10 @@ public class StagingImpl implements Staging {
 			GroupLocalServiceUtil.deleteGroup(stagingGroup.getGroupId());
 		}
 		else {
-			LayoutBranchLocalServiceUtil.deleteLayoutBranches(
-				liveGroup.getGroupId());
+			LayoutSetBranchLocalServiceUtil.deleteLayoutSetBranches(
+				liveGroup.getGroupId(), false);
+			LayoutSetBranchLocalServiceUtil.deleteLayoutSetBranches(
+				liveGroup.getGroupId(), true);
 		}
 
 		GroupLocalServiceUtil.updateGroup(
@@ -885,10 +887,17 @@ public class StagingImpl implements Staging {
 					parameterMap, null, null);
 			}
 
-			LayoutBranchLocalServiceUtil.addLayoutBranch(
-				themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
-				LayoutBranchConstants.MASTER_BRANCH_NAME,
-				LayoutBranchConstants.MASTER_BRANCH_NAME.concat(
+			LayoutSetBranchLocalServiceUtil.addLayoutSetBranch(
+				themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), false,
+				LayoutSetBranchConstants.MASTER_BRANCH_NAME,
+				LayoutSetBranchConstants.MASTER_BRANCH_NAME.concat(
+					" branch of ").concat(stagingGroup.getDescriptiveName()),
+				serviceContext);
+
+			LayoutSetBranchLocalServiceUtil.addLayoutSetBranch(
+				themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), true,
+				LayoutSetBranchConstants.MASTER_BRANCH_NAME,
+				LayoutSetBranchConstants.MASTER_BRANCH_NAME.concat(
 					" branch of ").concat(stagingGroup.getDescriptiveName()),
 				serviceContext);
 		}
@@ -938,10 +947,17 @@ public class StagingImpl implements Staging {
 		setCommonStagingOptions(
 			portletRequest, liveGroup, typeSettingsProperties);
 
-		LayoutBranchLocalServiceUtil.addLayoutBranch(
-			themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
-			LayoutBranchConstants.MASTER_BRANCH_NAME,
-			LayoutBranchConstants.MASTER_BRANCH_NAME.concat(
+		LayoutSetBranchLocalServiceUtil.addLayoutSetBranch(
+			themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), false,
+			LayoutSetBranchConstants.MASTER_BRANCH_NAME,
+			LayoutSetBranchConstants.MASTER_BRANCH_NAME.concat(
+				" branch of ").concat(liveGroup.getDescriptiveName()),
+			serviceContext);
+
+		LayoutSetBranchLocalServiceUtil.addLayoutSetBranch(
+			themeDisplay.getUserId(), themeDisplay.getScopeGroupId(), true,
+			LayoutSetBranchConstants.MASTER_BRANCH_NAME,
+			LayoutSetBranchConstants.MASTER_BRANCH_NAME.concat(
 				" branch of ").concat(liveGroup.getDescriptiveName()),
 			serviceContext);
 

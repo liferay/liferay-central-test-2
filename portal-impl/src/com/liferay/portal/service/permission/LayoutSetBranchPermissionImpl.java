@@ -16,49 +16,49 @@ package com.liferay.portal.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.model.LayoutBranch;
+import com.liferay.portal.model.LayoutSetBranch;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.LayoutBranchLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetBranchLocalServiceUtil;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class LayoutBranchPermissionImpl implements LayoutBranchPermission {
+public class LayoutSetBranchPermissionImpl implements LayoutSetBranchPermission {
 
 	public void check(
-			PermissionChecker permissionChecker, LayoutBranch layoutBranch,
+			PermissionChecker permissionChecker, LayoutSetBranch layoutSetBranch,
 			String actionId)
 		throws PortalException {
 
-		if (!contains(permissionChecker, layoutBranch, actionId)) {
+		if (!contains(permissionChecker, layoutSetBranch, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public void check(
 			PermissionChecker permissionChecker, long groupId,
-			long layoutBranchId, String actionId)
+			long layoutSetBranchId, String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, groupId, layoutBranchId, actionId)) {
+		if (!contains(permissionChecker, groupId, layoutSetBranchId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public boolean contains(
-		PermissionChecker permissionChecker, LayoutBranch layoutBranch,
+		PermissionChecker permissionChecker, LayoutSetBranch layoutSetBranch,
 		String actionId) {
 
 		return permissionChecker.hasPermission(
-			layoutBranch.getGroupId(), LayoutBranch.class.getName(),
-			layoutBranch.getLayoutBranchId(), actionId);
+			layoutSetBranch.getGroupId(), LayoutSetBranch.class.getName(),
+			layoutSetBranch.getLayoutSetBranchId(), actionId);
 	}
 
 	public boolean contains(
 			PermissionChecker permissionChecker, long groupId,
-			long layoutBranchId, String actionId)
+			long layoutSetBranchId, String actionId)
 		throws PortalException, SystemException {
 
 		if (actionId.equals(ActionKeys.ADD_LAYOUT_BRANCH) ||
@@ -68,10 +68,10 @@ public class LayoutBranchPermissionImpl implements LayoutBranchPermission {
 				permissionChecker, groupId, ActionKeys.ADD_LAYOUT_BRANCH);
 		}
 		else {
-			LayoutBranch layoutBranch =
-				LayoutBranchLocalServiceUtil.getLayoutBranch(layoutBranchId);
+			LayoutSetBranch layoutSetBranch =
+				LayoutSetBranchLocalServiceUtil.getLayoutSetBranch(layoutSetBranchId);
 
-			return contains(permissionChecker, layoutBranch, actionId);
+			return contains(permissionChecker, layoutSetBranch, actionId);
 		}
 	}
 

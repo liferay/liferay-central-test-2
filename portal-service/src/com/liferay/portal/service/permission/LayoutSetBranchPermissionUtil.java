@@ -16,59 +16,59 @@ package com.liferay.portal.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.model.LayoutBranch;
+import com.liferay.portal.model.LayoutSetBranch;
 import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class LayoutBranchPermissionUtil {
+public class LayoutSetBranchPermissionUtil {
 
 	public static void check(
-			PermissionChecker permissionChecker, LayoutBranch layoutBranch,
+			PermissionChecker permissionChecker, LayoutSetBranch layoutSetBranch,
 			String actionId)
 		throws PortalException {
 
-		getLayoutBranchPermission().check(
-			permissionChecker, layoutBranch, actionId);
+		getLayoutSetBranchPermission().check(
+			permissionChecker, layoutSetBranch, actionId);
 	}
 
 	public static void check(
 			PermissionChecker permissionChecker, long groupId,
-			long layoutBranchId, String actionId)
+			long layoutSetBranchId, String actionId)
 		throws PortalException, SystemException {
 
-		getLayoutBranchPermission().check(
-			permissionChecker, groupId, layoutBranchId, actionId);
+		getLayoutSetBranchPermission().check(
+			permissionChecker, groupId, layoutSetBranchId, actionId);
 	}
 
 	public static boolean contains(
-		PermissionChecker permissionChecker, LayoutBranch layoutBranch,
+		PermissionChecker permissionChecker, LayoutSetBranch layoutSetBranch,
 		String actionId) {
 
-		return getLayoutBranchPermission().contains(
-			permissionChecker, layoutBranch, actionId);
+		return getLayoutSetBranchPermission().contains(
+			permissionChecker, layoutSetBranch, actionId);
 	}
 
 	public static boolean contains(
 			PermissionChecker permissionChecker, long groupId,
-			long layoutBranchId, String actionId)
+			long layoutSetBranchId, String actionId)
 		throws PortalException, SystemException {
 
-		return getLayoutBranchPermission().contains(
-			permissionChecker, groupId, layoutBranchId, actionId);
+		return getLayoutSetBranchPermission().contains(
+			permissionChecker, groupId, layoutSetBranchId, actionId);
 	}
 
-	public static LayoutBranchPermission getLayoutBranchPermission() {
-		return _layoutBranchPermission;
+	public static LayoutSetBranchPermission getLayoutSetBranchPermission() {
+		return _layoutSetBranchPermission;
 	}
 
-	public void setLayoutBranchPermission(
-		LayoutBranchPermission layoutBranchPermission) {
+	public void setLayoutSetBranchPermission(
+		LayoutSetBranchPermission layoutSetBranchPermission) {
 
-		_layoutBranchPermission = layoutBranchPermission;
+		_layoutSetBranchPermission = layoutSetBranchPermission;
 	}
 
-	private static LayoutBranchPermission _layoutBranchPermission;
+	private static LayoutSetBranchPermission _layoutSetBranchPermission;
 
 }

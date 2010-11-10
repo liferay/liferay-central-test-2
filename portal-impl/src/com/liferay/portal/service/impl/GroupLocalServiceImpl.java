@@ -341,7 +341,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Layout branches
 
-		layoutBranchLocalService.deleteLayoutBranches(groupId);
+		layoutSetBranchLocalService.deleteLayoutSetBranches(groupId, true);
+		layoutSetBranchLocalService.deleteLayoutSetBranches(groupId, false);
 
 		// Layout sets
 

@@ -12,15 +12,27 @@
  * details.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portal;
 
 /**
- * <a href="BranchConstants.java.html"><b><i>View Source</i></b></a>
- *
- * @author Raymond Augé
+ * @author Brian Wing Shun Chan
  */
-public class LayoutBranchConstants {
+public class NoSuchLayoutSetBranchException extends NoSuchModelException {
 
-	public static final String MASTER_BRANCH_NAME = "master";
+	public NoSuchLayoutSetBranchException() {
+		super();
+	}
+
+	public NoSuchLayoutSetBranchException(String msg) {
+		super(msg);
+	}
+
+	public NoSuchLayoutSetBranchException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public NoSuchLayoutSetBranchException(Throwable cause) {
+		super(cause);
+	}
 
 }

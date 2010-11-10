@@ -748,18 +748,6 @@ create table Layout (
 	layoutPrototypeId LONG
 );
 
-create table LayoutBranch (
-	layoutBranchId LONG not null primary key,
-	groupId LONG,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	name VARCHAR(75) null,
-	description STRING null
-);
-
 create table LayoutPrototype (
 	layoutPrototypeId LONG not null primary key,
 	companyId LONG,
@@ -777,7 +765,7 @@ create table LayoutRevision (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	layoutBranchId LONG,
+	layoutSetBranchId LONG,
 	parentLayoutRevisionId LONG,
 	head BOOLEAN,
 	plid LONG,
@@ -814,6 +802,19 @@ create table LayoutSet (
 	virtualHost VARCHAR(75) null,
 	settings_ STRING null,
 	layoutSetPrototypeId LONG
+);
+
+create table LayoutSetBranch (
+	layoutSetBranchId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	privateLayout BOOLEAN,
+	name VARCHAR(75) null,
+	description STRING null
 );
 
 create table LayoutSetPrototype (

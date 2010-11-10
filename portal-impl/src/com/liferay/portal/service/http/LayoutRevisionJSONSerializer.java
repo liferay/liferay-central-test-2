@@ -56,7 +56,7 @@ public class LayoutRevisionJSONSerializer {
 		}
 
 		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("layoutBranchId", model.getLayoutBranchId());
+		jsonObj.put("layoutSetBranchId", model.getLayoutSetBranchId());
 		jsonObj.put("parentLayoutRevisionId", model.getParentLayoutRevisionId());
 		jsonObj.put("head", model.getHead());
 		jsonObj.put("plid", model.getPlid());
