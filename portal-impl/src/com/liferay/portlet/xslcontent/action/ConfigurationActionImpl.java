@@ -48,21 +48,20 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		String xmlURL = ParamUtil.getString(actionRequest, "xmlURL");
 		String xslURL = ParamUtil.getString(actionRequest, "xslURL");
 
-		String portletResource = ParamUtil.getString(
-			actionRequest, "portletResource");
-
-		PortletPreferences preferences =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				actionRequest, portletResource);
-
 		if (xmlURL.startsWith("file:/")) {
 			SessionErrors.add(actionRequest, "xmlURL");
 		}
-		if (xslURL.startsWith("file:/")) {
+		else if (xslURL.startsWith("file:/")) {
 			SessionErrors.add(actionRequest, "xslURL");
 		}
+		else {
+			String portletResource = ParamUtil.getString(
+				actionRequest, "portletResource");
 
-		if (SessionErrors.isEmpty(actionRequest)) {
+			PortletPreferences preferences =
+				PortletPreferencesFactoryUtil.getPortletSetup(
+					actionRequest, portletResource);
+
 			preferences.setValue("xml-url", xmlURL);
 			preferences.setValue("xsl-url", xslURL);
 
