@@ -36,6 +36,15 @@ public class ValidatorTag extends BaseBodyTagSupport {
 		processCustom();
 	}
 
+	public int doAfterBody(){
+		if (Validator.isNotNull(getBodyContent())) {
+			_body = getBodyContent().getString();
+		}
+
+		return SKIP_BODY;
+	}
+
+
 	public int doStartTag() {
 		processCustom();
 
@@ -44,20 +53,16 @@ public class ValidatorTag extends BaseBodyTagSupport {
 
 		parentInputTag.addValidatorTag(_name, this);
 
-		return EVAL_PAGE;
+		return EVAL_BODY_BUFFERED;
 	}
 
+	
 	public String getBody() {
-		String body = StringPool.DOUBLE_APOSTROPHE;
-
-		if (Validator.isNotNull(_body)) {
-			body = _body;
-		}
-		else if (getBodyContent() != null){
-			body = getBodyContent().getString();
+		if (Validator.isNull(_body)) {
+			return StringPool.DOUBLE_APOSTROPHE;
 		}
 
-		return body.trim();
+		return _body.trim();
 	}
 
 	public String getErrorMessage() {
