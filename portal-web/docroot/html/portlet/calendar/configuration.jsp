@@ -160,6 +160,10 @@ String editorContent = emailEventReminderBody;
 				<c:if test="<%= PropsValues.CALENDAR_EVENT_COMMENTS_ENABLED %>">
 					<aui:input inlineLabel="left" name="enableComments" type="checkbox" value="<%= enableComments %>" />
 				</c:if>
+
+				<c:if test="<%= PropsValues.CALENDAR_EVENT_RATINGS_ENABLED %>">
+					<aui:input inlineLabel="left" name="enableRatings" type="checkbox" value="<%= enableRatings %>" />
+				</c:if>
 			</aui:fieldset>
 		</c:when>
 	</c:choose>

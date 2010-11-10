@@ -45,13 +45,13 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
-			_events, _categories, _comments, _tags
+			_events, _categories, _comments, _ratings, _tags
 		};
 	}
 
 	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
-			_events, _categories, _comments, _tags
+			_events, _categories, _comments, _ratings, _tags
 		};
 	}
 
@@ -160,6 +160,11 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		if (portletDataContext.getBooleanParameter(_NAMESPACE, "comments")) {
 			portletDataContext.addComments(CalEvent.class, event.getEventId());
+		}
+
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "ratings")) {
+			portletDataContext.addRatingsEntries(
+				CalEvent.class, event.getEventId());
 		}
 
 		if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags")) {
@@ -304,6 +309,11 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 				CalEvent.class, event.getEventId(), importedEvent.getEventId(),
 				portletDataContext.getScopeGroupId());
 		}
+
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "ratings")) {
+			portletDataContext.importRatingsEntries(
+				CalEvent.class, event.getEventId(), importedEvent.getEventId());
+		}
 	}
 
 	private static final String _NAMESPACE = "calendar";
@@ -318,6 +328,9 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static PortletDataHandlerBoolean _events =
 		new PortletDataHandlerBoolean(_NAMESPACE, "events", true, true);
+
+	private static PortletDataHandlerBoolean _ratings =
+		new PortletDataHandlerBoolean(_NAMESPACE, "ratings");
 
 	private static PortletDataHandlerBoolean _tags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "tags");

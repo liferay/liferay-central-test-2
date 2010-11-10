@@ -95,6 +95,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			actionRequest, "summaryTabShowTodaysEvents");
 		boolean enableComments = ParamUtil.getBoolean(
 			actionRequest, "enableComments");
+		boolean enableRatings = ParamUtil.getBoolean(
+			actionRequest, "enableRatings");
 
 		preferences.setValue("tabs1-default", tabs1Default);
 		preferences.setValue("summary-tab-orientation", summaryTabOrientation);
@@ -103,6 +105,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		preferences.setValue(
 			"summary-tab-show-todays-events", summaryTabShowTodaysEvents);
 		preferences.setValue("enable-comments", String.valueOf(enableComments));
+		preferences.setValue("enable-ratings", String.valueOf(enableRatings));
 	}
 
 	protected void updateEmailFrom(

@@ -193,6 +193,15 @@ request.setAttribute("view_event.jsp-event", event);
 				message="tags"
 			/>
 		</span>
+
+		<c:if test="<%= enableRatings %>">
+			<div class="entry-ratings">
+				<liferay-ui:ratings
+					className="<%= CalEvent.class.getName() %>"
+					classPK="<%= event.getEventId() %>"
+				/>
+			</div>
+		</c:if>
 	</aui:column>
 
 	<aui:column columnWidth="<%= 25 %>" cssClass="detail-column detail-column-last" last="<%= true %>">
