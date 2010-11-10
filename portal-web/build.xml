@@ -592,9 +592,19 @@
 			classpath="${jspc.classpath}"
 			fork="true"
 			newenvironment="true"
+			outputproperty="jspc.output"
 		>
 			<arg line="${arg.line}" />
 		</java>
+
+		<echo>${jspc.output}</echo>
+
+		<if>
+			<contains string="${jspc.output}" substring="JasperException" />
+			<then>
+				<fail>JSPs failed to compile.</fail>
+			</then>
+		</if>
 
 		<javac
 			classpath="${jspc.classpath}"
