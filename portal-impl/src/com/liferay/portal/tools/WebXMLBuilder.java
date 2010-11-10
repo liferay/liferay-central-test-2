@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.servlet.filters.absoluteredirects.AbsoluteRedirectsFilter;
 import com.liferay.portal.util.HtmlImpl;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.xml.DocumentImpl;
@@ -38,6 +39,7 @@ import java.io.IOException;
 public class WebXMLBuilder {
 
 	public static void main(String[] args) {
+
 		InitUtil.initWithSpring();
 
 		if (args.length == 3) {
@@ -72,7 +74,7 @@ public class WebXMLBuilder {
 			merger = new XMLMerger(new WebXML24Descriptor());
 		}
 
-		DocumentImpl docImpl = (DocumentImpl)doc;
+		DocumentImpl docImpl = (DocumentImpl) doc;
 
 		merger.organizeXML(docImpl.getWrappedDocument());
 
@@ -97,9 +99,7 @@ public class WebXMLBuilder {
 
 			String originalContent = FileUtil.read(originalWebXML);
 
-			int z = originalContent.indexOf("<web-app");
-
-			z = originalContent.indexOf(">", z) + 1;
+			int z = getInsertionIndex(originalContent);
 
 			String mergedContent =
 				originalContent.substring(0, z) + customContent +
@@ -114,4 +114,33 @@ public class WebXMLBuilder {
 		}
 	}
 
+	protected int getInsertionIndex(String content) {
+
+		int x = content.indexOf(AbsoluteRedirectsFilter.class.getName());
+
+		if (x == -1) {
+			x = content.indexOf("<web-app");
+
+			x = content.indexOf(">", x) + 1;
+
+			return x;
+		}
+		else {
+			x = content.lastIndexOf("<filter-name", x);
+
+			x = content.indexOf(">", x) + 1;
+
+			int y = content.indexOf("</filter-name>", x);
+
+			String filterName = content.substring(x, y);
+
+			x = content.lastIndexOf(filterName);
+
+			y = content.indexOf("</filter-mapping>", x);
+
+			y = content.indexOf(">", y) + 1;
+
+			return y;
+		}
+	}
 }
