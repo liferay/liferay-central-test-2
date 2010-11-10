@@ -2741,6 +2741,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/tika-parsers.jar</file-name>
+		<version>0.7</version>
+		<project-name>Tika</project-name>
+		<project-url>http://tika.apache.org</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/truezip.jar</file-name>
 		<version>6.7 RC1</version>
 		<project-name>TrueZIP</project-name>
