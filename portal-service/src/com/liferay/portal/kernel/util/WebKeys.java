@@ -87,6 +87,8 @@ public interface WebKeys {
 
 	public static final String SEARCH_SEARCH_RESULTS = "SEARCH_SEARCH_RESULTS";
 
+	public static final String SERVLET_PATH = "SERVLET_PATH";
+
 	public static final String THEME = "THEME";
 
 	public static final String THEME_DISPLAY = "THEME_DISPLAY";

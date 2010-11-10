@@ -18,8 +18,12 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
+import com.liferay.portal.kernel.servlet.DirectServletContext;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.servlet.TrackedServletRequest;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -195,10 +199,17 @@ public class IncludeTag
 	}
 
 	protected void include(String page) throws Exception {
-		ServletContext servletContext = getServletContext();
 		HttpServletRequest request = getServletRequest();
 
+		request.setAttribute(WebKeys.SERVLET_PATH, page);
+
+		ServletContext servletContext = getServletContext();
+
 		servletContext = getServletContext(servletContext, request);
+
+		if (_DIRECT_SERVLET_CONTEXT_ENABLED) {
+			servletContext = new DirectServletContext(servletContext);
+		}
 
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(page);
@@ -241,6 +252,10 @@ public class IncludeTag
 	}
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = false;
+
+	private static final boolean _DIRECT_SERVLET_CONTEXT_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.DIRECT_SERVLET_CONTEXT_ENABLED));
 
 	private static final boolean _TRIM_NEW_LINES = false;
 
