@@ -1656,77 +1656,70 @@
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-api.jar</file-name>
-		<version>1.6.1</version>
+		<version>2.1.2</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-core.jar</file-name>
-		<version>1.6.1</version>
+		<version>2.1.2</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2007 The Apache Software Foundation</copyright-notice>
-			</license>
-			<license>
-				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
+		<comments>
+			This includes a public patch from LPS-13343.
+		</comments>
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-jcr-commons.jar</file-name>
-		<version>1.6.1</version>
+		<version>2.1.2</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-spi.jar</file-name>
-		<version>1.6.1</version>
+		<version>2.1.2</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-spi-commons.jar</file-name>
-		<version>1.6.1</version>
+		<version>2.1.2</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
 	<library>
 		<file-name>portal/jackrabbit-text-extractors.jar</file-name>
-		<version>1.6.1</version>
+		<version>1.6.4</version>
 		<project-name>Jackrabbit</project-name>
 		<project-url>http://jackrabbit.apache.org</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -1843,13 +1836,12 @@
 	</library>
 	<library>
 		<file-name>portal/jcr.jar</file-name>
-		<version></version>
-		<project-name>JSR 170 Content Repository for Java Technology</project-name>
-		<project-url>http://jcp.org/en/jsr/detail?id=170</project-url>
+		<version>2.0</version>
+		<project-name>JSR 283 Content Repository for Java Technology</project-name>
+		<project-url>http://jcp.org/en/jsr/detail?id=283</project-url>
 		<licenses>
 			<license>
 				<license-name>Content Repository for Java Technology API Specification License</license-name>
-				<copyright-notice>Copyright (c) 2005 Day Management AG Barfüsserplatz 6, 4001 Basel, Switzerland. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
 	</library>

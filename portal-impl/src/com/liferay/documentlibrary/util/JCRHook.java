@@ -53,6 +53,7 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.Property;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.nodetype.NodeType;
 import javax.jcr.version.Version;
 import javax.jcr.version.VersionHistory;
 import javax.jcr.version.VersionIterator;
@@ -144,7 +145,9 @@ public class JCRHook extends BaseHook {
 
 				Version version = contentNode.checkin();
 
-				contentNode.getVersionHistory().addVersionLabel(
+				VersionHistory versionHistory = contentNode.getVersionHistory();
+
+				versionHistory.addVersionLabel(
 					version.getName(), DEFAULT_VERSION, false);
 
 				Indexer indexer = IndexerRegistryUtil.getIndexer(
@@ -267,8 +270,9 @@ public class JCRHook extends BaseHook {
 
 			Version version = contentNode.checkin();
 
-			contentNode.getVersionHistory().addVersionLabel(
-				version.getName(), "0.0", false);
+			VersionHistory versionHistory = contentNode.getVersionHistory();
+
+			versionHistory.addVersionLabel(version.getName(), "0.0", false);
 		}
 		catch (PathNotFoundException pnfe) {
 			throw new NoSuchFileException(fileName);
@@ -460,9 +464,11 @@ public class JCRHook extends BaseHook {
 			while (itr.hasNext()) {
 				Node node = (Node)itr.next();
 
-				if (node.getPrimaryNodeType().getName().equals(
-						JCRConstants.NT_FILE)) {
+				NodeType primaryNodeType = node.getPrimaryNodeType();
 
+				String primaryNodeTypeName = primaryNodeType.getName();
+
+				if (primaryNodeTypeName.equals(JCRConstants.NT_FILE)) {
 					fileNames.add(dirName + "/" + node.getName());
 				}
 			}
@@ -567,9 +573,11 @@ public class JCRHook extends BaseHook {
 			while (itr.hasNext()) {
 				Node node = (Node)itr.next();
 
-				if (node.getPrimaryNodeType().getName().equals(
-						JCRConstants.NT_FILE)) {
+				NodeType primaryNodeType = node.getPrimaryNodeType();
 
+				String primaryNodeTypeName = primaryNodeType.getName();
+
+				if (primaryNodeTypeName.equals(JCRConstants.NT_FILE)) {
 					Indexer indexer = IndexerRegistryUtil.getIndexer(
 						FileModel.class);
 
@@ -666,7 +674,10 @@ public class JCRHook extends BaseHook {
 
 					Version newVersion = newContentNode.checkin();
 
-					newContentNode.getVersionHistory().addVersionLabel(
+					VersionHistory newVersionHistory =
+						newContentNode.getVersionHistory();
+
+					newVersionHistory.addVersionLabel(
 						newVersion.getName(), versionLabels[i],
 						PropsValues.DL_HOOK_JCR_MOVE_VERSION_LABELS);
 				}
@@ -758,7 +769,10 @@ public class JCRHook extends BaseHook {
 
 				Version newVersion = newContentNode.checkin();
 
-				newContentNode.getVersionHistory().addVersionLabel(
+				VersionHistory newVersionHistory =
+					newContentNode.getVersionHistory();
+
+				newVersionHistory.addVersionLabel(
 					newVersion.getName(), versionLabels[i],
 					PropsValues.DL_HOOK_JCR_MOVE_VERSION_LABELS);
 			}
@@ -829,7 +843,9 @@ public class JCRHook extends BaseHook {
 
 			Version version = contentNode.checkin();
 
-			contentNode.getVersionHistory().addVersionLabel(
+			VersionHistory versionHistory = contentNode.getVersionHistory();
+
+			versionHistory.addVersionLabel(
 				version.getName(), versionLabel,
 				PropsValues.DL_HOOK_JCR_MOVE_VERSION_LABELS);
 
@@ -884,8 +900,9 @@ public class JCRHook extends BaseHook {
 			while (itr.hasNext()) {
 				Node node = (Node)itr.next();
 
-				String primaryNodeTypeName =
-					node.getPrimaryNodeType().getName();
+				NodeType primaryNodeType = node.getPrimaryNodeType();
+
+				String primaryNodeTypeName = primaryNodeType.getName();
 
 				if (primaryNodeTypeName.equals(JCRConstants.NT_FOLDER)) {
 					deleteDirectory(companyId, portletId, repositoryId, node);
