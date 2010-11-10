@@ -58,6 +58,7 @@
 /portal-impl/src/META-INF/MANIFEST.MF.JOnAS
 /portal-impl/src/META-INF/portal-log4j-ext.xml
 
+/portal-impl/test/portal-test-ext.properties
 /portal-impl/test/test-portal-impl-ext.properties
 
 /portal-service/*.iml
