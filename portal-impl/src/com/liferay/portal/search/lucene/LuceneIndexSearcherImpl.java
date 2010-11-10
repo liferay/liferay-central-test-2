@@ -33,6 +33,7 @@ import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.lucene.document.NumericField;
@@ -244,28 +245,45 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 			int subsetTotal = end - start;
 
-			Document[] subsetDocs = new DocumentImpl[subsetTotal];
-			String[] subsetSnippets = new String[subsetTotal];
-			float[] subsetScores = new float[subsetTotal];
+			if (subsetTotal > PropsValues.INDEX_SEARCH_LIMIT) {
+				subsetTotal = PropsValues.INDEX_SEARCH_LIMIT;
+			}
 
-			int j = 0;
+			List<Document> subsetDocs = new ArrayList<Document>(subsetTotal);
+			List<String> subsetSnippets = new ArrayList<String>(subsetTotal);
+			List<Float> subsetScores = new ArrayList<Float>(subsetTotal);
 
-			for (int i = start; i < end; i++, j++) {
+			for (int i = start; i < end; i++) {
+				if (i >= PropsValues.INDEX_SEARCH_LIMIT) {
+					break;
+				}
+
 				org.apache.lucene.document.Document document =
 					indexSearcher.doc(topFieldDocs.scoreDocs[i].doc);
 
-				subsetDocs[j] = getDocument(document);
-				subsetSnippets[j] = getSnippet(document, query, Field.CONTENT);
-				subsetScores[j] = topFieldDocs.scoreDocs[i].score;
+				Document subsetDocument = getDocument(document);
+
+				subsetDocs.add(subsetDocument);
+
+				String subsetSnippet = getSnippet(
+					document, query, Field.CONTENT);
+
+				subsetSnippets.add(subsetSnippet);
+
+				Float subsetScore = topFieldDocs.scoreDocs[i].score;
+
+				subsetScores.add(subsetScore);
 			}
 
 			hits.setStart(startTime);
 			hits.setSearchTime(searchTime);
 			hits.setQueryTerms(queryTerms);
-			hits.setDocs(subsetDocs);
+			hits.setDocs(subsetDocs.toArray(new Document[subsetDocs.size()]));
 			hits.setLength(length);
-			hits.setSnippets(subsetSnippets);
-			hits.setScores(subsetScores);
+			hits.setSnippets(
+				subsetSnippets.toArray(new String[subsetSnippets.size()]));
+			hits.setScores(
+				subsetScores.toArray(new Float[subsetScores.size()]));
 		}
 
 		return hits;
