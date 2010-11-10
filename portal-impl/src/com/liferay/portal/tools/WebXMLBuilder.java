@@ -35,11 +35,11 @@ import java.io.IOException;
  * @author Brian Wing Shun Chan
  * @author Tang Ying Jian
  * @author Brian Myunghun Kim
+ * @author Minhchau Dang
  */
 public class WebXMLBuilder {
 
 	public static void main(String[] args) {
-
 		InitUtil.initWithSpring();
 
 		if (args.length == 3) {
@@ -57,28 +57,29 @@ public class WebXMLBuilder {
 
 		webXML = html.stripComments(webXML);
 
+		Document document = SAXReaderUtil.read(webXML);
+
+		Element rootElement = document.getRootElement();
+
 		double version = 2.3;
 
-		Document doc = SAXReaderUtil.read(webXML);
+		version = GetterUtil.getDouble(
+			rootElement.attributeValue("version"), version);
 
-		Element root = doc.getRootElement();
-
-		version = GetterUtil.getDouble(root.attributeValue("version"), version);
-
-		XMLMerger merger = null;
+		XMLMerger xmlMerger = null;
 
 		if (version == 2.3) {
-			merger = new XMLMerger(new WebXML23Descriptor());
+			xmlMerger = new XMLMerger(new WebXML23Descriptor());
 		}
 		else {
-			merger = new XMLMerger(new WebXML24Descriptor());
+			xmlMerger = new XMLMerger(new WebXML24Descriptor());
 		}
 
-		DocumentImpl docImpl = (DocumentImpl) doc;
+		DocumentImpl documentImpl = (DocumentImpl)document;
 
-		merger.organizeXML(docImpl.getWrappedDocument());
+		xmlMerger.organizeXML(documentImpl.getWrappedDocument());
 
-		webXML = doc.formattedString();
+		webXML = document.formattedString();
 
 		return webXML;
 	}
@@ -115,19 +116,16 @@ public class WebXMLBuilder {
 	}
 
 	protected int getInsertionIndex(String content) {
-
 		int x = content.indexOf(AbsoluteRedirectsFilter.class.getName());
 
 		if (x == -1) {
 			x = content.indexOf("<web-app");
-
 			x = content.indexOf(">", x) + 1;
 
 			return x;
 		}
 		else {
 			x = content.lastIndexOf("<filter-name", x);
-
 			x = content.indexOf(">", x) + 1;
 
 			int y = content.indexOf("</filter-name>", x);
@@ -137,10 +135,10 @@ public class WebXMLBuilder {
 			x = content.lastIndexOf(filterName);
 
 			y = content.indexOf("</filter-mapping>", x);
-
 			y = content.indexOf(">", y) + 1;
 
 			return y;
 		}
 	}
+
 }
