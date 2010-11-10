@@ -500,6 +500,20 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return _dlFileEntry.getFileVersion();
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersion(
+		java.lang.String version)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntry.getFileVersion(version);
+	}
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
+		int status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntry.getFileVersions(status);
+	}
+
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder() {
 		return _dlFileEntry.getFolder();
 	}

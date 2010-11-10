@@ -432,6 +432,22 @@ public class DLFileEntryServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion updateFileVersionDescription(
+		long fileVersionId, java.lang.String description)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.documentlibrary.model.DLFileVersion returnValue = DLFileEntryServiceUtil.updateFileVersionDescription(fileVersionId,
+					description);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static boolean verifyFileEntryLock(long groupId, long folderId,
 		java.lang.String name, java.lang.String lockUuid)
 		throws RemoteException {

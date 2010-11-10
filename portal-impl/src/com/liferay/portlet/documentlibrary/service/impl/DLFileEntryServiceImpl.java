@@ -27,6 +27,7 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryServiceBaseImpl;
@@ -596,6 +597,22 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		}
 
 		return fileEntry;
+	}
+
+	public DLFileVersion updateFileVersionDescription(
+			long fileVersionId, String description)
+		throws PortalException, SystemException {
+
+		DLFileVersion fileVersion = dlFileVersionPersistence.findByPrimaryKey(
+			fileVersionId);
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), fileVersion.getGroupId(),
+			fileVersion.getFolderId(), fileVersion.getName(),
+			ActionKeys.UPDATE);
+
+		return dlFileEntryLocalService.updateFileVersionDescription(
+			fileVersionId, description);
 	}
 
 	public boolean verifyFileEntryLock(

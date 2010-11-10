@@ -48,7 +48,6 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 
 import java.io.File;
@@ -949,10 +948,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 	}
 
 	protected void publishFileEntry(DLFileEntry fileEntry) throws Exception {
-		DLFileVersion latestFileVersion =
-			DLAppLocalServiceUtil.getLatestFileVersion(
-				fileEntry.getGroupId(), fileEntry.getFolderId(),
-				fileEntry.getName());
+		DLFileVersion latestFileVersion = fileEntry.getLatestFileVersion();
 
 		if (latestFileVersion.getStatus() ==
 				WorkflowConstants.STATUS_APPROVED) {

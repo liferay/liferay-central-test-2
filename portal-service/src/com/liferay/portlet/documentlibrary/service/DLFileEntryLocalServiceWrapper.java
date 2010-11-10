@@ -410,6 +410,29 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 			groupId);
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersion(
+		long fileVersionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntryLocalService.getFileVersion(fileVersionId);
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersion(
+		long groupId, long folderId, java.lang.String name,
+		java.lang.String version)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntryLocalService.getFileVersion(groupId, folderId, name,
+			version);
+	}
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
+		long groupId, long folderId, java.lang.String name, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntryLocalService.getFileVersions(groupId, folderId,
+			name, status);
+	}
+
 	public int getFoldersFileEntriesCount(long groupId,
 		java.util.List<java.lang.Long> folderIds, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -454,6 +477,14 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 	public int getGroupFileEntriesCount(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntryLocalService.getGroupFileEntriesCount(groupId, userId);
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion getLatestFileVersion(
+		long groupId, long folderId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntryLocalService.getLatestFileVersion(groupId, folderId,
+			name);
 	}
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getNoAssetFileEntries()
@@ -520,6 +551,14 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 		return _dlFileEntryLocalService.updateFileEntry(userId, groupId,
 			folderId, name, sourceFileName, title, description, changeLog,
 			majorVersion, extraSettings, is, size, serviceContext);
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion updateFileVersionDescription(
+		long fileVersionId, java.lang.String description)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntryLocalService.updateFileVersionDescription(fileVersionId,
+			description);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateStatus(

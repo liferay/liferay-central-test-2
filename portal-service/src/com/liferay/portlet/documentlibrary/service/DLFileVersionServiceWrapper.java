@@ -29,14 +29,6 @@ public class DLFileVersionServiceWrapper implements DLFileVersionService {
 		_dlFileVersionService = dlFileVersionService;
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileVersion updateDescription(
-		long fileVersionId, java.lang.String description)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileVersionService.updateDescription(fileVersionId,
-			description);
-	}
-
 	public DLFileVersionService getWrappedDLFileVersionService() {
 		return _dlFileVersionService;
 	}

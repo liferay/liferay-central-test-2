@@ -37,13 +37,6 @@ public class DLFileVersionServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.documentlibrary.service.impl.DLFileVersionServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static com.liferay.portlet.documentlibrary.model.DLFileVersion updateDescription(
-		long fileVersionId, java.lang.String description)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateDescription(fileVersionId, description);
-	}
-
 	public static DLFileVersionService getService() {
 		if (_service == null) {
 			_service = (DLFileVersionService)PortalBeanLocatorUtil.locate(DLFileVersionService.class.getName());

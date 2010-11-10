@@ -28,7 +28,6 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
-import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
@@ -233,9 +232,7 @@ public class GetFileAction extends PortletAction {
 				contentLength = (int)fileEntry.getSize();
 			}
 			else {
-				DLFileVersion fileVersion =
-					DLAppLocalServiceUtil.getFileVersion(
-						groupId, folderId, name, version);
+				DLFileVersion fileVersion = fileEntry.getFileVersion(version);
 
 				contentLength = (int)fileVersion.getSize();
 			}

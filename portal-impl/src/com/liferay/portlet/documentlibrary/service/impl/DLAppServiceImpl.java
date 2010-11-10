@@ -535,7 +535,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			long fileVersionId, String description)
 		throws PortalException, SystemException {
 
-		return dlFileVersionService.updateDescription(
+		return dlFileEntryService.updateFileVersionDescription(
 			fileVersionId, description);
 	}
 

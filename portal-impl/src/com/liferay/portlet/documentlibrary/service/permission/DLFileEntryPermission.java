@@ -28,7 +28,6 @@ import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
 /**
@@ -81,10 +80,7 @@ public class DLFileEntryPermission {
 			return hasPermission.booleanValue();
 		}
 
-		DLFileVersion latestFileVersion =
-			DLFileVersionLocalServiceUtil.getLatestFileVersion(
-				fileEntry.getGroupId(), fileEntry.getFolderId(),
-				fileEntry.getName());
+		DLFileVersion latestFileVersion = fileEntry.getLatestFileVersion();
 
 		if (latestFileVersion.isPending()) {
 			hasPermission = WorkflowPermissionUtil.hasPermission(

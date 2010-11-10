@@ -40,8 +40,4 @@ public interface DLFileVersionService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link DLFileVersionServiceUtil} to access the d l file version remote service. Add custom service methods to {@link com.liferay.portlet.documentlibrary.service.impl.DLFileVersionServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public com.liferay.portlet.documentlibrary.model.DLFileVersion updateDescription(
-		long fileVersionId, java.lang.String description)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
 }

@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
-import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -42,7 +42,7 @@ public class DLFileVersionImpl
 	}
 
 	public DLFileEntry getFileEntry() throws PortalException, SystemException {
-		return DLAppLocalServiceUtil.getFileEntry(
+		return DLFileEntryLocalServiceUtil.getFileEntry(
 			getGroupId(), getFolderId(), getName());
 	}
 

@@ -413,6 +413,27 @@ public class DLFileEntryLocalServiceUtil {
 		return getService().getFileEntryByUuidAndGroupId(uuid, groupId);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersion(
+		long fileVersionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFileVersion(fileVersionId);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersion(
+		long groupId, long folderId, java.lang.String name,
+		java.lang.String version)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFileVersion(groupId, folderId, name, version);
+	}
+
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
+		long groupId, long folderId, java.lang.String name, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFileVersions(groupId, folderId, name, status);
+	}
+
 	public static int getFoldersFileEntriesCount(long groupId,
 		java.util.List<java.lang.Long> folderIds, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -454,6 +475,13 @@ public class DLFileEntryLocalServiceUtil {
 	public static int getGroupFileEntriesCount(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getGroupFileEntriesCount(groupId, userId);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion getLatestFileVersion(
+		long groupId, long folderId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getLatestFileVersion(groupId, folderId, name);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getNoAssetFileEntries()
@@ -525,6 +553,14 @@ public class DLFileEntryLocalServiceUtil {
 				   .updateFileEntry(userId, groupId, folderId, name,
 			sourceFileName, title, description, changeLog, majorVersion,
 			extraSettings, is, size, serviceContext);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion updateFileVersionDescription(
+		long fileVersionId, java.lang.String description)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateFileVersionDescription(fileVersionId, description);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateStatus(

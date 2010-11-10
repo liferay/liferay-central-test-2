@@ -137,9 +137,8 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 		long fileEntryId = fileEntry.getFileEntryId();
 		String properties = fileEntry.getLuceneProperties();
 
-		List<DLFileVersion> dlFileVersions =
-			DLAppLocalServiceUtil.getFileVersions(
-				groupId, repositoryId, fileName, WorkflowConstants.STATUS_ANY);
+		List<DLFileVersion> dlFileVersions = fileEntry.getFileVersions(
+			WorkflowConstants.STATUS_ANY);
 
 		if (dlFileVersions.isEmpty()) {
 			String versionNumber = Hook.DEFAULT_VERSION;

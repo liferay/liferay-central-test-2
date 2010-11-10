@@ -272,7 +272,7 @@ if (Validator.isNotNull(folder.getName())) {
 				status = WorkflowConstants.STATUS_ANY;
 			}
 
-			List results = DLAppLocalServiceUtil.getFileVersions(scopeGroupId, toFileEntry.getFolderId(), toFileEntry.getName(), status);
+			List results = toFileEntry.getFileVersions(status);
 			List resultRows = searchContainer.getResultRows();
 
 			for (int i = 0; i < results.size(); i++) {

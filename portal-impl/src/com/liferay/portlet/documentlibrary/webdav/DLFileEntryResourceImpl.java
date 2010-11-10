@@ -23,7 +23,6 @@ import com.liferay.portal.model.Lock;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
-import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 
 import java.io.InputStream;
@@ -89,10 +88,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 
 				// Get last version regardless of status
 
-				DLFileVersion fileVersion =
-					DLAppLocalServiceUtil.getLatestFileVersion(
-						_fileEntry.getGroupId(), _fileEntry.getFolderId(),
-						_fileEntry.getName());
+				DLFileVersion fileVersion = _fileEntry.getLatestFileVersion();
 
 				version = fileVersion.getVersion();
 			}

@@ -644,6 +644,7 @@ Liferay.Service.registerClass(
 		moveFileEntry: true,
 		refreshFileEntryLock: true,
 		unlockFileEntry: true,
+		updateFileVersionDescription: true,
 		verifyFileEntryLock: true
 	}
 );
@@ -655,13 +656,6 @@ Liferay.Service.registerClass(
 		deleteFileShortcut: true,
 		getFileShortcut: true,
 		updateFileShortcut: true
-	}
-);
-
-Liferay.Service.registerClass(
-	Liferay.Service.DL, "DLFileVersion",
-	{
-		updateDescription: true
 	}
 );
 

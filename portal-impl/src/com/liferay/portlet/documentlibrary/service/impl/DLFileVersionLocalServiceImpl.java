@@ -14,78 +14,15 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
-import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.base.DLFileVersionLocalServiceBaseImpl;
-import com.liferay.portlet.documentlibrary.util.comparator.FileVersionVersionComparator;
-
-import java.util.List;
 
 /**
- * @author Brian Wing Shun Chan
- * @author Bruno Farache
- * @author Jorge Ferrer
+ * @author	   Brian Wing Shun Chan
+ * @author	   Bruno Farache
+ * @author	   Jorge Ferrer
+ * @author	   Alexander Chow
+ * @deprecated {@link DLFileEntryServiceImpl}
  */
 public class DLFileVersionLocalServiceImpl
 	extends DLFileVersionLocalServiceBaseImpl {
-
-	public DLFileVersion getFileVersion(long fileVersionId)
-		throws PortalException, SystemException {
-
-		return dlFileVersionPersistence.findByPrimaryKey(fileVersionId);
-	}
-
-	public DLFileVersion getFileVersion(
-			long groupId, long folderId, String name, String version)
-		throws PortalException, SystemException {
-
-		return dlFileVersionPersistence.findByG_F_N_V(
-			groupId, folderId, name, version);
-	}
-
-	public List<DLFileVersion> getFileVersions(
-			long groupId, long folderId, String name, int status)
-		throws SystemException {
-
-		if (status == WorkflowConstants.STATUS_ANY) {
-			return dlFileVersionPersistence.findByG_F_N(
-				groupId, folderId, name);
-		}
-		else {
-			return dlFileVersionPersistence.findByG_F_N_S(
-				groupId, folderId, name, status);
-		}
-	}
-
-	public DLFileVersion getLatestFileVersion(
-			long groupId, long folderId, String name)
-		throws PortalException, SystemException {
-
-		List<DLFileVersion> fileVersions = dlFileVersionPersistence.findByG_F_N(
-			groupId, folderId, name, 0, 1, new FileVersionVersionComparator());
-
-		if (fileVersions.isEmpty()) {
-			throw new NoSuchFileVersionException();
-		}
-
-		return fileVersions.get(0);
-	}
-
-	public DLFileVersion updateDescription(
-			long fileVersionId, String description)
-		throws PortalException, SystemException {
-
-		DLFileVersion fileVersion = dlFileVersionPersistence.findByPrimaryKey(
-			fileVersionId);
-
-		fileVersion.setDescription(description);
-
-		dlFileVersionPersistence.update(fileVersion, false);
-
-		return fileVersion;
-	}
-
 }

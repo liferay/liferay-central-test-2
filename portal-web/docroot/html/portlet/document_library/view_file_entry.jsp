@@ -361,7 +361,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 				status = WorkflowConstants.STATUS_ANY;
 			}
 
-			List results = DLAppLocalServiceUtil.getFileVersions(scopeGroupId, folderId, name, status);
+			List results = fileEntry.getFileVersions(status);
 			List resultRows = searchContainer.getResultRows();
 
 			for (int i = 0; i < results.size(); i++) {

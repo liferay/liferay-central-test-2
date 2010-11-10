@@ -14,13 +14,6 @@
 
 package com.liferay.portlet.documentlibrary.service.http;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
-import com.liferay.portlet.documentlibrary.service.DLFileVersionServiceUtil;
-
-import java.rmi.RemoteException;
-
 /**
  * <p>
  * This class provides a SOAP utility for the
@@ -65,21 +58,4 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class DLFileVersionServiceSoap {
-	public static com.liferay.portlet.documentlibrary.model.DLFileVersionSoap updateDescription(
-		long fileVersionId, java.lang.String description)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.documentlibrary.model.DLFileVersion returnValue = DLFileVersionServiceUtil.updateDescription(fileVersionId,
-					description);
-
-			return com.liferay.portlet.documentlibrary.model.DLFileVersionSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(DLFileVersionServiceSoap.class);
 }

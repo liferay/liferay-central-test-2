@@ -312,8 +312,7 @@ public class WebServerServlet extends HttpServlet {
 			}
 		}
 
-		DLFileVersion dlFileVersion = DLAppLocalServiceUtil.getFileVersion(
-			groupId, dlFolderId, name, version);
+		DLFileVersion dlFileVersion = dlFileEntry.getFileVersion(version);
 
 		fileName = dlFileVersion.getTitle();
 

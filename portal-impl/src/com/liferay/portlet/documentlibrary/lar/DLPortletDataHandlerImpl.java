@@ -78,9 +78,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		DLFileVersion fileVersion = DLAppLocalServiceUtil.getFileVersion(
-				portletDataContext.getScopeGroupId(), fileEntry.getFolderId(),
-				fileEntry.getName(), fileEntry.getVersion());
+		DLFileVersion fileVersion = fileEntry.getFileVersion();
 
 		if (fileVersion.getStatus() != WorkflowConstants.STATUS_APPROVED) {
 			return;

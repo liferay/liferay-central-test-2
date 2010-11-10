@@ -223,45 +223,6 @@ public class DLFileVersionLocalServiceWrapper
 			merge);
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersion(
-		long fileVersionId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileVersionLocalService.getFileVersion(fileVersionId);
-	}
-
-	public com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersion(
-		long groupId, long folderId, java.lang.String name,
-		java.lang.String version)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileVersionLocalService.getFileVersion(groupId, folderId,
-			name, version);
-	}
-
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
-		long groupId, long folderId, java.lang.String name, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileVersionLocalService.getFileVersions(groupId, folderId,
-			name, status);
-	}
-
-	public com.liferay.portlet.documentlibrary.model.DLFileVersion getLatestFileVersion(
-		long groupId, long folderId, java.lang.String name)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileVersionLocalService.getLatestFileVersion(groupId,
-			folderId, name);
-	}
-
-	public com.liferay.portlet.documentlibrary.model.DLFileVersion updateDescription(
-		long fileVersionId, java.lang.String description)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileVersionLocalService.updateDescription(fileVersionId,
-			description);
-	}
-
 	public DLFileVersionLocalService getWrappedDLFileVersionLocalService() {
 		return _dlFileVersionLocalService;
 	}

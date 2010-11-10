@@ -14,32 +14,12 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.base.DLFileVersionServiceBaseImpl;
-import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author	   Brian Wing Shun Chan
+ * @author	   Alexander Chow
+ * @deprecated {@link DLFileEntryServiceImpl}
  */
 public class DLFileVersionServiceImpl extends DLFileVersionServiceBaseImpl {
-
-	public DLFileVersion updateDescription(
-			long fileVersionId, String description)
-		throws PortalException, SystemException {
-
-		DLFileVersion fileVersion = dlFileVersionPersistence.findByPrimaryKey(
-			fileVersionId);
-
-		DLFileEntryPermission.check(
-			getPermissionChecker(), fileVersion.getGroupId(),
-			fileVersion.getFolderId(), fileVersion.getName(),
-			ActionKeys.UPDATE);
-
-		return dlFileVersionLocalService.updateDescription(
-			fileVersionId, description);
-	}
-
 }

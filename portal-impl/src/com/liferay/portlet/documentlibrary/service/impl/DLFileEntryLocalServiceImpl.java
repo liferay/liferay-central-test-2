@@ -58,6 +58,7 @@ import com.liferay.portlet.documentlibrary.service.base.DLFileEntryLocalServiceB
 import com.liferay.portlet.documentlibrary.social.DLActivityKeys;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.comparator.FileEntryModifiedDateComparator;
+import com.liferay.portlet.documentlibrary.util.comparator.FileVersionVersionComparator;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.RatingsStats;
@@ -401,9 +402,8 @@ public class DLFileEntryLocalServiceImpl
 			else {
 				if (version.equals(fileEntry.getVersion())) {
 					try {
-						DLFileVersion fileVersion =
-							dlFileVersionLocalService.getLatestFileVersion(
-								groupId, folderId, name);
+						DLFileVersion fileVersion = getLatestFileVersion(
+							groupId, folderId, name);
 
 						fileEntry.setVersion(fileVersion.getVersion());
 						fileEntry.setSize(fileVersion.getSize());
@@ -548,6 +548,34 @@ public class DLFileEntryLocalServiceImpl
 		return dlFileEntryPersistence.findByUUID_G(uuid, groupId);
 	}
 
+	public DLFileVersion getFileVersion(long fileVersionId)
+		throws PortalException, SystemException {
+
+		return dlFileVersionPersistence.findByPrimaryKey(fileVersionId);
+	}
+
+	public DLFileVersion getFileVersion(
+			long groupId, long folderId, String name, String version)
+		throws PortalException, SystemException {
+
+		return dlFileVersionPersistence.findByG_F_N_V(
+			groupId, folderId, name, version);
+	}
+
+	public List<DLFileVersion> getFileVersions(
+			long groupId, long folderId, String name, int status)
+		throws SystemException {
+
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return dlFileVersionPersistence.findByG_F_N(
+				groupId, folderId, name);
+		}
+		else {
+			return dlFileVersionPersistence.findByG_F_N_S(
+				groupId, folderId, name, status);
+		}
+	}
+
 	public int getFoldersFileEntriesCount(
 			long groupId, List<Long> folderIds, int status)
 		throws SystemException {
@@ -622,6 +650,20 @@ public class DLFileEntryLocalServiceImpl
 		else {
 			return dlFileEntryPersistence.countByG_U(groupId, userId);
 		}
+	}
+
+	public DLFileVersion getLatestFileVersion(
+			long groupId, long folderId, String name)
+		throws PortalException, SystemException {
+
+		List<DLFileVersion> fileVersions = dlFileVersionPersistence.findByG_F_N(
+			groupId, folderId, name, 0, 1, new FileVersionVersionComparator());
+
+		if (fileVersions.isEmpty()) {
+			throw new NoSuchFileVersionException();
+		}
+
+		return fileVersions.get(0);
 	}
 
 	public List<DLFileEntry> getNoAssetFileEntries() throws SystemException {
@@ -1073,6 +1115,20 @@ public class DLFileEntryLocalServiceImpl
 		return fileEntry;
 	}
 
+	public DLFileVersion updateFileVersionDescription(
+			long fileVersionId, String description)
+		throws PortalException, SystemException {
+
+		DLFileVersion fileVersion = dlFileVersionPersistence.findByPrimaryKey(
+			fileVersionId);
+
+		fileVersion.setDescription(description);
+
+		dlFileVersionPersistence.update(fileVersion, false);
+
+		return fileVersion;
+	}
+
 	public DLFileEntry updateStatus(
 			long userId, long fileEntryId, int status,
 			ServiceContext serviceContext)
@@ -1087,10 +1143,9 @@ public class DLFileEntryLocalServiceImpl
 
 		// File version
 
-		DLFileVersion latestFileVersion =
-			dlFileVersionLocalService.getLatestFileVersion(
-				fileEntry.getGroupId(), fileEntry.getFolderId(),
-				fileEntry.getName());
+		DLFileVersion latestFileVersion = getLatestFileVersion(
+			fileEntry.getGroupId(), fileEntry.getFolderId(),
+			fileEntry.getName());
 
 		latestFileVersion.setStatus(status);
 		latestFileVersion.setStatusByUserId(user.getUserId());

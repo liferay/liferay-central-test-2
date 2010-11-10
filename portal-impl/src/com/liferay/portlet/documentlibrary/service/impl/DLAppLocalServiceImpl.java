@@ -355,14 +355,14 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	public DLFileVersion getFileVersion(long fileVersionId)
 		throws PortalException, SystemException {
 
-		return dlFileVersionLocalService.getFileVersion(fileVersionId);
+		return dlFileEntryLocalService.getFileVersion(fileVersionId);
 	}
 
 	public DLFileVersion getFileVersion(
 			long groupId, long folderId, String name, String version)
 		throws PortalException, SystemException {
 
-		return dlFileVersionLocalService.getFileVersion(
+		return dlFileEntryLocalService.getFileVersion(
 			groupId, folderId, name, version);
 	}
 
@@ -370,7 +370,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		long groupId, long folderId, String name, int status)
 		throws SystemException {
 
-		return dlFileVersionLocalService.getFileVersions(
+		return dlFileEntryLocalService.getFileVersions(
 			groupId, folderId, name, status);
 	}
 
@@ -502,7 +502,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long groupId, long folderId, String name)
 		throws PortalException, SystemException {
 
-		return dlFileVersionLocalService.getLatestFileVersion(
+		return dlFileEntryLocalService.getLatestFileVersion(
 			groupId, folderId, name);
 	}
 
@@ -612,7 +612,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long fileVersionId, String description)
 		throws PortalException, SystemException {
 
-		return dlFileVersionLocalService.updateDescription(
+		return dlFileEntryLocalService.updateFileVersionDescription(
 			fileVersionId, description);
 	}
 

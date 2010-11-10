@@ -314,6 +314,14 @@ public class DLFileEntryServiceUtil {
 			size, serviceContext);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion updateFileVersionDescription(
+		long fileVersionId, java.lang.String description)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateFileVersionDescription(fileVersionId, description);
+	}
+
 	public static boolean verifyFileEntryLock(long groupId, long folderId,
 		java.lang.String name, java.lang.String lockUuid)
 		throws com.liferay.portal.kernel.exception.PortalException,
