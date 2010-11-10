@@ -25,7 +25,7 @@ String style = GetterUtil.getString((String)request.getAttribute("aui:option:sty
 String value = GetterUtil.getString((String)request.getAttribute("aui:option:value"));
 %>
 
-<option <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> <%= selected ? "selected" : StringPool.BLANK %> <%= Validator.isNotNull(style) ? "style=\"" + style + "\"" : StringPool.BLANK %> value="<%= value %>" <%= TaglibUtil.buildDynamicAttributes(dynamicAttributes) %>>
+<option <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> <%= selected ? "selected" : StringPool.BLANK %> <%= Validator.isNotNull(style) ? "style=\"" + style + "\"" : StringPool.BLANK %> value="<%= value %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>>
 
 <c:if test="<%= Validator.isNotNull(label) %>">
 	<liferay-ui:message key="<%= label %>" />

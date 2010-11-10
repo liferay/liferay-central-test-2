@@ -15,6 +15,7 @@
 package com.liferay.taglib.util;
 
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
 
@@ -83,18 +84,11 @@ public class InlineTag extends IncludeTag {
 	protected void writeDynamicAttributes(JspWriter jspWriter)
 		throws IOException {
 
-		Map<String, Object> dynamicAttributes = getDynamicAttributes();
+		String dynamicAttributesString = InlineUtil.buildDynamicAttributes(
+			getDynamicAttributes());
 
-		for (Map.Entry<String, Object> entry : dynamicAttributes.entrySet()) {
-			String key = entry.getKey();
-			String value = String.valueOf(entry.getValue());
-
-			if (!key.equals("class")) {
-				jspWriter.write(key);
-				jspWriter.write("=\"");
-				jspWriter.write(value);
-				jspWriter.write("\" ");
-			}
+		if (Validator.isNotNull(dynamicAttributesString)) {
+			jspWriter.write(dynamicAttributesString);
 		}
 	}
 

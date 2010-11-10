@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.taglib;
+package com.liferay.taglib.aui;
 
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -23,12 +23,23 @@ import java.util.Map;
 /**
  * @author Shuyang Zhou
  */
-public class TaglibUtil {
+public class AUIUtil {
+
+	public static final String BUTTON_INPUT_PREFIX = "aui-button-input";
+
+	public static final String BUTTON_PREFIX = "aui-button";
+
+	public static final String FIELD_PREFIX = "aui-field";
+
+	public static final String INPUT_PREFIX = "aui-field-input";
+
+	public static final String LABEL_PREFIX = "aui-field-label";
 
 	public static String buildCss(
 		String prefix, String baseTypeCss, boolean inlineField,
 		boolean disabled, boolean choiceField, boolean first, boolean last,
 		String cssClass) {
+
 		StringBundler sb = new StringBundler();
 
 		sb.append(prefix);
@@ -38,9 +49,12 @@ public class TaglibUtil {
 			sb.append(prefix);
 			sb.append("-choice");
 		}
-		else if (baseTypeCss.equals("textarea") ||
-			baseTypeCss.equals("password") ||
-			baseTypeCss.equals("string")) {
+		else if (baseTypeCss.equals("button")) {
+		}
+		else if (baseTypeCss.equals("password") ||
+				 baseTypeCss.equals("string") ||
+				 baseTypeCss.equals("textarea")) {
+
 			sb.append(StringPool.SPACE);
 			sb.append(prefix);
 			sb.append("-text");
@@ -52,8 +66,6 @@ public class TaglibUtil {
 			sb.append(StringPool.SPACE);
 			sb.append(prefix);
 			sb.append("-menu");
-		}
-		else if (baseTypeCss.equals("button")) {
 		}
 		else {
 			sb.append(StringPool.SPACE);
@@ -114,32 +126,10 @@ public class TaglibUtil {
 		return sb.toString();
 	}
 
-	public static String buildDynamicAttributes(
-		Map<String, Object> dynamicAttributes) {
-		if ((dynamicAttributes == null) || dynamicAttributes.isEmpty()) {
-			return StringPool.BLANK;
-		}
-
-		StringBundler sb = new StringBundler(dynamicAttributes.size() * 4);
-
-		for (Map.Entry<String, Object> entry : dynamicAttributes.entrySet()) {
-			String key = entry.getKey();
-			String value = String.valueOf(entry.getValue());
-
-			if (!key.equals("class")) {
-				sb.append(key);
-				sb.append("=\"");
-				sb.append(value);
-				sb.append("\" ");
-			}
-		}
-
-		return sb.toString();
-	}
-
 	public static String buildLabel(
 		String inlineLabel, boolean showForLabel, String forLabel) {
-		StringBundler sb = new StringBundler();
+
+		StringBundler sb = new StringBundler(4);
 
 		sb.append("class=\"" + LABEL_PREFIX);
 
@@ -155,11 +145,5 @@ public class TaglibUtil {
 
 		return sb.toString();
 	}
-
-	public static final String BUTTON_INPUT_PREFIX = "aui-button-input";
-	public static final String BUTTON_PREFIX = "aui-button";
-	public static final String FIELD_PREFIX = "aui-field";
-	public static final String INPUT_PREFIX = "aui-field-input";
-	public static final String LABEL_PREFIX = "aui-field-label";
 
 }

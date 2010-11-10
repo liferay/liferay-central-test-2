@@ -34,13 +34,13 @@ if (Validator.isNotNull(name)) {
 	name = namespace + name;
 }
 
-String fieldCss = TaglibUtil.buildCss(TaglibUtil.FIELD_PREFIX, "wrapper", inlineField, false, false, first, last, cssClass);
+String fieldCss = AUIUtil.buildCss(AUIUtil.FIELD_PREFIX, "wrapper", inlineField, false, false, first, last, cssClass);
 %>
 
 <div class="<%= fieldCss %>">
 	<div class="aui-field-wrapper-content">
 		<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
-			<label <%= TaglibUtil.buildLabel(inlineLabel, showForLabel, name) %>>
+			<label <%= AUIUtil.buildLabel(inlineLabel, showForLabel, name) %>>
 				<liferay-ui:message key="<%= label %>" />
 
 				<c:if test="<%= Validator.isNotNull(helpMessage) %>">

@@ -29,5 +29,5 @@ if (Validator.isNotNull(cssClass)) {
 }
 %>
 
-<div class="aui-layout <%= cssClass %>" <%= TaglibUtil.buildDynamicAttributes(dynamicAttributes) %>>
+<div class="aui-layout <%= cssClass %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>>
 	<div class="aui-layout-content <%= cssClasses %>">

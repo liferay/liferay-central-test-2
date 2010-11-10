@@ -35,7 +35,7 @@ String suffix = GetterUtil.getString((String)request.getAttribute("aui:select:su
 		</c:if>
 
 		<c:if test='<%= inlineLabel.equals("right") %>'>
-			<label <%= TaglibUtil.buildLabel(inlineLabel, true, id) %>>
+			<label <%= AUIUtil.buildLabel(inlineLabel, true, id) %>>
 				<liferay-ui:message key="<%= label %>" />
 
 				<c:if test="<%= Validator.isNotNull(helpMessage) %>">
