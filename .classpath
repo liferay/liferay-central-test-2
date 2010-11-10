@@ -157,7 +157,6 @@
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-jcr-commons.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-spi.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-spi-commons.jar"/>
-	<classpathentry kind="lib" path="lib/portal/jackrabbit-text-extractors.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jai_codec.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jai_core.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jamwiki-core.jar"/>
@@ -245,6 +244,7 @@
 	<classpathentry kind="lib" path="lib/portal/stax.jar"/>
 	<classpathentry kind="lib" path="lib/portal/struts.jar"/>
 	<classpathentry kind="lib" path="lib/portal/struts-el.jar"/>
+	<classpathentry kind="lib" path="lib/portal/tika-core.jar"/>
 	<classpathentry kind="lib" path="lib/portal/truezip.jar"/>
 	<classpathentry kind="lib" path="lib/portal/unoil.jar"/>
 	<classpathentry kind="lib" path="lib/portal/urlrewrite.jar"/>

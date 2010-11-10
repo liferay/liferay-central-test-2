@@ -20,11 +20,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.nio.charset.CharsetEncoderUtil;
 import com.liferay.portal.kernel.util.CharPool;
-import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileComparator;
-import com.liferay.portal.kernel.util.JavaProps;
-import com.liferay.portal.kernel.util.MimeTypesUtil;
-import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -33,9 +29,7 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.PwdGenerator;
 import com.liferay.util.SystemProperties;
-import com.liferay.util.lucene.JerichoHTMLTextExtractor;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -45,7 +39,6 @@ import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.io.Reader;
-import java.io.StringReader;
 import java.io.Writer;
 
 import java.nio.ByteBuffer;
@@ -53,22 +46,10 @@ import java.nio.channels.FileChannel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
-import org.apache.jackrabbit.extractor.MsExcelTextExtractor;
-import org.apache.jackrabbit.extractor.MsPowerPointTextExtractor;
-import org.apache.jackrabbit.extractor.MsWordTextExtractor;
-import org.apache.jackrabbit.extractor.OpenOfficeTextExtractor;
-import org.apache.jackrabbit.extractor.PdfTextExtractor;
-import org.apache.jackrabbit.extractor.PlainTextExtractor;
-import org.apache.jackrabbit.extractor.RTFTextExtractor;
-import org.apache.jackrabbit.extractor.TextExtractor;
-import org.apache.jackrabbit.extractor.XMLTextExtractor;
-import org.apache.poi.POITextExtractor;
-import org.apache.poi.extractor.ExtractorFactory;
+import org.apache.tika.Tika;
 import org.apache.tools.ant.DirectoryScanner;
 
 import org.mozilla.intl.chardet.nsDetector;
@@ -82,32 +63,6 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 	public static FileImpl getInstance() {
 		return _instance;
-	}
-
-	public FileImpl() {
-		Class<?>[] textExtractorClasses = new Class[] {
-			JerichoHTMLTextExtractor.class, MsExcelTextExtractor.class,
-			MsPowerPointTextExtractor.class, MsWordTextExtractor.class,
-			OpenOfficeTextExtractor.class, PdfTextExtractor.class,
-			PlainTextExtractor.class, RTFTextExtractor.class,
-			XMLTextExtractor.class
-		};
-
-		for (Class<?> textExtractorClass : textExtractorClasses) {
-			try {
-				TextExtractor textExtractor =
-					(TextExtractor)textExtractorClass.newInstance();
-
-				String[] contentTypes = textExtractor.getContentTypes();
-
-				for (String contentType : contentTypes) {
-					_textExtractors.put(contentType, textExtractor);
-				}
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-		}
 	}
 
 	public void copyDirectory(String sourceDirName, String destinationDirName) {
@@ -284,93 +239,9 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		String text = null;
 
 		try {
-			if (!is.markSupported()) {
-				is = new BufferedInputStream(is);
-			}
+			Tika tika = new Tika();
 
-			String contentType = MimeTypesUtil.getContentType(is, fileName);
-
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Attempting to extract text from " + fileName +
-						" of type " + contentType);
-			}
-
-			TextExtractor textExtractor = _textExtractors.get(contentType);
-
-			if (textExtractor != null) {
-				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Using text extractor " +
-							textExtractor.getClass().getName());
-				}
-
-				StringBuilder sb = new StringBuilder();
-
-				Reader reader = null;
-
-				if (ServerDetector.isJOnAS() && JavaProps.isJDK6() &&
-					contentType.equals(ContentTypes.APPLICATION_MSWORD)) {
-
-					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"JOnAS 5 with JDK 6 has a known issue with text " +
-								"extraction of Word documents. Use JDK 5 if " +
-									"you require indexing of Word documents.");
-					}
-
-					if (_log.isDebugEnabled()) {
-
-						// Execute code that will generate the error so it can
-						// be fixed at a later date
-
-						reader = textExtractor.extractText(
-							is, contentType, null);
-					}
-					else {
-						reader = new StringReader(StringPool.BLANK);
-					}
-				}
-				else {
-					reader = textExtractor.extractText(
-						is, contentType, null);
-				}
-
-				try{
-					char[] buffer = new char[1024];
-
-					int result = -1;
-
-					while ((result = reader.read(buffer)) != -1) {
-						sb.append(buffer, 0, result);
-					}
-				}
-				finally {
-					try {
-						reader.close();
-					}
-					catch (IOException ioe) {
-					}
-				}
-
-				text = sb.toString();
-			}
-			else if (contentType.equals(ContentTypes.APPLICATION_ZIP) ||
-				contentType.startsWith(
-					"application/vnd.openxmlformats-officedocument.")) {
-
-				try {
-					POITextExtractor poiTextExtractor =
-						ExtractorFactory.createExtractor(is);
-
-					text = poiTextExtractor.getText();
-				}
-				catch (Exception e) {
-					if (_log.isInfoEnabled()) {
-						_log.info(e.getMessage());
-					}
-				}
-			}
+			text = tika.parseToString(is);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -378,7 +249,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 		if (_log.isInfoEnabled()) {
 			if (text == null) {
-				_log.info("No text extractor found for " + fileName);
+				_log.info("Text extraction failed for " + fileName);
 			}
 			else {
 				_log.info("Text was extracted for " + fileName);
@@ -887,8 +758,5 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	private static Log _log = LogFactoryUtil.getLog(FileImpl.class);
 
 	private static FileImpl _instance = new FileImpl();
-
-	private Map<String, TextExtractor> _textExtractors =
-		new HashMap<String, TextExtractor>();
 
 }

@@ -1713,17 +1713,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/jackrabbit-text-extractors.jar</file-name>
-		<version>1.6.4</version>
-		<project-name>Jackrabbit</project-name>
-		<project-url>http://jackrabbit.apache.org</project-url>
-		<licenses>
-			<license>
-				<license-name>Apache License 2.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>portal/jai_codec.jar</file-name>
 		<version>1.1.3</version>
 		<project-name>Java Advanced Imaging</project-name>
@@ -2734,6 +2723,17 @@
 		<version>1.2.9</version>
 		<project-name>Struts</project-name>
 		<project-url>http://struts.apache.org</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/tika-core.jar</file-name>
+		<version>0.7</version>
+		<project-name>Tika</project-name>
+		<project-url>http://tika.apache.org</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
