@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.staging;
 
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.service.ServiceContext;
 
 import java.util.Date;
 import java.util.List;
@@ -49,6 +50,30 @@ public interface Staging {
 			Date endDate)
 		throws Exception;
 
+	public void disableStaging(
+			long scopeGroupId, long liveGroupId, ServiceContext serviceContext)
+		throws Exception;
+
+	public void disableStaging(
+			PortletRequest portletRequest, long scopeGroupId, long liveGroupId,
+			ServiceContext serviceContext)
+		throws Exception;
+
+	public void enableLocalStaging(
+			long userId, long scopeGroupId, long liveGroupId,
+			boolean branchingPublic, boolean branchingPrivate,
+			boolean lockingPublic, boolean lockingPrivate,
+			ServiceContext serviceContext)
+		throws Exception;
+
+	public void enableRemoteStaging(
+			long userId, long scopeGroupId, long liveGroupId,
+			boolean branchingPublic, boolean branchingPrivate,
+			boolean lockingPublic, boolean lockingPrivate, String remoteAddress,
+			long remoteGroupId, int remotePort, boolean secureConnection,
+			ServiceContext serviceContext)
+		throws Exception;
+
 	public List<Layout> getMissingParentLayouts(Layout layout, long liveGroupId)
 		throws Exception;
 
@@ -60,24 +85,25 @@ public interface Staging {
 		PortletRequest PortletRequest);
 
 	public void publishLayout(
-			long plid, long liveGroupId, boolean includeChildren)
+			long userId, long plid, long liveGroupId, boolean includeChildren)
 		throws Exception;
 
 	public void publishLayouts(
-			long sourceGroupId, long targetGroupId, boolean privateLayout,
-			long[] layoutIds, Map<String, String[]> parameterMap,
-			Date startDate, Date endDate)
-		throws Exception;
-
-	public void publishLayouts(
-			long sourceGroupId, long targetGroupId, boolean privateLayout,
-			Map<Long, Boolean> layoutIdMap, Map<String, String[]> parameterMap,
-			Date startDate, Date endDate)
-		throws Exception;
-
-	public void publishLayouts(
-			long sourceGroupId, long targetGroupId, boolean privateLayout,
+			long userId, long sourceGroupId, long targetGroupId,
+			boolean privateLayout, long[] layoutIds,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
+		throws Exception;
+
+	public void publishLayouts(
+			long userId, long sourceGroupId, long targetGroupId,
+			boolean privateLayout, Map<Long, Boolean> layoutIdMap,
+			Map<String, String[]> parameterMap, Date startDate, Date endDate)
+		throws Exception;
+
+	public void publishLayouts(
+			long userId, long sourceGroupId, long targetGroupId,
+			boolean privateLayout, Map<String, String[]> parameterMap,
+			Date startDate, Date endDate)
 		throws Exception;
 
 	public void publishToLive(PortletRequest PortletRequest) throws Exception;

@@ -99,15 +99,15 @@ public class LayoutsLocalPublisherMessageListener
 					LayoutsLocalPublisherRequest.COMMAND_ALL_PAGES)) {
 
 				StagingUtil.publishLayouts(
-					sourceGroupId, targetGroupId, privateLayout, parameterMap,
-					startDate, endDate);
+					userId, sourceGroupId, targetGroupId, privateLayout,
+					parameterMap, startDate, endDate);
 			}
 			else if (command.equals(
 				LayoutsLocalPublisherRequest.COMMAND_SELECTED_PAGES)) {
 
 				StagingUtil.publishLayouts(
-					sourceGroupId, targetGroupId, privateLayout, layoutIdMap,
-					parameterMap, startDate, endDate);
+					userId, sourceGroupId, targetGroupId, privateLayout,
+					layoutIdMap, parameterMap, startDate, endDate);
 			}
 		}
 		finally {

@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.staging;
 
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.service.ServiceContext;
 
 import java.util.Date;
 import java.util.List;
@@ -68,6 +69,48 @@ public class StagingUtil {
 			remotePrivateLayout, importParameterMap, startDate, endDate);
 	}
 
+	public static void disableStaging(
+			long scopeGroupId, long liveGroupId, ServiceContext serviceContext)
+		throws Exception {
+
+		getStaging().disableStaging(scopeGroupId, liveGroupId, serviceContext);
+	}
+
+	public static void disableStaging(
+			PortletRequest portletRequest, long scopeGroupId, long liveGroupId,
+			ServiceContext serviceContext)
+		throws Exception {
+
+		getStaging().disableStaging(
+			portletRequest, scopeGroupId, liveGroupId, serviceContext);
+	}
+
+	public static void enableLocalStaging(
+			long userId, long scopeGroupId, long liveGroupId,
+			boolean branchingPublic, boolean branchingPrivate,
+			boolean lockingPublic, boolean lockingPrivate,
+			ServiceContext serviceContext)
+		throws Exception {
+
+		getStaging().enableLocalStaging(
+			userId, scopeGroupId, liveGroupId, branchingPublic,
+			branchingPrivate, lockingPublic, lockingPrivate, serviceContext);
+	}
+
+	public static void enableRemoteStaging(
+			long userId, long scopeGroupId, long liveGroupId,
+			boolean branchingPublic, boolean branchingPrivate,
+			boolean lockingPublic, boolean lockingPrivate, String remoteAddress,
+			long remoteGroupId, int remotePort, boolean secureConnection,
+			ServiceContext serviceContext)
+		throws Exception {
+
+		getStaging().enableRemoteStaging(
+			userId, scopeGroupId, liveGroupId, branchingPublic,
+			branchingPrivate, lockingPublic, lockingPrivate, remoteAddress,
+			remoteGroupId, remotePort, secureConnection, serviceContext);
+	}
+
 	public static List<Layout> getMissingParentLayouts(
 			Layout layout, long liveGroupId)
 		throws Exception {
@@ -96,41 +139,42 @@ public class StagingUtil {
 	}
 
 	public static void publishLayout(
-			long plid, long liveGroupId, boolean includeChildren)
+			long userId, long plid, long liveGroupId, boolean includeChildren)
 		throws Exception {
 
-		getStaging().publishLayout(plid, liveGroupId, includeChildren);
+		getStaging().publishLayout(userId, plid, liveGroupId, includeChildren);
 	}
 
 	public static void publishLayouts(
-			long sourceGroupId, long targetGroupId, boolean privateLayout,
-			long[] layoutIds, Map<String, String[]> parameterMap,
-			Date startDate, Date endDate)
-		throws Exception {
-
-		getStaging().publishLayouts(
-			sourceGroupId, targetGroupId, privateLayout, layoutIds,
-			parameterMap, startDate, endDate);
-	}
-
-	public static void publishLayouts(
-			long sourceGroupId, long targetGroupId, boolean privateLayout,
-			Map<Long, Boolean> layoutIdMap, Map<String, String[]> parameterMap,
-			Date startDate, Date endDate)
-		throws Exception {
-
-		getStaging().publishLayouts(
-			sourceGroupId, targetGroupId, privateLayout, layoutIdMap,
-			parameterMap, startDate, endDate);
-	}
-
-	public static void publishLayouts(
-			long sourceGroupId, long targetGroupId, boolean privateLayout,
+			long userId, long sourceGroupId, long targetGroupId,
+			boolean privateLayout, long[] layoutIds,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws Exception {
 
 		getStaging().publishLayouts(
-			sourceGroupId, targetGroupId, privateLayout, parameterMap,
+			userId, sourceGroupId, targetGroupId, privateLayout, layoutIds,
+			parameterMap, startDate, endDate);
+	}
+
+	public static void publishLayouts(
+			long userId, long sourceGroupId, long targetGroupId,
+			boolean privateLayout, Map<Long, Boolean> layoutIdMap,
+			Map<String, String[]> parameterMap, Date startDate, Date endDate)
+		throws Exception {
+
+		getStaging().publishLayouts(
+			userId, sourceGroupId, targetGroupId, privateLayout, layoutIdMap,
+			parameterMap, startDate, endDate);
+	}
+
+	public static void publishLayouts(
+			long userId, long sourceGroupId, long targetGroupId,
+			boolean privateLayout, Map<String, String[]> parameterMap,
+			Date startDate, Date endDate)
+		throws Exception {
+
+		getStaging().publishLayouts(
+			userId, sourceGroupId, targetGroupId, privateLayout, parameterMap,
 			startDate, endDate);
 	}
 
