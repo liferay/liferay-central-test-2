@@ -515,7 +515,7 @@ AUI().add(
 
 				redirectInput.val(languageViewURL);
 
-				form.submit();
+				submitForm(form);
 			},
 
 			clearMessage: function(selector) {
@@ -677,7 +677,7 @@ AUI().add(
 
 					xmlInput.val(articleContent);
 
-					auxForm.submit();
+					submitForm(auxForm);
 				}
 			},
 
@@ -1197,7 +1197,7 @@ AUI().add(
 				templateIdInput.val('');
 				contentInput.val('');
 
-				form.submit();
+				submitForm(form);
 			},
 
 			loadEditFieldOptions: function(source) {
@@ -1331,7 +1331,7 @@ AUI().add(
 					titleAuxFormInput.val(titleInput.val());
 					xmlAuxFormInput.val(articleContent);
 
-					auxForm.submit();
+					submitForm(auxForm);
 				}
 			},
 
@@ -1482,7 +1482,7 @@ AUI().add(
 
 						contentInput.val(content);
 
-						form.submit();
+						submitForm(form);
 					}
 				}
 			},
