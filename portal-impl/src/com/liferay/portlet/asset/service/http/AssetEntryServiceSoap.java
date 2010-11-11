@@ -111,14 +111,14 @@ public class AssetEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.asset.model.AssetEntryDisplay[] getCompanyEntryDisplays(
+	public static com.liferay.portlet.asset.model.AssetEntryDisplaySoap[] getCompanyEntryDisplays(
 		long companyId, int start, int end, java.lang.String languageId)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.asset.model.AssetEntryDisplay[] returnValue = AssetEntryServiceUtil.getCompanyEntryDisplays(companyId,
 					start, end, languageId);
 
-			return returnValue;
+			return com.liferay.portlet.asset.model.AssetEntryDisplaySoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -202,7 +202,7 @@ public class AssetEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.asset.model.AssetEntryDisplay[] searchEntryDisplays(
+	public static com.liferay.portlet.asset.model.AssetEntryDisplaySoap[] searchEntryDisplays(
 		long companyId, java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId, int start, int end)
 		throws RemoteException {
@@ -210,7 +210,7 @@ public class AssetEntryServiceSoap {
 			com.liferay.portlet.asset.model.AssetEntryDisplay[] returnValue = AssetEntryServiceUtil.searchEntryDisplays(companyId,
 					portletId, keywords, languageId, start, end);
 
-			return returnValue;
+			return com.liferay.portlet.asset.model.AssetEntryDisplaySoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
