@@ -30,8 +30,6 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * <a href="LayoutRevisionWorkflowHandler.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class LayoutRevisionWorkflowHandler extends BaseWorkflowHandler {
