@@ -73,8 +73,8 @@ boolean view = GetterUtil.getBoolean((String)request.getAttribute("view_image.js
 
 <c:if test="<%= IGImagePermission.contains(permissionChecker, image, ActionKeys.DELETE) %>">
 	<portlet:renderURL var="viewFolderURL">
-			<portlet:param name="struts_action" value="/image_gallery/view" />
-			<portlet:param name="folderId" value="<%= String.valueOf(image.getFolderId()) %>" />
+		<portlet:param name="struts_action" value="/image_gallery/view" />
+		<portlet:param name="folderId" value="<%= String.valueOf(image.getFolderId()) %>" />
 	</portlet:renderURL>
 
 	<portlet:actionURL var="deleteURL">
