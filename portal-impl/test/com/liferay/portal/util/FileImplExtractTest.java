@@ -40,6 +40,12 @@ public class FileImplExtractTest extends BaseTestCase {
 		assertEquals("Extract test.", text);
 	}
 
+	public void testJpg() {
+		String text = extractText("test.jpg");
+
+		assertEquals("", text);
+	}
+
 	public void testOdt() {
 		String text = extractText("test.odt");
 
