@@ -15,6 +15,7 @@
 package com.liferay.portal.verify;
 
 import com.liferay.portal.GroupFriendlyURLException;
+import com.liferay.portal.NoSuchShardException;
 import com.liferay.portal.kernel.dao.shard.ShardUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -22,10 +23,13 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Shard;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.ShardLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -46,7 +50,18 @@ public class VerifyGroup extends VerifyProcess {
 		String currentShardName = ShardUtil.getCurrentShardName();
 
 		for (Company company : companies) {
-			String shardName = company.getShardName();
+			String shardName;
+
+			try {
+				shardName = company.getShardName();
+			}
+			catch (NoSuchShardException nsse) {
+				Shard shard = ShardLocalServiceUtil.addShard(
+					Company.class.getName(), company.getCompanyId(),
+					PropsValues.SHARD_DEFAULT_NAME);
+
+				shardName = shard.getName();
+			}
 
 			if (!ShardUtil.isEnabled() || shardName.equals(currentShardName)) {
 				GroupLocalServiceUtil.checkCompanyGroup(company.getCompanyId());
