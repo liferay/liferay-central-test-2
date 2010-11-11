@@ -8,10 +8,10 @@
 		<parameter name="className" value="com.liferay.portal.service.http.PortalServiceSoap" />
 		<parameter name="wsdlPortType" value="PortalServiceSoap" />
 		<parameter name="typeMappingVersion" value="1.2" />
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="test" qname="operNS:test" soapAction=""> </operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getBuildNumber" qname="operNS:getBuildNumber" returnQName="getBuildNumberReturn" returnType="rtns:int" soapAction=""> </operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getAutoDeployDirectory" qname="operNS:getAutoDeployDirectory" returnQName="getAutoDeployDirectoryReturn" returnType="rtns:string" soapAction=""> </operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="testCounterRollback" qname="operNS:testCounterRollback" soapAction=""> </operation>
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="test" qname="operNS:test" soapAction=""> </operation>
 		<parameter name="allowedMethods" value="getAutoDeployDirectory getBuildNumber testCounterRollback test" />
 	</service>
 </deployment>

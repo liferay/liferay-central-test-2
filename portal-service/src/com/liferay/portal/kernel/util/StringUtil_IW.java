@@ -206,9 +206,9 @@ public class StringUtil_IW {
 	}
 
 	public void readLines(java.io.InputStream is,
-		java.util.Collection<java.lang.String> strings)
+		java.util.Collection<java.lang.String> lines)
 		throws java.io.IOException {
-		StringUtil.readLines(is, strings);
+		StringUtil.readLines(is, lines);
 	}
 
 	public java.lang.String remove(java.lang.String s, java.lang.String remove) {
