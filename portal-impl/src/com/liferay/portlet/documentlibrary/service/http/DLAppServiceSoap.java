@@ -55,7 +55,7 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class DLAppServiceSoap {
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap addFileEntry(
 		long groupId, long folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String changeLog, java.lang.String extraSettings,
@@ -66,7 +66,7 @@ public class DLAppServiceSoap {
 					folderId, name, title, description, changeLog,
 					extraSettings, bytes, serviceContext);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -75,7 +75,7 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap addFileShortcut(
 		long groupId, long folderId, long toFolderId, java.lang.String toName,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
@@ -84,7 +84,7 @@ public class DLAppServiceSoap {
 				DLAppServiceUtil.addFileShortcut(groupId, folderId, toFolderId,
 					toName, serviceContext);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -93,7 +93,7 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
+	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap addFolder(
 		long groupId, long parentFolderId, java.lang.String name,
 		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -102,7 +102,7 @@ public class DLAppServiceSoap {
 			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLAppServiceUtil.addFolder(groupId,
 					parentFolderId, name, description, serviceContext);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -111,7 +111,7 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFolder copyFolder(
+	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap copyFolder(
 		long groupId, long sourceFolderId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -121,7 +121,7 @@ public class DLAppServiceSoap {
 					sourceFolderId, parentFolderId, name, description,
 					serviceContext);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -297,14 +297,14 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap getFileEntry(
 		long groupId, long folderId, java.lang.String name)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLAppServiceUtil.getFileEntry(groupId,
 					folderId, name);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -313,14 +313,14 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap getFileEntryByTitle(
 		long groupId, long folderId, java.lang.String titleWithExtension)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLAppServiceUtil.getFileEntryByTitle(groupId,
 					folderId, titleWithExtension);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -329,13 +329,13 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByUuidAndGroupId(
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap getFileEntryByUuidAndGroupId(
 		java.lang.String uuid, long groupId) throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLAppServiceUtil.getFileEntryByUuidAndGroupId(uuid,
 					groupId);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -344,13 +344,13 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut getFileShortcut(
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap getFileShortcut(
 		long fileShortcutId) throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileShortcut returnValue =
 				DLAppServiceUtil.getFileShortcut(fileShortcutId);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -359,12 +359,12 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
+	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap getFolder(
 		long folderId) throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLAppServiceUtil.getFolder(folderId);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -373,14 +373,14 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
+	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap getFolder(
 		long groupId, long parentFolderId, java.lang.String name)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLAppServiceUtil.getFolder(groupId,
 					parentFolderId, name);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -663,7 +663,7 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry moveFileEntry(
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap moveFileEntry(
 		long groupId, long folderId, long newFolderId, java.lang.String name,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
@@ -671,7 +671,7 @@ public class DLAppServiceSoap {
 			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLAppServiceUtil.moveFileEntry(groupId,
 					folderId, newFolderId, name, serviceContext);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -731,7 +731,7 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap updateFileEntry(
 		long groupId, long folderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
 		java.lang.String description, java.lang.String changeLog,
@@ -744,7 +744,7 @@ public class DLAppServiceSoap {
 					changeLog, majorVersion, extraSettings, bytes,
 					serviceContext);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -753,7 +753,7 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap updateFileShortcut(
 		long fileShortcutId, long folderId, long toFolderId,
 		java.lang.String toName,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -763,7 +763,7 @@ public class DLAppServiceSoap {
 				DLAppServiceUtil.updateFileShortcut(fileShortcutId, folderId,
 					toFolderId, toName, serviceContext);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -772,14 +772,14 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileVersion updateFileVersionDescription(
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersionSoap updateFileVersionDescription(
 		long fileVersionId, java.lang.String description)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileVersion returnValue = DLAppServiceUtil.updateFileVersionDescription(fileVersionId,
 					description);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFileVersionSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -788,7 +788,7 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
+	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -797,7 +797,7 @@ public class DLAppServiceSoap {
 			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLAppServiceUtil.updateFolder(folderId,
 					parentFolderId, name, description, serviceContext);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

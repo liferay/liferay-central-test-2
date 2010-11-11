@@ -432,14 +432,14 @@ public class DLFileEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileVersion updateFileVersionDescription(
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersionSoap updateFileVersionDescription(
 		long fileVersionId, java.lang.String description)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileVersion returnValue = DLFileEntryServiceUtil.updateFileVersionDescription(fileVersionId,
 					description);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFileVersionSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
