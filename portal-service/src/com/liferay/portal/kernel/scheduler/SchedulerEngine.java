@@ -41,11 +41,15 @@ public interface SchedulerEngine {
 
 	public static final int JOB_NAME_MAX_LENGTH = 80;
 
+	public static final String LANGUAGE = "language";
+
 	public static final String MESSAGE = "message";
 
 	public static final String MESSAGE_LISTENER_UUID = "message_listener_uuid";
 
 	public static final String RECEIVER_KEY = "receiver_key";
+
+	public static final String SCRIPT = "script";
 
 	public SchedulerRequest getScheduledJob(String jobName, String groupName)
 		throws SchedulerException;

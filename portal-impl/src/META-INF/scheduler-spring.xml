@@ -20,9 +20,18 @@
 	<bean id="destination.scheduler_engine.response" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/scheduler_engine/response" />
 	</bean>
+	<bean id="destination.scheduler_script_job" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<property name="name" value="liferay/scheduler_script_job" />
+	</bean>
 	<bean id="messageListener.scheduler_engine" class="com.liferay.portal.scheduler.messaging.SchedulerMessageListener">
 		<property name="messageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
 		<property name="schedulerEngine" ref="com.liferay.portal.kernel.scheduler.SchedulerEngine" />
+	</bean>
+	<bean id="messageListener.scheduler_script_job" class="com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper">
+		<property name="className" value="com.liferay.portal.scheduler.messaging.ScriptJobMessageListener" />
+		<property name="messageListener">
+			<bean class="com.liferay.portal.scheduler.messaging.ScriptJobMessageListener" />
+		</property>
 	</bean>
 	<bean id="messagingConfigurator.scheduler" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator">
 		<property name="destinations">
@@ -30,6 +39,7 @@
 				<ref bean="destination.scheduler_dispatch" />
 				<ref bean="destination.scheduler_engine" />
 				<ref bean="destination.scheduler_engine.response" />
+				<ref bean="destination.scheduler_script_job" />
 			</list>
 		</property>
 		<property name="messageBus">
@@ -40,6 +50,11 @@
 				<entry key="liferay/scheduler_engine">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
 						<ref bean="messageListener.scheduler_engine" />
+					</list>
+				</entry>
+				<entry key="liferay/scheduler_script_job">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="messageListener.scheduler_script_job" />
 					</list>
 				</entry>
 			</map>

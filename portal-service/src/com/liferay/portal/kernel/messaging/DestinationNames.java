@@ -96,6 +96,9 @@ public interface DestinationNames {
 	public static final String SCHEDULER_ENGINE_RESPONSE =
 		"liferay/scheduler_engine/response";
 
+	public static final String SCHEDULER_SCRIPT_JOB =
+		"liferay/scheduler_script_job";
+
 	public static final String SCRIPTING = "liferay/scripting";
 
 	public static final String SEARCH_READER = "liferay/search_reader";
