@@ -74,6 +74,8 @@ public class ${entity.name}ServiceSoap {
 
 			<#if returnValueName == extendedModelName>
 				${soapModelName}${returnValueDimension}
+			<#elseif stringUtil.startsWith(returnValueName, packagePath + ".model.")>
+				${returnValueName}Soap${returnValueDimension}
 			<#elseif returnValueName == "java.util.List">
 				<#if returnTypeGenericsName == "java.util.List<java.lang.Boolean>">
 					java.lang.Boolean[]
@@ -171,10 +173,18 @@ public class ${entity.name}ServiceSoap {
 					);
 
 					<#if returnValueName != "void">
-						<#if (returnValueName == extendedModelName) && (returnValueDimension == "")>
-							return ${soapModelName}.toSoapModel(returnValue);
-						<#elseif (returnValueName == extendedModelName) && (returnValueDimension != "")>
-							return ${soapModelName}.toSoapModels(returnValue);
+						<#if returnValueName == extendedModelName>
+							<#if returnValueDimension == "">
+								return ${soapModelName}.toSoapModel(returnValue);
+							<#else>
+								return ${soapModelName}.toSoapModels(returnValue);
+							</#if>
+						<#elseif stringUtil.startsWith(returnValueName, packagePath + ".model.")>
+							<#if returnValueDimension == "">
+								return ${returnValueName}Soap.toSoapModel(returnValue);
+							<#else>
+								return ${returnValueName}Soap.toSoapModels(returnValue);
+							</#if>
 						<#elseif returnValueName == "java.util.List">
 							<#if returnTypeGenericsName == "java.util.List<java.lang.Boolean>">
 								return returnValue.toArray(new java.lang.Boolean[returnValue.size()]);
