@@ -1196,6 +1196,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/commons-compress.jar</file-name>
+		<version>1.1</version>
+		<project-name>Commons Collections</project-name>
+		<project-url>http://commons.apache.org/compress</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/commons-configuration.jar</file-name>
 		<version>1.5.0</version>
 		<project-name>Commons Configuration</project-name>
@@ -1859,6 +1870,18 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/jempbox.jar</file-name>
+		<version>1.3.1</version>
+		<project-name>PDFBox</project-name>
+		<project-url>http://www.pdfbox.org</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+				<copyright-notice>Copyright (c) 2000-2002 The Apache Software Foundation. All rights reserved.</copyright-notice>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/jena.jar</file-name>
 		<version>1.4</version>
 		<project-name>Jena</project-name>
@@ -2168,6 +2191,17 @@
 		<licenses>
 			<license>
 				<license-name>MIT License</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/metadata-extractor.jar</file-name>
+		<version>2.4.0-beta-1</version>
+		<project-name>Metadata Extractor</project-name>
+		<project-url>http://www.drewnoakes.com/code/exif/</project-url>
+		<licenses>
+			<license>
+				<license-name>Public Domain</license-name>
 			</license>
 		</licenses>
 	</library>
