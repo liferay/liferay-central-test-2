@@ -560,10 +560,10 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.UserSoap updateLockout(long userId,
-		boolean lockout) throws RemoteException {
+	public static com.liferay.portal.model.UserSoap updateLockoutById(
+		long userId, boolean lockout) throws RemoteException {
 		try {
-			com.liferay.portal.model.User returnValue = UserServiceUtil.updateLockout(userId,
+			com.liferay.portal.model.User returnValue = UserServiceUtil.updateLockoutById(userId,
 					lockout);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);

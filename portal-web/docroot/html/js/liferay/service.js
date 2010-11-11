@@ -367,7 +367,7 @@ Liferay.Service.registerClass(
 		updateActive: true,
 		updateAgreedToTermsOfUse: true,
 		updateEmailAddress: true,
-		updateLockout: true,
+		updateLockoutById: true,
 		updateOpenId: true,
 		updateOrganizations: true,
 		updatePassword: true,

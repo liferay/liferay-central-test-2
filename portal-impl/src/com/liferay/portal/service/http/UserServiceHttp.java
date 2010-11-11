@@ -1249,13 +1249,13 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static com.liferay.portal.model.User updateLockout(
+	public static com.liferay.portal.model.User updateLockoutById(
 		HttpPrincipal httpPrincipal, long userId, boolean lockout)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
-					"updateLockout", _updateLockoutParameterTypes34);
+					"updateLockoutById", _updateLockoutByIdParameterTypes34);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					lockout);
@@ -1745,7 +1745,7 @@ public class UserServiceHttp {
 			long.class, java.lang.String.class, java.lang.String.class,
 			java.lang.String.class
 		};
-	private static final Class<?>[] _updateLockoutParameterTypes34 = new Class[] {
+	private static final Class<?>[] _updateLockoutByIdParameterTypes34 = new Class[] {
 			long.class, boolean.class
 		};
 	private static final Class<?>[] _updateOpenIdParameterTypes35 = new Class[] {

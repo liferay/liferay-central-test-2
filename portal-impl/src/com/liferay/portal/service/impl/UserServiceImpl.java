@@ -501,7 +501,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			userId, password, emailAddress1, emailAddress2);
 	}
 
-	public User updateLockout(long userId, boolean lockout)
+	public User updateLockoutById(long userId, boolean lockout)
 		throws PortalException, SystemException {
 
 		UserPermissionUtil.check(

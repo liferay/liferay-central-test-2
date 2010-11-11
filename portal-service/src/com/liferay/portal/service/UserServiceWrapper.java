@@ -272,11 +272,11 @@ public class UserServiceWrapper implements UserService {
 			emailAddress2);
 	}
 
-	public com.liferay.portal.model.User updateLockout(long userId,
+	public com.liferay.portal.model.User updateLockoutById(long userId,
 		boolean lockout)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _userService.updateLockout(userId, lockout);
+		return _userService.updateLockoutById(userId, lockout);
 	}
 
 	public void updateOpenId(long userId, java.lang.String openId)

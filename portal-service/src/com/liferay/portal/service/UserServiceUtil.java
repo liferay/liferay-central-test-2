@@ -286,11 +286,11 @@ public class UserServiceUtil {
 			.updateEmailAddress(userId, password, emailAddress1, emailAddress2);
 	}
 
-	public static com.liferay.portal.model.User updateLockout(long userId,
+	public static com.liferay.portal.model.User updateLockoutById(long userId,
 		boolean lockout)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateLockout(userId, lockout);
+		return getService().updateLockoutById(userId, lockout);
 	}
 
 	public static void updateOpenId(long userId, java.lang.String openId)
