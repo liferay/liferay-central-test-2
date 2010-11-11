@@ -81,7 +81,7 @@ public class AddIGFolderImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Use the classic uploader.")) {
+				if (selenium.isVisible("link=Use the classic uploader.")) {
 					break;
 				}
 			}
@@ -93,13 +93,27 @@ public class AddIGFolderImageTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		selenium.click("link=Use the classic uploader.");
-		selenium.type("_31_file",
-			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\dbupgrade\\sampledata605\\webcontent\\imageassociation\\dependencies\\ImageGallery.jpg"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_31_file")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.saveScreenShotAndSource();
 		selenium.type("_31_file",
 			RuntimeVariables.replace(
-				"L:\\projects\\6.0.x\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\dbupgrade\\sampledata605\\webcontent\\imageassociation\\dependencies\\ImageGallery.jpg"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\dbupgrade\\sampledata605\\webcontent\\imageassociation\\dependencies\\ImageGallery.jpg"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

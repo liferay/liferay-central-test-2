@@ -122,7 +122,7 @@ public class AddShortcutTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace("Test1 Document1")
+				if (RuntimeVariables.replace("Test1 Document1.txt")
 										.equals(selenium.getText(
 								"_20_toFileEntryTitle"))) {
 					break;
@@ -135,7 +135,7 @@ public class AddShortcutTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Test1 Document1"),
+		assertEquals(RuntimeVariables.replace("Test1 Document1.txt"),
 			selenium.getText("_20_toFileEntryTitle"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -171,7 +171,7 @@ public class AddShortcutTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace("Test1 Document1")
+				if (RuntimeVariables.replace("Test1 Document1.txt")
 										.equals(selenium.getText(
 								"//a/span/span"))) {
 					break;
@@ -184,7 +184,7 @@ public class AddShortcutTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Test1 Document1"),
+		assertEquals(RuntimeVariables.replace("Test1 Document1.txt"),
 			selenium.getText("//a/span/span"));
 
 		for (int second = 0;; second++) {

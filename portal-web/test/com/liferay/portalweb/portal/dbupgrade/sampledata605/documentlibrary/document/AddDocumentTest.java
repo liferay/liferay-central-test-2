@@ -116,7 +116,8 @@ public class AddDocumentTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\dbupgrade\\sampledata605\\documentlibrary\\document\\dependencies\\test_document.txt"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_20_title", RuntimeVariables.replace("Test1 Document1"));
+		selenium.type("_20_title",
+			RuntimeVariables.replace("Test1 Document1.txt"));
 		selenium.saveScreenShotAndSource();
 		selenium.type("_20_description",
 			RuntimeVariables.replace("This is test1 document1."));
@@ -156,7 +157,7 @@ public class AddDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace("Test1 Document1")
+				if (RuntimeVariables.replace("Test1 Document1.txt")
 										.equals(selenium.getText(
 								"//a/span/span"))) {
 					break;
@@ -169,7 +170,7 @@ public class AddDocumentTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Test1 Document1"),
+		assertEquals(RuntimeVariables.replace("Test1 Document1.txt"),
 			selenium.getText("//a/span/span"));
 
 		for (int second = 0;; second++) {

@@ -64,7 +64,7 @@ public class ViewDocumentTest extends BaseTestCase {
 		selenium.clickAt("//a/strong", RuntimeVariables.replace("Test1 Folder1"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Test1 Document1"),
+		assertEquals(RuntimeVariables.replace("Test1 Document1.txt"),
 			selenium.getText("//a/span/span"));
 		assertEquals(RuntimeVariables.replace("This is test1 document1."),
 			selenium.getText("//a/div"));

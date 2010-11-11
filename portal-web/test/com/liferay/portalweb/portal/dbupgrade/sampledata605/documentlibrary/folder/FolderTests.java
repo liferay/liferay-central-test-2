@@ -31,6 +31,7 @@ public class FolderTests extends BaseTests {
 		testSuite.addTestSuite(AddPageTest.class);
 		testSuite.addTestSuite(AddPortletTest.class);
 		testSuite.addTestSuite(AddFolderTest.class);
+		testSuite.addTestSuite(ViewFolderTest.class);
 
 		return testSuite;
 	}

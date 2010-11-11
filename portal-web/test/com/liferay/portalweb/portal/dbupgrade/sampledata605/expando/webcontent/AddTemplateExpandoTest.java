@@ -154,7 +154,7 @@ public class AddTemplateExpandoTest extends BaseTestCase {
 					selenium.getText("_15_structureName"));
 				selenium.type("_15_xsl",
 					RuntimeVariables.replace(
-						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\dbupgrade\\sampledata527\\expando\\webcontent\\dependencies\\Expando.htm"));
+						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\dbupgrade\\sampledata605\\expando\\webcontent\\dependencies\\Expando.htm"));
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));

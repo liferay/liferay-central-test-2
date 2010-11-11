@@ -95,9 +95,10 @@ public class AddDocumentVersionTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("_20_file",
 			RuntimeVariables.replace(
-				"L:\\projects\\6.0.x\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\dbupgrade\\sampledata605\\documentlibrary\\documentversion\\dependencies\\test_document2.txt"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\dbupgrade\\sampledata605\\documentlibrary\\documentversion\\dependencies\\test_document2.txt"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_20_title", RuntimeVariables.replace("Test2 Document2"));
+		selenium.type("_20_title",
+			RuntimeVariables.replace("Test2 Document2.txt"));
 		selenium.saveScreenShotAndSource();
 		selenium.type("_20_description",
 			RuntimeVariables.replace("This is test2 document2."));
@@ -106,12 +107,32 @@ public class AddDocumentVersionTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Test2 Document2"),
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Test2 Document2.txt")
+										.equals(selenium.getText(
+								"//a/span/span"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Test2 Document2.txt"),
 			selenium.getText("//a/span/span"));
 		assertEquals(RuntimeVariables.replace("This is test2 document2."),
 			selenium.getText("//a/div"));
 		selenium.clickAt("//a/span/span",
-			RuntimeVariables.replace("Test2 Document2"));
+			RuntimeVariables.replace("Test2 Document2.txt"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("1.1"),

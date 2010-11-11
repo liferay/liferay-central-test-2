@@ -110,29 +110,5 @@ public class PublishToLiveOrganizationStagingOrganizationWCDTest
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to publish these pages[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace(
-							"Your request processed successfully.")
-										.equals(selenium.getText(
-								"//div[2]/div/div/div"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
-			selenium.getText("//div[2]/div/div/div"));
 	}
 }
