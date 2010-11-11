@@ -84,8 +84,8 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Map;
 import java.util.Set;
 import java.util.TimeZone;
 
@@ -375,13 +375,13 @@ public class StagingImpl implements Staging {
 			liveGroup.getTypeSettingsProperties();
 
 		typeSettingsProperties.setProperty(
-			"branching-public", String.valueOf(branchingPublic));
-		typeSettingsProperties.setProperty(
 			"branching-private", String.valueOf(branchingPrivate));
 		typeSettingsProperties.setProperty(
-			"locking-public", String.valueOf(lockingPublic));
+			"branching-public", String.valueOf(branchingPublic));
 		typeSettingsProperties.setProperty(
 			"locking-private", String.valueOf(lockingPrivate));
+		typeSettingsProperties.setProperty(
+			"locking-public", String.valueOf(lockingPublic));
 		typeSettingsProperties.setProperty(
 			"staged", Boolean.TRUE.toString());
 		typeSettingsProperties.setProperty(
@@ -980,13 +980,13 @@ public class StagingImpl implements Staging {
 		int stagingType = ParamUtil.getInteger(portletRequest, "stagingType");
 
 		boolean branchingPublic = ParamUtil.getBoolean(
-			portletRequest, "branchingPublic", false);
+			portletRequest, "branchingPublic");
 		boolean branchingPrivate = ParamUtil.getBoolean(
-			portletRequest, "branchingPrivate", false);
+			portletRequest, "branchingPrivate");
 		boolean lockingPublic = ParamUtil.getBoolean(
-			portletRequest, "lockingPublic", false);
+			portletRequest, "lockingPublic");
 		boolean lockingPrivate = ParamUtil.getBoolean(
-			portletRequest, "lockingPrivate", false);
+			portletRequest, "lockingPrivate");
 
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
@@ -1168,6 +1168,9 @@ public class StagingImpl implements Staging {
 			boolean timeZoneSensitive)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		int dateMonth = ParamUtil.getInteger(
 			portletRequest, paramPrefix + "Month");
 		int dateDay = ParamUtil.getInteger(portletRequest, paramPrefix + "Day");
@@ -1188,10 +1191,6 @@ public class StagingImpl implements Staging {
 		TimeZone timeZone = null;
 
 		if (timeZoneSensitive) {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)portletRequest.getAttribute(
-					WebKeys.THEME_DISPLAY);
-
 			locale = themeDisplay.getLocale();
 			timeZone = themeDisplay.getTimeZone();
 		}
@@ -1254,10 +1253,8 @@ public class StagingImpl implements Staging {
 			boolean schedule)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)portletRequest.getAttribute(WebKeys.THEME_DISPLAY);
-
-		long userId = themeDisplay.getUserId();
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		String tabs1 = ParamUtil.getString(portletRequest, "tabs1");
 
@@ -1369,13 +1366,14 @@ public class StagingImpl implements Staging {
 					command = LayoutsLocalPublisherRequest.COMMAND_ALL_PAGES;
 
 					publishLayouts(
-						userId, sourceGroupId, targetGroupId, privateLayout,
-						parameterMap, startDate, endDate);
+						themeDisplay.getUserId(), sourceGroupId, targetGroupId,
+						privateLayout, parameterMap, startDate, endDate);
 				}
 				else {
 					publishLayouts(
-						userId, sourceGroupId, targetGroupId, privateLayout,
-						layoutIdMap, parameterMap, startDate, endDate);
+						themeDisplay.getUserId(), sourceGroupId, targetGroupId,
+						privateLayout, layoutIdMap, parameterMap, startDate,
+						endDate);
 				}
 			}
 			catch (Exception e) {
@@ -1404,8 +1402,8 @@ public class StagingImpl implements Staging {
 			PortletRequest portletRequest, boolean schedule)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)portletRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		String tabs1 = ParamUtil.getString(portletRequest, "tabs1");
 
