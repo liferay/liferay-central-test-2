@@ -123,7 +123,7 @@ public class LayoutServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.LayoutReferenceSoap[] getLayoutReferences(
+	public static com.liferay.portal.model.LayoutReference[] getLayoutReferences(
 		long companyId, java.lang.String portletId,
 		java.lang.String preferencesKey, java.lang.String preferencesValue)
 		throws RemoteException {
@@ -131,7 +131,7 @@ public class LayoutServiceSoap {
 			com.liferay.portal.model.LayoutReference[] returnValue = LayoutServiceUtil.getLayoutReferences(companyId,
 					portletId, preferencesKey, preferencesValue);
 
-			return com.liferay.portal.model.LayoutReferenceSoap.toSoapModels(returnValue);
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
