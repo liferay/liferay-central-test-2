@@ -42,7 +42,7 @@ public class SortFactoryImpl implements SortFactory {
 		Sort[] sortsArray = new Sort[sorts.size()];
 
 		for (int i = 0; i < sorts.size(); i++) {
-			sortsArray[i] = (Sort)sorts.get(i);
+			sortsArray[i] = sorts.get(i);
 		}
 
 		return sortsArray;
