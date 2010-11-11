@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -174,16 +175,14 @@ public class DLIndexer extends BaseIndexer {
 			}
 
 			if (indexContent) {
+				String extensionWithPeriod = StringPool.PERIOD + extension;
+
 				String[] ignoreExtensions = PrefsPropsUtil.getStringArray(
 					PropsKeys.DL_FILE_INDEXING_IGNORE_EXTENSIONS,
 					StringPool.COMMA);
 
-				for (String ignoreExtension : ignoreExtensions) {
-					if (StringUtil.endsWith(fileName, ignoreExtension)) {
-						indexContent = false;
-
-						break;
-					}
+				if (ArrayUtil.contains(ignoreExtensions, extensionWithPeriod)) {
+					indexContent = false;
 				}
 			}
 
