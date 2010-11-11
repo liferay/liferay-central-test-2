@@ -47,16 +47,19 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.jcr.Binary;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Property;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.Workspace;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.version.Version;
 import javax.jcr.version.VersionHistory;
 import javax.jcr.version.VersionIterator;
+import javax.jcr.version.VersionManager;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -120,6 +123,8 @@ public class JCRHook extends BaseHook {
 
 		try {
 			session = JCRFactoryUtil.createSession();
+			Workspace workspace = session.getWorkspace();
+			VersionManager versionManager = workspace.getVersionManager();
 
 			Node rootNode = getRootNode(session, companyId);
 			Node repositoryNode = getFolderNode(rootNode, repositoryId);
@@ -137,15 +142,19 @@ public class JCRHook extends BaseHook {
 				contentNode.addMixin(JCRConstants.MIX_VERSIONABLE);
 				contentNode.setProperty(
 					JCRConstants.JCR_MIME_TYPE, "text/plain");
-				contentNode.setProperty(JCRConstants.JCR_DATA, is);
+
+				Binary binary = session.getValueFactory().createBinary(is);
+				contentNode.setProperty(JCRConstants.JCR_DATA, binary);
+
 				contentNode.setProperty(
 					JCRConstants.JCR_LAST_MODIFIED, Calendar.getInstance());
 
 				session.save();
 
-				Version version = contentNode.checkin();
+				Version version = versionManager.checkin(contentNode.getPath());
 
-				VersionHistory versionHistory = contentNode.getVersionHistory();
+				VersionHistory versionHistory =
+						versionManager.getVersionHistory(contentNode.getPath());
 
 				versionHistory.addVersionLabel(
 					version.getName(), DEFAULT_VERSION, false);
@@ -253,13 +262,15 @@ public class JCRHook extends BaseHook {
 
 		try {
 			session = JCRFactoryUtil.createSession();
+			Workspace workspace = session.getWorkspace();
+			VersionManager versionManager = workspace.getVersionManager();
 
 			Node rootNode = getRootNode(session, companyId);
 			Node repositoryNode = getFolderNode(rootNode, repositoryId);
 			Node fileNode = repositoryNode.getNode(fileName);
 			Node contentNode = fileNode.getNode(JCRConstants.JCR_CONTENT);
 
-			contentNode.checkout();
+			versionManager.checkout(contentNode.getPath());
 
 			contentNode.setProperty(JCRConstants.JCR_MIME_TYPE, "text/plain");
 			contentNode.setProperty(JCRConstants.JCR_DATA, "");
@@ -268,9 +279,10 @@ public class JCRHook extends BaseHook {
 
 			session.save();
 
-			Version version = contentNode.checkin();
+			Version version = versionManager.checkin(contentNode.getPath());
 
-			VersionHistory versionHistory = contentNode.getVersionHistory();
+			VersionHistory versionHistory =
+					versionManager.getVersionHistory(contentNode.getPath());
 
 			versionHistory.addVersionLabel(version.getName(), "0.0", false);
 		}
@@ -290,13 +302,16 @@ public class JCRHook extends BaseHook {
 
 		try {
 			session = JCRFactoryUtil.createSession();
+			Workspace workspace = session.getWorkspace();
+			VersionManager versionManager = workspace.getVersionManager();
 
 			Node rootNode = getRootNode(session, companyId);
 			Node repositoryNode = getFolderNode(rootNode, repositoryId);
 			Node fileNode = repositoryNode.getNode(fileName);
 			Node contentNode = fileNode.getNode(JCRConstants.JCR_CONTENT);
 
-			VersionHistory versionHistory = contentNode.getVersionHistory();
+			VersionHistory versionHistory =
+					versionManager.getVersionHistory(contentNode.getPath());
 
 			VersionIterator itr = versionHistory.getAllVersions();
 
@@ -378,13 +393,16 @@ public class JCRHook extends BaseHook {
 
 		try {
 			session = JCRFactoryUtil.createSession();
+			Workspace workspace = session.getWorkspace();
+			VersionManager versionManager = workspace.getVersionManager();
 
 			Node rootNode = getRootNode(session, companyId);
 			Node repositoryNode = getFolderNode(rootNode, repositoryId);
 			Node fileNode = repositoryNode.getNode(fileName);
 			Node contentNode = fileNode.getNode(JCRConstants.JCR_CONTENT);
 
-			VersionHistory versionHistory = contentNode.getVersionHistory();
+			VersionHistory versionHistory =
+					versionManager.getVersionHistory(contentNode.getPath());
 
 			if (!versionHistory.hasVersionLabel(versionLabel)) {
 				throw new NoSuchFileException(
@@ -430,7 +448,8 @@ public class JCRHook extends BaseHook {
 
 			Property data = contentNode.getProperty(JCRConstants.JCR_DATA);
 
-			is = new UnsyncBufferedInputStream(data.getStream());
+			Binary binary = data.getValue().getBinary();
+			is = new UnsyncBufferedInputStream(binary.getStream());
 		}
 		catch (RepositoryException re) {
 			throw new SystemException(re);
@@ -625,6 +644,8 @@ public class JCRHook extends BaseHook {
 
 		try {
 			session = JCRFactoryUtil.createSession();
+			Workspace workspace = session.getWorkspace();
+			VersionManager versionManager = workspace.getVersionManager();
 
 			Node rootNode = getRootNode(session, companyId);
 			Node repositoryNode = getFolderNode(rootNode, repositoryId);
@@ -643,7 +664,8 @@ public class JCRHook extends BaseHook {
 				Node newContentNode = newFileNode.addNode(
 					JCRConstants.JCR_CONTENT, JCRConstants.NT_RESOURCE);
 
-				VersionHistory versionHistory = contentNode.getVersionHistory();
+				VersionHistory versionHistory =
+						versionManager.getVersionHistory(contentNode.getPath());
 
 				String[] versionLabels = versionHistory.getVersionLabels();
 
@@ -658,24 +680,29 @@ public class JCRHook extends BaseHook {
 						newContentNode.addMixin(JCRConstants.MIX_VERSIONABLE);
 					}
 					else {
-						newContentNode.checkout();
+						versionManager.checkout(newContentNode.getPath());
 					}
 
 					newContentNode.setProperty(
 						JCRConstants.JCR_MIME_TYPE, "text/plain");
-					newContentNode.setProperty(
-						JCRConstants.JCR_DATA,
-						frozenContentNode.getProperty(
-							JCRConstants.JCR_DATA).getStream());
+
+					Binary binary =
+							frozenContentNode.
+									getProperty(JCRConstants.JCR_DATA).
+									getBinary();
+					newContentNode.setProperty(JCRConstants.JCR_DATA, binary);
+
 					newContentNode.setProperty(
 						JCRConstants.JCR_LAST_MODIFIED, Calendar.getInstance());
 
 					session.save();
 
-					Version newVersion = newContentNode.checkin();
+					Version newVersion =
+							versionManager.checkin(newContentNode.getPath());
 
 					VersionHistory newVersionHistory =
-						newContentNode.getVersionHistory();
+							versionManager.getVersionHistory(
+									newContentNode.getPath());
 
 					newVersionHistory.addVersionLabel(
 						newVersion.getName(), versionLabels[i],
@@ -726,6 +753,8 @@ public class JCRHook extends BaseHook {
 
 		try {
 			session = JCRFactoryUtil.createSession();
+			Workspace workspace = session.getWorkspace();
+			VersionManager versionManager = workspace.getVersionManager();
 
 			Node rootNode = getRootNode(session, companyId);
 			Node repositoryNode = getFolderNode(rootNode, repositoryId);
@@ -738,7 +767,8 @@ public class JCRHook extends BaseHook {
 			Node newContentNode = newFileNode.addNode(
 				JCRConstants.JCR_CONTENT, JCRConstants.NT_RESOURCE);
 
-			VersionHistory versionHistory = contentNode.getVersionHistory();
+			VersionHistory versionHistory =
+					versionManager.getVersionHistory(contentNode.getPath());
 
 			String[] versionLabels = versionHistory.getVersionLabels();
 
@@ -753,24 +783,29 @@ public class JCRHook extends BaseHook {
 					newContentNode.addMixin(JCRConstants.MIX_VERSIONABLE);
 				}
 				else {
-					newContentNode.checkout();
+					versionManager.checkout(newContentNode.getPath());
 				}
 
 				newContentNode.setProperty(
 					JCRConstants.JCR_MIME_TYPE, "text/plain");
-				newContentNode.setProperty(
-					JCRConstants.JCR_DATA,
-					frozenContentNode.getProperty(
-						JCRConstants.JCR_DATA).getStream());
+
+				Binary binary =
+						frozenContentNode.
+								getProperty(JCRConstants.JCR_DATA).
+								getBinary();
+				newContentNode.setProperty(JCRConstants.JCR_DATA, binary);
+
 				newContentNode.setProperty(
 					JCRConstants.JCR_LAST_MODIFIED, Calendar.getInstance());
 
 				session.save();
 
-				Version newVersion = newContentNode.checkin();
+				Version newVersion =
+						versionManager.checkin(newContentNode.getPath());
 
 				VersionHistory newVersionHistory =
-					newContentNode.getVersionHistory();
+						versionManager.getVersionHistory(
+								newContentNode.getPath());
 
 				newVersionHistory.addVersionLabel(
 					newVersion.getName(), versionLabels[i],
@@ -826,24 +861,30 @@ public class JCRHook extends BaseHook {
 
 		try {
 			session = JCRFactoryUtil.createSession();
+			Workspace workspace = session.getWorkspace();
+			VersionManager versionManager = workspace.getVersionManager();
 
 			Node rootNode = getRootNode(session, companyId);
 			Node repositoryNode = getFolderNode(rootNode, repositoryId);
 			Node fileNode = repositoryNode.getNode(fileName);
 			Node contentNode = fileNode.getNode(JCRConstants.JCR_CONTENT);
 
-			contentNode.checkout();
+			versionManager.checkout(contentNode.getPath());
 
 			contentNode.setProperty(JCRConstants.JCR_MIME_TYPE, "text/plain");
-			contentNode.setProperty(JCRConstants.JCR_DATA, is);
+
+			Binary binary = session.getValueFactory().createBinary(is);
+			contentNode.setProperty(JCRConstants.JCR_DATA, binary);
+
 			contentNode.setProperty(
 				JCRConstants.JCR_LAST_MODIFIED, Calendar.getInstance());
 
 			session.save();
 
-			Version version = contentNode.checkin();
+			Version version = versionManager.checkin(contentNode.getPath());
 
-			VersionHistory versionHistory = contentNode.getVersionHistory();
+			VersionHistory versionHistory =
+					versionManager.getVersionHistory(contentNode.getPath());
 
 			versionHistory.addVersionLabel(
 				version.getName(), versionLabel,
@@ -960,6 +1001,9 @@ public class JCRHook extends BaseHook {
 		Node contentNode = null;
 
 		try {
+			Workspace workspace = session.getWorkspace();
+			VersionManager versionManager = workspace.getVersionManager();
+
 			Node rootNode = getRootNode(session, companyId);
 			Node repositoryNode = getFolderNode(rootNode, repositoryId);
 			Node fileNode = repositoryNode.getNode(fileName);
@@ -967,7 +1011,7 @@ public class JCRHook extends BaseHook {
 
 			if (Validator.isNotNull(versionNumber)) {
 				VersionHistory versionHistory =
-					contentNode.getVersionHistory();
+						versionManager.getVersionHistory(contentNode.getPath());
 
 				if (!versionHistory.hasVersionLabel(versionLabel)) {
 					throw new NoSuchFileException(
