@@ -50,7 +50,7 @@ public class VerifyGroup extends VerifyProcess {
 		String currentShardName = ShardUtil.getCurrentShardName();
 
 		for (Company company : companies) {
-			String shardName;
+			String shardName = null;
 
 			try {
 				shardName = company.getShardName();
