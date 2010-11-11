@@ -64,12 +64,6 @@ public class MessageSenderJob implements Job {
 				(ObjectValuePair<TriggerState, Exception>)
 					schedulerContext.get(jobDetail.getFullName());
 
-			if (jobState == null) {
-				jobState = new ObjectValuePair<TriggerState, Exception>();
-
-				schedulerContext.put(jobDetail.getFullName(), jobState);
-			}
-
 			message.put(SchedulerEngine.JOB_STATE, jobState);
 
 			MessageBusUtil.sendMessage(destinationName, message);

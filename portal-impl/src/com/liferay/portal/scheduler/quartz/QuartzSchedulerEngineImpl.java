@@ -72,6 +72,8 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			quartzLocalService.checkQuartzTables();
 
 			_scheduler = schedulerFactory.getScheduler();
+
+			initalJobState();
 		}
 		catch (Exception e) {
 			_log.error("Unable to initialize engine", e);
@@ -530,6 +532,25 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		message.put(JOB_STATE, jobState);
 	}
 
+	protected void initalJobState() throws Exception {
+		SchedulerContext schedulerContext = _scheduler.getContext();
+
+		String[] groupNames = _scheduler.getJobGroupNames();
+
+		for(String groupName : groupNames) {
+			String [] jobNames = _scheduler.getJobNames(groupName);
+
+			for(String jobName : jobNames) {
+				JobDetail jobDetail = _scheduler.getJobDetail(
+					jobName, groupName);
+				
+				schedulerContext.put(
+					jobDetail.getFullName(),
+					new ObjectValuePair<TriggerState, Exception>());
+			}
+		}
+	}
+
 	protected void schedule(
 			Trigger trigger, String description, String destinationName,
 			Message message)
@@ -543,6 +564,18 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				jobName, groupName, MessageSenderJob.class);
 
 			jobDetail.setDurability(true);
+
+			SchedulerContext schedulerContext = _scheduler.getContext();
+
+			ObjectValuePair<TriggerState, Exception> jobState =
+				(ObjectValuePair<TriggerState, Exception>)
+					schedulerContext.get(jobDetail.getFullName());
+
+			if (jobState == null) {
+				jobState = new ObjectValuePair<TriggerState, Exception>();
+
+				schedulerContext.put(jobDetail.getFullName(), jobState);
+			}
 
 			JobDataMap jobDataMap = jobDetail.getJobDataMap();
 
