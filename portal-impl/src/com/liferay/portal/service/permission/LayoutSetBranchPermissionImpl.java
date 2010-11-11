@@ -25,11 +25,12 @@ import com.liferay.portal.service.LayoutSetBranchLocalServiceUtil;
 /**
  * @author Brian Wing Shun Chan
  */
-public class LayoutSetBranchPermissionImpl implements LayoutSetBranchPermission {
+public class LayoutSetBranchPermissionImpl
+	implements LayoutSetBranchPermission {
 
 	public void check(
-			PermissionChecker permissionChecker, LayoutSetBranch layoutSetBranch,
-			String actionId)
+			PermissionChecker permissionChecker,
+			LayoutSetBranch layoutSetBranch, String actionId)
 		throws PortalException {
 
 		if (!contains(permissionChecker, layoutSetBranch, actionId)) {
@@ -42,7 +43,9 @@ public class LayoutSetBranchPermissionImpl implements LayoutSetBranchPermission 
 			long layoutSetBranchId, String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, groupId, layoutSetBranchId, actionId)) {
+		if (!contains(
+				permissionChecker, groupId, layoutSetBranchId, actionId)) {
+
 			throw new PrincipalException();
 		}
 	}
@@ -69,7 +72,8 @@ public class LayoutSetBranchPermissionImpl implements LayoutSetBranchPermission 
 		}
 		else {
 			LayoutSetBranch layoutSetBranch =
-				LayoutSetBranchLocalServiceUtil.getLayoutSetBranch(layoutSetBranchId);
+				LayoutSetBranchLocalServiceUtil.getLayoutSetBranch(
+					layoutSetBranchId);
 
 			return contains(permissionChecker, layoutSetBranch, actionId);
 		}

@@ -108,11 +108,11 @@ public class LayoutSetBranchLocalServiceImpl
 			LayoutSetBranch layoutSetBranch, boolean includeMaster)
 		throws PortalException, SystemException {
 
+		// Layout branch
+
 		if (!includeMaster && layoutSetBranch.isMaster()) {
 			throw new RequiredLayoutSetBranchException();
 		}
-
-		// Layout branch
 
 		layoutSetBranchPersistence.remove(layoutSetBranch);
 
@@ -156,19 +156,19 @@ public class LayoutSetBranchLocalServiceImpl
 		}
 	}
 
-	public List<LayoutSetBranch> getLayoutSetBranches(
-			long groupId, boolean privateLayout)
-		throws SystemException {
-
-		return layoutSetBranchPersistence.findByG_P(groupId, privateLayout);
-	}
-
 	public LayoutSetBranch getLayoutSetBranch(
 			long groupId, boolean privateLayout, String name)
 		throws PortalException, SystemException {
 
 		return layoutSetBranchPersistence.findByG_P_N(
 			groupId, privateLayout, name);
+	}
+
+	public List<LayoutSetBranch> getLayoutSetBranches(
+			long groupId, boolean privateLayout)
+		throws SystemException {
+
+		return layoutSetBranchPersistence.findByG_P(groupId, privateLayout);
 	}
 
 	public LayoutSetBranch getMasterLayoutSetBranch(

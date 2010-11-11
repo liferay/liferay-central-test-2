@@ -114,10 +114,10 @@ public class PersistenceTestSuite extends TestSuite {
 		testSuite.addTestSuite(EmailAddressPersistenceTest.class);
 		testSuite.addTestSuite(GroupPersistenceTest.class);
 		testSuite.addTestSuite(ImagePersistenceTest.class);
-		testSuite.addTestSuite(LayoutSetBranchPersistenceTest.class);
 		testSuite.addTestSuite(LayoutPersistenceTest.class);
 		testSuite.addTestSuite(LayoutPrototypePersistenceTest.class);
 		testSuite.addTestSuite(LayoutRevisionPersistenceTest.class);
+		testSuite.addTestSuite(LayoutSetBranchPersistenceTest.class);
 		testSuite.addTestSuite(LayoutSetPersistenceTest.class);
 		testSuite.addTestSuite(LayoutSetPrototypePersistenceTest.class);
 		testSuite.addTestSuite(ListTypePersistenceTest.class);

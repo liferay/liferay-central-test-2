@@ -50,8 +50,8 @@ public class LayoutRevisionLocalServiceImpl
 		// Layout revision
 
 		User user = userLocalService.getUserById(userId);
-		LayoutSetBranch layoutSetBranch = layoutSetBranchPersistence.findByPrimaryKey(
-			layoutSetBranchId);
+		LayoutSetBranch layoutSetBranch =
+			layoutSetBranchPersistence.findByPrimaryKey(layoutSetBranchId);
 		parentLayoutRevisionId = getParentLayoutRevisionId(
 			layoutSetBranchId, parentLayoutRevisionId, plid);
 		Date now = new Date();
@@ -95,8 +95,9 @@ public class LayoutRevisionLocalServiceImpl
 
 		WorkflowHandlerRegistryUtil.startWorkflowInstance(
 			user.getCompanyId(), layoutRevision.getGroupId(), user.getUserId(),
-			LayoutRevision.class.getName(), layoutRevision.getLayoutRevisionId(),
-			layoutRevision, serviceContext);
+			LayoutRevision.class.getName(),
+			layoutRevision.getLayoutRevisionId(), layoutRevision,
+			serviceContext);
 
 		return layoutRevision;
 	}
@@ -106,8 +107,8 @@ public class LayoutRevisionLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		LayoutSetBranch layoutSetBranch = layoutSetBranchPersistence.findByPrimaryKey(
-			layoutSetBranchId);
+		LayoutSetBranch layoutSetBranch =
+			layoutSetBranchPersistence.findByPrimaryKey(layoutSetBranchId);
 
 		LayoutRevision layoutRevision = null;
 
@@ -154,7 +155,8 @@ public class LayoutRevisionLocalServiceImpl
 
 		if (layoutRevisions.isEmpty()) {
 			addLayoutRevision(
-				layoutSetBranch.getUserId(), layoutSetBranch.getLayoutSetBranchId(),
+				layoutSetBranch.getUserId(),
+				layoutSetBranch.getLayoutSetBranchId(),
 				LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID,
 				false, plid, layout.getName(), layout.getTitle(),
 				layout.getDescription(), layout.getTypeSettings(),
@@ -284,7 +286,8 @@ public class LayoutRevisionLocalServiceImpl
 		newLayoutRevision.setUserName(user.getFullName());
 		newLayoutRevision.setCreateDate(serviceContext.getCreateDate(now));
 		newLayoutRevision.setModifiedDate(serviceContext.getModifiedDate(now));
-		newLayoutRevision.setLayoutSetBranchId(layoutRevision.getLayoutSetBranchId());
+		newLayoutRevision.setLayoutSetBranchId(
+			layoutRevision.getLayoutSetBranchId());
 		newLayoutRevision.setParentLayoutRevisionId(
 			layoutRevision.getLayoutRevisionId());
 		newLayoutRevision.setHead(false);

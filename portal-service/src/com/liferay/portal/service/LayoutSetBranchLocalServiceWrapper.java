@@ -259,19 +259,19 @@ public class LayoutSetBranchLocalServiceWrapper
 			privateLayout, includeMaster);
 	}
 
-	public java.util.List<com.liferay.portal.model.LayoutSetBranch> getLayoutSetBranches(
-		long groupId, boolean privateLayout)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _layoutSetBranchLocalService.getLayoutSetBranches(groupId,
-			privateLayout);
-	}
-
 	public com.liferay.portal.model.LayoutSetBranch getLayoutSetBranch(
 		long groupId, boolean privateLayout, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetBranchLocalService.getLayoutSetBranch(groupId,
 			privateLayout, name);
+	}
+
+	public java.util.List<com.liferay.portal.model.LayoutSetBranch> getLayoutSetBranches(
+		long groupId, boolean privateLayout)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _layoutSetBranchLocalService.getLayoutSetBranches(groupId,
+			privateLayout);
 	}
 
 	public com.liferay.portal.model.LayoutSetBranch getMasterLayoutSetBranch(

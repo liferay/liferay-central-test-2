@@ -25,8 +25,8 @@ import com.liferay.portal.security.permission.PermissionChecker;
 public class LayoutSetBranchPermissionUtil {
 
 	public static void check(
-			PermissionChecker permissionChecker, LayoutSetBranch layoutSetBranch,
-			String actionId)
+			PermissionChecker permissionChecker,
+			LayoutSetBranch layoutSetBranch, String actionId)
 		throws PortalException {
 
 		getLayoutSetBranchPermission().check(
