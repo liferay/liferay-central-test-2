@@ -93,10 +93,10 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			actionRequest, "summaryTabShowMiniMonth");
 		String summaryTabShowTodaysEvents = ParamUtil.getString(
 			actionRequest, "summaryTabShowTodaysEvents");
-		boolean enableComments = ParamUtil.getBoolean(
-			actionRequest, "enableComments");
 		boolean enableRatings = ParamUtil.getBoolean(
 			actionRequest, "enableRatings");
+		boolean enableComments = ParamUtil.getBoolean(
+			actionRequest, "enableComments");
 
 		preferences.setValue("tabs1-default", tabs1Default);
 		preferences.setValue("summary-tab-orientation", summaryTabOrientation);

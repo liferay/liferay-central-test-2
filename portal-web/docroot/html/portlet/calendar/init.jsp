@@ -53,8 +53,8 @@ String tabs1Default = preferences.getValue("tabs1-default", tabs1NamesArray[0]);
 String summaryTabOrientation = preferences.getValue("summary-tab-orientation", "horizontal");
 boolean summaryTabShowMiniMonth = GetterUtil.getBoolean(preferences.getValue("summary-tab-show-mini-month", "true"));
 boolean summaryTabShowTodaysEvents = GetterUtil.getBoolean(preferences.getValue("summary-tab-show-todays-events", "true"));
-boolean enableComments = PropsValues.CALENDAR_EVENT_COMMENTS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enable-comments", null), true);
 boolean enableRatings = PropsValues.CALENDAR_EVENT_RATINGS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enable-ratings", null), true);
+boolean enableComments = PropsValues.CALENDAR_EVENT_COMMENTS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enable-comments", null), true);
 
 String monthParam = request.getParameter("month");
 String dayParam = request.getParameter("day");

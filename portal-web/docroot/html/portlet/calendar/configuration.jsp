@@ -157,12 +157,12 @@ String editorContent = emailEventReminderBody;
 
 				<aui:input inlineLabel="left" label="show-todays-events" name="summaryTabShowTodaysEvents" type="checkbox" value="<%= summaryTabShowTodaysEvents %>" />
 
-				<c:if test="<%= PropsValues.CALENDAR_EVENT_COMMENTS_ENABLED %>">
-					<aui:input inlineLabel="left" name="enableComments" type="checkbox" value="<%= enableComments %>" />
-				</c:if>
-
 				<c:if test="<%= PropsValues.CALENDAR_EVENT_RATINGS_ENABLED %>">
 					<aui:input inlineLabel="left" name="enableRatings" type="checkbox" value="<%= enableRatings %>" />
+				</c:if>
+
+				<c:if test="<%= PropsValues.CALENDAR_EVENT_COMMENTS_ENABLED %>">
+					<aui:input inlineLabel="left" name="enableComments" type="checkbox" value="<%= enableComments %>" />
 				</c:if>
 			</aui:fieldset>
 		</c:when>
