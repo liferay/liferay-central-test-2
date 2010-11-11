@@ -257,7 +257,11 @@ public class ServiceBuilder {
 		jalopy.setInput(tempFile);
 		jalopy.setOutput(sb);
 
-		File jalopyXmlFile = new File("../tools/jalopy.xml");
+		File jalopyXmlFile = new File("tools/jalopy.xml");
+
+		if (!jalopyXmlFile.exists()) {
+			jalopyXmlFile = new File("../tools/jalopy.xml");
+		}
 
 		if (!jalopyXmlFile.exists()) {
 			jalopyXmlFile = new File("misc/jalopy.xml");

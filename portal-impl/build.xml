@@ -249,22 +249,22 @@
 			<arg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<arg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
 			<arg value="service.input.file=${service.file}" />
-			<arg value="service.hbm.file=src/META-INF/portal-hbm.xml" />
-			<arg value="service.orm.file=src/META-INF/portal-orm.xml" />
-			<arg value="service.model.hints.file=src/META-INF/portal-model-hints.xml" />
-			<arg value="service.spring.file=src/META-INF/portal-spring.xml" />
-			<arg value="service.api.dir=${project.dir}/portal-service/src" />
-			<arg value="service.impl.dir=src" />
-			<arg value="service.json.file=${project.dir}/portal-web/docroot/html/js/liferay/service.js" />
-			<arg value="service.remoting.file=${project.dir}/tunnel-web/docroot/WEB-INF/remoting-servlet.xml" />
-			<arg value="service.sql.dir=../sql" />
+			<arg value="service.hbm.file=${basedir}/src/META-INF/portal-hbm.xml" />
+			<arg value="service.orm.file=${basedir}/src/META-INF/portal-orm.xml" />
+			<arg value="service.model.hints.file=${basedir}/src/META-INF/portal-model-hints.xml" />
+			<arg value="service.spring.file=${basedir}/src/META-INF/portal-spring.xml" />
+			<arg value="service.api.dir=${basedir}/../portal-service/src" />
+			<arg value="service.impl.dir=${basedir}/src" />
+			<arg value="service.json.file=${basedir}/../portal-web/docroot/html/js/liferay/service.js" />
+			<arg value="service.remoting.file=${basedir}/../tunnel-web/docroot/WEB-INF/remoting-servlet.xml" />
+			<arg value="service.sql.dir=${basedir}/../sql" />
 			<arg value="service.sql.file=portal-tables.sql" />
 			<arg value="service.sql.indexes.file=indexes.sql" />
 			<arg value="service.sql.indexes.properties.file=indexes.properties" />
 			<arg value="service.sql.sequences.file=sequences.sql" />
 			<arg value="service.bean.locator.util=com.liferay.portal.kernel.bean.PortalBeanLocatorUtil" />
 			<arg value="service.props.util=com.liferay.portal.util.PropsUtil" />
-			<arg value="service.test.dir=test" />
+			<arg value="service.test.dir=${basedir}/test" />
 		</java>
 
 		<delete file="ServiceBuilder.temp" />
@@ -529,7 +529,7 @@
 			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
 			<arg value="${service.file}" />
-			<arg value="../tunnel-web/docroot/WEB-INF/server-config.wsdd" />
+			<arg value="${basedir}/../tunnel-web/docroot/WEB-INF/server-config.wsdd" />
 		</java>
 	</target>
 
