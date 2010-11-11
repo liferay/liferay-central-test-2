@@ -14,7 +14,7 @@
 
 package com.liferay.portal.kernel.search;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
@@ -28,6 +28,6 @@ public interface SortFactory {
 
 	public Sort[] getDefaultSorts();
 
-	public Sort[] toArray(ArrayList sorts);
+	public Sort[] toArray(List<Sort> sorts);
 
 }

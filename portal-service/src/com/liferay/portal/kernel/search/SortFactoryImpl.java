@@ -14,7 +14,7 @@
 
 package com.liferay.portal.kernel.search;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
@@ -34,15 +34,15 @@ public class SortFactoryImpl implements SortFactory {
 		return _DEFAULT_SORTS;
 	}
 
-	public Sort[] toArray(ArrayList sorts) {
-		Sort[] sortsArray = new Sort[0];
+	public Sort[] toArray(List<Sort> sorts) {
+		if ((sorts == null) || sorts.isEmpty()) {
+			return new Sort[0];
+		}
 
-		if (sorts != null && !sorts.isEmpty()) {
-			sortsArray = new Sort[sorts.size()];
+		Sort[] sortsArray = new Sort[sorts.size()];
 
-			for (int i = 0; i < sorts.size(); i++) {
-				sortsArray[i] = (Sort)sorts.get(i);
-			}
+		for (int i = 0; i < sorts.size(); i++) {
+			sortsArray[i] = (Sort)sorts.get(i);
 		}
 
 		return sortsArray;
