@@ -1,83 +1,108 @@
+/**
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
 package com.liferay.portal.util;
+
+import com.liferay.portal.kernel.util.FileUtil;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 /**
- * <a href="FileImplExtractTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Igor Spasic
  */
-public class FileImplExtractTest extends junit.framework.TestCase {
+public class FileImplExtractTest extends BaseTestCase {
 
-	public void testDocxExtract() {
-		String extractedText = _extractText("test2007.docx");
-		assertEquals("Extract test.", extractedText);
+	public void testDocx() {
+		String text = extractText("test-2007.docx");
 
-		 extractedText = _extractText("test2010.docx");
-		assertEquals("_GoBack\nExtract test.", extractedText);
+		assertEquals("Extract test.", text);
+
+		text = extractText("test-2010.docx");
+
+		assertEquals("_GoBack\nExtract test.", text);
 	}
 
-	public void testHtmlExtract() {
-		String extractedText = _extractText("test.html");
-		assertEquals("Extract test.", extractedText);
+	public void testHtml() {
+		String text = extractText("test.html");
+
+		assertEquals("Extract test.", text);
 	}
 
-	public void testOdtExtract() {
-		String extractedText = _extractText("test.odt");
-		assertEquals("Extract test.", extractedText);
+	public void testOdt() {
+		String text = extractText("test.odt");
+
+		assertEquals("Extract test.", text);
 	}
 
-	public void testPdfExtract() {
-		String extractedText = _extractText("test2(word2010).pdf");
-		assertEquals("Extract test.", extractedText);
+	public void testPdf() {
+		String text = extractText("test-2010.pdf");
 
-		// https://issues.apache.org/jira/browse/PDFBOX-890
-		//extractedText = _extractText("test.pdf");
-		//assertEquals("Extract test.", extractedText);
+		assertEquals("Extract test.", text);
+
+		// PDFBOX-890
+
+		//text = _extractText("test.pdf");
+
+		//assertEquals("Extract test.", text);
 	}
 
-	public void testPptExtract() {
-		String extractedText = _extractText("test2010.pptx");
-		assertEquals("Extract \ntest.", extractedText);
+	public void testPpt() {
+		String text = extractText("test-2010.pptx");
+
+		assertEquals("Extract \ntest.", text);
 	}
 
-	public void testRtfExtract() {
-		String extractedText = _extractText("test.rtf");
-		assertEquals("Extract  test.", extractedText);
+	public void testRtf() {
+		String text = extractText("test.rtf");
+
+		assertEquals("Extract  test.", text);
 	}
 
-	public void testTxtExtract() {
-		String extractedText = _extractText("test.txt");
-		assertEquals("Extract test.", extractedText);
+	public void testTxt() {
+		String text = extractText("test.txt");
+
+		assertEquals("Extract test.", text);
 	}
 
-	public void testXlsxExtract() {
-		String extractedText = _extractText("test2010.xlsx");
-		assertEquals("Sheet1\n\tExtract test.", extractedText);
+	public void testXlsx() {
+		String text = extractText("test-2010.xlsx");
+
+		assertEquals("Sheet1\n\tExtract test.", text);
 	}
 
-	public void testXmlExtract() {
-		String extractedText = _extractText("test.xml");
-		assertEquals("<test>Extract test.</test>", extractedText);
+	public void testXml() {
+		String text = extractText("test.xml");
+
+		assertEquals("<test>Extract test.</test>", text);
 	}
-	
-	private String _extractText(String fileName) {
-		FileInputStream fis;
+
+	protected String extractText(String fileName) {
+		FileInputStream fileInputStream = null;
 
 		try {
-			fis = new FileInputStream(_TEST_FOLDER + fileName);
+			fileInputStream = new FileInputStream(
+				"portal-impl/test/com/liferay/portal/util/dependencies/" +
+					fileName);
 		}
-		catch (FileNotFoundException fnfex) {
+		catch (FileNotFoundException fnfe) {
 			return null;
 		}
 
-		FileImpl fi = new FileImpl();
+		String text = FileUtil.extractText(fileInputStream, fileName);
 
-		return fi.extractText(fis, fileName).trim();
+		return text.trim();
 	}
-
-	private static final String _TEST_FOLDER =
-		"portal-impl/test/com/liferay/portal/util/dependencies/";
 
 }
