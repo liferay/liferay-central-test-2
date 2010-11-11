@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
