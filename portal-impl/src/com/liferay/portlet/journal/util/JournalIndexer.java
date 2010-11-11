@@ -17,7 +17,6 @@ package com.liferay.portlet.journal.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BaseIndexer;
-import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
@@ -51,7 +50,6 @@ import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -62,7 +60,6 @@ import javax.portlet.PortletURL;
  * @author Harry Mark
  * @author Bruno Farache
  * @author Raymond Augé
- * @author Marcellus Tavares
  */
 public class JournalIndexer extends BaseIndexer {
 
@@ -146,8 +143,6 @@ public class JournalIndexer extends BaseIndexer {
 		}
 
 		String templateId = article.getTemplateId();
-		int status = article.getStatus();
-		Date displayDate = article.getDisplayDate();
 		Date modifiedDate = article.getModifiedDate();
 
 		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
@@ -189,8 +184,6 @@ public class JournalIndexer extends BaseIndexer {
 
 		document.addKeyword("structureId", structureId);
 		document.addKeyword("templateId", templateId);
-		document.addDate("displayDate", displayDate);
-		document.addKeyword("status", status);
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
@@ -358,103 +351,6 @@ public class JournalIndexer extends BaseIndexer {
 		}
 		else if (elIndexType.equals("text")) {
 			document.addText(name, StringUtil.merge(value, StringPool.SPACE));
-		}
-	}
-
-	protected void postProcessContextQuery(
-			BooleanQuery contextQuery, SearchContext searchContext)
-		throws Exception {
-
-		Integer status = (Integer)searchContext.getAttribute("status");
-
-		if ((status != null) && (status != WorkflowConstants.STATUS_ANY)) {
-			contextQuery.addRequiredTerm("status", status);
-		}
-	}
-
-	protected void postProcessSearchQuery(
-			BooleanQuery searchQuery, SearchContext searchContext)
-		throws Exception {
-
-		String articleId = (String)searchContext.getAttribute("articleId");
-
-		if (Validator.isNotNull(articleId)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("entryClassPK", articleId, true);
-			}
-			else {
-				searchQuery.addTerm("entryClassPK", articleId, true);
-			}
-		}
-
-		String content = (String)searchContext.getAttribute("content");
-
-		if (Validator.isNotNull(content)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("content", content, true);
-			}
-			else {
-				searchQuery.addTerm("content", content, true);
-			}
-		}
-
-		String description = (String)searchContext.getAttribute("description");
-
-		if (Validator.isNotNull(description)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("description", description, true);
-			}
-			else {
-				searchQuery.addTerm("description", description, true);
-			}
-		}
-
-		String title = (String)searchContext.getAttribute("title");
-
-		if (Validator.isNotNull(title)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("title", title, true);
-			}
-			else {
-				searchQuery.addTerm("title", title, true);
-			}
-		}
-
-		String type = (String)searchContext.getAttribute("type");
-
-		if (Validator.isNotNull(type)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("type", type, true);
-			}
-			else {
-				searchQuery.addTerm("type", type, true);
-			}
-		}
-
-		LinkedHashMap<String, Object> params =
-			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
-
-		if (Validator.isNotNull(params)) {
-			String assetCategoryNames = (String)params.get(
-				"assetCategoryNames");
-
-			if (Validator.isNotNull(assetCategoryNames)) {
-				searchQuery.addExactTerm(
-					Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
-			}
-
-			String assetTagNames = (String)params.get("assetTagNames");
-
-			if (Validator.isNotNull(assetTagNames)) {
-				searchQuery.addExactTerm(
-					Field.ASSET_TAG_NAMES, assetTagNames);
-			}
-
-			String expandoAttributes = (String)params.get("expandoAttributes");
-
-			if (Validator.isNotNull(expandoAttributes)) {
-				addSearchExpando(searchQuery, searchContext, expandoAttributes);
-			}
 		}
 	}
 

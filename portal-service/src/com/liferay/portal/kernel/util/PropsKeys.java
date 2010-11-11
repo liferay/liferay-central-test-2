@@ -725,8 +725,6 @@ public interface PropsKeys {
 
 	public static final String JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID = "journal.article.force.autogenerate.id";
 
-	public static final String JOURNAL_ARTICLE_SEARCH_WITH_INDEX = "journal.article.search.with.index";
-
 	public static final String JOURNAL_ARTICLE_TOKEN_PAGE_BREAK = "journal.article.token.page.break";
 
 	public static final String JOURNAL_ARTICLE_TYPES = "journal.article.types";
