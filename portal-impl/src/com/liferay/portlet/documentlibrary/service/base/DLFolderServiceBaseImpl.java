@@ -47,8 +47,6 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutService;
-import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService;
-import com.liferay.portlet.documentlibrary.service.DLFileVersionService;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
@@ -286,44 +284,6 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 	public void setDLFileShortcutPersistence(
 		DLFileShortcutPersistence dlFileShortcutPersistence) {
 		this.dlFileShortcutPersistence = dlFileShortcutPersistence;
-	}
-
-	/**
-	 * Gets the d l file version local service.
-	 *
-	 * @return the d l file version local service
-	 */
-	public DLFileVersionLocalService getDLFileVersionLocalService() {
-		return dlFileVersionLocalService;
-	}
-
-	/**
-	 * Sets the d l file version local service.
-	 *
-	 * @param dlFileVersionLocalService the d l file version local service
-	 */
-	public void setDLFileVersionLocalService(
-		DLFileVersionLocalService dlFileVersionLocalService) {
-		this.dlFileVersionLocalService = dlFileVersionLocalService;
-	}
-
-	/**
-	 * Gets the d l file version remote service.
-	 *
-	 * @return the d l file version remote service
-	 */
-	public DLFileVersionService getDLFileVersionService() {
-		return dlFileVersionService;
-	}
-
-	/**
-	 * Sets the d l file version remote service.
-	 *
-	 * @param dlFileVersionService the d l file version remote service
-	 */
-	public void setDLFileVersionService(
-		DLFileVersionService dlFileVersionService) {
-		this.dlFileVersionService = dlFileVersionService;
 	}
 
 	/**
@@ -842,10 +802,6 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 	protected DLFileShortcutService dlFileShortcutService;
 	@BeanReference(type = DLFileShortcutPersistence.class)
 	protected DLFileShortcutPersistence dlFileShortcutPersistence;
-	@BeanReference(type = DLFileVersionLocalService.class)
-	protected DLFileVersionLocalService dlFileVersionLocalService;
-	@BeanReference(type = DLFileVersionService.class)
-	protected DLFileVersionService dlFileVersionService;
 	@BeanReference(type = DLFileVersionPersistence.class)
 	protected DLFileVersionPersistence dlFileVersionPersistence;
 	@BeanReference(type = DLFolderLocalService.class)
