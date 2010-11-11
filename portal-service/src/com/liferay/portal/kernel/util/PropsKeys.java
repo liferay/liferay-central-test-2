@@ -1139,6 +1139,8 @@ public interface PropsKeys {
 
 	public static final String MESSAGE_BOARDS_RSS_ABSTRACT_LENGTH = "message.boards.rss.abstract.length";
 
+	public static final String MESSAGE_BOARDS_SUBSCRIBE_BY_DEFAULT = "message.boards.subscribe.by.default";
+
 	public static final String MESSAGE_BOARDS_THREAD_PREVIOUS_AND_NEXT_NAVIGATION_ENABLED = "message.boards.thread.previous.and.next.navigation.enabled";
 
 	public static final String MESSAGE_BOARDS_THREAD_VIEWS = "message.boards.thread.views";

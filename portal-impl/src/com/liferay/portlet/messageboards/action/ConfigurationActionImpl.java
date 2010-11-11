@@ -210,12 +210,16 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		String enableFlags = ParamUtil.getString(actionRequest, "enableFlags");
 		boolean enableRatings = ParamUtil.getBoolean(
 			actionRequest, "enableRatings");
+		boolean subscribeByDefault = ParamUtil.getBoolean(
+			actionRequest, "subscribeByDefault");
 
 		preferences.setValue("allow-anonymous-posting", allowAnonymousPosting);
 		preferences.setValue("message-format", messageFormat);
 		preferences.setValue("enable-flags", enableFlags);
 		preferences.setValue(
 			"enable-message-ratings", String.valueOf(enableRatings));
+		preferences.setValue(
+			"subscribe-by-default", String.valueOf(subscribeByDefault));
 	}
 
 	protected void updateRSS(

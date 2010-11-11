@@ -744,6 +744,8 @@ public class PropsValues {
 
 	public static final boolean MESSAGE_BOARDS_PINGBACK_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.MESSAGE_BOARDS_PINGBACK_ENABLED));
 
+	public static final boolean MESSAGE_BOARDS_SUBSCRIBE_BY_DEFAULT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.MESSAGE_BOARDS_SUBSCRIBE_BY_DEFAULT));
+
 	public static final boolean MESSAGE_BOARDS_THREAD_PREVIOUS_AND_NEXT_NAVIGATION_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.MESSAGE_BOARDS_THREAD_PREVIOUS_AND_NEXT_NAVIGATION_ENABLED));
 
 	public static final String[] MESSAGE_BOARDS_THREAD_VIEWS = PropsUtil.getArray(PropsKeys.MESSAGE_BOARDS_THREAD_VIEWS);

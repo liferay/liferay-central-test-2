@@ -100,6 +100,8 @@ else if (tabs2.equals("message-updated-email")) {
 				<aui:input inlineLabel="left" name="enableFlags" type="checkbox" value="<%= enableFlags %>" />
 
 				<aui:input inlineLabel="left" name="enableRatings" type="checkbox" value="<%= enableRatings %>" />
+
+				<aui:input inlineLabel="left" label="subscribe-users-by-default-to-the-threads-in-which-they-participate" name="subscribeByDefault" type="checkbox" value="<%= subscribeByDefault %>" />
 			</aui:fieldset>
 		</c:when>
 		<c:when test='<%= tabs2.equals("email-from") %>'>

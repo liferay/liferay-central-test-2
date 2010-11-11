@@ -29,6 +29,8 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
@@ -48,6 +50,7 @@ import com.liferay.portlet.messageboards.model.MBMessageConstants;
 import com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadServiceUtil;
+import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
 
 import java.io.File;
 
@@ -358,6 +361,19 @@ public class EditMessageAction extends PortletAction {
 						message.getThreadId());
 				}
 			}
+		}
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		boolean subscribe = ParamUtil.getBoolean(
+			actionRequest, "subscribe");
+
+		if (subscribe &&
+			MBMessagePermission.contains(
+				permissionChecker, message,	ActionKeys.SUBSCRIBE)) {
+
+			MBMessageServiceUtil.subscribeMessage(message.getMessageId());
 		}
 
 		return message;
