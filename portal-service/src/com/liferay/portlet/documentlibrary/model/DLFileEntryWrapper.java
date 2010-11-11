@@ -508,9 +508,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
-		int status)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		int status) throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntry.getFileVersions(status);
 	}
 

@@ -106,7 +106,7 @@ public class DLFileEntryImpl
 	}
 
 	public List<DLFileVersion> getFileVersions(int status)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return DLFileEntryLocalServiceUtil.getFileVersions(
 			getGroupId(), getFolderId(), getName(), status);
