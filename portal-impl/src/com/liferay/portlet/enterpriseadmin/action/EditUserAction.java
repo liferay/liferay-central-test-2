@@ -481,7 +481,7 @@ public class EditUserAction extends PortletAction {
 	protected User updateLockout(ActionRequest actionRequest) throws Exception {
 		User user = PortalUtil.getSelectedUser(actionRequest);
 
-		UserServiceUtil.updateLockout(user.getUserId(), false);
+		UserServiceUtil.updateLockoutById(user.getUserId(), false);
 
 		return user;
 	}
