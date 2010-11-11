@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.PwdGenerator;
 
+import javax.servlet.jsp.tagext.BodyContent;
+
 /**
  * @author Julio Camarero
  * @author Brian Wing Shun Chan
@@ -37,13 +39,14 @@ public class ValidatorTag extends BaseBodyTagSupport {
 	}
 
 	public int doAfterBody(){
-		if (Validator.isNotNull(getBodyContent())) {
-			_body = getBodyContent().getString();
+		BodyContent bodyContent = getBodyContent();
+
+		if (bodyContent != null) {
+			_body = bodyContent.getString();
 		}
 
 		return SKIP_BODY;
 	}
-
 
 	public int doStartTag() {
 		processCustom();
@@ -56,7 +59,6 @@ public class ValidatorTag extends BaseBodyTagSupport {
 		return EVAL_BODY_BUFFERED;
 	}
 
-	
 	public String getBody() {
 		if (Validator.isNull(_body)) {
 			return StringPool.DOUBLE_APOSTROPHE;
