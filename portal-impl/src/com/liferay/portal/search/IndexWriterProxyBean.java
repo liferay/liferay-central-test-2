@@ -17,7 +17,6 @@ package com.liferay.portal.search;
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.IndexWriter;
-import com.liferay.portal.kernel.search.SearchException;
 
 import java.util.Collection;
 
@@ -27,44 +26,32 @@ import java.util.Collection;
  */
 public class IndexWriterProxyBean extends BaseProxyBean implements IndexWriter {
 
-	public void addDocument(long companyId, Document document)
-		throws SearchException {
-
+	public void addDocument(long companyId, Document document) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void addDocuments(long companyId, Collection<Document> documents)
-		throws SearchException {
-
+	public void addDocuments(long companyId, Collection<Document> documents) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void deleteDocument(long companyId, String uid)
-		throws SearchException {
-
+	public void deleteDocument(long companyId, String uid) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void deleteDocuments(long companyId, Collection<String> uids)
-		throws SearchException {
-
+	public void deleteDocuments(long companyId, Collection<String> uids) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void deletePortletDocuments(long companyId, String portletId)
-		throws SearchException {
-
+	public void deletePortletDocuments(long companyId, String portletId) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void updateDocument(long companyId, Document document)
-		throws SearchException {
-
+	public void updateDocument(long companyId, Document document) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void updateDocuments(long companyId, Collection<Document> documents)
-		throws SearchException {
+	public void updateDocuments(
+		long companyId, Collection<Document> documents) {
 
 		throw new UnsupportedOperationException();
 	}
