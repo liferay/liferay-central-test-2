@@ -21,7 +21,6 @@ import com.liferay.portlet.documentlibrary.service.base.DLFileVersionLocalServic
  * @author	   Bruno Farache
  * @author	   Jorge Ferrer
  * @author	   Alexander Chow
- * @deprecated {@link DLFileEntryServiceImpl}
  */
 public class DLFileVersionLocalServiceImpl
 	extends DLFileVersionLocalServiceBaseImpl {

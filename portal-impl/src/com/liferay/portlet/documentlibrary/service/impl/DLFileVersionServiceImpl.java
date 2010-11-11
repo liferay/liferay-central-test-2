@@ -19,7 +19,6 @@ import com.liferay.portlet.documentlibrary.service.base.DLFileVersionServiceBase
 /**
  * @author	   Brian Wing Shun Chan
  * @author	   Alexander Chow
- * @deprecated {@link DLFileEntryServiceImpl}
  */
 public class DLFileVersionServiceImpl extends DLFileVersionServiceBaseImpl {
 }
