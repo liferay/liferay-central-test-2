@@ -37,11 +37,11 @@ import java.util.Set;
  */
 public class SchedulerEngineUtil {
 
-	public static void addScriptJob(
-			String language, String script, String description, Trigger trigger)
+	public static void addScriptingJob(
+			Trigger trigger, String description, String language, String script)
 		throws SchedulerException {
 
-		_instance._addScriptJob(language, script, description, trigger);
+		_instance._addScriptingJob(trigger, description, language, script);
 	}
 
 	public static SchedulerRequest getScheduledJob(
@@ -150,8 +150,8 @@ public class SchedulerEngineUtil {
 		_instance._unschedule(trigger);
 	}
 
-	private void _addScriptJob(
-			String language, String script, String description, Trigger trigger)
+	private void _addScriptingJob(
+			Trigger trigger, String description, String language, String script)
 		throws SchedulerException {
 
 		Message message = new Message();
@@ -160,7 +160,7 @@ public class SchedulerEngineUtil {
 		message.put(SchedulerEngine.SCRIPT, script);
 
 		_schedule(
-			trigger, description, DestinationNames.SCHEDULER_SCRIPT_JOB,
+			trigger, description, DestinationNames.SCHEDULER_SCRIPTING,
 			message);
 	}
 

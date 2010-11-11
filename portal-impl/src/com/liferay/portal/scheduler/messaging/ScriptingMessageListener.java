@@ -23,17 +23,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
  * @author Tina Tian
  */
-public class ScriptJobMessageListener extends BaseMessageListener {
+public class ScriptingMessageListener extends BaseMessageListener {
 
 	public void doReceive(Message message) throws Exception {
-		String language = (String)message.get(SchedulerEngine.LANGUAGE);
-
-		String script = (String)message.get(SchedulerEngine.SCRIPT);
-
 		Map<String, Object> inputObjects = new HashMap<String, Object>();
+
+		String language = (String)message.get(SchedulerEngine.LANGUAGE);
+		String script = (String)message.get(SchedulerEngine.SCRIPT);
 
 		ScriptingUtil.exec(null, inputObjects, language, script);
 	}

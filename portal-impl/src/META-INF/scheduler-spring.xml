@@ -20,17 +20,17 @@
 	<bean id="destination.scheduler_engine.response" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/scheduler_engine/response" />
 	</bean>
-	<bean id="destination.scheduler_script_job" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<property name="name" value="liferay/scheduler_script_job" />
+	<bean id="destination.scheduler_scripting" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<property name="name" value="liferay/scheduler_scripting" />
 	</bean>
 	<bean id="messageListener.scheduler_engine" class="com.liferay.portal.scheduler.messaging.SchedulerMessageListener">
 		<property name="messageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
 		<property name="schedulerEngine" ref="com.liferay.portal.kernel.scheduler.SchedulerEngine" />
 	</bean>
-	<bean id="messageListener.scheduler_script_job" class="com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper">
-		<property name="className" value="com.liferay.portal.scheduler.messaging.ScriptJobMessageListener" />
+	<bean id="messageListener.scheduler_scripting" class="com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper">
+		<property name="className" value="com.liferay.portal.scheduler.messaging.ScriptingMessageListener" />
 		<property name="messageListener">
-			<bean class="com.liferay.portal.scheduler.messaging.ScriptJobMessageListener" />
+			<bean class="com.liferay.portal.scheduler.messaging.ScriptingMessageListener" />
 		</property>
 	</bean>
 	<bean id="messagingConfigurator.scheduler" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator">
@@ -39,7 +39,7 @@
 				<ref bean="destination.scheduler_dispatch" />
 				<ref bean="destination.scheduler_engine" />
 				<ref bean="destination.scheduler_engine.response" />
-				<ref bean="destination.scheduler_script_job" />
+				<ref bean="destination.scheduler_scripting" />
 			</list>
 		</property>
 		<property name="messageBus">
@@ -52,9 +52,9 @@
 						<ref bean="messageListener.scheduler_engine" />
 					</list>
 				</entry>
-				<entry key="liferay/scheduler_script_job">
+				<entry key="liferay/scheduler_scripting">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-						<ref bean="messageListener.scheduler_script_job" />
+						<ref bean="messageListener.scheduler_scripting" />
 					</list>
 				</entry>
 			</map>
