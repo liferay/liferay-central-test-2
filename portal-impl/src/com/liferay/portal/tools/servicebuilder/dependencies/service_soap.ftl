@@ -74,7 +74,7 @@ public class ${entity.name}ServiceSoap {
 
 			<#if returnValueName == extendedModelName>
 				${soapModelName}${returnValueDimension}
-			<#elseif stringUtil.startsWith(returnValueName, packagePath + ".model.")>
+			<#elseif stringUtil.startsWith(returnValueName, packagePath + ".model.") && serviceBuilder.hasEntityByGenericsName(returnValueName)>
 				${returnValueName}Soap${returnValueDimension}
 			<#elseif returnValueName == "java.util.List">
 				<#if returnTypeGenericsName == "java.util.List<java.lang.Boolean>">
@@ -179,7 +179,7 @@ public class ${entity.name}ServiceSoap {
 							<#else>
 								return ${soapModelName}.toSoapModels(returnValue);
 							</#if>
-						<#elseif stringUtil.startsWith(returnValueName, packagePath + ".model.")>
+						<#elseif stringUtil.startsWith(returnValueName, packagePath + ".model.") && serviceBuilder.hasEntityByGenericsName(returnValueName)>
 							<#if returnValueDimension == "">
 								return ${returnValueName}Soap.toSoapModel(returnValue);
 							<#else>
