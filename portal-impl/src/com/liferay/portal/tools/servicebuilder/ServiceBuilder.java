@@ -2411,16 +2411,6 @@ public class ServiceBuilder {
 		modelFile = new File(
 			_serviceOutputPath + "/model/" + entity.getName() + "Soap.java");
 
-		if (!entity.hasRemoteService()) {
-			if (modelFile.exists()) {
-				System.out.println("Removing " + modelFile);
-
-				modelFile.delete();
-			}
-
-			return;
-		}
-
 		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
