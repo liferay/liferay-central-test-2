@@ -18,8 +18,10 @@ package com.liferay.portal.kernel.search;
  * @author Raymond Augé
  * @author Brian Wing Shun Chan
  */
-public interface StringQueryFactory {
+public class StringQueryFactoryImpl implements StringQueryFactory {
 
-	public Query create(String query);
+	public Query create(String query) {
+		return new StringQueryImpl(query);
+	}
 
 }
