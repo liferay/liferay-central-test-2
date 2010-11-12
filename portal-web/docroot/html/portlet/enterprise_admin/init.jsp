@@ -177,25 +177,6 @@ if (Validator.isNull(tabs1)) {
 	tabs1 = "users";
 }
 
-boolean isOrgOwnerOrOrgAdmin = false;
-
-List<UserGroupRole> currentUserGroupRoles = new ArrayList<UserGroupRole>();
-
-currentUserGroupRoles  = UserGroupRoleLocalServiceUtil.getUserGroupRoles(themeDisplay.getUserId());
-
-for (UserGroupRole userGroupRole : currentUserGroupRoles) {
-	Role role = userGroupRole.getRole();
-
-	String name = role.getName();
-
-	if (name.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) ||
-			name.equals(RoleConstants.ORGANIZATION_OWNER)) {
-		isOrgOwnerOrOrgAdmin = true;
-
-		break;
-	}
-}
-
 boolean filterManageableGroups = true;
 boolean filterManageableOrganizations = true;
 boolean filterManageableRoles = true;
@@ -213,9 +194,6 @@ else if (permissionChecker.isCompanyAdmin()) {
 	filterManageableGroups = false;
 	filterManageableOrganizations = false;
 	filterManageableUserGroups = false;
-}
-else if (isOrgOwnerOrOrgAdmin) {
-	filterManageableUserGroupRoles = false;
 }
 
 boolean includeSystemPortlets = true;
