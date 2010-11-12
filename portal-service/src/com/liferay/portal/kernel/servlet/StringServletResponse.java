@@ -121,6 +121,15 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 		}
 	}
 
+	public boolean isCalledGetWriter() {
+		if (_printWriter != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public void recycle() {
 		_string = null;
 

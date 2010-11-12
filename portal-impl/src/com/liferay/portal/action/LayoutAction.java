@@ -987,7 +987,7 @@ public class LayoutAction extends Action {
 				request, response, renderResponseImpl.getResourceName(), is,
 				renderResponseImpl.getContentType());
 		}
-		else {
+		else if (stringResponse.isCalledGetWriter()){
 			byte[] content = stringResponse.getString().getBytes(
 				StringPool.UTF8);
 
