@@ -112,6 +112,7 @@
 	<classpathentry kind="lib" path="lib/portal/commons-beanutils.jar"/>
 	<classpathentry kind="lib" path="lib/portal/commons-codec.jar"/>
 	<classpathentry kind="lib" path="lib/portal/commons-collections.jar"/>
+	<classpathentry kind="lib" path="lib/portal/commons-compress.jar"/>
 	<classpathentry kind="lib" path="lib/portal/commons-configuration.jar"/>
 	<classpathentry kind="lib" path="lib/portal/commons-dbcp.jar"/>
 	<classpathentry kind="lib" path="lib/portal/commons-digester.jar"/>
@@ -170,6 +171,7 @@
 	<classpathentry kind="lib" path="lib/portal/jcommon.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jcr.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jdom.jar"/>
+	<classpathentry kind="lib" path="lib/portal/jempbox.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jena.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jericho-html.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jets3t.jar"/>
@@ -196,6 +198,7 @@
 	<classpathentry kind="lib" path="lib/portal/lucene-highlighter.jar"/>
 	<classpathentry kind="lib" path="lib/portal/lucene-memory.jar"/>
 	<classpathentry kind="lib" path="lib/portal/memcached.jar"/>
+	<classpathentry kind="lib" path="lib/portal/metadata-extractor.jar"/>
 	<classpathentry kind="lib" path="lib/portal/mime-util.jar"/>
 	<classpathentry kind="lib" path="lib/portal/msnm.jar"/>
 	<classpathentry kind="lib" path="lib/portal/nekohtml.jar"/>
