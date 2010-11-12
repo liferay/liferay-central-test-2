@@ -46,10 +46,6 @@ public class GroupSearchTag extends TagSupport {
 		_rowChecker = null;
 	}
 
-	protected String getEndPage() {
-		return _END_PAGE;
-	}
-
 	protected String getStartPage() {
 		return _START_PAGE;
 	}
@@ -60,9 +56,6 @@ public class GroupSearchTag extends TagSupport {
 		request.setAttribute("liferay-ui:group-search:portletURL", _portletURL);
 		request.setAttribute("liferay-ui:group-search:rowChecker", _rowChecker);
 	}
-
-	private static final String _END_PAGE =
-		"/html/taglib/ui/group_search/end.jsp";
 
 	private static final String _START_PAGE =
 		"/html/taglib/ui/group_search/start.jsp";

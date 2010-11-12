@@ -33,16 +33,18 @@ public class ButtonRowTag extends IncludeTag {
 		_cssClass = null;
 	}
 
-	protected String getEndPage() {
-		return _END_PAGE;
-	}
-
 	protected String getStartPage() {
 		return _START_PAGE;
 	}
 
 	protected boolean isCleanUpSetAttributes() {
 		return _CLEAN_UP_SET_ATTRIBUTES;
+	}
+
+	protected int processEndTag() throws Exception {
+		pageContext.getOut().write("</div>");
+
+		return EVAL_PAGE;
 	}
 
 	protected void setAttributes(HttpServletRequest request) {
@@ -52,9 +54,6 @@ public class ButtonRowTag extends IncludeTag {
 	}
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
-
-	private static final String _END_PAGE =
-		"/html/taglib/aui/button_row/end.jsp";
 
 	private static final String _START_PAGE =
 		"/html/taglib/aui/button_row/start.jsp";
