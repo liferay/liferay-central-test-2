@@ -22,9 +22,11 @@ import com.liferay.portal.kernel.util.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class IconListTag extends BaseBodyTagSupport {
 
@@ -68,18 +70,31 @@ public class IconListTag extends BaseBodyTagSupport {
 
 			request.removeAttribute("liferay-ui:icon-list:single-icon");
 
+			JspWriter jspWriter = pageContext.getOut();
+
 			if ((iconCount != null) && (iconCount.getValue() > 1) &&
 				((singleIcon == null) || _showWhenSingleIcon)) {
 
-				PortalIncludeUtil.include(pageContext, getStartPage());
+				if (Validator.isNull(_startPage)) {
+					jspWriter.write(
+						"<ul class=\"lfr-component taglib-icon-list\">");
+				}
+				else {
+					PortalIncludeUtil.include(pageContext, _startPage);
+				}
 			}
 
-			writeBodyContent(pageContext.getOut());
+			writeBodyContent(jspWriter);
 
 			if ((iconCount != null) && (iconCount.getValue() > 1) &&
 				((singleIcon == null) || _showWhenSingleIcon)) {
 
-				PortalIncludeUtil.include(pageContext, getEndPage());
+				if (Validator.isNull(_endPage)) {
+					jspWriter.write("</ul>");
+				}
+				else {
+					PortalIncludeUtil.include(pageContext, _endPage);
+				}
 			}
 
 			request.removeAttribute("liferay-ui:icon-list:showWhenSingleIcon");
@@ -111,24 +126,6 @@ public class IconListTag extends BaseBodyTagSupport {
 		return EVAL_BODY_BUFFERED;
 	}
 
-	protected String getEndPage() {
-		if (Validator.isNull(_endPage)) {
-			return _END_PAGE;
-		}
-		else {
-			return _endPage;
-		}
-	}
-
-	protected String getStartPage() {
-		if (Validator.isNull(_startPage)) {
-			return _START_PAGE;
-		}
-		else {
-			return _startPage;
-		}
-	}
-
 	public void setEndPage(String endPage) {
 		_endPage = endPage;
 	}
@@ -140,11 +137,6 @@ public class IconListTag extends BaseBodyTagSupport {
 	public void setStartPage(String startPage) {
 		_startPage = startPage;
 	}
-
-	private static final String _END_PAGE = "/html/taglib/ui/icon_list/end.jsp";
-
-	private static final String _START_PAGE =
-		"/html/taglib/ui/icon_list/start.jsp";
 
 	private String _endPage;
 	private boolean _showWhenSingleIcon = false;
