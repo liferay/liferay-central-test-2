@@ -92,14 +92,14 @@ public class SectionTag extends IncludeTag {
 		return _START_PAGE;
 	}
 
-	protected String getEndPage() {
-		return _END_PAGE;
+	protected int processEndTag() throws Exception {
+		pageContext.getOut().write("</div>");
+
+		return EVAL_PAGE;
 	}
 
 	private static final String _START_PAGE =
 		"/html/taglib/ui/section/start.jsp";
-
-	private static final String _END_PAGE = "/html/taglib/ui/section/end.jsp";
 
 	private TabsTag _tabsTag = null;
 	private Boolean _sectionSelected = Boolean.FALSE;
