@@ -22,6 +22,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.text.Format;
 
@@ -97,11 +99,16 @@ public class HeaderFilter extends BasePortalFilter {
 
 			boolean addHeader = true;
 
-			if (name.equalsIgnoreCase(HttpHeaders.CACHE_CONTROL)) {
-				HttpSession session = request.getSession(false);
+			if (PropsValues.WEB_SERVER_PROXY_LEGACY_MODE) {
+				if (name.equalsIgnoreCase(HttpHeaders.CACHE_CONTROL) &&
+					!request.getContextPath().equals(
+						PortalUtil.getPathContext())) {
 
-				if ((session == null) || session.isNew()) {
-					addHeader = false;
+					HttpSession session = request.getSession(false);
+
+					if ((session == null) || session.isNew()) {
+						addHeader = false;
+					}
 				}
 			}
 

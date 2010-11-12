@@ -1755,6 +1755,8 @@ public interface PropsKeys {
 
 	public static final String WEB_SERVER_PROTOCOL = "web.server.protocol";
 
+	public static final String WEB_SERVER_PROXY_LEGACY_MODE = "web.server.proxy.legacy.mode";
+
 	public static final String WEBDAV_IGNORE = "webdav.ignore";
 
 	public static final String WIDGET_SERVLET_MAPPING = "widget.servlet.mapping";
