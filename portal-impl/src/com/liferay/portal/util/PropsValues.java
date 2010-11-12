@@ -1218,7 +1218,7 @@ public class PropsValues {
 
 	public static final String WEB_SERVER_PROTOCOL = PropsUtil.get(PropsKeys.WEB_SERVER_PROTOCOL);
 
-	public static final boolean WEB_SERVER_PROXY_LEGACY_MODE =  GetterUtil.getBoolean(PropsUtil.get("web.server.proxy.legacy.mode"), false);
+	public static final boolean WEB_SERVER_PROXY_LEGACY_MODE =  GetterUtil.getBoolean(PropsUtil.get(PropsKeys.WEB_SERVER_PROXY_LEGACY_MODE));
 
 	public static final String[] WEBDAV_IGNORE = PropsUtil.getArray(PropsKeys.WEBDAV_IGNORE);
 

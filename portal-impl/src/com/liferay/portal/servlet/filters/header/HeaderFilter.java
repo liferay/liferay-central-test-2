@@ -100,9 +100,10 @@ public class HeaderFilter extends BasePortalFilter {
 			boolean addHeader = true;
 
 			if (PropsValues.WEB_SERVER_PROXY_LEGACY_MODE) {
+				String contextPath = request.getContextPath();
+
 				if (name.equalsIgnoreCase(HttpHeaders.CACHE_CONTROL) &&
-					request.getContextPath().equals(
-						PortalUtil.getPathContext())) {
+					contextPath.equals(PortalUtil.getPathContext())) {
 
 					HttpSession session = request.getSession(false);
 
