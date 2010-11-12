@@ -14,7 +14,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.NoSuchSubscriptionException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Subscription;
@@ -51,15 +50,11 @@ public class SubscriptionLocalServiceImpl
 
 		long subscriptionId = counterLocalService.increment();
 
-		Subscription subscription = null;
+		Subscription subscription = subscriptionPersistence.fetchByC_U_C_C(
+			user.getCompanyId(), userId, classNameId, classPK);
 
-		try {
-			subscription = subscriptionPersistence.findByC_U_C_C(
-				user.getCompanyId(), userId, classNameId, classPK);
-		}
-		catch (NoSuchSubscriptionException nssb) {
-			subscription = subscriptionPersistence.create(
-				subscriptionId);
+		if (subscription == null) {
+			subscription = subscriptionPersistence.create(subscriptionId);
 
 			subscription.setCompanyId(user.getCompanyId());
 			subscription.setUserId(user.getUserId());
@@ -72,9 +67,8 @@ public class SubscriptionLocalServiceImpl
 
 			subscriptionPersistence.update(subscription, false);
 		}
-		finally {
-			return subscription;
-		}
+
+		return subscription;
 	}
 
 	public void deleteSubscription(long subscriptionId)
