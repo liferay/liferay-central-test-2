@@ -21,15 +21,15 @@ import com.liferay.taglib.util.IncludeTag;
  */
 public class SearchTag extends IncludeTag {
 
-	protected String getEndPage() {
-		return _END_PAGE;
-	}
-
 	protected String getStartPage() {
 		return _START_PAGE;
 	}
 
-	private static final String _END_PAGE = "/html/taglib/ui/search/end.jsp";
+	protected int processEndTag() throws Exception {
+		pageContext.getOut().write("</form>");
+
+		return EVAL_PAGE;
+	}
 
 	private static final String _START_PAGE =
 		"/html/taglib/ui/search/start.jsp";
