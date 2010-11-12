@@ -87,7 +87,7 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 		</aui:field-wrapper>
 
 		<c:if test="<%= themeDisplay.isSignedIn() && !SubscriptionLocalServiceUtil.isSubscribed(themeDisplay.getCompanyId(), user.getUserId(),	MBThread.class.getName(), threadId) && !SubscriptionLocalServiceUtil.isSubscribed(themeDisplay.getCompanyId(), user.getUserId(), MBCategory.class.getName(), categoryId) %>">
-			<aui:input helpMessage="message-boards-message-subscribe-by-default-help" inlineLabel="left" label="subscribe-me-to-this-thread" name="subscribe" type="checkbox" value="<%= subscribeByDefault %>" />
+			<aui:input helpMessage="message-boards-message-subscribe-me-help" inlineLabel="left" label="subscribe-me" name="subscribe" type="checkbox" value="<%= subscribeByDefault %>" />
 		</c:if>
 
 		<liferay-ui:custom-attributes-available className="<%= MBMessage.class.getName() %>">
