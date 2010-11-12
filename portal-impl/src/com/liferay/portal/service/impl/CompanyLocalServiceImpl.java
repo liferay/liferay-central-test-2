@@ -25,6 +25,8 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
@@ -44,6 +46,7 @@ import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
+import com.liferay.portal.model.ModelEventMessage;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
@@ -357,8 +360,14 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				serviceContext);
 		}
 
-		// Portlets
+		//Model Events
+		ModelEventMessage modelEventMessage = ModelEventMessage.initialized(
+			company);
 
+		MessageBusUtil.sendMessage(
+			DestinationNames.MODEL_EVENTS, modelEventMessage);
+
+		// Portlets
 		portletLocalService.checkPortlets(companyId);
 
 		return company;
@@ -381,6 +390,27 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			companyPersistence.update(company, false);
 		}
+	}
+
+	@Override
+	public void deleteCompany(long companyId)
+		throws PortalException, SystemException {
+
+		Company company = getCompany(companyId);
+
+		deleteCompany(company);
+	}
+
+	@Override
+	public void deleteCompany(Company company) throws SystemException {
+		super.deleteCompany(company);
+
+		//Model Events
+		ModelEventMessage modelEventMessage = ModelEventMessage.initialized(
+			company);
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.MODEL_EVENTS, modelEventMessage);
 	}
 
 	public void deleteLogo(long companyId)
