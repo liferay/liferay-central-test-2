@@ -17,6 +17,7 @@ package com.liferay.taglib.aui;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.JspWriter;
 
 /**
  * @author Julio Camarero
@@ -62,7 +63,9 @@ public class OptionTag extends IncludeTag {
 	}
 
 	protected int processEndTag() throws Exception {
-		pageContext.getOut().write("</option>");
+		JspWriter jspWriter = pageContext.getOut();
+
+		jspWriter.write("</option>");
 
 		return EVAL_PAGE;
 	}

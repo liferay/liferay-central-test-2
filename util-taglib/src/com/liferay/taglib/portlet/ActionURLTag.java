@@ -37,6 +37,7 @@ import javax.portlet.PortletResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -156,7 +157,9 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 			pageContext.setAttribute(varImpl, liferayPortletURL);
 		}
 		else {
-			pageContext.getOut().print(portletURLToString);
+			JspWriter jspWriter = pageContext.getOut();
+
+			jspWriter.write(portletURLToString);
 		}
 	}
 

@@ -36,6 +36,7 @@ import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
 /**
@@ -135,7 +136,9 @@ public class EncryptTag extends TagSupport {
 
 			sb.append(">");
 
-			pageContext.getOut().print(sb.toString());
+			JspWriter jspWriter = pageContext.getOut();
+
+			jspWriter.write(sb.toString());
 
 			return EVAL_BODY_INCLUDE;
 		}
@@ -146,7 +149,9 @@ public class EncryptTag extends TagSupport {
 
 	public int doEndTag() throws JspException {
 		try {
-			pageContext.getOut().print("</a>");
+			JspWriter jspWriter = pageContext.getOut();
+
+			jspWriter.write("</a>");
 
 			return EVAL_PAGE;
 		}

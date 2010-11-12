@@ -17,6 +17,7 @@ package com.liferay.taglib.aui;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.JspWriter;
 
 /**
  * @author Julio Camarero
@@ -52,7 +53,9 @@ public class FieldsetTag extends IncludeTag {
 	}
 
 	protected int processEndTag() throws Exception {
-		pageContext.getOut().write("</div></fieldset>");
+		JspWriter jspWriter = pageContext.getOut();
+
+		jspWriter.write("</div></fieldset>");
 
 		return EVAL_PAGE;
 	}

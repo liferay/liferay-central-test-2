@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
 /**
@@ -39,7 +40,9 @@ public class GetUrlTag extends TagSupport {
 				pageContext.setAttribute(_var, content);
 			}
 			else {
-				pageContext.getOut().print(content);
+				JspWriter jspWriter = pageContext.getOut();
+
+				jspWriter.print(content);
 			}
 
 			return EVAL_PAGE;

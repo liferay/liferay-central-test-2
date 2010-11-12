@@ -30,6 +30,7 @@ import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.TagSupport;
 
@@ -89,7 +90,9 @@ public class PermissionsURLTag extends TagSupport {
 			pageContext.setAttribute(var, portletURLToString);
 		}
 		else {
-			pageContext.getOut().print(portletURLToString);
+			JspWriter jspWriter = pageContext.getOut();
+
+			jspWriter.write(portletURLToString);
 		}
 	}
 

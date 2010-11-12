@@ -17,6 +17,7 @@ package com.liferay.taglib.aui;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.JspWriter;
 
 /**
  * @author Julio Camarero
@@ -42,7 +43,9 @@ public class ButtonRowTag extends IncludeTag {
 	}
 
 	protected int processEndTag() throws Exception {
-		pageContext.getOut().write("</div>");
+		JspWriter jspWriter = pageContext.getOut();
+
+		jspWriter.write("</div>");
 
 		return EVAL_PAGE;
 	}

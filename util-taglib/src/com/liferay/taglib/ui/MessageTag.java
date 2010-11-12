@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
 /**
@@ -38,7 +39,9 @@ public class MessageTag extends TagSupport {
 					pageContext, _key, _arguments, _translateArguments);
 			}
 
-			pageContext.getOut().print(value);
+			JspWriter jspWriter = pageContext.getOut();
+
+			jspWriter.write(value);
 
 			return EVAL_PAGE;
 		}

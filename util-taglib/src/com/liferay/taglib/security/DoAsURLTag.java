@@ -25,6 +25,7 @@ import com.liferay.util.Encryptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.TagSupport;
 
@@ -67,7 +68,9 @@ public class DoAsURLTag extends TagSupport {
 			pageContext.setAttribute(var, doAsURL);
 		}
 		else {
-			pageContext.getOut().print(doAsURL);
+			JspWriter jspWriter = pageContext.getOut();
+
+			jspWriter.write(doAsURL);
 		}
 	}
 

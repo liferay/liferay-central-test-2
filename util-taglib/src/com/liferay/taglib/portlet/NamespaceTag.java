@@ -20,6 +20,7 @@ import javax.portlet.PortletResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
 /**
@@ -39,7 +40,9 @@ public class NamespaceTag extends TagSupport {
 			if (portletResponse != null) {
 				String namespace = portletResponse.getNamespace();
 
-				pageContext.getOut().print(namespace);
+				JspWriter jspWriter = pageContext.getOut();
+
+				jspWriter.write(namespace);
 			}
 		}
 		catch (Exception e) {

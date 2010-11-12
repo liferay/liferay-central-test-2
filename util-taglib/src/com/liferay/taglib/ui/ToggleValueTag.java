@@ -19,6 +19,7 @@ import com.liferay.portal.util.SessionClicks;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.TagSupport;
 
@@ -39,7 +40,9 @@ public class ToggleValueTag extends TagSupport {
 			value = "block";
 		}
 
-		pageContext.getOut().print(value);
+		JspWriter jspWriter = pageContext.getOut();
+
+		jspWriter.write(value);
 	}
 
 	/**

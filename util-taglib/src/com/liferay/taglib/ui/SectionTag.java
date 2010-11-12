@@ -22,6 +22,7 @@ import javax.portlet.PortletResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 
 /**
  * @author Brian Wing Shun Chan
@@ -93,7 +94,9 @@ public class SectionTag extends IncludeTag {
 	}
 
 	protected int processEndTag() throws Exception {
-		pageContext.getOut().write("</div>");
+		JspWriter jspWriter = pageContext.getOut();
+
+		jspWriter.write("</div>");
 
 		return EVAL_PAGE;
 	}

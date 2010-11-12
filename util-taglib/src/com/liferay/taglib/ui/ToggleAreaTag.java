@@ -20,6 +20,7 @@ import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 
 /**
  * @author Raymond Augé
@@ -58,7 +59,9 @@ public class ToggleAreaTag extends IncludeTag {
 	public int doEndTag() throws JspException {
 		try {
 			if (Validator.isNull(_endPage)) {
-				pageContext.getOut().write("</div>");
+				JspWriter jspWriter = pageContext.getOut();
+
+				jspWriter.write("</div>");
 			}
 			else {
 				include(_endPage);

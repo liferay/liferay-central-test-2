@@ -28,6 +28,7 @@ import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.TagSupport;
 
@@ -46,7 +47,9 @@ public class RenderURLParamsTag extends TagSupport {
 		if (portletURL != null) {
 			params = _toParamsString(portletURL, pageContext);
 
-			pageContext.getOut().print(params);
+			JspWriter jspWriter = pageContext.getOut();
+
+			jspWriter.write(params);
 		}
 
 		return params;
