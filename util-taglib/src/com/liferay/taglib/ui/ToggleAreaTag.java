@@ -57,7 +57,12 @@ public class ToggleAreaTag extends IncludeTag {
 
 	public int doEndTag() throws JspException {
 		try {
-			include(getEndPage());
+			if (Validator.isNull(_endPage)) {
+				pageContext.getOut().write("</div>");
+			}
+			else {
+				include(_endPage);
+			}
 
 			return EVAL_PAGE;
 		}
@@ -89,15 +94,6 @@ public class ToggleAreaTag extends IncludeTag {
 
 	public void setStartPage(String startPage) {
 		_startPage = startPage;
-	}
-
-	protected String getEndPage() {
-		if (Validator.isNull(_endPage)) {
-			return _END_PAGE;
-		}
-		else {
-			return _endPage;
-		}
 	}
 
 	public void setEndPage(String endPage) {
@@ -138,9 +134,6 @@ public class ToggleAreaTag extends IncludeTag {
 
 	private static final String _START_PAGE =
 		"/html/taglib/ui/toggle_area/start.jsp";
-
-	private static final String _END_PAGE =
-		"/html/taglib/ui/toggle_area/end.jsp";
 
 	private String _startPage;
 	private String _endPage;
