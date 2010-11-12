@@ -205,10 +205,10 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		String allowAnonymousPosting = ParamUtil.getString(
 			actionRequest, "allowAnonymousPosting");
-		String messageFormat = ParamUtil.getString(
-			actionRequest, "messageFormat");
 		boolean subscribeByDefault = ParamUtil.getBoolean(
 			actionRequest, "subscribeByDefault");
+		String messageFormat = ParamUtil.getString(
+			actionRequest, "messageFormat");
 		String enableFlags = ParamUtil.getString(actionRequest, "enableFlags");
 		boolean enableRatings = ParamUtil.getBoolean(
 			actionRequest, "enableRatings");
