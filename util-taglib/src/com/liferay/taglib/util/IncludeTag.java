@@ -109,7 +109,7 @@ public class IncludeTag
 	}
 
 	public void runEndTag() throws JspException {
-		doStartTag();
+		doEndTag();
 	}
 
 	public void runStartTag() throws JspException {
