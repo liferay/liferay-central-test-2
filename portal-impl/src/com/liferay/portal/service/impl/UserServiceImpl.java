@@ -794,17 +794,27 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		List<UserGroupRole> oldUserGroupRoles =
 			userGroupRoleLocalService.getUserGroupRoles(userId);
 
-		for (UserGroupRole oldUserGroupRole : oldUserGroupRoles) {
-			if (!userGroupRoles.contains(oldUserGroupRole) &&
-				(!GroupPermissionUtil.contains(
-					getPermissionChecker(), oldUserGroupRole.getGroupId(),
-					ActionKeys.ASSIGN_MEMBERS) ||
-				!RolePermissionUtil.contains(
-					getPermissionChecker(), oldUserGroupRole.getRoleId(),
-					ActionKeys.ASSIGN_MEMBERS))) {
+		long curUserId = getUserId();
 
-				userGroupRoles.add(oldUserGroupRole);
+		if (curUserId == userId) {
+			if (userGroupRoles.size() < oldUserGroupRoles.size()) {
+				userGroupRoles = oldUserGroupRoles;
 			}
+		}
+		else {
+			for (UserGroupRole oldUserGroupRole : oldUserGroupRoles) {
+				if (!userGroupRoles.contains(oldUserGroupRole) &&
+					(!GroupPermissionUtil.contains(
+						getPermissionChecker(), oldUserGroupRole.getGroupId(),
+						ActionKeys.ASSIGN_MEMBERS) &&
+					!RolePermissionUtil.contains(
+						getPermissionChecker(), oldUserGroupRole.getRoleId(),
+						ActionKeys.ASSIGN_MEMBERS))) {
+
+					userGroupRoles.add(oldUserGroupRole);
+				}
+			}
+
 		}
 
 		for (UserGroupRole userGroupRole : userGroupRoles) {
@@ -812,7 +822,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 				if (!GroupPermissionUtil.contains(
 						getPermissionChecker(), userGroupRole.getGroupId(),
-						ActionKeys.ASSIGN_MEMBERS) ||
+						ActionKeys.ASSIGN_MEMBERS) &&
 					!RolePermissionUtil.contains(
 						getPermissionChecker(), userGroupRole.getRoleId(),
 						ActionKeys.ASSIGN_MEMBERS)) {
