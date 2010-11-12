@@ -26,13 +26,39 @@ import com.liferay.portal.theme.ThemeDisplay;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.BodyContent;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class ScriptTag extends BaseBodyTagSupport {
 
 	public static final String PAGE = "/html/taglib/aui/script/page.jsp";
+
+	public static void doTag(
+			PageContext pageContext, String position, String use, String body)
+		throws Exception {
+
+		ScriptTag scriptTag = new ScriptTag();
+
+		scriptTag.setPageContext(pageContext);
+
+		scriptTag._position = position;
+		scriptTag._use = use;
+
+		BodyContent bodyContent = pageContext.pushBody();
+		scriptTag.setBodyContent(bodyContent);
+
+		bodyContent.write(body);
+
+		pageContext.popBody();
+
+		scriptTag.doEndTag();
+
+		scriptTag.release();
+	}
 
 	public int doEndTag() throws JspException {
 		HttpServletRequest request =

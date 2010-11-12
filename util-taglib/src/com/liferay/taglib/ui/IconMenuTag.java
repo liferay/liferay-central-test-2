@@ -14,6 +14,7 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.servlet.taglib.BaseBodyTagSupport;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -23,12 +24,15 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.taglib.aui.ScriptTag;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class IconMenuTag extends BaseBodyTagSupport {
 
@@ -72,27 +76,76 @@ public class IconMenuTag extends BaseBodyTagSupport {
 
 			request.removeAttribute("liferay-ui:icon-menu:single-icon");
 
-			if ((iconCount != null) && (iconCount.getValue() >= 1) &&
-				((singleIcon == null) || _showWhenSingleIcon)) {
-
-				PortalIncludeUtil.include(pageContext, getStartPage());
-			}
-
-			writeBodyContent(pageContext.getOut());
+			JspWriter jspWriter = pageContext.getOut();
 
 			if ((iconCount != null) && (iconCount.getValue() >= 1) &&
 				((singleIcon == null) || _showWhenSingleIcon)) {
 
-				PortalIncludeUtil.include(pageContext, getEndPage());
+				if (Validator.isNull(_startPage)) {
+					if (_showExpanded) {
+						jspWriter.write(
+							"<div class=\"lfr-component lfr-menu-list "
+							+ "lfr-menu-expanded ");
+						jspWriter.write(_align);
+						jspWriter.write(" ");
+						jspWriter.write(_cssClass);
+						jspWriter.write("\" id=\"");
+						jspWriter.write(_id);
+						jspWriter.write("menu\">");
+					}
+					else {
+						jspWriter.write(
+							"<ul class='lfr-component lfr-actions ");
+						jspWriter.write(_align);
+						jspWriter.write(" ");
+						jspWriter.write(_cssClass);
+						jspWriter.write(" ");
+						if (_showArrow) {
+							jspWriter.write("show-arrow");
+						}
+						jspWriter.write("'>");
+						jspWriter.write(
+							"<li class=\"lfr-trigger\"><strong>"
+							+ "<a class=\"nobr\" href=\"javascript:;\">");
+						if (Validator.isNotNull(_icon)) {
+							jspWriter.write("<img alt=\"\" src=\"");
+							jspWriter.write(_icon);
+							jspWriter.write("\"/>");
+						}
+						jspWriter.write(
+							LanguageUtil.get(pageContext, _message));
+						jspWriter.write("</a></strong>");
+					}
+					jspWriter.write("<ul>");
+				}
+				else {
+					PortalIncludeUtil.include(pageContext, _startPage);
+				}
 			}
 
-			request.removeAttribute("liferay-ui:icon-menu:align");
-			request.removeAttribute("liferay-ui:icon-menu:cssClass");
-			request.removeAttribute("liferay-ui:icon-menu:icon");
-			request.removeAttribute("liferay-ui:icon-menu:id");
-			request.removeAttribute("liferay-ui:icon-menu:message");
-			request.removeAttribute("liferay-ui:icon-menu:showArrow");
-			request.removeAttribute("liferay-ui:icon-menu:showExpanded");
+			writeBodyContent(jspWriter);
+
+			if ((iconCount != null) && (iconCount.getValue() >= 1) &&
+				((singleIcon == null) || _showWhenSingleIcon)) {
+
+				if (Validator.isNull(_endPage)) {
+					jspWriter.write("</ul>");
+
+					if (_showExpanded) {
+						jspWriter.write("</div>");
+						ScriptTag.doTag(pageContext, null, "liferay-menu",
+							"Liferay.Menu.handleFocus('#" + _id + "menu');");
+					}
+					else {
+						jspWriter.write("</li></ul>");
+					}
+				}
+				else {
+					PortalIncludeUtil.include(pageContext, _endPage);
+				}
+
+			}
+
 			request.removeAttribute("liferay-ui:icon-menu:showWhenSingleIcon");
 
 			return EVAL_PAGE;
@@ -103,10 +156,10 @@ public class IconMenuTag extends BaseBodyTagSupport {
 		finally {
 			if (!ServerDetector.isResin()) {
 				_align = "right";
-				_cssClass = null;
+				_cssClass = StringPool.BLANK;
 				_endPage = null;
-				_icon = null;
-				_id = null;
+				_icon = StringPool.BLANK;
+				_id = StringPool.BLANK;
 				_message = "actions";
 				_showArrow = true;
 				_showExpanded = false;
@@ -129,49 +182,20 @@ public class IconMenuTag extends BaseBodyTagSupport {
 			icon =  themeDisplay.getPathThemeImages() + "/common/tool.png";
 		}
 
-		String id = _id;
-
-		if (Validator.isNull(id)) {
+		if (Validator.isNull(_id)) {
 			String randomKey = PortalUtil.generateRandomKey(
 				request, IconMenuTag.class.getName());
 
-			id = randomKey + StringPool.UNDERLINE;
+			_id = randomKey + StringPool.UNDERLINE;
 		}
 
-		request.setAttribute("liferay-ui:icon-menu:align", _align);
-		request.setAttribute("liferay-ui:icon-menu:cssClass", _cssClass);
 		request.setAttribute(
 			"liferay-ui:icon-menu:icon-count", new IntegerWrapper());
-		request.setAttribute("liferay-ui:icon-menu:icon", icon);
-		request.setAttribute("liferay-ui:icon-menu:id", id);
-		request.setAttribute("liferay-ui:icon-menu:message", _message);
-		request.setAttribute(
-			"liferay-ui:icon-menu:showArrow",String.valueOf(_showArrow));
-		request.setAttribute(
-			"liferay-ui:icon-menu:showExpanded",String.valueOf(_showExpanded));
 		request.setAttribute(
 			"liferay-ui:icon-menu:showWhenSingleIcon",
 			String.valueOf(_showWhenSingleIcon));
 
 		return EVAL_BODY_BUFFERED;
-	}
-
-	protected String getEndPage() {
-		if (Validator.isNull(_endPage)) {
-			return _END_PAGE;
-		}
-		else {
-			return _endPage;
-		}
-	}
-
-	protected String getStartPage() {
-		if (Validator.isNull(_startPage)) {
-			return _START_PAGE;
-		}
-		else {
-			return _startPage;
-		}
 	}
 
 	public void setAlign(String align) {
@@ -214,16 +238,11 @@ public class IconMenuTag extends BaseBodyTagSupport {
 		_startPage = startPage;
 	}
 
-	private static final String _END_PAGE = "/html/taglib/ui/icon_menu/end.jsp";
-
-	private static final String _START_PAGE =
-		"/html/taglib/ui/icon_menu/start.jsp";
-
 	private String _align = "right";
-	private String _cssClass;
+	private String _cssClass = StringPool.BLANK;
 	private String _endPage;
-	private String _icon;
-	private String _id;
+	private String _icon = StringPool.BLANK;
+	private String _id = StringPool.BLANK;
 	private String _message = "actions";
 	private boolean _showArrow = true;
 	private boolean _showExpanded;
