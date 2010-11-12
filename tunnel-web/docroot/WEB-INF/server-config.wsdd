@@ -1677,7 +1677,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="agreedToTermsOfUse" type="tns:boolean"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateLockout" qname="operNS:updateLockout" returnQName="updateLockoutReturn" returnType="rtns:UserSoap" soapAction="">
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateLockoutById" qname="operNS:updateLockoutById" returnQName="updateLockoutByIdReturn" returnType="rtns:UserSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="lockout" type="tns:boolean"></parameter>
 		</operation>
@@ -1789,7 +1789,7 @@
 			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="userGroupIds" type="tns:ArrayOf_xsd_long"></parameter>
 			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="updatePortrait hasRoleUser unsetGroupUsers setRoleUsers unsetUserGroupUsers unsetPasswordPolicyUsers getUserByScreenName getUserIdByScreenName updateScreenName addUser unsetRoleUsers addRoleUsers updatePassword getOrganizationUserIds deletePortrait deleteUser getDefaultUserId unsetTeamUsers getUserByEmailAddress updateReminderQuery addGroupUsers getRoleUserIds updateEmailAddress updateOpenId getGroupUserIds unsetOrganizationUsers getUserIdByEmailAddress addTeamUsers addPasswordPolicyUsers hasGroupUser addOrganizationUsers updateOrganizations updateAgreedToTermsOfUse deleteRoleUser addUserGroupUsers getUserById updateLockout updateActive setUserGroupUsers updateUser" />
+		<parameter name="allowedMethods" value="updatePortrait hasRoleUser unsetGroupUsers setRoleUsers unsetUserGroupUsers unsetPasswordPolicyUsers getUserByScreenName getUserIdByScreenName updateScreenName addUser unsetRoleUsers addRoleUsers updatePassword getOrganizationUserIds deletePortrait deleteUser getDefaultUserId unsetTeamUsers getUserByEmailAddress updateReminderQuery addGroupUsers getRoleUserIds updateEmailAddress updateOpenId updateLockoutById getGroupUserIds unsetOrganizationUsers getUserIdByEmailAddress addTeamUsers addPasswordPolicyUsers hasGroupUser addOrganizationUsers updateOrganizations updateAgreedToTermsOfUse deleteRoleUser addUserGroupUsers getUserById updateActive setUserGroupUsers updateUser" />
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletPreferencesIds" type="java:com.liferay.portal.model.PortletPreferencesIds" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:UserGroupRoleSoap" type="java:com.liferay.portal.model.UserGroupRoleSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns2_AddressSoap" type="java:com.liferay.portal.model.AddressSoap[]" innerType="cmp-ns:AddressSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
@@ -2950,15 +2950,6 @@
 		<arrayMapping xmlns:ns="urn:http.service.documentlibrary.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<typeMapping xmlns:ns="http://model.documentlibrary.portlet.liferay.com" qname="ns:DLFileShortcutSoap" type="java:com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<typeMapping xmlns:ns="http://service.portal.liferay.com" qname="ns:ServiceContext" type="java:com.liferay.portal.service.ServiceContext" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
-	</service>
-	<service name="Portlet_DL_DLFileVersionService" provider="java:RPC" style="rpc" use="encoded">
-		<parameter name="wsdlTargetNamespace" value="urn:http.service.documentlibrary.portlet.liferay.com" />
-		<parameter name="wsdlServiceElement" value="DLFileVersionServiceSoapService" />
-		<parameter name="wsdlServicePort" value="Portlet_DL_DLFileVersionService" />
-		<parameter name="className" value="com.liferay.portlet.documentlibrary.service.http.DLFileVersionServiceSoap" />
-		<parameter name="wsdlPortType" value="DLFileVersionServiceSoap" />
-		<parameter name="typeMappingVersion" value="1.2" />
-		<parameter name="allowedMethods" value="*" />
 	</service>
 	<service name="Portlet_DL_DLFolderService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.documentlibrary.portlet.liferay.com" />
