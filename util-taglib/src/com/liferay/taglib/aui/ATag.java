@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.taglib.util.InlineTag;
+import com.liferay.taglib.util.IncludeTag;
 
 import javax.portlet.PortletResponse;
 
@@ -33,7 +33,7 @@ import javax.servlet.jsp.JspWriter;
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */
-public class ATag extends InlineTag {
+public class ATag extends IncludeTag {
 
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
