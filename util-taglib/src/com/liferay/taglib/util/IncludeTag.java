@@ -33,6 +33,8 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 
+import java.io.IOException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,10 +42,12 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class IncludeTag
 	extends ParamAndPropertyAncestorTagImpl implements DynamicAttributes {
@@ -58,11 +62,19 @@ public class IncludeTag
 
 			callSetAttributes();
 
-			if (Validator.isNotNull(page)) {
-				_doInclude(page);
+			if (Validator.isNull(page)) {
+				try {
+					return processEndTag();
+				}
+				catch(Exception e) {
+					throw new JspException(e);
+				}
 			}
+			else {
+				_doInclude(page);
 
-			return EVAL_PAGE;
+				return EVAL_PAGE;
+			}
 		}
 		finally {
 			_dynamicAttributes.clear();
@@ -83,15 +95,21 @@ public class IncludeTag
 	public int doStartTag() throws JspException {
 		String page = getStartPage();
 
-		if (Validator.isNull(page)) {
-			return EVAL_BODY_BUFFERED;
-		}
-
 		callSetAttributes();
 
-		_doInclude(page);
+		if (Validator.isNull(page)) {
+			try {
+				return processStartTag();
+			}
+			catch(Exception e) {
+				throw new JspException(e);
+			}
+		}
+		else {
+			_doInclude(page);
 
-		return EVAL_BODY_INCLUDE;
+			return EVAL_BODY_INCLUDE;
+		}
 	}
 
 	public void setDynamicAttribute(
@@ -226,7 +244,26 @@ public class IncludeTag
 		return _TRIM_NEW_LINES;
 	}
 
+	protected int processEndTag() throws Exception {
+		return EVAL_PAGE;
+	}
+
+	protected int processStartTag() throws Exception {
+		return EVAL_BODY_INCLUDE;
+	}
+
 	protected void setAttributes(HttpServletRequest request) {
+	}
+
+	protected void writeDynamicAttributes(JspWriter jspWriter)
+		throws IOException {
+
+		String dynamicAttributesString = InlineUtil.buildDynamicAttributes(
+			getDynamicAttributes());
+
+		if (Validator.isNotNull(dynamicAttributesString)) {
+			jspWriter.write(dynamicAttributesString);
+		}
 	}
 
 	private void _doInclude(String page) throws JspException {
