@@ -18,9 +18,12 @@ import com.liferay.portal.CompanyMxException;
 import com.liferay.portal.CompanyVirtualHostException;
 import com.liferay.portal.CompanyWebIdException;
 import com.liferay.portal.NoSuchCompanyException;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.ModelEventMessage;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.CompanyServiceUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -124,6 +127,13 @@ public class EditInstanceAction extends PortletAction {
 				(ServletContext)actionRequest.getAttribute(WebKeys.CTX);
 
 			PortalInstances.initCompany(servletContext, company.getWebId());
+
+			//Model Events
+			ModelEventMessage modelEventMessage = ModelEventMessage.initialized(
+				company);
+
+			MessageBusUtil.sendMessage(
+				DestinationNames.MODEL_EVENTS, modelEventMessage);
 		}
 		else {
 

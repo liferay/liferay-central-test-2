@@ -360,13 +360,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				serviceContext);
 		}
 
-		//Model Events
-		ModelEventMessage modelEventMessage = ModelEventMessage.initialized(
-			company);
-
-		MessageBusUtil.sendMessage(
-			DestinationNames.MODEL_EVENTS, modelEventMessage);
-
 		// Portlets
 		portletLocalService.checkPortlets(companyId);
 
