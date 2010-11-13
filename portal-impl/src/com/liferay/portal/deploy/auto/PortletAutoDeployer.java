@@ -18,6 +18,7 @@ import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
@@ -90,6 +91,8 @@ public class PortletAutoDeployer
 
 		try {
 			deploy();
+
+			MethodCache.reset();
 		}
 		catch (Exception e) {
 			throw new AutoDeployException(e);
