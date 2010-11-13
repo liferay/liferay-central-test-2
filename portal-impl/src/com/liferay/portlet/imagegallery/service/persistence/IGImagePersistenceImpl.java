@@ -3242,7 +3242,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 		StringBundler query = new StringBundler();
 
-		query.append(_FILTER_SQL_SELECT_IGIMAGE_WHERE);
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_IGIMAGE_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE);
+		}
 
 		boolean conjunctionable = false;
 

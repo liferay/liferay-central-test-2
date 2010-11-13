@@ -2473,7 +2473,12 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 		StringBundler query = new StringBundler();
 
-		query.append(_FILTER_SQL_SELECT_MBCATEGORY_WHERE);
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_MBCATEGORY_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_MBCATEGORY_NO_INLINE_DISTINCT_WHERE);
+		}
 
 		boolean conjunctionable = false;
 

@@ -2617,7 +2617,12 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 
 		StringBundler query = new StringBundler();
 
-		query.append(_FILTER_SQL_SELECT_BOOKMARKSENTRY_WHERE);
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_BOOKMARKSENTRY_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_BOOKMARKSENTRY_NO_INLINE_DISTINCT_WHERE);
+		}
 
 		boolean conjunctionable = false;
 

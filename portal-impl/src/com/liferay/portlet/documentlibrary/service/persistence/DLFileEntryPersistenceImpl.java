@@ -3120,7 +3120,12 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 		StringBundler query = new StringBundler();
 
-		query.append(_FILTER_SQL_SELECT_DLFILEENTRY_WHERE);
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_DLFILEENTRY_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_DLFILEENTRY_NO_INLINE_DISTINCT_WHERE);
+		}
 
 		boolean conjunctionable = false;
 
@@ -3926,7 +3931,12 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 		StringBundler query = new StringBundler();
 
-		query.append(_FILTER_SQL_SELECT_DLFILEENTRY_WHERE);
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_DLFILEENTRY_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_DLFILEENTRY_NO_INLINE_DISTINCT_WHERE);
+		}
 
 		boolean conjunctionable = false;
 
