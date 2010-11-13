@@ -1666,7 +1666,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						StringBundler query = new StringBundler();
 
-						query.append(_FILTER_SQL_SELECT_${entity.alias?upper_case}_WHERE);
+						if (getDB().isSupportsInlineDistinct()) {
+							query.append(_FILTER_SQL_SELECT_${entity.alias?upper_case}_WHERE);
+						}
+						else {
+							query.append(_FILTER_SQL_SELECT_${entity.alias?upper_case}_NO_INLINE_DISTINCT_WHERE);
+						}
 
 						<#include "persistence_impl_finder_arrayable_cols.ftl">
 
