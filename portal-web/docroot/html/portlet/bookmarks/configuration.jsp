@@ -34,7 +34,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<liferay-ui:error key="rootFolderId" message="please-enter-a-valid-root-folder" />
 
 	<liferay-ui:panel-container extended="<%= true %>" id="bookmarksSettingsPanelContainer" persistState="<%= true %>">
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="foldersListingPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "folders-listing") %>'>
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="bookmarksFoldersListingPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "folders-listing") %>'>
 			<aui:fieldset>
 				<aui:field-wrapper label="root-folder">
 					<portlet:renderURL var="viewFolderURL">

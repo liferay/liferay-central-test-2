@@ -269,6 +269,6 @@
 	padding: 10px 15px;
 }
 
-.portlet-calendar #commentsPanelContainer {
+.portlet-calendar #calendarCommentsPanelContainer {
 	border-width: 0;
 }

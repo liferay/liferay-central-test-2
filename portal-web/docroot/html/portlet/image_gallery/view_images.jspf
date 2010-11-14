@@ -165,7 +165,7 @@
 				}
 			},
 			delay: 5000,
-			links: '#imageGalleryPanelContainer .image-thumbnail',
+			links: '#imageGalleryAssetInfoPanelContainer .image-thumbnail',
 			maxHeight: maxHeight,
 			maxWidth: maxWidth,
 			playingLabel: '(<liferay-ui:message key="playing" />)'

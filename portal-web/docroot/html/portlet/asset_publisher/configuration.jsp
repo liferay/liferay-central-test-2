@@ -101,8 +101,8 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 		<c:choose>
 			<c:when test='<%= selectionStyle.equals("manual") %>'>
-				<liferay-ui:panel-container extended="<%= true %>" id="assetSelectionStylePanelContainer" persistState="<%= true %>">
-					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="assetSelectionStylePanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "selection") %>' >
+				<liferay-ui:panel-container extended="<%= true %>" id="assetPublisherSelectionStylePanelContainer" persistState="<%= true %>">
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="assetPublisherSelectionStylePanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "selection") %>' >
 						<aui:fieldset>
 
 							<%
@@ -267,7 +267,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 							<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 						</aui:fieldset>
 					</liferay-ui:panel>
-					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="assetSelectionDisplaySettingsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>'>
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="assetPublisherSelectionDisplaySettingsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>'>
 						<%@ include file="/html/portlet/asset_publisher/display_settings.jspf" %>
 					</liferay-ui:panel>
 				</liferay-ui:panel-container>
@@ -277,8 +277,8 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 				</aui:button-row>
 			</c:when>
 			<c:when test='<%= selectionStyle.equals("dynamic") %>'>
-				<liferay-ui:panel-container extended="<%= true %>" id="assetDynamicSelectionStylePanelContainer" persistState="<%= true %>">
-					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="assetSourcePanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "source") %>'>
+				<liferay-ui:panel-container extended="<%= true %>" id="assetPublisherDynamicSelectionStylePanelContainer" persistState="<%= true %>">
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="assetPublisherSourcePanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "source") %>'>
 						<aui:fieldset label="scope">
 							<aui:select label="" name="defaultScope">
 								<aui:option label="<%= _getName(scopeGroup, pageContext) %>" selected="<%= defaultScope %>" value="<%= true %>" />
@@ -342,7 +342,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 						</aui:fieldset>
 					</liferay-ui:panel>
 
-					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="queryRulesPanelContainer" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "filter[action]") %>'>
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="assetPublisherQueryRulesPanelContainer" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "filter[action]") %>'>
 						<liferay-ui:asset-tags-error />
 
 						<div id="<portlet:namespace />queryRules">
@@ -416,7 +416,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 							Liferay.Util.toggleSelectBox('<portlet:namespace />defaultScope','false','<portlet:namespace />scopesBoxes');
 						</aui:script>
 					</liferay-ui:panel>
-					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="orderingAndGroupingPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "ordering-and-grouping") %>'>
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="assetPublisherOrderingAndGroupingPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "ordering-and-grouping") %>'>
 						<aui:fieldset>
 							<span class="aui-field-row">
 								<aui:select inlineField="<%= true %>" inlineLabel="left" label="order-by" name="orderByColumn1">
@@ -485,10 +485,10 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 							</span>
 						</aui:fieldset>
 					</liferay-ui:panel>
-					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="assetDisplaySettingsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>'>
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="assetPublisherDisplaySettingsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>'>
 						<%@ include file="/html/portlet/asset_publisher/display_settings.jspf" %>
 					</liferay-ui:panel>
-					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="assetRssPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "rss") %>'>
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="assetPublisherRssPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "rss") %>'>
 						<aui:fieldset>
 							<aui:input label="enable-rss-subscription" name="enableRSS" type="checkbox" value="<%= enableRSS %>" />
 

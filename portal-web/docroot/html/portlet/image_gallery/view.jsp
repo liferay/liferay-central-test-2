@@ -145,7 +145,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 			</c:if>
 
 			<aui:column columnWidth="<%= 75 %>" cssClass="lfr-asset-column lfr-asset-column-details" first="<%= true %>">
-				<liferay-ui:panel-container extended="<%= false %>" id="imageGalleryPanelContainer" persistState="<%= true %>">
+				<liferay-ui:panel-container extended="<%= false %>" id="imageGalleryAssetInfoPanelContainer" persistState="<%= true %>">
 					<c:if test="<%= folder != null %>">
 						<div class="lfr-asset-description">
 							<%= HtmlUtil.escape(folder.getDescription()) %>
@@ -176,12 +176,12 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 					</c:if>
 
 					<c:if test="<%= foldersCount > 0 %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="subFoldersPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, (folder != null) ? "subfolders" : "folders") %>'>
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="imageGallerySubFoldersPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, (folder != null) ? "subfolders" : "folders") %>'>
 							<liferay-util:include page="/html/portlet/image_gallery/view_folders.jsp" />
 						</liferay-ui:panel>
 					</c:if>
 
-					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="entriesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "images") %>'>
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="imageGalleryEntriesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "images") %>'>
 
 						<%
 						SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, null, null);

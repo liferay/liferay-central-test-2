@@ -436,24 +436,24 @@ numberFormat.setMinimumIntegerDigits(2);
 			</c:when>
 			<c:when test='<%= tabs2.equals("file-uploads") %>'>
 				<aui:fieldset label="configure-the-file-upload-settings">
-					<liferay-ui:panel-container extended="<%= true %>" id="generalUploadPanelContainer" persistState="<%= true %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="generalUploadPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "general") %>'>
+					<liferay-ui:panel-container extended="<%= true %>" id="adminGeneralUploadPanelContainer" persistState="<%= true %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="adminGeneralUploadPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "general") %>'>
 							<aui:input cssClass="lfr-input-text-container" label="overall-maximum-file-size" name="uploadServletRequestImplMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE) %>" />
 
 							<aui:input cssClass="lfr-input-text-container" label="temporary-storage-directory" name="uploadServletRequestImplTempDir" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR, StringPool.BLANK) %>" />
 						</liferay-ui:panel>
 					</liferay-ui:panel-container>
 
-					<liferay-ui:panel-container extended="<%= true %>" id="documentLibraryPanelContainer" persistState="<%= true %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="documentLibraryPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "document-library") %>'>
+					<liferay-ui:panel-container extended="<%= true %>" id="adminDocumentLibraryPanelContainer" persistState="<%= true %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="adminDocumentLibraryPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "document-library") %>'>
 							<aui:input cssClass="lfr-input-text-container" label="maximum-file-size" name="dlFileMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) %>" />
 
 							<aui:input cssClass="lfr-input-text-container" label="allowed-file-extensions" name="dlFileExtensions" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.DL_FILE_EXTENSIONS) %>" />
 						</liferay-ui:panel>
 					</liferay-ui:panel-container>
 
-					<liferay-ui:panel-container extended="<%= true %>" id="imageGalleryPanelContainer" persistState="<%= true %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="imageGalleryPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "image-gallery") %>'>
+					<liferay-ui:panel-container extended="<%= true %>" id="adminImageGalleryPanelContainer" persistState="<%= true %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="adminImageGalleryPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "image-gallery") %>'>
 							<aui:input cssClass="lfr-input-text-container" label="maximum-file-size" name="igImageMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) %>" />
 
 							<aui:input cssClass="lfr-input-text-container" label="allowed-file-extensions" name="igImageExtensions" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.IG_IMAGE_EXTENSIONS) %>" />
@@ -462,16 +462,16 @@ numberFormat.setMinimumIntegerDigits(2);
 						</liferay-ui:panel>
 					</liferay-ui:panel-container>
 
-					<liferay-ui:panel-container extended="<%= true %>" id="webContentImagesPanelContainer" persistState="<%= true %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="webContentImagesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "web-content-images") %>'>
+					<liferay-ui:panel-container extended="<%= true %>" id="adminWebContentImagesPanelContainer" persistState="<%= true %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="adminWebContentImagesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "web-content-images") %>'>
 							<aui:input cssClass="lfr-input-text-container" label="maximum-file-size" name="journalImageSmallMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE) %>" />
 
 							<aui:input cssClass="lfr-input-text-container" label="allowed-file-extensions" name="journalImageExtensions" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.JOURNAL_IMAGE_EXTENSIONS) %>" />
 						</liferay-ui:panel>
 					</liferay-ui:panel-container>
 
-					<liferay-ui:panel-container extended="<%= true %>" id="shoppingCartImagesPanelContainer" persistState="<%= true %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="shoppingCartImagesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "shopping-cart-images") %>'>
+					<liferay-ui:panel-container extended="<%= true %>" id="adminShoppingCartImagesPanelContainer" persistState="<%= true %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="adminShoppingCartImagesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "shopping-cart-images") %>'>
 							<aui:input cssClass="lfr-input-text-container" label='<%= LanguageUtil.get(pageContext, "maximum-file-size") + "(" + LanguageUtil.get(pageContext,"large-image") + ")" %>' name="shoppingImageLargeMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SHOPPING_IMAGE_LARGE_MAX_SIZE) %>" />
 
 							<aui:input cssClass="lfr-input-text-container" label='<%= LanguageUtil.get(pageContext, "maximum-file-size") + "(" + LanguageUtil.get(pageContext,"medium-image") + ")" %>' name="shoppingImageMediumMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SHOPPING_IMAGE_MEDIUM_MAX_SIZE) %>" />
@@ -482,8 +482,8 @@ numberFormat.setMinimumIntegerDigits(2);
 						</liferay-ui:panel>
 					</liferay-ui:panel-container>
 
-					<liferay-ui:panel-container extended="<%= true %>" id="softwareCatalogImagesPanelContainer" persistState="<%= true %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="softwareCatalogImagesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "software-catalog-images") %>'>
+					<liferay-ui:panel-container extended="<%= true %>" id="adminSoftwareCatalogImagesPanelContainer" persistState="<%= true %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="adminSoftwareCatalogImagesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "software-catalog-images") %>'>
 							<aui:input cssClass="lfr-input-text-container" label="maximum-file-size" name="scImageMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SC_IMAGE_MAX_SIZE) %>" />
 
 							<aui:input cssClass="lfr-input-text-container" label="maximum-thumbnail-height" name="scImageThumbnailMaxHeight" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SC_IMAGE_THUMBNAIL_MAX_HEIGHT) %>" />
@@ -492,8 +492,8 @@ numberFormat.setMinimumIntegerDigits(2);
 						</liferay-ui:panel>
 					</liferay-ui:panel-container>
 
-					<liferay-ui:panel-container extended="<%= true %>" id="userImagesPanelContainer" persistState="<%= true %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="userImagesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "user-images") %>'>
+					<liferay-ui:panel-container extended="<%= true %>" id="adminUserImagesPanelContainer" persistState="<%= true %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="adminUserImagesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "user-images") %>'>
 							<aui:input cssClass="lfr-input-text-container" label="maximum-file-size" name="usersImageMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.USERS_IMAGE_MAX_SIZE) %>" />
 						</liferay-ui:panel>
 					</liferay-ui:panel-container>
@@ -510,8 +510,8 @@ numberFormat.setMinimumIntegerDigits(2);
 			</c:when>
 			<c:when test='<%= tabs2.equals("mail") %>'>
 				<aui:fieldset>
-					<liferay-ui:panel-container extended="<%= true %>" id="mailServerSettingsPanelContainer" persistState="<%= true %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="mailServerSettingsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "configure-the-mail-server-settings") %>'>
+					<liferay-ui:panel-container extended="<%= true %>" id="adminMailServerSettingsPanelContainer" persistState="<%= true %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="adminMailServerSettingsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "configure-the-mail-server-settings") %>'>
 							<aui:input cssClass="lfr-input-text-container" label="incoming-pop-server" name="pop3Host" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_POP3_HOST) %>" />
 
 							<aui:input cssClass="lfr-input-text-container" label="incoming-port" name="pop3Port" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.MAIL_SESSION_MAIL_POP3_PORT) %>" />
@@ -548,8 +548,8 @@ numberFormat.setMinimumIntegerDigits(2);
 			</c:when>
 			<c:when test='<%= tabs2.equals("OpenOffice") %>'>
 				<aui:fieldset>
-					<liferay-ui:panel-container extended="<%= true %>" id="openOfficeConversionPanelContainer" persistState="<%= true %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="openOfficeConversionPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "enabling-openoffice-integration-provides-document-conversion-functionality") %>'>
+					<liferay-ui:panel-container extended="<%= true %>" id="adminOpenOfficeConversionPanelContainer" persistState="<%= true %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="adminOpenOfficeConversionPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "enabling-openoffice-integration-provides-document-conversion-functionality") %>'>
 							<aui:input inlineLabel="right" name="enabled" type="checkbox" value="<%= PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED) %>" />
 
 							<aui:input cssClass="lfr-input-text-container" name="port" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.OPENOFFICE_SERVER_PORT) %>" />
@@ -703,8 +703,8 @@ numberFormat.setMinimumIntegerDigits(2);
 
 				<br />
 
-				<liferay-ui:panel-container extended="<%= true %>" id="serverAdministrationActionsPanelContainer" persistState="<%= true %>">
-					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="serverAdministrationActionsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "actions") %>'>
+				<liferay-ui:panel-container extended="<%= true %>" id="adminServerAdministrationActionsPanelContainer" persistState="<%= true %>">
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="adminServerAdministrationActionsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "actions") %>'>
 						<table class="lfr-table">
 						<tr>
 							<td>

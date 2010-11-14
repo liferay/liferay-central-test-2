@@ -21,7 +21,7 @@
 </h1>
 
 <div class="portal-add-content">
-	<liferay-ui:panel-container extended="<%= true %>" id="addContentPanelContainer" persistState="<%= true %>">
+	<liferay-ui:panel-container extended="<%= true %>" id="controlPanelMenuAddContentPanelContainer" persistState="<%= true %>">
 
 		<%
 		String ppid = GetterUtil.getString((String)request.getAttribute("control_panel.jsp-ppid"), layoutTypePortlet.getStateMaxPortletId());
@@ -118,7 +118,7 @@
 					%>
 
 					<c:if test="<%= !manageableGroups.isEmpty() %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="communitiesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "communities") %>'>
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="controlPanelMenuCommunitiesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "communities") %>'>
 							<ul>
 
 								<%
@@ -144,7 +144,7 @@
 					</c:if>
 
 					<c:if test="<%= !manageableOrganizations.isEmpty() %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="organizationsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "organizations") %>'>
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="controlPanelMenuOrganizationsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "organizations") %>'>
 							<ul>
 
 								<%
@@ -190,7 +190,7 @@
 					%>
 
 					<c:if test="<%= showGlobal || showMyCommunity %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="sharedPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "other[plural]") %>'>
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="controlPanelMenuSharedCommunitiesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "other[plural]") %>'>
 							<ul>
 								<c:if test="<%= showGlobal %>">
 									<li>

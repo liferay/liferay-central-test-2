@@ -42,7 +42,7 @@ try {
 				<div class="separator" />
 
 				<liferay-ui:panel-container extended="<%= false %>" id="workflowTasksPanelContainer" persistState="<%= true %>">
-					<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="myTasksPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "assigned-to-me") %>'>
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="workflowMyTasksPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "assigned-to-me") %>'>
 
 						<%
 						type = "assigned-to-me";
@@ -51,7 +51,7 @@ try {
 						<%@ include file="/html/portlet/workflow_tasks/workflow_tasks.jspf" %>
 					</liferay-ui:panel>
 
-					<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="myRolesTasksPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "assigned-to-my-roles") %>'>
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="workflowMyRolesTasksPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "assigned-to-my-roles") %>'>
 
 						<%
 						type = "assigned-to-my-roles";

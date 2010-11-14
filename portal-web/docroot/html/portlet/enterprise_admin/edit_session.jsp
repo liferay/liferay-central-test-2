@@ -97,7 +97,7 @@ userTracker = userTracker.toEscapedModel();
 					<%= userTracker.getRemoteAddr() %> / <%= userTracker.getRemoteHost() %>
 				</aui:field-wrapper>
 
-				<liferay-ui:panel-container extended="<%= true %>" id="sessionHistoryPanelContainer" persistState="<%= true %>">
+				<liferay-ui:panel-container extended="<%= true %>" id="enterpriseAdminSessionHistoryPanelContainer" persistState="<%= true %>">
 					<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="sessionAccessedURLsPanels" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "accessed-urls") %>'>
 						<table border="0" cellpadding="4" cellspacing="0" width="100%">
 
@@ -130,7 +130,7 @@ userTracker = userTracker.toEscapedModel();
 							</table>
 					</liferay-ui:panel>
 
-					<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="sessionAttributesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "session-attributes") %>'>
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="enterpriseAdminSessionAttributesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "session-attributes") %>'>
 						<table border="0" cellpadding="4" cellspacing="0" width="100%">
 
 							<%

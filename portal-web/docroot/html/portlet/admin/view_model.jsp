@@ -74,7 +74,7 @@ catch (Exception e) {
 
 <div style="overflow: auto; vertical-align: top;">
 	<liferay-ui:panel-container cssClass="model-details" id='<%= randomId + "modelDetails" %>'>
-		<liferay-ui:panel defaultState="closed" id='<%= randomId + "modelDetailsPanel" %>' title="<%= resourceTitle %>">
+		<liferay-ui:panel defaultState="closed" id='<%= randomId + "adminModelDetailsPanel" %>' title="<%= resourceTitle %>">
 			<div style="height: 100px; width: 350px;"><%= modelString %></div>
 		</liferay-ui:panel>
 	</liferay-ui:panel-container>

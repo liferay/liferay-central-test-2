@@ -16,7 +16,7 @@
 
 <br />
 
-<liferay-ui:panel-container cssClass="page-extra-settings" extended="<%= true %>" id="pageExtraSettingsPanelContainer" persistState="<%= true %>">
+<liferay-ui:panel-container cssClass="page-extra-settings" extended="<%= true %>" id="layoutExtraSettingsPanelContainer" persistState="<%= true %>">
 	<liferay-ui:panel defaultState="closed" title='<%= LanguageUtil.get(pageContext, "meta-tags") %>'>
 		<table class="lfr-table">
 		<tr>
@@ -163,7 +163,7 @@
 		</table>
 	</liferay-ui:panel>
 
-	<liferay-ui:panel defaultState="closed" extended="<%= true %>" id="pageJavascriptPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "javascript") %>'>
+	<liferay-ui:panel defaultState="closed" extended="<%= true %>" id="layoutJavascriptPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "javascript") %>'>
 		<table class="lfr-table">
 		<tr>
 			<td>
@@ -203,7 +203,7 @@
 	</liferay-ui:panel>
 
 	<c:if test="<%= PortalUtil.isLayoutSitemapable(selLayout) %>">
-		<liferay-ui:panel defaultState="closed" extended="<%= true %>" id="pageRobotsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "robots") %>'>
+		<liferay-ui:panel defaultState="closed" extended="<%= true %>" id="layoutRobotsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "robots") %>'>
 
 			<%
 			boolean include = GetterUtil.getBoolean(selLayout.getTypeSettingsProperties().getProperty("sitemap-include"), true);
