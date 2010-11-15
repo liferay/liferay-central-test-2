@@ -139,7 +139,12 @@ public class InitUtil {
 			return;
 		}
 
-		PropsUtil.reload();
+		if (!_neverInitialized) {
+			PropsUtil.reload();
+		}
+		else {
+			_neverInitialized = false;
+		}
 
 		init();
 
@@ -151,5 +156,6 @@ public class InitUtil {
 	private static final boolean _PRINT_TIME = false;
 
 	private static boolean _initialized;
+	private static boolean _neverInitialized = true;
 
 }
