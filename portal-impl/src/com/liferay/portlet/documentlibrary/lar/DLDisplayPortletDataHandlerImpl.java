@@ -102,7 +102,7 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 			for (DLFolder folder : folders) {
 				DLPortletDataHandlerImpl.exportFolder(
 					portletDataContext, foldersElement, fileEntriesElement,
-					fileShortcutsElement, fileRanksElement, folder);
+					fileShortcutsElement, fileRanksElement, folder, false);
 			}
 		}
 		else {
@@ -113,7 +113,7 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			DLPortletDataHandlerImpl.exportFolder(
 				portletDataContext, foldersElement, fileEntriesElement,
-				fileShortcutsElement, fileRanksElement, folder);
+				fileShortcutsElement, fileRanksElement, folder, true);
 		}
 
 		return document.formattedString();
