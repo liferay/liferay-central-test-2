@@ -74,8 +74,10 @@ public class RSSAction extends PortletAction {
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(7);
 
+		sb.append(themeDisplay.getPortalURL());
+		sb.append(themeDisplay.getPathContext());
 		sb.append(PortalUtil.getLayoutURL(layout, themeDisplay));
 		sb.append(Portal.FRIENDLY_URL_SEPARATOR);
 		sb.append("asset_publisher/");
