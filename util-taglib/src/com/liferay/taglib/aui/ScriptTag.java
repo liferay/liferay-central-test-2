@@ -38,20 +38,21 @@ public class ScriptTag extends BaseBodyTagSupport {
 	public static final String PAGE = "/html/taglib/aui/script/page.jsp";
 
 	public static void doTag(
-			PageContext pageContext, String position, String use, String body)
+			String position, String use, String bodyContentString,
+			PageContext pageContext)
 		throws Exception {
 
 		ScriptTag scriptTag = new ScriptTag();
 
 		scriptTag.setPageContext(pageContext);
-
-		scriptTag._position = position;
-		scriptTag._use = use;
+		scriptTag.setPosition(position);
+		scriptTag.setUse(use);
 
 		BodyContent bodyContent = pageContext.pushBody();
+
 		scriptTag.setBodyContent(bodyContent);
 
-		bodyContent.write(body);
+		bodyContent.write(bodyContentString);
 
 		pageContext.popBody();
 
@@ -128,17 +129,17 @@ public class ScriptTag extends BaseBodyTagSupport {
 		}
 	}
 
-	protected void cleanUp() {
-		_position = null;
-		_use = null;
-	}
-
 	public void setPosition(String position) {
 		_position = position;
 	}
 
 	public void setUse(String use) {
 		_use = use;
+	}
+
+	protected void cleanUp() {
+		_position = null;
+		_use = null;
 	}
 
 	private static final String _POSITION_AUTO = "auto";

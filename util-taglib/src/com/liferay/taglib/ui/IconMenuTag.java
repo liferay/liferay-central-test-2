@@ -63,92 +63,7 @@ public class IconMenuTag extends BaseBodyTagSupport {
 
 	public int doEndTag() throws JspException {
 		try {
-			HttpServletRequest request =
-				(HttpServletRequest)pageContext.getRequest();
-
-			IntegerWrapper iconCount = (IntegerWrapper)request.getAttribute(
-				"liferay-ui:icon-menu:icon-count");
-
-			request.removeAttribute("liferay-ui:icon-menu:icon-count");
-
-			Boolean singleIcon = (Boolean)request.getAttribute(
-				"liferay-ui:icon-menu:single-icon");
-
-			request.removeAttribute("liferay-ui:icon-menu:single-icon");
-
-			JspWriter jspWriter = pageContext.getOut();
-
-			if ((iconCount != null) && (iconCount.getValue() >= 1) &&
-				((singleIcon == null) || _showWhenSingleIcon)) {
-
-				if (Validator.isNull(_startPage)) {
-					if (_showExpanded) {
-						jspWriter.write(
-							"<div class=\"lfr-component lfr-menu-list "
-							+ "lfr-menu-expanded ");
-						jspWriter.write(_align);
-						jspWriter.write(" ");
-						jspWriter.write(_cssClass);
-						jspWriter.write("\" id=\"");
-						jspWriter.write(_id);
-						jspWriter.write("menu\">");
-					}
-					else {
-						jspWriter.write(
-							"<ul class='lfr-component lfr-actions ");
-						jspWriter.write(_align);
-						jspWriter.write(" ");
-						jspWriter.write(_cssClass);
-						jspWriter.write(" ");
-						if (_showArrow) {
-							jspWriter.write("show-arrow");
-						}
-						jspWriter.write("'>");
-						jspWriter.write(
-							"<li class=\"lfr-trigger\"><strong>"
-							+ "<a class=\"nobr\" href=\"javascript:;\">");
-						if (Validator.isNotNull(_icon)) {
-							jspWriter.write("<img alt=\"\" src=\"");
-							jspWriter.write(_icon);
-							jspWriter.write("\"/>");
-						}
-						jspWriter.write(
-							LanguageUtil.get(pageContext, _message));
-						jspWriter.write("</a></strong>");
-					}
-					jspWriter.write("<ul>");
-				}
-				else {
-					PortalIncludeUtil.include(pageContext, _startPage);
-				}
-			}
-
-			writeBodyContent(jspWriter);
-
-			if ((iconCount != null) && (iconCount.getValue() >= 1) &&
-				((singleIcon == null) || _showWhenSingleIcon)) {
-
-				if (Validator.isNull(_endPage)) {
-					jspWriter.write("</ul>");
-
-					if (_showExpanded) {
-						jspWriter.write("</div>");
-						ScriptTag.doTag(pageContext, null, "liferay-menu",
-							"Liferay.Menu.handleFocus('#" + _id + "menu');");
-					}
-					else {
-						jspWriter.write("</li></ul>");
-					}
-				}
-				else {
-					PortalIncludeUtil.include(pageContext, _endPage);
-				}
-
-			}
-
-			request.removeAttribute("liferay-ui:icon-menu:showWhenSingleIcon");
-
-			return EVAL_PAGE;
+			return processEndTag();
 		}
 		catch (Exception e) {
 			throw new JspException(e);
@@ -176,10 +91,8 @@ public class IconMenuTag extends BaseBodyTagSupport {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String icon = _icon;
-
-		if (icon == null) {
-			icon =  themeDisplay.getPathThemeImages() + "/common/tool.png";
+		if (Validator.isNull(_icon)) {
+			_icon = themeDisplay.getPathThemeImages() + "/common/tool.png";
 		}
 
 		if (Validator.isNull(_id)) {
@@ -236,6 +149,97 @@ public class IconMenuTag extends BaseBodyTagSupport {
 
 	public void setStartPage(String startPage) {
 		_startPage = startPage;
+	}
+
+	protected int processEndTag() throws Exception {
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
+
+		IntegerWrapper iconCount = (IntegerWrapper)request.getAttribute(
+			"liferay-ui:icon-menu:icon-count");
+
+		request.removeAttribute("liferay-ui:icon-menu:icon-count");
+
+		Boolean singleIcon = (Boolean)request.getAttribute(
+			"liferay-ui:icon-menu:single-icon");
+
+		request.removeAttribute("liferay-ui:icon-menu:single-icon");
+
+		JspWriter jspWriter = pageContext.getOut();
+
+		if ((iconCount != null) && (iconCount.getValue() >= 1) &&
+			((singleIcon == null) || _showWhenSingleIcon)) {
+
+			if (Validator.isNull(_startPage)) {
+				if (_showExpanded) {
+					jspWriter.write("<div class=\"lfr-component ");
+					jspWriter.write("lfr-menu-list lfr-menu-expanded ");
+					jspWriter.write(_align);
+					jspWriter.write(" ");
+					jspWriter.write(_cssClass);
+					jspWriter.write("\" id=\"");
+					jspWriter.write(_id);
+					jspWriter.write("menu\">");
+				}
+				else {
+					jspWriter.write("<ul class='lfr-component lfr-actions ");
+					jspWriter.write(_align);
+					jspWriter.write(" ");
+					jspWriter.write(_cssClass);
+					jspWriter.write(" ");
+
+					if (_showArrow) {
+						jspWriter.write("show-arrow");
+					}
+
+					jspWriter.write("'>");
+					jspWriter.write("<li class=\"lfr-trigger\"><strong>");
+					jspWriter.write("<a class=\"nobr\" href=\"javascript:;\">");
+
+					if (Validator.isNotNull(_icon)) {
+						jspWriter.write("<img alt=\"\" src=\"");
+						jspWriter.write(_icon);
+						jspWriter.write("\" />");
+					}
+
+					jspWriter.write(LanguageUtil.get(pageContext, _message));
+					jspWriter.write("</a></strong>");
+				}
+
+				jspWriter.write("<ul>");
+			}
+			else {
+				PortalIncludeUtil.include(pageContext, _startPage);
+			}
+		}
+
+		writeBodyContent(jspWriter);
+
+		if ((iconCount != null) && (iconCount.getValue() >= 1) &&
+			((singleIcon == null) || _showWhenSingleIcon)) {
+
+			if (Validator.isNull(_endPage)) {
+				jspWriter.write("</ul>");
+
+				if (_showExpanded) {
+					jspWriter.write("</div>");
+					ScriptTag.doTag(
+						null, "liferay-menu",
+						"Liferay.Menu.handleFocus('#" + _id + "menu');",
+						pageContext);
+				}
+				else {
+					jspWriter.write("</li></ul>");
+				}
+			}
+			else {
+				PortalIncludeUtil.include(pageContext, _endPage);
+			}
+		}
+
+		request.removeAttribute("liferay-ui:icon-menu:showWhenSingleIcon");
+
+		return EVAL_PAGE;
 	}
 
 	private String _align = "right";
