@@ -19,14 +19,13 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspException;
 
 /**
  * @author Brian Wing Shun Chan
  */
 public class IconTag extends IncludeTag {
 
-	public int doStartTag() throws JspException {
+	public int doStartTag() {
 		return EVAL_BODY_INCLUDE;
 	}
 
