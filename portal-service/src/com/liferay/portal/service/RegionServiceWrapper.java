@@ -68,5 +68,9 @@ public class RegionServiceWrapper implements RegionService {
 		return _regionService;
 	}
 
+	public void setWrappedRegionService(RegionService regionService) {
+		_regionService = regionService;
+	}
+
 	private RegionService _regionService;
 }

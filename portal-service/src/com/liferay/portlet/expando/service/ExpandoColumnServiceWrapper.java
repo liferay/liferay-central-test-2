@@ -77,5 +77,10 @@ public class ExpandoColumnServiceWrapper implements ExpandoColumnService {
 		return _expandoColumnService;
 	}
 
+	public void setWrappedExpandoColumnService(
+		ExpandoColumnService expandoColumnService) {
+		_expandoColumnService = expandoColumnService;
+	}
+
 	private ExpandoColumnService _expandoColumnService;
 }

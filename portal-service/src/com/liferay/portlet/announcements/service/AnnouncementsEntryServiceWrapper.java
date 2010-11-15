@@ -72,5 +72,10 @@ public class AnnouncementsEntryServiceWrapper
 		return _announcementsEntryService;
 	}
 
+	public void setWrappedAnnouncementsEntryService(
+		AnnouncementsEntryService announcementsEntryService) {
+		_announcementsEntryService = announcementsEntryService;
+	}
+
 	private AnnouncementsEntryService _announcementsEntryService;
 }

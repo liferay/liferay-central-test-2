@@ -249,5 +249,10 @@ public class ResourceActionLocalServiceWrapper
 		return _resourceActionLocalService;
 	}
 
+	public void setWrappedResourceActionLocalService(
+		ResourceActionLocalService resourceActionLocalService) {
+		_resourceActionLocalService = resourceActionLocalService;
+	}
+
 	private ResourceActionLocalService _resourceActionLocalService;
 }

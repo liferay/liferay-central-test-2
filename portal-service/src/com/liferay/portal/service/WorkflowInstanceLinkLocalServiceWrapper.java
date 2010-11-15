@@ -310,5 +310,10 @@ public class WorkflowInstanceLinkLocalServiceWrapper
 		return _workflowInstanceLinkLocalService;
 	}
 
+	public void setWrappedWorkflowInstanceLinkLocalService(
+		WorkflowInstanceLinkLocalService workflowInstanceLinkLocalService) {
+		_workflowInstanceLinkLocalService = workflowInstanceLinkLocalService;
+	}
+
 	private WorkflowInstanceLinkLocalService _workflowInstanceLinkLocalService;
 }

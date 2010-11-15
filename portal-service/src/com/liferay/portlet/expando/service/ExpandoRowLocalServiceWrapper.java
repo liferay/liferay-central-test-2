@@ -372,5 +372,10 @@ public class ExpandoRowLocalServiceWrapper implements ExpandoRowLocalService {
 		return _expandoRowLocalService;
 	}
 
+	public void setWrappedExpandoRowLocalService(
+		ExpandoRowLocalService expandoRowLocalService) {
+		_expandoRowLocalService = expandoRowLocalService;
+	}
+
 	private ExpandoRowLocalService _expandoRowLocalService;
 }

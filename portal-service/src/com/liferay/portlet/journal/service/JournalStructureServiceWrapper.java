@@ -78,5 +78,10 @@ public class JournalStructureServiceWrapper implements JournalStructureService {
 		return _journalStructureService;
 	}
 
+	public void setWrappedJournalStructureService(
+		JournalStructureService journalStructureService) {
+		_journalStructureService = journalStructureService;
+	}
+
 	private JournalStructureService _journalStructureService;
 }

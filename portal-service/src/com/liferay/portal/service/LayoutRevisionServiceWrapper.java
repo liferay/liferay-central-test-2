@@ -33,5 +33,10 @@ public class LayoutRevisionServiceWrapper implements LayoutRevisionService {
 		return _layoutRevisionService;
 	}
 
+	public void setWrappedLayoutRevisionService(
+		LayoutRevisionService layoutRevisionService) {
+		_layoutRevisionService = layoutRevisionService;
+	}
+
 	private LayoutRevisionService _layoutRevisionService;
 }

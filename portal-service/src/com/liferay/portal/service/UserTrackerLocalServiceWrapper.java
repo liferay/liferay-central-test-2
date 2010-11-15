@@ -241,5 +241,10 @@ public class UserTrackerLocalServiceWrapper implements UserTrackerLocalService {
 		return _userTrackerLocalService;
 	}
 
+	public void setWrappedUserTrackerLocalService(
+		UserTrackerLocalService userTrackerLocalService) {
+		_userTrackerLocalService = userTrackerLocalService;
+	}
+
 	private UserTrackerLocalService _userTrackerLocalService;
 }

@@ -78,5 +78,10 @@ public class SCFrameworkVersionServiceWrapper
 		return _scFrameworkVersionService;
 	}
 
+	public void setWrappedSCFrameworkVersionService(
+		SCFrameworkVersionService scFrameworkVersionService) {
+		_scFrameworkVersionService = scFrameworkVersionService;
+	}
+
 	private SCFrameworkVersionService _scFrameworkVersionService;
 }

@@ -270,5 +270,10 @@ public class SCProductScreenshotLocalServiceWrapper
 		return _scProductScreenshotLocalService;
 	}
 
+	public void setWrappedSCProductScreenshotLocalService(
+		SCProductScreenshotLocalService scProductScreenshotLocalService) {
+		_scProductScreenshotLocalService = scProductScreenshotLocalService;
+	}
+
 	private SCProductScreenshotLocalService _scProductScreenshotLocalService;
 }

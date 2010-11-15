@@ -382,5 +382,10 @@ public class ExpandoTableLocalServiceWrapper implements ExpandoTableLocalService
 		return _expandoTableLocalService;
 	}
 
+	public void setWrappedExpandoTableLocalService(
+		ExpandoTableLocalService expandoTableLocalService) {
+		_expandoTableLocalService = expandoTableLocalService;
+	}
+
 	private ExpandoTableLocalService _expandoTableLocalService;
 }

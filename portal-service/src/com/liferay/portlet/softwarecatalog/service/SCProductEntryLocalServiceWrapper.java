@@ -389,5 +389,10 @@ public class SCProductEntryLocalServiceWrapper
 		return _scProductEntryLocalService;
 	}
 
+	public void setWrappedSCProductEntryLocalService(
+		SCProductEntryLocalService scProductEntryLocalService) {
+		_scProductEntryLocalService = scProductEntryLocalService;
+	}
+
 	private SCProductEntryLocalService _scProductEntryLocalService;
 }

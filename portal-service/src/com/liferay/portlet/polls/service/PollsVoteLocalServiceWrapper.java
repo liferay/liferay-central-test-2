@@ -261,5 +261,10 @@ public class PollsVoteLocalServiceWrapper implements PollsVoteLocalService {
 		return _pollsVoteLocalService;
 	}
 
+	public void setWrappedPollsVoteLocalService(
+		PollsVoteLocalService pollsVoteLocalService) {
+		_pollsVoteLocalService = pollsVoteLocalService;
+	}
+
 	private PollsVoteLocalService _pollsVoteLocalService;
 }

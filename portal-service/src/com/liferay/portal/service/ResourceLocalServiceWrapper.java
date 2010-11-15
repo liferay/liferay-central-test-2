@@ -340,5 +340,10 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 		return _resourceLocalService;
 	}
 
+	public void setWrappedResourceLocalService(
+		ResourceLocalService resourceLocalService) {
+		_resourceLocalService = resourceLocalService;
+	}
+
 	private ResourceLocalService _resourceLocalService;
 }

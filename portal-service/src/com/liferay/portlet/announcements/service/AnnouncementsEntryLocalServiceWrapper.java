@@ -390,5 +390,10 @@ public class AnnouncementsEntryLocalServiceWrapper
 		return _announcementsEntryLocalService;
 	}
 
+	public void setWrappedAnnouncementsEntryLocalService(
+		AnnouncementsEntryLocalService announcementsEntryLocalService) {
+		_announcementsEntryLocalService = announcementsEntryLocalService;
+	}
+
 	private AnnouncementsEntryLocalService _announcementsEntryLocalService;
 }

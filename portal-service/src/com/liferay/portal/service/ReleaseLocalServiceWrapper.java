@@ -252,5 +252,10 @@ public class ReleaseLocalServiceWrapper implements ReleaseLocalService {
 		return _releaseLocalService;
 	}
 
+	public void setWrappedReleaseLocalService(
+		ReleaseLocalService releaseLocalService) {
+		_releaseLocalService = releaseLocalService;
+	}
+
 	private ReleaseLocalService _releaseLocalService;
 }

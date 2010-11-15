@@ -378,5 +378,10 @@ public class WikiNodeLocalServiceWrapper implements WikiNodeLocalService {
 		return _wikiNodeLocalService;
 	}
 
+	public void setWrappedWikiNodeLocalService(
+		WikiNodeLocalService wikiNodeLocalService) {
+		_wikiNodeLocalService = wikiNodeLocalService;
+	}
+
 	private WikiNodeLocalService _wikiNodeLocalService;
 }

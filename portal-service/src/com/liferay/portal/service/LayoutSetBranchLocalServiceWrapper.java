@@ -296,5 +296,10 @@ public class LayoutSetBranchLocalServiceWrapper
 		return _layoutSetBranchLocalService;
 	}
 
+	public void setWrappedLayoutSetBranchLocalService(
+		LayoutSetBranchLocalService layoutSetBranchLocalService) {
+		_layoutSetBranchLocalService = layoutSetBranchLocalService;
+	}
+
 	private LayoutSetBranchLocalService _layoutSetBranchLocalService;
 }

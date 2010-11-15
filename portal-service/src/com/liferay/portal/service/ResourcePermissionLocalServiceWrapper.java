@@ -337,5 +337,10 @@ public class ResourcePermissionLocalServiceWrapper
 		return _resourcePermissionLocalService;
 	}
 
+	public void setWrappedResourcePermissionLocalService(
+		ResourcePermissionLocalService resourcePermissionLocalService) {
+		_resourcePermissionLocalService = resourcePermissionLocalService;
+	}
+
 	private ResourcePermissionLocalService _resourcePermissionLocalService;
 }

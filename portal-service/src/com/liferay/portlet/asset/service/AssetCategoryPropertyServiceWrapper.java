@@ -69,5 +69,10 @@ public class AssetCategoryPropertyServiceWrapper
 		return _assetCategoryPropertyService;
 	}
 
+	public void setWrappedAssetCategoryPropertyService(
+		AssetCategoryPropertyService assetCategoryPropertyService) {
+		_assetCategoryPropertyService = assetCategoryPropertyService;
+	}
+
 	private AssetCategoryPropertyService _assetCategoryPropertyService;
 }

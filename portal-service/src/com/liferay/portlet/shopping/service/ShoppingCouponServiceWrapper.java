@@ -92,5 +92,10 @@ public class ShoppingCouponServiceWrapper implements ShoppingCouponService {
 		return _shoppingCouponService;
 	}
 
+	public void setWrappedShoppingCouponService(
+		ShoppingCouponService shoppingCouponService) {
+		_shoppingCouponService = shoppingCouponService;
+	}
+
 	private ShoppingCouponService _shoppingCouponService;
 }

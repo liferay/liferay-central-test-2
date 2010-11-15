@@ -120,5 +120,10 @@ public class AssetVocabularyServiceWrapper implements AssetVocabularyService {
 		return _assetVocabularyService;
 	}
 
+	public void setWrappedAssetVocabularyService(
+		AssetVocabularyService assetVocabularyService) {
+		_assetVocabularyService = assetVocabularyService;
+	}
+
 	private AssetVocabularyService _assetVocabularyService;
 }

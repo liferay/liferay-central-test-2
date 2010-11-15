@@ -244,5 +244,10 @@ public class BrowserTrackerLocalServiceWrapper
 		return _browserTrackerLocalService;
 	}
 
+	public void setWrappedBrowserTrackerLocalService(
+		BrowserTrackerLocalService browserTrackerLocalService) {
+		_browserTrackerLocalService = browserTrackerLocalService;
+	}
+
 	private BrowserTrackerLocalService _browserTrackerLocalService;
 }

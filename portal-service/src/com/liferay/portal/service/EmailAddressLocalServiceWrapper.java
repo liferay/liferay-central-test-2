@@ -261,5 +261,10 @@ public class EmailAddressLocalServiceWrapper implements EmailAddressLocalService
 		return _emailAddressLocalService;
 	}
 
+	public void setWrappedEmailAddressLocalService(
+		EmailAddressLocalService emailAddressLocalService) {
+		_emailAddressLocalService = emailAddressLocalService;
+	}
+
 	private EmailAddressLocalService _emailAddressLocalService;
 }

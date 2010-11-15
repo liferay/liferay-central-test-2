@@ -397,5 +397,9 @@ public class UserServiceWrapper implements UserService {
 		return _userService;
 	}
 
+	public void setWrappedUserService(UserService userService) {
+		_userService = userService;
+	}
+
 	private UserService _userService;
 }

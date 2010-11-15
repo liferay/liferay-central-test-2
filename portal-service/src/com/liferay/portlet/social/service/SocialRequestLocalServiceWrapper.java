@@ -340,5 +340,10 @@ public class SocialRequestLocalServiceWrapper
 		return _socialRequestLocalService;
 	}
 
+	public void setWrappedSocialRequestLocalService(
+		SocialRequestLocalService socialRequestLocalService) {
+		_socialRequestLocalService = socialRequestLocalService;
+	}
+
 	private SocialRequestLocalService _socialRequestLocalService;
 }

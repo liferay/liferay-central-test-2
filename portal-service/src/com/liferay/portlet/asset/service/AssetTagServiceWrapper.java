@@ -96,5 +96,9 @@ public class AssetTagServiceWrapper implements AssetTagService {
 		return _assetTagService;
 	}
 
+	public void setWrappedAssetTagService(AssetTagService assetTagService) {
+		_assetTagService = assetTagService;
+	}
+
 	private AssetTagService _assetTagService;
 }

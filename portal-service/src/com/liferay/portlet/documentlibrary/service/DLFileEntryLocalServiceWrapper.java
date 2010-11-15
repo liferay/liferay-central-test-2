@@ -574,5 +574,10 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 		return _dlFileEntryLocalService;
 	}
 
+	public void setWrappedDLFileEntryLocalService(
+		DLFileEntryLocalService dlFileEntryLocalService) {
+		_dlFileEntryLocalService = dlFileEntryLocalService;
+	}
+
 	private DLFileEntryLocalService _dlFileEntryLocalService;
 }

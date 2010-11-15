@@ -39,5 +39,9 @@ public class ResourceServiceWrapper implements ResourceService {
 		return _resourceService;
 	}
 
+	public void setWrappedResourceService(ResourceService resourceService) {
+		_resourceService = resourceService;
+	}
+
 	private ResourceService _resourceService;
 }

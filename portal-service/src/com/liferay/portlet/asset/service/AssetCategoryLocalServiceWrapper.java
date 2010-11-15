@@ -413,5 +413,10 @@ public class AssetCategoryLocalServiceWrapper
 		return _assetCategoryLocalService;
 	}
 
+	public void setWrappedAssetCategoryLocalService(
+		AssetCategoryLocalService assetCategoryLocalService) {
+		_assetCategoryLocalService = assetCategoryLocalService;
+	}
+
 	private AssetCategoryLocalService _assetCategoryLocalService;
 }

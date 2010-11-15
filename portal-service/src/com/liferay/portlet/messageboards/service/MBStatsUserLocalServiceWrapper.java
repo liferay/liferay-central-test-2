@@ -282,5 +282,10 @@ public class MBStatsUserLocalServiceWrapper implements MBStatsUserLocalService {
 		return _mbStatsUserLocalService;
 	}
 
+	public void setWrappedMBStatsUserLocalService(
+		MBStatsUserLocalService mbStatsUserLocalService) {
+		_mbStatsUserLocalService = mbStatsUserLocalService;
+	}
+
 	private MBStatsUserLocalService _mbStatsUserLocalService;
 }

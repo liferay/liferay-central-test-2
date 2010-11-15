@@ -233,5 +233,10 @@ public class ShoppingItemFieldLocalServiceWrapper
 		return _shoppingItemFieldLocalService;
 	}
 
+	public void setWrappedShoppingItemFieldLocalService(
+		ShoppingItemFieldLocalService shoppingItemFieldLocalService) {
+		_shoppingItemFieldLocalService = shoppingItemFieldLocalService;
+	}
+
 	private ShoppingItemFieldLocalService _shoppingItemFieldLocalService;
 }

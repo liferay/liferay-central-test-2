@@ -52,5 +52,10 @@ public class AnnouncementsFlagServiceWrapper implements AnnouncementsFlagService
 		return _announcementsFlagService;
 	}
 
+	public void setWrappedAnnouncementsFlagService(
+		AnnouncementsFlagService announcementsFlagService) {
+		_announcementsFlagService = announcementsFlagService;
+	}
+
 	private AnnouncementsFlagService _announcementsFlagService;
 }

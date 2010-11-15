@@ -429,5 +429,10 @@ public class ShoppingItemLocalServiceWrapper implements ShoppingItemLocalService
 		return _shoppingItemLocalService;
 	}
 
+	public void setWrappedShoppingItemLocalService(
+		ShoppingItemLocalService shoppingItemLocalService) {
+		_shoppingItemLocalService = shoppingItemLocalService;
+	}
+
 	private ShoppingItemLocalService _shoppingItemLocalService;
 }

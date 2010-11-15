@@ -560,5 +560,9 @@ public class DLAppServiceWrapper implements DLAppService {
 		return _dlAppService;
 	}
 
+	public void setWrappedDLAppService(DLAppService dlAppService) {
+		_dlAppService = dlAppService;
+	}
+
 	private DLAppService _dlAppService;
 }

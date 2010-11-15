@@ -428,5 +428,10 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 		return _mbCategoryLocalService;
 	}
 
+	public void setWrappedMBCategoryLocalService(
+		MBCategoryLocalService mbCategoryLocalService) {
+		_mbCategoryLocalService = mbCategoryLocalService;
+	}
+
 	private MBCategoryLocalService _mbCategoryLocalService;
 }

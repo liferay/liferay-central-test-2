@@ -254,5 +254,10 @@ public class WebsiteLocalServiceWrapper implements WebsiteLocalService {
 		return _websiteLocalService;
 	}
 
+	public void setWrappedWebsiteLocalService(
+		WebsiteLocalService websiteLocalService) {
+		_websiteLocalService = websiteLocalService;
+	}
+
 	private WebsiteLocalService _websiteLocalService;
 }

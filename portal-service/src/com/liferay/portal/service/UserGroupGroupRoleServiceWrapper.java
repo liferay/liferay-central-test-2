@@ -66,5 +66,10 @@ public class UserGroupGroupRoleServiceWrapper
 		return _userGroupGroupRoleService;
 	}
 
+	public void setWrappedUserGroupGroupRoleService(
+		UserGroupGroupRoleService userGroupGroupRoleService) {
+		_userGroupGroupRoleService = userGroupGroupRoleService;
+	}
+
 	private UserGroupGroupRoleService _userGroupGroupRoleService;
 }

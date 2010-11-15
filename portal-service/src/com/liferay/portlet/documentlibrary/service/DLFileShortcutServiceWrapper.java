@@ -65,5 +65,10 @@ public class DLFileShortcutServiceWrapper implements DLFileShortcutService {
 		return _dlFileShortcutService;
 	}
 
+	public void setWrappedDLFileShortcutService(
+		DLFileShortcutService dlFileShortcutService) {
+		_dlFileShortcutService = dlFileShortcutService;
+	}
+
 	private DLFileShortcutService _dlFileShortcutService;
 }

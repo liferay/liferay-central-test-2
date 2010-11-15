@@ -298,5 +298,9 @@ public class LockLocalServiceWrapper implements LockLocalService {
 		return _lockLocalService;
 	}
 
+	public void setWrappedLockLocalService(LockLocalService lockLocalService) {
+		_lockLocalService = lockLocalService;
+	}
+
 	private LockLocalService _lockLocalService;
 }

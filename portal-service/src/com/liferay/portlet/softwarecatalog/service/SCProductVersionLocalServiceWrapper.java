@@ -297,5 +297,10 @@ public class SCProductVersionLocalServiceWrapper
 		return _scProductVersionLocalService;
 	}
 
+	public void setWrappedSCProductVersionLocalService(
+		SCProductVersionLocalService scProductVersionLocalService) {
+		_scProductVersionLocalService = scProductVersionLocalService;
+	}
+
 	private SCProductVersionLocalService _scProductVersionLocalService;
 }

@@ -463,5 +463,10 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService {
 		return _blogsEntryLocalService;
 	}
 
+	public void setWrappedBlogsEntryLocalService(
+		BlogsEntryLocalService blogsEntryLocalService) {
+		_blogsEntryLocalService = blogsEntryLocalService;
+	}
+
 	private BlogsEntryLocalService _blogsEntryLocalService;
 }

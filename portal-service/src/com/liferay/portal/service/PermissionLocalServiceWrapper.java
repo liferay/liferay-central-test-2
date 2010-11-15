@@ -438,5 +438,10 @@ public class PermissionLocalServiceWrapper implements PermissionLocalService {
 		return _permissionLocalService;
 	}
 
+	public void setWrappedPermissionLocalService(
+		PermissionLocalService permissionLocalService) {
+		_permissionLocalService = permissionLocalService;
+	}
+
 	private PermissionLocalService _permissionLocalService;
 }

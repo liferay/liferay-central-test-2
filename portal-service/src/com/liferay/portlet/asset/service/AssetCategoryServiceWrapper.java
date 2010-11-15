@@ -128,5 +128,10 @@ public class AssetCategoryServiceWrapper implements AssetCategoryService {
 		return _assetCategoryService;
 	}
 
+	public void setWrappedAssetCategoryService(
+		AssetCategoryService assetCategoryService) {
+		_assetCategoryService = assetCategoryService;
+	}
+
 	private AssetCategoryService _assetCategoryService;
 }

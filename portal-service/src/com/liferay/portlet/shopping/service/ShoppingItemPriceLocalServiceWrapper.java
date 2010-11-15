@@ -235,5 +235,10 @@ public class ShoppingItemPriceLocalServiceWrapper
 		return _shoppingItemPriceLocalService;
 	}
 
+	public void setWrappedShoppingItemPriceLocalService(
+		ShoppingItemPriceLocalService shoppingItemPriceLocalService) {
+		_shoppingItemPriceLocalService = shoppingItemPriceLocalService;
+	}
+
 	private ShoppingItemPriceLocalService _shoppingItemPriceLocalService;
 }

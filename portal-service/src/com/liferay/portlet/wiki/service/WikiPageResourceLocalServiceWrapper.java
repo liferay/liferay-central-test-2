@@ -260,5 +260,10 @@ public class WikiPageResourceLocalServiceWrapper
 		return _wikiPageResourceLocalService;
 	}
 
+	public void setWrappedWikiPageResourceLocalService(
+		WikiPageResourceLocalService wikiPageResourceLocalService) {
+		_wikiPageResourceLocalService = wikiPageResourceLocalService;
+	}
+
 	private WikiPageResourceLocalService _wikiPageResourceLocalService;
 }

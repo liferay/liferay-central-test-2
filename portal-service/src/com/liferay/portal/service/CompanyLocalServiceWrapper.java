@@ -384,5 +384,10 @@ public class CompanyLocalServiceWrapper implements CompanyLocalService {
 		return _companyLocalService;
 	}
 
+	public void setWrappedCompanyLocalService(
+		CompanyLocalService companyLocalService) {
+		_companyLocalService = companyLocalService;
+	}
+
 	private CompanyLocalService _companyLocalService;
 }

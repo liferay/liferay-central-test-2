@@ -404,5 +404,10 @@ public class TasksProposalLocalServiceWrapper
 		return _tasksProposalLocalService;
 	}
 
+	public void setWrappedTasksProposalLocalService(
+		TasksProposalLocalService tasksProposalLocalService) {
+		_tasksProposalLocalService = tasksProposalLocalService;
+	}
+
 	private TasksProposalLocalService _tasksProposalLocalService;
 }

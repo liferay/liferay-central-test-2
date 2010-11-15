@@ -392,5 +392,10 @@ public class DLFolderLocalServiceWrapper implements DLFolderLocalService {
 		return _dlFolderLocalService;
 	}
 
+	public void setWrappedDLFolderLocalService(
+		DLFolderLocalService dlFolderLocalService) {
+		_dlFolderLocalService = dlFolderLocalService;
+	}
+
 	private DLFolderLocalService _dlFolderLocalService;
 }

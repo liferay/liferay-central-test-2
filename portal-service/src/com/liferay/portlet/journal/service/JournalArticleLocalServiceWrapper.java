@@ -907,5 +907,10 @@ public class JournalArticleLocalServiceWrapper
 		return _journalArticleLocalService;
 	}
 
+	public void setWrappedJournalArticleLocalService(
+		JournalArticleLocalService journalArticleLocalService) {
+		_journalArticleLocalService = journalArticleLocalService;
+	}
+
 	private JournalArticleLocalService _journalArticleLocalService;
 }

@@ -638,5 +638,10 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 		return _wikiPageLocalService;
 	}
 
+	public void setWrappedWikiPageLocalService(
+		WikiPageLocalService wikiPageLocalService) {
+		_wikiPageLocalService = wikiPageLocalService;
+	}
+
 	private WikiPageLocalService _wikiPageLocalService;
 }

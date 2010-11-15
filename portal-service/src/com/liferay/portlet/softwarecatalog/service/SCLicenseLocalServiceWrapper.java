@@ -296,5 +296,10 @@ public class SCLicenseLocalServiceWrapper implements SCLicenseLocalService {
 		return _scLicenseLocalService;
 	}
 
+	public void setWrappedSCLicenseLocalService(
+		SCLicenseLocalService scLicenseLocalService) {
+		_scLicenseLocalService = scLicenseLocalService;
+	}
+
 	private SCLicenseLocalService _scLicenseLocalService;
 }

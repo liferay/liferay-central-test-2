@@ -235,5 +235,10 @@ public class TicketLocalServiceWrapper implements TicketLocalService {
 		return _ticketLocalService;
 	}
 
+	public void setWrappedTicketLocalService(
+		TicketLocalService ticketLocalService) {
+		_ticketLocalService = ticketLocalService;
+	}
+
 	private TicketLocalService _ticketLocalService;
 }

@@ -327,5 +327,9 @@ public class LayoutServiceWrapper implements LayoutService {
 		return _layoutService;
 	}
 
+	public void setWrappedLayoutService(LayoutService layoutService) {
+		_layoutService = layoutService;
+	}
+
 	private LayoutService _layoutService;
 }

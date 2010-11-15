@@ -431,5 +431,10 @@ public class ExpandoColumnLocalServiceWrapper
 		return _expandoColumnLocalService;
 	}
 
+	public void setWrappedExpandoColumnLocalService(
+		ExpandoColumnLocalService expandoColumnLocalService) {
+		_expandoColumnLocalService = expandoColumnLocalService;
+	}
+
 	private ExpandoColumnLocalService _expandoColumnLocalService;
 }

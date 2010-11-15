@@ -293,5 +293,10 @@ public class SocialRelationLocalServiceWrapper
 		return _socialRelationLocalService;
 	}
 
+	public void setWrappedSocialRelationLocalService(
+		SocialRelationLocalService socialRelationLocalService) {
+		_socialRelationLocalService = socialRelationLocalService;
+	}
+
 	private SocialRelationLocalService _socialRelationLocalService;
 }

@@ -256,5 +256,10 @@ public class AssetTagStatsLocalServiceWrapper
 		return _assetTagStatsLocalService;
 	}
 
+	public void setWrappedAssetTagStatsLocalService(
+		AssetTagStatsLocalService assetTagStatsLocalService) {
+		_assetTagStatsLocalService = assetTagStatsLocalService;
+	}
+
 	private AssetTagStatsLocalService _assetTagStatsLocalService;
 }

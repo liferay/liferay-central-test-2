@@ -232,5 +232,9 @@ public class ShardLocalServiceWrapper implements ShardLocalService {
 		return _shardLocalService;
 	}
 
+	public void setWrappedShardLocalService(ShardLocalService shardLocalService) {
+		_shardLocalService = shardLocalService;
+	}
+
 	private ShardLocalService _shardLocalService;
 }

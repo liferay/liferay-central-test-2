@@ -236,5 +236,10 @@ public class ClusterGroupLocalServiceWrapper implements ClusterGroupLocalService
 		return _clusterGroupLocalService;
 	}
 
+	public void setWrappedClusterGroupLocalService(
+		ClusterGroupLocalService clusterGroupLocalService) {
+		_clusterGroupLocalService = clusterGroupLocalService;
+	}
+
 	private ClusterGroupLocalService _clusterGroupLocalService;
 }

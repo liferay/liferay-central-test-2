@@ -52,5 +52,9 @@ public class TeamServiceWrapper implements TeamService {
 		return _teamService;
 	}
 
+	public void setWrappedTeamService(TeamService teamService) {
+		_teamService = teamService;
+	}
+
 	private TeamService _teamService;
 }

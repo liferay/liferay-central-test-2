@@ -121,5 +121,9 @@ public class MBThreadServiceWrapper implements MBThreadService {
 		return _mbThreadService;
 	}
 
+	public void setWrappedMBThreadService(MBThreadService mbThreadService) {
+		_mbThreadService = mbThreadService;
+	}
+
 	private MBThreadService _mbThreadService;
 }

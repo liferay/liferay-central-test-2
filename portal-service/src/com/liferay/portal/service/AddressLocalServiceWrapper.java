@@ -260,5 +260,10 @@ public class AddressLocalServiceWrapper implements AddressLocalService {
 		return _addressLocalService;
 	}
 
+	public void setWrappedAddressLocalService(
+		AddressLocalService addressLocalService) {
+		_addressLocalService = addressLocalService;
+	}
+
 	private AddressLocalService _addressLocalService;
 }

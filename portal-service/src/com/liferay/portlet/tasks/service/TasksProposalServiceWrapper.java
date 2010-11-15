@@ -71,5 +71,10 @@ public class TasksProposalServiceWrapper implements TasksProposalService {
 		return _tasksProposalService;
 	}
 
+	public void setWrappedTasksProposalService(
+		TasksProposalService tasksProposalService) {
+		_tasksProposalService = tasksProposalService;
+	}
+
 	private TasksProposalService _tasksProposalService;
 }

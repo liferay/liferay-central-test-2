@@ -50,5 +50,9 @@ public class PortalServiceWrapper implements PortalService {
 		return _portalService;
 	}
 
+	public void setWrappedPortalService(PortalService portalService) {
+		_portalService = portalService;
+	}
+
 	private PortalService _portalService;
 }

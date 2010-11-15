@@ -610,5 +610,10 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 		return _mbMessageLocalService;
 	}
 
+	public void setWrappedMBMessageLocalService(
+		MBMessageLocalService mbMessageLocalService) {
+		_mbMessageLocalService = mbMessageLocalService;
+	}
+
 	private MBMessageLocalService _mbMessageLocalService;
 }

@@ -1056,5 +1056,9 @@ public class UserLocalServiceWrapper implements UserLocalService {
 		return _userLocalService;
 	}
 
+	public void setWrappedUserLocalService(UserLocalService userLocalService) {
+		_userLocalService = userLocalService;
+	}
+
 	private UserLocalService _userLocalService;
 }

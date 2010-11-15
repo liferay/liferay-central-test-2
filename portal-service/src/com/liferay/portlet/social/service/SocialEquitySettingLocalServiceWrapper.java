@@ -251,5 +251,10 @@ public class SocialEquitySettingLocalServiceWrapper
 		return _socialEquitySettingLocalService;
 	}
 
+	public void setWrappedSocialEquitySettingLocalService(
+		SocialEquitySettingLocalService socialEquitySettingLocalService) {
+		_socialEquitySettingLocalService = socialEquitySettingLocalService;
+	}
+
 	private SocialEquitySettingLocalService _socialEquitySettingLocalService;
 }

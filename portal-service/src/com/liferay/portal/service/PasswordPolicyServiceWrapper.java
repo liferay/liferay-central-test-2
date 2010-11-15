@@ -77,5 +77,10 @@ public class PasswordPolicyServiceWrapper implements PasswordPolicyService {
 		return _passwordPolicyService;
 	}
 
+	public void setWrappedPasswordPolicyService(
+		PasswordPolicyService passwordPolicyService) {
+		_passwordPolicyService = passwordPolicyService;
+	}
+
 	private PasswordPolicyService _passwordPolicyService;
 }

@@ -257,5 +257,10 @@ public class PluginSettingLocalServiceWrapper
 		return _pluginSettingLocalService;
 	}
 
+	public void setWrappedPluginSettingLocalService(
+		PluginSettingLocalService pluginSettingLocalService) {
+		_pluginSettingLocalService = pluginSettingLocalService;
+	}
+
 	private PluginSettingLocalService _pluginSettingLocalService;
 }

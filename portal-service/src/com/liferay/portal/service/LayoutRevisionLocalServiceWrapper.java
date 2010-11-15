@@ -324,5 +324,10 @@ public class LayoutRevisionLocalServiceWrapper
 		return _layoutRevisionLocalService;
 	}
 
+	public void setWrappedLayoutRevisionLocalService(
+		LayoutRevisionLocalService layoutRevisionLocalService) {
+		_layoutRevisionLocalService = layoutRevisionLocalService;
+	}
+
 	private LayoutRevisionLocalService _layoutRevisionLocalService;
 }

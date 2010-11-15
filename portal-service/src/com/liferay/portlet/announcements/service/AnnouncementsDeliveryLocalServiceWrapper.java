@@ -282,5 +282,10 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 		return _announcementsDeliveryLocalService;
 	}
 
+	public void setWrappedAnnouncementsDeliveryLocalService(
+		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService) {
+		_announcementsDeliveryLocalService = announcementsDeliveryLocalService;
+	}
+
 	private AnnouncementsDeliveryLocalService _announcementsDeliveryLocalService;
 }

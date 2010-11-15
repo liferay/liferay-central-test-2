@@ -68,5 +68,10 @@ public class ExpandoValueServiceWrapper implements ExpandoValueService {
 		return _expandoValueService;
 	}
 
+	public void setWrappedExpandoValueService(
+		ExpandoValueService expandoValueService) {
+		_expandoValueService = expandoValueService;
+	}
+
 	private ExpandoValueService _expandoValueService;
 }

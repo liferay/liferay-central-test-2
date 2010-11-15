@@ -32,5 +32,9 @@ public class AccountServiceWrapper implements AccountService {
 		return _accountService;
 	}
 
+	public void setWrappedAccountService(AccountService accountService) {
+		_accountService = accountService;
+	}
+
 	private AccountService _accountService;
 }

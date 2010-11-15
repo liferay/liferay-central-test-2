@@ -290,5 +290,10 @@ public class PasswordPolicyRelLocalServiceWrapper
 		return _passwordPolicyRelLocalService;
 	}
 
+	public void setWrappedPasswordPolicyRelLocalService(
+		PasswordPolicyRelLocalService passwordPolicyRelLocalService) {
+		_passwordPolicyRelLocalService = passwordPolicyRelLocalService;
+	}
+
 	private PasswordPolicyRelLocalService _passwordPolicyRelLocalService;
 }

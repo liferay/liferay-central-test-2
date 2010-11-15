@@ -173,5 +173,9 @@ public class GroupServiceWrapper implements GroupService {
 		return _groupService;
 	}
 
+	public void setWrappedGroupService(GroupService groupService) {
+		_groupService = groupService;
+	}
+
 	private GroupService _groupService;
 }

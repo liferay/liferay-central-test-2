@@ -320,5 +320,10 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService {
 		return _dlFileEntryService;
 	}
 
+	public void setWrappedDLFileEntryService(
+		DLFileEntryService dlFileEntryService) {
+		_dlFileEntryService = dlFileEntryService;
+	}
+
 	private DLFileEntryService _dlFileEntryService;
 }

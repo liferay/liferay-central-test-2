@@ -361,5 +361,10 @@ public class MBThreadLocalServiceWrapper implements MBThreadLocalService {
 		return _mbThreadLocalService;
 	}
 
+	public void setWrappedMBThreadLocalService(
+		MBThreadLocalService mbThreadLocalService) {
+		_mbThreadLocalService = mbThreadLocalService;
+	}
+
 	private MBThreadLocalService _mbThreadLocalService;
 }

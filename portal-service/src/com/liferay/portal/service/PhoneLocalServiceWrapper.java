@@ -254,5 +254,9 @@ public class PhoneLocalServiceWrapper implements PhoneLocalService {
 		return _phoneLocalService;
 	}
 
+	public void setWrappedPhoneLocalService(PhoneLocalService phoneLocalService) {
+		_phoneLocalService = phoneLocalService;
+	}
+
 	private PhoneLocalService _phoneLocalService;
 }

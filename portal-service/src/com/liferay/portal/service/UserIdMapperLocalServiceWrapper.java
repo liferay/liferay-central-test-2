@@ -257,5 +257,10 @@ public class UserIdMapperLocalServiceWrapper implements UserIdMapperLocalService
 		return _userIdMapperLocalService;
 	}
 
+	public void setWrappedUserIdMapperLocalService(
+		UserIdMapperLocalService userIdMapperLocalService) {
+		_userIdMapperLocalService = userIdMapperLocalService;
+	}
+
 	private UserIdMapperLocalService _userIdMapperLocalService;
 }

@@ -96,5 +96,10 @@ public class ShoppingItemServiceWrapper implements ShoppingItemService {
 		return _shoppingItemService;
 	}
 
+	public void setWrappedShoppingItemService(
+		ShoppingItemService shoppingItemService) {
+		_shoppingItemService = shoppingItemService;
+	}
+
 	private ShoppingItemService _shoppingItemService;
 }

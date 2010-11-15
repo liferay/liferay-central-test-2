@@ -56,5 +56,9 @@ public class ListTypeServiceWrapper implements ListTypeService {
 		return _listTypeService;
 	}
 
+	public void setWrappedListTypeService(ListTypeService listTypeService) {
+		_listTypeService = listTypeService;
+	}
+
 	private ListTypeService _listTypeService;
 }

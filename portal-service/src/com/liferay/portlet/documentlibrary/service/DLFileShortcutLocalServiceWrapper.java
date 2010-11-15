@@ -345,5 +345,10 @@ public class DLFileShortcutLocalServiceWrapper
 		return _dlFileShortcutLocalService;
 	}
 
+	public void setWrappedDLFileShortcutLocalService(
+		DLFileShortcutLocalService dlFileShortcutLocalService) {
+		_dlFileShortcutLocalService = dlFileShortcutLocalService;
+	}
+
 	private DLFileShortcutLocalService _dlFileShortcutLocalService;
 }

@@ -43,5 +43,9 @@ public class PortletServiceWrapper implements PortletService {
 		return _portletService;
 	}
 
+	public void setWrappedPortletService(PortletService portletService) {
+		_portletService = portletService;
+	}
+
 	private PortletService _portletService;
 }

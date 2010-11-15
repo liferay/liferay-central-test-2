@@ -370,5 +370,10 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 		return _igFolderLocalService;
 	}
 
+	public void setWrappedIGFolderLocalService(
+		IGFolderLocalService igFolderLocalService) {
+		_igFolderLocalService = igFolderLocalService;
+	}
+
 	private IGFolderLocalService _igFolderLocalService;
 }

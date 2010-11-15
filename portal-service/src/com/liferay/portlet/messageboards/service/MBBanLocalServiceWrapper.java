@@ -270,5 +270,9 @@ public class MBBanLocalServiceWrapper implements MBBanLocalService {
 		return _mbBanLocalService;
 	}
 
+	public void setWrappedMBBanLocalService(MBBanLocalService mbBanLocalService) {
+		_mbBanLocalService = mbBanLocalService;
+	}
+
 	private MBBanLocalService _mbBanLocalService;
 }

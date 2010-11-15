@@ -308,5 +308,10 @@ public class MBMailingListLocalServiceWrapper
 		return _mbMailingListLocalService;
 	}
 
+	public void setWrappedMBMailingListLocalService(
+		MBMailingListLocalService mbMailingListLocalService) {
+		_mbMailingListLocalService = mbMailingListLocalService;
+	}
+
 	private MBMailingListLocalService _mbMailingListLocalService;
 }

@@ -289,5 +289,10 @@ public class MBMessageFlagLocalServiceWrapper
 		return _mbMessageFlagLocalService;
 	}
 
+	public void setWrappedMBMessageFlagLocalService(
+		MBMessageFlagLocalService mbMessageFlagLocalService) {
+		_mbMessageFlagLocalService = mbMessageFlagLocalService;
+	}
+
 	private MBMessageFlagLocalService _mbMessageFlagLocalService;
 }

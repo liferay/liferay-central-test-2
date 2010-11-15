@@ -183,5 +183,9 @@ public class WikiPageServiceWrapper implements WikiPageService {
 		return _wikiPageService;
 	}
 
+	public void setWrappedWikiPageService(WikiPageService wikiPageService) {
+		_wikiPageService = wikiPageService;
+	}
+
 	private WikiPageService _wikiPageService;
 }

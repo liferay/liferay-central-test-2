@@ -220,5 +220,10 @@ public class ContactLocalServiceWrapper implements ContactLocalService {
 		return _contactLocalService;
 	}
 
+	public void setWrappedContactLocalService(
+		ContactLocalService contactLocalService) {
+		_contactLocalService = contactLocalService;
+	}
+
 	private ContactLocalService _contactLocalService;
 }

@@ -69,5 +69,10 @@ public class ResourcePermissionServiceWrapper
 		return _resourcePermissionService;
 	}
 
+	public void setWrappedResourcePermissionService(
+		ResourcePermissionService resourcePermissionService) {
+		_resourcePermissionService = resourcePermissionService;
+	}
+
 	private ResourcePermissionService _resourcePermissionService;
 }

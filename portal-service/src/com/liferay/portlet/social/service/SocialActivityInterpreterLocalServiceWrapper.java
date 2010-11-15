@@ -51,5 +51,10 @@ public class SocialActivityInterpreterLocalServiceWrapper
 		return _socialActivityInterpreterLocalService;
 	}
 
+	public void setWrappedSocialActivityInterpreterLocalService(
+		SocialActivityInterpreterLocalService socialActivityInterpreterLocalService) {
+		_socialActivityInterpreterLocalService = socialActivityInterpreterLocalService;
+	}
+
 	private SocialActivityInterpreterLocalService _socialActivityInterpreterLocalService;
 }

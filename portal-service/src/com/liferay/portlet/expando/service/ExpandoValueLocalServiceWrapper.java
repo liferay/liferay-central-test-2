@@ -1254,5 +1254,10 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 		return _expandoValueLocalService;
 	}
 
+	public void setWrappedExpandoValueLocalService(
+		ExpandoValueLocalService expandoValueLocalService) {
+		_expandoValueLocalService = expandoValueLocalService;
+	}
+
 	private ExpandoValueLocalService _expandoValueLocalService;
 }

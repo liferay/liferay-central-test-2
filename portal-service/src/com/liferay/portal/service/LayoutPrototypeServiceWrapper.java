@@ -73,5 +73,10 @@ public class LayoutPrototypeServiceWrapper implements LayoutPrototypeService {
 		return _layoutPrototypeService;
 	}
 
+	public void setWrappedLayoutPrototypeService(
+		LayoutPrototypeService layoutPrototypeService) {
+		_layoutPrototypeService = layoutPrototypeService;
+	}
+
 	private LayoutPrototypeService _layoutPrototypeService;
 }

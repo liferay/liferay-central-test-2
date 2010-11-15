@@ -84,5 +84,9 @@ public class ThemeLocalServiceWrapper implements ThemeLocalService {
 		return _themeLocalService;
 	}
 
+	public void setWrappedThemeLocalService(ThemeLocalService themeLocalService) {
+		_themeLocalService = themeLocalService;
+	}
+
 	private ThemeLocalService _themeLocalService;
 }

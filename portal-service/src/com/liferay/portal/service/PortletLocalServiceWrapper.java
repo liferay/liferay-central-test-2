@@ -345,5 +345,10 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 		return _portletLocalService;
 	}
 
+	public void setWrappedPortletLocalService(
+		PortletLocalService portletLocalService) {
+		_portletLocalService = portletLocalService;
+	}
+
 	private PortletLocalService _portletLocalService;
 }

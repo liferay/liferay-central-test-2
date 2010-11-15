@@ -155,5 +155,9 @@ public class PermissionServiceWrapper implements PermissionService {
 		return _permissionService;
 	}
 
+	public void setWrappedPermissionService(PermissionService permissionService) {
+		_permissionService = permissionService;
+	}
+
 	private PermissionService _permissionService;
 }

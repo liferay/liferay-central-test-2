@@ -254,5 +254,10 @@ public class RatingsStatsLocalServiceWrapper implements RatingsStatsLocalService
 		return _ratingsStatsLocalService;
 	}
 
+	public void setWrappedRatingsStatsLocalService(
+		RatingsStatsLocalService ratingsStatsLocalService) {
+		_ratingsStatsLocalService = ratingsStatsLocalService;
+	}
+
 	private RatingsStatsLocalService _ratingsStatsLocalService;
 }

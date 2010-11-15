@@ -302,5 +302,10 @@ public class LayoutSetLocalServiceWrapper implements LayoutSetLocalService {
 		return _layoutSetLocalService;
 	}
 
+	public void setWrappedLayoutSetLocalService(
+		LayoutSetLocalService layoutSetLocalService) {
+		_layoutSetLocalService = layoutSetLocalService;
+	}
+
 	private LayoutSetLocalService _layoutSetLocalService;
 }

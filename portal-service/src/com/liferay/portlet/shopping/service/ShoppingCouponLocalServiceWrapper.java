@@ -306,5 +306,10 @@ public class ShoppingCouponLocalServiceWrapper
 		return _shoppingCouponLocalService;
 	}
 
+	public void setWrappedShoppingCouponLocalService(
+		ShoppingCouponLocalService shoppingCouponLocalService) {
+		_shoppingCouponLocalService = shoppingCouponLocalService;
+	}
+
 	private ShoppingCouponLocalService _shoppingCouponLocalService;
 }

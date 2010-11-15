@@ -398,5 +398,10 @@ public class JournalFeedLocalServiceWrapper implements JournalFeedLocalService {
 		return _journalFeedLocalService;
 	}
 
+	public void setWrappedJournalFeedLocalService(
+		JournalFeedLocalService journalFeedLocalService) {
+		_journalFeedLocalService = journalFeedLocalService;
+	}
+
 	private JournalFeedLocalService _journalFeedLocalService;
 }

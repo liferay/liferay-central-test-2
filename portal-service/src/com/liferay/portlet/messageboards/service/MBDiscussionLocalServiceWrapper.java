@@ -253,5 +253,10 @@ public class MBDiscussionLocalServiceWrapper implements MBDiscussionLocalService
 		return _mbDiscussionLocalService;
 	}
 
+	public void setWrappedMBDiscussionLocalService(
+		MBDiscussionLocalService mbDiscussionLocalService) {
+		_mbDiscussionLocalService = mbDiscussionLocalService;
+	}
+
 	private MBDiscussionLocalService _mbDiscussionLocalService;
 }

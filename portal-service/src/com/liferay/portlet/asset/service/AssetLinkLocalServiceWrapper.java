@@ -259,5 +259,10 @@ public class AssetLinkLocalServiceWrapper implements AssetLinkLocalService {
 		return _assetLinkLocalService;
 	}
 
+	public void setWrappedAssetLinkLocalService(
+		AssetLinkLocalService assetLinkLocalService) {
+		_assetLinkLocalService = assetLinkLocalService;
+	}
+
 	private AssetLinkLocalService _assetLinkLocalService;
 }

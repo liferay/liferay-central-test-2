@@ -65,5 +65,10 @@ public class AssetTagPropertyServiceWrapper implements AssetTagPropertyService {
 		return _assetTagPropertyService;
 	}
 
+	public void setWrappedAssetTagPropertyService(
+		AssetTagPropertyService assetTagPropertyService) {
+		_assetTagPropertyService = assetTagPropertyService;
+	}
+
 	private AssetTagPropertyService _assetTagPropertyService;
 }

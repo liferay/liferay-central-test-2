@@ -105,5 +105,9 @@ public class IGFolderServiceWrapper implements IGFolderService {
 		return _igFolderService;
 	}
 
+	public void setWrappedIGFolderService(IGFolderService igFolderService) {
+		_igFolderService = igFolderService;
+	}
+
 	private IGFolderService _igFolderService;
 }

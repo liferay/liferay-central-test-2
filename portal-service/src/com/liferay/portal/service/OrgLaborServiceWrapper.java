@@ -73,5 +73,9 @@ public class OrgLaborServiceWrapper implements OrgLaborService {
 		return _orgLaborService;
 	}
 
+	public void setWrappedOrgLaborService(OrgLaborService orgLaborService) {
+		_orgLaborService = orgLaborService;
+	}
+
 	private OrgLaborService _orgLaborService;
 }

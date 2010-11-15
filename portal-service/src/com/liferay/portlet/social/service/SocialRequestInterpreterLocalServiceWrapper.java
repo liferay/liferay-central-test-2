@@ -65,5 +65,10 @@ public class SocialRequestInterpreterLocalServiceWrapper
 		return _socialRequestInterpreterLocalService;
 	}
 
+	public void setWrappedSocialRequestInterpreterLocalService(
+		SocialRequestInterpreterLocalService socialRequestInterpreterLocalService) {
+		_socialRequestInterpreterLocalService = socialRequestInterpreterLocalService;
+	}
+
 	private SocialRequestInterpreterLocalService _socialRequestInterpreterLocalService;
 }

@@ -365,5 +365,10 @@ public class AssetVocabularyLocalServiceWrapper
 		return _assetVocabularyLocalService;
 	}
 
+	public void setWrappedAssetVocabularyLocalService(
+		AssetVocabularyLocalService assetVocabularyLocalService) {
+		_assetVocabularyLocalService = assetVocabularyLocalService;
+	}
+
 	private AssetVocabularyLocalService _assetVocabularyLocalService;
 }

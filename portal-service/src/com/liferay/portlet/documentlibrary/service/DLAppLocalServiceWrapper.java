@@ -620,5 +620,9 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService {
 		return _dlAppLocalService;
 	}
 
+	public void setWrappedDLAppLocalService(DLAppLocalService dlAppLocalService) {
+		_dlAppLocalService = dlAppLocalService;
+	}
+
 	private DLAppLocalService _dlAppLocalService;
 }

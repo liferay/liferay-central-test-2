@@ -280,5 +280,10 @@ public class JournalArticleResourceLocalServiceWrapper
 		return _journalArticleResourceLocalService;
 	}
 
+	public void setWrappedJournalArticleResourceLocalService(
+		JournalArticleResourceLocalService journalArticleResourceLocalService) {
+		_journalArticleResourceLocalService = journalArticleResourceLocalService;
+	}
+
 	private JournalArticleResourceLocalService _journalArticleResourceLocalService;
 }

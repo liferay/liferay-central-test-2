@@ -67,5 +67,9 @@ public class WebsiteServiceWrapper implements WebsiteService {
 		return _websiteService;
 	}
 
+	public void setWrappedWebsiteService(WebsiteService websiteService) {
+		_websiteService = websiteService;
+	}
+
 	private WebsiteService _websiteService;
 }

@@ -39,5 +39,9 @@ public class PollsVoteServiceWrapper implements PollsVoteService {
 		return _pollsVoteService;
 	}
 
+	public void setWrappedPollsVoteService(PollsVoteService pollsVoteService) {
+		_pollsVoteService = pollsVoteService;
+	}
+
 	private PollsVoteService _pollsVoteService;
 }

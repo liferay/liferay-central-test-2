@@ -73,5 +73,10 @@ public class BookmarksEntryServiceWrapper implements BookmarksEntryService {
 		return _bookmarksEntryService;
 	}
 
+	public void setWrappedBookmarksEntryService(
+		BookmarksEntryService bookmarksEntryService) {
+		_bookmarksEntryService = bookmarksEntryService;
+	}
+
 	private BookmarksEntryService _bookmarksEntryService;
 }

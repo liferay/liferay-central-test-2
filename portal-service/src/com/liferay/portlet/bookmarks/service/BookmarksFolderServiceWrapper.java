@@ -66,5 +66,10 @@ public class BookmarksFolderServiceWrapper implements BookmarksFolderService {
 		return _bookmarksFolderService;
 	}
 
+	public void setWrappedBookmarksFolderService(
+		BookmarksFolderService bookmarksFolderService) {
+		_bookmarksFolderService = bookmarksFolderService;
+	}
+
 	private BookmarksFolderService _bookmarksFolderService;
 }

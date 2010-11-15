@@ -243,5 +243,10 @@ public class WebDAVPropsLocalServiceWrapper implements WebDAVPropsLocalService {
 		return _webDAVPropsLocalService;
 	}
 
+	public void setWrappedWebDAVPropsLocalService(
+		WebDAVPropsLocalService webDAVPropsLocalService) {
+		_webDAVPropsLocalService = webDAVPropsLocalService;
+	}
+
 	private WebDAVPropsLocalService _webDAVPropsLocalService;
 }

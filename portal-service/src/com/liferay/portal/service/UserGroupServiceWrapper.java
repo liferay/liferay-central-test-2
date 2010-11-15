@@ -82,5 +82,9 @@ public class UserGroupServiceWrapper implements UserGroupService {
 		return _userGroupService;
 	}
 
+	public void setWrappedUserGroupService(UserGroupService userGroupService) {
+		_userGroupService = userGroupService;
+	}
+
 	private UserGroupService _userGroupService;
 }

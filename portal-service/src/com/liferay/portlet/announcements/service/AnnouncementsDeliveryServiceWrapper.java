@@ -43,5 +43,10 @@ public class AnnouncementsDeliveryServiceWrapper
 		return _announcementsDeliveryService;
 	}
 
+	public void setWrappedAnnouncementsDeliveryService(
+		AnnouncementsDeliveryService announcementsDeliveryService) {
+		_announcementsDeliveryService = announcementsDeliveryService;
+	}
+
 	private AnnouncementsDeliveryService _announcementsDeliveryService;
 }

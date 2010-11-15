@@ -314,5 +314,10 @@ public class SocialEquityLogLocalServiceWrapper
 		return _socialEquityLogLocalService;
 	}
 
+	public void setWrappedSocialEquityLogLocalService(
+		SocialEquityLogLocalService socialEquityLogLocalService) {
+		_socialEquityLogLocalService = socialEquityLogLocalService;
+	}
+
 	private SocialEquityLogLocalService _socialEquityLogLocalService;
 }

@@ -429,5 +429,10 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 		return _calEventLocalService;
 	}
 
+	public void setWrappedCalEventLocalService(
+		CalEventLocalService calEventLocalService) {
+		_calEventLocalService = calEventLocalService;
+	}
+
 	private CalEventLocalService _calEventLocalService;
 }

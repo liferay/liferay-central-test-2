@@ -296,5 +296,10 @@ public class AssetCategoryPropertyLocalServiceWrapper
 		return _assetCategoryPropertyLocalService;
 	}
 
+	public void setWrappedAssetCategoryPropertyLocalService(
+		AssetCategoryPropertyLocalService assetCategoryPropertyLocalService) {
+		_assetCategoryPropertyLocalService = assetCategoryPropertyLocalService;
+	}
+
 	private AssetCategoryPropertyLocalService _assetCategoryPropertyLocalService;
 }

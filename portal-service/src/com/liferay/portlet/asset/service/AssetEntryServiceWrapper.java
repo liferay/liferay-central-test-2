@@ -129,5 +129,9 @@ public class AssetEntryServiceWrapper implements AssetEntryService {
 		return _assetEntryService;
 	}
 
+	public void setWrappedAssetEntryService(AssetEntryService assetEntryService) {
+		_assetEntryService = assetEntryService;
+	}
+
 	private AssetEntryService _assetEntryService;
 }

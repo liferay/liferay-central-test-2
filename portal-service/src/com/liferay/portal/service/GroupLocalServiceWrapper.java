@@ -529,5 +529,9 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 		return _groupLocalService;
 	}
 
+	public void setWrappedGroupLocalService(GroupLocalService groupLocalService) {
+		_groupLocalService = groupLocalService;
+	}
+
 	private GroupLocalService _groupLocalService;
 }

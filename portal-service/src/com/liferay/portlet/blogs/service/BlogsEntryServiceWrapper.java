@@ -158,5 +158,9 @@ public class BlogsEntryServiceWrapper implements BlogsEntryService {
 		return _blogsEntryService;
 	}
 
+	public void setWrappedBlogsEntryService(BlogsEntryService blogsEntryService) {
+		_blogsEntryService = blogsEntryService;
+	}
+
 	private BlogsEntryService _blogsEntryService;
 }

@@ -57,5 +57,10 @@ public class PortletPreferencesServiceWrapper
 		return _portletPreferencesService;
 	}
 
+	public void setWrappedPortletPreferencesService(
+		PortletPreferencesService portletPreferencesService) {
+		_portletPreferencesService = portletPreferencesService;
+	}
+
 	private PortletPreferencesService _portletPreferencesService;
 }

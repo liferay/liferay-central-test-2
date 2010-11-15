@@ -229,5 +229,10 @@ public class SocialEquityHistoryLocalServiceWrapper
 		return _socialEquityHistoryLocalService;
 	}
 
+	public void setWrappedSocialEquityHistoryLocalService(
+		SocialEquityHistoryLocalService socialEquityHistoryLocalService) {
+		_socialEquityHistoryLocalService = socialEquityHistoryLocalService;
+	}
+
 	private SocialEquityHistoryLocalService _socialEquityHistoryLocalService;
 }

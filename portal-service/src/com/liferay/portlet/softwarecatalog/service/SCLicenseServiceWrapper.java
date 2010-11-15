@@ -63,5 +63,9 @@ public class SCLicenseServiceWrapper implements SCLicenseService {
 		return _scLicenseService;
 	}
 
+	public void setWrappedSCLicenseService(SCLicenseService scLicenseService) {
+		_scLicenseService = scLicenseService;
+	}
+
 	private SCLicenseService _scLicenseService;
 }

@@ -118,5 +118,10 @@ public class JournalTemplateServiceWrapper implements JournalTemplateService {
 		return _journalTemplateService;
 	}
 
+	public void setWrappedJournalTemplateService(
+		JournalTemplateService journalTemplateService) {
+		_journalTemplateService = journalTemplateService;
+	}
+
 	private JournalTemplateService _journalTemplateService;
 }

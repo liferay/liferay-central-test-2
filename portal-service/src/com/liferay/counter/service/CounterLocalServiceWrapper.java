@@ -256,5 +256,10 @@ public class CounterLocalServiceWrapper implements CounterLocalService {
 		return _counterLocalService;
 	}
 
+	public void setWrappedCounterLocalService(
+		CounterLocalService counterLocalService) {
+		_counterLocalService = counterLocalService;
+	}
+
 	private CounterLocalService _counterLocalService;
 }

@@ -234,5 +234,10 @@ public class UserTrackerPathLocalServiceWrapper
 		return _userTrackerPathLocalService;
 	}
 
+	public void setWrappedUserTrackerPathLocalService(
+		UserTrackerPathLocalService userTrackerPathLocalService) {
+		_userTrackerPathLocalService = userTrackerPathLocalService;
+	}
+
 	private UserTrackerPathLocalService _userTrackerPathLocalService;
 }

@@ -70,5 +70,10 @@ public class EmailAddressServiceWrapper implements EmailAddressService {
 		return _emailAddressService;
 	}
 
+	public void setWrappedEmailAddressService(
+		EmailAddressService emailAddressService) {
+		_emailAddressService = emailAddressService;
+	}
+
 	private EmailAddressService _emailAddressService;
 }

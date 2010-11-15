@@ -324,5 +324,10 @@ public class BlogsStatsUserLocalServiceWrapper
 		return _blogsStatsUserLocalService;
 	}
 
+	public void setWrappedBlogsStatsUserLocalService(
+		BlogsStatsUserLocalService blogsStatsUserLocalService) {
+		_blogsStatsUserLocalService = blogsStatsUserLocalService;
+	}
+
 	private BlogsStatsUserLocalService _blogsStatsUserLocalService;
 }

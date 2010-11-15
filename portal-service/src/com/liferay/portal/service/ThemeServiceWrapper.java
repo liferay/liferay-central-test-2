@@ -41,5 +41,9 @@ public class ThemeServiceWrapper implements ThemeService {
 		return _themeService;
 	}
 
+	public void setWrappedThemeService(ThemeService themeService) {
+		_themeService = themeService;
+	}
+
 	private ThemeService _themeService;
 }

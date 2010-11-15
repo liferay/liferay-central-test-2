@@ -450,5 +450,9 @@ public class RoleLocalServiceWrapper implements RoleLocalService {
 		return _roleLocalService;
 	}
 
+	public void setWrappedRoleLocalService(RoleLocalService roleLocalService) {
+		_roleLocalService = roleLocalService;
+	}
+
 	private RoleLocalService _roleLocalService;
 }

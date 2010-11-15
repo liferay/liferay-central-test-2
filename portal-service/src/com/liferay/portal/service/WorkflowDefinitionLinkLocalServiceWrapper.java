@@ -296,5 +296,10 @@ public class WorkflowDefinitionLinkLocalServiceWrapper
 		return _workflowDefinitionLinkLocalService;
 	}
 
+	public void setWrappedWorkflowDefinitionLinkLocalService(
+		WorkflowDefinitionLinkLocalService workflowDefinitionLinkLocalService) {
+		_workflowDefinitionLinkLocalService = workflowDefinitionLinkLocalService;
+	}
+
 	private WorkflowDefinitionLinkLocalService _workflowDefinitionLinkLocalService;
 }

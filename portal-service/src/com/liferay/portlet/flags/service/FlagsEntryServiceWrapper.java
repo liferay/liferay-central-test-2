@@ -41,5 +41,9 @@ public class FlagsEntryServiceWrapper implements FlagsEntryService {
 		return _flagsEntryService;
 	}
 
+	public void setWrappedFlagsEntryService(FlagsEntryService flagsEntryService) {
+		_flagsEntryService = flagsEntryService;
+	}
+
 	private FlagsEntryService _flagsEntryService;
 }

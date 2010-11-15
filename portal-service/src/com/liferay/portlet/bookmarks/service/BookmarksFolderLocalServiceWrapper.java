@@ -372,5 +372,10 @@ public class BookmarksFolderLocalServiceWrapper
 		return _bookmarksFolderLocalService;
 	}
 
+	public void setWrappedBookmarksFolderLocalService(
+		BookmarksFolderLocalService bookmarksFolderLocalService) {
+		_bookmarksFolderLocalService = bookmarksFolderLocalService;
+	}
+
 	private BookmarksFolderLocalService _bookmarksFolderLocalService;
 }

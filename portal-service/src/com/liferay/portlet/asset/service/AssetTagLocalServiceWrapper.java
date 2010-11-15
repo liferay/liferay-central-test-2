@@ -397,5 +397,10 @@ public class AssetTagLocalServiceWrapper implements AssetTagLocalService {
 		return _assetTagLocalService;
 	}
 
+	public void setWrappedAssetTagLocalService(
+		AssetTagLocalService assetTagLocalService) {
+		_assetTagLocalService = assetTagLocalService;
+	}
+
 	private AssetTagLocalService _assetTagLocalService;
 }

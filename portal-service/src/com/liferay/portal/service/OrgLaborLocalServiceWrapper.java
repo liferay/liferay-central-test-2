@@ -249,5 +249,10 @@ public class OrgLaborLocalServiceWrapper implements OrgLaborLocalService {
 		return _orgLaborLocalService;
 	}
 
+	public void setWrappedOrgLaborLocalService(
+		OrgLaborLocalService orgLaborLocalService) {
+		_orgLaborLocalService = orgLaborLocalService;
+	}
+
 	private OrgLaborLocalService _orgLaborLocalService;
 }

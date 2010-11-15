@@ -307,5 +307,9 @@ public class ImageLocalServiceWrapper implements ImageLocalService {
 		return _imageLocalService;
 	}
 
+	public void setWrappedImageLocalService(ImageLocalService imageLocalService) {
+		_imageLocalService = imageLocalService;
+	}
+
 	private ImageLocalService _imageLocalService;
 }

@@ -323,5 +323,10 @@ public class UserGroupLocalServiceWrapper implements UserGroupLocalService {
 		return _userGroupLocalService;
 	}
 
+	public void setWrappedUserGroupLocalService(
+		UserGroupLocalService userGroupLocalService) {
+		_userGroupLocalService = userGroupLocalService;
+	}
+
 	private UserGroupLocalService _userGroupLocalService;
 }

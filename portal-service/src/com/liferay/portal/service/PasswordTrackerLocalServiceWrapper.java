@@ -253,5 +253,10 @@ public class PasswordTrackerLocalServiceWrapper
 		return _passwordTrackerLocalService;
 	}
 
+	public void setWrappedPasswordTrackerLocalService(
+		PasswordTrackerLocalService passwordTrackerLocalService) {
+		_passwordTrackerLocalService = passwordTrackerLocalService;
+	}
+
 	private PasswordTrackerLocalService _passwordTrackerLocalService;
 }

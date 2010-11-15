@@ -477,5 +477,10 @@ public class SocialActivityLocalServiceWrapper
 		return _socialActivityLocalService;
 	}
 
+	public void setWrappedSocialActivityLocalService(
+		SocialActivityLocalService socialActivityLocalService) {
+		_socialActivityLocalService = socialActivityLocalService;
+	}
+
 	private SocialActivityLocalService _socialActivityLocalService;
 }

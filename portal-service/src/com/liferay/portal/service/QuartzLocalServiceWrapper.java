@@ -37,5 +37,10 @@ public class QuartzLocalServiceWrapper implements QuartzLocalService {
 		return _quartzLocalService;
 	}
 
+	public void setWrappedQuartzLocalService(
+		QuartzLocalService quartzLocalService) {
+		_quartzLocalService = quartzLocalService;
+	}
+
 	private QuartzLocalService _quartzLocalService;
 }

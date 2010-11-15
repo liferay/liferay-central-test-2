@@ -597,5 +597,10 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService {
 		return _layoutLocalService;
 	}
 
+	public void setWrappedLayoutLocalService(
+		LayoutLocalService layoutLocalService) {
+		_layoutLocalService = layoutLocalService;
+	}
+
 	private LayoutLocalService _layoutLocalService;
 }

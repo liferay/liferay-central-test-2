@@ -345,5 +345,10 @@ public class SCFrameworkVersionLocalServiceWrapper
 		return _scFrameworkVersionLocalService;
 	}
 
+	public void setWrappedSCFrameworkVersionLocalService(
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService) {
+		_scFrameworkVersionLocalService = scFrameworkVersionLocalService;
+	}
+
 	private SCFrameworkVersionLocalService _scFrameworkVersionLocalService;
 }

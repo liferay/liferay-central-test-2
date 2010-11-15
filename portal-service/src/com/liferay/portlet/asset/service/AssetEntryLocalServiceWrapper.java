@@ -428,5 +428,10 @@ public class AssetEntryLocalServiceWrapper implements AssetEntryLocalService {
 		return _assetEntryLocalService;
 	}
 
+	public void setWrappedAssetEntryLocalService(
+		AssetEntryLocalService assetEntryLocalService) {
+		_assetEntryLocalService = assetEntryLocalService;
+	}
+
 	private AssetEntryLocalService _assetEntryLocalService;
 }

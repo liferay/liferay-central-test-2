@@ -94,5 +94,10 @@ public class JournalFeedServiceWrapper implements JournalFeedService {
 		return _journalFeedService;
 	}
 
+	public void setWrappedJournalFeedService(
+		JournalFeedService journalFeedService) {
+		_journalFeedService = journalFeedService;
+	}
+
 	private JournalFeedService _journalFeedService;
 }

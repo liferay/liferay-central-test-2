@@ -52,5 +52,10 @@ public class TasksReviewServiceWrapper implements TasksReviewService {
 		return _tasksReviewService;
 	}
 
+	public void setWrappedTasksReviewService(
+		TasksReviewService tasksReviewService) {
+		_tasksReviewService = tasksReviewService;
+	}
+
 	private TasksReviewService _tasksReviewService;
 }

@@ -100,5 +100,10 @@ public class LayoutTemplateLocalServiceWrapper
 		return _layoutTemplateLocalService;
 	}
 
+	public void setWrappedLayoutTemplateLocalService(
+		LayoutTemplateLocalService layoutTemplateLocalService) {
+		_layoutTemplateLocalService = layoutTemplateLocalService;
+	}
+
 	private LayoutTemplateLocalService _layoutTemplateLocalService;
 }

@@ -38,5 +38,9 @@ public class ImageServiceWrapper implements ImageService {
 		return _imageService;
 	}
 
+	public void setWrappedImageService(ImageService imageService) {
+		_imageService = imageService;
+	}
+
 	private ImageService _imageService;
 }

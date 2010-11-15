@@ -46,5 +46,9 @@ public class MBBanServiceWrapper implements MBBanService {
 		return _mbBanService;
 	}
 
+	public void setWrappedMBBanService(MBBanService mbBanService) {
+		_mbBanService = mbBanService;
+	}
+
 	private MBBanService _mbBanService;
 }

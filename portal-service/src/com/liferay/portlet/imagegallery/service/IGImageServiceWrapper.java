@@ -130,5 +130,9 @@ public class IGImageServiceWrapper implements IGImageService {
 		return _igImageService;
 	}
 
+	public void setWrappedIGImageService(IGImageService igImageService) {
+		_igImageService = igImageService;
+	}
+
 	private IGImageService _igImageService;
 }

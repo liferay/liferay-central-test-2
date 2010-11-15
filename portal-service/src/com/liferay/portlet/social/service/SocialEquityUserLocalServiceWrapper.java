@@ -256,5 +256,10 @@ public class SocialEquityUserLocalServiceWrapper
 		return _socialEquityUserLocalService;
 	}
 
+	public void setWrappedSocialEquityUserLocalService(
+		SocialEquityUserLocalService socialEquityUserLocalService) {
+		_socialEquityUserLocalService = socialEquityUserLocalService;
+	}
+
 	private SocialEquityUserLocalService _socialEquityUserLocalService;
 }

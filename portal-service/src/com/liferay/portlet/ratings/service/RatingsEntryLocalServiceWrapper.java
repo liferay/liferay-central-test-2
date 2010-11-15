@@ -261,5 +261,10 @@ public class RatingsEntryLocalServiceWrapper implements RatingsEntryLocalService
 		return _ratingsEntryLocalService;
 	}
 
+	public void setWrappedRatingsEntryLocalService(
+		RatingsEntryLocalService ratingsEntryLocalService) {
+		_ratingsEntryLocalService = ratingsEntryLocalService;
+	}
+
 	private RatingsEntryLocalService _ratingsEntryLocalService;
 }

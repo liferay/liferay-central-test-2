@@ -246,5 +246,10 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService {
 		return _classNameLocalService;
 	}
 
+	public void setWrappedClassNameLocalService(
+		ClassNameLocalService classNameLocalService) {
+		_classNameLocalService = classNameLocalService;
+	}
+
 	private ClassNameLocalService _classNameLocalService;
 }

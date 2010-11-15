@@ -327,5 +327,10 @@ public class JournalContentSearchLocalServiceWrapper
 		return _journalContentSearchLocalService;
 	}
 
+	public void setWrappedJournalContentSearchLocalService(
+		JournalContentSearchLocalService journalContentSearchLocalService) {
+		_journalContentSearchLocalService = journalContentSearchLocalService;
+	}
+
 	private JournalContentSearchLocalService _journalContentSearchLocalService;
 }

@@ -32,5 +32,9 @@ public class ContactServiceWrapper implements ContactService {
 		return _contactService;
 	}
 
+	public void setWrappedContactService(ContactService contactService) {
+		_contactService = contactService;
+	}
+
 	private ContactService _contactService;
 }

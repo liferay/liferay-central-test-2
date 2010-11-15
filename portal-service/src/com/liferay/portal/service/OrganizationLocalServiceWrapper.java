@@ -532,5 +532,10 @@ public class OrganizationLocalServiceWrapper implements OrganizationLocalService
 		return _organizationLocalService;
 	}
 
+	public void setWrappedOrganizationLocalService(
+		OrganizationLocalService organizationLocalService) {
+		_organizationLocalService = organizationLocalService;
+	}
+
 	private OrganizationLocalService _organizationLocalService;
 }

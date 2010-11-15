@@ -147,5 +147,9 @@ public class MBCategoryServiceWrapper implements MBCategoryService {
 		return _mbCategoryService;
 	}
 
+	public void setWrappedMBCategoryService(MBCategoryService mbCategoryService) {
+		_mbCategoryService = mbCategoryService;
+	}
+
 	private MBCategoryService _mbCategoryService;
 }

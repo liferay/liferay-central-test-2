@@ -192,5 +192,10 @@ public class OrganizationServiceWrapper implements OrganizationService {
 		return _organizationService;
 	}
 
+	public void setWrappedOrganizationService(
+		OrganizationService organizationService) {
+		_organizationService = organizationService;
+	}
+
 	private OrganizationService _organizationService;
 }

@@ -328,5 +328,10 @@ public class PortletPreferencesLocalServiceWrapper
 		return _portletPreferencesLocalService;
 	}
 
+	public void setWrappedPortletPreferencesLocalService(
+		PortletPreferencesLocalService portletPreferencesLocalService) {
+		_portletPreferencesLocalService = portletPreferencesLocalService;
+	}
+
 	private PortletPreferencesLocalService _portletPreferencesLocalService;
 }

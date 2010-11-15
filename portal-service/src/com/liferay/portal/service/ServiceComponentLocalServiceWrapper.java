@@ -264,5 +264,10 @@ public class ServiceComponentLocalServiceWrapper
 		return _serviceComponentLocalService;
 	}
 
+	public void setWrappedServiceComponentLocalService(
+		ServiceComponentLocalService serviceComponentLocalService) {
+		_serviceComponentLocalService = serviceComponentLocalService;
+	}
+
 	private ServiceComponentLocalService _serviceComponentLocalService;
 }

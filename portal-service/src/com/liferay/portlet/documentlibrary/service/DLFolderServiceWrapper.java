@@ -243,5 +243,9 @@ public class DLFolderServiceWrapper implements DLFolderService {
 		return _dlFolderService;
 	}
 
+	public void setWrappedDLFolderService(DLFolderService dlFolderService) {
+		_dlFolderService = dlFolderService;
+	}
+
 	private DLFolderService _dlFolderService;
 }

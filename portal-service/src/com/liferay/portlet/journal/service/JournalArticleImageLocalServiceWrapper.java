@@ -294,5 +294,10 @@ public class JournalArticleImageLocalServiceWrapper
 		return _journalArticleImageLocalService;
 	}
 
+	public void setWrappedJournalArticleImageLocalService(
+		JournalArticleImageLocalService journalArticleImageLocalService) {
+		_journalArticleImageLocalService = journalArticleImageLocalService;
+	}
+
 	private JournalArticleImageLocalService _journalArticleImageLocalService;
 }

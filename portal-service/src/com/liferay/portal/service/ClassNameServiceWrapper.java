@@ -52,5 +52,9 @@ public class ClassNameServiceWrapper implements ClassNameService {
 		return _classNameService;
 	}
 
+	public void setWrappedClassNameService(ClassNameService classNameService) {
+		_classNameService = classNameService;
+	}
+
 	private ClassNameService _classNameService;
 }

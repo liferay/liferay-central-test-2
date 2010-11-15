@@ -264,5 +264,10 @@ public class PortletItemLocalServiceWrapper implements PortletItemLocalService {
 		return _portletItemLocalService;
 	}
 
+	public void setWrappedPortletItemLocalService(
+		PortletItemLocalService portletItemLocalService) {
+		_portletItemLocalService = portletItemLocalService;
+	}
+
 	private PortletItemLocalService _portletItemLocalService;
 }

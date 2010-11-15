@@ -265,5 +265,10 @@ public class DLFileRankLocalServiceWrapper implements DLFileRankLocalService {
 		return _dlFileRankLocalService;
 	}
 
+	public void setWrappedDLFileRankLocalService(
+		DLFileRankLocalService dlFileRankLocalService) {
+		_dlFileRankLocalService = dlFileRankLocalService;
+	}
+
 	private DLFileRankLocalService _dlFileRankLocalService;
 }

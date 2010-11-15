@@ -76,5 +76,9 @@ public class CountryServiceWrapper implements CountryService {
 		return _countryService;
 	}
 
+	public void setWrappedCountryService(CountryService countryService) {
+		_countryService = countryService;
+	}
+
 	private CountryService _countryService;
 }

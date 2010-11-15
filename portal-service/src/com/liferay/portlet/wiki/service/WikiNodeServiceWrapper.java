@@ -88,5 +88,9 @@ public class WikiNodeServiceWrapper implements WikiNodeService {
 		return _wikiNodeService;
 	}
 
+	public void setWrappedWikiNodeService(WikiNodeService wikiNodeService) {
+		_wikiNodeService = wikiNodeService;
+	}
+
 	private WikiNodeService _wikiNodeService;
 }

@@ -45,5 +45,10 @@ public class MBMessageFlagServiceWrapper implements MBMessageFlagService {
 		return _mbMessageFlagService;
 	}
 
+	public void setWrappedMBMessageFlagService(
+		MBMessageFlagService mbMessageFlagService) {
+		_mbMessageFlagService = mbMessageFlagService;
+	}
+
 	private MBMessageFlagService _mbMessageFlagService;
 }

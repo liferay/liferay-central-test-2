@@ -45,5 +45,10 @@ public class RatingsEntryServiceWrapper implements RatingsEntryService {
 		return _ratingsEntryService;
 	}
 
+	public void setWrappedRatingsEntryService(
+		RatingsEntryService ratingsEntryService) {
+		_ratingsEntryService = ratingsEntryService;
+	}
+
 	private RatingsEntryService _ratingsEntryService;
 }

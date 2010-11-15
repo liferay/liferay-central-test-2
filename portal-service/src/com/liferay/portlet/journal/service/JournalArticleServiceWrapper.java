@@ -232,5 +232,10 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 		return _journalArticleService;
 	}
 
+	public void setWrappedJournalArticleService(
+		JournalArticleService journalArticleService) {
+		_journalArticleService = journalArticleService;
+	}
+
 	private JournalArticleService _journalArticleService;
 }

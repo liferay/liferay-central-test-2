@@ -124,5 +124,9 @@ public class RoleServiceWrapper implements RoleService {
 		return _roleService;
 	}
 
+	public void setWrappedRoleService(RoleService roleService) {
+		_roleService = roleService;
+	}
+
 	private RoleService _roleService;
 }

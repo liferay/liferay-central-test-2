@@ -410,5 +410,10 @@ public class JournalStructureLocalServiceWrapper
 		return _journalStructureLocalService;
 	}
 
+	public void setWrappedJournalStructureLocalService(
+		JournalStructureLocalService journalStructureLocalService) {
+		_journalStructureLocalService = journalStructureLocalService;
+	}
+
 	private JournalStructureLocalService _journalStructureLocalService;
 }

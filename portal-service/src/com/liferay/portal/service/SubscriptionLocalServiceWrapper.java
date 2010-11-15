@@ -287,5 +287,10 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 		return _subscriptionLocalService;
 	}
 
+	public void setWrappedSubscriptionLocalService(
+		SubscriptionLocalService subscriptionLocalService) {
+		_subscriptionLocalService = subscriptionLocalService;
+	}
+
 	private SubscriptionLocalService _subscriptionLocalService;
 }

@@ -77,5 +77,10 @@ public class PollsQuestionServiceWrapper implements PollsQuestionService {
 		return _pollsQuestionService;
 	}
 
+	public void setWrappedPollsQuestionService(
+		PollsQuestionService pollsQuestionService) {
+		_pollsQuestionService = pollsQuestionService;
+	}
+
 	private PollsQuestionService _pollsQuestionService;
 }

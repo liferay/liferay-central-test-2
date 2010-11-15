@@ -404,5 +404,10 @@ public class ShoppingOrderLocalServiceWrapper
 		return _shoppingOrderLocalService;
 	}
 
+	public void setWrappedShoppingOrderLocalService(
+		ShoppingOrderLocalService shoppingOrderLocalService) {
+		_shoppingOrderLocalService = shoppingOrderLocalService;
+	}
+
 	private ShoppingOrderLocalService _shoppingOrderLocalService;
 }

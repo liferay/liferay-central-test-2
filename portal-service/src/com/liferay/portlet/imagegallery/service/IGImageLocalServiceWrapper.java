@@ -482,5 +482,10 @@ public class IGImageLocalServiceWrapper implements IGImageLocalService {
 		return _igImageLocalService;
 	}
 
+	public void setWrappedIGImageLocalService(
+		IGImageLocalService igImageLocalService) {
+		_igImageLocalService = igImageLocalService;
+	}
+
 	private IGImageLocalService _igImageLocalService;
 }

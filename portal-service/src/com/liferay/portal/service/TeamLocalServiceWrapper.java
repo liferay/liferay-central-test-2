@@ -277,5 +277,9 @@ public class TeamLocalServiceWrapper implements TeamLocalService {
 		return _teamLocalService;
 	}
 
+	public void setWrappedTeamLocalService(TeamLocalService teamLocalService) {
+		_teamLocalService = teamLocalService;
+	}
+
 	private TeamLocalService _teamLocalService;
 }

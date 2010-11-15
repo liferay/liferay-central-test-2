@@ -358,5 +358,10 @@ public class ShoppingCategoryLocalServiceWrapper
 		return _shoppingCategoryLocalService;
 	}
 
+	public void setWrappedShoppingCategoryLocalService(
+		ShoppingCategoryLocalService shoppingCategoryLocalService) {
+		_shoppingCategoryLocalService = shoppingCategoryLocalService;
+	}
+
 	private ShoppingCategoryLocalService _shoppingCategoryLocalService;
 }

@@ -453,5 +453,10 @@ public class JournalTemplateLocalServiceWrapper
 		return _journalTemplateLocalService;
 	}
 
+	public void setWrappedJournalTemplateLocalService(
+		JournalTemplateLocalService journalTemplateLocalService) {
+		_journalTemplateLocalService = journalTemplateLocalService;
+	}
+
 	private JournalTemplateLocalService _journalTemplateLocalService;
 }

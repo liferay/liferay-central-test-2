@@ -42,5 +42,10 @@ public class PluginSettingServiceWrapper implements PluginSettingService {
 		return _pluginSettingService;
 	}
 
+	public void setWrappedPluginSettingService(
+		PluginSettingService pluginSettingService) {
+		_pluginSettingService = pluginSettingService;
+	}
+
 	private PluginSettingService _pluginSettingService;
 }

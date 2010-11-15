@@ -86,5 +86,10 @@ public class SCProductVersionServiceWrapper implements SCProductVersionService {
 		return _scProductVersionService;
 	}
 
+	public void setWrappedSCProductVersionService(
+		SCProductVersionService scProductVersionService) {
+		_scProductVersionService = scProductVersionService;
+	}
+
 	private SCProductVersionService _scProductVersionService;
 }

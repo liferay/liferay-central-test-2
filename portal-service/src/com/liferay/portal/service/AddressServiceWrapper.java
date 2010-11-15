@@ -73,5 +73,9 @@ public class AddressServiceWrapper implements AddressService {
 		return _addressService;
 	}
 
+	public void setWrappedAddressService(AddressService addressService) {
+		_addressService = addressService;
+	}
+
 	private AddressService _addressService;
 }

@@ -66,5 +66,10 @@ public class LayoutSetBranchServiceWrapper implements LayoutSetBranchService {
 		return _layoutSetBranchService;
 	}
 
+	public void setWrappedLayoutSetBranchService(
+		LayoutSetBranchService layoutSetBranchService) {
+		_layoutSetBranchService = layoutSetBranchService;
+	}
+
 	private LayoutSetBranchService _layoutSetBranchService;
 }

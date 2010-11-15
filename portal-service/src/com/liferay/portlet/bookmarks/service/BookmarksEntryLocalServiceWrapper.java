@@ -397,5 +397,10 @@ public class BookmarksEntryLocalServiceWrapper
 		return _bookmarksEntryLocalService;
 	}
 
+	public void setWrappedBookmarksEntryLocalService(
+		BookmarksEntryLocalService bookmarksEntryLocalService) {
+		_bookmarksEntryLocalService = bookmarksEntryLocalService;
+	}
+
 	private BookmarksEntryLocalService _bookmarksEntryLocalService;
 }

@@ -69,5 +69,9 @@ public class PhoneServiceWrapper implements PhoneService {
 		return _phoneService;
 	}
 
+	public void setWrappedPhoneService(PhoneService phoneService) {
+		_phoneService = phoneService;
+	}
+
 	private PhoneService _phoneService;
 }

@@ -296,5 +296,10 @@ public class AssetTagPropertyLocalServiceWrapper
 		return _assetTagPropertyLocalService;
 	}
 
+	public void setWrappedAssetTagPropertyLocalService(
+		AssetTagPropertyLocalService assetTagPropertyLocalService) {
+		_assetTagPropertyLocalService = assetTagPropertyLocalService;
+	}
+
 	private AssetTagPropertyLocalService _assetTagPropertyLocalService;
 }

@@ -67,5 +67,10 @@ public class ShoppingCategoryServiceWrapper implements ShoppingCategoryService {
 		return _shoppingCategoryService;
 	}
 
+	public void setWrappedShoppingCategoryService(
+		ShoppingCategoryService shoppingCategoryService) {
+		_shoppingCategoryService = shoppingCategoryService;
+	}
+
 	private ShoppingCategoryService _shoppingCategoryService;
 }

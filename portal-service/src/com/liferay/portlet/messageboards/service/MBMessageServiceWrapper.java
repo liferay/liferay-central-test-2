@@ -224,5 +224,9 @@ public class MBMessageServiceWrapper implements MBMessageService {
 		return _mbMessageService;
 	}
 
+	public void setWrappedMBMessageService(MBMessageService mbMessageService) {
+		_mbMessageService = mbMessageService;
+	}
+
 	private MBMessageService _mbMessageService;
 }

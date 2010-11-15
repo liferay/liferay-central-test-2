@@ -61,5 +61,10 @@ public class MembershipRequestServiceWrapper implements MembershipRequestService
 		return _membershipRequestService;
 	}
 
+	public void setWrappedMembershipRequestService(
+		MembershipRequestService membershipRequestService) {
+		_membershipRequestService = membershipRequestService;
+	}
+
 	private MembershipRequestService _membershipRequestService;
 }

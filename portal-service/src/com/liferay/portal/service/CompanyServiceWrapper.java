@@ -158,5 +158,9 @@ public class CompanyServiceWrapper implements CompanyService {
 		return _companyService;
 	}
 
+	public void setWrappedCompanyService(CompanyService companyService) {
+		_companyService = companyService;
+	}
+
 	private CompanyService _companyService;
 }

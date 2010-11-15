@@ -260,5 +260,10 @@ public class LayoutPrototypeLocalServiceWrapper
 		return _layoutPrototypeLocalService;
 	}
 
+	public void setWrappedLayoutPrototypeLocalService(
+		LayoutPrototypeLocalService layoutPrototypeLocalService) {
+		_layoutPrototypeLocalService = layoutPrototypeLocalService;
+	}
+
 	private LayoutPrototypeLocalService _layoutPrototypeLocalService;
 }

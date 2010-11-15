@@ -244,5 +244,10 @@ public class ResourceCodeLocalServiceWrapper implements ResourceCodeLocalService
 		return _resourceCodeLocalService;
 	}
 
+	public void setWrappedResourceCodeLocalService(
+		ResourceCodeLocalService resourceCodeLocalService) {
+		_resourceCodeLocalService = resourceCodeLocalService;
+	}
+
 	private ResourceCodeLocalService _resourceCodeLocalService;
 }

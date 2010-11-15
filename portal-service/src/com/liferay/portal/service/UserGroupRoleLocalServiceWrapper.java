@@ -328,5 +328,10 @@ public class UserGroupRoleLocalServiceWrapper
 		return _userGroupRoleLocalService;
 	}
 
+	public void setWrappedUserGroupRoleLocalService(
+		UserGroupRoleLocalService userGroupRoleLocalService) {
+		_userGroupRoleLocalService = userGroupRoleLocalService;
+	}
+
 	private UserGroupRoleLocalService _userGroupRoleLocalService;
 }

@@ -252,5 +252,10 @@ public class AnnouncementsFlagLocalServiceWrapper
 		return _announcementsFlagLocalService;
 	}
 
+	public void setWrappedAnnouncementsFlagLocalService(
+		AnnouncementsFlagLocalService announcementsFlagLocalService) {
+		_announcementsFlagLocalService = announcementsFlagLocalService;
+	}
+
 	private AnnouncementsFlagLocalService _announcementsFlagLocalService;
 }

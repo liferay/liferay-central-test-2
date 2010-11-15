@@ -75,5 +75,10 @@ public class SCProductEntryServiceWrapper implements SCProductEntryService {
 		return _scProductEntryService;
 	}
 
+	public void setWrappedSCProductEntryService(
+		SCProductEntryService scProductEntryService) {
+		_scProductEntryService = scProductEntryService;
+	}
+
 	private SCProductEntryService _scProductEntryService;
 }

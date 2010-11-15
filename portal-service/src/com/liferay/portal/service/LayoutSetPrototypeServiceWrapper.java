@@ -74,5 +74,10 @@ public class LayoutSetPrototypeServiceWrapper
 		return _layoutSetPrototypeService;
 	}
 
+	public void setWrappedLayoutSetPrototypeService(
+		LayoutSetPrototypeService layoutSetPrototypeService) {
+		_layoutSetPrototypeService = layoutSetPrototypeService;
+	}
+
 	private LayoutSetPrototypeService _layoutSetPrototypeService;
 }

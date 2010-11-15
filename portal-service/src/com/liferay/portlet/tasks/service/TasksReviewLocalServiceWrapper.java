@@ -308,5 +308,10 @@ public class TasksReviewLocalServiceWrapper implements TasksReviewLocalService {
 		return _tasksReviewLocalService;
 	}
 
+	public void setWrappedTasksReviewLocalService(
+		TasksReviewLocalService tasksReviewLocalService) {
+		_tasksReviewLocalService = tasksReviewLocalService;
+	}
+
 	private TasksReviewLocalService _tasksReviewLocalService;
 }

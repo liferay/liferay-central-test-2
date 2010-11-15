@@ -355,5 +355,10 @@ public class PollsQuestionLocalServiceWrapper
 		return _pollsQuestionLocalService;
 	}
 
+	public void setWrappedPollsQuestionLocalService(
+		PollsQuestionLocalService pollsQuestionLocalService) {
+		_pollsQuestionLocalService = pollsQuestionLocalService;
+	}
+
 	private PollsQuestionLocalService _pollsQuestionLocalService;
 }
