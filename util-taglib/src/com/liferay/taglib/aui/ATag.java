@@ -68,14 +68,6 @@ public class ATag extends IncludeTag {
 		_target = StringPool.BLANK;
 	}
 
-	protected boolean isCleanUpSetAttributes() {
-		return _CLEAN_UP_SET_ATTRIBUTES;
-	}
-
-	protected boolean isTrimNewLines() {
-		return _TRIM_NEW_LINES;
-	}
-
 	protected int processEndTag() throws Exception {
 		JspWriter jspWriter = pageContext.getOut();
 
@@ -171,16 +163,6 @@ public class ATag extends IncludeTag {
 		return EVAL_BODY_INCLUDE;
 	}
 
-	protected void setAttributes(HttpServletRequest request) {
-		request.setAttribute("aui:a:cssClass", _cssClass);
-		request.setAttribute("aui:a:dynamicAttributes", getDynamicAttributes());
-		request.setAttribute("aui:a:href", _href);
-		request.setAttribute("aui:a:id", _id);
-		request.setAttribute("aui:a:label", _label);
-		request.setAttribute("aui:a:lang", _lang);
-		request.setAttribute("aui:a:target", _target);
-	}
-
 	private String _getNamespace() {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
@@ -199,10 +181,6 @@ public class ATag extends IncludeTag {
 
 		return namespace;
 	}
-
-	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
-
-	private static final boolean _TRIM_NEW_LINES = true;
 
 	private String _cssClass = StringPool.BLANK;
 	private String _href = StringPool.BLANK;
