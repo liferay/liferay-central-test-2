@@ -1789,6 +1789,18 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		JournalStructure existingStructure = null;
 
+		Map<String, String> structureIds =
+			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
+				JournalStructure.class);
+
+		String parentStructureId = structure.getParentStructureId();
+
+		String newParentStructureId = structureIds.get(parentStructureId);
+
+		if (Validator.isNotNull(newParentStructureId)) {
+			parentStructureId = newParentStructureId;
+		}
+
 		if (portletDataContext.isDataStrategyMirror()) {
 			existingStructure = JournalStructureUtil.fetchByUUID_G(
 				structure.getUuid(), portletDataContext.getScopeGroupId());
@@ -1800,7 +1812,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					JournalStructureLocalServiceUtil.addStructure(
 						userId, portletDataContext.getScopeGroupId(),
 						structureId, autoStructureId,
-						structure.getParentStructureId(), structure.getName(),
+						parentStructureId, structure.getName(),
 						structure.getDescription(), structure.getXsd(),
 						serviceContext);
 			}
@@ -1809,7 +1821,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					JournalStructureLocalServiceUtil.updateStructure(
 						existingStructure.getGroupId(),
 						existingStructure.getStructureId(),
-						structure.getParentStructureId(), structure.getName(),
+						parentStructureId, structure.getName(),
 						structure.getDescription(), structure.getXsd(),
 						serviceContext);
 			}
@@ -1817,14 +1829,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		else {
 			existingStructure = JournalStructureLocalServiceUtil.addStructure(
 				userId, portletDataContext.getScopeGroupId(), structureId,
-				autoStructureId, structure.getParentStructureId(),
+				autoStructureId, parentStructureId,
 				structure.getName(), structure.getDescription(),
 				structure.getXsd(), serviceContext);
 		}
-
-		Map<String, String> structureIds =
-			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
-				JournalStructure.class);
 
 		structureIds.put(structureId, existingStructure.getStructureId());
 
