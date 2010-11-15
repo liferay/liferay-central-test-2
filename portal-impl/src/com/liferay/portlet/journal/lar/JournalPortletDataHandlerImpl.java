@@ -512,9 +512,28 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
+		feed = (JournalFeed)feed.clone();
+
 		Element feedElement = feedsElement.addElement("feed");
 
 		feedElement.addAttribute("path", path);
+
+		Group group = GroupLocalServiceUtil.getGroup(
+			portletDataContext.getScopeGroupId());
+
+		String newGroupFriendlyURL = group.getFriendlyURL().substring(1);
+
+		String[] friendlyUrlParts = StringUtil.split(
+			feed.getTargetLayoutFriendlyUrl(), "/");
+
+		String oldGroupFriendlyURL = friendlyUrlParts[2];
+
+		if (newGroupFriendlyURL.equals(oldGroupFriendlyURL)) {
+			feed.setTargetLayoutFriendlyUrl(
+				StringUtil.replace(
+					feed.getTargetLayoutFriendlyUrl(), newGroupFriendlyURL,
+					"@data_handler_group_friendly_url@"));
+		}
 
 		feed.setUserUuid(feed.getUserUuid());
 
@@ -1534,6 +1553,24 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			path);
 
 		long userId = portletDataContext.getUserId(feed.getUserUuid());
+		long groupId = portletDataContext.getScopeGroupId();
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		String newGroupFriendlyURL = group.getFriendlyURL().substring(1);
+
+		String[] friendlyUrlParts = StringUtil.split(
+			feed.getTargetLayoutFriendlyUrl(), "/");
+
+		String oldGroupFriendlyURL = friendlyUrlParts[2];
+
+		if (oldGroupFriendlyURL.equals("@data_handler_group_friendly_url@")) {
+			feed.setTargetLayoutFriendlyUrl(
+				StringUtil.replace(
+					feed.getTargetLayoutFriendlyUrl(),
+					"@data_handler_group_friendly_url@",
+					newGroupFriendlyURL));
+		}
 
 		String feedId = feed.getFeedId();
 		boolean autoFeedId = false;
