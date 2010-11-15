@@ -71,6 +71,10 @@ public class ${entity.name}${sessionTypeName}ServiceWrapper implements ${entity.
 		return _${entity.varName}${sessionTypeName}Service;
 	}
 
+	public void setWrapped${entity.name}${sessionTypeName}Service(${entity.name}${sessionTypeName}Service ${entity.varName}${sessionTypeName}Service) {
+		_${entity.varName}${sessionTypeName}Service = ${entity.varName}${sessionTypeName}Service;
+	}
+
 	private ${entity.name}${sessionTypeName}Service _${entity.varName}${sessionTypeName}Service;
 
 }
