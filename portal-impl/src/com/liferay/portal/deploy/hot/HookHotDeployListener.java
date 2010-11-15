@@ -359,22 +359,30 @@ public class HookHotDeployListener
 	}
 
 	protected void destroyServices(String servletContextName) throws Exception {
-		List<ServiceBag> serviceBags =
-			_servicesContainer.findByServletContextName(servletContextName);
+		Map<String, ServiceBag> serviceBags = _servicesContainer._serviceBags;
 
-		for (ServiceBag serviceBag : serviceBags) {
-			Object serviceProxy = PortalBeanLocatorUtil.locate(
-				serviceBag.getServiceType());
+		for (Map.Entry<String, ServiceBag> entry : serviceBags.entrySet()) {
+			String serviceType = entry.getKey();
+			ServiceBag serviceBag = entry.getValue();
+
+			Map<String, List<ServiceConstructor>> serviceConstructors =
+				serviceBag._serviceConstructors;
+
+			if (serviceConstructors.remove(servletContextName) == null) {
+				continue;
+			}
+
+			Object serviceProxy = PortalBeanLocatorUtil.locate(serviceType);
 
 			AdvisedSupport advisedSupport = getAdvisedSupport(serviceProxy);
 
-			TargetSource originalTargetSource = new SingletonTargetSource(
-				serviceBag.getOriginalService());
+			Object previousService = serviceBag.getCustomService();
 
-			advisedSupport.setTargetSource(originalTargetSource);
+			TargetSource previousTargetSource = new SingletonTargetSource(
+				previousService);
+
+			advisedSupport.setTargetSource(previousTargetSource);
 		}
-
-		_servicesContainer.removeByServletContextName(servletContextName);
 	}
 
 	protected void doInvokeDeploy(HotDeployEvent event) throws Exception {
@@ -1365,47 +1373,38 @@ public class HookHotDeployListener
 			Constructor<?> serviceImplConstructor, Object serviceProxy)
 		throws Exception {
 
-		ServiceBag serviceBag = _servicesContainer.findByServiceType(
-			serviceType);
-
-		if (serviceBag != null) {
-			throw new IllegalStateException(
-				serviceType + " is already overridden by " +
-					serviceBag.getServletContextName());
-		}
-
 		AdvisedSupport advisedSupport = getAdvisedSupport(serviceProxy);
 
 		TargetSource targetSource = advisedSupport.getTargetSource();
 
-		Object originalService = targetSource.getTarget();
+		Object previousService = targetSource.getTarget();
 
-		if (Proxy.isProxyClass(originalService.getClass())) {
+		if (Proxy.isProxyClass(previousService.getClass())) {
 			InvocationHandler invocationHandler =
-				Proxy.getInvocationHandler(originalService);
+				Proxy.getInvocationHandler(previousService);
 
 			if (invocationHandler instanceof ClassLoaderBeanHandler) {
 				ClassLoaderBeanHandler classLoaderBeanHandler =
 					(ClassLoaderBeanHandler)invocationHandler;
 
-				originalService = classLoaderBeanHandler.getBean();
+				previousService = classLoaderBeanHandler.getBean();
 			}
 		}
 
-		Object customService = serviceImplConstructor.newInstance(
-			originalService);
+		Object nextService = serviceImplConstructor.newInstance(
+			previousService);
 
-		Object customTarget = Proxy.newProxyInstance(
+		Object nextTarget = Proxy.newProxyInstance(
 			portletClassLoader, new Class<?>[] {serviceTypeClass},
-			new ClassLoaderBeanHandler(customService, portletClassLoader));
+			new ClassLoaderBeanHandler(nextService, portletClassLoader));
 
-		TargetSource customTargetSource = new SingletonTargetSource(
-			customTarget);
+		TargetSource nextTargetSource = new SingletonTargetSource(nextTarget);
 
-		advisedSupport.setTargetSource(customTargetSource);
+		advisedSupport.setTargetSource(nextTargetSource);
 
 		_servicesContainer.addServiceBag(
-			servletContextName, serviceType, originalService);
+			servletContextName, portletClassLoader, serviceType,
+			serviceTypeClass, serviceImplConstructor, previousService);
 	}
 
 	protected void resetPortalProperties(
@@ -1970,88 +1969,107 @@ public class HookHotDeployListener
 
 	private class ServiceBag {
 
-		public ServiceBag(
-			String servletContextName, String serviceType,
-			Object originalService) {
-
-			_servletContextName = servletContextName;
-			_serviceType = serviceType;
+		public ServiceBag(Object originalService) {
 			_originalService = originalService;
 		}
 
-		public Object getOriginalService() {
-			return _originalService;
+		public void addCustomServiceConstructor(
+			String servletContextName, ClassLoader portletClassLoader,
+			Class<?> serviceTypeClass, Constructor<?> serviceImplConstructor) {
+
+			List<ServiceConstructor> serviceConstructors =
+				_serviceConstructors.get(servletContextName);
+
+			if (serviceConstructors == null) {
+				serviceConstructors = new ArrayList<ServiceConstructor>();
+
+				_serviceConstructors.put(
+					servletContextName, serviceConstructors);
+			}
+
+			ServiceConstructor serviceConstructor = new ServiceConstructor(
+				portletClassLoader, serviceTypeClass, serviceImplConstructor);
+
+			serviceConstructors.add(serviceConstructor);
 		}
 
-		public String getServiceType() {
-			return _serviceType;
-		}
+		public Object getCustomService() throws Exception {
+			List<ServiceConstructor> serviceConstructors =
+				new ArrayList<ServiceConstructor>();
 
-		public String getServletContextName() {
-			return _servletContextName;
+			for (Map.Entry<String, List<ServiceConstructor>> entry :
+					_serviceConstructors.entrySet()) {
+
+				serviceConstructors.addAll(entry.getValue());
+			}
+
+			Object customService = _originalService;
+
+			for (ServiceConstructor serviceConstructor : serviceConstructors) {
+				ClassLoader portletClassLoader =
+					serviceConstructor._portletClassLoader;
+				Class<?> serviceTypeClass =
+					serviceConstructor._serviceTypeClass;
+				Constructor<?> serviceImplConstructor =
+					serviceConstructor._serviceImplConstructor;
+
+				customService = serviceImplConstructor.newInstance(
+					customService);
+
+				customService = Proxy.newProxyInstance(
+					portletClassLoader, new Class<?>[] {serviceTypeClass},
+					new ClassLoaderBeanHandler(
+						customService, portletClassLoader));
+			}
+
+			return customService;
 		}
 
 		private Object _originalService;
-		private String _serviceType;
-		private String _servletContextName;
+		private Map<String, List<ServiceConstructor>> _serviceConstructors =
+			new HashMap<String, List<ServiceConstructor>>();
+
+	}
+
+	private class ServiceConstructor {
+
+		public ServiceConstructor(
+			ClassLoader portletClassLoader, Class<?> serviceTypeClass,
+			Constructor<?> serviceImplConstructor) {
+
+			_portletClassLoader = portletClassLoader;
+			_serviceTypeClass = serviceTypeClass;
+			_serviceImplConstructor = serviceImplConstructor;
+		}
+
+		private ClassLoader _portletClassLoader;
+		private Constructor<?> _serviceImplConstructor;
+		private Class<?> _serviceTypeClass;
 
 	}
 
 	private class ServicesContainer {
 
 		public void addServiceBag(
-			String servletContextName, String serviceType,
-			Object originalService) {
+			String servletContextName, ClassLoader portletClassLoader,
+			String serviceType, Class<?> serviceTypeClass,
+			Constructor<?> serviceImplConstructor, Object wrappedService) {
 
-			ServiceBag serviceBag = new ServiceBag(
-				servletContextName, serviceType, originalService);
+			ServiceBag serviceBag = _serviceBags.get(serviceType);
 
-			_serviceBags.add(serviceBag);
-		}
+			if (serviceBag == null) {
+				serviceBag = new ServiceBag(wrappedService);
 
-		public ServiceBag findByServiceType(String serviceType) {
-			for (ServiceBag serviceBag : _serviceBags) {
-				if (serviceBag.getServiceType().equals(serviceType)) {
-					return serviceBag;
-				}
+				_serviceBags.put(serviceType, serviceBag);
 			}
 
-			return null;
+			serviceBag.addCustomServiceConstructor(
+				servletContextName, portletClassLoader, serviceTypeClass,
+				serviceImplConstructor);
 		}
 
-		public List<ServiceBag> findByServletContextName(
-			String servletContextName) {
-
-			List<ServiceBag> serviceBags = new ArrayList<ServiceBag>();
-
-			for (ServiceBag serviceBag : _serviceBags) {
-				if (serviceBag.getServletContextName().equals(
-						servletContextName)) {
-
-					serviceBags.add(serviceBag);
-				}
-			}
-
-			return serviceBags;
-		}
-
-		public void removeByServletContextName(
-			String servletContextName) {
-
-			Iterator<ServiceBag> itr = _serviceBags.iterator();
-
-			while (itr.hasNext()) {
-				ServiceBag serviceBag = itr.next();
-
-				if (serviceBag.getServletContextName().equals(
-						servletContextName)) {
-
-					itr.remove();
-				}
-			}
-		}
-
-		private List<ServiceBag> _serviceBags = new ArrayList<ServiceBag>();
+		private Map<String, ServiceBag> _serviceBags =
+			new HashMap<String, ServiceBag>();
 
 	}
 
