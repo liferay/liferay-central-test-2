@@ -62,9 +62,6 @@
 	<bean id="destination.message_boards_mailing_list" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/message_boards_mailing_list" />
 	</bean>
-	<bean id="destination.model_events" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<property name="name" value="liferay/model_events" />
-	</bean>
 	<bean id="destination.wiki" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/wiki" />
 	</bean>
@@ -129,7 +126,6 @@
 				<ref bean="destination.live_users" />
 				<ref bean="destination.message_boards" />
 				<ref bean="destination.message_boards_mailing_list" />
-				<ref bean="destination.model_events" />
 				<ref bean="destination.wiki" />
 			</list>
 		</property>
