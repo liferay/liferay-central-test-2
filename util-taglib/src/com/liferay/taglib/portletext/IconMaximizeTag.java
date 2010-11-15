@@ -14,18 +14,31 @@
 
 package com.liferay.taglib.portletext;
 
+import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.taglib.ui.IconTag;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class IconMaximizeTag extends IconTag {
 
 	protected String getPage() {
-		return _PAGE;
-	}
+		PortletDisplay portletDisplay =
+			(PortletDisplay)pageContext.getAttribute("portletDisplay");
 
-	private static final String _PAGE =
-		"/html/taglib/portlet/icon_maximize/page.jsp";
+		if (!portletDisplay.isShowMaxIcon()) {
+			return null;
+		}
+
+		setCssClass("portlet-maximize portlet-maximize-icon");
+		setImage("../portlet/maximize");
+		setMessage("maximize");
+		setMethod("get");
+		setToolTip(false);
+		setUrl(portletDisplay.getURLMax());
+
+		return super.getPage();
+	}
 
 }

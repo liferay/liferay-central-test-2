@@ -15,20 +15,28 @@
 package com.liferay.taglib.portletext;
 
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.theme.PortletDisplay;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.taglib.ui.IconTag;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class IconPortletTag extends IconTag {
 
 	protected void cleanUp() {
+		super.cleanUp();
+
 		_portlet = null;
 	}
 
 	protected void setAttributes(HttpServletRequest request) {
+		super.setAttributes(request);
+
 		request.setAttribute("liferay-portlet:icon_portlet:portlet", _portlet);
 	}
 
@@ -37,11 +45,35 @@ public class IconPortletTag extends IconTag {
 	}
 
 	protected String getPage() {
-		return _PAGE;
-	}
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)pageContext.getAttribute("themeDisplay");
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-	private static final String _PAGE =
-		"/html/taglib/portlet/icon_portlet/page.jsp";
+		boolean showPortletIcon = true;
+		String message = null;
+		String src = null;
+
+		if (_portlet != null) {
+			message = PortalUtil.getPortletTitle(
+				_portlet, pageContext.getServletContext(),
+				themeDisplay.getLocale());
+			src = _portlet.getStaticResourcePath().concat(_portlet.getIcon());
+		}
+		else {
+			showPortletIcon = portletDisplay.isShowPortletIcon();
+			message = portletDisplay.getTitle();
+			src = portletDisplay.getURLPortlet();
+		}
+
+		if (!showPortletIcon) {
+			return null;
+		}
+
+		setMessage(message);
+		setSrc(src);
+
+		return super.getPage();
+	}
 
 	private Portlet _portlet;
 

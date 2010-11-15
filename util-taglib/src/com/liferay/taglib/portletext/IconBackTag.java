@@ -14,18 +14,30 @@
 
 package com.liferay.taglib.portletext;
 
+import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.taglib.ui.IconTag;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class IconBackTag extends IconTag {
 
 	protected String getPage() {
-		return _PAGE;
-	}
+		PortletDisplay portletDisplay =
+			(PortletDisplay)pageContext.getAttribute("portletDisplay");
 
-	private static final String _PAGE =
-		"/html/taglib/portlet/icon_back/page.jsp";
+		if (!portletDisplay.isShowBackIcon()) {
+			return null;
+		}
+
+		setCssClass("portlet-back portlet-back-icon");
+		setImage("../portlet/back");
+		setMessage("back");
+		setToolTip(false);
+		setUrl(portletDisplay.getURLBack());
+
+		return super.getPage();
+	}
 
 }

@@ -14,16 +14,38 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
+import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.HttpUtil;
+
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class IconDeactivateTag extends IconTag {
 
 	protected String getPage() {
-		return _PAGE;
-	}
+		String url = getUrl();
 
-	private static final String _PAGE =
-		"/html/taglib/ui/icon_deactivate/page.jsp";
+		if (url.startsWith("javascript:")) {
+			url = url.substring(11);
+		}
+
+		if (url.startsWith(Http.HTTP_WITH_SLASH) ||
+			url.startsWith(Http.HTTPS_WITH_SLASH)) {
+			url = "submitForm(document.hrefFm, '" + HttpUtil.encodeURL(url) +
+				"');";
+		}
+
+		url = "javascript:if (confirm('" +
+			UnicodeLanguageUtil.get(pageContext,
+				"are-you-sure-you-want-to-deactivate-this") + "')) { " + url +
+			" } else { self.focus(); }";
+
+		setImage("deactivate");
+		setUrl(url);
+
+		return super.getPage();
+	}
 
 }

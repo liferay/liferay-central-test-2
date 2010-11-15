@@ -14,15 +14,41 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
+import com.liferay.portal.theme.ThemeDisplay;
+
+import javax.servlet.jsp.JspWriter;
+
 /**
  * @author Scott Lee
+ * @author Shuyang Zhou
  */
 public class IconHelpTag extends IconTag {
 
 	protected String getPage() {
-		return _PAGE;
+		return null;
 	}
 
-	private static final String _PAGE = "/html/taglib/ui/icon_help/page.jsp";
+	protected int processEndTag() throws Exception {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)pageContext.getAttribute("themeDisplay");
+
+		String message = getMessage();
+
+		JspWriter jspWriter = pageContext.getOut();
+
+		jspWriter.write("<span class=\"taglib-icon-help\"><img alt=\"\" "
+			+ "onMouseOver=\"Liferay.Portal.ToolTip.show(this, '");
+		jspWriter.write(UnicodeLanguageUtil.get(pageContext, message));
+		jspWriter.write("');\" src=\"");
+		jspWriter.write(themeDisplay.getPathThemeImages());
+		jspWriter.write("/portlet/help.png\" />");
+		jspWriter.write("<span class=\"aui-helper-hidden-accessible\">");
+		jspWriter.write(LanguageUtil.get(pageContext, message));
+		jspWriter.write("</span></span>");
+
+		return EVAL_PAGE;
+	}
 
 }

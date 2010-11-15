@@ -14,18 +14,39 @@
 
 package com.liferay.taglib.portletext;
 
+import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.taglib.ui.IconTag;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class IconMinimizeTag extends IconTag {
 
 	protected String getPage() {
-		return _PAGE;
-	}
+		PortletDisplay portletDisplay =
+			(PortletDisplay)pageContext.getAttribute("portletDisplay");
 
-	private static final String _PAGE =
-		"/html/taglib/portlet/icon_minimize/page.jsp";
+		if (!portletDisplay.isShowMinIcon()) {
+			return null;
+		}
+
+		setCssClass("portlet-minimize portlet-minimize-icon");
+
+		String image = null;
+
+		if (portletDisplay.isStateMin()) {
+			image = "restore";
+		}
+		else {
+			image = "minimize";
+		}
+		setImage("../portlet/".concat(image));
+		setMessage(image);
+		setToolTip(false);
+		setUrl(portletDisplay.getURLMin());
+
+		return super.getPage();
+	}
 
 }

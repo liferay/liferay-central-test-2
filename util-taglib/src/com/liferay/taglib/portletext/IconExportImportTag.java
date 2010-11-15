@@ -14,18 +14,31 @@
 
 package com.liferay.taglib.portletext;
 
+import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.taglib.ui.IconTag;
 
 /**
  * @author Jorge Ferrer
+ * @author Shuyang Zhou
  */
 public class IconExportImportTag extends IconTag {
 
 	protected String getPage() {
-		return _PAGE;
-	}
+		PortletDisplay portletDisplay =
+			(PortletDisplay)pageContext.getAttribute("portletDisplay");
 
-	private static final String _PAGE =
-		"/html/taglib/portlet/icon_export_import/page.jsp";
+		if (!portletDisplay.isShowExportImportIcon()) {
+			return null;
+		}
+
+		setCssClass("portlet-export-import portlet-export-import-icon");
+		setImage("download");
+		setMessage("export-import");
+		setMethod("get");
+		setToolTip(false);
+		setUrl(portletDisplay.getURLExportImport());
+
+		return super.getPage();
+	}
 
 }

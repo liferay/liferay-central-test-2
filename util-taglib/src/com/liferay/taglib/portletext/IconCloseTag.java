@@ -14,18 +14,30 @@
 
 package com.liferay.taglib.portletext;
 
+import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.taglib.ui.IconTag;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class IconCloseTag extends IconTag {
 
 	protected String getPage() {
-		return _PAGE;
-	}
+		PortletDisplay portletDisplay =
+			(PortletDisplay)pageContext.getAttribute("portletDisplay");
 
-	private static final String _PAGE =
-		"/html/taglib/portlet/icon_close/page.jsp";
+		if (!portletDisplay.isShowCloseIcon()) {
+			return null;
+		}
+
+		setCssClass("portlet-close portlet-close-icon");
+		setImage("../portlet/close");
+		setMessage("remove");
+		setToolTip(false);
+		setUrl(portletDisplay.getURLClose());
+
+		return super.getPage();
+	}
 
 }

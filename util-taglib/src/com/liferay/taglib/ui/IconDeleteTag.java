@@ -14,15 +14,45 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
+import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.StringUtil;
+
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class IconDeleteTag extends IconTag {
 
 	protected String getPage() {
-		return _PAGE;
-	}
+		String url = getUrl();
 
-	private static final String _PAGE = "/html/taglib/ui/icon_delete/page.jsp";
+		if (url.startsWith("javascript:")) {
+			url = url.substring(11);
+		}
+
+		if (url.startsWith(Http.HTTP_WITH_SLASH) ||
+			url.startsWith(Http.HTTPS_WITH_SLASH)) {
+			url = "submitForm(document.hrefFm, '" + HttpUtil.encodeURL(url) +
+				"');";
+		}
+
+		if (url.startsWith("wsrp_rewrite?")) {
+			url = StringUtil.replace(url, "/wsrp_rewrite",
+				"&wsrp-extensions=encodeURL/wsrp_rewrite");
+			url = "submitForm(document.hrefFm, '" + url + "');";
+		}
+
+		url = "javascript:if (confirm('" +
+			UnicodeLanguageUtil.get(pageContext,
+				"are-you-sure-you-want-to-delete-this") + "')) { " + url +
+			" } else { self.focus(); }";
+
+		setImage("delete");
+		setUrl(url);
+
+		return super.getPage();
+	}
 
 }

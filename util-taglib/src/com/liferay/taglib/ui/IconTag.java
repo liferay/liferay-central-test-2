@@ -19,11 +19,16 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.JspException;
 
 /**
  * @author Brian Wing Shun Chan
  */
 public class IconTag extends IncludeTag {
+
+	public int doStartTag() throws JspException {
+		return EVAL_BODY_INCLUDE;
+	}
 
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
@@ -93,8 +98,16 @@ public class IconTag extends IncludeTag {
 		_url = null;
 	}
 
+	protected String getMessage() {
+		return _message;
+	}
+
 	protected String getPage() {
 		return _PAGE;
+	}
+
+	protected String getUrl() {
+		return _url;
 	}
 
 	protected boolean isCleanUpSetAttributes() {
