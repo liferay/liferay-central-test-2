@@ -1388,7 +1388,7 @@ public class HookHotDeployListener
 				ClassLoaderBeanHandler classLoaderBeanHandler =
 					(ClassLoaderBeanHandler)invocationHandler;
 
-				originalService =  classLoaderBeanHandler.getBean();
+				originalService = classLoaderBeanHandler.getBean();
 			}
 		}
 
@@ -1415,7 +1415,7 @@ public class HookHotDeployListener
 
 		for (String key : _PROPS_VALUES_BOOLEAN) {
 			String fieldName = StringUtil.replace(
-				key.toUpperCase(), CharPool.PERIOD,  CharPool.UNDERLINE);
+				key.toUpperCase(), CharPool.PERIOD, CharPool.UNDERLINE);
 
 			if (!containsKey(portalProperties, key)) {
 				continue;
@@ -1424,8 +1424,8 @@ public class HookHotDeployListener
 			try {
 				Field field = PropsValues.class.getField(fieldName);
 
-				Boolean value = Boolean.valueOf(GetterUtil.getBoolean(
-					PropsUtil.get(key)));
+				Boolean value = Boolean.valueOf(
+					GetterUtil.getBoolean(PropsUtil.get(key)));
 
 				field.setBoolean(null, value);
 			}
@@ -1437,7 +1437,7 @@ public class HookHotDeployListener
 
 		for (String key : _PROPS_VALUES_INTEGER) {
 			String fieldName = StringUtil.replace(
-				key.toUpperCase(), CharPool.PERIOD,  CharPool.UNDERLINE);
+				key.toUpperCase(), CharPool.PERIOD, CharPool.UNDERLINE);
 
 			if (!containsKey(portalProperties, key)) {
 				continue;
@@ -1446,8 +1446,8 @@ public class HookHotDeployListener
 			try {
 				Field field = PropsValues.class.getField(fieldName);
 
-				Integer value = Integer.valueOf(GetterUtil.getInteger(
-					PropsUtil.get(key)));
+				Integer value = Integer.valueOf(
+					GetterUtil.getInteger(PropsUtil.get(key)));
 
 				field.setInt(null, value);
 			}
@@ -1459,7 +1459,7 @@ public class HookHotDeployListener
 
 		for (String key : _PROPS_VALUES_LONG) {
 			String fieldName = StringUtil.replace(
-				key.toUpperCase(), CharPool.PERIOD,  CharPool.UNDERLINE);
+				key.toUpperCase(), CharPool.PERIOD, CharPool.UNDERLINE);
 
 			if (!containsKey(portalProperties, key)) {
 				continue;
@@ -1468,8 +1468,8 @@ public class HookHotDeployListener
 			try {
 				Field field = PropsValues.class.getField(fieldName);
 
-				Long value = Long.valueOf(GetterUtil.getLong(
-					PropsUtil.get(key)));
+				Long value = Long.valueOf(
+					GetterUtil.getLong(PropsUtil.get(key)));
 
 				field.setLong(null, value);
 			}
@@ -1481,7 +1481,7 @@ public class HookHotDeployListener
 
 		for (String key : _PROPS_VALUES_STRING) {
 			String fieldName = StringUtil.replace(
-				key.toUpperCase(), CharPool.PERIOD,  CharPool.UNDERLINE);
+				key.toUpperCase(), CharPool.PERIOD, CharPool.UNDERLINE);
 
 			if (!containsKey(portalProperties, key)) {
 				continue;
