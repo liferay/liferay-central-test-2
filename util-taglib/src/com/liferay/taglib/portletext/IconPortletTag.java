@@ -45,11 +45,9 @@ public class IconPortletTag extends IconTag {
 	}
 
 	protected String getPage() {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)pageContext.getAttribute("themeDisplay");
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+		ThemeDisplay themeDisplay = (ThemeDisplay)pageContext.getAttribute(
+			"themeDisplay");
 
-		boolean showPortletIcon = true;
 		String message = null;
 		String src = null;
 
@@ -60,13 +58,14 @@ public class IconPortletTag extends IconTag {
 			src = _portlet.getStaticResourcePath().concat(_portlet.getIcon());
 		}
 		else {
-			showPortletIcon = portletDisplay.isShowPortletIcon();
+			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+			if (!portletDisplay.isShowPortletIcon()) {
+				return null;
+			}
+
 			message = portletDisplay.getTitle();
 			src = portletDisplay.getURLPortlet();
-		}
-
-		if (!showPortletIcon) {
-			return null;
 		}
 
 		setMessage(message);

@@ -17,6 +17,7 @@ package com.liferay.taglib.ui;
 import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 
 /**
  * @author Brian Wing Shun Chan
@@ -33,14 +34,23 @@ public class IconDeactivateTag extends IconTag {
 
 		if (url.startsWith(Http.HTTP_WITH_SLASH) ||
 			url.startsWith(Http.HTTPS_WITH_SLASH)) {
-			url = "submitForm(document.hrefFm, '" + HttpUtil.encodeURL(url) +
-				"');";
+
+			url =
+				"submitForm(document.hrefFm, '".concat(
+					HttpUtil.encodeURL(url)).concat("');");
 		}
 
-		url = "javascript:if (confirm('" +
-			UnicodeLanguageUtil.get(pageContext,
-				"are-you-sure-you-want-to-deactivate-this") + "')) { " + url +
-			" } else { self.focus(); }";
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("javascript:if (confirm('");
+		sb.append(
+			UnicodeLanguageUtil.get(
+				pageContext, "are-you-sure-you-want-to-deactivate-this"));
+		sb.append("')) { ");
+		sb.append(url);
+		sb.append(" } else { self.focus(); }");
+
+		url = sb.toString();
 
 		setImage("deactivate");
 		setUrl(url);

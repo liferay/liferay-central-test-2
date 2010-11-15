@@ -31,21 +31,19 @@ public class IconHelpTag extends IconTag {
 	}
 
 	protected int processEndTag() throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)pageContext.getAttribute("themeDisplay");
-
-		String message = getMessage();
+		ThemeDisplay themeDisplay = (ThemeDisplay)pageContext.getAttribute(
+			"themeDisplay");
 
 		JspWriter jspWriter = pageContext.getOut();
 
-		jspWriter.write("<span class=\"taglib-icon-help\"><img alt=\"\" "
-			+ "onMouseOver=\"Liferay.Portal.ToolTip.show(this, '");
-		jspWriter.write(UnicodeLanguageUtil.get(pageContext, message));
+		jspWriter.write("<span class=\"taglib-icon-help\"><img alt=\"\" ");
+		jspWriter.write("onMouseOver=\"Liferay.Portal.ToolTip.show(this, '");
+		jspWriter.write(UnicodeLanguageUtil.get(pageContext, getMessage()));
 		jspWriter.write("');\" src=\"");
 		jspWriter.write(themeDisplay.getPathThemeImages());
 		jspWriter.write("/portlet/help.png\" />");
 		jspWriter.write("<span class=\"aui-helper-hidden-accessible\">");
-		jspWriter.write(LanguageUtil.get(pageContext, message));
+		jspWriter.write(LanguageUtil.get(pageContext, getMessage()));
 		jspWriter.write("</span></span>");
 
 		return EVAL_PAGE;

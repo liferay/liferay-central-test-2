@@ -41,6 +41,7 @@ public class IconMinimizeTag extends IconTag {
 		else {
 			image = "minimize";
 		}
+
 		setImage("../portlet/".concat(image));
 		setMessage(image);
 		setToolTip(false);
