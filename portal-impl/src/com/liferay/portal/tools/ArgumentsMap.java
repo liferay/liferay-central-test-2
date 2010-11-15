@@ -14,38 +14,25 @@
 
 package com.liferay.portal.tools;
 
-import java.util.Map;
+import com.liferay.portal.kernel.util.Validator;
+
+import java.util.HashMap;
 
 /**
- * @author Shuyang Zhou
+ * <a href="ArgumentsMap.java.html"><b><i>View Source</i></b></a>
+ *
  * @author Raymond Augé
  */
-public class ArgumentsUtil {
+public class ArgumentsMap extends HashMap<String, String> {
 
-	public static Map<String, String> parseArguments(String[] args) {
-		Map<String, String> arguments = new ArgumentsMap();
+	public String get(Object key) {
+		String value = super.get(key);
 
-		for (String arg : args) {
-			int pos = arg.indexOf('=');
-
-			if (pos <= 0) {
-				throw new IllegalArgumentException("Bad argument " + arg);
-			}
-
-			String key = arg.substring(0, pos).trim();
-			String value = arg.substring(pos + 1).trim();
-
-			if (key.startsWith("-D")) {
-				key = key.substring(2);
-
-				System.setProperty(key, value);
-			}
-			else {
-				arguments.put(key, value);
-			}
+		if (Validator.isNull(value)) {
+			value = System.getProperty((String)key);
 		}
 
-		return arguments;
+		return value;
 	}
 
 }
