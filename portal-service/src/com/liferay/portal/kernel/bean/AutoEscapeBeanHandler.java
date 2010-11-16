@@ -14,7 +14,6 @@
 
 package com.liferay.portal.kernel.bean;
 
-import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.util.HtmlUtil;
 
 import java.lang.reflect.InvocationHandler;
@@ -69,7 +68,11 @@ public class AutoEscapeBeanHandler implements InvocationHandler {
 			throw ite.getTargetException();
 		}
 
-		if (method.getAnnotation(AutoEscape.class) != null) {
+		if ((method.getAnnotation(AutoEscape.class) != null) ||
+			(method.getAnnotation(
+				com.liferay.portal.kernel.annotation.AutoEscape.class) !=
+					null)) {
+
 			result = HtmlUtil.escape((String)result);
 		}
 

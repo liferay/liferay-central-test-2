@@ -12,7 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.kernel.annotation;
+package com.liferay.portal.kernel.bean;
+
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -21,11 +23,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author	   Shuyang Zhou
- * @deprecated {@link com.liferay.portal.kernel.bean.AutoEscape}
+ * @author Brian Wing Shun Chan
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-public @interface AutoEscape {
+@Target({ElementType.FIELD, ElementType.METHOD})
+public @interface BeanReference {
+
+	public String name() default StringPool.BLANK;
+
+	public Class<?> type() default Object.class;
+
 }

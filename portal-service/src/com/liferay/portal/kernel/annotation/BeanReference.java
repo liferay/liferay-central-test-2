@@ -23,7 +23,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author	   Brian Wing Shun Chan
+ * @deprecated {@link com.liferay.portal.kernel.bean.AutoEscape}
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

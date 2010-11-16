@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.annotation;
+package com.liferay.portal.kernel.bean;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -21,8 +21,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author	   Shuyang Zhou
- * @deprecated {@link com.liferay.portal.kernel.bean.AutoEscape}
+ * Enables HTML auto escaping of strings returned by annotated methods when a
+ * bean is wrapped with {@link AutoEscapeBeanHandler}.
+ *
+ * <p>
+ * For a usage example, see {@link com.liferay.portal.model.UserModel}.
+ * </p>
+ *
+ * @author Shuyang Zhou
+ * @see	   AutoEscapeBeanHandler
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
