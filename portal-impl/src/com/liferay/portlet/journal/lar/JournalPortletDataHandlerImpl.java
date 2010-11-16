@@ -1774,6 +1774,14 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			userId = authorId;
 		}
 
+		Map<String, String> structureIds =
+			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
+				JournalStructure.class);
+
+		String parentStructureId = MapUtil.getString(
+			structureIds, structure.getParentStructureId(),
+			structure.getParentStructureId());
+
 		boolean addCommunityPermissions =
 			creationStrategy.addCommunityPermissions(
 				portletDataContext, structure);
@@ -1789,18 +1797,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		JournalStructure existingStructure = null;
 
-		Map<String, String> structureIds =
-			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
-				JournalStructure.class);
-
-		String parentStructureId = structure.getParentStructureId();
-
-		String newParentStructureId = structureIds.get(parentStructureId);
-
-		if (Validator.isNotNull(newParentStructureId)) {
-			parentStructureId = newParentStructureId;
-		}
-
 		if (portletDataContext.isDataStrategyMirror()) {
 			existingStructure = JournalStructureUtil.fetchByUUID_G(
 				structure.getUuid(), portletDataContext.getScopeGroupId());
@@ -1811,27 +1807,25 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				existingStructure =
 					JournalStructureLocalServiceUtil.addStructure(
 						userId, portletDataContext.getScopeGroupId(),
-						structureId, autoStructureId,
-						parentStructureId, structure.getName(),
-						structure.getDescription(), structure.getXsd(),
-						serviceContext);
+						structureId, autoStructureId, parentStructureId,
+						structure.getName(), structure.getDescription(),
+						structure.getXsd(), serviceContext);
 			}
 			else {
 				existingStructure =
 					JournalStructureLocalServiceUtil.updateStructure(
 						existingStructure.getGroupId(),
-						existingStructure.getStructureId(),
-						parentStructureId, structure.getName(),
-						structure.getDescription(), structure.getXsd(),
-						serviceContext);
+						existingStructure.getStructureId(), parentStructureId,
+						structure.getName(), structure.getDescription(),
+						structure.getXsd(), serviceContext);
 			}
 		}
 		else {
 			existingStructure = JournalStructureLocalServiceUtil.addStructure(
 				userId, portletDataContext.getScopeGroupId(), structureId,
-				autoStructureId, parentStructureId,
-				structure.getName(), structure.getDescription(),
-				structure.getXsd(), serviceContext);
+				autoStructureId, parentStructureId, structure.getName(),
+				structure.getDescription(), structure.getXsd(),
+				serviceContext);
 		}
 
 		structureIds.put(structureId, existingStructure.getStructureId());
