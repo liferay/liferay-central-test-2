@@ -110,37 +110,30 @@ AUI().add(
 					);
 
 					var MenuManager = Dockbar.MenuManager;
+
 					var dockBar = instance.dockBar;
+
 					var trigger = menu.get('trigger').item(0);
 					var button = trigger.one('a');
 
 					MenuManager.register(menu);
 
 					menu.on(
-						'show',
+						'visibleChange',
 						function(event) {
-							var instance = this;
+							var visible = event.newVal;
 
-							MenuManager.hideAll();
+							if (visible) {
+								MenuManager.hideAll();
+							}
 
-							trigger.addClass('menu-button-active');
-						}
-					);
-
-					menu.on(
-						'hide',
-						function(event) {
-							var instance = this;
-
-							trigger.removeClass('menu-button-active');
+							trigger.toggleClass('menu-button-active', visible);
 						}
 					);
 
 					button.on(
 						'focus',
 						function(event) {
-							var instance = this;
-
 							menu.show();
 						}
 					);
@@ -148,13 +141,8 @@ AUI().add(
 					button.on(
 						'keydown',
 						function(event) {
-							var instance = this;
-
-							switch (event.keyCode) {
-								case 40:
-									focusManager.focus(0);
-
-								break;
+							if (event.keyCode == 40) {
+								focusManager.focus(0);
 							}
 						}
 					);
@@ -162,16 +150,13 @@ AUI().add(
 					menu.on(
 						'keydown',
 						function(event) {
-							var instance = this;
-
 							if (focusManager.get('activeDescendant') == -1) {
 								button.focus();
 							}
 							else {
 								instance._updateMenu(event.domEvent, button);
 							}
-						},
-						instance
+						}
 					);
 
 					instance[name] = menu.render(instance.dockBar);
@@ -575,76 +560,39 @@ AUI().add(
 					);
 				}
 
-				var menuButtons = [];
-
-				dockBar.all('ul.aui-toolbar').each(
-					function(item, index, collection) {
-						var childNodes = item.all('> li > a, .user-links a, .sign-out a');
-
-						childNodes.each(
-							function(item, index, collection) {
-								menuButtons.push(item);
-							}
-						);
-					}
-				);
+				dockBar._menuButtons = dockBar.all('ul.aui-toolbar > li > a, .user-links a, .sign-out a');
 
 				dockBar.delegate(
 					'keydown',
 					function(event) {
-						var instance = this;
-
 						instance._updateMenu(event, event.currentTarget);
 					},
-					'.aui-toolbar a',
-					instance
+					'.aui-toolbar a'
 				);
-
-				dockBar._menuButtons = menuButtons;
 			},
 
 			_updateMenu: function(event, item) {
 				var instance = this;
 
 				var menuButtons = instance.dockBar._menuButtons;
-				var index = -1;
+				var lastButtonIndex = menuButtons.size();
+				var index = menuButtons.indexOf(item);
 
-				for (var i = 0; i < menuButtons.length; i++) {
-					if (menuButtons[i] == item) {
-						index = i;
-
-						break;
-					}
-				}
-
-				if (index != -1) {
+				if (index > -1) {
 					var button;
 
-					switch (event.keyCode) {
-						case 37:
-							if (index > 0) {
-								button = menuButtons[--index];
-							}
+					var keyCode = event.keyCode;
 
-						break;
-
-						case 39:
-							if (index < menuButtons.length - 1) {
-								button = menuButtons[++index];
-							}
-
-						break;
+					if (keyCode == 37 && index > 0) {
+						button = menuButtons.item(--index);
+					}
+					else if (keyCode == 39 && (index < lastButtonIndex)) {
+						button = menuButtons.item(++index);
 					}
 
 					if (button) {
-						switch (event.keyCode) {
-							case 37:
-							case 38:
-							case 39:
-							case 40:
-								event.halt();
-
-							break;
+						if (keyCode >= 37 && keyCode <= 40) {
+							event.halt();
 						}
 
 						var MenuManager = Dockbar.MenuManager;
