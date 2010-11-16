@@ -32,6 +32,88 @@ try {
 	String type = "completed";
 %>
 
+	<aui:script>
+		Liferay.provide(
+			window,
+			'<portlet:namespace />showPopup',
+			function(url, content, title, randomId) {
+				var A = AUI();
+
+				var form = A.Node.create('<form />');
+
+				form.setAttribute('action', url);
+				form.setAttribute('method', 'POST');
+
+				var comments = A.one('#' + randomId + 'updateComments');
+
+				if (content) {
+					form.append(content);
+					content.show();
+				}
+
+				if (comments) {
+					form.append(comments);
+					comments.show();
+				}
+
+				var dialog = new A.Dialog(
+					{
+						bodyContent: form,
+						buttons: [
+							{
+								handler: function() {
+									submitForm(form);
+								},
+								text: '<liferay-ui:message key="ok" />'
+							},
+							{
+								handler: function() {
+									this.close();
+								},
+								text: '<liferay-ui:message key="cancel" />'
+							}
+						],
+						centered: true,
+						modal: true,
+						title: title,
+						width: 400
+					}
+				).render();
+			},
+			['aui-dialog']
+		);
+
+		Liferay.provide(
+			window,
+			'<portlet:namespace />onTaskClick',
+			function(event, randomId) {
+				var A = AUI();
+
+				var icon = event.currentTarget;
+				var li = icon.get('parentNode');
+
+				event.preventDefault();
+
+				var content = null;
+
+				if (li.hasClass('task-due-date-link')) {
+					content = '#' + randomId + 'updateDueDate';
+				}
+				else if (li.hasClass('task-assign-to-me-link')) {
+					content = '#' + randomId + 'updateAsigneeToMe';
+				}
+				else if (li.hasClass('task-assign-link')) {
+					content = '#' + randomId + 'updateAsignee';
+				}
+
+				title = icon.text();
+
+				<portlet:namespace />showPopup(icon.attr('href'), A.one(content), title, randomId);
+			},
+			['aui-base']
+		);
+	</aui:script>
+
 	<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 		<c:choose>
 			<c:when test='<%= portletName.equals(PortletKeys.MY_WORKFLOW_TASKS) && tabs1.equals("pending") %>'>
