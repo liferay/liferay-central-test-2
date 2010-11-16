@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.util.Validator;
 import java.util.HashMap;
 
 /**
- * <a href="ArgumentsMap.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class ArgumentsMap extends HashMap<String, String> {
