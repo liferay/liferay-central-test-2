@@ -45,7 +45,7 @@ public class CustomAttributesAvailableTag
 				expandoBridge.getAttributeNames());
 
 			if (attributeNames.isEmpty()) {
-				return EVAL_PAGE;
+				return SKIP_BODY;
 			}
 			else {
 				return EVAL_BODY_INCLUDE;
