@@ -2253,7 +2253,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return user;
 	}
 
-	public void updatePasswordReset(long userId, boolean passwordReset)
+	public User updatePasswordReset(long userId, boolean passwordReset)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -2261,6 +2261,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setPasswordReset(passwordReset);
 
 		userPersistence.update(user, false);
+		
+		return user;
 	}
 
 	public User updatePortrait(long userId, byte[] bytes)

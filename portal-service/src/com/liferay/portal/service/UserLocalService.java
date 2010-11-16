@@ -785,7 +785,8 @@ public interface UserLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void updatePasswordReset(long userId, boolean passwordReset)
+	public com.liferay.portal.model.User updatePasswordReset(long userId,
+		boolean passwordReset)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

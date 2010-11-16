@@ -995,10 +995,11 @@ public class UserLocalServiceWrapper implements UserLocalService {
 			passwordEncrypted, passwordReset, passwordModifiedDate);
 	}
 
-	public void updatePasswordReset(long userId, boolean passwordReset)
+	public com.liferay.portal.model.User updatePasswordReset(long userId,
+		boolean passwordReset)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_userLocalService.updatePasswordReset(userId, passwordReset);
+		return _userLocalService.updatePasswordReset(userId, passwordReset);
 	}
 
 	public com.liferay.portal.model.User updatePortrait(long userId,

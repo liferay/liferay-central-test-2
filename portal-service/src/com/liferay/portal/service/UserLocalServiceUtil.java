@@ -1024,10 +1024,11 @@ public class UserLocalServiceUtil {
 			passwordReset, passwordModifiedDate);
 	}
 
-	public static void updatePasswordReset(long userId, boolean passwordReset)
+	public static com.liferay.portal.model.User updatePasswordReset(
+		long userId, boolean passwordReset)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updatePasswordReset(userId, passwordReset);
+		return getService().updatePasswordReset(userId, passwordReset);
 	}
 
 	public static com.liferay.portal.model.User updatePortrait(long userId,
