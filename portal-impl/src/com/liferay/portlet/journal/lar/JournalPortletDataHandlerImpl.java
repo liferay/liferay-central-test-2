@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -39,11 +40,14 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.ImageUtil;
+import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl;
@@ -78,11 +82,14 @@ import com.liferay.portlet.journal.util.comparator.ArticleIDComparator;
 
 import java.io.File;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.portlet.PortletPreferences;
 
@@ -315,6 +322,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				portletDataContext, igFoldersElement, igImagesElement,
 				articleElement, content, checkDateRange);
 			content = exportLayoutFriendlyURLs(portletDataContext, content);
+			content = exportLinksToLayout(portletDataContext, content);
 
 			article.setContent(content);
 		}
@@ -825,6 +833,55 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
+	protected static String exportLinksToLayout(
+			PortletDataContext portletDataContext, String content)
+		throws Exception {
+
+		List<String> oldLinksToLayout = new ArrayList<String>();
+		List<String> newLinksToLayout = new ArrayList<String>();
+
+		Matcher matcher = _exportLinkToLayoutPattern.matcher(content);
+
+		while (matcher.find()) {
+			long layoutId = GetterUtil.getLong(matcher.group(1));
+
+			String layoutType = matcher.group(2);
+
+			boolean privateLayout = layoutType.startsWith("private");
+
+			try {
+				Layout layout = LayoutLocalServiceUtil.getLayout(
+					portletDataContext.getScopeGroupId(), privateLayout,
+					layoutId);
+
+				String oldLinkToLayout = matcher.group(0);
+
+				String newLinkToLayout = StringUtil.replace(
+					oldLinkToLayout, layoutType,
+					layoutType.concat(
+						StringPool.AT.concat(layout.getFriendlyURL())));
+
+				oldLinksToLayout.add(oldLinkToLayout);
+				newLinksToLayout.add(newLinkToLayout);
+			}
+			catch (Exception e) {
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Error looking for layout with id " + layoutId +
+							" in group " +
+								portletDataContext.getScopeGroupId(), e);
+				}
+			}
+		}
+
+		content = StringUtil.replace(
+			content,
+			ArrayUtil.toStringArray(oldLinksToLayout.toArray()),
+			ArrayUtil.toStringArray(newLinksToLayout.toArray()));
+
+		return content;
+	}
+
 	protected static void exportStructure(
 			PortletDataContext portletDataContext, Element structuresElement,
 			JournalStructure structure)
@@ -1109,6 +1166,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		content = StringUtil.replace(
 			content, "@data_handler_group_friendly_url@",
 			group.getFriendlyURL());
+
+		content = importLinksToLayout(portletDataContext, content);
 
 		article.setContent(content);
 
@@ -1740,6 +1799,67 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		return content;
 	}
 
+	protected static String importLinksToLayout(
+			PortletDataContext portletDataContext, String content)
+		throws Exception {
+
+		List<String> oldLinksToLayout = new ArrayList<String>();
+		List<String> newLinksToLayout = new ArrayList<String>();
+
+		Matcher matcher = _importLinkToLayoutPattern.matcher(content);
+
+		while (matcher.find()) {
+			String oldLayoutId = matcher.group(1);
+
+			String newLayoutId = oldLayoutId;
+
+			String layoutType = matcher.group(2);
+
+			boolean privateLayout = layoutType.startsWith("private");
+
+			String friendlyURL = matcher.group(3);
+
+			try {
+				Layout layout = LayoutUtil.fetchByG_P_F(
+					portletDataContext.getScopeGroupId(), privateLayout,
+					friendlyURL);
+
+				newLayoutId = String.valueOf(layout.getLayoutId());
+			}
+			catch (Exception e) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Error finding friendly layout with friendlyURL " +
+							friendlyURL + " in group " +
+								portletDataContext.getScopeGroupId(), e);
+				}
+			}
+
+			String oldLinkToLayout = matcher.group(0);
+
+			String newLinkToLayout = StringUtil.replace(
+					oldLinkToLayout,
+					new String[] {
+						oldLayoutId,
+						StringPool.AT.concat(friendlyURL),
+					},
+					new String[] {
+						newLayoutId,
+						StringPool.BLANK
+					});
+
+			oldLinksToLayout.add(oldLinkToLayout);
+			newLinksToLayout.add(newLinkToLayout);
+		}
+
+		content = StringUtil.replace(
+			content,
+			ArrayUtil.toStringArray(oldLinksToLayout.toArray()),
+			ArrayUtil.toStringArray(newLinksToLayout.toArray()));
+
+		return content;
+	}
+
 	protected static void importStructure(
 			PortletDataContext portletDataContext,	Element structureElement)
 		throws Exception {
@@ -2230,5 +2350,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	private static PortletDataHandlerBoolean _articles =
 		new PortletDataHandlerBoolean(_NAMESPACE, "articles", true, false,
 		new PortletDataHandlerControl[] {_images, _comments, _ratings, _tags});
+
+	private static Pattern _exportLinkToLayoutPattern = Pattern.compile(
+		"\\[([0-9]+)@(public|private\\-[a-z]*)\\]");
+
+	private static Pattern _importLinkToLayoutPattern = Pattern.compile(
+		"\\[([0-9]+)@(public|private\\-[a-z]*)@([^\\]]*)\\]");
 
 }
