@@ -68,11 +68,7 @@ public class AutoEscapeBeanHandler implements InvocationHandler {
 			throw ite.getTargetException();
 		}
 
-		if ((method.getAnnotation(AutoEscape.class) != null) ||
-			(method.getAnnotation(
-				com.liferay.portal.kernel.annotation.AutoEscape.class) !=
-					null)) {
-
+		if (method.getAnnotation(AutoEscape.class) != null) {
 			result = HtmlUtil.escape((String)result);
 		}
 

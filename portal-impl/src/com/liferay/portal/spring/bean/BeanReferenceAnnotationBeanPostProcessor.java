@@ -88,18 +88,7 @@ public class BeanReferenceAnnotationBeanPostProcessor
 				referencedBeanType = beanReference.type();
 			}
 			else {
-				com.liferay.portal.kernel.annotation.BeanReference
-					oldBeanReference = field.getAnnotation(
-						com.liferay.portal.kernel.annotation.
-							BeanReference.class);
-
-				if (oldBeanReference != null) {
-					referencedBeanName = oldBeanReference.name();
-					referencedBeanType = oldBeanReference.type();
-				}
-				else {
-					continue;
-				}
+				continue;
 			}
 
 			if (!Object.class.equals(referencedBeanType)) {
