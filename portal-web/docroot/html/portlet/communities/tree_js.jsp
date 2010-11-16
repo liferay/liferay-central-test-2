@@ -78,7 +78,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 				function(node) {
 					var xmlDoc = A.DataType.XML.parse(node.name);
 
-					var newNode ={
+					var newNode = {
 						after: {
 							check: function(event) {
 								var plid = TreeUtil.extractPlid(event.target);
