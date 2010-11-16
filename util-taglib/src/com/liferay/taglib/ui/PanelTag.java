@@ -14,10 +14,10 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.servlet.taglib.BaseBodyTagSupport;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.taglib.util.IncludeTag;
 import com.liferay.util.PwdGenerator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,10 +25,11 @@ import javax.servlet.jsp.JspException;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
-public class PanelTag extends BaseBodyTagSupport {
+public class PanelTag extends IncludeTag {
 
-	public int doStartTag() {
+	public int doStartTag() throws JspException {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
@@ -71,22 +72,9 @@ public class PanelTag extends BaseBodyTagSupport {
 			"liferay-ui:panel:extended", String.valueOf(_extended));
  		request.setAttribute("liferay-ui:panel:cssClass", _cssClass);
 
-		return EVAL_BODY_BUFFERED;
-	}
+		super.doStartTag();
 
-	public int doEndTag() throws JspException {
-		try {
-			PortalIncludeUtil.include(pageContext, getStartPage());
-
-			writeBodyContent(pageContext.getOut());
-
-			PortalIncludeUtil.include(pageContext, getEndPage());
-
-			return EVAL_PAGE;
-		}
-		catch (Exception e) {
-			throw new JspException(e);
-		}
+		return EVAL_BODY_INCLUDE;
 	}
 
 	protected String getStartPage() {
