@@ -50,7 +50,7 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 			var textArea = document.getElementById("CKEditor1");
 			var ckEditor = CKEDITOR.instances.CKEditor1;
 
-			textArea.value = parent.<%= HtmlUtil.escape(initMethod) %>();
+			ckEditor.setData(parent.<%= HtmlUtil.escape(initMethod) %>());
 
 			CKEDITOR.config.toolbar = '<%= TextFormatter.format(HtmlUtil.escape(toolbarSet), TextFormatter.M) %>';
 			CKEDITOR.config.customConfig = '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/ckconfig.jsp?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(doAsGroupId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>';
@@ -131,7 +131,9 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 		}
 	);
 
-	initCkArea();
+	if (parent.AUI) {
+		parent.AUI().on('domready', initCkArea);
+	}
 </script>
 
 </body>
