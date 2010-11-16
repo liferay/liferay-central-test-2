@@ -72,7 +72,9 @@ public class ICQConnector implements Observer {
 
 	private void _disconnect() {
 		try {
-			_icq.close();
+			if (_icq != null) {
+				_icq.close();
+			}
 		}
 		catch (Exception e) {
 			_log.warn(e);
