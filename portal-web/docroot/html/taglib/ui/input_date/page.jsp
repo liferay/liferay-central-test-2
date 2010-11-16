@@ -127,38 +127,47 @@ if (yearValue > 0) {
 <input class="<%= disabled ? "disabled" : "" %>" id="<%= imageInputId %>Input" type="hidden" />
 
 <aui:script use="aui-datepicker-select">
-	var datePicker = new A.DatePickerSelect(
-		{
-			appendOrder: '<%= dateFormatOrder %>',
-			boundingBox: '#<%= randomNamespace %>displayDate',
-			calendar: {
-				dates: [
-					new Date(
-						<%= cal.get(Calendar.YEAR) %>,
-						<%= cal.get(Calendar.MONTH) %>,
-						<%= cal.get(Calendar.DATE) %>
-					)
-				],
-				dateFormat: '%m/%e/%Y',
-				firstDayOfWeek: <%= firstDayOfWeek %>
-			},
-			dayNode: '#<%= dayParam %>',
-			disabled: <%= disabled %>,
-			monthNode: '#<%= monthParam %>',
-			on: {
-				'calendar:select': function(event) {
-					var formatted = event.date.formatted[0];
+	var displayDateNode = A.one('#<%= randomNamespace %>displayDate');
 
-					A.one('#<%= imageInputId %>Input').val(formatted);
-				}
-			},
-			populateMonth: false,
-			populateYear: false,
-			srcNode: '#<%= randomNamespace %>displayDateContent',
-			yearNode: '#<%= yearParam %>',
-			yearRange: [<%= yearRangeStart %>, <%= yearRangeEnd %>]
-		}
-	).render();
+	var displayDatePicker = function(event) {
+		new A.DatePickerSelect(
+			{
+				appendOrder: '<%= dateFormatOrder %>',
+				boundingBox: displayDateNode,
+				calendar: {
+					dates: [
+						new Date(
+							<%= cal.get(Calendar.YEAR) %>,
+							<%= cal.get(Calendar.MONTH) %>,
+							<%= cal.get(Calendar.DATE) %>
+						)
+					],
+					dateFormat: '%m/%e/%Y',
+					firstDayOfWeek: <%= firstDayOfWeek %>
+				},
+				dayNode: '#<%= dayParam %>',
+				disabled: <%= disabled %>,
+				monthNode: '#<%= monthParam %>',
+				on: {
+					'calendar:select': function(event) {
+						var formatted = event.date.formatted[0];
+
+						A.one('#<%= imageInputId %>Input').val(formatted);
+					}
+				},
+				populateMonth: false,
+				populateYear: false,
+				srcNode: '#<%= randomNamespace %>displayDateContent',
+				yearNode: '#<%= yearParam %>',
+				yearRange: [<%= yearRangeStart %>, <%= yearRangeEnd %>]
+			}
+		).render();
+
+		displayDateNode.detach('mousemove', displayDatePicker);
+		displayDateNode.detach('click', displayDatePicker);
+	};
+
+	displayDateNode.on(['mousemove', 'click'], displayDatePicker);
 </aui:script>
 
 <%!
