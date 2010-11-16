@@ -514,7 +514,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static void exportFolder(
 			PortletDataContext portletDataContext, Element foldersElement,
 			Element fileEntriesElement, Element fileShortcutsElement,
-			Element fileRanksElement, DLFolder folder, boolean recursive)
+			Element fileRanksElement, DLFolder folder, boolean recurse)
 		throws Exception {
 
 		if (portletDataContext.isWithinDateRange(folder.getModifiedDate())) {
@@ -537,15 +537,14 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
-		if (recursive) {
+		if (recurse) {
 			List<DLFolder> folders = DLFolderUtil.findByG_P(
 				folder.getGroupId(), folder.getFolderId());
 
 			for (DLFolder curFolder : folders) {
 				exportFolder(
 					portletDataContext, foldersElement, fileEntriesElement,
-					fileShortcutsElement, fileRanksElement, curFolder,
-					recursive);
+					fileShortcutsElement, fileRanksElement, curFolder, recurse);
 			}
 		}
 
