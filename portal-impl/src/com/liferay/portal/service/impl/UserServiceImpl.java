@@ -798,7 +798,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			if (!userGroupRoles.contains(oldUserGroupRole) &&
 				(!GroupPermissionUtil.contains(
 					getPermissionChecker(), oldUserGroupRole.getGroupId(),
-					ActionKeys.ASSIGN_MEMBERS) ||
+					ActionKeys.ASSIGN_MEMBERS) &&
 				!RolePermissionUtil.contains(
 					getPermissionChecker(), oldUserGroupRole.getRoleId(),
 					ActionKeys.ASSIGN_MEMBERS))) {
@@ -812,7 +812,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 				if (!GroupPermissionUtil.contains(
 						getPermissionChecker(), userGroupRole.getGroupId(),
-						ActionKeys.ASSIGN_MEMBERS) ||
+						ActionKeys.ASSIGN_MEMBERS) &&
 					!RolePermissionUtil.contains(
 						getPermissionChecker(), userGroupRole.getRoleId(),
 						ActionKeys.ASSIGN_MEMBERS)) {
