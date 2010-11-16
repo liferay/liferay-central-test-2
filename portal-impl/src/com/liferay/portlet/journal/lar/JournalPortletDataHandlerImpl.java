@@ -1059,6 +1059,16 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		long userId = portletDataContext.getUserId(article.getUserUuid());
 
+		JournalCreationStrategy creationStrategy =
+			JournalCreationStrategyFactory.getInstance();
+
+		long authorId = creationStrategy.getAuthorUserId(
+			portletDataContext, article);
+
+		if (authorId != JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY) {
+			userId = authorId;
+		}
+
 		User user = UserLocalServiceUtil.getUser(userId);
 
 		String articleId = article.getArticleId();
@@ -1333,16 +1343,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				JournalArticle.class, article.getResourcePrimKey());
 		}
 
-		JournalCreationStrategy creationStrategy =
-			JournalCreationStrategyFactory.getInstance();
-
-		long authorId = creationStrategy.getAuthorUserId(
-			portletDataContext, article);
-
-		if (authorId != JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY) {
-			userId = authorId;
-		}
-
 		String newContent = creationStrategy.getTransformedContent(
 			portletDataContext, article);
 
@@ -1553,6 +1553,17 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			path);
 
 		long userId = portletDataContext.getUserId(feed.getUserUuid());
+
+		JournalCreationStrategy creationStrategy =
+			JournalCreationStrategyFactory.getInstance();
+
+		long authorId = creationStrategy.getAuthorUserId(
+			portletDataContext, feed);
+
+		if (authorId != JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY) {
+			userId = authorId;
+		}
+
 		long groupId = portletDataContext.getScopeGroupId();
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
@@ -1598,16 +1609,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		String parentRenderTemplateId = MapUtil.getString(
 			templateIds, feed.getRendererTemplateId(),
 			feed.getRendererTemplateId());
-
-		JournalCreationStrategy creationStrategy =
-			JournalCreationStrategyFactory.getInstance();
-
-		long authorId = creationStrategy.getAuthorUserId(
-			portletDataContext, feed);
-
-		if (authorId != JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY) {
-			userId = authorId;
-		}
 
 		boolean addCommunityPermissions =
 			creationStrategy.addCommunityPermissions(portletDataContext, feed);
@@ -1754,16 +1755,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		long userId = portletDataContext.getUserId(structure.getUserUuid());
 
-		String structureId = structure.getStructureId();
-		boolean autoStructureId = false;
-
-		if ((Validator.isNumber(structureId)) ||
-			(JournalStructureUtil.fetchByG_S(
-				portletDataContext.getScopeGroupId(), structureId) != null)) {
-
-			autoStructureId = true;
-		}
-
 		JournalCreationStrategy creationStrategy =
 			JournalCreationStrategyFactory.getInstance();
 
@@ -1772,6 +1763,16 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		if (authorId != JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY) {
 			userId = authorId;
+		}
+
+		String structureId = structure.getStructureId();
+		boolean autoStructureId = false;
+
+		if ((Validator.isNumber(structureId)) ||
+			(JournalStructureUtil.fetchByG_S(
+				portletDataContext.getScopeGroupId(), structureId) != null)) {
+
+			autoStructureId = true;
 		}
 
 		Map<String, String> structureIds =
@@ -1859,6 +1860,16 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		long userId = portletDataContext.getUserId(template.getUserUuid());
 
+		JournalCreationStrategy creationStrategy =
+			JournalCreationStrategyFactory.getInstance();
+
+		long authorId = creationStrategy.getAuthorUserId(
+			portletDataContext, template);
+
+		if (authorId != JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY) {
+			userId = authorId;
+		}
+
 		String templateId = template.getTemplateId();
 		boolean autoTemplateId = false;
 
@@ -1890,16 +1901,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		template.setXsl(xsl);
 
 		boolean formatXsl = false;
-
-		JournalCreationStrategy creationStrategy =
-			JournalCreationStrategyFactory.getInstance();
-
-		long authorId = creationStrategy.getAuthorUserId(
-			portletDataContext, template);
-
-		if (authorId != JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY) {
-			userId = authorId;
-		}
 
 		boolean addCommunityPermissions =
 			creationStrategy.addCommunityPermissions(
