@@ -20,10 +20,11 @@ AUI().add(
 
 					Liferay.once('initDockbar', instance._init, instance);
 
-					dockBar.once(
+					var eventHandle = dockBar.on(
 						['focus', 'mousemove'],
 						function(event) {
 							Liferay.fire('initDockbar');
+							eventHandle.detach();
 						}
 					);
 				}
@@ -396,7 +397,11 @@ AUI().add(
 
 					var addContentBoundingBox = addContent.get('boundingBox');
 
-					addContentBoundingBox.one('.common-items').removeClass('aui-menu-item');
+					var commonItems = addContentBoundingBox.one('.common-items');
+
+					if (commonItems) {
+						commonItems.removeClass('aui-menu-item');
+					}
 
 					addContentBoundingBox.delegate(
 						'click',
