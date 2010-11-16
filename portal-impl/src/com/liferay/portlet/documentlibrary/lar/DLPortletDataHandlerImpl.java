@@ -537,6 +537,18 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
+		if (recursive) {
+			List<DLFolder> folders = DLFolderUtil.findByG_P(
+				folder.getGroupId(), folder.getFolderId());
+
+			for (DLFolder curFolder : folders) {
+				exportFolder(
+					portletDataContext, foldersElement, fileEntriesElement,
+					fileShortcutsElement, fileRanksElement, curFolder,
+					recursive);
+			}
+		}
+
 		List<DLFileEntry> fileEntries = DLFileEntryUtil.findByG_F(
 			folder.getGroupId(), folder.getFolderId());
 
@@ -554,18 +566,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				exportFileShortcut(
 					portletDataContext, foldersElement, fileShortcutsElement,
 					fileShortcut);
-			}
-		}
-
-		if (recursive) {
-			List<DLFolder> folders = DLFolderUtil.findByG_P(
-				folder.getGroupId(), folder.getFolderId());
-
-			for (DLFolder curFolder : folders) {
-				exportFolder(
-					portletDataContext, foldersElement, fileEntriesElement,
-					fileShortcutsElement, fileRanksElement, curFolder,
-					recursive);
 			}
 		}
 	}
