@@ -1980,7 +1980,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setFacebookId(facebookId);
 
 		userPersistence.update(user, false);
-		
+
 		return user;
 	}
 
@@ -2117,7 +2117,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setOpenId(openId);
 
 		userPersistence.update(user, false);
-		
+
 		return user;
 	}
 
@@ -2261,7 +2261,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setPasswordReset(passwordReset);
 
 		userPersistence.update(user, false);
-		
+
 		return user;
 	}
 
@@ -2326,7 +2326,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setReminderQueryAnswer(answer);
 
 		userPersistence.update(user, false);
-		
+
 		return user;
 	}
 
@@ -2357,7 +2357,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		group.setFriendlyURL(StringPool.SLASH + screenName);
 
 		groupPersistence.update(group, false);
-		
+
 		return user;
 	}
 
