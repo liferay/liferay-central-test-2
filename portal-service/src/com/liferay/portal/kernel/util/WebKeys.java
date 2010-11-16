@@ -19,6 +19,10 @@ package com.liferay.portal.kernel.util;
  */
 public interface WebKeys {
 
+	public static final String ASSET_RENDERER = "ASSET_RENDERER";
+
+	public static final String ASSET_RENDERER_FACTORY = "ASSET_RENDERER_FACTORY";
+
 	public static final String AUI_SCRIPT_DATA = "LIFERAY_SHARED_AUI_SCRIPT_DATA";
 
 	public static final String AUTHENTICATION_TOKEN = "LIFERAY_SHARED_AUTHENTICATION_TOKEN";
