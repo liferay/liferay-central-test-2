@@ -17,11 +17,12 @@ package com.liferay.taglib.ui;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.tagext.BodyTag;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class SuccessTag extends IncludeTag {
+public class SuccessTag extends IncludeTag implements BodyTag {
 
 	public int doStartTag() {
 		HttpServletRequest request =

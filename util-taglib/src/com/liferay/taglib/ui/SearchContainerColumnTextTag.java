@@ -30,11 +30,13 @@ import javax.portlet.PortletURL;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.BodyContent;
+import javax.servlet.jsp.tagext.BodyTag;
 
 /**
  * @author Raymond Augé
  */
-public class SearchContainerColumnTextTag<R> extends SearchContainerColumnTag {
+public class SearchContainerColumnTextTag<R>
+	extends SearchContainerColumnTag implements BodyTag {
 
 	public int doEndTag() {
 		try {

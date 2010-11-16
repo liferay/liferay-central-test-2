@@ -20,12 +20,13 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.PwdGenerator;
 
 import javax.servlet.jsp.tagext.BodyContent;
+import javax.servlet.jsp.tagext.BodyTag;
 
 /**
  * @author Julio Camarero
  * @author Brian Wing Shun Chan
  */
-public class ValidatorTag extends BaseBodyTagSupport {
+public class ValidatorTag extends BaseBodyTagSupport implements BodyTag {
 
 	public ValidatorTag() {
 	}

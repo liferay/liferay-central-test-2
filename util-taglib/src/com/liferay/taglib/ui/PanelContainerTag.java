@@ -23,11 +23,12 @@ import com.liferay.util.PwdGenerator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.BodyTag;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class PanelContainerTag extends BaseBodyTagSupport {
+public class PanelContainerTag extends BaseBodyTagSupport implements BodyTag {
 
 	public int doStartTag() {
 		HttpServletRequest request =

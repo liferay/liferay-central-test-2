@@ -28,12 +28,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.BodyContent;
+import javax.servlet.jsp.tagext.BodyTag;
 
 /**
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */
-public class ScriptTag extends BaseBodyTagSupport {
+public class ScriptTag extends BaseBodyTagSupport implements BodyTag {
 
 	public static final String PAGE = "/html/taglib/aui/script/page.jsp";
 

@@ -32,11 +32,13 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.BodyTag;
 
 /**
  * @author Raymond Augé
  */
-public class SearchContainerRowTag<R> extends ParamAndPropertyAncestorTagImpl {
+public class SearchContainerRowTag<R>
+	extends ParamAndPropertyAncestorTagImpl implements BodyTag {
 
 	public static final String DEFAULT_INDEX_VAR = "index";
 

@@ -20,11 +20,13 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.tagext.BodyTag;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class LayoutIconTag extends com.liferay.taglib.util.IncludeTag {
+public class LayoutIconTag
+	extends com.liferay.taglib.util.IncludeTag implements BodyTag {
 
 	public static void doTag(
 			Layout layout, ServletContext servletContext,

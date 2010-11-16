@@ -29,12 +29,13 @@ import com.liferay.taglib.aui.ScriptTag;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.tagext.BodyTag;
 
 /**
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */
-public class IconMenuTag extends BaseBodyTagSupport {
+public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 
 	public int doAfterBody() {
 		HttpServletRequest request =

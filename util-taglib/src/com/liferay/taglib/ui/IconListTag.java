@@ -23,12 +23,13 @@ import com.liferay.portal.kernel.util.Validator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.tagext.BodyTag;
 
 /**
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */
-public class IconListTag extends BaseBodyTagSupport {
+public class IconListTag extends BaseBodyTagSupport implements BodyTag {
 
 	public int doAfterBody() {
 		HttpServletRequest request =

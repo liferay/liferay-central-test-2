@@ -19,11 +19,12 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.tagext.BodyTag;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class HtmlBottomTag extends BaseBodyTagSupport {
+public class HtmlBottomTag extends BaseBodyTagSupport implements BodyTag {
 
 	public int doStartTag() {
 		return EVAL_BODY_BUFFERED;

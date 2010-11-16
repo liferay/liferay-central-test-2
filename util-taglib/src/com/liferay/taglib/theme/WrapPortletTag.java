@@ -29,11 +29,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.BodyTag;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
+public class WrapPortletTag
+	extends ParamAndPropertyAncestorTagImpl implements BodyTag {
 
 	public static String doTag(
 			String wrapPage, String portletPage, ServletContext servletContext,
