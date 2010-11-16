@@ -38,15 +38,6 @@ catch (CaptchaMaxChallengesException cmce) {
 	<div class="taglib-captcha">
 		<img alt="captcha" class="captcha" src="<%= url %>" />
 
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="text-verification" />
-			</td>
-			<td>
-				<input name="<%= namespace %>captchaText" size="10" type="text" value="" />
-			</td>
-		</tr>
-		</table>
+		<aui:input label="text-verification" name="captchaText" size="10" type="text" value="" />
 	</div>
 </c:if>
