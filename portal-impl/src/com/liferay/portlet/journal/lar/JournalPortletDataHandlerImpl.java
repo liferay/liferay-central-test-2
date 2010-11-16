@@ -1112,6 +1112,13 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		article.setContent(content);
 
+		String newContent = creationStrategy.getTransformedContent(
+			portletDataContext, article);
+
+		if (newContent != JournalCreationStrategy.ARTICLE_CONTENT_UNCHANGED) {
+			article.setContent(newContent);
+		}
+
 		Map<String, String> structureIds =
 			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
 				JournalStructure.class);
@@ -1341,13 +1348,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags")) {
 			assetTagNames = portletDataContext.getAssetTagNames(
 				JournalArticle.class, article.getResourcePrimKey());
-		}
-
-		String newContent = creationStrategy.getTransformedContent(
-			portletDataContext, article);
-
-		if (newContent != JournalCreationStrategy.ARTICLE_CONTENT_UNCHANGED) {
-			article.setContent(newContent);
 		}
 
 		boolean addCommunityPermissions =
