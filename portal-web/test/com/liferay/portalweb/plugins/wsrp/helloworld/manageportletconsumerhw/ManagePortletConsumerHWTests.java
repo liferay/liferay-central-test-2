@@ -12,9 +12,8 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.wsrp;
+package com.liferay.portalweb.plugins.wsrp.helloworld.manageportletconsumerhw;
 
-import com.liferay.portalweb.plugins.wsrp.helloworld.HelloWorldTests;
 import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
@@ -23,12 +22,16 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class WSRPTests extends BaseTests {
+public class ManagePortletConsumerHWTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(HelloWorldTests.suite());
+		testSuite.addTestSuite(AddProducerHWTest.class);
+		testSuite.addTestSuite(AddConsumerHWTest.class);
+		testSuite.addTestSuite(ManagePortletConsumerHWTest.class);
+		testSuite.addTestSuite(TearDownConsumerTest.class);
+		testSuite.addTestSuite(TearDownProducerTest.class);
 
 		return testSuite;
 	}

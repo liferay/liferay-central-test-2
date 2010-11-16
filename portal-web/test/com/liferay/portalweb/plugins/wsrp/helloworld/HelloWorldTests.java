@@ -12,9 +12,12 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.wsrp;
+package com.liferay.portalweb.plugins.wsrp.helloworld;
 
-import com.liferay.portalweb.plugins.wsrp.helloworld.HelloWorldTests;
+import com.liferay.portalweb.plugins.wsrp.helloworld.addconsumerhw.AddConsumerHWTests;
+import com.liferay.portalweb.plugins.wsrp.helloworld.addportletwsrphw.AddPortletWSRPHWTests;
+import com.liferay.portalweb.plugins.wsrp.helloworld.addproducerhw.AddProducerHWTests;
+import com.liferay.portalweb.plugins.wsrp.helloworld.manageportletconsumerhw.ManagePortletConsumerHWTests;
 import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
@@ -23,12 +26,15 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class WSRPTests extends BaseTests {
+public class HelloWorldTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(HelloWorldTests.suite());
+		testSuite.addTest(AddConsumerHWTests.suite());
+		testSuite.addTest(AddPortletWSRPHWTests.suite());
+		testSuite.addTest(AddProducerHWTests.suite());
+		testSuite.addTest(ManagePortletConsumerHWTests.suite());
 
 		return testSuite;
 	}
