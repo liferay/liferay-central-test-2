@@ -561,10 +561,11 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			List<DLFolder> folders = DLFolderUtil.findByG_P(
 				folder.getGroupId(), folder.getFolderId());
 
-			for (DLFolder subFolder : folders) {
-				exportFolder(portletDataContext, foldersElement,
-					fileEntriesElement, fileShortcutsElement, fileRanksElement,
-					subFolder, recursive);
+			for (DLFolder curFolder : folders) {
+				exportFolder(
+					portletDataContext, foldersElement, fileEntriesElement,
+					fileShortcutsElement, fileRanksElement, curFolder,
+					recursive);
 			}
 		}
 	}
