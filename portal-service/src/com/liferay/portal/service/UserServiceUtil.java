@@ -277,13 +277,14 @@ public class UserServiceUtil {
 		return getService().updateAgreedToTermsOfUse(userId, agreedToTermsOfUse);
 	}
 
-	public static void updateEmailAddress(long userId,
-		java.lang.String password, java.lang.String emailAddress1,
+	public static com.liferay.portal.model.User updateEmailAddress(
+		long userId, java.lang.String password, java.lang.String emailAddress1,
 		java.lang.String emailAddress2)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.updateEmailAddress(userId, password, emailAddress1, emailAddress2);
+		return getService()
+				   .updateEmailAddress(userId, password, emailAddress1,
+			emailAddress2);
 	}
 
 	public static com.liferay.portal.model.User updateLockoutById(long userId,
@@ -293,10 +294,11 @@ public class UserServiceUtil {
 		return getService().updateLockoutById(userId, lockout);
 	}
 
-	public static void updateOpenId(long userId, java.lang.String openId)
+	public static com.liferay.portal.model.User updateOpenId(long userId,
+		java.lang.String openId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updateOpenId(userId, openId);
+		return getService().updateOpenId(userId, openId);
 	}
 
 	public static void updateOrganizations(long userId, long[] organizationIds)
@@ -314,23 +316,25 @@ public class UserServiceUtil {
 				   .updatePassword(userId, password1, password2, passwordReset);
 	}
 
-	public static void updatePortrait(long userId, byte[] bytes)
+	public static com.liferay.portal.model.User updatePortrait(long userId,
+		byte[] bytes)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updatePortrait(userId, bytes);
+		return getService().updatePortrait(userId, bytes);
 	}
 
-	public static void updateReminderQuery(long userId,
-		java.lang.String question, java.lang.String answer)
+	public static com.liferay.portal.model.User updateReminderQuery(
+		long userId, java.lang.String question, java.lang.String answer)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updateReminderQuery(userId, question, answer);
+		return getService().updateReminderQuery(userId, question, answer);
 	}
 
-	public static void updateScreenName(long userId, java.lang.String screenName)
+	public static com.liferay.portal.model.User updateScreenName(long userId,
+		java.lang.String screenName)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updateScreenName(userId, screenName);
+		return getService().updateScreenName(userId, screenName);
 	}
 
 	public static com.liferay.portal.model.User updateUser(long userId,

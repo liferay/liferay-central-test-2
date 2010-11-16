@@ -1215,9 +1215,9 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static void updateEmailAddress(HttpPrincipal httpPrincipal,
-		long userId, java.lang.String password, java.lang.String emailAddress1,
-		java.lang.String emailAddress2)
+	public static com.liferay.portal.model.User updateEmailAddress(
+		HttpPrincipal httpPrincipal, long userId, java.lang.String password,
+		java.lang.String emailAddress1, java.lang.String emailAddress2)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -1227,8 +1227,10 @@ public class UserServiceHttp {
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					password, emailAddress1, emailAddress2);
 
+			Object returnObj = null;
+
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1241,6 +1243,8 @@ public class UserServiceHttp {
 
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
+
+			return (com.liferay.portal.model.User)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -1286,8 +1290,8 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static void updateOpenId(HttpPrincipal httpPrincipal, long userId,
-		java.lang.String openId)
+	public static com.liferay.portal.model.User updateOpenId(
+		HttpPrincipal httpPrincipal, long userId, java.lang.String openId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -1297,8 +1301,10 @@ public class UserServiceHttp {
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					openId);
 
+			Object returnObj = null;
+
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1311,6 +1317,8 @@ public class UserServiceHttp {
 
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
+
+			return (com.liferay.portal.model.User)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -1390,8 +1398,8 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static void updatePortrait(HttpPrincipal httpPrincipal, long userId,
-		byte[] bytes)
+	public static com.liferay.portal.model.User updatePortrait(
+		HttpPrincipal httpPrincipal, long userId, byte[] bytes)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -1401,8 +1409,10 @@ public class UserServiceHttp {
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					bytes);
 
+			Object returnObj = null;
+
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1415,6 +1425,8 @@ public class UserServiceHttp {
 
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
+
+			return (com.liferay.portal.model.User)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -1423,8 +1435,9 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static void updateReminderQuery(HttpPrincipal httpPrincipal,
-		long userId, java.lang.String question, java.lang.String answer)
+	public static com.liferay.portal.model.User updateReminderQuery(
+		HttpPrincipal httpPrincipal, long userId, java.lang.String question,
+		java.lang.String answer)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -1434,8 +1447,10 @@ public class UserServiceHttp {
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					question, answer);
 
+			Object returnObj = null;
+
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1448,6 +1463,8 @@ public class UserServiceHttp {
 
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
+
+			return (com.liferay.portal.model.User)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -1456,8 +1473,8 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static void updateScreenName(HttpPrincipal httpPrincipal,
-		long userId, java.lang.String screenName)
+	public static com.liferay.portal.model.User updateScreenName(
+		HttpPrincipal httpPrincipal, long userId, java.lang.String screenName)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -1467,8 +1484,10 @@ public class UserServiceHttp {
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					screenName);
 
+			Object returnObj = null;
+
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1481,6 +1500,8 @@ public class UserServiceHttp {
 
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
+
+			return (com.liferay.portal.model.User)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);

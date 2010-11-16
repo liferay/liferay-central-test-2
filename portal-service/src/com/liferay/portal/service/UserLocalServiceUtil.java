@@ -924,10 +924,11 @@ public class UserLocalServiceUtil {
 			emailAddress2);
 	}
 
-	public static void updateFacebookId(long userId, long facebookId)
+	public static com.liferay.portal.model.User updateFacebookId(long userId,
+		long facebookId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updateFacebookId(userId, facebookId);
+		return getService().updateFacebookId(userId, facebookId);
 	}
 
 	public static void updateGroups(long userId, long[] newGroupIds)
@@ -980,10 +981,11 @@ public class UserLocalServiceUtil {
 		return getService().updateModifiedDate(userId, modifiedDate);
 	}
 
-	public static void updateOpenId(long userId, java.lang.String openId)
+	public static com.liferay.portal.model.User updateOpenId(long userId,
+		java.lang.String openId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updateOpenId(userId, openId);
+		return getService().updateOpenId(userId, openId);
 	}
 
 	public static void updateOrganizations(long userId,
@@ -1028,23 +1030,25 @@ public class UserLocalServiceUtil {
 		getService().updatePasswordReset(userId, passwordReset);
 	}
 
-	public static void updatePortrait(long userId, byte[] bytes)
+	public static com.liferay.portal.model.User updatePortrait(long userId,
+		byte[] bytes)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updatePortrait(userId, bytes);
+		return getService().updatePortrait(userId, bytes);
 	}
 
-	public static void updateReminderQuery(long userId,
-		java.lang.String question, java.lang.String answer)
+	public static com.liferay.portal.model.User updateReminderQuery(
+		long userId, java.lang.String question, java.lang.String answer)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updateReminderQuery(userId, question, answer);
+		return getService().updateReminderQuery(userId, question, answer);
 	}
 
-	public static void updateScreenName(long userId, java.lang.String screenName)
+	public static com.liferay.portal.model.User updateScreenName(long userId,
+		java.lang.String screenName)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updateScreenName(userId, screenName);
+		return getService().updateScreenName(userId, screenName);
 	}
 
 	public static com.liferay.portal.model.User updateUser(long userId,

@@ -898,10 +898,11 @@ public class UserLocalServiceWrapper implements UserLocalService {
 			emailAddress1, emailAddress2);
 	}
 
-	public void updateFacebookId(long userId, long facebookId)
+	public com.liferay.portal.model.User updateFacebookId(long userId,
+		long facebookId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_userLocalService.updateFacebookId(userId, facebookId);
+		return _userLocalService.updateFacebookId(userId, facebookId);
 	}
 
 	public void updateGroups(long userId, long[] newGroupIds)
@@ -954,10 +955,11 @@ public class UserLocalServiceWrapper implements UserLocalService {
 		return _userLocalService.updateModifiedDate(userId, modifiedDate);
 	}
 
-	public void updateOpenId(long userId, java.lang.String openId)
+	public com.liferay.portal.model.User updateOpenId(long userId,
+		java.lang.String openId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_userLocalService.updateOpenId(userId, openId);
+		return _userLocalService.updateOpenId(userId, openId);
 	}
 
 	public void updateOrganizations(long userId, long[] newOrganizationIds)
@@ -999,23 +1001,25 @@ public class UserLocalServiceWrapper implements UserLocalService {
 		_userLocalService.updatePasswordReset(userId, passwordReset);
 	}
 
-	public void updatePortrait(long userId, byte[] bytes)
+	public com.liferay.portal.model.User updatePortrait(long userId,
+		byte[] bytes)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_userLocalService.updatePortrait(userId, bytes);
+		return _userLocalService.updatePortrait(userId, bytes);
 	}
 
-	public void updateReminderQuery(long userId, java.lang.String question,
-		java.lang.String answer)
+	public com.liferay.portal.model.User updateReminderQuery(long userId,
+		java.lang.String question, java.lang.String answer)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_userLocalService.updateReminderQuery(userId, question, answer);
+		return _userLocalService.updateReminderQuery(userId, question, answer);
 	}
 
-	public void updateScreenName(long userId, java.lang.String screenName)
+	public com.liferay.portal.model.User updateScreenName(long userId,
+		java.lang.String screenName)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_userLocalService.updateScreenName(userId, screenName);
+		return _userLocalService.updateScreenName(userId, screenName);
 	}
 
 	public com.liferay.portal.model.User updateUser(long userId,

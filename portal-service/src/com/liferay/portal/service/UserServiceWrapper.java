@@ -264,11 +264,12 @@ public class UserServiceWrapper implements UserService {
 		return _userService.updateAgreedToTermsOfUse(userId, agreedToTermsOfUse);
 	}
 
-	public void updateEmailAddress(long userId, java.lang.String password,
-		java.lang.String emailAddress1, java.lang.String emailAddress2)
+	public com.liferay.portal.model.User updateEmailAddress(long userId,
+		java.lang.String password, java.lang.String emailAddress1,
+		java.lang.String emailAddress2)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_userService.updateEmailAddress(userId, password, emailAddress1,
+		return _userService.updateEmailAddress(userId, password, emailAddress1,
 			emailAddress2);
 	}
 
@@ -279,10 +280,11 @@ public class UserServiceWrapper implements UserService {
 		return _userService.updateLockoutById(userId, lockout);
 	}
 
-	public void updateOpenId(long userId, java.lang.String openId)
+	public com.liferay.portal.model.User updateOpenId(long userId,
+		java.lang.String openId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_userService.updateOpenId(userId, openId);
+		return _userService.updateOpenId(userId, openId);
 	}
 
 	public void updateOrganizations(long userId, long[] organizationIds)
@@ -300,23 +302,25 @@ public class UserServiceWrapper implements UserService {
 			passwordReset);
 	}
 
-	public void updatePortrait(long userId, byte[] bytes)
+	public com.liferay.portal.model.User updatePortrait(long userId,
+		byte[] bytes)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_userService.updatePortrait(userId, bytes);
+		return _userService.updatePortrait(userId, bytes);
 	}
 
-	public void updateReminderQuery(long userId, java.lang.String question,
-		java.lang.String answer)
+	public com.liferay.portal.model.User updateReminderQuery(long userId,
+		java.lang.String question, java.lang.String answer)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_userService.updateReminderQuery(userId, question, answer);
+		return _userService.updateReminderQuery(userId, question, answer);
 	}
 
-	public void updateScreenName(long userId, java.lang.String screenName)
+	public com.liferay.portal.model.User updateScreenName(long userId,
+		java.lang.String screenName)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_userService.updateScreenName(userId, screenName);
+		return _userService.updateScreenName(userId, screenName);
 	}
 
 	public com.liferay.portal.model.User updateUser(long userId,

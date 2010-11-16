@@ -489,7 +489,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			userId, agreedToTermsOfUse);
 	}
 
-	public void updateEmailAddress(
+	public User updateEmailAddress(
 			long userId, String password, String emailAddress1,
 			String emailAddress2)
 		throws PortalException, SystemException {
@@ -497,7 +497,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		UserPermissionUtil.check(
 			getPermissionChecker(), userId, ActionKeys.UPDATE);
 
-		userLocalService.updateEmailAddress(
+		return userLocalService.updateEmailAddress(
 			userId, password, emailAddress1, emailAddress2);
 	}
 
@@ -510,13 +510,13 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		return userLocalService.updateLockoutById(userId, lockout);
 	}
 
-	public void updateOpenId(long userId, String openId)
+	public User updateOpenId(long userId, String openId)
 		throws PortalException, SystemException {
 
 		UserPermissionUtil.check(
 			getPermissionChecker(), userId, ActionKeys.UPDATE);
 
-		userLocalService.updateOpenId(userId, openId);
+		return userLocalService.updateOpenId(userId, openId);
 	}
 
 	public void updateOrganizations(long userId, long[] organizationIds)
@@ -540,32 +540,32 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			userId, password1, password2, passwordReset);
 	}
 
-	public void updatePortrait(long userId, byte[] bytes)
+	public User updatePortrait(long userId, byte[] bytes)
 		throws PortalException, SystemException {
 
 		UserPermissionUtil.check(
 			getPermissionChecker(), userId, ActionKeys.UPDATE);
 
-		userLocalService.updatePortrait(userId, bytes);
+		return userLocalService.updatePortrait(userId, bytes);
 	}
 
-	public void updateReminderQuery(
+	public User updateReminderQuery(
 			long userId, String question, String answer)
 		throws PortalException, SystemException {
 
 		UserPermissionUtil.check(
 			getPermissionChecker(), userId, ActionKeys.UPDATE);
 
-		userLocalService.updateReminderQuery(userId, question, answer);
+		return userLocalService.updateReminderQuery(userId, question, answer);
 	}
 
-	public void updateScreenName(long userId, String screenName)
+	public User updateScreenName(long userId, String screenName)
 		throws PortalException, SystemException {
 
 		UserPermissionUtil.check(
 			getPermissionChecker(), userId, ActionKeys.UPDATE);
 
-		userLocalService.updateScreenName(userId, screenName);
+		return userLocalService.updateScreenName(userId, screenName);
 	}
 
 	public User updateUser(

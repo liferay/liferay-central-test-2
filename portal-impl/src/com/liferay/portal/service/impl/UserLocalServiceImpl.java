@@ -1972,7 +1972,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return user;
 	}
 
-	public void updateFacebookId(long userId, long facebookId)
+	public User updateFacebookId(long userId, long facebookId)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -1980,6 +1980,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setFacebookId(facebookId);
 
 		userPersistence.update(user, false);
+		
+		return user;
 	}
 
 	public void updateGroups(long userId, long[] newGroupIds)
@@ -2105,7 +2107,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return user;
 	}
 
-	public void updateOpenId(long userId, String openId)
+	public User updateOpenId(long userId, String openId)
 		throws PortalException, SystemException {
 
 		openId = openId.trim();
@@ -2115,6 +2117,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setOpenId(openId);
 
 		userPersistence.update(user, false);
+		
+		return user;
 	}
 
 	public void updateOrganizations(long userId, long[] newOrganizationIds)
@@ -2259,7 +2263,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		userPersistence.update(user, false);
 	}
 
-	public void updatePortrait(long userId, byte[] bytes)
+	public User updatePortrait(long userId, byte[] bytes)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -2305,9 +2309,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		catch (IOException ioe) {
 			throw new ImageSizeException(ioe);
 		}
+
+		return user;
 	}
 
-	public void updateReminderQuery(long userId, String question, String answer)
+	public User updateReminderQuery(long userId, String question, String answer)
 		throws PortalException, SystemException {
 
 		validateReminderQuery(question, answer) ;
@@ -2318,9 +2324,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setReminderQueryAnswer(answer);
 
 		userPersistence.update(user, false);
+		
+		return user;
 	}
 
-	public void updateScreenName(long userId, String screenName)
+	public User updateScreenName(long userId, String screenName)
 		throws PortalException, SystemException {
 
 		// User
@@ -2347,6 +2355,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		group.setFriendlyURL(StringPool.SLASH + screenName);
 
 		groupPersistence.update(group, false);
+		
+		return user;
 	}
 
 	public User updateUser(

@@ -546,12 +546,14 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void updateEmailAddress(long userId,
-		java.lang.String password, java.lang.String emailAddress1,
+	public static com.liferay.portal.model.UserSoap updateEmailAddress(
+		long userId, java.lang.String password, java.lang.String emailAddress1,
 		java.lang.String emailAddress2) throws RemoteException {
 		try {
-			UserServiceUtil.updateEmailAddress(userId, password, emailAddress1,
-				emailAddress2);
+			com.liferay.portal.model.User returnValue = UserServiceUtil.updateEmailAddress(userId,
+					password, emailAddress1, emailAddress2);
+
+			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -575,10 +577,13 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void updateOpenId(long userId, java.lang.String openId)
-		throws RemoteException {
+	public static com.liferay.portal.model.UserSoap updateOpenId(long userId,
+		java.lang.String openId) throws RemoteException {
 		try {
-			UserServiceUtil.updateOpenId(userId, openId);
+			com.liferay.portal.model.User returnValue = UserServiceUtil.updateOpenId(userId,
+					openId);
+
+			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -615,10 +620,13 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void updatePortrait(long userId, byte[] bytes)
-		throws RemoteException {
+	public static com.liferay.portal.model.UserSoap updatePortrait(
+		long userId, byte[] bytes) throws RemoteException {
 		try {
-			UserServiceUtil.updatePortrait(userId, bytes);
+			com.liferay.portal.model.User returnValue = UserServiceUtil.updatePortrait(userId,
+					bytes);
+
+			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -627,11 +635,14 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void updateReminderQuery(long userId,
-		java.lang.String question, java.lang.String answer)
+	public static com.liferay.portal.model.UserSoap updateReminderQuery(
+		long userId, java.lang.String question, java.lang.String answer)
 		throws RemoteException {
 		try {
-			UserServiceUtil.updateReminderQuery(userId, question, answer);
+			com.liferay.portal.model.User returnValue = UserServiceUtil.updateReminderQuery(userId,
+					question, answer);
+
+			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -640,10 +651,13 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void updateScreenName(long userId, java.lang.String screenName)
-		throws RemoteException {
+	public static com.liferay.portal.model.UserSoap updateScreenName(
+		long userId, java.lang.String screenName) throws RemoteException {
 		try {
-			UserServiceUtil.updateScreenName(userId, screenName);
+			com.liferay.portal.model.User returnValue = UserServiceUtil.updateScreenName(userId,
+					screenName);
+
+			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

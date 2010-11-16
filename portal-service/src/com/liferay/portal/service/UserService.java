@@ -212,8 +212,9 @@ public interface UserService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void updateEmailAddress(long userId, java.lang.String password,
-		java.lang.String emailAddress1, java.lang.String emailAddress2)
+	public com.liferay.portal.model.User updateEmailAddress(long userId,
+		java.lang.String password, java.lang.String emailAddress1,
+		java.lang.String emailAddress2)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -222,7 +223,8 @@ public interface UserService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void updateOpenId(long userId, java.lang.String openId)
+	public com.liferay.portal.model.User updateOpenId(long userId,
+		java.lang.String openId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -236,16 +238,18 @@ public interface UserService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void updatePortrait(long userId, byte[] bytes)
+	public com.liferay.portal.model.User updatePortrait(long userId,
+		byte[] bytes)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void updateReminderQuery(long userId, java.lang.String question,
-		java.lang.String answer)
+	public com.liferay.portal.model.User updateReminderQuery(long userId,
+		java.lang.String question, java.lang.String answer)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void updateScreenName(long userId, java.lang.String screenName)
+	public com.liferay.portal.model.User updateScreenName(long userId,
+		java.lang.String screenName)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
