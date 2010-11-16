@@ -518,6 +518,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		feedElement.addAttribute("path", path);
 
+		feed.setUserUuid(feed.getUserUuid());
+
 		Group group = GroupLocalServiceUtil.getGroup(
 			portletDataContext.getScopeGroupId());
 
@@ -534,8 +536,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					feed.getTargetLayoutFriendlyUrl(), newGroupFriendlyURL,
 					"@data_handler_group_friendly_url@"));
 		}
-
-		feed.setUserUuid(feed.getUserUuid());
 
 		portletDataContext.addPermissions(JournalFeed.class, feed.getId());
 
@@ -871,6 +871,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		templateElement.addAttribute("path", path);
 
+		template.setUserUuid(template.getUserUuid());
+
 		if (template.isSmallImage()) {
 			String smallImagePath = getTemplateSmallImagePath(
 				portletDataContext, template);
@@ -904,8 +906,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			template.setXsl(content);
 		}
-
-		template.setUserUuid(template.getUserUuid());
 
 		portletDataContext.addPermissions(
 			JournalTemplate.class, template.getId());
