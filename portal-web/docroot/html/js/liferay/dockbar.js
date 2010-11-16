@@ -20,7 +20,8 @@ AUI().add(
 
 					Liferay.once('initDockbar', instance._init, instance);
 
-					dockBar.once('mousemove',
+					dockBar.once(
+						['mousemove', 'focus'],
 						function(event) {
 							Liferay.fire('initDockbar');
 						}
@@ -78,7 +79,7 @@ AUI().add(
 					contentBox.plug(
 						A.Plugin.NodeFocusManager,
 						{
-							circular: true,
+							circular: false,
 							descendants: 'a',
 							focusClass: 'aui-focus',
 							keys: {
@@ -109,6 +110,9 @@ AUI().add(
 					);
 
 					var MenuManager = Dockbar.MenuManager;
+					var dockBar = instance.dockBar;
+					var trigger = menu.get('trigger').item(0);
+					var button = trigger.one('a');
 
 					MenuManager.register(menu);
 
@@ -119,7 +123,7 @@ AUI().add(
 
 							MenuManager.hideAll();
 
-							instance.get('trigger').addClass('menu-button-active');
+							trigger.addClass('menu-button-active');
 						}
 					);
 
@@ -128,8 +132,46 @@ AUI().add(
 						function(event) {
 							var instance = this;
 
-							instance.get('trigger').removeClass('menu-button-active');
+							trigger.removeClass('menu-button-active');
 						}
+					);
+
+					button.on(
+						'focus',
+						function(event) {
+							var instance = this;
+
+							menu.show();
+						}
+					);
+
+					button.on(
+						'keydown',
+						function(event) {
+							var instance = this;
+
+							switch (event.keyCode) {
+								case 40:
+									focusManager.focus(0);
+
+								break;
+							}
+						}
+					);
+
+					menu.on(
+						'keydown',
+						function(event) {
+							var instance = this;
+
+							if (focusManager.get('activeDescendant') == -1) {
+								button.focus();
+							}
+							else {
+								instance._updateMenu(event.domEvent, button);
+							}
+						},
+						instance
 					);
 
 					instance[name] = menu.render(instance.dockBar);
@@ -531,6 +573,86 @@ AUI().add(
 							manageLayouts.focus();
 						}
 					);
+				}
+
+				var menuButtons = [];
+
+				dockBar.all('ul.aui-toolbar').each(
+					function(item, index, collection) {
+						var childNodes = item.all('> li > a, .user-links a, .sign-out a');
+
+						childNodes.each(
+							function(item, index, collection) {
+								menuButtons.push(item);
+							}
+						);
+					}
+				);
+
+				dockBar.delegate(
+					'keydown',
+					function(event) {
+						var instance = this;
+
+						instance._updateMenu(event, event.currentTarget);
+					},
+					'.aui-toolbar a',
+					instance
+				);
+
+				dockBar._menuButtons = menuButtons;
+			},
+
+			_updateMenu: function(event, item) {
+				var instance = this;
+
+				var menuButtons = instance.dockBar._menuButtons;
+				var index = -1;
+
+				for (var i = 0; i < menuButtons.length; i++) {
+					if (menuButtons[i] == item) {
+						index = i;
+
+						break;
+					}
+				}
+
+				if (index != -1) {
+					var button;
+
+					switch (event.keyCode) {
+						case 37:
+							if (index > 0) {
+								button = menuButtons[--index];
+							}
+
+						break;
+
+						case 39:
+							if (index < menuButtons.length - 1) {
+								button = menuButtons[++index];
+							}
+
+						break;
+					}
+
+					if (button) {
+						switch (event.keyCode) {
+							case 37:
+							case 38:
+							case 39:
+							case 40:
+								event.halt();
+
+							break;
+						}
+
+						var MenuManager = Dockbar.MenuManager;
+
+						MenuManager.hideAll();
+
+						button.focus();
+					}
 				}
 			}
 		};
