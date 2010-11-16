@@ -21,7 +21,7 @@ AUI().add(
 					Liferay.once('initDockbar', instance._init, instance);
 
 					dockBar.once(
-						['mousemove', 'focus'],
+						['focus', 'mousemove'],
 						function(event) {
 							Liferay.fire('initDockbar');
 						}
