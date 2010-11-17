@@ -268,11 +268,3 @@
 <liferay-theme:defineObjects />
 
 <%@ include file="/html/common/init-ext.jsp" %>
-
-<%!
-public void jspDestroy() {
-	DirectServletRegistry.removeServlet(this);
-
-	super.jspDestroy();
-}
-%>

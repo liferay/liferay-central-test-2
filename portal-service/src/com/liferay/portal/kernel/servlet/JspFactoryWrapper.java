@@ -56,13 +56,15 @@ public class JspFactoryWrapper extends JspFactory {
 			servlet, servletRequest, servletResponse, errorPageURL,
 			needsSession, _JSP_WRITER_BUFFER_SIZE, autoflush);
 
-		String servletPath = (String)servletRequest.getAttribute(
-			WebKeys.SERVLET_PATH);
+		if (_DIRECT_SERVLET_CONTEXT_ENABLED) {
+			String servletPath = (String)servletRequest.getAttribute(
+				WebKeys.SERVLET_PATH);
 
-		if (servletPath != null) {
-			servletRequest.removeAttribute(WebKeys.SERVLET_PATH);
+			if (servletPath != null) {
+				servletRequest.removeAttribute(WebKeys.SERVLET_PATH);
 
-			DirectServletRegistry.putServlet(servletPath, servlet);
+				DirectServletRegistry.putServlet(servletPath, servlet);
+			}
 		}
 
 		return new PageContextWrapper(pageContext);
@@ -78,6 +80,10 @@ public class JspFactoryWrapper extends JspFactory {
 
 		_jspFactory.releasePageContext(pageContext);
 	}
+
+	private static boolean _DIRECT_SERVLET_CONTEXT_ENABLED =
+		GetterUtil.getBoolean(PropsUtil.get(
+			PropsKeys.DIRECT_SERVLET_CONTEXT_ENABLED));
 
 	private static final int _JSP_WRITER_BUFFER_SIZE = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.JSP_WRITER_BUFFER_SIZE));

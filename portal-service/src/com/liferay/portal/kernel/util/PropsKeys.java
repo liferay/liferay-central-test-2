@@ -477,6 +477,8 @@ public interface PropsKeys {
 
 	public static final String DEFAULT_WAP_THEME_ID = "default.wap.theme.id";
 
+	public static final String DIRECT_SERVLET_CONTEXT_CHECK_UPDATE_ENABLED = "direct.servlet.context.check.update.enabled";
+	
 	public static final String DIRECT_SERVLET_CONTEXT_ENABLED = "direct.servlet.context.enabled";
 
 	public static final String DISCUSSION_THREAD_VIEW = "discussion.thread.view";

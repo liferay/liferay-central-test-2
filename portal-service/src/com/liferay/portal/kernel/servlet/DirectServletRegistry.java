@@ -14,10 +14,18 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
+
+import java.io.File;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.Servlet;
+import javax.servlet.ServletContext;
 
 /**
  * @author Shuyang Zhou
@@ -25,16 +33,46 @@ import javax.servlet.Servlet;
 public class DirectServletRegistry {
 
 	public static Servlet getServlet(String path) {
-		return _servlets.get(path);
+		ObjectValuePair<Servlet, Long> servletInfo = _servlets.get(path);
+
+		if (servletInfo == null) {
+			return null;
+		}
+
+		Servlet servlet = servletInfo.getKey();
+
+		if (_checkUpdate) {
+			long previousLastModifiedTime = servletInfo.getValue();
+			long lastModifiedTime = _getJspFileLastModifiedTime(path, servlet);
+			if (lastModifiedTime > previousLastModifiedTime ||
+				lastModifiedTime == 0) {
+				_servlets.remove(path);
+				servlet = null;
+			}
+		}
+
+		return servlet;
 	}
 
 	public static void putServlet(String path, Servlet servlet) {
-		_servlets.put(path, servlet);
+		if (!_servlets.containsKey(path)) {
+			long lastModifiedTime = 1;
+
+			if (_checkUpdate) {
+				lastModifiedTime = _getJspFileLastModifiedTime(path, servlet);
+			}
+
+			if (lastModifiedTime > 0) {
+				_servlets.put(path, new ObjectValuePair<Servlet, Long>(
+					servlet, lastModifiedTime));
+			}
+		}
 	}
 
 	public static void removeServlet(Servlet servlet) {
-		for (Map.Entry<String, Servlet> entry : _servlets.entrySet()) {
-			if (servlet == entry.getValue()) {
+		for (Map.Entry<String, ObjectValuePair<Servlet, Long>> entry :
+			_servlets.entrySet()) {
+			if (servlet == entry.getValue().getKey()) {
 				_servlets.remove(entry.getKey());
 
 				break;
@@ -42,7 +80,22 @@ public class DirectServletRegistry {
 		}
 	}
 
-	private static Map<String, Servlet> _servlets =
-		new ConcurrentHashMap<String, Servlet>();
+	private static long _getJspFileLastModifiedTime(
+		String path, Servlet servlet) {
+
+		ServletContext servletContext =
+			servlet.getServletConfig().getServletContext();
+		String rootPath = servletContext.getRealPath("");
+
+		File file = new File(rootPath, path);
+
+		return file.lastModified();
+	}
+
+	private static boolean _checkUpdate = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.DIRECT_SERVLET_CONTEXT_CHECK_UPDATE_ENABLED));
+
+	private static Map<String, ObjectValuePair<Servlet, Long>> _servlets =
+		new ConcurrentHashMap<String, ObjectValuePair<Servlet, Long>>();
 
 }
