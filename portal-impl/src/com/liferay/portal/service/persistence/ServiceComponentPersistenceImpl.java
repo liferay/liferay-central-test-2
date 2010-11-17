@@ -1432,6 +1432,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	private static final String _FINDER_COLUMN_BNS_BNU_BUILDNAMESPACE_3 = "(serviceComponent.buildNamespace IS NULL OR serviceComponent.buildNamespace = ?) AND ";
 	private static final String _FINDER_COLUMN_BNS_BNU_BUILDNUMBER_2 = "serviceComponent.buildNumber = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "serviceComponent.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "ServiceComponent.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ServiceComponent exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ServiceComponent exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(ServiceComponentPersistenceImpl.class);

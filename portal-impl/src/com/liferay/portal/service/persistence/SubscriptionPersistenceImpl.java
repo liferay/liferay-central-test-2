@@ -2320,6 +2320,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	private static final String _FINDER_COLUMN_C_U_C_C_CLASSNAMEID_2 = "subscription.classNameId = ? AND ";
 	private static final String _FINDER_COLUMN_C_U_C_C_CLASSPK_2 = "subscription.classPK = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "subscription.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "Subscription.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Subscription exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Subscription exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(SubscriptionPersistenceImpl.class);

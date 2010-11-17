@@ -2043,6 +2043,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	private static final String _FINDER_COLUMN_LOGOID_LOGOID_2 = "company.logoId = ?";
 	private static final String _FINDER_COLUMN_SYSTEM_SYSTEM_2 = "company.system = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "company.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "Company.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Company exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Company exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(CompanyPersistenceImpl.class);

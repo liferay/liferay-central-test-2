@@ -1458,18 +1458,33 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			query.append(_FILTER_SQL_SELECT_IGFOLDER_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_IGFOLDER_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_IGFOLDER_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_IGFOLDER_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(IGFolderModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(IGFolderModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(IGFolderModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -1483,7 +1498,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, IGFolderImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, IGFolderImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, IGFolderImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2271,20 +2291,35 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			query.append(_FILTER_SQL_SELECT_IGFOLDER_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_IGFOLDER_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_IGFOLDER_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
 		query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_IGFOLDER_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(IGFolderModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(IGFolderModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(IGFolderModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -2298,7 +2333,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, IGFolderImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, IGFolderImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, IGFolderImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -3265,13 +3305,17 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	private static final String _FINDER_COLUMN_G_P_N_NAME_2 = "igFolder.name = ?";
 	private static final String _FINDER_COLUMN_G_P_N_NAME_3 = "(igFolder.name IS NULL OR igFolder.name = ?)";
 	private static final String _FILTER_SQL_SELECT_IGFOLDER_WHERE = "SELECT DISTINCT {igFolder.*} FROM IGFolder igFolder WHERE ";
-	private static final String _FILTER_SQL_SELECT_IGFOLDER_NO_INLINE_DISTINCT_WHERE =
-		"SELECT {igFolder.*} FROM (SELECT DISTINCT folderId FROM IGFolder) igFolder2 INNER JOIN IGFolder igFolder ON (igFolder2.folderId = igFolder.folderId) WHERE ";
+	private static final String _FILTER_SQL_SELECT_IGFOLDER_NO_INLINE_DISTINCT_WHERE_1 =
+		"SELECT {IGFolder.*} FROM (SELECT DISTINCT igFolder.folderId FROM IGFolder igFolder WHERE ";
+	private static final String _FILTER_SQL_SELECT_IGFOLDER_NO_INLINE_DISTINCT_WHERE_2 =
+		") TEMP_TABLE INNER JOIN IGFolder ON TEMP_TABLE.folderId = IGFolder.folderId";
 	private static final String _FILTER_SQL_COUNT_IGFOLDER_WHERE = "SELECT COUNT(DISTINCT igFolder.folderId) AS COUNT_VALUE FROM IGFolder igFolder WHERE ";
 	private static final String _FILTER_COLUMN_PK = "igFolder.folderId";
 	private static final String _FILTER_COLUMN_USERID = "igFolder.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "igFolder";
+	private static final String _FILTER_ENTITY_TABLE = "IGFolder";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "igFolder.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "IGFolder.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No IGFolder exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No IGFolder exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(IGFolderPersistenceImpl.class);

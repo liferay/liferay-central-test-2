@@ -2013,6 +2013,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	private static final String _FINDER_COLUMN_G_N_P_C_PORTLETID_3 = "(portletItem.portletId IS NULL OR portletItem.portletId = ?) AND ";
 	private static final String _FINDER_COLUMN_G_N_P_C_CLASSNAMEID_2 = "portletItem.classNameId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "portletItem.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "PortletItem.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No PortletItem exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No PortletItem exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(PortletItemPersistenceImpl.class);

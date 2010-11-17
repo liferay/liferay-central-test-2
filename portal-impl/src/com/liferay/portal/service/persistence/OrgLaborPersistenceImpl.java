@@ -1091,6 +1091,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	private static final String _SQL_COUNT_ORGLABOR_WHERE = "SELECT COUNT(orgLabor) FROM OrgLabor orgLabor WHERE ";
 	private static final String _FINDER_COLUMN_ORGANIZATIONID_ORGANIZATIONID_2 = "orgLabor.organizationId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "orgLabor.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "OrgLabor.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No OrgLabor exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No OrgLabor exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(OrgLaborPersistenceImpl.class);

@@ -4296,6 +4296,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	private static final String _FINDER_COLUMN_U1_U2_T_USERID2_2 = "socialRelation.userId2 = ? AND ";
 	private static final String _FINDER_COLUMN_U1_U2_T_TYPE_2 = "socialRelation.type = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "socialRelation.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "SocialRelation.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SocialRelation exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SocialRelation exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(SocialRelationPersistenceImpl.class);

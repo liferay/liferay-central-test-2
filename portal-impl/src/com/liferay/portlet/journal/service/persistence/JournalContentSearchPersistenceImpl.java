@@ -3944,6 +3944,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	private static final String _FINDER_COLUMN_G_P_L_P_A_ARTICLEID_2 = "journalContentSearch.articleId = ?";
 	private static final String _FINDER_COLUMN_G_P_L_P_A_ARTICLEID_3 = "(journalContentSearch.articleId IS NULL OR journalContentSearch.articleId = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "journalContentSearch.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "JournalContentSearch.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No JournalContentSearch exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No JournalContentSearch exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(JournalContentSearchPersistenceImpl.class);

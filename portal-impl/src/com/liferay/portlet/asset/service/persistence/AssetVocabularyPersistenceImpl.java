@@ -1449,18 +1449,33 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			query.append(_FILTER_SQL_SELECT_ASSETVOCABULARY_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_ASSETVOCABULARY_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_ASSETVOCABULARY_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_ASSETVOCABULARY_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(AssetVocabularyModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(AssetVocabularyModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(AssetVocabularyModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -1474,7 +1489,12 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, AssetVocabularyImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, AssetVocabularyImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, AssetVocabularyImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2640,13 +2660,17 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	private static final String _FINDER_COLUMN_G_N_NAME_2 = "assetVocabulary.name = ?";
 	private static final String _FINDER_COLUMN_G_N_NAME_3 = "(assetVocabulary.name IS NULL OR assetVocabulary.name = ?)";
 	private static final String _FILTER_SQL_SELECT_ASSETVOCABULARY_WHERE = "SELECT DISTINCT {assetVocabulary.*} FROM AssetVocabulary assetVocabulary WHERE ";
-	private static final String _FILTER_SQL_SELECT_ASSETVOCABULARY_NO_INLINE_DISTINCT_WHERE =
-		"SELECT {assetVocabulary.*} FROM (SELECT DISTINCT vocabularyId FROM AssetVocabulary) assetVocabulary2 INNER JOIN AssetVocabulary assetVocabulary ON (assetVocabulary2.vocabularyId = assetVocabulary.vocabularyId) WHERE ";
+	private static final String _FILTER_SQL_SELECT_ASSETVOCABULARY_NO_INLINE_DISTINCT_WHERE_1 =
+		"SELECT {AssetVocabulary.*} FROM (SELECT DISTINCT assetVocabulary.vocabularyId FROM AssetVocabulary assetVocabulary WHERE ";
+	private static final String _FILTER_SQL_SELECT_ASSETVOCABULARY_NO_INLINE_DISTINCT_WHERE_2 =
+		") TEMP_TABLE INNER JOIN AssetVocabulary ON TEMP_TABLE.vocabularyId = AssetVocabulary.vocabularyId";
 	private static final String _FILTER_SQL_COUNT_ASSETVOCABULARY_WHERE = "SELECT COUNT(DISTINCT assetVocabulary.vocabularyId) AS COUNT_VALUE FROM AssetVocabulary assetVocabulary WHERE ";
 	private static final String _FILTER_COLUMN_PK = "assetVocabulary.vocabularyId";
 	private static final String _FILTER_COLUMN_USERID = "assetVocabulary.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "assetVocabulary";
+	private static final String _FILTER_ENTITY_TABLE = "AssetVocabulary";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "assetVocabulary.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "AssetVocabulary.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No AssetVocabulary exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No AssetVocabulary exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(AssetVocabularyPersistenceImpl.class);

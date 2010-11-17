@@ -3453,6 +3453,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	private static final String _FINDER_COLUMN_C_C_C_P_CLASSPK_2 = "address.classPK = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_C_P_PRIMARY_2 = "address.primary = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "address.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "Address.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Address exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Address exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(AddressPersistenceImpl.class);

@@ -909,18 +909,33 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			query.append(_FILTER_SQL_SELECT_ORGANIZATION_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_ORGANIZATION_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_ORGANIZATION_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_ORGANIZATION_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(OrganizationModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(OrganizationModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(OrganizationModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -934,7 +949,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, OrganizationImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, OrganizationImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, OrganizationImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1357,18 +1377,33 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			query.append(_FILTER_SQL_SELECT_ORGANIZATION_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_ORGANIZATION_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_ORGANIZATION_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_LOCATIONS_COMPANYID_2);
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_ORGANIZATION_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(OrganizationModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(OrganizationModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(OrganizationModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -1382,7 +1417,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, OrganizationImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, OrganizationImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, OrganizationImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1834,20 +1874,35 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			query.append(_FILTER_SQL_SELECT_ORGANIZATION_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_ORGANIZATION_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_ORGANIZATION_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_C_P_COMPANYID_2);
 
 		query.append(_FINDER_COLUMN_C_P_PARENTORGANIZATIONID_2);
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_ORGANIZATION_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(OrganizationModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(OrganizationModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(OrganizationModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -1861,7 +1916,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, OrganizationImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, OrganizationImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, OrganizationImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -4353,13 +4413,17 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	private static final String _FINDER_COLUMN_C_N_NAME_2 = "organization.name = ?";
 	private static final String _FINDER_COLUMN_C_N_NAME_3 = "(organization.name IS NULL OR organization.name = ?)";
 	private static final String _FILTER_SQL_SELECT_ORGANIZATION_WHERE = "SELECT DISTINCT {organization.*} FROM Organization_ organization WHERE ";
-	private static final String _FILTER_SQL_SELECT_ORGANIZATION_NO_INLINE_DISTINCT_WHERE =
-		"SELECT {organization.*} FROM (SELECT DISTINCT organizationId FROM Organization_) organization2 INNER JOIN Organization_ organization ON (organization2.organizationId = organization.organizationId) WHERE ";
+	private static final String _FILTER_SQL_SELECT_ORGANIZATION_NO_INLINE_DISTINCT_WHERE_1 =
+		"SELECT {Organization_.*} FROM (SELECT DISTINCT organization.organizationId FROM Organization_ organization WHERE ";
+	private static final String _FILTER_SQL_SELECT_ORGANIZATION_NO_INLINE_DISTINCT_WHERE_2 =
+		") TEMP_TABLE INNER JOIN Organization_ ON TEMP_TABLE.organizationId = Organization_.organizationId";
 	private static final String _FILTER_SQL_COUNT_ORGANIZATION_WHERE = "SELECT COUNT(DISTINCT organization.organizationId) AS COUNT_VALUE FROM Organization_ organization WHERE ";
 	private static final String _FILTER_COLUMN_PK = "organization.organizationId";
 	private static final String _FILTER_COLUMN_USERID = null;
 	private static final String _FILTER_ENTITY_ALIAS = "organization";
+	private static final String _FILTER_ENTITY_TABLE = "Organization_";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "organization.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "Organization_.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Organization exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Organization exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(OrganizationPersistenceImpl.class);

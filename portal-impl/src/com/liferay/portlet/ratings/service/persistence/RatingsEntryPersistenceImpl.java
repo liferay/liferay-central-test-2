@@ -1311,6 +1311,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 	private static final String _FINDER_COLUMN_U_C_C_CLASSNAMEID_2 = "ratingsEntry.classNameId = ? AND ";
 	private static final String _FINDER_COLUMN_U_C_C_CLASSPK_2 = "ratingsEntry.classPK = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "ratingsEntry.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "RatingsEntry.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No RatingsEntry exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No RatingsEntry exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(RatingsEntryPersistenceImpl.class);

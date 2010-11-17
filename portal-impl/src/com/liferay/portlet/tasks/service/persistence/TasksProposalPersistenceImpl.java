@@ -863,18 +863,33 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 			query.append(_FILTER_SQL_SELECT_TASKSPROPOSAL_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_TASKSPROPOSAL_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_TASKSPROPOSAL_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_TASKSPROPOSAL_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(TasksProposalModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(TasksProposalModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(TasksProposalModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -888,7 +903,12 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, TasksProposalImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, TasksProposalImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, TasksProposalImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1335,20 +1355,35 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 			query.append(_FILTER_SQL_SELECT_TASKSPROPOSAL_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_TASKSPROPOSAL_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_TASKSPROPOSAL_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
 		query.append(_FINDER_COLUMN_G_U_USERID_2);
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_TASKSPROPOSAL_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(TasksProposalModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(TasksProposalModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(TasksProposalModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -1362,7 +1397,12 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, TasksProposalImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, TasksProposalImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, TasksProposalImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2073,13 +2113,17 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "tasksProposal.classPK = ?";
 	private static final String _FINDER_COLUMN_C_C_CLASSPK_3 = "(tasksProposal.classPK IS NULL OR tasksProposal.classPK = ?)";
 	private static final String _FILTER_SQL_SELECT_TASKSPROPOSAL_WHERE = "SELECT DISTINCT {tasksProposal.*} FROM TasksProposal tasksProposal WHERE ";
-	private static final String _FILTER_SQL_SELECT_TASKSPROPOSAL_NO_INLINE_DISTINCT_WHERE =
-		"SELECT {tasksProposal.*} FROM (SELECT DISTINCT proposalId FROM TasksProposal) tasksProposal2 INNER JOIN TasksProposal tasksProposal ON (tasksProposal2.proposalId = tasksProposal.proposalId) WHERE ";
+	private static final String _FILTER_SQL_SELECT_TASKSPROPOSAL_NO_INLINE_DISTINCT_WHERE_1 =
+		"SELECT {TasksProposal.*} FROM (SELECT DISTINCT tasksProposal.proposalId FROM TasksProposal tasksProposal WHERE ";
+	private static final String _FILTER_SQL_SELECT_TASKSPROPOSAL_NO_INLINE_DISTINCT_WHERE_2 =
+		") TEMP_TABLE INNER JOIN TasksProposal ON TEMP_TABLE.proposalId = TasksProposal.proposalId";
 	private static final String _FILTER_SQL_COUNT_TASKSPROPOSAL_WHERE = "SELECT COUNT(DISTINCT tasksProposal.proposalId) AS COUNT_VALUE FROM TasksProposal tasksProposal WHERE ";
 	private static final String _FILTER_COLUMN_PK = "tasksProposal.proposalId";
 	private static final String _FILTER_COLUMN_USERID = "tasksProposal.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "tasksProposal";
+	private static final String _FILTER_ENTITY_TABLE = "TasksProposal";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "tasksProposal.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "TasksProposal.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No TasksProposal exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No TasksProposal exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(TasksProposalPersistenceImpl.class);

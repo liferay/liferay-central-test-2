@@ -577,6 +577,7 @@ public class SocialEquityHistoryPersistenceImpl extends BasePersistenceImpl<Soci
 	private static final String _SQL_SELECT_SOCIALEQUITYHISTORY = "SELECT socialEquityHistory FROM SocialEquityHistory socialEquityHistory";
 	private static final String _SQL_COUNT_SOCIALEQUITYHISTORY = "SELECT COUNT(socialEquityHistory) FROM SocialEquityHistory socialEquityHistory";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "socialEquityHistory.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "SocialEquityHistory.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SocialEquityHistory exists with the primary key ";
 	private static Log _log = LogFactoryUtil.getLog(SocialEquityHistoryPersistenceImpl.class);
 }

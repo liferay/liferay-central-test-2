@@ -2930,6 +2930,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	private static final String _FINDER_COLUMN_C_C_C_P_CLASSPK_2 = "phone.classPK = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_C_P_PRIMARY_2 = "phone.primary = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "phone.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "Phone.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Phone exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Phone exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(PhonePersistenceImpl.class);

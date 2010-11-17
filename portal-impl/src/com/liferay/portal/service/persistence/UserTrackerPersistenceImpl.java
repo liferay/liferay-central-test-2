@@ -1933,6 +1933,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	private static final String _FINDER_COLUMN_SESSIONID_SESSIONID_2 = "userTracker.sessionId = ?";
 	private static final String _FINDER_COLUMN_SESSIONID_SESSIONID_3 = "(userTracker.sessionId IS NULL OR userTracker.sessionId = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "userTracker.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "UserTracker.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No UserTracker exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No UserTracker exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(UserTrackerPersistenceImpl.class);

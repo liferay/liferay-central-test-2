@@ -1465,18 +1465,33 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(JournalStructureModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(JournalStructureModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(JournalStructureModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -1490,7 +1505,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, JournalStructureImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, JournalStructureImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, JournalStructureImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2484,7 +2504,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_G_P_GROUPID_2);
@@ -2501,13 +2521,28 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			}
 		}
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(JournalStructureModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(JournalStructureModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(JournalStructureModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -2521,7 +2556,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, JournalStructureImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, JournalStructureImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, JournalStructureImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -3369,13 +3409,17 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	private static final String _FINDER_COLUMN_G_P_PARENTSTRUCTUREID_2 = "journalStructure.parentStructureId = ?";
 	private static final String _FINDER_COLUMN_G_P_PARENTSTRUCTUREID_3 = "(journalStructure.parentStructureId IS NULL OR journalStructure.parentStructureId = ?)";
 	private static final String _FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE = "SELECT DISTINCT {journalStructure.*} FROM JournalStructure journalStructure WHERE ";
-	private static final String _FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE =
-		"SELECT {journalStructure.*} FROM (SELECT DISTINCT id FROM JournalStructure) journalStructure2 INNER JOIN JournalStructure journalStructure ON (journalStructure2.id = journalStructure.id) WHERE ";
+	private static final String _FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE_1 =
+		"SELECT {JournalStructure.*} FROM (SELECT DISTINCT journalStructure.id FROM JournalStructure journalStructure WHERE ";
+	private static final String _FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE_2 =
+		") TEMP_TABLE INNER JOIN JournalStructure ON TEMP_TABLE.id = JournalStructure.id";
 	private static final String _FILTER_SQL_COUNT_JOURNALSTRUCTURE_WHERE = "SELECT COUNT(DISTINCT journalStructure.id) AS COUNT_VALUE FROM JournalStructure journalStructure WHERE ";
 	private static final String _FILTER_COLUMN_PK = "journalStructure.id";
 	private static final String _FILTER_COLUMN_USERID = "journalStructure.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "journalStructure";
+	private static final String _FILTER_ENTITY_TABLE = "JournalStructure";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "journalStructure.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "JournalStructure.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No JournalStructure exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No JournalStructure exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(JournalStructurePersistenceImpl.class);

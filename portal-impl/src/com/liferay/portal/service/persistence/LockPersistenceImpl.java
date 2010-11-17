@@ -1865,6 +1865,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	private static final String _FINDER_COLUMN_C_K_KEY_2 = "lock.key = ?";
 	private static final String _FINDER_COLUMN_C_K_KEY_3 = "(lock.key IS NULL OR lock.key = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "lock.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "Lock_.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Lock exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Lock exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(LockPersistenceImpl.class);

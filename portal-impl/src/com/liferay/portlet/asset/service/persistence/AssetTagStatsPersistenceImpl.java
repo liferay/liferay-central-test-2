@@ -1680,6 +1680,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	private static final String _FINDER_COLUMN_T_C_TAGID_2 = "assetTagStats.tagId = ? AND ";
 	private static final String _FINDER_COLUMN_T_C_CLASSNAMEID_2 = "assetTagStats.classNameId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "assetTagStats.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "AssetTagStats.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No AssetTagStats exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No AssetTagStats exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(AssetTagStatsPersistenceImpl.class);

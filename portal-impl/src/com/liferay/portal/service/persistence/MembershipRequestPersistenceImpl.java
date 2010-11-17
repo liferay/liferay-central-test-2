@@ -1961,6 +1961,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	private static final String _FINDER_COLUMN_G_S_GROUPID_2 = "membershipRequest.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_S_STATUSID_2 = "membershipRequest.statusId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "membershipRequest.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "MembershipRequest.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No MembershipRequest exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No MembershipRequest exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(MembershipRequestPersistenceImpl.class);

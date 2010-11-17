@@ -1325,6 +1325,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 	private static final String _FINDER_COLUMN_N_T_TITLE_2 = "wikiPageResource.title = ?";
 	private static final String _FINDER_COLUMN_N_T_TITLE_3 = "(wikiPageResource.title IS NULL OR wikiPageResource.title = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "wikiPageResource.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "WikiPageResource.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No WikiPageResource exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No WikiPageResource exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(WikiPageResourcePersistenceImpl.class);

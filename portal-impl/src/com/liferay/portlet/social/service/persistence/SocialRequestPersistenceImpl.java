@@ -4951,6 +4951,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	private static final String _FINDER_COLUMN_C_C_T_R_S_RECEIVERUSERID_2 = "socialRequest.receiverUserId = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_T_R_S_STATUS_2 = "socialRequest.status = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "socialRequest.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "SocialRequest.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SocialRequest exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SocialRequest exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(SocialRequestPersistenceImpl.class);

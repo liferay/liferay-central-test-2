@@ -831,18 +831,33 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 			query.append(_FILTER_SQL_SELECT_TEAM_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_TEAM_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_TEAM_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_TEAM_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(TeamModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(TeamModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(TeamModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -856,7 +871,12 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, TeamImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, TeamImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, TeamImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2172,13 +2192,17 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	private static final String _FINDER_COLUMN_G_N_NAME_2 = "team.name = ?";
 	private static final String _FINDER_COLUMN_G_N_NAME_3 = "(team.name IS NULL OR team.name = ?)";
 	private static final String _FILTER_SQL_SELECT_TEAM_WHERE = "SELECT DISTINCT {team.*} FROM Team team WHERE ";
-	private static final String _FILTER_SQL_SELECT_TEAM_NO_INLINE_DISTINCT_WHERE =
-		"SELECT {team.*} FROM (SELECT DISTINCT teamId FROM Team) team2 INNER JOIN Team team ON (team2.teamId = team.teamId) WHERE ";
+	private static final String _FILTER_SQL_SELECT_TEAM_NO_INLINE_DISTINCT_WHERE_1 =
+		"SELECT {Team.*} FROM (SELECT DISTINCT team.teamId FROM Team team WHERE ";
+	private static final String _FILTER_SQL_SELECT_TEAM_NO_INLINE_DISTINCT_WHERE_2 =
+		") TEMP_TABLE INNER JOIN Team ON TEMP_TABLE.teamId = Team.teamId";
 	private static final String _FILTER_SQL_COUNT_TEAM_WHERE = "SELECT COUNT(DISTINCT team.teamId) AS COUNT_VALUE FROM Team team WHERE ";
 	private static final String _FILTER_COLUMN_PK = "team.teamId";
 	private static final String _FILTER_COLUMN_USERID = "team.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "team";
+	private static final String _FILTER_ENTITY_TABLE = "Team";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "team.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "Team.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Team exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Team exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(TeamPersistenceImpl.class);

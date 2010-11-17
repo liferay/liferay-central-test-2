@@ -806,18 +806,33 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			query.append(_FILTER_SQL_SELECT_SCLICENSE_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_SCLICENSE_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_SCLICENSE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_SCLICENSE_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(SCLicenseModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(SCLicenseModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(SCLicenseModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -831,7 +846,12 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, SCLicenseImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, SCLicenseImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, SCLicenseImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1278,20 +1298,35 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			query.append(_FILTER_SQL_SELECT_SCLICENSE_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_SCLICENSE_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_SCLICENSE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_A_R_ACTIVE_2);
 
 		query.append(_FINDER_COLUMN_A_R_RECOMMENDED_2);
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_SCLICENSE_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(SCLicenseModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(SCLicenseModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(SCLicenseModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -1305,7 +1340,12 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, SCLicenseImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, SCLicenseImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, SCLicenseImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2446,13 +2486,17 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	private static final String _FINDER_COLUMN_A_R_ACTIVE_2 = "scLicense.active = ? AND ";
 	private static final String _FINDER_COLUMN_A_R_RECOMMENDED_2 = "scLicense.recommended = ?";
 	private static final String _FILTER_SQL_SELECT_SCLICENSE_WHERE = "SELECT DISTINCT {scLicense.*} FROM SCLicense scLicense WHERE ";
-	private static final String _FILTER_SQL_SELECT_SCLICENSE_NO_INLINE_DISTINCT_WHERE =
-		"SELECT {scLicense.*} FROM (SELECT DISTINCT licenseId FROM SCLicense) scLicense2 INNER JOIN SCLicense scLicense ON (scLicense2.licenseId = scLicense.licenseId) WHERE ";
+	private static final String _FILTER_SQL_SELECT_SCLICENSE_NO_INLINE_DISTINCT_WHERE_1 =
+		"SELECT {SCLicense.*} FROM (SELECT DISTINCT scLicense.licenseId FROM SCLicense scLicense WHERE ";
+	private static final String _FILTER_SQL_SELECT_SCLICENSE_NO_INLINE_DISTINCT_WHERE_2 =
+		") TEMP_TABLE INNER JOIN SCLicense ON TEMP_TABLE.licenseId = SCLicense.licenseId";
 	private static final String _FILTER_SQL_COUNT_SCLICENSE_WHERE = "SELECT COUNT(DISTINCT scLicense.licenseId) AS COUNT_VALUE FROM SCLicense scLicense WHERE ";
 	private static final String _FILTER_COLUMN_PK = "scLicense.licenseId";
 	private static final String _FILTER_COLUMN_USERID = null;
 	private static final String _FILTER_ENTITY_ALIAS = "scLicense";
+	private static final String _FILTER_ENTITY_TABLE = "SCLicense";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "scLicense.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "SCLicense.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SCLicense exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SCLicense exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(SCLicensePersistenceImpl.class);

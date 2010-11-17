@@ -834,18 +834,33 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			query.append(_FILTER_SQL_SELECT_SCFRAMEWORKVERSION_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_SCFRAMEWORKVERSION_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_SCFRAMEWORKVERSION_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_SCFRAMEWORKVERSION_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(SCFrameworkVersionModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(SCFrameworkVersionModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(SCFrameworkVersionModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -859,7 +874,12 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, SCFrameworkVersionImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, SCFrameworkVersionImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, SCFrameworkVersionImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1649,20 +1669,35 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			query.append(_FILTER_SQL_SELECT_SCFRAMEWORKVERSION_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_SCFRAMEWORKVERSION_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_SCFRAMEWORKVERSION_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_G_A_GROUPID_2);
 
 		query.append(_FINDER_COLUMN_G_A_ACTIVE_2);
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_SCFRAMEWORKVERSION_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(SCFrameworkVersionModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(SCFrameworkVersionModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(SCFrameworkVersionModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -1676,7 +1711,12 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, SCFrameworkVersionImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, SCFrameworkVersionImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, SCFrameworkVersionImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2893,13 +2933,17 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	private static final String _FINDER_COLUMN_G_A_GROUPID_2 = "scFrameworkVersion.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_A_ACTIVE_2 = "scFrameworkVersion.active = ?";
 	private static final String _FILTER_SQL_SELECT_SCFRAMEWORKVERSION_WHERE = "SELECT DISTINCT {scFrameworkVersion.*} FROM SCFrameworkVersion scFrameworkVersion WHERE ";
-	private static final String _FILTER_SQL_SELECT_SCFRAMEWORKVERSION_NO_INLINE_DISTINCT_WHERE =
-		"SELECT {scFrameworkVersion.*} FROM (SELECT DISTINCT frameworkVersionId FROM SCFrameworkVersion) scFrameworkVersion2 INNER JOIN SCFrameworkVersion scFrameworkVersion ON (scFrameworkVersion2.frameworkVersionId = scFrameworkVersion.frameworkVersionId) WHERE ";
+	private static final String _FILTER_SQL_SELECT_SCFRAMEWORKVERSION_NO_INLINE_DISTINCT_WHERE_1 =
+		"SELECT {SCFrameworkVersion.*} FROM (SELECT DISTINCT scFrameworkVersion.frameworkVersionId FROM SCFrameworkVersion scFrameworkVersion WHERE ";
+	private static final String _FILTER_SQL_SELECT_SCFRAMEWORKVERSION_NO_INLINE_DISTINCT_WHERE_2 =
+		") TEMP_TABLE INNER JOIN SCFrameworkVersion ON TEMP_TABLE.frameworkVersionId = SCFrameworkVersion.frameworkVersionId";
 	private static final String _FILTER_SQL_COUNT_SCFRAMEWORKVERSION_WHERE = "SELECT COUNT(DISTINCT scFrameworkVersion.frameworkVersionId) AS COUNT_VALUE FROM SCFrameworkVersion scFrameworkVersion WHERE ";
 	private static final String _FILTER_COLUMN_PK = "scFrameworkVersion.frameworkVersionId";
 	private static final String _FILTER_COLUMN_USERID = "scFrameworkVersion.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "scFrameworkVersion";
+	private static final String _FILTER_ENTITY_TABLE = "SCFrameworkVersion";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "scFrameworkVersion.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "SCFrameworkVersion.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SCFrameworkVersion exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SCFrameworkVersion exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(SCFrameworkVersionPersistenceImpl.class);

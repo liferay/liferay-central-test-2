@@ -2281,6 +2281,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	private static final String _FINDER_COLUMN_C_U_F_N_NAME_2 = "dlFileRank.name = ?";
 	private static final String _FINDER_COLUMN_C_U_F_N_NAME_3 = "(dlFileRank.name IS NULL OR dlFileRank.name = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "dlFileRank.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "DLFileRank.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No DLFileRank exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No DLFileRank exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(DLFileRankPersistenceImpl.class);

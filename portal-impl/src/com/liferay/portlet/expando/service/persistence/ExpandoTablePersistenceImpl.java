@@ -1338,6 +1338,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 	private static final String _FINDER_COLUMN_C_C_N_NAME_2 = "expandoTable.name = ?";
 	private static final String _FINDER_COLUMN_C_C_N_NAME_3 = "(expandoTable.name IS NULL OR expandoTable.name = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "expandoTable.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "ExpandoTable.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ExpandoTable exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ExpandoTable exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(ExpandoTablePersistenceImpl.class);

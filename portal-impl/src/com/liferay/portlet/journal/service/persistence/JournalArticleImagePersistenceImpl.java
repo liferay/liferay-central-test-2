@@ -2447,6 +2447,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	private static final String _FINDER_COLUMN_G_A_V_E_E_L_LANGUAGEID_2 = "journalArticleImage.languageId = ?";
 	private static final String _FINDER_COLUMN_G_A_V_E_E_L_LANGUAGEID_3 = "(journalArticleImage.languageId IS NULL OR journalArticleImage.languageId = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "journalArticleImage.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "JournalArticleImage.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No JournalArticleImage exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No JournalArticleImage exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(JournalArticleImagePersistenceImpl.class);

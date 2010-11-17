@@ -664,6 +664,7 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 	private static final String _SQL_SELECT_ACCOUNT = "SELECT account FROM Account account";
 	private static final String _SQL_COUNT_ACCOUNT = "SELECT COUNT(account) FROM Account account";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "account.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "Account_.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Account exists with the primary key ";
 	private static Log _log = LogFactoryUtil.getLog(AccountPersistenceImpl.class);
 }

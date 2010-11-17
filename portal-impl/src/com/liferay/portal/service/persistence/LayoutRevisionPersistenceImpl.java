@@ -2762,6 +2762,7 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 	private static final String _FINDER_COLUMN_L_P_S_PLID_2 = "layoutRevision.plid = ? AND ";
 	private static final String _FINDER_COLUMN_L_P_S_STATUS_2 = "layoutRevision.status = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "layoutRevision.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "LayoutRevision.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No LayoutRevision exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No LayoutRevision exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(LayoutRevisionPersistenceImpl.class);

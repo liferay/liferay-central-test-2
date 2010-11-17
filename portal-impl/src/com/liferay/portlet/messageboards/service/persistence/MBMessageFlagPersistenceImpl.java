@@ -3459,6 +3459,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	private static final String _FINDER_COLUMN_U_M_F_MESSAGEID_2 = "mbMessageFlag.messageId = ? AND ";
 	private static final String _FINDER_COLUMN_U_M_F_FLAG_2 = "mbMessageFlag.flag = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "mbMessageFlag.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "MBMessageFlag.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No MBMessageFlag exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No MBMessageFlag exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(MBMessageFlagPersistenceImpl.class);

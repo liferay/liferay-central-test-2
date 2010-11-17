@@ -996,6 +996,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 	private static final String _SQL_COUNT_SHOPPINGITEMFIELD_WHERE = "SELECT COUNT(shoppingItemField) FROM ShoppingItemField shoppingItemField WHERE ";
 	private static final String _FINDER_COLUMN_ITEMID_ITEMID_2 = "shoppingItemField.itemId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "shoppingItemField.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "ShoppingItemField.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ShoppingItemField exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ShoppingItemField exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(ShoppingItemFieldPersistenceImpl.class);

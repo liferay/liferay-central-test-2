@@ -1380,18 +1380,33 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			query.append(_FILTER_SQL_SELECT_POLLSQUESTION_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_POLLSQUESTION_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_POLLSQUESTION_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_POLLSQUESTION_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(PollsQuestionModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(PollsQuestionModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(PollsQuestionModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -1405,7 +1420,12 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, PollsQuestionImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, PollsQuestionImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, PollsQuestionImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1911,13 +1931,17 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "pollsQuestion.groupId = ?";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "pollsQuestion.groupId = ?";
 	private static final String _FILTER_SQL_SELECT_POLLSQUESTION_WHERE = "SELECT DISTINCT {pollsQuestion.*} FROM PollsQuestion pollsQuestion WHERE ";
-	private static final String _FILTER_SQL_SELECT_POLLSQUESTION_NO_INLINE_DISTINCT_WHERE =
-		"SELECT {pollsQuestion.*} FROM (SELECT DISTINCT questionId FROM PollsQuestion) pollsQuestion2 INNER JOIN PollsQuestion pollsQuestion ON (pollsQuestion2.questionId = pollsQuestion.questionId) WHERE ";
+	private static final String _FILTER_SQL_SELECT_POLLSQUESTION_NO_INLINE_DISTINCT_WHERE_1 =
+		"SELECT {PollsQuestion.*} FROM (SELECT DISTINCT pollsQuestion.questionId FROM PollsQuestion pollsQuestion WHERE ";
+	private static final String _FILTER_SQL_SELECT_POLLSQUESTION_NO_INLINE_DISTINCT_WHERE_2 =
+		") TEMP_TABLE INNER JOIN PollsQuestion ON TEMP_TABLE.questionId = PollsQuestion.questionId";
 	private static final String _FILTER_SQL_COUNT_POLLSQUESTION_WHERE = "SELECT COUNT(DISTINCT pollsQuestion.questionId) AS COUNT_VALUE FROM PollsQuestion pollsQuestion WHERE ";
 	private static final String _FILTER_COLUMN_PK = "pollsQuestion.questionId";
 	private static final String _FILTER_COLUMN_USERID = "pollsQuestion.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "pollsQuestion";
+	private static final String _FILTER_ENTITY_TABLE = "PollsQuestion";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "pollsQuestion.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "PollsQuestion.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No PollsQuestion exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No PollsQuestion exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(PollsQuestionPersistenceImpl.class);

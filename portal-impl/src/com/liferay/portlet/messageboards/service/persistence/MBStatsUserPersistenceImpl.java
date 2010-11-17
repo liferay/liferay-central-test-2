@@ -2123,6 +2123,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 	private static final String _FINDER_COLUMN_G_NOTM_GROUPID_2 = "mbStatsUser.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_NOTM_MESSAGECOUNT_2 = "mbStatsUser.messageCount != ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "mbStatsUser.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "MBStatsUser.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No MBStatsUser exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No MBStatsUser exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(MBStatsUserPersistenceImpl.class);

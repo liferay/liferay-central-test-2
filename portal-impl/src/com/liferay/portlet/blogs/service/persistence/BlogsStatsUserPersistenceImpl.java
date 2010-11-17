@@ -3048,6 +3048,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	private static final String _FINDER_COLUMN_U_L_LASTPOSTDATE_1 = "blogsStatsUser.lastPostDate IS NULL";
 	private static final String _FINDER_COLUMN_U_L_LASTPOSTDATE_2 = "blogsStatsUser.lastPostDate = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "blogsStatsUser.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "BlogsStatsUser.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No BlogsStatsUser exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No BlogsStatsUser exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(BlogsStatsUserPersistenceImpl.class);

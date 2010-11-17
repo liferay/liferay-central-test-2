@@ -1421,18 +1421,33 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			query.append(_FILTER_SQL_SELECT_WIKINODE_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_WIKINODE_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_WIKINODE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_WIKINODE_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(WikiNodeModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(WikiNodeModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(WikiNodeModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -1446,7 +1461,12 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, WikiNodeImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, WikiNodeImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, WikiNodeImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2601,13 +2621,17 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	private static final String _FINDER_COLUMN_G_N_NAME_2 = "wikiNode.name = ?";
 	private static final String _FINDER_COLUMN_G_N_NAME_3 = "(wikiNode.name IS NULL OR wikiNode.name = ?)";
 	private static final String _FILTER_SQL_SELECT_WIKINODE_WHERE = "SELECT DISTINCT {wikiNode.*} FROM WikiNode wikiNode WHERE ";
-	private static final String _FILTER_SQL_SELECT_WIKINODE_NO_INLINE_DISTINCT_WHERE =
-		"SELECT {wikiNode.*} FROM (SELECT DISTINCT nodeId FROM WikiNode) wikiNode2 INNER JOIN WikiNode wikiNode ON (wikiNode2.nodeId = wikiNode.nodeId) WHERE ";
+	private static final String _FILTER_SQL_SELECT_WIKINODE_NO_INLINE_DISTINCT_WHERE_1 =
+		"SELECT {WikiNode.*} FROM (SELECT DISTINCT wikiNode.nodeId FROM WikiNode wikiNode WHERE ";
+	private static final String _FILTER_SQL_SELECT_WIKINODE_NO_INLINE_DISTINCT_WHERE_2 =
+		") TEMP_TABLE INNER JOIN WikiNode ON TEMP_TABLE.nodeId = WikiNode.nodeId";
 	private static final String _FILTER_SQL_COUNT_WIKINODE_WHERE = "SELECT COUNT(DISTINCT wikiNode.nodeId) AS COUNT_VALUE FROM WikiNode wikiNode WHERE ";
 	private static final String _FILTER_COLUMN_PK = "wikiNode.nodeId";
 	private static final String _FILTER_COLUMN_USERID = "wikiNode.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "wikiNode";
+	private static final String _FILTER_ENTITY_TABLE = "WikiNode";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "wikiNode.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "WikiNode.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No WikiNode exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No WikiNode exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(WikiNodePersistenceImpl.class);

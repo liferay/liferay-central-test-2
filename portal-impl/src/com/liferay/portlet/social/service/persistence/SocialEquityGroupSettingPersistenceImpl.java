@@ -888,6 +888,7 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 	private static final String _FINDER_COLUMN_G_C_T_CLASSNAMEID_2 = "socialEquityGroupSetting.classNameId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_T_TYPE_2 = "socialEquityGroupSetting.type = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "socialEquityGroupSetting.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "SocialEquityGroupSetting.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SocialEquityGroupSetting exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SocialEquityGroupSetting exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(SocialEquityGroupSettingPersistenceImpl.class);

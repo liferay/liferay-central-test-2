@@ -1529,18 +1529,33 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			query.append(_FILTER_SQL_SELECT_IGIMAGE_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(IGImageModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(IGImageModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(IGImageModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -1554,7 +1569,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, IGImageImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, IGImageImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, IGImageImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2513,20 +2533,35 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			query.append(_FILTER_SQL_SELECT_IGIMAGE_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
 		query.append(_FINDER_COLUMN_G_U_USERID_2);
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(IGImageModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(IGImageModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(IGImageModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -2540,7 +2575,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, IGImageImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, IGImageImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, IGImageImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -3136,20 +3176,35 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			query.append(_FILTER_SQL_SELECT_IGIMAGE_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
 		query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(IGImageModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(IGImageModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(IGImageModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -3163,7 +3218,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, IGImageImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, IGImageImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, IGImageImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -3246,7 +3306,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			query.append(_FILTER_SQL_SELECT_IGIMAGE_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		boolean conjunctionable = false;
@@ -3279,13 +3339,28 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			conjunctionable = true;
 		}
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(IGImageModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(IGImageModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(IGImageModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -3299,7 +3374,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, IGImageImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, IGImageImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, IGImageImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -3797,7 +3877,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			query.append(_FILTER_SQL_SELECT_IGIMAGE_WHERE);
 		}
 		else {
-			query.append(_FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE);
+			query.append(_FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
 		query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
@@ -3816,13 +3896,28 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			}
 		}
 
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
 		if (orderByComparator != null) {
-			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-				orderByComparator);
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
 		}
 
 		else {
-			query.append(IGImageModelImpl.ORDER_BY_JPQL);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(IGImageModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(IGImageModelImpl.ORDER_BY_SQL);
+			}
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
@@ -3836,7 +3931,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity(_FILTER_ENTITY_ALIAS, IGImageImpl.class);
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, IGImageImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, IGImageImpl.class);
+			}
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -5234,13 +5334,17 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	private static final String _FILTER_SQL_SELECT_IGIMAGE_WHERE = "SELECT DISTINCT {igImage.*} FROM IGImage igImage WHERE ";
-	private static final String _FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE =
-		"SELECT {igImage.*} FROM (SELECT DISTINCT imageId FROM IGImage) igImage2 INNER JOIN IGImage igImage ON (igImage2.imageId = igImage.imageId) WHERE ";
+	private static final String _FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE_1 =
+		"SELECT {IGImage.*} FROM (SELECT DISTINCT igImage.imageId FROM IGImage igImage WHERE ";
+	private static final String _FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE_2 =
+		") TEMP_TABLE INNER JOIN IGImage ON TEMP_TABLE.imageId = IGImage.imageId";
 	private static final String _FILTER_SQL_COUNT_IGIMAGE_WHERE = "SELECT COUNT(DISTINCT igImage.imageId) AS COUNT_VALUE FROM IGImage igImage WHERE ";
 	private static final String _FILTER_COLUMN_PK = "igImage.imageId";
 	private static final String _FILTER_COLUMN_USERID = "igImage.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "igImage";
+	private static final String _FILTER_ENTITY_TABLE = "IGImage";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "igImage.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "IGImage.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No IGImage exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No IGImage exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(IGImagePersistenceImpl.class);

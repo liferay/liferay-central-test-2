@@ -1081,6 +1081,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	private static final String _SQL_COUNT_USERTRACKERPATH_WHERE = "SELECT COUNT(userTrackerPath) FROM UserTrackerPath userTrackerPath WHERE ";
 	private static final String _FINDER_COLUMN_USERTRACKERID_USERTRACKERID_2 = "userTrackerPath.userTrackerId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "userTrackerPath.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "UserTrackerPath.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No UserTrackerPath exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No UserTrackerPath exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(UserTrackerPathPersistenceImpl.class);

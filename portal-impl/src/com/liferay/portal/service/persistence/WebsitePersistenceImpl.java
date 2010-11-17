@@ -2933,6 +2933,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	private static final String _FINDER_COLUMN_C_C_C_P_CLASSPK_2 = "website.classPK = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_C_P_PRIMARY_2 = "website.primary = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "website.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "Website.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Website exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Website exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(WebsitePersistenceImpl.class);
