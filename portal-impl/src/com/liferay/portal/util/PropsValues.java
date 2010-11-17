@@ -472,6 +472,8 @@ public class PropsValues {
 
 	public static final String GOOGLE_GADGET_SERVLET_MAPPING = PropsUtil.get(PropsKeys.GOOGLE_GADGET_SERVLET_MAPPING);
 
+	public static final int GZIP_COMPRESSION_LEVEL = GetterUtil.getInteger(PropsUtil.get(PropsKeys.GZIP_COMPRESSION_LEVEL));
+
 	public static final String HIBERNATE_DIALECT = PropsUtil.get(PropsKeys.HIBERNATE_DIALECT);
 
 	public static final boolean HIBERNATE_GENERATE_STATISTICS = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.HIBERNATE_GENERATE_STATISTICS));

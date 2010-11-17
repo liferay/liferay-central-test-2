@@ -609,6 +609,8 @@ public interface PropsKeys {
 
 	public static final String GOOGLE_GADGET_SERVLET_MAPPING = "google.gadget.servlet.mapping";
 
+	public static final String GZIP_COMPRESSION_LEVEL = "gzip.compression.level";
+
 	public static final String HIBERNATE_CONFIGS = "hibernate.configs";
 
 	public static final String HIBERNATE_DIALECT = "hibernate.dialect";
