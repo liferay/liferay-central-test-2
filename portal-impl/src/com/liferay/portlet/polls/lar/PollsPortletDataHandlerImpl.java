@@ -462,6 +462,6 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 		new PortletDataHandlerBoolean(_NAMESPACE, "questions", true, true);
 
 	private static PortletDataHandlerBoolean _votes =
-	new PortletDataHandlerBoolean(_NAMESPACE, "votes");
+		new PortletDataHandlerBoolean(_NAMESPACE, "votes");
 
 }
