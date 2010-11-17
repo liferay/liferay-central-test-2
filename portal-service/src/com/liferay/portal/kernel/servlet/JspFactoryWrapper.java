@@ -56,8 +56,8 @@ public class JspFactoryWrapper extends JspFactory {
 			servlet, servletRequest, servletResponse, errorPageURL,
 			needsSession, _JSP_WRITER_BUFFER_SIZE, autoflush);
 
-		String servletPath =
-			(String)servletRequest.getAttribute(WebKeys.SERVLET_PATH);
+		String servletPath = (String)servletRequest.getAttribute(
+			WebKeys.SERVLET_PATH);
 
 		if (servletPath != null) {
 			servletRequest.removeAttribute(WebKeys.SERVLET_PATH);
