@@ -24,6 +24,7 @@ AUI().add(
 						['focus', 'mousemove'],
 						function(event) {
 							Liferay.fire('initDockbar');
+
 							eventHandle.detach();
 						}
 					);
