@@ -118,6 +118,7 @@ import javax.portlet.PortletPreferences;
  * @author Bruno Farache
  * @author Karthik Sudarshan
  * @author Wesley Gong
+ * @author Hugo Huijser
  * @see	   com.liferay.portal.kernel.lar.PortletDataHandler
  * @see	   com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl
  * @see	   com.liferay.portlet.journal.lar.JournalCreationStrategy
@@ -208,10 +209,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			articleElement.addAttribute("structure-uuid", structure.getUuid());
 
-			if (structure.getGroupId() == companyGroup.getGroupId()) {
-				exportStructure(
-					portletDataContext, structuresElement, structure);
-			}
+			exportStructure(portletDataContext, structuresElement, structure);
 		}
 
 		if (Validator.isNotNull(article.getTemplateId())) {
@@ -229,12 +227,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			articleElement.addAttribute("template-uuid", template.getUuid());
 
-			if (template.getGroupId() == companyGroup.getGroupId()) {
-				exportTemplate(
-					portletDataContext, templatesElement, dlFoldersElement,
-					dlFileEntriesElement, dlFileRanksElement, igFoldersElement,
-					igImagesElement, template, checkDateRange);
-			}
+			exportTemplate(
+				portletDataContext, templatesElement, dlFoldersElement,
+				dlFileEntriesElement, dlFileRanksElement, igFoldersElement,
+				igImagesElement, template, checkDateRange);
 		}
 
 		Image smallImage = ImageUtil.fetchByPrimaryKey(

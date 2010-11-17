@@ -210,47 +210,6 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 				portletDataContext, rootElement, rootElement, rootElement,
 				dlFoldersElement, dlFilesElement, dlFileRanksElement,
 				igFoldersElement, igImagesElement, article, false);
-
-			Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
-				article.getCompanyId());
-
-			String structureId = article.getStructureId();
-
-			if (Validator.isNotNull(structureId)) {
-				JournalStructure structure = null;
-
-				try {
-					structure = JournalStructureLocalServiceUtil.getStructure(
-						article.getGroupId(), structureId);
-				}
-				catch (NoSuchStructureException nsse) {
-					structure = JournalStructureLocalServiceUtil.getStructure(
-						companyGroup.getGroupId(), structureId);
-				}
-
-				JournalPortletDataHandlerImpl.exportStructure(
-					portletDataContext, rootElement, structure);
-			}
-
-			String templateId = article.getTemplateId();
-
-			if (Validator.isNotNull(templateId)) {
-				JournalTemplate template = null;
-
-				try {
-					template = JournalTemplateLocalServiceUtil.getTemplate(
-						portletDataContext.getScopeGroupId(), templateId);
-				}
-				catch (NoSuchTemplateException nste) {
-					template = JournalTemplateLocalServiceUtil.getTemplate(
-						companyGroup.getGroupId(), templateId);
-				}
-
-				JournalPortletDataHandlerImpl.exportTemplate(
-					portletDataContext, rootElement, dlFoldersElement,
-					dlFilesElement, dlFileRanksElement, igFoldersElement,
-					igImagesElement, template, false);
-			}
 		}
 
 		return document.formattedString();
