@@ -11,7 +11,7 @@
 
 		<copy
 			file="${hudson.portal.dependencies.dir}${lp.version}/lpe2005-ee5207-hook-5.2.7.1.war"
-			todir="${app.server.parent.dir}/${ee.deploy.dir}"
+			todir="${user.home}/liferay/deploy"
 		/>
 	</target>
 
@@ -190,9 +190,21 @@ web.server.display.node=true</echo>
 			<then>
 				<copy
 					file="${hudson.license.dependencies.dir}/${lp.version}/license"
-					todir="${app.server.parent.dir}/${ee.license.dir}"
+					todir="${user.home}/liferay/ee"
 				/>
 			</then>
+			<elseif>
+				<equals arg1="${lp.version}" arg2="5.2.9" />
+				<then>
+					<copy
+						todir="${user.home}/liferay/deploy">
+							<fileset
+								dir="${hudson.license.dependencies.dir}/${lp.version}"
+								includes="license-portal-*.xml"
+						/>
+					</copy>
+				</then>
+			</elseif>
 		</if>
 
 		<antcall target="start-selenium" />

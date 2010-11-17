@@ -6,17 +6,22 @@
 		</antcall>
 
 		<antcall target="run-versioned-upgrade-test">
-			<param name="deploy.versioned.plugins" value="true" />
-			<param name="ee.deploy.dir" value="liferay-portal-6.0.5/deploy" />
 			<param name="file.name" value="liferay-portal-tomcat-6.0.5.zip" />
 			<param name="legacy.theme.ids" value="classic,controlpanel" />
 			<param name="lp.version" value="6.0.5" />
+			<param name="plugins.version.includes" value="web-form-portlet**.war" />
 			<param name="test.name" value="SampleData605TestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-6.0.5/tomcat-6.0.26" />
 		</antcall>
 
+		<antcall target="prepare-db-${test.ant.script.db}-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="skip.rebuild-database" value="true" />
+			<param name="sql.version" value="6.0.5" />
+		</antcall>
+
 		<antcall target="run-latest-upgrade-test">
-			<param name="portlet.plugins.includes" value="web-form-portlet" />
+			<param name="portlet.plugins.upgrade.includes" value="web-form-portlet" />
 			<param name="test.name" value="ViewSampleData605LatestTestSuite" />
 		</antcall>
 	</target>

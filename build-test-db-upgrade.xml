@@ -149,6 +149,8 @@
 			<property name="skip.rebuild-database" value="true" />
 		</ant>
 
-		<antcall target="clean-up-bundles" />
+		<antcall target="clean-up-bundles">
+			<param name="skip.delete-liferay-home" value="true" />
+		</antcall>
 	</target>
 </project>

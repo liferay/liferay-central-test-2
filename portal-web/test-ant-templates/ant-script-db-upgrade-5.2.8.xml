@@ -6,25 +6,23 @@
 		</antcall>
 
 		<antcall target="run-versioned-upgrade-test">
-			<param name="deploy.versioned.plugins" value="true" />
-			<param name="ee.deploy.dir" value="liferay-portal-5.2-ee-sp4/deploy" />
-			<param name="ee.license.dir" value="liferay-portal-5.2-ee-sp4/ee" />
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2-ee-sp4.zip" />
 			<param name="legacy.theme.ids" value="classic,controlpanel" />
 			<param name="lp.version" value="5.2.8" />
+			<param name="plugins.version.includes" value="web-form-portlet**.war" />
 			<param name="test.name" value="SampleData528TestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-5.2-ee-sp4/tomcat-6.0.18" />
 		</antcall>
 
 		<antcall target="prepare-db-${test.ant.script.db}-common">
-			<param name="custom.properties" value="upgrade.processes=\$${line.separator}com.liferay.portal.upgrade.UpgradeProcess_5_2_8_to_6_0_5,\$${line.separator}com.liferay.portal.upgrade.UpgradeProcess_6_0_6,\$${line.separator}com.liferay.portal.upgrade.UpgradeProcess_6_1_0$${line.separator}permissions.user.check.algorithm=5$${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
+			<param name="custom.properties" value="upgrade.processes=\$${line.separator}com.liferay.portal.upgrade.UpgradeProcess_5_2_8_to_6_0_5,\$${line.separator}com.liferay.portal.upgrade.UpgradeProcess_6_0_6,\$${line.separator}com.liferay.portal.upgrade.UpgradeProcess_6_1_0" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="skip.rebuild-database" value="true" />
 			<param name="sql.version" value="5.2.8" />
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			<param name="portlet.plugins.includes" value="web-form-portlet" />
+			<param name="portlet.plugins.upgrade.includes" value="web-form-portlet" />
 			<param name="test.name" value="ViewSampleData528LatestTestSuite" />
 		</antcall>
 	</target>

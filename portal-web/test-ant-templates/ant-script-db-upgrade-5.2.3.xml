@@ -14,7 +14,6 @@
 		</antcall>
 
 		<antcall target="prepare-db-${test.ant.script.db}-common">
-			<param name="custom.properties" value="permissions.user.check.algorithm=5$${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="skip.rebuild-database" value="true" />
 			<param name="sql.version" value="5.2.3" />
