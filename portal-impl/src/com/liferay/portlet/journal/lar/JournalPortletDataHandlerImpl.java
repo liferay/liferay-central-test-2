@@ -845,9 +845,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		while (matcher.find()) {
 			long layoutId = GetterUtil.getLong(matcher.group(1));
 
-			String layoutType = matcher.group(2);
+			String type = matcher.group(2);
 
-			boolean privateLayout = layoutType.startsWith("private");
+			boolean privateLayout = type.startsWith("private");
 
 			try {
 				Layout layout = LayoutLocalServiceUtil.getLayout(
@@ -857,26 +857,24 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				String oldLinkToLayout = matcher.group(0);
 
 				String newLinkToLayout = StringUtil.replace(
-					oldLinkToLayout, layoutType,
-					layoutType.concat(
-						StringPool.AT.concat(layout.getFriendlyURL())));
+					oldLinkToLayout, type,
+					type.concat(StringPool.AT.concat(layout.getFriendlyURL())));
 
 				oldLinksToLayout.add(oldLinkToLayout);
 				newLinksToLayout.add(newLinkToLayout);
 			}
 			catch (Exception e) {
-				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Error looking for layout with id " + layoutId +
-							" in group " +
-								portletDataContext.getScopeGroupId(), e);
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Unable to get layout with id " + layoutId +
+							" in group " + portletDataContext.getScopeGroupId(),
+						e);
 				}
 			}
 		}
 
 		content = StringUtil.replace(
-			content,
-			ArrayUtil.toStringArray(oldLinksToLayout.toArray()),
+			content, ArrayUtil.toStringArray(oldLinksToLayout.toArray()),
 			ArrayUtil.toStringArray(newLinksToLayout.toArray()));
 
 		return content;
@@ -1813,9 +1811,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			String newLayoutId = oldLayoutId;
 
-			String layoutType = matcher.group(2);
+			String type = matcher.group(2);
 
-			boolean privateLayout = layoutType.startsWith("private");
+			boolean privateLayout = type.startsWith("private");
 
 			String friendlyURL = matcher.group(3);
 
@@ -1827,34 +1825,28 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				newLayoutId = String.valueOf(layout.getLayoutId());
 			}
 			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Error finding friendly layout with friendlyURL " +
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Unable to get layout with friendly URL " +
 							friendlyURL + " in group " +
-								portletDataContext.getScopeGroupId(), e);
+								portletDataContext.getScopeGroupId(),
+						e);
 				}
 			}
 
 			String oldLinkToLayout = matcher.group(0);
 
 			String newLinkToLayout = StringUtil.replace(
-					oldLinkToLayout,
-					new String[] {
-						oldLayoutId,
-						StringPool.AT.concat(friendlyURL),
-					},
-					new String[] {
-						newLayoutId,
-						StringPool.BLANK
-					});
+				oldLinkToLayout,
+				new String[] {oldLayoutId, StringPool.AT.concat(friendlyURL)},
+				new String[] {newLayoutId, StringPool.BLANK});
 
 			oldLinksToLayout.add(oldLinkToLayout);
 			newLinksToLayout.add(newLinkToLayout);
 		}
 
 		content = StringUtil.replace(
-			content,
-			ArrayUtil.toStringArray(oldLinksToLayout.toArray()),
+			content, ArrayUtil.toStringArray(oldLinksToLayout.toArray()),
 			ArrayUtil.toStringArray(newLinksToLayout.toArray()));
 
 		return content;
@@ -2353,7 +2345,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static Pattern _exportLinkToLayoutPattern = Pattern.compile(
 		"\\[([0-9]+)@(public|private\\-[a-z]*)\\]");
-
 	private static Pattern _importLinkToLayoutPattern = Pattern.compile(
 		"\\[([0-9]+)@(public|private\\-[a-z]*)@([^\\]]*)\\]");
 
