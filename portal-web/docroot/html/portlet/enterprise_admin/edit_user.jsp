@@ -75,23 +75,6 @@ else {
 	}
 }
 
-if (selUser != null) {
-	Group selUserGroup = null;
-
-	for (Organization selUserOrg : organizations) {
-		selUserGroup = selUserOrg.getGroup();
-
-		if (permissionChecker.isCommunityAdmin(selUserGroup.getGroupId()) ||
-				permissionChecker.isCommunityOwner(selUserGroup.getGroupId())) {
-			filterManageableRoles = false;
-
-			filterManageableUserGroupRoles = false;
-
-			break;
-		}
-	}
-}
-
 String roleIds = ParamUtil.getString(request, "rolesSearchContainerPrimaryKeys");
 
 List<Role> roles = Collections.EMPTY_LIST;
