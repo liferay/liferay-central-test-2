@@ -138,6 +138,7 @@ public class PluginPackageIndexer extends BaseIndexer {
 
 		document.addModifiedDate(modifiedDate);
 
+		document.addKeyword(Field.COMPANY_ID, CompanyConstants.SYSTEM);
 		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		document.addKeyword(Field.GROUP_ID, moduleIdObj.getGroupId());
 
