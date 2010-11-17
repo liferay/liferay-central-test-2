@@ -270,6 +270,10 @@ public class PortalImpl implements Portal {
 
 		int pos = _globalLibDir.lastIndexOf(".jar!");
 
+		if (pos == -1) {
+			pos = _globalLibDir.lastIndexOf(".jar/");
+		}
+
 		pos = _globalLibDir.lastIndexOf(CharPool.SLASH, pos);
 
 		_globalLibDir = _globalLibDir.substring(0, pos + 1);
