@@ -146,6 +146,11 @@
 			<bean class="com.liferay.portal.management.BasePortalManager" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.oauth.OAuthFactoryUtil" class="com.liferay.portal.kernel.oauth.OAuthFactoryUtil">
+		<property name="OAuthFactory">
+			<bean class="com.liferay.portal.oauth.OAuthFactoryImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.sanitizer.SanitizerUtil" class="com.liferay.portal.kernel.sanitizer.SanitizerUtil">
 		<property name="sanitizer">
 			<bean class="com.liferay.portal.sanitizer.SanitizerImpl" />

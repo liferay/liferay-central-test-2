@@ -2483,6 +2483,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/scribe.jar</file-name>
+		<version>1.0.7</version>
+		<project-name>Scribe</project-name>
+		<project-url>https://github.com/fernandezpablo85/scribe-java</project-url>
+		<licenses>
+			<license>
+				<license-name>MIT License</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/serializer.jar</file-name>
 		<version>2.7.0</version>
 		<project-name>Xalan-Java</project-name>
