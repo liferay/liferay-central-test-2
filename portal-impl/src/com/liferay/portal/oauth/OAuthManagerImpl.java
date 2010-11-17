@@ -91,7 +91,8 @@ public class OAuthManagerImpl implements OAuthManager {
 		try {
 			_oAuthService.signRequest(
 				(org.scribe.model.Token)accessToken.getWrappedToken(),
-				(org.scribe.model.OAuthRequest)oAuthRequest);
+				(org.scribe.model.OAuthRequest)
+					oAuthRequest.getWrappedOAuthRequest());
 		}
 		catch (Exception e) {
 			throw new OAuthException(e);
