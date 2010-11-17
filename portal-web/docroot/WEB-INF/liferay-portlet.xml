@@ -1483,6 +1483,7 @@
 		<header-portlet-css>/html/portlet/asset_publisher/css/main.jsp</header-portlet-css>
 		<header-portlet-css>/html/portlet/enterprise_admin/css/main.jsp</header-portlet-css>
 		<header-portlet-css>/html/portlet/workflow_definitions/css/main.jsp</header-portlet-css>
+		<footer-portlet-javascript>/html/portlet/workflow_tasks/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-workflow-tasks</css-class-wrapper>
 	</portlet>
 	<portlet>

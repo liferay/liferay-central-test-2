@@ -169,8 +169,8 @@ if (workflowTask.getDueDate() != null) {
 	<aui:input cols="55" name="comment" type="textarea" rows="10" />
 </div>
 
-<aui:script>
-	var onTaskClickFn = AUI().rbind(<portlet:namespace />onTaskClick, window, '<%= randomId %>');
+<aui:script use="liferay-workflow-tasks">
+	var onTaskClickFn = A.rbind(Liferay.WorkflowTasks.onTaskClick, Liferay.WorkflowTasks, '<%= randomId %>');
 
 	Liferay.delegateClick('<portlet:namespace /><%= randomId %>taskChangeStatusLink', onTaskClickFn);
 	Liferay.delegateClick('<portlet:namespace /><%= randomId %>taskAssignToMeLink', onTaskClickFn);
