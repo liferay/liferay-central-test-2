@@ -197,11 +197,11 @@
 		<%
 		long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/html/js/", true);
 
-		String alloyRootPath = themeDisplay.getPathJavaScript() + "/aui/";
+		String alloyRootPath = themeDisplay.getPathContext() + "/html/js/aui/";
 
 		String alloyBaseURL = PortalUtil.getPortalURL(request) + alloyRootPath;
 
-		String alloyComboPath = PortalUtil.getStaticResourceURL(request, themeDisplay.getPathContext() + "/combo/", javaScriptLastModified);
+		String alloyComboPath = PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNHost() + themeDisplay.getPathContext() + "/combo/", javaScriptLastModified);
 		%>
 
 		Liferay.AUI = {
@@ -212,14 +212,14 @@
 				return <%= themeDisplay.isThemeJsFastLoad() %>;
 			},
 			getComboPath: function() {
-				return '<%= alloyComboPath %>&p=<%= themeDisplay.getPathJavaScript() %>&';
+				return '<%= alloyComboPath %>&p=<%= themeDisplay.getPathContext() %>/html/js&';
 			},
 			getFilter: function() {
 				<c:choose>
 					<c:when test="<%= themeDisplay.isThemeJsFastLoad() %>">
 						return {
 							replaceStr: function(match, fragment, string) {
-								return fragment + 'm=' + (match.split('<%= themeDisplay.getPathJavaScript() %>')[1] || '');
+								return fragment + 'm=' + (match.split('<%= themeDisplay.getPathContext() %>/html/js')[1] || '');
 							},
 							searchExp: '(\\?|&)/([^&]+)'
 						};
