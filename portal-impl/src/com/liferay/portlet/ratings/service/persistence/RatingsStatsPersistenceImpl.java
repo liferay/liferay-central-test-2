@@ -828,7 +828,6 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "ratingsStats.classNameId = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "ratingsStats.classPK = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "ratingsStats.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "RatingsStats.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No RatingsStats exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No RatingsStats exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(RatingsStatsPersistenceImpl.class);

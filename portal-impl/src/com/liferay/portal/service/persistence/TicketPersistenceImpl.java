@@ -917,7 +917,6 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	private static final String _FINDER_COLUMN_KEY_KEY_2 = "ticket.key = ?";
 	private static final String _FINDER_COLUMN_KEY_KEY_3 = "(ticket.key IS NULL OR ticket.key = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "ticket.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "Ticket.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Ticket exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Ticket exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(TicketPersistenceImpl.class);

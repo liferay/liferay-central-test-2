@@ -1596,7 +1596,6 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 	private static final String _FINDER_COLUMN_G_P_GROUPID_2 = "layoutSet.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_P_PRIVATELAYOUT_2 = "layoutSet.privateLayout = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "layoutSet.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "LayoutSet.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No LayoutSet exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No LayoutSet exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(LayoutSetPersistenceImpl.class);

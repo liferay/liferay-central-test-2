@@ -1494,7 +1494,6 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "orgGroupPermission.id.groupId = ?";
 	private static final String _FINDER_COLUMN_PERMISSIONID_PERMISSIONID_2 = "orgGroupPermission.id.permissionId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "orgGroupPermission.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "OrgGroupPermission.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No OrgGroupPermission exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No OrgGroupPermission exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(OrgGroupPermissionPersistenceImpl.class);

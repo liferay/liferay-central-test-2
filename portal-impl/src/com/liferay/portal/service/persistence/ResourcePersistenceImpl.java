@@ -1357,7 +1357,6 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	private static final String _FINDER_COLUMN_C_P_PRIMKEY_2 = "resource.primKey = ?";
 	private static final String _FINDER_COLUMN_C_P_PRIMKEY_3 = "(resource.primKey IS NULL OR resource.primKey = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "resource.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "Resource_.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Resource exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Resource exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(ResourcePersistenceImpl.class);

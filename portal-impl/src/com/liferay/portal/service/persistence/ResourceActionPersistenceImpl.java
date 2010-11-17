@@ -1444,7 +1444,6 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	private static final String _FINDER_COLUMN_N_A_ACTIONID_2 = "resourceAction.actionId = ?";
 	private static final String _FINDER_COLUMN_N_A_ACTIONID_3 = "(resourceAction.actionId IS NULL OR resourceAction.actionId = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "resourceAction.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "ResourceAction.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ResourceAction exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ResourceAction exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(ResourceActionPersistenceImpl.class);

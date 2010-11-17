@@ -1091,7 +1091,6 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 	private static final String _SQL_COUNT_CONTACT_WHERE = "SELECT COUNT(contact) FROM Contact contact WHERE ";
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "contact.companyId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "contact.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "Contact_.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Contact exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Contact exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(ContactPersistenceImpl.class);

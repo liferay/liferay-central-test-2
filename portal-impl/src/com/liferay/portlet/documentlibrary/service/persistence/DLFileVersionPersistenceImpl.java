@@ -2051,7 +2051,6 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	private static final String _FINDER_COLUMN_G_F_N_S_NAME_3 = "(dlFileVersion.name IS NULL OR dlFileVersion.name = ?) AND ";
 	private static final String _FINDER_COLUMN_G_F_N_S_STATUS_2 = "dlFileVersion.status = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "dlFileVersion.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "DLFileVersion.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No DLFileVersion exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No DLFileVersion exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(DLFileVersionPersistenceImpl.class);

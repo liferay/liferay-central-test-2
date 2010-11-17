@@ -1236,7 +1236,6 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 	private static final String _FINDER_COLUMN_T_C_TABLEID_2 = "expandoRow.tableId = ? AND ";
 	private static final String _FINDER_COLUMN_T_C_CLASSPK_2 = "expandoRow.classPK = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "expandoRow.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "ExpandoRow.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ExpandoRow exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ExpandoRow exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(ExpandoRowPersistenceImpl.class);

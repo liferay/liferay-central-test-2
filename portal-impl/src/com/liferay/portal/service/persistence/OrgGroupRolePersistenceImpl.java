@@ -1481,7 +1481,6 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "orgGroupRole.id.groupId = ?";
 	private static final String _FINDER_COLUMN_ROLEID_ROLEID_2 = "orgGroupRole.id.roleId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "orgGroupRole.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "OrgGroupRole.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No OrgGroupRole exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No OrgGroupRole exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(OrgGroupRolePersistenceImpl.class);

@@ -895,7 +895,6 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 	private static final String _SQL_COUNT_BROWSERTRACKER_WHERE = "SELECT COUNT(browserTracker) FROM BrowserTracker browserTracker WHERE ";
 	private static final String _FINDER_COLUMN_USERID_USERID_2 = "browserTracker.userId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "browserTracker.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "BrowserTracker.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No BrowserTracker exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No BrowserTracker exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(BrowserTrackerPersistenceImpl.class);

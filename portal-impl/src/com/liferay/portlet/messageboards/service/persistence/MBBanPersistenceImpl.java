@@ -2051,7 +2051,6 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	private static final String _FINDER_COLUMN_G_B_GROUPID_2 = "mbBan.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_B_BANUSERID_2 = "mbBan.banUserId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "mbBan.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "MBBan.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No MBBan exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No MBBan exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(MBBanPersistenceImpl.class);

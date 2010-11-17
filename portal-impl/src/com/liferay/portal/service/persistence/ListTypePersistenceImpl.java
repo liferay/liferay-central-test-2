@@ -1109,7 +1109,6 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	private static final String _FINDER_COLUMN_TYPE_TYPE_2 = "listType.type = ?";
 	private static final String _FINDER_COLUMN_TYPE_TYPE_3 = "(listType.type IS NULL OR listType.type = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "listType.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "ListType.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ListType exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ListType exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(ListTypePersistenceImpl.class);

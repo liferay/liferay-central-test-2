@@ -1445,7 +1445,6 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 	private static final String _FINDER_COLUMN_C_I_T_PLUGINTYPE_2 = "pluginSetting.pluginType = ?";
 	private static final String _FINDER_COLUMN_C_I_T_PLUGINTYPE_3 = "(pluginSetting.pluginType IS NULL OR pluginSetting.pluginType = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "pluginSetting.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "PluginSetting.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No PluginSetting exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No PluginSetting exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(PluginSettingPersistenceImpl.class);

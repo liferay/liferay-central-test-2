@@ -1662,7 +1662,6 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "shoppingCart.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_U_USERID_2 = "shoppingCart.userId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "shoppingCart.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "ShoppingCart.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ShoppingCart exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ShoppingCart exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(ShoppingCartPersistenceImpl.class);

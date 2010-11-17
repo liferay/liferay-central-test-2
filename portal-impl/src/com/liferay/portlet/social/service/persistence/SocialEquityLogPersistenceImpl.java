@@ -3732,7 +3732,6 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	private static final String _FINDER_COLUMN_U_AEI_AID_AD_A_T_ACTIVE_2 = "socialEquityLog.active = ? AND ";
 	private static final String _FINDER_COLUMN_U_AEI_AID_AD_A_T_TYPE_2 = "socialEquityLog.type = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "socialEquityLog.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "SocialEquityLog.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SocialEquityLog exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SocialEquityLog exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(SocialEquityLogPersistenceImpl.class);

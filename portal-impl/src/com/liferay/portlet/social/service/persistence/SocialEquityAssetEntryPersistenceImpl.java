@@ -822,7 +822,6 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 	private static final String _SQL_COUNT_SOCIALEQUITYASSETENTRY_WHERE = "SELECT COUNT(socialEquityAssetEntry) FROM SocialEquityAssetEntry socialEquityAssetEntry WHERE ";
 	private static final String _FINDER_COLUMN_ASSETENTRYID_ASSETENTRYID_2 = "socialEquityAssetEntry.assetEntryId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "socialEquityAssetEntry.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "SocialEquityAssetEntry.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SocialEquityAssetEntry exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SocialEquityAssetEntry exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(SocialEquityAssetEntryPersistenceImpl.class);

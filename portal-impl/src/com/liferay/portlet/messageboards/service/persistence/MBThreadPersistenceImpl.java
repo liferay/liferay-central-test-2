@@ -4794,7 +4794,6 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	}
 
 	private static final String _ORDER_BY_ENTITY_ALIAS = "mbThread.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "MBThread.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No MBThread exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No MBThread exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(MBThreadPersistenceImpl.class);

@@ -6680,7 +6680,6 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	private static final String _FINDER_COLUMN_C_C_L_N_NAME_2 = "group_.name = ?";
 	private static final String _FINDER_COLUMN_C_C_L_N_NAME_3 = "(group_.name IS NULL OR group_.name = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "group_.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "Group_.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Group exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Group exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(GroupPersistenceImpl.class);

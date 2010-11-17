@@ -913,7 +913,6 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	private static final String _FINDER_COLUMN_VALUE_VALUE_2 = "className.value = ?";
 	private static final String _FINDER_COLUMN_VALUE_VALUE_3 = "(className.value IS NULL OR className.value = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "className.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "ClassName_.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ClassName exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ClassName exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(ClassNamePersistenceImpl.class);

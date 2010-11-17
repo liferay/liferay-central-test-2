@@ -3328,7 +3328,6 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	private static final String _FINDER_COLUMN_A_R_ACTIONID_3 = "(permission.actionId IS NULL OR permission.actionId = ?) AND ";
 	private static final String _FINDER_COLUMN_A_R_RESOURCEID_2 = "permission.resourceId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "permission.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "Permission_.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Permission exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Permission exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(PermissionPersistenceImpl.class);

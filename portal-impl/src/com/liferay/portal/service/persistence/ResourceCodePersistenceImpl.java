@@ -1846,7 +1846,6 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	private static final String _FINDER_COLUMN_C_N_S_NAME_3 = "(resourceCode.name IS NULL OR resourceCode.name = ?) AND ";
 	private static final String _FINDER_COLUMN_C_N_S_SCOPE_2 = "resourceCode.scope = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "resourceCode.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "ResourceCode.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ResourceCode exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ResourceCode exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(ResourceCodePersistenceImpl.class);

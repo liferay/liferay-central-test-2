@@ -8510,7 +8510,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	private static final String _FINDER_COLUMN_C_A_COMPANYID_2 = "user.companyId = ? AND ";
 	private static final String _FINDER_COLUMN_C_A_ACTIVE_2 = "user.active = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "user.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "User_.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No User exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No User exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(UserPersistenceImpl.class);

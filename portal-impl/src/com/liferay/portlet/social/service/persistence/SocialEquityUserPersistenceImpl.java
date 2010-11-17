@@ -2930,7 +2930,6 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 	private static final String _FINDER_COLUMN_G_R_GROUPID_2 = "socialEquityUser.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_R_RANK_2 = "socialEquityUser.rank = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "socialEquityUser.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "SocialEquityUser.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SocialEquityUser exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SocialEquityUser exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(SocialEquityUserPersistenceImpl.class);

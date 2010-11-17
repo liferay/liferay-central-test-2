@@ -1464,7 +1464,6 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 	private static final String _FINDER_COLUMN_G_C_A_T_ACTIONID_3 = "(socialEquitySetting.actionId IS NULL OR socialEquitySetting.actionId = ?) AND ";
 	private static final String _FINDER_COLUMN_G_C_A_T_TYPE_2 = "socialEquitySetting.type = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "socialEquitySetting.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "SocialEquitySetting.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SocialEquitySetting exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SocialEquitySetting exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(SocialEquitySettingPersistenceImpl.class);

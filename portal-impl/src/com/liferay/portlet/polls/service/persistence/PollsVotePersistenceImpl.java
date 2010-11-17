@@ -1648,7 +1648,6 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 	private static final String _FINDER_COLUMN_Q_U_QUESTIONID_2 = "pollsVote.questionId = ? AND ";
 	private static final String _FINDER_COLUMN_Q_U_USERID_2 = "pollsVote.userId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "pollsVote.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "PollsVote.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No PollsVote exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No PollsVote exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(PollsVotePersistenceImpl.class);

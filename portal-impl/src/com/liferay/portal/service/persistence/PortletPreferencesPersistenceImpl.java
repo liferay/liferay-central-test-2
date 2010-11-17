@@ -2396,7 +2396,6 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	private static final String _FINDER_COLUMN_O_O_P_P_PORTLETID_2 = "portletPreferences.portletId = ?";
 	private static final String _FINDER_COLUMN_O_O_P_P_PORTLETID_3 = "(portletPreferences.portletId IS NULL OR portletPreferences.portletId = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "portletPreferences.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "PortletPreferences.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No PortletPreferences exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No PortletPreferences exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(PortletPreferencesPersistenceImpl.class);

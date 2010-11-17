@@ -1934,7 +1934,6 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	private static final String _FINDER_COLUMN_C_A_COUNTRYID_2 = "region.countryId = ? AND ";
 	private static final String _FINDER_COLUMN_C_A_ACTIVE_2 = "region.active = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "region.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "Region.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Region exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Region exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(RegionPersistenceImpl.class);

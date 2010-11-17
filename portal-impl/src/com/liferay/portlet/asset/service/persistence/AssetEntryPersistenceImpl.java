@@ -2949,7 +2949,6 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "assetEntry.classNameId = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "assetEntry.classPK = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "assetEntry.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "AssetEntry.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No AssetEntry exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No AssetEntry exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(AssetEntryPersistenceImpl.class);

@@ -3121,7 +3121,6 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	private static final String _FINDER_COLUMN_P_S_C_R_COMPLETED_2 = "tasksReview.completed = ? AND ";
 	private static final String _FINDER_COLUMN_P_S_C_R_REJECTED_2 = "tasksReview.rejected = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "tasksReview.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "TasksReview.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No TasksReview exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No TasksReview exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(TasksReviewPersistenceImpl.class);

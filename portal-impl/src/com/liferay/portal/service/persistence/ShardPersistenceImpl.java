@@ -1166,7 +1166,6 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "shard.classNameId = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "shard.classPK = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "shard.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "Shard.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Shard exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Shard exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(ShardPersistenceImpl.class);

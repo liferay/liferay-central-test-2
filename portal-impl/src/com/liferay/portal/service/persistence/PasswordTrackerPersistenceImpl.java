@@ -1083,7 +1083,6 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	private static final String _SQL_COUNT_PASSWORDTRACKER_WHERE = "SELECT COUNT(passwordTracker) FROM PasswordTracker passwordTracker WHERE ";
 	private static final String _FINDER_COLUMN_USERID_USERID_2 = "passwordTracker.userId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "passwordTracker.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "PasswordTracker.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No PasswordTracker exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No PasswordTracker exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(PasswordTrackerPersistenceImpl.class);

@@ -4692,7 +4692,6 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	private static final String _FINDER_COLUMN_T_C_D_DATA_2 = "expandoValue.data = ?";
 	private static final String _FINDER_COLUMN_T_C_D_DATA_3 = "(expandoValue.data IS NULL OR expandoValue.data = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "expandoValue.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "ExpandoValue.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ExpandoValue exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ExpandoValue exists with the key {";
 	private static Log _log = LogFactoryUtil.getLog(ExpandoValuePersistenceImpl.class);
