@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -125,7 +126,9 @@ public class TextSearchEntry extends SearchEntry {
 			sb.append(_name);
 			sb.append("</a>");
 
-			pageContext.getOut().print(sb.toString());
+			JspWriter jspWriter = pageContext.getOut();
+
+			jspWriter.print(sb.toString());
 		}
 	}
 
