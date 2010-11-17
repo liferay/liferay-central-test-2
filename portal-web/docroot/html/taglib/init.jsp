@@ -16,7 +16,6 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
-<%@ page import="com.liferay.portal.kernel.servlet.DirectServletRegistry" %>
 <%@ page import="com.liferay.taglib.aui.AUIUtil" %>
 <%@ page import="com.liferay.taglib.util.InlineUtil" %>
 
@@ -33,23 +32,7 @@ if ((portletResponse != null) && useNamespace) {
 	namespace = portletResponse.getNamespace();
 }
 
-String servletPath = (String)request.getAttribute(WebKeys.SERVLET_PATH);
-
-if (servletPath != null) {
-	request.removeAttribute(WebKeys.SERVLET_PATH);
-
-	DirectServletRegistry.putServlet(servletPath, this);
-}
-
 String currentURL = PortalUtil.getCurrentURL(request);
 %>
 
 <%@ include file="/html/taglib/init-ext.jsp" %>
-
-<%!
-public void jspDestroy() {
-	DirectServletRegistry.removeServlet(this);
-
-	super.jspDestroy();
-}
-%>

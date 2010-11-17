@@ -82,6 +82,7 @@
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayWindowState" %>
 <%@ page import="com.liferay.portal.kernel.search.Field" %>
 <%@ page import="com.liferay.portal.kernel.servlet.BrowserSnifferUtil" %>
+<%@ page import="com.liferay.portal.kernel.servlet.DirectServletRegistry" %>
 <%@ page import="com.liferay.portal.kernel.servlet.ImageServletTokenUtil" %>
 <%@ page import="com.liferay.portal.kernel.servlet.ServletContextUtil" %>
 <%@ page import="com.liferay.portal.kernel.servlet.SessionErrors" %>
@@ -267,3 +268,11 @@
 <liferay-theme:defineObjects />
 
 <%@ include file="/html/common/init-ext.jsp" %>
+
+<%!
+public void jspDestroy() {
+	DirectServletRegistry.removeServlet(this);
+
+	super.jspDestroy();
+}
+%>
