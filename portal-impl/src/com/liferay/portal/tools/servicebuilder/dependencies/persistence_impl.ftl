@@ -1490,18 +1490,32 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						query.append(_FILTER_SQL_SELECT_${entity.alias?upper_case}_WHERE);
 					}
 					else {
-						query.append(_FILTER_SQL_SELECT_${entity.alias?upper_case}_NO_INLINE_DISTINCT_WHERE);
+						query.append(_FILTER_SQL_SELECT_${entity.alias?upper_case}_NO_INLINE_DISTINCT_WHERE_1);
 					}
 
 					<#include "persistence_impl_finder_cols.ftl">
 
+					if (!getDB().isSupportsInlineDistinct()) {
+						query.append(_FILTER_SQL_SELECT_${entity.alias?upper_case}_NO_INLINE_DISTINCT_WHERE_2);
+					}
+
 					if (orderByComparator != null) {
-						appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
+						if (getDB().isSupportsInlineDistinct()) {
+							appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
+						}
+						else {
+							appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE, orderByComparator);
+						}
 					}
 
 					<#if entity.getOrder()??>
 						else {
-							query.append(${entity.name}ModelImpl.ORDER_BY_JPQL);
+							if (getDB().isSupportsInlineDistinct()) {
+								query.append(${entity.name}ModelImpl.ORDER_BY_JPQL);
+							}
+							else {
+								query.append(${entity.name}ModelImpl.ORDER_BY_SQL);
+							}
 						}
 					</#if>
 
@@ -1514,7 +1528,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						SQLQuery q = session.createSQLQuery(sql);
 
-						q.addEntity(_FILTER_ENTITY_ALIAS, ${entity.name}Impl.class);
+						if (getDB().isSupportsInlineDistinct()) {
+							q.addEntity(_FILTER_ENTITY_ALIAS, ${entity.name}Impl.class);
+						}
+						else {
+							q.addEntity(_FILTER_ENTITY_TABLE, ${entity.name}Impl.class);
+						}
 
 						QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1670,18 +1689,32 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 							query.append(_FILTER_SQL_SELECT_${entity.alias?upper_case}_WHERE);
 						}
 						else {
-							query.append(_FILTER_SQL_SELECT_${entity.alias?upper_case}_NO_INLINE_DISTINCT_WHERE);
+							query.append(_FILTER_SQL_SELECT_${entity.alias?upper_case}_NO_INLINE_DISTINCT_WHERE_1);
 						}
 
 						<#include "persistence_impl_finder_arrayable_cols.ftl">
 
+						if (!getDB().isSupportsInlineDistinct()) {
+							query.append(_FILTER_SQL_SELECT_${entity.alias?upper_case}_NO_INLINE_DISTINCT_WHERE_2);
+						}
+
 						if (orderByComparator != null) {
-							appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
+							if (getDB().isSupportsInlineDistinct()) {
+								appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
+							}
+							else {
+								appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE, orderByComparator);
+							}
 						}
 
 						<#if entity.getOrder()??>
 							else {
-								query.append(${entity.name}ModelImpl.ORDER_BY_JPQL);
+								if (getDB().isSupportsInlineDistinct()) {
+									query.append(${entity.name}ModelImpl.ORDER_BY_JPQL);
+								}
+								else {
+									query.append(${entity.name}ModelImpl.ORDER_BY_SQL);
+								}
 							}
 						</#if>
 
@@ -1694,7 +1727,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 							SQLQuery q = session.createSQLQuery(sql);
 
-							q.addEntity(_FILTER_ENTITY_ALIAS, ${entity.name}Impl.class);
+							if (getDB().isSupportsInlineDistinct()) {
+								q.addEntity(_FILTER_ENTITY_ALIAS, ${entity.name}Impl.class);
+							}
+							else {
+								q.addEntity(_FILTER_ENTITY_TABLE, ${entity.name}Impl.class);
+							}
 
 							QueryPos qPos = QueryPos.getInstance(q);
 
@@ -3554,7 +3592,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	<#if entity.isPermissionCheckEnabled()>
 		private static final String _FILTER_SQL_SELECT_${entity.alias?upper_case}_WHERE = "SELECT DISTINCT {${entity.alias}.*} FROM ${entity.table} ${entity.alias} WHERE ";
 
-		private static final String _FILTER_SQL_SELECT_${entity.alias?upper_case}_NO_INLINE_DISTINCT_WHERE = "SELECT {${entity.alias}.*} FROM (SELECT DISTINCT ${entity.PKVarName} FROM ${entity.table}) ${entity.alias}2 INNER JOIN ${entity.table} ${entity.alias} ON (${entity.alias}2.${entity.PKVarName} = ${entity.alias}.${entity.PKVarName}) WHERE ";
+		private static final String _FILTER_SQL_SELECT_${entity.alias?upper_case}_NO_INLINE_DISTINCT_WHERE_1 = "SELECT {${entity.table}.*} FROM (SELECT DISTINCT ${entity.alias}.${entity.PKVarName} FROM ${entity.table} ${entity.alias} WHERE ";
+
+		private static final String _FILTER_SQL_SELECT_${entity.alias?upper_case}_NO_INLINE_DISTINCT_WHERE_2 = ") TEMP_TABLE INNER JOIN ${entity.table} ON TEMP_TABLE.${entity.PKVarName} = ${entity.table}.${entity.PKVarName}";
 
 		private static final String _FILTER_SQL_COUNT_${entity.alias?upper_case}_WHERE = "SELECT COUNT(DISTINCT ${entity.alias}.${entity.PKVarName}) AS COUNT_VALUE FROM ${entity.table} ${entity.alias} WHERE ";
 
@@ -3567,9 +3607,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		</#if>
 
 		private static final String _FILTER_ENTITY_ALIAS = "${entity.alias}";
+
+		private static final String _FILTER_ENTITY_TABLE = "${entity.table}";
 	</#if>
 
 	private static final String _ORDER_BY_ENTITY_ALIAS = "${entity.alias}.";
+
+	private static final String _ORDER_BY_ENTITY_TABLE = "${entity.table}.";
 
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ${entity.name} exists with the primary key ";
 
