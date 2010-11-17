@@ -24,8 +24,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>clickAtAndWait</td>
 	<td>link=Sign In</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_58_login</td>
 	<td></td>
 </tr>
 <tr>
@@ -39,6 +44,11 @@
 	<td>test</td>
 </tr>
 <tr>
+	<td>waitForVisible</td>
+	<td>_58_rememberMeCheckbox</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>_58_rememberMeCheckbox</td>
 	<td></td>
@@ -49,8 +59,73 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>clickAtAndWait</td>
 	<td>//input[@value='Sign In']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isTextPresent('Terms of Use'))</td>
+	<td>agreementAvailable</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${agreementAvailable}</td>
+	<td>AgreementNotAvailable</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//input[@value='I Agree']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='I Agree']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>AgreementNotAvailable</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('reminderQueryAnswer'))</td>
+	<td>reminderQueryPresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${reminderQueryPresent}</td>
+	<td>ReminderQueryNotPresent</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>reminderQueryAnswer</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>reminderQueryAnswer</td>
+	<td>Test</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>ReminderQueryNotPresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//header/h1/span</td>
 	<td></td>
 </tr>
 

@@ -54,7 +54,6 @@ public class ViewOrganizationTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				Thread.sleep(5000);
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
@@ -75,8 +74,8 @@ public class ViewOrganizationTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				Thread.sleep(5000);
-				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+				selenium.clickAt("//strong/a",
+					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -84,7 +83,8 @@ public class ViewOrganizationTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=Assign Members")) {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a")) {
 							break;
 						}
 					}
@@ -95,8 +95,11 @@ public class ViewOrganizationTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("link=Assign Members",
-					RuntimeVariables.replace(""));
+				assertEquals(RuntimeVariables.replace("Assign Members"),
+					selenium.getText(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
+				selenium.click(RuntimeVariables.replace(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Joe Bloggs"),
@@ -105,6 +108,7 @@ public class ViewOrganizationTest extends BaseTestCase {
 				assertEquals(RuntimeVariables.replace("joebloggs"),
 					selenium.getText(
 						"//tr[@class='portlet-section-body results-row last']/td[3]"));
+				selenium.open("/web/guest/home/");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -112,7 +116,7 @@ public class ViewOrganizationTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("_126_TabsBack")) {
+						if (selenium.isElementPresent("link=Control Panel")) {
 							break;
 						}
 					}
@@ -123,11 +127,23 @@ public class ViewOrganizationTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("_126_TabsBack", RuntimeVariables.replace(""));
+				selenium.clickAt("link=Control Panel",
+					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				Thread.sleep(5000);
-				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+				selenium.clickAt("link=Organizations",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
+				selenium.type("_126_keywords",
+					RuntimeVariables.replace("Sample"));
+				selenium.saveScreenShotAndSource();
+				selenium.clickAt("//input[@value='Search']",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
+				selenium.clickAt("//strong/a",
+					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -135,7 +151,8 @@ public class ViewOrganizationTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=View Users")) {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a")) {
 							break;
 						}
 					}
@@ -146,7 +163,11 @@ public class ViewOrganizationTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("link=View Users", RuntimeVariables.replace(""));
+				assertEquals(RuntimeVariables.replace("View Users"),
+					selenium.getText(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+				selenium.click(RuntimeVariables.replace(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Joe"),

@@ -99,10 +99,9 @@ public class ViewCheckOutOrderTest extends BaseTestCase {
 			selenium.getText("//tr[9]/td[2]"));
 		assertEquals(RuntimeVariables.replace("USA"),
 			selenium.getText("//td[2]/table/tbody/tr[9]/td[2]"));
-		assertEquals(RuntimeVariables.replace("626-589-1453"),
-			selenium.getText("//tr[10]/td[2]"));
-		assertEquals(RuntimeVariables.replace("626-589-1453"),
-			selenium.getText("//td[2]/table/tbody/tr[10]/td[2]"));
+		assertTrue(selenium.isPartialText("//tr[10]/td[2]", "626-589-1453"));
+		assertTrue(selenium.isPartialText("//td[2]/table/tbody/tr[10]/td[2]",
+				"626-589-1453"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
 			selenium.getText("//table[3]/tbody/tr[1]/td[2]"));
 		assertEquals(RuntimeVariables.replace("Visa"),

@@ -22,54 +22,191 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class LoginTest extends BaseTestCase {
 	public void testLogin() throws Exception {
-		selenium.setTimeout("180000");
-		selenium.open("/web/guest/home");
+		int label = 1;
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+				selenium.setTimeout("180000");
+				selenium.open("/web/guest/home");
 
-			try {
-				if (selenium.isVisible("link=Sign In")) {
-					break;
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("link=Sign In")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.saveScreenShotAndSource();
+				selenium.clickAt("link=Sign In", RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
-		selenium.saveScreenShotAndSource();
-		selenium.click(RuntimeVariables.replace("link=Sign In"));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
-		selenium.saveScreenShotAndSource();
-		selenium.type("_58_password", RuntimeVariables.replace("test"));
-		selenium.saveScreenShotAndSource();
-		selenium.click("_58_rememberMeCheckbox");
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isVisible("_58_login")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isVisible("//input[@value='Sign In']")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.saveScreenShotAndSource();
+				selenium.type("_58_login",
+					RuntimeVariables.replace("test@liferay.com"));
+				selenium.saveScreenShotAndSource();
+				selenium.type("_58_password", RuntimeVariables.replace("test"));
+				selenium.saveScreenShotAndSource();
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("_58_rememberMeCheckbox")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.saveScreenShotAndSource();
+				selenium.click("_58_rememberMeCheckbox");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("//input[@value='Sign In']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.saveScreenShotAndSource();
+				selenium.clickAt("//input[@value='Sign In']",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
+
+				boolean agreementAvailable = selenium.isTextPresent(
+						"Terms of Use");
+
+				if (!agreementAvailable) {
+					label = 2;
+
+					continue;
+				}
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("//input[@value='I Agree']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.saveScreenShotAndSource();
+				selenium.clickAt("//input[@value='I Agree']",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
+
+			case 2:
+
+				boolean reminderQueryPresent = selenium.isElementPresent(
+						"reminderQueryAnswer");
+
+				if (!reminderQueryPresent) {
+					label = 3;
+
+					continue;
+				}
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("reminderQueryAnswer")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.saveScreenShotAndSource();
+				selenium.type("reminderQueryAnswer",
+					RuntimeVariables.replace("Test"));
+				selenium.saveScreenShotAndSource();
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("//input[@value='Save']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.saveScreenShotAndSource();
+				selenium.clickAt("//input[@value='Save']",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
+
+			case 3:
+				assertEquals(RuntimeVariables.replace(""),
+					selenium.getText("//header/h1/span"));
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.saveScreenShotAndSource();
-		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
 	}
 }

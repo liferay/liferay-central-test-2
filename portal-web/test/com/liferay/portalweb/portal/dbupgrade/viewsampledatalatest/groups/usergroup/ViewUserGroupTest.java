@@ -48,7 +48,7 @@ public class ViewUserGroupTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=User Group Sample Test"));
-		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -56,7 +56,8 @@ public class ViewUserGroupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Assign Members")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a")) {
 					break;
 				}
 			}
@@ -67,15 +68,17 @@ public class ViewUserGroupTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Assign Members", RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("Assign Members"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a"));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
-			selenium.getText(
-				"//tr[@class='portlet-section-body results-row last']/td[2]"));
+			selenium.getText("//tr[3]/td[2]"));
 		assertEquals(RuntimeVariables.replace("joebloggs"),
-			selenium.getText(
-				"//tr[@class='portlet-section-body results-row last']/td[3]"));
+			selenium.getText("//tr[3]/td[3]"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -97,7 +100,7 @@ public class ViewUserGroupTest extends BaseTestCase {
 		selenium.clickAt("link=User Groups", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -105,7 +108,8 @@ public class ViewUserGroupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=View Users")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a")) {
 					break;
 				}
 			}
@@ -116,29 +120,21 @@ public class ViewUserGroupTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=View Users", RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("View Users"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Joe"),
-			selenium.getText(
-				"//tr[@class='portlet-section-body results-row last']/td[2]"));
+			selenium.getText("//td[2]/a"));
 		assertEquals(RuntimeVariables.replace("Bloggs"),
-			selenium.getText(
-				"//tr[@class='portlet-section-body results-row last']/td[3]"));
+			selenium.getText("//td[3]/a"));
 		assertEquals(RuntimeVariables.replace("joebloggs"),
-			selenium.getText(
-				"//tr[@class='portlet-section-body results-row last']/td[4]"));
-		assertEquals(RuntimeVariables.replace(""),
-			selenium.getText(
-				"//tr[@class='portlet-section-body results-row last']/td[5]"));
-		assertTrue(selenium.isPartialText(
-				"//tr[@class='portlet-section-body results-row last']/td[6]",
-				"Liferay Los Angeles"));
-		assertTrue(selenium.isPartialText(
-				"//tr[@class='portlet-section-body results-row last']/td[6]",
-				"Liferay, Inc."));
-		assertTrue(selenium.isPartialText(
-				"//tr[@class='portlet-section-body results-row last']/td[6]",
-				"Organization Sample Test"));
+			selenium.getText("//td[4]/a"));
+		assertEquals(RuntimeVariables.replace(""), selenium.getText("//td[5]/a"));
+		assertTrue(selenium.isPartialText("//td[6]/a", "Liferay Los Angeles"));
+		assertTrue(selenium.isPartialText("//td[6]/a", "Liferay, Inc."));
 	}
 }

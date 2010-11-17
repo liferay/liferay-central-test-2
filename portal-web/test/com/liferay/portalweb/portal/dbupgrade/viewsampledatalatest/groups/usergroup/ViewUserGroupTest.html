@@ -36,26 +36,31 @@
 <tr>
 	<td>clickAt</td>
 	<td>//strong/a</td>
-	<td></td>
+	<td>Actions</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Assign Members</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Assign Members</td>
-	<td></td>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a</td>
+	<td>Assign Members</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[@class='portlet-section-body results-row last']/td[2]</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a</td>
+	<td>Assign Members</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a</td>
+	<td>Assign Members</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[3]/td[2]</td>
 	<td>Joe Bloggs</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[@class='portlet-section-body results-row last']/td[3]</td>
+	<td>//tr[3]/td[3]</td>
 	<td>joebloggs</td>
 </tr>
 <tr>
@@ -71,52 +76,52 @@
 <tr>
 	<td>clickAt</td>
 	<td>//strong/a</td>
-	<td></td>
+	<td>Actions</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=View Users</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=View Users</td>
-	<td></td>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a</td>
+	<td>View Users</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[@class='portlet-section-body results-row last']/td[2]</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a</td>
+	<td>View Users</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a</td>
+	<td>View Users</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[2]/a</td>
 	<td>Joe</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[@class='portlet-section-body results-row last']/td[3]</td>
+	<td>//td[3]/a</td>
 	<td>Bloggs</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[@class='portlet-section-body results-row last']/td[4]</td>
+	<td>//td[4]/a</td>
 	<td>joebloggs</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[@class='portlet-section-body results-row last']/td[5]</td>
+	<td>//td[5]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertPartialText</td>
-	<td>//tr[@class='portlet-section-body results-row last']/td[6]</td>
+	<td>//td[6]/a</td>
 	<td>Liferay Los Angeles</td>
 </tr>
 <tr>
 	<td>assertPartialText</td>
-	<td>//tr[@class='portlet-section-body results-row last']/td[6]</td>
+	<td>//td[6]/a</td>
 	<td>Liferay, Inc.</td>
-</tr>
-<tr>
-	<td>assertPartialText</td>
-	<td>//tr[@class='portlet-section-body results-row last']/td[6]</td>
-	<td>Organization Sample Test</td>
 </tr>
 
 </tbody></table>
