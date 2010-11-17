@@ -14,18 +14,23 @@
 
 package com.liferay.taglib.aui;
 
-import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
+import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.taglib.BaseBodyTagSupport;
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 
+import java.util.Set;
+
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.BodyContent;
 import javax.servlet.jsp.tagext.BodyTag;
@@ -60,6 +65,27 @@ public class ScriptTag extends BaseBodyTagSupport implements BodyTag {
 		scriptTag.doEndTag();
 
 		scriptTag.release();
+	}
+
+	public static void doTag(PageContext pageContext) throws Exception {
+		ServletRequest servletRequest = pageContext.getRequest();
+		ScriptData scriptData = (ScriptData)servletRequest.getAttribute(
+			ScriptTag.class.getName());
+
+		if (scriptData == null) {
+			scriptData = (ScriptData)servletRequest.getAttribute(
+				WebKeys.AUI_SCRIPT_DATA);
+
+			if (scriptData != null) {
+				servletRequest.removeAttribute(WebKeys.AUI_SCRIPT_DATA);
+			}
+		}
+
+		if (scriptData != null) {
+			ScriptTag scriptTag = new ScriptTag();
+			scriptTag.setPageContext(pageContext);
+			scriptTag.processEndTag(scriptData);
+		}
 	}
 
 	public int doEndTag() throws JspException {
@@ -99,7 +125,7 @@ public class ScriptTag extends BaseBodyTagSupport implements BodyTag {
 
 				scriptData.append(bodyContentSB, _use);
 
-				PortalIncludeUtil.include(pageContext, PAGE);
+				processEndTag(scriptData);
 			}
 			else {
 				ScriptData scriptData = (ScriptData)request.getAttribute(
@@ -141,6 +167,48 @@ public class ScriptTag extends BaseBodyTagSupport implements BodyTag {
 	protected void cleanUp() {
 		_position = null;
 		_use = null;
+	}
+
+	protected void processEndTag(ScriptData scriptData) throws Exception {
+		JspWriter jspWriter = pageContext.getOut();
+
+		jspWriter.write("<script type=\"text/javascript\">// <![CDATA[\n");
+
+		StringBundler rawSB = scriptData.getRawSB();
+
+		rawSB.writeTo(jspWriter);
+
+		StringBundler callbackSB = scriptData.getCallbackSB();
+
+		if (callbackSB.index() > 0) {
+			String loadMethod = "use";
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
+			if (BrowserSnifferUtil.isIe(request) &&
+				(BrowserSnifferUtil.getMajorVersion(request) < 8)) {
+				loadMethod = "ready";
+			}
+
+			jspWriter.write("AUI().");
+			jspWriter.write( loadMethod );
+			jspWriter.write("(");
+
+			Set<String> useSet = scriptData.getUseSet();
+
+			for (String use : useSet) {
+				jspWriter.write(StringPool.APOSTROPHE);
+				jspWriter.write(use);
+				jspWriter.write(StringPool.APOSTROPHE);
+				jspWriter.write(StringPool.COMMA_AND_SPACE);
+			}
+
+			jspWriter.write("function(A) {");
+
+			callbackSB.writeTo(jspWriter);
+
+			jspWriter.write("});");
+		}
+		jspWriter.write("// ]]></script>");
 	}
 
 	private static final String _POSITION_AUTO = "auto";
