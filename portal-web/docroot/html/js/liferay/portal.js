@@ -4,37 +4,70 @@
 
 	var arrayIndexOf = A.Array.indexOf;
 
+	Liferay.Portal.Tabs._show = function(event) {
+		var id = event.id;
+		var names = event.names;
+		var namespace = event.namespace;
+
+		var selectedIndex = event.selectedIndex;
+
+		var tabItem = event.tabItem;
+		var tabSection = event.tabSection;
+
+		if (tabItem) {
+			tabItem.radioClass('aui-selected');
+			tabItem.radioClass('aui-state-active');
+			tabItem.radioClass('aui-tab-active');
+			tabItem.radioClass('current');
+		}
+
+		if (tabSection) {
+			tabSection.show();
+		}
+
+		names.splice(selectedIndex, 1);
+
+		for (var i = 0; i < names.length; i++) {
+			el = A.one('#' + namespace + names[i] + 'TabsSection');
+
+			if (el) {
+				el.hide();
+			}
+		}
+	};
+
 	Liferay.provide(
 		Tabs,
 		'show',
-		function(namespace, names, id) {
-			var tab = A.one('#' + namespace + id + 'TabsId');
-			var panel = A.one('#' + namespace + id + 'TabsSection');
+		function(namespace, names, id, callback) {
+			var namespacedId = namespace + id;
 
-			if (tab) {
-				tab.radioClass('aui-selected');
-				tab.radioClass('aui-state-active');
-				tab.radioClass('aui-tab-active');
-				tab.radioClass('current');
+			var tab = A.one('#' + namespacedId + 'TabsId');
+			var tabSection = A.one('#' + namespacedId + 'TabsSection');
+
+			var details = {
+				id: id,
+				names: names,
+				namespace: namespace,
+				selectedIndex: arrayIndexOf(names, id),
+				tabItem: tab,
+				tabSection: tabSection
+			};
+
+			if (callback && A.Lang.isFunction(callback)) {
+				callback.call(this, namespace, names, id, details);
 			}
 
-			if (panel) {
-				panel.show();
-			}
-
-			var index = arrayIndexOf(names, id);
-
-			names.splice(index, 1);
-
-			for (var i = 0; i < names.length; i++) {
-				el = A.one('#' + namespace + names[i] + 'TabsSection');
-
-				if (el) {
-					el.hide();
-				}
-			}
+			Liferay.fire('showTab', details);
 		},
 		['aui-base']
+	);
+
+	Liferay.publish(
+		'showTab',
+		{
+			defaultFn: Liferay.Portal.Tabs._show
+		}
 	);
 
 	Liferay.provide(

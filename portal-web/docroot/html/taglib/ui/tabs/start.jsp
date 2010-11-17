@@ -148,7 +148,14 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 		String curOnClick = StringPool.BLANK;
 
 		if (Validator.isNotNull(onClick)) {
-			curOnClick = onClick + "('" + curURL + "', '" + values[i] + "'); return false;";
+			if (refresh) {
+				curOnClick = onClick + "('" + curURL + "', '" + values[i] + "'); return false;";
+			}
+			else {
+				curOnClick = "Liferay.Portal.Tabs.show('" + namespace + param + "', " + namesJS + ", '" + names[i] + "', " + onClick + ");";
+
+				curURL = "javascript:;";
+			}
 		}
 
 		boolean selected = (values.length == 1) || value.equals(values[i]);
