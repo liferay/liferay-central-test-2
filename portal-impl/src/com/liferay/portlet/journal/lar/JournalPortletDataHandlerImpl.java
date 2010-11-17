@@ -840,7 +840,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		List<String> oldLinksToLayout = new ArrayList<String>();
 		List<String> newLinksToLayout = new ArrayList<String>();
 
-		Matcher matcher = _exportLinkToLayoutPattern.matcher(content);
+		Matcher matcher = _exportLinksToLayoutPattern.matcher(content);
 
 		while (matcher.find()) {
 			long layoutId = GetterUtil.getLong(matcher.group(1));
@@ -1804,7 +1804,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		List<String> oldLinksToLayout = new ArrayList<String>();
 		List<String> newLinksToLayout = new ArrayList<String>();
 
-		Matcher matcher = _importLinkToLayoutPattern.matcher(content);
+		Matcher matcher = _importLinksToLayoutPattern.matcher(content);
 
 		while (matcher.find()) {
 			String oldLayoutId = matcher.group(1);
@@ -2343,9 +2343,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		new PortletDataHandlerBoolean(_NAMESPACE, "articles", true, false,
 		new PortletDataHandlerControl[] {_images, _comments, _ratings, _tags});
 
-	private static Pattern _exportLinkToLayoutPattern = Pattern.compile(
+	private static Pattern _exportLinksToLayoutPattern = Pattern.compile(
 		"\\[([0-9]+)@(public|private\\-[a-z]*)\\]");
-	private static Pattern _importLinkToLayoutPattern = Pattern.compile(
+	private static Pattern _importLinksToLayoutPattern = Pattern.compile(
 		"\\[([0-9]+)@(public|private\\-[a-z]*)@([^\\]]*)\\]");
 
 }
