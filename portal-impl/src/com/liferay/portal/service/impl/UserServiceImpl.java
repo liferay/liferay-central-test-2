@@ -796,27 +796,29 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		for (UserGroupRole oldUserGroupRole : oldUserGroupRoles) {
 			if (!userGroupRoles.contains(oldUserGroupRole) &&
-				!GroupPermissionUtil.contains(
+				(!GroupPermissionUtil.contains(
 					getPermissionChecker(), oldUserGroupRole.getGroupId(),
-					ActionKeys.ASSIGN_MEMBERS) &&
+					ActionKeys.ASSIGN_MEMBERS) ||
 				!RolePermissionUtil.contains(
 					getPermissionChecker(), oldUserGroupRole.getRoleId(),
-					ActionKeys.ASSIGN_MEMBERS)) {
+					ActionKeys.ASSIGN_MEMBERS))) {
 
 				userGroupRoles.add(oldUserGroupRole);
 			}
 		}
 
 		for (UserGroupRole userGroupRole : userGroupRoles) {
-			if (!oldUserGroupRoles.contains(userGroupRole) &&
-				!GroupPermissionUtil.contains(
-					getPermissionChecker(), userGroupRole.getGroupId(),
-					ActionKeys.ASSIGN_MEMBERS) &&
-				!RolePermissionUtil.contains(
-					getPermissionChecker(), userGroupRole.getRoleId(),
-					ActionKeys.ASSIGN_MEMBERS)) {
+			if (!oldUserGroupRoles.contains(userGroupRole)) {
 
-				throw new PrincipalException();
+				if (!GroupPermissionUtil.contains(
+						getPermissionChecker(), userGroupRole.getGroupId(),
+						ActionKeys.ASSIGN_MEMBERS) ||
+					!RolePermissionUtil.contains(
+						getPermissionChecker(), userGroupRole.getRoleId(),
+						ActionKeys.ASSIGN_MEMBERS)) {
+
+					throw new PrincipalException();
+				}
 			}
 		}
 
