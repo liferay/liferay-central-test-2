@@ -64,7 +64,7 @@ public class GZipFilter extends BasePortalFilter {
 	}
 
 	protected boolean isCompress(HttpServletRequest request) {
-		if (ParamUtil.get(request, _COMPRESS, true)) {
+		if (ParamUtil.getBoolean(request, _COMPRESS, true)) {
 			return true;
 		}
 		else {
