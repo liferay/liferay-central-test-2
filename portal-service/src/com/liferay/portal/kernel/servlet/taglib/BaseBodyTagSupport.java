@@ -29,34 +29,24 @@ import javax.servlet.jsp.tagext.BodyContent;
 import javax.servlet.jsp.tagext.BodyTag;
 
 /**
- * This class is a little tricky. It behaves like a base
- * {@link javax.servlet.jsp.tagext.BodyTag} implementation, but not implementing
- * the {@link javax.servlet.jsp.tagext.BodyTag} interface, just a standard
- * {@link javax.servlet.jsp.tagext.Tag} interface.<p>
- * I do this because {@link javax.servlet.jsp.tagext.BodyTag} extends
- * {@link javax.servlet.jsp.tagext.IterationTag} which will be compiled to a
- * do-while loop, even most time we just want to include the body content
- * without manipulating it. In a complex page with a lot nesting tags, this
- * could create a very deep nesting do-while loops which can totally disable
- * compiler's optimization.<p>
- * By just implementing {@link javax.servlet.jsp.tagext.Tag}, we are loop free.
- * For sub-classes who do need to manipulate body content, they can simply just
- * mark themselves implementing {@link javax.servlet.jsp.tagext.BodyTag}.
- * Since this class has already implemented all the needed methods for
- * {@link javax.servlet.jsp.tagext.BodyTag}, JVM can cleverly bind to the right
- * methods in this class.
+ * <p>
+ * See http://issues.liferay.com/browse/LPS-13878.
+ * </p>
  *
  * @author Shuyang Zhou
  */
 public class BaseBodyTagSupport extends TagSupport {
 
+	@SuppressWarnings("unused")
 	public int doAfterBody() throws JspException {
 		return SKIP_BODY;
 	}
 
+	@SuppressWarnings("unused")
 	public void doInitBody() throws JspException {
 	}
 
+	@SuppressWarnings("unused")
 	public int doStartTag() throws JspException {
 		return BodyTag.EVAL_BODY_BUFFERED;
 	}
@@ -99,6 +89,7 @@ public class BaseBodyTagSupport extends TagSupport {
 
 	public void release() {
 		bodyContent = null;
+
 		super.release();
 	}
 
@@ -112,8 +103,8 @@ public class BaseBodyTagSupport extends TagSupport {
 		sb.writeTo(writer);
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(BaseBodyTagSupport.class);
-
 	protected BodyContent bodyContent;
+
+	private static Log _log = LogFactoryUtil.getLog(BaseBodyTagSupport.class);
 
 }

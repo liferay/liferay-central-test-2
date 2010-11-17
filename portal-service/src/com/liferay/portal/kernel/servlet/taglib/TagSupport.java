@@ -19,45 +19,48 @@ import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.Tag;
 
 /**
- * The difference between this class and
- * {@link javax.servlet.jsp.tagext.TagSupport} is this class is not implementing
- * {@link javax.servlet.jsp.tagext.IterationTag} which will be compiled to a
- * do-while loop. In a complex jsp page with many tags, the loop stack can be
- * very deep which hurts performance a lot.
+ * <p>
+ * See http://issues.liferay.com/browse/LPS-13878.
+ * </p>
+ *
  * @author Shuyang Zhou
  */
 public class TagSupport implements Tag {
 
-	public static Tag findAncestorWithClass(Tag from, Class<?> clazz) {
+	public static Tag findAncestorWithClass(Tag fromTag, Class<?> clazz) {
 		boolean isInterface = false;
 
-		if ((from == null) || (clazz == null) ||
+		if ((fromTag == null) || (clazz == null) ||
 			(!Tag.class.isAssignableFrom(clazz) &&
-				!(isInterface = clazz.isInterface()))) {
+			 !(isInterface = clazz.isInterface()))) {
+
 			return null;
 		}
 
 		while (true) {
-			Tag tag = from.getParent();
+			Tag parentTag = fromTag.getParent();
 
-			if (tag == null) {
+			if (parentTag == null) {
 				return null;
 			}
 
-			if ((isInterface && clazz.isInstance(tag)) ||
-				clazz.isAssignableFrom(tag.getClass())) {
-				return tag;
+			if ((isInterface && clazz.isInstance(parentTag)) ||
+				clazz.isAssignableFrom(parentTag.getClass())) {
+
+				return parentTag;
 			}
 			else {
-				from = tag;
+				fromTag = parentTag;
 			}
 		}
 	}
 
+	@SuppressWarnings("unused")
 	public int doEndTag() throws JspException {
 		return EVAL_PAGE;
 	}
 
+	@SuppressWarnings("unused")
 	public int doStartTag() throws JspException {
 		return SKIP_BODY;
 	}
