@@ -27,7 +27,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 
 import java.util.Set;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
@@ -67,23 +66,29 @@ public class ScriptTag extends BaseBodyTagSupport implements BodyTag {
 		scriptTag.release();
 	}
 
-	public static void doTag(PageContext pageContext) throws Exception {
-		ServletRequest servletRequest = pageContext.getRequest();
-		ScriptData scriptData = (ScriptData)servletRequest.getAttribute(
+	public static void flushScriptData(PageContext pageContext)
+		throws Exception {
+
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
+
+		ScriptData scriptData = (ScriptData)request.getAttribute(
 			ScriptTag.class.getName());
 
 		if (scriptData == null) {
-			scriptData = (ScriptData)servletRequest.getAttribute(
+			scriptData = (ScriptData)request.getAttribute(
 				WebKeys.AUI_SCRIPT_DATA);
 
 			if (scriptData != null) {
-				servletRequest.removeAttribute(WebKeys.AUI_SCRIPT_DATA);
+				request.removeAttribute(WebKeys.AUI_SCRIPT_DATA);
 			}
 		}
 
 		if (scriptData != null) {
 			ScriptTag scriptTag = new ScriptTag();
+
 			scriptTag.setPageContext(pageContext);
+
 			scriptTag.processEndTag(scriptData);
 		}
 	}
@@ -172,7 +177,7 @@ public class ScriptTag extends BaseBodyTagSupport implements BodyTag {
 	protected void processEndTag(ScriptData scriptData) throws Exception {
 		JspWriter jspWriter = pageContext.getOut();
 
-		jspWriter.write("<script type=\"text/javascript\">// <![CDATA[\n");
+		jspWriter.write("<script type=\"text/javascript\">\n// <![CDATA[\n");
 
 		StringBundler rawSB = scriptData.getRawSB();
 
@@ -182,10 +187,13 @@ public class ScriptTag extends BaseBodyTagSupport implements BodyTag {
 
 		if (callbackSB.index() > 0) {
 			String loadMethod = "use";
+
 			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
+
 			if (BrowserSnifferUtil.isIe(request) &&
 				(BrowserSnifferUtil.getMajorVersion(request) < 8)) {
+
 				loadMethod = "ready";
 			}
 
@@ -208,7 +216,8 @@ public class ScriptTag extends BaseBodyTagSupport implements BodyTag {
 
 			jspWriter.write("});");
 		}
-		jspWriter.write("// ]]></script>");
+
+		jspWriter.write("\n// ]]>\n</script>");
 	}
 
 	private static final String _POSITION_AUTO = "auto";

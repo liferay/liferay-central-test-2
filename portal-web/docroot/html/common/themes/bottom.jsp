@@ -15,6 +15,7 @@
 --%>
 
 <%@ include file="/html/common/init.jsp" %>
+
 <%@ page import="com.liferay.taglib.aui.ScriptTag" %>
 
 <%-- Portal JavaScript --%>
@@ -119,7 +120,9 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 
 <%@ include file="/html/common/themes/session_timeout.jspf" %>
 
-<%ScriptTag.doTag(pageContext);%>
+<%
+ScriptTag.flushScriptData(pageContext);
+%>
 
 <%-- Raw Text --%>
 
