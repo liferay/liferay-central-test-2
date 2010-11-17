@@ -124,7 +124,7 @@ public class AnnotationTransactionAttributeSource
 	private TransactionAttribute _parseTransactionAnnotation(
 		Transactional transactional) {
 
-		if (transactional == null || !transactional.enabled()) {
+		if ((transactional == null) || !transactional.enabled()) {
 			return null;
 		}
 

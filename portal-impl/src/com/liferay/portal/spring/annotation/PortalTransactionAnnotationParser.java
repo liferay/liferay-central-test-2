@@ -45,10 +45,10 @@ public class PortalTransactionAnnotationParser
 	public TransactionAttribute parseTransactionAnnotation(
 		AnnotatedElement annotatedElement) {
 
-		//Transactional annotation = annotatedElement.getAnnotation(
+		//Transactional transactional = annotatedElement.getAnnotation(
 		//	Transactional.class);
 
-		Transactional annotation = null;
+		Transactional transactional = null;
 
 		Queue<Class<?>> candidateQueue = new LinkedList<Class<?>>();
 
@@ -57,22 +57,22 @@ public class PortalTransactionAnnotationParser
 
 			candidateQueue.offer(method.getDeclaringClass());
 
-			annotation = _deepSearchMethods(method, candidateQueue);
+			transactional = _deepSearchMethods(method, candidateQueue);
 		}
 		else {
 			candidateQueue.offer((Class<?>)annotatedElement);
 
-			annotation = _deepSearchTypes(candidateQueue);
+			transactional = _deepSearchTypes(candidateQueue);
 		}
 
-		if (annotation == null || !annotation.enabled()) {
+		if (transactional == null || !transactional.enabled()) {
 			return null;
 		}
 
 		RuleBasedTransactionAttribute ruleBasedTransactionAttribute =
 			new RuleBasedTransactionAttribute();
 
-		int isolationLevel = annotation.isolation().value();
+		int isolationLevel = transactional.isolation().value();
 
 		if (isolationLevel == TransactionDefinition.ISOLATION_COUNTER) {
 			ruleBasedTransactionAttribute.setIsolationLevel(
@@ -87,14 +87,14 @@ public class PortalTransactionAnnotationParser
 		}
 
 		ruleBasedTransactionAttribute.setPropagationBehavior(
-			annotation.propagation().value());
-		ruleBasedTransactionAttribute.setReadOnly(annotation.readOnly());
-		ruleBasedTransactionAttribute.setTimeout(annotation.timeout());
+			transactional.propagation().value());
+		ruleBasedTransactionAttribute.setReadOnly(transactional.readOnly());
+		ruleBasedTransactionAttribute.setTimeout(transactional.timeout());
 
 		List<RollbackRuleAttribute> rollBackAttributes =
 			new ArrayList<RollbackRuleAttribute>();
 
-		Class<?>[] rollbackFor = annotation.rollbackFor();
+		Class<?>[] rollbackFor = transactional.rollbackFor();
 
 		for (int i = 0; i < rollbackFor.length; i++) {
 			RollbackRuleAttribute rollbackRuleAttribute =
@@ -103,7 +103,7 @@ public class PortalTransactionAnnotationParser
 			rollBackAttributes.add(rollbackRuleAttribute);
 		}
 
-		String[] rollbackForClassName = annotation.rollbackForClassName();
+		String[] rollbackForClassName = transactional.rollbackForClassName();
 
 		for (int i = 0; i < rollbackForClassName.length; i++) {
 			RollbackRuleAttribute rollbackRuleAttribute =
@@ -112,7 +112,7 @@ public class PortalTransactionAnnotationParser
 			rollBackAttributes.add(rollbackRuleAttribute);
 		}
 
-		Class<?>[] noRollbackFor = annotation.noRollbackFor();
+		Class<?>[] noRollbackFor = transactional.noRollbackFor();
 
 		for (int i = 0; i < noRollbackFor.length; ++i) {
 			NoRollbackRuleAttribute noRollbackRuleAttribute =
@@ -121,7 +121,7 @@ public class PortalTransactionAnnotationParser
 			rollBackAttributes.add(noRollbackRuleAttribute);
 		}
 
-		String[] noRollbackForClassName = annotation.noRollbackForClassName();
+		String[] noRollbackForClassName = transactional.noRollbackForClassName();
 
 		for (int i = 0; i < noRollbackForClassName.length; ++i) {
 			NoRollbackRuleAttribute noRollbackRuleAttribute =
@@ -139,10 +139,10 @@ public class PortalTransactionAnnotationParser
 	private Transactional _deepSearchMethods(
 		Method method, Queue<Class<?>> candidateQueue) {
 
-		Transactional annotation = method.getAnnotation(Transactional.class);
+		Transactional transactional = method.getAnnotation(Transactional.class);
 
-		if (annotation != null) {
-			return annotation;
+		if (transactional != null) {
+			return transactional;
 		}
 
 		if (candidateQueue.isEmpty()) {
@@ -156,25 +156,25 @@ public class PortalTransactionAnnotationParser
 				Method specificMethod = clazz.getDeclaredMethod(
 					method.getName(), method.getParameterTypes());
 
-				annotation = specificMethod.getAnnotation(Transactional.class);
+				transactional = specificMethod.getAnnotation(Transactional.class);
 
-				if (annotation != null) {
-					return annotation;
+				if (transactional != null) {
+					return transactional;
 				}
 			}
 			catch (Exception e) {
 			}
 		}
 
-		annotation = clazz.getAnnotation(Transactional.class);
+		transactional = clazz.getAnnotation(Transactional.class);
 
-		if (annotation == null) {
+		if (transactional == null) {
 			_queueSuperTypes(clazz, candidateQueue);
 
 			return _deepSearchMethods(method, candidateQueue);
 		}
 		else {
-			return annotation;
+			return transactional;
 		}
 	}
 
@@ -185,15 +185,15 @@ public class PortalTransactionAnnotationParser
 
 		Class<?> clazz = candidateQueue.poll();
 
-		Transactional annotation = clazz.getAnnotation(Transactional.class);
+		Transactional transactional = clazz.getAnnotation(Transactional.class);
 
-		if (annotation == null) {
+		if (transactional == null) {
 			_queueSuperTypes(clazz, candidateQueue);
 
 			return _deepSearchTypes(candidateQueue);
 		}
 		else {
-			return annotation;
+			return transactional;
 		}
 	}
 
