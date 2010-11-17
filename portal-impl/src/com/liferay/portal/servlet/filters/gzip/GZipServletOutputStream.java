@@ -14,6 +14,9 @@
 
 package com.liferay.portal.servlet.filters.gzip;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsUtil;
+
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -23,13 +26,21 @@ import javax.servlet.ServletOutputStream;
 
 /**
  * @author Shuyang Zhou
+ * @author Raymond Augé
  */
 public class GZipServletOutputStream extends ServletOutputStream {
+
+	public static final int COMPRESSION_LEVEL = GetterUtil.getInteger(
+		PropsUtil.get(GZipFilter.class.getName().concat(".compression.level")));
 
 	public GZipServletOutputStream(OutputStream outputStream)
 		throws IOException {
 
-		_gZipOutputStream = new GZIPOutputStream(outputStream);
+		_gZipOutputStream = new GZIPOutputStream(outputStream) {
+			{
+				def.setLevel(COMPRESSION_LEVEL);
+			}
+		};
 	}
 
 	public void close() throws IOException {
