@@ -107,7 +107,7 @@ public class TextSearchEntry extends SearchEntry {
 			StringBundler sb = new StringBundler();
 
 			sb.append("<a href=\"");
-			sb.append(HtmlUtil.escape(_href));
+			sb.append(HtmlUtil.escapeHREF(_href));
 			sb.append("\"");
 
 			if (Validator.isNotNull(_target)) {
