@@ -433,7 +433,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 		long parentLayoutId = getParentLayoutId();
 
-		while (isRootLayout()) {
+		while (parentLayoutId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
 			if (parentLayoutId == layoutId) {
 				return true;
 			}
