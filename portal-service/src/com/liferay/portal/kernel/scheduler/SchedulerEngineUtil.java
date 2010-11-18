@@ -46,6 +46,16 @@ public class SchedulerEngineUtil {
 		_instance._addScriptingJob(trigger, description, language, script);
 	}
 
+	public static void delete(String groupName) throws SchedulerException {
+		_instance._delete(groupName);
+	}
+
+	public static void delete(String jobName, String groupName)
+		throws SchedulerException {
+
+		_instance._delete(jobName, groupName);
+	}
+
 	public static Date getEndTime(SchedulerRequest schedulerRequest) {
 		return _instance._getEndTime(schedulerRequest);
 	}
@@ -239,6 +249,16 @@ public class SchedulerEngineUtil {
 		_schedule(
 			trigger, description, DestinationNames.SCHEDULER_SCRIPTING,
 			message);
+	}
+
+	private void _delete(String groupName) throws SchedulerException {
+		_schedulerEngine.delete(groupName);
+	}
+
+	private void _delete(String jobName, String groupName)
+		throws SchedulerException {
+
+		_schedulerEngine.delete(jobName, groupName);
 	}
 
 	private Date _getEndTime(SchedulerRequest schedulerRequest) {

@@ -43,7 +43,10 @@ public class SchedulerMessageListener extends BaseMessageListener {
 
 		String command = schedulerRequest.getCommand();
 
-		if (command.equals(SchedulerRequest.COMMAND_PAUSE)) {
+		if (command.equals(SchedulerRequest.COMMAND_DELETE)) {
+			doCommandDelete(schedulerRequest);
+		}
+		else if (command.equals(SchedulerRequest.COMMAND_PAUSE)) {
 			doCommandPause(schedulerRequest);
 		}
 		else if (command.equals(SchedulerRequest.COMMAND_REGISTER)) {
@@ -72,6 +75,23 @@ public class SchedulerMessageListener extends BaseMessageListener {
 		else if (command.equals(SchedulerRequest.COMMAND_UNREGISTER)) {
 			_schedulerEngine.unschedule(
 				schedulerRequest.getJobName(), schedulerRequest.getGroupName());
+		}
+	}
+
+	protected void doCommandDelete(SchedulerRequest schedulerRequest)
+		throws Exception {
+
+		String jobName = schedulerRequest.getJobName();
+		String groupName = schedulerRequest.getGroupName();
+
+		if (groupName == null) {
+			return;
+		}
+		else if (jobName == null) {
+			_schedulerEngine.delete(groupName);
+		}
+		else {
+			_schedulerEngine.delete(jobName, groupName);
 		}
 	}
 

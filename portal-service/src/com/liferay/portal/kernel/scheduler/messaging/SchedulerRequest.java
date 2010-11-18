@@ -26,6 +26,8 @@ import java.io.Serializable;
  */
 public class SchedulerRequest implements Serializable {
 
+	public static final String COMMAND_DELETE = "DELETE";
+
 	public static final String COMMAND_PAUSE = "PAUSE";
 
 	public static final String COMMAND_REGISTER = "REGISTER";
@@ -41,6 +43,28 @@ public class SchedulerRequest implements Serializable {
 	public static final String COMMAND_SUPPRESS_ERROR = "SUPPRESS_ERROR";
 
 	public static final String COMMAND_UNREGISTER = "UNREGISTER";
+
+	public static SchedulerRequest createDeleteRequest(String groupName) {
+
+		SchedulerRequest schedulerRequest = new SchedulerRequest();
+
+		schedulerRequest.setCommand(COMMAND_DELETE);
+		schedulerRequest.setGroupName(groupName);
+
+		return schedulerRequest;
+	}
+
+	public static SchedulerRequest createDeleteRequest(
+		String jobName, String groupName) {
+
+		SchedulerRequest schedulerRequest = new SchedulerRequest();
+
+		schedulerRequest.setCommand(COMMAND_DELETE);
+		schedulerRequest.setGroupName(groupName);
+		schedulerRequest.setJobName(jobName);
+
+		return schedulerRequest;
+	}
 
 	public static SchedulerRequest createPauseRequest(String groupName) {
 

@@ -63,6 +63,11 @@ public interface SchedulerEngine {
 
 	public static final String START_TIME = "START_TIME";
 
+	public void delete(String groupName) throws SchedulerException;
+
+	public void delete(String jobName, String groupName)
+		throws SchedulerException;
+
 	public SchedulerRequest getScheduledJob(String jobName, String groupName)
 		throws SchedulerException;
 

@@ -31,6 +31,24 @@ import java.util.List;
  */
 public class SchedulerEngineProxy implements SchedulerEngine {
 
+	public void delete(String groupName) throws SchedulerException {
+		SchedulerRequest schedulerRequest =
+			SchedulerRequest.createDeleteRequest(groupName);
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
+	}
+
+	public void delete(String jobName, String groupName)
+		throws SchedulerException {
+
+		SchedulerRequest schedulerRequest =
+			SchedulerRequest.createDeleteRequest(jobName, groupName);
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
+	}
+
 	public SchedulerRequest getScheduledJob(String jobName, String groupName)
 		throws SchedulerException {
 

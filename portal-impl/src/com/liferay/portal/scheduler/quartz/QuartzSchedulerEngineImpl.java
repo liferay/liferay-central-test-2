@@ -81,6 +81,46 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 	}
 
+	public void delete(String groupName) throws SchedulerException {
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return;
+		}
+
+		try {
+			String[] jobNames = _scheduler.getJobNames(groupName);
+
+			for (String jobName : jobNames) {
+				delete(jobName, groupName);
+			}
+		}
+		catch (Exception e) {
+			throw new SchedulerException("Unable to delete jobs", e);
+		}
+	}
+
+	public void delete(String jobName, String groupName)
+		throws SchedulerException {
+
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return;
+		}
+
+		try {
+			SchedulerContext schedulerContext = _scheduler.getContext();
+
+			schedulerContext.remove(
+				groupName.concat(StringPool.PERIOD).concat(jobName));
+
+			_scheduler.deleteJob(jobName, groupName);
+		}
+		catch (Exception e) {
+			throw new SchedulerException(
+				"Unable to delete job {jobName=" + jobName + ", groupName=" +
+					groupName + "}",
+				e);
+		}
+	}
+
 	public SchedulerRequest getScheduledJob(String jobName, String groupName)
 		throws SchedulerException {
 
