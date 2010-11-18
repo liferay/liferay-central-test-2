@@ -493,11 +493,11 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			String destinationName = jobDataMap.getString(DESTINATION_NAME);
 
 			if (!destinationName.equals(DestinationNames.SCHEDULER_DISPATCH)) {
-				jobState = (JobState)jobState.clone();
+				JobState jobStateClone = (JobState)jobState.clone();
 
-				jobState.clearExceptions();
+				jobStateClone.clearExceptions();
 
-				jobDataMap.put(SchedulerEngine.JOB_STATE, jobState);
+				jobDataMap.put(SchedulerEngine.JOB_STATE, jobStateClone);
 			}
 
 			_scheduler.unscheduleJob(jobName, groupName);

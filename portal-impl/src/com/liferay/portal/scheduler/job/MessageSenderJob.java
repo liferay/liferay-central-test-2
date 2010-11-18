@@ -92,11 +92,11 @@ public class MessageSenderJob implements Job {
 
 				jobState.setTriggerState(TriggerState.COMPLETE);
 
-				jobState = (JobState)jobState.clone();
+				JobState jobStateClone = (JobState)jobState.clone();
 
-				jobState.clearExceptions();
+				jobStateClone.clearExceptions();
 
-				jobDataMap.put(SchedulerEngine.JOB_STATE, jobState);
+				jobDataMap.put(SchedulerEngine.JOB_STATE, jobStateClone);
 
 				scheduler.addJob(jobDetail, true);
 			}
