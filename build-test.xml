@@ -1296,11 +1296,6 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="portal-web-reverend-fun" />
-			<param name="test.ant.script.suite" value="PortalWebReverendFunTestSuite" />
-		</antcall>
-
-		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-rss" />
 			<param name="test.ant.script.suite" value="PortalWebRSSTestSuite" />
 		</antcall>
@@ -1318,11 +1313,6 @@
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-site-map" />
 			<param name="test.ant.script.suite" value="PortalWebSiteMapTestSuite" />
-		</antcall>
-
-		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="portal-web-sms-text-messenger" />
-			<param name="test.ant.script.suite" value="PortalWebSMSTextMessengerTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
