@@ -63,6 +63,7 @@ import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.service.permission.UserGroupPermissionUtil;
+import com.liferay.portal.service.permission.UserGroupRolePermissionUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.GroupNameComparator;
@@ -360,9 +361,9 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 		while (itr.hasNext()) {
 			UserGroupRole userGroupRole = itr.next();
 
-			if (!RolePermissionUtil.contains(
-					permissionChecker, userGroupRole.getRoleId(),
-					ActionKeys.ASSIGN_MEMBERS)) {
+			if (!UserGroupRolePermissionUtil.contains(
+					permissionChecker, userGroupRole.getGroupId(),
+					userGroupRole.getRoleId())) {
 
 				itr.remove();
 			}
