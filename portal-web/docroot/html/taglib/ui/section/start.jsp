@@ -19,6 +19,15 @@
 <%
 String param = (String)request.getAttribute("liferay-ui:section:param");
 String name = (String)request.getAttribute("liferay-ui:section:name");
+
+int length = name.length();
+StringBuilder sb = new StringBuilder(length);
+
+for (int j = 0; j < length; j++) {
+	sb.append(name.codePointAt(j));
+}
+
+String id = sb.toString();
 %>
 
-<div class="aui-helper-hidden" id="<%= namespace %><%= param %><%= name %>TabsSection">
+<div class="aui-helper-hidden" id="<%= namespace %><%= param %><%= id %>TabsSection">

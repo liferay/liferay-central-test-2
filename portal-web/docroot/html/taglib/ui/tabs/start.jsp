@@ -109,6 +109,15 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 
 	<%
 	for (int i = 0; i < values.length; i++) {
+		int length = values[i].length();
+		StringBuilder sb = new StringBuilder(length);
+
+		for (int j = 0; j < length; j++) {
+			sb.append(values[i].codePointAt(j));
+		}
+
+		String id = sb.toString();
+
 		String curURL = (String)request.getAttribute("liferay-ui:tabs:url" + i);
 
 		if (Validator.isNull(curURL)) {
@@ -185,7 +194,7 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 				/>
 			</c:when>
 			<c:otherwise>
-				<li class="<%= cssClassName %>" id="<%= namespace %><%= param %><%= values[i] %>TabsId">
+				<li class="<%= cssClassName %>" id="<%= namespace %><%= param %><%= id %>TabsId">
 					<span class="aui-tab-content">
 						<span class="aui-tab-label">
 							<c:choose>

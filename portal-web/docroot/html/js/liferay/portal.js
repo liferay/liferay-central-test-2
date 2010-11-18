@@ -4,6 +4,20 @@
 
 	var arrayIndexOf = A.Array.indexOf;
 
+	var toCharCode = A.cached(
+		function(name) {
+			var buffer = [];
+
+			name = unescape(escape(name).replace(/%u/g, '\\u'));
+
+			for (var i = 0; i < name.length; i++) {
+				buffer[i] = name.charCodeAt(i);
+			}
+
+			return buffer.join('');
+		}
+	);
+
 	Liferay.Portal.Tabs._show = function(event) {
 		var id = event.id;
 		var names = event.names;
@@ -28,7 +42,7 @@
 		names.splice(selectedIndex, 1);
 
 		for (var i = 0; i < names.length; i++) {
-			el = A.one('#' + namespace + names[i] + 'TabsSection');
+			el = A.one('#' + namespace + toCharCode(names[i]) + 'TabsSection');
 
 			if (el) {
 				el.hide();
@@ -40,7 +54,7 @@
 		Tabs,
 		'show',
 		function(namespace, names, id, callback) {
-			var namespacedId = namespace + id;
+			var namespacedId = namespace + toCharCode(id);
 
 			var tab = A.one('#' + namespacedId + 'TabsId');
 			var tabSection = A.one('#' + namespacedId + 'TabsSection');
