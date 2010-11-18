@@ -338,6 +338,18 @@ public class OrganizationWrapper implements Organization {
 		return _organization.getAncestors();
 	}
 
+	public java.lang.String getMembershipType() {
+		return _organization.getMembershipType();
+	}
+
+	public boolean isMembershipTypeWeak() {
+		return _organization.isMembershipTypeWeak();
+	}
+
+	public boolean isMembershipTypeStrong() {
+		return _organization.isMembershipTypeStrong();
+	}
+
 	public com.liferay.portal.model.Organization getParentOrganization()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

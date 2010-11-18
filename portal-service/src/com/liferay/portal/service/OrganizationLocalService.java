@@ -221,6 +221,14 @@ public interface OrganizationLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public com.liferay.portal.model.Organization addOrganization(long userId,
+		long parentOrganizationId, java.lang.String name,
+		java.lang.String type, int memberhsipPolicy, boolean recursable,
+		long regionId, long countryId, int statusId, java.lang.String comments,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public void addOrganizationResources(long userId,
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -431,6 +439,15 @@ public interface OrganizationLocalService {
 		long companyId, long organizationId, long parentOrganizationId,
 		java.lang.String name, java.lang.String type, boolean recursable,
 		long regionId, long countryId, int statusId, java.lang.String comments,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.Organization updateOrganization(
+		long companyId, long organizationId, long parentOrganizationId,
+		java.lang.String name, java.lang.String type, int membershipPolicy,
+		boolean recursable, long regionId, long countryId, int statusId,
+		java.lang.String comments,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

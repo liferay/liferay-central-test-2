@@ -248,6 +248,19 @@ public class OrganizationLocalServiceUtil {
 			recursable, regionId, countryId, statusId, comments, serviceContext);
 	}
 
+	public static com.liferay.portal.model.Organization addOrganization(
+		long userId, long parentOrganizationId, java.lang.String name,
+		java.lang.String type, int memberhsipPolicy, boolean recursable,
+		long regionId, long countryId, int statusId, java.lang.String comments,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addOrganization(userId, parentOrganizationId, name, type,
+			memberhsipPolicy, recursable, regionId, countryId, statusId,
+			comments, serviceContext);
+	}
+
 	public static void addOrganizationResources(long userId,
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -540,6 +553,20 @@ public class OrganizationLocalServiceUtil {
 				   .updateOrganization(companyId, organizationId,
 			parentOrganizationId, name, type, recursable, regionId, countryId,
 			statusId, comments, serviceContext);
+	}
+
+	public static com.liferay.portal.model.Organization updateOrganization(
+		long companyId, long organizationId, long parentOrganizationId,
+		java.lang.String name, java.lang.String type, int membershipPolicy,
+		boolean recursable, long regionId, long countryId, int statusId,
+		java.lang.String comments,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateOrganization(companyId, organizationId,
+			parentOrganizationId, name, type, membershipPolicy, recursable,
+			regionId, countryId, statusId, comments, serviceContext);
 	}
 
 	public static OrganizationLocalService getService() {

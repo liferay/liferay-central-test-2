@@ -37,6 +37,12 @@ public interface Organization extends OrganizationModel {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public java.lang.String getMembershipType();
+
+	public boolean isMembershipTypeWeak();
+
+	public boolean isMembershipTypeStrong();
+
 	public com.liferay.portal.model.Organization getParentOrganization()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
