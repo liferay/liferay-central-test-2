@@ -563,39 +563,41 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 					continue;
 				}
 
-				JobState jobState = (JobState)jobDataMap.get(JOB_STATE);
+				Trigger trigger = _scheduler.getTrigger(jobName, groupName);
 
-				if (jobState == null) {
-					Trigger trigger = _scheduler.getTrigger(jobName, groupName);
+				JobState jobState = null;
+				
+				if (trigger != null) {
+					Message message = (Message)jobDataMap.get(MESSAGE);
 
-					if (trigger == null) {
+					jobState = new JobState(
+						TriggerState.NORMAL,
+						message.getInteger(MAX_EXCEPTION_NUMBER));
+
+					jobState.setTriggerTimeInfomation(
+						SchedulerEngine.START_TIME, trigger.getStartTime());
+					jobState.setTriggerTimeInfomation(
+						SchedulerEngine.END_TIME, trigger.getEndTime());
+					jobState.setTriggerTimeInfomation(
+						SchedulerEngine.NEXT_FIRE_TIME, null);
+					jobState.setTriggerTimeInfomation(
+						SchedulerEngine.PREVIOUS_FIRE_TIME,
+						trigger.getPreviousFireTime());
+					jobState.setTriggerTimeInfomation(
+						SchedulerEngine.FINAL_FIRE_TIME,
+						trigger.getFinalFireTime());
+
+					jobDataMap.put(JOB_STATE, jobState);
+
+					_scheduler.addJob(jobDetail, true);
+				}
+				else {
+					jobState = (JobState)jobDataMap.get(JOB_STATE);
+
+					if (jobState == null) {
 						throw new Exception(
 							"Unable to get trigger details of job {jobName=" +
 							jobName + ", groupName=" + groupName + "}");
-					}
-					else {
-						Message message = (Message)jobDataMap.get(MESSAGE);
-
-						jobState = new JobState(
-							TriggerState.NORMAL,
-							message.getInteger(MAX_EXCEPTION_NUMBER));
-
-						jobState.setTriggerTimeInfomation(
-							SchedulerEngine.START_TIME, trigger.getStartTime());
-						jobState.setTriggerTimeInfomation(
-							SchedulerEngine.END_TIME, trigger.getEndTime());
-						jobState.setTriggerTimeInfomation(
-							SchedulerEngine.NEXT_FIRE_TIME, null);
-						jobState.setTriggerTimeInfomation(
-							SchedulerEngine.PREVIOUS_FIRE_TIME,
-							trigger.getPreviousFireTime());
-						jobState.setTriggerTimeInfomation(
-							SchedulerEngine.FINAL_FIRE_TIME,
-							trigger.getFinalFireTime());
-
-						jobDataMap.put(JOB_STATE, jobState);
-
-						_scheduler.addJob(jobDetail, true);
 					}
 				}
 
