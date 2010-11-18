@@ -16,11 +16,13 @@ package com.liferay.portal.service.permission;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.OrganizationServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -105,7 +107,11 @@ public class UserPermissionImpl implements UserPermission {
 				for (int i = 0; i < organizationIds.length; i++) {
 					long organizationId = organizationIds[i];
 
-					if (OrganizationPermissionUtil.contains(
+					Organization organization =
+						OrganizationServiceUtil.getOrganization(organizationId);
+
+					if (organization.isMembershipTypeStrong() &&
+						OrganizationPermissionUtil.contains(
 							permissionChecker, organizationId,
 							ActionKeys.MANAGE_USERS)) {
 

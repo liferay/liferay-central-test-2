@@ -74,6 +74,7 @@ pageContext.setAttribute("portletURL", portletURL);
 	List<String> headerNames = new ArrayList<String>();
 
 	headerNames.add("name");
+	headerNames.add(StringPool.BLANK);
 
 	searchContainer.setHeaderNames(headerNames);
 
@@ -183,6 +184,10 @@ pageContext.setAttribute("portletURL", portletURL);
 		}
 
 		row.addText(sb.toString());
+
+		// Action
+
+		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/my_organizations/organization_action.jsp");
 
 		// Add result row
 

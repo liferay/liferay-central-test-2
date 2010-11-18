@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.ListTypeConstants;
 import com.liferay.portal.model.Organization;
@@ -69,6 +70,7 @@ import java.util.Map;
  * @author Jorge Ferrer
  * @author Julio Camarero
  * @author Hugo Huijser
+ * @author Juan Fernández
  */
 public class OrganizationLocalServiceImpl
 	extends OrganizationLocalServiceBaseImpl {
@@ -88,6 +90,18 @@ public class OrganizationLocalServiceImpl
 	public Organization addOrganization(
 			long userId, long parentOrganizationId, String name,
 			String type, boolean recursable, long regionId, long countryId,
+			int statusId, String comments, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return addOrganization(
+			userId, parentOrganizationId, name, type,
+			GroupConstants.TYPE_COMMUNITY_PRIVATE, recursable, regionId,
+			countryId, statusId, comments, serviceContext);
+	}
+
+	public Organization addOrganization(
+			long userId, long parentOrganizationId, String name, String type,
+			int groupType, boolean recursable, long regionId, long countryId,
 			int statusId, String comments, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -122,8 +136,8 @@ public class OrganizationLocalServiceImpl
 		// Group
 
 		Group group = groupLocalService.addGroup(
-			userId, Organization.class.getName(), organizationId, name, null, 0,
-			null, true, null);
+			userId, Organization.class.getName(), organizationId, name, null,
+			groupType, null, true, null);
 
 		if (PropsValues.ORGANIZATIONS_ASSIGNMENT_AUTO) {
 
@@ -809,6 +823,19 @@ public class OrganizationLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		return updateOrganization(
+			companyId, organizationId, parentOrganizationId, name, type,
+			GroupConstants.TYPE_COMMUNITY_PRIVATE, recursable, regionId,
+			countryId, statusId, comments, serviceContext);
+	}
+
+	public Organization updateOrganization(
+			long companyId, long organizationId, long parentOrganizationId,
+			String name, String type, int groupType, boolean recursable,
+			long regionId, long countryId, int statusId, String comments,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
 		// Organization
 
 		parentOrganizationId = getParentOrganizationId(
@@ -832,6 +859,14 @@ public class OrganizationLocalServiceImpl
 		organization.setComments(comments);
 
 		organizationPersistence.update(organization, false);
+
+		// Group
+
+		Group group = organization.getGroup();
+
+		group.setType(groupType);
+
+		groupPersistence.update(group, false);
 
 		// Asset
 

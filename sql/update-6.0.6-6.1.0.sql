@@ -3,6 +3,8 @@ alter table BlogsEntry add smallImage BOOLEAN null;
 alter table BlogsEntry add smallImageId VARCHAR(75) null;
 alter table BlogsEntry add smallImageURL STRING null;
 
+update Group set type=3 where type=0;
+
 alter table Layout drop column dlFolderId;
 
 create table LayoutRevision (

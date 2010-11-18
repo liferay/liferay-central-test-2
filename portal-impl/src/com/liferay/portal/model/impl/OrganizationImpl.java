@@ -52,6 +52,7 @@ import javax.portlet.PortletPreferences;
 /**
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
+ * @author Juan Fernández
  */
 public class OrganizationImpl
 	extends OrganizationModelImpl implements Organization {
@@ -80,6 +81,21 @@ public class OrganizationImpl
 	public static String[] getChildrenTypes(String type) {
 		return PropsUtil.getArray(
 			PropsKeys.ORGANIZATIONS_CHILDREN_TYPES, new Filter(type));
+	}
+
+	public String getMembershipType() {
+		return PropsUtil.get(
+			PropsKeys.ORGANIZATIONS_MEMBERSHIP_TYPE, new Filter(getType()));
+	}
+
+	public boolean isMembershipTypeWeak(){
+		return getMembershipType().
+			equals(OrganizationConstants.MEMBERSHIP_TYPE_WEAK);
+	}
+
+	public boolean isMembershipTypeStrong(){
+		return getMembershipType().
+			equals(OrganizationConstants.MEMBERSHIP_TYPE_STRONG);
 	}
 
 	public Organization getParentOrganization()

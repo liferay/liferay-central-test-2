@@ -30,6 +30,7 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroupRole;
+import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.base.MembershipRequestLocalServiceBaseImpl;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.util.UniqueList;
@@ -136,9 +137,18 @@ public class MembershipRequestLocalServiceImpl
 
 		if (statusId == MembershipRequestConstants.STATUS_APPROVED) {
 			long[] addUserIds = new long[] {membershipRequest.getUserId()};
+			Group group = GroupServiceUtil.getGroup(
+				membershipRequest.getGroupId());
 
-			userLocalService.addGroupUsers(
-				membershipRequest.getGroupId(), addUserIds);
+			if (group.isOrganization()) {
+				userLocalService.addOrganizationUsers(
+					group.getOrganizationId(),
+					new long[] {membershipRequest.getUserId()});
+			}
+			else {
+				userLocalService.addGroupUsers(
+					membershipRequest.getGroupId(), addUserIds);
+			}
 		}
 
 		try {

@@ -1271,6 +1271,8 @@ public interface PropsKeys {
 
 	public static final String ORGANIZATIONS_MEMBERSHIP_STRICT = "organizations.membership.strict";
 
+	public static final String ORGANIZATIONS_MEMBERSHIP_TYPE = "organizations.membership.type";
+
 	public static final String ORGANIZATIONS_ROOTABLE = "organizations.rootable";
 
 	public static final String ORGANIZATIONS_SEARCH_WITH_INDEX = "organizations.search.with.index";

@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.EmailAddress;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
@@ -44,6 +45,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  * @author Julio Camarero
+ * @author Juan Fernández
  */
 public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
@@ -66,9 +68,24 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		return addOrganization(
+			parentOrganizationId, name, type,
+			GroupConstants.TYPE_COMMUNITY_PRIVATE, recursable, regionId,
+			countryId, statusId, comments, serviceContext);
+	}
+
+	public Organization addOrganization(
+			long parentOrganizationId, String name, String type, int groupType,
+			boolean recursable, long regionId, long countryId, int statusId,
+			String comments, List<Address> addresses,
+			List<EmailAddress> emailAddresses, List<OrgLabor> orgLabors,
+			List<Phone> phones, List<Website> websites,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
 		Organization organization = addOrganization(
-			parentOrganizationId, name, type, recursable, regionId, countryId,
-			statusId, comments, serviceContext);
+			parentOrganizationId, name, type, groupType, recursable, regionId,
+			countryId, statusId, comments, serviceContext);
 
 		EnterpriseAdminUtil.updateAddresses(
 			Organization.class.getName(), organization.getOrganizationId(),
@@ -112,6 +129,30 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 		return organizationLocalService.addOrganization(
 			getUserId(), parentOrganizationId, name, type, recursable,
 			regionId, countryId, statusId, comments, serviceContext);
+	}
+
+	public Organization addOrganization(
+			long parentOrganizationId, String name, String type,
+			int membershipPolicy, boolean recursable, long regionId,
+			long countryId, int statusId, String comments,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		if (!OrganizationPermissionUtil.contains(
+				getPermissionChecker(), parentOrganizationId,
+				ActionKeys.MANAGE_SUBORGANIZATIONS) &&
+			!PortalPermissionUtil.contains(
+				getPermissionChecker(), ActionKeys.ADD_ORGANIZATION)) {
+
+			throw new PrincipalException(
+				"User " + getUserId() + " does not have permissions to add " +
+					"an organization with parent " + parentOrganizationId);
+		}
+
+		return organizationLocalService.addOrganization(
+			getUserId(), parentOrganizationId, name, type, membershipPolicy,
+			recursable, regionId, countryId, statusId, comments,
+			serviceContext);
 	}
 
 	public void addPasswordPolicyOrganizations(
@@ -285,6 +326,21 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		return updateOrganization(
+			organizationId, parentOrganizationId, name, type,
+			GroupConstants.TYPE_COMMUNITY_PRIVATE, recursable, regionId,
+			countryId, statusId, comments, serviceContext);
+	}
+
+	public Organization updateOrganization(
+			long organizationId, long parentOrganizationId, String name,
+			String type, int groupType, boolean recursable, long regionId,
+			long countryId, int statusId, String comments,
+			List<Address> addresses, List<EmailAddress> emailAddresses,
+			List<OrgLabor> orgLabors, List<Phone> phones,
+			List<Website> websites, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
 		EnterpriseAdminUtil.updateAddresses(
 			Organization.class.getName(), organizationId, addresses);
 
@@ -300,8 +356,9 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			Organization.class.getName(), organizationId, websites);
 
 		Organization organization = updateOrganization(
-			organizationId, parentOrganizationId, name, type, recursable,
-			regionId, countryId, statusId, comments, serviceContext);
+			organizationId, parentOrganizationId, name, type, groupType,
+			recursable, regionId, countryId, statusId, comments,
+			serviceContext);
 
 		return organization;
 	}
@@ -321,6 +378,24 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			user.getCompanyId(), organizationId, parentOrganizationId,
 			name, type, recursable, regionId, countryId, statusId, comments,
 			serviceContext);
+	}
+
+	public Organization updateOrganization(
+			long organizationId, long parentOrganizationId, String name,
+			String type, int groupType, boolean recursable,
+			long regionId, long countryId, int statusId, String comments,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		OrganizationPermissionUtil.check(
+			getPermissionChecker(), organizationId, ActionKeys.UPDATE);
+
+		User user = getUser();
+
+		return organizationLocalService.updateOrganization(
+			user.getCompanyId(), organizationId, parentOrganizationId,
+			name, type, groupType, recursable, regionId, countryId,
+			statusId, comments, serviceContext);
 	}
 
 }

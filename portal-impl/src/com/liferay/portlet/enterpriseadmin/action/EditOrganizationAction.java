@@ -190,6 +190,8 @@ public class EditOrganizationAction extends PortletAction {
 		boolean recursable = ParamUtil.getBoolean(actionRequest, "recursable");
 		int statusId = ParamUtil.getInteger(actionRequest, "statusId");
 		String type = ParamUtil.getString(actionRequest, "type");
+		int membershipPolicy =
+			ParamUtil.getInteger(actionRequest, "membership-policy");
 		long regionId = ParamUtil.getLong(actionRequest, "regionId");
 		long countryId = ParamUtil.getLong(actionRequest, "countryId");
 		String comments = ParamUtil.getString(actionRequest, "comments");
@@ -212,9 +214,9 @@ public class EditOrganizationAction extends PortletAction {
 			// Add organization
 
 			organization = OrganizationServiceUtil.addOrganization(
-				parentOrganizationId, name, type, recursable, regionId,
-				countryId, statusId, comments, addresses, emailAddresses,
-				orgLabors, phones, websites, serviceContext);
+				parentOrganizationId, name, type, membershipPolicy, recursable,
+				regionId, countryId, statusId, comments, addresses,
+				emailAddresses,	orgLabors, phones, websites, serviceContext);
 		}
 		else {
 
@@ -222,8 +224,9 @@ public class EditOrganizationAction extends PortletAction {
 
 			organization = OrganizationServiceUtil.updateOrganization(
 				organizationId, parentOrganizationId, name, type,
-				recursable, regionId, countryId, statusId, comments, addresses,
-				emailAddresses, orgLabors, phones, websites, serviceContext);
+				membershipPolicy, recursable, regionId, countryId, statusId,
+				comments, addresses, emailAddresses, orgLabors, phones,
+				websites, serviceContext);
 
 			boolean deleteLogo = ParamUtil.getBoolean(
 				actionRequest, "deleteLogo");

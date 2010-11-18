@@ -1620,6 +1620,7 @@
 		<portlet-name>163</portlet-name>
 		<icon>/html/icons/my_organizations.png</icon>
 		<struts-path>my_organizations</struts-path>
+		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>

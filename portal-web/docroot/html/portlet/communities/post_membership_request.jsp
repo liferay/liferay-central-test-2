@@ -39,7 +39,7 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 
 	<liferay-ui:header
 		backURL="<%= redirect %>"
-		title="community"
+		title='<%= LanguageUtil.format(pageContext, "request-membership-for-x", group.getDescriptiveName()) %>'
 	/>
 
 	<liferay-ui:error exception="<%= MembershipRequestCommentsException.class %>" message="please-enter-valid-comments" />
@@ -47,10 +47,6 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 	<aui:model-context bean="<%= membershipRequest %>" model="<%= MembershipRequest.class %>" />
 
 	<aui:fieldset>
-		<aui:field-wrapper label="community">
-			<%= group.getDescriptiveName() %>
-		</aui:field-wrapper>
-
 		<c:if test="<%= Validator.isNotNull(group.getDescription()) %>">
 			<aui:field-wrapper label="description">
 				<%= group.getDescription() %>
