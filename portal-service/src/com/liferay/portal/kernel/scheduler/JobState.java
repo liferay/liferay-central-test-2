@@ -30,16 +30,16 @@ import java.util.Queue;
 public class JobState implements Cloneable, Serializable {
 
 	public JobState(TriggerState triggerState) {
-		this(triggerState, _DEFAULT_MAX_EXCEPTION_NUMBER);
+		this(triggerState, _EXCEPTIONS_MAX_SIZE);
 	}
 
-	public JobState(TriggerState triggerState, int maxExceptionNumber) {
-		if (maxExceptionNumber <= 0) {
-			maxExceptionNumber = _DEFAULT_MAX_EXCEPTION_NUMBER;
+	public JobState(TriggerState triggerState, int exceptionsMaxSize) {
+		if (exceptionsMaxSize <= 0) {
+			exceptionsMaxSize = _EXCEPTIONS_MAX_SIZE;
 		}
 
-		_maxExceptionNumber = maxExceptionNumber;
 		_triggerState = triggerState;
+		_exceptionsMaxSize = exceptionsMaxSize;
 	}
 
 	public void addException(Exception exception) {
@@ -50,7 +50,7 @@ public class JobState implements Cloneable, Serializable {
 		_exceptions.add(
 			new ObjectValuePair<Exception, Date>(exception, new Date()));
 
-		while (_exceptions.size() > _maxExceptionNumber) {
+		while (_exceptions.size() > _exceptionsMaxSize) {
 			_exceptions.poll();
 		}
 	}
@@ -62,19 +62,24 @@ public class JobState implements Cloneable, Serializable {
 	}
 
 	public Object clone() {
-		JobState jobState = new JobState(_triggerState, _maxExceptionNumber);
+		JobState jobState = new JobState(_triggerState, _exceptionsMaxSize);
 
 		if (_exceptions != null) {
-			jobState._exceptions =
+			Queue<ObjectValuePair<Exception, Date>> exceptions =
 				new LinkedList<ObjectValuePair<Exception, Date>>();
 
-			jobState._exceptions.addAll(_exceptions);
+			exceptions.addAll(_exceptions);
+
+			jobState._exceptions = exceptions;
 		}
 
 		if (_triggerTimeInfomation != null) {
-			jobState._triggerTimeInfomation = new HashMap<String, Date>();
+			Map<String, Date> triggerTimeInfomation =
+				new HashMap<String, Date>();
 
-			jobState._triggerTimeInfomation.putAll(_triggerTimeInfomation);
+			triggerTimeInfomation.putAll(_triggerTimeInfomation);
+
+			jobState._triggerTimeInfomation = triggerTimeInfomation;
 		}
 
 		return jobState;
@@ -88,6 +93,10 @@ public class JobState implements Cloneable, Serializable {
 		return _exceptions.toArray(new ObjectValuePair[_exceptions.size()]);
 	}
 
+	public TriggerState getTriggerState() {
+		return _triggerState;
+	}
+
 	public Date getTriggerTimeInfomation(String key) {
 		if (_triggerTimeInfomation == null) {
 			return null;
@@ -96,8 +105,8 @@ public class JobState implements Cloneable, Serializable {
 		return _triggerTimeInfomation.get(key);
 	}
 
-	public TriggerState getTriggerState() {
-		return _triggerState;
+	public void setTriggerState(TriggerState triggerState) {
+		_triggerState = triggerState;
 	}
 
 	public void setTriggerTimeInfomation(String key, Date date) {
@@ -108,15 +117,11 @@ public class JobState implements Cloneable, Serializable {
 		_triggerTimeInfomation.put(key, date);
 	}
 
-	public void setTriggerState(TriggerState triggerState) {
-		_triggerState = triggerState;
-	}
-
-	private static final int _DEFAULT_MAX_EXCEPTION_NUMBER = 10;
+	private static final int _EXCEPTIONS_MAX_SIZE = 10;
 
 	private Queue<ObjectValuePair<Exception, Date>> _exceptions;
-	private int _maxExceptionNumber;
-	private Map<String, Date> _triggerTimeInfomation;
+	private int _exceptionsMaxSize;
 	private TriggerState _triggerState;
+	private Map<String, Date> _triggerTimeInfomation;
 
 }

@@ -46,16 +46,18 @@ public class SchedulerEngineUtil {
 		_instance._addScriptingJob(trigger, description, language, script);
 	}
 
+	public static Date getEndTime(SchedulerRequest schedulerRequest) {
+		return _instance._getEndTime(schedulerRequest);
+	}
+
 	public static Date getEndTime(String jobName, String groupName)
 		throws SchedulerException {
 
 		return _instance._getEndTime(jobName, groupName);
 	}
 
-	public static Date getEndTime(SchedulerRequest schedulerRequest)
-		throws SchedulerException {
-
-		return _instance._getEndTime(schedulerRequest);
+	public static Date getFinalFireTime(SchedulerRequest schedulerRequest) {
+		return _instance._getFinalFireTime(schedulerRequest);
 	}
 
 	public static Date getFinalFireTime(String jobName, String groupName)
@@ -64,10 +66,10 @@ public class SchedulerEngineUtil {
 		return _instance._getFinalFireTime(jobName, groupName);
 	}
 
-	public static Date getFinalFireTime(SchedulerRequest schedulerRequest)
-		throws SchedulerException {
+	public static ObjectValuePair<Exception, Date>[] getJobExceptions(
+		SchedulerRequest schedulerRequest) {
 
-		return _instance._getFinalFireTime(schedulerRequest);
+		return _instance._getJobExceptions(schedulerRequest);
 	}
 
 	public static ObjectValuePair<Exception, Date>[] getJobExceptions(
@@ -77,11 +79,8 @@ public class SchedulerEngineUtil {
 		return _instance._getJobExceptions(jobName, groupName);
 	}
 
-	public static ObjectValuePair<Exception, Date>[] getJobExceptions(
-			SchedulerRequest schedulerRequest)
-		throws SchedulerException {
-
-		return _instance._getJobExceptions(schedulerRequest);
+	public static TriggerState getJobState(SchedulerRequest schedulerRequest) {
+		return _instance._getJobState(schedulerRequest);
 	}
 
 	public static TriggerState getJobState(String jobName, String groupName)
@@ -90,10 +89,8 @@ public class SchedulerEngineUtil {
 		return _instance._getJobState(jobName, groupName);
 	}
 
-	public static TriggerState getJobState(SchedulerRequest schedulerRequest)
-		throws SchedulerException {
-
-		return _instance._getJobState(schedulerRequest);
+	public static Date getNextFireTime(SchedulerRequest schedulerRequest) {
+		return _instance._getNextFireTime(schedulerRequest);
 	}
 
 	public static Date getNextFireTime(String jobName, String groupName)
@@ -102,22 +99,14 @@ public class SchedulerEngineUtil {
 		return _instance._getNextFireTime(jobName, groupName);
 	}
 
-	public static Date getNextFireTime(SchedulerRequest schedulerRequest)
-		throws SchedulerException {
-
-		return _instance._getNextFireTime(schedulerRequest);
+	public static Date getPreviousFireTime(SchedulerRequest schedulerRequest) {
+		return _instance._getPreviousFireTime(schedulerRequest);
 	}
 
 	public static Date getPreviousFireTime(String jobName, String groupName)
 		throws SchedulerException {
 
 		return _instance._getPreviousFireTime(jobName, groupName);
-	}
-
-	public static Date getPreviousFireTime(SchedulerRequest schedulerRequest)
-		throws SchedulerException {
-
-		return _instance._getPreviousFireTime(schedulerRequest);
 	}
 
 	public static SchedulerRequest getScheduledJob(
@@ -139,16 +128,14 @@ public class SchedulerEngineUtil {
 		return _instance._getScheduledJobs(groupName);
 	}
 
+	public static Date getStartTime(SchedulerRequest schedulerRequest) {
+		return _instance._getStartTime(schedulerRequest);
+	}
+
 	public static Date getStartTime(String jobName, String groupName)
 		throws SchedulerException {
 
 		return _instance._getStartTime(jobName, groupName);
-	}
-
-	public static Date getStartTime(SchedulerRequest schedulerRequest)
-		throws SchedulerException {
-
-		return _instance._getStartTime(schedulerRequest);
 	}
 
 	public static void init(SchedulerEngine defaultScheduler) {
@@ -238,6 +225,8 @@ public class SchedulerEngineUtil {
 		_instance._unschedule(trigger);
 	}
 
+	private SchedulerEngine _schedulerEngine;
+
 	private void _addScriptingJob(
 			Trigger trigger, String description, String language, String script)
 		throws SchedulerException {
@@ -250,6 +239,23 @@ public class SchedulerEngineUtil {
 		_schedule(
 			trigger, description, DestinationNames.SCHEDULER_SCRIPTING,
 			message);
+	}
+
+	private Date _getEndTime(SchedulerRequest schedulerRequest) {
+		Message message = schedulerRequest.getMessage();
+
+		JobState jobState = (JobState)message.get(SchedulerEngine.JOB_STATE);
+
+		TriggerState triggerState = jobState.getTriggerState();
+
+		if ((triggerState == TriggerState.NORMAL) ||
+			(triggerState == TriggerState.PAUSED)) {
+
+			return (Date)message.get(SchedulerEngine.END_TIME);
+		}
+		else {
+			return jobState.getTriggerTimeInfomation(SchedulerEngine.END_TIME);
+		}
 	}
 
 	private Date _getEndTime(String jobName, String groupName)
@@ -265,22 +271,21 @@ public class SchedulerEngineUtil {
 		return null;
 	}
 
-	private Date _getEndTime(SchedulerRequest schedulerRequest)
-		throws SchedulerException {
+	private Date _getFinalFireTime(SchedulerRequest schedulerRequest) {
+		Message message = schedulerRequest.getMessage();
 
-		JobState jobState = (JobState)schedulerRequest.getMessage().get(
-			SchedulerEngine.JOB_STATE);
+		JobState jobState = (JobState)message.get(SchedulerEngine.JOB_STATE);
 
 		TriggerState triggerState = jobState.getTriggerState();
 
-		if (triggerState == TriggerState.NORMAL ||
-			triggerState == TriggerState.PAUSED) {
+		if ((triggerState == TriggerState.NORMAL) ||
+			(triggerState == TriggerState.PAUSED)) {
 
-			return (Date)schedulerRequest.getMessage().get(
-				SchedulerEngine.END_TIME);
+			return (Date)message.get(SchedulerEngine.FINAL_FIRE_TIME);
 		}
 		else {
-			return jobState.getTriggerTimeInfomation(SchedulerEngine.END_TIME);
+			return jobState.getTriggerTimeInfomation(
+				SchedulerEngine.FINAL_FIRE_TIME);
 		}
 	}
 
@@ -297,24 +302,14 @@ public class SchedulerEngineUtil {
 		return null;
 	}
 
-	private Date _getFinalFireTime(SchedulerRequest schedulerRequest)
-		throws SchedulerException {
+	private ObjectValuePair<Exception, Date>[] _getJobExceptions(
+		SchedulerRequest schedulerRequest) {
 
-		JobState jobState = (JobState)schedulerRequest.getMessage().get(
-			SchedulerEngine.JOB_STATE);
+		Message message = schedulerRequest.getMessage();
 
-		TriggerState triggerState = jobState.getTriggerState();
+		JobState jobState = (JobState)message.get(SchedulerEngine.JOB_STATE);
 
-		if (triggerState == TriggerState.NORMAL ||
-			triggerState == TriggerState.PAUSED) {
-
-			return (Date)schedulerRequest.getMessage().get(
-				SchedulerEngine.FINAL_FIRE_TIME);
-		}
-		else {
-			return jobState.getTriggerTimeInfomation(
-				SchedulerEngine.FINAL_FIRE_TIME);
-		}
+		return jobState.getExceptions();
 	}
 
 	private ObjectValuePair<Exception, Date>[] _getJobExceptions(
@@ -331,14 +326,12 @@ public class SchedulerEngineUtil {
 		return null;
 	}
 
-	private ObjectValuePair<Exception, Date>[] _getJobExceptions(
-			SchedulerRequest schedulerRequest)
-		throws SchedulerException {
+	private TriggerState _getJobState(SchedulerRequest schedulerRequest) {
+		Message message = schedulerRequest.getMessage();
 
-		JobState jobState = (JobState)schedulerRequest.getMessage().get(
-			SchedulerEngine.JOB_STATE);
+		JobState jobState = (JobState)message.get(SchedulerEngine.JOB_STATE);
 
-		return jobState.getExceptions();
+		return jobState.getTriggerState();
 	}
 
 	private TriggerState _getJobState(String jobName, String groupName)
@@ -354,13 +347,22 @@ public class SchedulerEngineUtil {
 		return null;
 	}
 
-	private TriggerState _getJobState(SchedulerRequest schedulerRequest)
-		throws SchedulerException {
+	private Date _getNextFireTime(SchedulerRequest schedulerRequest) {
+		Message message = schedulerRequest.getMessage();
 
-		JobState jobState = (JobState)schedulerRequest.getMessage().get(
-			SchedulerEngine.JOB_STATE);
+		JobState jobState = (JobState)message.get(SchedulerEngine.JOB_STATE);
 
-		return jobState.getTriggerState();
+		TriggerState triggerState = jobState.getTriggerState();
+
+		if ((triggerState == TriggerState.NORMAL) ||
+			(triggerState == TriggerState.PAUSED)) {
+
+			return (Date)message.get(SchedulerEngine.NEXT_FIRE_TIME);
+		}
+		else {
+			return jobState.getTriggerTimeInfomation(
+				SchedulerEngine.NEXT_FIRE_TIME);
+		}
 	}
 
 	private Date _getNextFireTime(String jobName, String groupName)
@@ -376,23 +378,21 @@ public class SchedulerEngineUtil {
 		return null;
 	}
 
-	private Date _getNextFireTime(SchedulerRequest schedulerRequest)
-		throws SchedulerException {
+	private Date _getPreviousFireTime(SchedulerRequest schedulerRequest) {
+		Message message = schedulerRequest.getMessage();
 
-		JobState jobState = (JobState)schedulerRequest.getMessage().get(
-			SchedulerEngine.JOB_STATE);
+		JobState jobState = (JobState)message.get(SchedulerEngine.JOB_STATE);
 
 		TriggerState triggerState = jobState.getTriggerState();
 
-		if (triggerState == TriggerState.NORMAL ||
-			triggerState == TriggerState.PAUSED) {
+		if ((triggerState == TriggerState.NORMAL) ||
+			(triggerState == TriggerState.PAUSED)) {
 
-			return (Date)schedulerRequest.getMessage().get(
-				SchedulerEngine.NEXT_FIRE_TIME);
+			return (Date)message.get(SchedulerEngine.PREVIOUS_FIRE_TIME);
 		}
 		else {
 			return jobState.getTriggerTimeInfomation(
-				SchedulerEngine.NEXT_FIRE_TIME);
+				SchedulerEngine.PREVIOUS_FIRE_TIME);
 		}
 	}
 
@@ -407,26 +407,6 @@ public class SchedulerEngineUtil {
 		}
 
 		return null;
-	}
-
-	private Date _getPreviousFireTime(SchedulerRequest schedulerRequest)
-		throws SchedulerException {
-
-		JobState jobState = (JobState)schedulerRequest.getMessage().get(
-			SchedulerEngine.JOB_STATE);
-
-		TriggerState triggerState = jobState.getTriggerState();
-
-		if (triggerState == TriggerState.NORMAL ||
-			triggerState == TriggerState.PAUSED) {
-
-			return (Date)schedulerRequest.getMessage().get(
-				SchedulerEngine.PREVIOUS_FIRE_TIME);
-		}
-		else {
-			return jobState.getTriggerTimeInfomation(
-				SchedulerEngine.PREVIOUS_FIRE_TIME);
-		}
 	}
 
 	private SchedulerRequest _getScheduledJob(String jobName, String groupName)
@@ -457,39 +437,6 @@ public class SchedulerEngineUtil {
 		return _schedulerEngine.getScheduledJobs(groupName);
 	}
 
-	private Date _getStartTime(String jobName, String groupName)
-		throws SchedulerException {
-
-		SchedulerRequest schedulerRequest = _getScheduledJob(
-			jobName, groupName);
-
-		if (schedulerRequest != null) {
-			return _getStartTime(schedulerRequest);
-		}
-
-		return null;
-	}
-
-	private Date _getStartTime(SchedulerRequest schedulerRequest)
-		throws SchedulerException {
-
-		JobState jobState = (JobState)schedulerRequest.getMessage().get(
-			SchedulerEngine.JOB_STATE);
-
-		TriggerState triggerState = jobState.getTriggerState();
-
-		if (triggerState == TriggerState.NORMAL ||
-			triggerState == TriggerState.PAUSED) {
-
-			return (Date)schedulerRequest.getMessage().get(
-				SchedulerEngine.START_TIME);
-		}
-		else {
-			return jobState.getTriggerTimeInfomation(
-				SchedulerEngine.START_TIME);
-		}
-	}
-
 	private MessageListener _getSchedulerEventListener(
 			SchedulerEntry schedulerEntry, ClassLoader classLoader)
 		throws SchedulerException {
@@ -507,6 +454,37 @@ public class SchedulerEngineUtil {
 		catch (Exception e) {
 			throw new SchedulerException(e);
 		}
+	}
+
+	private Date _getStartTime(SchedulerRequest schedulerRequest) {
+		Message message = schedulerRequest.getMessage();
+
+		JobState jobState = (JobState)message.get(SchedulerEngine.JOB_STATE);
+
+		TriggerState triggerState = jobState.getTriggerState();
+
+		if ((triggerState == TriggerState.NORMAL) ||
+			(triggerState == TriggerState.PAUSED)) {
+
+			return (Date)message.get(SchedulerEngine.START_TIME);
+		}
+		else {
+			return jobState.getTriggerTimeInfomation(
+				SchedulerEngine.START_TIME);
+		}
+	}
+
+	private Date _getStartTime(String jobName, String groupName)
+		throws SchedulerException {
+
+		SchedulerRequest schedulerRequest = _getScheduledJob(
+			jobName, groupName);
+
+		if (schedulerRequest != null) {
+			return _getStartTime(schedulerRequest);
+		}
+
+		return null;
 	}
 
 	private void _init(SchedulerEngine schedulerEngine) {
@@ -668,7 +646,5 @@ public class SchedulerEngineUtil {
 	}
 
 	private static SchedulerEngineUtil _instance = new SchedulerEngineUtil();
-
-	private SchedulerEngine _schedulerEngine;
 
 }

@@ -39,68 +39,72 @@ public class MessageSenderJob implements Job {
 
 	public void execute(JobExecutionContext jobExecutionContext) {
 		try {
-			JobDetail jobDetail = jobExecutionContext.getJobDetail();
-
-			JobDataMap jobDataMap = jobDetail.getJobDataMap();
-
-			String destinationName = jobDataMap.getString(
-				SchedulerEngine.DESTINATION_NAME);
-
-			Message message = (Message)jobDataMap.get(SchedulerEngine.MESSAGE);
-
-			if (message == null) {
-				message = new Message();
-			}
-
-			message.put(SchedulerEngine.DESTINATION_NAME, destinationName);
-
-			Scheduler scheduler = jobExecutionContext.getScheduler();
-
-			SchedulerContext schedulerContext = scheduler.getContext();
-
-			JobState jobState =(JobState)schedulerContext.get(
-				jobDetail.getFullName());
-
-			if (jobExecutionContext.getNextFireTime() == null) {
-				message.put(SchedulerEngine.DISABLE, true);
-
-				if (!destinationName.equals(
-					DestinationNames.SCHEDULER_DISPATCH)) {
-
-					Trigger trigger = jobExecutionContext.getTrigger();
-
-					jobState.setTriggerTimeInfomation(
-						SchedulerEngine.START_TIME, trigger.getStartTime());
-					jobState.setTriggerTimeInfomation(
-						SchedulerEngine.END_TIME, trigger.getEndTime());
-					jobState.setTriggerTimeInfomation(
-						SchedulerEngine.NEXT_FIRE_TIME, null);
-					jobState.setTriggerTimeInfomation(
-						SchedulerEngine.PREVIOUS_FIRE_TIME,
-						trigger.getPreviousFireTime());
-					jobState.setTriggerTimeInfomation(
-						SchedulerEngine.FINAL_FIRE_TIME,
-						trigger.getFinalFireTime());
-
-					jobState.setTriggerState(TriggerState.COMPLETE);
-
-					JobState jobStateCopy = (JobState)jobState.clone();
-
-					jobStateCopy.clearExceptions();
-
-					jobDataMap.put(SchedulerEngine.JOB_STATE, jobStateCopy);
-
-					scheduler.addJob(jobDetail, true);
-				}
-			}
-
-			message.put(SchedulerEngine.JOB_STATE, jobState);
-
-			MessageBusUtil.sendMessage(destinationName, message);
+			doExecute(jobExecutionContext);
 		}
 		catch (Exception e) {
 			_log.error("Unable to execute job", e);
 		}
+	}
+
+	protected void doExecute(JobExecutionContext jobExecutionContext)
+		throws Exception {
+
+		JobDetail jobDetail = jobExecutionContext.getJobDetail();
+
+		JobDataMap jobDataMap = jobDetail.getJobDataMap();
+
+		String destinationName = jobDataMap.getString(
+			SchedulerEngine.DESTINATION_NAME);
+
+		Message message = (Message)jobDataMap.get(SchedulerEngine.MESSAGE);
+
+		if (message == null) {
+			message = new Message();
+		}
+
+		message.put(SchedulerEngine.DESTINATION_NAME, destinationName);
+
+		Scheduler scheduler = jobExecutionContext.getScheduler();
+
+		SchedulerContext schedulerContext = scheduler.getContext();
+
+		JobState jobState = (JobState)schedulerContext.get(
+			jobDetail.getFullName());
+
+		if (jobExecutionContext.getNextFireTime() == null) {
+			message.put(SchedulerEngine.DISABLE, true);
+
+			if (!destinationName.equals(DestinationNames.SCHEDULER_DISPATCH)) {
+				Trigger trigger = jobExecutionContext.getTrigger();
+
+				jobState.setTriggerTimeInfomation(
+					SchedulerEngine.END_TIME, trigger.getEndTime());
+				jobState.setTriggerTimeInfomation(
+					SchedulerEngine.FINAL_FIRE_TIME,
+					trigger.getFinalFireTime());
+				jobState.setTriggerTimeInfomation(
+					SchedulerEngine.NEXT_FIRE_TIME, null);
+				jobState.setTriggerTimeInfomation(
+					SchedulerEngine.PREVIOUS_FIRE_TIME,
+					trigger.getPreviousFireTime());
+				jobState.setTriggerTimeInfomation(
+					SchedulerEngine.START_TIME, trigger.getStartTime());
+
+				jobState.setTriggerState(TriggerState.COMPLETE);
+
+				jobState = (JobState)jobState.clone();
+
+				jobState.clearExceptions();
+
+				jobDataMap.put(SchedulerEngine.JOB_STATE, jobState);
+
+				scheduler.addJob(jobDetail, true);
+			}
+		}
+
+		message.put(SchedulerEngine.JOB_STATE, jobState);
+
+		MessageBusUtil.sendMessage(destinationName, message);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(MessageSenderJob.class);

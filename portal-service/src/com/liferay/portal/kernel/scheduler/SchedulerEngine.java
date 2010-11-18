@@ -27,41 +27,41 @@ import java.util.List;
  */
 public interface SchedulerEngine {
 
-	public static final String DESCRIPTION = "description";
+	public static final String DESCRIPTION = "DESCRIPTION";
 
 	public static final int DESCRIPTION_MAX_LENGTH = 120;
 
-	public static final String DESTINATION_NAME = "destinationName";
+	public static final String DESTINATION_NAME = "DESTINATION_NAME";
 
-	public static final String DISABLE = "disable";
+	public static final String DISABLE = "DISABLE";
 
-	public static final String END_TIME = "end_time";
+	public static final String END_TIME = "END_TIME";
 
-	public static final String FINAL_FIRE_TIME = "final_fire_time";
+	public static final String EXCEPTIONS_MAX_SIZE = "EXCEPTIONS_MAX_SIZE";
+
+	public static final String FINAL_FIRE_TIME = "FINAL_FIRE_TIME";
 
 	public static final int GROUP_NAME_MAX_LENGTH = 80;
 
 	public static final int JOB_NAME_MAX_LENGTH = 80;
 
-	public static final String JOB_STATE = "job_state";
+	public static final String JOB_STATE = "JOB_STATE";
 
-	public static final String LANGUAGE = "language";
+	public static final String LANGUAGE = "LANGUAGE";
 
-	public static final String MAX_EXCEPTION_NUMBER = "max_exception_number";
+	public static final String MESSAGE = "MESSAGE";
 
-	public static final String MESSAGE = "message";
+	public static final String MESSAGE_LISTENER_UUID = "MESSAGE_LISTENER_UUID";
 
-	public static final String MESSAGE_LISTENER_UUID = "message_listener_uuid";
+	public static final String NEXT_FIRE_TIME = "NEXT_FIRE_TIME";
 
-	public static final String NEXT_FIRE_TIME = "next_fire_time";
+	public static final String PREVIOUS_FIRE_TIME = "PREVIOUS_FIRE_TIME";
 
-	public static final String PREVIOUS_FIRE_TIME = "previous_fire_time";
+	public static final String RECEIVER_KEY = "RECEIVER_KEY";
 
-	public static final String RECEIVER_KEY = "receiver_key";
+	public static final String SCRIPT = "SCRIPT";
 
-	public static final String SCRIPT = "script";
-
-	public static final String START_TIME = "start_time";
+	public static final String START_TIME = "START_TIME";
 
 	public SchedulerRequest getScheduledJob(String jobName, String groupName)
 		throws SchedulerException;
