@@ -165,6 +165,13 @@ public class ResourceActionsUtil_IW {
 		return ResourceActionsUtil.getRoles(companyId, group, modelResource);
 	}
 
+	public java.util.List<com.liferay.portal.model.Role> getRoles(
+		long companyId, com.liferay.portal.model.Group group,
+		java.lang.String modelResource, int[] types)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return ResourceActionsUtil.getRoles(companyId, group, modelResource, types);
+	}
+
 	public com.liferay.portlet.social.model.SocialEquityActionMapping getSocialEquityActionMapping(
 		java.lang.String name, java.lang.String actionId) {
 		return ResourceActionsUtil.getSocialEquityActionMapping(name, actionId);

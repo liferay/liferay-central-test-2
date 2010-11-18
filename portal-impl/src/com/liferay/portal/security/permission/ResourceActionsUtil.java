@@ -343,37 +343,17 @@ public class ResourceActionsUtil {
 			long companyId, Group group, String modelResource)
 		throws SystemException {
 
+		return getRoles(companyId, group, modelResource, null);
+	}
+
+	public static List<Role> getRoles(
+			long companyId, Group group, String modelResource, int[] types)
+		throws SystemException {
+
 		List<Role> allRoles = RoleLocalServiceUtil.getRoles(companyId);
 
-		int[] types = new int[] {
-			RoleConstants.TYPE_REGULAR, RoleConstants.TYPE_COMMUNITY
-		};
-
-		if (isPortalModelResource(modelResource)) {
-			if (modelResource.equals(Organization.class.getName()) ||
-				modelResource.equals(User.class.getName())) {
-
-				types = new int[] {
-					RoleConstants.TYPE_REGULAR,
-					RoleConstants.TYPE_ORGANIZATION
-				};
-			}
-			else {
-				types = new int[] {RoleConstants.TYPE_REGULAR};
-			}
-		}
-		else {
-			if (group != null) {
-				if (group.isOrganization()) {
-					types = new int[] {
-						RoleConstants.TYPE_REGULAR,
-						RoleConstants.TYPE_ORGANIZATION
-					};
-				}
-				else if (group.isUser()) {
-					types = new int[] {RoleConstants.TYPE_REGULAR};
-				}
-			}
+		if (types == null) {
+			types = _instance._getRoleTypes(companyId, group, modelResource);
 		}
 
 		List<Role> roles = new ArrayList<Role>();
@@ -778,6 +758,43 @@ public class ResourceActionsUtil {
 		}
 
 		return actions;
+	}
+
+	private int[] _getRoleTypes (
+		long companyId, Group group, String modelResource) {
+
+		int[] types = new int[] {
+			RoleConstants.TYPE_REGULAR, RoleConstants.TYPE_COMMUNITY
+		};
+
+		if (isPortalModelResource(modelResource)) {
+			if (modelResource.equals(Organization.class.getName()) ||
+				modelResource.equals(User.class.getName())) {
+
+				types = new int[] {
+					RoleConstants.TYPE_REGULAR,
+					RoleConstants.TYPE_ORGANIZATION
+				};
+			}
+			else {
+				types = new int[] {RoleConstants.TYPE_REGULAR};
+			}
+		}
+		else {
+			if (group != null) {
+				if (group.isOrganization()) {
+					types = new int[] {
+						RoleConstants.TYPE_REGULAR,
+						RoleConstants.TYPE_ORGANIZATION
+					};
+				}
+				else if (group.isUser()) {
+					types = new int[] {RoleConstants.TYPE_REGULAR};
+				}
+			}
+		}
+
+		return types;
 	}
 
 	private SocialEquityActionMapping _getSocialEquityActionMapping(

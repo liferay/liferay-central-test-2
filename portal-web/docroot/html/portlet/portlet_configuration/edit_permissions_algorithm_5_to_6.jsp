@@ -32,6 +32,8 @@ if (Validator.isNull(resourcePrimKey)) {
 	throw new ResourcePrimKeyException();
 }
 
+String roleTypesParam = ParamUtil.getString(request, "roleTypes");
+
 String selResource = modelResource;
 String selResourceDescription = modelResourceDescription;
 String selResourceName = modelResourceName;
@@ -96,6 +98,7 @@ actionPortletURL.setParameter("portletResource", portletResource);
 actionPortletURL.setParameter("modelResource", modelResource);
 actionPortletURL.setParameter("modelResourceDescription", modelResourceDescription);
 actionPortletURL.setParameter("resourcePrimKey", resourcePrimKey);
+actionPortletURL.setParameter("roleTypes", roleTypesParam);
 
 PortletURL renderPortletURL = renderResponse.createRenderURL();
 
@@ -107,6 +110,7 @@ renderPortletURL.setParameter("portletResource", portletResource);
 renderPortletURL.setParameter("modelResource", modelResource);
 renderPortletURL.setParameter("modelResourceDescription", modelResourceDescription);
 renderPortletURL.setParameter("resourcePrimKey", resourcePrimKey);
+renderPortletURL.setParameter("roleTypes", roleTypesParam);
 
 Group controlPanelGroup = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupConstants.CONTROL_PANEL);
 
@@ -120,6 +124,12 @@ definePermissionsURL.setRefererPlid(plid);
 
 definePermissionsURL.setParameter("struts_action", "/enterprise_admin_roles/edit_role_permissions");
 definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
+
+int[] roleTypes = null;
+
+if (Validator.isNotNull(roleTypesParam)) {
+	roleTypes = StringUtil.split(roleTypesParam, 0);
+}
 %>
 
 <div class="edit-permissions">
@@ -144,20 +154,21 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 		<%
 		List<String> actions = ResourceActionsUtil.getResourceActions(portletResource, modelResource);
 
-		List<Role> roles = ResourceActionsUtil.getRoles(company.getCompanyId(), group, modelResource);
+		List<Role> roles = ResourceActionsUtil.getRoles(company.getCompanyId(), group, modelResource, roleTypes);
 
 		Role administrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ADMINISTRATOR);
 
 		roles.remove(administrator);
 
-		if (group.isCommunity()) {
+		if (group.isCommunity() || ArrayUtil.contains(roleTypes, RoleConstants.TYPE_COMMUNITY)) {
 			Role communityAdministrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.COMMUNITY_ADMINISTRATOR);
 			Role communityOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.COMMUNITY_OWNER);
 
 			roles.remove(communityAdministrator);
 			roles.remove(communityOwner);
 		}
-		else if (group.isOrganization()) {
+
+		if (group.isOrganization() || ArrayUtil.contains(roleTypes, RoleConstants.TYPE_ORGANIZATION)) {
 			Role organizationAdministrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_ADMINISTRATOR);
 			Role organizationOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
 
