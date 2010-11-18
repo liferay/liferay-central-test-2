@@ -7,7 +7,7 @@
 
 	var PATH_COMBO = LiferayAUI.getComboPath();
 
-	var PATH_JAVASCRIPT = themeDisplay.getPathContext() + '/html/js';
+	var PATH_JAVASCRIPT = LiferayAUI.getJavaScriptRootPath() + '/';
 
 	var PATH_LIFERAY = PATH_JAVASCRIPT + '/liferay/';
 

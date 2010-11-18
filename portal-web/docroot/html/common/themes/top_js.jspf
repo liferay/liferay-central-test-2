@@ -197,7 +197,9 @@
 		<%
 		long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/html/js/", true);
 
-		String alloyRootPath = themeDisplay.getPathContext() + "/html/js/aui/";
+		String javaScriptRootPath = themeDisplay.getPathContext() + "/html/js";
+
+		String alloyRootPath = javaScriptRootPath + "/aui/";
 
 		String alloyBaseURL = PortalUtil.getPortalURL(request) + alloyRootPath;
 
@@ -212,14 +214,14 @@
 				return <%= themeDisplay.isThemeJsFastLoad() %>;
 			},
 			getComboPath: function() {
-				return '<%= alloyComboPath %>&p=<%= themeDisplay.getPathContext() %>/html/js&';
+				return '<%= alloyComboPath %>&p=<%= javaScriptRootPath %>&';
 			},
 			getFilter: function() {
 				<c:choose>
 					<c:when test="<%= themeDisplay.isThemeJsFastLoad() %>">
 						return {
 							replaceStr: function(match, fragment, string) {
-								return fragment + 'm=' + (match.split('<%= themeDisplay.getPathContext() %>/html/js')[1] || '');
+								return fragment + 'm=' + (match.split('<%= javaScriptRootPath %>')[1] || '');
 							},
 							searchExp: '(\\?|&)/([^&]+)'
 						};
@@ -228,6 +230,9 @@
 						return 'raw';
 					</c:otherwise>
 				</c:choose>
+			},
+			getJavaScriptRootPath: function() {
+				return '<%= javaScriptRootPath %>';
 			},
 			getRootPath: function() {
 				return '<%= alloyRootPath %>';
