@@ -108,8 +108,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		try {
 			SchedulerContext schedulerContext = _scheduler.getContext();
 
-			schedulerContext.remove(
-				groupName.concat(StringPool.PERIOD).concat(jobName));
+			schedulerContext.remove(getFullName(jobName, groupName));
 
 			_scheduler.deleteJob(jobName, groupName);
 		}
@@ -552,13 +551,17 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 	}
 
+	protected String getFullName(String jobName, String groupName) {
+		return groupName.concat(StringPool.PERIOD).concat(jobName);
+	}
+
 	protected JobState getJobState(String jobName, String groupName)
 		throws Exception {
 
 		SchedulerContext schedulerContext = _scheduler.getContext();
 
 		JobState jobState = (JobState)schedulerContext.get(
-			groupName.concat(StringPool.PERIOD).concat(jobName));
+			getFullName(jobName, groupName));
 
 		return jobState;
 	}

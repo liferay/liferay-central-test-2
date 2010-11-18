@@ -31,7 +31,7 @@ import java.util.List;
  */
 public class SchedulerEngineProxy implements SchedulerEngine {
 
-	public void delete(String groupName) throws SchedulerException {
+	public void delete(String groupName) {
 		SchedulerRequest schedulerRequest =
 			SchedulerRequest.createDeleteRequest(groupName);
 
@@ -39,9 +39,7 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
 	}
 
-	public void delete(String jobName, String groupName)
-		throws SchedulerException {
-
+	public void delete(String jobName, String groupName) {
 		SchedulerRequest schedulerRequest =
 			SchedulerRequest.createDeleteRequest(jobName, groupName);
 

@@ -45,7 +45,6 @@ public class SchedulerRequest implements Serializable {
 	public static final String COMMAND_UNREGISTER = "UNREGISTER";
 
 	public static SchedulerRequest createDeleteRequest(String groupName) {
-
 		SchedulerRequest schedulerRequest = new SchedulerRequest();
 
 		schedulerRequest.setCommand(COMMAND_DELETE);
@@ -67,7 +66,6 @@ public class SchedulerRequest implements Serializable {
 	}
 
 	public static SchedulerRequest createPauseRequest(String groupName) {
-
 		SchedulerRequest schedulerRequest = new SchedulerRequest();
 
 		schedulerRequest.setCommand(COMMAND_PAUSE);
