@@ -19,10 +19,9 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.messaging.MessageListenerException;
+import com.liferay.portal.kernel.scheduler.JobState;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
-import com.liferay.portal.kernel.scheduler.TriggerState;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
@@ -106,12 +105,9 @@ public class SchedulerEventMessageListenerWrapper implements MessageListener {
 	}
 
 	protected void handleException(Message message, Exception exception) {
-		ObjectValuePair<TriggerState, Exception> jobState =
-			(ObjectValuePair<TriggerState, Exception>)message.get(
-				SchedulerEngine.JOB_STATE);
+		JobState jobState = (JobState)message.get(SchedulerEngine.JOB_STATE);
 
-		jobState.setKey(TriggerState.ERROR);
-		jobState.setValue(exception);
+		jobState.addException(exception);
 	}
 
 	private String _className;

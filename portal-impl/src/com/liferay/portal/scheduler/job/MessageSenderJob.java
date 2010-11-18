@@ -16,11 +16,12 @@ package com.liferay.portal.scheduler.job;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.scheduler.JobState;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.TriggerState;
-import com.liferay.portal.kernel.util.ObjectValuePair;
 
 import org.quartz.Job;
 import org.quartz.JobDataMap;
@@ -28,6 +29,7 @@ import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerContext;
+import org.quartz.Trigger;
 
 /**
  * @author Michael C. Han
@@ -52,17 +54,45 @@ public class MessageSenderJob implements Job {
 
 			message.put(SchedulerEngine.DESTINATION_NAME, destinationName);
 
-			if (jobExecutionContext.getNextFireTime() == null) {
-				message.put(SchedulerEngine.DISABLE, true);
-			}
-
 			Scheduler scheduler = jobExecutionContext.getScheduler();
 
 			SchedulerContext schedulerContext = scheduler.getContext();
 
-			ObjectValuePair<TriggerState, Exception> jobState =
-				(ObjectValuePair<TriggerState, Exception>)
-					schedulerContext.get(jobDetail.getFullName());
+			JobState jobState =(JobState)schedulerContext.get(
+				jobDetail.getFullName());
+
+			if (jobExecutionContext.getNextFireTime() == null) {
+				message.put(SchedulerEngine.DISABLE, true);
+
+				if (!destinationName.equals(
+					DestinationNames.SCHEDULER_DISPATCH)) {
+
+					Trigger trigger = jobExecutionContext.getTrigger();
+
+					jobState.setTriggerTimeInfomation(
+						SchedulerEngine.START_TIME, trigger.getStartTime());
+					jobState.setTriggerTimeInfomation(
+						SchedulerEngine.END_TIME, trigger.getEndTime());
+					jobState.setTriggerTimeInfomation(
+						SchedulerEngine.NEXT_FIRE_TIME, null);
+					jobState.setTriggerTimeInfomation(
+						SchedulerEngine.PREVIOUS_FIRE_TIME,
+						trigger.getPreviousFireTime());
+					jobState.setTriggerTimeInfomation(
+						SchedulerEngine.FINAL_FIRE_TIME,
+						trigger.getFinalFireTime());
+
+					jobState.setTriggerState(TriggerState.COMPLETE);
+
+					JobState jobStateCopy = (JobState)jobState.clone();
+
+					jobStateCopy.clearExceptions();
+
+					jobDataMap.put(SchedulerEngine.JOB_STATE, jobStateCopy);
+
+					scheduler.addJob(jobDetail, true);
+				}
+			}
 
 			message.put(SchedulerEngine.JOB_STATE, jobState);
 
