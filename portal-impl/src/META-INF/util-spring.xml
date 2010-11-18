@@ -386,6 +386,11 @@
 			<bean class="com.liferay.portal.service.permission.UserGroupPermissionImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.permission.UserGroupRolePermissionUtil" class="com.liferay.portal.service.permission.UserGroupRolePermissionUtil">
+		<property name="userGroupRolePermission">
+			<bean class="com.liferay.portal.service.permission.UserGroupRolePermissionImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.permission.UserPermissionUtil" class="com.liferay.portal.service.permission.UserPermissionUtil">
 		<property name="userPermission">
 			<bean class="com.liferay.portal.service.permission.UserPermissionImpl" />
