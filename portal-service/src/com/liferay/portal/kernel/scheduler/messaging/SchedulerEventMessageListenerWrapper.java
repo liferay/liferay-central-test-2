@@ -107,7 +107,9 @@ public class SchedulerEventMessageListenerWrapper implements MessageListener {
 	protected void handleException(Message message, Exception exception) {
 		JobState jobState = (JobState)message.get(SchedulerEngine.JOB_STATE);
 
-		jobState.addException(exception);
+		if (jobState != null) {
+			jobState.addException(exception);
+		}
 	}
 
 	private String _className;
