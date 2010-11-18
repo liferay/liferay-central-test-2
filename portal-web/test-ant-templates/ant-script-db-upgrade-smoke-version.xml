@@ -5,7 +5,5 @@
 			<param name="sql.version" value="${test.ant.script.version}" />
 		</antcall>
 
-		<antcall target="run-smoke-test">
-			<param name="build.app.server" value="false" />
-		</antcall>
+		<antcall target="run-smoke-test" />
 	</target>
