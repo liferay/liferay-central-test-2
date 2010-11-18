@@ -4,19 +4,7 @@
 
 	var arrayIndexOf = A.Array.indexOf;
 
-	var toCharCode = A.cached(
-		function(name) {
-			var buffer = [];
-
-			name = unescape(escape(name).replace(/%u/g, '\\u'));
-
-			for (var i = 0; i < name.length; i++) {
-				buffer[i] = name.charCodeAt(i);
-			}
-
-			return buffer.join('');
-		}
-	);
+	var toCharCode = Liferay.Util.toCharCode;
 
 	Liferay.Portal.Tabs._show = function(event) {
 		var id = event.id;

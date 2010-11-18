@@ -388,6 +388,20 @@
 		    }
 		},
 
+		toCharCode: A.cached(
+			function(name) {
+				var buffer = [];
+
+				name = unescape(escape(name).replace(/%u/g, '\\u'));
+
+				for (var i = 0; i < name.length; i++) {
+					buffer[i] = name.charCodeAt(i);
+				}
+
+				return buffer.join('');
+			}
+		),
+
 		uncamelize: function(value, separator) {
 			separator = separator || ' ';
 
