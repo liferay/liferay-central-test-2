@@ -146,7 +146,7 @@ public class SQLTransformer {
 		String newSQL = sql;
 
 		newSQL = _replaceCastText(newSQL);
-		newSQL= _replaceIntegerDivision(newSQL);
+		newSQL = _replaceIntegerDivision(newSQL);
 
 		if (_vendorDerby) {
 			newSQL = _replaceUnion(newSQL);
