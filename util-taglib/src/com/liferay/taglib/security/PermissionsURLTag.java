@@ -15,6 +15,7 @@
 package com.liferay.taglib.security;
 
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
@@ -42,7 +43,7 @@ public class PermissionsURLTag extends TagSupport {
 	public static void doTag(
 			String redirect, String modelResource,
 			String modelResourceDescription, String resourcePrimKey, String var,
-			PageContext pageContext)
+			int[] roleTypes, PageContext pageContext)
 		throws Exception {
 
 		HttpServletRequest request =
@@ -84,6 +85,10 @@ public class PermissionsURLTag extends TagSupport {
 			"modelResourceDescription", modelResourceDescription);
 		portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
+		if (roleTypes != null) {
+			portletURL.setParameter("roleTypes", StringUtil.merge(roleTypes));
+		}
+
 		String portletURLToString = portletURL.toString();
 
 		if (Validator.isNotNull(var)) {
@@ -100,7 +105,7 @@ public class PermissionsURLTag extends TagSupport {
 		try {
 			doTag(
 				_redirect, _modelResource, _modelResourceDescription,
-				_resourcePrimKey, _var, pageContext);
+				_resourcePrimKey, _var, _roleTypes, pageContext);
 		}
 		catch (Exception e) {
 			throw new JspException(e);
@@ -125,6 +130,10 @@ public class PermissionsURLTag extends TagSupport {
 		_resourcePrimKey = resourcePrimKey;
 	}
 
+	public void setRoleTypes(int[] roleTypes) {
+		_roleTypes = roleTypes;
+	}
+
 	public void setVar(String var) {
 		_var = var;
 	}
@@ -133,6 +142,7 @@ public class PermissionsURLTag extends TagSupport {
 	private String _modelResource;
 	private String _modelResourceDescription;
 	private String _resourcePrimKey;
+	private int[] _roleTypes;
 	private String _var;
 
 }
