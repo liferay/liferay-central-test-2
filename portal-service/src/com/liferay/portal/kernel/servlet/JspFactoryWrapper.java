@@ -82,8 +82,8 @@ public class JspFactoryWrapper extends JspFactory {
 	}
 
 	private static boolean _DIRECT_SERVLET_CONTEXT_ENABLED =
-		GetterUtil.getBoolean(PropsUtil.get(
-			PropsKeys.DIRECT_SERVLET_CONTEXT_ENABLED));
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.DIRECT_SERVLET_CONTEXT_ENABLED));
 
 	private static final int _JSP_WRITER_BUFFER_SIZE = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.JSP_WRITER_BUFFER_SIZE));

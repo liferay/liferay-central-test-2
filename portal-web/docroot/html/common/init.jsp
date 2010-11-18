@@ -82,7 +82,6 @@
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayWindowState" %>
 <%@ page import="com.liferay.portal.kernel.search.Field" %>
 <%@ page import="com.liferay.portal.kernel.servlet.BrowserSnifferUtil" %>
-<%@ page import="com.liferay.portal.kernel.servlet.DirectServletRegistry" %>
 <%@ page import="com.liferay.portal.kernel.servlet.ImageServletTokenUtil" %>
 <%@ page import="com.liferay.portal.kernel.servlet.ServletContextUtil" %>
 <%@ page import="com.liferay.portal.kernel.servlet.SessionErrors" %>

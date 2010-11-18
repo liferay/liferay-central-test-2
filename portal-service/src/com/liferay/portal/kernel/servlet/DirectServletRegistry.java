@@ -15,9 +15,9 @@
 package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.File;
 
@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.Servlet;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 
 /**
@@ -33,20 +34,45 @@ import javax.servlet.ServletContext;
 public class DirectServletRegistry {
 
 	public static Servlet getServlet(String path) {
-		ObjectValuePair<Servlet, Long> servletInfo = _servlets.get(path);
+		return _instance._getServlet(path);
+	}
+
+	public static void putServlet(String path, Servlet servlet) {
+		_instance._putServlet(path, servlet);
+	}
+
+	private DirectServletRegistry() {
+	}
+
+	private long _getJspFileLastModified(String path, Servlet servlet) {
+		ServletConfig servletConfig = servlet.getServletConfig();
+
+		ServletContext servletContext = servletConfig.getServletContext();
+
+		String rootPath = servletContext.getRealPath(StringPool.BLANK);
+
+		File file = new File(rootPath, path);
+
+		return file.lastModified();
+	}
+
+	private Servlet _getServlet(String path) {
+		ServletInfo servletInfo = _servletInfos.get(path);
 
 		if (servletInfo == null) {
 			return null;
 		}
 
-		Servlet servlet = servletInfo.getKey();
+		Servlet servlet = servletInfo.getServlet();
 
-		if (_checkUpdate) {
-			long previousLastModifiedTime = servletInfo.getValue();
-			long lastModifiedTime = _getJspFileLastModifiedTime(path, servlet);
-			if (lastModifiedTime > previousLastModifiedTime ||
-				lastModifiedTime == 0) {
-				_servlets.remove(path);
+		if (_DIRECT_SERVLET_CONTEXT_RELOAD) {
+			long lastModified = _getJspFileLastModified(path, servlet);
+
+			if ((lastModified == 0) ||
+				(lastModified > servletInfo.getLastModified())) {
+
+				_servletInfos.remove(path);
+
 				servlet = null;
 			}
 		}
@@ -54,48 +80,58 @@ public class DirectServletRegistry {
 		return servlet;
 	}
 
-	public static void putServlet(String path, Servlet servlet) {
-		if (!_servlets.containsKey(path)) {
-			long lastModifiedTime = 1;
+	private void _putServlet(String path, Servlet servlet) {
+		if (_servletInfos.containsKey(path)) {
+			return;
+		}
 
-			if (_checkUpdate) {
-				lastModifiedTime = _getJspFileLastModifiedTime(path, servlet);
-			}
+		long lastModified = 1;
 
-			if (lastModifiedTime > 0) {
-				_servlets.put(path, new ObjectValuePair<Servlet, Long>(
-					servlet, lastModifiedTime));
-			}
+		if (_DIRECT_SERVLET_CONTEXT_RELOAD) {
+			lastModified = _getJspFileLastModified(path, servlet);
+		}
+
+		if (lastModified > 0) {
+			ServletInfo servletInfo = new ServletInfo();
+
+			servletInfo.setLastModified(lastModified);
+			servletInfo.setServlet(servlet);
+
+			_servletInfos.put(path, servletInfo);
 		}
 	}
 
-	public static void removeServlet(Servlet servlet) {
-		for (Map.Entry<String, ObjectValuePair<Servlet, Long>> entry :
-			_servlets.entrySet()) {
-			if (servlet == entry.getValue().getKey()) {
-				_servlets.remove(entry.getKey());
+	private static boolean _DIRECT_SERVLET_CONTEXT_RELOAD =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.DIRECT_SERVLET_CONTEXT_RELOAD));
 
-				break;
-			}
+	private static DirectServletRegistry _instance =
+		new DirectServletRegistry();
+
+	private Map<String, ServletInfo> _servletInfos =
+		new ConcurrentHashMap<String, ServletInfo>();
+
+	private class ServletInfo {
+
+		public long getLastModified() {
+			return _lastModified;
 		}
+
+		public Servlet getServlet() {
+			return _servlet;
+		}
+
+		public void setLastModified(long lastModified) {
+			_lastModified = lastModified;
+		}
+
+		public void setServlet(Servlet servlet) {
+			_servlet = servlet;
+		}
+
+		private long _lastModified;
+		private Servlet _servlet;
+
 	}
-
-	private static long _getJspFileLastModifiedTime(
-		String path, Servlet servlet) {
-
-		ServletContext servletContext =
-			servlet.getServletConfig().getServletContext();
-		String rootPath = servletContext.getRealPath("");
-
-		File file = new File(rootPath, path);
-
-		return file.lastModified();
-	}
-
-	private static boolean _checkUpdate = GetterUtil.getBoolean(
-		PropsUtil.get(PropsKeys.DIRECT_SERVLET_CONTEXT_CHECK_UPDATE_ENABLED));
-
-	private static Map<String, ObjectValuePair<Servlet, Long>> _servlets =
-		new ConcurrentHashMap<String, ObjectValuePair<Servlet, Long>>();
 
 }
