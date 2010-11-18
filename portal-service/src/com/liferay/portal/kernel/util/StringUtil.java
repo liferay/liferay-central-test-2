@@ -1359,6 +1359,16 @@ public class StringUtil {
 		return sb.toString();
 	}
 
+	public static String toCharCode(String s) {
+		StringBundler sb = new StringBundler(s.length());
+
+		for (int i = 0; i < s.length(); i++) {
+			sb.append(s.codePointAt(i));
+		}
+
+		return sb.toString();
+	}
+
 	public static String toHexString(int i) {
 		char[] buffer = new char[8];
 

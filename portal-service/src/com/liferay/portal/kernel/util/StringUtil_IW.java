@@ -413,6 +413,10 @@ public class StringUtil_IW {
 		return StringUtil.stripBetween(s, begin, end);
 	}
 
+	public java.lang.String toCharCode(java.lang.String s) {
+		return StringUtil.toCharCode(s);
+	}
+
 	public java.lang.String toHexString(int i) {
 		return StringUtil.toHexString(i);
 	}
