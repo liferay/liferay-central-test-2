@@ -24,39 +24,7 @@ public class PublishToLiveOrganizationStagingOrganizationWCDTest
 	extends BaseTestCase {
 	public void testPublishToLiveOrganizationStagingOrganizationWCD()
 		throws Exception {
-		selenium.open("/web/guest/home/");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Control Panel")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Organizations", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		selenium.type("_126_keywords",
-			RuntimeVariables.replace("Web Content Display"));
-		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
+		selenium.open("/web/staging-organization-wcd/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -65,7 +33,7 @@ public class PublishToLiveOrganizationStagingOrganizationWCDTest
 
 			try {
 				if (selenium.isVisible(
-							"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
+							"link=Page Staging Organization Web Content Display")) {
 					break;
 				}
 			}
@@ -76,14 +44,14 @@ public class PublishToLiveOrganizationStagingOrganizationWCDTest
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Manage Pages"),
-			selenium.getText(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
-		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
+		selenium.clickAt("link=Page Staging Organization Web Content Display",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//input[@value='Publish to Live Now']",
+		selenium.click(RuntimeVariables.replace("link=View Staged Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("link=Publish to Live Now",
 			RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 

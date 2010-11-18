@@ -28,6 +28,7 @@ public class LoginTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(LoginTest.class);
+		testSuite.addTestSuite(ReindexAllSearchIndexesTest.class);
 
 		return testSuite;
 	}
