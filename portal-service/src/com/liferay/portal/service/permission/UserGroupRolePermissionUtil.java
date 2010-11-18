@@ -43,7 +43,9 @@ public class UserGroupRolePermissionUtil {
 		return _userGroupRolePermission;
 	}
 
-	public void setUserGroupRolePermission(UserGroupRolePermission userGroupRolePermission) {
+	public void setUserGroupRolePermission(
+		UserGroupRolePermission userGroupRolePermission) {
+
 		_userGroupRolePermission = userGroupRolePermission;
 	}
 

@@ -39,11 +39,17 @@ public class UserGroupRolePermissionImpl implements UserGroupRolePermission {
 			PermissionChecker permissionChecker, long groupId, long roleId)
 		throws PortalException, SystemException {
 
-		return (permissionChecker.isCommunityOwner(groupId) ||
-				GroupPermissionUtil.contains(
-					permissionChecker, groupId, ActionKeys.ASSIGN_USER_ROLES) ||
-			    RolePermissionUtil.contains(
-				permissionChecker, roleId, ActionKeys.ASSIGN_MEMBERS)
-			);
+		if (permissionChecker.isCommunityOwner(groupId) ||
+			GroupPermissionUtil.contains(
+				permissionChecker, groupId, ActionKeys.ASSIGN_USER_ROLES) ||
+			RolePermissionUtil.contains(
+				permissionChecker, roleId, ActionKeys.ASSIGN_MEMBERS)) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
+
 }
