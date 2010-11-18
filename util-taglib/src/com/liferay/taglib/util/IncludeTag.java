@@ -35,6 +35,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
@@ -245,30 +246,22 @@ public class IncludeTag
 			requestDispatcher.include(request, response);
 		}
 		else {
-			include(request, response, requestDispatcher, page);
+			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
+
+			Class<?> classObj = classLoader.loadClass(
+				_LIFERAY_REQUEST_DISPATCHER);
+
+			Constructor<?> constructor = classObj.getConstructor(
+				RequestDispatcher.class, String.class);
+
+			Object obj = constructor.newInstance(requestDispatcher, page);
+
+			Method method = classObj.getMethod(
+				"include", ServletRequest.class, ServletResponse.class,
+				boolean.class);
+
+			method.invoke(obj, request, response, true);
 		}
-	}
-
-	protected void include(
-			HttpServletRequest request, HttpServletResponse response,
-			RequestDispatcher requestDispatcher, String page)
-		throws Exception {
-
-		ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
-
-		Class<?> classObj = classLoader.loadClass(
-			_LIFERAY_REQUEST_DISPATCHER);
-
-		Constructor<?> constructor = classObj.getConstructor(
-			RequestDispatcher.class, String.class);
-
-		Object obj = constructor.newInstance(requestDispatcher, page);
-
-		Method method = classObj.getMethod(
-			"include", ServletRequest.class, ServletResponse.class,
-			boolean.class);
-
-		method.invoke(obj, request, response, true);
 	}
 
 	protected boolean isCleanUpSetAttributes() {
