@@ -312,7 +312,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 			Trigger quartzTrigger = null;
 
-			if (trigger.getTriggerType() == TriggerType.CRON) {
+			TriggerType triggerType = trigger.getTriggerType();
+
+			if (triggerType.equals(TriggerType.CRON)) {
 				try {
 					quartzTrigger = new CronTrigger(
 						jobName, groupName,
@@ -324,7 +326,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 							trigger.getTriggerContent());
 				}
 			}
-			else if (trigger.getTriggerType() == TriggerType.SIMPLE) {
+			else if (triggerType.equals(TriggerType.SIMPLE)) {
 				long interval = (Long)trigger.getTriggerContent();
 
 				if (interval <= 0) {
@@ -535,7 +537,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			message.put(START_TIME, trigger.getStartTime());
 		}
 		else {
-			if (jobState.getTriggerState() == TriggerState.NORMAL) {
+			TriggerState triggerState = jobState.getTriggerState();
+
+			if (triggerState.equals(TriggerState.NORMAL)) {
 				jobState.setTriggerState(TriggerState.COMPLETE);
 			}
 		}

@@ -248,8 +248,8 @@ public class SchedulerEngineUtil {
 
 		TriggerState triggerState = jobState.getTriggerState();
 
-		if ((triggerState == TriggerState.NORMAL) ||
-			(triggerState == TriggerState.PAUSED)) {
+		if ((triggerState.equals(TriggerState.NORMAL)) ||
+			(triggerState.equals(TriggerState.PAUSED))) {
 
 			return (Date)message.get(SchedulerEngine.END_TIME);
 		}
@@ -278,8 +278,8 @@ public class SchedulerEngineUtil {
 
 		TriggerState triggerState = jobState.getTriggerState();
 
-		if ((triggerState == TriggerState.NORMAL) ||
-			(triggerState == TriggerState.PAUSED)) {
+		if ((triggerState.equals(TriggerState.NORMAL)) ||
+			(triggerState.equals(TriggerState.PAUSED))) {
 
 			return (Date)message.get(SchedulerEngine.FINAL_FIRE_TIME);
 		}
@@ -354,8 +354,8 @@ public class SchedulerEngineUtil {
 
 		TriggerState triggerState = jobState.getTriggerState();
 
-		if ((triggerState == TriggerState.NORMAL) ||
-			(triggerState == TriggerState.PAUSED)) {
+		if ((triggerState.equals(TriggerState.NORMAL)) ||
+			(triggerState.equals(TriggerState.PAUSED))) {
 
 			return (Date)message.get(SchedulerEngine.NEXT_FIRE_TIME);
 		}
@@ -385,8 +385,8 @@ public class SchedulerEngineUtil {
 
 		TriggerState triggerState = jobState.getTriggerState();
 
-		if ((triggerState == TriggerState.NORMAL) ||
-			(triggerState == TriggerState.PAUSED)) {
+		if ((triggerState.equals(TriggerState.NORMAL)) ||
+			(triggerState.equals(TriggerState.PAUSED))) {
 
 			return (Date)message.get(SchedulerEngine.PREVIOUS_FIRE_TIME);
 		}
@@ -463,8 +463,8 @@ public class SchedulerEngineUtil {
 
 		TriggerState triggerState = jobState.getTriggerState();
 
-		if ((triggerState == TriggerState.NORMAL) ||
-			(triggerState == TriggerState.PAUSED)) {
+		if ((triggerState.equals(TriggerState.NORMAL)) ||
+			(triggerState.equals(TriggerState.PAUSED))) {
 
 			return (Date)message.get(SchedulerEngine.START_TIME);
 		}

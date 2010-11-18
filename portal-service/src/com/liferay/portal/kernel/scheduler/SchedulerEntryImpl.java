@@ -48,11 +48,11 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 			return _trigger;
 		}
 
-		if (_triggerType == TriggerType.CRON) {
+		if (_triggerType.equals(TriggerType.CRON)) {
 			_trigger = new CronTrigger(
 				_eventListenerClass, _eventListenerClass, _triggerValue);
 		}
-		else if (_triggerType == TriggerType.SIMPLE) {
+		else if (_triggerType.equals(TriggerType.SIMPLE)) {
 			long intervalTime = GetterUtil.getLong(_triggerValue);
 
 			if (_timeUnit.equals(TimeUnit.DAY)) {

@@ -26,12 +26,12 @@ public class TriggerFactoryUtil {
 			Date startDate, Date endDate, Object triggerContent)
 		throws SchedulerException {
 
-		if (triggerType == TriggerType.CRON) {
+		if (triggerType.equals(TriggerType.CRON)) {
 			return new CronTrigger(
 				jobName, groupName, startDate, endDate,
 				String.valueOf(triggerContent));
 		}
-		else if (triggerType == TriggerType.SIMPLE) {
+		else if (triggerType.equals(TriggerType.SIMPLE)) {
 			Number number = (Number)triggerContent;
 
 			return new IntervalTrigger(
