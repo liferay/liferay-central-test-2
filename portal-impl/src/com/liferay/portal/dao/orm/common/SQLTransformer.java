@@ -115,6 +115,17 @@ public class SQLTransformer {
 		}
 	}
 
+	private String _replaceIntegerDivision(String sql) {
+		Matcher matcher = _integerDivisionPattern.matcher(sql);
+
+		if (_vendorMySQL) {
+			return matcher.replaceAll("$1 DIV $2");
+		}
+		else {
+			return matcher.replaceAll("$1 / $2");
+		}
+	}
+
 	private String _replaceMod(String sql) {
 		Matcher matcher = _modPattern.matcher(sql);
 
@@ -135,6 +146,7 @@ public class SQLTransformer {
 		String newSQL = sql;
 
 		newSQL = _replaceCastText(newSQL);
+		newSQL= _replaceIntegerDivision(newSQL);
 
 		if (_vendorDerby) {
 			newSQL = _replaceUnion(newSQL);
@@ -168,6 +180,8 @@ public class SQLTransformer {
 
 	private static Pattern _castTextPattern = Pattern.compile(
 		"CAST_TEXT\\((.+?)\\)", Pattern.CASE_INSENSITIVE);
+	private static Pattern _integerDivisionPattern = Pattern.compile(
+		"INTEGER_DIV\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
 	private static Pattern _modPattern = Pattern.compile(
 		"MOD\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
 	private static Pattern _unionAllPattern = Pattern.compile(
