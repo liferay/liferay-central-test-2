@@ -63,6 +63,8 @@ public class SelectBirthdayTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
+		selenium.clickAt("_2_birthdayMonth",
+			RuntimeVariables.replace("Birthday Month"));
 		selenium.select("_2_birthdayMonth",
 			RuntimeVariables.replace("label=March"));
 
@@ -131,8 +133,8 @@ public class SelectBirthdayTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isPartialText("//div[2]/div/div[1]/div/div",
-							"April 1986")) {
+				if (selenium.isPartialText(
+							"//div[@class='aui-calendar-title']", "April 1986")) {
 					break;
 				}
 			}
@@ -151,8 +153,8 @@ public class SelectBirthdayTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isPartialText("//div[2]/div/div[1]/div/div",
-							"May 1986")) {
+				if (selenium.isPartialText(
+							"//div[@class='aui-calendar-title']", "May 1986")) {
 					break;
 				}
 			}
@@ -189,7 +191,7 @@ public class SelectBirthdayTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isVisible("//div[2]/div/div[1]/div/div")) {
+				if (!selenium.isVisible("//div[@class='aui-calendar-title']")) {
 					break;
 				}
 			}

@@ -112,6 +112,8 @@ public class AddInvalidEndDateEventTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("_8_dailyInterval", RuntimeVariables.replace("1"));
 		selenium.saveScreenShotAndSource();
+		selenium.clickAt("_8_endDateMonth",
+			RuntimeVariables.replace("End Date Month"));
 		selenium.select("_8_endDateMonth",
 			RuntimeVariables.replace("label=February"));
 		Thread.sleep(5000);

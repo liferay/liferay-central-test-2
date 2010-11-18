@@ -56,7 +56,7 @@ public class ViewBookmarksEntryTableTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("AP Bookmarks Entry Name"),
 			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace(
-				"AP Bookmarks Entry Name (http://www.liferay.com) (Opens New Window)"),
+				"AP Bookmarks Entry Name (http://www.liferay.com)(Opens New Window)"),
 			selenium.getText("//div[@class='asset-content']/a"));
 		assertEquals(RuntimeVariables.replace("View in Context \u00bb"),
 			selenium.getText("//div[@class='asset-more']/a"));

@@ -45,7 +45,8 @@ public class AddWebContentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//strong/a/img", RuntimeVariables.replace(""));
+		selenium.clickAt("//div/ul/li/strong/a",
+			RuntimeVariables.replace("Add New"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

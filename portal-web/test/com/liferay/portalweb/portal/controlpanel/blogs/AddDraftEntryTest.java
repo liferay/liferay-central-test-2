@@ -135,7 +135,7 @@ public class AddDraftEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Saving draft...")) {
+				if (selenium.isTextPresent("Draft saved")) {
 					break;
 				}
 			}
@@ -146,7 +146,7 @@ public class AddDraftEntryTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent("Saving draft..."));
+		assertTrue(selenium.isTextPresent("Draft saved"));
 		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

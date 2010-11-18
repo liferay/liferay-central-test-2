@@ -112,11 +112,11 @@ public class AddWebContentExpirationDateTest extends BaseTestCase {
 		selenium.selectFrame("relative=top");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
-				"//select[@id='_15_expirationDateMonth' and @disabled='']"));
+				"//select[@id='_15_expirationDateMonth' and @disabled='disabled']"));
 		assertTrue(selenium.isElementPresent(
-				"//select[@id='_15_expirationDateDay' and @disabled='']"));
+				"//select[@id='_15_expirationDateDay' and @disabled='disabled']"));
 		assertTrue(selenium.isElementPresent(
-				"//select[@id='_15_expirationDateYear' and @disabled='']"));
+				"//select[@id='_15_expirationDateYear' and @disabled='disabled']"));
 		assertTrue(selenium.isElementPresent(
 				"//select[@name='_15_expirationDateHour' and @disabled='disabled']"));
 		assertTrue(selenium.isElementPresent(
@@ -130,11 +130,11 @@ public class AddWebContentExpirationDateTest extends BaseTestCase {
 		assertFalse(selenium.isChecked("_15_neverExpireCheckbox"));
 		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent(
-				"//select[@id='_15_expirationDateMonth' and @disabled='']"));
+				"//select[@id='_15_expirationDateMonth' and @disabled='disabled']"));
 		assertFalse(selenium.isElementPresent(
-				"//select[@id='_15_expirationDateDay' and @disabled='']"));
+				"//select[@id='_15_expirationDateDay' and @disabled='disabled']"));
 		assertFalse(selenium.isElementPresent(
-				"//select[@id='_15_expirationDateYear' and @disabled='']"));
+				"//select[@id='_15_expirationDateYear' and @disabled='disabled']"));
 		assertFalse(selenium.isElementPresent(
 				"//select[@name='_15_expirationDateHour' and @disabled='disabled']"));
 		assertFalse(selenium.isElementPresent(

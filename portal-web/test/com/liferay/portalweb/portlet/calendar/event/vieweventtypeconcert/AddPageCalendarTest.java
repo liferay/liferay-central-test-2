@@ -26,7 +26,6 @@ public class AddPageCalendarTest extends BaseTestCase {
 		selenium.clickAt("main-content", RuntimeVariables.replace(""));
 		selenium.clickAt("dockbar", RuntimeVariables.replace(""));
 		selenium.clickAt("navigation", RuntimeVariables.replace(""));
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

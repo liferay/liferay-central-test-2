@@ -90,6 +90,8 @@ public class AddInvalidStartDateEventTest extends BaseTestCase {
 		selenium.type("_8_title",
 			RuntimeVariables.replace("Invalid Start Date Test Event"));
 		selenium.saveScreenShotAndSource();
+		selenium.clickAt("_8_startDateMonth",
+			RuntimeVariables.replace("Start Date Month"));
 		selenium.select("_8_startDateMonth",
 			RuntimeVariables.replace("label=February"));
 		Thread.sleep(5000);

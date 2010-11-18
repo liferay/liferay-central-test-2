@@ -114,7 +114,7 @@ public class AddEntryAutoDraftTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Draft saved")) {
+				if (selenium.isPartialText("_33_saveStatus", "Draft saved")) {
 					break;
 				}
 			}
@@ -125,7 +125,7 @@ public class AddEntryAutoDraftTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent("Draft saved"));
+		assertTrue(selenium.isPartialText("_33_saveStatus", "Draft saved"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -147,26 +147,6 @@ public class AddEntryAutoDraftTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace("Draft")
-										.equals(selenium.getText(
-								"//div[@class='entry-content']/h3"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Draft"),
 			selenium.getText("//div[@class='entry-content']/h3"));
