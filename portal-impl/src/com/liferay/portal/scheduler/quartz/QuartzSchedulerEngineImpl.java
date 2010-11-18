@@ -592,6 +592,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 						jobState.setTriggerTimeInfomation(
 							SchedulerEngine.FINAL_FIRE_TIME,
 							trigger.getFinalFireTime());
+
+						jobDataMap.put(JOB_STATE, jobState);
+
+						_scheduler.addJob(jobDetail, true);
 					}
 				}
 
