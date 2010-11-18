@@ -16,11 +16,8 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.base.UserGroupRoleServiceBaseImpl;
-import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portal.service.permission.UserGroupRolePermissionUtil;
 
 /**
  * @author Brian Wing Shun Chan
@@ -30,13 +27,9 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 	public void addUserGroupRoles(long userId, long groupId, long[] roleIds)
 		throws PortalException, SystemException {
 
-		PermissionChecker permissionChecker = getPermissionChecker();
-
-		if (!permissionChecker.isCommunityOwner(groupId) &&
-			!GroupPermissionUtil.contains(
-				permissionChecker, groupId, ActionKeys.ASSIGN_USER_ROLES)) {
-
-			throw new PrincipalException();
+		for (long roleId : roleIds) {
+			UserGroupRolePermissionUtil.check(
+				getPermissionChecker(), groupId, roleId);
 		}
 
 		userGroupRoleLocalService.addUserGroupRoles(userId, groupId, roleIds);
@@ -45,14 +38,8 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 	public void addUserGroupRoles(long[] userIds, long groupId, long roleId)
 		throws PortalException, SystemException {
 
-		PermissionChecker permissionChecker = getPermissionChecker();
-
-		if (!permissionChecker.isCommunityOwner(groupId) &&
-			!GroupPermissionUtil.contains(
-				permissionChecker, groupId, ActionKeys.ASSIGN_USER_ROLES)) {
-
-			throw new PrincipalException();
-		}
+		UserGroupRolePermissionUtil.check(
+			getPermissionChecker(), groupId, roleId);
 
 		userGroupRoleLocalService.addUserGroupRoles(userIds, groupId, roleId);
 	}
@@ -60,10 +47,9 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 	public void deleteUserGroupRoles(long userId, long groupId, long[] roleIds)
 		throws PortalException, SystemException {
 
-		PermissionChecker permissionChecker = getPermissionChecker();
-
-		if (!permissionChecker.isCommunityOwner(groupId)) {
-			throw new PrincipalException();
+		for (long roleId : roleIds) {
+			UserGroupRolePermissionUtil.check(
+				getPermissionChecker(), groupId, roleId);
 		}
 
 		userGroupRoleLocalService.deleteUserGroupRoles(
@@ -73,14 +59,8 @@ public class UserGroupRoleServiceImpl extends UserGroupRoleServiceBaseImpl {
 	public void deleteUserGroupRoles(long[] userIds, long groupId, long roleId)
 		throws PortalException, SystemException {
 
-		PermissionChecker permissionChecker = getPermissionChecker();
-
-		if (!permissionChecker.isCommunityOwner(groupId) &&
-			!GroupPermissionUtil.contains(
-				permissionChecker, groupId, ActionKeys.ASSIGN_USER_ROLES)) {
-
-			throw new PrincipalException();
-		}
+		UserGroupRolePermissionUtil.check(
+			getPermissionChecker(), groupId, roleId);
 
 		userGroupRoleLocalService.deleteUserGroupRoles(
 			userIds, groupId, roleId);

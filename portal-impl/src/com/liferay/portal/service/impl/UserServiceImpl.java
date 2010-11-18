@@ -45,6 +45,7 @@ import com.liferay.portal.service.permission.PortalPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.service.permission.TeamPermissionUtil;
 import com.liferay.portal.service.permission.UserGroupPermissionUtil;
+import com.liferay.portal.service.permission.UserGroupRolePermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
@@ -796,12 +797,9 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		for (UserGroupRole oldUserGroupRole : oldUserGroupRoles) {
 			if (!userGroupRoles.contains(oldUserGroupRole) &&
-				(!GroupPermissionUtil.contains(
+				!UserGroupRolePermissionUtil.contains(
 					getPermissionChecker(), oldUserGroupRole.getGroupId(),
-					ActionKeys.ASSIGN_MEMBERS) ||
-				!RolePermissionUtil.contains(
-					getPermissionChecker(), oldUserGroupRole.getRoleId(),
-					ActionKeys.ASSIGN_MEMBERS))) {
+					oldUserGroupRole.getRoleId())) {
 
 				userGroupRoles.add(oldUserGroupRole);
 			}
@@ -809,16 +807,9 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		for (UserGroupRole userGroupRole : userGroupRoles) {
 			if (!oldUserGroupRoles.contains(userGroupRole)) {
-
-				if (!GroupPermissionUtil.contains(
-						getPermissionChecker(), userGroupRole.getGroupId(),
-						ActionKeys.ASSIGN_MEMBERS) ||
-					!RolePermissionUtil.contains(
-						getPermissionChecker(), userGroupRole.getRoleId(),
-						ActionKeys.ASSIGN_MEMBERS)) {
-
-					throw new PrincipalException();
-				}
+				UserGroupRolePermissionUtil.check(
+					getPermissionChecker(), userGroupRole.getGroupId(),
+					userGroupRole.getRoleId());
 			}
 		}
 
