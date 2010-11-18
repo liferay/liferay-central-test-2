@@ -235,7 +235,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 								}
 							%>
 
-								<aui:option label="<%= listElName %>" name="<%= listElValue %>" selected="<%= elContent.equals(listElName) %>" />
+							<aui:option label="<%= listElName %>" value="<%= listElValue %>" name="<%= listElValue %>" selected="<%= elContent.equals(listElName) %>" />
 
 							<%
 							}
@@ -252,7 +252,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 						<div class="journal-edit-field-control">
 							<br /><br />
 
-							<input class="journal-list-key" size="15" title="<liferay-ui:message key="new-item" />" type="text" value="<liferay-ui:message key="new-item" />" />
+							<input class="journal-list-key" size="15" title="<liferay-ui:message key="item-label" />" type="text" value="<liferay-ui:message key="label" />" />
 
 							<input class="journal-list-value" size="15" title="<liferay-ui:message key="item-value" />" type="text" value="value" />
 
@@ -316,7 +316,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 						<div class="journal-edit-field-control">
 							<br /><br />
 
-							<input class="journal-list-key" size="15" title="<liferay-ui:message key="new-item" />" type="text" value="<liferay-ui:message key="new-item" />" />
+							<input class="journal-list-key" size="15" title="<liferay-ui:message key="item-label" />" type="text" value="<liferay-ui:message key="label" />" />
 
 							<input class="journal-list-value" size="15" title="<liferay-ui:message key="item-value" />" type="text" value="value" />
 
