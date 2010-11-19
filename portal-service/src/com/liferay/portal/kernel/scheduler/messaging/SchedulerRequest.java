@@ -219,6 +219,16 @@ public class SchedulerRequest implements Serializable {
 		return schedulerRequest;
 	}
 
+	public static SchedulerRequest createUnregisterRequest(String groupName) {
+
+		SchedulerRequest schedulerRequest = new SchedulerRequest();
+
+		schedulerRequest.setCommand(COMMAND_UNREGISTER);
+		schedulerRequest.setGroupName(groupName);
+
+		return schedulerRequest;
+	}
+
 	public static SchedulerRequest createUnregisterRequest(
 		String jobName, String groupName) {
 

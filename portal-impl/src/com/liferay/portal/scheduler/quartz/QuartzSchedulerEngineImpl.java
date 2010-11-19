@@ -496,6 +496,23 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		unschedule(trigger.getJobName(), trigger.getGroupName());
 	}
 
+	public void unschedule(String groupName) throws SchedulerException {
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return;
+		}
+
+		try {
+			String[] jobNames = _scheduler.getJobNames(groupName);
+
+			for (String jobName : jobNames) {
+				unschedule(jobName, groupName);
+			}
+		}
+		catch (Exception e) {
+			throw new SchedulerException("Unable to unschedule jobs", e);
+		}
+	}
+
 	public void unschedule(String jobName, String groupName)
 		throws SchedulerException {
 

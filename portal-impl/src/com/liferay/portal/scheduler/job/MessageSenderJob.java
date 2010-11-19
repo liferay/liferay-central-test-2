@@ -72,8 +72,6 @@ public class MessageSenderJob implements Job {
 			jobDetail.getFullName());
 
 		if (jobExecutionContext.getNextFireTime() == null) {
-			message.put(SchedulerEngine.DISABLE, true);
-
 			if (!destinationName.equals(DestinationNames.SCHEDULER_DISPATCH)) {
 				Trigger trigger = jobExecutionContext.getTrigger();
 
@@ -99,6 +97,9 @@ public class MessageSenderJob implements Job {
 				jobDataMap.put(SchedulerEngine.JOB_STATE, jobStateClone);
 
 				scheduler.addJob(jobDetail, true);
+			}
+			else {
+				message.put(SchedulerEngine.DISABLE, true);
 			}
 		}
 

@@ -168,6 +168,14 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
 	}
 
+	public void unschedule(String groupName) {
+		SchedulerRequest schedulerRequest =
+			SchedulerRequest.createUnregisterRequest(groupName);
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
+	}
+
 	public void unschedule(String jobName, String groupName) {
 		SchedulerRequest schedulerRequest =
 			SchedulerRequest.createUnregisterRequest(jobName, groupName);

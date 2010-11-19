@@ -46,6 +46,12 @@ public class SchedulerEngineUtil {
 		_instance._addScriptingJob(trigger, description, language, script);
 	}
 
+	public static void delete(SchedulerEntry schedulerEntry)
+		throws SchedulerException {
+
+		_instance._delete(schedulerEntry);
+	}
+
 	public static void delete(String groupName) throws SchedulerException {
 		_instance._delete(groupName);
 	}
@@ -54,6 +60,13 @@ public class SchedulerEngineUtil {
 		throws SchedulerException {
 
 		_instance._delete(jobName, groupName);
+	}
+
+	public static void delete(
+			String jobName, String groupName, String messageListenerUUID)
+		throws SchedulerException {
+
+		_instance._delete(jobName, groupName, messageListenerUUID);
 	}
 
 	public static Date getEndTime(SchedulerRequest schedulerRequest) {
@@ -215,6 +228,11 @@ public class SchedulerEngineUtil {
 		_instance._unschedule(schedulerEntry);
 	}
 
+	public static void unschedule(String groupName) throws SchedulerException {
+
+		_instance._unschedule(groupName);
+	}
+
 	public static void unschedule(String jobName, String groupName)
 		throws SchedulerException {
 
@@ -251,6 +269,20 @@ public class SchedulerEngineUtil {
 			message);
 	}
 
+	private void _delete(SchedulerEntry schedulerEntry)
+		throws SchedulerException {
+
+		MessageListener schedulerEventListener =
+			schedulerEntry.getEventListener();
+
+		MessageBusUtil.unregisterMessageListener(
+			DestinationNames.SCHEDULER_DISPATCH, schedulerEventListener);
+
+		Trigger trigger = schedulerEntry.getTrigger();
+
+		_delete(trigger.getJobName(), trigger.getGroupName());
+	}
+
 	private void _delete(String groupName) throws SchedulerException {
 		_schedulerEngine.delete(groupName);
 	}
@@ -259,6 +291,14 @@ public class SchedulerEngineUtil {
 		throws SchedulerException {
 
 		_schedulerEngine.delete(jobName, groupName);
+	}
+
+	private void _delete(
+			String jobName, String groupName, String messageListenerUUID)
+		throws SchedulerException {
+
+		_unregisterMessageListener(messageListenerUUID);
+		_delete(jobName, groupName);
 	}
 
 	private Date _getEndTime(SchedulerRequest schedulerRequest) {
@@ -642,6 +682,11 @@ public class SchedulerEngineUtil {
 		Trigger trigger = schedulerEntry.getTrigger();
 
 		_unschedule(trigger.getJobName(), trigger.getGroupName());
+	}
+
+	private void _unschedule(String groupName) throws SchedulerException {
+
+		_schedulerEngine.unschedule(groupName);
 	}
 
 	private void _unschedule(String jobName, String groupName)

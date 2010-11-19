@@ -99,6 +99,8 @@ public interface SchedulerEngine {
 	public void suppressError(String jobName, String groupName)
 		throws SchedulerException;
 
+	public void unschedule(String groupName) throws SchedulerException;
+
 	public void unschedule(String jobName, String groupName)
 		throws SchedulerException;
 

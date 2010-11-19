@@ -122,6 +122,26 @@ public class SchedulerMessageListener extends BaseMessageListener {
 		_messageSender.send(
 			responseMessage.getDestinationName(), responseMessage);
 	}
+
+	protected void doCommandUnRegister(SchedulerRequest schedulerRequest)
+		throws Exception {
+
+		String groupName = schedulerRequest.getGroupName();
+
+		if (groupName == null) {
+			return;
+		}
+
+		String jobName = schedulerRequest.getJobName();
+
+		if (jobName == null) {
+			_schedulerEngine.unschedule(groupName);
+		}
+		else {
+			_schedulerEngine.unschedule(jobName, groupName);
+		}
+	}
+
 	protected void doReceive(Message message) throws Exception {
 		SchedulerRequest schedulerRequest =
 			(SchedulerRequest)message.getPayload();
@@ -158,8 +178,7 @@ public class SchedulerMessageListener extends BaseMessageListener {
 				schedulerRequest.getJobName(), schedulerRequest.getGroupName());
 		}
 		else if (command.equals(SchedulerRequest.COMMAND_UNREGISTER)) {
-			_schedulerEngine.unschedule(
-				schedulerRequest.getJobName(), schedulerRequest.getGroupName());
+			doCommandUnRegister(schedulerRequest);
 		}
 	}
 
