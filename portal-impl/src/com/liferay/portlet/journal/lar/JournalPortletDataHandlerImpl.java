@@ -1617,9 +1617,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			userId = authorId;
 		}
 
-		long groupId = portletDataContext.getScopeGroupId();
-
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
+		Group group = GroupLocalServiceUtil.getGroup(
+			portletDataContext.getScopeGroupId());
 
 		String newGroupFriendlyURL = group.getFriendlyURL().substring(1);
 
