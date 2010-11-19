@@ -132,26 +132,6 @@ public class OrganizationServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.OrganizationSoap addOrganization(
-		long parentOrganizationId, java.lang.String name,
-		java.lang.String type, int membershipPolicy, boolean recursable,
-		long regionId, long countryId, int statusId, java.lang.String comments,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.addOrganization(parentOrganizationId,
-					name, type, membershipPolicy, recursable, regionId,
-					countryId, statusId, comments, serviceContext);
-
-			return com.liferay.portal.model.OrganizationSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void addPasswordPolicyOrganizations(long passwordPolicyId,
 		long[] organizationIds) throws RemoteException {
 		try {
