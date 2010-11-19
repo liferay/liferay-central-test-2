@@ -438,6 +438,18 @@ public class VelocityTaglib {
 		myPlacesTag.runTag();
 	}
 
+	/**
+	 * @deprecated
+	 */
+	public void permissionsURL(
+			String redirect, String modelResource,
+			String modelResourceDescription, String resourcePrimKey)
+		throws Exception {
+
+		permissionsURL(
+			redirect, modelResource, modelResourceDescription, resourcePrimKey);
+	}
+
 	public void permissionsURL(
 			String redirect, String modelResource,
 			String modelResourceDescription, String resourcePrimKey,
