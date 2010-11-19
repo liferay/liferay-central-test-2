@@ -339,6 +339,9 @@ public class ResourceActionsUtil {
 		return actions;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static List<Role> getRoles(
 			long companyId, Group group, String modelResource)
 		throws SystemException {
@@ -347,20 +350,21 @@ public class ResourceActionsUtil {
 	}
 
 	public static List<Role> getRoles(
-			long companyId, Group group, String modelResource, int[] types)
+			long companyId, Group group, String modelResource, int[] roleTypes)
 		throws SystemException {
 
 		List<Role> allRoles = RoleLocalServiceUtil.getRoles(companyId);
 
-		if (types == null) {
-			types = _instance._getRoleTypes(companyId, group, modelResource);
+		if (roleTypes == null) {
+			roleTypes = _instance._getRoleTypes(
+				companyId, group, modelResource);
 		}
 
 		List<Role> roles = new ArrayList<Role>();
 
-		for (int type : types) {
+		for (int roleType : roleTypes) {
 			for (Role role : allRoles) {
-				if (role.getType() == type) {
+				if (role.getType() == roleType) {
 					roles.add(role);
 				}
 			}
@@ -763,7 +767,7 @@ public class ResourceActionsUtil {
 	private int[] _getRoleTypes (
 		long companyId, Group group, String modelResource) {
 
-		int[] types = new int[] {
+		int[] types = {
 			RoleConstants.TYPE_REGULAR, RoleConstants.TYPE_COMMUNITY
 		};
 

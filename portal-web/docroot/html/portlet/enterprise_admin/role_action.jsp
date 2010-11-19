@@ -32,8 +32,6 @@ boolean unassignableRole = false;
 if (name.equals(RoleConstants.GUEST) || name.equals(RoleConstants.OWNER) || name.equals(RoleConstants.USER)) {
 	unassignableRole = true;
 }
-
-int[] roleTypes = new int[] {RoleConstants.TYPE_REGULAR, role.getType()};
 %>
 
 <liferay-ui:icon-menu>
@@ -55,7 +53,7 @@ int[] roleTypes = new int[] {RoleConstants.TYPE_REGULAR, role.getType()};
 			modelResource="<%= Role.class.getName() %>"
 			modelResourceDescription="<%= role.getTitle(locale) %>"
 			resourcePrimKey="<%= String.valueOf(role.getRoleId()) %>"
-			roleTypes="<%= roleTypes %>"
+			roleTypes="<%= new int[] {RoleConstants.TYPE_REGULAR, role.getType()} %>"
 			var="permissionsURL"
 		/>
 

@@ -180,7 +180,7 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		}
 
 		List<Role> roles = ResourceActionsUtil.getRoles(
-			companyId, group, className);
+			companyId, group, className, null);
 
 		List<Long> roleIds = new ArrayList<Long>();
 		List<String> groupRoleIds = new ArrayList<String>();
@@ -219,7 +219,7 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		}
 
 		List<Role> roles = ResourceActionsUtil.getRoles(
-			companyId, group, className);
+			companyId, group, className, null);
 
 		List<Long> roleIds = new ArrayList<Long>();
 		List<String> groupRoleIds = new ArrayList<String>();

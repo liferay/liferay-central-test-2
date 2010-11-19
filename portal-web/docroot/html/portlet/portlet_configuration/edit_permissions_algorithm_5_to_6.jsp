@@ -32,8 +32,6 @@ if (Validator.isNull(resourcePrimKey)) {
 	throw new ResourcePrimKeyException();
 }
 
-String roleTypesParam = ParamUtil.getString(request, "roleTypes");
-
 String selResource = modelResource;
 String selResourceDescription = modelResourceDescription;
 String selResourceName = modelResourceName;
@@ -88,6 +86,14 @@ catch (NoSuchResourceException nsre) {
 	resource = ResourceLocalServiceUtil.getResource(company.getCompanyId(), selResource, ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey);
 }
 
+String roleTypesParam = ParamUtil.getString(request, "roleTypes");
+
+int[] roleTypes = null;
+
+if (Validator.isNotNull(roleTypesParam)) {
+	roleTypes = StringUtil.split(roleTypesParam, 0);
+}
+
 PortletURL actionPortletURL = renderResponse.createActionURL();
 
 actionPortletURL.setParameter("struts_action", "/portlet_configuration/edit_permissions");
@@ -124,12 +130,6 @@ definePermissionsURL.setRefererPlid(plid);
 
 definePermissionsURL.setParameter("struts_action", "/enterprise_admin_roles/edit_role_permissions");
 definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
-
-int[] roleTypes = null;
-
-if (Validator.isNotNull(roleTypesParam)) {
-	roleTypes = StringUtil.split(roleTypesParam, 0);
-}
 %>
 
 <div class="edit-permissions">

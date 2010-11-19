@@ -160,7 +160,7 @@ public class LayoutCache {
 			Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 			roles = ResourceActionsUtil.getRoles(
-				group.getCompanyId(), group, resourceName);
+				group.getCompanyId(), group, resourceName, null);
 
 			groupRolesMap.put(groupId, roles);
 		}
