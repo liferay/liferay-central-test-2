@@ -945,6 +945,8 @@
 
 		<action path="/enterprise_admin_roles/select_community" forward="portlet.enterprise_admin.select_community" />
 
+		<action path="/enterprise_admin_roles/select_organization" forward="portlet.enterprise_admin.select_organization" />
+
 		<action path="/enterprise_admin_roles/view" forward="portlet.enterprise_admin.view" />
 
 		<!-- Enterprise Admin Settings -->

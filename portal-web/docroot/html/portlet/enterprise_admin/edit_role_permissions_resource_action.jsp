@@ -41,4 +41,20 @@ Boolean supportsFilterByGroup = (Boolean)objArray[5];
 		message="limit-scope"
 		url="<%= limitScopeURL %>"
 	/>
+
+	<portlet:renderURL var="selectOrganizationURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+		<portlet:param name="struts_action" value="/enterprise_admin/select_organization" />
+		<portlet:param name="target" value="<%= target %>" />
+	</portlet:renderURL>
+
+	<%
+	String limitOrganizationURL = "javascript:var organizationWindow = window.open('" + selectOrganizationURL + "', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();";
+	%>
+
+	<liferay-ui:icon
+		image="add"
+		label="<%= true %>"
+		message="limit-organization"
+		url="<%= limitOrganizationURL %>"
+	/>
 </c:if>

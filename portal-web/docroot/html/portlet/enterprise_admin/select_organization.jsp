@@ -17,9 +17,15 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+String target = ParamUtil.getString(request, "target");
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/enterprise_admin/select_organization");
+
+if (Validator.isNotNull(target)) {
+	portletURL.setParameter("target", target);
+}
 %>
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
@@ -82,11 +88,15 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_organization"
 			sb.append("javascript:opener.");
 			sb.append(renderResponse.getNamespace());
 			sb.append("selectOrganization('");
+			sb.append(organization.getGroup().getGroupId());
+			sb.append("', '");
 			sb.append(organization.getOrganizationId());
 			sb.append("', '");
 			sb.append(UnicodeFormatter.toString(organization.getName()));
 			sb.append("', '");
 			sb.append(UnicodeLanguageUtil.get(pageContext, organization.getType()));
+			sb.append("', '");
+			sb.append(target);
 			sb.append("');");
 			sb.append("window.close();");
 
