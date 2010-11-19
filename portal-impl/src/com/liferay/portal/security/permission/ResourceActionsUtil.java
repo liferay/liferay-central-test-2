@@ -339,16 +339,6 @@ public class ResourceActionsUtil {
 		return actions;
 	}
 
-	/**
-	 * @deprecated
-	 */
-	public static List<Role> getRoles(
-			long companyId, Group group, String modelResource)
-		throws SystemException {
-
-		return getRoles(companyId, group, modelResource, null);
-	}
-
 	public static List<Role> getRoles(
 			long companyId, Group group, String modelResource, int[] roleTypes)
 		throws SystemException {

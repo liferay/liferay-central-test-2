@@ -158,16 +158,6 @@ public class ResourceActionsUtil_IW {
 			modelResource);
 	}
 
-	/**
-	 * @deprecated
-	 */
-	public java.util.List<com.liferay.portal.model.Role> getRoles(
-		long companyId, com.liferay.portal.model.Group group,
-		java.lang.String modelResource)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return ResourceActionsUtil.getRoles(companyId, group, modelResource);
-	}
-
 	public java.util.List<com.liferay.portal.model.Role> getRoles(
 		long companyId, com.liferay.portal.model.Group group,
 		java.lang.String modelResource, int[] roleTypes)
