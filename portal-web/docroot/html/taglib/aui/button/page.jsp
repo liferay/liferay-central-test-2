@@ -27,8 +27,11 @@ String onClick = GetterUtil.getString((String)request.getAttribute("aui:button:o
 String type = GetterUtil.getString((String)request.getAttribute("aui:button:type"));
 String value = (String)request.getAttribute("aui:button:value");
 
-if (onClick.startsWith(Http.HTTP_WITH_SLASH) || onClick.startsWith(Http.HTTPS_WITH_SLASH) || onClick.startsWith(StringPool.SLASH) || onClick.startsWith("wsrp_rewrite?")) {
+if (onClick.startsWith(Http.HTTP_WITH_SLASH) || onClick.startsWith(Http.HTTPS_WITH_SLASH) || onClick.startsWith(StringPool.SLASH)) {
 	onClick = "location.href = '" + HtmlUtil.escape(PortalUtil.escapeRedirect(onClick)) + "';";
+}
+else if (onClick.startsWith("wsrp_rewrite?")){
+    onClick = "location.href = '" + HtmlUtil.escape(onClick) + "';";
 }
 %>
 
