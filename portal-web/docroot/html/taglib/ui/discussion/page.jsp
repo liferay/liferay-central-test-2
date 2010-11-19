@@ -87,6 +87,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 		<input name="<%= namespace %>threadId" type="hidden" value="<%= thread.getThreadId() %>" />
 		<input name="<%= namespace %>parentMessageId" type="hidden" value="" />
 		<input name="<%= namespace %>body" type="hidden" value="" />
+		<input name="<%= namespace %>workflowAction" type="hidden" value="<%= String.valueOf(WorkflowConstants.ACTION_PUBLISH) %>" />
 
 		<%
 		int i = 0;
@@ -422,14 +423,21 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 									<br />
 
 									<%
+									boolean pending = message.isPending();
+
 									String publishButtonLabel = LanguageUtil.get(pageContext, "publish");
 
 									if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, MBDiscussion.class.getName())) {
-										publishButtonLabel = LanguageUtil.get(pageContext, "submit-for-publication");
+										if (pending) {
+											publishButtonLabel = "save";
+										}
+										else {
+											publishButtonLabel = LanguageUtil.get(pageContext, "submit-for-publication");
+										}
 									}
 									%>
 
-									<input id="<%= randomNamespace %>editReplyButton<%= i %>" onClick="<%= randomNamespace %>updateMessage(<%= i %>);" type="button" value="<liferay-ui:message key="<%= publishButtonLabel %>" />" />
+									<input id="<%= randomNamespace %>editReplyButton<%= i %>" onClick="<%= randomNamespace %>updateMessage(<%= i %>, <%= pending %>);" type="button" value="<liferay-ui:message key="<%= publishButtonLabel %>" />" />
 
 									<input type="button" value="<liferay-ui:message key="cancel" />" onClick="document.getElementById('<%= randomNamespace %>editForm<%= i %>').style.display = 'none'; void('');" />
 								</td>
@@ -490,9 +498,13 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			document.getElementById(textAreaId).focus();
 		}
 
-		function <%= randomNamespace %>updateMessage(i) {
+		function <%= randomNamespace %>updateMessage(i, pending) {
 			eval("var messageId = document.<%= formName %>.<%= namespace %>messageId" + i + ".value;");
 			eval("var body = document.<%= formName %>.<%= namespace %>editReplyBody" + i + ".value;");
+
+			if (pending) {
+				document.<%= formName %>.<%= namespace %>workflowAction.value = <%= WorkflowConstants.ACTION_SAVE_DRAFT %>;
+			}
 
 			document.<%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
 			document.<%= formName %>.<%= namespace %>messageId.value = messageId;

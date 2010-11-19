@@ -44,6 +44,13 @@ if (Validator.isNull(redirect)) {
 
 	redirect = viewMessageURL.toString();
 }
+
+boolean pending = false;
+
+if (message != null) {
+	pending = message.isPending();
+}
+
 %>
 
 <liferay-ui:header
@@ -55,12 +62,13 @@ if (Validator.isNull(redirect)) {
 	<portlet:param name="struts_action" value="/message_boards/edit_discussion" />
 </portlet:actionURL>
 
-<aui:form action="<%= editMessageURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveMessage(false);" %>'>
+<aui:form action="<%= editMessageURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveMessage(" + pending + ");" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="messageId" type="hidden" value="<%= messageId %>" />
 	<aui:input name="threadId" type="hidden" value="<%= threadId %>" />
 	<aui:input name="parentMessageId" type="hidden" value="<%= parentMessageId %>" />
+	<aui:input name="workflowAction" type="hidden" value="<%= String.valueOf(WorkflowConstants.ACTION_SAVE_DRAFT) %>" />
 
 	<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 	<liferay-ui:error exception="<%= MessageBodyException.class %>" message="please-enter-a-valid-message" />
@@ -84,14 +92,6 @@ if (Validator.isNull(redirect)) {
 
 		<liferay-util:include page="/html/portlet/message_boards/asset/discussion_full_content.jsp" />
 	</c:if>
-
-	<%
-	boolean pending = false;
-
-	if (message != null) {
-		pending = message.isPending();
-	}
-	%>
 
 	<c:if test="<%= pending %>">
 		<div class="portlet-msg-info">
@@ -118,6 +118,15 @@ if (Validator.isNull(redirect)) {
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && !themeDisplay.isFacebook() %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />body);
 	</c:if>
+
+	function <portlet:namespace />saveMessage(pending) {
+		if (!pending) {
+			document.<portlet:namespace />fm.<portlet:namespace />workflowAction.value = <%= WorkflowConstants.ACTION_PUBLISH %>;
+		}
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
 </aui:script>
 
 <%
