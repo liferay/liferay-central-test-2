@@ -14,14 +14,13 @@
 
 package com.liferay.portal.spring.transaction;
 
+import com.liferay.portal.kernel.annotation.AnnotationLocator;
 import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.kernel.util.MethodTargetClassKey;
 
 import java.lang.reflect.Method;
 
-import java.util.LinkedList;
 import java.util.Map;
-import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.transaction.interceptor.DefaultTransactionAttribute;
@@ -53,17 +52,8 @@ public class AnnotationTransactionAttributeSource
 			}
 		}
 
-		Queue<Class<?>> candidateQueue = new LinkedList<Class<?>>();
-
-		if (targetClass == null) {
-			candidateQueue.offer(method.getDeclaringClass());
-		}
-		else {
-			candidateQueue.offer(targetClass);
-		}
-
-		Transactional transactional = _findTransactionAnnotation(
-			method, candidateQueue);
+		Transactional transactional = AnnotationLocator.locate(
+			method, targetClass, Transactional.class);
 
 		transactionAttribute = TransactionAttributeBuilder.build(transactional);
 
@@ -77,57 +67,6 @@ public class AnnotationTransactionAttributeSource
 		}
 
 		return transactionAttribute;
-	}
-
-	private Transactional _findTransactionAnnotation(
-		Method method, Queue<Class<?>> candidateQueue) {
-
-		if (candidateQueue.isEmpty()) {
-			return null;
-		}
-
-		Transactional transactional = null;
-
-		Class<?> clazz = candidateQueue.poll();
-
-		try {
-			Method specificMethod = clazz.getDeclaredMethod(
-				method.getName(), method.getParameterTypes());
-
-			transactional = specificMethod.getAnnotation(Transactional.class);
-
-			if (transactional != null) {
-				return transactional;
-			}
-		}
-		catch (Exception e) {
-		}
-
-		transactional = clazz.getAnnotation(Transactional.class);
-
-		if (transactional != null) {
-			return transactional;
-		}
-
-		_queueSuperTypes(clazz, candidateQueue);
-
-		return _findTransactionAnnotation(method, candidateQueue);
-	}
-
-	private void _queueSuperTypes(
-		Class<?> clazz, Queue<Class<?>> candidateQueue) {
-
-		Class<?> supperClass = clazz.getSuperclass();
-
-		if ((supperClass != null) && (supperClass != Object.class)) {
-			candidateQueue.offer(supperClass);
-		}
-
-		Class<?>[] interfaces = clazz.getInterfaces();
-
-		for (Class<?> inter : interfaces) {
-			candidateQueue.offer(inter);
-		}
 	}
 
 	private static TransactionAttribute _nullTransactionAttribute =
