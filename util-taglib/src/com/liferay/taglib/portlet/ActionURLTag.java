@@ -185,6 +185,10 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 		}
 	}
 
+	public int doStartTag() {
+		return EVAL_BODY_INCLUDE;
+	}
+
 	public String getLifecycle() {
 		return PortletRequest.ACTION_PHASE;
 	}

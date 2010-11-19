@@ -18,11 +18,17 @@ import com.liferay.portal.kernel.dao.search.SearchEntry;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
+import javax.servlet.jsp.JspException;
+
 /**
  * @author Raymond Augé
  */
 public abstract class SearchContainerColumnTag
 	extends ParamAndPropertyAncestorTagImpl {
+
+	public int doStartTag() throws JspException {
+		return EVAL_BODY_INCLUDE;
+	}
 
 	public String getAlign() {
 		return align;
