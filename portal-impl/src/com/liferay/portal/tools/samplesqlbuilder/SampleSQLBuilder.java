@@ -30,6 +30,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
+import com.liferay.portal.tools.ArgumentsUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -58,34 +59,36 @@ import java.util.Map;
 public class SampleSQLBuilder {
 
 	public static void main(String[] args) {
+		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
+
 		InitUtil.initWithSpring();
 
-		String outputDir = System.getProperty("sample.sql.output.dir");
-		String dbType = System.getProperty("sample.sql.db.type");
+		String outputDir = arguments.get("sample.sql.output.dir");
+		String dbType = arguments.get("sample.sql.db.type");
 		int maxBlogsEntryCommentCount = GetterUtil.getInteger(
-			System.getProperty("sample.sql.blogs.entry.comment.count"));
+			arguments.get("sample.sql.blogs.entry.comment.count"));
 		int maxBlogsEntryCount = GetterUtil.getInteger(
-			System.getProperty("sample.sql.blogs.entry.count"));
+			arguments.get("sample.sql.blogs.entry.count"));
 		int maxGroupCount = GetterUtil.getInteger(
-			System.getProperty("sample.sql.group.count"));
+			arguments.get("sample.sql.group.count"));
 		int maxMBCategoryCount = GetterUtil.getInteger(
-			System.getProperty("sample.sql.mb.category.count"));
+			arguments.get("sample.sql.mb.category.count"));
 		int maxMBMessageCount = GetterUtil.getInteger(
-			System.getProperty("sample.sql.mb.message.count"));
+			arguments.get("sample.sql.mb.message.count"));
 		int maxMBThreadCount = GetterUtil.getInteger(
-			System.getProperty("sample.sql.mb.thread.count"));
+			arguments.get("sample.sql.mb.thread.count"));
 		int maxUserCount = GetterUtil.getInteger(
-			System.getProperty("sample.sql.user.count"));
+			arguments.get("sample.sql.user.count"));
 		int maxUserToGroupCount = GetterUtil.getInteger(
-			System.getProperty("sample.sql.user.to.group.count"));
+			arguments.get("sample.sql.user.to.group.count"));
 		int maxWikiNodeCount = GetterUtil.getInteger(
-			System.getProperty("sample.sql.wiki.node.count"));
+			arguments.get("sample.sql.wiki.node.count"));
 		int maxWikiPageCommentCount = GetterUtil.getInteger(
-			System.getProperty("sample.sql.wiki.page.comment.count"));
+			arguments.get("sample.sql.wiki.page.comment.count"));
 		int maxWikiPageCount = GetterUtil.getInteger(
-			System.getProperty("sample.sql.wiki.page.count"));
+			arguments.get("sample.sql.wiki.page.count"));
 		boolean securityEnabled = GetterUtil.getBoolean(
-			System.getProperty("sample.sql.security.enabled"));
+			arguments.get("sample.sql.security.enabled"));
 
 		new SampleSQLBuilder(
 			outputDir, dbType, maxBlogsEntryCommentCount, maxBlogsEntryCount,
