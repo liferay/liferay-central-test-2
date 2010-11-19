@@ -619,27 +619,31 @@ public class PortletImporter {
 						scopeLayout.getPlid(), name, null, 0, null, true, null);
 				}
 
-				try {
-					long oldPlid = context.getOldPlid();
+				Group group = scopeLayout.getGroup();
 
-					if (oldPlid == 0) {
-						oldPlid = GetterUtil.getLong(
-							portletDataRefEl.getParent().attributeValue(
-								"old-plid"));
+				if (group.isStaged() && !group.isStagedRemotely()) {
+					try {
+						long oldPlid = context.getOldPlid();
+
+						if (oldPlid == 0) {
+							oldPlid = GetterUtil.getLong(
+								portletDataRefEl.getParent().attributeValue(
+									"old-plid"));
+						}
+
+						Layout oldLayout = LayoutLocalServiceUtil.getLayout(
+							oldPlid);
+
+						Group oldScopeGroup = oldLayout.getScopeGroup();
+
+						oldScopeGroup.setLiveGroupId(scopeGroup.getGroupId());
+
+						GroupLocalServiceUtil.updateGroup(oldScopeGroup, true);
 					}
-
-					Layout oldLayout = LayoutLocalServiceUtil.getLayout(
-						oldPlid);
-
-					Group oldScopeGroup = oldLayout.getScopeGroup();
-
-					oldScopeGroup.setLiveGroupId(scopeGroup.getGroupId());
-
-					GroupLocalServiceUtil.updateGroup(oldScopeGroup, true);
-				}
-				catch (NoSuchLayoutException nsle) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(nsle);
+					catch (NoSuchLayoutException nsle) {
+						if (_log.isWarnEnabled()) {
+							_log.warn(nsle);
+						}
 					}
 				}
 
