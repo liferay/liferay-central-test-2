@@ -33,12 +33,16 @@ else {
 }
 %>
 
+<portlet:renderURL var="viewListURL">
+	<portlet:param name="struts_action" value="/workflow_instances/view" />
+</portlet:renderURL>
+
 <liferay-ui:icon-menu showExpanded="<%= (row == null) %>" showWhenSingleIcon="<%= (row == null) %>">
 	<c:if test="<%= !workflowInstance.isComplete() %>">
 		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/workflow_instances/edit_workflow_instance" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="redirect" value="<%= viewListURL %>" />
 			<portlet:param name="workflowInstanceId" value="<%= StringUtil.valueOf(workflowInstance.getWorkflowInstanceId()) %>" />
 		</portlet:actionURL>
 
