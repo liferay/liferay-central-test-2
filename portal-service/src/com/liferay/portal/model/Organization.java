@@ -33,24 +33,14 @@ public interface Organization extends OrganizationModel {
 	 *
 	 * Never reference this interface directly. All methods that expect a organization model instance should use the {@link Organization} interface instead.
 	 */
-	public java.util.List<com.liferay.portal.model.Organization> getAncestors()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public java.lang.String getMembershipType();
-
-	public boolean isMembershipTypeWeak();
-
-	public boolean isMembershipTypeStrong();
-
-	public com.liferay.portal.model.Organization getParentOrganization()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
 	public com.liferay.portal.model.Address getAddress();
 
 	public java.util.List<com.liferay.portal.model.Address> getAddresses()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Organization> getAncestors()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.lang.String[] getChildrenTypes();
 
@@ -60,6 +50,12 @@ public interface Organization extends OrganizationModel {
 	public com.liferay.portal.model.Group getGroup();
 
 	public long getLogoId();
+
+	public java.lang.String getMembershipPolicy();
+
+	public com.liferay.portal.model.Organization getParentOrganization()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public javax.portlet.PortletPreferences getPreferences()
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -90,6 +86,10 @@ public interface Organization extends OrganizationModel {
 
 	public boolean hasSuborganizations()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public boolean isMembershipPolicyStrong();
+
+	public boolean isMembershipPolicyWeak();
 
 	public boolean isParentable();
 

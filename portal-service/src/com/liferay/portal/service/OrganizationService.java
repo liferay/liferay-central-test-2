@@ -47,19 +47,6 @@ public interface OrganizationService {
 
 	public com.liferay.portal.model.Organization addOrganization(
 		long parentOrganizationId, java.lang.String name,
-		java.lang.String type, boolean recursable, long regionId,
-		long countryId, int statusId, java.lang.String comments,
-		java.util.List<com.liferay.portal.model.Address> addresses,
-		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
-		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors,
-		java.util.List<com.liferay.portal.model.Phone> phones,
-		java.util.List<com.liferay.portal.model.Website> websites,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portal.model.Organization addOrganization(
-		long parentOrganizationId, java.lang.String name,
 		java.lang.String type, int membershipPolicy, boolean recursable,
 		long regionId, long countryId, int statusId, java.lang.String comments,
 		java.util.List<com.liferay.portal.model.Address> addresses,
@@ -67,14 +54,6 @@ public interface OrganizationService {
 		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors,
 		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portal.model.Organization addOrganization(
-		long parentOrganizationId, java.lang.String name,
-		java.lang.String type, boolean recursable, long regionId,
-		long countryId, int statusId, java.lang.String comments,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -157,19 +136,6 @@ public interface OrganizationService {
 
 	public com.liferay.portal.model.Organization updateOrganization(
 		long organizationId, long parentOrganizationId, java.lang.String name,
-		java.lang.String type, boolean recursable, long regionId,
-		long countryId, int statusId, java.lang.String comments,
-		java.util.List<com.liferay.portal.model.Address> addresses,
-		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
-		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors,
-		java.util.List<com.liferay.portal.model.Phone> phones,
-		java.util.List<com.liferay.portal.model.Website> websites,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portal.model.Organization updateOrganization(
-		long organizationId, long parentOrganizationId, java.lang.String name,
 		java.lang.String type, int membershipPolicy, boolean recursable,
 		long regionId, long countryId, int statusId, java.lang.String comments,
 		java.util.List<com.liferay.portal.model.Address> addresses,
@@ -177,14 +143,6 @@ public interface OrganizationService {
 		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors,
 		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portal.model.Organization updateOrganization(
-		long organizationId, long parentOrganizationId, java.lang.String name,
-		java.lang.String type, boolean recursable, long regionId,
-		long countryId, int statusId, java.lang.String comments,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

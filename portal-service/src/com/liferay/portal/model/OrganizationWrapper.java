@@ -332,30 +332,6 @@ public class OrganizationWrapper implements Organization {
 		return _organization.toXmlString();
 	}
 
-	public java.util.List<com.liferay.portal.model.Organization> getAncestors()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _organization.getAncestors();
-	}
-
-	public java.lang.String getMembershipType() {
-		return _organization.getMembershipType();
-	}
-
-	public boolean isMembershipTypeWeak() {
-		return _organization.isMembershipTypeWeak();
-	}
-
-	public boolean isMembershipTypeStrong() {
-		return _organization.isMembershipTypeStrong();
-	}
-
-	public com.liferay.portal.model.Organization getParentOrganization()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _organization.getParentOrganization();
-	}
-
 	public com.liferay.portal.model.Address getAddress() {
 		return _organization.getAddress();
 	}
@@ -363,6 +339,12 @@ public class OrganizationWrapper implements Organization {
 	public java.util.List<com.liferay.portal.model.Address> getAddresses()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _organization.getAddresses();
+	}
+
+	public java.util.List<com.liferay.portal.model.Organization> getAncestors()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _organization.getAncestors();
 	}
 
 	public java.lang.String[] getChildrenTypes() {
@@ -380,6 +362,16 @@ public class OrganizationWrapper implements Organization {
 
 	public long getLogoId() {
 		return _organization.getLogoId();
+	}
+
+	public java.lang.String getMembershipPolicy() {
+		return _organization.getMembershipPolicy();
+	}
+
+	public com.liferay.portal.model.Organization getParentOrganization()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _organization.getParentOrganization();
 	}
 
 	public javax.portlet.PortletPreferences getPreferences()
@@ -432,6 +424,14 @@ public class OrganizationWrapper implements Organization {
 	public boolean hasSuborganizations()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _organization.hasSuborganizations();
+	}
+
+	public boolean isMembershipPolicyStrong() {
+		return _organization.isMembershipPolicyStrong();
+	}
+
+	public boolean isMembershipPolicyWeak() {
+		return _organization.isMembershipPolicyWeak();
 	}
 
 	public boolean isParentable() {
