@@ -1037,6 +1037,18 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				fileRanksElement, fileEntry, true);
 		}
 
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "shortcuts")) {
+			List<DLFileShortcut> fileShortcuts = DLFileShortcutUtil.findByG_F(
+				portletDataContext.getScopeGroupId(),
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+			for (DLFileShortcut fileShortcut : fileShortcuts) {
+				exportFileShortcut(
+					portletDataContext, foldersElement, fileShortcutsElement,
+					fileShortcut);
+			}
+		}
+
 		return document.formattedString();
 	}
 
