@@ -585,11 +585,12 @@ public class PortalLDAPUtil {
 				return true;
 			}
 		}
-		catch (NameNotFoundException e) {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Unable to find groupDN: " + groupDN + " user: " + userDN,
-					e);
+		catch (NameNotFoundException nnfe) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to determine if user DN " + userDN +
+						" is a member of group DN " + groupDN,
+					nnfe);
 			}
 		}
 		finally {
