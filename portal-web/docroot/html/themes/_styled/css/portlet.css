@@ -551,6 +551,38 @@ body.portlet {
 	background-image: url(../images/portlet/options_selected.png);
 }
 
+/*------ Breadcrumbs taglib ------*/
+
+.breadcrumbs:before,
+.breadcrumbs:after {
+	content: "\0020";
+	display: block;
+	height: 0;
+	visibility: hidden;	
+}
+
+.breadcrumbs:after {
+	clear: both;
+}
+
+.ie6 .breadcrumbs {
+	zoom: 1;
+}
+
+.breadcrumbs-vertical {
+	display: inline-block;
+}
+
+.breadcrumbs-horizontal li {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.ie6 .breadcrumbs-vertical, .ie7 .breadcrumbs-vertical, .ie6 .breadcrumbs-horizontal li, .ie7 .breadcrumbs-horizontal li {
+	display: inline;
+	zoom: 1;
+}
+
 /* ---------- Calendar taglib ---------- */
 
 .taglib-calendar tr.portlet-section-header th, .taglib-calendar tr td {

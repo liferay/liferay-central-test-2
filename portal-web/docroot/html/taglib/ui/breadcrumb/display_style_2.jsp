@@ -34,72 +34,23 @@ if (showLayout) {
 if (showPortletBreadcrumb) {
 	_buildPortletBreadcrumb(request, sb);
 }
-%>
 
-<%= sb.toString() %>
+String breadCrumbString = sb.toString();
 
-<%!
-private void _buildLayoutBreadcrumb(Layout selLayout, String selLayoutParam, PortletURL portletURL, ThemeDisplay themeDisplay, boolean selectedLayout, StringBundler sb) throws Exception {
-	String layoutURL = _getBreadcrumbLayoutURL(selLayout, selLayoutParam, portletURL, themeDisplay);
-	String target = PortalUtil.getLayoutTarget(selLayout);
-	long layoutParentId = selLayout.getParentLayoutId();
+if (Validator.isNotNull(breadCrumbString)) {
+	String listToken = "<li";
+	int tokenLength = listToken.length();
 
-	StringBundler breadCrumbSB = new StringBundler(7);
+	int pos = breadCrumbString.indexOf(listToken);
 
-	if (selectedLayout) {
-		if (layoutParentId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
-			breadCrumbSB.append("<br />");
-			breadCrumbSB.append("<br />");
-		}
+	breadCrumbString = StringUtil.insert(breadCrumbString, " class=\"first\"", pos + tokenLength);
 
-		breadCrumbSB.append("<div class=\"font-xx-large\" style=\"font-weight: bold;\">");
-		breadCrumbSB.append(HtmlUtil.escape(selLayout.getName(themeDisplay.getLocale())));
-		breadCrumbSB.append("</div>");
-		breadCrumbSB.append("<br />");
-	}
-	else {
-		breadCrumbSB.append("<a href=\"");
-		breadCrumbSB.append(layoutURL);
-		breadCrumbSB.append("\" ");
-		breadCrumbSB.append(target);
-		breadCrumbSB.append(">");
-		breadCrumbSB.append(HtmlUtil.escape(selLayout.getName(themeDisplay.getLocale())));
-		breadCrumbSB.append("</a>");
-	}
+	pos = breadCrumbString.lastIndexOf(listToken);
 
-	Layout layoutParent = null;
-
-	if (layoutParentId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
-		layoutParent = LayoutLocalServiceUtil.getLayout(selLayout.getGroupId(), selLayout.isPrivateLayout(), layoutParentId);
-
-		_buildLayoutBreadcrumb(layoutParent, selLayoutParam, portletURL, themeDisplay, false, sb);
-
-		sb.append(" &raquo; ");
-		sb.append(breadCrumbSB.toString());
-	}
-	else {
-		sb.append(breadCrumbSB.toString());
-	}
-}
-
-private String _getBreadcrumbLayoutURL(Layout selLayout, String selLayoutParam, PortletURL portletURL, ThemeDisplay themeDisplay) throws Exception {
-	if (portletURL == null) {
-		return PortalUtil.getLayoutURL(selLayout, themeDisplay);
-	}
-	else {
-		portletURL.setParameter(selLayoutParam, String.valueOf(selLayout.getPlid()));
-
-		if (selLayout.isTypeControlPanel()) {
-			if (themeDisplay.getDoAsGroupId() > 0) {
-				portletURL.setParameter("doAsGroupId", String.valueOf(themeDisplay.getDoAsGroupId()));
-			}
-
-			if (themeDisplay.getRefererPlid() != LayoutConstants.DEFAULT_PLID) {
-				portletURL.setParameter("refererPlid", String.valueOf(themeDisplay.getRefererPlid()));
-			}
-		}
-
-		return portletURL.toString();
-	}
+	breadCrumbString = StringUtil.insert(breadCrumbString, " class=\"last\"", pos + tokenLength);
 }
 %>
+
+<ul class="breadcrumbs breadcrumbs-vertical lfr-component">
+	<%= breadCrumbString %>
+</ul>

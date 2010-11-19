@@ -51,60 +51,6 @@ if (Validator.isNotNull(breadCrumbString)) {
 }
 %>
 
-<ul class="breadcrumbs lfr-component">
+<ul class="breadcrumbs breadcrumbs-horizontal lfr-component">
 	<%= breadCrumbString %>
 </ul>
-
-<%!
-private void _buildLayoutBreadcrumb(Layout selLayout, String selLayoutParam, PortletURL portletURL, ThemeDisplay themeDisplay, boolean selectedLayout, StringBundler sb) throws Exception {
-	String layoutURL = _getBreadcrumbLayoutURL(selLayout, selLayoutParam, portletURL, themeDisplay);
-	String target = PortalUtil.getLayoutTarget(selLayout);
-
-	StringBundler breadCrumbSB = new StringBundler(7);
-
-	breadCrumbSB.append("<li><span><a href=\"");
-	breadCrumbSB.append(layoutURL);
-	breadCrumbSB.append("\" ");
-	breadCrumbSB.append(target);
-	breadCrumbSB.append(">");
-
-	breadCrumbSB.append(HtmlUtil.escape(selLayout.getName(themeDisplay.getLocale())));
-
-	breadCrumbSB.append("</a></span></li>");
-
-	Layout layoutParent = null;
-	long layoutParentId = selLayout.getParentLayoutId();
-
-	if (layoutParentId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
-		layoutParent = LayoutLocalServiceUtil.getLayout(selLayout.getGroupId(), selLayout.isPrivateLayout(), layoutParentId);
-
-		_buildLayoutBreadcrumb(layoutParent, selLayoutParam, portletURL, themeDisplay, false, sb);
-
-		sb.append(breadCrumbSB.toString());
-	}
-	else {
-		sb.append(breadCrumbSB.toString());
-	}
-}
-
-private String _getBreadcrumbLayoutURL(Layout selLayout, String selLayoutParam, PortletURL portletURL, ThemeDisplay themeDisplay) throws Exception {
-	if (portletURL == null) {
-		return PortalUtil.getLayoutURL(selLayout, themeDisplay);
-	}
-	else {
-		portletURL.setParameter(selLayoutParam, String.valueOf(selLayout.getPlid()));
-
-		if (selLayout.isTypeControlPanel()) {
-			if (themeDisplay.getDoAsGroupId() > 0) {
-				portletURL.setParameter("doAsGroupId", String.valueOf(themeDisplay.getDoAsGroupId()));
-			}
-
-			if (themeDisplay.getRefererPlid() != LayoutConstants.DEFAULT_PLID) {
-				portletURL.setParameter("refererPlid", String.valueOf(themeDisplay.getRefererPlid()));
-			}
-		}
-
-		return portletURL.toString();
-	}
-}
-%>
