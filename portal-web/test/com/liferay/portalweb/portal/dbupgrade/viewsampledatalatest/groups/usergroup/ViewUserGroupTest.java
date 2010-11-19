@@ -48,7 +48,8 @@ public class ViewUserGroupTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=User Group Sample Test"));
-		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
+		selenium.click(
+			"//ul[@class='lfr-component lfr-actions right&nbsp;&nbsp;show-arrow']/li/strong/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -100,7 +101,8 @@ public class ViewUserGroupTest extends BaseTestCase {
 		selenium.clickAt("link=User Groups", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
+		selenium.click(
+			"//ul[@class='lfr-component lfr-actions right&nbsp;&nbsp;show-arrow']/li/strong/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

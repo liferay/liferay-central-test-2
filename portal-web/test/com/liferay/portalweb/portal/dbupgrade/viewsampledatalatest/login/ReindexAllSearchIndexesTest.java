@@ -61,7 +61,7 @@ public class ReindexAllSearchIndexesTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Reindex all search indexes."),
 			selenium.getText("//tr[5]/td[1]"));
 		assertEquals("Execute", selenium.getValue("//tr[5]/td[2]/input"));
-		selenium.clickAt("//tr[4]/td[2]/input",
+		selenium.clickAt("//tr[5]/td[2]/input",
 			RuntimeVariables.replace("Execute"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
