@@ -40,20 +40,6 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class PermissionsURLTag extends TagSupport {
 
-	/**
-	 * @deprecated
-	 */
-	public static void doTag(
-			String redirect, String modelResource,
-			String modelResourceDescription, String resourcePrimKey, String var,
-			PageContext pageContext)
-		throws Exception {
-
-		doTag(
-			redirect, modelResource, modelResourceDescription, resourcePrimKey,
-			var, null, pageContext);
-	}
-
 	public static void doTag(
 			String redirect, String modelResource,
 			String modelResourceDescription, String resourcePrimKey, String var,
