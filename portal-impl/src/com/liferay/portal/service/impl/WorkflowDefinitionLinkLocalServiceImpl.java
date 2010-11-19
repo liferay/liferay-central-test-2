@@ -73,7 +73,7 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 
 		try {
 			WorkflowDefinitionLink workflowDefinitionLink =
-				getWorkflowDefinitionLink(companyId, groupId, className);
+				getWorkflowDefinitionLink(companyId, groupId, className, true);
 
 			deleteWorkflowDefinitionLink(workflowDefinitionLink);
 		}
