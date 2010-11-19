@@ -116,7 +116,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 	Liferay.provide(
 		window,
 		'<portlet:namespace />selectOrganization',
-		function(organizationId, name, type) {
+		function(groupId, organizationId, name, type) {
 			var A = AUI();
 
 			var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />organizationsSearchContainer');
