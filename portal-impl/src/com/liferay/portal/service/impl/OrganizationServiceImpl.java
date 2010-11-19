@@ -117,30 +117,6 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			serviceContext);
 	}
 
-	public Organization addOrganization(
-			long parentOrganizationId, String name, String type,
-			int membershipPolicy, boolean recursable, long regionId,
-			long countryId, int statusId, String comments,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		if (!OrganizationPermissionUtil.contains(
-				getPermissionChecker(), parentOrganizationId,
-				ActionKeys.MANAGE_SUBORGANIZATIONS) &&
-			!PortalPermissionUtil.contains(
-				getPermissionChecker(), ActionKeys.ADD_ORGANIZATION)) {
-
-			throw new PrincipalException(
-				"User " + getUserId() + " does not have permissions to add " +
-					"an organization with parent " + parentOrganizationId);
-		}
-
-		return organizationLocalService.addOrganization(
-			getUserId(), parentOrganizationId, name, type, membershipPolicy,
-			recursable, regionId, countryId, statusId, comments,
-			serviceContext);
-	}
-
 	public void addPasswordPolicyOrganizations(
 			long passwordPolicyId, long[] organizationIds)
 		throws PortalException, SystemException {
