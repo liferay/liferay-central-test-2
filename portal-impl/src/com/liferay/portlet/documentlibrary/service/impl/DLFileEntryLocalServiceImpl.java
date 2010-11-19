@@ -657,13 +657,26 @@ public class DLFileEntryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		List<DLFileVersion> fileVersions = dlFileVersionPersistence.findByG_F_N(
-			groupId, folderId, name, 0, 1, new FileVersionVersionComparator());
+			groupId, folderId, name);
 
 		if (fileVersions.isEmpty()) {
 			throw new NoSuchFileVersionException();
 		}
 
-		return fileVersions.get(0);
+		DLFileVersion latestFileVersion = fileVersions.get(0);
+
+		FileVersionVersionComparator orderByComparator =
+			new FileVersionVersionComparator();
+
+		for (int i = 1; i < fileVersions.size(); i++) {
+			if (orderByComparator.compare(
+					latestFileVersion, fileVersions.get(i)) == 1) {
+
+				latestFileVersion = fileVersions.get(i);
+			}
+		}
+
+		return latestFileVersion;
 	}
 
 	public List<DLFileEntry> getNoAssetFileEntries() throws SystemException {
