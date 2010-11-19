@@ -195,4 +195,12 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
 	}
 
+	public void update(Trigger trigger) {
+		SchedulerRequest schedulerRequest =
+			SchedulerRequest.createUpdateRequest(trigger);
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
+	}
+
 }

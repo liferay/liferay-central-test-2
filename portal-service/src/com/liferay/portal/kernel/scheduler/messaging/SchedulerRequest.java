@@ -44,6 +44,8 @@ public class SchedulerRequest implements Serializable {
 
 	public static final String COMMAND_UNREGISTER = "UNREGISTER";
 
+	public static final String COMMAND_UPDATE = "UPDATE";
+
 	public static SchedulerRequest createDeleteRequest(String groupName) {
 		SchedulerRequest schedulerRequest = new SchedulerRequest();
 
@@ -247,6 +249,15 @@ public class SchedulerRequest implements Serializable {
 	public static SchedulerRequest createUnregisterRequest(Trigger trigger) {
 		return createUnregisterRequest(
 			trigger.getJobName(), trigger.getGroupName());
+	}
+
+	public static SchedulerRequest createUpdateRequest(Trigger trigger) {
+		SchedulerRequest schedulerRequest = new SchedulerRequest();
+
+		schedulerRequest.setCommand(COMMAND_UPDATE);
+		schedulerRequest.setTrigger(trigger);
+
+		return schedulerRequest;
 	}
 
 	public String getCommand() {

@@ -180,6 +180,9 @@ public class SchedulerMessageListener extends BaseMessageListener {
 		else if (command.equals(SchedulerRequest.COMMAND_UNREGISTER)) {
 			doCommandUnRegister(schedulerRequest);
 		}
+		else if (command.equals(SchedulerRequest.COMMAND_UPDATE)) {
+			_schedulerEngine.update(schedulerRequest.getTrigger());
+		}
 	}
 
 	private MessageSender _messageSender;

@@ -109,4 +109,6 @@ public interface SchedulerEngine {
 	 */
 	public void unschedule(Trigger trigger) throws SchedulerException;
 
+	public void update(Trigger trigger) throws SchedulerException;
+
 }

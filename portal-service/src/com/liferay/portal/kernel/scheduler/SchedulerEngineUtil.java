@@ -253,6 +253,11 @@ public class SchedulerEngineUtil {
 		_instance._unschedule(trigger);
 	}
 
+	public static void update(Trigger trigger) throws SchedulerException {
+
+		_instance._update(trigger);
+	}
+
 	private SchedulerEngine _schedulerEngine;
 
 	private void _addScriptingJob(
@@ -708,6 +713,10 @@ public class SchedulerEngineUtil {
 	 */
 	private void _unschedule(Trigger trigger) throws SchedulerException {
 		_schedulerEngine.unschedule(trigger);
+	}
+
+	private void _update(Trigger trigger) throws SchedulerException {
+		_schedulerEngine.update(trigger);
 	}
 
 	private static SchedulerEngineUtil _instance = new SchedulerEngineUtil();
