@@ -34,6 +34,11 @@ if (threadId > 0) {
 	}
 	catch (Exception e) {
 	}
+
+	// for discussion messages, the root message is always empty
+	if (curParentMessage.isRoot() && curParentMessage.isDiscussion()) {
+		curParentMessage = null;
+	}
 }
 
 if (Validator.isNull(redirect)) {
