@@ -37,6 +37,7 @@ import javax.naming.Binding;
 import javax.naming.CompositeName;
 import javax.naming.Context;
 import javax.naming.Name;
+import javax.naming.NameNotFoundException;
 import javax.naming.NamingEnumeration;
 import javax.naming.OperationNotSupportedException;
 import javax.naming.directory.Attribute;
@@ -584,8 +585,12 @@ public class PortalLDAPUtil {
 				return true;
 			}
 		}
-		catch (Exception e) {
-			throw e;
+		catch (NameNotFoundException e) {
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Unable to find groupDN: " + groupDN + " user: " + userDN,
+					e);
+			}
 		}
 		finally {
 			if (ldapContext != null) {
