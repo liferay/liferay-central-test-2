@@ -64,15 +64,15 @@ import java.util.List;
  */
 public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 
-	public void addPermissionFields(long companyId, Document doc) {
+	public void addPermissionFields(long companyId, Document document) {
 		try {
-			long groupId = GetterUtil.getLong(doc.get(Field.GROUP_ID));
-			String className = doc.get(Field.ENTRY_CLASS_NAME);
+			long groupId = GetterUtil.getLong(document.get(Field.GROUP_ID));
+			String className = document.get(Field.ENTRY_CLASS_NAME);
 
-			String classPK = doc.get(Field.ROOT_ENTRY_CLASS_PK);
+			String classPK = document.get(Field.ROOT_ENTRY_CLASS_PK);
 
 			if (Validator.isNull(classPK)) {
-				classPK = doc.get(Field.ENTRY_CLASS_PK);
+				classPK = document.get(Field.ENTRY_CLASS_PK);
 			}
 
 			if (Validator.isNotNull(className) &&
@@ -80,11 +80,11 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 
 				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 					doAddPermissionFields_5(
-						companyId, groupId, className, classPK, doc);
+						companyId, groupId, className, classPK, document);
 				}
 				else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 					doAddPermissionFields_6(
-						companyId, groupId, className, classPK, doc);
+						companyId, groupId, className, classPK, document);
 				}
 			}
 		}
@@ -166,7 +166,7 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 
 	protected void doAddPermissionFields_5(
 			long companyId, long groupId, String className, String classPK,
-			Document doc)
+			Document document)
 		throws Exception {
 
 		Resource resource = ResourceLocalServiceUtil.getResource(
@@ -200,9 +200,9 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 			}
 		}
 
-		doc.addKeyword(
+		document.addKeyword(
 			Field.ROLE_ID, roleIds.toArray(new Long[roleIds.size()]));
-		doc.addKeyword(
+		document.addKeyword(
 			Field.GROUP_ROLE_ID,
 			groupRoleIds.toArray(new String[groupRoleIds.size()]));
 	}
