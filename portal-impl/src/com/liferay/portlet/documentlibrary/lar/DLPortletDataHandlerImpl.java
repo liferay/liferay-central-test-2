@@ -786,10 +786,16 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		String toName = MapUtil.getString(
 			fileEntryNames, fileShortcut.getToName(), fileShortcut.getToName());
 
-		DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
+		long groupId = portletDataContext.getScopeGroupId();
+
+		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
+
+			groupId = folder.getGroupId();
+		}
 
 		DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(
-			folder.getGroupId(), toFolderId, toName);
+			groupId, toFolderId, toName);
 
 		long[] assetCategoryIds = null;
 		String[] assetTagNames = null;
@@ -826,18 +832,18 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				serviceContext.setUuid(fileShortcut.getUuid());
 
 				importedFileShortcut = DLAppLocalServiceUtil.addFileShortcut(
-					userId, folder.getGroupId(), folderId, toFolderId, toName,
+					userId, groupId, folderId, toFolderId, toName,
 					serviceContext);
 			}
 			else {
 				importedFileShortcut = DLAppLocalServiceUtil.updateFileShortcut(
-					userId, existingFileShortcut.getFileShortcutId(), folderId,
-					toFolderId, toName, serviceContext);
+					userId, existingFileShortcut.getFileShortcutId(), groupId,
+					folderId, toFolderId, toName, serviceContext);
 			}
 		}
 		else {
 			importedFileShortcut = DLAppLocalServiceUtil.addFileShortcut(
-				userId, folder.getGroupId(), folderId, toFolderId, toName,
+				userId, groupId, folderId, toFolderId, toName,
 				serviceContext);
 		}
 
