@@ -39,7 +39,7 @@ WorkflowTaskDisplayTerms displayTerms = new WorkflowTaskDisplayTerms(renderReque
 				List<WorkflowHandler> workflowHhandlers = WorkflowHandlerRegistryUtil.getWorkflowHandlers();
 
 				for (WorkflowHandler workflowHandler : workflowHhandlers) {
-					String defaultWorkflowHandlerType = workflowHandler.getType(LocaleUtil.getDefault());
+					String defaultWorkflowHandlerType = workflowHandler.getClassName();
 				%>
 
 					<aui:option label="<%= workflowHandler.getType(locale) %>" selected="<%= displayTermsType.equals(defaultWorkflowHandlerType) %>" value="<%= defaultWorkflowHandlerType %>" />
