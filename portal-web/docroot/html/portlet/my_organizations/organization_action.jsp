@@ -22,12 +22,13 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 Object[] objArray = (Object[])row.getObject();
 
 Organization organization = (Organization)objArray[0];
-Group group  = organization.getGroup();
 String tabs1 = (String)objArray[1];
+
+Group group  = organization.getGroup();
 %>
 
 <liferay-ui:icon-menu>
-	<c:if test='<%= organization.isMembershipTypeWeak() && tabs1.equals("available-organizations") %>'>
+	<c:if test='<%= organization.isMembershipPolicyWeak() && tabs1.equals("available-organizations") %>'>
 		<c:choose>
 			<c:when test="<%= OrganizationLocalServiceUtil.hasUserOrganization(user.getUserId(), organization.getOrganizationId()) %>">
 				<portlet:actionURL var="leaveURL">
@@ -79,7 +80,7 @@ String tabs1 = (String)objArray[1];
 		</c:choose>
 	</c:if>
 
-	<c:if test='<%= organization.isMembershipTypeWeak() && tabs1.equals("my-organizations") && (group.getType() == GroupConstants.TYPE_COMMUNITY_RESTRICTED) && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_MEMBERS) %>'>
+	<c:if test='<%= organization.isMembershipPolicyWeak() && tabs1.equals("my-organizations") && (group.getType() == GroupConstants.TYPE_COMMUNITY_RESTRICTED) && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_MEMBERS) %>'>
 		<portlet:renderURL var="viewMembershipRequestsURL">
 		<portlet:param name="struts_action" value="/my_organizations/view_membership_requests" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -93,7 +94,7 @@ String tabs1 = (String)objArray[1];
 		/>
 	</c:if>
 
-	<c:if test='<%= organization.isMembershipTypeWeak() && tabs1.equals("my-organizations") %>'>
+	<c:if test='<%= organization.isMembershipPolicyWeak() && tabs1.equals("my-organizations") %>'>
 		<portlet:actionURL var="leaveURL">
 			<portlet:param name="struts_action" value="/my_organizations/edit_organization_assignments" />
 			<portlet:param name="<%= Constants.CMD %>" value="group_users" />

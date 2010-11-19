@@ -38,13 +38,17 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 
 boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
 
-long groupId = 0;
 Group group = null;
+
+long groupId = 0;
+
 int groupType = 0;
 
 if (organization != null) {
-	groupId = organization.getGroup().getGroupId();
-	group = GroupServiceUtil.getGroup(groupId);
+	group = organization.getGroup();
+
+	groupId = group.getGroupId();
+
 	groupType = group.getType();
 }
 %>
@@ -113,8 +117,8 @@ if (organization != null) {
 		<aui:select label="region" name="regionId" />
 	</div>
 
-	<c:if test="<%= (organization != null) && organization.isMembershipTypeWeak() %>">
-		<aui:select name="membership-policy">
+	<c:if test="<%= (organization != null) && organization.isMembershipPolicyWeak() %>">
+		<aui:select label="membership-policy" name="membershipPolicy">
 			<aui:option label="open" selected="<%= (groupType == GroupConstants.TYPE_COMMUNITY_OPEN) %>" value="<%= GroupConstants.TYPE_COMMUNITY_OPEN %>" />
 			<aui:option label="restricted" selected="<%= (groupType == GroupConstants.TYPE_COMMUNITY_RESTRICTED) %>" value="<%= GroupConstants.TYPE_COMMUNITY_RESTRICTED %>" />
 			<aui:option label="private" selected="<%= (groupType == GroupConstants.TYPE_COMMUNITY_PRIVATE) %>" value="<%= GroupConstants.TYPE_COMMUNITY_PRIVATE %>" />

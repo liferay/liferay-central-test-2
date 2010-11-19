@@ -57,58 +57,9 @@ import javax.portlet.PortletPreferences;
 public class OrganizationImpl
 	extends OrganizationModelImpl implements Organization {
 
-	public List<Organization> getAncestors()
-		throws PortalException, SystemException {
-
-		List<Organization> ancestors = new ArrayList<Organization>();
-
-		Organization organization = this;
-
-		while (true) {
-			if (!organization.isRoot()) {
-				organization = organization.getParentOrganization();
-
-				ancestors.add(organization);
-			}
-			else {
-				break;
-			}
-		}
-
-		return ancestors;
-	}
-
 	public static String[] getChildrenTypes(String type) {
 		return PropsUtil.getArray(
 			PropsKeys.ORGANIZATIONS_CHILDREN_TYPES, new Filter(type));
-	}
-
-	public String getMembershipType() {
-		return PropsUtil.get(
-			PropsKeys.ORGANIZATIONS_MEMBERSHIP_TYPE, new Filter(getType()));
-	}
-
-	public boolean isMembershipTypeWeak(){
-		return getMembershipType().
-			equals(OrganizationConstants.MEMBERSHIP_TYPE_WEAK);
-	}
-
-	public boolean isMembershipTypeStrong(){
-		return getMembershipType().
-			equals(OrganizationConstants.MEMBERSHIP_TYPE_STRONG);
-	}
-
-	public Organization getParentOrganization()
-		throws PortalException, SystemException {
-
-		if (getParentOrganizationId() ==
-				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
-
-			return null;
-		}
-
-		return OrganizationLocalServiceUtil.getOrganization(
-			getParentOrganizationId());
 	}
 
 	public static String[] getParentTypes(String type) {
@@ -171,6 +122,27 @@ public class OrganizationImpl
 			getCompanyId(), Organization.class.getName(), getOrganizationId());
 	}
 
+	public List<Organization> getAncestors()
+		throws PortalException, SystemException {
+
+		List<Organization> ancestors = new ArrayList<Organization>();
+
+		Organization organization = this;
+
+		while (true) {
+			if (!organization.isRoot()) {
+				organization = organization.getParentOrganization();
+
+				ancestors.add(organization);
+			}
+			else {
+				break;
+			}
+		}
+
+		return ancestors;
+	}
+
 	public String[] getChildrenTypes() {
 		return getChildrenTypes(getType());
 	}
@@ -224,6 +196,24 @@ public class OrganizationImpl
 		}
 
 		return logoId;
+	}
+
+	public String getMembershipPolicy() {
+		return PropsUtil.get(
+			PropsKeys.ORGANIZATIONS_MEMBERSHIP_POLICY, new Filter(getType()));
+	}
+
+	public Organization getParentOrganization()
+		throws PortalException, SystemException {
+
+		if (getParentOrganizationId() ==
+				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
+
+			return null;
+		}
+
+		return OrganizationLocalServiceUtil.getOrganization(
+			getParentOrganizationId());
 	}
 
 	public PortletPreferences getPreferences() throws SystemException {
@@ -338,6 +328,32 @@ public class OrganizationImpl
 
 	public boolean hasSuborganizations() throws SystemException {
 		if (getSuborganizationsSize() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isMembershipPolicyStrong(){
+		String membershipPolicy = getMembershipPolicy();
+
+		if (membershipPolicy.equals(
+				OrganizationConstants.MEMBERSHIP_POLICY_STRONG)) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isMembershipPolicyWeak(){
+		String membershipPolicy = getMembershipPolicy();
+
+		if (membershipPolicy.equals(
+				OrganizationConstants.MEMBERSHIP_POLICY_WEAK)) {
+
 			return true;
 		}
 		else {

@@ -128,7 +128,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 				if (user.getUserId() == userIds[0]) {
 					Organization organization =
-						organizationLocalService.getOrganization(
+						organizationPersistence.findByPrimaryKey(
 							organizationId);
 
 					Group group = organization.getGroup();
@@ -464,7 +464,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			OrganizationPermissionUtil.check(
 				getPermissionChecker(), organizationId,
 				ActionKeys.ASSIGN_MEMBERS);
-
 		}
 		catch (PrincipalException pe) {
 
@@ -480,7 +479,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 				if (user.getUserId() == userIds[0]) {
 					Organization organization =
-						organizationLocalService.getOrganization(
+						organizationPersistence.findByPrimaryKey(
 							organizationId);
 
 					Group group = organization.getGroup();

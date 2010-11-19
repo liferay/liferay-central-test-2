@@ -28,9 +28,9 @@ public class OrganizationConstants {
 
 	public static final String LIST_VIEW_TREE = "tree";
 
-	public static final String MEMBERSHIP_TYPE_STRONG = "strong";
+	public static final String MEMBERSHIP_POLICY_STRONG = "strong";
 
-	public static final String MEMBERSHIP_TYPE_WEAK = "weak";
+	public static final String MEMBERSHIP_POLICY_WEAK = "weak";
 
 	public static final String TYPE_LOCATION = "location";
 

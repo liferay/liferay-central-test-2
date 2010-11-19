@@ -190,8 +190,8 @@ public class EditOrganizationAction extends PortletAction {
 		boolean recursable = ParamUtil.getBoolean(actionRequest, "recursable");
 		int statusId = ParamUtil.getInteger(actionRequest, "statusId");
 		String type = ParamUtil.getString(actionRequest, "type");
-		int membershipPolicy =
-			ParamUtil.getInteger(actionRequest, "membership-policy");
+		int membershipPolicy = ParamUtil.getInteger(
+			actionRequest, "membershipPolicy");
 		long regionId = ParamUtil.getLong(actionRequest, "regionId");
 		long countryId = ParamUtil.getLong(actionRequest, "countryId");
 		String comments = ParamUtil.getString(actionRequest, "comments");

@@ -1269,9 +1269,9 @@ public interface PropsKeys {
 
 	public static final String ORGANIZATIONS_LIST_VIEWS_DEFAULT = "organizations.list.views.default";
 
-	public static final String ORGANIZATIONS_MEMBERSHIP_STRICT = "organizations.membership.strict";
+	public static final String ORGANIZATIONS_MEMBERSHIP_POLICY = "organizations.membership.policy";
 
-	public static final String ORGANIZATIONS_MEMBERSHIP_TYPE = "organizations.membership.type";
+	public static final String ORGANIZATIONS_MEMBERSHIP_STRICT = "organizations.membership.strict";
 
 	public static final String ORGANIZATIONS_ROOTABLE = "organizations.rootable";
 
