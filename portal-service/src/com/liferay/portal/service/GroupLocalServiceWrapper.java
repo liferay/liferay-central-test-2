@@ -453,12 +453,32 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 	}
 
 	public java.util.List<com.liferay.portal.model.Group> search(
+		long companyId, long[] classNameIds, java.lang.String name,
+		java.lang.String description,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _groupLocalService.search(companyId, classNameIds, name,
+			description, params, start, end);
+	}
+
+	public java.util.List<com.liferay.portal.model.Group> search(
 		long companyId, java.lang.String name, java.lang.String description,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _groupLocalService.search(companyId, name, description, params,
 			start, end, obc);
+	}
+
+	public java.util.List<com.liferay.portal.model.Group> search(
+		long companyId, long[] classNameIds, java.lang.String name,
+		java.lang.String description,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _groupLocalService.search(companyId, classNameIds, name,
+			description, params, start, end, obc);
 	}
 
 	public int searchCount(long companyId, java.lang.String name,

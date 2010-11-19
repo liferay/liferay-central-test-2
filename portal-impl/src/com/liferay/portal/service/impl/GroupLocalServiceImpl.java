@@ -794,6 +794,16 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	public List<Group> search(
+			long companyId, long[] classNameIds, String name,
+			String description,	LinkedHashMap<String, Object> params, int start,
+			int end)
+		throws SystemException {
+
+		return search(companyId, classNameIds, name, description, params, start,
+			end, null);
+	}
+
+	public List<Group> search(
 			long companyId, String name, String description,
 			LinkedHashMap<String, Object> params, int start, int end,
 			OrderByComparator obc)
@@ -807,6 +817,23 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		return groupFinder.findByC_N_D(
 			companyId, name, realName, description, params, start, end, obc);
+	}
+
+	public List<Group> search(
+			long companyId, long[] classNameIds, String name,
+			String description, LinkedHashMap<String, Object> params, int start,
+			int end, OrderByComparator obc)
+		throws SystemException {
+
+		if (obc == null) {
+			obc = new GroupNameComparator(true);
+		}
+
+		String realName = getRealName(companyId, name);
+
+		return groupFinder.findByC_C_N_D(
+			companyId, classNameIds, name, realName, description, params, start,
+			end, obc);
 	}
 
 	@ThreadLocalCachable
