@@ -14,24 +14,17 @@
 
 package com.liferay.portal.spring.transaction;
 
-import com.liferay.portal.kernel.annotation.TransactionDefinition;
 import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.kernel.util.MethodTargetClassKey;
-import com.liferay.portal.util.PropsValues;
 
 import java.lang.reflect.Method;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.transaction.interceptor.DefaultTransactionAttribute;
-import org.springframework.transaction.interceptor.NoRollbackRuleAttribute;
-import org.springframework.transaction.interceptor.RollbackRuleAttribute;
-import org.springframework.transaction.interceptor.RuleBasedTransactionAttribute;
 import org.springframework.transaction.interceptor.TransactionAttribute;
 import org.springframework.transaction.interceptor.TransactionAttributeSource;
 
@@ -72,7 +65,7 @@ public class AnnotationTransactionAttributeSource
 		Transactional transactional = _findTransactionAnnotation(
 			method, candidateQueue);
 
-		transactionAttribute = _parseTransactionAnnotation(transactional);
+		transactionAttribute = TransactionAttributeBuilder.build(transactional);
 
 		if (transactionAttribute == null) {
 			_transactionAttributes.put(
@@ -119,81 +112,6 @@ public class AnnotationTransactionAttributeSource
 		_queueSuperTypes(clazz, candidateQueue);
 
 		return _findTransactionAnnotation(method, candidateQueue);
-	}
-
-	private TransactionAttribute _parseTransactionAnnotation(
-		Transactional transactional) {
-
-		if ((transactional == null) || !transactional.enabled()) {
-			return null;
-		}
-
-		RuleBasedTransactionAttribute ruleBasedTransactionAttribute =
-			new RuleBasedTransactionAttribute();
-
-		int isolationLevel = transactional.isolation().value();
-
-		if (isolationLevel == TransactionDefinition.ISOLATION_COUNTER) {
-			ruleBasedTransactionAttribute.setIsolationLevel(
-				PropsValues.TRANSACTION_ISOLATION_COUNTER);
-		}
-		else if (isolationLevel == TransactionDefinition.ISOLATION_PORTAL) {
-			ruleBasedTransactionAttribute.setIsolationLevel(
-				PropsValues.TRANSACTION_ISOLATION_PORTAL);
-		}
-		else {
-			ruleBasedTransactionAttribute.setIsolationLevel(isolationLevel);
-		}
-
-		ruleBasedTransactionAttribute.setPropagationBehavior(
-			transactional.propagation().value());
-		ruleBasedTransactionAttribute.setReadOnly(transactional.readOnly());
-		ruleBasedTransactionAttribute.setTimeout(transactional.timeout());
-
-		List<RollbackRuleAttribute> rollBackAttributes =
-			new ArrayList<RollbackRuleAttribute>();
-
-		Class<?>[] rollbackFor = transactional.rollbackFor();
-
-		for (int i = 0; i < rollbackFor.length; i++) {
-			RollbackRuleAttribute rollbackRuleAttribute =
-				new RollbackRuleAttribute(rollbackFor[i]);
-
-			rollBackAttributes.add(rollbackRuleAttribute);
-		}
-
-		String[] rollbackForClassName = transactional.rollbackForClassName();
-
-		for (int i = 0; i < rollbackForClassName.length; i++) {
-			RollbackRuleAttribute rollbackRuleAttribute =
-				new RollbackRuleAttribute(rollbackForClassName[i]);
-
-			rollBackAttributes.add(rollbackRuleAttribute);
-		}
-
-		Class<?>[] noRollbackFor = transactional.noRollbackFor();
-
-		for (int i = 0; i < noRollbackFor.length; ++i) {
-			NoRollbackRuleAttribute noRollbackRuleAttribute =
-				new NoRollbackRuleAttribute(noRollbackFor[i]);
-
-			rollBackAttributes.add(noRollbackRuleAttribute);
-		}
-
-		String[] noRollbackForClassName =
-			transactional.noRollbackForClassName();
-
-		for (int i = 0; i < noRollbackForClassName.length; ++i) {
-			NoRollbackRuleAttribute noRollbackRuleAttribute =
-				new NoRollbackRuleAttribute(noRollbackForClassName[i]);
-
-			rollBackAttributes.add(noRollbackRuleAttribute);
-		}
-
-		ruleBasedTransactionAttribute.getRollbackRules().addAll(
-			rollBackAttributes);
-
-		return ruleBasedTransactionAttribute;
 	}
 
 	private void _queueSuperTypes(

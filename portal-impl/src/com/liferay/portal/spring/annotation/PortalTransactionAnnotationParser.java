@@ -14,24 +14,18 @@
 
 package com.liferay.portal.spring.annotation;
 
-import com.liferay.portal.kernel.annotation.TransactionDefinition;
 import com.liferay.portal.kernel.annotation.Transactional;
-import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.spring.transaction.TransactionAttributeBuilder;
 
 import java.io.Serializable;
 
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 import org.springframework.transaction.annotation.TransactionAnnotationParser;
-import org.springframework.transaction.interceptor.NoRollbackRuleAttribute;
-import org.springframework.transaction.interceptor.RollbackRuleAttribute;
-import org.springframework.transaction.interceptor.RuleBasedTransactionAttribute;
 import org.springframework.transaction.interceptor.TransactionAttribute;
 
 /**
@@ -44,9 +38,6 @@ public class PortalTransactionAnnotationParser
 
 	public TransactionAttribute parseTransactionAnnotation(
 		AnnotatedElement annotatedElement) {
-
-		//Transactional transactional = annotatedElement.getAnnotation(
-		//	Transactional.class);
 
 		Transactional transactional = null;
 
@@ -65,75 +56,7 @@ public class PortalTransactionAnnotationParser
 			transactional = _deepSearchTypes(candidateQueue);
 		}
 
-		if (transactional == null || !transactional.enabled()) {
-			return null;
-		}
-
-		RuleBasedTransactionAttribute ruleBasedTransactionAttribute =
-			new RuleBasedTransactionAttribute();
-
-		int isolationLevel = transactional.isolation().value();
-
-		if (isolationLevel == TransactionDefinition.ISOLATION_COUNTER) {
-			ruleBasedTransactionAttribute.setIsolationLevel(
-				PropsValues.TRANSACTION_ISOLATION_COUNTER);
-		}
-		else if (isolationLevel == TransactionDefinition.ISOLATION_PORTAL) {
-			ruleBasedTransactionAttribute.setIsolationLevel(
-				PropsValues.TRANSACTION_ISOLATION_PORTAL);
-		}
-		else {
-			ruleBasedTransactionAttribute.setIsolationLevel(isolationLevel);
-		}
-
-		ruleBasedTransactionAttribute.setPropagationBehavior(
-			transactional.propagation().value());
-		ruleBasedTransactionAttribute.setReadOnly(transactional.readOnly());
-		ruleBasedTransactionAttribute.setTimeout(transactional.timeout());
-
-		List<RollbackRuleAttribute> rollBackAttributes =
-			new ArrayList<RollbackRuleAttribute>();
-
-		Class<?>[] rollbackFor = transactional.rollbackFor();
-
-		for (int i = 0; i < rollbackFor.length; i++) {
-			RollbackRuleAttribute rollbackRuleAttribute =
-				new RollbackRuleAttribute(rollbackFor[i]);
-
-			rollBackAttributes.add(rollbackRuleAttribute);
-		}
-
-		String[] rollbackForClassName = transactional.rollbackForClassName();
-
-		for (int i = 0; i < rollbackForClassName.length; i++) {
-			RollbackRuleAttribute rollbackRuleAttribute =
-				new RollbackRuleAttribute(rollbackForClassName[i]);
-
-			rollBackAttributes.add(rollbackRuleAttribute);
-		}
-
-		Class<?>[] noRollbackFor = transactional.noRollbackFor();
-
-		for (int i = 0; i < noRollbackFor.length; ++i) {
-			NoRollbackRuleAttribute noRollbackRuleAttribute =
-				new NoRollbackRuleAttribute(noRollbackFor[i]);
-
-			rollBackAttributes.add(noRollbackRuleAttribute);
-		}
-
-		String[] noRollbackForClassName = transactional.noRollbackForClassName();
-
-		for (int i = 0; i < noRollbackForClassName.length; ++i) {
-			NoRollbackRuleAttribute noRollbackRuleAttribute =
-				new NoRollbackRuleAttribute(noRollbackForClassName[i]);
-
-			rollBackAttributes.add(noRollbackRuleAttribute);
-		}
-
-		ruleBasedTransactionAttribute.getRollbackRules().addAll(
-			rollBackAttributes);
-
-		return ruleBasedTransactionAttribute;
+		return TransactionAttributeBuilder.build(transactional);
 	}
 
 	private Transactional _deepSearchMethods(
@@ -156,7 +79,8 @@ public class PortalTransactionAnnotationParser
 				Method specificMethod = clazz.getDeclaredMethod(
 					method.getName(), method.getParameterTypes());
 
-				transactional = specificMethod.getAnnotation(Transactional.class);
+				transactional = specificMethod.getAnnotation(
+					Transactional.class);
 
 				if (transactional != null) {
 					return transactional;
