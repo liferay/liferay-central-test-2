@@ -2202,7 +2202,7 @@ file.
 		<delete includeemptydirs="true" failonerror="false">
 			<fileset
 				dir="${simple.server.deploy.dir}"
-				includes="kaleo-web/**,*-hook/**,*-portlet/**,*-theme/**"
+				excludes="ROOT/**,ROOT.war/**,tunnel-web/**,tunnel-web.war/**"
 			/>
 		</delete>
 
