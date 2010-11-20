@@ -2218,6 +2218,11 @@
 			<forward name="portlet.wiki.move_page" path="portlet.wiki.move_page" />
 		</action>
 
+		<action path="/wiki_display/search" type="com.liferay.portlet.wiki.action.ViewNodeAction">
+			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
+			<forward name="portlet.wiki.view_node" path="portlet.wiki.search" />
+		</action>
+
 		<action path="/wiki_display/view" type="com.liferay.portlet.wikidisplay.action.ViewAction">
 			<forward name="portlet.wiki_display.error" path="portlet.wiki.error" />
 			<forward name="portlet.wiki_display.view" path="portlet.wiki_display.view" />
