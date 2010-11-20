@@ -32,8 +32,8 @@ import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission
 public class DLFileShortcutServiceImpl extends DLFileShortcutServiceBaseImpl {
 
 	public DLFileShortcut addFileShortcut(
-			long groupId, long folderId, long toFolderId, String toName,
-			ServiceContext serviceContext)
+			long groupId, long toGroupId, long folderId, long toFolderId,
+			String toName, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFolderPermission.check(
@@ -41,7 +41,7 @@ public class DLFileShortcutServiceImpl extends DLFileShortcutServiceBaseImpl {
 
 		try {
 			DLFileEntryPermission.check(
-				getPermissionChecker(), groupId, toFolderId, toName,
+				getPermissionChecker(), toGroupId, toFolderId, toName,
 				ActionKeys.VIEW);
 		}
 		catch (PrincipalException pe) {
@@ -49,7 +49,8 @@ public class DLFileShortcutServiceImpl extends DLFileShortcutServiceBaseImpl {
 		}
 
 		return dlFileShortcutLocalService.addFileShortcut(
-			getUserId(), groupId, folderId, toFolderId, toName, serviceContext);
+			getUserId(), groupId, toGroupId, folderId, toFolderId, toName,
+			serviceContext);
 	}
 
 	public void deleteFileShortcut(long fileShortcutId)
@@ -71,8 +72,8 @@ public class DLFileShortcutServiceImpl extends DLFileShortcutServiceBaseImpl {
 	}
 
 	public DLFileShortcut updateFileShortcut(
-			long fileShortcutId, long folderId, long toFolderId, String toName,
-			ServiceContext serviceContext)
+			long fileShortcutId, long toGroupId, long folderId, long toFolderId,
+			String toName, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFileShortcutPermission.check(
@@ -83,16 +84,16 @@ public class DLFileShortcutServiceImpl extends DLFileShortcutServiceBaseImpl {
 
 		try {
 			DLFileEntryPermission.check(
-				getPermissionChecker(), fileShortcut.getGroupId(), toFolderId,
-				toName, ActionKeys.VIEW);
+				getPermissionChecker(), toGroupId, toFolderId, toName,
+				ActionKeys.VIEW);
 		}
 		catch (PrincipalException pe) {
 			throw new FileShortcutPermissionException();
 		}
 
 		return dlFileShortcutLocalService.updateFileShortcut(
-			getUserId(), fileShortcutId, folderId, toFolderId, toName,
-			serviceContext);
+			getUserId(), fileShortcutId, toGroupId, folderId, toFolderId,
+			toName, serviceContext);
 	}
 
 }

@@ -474,7 +474,7 @@ public class DLFileEntryLocalServiceImpl
 				fileEntry.getFileEntryId());
 
 			List<DLFileShortcut> fileShortcuts =
-				dlFileShortcutPersistence.findByG_TF_TN(
+				dlFileShortcutPersistence.findByTG_TF_TN(
 					groupId, folderId, name);
 
 			for (DLFileShortcut fileShortcut : fileShortcuts) {
@@ -786,7 +786,7 @@ public class DLFileEntryLocalServiceImpl
 			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 		List<DLFileShortcut> fileShortcuts =
-			dlFileShortcutPersistence.findByG_TF_TN(
+			dlFileShortcutPersistence.findByTG_TF_TN(
 				groupId, folderId, name);
 
 		for (DLFileShortcut fileShortcut : fileShortcuts) {
@@ -894,7 +894,7 @@ public class DLFileEntryLocalServiceImpl
 				fileEntry.getDescription(), null, null, 0, 0, null, false);
 
 			List<DLFileShortcut> fileShortcuts =
-				dlFileShortcutPersistence.findByG_TF_TN(
+				dlFileShortcutPersistence.findByTG_TF_TN(
 					fileEntry.getGroupId(), fileEntry.getFolderId(),
 					fileEntry.getName());
 

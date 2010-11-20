@@ -3,7 +3,7 @@
 
 <service-builder package-path="com.liferay.portlet.documentlibrary">
 	<namespace>DL</namespace>
-	<entity name="DLApp" local-service="true" remote-service="true"> 
+	<entity name="DLApp" local-service="true" remote-service="true">
 
 		<!-- References -->
 
@@ -178,6 +178,7 @@
 		<!-- Group instance -->
 
 		<column name="groupId" type="long" />
+		<column name="toGroupId" type="long" />
 
 		<!-- Audit fields -->
 
@@ -208,16 +209,10 @@
 			<finder-column name="folderId" />
 			<finder-column name="status" />
 		</finder>
-		<finder name="G_TF_TN" return-type="Collection">
-			<finder-column name="groupId" />
+		<finder name="TG_TF_TN" return-type="Collection">
+			<finder-column name="toGroupId" />
 			<finder-column name="toFolderId" />
 			<finder-column name="toName" />
-		</finder>
-		<finder name="G_TF_TN_S" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column name="toFolderId" />
-			<finder-column name="toName" />
-			<finder-column name="status" />
 		</finder>
 
 		<!-- References -->

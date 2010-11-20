@@ -28,17 +28,17 @@ DLFileShortcut fileShortcut = (DLFileShortcut)request.getAttribute(WebKeys.DOCUM
 fileShortcut = fileShortcut.toEscapedModel();
 
 long fileShortcutId = fileShortcut.getFileShortcutId();
+long toGroupId = fileShortcut.getToGroupId();
 long toFolderId = fileShortcut.getToFolderId();
 String toName = fileShortcut.getToName();
 
-Group toGroup = null;
+Group toGroup = GroupLocalServiceUtil.getGroup(toGroupId);
 DLFolder toFolder = null;
 DLFileEntry toFileEntry = null;
 
 if (Validator.isNotNull(toName)) {
 	try {
-		toFileEntry = DLAppLocalServiceUtil.getFileEntry(scopeGroupId, toFolderId, toName);
-		toGroup = GroupLocalServiceUtil.getGroup(toFileEntry.getGroupId());
+		toFileEntry = DLAppLocalServiceUtil.getFileEntry(toGroupId, toFolderId, toName);
 
 		if (toFolderId > 0) {
 			toFolder = DLAppLocalServiceUtil.getFolder(toFolderId);
@@ -50,7 +50,6 @@ if (Validator.isNotNull(toName)) {
 else if (toFolderId > 0) {
 	try {
 		toFolder = DLAppLocalServiceUtil.getFolder(toFolderId);
-		toGroup = GroupLocalServiceUtil.getGroup(toFolder.getGroupId());
 	}
 	catch (Exception e) {
 	}

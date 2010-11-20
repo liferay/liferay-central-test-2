@@ -147,14 +147,14 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 		<c:otherwise>
 
 			<%
-			fileEntry = DLAppLocalServiceUtil.getFileEntry(fileShortcut.getGroupId(), fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
+			fileEntry = DLAppLocalServiceUtil.getFileEntry(fileShortcut.getToGroupId(), fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
 			%>
 
 			<c:if test="<%= DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.VIEW) %>">
 				<liferay-ui:icon
 					image="download"
 					message='<%= LanguageUtil.get(pageContext, "download") + " (" + TextFormatter.formatKB(fileEntry.getSize(), locale) + "k)" %>'
-					url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) %>'
+					url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + fileShortcut.getFileShortcutId() %>'
 				/>
 			</c:if>
 
@@ -177,6 +177,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 				<portlet:renderURL var="viewOriginalFileURL">
 					<portlet:param name="struts_action" value="/document_library/view_file_entry" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="groupId" value="<%= String.valueOf(fileShortcut.getToGroupId()) %>" />
 					<portlet:param name="folderId" value="<%= String.valueOf(fileShortcut.getToFolderId()) %>" />
 					<portlet:param name="name" value="<%= HtmlUtil.unescape(fileShortcut.getToName()) %>" />
 				</portlet:renderURL>

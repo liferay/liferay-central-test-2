@@ -32,7 +32,7 @@ if (result instanceof AssetEntry) {
 
 		fileShortcut = fileShortcut.toEscapedModel();
 
-		fileEntry = DLAppLocalServiceUtil.getFileEntry(fileShortcut.getGroupId(), fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
+		fileEntry = DLAppLocalServiceUtil.getFileEntry(fileShortcut.getToGroupId(), fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
 
 		fileEntry = fileEntry.toEscapedModel();
 	}
@@ -52,7 +52,7 @@ else {
 
 	fileShortcut = fileShortcut.toEscapedModel();
 
-	fileEntry = DLAppLocalServiceUtil.getFileEntry(fileShortcut.getGroupId(), fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
+	fileEntry = DLAppLocalServiceUtil.getFileEntry(fileShortcut.getToGroupId(), fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
 
 	fileEntry = fileEntry.toEscapedModel();
 }

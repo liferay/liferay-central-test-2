@@ -71,12 +71,12 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	}
 
 	public DLFileShortcut addFileShortcut(
-			long groupId, long folderId, long toFolderId, String toName,
-			ServiceContext serviceContext)
+			long groupId, long toGroupId, long folderId, long toFolderId,
+			String toName, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return dlFileShortcutService.addFileShortcut(
-			groupId, folderId, toFolderId, toName, serviceContext);
+			groupId, toGroupId, folderId, toFolderId, toName, serviceContext);
 	}
 
 	public DLFolder addFolder(
@@ -522,12 +522,12 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	}
 
 	public DLFileShortcut updateFileShortcut(
-			long fileShortcutId, long folderId, long toFolderId, String toName,
-			ServiceContext serviceContext)
+			long fileShortcutId, long toGroupId, long folderId, long toFolderId,
+			String toName, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return dlFileShortcutService.updateFileShortcut(
-			fileShortcutId, folderId, toFolderId, toName,
+			fileShortcutId, toGroupId, folderId, toFolderId, toName,
 			serviceContext);
 	}
 

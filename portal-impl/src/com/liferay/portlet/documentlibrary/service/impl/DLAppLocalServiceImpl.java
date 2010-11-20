@@ -78,12 +78,13 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	}
 
 	public DLFileShortcut addFileShortcut(
-			long userId, long groupId, long folderId, long toFolderId,
-			String toName, ServiceContext serviceContext)
+			long userId, long groupId, long toGroupId, long folderId,
+			long toFolderId, String toName, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return dlFileShortcutLocalService.addFileShortcut(
-			userId, groupId, folderId, toFolderId, toName, serviceContext);
+			userId, groupId, toGroupId, folderId, toFolderId, toName,
+			serviceContext);
 	}
 
 	public DLFolder addFolder(
@@ -157,11 +158,11 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	}
 
 	public void deleteFileShortcuts(
-			long groupId, long toFolderId, String toName)
+			long toGroupId, long toFolderId, String toName)
 		throws PortalException, SystemException {
 
 		dlFileShortcutLocalService.deleteFileShortcuts(
-			groupId, toFolderId, toName);
+			toGroupId, toFolderId, toName);
 	}
 
 	public void deleteFolder(DLFolder folder)
@@ -590,22 +591,22 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	}
 
 	public DLFileShortcut updateFileShortcut(
-			long userId, long fileShortcutId, long folderId, long toFolderId,
-			String toName, ServiceContext serviceContext)
+			long userId, long fileShortcutId, long toGroupId, long folderId,
+			long toFolderId, String toName, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return dlFileShortcutLocalService.updateFileShortcut(
-			userId, fileShortcutId, folderId, toFolderId, toName,
+			userId, fileShortcutId, toGroupId, folderId, toFolderId, toName,
 			serviceContext);
 	}
 
 	public void updateFileShortcuts(
-			long groupId, long oldToFolderId, String oldToName,
+			long toGroupId, long oldToFolderId, String oldToName,
 			long newToFolderId, String newToName)
 		throws SystemException {
 
 		dlFileShortcutLocalService.updateFileShortcuts(
-			groupId, oldToFolderId, oldToName, newToFolderId, newToName);
+			toGroupId, oldToFolderId, oldToName, newToFolderId, newToName);
 	}
 
 	public DLFileVersion updateFileVersionDescription(

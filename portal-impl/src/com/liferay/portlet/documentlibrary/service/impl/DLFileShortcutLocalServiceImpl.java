@@ -38,8 +38,8 @@ public class DLFileShortcutLocalServiceImpl
 	extends DLFileShortcutLocalServiceBaseImpl {
 
 	public DLFileShortcut addFileShortcut(
-			long userId, long groupId, long folderId, long toFolderId,
-			String toName, ServiceContext serviceContext)
+			long userId, long groupId, long toGroupId, long folderId,
+			long toFolderId, String toName, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// File shortcut
@@ -48,7 +48,7 @@ public class DLFileShortcutLocalServiceImpl
 		folderId = getFolderId(user.getCompanyId(), folderId);
 		Date now = new Date();
 
-		validate(user, groupId, toFolderId, toName);
+		validate(user, toGroupId, toFolderId, toName);
 
 		long fileShortcutId = counterLocalService.increment();
 
@@ -57,6 +57,7 @@ public class DLFileShortcutLocalServiceImpl
 
 		fileShortcut.setUuid(serviceContext.getUuid());
 		fileShortcut.setGroupId(groupId);
+		fileShortcut.setToGroupId(toGroupId);
 		fileShortcut.setCompanyId(user.getCompanyId());
 		fileShortcut.setUserId(user.getUserId());
 		fileShortcut.setUserName(user.getFullName());
@@ -100,7 +101,7 @@ public class DLFileShortcutLocalServiceImpl
 		// Asset
 
 		DLFileEntry fileEntry = dlFileEntryLocalService.getFileEntry(
-			groupId, toFolderId, toName);
+			toGroupId, toFolderId, toName);
 
 		copyAssetTags(fileEntry, serviceContext);
 
@@ -189,12 +190,12 @@ public class DLFileShortcutLocalServiceImpl
 	}
 
 	public void deleteFileShortcuts(
-			long groupId, long toFolderId, String toName)
+			long toGroupId, long toFolderId, String toName)
 		throws PortalException, SystemException {
 
 		List<DLFileShortcut> fileShortcuts =
-			dlFileShortcutPersistence.findByG_TF_TN(
-				groupId, toFolderId, toName);
+			dlFileShortcutPersistence.findByTG_TF_TN(
+				toGroupId, toFolderId, toName);
 
 		for (DLFileShortcut fileShortcut : fileShortcuts) {
 			deleteFileShortcut(fileShortcut);
@@ -213,7 +214,7 @@ public class DLFileShortcutLocalServiceImpl
 		throws PortalException, SystemException {
 
 		DLFileEntry fileEntry = dlFileEntryLocalService.getFileEntry(
-			fileShortcut.getGroupId(), fileShortcut.getToFolderId(),
+			fileShortcut.getToGroupId(), fileShortcut.getToFolderId(),
 			fileShortcut.getToName());
 
 		String mimeType = MimeTypesUtil.getContentType(fileEntry.getTitle());
@@ -227,7 +228,7 @@ public class DLFileShortcutLocalServiceImpl
 	}
 
 	public DLFileShortcut updateFileShortcut(
-			long userId, long fileShortcutId, long folderId,
+			long userId, long fileShortcutId, long toGroupId, long folderId,
 			long toFolderId, String toName, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -238,10 +239,11 @@ public class DLFileShortcutLocalServiceImpl
 		DLFileShortcut fileShortcut =
 			dlFileShortcutPersistence.findByPrimaryKey(fileShortcutId);
 
-		validate(user, fileShortcut.getGroupId(), toFolderId, toName);
+		validate(user, toGroupId, toFolderId, toName);
 
 		fileShortcut.setModifiedDate(
 			serviceContext.getModifiedDate(new Date()));
+		fileShortcut.setToGroupId(toGroupId);
 		fileShortcut.setFolderId(folderId);
 		fileShortcut.setToFolderId(toFolderId);
 		fileShortcut.setToName(toName);
@@ -261,7 +263,7 @@ public class DLFileShortcutLocalServiceImpl
 		// Asset
 
 		DLFileEntry fileEntry = dlFileEntryLocalService.getFileEntry(
-			fileShortcut.getGroupId(), toFolderId, toName);
+			toGroupId, toFolderId, toName);
 
 		copyAssetTags(fileEntry, serviceContext);
 
@@ -273,13 +275,13 @@ public class DLFileShortcutLocalServiceImpl
 	}
 
 	public void updateFileShortcuts(
-			long groupId, long oldToFolderId, String oldToName,
+			long toGroupId, long oldToFolderId, String oldToName,
 			long newToFolderId, String newToName)
 		throws SystemException {
 
 		List<DLFileShortcut> fileShortcuts =
-			dlFileShortcutPersistence.findByG_TF_TN(
-				groupId, oldToFolderId, oldToName);
+			dlFileShortcutPersistence.findByTG_TF_TN(
+				toGroupId, oldToFolderId, oldToName);
 
 		for (DLFileShortcut fileShortcut : fileShortcuts) {
 			fileShortcut.setToFolderId(newToFolderId);

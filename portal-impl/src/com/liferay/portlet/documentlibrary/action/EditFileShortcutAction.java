@@ -126,6 +126,7 @@ public class EditFileShortcutAction extends PortletAction {
 			actionRequest, "fileShortcutId");
 
 		long groupId = themeDisplay.getScopeGroupId();
+		long toGroupId = ParamUtil.getLong(actionRequest, "toGroupId");
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 		long toFolderId = ParamUtil.getLong(actionRequest, "toFolderId");
 		String toName = HtmlUtil.unescape(
@@ -139,7 +140,8 @@ public class EditFileShortcutAction extends PortletAction {
 			// Add file shortcut
 
 			DLFileShortcut fileShortcut = DLAppServiceUtil.addFileShortcut(
-				groupId, folderId, toFolderId, toName, serviceContext);
+				groupId, toGroupId, folderId, toFolderId, toName,
+				serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, DLFileShortcut.class.getName(),
@@ -150,7 +152,8 @@ public class EditFileShortcutAction extends PortletAction {
 			// Update file shortcut
 
 			DLAppServiceUtil.updateFileShortcut(
-				fileShortcutId, folderId, toFolderId, toName, serviceContext);
+				fileShortcutId, toGroupId, folderId, toFolderId, toName,
+				serviceContext);
 
 			AssetPublisherUtil.addRecentFolderId(
 				actionRequest, DLFileShortcut.class.getName(), folderId);
