@@ -42,7 +42,8 @@ public interface DLFileShortcutService {
 	 * Never modify or reference this interface directly. Always use {@link DLFileShortcutServiceUtil} to access the d l file shortcut remote service. Add custom service methods to {@link com.liferay.portlet.documentlibrary.service.impl.DLFileShortcutServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		long groupId, long folderId, long toFolderId, java.lang.String toName,
+		long groupId, long toGroupId, long folderId, long toFolderId,
+		java.lang.String toName,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -58,7 +59,7 @@ public interface DLFileShortcutService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(
-		long fileShortcutId, long folderId, long toFolderId,
+		long fileShortcutId, long toGroupId, long folderId, long toFolderId,
 		java.lang.String toName,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,

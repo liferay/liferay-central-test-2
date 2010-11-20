@@ -103,6 +103,20 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut> {
 	public void setGroupId(long groupId);
 
 	/**
+	 * Gets the to group id of this d l file shortcut.
+	 *
+	 * @return the to group id of this d l file shortcut
+	 */
+	public long getToGroupId();
+
+	/**
+	 * Sets the to group id of this d l file shortcut.
+	 *
+	 * @param toGroupId the to group id of this d l file shortcut
+	 */
+	public void setToGroupId(long toGroupId);
+
+	/**
 	 * Gets the company id of this d l file shortcut.
 	 *
 	 * @return the company id of this d l file shortcut

@@ -419,6 +419,7 @@ create table DLFileShortcut (
 	uuid_ VARCHAR(75) null,
 	fileShortcutId LONG not null primary key,
 	groupId LONG,
+	toGroupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,

@@ -101,6 +101,24 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
+	* Gets the to group id of this d l file shortcut.
+	*
+	* @return the to group id of this d l file shortcut
+	*/
+	public long getToGroupId() {
+		return _dlFileShortcut.getToGroupId();
+	}
+
+	/**
+	* Sets the to group id of this d l file shortcut.
+	*
+	* @param toGroupId the to group id of this d l file shortcut
+	*/
+	public void setToGroupId(long toGroupId) {
+		_dlFileShortcut.setToGroupId(toGroupId);
+	}
+
+	/**
 	* Gets the company id of this d l file shortcut.
 	*
 	* @return the company id of this d l file shortcut

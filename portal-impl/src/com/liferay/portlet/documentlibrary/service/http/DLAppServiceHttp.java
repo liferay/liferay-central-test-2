@@ -181,8 +181,8 @@ public class DLAppServiceHttp {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		HttpPrincipal httpPrincipal, long groupId, long folderId,
-		long toFolderId, java.lang.String toName,
+		HttpPrincipal httpPrincipal, long groupId, long toGroupId,
+		long folderId, long toFolderId, java.lang.String toName,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -191,7 +191,7 @@ public class DLAppServiceHttp {
 					"addFileShortcut", _addFileShortcutParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					folderId, toFolderId, toName, serviceContext);
+					toGroupId, folderId, toFolderId, toName, serviceContext);
 
 			Object returnObj = null;
 
@@ -2344,8 +2344,8 @@ public class DLAppServiceHttp {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(
-		HttpPrincipal httpPrincipal, long fileShortcutId, long folderId,
-		long toFolderId, java.lang.String toName,
+		HttpPrincipal httpPrincipal, long fileShortcutId, long toGroupId,
+		long folderId, long toFolderId, java.lang.String toName,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -2354,7 +2354,8 @@ public class DLAppServiceHttp {
 					"updateFileShortcut", _updateFileShortcutParameterTypes63);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					fileShortcutId, folderId, toFolderId, toName, serviceContext);
+					fileShortcutId, toGroupId, folderId, toFolderId, toName,
+					serviceContext);
 
 			Object returnObj = null;
 
@@ -2562,7 +2563,8 @@ public class DLAppServiceHttp {
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addFileShortcutParameterTypes3 = new Class[] {
-			long.class, long.class, long.class, java.lang.String.class,
+			long.class, long.class, long.class, long.class,
+			java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addFolderParameterTypes4 = new Class[] {
@@ -2763,7 +2765,8 @@ public class DLAppServiceHttp {
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _updateFileShortcutParameterTypes63 = new Class[] {
-			long.class, long.class, long.class, java.lang.String.class,
+			long.class, long.class, long.class, long.class,
+			java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _updateFileVersionDescriptionParameterTypes64 =
