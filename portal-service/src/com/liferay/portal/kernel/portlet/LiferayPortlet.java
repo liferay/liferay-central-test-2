@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
 
@@ -288,12 +287,6 @@ public class LiferayPortlet extends GenericPortlet {
 
 	protected boolean isProcessResourceRequest(
 		ResourceRequest resourceRequest) {
-
-		String resourceId = resourceRequest.getResourceID();
-
-		if (!PortalUtil.isValidResourceId(resourceId)) {
-			return false;
-		}
 
 		return isProcessPortletRequest(resourceRequest);
 	}
