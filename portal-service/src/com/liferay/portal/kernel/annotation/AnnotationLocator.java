@@ -27,38 +27,39 @@ public class AnnotationLocator {
 
 	public static <T extends Annotation> T locate(
 		Class<?> targetClass, Class<T> annotationClass) {
-		Queue<Class<?>> candidateQueue = new LinkedList<Class<?>>();
 
-		candidateQueue.offer(targetClass);
+		Queue<Class<?>> queue = new LinkedList<Class<?>>();
 
-		return _deepSearchTypes(candidateQueue, annotationClass);
+		queue.offer(targetClass);
+
+		return _deepSearchTypes(queue, annotationClass);
 	}
 
 	public static <T extends Annotation> T locate(
 		Method method, Class<?> targetClass, Class<T> annotationClass) {
-		Queue<Class<?>> candidateQueue = new LinkedList<Class<?>>();
+
+		Queue<Class<?>> queue = new LinkedList<Class<?>>();
 
 		if (targetClass == null) {
-			candidateQueue.offer(method.getDeclaringClass());
+			queue.offer(method.getDeclaringClass());
 		}
 		else {
-			candidateQueue.offer(targetClass);
+			queue.offer(targetClass);
 		}
 
-		return _deepSearchMethods(method, candidateQueue, annotationClass);
+		return _deepSearchMethods(queue, method, annotationClass);
 	}
 
 	private static <T extends Annotation> T _deepSearchMethods(
-		Method method, Queue<Class<?>> candidateQueue,
-		Class<T> annotationClass) {
+		Queue<Class<?>> queue, Method method, Class<T> annotationClass) {
 
-		if (candidateQueue.isEmpty()) {
+		if (queue.isEmpty()) {
 			return null;
 		}
 
 		T annotation = null;
 
-		Class<?> clazz = candidateQueue.poll();
+		Class<?> clazz = queue.poll();
 
 		try {
 			Method specificMethod = clazz.getDeclaredMethod(
@@ -76,9 +77,9 @@ public class AnnotationLocator {
 		annotation = clazz.getAnnotation(annotationClass);
 
 		if (annotation == null) {
-			_queueSuperTypes(clazz, candidateQueue);
+			_queueSuperTypes(queue, clazz);
 
-			return _deepSearchMethods(method, candidateQueue, annotationClass);
+			return _deepSearchMethods(queue, method, annotationClass);
 		}
 		else {
 			return annotation;
@@ -86,19 +87,20 @@ public class AnnotationLocator {
 	}
 
 	private static <T extends Annotation> T _deepSearchTypes(
-		Queue<Class<?>> candidateQueue, Class<T> annotationClass) {
-		if (candidateQueue.isEmpty()) {
+		Queue<Class<?>> queue, Class<T> annotationClass) {
+
+		if (queue.isEmpty()) {
 			return null;
 		}
 
-		Class<?> clazz = candidateQueue.poll();
+		Class<?> clazz = queue.poll();
 
 		T annotation = clazz.getAnnotation(annotationClass);
 
 		if (annotation == null) {
-			_queueSuperTypes(clazz, candidateQueue);
+			_queueSuperTypes(queue, clazz);
 
-			return _deepSearchTypes(candidateQueue, annotationClass);
+			return _deepSearchTypes(queue, annotationClass);
 		}
 		else {
 			return annotation;
@@ -106,18 +108,18 @@ public class AnnotationLocator {
 	}
 
 	private static void _queueSuperTypes(
-		Class<?> clazz, Queue<Class<?>> candidateQueue) {
+		Queue<Class<?>> queue, Class<?> clazz) {
 
 		Class<?> supperClass = clazz.getSuperclass();
 
 		if ((supperClass != null) && (supperClass != Object.class)) {
-			candidateQueue.offer(supperClass);
+			queue.offer(supperClass);
 		}
 
-		Class<?>[] interfaces = clazz.getInterfaces();
+		Class<?>[] interfaceClasses = clazz.getInterfaces();
 
-		for (Class<?> inter : interfaces) {
-			candidateQueue.offer(inter);
+		for (Class<?> interfaceClass : interfaceClasses) {
+			queue.offer(interfaceClass);
 		}
 	}
 
