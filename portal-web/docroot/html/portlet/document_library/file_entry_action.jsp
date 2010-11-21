@@ -224,7 +224,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 				<portlet:actionURL var="deleteShortcutURL">
 					<portlet:param name="struts_action" value="/document_library/edit_file_shortcut" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="redirect" value="<%= viewFolderURL.toString() %>" />
 					<portlet:param name="fileShortcutId" value="<%= String.valueOf(fileShortcut.getFileShortcutId()) %>" />
 				</portlet:actionURL>
 
