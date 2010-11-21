@@ -37,7 +37,6 @@ import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
@@ -294,13 +293,7 @@ public class EditEntryAction extends PortletAction {
 
 		portletURL.setWindowState(WindowState.MAXIMIZED);
 
-		if (portletConfig.getPortletName().equals(PortletKeys.BLOGS_ADMIN)){
-			portletURL.setParameter("struts_action", "/blogs_admin/edit_entry");
-		}
-		else {
-			portletURL.setParameter("struts_action", "/blogs/edit_entry");
-		}
-
+		portletURL.setParameter("struts_action", "/blogs_admin/edit_entry");
 		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
 		portletURL.setParameter("redirect", redirect, false);
 		portletURL.setParameter(
@@ -348,51 +341,51 @@ public class EditEntryAction extends PortletAction {
 	protected Object[] updateEntry(ActionRequest actionRequest)
 		throws Exception {
 
-		long entryId = ParamUtil.getLong(actionRequest, "entryId");
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
+			actionRequest);
 
-		String title = ParamUtil.getString(actionRequest, "title");
-		String description = ParamUtil.getString(actionRequest, "description");
-		String content = ParamUtil.getString(actionRequest, "content");
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long entryId = ParamUtil.getLong(uploadRequest, "entryId");
+
+		String title = ParamUtil.getString(uploadRequest, "title");
+		String description = ParamUtil.getString(uploadRequest, "description");
+		String content = ParamUtil.getString(uploadRequest, "content");
 
 		int displayDateMonth = ParamUtil.getInteger(
-			actionRequest, "displayDateMonth");
+			uploadRequest, "displayDateMonth");
 		int displayDateDay = ParamUtil.getInteger(
-			actionRequest, "displayDateDay");
+			uploadRequest, "displayDateDay");
 		int displayDateYear = ParamUtil.getInteger(
-			actionRequest, "displayDateYear");
+			uploadRequest, "displayDateYear");
 		int displayDateHour = ParamUtil.getInteger(
-			actionRequest, "displayDateHour");
+			uploadRequest, "displayDateHour");
 		int displayDateMinute = ParamUtil.getInteger(
-			actionRequest, "displayDateMinute");
+			uploadRequest, "displayDateMinute");
 		int displayDateAmPm = ParamUtil.getInteger(
-			actionRequest, "displayDateAmPm");
+			uploadRequest, "displayDateAmPm");
 
 		if (displayDateAmPm == Calendar.PM) {
 			displayDateHour += 12;
 		}
 
 		boolean allowPingbacks = ParamUtil.getBoolean(
-			actionRequest, "allowPingbacks");
+			uploadRequest, "allowPingbacks");
 		boolean allowTrackbacks = ParamUtil.getBoolean(
-			actionRequest, "allowTrackbacks");
+			uploadRequest, "allowTrackbacks");
 		String[] trackbacks = StringUtil.split(
-			ParamUtil.getString(actionRequest, "trackbacks"));
+			ParamUtil.getString(uploadRequest, "trackbacks"));
 
-		boolean smallImage = ParamUtil.getBoolean(actionRequest, "smallImage");
-		String smallImageURL =
-			ParamUtil.getString(actionRequest, "smallImageURL");
+		boolean	smallImage = false;
+		String smallImageURL = null;
 		File smallFile = null;
 
-		if (smallImage && Validator.isNull(smallImageURL)) {
-			try {
-				UploadPortletRequest uploadRequest =
-					PortalUtil.getUploadPortletRequest(actionRequest);
-
-				smallFile = uploadRequest.getFile("smallFile");
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
+		if (!themeDisplay.isStateExclusive()) {
+			smallImage = ParamUtil.getBoolean(uploadRequest, "smallImage");
+			smallImageURL = ParamUtil.getString(
+				uploadRequest, "smallImageURL");
+			smallFile = uploadRequest.getFile("smallFile");
 		}
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
