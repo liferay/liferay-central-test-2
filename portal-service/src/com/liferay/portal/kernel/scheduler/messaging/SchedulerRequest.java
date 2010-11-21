@@ -222,7 +222,6 @@ public class SchedulerRequest implements Serializable {
 	}
 
 	public static SchedulerRequest createUnregisterRequest(String groupName) {
-
 		SchedulerRequest schedulerRequest = new SchedulerRequest();
 
 		schedulerRequest.setCommand(COMMAND_UNREGISTER);

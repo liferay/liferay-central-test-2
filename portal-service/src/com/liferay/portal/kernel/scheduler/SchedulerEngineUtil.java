@@ -254,11 +254,8 @@ public class SchedulerEngineUtil {
 	}
 
 	public static void update(Trigger trigger) throws SchedulerException {
-
 		_instance._update(trigger);
 	}
-
-	private SchedulerEngine _schedulerEngine;
 
 	private void _addScriptingJob(
 			Trigger trigger, String description, String language, String script)
@@ -303,6 +300,7 @@ public class SchedulerEngineUtil {
 		throws SchedulerException {
 
 		_unregisterMessageListener(messageListenerUUID);
+
 		_delete(jobName, groupName);
 	}
 
@@ -690,7 +688,6 @@ public class SchedulerEngineUtil {
 	}
 
 	private void _unschedule(String groupName) throws SchedulerException {
-
 		_schedulerEngine.unschedule(groupName);
 	}
 
@@ -720,5 +717,7 @@ public class SchedulerEngineUtil {
 	}
 
 	private static SchedulerEngineUtil _instance = new SchedulerEngineUtil();
+
+	private SchedulerEngine _schedulerEngine;
 
 }

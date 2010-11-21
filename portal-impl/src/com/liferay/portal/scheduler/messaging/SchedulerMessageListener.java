@@ -123,7 +123,7 @@ public class SchedulerMessageListener extends BaseMessageListener {
 			responseMessage.getDestinationName(), responseMessage);
 	}
 
-	protected void doCommandUnRegister(SchedulerRequest schedulerRequest)
+	protected void doCommandUnregister(SchedulerRequest schedulerRequest)
 		throws Exception {
 
 		String groupName = schedulerRequest.getGroupName();
@@ -178,7 +178,7 @@ public class SchedulerMessageListener extends BaseMessageListener {
 				schedulerRequest.getJobName(), schedulerRequest.getGroupName());
 		}
 		else if (command.equals(SchedulerRequest.COMMAND_UNREGISTER)) {
-			doCommandUnRegister(schedulerRequest);
+			doCommandUnregister(schedulerRequest);
 		}
 		else if (command.equals(SchedulerRequest.COMMAND_UPDATE)) {
 			_schedulerEngine.update(schedulerRequest.getTrigger());

@@ -617,16 +617,13 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		Date startDate = trigger.getStartDate();
 
 		if (startDate == null) {
-			if (ServerDetector.getServerId().equals(
-					ServerDetector.TOMCAT_ID)) {
-
+			if (ServerDetector.getServerId().equals(ServerDetector.TOMCAT_ID)) {
 				quartzTrigger.setStartTime(
 					new Date(System.currentTimeMillis() + Time.MINUTE));
 			}
 			else {
 				quartzTrigger.setStartTime(
-					new Date(
-					System.currentTimeMillis() + Time.MINUTE * 3));
+					new Date(System.currentTimeMillis() + Time.MINUTE * 3));
 			}
 		}
 		else {
