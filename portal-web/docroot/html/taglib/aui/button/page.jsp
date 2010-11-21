@@ -31,7 +31,7 @@ if (onClick.startsWith(Http.HTTP_WITH_SLASH) || onClick.startsWith(Http.HTTPS_WI
 	onClick = "location.href = '" + HtmlUtil.escape(PortalUtil.escapeRedirect(onClick)) + "';";
 }
 else if (onClick.startsWith("wsrp_rewrite?")){
-    onClick = "location.href = '" + HtmlUtil.escape(onClick) + "';";
+	onClick = "location.href = '" + HtmlUtil.escape(onClick) + "';";
 }
 %>
 
