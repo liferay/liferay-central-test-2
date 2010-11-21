@@ -54,3 +54,5 @@ alter table MBMessage add format VARCHAR(75) null;
 COMMIT_TRANSACTION;
 
 update MBMessage set format = 'bbcode';
+
+alter table DLFileShortcut add toGroupId LONG not null;
