@@ -849,6 +849,18 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			companyId, name, realName, description, params);
 	}
 
+	@ThreadLocalCachable
+	public int searchCount(
+			long companyId, long[] classNameIds, String name,
+			String description, LinkedHashMap<String, Object> params)
+		throws SystemException {
+
+		String realName = getRealName(companyId, name);
+
+		return groupFinder.countByC_C_N_D(
+			companyId, classNameIds, name, realName, description, params);
+	}
+
 	public void setRoleGroups(long roleId, long[] groupIds)
 		throws SystemException {
 

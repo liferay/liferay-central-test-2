@@ -26,6 +26,12 @@ public interface GroupFinder {
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int countByC_C_N_D(long companyId, long[] classNameIds,
+		java.lang.String name, java.lang.String realName,
+		java.lang.String description,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portal.model.Group> findByLiveGroups()
 		throws com.liferay.portal.kernel.exception.SystemException;
 

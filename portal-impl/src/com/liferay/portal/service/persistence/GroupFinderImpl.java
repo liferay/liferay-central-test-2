@@ -147,6 +147,16 @@ public class GroupFinderImpl
 			LinkedHashMap<String, Object> params)
 		throws SystemException {
 
+		return countByC_C_N_D(
+			companyId, new long[] {PortalUtil.getClassNameId(Group.class)},
+			name, realName, description, params);
+	}
+
+	public int countByC_C_N_D(
+			long companyId, long[] classNameIds, String name, String realName,
+			String description, LinkedHashMap<String, Object> params)
+		throws SystemException {
+
 		name = StringUtil.lowerCase(name);
 		description = StringUtil.lowerCase(description);
 
@@ -186,19 +196,20 @@ public class GroupFinderImpl
 			Set<Long> groupIds = new HashSet<Long>();
 
 			groupIds.addAll(
-				countByC_N_D(
-					session, companyId, name, realName, description, params1));
+				countByC_C_N_D(
+					session, companyId, classNameIds, name, realName,
+					description, params1));
 
 			if (Validator.isNotNull(userId)) {
 				groupIds.addAll(
-					countByC_N_D(
-						session, companyId, name, realName, description,
-						params2));
+					countByC_C_N_D(
+						session, companyId, classNameIds, name, realName,
+						description, params2));
 
 				groupIds.addAll(
-					countByC_N_D(
-						session, companyId, name, realName, description,
-						params3));
+					countByC_C_N_D(
+						session, companyId, classNameIds, name, realName,
+						description, params3));
 			}
 
 			return groupIds.size();
@@ -457,7 +468,6 @@ public class GroupFinderImpl
 			sql, "Group_.classNameId = ?",
 			"Group_.classNameId = ".concat(
 				StringUtil.merge(classNameIds, " OR Group_.classNameId = ")));
-
 		sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
 		Session session = null;
@@ -550,12 +560,17 @@ public class GroupFinderImpl
 		return 0;
 	}
 
-	protected List<Long> countByC_N_D(
-		Session session, long companyId, String name, String realName,
-		String description, LinkedHashMap<String, Object> params) {
+	protected List<Long> countByC_C_N_D(
+		Session session, long companyId, long[] classNameIds, String name,
+		String realName, String description,
+		LinkedHashMap<String, Object> params) {
 
 		String sql = CustomSQLUtil.get(COUNT_BY_C_N_D);
 
+		sql = StringUtil.replace(
+			sql, "Group_.classNameId = ?",
+			"Group_.classNameId = ".concat(
+				StringUtil.merge(classNameIds, " OR Group_.classNameId = ")));
 		sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
 		sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
 

@@ -52,7 +52,7 @@
 			WHERE
 				[$WHERE$]
 				(Group_.companyId = ?) AND
-				(Group_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.GROUP$]) AND
+				(Group_.classNameId = ?) AND
 				(Group_.liveGroupId = 0) AND
 				(Group_.name != 'Control Panel') AND
 				(lower(Group_.name) LIKE ? OR lower(Group_.name) LIKE ? OR ? IS NULL) AND

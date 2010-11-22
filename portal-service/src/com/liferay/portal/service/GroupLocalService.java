@@ -422,6 +422,12 @@ public interface GroupLocalService {
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int searchCount(long companyId, long[] classNameIds,
+		java.lang.String name, java.lang.String description,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void setRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

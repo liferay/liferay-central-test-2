@@ -502,6 +502,15 @@ public class GroupLocalServiceUtil {
 		return getService().searchCount(companyId, name, description, params);
 	}
 
+	public static int searchCount(long companyId, long[] classNameIds,
+		java.lang.String name, java.lang.String description,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .searchCount(companyId, classNameIds, name, description,
+			params);
+	}
+
 	public static void setRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().setRoleGroups(roleId, groupIds);
