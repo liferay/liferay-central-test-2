@@ -15,7 +15,7 @@
 package com.liferay.portal.spring.transaction;
 
 import com.liferay.portal.kernel.annotation.AnnotationLocator;
-import com.liferay.portal.kernel.annotation.Transactional;
+import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.MethodTargetClassKey;
 
 import java.lang.reflect.Method;
@@ -33,9 +33,8 @@ import org.springframework.transaction.interceptor.TransactionAttributeSource;
 public class AnnotationTransactionAttributeSource
 	implements TransactionAttributeSource {
 
-	@SuppressWarnings("rawtypes")
 	public TransactionAttribute getTransactionAttribute(
-		Method method, Class targetClass) {
+		Method method, Class<?> targetClass) {
 
 		MethodTargetClassKey methodTargetClassKey = new MethodTargetClassKey(
 			method, targetClass);
@@ -55,7 +54,20 @@ public class AnnotationTransactionAttributeSource
 		Transactional transactional = AnnotationLocator.locate(
 			method, targetClass, Transactional.class);
 
-		transactionAttribute = TransactionAttributeBuilder.build(transactional);
+		if (transactional != null) {
+			transactionAttribute = TransactionAttributeBuilder.build(
+				transactional);
+		}
+		else {
+			@SuppressWarnings("deprecation")
+			com.liferay.portal.kernel.annotation.Transactional
+				oldTransactional = AnnotationLocator.locate(
+					method, targetClass,
+					com.liferay.portal.kernel.annotation.Transactional.class);
+
+			transactionAttribute = TransactionAttributeBuilder.build(
+				oldTransactional);
+		}
 
 		if (transactionAttribute == null) {
 			_transactionAttributes.put(
