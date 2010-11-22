@@ -14,11 +14,12 @@
 
 package com.liferay.portal.upload;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.util.SystemProperties;
 
 import java.io.File;
@@ -37,24 +38,29 @@ import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
  * @author Brian Wing Shun Chan
  * @author Zongliang Li
  * @author Harry Mark
+ * @author Raymond Augé
  */
 public class UploadServletRequestImpl
 	extends HttpServletRequestWrapper implements UploadServletRequest {
 
-	public static final long DEFAULT_SIZE_MAX = GetterUtil.getLong(
-		PropsUtil.get(UploadServletRequestImpl.class.getName() + ".max.size"));
+	public static File UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR = null;
 
-	public static final File DEFAULT_TEMP_DIR = new File(
-		GetterUtil.getString(PropsUtil.get(
-			UploadServletRequestImpl.class.getName() + ".temp.dir"),
-		SystemProperties.get(SystemProperties.TMP_DIR)));
+	static {
+		try {
+			UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR = new File(
+				PrefsPropsUtil.getString(
+					PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR,
+					SystemProperties.get(SystemProperties.TMP_DIR)));
+		}
+		catch (SystemException se) {
+		}
+	}
 
 	public UploadServletRequestImpl(HttpServletRequest request) {
 		super(request);
@@ -63,9 +69,12 @@ public class UploadServletRequestImpl
 
 		try {
 			ServletFileUpload servletFileUpload = new LiferayFileUpload(
-				new LiferayFileItemFactory(DEFAULT_TEMP_DIR), request);
+				new LiferayFileItemFactory(
+					UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR), request);
 
-			servletFileUpload.setSizeMax(DEFAULT_SIZE_MAX);
+			servletFileUpload.setSizeMax(
+				PrefsPropsUtil.getLong(
+					PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE));
 
 			_lsr = new LiferayServletRequest(request);
 
@@ -97,16 +106,16 @@ public class UploadServletRequestImpl
 				_params.put(fileItem.getFieldName(), fileItems);
 			}
 		}
-		catch (FileUploadException fue) {
-			_log.error(fue, fue);
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 	}
 
 	public void cleanUp() {
 		if ((_params != null) && !_params.isEmpty()) {
 			for (LiferayFileItem[] fileItems : _params.values()) {
-				for (int i = 0; i < fileItems.length; i++) {
-					fileItems[i].delete();
+				for (LiferayFileItem _fileItem : fileItems) {
+					_fileItem.delete();
 				}
 			}
 		}

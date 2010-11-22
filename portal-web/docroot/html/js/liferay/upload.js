@@ -187,7 +187,7 @@ AUI().add(
 			fileAddError: function(file, error_code, msg) {
 				var instance = this;
 
-				if (error_code == -110) {
+				if (error_code == SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT) {
 					var ul = instance.getFileListUl();
 
 					ul.append('<li class="upload-file upload-error"><span class="file-title">' + file.name + '</span> <span class="error-message">' + instance._invalidFileSizeText + '</span></li>');
@@ -299,7 +299,9 @@ AUI().add(
 					instance.fileCancelled(file, error_code, msg);
 				}
 
-				if (error_code == SWFUpload.UPLOAD_ERROR.HTTP_ERROR) {
+				if ((error_code == SWFUpload.UPLOAD_ERROR.HTTP_ERROR) ||
+					(error_code == SWFUpload.UPLOAD_ERROR.IO_ERROR)) {
+
 					var fileId = instance._namespace(file.id);
 					var li = A.one('#' + fileId);
 

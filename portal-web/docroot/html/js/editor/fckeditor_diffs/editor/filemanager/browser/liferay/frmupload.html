@@ -101,6 +101,12 @@ function OnUploadCompleted( errorNumber, data )
 		case 207:
 			alert( 'You do not have the permission to upload to this folder.' );
 			break ;
+		case 208:
+			alert( 'File size exceeds upload limit.' );
+			break ;
+		case 209:
+			alert( 'An internal server error occured.' );
+			break ;
 
 		default :
 			alert( 'Error on file upload. Error number: ' + errorNumber ) ;

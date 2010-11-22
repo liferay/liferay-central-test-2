@@ -54,6 +54,7 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ServiceComponentLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.MaintenanceUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -61,6 +62,8 @@ import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.util.log4j.Log4JUtil;
+
+import java.io.File;
 
 import java.util.Enumeration;
 import java.util.Map;
@@ -480,6 +483,9 @@ public class EditServerAction extends PortletAction {
 			preferences.setValue(
 				PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR,
 				uploadServletRequestImplTempDir);
+
+			UploadServletRequestImpl.UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR =
+				new File(uploadServletRequestImplTempDir);
 		}
 
 		preferences.setValue(

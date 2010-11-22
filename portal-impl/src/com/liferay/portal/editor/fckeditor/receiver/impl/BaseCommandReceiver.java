@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -33,7 +34,10 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.upload.LiferayFileItemFactory;
+import com.liferay.portal.upload.LiferayFileUpload;
+import com.liferay.portal.upload.LiferayServletRequest;
 import com.liferay.portal.upload.UploadServletRequestImpl;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.File;
@@ -56,7 +60,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
@@ -66,6 +69,7 @@ import org.w3c.dom.Node;
 
 /**
  * @author Ivica Cardic
+ * @author Raymond Augé
  */
 public abstract class BaseCommandReceiver implements CommandReceiver {
 
@@ -150,46 +154,56 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		CommandArgument argument, HttpServletRequest request,
 		HttpServletResponse response) {
 
-		ServletFileUpload upload = new ServletFileUpload(
-			new LiferayFileItemFactory(
-				UploadServletRequestImpl.DEFAULT_TEMP_DIR));
-
-		List<FileItem> items = null;
-
-		try {
-			items = upload.parseRequest(request);
-		}
-		catch (FileUploadException fue) {
-			throw new FCKException(fue);
-		}
-
-		Map<String, Object> fields = new HashMap<String, Object>();
-
-		for (FileItem item : items) {
-			if (item.isFormField()) {
-				fields.put(item.getFieldName(), item.getString());
-			}
-			else {
-				fields.put(item.getFieldName(), item);
-			}
-		}
-
-		DiskFileItem fileItem = (DiskFileItem)fields.get("NewFile");
-
-		String fileName = StringUtil.replace(
-			fileItem.getName(), CharPool.BACK_SLASH, CharPool.SLASH);
-		String[] fileNameArray = StringUtil.split(fileName, "/");
-		fileName = fileNameArray[fileNameArray.length - 1];
-
-		String extension = _getExtension(fileName);
-
 		String returnValue = null;
 
 		try {
+			ServletFileUpload upload = new LiferayFileUpload(
+				new LiferayFileItemFactory(
+					UploadServletRequestImpl.UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR),
+					request);
+
+			upload.setFileSizeMax(
+				PrefsPropsUtil.getLong(
+					PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE));
+
+			LiferayServletRequest liferayServletRequest =
+				new LiferayServletRequest(request);
+
+			List<FileItem> items = upload.parseRequest(liferayServletRequest);
+
+			Map<String, Object> fields = new HashMap<String, Object>();
+
+			for (FileItem item : items) {
+				if (item.isFormField()) {
+					fields.put(item.getFieldName(), item.getString());
+				}
+				else {
+					fields.put(item.getFieldName(), item);
+				}
+			}
+
+			DiskFileItem fileItem = (DiskFileItem)fields.get("NewFile");
+
+			String fileName = StringUtil.replace(
+				fileItem.getName(), CharPool.BACK_SLASH, CharPool.SLASH);
+			String[] fileNameArray = StringUtil.split(fileName, "/");
+			fileName = fileNameArray[fileNameArray.length - 1];
+
+			String extension = _getExtension(fileName);
+
 			returnValue = fileUpload(
 				argument, fileName, fileItem.getStoreLocation(), extension);
 		}
-		catch (FCKException fcke) {
+		catch (Exception e) {
+			FCKException fcke = null;
+
+			if (e instanceof FCKException) {
+				fcke = (FCKException)e;
+			}
+			else {
+				fcke = new FCKException(e);
+			}
+
 			Throwable cause = fcke.getCause();
 
 			returnValue = "203";
@@ -210,6 +224,14 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 				}
 				else if (causeString.indexOf("PrincipalException") != -1) {
 					returnValue = "207";
+				}
+				else if ((causeString.indexOf("ImageSizeException") != -1) ||
+						 (causeString.indexOf("FileSizeException") != -1)) {
+
+					returnValue = "208";
+				}
+				else if (causeString.indexOf("SystemException") != -1) {
+					returnValue = "209";
 				}
 				else {
 					throw fcke;
