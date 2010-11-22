@@ -78,6 +78,7 @@ public class ResourceRequestImpl
 
 		_cacheablity = ParamUtil.getString(
 			request, "p_p_cacheability", ResourceURL.PAGE);
+
 		_resourceID = request.getParameter("p_p_resource_id");
 
 		if (!PortalUtil.isValidResourceId(_resourceID)) {

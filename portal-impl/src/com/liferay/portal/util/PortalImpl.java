@@ -3689,7 +3689,7 @@ public class PortalImpl implements Portal {
 			return true;
 		}
 
-		Matcher matcher = _BANNED_RESOURCE_ID_PATTERN.matcher(resourceId);
+		Matcher matcher = _bannedResourceIdPattern.matcher(resourceId);
 
 		if (matcher.matches()) {
 			return false;
@@ -4613,10 +4613,6 @@ public class PortalImpl implements Portal {
 		};
 	}
 
-	private static final Pattern _BANNED_RESOURCE_ID_PATTERN = Pattern.compile(
-		PropsValues.PORTLET_RESOURCE_ID_BANNED_PATHS_REGEXP,
-		Pattern.CASE_INSENSITIVE);
-
 	private static final String _J_SECURITY_CHECK = "j_security_check";
 
 	private static final String _JSESSIONID = ";jsessionid=";
@@ -4643,6 +4639,9 @@ public class PortalImpl implements Portal {
 	private String[] _allSystemGroups;
 	private String[] _allSystemOrganizationRoles;
 	private String[] _allSystemRoles;
+	private Pattern _bannedResourceIdPattern = Pattern.compile(
+		PropsValues.PORTLET_RESOURCE_ID_BANNED_PATHS_REGEXP,
+		Pattern.CASE_INSENSITIVE);
 	private String _cdnHostHttp;
 	private String _cdnHostHttps;
 	private String _computerAddress;
