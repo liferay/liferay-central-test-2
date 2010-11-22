@@ -15,7 +15,7 @@
 package com.liferay.portal.spring.annotation;
 
 import com.liferay.portal.kernel.annotation.AnnotationLocator;
-import com.liferay.portal.kernel.annotation.Transactional;
+import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.spring.transaction.TransactionAttributeBuilder;
 
 import java.io.Serializable;
@@ -50,7 +50,27 @@ public class PortalTransactionAnnotationParser
 				(Class<?>)annotatedElement, Transactional.class);
 		}
 
-		return TransactionAttributeBuilder.build(transactional);
+		if (transactional != null) {
+			return TransactionAttributeBuilder.build(transactional);
+		}
+
+		com.liferay.portal.kernel.annotation.Transactional oldTransactional =
+			null;
+
+		if (annotatedElement instanceof Method) {
+			Method method = (Method)annotatedElement;
+
+			oldTransactional = AnnotationLocator.locate(
+				method, method.getDeclaringClass(),
+				com.liferay.portal.kernel.annotation.Transactional.class);
+		}
+		else {
+			oldTransactional = AnnotationLocator.locate(
+				(Class<?>)annotatedElement,
+				com.liferay.portal.kernel.annotation.Transactional.class);
+		}
+
+		return TransactionAttributeBuilder.build(oldTransactional);
 	}
 
 }
