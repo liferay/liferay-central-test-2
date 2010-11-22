@@ -15,7 +15,8 @@
 package com.liferay.portal.kernel.annotation;
 
 /**
- * @author Michael Young
+ * @author	   Michael Young
+ * @deprecated {@link com.liferay.portal.kernel.transaction.Isolation}
  */
 public enum Isolation {
 

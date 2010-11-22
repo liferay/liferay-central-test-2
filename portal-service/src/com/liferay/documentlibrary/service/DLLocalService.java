@@ -14,10 +14,10 @@
 
 package com.liferay.documentlibrary.service;
 
-import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.service.ServiceContext;
 
 import java.io.File;

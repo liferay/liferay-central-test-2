@@ -12,11 +12,10 @@
  * details.
  */
 
-package com.liferay.portal.kernel.annotation;
+package com.liferay.portal.kernel.transaction;
 
 /**
- * @author	   Michael Young
- * @deprecated {@link com.liferay.portal.kernel.transaction.Propagation}
+ * @author Michael Young
  */
 public enum Propagation {
 

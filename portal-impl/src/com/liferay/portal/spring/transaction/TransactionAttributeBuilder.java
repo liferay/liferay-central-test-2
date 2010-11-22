@@ -14,8 +14,8 @@
 
 package com.liferay.portal.spring.transaction;
 
-import com.liferay.portal.kernel.annotation.TransactionDefinition;
-import com.liferay.portal.kernel.annotation.Transactional;
+import com.liferay.portal.kernel.transaction.TransactionDefinition;
+import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
@@ -32,15 +32,47 @@ import org.springframework.transaction.interceptor.TransactionAttribute;
  */
 public class TransactionAttributeBuilder {
 
+	@SuppressWarnings("deprecation")
+	public static TransactionAttribute build(
+		com.liferay.portal.kernel.annotation.Transactional transactional) {
+
+		if (transactional == null) {
+			return null;
+		}
+
+		return _build(
+			transactional.enabled(), transactional.isolation().value(),
+			transactional.propagation().value(), transactional.readOnly(),
+			transactional.timeout(), transactional.rollbackFor(),
+			transactional.rollbackForClassName(), transactional.noRollbackFor(),
+			transactional.noRollbackForClassName());
+	}
+
 	public static TransactionAttribute build(Transactional transactional) {
-		if ((transactional == null) || !transactional.enabled()) {
+		if (transactional == null) {
+			return null;
+		}
+
+		return _build(
+			transactional.enabled(), transactional.isolation().value(),
+			transactional.propagation().value(), transactional.readOnly(),
+			transactional.timeout(), transactional.rollbackFor(),
+			transactional.rollbackForClassName(), transactional.noRollbackFor(),
+			transactional.noRollbackForClassName());
+	}
+
+	private static TransactionAttribute _build(
+		boolean enabled, int isolationLevel, int propagationBehavior,
+		boolean readOnly, int timeout, Class<?>[] rollbackFor,
+		String[] rollbackForClassName, Class<?>[] noRollbackFor,
+		String[] noRollbackForClassName) {
+
+		if (!enabled) {
 			return null;
 		}
 
 		RuleBasedTransactionAttribute ruleBasedTransactionAttribute =
 			new RuleBasedTransactionAttribute();
-
-		int isolationLevel = transactional.isolation().value();
 
 		if (isolationLevel == TransactionDefinition.ISOLATION_COUNTER) {
 			ruleBasedTransactionAttribute.setIsolationLevel(
@@ -55,14 +87,12 @@ public class TransactionAttributeBuilder {
 		}
 
 		ruleBasedTransactionAttribute.setPropagationBehavior(
-			transactional.propagation().value());
-		ruleBasedTransactionAttribute.setReadOnly(transactional.readOnly());
-		ruleBasedTransactionAttribute.setTimeout(transactional.timeout());
+			propagationBehavior);
+		ruleBasedTransactionAttribute.setReadOnly(readOnly);
+		ruleBasedTransactionAttribute.setTimeout(timeout);
 
 		List<RollbackRuleAttribute> rollbackRuleAttributes =
 			new ArrayList<RollbackRuleAttribute>();
-
-		Class<?>[] rollbackFor = transactional.rollbackFor();
 
 		for (int i = 0; i < rollbackFor.length; i++) {
 			RollbackRuleAttribute rollbackRuleAttribute =
@@ -71,8 +101,6 @@ public class TransactionAttributeBuilder {
 			rollbackRuleAttributes.add(rollbackRuleAttribute);
 		}
 
-		String[] rollbackForClassName = transactional.rollbackForClassName();
-
 		for (int i = 0; i < rollbackForClassName.length; i++) {
 			RollbackRuleAttribute rollbackRuleAttribute =
 				new RollbackRuleAttribute(rollbackForClassName[i]);
@@ -80,17 +108,12 @@ public class TransactionAttributeBuilder {
 			rollbackRuleAttributes.add(rollbackRuleAttribute);
 		}
 
-		Class<?>[] noRollbackFor = transactional.noRollbackFor();
-
 		for (int i = 0; i < noRollbackFor.length; ++i) {
 			NoRollbackRuleAttribute noRollbackRuleAttribute =
 				new NoRollbackRuleAttribute(noRollbackFor[i]);
 
 			rollbackRuleAttributes.add(noRollbackRuleAttribute);
 		}
-
-		String[] noRollbackForClassName =
-			transactional.noRollbackForClassName();
 
 		for (int i = 0; i < noRollbackForClassName.length; ++i) {
 			NoRollbackRuleAttribute noRollbackRuleAttribute =

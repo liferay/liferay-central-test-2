@@ -15,10 +15,10 @@
 package com.liferay.mail.service;
 
 import com.liferay.mail.model.Filter;
-import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.transaction.Transactional;
 
 import java.util.List;
 

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.annotation;
+package com.liferay.portal.kernel.transaction;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -22,8 +22,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author	   Brian Wing Shun Chan
- * @deprecated {@link com.liferay.portal.kernel.transaction.Transactional}
+ * @author Brian Wing Shun Chan
  */
 @Documented
 @Inherited

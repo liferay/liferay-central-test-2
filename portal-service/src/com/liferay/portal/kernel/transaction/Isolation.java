@@ -12,23 +12,22 @@
  * details.
  */
 
-package com.liferay.portal.kernel.annotation;
+package com.liferay.portal.kernel.transaction;
 
 /**
- * @author	   Michael Young
- * @deprecated {@link com.liferay.portal.kernel.transaction.Propagation}
+ * @author Michael Young
  */
-public enum Propagation {
+public enum Isolation {
 
-	MANDATORY(TransactionDefinition.PROPAGATION_MANDATORY),
-	NEVER(TransactionDefinition.PROPAGATION_NEVER),
-	NESTED(TransactionDefinition.PROPAGATION_NESTED),
-	NOT_SUPPORTED(TransactionDefinition.PROPAGATION_NOT_SUPPORTED),
-	REQUIRED(TransactionDefinition.PROPAGATION_REQUIRED),
-	REQUIRES_NEW(TransactionDefinition.PROPAGATION_REQUIRES_NEW),
-	SUPPORTS(TransactionDefinition.PROPAGATION_SUPPORTS);
+	COUNTER(TransactionDefinition.ISOLATION_COUNTER),
+	DEFAULT(TransactionDefinition.ISOLATION_DEFAULT),
+	PORTAL(TransactionDefinition.ISOLATION_PORTAL),
+	READ_COMMITTED(TransactionDefinition.ISOLATION_READ_COMMITTED),
+	READ_UNCOMMITTED(TransactionDefinition.ISOLATION_READ_UNCOMMITTED),
+	REPEATABLE_READ(TransactionDefinition.ISOLATION_REPEATABLE_READ),
+	SERIALIZABLE(TransactionDefinition.ISOLATION_SERIALIZABLE);
 
-	Propagation(int value) {
+	Isolation(int value) {
 		_value = value;
 	}
 
