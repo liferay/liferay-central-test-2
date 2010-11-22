@@ -623,16 +623,9 @@ public class PortletImporter {
 
 				if (group.isStaged() && !group.isStagedRemotely()) {
 					try {
-						long oldPlid = context.getOldPlid();
-
-						if (oldPlid == 0) {
-							oldPlid = GetterUtil.getLong(
-								portletDataRefEl.getParent().attributeValue(
-									"old-plid"));
-						}
-
-						Layout oldLayout = LayoutLocalServiceUtil.getLayout(
-							oldPlid);
+						Layout oldLayout =
+							LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+								scopeLayoutUuid, context.getSourceGroupId());
 
 						Group oldScopeGroup = oldLayout.getScopeGroup();
 
