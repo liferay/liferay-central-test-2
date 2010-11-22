@@ -65,13 +65,13 @@ import java.rmi.RemoteException;
  */
 public class GroupServiceSoap {
 	public static com.liferay.portal.model.GroupSoap addGroup(
-		java.lang.String name, java.lang.String description, int type,
-		java.lang.String friendlyURL, boolean active,
+		long liveGroupId, java.lang.String name, java.lang.String description,
+		int type, java.lang.String friendlyURL, boolean active,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(name,
-					description, type, friendlyURL, active, serviceContext);
+			com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(liveGroupId,
+					name, description, type, friendlyURL, active, serviceContext);
 
 			return com.liferay.portal.model.GroupSoap.toSoapModel(returnValue);
 		}
@@ -83,13 +83,13 @@ public class GroupServiceSoap {
 	}
 
 	public static com.liferay.portal.model.GroupSoap addGroup(
-		long liveGroupId, java.lang.String name, java.lang.String description,
-		int type, java.lang.String friendlyURL, boolean active,
+		java.lang.String name, java.lang.String description, int type,
+		java.lang.String friendlyURL, boolean active,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(liveGroupId,
-					name, description, type, friendlyURL, active, serviceContext);
+			com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(name,
+					description, type, friendlyURL, active, serviceContext);
 
 			return com.liferay.portal.model.GroupSoap.toSoapModel(returnValue);
 		}
@@ -316,13 +316,10 @@ public class GroupServiceSoap {
 	}
 
 	public static com.liferay.portal.model.GroupSoap updateGroup(long groupId,
-		java.lang.String name, java.lang.String description, int type,
-		java.lang.String friendlyURL, boolean active,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
+		java.lang.String typeSettings) throws RemoteException {
 		try {
 			com.liferay.portal.model.Group returnValue = GroupServiceUtil.updateGroup(groupId,
-					name, description, type, friendlyURL, active, serviceContext);
+					typeSettings);
 
 			return com.liferay.portal.model.GroupSoap.toSoapModel(returnValue);
 		}
@@ -334,10 +331,13 @@ public class GroupServiceSoap {
 	}
 
 	public static com.liferay.portal.model.GroupSoap updateGroup(long groupId,
-		java.lang.String typeSettings) throws RemoteException {
+		java.lang.String name, java.lang.String description, int type,
+		java.lang.String friendlyURL, boolean active,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
 			com.liferay.portal.model.Group returnValue = GroupServiceUtil.updateGroup(groupId,
-					typeSettings);
+					name, description, type, friendlyURL, active, serviceContext);
 
 			return com.liferay.portal.model.GroupSoap.toSoapModel(returnValue);
 		}

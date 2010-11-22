@@ -37,17 +37,6 @@ public class GroupServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.GroupServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static com.liferay.portal.model.Group addGroup(
-		java.lang.String name, java.lang.String description, int type,
-		java.lang.String friendlyURL, boolean active,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .addGroup(name, description, type, friendlyURL, active,
-			serviceContext);
-	}
-
 	public static com.liferay.portal.model.Group addGroup(long liveGroupId,
 		java.lang.String name, java.lang.String description, int type,
 		java.lang.String friendlyURL, boolean active,
@@ -57,6 +46,17 @@ public class GroupServiceUtil {
 		return getService()
 				   .addGroup(liveGroupId, name, description, type, friendlyURL,
 			active, serviceContext);
+	}
+
+	public static com.liferay.portal.model.Group addGroup(
+		java.lang.String name, java.lang.String description, int type,
+		java.lang.String friendlyURL, boolean active,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addGroup(name, description, type, friendlyURL, active,
+			serviceContext);
 	}
 
 	public static void addRoleGroups(long roleId, long[] groupIds)
@@ -156,6 +156,13 @@ public class GroupServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Group updateGroup(long groupId,
+		java.lang.String typeSettings)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().updateGroup(groupId, typeSettings);
+	}
+
+	public static com.liferay.portal.model.Group updateGroup(long groupId,
 		java.lang.String name, java.lang.String description, int type,
 		java.lang.String friendlyURL, boolean active,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -164,13 +171,6 @@ public class GroupServiceUtil {
 		return getService()
 				   .updateGroup(groupId, name, description, type, friendlyURL,
 			active, serviceContext);
-	}
-
-	public static com.liferay.portal.model.Group updateGroup(long groupId,
-		java.lang.String typeSettings)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateGroup(groupId, typeSettings);
 	}
 
 	public static com.liferay.portal.model.Group updateWorkflow(long groupId,

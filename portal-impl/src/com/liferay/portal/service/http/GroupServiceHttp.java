@@ -53,7 +53,7 @@ import com.liferay.portal.service.GroupServiceUtil;
  */
 public class GroupServiceHttp {
 	public static com.liferay.portal.model.Group addGroup(
-		HttpPrincipal httpPrincipal, java.lang.String name,
+		HttpPrincipal httpPrincipal, long liveGroupId, java.lang.String name,
 		java.lang.String description, int type, java.lang.String friendlyURL,
 		boolean active, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -62,8 +62,9 @@ public class GroupServiceHttp {
 			MethodKey methodKey = new MethodKey(GroupServiceUtil.class.getName(),
 					"addGroup", _addGroupParameterTypes0);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, name,
-					description, type, friendlyURL, active, serviceContext);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					liveGroupId, name, description, type, friendlyURL, active,
+					serviceContext);
 
 			Object returnObj = null;
 
@@ -92,7 +93,7 @@ public class GroupServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Group addGroup(
-		HttpPrincipal httpPrincipal, long liveGroupId, java.lang.String name,
+		HttpPrincipal httpPrincipal, java.lang.String name,
 		java.lang.String description, int type, java.lang.String friendlyURL,
 		boolean active, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -101,9 +102,8 @@ public class GroupServiceHttp {
 			MethodKey methodKey = new MethodKey(GroupServiceUtil.class.getName(),
 					"addGroup", _addGroupParameterTypes1);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					liveGroupId, name, description, type, friendlyURL, active,
-					serviceContext);
+			MethodHandler methodHandler = new MethodHandler(methodKey, name,
+					description, type, friendlyURL, active, serviceContext);
 
 			Object returnObj = null;
 
@@ -650,9 +650,7 @@ public class GroupServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Group updateGroup(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String name,
-		java.lang.String description, int type, java.lang.String friendlyURL,
-		boolean active, com.liferay.portal.service.ServiceContext serviceContext)
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String typeSettings)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -660,7 +658,7 @@ public class GroupServiceHttp {
 					"updateGroup", _updateGroupParameterTypes17);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					name, description, type, friendlyURL, active, serviceContext);
+					typeSettings);
 
 			Object returnObj = null;
 
@@ -689,7 +687,9 @@ public class GroupServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Group updateGroup(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String typeSettings)
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String name,
+		java.lang.String description, int type, java.lang.String friendlyURL,
+		boolean active, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -697,7 +697,7 @@ public class GroupServiceHttp {
 					"updateGroup", _updateGroupParameterTypes18);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					typeSettings);
+					name, description, type, friendlyURL, active, serviceContext);
 
 			Object returnObj = null;
 
@@ -765,13 +765,13 @@ public class GroupServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(GroupServiceHttp.class);
 	private static final Class<?>[] _addGroupParameterTypes0 = new Class[] {
-			java.lang.String.class, java.lang.String.class, int.class,
-			java.lang.String.class, boolean.class,
+			long.class, java.lang.String.class, java.lang.String.class,
+			int.class, java.lang.String.class, boolean.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addGroupParameterTypes1 = new Class[] {
-			long.class, java.lang.String.class, java.lang.String.class,
-			int.class, java.lang.String.class, boolean.class,
+			java.lang.String.class, java.lang.String.class, int.class,
+			java.lang.String.class, boolean.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addRoleGroupsParameterTypes2 = new Class[] {
@@ -822,12 +822,12 @@ public class GroupServiceHttp {
 			long.class, java.lang.String.class
 		};
 	private static final Class<?>[] _updateGroupParameterTypes17 = new Class[] {
+			long.class, java.lang.String.class
+		};
+	private static final Class<?>[] _updateGroupParameterTypes18 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
 			int.class, java.lang.String.class, boolean.class,
 			com.liferay.portal.service.ServiceContext.class
-		};
-	private static final Class<?>[] _updateGroupParameterTypes18 = new Class[] {
-			long.class, java.lang.String.class
 		};
 	private static final Class<?>[] _updateWorkflowParameterTypes19 = new Class[] {
 			long.class, boolean.class, int.class, java.lang.String.class
