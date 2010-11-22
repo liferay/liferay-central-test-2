@@ -35,7 +35,6 @@ if (threadId > 0) {
 	catch (Exception e) {
 	}
 
-	// for discussion messages, the root message is always empty
 	if (curParentMessage.isRoot() && curParentMessage.isDiscussion()) {
 		curParentMessage = null;
 	}
@@ -55,7 +54,6 @@ boolean pending = false;
 if (message != null) {
 	pending = message.isPending();
 }
-
 %>
 
 <liferay-ui:header
@@ -120,10 +118,6 @@ if (message != null) {
 </aui:form>
 
 <aui:script>
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && !themeDisplay.isFacebook() %>">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />body);
-	</c:if>
-
 	function <portlet:namespace />saveMessage(pending) {
 		if (!pending) {
 			document.<portlet:namespace />fm.<portlet:namespace />workflowAction.value = <%= WorkflowConstants.ACTION_PUBLISH %>;
@@ -132,6 +126,9 @@ if (message != null) {
 		submitForm(document.<portlet:namespace />fm);
 	}
 
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && !themeDisplay.isFacebook() %>">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />body);
+	</c:if>
 </aui:script>
 
 <%
