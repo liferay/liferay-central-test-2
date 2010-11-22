@@ -37,6 +37,7 @@ import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
@@ -293,7 +294,13 @@ public class EditEntryAction extends PortletAction {
 
 		portletURL.setWindowState(WindowState.MAXIMIZED);
 
-		portletURL.setParameter("struts_action", "/blogs_admin/edit_entry");
+		if (portletConfig.getPortletName().equals(PortletKeys.BLOGS_ADMIN)){
+			portletURL.setParameter("struts_action", "/blogs_admin/edit_entry");
+		}
+		else {
+			portletURL.setParameter("struts_action", "/blogs/edit_entry");
+		}
+
 		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
 		portletURL.setParameter("redirect", redirect, false);
 		portletURL.setParameter(
