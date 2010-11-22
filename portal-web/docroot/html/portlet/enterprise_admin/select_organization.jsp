@@ -88,9 +88,9 @@ if (Validator.isNotNull(target)) {
 			sb.append("javascript:opener.");
 			sb.append(renderResponse.getNamespace());
 			sb.append("selectOrganization('");
-			sb.append(organization.getGroup().getGroupId());
-			sb.append("', '");
 			sb.append(organization.getOrganizationId());
+			sb.append("', '");
+			sb.append(organization.getGroup().getGroupId());
 			sb.append("', '");
 			sb.append(UnicodeFormatter.toString(organization.getName()));
 			sb.append("', '");

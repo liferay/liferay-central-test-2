@@ -92,9 +92,9 @@ if (step == 1) {
 					sb.append("javascript:");
 					sb.append(renderResponse.getNamespace());
 					sb.append("selectOrganization('");
-					sb.append(organization.getGroup().getGroupId());
-					sb.append("', '");
 					sb.append(organization.getOrganizationId());
+					sb.append("', '");
+					sb.append(organization.getGroup().getGroupId());
 					sb.append("');");
 
 					String rowHREF = sb.toString();

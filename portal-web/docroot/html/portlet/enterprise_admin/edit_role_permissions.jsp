@@ -224,7 +224,7 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		<portlet:namespace />updateGroups(selectedGroupIds, selectedGroupNames, target);
 	}
 
-	function <portlet:namespace />selectOrganization(groupId, organizationId, name, type, target) {
+	function <portlet:namespace />selectOrganization(organizationId, groupId, name, type, target) {
 		<portlet:namespace />selectGroup(groupId, name, target);
 	}
 

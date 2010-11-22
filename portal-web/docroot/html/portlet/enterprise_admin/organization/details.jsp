@@ -331,7 +331,7 @@ if (parentOrganization != null) {
 	Liferay.provide(
 		window,
 		'<portlet:namespace />selectOrganization',
-		function(groupId, organizationId, name, type) {
+		function(organizationId, groupId, name, type) {
 			var A = AUI();
 
 			var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />parentOrganizationSearchContainer');

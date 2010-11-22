@@ -115,7 +115,7 @@ if (organizationId > 0) {
 		document.getElementById("<portlet:namespace />removeOrganizationButton").disabled = true;
 	}
 
-	function <portlet:namespace />selectOrganization(groupId, organizationId, name) {
+	function <portlet:namespace />selectOrganization(organizationId, groupId, name) {
 		document.<portlet:namespace />fm.<portlet:namespace />organizationId.value = organizationId;
 
 		var nameEl = document.getElementById("<portlet:namespace />organizationName");
