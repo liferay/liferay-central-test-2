@@ -37,7 +37,9 @@ public class ViewAction extends PortletAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		if (portletConfig.getPortletName().equals(PortletKeys.ALERTS)) {
+		String portletName = portletConfig.getPortletName();
+
+		if (portletName.equals(PortletKeys.ALERTS)) {
 			renderRequest.setAttribute(WebKeys.PORTLET_DECORATE, Boolean.FALSE);
 		}
 

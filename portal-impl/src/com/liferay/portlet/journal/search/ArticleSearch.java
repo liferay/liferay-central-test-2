@@ -78,7 +78,9 @@ public class ArticleSearch extends SearchContainer<JournalArticle> {
 			(ArticleDisplayTerms)getDisplayTerms();
 		ArticleSearchTerms searchTerms = (ArticleSearchTerms)getSearchTerms();
 
-		if (!portletConfig.getPortletName().equals(PortletKeys.JOURNAL)) {
+		String portletName = portletConfig.getPortletName();
+
+		if (!portletName.equals(PortletKeys.JOURNAL)) {
 			displayTerms.setStatus("approved");
 			searchTerms.setStatus("approved");
 		}

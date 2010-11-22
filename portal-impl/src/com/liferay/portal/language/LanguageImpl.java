@@ -594,9 +594,10 @@ public class LanguageImpl implements Language {
 
 			// LEP-7393
 
+			String portletName = portletConfig.getPortletName();
+
 			if (((value == null) || (value.equals(defaultValue))) &&
-				(portletConfig.getPortletName().equals(
-					PortletKeys.PORTLET_CONFIGURATION))) {
+				(portletName.equals(PortletKeys.PORTLET_CONFIGURATION))) {
 
 				try {
 					value = _getPortletConfigurationValue(

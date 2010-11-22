@@ -294,7 +294,9 @@ public class EditEntryAction extends PortletAction {
 
 		portletURL.setWindowState(WindowState.MAXIMIZED);
 
-		if (portletConfig.getPortletName().equals(PortletKeys.BLOGS_ADMIN)){
+		String portletName = portletConfig.getPortletName();
+
+		if (portletName.equals(PortletKeys.BLOGS_ADMIN)){
 			portletURL.setParameter("struts_action", "/blogs_admin/edit_entry");
 		}
 		else {
