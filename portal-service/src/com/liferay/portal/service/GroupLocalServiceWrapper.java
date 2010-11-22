@@ -216,16 +216,6 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 	}
 
 	public com.liferay.portal.model.Group addGroup(long userId,
-		java.lang.String className, long classPK, java.lang.String name,
-		java.lang.String description, int type, java.lang.String friendlyURL,
-		boolean active, com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _groupLocalService.addGroup(userId, className, classPK, name,
-			description, type, friendlyURL, active, serviceContext);
-	}
-
-	public com.liferay.portal.model.Group addGroup(long userId,
 		java.lang.String className, long classPK, long liveGroupId,
 		java.lang.String name, java.lang.String description, int type,
 		java.lang.String friendlyURL, boolean active,
@@ -235,6 +225,16 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 		return _groupLocalService.addGroup(userId, className, classPK,
 			liveGroupId, name, description, type, friendlyURL, active,
 			serviceContext);
+	}
+
+	public com.liferay.portal.model.Group addGroup(long userId,
+		java.lang.String className, long classPK, java.lang.String name,
+		java.lang.String description, int type, java.lang.String friendlyURL,
+		boolean active, com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _groupLocalService.addGroup(userId, className, classPK, name,
+			description, type, friendlyURL, active, serviceContext);
 	}
 
 	public void addRoleGroups(long roleId, long[] groupIds)
@@ -395,17 +395,17 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 	}
 
 	public java.util.List<com.liferay.portal.model.Group> getUserGroups(
-		long userId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _groupLocalService.getUserGroups(userId, start, end);
-	}
-
-	public java.util.List<com.liferay.portal.model.Group> getUserGroups(
 		long userId, boolean inherit, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _groupLocalService.getUserGroups(userId, inherit, start, end);
+	}
+
+	public java.util.List<com.liferay.portal.model.Group> getUserGroups(
+		long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _groupLocalService.getUserGroups(userId, start, end);
 	}
 
 	public java.util.List<com.liferay.portal.model.Group> getUserGroupsGroups(
@@ -444,15 +444,6 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 	}
 
 	public java.util.List<com.liferay.portal.model.Group> search(
-		long companyId, java.lang.String name, java.lang.String description,
-		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _groupLocalService.search(companyId, name, description, params,
-			start, end);
-	}
-
-	public java.util.List<com.liferay.portal.model.Group> search(
 		long companyId, long[] classNameIds, java.lang.String name,
 		java.lang.String description,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
@@ -463,15 +454,6 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 	}
 
 	public java.util.List<com.liferay.portal.model.Group> search(
-		long companyId, java.lang.String name, java.lang.String description,
-		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _groupLocalService.search(companyId, name, description, params,
-			start, end, obc);
-	}
-
-	public java.util.List<com.liferay.portal.model.Group> search(
 		long companyId, long[] classNameIds, java.lang.String name,
 		java.lang.String description,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
@@ -479,6 +461,24 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _groupLocalService.search(companyId, classNameIds, name,
 			description, params, start, end, obc);
+	}
+
+	public java.util.List<com.liferay.portal.model.Group> search(
+		long companyId, java.lang.String name, java.lang.String description,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _groupLocalService.search(companyId, name, description, params,
+			start, end);
+	}
+
+	public java.util.List<com.liferay.portal.model.Group> search(
+		long companyId, java.lang.String name, java.lang.String description,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _groupLocalService.search(companyId, name, description, params,
+			start, end, obc);
 	}
 
 	public int searchCount(long companyId, java.lang.String name,
@@ -520,6 +520,13 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 	}
 
 	public com.liferay.portal.model.Group updateGroup(long groupId,
+		java.lang.String typeSettings)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _groupLocalService.updateGroup(groupId, typeSettings);
+	}
+
+	public com.liferay.portal.model.Group updateGroup(long groupId,
 		java.lang.String name, java.lang.String description, int type,
 		java.lang.String friendlyURL, boolean active,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -527,13 +534,6 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 			com.liferay.portal.kernel.exception.SystemException {
 		return _groupLocalService.updateGroup(groupId, name, description, type,
 			friendlyURL, active, serviceContext);
-	}
-
-	public com.liferay.portal.model.Group updateGroup(long groupId,
-		java.lang.String typeSettings)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _groupLocalService.updateGroup(groupId, typeSettings);
 	}
 
 	public com.liferay.portal.model.Group updateWorkflow(long groupId,

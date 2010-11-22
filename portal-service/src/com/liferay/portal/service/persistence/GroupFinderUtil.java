@@ -57,17 +57,6 @@ public class GroupFinderUtil {
 		return getFinder().findBySystem(companyId);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Group> findByC_C_N_D(
-		long companyId, long[] classNameIds, java.lang.String name,
-		java.lang.String realName, java.lang.String description,
-		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder()
-				   .findByC_C_N_D(companyId, classNameIds, name, realName,
-			description, params, start, end, obc);
-	}
-
 	public static com.liferay.portal.model.Group findByC_N(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.NoSuchGroupException,
@@ -84,6 +73,17 @@ public class GroupFinderUtil {
 		return getFinder()
 				   .findByC_N_D(companyId, name, realName, description, params,
 			start, end, obc);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Group> findByC_C_N_D(
+		long companyId, long[] classNameIds, java.lang.String name,
+		java.lang.String realName, java.lang.String description,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .findByC_C_N_D(companyId, classNameIds, name, realName,
+			description, params, start, end, obc);
 	}
 
 	public static GroupFinder getFinder() {

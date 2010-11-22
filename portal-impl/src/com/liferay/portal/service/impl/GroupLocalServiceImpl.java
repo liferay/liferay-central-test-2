@@ -96,17 +96,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	public Group addGroup(
-			long userId, String className, long classPK, String name,
-			String description, int type, String friendlyURL, boolean active,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addGroup(
-			userId, className, classPK, GroupConstants.DEFAULT_LIVE_GROUP_ID,
-			name, description, type, friendlyURL, active, serviceContext);
-	}
-
-	public Group addGroup(
 			long userId, String className, long classPK, long liveGroupId,
 			String name, String description, int type, String friendlyURL,
 			boolean active, ServiceContext serviceContext)
@@ -235,6 +224,17 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		return group;
+	}
+
+	public Group addGroup(
+			long userId, String className, long classPK, String name,
+			String description, int type, String friendlyURL, boolean active,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return addGroup(
+			userId, className, classPK, GroupConstants.DEFAULT_LIVE_GROUP_ID,
+			name, description, type, friendlyURL, active, serviceContext);
 	}
 
 	public void addRoleGroups(long roleId, long[] groupIds)
@@ -675,12 +675,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			userId, inherit, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List<Group> getUserGroups(long userId, int start, int end)
-		throws PortalException, SystemException {
-
-		return getUserGroups(userId, false, start, end);
-	}
-
 	public List<Group> getUserGroups(
 			long userId, boolean inherit, int start, int end)
 		throws PortalException, SystemException {
@@ -699,6 +693,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		else {
 			return userPersistence.getGroups(userId);
 		}
+	}
+
+	public List<Group> getUserGroups(long userId, int start, int end)
+		throws PortalException, SystemException {
+
+		return getUserGroups(userId, false, start, end);
 	}
 
 	public List<Group> getUserGroupsGroups(List<UserGroup> userGroups)
@@ -786,37 +786,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	public List<Group> search(
-			long companyId, String name, String description,
-			LinkedHashMap<String, Object> params, int start, int end)
-		throws SystemException {
-
-		return search(companyId, name, description, params, start, end, null);
-	}
-
-	public List<Group> search(
 			long companyId, long[] classNameIds, String name,
 			String description,	LinkedHashMap<String, Object> params, int start,
 			int end)
 		throws SystemException {
 
-		return search(companyId, classNameIds, name, description, params, start,
-			end, null);
-	}
-
-	public List<Group> search(
-			long companyId, String name, String description,
-			LinkedHashMap<String, Object> params, int start, int end,
-			OrderByComparator obc)
-		throws SystemException {
-
-		if (obc == null) {
-			obc = new GroupNameComparator(true);
-		}
-
-		String realName = getRealName(companyId, name);
-
-		return groupFinder.findByC_N_D(
-			companyId, name, realName, description, params, start, end, obc);
+		return search(
+			companyId, classNameIds, name, description, params, start, end,
+			null);
 	}
 
 	public List<Group> search(
@@ -834,6 +811,30 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return groupFinder.findByC_C_N_D(
 			companyId, classNameIds, name, realName, description, params, start,
 			end, obc);
+	}
+
+	public List<Group> search(
+			long companyId, String name, String description,
+			LinkedHashMap<String, Object> params, int start, int end)
+		throws SystemException {
+
+		return search(companyId, name, description, params, start, end, null);
+	}
+
+	public List<Group> search(
+			long companyId, String name, String description,
+			LinkedHashMap<String, Object> params, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		if (obc == null) {
+			obc = new GroupNameComparator(true);
+		}
+
+		String realName = getRealName(companyId, name);
+
+		return groupFinder.findByC_N_D(
+			companyId, name, realName, description, params, start, end, obc);
 	}
 
 	@ThreadLocalCachable
@@ -923,6 +924,18 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return group;
 	}
 
+	public Group updateGroup(long groupId, String typeSettings)
+		throws PortalException, SystemException {
+
+		Group group = groupPersistence.findByPrimaryKey(groupId);
+
+		group.setTypeSettings(typeSettings);
+
+		groupPersistence.update(group, false);
+
+		return group;
+	}
+
 	public Group updateGroup(
 			long groupId, String name, String description, int type,
 			String friendlyURL, boolean active, ServiceContext serviceContext)
@@ -987,18 +1000,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				user.getUserId(), group, serviceContext.getAssetCategoryIds(),
 				serviceContext.getAssetTagNames());
 		}
-
-		return group;
-	}
-
-	public Group updateGroup(long groupId, String typeSettings)
-		throws PortalException, SystemException {
-
-		Group group = groupPersistence.findByPrimaryKey(groupId);
-
-		group.setTypeSettings(typeSettings);
-
-		groupPersistence.update(group, false);
 
 		return group;
 	}
@@ -1186,10 +1187,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			defaultUserId, group.getGroupId(), false, parameterMap, larFile);
 	}
 
-	protected String getFriendlyURL(String friendlyURL) {
-		return FriendlyURLNormalizer.normalize(friendlyURL);
-	}
-
 	protected String getFriendlyURL(
 			long companyId, long groupId, long classNameId, long classPK,
 			String friendlyName, String friendlyURL)
@@ -1227,6 +1224,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return friendlyURL;
 	}
 
+	protected String getFriendlyURL(String friendlyURL) {
+		return FriendlyURLNormalizer.normalize(friendlyURL);
+	}
+
 	protected String getRealName(long companyId, String name)
 		throws SystemException {
 
@@ -1257,14 +1258,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return realName;
 	}
 
-	protected boolean isStaging(ServiceContext serviceContext) {
-		if (serviceContext != null) {
-			return ParamUtil.getBoolean(serviceContext, "staging");
-		}
-
-		return false;
-	}
-
 	protected void initImportLARFile() {
 		String publicLARFileName = PropsValues.DEFAULT_GUEST_PUBLIC_LAYOUTS_LAR;
 
@@ -1287,6 +1280,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				}
 			}
 		}
+	}
+
+	protected boolean isStaging(ServiceContext serviceContext) {
+		if (serviceContext != null) {
+			return ParamUtil.getBoolean(serviceContext, "staging");
+		}
+
+		return false;
 	}
 
 	protected void unscheduleStaging(Group group) {

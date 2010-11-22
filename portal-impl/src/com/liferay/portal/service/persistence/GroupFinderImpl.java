@@ -311,6 +311,62 @@ public class GroupFinderImpl
 		}
 	}
 
+	public Group findByC_N(long companyId, String name)
+		throws NoSuchGroupException, SystemException {
+
+		name = StringUtil.lowerCase(name);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_C_N);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("Group_", GroupImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+			qPos.add(name);
+
+			List<Group> list = q.list();
+
+			if (!list.isEmpty()) {
+				return list.get(0);
+			}
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("No Group exists with the key {companyId=");
+		sb.append(companyId);
+		sb.append(", name=");
+		sb.append(name);
+		sb.append("}");
+
+		throw new NoSuchGroupException(sb.toString());
+	}
+
+	public List<Group> findByC_N_D(
+			long companyId, String name, String realName, String description,
+			LinkedHashMap<String, Object> params, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return findByC_C_N_D(
+			companyId, new long[] {PortalUtil.getClassNameId(Group.class)},
+			name, realName, description,params, start, end, obc);
+	}
+
 	public List<Group> findByC_C_N_D(
 			long companyId, long[] classNameIds, String name, String realName,
 			String description, LinkedHashMap<String, Object> params,
@@ -399,8 +455,8 @@ public class GroupFinderImpl
 
 		sql = StringUtil.replace(
 			sql, "Group_.classNameId = ?",
-			"Group_.classNameId = " +
-				StringUtil.merge(classNameIds, " OR Group_.classNameId = "));
+			"Group_.classNameId = ".concat(
+				StringUtil.merge(classNameIds, " OR Group_.classNameId = ")));
 
 		sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
@@ -462,62 +518,6 @@ public class GroupFinderImpl
 		finally {
 			closeSession(session);
 		}
-	}
-
-	public Group findByC_N(long companyId, String name)
-		throws NoSuchGroupException, SystemException {
-
-		name = StringUtil.lowerCase(name);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_C_N);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("Group_", GroupImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-			qPos.add(name);
-
-			List<Group> list = q.list();
-
-			if (!list.isEmpty()) {
-				return list.get(0);
-			}
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-
-		StringBundler sb = new StringBundler(5);
-
-		sb.append("No Group exists with the key {companyId=");
-		sb.append(companyId);
-		sb.append(", name=");
-		sb.append(name);
-		sb.append("}");
-
-		throw new NoSuchGroupException(sb.toString());
-	}
-
-	public List<Group> findByC_N_D(
-			long companyId, String name, String realName, String description,
-			LinkedHashMap<String, Object> params, int start, int end,
-			OrderByComparator obc)
-		throws SystemException {
-
-		return findByC_C_N_D(
-			companyId, new long[] {PortalUtil.getClassNameId(Group.class)},
-			name, realName, description,params, start, end, obc);
 	}
 
 	protected int countByGroupId(
