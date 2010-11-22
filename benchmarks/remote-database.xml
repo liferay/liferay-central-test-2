@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="remote-database" basedir=".">
+	<description>This script is supposed to run remotely to manipulate Liferay Portal Database</description>
+
+	<target name="extract">
+		<unzip src="database.zip" dest="."/>
+	</target>
+
+	<target name="rebuild-database">
+		<exec executable="mysql" input="database.sql" failifexecutionfails="true" failonerror="true"/>
+		<antcall target="restart-database"/>
+	</target>
+
+	<target name="restart-database">
+		<exec executable="sudo" inputstring="${database.dbms.password}">
+			<arg value="/etc/init.d/mysql"/>
+			<arg value="restart"/>
+		</exec>
+	</target>
+</project>
