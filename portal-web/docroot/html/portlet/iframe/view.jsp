@@ -145,6 +145,7 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 		}
 
 		iframe.height = height + 50;
+		iframe.width= "100%";
 
 		return true;
 	}
