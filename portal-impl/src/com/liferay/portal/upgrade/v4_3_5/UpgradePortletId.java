@@ -120,7 +120,7 @@ public class UpgradePortletId extends UpgradeProcess {
 			ps.setString(
 				1,
 				"%" + PortletConstants.LAYOUT_SEPARATOR + oldRootPortletId +
-					PortletConstants.INSTANCE_SEPARATOR + "%");
+					"%");
 
 			rs = ps.executeQuery();
 
@@ -132,26 +132,41 @@ public class UpgradePortletId extends UpgradeProcess {
 				long plid = GetterUtil.getLong(
 					oldPrimKey.substring(0, pos));
 
-				pos = oldPrimKey.indexOf(PortletConstants.INSTANCE_SEPARATOR);
-
-				String instanceId = oldPrimKey.substring(
-					pos + PortletConstants.INSTANCE_SEPARATOR.length());
+				String portletId = oldPrimKey.substring(
+					pos + PortletConstants.LAYOUT_SEPARATOR.length());
 
 				String newPrimKey =
 					plid + PortletConstants.LAYOUT_SEPARATOR +
-						newRootPortletId + PortletConstants.INSTANCE_SEPARATOR +
+						newRootPortletId;
+
+				String oldPortletId = oldRootPortletId;
+				String newPortletId = newRootPortletId ;
+
+				pos = portletId.indexOf(PortletConstants.INSTANCE_SEPARATOR);
+
+				if (pos != -1) {
+					portletId = portletId.substring(
+						0, pos);
+
+					String instanceId = oldPrimKey.substring(
+						pos + PortletConstants.INSTANCE_SEPARATOR.length());
+
+					newPrimKey  += PortletConstants.INSTANCE_SEPARATOR +
 							instanceId;
+
+					oldPortletId +=
+						PortletConstants.INSTANCE_SEPARATOR + instanceId;
+					newPortletId +=
+					 	PortletConstants.INSTANCE_SEPARATOR + instanceId;
+				}
+
+				if (!portletId.equals(oldRootPortletId)) {
+					continue;
+				}
 
 				runSQL(
 					"update Resource_ set primKey = '" + newPrimKey +
 						"' where primKey = '" + oldPrimKey + "'");
-
-				String oldPortletId =
-					oldRootPortletId + PortletConstants.INSTANCE_SEPARATOR +
-						instanceId;
-				String newPortletId =
-					newRootPortletId + PortletConstants.INSTANCE_SEPARATOR +
-						instanceId;
 
 				updateLayout(plid, oldPortletId, newPortletId);
 
