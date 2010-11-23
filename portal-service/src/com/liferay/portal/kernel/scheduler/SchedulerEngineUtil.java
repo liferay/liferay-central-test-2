@@ -174,20 +174,6 @@ public class SchedulerEngineUtil {
 		_instance._init(defaultScheduler);
 	}
 
-	public static boolean isPermanent(String destinationName, Message message) {
-		if (destinationName.equals(DestinationNames.SCHEDULER_DISPATCH)) {
-			return false;
-		}
-		else if (destinationName.equals(DestinationNames.SCHEDULER_SCRIPTING) &&
-			!message.getBoolean(SchedulerEngine.PERMANENT_FLAG)) {
-
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
 	public static void pause(String groupName) throws SchedulerException {
 		_instance._pause(groupName);
 	}
@@ -274,14 +260,6 @@ public class SchedulerEngineUtil {
 	 */
 	public static void unschedule(Trigger trigger) throws SchedulerException {
 		_instance._unschedule(trigger);
-	}
-
-	public static void update(
-			String jobName, String groupName, String description,
-			String language, String script)
-		throws SchedulerException {
-
-		_instance._update(jobName, groupName, description, language, script);
 	}
 
 	public static void update(Trigger trigger) throws SchedulerException {
@@ -757,31 +735,6 @@ public class SchedulerEngineUtil {
 	 */
 	private void _unschedule(Trigger trigger) throws SchedulerException {
 		_schedulerEngine.unschedule(trigger);
-	}
-
-	private void _update(
-			String jobName, String groupName, String description,
-			String language, String script)
-		throws SchedulerException {
-
-		SchedulerRequest schedulerRequest = _getScheduledJob(
-			jobName, groupName);
-
-		if (schedulerRequest == null) {
-			return;
-		}
-
-		Trigger trigger = schedulerRequest.getTrigger();
-
-		if (trigger == null) {
-			return;
-		}
-
-		boolean isPermanent = isPermanent(
-			schedulerRequest.getDestinationName(),
-			schedulerRequest.getMessage());
-
-		_addScriptingJob(trigger, description, language, script, isPermanent);
 	}
 
 	private void _update(Trigger trigger) throws SchedulerException {
