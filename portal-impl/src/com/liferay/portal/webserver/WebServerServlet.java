@@ -447,7 +447,7 @@ public class WebServerServlet extends HttpServlet {
 		else if (pathArray.length == 2) {
 			long groupId = GetterUtil.getLong(pathArray[0]);
 
-			return DLAppServiceUtil.getFileEntryByUuidAndGroupId(
+			return DLAppLocalServiceUtil.getFileEntryByUuidAndGroupId(
 				pathArray[1], groupId);
 		}
 		else {
