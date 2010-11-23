@@ -19,3 +19,8 @@
 .portlet-configuration fieldset {
 	margin-bottom: 5px;
 }
+
+.portlet-configuration .lfr-panel-content {
+	background-color: #F8F8F8;
+	padding: 10px;
+}
