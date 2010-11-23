@@ -375,8 +375,6 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 
 		try {
-			cleanNonpermanentJobs();
-
 			_scheduler.shutdown(false);
 		}
 		catch (Exception e) {
@@ -391,8 +389,6 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 		try {
 			_scheduler.start();
-
-			cleanNonpermanentJobs();
 		}
 		catch (Exception e) {
 			throw new SchedulerException("Unable to start scheduler", e);
@@ -477,12 +473,14 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 			JobDataMap jobDataMap = jobDetail.getJobDataMap();
 
-			if (isPermanent(jobDataMap)) {
+			String destinationName = jobDataMap.getString(DESTINATION_NAME);
+
+			if (!destinationName.equals(DestinationNames.SCHEDULER_DISPATCH)) {
 				JobState jobStateClone = (JobState)jobState.clone();
 
 				jobStateClone.clearExceptions();
 
-				jobDataMap.put(JOB_STATE, jobStateClone);
+				jobDataMap.put(SchedulerEngine.JOB_STATE, jobStateClone);
 			}
 
 			_scheduler.unscheduleJob(jobName, groupName);
@@ -540,29 +538,6 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				"Unable to update trigger for job {jobName=" + jobName +
 					", groupName=" + groupName + "}",
 				e);
-		}
-	}
-
-	protected void cleanNonpermanentJobs() throws Exception {
-		String[] groupNames = _scheduler.getJobGroupNames();
-
-		for (String groupName : groupNames) {
-			String[] jobNames = _scheduler.getJobNames(groupName);
-
-			for (String jobName : jobNames) {
-				JobDetail jobDetail = _scheduler.getJobDetail(
-					jobName, groupName);
-
-				if (jobDetail == null) {
-					continue;
-				}
-
-				JobDataMap jobDataMap = jobDetail.getJobDataMap();
-
-				if (!isPermanent(jobDataMap)) {
-					_scheduler.deleteJob(jobName, groupName);
-				}
-			}
 		}
 	}
 
@@ -707,7 +682,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 		JobDataMap jobDataMap = jobDetail.getJobDataMap();
 
-		if (!isPermanent(jobDataMap)) {
+		String destinationName = jobDataMap.getString(DESTINATION_NAME);
+
+		if (destinationName.equals(DestinationNames.SCHEDULER_DISPATCH)) {
 			return;
 		}
 
@@ -750,23 +727,6 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		SchedulerContext schedulerContext = _scheduler.getContext();
 
 		schedulerContext.put(jobDetail.getFullName(), jobState);
-	}
-
-	protected boolean isPermanent(JobDataMap jobDataMap) {
-		String destinationName = jobDataMap.getString(DESTINATION_NAME);
-		Message message = (Message)jobDataMap.get(MESSAGE);
-
-		if (destinationName.equals(DestinationNames.SCHEDULER_DISPATCH)) {
-			return false;
-		}
-		else if (destinationName.equals(DestinationNames.SCHEDULER_SCRIPTING) &&
-			!message.getBoolean(PERMANENT_FLAG)) {
-
-			return false;
-		}
-		else {
-			return true;
-		}
 	}
 
 	protected void schedule(

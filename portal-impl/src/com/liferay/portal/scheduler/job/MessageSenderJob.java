@@ -73,35 +73,30 @@ public class MessageSenderJob implements Job {
 
 		if (jobExecutionContext.getNextFireTime() == null) {
 			if (!destinationName.equals(DestinationNames.SCHEDULER_DISPATCH)) {
-				if (!destinationName.equals(
-						DestinationNames.SCHEDULER_SCRIPTING) ||
-					message.getBoolean(SchedulerEngine.PERMANENT_FLAG)) {
+				Trigger trigger = jobExecutionContext.getTrigger();
 
-					Trigger trigger = jobExecutionContext.getTrigger();
+				jobState.setTriggerTimeInfomation(
+					SchedulerEngine.END_TIME, trigger.getEndTime());
+				jobState.setTriggerTimeInfomation(
+					SchedulerEngine.FINAL_FIRE_TIME,
+					trigger.getFinalFireTime());
+				jobState.setTriggerTimeInfomation(
+					SchedulerEngine.NEXT_FIRE_TIME, null);
+				jobState.setTriggerTimeInfomation(
+					SchedulerEngine.PREVIOUS_FIRE_TIME,
+					trigger.getPreviousFireTime());
+				jobState.setTriggerTimeInfomation(
+					SchedulerEngine.START_TIME, trigger.getStartTime());
 
-					jobState.setTriggerTimeInfomation(
-						SchedulerEngine.END_TIME, trigger.getEndTime());
-					jobState.setTriggerTimeInfomation(
-						SchedulerEngine.FINAL_FIRE_TIME,
-						trigger.getFinalFireTime());
-					jobState.setTriggerTimeInfomation(
-						SchedulerEngine.NEXT_FIRE_TIME, null);
-					jobState.setTriggerTimeInfomation(
-						SchedulerEngine.PREVIOUS_FIRE_TIME,
-						trigger.getPreviousFireTime());
-					jobState.setTriggerTimeInfomation(
-						SchedulerEngine.START_TIME, trigger.getStartTime());
+				jobState.setTriggerState(TriggerState.COMPLETE);
 
-					jobState.setTriggerState(TriggerState.COMPLETE);
+				JobState jobStateClone = (JobState)jobState.clone();
 
-					JobState jobStateClone = (JobState)jobState.clone();
+				jobStateClone.clearExceptions();
 
-					jobStateClone.clearExceptions();
+				jobDataMap.put(SchedulerEngine.JOB_STATE, jobStateClone);
 
-					jobDataMap.put(SchedulerEngine.JOB_STATE, jobStateClone);
-
-					scheduler.addJob(jobDetail, true);
-				}
+				scheduler.addJob(jobDetail, true);
 			}
 			else {
 				message.put(SchedulerEngine.DISABLE, true);
