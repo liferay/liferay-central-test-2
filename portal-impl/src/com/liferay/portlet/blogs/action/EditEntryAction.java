@@ -151,51 +151,50 @@ public class EditEntryAction extends PortletAction {
 				updateRedirect = true;
 			}
 
-			if (entry != null) {
-				int workflowAction = ParamUtil.getInteger(
+			int workflowAction = ParamUtil.getInteger(
 					actionRequest, "workflowAction",
 					WorkflowConstants.ACTION_SAVE_DRAFT);
 
-				if (themeDisplay.isStateExclusive()) {
-					JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+			if ((entry != null) && (themeDisplay.isStateExclusive())) {
+				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-					jsonObject.put("entryId", entry.getEntryId());
-					jsonObject.put("redirect", redirect);
-					jsonObject.put("updateRedirect", updateRedirect);
+				jsonObject.put("entryId", entry.getEntryId());
+				jsonObject.put("redirect", redirect);
+				jsonObject.put("updateRedirect", updateRedirect);
 
-					HttpServletRequest request =
-						PortalUtil.getHttpServletRequest(actionRequest);
-					HttpServletResponse response =
-						PortalUtil.getHttpServletResponse(actionResponse);
-					InputStream inputStream = new UnsyncByteArrayInputStream(
-						jsonObject.toString().getBytes());
-					String contentType = ContentTypes.TEXT_JAVASCRIPT;
+				HttpServletRequest request =
+					PortalUtil.getHttpServletRequest(actionRequest);
+				HttpServletResponse response =
+					PortalUtil.getHttpServletResponse(actionResponse);
+				InputStream inputStream = new UnsyncByteArrayInputStream(
+					jsonObject.toString().getBytes());
+				String contentType = ContentTypes.TEXT_JAVASCRIPT;
 
-					ServletResponseUtil.sendFile(
-						request, response, null, inputStream, contentType);
+				ServletResponseUtil.sendFile(
+					request, response, null, inputStream, contentType);
 
-					setForward(actionRequest, ActionConstants.COMMON_NULL);
-				}
-				else if (workflowAction ==
-							WorkflowConstants.ACTION_SAVE_DRAFT) {
+				setForward(actionRequest, ActionConstants.COMMON_NULL);
+			}
+			else if ((entry != null) &&
+					 (workflowAction ==
+						WorkflowConstants.ACTION_SAVE_DRAFT)) {
 
-					redirect = getSaveAndContinueRedirect(
-						portletConfig, actionRequest, entry, redirect);
+				redirect = getSaveAndContinueRedirect(
+					portletConfig, actionRequest, entry, redirect);
+
+				sendRedirect(actionRequest, actionResponse, redirect);
+			}
+			else {
+				LayoutTypePortlet layoutTypePortlet =
+					themeDisplay.getLayoutTypePortlet();
+
+				if (layoutTypePortlet.hasPortletId(
+						portletConfig.getPortletName())) {
 
 					sendRedirect(actionRequest, actionResponse, redirect);
 				}
 				else {
-					LayoutTypePortlet layoutTypePortlet =
-						themeDisplay.getLayoutTypePortlet();
-
-					if (layoutTypePortlet.hasPortletId(
-							portletConfig.getPortletName())) {
-
-						sendRedirect(actionRequest, actionResponse, redirect);
-					}
-					else {
-						actionResponse.sendRedirect(redirect);
-					}
+					actionResponse.sendRedirect(redirect);
 				}
 			}
 		}
