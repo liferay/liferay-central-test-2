@@ -19,23 +19,23 @@ import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * The utility for the d l file entry remote service. This utility wraps {@link com.liferay.portlet.documentlibrary.service.impl.DLFileEntryServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
+ * The utility for the d l repository remote service. This utility wraps {@link com.liferay.portlet.documentlibrary.service.impl.DLRepositoryServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
  *
  * <p>
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see DLFileEntryService
- * @see com.liferay.portlet.documentlibrary.service.base.DLFileEntryServiceBaseImpl
- * @see com.liferay.portlet.documentlibrary.service.impl.DLFileEntryServiceImpl
+ * @see DLRepositoryService
+ * @see com.liferay.portlet.documentlibrary.service.base.DLRepositoryServiceBaseImpl
+ * @see com.liferay.portlet.documentlibrary.service.impl.DLRepositoryServiceImpl
  * @generated
  */
-public class DLFileEntryServiceUtil {
+public class DLRepositoryServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.documentlibrary.service.impl.DLFileEntryServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.documentlibrary.service.impl.DLRepositoryServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		long groupId, long folderId, java.lang.String name,
@@ -330,27 +330,251 @@ public class DLFileEntryServiceUtil {
 				   .verifyFileEntryLock(groupId, folderId, name, lockUuid);
 	}
 
-	public static DLFileEntryService getService() {
-		if (_service == null) {
-			_service = (DLFileEntryService)PortalBeanLocatorUtil.locate(DLFileEntryService.class.getName());
+	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
+		long groupId, long parentFolderId, java.lang.String name,
+		java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addFolder(groupId, parentFolderId, name, description,
+			serviceContext);
+	}
 
-			ReferenceRegistry.registerReference(DLFileEntryServiceUtil.class,
+	public static com.liferay.portlet.documentlibrary.model.DLFolder copyFolder(
+		long groupId, long sourceFolderId, long parentFolderId,
+		java.lang.String name, java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException,
+			java.rmi.RemoteException {
+		return getService()
+				   .copyFolder(groupId, sourceFolderId, parentFolderId, name,
+			description, serviceContext);
+	}
+
+	public static void deleteFolder(long folderId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException,
+			java.rmi.RemoteException {
+		getService().deleteFolder(folderId);
+	}
+
+	public static void deleteFolder(long groupId, long parentFolderId,
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException,
+			java.rmi.RemoteException {
+		getService().deleteFolder(groupId, parentFolderId, name);
+	}
+
+	public static java.util.List<java.lang.Object> getFileEntriesAndFileShortcuts(
+		long groupId, java.util.List<java.lang.Long> folderIds, int status,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getFileEntriesAndFileShortcuts(groupId, folderIds, status,
+			start, end);
+	}
+
+	public static java.util.List<java.lang.Object> getFileEntriesAndFileShortcuts(
+		long groupId, long folderId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getFileEntriesAndFileShortcuts(groupId, folderId, status,
+			start, end);
+	}
+
+	public static int getFileEntriesAndFileShortcutsCount(long groupId,
+		java.util.List<java.lang.Long> folderIds, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getFileEntriesAndFileShortcutsCount(groupId, folderIds,
+			status);
+	}
+
+	public static int getFileEntriesAndFileShortcutsCount(long groupId,
+		long folderId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getFileEntriesAndFileShortcutsCount(groupId, folderId,
+			status);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
+		long folderId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFolder(folderId);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
+		long groupId, long parentFolderId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFolder(groupId, parentFolderId, name);
+	}
+
+	public static long getFolderId(long groupId, long parentFolderId,
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFolderId(groupId, parentFolderId, name);
+	}
+
+	public static long[] getFolderIds(long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFolderIds(groupId, folderId);
+	}
+
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
+		long groupId, long parentFolderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFolders(groupId, parentFolderId);
+	}
+
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
+		long groupId, long parentFolderId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFolders(groupId, parentFolderId, start, end);
+	}
+
+	public static java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
+		long groupId, java.util.List<java.lang.Long> folderIds, int status,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getFoldersAndFileEntriesAndFileShortcuts(groupId,
+			folderIds, status, start, end);
+	}
+
+	public static java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
+		long groupId, long folderId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getFoldersAndFileEntriesAndFileShortcuts(groupId, folderId,
+			status, start, end);
+	}
+
+	public static int getFoldersAndFileEntriesAndFileShortcutsCount(
+		long groupId, java.util.List<java.lang.Long> folderIds, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getFoldersAndFileEntriesAndFileShortcutsCount(groupId,
+			folderIds, status);
+	}
+
+	public static int getFoldersAndFileEntriesAndFileShortcutsCount(
+		long groupId, long folderId, int status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getFoldersAndFileEntriesAndFileShortcutsCount(groupId,
+			folderId, status);
+	}
+
+	public static int getFoldersCount(long groupId, long parentFolderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFoldersCount(groupId, parentFolderId);
+	}
+
+	public static void getSubfolderIds(
+		java.util.List<java.lang.Long> folderIds, long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().getSubfolderIds(folderIds, groupId, folderId);
+	}
+
+	public static void getSubfolderIds(
+		java.util.List<java.lang.Long> folderIds, long groupId, long folderId,
+		boolean recurse)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().getSubfolderIds(folderIds, groupId, folderId, recurse);
+	}
+
+	public static boolean hasInheritableLock(long folderId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().hasInheritableLock(folderId);
+	}
+
+	public static com.liferay.portal.model.Lock lockFolder(long folderId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException,
+			java.rmi.RemoteException {
+		return getService().lockFolder(folderId);
+	}
+
+	public static com.liferay.portal.model.Lock lockFolder(long folderId,
+		java.lang.String owner, boolean inheritable, long expirationTime)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException,
+			java.rmi.RemoteException {
+		return getService()
+				   .lockFolder(folderId, owner, inheritable, expirationTime);
+	}
+
+	public static com.liferay.portal.model.Lock refreshFolderLock(
+		java.lang.String lockUuid, long expirationTime)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().refreshFolderLock(lockUuid, expirationTime);
+	}
+
+	public static void unlockFolder(long groupId, long folderId,
+		java.lang.String lockUuid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().unlockFolder(groupId, folderId, lockUuid);
+	}
+
+	public static void unlockFolder(long groupId, long parentFolderId,
+		java.lang.String name, java.lang.String lockUuid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().unlockFolder(groupId, parentFolderId, name, lockUuid);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
+		long folderId, long parentFolderId, java.lang.String name,
+		java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException,
+			java.rmi.RemoteException {
+		return getService()
+				   .updateFolder(folderId, parentFolderId, name, description,
+			serviceContext);
+	}
+
+	public static boolean verifyInheritableLock(long folderId,
+		java.lang.String lockUuid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().verifyInheritableLock(folderId, lockUuid);
+	}
+
+	public static DLRepositoryService getService() {
+		if (_service == null) {
+			_service = (DLRepositoryService)PortalBeanLocatorUtil.locate(DLRepositoryService.class.getName());
+
+			ReferenceRegistry.registerReference(DLRepositoryServiceUtil.class,
 				"_service");
-			MethodCache.remove(DLFileEntryService.class);
+			MethodCache.remove(DLRepositoryService.class);
 		}
 
 		return _service;
 	}
 
-	public void setService(DLFileEntryService service) {
-		MethodCache.remove(DLFileEntryService.class);
+	public void setService(DLRepositoryService service) {
+		MethodCache.remove(DLRepositoryService.class);
 
 		_service = service;
 
-		ReferenceRegistry.registerReference(DLFileEntryServiceUtil.class,
+		ReferenceRegistry.registerReference(DLRepositoryServiceUtil.class,
 			"_service");
-		MethodCache.remove(DLFileEntryService.class);
+		MethodCache.remove(DLRepositoryService.class);
 	}
 
-	private static DLFileEntryService _service;
+	private static DLRepositoryService _service;
 }

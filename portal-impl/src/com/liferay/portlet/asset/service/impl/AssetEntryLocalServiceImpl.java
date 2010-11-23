@@ -729,7 +729,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 				folderId = folder.getFolderId();
 			}
 
-			DLFileEntry fileEntry = dlFileEntryLocalService.getFileEntry(
+			DLFileEntry fileEntry = dlRepositoryLocalService.getFileEntry(
 				groupId, folderId, name);
 
 			long classNameId = PortalUtil.getClassNameId(

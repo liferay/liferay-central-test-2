@@ -27,8 +27,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
 
 /**
  * @author Brian Wing Shun Chan
@@ -97,7 +96,7 @@ public class DLFileEntryPermission {
 			if (fileEntry.getFolderId() !=
 					DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
-				DLFolder folder = DLFolderLocalServiceUtil.getFolder(
+				DLFolder folder = DLRepositoryLocalServiceUtil.getFolder(
 					fileEntry.getFolderId());
 
 				if (!DLFolderPermission.contains(
@@ -127,7 +126,7 @@ public class DLFileEntryPermission {
 			String name, String actionId)
 		throws PortalException, SystemException {
 
-		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+		DLFileEntry fileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
 			groupId, folderId, name);
 
 		return contains(permissionChecker, fileEntry, actionId);
@@ -138,7 +137,7 @@ public class DLFileEntryPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+		DLFileEntry fileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
 			fileEntryId);
 
 		return contains(permissionChecker, fileEntry, actionId);

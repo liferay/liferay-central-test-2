@@ -626,7 +626,17 @@ Liferay.Service.registerClass(
 );
 
 Liferay.Service.registerClass(
-	Liferay.Service.DL, "DLFileEntry",
+	Liferay.Service.DL, "DLFileShortcut",
+	{
+		addFileShortcut: true,
+		deleteFileShortcut: true,
+		getFileShortcut: true,
+		updateFileShortcut: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.DL, "DLRepository",
 	{
 		deleteFileEntry: true,
 		deleteFileEntryByTitle: true,
@@ -645,23 +655,7 @@ Liferay.Service.registerClass(
 		refreshFileEntryLock: true,
 		unlockFileEntry: true,
 		updateFileVersionDescription: true,
-		verifyFileEntryLock: true
-	}
-);
-
-Liferay.Service.registerClass(
-	Liferay.Service.DL, "DLFileShortcut",
-	{
-		addFileShortcut: true,
-		deleteFileShortcut: true,
-		getFileShortcut: true,
-		updateFileShortcut: true
-	}
-);
-
-Liferay.Service.registerClass(
-	Liferay.Service.DL, "DLFolder",
-	{
+		verifyFileEntryLock: true,
 		addFolder: true,
 		copyFolder: true,
 		deleteFolder: true,

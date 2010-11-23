@@ -38,7 +38,7 @@ import java.util.List;
 /**
  * @author Alexander Chow
  */
-public class DLFileEntryServiceTest extends BaseServiceTestCase {
+public class DLAppServiceTest extends BaseServiceTestCase {
 
 	public void setUp() throws Exception {
 		super.setUp();

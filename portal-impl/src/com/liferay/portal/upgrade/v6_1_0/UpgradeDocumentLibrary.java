@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.upgrade.v6_1_0.util.DLFileVersionTable;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLRepositoryServiceUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -61,7 +61,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				long toGroupId = groupId;
 
 				if (toFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-					DLFolder folder = DLFolderLocalServiceUtil.getFolder(
+					DLFolder folder = DLRepositoryServiceUtil.getFolder(
 						toFolderId);
 
 					toGroupId = folder.getGroupId();

@@ -87,6 +87,7 @@
 	<import class="com.liferay.portlet.documentlibrary.model.DLFileShortcut" />
 	<import class="com.liferay.portlet.documentlibrary.model.DLFileVersion" />
 	<import class="com.liferay.portlet.documentlibrary.model.DLFolder" />
+	<import class="com.liferay.portlet.documentlibrary.model.DLRepository" />
 	<import class="com.liferay.portlet.expando.model.ExpandoColumn" />
 	<import class="com.liferay.portlet.expando.model.ExpandoRow" />
 	<import class="com.liferay.portlet.expando.model.ExpandoTable" />

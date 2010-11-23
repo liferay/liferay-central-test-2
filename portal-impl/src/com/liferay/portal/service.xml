@@ -396,7 +396,7 @@
 		<reference package-path="com.liferay.portlet.blogs" entity="BlogsStatsUser" />
 		<reference package-path="com.liferay.portlet.bookmarks" entity="BookmarksFolder" />
 		<reference package-path="com.liferay.portlet.calendar" entity="CalEvent" />
-		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFolder" />
+		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLRepository" />
 		<reference package-path="com.liferay.portlet.imagegallery" entity="IGFolder" />
 		<reference package-path="com.liferay.portlet.journal" entity="JournalArticle" />
 		<reference package-path="com.liferay.portlet.journal" entity="JournalStructure" />

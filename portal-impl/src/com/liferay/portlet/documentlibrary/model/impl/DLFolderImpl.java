@@ -22,7 +22,7 @@ import com.liferay.portal.service.LockLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +63,7 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 			return null;
 		}
 
-		return DLFolderLocalServiceUtil.getFolder(getParentFolderId());
+		return DLRepositoryLocalServiceUtil.getFolder(getParentFolderId());
 	}
 
 	public String getPath() throws PortalException, SystemException {
@@ -78,7 +78,7 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 			if (folder.getParentFolderId() !=
 					DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
-				folder = DLFolderLocalServiceUtil.getFolder(
+				folder = DLRepositoryLocalServiceUtil.getFolder(
 					folder.getParentFolderId());
 			}
 			else {

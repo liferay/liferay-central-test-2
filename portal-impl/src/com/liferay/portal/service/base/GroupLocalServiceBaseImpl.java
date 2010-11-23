@@ -205,10 +205,8 @@ import com.liferay.portlet.calendar.service.CalEventLocalService;
 import com.liferay.portlet.calendar.service.CalEventService;
 import com.liferay.portlet.calendar.service.persistence.CalEventFinder;
 import com.liferay.portlet.calendar.service.persistence.CalEventPersistence;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
-import com.liferay.portlet.documentlibrary.service.DLFolderService;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
+import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalService;
+import com.liferay.portlet.documentlibrary.service.DLRepositoryService;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalService;
 import com.liferay.portlet.imagegallery.service.IGFolderService;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence;
@@ -3816,76 +3814,40 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService {
 	}
 
 	/**
-	 * Gets the d l folder local service.
+	 * Gets the d l repository local service.
 	 *
-	 * @return the d l folder local service
+	 * @return the d l repository local service
 	 */
-	public DLFolderLocalService getDLFolderLocalService() {
-		return dlFolderLocalService;
+	public DLRepositoryLocalService getDLRepositoryLocalService() {
+		return dlRepositoryLocalService;
 	}
 
 	/**
-	 * Sets the d l folder local service.
+	 * Sets the d l repository local service.
 	 *
-	 * @param dlFolderLocalService the d l folder local service
+	 * @param dlRepositoryLocalService the d l repository local service
 	 */
-	public void setDLFolderLocalService(
-		DLFolderLocalService dlFolderLocalService) {
-		this.dlFolderLocalService = dlFolderLocalService;
+	public void setDLRepositoryLocalService(
+		DLRepositoryLocalService dlRepositoryLocalService) {
+		this.dlRepositoryLocalService = dlRepositoryLocalService;
 	}
 
 	/**
-	 * Gets the d l folder remote service.
+	 * Gets the d l repository remote service.
 	 *
-	 * @return the d l folder remote service
+	 * @return the d l repository remote service
 	 */
-	public DLFolderService getDLFolderService() {
-		return dlFolderService;
+	public DLRepositoryService getDLRepositoryService() {
+		return dlRepositoryService;
 	}
 
 	/**
-	 * Sets the d l folder remote service.
+	 * Sets the d l repository remote service.
 	 *
-	 * @param dlFolderService the d l folder remote service
+	 * @param dlRepositoryService the d l repository remote service
 	 */
-	public void setDLFolderService(DLFolderService dlFolderService) {
-		this.dlFolderService = dlFolderService;
-	}
-
-	/**
-	 * Gets the d l folder persistence.
-	 *
-	 * @return the d l folder persistence
-	 */
-	public DLFolderPersistence getDLFolderPersistence() {
-		return dlFolderPersistence;
-	}
-
-	/**
-	 * Sets the d l folder persistence.
-	 *
-	 * @param dlFolderPersistence the d l folder persistence
-	 */
-	public void setDLFolderPersistence(DLFolderPersistence dlFolderPersistence) {
-		this.dlFolderPersistence = dlFolderPersistence;
-	}
-
-	/**
-	 * Gets the d l folder finder.
-	 *
-	 * @return the d l folder finder
-	 */
-	public DLFolderFinder getDLFolderFinder() {
-		return dlFolderFinder;
-	}
-
-	/**
-	 * Sets the d l folder finder.
-	 *
-	 * @param dlFolderFinder the d l folder finder
-	 */
-	public void setDLFolderFinder(DLFolderFinder dlFolderFinder) {
-		this.dlFolderFinder = dlFolderFinder;
+	public void setDLRepositoryService(DLRepositoryService dlRepositoryService) {
+		this.dlRepositoryService = dlRepositoryService;
 	}
 
 	/**
@@ -5265,14 +5227,10 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService {
 	protected CalEventPersistence calEventPersistence;
 	@BeanReference(type = CalEventFinder.class)
 	protected CalEventFinder calEventFinder;
-	@BeanReference(type = DLFolderLocalService.class)
-	protected DLFolderLocalService dlFolderLocalService;
-	@BeanReference(type = DLFolderService.class)
-	protected DLFolderService dlFolderService;
-	@BeanReference(type = DLFolderPersistence.class)
-	protected DLFolderPersistence dlFolderPersistence;
-	@BeanReference(type = DLFolderFinder.class)
-	protected DLFolderFinder dlFolderFinder;
+	@BeanReference(type = DLRepositoryLocalService.class)
+	protected DLRepositoryLocalService dlRepositoryLocalService;
+	@BeanReference(type = DLRepositoryService.class)
+	protected DLRepositoryService dlRepositoryService;
 	@BeanReference(type = IGFolderLocalService.class)
 	protected IGFolderLocalService igFolderLocalService;
 	@BeanReference(type = IGFolderService.class)

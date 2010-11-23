@@ -27,7 +27,7 @@
 
 		<tx-required>getFileAsStream</tx-required>
 	</entity>
-	<entity name="DLFileEntry" uuid="true" local-service="true" remote-service="true">
+	<entity name="DLFileEntry" uuid="true" local-service="false" remote-service="false">
 
 		<!-- PK fields -->
 
@@ -97,26 +97,6 @@
 			<finder-column name="folderId" />
 			<finder-column name="title" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.documentlibrary" entity="DL" />
-		<reference package-path="com.liferay.portal" entity="Lock" />
-		<reference package-path="com.liferay.portal" entity="WebDAVProps" />
-		<reference package-path="com.liferay.portal" entity="WorkflowInstanceLink" />
-		<reference package-path="com.liferay.portlet.asset" entity="AssetCategory" />
-		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
-		<reference package-path="com.liferay.portlet.asset" entity="AssetTag" />
-		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
-		<reference package-path="com.liferay.portlet.messageboards" entity="MBDiscussion" />
-		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
-		<reference package-path="com.liferay.portlet.ratings" entity="RatingsEntry" />
-		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
-		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
-
-		<!-- Transactions -->
-
-		<tx-required>getFileAsStream</tx-required>
 	</entity>
 	<entity name="DLFileRank" local-service="true" remote-service="false">
 
@@ -280,12 +260,8 @@
 			<finder-column name="name" />
 			<finder-column name="status" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 	</entity>
-	<entity name="DLFolder" uuid="true" local-service="true" remote-service="true">
+	<entity name="DLFolder" uuid="true" local-service="false" remote-service="false">
 
 		<!-- PK fields -->
 
@@ -338,6 +314,8 @@
 			<finder-column name="parentFolderId" />
 			<finder-column name="name" />
 		</finder>
+	</entity>
+	<entity name="DLRepository" local-service="true" remote-service="true">
 
 		<!-- References -->
 
@@ -345,7 +323,20 @@
 		<reference package-path="com.liferay.portal" entity="Group" />
 		<reference package-path="com.liferay.portal" entity="Lock" />
 		<reference package-path="com.liferay.portal" entity="WebDAVProps" />
+		<reference package-path="com.liferay.portal" entity="WorkflowInstanceLink" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetCategory" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetTag" />
 		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
+		<reference package-path="com.liferay.portlet.messageboards" entity="MBDiscussion" />
+		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
+		<reference package-path="com.liferay.portlet.ratings" entity="RatingsEntry" />
+		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
+		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
+
+		<!-- Transactions -->
+
+		<tx-required>getFileAsStream</tx-required>
 	</entity>
 	<exceptions>
 		<exception>DuplicateFolderName</exception>

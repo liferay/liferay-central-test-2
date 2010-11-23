@@ -29,8 +29,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 
 import java.io.IOException;
@@ -94,21 +93,21 @@ public class DLFileEntryImpl
 	public DLFileVersion getFileVersion()
 		throws PortalException, SystemException {
 
-		return DLFileEntryLocalServiceUtil.getFileVersion(
+		return DLRepositoryLocalServiceUtil.getFileVersion(
 			getGroupId(), getFolderId(), getName(), getVersion());
 	}
 
 	public DLFileVersion getFileVersion(String version)
 		throws PortalException, SystemException {
 
-		return DLFileEntryLocalServiceUtil.getFileVersion(
+		return DLRepositoryLocalServiceUtil.getFileVersion(
 			getGroupId(), getFolderId(), getName(), version);
 	}
 
 	public List<DLFileVersion> getFileVersions(int status)
 		throws SystemException {
 
-		return DLFileEntryLocalServiceUtil.getFileVersions(
+		return DLRepositoryLocalServiceUtil.getFileVersions(
 			getGroupId(), getFolderId(), getName(), status);
 	}
 
@@ -117,7 +116,7 @@ public class DLFileEntryImpl
 
 		if (getFolderId() > 0) {
 			try {
-				folder = DLFolderLocalServiceUtil.getFolder(getFolderId());
+				folder = DLRepositoryLocalServiceUtil.getFolder(getFolderId());
 			}
 			catch (Exception e) {
 				folder = new DLFolderImpl();
@@ -139,7 +138,7 @@ public class DLFileEntryImpl
 	public DLFileVersion getLatestFileVersion()
 		throws PortalException, SystemException {
 
-		return DLFileEntryLocalServiceUtil.getLatestFileVersion(
+		return DLRepositoryLocalServiceUtil.getLatestFileVersion(
 			getGroupId(), getFolderId(), getName());
 	}
 

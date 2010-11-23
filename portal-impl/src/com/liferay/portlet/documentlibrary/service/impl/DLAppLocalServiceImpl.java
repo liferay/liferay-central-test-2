@@ -41,7 +41,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return dlFileEntryLocalService.addFileEntry(
+		return dlRepositoryLocalService.addFileEntry(
 			userId, groupId, folderId, name, title, description, changeLog,
 			extraSettings, bytes, serviceContext);
 	}
@@ -52,7 +52,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return dlFileEntryLocalService.addFileEntry(
+		return dlRepositoryLocalService.addFileEntry(
 			userId, groupId, folderId, name, title, description, changeLog,
 			extraSettings, file, serviceContext);
 	}
@@ -63,7 +63,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			InputStream is, long size, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return dlFileEntryLocalService.addFileEntry(
+		return dlRepositoryLocalService.addFileEntry(
 			userId, groupId, folderId, name, title, description, changeLog,
 			extraSettings, is, size, serviceContext);
 	}
@@ -92,7 +92,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return dlFolderLocalService.addFolder(
+		return dlRepositoryLocalService.addFolder(
 			userId, groupId, parentFolderId, name, description, serviceContext);
 	}
 
@@ -103,7 +103,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return dlFileEntryLocalService.addOrOverwriteFileEntry(
+		return dlRepositoryLocalService.addOrOverwriteFileEntry(
 			userId, groupId, folderId, name, sourceName, title, description,
 			changeLog, extraSettings, file, serviceContext);
 	}
@@ -111,27 +111,27 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	public void deleteFileEntries(long groupId, long folderId)
 		throws PortalException, SystemException {
 
-		dlFileEntryLocalService.deleteFileEntries(groupId, folderId);
+		dlRepositoryLocalService.deleteFileEntries(groupId, folderId);
 	}
 
 	public void deleteFileEntry(DLFileEntry fileEntry)
 		throws PortalException, SystemException {
 
-		dlFileEntryLocalService.deleteFileEntry(fileEntry);
+		dlRepositoryLocalService.deleteFileEntry(fileEntry);
 	}
 
 	public void deleteFileEntry(
 			long groupId, long folderId, String name)
 		throws PortalException, SystemException {
 
-		dlFileEntryLocalService.deleteFileEntry(groupId, folderId, name);
+		dlRepositoryLocalService.deleteFileEntry(groupId, folderId, name);
 	}
 
 	public void deleteFileEntry(
 			long groupId, long folderId, String name, String version)
 		throws PortalException, SystemException {
 
-		dlFileEntryLocalService.deleteFileEntry(
+		dlRepositoryLocalService.deleteFileEntry(
 			groupId, folderId, name, version);
 	}
 
@@ -168,26 +168,26 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	public void deleteFolder(DLFolder folder)
 		throws PortalException, SystemException {
 
-		dlFolderLocalService.deleteFolder(folder);
+		dlRepositoryLocalService.deleteFolder(folder);
 	}
 
 	public void deleteFolder(long folderId)
 		throws PortalException, SystemException {
 
-		dlFolderLocalService.deleteFolder(folderId);
+		dlRepositoryLocalService.deleteFolder(folderId);
 	}
 
 	public void deleteFolders(long groupId)
 		throws PortalException, SystemException {
 
-		dlFolderLocalService.deleteFolders(groupId);
+		dlRepositoryLocalService.deleteFolders(groupId);
 	}
 
 	public List<DLFileEntry> getCompanyFileEntries(
 			long companyId, int start, int end)
 		throws SystemException {
 
-		return dlFileEntryLocalService.getCompanyFileEntries(
+		return dlRepositoryLocalService.getCompanyFileEntries(
 			companyId, start, end);
 	}
 
@@ -195,36 +195,36 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long companyId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return dlFileEntryLocalService.getCompanyFileEntries(
+		return dlRepositoryLocalService.getCompanyFileEntries(
 			companyId, start, end, obc);
 	}
 
 	public int getCompanyFileEntriesCount(long companyId)
 		throws SystemException {
 
-		return dlFileEntryLocalService.getCompanyFileEntriesCount(companyId);
+		return dlRepositoryLocalService.getCompanyFileEntriesCount(companyId);
 	}
 
 	public List<DLFolder> getCompanyFolders(long companyId, int start, int end)
 		throws SystemException {
 
-		return dlFolderLocalService.getCompanyFolders(companyId, start, end);
+		return dlRepositoryLocalService.getCompanyFolders(companyId, start, end);
 	}
 
 	public int getCompanyFoldersCount(long companyId)
 		throws SystemException {
 
-		return dlFolderLocalService.getCompanyFoldersCount(companyId);
+		return dlRepositoryLocalService.getCompanyFoldersCount(companyId);
 	}
 
 	public List<DLFileEntry> getDLFileEntries(int start, int end)
 		throws SystemException {
 
-		return dlFileEntryLocalService.getDLFileEntries(start, end);
+		return dlRepositoryLocalService.getDLFileEntries(start, end);
 	}
 
 	public int getDLFileEntriesCount() throws SystemException {
-		return dlFileEntryLocalService.getDLFileEntriesCount();
+		return dlRepositoryLocalService.getDLFileEntriesCount();
 	}
 
 	public InputStream getFileAsStream(
@@ -232,7 +232,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			String name)
 		throws PortalException, SystemException {
 
-		return dlFileEntryLocalService.getFileAsStream(
+		return dlRepositoryLocalService.getFileAsStream(
 			companyId, userId, groupId, folderId, name);
 	}
 
@@ -241,21 +241,21 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			String name, String version)
 		throws PortalException, SystemException {
 
-		return dlFileEntryLocalService.getFileAsStream(
+		return dlRepositoryLocalService.getFileAsStream(
 			companyId, userId, groupId, folderId, name, version);
 	}
 
 	public List<DLFileEntry> getFileEntries(long groupId, long folderId)
 		throws SystemException {
 
-		return dlFileEntryLocalService.getFileEntries(groupId, folderId);
+		return dlRepositoryLocalService.getFileEntries(groupId, folderId);
 	}
 
 	public List<DLFileEntry> getFileEntries(
 			long groupId, long folderId, int start, int end)
 		throws SystemException {
 
-		return dlFileEntryLocalService.getFileEntries(
+		return dlRepositoryLocalService.getFileEntries(
 			groupId, folderId, start, end);
 	}
 
@@ -264,7 +264,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 
-		return dlFileEntryLocalService.getFileEntries(
+		return dlRepositoryLocalService.getFileEntries(
 				groupId, folderId, start, end, obc);
 	}
 
@@ -272,7 +272,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long groupId, List<Long> folderIds, int status, int start, int end)
 		throws SystemException {
 
-		return dlFolderLocalService.getFileEntriesAndFileShortcuts(
+		return dlRepositoryLocalService.getFileEntriesAndFileShortcuts(
 			groupId, folderIds, status, start, end);
 	}
 
@@ -280,7 +280,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long groupId, long folderId, int status, int start, int end)
 		throws SystemException {
 
-		return dlFolderLocalService.getFileEntriesAndFileShortcuts(
+		return dlRepositoryLocalService.getFileEntriesAndFileShortcuts(
 			groupId, folderId, status, start, end);
 	}
 
@@ -288,7 +288,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long groupId, List<Long> folderIds, int status)
 		throws SystemException {
 
-		return dlFolderLocalService.getFileEntriesAndFileShortcutsCount(
+		return dlRepositoryLocalService.getFileEntriesAndFileShortcutsCount(
 			groupId, folderIds, status);
 	}
 
@@ -296,33 +296,33 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long groupId, long folderId, int status)
 		throws SystemException {
 
-		return dlFolderLocalService.getFileEntriesAndFileShortcutsCount(
+		return dlRepositoryLocalService.getFileEntriesAndFileShortcutsCount(
 			groupId, folderId, status);
 	}
 
 	public int getFileEntriesCount(long groupId, long folderId)
 		throws SystemException {
 
-		return dlFileEntryLocalService.getFileEntriesCount(groupId, folderId);
+		return dlRepositoryLocalService.getFileEntriesCount(groupId, folderId);
 	}
 
 	public DLFileEntry getFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 
-		return dlFileEntryLocalService.getFileEntry(fileEntryId);
+		return dlRepositoryLocalService.getFileEntry(fileEntryId);
 	}
 
 	public DLFileEntry getFileEntry(long groupId, long folderId, String name)
 		throws PortalException, SystemException {
 
-		return dlFileEntryLocalService.getFileEntry(groupId, folderId, name);
+		return dlRepositoryLocalService.getFileEntry(groupId, folderId, name);
 	}
 
 	public DLFileEntry getFileEntryByTitle(
 			long groupId, long folderId, String title)
 		throws PortalException, SystemException {
 
-		return dlFileEntryLocalService.getFileEntryByTitle(
+		return dlRepositoryLocalService.getFileEntryByTitle(
 			groupId, folderId, title);
 	}
 
@@ -330,7 +330,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			String uuid, long groupId)
 		throws PortalException, SystemException {
 
-		return dlFileEntryLocalService.getFileEntryByUuidAndGroupId(
+		return dlRepositoryLocalService.getFileEntryByUuidAndGroupId(
 			uuid, groupId);
 	}
 
@@ -356,14 +356,14 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	public DLFileVersion getFileVersion(long fileVersionId)
 		throws PortalException, SystemException {
 
-		return dlFileEntryLocalService.getFileVersion(fileVersionId);
+		return dlRepositoryLocalService.getFileVersion(fileVersionId);
 	}
 
 	public DLFileVersion getFileVersion(
 			long groupId, long folderId, String name, String version)
 		throws PortalException, SystemException {
 
-		return dlFileEntryLocalService.getFileVersion(
+		return dlRepositoryLocalService.getFileVersion(
 			groupId, folderId, name, version);
 	}
 
@@ -371,38 +371,38 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		long groupId, long folderId, String name, int status)
 		throws SystemException {
 
-		return dlFileEntryLocalService.getFileVersions(
+		return dlRepositoryLocalService.getFileVersions(
 			groupId, folderId, name, status);
 	}
 
 	public DLFolder getFolder(long folderId)
 		throws PortalException, SystemException {
 
-		return dlFolderLocalService.getFolder(folderId);
+		return dlRepositoryLocalService.getFolder(folderId);
 	}
 
 	public DLFolder getFolder(
 		long groupId, long parentFolderId, String name)
 		throws PortalException, SystemException {
 
-		return dlFolderLocalService.getFolder(groupId, parentFolderId, name);
+		return dlRepositoryLocalService.getFolder(groupId, parentFolderId, name);
 	}
 
 	public List<DLFolder> getFolders(long companyId) throws SystemException {
-		return dlFolderLocalService.getFolders(companyId);
+		return dlRepositoryLocalService.getFolders(companyId);
 	}
 
 	public List<DLFolder> getFolders(long groupId, long parentFolderId)
 		throws SystemException {
 
-		return dlFolderLocalService.getFolders(groupId, parentFolderId);
+		return dlRepositoryLocalService.getFolders(groupId, parentFolderId);
 	}
 
 	public List<DLFolder> getFolders(
 			long groupId, long parentFolderId, int start, int end)
 		throws SystemException {
 
-		return dlFolderLocalService.getFolders(
+		return dlRepositoryLocalService.getFolders(
 			groupId, parentFolderId, start, end);
 	}
 
@@ -410,7 +410,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long groupId, List<Long> folderIds, int status, int start, int end)
 		throws SystemException {
 
-		return dlFolderLocalService.getFoldersAndFileEntriesAndFileShortcuts(
+		return dlRepositoryLocalService.getFoldersAndFileEntriesAndFileShortcuts(
 			groupId, folderIds, status, start, end);
 	}
 
@@ -418,7 +418,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long groupId, long folderId, int status, int start, int end)
 		throws SystemException {
 
-		return dlFolderLocalService.getFoldersAndFileEntriesAndFileShortcuts(
+		return dlRepositoryLocalService.getFoldersAndFileEntriesAndFileShortcuts(
 			groupId, folderId, status, start, end);
 	}
 
@@ -427,7 +427,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		throws SystemException {
 
 		return
-			dlFolderLocalService.getFoldersAndFileEntriesAndFileShortcutsCount(
+			dlRepositoryLocalService.getFoldersAndFileEntriesAndFileShortcutsCount(
 				groupId, folderIds, status);
 	}
 
@@ -436,21 +436,21 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		throws SystemException {
 
 		return
-			dlFolderLocalService.getFoldersAndFileEntriesAndFileShortcutsCount(
+			dlRepositoryLocalService.getFoldersAndFileEntriesAndFileShortcutsCount(
 				groupId, folderId, status);
 	}
 
 	public int getFoldersCount(long groupId, long parentFolderId)
 		throws SystemException {
 
-		return dlFolderLocalService.getFoldersCount(groupId, parentFolderId);
+		return dlRepositoryLocalService.getFoldersCount(groupId, parentFolderId);
 	}
 
 	public int getFoldersFileEntriesCount(
 			long groupId, List<Long> folderIds, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 
-		return dlFileEntryLocalService.getFoldersFileEntriesCount(
+		return dlRepositoryLocalService.getFoldersFileEntriesCount(
 			groupId, folderIds, status);
 	}
 
@@ -458,14 +458,14 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long groupId, int start, int end)
 		throws SystemException {
 
-		return dlFileEntryLocalService.getGroupFileEntries(groupId, start, end);
+		return dlRepositoryLocalService.getGroupFileEntries(groupId, start, end);
 	}
 
 	public List<DLFileEntry> getGroupFileEntries(
 			long groupId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return dlFileEntryLocalService.getGroupFileEntries(
+		return dlRepositoryLocalService.getGroupFileEntries(
 			groupId, start, end, obc);
 	}
 
@@ -473,7 +473,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long groupId, long userId, int start, int end)
 		throws SystemException {
 
-		return dlFileEntryLocalService.getGroupFileEntries(
+		return dlRepositoryLocalService.getGroupFileEntries(
 			groupId, userId, start, end);
 	}
 
@@ -482,20 +482,20 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			OrderByComparator obc)
 		throws SystemException {
 
-		return dlFileEntryLocalService.getGroupFileEntries(
+		return dlRepositoryLocalService.getGroupFileEntries(
 			groupId, start, end, obc);
 	}
 
 	public int getGroupFileEntriesCount(long groupId)
 		throws SystemException {
 
-		return dlFileEntryLocalService.getGroupFileEntriesCount(groupId);
+		return dlRepositoryLocalService.getGroupFileEntriesCount(groupId);
 	}
 
 	public int getGroupFileEntriesCount(long groupId, long userId)
 		throws SystemException {
 
-		return dlFileEntryLocalService.getGroupFileEntriesCount(
+		return dlRepositoryLocalService.getGroupFileEntriesCount(
 			groupId, userId);
 	}
 
@@ -503,19 +503,19 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long groupId, long folderId, String name)
 		throws PortalException, SystemException {
 
-		return dlFileEntryLocalService.getLatestFileVersion(
+		return dlRepositoryLocalService.getLatestFileVersion(
 			groupId, folderId, name);
 	}
 
 	public List<DLFileEntry> getNoAssetFileEntries() throws SystemException {
-		return dlFileEntryLocalService.getNoAssetFileEntries();
+		return dlRepositoryLocalService.getNoAssetFileEntries();
 	}
 
 	public void getSubfolderIds(
 			List<Long> folderIds, long groupId, long folderId)
 		throws SystemException {
 
-		dlFolderLocalService.getSubfolderIds(folderIds, groupId, folderId);
+		dlRepositoryLocalService.getSubfolderIds(folderIds, groupId, folderId);
 	}
 
 	public DLFileEntry moveFileEntry(
@@ -523,7 +523,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			String name, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return dlFileEntryLocalService.moveFileEntry(
+		return dlRepositoryLocalService.moveFileEntry(
 			userId, groupId, folderId, newFolderId, name, serviceContext);
 	}
 
@@ -532,7 +532,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long[] assetCategoryIds, String[] assetTagNames)
 		throws PortalException, SystemException {
 
-		dlFileEntryLocalService.updateAsset(
+		dlRepositoryLocalService.updateAsset(
 			userId, fileEntry, fileVersion, assetCategoryIds, assetTagNames);
 	}
 
@@ -552,7 +552,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return dlFileEntryLocalService.updateFileEntry(
+		return dlRepositoryLocalService.updateFileEntry(
 			userId, groupId, folderId, name, sourceFileName, title, description,
 			changeLog, majorVersion, extraSettings, bytes, serviceContext);
 	}
@@ -564,7 +564,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return dlFileEntryLocalService.updateFileEntry(
+		return dlRepositoryLocalService.updateFileEntry(
 			userId, groupId, folderId, name, sourceFileName, title, description,
 			changeLog, majorVersion, extraSettings, file, serviceContext);
 	}
@@ -576,7 +576,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			InputStream is, long size, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return dlFileEntryLocalService.updateFileEntry(
+		return dlRepositoryLocalService.updateFileEntry(
 			userId, groupId, folderId, name, sourceFileName, title, description,
 			changeLog, majorVersion, extraSettings, is, size, serviceContext);
 	}
@@ -613,7 +613,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long fileVersionId, String description)
 		throws PortalException, SystemException {
 
-		return dlFileEntryLocalService.updateFileVersionDescription(
+		return dlRepositoryLocalService.updateFileVersionDescription(
 			fileVersionId, description);
 	}
 
@@ -622,7 +622,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return dlFolderLocalService.updateFolder(
+		return dlRepositoryLocalService.updateFolder(
 			folderId, parentFolderId, name, description, serviceContext);
 	}
 
@@ -631,7 +631,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return dlFileEntryLocalService.updateStatus(
+		return dlRepositoryLocalService.updateStatus(
 			userId, fileEntryId, status, serviceContext);
 	}
 

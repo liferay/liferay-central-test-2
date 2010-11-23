@@ -100,7 +100,7 @@ public class DLFileShortcutLocalServiceImpl
 
 		// Asset
 
-		DLFileEntry fileEntry = dlFileEntryLocalService.getFileEntry(
+		DLFileEntry fileEntry = dlRepositoryLocalService.getFileEntry(
 			toGroupId, toFolderId, toName);
 
 		copyAssetTags(fileEntry, serviceContext);
@@ -213,7 +213,7 @@ public class DLFileShortcutLocalServiceImpl
 			String[] assetTagNames)
 		throws PortalException, SystemException {
 
-		DLFileEntry fileEntry = dlFileEntryLocalService.getFileEntry(
+		DLFileEntry fileEntry = dlRepositoryLocalService.getFileEntry(
 			fileShortcut.getToGroupId(), fileShortcut.getToFolderId(),
 			fileShortcut.getToName());
 
@@ -262,7 +262,7 @@ public class DLFileShortcutLocalServiceImpl
 
 		// Asset
 
-		DLFileEntry fileEntry = dlFileEntryLocalService.getFileEntry(
+		DLFileEntry fileEntry = dlRepositoryLocalService.getFileEntry(
 			toGroupId, toFolderId, toName);
 
 		copyAssetTags(fileEntry, serviceContext);
@@ -326,7 +326,7 @@ public class DLFileShortcutLocalServiceImpl
 			User user, long groupId, long toFolderId, String toName)
 		throws PortalException, SystemException {
 
-		DLFileEntry fileEntry = dlFileEntryLocalService.getFileEntry(
+		DLFileEntry fileEntry = dlRepositoryLocalService.getFileEntry(
 			groupId, toFolderId, toName);
 
 		if (user.getCompanyId() != fileEntry.getCompanyId()) {

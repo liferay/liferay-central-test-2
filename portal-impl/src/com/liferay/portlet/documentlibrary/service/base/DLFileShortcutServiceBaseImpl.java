@@ -40,13 +40,11 @@ import com.liferay.portlet.asset.service.persistence.AssetTagFinder;
 import com.liferay.portlet.asset.service.persistence.AssetTagPersistence;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalService;
 import com.liferay.portlet.documentlibrary.service.DLAppService;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutService;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
-import com.liferay.portlet.documentlibrary.service.DLFolderService;
+import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalService;
+import com.liferay.portlet.documentlibrary.service.DLRepositoryService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence;
@@ -110,43 +108,6 @@ public abstract class DLFileShortcutServiceBaseImpl extends PrincipalBean
 	 */
 	public void setDLAppService(DLAppService dlAppService) {
 		this.dlAppService = dlAppService;
-	}
-
-	/**
-	 * Gets the d l file entry local service.
-	 *
-	 * @return the d l file entry local service
-	 */
-	public DLFileEntryLocalService getDLFileEntryLocalService() {
-		return dlFileEntryLocalService;
-	}
-
-	/**
-	 * Sets the d l file entry local service.
-	 *
-	 * @param dlFileEntryLocalService the d l file entry local service
-	 */
-	public void setDLFileEntryLocalService(
-		DLFileEntryLocalService dlFileEntryLocalService) {
-		this.dlFileEntryLocalService = dlFileEntryLocalService;
-	}
-
-	/**
-	 * Gets the d l file entry remote service.
-	 *
-	 * @return the d l file entry remote service
-	 */
-	public DLFileEntryService getDLFileEntryService() {
-		return dlFileEntryService;
-	}
-
-	/**
-	 * Sets the d l file entry remote service.
-	 *
-	 * @param dlFileEntryService the d l file entry remote service
-	 */
-	public void setDLFileEntryService(DLFileEntryService dlFileEntryService) {
-		this.dlFileEntryService = dlFileEntryService;
 	}
 
 	/**
@@ -301,43 +262,6 @@ public abstract class DLFileShortcutServiceBaseImpl extends PrincipalBean
 	}
 
 	/**
-	 * Gets the d l folder local service.
-	 *
-	 * @return the d l folder local service
-	 */
-	public DLFolderLocalService getDLFolderLocalService() {
-		return dlFolderLocalService;
-	}
-
-	/**
-	 * Sets the d l folder local service.
-	 *
-	 * @param dlFolderLocalService the d l folder local service
-	 */
-	public void setDLFolderLocalService(
-		DLFolderLocalService dlFolderLocalService) {
-		this.dlFolderLocalService = dlFolderLocalService;
-	}
-
-	/**
-	 * Gets the d l folder remote service.
-	 *
-	 * @return the d l folder remote service
-	 */
-	public DLFolderService getDLFolderService() {
-		return dlFolderService;
-	}
-
-	/**
-	 * Sets the d l folder remote service.
-	 *
-	 * @param dlFolderService the d l folder remote service
-	 */
-	public void setDLFolderService(DLFolderService dlFolderService) {
-		this.dlFolderService = dlFolderService;
-	}
-
-	/**
 	 * Gets the d l folder persistence.
 	 *
 	 * @return the d l folder persistence
@@ -371,6 +295,43 @@ public abstract class DLFileShortcutServiceBaseImpl extends PrincipalBean
 	 */
 	public void setDLFolderFinder(DLFolderFinder dlFolderFinder) {
 		this.dlFolderFinder = dlFolderFinder;
+	}
+
+	/**
+	 * Gets the d l repository local service.
+	 *
+	 * @return the d l repository local service
+	 */
+	public DLRepositoryLocalService getDLRepositoryLocalService() {
+		return dlRepositoryLocalService;
+	}
+
+	/**
+	 * Sets the d l repository local service.
+	 *
+	 * @param dlRepositoryLocalService the d l repository local service
+	 */
+	public void setDLRepositoryLocalService(
+		DLRepositoryLocalService dlRepositoryLocalService) {
+		this.dlRepositoryLocalService = dlRepositoryLocalService;
+	}
+
+	/**
+	 * Gets the d l repository remote service.
+	 *
+	 * @return the d l repository remote service
+	 */
+	public DLRepositoryService getDLRepositoryService() {
+		return dlRepositoryService;
+	}
+
+	/**
+	 * Sets the d l repository remote service.
+	 *
+	 * @param dlRepositoryService the d l repository remote service
+	 */
+	public void setDLRepositoryService(DLRepositoryService dlRepositoryService) {
+		this.dlRepositoryService = dlRepositoryService;
 	}
 
 	/**
@@ -706,10 +667,6 @@ public abstract class DLFileShortcutServiceBaseImpl extends PrincipalBean
 	protected DLAppLocalService dlAppLocalService;
 	@BeanReference(type = DLAppService.class)
 	protected DLAppService dlAppService;
-	@BeanReference(type = DLFileEntryLocalService.class)
-	protected DLFileEntryLocalService dlFileEntryLocalService;
-	@BeanReference(type = DLFileEntryService.class)
-	protected DLFileEntryService dlFileEntryService;
 	@BeanReference(type = DLFileEntryPersistence.class)
 	protected DLFileEntryPersistence dlFileEntryPersistence;
 	@BeanReference(type = DLFileEntryFinder.class)
@@ -726,14 +683,14 @@ public abstract class DLFileShortcutServiceBaseImpl extends PrincipalBean
 	protected DLFileShortcutPersistence dlFileShortcutPersistence;
 	@BeanReference(type = DLFileVersionPersistence.class)
 	protected DLFileVersionPersistence dlFileVersionPersistence;
-	@BeanReference(type = DLFolderLocalService.class)
-	protected DLFolderLocalService dlFolderLocalService;
-	@BeanReference(type = DLFolderService.class)
-	protected DLFolderService dlFolderService;
 	@BeanReference(type = DLFolderPersistence.class)
 	protected DLFolderPersistence dlFolderPersistence;
 	@BeanReference(type = DLFolderFinder.class)
 	protected DLFolderFinder dlFolderFinder;
+	@BeanReference(type = DLRepositoryLocalService.class)
+	protected DLRepositoryLocalService dlRepositoryLocalService;
+	@BeanReference(type = DLRepositoryService.class)
+	protected DLRepositoryService dlRepositoryService;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = ResourceLocalService.class)
