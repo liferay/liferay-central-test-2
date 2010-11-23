@@ -1,9 +1,15 @@
 <?xml version="1.0"?>
 
-<project name="benchmarks" basedir=".">
+<project name="benchmarks" basedir="." default="run">
 	<import file="../build-common.xml" />
 
-	<target name="build-sample-sql" depends="init">
+	<path id="grinder.classpath">
+		<fileset dir="lib" includes="*.jar" />
+	</path>
+
+	<property name="grinder.file" value="../tools/grinder-3.1.zip" />
+
+	<target name="build-sample-sql">
 		<java
 			classname="com.liferay.portal.tools.samplesqlbuilder.SampleSQLBuilder"
 			classpathref="project.classpath"
@@ -26,7 +32,28 @@
 		</java>
 	</target>
 
-	<target name="init">
-		<mkdir dir="build/database"/>
+	<target name="run" depends="setup">
+		<java
+			classname="net.grinder.Grinder"
+			classpathref="grinder.classpath"
+			fork="true"
+			newenvironment="true"
+		/>
+	</target>
+
+	<target name="setup">
+		<if>
+			<not>
+				<available file="lib" />
+			</not>
+			<then>
+				<unzip src="${grinder.file}" dest="lib">
+					<patternset>
+						<include name="**/lib/*.jar" />
+					</patternset>
+					<mapper type="flatten" />
+				</unzip>
+			</then>
+		</if>
 	</target>
 </project>
