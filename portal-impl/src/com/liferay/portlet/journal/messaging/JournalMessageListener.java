@@ -127,7 +127,9 @@ public class JournalMessageListener extends BaseMessageListener {
 				continue;
 			}
 
-			if (!GroupLocalServiceUtil.hasUserGroup(userId, groupId)) {
+			if (!GroupLocalServiceUtil.hasUserGroup(
+					subscribedUserId, groupId)) {
+
 				if (_log.isInfoEnabled()) {
 					_log.info(
 						"Subscription " + subscription.getSubscriptionId() +
