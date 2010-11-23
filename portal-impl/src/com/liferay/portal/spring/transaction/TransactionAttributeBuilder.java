@@ -32,22 +32,6 @@ import org.springframework.transaction.interceptor.TransactionAttribute;
  */
 public class TransactionAttributeBuilder {
 
-	@SuppressWarnings("deprecation")
-	public static TransactionAttribute build(
-		com.liferay.portal.kernel.annotation.Transactional transactional) {
-
-		if (transactional == null) {
-			return null;
-		}
-
-		return _build(
-			transactional.enabled(), transactional.isolation().value(),
-			transactional.propagation().value(), transactional.readOnly(),
-			transactional.timeout(), transactional.rollbackFor(),
-			transactional.rollbackForClassName(), transactional.noRollbackFor(),
-			transactional.noRollbackForClassName());
-	}
-
 	public static TransactionAttribute build(Transactional transactional) {
 		if (transactional == null) {
 			return null;

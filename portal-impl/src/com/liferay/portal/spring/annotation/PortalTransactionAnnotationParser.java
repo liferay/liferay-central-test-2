@@ -50,27 +50,7 @@ public class PortalTransactionAnnotationParser
 				(Class<?>)annotatedElement, Transactional.class);
 		}
 
-		if (transactional != null) {
-			return TransactionAttributeBuilder.build(transactional);
-		}
-
-		com.liferay.portal.kernel.annotation.Transactional oldTransactional =
-			null;
-
-		if (annotatedElement instanceof Method) {
-			Method method = (Method)annotatedElement;
-
-			oldTransactional = AnnotationLocator.locate(
-				method, method.getDeclaringClass(),
-				com.liferay.portal.kernel.annotation.Transactional.class);
-		}
-		else {
-			oldTransactional = AnnotationLocator.locate(
-				(Class<?>)annotatedElement,
-				com.liferay.portal.kernel.annotation.Transactional.class);
-		}
-
-		return TransactionAttributeBuilder.build(oldTransactional);
+		return TransactionAttributeBuilder.build(transactional);
 	}
 
 }

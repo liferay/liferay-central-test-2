@@ -54,20 +54,8 @@ public class AnnotationTransactionAttributeSource
 		Transactional transactional = AnnotationLocator.locate(
 			method, targetClass, Transactional.class);
 
-		if (transactional != null) {
-			transactionAttribute = TransactionAttributeBuilder.build(
-				transactional);
-		}
-		else {
-			@SuppressWarnings("deprecation")
-			com.liferay.portal.kernel.annotation.Transactional
-				oldTransactional = AnnotationLocator.locate(
-					method, targetClass,
-					com.liferay.portal.kernel.annotation.Transactional.class);
-
-			transactionAttribute = TransactionAttributeBuilder.build(
-				oldTransactional);
-		}
+		transactionAttribute = TransactionAttributeBuilder.build(
+			transactional);
 
 		if (transactionAttribute == null) {
 			_transactionAttributes.put(
