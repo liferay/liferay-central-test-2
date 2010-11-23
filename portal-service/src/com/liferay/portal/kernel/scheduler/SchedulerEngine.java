@@ -55,6 +55,8 @@ public interface SchedulerEngine {
 
 	public static final String NEXT_FIRE_TIME = "NEXT_FIRE_TIME";
 
+	public static final String PERMANENT_FLAG = "PERMANENT_FLAG";
+
 	public static final String PREVIOUS_FIRE_TIME = "PREVIOUS_FIRE_TIME";
 
 	public static final String RECEIVER_KEY = "RECEIVER_KEY";
