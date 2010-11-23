@@ -70,6 +70,13 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			actionRequest, "passwordField");
 		String hiddenVariables = ParamUtil.getString(
 			actionRequest, "hiddenVariables");
+		boolean resizeAutomatically = ParamUtil.getBoolean(
+			actionRequest, "resizeAutomatically");
+		String heightMaximized = ParamUtil.getString(
+			actionRequest, "heightMaximized");
+		String heightNormal = ParamUtil.getString(
+			actionRequest, "heightNormal");
+		String width = ParamUtil.getString(actionRequest, "width");
 
 		String[] htmlAttributes = StringUtil.split(ParamUtil.getString(
 			actionRequest, "htmlAttributes"), StringPool.NEW_LINE);
@@ -92,6 +99,11 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		preferences.setValue("password", password);
 		preferences.setValue("password-field", passwordField);
 		preferences.setValue("hidden-variables", hiddenVariables);
+		preferences.setValue(
+			"resize-automatically", String.valueOf(resizeAutomatically));
+		preferences.setValue("height-maximized", heightMaximized);
+		preferences.setValue("height-normal", heightNormal);
+		preferences.setValue("width", width);
 
 		for (String htmlAttribute : htmlAttributes) {
 			int pos = htmlAttribute.indexOf(CharPool.EQUAL);

@@ -24,13 +24,10 @@ String htmlAttributes =
 	"border=" + border + "\n" +
 	"bordercolor=" + bordercolor + "\n" +
 	"frameborder=" + frameborder + "\n" +
-	"height-maximized=" + heightMaximized + "\n" +
-	"height-normal=" + heightNormal + "\n" +
 	"hspace=" + hspace + "\n" +
 	"longdesc=" + longdesc + "\n" +
 	"scrolling=" + scrolling + "\n" +
-	"vspace=" + vspace + "\n" +
-	"width=" + width + "\n";
+	"vspace=" + vspace + "\n";
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
@@ -108,6 +105,16 @@ String htmlAttributes =
 		</div>
 	</aui:fieldset>
 
+	<aui:fieldset label="display-settings">
+		<aui:input label="resize-automatically" name="resizeAutomatically" type="checkbox" value="<%= resizeAutomatically %>" />
+
+		<div id="<portlet:namespace />displaySettings">
+			<aui:input name="heightMaximized" type="text" value="<%= heightMaximized %>" />
+			<aui:input name="heightNormal" type="text" value="<%= heightNormal %>" />
+			<aui:input name="width" type="text" value="<%= width %>" />
+		</div>
+	</aui:fieldset>
+
 	<aui:fieldset label="advanced">
 		<aui:input cssClass="lfr-textarea-container" name="htmlAttributes" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();" type="textarea" value="<%= htmlAttributes %>" wrap="soft" />
 	</aui:fieldset>
@@ -123,6 +130,7 @@ String htmlAttributes =
 	</c:if>
 
 	Liferay.Util.toggleBoxes('<portlet:namespace />authCheckbox','<portlet:namespace />authenticationOptions');
+	Liferay.Util.toggleBoxes('<portlet:namespace />resizeAutomaticallyCheckbox','<portlet:namespace />displaySettings', true);
 	Liferay.Util.toggleSelectBox('<portlet:namespace />authType', 'form', '<portlet:namespace />formAuthOptions');
 	Liferay.Util.toggleSelectBox('<portlet:namespace />authType', 'basic', '<portlet:namespace />basicAuthOptions');
 </aui:script>
