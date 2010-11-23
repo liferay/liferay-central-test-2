@@ -33,20 +33,9 @@ portletURL.setParameter("target", target);
 	<liferay-ui:search-container
 		searchContainer="<%= new GroupSearch(renderRequest, portletURL) %>"
 	>
-<!--
-/**
- *      Date: 2010-11-23 HKT
- *      Ticket: http://issues.liferay.com/browse/LPP-634
- *      Developer: dale.shan@liferay.com 
- *      Symptom: Search function is not available as an user is member only.
- *      Suggestion: Search box does not show if the user is not owner or administrator
- */
--->
-<c:if test="<%=!filterManageableGroups%>">
-        <liferay-ui:search-form
-                page="/html/portlet/enterprise_admin/group_search.jsp"
-        />
-</c:if>
+		<liferay-ui:search-form
+			page="/html/portlet/enterprise_admin/group_search.jsp"
+		/>
 
 		<%
 		GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
