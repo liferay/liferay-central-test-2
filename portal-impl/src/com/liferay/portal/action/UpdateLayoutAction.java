@@ -255,167 +255,164 @@ public class UpdateLayoutAction extends Action {
 		String dataType = ParamUtil.getString(request, "dataType");
 
 		if (dataType.equals("json")) {
-			JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 			if (portlet.isAjaxable()) {
-				ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-					WebKeys.THEME_DISPLAY);
-
 				StringServletResponse stringResponse =
 					new StringServletResponse(response);
 
 				renderPortletAction.execute(
 					mapping, form, dynamicRequest, stringResponse);
 
-				jsonObj.put("refresh", false);
-				jsonObj.put("portletHTML", stringResponse.getString().trim());
-
-				Set<String> footerCssSet = new LinkedHashSet<String>();
-				Set<String> footerJavaScriptSet = new LinkedHashSet<String>();
-				Set<String> headerCssSet = new LinkedHashSet<String>();
-				Set<String> headerJavaScriptSet = new LinkedHashSet<String>();
-
-				for (String footerPortalCss : portlet.getFooterPortalCss()) {
-					if (!HttpUtil.hasProtocol(footerPortalCss)) {
-						footerPortalCss = PortalUtil.getStaticResourceURL(
-							request,
-							PortalUtil.getPathContext() + footerPortalCss,
-							portlet.getTimestamp()
-						);
-					}
-
-					footerCssSet.add(footerPortalCss);
-				}
-
-				for (String footerPortalJavaScript :
-						portlet.getFooterPortalJavaScript()) {
-
-					if (!HttpUtil.hasProtocol(footerPortalJavaScript)) {
-						footerPortalJavaScript =
-							PortalUtil.getStaticResourceURL(
-								request, PortalUtil.getPathContext() +
-									footerPortalJavaScript,
-								portlet.getTimestamp());
-					}
-
-					footerJavaScriptSet.add(footerPortalJavaScript);
-				}
-
-				for (String footerPortletCss : portlet.getFooterPortletCss()) {
-					if (!HttpUtil.hasProtocol(footerPortletCss)) {
-						footerPortletCss =
-							PortalUtil.getStaticResourceURL(request,
-								portlet.getStaticResourcePath() +
-									footerPortletCss,
-								portlet.getTimestamp());
-					}
-
-					footerCssSet.add(footerPortletCss);
-				}
-
-				for (String footerPortletJavaScript :
-						portlet.getFooterPortletJavaScript()) {
-
-					if (!HttpUtil.hasProtocol(footerPortletJavaScript)) {
-						footerPortletJavaScript =
-							PortalUtil.getStaticResourceURL(request,
-								portlet.getStaticResourcePath() +
-									footerPortletJavaScript,
-								portlet.getTimestamp());
-					}
-
-					footerJavaScriptSet.add(footerPortletJavaScript);
-				}
-
-				for (String headerPortalCss : portlet.getHeaderPortalCss()) {
-					if (!HttpUtil.hasProtocol(headerPortalCss)) {
-						headerPortalCss =
-							PortalUtil.getStaticResourceURL(
-								request, PortalUtil.getPathContext() +
-									headerPortalCss,
-								portlet.getTimestamp());
-					}
-
-					headerCssSet.add(headerPortalCss);
-				}
-
-				for (String headerPortalJavaScript :
-						portlet.getHeaderPortalJavaScript()) {
-
-					if (!HttpUtil.hasProtocol(headerPortalJavaScript)) {
-						headerPortalJavaScript =
-							PortalUtil.getStaticResourceURL(
-								request,
-								PortalUtil.getPathContext() +
-									headerPortalJavaScript,
-								portlet.getTimestamp());
-					}
-
-					headerJavaScriptSet.add(headerPortalJavaScript);
-				}
-
-				for (String headerPortletCss : portlet.getHeaderPortletCss()) {
-					if (!HttpUtil.hasProtocol(headerPortletCss)) {
-						headerPortletCss = PortalUtil.getStaticResourceURL(
-							request,
-							portlet.getStaticResourcePath() + headerPortletCss,
-							portlet.getTimestamp());
-					}
-
-					headerCssSet.add(headerPortletCss);
-				}
-
-				for (String headerPortletJavaScript :
-						portlet.getHeaderPortletJavaScript()) {
-
-					if (!HttpUtil.hasProtocol(headerPortletJavaScript)) {
-						headerPortletJavaScript =
-							PortalUtil.getStaticResourceURL(
-								request,
-								portlet.getStaticResourcePath() +
-									headerPortletJavaScript,
-								portlet.getTimestamp());
-					}
-
-					headerJavaScriptSet.add(headerPortletJavaScript);
-				}
-
-				String footerCssPaths = JSONFactoryUtil.serialize(
-					footerCssSet.toArray());
-
-				String footerJavaScriptPaths = JSONFactoryUtil.serialize(
-					footerJavaScriptSet.toArray());
-
-				String headerCssPaths = JSONFactoryUtil.serialize(
-					headerCssSet.toArray());
-
-				String headerJavaScriptPaths = JSONFactoryUtil.serialize(
-					headerJavaScriptSet.toArray());
-
-				jsonObj.put("footerCssPaths",
-					JSONFactoryUtil.createJSONArray(footerCssPaths));
-
-				jsonObj.put("footerJavaScriptPaths",
-					JSONFactoryUtil.createJSONArray(footerJavaScriptPaths));
-
-				jsonObj.put("headerCssPaths",
-					JSONFactoryUtil.createJSONArray(headerCssPaths));
-
-				jsonObj.put("headerJavaScriptPaths",
-					JSONFactoryUtil.createJSONArray(headerJavaScriptPaths));
+				populatePortletJSONObject(
+					request, stringResponse, portlet, jsonObject);
 			}
 			else {
-				jsonObj.put("refresh", true);
+				jsonObject.put("refresh", true);
 			}
 
 			response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 
-			ServletResponseUtil.write(response, jsonObj.toString());
+			ServletResponseUtil.write(response, jsonObject.toString());
 		}
 		else {
 			renderPortletAction.execute(
 				mapping, form, dynamicRequest, response);
 		}
+	}
+
+	protected void populatePortletJSONObject(
+			HttpServletRequest request, StringServletResponse stringResponse,
+			Portlet portlet, JSONObject jsonObject)
+		throws Exception {
+
+		jsonObject.put("refresh", false);
+		jsonObject.put("portletHTML", stringResponse.getString().trim());
+
+		Set<String> footerCssSet = new LinkedHashSet<String>();
+		Set<String> footerJavaScriptSet = new LinkedHashSet<String>();
+		Set<String> headerCssSet = new LinkedHashSet<String>();
+		Set<String> headerJavaScriptSet = new LinkedHashSet<String>();
+
+		for (String footerPortalCss : portlet.getFooterPortalCss()) {
+			if (!HttpUtil.hasProtocol(footerPortalCss)) {
+				footerPortalCss = PortalUtil.getStaticResourceURL(
+					request, PortalUtil.getPathContext() + footerPortalCss,
+					portlet.getTimestamp());
+			}
+
+			footerCssSet.add(footerPortalCss);
+		}
+
+		for (String footerPortalJavaScript :
+				portlet.getFooterPortalJavaScript()) {
+
+			if (!HttpUtil.hasProtocol(footerPortalJavaScript)) {
+				footerPortalJavaScript = PortalUtil.getStaticResourceURL(
+					request,
+					PortalUtil.getPathContext() + footerPortalJavaScript,
+					portlet.getTimestamp());
+			}
+
+			footerJavaScriptSet.add(footerPortalJavaScript);
+		}
+
+		for (String footerPortletCss : portlet.getFooterPortletCss()) {
+			if (!HttpUtil.hasProtocol(footerPortletCss)) {
+				footerPortletCss = PortalUtil.getStaticResourceURL(
+					request, portlet.getStaticResourcePath() + footerPortletCss,
+					portlet.getTimestamp());
+			}
+
+			footerCssSet.add(footerPortletCss);
+		}
+
+		for (String footerPortletJavaScript :
+				portlet.getFooterPortletJavaScript()) {
+
+			if (!HttpUtil.hasProtocol(footerPortletJavaScript)) {
+				footerPortletJavaScript = PortalUtil.getStaticResourceURL(
+					request,
+					portlet.getStaticResourcePath() + footerPortletJavaScript,
+					portlet.getTimestamp());
+			}
+
+			footerJavaScriptSet.add(footerPortletJavaScript);
+		}
+
+		for (String headerPortalCss : portlet.getHeaderPortalCss()) {
+			if (!HttpUtil.hasProtocol(headerPortalCss)) {
+				headerPortalCss = PortalUtil.getStaticResourceURL(
+					request, PortalUtil.getPathContext() + headerPortalCss,
+					portlet.getTimestamp());
+			}
+
+			headerCssSet.add(headerPortalCss);
+		}
+
+		for (String headerPortalJavaScript :
+				portlet.getHeaderPortalJavaScript()) {
+
+			if (!HttpUtil.hasProtocol(headerPortalJavaScript)) {
+				headerPortalJavaScript = PortalUtil.getStaticResourceURL(
+					request,
+					PortalUtil.getPathContext() + headerPortalJavaScript,
+					portlet.getTimestamp());
+			}
+
+			headerJavaScriptSet.add(headerPortalJavaScript);
+		}
+
+		for (String headerPortletCss : portlet.getHeaderPortletCss()) {
+			if (!HttpUtil.hasProtocol(headerPortletCss)) {
+				headerPortletCss = PortalUtil.getStaticResourceURL(
+					request, portlet.getStaticResourcePath() + headerPortletCss,
+					portlet.getTimestamp());
+			}
+
+			headerCssSet.add(headerPortletCss);
+		}
+
+		for (String headerPortletJavaScript :
+				portlet.getHeaderPortletJavaScript()) {
+
+			if (!HttpUtil.hasProtocol(headerPortletJavaScript)) {
+				headerPortletJavaScript = PortalUtil.getStaticResourceURL(
+					request,
+					portlet.getStaticResourcePath() + headerPortletJavaScript,
+					portlet.getTimestamp());
+			}
+
+			headerJavaScriptSet.add(headerPortletJavaScript);
+		}
+
+		String footerCssPaths = JSONFactoryUtil.serialize(
+			footerCssSet.toArray(new String[footerCssSet.size()]));
+
+		jsonObject.put(
+			"footerCssPaths", JSONFactoryUtil.createJSONArray(footerCssPaths));
+
+		String footerJavaScriptPaths = JSONFactoryUtil.serialize(
+			footerJavaScriptSet.toArray(
+				new String[footerJavaScriptSet.size()]));
+
+		jsonObject.put(
+			"footerJavaScriptPaths",
+			JSONFactoryUtil.createJSONArray(footerJavaScriptPaths));
+
+		String headerCssPaths = JSONFactoryUtil.serialize(
+			headerCssSet.toArray(new String[headerCssSet.size()]));
+
+		jsonObject.put(
+			"headerCssPaths", JSONFactoryUtil.createJSONArray(headerCssPaths));
+
+		String headerJavaScriptPaths = JSONFactoryUtil.serialize(
+			headerJavaScriptSet.toArray(
+				new String[headerJavaScriptSet.size()]));
+
+		jsonObject.put(
+			"headerJavaScriptPaths",
+			JSONFactoryUtil.createJSONArray(headerJavaScriptPaths));
 	}
 
 }

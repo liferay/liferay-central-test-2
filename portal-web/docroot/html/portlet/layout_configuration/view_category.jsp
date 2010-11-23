@@ -131,7 +131,6 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 
 				<c:choose>
 					<c:when test="<%= layout.isTypePortlet() %>">
-
 						<div
 							class="lfr-portlet-item <c:if test="<%= portletLocked %>">lfr-portlet-used</c:if> <c:if test="<%= portletInstanceable %>">lfr-instanceable</c:if>"
 							id="<portlet:namespace />portletItem<%= portlet.getPortletId() %>"
