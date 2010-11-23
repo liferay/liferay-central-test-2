@@ -3,6 +3,8 @@ alter table BlogsEntry add smallImage BOOLEAN null;
 alter table BlogsEntry add smallImageId VARCHAR(75) null;
 alter table BlogsEntry add smallImageURL STRING null;
 
+alter table DLFileShortcut add toGroupId LONG not null;
+
 update Group_ set type_ = 3 where type_ = 0;
 
 alter table Layout drop column dlFolderId;
@@ -54,5 +56,3 @@ alter table MBMessage add format VARCHAR(75) null;
 COMMIT_TRANSACTION;
 
 update MBMessage set format = 'bbcode';
-
-alter table DLFileShortcut add toGroupId LONG not null;

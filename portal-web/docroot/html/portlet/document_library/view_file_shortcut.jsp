@@ -28,11 +28,14 @@ DLFileShortcut fileShortcut = (DLFileShortcut)request.getAttribute(WebKeys.DOCUM
 fileShortcut = fileShortcut.toEscapedModel();
 
 long fileShortcutId = fileShortcut.getFileShortcutId();
+
 long toGroupId = fileShortcut.getToGroupId();
+
+Group toGroup = GroupLocalServiceUtil.getGroup(toGroupId);
+
 long toFolderId = fileShortcut.getToFolderId();
 String toName = fileShortcut.getToName();
 
-Group toGroup = GroupLocalServiceUtil.getGroup(toGroupId);
 DLFolder toFolder = null;
 DLFileEntry toFileEntry = null;
 
