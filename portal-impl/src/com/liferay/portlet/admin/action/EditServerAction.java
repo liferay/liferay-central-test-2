@@ -484,8 +484,8 @@ public class EditServerAction extends PortletAction {
 				PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR,
 				uploadServletRequestImplTempDir);
 
-			UploadServletRequestImpl.UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR =
-				new File(uploadServletRequestImplTempDir);
+			UploadServletRequestImpl.setTempDir(
+				new File(uploadServletRequestImplTempDir));
 		}
 
 		preferences.setValue(

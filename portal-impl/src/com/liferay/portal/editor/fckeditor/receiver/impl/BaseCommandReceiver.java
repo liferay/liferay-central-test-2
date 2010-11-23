@@ -157,42 +157,42 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		String returnValue = null;
 
 		try {
-			ServletFileUpload upload = new LiferayFileUpload(
+			ServletFileUpload servletFileUpload = new LiferayFileUpload(
 				new LiferayFileItemFactory(
-					UploadServletRequestImpl.UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR),
-					request);
+					UploadServletRequestImpl.getTempDir()), request);
 
-			upload.setFileSizeMax(
+			servletFileUpload.setFileSizeMax(
 				PrefsPropsUtil.getLong(
 					PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE));
 
 			LiferayServletRequest liferayServletRequest =
 				new LiferayServletRequest(request);
 
-			List<FileItem> items = upload.parseRequest(liferayServletRequest);
+			List<FileItem> fileItems = servletFileUpload.parseRequest(
+				liferayServletRequest);
 
 			Map<String, Object> fields = new HashMap<String, Object>();
 
-			for (FileItem item : items) {
-				if (item.isFormField()) {
-					fields.put(item.getFieldName(), item.getString());
+			for (FileItem fileItem : fileItems) {
+				if (fileItem.isFormField()) {
+					fields.put(fileItem.getFieldName(), fileItem.getString());
 				}
 				else {
-					fields.put(item.getFieldName(), item);
+					fields.put(fileItem.getFieldName(), fileItem);
 				}
 			}
 
-			DiskFileItem fileItem = (DiskFileItem)fields.get("NewFile");
+			DiskFileItem diskFileItem = (DiskFileItem)fields.get("NewFile");
 
 			String fileName = StringUtil.replace(
-				fileItem.getName(), CharPool.BACK_SLASH, CharPool.SLASH);
+				diskFileItem.getName(), CharPool.BACK_SLASH, CharPool.SLASH);
 			String[] fileNameArray = StringUtil.split(fileName, "/");
 			fileName = fileNameArray[fileNameArray.length - 1];
 
 			String extension = _getExtension(fileName);
 
 			returnValue = fileUpload(
-				argument, fileName, fileItem.getStoreLocation(), extension);
+				argument, fileName, diskFileItem.getStoreLocation(), extension);
 		}
 		catch (Exception e) {
 			FCKException fcke = null;
