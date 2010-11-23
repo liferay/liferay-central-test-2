@@ -3,7 +3,7 @@
 <project name="benchmarks" basedir=".">
 	<import file="../build-common.xml" />
 
-	<target name="build-sample-sql">
+	<target name="build-sample-sql" depends="init">
 		<java
 			classname="com.liferay.portal.tools.samplesqlbuilder.SampleSQLBuilder"
 			classpathref="project.classpath"
@@ -24,5 +24,9 @@
 			<arg value="sample.sql.wiki.page.count=${sample.sql.wiki.page.count}" />
 			<arg value="sample.sql.security.enabled=${sample.sql.security.enabled}" />
 		</java>
+	</target>
+
+	<target name="init">
+		<mkdir dir="build/database"/>
 	</target>
 </project>
