@@ -79,16 +79,8 @@
 					}
 				}
 
-				List<Layout> curGroupLayouts = new ArrayList<Layout>();
-
-				curGroupLayouts.addAll(LayoutLocalServiceUtil.getLayouts(curGroup.getGroupId(), false));
-				curGroupLayouts.addAll(LayoutLocalServiceUtil.getLayouts(curGroup.getGroupId(), true));
-
-				for (Layout curGroupLayout : curGroupLayouts) {
-					if (curGroupLayout.hasScopeGroup()) {
-						scopeLayouts.add(curGroupLayout);
-					}
-				}
+				scopeLayouts.addAll(LayoutLocalServiceUtil.getScopeGroupLayouts(curGroup.getGroupId(), false));
+				scopeLayouts.addAll(LayoutLocalServiceUtil.getScopeGroupLayouts(curGroup.getGroupId(), true));
 
 				title = "<a href=\"javascript:;\" class=\"lfr-floating-trigger lfr-group-selector\">" + HtmlUtil.escape(StringUtil.shorten(curGroupName, 25)) + "</a>";
 			}

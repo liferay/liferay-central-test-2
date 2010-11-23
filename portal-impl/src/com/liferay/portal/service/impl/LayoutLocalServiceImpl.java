@@ -576,6 +576,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			new LayoutReference[layoutReferences.size()]);
 	}
 
+	public List<Layout> getScopeGroupLayouts(
+			long groupId, boolean privateLayout)
+		throws PortalException, SystemException {
+
+		return layoutFinder.findByScopeGroup(groupId, privateLayout);
+	}
+
 	public long getNextLayoutId(long groupId, boolean privateLayout)
 		throws SystemException {
 

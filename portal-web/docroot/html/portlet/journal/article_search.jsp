@@ -73,17 +73,8 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 
 					List<Layout> scopeLayouts = new ArrayList<Layout>();
 
-					for (Layout curGroupLayout : LayoutLocalServiceUtil.getLayouts(themeDisplay.getParentGroupId(), false)) {
-						if (curGroupLayout.hasScopeGroup()) {
-							scopeLayouts.add(curGroupLayout);
-						}
-					}
-
-					for (Layout curGroupLayout : LayoutLocalServiceUtil.getLayouts(themeDisplay.getParentGroupId(), true)) {
-						if (curGroupLayout.hasScopeGroup()) {
-							scopeLayouts.add(curGroupLayout);
-						}
-					}
+					scopeLayouts.addAll(LayoutLocalServiceUtil.getScopeGroupLayouts(themeDisplay.getParentGroupId(), false));
+					scopeLayouts.addAll(LayoutLocalServiceUtil.getScopeGroupLayouts(themeDisplay.getParentGroupId(), true));
 					%>
 
 					<aui:select label="my-places" name="<%= displayTerms.GROUP_ID %>">

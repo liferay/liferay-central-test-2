@@ -293,10 +293,8 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 							groups.add(company.getGroup());
 							groups.add(scopeGroup);
 
-							for (Layout curLayout : LayoutLocalServiceUtil.getLayouts(layout.getGroupId(), layout.isPrivateLayout())) {
-								if (curLayout.hasScopeGroup()) {
-									groups.add(curLayout.getScopeGroup());
-								}
+							for (Layout curLayout : LayoutLocalServiceUtil.getScopeGroupLayouts(layout.getGroupId(), layout.isPrivateLayout())) {
+								groups.add(curLayout.getScopeGroup());
 							}
 
 							// Left list

@@ -24,6 +24,7 @@ import com.liferay.portal.model.LayoutReference;
 import com.liferay.portal.model.LayoutSoap;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
@@ -41,6 +42,9 @@ public class LayoutFinderImpl
 
 	public static String FIND_BY_C_P_P =
 		LayoutFinder.class.getName() + ".findByC_P_P";
+
+	public static String FIND_BY_SCOPE_GROUP =
+		LayoutFinder.class.getName() + ".findByScopeGroup";
 
 	public List<Layout> findByNullFriendlyURL() throws SystemException {
 		Session session = null;
@@ -112,6 +116,37 @@ public class LayoutFinderImpl
 			}
 
 			return layoutReferences;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<Layout> findByScopeGroup(long groupId, boolean privateLayout)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(Layout.class);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_SCOPE_GROUP);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("Layout", LayoutImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(privateLayout);
+
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

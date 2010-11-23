@@ -35,6 +35,12 @@ public class LayoutFinderUtil {
 			preferencesValue);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Layout> findByScopeGroup(
+		long groupId, boolean privateLayout)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().findByScopeGroup(groupId, privateLayout);
+	}
+
 	public static LayoutFinder getFinder() {
 		if (_finder == null) {
 			_finder = (LayoutFinder)PortalBeanLocatorUtil.locate(LayoutFinder.class.getName());
