@@ -425,13 +425,6 @@ public class LayoutLocalServiceUtil {
 			preferencesValue);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Layout> getScopeGroupLayouts(
-		long groupId, boolean privateLayout)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getScopeGroupLayouts(groupId, privateLayout);
-	}
-
 	public static long getNextLayoutId(long groupId, boolean privateLayout)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getNextLayoutId(groupId, privateLayout);
@@ -440,6 +433,12 @@ public class LayoutLocalServiceUtil {
 	public static java.util.List<com.liferay.portal.model.Layout> getNullFriendlyURLLayouts()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getNullFriendlyURLLayouts();
+	}
+
+	public static java.util.List<com.liferay.portal.model.Layout> getScopeGroupLayouts(
+		long groupId, boolean privateLayout)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getScopeGroupLayouts(groupId, privateLayout);
 	}
 
 	public static boolean hasLayouts(long groupId, boolean privateLayout,

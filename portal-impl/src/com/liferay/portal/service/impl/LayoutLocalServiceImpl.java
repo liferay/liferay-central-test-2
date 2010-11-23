@@ -576,13 +576,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			new LayoutReference[layoutReferences.size()]);
 	}
 
-	public List<Layout> getScopeGroupLayouts(
-			long groupId, boolean privateLayout)
-		throws PortalException, SystemException {
-
-		return layoutFinder.findByScopeGroup(groupId, privateLayout);
-	}
-
 	public long getNextLayoutId(long groupId, boolean privateLayout)
 		throws SystemException {
 
@@ -608,6 +601,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public List<Layout> getNullFriendlyURLLayouts() throws SystemException {
 		return layoutFinder.findByNullFriendlyURL();
+	}
+
+	public List<Layout> getScopeGroupLayouts(
+			long groupId, boolean privateLayout)
+		throws SystemException {
+
+		return layoutFinder.findByScopeGroup(groupId, privateLayout);
 	}
 
 	public boolean hasLayouts(

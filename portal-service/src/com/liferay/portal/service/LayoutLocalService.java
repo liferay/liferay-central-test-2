@@ -351,17 +351,16 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portal.model.Layout> getScopeGroupLayouts(
-		long groupId, boolean privateLayout)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long getNextLayoutId(long groupId, boolean privateLayout)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Layout> getNullFriendlyURLLayouts()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.Layout> getScopeGroupLayouts(
+		long groupId, boolean privateLayout)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
