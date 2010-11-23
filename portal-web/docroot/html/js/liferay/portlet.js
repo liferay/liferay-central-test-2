@@ -35,6 +35,61 @@
 			);
 		},
 
+		_loadPortletFiles: function(response) {
+			var headerCssPaths = response.headerCssPaths || [];
+			var footerCssPaths = response.footerCssPaths || [];
+
+			var headerJavaScriptPaths = response.headerJavaScriptPaths || [];
+			var footerJavaScriptPaths = response.footerJavaScriptPaths || [];
+
+			var head = A.one('head');
+			var body = A.getBody();
+
+			if (headerCssPaths.length) {
+				A.Get.css(
+					headerCssPaths,
+					{
+						insertBefore: head.get('firstChild').getDOM(),
+						onSuccess: function(event) {
+							if (Liferay.Browser.isIe()) {
+								A.all('body link').appendTo(head);
+
+								A.all('link.lfr-css-file').each(
+									function(item, index, collection) {
+										document.createStyleSheet(item.get('href'));
+									}
+								);
+							}
+						}
+					}
+				);
+			}
+
+			var lastChild = body.get('lastChild').getDOM();
+
+			if (footerCssPaths.length) {
+				A.Get.css(
+					footerCssPaths,
+					{
+						insertBefore: lastChild
+					}
+				);
+			}
+
+			if (headerJavaScriptPaths.length) {
+				A.Get.script(headerJavaScriptPaths);
+			}
+
+			if (footerJavaScriptPaths.length) {
+				A.Get.script(
+					footerJavaScriptPaths,
+					{
+						insertBefore: lastChild
+					}
+				);
+			}
+		},
+
 		_staticPortlets: {}
 	};
 
@@ -215,6 +270,8 @@
 								}
 								else {
 									addPortletReturn(response.portletHTML);
+
+									Portlet._loadPortletFiles(response);
 								}
 							}
 						}

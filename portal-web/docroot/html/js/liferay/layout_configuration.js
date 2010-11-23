@@ -263,8 +263,6 @@
 							};
 
 							Liferay.Portlet.add(portletOptions);
-
-							instance._loadPortletFiles(portletMetaData);
 						}
 					},
 
@@ -308,31 +306,11 @@
 							var plid = portlet.attr('plid');
 							var portletId = portlet.attr('portletId');
 							var portletUsed = portlet.hasClass('lfr-portlet-used');
-							var footerPortalCssPaths = (portlet.attr('footerPortalCssPaths') || '').split(',');
-							var footerPortalJavaScriptPaths = (portlet.attr('footerPortalJavaScriptPaths') || '').split(',');
-							var footerPortletCssPaths = (portlet.attr('footerPortletCssPaths') || '').split(',');
-				            var footerPortletJavaScriptPaths = (portlet.attr('footerPortletJavaScriptPaths') || '').split(',');
-							var headerPortalCssPaths = (portlet.attr('headerPortalCssPaths') || '').split(',');
-							var headerPortalJavaScriptPaths = (portlet.attr('headerPortalJavaScriptPaths') || '').split(',');
-				            var headerPortletCssPaths = (portlet.attr('headerPortletCssPaths') || '').split(',');
-							var headerPortletJavaScriptPaths = (portlet.attr('headerPortletJavaScriptPaths') || '').split(',');
 
 							portletMetaData = {
 								instanceable: instanceable,
 								plid: plid,
 								portletId: portletId,
-								portalPaths: {
-									footerPortalCssPaths: footerPortalCssPaths,
-									footerPortalJavaScriptPaths: footerPortalJavaScriptPaths,
-									headerPortalCssPaths: headerPortalCssPaths,
-									headerPortalJavaScriptPaths: headerPortalJavaScriptPaths
-								},
-								portletPaths: {
-									footerPortletCssPaths: footerPortletCssPaths,
-									footerPortletJavaScriptPaths: footerPortletJavaScriptPaths,
-									headerPortletCssPaths: headerPortletCssPaths,
-									headerPortletJavaScriptPaths: headerPortletJavaScriptPaths
-								},
 								portletUsed: portletUsed
 							};
 
@@ -431,65 +409,6 @@
 						);
 
 						Util.focusFormField('#layout_configuration_content');
-					},
-
-					_loadPortletFiles: function(portletMetaData) {
-						var instance = this;
-
-						var headerPortalCssPaths = portletMetaData.portalPaths.headerPortalCssPaths;
-						var footerPortalCssPaths = portletMetaData.portalPaths.footerPortalCssPaths;
-						var headerPortletCssPaths = portletMetaData.portletPaths.headerPortletCssPaths;
-						var footerPortletCssPaths = portletMetaData.portletPaths.footerPortletCssPaths;
-
-						var headerPortalJavaScriptPaths = portletMetaData.portalPaths.headerPortalJavaScriptPaths;
-						var footerPortalJavaScriptPaths = portletMetaData.portalPaths.footerPortalJavaScriptPaths;
-						var headerPortletJavaScriptPaths = portletMetaData.portletPaths.headerPortletJavaScriptPaths;
-						var footerPortletJavaScriptPaths = portletMetaData.portletPaths.footerPortletJavaScriptPaths;
-
-						var head = A.one('head');
-						var body = A.getBody();
-
-						var headerCSS = headerPortalCssPaths.concat(headerPortletCssPaths);
-						var footerCSS = footerPortalCssPaths.concat(footerPortletCssPaths);
-
-						var headerJS = headerPortalJavaScriptPaths.concat(headerPortletJavaScriptPaths);
-						var footerJS = footerPortalJavaScriptPaths.concat(footerPortletJavaScriptPaths);
-
-						A.Get.css(
-							headerCSS,
-							{
-								insertBefore: head.get('firstChild').getDOM(),
-								onSuccess: function(event) {
-									if (Browser.isIe()) {
-										A.all('body link').appendTo(head);
-
-										A.all('link.lfr-css-file').each(
-											function(item, index, collection) {
-												document.createStyleSheet(item.get('href'));
-											}
-										);
-									}
-								}
-							}
-						);
-
-						var lastChild = body.get('lastChild').getDOM();
-
-						A.Get.css(
-							footerCSS,
-							{
-								insertBefore: lastChild
-							}
-						);
-
-						A.Get.script(headerJS);
-
-						A.Get.script(
-							footerJS,
-							{
-								insertBefore: lastChild
-							}
-						);
 					},
 
 					_onPortletClose: function(event) {
