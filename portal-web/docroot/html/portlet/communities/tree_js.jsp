@@ -308,6 +308,10 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 					);
 				}
 			},
+			paginator: {
+				limit: <%= PropsValues.LAYOUT_MANAGE_PAGES_INITIAL_CHILDREN %>,
+				offsetParam: 'start'
+			},
 			type: 'pages'
 		}
 	).render();

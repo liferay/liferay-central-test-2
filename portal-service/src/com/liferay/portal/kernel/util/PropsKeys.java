@@ -859,6 +859,8 @@ public interface PropsKeys {
 
 	public static final String LAYOUT_GUEST_SHOW_MIN_ICON = "layout.guest.show.min.icon";
 
+	public static final String LAYOUT_MANAGE_PAGES_INITIAL_CHILDREN = "layout.manage.pages.initial.children";
+
 	public static final String LAYOUT_PARALLEL_RENDER_ENABLE = "layout.parallel.render.enable";
 
 	public static final String LAYOUT_PARENTABLE = "layout.parentable";

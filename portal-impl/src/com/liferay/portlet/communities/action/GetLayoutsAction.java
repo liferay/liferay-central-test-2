@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.struts.JSONAction;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -68,9 +69,11 @@ public class GetLayoutsAction extends JSONAction {
 		long groupId = ParamUtil.getLong(request, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
 		long parentLayoutId = ParamUtil.getLong(request, "parentLayoutId");
+		int begin = ParamUtil.getInteger(request, "start");
+		int end = begin + PropsValues.LAYOUT_MANAGE_PAGES_INITIAL_CHILDREN;
 
 		return LayoutLocalServiceUtil.getLayouts(
-			groupId, privateLayout, parentLayoutId);
+			groupId, privateLayout, parentLayoutId, begin, end);
 	}
 
 }
