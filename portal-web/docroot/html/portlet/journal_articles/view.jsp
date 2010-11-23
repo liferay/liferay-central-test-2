@@ -181,46 +181,70 @@ double version = ParamUtil.getDouble(request, "version", -1);
 
 		JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(groupId, articleId, null, null, languageId, themeDisplay, articlePage, xmlRequest);
 
-		if (articleDisplay != null) {
-			AssetEntryServiceUtil.incrementViewCounter(JournalArticle.class.getName(), articleDisplay.getResourcePrimKey());
+		JournalArticle article = null;
+
+		try {
+			article = JournalArticleLocalServiceUtil.getLatestArticle(scopeGroupId, articleId, WorkflowConstants.STATUS_ANY);
+
+			Date now = new Date();
+			Date expirationDate = article.getExpirationDate();
+
+			boolean expired = article.isExpired() || (Validator.isNotNull(expirationDate) && expirationDate.before(now));
+
+
+			if ((articleDisplay != null) && !expired) {
+				AssetEntryServiceUtil.incrementViewCounter(JournalArticle.class.getName(), articleDisplay.getResourcePrimKey());
+			}
+			%>
+
+			<c:choose>
+				<c:when test="<%= (articleDisplay != null) && !expired %>">
+					<div class="journal-content-article">
+						<%= articleDisplay.getContent() %>
+					</div>
+
+					<c:if test="<%= articleDisplay.isPaginate() %>">
+
+						<%
+						PortletURL portletURL = renderResponse.createRenderURL();
+
+						portletURL.setParameter("articleId", articleId);
+						portletURL.setParameter("version", String.valueOf(version));
+						%>
+
+						<br />
+
+						<liferay-ui:page-iterator
+							cur="<%= articleDisplay.getCurrentPage() %>"
+							curParam='<%= "page" %>'
+							delta="<%= 1 %>"
+							maxPages="<%= 25 %>"
+							total="<%= articleDisplay.getNumberOfPages() %>"
+							type="article"
+							url="<%= portletURL.toString() %>"
+						/>
+
+						<br />
+					</c:if>
+				</c:when>
+				<c:otherwise>
+					<div class="portlet-msg-error">
+						<liferay-ui:message key="this-content-has-expired-or-you-do-not-have-the-required-permissions-to-access-it" />
+					</div>
+				</c:otherwise>
+			</c:choose>
+
+		<%
+		} catch (NoSuchArticleException nsae) {
+		%>
+
+			<div class="portlet-msg-error">
+				<%= LanguageUtil.get(pageContext, "the-selected-web-content-no-longer-exists") %>
+			</div>
+
+		<%
 		}
 		%>
 
-		<c:choose>
-			<c:when test="<%= articleDisplay != null %>">
-				<div class="journal-content-article">
-					<%= articleDisplay.getContent() %>
-				</div>
-
-				<c:if test="<%= articleDisplay.isPaginate() %>">
-
-					<%
-					PortletURL portletURL = renderResponse.createRenderURL();
-
-					portletURL.setParameter("articleId", articleId);
-					portletURL.setParameter("version", String.valueOf(version));
-					%>
-
-					<br />
-
-					<liferay-ui:page-iterator
-						cur="<%= articleDisplay.getCurrentPage() %>"
-						curParam='<%= "page" %>'
-						delta="<%= 1 %>"
-						maxPages="<%= 25 %>"
-						total="<%= articleDisplay.getNumberOfPages() %>"
-						type="article"
-						url="<%= portletURL.toString() %>"
-					/>
-
-					<br />
-				</c:if>
-			</c:when>
-			<c:otherwise>
-				<div class="portlet-msg-error">
-					<liferay-ui:message key="you-do-not-have-the-required-permissions" />
-				</div>
-			</c:otherwise>
-		</c:choose>
 	</c:otherwise>
 </c:choose>
