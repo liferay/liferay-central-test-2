@@ -129,8 +129,7 @@ public class UpgradePortletId extends UpgradeProcess {
 
 				int pos = oldPrimKey.indexOf(PortletConstants.LAYOUT_SEPARATOR);
 
-				long plid = GetterUtil.getLong(
-					oldPrimKey.substring(0, pos));
+				long plid = GetterUtil.getLong(oldPrimKey.substring(0, pos));
 
 				String portletId = oldPrimKey.substring(
 					pos + PortletConstants.LAYOUT_SEPARATOR.length());
@@ -145,14 +144,13 @@ public class UpgradePortletId extends UpgradeProcess {
 				pos = portletId.indexOf(PortletConstants.INSTANCE_SEPARATOR);
 
 				if (pos != -1) {
-					portletId = portletId.substring(
-						0, pos);
+					portletId = portletId.substring(0, pos);
 
 					String instanceId = oldPrimKey.substring(
 						pos + PortletConstants.INSTANCE_SEPARATOR.length());
 
-					newPrimKey  += PortletConstants.INSTANCE_SEPARATOR +
-							instanceId;
+					newPrimKey +=
+						PortletConstants.INSTANCE_SEPARATOR + instanceId;
 
 					oldPortletId +=
 						PortletConstants.INSTANCE_SEPARATOR + instanceId;
