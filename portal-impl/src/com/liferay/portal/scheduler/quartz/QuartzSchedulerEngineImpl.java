@@ -17,11 +17,11 @@ package com.liferay.portal.scheduler.quartz;
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.scheduler.IntervalTrigger;
 import com.liferay.portal.kernel.scheduler.JobState;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
+import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.TriggerState;
 import com.liferay.portal.kernel.scheduler.TriggerType;
@@ -477,7 +477,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 			JobDataMap jobDataMap = jobDetail.getJobDataMap();
 
-			if (isPermanent(jobDataMap)) {
+			String destinationName = jobDataMap.getString(DESTINATION_NAME);
+			Message message = (Message)jobDataMap.get(MESSAGE);
+
+			if (SchedulerEngineUtil.isPermanent(destinationName, message)) {
 				JobState jobStateClone = (JobState)jobState.clone();
 
 				jobStateClone.clearExceptions();
@@ -558,8 +561,12 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				}
 
 				JobDataMap jobDataMap = jobDetail.getJobDataMap();
+				String destinationName = jobDataMap.getString(DESTINATION_NAME);
+				Message message = (Message)jobDataMap.get(MESSAGE);
 
-				if (!isPermanent(jobDataMap)) {
+				if (!SchedulerEngineUtil.isPermanent(
+					destinationName, message)) {
+
 					_scheduler.deleteJob(jobName, groupName);
 				}
 			}
@@ -707,7 +714,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 		JobDataMap jobDataMap = jobDetail.getJobDataMap();
 
-		if (!isPermanent(jobDataMap)) {
+		String destinationName = jobDataMap.getString(DESTINATION_NAME);
+		Message message = (Message)jobDataMap.get(MESSAGE);
+
+		if (!SchedulerEngineUtil.isPermanent(destinationName, message)) {
 			return;
 		}
 
@@ -716,8 +726,6 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		JobState jobState = null;
 
 		if (trigger != null) {
-			Message message = (Message)jobDataMap.get(MESSAGE);
-
 			jobState = new JobState(
 				TriggerState.NORMAL, message.getInteger(EXCEPTIONS_MAX_SIZE));
 
@@ -750,23 +758,6 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		SchedulerContext schedulerContext = _scheduler.getContext();
 
 		schedulerContext.put(jobDetail.getFullName(), jobState);
-	}
-
-	protected boolean isPermanent(JobDataMap jobDataMap) {
-		String destinationName = jobDataMap.getString(DESTINATION_NAME);
-		Message message = (Message)jobDataMap.get(MESSAGE);
-
-		if (destinationName.equals(DestinationNames.SCHEDULER_DISPATCH)) {
-			return false;
-		}
-		else if (destinationName.equals(DestinationNames.SCHEDULER_SCRIPTING) &&
-			!message.getBoolean(PERMANENT_FLAG)) {
-
-			return false;
-		}
-		else {
-			return true;
-		}
 	}
 
 	protected void schedule(
