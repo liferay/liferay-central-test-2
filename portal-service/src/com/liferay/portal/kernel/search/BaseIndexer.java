@@ -137,7 +137,6 @@ public abstract class BaseIndexer implements Indexer {
 			addSearchNodeIds(contextQuery, searchContext);
 			addSearchFolderIds(contextQuery, searchContext);
 			addSearchPortletIds(contextQuery, searchContext);
-			addSearchType(contextQuery, searchContext);
 
 			BooleanQuery fullQuery = createFullQuery(
 				contextQuery, searchContext);
@@ -468,18 +467,6 @@ public abstract class BaseIndexer implements Indexer {
 			if (!portletIdsQuery.clauses().isEmpty()) {
 				contextQuery.add(portletIdsQuery, BooleanClauseOccur.MUST);
 			}
-		}
-	}
-
-	protected void addSearchType(
-			BooleanQuery contextQuery, SearchContext searchContext)
-		throws Exception {
-
-		String type = (String)searchContext.getAttribute("type");
-
-		if (Validator.isNotNull(type)) {
-			contextQuery.addRequiredTerm(
-				Field.TYPE, type);
 		}
 	}
 
