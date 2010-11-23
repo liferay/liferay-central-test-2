@@ -192,9 +192,6 @@ public class EditFileEntryAction extends PortletAction {
 	}
 
 	protected void lockFileEntry(ActionRequest actionRequest) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 		String name = ParamUtil.getString(actionRequest, "name");
@@ -241,9 +238,6 @@ public class EditFileEntryAction extends PortletAction {
 
 	protected void unlockFileEntry(ActionRequest actionRequest)
 		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");

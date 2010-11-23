@@ -79,9 +79,6 @@ public class DLFileShortcutServiceImpl extends DLFileShortcutServiceBaseImpl {
 		DLFileShortcutPermission.check(
 			getPermissionChecker(), fileShortcutId, ActionKeys.UPDATE);
 
-		DLFileShortcut fileShortcut =
-			dlFileShortcutLocalService.getDLFileShortcut(fileShortcutId);
-
 		try {
 			DLFileEntryPermission.check(
 				getPermissionChecker(), toGroupId, toFolderId, toName,

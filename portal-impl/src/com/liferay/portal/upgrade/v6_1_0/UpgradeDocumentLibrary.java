@@ -55,7 +55,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			while (rs.next()) {
 				long fileShortcutId = rs.getLong("fileShortcutId");
 				long groupId = rs.getLong("groupId");
-				long folderId = rs.getLong("folderId");
+				//long folderId = rs.getLong("folderId");
 				long toFolderId = rs.getLong("toFolderId");
 
 				long toGroupId = groupId;
