@@ -954,7 +954,7 @@ public class LayoutAction extends Action {
 				JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		StringServletResponse stringResponse =
-			(StringServletResponse)request.getAttribute(
+			(StringServletResponse)renderRequestImpl.getAttribute(
 				WebKeys.STRING_SERVLET_RESPONSE);
 
 		if (stringResponse == null) {
