@@ -1,13 +1,7 @@
 <?xml version="1.0"?>
 
-<project name="benchmarks" basedir="." default="run">
+<project name="benchmarks" basedir=".">
 	<import file="../build-common.xml" />
-
-	<path id="grinder.classpath">
-		<fileset dir="lib" includes="*.jar" />
-	</path>
-
-	<property name="grinder.file" value="../tools/grinder-3.1.zip" />
 
 	<target name="build-sample-sql">
 		<java
@@ -30,30 +24,5 @@
 			<arg value="sample.sql.wiki.page.count=${sample.sql.wiki.page.count}" />
 			<arg value="sample.sql.security.enabled=${sample.sql.security.enabled}" />
 		</java>
-	</target>
-
-	<target name="run" depends="setup">
-		<java
-			classname="net.grinder.Grinder"
-			classpathref="grinder.classpath"
-			fork="true"
-			newenvironment="true"
-		/>
-	</target>
-
-	<target name="setup">
-		<if>
-			<not>
-				<available file="lib" />
-			</not>
-			<then>
-				<unzip src="${grinder.file}" dest="lib">
-					<patternset>
-						<include name="**/lib/*.jar" />
-					</patternset>
-					<mapper type="flatten" />
-				</unzip>
-			</then>
-		</if>
 	</target>
 </project>
