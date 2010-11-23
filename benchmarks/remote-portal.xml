@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="remote-portal" default="default" basedir=".">
+	<description>This script is supposed to run remotely to manipulate Liferay Portal</description>
+
+	<taskdef classpath="liferay-lib.jar" resource="com/liferay/ant/taskdefs.properties" />
+	
+	<target name="extract" depends="clean">
+		<untar src="portal-tomcat.tar" dest="portal"/>
+		<chmod dir="portal/bin" perm="+x" includes="*.sh"/>
+	</target>
+
+	<target name="start-portal">
+		<kill processName="Bootstrap"/>
+		<delete>
+			<fileset dir="${basedir}/portal/logs" includes="*"/>
+		</delete>
+		<exec dir="portal/bin" executable="./catalina.sh" failifexecutionfails="true" failonerror="true">
+			<arg value="start"/>
+		</exec>
+	</target>
+
+	<target name="stop-portal">
+		<!--Temporarily remote setenv.bat/sh to avoid jmx port binding error-->
+		<copy file="${basedir}/portal/bin/setenv.sh" tofile="${basedir}/portal/bin/setenv.sh.bak" overwrite="true" failonerror="false"/>
+		<concat destfile="${basedir}/portal/bin/setenv.sh" append="true">
+JAVA_OPTS=</concat>
+		<exec dir="portal/bin" executable="./catalina.sh" failifexecutionfails="true" failonerror="true">
+			<arg value="stop"/>
+		</exec>
+		<!--Move setenv.bat/sh back-->
+		<move file="${basedir}/portal/bin/setenv.sh.bak" tofile="${basedir}/portal/bin/setenv.sh" failonerror="false"/>
+	</target>
+
+	<target name="clean">
+		<kill processName="Bootstrap"/>
+		<delete>
+		    <fileset dir=".">
+				<exclude name="remote-portal.xml"/>
+				<exclude name="portal-tomcat.tar"/>
+				<exclude name="liferay-lib.jar"/>
+				<include name="**/*"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="start-daemon">
+		<kill processName="RegistryImpl"/>
+		<kill processName="jstatd"/>
+		<property name="JAVA_HOME" value="${java.home}/.."/>
+		<property name="CLASSPATH" value="${JAVA_HOME}/lib/tools.jar"/>
+		<exec executable="rmiregistry" spawn="true">
+			<env key="JAVA_HOME" value="${JAVA_HOME}"/>
+			<env key="CLASSPATH" value="${CLASSPATH}"/>
+		</exec>
+		<exec executable="jstatd" spawn="true">
+			<env key="JAVA_HOME" value="${JAVA_HOME}"/>
+			<env key="CLASSPATH" value="${CLASSPATH}"/>
+			<arg value="-J-Djava.rmi.server.hostname=${portal.ip}"/>
+			<arg value="-J-Djava.security.policy=portal/jstatd.all.policy"/>
+		</exec>
+	</target>
+</project>
