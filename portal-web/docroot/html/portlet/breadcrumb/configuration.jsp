@@ -35,8 +35,17 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 	<aui:fieldset>
 		<aui:select name="displayStyle">
-				<aui:option label="horizontal" selected="<%= displayStyle == 1 %>" value="1" />
-				<aui:option label="vertical" selected="<%= displayStyle == 2 %>" value="2" />
+
+			<%
+			for (String displayStyleOption : PropsValues.BREADCRUMB_DISPLAY_STYLE_OPTIONS) {
+			%>
+
+				<aui:option label="<%= displayStyleOption %>" selected="<%= displayStyle.equals(displayStyleOption) %>" />
+
+			<%
+			}
+			%>
+
 		</aui:select>
 	</aui:fieldset>
 

@@ -1,44 +1,37 @@
 /* ---------- Breadcrumbs ---------- */
 
-.breadcrumbs-horizontal {
+.breadcrumbs {
 	margin-bottom: 1.5em;
 }
 
-.breadcrumbs-horizontal li {
+.breadcrumbs li {
 	background: url(../images/arrows/05_right.png) no-repeat 100% 50%;
+	display: inline-block;
 	margin-right: 5px;
 	max-width: 50%;
 	padding-right: 15px;
+	vertical-align: middle;
 }
 
-.breadcrumbs-vertical li {
-	background: url(../images/arrows/07_down.png) no-repeat 50% 100%;
-	padding: 0 0 9px;
-	max-width: auto;
+.ie7 .breadcrumbs li, .ie6 .breadcrumbs li {
+	display: inline;
+	zoom: 1;
+}
+
+.ie6 .breadcrumbs {
+	zoom: 1;
 }
 
 .breadcrumbs a {
 	display: block;
 }
 
-.breadcrumbs-vertical a {
-	text-align: center;
-	text-decoration: none;
-}
-
 .breadcrumbs .last {
 	background-image: none;
-}
-
-.breadcrumbs-horizontal .last {
 	margin-top: 0.2em;
 }
 
-.breadcrumbs-vertical .last {
-	font-weight: bold;
-}
-
-.breadcrumbs-horizontal .last a, .aui-tree-node-selected a {
+.breadcrumbs .last a, .aui-tree-node-selected a {
 	color: #555;
 }
 
