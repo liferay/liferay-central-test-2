@@ -34,47 +34,52 @@ if (showLayout) {
 if (showPortletBreadcrumb) {
 	_buildPortletBreadcrumb(request, sb);
 }
+
+String breadCrumbString = sb.toString();
+
+if (Validator.isNotNull(breadCrumbString)) {
+	String listToken = "<li";
+	int tokenLength = listToken.length();
+
+	int pos = breadCrumbString.indexOf(listToken);
+
+	breadCrumbString = StringUtil.insert(breadCrumbString, " class=\"first\"", pos + tokenLength);
+
+	pos = breadCrumbString.lastIndexOf(listToken);
+
+	breadCrumbString = StringUtil.insert(breadCrumbString, " class=\"last\"", pos + tokenLength);
+}
 %>
 
-<%= sb.toString() %>
+<ul class="breadcrumbs breadcrumbs-style-2 lfr-component">
+	<%= breadCrumbString %>
+</ul>
 
 <%!
 private void _buildLayoutBreadcrumb(Layout selLayout, String selLayoutParam, PortletURL portletURL, ThemeDisplay themeDisplay, boolean selectedLayout, StringBundler sb) throws Exception {
 	String layoutURL = _getBreadcrumbLayoutURL(selLayout, selLayoutParam, portletURL, themeDisplay);
 	String target = PortalUtil.getLayoutTarget(selLayout);
-	long layoutParentId = selLayout.getParentLayoutId();
 
 	StringBundler breadCrumbSB = new StringBundler(7);
 
-	if (selectedLayout) {
-		if (layoutParentId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
-			breadCrumbSB.append("<br />");
-			breadCrumbSB.append("<br />");
-		}
+	breadCrumbSB.append("<li><span><a href=\"");
+	breadCrumbSB.append(layoutURL);
+	breadCrumbSB.append("\" ");
+	breadCrumbSB.append(target);
+	breadCrumbSB.append(">");
 
-		breadCrumbSB.append("<div class=\"font-xx-large\" style=\"font-weight: bold;\">");
-		breadCrumbSB.append(HtmlUtil.escape(selLayout.getName(themeDisplay.getLocale())));
-		breadCrumbSB.append("</div>");
-		breadCrumbSB.append("<br />");
-	}
-	else {
-		breadCrumbSB.append("<a href=\"");
-		breadCrumbSB.append(layoutURL);
-		breadCrumbSB.append("\" ");
-		breadCrumbSB.append(target);
-		breadCrumbSB.append(">");
-		breadCrumbSB.append(HtmlUtil.escape(selLayout.getName(themeDisplay.getLocale())));
-		breadCrumbSB.append("</a>");
-	}
+	breadCrumbSB.append(HtmlUtil.escape(selLayout.getName(themeDisplay.getLocale())));
+
+	breadCrumbSB.append("</a></span></li>");
 
 	Layout layoutParent = null;
+	long layoutParentId = selLayout.getParentLayoutId();
 
 	if (layoutParentId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
 		layoutParent = LayoutLocalServiceUtil.getLayout(selLayout.getGroupId(), selLayout.isPrivateLayout(), layoutParentId);
 
 		_buildLayoutBreadcrumb(layoutParent, selLayoutParam, portletURL, themeDisplay, false, sb);
 
-		sb.append(" &raquo; ");
 		sb.append(breadCrumbSB.toString());
 	}
 	else {

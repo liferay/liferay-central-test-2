@@ -51,7 +51,7 @@ if (Validator.isNotNull(breadCrumbString)) {
 }
 %>
 
-<ul class="breadcrumbs lfr-component">
+<ul class="breadcrumbs breadcrumbs-style-1 lfr-component">
 	<%= breadCrumbString %>
 </ul>
 
