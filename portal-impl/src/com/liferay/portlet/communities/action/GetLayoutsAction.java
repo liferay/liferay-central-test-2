@@ -69,11 +69,11 @@ public class GetLayoutsAction extends JSONAction {
 		long groupId = ParamUtil.getLong(request, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
 		long parentLayoutId = ParamUtil.getLong(request, "parentLayoutId");
-		int begin = ParamUtil.getInteger(request, "start");
-		int end = begin + PropsValues.LAYOUT_MANAGE_PAGES_INITIAL_CHILDREN;
+		int start = ParamUtil.getInteger(request, "start");
+		int end = start + PropsValues.LAYOUT_MANAGE_PAGES_INITIAL_CHILDREN;
 
 		return LayoutLocalServiceUtil.getLayouts(
-			groupId, privateLayout, parentLayoutId, begin, end);
+			groupId, privateLayout, parentLayoutId, start, end);
 	}
 
 }
