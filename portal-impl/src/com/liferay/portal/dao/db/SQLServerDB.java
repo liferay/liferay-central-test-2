@@ -68,9 +68,11 @@ public class SQLServerDB extends BaseDB {
 		try {
 			con = DataAccess.getConnection();
 
-			DatabaseMetaData metaData = con.getMetaData();
+			DatabaseMetaData databaseMetaData = con.getMetaData();
 
-			if (metaData.getDatabaseMajorVersion() <= _SQL_SERVER_2000) {
+			if (databaseMetaData.getDatabaseMajorVersion() <=
+					_SQL_SERVER_2000) {
+
 				return null;
 			}
 

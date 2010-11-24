@@ -43,6 +43,7 @@ import java.io.FileWriter;
 
 import java.sql.Clob;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -478,9 +479,9 @@ public class Table {
 		String line = null;
 
 		try {
-			boolean useBatch = con.getMetaData().supportsBatchUpdates();
+			DatabaseMetaData databaseMetaData = con.getMetaData();
 
-			if (!useBatch) {
+			if (!databaseMetaData.supportsBatchUpdates()) {
 				if (_log.isDebugEnabled()) {
 					_log.debug("Database does not support batch updates");
 				}
@@ -511,7 +512,7 @@ public class Table {
 					setColumn(ps, i, (Integer)columns[pos][1], values[pos]);
 				}
 
-				if (useBatch) {
+				if (databaseMetaData.supportsBatchUpdates()) {
 					ps.addBatch();
 
 					if (count == BATCH_SIZE) {
@@ -528,7 +529,7 @@ public class Table {
 				}
 			}
 
-			if (useBatch) {
+			if (databaseMetaData.supportsBatchUpdates()) {
 				if (count != 0) {
 					populateTableRows(ps, true);
 				}

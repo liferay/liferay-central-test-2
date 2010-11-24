@@ -461,9 +461,9 @@ public class IndexAccessorImpl implements IndexAccessor {
 
 			// Check if table exists
 
-			DatabaseMetaData metaData = con.getMetaData();
+			DatabaseMetaData databaseMetaData = con.getMetaData();
 
-			rs = metaData.getTables(null, null, tableName, null);
+			rs = databaseMetaData.getTables(null, null, tableName, null);
 
 			if (!rs.next()) {
 				JdbcTemplate jdbcTemplate = jdbcDirectory.getJdbcTemplate();
