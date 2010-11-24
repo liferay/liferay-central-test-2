@@ -35,24 +35,21 @@ if (showPortletBreadcrumb) {
 	_buildPortletBreadcrumb(request, sb);
 }
 
-String breadCrumbString = sb.toString();
+String breadcrumbsString = sb.toString();
 
-if (Validator.isNotNull(breadCrumbString)) {
-	String listToken = "<li";
-	int tokenLength = listToken.length();
+if (Validator.isNotNull(breadcrumbsString)) {
+	int pos = breadcrumbsString.indexOf("<li");
 
-	int pos = breadCrumbString.indexOf(listToken);
+	breadcrumbsString = StringUtil.insert(breadcrumbsString, " class=\"first\"", pos + 3);
 
-	breadCrumbString = StringUtil.insert(breadCrumbString, " class=\"first\"", pos + tokenLength);
+	pos = breadcrumbsString.lastIndexOf("<li");
 
-	pos = breadCrumbString.lastIndexOf(listToken);
-
-	breadCrumbString = StringUtil.insert(breadCrumbString, " class=\"last\"", pos + tokenLength);
+	breadcrumbsString = StringUtil.insert(breadcrumbsString, " class=\"last\"", pos + 3);
 }
 %>
 
 <ul class="breadcrumbs breadcrumbs-style-1 lfr-component">
-	<%= breadCrumbString %>
+	<%= breadcrumbsString %>
 </ul>
 
 <%!
@@ -72,11 +69,8 @@ private void _buildLayoutBreadcrumb(Layout selLayout, String selLayoutParam, Por
 
 	breadCrumbSB.append("</a></span></li>");
 
-	Layout layoutParent = null;
-	long layoutParentId = selLayout.getParentLayoutId();
-
-	if (layoutParentId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
-		layoutParent = LayoutLocalServiceUtil.getLayout(selLayout.getGroupId(), selLayout.isPrivateLayout(), layoutParentId);
+	if (selLayout.getParentLayoutId() != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
+		Layout layoutParent = LayoutLocalServiceUtil.getLayout(selLayout.getGroupId(), selLayout.isPrivateLayout(), selLayout.getParentLayoutId());
 
 		_buildLayoutBreadcrumb(layoutParent, selLayoutParam, portletURL, themeDisplay, false, sb);
 
