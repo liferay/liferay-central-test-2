@@ -906,6 +906,9 @@ public class SourceFormatter {
 				if (fileName.endsWith("Table.java") &&
 					line.contains("String TABLE_SQL_CREATE = ")) {
 				}
+				else if (fileName.endsWith("Table.java") &&
+					line.contains("String TABLE_SQL_DROP = ")) {
+				}
 				else {
 					_sourceFormatterHelper.printError(
 						fileName, "> 80: " + fileName + " " + lineCount);
