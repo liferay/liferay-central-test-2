@@ -48,11 +48,11 @@ public class SchedulerEngineUtil {
 
 	public static void addScriptingJob(
 			Trigger trigger, String description, String language, String script,
-			boolean isPermanent)
+			boolean permanent)
 		throws SchedulerException {
 
 		_instance._addScriptingJob(
-			trigger, description, language, script, isPermanent);
+			trigger, description, language, script, permanent);
 	}
 
 	public static void delete(SchedulerEntry schedulerEntry)
@@ -290,14 +290,14 @@ public class SchedulerEngineUtil {
 
 	private void _addScriptingJob(
 			Trigger trigger, String description, String language, String script,
-			boolean isPermanent)
+			boolean permanent)
 		throws SchedulerException {
 
 		Message message = new Message();
 
 		message.put(SchedulerEngine.LANGUAGE, language);
 		message.put(SchedulerEngine.SCRIPT, script);
-		message.put(SchedulerEngine.PERMANENT, isPermanent);
+		message.put(SchedulerEngine.PERMANENT, permanent);
 
 		_schedule(
 			trigger, description, DestinationNames.SCHEDULER_SCRIPTING,
