@@ -654,25 +654,6 @@ public class SchedulerEngineUtil {
 		_schedulerEngine.suppressError(jobName, groupName);
 	}
 
-	private void _unregisterMessageListener(String groupName)
-		throws SchedulerException {
-
-		List<SchedulerRequest> schedulerRequests = _getScheduledJobs(groupName);
-
-		for (SchedulerRequest schedulerRequest : schedulerRequests) {
-			_unregisterMessageListener(schedulerRequest);
-		}
-	}
-
-	private void _unregisterMessageListener(String jobName, String groupName)
-		throws SchedulerException {
-
-		SchedulerRequest schedulerRequest = _getScheduledJob(
-			jobName, groupName);
-
-		_unregisterMessageListener(schedulerRequest);
-	}
-
 	private void _unregisterMessageListener(SchedulerRequest schedulerRequest) {
 		if (schedulerRequest == null) {
 			return;
@@ -719,6 +700,25 @@ public class SchedulerEngineUtil {
 				return;
 			}
 		}
+	}
+
+	private void _unregisterMessageListener(String groupName)
+		throws SchedulerException {
+
+		List<SchedulerRequest> schedulerRequests = _getScheduledJobs(groupName);
+
+		for (SchedulerRequest schedulerRequest : schedulerRequests) {
+			_unregisterMessageListener(schedulerRequest);
+		}
+	}
+
+	private void _unregisterMessageListener(String jobName, String groupName)
+		throws SchedulerException {
+
+		SchedulerRequest schedulerRequest = _getScheduledJob(
+			jobName, groupName);
+
+		_unregisterMessageListener(schedulerRequest);
 	}
 
 	private void _unschedule(SchedulerEntry schedulerEntry)
@@ -784,7 +784,7 @@ public class SchedulerEngineUtil {
 		boolean permanent = message.getBoolean(SchedulerEngine.PERMANENT);
 
 		_unregisterMessageListener(schedulerRequest);
-		
+
 		_addScriptingJob(trigger, description, language, script, permanent);
 	}
 
