@@ -71,6 +71,7 @@ if (workflowTask.getDueDate() != null) {
 
 			<liferay-ui:icon
 				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
+				id='<%= randomId + "taskChangeStatusLink" %>'
 				image="../aui/shuffle"
 				message="<%= message %>"
 				method="get"
@@ -94,6 +95,7 @@ if (workflowTask.getDueDate() != null) {
 
 		<liferay-ui:icon
 			cssClass='<%= "workflow-task-" + randomId + " task-assign-to-me-link" %>'
+			id='<%= randomId + "taskAssignToMeLink" %>'
 			image="assign"
 			message="assign-to-me"
 			method="get"
@@ -111,6 +113,7 @@ if (workflowTask.getDueDate() != null) {
 
 		<liferay-ui:icon
 			cssClass='<%= "workflow-task-" + randomId + " task-assign-link" %>'
+			id='<%= randomId + "taskAssignLink" %>'
 			image="assign"
 			message="assign-to-..."
 			method="get"
@@ -128,6 +131,7 @@ if (workflowTask.getDueDate() != null) {
 
 		<liferay-ui:icon
 			cssClass='<%= "workflow-task-" + randomId + " task-due-date-link" %>'
+			id='<%= randomId + "taskDueDateLink" %>'
 			image="time"
 			message="update-due-date"
 			method="get"
