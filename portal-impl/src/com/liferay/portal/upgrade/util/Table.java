@@ -380,7 +380,7 @@ public class Table {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		boolean isEmpty = true;
+		boolean empty = true;
 
 		String tempFileName =
 			SystemProperties.get(SystemProperties.TMP_DIR) + "/temp-db-" +
@@ -417,7 +417,7 @@ public class Table {
 
 					_totalRows++;
 
-					isEmpty = false;
+					empty = false;
 				}
 				catch (StagnantRowException sre) {
 					if (_log.isWarnEnabled()) {
@@ -445,7 +445,7 @@ public class Table {
 			unsyncBufferedWriter.close();
 		}
 
-		if (!isEmpty) {
+		if (!empty) {
 			return tempFileName;
 		}
 		else {
