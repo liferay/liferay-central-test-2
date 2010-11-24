@@ -71,13 +71,6 @@ public class SchedulerEngineUtil {
 		_instance._delete(jobName, groupName);
 	}
 
-	public static void delete(
-			String jobName, String groupName, String messageListenerUUID)
-		throws SchedulerException {
-
-		_instance._delete(jobName, groupName, messageListenerUUID);
-	}
-
 	public static Date getEndTime(SchedulerRequest schedulerRequest) {
 		return _instance._getEndTime(schedulerRequest);
 	}
@@ -248,13 +241,6 @@ public class SchedulerEngineUtil {
 		_instance._unschedule(jobName, groupName);
 	}
 
-	public static void unschedule(
-			String jobName, String groupName, String messageListenerUUID)
-		throws SchedulerException {
-
-		_instance._unschedule(jobName, groupName, messageListenerUUID);
-	}
-
 	/**
 	 * @deprecated {@link #unschedule(String, String)}
 	 */
@@ -315,26 +301,21 @@ public class SchedulerEngineUtil {
 
 		Trigger trigger = schedulerEntry.getTrigger();
 
-		_delete(trigger.getJobName(), trigger.getGroupName());
+		_schedulerEngine.delete(trigger.getJobName(), trigger.getGroupName());
 	}
 
 	private void _delete(String groupName) throws SchedulerException {
+		_unregisterMessageListener(groupName);
+
 		_schedulerEngine.delete(groupName);
 	}
 
 	private void _delete(String jobName, String groupName)
 		throws SchedulerException {
 
+		_unregisterMessageListener(jobName, groupName);
+
 		_schedulerEngine.delete(jobName, groupName);
-	}
-
-	private void _delete(
-			String jobName, String groupName, String messageListenerUUID)
-		throws SchedulerException {
-
-		_unregisterMessageListener(messageListenerUUID);
-
-		_delete(jobName, groupName);
 	}
 
 	private Date _getEndTime(SchedulerRequest schedulerRequest) {
@@ -673,7 +654,41 @@ public class SchedulerEngineUtil {
 		_schedulerEngine.suppressError(jobName, groupName);
 	}
 
-	private void _unregisterMessageListener(String messageListenerUUID) {
+	private void _unregisterMessageListener(String groupName)
+		throws SchedulerException {
+
+		List<SchedulerRequest> schedulerRequests = _getScheduledJobs(groupName);
+
+		for (SchedulerRequest schedulerRequest : schedulerRequests) {
+			_unregisterMessageListener(schedulerRequest);
+		}
+	}
+
+	private void _unregisterMessageListener(String jobName, String groupName)
+		throws SchedulerException {
+
+		SchedulerRequest schedulerRequest = _getScheduledJob(
+			jobName, groupName);
+
+		_unregisterMessageListener(schedulerRequest);
+	}
+
+	private void _unregisterMessageListener(SchedulerRequest schedulerRequest) {
+		if (schedulerRequest == null) {
+			return;
+		}
+
+		String destinationName = schedulerRequest.getDestinationName();
+
+		if (!destinationName.equals(DestinationNames.SCHEDULER_DISPATCH)) {
+			return;
+		}
+
+		Message message = schedulerRequest.getMessage();
+
+		String messageListenerUUID = message.getString(
+			SchedulerEngine.MESSAGE_LISTENER_UUID);
+
 		if (messageListenerUUID == null) {
 			return;
 		}
@@ -717,25 +732,22 @@ public class SchedulerEngineUtil {
 
 		Trigger trigger = schedulerEntry.getTrigger();
 
-		_unschedule(trigger.getJobName(), trigger.getGroupName());
+		_schedulerEngine.unschedule(
+			trigger.getJobName(), trigger.getGroupName());
 	}
 
 	private void _unschedule(String groupName) throws SchedulerException {
+		_unregisterMessageListener(groupName);
+
 		_schedulerEngine.unschedule(groupName);
 	}
 
 	private void _unschedule(String jobName, String groupName)
 		throws SchedulerException {
 
+		_unregisterMessageListener(jobName, groupName);
+
 		_schedulerEngine.unschedule(jobName, groupName);
-	}
-
-	private void _unschedule(
-			String jobName, String groupName, String messageListenerUUID)
-		throws SchedulerException {
-
-		_unregisterMessageListener(messageListenerUUID);
-		_unschedule(jobName, groupName);
 	}
 
 	/**
@@ -771,6 +783,8 @@ public class SchedulerEngineUtil {
 
 		boolean permanent = message.getBoolean(SchedulerEngine.PERMANENT);
 
+		_unregisterMessageListener(schedulerRequest);
+		
 		_addScriptingJob(trigger, description, language, script, permanent);
 	}
 
