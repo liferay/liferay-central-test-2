@@ -53,34 +53,6 @@ portletURL.setParameter("target", target);
 
 				total = groups.size();
 				results = ListUtil.subList(groups, searchContainer.getStart(), searchContainer.getEnd());
-
-				if (Validator.isNotNull(searchTerms.getName())) {
-					String searchTermsName = searchTerms.getName();
-
-					searchTermsName = StringUtil.replaceFirst(searchTermsName, '%', "");
-					searchTermsName = StringUtil.replaceLast(searchTermsName, '%', "");
-					searchTermsName.trim();
-
-					Group group = null;
-
-					for (int i = 0; i < results.size();) {
-						group = (Group)results.get(i);
-
-						String groupName = group.getDescriptiveName();
-
-						groupName = groupName.toLowerCase();
-
-						if (groupName.indexOf(searchTermsName) == -1) {
-							results.remove(i);
-
-							continue;
-						}
-
-						i += 1;
-					}
-
-					total = results.size();
-				}
 			}
 			else {
 				results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
