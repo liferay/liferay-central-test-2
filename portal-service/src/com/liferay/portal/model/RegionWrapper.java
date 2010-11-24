@@ -183,7 +183,7 @@ public class RegionWrapper implements Region {
 	}
 
 	public java.lang.Object clone() {
-		return _region.clone();
+		return new RegionWrapper((Region)_region.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Region region) {
@@ -195,7 +195,7 @@ public class RegionWrapper implements Region {
 	}
 
 	public com.liferay.portal.model.Region toEscapedModel() {
-		return _region.toEscapedModel();
+		return new RegionWrapper(_region.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

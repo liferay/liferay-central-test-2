@@ -282,7 +282,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 	}
 
 	public java.lang.Object clone() {
-		return _shoppingItemPrice.clone();
+		return new ShoppingItemPriceWrapper((ShoppingItemPrice)_shoppingItemPrice.clone());
 	}
 
 	public int compareTo(
@@ -295,7 +295,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingItemPrice toEscapedModel() {
-		return _shoppingItemPrice.toEscapedModel();
+		return new ShoppingItemPriceWrapper(_shoppingItemPrice.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

@@ -437,7 +437,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	public java.lang.Object clone() {
-		return _shoppingCoupon.clone();
+		return new ShoppingCouponWrapper((ShoppingCoupon)_shoppingCoupon.clone());
 	}
 
 	public int compareTo(
@@ -450,7 +450,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon toEscapedModel() {
-		return _shoppingCoupon.toEscapedModel();
+		return new ShoppingCouponWrapper(_shoppingCoupon.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

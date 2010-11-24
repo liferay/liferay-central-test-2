@@ -707,7 +707,7 @@ public class JournalArticleWrapper implements JournalArticle {
 	}
 
 	public java.lang.Object clone() {
-		return _journalArticle.clone();
+		return new JournalArticleWrapper((JournalArticle)_journalArticle.clone());
 	}
 
 	public int compareTo(
@@ -720,7 +720,7 @@ public class JournalArticleWrapper implements JournalArticle {
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle toEscapedModel() {
-		return _journalArticle.toEscapedModel();
+		return new JournalArticleWrapper(_journalArticle.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

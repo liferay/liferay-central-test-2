@@ -356,7 +356,7 @@ public class GroupWrapper implements Group {
 	}
 
 	public java.lang.Object clone() {
-		return _group.clone();
+		return new GroupWrapper((Group)_group.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Group group) {
@@ -368,7 +368,7 @@ public class GroupWrapper implements Group {
 	}
 
 	public com.liferay.portal.model.Group toEscapedModel() {
-		return _group.toEscapedModel();
+		return new GroupWrapper(_group.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

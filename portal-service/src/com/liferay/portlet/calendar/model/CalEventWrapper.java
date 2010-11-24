@@ -527,7 +527,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	public java.lang.Object clone() {
-		return _calEvent.clone();
+		return new CalEventWrapper((CalEvent)_calEvent.clone());
 	}
 
 	public int compareTo(com.liferay.portlet.calendar.model.CalEvent calEvent) {
@@ -539,7 +539,7 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	public com.liferay.portlet.calendar.model.CalEvent toEscapedModel() {
-		return _calEvent.toEscapedModel();
+		return new CalEventWrapper(_calEvent.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

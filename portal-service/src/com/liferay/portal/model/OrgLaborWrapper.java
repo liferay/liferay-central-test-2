@@ -390,7 +390,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	public java.lang.Object clone() {
-		return _orgLabor.clone();
+		return new OrgLaborWrapper((OrgLabor)_orgLabor.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.OrgLabor orgLabor) {
@@ -402,7 +402,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	public com.liferay.portal.model.OrgLabor toEscapedModel() {
-		return _orgLabor.toEscapedModel();
+		return new OrgLaborWrapper(_orgLabor.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

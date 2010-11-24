@@ -320,7 +320,7 @@ public class EmailAddressWrapper implements EmailAddress {
 	}
 
 	public java.lang.Object clone() {
-		return _emailAddress.clone();
+		return new EmailAddressWrapper((EmailAddress)_emailAddress.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.EmailAddress emailAddress) {
@@ -332,7 +332,7 @@ public class EmailAddressWrapper implements EmailAddress {
 	}
 
 	public com.liferay.portal.model.EmailAddress toEscapedModel() {
-		return _emailAddress.toEscapedModel();
+		return new EmailAddressWrapper(_emailAddress.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

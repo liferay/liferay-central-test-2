@@ -284,7 +284,7 @@ public class BookmarksFolderWrapper implements BookmarksFolder {
 	}
 
 	public java.lang.Object clone() {
-		return _bookmarksFolder.clone();
+		return new BookmarksFolderWrapper((BookmarksFolder)_bookmarksFolder.clone());
 	}
 
 	public int compareTo(
@@ -297,7 +297,7 @@ public class BookmarksFolderWrapper implements BookmarksFolder {
 	}
 
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder toEscapedModel() {
-		return _bookmarksFolder.toEscapedModel();
+		return new BookmarksFolderWrapper(_bookmarksFolder.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

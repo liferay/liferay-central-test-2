@@ -356,7 +356,7 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	public java.lang.Object clone() {
-		return _mbCategory.clone();
+		return new MBCategoryWrapper((MBCategory)_mbCategory.clone());
 	}
 
 	public int compareTo(
@@ -369,7 +369,7 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	public com.liferay.portlet.messageboards.model.MBCategory toEscapedModel() {
-		return _mbCategory.toEscapedModel();
+		return new MBCategoryWrapper(_mbCategory.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

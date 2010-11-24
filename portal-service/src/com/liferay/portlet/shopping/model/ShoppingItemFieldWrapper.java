@@ -174,7 +174,7 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField {
 	}
 
 	public java.lang.Object clone() {
-		return _shoppingItemField.clone();
+		return new ShoppingItemFieldWrapper((ShoppingItemField)_shoppingItemField.clone());
 	}
 
 	public int compareTo(
@@ -187,7 +187,7 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField {
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingItemField toEscapedModel() {
-		return _shoppingItemField.toEscapedModel();
+		return new ShoppingItemFieldWrapper(_shoppingItemField.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

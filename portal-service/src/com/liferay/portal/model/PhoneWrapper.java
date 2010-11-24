@@ -338,7 +338,7 @@ public class PhoneWrapper implements Phone {
 	}
 
 	public java.lang.Object clone() {
-		return _phone.clone();
+		return new PhoneWrapper((Phone)_phone.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Phone phone) {
@@ -350,7 +350,7 @@ public class PhoneWrapper implements Phone {
 	}
 
 	public com.liferay.portal.model.Phone toEscapedModel() {
-		return _phone.toEscapedModel();
+		return new PhoneWrapper(_phone.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

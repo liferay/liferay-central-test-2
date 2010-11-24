@@ -286,7 +286,7 @@ public class SocialEquityUserWrapper implements SocialEquityUser {
 	}
 
 	public java.lang.Object clone() {
-		return _socialEquityUser.clone();
+		return new SocialEquityUserWrapper((SocialEquityUser)_socialEquityUser.clone());
 	}
 
 	public int compareTo(
@@ -299,7 +299,7 @@ public class SocialEquityUserWrapper implements SocialEquityUser {
 	}
 
 	public com.liferay.portlet.social.model.SocialEquityUser toEscapedModel() {
-		return _socialEquityUser.toEscapedModel();
+		return new SocialEquityUserWrapper(_socialEquityUser.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

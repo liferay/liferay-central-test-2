@@ -554,7 +554,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	public java.lang.Object clone() {
-		return _assetEntry.clone();
+		return new AssetEntryWrapper((AssetEntry)_assetEntry.clone());
 	}
 
 	public int compareTo(com.liferay.portlet.asset.model.AssetEntry assetEntry) {
@@ -566,7 +566,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	public com.liferay.portlet.asset.model.AssetEntry toEscapedModel() {
-		return _assetEntry.toEscapedModel();
+		return new AssetEntryWrapper(_assetEntry.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

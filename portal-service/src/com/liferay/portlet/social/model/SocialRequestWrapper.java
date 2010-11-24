@@ -367,7 +367,7 @@ public class SocialRequestWrapper implements SocialRequest {
 	}
 
 	public java.lang.Object clone() {
-		return _socialRequest.clone();
+		return new SocialRequestWrapper((SocialRequest)_socialRequest.clone());
 	}
 
 	public int compareTo(
@@ -380,7 +380,7 @@ public class SocialRequestWrapper implements SocialRequest {
 	}
 
 	public com.liferay.portlet.social.model.SocialRequest toEscapedModel() {
-		return _socialRequest.toEscapedModel();
+		return new SocialRequestWrapper(_socialRequest.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

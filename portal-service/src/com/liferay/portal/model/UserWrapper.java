@@ -842,7 +842,7 @@ public class UserWrapper implements User {
 	}
 
 	public java.lang.Object clone() {
-		return _user.clone();
+		return new UserWrapper((User)_user.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.User user) {
@@ -854,7 +854,7 @@ public class UserWrapper implements User {
 	}
 
 	public com.liferay.portal.model.User toEscapedModel() {
-		return _user.toEscapedModel();
+		return new UserWrapper(_user.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

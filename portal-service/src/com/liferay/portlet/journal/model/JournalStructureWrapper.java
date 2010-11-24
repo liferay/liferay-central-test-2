@@ -338,7 +338,7 @@ public class JournalStructureWrapper implements JournalStructure {
 	}
 
 	public java.lang.Object clone() {
-		return _journalStructure.clone();
+		return new JournalStructureWrapper((JournalStructure)_journalStructure.clone());
 	}
 
 	public int compareTo(
@@ -351,7 +351,7 @@ public class JournalStructureWrapper implements JournalStructure {
 	}
 
 	public com.liferay.portlet.journal.model.JournalStructure toEscapedModel() {
-		return _journalStructure.toEscapedModel();
+		return new JournalStructureWrapper(_journalStructure.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

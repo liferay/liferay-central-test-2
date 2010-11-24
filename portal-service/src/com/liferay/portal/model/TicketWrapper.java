@@ -219,7 +219,7 @@ public class TicketWrapper implements Ticket {
 	}
 
 	public java.lang.Object clone() {
-		return _ticket.clone();
+		return new TicketWrapper((Ticket)_ticket.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Ticket ticket) {
@@ -231,7 +231,7 @@ public class TicketWrapper implements Ticket {
 	}
 
 	public com.liferay.portal.model.Ticket toEscapedModel() {
-		return _ticket.toEscapedModel();
+		return new TicketWrapper(_ticket.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

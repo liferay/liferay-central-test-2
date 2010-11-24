@@ -1067,7 +1067,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	public java.lang.Object clone() {
-		return _shoppingOrder.clone();
+		return new ShoppingOrderWrapper((ShoppingOrder)_shoppingOrder.clone());
 	}
 
 	public int compareTo(
@@ -1080,7 +1080,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder toEscapedModel() {
-		return _shoppingOrder.toEscapedModel();
+		return new ShoppingOrderWrapper(_shoppingOrder.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

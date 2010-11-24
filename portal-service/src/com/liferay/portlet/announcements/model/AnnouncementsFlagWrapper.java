@@ -194,7 +194,7 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 	}
 
 	public java.lang.Object clone() {
-		return _announcementsFlag.clone();
+		return new AnnouncementsFlagWrapper((AnnouncementsFlag)_announcementsFlag.clone());
 	}
 
 	public int compareTo(
@@ -207,7 +207,7 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 	}
 
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag toEscapedModel() {
-		return _announcementsFlag.toEscapedModel();
+		return new AnnouncementsFlagWrapper(_announcementsFlag.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

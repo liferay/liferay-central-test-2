@@ -156,7 +156,7 @@ public class ResourceActionWrapper implements ResourceAction {
 	}
 
 	public java.lang.Object clone() {
-		return _resourceAction.clone();
+		return new ResourceActionWrapper((ResourceAction)_resourceAction.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.ResourceAction resourceAction) {
@@ -168,7 +168,7 @@ public class ResourceActionWrapper implements ResourceAction {
 	}
 
 	public com.liferay.portal.model.ResourceAction toEscapedModel() {
-		return _resourceAction.toEscapedModel();
+		return new ResourceActionWrapper(_resourceAction.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

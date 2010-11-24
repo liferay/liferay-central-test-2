@@ -165,7 +165,7 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel {
 	}
 
 	public java.lang.Object clone() {
-		return _passwordPolicyRel.clone();
+		return new PasswordPolicyRelWrapper((PasswordPolicyRel)_passwordPolicyRel.clone());
 	}
 
 	public int compareTo(
@@ -178,7 +178,7 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel {
 	}
 
 	public com.liferay.portal.model.PasswordPolicyRel toEscapedModel() {
-		return _passwordPolicyRel.toEscapedModel();
+		return new PasswordPolicyRelWrapper(_passwordPolicyRel.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

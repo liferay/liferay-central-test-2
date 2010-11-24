@@ -201,7 +201,7 @@ public class PluginSettingWrapper implements PluginSetting {
 	}
 
 	public java.lang.Object clone() {
-		return _pluginSetting.clone();
+		return new PluginSettingWrapper((PluginSetting)_pluginSetting.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.PluginSetting pluginSetting) {
@@ -213,7 +213,7 @@ public class PluginSettingWrapper implements PluginSetting {
 	}
 
 	public com.liferay.portal.model.PluginSetting toEscapedModel() {
-		return _pluginSetting.toEscapedModel();
+		return new PluginSettingWrapper(_pluginSetting.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

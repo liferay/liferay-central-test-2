@@ -273,7 +273,7 @@ public class CompanyWrapper implements Company {
 	}
 
 	public java.lang.Object clone() {
-		return _company.clone();
+		return new CompanyWrapper((Company)_company.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Company company) {
@@ -285,7 +285,7 @@ public class CompanyWrapper implements Company {
 	}
 
 	public com.liferay.portal.model.Company toEscapedModel() {
-		return _company.toEscapedModel();
+		return new CompanyWrapper(_company.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

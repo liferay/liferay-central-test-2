@@ -138,7 +138,7 @@ public class ResourceWrapper implements Resource {
 	}
 
 	public java.lang.Object clone() {
-		return _resource.clone();
+		return new ResourceWrapper((Resource)_resource.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Resource resource) {
@@ -150,7 +150,7 @@ public class ResourceWrapper implements Resource {
 	}
 
 	public com.liferay.portal.model.Resource toEscapedModel() {
-		return _resource.toEscapedModel();
+		return new ResourceWrapper(_resource.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

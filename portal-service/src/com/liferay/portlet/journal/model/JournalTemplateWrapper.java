@@ -446,7 +446,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	public java.lang.Object clone() {
-		return _journalTemplate.clone();
+		return new JournalTemplateWrapper((JournalTemplate)_journalTemplate.clone());
 	}
 
 	public int compareTo(
@@ -459,7 +459,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	public com.liferay.portlet.journal.model.JournalTemplate toEscapedModel() {
-		return _journalTemplate.toEscapedModel();
+		return new JournalTemplateWrapper(_journalTemplate.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

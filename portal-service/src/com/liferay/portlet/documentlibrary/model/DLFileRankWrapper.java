@@ -230,7 +230,7 @@ public class DLFileRankWrapper implements DLFileRank {
 	}
 
 	public java.lang.Object clone() {
-		return _dlFileRank.clone();
+		return new DLFileRankWrapper((DLFileRank)_dlFileRank.clone());
 	}
 
 	public int compareTo(
@@ -243,7 +243,7 @@ public class DLFileRankWrapper implements DLFileRank {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileRank toEscapedModel() {
-		return _dlFileRank.toEscapedModel();
+		return new DLFileRankWrapper(_dlFileRank.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

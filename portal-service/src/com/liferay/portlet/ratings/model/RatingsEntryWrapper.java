@@ -275,7 +275,7 @@ public class RatingsEntryWrapper implements RatingsEntry {
 	}
 
 	public java.lang.Object clone() {
-		return _ratingsEntry.clone();
+		return new RatingsEntryWrapper((RatingsEntry)_ratingsEntry.clone());
 	}
 
 	public int compareTo(
@@ -288,7 +288,7 @@ public class RatingsEntryWrapper implements RatingsEntry {
 	}
 
 	public com.liferay.portlet.ratings.model.RatingsEntry toEscapedModel() {
-		return _ratingsEntry.toEscapedModel();
+		return new RatingsEntryWrapper(_ratingsEntry.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

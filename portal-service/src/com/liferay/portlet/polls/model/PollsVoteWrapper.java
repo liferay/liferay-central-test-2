@@ -194,7 +194,7 @@ public class PollsVoteWrapper implements PollsVote {
 	}
 
 	public java.lang.Object clone() {
-		return _pollsVote.clone();
+		return new PollsVoteWrapper((PollsVote)_pollsVote.clone());
 	}
 
 	public int compareTo(com.liferay.portlet.polls.model.PollsVote pollsVote) {
@@ -206,7 +206,7 @@ public class PollsVoteWrapper implements PollsVote {
 	}
 
 	public com.liferay.portlet.polls.model.PollsVote toEscapedModel() {
-		return _pollsVote.toEscapedModel();
+		return new PollsVoteWrapper(_pollsVote.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

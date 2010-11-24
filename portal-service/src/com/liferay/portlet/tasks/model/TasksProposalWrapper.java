@@ -347,7 +347,7 @@ public class TasksProposalWrapper implements TasksProposal {
 	}
 
 	public java.lang.Object clone() {
-		return _tasksProposal.clone();
+		return new TasksProposalWrapper((TasksProposal)_tasksProposal.clone());
 	}
 
 	public int compareTo(
@@ -360,7 +360,7 @@ public class TasksProposalWrapper implements TasksProposal {
 	}
 
 	public com.liferay.portlet.tasks.model.TasksProposal toEscapedModel() {
-		return _tasksProposal.toEscapedModel();
+		return new TasksProposalWrapper(_tasksProposal.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

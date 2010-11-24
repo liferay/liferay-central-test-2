@@ -653,7 +653,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	public java.lang.Object clone() {
-		return _contact.clone();
+		return new ContactWrapper((Contact)_contact.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Contact contact) {
@@ -665,7 +665,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	public com.liferay.portal.model.Contact toEscapedModel() {
-		return _contact.toEscapedModel();
+		return new ContactWrapper(_contact.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

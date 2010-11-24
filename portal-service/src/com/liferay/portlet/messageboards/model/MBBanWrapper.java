@@ -268,7 +268,7 @@ public class MBBanWrapper implements MBBan {
 	}
 
 	public java.lang.Object clone() {
-		return _mbBan.clone();
+		return new MBBanWrapper((MBBan)_mbBan.clone());
 	}
 
 	public int compareTo(com.liferay.portlet.messageboards.model.MBBan mbBan) {
@@ -280,7 +280,7 @@ public class MBBanWrapper implements MBBan {
 	}
 
 	public com.liferay.portlet.messageboards.model.MBBan toEscapedModel() {
-		return _mbBan.toEscapedModel();
+		return new MBBanWrapper(_mbBan.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

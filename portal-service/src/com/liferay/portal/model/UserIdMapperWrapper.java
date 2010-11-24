@@ -194,7 +194,7 @@ public class UserIdMapperWrapper implements UserIdMapper {
 	}
 
 	public java.lang.Object clone() {
-		return _userIdMapper.clone();
+		return new UserIdMapperWrapper((UserIdMapper)_userIdMapper.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.UserIdMapper userIdMapper) {
@@ -206,7 +206,7 @@ public class UserIdMapperWrapper implements UserIdMapper {
 	}
 
 	public com.liferay.portal.model.UserIdMapper toEscapedModel() {
-		return _userIdMapper.toEscapedModel();
+		return new UserIdMapperWrapper(_userIdMapper.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

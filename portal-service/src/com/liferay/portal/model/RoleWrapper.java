@@ -327,7 +327,7 @@ public class RoleWrapper implements Role {
 	}
 
 	public java.lang.Object clone() {
-		return _role.clone();
+		return new RoleWrapper((Role)_role.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Role role) {
@@ -339,7 +339,7 @@ public class RoleWrapper implements Role {
 	}
 
 	public com.liferay.portal.model.Role toEscapedModel() {
-		return _role.toEscapedModel();
+		return new RoleWrapper(_role.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

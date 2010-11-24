@@ -372,7 +372,7 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	public java.lang.Object clone() {
-		return _layoutSet.clone();
+		return new LayoutSetWrapper((LayoutSet)_layoutSet.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.LayoutSet layoutSet) {
@@ -384,7 +384,7 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	public com.liferay.portal.model.LayoutSet toEscapedModel() {
-		return _layoutSet.toEscapedModel();
+		return new LayoutSetWrapper(_layoutSet.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

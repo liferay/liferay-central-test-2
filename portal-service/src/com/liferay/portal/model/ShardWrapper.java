@@ -165,7 +165,7 @@ public class ShardWrapper implements Shard {
 	}
 
 	public java.lang.Object clone() {
-		return _shard.clone();
+		return new ShardWrapper((Shard)_shard.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Shard shard) {
@@ -177,7 +177,7 @@ public class ShardWrapper implements Shard {
 	}
 
 	public com.liferay.portal.model.Shard toEscapedModel() {
-		return _shard.toEscapedModel();
+		return new ShardWrapper(_shard.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

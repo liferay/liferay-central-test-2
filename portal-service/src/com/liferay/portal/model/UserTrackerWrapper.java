@@ -248,7 +248,7 @@ public class UserTrackerWrapper implements UserTracker {
 	}
 
 	public java.lang.Object clone() {
-		return _userTracker.clone();
+		return new UserTrackerWrapper((UserTracker)_userTracker.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.UserTracker userTracker) {
@@ -260,7 +260,7 @@ public class UserTrackerWrapper implements UserTracker {
 	}
 
 	public com.liferay.portal.model.UserTracker toEscapedModel() {
-		return _userTracker.toEscapedModel();
+		return new UserTrackerWrapper(_userTracker.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

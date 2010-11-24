@@ -165,7 +165,7 @@ public class ExpandoTableWrapper implements ExpandoTable {
 	}
 
 	public java.lang.Object clone() {
-		return _expandoTable.clone();
+		return new ExpandoTableWrapper((ExpandoTable)_expandoTable.clone());
 	}
 
 	public int compareTo(
@@ -178,7 +178,7 @@ public class ExpandoTableWrapper implements ExpandoTable {
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoTable toEscapedModel() {
-		return _expandoTable.toEscapedModel();
+		return new ExpandoTableWrapper(_expandoTable.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

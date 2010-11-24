@@ -392,7 +392,7 @@ public class AccountWrapper implements Account {
 	}
 
 	public java.lang.Object clone() {
-		return _account.clone();
+		return new AccountWrapper((Account)_account.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Account account) {
@@ -404,7 +404,7 @@ public class AccountWrapper implements Account {
 	}
 
 	public com.liferay.portal.model.Account toEscapedModel() {
-		return _account.toEscapedModel();
+		return new AccountWrapper(_account.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

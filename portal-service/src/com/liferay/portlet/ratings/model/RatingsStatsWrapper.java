@@ -201,7 +201,7 @@ public class RatingsStatsWrapper implements RatingsStats {
 	}
 
 	public java.lang.Object clone() {
-		return _ratingsStats.clone();
+		return new RatingsStatsWrapper((RatingsStats)_ratingsStats.clone());
 	}
 
 	public int compareTo(
@@ -214,7 +214,7 @@ public class RatingsStatsWrapper implements RatingsStats {
 	}
 
 	public com.liferay.portlet.ratings.model.RatingsStats toEscapedModel() {
-		return _ratingsStats.toEscapedModel();
+		return new RatingsStatsWrapper(_ratingsStats.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

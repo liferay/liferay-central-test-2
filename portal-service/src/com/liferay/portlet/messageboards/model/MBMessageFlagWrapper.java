@@ -212,7 +212,7 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 	}
 
 	public java.lang.Object clone() {
-		return _mbMessageFlag.clone();
+		return new MBMessageFlagWrapper((MBMessageFlag)_mbMessageFlag.clone());
 	}
 
 	public int compareTo(
@@ -225,7 +225,7 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag toEscapedModel() {
-		return _mbMessageFlag.toEscapedModel();
+		return new MBMessageFlagWrapper(_mbMessageFlag.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

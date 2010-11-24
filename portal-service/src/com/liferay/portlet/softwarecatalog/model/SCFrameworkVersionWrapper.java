@@ -311,7 +311,7 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 	}
 
 	public java.lang.Object clone() {
-		return _scFrameworkVersion.clone();
+		return new SCFrameworkVersionWrapper((SCFrameworkVersion)_scFrameworkVersion.clone());
 	}
 
 	public int compareTo(
@@ -324,7 +324,7 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 	}
 
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion toEscapedModel() {
-		return _scFrameworkVersion.toEscapedModel();
+		return new SCFrameworkVersionWrapper(_scFrameworkVersion.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

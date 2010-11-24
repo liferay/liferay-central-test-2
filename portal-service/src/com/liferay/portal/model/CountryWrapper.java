@@ -219,7 +219,7 @@ public class CountryWrapper implements Country {
 	}
 
 	public java.lang.Object clone() {
-		return _country.clone();
+		return new CountryWrapper((Country)_country.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Country country) {
@@ -231,7 +231,7 @@ public class CountryWrapper implements Country {
 	}
 
 	public com.liferay.portal.model.Country toEscapedModel() {
-		return _country.toEscapedModel();
+		return new CountryWrapper(_country.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

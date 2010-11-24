@@ -293,7 +293,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 	}
 
 	public java.lang.Object clone() {
-		return _layoutSetBranch.clone();
+		return new LayoutSetBranchWrapper((LayoutSetBranch)_layoutSetBranch.clone());
 	}
 
 	public int compareTo(
@@ -306,7 +306,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 	}
 
 	public com.liferay.portal.model.LayoutSetBranch toEscapedModel() {
-		return _layoutSetBranch.toEscapedModel();
+		return new LayoutSetBranchWrapper(_layoutSetBranch.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

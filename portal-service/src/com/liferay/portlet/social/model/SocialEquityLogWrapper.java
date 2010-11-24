@@ -311,7 +311,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	}
 
 	public java.lang.Object clone() {
-		return _socialEquityLog.clone();
+		return new SocialEquityLogWrapper((SocialEquityLog)_socialEquityLog.clone());
 	}
 
 	public int compareTo(
@@ -324,7 +324,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	}
 
 	public com.liferay.portlet.social.model.SocialEquityLog toEscapedModel() {
-		return _socialEquityLog.toEscapedModel();
+		return new SocialEquityLogWrapper(_socialEquityLog.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

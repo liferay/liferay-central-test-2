@@ -120,7 +120,7 @@ public class CounterWrapper implements Counter {
 	}
 
 	public java.lang.Object clone() {
-		return _counter.clone();
+		return new CounterWrapper((Counter)_counter.clone());
 	}
 
 	public int compareTo(com.liferay.counter.model.Counter counter) {
@@ -132,7 +132,7 @@ public class CounterWrapper implements Counter {
 	}
 
 	public com.liferay.counter.model.Counter toEscapedModel() {
-		return _counter.toEscapedModel();
+		return new CounterWrapper(_counter.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

@@ -761,7 +761,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	}
 
 	public java.lang.Object clone() {
-		return _passwordPolicy.clone();
+		return new PasswordPolicyWrapper((PasswordPolicy)_passwordPolicy.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.PasswordPolicy passwordPolicy) {
@@ -773,7 +773,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	}
 
 	public com.liferay.portal.model.PasswordPolicy toEscapedModel() {
-		return _passwordPolicy.toEscapedModel();
+		return new PasswordPolicyWrapper(_passwordPolicy.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

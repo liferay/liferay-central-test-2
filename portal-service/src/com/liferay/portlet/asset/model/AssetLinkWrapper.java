@@ -266,7 +266,7 @@ public class AssetLinkWrapper implements AssetLink {
 	}
 
 	public java.lang.Object clone() {
-		return _assetLink.clone();
+		return new AssetLinkWrapper((AssetLink)_assetLink.clone());
 	}
 
 	public int compareTo(com.liferay.portlet.asset.model.AssetLink assetLink) {
@@ -278,7 +278,7 @@ public class AssetLinkWrapper implements AssetLink {
 	}
 
 	public com.liferay.portlet.asset.model.AssetLink toEscapedModel() {
-		return _assetLink.toEscapedModel();
+		return new AssetLinkWrapper(_assetLink.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

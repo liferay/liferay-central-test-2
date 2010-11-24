@@ -258,7 +258,7 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 	}
 
 	public java.lang.Object clone() {
-		return _announcementsDelivery.clone();
+		return new AnnouncementsDeliveryWrapper((AnnouncementsDelivery)_announcementsDelivery.clone());
 	}
 
 	public int compareTo(
@@ -271,7 +271,7 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 	}
 
 	public com.liferay.portlet.announcements.model.AnnouncementsDelivery toEscapedModel() {
-		return _announcementsDelivery.toEscapedModel();
+		return new AnnouncementsDeliveryWrapper(_announcementsDelivery.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

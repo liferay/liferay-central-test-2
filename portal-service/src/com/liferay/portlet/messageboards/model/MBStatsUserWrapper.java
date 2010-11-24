@@ -214,7 +214,7 @@ public class MBStatsUserWrapper implements MBStatsUser {
 	}
 
 	public java.lang.Object clone() {
-		return _mbStatsUser.clone();
+		return new MBStatsUserWrapper((MBStatsUser)_mbStatsUser.clone());
 	}
 
 	public int compareTo(
@@ -227,7 +227,7 @@ public class MBStatsUserWrapper implements MBStatsUser {
 	}
 
 	public com.liferay.portlet.messageboards.model.MBStatsUser toEscapedModel() {
-		return _mbStatsUser.toEscapedModel();
+		return new MBStatsUserWrapper(_mbStatsUser.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

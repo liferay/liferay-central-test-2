@@ -139,7 +139,7 @@ public class OrgGroupRoleWrapper implements OrgGroupRole {
 	}
 
 	public java.lang.Object clone() {
-		return _orgGroupRole.clone();
+		return new OrgGroupRoleWrapper((OrgGroupRole)_orgGroupRole.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.OrgGroupRole orgGroupRole) {
@@ -151,7 +151,7 @@ public class OrgGroupRoleWrapper implements OrgGroupRole {
 	}
 
 	public com.liferay.portal.model.OrgGroupRole toEscapedModel() {
-		return _orgGroupRole.toEscapedModel();
+		return new OrgGroupRoleWrapper(_orgGroupRole.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

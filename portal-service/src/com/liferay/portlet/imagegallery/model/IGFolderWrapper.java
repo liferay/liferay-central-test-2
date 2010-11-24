@@ -284,7 +284,7 @@ public class IGFolderWrapper implements IGFolder {
 	}
 
 	public java.lang.Object clone() {
-		return _igFolder.clone();
+		return new IGFolderWrapper((IGFolder)_igFolder.clone());
 	}
 
 	public int compareTo(
@@ -297,7 +297,7 @@ public class IGFolderWrapper implements IGFolder {
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGFolder toEscapedModel() {
-		return _igFolder.toEscapedModel();
+		return new IGFolderWrapper(_igFolder.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

@@ -266,7 +266,7 @@ public class AssetTagPropertyWrapper implements AssetTagProperty {
 	}
 
 	public java.lang.Object clone() {
-		return _assetTagProperty.clone();
+		return new AssetTagPropertyWrapper((AssetTagProperty)_assetTagProperty.clone());
 	}
 
 	public int compareTo(
@@ -279,7 +279,7 @@ public class AssetTagPropertyWrapper implements AssetTagProperty {
 	}
 
 	public com.liferay.portlet.asset.model.AssetTagProperty toEscapedModel() {
-		return _assetTagProperty.toEscapedModel();
+		return new AssetTagPropertyWrapper(_assetTagProperty.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

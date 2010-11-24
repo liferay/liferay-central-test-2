@@ -266,7 +266,7 @@ public class AssetTagWrapper implements AssetTag {
 	}
 
 	public java.lang.Object clone() {
-		return _assetTag.clone();
+		return new AssetTagWrapper((AssetTag)_assetTag.clone());
 	}
 
 	public int compareTo(com.liferay.portlet.asset.model.AssetTag assetTag) {
@@ -278,7 +278,7 @@ public class AssetTagWrapper implements AssetTag {
 	}
 
 	public com.liferay.portlet.asset.model.AssetTag toEscapedModel() {
-		return _assetTag.toEscapedModel();
+		return new AssetTagWrapper(_assetTag.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

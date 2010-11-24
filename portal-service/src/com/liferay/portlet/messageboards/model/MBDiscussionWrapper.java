@@ -165,7 +165,7 @@ public class MBDiscussionWrapper implements MBDiscussion {
 	}
 
 	public java.lang.Object clone() {
-		return _mbDiscussion.clone();
+		return new MBDiscussionWrapper((MBDiscussion)_mbDiscussion.clone());
 	}
 
 	public int compareTo(
@@ -178,7 +178,7 @@ public class MBDiscussionWrapper implements MBDiscussion {
 	}
 
 	public com.liferay.portlet.messageboards.model.MBDiscussion toEscapedModel() {
-		return _mbDiscussion.toEscapedModel();
+		return new MBDiscussionWrapper(_mbDiscussion.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

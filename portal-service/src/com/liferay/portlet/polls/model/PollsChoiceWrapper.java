@@ -248,7 +248,7 @@ public class PollsChoiceWrapper implements PollsChoice {
 	}
 
 	public java.lang.Object clone() {
-		return _pollsChoice.clone();
+		return new PollsChoiceWrapper((PollsChoice)_pollsChoice.clone());
 	}
 
 	public int compareTo(
@@ -261,7 +261,7 @@ public class PollsChoiceWrapper implements PollsChoice {
 	}
 
 	public com.liferay.portlet.polls.model.PollsChoice toEscapedModel() {
-		return _pollsChoice.toEscapedModel();
+		return new PollsChoiceWrapper(_pollsChoice.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

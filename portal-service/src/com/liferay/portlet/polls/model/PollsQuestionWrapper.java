@@ -466,7 +466,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	public java.lang.Object clone() {
-		return _pollsQuestion.clone();
+		return new PollsQuestionWrapper((PollsQuestion)_pollsQuestion.clone());
 	}
 
 	public int compareTo(
@@ -479,7 +479,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	public com.liferay.portlet.polls.model.PollsQuestion toEscapedModel() {
-		return _pollsQuestion.toEscapedModel();
+		return new PollsQuestionWrapper(_pollsQuestion.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

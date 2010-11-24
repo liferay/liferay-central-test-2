@@ -273,7 +273,7 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	}
 
 	public java.lang.Object clone() {
-		return _layoutSetPrototype.clone();
+		return new LayoutSetPrototypeWrapper((LayoutSetPrototype)_layoutSetPrototype.clone());
 	}
 
 	public int compareTo(
@@ -286,7 +286,7 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	}
 
 	public com.liferay.portal.model.LayoutSetPrototype toEscapedModel() {
-		return _layoutSetPrototype.toEscapedModel();
+		return new LayoutSetPrototypeWrapper(_layoutSetPrototype.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

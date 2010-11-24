@@ -302,7 +302,7 @@ public class WikiNodeWrapper implements WikiNode {
 	}
 
 	public java.lang.Object clone() {
-		return _wikiNode.clone();
+		return new WikiNodeWrapper((WikiNode)_wikiNode.clone());
 	}
 
 	public int compareTo(com.liferay.portlet.wiki.model.WikiNode wikiNode) {
@@ -314,7 +314,7 @@ public class WikiNodeWrapper implements WikiNode {
 	}
 
 	public com.liferay.portlet.wiki.model.WikiNode toEscapedModel() {
-		return _wikiNode.toEscapedModel();
+		return new WikiNodeWrapper(_wikiNode.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

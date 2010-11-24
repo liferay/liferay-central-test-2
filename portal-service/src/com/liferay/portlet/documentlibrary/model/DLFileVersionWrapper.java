@@ -509,7 +509,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	public java.lang.Object clone() {
-		return _dlFileVersion.clone();
+		return new DLFileVersionWrapper((DLFileVersion)_dlFileVersion.clone());
 	}
 
 	public int compareTo(
@@ -522,7 +522,7 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion toEscapedModel() {
-		return _dlFileVersion.toEscapedModel();
+		return new DLFileVersionWrapper(_dlFileVersion.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

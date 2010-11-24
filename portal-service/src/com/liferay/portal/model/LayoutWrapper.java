@@ -525,7 +525,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	public java.lang.Object clone() {
-		return _layout.clone();
+		return new LayoutWrapper((Layout)_layout.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Layout layout) {
@@ -537,7 +537,7 @@ public class LayoutWrapper implements Layout {
 	}
 
 	public com.liferay.portal.model.Layout toEscapedModel() {
-		return _layout.toEscapedModel();
+		return new LayoutWrapper(_layout.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

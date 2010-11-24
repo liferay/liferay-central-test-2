@@ -304,7 +304,7 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	public java.lang.Object clone() {
-		return _membershipRequest.clone();
+		return new MembershipRequestWrapper((MembershipRequest)_membershipRequest.clone());
 	}
 
 	public int compareTo(
@@ -317,7 +317,7 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	public com.liferay.portal.model.MembershipRequest toEscapedModel() {
-		return _membershipRequest.toEscapedModel();
+		return new MembershipRequestWrapper(_membershipRequest.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

@@ -211,7 +211,7 @@ public class SocialEquityGroupSettingWrapper implements SocialEquityGroupSetting
 	}
 
 	public java.lang.Object clone() {
-		return _socialEquityGroupSetting.clone();
+		return new SocialEquityGroupSettingWrapper((SocialEquityGroupSetting)_socialEquityGroupSetting.clone());
 	}
 
 	public int compareTo(
@@ -224,7 +224,7 @@ public class SocialEquityGroupSettingWrapper implements SocialEquityGroupSetting
 	}
 
 	public com.liferay.portlet.social.model.SocialEquityGroupSetting toEscapedModel() {
-		return _socialEquityGroupSetting.toEscapedModel();
+		return new SocialEquityGroupSettingWrapper(_socialEquityGroupSetting.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

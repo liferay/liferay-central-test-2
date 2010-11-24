@@ -401,7 +401,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	public java.lang.Object clone() {
-		return _mbThread.clone();
+		return new MBThreadWrapper((MBThread)_mbThread.clone());
 	}
 
 	public int compareTo(
@@ -414,7 +414,7 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	public com.liferay.portlet.messageboards.model.MBThread toEscapedModel() {
-		return _mbThread.toEscapedModel();
+		return new MBThreadWrapper(_mbThread.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

@@ -156,7 +156,7 @@ public class ResourceCodeWrapper implements ResourceCode {
 	}
 
 	public java.lang.Object clone() {
-		return _resourceCode.clone();
+		return new ResourceCodeWrapper((ResourceCode)_resourceCode.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.ResourceCode resourceCode) {
@@ -168,7 +168,7 @@ public class ResourceCodeWrapper implements ResourceCode {
 	}
 
 	public com.liferay.portal.model.ResourceCode toEscapedModel() {
-		return _resourceCode.toEscapedModel();
+		return new ResourceCodeWrapper(_resourceCode.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

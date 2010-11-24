@@ -156,7 +156,7 @@ public class ExpandoRowWrapper implements ExpandoRow {
 	}
 
 	public java.lang.Object clone() {
-		return _expandoRow.clone();
+		return new ExpandoRowWrapper((ExpandoRow)_expandoRow.clone());
 	}
 
 	public int compareTo(
@@ -169,7 +169,7 @@ public class ExpandoRowWrapper implements ExpandoRow {
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoRow toEscapedModel() {
-		return _expandoRow.toEscapedModel();
+		return new ExpandoRowWrapper(_expandoRow.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

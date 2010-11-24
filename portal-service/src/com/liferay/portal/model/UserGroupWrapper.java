@@ -174,7 +174,7 @@ public class UserGroupWrapper implements UserGroup {
 	}
 
 	public java.lang.Object clone() {
-		return _userGroup.clone();
+		return new UserGroupWrapper((UserGroup)_userGroup.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.UserGroup userGroup) {
@@ -186,7 +186,7 @@ public class UserGroupWrapper implements UserGroup {
 	}
 
 	public com.liferay.portal.model.UserGroup toEscapedModel() {
-		return _userGroup.toEscapedModel();
+		return new UserGroupWrapper(_userGroup.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

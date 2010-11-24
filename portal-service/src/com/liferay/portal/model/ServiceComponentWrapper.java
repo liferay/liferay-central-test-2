@@ -174,7 +174,7 @@ public class ServiceComponentWrapper implements ServiceComponent {
 	}
 
 	public java.lang.Object clone() {
-		return _serviceComponent.clone();
+		return new ServiceComponentWrapper((ServiceComponent)_serviceComponent.clone());
 	}
 
 	public int compareTo(
@@ -187,7 +187,7 @@ public class ServiceComponentWrapper implements ServiceComponent {
 	}
 
 	public com.liferay.portal.model.ServiceComponent toEscapedModel() {
-		return _serviceComponent.toEscapedModel();
+		return new ServiceComponentWrapper(_serviceComponent.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

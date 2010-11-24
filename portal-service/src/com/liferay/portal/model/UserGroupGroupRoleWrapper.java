@@ -139,7 +139,7 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole {
 	}
 
 	public java.lang.Object clone() {
-		return _userGroupGroupRole.clone();
+		return new UserGroupGroupRoleWrapper((UserGroupGroupRole)_userGroupGroupRole.clone());
 	}
 
 	public int compareTo(
@@ -152,7 +152,7 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole {
 	}
 
 	public com.liferay.portal.model.UserGroupGroupRole toEscapedModel() {
-		return _userGroupGroupRole.toEscapedModel();
+		return new UserGroupGroupRoleWrapper(_userGroupGroupRole.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

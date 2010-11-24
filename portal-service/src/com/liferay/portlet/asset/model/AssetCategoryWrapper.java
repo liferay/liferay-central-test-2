@@ -428,7 +428,7 @@ public class AssetCategoryWrapper implements AssetCategory {
 	}
 
 	public java.lang.Object clone() {
-		return _assetCategory.clone();
+		return new AssetCategoryWrapper((AssetCategory)_assetCategory.clone());
 	}
 
 	public int compareTo(
@@ -441,7 +441,7 @@ public class AssetCategoryWrapper implements AssetCategory {
 	}
 
 	public com.liferay.portlet.asset.model.AssetCategory toEscapedModel() {
-		return _assetCategory.toEscapedModel();
+		return new AssetCategoryWrapper(_assetCategory.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

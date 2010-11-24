@@ -311,7 +311,7 @@ public class ShoppingCartWrapper implements ShoppingCart {
 	}
 
 	public java.lang.Object clone() {
-		return _shoppingCart.clone();
+		return new ShoppingCartWrapper((ShoppingCart)_shoppingCart.clone());
 	}
 
 	public int compareTo(
@@ -324,7 +324,7 @@ public class ShoppingCartWrapper implements ShoppingCart {
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCart toEscapedModel() {
-		return _shoppingCart.toEscapedModel();
+		return new ShoppingCartWrapper(_shoppingCart.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

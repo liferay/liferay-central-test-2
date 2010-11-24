@@ -183,7 +183,7 @@ public class PortletWrapper implements Portlet {
 	}
 
 	public java.lang.Object clone() {
-		return _portlet.clone();
+		return new PortletWrapper((Portlet)_portlet.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Portlet portlet) {
@@ -195,7 +195,7 @@ public class PortletWrapper implements Portlet {
 	}
 
 	public com.liferay.portal.model.Portlet toEscapedModel() {
-		return _portlet.toEscapedModel();
+		return new PortletWrapper(_portlet.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

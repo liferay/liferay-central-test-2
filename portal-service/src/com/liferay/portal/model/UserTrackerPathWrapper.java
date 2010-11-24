@@ -156,7 +156,7 @@ public class UserTrackerPathWrapper implements UserTrackerPath {
 	}
 
 	public java.lang.Object clone() {
-		return _userTrackerPath.clone();
+		return new UserTrackerPathWrapper((UserTrackerPath)_userTrackerPath.clone());
 	}
 
 	public int compareTo(
@@ -169,7 +169,7 @@ public class UserTrackerPathWrapper implements UserTrackerPath {
 	}
 
 	public com.liferay.portal.model.UserTrackerPath toEscapedModel() {
-		return _userTrackerPath.toEscapedModel();
+		return new UserTrackerPathWrapper(_userTrackerPath.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

@@ -237,7 +237,7 @@ public class ReleaseWrapper implements Release {
 	}
 
 	public java.lang.Object clone() {
-		return _release.clone();
+		return new ReleaseWrapper((Release)_release.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Release release) {
@@ -249,7 +249,7 @@ public class ReleaseWrapper implements Release {
 	}
 
 	public com.liferay.portal.model.Release toEscapedModel() {
-		return _release.toEscapedModel();
+		return new ReleaseWrapper(_release.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

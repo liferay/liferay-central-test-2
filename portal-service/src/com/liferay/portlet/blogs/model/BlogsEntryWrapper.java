@@ -608,7 +608,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	public java.lang.Object clone() {
-		return _blogsEntry.clone();
+		return new BlogsEntryWrapper((BlogsEntry)_blogsEntry.clone());
 	}
 
 	public int compareTo(com.liferay.portlet.blogs.model.BlogsEntry blogsEntry) {
@@ -620,7 +620,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	public com.liferay.portlet.blogs.model.BlogsEntry toEscapedModel() {
-		return _blogsEntry.toEscapedModel();
+		return new BlogsEntryWrapper(_blogsEntry.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

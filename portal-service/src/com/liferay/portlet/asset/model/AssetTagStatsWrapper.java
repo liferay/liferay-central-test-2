@@ -165,7 +165,7 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 	}
 
 	public java.lang.Object clone() {
-		return _assetTagStats.clone();
+		return new AssetTagStatsWrapper((AssetTagStats)_assetTagStats.clone());
 	}
 
 	public int compareTo(
@@ -178,7 +178,7 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 	}
 
 	public com.liferay.portlet.asset.model.AssetTagStats toEscapedModel() {
-		return _assetTagStats.toEscapedModel();
+		return new AssetTagStatsWrapper(_assetTagStats.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

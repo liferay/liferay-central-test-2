@@ -275,7 +275,7 @@ public class SubscriptionWrapper implements Subscription {
 	}
 
 	public java.lang.Object clone() {
-		return _subscription.clone();
+		return new SubscriptionWrapper((Subscription)_subscription.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Subscription subscription) {
@@ -287,7 +287,7 @@ public class SubscriptionWrapper implements Subscription {
 	}
 
 	public com.liferay.portal.model.Subscription toEscapedModel() {
-		return _subscription.toEscapedModel();
+		return new SubscriptionWrapper(_subscription.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

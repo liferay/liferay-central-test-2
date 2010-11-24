@@ -210,7 +210,7 @@ public class ImageWrapper implements Image {
 	}
 
 	public java.lang.Object clone() {
-		return _image.clone();
+		return new ImageWrapper((Image)_image.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Image image) {
@@ -222,7 +222,7 @@ public class ImageWrapper implements Image {
 	}
 
 	public com.liferay.portal.model.Image toEscapedModel() {
-		return _image.toEscapedModel();
+		return new ImageWrapper(_image.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

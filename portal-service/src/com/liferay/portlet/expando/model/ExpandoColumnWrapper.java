@@ -210,7 +210,7 @@ public class ExpandoColumnWrapper implements ExpandoColumn {
 	}
 
 	public java.lang.Object clone() {
-		return _expandoColumn.clone();
+		return new ExpandoColumnWrapper((ExpandoColumn)_expandoColumn.clone());
 	}
 
 	public int compareTo(
@@ -223,7 +223,7 @@ public class ExpandoColumnWrapper implements ExpandoColumn {
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoColumn toEscapedModel() {
-		return _expandoColumn.toEscapedModel();
+		return new ExpandoColumnWrapper(_expandoColumn.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

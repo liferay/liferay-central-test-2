@@ -210,7 +210,7 @@ public class ResourcePermissionWrapper implements ResourcePermission {
 	}
 
 	public java.lang.Object clone() {
-		return _resourcePermission.clone();
+		return new ResourcePermissionWrapper((ResourcePermission)_resourcePermission.clone());
 	}
 
 	public int compareTo(
@@ -223,7 +223,7 @@ public class ResourcePermissionWrapper implements ResourcePermission {
 	}
 
 	public com.liferay.portal.model.ResourcePermission toEscapedModel() {
-		return _resourcePermission.toEscapedModel();
+		return new ResourcePermissionWrapper(_resourcePermission.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

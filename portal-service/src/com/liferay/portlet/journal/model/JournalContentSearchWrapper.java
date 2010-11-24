@@ -220,7 +220,7 @@ public class JournalContentSearchWrapper implements JournalContentSearch {
 	}
 
 	public java.lang.Object clone() {
-		return _journalContentSearch.clone();
+		return new JournalContentSearchWrapper((JournalContentSearch)_journalContentSearch.clone());
 	}
 
 	public int compareTo(
@@ -233,7 +233,7 @@ public class JournalContentSearchWrapper implements JournalContentSearch {
 	}
 
 	public com.liferay.portlet.journal.model.JournalContentSearch toEscapedModel() {
-		return _journalContentSearch.toEscapedModel();
+		return new JournalContentSearchWrapper(_journalContentSearch.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

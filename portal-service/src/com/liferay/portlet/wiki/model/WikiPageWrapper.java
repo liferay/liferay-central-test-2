@@ -599,7 +599,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	public java.lang.Object clone() {
-		return _wikiPage.clone();
+		return new WikiPageWrapper((WikiPage)_wikiPage.clone());
 	}
 
 	public int compareTo(com.liferay.portlet.wiki.model.WikiPage wikiPage) {
@@ -611,7 +611,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	public com.liferay.portlet.wiki.model.WikiPage toEscapedModel() {
-		return _wikiPage.toEscapedModel();
+		return new WikiPageWrapper(_wikiPage.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

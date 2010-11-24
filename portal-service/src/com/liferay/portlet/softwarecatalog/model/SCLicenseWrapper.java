@@ -219,7 +219,7 @@ public class SCLicenseWrapper implements SCLicense {
 	}
 
 	public java.lang.Object clone() {
-		return _scLicense.clone();
+		return new SCLicenseWrapper((SCLicense)_scLicense.clone());
 	}
 
 	public int compareTo(
@@ -232,7 +232,7 @@ public class SCLicenseWrapper implements SCLicense {
 	}
 
 	public com.liferay.portlet.softwarecatalog.model.SCLicense toEscapedModel() {
-		return _scLicense.toEscapedModel();
+		return new SCLicenseWrapper(_scLicense.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

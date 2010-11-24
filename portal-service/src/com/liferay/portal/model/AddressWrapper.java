@@ -455,7 +455,7 @@ public class AddressWrapper implements Address {
 	}
 
 	public java.lang.Object clone() {
-		return _address.clone();
+		return new AddressWrapper((Address)_address.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Address address) {
@@ -467,7 +467,7 @@ public class AddressWrapper implements Address {
 	}
 
 	public com.liferay.portal.model.Address toEscapedModel() {
-		return _address.toEscapedModel();
+		return new AddressWrapper(_address.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

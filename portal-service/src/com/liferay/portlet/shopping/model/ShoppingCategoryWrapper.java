@@ -284,7 +284,7 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 	}
 
 	public java.lang.Object clone() {
-		return _shoppingCategory.clone();
+		return new ShoppingCategoryWrapper((ShoppingCategory)_shoppingCategory.clone());
 	}
 
 	public int compareTo(
@@ -297,7 +297,7 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory toEscapedModel() {
-		return _shoppingCategory.toEscapedModel();
+		return new ShoppingCategoryWrapper(_shoppingCategory.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

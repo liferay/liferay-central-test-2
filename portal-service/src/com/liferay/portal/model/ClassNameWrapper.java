@@ -129,7 +129,7 @@ public class ClassNameWrapper implements ClassName {
 	}
 
 	public java.lang.Object clone() {
-		return _className.clone();
+		return new ClassNameWrapper((ClassName)_className.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.ClassName className) {
@@ -141,7 +141,7 @@ public class ClassNameWrapper implements ClassName {
 	}
 
 	public com.liferay.portal.model.ClassName toEscapedModel() {
-		return _className.toEscapedModel();
+		return new ClassNameWrapper(_className.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

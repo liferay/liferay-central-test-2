@@ -329,7 +329,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	public java.lang.Object clone() {
-		return _scProductVersion.clone();
+		return new SCProductVersionWrapper((SCProductVersion)_scProductVersion.clone());
 	}
 
 	public int compareTo(
@@ -342,7 +342,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion toEscapedModel() {
-		return _scProductVersion.toEscapedModel();
+		return new SCProductVersionWrapper(_scProductVersion.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

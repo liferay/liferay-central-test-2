@@ -139,7 +139,7 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 	}
 
 	public java.lang.Object clone() {
-		return _orgGroupPermission.clone();
+		return new OrgGroupPermissionWrapper((OrgGroupPermission)_orgGroupPermission.clone());
 	}
 
 	public int compareTo(
@@ -152,7 +152,7 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 	}
 
 	public com.liferay.portal.model.OrgGroupPermission toEscapedModel() {
-		return _orgGroupPermission.toEscapedModel();
+		return new OrgGroupPermissionWrapper(_orgGroupPermission.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

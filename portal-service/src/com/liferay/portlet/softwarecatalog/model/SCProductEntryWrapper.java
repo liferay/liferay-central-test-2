@@ -392,7 +392,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	public java.lang.Object clone() {
-		return _scProductEntry.clone();
+		return new SCProductEntryWrapper((SCProductEntry)_scProductEntry.clone());
 	}
 
 	public int compareTo(
@@ -405,7 +405,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry toEscapedModel() {
-		return _scProductEntry.toEscapedModel();
+		return new SCProductEntryWrapper(_scProductEntry.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

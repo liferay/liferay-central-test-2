@@ -158,7 +158,7 @@ public class BrowserTrackerWrapper implements BrowserTracker {
 	}
 
 	public java.lang.Object clone() {
-		return _browserTracker.clone();
+		return new BrowserTrackerWrapper((BrowserTracker)_browserTracker.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.BrowserTracker browserTracker) {
@@ -170,7 +170,7 @@ public class BrowserTrackerWrapper implements BrowserTracker {
 	}
 
 	public com.liferay.portal.model.BrowserTracker toEscapedModel() {
-		return _browserTracker.toEscapedModel();
+		return new BrowserTrackerWrapper(_browserTracker.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

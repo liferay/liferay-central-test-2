@@ -338,7 +338,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	public java.lang.Object clone() {
-		return _bookmarksEntry.clone();
+		return new BookmarksEntryWrapper((BookmarksEntry)_bookmarksEntry.clone());
 	}
 
 	public int compareTo(
@@ -351,7 +351,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry toEscapedModel() {
-		return _bookmarksEntry.toEscapedModel();
+		return new BookmarksEntryWrapper(_bookmarksEntry.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

@@ -138,7 +138,7 @@ public class ListTypeWrapper implements ListType {
 	}
 
 	public java.lang.Object clone() {
-		return _listType.clone();
+		return new ListTypeWrapper((ListType)_listType.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.ListType listType) {
@@ -150,7 +150,7 @@ public class ListTypeWrapper implements ListType {
 	}
 
 	public com.liferay.portal.model.ListType toEscapedModel() {
-		return _listType.toEscapedModel();
+		return new ListTypeWrapper(_listType.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

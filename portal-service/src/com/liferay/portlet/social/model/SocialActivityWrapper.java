@@ -331,7 +331,7 @@ public class SocialActivityWrapper implements SocialActivity {
 	}
 
 	public java.lang.Object clone() {
-		return _socialActivity.clone();
+		return new SocialActivityWrapper((SocialActivity)_socialActivity.clone());
 	}
 
 	public int compareTo(
@@ -344,7 +344,7 @@ public class SocialActivityWrapper implements SocialActivity {
 	}
 
 	public com.liferay.portlet.social.model.SocialActivity toEscapedModel() {
-		return _socialActivity.toEscapedModel();
+		return new SocialActivityWrapper(_socialActivity.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

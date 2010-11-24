@@ -237,7 +237,7 @@ public class ExpandoValueWrapper implements ExpandoValue {
 	}
 
 	public java.lang.Object clone() {
-		return _expandoValue.clone();
+		return new ExpandoValueWrapper((ExpandoValue)_expandoValue.clone());
 	}
 
 	public int compareTo(
@@ -250,7 +250,7 @@ public class ExpandoValueWrapper implements ExpandoValue {
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoValue toEscapedModel() {
-		return _expandoValue.toEscapedModel();
+		return new ExpandoValueWrapper(_expandoValue.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

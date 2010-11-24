@@ -428,7 +428,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	public java.lang.Object clone() {
-		return _announcementsEntry.clone();
+		return new AnnouncementsEntryWrapper((AnnouncementsEntry)_announcementsEntry.clone());
 	}
 
 	public int compareTo(
@@ -441,7 +441,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry toEscapedModel() {
-		return _announcementsEntry.toEscapedModel();
+		return new AnnouncementsEntryWrapper(_announcementsEntry.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

@@ -653,7 +653,7 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	}
 
 	public java.lang.Object clone() {
-		return _layoutRevision.clone();
+		return new LayoutRevisionWrapper((LayoutRevision)_layoutRevision.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.LayoutRevision layoutRevision) {
@@ -665,7 +665,7 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	}
 
 	public com.liferay.portal.model.LayoutRevision toEscapedModel() {
-		return _layoutRevision.toEscapedModel();
+		return new LayoutRevisionWrapper(_layoutRevision.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

@@ -376,7 +376,7 @@ public class TasksReviewWrapper implements TasksReview {
 	}
 
 	public java.lang.Object clone() {
-		return _tasksReview.clone();
+		return new TasksReviewWrapper((TasksReview)_tasksReview.clone());
 	}
 
 	public int compareTo(
@@ -389,7 +389,7 @@ public class TasksReviewWrapper implements TasksReview {
 	}
 
 	public com.liferay.portlet.tasks.model.TasksReview toEscapedModel() {
-		return _tasksReview.toEscapedModel();
+		return new TasksReviewWrapper(_tasksReview.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

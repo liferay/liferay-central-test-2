@@ -176,7 +176,7 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 	}
 
 	public java.lang.Object clone() {
-		return _passwordTracker.clone();
+		return new PasswordTrackerWrapper((PasswordTracker)_passwordTracker.clone());
 	}
 
 	public int compareTo(
@@ -189,7 +189,7 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 	}
 
 	public com.liferay.portal.model.PasswordTracker toEscapedModel() {
-		return _passwordTracker.toEscapedModel();
+		return new PasswordTrackerWrapper(_passwordTracker.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

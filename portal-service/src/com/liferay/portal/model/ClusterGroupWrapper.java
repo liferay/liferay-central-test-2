@@ -165,7 +165,7 @@ public class ClusterGroupWrapper implements ClusterGroup {
 	}
 
 	public java.lang.Object clone() {
-		return _clusterGroup.clone();
+		return new ClusterGroupWrapper((ClusterGroup)_clusterGroup.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.ClusterGroup clusterGroup) {
@@ -177,7 +177,7 @@ public class ClusterGroupWrapper implements ClusterGroup {
 	}
 
 	public com.liferay.portal.model.ClusterGroup toEscapedModel() {
-		return _clusterGroup.toEscapedModel();
+		return new ClusterGroupWrapper(_clusterGroup.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

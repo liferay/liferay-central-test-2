@@ -320,7 +320,7 @@ public class WebsiteWrapper implements Website {
 	}
 
 	public java.lang.Object clone() {
-		return _website.clone();
+		return new WebsiteWrapper((Website)_website.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Website website) {
@@ -332,7 +332,7 @@ public class WebsiteWrapper implements Website {
 	}
 
 	public com.liferay.portal.model.Website toEscapedModel() {
-		return _website.toEscapedModel();
+		return new WebsiteWrapper(_website.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

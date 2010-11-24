@@ -192,7 +192,7 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 	}
 
 	public java.lang.Object clone() {
-		return _portletPreferences.clone();
+		return new PortletPreferencesWrapper((PortletPreferences)_portletPreferences.clone());
 	}
 
 	public int compareTo(
@@ -205,7 +205,7 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 	}
 
 	public com.liferay.portal.model.PortletPreferences toEscapedModel() {
-		return _portletPreferences.toEscapedModel();
+		return new PortletPreferencesWrapper(_portletPreferences.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

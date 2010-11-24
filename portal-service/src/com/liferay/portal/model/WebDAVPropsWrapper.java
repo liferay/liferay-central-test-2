@@ -219,7 +219,7 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 	}
 
 	public java.lang.Object clone() {
-		return _webDAVProps.clone();
+		return new WebDAVPropsWrapper((WebDAVProps)_webDAVProps.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.WebDAVProps webDAVProps) {
@@ -231,7 +231,7 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 	}
 
 	public com.liferay.portal.model.WebDAVProps toEscapedModel() {
-		return _webDAVProps.toEscapedModel();
+		return new WebDAVPropsWrapper(_webDAVProps.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

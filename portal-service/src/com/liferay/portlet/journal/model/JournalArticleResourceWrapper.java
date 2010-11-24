@@ -157,7 +157,7 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 	}
 
 	public java.lang.Object clone() {
-		return _journalArticleResource.clone();
+		return new JournalArticleResourceWrapper((JournalArticleResource)_journalArticleResource.clone());
 	}
 
 	public int compareTo(
@@ -170,7 +170,7 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticleResource toEscapedModel() {
-		return _journalArticleResource.toEscapedModel();
+		return new JournalArticleResourceWrapper(_journalArticleResource.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

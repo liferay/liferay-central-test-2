@@ -237,7 +237,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 	}
 
 	public java.lang.Object clone() {
-		return _journalArticleImage.clone();
+		return new JournalArticleImageWrapper((JournalArticleImage)_journalArticleImage.clone());
 	}
 
 	public int compareTo(
@@ -250,7 +250,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticleImage toEscapedModel() {
-		return _journalArticleImage.toEscapedModel();
+		return new JournalArticleImageWrapper(_journalArticleImage.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

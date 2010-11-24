@@ -311,7 +311,7 @@ public class LockWrapper implements Lock {
 	}
 
 	public java.lang.Object clone() {
-		return _lock.clone();
+		return new LockWrapper((Lock)_lock.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Lock lock) {
@@ -323,7 +323,7 @@ public class LockWrapper implements Lock {
 	}
 
 	public com.liferay.portal.model.Lock toEscapedModel() {
-		return _lock.toEscapedModel();
+		return new LockWrapper(_lock.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

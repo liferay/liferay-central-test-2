@@ -797,7 +797,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	public java.lang.Object clone() {
-		return _shoppingItem.clone();
+		return new ShoppingItemWrapper((ShoppingItem)_shoppingItem.clone());
 	}
 
 	public int compareTo(
@@ -810,7 +810,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingItem toEscapedModel() {
-		return _shoppingItem.toEscapedModel();
+		return new ShoppingItemWrapper(_shoppingItem.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

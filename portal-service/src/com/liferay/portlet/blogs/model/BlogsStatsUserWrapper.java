@@ -286,7 +286,7 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 	}
 
 	public java.lang.Object clone() {
-		return _blogsStatsUser.clone();
+		return new BlogsStatsUserWrapper((BlogsStatsUser)_blogsStatsUser.clone());
 	}
 
 	public int compareTo(
@@ -299,7 +299,7 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 	}
 
 	public com.liferay.portlet.blogs.model.BlogsStatsUser toEscapedModel() {
-		return _blogsStatsUser.toEscapedModel();
+		return new BlogsStatsUserWrapper(_blogsStatsUser.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

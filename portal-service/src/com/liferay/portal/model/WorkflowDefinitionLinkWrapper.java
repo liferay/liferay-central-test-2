@@ -295,7 +295,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 	}
 
 	public java.lang.Object clone() {
-		return _workflowDefinitionLink.clone();
+		return new WorkflowDefinitionLinkWrapper((WorkflowDefinitionLink)_workflowDefinitionLink.clone());
 	}
 
 	public int compareTo(
@@ -308,7 +308,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 	}
 
 	public com.liferay.portal.model.WorkflowDefinitionLink toEscapedModel() {
-		return _workflowDefinitionLink.toEscapedModel();
+		return new WorkflowDefinitionLinkWrapper(_workflowDefinitionLink.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

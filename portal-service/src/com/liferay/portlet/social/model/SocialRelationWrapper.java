@@ -210,7 +210,7 @@ public class SocialRelationWrapper implements SocialRelation {
 	}
 
 	public java.lang.Object clone() {
-		return _socialRelation.clone();
+		return new SocialRelationWrapper((SocialRelation)_socialRelation.clone());
 	}
 
 	public int compareTo(
@@ -223,7 +223,7 @@ public class SocialRelationWrapper implements SocialRelation {
 	}
 
 	public com.liferay.portlet.social.model.SocialRelation toEscapedModel() {
-		return _socialRelation.toEscapedModel();
+		return new SocialRelationWrapper(_socialRelation.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

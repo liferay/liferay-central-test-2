@@ -210,7 +210,7 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 	}
 
 	public java.lang.Object clone() {
-		return _scProductScreenshot.clone();
+		return new SCProductScreenshotWrapper((SCProductScreenshot)_scProductScreenshot.clone());
 	}
 
 	public int compareTo(
@@ -223,7 +223,7 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 	}
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot toEscapedModel() {
-		return _scProductScreenshot.toEscapedModel();
+		return new SCProductScreenshotWrapper(_scProductScreenshot.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

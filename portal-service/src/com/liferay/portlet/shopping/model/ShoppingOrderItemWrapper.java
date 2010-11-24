@@ -264,7 +264,7 @@ public class ShoppingOrderItemWrapper implements ShoppingOrderItem {
 	}
 
 	public java.lang.Object clone() {
-		return _shoppingOrderItem.clone();
+		return new ShoppingOrderItemWrapper((ShoppingOrderItem)_shoppingOrderItem.clone());
 	}
 
 	public int compareTo(
@@ -277,7 +277,7 @@ public class ShoppingOrderItemWrapper implements ShoppingOrderItem {
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem toEscapedModel() {
-		return _shoppingOrderItem.toEscapedModel();
+		return new ShoppingOrderItemWrapper(_shoppingOrderItem.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

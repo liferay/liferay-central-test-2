@@ -231,7 +231,7 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 	}
 
 	public java.lang.Object clone() {
-		return _socialEquityAssetEntry.clone();
+		return new SocialEquityAssetEntryWrapper((SocialEquityAssetEntry)_socialEquityAssetEntry.clone());
 	}
 
 	public int compareTo(
@@ -244,7 +244,7 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 	}
 
 	public com.liferay.portlet.social.model.SocialEquityAssetEntry toEscapedModel() {
-		return _socialEquityAssetEntry.toEscapedModel();
+		return new SocialEquityAssetEntryWrapper(_socialEquityAssetEntry.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

@@ -356,7 +356,7 @@ public class IGImageWrapper implements IGImage {
 	}
 
 	public java.lang.Object clone() {
-		return _igImage.clone();
+		return new IGImageWrapper((IGImage)_igImage.clone());
 	}
 
 	public int compareTo(com.liferay.portlet.imagegallery.model.IGImage igImage) {
@@ -368,7 +368,7 @@ public class IGImageWrapper implements IGImage {
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGImage toEscapedModel() {
-		return _igImage.toEscapedModel();
+		return new IGImageWrapper(_igImage.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

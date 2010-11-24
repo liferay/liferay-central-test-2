@@ -455,7 +455,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	public java.lang.Object clone() {
-		return _dlFileShortcut.clone();
+		return new DLFileShortcutWrapper((DLFileShortcut)_dlFileShortcut.clone());
 	}
 
 	public int compareTo(
@@ -468,7 +468,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut toEscapedModel() {
-		return _dlFileShortcut.toEscapedModel();
+		return new DLFileShortcutWrapper(_dlFileShortcut.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

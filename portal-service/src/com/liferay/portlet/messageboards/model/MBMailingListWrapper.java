@@ -590,7 +590,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	public java.lang.Object clone() {
-		return _mbMailingList.clone();
+		return new MBMailingListWrapper((MBMailingList)_mbMailingList.clone());
 	}
 
 	public int compareTo(
@@ -603,7 +603,7 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMailingList toEscapedModel() {
-		return _mbMailingList.toEscapedModel();
+		return new MBMailingListWrapper(_mbMailingList.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

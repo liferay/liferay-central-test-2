@@ -156,7 +156,7 @@ public class PermissionWrapper implements Permission {
 	}
 
 	public java.lang.Object clone() {
-		return _permission.clone();
+		return new PermissionWrapper((Permission)_permission.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Permission permission) {
@@ -168,7 +168,7 @@ public class PermissionWrapper implements Permission {
 	}
 
 	public com.liferay.portal.model.Permission toEscapedModel() {
-		return _permission.toEscapedModel();
+		return new PermissionWrapper(_permission.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

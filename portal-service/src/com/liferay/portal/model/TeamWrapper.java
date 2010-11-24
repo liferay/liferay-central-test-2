@@ -266,7 +266,7 @@ public class TeamWrapper implements Team {
 	}
 
 	public java.lang.Object clone() {
-		return _team.clone();
+		return new TeamWrapper((Team)_team.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Team team) {
@@ -278,7 +278,7 @@ public class TeamWrapper implements Team {
 	}
 
 	public com.liferay.portal.model.Team toEscapedModel() {
-		return _team.toEscapedModel();
+		return new TeamWrapper(_team.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

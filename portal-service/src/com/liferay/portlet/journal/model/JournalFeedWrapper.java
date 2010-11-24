@@ -519,7 +519,7 @@ public class JournalFeedWrapper implements JournalFeed {
 	}
 
 	public java.lang.Object clone() {
-		return _journalFeed.clone();
+		return new JournalFeedWrapper((JournalFeed)_journalFeed.clone());
 	}
 
 	public int compareTo(
@@ -532,7 +532,7 @@ public class JournalFeedWrapper implements JournalFeed {
 	}
 
 	public com.liferay.portlet.journal.model.JournalFeed toEscapedModel() {
-		return _journalFeed.toEscapedModel();
+		return new JournalFeedWrapper(_journalFeed.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

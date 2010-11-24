@@ -267,7 +267,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty {
 	}
 
 	public java.lang.Object clone() {
-		return _assetCategoryProperty.clone();
+		return new AssetCategoryPropertyWrapper((AssetCategoryProperty)_assetCategoryProperty.clone());
 	}
 
 	public int compareTo(
@@ -280,7 +280,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty {
 	}
 
 	public com.liferay.portlet.asset.model.AssetCategoryProperty toEscapedModel() {
-		return _assetCategoryProperty.toEscapedModel();
+		return new AssetCategoryPropertyWrapper(_assetCategoryProperty.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

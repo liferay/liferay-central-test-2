@@ -156,7 +156,7 @@ public class WikiPageResourceWrapper implements WikiPageResource {
 	}
 
 	public java.lang.Object clone() {
-		return _wikiPageResource.clone();
+		return new WikiPageResourceWrapper((WikiPageResource)_wikiPageResource.clone());
 	}
 
 	public int compareTo(
@@ -169,7 +169,7 @@ public class WikiPageResourceWrapper implements WikiPageResource {
 	}
 
 	public com.liferay.portlet.wiki.model.WikiPageResource toEscapedModel() {
-		return _wikiPageResource.toEscapedModel();
+		return new WikiPageResourceWrapper(_wikiPageResource.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

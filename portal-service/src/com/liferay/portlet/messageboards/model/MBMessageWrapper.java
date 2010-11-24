@@ -653,7 +653,7 @@ public class MBMessageWrapper implements MBMessage {
 	}
 
 	public java.lang.Object clone() {
-		return _mbMessage.clone();
+		return new MBMessageWrapper((MBMessage)_mbMessage.clone());
 	}
 
 	public int compareTo(
@@ -666,7 +666,7 @@ public class MBMessageWrapper implements MBMessage {
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage toEscapedModel() {
-		return _mbMessage.toEscapedModel();
+		return new MBMessageWrapper(_mbMessage.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

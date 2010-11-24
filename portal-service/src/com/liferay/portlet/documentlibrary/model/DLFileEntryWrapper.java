@@ -466,7 +466,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	public java.lang.Object clone() {
-		return _dlFileEntry.clone();
+		return new DLFileEntryWrapper((DLFileEntry)_dlFileEntry.clone());
 	}
 
 	public int compareTo(
@@ -479,7 +479,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry toEscapedModel() {
-		return _dlFileEntry.toEscapedModel();
+		return new DLFileEntryWrapper(_dlFileEntry.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

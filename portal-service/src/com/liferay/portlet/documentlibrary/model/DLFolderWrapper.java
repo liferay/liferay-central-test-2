@@ -320,7 +320,7 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	public java.lang.Object clone() {
-		return _dlFolder.clone();
+		return new DLFolderWrapper((DLFolder)_dlFolder.clone());
 	}
 
 	public int compareTo(
@@ -333,7 +333,7 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder toEscapedModel() {
-		return _dlFolder.toEscapedModel();
+		return new DLFolderWrapper(_dlFolder.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

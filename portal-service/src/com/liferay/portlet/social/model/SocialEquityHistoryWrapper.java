@@ -212,7 +212,7 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 	}
 
 	public java.lang.Object clone() {
-		return _socialEquityHistory.clone();
+		return new SocialEquityHistoryWrapper((SocialEquityHistory)_socialEquityHistory.clone());
 	}
 
 	public int compareTo(
@@ -225,7 +225,7 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 	}
 
 	public com.liferay.portlet.social.model.SocialEquityHistory toEscapedModel() {
-		return _socialEquityHistory.toEscapedModel();
+		return new SocialEquityHistoryWrapper(_socialEquityHistory.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

@@ -309,7 +309,7 @@ public class OrganizationWrapper implements Organization {
 	}
 
 	public java.lang.Object clone() {
-		return _organization.clone();
+		return new OrganizationWrapper((Organization)_organization.clone());
 	}
 
 	public int compareTo(com.liferay.portal.model.Organization organization) {
@@ -321,7 +321,7 @@ public class OrganizationWrapper implements Organization {
 	}
 
 	public com.liferay.portal.model.Organization toEscapedModel() {
-		return _organization.toEscapedModel();
+		return new OrganizationWrapper(_organization.toEscapedModel());
 	}
 
 	public java.lang.String toString() {

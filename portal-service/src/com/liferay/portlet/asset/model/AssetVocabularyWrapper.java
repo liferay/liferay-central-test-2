@@ -466,7 +466,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	public java.lang.Object clone() {
-		return _assetVocabulary.clone();
+		return new AssetVocabularyWrapper((AssetVocabulary)_assetVocabulary.clone());
 	}
 
 	public int compareTo(
@@ -479,7 +479,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	public com.liferay.portlet.asset.model.AssetVocabulary toEscapedModel() {
-		return _assetVocabulary.toEscapedModel();
+		return new AssetVocabularyWrapper(_assetVocabulary.toEscapedModel());
 	}
 
 	public java.lang.String toString() {
