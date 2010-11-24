@@ -14,15 +14,6 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
-import java.io.File;
-import java.io.InputStream;
-import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.liferay.portal.ExpiredLockException;
 import com.liferay.portal.InvalidLockException;
 import com.liferay.portal.NoSuchLockException;
@@ -50,6 +41,17 @@ import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermiss
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.comparator.FileEntryModifiedDateComparator;
+
+import java.io.File;
+import java.io.InputStream;
+
+import java.rmi.RemoteException;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -485,7 +487,6 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		return getFoldersAndFileEntriesAndFileShortcutsCount(
 			groupId, folderIds, status);
 	}
-
 
 	public int getFoldersCount(long groupId, long parentFolderId)
 		throws SystemException {

@@ -208,7 +208,8 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	public List<DLFolder> getCompanyFolders(long companyId, int start, int end)
 		throws SystemException {
 
-		return dlRepositoryLocalService.getCompanyFolders(companyId, start, end);
+		return dlRepositoryLocalService.getCompanyFolders(
+			companyId, start, end);
 	}
 
 	public int getCompanyFoldersCount(long companyId)
@@ -385,7 +386,8 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		long groupId, long parentFolderId, String name)
 		throws PortalException, SystemException {
 
-		return dlRepositoryLocalService.getFolder(groupId, parentFolderId, name);
+		return dlRepositoryLocalService.getFolder(
+			groupId, parentFolderId, name);
 	}
 
 	public List<DLFolder> getFolders(long companyId) throws SystemException {
@@ -410,24 +412,26 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long groupId, List<Long> folderIds, int status, int start, int end)
 		throws SystemException {
 
-		return dlRepositoryLocalService.getFoldersAndFileEntriesAndFileShortcuts(
-			groupId, folderIds, status, start, end);
+		return
+			dlRepositoryLocalService.getFoldersAndFileEntriesAndFileShortcuts(
+				groupId, folderIds, status, start, end);
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
 			long groupId, long folderId, int status, int start, int end)
 		throws SystemException {
 
-		return dlRepositoryLocalService.getFoldersAndFileEntriesAndFileShortcuts(
-			groupId, folderId, status, start, end);
+		return
+			dlRepositoryLocalService.getFoldersAndFileEntriesAndFileShortcuts(
+				groupId, folderId, status, start, end);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
 			long groupId, List<Long> folderIds, int status)
 		throws SystemException {
 
-		return
-			dlRepositoryLocalService.getFoldersAndFileEntriesAndFileShortcutsCount(
+		return dlRepositoryLocalService.
+			getFoldersAndFileEntriesAndFileShortcutsCount(
 				groupId, folderIds, status);
 	}
 
@@ -435,15 +439,16 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long groupId, long folderId, int status)
 		throws SystemException {
 
-		return
-			dlRepositoryLocalService.getFoldersAndFileEntriesAndFileShortcutsCount(
+		return dlRepositoryLocalService.
+			getFoldersAndFileEntriesAndFileShortcutsCount(
 				groupId, folderId, status);
 	}
 
 	public int getFoldersCount(long groupId, long parentFolderId)
 		throws SystemException {
 
-		return dlRepositoryLocalService.getFoldersCount(groupId, parentFolderId);
+		return dlRepositoryLocalService.getFoldersCount(
+			groupId, parentFolderId);
 	}
 
 	public int getFoldersFileEntriesCount(
@@ -458,7 +463,8 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long groupId, int start, int end)
 		throws SystemException {
 
-		return dlRepositoryLocalService.getGroupFileEntries(groupId, start, end);
+		return dlRepositoryLocalService.getGroupFileEntries(
+			groupId, start, end);
 	}
 
 	public List<DLFileEntry> getGroupFileEntries(
