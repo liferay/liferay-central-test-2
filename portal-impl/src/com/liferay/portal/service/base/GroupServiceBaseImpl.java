@@ -201,8 +201,8 @@ import com.liferay.portlet.calendar.service.CalEventLocalService;
 import com.liferay.portlet.calendar.service.CalEventService;
 import com.liferay.portlet.calendar.service.persistence.CalEventFinder;
 import com.liferay.portlet.calendar.service.persistence.CalEventPersistence;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalService;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryService;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalService;
+import com.liferay.portlet.documentlibrary.service.DLAppService;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalService;
 import com.liferay.portlet.imagegallery.service.IGFolderService;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence;
@@ -3632,40 +3632,39 @@ public abstract class GroupServiceBaseImpl extends PrincipalBean
 	}
 
 	/**
-	 * Gets the d l repository local service.
+	 * Gets the d l app local service.
 	 *
-	 * @return the d l repository local service
+	 * @return the d l app local service
 	 */
-	public DLRepositoryLocalService getDLRepositoryLocalService() {
-		return dlRepositoryLocalService;
+	public DLAppLocalService getDLAppLocalService() {
+		return dlAppLocalService;
 	}
 
 	/**
-	 * Sets the d l repository local service.
+	 * Sets the d l app local service.
 	 *
-	 * @param dlRepositoryLocalService the d l repository local service
+	 * @param dlAppLocalService the d l app local service
 	 */
-	public void setDLRepositoryLocalService(
-		DLRepositoryLocalService dlRepositoryLocalService) {
-		this.dlRepositoryLocalService = dlRepositoryLocalService;
+	public void setDLAppLocalService(DLAppLocalService dlAppLocalService) {
+		this.dlAppLocalService = dlAppLocalService;
 	}
 
 	/**
-	 * Gets the d l repository remote service.
+	 * Gets the d l app remote service.
 	 *
-	 * @return the d l repository remote service
+	 * @return the d l app remote service
 	 */
-	public DLRepositoryService getDLRepositoryService() {
-		return dlRepositoryService;
+	public DLAppService getDLAppService() {
+		return dlAppService;
 	}
 
 	/**
-	 * Sets the d l repository remote service.
+	 * Sets the d l app remote service.
 	 *
-	 * @param dlRepositoryService the d l repository remote service
+	 * @param dlAppService the d l app remote service
 	 */
-	public void setDLRepositoryService(DLRepositoryService dlRepositoryService) {
-		this.dlRepositoryService = dlRepositoryService;
+	public void setDLAppService(DLAppService dlAppService) {
+		this.dlAppService = dlAppService;
 	}
 
 	/**
@@ -5045,10 +5044,10 @@ public abstract class GroupServiceBaseImpl extends PrincipalBean
 	protected CalEventPersistence calEventPersistence;
 	@BeanReference(type = CalEventFinder.class)
 	protected CalEventFinder calEventFinder;
-	@BeanReference(type = DLRepositoryLocalService.class)
-	protected DLRepositoryLocalService dlRepositoryLocalService;
-	@BeanReference(type = DLRepositoryService.class)
-	protected DLRepositoryService dlRepositoryService;
+	@BeanReference(type = DLAppLocalService.class)
+	protected DLAppLocalService dlAppLocalService;
+	@BeanReference(type = DLAppService.class)
+	protected DLAppService dlAppService;
 	@BeanReference(type = IGFolderLocalService.class)
 	protected IGFolderLocalService igFolderLocalService;
 	@BeanReference(type = IGFolderService.class)

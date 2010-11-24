@@ -76,8 +76,8 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryService;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalService;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryService;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalService;
+import com.liferay.portlet.documentlibrary.service.DLAppService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder;
@@ -1273,6 +1273,42 @@ public abstract class AssetEntryLocalServiceBaseImpl
 	}
 
 	/**
+	 * Gets the d l app local service.
+	 *
+	 * @return the d l app local service
+	 */
+	public DLAppLocalService getDLAppLocalService() {
+		return dlAppLocalService;
+	}
+
+	/**
+	 * Sets the d l app local service.
+	 *
+	 * @param dlAppLocalService the d l app local service
+	 */
+	public void setDLAppLocalService(DLAppLocalService dlAppLocalService) {
+		this.dlAppLocalService = dlAppLocalService;
+	}
+
+	/**
+	 * Gets the d l app remote service.
+	 *
+	 * @return the d l app remote service
+	 */
+	public DLAppService getDLAppService() {
+		return dlAppService;
+	}
+
+	/**
+	 * Sets the d l app remote service.
+	 *
+	 * @param dlAppService the d l app remote service
+	 */
+	public void setDLAppService(DLAppService dlAppService) {
+		this.dlAppService = dlAppService;
+	}
+
+	/**
 	 * Gets the d l file entry persistence.
 	 *
 	 * @return the d l file entry persistence
@@ -1343,43 +1379,6 @@ public abstract class AssetEntryLocalServiceBaseImpl
 	 */
 	public void setDLFolderFinder(DLFolderFinder dlFolderFinder) {
 		this.dlFolderFinder = dlFolderFinder;
-	}
-
-	/**
-	 * Gets the d l repository local service.
-	 *
-	 * @return the d l repository local service
-	 */
-	public DLRepositoryLocalService getDLRepositoryLocalService() {
-		return dlRepositoryLocalService;
-	}
-
-	/**
-	 * Sets the d l repository local service.
-	 *
-	 * @param dlRepositoryLocalService the d l repository local service
-	 */
-	public void setDLRepositoryLocalService(
-		DLRepositoryLocalService dlRepositoryLocalService) {
-		this.dlRepositoryLocalService = dlRepositoryLocalService;
-	}
-
-	/**
-	 * Gets the d l repository remote service.
-	 *
-	 * @return the d l repository remote service
-	 */
-	public DLRepositoryService getDLRepositoryService() {
-		return dlRepositoryService;
-	}
-
-	/**
-	 * Sets the d l repository remote service.
-	 *
-	 * @param dlRepositoryService the d l repository remote service
-	 */
-	public void setDLRepositoryService(DLRepositoryService dlRepositoryService) {
-		this.dlRepositoryService = dlRepositoryService;
 	}
 
 	/**
@@ -1842,6 +1841,10 @@ public abstract class AssetEntryLocalServiceBaseImpl
 	protected BookmarksEntryPersistence bookmarksEntryPersistence;
 	@BeanReference(type = BookmarksEntryFinder.class)
 	protected BookmarksEntryFinder bookmarksEntryFinder;
+	@BeanReference(type = DLAppLocalService.class)
+	protected DLAppLocalService dlAppLocalService;
+	@BeanReference(type = DLAppService.class)
+	protected DLAppService dlAppService;
 	@BeanReference(type = DLFileEntryPersistence.class)
 	protected DLFileEntryPersistence dlFileEntryPersistence;
 	@BeanReference(type = DLFileEntryFinder.class)
@@ -1850,10 +1853,6 @@ public abstract class AssetEntryLocalServiceBaseImpl
 	protected DLFolderPersistence dlFolderPersistence;
 	@BeanReference(type = DLFolderFinder.class)
 	protected DLFolderFinder dlFolderFinder;
-	@BeanReference(type = DLRepositoryLocalService.class)
-	protected DLRepositoryLocalService dlRepositoryLocalService;
-	@BeanReference(type = DLRepositoryService.class)
-	protected DLRepositoryService dlRepositoryService;
 	@BeanReference(type = JournalArticleLocalService.class)
 	protected JournalArticleLocalService journalArticleLocalService;
 	@BeanReference(type = JournalArticleService.class)

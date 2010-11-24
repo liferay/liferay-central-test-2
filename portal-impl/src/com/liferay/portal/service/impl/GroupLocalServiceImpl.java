@@ -412,7 +412,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Document library
 
-		dlRepositoryLocalService.deleteFolders(groupId);
+		dlAppLocalService.deleteFolders(groupId);
 
 		// Image gallery
 
