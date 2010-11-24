@@ -186,19 +186,24 @@ double version = ParamUtil.getDouble(request, "version", -1);
 		try {
 			article = JournalArticleLocalServiceUtil.getLatestArticle(scopeGroupId, articleId, WorkflowConstants.STATUS_ANY);
 
-			Date now = new Date();
-			Date expirationDate = article.getExpirationDate();
+			boolean expired = article.isExpired();
 
-			boolean expired = article.isExpired() || (Validator.isNotNull(expirationDate) && expirationDate.before(now));
+			if (!expired) {
+				Date expirationDate = article.getExpirationDate();
 
-
-			if ((articleDisplay != null) && !expired) {
-				AssetEntryServiceUtil.incrementViewCounter(JournalArticle.class.getName(), articleDisplay.getResourcePrimKey());
+				if ((expirationDate != null) && expirationDate.before(new Date())) {
+					expired = true;
+				}
 			}
 			%>
 
 			<c:choose>
 				<c:when test="<%= (articleDisplay != null) && !expired %>">
+
+					<%
+					AssetEntryServiceUtil.incrementViewCounter(JournalArticle.class.getName(), articleDisplay.getResourcePrimKey());
+					%>
+
 					<div class="journal-content-article">
 						<%= articleDisplay.getContent() %>
 					</div>
