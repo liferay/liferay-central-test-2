@@ -564,7 +564,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				}
 
 				JobDataMap jobDataMap = jobDetail.getJobDataMap();
-				String destinationName = jobDataMap.getString(DESTINATION_NAME);
+
 				Message message = (Message)jobDataMap.get(MESSAGE);
 
 				if (!message.getBoolean(PERMANENT)) {
@@ -715,7 +715,6 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 		JobDataMap jobDataMap = jobDetail.getJobDataMap();
 
-		String destinationName = jobDataMap.getString(DESTINATION_NAME);
 		Message message = (Message)jobDataMap.get(MESSAGE);
 
 		if (!message.getBoolean(PERMANENT)) {
@@ -766,7 +765,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			return false;
 		}
 		else if (destinationName.equals(DestinationNames.SCHEDULER_SCRIPTING) &&
-			!message.getBoolean(SchedulerEngine.PERMANENT)) {
+				 !message.getBoolean(SchedulerEngine.PERMANENT)) {
 
 			return false;
 		}

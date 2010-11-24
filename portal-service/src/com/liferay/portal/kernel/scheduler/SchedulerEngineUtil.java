@@ -296,8 +296,8 @@ public class SchedulerEngineUtil {
 		Message message = new Message();
 
 		message.put(SchedulerEngine.LANGUAGE, language);
-		message.put(SchedulerEngine.SCRIPT, script);
 		message.put(SchedulerEngine.PERMANENT, permanent);
+		message.put(SchedulerEngine.SCRIPT, script);
 
 		_schedule(
 			trigger, description, DestinationNames.SCHEDULER_SCRIPTING,
