@@ -46,6 +46,15 @@ public class SchedulerEngineUtil {
 		_instance._addScriptingJob(trigger, description, language, script);
 	}
 
+	public static void addScriptingJob(
+			Trigger trigger, String description, String language, String script,
+			boolean isPermanent)
+		throws SchedulerException {
+
+		_instance._addScriptingJob(
+			trigger, description, language, script, isPermanent);
+	}
+
 	public static void delete(SchedulerEntry schedulerEntry)
 		throws SchedulerException {
 
@@ -253,6 +262,14 @@ public class SchedulerEngineUtil {
 		_instance._unschedule(trigger);
 	}
 
+	public static void update(
+			String jobName, String groupName, String description,
+			String language, String script)
+		throws SchedulerException {
+
+		_instance._update(jobName, groupName, description, language, script);
+	}
+
 	public static void update(Trigger trigger) throws SchedulerException {
 		_instance._update(trigger);
 	}
@@ -265,6 +282,22 @@ public class SchedulerEngineUtil {
 
 		message.put(SchedulerEngine.LANGUAGE, language);
 		message.put(SchedulerEngine.SCRIPT, script);
+
+		_schedule(
+			trigger, description, DestinationNames.SCHEDULER_SCRIPTING,
+			message);
+	}
+
+	private void _addScriptingJob(
+			Trigger trigger, String description, String language, String script,
+			boolean isPermanent)
+		throws SchedulerException {
+
+		Message message = new Message();
+
+		message.put(SchedulerEngine.LANGUAGE, language);
+		message.put(SchedulerEngine.SCRIPT, script);
+		message.put(SchedulerEngine.PERMANENT, isPermanent);
 
 		_schedule(
 			trigger, description, DestinationNames.SCHEDULER_SCRIPTING,
@@ -710,6 +743,35 @@ public class SchedulerEngineUtil {
 	 */
 	private void _unschedule(Trigger trigger) throws SchedulerException {
 		_schedulerEngine.unschedule(trigger);
+	}
+
+	private void _update(
+			String jobName, String groupName, String description,
+			String language, String script)
+		throws SchedulerException {
+
+		SchedulerRequest schedulerRequest = _getScheduledJob(
+			jobName, groupName);
+
+		if (schedulerRequest == null) {
+			return;
+		}
+
+		Trigger trigger = schedulerRequest.getTrigger();
+
+		if (trigger == null) {
+			return;
+		}
+
+		Message message = schedulerRequest.getMessage();
+
+		if (message == null) {
+			return;
+		}
+
+		boolean permanent = message.getBoolean(SchedulerEngine.PERMANENT);
+
+		_addScriptingJob(trigger, description, language, script, permanent);
 	}
 
 	private void _update(Trigger trigger) throws SchedulerException {

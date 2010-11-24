@@ -16,7 +16,6 @@ package com.liferay.portal.scheduler.job;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.scheduler.JobState;
@@ -72,7 +71,7 @@ public class MessageSenderJob implements Job {
 			jobDetail.getFullName());
 
 		if (jobExecutionContext.getNextFireTime() == null) {
-			if (!destinationName.equals(DestinationNames.SCHEDULER_DISPATCH)) {
+			if (message.getBoolean(SchedulerEngine.PERMANENT)) {
 				Trigger trigger = jobExecutionContext.getTrigger();
 
 				jobState.setTriggerTimeInfomation(
