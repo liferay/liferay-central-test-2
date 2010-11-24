@@ -14,6 +14,7 @@
 
 package com.liferay.taglib.portletext;
 
+import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.taglib.ui.IconTag;
 
@@ -24,6 +25,10 @@ import com.liferay.taglib.ui.IconTag;
 public class IconEditTag extends IconTag {
 
 	protected String getPage() {
+		if (FileAvailabilityUtil.isAvailable(getServletContext(), _PAGE)) {
+			return _PAGE;
+		}
+
 		PortletDisplay portletDisplay =
 			(PortletDisplay)pageContext.getAttribute("portletDisplay");
 
@@ -38,5 +43,8 @@ public class IconEditTag extends IconTag {
 
 		return super.getPage();
 	}
+
+	private static final String _PAGE =
+		"/html/taglib/portlet/icon_edit/page.jsp";
 
 }

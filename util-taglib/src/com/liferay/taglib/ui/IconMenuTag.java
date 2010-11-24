@@ -17,6 +17,7 @@ package com.liferay.taglib.ui;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.servlet.taglib.BaseBodyTagSupport;
+import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
@@ -152,6 +153,24 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 		_startPage = startPage;
 	}
 
+	protected String getEndPage() {
+		if (Validator.isNull(_endPage)) {
+			return _END_PAGE;
+		}
+		else {
+			return _endPage;
+		}
+	}
+
+	protected String getStartPage() {
+		if (Validator.isNull(_startPage)) {
+			return _START_PAGE;
+		}
+		else {
+			return _startPage;
+		}
+	}
+
 	protected int processEndTag() throws Exception {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
@@ -171,7 +190,9 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 		if ((iconCount != null) && (iconCount.getValue() >= 1) &&
 			((singleIcon == null) || _showWhenSingleIcon)) {
 
-			if (Validator.isNull(_startPage)) {
+			if (!FileAvailabilityUtil.isAvailable(
+					pageContext.getServletContext(), getStartPage())) {
+
 				if (_showExpanded) {
 					jspWriter.write("<div class=\"lfr-component ");
 					jspWriter.write("lfr-menu-list lfr-menu-expanded ");
@@ -210,7 +231,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 				jspWriter.write("<ul>");
 			}
 			else {
-				PortalIncludeUtil.include(pageContext, _startPage);
+				PortalIncludeUtil.include(pageContext, getStartPage());
 			}
 		}
 
@@ -219,7 +240,9 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 		if ((iconCount != null) && (iconCount.getValue() >= 1) &&
 			((singleIcon == null) || _showWhenSingleIcon)) {
 
-			if (Validator.isNull(_endPage)) {
+			if (!FileAvailabilityUtil.isAvailable(
+					pageContext.getServletContext(), getEndPage())) {
+
 				jspWriter.write("</ul>");
 
 				if (_showExpanded) {
@@ -234,7 +257,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 				}
 			}
 			else {
-				PortalIncludeUtil.include(pageContext, _endPage);
+				PortalIncludeUtil.include(pageContext, getEndPage());
 			}
 		}
 
@@ -242,6 +265,11 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 
 		return EVAL_PAGE;
 	}
+
+	private static final String _END_PAGE = "/html/taglib/ui/icon_menu/end.jsp";
+
+	private static final String _START_PAGE =
+		"/html/taglib/ui/icon_menu/start.jsp";
 
 	private String _align = "right";
 	private String _cssClass = StringPool.BLANK;

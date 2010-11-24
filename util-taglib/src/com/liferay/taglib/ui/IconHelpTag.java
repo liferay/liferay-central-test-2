@@ -16,6 +16,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
+import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 
 import javax.servlet.jsp.JspWriter;
@@ -27,7 +28,12 @@ import javax.servlet.jsp.JspWriter;
 public class IconHelpTag extends IconTag {
 
 	protected String getPage() {
-		return null;
+		if (FileAvailabilityUtil.isAvailable(getServletContext(), _PAGE)) {
+			return _PAGE;
+		}
+		else {
+			return null;
+		}
 	}
 
 	protected int processEndTag() throws Exception {
@@ -48,5 +54,7 @@ public class IconHelpTag extends IconTag {
 
 		return EVAL_PAGE;
 	}
+
+	private static final String _PAGE = "/html/taglib/ui/icon_help/page.jsp";
 
 }

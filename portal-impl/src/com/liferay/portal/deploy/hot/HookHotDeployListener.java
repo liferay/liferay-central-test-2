@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.sanitizer.Sanitizer;
 import com.liferay.portal.kernel.sanitizer.SanitizerUtil;
 import com.liferay.portal.kernel.sanitizer.SanitizerWrapper;
+import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
@@ -654,6 +655,8 @@ public class HookHotDeployListener
 		// End backwards compatibility for 5.1.0
 
 		registerClpMessageListeners(servletContext, portletClassLoader);
+
+		FileAvailabilityUtil.reset();
 
 		if (_log.isInfoEnabled()) {
 			_log.info(

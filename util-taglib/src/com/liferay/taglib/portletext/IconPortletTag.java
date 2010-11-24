@@ -14,6 +14,7 @@
 
 package com.liferay.taglib.portletext;
 
+import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -45,6 +46,10 @@ public class IconPortletTag extends IconTag {
 	}
 
 	protected String getPage() {
+		if (FileAvailabilityUtil.isAvailable(getServletContext(), _PAGE)) {
+			return _PAGE;
+		}
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)pageContext.getAttribute(
 			"themeDisplay");
 
@@ -73,6 +78,9 @@ public class IconPortletTag extends IconTag {
 
 		return super.getPage();
 	}
+
+	private static final String _PAGE =
+		"/html/taglib/portlet/icon_portlet/page.jsp";
 
 	private Portlet _portlet;
 

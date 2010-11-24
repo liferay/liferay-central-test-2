@@ -46,6 +46,10 @@ public class UserSearchTag extends IncludeTag {
 		_userParams = null;
 	}
 
+	protected String getEndPage() {
+		return _END_PAGE;
+	}
+
 	protected String getStartPage() {
 		return _START_PAGE;
 	}
@@ -58,6 +62,9 @@ public class UserSearchTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:user-search:userParams", _userParams);
 	}
+
+	private static final String _END_PAGE =
+		"/html/taglib/ui/user_search/end.jsp";
 
 	private static final String _START_PAGE =
 		"/html/taglib/ui/user_search/start.jsp";

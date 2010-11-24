@@ -15,7 +15,9 @@
 package com.liferay.taglib.aui;
 
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
+import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.servlet.taglib.BaseBodyTagSupport;
+import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
@@ -130,7 +132,14 @@ public class ScriptTag extends BaseBodyTagSupport implements BodyTag {
 
 				scriptData.append(bodyContentSB, _use);
 
-				processEndTag(scriptData);
+				if (FileAvailabilityUtil.isAvailable(
+						pageContext.getServletContext(), PAGE)) {
+
+					PortalIncludeUtil.include(pageContext, PAGE);
+				}
+				else {
+					processEndTag(scriptData);
+				}
 			}
 			else {
 				ScriptData scriptData = (ScriptData)request.getAttribute(

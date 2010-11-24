@@ -15,6 +15,7 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
+import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -27,6 +28,10 @@ import com.liferay.portal.kernel.util.StringUtil;
 public class IconDeleteTag extends IconTag {
 
 	protected String getPage() {
+		if (FileAvailabilityUtil.isAvailable(getServletContext(), _PAGE)) {
+			return _PAGE;
+		}
+
 		String url = getUrl();
 
 		if (url.startsWith("javascript:")) {
@@ -65,5 +70,7 @@ public class IconDeleteTag extends IconTag {
 
 		return super.getPage();
 	}
+
+	private static final String _PAGE = "/html/taglib/ui/icon_delete/page.jsp";
 
 }

@@ -89,6 +89,10 @@ public class SectionTag extends IncludeTag {
 		}
 	}
 
+	protected String getEndPage() {
+		return _END_PAGE;
+	}
+
 	protected String getStartPage() {
 		return _START_PAGE;
 	}
@@ -100,6 +104,8 @@ public class SectionTag extends IncludeTag {
 
 		return EVAL_PAGE;
 	}
+
+	private static final String _END_PAGE = "/html/taglib/ui/section/end.jsp";
 
 	private static final String _START_PAGE =
 		"/html/taglib/ui/section/start.jsp";

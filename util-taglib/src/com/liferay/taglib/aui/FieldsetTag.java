@@ -44,6 +44,10 @@ public class FieldsetTag extends IncludeTag {
 		_label = null;
 	}
 
+	protected String getEndPage() {
+		return _END_PAGE;
+	}
+
 	protected String getStartPage() {
 		return _START_PAGE;
 	}
@@ -69,6 +73,9 @@ public class FieldsetTag extends IncludeTag {
 	}
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
+
+	private static final String _END_PAGE =
+		"/html/taglib/aui/fieldset/end.jsp";
 
 	private static final String _START_PAGE =
 		"/html/taglib/aui/fieldset/start.jsp";

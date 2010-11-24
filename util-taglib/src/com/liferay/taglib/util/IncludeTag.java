@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.servlet.DirectServletContext;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.servlet.TrackedServletRequest;
+import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -69,7 +70,7 @@ public class IncludeTag
 
 			callSetAttributes();
 
-			if (Validator.isNull(page)) {
+			if (!FileAvailabilityUtil.isAvailable(getServletContext(), page)) {
 				try {
 					return processEndTag();
 				}
@@ -104,7 +105,7 @@ public class IncludeTag
 
 		callSetAttributes();
 
-		if (Validator.isNull(page)) {
+		if (!FileAvailabilityUtil.isAvailable(getServletContext(), page)) {
 			try {
 				return processStartTag();
 			}

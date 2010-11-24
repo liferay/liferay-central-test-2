@@ -106,6 +106,15 @@ public class PageIteratorTag extends IncludeTag {
 		_urlAnchor = null;
 	}
 
+	protected String getEndPage() {
+		if (_pages > 1) {
+			return _END_PAGE;
+		}
+		else {
+			return null;
+		}
+	}
+
 	protected String getStartPage() {
 		return _START_PAGE;
 	}
@@ -139,6 +148,9 @@ public class PageIteratorTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:page-iterator:urlAnchor", _urlAnchor);
 	}
+
+	private static final String _END_PAGE =
+		"/html/taglib/ui/page_iterator/end.jsp";
 
 	private static final String _START_PAGE =
 		"/html/taglib/ui/page_iterator/start.jsp";

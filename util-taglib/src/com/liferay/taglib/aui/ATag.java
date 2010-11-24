@@ -68,6 +68,14 @@ public class ATag extends IncludeTag {
 		_target = StringPool.BLANK;
 	}
 
+	protected String getEndPage() {
+		return _END_PAGE;
+	}
+
+	protected String getStartPage() {
+		return _START_PAGE;
+	}
+
 	protected int processEndTag() throws Exception {
 		JspWriter jspWriter = pageContext.getOut();
 
@@ -181,6 +189,12 @@ public class ATag extends IncludeTag {
 
 		return namespace;
 	}
+
+	private static final String _END_PAGE =
+		"/html/taglib/aui/a/end.jsp";
+
+	private static final String _START_PAGE =
+		"/html/taglib/aui/a/start.jsp";
 
 	private String _cssClass = StringPool.BLANK;
 	private String _href = StringPool.BLANK;

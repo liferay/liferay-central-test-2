@@ -14,6 +14,7 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
@@ -58,7 +59,9 @@ public class ToggleAreaTag extends IncludeTag {
 
 	public int doEndTag() throws JspException {
 		try {
-			if (Validator.isNull(_endPage)) {
+			if (!FileAvailabilityUtil.isAvailable(
+					getServletContext(), getEndPage())) {
+
 				JspWriter jspWriter = pageContext.getOut();
 
 				jspWriter.write("</div>");
@@ -83,15 +86,6 @@ public class ToggleAreaTag extends IncludeTag {
 				_stateVar = null;
 				_align = "left";
 			}
-		}
-	}
-
-	protected String getStartPage() {
-		if (Validator.isNull(_startPage)) {
-			return _START_PAGE;
-		}
-		else {
-			return _startPage;
 		}
 	}
 
@@ -134,6 +128,27 @@ public class ToggleAreaTag extends IncludeTag {
 	public void setAlign(String align) {
 		_align = align;
 	}
+
+	protected String getEndPage() {
+		if (Validator.isNull(_endPage)) {
+			return _END_PAGE;
+		}
+		else {
+			return _endPage;
+		}
+	}
+
+	protected String getStartPage() {
+		if (Validator.isNull(_startPage)) {
+			return _START_PAGE;
+		}
+		else {
+			return _startPage;
+		}
+	}
+
+	private static final String _END_PAGE =
+		"/html/taglib/ui/toggle_area/end.jsp";
 
 	private static final String _START_PAGE =
 		"/html/taglib/ui/toggle_area/start.jsp";

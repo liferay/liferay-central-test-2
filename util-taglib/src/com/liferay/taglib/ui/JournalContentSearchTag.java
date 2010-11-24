@@ -23,6 +23,10 @@ import javax.servlet.jsp.JspWriter;
  */
 public class JournalContentSearchTag extends IncludeTag {
 
+	protected String getEndPage() {
+		return _END_PAGE;
+	}
+
 	protected String getStartPage() {
 		return _START_PAGE;
 	}
@@ -34,6 +38,9 @@ public class JournalContentSearchTag extends IncludeTag {
 
 		return EVAL_PAGE;
 	}
+
+	private static final String _END_PAGE =
+		"/html/taglib/ui/journal_content_search/end.jsp";
 
 	private static final String _START_PAGE =
 		"/html/taglib/ui/journal_content_search/start.jsp";

@@ -16,6 +16,7 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.servlet.taglib.BaseBodyTagSupport;
+import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
@@ -76,7 +77,9 @@ public class IconListTag extends BaseBodyTagSupport implements BodyTag {
 			if ((iconCount != null) && (iconCount.getValue() > 1) &&
 				((singleIcon == null) || _showWhenSingleIcon)) {
 
-				if (Validator.isNull(_startPage)) {
+				if (!FileAvailabilityUtil.isAvailable(
+						pageContext.getServletContext(), getStartPage())) {
+
 					jspWriter.write(
 						"<ul class=\"lfr-component taglib-icon-list\">");
 				}
@@ -90,7 +93,9 @@ public class IconListTag extends BaseBodyTagSupport implements BodyTag {
 			if ((iconCount != null) && (iconCount.getValue() > 1) &&
 				((singleIcon == null) || _showWhenSingleIcon)) {
 
-				if (Validator.isNull(_endPage)) {
+				if (!FileAvailabilityUtil.isAvailable(
+						pageContext.getServletContext(), getEndPage())) {
+
 					jspWriter.write("</ul>");
 				}
 				else {
@@ -138,6 +143,29 @@ public class IconListTag extends BaseBodyTagSupport implements BodyTag {
 	public void setStartPage(String startPage) {
 		_startPage = startPage;
 	}
+
+	protected String getEndPage() {
+		if (Validator.isNull(_endPage)) {
+			return _END_PAGE;
+		}
+		else {
+			return _endPage;
+		}
+	}
+
+	protected String getStartPage() {
+		if (Validator.isNull(_startPage)) {
+			return _START_PAGE;
+		}
+		else {
+			return _startPage;
+		}
+	}
+
+	private static final String _END_PAGE = "/html/taglib/ui/icon_list/end.jsp";
+
+	private static final String _START_PAGE =
+		"/html/taglib/ui/icon_list/start.jsp";
 
 	private String _endPage;
 	private boolean _showWhenSingleIcon = false;
