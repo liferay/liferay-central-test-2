@@ -26,10 +26,10 @@ if (selLayout == null) {
 String selLayoutParam = (String)request.getAttribute("liferay-ui:breadcrumb:selLayoutParam");
 PortletURL portletURL = (PortletURL)request.getAttribute("liferay-ui:breadcrumb:portletURL");
 
-String displayStyle = GetterUtil.getString((String)request.getAttribute("liferay-ui:breadcrumb:displayStyle"));
+String displayStyle = GetterUtil.getString((String)request.getAttribute("liferay-ui:breadcrumb:displayStyle"), "horizontal");
 
-if (displayStyle.equals("0")) {
-	displayStyle = "1";
+if (!ArrayUtil.contains(PropsValues.BREADCRUMB_DISPLAY_STYLE_OPTIONS, displayStyle)){
+	displayStyle = "horizontal";
 }
 
 boolean showGuestGroup = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:breadcrumb:showGuestGroup"));
