@@ -30,8 +30,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
-import com.liferay.portal.kernel.scheduler.Trigger;
-import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -1310,14 +1308,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			String groupName = StagingUtil.getSchedulerGroupName(
 				DestinationNames.LAYOUTS_REMOTE_PUBLISHER, group.getGroupId());
 
-			List<SchedulerRequest> schedulerRequests =
-				SchedulerEngineUtil.getScheduledJobs(groupName);
-
-			for (SchedulerRequest schedulerRequest : schedulerRequests) {
-				SchedulerEngineUtil.unschedule(
-					schedulerRequest.getJobName(),
-					schedulerRequest.getGroupName());
-			}
+			SchedulerEngineUtil.unschedule(groupName);
 
 			long liveGroupId = 0;
 			long stagingGroupId = 0;
@@ -1340,30 +1331,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				groupName = StagingUtil.getSchedulerGroupName(
 					DestinationNames.LAYOUTS_LOCAL_PUBLISHER, liveGroupId);
 
-				schedulerRequests = SchedulerEngineUtil.getScheduledJobs(
-					groupName);
-
-				for (SchedulerRequest schedulerRequest : schedulerRequests) {
-					Trigger trigger = schedulerRequest.getTrigger();
-
-					SchedulerEngineUtil.unschedule(
-						trigger.getJobName(), trigger.getGroupName());
-				}
+				SchedulerEngineUtil.unschedule(groupName);
 
 				// Copy from live
 
 				groupName = StagingUtil.getSchedulerGroupName(
 					DestinationNames.LAYOUTS_LOCAL_PUBLISHER, stagingGroupId);
 
-				schedulerRequests = SchedulerEngineUtil.getScheduledJobs(
-					groupName);
-
-				for (SchedulerRequest schedulerRequest : schedulerRequests) {
-					Trigger trigger = schedulerRequest.getTrigger();
-
-					SchedulerEngineUtil.unschedule(
-						trigger.getJobName(), trigger.getGroupName());
-				}
+				SchedulerEngineUtil.unschedule(groupName);
 			}
 		}
 		catch (Exception e) {

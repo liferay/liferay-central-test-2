@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.scheduler.CronText;
 import com.liferay.portal.kernel.scheduler.CronTrigger;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.Trigger;
-import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -39,7 +38,6 @@ import com.liferay.portlet.messageboards.service.base.MBMailingListLocalServiceB
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author Thiago Moreira
@@ -238,15 +236,7 @@ public class MBMailingListLocalServiceImpl
 
 		String groupName = getSchedulerGroupName(mailingList);
 
-		List<SchedulerRequest> schedulerRequests =
-			SchedulerEngineUtil.getScheduledJobs(groupName);
-
-		for (SchedulerRequest schedulerRequest : schedulerRequests) {
-			Trigger trigger = schedulerRequest.getTrigger();
-
-			SchedulerEngineUtil.unschedule(
-				trigger.getJobName(), trigger.getGroupName());
-		}
+		SchedulerEngineUtil.unschedule(groupName);
 	}
 
 	protected void validate(
