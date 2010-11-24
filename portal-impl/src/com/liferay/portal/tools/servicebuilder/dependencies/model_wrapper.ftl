@@ -49,21 +49,27 @@ public class ${entity.name}Wrapper implements ${entity.name} {
 			</#list>
 
 			{
-				<#if method.returns.value != "void">
-					return
-				</#if>
-
-				_${entity.varName}.${method.name}(
-
-				<#list method.parameters as parameter>
-					${parameter.name}
-
-					<#if parameter_has_next>
-						,
+				<#if method.name == "clone" && (parameters?size == 0)>
+					return new ${entity.name}Wrapper((${entity.name})_${entity.varName}.clone());
+				<#elseif method.name == "toEscapedModel" && (parameters?size == 0)>
+					return new ${entity.name}Wrapper(_${entity.varName}.toEscapedModel());
+				<#else>
+					<#if method.returns.value != "void">
+						return
 					</#if>
-				</#list>
 
-				);
+					_${entity.varName}.${method.name}(
+
+					<#list method.parameters as parameter>
+						${parameter.name}
+
+						<#if parameter_has_next>
+							,
+						</#if>
+					</#list>
+
+					);
+				</#if>
 			}
 		</#if>
 	</#list>
