@@ -33,12 +33,9 @@ portletURL.setParameter("target", target);
 	<liferay-ui:search-container
 		searchContainer="<%= new GroupSearch(renderRequest, portletURL) %>"
 	>
-
-		<c:if test="<%= !filterManageableGroups ">
-			<liferay-ui:search-form
-				page="/html/portlet/enterprise_admin/group_search.jsp"
-			/>	
-		</c:if>
+		<liferay-ui:search-form
+			page="/html/portlet/enterprise_admin/group_search.jsp"
+		/>
 
 		<%
 		GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
