@@ -152,18 +152,18 @@ public class EditEntryAction extends PortletAction {
 			}
 
 			int workflowAction = ParamUtil.getInteger(
-					actionRequest, "workflowAction",
-					WorkflowConstants.ACTION_SAVE_DRAFT);
+				actionRequest, "workflowAction",
+				WorkflowConstants.ACTION_SAVE_DRAFT);
 
-			if ((entry != null) && (themeDisplay.isStateExclusive())) {
+			if ((entry != null) && themeDisplay.isStateExclusive()) {
 				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 				jsonObject.put("entryId", entry.getEntryId());
 				jsonObject.put("redirect", redirect);
 				jsonObject.put("updateRedirect", updateRedirect);
 
-				HttpServletRequest request =
-					PortalUtil.getHttpServletRequest(actionRequest);
+				HttpServletRequest request = PortalUtil.getHttpServletRequest(
+					actionRequest);
 				HttpServletResponse response =
 					PortalUtil.getHttpServletResponse(actionResponse);
 				InputStream inputStream = new UnsyncByteArrayInputStream(
@@ -176,8 +176,7 @@ public class EditEntryAction extends PortletAction {
 				setForward(actionRequest, ActionConstants.COMMON_NULL);
 			}
 			else if ((entry != null) &&
-					 (workflowAction ==
-						WorkflowConstants.ACTION_SAVE_DRAFT)) {
+					 (workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT)) {
 
 				redirect = getSaveAndContinueRedirect(
 					portletConfig, actionRequest, entry, redirect);
