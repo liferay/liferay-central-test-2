@@ -60,12 +60,12 @@ public class ATag extends IncludeTag {
 	}
 
 	protected void cleanUp() {
-		_cssClass = StringPool.BLANK;
-		_href = StringPool.BLANK;
-		_id = StringPool.BLANK;
-		_label = StringPool.BLANK;
-		_lang = StringPool.BLANK;
-		_target = StringPool.BLANK;
+		_cssClass = null;
+		_href = null;
+		_id = null;
+		_label = null;
+		_lang = null;
+		_target = null;
 	}
 
 	protected String getEndPage() {
@@ -80,7 +80,7 @@ public class ATag extends IncludeTag {
 		JspWriter jspWriter = pageContext.getOut();
 
 		if (Validator.isNotNull(_href)) {
-			if (_target.equals("_blank") || _target.equals("_new")) {
+			if ("_blank".equals(_target) || "_new".equals(_target)) {
 				jspWriter.write("<span class=\"opens-new-window-accessible\">");
 				jspWriter.write(
 					LanguageUtil.get(pageContext, "opens-new-window"));
@@ -196,11 +196,11 @@ public class ATag extends IncludeTag {
 	private static final String _START_PAGE =
 		"/html/taglib/aui/a/start.jsp";
 
-	private String _cssClass = StringPool.BLANK;
-	private String _href = StringPool.BLANK;
-	private String _id = StringPool.BLANK;
-	private String _label = StringPool.BLANK;
-	private String _lang = StringPool.BLANK;
-	private String _target = StringPool.BLANK;
+	private String _cssClass;
+	private String _href;
+	private String _id;
+	private String _label;
+	private String _lang;
+	private String _target;
 
 }

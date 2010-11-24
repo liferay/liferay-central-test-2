@@ -73,10 +73,10 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 		finally {
 			if (!ServerDetector.isResin()) {
 				_align = "right";
-				_cssClass = StringPool.BLANK;
+				_cssClass = null;
 				_endPage = null;
-				_icon = StringPool.BLANK;
-				_id = StringPool.BLANK;
+				_icon = null;
+				_id = null;
 				_message = "actions";
 				_showArrow = true;
 				_showExpanded = false;
@@ -198,7 +198,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 					jspWriter.write("lfr-menu-list lfr-menu-expanded ");
 					jspWriter.write(_align);
 					jspWriter.write(" ");
-					jspWriter.write(_cssClass);
+					jspWriter.print(_cssClass);
 					jspWriter.write("\" id=\"");
 					jspWriter.write(_id);
 					jspWriter.write("menu\">");
@@ -207,7 +207,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 					jspWriter.write("<ul class='lfr-component lfr-actions ");
 					jspWriter.write(_align);
 					jspWriter.write(" ");
-					jspWriter.write(_cssClass);
+					jspWriter.print(_cssClass);
 					jspWriter.write(" ");
 
 					if (_showArrow) {
@@ -272,10 +272,10 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 		"/html/taglib/ui/icon_menu/start.jsp";
 
 	private String _align = "right";
-	private String _cssClass = StringPool.BLANK;
+	private String _cssClass;
 	private String _endPage;
-	private String _icon = StringPool.BLANK;
-	private String _id = StringPool.BLANK;
+	private String _icon;
+	private String _id;
 	private String _message = "actions";
 	private boolean _showArrow = true;
 	private boolean _showExpanded;
