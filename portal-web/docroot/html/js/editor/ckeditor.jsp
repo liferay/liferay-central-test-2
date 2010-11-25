@@ -127,7 +127,7 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 		'CKEditor1',
 		{
 			filebrowserBrowseUrl: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/editor/filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %>',
-			filebrowserUploadUrl: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/editor/filemanager/browser/liferay/frmupload.html?Connector=<%= connectorURL %>'
+			filebrowserUploadUrl: null
 		}
 	);
 
