@@ -403,7 +403,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		sb.append("(");
 		sb.append(groupMappings.getProperty("groupName"));
 		sb.append("=");
-		sb.append(userGroup.getName());
+		sb.append(StringUtil.replace(userGroup.getName(), "\\,", "\\\\,"));
 		sb.append("))");
 
 		return PortalLDAPUtil.getMultivaluedAttribute(
@@ -588,7 +588,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			sb.append(StringPool.OPEN_PARENTHESIS);
 			sb.append(groupMappings.getProperty("user"));
 			sb.append(StringPool.EQUAL);
-			sb.append(fullUserDN);
+			sb.append(StringUtil.replace(fullUserDN, "\\,", "\\\\,"));
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
