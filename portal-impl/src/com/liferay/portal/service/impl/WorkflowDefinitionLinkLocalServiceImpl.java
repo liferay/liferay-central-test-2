@@ -120,11 +120,11 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 			if (group.isLayout()) {
 				groupId = group.getParentGroupId();
 			}
-
-			workflowDefinitionLink =
-				workflowDefinitionLinkPersistence.fetchByG_C_C(
-					groupId, companyId, classNameId);
 		}
+
+		workflowDefinitionLink =
+			workflowDefinitionLinkPersistence.fetchByG_C_C(
+				groupId, companyId, classNameId);
 
 		if (!strict && (workflowDefinitionLink == null)) {
 			workflowDefinitionLink =
