@@ -93,7 +93,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		if (Validator.isNull(_icon)) {
+		if (_icon == null) {
 			_icon = themeDisplay.getPathThemeImages() + "/common/tool.png";
 		}
 
