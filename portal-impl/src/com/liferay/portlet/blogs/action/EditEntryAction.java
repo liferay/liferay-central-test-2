@@ -151,11 +151,12 @@ public class EditEntryAction extends PortletAction {
 				updateRedirect = true;
 			}
 
+			boolean ajax = ParamUtil.getBoolean(actionRequest, "ajax", false);
 			int workflowAction = ParamUtil.getInteger(
 				actionRequest, "workflowAction",
 				WorkflowConstants.ACTION_SAVE_DRAFT);
 
-			if ((entry != null) && themeDisplay.isStateExclusive()) {
+			if (ajax) {
 				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 				jsonObject.put("entryId", entry.getEntryId());
@@ -348,47 +349,46 @@ public class EditEntryAction extends PortletAction {
 	protected Object[] updateEntry(ActionRequest actionRequest)
 		throws Exception {
 
-		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
-			actionRequest);
+		long entryId = ParamUtil.getLong(actionRequest, "entryId");
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		long entryId = ParamUtil.getLong(uploadRequest, "entryId");
-
-		String title = ParamUtil.getString(uploadRequest, "title");
-		String description = ParamUtil.getString(uploadRequest, "description");
-		String content = ParamUtil.getString(uploadRequest, "content");
+		String title = ParamUtil.getString(actionRequest, "title");
+		String description = ParamUtil.getString(actionRequest, "description");
+		String content = ParamUtil.getString(actionRequest, "content");
 
 		int displayDateMonth = ParamUtil.getInteger(
-			uploadRequest, "displayDateMonth");
+			actionRequest, "displayDateMonth");
 		int displayDateDay = ParamUtil.getInteger(
-			uploadRequest, "displayDateDay");
+			actionRequest, "displayDateDay");
 		int displayDateYear = ParamUtil.getInteger(
-			uploadRequest, "displayDateYear");
+			actionRequest, "displayDateYear");
 		int displayDateHour = ParamUtil.getInteger(
-			uploadRequest, "displayDateHour");
+			actionRequest, "displayDateHour");
 		int displayDateMinute = ParamUtil.getInteger(
-			uploadRequest, "displayDateMinute");
+			actionRequest, "displayDateMinute");
 		int displayDateAmPm = ParamUtil.getInteger(
-			uploadRequest, "displayDateAmPm");
+			actionRequest, "displayDateAmPm");
 
 		if (displayDateAmPm == Calendar.PM) {
 			displayDateHour += 12;
 		}
 
 		boolean allowPingbacks = ParamUtil.getBoolean(
-			uploadRequest, "allowPingbacks");
+			actionRequest, "allowPingbacks");
 		boolean allowTrackbacks = ParamUtil.getBoolean(
-			uploadRequest, "allowTrackbacks");
+			actionRequest, "allowTrackbacks");
 		String[] trackbacks = StringUtil.split(
-			ParamUtil.getString(uploadRequest, "trackbacks"));
+			ParamUtil.getString(actionRequest, "trackbacks"));
 
 		boolean	smallImage = false;
 		String smallImageURL = null;
 		File smallFile = null;
 
-		if (!themeDisplay.isStateExclusive()) {
+		boolean ajax = ParamUtil.getBoolean(actionRequest, "ajax", false);
+
+		if (!ajax) {
+			UploadPortletRequest uploadRequest =
+				PortalUtil.getUploadPortletRequest(actionRequest);
+
 			smallImage = ParamUtil.getBoolean(uploadRequest, "smallImage");
 			smallImageURL = ParamUtil.getString(
 				uploadRequest, "smallImageURL");

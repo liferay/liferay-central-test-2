@@ -255,7 +255,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 				<portlet:namespace />oldTitle = title;
 				<portlet:namespace />oldContent = content;
 
-				var url = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_entry" /></portlet:actionURL>';
+				var url = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_entry" /><portlet:param name="ajax" value="true" /></portlet:actionURL>';
 
 				A.io.request(
 					url,
