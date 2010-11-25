@@ -107,20 +107,6 @@ public class DLAppLocalServiceUtil {
 			description, serviceContext);
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addOrOverwriteFileEntry(
-		long userId, long groupId, long folderId, java.lang.String name,
-		java.lang.String sourceName, java.lang.String title,
-		java.lang.String description, java.lang.String changeLog,
-		java.lang.String extraSettings, java.io.File file,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .addOrOverwriteFileEntry(userId, groupId, folderId, name,
-			sourceName, title, description, changeLog, extraSettings, file,
-			serviceContext);
-	}
-
 	public static void deleteFileEntries(long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

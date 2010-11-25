@@ -297,27 +297,6 @@ public class DLRepositoryLocalServiceImpl
 		return folder;
 	}
 
-	public DLFileEntry addOrOverwriteFileEntry(
-			long userId, long groupId, long folderId, String name,
-			String sourceName, String title, String description,
-			String changeLog, String extraSettings, File file,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		try {
-			dlFileEntryPersistence.findByG_F_T(groupId, folderId, title);
-
-			return updateFileEntry(
-				userId, groupId, folderId, name, sourceName, title, description,
-				changeLog, false, extraSettings, file, serviceContext);
-		}
-		catch (NoSuchFileEntryException nsfee) {
-			return addFileEntry(
-				userId, groupId, folderId, name, title, description, changeLog,
-				extraSettings, file, serviceContext);
-		}
-	}
-
 	public void deleteFileEntries(long groupId, long folderId)
 		throws PortalException, SystemException {
 

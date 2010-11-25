@@ -93,19 +93,6 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService {
 			name, description, serviceContext);
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry addOrOverwriteFileEntry(
-		long userId, long groupId, long folderId, java.lang.String name,
-		java.lang.String sourceName, java.lang.String title,
-		java.lang.String description, java.lang.String changeLog,
-		java.lang.String extraSettings, java.io.File file,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppLocalService.addOrOverwriteFileEntry(userId, groupId,
-			folderId, name, sourceName, title, description, changeLog,
-			extraSettings, file, serviceContext);
-	}
-
 	public void deleteFileEntries(long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

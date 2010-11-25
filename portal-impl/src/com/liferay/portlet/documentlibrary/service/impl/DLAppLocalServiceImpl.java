@@ -96,18 +96,6 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			userId, groupId, parentFolderId, name, description, serviceContext);
 	}
 
-	public DLFileEntry addOrOverwriteFileEntry(
-			long userId, long groupId, long folderId, String name,
-			String sourceName, String title, String description,
-			String changeLog, String extraSettings, java.io.File file,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return dlRepositoryLocalService.addOrOverwriteFileEntry(
-			userId, groupId, folderId, name, sourceName, title, description,
-			changeLog, extraSettings, file, serviceContext);
-	}
-
 	public void deleteFileEntries(long groupId, long folderId)
 		throws PortalException, SystemException {
 
