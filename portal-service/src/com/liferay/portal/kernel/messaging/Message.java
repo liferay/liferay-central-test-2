@@ -105,6 +105,10 @@ public class Message implements Serializable {
 		return _payload;
 	}
 
+	public Object getResponse() {
+		return _response;
+	}
+
 	public String getResponseDestinationName() {
 		return _responseDestinationName;
 	}
@@ -131,6 +135,10 @@ public class Message implements Serializable {
 
 	public void setPayload(Object payload) {
 		_payload = payload;
+	}
+
+	public void setResponse(Object response) {
+		_response = response;
 	}
 
 	public void setResponseDestinationName(String responseDestinationName) {
@@ -161,6 +169,7 @@ public class Message implements Serializable {
 
 	private String _destinationName;
 	private Object _payload;
+	private Object _response;
 	private String _responseDestinationName;
 	private String _responseId;
 	private Map<String, Object> _values;

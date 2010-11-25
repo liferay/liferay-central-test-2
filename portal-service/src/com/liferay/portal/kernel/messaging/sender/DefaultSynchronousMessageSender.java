@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.uuid.PortalUUID;
 
 /**
  * @author Michael C. Han
+ * @deprecated
  */
 public class DefaultSynchronousMessageSender
 	implements SynchronousMessageSender {

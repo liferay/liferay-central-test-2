@@ -78,6 +78,7 @@ public class ProxyMessageListener implements MessageListener {
 				if (proxyResponseException != null) {
 					_log.error(proxyResponseException, proxyResponseException);
 				}
+				message.setResponse(proxyResponse);
 			}
 		}
 	}
