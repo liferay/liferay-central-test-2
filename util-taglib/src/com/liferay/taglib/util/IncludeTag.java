@@ -120,6 +120,23 @@ public class IncludeTag
 		}
 	}
 
+	@Override
+	public ServletContext getServletContext() {
+
+		ServletContext servletContext = super.getServletContext();
+
+		if (Validator.isNotNull(_portletId)) {
+			try {
+				servletContext = getServletContext(
+					servletContext, getServletRequest());
+			}
+			catch (SystemException e) {
+			}
+		}
+
+		return servletContext;
+	}
+
 	public void setDynamicAttribute(
 		String uri, String localName, Object value) {
 
