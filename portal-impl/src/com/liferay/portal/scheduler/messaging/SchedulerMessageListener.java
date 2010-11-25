@@ -37,16 +37,12 @@ public class SchedulerMessageListener extends BaseMessageListener {
 		_schedulerEngine = schedulerEngine;
 	}
 
-	protected void doCommandDelete(SchedulerRequest schedulerRequest)
+	protected void doCommandDelete(String jobName, String groupName)
 		throws Exception {
-
-		String groupName = schedulerRequest.getGroupName();
 
 		if (groupName == null) {
 			return;
 		}
-
-		String jobName = schedulerRequest.getJobName();
 
 		if (jobName == null) {
 			_schedulerEngine.delete(groupName);
@@ -56,11 +52,8 @@ public class SchedulerMessageListener extends BaseMessageListener {
 		}
 	}
 
-	protected void doCommandPause(SchedulerRequest schedulerRequest)
+	protected void doCommandPause(String jobName, String groupName)
 		throws Exception {
-
-		String jobName = schedulerRequest.getJobName();
-		String groupName = schedulerRequest.getGroupName();
 
 		if (groupName == null) {
 			return;
@@ -73,11 +66,8 @@ public class SchedulerMessageListener extends BaseMessageListener {
 		}
 	}
 
-	protected void doCommandResume(SchedulerRequest schedulerRequest)
+	protected void doCommandResume(String jobName, String groupName)
 		throws Exception {
-
-		String jobName = schedulerRequest.getJobName();
-		String groupName = schedulerRequest.getGroupName();
 
 		if (groupName == null) {
 			return;
@@ -91,13 +81,10 @@ public class SchedulerMessageListener extends BaseMessageListener {
 	}
 
 	protected void doCommandRetrieve(
-			Message message, SchedulerRequest schedulerRequest)
+			Message message, String jobName, String groupName)
 		throws Exception {
 
 		Object schedulerResponse = null;
-
-		String jobName = schedulerRequest.getJobName();
-		String groupName = schedulerRequest.getGroupName();
 
 		if (groupName == null) {
 			schedulerResponse = _schedulerEngine.getScheduledJobs();
@@ -110,7 +97,7 @@ public class SchedulerMessageListener extends BaseMessageListener {
 			schedulerResponse = _schedulerEngine.getScheduledJob(
 				jobName, groupName);
 
-			if (schedulerRequest == null) {
+			if (schedulerResponse == null) {
 				schedulerResponse =
 					SchedulerRequest.createRetrieveResponseRequest();
 			}
@@ -123,16 +110,12 @@ public class SchedulerMessageListener extends BaseMessageListener {
 			responseMessage.getDestinationName(), responseMessage);
 	}
 
-	protected void doCommandUnregister(SchedulerRequest schedulerRequest)
+	protected void doCommandUnregister(String jobName, String groupName)
 		throws Exception {
-
-		String groupName = schedulerRequest.getGroupName();
 
 		if (groupName == null) {
 			return;
 		}
-
-		String jobName = schedulerRequest.getJobName();
 
 		if (jobName == null) {
 			_schedulerEngine.unschedule(groupName);
@@ -147,12 +130,27 @@ public class SchedulerMessageListener extends BaseMessageListener {
 			(SchedulerRequest)message.getPayload();
 
 		String command = schedulerRequest.getCommand();
+		String jobName = schedulerRequest.getJobName();
+		String groupName = schedulerRequest.getGroupName();
+
+		if (jobName != null && 
+			jobName.length() > SchedulerEngine.JOB_NAME_MAX_LENGTH) {
+
+			jobName = jobName.substring(0, SchedulerEngine.JOB_NAME_MAX_LENGTH);
+		}
+
+		if (groupName != null &&
+			groupName.length() > SchedulerEngine.GROUP_NAME_MAX_LENGTH) {
+			
+			groupName = groupName.substring(
+				0, SchedulerEngine.GROUP_NAME_MAX_LENGTH);
+		}
 
 		if (command.equals(SchedulerRequest.COMMAND_DELETE)) {
-			doCommandDelete(schedulerRequest);
+			doCommandDelete(jobName, groupName);
 		}
 		else if (command.equals(SchedulerRequest.COMMAND_PAUSE)) {
-			doCommandPause(schedulerRequest);
+			doCommandPause(jobName, groupName);
 		}
 		else if (command.equals(SchedulerRequest.COMMAND_REGISTER)) {
 			_schedulerEngine.schedule(
@@ -162,10 +160,10 @@ public class SchedulerMessageListener extends BaseMessageListener {
 				schedulerRequest.getMessage());
 		}
 		else if (command.equals(SchedulerRequest.COMMAND_RESUME)) {
-			doCommandResume(schedulerRequest);
+			doCommandResume(jobName, groupName);
 		}
 		else if (command.equals(SchedulerRequest.COMMAND_RETRIEVE)) {
-			doCommandRetrieve(message, schedulerRequest);
+			doCommandRetrieve(message, jobName, groupName);
 		}
 		else if (command.equals(SchedulerRequest.COMMAND_SHUTDOWN)) {
 			_schedulerEngine.shutdown();
@@ -174,11 +172,10 @@ public class SchedulerMessageListener extends BaseMessageListener {
 			_schedulerEngine.start();
 		}
 		else if (command.equals(SchedulerRequest.COMMAND_SUPPRESS_ERROR)) {
-			_schedulerEngine.suppressError(
-				schedulerRequest.getJobName(), schedulerRequest.getGroupName());
+			_schedulerEngine.suppressError(jobName, groupName);
 		}
 		else if (command.equals(SchedulerRequest.COMMAND_UNREGISTER)) {
-			doCommandUnregister(schedulerRequest);
+			doCommandUnregister(jobName, groupName);
 		}
 		else if (command.equals(SchedulerRequest.COMMAND_UPDATE)) {
 			_schedulerEngine.update(schedulerRequest.getTrigger());
