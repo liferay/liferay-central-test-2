@@ -39,11 +39,8 @@ import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.asset.NoSuchEntryException;
-import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.util.AssetUtil;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.FolderNameException;
@@ -52,19 +49,14 @@ import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
-import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLRepositoryLocalServiceBaseImpl;
-import com.liferay.portlet.documentlibrary.social.DLActivityKeys;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.comparator.FileEntryModifiedDateComparator;
 import com.liferay.portlet.documentlibrary.util.comparator.FileVersionVersionComparator;
-import com.liferay.portlet.messageboards.model.MBDiscussion;
-import com.liferay.portlet.ratings.model.RatingsEntry;
-import com.liferay.portlet.ratings.model.RatingsStats;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -220,14 +212,10 @@ public class DLRepositoryLocalServiceImpl
 			serviceContext.getAssetCategoryIds(),
 			serviceContext.getAssetTagNames());
 
-		// Message boards
+		// DLApp
 
-		if (PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED) {
-			mbMessageLocalService.addDiscussionMessage(
-				userId, fileEntry.getUserName(), groupId,
-				DLFileEntry.class.getName(), fileEntryId,
-				WorkflowConstants.ACTION_PUBLISH);
-		}
+		dlAppHelperLocalService.addFileEntry(
+			fileEntry, fileVersion, serviceContext);
 
 		// File
 
@@ -302,6 +290,10 @@ public class DLRepositoryLocalServiceImpl
 			dlFolderPersistence.update(parentFolder, false);
 		}
 
+		// DLApp
+
+		dlAppHelperLocalService.addFolder(folder, serviceContext);
+
 		return folder;
 	}
 
@@ -361,17 +353,6 @@ public class DLRepositoryLocalServiceImpl
 			fileEntry.getCompanyId(), fileEntry.getGroupId(),
 			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
-		// File ranks
-
-		dlFileRankLocalService.deleteFileRanks(
-			fileEntry.getFolderId(), fileEntry.getName());
-
-		// File shortcuts
-
-		dlFileShortcutLocalService.deleteFileShortcuts(
-			fileEntry.getGroupId(), fileEntry.getFolderId(),
-			fileEntry.getName());
-
 		// File versions
 
 		List<DLFileVersion> fileVersions = dlFileVersionPersistence.findByG_F_N(
@@ -381,11 +362,6 @@ public class DLRepositoryLocalServiceImpl
 		for (DLFileVersion fileVersion : fileVersions) {
 			dlFileVersionPersistence.remove(fileVersion);
 		}
-
-		// Asset
-
-		assetEntryLocalService.deleteEntry(
-			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 		// Expando
 
@@ -400,20 +376,9 @@ public class DLRepositoryLocalServiceImpl
 
 		lockLocalService.unlock(DLFileEntry.class.getName(), lockId);
 
-		// Message boards
+		// DLApp
 
-		mbMessageLocalService.deleteDiscussionMessages(
-			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-
-		// Ratings
-
-		ratingsStatsLocalService.deleteStats(
-			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-
-		// Social
-
-		socialActivityLocalService.deleteActivities(
-			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+		dlAppHelperLocalService.deleteFileEntry(fileEntry);
 
 		// File
 
@@ -520,6 +485,10 @@ public class DLRepositoryLocalServiceImpl
 		expandoValueLocalService.deleteValues(
 			DLFolder.class.getName(), folder.getFolderId());
 
+		// DLApp
+
+		dlAppHelperLocalService.deleteFolder(folder);
+
 		// Directory
 
 		try {
@@ -611,31 +580,13 @@ public class DLRepositoryLocalServiceImpl
 		DLFileEntry fileEntry = dlFileEntryPersistence.findByG_F_N(
 			groupId, folderId, name);
 
-		if (userId > 0) {
-			dlFileRankLocalService.updateFileRank(
-				groupId, companyId, userId, folderId, name,
-				new ServiceContext());
-		}
-
 		if (PropsValues.DL_FILE_ENTRY_READ_COUNT_ENABLED) {
 			fileEntry.setReadCount(fileEntry.getReadCount() + 1);
 
 			dlFileEntryPersistence.update(fileEntry, false);
-
-			assetEntryLocalService.incrementViewCounter(
-				userId, DLFileEntry.class.getName(),
-				fileEntry.getFileEntryId());
-
-			List<DLFileShortcut> fileShortcuts =
-				dlFileShortcutPersistence.findByTG_TF_TN(
-					groupId, folderId, name);
-
-			for (DLFileShortcut fileShortcut : fileShortcuts) {
-				assetEntryLocalService.incrementViewCounter(
-					userId, DLFileShortcut.class.getName(),
-					fileShortcut.getFileShortcutId());
-			}
 		}
+
+		dlAppHelperLocalService.getFileAsStream(userId, fileEntry);
 
 		if (Validator.isNotNull(version)) {
 			return dlLocalService.getFileAsStream(
@@ -1037,9 +988,6 @@ public class DLRepositoryLocalServiceImpl
 			dlFileVersionPersistence.remove(fileVersion);
 		}
 
-		dlFileShortcutLocalService.updateFileShortcuts(
-			groupId, folderId, name, newFolderId, name);
-
 		// Resources
 
 		resourceLocalService.updateResources(
@@ -1048,62 +996,16 @@ public class DLRepositoryLocalServiceImpl
 			String.valueOf(fileEntry.getFileEntryId()),
 			String.valueOf(newFileEntryId));
 
-		// Asset
-
-		assetEntryLocalService.deleteEntry(
-			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-
-		List<DLFileShortcut> fileShortcuts =
-			dlFileShortcutPersistence.findByTG_TF_TN(
-				groupId, folderId, name);
-
-		for (DLFileShortcut fileShortcut : fileShortcuts) {
-			assetEntryLocalService.deleteEntry(
-				DLFileShortcut.class.getName(),
-				fileShortcut.getFileShortcutId());
-		}
-
 		// Expando
 
 		expandoValueLocalService.deleteValues(
 			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
-		// Ratings
+		// DLApp
 
-		RatingsStats stats = ratingsStatsLocalService.getStats(
-			DLFileEntry.class.getName(), oldFileEntryId);
-
-		stats.setClassPK(newFileEntryId);
-
-		ratingsStatsPersistence.update(stats, false);
-
-		long classNameId = PortalUtil.getClassNameId(
-			DLFileEntry.class.getName());
-
-		List<RatingsEntry> entries = ratingsEntryPersistence.findByC_C(
-			classNameId, oldFileEntryId);
-
-		for (RatingsEntry entry : entries) {
-			entry.setClassPK(newFileEntryId);
-
-			ratingsEntryPersistence.update(entry, false);
-		}
-
-		// Message boards
-
-		MBDiscussion discussion = mbDiscussionPersistence.fetchByC_C(
-			classNameId, oldFileEntryId);
-
-		if (discussion != null) {
-			discussion.setClassPK(newFileEntryId);
-
-			mbDiscussionPersistence.update(discussion, false);
-		}
-
-		// Social
-
-		socialActivityLocalService.deleteActivities(
-			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+		dlAppHelperLocalService.moveFileEntry(
+			userId, groupId, folderId, newFolderId, oldFileEntryId,
+			newFileEntryId, name);
 
 		// File
 
@@ -1139,43 +1041,15 @@ public class DLRepositoryLocalServiceImpl
 			}
 		}
 
-		if (addDraftAssetEntry) {
-			assetEntryLocalService.updateEntry(
-				userId, fileEntry.getGroupId(), DLFileEntry.class.getName(),
-				fileVersion.getFileVersionId(), fileEntry.getUuid(),
-				assetCategoryIds, assetTagNames, false, null, null, null, null,
-				mimeType, fileEntry.getTitle(), fileEntry.getDescription(),
-				null, null, 0, 0, null, false);
+		boolean visible = true;
+
+		if ((fileVersion != null) && !fileVersion.isApproved()) {
+			visible = false;
 		}
-		else {
-			boolean visible = true;
 
-			if ((fileVersion != null) && !fileVersion.isApproved()) {
-				visible = false;
-			}
-
-			assetEntryLocalService.updateEntry(
-				userId, fileEntry.getGroupId(), DLFileEntry.class.getName(),
-				fileEntry.getFileEntryId(), fileEntry.getUuid(),
-				assetCategoryIds, assetTagNames, visible, null, null, null,
-				null, mimeType, fileEntry.getTitle(),
-				fileEntry.getDescription(), null, null, 0, 0, null, false);
-
-			List<DLFileShortcut> fileShortcuts =
-				dlFileShortcutPersistence.findByTG_TF_TN(
-					fileEntry.getGroupId(), fileEntry.getFolderId(),
-					fileEntry.getName());
-
-			for (DLFileShortcut fileShortcut : fileShortcuts) {
-				assetEntryLocalService.updateEntry(
-					userId, fileShortcut.getGroupId(),
-					DLFileShortcut.class.getName(),
-					fileShortcut.getFileShortcutId(), fileShortcut.getUuid(),
-					assetCategoryIds, assetTagNames, true, null, null, null,
-					null, mimeType, fileEntry.getTitle(),
-					fileEntry.getDescription(), null, null, 0, 0, null, false);
-			}
-		}
+		dlAppHelperLocalService.updateAsset(
+			userId, fileEntry, fileVersion, assetCategoryIds, assetTagNames,
+			mimeType, addDraftAssetEntry, visible);
 	}
 
 	public DLFileEntry updateFileEntry(
@@ -1481,53 +1355,6 @@ public class DLRepositoryLocalServiceImpl
 				dlFileEntryPersistence.update(fileEntry, false);
 			}
 
-			// Asset
-
-			if (fileEntry.getVersion().equals(latestFileVersion.getVersion())) {
-				if ((latestFileVersion.getVersion() !=
-						DLFileEntryConstants.DEFAULT_VERSION)) {
-
-					AssetEntry draftAssetEntry = null;
-
-					try {
-						draftAssetEntry = assetEntryLocalService.getEntry(
-							DLFileEntry.class.getName(),
-							latestFileVersion.getPrimaryKey());
-
-						long[] assetCategoryIds =
-							draftAssetEntry.getCategoryIds();
-						String[] assetTagNames = draftAssetEntry.getTagNames();
-
-						assetEntryLocalService.updateEntry(
-							userId, fileEntry.getGroupId(),
-							DLFileEntry.class.getName(),
-							fileEntry.getFileEntryId(), fileEntry.getUuid(),
-							assetCategoryIds, assetTagNames, true, null, null,
-							null, null, draftAssetEntry.getMimeType(),
-							fileEntry.getTitle(), fileEntry.getDescription(),
-							null, null, 0, 0, null, false);
-
-						assetEntryLocalService.deleteEntry(
-							draftAssetEntry.getEntryId());
-					}
-					catch (NoSuchEntryException nsee) {
-					}
-				}
-
-				assetEntryLocalService.updateVisible(
-					DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
-					true);
-			}
-
-			// Social
-
-			socialActivityLocalService.addUniqueActivity(
-				latestFileVersion.getStatusByUserId(),
-				latestFileVersion.getGroupId(),
-				latestFileVersion.getCreateDate(), DLFileEntry.class.getName(),
-				fileEntryId, DLActivityKeys.ADD_FILE_ENTRY,
-				StringPool.BLANK, 0);
-
 			// Indexer
 
 			Indexer indexer = IndexerRegistryUtil.getIndexer(DLFileEntry.class);
@@ -1555,14 +1382,6 @@ public class DLRepositoryLocalServiceImpl
 				dlFileEntryPersistence.update(fileEntry, false);
 			}
 
-			// Asset
-
-			if (Validator.isNull(fileEntry.getVersion())) {
-				assetEntryLocalService.updateVisible(
-					DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
-					false);
-			}
-
 			// Indexer
 
 			if (latestFileVersion.getVersion().equals(
@@ -1574,6 +1393,11 @@ public class DLRepositoryLocalServiceImpl
 				indexer.delete(fileEntry);
 			}
 		}
+
+		// DLApp
+
+		dlAppHelperLocalService.updateStatus(
+			userId, fileEntry, latestFileVersion, status);
 
 		return fileEntry;
 	}

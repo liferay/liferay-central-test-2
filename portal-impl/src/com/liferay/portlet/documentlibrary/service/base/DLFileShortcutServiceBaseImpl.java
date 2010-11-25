@@ -38,6 +38,7 @@ import com.liferay.portlet.asset.service.persistence.AssetEntryFinder;
 import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 import com.liferay.portlet.asset.service.persistence.AssetTagFinder;
 import com.liferay.portlet.asset.service.persistence.AssetTagPersistence;
+import com.liferay.portlet.documentlibrary.service.DLAppHelperLocalService;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalService;
 import com.liferay.portlet.documentlibrary.service.DLAppService;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
@@ -108,6 +109,25 @@ public abstract class DLFileShortcutServiceBaseImpl extends PrincipalBean
 	 */
 	public void setDLAppService(DLAppService dlAppService) {
 		this.dlAppService = dlAppService;
+	}
+
+	/**
+	 * Gets the d l app helper local service.
+	 *
+	 * @return the d l app helper local service
+	 */
+	public DLAppHelperLocalService getDLAppHelperLocalService() {
+		return dlAppHelperLocalService;
+	}
+
+	/**
+	 * Sets the d l app helper local service.
+	 *
+	 * @param dlAppHelperLocalService the d l app helper local service
+	 */
+	public void setDLAppHelperLocalService(
+		DLAppHelperLocalService dlAppHelperLocalService) {
+		this.dlAppHelperLocalService = dlAppHelperLocalService;
 	}
 
 	/**
@@ -667,6 +687,8 @@ public abstract class DLFileShortcutServiceBaseImpl extends PrincipalBean
 	protected DLAppLocalService dlAppLocalService;
 	@BeanReference(type = DLAppService.class)
 	protected DLAppService dlAppService;
+	@BeanReference(type = DLAppHelperLocalService.class)
+	protected DLAppHelperLocalService dlAppHelperLocalService;
 	@BeanReference(type = DLFileEntryPersistence.class)
 	protected DLFileEntryPersistence dlFileEntryPersistence;
 	@BeanReference(type = DLFileEntryFinder.class)
