@@ -299,7 +299,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 							existingTitleFileEntry =
 								DLFileEntryUtil.findByG_F_T(
 									portletDataContext.getScopeGroupId(),
-									folderId, fileEntry.getTitle());
+									folderId, fileEntryTitle);
 
 							if (existingTitleFileEntry == null) {
 								break;
