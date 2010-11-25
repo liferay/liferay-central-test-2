@@ -46,17 +46,13 @@ portletURL.setParameter("target", target);
 		<liferay-ui:search-container-results>
 
 			<%
+			results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+			total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams);
+
 			if (filterManageableGroups) {
-				List<Group> groups = user.getGroups();
+				results = EnterpriseAdminUtil.filterGroups(permissionChecker, results);
 
-				groups = EnterpriseAdminUtil.filterGroups(permissionChecker, groups);
-
-				total = groups.size();
-				results = ListUtil.subList(groups, searchContainer.getStart(), searchContainer.getEnd());
-			}
-			else {
-				results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-				total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams);
+				total = results.size();
 			}
 
 			pageContext.setAttribute("results", results);
