@@ -80,7 +80,9 @@ public class ATag extends IncludeTag {
 		JspWriter jspWriter = pageContext.getOut();
 
 		if (Validator.isNotNull(_href)) {
-			if ("_blank".equals(_target) || "_new".equals(_target)) {
+			if ((_target != null) &&
+				(_target.equals("_blank") || _target.equals("_new"))) {
+
 				jspWriter.write("<span class=\"opens-new-window-accessible\">");
 				jspWriter.write(
 					LanguageUtil.get(pageContext, "opens-new-window"));
