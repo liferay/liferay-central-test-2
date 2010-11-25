@@ -24,7 +24,7 @@
 		<property name="singleDestinationSynchronousMessageSender">
 			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationSynchronousMessageSender">
 				<property name="destinationName" value="liferay/search_reader" />
-				<property name="synchronousMessageSender" ref="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" />
+				<property name="synchronousMessageSender" ref="com.liferay.portal.kernel.messaging.sender.DirectSynchronousMessageSender" />
 			</bean>
 		</property>
 	</bean>

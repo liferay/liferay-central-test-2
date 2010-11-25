@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 
 /**
  * @author Michael C. Han
- * @deprecated
  */
 public class SynchronousMessageListener implements MessageListener {
 
