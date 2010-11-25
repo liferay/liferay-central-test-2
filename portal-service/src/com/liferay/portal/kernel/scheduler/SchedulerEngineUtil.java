@@ -48,11 +48,30 @@ public class SchedulerEngineUtil {
 
 	public static void addScriptingJob(
 			Trigger trigger, String description, String language, String script,
+			int exceptionsMaxSize)
+		throws SchedulerException {
+
+		_instance._addScriptingJob(
+			trigger, description, language, script, exceptionsMaxSize);
+	}
+
+	public static void addScriptingJob(
+			Trigger trigger, String description, String language, String script,
 			boolean permanent)
 		throws SchedulerException {
 
 		_instance._addScriptingJob(
 			trigger, description, language, script, permanent);
+	}
+
+	public static void addScriptingJob(
+			Trigger trigger, String description, String language, String script,
+			boolean permanent, int exceptionsMaxSize)
+		throws SchedulerException {
+
+		_instance._addScriptingJob(
+			trigger, description, language, script, permanent,
+			exceptionsMaxSize);
 	}
 
 	public static void delete(SchedulerEntry schedulerEntry)
@@ -195,6 +214,14 @@ public class SchedulerEngineUtil {
 	}
 
 	public static void schedule(
+			SchedulerEntry schedulerEntry, ClassLoader classLoader,
+			int exceptionsMaxSize)
+		throws SchedulerException {
+
+		_instance._schedule(schedulerEntry, classLoader, exceptionsMaxSize);
+	}
+
+	public static void schedule(
 			Trigger trigger, String description, String destinationName,
 			Message message)
 		throws SchedulerException {
@@ -204,10 +231,28 @@ public class SchedulerEngineUtil {
 
 	public static void schedule(
 			Trigger trigger, String description, String destinationName,
+			Message message, int exceptionsMaxSize)
+		throws SchedulerException {
+
+		_instance._schedule(
+			trigger, description, destinationName, message, exceptionsMaxSize);
+	}
+
+	public static void schedule(
+			Trigger trigger, String description, String destinationName,
 			Object payload)
 		throws SchedulerException {
 
 		_instance._schedule(trigger, description, destinationName, payload);
+	}
+
+	public static void schedule(
+			Trigger trigger, String description, String destinationName,
+			Object payload, int exceptionsMaxSize)
+		throws SchedulerException {
+
+		_instance._schedule(
+			trigger, description, destinationName, payload, exceptionsMaxSize);
 	}
 
 	public static void shutdown() throws SchedulerException {
@@ -256,12 +301,30 @@ public class SchedulerEngineUtil {
 		_instance._update(jobName, groupName, description, language, script);
 	}
 
+	public static void update(
+			String jobName, String groupName, String description,
+			String language, String script, int exceptionsMaxSize)
+		throws SchedulerException {
+
+		_instance._update(
+			jobName, groupName, description, language, script,
+			exceptionsMaxSize);
+	}
+
 	public static void update(Trigger trigger) throws SchedulerException {
 		_instance._update(trigger);
 	}
 
 	private void _addScriptingJob(
 			Trigger trigger, String description, String language, String script)
+		throws SchedulerException {
+
+		_addScriptingJob(trigger, description, language, script, 0);
+	}
+
+	private void _addScriptingJob(
+			Trigger trigger, String description, String language, String script,
+			int exceptionsMaxSize)
 		throws SchedulerException {
 
 		Message message = new Message();
@@ -271,12 +334,20 @@ public class SchedulerEngineUtil {
 
 		_schedule(
 			trigger, description, DestinationNames.SCHEDULER_SCRIPTING,
-			message);
+			message, exceptionsMaxSize);
 	}
 
 	private void _addScriptingJob(
 			Trigger trigger, String description, String language, String script,
 			boolean permanent)
+		throws SchedulerException {
+
+		_addScriptingJob(trigger, description, language, script, permanent, 0);
+	}
+
+	private void _addScriptingJob(
+			Trigger trigger, String description, String language, String script,
+			boolean permanent, int exceptionsMaxSize)
 		throws SchedulerException {
 
 		Message message = new Message();
@@ -287,7 +358,7 @@ public class SchedulerEngineUtil {
 
 		_schedule(
 			trigger, description, DestinationNames.SCHEDULER_SCRIPTING,
-			message);
+			message, exceptionsMaxSize);
 	}
 
 	private void _delete(SchedulerEntry schedulerEntry)
@@ -592,6 +663,14 @@ public class SchedulerEngineUtil {
 			SchedulerEntry schedulerEntry, ClassLoader classLoader)
 		throws SchedulerException {
 
+		_schedule(schedulerEntry, classLoader, 0);
+	}
+
+	private void _schedule(
+			SchedulerEntry schedulerEntry, ClassLoader classLoader,
+			int exceptionsMaxSize)
+		throws SchedulerException {
+
 		SchedulerEventMessageListenerWrapper schedulerEventListenerWrapper =
 			new SchedulerEventMessageListenerWrapper();
 
@@ -615,7 +694,7 @@ public class SchedulerEngineUtil {
 
 		_schedule(
 			schedulerEntry.getTrigger(), schedulerEntry.getDescription(),
-			DestinationNames.SCHEDULER_DISPATCH, message);
+			DestinationNames.SCHEDULER_DISPATCH, message, exceptionsMaxSize);
 	}
 
 	private void _schedule(
@@ -629,15 +708,38 @@ public class SchedulerEngineUtil {
 
 	private void _schedule(
 			Trigger trigger, String description, String destinationName,
+			Message message, int exceptionsMaxSize)
+		throws SchedulerException {
+
+		if (message == null) {
+			message = new Message();
+		}
+
+		message.put(SchedulerEngine.EXCEPTIONS_MAX_SIZE, exceptionsMaxSize);
+
+		_schedulerEngine.schedule(
+			trigger, description, destinationName, message);
+	}
+
+	private void _schedule(
+			Trigger trigger, String description, String destinationName,
 			Object payload)
+		throws SchedulerException {
+
+		_schedule(trigger, description, destinationName, payload, 0);
+	}
+
+	private void _schedule(
+			Trigger trigger, String description, String destinationName,
+			Object payload, int exceptionsMaxSize)
 		throws SchedulerException {
 
 		Message message = new Message();
 
 		message.setPayload(payload);
 
-		_schedulerEngine.schedule(
-			trigger, description, destinationName, message);
+		_schedule(
+			trigger, description, destinationName, message, exceptionsMaxSize);
 	}
 
 	private void _shutdown() throws SchedulerException {
@@ -762,6 +864,14 @@ public class SchedulerEngineUtil {
 			String language, String script)
 		throws SchedulerException {
 
+		_update(jobName, groupName, description, language, script, 0);
+	}
+
+	private void _update(
+			String jobName, String groupName, String description,
+			String language, String script, int exceptionsMaxSize)
+		throws SchedulerException {
+
 		SchedulerRequest schedulerRequest = _getScheduledJob(
 			jobName, groupName);
 
@@ -785,7 +895,9 @@ public class SchedulerEngineUtil {
 
 		_unregisterMessageListener(schedulerRequest);
 
-		_addScriptingJob(trigger, description, language, script, permanent);
+		_addScriptingJob(
+			trigger, description, language, script, permanent,
+			exceptionsMaxSize);
 	}
 
 	private void _update(Trigger trigger) throws SchedulerException {
