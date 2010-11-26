@@ -156,7 +156,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 
 <aui:script>
 	function <portlet:namespace />createSelectFileEntryURL(url) {
-		url += '&<portlet:namespace />groupId='+ document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value;
+		url += '&<portlet:namespace />groupId=' + document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value;
 		url += '&<portlet:namespace />fileEntryId=' + document.<portlet:namespace />fm.<portlet:namespace />toFileEntryId.value;
 
 		return url;
