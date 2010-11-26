@@ -245,6 +245,15 @@ AUI().add(
 							}
 						);
 
+						instance._hideMessageTask = new A.DelayedTask(
+							function() {
+								instance._portletMessageContainer.hide();
+
+								instance._toolbarCategoryPanel.refreshAlign();
+								instance._vocabularyCategoryPanel.refreshAlign();
+							}
+						);
+
 						instance._loadData();
 
 						instance.after('drop:hit', instance._afterDragDrop);
@@ -1223,21 +1232,12 @@ AUI().add(
 						var output = instance._portletMessageContainer;
 						var typeClass = 'portlet-msg-' + type;
 
-						clearTimeout(instance._messageTimeout);
-
-						output.removeClass('portlet-msg-error portlet-msg-success');
+						output.removeClass('portlet-msg-error').removeClass('portlet-msg-success');
 						output.addClass(typeClass);
 						output.html(message);
 						output.show();
 
-						instance._messageTimeout = setTimeout(
-							function() {
-								output.hide();
-
-								instance._toolbarCategoryPanel.refreshAlign();
-								instance._vocabularyCategoryPanel.refreshAlign();
-							},
-						7000);
+						instance._hideMessageTask.delay(7000);
 					},
 
 					_showLoading: function(container) {
