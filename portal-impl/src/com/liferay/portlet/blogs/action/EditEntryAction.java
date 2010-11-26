@@ -151,10 +151,11 @@ public class EditEntryAction extends PortletAction {
 				updateRedirect = true;
 			}
 
-			boolean ajax = ParamUtil.getBoolean(actionRequest, "ajax", false);
 			int workflowAction = ParamUtil.getInteger(
 				actionRequest, "workflowAction",
 				WorkflowConstants.ACTION_SAVE_DRAFT);
+
+			boolean ajax = ParamUtil.getBoolean(actionRequest, "ajax");
 
 			if (ajax) {
 				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
@@ -383,7 +384,7 @@ public class EditEntryAction extends PortletAction {
 		String smallImageURL = null;
 		File smallFile = null;
 
-		boolean ajax = ParamUtil.getBoolean(actionRequest, "ajax", false);
+		boolean ajax = ParamUtil.getBoolean(actionRequest, "ajax");
 
 		if (!ajax) {
 			UploadPortletRequest uploadRequest =
