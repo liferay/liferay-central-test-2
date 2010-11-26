@@ -1655,7 +1655,7 @@
 	</library>
 	<library>
 		<file-name>portal/ical4j.jar</file-name>
-		<version>1.0 B2</version>
+		<version>1.0 RC3</version>
 		<project-name>iCal4j</project-name>
 		<project-url>http://ical4j.sourceforge.net</project-url>
 		<licenses>
