@@ -182,12 +182,9 @@ public class GetFileAction extends PortletAction {
 			DLFileShortcut fileShortcut = DLAppServiceUtil.getFileShortcut(
 				fileShortcutId);
 
-			groupId = fileShortcut.getToGroupId();
-			folderId = fileShortcut.getToFolderId();
-			name = fileShortcut.getToName();
+			long fileEntryId = fileShortcut.getToFileEntryId();
 
-			fileEntry = DLAppServiceUtil.getFileEntry(
-				groupId, folderId, name);
+			fileEntry = DLAppServiceUtil.getFileEntry(fileEntryId);
 		}
 
 		if (Validator.isNull(version)) {

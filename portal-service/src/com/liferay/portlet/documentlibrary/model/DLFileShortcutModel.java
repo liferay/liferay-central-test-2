@@ -103,20 +103,6 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut> {
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the to group id of this d l file shortcut.
-	 *
-	 * @return the to group id of this d l file shortcut
-	 */
-	public long getToGroupId();
-
-	/**
-	 * Sets the to group id of this d l file shortcut.
-	 *
-	 * @param toGroupId the to group id of this d l file shortcut
-	 */
-	public void setToGroupId(long toGroupId);
-
-	/**
 	 * Gets the company id of this d l file shortcut.
 	 *
 	 * @return the company id of this d l file shortcut
@@ -217,33 +203,18 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut> {
 	public void setFolderId(long folderId);
 
 	/**
-	 * Gets the to folder id of this d l file shortcut.
+	 * Gets the to file entry id of this d l file shortcut.
 	 *
-	 * @return the to folder id of this d l file shortcut
+	 * @return the to file entry id of this d l file shortcut
 	 */
-	public long getToFolderId();
+	public long getToFileEntryId();
 
 	/**
-	 * Sets the to folder id of this d l file shortcut.
+	 * Sets the to file entry id of this d l file shortcut.
 	 *
-	 * @param toFolderId the to folder id of this d l file shortcut
+	 * @param toFileEntryId the to file entry id of this d l file shortcut
 	 */
-	public void setToFolderId(long toFolderId);
-
-	/**
-	 * Gets the to name of this d l file shortcut.
-	 *
-	 * @return the to name of this d l file shortcut
-	 */
-	@AutoEscape
-	public String getToName();
-
-	/**
-	 * Sets the to name of this d l file shortcut.
-	 *
-	 * @param toName the to name of this d l file shortcut
-	 */
-	public void setToName(String toName);
+	public void setToFileEntryId(long toFileEntryId);
 
 	/**
 	 * Gets the status of this d l file shortcut.

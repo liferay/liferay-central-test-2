@@ -270,6 +270,20 @@ public class DLRepositoryServiceSoap {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap getFileEntry(
+		long fileEntryId) throws RemoteException {
+		try {
+			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLRepositoryServiceUtil.getFileEntry(fileEntryId);
+
+			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap getFileEntry(
 		long groupId, long folderId, java.lang.String name)
 		throws RemoteException {
 		try {

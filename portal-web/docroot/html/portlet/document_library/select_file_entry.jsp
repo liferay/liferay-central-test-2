@@ -150,9 +150,7 @@ if (folder != null) {
 		sb.append("javascript:opener.");
 		sb.append(renderResponse.getNamespace());
 		sb.append("selectFileEntry('");
-		sb.append(fileEntry.getFolderId());
-		sb.append("', '");
-		sb.append(UnicodeFormatter.toString(fileEntry.getName()));
+		sb.append(fileEntry.getFileEntryId());
 		sb.append("', '");
 		sb.append(UnicodeFormatter.toString(fileEntry.getTitle()));
 		sb.append("'); window.close();");

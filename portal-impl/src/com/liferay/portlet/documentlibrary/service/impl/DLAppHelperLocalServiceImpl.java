@@ -78,8 +78,7 @@ public class DLAppHelperLocalServiceImpl
 		// File shortcuts
 
 		dlFileShortcutLocalService.deleteFileShortcuts(
-			fileEntry.getGroupId(), fileEntry.getFolderId(),
-			fileEntry.getName());
+			fileEntry.getFileEntryId());
 
 		// Asset
 
@@ -109,6 +108,7 @@ public class DLAppHelperLocalServiceImpl
 	public void getFileAsStream(long userId, DLFileEntry fileEntry)
 		throws PortalException, SystemException {
 
+		long fileEntryId = fileEntry.getFileEntryId();
 		long groupId = fileEntry.getGroupId();
 		long companyId = fileEntry.getCompanyId();
 		long folderId = fileEntry.getFolderId();
@@ -130,8 +130,7 @@ public class DLAppHelperLocalServiceImpl
 				fileEntry.getFileEntryId());
 
 			List<DLFileShortcut> fileShortcuts =
-				dlFileShortcutPersistence.findByTG_TF_TN(
-					groupId, folderId, name);
+				dlFileShortcutPersistence.findByTF(fileEntryId);
 
 			for (DLFileShortcut fileShortcut : fileShortcuts) {
 				assetEntryLocalService.incrementViewCounter(
@@ -194,7 +193,7 @@ public class DLAppHelperLocalServiceImpl
 		// File shortcuts
 
 		dlFileShortcutLocalService.updateFileShortcuts(
-			groupId, folderId, name, newFolderId, name);
+			oldFileEntryId, newFileEntryId);
 
 		// Asset
 
@@ -202,8 +201,7 @@ public class DLAppHelperLocalServiceImpl
 			DLFileEntry.class.getName(), oldFileEntryId);
 
 		List<DLFileShortcut> fileShortcuts =
-			dlFileShortcutPersistence.findByTG_TF_TN(
-				groupId, folderId, name);
+			dlFileShortcutPersistence.findByTF(oldFileEntryId);
 
 		for (DLFileShortcut fileShortcut : fileShortcuts) {
 			assetEntryLocalService.deleteEntry(
@@ -272,9 +270,7 @@ public class DLAppHelperLocalServiceImpl
 				fileEntry.getDescription(), null, null, 0, 0, null, false);
 
 			List<DLFileShortcut> fileShortcuts =
-				dlFileShortcutPersistence.findByTG_TF_TN(
-					fileEntry.getGroupId(), fileEntry.getFolderId(),
-					fileEntry.getName());
+				dlFileShortcutPersistence.findByTF(fileEntry.getFileEntryId());
 
 			for (DLFileShortcut fileShortcut : fileShortcuts) {
 				assetEntryLocalService.updateEntry(

@@ -30,13 +30,12 @@ public class DLFileShortcutServiceWrapper implements DLFileShortcutService {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		long groupId, long toGroupId, long folderId, long toFolderId,
-		java.lang.String toName,
+		long groupId, long folderId, long toFileEntryId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileShortcutService.addFileShortcut(groupId, toGroupId,
-			folderId, toFolderId, toName, serviceContext);
+		return _dlFileShortcutService.addFileShortcut(groupId, folderId,
+			toFileEntryId, serviceContext);
 	}
 
 	public void deleteFileShortcut(long fileShortcutId)
@@ -53,13 +52,12 @@ public class DLFileShortcutServiceWrapper implements DLFileShortcutService {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(
-		long fileShortcutId, long toGroupId, long folderId, long toFolderId,
-		java.lang.String toName,
+		long fileShortcutId, long folderId, long toFileEntryId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileShortcutService.updateFileShortcut(fileShortcutId,
-			toGroupId, folderId, toFolderId, toName, serviceContext);
+			folderId, toFileEntryId, serviceContext);
 	}
 
 	public DLFileShortcutService getWrappedDLFileShortcutService() {

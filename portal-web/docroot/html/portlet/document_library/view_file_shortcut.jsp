@@ -29,30 +29,17 @@ fileShortcut = fileShortcut.toEscapedModel();
 
 long fileShortcutId = fileShortcut.getFileShortcutId();
 
-long toGroupId = fileShortcut.getToGroupId();
+long toFileEntryId = fileShortcut.getToFileEntryId();
 
-Group toGroup = GroupLocalServiceUtil.getGroup(toGroupId);
-
-long toFolderId = fileShortcut.getToFolderId();
-String toName = fileShortcut.getToName();
-
+Group toGroup = null;
 DLFolder toFolder = null;
 DLFileEntry toFileEntry = null;
 
-if (Validator.isNotNull(toName)) {
+if (toFileEntryId > 0) {
 	try {
-		toFileEntry = DLAppLocalServiceUtil.getFileEntry(toGroupId, toFolderId, toName);
-
-		if (toFolderId > 0) {
-			toFolder = DLAppLocalServiceUtil.getFolder(toFolderId);
-		}
-	}
-	catch (Exception e) {
-	}
-}
-else if (toFolderId > 0) {
-	try {
-		toFolder = DLAppLocalServiceUtil.getFolder(toFolderId);
+		toFileEntry = DLAppLocalServiceUtil.getFileEntry(toFileEntryId);
+		toFolder = toFileEntry.getFolder();
+		toGroup = GroupLocalServiceUtil.getGroup(toFileEntry.getGroupId());
 	}
 	catch (Exception e) {
 	}

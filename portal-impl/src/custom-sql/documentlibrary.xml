@@ -67,6 +67,9 @@
 				COUNT(DISTINCT fileShortcutId) AS COUNT_VALUE
 			FROM
 				DLFileShortcut
+			INNER JOIN
+				DLFileEntry ON
+					(DLFileEntry.fileEntryId = DLFileShortcut.toFileEntryId)
 			WHERE
 				(DLFileShortcut.groupId = ?) AND
 				(DLFileShortcut.status = 0) AND
@@ -103,13 +106,12 @@
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.findFS_ByG_F_S">
 		<![CDATA[
 			SELECT
-				DISTINCT toFolderId AS modelFolderId, toName AS name, DLFileEntry.title AS title, fileShortcutId AS fileShortcutId, 0 AS modelFolder
+				DISTINCT DLFileEntry.folderId AS modelFolderId, DLFileEntry.name AS name, DLFileEntry.title AS title, fileShortcutId AS fileShortcutId, 0 AS modelFolder
 			FROM
 				DLFileShortcut
 			INNER JOIN
 				DLFileEntry ON
-					(DLFileEntry.folderId = DLFileShortcut.toFolderId) AND
-					(DLFileEntry.name = DLFileShortcut.toName)
+					(DLFileEntry.fileEntryId = DLFileShortcut.toFileEntryId)
 			WHERE
 				(DLFileShortcut.groupId = ?) AND
 				(DLFileShortcut.status = 0) AND

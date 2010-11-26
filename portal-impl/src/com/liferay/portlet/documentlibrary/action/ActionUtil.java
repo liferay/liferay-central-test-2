@@ -43,6 +43,7 @@ public class ActionUtil {
 
 		long groupId = ParamUtil.getLong(
 			request, "groupId", themeDisplay.getScopeGroupId());
+		long fileEntryId = ParamUtil.getLong(request, "fileEntryId");
 		long folderId = ParamUtil.getLong(request, "folderId");
 		long newFolderId = ParamUtil.getLong(request, "newFolderId");
 		String name = ParamUtil.getString(request, "name");
@@ -62,6 +63,9 @@ public class ActionUtil {
 				fileEntry = DLAppServiceUtil.getFileEntry(
 					groupId, newFolderId, name);
 			}
+		}
+		else {
+			fileEntry = DLAppServiceUtil.getFileEntry(fileEntryId);
 		}
 
 		request.setAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, fileEntry);

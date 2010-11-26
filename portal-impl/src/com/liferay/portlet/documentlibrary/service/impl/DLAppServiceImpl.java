@@ -71,12 +71,12 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	}
 
 	public DLFileShortcut addFileShortcut(
-			long groupId, long toGroupId, long folderId, long toFolderId,
-			String toName, ServiceContext serviceContext)
+			long groupId, long folderId, long toFileEntryId,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return dlFileShortcutService.addFileShortcut(
-			groupId, toGroupId, folderId, toFolderId, toName, serviceContext);
+			groupId, folderId, toFileEntryId, serviceContext);
 	}
 
 	public DLFolder addFolder(
@@ -218,6 +218,12 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return dlRepositoryService.getFileEntry(groupId, folderId, name);
+	}
+
+	public DLFileEntry getFileEntry(long fileEntryId)
+		throws PortalException, SystemException {
+
+		return dlRepositoryService.getFileEntry(fileEntryId);
 	}
 
 	public DLFileEntry getFileEntryByTitle(
@@ -527,13 +533,12 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	}
 
 	public DLFileShortcut updateFileShortcut(
-			long fileShortcutId, long toGroupId, long folderId, long toFolderId,
-			String toName, ServiceContext serviceContext)
+			long fileShortcutId, long folderId, long toFileEntryId,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return dlFileShortcutService.updateFileShortcut(
-			fileShortcutId, toGroupId, folderId, toFolderId, toName,
-			serviceContext);
+			fileShortcutId, folderId, toFileEntryId, serviceContext);
 	}
 
 	public DLFileVersion updateFileVersionDescription(

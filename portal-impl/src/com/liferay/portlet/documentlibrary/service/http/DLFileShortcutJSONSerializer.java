@@ -35,7 +35,6 @@ public class DLFileShortcutJSONSerializer {
 		jsonObj.put("uuid", model.getUuid());
 		jsonObj.put("fileShortcutId", model.getFileShortcutId());
 		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("toGroupId", model.getToGroupId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
 		jsonObj.put("userName", model.getUserName());
@@ -60,8 +59,7 @@ public class DLFileShortcutJSONSerializer {
 
 		jsonObj.put("modifiedDate", modifiedDateJSON);
 		jsonObj.put("folderId", model.getFolderId());
-		jsonObj.put("toFolderId", model.getToFolderId());
-		jsonObj.put("toName", model.getToName());
+		jsonObj.put("toFileEntryId", model.getToFileEntryId());
 		jsonObj.put("status", model.getStatus());
 		jsonObj.put("statusByUserId", model.getStatusByUserId());
 		jsonObj.put("statusByUserName", model.getStatusByUserName());

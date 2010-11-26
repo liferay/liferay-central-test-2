@@ -144,7 +144,7 @@ create index IX_EED06670 on DLFileRank (userId);
 
 create index IX_B0051937 on DLFileShortcut (groupId, folderId);
 create index IX_ECCE311D on DLFileShortcut (groupId, folderId, status);
-create index IX_94C93A71 on DLFileShortcut (toGroupId, toFolderId, toName);
+create index IX_4B7247F6 on DLFileShortcut (toFileEntryId);
 create index IX_4831EBE4 on DLFileShortcut (uuid_);
 create unique index IX_FDB4A946 on DLFileShortcut (uuid_, groupId);
 

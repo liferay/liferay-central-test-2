@@ -180,8 +180,7 @@ public class WebServerServlet extends HttpServlet {
 				dlFileShortcutId);
 
 			return DLAppServiceUtil.getFileEntry(
-				dlFileShortcut.getToGroupId(), dlFileShortcut.getToFolderId(),
-				dlFileShortcut.getToName());
+				dlFileShortcut.getToFileEntryId());
 		}
 		else if (pathArray.length == 2) {
 			long groupId = GetterUtil.getLong(pathArray[0]);
@@ -441,8 +440,7 @@ public class WebServerServlet extends HttpServlet {
 				DLAppLocalServiceUtil.getFileShortcut(dlFileShortcutId);
 
 			return DLAppLocalServiceUtil.getFileEntry(
-				dlFileShortcut.getToGroupId(), dlFileShortcut.getToFolderId(),
-				dlFileShortcut.getToName());
+				dlFileShortcut.getToFileEntryId());
 		}
 		else if (pathArray.length == 2) {
 			long groupId = GetterUtil.getLong(pathArray[0]);

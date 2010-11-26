@@ -37,15 +37,13 @@ public class DLFileShortcutSoap implements Serializable {
 		soapModel.setUuid(model.getUuid());
 		soapModel.setFileShortcutId(model.getFileShortcutId());
 		soapModel.setGroupId(model.getGroupId());
-		soapModel.setToGroupId(model.getToGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setFolderId(model.getFolderId());
-		soapModel.setToFolderId(model.getToFolderId());
-		soapModel.setToName(model.getToName());
+		soapModel.setToFileEntryId(model.getToFileEntryId());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setStatusByUserId(model.getStatusByUserId());
 		soapModel.setStatusByUserName(model.getStatusByUserName());
@@ -126,14 +124,6 @@ public class DLFileShortcutSoap implements Serializable {
 		_groupId = groupId;
 	}
 
-	public long getToGroupId() {
-		return _toGroupId;
-	}
-
-	public void setToGroupId(long toGroupId) {
-		_toGroupId = toGroupId;
-	}
-
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -182,20 +172,12 @@ public class DLFileShortcutSoap implements Serializable {
 		_folderId = folderId;
 	}
 
-	public long getToFolderId() {
-		return _toFolderId;
+	public long getToFileEntryId() {
+		return _toFileEntryId;
 	}
 
-	public void setToFolderId(long toFolderId) {
-		_toFolderId = toFolderId;
-	}
-
-	public String getToName() {
-		return _toName;
-	}
-
-	public void setToName(String toName) {
-		_toName = toName;
+	public void setToFileEntryId(long toFileEntryId) {
+		_toFileEntryId = toFileEntryId;
 	}
 
 	public int getStatus() {
@@ -233,15 +215,13 @@ public class DLFileShortcutSoap implements Serializable {
 	private String _uuid;
 	private long _fileShortcutId;
 	private long _groupId;
-	private long _toGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _folderId;
-	private long _toFolderId;
-	private String _toName;
+	private long _toFileEntryId;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserName;

@@ -67,15 +67,13 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 
 		newDLFileShortcut.setUuid(randomString());
 		newDLFileShortcut.setGroupId(nextLong());
-		newDLFileShortcut.setToGroupId(nextLong());
 		newDLFileShortcut.setCompanyId(nextLong());
 		newDLFileShortcut.setUserId(nextLong());
 		newDLFileShortcut.setUserName(randomString());
 		newDLFileShortcut.setCreateDate(nextDate());
 		newDLFileShortcut.setModifiedDate(nextDate());
 		newDLFileShortcut.setFolderId(nextLong());
-		newDLFileShortcut.setToFolderId(nextLong());
-		newDLFileShortcut.setToName(randomString());
+		newDLFileShortcut.setToFileEntryId(nextLong());
 		newDLFileShortcut.setStatus(nextInt());
 		newDLFileShortcut.setStatusByUserId(nextLong());
 		newDLFileShortcut.setStatusByUserName(randomString());
@@ -91,8 +89,6 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 			newDLFileShortcut.getFileShortcutId());
 		assertEquals(existingDLFileShortcut.getGroupId(),
 			newDLFileShortcut.getGroupId());
-		assertEquals(existingDLFileShortcut.getToGroupId(),
-			newDLFileShortcut.getToGroupId());
 		assertEquals(existingDLFileShortcut.getCompanyId(),
 			newDLFileShortcut.getCompanyId());
 		assertEquals(existingDLFileShortcut.getUserId(),
@@ -107,10 +103,8 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 			Time.getShortTimestamp(newDLFileShortcut.getModifiedDate()));
 		assertEquals(existingDLFileShortcut.getFolderId(),
 			newDLFileShortcut.getFolderId());
-		assertEquals(existingDLFileShortcut.getToFolderId(),
-			newDLFileShortcut.getToFolderId());
-		assertEquals(existingDLFileShortcut.getToName(),
-			newDLFileShortcut.getToName());
+		assertEquals(existingDLFileShortcut.getToFileEntryId(),
+			newDLFileShortcut.getToFileEntryId());
 		assertEquals(existingDLFileShortcut.getStatus(),
 			newDLFileShortcut.getStatus());
 		assertEquals(existingDLFileShortcut.getStatusByUserId(),
@@ -195,15 +189,13 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 
 		dlFileShortcut.setUuid(randomString());
 		dlFileShortcut.setGroupId(nextLong());
-		dlFileShortcut.setToGroupId(nextLong());
 		dlFileShortcut.setCompanyId(nextLong());
 		dlFileShortcut.setUserId(nextLong());
 		dlFileShortcut.setUserName(randomString());
 		dlFileShortcut.setCreateDate(nextDate());
 		dlFileShortcut.setModifiedDate(nextDate());
 		dlFileShortcut.setFolderId(nextLong());
-		dlFileShortcut.setToFolderId(nextLong());
-		dlFileShortcut.setToName(randomString());
+		dlFileShortcut.setToFileEntryId(nextLong());
 		dlFileShortcut.setStatus(nextInt());
 		dlFileShortcut.setStatusByUserId(nextLong());
 		dlFileShortcut.setStatusByUserName(randomString());

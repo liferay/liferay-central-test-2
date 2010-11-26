@@ -159,7 +159,6 @@
 		<!-- Group instance -->
 
 		<column name="groupId" type="long" />
-		<column name="toGroupId" type="long" />
 
 		<!-- Audit fields -->
 
@@ -172,8 +171,7 @@
 		<!-- Other fields -->
 
 		<column name="folderId" type="long" />
-		<column name="toFolderId" type="long" />
-		<column name="toName" type="String" />
+		<column name="toFileEntryId" type="long" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />
@@ -190,10 +188,8 @@
 			<finder-column name="folderId" />
 			<finder-column name="status" />
 		</finder>
-		<finder name="TG_TF_TN" return-type="Collection">
-			<finder-column name="toGroupId" />
-			<finder-column name="toFolderId" />
-			<finder-column name="toName" />
+		<finder name="TF" return-type="Collection">
+			<finder-column name="toFileEntryId" />
 		</finder>
 
 		<!-- References -->

@@ -64,13 +64,12 @@ public class DLAppServiceWrapper implements DLAppService {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		long groupId, long toGroupId, long folderId, long toFolderId,
-		java.lang.String toName,
+		long groupId, long folderId, long toFileEntryId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.addFileShortcut(groupId, toGroupId, folderId,
-			toFolderId, toName, serviceContext);
+		return _dlAppService.addFileShortcut(groupId, folderId, toFileEntryId,
+			serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
@@ -212,6 +211,13 @@ public class DLAppServiceWrapper implements DLAppService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlAppService.getFileEntry(groupId, folderId, name);
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
+		long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlAppService.getFileEntry(fileEntryId);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
@@ -514,13 +520,12 @@ public class DLAppServiceWrapper implements DLAppService {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(
-		long fileShortcutId, long toGroupId, long folderId, long toFolderId,
-		java.lang.String toName,
+		long fileShortcutId, long folderId, long toFileEntryId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.updateFileShortcut(fileShortcutId, toGroupId,
-			folderId, toFolderId, toName, serviceContext);
+		return _dlAppService.updateFileShortcut(fileShortcutId, folderId,
+			toFileEntryId, serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion updateFileVersionDescription(

@@ -16,7 +16,6 @@ package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
@@ -126,11 +125,8 @@ public class EditFileShortcutAction extends PortletAction {
 			actionRequest, "fileShortcutId");
 
 		long groupId = themeDisplay.getScopeGroupId();
-		long toGroupId = ParamUtil.getLong(actionRequest, "toGroupId");
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
-		long toFolderId = ParamUtil.getLong(actionRequest, "toFolderId");
-		String toName = HtmlUtil.unescape(
-			ParamUtil.getString(actionRequest, "toName"));
+		long toFileEntryId = ParamUtil.getLong(actionRequest, "toFileEntryId");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLFileShortcut.class.getName(), actionRequest);
@@ -140,8 +136,7 @@ public class EditFileShortcutAction extends PortletAction {
 			// Add file shortcut
 
 			DLFileShortcut fileShortcut = DLAppServiceUtil.addFileShortcut(
-				groupId, toGroupId, folderId, toFolderId, toName,
-				serviceContext);
+				groupId, folderId, toFileEntryId, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, DLFileShortcut.class.getName(),
@@ -152,8 +147,7 @@ public class EditFileShortcutAction extends PortletAction {
 			// Update file shortcut
 
 			DLAppServiceUtil.updateFileShortcut(
-				fileShortcutId, toGroupId, folderId, toFolderId, toName,
-				serviceContext);
+				fileShortcutId, folderId, toFileEntryId, serviceContext);
 
 			AssetPublisherUtil.addRecentFolderId(
 				actionRequest, DLFileShortcut.class.getName(), folderId);

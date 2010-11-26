@@ -76,14 +76,13 @@ public class DLAppServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		long groupId, long toGroupId, long folderId, long toFolderId,
-		java.lang.String toName,
+		long groupId, long folderId, long toFileEntryId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addFileShortcut(groupId, toGroupId, folderId, toFolderId,
-			toName, serviceContext);
+				   .addFileShortcut(groupId, folderId, toFileEntryId,
+			serviceContext);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
@@ -232,6 +231,13 @@ public class DLAppServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFileEntry(groupId, folderId, name);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
+		long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFileEntry(fileEntryId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
@@ -544,14 +550,13 @@ public class DLAppServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(
-		long fileShortcutId, long toGroupId, long folderId, long toFolderId,
-		java.lang.String toName,
+		long fileShortcutId, long folderId, long toFileEntryId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateFileShortcut(fileShortcutId, toGroupId, folderId,
-			toFolderId, toName, serviceContext);
+				   .updateFileShortcut(fileShortcutId, folderId, toFileEntryId,
+			serviceContext);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion updateFileVersionDescription(

@@ -773,8 +773,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				DLFolder.class);
 
-		long toGroupId = fileShortcut.getToGroupId();
-
 		long folderId = MapUtil.getLong(
 			folderPKs, fileShortcut.getFolderId(), fileShortcut.getFolderId());
 
@@ -786,19 +784,10 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			groupId = folder.getGroupId();
 		}
 
-		long toFolderId = MapUtil.getLong(
-			folderPKs, fileShortcut.getToFolderId(),
-			fileShortcut.getToFolderId());
-
-		Map<String, String> fileEntryNames =
-			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
-				DLFileEntry.class.getName() + ".name");
-
-		String toName = MapUtil.getString(
-			fileEntryNames, fileShortcut.getToName(), fileShortcut.getToName());
+		long toFileEntryId = fileShortcut.getToFileEntryId();
 
 		DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(
-			toGroupId, toFolderId, toName);
+			toFileEntryId);
 
 		long[] assetCategoryIds = null;
 		String[] assetTagNames = null;
@@ -835,19 +824,17 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				serviceContext.setUuid(fileShortcut.getUuid());
 
 				importedFileShortcut = DLAppLocalServiceUtil.addFileShortcut(
-					userId, groupId, toGroupId, folderId, toFolderId, toName,
-					serviceContext);
+					userId, groupId, folderId, toFileEntryId, serviceContext);
 			}
 			else {
 				importedFileShortcut = DLAppLocalServiceUtil.updateFileShortcut(
-					userId, existingFileShortcut.getFileShortcutId(), toGroupId,
-					folderId, toFolderId, toName, serviceContext);
+					userId, existingFileShortcut.getFileShortcutId(), folderId,
+					toFileEntryId, serviceContext);
 			}
 		}
 		else {
 			importedFileShortcut = DLAppLocalServiceUtil.addFileShortcut(
-				userId, groupId, toGroupId, folderId, toFolderId, toName,
-				serviceContext);
+				userId, groupId, folderId, toFileEntryId, serviceContext);
 		}
 
 		portletDataContext.importPermissions(

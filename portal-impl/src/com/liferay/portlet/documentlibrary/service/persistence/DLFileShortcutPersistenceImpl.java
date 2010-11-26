@@ -129,23 +129,19 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				Long.class.getName(), Long.class.getName(),
 				Integer.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FIND_BY_TG_TF_TN = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_TF = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByTG_TF_TN",
+			FINDER_CLASS_NAME_LIST, "findByTF",
 			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				String.class.getName(),
+				Long.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_TG_TF_TN = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_TF = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByTG_TF_TN",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				String.class.getName()
-			});
+			FINDER_CLASS_NAME_LIST, "countByTF",
+			new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
@@ -398,15 +394,13 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		dlFileShortcutImpl.setUuid(dlFileShortcut.getUuid());
 		dlFileShortcutImpl.setFileShortcutId(dlFileShortcut.getFileShortcutId());
 		dlFileShortcutImpl.setGroupId(dlFileShortcut.getGroupId());
-		dlFileShortcutImpl.setToGroupId(dlFileShortcut.getToGroupId());
 		dlFileShortcutImpl.setCompanyId(dlFileShortcut.getCompanyId());
 		dlFileShortcutImpl.setUserId(dlFileShortcut.getUserId());
 		dlFileShortcutImpl.setUserName(dlFileShortcut.getUserName());
 		dlFileShortcutImpl.setCreateDate(dlFileShortcut.getCreateDate());
 		dlFileShortcutImpl.setModifiedDate(dlFileShortcut.getModifiedDate());
 		dlFileShortcutImpl.setFolderId(dlFileShortcut.getFolderId());
-		dlFileShortcutImpl.setToFolderId(dlFileShortcut.getToFolderId());
-		dlFileShortcutImpl.setToName(dlFileShortcut.getToName());
+		dlFileShortcutImpl.setToFileEntryId(dlFileShortcut.getToFileEntryId());
 		dlFileShortcutImpl.setStatus(dlFileShortcut.getStatus());
 		dlFileShortcutImpl.setStatusByUserId(dlFileShortcut.getStatusByUserId());
 		dlFileShortcutImpl.setStatusByUserName(dlFileShortcut.getStatusByUserName());
@@ -1996,97 +1990,76 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	}
 
 	/**
-	 * Finds all the d l file shortcuts where toGroupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	 * Finds all the d l file shortcuts where toFileEntryId = &#63;.
 	 *
-	 * @param toGroupId the to group id to search with
-	 * @param toFolderId the to folder id to search with
-	 * @param toName the to name to search with
+	 * @param toFileEntryId the to file entry id to search with
 	 * @return the matching d l file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileShortcut> findByTG_TF_TN(long toGroupId, long toFolderId,
-		String toName) throws SystemException {
-		return findByTG_TF_TN(toGroupId, toFolderId, toName, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+	public List<DLFileShortcut> findByTF(long toFileEntryId)
+		throws SystemException {
+		return findByTF(toFileEntryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	/**
-	 * Finds a range of all the d l file shortcuts where toGroupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	 * Finds a range of all the d l file shortcuts where toFileEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param toGroupId the to group id to search with
-	 * @param toFolderId the to folder id to search with
-	 * @param toName the to name to search with
+	 * @param toFileEntryId the to file entry id to search with
 	 * @param start the lower bound of the range of d l file shortcuts to return
 	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
 	 * @return the range of matching d l file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileShortcut> findByTG_TF_TN(long toGroupId, long toFolderId,
-		String toName, int start, int end) throws SystemException {
-		return findByTG_TF_TN(toGroupId, toFolderId, toName, start, end, null);
+	public List<DLFileShortcut> findByTF(long toFileEntryId, int start, int end)
+		throws SystemException {
+		return findByTF(toFileEntryId, start, end, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the d l file shortcuts where toGroupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	 * Finds an ordered range of all the d l file shortcuts where toFileEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param toGroupId the to group id to search with
-	 * @param toFolderId the to folder id to search with
-	 * @param toName the to name to search with
+	 * @param toFileEntryId the to file entry id to search with
 	 * @param start the lower bound of the range of d l file shortcuts to return
 	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
 	 * @return the ordered range of matching d l file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileShortcut> findByTG_TF_TN(long toGroupId, long toFolderId,
-		String toName, int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	public List<DLFileShortcut> findByTF(long toFileEntryId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				toGroupId, toFolderId, toName,
+				toFileEntryId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
-		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TG_TF_TN,
+		List<DLFileShortcut> list = (List<DLFileShortcut>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_TF,
 				finderArgs, this);
 
 		if (list == null) {
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(5 +
+				query = new StringBundler(3 +
 						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
-				query = new StringBundler(4);
+				query = new StringBundler(2);
 			}
 
 			query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
-			query.append(_FINDER_COLUMN_TG_TF_TN_TOGROUPID_2);
-
-			query.append(_FINDER_COLUMN_TG_TF_TN_TOFOLDERID_2);
-
-			if (toName == null) {
-				query.append(_FINDER_COLUMN_TG_TF_TN_TONAME_1);
-			}
-			else {
-				if (toName.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_TG_TF_TN_TONAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_TG_TF_TN_TONAME_2);
-				}
-			}
+			query.append(_FINDER_COLUMN_TF_TOFILEENTRYID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -2104,13 +2077,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(toGroupId);
-
-				qPos.add(toFolderId);
-
-				if (toName != null) {
-					qPos.add(toName);
-				}
+				qPos.add(toFileEntryId);
 
 				list = (List<DLFileShortcut>)QueryUtil.list(q, getDialect(),
 						start, end);
@@ -2120,13 +2087,13 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			}
 			finally {
 				if (list == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_TG_TF_TN,
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_TF,
 						finderArgs);
 				}
 				else {
 					cacheResult(list);
 
-					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TG_TF_TN,
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_TF,
 						finderArgs, list);
 				}
 
@@ -2138,39 +2105,31 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	}
 
 	/**
-	 * Finds the first d l file shortcut in the ordered set where toGroupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	 * Finds the first d l file shortcut in the ordered set where toFileEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param toGroupId the to group id to search with
-	 * @param toFolderId the to folder id to search with
-	 * @param toName the to name to search with
+	 * @param toFileEntryId the to file entry id to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching d l file shortcut
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileShortcut findByTG_TF_TN_First(long toGroupId, long toFolderId,
-		String toName, OrderByComparator orderByComparator)
+	public DLFileShortcut findByTF_First(long toFileEntryId,
+		OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
-		List<DLFileShortcut> list = findByTG_TF_TN(toGroupId, toFolderId,
-				toName, 0, 1, orderByComparator);
+		List<DLFileShortcut> list = findByTF(toFileEntryId, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(8);
+			StringBundler msg = new StringBundler(4);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("toGroupId=");
-			msg.append(toGroupId);
-
-			msg.append(", toFolderId=");
-			msg.append(toFolderId);
-
-			msg.append(", toName=");
-			msg.append(toName);
+			msg.append("toFileEntryId=");
+			msg.append(toFileEntryId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -2182,41 +2141,33 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	}
 
 	/**
-	 * Finds the last d l file shortcut in the ordered set where toGroupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	 * Finds the last d l file shortcut in the ordered set where toFileEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param toGroupId the to group id to search with
-	 * @param toFolderId the to folder id to search with
-	 * @param toName the to name to search with
+	 * @param toFileEntryId the to file entry id to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching d l file shortcut
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileShortcut findByTG_TF_TN_Last(long toGroupId, long toFolderId,
-		String toName, OrderByComparator orderByComparator)
+	public DLFileShortcut findByTF_Last(long toFileEntryId,
+		OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
-		int count = countByTG_TF_TN(toGroupId, toFolderId, toName);
+		int count = countByTF(toFileEntryId);
 
-		List<DLFileShortcut> list = findByTG_TF_TN(toGroupId, toFolderId,
-				toName, count - 1, count, orderByComparator);
+		List<DLFileShortcut> list = findByTF(toFileEntryId, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(8);
+			StringBundler msg = new StringBundler(4);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("toGroupId=");
-			msg.append(toGroupId);
-
-			msg.append(", toFolderId=");
-			msg.append(toFolderId);
-
-			msg.append(", toName=");
-			msg.append(toName);
+			msg.append("toFileEntryId=");
+			msg.append(toFileEntryId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -2228,24 +2179,21 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	}
 
 	/**
-	 * Finds the d l file shortcuts before and after the current d l file shortcut in the ordered set where toGroupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	 * Finds the d l file shortcuts before and after the current d l file shortcut in the ordered set where toFileEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param fileShortcutId the primary key of the current d l file shortcut
-	 * @param toGroupId the to group id to search with
-	 * @param toFolderId the to folder id to search with
-	 * @param toName the to name to search with
+	 * @param toFileEntryId the to file entry id to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next d l file shortcut
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a d l file shortcut with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileShortcut[] findByTG_TF_TN_PrevAndNext(long fileShortcutId,
-		long toGroupId, long toFolderId, String toName,
-		OrderByComparator orderByComparator)
+	public DLFileShortcut[] findByTF_PrevAndNext(long fileShortcutId,
+		long toFileEntryId, OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
 		DLFileShortcut dlFileShortcut = findByPrimaryKey(fileShortcutId);
 
@@ -2256,13 +2204,13 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 			DLFileShortcut[] array = new DLFileShortcutImpl[3];
 
-			array[0] = getByTG_TF_TN_PrevAndNext(session, dlFileShortcut,
-					toGroupId, toFolderId, toName, orderByComparator, true);
+			array[0] = getByTF_PrevAndNext(session, dlFileShortcut,
+					toFileEntryId, orderByComparator, true);
 
 			array[1] = dlFileShortcut;
 
-			array[2] = getByTG_TF_TN_PrevAndNext(session, dlFileShortcut,
-					toGroupId, toFolderId, toName, orderByComparator, false);
+			array[2] = getByTF_PrevAndNext(session, dlFileShortcut,
+					toFileEntryId, orderByComparator, false);
 
 			return array;
 		}
@@ -2274,9 +2222,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
-	protected DLFileShortcut getByTG_TF_TN_PrevAndNext(Session session,
-		DLFileShortcut dlFileShortcut, long toGroupId, long toFolderId,
-		String toName, OrderByComparator orderByComparator, boolean previous) {
+	protected DLFileShortcut getByTF_PrevAndNext(Session session,
+		DLFileShortcut dlFileShortcut, long toFileEntryId,
+		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -2289,21 +2237,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 		query.append(_SQL_SELECT_DLFILESHORTCUT_WHERE);
 
-		query.append(_FINDER_COLUMN_TG_TF_TN_TOGROUPID_2);
-
-		query.append(_FINDER_COLUMN_TG_TF_TN_TOFOLDERID_2);
-
-		if (toName == null) {
-			query.append(_FINDER_COLUMN_TG_TF_TN_TONAME_1);
-		}
-		else {
-			if (toName.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_TG_TF_TN_TONAME_3);
-			}
-			else {
-				query.append(_FINDER_COLUMN_TG_TF_TN_TONAME_2);
-			}
-		}
+		query.append(_FINDER_COLUMN_TF_TOFILEENTRYID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -2368,13 +2302,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(toGroupId);
-
-		qPos.add(toFolderId);
-
-		if (toName != null) {
-			qPos.add(toName);
-		}
+		qPos.add(toFileEntryId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByValues(dlFileShortcut);
@@ -2560,17 +2488,13 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	}
 
 	/**
-	 * Removes all the d l file shortcuts where toGroupId = &#63; and toFolderId = &#63; and toName = &#63; from the database.
+	 * Removes all the d l file shortcuts where toFileEntryId = &#63; from the database.
 	 *
-	 * @param toGroupId the to group id to search with
-	 * @param toFolderId the to folder id to search with
-	 * @param toName the to name to search with
+	 * @param toFileEntryId the to file entry id to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByTG_TF_TN(long toGroupId, long toFolderId, String toName)
-		throws SystemException {
-		for (DLFileShortcut dlFileShortcut : findByTG_TF_TN(toGroupId,
-				toFolderId, toName)) {
+	public void removeByTF(long toFileEntryId) throws SystemException {
+		for (DLFileShortcut dlFileShortcut : findByTF(toFileEntryId)) {
 			remove(dlFileShortcut);
 		}
 	}
@@ -2959,41 +2883,24 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	}
 
 	/**
-	 * Counts all the d l file shortcuts where toGroupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	 * Counts all the d l file shortcuts where toFileEntryId = &#63;.
 	 *
-	 * @param toGroupId the to group id to search with
-	 * @param toFolderId the to folder id to search with
-	 * @param toName the to name to search with
+	 * @param toFileEntryId the to file entry id to search with
 	 * @return the number of matching d l file shortcuts
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByTG_TF_TN(long toGroupId, long toFolderId, String toName)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { toGroupId, toFolderId, toName };
+	public int countByTF(long toFileEntryId) throws SystemException {
+		Object[] finderArgs = new Object[] { toFileEntryId };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_TG_TF_TN,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_TF,
 				finderArgs, this);
 
 		if (count == null) {
-			StringBundler query = new StringBundler(4);
+			StringBundler query = new StringBundler(2);
 
 			query.append(_SQL_COUNT_DLFILESHORTCUT_WHERE);
 
-			query.append(_FINDER_COLUMN_TG_TF_TN_TOGROUPID_2);
-
-			query.append(_FINDER_COLUMN_TG_TF_TN_TOFOLDERID_2);
-
-			if (toName == null) {
-				query.append(_FINDER_COLUMN_TG_TF_TN_TONAME_1);
-			}
-			else {
-				if (toName.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_TG_TF_TN_TONAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_TG_TF_TN_TONAME_2);
-				}
-			}
+			query.append(_FINDER_COLUMN_TF_TOFILEENTRYID_2);
 
 			String sql = query.toString();
 
@@ -3006,13 +2913,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(toGroupId);
-
-				qPos.add(toFolderId);
-
-				if (toName != null) {
-					qPos.add(toName);
-				}
+				qPos.add(toFileEntryId);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -3024,8 +2925,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_TG_TF_TN,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_TF, finderArgs,
+					count);
 
 				closeSession(session);
 			}
@@ -3139,11 +3040,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	private static final String _FINDER_COLUMN_G_F_S_GROUPID_2 = "dlFileShortcut.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_F_S_FOLDERID_2 = "dlFileShortcut.folderId = ? AND ";
 	private static final String _FINDER_COLUMN_G_F_S_STATUS_2 = "dlFileShortcut.status = ?";
-	private static final String _FINDER_COLUMN_TG_TF_TN_TOGROUPID_2 = "dlFileShortcut.toGroupId = ? AND ";
-	private static final String _FINDER_COLUMN_TG_TF_TN_TOFOLDERID_2 = "dlFileShortcut.toFolderId = ? AND ";
-	private static final String _FINDER_COLUMN_TG_TF_TN_TONAME_1 = "dlFileShortcut.toName IS NULL";
-	private static final String _FINDER_COLUMN_TG_TF_TN_TONAME_2 = "dlFileShortcut.toName = ?";
-	private static final String _FINDER_COLUMN_TG_TF_TN_TONAME_3 = "(dlFileShortcut.toName IS NULL OR dlFileShortcut.toName = ?)";
+	private static final String _FINDER_COLUMN_TF_TOFILEENTRYID_2 = "dlFileShortcut.toFileEntryId = ?";
 	private static final String _FILTER_SQL_SELECT_DLFILESHORTCUT_WHERE = "SELECT DISTINCT {dlFileShortcut.*} FROM DLFileShortcut dlFileShortcut WHERE ";
 	private static final String _FILTER_SQL_SELECT_DLFILESHORTCUT_NO_INLINE_DISTINCT_WHERE_1 =
 		"SELECT {DLFileShortcut.*} FROM (SELECT DISTINCT dlFileShortcut.fileShortcutId FROM DLFileShortcut dlFileShortcut WHERE ";

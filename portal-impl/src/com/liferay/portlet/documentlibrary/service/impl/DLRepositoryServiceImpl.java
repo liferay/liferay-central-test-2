@@ -342,6 +342,15 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		return dlFileEntryPersistence.filterCountByG_F(groupId, folderId);
 	}
 
+	public DLFileEntry getFileEntry(long fileEntryId)
+		throws PortalException, SystemException {
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), fileEntryId, ActionKeys.VIEW);
+
+		return dlRepositoryLocalService.getFileEntry(fileEntryId);
+	}
+
 	public DLFileEntry getFileEntry(long groupId, long folderId, String name)
 		throws PortalException, SystemException {
 

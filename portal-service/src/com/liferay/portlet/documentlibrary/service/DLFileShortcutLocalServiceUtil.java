@@ -247,14 +247,13 @@ public class DLFileShortcutLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		long userId, long groupId, long toGroupId, long folderId,
-		long toFolderId, java.lang.String toName,
+		long userId, long groupId, long folderId, long toFileEntryId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addFileShortcut(userId, groupId, toGroupId, folderId,
-			toFolderId, toName, serviceContext);
+				   .addFileShortcut(userId, groupId, folderId, toFileEntryId,
+			serviceContext);
 	}
 
 	public static void addFileShortcutResources(
@@ -310,11 +309,10 @@ public class DLFileShortcutLocalServiceUtil {
 		getService().deleteFileShortcut(fileShortcutId);
 	}
 
-	public static void deleteFileShortcuts(long toGroupId, long toFolderId,
-		java.lang.String toName)
+	public static void deleteFileShortcuts(long toFileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteFileShortcuts(toGroupId, toFolderId, toName);
+		getService().deleteFileShortcuts(toFileEntryId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut getFileShortcut(
@@ -334,23 +332,19 @@ public class DLFileShortcutLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(
-		long userId, long fileShortcutId, long toGroupId, long folderId,
-		long toFolderId, java.lang.String toName,
+		long userId, long fileShortcutId, long folderId, long toFileEntryId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateFileShortcut(userId, fileShortcutId, toGroupId,
-			folderId, toFolderId, toName, serviceContext);
+				   .updateFileShortcut(userId, fileShortcutId, folderId,
+			toFileEntryId, serviceContext);
 	}
 
-	public static void updateFileShortcuts(long toGroupId, long oldToFolderId,
-		java.lang.String oldToName, long newToFolderId,
-		java.lang.String newToName)
+	public static void updateFileShortcuts(long oldToFileEntryId,
+		long newToFileEntryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.updateFileShortcuts(toGroupId, oldToFolderId, oldToName,
-			newToFolderId, newToName);
+		getService().updateFileShortcuts(oldToFileEntryId, newToFileEntryId);
 	}
 
 	public static DLFileShortcutLocalService getService() {

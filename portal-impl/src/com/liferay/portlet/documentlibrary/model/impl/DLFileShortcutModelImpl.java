@@ -65,21 +65,19 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 			{ "uuid_", new Integer(Types.VARCHAR) },
 			{ "fileShortcutId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
-			{ "toGroupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "folderId", new Integer(Types.BIGINT) },
-			{ "toFolderId", new Integer(Types.BIGINT) },
-			{ "toName", new Integer(Types.VARCHAR) },
+			{ "toFileEntryId", new Integer(Types.BIGINT) },
 			{ "status", new Integer(Types.INTEGER) },
 			{ "statusByUserId", new Integer(Types.BIGINT) },
 			{ "statusByUserName", new Integer(Types.VARCHAR) },
 			{ "statusDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileShortcut (uuid_ VARCHAR(75) null,fileShortcutId LONG not null primary key,groupId LONG,toGroupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,toFolderId LONG,toName VARCHAR(255) null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileShortcut (uuid_ VARCHAR(75) null,fileShortcutId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,toFileEntryId LONG,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileShortcut";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -103,15 +101,13 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		model.setUuid(soapModel.getUuid());
 		model.setFileShortcutId(soapModel.getFileShortcutId());
 		model.setGroupId(soapModel.getGroupId());
-		model.setToGroupId(soapModel.getToGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setFolderId(soapModel.getFolderId());
-		model.setToFolderId(soapModel.getToFolderId());
-		model.setToName(soapModel.getToName());
+		model.setToFileEntryId(soapModel.getToFileEntryId());
 		model.setStatus(soapModel.getStatus());
 		model.setStatusByUserId(soapModel.getStatusByUserId());
 		model.setStatusByUserName(soapModel.getStatusByUserName());
@@ -201,14 +197,6 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		return _originalGroupId;
 	}
 
-	public long getToGroupId() {
-		return _toGroupId;
-	}
-
-	public void setToGroupId(long toGroupId) {
-		_toGroupId = toGroupId;
-	}
-
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -270,25 +258,12 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		_folderId = folderId;
 	}
 
-	public long getToFolderId() {
-		return _toFolderId;
+	public long getToFileEntryId() {
+		return _toFileEntryId;
 	}
 
-	public void setToFolderId(long toFolderId) {
-		_toFolderId = toFolderId;
-	}
-
-	public String getToName() {
-		if (_toName == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _toName;
-		}
-	}
-
-	public void setToName(String toName) {
-		_toName = toName;
+	public void setToFileEntryId(long toFileEntryId) {
+		_toFileEntryId = toFileEntryId;
 	}
 
 	public int getStatus() {
@@ -410,15 +385,13 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		clone.setUuid(getUuid());
 		clone.setFileShortcutId(getFileShortcutId());
 		clone.setGroupId(getGroupId());
-		clone.setToGroupId(getToGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setFolderId(getFolderId());
-		clone.setToFolderId(getToFolderId());
-		clone.setToName(getToName());
+		clone.setToFileEntryId(getToFileEntryId());
 		clone.setStatus(getStatus());
 		clone.setStatusByUserId(getStatusByUserId());
 		clone.setStatusByUserName(getStatusByUserName());
@@ -470,7 +443,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -478,8 +451,6 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		sb.append(getFileShortcutId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
-		sb.append(", toGroupId=");
-		sb.append(getToGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -492,10 +463,8 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		sb.append(getModifiedDate());
 		sb.append(", folderId=");
 		sb.append(getFolderId());
-		sb.append(", toFolderId=");
-		sb.append(getToFolderId());
-		sb.append(", toName=");
-		sb.append(getToName());
+		sb.append(", toFileEntryId=");
+		sb.append(getToFileEntryId());
 		sb.append(", status=");
 		sb.append(getStatus());
 		sb.append(", statusByUserId=");
@@ -510,7 +479,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(52);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.documentlibrary.model.DLFileShortcut");
@@ -527,10 +496,6 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		sb.append(
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
 		sb.append(getGroupId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>toGroupId</column-name><column-value><![CDATA[");
-		sb.append(getToGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -557,12 +522,8 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		sb.append(getFolderId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>toFolderId</column-name><column-value><![CDATA[");
-		sb.append(getToFolderId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>toName</column-name><column-value><![CDATA[");
-		sb.append(getToName());
+			"<column><column-name>toFileEntryId</column-name><column-value><![CDATA[");
+		sb.append(getToFileEntryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>status</column-name><column-value><![CDATA[");
@@ -592,7 +553,6 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 	private long _groupId;
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
-	private long _toGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
@@ -600,8 +560,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _folderId;
-	private long _toFolderId;
-	private String _toName;
+	private long _toFileEntryId;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserUuid;

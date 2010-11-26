@@ -19,8 +19,7 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.upgrade.v6_1_0.util.DLFileVersionTable;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLRepositoryServiceUtil;
 
 import java.sql.Connection;
@@ -30,6 +29,7 @@ import java.sql.ResultSet;
 /**
  * @author Brian Wing Shun Chan
  * @author Douglas Wong
+ * @author Alexander Chow
  */
 public class UpgradeDocumentLibrary extends UpgradeProcess {
 
@@ -47,7 +47,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select fileShortcutId, groupId, folderId, toFolderId " +
+				"select fileShortcutId, groupId, toFolderId, toName " +
 					"from DLFileShortcut");
 
 			rs = ps.executeQuery();
@@ -55,20 +55,16 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			while (rs.next()) {
 				long fileShortcutId = rs.getLong("fileShortcutId");
 				long groupId = rs.getLong("groupId");
-				//long folderId = rs.getLong("folderId");
 				long toFolderId = rs.getLong("toFolderId");
+				String toName = rs.getString("toName");
 
-				long toGroupId = groupId;
+				DLFileEntry fileEntry = DLRepositoryServiceUtil.getFileEntry(
+					groupId, toFolderId, toName);
 
-				if (toFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-					DLFolder folder = DLRepositoryServiceUtil.getFolder(
-						toFolderId);
-
-					toGroupId = folder.getGroupId();
-				}
+				long toFileEntryId = fileEntry.getFileEntryId();
 
 				runSQL(
-					"update DLFileShortcut set toGroupId = '" + toGroupId +
+					"update DLFileShortcut set toGroupId = '" + toFileEntryId +
 						"' where fileShortcutId = " + fileShortcutId);
 			}
 		}

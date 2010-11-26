@@ -3,7 +3,7 @@ alter table BlogsEntry add smallImage BOOLEAN null;
 alter table BlogsEntry add smallImageId VARCHAR(75) null;
 alter table BlogsEntry add smallImageURL STRING null;
 
-alter table DLFileShortcut add toGroupId LONG not null;
+alter table DLFileShortcut add toFileEntryId LONG not null;
 
 update Group_ set type_ = 3 where type_ = 0;
 

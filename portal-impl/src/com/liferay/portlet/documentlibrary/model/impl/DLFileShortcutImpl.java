@@ -55,7 +55,7 @@ public class DLFileShortcutImpl
 
 		try {
 			DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(
-				getToGroupId(), getToFolderId(), getToName());
+				getToFileEntryId());
 
 			toTitle = fileEntry.getTitle();
 		}

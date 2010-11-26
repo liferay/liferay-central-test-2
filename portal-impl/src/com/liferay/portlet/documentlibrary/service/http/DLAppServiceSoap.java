@@ -76,14 +76,13 @@ public class DLAppServiceSoap {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap addFileShortcut(
-		long groupId, long toGroupId, long folderId, long toFolderId,
-		java.lang.String toName,
+		long groupId, long folderId, long toFileEntryId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileShortcut returnValue =
-				DLAppServiceUtil.addFileShortcut(groupId, toGroupId, folderId,
-					toFolderId, toName, serviceContext);
+				DLAppServiceUtil.addFileShortcut(groupId, folderId,
+					toFileEntryId, serviceContext);
 
 			return com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap.toSoapModel(returnValue);
 		}
@@ -304,6 +303,20 @@ public class DLAppServiceSoap {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLAppServiceUtil.getFileEntry(groupId,
 					folderId, name);
+
+			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap getFileEntry(
+		long fileEntryId) throws RemoteException {
+		try {
+			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLAppServiceUtil.getFileEntry(fileEntryId);
 
 			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
 		}
@@ -755,14 +768,13 @@ public class DLAppServiceSoap {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap updateFileShortcut(
-		long fileShortcutId, long toGroupId, long folderId, long toFolderId,
-		java.lang.String toName,
+		long fileShortcutId, long folderId, long toFileEntryId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileShortcut returnValue =
-				DLAppServiceUtil.updateFileShortcut(fileShortcutId, toGroupId,
-					folderId, toFolderId, toName, serviceContext);
+				DLAppServiceUtil.updateFileShortcut(fileShortcutId, folderId,
+					toFileEntryId, serviceContext);
 
 			return com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap.toSoapModel(returnValue);
 		}

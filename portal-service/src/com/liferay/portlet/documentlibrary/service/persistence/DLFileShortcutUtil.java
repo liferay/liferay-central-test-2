@@ -749,143 +749,123 @@ public class DLFileShortcutUtil {
 	}
 
 	/**
-	* Finds all the d l file shortcuts where toGroupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	* Finds all the d l file shortcuts where toFileEntryId = &#63;.
 	*
-	* @param toGroupId the to group id to search with
-	* @param toFolderId the to folder id to search with
-	* @param toName the to name to search with
+	* @param toFileEntryId the to file entry id to search with
 	* @return the matching d l file shortcuts
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByTG_TF_TN(
-		long toGroupId, long toFolderId, java.lang.String toName)
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByTF(
+		long toFileEntryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByTG_TF_TN(toGroupId, toFolderId, toName);
+		return getPersistence().findByTF(toFileEntryId);
 	}
 
 	/**
-	* Finds a range of all the d l file shortcuts where toGroupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	* Finds a range of all the d l file shortcuts where toFileEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param toGroupId the to group id to search with
-	* @param toFolderId the to folder id to search with
-	* @param toName the to name to search with
+	* @param toFileEntryId the to file entry id to search with
 	* @param start the lower bound of the range of d l file shortcuts to return
 	* @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
 	* @return the range of matching d l file shortcuts
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByTG_TF_TN(
-		long toGroupId, long toFolderId, java.lang.String toName, int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByTG_TF_TN(toGroupId, toFolderId, toName, start, end);
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByTF(
+		long toFileEntryId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByTF(toFileEntryId, start, end);
 	}
 
 	/**
-	* Finds an ordered range of all the d l file shortcuts where toGroupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	* Finds an ordered range of all the d l file shortcuts where toFileEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param toGroupId the to group id to search with
-	* @param toFolderId the to folder id to search with
-	* @param toName the to name to search with
+	* @param toFileEntryId the to file entry id to search with
 	* @param start the lower bound of the range of d l file shortcuts to return
 	* @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
 	* @return the ordered range of matching d l file shortcuts
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByTG_TF_TN(
-		long toGroupId, long toFolderId, java.lang.String toName, int start,
-		int end,
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByTF(
+		long toFileEntryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByTG_TF_TN(toGroupId, toFolderId, toName, start, end,
-			orderByComparator);
+				   .findByTF(toFileEntryId, start, end, orderByComparator);
 	}
 
 	/**
-	* Finds the first d l file shortcut in the ordered set where toGroupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	* Finds the first d l file shortcut in the ordered set where toFileEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param toGroupId the to group id to search with
-	* @param toFolderId the to folder id to search with
-	* @param toName the to name to search with
+	* @param toFileEntryId the to file entry id to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching d l file shortcut
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByTG_TF_TN_First(
-		long toGroupId, long toFolderId, java.lang.String toName,
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByTF_First(
+		long toFileEntryId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
-		return getPersistence()
-				   .findByTG_TF_TN_First(toGroupId, toFolderId, toName,
-			orderByComparator);
+		return getPersistence().findByTF_First(toFileEntryId, orderByComparator);
 	}
 
 	/**
-	* Finds the last d l file shortcut in the ordered set where toGroupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	* Finds the last d l file shortcut in the ordered set where toFileEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param toGroupId the to group id to search with
-	* @param toFolderId the to folder id to search with
-	* @param toName the to name to search with
+	* @param toFileEntryId the to file entry id to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching d l file shortcut
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByTG_TF_TN_Last(
-		long toGroupId, long toFolderId, java.lang.String toName,
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut findByTF_Last(
+		long toFileEntryId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
-		return getPersistence()
-				   .findByTG_TF_TN_Last(toGroupId, toFolderId, toName,
-			orderByComparator);
+		return getPersistence().findByTF_Last(toFileEntryId, orderByComparator);
 	}
 
 	/**
-	* Finds the d l file shortcuts before and after the current d l file shortcut in the ordered set where toGroupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	* Finds the d l file shortcuts before and after the current d l file shortcut in the ordered set where toFileEntryId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param fileShortcutId the primary key of the current d l file shortcut
-	* @param toGroupId the to group id to search with
-	* @param toFolderId the to folder id to search with
-	* @param toName the to name to search with
+	* @param toFileEntryId the to file entry id to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next d l file shortcut
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a d l file shortcut with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut[] findByTG_TF_TN_PrevAndNext(
-		long fileShortcutId, long toGroupId, long toFolderId,
-		java.lang.String toName,
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut[] findByTF_PrevAndNext(
+		long fileShortcutId, long toFileEntryId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException {
 		return getPersistence()
-				   .findByTG_TF_TN_PrevAndNext(fileShortcutId, toGroupId,
-			toFolderId, toName, orderByComparator);
+				   .findByTF_PrevAndNext(fileShortcutId, toFileEntryId,
+			orderByComparator);
 	}
 
 	/**
@@ -987,17 +967,14 @@ public class DLFileShortcutUtil {
 	}
 
 	/**
-	* Removes all the d l file shortcuts where toGroupId = &#63; and toFolderId = &#63; and toName = &#63; from the database.
+	* Removes all the d l file shortcuts where toFileEntryId = &#63; from the database.
 	*
-	* @param toGroupId the to group id to search with
-	* @param toFolderId the to folder id to search with
-	* @param toName the to name to search with
+	* @param toFileEntryId the to file entry id to search with
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeByTG_TF_TN(long toGroupId, long toFolderId,
-		java.lang.String toName)
+	public static void removeByTF(long toFileEntryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByTG_TF_TN(toGroupId, toFolderId, toName);
+		getPersistence().removeByTF(toFileEntryId);
 	}
 
 	/**
@@ -1090,18 +1067,15 @@ public class DLFileShortcutUtil {
 	}
 
 	/**
-	* Counts all the d l file shortcuts where toGroupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	* Counts all the d l file shortcuts where toFileEntryId = &#63;.
 	*
-	* @param toGroupId the to group id to search with
-	* @param toFolderId the to folder id to search with
-	* @param toName the to name to search with
+	* @param toFileEntryId the to file entry id to search with
 	* @return the number of matching d l file shortcuts
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByTG_TF_TN(long toGroupId, long toFolderId,
-		java.lang.String toName)
+	public static int countByTF(long toFileEntryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByTG_TF_TN(toGroupId, toFolderId, toName);
+		return getPersistence().countByTF(toFileEntryId);
 	}
 
 	/**

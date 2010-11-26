@@ -1178,17 +1178,13 @@
 		<field name="uuid" type="String" />
 		<field name="fileShortcutId" type="long" />
 		<field name="groupId" type="long" />
-		<field name="toGroupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="folderId" type="long" />
-		<field name="toFolderId" type="long" />
-		<field name="toName" type="String">
-			<hint name="max-length">255</hint>
-		</field>
+		<field name="toFileEntryId" type="long" />
 		<field name="status" type="int" />
 		<field name="statusByUserId" type="long" />
 		<field name="statusByUserName" type="String" />

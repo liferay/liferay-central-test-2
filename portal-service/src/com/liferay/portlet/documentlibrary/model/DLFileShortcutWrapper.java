@@ -101,24 +101,6 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the to group id of this d l file shortcut.
-	*
-	* @return the to group id of this d l file shortcut
-	*/
-	public long getToGroupId() {
-		return _dlFileShortcut.getToGroupId();
-	}
-
-	/**
-	* Sets the to group id of this d l file shortcut.
-	*
-	* @param toGroupId the to group id of this d l file shortcut
-	*/
-	public void setToGroupId(long toGroupId) {
-		_dlFileShortcut.setToGroupId(toGroupId);
-	}
-
-	/**
 	* Gets the company id of this d l file shortcut.
 	*
 	* @return the company id of this d l file shortcut
@@ -247,39 +229,21 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the to folder id of this d l file shortcut.
+	* Gets the to file entry id of this d l file shortcut.
 	*
-	* @return the to folder id of this d l file shortcut
+	* @return the to file entry id of this d l file shortcut
 	*/
-	public long getToFolderId() {
-		return _dlFileShortcut.getToFolderId();
+	public long getToFileEntryId() {
+		return _dlFileShortcut.getToFileEntryId();
 	}
 
 	/**
-	* Sets the to folder id of this d l file shortcut.
+	* Sets the to file entry id of this d l file shortcut.
 	*
-	* @param toFolderId the to folder id of this d l file shortcut
+	* @param toFileEntryId the to file entry id of this d l file shortcut
 	*/
-	public void setToFolderId(long toFolderId) {
-		_dlFileShortcut.setToFolderId(toFolderId);
-	}
-
-	/**
-	* Gets the to name of this d l file shortcut.
-	*
-	* @return the to name of this d l file shortcut
-	*/
-	public java.lang.String getToName() {
-		return _dlFileShortcut.getToName();
-	}
-
-	/**
-	* Sets the to name of this d l file shortcut.
-	*
-	* @param toName the to name of this d l file shortcut
-	*/
-	public void setToName(java.lang.String toName) {
-		_dlFileShortcut.setToName(toName);
+	public void setToFileEntryId(long toFileEntryId) {
+		_dlFileShortcut.setToFileEntryId(toFileEntryId);
 	}
 
 	/**

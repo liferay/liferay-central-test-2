@@ -26,35 +26,20 @@ String redirect = ParamUtil.getString(request, "redirect");
 DLFileShortcut fileShortcut = (DLFileShortcut)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_SHORTCUT);
 
 long fileShortcutId = BeanParamUtil.getLong(fileShortcut, request, "fileShortcutId");
-long folderId = BeanParamUtil.getLong(fileShortcut, request, "folderId");
 long toGroupId = ParamUtil.getLong(request, "toGroupId");
-long toFolderId = BeanParamUtil.getLong(fileShortcut, request, "toFolderId");
-String toName = BeanParamUtil.getString(fileShortcut, request, "toName");
+long folderId = BeanParamUtil.getLong(fileShortcut, request, "folderId");
+long toFileEntryId = BeanParamUtil.getLong(fileShortcut, request, "toFileEntryId");
 
 Group toGroup = null;
 DLFolder toFolder = null;
 DLFileEntry toFileEntry = null;
 
-if ((toFolderId > 0) && Validator.isNotNull(toName)) {
+if (toFileEntryId > 0) {
 	try {
-		toFileEntry = DLAppLocalServiceUtil.getFileEntry(toGroupId, toFolderId, toName);
-		toFolder = DLAppLocalServiceUtil.getFolder(toFolderId);
-		toGroup = GroupLocalServiceUtil.getGroup(toFolder.getGroupId());
-	}
-	catch (Exception e) {
-	}
-}
-else if ((toFolderId > 0)) {
-	try {
-		toFolder = DLAppLocalServiceUtil.getFolder(toFolderId);
-		toGroup = GroupLocalServiceUtil.getGroup(toFolder.getGroupId());
-	}
-	catch (Exception e) {
-	}
-}
+		toFileEntry = DLAppLocalServiceUtil.getFileEntry(toFileEntryId);
+		toFolder = toFileEntry.getFolder();
 
-if ((toGroup == null) && (toGroupId > 0)) {
-	try {
+		toGroupId = toFolder.getGroupId();
 		toGroup = GroupLocalServiceUtil.getGroup(toGroupId);
 	}
 	catch (Exception e) {
@@ -95,8 +80,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	<aui:input name="fileShortcutId" type="hidden" value="<%= fileShortcutId %>" />
 	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
 	<aui:input name="toGroupId" type="hidden" value="<%= toGroupId %>" />
-	<aui:input name="toFolderId" type="hidden" value="<%= toFolderId %>" />
-	<aui:input name="toName" type="hidden" value="<%= toName %>" />
+	<aui:input name="toFileEntryId" type="hidden" value="<%= toFileEntryId %>" />
 
 	<liferay-ui:header
 		backURL="<%= redirect %>"
@@ -172,8 +156,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 <aui:script>
 	function <portlet:namespace />createSelectFileEntryURL(url) {
 		url += '&<portlet:namespace />groupId='+ document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value;
-		url += '&<portlet:namespace />folderId=' + document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value;
-		url += '&<portlet:namespace />name=' + document.<portlet:namespace />fm.<portlet:namespace />toName.value;
+		url += '&<portlet:namespace />fileEntryId=' + document.<portlet:namespace />fm.<portlet:namespace />toFileEntryId.value;
 
 		return url;
 	}
@@ -183,9 +166,8 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />selectFileEntry(folderId, name, title) {
-		document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value = folderId;
-		document.<portlet:namespace />fm.<portlet:namespace />toName.value = name;
+	function <portlet:namespace />selectFileEntry(fileEntryId, title) {
+		document.<portlet:namespace />fm.<portlet:namespace />toFileEntryId.value = fileEntryId;
 
 		var titleEl = document.getElementById("<portlet:namespace />toFileEntryTitle");
 
@@ -203,12 +185,11 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 			var A = AUI();
 
 			if (document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value != groupId) {
-				<portlet:namespace />selectFileEntry("", "", "");
+				<portlet:namespace />selectFileEntry("", "");
 			}
 
 			document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value = groupId;
-			document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value = "";
-			document.<portlet:namespace />fm.<portlet:namespace />toName.value = "";
+			document.<portlet:namespace />fm.<portlet:namespace />toFileEntryId.value = 0;
 
 			var nameEl = document.getElementById("<portlet:namespace />toGroupName");
 

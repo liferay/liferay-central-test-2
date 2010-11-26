@@ -78,13 +78,12 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	}
 
 	public DLFileShortcut addFileShortcut(
-			long userId, long groupId, long toGroupId, long folderId,
-			long toFolderId, String toName, ServiceContext serviceContext)
+			long userId, long groupId, long folderId, long toFileEntryId,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return dlFileShortcutLocalService.addFileShortcut(
-			userId, groupId, toGroupId, folderId, toFolderId, toName,
-			serviceContext);
+			userId, groupId, folderId, toFileEntryId, serviceContext);
 	}
 
 	public DLFolder addFolder(
@@ -145,12 +144,10 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		dlFileShortcutLocalService.deleteDLFileShortcut(fileShortcutId);
 	}
 
-	public void deleteFileShortcuts(
-			long toGroupId, long toFolderId, String toName)
+	public void deleteFileShortcuts(long toFileEntryId)
 		throws PortalException, SystemException {
 
-		dlFileShortcutLocalService.deleteFileShortcuts(
-			toGroupId, toFolderId, toName);
+		dlFileShortcutLocalService.deleteFileShortcuts(toFileEntryId);
 	}
 
 	public void deleteFolder(DLFolder folder)
@@ -585,22 +582,20 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	}
 
 	public DLFileShortcut updateFileShortcut(
-			long userId, long fileShortcutId, long toGroupId, long folderId,
-			long toFolderId, String toName, ServiceContext serviceContext)
+			long userId, long fileShortcutId, long folderId, long toFileEntryId,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return dlFileShortcutLocalService.updateFileShortcut(
-			userId, fileShortcutId, toGroupId, folderId, toFolderId, toName,
-			serviceContext);
+			userId, fileShortcutId, folderId, toFileEntryId, serviceContext);
 	}
 
 	public void updateFileShortcuts(
-			long toGroupId, long oldToFolderId, String oldToName,
-			long newToFolderId, String newToName)
+			long toGroupId, long oldToFileEntryId, long newToFileEntryId)
 		throws SystemException {
 
 		dlFileShortcutLocalService.updateFileShortcuts(
-			toGroupId, oldToFolderId, oldToName, newToFolderId, newToName);
+			oldToFileEntryId, newToFileEntryId);
 	}
 
 	public DLFileVersion updateFileVersionDescription(
