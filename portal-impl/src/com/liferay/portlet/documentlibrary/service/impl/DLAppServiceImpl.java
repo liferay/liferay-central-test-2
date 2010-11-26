@@ -213,17 +213,17 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		return dlRepositoryService.getFileEntriesCount(groupId, folderId);
 	}
 
+	public DLFileEntry getFileEntry(long fileEntryId)
+		throws PortalException, SystemException {
+
+		return dlRepositoryService.getFileEntry(fileEntryId);
+	}
+
 	public DLFileEntry getFileEntry(
 			long groupId, long folderId, String name)
 		throws PortalException, SystemException {
 
 		return dlRepositoryService.getFileEntry(groupId, folderId, name);
-	}
-
-	public DLFileEntry getFileEntry(long fileEntryId)
-		throws PortalException, SystemException {
-
-		return dlRepositoryService.getFileEntry(fileEntryId);
 	}
 
 	public DLFileEntry getFileEntryByTitle(

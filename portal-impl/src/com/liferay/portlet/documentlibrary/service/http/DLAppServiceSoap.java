@@ -298,11 +298,9 @@ public class DLAppServiceSoap {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap getFileEntry(
-		long groupId, long folderId, java.lang.String name)
-		throws RemoteException {
+		long fileEntryId) throws RemoteException {
 		try {
-			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLAppServiceUtil.getFileEntry(groupId,
-					folderId, name);
+			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLAppServiceUtil.getFileEntry(fileEntryId);
 
 			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
 		}
@@ -314,9 +312,11 @@ public class DLAppServiceSoap {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap getFileEntry(
-		long fileEntryId) throws RemoteException {
+		long groupId, long folderId, java.lang.String name)
+		throws RemoteException {
 		try {
-			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLAppServiceUtil.getFileEntry(fileEntryId);
+			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLAppServiceUtil.getFileEntry(groupId,
+					folderId, name);
 
 			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
 		}

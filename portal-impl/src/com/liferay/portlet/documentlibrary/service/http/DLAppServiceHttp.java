@@ -874,16 +874,15 @@ public class DLAppServiceHttp {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
-		HttpPrincipal httpPrincipal, long groupId, long folderId,
-		java.lang.String name)
+		HttpPrincipal httpPrincipal, long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLAppServiceUtil.class.getName(),
 					"getFileEntry", _getFileEntryParameterTypes22);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					folderId, name);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					fileEntryId);
 
 			Object returnObj = null;
 
@@ -912,15 +911,16 @@ public class DLAppServiceHttp {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
-		HttpPrincipal httpPrincipal, long fileEntryId)
+		HttpPrincipal httpPrincipal, long groupId, long folderId,
+		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLAppServiceUtil.class.getName(),
 					"getFileEntry", _getFileEntryParameterTypes23);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					fileEntryId);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					folderId, name);
 
 			Object returnObj = null;
 
@@ -2662,10 +2662,10 @@ public class DLAppServiceHttp {
 			long.class, long.class
 		};
 	private static final Class<?>[] _getFileEntryParameterTypes22 = new Class[] {
-			long.class, long.class, java.lang.String.class
+			long.class
 		};
 	private static final Class<?>[] _getFileEntryParameterTypes23 = new Class[] {
-			long.class
+			long.class, long.class, java.lang.String.class
 		};
 	private static final Class<?>[] _getFileEntryByTitleParameterTypes24 = new Class[] {
 			long.class, long.class, java.lang.String.class

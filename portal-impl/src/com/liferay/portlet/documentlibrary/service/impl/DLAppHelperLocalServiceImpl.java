@@ -108,7 +108,6 @@ public class DLAppHelperLocalServiceImpl
 	public void getFileAsStream(long userId, DLFileEntry fileEntry)
 		throws PortalException, SystemException {
 
-		long fileEntryId = fileEntry.getFileEntryId();
 		long groupId = fileEntry.getGroupId();
 		long companyId = fileEntry.getCompanyId();
 		long folderId = fileEntry.getFolderId();
@@ -130,7 +129,8 @@ public class DLAppHelperLocalServiceImpl
 				fileEntry.getFileEntryId());
 
 			List<DLFileShortcut> fileShortcuts =
-				dlFileShortcutPersistence.findByTF(fileEntryId);
+				dlFileShortcutPersistence.findByToFileEntryId(
+					fileEntry.getFileEntryId());
 
 			for (DLFileShortcut fileShortcut : fileShortcuts) {
 				assetEntryLocalService.incrementViewCounter(
@@ -201,7 +201,7 @@ public class DLAppHelperLocalServiceImpl
 			DLFileEntry.class.getName(), oldFileEntryId);
 
 		List<DLFileShortcut> fileShortcuts =
-			dlFileShortcutPersistence.findByTF(oldFileEntryId);
+			dlFileShortcutPersistence.findByToFileEntryId(oldFileEntryId);
 
 		for (DLFileShortcut fileShortcut : fileShortcuts) {
 			assetEntryLocalService.deleteEntry(
@@ -270,7 +270,8 @@ public class DLAppHelperLocalServiceImpl
 				fileEntry.getDescription(), null, null, 0, 0, null, false);
 
 			List<DLFileShortcut> fileShortcuts =
-				dlFileShortcutPersistence.findByTF(fileEntry.getFileEntryId());
+				dlFileShortcutPersistence.findByToFileEntryId(
+					fileEntry.getFileEntryId());
 
 			for (DLFileShortcut fileShortcut : fileShortcuts) {
 				assetEntryLocalService.updateEntry(

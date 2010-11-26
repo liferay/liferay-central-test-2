@@ -29,16 +29,20 @@ fileShortcut = fileShortcut.toEscapedModel();
 
 long fileShortcutId = fileShortcut.getFileShortcutId();
 
+Group toGroup = null;
+
+DLFolder toFolder = null;
+
 long toFileEntryId = fileShortcut.getToFileEntryId();
 
-Group toGroup = null;
-DLFolder toFolder = null;
 DLFileEntry toFileEntry = null;
 
 if (toFileEntryId > 0) {
 	try {
 		toFileEntry = DLAppLocalServiceUtil.getFileEntry(toFileEntryId);
+
 		toFolder = toFileEntry.getFolder();
+
 		toGroup = GroupLocalServiceUtil.getGroup(toFileEntry.getGroupId());
 	}
 	catch (Exception e) {

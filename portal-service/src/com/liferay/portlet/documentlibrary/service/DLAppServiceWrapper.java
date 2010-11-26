@@ -207,17 +207,17 @@ public class DLAppServiceWrapper implements DLAppService {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
-		long groupId, long folderId, java.lang.String name)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.getFileEntry(groupId, folderId, name);
-	}
-
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
 		long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlAppService.getFileEntry(fileEntryId);
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
+		long groupId, long folderId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlAppService.getFileEntry(groupId, folderId, name);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(

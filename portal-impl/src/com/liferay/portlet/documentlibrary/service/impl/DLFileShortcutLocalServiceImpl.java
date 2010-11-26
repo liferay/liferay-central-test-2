@@ -190,7 +190,7 @@ public class DLFileShortcutLocalServiceImpl
 		throws PortalException, SystemException {
 
 		List<DLFileShortcut> fileShortcuts =
-			dlFileShortcutPersistence.findByTF(toFileEntryId);
+			dlFileShortcutPersistence.findByToFileEntryId(toFileEntryId);
 
 		for (DLFileShortcut fileShortcut : fileShortcuts) {
 			deleteFileShortcut(fileShortcut);
@@ -269,8 +269,8 @@ public class DLFileShortcutLocalServiceImpl
 			long oldToFileEntryId, long newToFileEntryId)
 		throws SystemException {
 
-		List<DLFileShortcut> fileShortcuts = dlFileShortcutPersistence.findByTF(
-			oldToFileEntryId);
+		List<DLFileShortcut> fileShortcuts =
+			dlFileShortcutPersistence.findByToFileEntryId(oldToFileEntryId);
 
 		for (DLFileShortcut fileShortcut : fileShortcuts) {
 			fileShortcut.setToFileEntryId(newToFileEntryId);

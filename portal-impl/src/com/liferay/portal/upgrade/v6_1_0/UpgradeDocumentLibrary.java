@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.upgrade.v6_1_0.util.DLFileVersionTable;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryServiceUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,6 +36,36 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		updateFileVersions();
 	}
 
+	protected long getFileEntryId(long folderId, String name) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		long fileEntryId = 0;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select fileEntryId from DLFileEntry where folderId = ? " +
+					"and name = ?");
+
+			ps.setLong(1, folderId);
+			ps.setString(2, name);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				fileEntryId = rs.getLong("fileEntryId");
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return fileEntryId;
+	}
+
 	protected void updateFileShortcuts() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -47,25 +75,22 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select fileShortcutId, groupId, toFolderId, toName " +
-					"from DLFileShortcut");
+				"select fileShortcutId, toFolderId, toName from " +
+					"DLFileShortcut");
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				long fileShortcutId = rs.getLong("fileShortcutId");
-				long groupId = rs.getLong("groupId");
 				long toFolderId = rs.getLong("toFolderId");
 				String toName = rs.getString("toName");
 
-				DLFileEntry fileEntry = DLRepositoryServiceUtil.getFileEntry(
-					groupId, toFolderId, toName);
-
-				long toFileEntryId = fileEntry.getFileEntryId();
+				long toFileEntryId = getFileEntryId(toFolderId, toName);
 
 				runSQL(
-					"update DLFileShortcut set toGroupId = '" + toFileEntryId +
-						"' where fileShortcutId = " + fileShortcutId);
+					"update DLFileShortcut set toFileEntryId = '" +
+						toFileEntryId + "' where fileShortcutId = " +
+							fileShortcutId);
 			}
 		}
 		finally {

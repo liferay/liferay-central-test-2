@@ -26,34 +26,35 @@ String redirect = ParamUtil.getString(request, "redirect");
 DLFileShortcut fileShortcut = (DLFileShortcut)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_SHORTCUT);
 
 long fileShortcutId = BeanParamUtil.getLong(fileShortcut, request, "fileShortcutId");
+
 long toGroupId = ParamUtil.getLong(request, "toGroupId");
-long folderId = BeanParamUtil.getLong(fileShortcut, request, "folderId");
-long toFileEntryId = BeanParamUtil.getLong(fileShortcut, request, "toFileEntryId");
 
 Group toGroup = null;
+
+long folderId = BeanParamUtil.getLong(fileShortcut, request, "folderId");
+
 DLFolder toFolder = null;
+
+long toFileEntryId = BeanParamUtil.getLong(fileShortcut, request, "toFileEntryId");
+
 DLFileEntry toFileEntry = null;
 
 if (toFileEntryId > 0) {
 	try {
 		toFileEntry = DLAppLocalServiceUtil.getFileEntry(toFileEntryId);
+
+		toFileEntry = toFileEntry.toEscapedModel();
+
 		toFolder = toFileEntry.getFolder();
 
 		toGroupId = toFolder.getGroupId();
+
 		toGroup = GroupLocalServiceUtil.getGroup(toGroupId);
+
+		toGroup = toGroup.toEscapedModel();
 	}
 	catch (Exception e) {
 	}
-}
-
-if (toGroup != null) {
-	toGroup = toGroup.toEscapedModel();
-
-	toGroupId = toGroup.getGroupId();
-}
-
-if (toFileEntry != null) {
-	toFileEntry = toFileEntry.toEscapedModel();
 }
 
 Boolean isLocked = Boolean.TRUE;
