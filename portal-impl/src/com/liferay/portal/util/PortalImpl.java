@@ -105,6 +105,7 @@ import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
@@ -662,11 +663,27 @@ public class PortalImpl implements Portal {
 			return url;
 		}
 
+		String domain = StringUtil.split(
+			HttpUtil.getDomain(url), StringPool.COLON)[0];
+
+		try {
+			CompanyLocalServiceUtil.getCompanyByVirtualHost(domain);
+
+			return url;
+		}
+		catch (Exception e) {
+		}
+
+		try {
+			LayoutSetLocalServiceUtil.getLayoutSet(domain);
+
+			return url;
+		}
+		catch (Exception e) {
+		}
+
 		try {
 			String securityMode = PropsValues.REDIRECT_URL_SECURITY_MODE;
-
-			String domain = StringUtil.split(
-				HttpUtil.getDomain(url), StringPool.COLON)[0];
 
 			if (securityMode.equals("domain")) {
 				String[] allowedDomains =
