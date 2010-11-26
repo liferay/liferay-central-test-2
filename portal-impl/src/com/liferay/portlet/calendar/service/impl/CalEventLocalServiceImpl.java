@@ -530,7 +530,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 					}
 				}
 				catch (Exception e) {
-					_log.error(e.getMessage());
+					_log.error(e.getMessage(), e);
 				}
 			}
 
@@ -655,10 +655,10 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			}
 		}
 		catch (IOException ioe) {
-			throw new SystemException(ioe.getMessage());
+			throw new SystemException(ioe.getMessage(), ioe);
 		}
 		catch (ParserException pe) {
-			throw new SystemException(pe.getMessage());
+			throw new SystemException(pe.getMessage(), pe);
 		}
 		finally {
 			try {
@@ -667,7 +667,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				}
 			}
 			catch (IOException ioe) {
-				_log.error(ioe);
+				_log.error(ioe, ioe);
 			}
 		}
 	}
@@ -1194,7 +1194,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 	}
 
