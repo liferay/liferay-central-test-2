@@ -47,7 +47,7 @@ portletURL.setParameter("target", target);
 
 			<%
 			if (filterManageableGroups) {
-				List<Group> groups = user.getGroups();
+				List<Group> groups = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
 				groups = EnterpriseAdminUtil.filterGroups(permissionChecker, groups);
 
