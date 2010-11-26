@@ -1,6 +1,19 @@
 AUI().add(
 	'liferay-category-admin',
 	function(A) {
+		var JSON = A.JSON;
+		var Node = A.Node;
+
+		var EXC_NO_SUCH_VOCABULARY = 'NoSuchVocabularyException';
+
+		var EXC_PRINCIPAL = 'auth.PrincipalException';
+
+		var EXC_VOCABULARY_NAME = 'VocabularyNameException';
+
+		var MSG_TYPE_ERROR = 'error';
+
+		var MSG_TYPE_SUCCESS = 'success';
+
 		var AssetCategoryAdmin = A.Component.create(
 			{
 				NAME: 'assetcategoryadmin',
@@ -34,8 +47,8 @@ AUI().add(
 							}
 						);
 
-						instance._portletMessageContainer = A.Node.create('<div class="aui-helper-hidden lfr-message-response" id="vocabulary-messages" />');
-						instance._categoryMessageContainer = A.Node.create('<div class="aui-helper-hidden lfr-message-response" id="vocabulary-category-messages" />');
+						instance._portletMessageContainer = Node.create('<div class="aui-helper-hidden lfr-message-response" id="vocabulary-messages" />');
+						instance._categoryMessageContainer = Node.create('<div class="aui-helper-hidden lfr-message-response" id="vocabulary-category-messages" />');
 
 						instance._container.placeBefore(instance._portletMessageContainer);
 						childrenContainer.placeBefore(instance._categoryMessageContainer);
@@ -192,8 +205,8 @@ AUI().add(
 												instance._displayVocabularyCategories(instance._selectedVocabularyId);
 											}
 											else {
-												if (exception.indexOf('auth.PrincipalException') > -1) {
-													instance._sendMessage('error', Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource'));
+												if (exception.indexOf(EXC_PRINCIPAL) > -1) {
+													instance._sendMessage(MSG_TYPE_ERROR, Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource'));
 												}
 											}
 										}
@@ -216,8 +229,8 @@ AUI().add(
 												instance._loadData();
 											}
 											else {
-												if (exception.indexOf('auth.PrincipalException') > -1) {
-													instance._sendMessage('error', Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource'));
+												if (exception.indexOf(EXC_PRINCIPAL) > -1) {
+													instance._sendMessage(MSG_TYPE_ERROR, Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource'));
 												}
 											}
 										}
@@ -311,7 +324,7 @@ AUI().add(
 						var buffer = [];
 
 						var childrenList = A.one(instance._categoryContainerSelector);
-						var boundingBox = A.Node.create('<div class="vocabulary-treeview-container" id="vocabularyTreeContainer"></div>');
+						var boundingBox = Node.create('<div class="vocabulary-treeview-container" id="vocabularyTreeContainer"></div>');
 
 						childrenList.empty();
 						childrenList.append(boundingBox);
@@ -459,11 +472,11 @@ AUI().add(
 																}
 															);
 
-															if (exception.indexOf('auth.PrincipalException') > -1) {
-																instance._sendMessage('error', Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource'));
+															if (exception.indexOf(EXC_PRINCIPAL) > -1) {
+																instance._sendMessage(MSG_TYPE_ERROR, Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource'));
 															}
-															else if (exception.indexOf('VocabularyNameException') > -1) {
-																instance._sendMessage('error', Liferay.Language.get('one-of-your-fields-contains-invalid-characters'));
+															else if (exception.indexOf(EXC_VOCABULARY_NAME) > -1) {
+																instance._sendMessage(MSG_TYPE_ERROR, Liferay.Language.get('one-of-your-fields-contains-invalid-characters'));
 															}
 														}
 														else {
@@ -574,7 +587,7 @@ AUI().add(
 								var exception = message.exception;
 
 								if (!exception && message.categoryId) {
-									instance._sendMessage('success', Liferay.Language.get('your-request-processed-successfully'));
+									instance._sendMessage(MSG_TYPE_SUCCESS, Liferay.Language.get('your-request-processed-successfully'));
 
 									instance._selectVocabulary(vocabularyId);
 
@@ -602,14 +615,14 @@ AUI().add(
 											 (exception.indexOf('AssetCategoryException') > -1)) {
 										errorKey = 'one-of-your-fields-contains-invalid-characters';
 									}
-									else if (exception.indexOf('NoSuchVocabularyException') > -1) {
+									else if (exception.indexOf(EXC_NO_SUCH_VOCABULARY) > -1) {
 										errorKey = 'that-vocabulary-does-not-exist';
 									}
-									else if (exception.indexOf('auth.PrincipalException') > -1) {
+									else if (exception.indexOf(EXC_PRINCIPAL) > -1) {
 										errorKey = 'you-do-not-have-permission-to-access-the-requested-resource';
 									}
 									if (errorKey) {
-										instance._sendMessage('error', Liferay.Language.get(errorKey));
+										instance._sendMessage(MSG_TYPE_ERROR, Liferay.Language.get(errorKey));
 									}
 								}
 							}
@@ -675,7 +688,7 @@ AUI().add(
 								var exception = message.exception;
 
 								if (!message.exception) {
-									instance._sendMessage('success', Liferay.Language.get('your-request-processed-successfully'));
+									instance._sendMessage(MSG_TYPE_SUCCESS, Liferay.Language.get('your-request-processed-successfully'));
 
 									instance._displayList(
 										function() {
@@ -703,18 +716,18 @@ AUI().add(
 									if (exception.indexOf('DuplicateVocabularyException') > -1) {
 										errorKey = 'that-vocabulary-already-exists';
 									}
-									else if (exception.indexOf('VocabularyNameException') > -1) {
+									else if (exception.indexOf(EXC_VOCABULARY_NAME) > -1) {
 										errorKey = 'one-of-your-fields-contains-invalid-characters';
 									}
-									else if (exception.indexOf('NoSuchVocabularyException') > -1) {
+									else if (exception.indexOf(EXC_NO_SUCH_VOCABULARY) > -1) {
 										errorKey = 'that-parent-vocabulary-does-not-exist';
 									}
-									else if (exception.indexOf('auth.PrincipalException') > -1) {
+									else if (exception.indexOf(EXC_PRINCIPAL) > -1) {
 										errorKey = 'you-do-not-have-permission-to-access-the-requested-resource';
 									}
 
 									if (errorKey) {
-										instance._sendMessage('error', Liferay.Language.get(errorKey));
+										instance._sendMessage(MSG_TYPE_ERROR, Liferay.Language.get(errorKey));
 									}
 								}
 							}
@@ -1342,13 +1355,13 @@ AUI().add(
 									else if (exception.indexOf('DuplicateCategoryException') > -1) {
 										errorText = Liferay.Language.get('there-is-another-category-with-the-same-name-and-the-same-parent');
 									}
-									else if (exception.indexOf('NoSuchVocabularyException') > -1) {
+									else if (exception.indexOf(EXC_NO_SUCH_VOCABULARY) > -1) {
 										errorText = Liferay.Language.get('that-vocabulary-does-not-exist');
 									}
 									else if (exception.indexOf('NoSuchCategoryException') > -1) {
 										errorText = Liferay.Language.get('that-parent-category-does-not-exist');
 									}
-									else if (exception.indexOf('auth.PrincipalException') > -1) {
+									else if (exception.indexOf(EXC_PRINCIPAL) > -1) {
 										errorText = Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource');
 									}
 									else if (exception.indexOf('Exception') > -1) {
@@ -1356,7 +1369,7 @@ AUI().add(
 									}
 
 									if (errorText) {
-										instance._sendMessage('error', Liferay.Language.get(errorText));
+										instance._sendMessage(MSG_TYPE_ERROR, Liferay.Language.get(errorText));
 									}
 								}
 
