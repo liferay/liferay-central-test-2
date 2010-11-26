@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.servlet.JspFactorySwapper;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
-import com.liferay.portal.scheduler.SchedulerEngineProxy;
 import com.liferay.portal.security.lang.PortalSecurityManager;
 import com.liferay.portal.service.LockLocalServiceUtil;
 import com.liferay.portal.tools.DBUpgrader;
@@ -137,10 +136,8 @@ public class StartupAction extends SimpleAction {
 		// Scheduler
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize scheduler engine");
+			_log.debug("Start scheduler engine");
 		}
-
-		SchedulerEngineUtil.init(new SchedulerEngineProxy());
 
 		SchedulerEngineUtil.start();
 
