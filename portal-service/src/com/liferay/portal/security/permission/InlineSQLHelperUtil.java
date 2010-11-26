@@ -27,6 +27,10 @@ public class InlineSQLHelperUtil {
 		return getInlineSQLHelper().isEnabled(groupId);
 	}
 
+	public static boolean isEnabled(long[] groupIds) {
+		return getInlineSQLHelper().isEnabled(groupIds);
+	}
+
 	public static String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField) {
 
@@ -44,10 +48,26 @@ public class InlineSQLHelperUtil {
 
 	public static String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField,
+		long[] groupIds) {
+
+		return getInlineSQLHelper().replacePermissionCheck(
+			sql, className, classPKField, userIdField, groupIds);
+	}
+
+	public static String replacePermissionCheck(
+		String sql, String className, String classPKField, String userIdField,
 		long groupId, String bridgeJoin) {
 
 		return getInlineSQLHelper().replacePermissionCheck(
 			sql, className, classPKField, userIdField, groupId, bridgeJoin);
+	}
+
+	public static String replacePermissionCheck(
+		String sql, String className, String classPKField, String userIdField,
+		long[] groupIds, String bridgeJoin) {
+
+		return getInlineSQLHelper().replacePermissionCheck(
+			sql, className, classPKField, userIdField, groupIds, bridgeJoin);
 	}
 
 	public static String replacePermissionCheck(

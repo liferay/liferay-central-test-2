@@ -14,6 +14,7 @@
 
 package com.liferay.portal.security.permission;
 
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -61,11 +62,25 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		return true;
 	}
 
+	public boolean isEnabled(long[] groupIds) {
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6) {
+			return false;
+		}
+
+		for (long groupId : groupIds) {
+			if (!isEnabled(groupId)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 	public String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField) {
 
 		return replacePermissionCheck(
-			sql, className, classPKField, userIdField, 0, null);
+			sql, className, classPKField, userIdField, new long[] {0}, null);
 	}
 
 	public String replacePermissionCheck(
@@ -73,14 +88,32 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		long groupId) {
 
 		return replacePermissionCheck(
-			sql, className, classPKField, userIdField, groupId, null);
+			sql, className, classPKField, userIdField, new long[] {groupId},
+			null);
+	}
+
+	public String replacePermissionCheck(
+		String sql, String className, String classPKField, String userIdField,
+		long[] groupIds) {
+
+		return replacePermissionCheck(
+			sql, className, classPKField, userIdField, groupIds, null);
 	}
 
 	public String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField,
 		long groupId, String bridgeJoin) {
 
-		if (!isEnabled(groupId)) {
+		return replacePermissionCheck(
+			sql, className, classPKField, userIdField, new long[] {groupId},
+			bridgeJoin);
+	}
+
+	public String replacePermissionCheck(
+		String sql, String className, String classPKField, String userIdField,
+		long[] groupIds, String bridgeJoin) {
+
+		if (!isEnabled(groupIds)) {
 			return sql;
 		}
 
@@ -123,7 +156,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 				"[$CLASS_NAME$]",
 				"[$CLASS_PK_FIELD$]",
 				"[$COMPANY_ID$]",
-				"[$GROUP_ID$]",
+				"[$GROUP_IDS$]",
 				"[$OWNER_CHECK$]",
 				"[$ROLE_IDS$]"
 			},
@@ -131,9 +164,9 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 				className,
 				classPKField,
 				String.valueOf(permissionChecker.getCompanyId()),
-				String.valueOf(groupId),
+				StringUtil.merge(groupIds, "','"),
 				ownerSQL.toString(),
-				StringUtil.merge(getRoleIds(groupId))
+				StringUtil.merge(getRoleIds(groupIds))
 			});
 
 		int pos = sql.indexOf(_WHERE_CLAUSE);
@@ -170,6 +203,20 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		if (permissionChecker != null) {
 			roleIds = permissionChecker.getRoleIds(
 				permissionChecker.getUserId(), groupId);
+		}
+
+		return roleIds;
+	}
+
+	protected long[] getRoleIds(long[] groupIds) {
+		long[] roleIds = PermissionChecker.DEFAULT_ROLE_IDS;
+
+		for (long groupId : groupIds) {
+			for (long roleId : getRoleIds(groupId)) {
+				if (!ArrayUtil.contains(roleIds, roleId)) {
+					roleIds = ArrayUtil.append(roleIds, roleId);
+				}
+			}
 		}
 
 		return roleIds;

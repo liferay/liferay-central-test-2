@@ -18,7 +18,7 @@
 							) OR
 							(
 								(ResourcePermission.scope = 2) AND
-								(ResourcePermission.primKey = '[$GROUP_ID$]')
+								(ResourcePermission.primKey IN ('[$GROUP_IDS$]'))
 							) OR
 							(
 								(ResourcePermission.scope = 4) AND

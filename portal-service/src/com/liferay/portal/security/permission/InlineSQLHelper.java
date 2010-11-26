@@ -23,6 +23,8 @@ public interface InlineSQLHelper {
 
 	public boolean isEnabled(long groupId);
 
+	public boolean isEnabled(long[] groupIds);
+
 	public String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField);
 
@@ -31,8 +33,16 @@ public interface InlineSQLHelper {
 		long groupId);
 
 	public String replacePermissionCheck(
+		String sql, String className, String classPKField, String userIdField,
+		long[] groupIds);
+
+	public String replacePermissionCheck(
 		String sql, String className, String classPKField,
 		String userIdField, long groupId, String bridgeJoin);
+
+	public String replacePermissionCheck(
+		String sql, String className, String classPKField,
+		String userIdField, long[] groupIds, String bridgeJoin);
 
 	public String replacePermissionCheck(
 		String sql, String className, String classPKField,

@@ -38,6 +38,16 @@ public class EntityFinder {
 		_columns = columns;
 	}
 
+	public EntityColumn getColumn(String name) {
+		for (EntityColumn column : _columns) {
+			if (column.getName().equals(name)) {
+				return column;
+			}
+		}
+
+		return null;
+	}
+
 	public List<EntityColumn> getColumns() {
 		return _columns;
 	}
