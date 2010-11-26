@@ -53,7 +53,7 @@
 	</bean>
 	<bean id="messageListener.scheduler_engine" class="com.liferay.portal.kernel.messaging.proxy.ProxyMessageListener">
 		<property name="manager"  >
-			<bean class="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineImpl" />
+			<bean id="com.liferay.portal.kernel.scheduler.SchedulerEngine" class="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineImpl" />
 		</property>
 	</bean>
 	<bean id="messageListener.scheduler_scripting" class="com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper">
