@@ -39,27 +39,23 @@
 <c:if test="<%= enableRssSubscription %>">
 
 	<%
-	StringBundler sb = new StringBundler(4);
+	ResourceURL rssURL = new PortletURLImpl(request, PortletKeys.BLOGS, layout.getPlid(), PortletRequest.RESOURCE_PHASE);
 
-	sb.append(themeDisplay.getPathMain());
-	sb.append("/blogs/rss?");
+	rssURL.setCacheability(ResourceURL.FULL);
+
+	rssURL.setParameter("struts_action", "/blogs/rss");
 
 	if (selectionMethod.equals("users")) {
 		if (organizationId > 0) {
-			sb.append("organizationId=");
-			sb.append(organizationId);
+			rssURL.setParameter("organizationId", String.valueOf(organizationId));
 		}
 		else {
-			sb.append("companyId=");
-			sb.append(company.getCompanyId());
+			rssURL.setParameter("companyId", String.valueOf(company.getCompanyId()));
 		}
 	}
 	else {
-		sb.append("groupId=");
-		sb.append(themeDisplay.getScopeGroupId());
+		rssURL.setParameter("groupId", String.valueOf(themeDisplay.getScopeGroupId()));
 	}
-
-	String rssURL = sb.toString();
 	%>
 
 	<liferay-ui:icon
@@ -67,7 +63,7 @@
 		label="<%= true %>"
 		method="get"
 		target="_blank"
-		url="<%= rssURL %>"
+		url="<%= rssURL.toString() %>"
 	/>
 </c:if>
 
