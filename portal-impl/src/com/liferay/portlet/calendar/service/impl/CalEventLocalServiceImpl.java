@@ -530,7 +530,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 					}
 				}
 				catch (Exception e) {
-					_log.error(e.getMessage(), e);
+					_log.error(e, e);
 				}
 			}
 
