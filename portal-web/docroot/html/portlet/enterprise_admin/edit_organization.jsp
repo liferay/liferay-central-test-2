@@ -31,9 +31,9 @@ String[] identificationSections = PropsValues.ORGANIZATIONS_FORM_ADD_IDENTIFICAT
 String[] miscellaneousSections = PropsValues.ORGANIZATIONS_FORM_ADD_MISCELLANEOUS;
 
 if (organization != null) {
-	mainSections = PropsValues.ORGANIZATIONS_FORM_UPDATE_MAIN;
-	identificationSections = PropsValues.ORGANIZATIONS_FORM_UPDATE_IDENTIFICATION;
-	miscellaneousSections = PropsValues.ORGANIZATIONS_FORM_UPDATE_MISCELLANEOUS;
+	mainSections = PropsUtil.getArray(PropsKeys.ORGANIZATIONS_FORM_UPDATE_MAIN, new Filter(organization.getType()));
+	identificationSections = PropsUtil.getArray(PropsKeys.ORGANIZATIONS_FORM_UPDATE_IDENTIFICATION, new Filter(organization.getType()));
+	miscellaneousSections = PropsUtil.getArray(PropsKeys.ORGANIZATIONS_FORM_UPDATE_MISCELLANEOUS, new Filter(organization.getType()));
 }
 
 String[] allSections = ArrayUtil.append(mainSections, ArrayUtil.append(identificationSections, miscellaneousSections));

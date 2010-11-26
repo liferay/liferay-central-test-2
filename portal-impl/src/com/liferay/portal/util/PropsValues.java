@@ -856,12 +856,6 @@ public class PropsValues {
 
 	public static final String[] ORGANIZATIONS_FORM_ADD_MISCELLANEOUS = PropsUtil.getArray(PropsKeys.ORGANIZATIONS_FORM_ADD_MISCELLANEOUS);
 
-	public static final String[] ORGANIZATIONS_FORM_UPDATE_IDENTIFICATION = PropsUtil.getArray(PropsKeys.ORGANIZATIONS_FORM_UPDATE_IDENTIFICATION);
-
-	public static final String[] ORGANIZATIONS_FORM_UPDATE_MAIN = PropsUtil.getArray(PropsKeys.ORGANIZATIONS_FORM_UPDATE_MAIN);
-
-	public static final String[] ORGANIZATIONS_FORM_UPDATE_MISCELLANEOUS = PropsUtil.getArray(PropsKeys.ORGANIZATIONS_FORM_UPDATE_MISCELLANEOUS);
-
 	public static final String[] ORGANIZATIONS_LIST_VIEWS = PropsUtil.getArray(PropsKeys.ORGANIZATIONS_LIST_VIEWS);
 
 	public static final String ORGANIZATIONS_LIST_VIEWS_DEFAULT = PropsUtil.get(PropsKeys.ORGANIZATIONS_LIST_VIEWS_DEFAULT);
