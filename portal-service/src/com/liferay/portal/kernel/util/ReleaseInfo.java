@@ -27,7 +27,7 @@ public class ReleaseInfo {
 
 	static String version = "6.1.0";
 
-	static String versionDisplayName = "6.0.10 CE";
+	static String versionDisplayName = "6.1.0 CE";
 
 	static String codeName = "Paton";
 
@@ -35,7 +35,7 @@ public class ReleaseInfo {
 
 	static int buildNumber = Integer.parseInt(build);
 
-	static String date = "October 14, 2010";
+	static String date = "December 1, 2010";
 
 	static String releaseInfoPrefix = System.getProperty(
 		"liferay.release.info.prefix" , StringPool.BLANK);
