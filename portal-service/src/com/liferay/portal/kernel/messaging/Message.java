@@ -154,6 +154,8 @@ public class Message implements Serializable {
 
 		sb.append("{destinationName=");
 		sb.append(_destinationName);
+		sb.append(", response=");
+		sb.append(_response);
 		sb.append(", responseDestinationName=");
 		sb.append(_responseDestinationName);
 		sb.append(", responseId=");
