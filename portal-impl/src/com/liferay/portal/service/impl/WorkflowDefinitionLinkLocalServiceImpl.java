@@ -122,9 +122,8 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 			}
 		}
 
-		workflowDefinitionLink =
-			workflowDefinitionLinkPersistence.fetchByG_C_C(
-				groupId, companyId, classNameId);
+		workflowDefinitionLink = workflowDefinitionLinkPersistence.fetchByG_C_C(
+			groupId, companyId, classNameId);
 
 		if (!strict && (workflowDefinitionLink == null)) {
 			workflowDefinitionLink =
