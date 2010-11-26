@@ -1223,21 +1223,21 @@ AUI().add(
 						var output = instance._portletMessageContainer;
 						var typeClass = 'portlet-msg-' + type;
 
-						if( instance._messageTimeout ){
-						    instance._messageTimeout.cancel();
-						}
+						clearTimeout(instance._messageTimeout);
 
-						output.removeClass('portlet-msg-error' ).removeClass( 'portlet-msg-success');
+						output.removeClass('portlet-msg-error portlet-msg-success');
 						output.addClass(typeClass);
 						output.html(message);
 						output.show();
 
-						instance._messageTimeout = A.later( 7000, instance, function() {
-						    output.hide();
+						instance._messageTimeout = setTimeout(
+							function() {
+								output.hide();
 
-						    instance._toolbarCategoryPanel.refreshAlign();
-						    instance._vocabularyCategoryPanel.refreshAlign();
-						});
+								instance._toolbarCategoryPanel.refreshAlign();
+								instance._vocabularyCategoryPanel.refreshAlign();
+							},
+						7000);
 					},
 
 					_showLoading: function(container) {
