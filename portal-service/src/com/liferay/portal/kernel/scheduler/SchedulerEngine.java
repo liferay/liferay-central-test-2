@@ -15,9 +15,7 @@
 package com.liferay.portal.kernel.scheduler;
 
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
-import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
-import com.liferay.portal.kernel.scheduler.messaging.SchedulerResponse;
+import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 
 import java.util.List;
 
@@ -27,7 +25,6 @@ import java.util.List;
  * @author Shuyang Zhou
  * @author Tina Tian
  */
-@MessagingProxy(mode = ProxyMode.SYNC)
 public interface SchedulerEngine {
 
 	public static final String DESCRIPTION = "DESCRIPTION";
@@ -73,13 +70,13 @@ public interface SchedulerEngine {
 	public void delete(String jobName, String groupName)
 		throws SchedulerException;
 
-	public SchedulerResponse getScheduledJob(String jobName, String groupName)
+	public SchedulerRequest getScheduledJob(String jobName, String groupName)
 		throws SchedulerException;
 
-	public List<SchedulerResponse> getScheduledJobs()
+	public List<SchedulerRequest> getScheduledJobs()
 		throws SchedulerException;
 
-	public List<SchedulerResponse> getScheduledJobs(String groupName)
+	public List<SchedulerRequest> getScheduledJobs(String groupName)
 		throws SchedulerException;
 
 	public void pause(String groupName) throws SchedulerException;

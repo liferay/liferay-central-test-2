@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.TriggerState;
 import com.liferay.portal.kernel.scheduler.TriggerType;
-import com.liferay.portal.kernel.scheduler.messaging.SchedulerResponse;
+import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
@@ -120,7 +120,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 	}
 
-	public SchedulerResponse getScheduledJob(String jobName, String groupName)
+	public SchedulerRequest getScheduledJob(String jobName, String groupName)
 		throws SchedulerException {
 
 		if (!PropsValues.SCHEDULER_ENABLED) {
@@ -141,15 +141,15 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			String destinationName = jobDataMap.getString(DESTINATION_NAME);
 			Message message = (Message)jobDataMap.get(MESSAGE);
 
-			SchedulerResponse schedulerResponse = null;
+			SchedulerRequest schedulerRequest = null;
 
 			Trigger trigger = _scheduler.getTrigger(jobName, groupName);
 
 			handleJobState(jobName, groupName, message, trigger);
 
 			if (trigger == null) {
-				schedulerResponse =
-					SchedulerResponse.createSchedulerResponse(
+				schedulerRequest =
+					SchedulerRequest.createRetrieveResponseRequest(
 						jobName, groupName, description, destinationName,
 						message);
 			}
@@ -157,8 +157,8 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				if (CronTrigger.class.isAssignableFrom(trigger.getClass())) {
 					CronTrigger cronTrigger = CronTrigger.class.cast(trigger);
 
-					schedulerResponse =
-						SchedulerResponse.createSchedulerResponse(
+					schedulerRequest =
+						SchedulerRequest.createRetrieveResponseRequest(
 							new com.liferay.portal.kernel.scheduler.CronTrigger(
 								jobName, groupName, cronTrigger.getStartTime(),
 								cronTrigger.getEndTime(),
@@ -171,8 +171,8 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 					SimpleTrigger simpleTrigger = SimpleTrigger.class.cast(
 						trigger);
 
-					schedulerResponse =
-						SchedulerResponse.createSchedulerResponse(
+					schedulerRequest =
+						SchedulerRequest.createRetrieveResponseRequest(
 							new IntervalTrigger(
 								jobName, groupName,
 								simpleTrigger.getStartTime(),
@@ -182,16 +182,14 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				}
 			}
 
-			return schedulerResponse;
+			return schedulerRequest;
 		}
 		catch (Exception e) {
 			throw new SchedulerException("Unable to get job", e);
 		}
 	}
 
-	public List<SchedulerResponse> getScheduledJobs()
-		throws SchedulerException {
-
+	public List<SchedulerRequest> getScheduledJobs() throws SchedulerException {
 		if (!PropsValues.SCHEDULER_ENABLED) {
 			return null;
 		}
@@ -199,21 +197,21 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		try {
 			String[] groupNames = _scheduler.getJobGroupNames();
 
-			List<SchedulerResponse> schedulerResponses =
-				new ArrayList<SchedulerResponse>();
+			List<SchedulerRequest> schedulerRequests =
+				new ArrayList<SchedulerRequest>();
 
 			for (String groupName : groupNames) {
-				schedulerResponses.addAll(getScheduledJobs(groupName));
+				schedulerRequests.addAll(getScheduledJobs(groupName));
 			}
 
-			return schedulerResponses;
+			return schedulerRequests;
 		}
 		catch (Exception e) {
 			throw new SchedulerException("Unable to get jobs", e);
 		}
 	}
 
-	public List<SchedulerResponse> getScheduledJobs(String groupName)
+	public List<SchedulerRequest> getScheduledJobs(String groupName)
 		throws SchedulerException {
 
 		if (!PropsValues.SCHEDULER_ENABLED) {
@@ -221,21 +219,21 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 
 		try {
-			List<SchedulerResponse> schedulerResponses =
-				new ArrayList<SchedulerResponse>();
+			List<SchedulerRequest> schedulerRequests =
+				new ArrayList<SchedulerRequest>();
 
 			String[] jobNames = _scheduler.getJobNames(groupName);
 
 			for (String jobName : jobNames) {
-				SchedulerResponse schedulerResponse = getScheduledJob(
+				SchedulerRequest schedulerRequest = getScheduledJob(
 					jobName, groupName);
 
-				if (schedulerResponse != null) {
-					schedulerResponses.add(schedulerResponse);
+				if (schedulerRequest != null) {
+					schedulerRequests.add(schedulerRequest);
 				}
 			}
 
-			return schedulerResponses;
+			return schedulerRequests;
 		}
 		catch (Exception e) {
 			throw new SchedulerException("Unable to get jobs", e);
