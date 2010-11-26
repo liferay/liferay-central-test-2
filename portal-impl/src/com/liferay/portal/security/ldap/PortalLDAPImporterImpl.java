@@ -349,6 +349,10 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			ldapUser.isSendEmail(), ldapUser.getServiceContext());
 	}
 
+	protected String escapeValue(String value) {
+		return StringUtil.replace(value, "\\,", "\\\\,");
+	}
+
 	protected User getUser(long companyId, LDAPUser ldapUser)
 		throws Exception {
 
@@ -403,7 +407,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		sb.append("(");
 		sb.append(groupMappings.getProperty("groupName"));
 		sb.append("=");
-		sb.append(StringUtil.replace(userGroup.getName(), "\\,", "\\\\,"));
+		sb.append(escapeValue(userGroup.getName()));
 		sb.append("))");
 
 		return PortalLDAPUtil.getMultivaluedAttribute(
@@ -588,7 +592,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			sb.append(StringPool.OPEN_PARENTHESIS);
 			sb.append(groupMappings.getProperty("user"));
 			sb.append(StringPool.EQUAL);
-			sb.append(StringUtil.replace(fullUserDN, "\\,", "\\\\,"));
+			sb.append(escapeValue(fullUserDN));
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
