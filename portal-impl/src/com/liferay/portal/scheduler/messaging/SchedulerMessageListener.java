@@ -130,18 +130,20 @@ public class SchedulerMessageListener extends BaseMessageListener {
 			(SchedulerRequest)message.getPayload();
 
 		String command = schedulerRequest.getCommand();
-		String jobName = schedulerRequest.getJobName();
-		String groupName = schedulerRequest.getGroupName();
 
-		if (jobName != null && 
+		String jobName = schedulerRequest.getJobName();
+
+		if (jobName != null &&
 			jobName.length() > SchedulerEngine.JOB_NAME_MAX_LENGTH) {
 
 			jobName = jobName.substring(0, SchedulerEngine.JOB_NAME_MAX_LENGTH);
 		}
 
+		String groupName = schedulerRequest.getGroupName();
+
 		if (groupName != null &&
 			groupName.length() > SchedulerEngine.GROUP_NAME_MAX_LENGTH) {
-			
+
 			groupName = groupName.substring(
 				0, SchedulerEngine.GROUP_NAME_MAX_LENGTH);
 		}

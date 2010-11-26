@@ -48,15 +48,6 @@ public class SchedulerEngineUtil {
 
 	public static void addScriptingJob(
 			Trigger trigger, String description, String language, String script,
-			int exceptionsMaxSize)
-		throws SchedulerException {
-
-		_instance._addScriptingJob(
-			trigger, description, language, script, exceptionsMaxSize);
-	}
-
-	public static void addScriptingJob(
-			Trigger trigger, String description, String language, String script,
 			boolean permanent)
 		throws SchedulerException {
 
@@ -72,6 +63,15 @@ public class SchedulerEngineUtil {
 		_instance._addScriptingJob(
 			trigger, description, language, script, permanent,
 			exceptionsMaxSize);
+	}
+
+	public static void addScriptingJob(
+			Trigger trigger, String description, String language, String script,
+			int exceptionsMaxSize)
+		throws SchedulerException {
+
+		_instance._addScriptingJob(
+			trigger, description, language, script, exceptionsMaxSize);
 	}
 
 	public static void delete(SchedulerEntry schedulerEntry)
@@ -324,21 +324,6 @@ public class SchedulerEngineUtil {
 
 	private void _addScriptingJob(
 			Trigger trigger, String description, String language, String script,
-			int exceptionsMaxSize)
-		throws SchedulerException {
-
-		Message message = new Message();
-
-		message.put(SchedulerEngine.LANGUAGE, language);
-		message.put(SchedulerEngine.SCRIPT, script);
-
-		_schedule(
-			trigger, description, DestinationNames.SCHEDULER_SCRIPTING,
-			message, exceptionsMaxSize);
-	}
-
-	private void _addScriptingJob(
-			Trigger trigger, String description, String language, String script,
 			boolean permanent)
 		throws SchedulerException {
 
@@ -354,6 +339,21 @@ public class SchedulerEngineUtil {
 
 		message.put(SchedulerEngine.LANGUAGE, language);
 		message.put(SchedulerEngine.PERMANENT, permanent);
+		message.put(SchedulerEngine.SCRIPT, script);
+
+		_schedule(
+			trigger, description, DestinationNames.SCHEDULER_SCRIPTING,
+			message, exceptionsMaxSize);
+	}
+
+	private void _addScriptingJob(
+			Trigger trigger, String description, String language, String script,
+			int exceptionsMaxSize)
+		throws SchedulerException {
+
+		Message message = new Message();
+
+		message.put(SchedulerEngine.LANGUAGE, language);
 		message.put(SchedulerEngine.SCRIPT, script);
 
 		_schedule(
