@@ -120,21 +120,37 @@ public class IncludeTag
 		}
 	}
 
-	@Override
 	public ServletContext getServletContext() {
-
 		ServletContext servletContext = super.getServletContext();
 
-		if (Validator.isNotNull(_portletId)) {
-			try {
-				servletContext = getServletContext(
-					servletContext, getServletRequest());
+		try {
+			if (Validator.isNull(_portletId)) {
+				return servletContext;
 			}
-			catch (SystemException e) {
-			}
-		}
 
-		return servletContext;
+			HttpServletRequest request = getServletRequest();
+
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				themeDisplay.getCompanyId(), _portletId);
+
+			if (portlet == null) {
+				return servletContext;
+			}
+
+			PortletApp portletApp = portlet.getPortletApp();
+
+			if (!portletApp.isWARFile()) {
+				return servletContext;
+			}
+
+			return PortalUtil.getServletContext(portlet, servletContext);
+		}
+		catch (SystemException se) {
+			return servletContext;
+		}
 	}
 
 	public void setDynamicAttribute(
@@ -210,45 +226,12 @@ public class IncludeTag
 		return _page;
 	}
 
-	protected ServletContext getServletContext(
-			ServletContext servletContext, HttpServletRequest request)
-		throws SystemException {
-
-		if (Validator.isNull(_portletId)) {
-			return servletContext;
-		}
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		Portlet portlet = PortletLocalServiceUtil.getPortletById(
-			themeDisplay.getCompanyId(), _portletId);
-
-		if (portlet == null) {
-			return servletContext;
-		}
-
-		PortletApp portletApp = portlet.getPortletApp();
-
-		if (!portletApp.isWARFile()) {
-			return servletContext;
-		}
-
-		return PortalUtil.getServletContext(portlet, servletContext);
-	}
-
 	protected String getStartPage() {
 		return null;
 	}
 
 	protected void include(String page) throws Exception {
-		HttpServletRequest request = getServletRequest();
-
-		request.setAttribute(WebKeys.SERVLET_PATH, page);
-
 		ServletContext servletContext = getServletContext();
-
-		servletContext = getServletContext(servletContext, request);
 
 		if (_DIRECT_SERVLET_CONTEXT_ENABLED) {
 			servletContext = new DirectServletContext(servletContext);
@@ -256,6 +239,10 @@ public class IncludeTag
 
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(page);
+
+		HttpServletRequest request = getServletRequest();
+
+		request.setAttribute(WebKeys.SERVLET_PATH, page);
 
 		HttpServletResponse response = new PipingServletResponse(
 			pageContext, isTrimNewLines());
