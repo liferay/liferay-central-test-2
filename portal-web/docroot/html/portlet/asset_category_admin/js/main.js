@@ -672,14 +672,14 @@ AUI().add(
 
 												A.one(instance._vocabularyContainerSelector).set('scrollTop', scrollTop);
 											}
+
+											if (callback) {
+												callback(vocabulary);
+											}
 										}
 									);
 
 									instance._resetActionValues();
-
-									if (callback) {
-										callback(vocabulary);
-									}
 								}
 								else {
 									var errorKey = '';
