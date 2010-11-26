@@ -425,7 +425,7 @@ public class AssetCategoryLocalServiceImpl
 			long vocabularyId)
 		throws PortalException, SystemException {
 
-		if (Validator.isNull(name) || !AssetUtil.isValidWord(name)) {
+		if (!AssetUtil.isValidWord(name)) {
 			throw new AssetCategoryNameException();
 		}
 
