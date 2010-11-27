@@ -34,18 +34,18 @@ public interface InlineSQLHelper {
 
 	public String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField,
+		long groupId, String bridgeJoin);
+
+	public String replacePermissionCheck(
+		String sql, String className, String classPKField, String userIdField,
 		long[] groupIds);
 
 	public String replacePermissionCheck(
-		String sql, String className, String classPKField,
-		String userIdField, long groupId, String bridgeJoin);
+		String sql, String className, String classPKField, String userIdField,
+		long[] groupIds, String bridgeJoin);
 
 	public String replacePermissionCheck(
-		String sql, String className, String classPKField,
-		String userIdField, long[] groupIds, String bridgeJoin);
-
-	public String replacePermissionCheck(
-		String sql, String className, String classPKField,
-		String userIdField, String bridgeJoin);
+		String sql, String className, String classPKField, String userIdField,
+		String bridgeJoin);
 
 }

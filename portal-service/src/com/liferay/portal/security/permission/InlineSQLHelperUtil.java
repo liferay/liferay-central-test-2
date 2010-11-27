@@ -19,6 +19,10 @@ package com.liferay.portal.security.permission;
  */
 public class InlineSQLHelperUtil {
 
+	public static InlineSQLHelper getInlineSQLHelper() {
+		return _inlineSQLPermission;
+	}
+
 	public static boolean isEnabled() {
 		return getInlineSQLHelper().isEnabled();
 	}
@@ -48,18 +52,18 @@ public class InlineSQLHelperUtil {
 
 	public static String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField,
-		long[] groupIds) {
-
-		return getInlineSQLHelper().replacePermissionCheck(
-			sql, className, classPKField, userIdField, groupIds);
-	}
-
-	public static String replacePermissionCheck(
-		String sql, String className, String classPKField, String userIdField,
 		long groupId, String bridgeJoin) {
 
 		return getInlineSQLHelper().replacePermissionCheck(
 			sql, className, classPKField, userIdField, groupId, bridgeJoin);
+	}
+
+	public static String replacePermissionCheck(
+		String sql, String className, String classPKField, String userIdField,
+		long[] groupIds) {
+
+		return getInlineSQLHelper().replacePermissionCheck(
+			sql, className, classPKField, userIdField, groupIds);
 	}
 
 	public static String replacePermissionCheck(
@@ -80,10 +84,6 @@ public class InlineSQLHelperUtil {
 
 	public void setInlineSQLHelper(InlineSQLHelper inlineSQLPermission) {
 		_inlineSQLPermission = inlineSQLPermission;
-	}
-
-	public static InlineSQLHelper getInlineSQLHelper() {
-		return _inlineSQLPermission;
 	}
 
 	private static InlineSQLHelper _inlineSQLPermission;

@@ -94,19 +94,19 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 
 	public String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField,
-		long[] groupIds) {
-
-		return replacePermissionCheck(
-			sql, className, classPKField, userIdField, groupIds, null);
-	}
-
-	public String replacePermissionCheck(
-		String sql, String className, String classPKField, String userIdField,
 		long groupId, String bridgeJoin) {
 
 		return replacePermissionCheck(
 			sql, className, classPKField, userIdField, new long[] {groupId},
 			bridgeJoin);
+	}
+
+	public String replacePermissionCheck(
+		String sql, String className, String classPKField, String userIdField,
+		long[] groupIds) {
+
+		return replacePermissionCheck(
+			sql, className, classPKField, userIdField, groupIds, null);
 	}
 
 	public String replacePermissionCheck(
