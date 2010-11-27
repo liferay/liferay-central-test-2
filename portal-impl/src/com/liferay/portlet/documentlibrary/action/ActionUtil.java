@@ -64,7 +64,7 @@ public class ActionUtil {
 					groupId, newFolderId, name);
 			}
 		}
-		else {
+		else if (fileEntryId > 0) {
 			fileEntry = DLAppServiceUtil.getFileEntry(fileEntryId);
 		}
 
