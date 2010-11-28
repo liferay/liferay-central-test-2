@@ -130,6 +130,9 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+
+		runSQL("alter table DLFileShortcut drop column toFolderId");
+		runSQL("alter table DLFileShortcut drop column toName");
 	}
 
 	protected void updateFileVersions() throws Exception {
