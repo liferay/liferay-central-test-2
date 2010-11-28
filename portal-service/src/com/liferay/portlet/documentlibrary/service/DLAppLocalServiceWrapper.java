@@ -65,12 +65,11 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileRank addFileRank(
-		long groupId, long companyId, long userId, long folderId,
-		java.lang.String name,
+		long groupId, long companyId, long userId, long fileEntryId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlAppLocalService.addFileRank(groupId, companyId, userId,
-			folderId, name, serviceContext);
+			fileEntryId, serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
@@ -124,9 +123,9 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService {
 		_dlAppLocalService.deleteFileRanks(userId);
 	}
 
-	public void deleteFileRanks(long folderId, java.lang.String name)
+	public void deleteFileRanksByFileEntryId(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		_dlAppLocalService.deleteFileRanks(folderId, name);
+		_dlAppLocalService.deleteFileRanksByFileEntryId(fileEntryId);
 	}
 
 	public void deleteFileShortcut(
@@ -548,12 +547,11 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileRank updateFileRank(
-		long groupId, long companyId, long userId, long folderId,
-		java.lang.String name,
+		long groupId, long companyId, long userId, long fileEntryId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlAppLocalService.updateFileRank(groupId, companyId, userId,
-			folderId, name, serviceContext);
+			fileEntryId, serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(

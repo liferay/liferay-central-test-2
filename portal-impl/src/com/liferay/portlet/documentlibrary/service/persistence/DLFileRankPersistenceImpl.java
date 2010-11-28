@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.LayoutPersistence;
@@ -99,32 +98,29 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			DLFileRankModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByG_U",
 			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_F_N = new FinderPath(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_FILEENTRYID = new FinderPath(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileRankModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByF_N",
+			"findByFileEntryId",
 			new String[] {
-				Long.class.getName(), String.class.getName(),
+				Long.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_F_N = new FinderPath(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_FILEENTRYID = new FinderPath(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileRankModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByF_N",
-			new String[] { Long.class.getName(), String.class.getName() });
-	public static final FinderPath FINDER_PATH_FETCH_BY_C_U_F_N = new FinderPath(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,
+			"countByFileEntryId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_U_F = new FinderPath(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileRankModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
-			"fetchByC_U_F_N",
+			"fetchByC_U_F",
 			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				String.class.getName()
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_C_U_F_N = new FinderPath(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_U_F = new FinderPath(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileRankModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByC_U_F_N",
+			"countByC_U_F",
 			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				String.class.getName()
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileRankModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -142,13 +138,11 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 		EntityCacheUtil.putResult(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileRankImpl.class, dlFileRank.getPrimaryKey(), dlFileRank);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_F_N,
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_F,
 			new Object[] {
 				new Long(dlFileRank.getCompanyId()),
 				new Long(dlFileRank.getUserId()),
-				new Long(dlFileRank.getFolderId()),
-				
-			dlFileRank.getName()
+				new Long(dlFileRank.getFileEntryId())
 			}, dlFileRank);
 	}
 
@@ -192,13 +186,11 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 		EntityCacheUtil.removeResult(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileRankImpl.class, dlFileRank.getPrimaryKey());
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_F_N,
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_F,
 			new Object[] {
 				new Long(dlFileRank.getCompanyId()),
 				new Long(dlFileRank.getUserId()),
-				new Long(dlFileRank.getFolderId()),
-				
-			dlFileRank.getName()
+				new Long(dlFileRank.getFileEntryId())
 			});
 	}
 
@@ -292,13 +284,11 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 		DLFileRankModelImpl dlFileRankModelImpl = (DLFileRankModelImpl)dlFileRank;
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_F_N,
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_F,
 			new Object[] {
 				new Long(dlFileRankModelImpl.getOriginalCompanyId()),
 				new Long(dlFileRankModelImpl.getOriginalUserId()),
-				new Long(dlFileRankModelImpl.getOriginalFolderId()),
-				
-			dlFileRankModelImpl.getOriginalName()
+				new Long(dlFileRankModelImpl.getOriginalFileEntryId())
 			});
 
 		EntityCacheUtil.removeResult(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,
@@ -340,32 +330,24 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 		if (!isNew &&
 				((dlFileRank.getCompanyId() != dlFileRankModelImpl.getOriginalCompanyId()) ||
 				(dlFileRank.getUserId() != dlFileRankModelImpl.getOriginalUserId()) ||
-				(dlFileRank.getFolderId() != dlFileRankModelImpl.getOriginalFolderId()) ||
-				!Validator.equals(dlFileRank.getName(),
-					dlFileRankModelImpl.getOriginalName()))) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_F_N,
+				(dlFileRank.getFileEntryId() != dlFileRankModelImpl.getOriginalFileEntryId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_F,
 				new Object[] {
 					new Long(dlFileRankModelImpl.getOriginalCompanyId()),
 					new Long(dlFileRankModelImpl.getOriginalUserId()),
-					new Long(dlFileRankModelImpl.getOriginalFolderId()),
-					
-				dlFileRankModelImpl.getOriginalName()
+					new Long(dlFileRankModelImpl.getOriginalFileEntryId())
 				});
 		}
 
 		if (isNew ||
 				((dlFileRank.getCompanyId() != dlFileRankModelImpl.getOriginalCompanyId()) ||
 				(dlFileRank.getUserId() != dlFileRankModelImpl.getOriginalUserId()) ||
-				(dlFileRank.getFolderId() != dlFileRankModelImpl.getOriginalFolderId()) ||
-				!Validator.equals(dlFileRank.getName(),
-					dlFileRankModelImpl.getOriginalName()))) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_F_N,
+				(dlFileRank.getFileEntryId() != dlFileRankModelImpl.getOriginalFileEntryId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_F,
 				new Object[] {
 					new Long(dlFileRank.getCompanyId()),
 					new Long(dlFileRank.getUserId()),
-					new Long(dlFileRank.getFolderId()),
-					
-				dlFileRank.getName()
+					new Long(dlFileRank.getFileEntryId())
 				}, dlFileRank);
 		}
 
@@ -387,8 +369,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 		dlFileRankImpl.setCompanyId(dlFileRank.getCompanyId());
 		dlFileRankImpl.setUserId(dlFileRank.getUserId());
 		dlFileRankImpl.setCreateDate(dlFileRank.getCreateDate());
-		dlFileRankImpl.setFolderId(dlFileRank.getFolderId());
-		dlFileRankImpl.setName(dlFileRank.getName());
+		dlFileRankImpl.setFileEntryId(dlFileRank.getFileEntryId());
 
 		return dlFileRankImpl;
 	}
@@ -1178,91 +1159,76 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	}
 
 	/**
-	 * Finds all the d l file ranks where folderId = &#63; and name = &#63;.
+	 * Finds all the d l file ranks where fileEntryId = &#63;.
 	 *
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @return the matching d l file ranks
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileRank> findByF_N(long folderId, String name)
+	public List<DLFileRank> findByFileEntryId(long fileEntryId)
 		throws SystemException {
-		return findByF_N(folderId, name, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
+		return findByFileEntryId(fileEntryId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Finds a range of all the d l file ranks where folderId = &#63; and name = &#63;.
+	 * Finds a range of all the d l file ranks where fileEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param start the lower bound of the range of d l file ranks to return
 	 * @param end the upper bound of the range of d l file ranks to return (not inclusive)
 	 * @return the range of matching d l file ranks
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileRank> findByF_N(long folderId, String name, int start,
+	public List<DLFileRank> findByFileEntryId(long fileEntryId, int start,
 		int end) throws SystemException {
-		return findByF_N(folderId, name, start, end, null);
+		return findByFileEntryId(fileEntryId, start, end, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the d l file ranks where folderId = &#63; and name = &#63;.
+	 * Finds an ordered range of all the d l file ranks where fileEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param start the lower bound of the range of d l file ranks to return
 	 * @param end the upper bound of the range of d l file ranks to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
 	 * @return the ordered range of matching d l file ranks
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileRank> findByF_N(long folderId, String name, int start,
+	public List<DLFileRank> findByFileEntryId(long fileEntryId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				folderId, name,
+				fileEntryId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
-		List<DLFileRank> list = (List<DLFileRank>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_F_N,
+		List<DLFileRank> list = (List<DLFileRank>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_FILEENTRYID,
 				finderArgs, this);
 
 		if (list == null) {
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(4 +
+				query = new StringBundler(3 +
 						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
-				query = new StringBundler(4);
+				query = new StringBundler(3);
 			}
 
 			query.append(_SQL_SELECT_DLFILERANK_WHERE);
 
-			query.append(_FINDER_COLUMN_F_N_FOLDERID_2);
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_F_N_NAME_1);
-			}
-			else {
-				if (name.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_F_N_NAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_F_N_NAME_2);
-				}
-			}
+			query.append(_FINDER_COLUMN_FILEENTRYID_FILEENTRYID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1284,11 +1250,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(folderId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
+				qPos.add(fileEntryId);
 
 				list = (List<DLFileRank>)QueryUtil.list(q, getDialect(), start,
 						end);
@@ -1298,13 +1260,13 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			}
 			finally {
 				if (list == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_F_N,
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_FILEENTRYID,
 						finderArgs);
 				}
 				else {
 					cacheResult(list);
 
-					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_F_N,
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_FILEENTRYID,
 						finderArgs, list);
 				}
 
@@ -1316,35 +1278,31 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	}
 
 	/**
-	 * Finds the first d l file rank in the ordered set where folderId = &#63; and name = &#63;.
+	 * Finds the first d l file rank in the ordered set where fileEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching d l file rank
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileRankException if a matching d l file rank could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileRank findByF_N_First(long folderId, String name,
+	public DLFileRank findByFileEntryId_First(long fileEntryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileRankException, SystemException {
-		List<DLFileRank> list = findByF_N(folderId, name, 0, 1,
+		List<DLFileRank> list = findByFileEntryId(fileEntryId, 0, 1,
 				orderByComparator);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(6);
+			StringBundler msg = new StringBundler(4);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("folderId=");
-			msg.append(folderId);
-
-			msg.append(", name=");
-			msg.append(name);
+			msg.append("fileEntryId=");
+			msg.append(fileEntryId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1356,37 +1314,33 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	}
 
 	/**
-	 * Finds the last d l file rank in the ordered set where folderId = &#63; and name = &#63;.
+	 * Finds the last d l file rank in the ordered set where fileEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching d l file rank
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileRankException if a matching d l file rank could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileRank findByF_N_Last(long folderId, String name,
+	public DLFileRank findByFileEntryId_Last(long fileEntryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileRankException, SystemException {
-		int count = countByF_N(folderId, name);
+		int count = countByFileEntryId(fileEntryId);
 
-		List<DLFileRank> list = findByF_N(folderId, name, count - 1, count,
-				orderByComparator);
+		List<DLFileRank> list = findByFileEntryId(fileEntryId, count - 1,
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(6);
+			StringBundler msg = new StringBundler(4);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("folderId=");
-			msg.append(folderId);
-
-			msg.append(", name=");
-			msg.append(name);
+			msg.append("fileEntryId=");
+			msg.append(fileEntryId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1398,22 +1352,21 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	}
 
 	/**
-	 * Finds the d l file ranks before and after the current d l file rank in the ordered set where folderId = &#63; and name = &#63;.
+	 * Finds the d l file ranks before and after the current d l file rank in the ordered set where fileEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param fileRankId the primary key of the current d l file rank
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next d l file rank
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileRankException if a d l file rank with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileRank[] findByF_N_PrevAndNext(long fileRankId, long folderId,
-		String name, OrderByComparator orderByComparator)
+	public DLFileRank[] findByFileEntryId_PrevAndNext(long fileRankId,
+		long fileEntryId, OrderByComparator orderByComparator)
 		throws NoSuchFileRankException, SystemException {
 		DLFileRank dlFileRank = findByPrimaryKey(fileRankId);
 
@@ -1424,13 +1377,13 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 			DLFileRank[] array = new DLFileRankImpl[3];
 
-			array[0] = getByF_N_PrevAndNext(session, dlFileRank, folderId,
-					name, orderByComparator, true);
+			array[0] = getByFileEntryId_PrevAndNext(session, dlFileRank,
+					fileEntryId, orderByComparator, true);
 
 			array[1] = dlFileRank;
 
-			array[2] = getByF_N_PrevAndNext(session, dlFileRank, folderId,
-					name, orderByComparator, false);
+			array[2] = getByFileEntryId_PrevAndNext(session, dlFileRank,
+					fileEntryId, orderByComparator, false);
 
 			return array;
 		}
@@ -1442,8 +1395,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 		}
 	}
 
-	protected DLFileRank getByF_N_PrevAndNext(Session session,
-		DLFileRank dlFileRank, long folderId, String name,
+	protected DLFileRank getByFileEntryId_PrevAndNext(Session session,
+		DLFileRank dlFileRank, long fileEntryId,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -1457,19 +1410,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 		query.append(_SQL_SELECT_DLFILERANK_WHERE);
 
-		query.append(_FINDER_COLUMN_F_N_FOLDERID_2);
-
-		if (name == null) {
-			query.append(_FINDER_COLUMN_F_N_NAME_1);
-		}
-		else {
-			if (name.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_F_N_NAME_3);
-			}
-			else {
-				query.append(_FINDER_COLUMN_F_N_NAME_2);
-			}
-		}
+		query.append(_FINDER_COLUMN_FILEENTRYID_FILEENTRYID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -1538,11 +1479,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(folderId);
-
-		if (name != null) {
-			qPos.add(name);
-		}
+		qPos.add(fileEntryId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByValues(dlFileRank);
@@ -1563,22 +1500,21 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	}
 
 	/**
-	 * Finds the d l file rank where companyId = &#63; and userId = &#63; and folderId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileRankException} if it could not be found.
+	 * Finds the d l file rank where companyId = &#63; and userId = &#63; and fileEntryId = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileRankException} if it could not be found.
 	 *
 	 * @param companyId the company id to search with
 	 * @param userId the user id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @return the matching d l file rank
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileRankException if a matching d l file rank could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileRank findByC_U_F_N(long companyId, long userId, long folderId,
-		String name) throws NoSuchFileRankException, SystemException {
-		DLFileRank dlFileRank = fetchByC_U_F_N(companyId, userId, folderId, name);
+	public DLFileRank findByC_U_F(long companyId, long userId, long fileEntryId)
+		throws NoSuchFileRankException, SystemException {
+		DLFileRank dlFileRank = fetchByC_U_F(companyId, userId, fileEntryId);
 
 		if (dlFileRank == null) {
-			StringBundler msg = new StringBundler(10);
+			StringBundler msg = new StringBundler(8);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
@@ -1588,11 +1524,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			msg.append(", userId=");
 			msg.append(userId);
 
-			msg.append(", folderId=");
-			msg.append(folderId);
-
-			msg.append(", name=");
-			msg.append(name);
+			msg.append(", fileEntryId=");
+			msg.append(fileEntryId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1607,64 +1540,49 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	}
 
 	/**
-	 * Finds the d l file rank where companyId = &#63; and userId = &#63; and folderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Finds the d l file rank where companyId = &#63; and userId = &#63; and fileEntryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param companyId the company id to search with
 	 * @param userId the user id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @return the matching d l file rank, or <code>null</code> if a matching d l file rank could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileRank fetchByC_U_F_N(long companyId, long userId,
-		long folderId, String name) throws SystemException {
-		return fetchByC_U_F_N(companyId, userId, folderId, name, true);
+	public DLFileRank fetchByC_U_F(long companyId, long userId, long fileEntryId)
+		throws SystemException {
+		return fetchByC_U_F(companyId, userId, fileEntryId, true);
 	}
 
 	/**
-	 * Finds the d l file rank where companyId = &#63; and userId = &#63; and folderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Finds the d l file rank where companyId = &#63; and userId = &#63; and fileEntryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param companyId the company id to search with
 	 * @param userId the user id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @return the matching d l file rank, or <code>null</code> if a matching d l file rank could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileRank fetchByC_U_F_N(long companyId, long userId,
-		long folderId, String name, boolean retrieveFromCache)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { companyId, userId, folderId, name };
+	public DLFileRank fetchByC_U_F(long companyId, long userId,
+		long fileEntryId, boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { companyId, userId, fileEntryId };
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_U_F_N,
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_U_F,
 					finderArgs, this);
 		}
 
 		if (result == null) {
-			StringBundler query = new StringBundler(6);
+			StringBundler query = new StringBundler(5);
 
 			query.append(_SQL_SELECT_DLFILERANK_WHERE);
 
-			query.append(_FINDER_COLUMN_C_U_F_N_COMPANYID_2);
+			query.append(_FINDER_COLUMN_C_U_F_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_C_U_F_N_USERID_2);
+			query.append(_FINDER_COLUMN_C_U_F_USERID_2);
 
-			query.append(_FINDER_COLUMN_C_U_F_N_FOLDERID_2);
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_C_U_F_N_NAME_1);
-			}
-			else {
-				if (name.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_C_U_F_N_NAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_C_U_F_N_NAME_2);
-				}
-			}
+			query.append(_FINDER_COLUMN_C_U_F_FILEENTRYID_2);
 
 			query.append(DLFileRankModelImpl.ORDER_BY_JPQL);
 
@@ -1683,11 +1601,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 				qPos.add(userId);
 
-				qPos.add(folderId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
+				qPos.add(fileEntryId);
 
 				List<DLFileRank> list = q.list();
 
@@ -1696,7 +1610,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 				DLFileRank dlFileRank = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_F_N,
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_F,
 						finderArgs, list);
 				}
 				else {
@@ -1706,10 +1620,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 					if ((dlFileRank.getCompanyId() != companyId) ||
 							(dlFileRank.getUserId() != userId) ||
-							(dlFileRank.getFolderId() != folderId) ||
-							(dlFileRank.getName() == null) ||
-							!dlFileRank.getName().equals(name)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_F_N,
+							(dlFileRank.getFileEntryId() != fileEntryId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_F,
 							finderArgs, dlFileRank);
 					}
 				}
@@ -1721,7 +1633,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_F_N,
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_F,
 						finderArgs);
 				}
 
@@ -1874,31 +1786,28 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	}
 
 	/**
-	 * Removes all the d l file ranks where folderId = &#63; and name = &#63; from the database.
+	 * Removes all the d l file ranks where fileEntryId = &#63; from the database.
 	 *
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByF_N(long folderId, String name)
-		throws SystemException {
-		for (DLFileRank dlFileRank : findByF_N(folderId, name)) {
+	public void removeByFileEntryId(long fileEntryId) throws SystemException {
+		for (DLFileRank dlFileRank : findByFileEntryId(fileEntryId)) {
 			remove(dlFileRank);
 		}
 	}
 
 	/**
-	 * Removes the d l file rank where companyId = &#63; and userId = &#63; and folderId = &#63; and name = &#63; from the database.
+	 * Removes the d l file rank where companyId = &#63; and userId = &#63; and fileEntryId = &#63; from the database.
 	 *
 	 * @param companyId the company id to search with
 	 * @param userId the user id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByC_U_F_N(long companyId, long userId, long folderId,
-		String name) throws NoSuchFileRankException, SystemException {
-		DLFileRank dlFileRank = findByC_U_F_N(companyId, userId, folderId, name);
+	public void removeByC_U_F(long companyId, long userId, long fileEntryId)
+		throws NoSuchFileRankException, SystemException {
+		DLFileRank dlFileRank = findByC_U_F(companyId, userId, fileEntryId);
 
 		remove(dlFileRank);
 	}
@@ -2026,37 +1935,24 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	}
 
 	/**
-	 * Counts all the d l file ranks where folderId = &#63; and name = &#63;.
+	 * Counts all the d l file ranks where fileEntryId = &#63;.
 	 *
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @return the number of matching d l file ranks
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByF_N(long folderId, String name) throws SystemException {
-		Object[] finderArgs = new Object[] { folderId, name };
+	public int countByFileEntryId(long fileEntryId) throws SystemException {
+		Object[] finderArgs = new Object[] { fileEntryId };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_F_N,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_FILEENTRYID,
 				finderArgs, this);
 
 		if (count == null) {
-			StringBundler query = new StringBundler(3);
+			StringBundler query = new StringBundler(2);
 
 			query.append(_SQL_COUNT_DLFILERANK_WHERE);
 
-			query.append(_FINDER_COLUMN_F_N_FOLDERID_2);
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_F_N_NAME_1);
-			}
-			else {
-				if (name.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_F_N_NAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_F_N_NAME_2);
-				}
-			}
+			query.append(_FINDER_COLUMN_FILEENTRYID_FILEENTRYID_2);
 
 			String sql = query.toString();
 
@@ -2069,11 +1965,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(folderId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
+				qPos.add(fileEntryId);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2085,8 +1977,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_F_N, finderArgs,
-					count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_FILEENTRYID,
+					finderArgs, count);
 
 				closeSession(session);
 			}
@@ -2096,44 +1988,31 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	}
 
 	/**
-	 * Counts all the d l file ranks where companyId = &#63; and userId = &#63; and folderId = &#63; and name = &#63;.
+	 * Counts all the d l file ranks where companyId = &#63; and userId = &#63; and fileEntryId = &#63;.
 	 *
 	 * @param companyId the company id to search with
 	 * @param userId the user id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @return the number of matching d l file ranks
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByC_U_F_N(long companyId, long userId, long folderId,
-		String name) throws SystemException {
-		Object[] finderArgs = new Object[] { companyId, userId, folderId, name };
+	public int countByC_U_F(long companyId, long userId, long fileEntryId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { companyId, userId, fileEntryId };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_U_F_N,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_U_F,
 				finderArgs, this);
 
 		if (count == null) {
-			StringBundler query = new StringBundler(5);
+			StringBundler query = new StringBundler(4);
 
 			query.append(_SQL_COUNT_DLFILERANK_WHERE);
 
-			query.append(_FINDER_COLUMN_C_U_F_N_COMPANYID_2);
+			query.append(_FINDER_COLUMN_C_U_F_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_C_U_F_N_USERID_2);
+			query.append(_FINDER_COLUMN_C_U_F_USERID_2);
 
-			query.append(_FINDER_COLUMN_C_U_F_N_FOLDERID_2);
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_C_U_F_N_NAME_1);
-			}
-			else {
-				if (name.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_C_U_F_N_NAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_C_U_F_N_NAME_2);
-				}
-			}
+			query.append(_FINDER_COLUMN_C_U_F_FILEENTRYID_2);
 
 			String sql = query.toString();
 
@@ -2150,11 +2029,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 				qPos.add(userId);
 
-				qPos.add(folderId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
+				qPos.add(fileEntryId);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2166,7 +2041,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_U_F_N,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_U_F,
 					finderArgs, count);
 
 				closeSession(session);
@@ -2270,16 +2145,10 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	private static final String _FINDER_COLUMN_USERID_USERID_2 = "dlFileRank.userId = ?";
 	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "dlFileRank.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_U_USERID_2 = "dlFileRank.userId = ?";
-	private static final String _FINDER_COLUMN_F_N_FOLDERID_2 = "dlFileRank.folderId = ? AND ";
-	private static final String _FINDER_COLUMN_F_N_NAME_1 = "dlFileRank.name IS NULL";
-	private static final String _FINDER_COLUMN_F_N_NAME_2 = "dlFileRank.name = ?";
-	private static final String _FINDER_COLUMN_F_N_NAME_3 = "(dlFileRank.name IS NULL OR dlFileRank.name = ?)";
-	private static final String _FINDER_COLUMN_C_U_F_N_COMPANYID_2 = "dlFileRank.companyId = ? AND ";
-	private static final String _FINDER_COLUMN_C_U_F_N_USERID_2 = "dlFileRank.userId = ? AND ";
-	private static final String _FINDER_COLUMN_C_U_F_N_FOLDERID_2 = "dlFileRank.folderId = ? AND ";
-	private static final String _FINDER_COLUMN_C_U_F_N_NAME_1 = "dlFileRank.name IS NULL";
-	private static final String _FINDER_COLUMN_C_U_F_N_NAME_2 = "dlFileRank.name = ?";
-	private static final String _FINDER_COLUMN_C_U_F_N_NAME_3 = "(dlFileRank.name IS NULL OR dlFileRank.name = ?)";
+	private static final String _FINDER_COLUMN_FILEENTRYID_FILEENTRYID_2 = "dlFileRank.fileEntryId = ?";
+	private static final String _FINDER_COLUMN_C_U_F_COMPANYID_2 = "dlFileRank.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_U_F_USERID_2 = "dlFileRank.userId = ? AND ";
+	private static final String _FINDER_COLUMN_C_U_F_FILEENTRYID_2 = "dlFileRank.fileEntryId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "dlFileRank.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No DLFileRank exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No DLFileRank exists with the key {";

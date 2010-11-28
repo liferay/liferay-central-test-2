@@ -32,8 +32,8 @@ import java.util.List;
 public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 
 	public DLFileRank addFileRank(
-			long groupId, long companyId, long userId, long folderId,
-			String name, ServiceContext serviceContext)
+			long groupId, long companyId, long userId, long fileEntryId,
+			ServiceContext serviceContext)
 		throws SystemException {
 
 		long fileRankId = counterLocalService.increment();
@@ -44,8 +44,7 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		fileRank.setCompanyId(companyId);
 		fileRank.setUserId(userId);
 		fileRank.setCreateDate(serviceContext.getCreateDate(null));
-		fileRank.setFolderId(folderId);
-		fileRank.setName(name);
+		fileRank.setFileEntryId(fileEntryId);
 
 		try {
 			dlFileRankPersistence.update(fileRank, false);
@@ -54,12 +53,11 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Add failed, fetch {companyId=" + companyId + ", userId=" +
-						userId + ", folderId=" + folderId + ", name=" + name +
-							"}");
+						userId + ", fileEntryId=" + fileEntryId + "}");
 			}
 
-			fileRank = dlFileRankPersistence.fetchByC_U_F_N(
-				companyId, userId, folderId, name, false);
+			fileRank = dlFileRankPersistence.fetchByC_U_F(
+				companyId, userId, fileEntryId, false);
 
 			if (fileRank == null) {
 				throw se;
@@ -73,10 +71,10 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		dlFileRankPersistence.removeByUserId(userId);
 	}
 
-	public void deleteFileRanks(long folderId, String name)
+	public void deleteFileRanksByFileEntryId(long fileEntryId)
 		throws SystemException {
 
-		dlFileRankPersistence.removeByF_N(folderId, name);
+		dlFileRankPersistence.removeByFileEntryId(fileEntryId);
 	}
 
 	public List<DLFileRank> getFileRanks(long groupId, long userId)
@@ -95,16 +93,16 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 	}
 
 	public DLFileRank updateFileRank(
-			long groupId, long companyId, long userId, long folderId,
-			String name, ServiceContext serviceContext)
+			long groupId, long companyId, long userId, long fileEntryId,
+			ServiceContext serviceContext)
 		throws SystemException {
 
 		if (!PropsValues.DL_FILE_RANK_ENABLED) {
 			return null;
 		}
 
-		DLFileRank fileRank = dlFileRankPersistence.fetchByC_U_F_N(
-			companyId, userId, folderId, name);
+		DLFileRank fileRank = dlFileRankPersistence.fetchByC_U_F(
+			companyId, userId, fileEntryId);
 
 		if (fileRank != null) {
 			fileRank.setCreateDate(serviceContext.getCreateDate(null));
@@ -113,7 +111,7 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		}
 		else {
 			fileRank = addFileRank(
-				groupId, companyId, userId, folderId, name, serviceContext);
+				groupId, companyId, userId, fileEntryId, serviceContext);
 		}
 
 		if (dlFileRankPersistence.countByG_U(groupId, userId) > 5) {

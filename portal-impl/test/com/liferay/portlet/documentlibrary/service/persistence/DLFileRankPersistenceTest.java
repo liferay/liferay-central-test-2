@@ -69,8 +69,7 @@ public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
 		newDLFileRank.setCompanyId(nextLong());
 		newDLFileRank.setUserId(nextLong());
 		newDLFileRank.setCreateDate(nextDate());
-		newDLFileRank.setFolderId(nextLong());
-		newDLFileRank.setName(randomString());
+		newDLFileRank.setFileEntryId(nextLong());
 
 		_persistence.update(newDLFileRank, false);
 
@@ -84,9 +83,8 @@ public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingDLFileRank.getUserId(), newDLFileRank.getUserId());
 		assertEquals(Time.getShortTimestamp(existingDLFileRank.getCreateDate()),
 			Time.getShortTimestamp(newDLFileRank.getCreateDate()));
-		assertEquals(existingDLFileRank.getFolderId(),
-			newDLFileRank.getFolderId());
-		assertEquals(existingDLFileRank.getName(), newDLFileRank.getName());
+		assertEquals(existingDLFileRank.getFileEntryId(),
+			newDLFileRank.getFileEntryId());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -164,8 +162,7 @@ public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
 		dlFileRank.setCompanyId(nextLong());
 		dlFileRank.setUserId(nextLong());
 		dlFileRank.setCreateDate(nextDate());
-		dlFileRank.setFolderId(nextLong());
-		dlFileRank.setName(randomString());
+		dlFileRank.setFileEntryId(nextLong());
 
 		_persistence.update(dlFileRank, false);
 

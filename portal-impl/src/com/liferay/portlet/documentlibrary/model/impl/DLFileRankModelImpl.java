@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -64,10 +63,9 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "folderId", new Integer(Types.BIGINT) },
-			{ "name", new Integer(Types.VARCHAR) }
+			{ "fileEntryId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileRank (fileRankId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,folderId LONG,name VARCHAR(255) null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileRank (fileRankId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,fileEntryId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileRank";
 	public static final String ORDER_BY_JPQL = " ORDER BY dlFileRank.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY DLFileRank.createDate DESC";
@@ -166,43 +164,22 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 		_createDate = createDate;
 	}
 
-	public long getFolderId() {
-		return _folderId;
+	public long getFileEntryId() {
+		return _fileEntryId;
 	}
 
-	public void setFolderId(long folderId) {
-		_folderId = folderId;
+	public void setFileEntryId(long fileEntryId) {
+		_fileEntryId = fileEntryId;
 
-		if (!_setOriginalFolderId) {
-			_setOriginalFolderId = true;
+		if (!_setOriginalFileEntryId) {
+			_setOriginalFileEntryId = true;
 
-			_originalFolderId = folderId;
+			_originalFileEntryId = fileEntryId;
 		}
 	}
 
-	public long getOriginalFolderId() {
-		return _originalFolderId;
-	}
-
-	public String getName() {
-		if (_name == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _name;
-		}
-	}
-
-	public void setName(String name) {
-		_name = name;
-
-		if (_originalName == null) {
-			_originalName = name;
-		}
-	}
-
-	public String getOriginalName() {
-		return GetterUtil.getString(_originalName);
+	public long getOriginalFileEntryId() {
+		return _originalFileEntryId;
 	}
 
 	public DLFileRank toEscapedModel() {
@@ -237,8 +214,7 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setCreateDate(getCreateDate());
-		clone.setFolderId(getFolderId());
-		clone.setName(getName());
+		clone.setFileEntryId(getFileEntryId());
 
 		return clone;
 	}
@@ -286,7 +262,7 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{fileRankId=");
 		sb.append(getFileRankId());
@@ -298,17 +274,15 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 		sb.append(getUserId());
 		sb.append(", createDate=");
 		sb.append(getCreateDate());
-		sb.append(", folderId=");
-		sb.append(getFolderId());
-		sb.append(", name=");
-		sb.append(getName());
+		sb.append(", fileEntryId=");
+		sb.append(getFileEntryId());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.documentlibrary.model.DLFileRank");
@@ -335,12 +309,8 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>folderId</column-name><column-value><![CDATA[");
-		sb.append(getFolderId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append(getName());
+			"<column><column-name>fileEntryId</column-name><column-value><![CDATA[");
+		sb.append(getFileEntryId());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -358,10 +328,8 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
 	private Date _createDate;
-	private long _folderId;
-	private long _originalFolderId;
-	private boolean _setOriginalFolderId;
-	private String _name;
-	private String _originalName;
+	private long _fileEntryId;
+	private long _originalFileEntryId;
+	private boolean _setOriginalFileEntryId;
 	private transient ExpandoBridge _expandoBridge;
 }

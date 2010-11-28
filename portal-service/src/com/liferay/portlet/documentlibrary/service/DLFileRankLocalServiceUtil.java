@@ -231,12 +231,11 @@ public class DLFileRankLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank addFileRank(
-		long groupId, long companyId, long userId, long folderId,
-		java.lang.String name,
+		long groupId, long companyId, long userId, long fileEntryId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addFileRank(groupId, companyId, userId, folderId, name,
+				   .addFileRank(groupId, companyId, userId, fileEntryId,
 			serviceContext);
 	}
 
@@ -245,9 +244,9 @@ public class DLFileRankLocalServiceUtil {
 		getService().deleteFileRanks(userId);
 	}
 
-	public static void deleteFileRanks(long folderId, java.lang.String name)
+	public static void deleteFileRanksByFileEntryId(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteFileRanks(folderId, name);
+		getService().deleteFileRanksByFileEntryId(fileEntryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> getFileRanks(
@@ -263,12 +262,11 @@ public class DLFileRankLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank updateFileRank(
-		long groupId, long companyId, long userId, long folderId,
-		java.lang.String name,
+		long groupId, long companyId, long userId, long fileEntryId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateFileRank(groupId, companyId, userId, folderId, name,
+				   .updateFileRank(groupId, companyId, userId, fileEntryId,
 			serviceContext);
 	}
 

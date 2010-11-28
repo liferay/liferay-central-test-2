@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
-import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -145,33 +144,18 @@ public interface DLFileRankModel extends BaseModel<DLFileRank> {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the folder id of this d l file rank.
+	 * Gets the file entry id of this d l file rank.
 	 *
-	 * @return the folder id of this d l file rank
+	 * @return the file entry id of this d l file rank
 	 */
-	public long getFolderId();
+	public long getFileEntryId();
 
 	/**
-	 * Sets the folder id of this d l file rank.
+	 * Sets the file entry id of this d l file rank.
 	 *
-	 * @param folderId the folder id of this d l file rank
+	 * @param fileEntryId the file entry id of this d l file rank
 	 */
-	public void setFolderId(long folderId);
-
-	/**
-	 * Gets the name of this d l file rank.
-	 *
-	 * @return the name of this d l file rank
-	 */
-	@AutoEscape
-	public String getName();
-
-	/**
-	 * Sets the name of this d l file rank.
-	 *
-	 * @param name the name of this d l file rank
-	 */
-	public void setName(String name);
+	public void setFileEntryId(long fileEntryId);
 
 	public boolean isNew();
 

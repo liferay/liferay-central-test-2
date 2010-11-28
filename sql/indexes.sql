@@ -137,8 +137,8 @@ create index IX_D20C434D on DLFileEntry (groupId, userId, folderId);
 create index IX_64F0FE40 on DLFileEntry (uuid_);
 create unique index IX_BC2E7E6A on DLFileEntry (uuid_, groupId);
 
-create unique index IX_CE705D48 on DLFileRank (companyId, userId, folderId, name);
-create index IX_40B56512 on DLFileRank (folderId, name);
+create unique index IX_38F0315 on DLFileRank (companyId, userId, fileEntryId);
+create index IX_A65A1F8B on DLFileRank (fileEntryId);
 create index IX_BAFB116E on DLFileRank (groupId, userId);
 create index IX_EED06670 on DLFileRank (userId);
 

@@ -72,8 +72,8 @@ public class DLAppHelperLocalServiceImpl
 
 		// File ranks
 
-		dlFileRankLocalService.deleteFileRanks(
-			fileEntry.getFolderId(), fileEntry.getName());
+		dlFileRankLocalService.deleteFileRanksByFileEntryId(
+			fileEntry.getFileEntryId());
 
 		// File shortcuts
 
@@ -110,27 +110,23 @@ public class DLAppHelperLocalServiceImpl
 
 		long groupId = fileEntry.getGroupId();
 		long companyId = fileEntry.getCompanyId();
-		long folderId = fileEntry.getFolderId();
-		String name = fileEntry.getName();
+		long fileEntryId = fileEntry.getFileEntryId();
 
 		// File rank
 
 		if (userId > 0) {
 			dlFileRankLocalService.updateFileRank(
-				groupId, companyId, userId, folderId, name,
-				new ServiceContext());
+				groupId, companyId, userId, fileEntryId, new ServiceContext());
 		}
 
 		// File read count
 
 		if (PropsValues.DL_FILE_ENTRY_READ_COUNT_ENABLED) {
 			assetEntryLocalService.incrementViewCounter(
-				userId, DLFileEntry.class.getName(),
-				fileEntry.getFileEntryId());
+				userId, DLFileEntry.class.getName(), fileEntryId);
 
 			List<DLFileShortcut> fileShortcuts =
-				dlFileShortcutPersistence.findByToFileEntryId(
-					fileEntry.getFileEntryId());
+				dlFileShortcutPersistence.findByToFileEntryId(fileEntryId);
 
 			for (DLFileShortcut fileShortcut : fileShortcuts) {
 				assetEntryLocalService.incrementViewCounter(

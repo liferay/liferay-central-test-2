@@ -69,12 +69,12 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	}
 
 	public DLFileRank addFileRank(
-			long groupId, long companyId, long userId, long folderId,
-			String name, ServiceContext serviceContext)
+			long groupId, long companyId, long userId, long fileEntryId,
+			ServiceContext serviceContext)
 		throws SystemException {
 
 		return dlFileRankLocalService.addFileRank(
-			groupId, companyId, userId, folderId, name, serviceContext);
+			groupId, companyId, userId, fileEntryId, serviceContext);
 	}
 
 	public DLFileShortcut addFileShortcut(
@@ -126,10 +126,10 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		dlFileRankLocalService.deleteFileRanks(userId);
 	}
 
-	public void deleteFileRanks(long folderId, String name)
+	public void deleteFileRanksByFileEntryId(long fileEntryId)
 		throws SystemException {
 
-		dlFileRankLocalService.deleteFileRanks(folderId, name);
+		dlFileRankLocalService.deleteFileRanksByFileEntryId(fileEntryId);
 	}
 
 	public void deleteFileShortcut(DLFileShortcut fileShortcut)
@@ -573,12 +573,12 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	}
 
 	public DLFileRank updateFileRank(
-			long groupId, long companyId, long userId, long folderId,
-			String name, ServiceContext serviceContext)
+			long groupId, long companyId, long userId, long fileEntryId,
+			ServiceContext serviceContext)
 		throws SystemException {
 
 		return dlFileRankLocalService.updateFileRank(
-			groupId, companyId, userId, folderId, name, serviceContext);
+			groupId, companyId, userId, fileEntryId, serviceContext);
 	}
 
 	public DLFileShortcut updateFileShortcut(

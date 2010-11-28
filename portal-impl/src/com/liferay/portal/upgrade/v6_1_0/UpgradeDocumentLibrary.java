@@ -32,6 +32,7 @@ import java.sql.ResultSet;
 public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
+		updateFileRanks();
 		updateFileShortcuts();
 		updateFileVersions();
 	}
@@ -64,6 +65,36 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 
 		return fileEntryId;
+	}
+
+	protected void updateFileRanks() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select fileRankId, folderId, name from DLFileRank");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long fileRankId = rs.getLong("fileRankId");
+				long folderId = rs.getLong("folderId");
+				String name = rs.getString("name");
+
+				long fileEntryId = getFileEntryId(folderId, name);
+
+				runSQL(
+					"update DLFileRank set fileEntryId = '" + fileEntryId +
+						"' where fileRankId = " + fileRankId);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
 	}
 
 	protected void updateFileShortcuts() throws Exception {

@@ -117,8 +117,7 @@
 
 		<!-- Other fields -->
 
-		<column name="folderId" type="long" />
-		<column name="name" type="String" />
+		<column name="fileEntryId" type="long" />
 
 		<!-- Order -->
 
@@ -135,15 +134,13 @@
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
 		</finder>
-		<finder name="F_N" return-type="Collection">
-			<finder-column name="folderId" />
-			<finder-column name="name" />
+		<finder name="FileEntryId" return-type="Collection">
+			<finder-column name="fileEntryId" />
 		</finder>
-		<finder name="C_U_F_N" return-type="DLFileRank" unique="true">
+		<finder name="C_U_F" return-type="DLFileRank" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="userId" />
-			<finder-column name="folderId" />
-			<finder-column name="name" />
+			<finder-column name="fileEntryId" />
 		</finder>
 
 		<!-- References -->

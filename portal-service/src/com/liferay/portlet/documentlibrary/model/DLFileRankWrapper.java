@@ -157,39 +157,21 @@ public class DLFileRankWrapper implements DLFileRank {
 	}
 
 	/**
-	* Gets the folder id of this d l file rank.
+	* Gets the file entry id of this d l file rank.
 	*
-	* @return the folder id of this d l file rank
+	* @return the file entry id of this d l file rank
 	*/
-	public long getFolderId() {
-		return _dlFileRank.getFolderId();
+	public long getFileEntryId() {
+		return _dlFileRank.getFileEntryId();
 	}
 
 	/**
-	* Sets the folder id of this d l file rank.
+	* Sets the file entry id of this d l file rank.
 	*
-	* @param folderId the folder id of this d l file rank
+	* @param fileEntryId the file entry id of this d l file rank
 	*/
-	public void setFolderId(long folderId) {
-		_dlFileRank.setFolderId(folderId);
-	}
-
-	/**
-	* Gets the name of this d l file rank.
-	*
-	* @return the name of this d l file rank
-	*/
-	public java.lang.String getName() {
-		return _dlFileRank.getName();
-	}
-
-	/**
-	* Sets the name of this d l file rank.
-	*
-	* @param name the name of this d l file rank
-	*/
-	public void setName(java.lang.String name) {
-		_dlFileRank.setName(name);
+	public void setFileEntryId(long fileEntryId) {
+		_dlFileRank.setFileEntryId(fileEntryId);
 	}
 
 	public boolean isNew() {

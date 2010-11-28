@@ -171,8 +171,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			portletDataContext.addZipEntry(path, fileEntry);
 
 			if (portletDataContext.getBooleanParameter(_NAMESPACE, "ranks")) {
-				List<DLFileRank> fileRanks = DLFileRankUtil.findByF_N(
-					fileEntry.getFolderId(), fileEntry.getName());
+				List<DLFileRank> fileRanks = DLFileRankUtil.findByFileEntryId(
+					fileEntry.getFileEntryId());
 
 				for (DLFileRank fileRank : fileRanks) {
 					exportFileRank(
@@ -722,44 +722,20 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		long userId = portletDataContext.getUserId(rank.getUserUuid());
 
-		Map<Long, Long> folderPKs =
+		Map<Long, Long> fileEntryPKs =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				DLFolder.class);
+				DLFileEntry.class);
 
-		long folderId = MapUtil.getLong(
-			folderPKs, rank.getFolderId(), rank.getFolderId());
-
-		Map<String, String> fileEntryNames =
-			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
-				DLFileEntry.class.getName() + ".name");
-
-		String name = fileEntryNames.get(rank.getName());
-
-		if (name == null) {
-			name = rank.getName();
-		}
+		long fileEntryId = MapUtil.getLong(
+			fileEntryPKs, rank.getFileEntryId(), rank.getFileEntryId());
 
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setCreateDate(rank.getCreateDate());
 
-		if ((folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
-			(folderId == rank.getFolderId())) {
-
-			String path = getImportFolderPath(portletDataContext, folderId);
-
-			DLFolder folder = (DLFolder)portletDataContext.getZipEntryAsObject(
-				path);
-
-			importFolder(portletDataContext, folder);
-
-			folderId = MapUtil.getLong(
-				folderPKs, rank.getFolderId(), rank.getFolderId());
-		}
-
 		DLAppLocalServiceUtil.updateFileRank(
 			portletDataContext.getScopeGroupId(),
-			portletDataContext.getCompanyId(), userId, folderId, name,
+			portletDataContext.getCompanyId(), userId, fileEntryId,
 			serviceContext);
 	}
 

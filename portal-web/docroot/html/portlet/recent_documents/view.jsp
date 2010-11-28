@@ -32,7 +32,7 @@ List fileRanks = DLAppLocalServiceUtil.getFileRanks(scopeGroupId, user.getUserId
 			DLFileRank fileRank = (DLFileRank)fileRanks.get(i);
 
 			try {
-				DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(scopeGroupId, fileRank.getFolderId(), fileRank.getName());
+				DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(fileRank.getFileEntryId());
 
 				fileEntry = fileEntry.toEscapedModel();
 
@@ -41,8 +41,7 @@ List fileRanks = DLAppLocalServiceUtil.getFileRanks(scopeGroupId, user.getUserId
 				rowURL.setWindowState(LiferayWindowState.EXCLUSIVE);
 
 				rowURL.setParameter("struts_action", "/recent_documents/get_file");
-				rowURL.setParameter("folderId", String.valueOf(fileRank.getFolderId()));
-				rowURL.setParameter("name", HtmlUtil.unescape(fileRank.getName()));
+				rowURL.setParameter("fileEntryId", String.valueOf(fileRank.getFileEntryId()));
 		%>
 
 				<tr>

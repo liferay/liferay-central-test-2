@@ -411,8 +411,7 @@ create table DLFileRank (
 	companyId LONG,
 	userId LONG,
 	createDate DATE null,
-	folderId LONG,
-	name VARCHAR(255) null
+	fileEntryId LONG
 );
 
 create table DLFileShortcut (

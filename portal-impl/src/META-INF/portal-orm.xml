@@ -1476,8 +1476,7 @@
 			<basic name="createDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="folderId" />
-			<basic name="name" />
+			<basic name="fileEntryId" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
 		</attributes>
