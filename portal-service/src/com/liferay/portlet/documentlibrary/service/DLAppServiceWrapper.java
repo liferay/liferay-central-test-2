@@ -451,6 +451,12 @@ public class DLAppServiceWrapper implements DLAppService {
 		return _dlAppService.refreshFolderLock(lockUuid, expirationTime);
 	}
 
+	public void revertFileEntry(long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlAppService.revertFileEntry(fileEntryId);
+	}
+
 	public void unlockFileEntry(long groupId, long folderId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {

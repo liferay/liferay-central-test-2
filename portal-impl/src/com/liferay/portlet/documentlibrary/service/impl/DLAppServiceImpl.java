@@ -468,6 +468,12 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		return dlRepositoryService.refreshFolderLock(lockUuid, expirationTime);
 	}
 
+	public void revertFileEntry(long fileEntryId)
+		throws PortalException, SystemException {
+
+		dlRepositoryService.revertFileEntry(fileEntryId);
+	}
+
 	public void unlockFileEntry(long groupId, long folderId, String name)
 		throws SystemException {
 

@@ -455,6 +455,12 @@ public class DLRepositoryServiceUtil {
 		return getService().refreshFolderLock(lockUuid, expirationTime);
 	}
 
+	public static void revertFileEntry(long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().revertFileEntry(fileEntryId);
+	}
+
 	public static void unlockFileEntry(long groupId, long folderId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {

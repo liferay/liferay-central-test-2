@@ -694,6 +694,18 @@ public class DLAppServiceSoap {
 		}
 	}
 
+	public static void revertFileEntry(long fileEntryId)
+		throws RemoteException {
+		try {
+			DLAppServiceUtil.revertFileEntry(fileEntryId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void unlockFileEntry(long groupId, long folderId,
 		java.lang.String name) throws RemoteException {
 		try {

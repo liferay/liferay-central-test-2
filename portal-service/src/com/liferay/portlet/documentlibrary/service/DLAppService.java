@@ -362,6 +362,10 @@ public interface DLAppService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public void revertFileEntry(long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public void unlockFileEntry(long groupId, long folderId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException;

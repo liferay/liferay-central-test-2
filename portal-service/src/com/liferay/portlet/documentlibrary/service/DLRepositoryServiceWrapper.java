@@ -436,6 +436,12 @@ public class DLRepositoryServiceWrapper implements DLRepositoryService {
 		return _dlRepositoryService.refreshFolderLock(lockUuid, expirationTime);
 	}
 
+	public void revertFileEntry(long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlRepositoryService.revertFileEntry(fileEntryId);
+	}
+
 	public void unlockFileEntry(long groupId, long folderId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {
