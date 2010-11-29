@@ -118,7 +118,9 @@ public class UpgradeLayout extends UpgradeProcess {
 
 				rs = ps.executeQuery();
 
-				rs.next();
+				if(!rs.next()) {
+					return;
+				}
 			}
 
 			String uuid = rs.getString("uuid_");
