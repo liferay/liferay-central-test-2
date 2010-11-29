@@ -15,11 +15,8 @@
 package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
@@ -38,33 +35,11 @@ public class ActionUtil {
 	public static void getFileEntry(HttpServletRequest request)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		long groupId = ParamUtil.getLong(
-			request, "groupId", themeDisplay.getScopeGroupId());
 		long fileEntryId = ParamUtil.getLong(request, "fileEntryId");
-		long folderId = ParamUtil.getLong(request, "folderId");
-		long newFolderId = ParamUtil.getLong(request, "newFolderId");
-		String name = ParamUtil.getString(request, "name");
 
 		DLFileEntry fileEntry = null;
 
-		if (Validator.isNotNull(name)) {
-			try {
-				fileEntry = DLAppServiceUtil.getFileEntry(
-					groupId, folderId, name);
-			}
-			catch (NoSuchFileEntryException nsfe) {
-
-				// This only happens when you're moving a file to a different
-				// folder
-
-				fileEntry = DLAppServiceUtil.getFileEntry(
-					groupId, newFolderId, name);
-			}
-		}
-		else if (fileEntryId > 0) {
+		if (fileEntryId > 0) {
 			fileEntry = DLAppServiceUtil.getFileEntry(fileEntryId);
 		}
 

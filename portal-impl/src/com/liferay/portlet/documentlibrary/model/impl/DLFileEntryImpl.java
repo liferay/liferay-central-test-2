@@ -143,10 +143,8 @@ public class DLFileEntryImpl
 
 	public Lock getLock() {
 		try {
-			String lockId = Long.toString(getFileEntryId());
-
 			return LockLocalServiceUtil.getLock(
-				DLFileEntry.class.getName(), lockId);
+				DLFileEntry.class.getName(), getFileEntryId());
 		}
 		catch (Exception e) {
 		}
@@ -185,10 +183,8 @@ public class DLFileEntryImpl
 
 	public boolean hasLock(long userId) {
 		try {
-			String lockId = Long.toString(getFileEntryId());
-
 			return LockLocalServiceUtil.hasLock(
-				userId, DLFileEntry.class.getName(), lockId);
+				userId, DLFileEntry.class.getName(), getFileEntryId());
 		}
 		catch (Exception e) {
 		}
@@ -198,10 +194,8 @@ public class DLFileEntryImpl
 
 	public boolean isLocked() {
 		try {
-			String lockId = Long.toString(getFileEntryId());
-
 			return LockLocalServiceUtil.isLocked(
-				DLFileEntry.class.getName(), lockId);
+				DLFileEntry.class.getName(), getFileEntryId());
 		}
 		catch (Exception e) {
 		}

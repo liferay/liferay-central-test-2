@@ -46,16 +46,6 @@ public class DLFileEntryPermission {
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, long groupId, long folderId,
-			String name, String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, groupId, folderId, name, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public static void check(
 			PermissionChecker permissionChecker, long fileEntryId,
 			String actionId)
 		throws PortalException, SystemException {
@@ -119,17 +109,6 @@ public class DLFileEntryPermission {
 		return permissionChecker.hasPermission(
 			fileEntry.getGroupId(), DLFileEntry.class.getName(),
 			fileEntry.getFileEntryId(), actionId);
-	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, long groupId, long folderId,
-			String name, String actionId)
-		throws PortalException, SystemException {
-
-		DLFileEntry fileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
-			groupId, folderId, name);
-
-		return contains(permissionChecker, fileEntry, actionId);
 	}
 
 	public static boolean contains(
