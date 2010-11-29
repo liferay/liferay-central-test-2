@@ -934,6 +934,25 @@ ${exception.message}
 		<ant dir=".." target="deploy-properties" inheritAll="false" />
 	</target>
 
+	<target name="format-fast">
+		<copy todir="classes" overwrite="true">
+			<fileset dir="src" includes="com/liferay/portal/tools/dependencies/*.properties" />
+		</copy>
+
+		<java
+			classname="com.liferay.portal.tools.SourceFormatter"
+			classpathref="project.classpath"
+			dir="${project.dir}"
+			fork="true"
+			newenvironment="true"
+		>
+			<jvmarg value="-Xmx256m" />
+			<arg value="fast" />
+		</java>
+
+		<delete file="ServiceBuilder.temp" />
+	</target>
+
 	<target name="format-source">
 		<copy todir="classes" overwrite="true">
 			<fileset dir="src" includes="com/liferay/portal/tools/dependencies/*.properties" />
