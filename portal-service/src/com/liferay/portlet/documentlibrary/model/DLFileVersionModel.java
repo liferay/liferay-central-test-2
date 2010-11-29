@@ -74,6 +74,20 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 	public void setFileVersionId(long fileVersionId);
 
 	/**
+	 * Gets the group id of this d l file version.
+	 *
+	 * @return the group id of this d l file version
+	 */
+	public long getGroupId();
+
+	/**
+	 * Sets the group id of this d l file version.
+	 *
+	 * @param groupId the group id of this d l file version
+	 */
+	public void setGroupId(long groupId);
+
+	/**
 	 * Gets the company id of this d l file version.
 	 *
 	 * @return the company id of this d l file version

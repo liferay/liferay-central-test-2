@@ -35,6 +35,7 @@ public class DLFileVersionSoap implements Serializable {
 		DLFileVersionSoap soapModel = new DLFileVersionSoap();
 
 		soapModel.setFileVersionId(model.getFileVersionId());
+		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
@@ -109,6 +110,14 @@ public class DLFileVersionSoap implements Serializable {
 
 	public void setFileVersionId(long fileVersionId) {
 		_fileVersionId = fileVersionId;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -240,6 +249,7 @@ public class DLFileVersionSoap implements Serializable {
 	}
 
 	private long _fileVersionId;
+	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;

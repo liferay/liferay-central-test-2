@@ -65,6 +65,24 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
+	* Gets the group id of this d l file version.
+	*
+	* @return the group id of this d l file version
+	*/
+	public long getGroupId() {
+		return _dlFileVersion.getGroupId();
+	}
+
+	/**
+	* Sets the group id of this d l file version.
+	*
+	* @param groupId the group id of this d l file version
+	*/
+	public void setGroupId(long groupId) {
+		_dlFileVersion.setGroupId(groupId);
+	}
+
+	/**
 	* Gets the company id of this d l file version.
 	*
 	* @return the company id of this d l file version

@@ -353,6 +353,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		dlFileVersionImpl.setPrimaryKey(dlFileVersion.getPrimaryKey());
 
 		dlFileVersionImpl.setFileVersionId(dlFileVersion.getFileVersionId());
+		dlFileVersionImpl.setGroupId(dlFileVersion.getGroupId());
 		dlFileVersionImpl.setCompanyId(dlFileVersion.getCompanyId());
 		dlFileVersionImpl.setUserId(dlFileVersion.getUserId());
 		dlFileVersionImpl.setUserName(dlFileVersion.getUserName());

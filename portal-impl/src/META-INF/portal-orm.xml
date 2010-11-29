@@ -1513,6 +1513,7 @@
 	<mapped-superclass class="com.liferay.portlet.documentlibrary.model.impl.DLFileVersionModelImpl">
 		<attributes>
 			<id name="fileVersionId" />
+			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
 			<basic name="userName" />
