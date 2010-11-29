@@ -67,14 +67,14 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		return fileRank;
 	}
 
-	public void deleteFileRanks(long userId) throws SystemException {
-		dlFileRankPersistence.removeByUserId(userId);
-	}
-
 	public void deleteFileRanksByFileEntryId(long fileEntryId)
 		throws SystemException {
 
 		dlFileRankPersistence.removeByFileEntryId(fileEntryId);
+	}
+
+	public void deleteFileRanksByUserId(long userId) throws SystemException {
+		dlFileRankPersistence.removeByUserId(userId);
 	}
 
 	public List<DLFileRank> getFileRanks(long groupId, long userId)

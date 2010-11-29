@@ -1080,7 +1080,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Document library
 
-		dlFileRankLocalService.deleteFileRanks(userId);
+		dlFileRankLocalService.deleteFileRanksByUserId(userId);
 
 		// Expando
 

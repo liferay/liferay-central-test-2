@@ -108,25 +108,24 @@ public class DLAppHelperLocalServiceImpl
 	public void getFileAsStream(long userId, DLFileEntry fileEntry)
 		throws PortalException, SystemException {
 
-		long groupId = fileEntry.getGroupId();
-		long companyId = fileEntry.getCompanyId();
-		long fileEntryId = fileEntry.getFileEntryId();
-
 		// File rank
 
 		if (userId > 0) {
 			dlFileRankLocalService.updateFileRank(
-				groupId, companyId, userId, fileEntryId, new ServiceContext());
+				fileEntry.getGroupId(), fileEntry.getCompanyId(), userId,
+				fileEntry.getFileEntryId(), new ServiceContext());
 		}
 
 		// File read count
 
 		if (PropsValues.DL_FILE_ENTRY_READ_COUNT_ENABLED) {
 			assetEntryLocalService.incrementViewCounter(
-				userId, DLFileEntry.class.getName(), fileEntryId);
+				userId, DLFileEntry.class.getName(),
+				fileEntry.getFileEntryId());
 
 			List<DLFileShortcut> fileShortcuts =
-				dlFileShortcutPersistence.findByToFileEntryId(fileEntryId);
+				dlFileShortcutPersistence.findByToFileEntryId(
+				fileEntry.getFileEntryId());
 
 			for (DLFileShortcut fileShortcut : fileShortcuts) {
 				assetEntryLocalService.incrementViewCounter(

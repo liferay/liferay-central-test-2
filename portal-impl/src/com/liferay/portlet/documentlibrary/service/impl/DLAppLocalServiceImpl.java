@@ -122,14 +122,14 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			groupId, folderId, name, version);
 	}
 
-	public void deleteFileRanks(long userId) throws SystemException {
-		dlFileRankLocalService.deleteFileRanks(userId);
-	}
-
 	public void deleteFileRanksByFileEntryId(long fileEntryId)
 		throws SystemException {
 
 		dlFileRankLocalService.deleteFileRanksByFileEntryId(fileEntryId);
+	}
+
+	public void deleteFileRanksByUserId(long userId) throws SystemException {
+		dlFileRankLocalService.deleteFileRanksByUserId(userId);
 	}
 
 	public void deleteFileShortcut(DLFileShortcut fileShortcut)

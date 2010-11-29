@@ -122,8 +122,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				long toFileEntryId = getFileEntryId(toFolderId, toName);
 
 				runSQL(
-					"update DLFileShortcut set toFileEntryId = '" +
-						toFileEntryId + "' where fileShortcutId = " +
+					"update DLFileShortcut set toFileEntryId = " +
+						toFileEntryId + " where fileShortcutId = " +
 							fileShortcutId);
 			}
 		}

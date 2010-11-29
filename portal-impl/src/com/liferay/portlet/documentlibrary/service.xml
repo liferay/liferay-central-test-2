@@ -130,12 +130,12 @@
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
+		<finder name="FileEntryId" return-type="Collection">
+			<finder-column name="fileEntryId" />
+		</finder>
 		<finder name="G_U" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
-		</finder>
-		<finder name="FileEntryId" return-type="Collection">
-			<finder-column name="fileEntryId" />
 		</finder>
 		<finder name="C_U_F" return-type="DLFileRank" unique="true">
 			<finder-column name="companyId" />
