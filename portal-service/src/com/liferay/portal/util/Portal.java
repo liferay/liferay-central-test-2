@@ -145,6 +145,8 @@ public interface Portal {
 
 	public String generateRandomKey(HttpServletRequest request, String input);
 
+	public Set<String> getAuthTokenIgnorePortlets();
+
 	public BaseModel<?> getBaseModel(Resource resource)
 		throws PortalException, SystemException;
 

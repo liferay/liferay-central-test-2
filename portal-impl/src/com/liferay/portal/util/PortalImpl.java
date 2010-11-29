@@ -434,6 +434,11 @@ public class PortalImpl implements Portal {
 
 		Arrays.sort(_sortedSystemOrganizationRoles, new StringComparator());
 
+		// Authentication token ignore portlets check white list
+
+		_authTokenIgnorePortlets = SetUtil.fromArray(
+			PropsValues.AUTH_TOKEN_IGNORE_PORTLETS);
+
 		// Portlet add default resource check white list
 
 		_portletAddDefaultResourceCheckWhitelist = SetUtil.fromArray(
@@ -746,6 +751,10 @@ public class PortalImpl implements Portal {
 		else {
 			return DeterminateKeyGenerator.generate(input);
 		}
+	}
+
+	public Set<String> getAuthTokenIgnorePortlets() {
+		return _authTokenIgnorePortlets;
 	}
 
 	public BaseModel<?> getBaseModel(Resource resource)
@@ -4656,6 +4665,7 @@ public class PortalImpl implements Portal {
 	private String[] _allSystemGroups;
 	private String[] _allSystemOrganizationRoles;
 	private String[] _allSystemRoles;
+	private Set<String> _authTokenIgnorePortlets;
 	private Pattern _bannedResourceIdPattern = Pattern.compile(
 		PropsValues.PORTLET_RESOURCE_ID_BANNED_PATHS_REGEXP,
 		Pattern.CASE_INSENSITIVE);

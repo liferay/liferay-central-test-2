@@ -658,6 +658,13 @@ public class PortletURLImpl
 			return;
 		}
 
+		Set<String> authTokenIgnorePortlets =
+			PortalUtil.getAuthTokenIgnorePortlets();
+
+		if (authTokenIgnorePortlets.contains(_portletId)) {
+			return;
+		}
+
 		sb.append("p_auth");
 		sb.append(StringPool.EQUAL);
 		sb.append(processValue(key, AuthTokenUtil.getToken(_request)));

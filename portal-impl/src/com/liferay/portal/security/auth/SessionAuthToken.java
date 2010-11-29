@@ -41,10 +41,13 @@ public class SessionAuthToken implements AuthToken {
 	public SessionAuthToken() {
 		_ignoreActions = SetUtil.fromArray(
 			PropsUtil.getArray(PropsKeys.AUTH_TOKEN_IGNORE_ACTIONS));
+		_ignorePortlets = SetUtil.fromArray(
+			PropsUtil.getArray(
+				PropsKeys.AUTH_TOKEN_IGNORE_PORTLETS));
 	}
 
 	public void check(HttpServletRequest request) throws PrincipalException {
-		if (isIgnoreAction(request)) {
+		if (isIgnoreAction(request) || isIgnorePortlet(request)) {
 			return;
 		}
 
@@ -132,8 +135,19 @@ public class SessionAuthToken implements AuthToken {
 		return _ignoreActions.contains(strutsAction);
 	}
 
+	protected boolean isIgnorePortlet(HttpServletRequest request) {
+		String ppid = ParamUtil.getString(request, "p_p_id");
+
+		return isIgnorePortlet(ppid);
+	}
+
+	protected boolean isIgnorePortlet(String portletId) {
+		return _ignorePortlets.contains(portletId);
+	}
+
 	private static final String _PORTAL = "PORTAL";
 
 	private Set<String> _ignoreActions;
+	private Set<String> _ignorePortlets;
 
 }
