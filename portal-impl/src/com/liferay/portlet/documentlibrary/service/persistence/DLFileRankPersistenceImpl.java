@@ -85,6 +85,18 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileRankModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByUserId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_FILEENTRYID = new FinderPath(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileRankModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByFileEntryId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_FILEENTRYID = new FinderPath(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileRankModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByFileEntryId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_G_U = new FinderPath(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileRankModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_U",
@@ -98,18 +110,6 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			DLFileRankModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByG_U",
 			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_FILEENTRYID = new FinderPath(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,
-			DLFileRankModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByFileEntryId",
-			new String[] {
-				Long.class.getName(),
-				
-			"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_FILEENTRYID = new FinderPath(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,
-			DLFileRankModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByFileEntryId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FETCH_BY_C_U_F = new FinderPath(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileRankModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
 			"fetchByC_U_F",
@@ -798,6 +798,347 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	}
 
 	/**
+	 * Finds all the d l file ranks where fileEntryId = &#63;.
+	 *
+	 * @param fileEntryId the file entry id to search with
+	 * @return the matching d l file ranks
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<DLFileRank> findByFileEntryId(long fileEntryId)
+		throws SystemException {
+		return findByFileEntryId(fileEntryId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Finds a range of all the d l file ranks where fileEntryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param fileEntryId the file entry id to search with
+	 * @param start the lower bound of the range of d l file ranks to return
+	 * @param end the upper bound of the range of d l file ranks to return (not inclusive)
+	 * @return the range of matching d l file ranks
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<DLFileRank> findByFileEntryId(long fileEntryId, int start,
+		int end) throws SystemException {
+		return findByFileEntryId(fileEntryId, start, end, null);
+	}
+
+	/**
+	 * Finds an ordered range of all the d l file ranks where fileEntryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param fileEntryId the file entry id to search with
+	 * @param start the lower bound of the range of d l file ranks to return
+	 * @param end the upper bound of the range of d l file ranks to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching d l file ranks
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<DLFileRank> findByFileEntryId(long fileEntryId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				fileEntryId,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<DLFileRank> list = (List<DLFileRank>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_FILEENTRYID,
+				finderArgs, this);
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_DLFILERANK_WHERE);
+
+			query.append(_FINDER_COLUMN_FILEENTRYID_FILEENTRYID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(DLFileRankModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(fileEntryId);
+
+				list = (List<DLFileRank>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_FILEENTRYID,
+						finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_FILEENTRYID,
+						finderArgs, list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Finds the first d l file rank in the ordered set where fileEntryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param fileEntryId the file entry id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching d l file rank
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileRankException if a matching d l file rank could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLFileRank findByFileEntryId_First(long fileEntryId,
+		OrderByComparator orderByComparator)
+		throws NoSuchFileRankException, SystemException {
+		List<DLFileRank> list = findByFileEntryId(fileEntryId, 0, 1,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("fileEntryId=");
+			msg.append(fileEntryId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchFileRankException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the last d l file rank in the ordered set where fileEntryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param fileEntryId the file entry id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching d l file rank
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileRankException if a matching d l file rank could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLFileRank findByFileEntryId_Last(long fileEntryId,
+		OrderByComparator orderByComparator)
+		throws NoSuchFileRankException, SystemException {
+		int count = countByFileEntryId(fileEntryId);
+
+		List<DLFileRank> list = findByFileEntryId(fileEntryId, count - 1,
+				count, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("fileEntryId=");
+			msg.append(fileEntryId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchFileRankException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the d l file ranks before and after the current d l file rank in the ordered set where fileEntryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param fileRankId the primary key of the current d l file rank
+	 * @param fileEntryId the file entry id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next d l file rank
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileRankException if a d l file rank with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLFileRank[] findByFileEntryId_PrevAndNext(long fileRankId,
+		long fileEntryId, OrderByComparator orderByComparator)
+		throws NoSuchFileRankException, SystemException {
+		DLFileRank dlFileRank = findByPrimaryKey(fileRankId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			DLFileRank[] array = new DLFileRankImpl[3];
+
+			array[0] = getByFileEntryId_PrevAndNext(session, dlFileRank,
+					fileEntryId, orderByComparator, true);
+
+			array[1] = dlFileRank;
+
+			array[2] = getByFileEntryId_PrevAndNext(session, dlFileRank,
+					fileEntryId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected DLFileRank getByFileEntryId_PrevAndNext(Session session,
+		DLFileRank dlFileRank, long fileEntryId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_DLFILERANK_WHERE);
+
+		query.append(_FINDER_COLUMN_FILEENTRYID_FILEENTRYID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		else {
+			query.append(DLFileRankModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(fileEntryId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(dlFileRank);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<DLFileRank> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Finds all the d l file ranks where groupId = &#63; and userId = &#63;.
 	 *
 	 * @param groupId the group id to search with
@@ -1159,347 +1500,6 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	}
 
 	/**
-	 * Finds all the d l file ranks where fileEntryId = &#63;.
-	 *
-	 * @param fileEntryId the file entry id to search with
-	 * @return the matching d l file ranks
-	 * @throws SystemException if a system exception occurred
-	 */
-	public List<DLFileRank> findByFileEntryId(long fileEntryId)
-		throws SystemException {
-		return findByFileEntryId(fileEntryId, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
-	}
-
-	/**
-	 * Finds a range of all the d l file ranks where fileEntryId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param fileEntryId the file entry id to search with
-	 * @param start the lower bound of the range of d l file ranks to return
-	 * @param end the upper bound of the range of d l file ranks to return (not inclusive)
-	 * @return the range of matching d l file ranks
-	 * @throws SystemException if a system exception occurred
-	 */
-	public List<DLFileRank> findByFileEntryId(long fileEntryId, int start,
-		int end) throws SystemException {
-		return findByFileEntryId(fileEntryId, start, end, null);
-	}
-
-	/**
-	 * Finds an ordered range of all the d l file ranks where fileEntryId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param fileEntryId the file entry id to search with
-	 * @param start the lower bound of the range of d l file ranks to return
-	 * @param end the upper bound of the range of d l file ranks to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
-	 * @return the ordered range of matching d l file ranks
-	 * @throws SystemException if a system exception occurred
-	 */
-	public List<DLFileRank> findByFileEntryId(long fileEntryId, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				fileEntryId,
-				
-				String.valueOf(start), String.valueOf(end),
-				String.valueOf(orderByComparator)
-			};
-
-		List<DLFileRank> list = (List<DLFileRank>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_FILEENTRYID,
-				finderArgs, this);
-
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_DLFILERANK_WHERE);
-
-			query.append(_FINDER_COLUMN_FILEENTRYID_FILEENTRYID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(DLFileRankModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(fileEntryId);
-
-				list = (List<DLFileRank>)QueryUtil.list(q, getDialect(), start,
-						end);
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_FILEENTRYID,
-						finderArgs);
-				}
-				else {
-					cacheResult(list);
-
-					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_FILEENTRYID,
-						finderArgs, list);
-				}
-
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Finds the first d l file rank in the ordered set where fileEntryId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param fileEntryId the file entry id to search with
-	 * @param orderByComparator the comparator to order the set by
-	 * @return the first matching d l file rank
-	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileRankException if a matching d l file rank could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DLFileRank findByFileEntryId_First(long fileEntryId,
-		OrderByComparator orderByComparator)
-		throws NoSuchFileRankException, SystemException {
-		List<DLFileRank> list = findByFileEntryId(fileEntryId, 0, 1,
-				orderByComparator);
-
-		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(4);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("fileEntryId=");
-			msg.append(fileEntryId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchFileRankException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	/**
-	 * Finds the last d l file rank in the ordered set where fileEntryId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param fileEntryId the file entry id to search with
-	 * @param orderByComparator the comparator to order the set by
-	 * @return the last matching d l file rank
-	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileRankException if a matching d l file rank could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DLFileRank findByFileEntryId_Last(long fileEntryId,
-		OrderByComparator orderByComparator)
-		throws NoSuchFileRankException, SystemException {
-		int count = countByFileEntryId(fileEntryId);
-
-		List<DLFileRank> list = findByFileEntryId(fileEntryId, count - 1,
-				count, orderByComparator);
-
-		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(4);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("fileEntryId=");
-			msg.append(fileEntryId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchFileRankException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	/**
-	 * Finds the d l file ranks before and after the current d l file rank in the ordered set where fileEntryId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param fileRankId the primary key of the current d l file rank
-	 * @param fileEntryId the file entry id to search with
-	 * @param orderByComparator the comparator to order the set by
-	 * @return the previous, current, and next d l file rank
-	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileRankException if a d l file rank with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DLFileRank[] findByFileEntryId_PrevAndNext(long fileRankId,
-		long fileEntryId, OrderByComparator orderByComparator)
-		throws NoSuchFileRankException, SystemException {
-		DLFileRank dlFileRank = findByPrimaryKey(fileRankId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			DLFileRank[] array = new DLFileRankImpl[3];
-
-			array[0] = getByFileEntryId_PrevAndNext(session, dlFileRank,
-					fileEntryId, orderByComparator, true);
-
-			array[1] = dlFileRank;
-
-			array[2] = getByFileEntryId_PrevAndNext(session, dlFileRank,
-					fileEntryId, orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected DLFileRank getByFileEntryId_PrevAndNext(Session session,
-		DLFileRank dlFileRank, long fileEntryId,
-		OrderByComparator orderByComparator, boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(6 +
-					(orderByComparator.getOrderByFields().length * 6));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		query.append(_SQL_SELECT_DLFILERANK_WHERE);
-
-		query.append(_FINDER_COLUMN_FILEENTRYID_FILEENTRYID_2);
-
-		if (orderByComparator != null) {
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			if (orderByFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-
-		else {
-			query.append(DLFileRankModelImpl.ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(fileEntryId);
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByValues(dlFileRank);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<DLFileRank> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
 	 * Finds the d l file rank where companyId = &#63; and userId = &#63; and fileEntryId = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileRankException} if it could not be found.
 	 *
 	 * @param companyId the company id to search with
@@ -1772,6 +1772,18 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	}
 
 	/**
+	 * Removes all the d l file ranks where fileEntryId = &#63; from the database.
+	 *
+	 * @param fileEntryId the file entry id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByFileEntryId(long fileEntryId) throws SystemException {
+		for (DLFileRank dlFileRank : findByFileEntryId(fileEntryId)) {
+			remove(dlFileRank);
+		}
+	}
+
+	/**
 	 * Removes all the d l file ranks where groupId = &#63; and userId = &#63; from the database.
 	 *
 	 * @param groupId the group id to search with
@@ -1781,18 +1793,6 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	public void removeByG_U(long groupId, long userId)
 		throws SystemException {
 		for (DLFileRank dlFileRank : findByG_U(groupId, userId)) {
-			remove(dlFileRank);
-		}
-	}
-
-	/**
-	 * Removes all the d l file ranks where fileEntryId = &#63; from the database.
-	 *
-	 * @param fileEntryId the file entry id to search with
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void removeByFileEntryId(long fileEntryId) throws SystemException {
-		for (DLFileRank dlFileRank : findByFileEntryId(fileEntryId)) {
 			remove(dlFileRank);
 		}
 	}
@@ -1877,6 +1877,59 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	}
 
 	/**
+	 * Counts all the d l file ranks where fileEntryId = &#63;.
+	 *
+	 * @param fileEntryId the file entry id to search with
+	 * @return the number of matching d l file ranks
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByFileEntryId(long fileEntryId) throws SystemException {
+		Object[] finderArgs = new Object[] { fileEntryId };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_FILEENTRYID,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_DLFILERANK_WHERE);
+
+			query.append(_FINDER_COLUMN_FILEENTRYID_FILEENTRYID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(fileEntryId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_FILEENTRYID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
 	 * Counts all the d l file ranks where groupId = &#63; and userId = &#63;.
 	 *
 	 * @param groupId the group id to search with
@@ -1926,59 +1979,6 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U, finderArgs,
 					count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	/**
-	 * Counts all the d l file ranks where fileEntryId = &#63;.
-	 *
-	 * @param fileEntryId the file entry id to search with
-	 * @return the number of matching d l file ranks
-	 * @throws SystemException if a system exception occurred
-	 */
-	public int countByFileEntryId(long fileEntryId) throws SystemException {
-		Object[] finderArgs = new Object[] { fileEntryId };
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_FILEENTRYID,
-				finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(2);
-
-			query.append(_SQL_COUNT_DLFILERANK_WHERE);
-
-			query.append(_FINDER_COLUMN_FILEENTRYID_FILEENTRYID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(fileEntryId);
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_FILEENTRYID,
-					finderArgs, count);
 
 				closeSession(session);
 			}
@@ -2143,9 +2143,9 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	private static final String _SQL_COUNT_DLFILERANK = "SELECT COUNT(dlFileRank) FROM DLFileRank dlFileRank";
 	private static final String _SQL_COUNT_DLFILERANK_WHERE = "SELECT COUNT(dlFileRank) FROM DLFileRank dlFileRank WHERE ";
 	private static final String _FINDER_COLUMN_USERID_USERID_2 = "dlFileRank.userId = ?";
+	private static final String _FINDER_COLUMN_FILEENTRYID_FILEENTRYID_2 = "dlFileRank.fileEntryId = ?";
 	private static final String _FINDER_COLUMN_G_U_GROUPID_2 = "dlFileRank.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_U_USERID_2 = "dlFileRank.userId = ?";
-	private static final String _FINDER_COLUMN_FILEENTRYID_FILEENTRYID_2 = "dlFileRank.fileEntryId = ?";
 	private static final String _FINDER_COLUMN_C_U_F_COMPANYID_2 = "dlFileRank.companyId = ? AND ";
 	private static final String _FINDER_COLUMN_C_U_F_USERID_2 = "dlFileRank.userId = ? AND ";
 	private static final String _FINDER_COLUMN_C_U_F_FILEENTRYID_2 = "dlFileRank.fileEntryId = ?";

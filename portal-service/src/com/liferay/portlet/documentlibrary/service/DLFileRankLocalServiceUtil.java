@@ -239,14 +239,14 @@ public class DLFileRankLocalServiceUtil {
 			serviceContext);
 	}
 
-	public static void deleteFileRanks(long userId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteFileRanks(userId);
-	}
-
 	public static void deleteFileRanksByFileEntryId(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteFileRanksByFileEntryId(fileEntryId);
+	}
+
+	public static void deleteFileRanksByUserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteFileRanksByUserId(userId);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> getFileRanks(

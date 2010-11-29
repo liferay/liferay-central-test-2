@@ -104,10 +104,10 @@ public interface DLAppLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteFileRanks(long userId)
+	public void deleteFileRanksByFileEntryId(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteFileRanksByFileEntryId(long fileEntryId)
+	public void deleteFileRanksByUserId(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteFileShortcut(
