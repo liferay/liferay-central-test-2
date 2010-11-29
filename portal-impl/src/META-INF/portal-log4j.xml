@@ -992,6 +992,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="portal-web.docroot.errors.404.jsp">
+		<priority value="WARN" />
+	</category>
+
 	<root>
 		<priority value="INFO" />
 		<appender-ref ref="CONSOLE" />
