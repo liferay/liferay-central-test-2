@@ -48,7 +48,7 @@ public abstract class BaseAsyncDestination extends BaseDestination {
 	public BaseAsyncDestination(
 		String name, int workersCoreSize, int workersMaxSize) {
 
-		super.name = name;
+		this.name = name;
 		_workersCoreSize = workersCoreSize;
 		_workersMaxSize = workersMaxSize;
 
@@ -67,9 +67,9 @@ public abstract class BaseAsyncDestination extends BaseDestination {
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"The following " + pendingTasks.size() + " tasks "
-						+ "were not executed due to shutown: "
-						+ pendingTasks);
+						"The following " + pendingTasks.size() + " tasks " +
+							"were not executed due to shutown: " +
+								pendingTasks);
 				}
 			}
 		}
@@ -141,8 +141,8 @@ public abstract class BaseAsyncDestination extends BaseDestination {
 
 		if (threadPoolExecutor.isShutdown()) {
 			throw new IllegalStateException(
-				"Destination " + getName() + " is shutdown and cannot "
-				+ "receive more messages");
+				"Destination " + getName() + " is shutdown and cannot " +
+					"receive more messages");
 		}
 
 		dispatch(messageListeners, message);
@@ -178,10 +178,12 @@ public abstract class BaseAsyncDestination extends BaseDestination {
 
 				MessageRunnable messageRunnable = (MessageRunnable) runnable;
 
-				_log.warn("Discarding message " + messageRunnable.getMessage()
-					+ " because it exceeds the maximum queue size of "
-					+ _maximumQueueSize);
+				_log.warn(
+					"Discarding message " + messageRunnable.getMessage() +
+						" because it exceeds the maximum queue size of " +
+							_maximumQueueSize);
 			}
+
 		};
 	}
 
@@ -192,12 +194,12 @@ public abstract class BaseAsyncDestination extends BaseDestination {
 		return _threadPoolExecutor;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		BaseAsyncDestination.class);
-
 	private static final int _WORKERS_CORE_SIZE = 2;
 
 	private static final int _WORKERS_MAX_SIZE = 5;
+
+	private static Log _log = LogFactoryUtil.getLog(
+		BaseAsyncDestination.class);
 
 	private int _maximumQueueSize = Integer.MAX_VALUE;
 	private RejectedExecutionHandler _rejectedExecutionHandler;

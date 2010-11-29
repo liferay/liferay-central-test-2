@@ -24,6 +24,15 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class SynchronousDestination extends BaseDestination {
 
+	public DestinationStatistics getDestinationStatistics() {
+		DestinationStatistics destinationStatistics =
+			new DestinationStatistics();
+
+		destinationStatistics.setSentMessageCount(_sentMessageCounter.get());
+
+		return destinationStatistics;
+	}
+
 	public void send(Message message) {
 		for (MessageListener messageListener : messageListeners) {
 			try {
@@ -35,15 +44,6 @@ public class SynchronousDestination extends BaseDestination {
 		}
 
 		_sentMessageCounter.incrementAndGet();
-	}
-
-	public DestinationStatistics getDestinationStatistics() {
-		DestinationStatistics destinationStatistics =
-			new DestinationStatistics();
-
-		destinationStatistics.setSentMessageCount(_sentMessageCounter.get());
-
-		return destinationStatistics;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
