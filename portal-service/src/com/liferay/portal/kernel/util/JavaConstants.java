@@ -43,6 +43,12 @@ public interface JavaConstants {
 
 	public static final String JAVAX_PORTLET_TITLE = "javax.portlet.title";
 
+	public static final String JAVAX_SERVLET_ERROR_EXCEPTION =
+		"javax.servlet.error.exception";
+
+	public static final String JAVAX_SERVLET_ERROR_MESSAGE =
+		"javax.servlet.error.message";
+
 	public static final String JAVAX_SERVLET_FORWARD_CONTEXT_PATH =
 		"javax.servlet.forward.context_path";
 

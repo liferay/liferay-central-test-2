@@ -17,6 +17,7 @@
 <%@ page import="com.liferay.portal.kernel.log.Log" %>
 <%@ page import="com.liferay.portal.kernel.log.LogFactoryUtil" %>
 <%@ page import="com.liferay.portal.kernel.servlet.HttpHeaders" %>
+<%@ page import="com.liferay.portal.kernel.util.JavaConstants" %>
 <%@ page import="com.liferay.portal.model.LayoutSet" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 <%@ page import="com.liferay.portal.util.WebKeys" %>
@@ -49,10 +50,10 @@ response.setHeader(HttpHeaders.CONNECTION, HttpHeaders.CONNECTION_CLOSE_VALUE);
 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 
 if (_log.isWarnEnabled()) {
-	_log.warn(
-			request.getAttribute("javax.servlet.error.message"),
-			(Throwable)request.getAttribute("javax.servlet.error.exception")
-	);
+	Object msg = request.getAttribute(JavaConstants.JAVAX_SERVLET_ERROR_MESSAGE);
+	Throwable t = (Throwable)request.getAttribute(JavaConstants.JAVAX_SERVLET_ERROR_EXCEPTION;
+
+	_log.warn(msg, t);
 }
 %>
 
@@ -79,4 +80,6 @@ information on why this is necessary.
 
 </html>
 
-<%! private static Log _log = LogFactoryUtil.getLog("jsp.errors.404"); %>
+<%!
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.errors.404.jsp");
+%>
