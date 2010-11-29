@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -238,18 +237,6 @@ public class DLUtil {
 
 	public static String getGenericName(String extension) {
 		return _instance._getGenericName(extension);
-	}
-
-	public static String getLockId(long groupId, long folderId, String name) {
-		StringBundler sb = new StringBundler(5);
-
-		sb.append(groupId);
-		sb.append(StringPool.POUND);
-		sb.append(folderId);
-		sb.append(StringPool.POUND);
-		sb.append(name);
-
-		return sb.toString();
 	}
 
 	private DLUtil() {
