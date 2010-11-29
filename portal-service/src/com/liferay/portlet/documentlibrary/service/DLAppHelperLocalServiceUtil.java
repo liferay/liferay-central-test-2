@@ -103,14 +103,10 @@ public class DLAppHelperLocalServiceUtil {
 		return getService().getNoAssetFileEntries();
 	}
 
-	public static void moveFileEntry(long userId, long groupId, long folderId,
-		long newFolderId, long oldFileEntryId, long newFileEntryId,
-		java.lang.String name)
+	public static void moveFileEntry(long oldFileEntryId, long newFileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.moveFileEntry(userId, groupId, folderId, newFolderId,
-			oldFileEntryId, newFileEntryId, name);
+		getService().moveFileEntry(oldFileEntryId, newFileEntryId);
 	}
 
 	public static void updateAsset(long userId,

@@ -58,7 +58,7 @@ Boolean isLocked = Boolean.FALSE;
 Boolean hasLock = Boolean.FALSE;
 
 try {
-	lock = LockLocalServiceUtil.getLock(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getGroupId(), fileEntry.getFolderId(), fileEntry.getName()));
+	lock = LockLocalServiceUtil.getLock(DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 	isLocked = Boolean.TRUE;
 

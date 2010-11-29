@@ -56,15 +56,15 @@ import java.rmi.RemoteException;
  */
 public class DLRepositoryServiceSoap {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap addFileEntry(
-		long groupId, long folderId, java.lang.String name,
-		java.lang.String title, java.lang.String description,
-		java.lang.String changeLog, java.lang.String extraSettings,
-		byte[] bytes, com.liferay.portal.service.ServiceContext serviceContext)
+		long groupId, long folderId, java.lang.String title,
+		java.lang.String description, java.lang.String changeLog,
+		java.lang.String extraSettings, byte[] bytes,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLRepositoryServiceUtil.addFileEntry(groupId,
-					folderId, name, title, description, changeLog,
-					extraSettings, bytes, serviceContext);
+					folderId, title, description, changeLog, extraSettings,
+					bytes, serviceContext);
 
 			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
 		}
@@ -112,10 +112,10 @@ public class DLRepositoryServiceSoap {
 		}
 	}
 
-	public static void deleteFileEntry(long groupId, long folderId,
-		java.lang.String name) throws RemoteException {
+	public static void deleteFileEntry(long fileEntryId)
+		throws RemoteException {
 		try {
-			DLRepositoryServiceUtil.deleteFileEntry(groupId, folderId, name);
+			DLRepositoryServiceUtil.deleteFileEntry(fileEntryId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -124,12 +124,10 @@ public class DLRepositoryServiceSoap {
 		}
 	}
 
-	public static void deleteFileEntry(long groupId, long folderId,
-		java.lang.String name, java.lang.String version)
-		throws RemoteException {
+	public static void deleteFileEntry(long fileEntryId,
+		java.lang.String version) throws RemoteException {
 		try {
-			DLRepositoryServiceUtil.deleteFileEntry(groupId, folderId, name,
-				version);
+			DLRepositoryServiceUtil.deleteFileEntry(fileEntryId, version);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -273,22 +271,6 @@ public class DLRepositoryServiceSoap {
 		long fileEntryId) throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLRepositoryServiceUtil.getFileEntry(fileEntryId);
-
-			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap getFileEntry(
-		long groupId, long folderId, java.lang.String name)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLRepositoryServiceUtil.getFileEntry(groupId,
-					folderId, name);
 
 			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
 		}
@@ -608,11 +590,10 @@ public class DLRepositoryServiceSoap {
 		}
 	}
 
-	public static boolean hasFileEntryLock(long groupId, long folderId,
-		java.lang.String name) throws RemoteException {
+	public static boolean hasFileEntryLock(long fileEntryId)
+		throws RemoteException {
 		try {
-			boolean returnValue = DLRepositoryServiceUtil.hasFileEntryLock(groupId,
-					folderId, name);
+			boolean returnValue = DLRepositoryServiceUtil.hasFileEntryLock(fileEntryId);
 
 			return returnValue;
 		}
@@ -638,12 +619,12 @@ public class DLRepositoryServiceSoap {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap moveFileEntry(
-		long groupId, long folderId, long newFolderId, java.lang.String name,
+		long fileEntryId, long newFolderId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLRepositoryServiceUtil.moveFileEntry(groupId,
-					folderId, newFolderId, name, serviceContext);
+			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLRepositoryServiceUtil.moveFileEntry(fileEntryId,
+					newFolderId, serviceContext);
 
 			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
 		}
@@ -666,10 +647,10 @@ public class DLRepositoryServiceSoap {
 		}
 	}
 
-	public static void unlockFileEntry(long groupId, long folderId,
-		java.lang.String name) throws RemoteException {
+	public static void unlockFileEntry(long fileEntryId)
+		throws RemoteException {
 		try {
-			DLRepositoryServiceUtil.unlockFileEntry(groupId, folderId, name);
+			DLRepositoryServiceUtil.unlockFileEntry(fileEntryId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -678,12 +659,10 @@ public class DLRepositoryServiceSoap {
 		}
 	}
 
-	public static void unlockFileEntry(long groupId, long folderId,
-		java.lang.String name, java.lang.String lockUuid)
-		throws RemoteException {
+	public static void unlockFileEntry(long fileEntryId,
+		java.lang.String lockUuid) throws RemoteException {
 		try {
-			DLRepositoryServiceUtil.unlockFileEntry(groupId, folderId, name,
-				lockUuid);
+			DLRepositoryServiceUtil.unlockFileEntry(fileEntryId, lockUuid);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -719,17 +698,16 @@ public class DLRepositoryServiceSoap {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap updateFileEntry(
-		long groupId, long folderId, java.lang.String name,
-		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String changeLog,
-		boolean majorVersion, java.lang.String extraSettings, byte[] bytes,
+		long fileEntryId, java.lang.String sourceFileName,
+		java.lang.String title, java.lang.String description,
+		java.lang.String changeLog, boolean majorVersion,
+		java.lang.String extraSettings, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLRepositoryServiceUtil.updateFileEntry(groupId,
-					folderId, name, sourceFileName, title, description,
-					changeLog, majorVersion, extraSettings, bytes,
-					serviceContext);
+			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLRepositoryServiceUtil.updateFileEntry(fileEntryId,
+					sourceFileName, title, description, changeLog,
+					majorVersion, extraSettings, bytes, serviceContext);
 
 			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
 		}
@@ -774,12 +752,11 @@ public class DLRepositoryServiceSoap {
 		}
 	}
 
-	public static boolean verifyFileEntryLock(long groupId, long folderId,
-		java.lang.String name, java.lang.String lockUuid)
-		throws RemoteException {
+	public static boolean verifyFileEntryLock(long fileEntryId,
+		java.lang.String lockUuid) throws RemoteException {
 		try {
-			boolean returnValue = DLRepositoryServiceUtil.verifyFileEntryLock(groupId,
-					folderId, name, lockUuid);
+			boolean returnValue = DLRepositoryServiceUtil.verifyFileEntryLock(fileEntryId,
+					lockUuid);
 
 			return returnValue;
 		}

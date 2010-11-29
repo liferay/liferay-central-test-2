@@ -93,9 +93,7 @@ public interface DLAppHelperLocalService {
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getNoAssetFileEntries()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void moveFileEntry(long userId, long groupId, long folderId,
-		long newFolderId, long oldFileEntryId, long newFileEntryId,
-		java.lang.String name)
+	public void moveFileEntry(long oldFileEntryId, long newFileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

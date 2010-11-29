@@ -36,35 +36,35 @@ import java.util.List;
 public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 
 	public DLFileEntry addFileEntry(
-			long userId, long groupId, long folderId, String name, String title,
+			long userId, long groupId, long folderId, String title,
 			String description, String changeLog, String extraSettings,
 			byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return dlRepositoryLocalService.addFileEntry(
-			userId, groupId, folderId, name, title, description, changeLog,
+			userId, groupId, folderId, title, description, changeLog,
 			extraSettings, bytes, serviceContext);
 	}
 
 	public DLFileEntry addFileEntry(
-			long userId, long groupId, long folderId, String name, String title,
+			long userId, long groupId, long folderId, String title,
 			String description, String changeLog, String extraSettings,
 			File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return dlRepositoryLocalService.addFileEntry(
-			userId, groupId, folderId, name, title, description, changeLog,
+			userId, groupId, folderId, title, description, changeLog,
 			extraSettings, file, serviceContext);
 	}
 
 	public DLFileEntry addFileEntry(
-			long userId, long groupId, long folderId, String name, String title,
+			long userId, long groupId, long folderId, String title,
 			String description, String changeLog, String extraSettings,
 			InputStream is, long size, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return dlRepositoryLocalService.addFileEntry(
-			userId, groupId, folderId, name, title, description, changeLog,
+			userId, groupId, folderId, title, description, changeLog,
 			extraSettings, is, size, serviceContext);
 	}
 
@@ -107,19 +107,16 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		dlRepositoryLocalService.deleteFileEntry(fileEntry);
 	}
 
-	public void deleteFileEntry(
-			long groupId, long folderId, String name)
+	public void deleteFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 
-		dlRepositoryLocalService.deleteFileEntry(groupId, folderId, name);
+		dlRepositoryLocalService.deleteFileEntry(fileEntryId);
 	}
 
-	public void deleteFileEntry(
-			long groupId, long folderId, String name, String version)
+	public void deleteFileEntry(long fileEntryId, String version)
 		throws PortalException, SystemException {
 
-		dlRepositoryLocalService.deleteFileEntry(
-			groupId, folderId, name, version);
+		dlRepositoryLocalService.deleteFileEntry(fileEntryId, version);
 	}
 
 	public void deleteFileRanksByFileEntryId(long fileEntryId)
@@ -176,7 +173,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			companyId, start, end);
 	}
 
-	public java.util.List<DLFileEntry> getCompanyFileEntries(
+	public List<DLFileEntry> getCompanyFileEntries(
 			long companyId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -213,22 +210,18 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		return dlRepositoryLocalService.getDLFileEntriesCount();
 	}
 
-	public InputStream getFileAsStream(
-			long companyId, long userId, long groupId, long folderId,
-			String name)
+	public InputStream getFileAsStream(long userId, long fileEntryId)
 		throws PortalException, SystemException {
 
-		return dlRepositoryLocalService.getFileAsStream(
-			companyId, userId, groupId, folderId, name);
+		return dlRepositoryLocalService.getFileAsStream(userId, fileEntryId);
 	}
 
 	public InputStream getFileAsStream(
-			long companyId, long userId, long groupId, long folderId,
-			String name, String version)
+			long userId, long fileEntryId, String version)
 		throws PortalException, SystemException {
 
 		return dlRepositoryLocalService.getFileAsStream(
-			companyId, userId, groupId, folderId, name, version);
+			userId, fileEntryId, version);
 	}
 
 	public List<DLFileEntry> getFileEntries(long groupId, long folderId)
@@ -296,12 +289,6 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return dlRepositoryLocalService.getFileEntry(fileEntryId);
-	}
-
-	public DLFileEntry getFileEntry(long groupId, long folderId, String name)
-		throws PortalException, SystemException {
-
-		return dlRepositoryLocalService.getFileEntry(groupId, folderId, name);
 	}
 
 	public DLFileEntry getFileEntryByTitle(
@@ -505,12 +492,12 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	}
 
 	public DLFileEntry moveFileEntry(
-			long userId, long groupId, long folderId, long newFolderId,
-			String name, ServiceContext serviceContext)
+			long userId, long fileEntryId, long newFolderId,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return dlRepositoryLocalService.moveFileEntry(
-			userId, groupId, folderId, newFolderId, name, serviceContext);
+			userId, fileEntryId, newFolderId, serviceContext);
 	}
 
 	public void updateAsset(
@@ -532,38 +519,36 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	}
 
 	public DLFileEntry updateFileEntry(
-			long userId, long groupId, long folderId, String name,
-			String sourceFileName, String title, String description,
-			String changeLog, boolean majorVersion, String extraSettings,
-			byte[] bytes, ServiceContext serviceContext)
+			long userId, long fileEntryId, String sourceFileName, String title,
+			String description, String changeLog, boolean majorVersion,
+			String extraSettings, byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return dlRepositoryLocalService.updateFileEntry(
-			userId, groupId, folderId, name, sourceFileName, title, description,
-			changeLog, majorVersion, extraSettings, bytes, serviceContext);
+			userId, fileEntryId, sourceFileName, title, description, changeLog,
+			majorVersion, extraSettings, bytes, serviceContext);
 	}
 
 	public DLFileEntry updateFileEntry(
-			long userId, long groupId, long folderId, String name,
-			String sourceFileName, String title, String description,
-			String changeLog, boolean majorVersion, String extraSettings,
-			File file, ServiceContext serviceContext)
+			long userId, long fileEntryId, String sourceFileName, String title,
+			String description, String changeLog, boolean majorVersion,
+			String extraSettings, File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return dlRepositoryLocalService.updateFileEntry(
-			userId, groupId, folderId, name, sourceFileName, title, description,
-			changeLog, majorVersion, extraSettings, file, serviceContext);
+			userId, fileEntryId, sourceFileName, title, description, changeLog,
+			majorVersion, extraSettings, file, serviceContext);
 	}
 
 	public DLFileEntry updateFileEntry(
-			long userId, long groupId, long folderId, String name,
-			String sourceFileName, String title, String description,
-			String changeLog, boolean majorVersion, String extraSettings,
-			InputStream is, long size, ServiceContext serviceContext)
+			long userId, long fileEntryId, String sourceFileName, String title,
+			String description, String changeLog, boolean majorVersion,
+			String extraSettings, InputStream is, long size,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return dlRepositoryLocalService.updateFileEntry(
-			userId, groupId, folderId, name, sourceFileName, title, description,
+			userId, fileEntryId, sourceFileName, title, description,
 			changeLog, majorVersion, extraSettings, is, size, serviceContext);
 	}
 

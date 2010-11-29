@@ -68,8 +68,7 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 	public void tearDown() throws Exception {
 		if (_fileEntry != null) {
 			DLAppServiceUtil.deleteFileEntry(
-				_fileEntry.getGroupId(), _fileEntry.getFolderId(),
-				_fileEntry.getName());
+				_fileEntry.getFileEntryId());
 		}
 
 		if (_folder != null) {
@@ -134,8 +133,8 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		serviceContext.setAddGuestPermissions(true);
 
 		_fileEntry = DLAppServiceUtil.addFileEntry(
-			groupId, folderId, fileName, fileName, description, changeLog,
-			extraSettings, bytes, serviceContext);
+			groupId, folderId, fileName, description, changeLog, extraSettings,
+			bytes, serviceContext);
 	}
 
 	protected void search(boolean rootFolder, String keywords)

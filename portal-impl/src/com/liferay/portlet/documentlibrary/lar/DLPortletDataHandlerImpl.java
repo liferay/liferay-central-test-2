@@ -104,10 +104,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			fileEntry.setUserUuid(fileEntry.getUserUuid());
 
 			portletDataContext.addLocks(
-				DLFileEntry.class,
-				DLUtil.getLockId(
-					fileEntry.getGroupId(), fileEntry.getFolderId(),
-					fileEntry.getName()));
+				DLFileEntry.class, Long.toString(fileEntry.getFileEntryId()));
 
 			portletDataContext.addPermissions(
 				DLFileEntry.class, fileEntry.getFileEntryId());
@@ -266,17 +263,18 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		DLFileEntry importedFileEntry = null;
 
-		String nameWithExtension =
-			fileEntry.getName().concat(StringPool.PERIOD).concat(
-				fileEntry.getExtension());
+		String titleWithExtension = fileEntry.getTitle();
+		String extension = fileEntry.getExtension();
+
+		if (!titleWithExtension.endsWith(StringPool.PERIOD + extension)) {
+			titleWithExtension += StringPool.PERIOD + extension;
+		}
 
 		if (portletDataContext.isDataStrategyMirror()) {
 			DLFileEntry existingFileEntry = DLFileEntryUtil.fetchByUUID_G(
 				fileEntry.getUuid(), portletDataContext.getScopeGroupId());
 
 			if (existingFileEntry == null) {
-				String fileEntryTitle = fileEntry.getTitle();
-
 				DLFileEntry existingTitleFileEntry =
 					DLFileEntryUtil.fetchByG_F_T(
 						portletDataContext.getScopeGroupId(), folderId,
@@ -290,16 +288,24 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 							existingTitleFileEntry);
 					}
 					else {
-						String originalTitle = 	fileEntryTitle;
+						String originalTitle = fileEntry.getTitle();
+						String dotExtension = StringPool.PERIOD + extension;
+
+						if (originalTitle.endsWith(dotExtension)) {
+							int end = originalTitle.lastIndexOf(dotExtension);
+
+							originalTitle = originalTitle.substring(0, end);
+						}
 
 						for (int i = 1;; i++) {
-							fileEntryTitle =
-								originalTitle + StringPool.SPACE + i;
+							titleWithExtension =
+								originalTitle + StringPool.SPACE + i +
+									dotExtension;
 
 							existingTitleFileEntry =
 								DLFileEntryUtil.findByG_F_T(
 									portletDataContext.getScopeGroupId(),
-									folderId, fileEntryTitle);
+									folderId, titleWithExtension);
 
 							if (existingTitleFileEntry == null) {
 								break;
@@ -312,18 +318,16 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				importedFileEntry = DLAppLocalServiceUtil.addFileEntry(
 					userId, portletDataContext.getScopeGroupId(), folderId,
-					nameWithExtension, fileEntryTitle,
-					fileEntry.getDescription(), null,
+					titleWithExtension, fileEntry.getDescription(), null,
 					fileEntry.getExtraSettings(), is, fileEntry.getSize(),
 					serviceContext);
 			}
 			else if (!isDuplicateFileEntry(fileEntry, existingFileEntry)) {
 				importedFileEntry = DLAppLocalServiceUtil.updateFileEntry(
-					userId, portletDataContext.getScopeGroupId(),
-					existingFileEntry.getFolderId(),
-					existingFileEntry.getName(), fileEntry.getTitle(),
-					fileEntry.getTitle(), fileEntry.getDescription(), null,
-					true, fileEntry.getExtraSettings(), is, fileEntry.getSize(),
+					userId, existingFileEntry.getFileEntryId(),
+					fileEntry.getTitle(), fileEntry.getTitle(),
+					fileEntry.getDescription(), null, true,
+					fileEntry.getExtraSettings(), is, fileEntry.getSize(),
 					serviceContext);
 			}
 			else {
@@ -344,16 +348,16 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 		else {
-			String title = fileEntry.getTitle();
-
 			try {
 				importedFileEntry = DLAppLocalServiceUtil.addFileEntry(
 					userId, portletDataContext.getScopeGroupId(), folderId,
-					nameWithExtension, title, fileEntry.getDescription(), null,
+					titleWithExtension, fileEntry.getDescription(), null,
 					fileEntry.getExtraSettings(), is, fileEntry.getSize(),
 					serviceContext);
 			}
 			catch (DuplicateFileException dfe) {
+				String title = fileEntry.getTitle();
+
 				String[] titleParts = title.split("\\.", 2);
 
 				title = titleParts[0] + PwdGenerator.getPassword();
@@ -362,9 +366,13 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 					title += StringPool.PERIOD + titleParts[1];
 				}
 
+				if (!title.endsWith(StringPool.PERIOD + extension)) {
+					title += StringPool.PERIOD + extension;
+				}
+
 				importedFileEntry = DLAppLocalServiceUtil.addFileEntry(
 					userId, portletDataContext.getScopeGroupId(), folderId,
-					nameWithExtension, title, fileEntry.getDescription(), null,
+					title, fileEntry.getDescription(), null,
 					fileEntry.getExtraSettings(), is, fileEntry.getSize(),
 					serviceContext);
 			}
@@ -383,13 +391,9 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		fileEntryNames.put(fileEntry.getName(), importedFileEntry.getName());
 
-		String lockKey = DLUtil.getLockId(
-			fileEntry.getGroupId(), fileEntry.getFolderId(),
-			fileEntry.getName());
+		String lockKey = Long.toString(fileEntry.getFileEntryId());
 
-		String newLockKey = DLUtil.getLockId(
-			importedFileEntry.getGroupId(), importedFileEntry.getFolderId(),
-			importedFileEntry.getName());
+		String newLockKey = Long.toString(importedFileEntry.getFileEntryId());
 
 		portletDataContext.importLocks(DLFileEntry.class, lockKey, newLockKey);
 

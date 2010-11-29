@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.asset.service.impl;
 
-import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -56,8 +55,6 @@ import com.liferay.portlet.asset.util.AssetEntryValidator;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -710,31 +707,11 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			return assetEntryPersistence.findByC_C(classNameId, classPK);
 		}
 		else if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
-			long repositoryId = GetterUtil.getLong(doc.get("repositoryId"));
-			String name = doc.get("path");
-
-			long groupId = 0;
-			long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
-
-			try {
-				groupPersistence.findByPrimaryKey(repositoryId);
-
-				groupId = repositoryId;
-			}
-			catch (NoSuchGroupException nsge) {
-				DLFolder folder = dlFolderPersistence.findByPrimaryKey(
-					repositoryId);
-
-				groupId = folder.getGroupId();
-				folderId = folder.getFolderId();
-			}
-
-			DLFileEntry fileEntry = dlAppLocalService.getFileEntry(
-				groupId, folderId, name);
+			long entryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 
 			long classNameId = PortalUtil.getClassNameId(
 				DLFileEntry.class.getName());
-			long classPK = fileEntry.getFileEntryId();
+			long classPK = entryId;
 
 			return assetEntryPersistence.findByC_C(classNameId, classPK);
 		}

@@ -107,7 +107,7 @@ public class DLIndexer extends BaseIndexer {
 				fileEntry = DLAppLocalServiceUtil.getFileEntry(fileEntryId);
 			}
 			else {
-				fileEntry = DLAppLocalServiceUtil.getFileEntry(
+				fileEntry = DLAppLocalServiceUtil.getFileEntryByTitle(
 					scopeGroupId, folderId, fileName);
 			}
 		}

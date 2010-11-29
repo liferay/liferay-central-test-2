@@ -80,7 +80,6 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 				group.getGroupId(), arg.getCurrentFolder());
 
 			long folderId = folder.getFolderId();
-			String name = fileName;
 			String title = fileName;
 			String description = StringPool.BLANK;
 			String changeLog = StringPool.BLANK;
@@ -92,7 +91,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			serviceContext.setAddGuestPermissions(true);
 
 			DLAppServiceUtil.addFileEntry(
-				group.getGroupId(), folderId, name, title, description,
+				group.getGroupId(), folderId, title, description,
 				changeLog, extraSettings, file, serviceContext);
 		}
 		catch (Exception e) {

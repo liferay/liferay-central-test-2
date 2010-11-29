@@ -55,8 +55,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 	public Lock getLock() {
 		try {
 			return DLAppServiceUtil.getFileEntryLock(
-				_fileEntry.getGroupId(), _fileEntry.getFolderId(),
-				_fileEntry.getName());
+				_fileEntry.getFileEntryId());
 		}
 		catch (Exception e) {
 		}
@@ -67,8 +66,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 	public boolean isLocked() {
 		try {
 			return DLAppServiceUtil.hasFileEntryLock(
-				_fileEntry.getGroupId(), _fileEntry.getFolderId(),
-				_fileEntry.getName());
+				_fileEntry.getFileEntryId());
 		}
 		catch (Exception e) {
 		}
@@ -94,8 +92,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 			}
 
 			return DLAppServiceUtil.getFileAsStream(
-				_fileEntry.getGroupId(), _fileEntry.getFolderId(),
-				_fileEntry.getName(), version);
+				_fileEntry.getFileEntryId(), version);
 		}
 		catch (Exception e) {
 			throw new WebDAVException(e);

@@ -180,9 +180,7 @@ public class DLAppHelperLocalServiceImpl
 		return null;
 	}
 
-	public void moveFileEntry(
-			long userId, long groupId, long folderId, long newFolderId,
-			long oldFileEntryId, long newFileEntryId, String name)
+	public void moveFileEntry(long oldFileEntryId, long newFileEntryId)
 		throws PortalException, SystemException {
 
 		// File shortcuts

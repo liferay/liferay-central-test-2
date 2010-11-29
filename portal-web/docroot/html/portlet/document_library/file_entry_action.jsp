@@ -87,8 +87,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 				<portlet:renderURL var="editURL">
 					<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="folderId" value="<%= String.valueOf(fileEntry.getFolderId()) %>" />
-					<portlet:param name="name" value="<%= HtmlUtil.unescape(fileEntry.getName()) %>" />
+					<portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntry.getFileEntryId()) %>" />
 				</portlet:renderURL>
 
 				<liferay-ui:icon
@@ -101,8 +100,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 				<portlet:renderURL var="moveURL">
 					<portlet:param name="struts_action" value="/document_library/move_file_entry" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="folderId" value="<%= String.valueOf(fileEntry.getFolderId()) %>" />
-					<portlet:param name="name" value="<%= HtmlUtil.unescape(fileEntry.getName()) %>" />
+					<portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntry.getFileEntryId()) %>" />
 				</portlet:renderURL>
 
 				<liferay-ui:icon
@@ -135,8 +133,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 					<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 					<portlet:param name="redirect" value="<%= viewFolderURL.toString() %>" />
-					<portlet:param name="folderId" value="<%= String.valueOf(fileEntry.getFolderId()) %>" />
-					<portlet:param name="name" value="<%= HtmlUtil.unescape(fileEntry.getName()) %>" />
+					<portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntry.getFileEntryId()) %>" />
 				</portlet:actionURL>
 
 				<liferay-ui:icon-delete

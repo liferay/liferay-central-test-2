@@ -292,9 +292,6 @@ public class WebServerServlet extends HttpServlet {
 			throw new NoSuchFileEntryException();
 		}
 
-		long groupId = dlFileEntry.getGroupId();
-		long dlFolderId = dlFileEntry.getFolderId();
-		String name = dlFileEntry.getName();
 		String fileName = dlFileEntry.getTitle();
 
 		String version = ParamUtil.getString(request, "version");
@@ -325,7 +322,7 @@ public class WebServerServlet extends HttpServlet {
 		}
 
 		InputStream inputStream = DLAppServiceUtil.getFileAsStream(
-			groupId, dlFolderId, name, version);
+			dlFileEntry.getFileEntryId(), version);
 
 		boolean converted = false;
 
@@ -382,7 +379,7 @@ public class WebServerServlet extends HttpServlet {
 			dlFileEntry.getTitle());
 
 		InputStream inputStream = DLAppServiceUtil.getFileAsStream(
-			groupId, folderId, dlFileEntry.getName());
+			dlFileEntry.getFileEntryId());
 
 		response.setContentType(contentType);
 

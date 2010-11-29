@@ -23,8 +23,10 @@ import com.liferay.portal.kernel.servlet.ServletResponseConstants;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -177,39 +179,27 @@ public class EditFileEntryAction extends PortletAction {
 	protected void deleteFileEntry(ActionRequest actionRequest)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		long groupId = themeDisplay.getScopeGroupId();
-		long folderId = ParamUtil.getLong(actionRequest, "folderId");
-		String name = ParamUtil.getString(actionRequest, "name");
+		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
 		String version = ParamUtil.getString(actionRequest, "version");
 
-		DLAppServiceUtil.deleteFileEntry(groupId, folderId, name, version);
+		DLAppServiceUtil.deleteFileEntry(fileEntryId, version);
 	}
 
 	protected void lockFileEntry(ActionRequest actionRequest) throws Exception {
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		long folderId = ParamUtil.getLong(actionRequest, "folderId");
-		String name = ParamUtil.getString(actionRequest, "name");
+		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
 
-		DLAppServiceUtil.lockFileEntry(groupId, folderId, name);
+		DLAppServiceUtil.lockFileEntry(fileEntryId);
 	}
 
 	protected void moveFileEntry(ActionRequest actionRequest) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		long groupId = themeDisplay.getScopeGroupId();
-		long folderId = ParamUtil.getLong(actionRequest, "folderId");
+		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
 		long newFolderId = ParamUtil.getLong(actionRequest, "newFolderId");
-		String name = ParamUtil.getString(actionRequest, "name");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLFileEntry.class.getName(), actionRequest);
 
 		DLAppServiceUtil.moveFileEntry(
-			groupId, folderId, newFolderId, name, serviceContext);
+			fileEntryId, newFolderId, serviceContext);
 	}
 
 	protected void revertFileEntry(ActionRequest actionRequest)
@@ -223,11 +213,9 @@ public class EditFileEntryAction extends PortletAction {
 	protected void unlockFileEntry(ActionRequest actionRequest)
 		throws Exception {
 
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		long folderId = ParamUtil.getLong(actionRequest, "folderId");
-		String name = ParamUtil.getString(actionRequest, "name");
+		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
 
-		DLAppServiceUtil.unlockFileEntry(groupId, folderId, name);
+		DLAppServiceUtil.unlockFileEntry(fileEntryId);
 	}
 
 	protected void updateFileEntry(
@@ -242,9 +230,9 @@ public class EditFileEntryAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		long fileEntryId = ParamUtil.getLong(uploadRequest, "fileEntryId");
 		long groupId = themeDisplay.getScopeGroupId();
 		long folderId = ParamUtil.getLong(uploadRequest, "folderId");
-		String name = ParamUtil.getString(uploadRequest, "name");
 		String sourceFileName = uploadRequest.getFileName("file");
 
 		String title = ParamUtil.getString(uploadRequest, "title");
@@ -271,11 +259,24 @@ public class EditFileEntryAction extends PortletAction {
 
 		if (cmd.equals(Constants.ADD)) {
 
+			// Get title with extension
+
+			String extension = FileUtil.getExtension(sourceFileName);
+
+			if (Validator.isNotNull(title)) {
+				if (!title.endsWith(StringPool.PERIOD + extension)) {
+					title += StringPool.PERIOD + extension;
+				}
+			}
+			else {
+				title = sourceFileName;
+			}
+
 			// Add file entry
 
 			DLFileEntry fileEntry = DLAppServiceUtil.addFileEntry(
-				groupId, folderId, sourceFileName, title, description,
-				changeLog, extraSettings, file, serviceContext);
+				groupId, folderId, title, description, changeLog,
+				extraSettings, file, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, DLFileEntry.class.getName(),
@@ -286,7 +287,7 @@ public class EditFileEntryAction extends PortletAction {
 			// Update file entry
 
 			DLAppServiceUtil.updateFileEntry(
-				groupId, folderId, name, sourceFileName, title, description,
+				fileEntryId, sourceFileName, title, description,
 				changeLog, majorVersion, extraSettings, file,
 				serviceContext);
 		}

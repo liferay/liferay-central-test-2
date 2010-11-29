@@ -96,9 +96,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 		DLFileEntry fileEntry = getFileEntry(sharepointRequest);
 
-		return DLAppServiceUtil.getFileAsStream(
-			fileEntry.getGroupId(), fileEntry.getFolderId(),
-			fileEntry.getName());
+		return DLAppServiceUtil.getFileAsStream(fileEntry.getFileEntryId());
 	}
 
 	public Tree getDocumentTree(SharepointRequest sharepointRequest)
@@ -243,15 +241,14 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		ServiceContext serviceContext = new ServiceContext();
 
 		if (fileEntry != null) {
+			long fileEntryId = fileEntry.getFileEntryId();
 			long folderId = fileEntry.getFolderId();
-			String name = fileEntry.getName();
 			String description = fileEntry.getDescription();
 			String changeLog = StringPool.BLANK;
 			String extraSettings = fileEntry.getExtraSettings();
 
 			InputStream is = DLAppServiceUtil.getFileAsStream(
-				fileEntry.getGroupId(), fileEntry.getFolderId(),
-				fileEntry.getName());
+				fileEntry.getFileEntryId());
 
 			byte[] bytes = FileUtil.getBytes(is);
 
@@ -261,12 +258,12 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			serviceContext.setAssetTagNames(assetTagNames);
 
 			fileEntry = DLAppServiceUtil.updateFileEntry(
-				groupId, folderId, name, newName, newName, description,
+				fileEntryId, newName, newName, description,
 				changeLog, false, extraSettings, bytes, serviceContext);
 
 			if (folderId != newParentFolderId) {
 				fileEntry = DLAppServiceUtil.moveFileEntry(
-					groupId, folderId, newParentFolderId, name, serviceContext);
+					fileEntryId, newParentFolderId, serviceContext);
 			}
 
 			Tree documentTree = getFileEntryTree(
@@ -296,12 +293,12 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		String documentPath = sharepointRequest.getRootPath();
 		String parentFolderPath = getParentFolderPath(documentPath);
 
+		long fileEntryId = 0;
 		long groupId = SharepointUtil.getGroupId(parentFolderPath);
 		long parentFolderId = getLastFolderId(
 			groupId, parentFolderPath,
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-		String name = getResourceName(documentPath);
-		String title = name;
+		String title = getResourceName(documentPath);
 		String description = StringPool.BLANK;
 		String changeLog = StringPool.BLANK;
 		String extraSettings = StringPool.BLANK;
@@ -314,7 +311,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		try {
 			DLFileEntry fileEntry = getFileEntry(sharepointRequest);
 
-			name = fileEntry.getName();
+			fileEntryId = fileEntry.getFileEntryId();
 			description = fileEntry.getDescription();
 			extraSettings = fileEntry.getExtraSettings();
 
@@ -324,17 +321,17 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			serviceContext.setAssetTagNames(assetTagNames);
 
 			DLAppServiceUtil.updateFileEntry(
-				groupId, parentFolderId, name, title, title, description,
+				fileEntryId, title, title, description,
 				changeLog, false, extraSettings, sharepointRequest.getBytes(),
 				serviceContext);
 		}
 		catch (NoSuchFileEntryException nsfee) {
-			File file = FileUtil.createTempFile(FileUtil.getExtension(name));
+			File file = FileUtil.createTempFile(FileUtil.getExtension(title));
 
 			FileUtil.write(file, sharepointRequest.getBytes());
 
 			DLAppServiceUtil.addFileEntry(
-				groupId, parentFolderId, name, title, description, changeLog,
+				groupId, parentFolderId, title, description, changeLog,
 				extraSettings, file, serviceContext);
 		}
 	}
@@ -378,9 +375,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			try {
 				documentTree = getFileEntryTree(fileEntry, parentFolderPath);
 
-				DLAppServiceUtil.deleteFileEntry(
-					fileEntry.getGroupId(), fileEntry.getFolderId(),
-					fileEntry.getName());
+				DLAppServiceUtil.deleteFileEntry(fileEntry.getFileEntryId());
 
 				removedDocsTree.addChild(documentTree);
 			}

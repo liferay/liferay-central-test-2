@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -79,13 +78,8 @@ public class CompareVersionsAction extends PortletAction {
 	protected void compareVersions(RenderRequest renderRequest)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		long fileEntryId = ParamUtil.getLong(renderRequest, "fileEntryId");
 
-		long groupId = themeDisplay.getScopeGroupId();
-		long folderId = ParamUtil.getLong(renderRequest, "folderId");
 		String name = ParamUtil.getString(renderRequest, "name");
 
 		String extension = FileUtil.getExtension(name);
@@ -99,9 +93,9 @@ public class CompareVersionsAction extends PortletAction {
 			renderRequest, "targetVersion");
 
 		InputStream sourceIs = DLAppServiceUtil.getFileAsStream(
-			groupId, folderId, name, sourceVersion);
+			fileEntryId, sourceVersion);
 		InputStream targetIs = DLAppServiceUtil.getFileAsStream(
-			groupId, folderId, name, targetVersion);
+			fileEntryId, targetVersion);
 
 		if (extension.equals("htm") || extension.equals("html") ||
 			extension.equals("xml")) {

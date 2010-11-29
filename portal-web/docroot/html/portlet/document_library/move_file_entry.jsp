@@ -27,15 +27,15 @@ String referringPortletResource = ParamUtil.getString(request, "referringPortlet
 
 DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
 
+long fileEntryId = BeanParamUtil.getLong(fileEntry, request, "fileEntryId");
 long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
-String name = BeanParamUtil.getString(fileEntry, request, "name");
 
 Lock lock = null;
 Boolean isLocked = Boolean.FALSE;
 Boolean hasLock = Boolean.FALSE;
 
 try {
-	lock = LockLocalServiceUtil.getLock(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getGroupId(), fileEntry.getFolderId(), fileEntry.getName()));
+	lock = LockLocalServiceUtil.getLock(DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
 	isLocked = Boolean.TRUE;
 
@@ -51,8 +51,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setParameter("struts_action", strutsAction);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("folderId", String.valueOf(folderId));
-portletURL.setParameter("name", name);
+portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 %>
 
 <c:if test="<%= Validator.isNull(referringPortletResource) %>">
@@ -93,9 +92,8 @@ portletURL.setParameter("name", name);
 <aui:form action="<%= moveFileEntryURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveFileEntry(false);" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.MOVE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
+	<aui:input name="fileEntryId" type="hidden" value="<%= fileEntryId %>" />
 	<aui:input name="newFolderId" type="hidden" value="<%= folderId %>" />
-	<aui:input name="name" type="hidden" value="<%= name %>" />
 
 	<liferay-ui:header
 		backURL="<%= redirect %>"

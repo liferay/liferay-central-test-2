@@ -29,37 +29,35 @@ public class DLAppServiceWrapper implements DLAppService {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long groupId, long folderId, java.lang.String name,
-		java.lang.String title, java.lang.String description,
-		java.lang.String changeLog, java.lang.String extraSettings,
-		byte[] bytes, com.liferay.portal.service.ServiceContext serviceContext)
+		long groupId, long folderId, java.lang.String title,
+		java.lang.String description, java.lang.String changeLog,
+		java.lang.String extraSettings, byte[] bytes,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.addFileEntry(groupId, folderId, name, title,
+		return _dlAppService.addFileEntry(groupId, folderId, title,
 			description, changeLog, extraSettings, bytes, serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long groupId, long folderId, java.lang.String name,
-		java.lang.String title, java.lang.String description,
-		java.lang.String changeLog, java.lang.String extraSettings,
-		java.io.File file,
+		long groupId, long folderId, java.lang.String title,
+		java.lang.String description, java.lang.String changeLog,
+		java.lang.String extraSettings, java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.addFileEntry(groupId, folderId, name, title,
+		return _dlAppService.addFileEntry(groupId, folderId, title,
 			description, changeLog, extraSettings, file, serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long groupId, long folderId, java.lang.String name,
-		java.lang.String title, java.lang.String description,
-		java.lang.String changeLog, java.lang.String extraSettings,
-		java.io.InputStream is, long size,
+		long groupId, long folderId, java.lang.String title,
+		java.lang.String description, java.lang.String changeLog,
+		java.lang.String extraSettings, java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.addFileEntry(groupId, folderId, name, title,
+		return _dlAppService.addFileEntry(groupId, folderId, title,
 			description, changeLog, extraSettings, is, size, serviceContext);
 	}
 
@@ -93,18 +91,16 @@ public class DLAppServiceWrapper implements DLAppService {
 			parentFolderId, name, description, serviceContext);
 	}
 
-	public void deleteFileEntry(long groupId, long folderId,
-		java.lang.String name)
+	public void deleteFileEntry(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_dlAppService.deleteFileEntry(groupId, folderId, name);
+		_dlAppService.deleteFileEntry(fileEntryId);
 	}
 
-	public void deleteFileEntry(long groupId, long folderId,
-		java.lang.String name, java.lang.String version)
+	public void deleteFileEntry(long fileEntryId, java.lang.String version)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_dlAppService.deleteFileEntry(groupId, folderId, name, version);
+		_dlAppService.deleteFileEntry(fileEntryId, version);
 	}
 
 	public void deleteFileEntryByTitle(long groupId, long folderId,
@@ -136,18 +132,17 @@ public class DLAppServiceWrapper implements DLAppService {
 		_dlAppService.deleteFolder(groupId, parentFolderId, name);
 	}
 
-	public java.io.InputStream getFileAsStream(long groupId, long folderId,
-		java.lang.String name)
+	public java.io.InputStream getFileAsStream(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.getFileAsStream(groupId, folderId, name);
+		return _dlAppService.getFileAsStream(fileEntryId);
 	}
 
-	public java.io.InputStream getFileAsStream(long groupId, long folderId,
-		java.lang.String name, java.lang.String version)
+	public java.io.InputStream getFileAsStream(long fileEntryId,
+		java.lang.String version)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.getFileAsStream(groupId, folderId, name, version);
+		return _dlAppService.getFileAsStream(fileEntryId, version);
 	}
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
@@ -213,13 +208,6 @@ public class DLAppServiceWrapper implements DLAppService {
 		return _dlAppService.getFileEntry(fileEntryId);
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
-		long groupId, long folderId, java.lang.String name)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.getFileEntry(groupId, folderId, name);
-	}
-
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
 		long groupId, long folderId, java.lang.String titleWithExtension)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -235,11 +223,10 @@ public class DLAppServiceWrapper implements DLAppService {
 		return _dlAppService.getFileEntryByUuidAndGroupId(uuid, groupId);
 	}
 
-	public com.liferay.portal.model.Lock getFileEntryLock(long groupId,
-		long folderId, java.lang.String name)
+	public com.liferay.portal.model.Lock getFileEntryLock(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.getFileEntryLock(groupId, folderId, name);
+		return _dlAppService.getFileEntryLock(fileEntryId);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut getFileShortcut(
@@ -383,11 +370,10 @@ public class DLAppServiceWrapper implements DLAppService {
 		_dlAppService.getSubfolderIds(folderIds, groupId, folderId, recurse);
 	}
 
-	public boolean hasFileEntryLock(long groupId, long folderId,
-		java.lang.String name)
+	public boolean hasFileEntryLock(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.hasFileEntryLock(groupId, folderId, name);
+		return _dlAppService.hasFileEntryLock(fileEntryId);
 	}
 
 	public boolean hasInheritableLock(long folderId)
@@ -396,20 +382,17 @@ public class DLAppServiceWrapper implements DLAppService {
 		return _dlAppService.hasInheritableLock(folderId);
 	}
 
-	public com.liferay.portal.model.Lock lockFileEntry(long groupId,
-		long folderId, java.lang.String name)
+	public com.liferay.portal.model.Lock lockFileEntry(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.lockFileEntry(groupId, folderId, name);
+		return _dlAppService.lockFileEntry(fileEntryId);
 	}
 
-	public com.liferay.portal.model.Lock lockFileEntry(long groupId,
-		long folderId, java.lang.String name, java.lang.String owner,
-		long expirationTime)
+	public com.liferay.portal.model.Lock lockFileEntry(long fileEntryId,
+		java.lang.String owner, long expirationTime)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.lockFileEntry(groupId, folderId, name, owner,
-			expirationTime);
+		return _dlAppService.lockFileEntry(fileEntryId, owner, expirationTime);
 	}
 
 	public com.liferay.portal.model.Lock lockFolder(long folderId)
@@ -429,12 +412,12 @@ public class DLAppServiceWrapper implements DLAppService {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry moveFileEntry(
-		long groupId, long folderId, long newFolderId, java.lang.String name,
+		long fileEntryId, long newFolderId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.moveFileEntry(groupId, folderId, newFolderId,
-			name, serviceContext);
+		return _dlAppService.moveFileEntry(fileEntryId, newFolderId,
+			serviceContext);
 	}
 
 	public com.liferay.portal.model.Lock refreshFileEntryLock(
@@ -457,17 +440,15 @@ public class DLAppServiceWrapper implements DLAppService {
 		_dlAppService.revertFileEntry(fileEntryId);
 	}
 
-	public void unlockFileEntry(long groupId, long folderId,
-		java.lang.String name)
+	public void unlockFileEntry(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		_dlAppService.unlockFileEntry(groupId, folderId, name);
+		_dlAppService.unlockFileEntry(fileEntryId);
 	}
 
-	public void unlockFileEntry(long groupId, long folderId,
-		java.lang.String name, java.lang.String lockUuid)
+	public void unlockFileEntry(long fileEntryId, java.lang.String lockUuid)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_dlAppService.unlockFileEntry(groupId, folderId, name, lockUuid);
+		_dlAppService.unlockFileEntry(fileEntryId, lockUuid);
 	}
 
 	public void unlockFolder(long groupId, long folderId,
@@ -485,44 +466,42 @@ public class DLAppServiceWrapper implements DLAppService {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		long groupId, long folderId, java.lang.String name,
-		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String changeLog,
-		boolean majorVersion, java.lang.String extraSettings, byte[] bytes,
+		long fileEntryId, java.lang.String sourceFileName,
+		java.lang.String title, java.lang.String description,
+		java.lang.String changeLog, boolean majorVersion,
+		java.lang.String extraSettings, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.updateFileEntry(groupId, folderId, name,
-			sourceFileName, title, description, changeLog, majorVersion,
-			extraSettings, bytes, serviceContext);
+		return _dlAppService.updateFileEntry(fileEntryId, sourceFileName,
+			title, description, changeLog, majorVersion, extraSettings, bytes,
+			serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		long groupId, long folderId, java.lang.String name,
-		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String changeLog,
-		boolean majorVersion, java.lang.String extraSettings,
-		java.io.File file,
+		long fileEntryId, java.lang.String sourceFileName,
+		java.lang.String title, java.lang.String description,
+		java.lang.String changeLog, boolean majorVersion,
+		java.lang.String extraSettings, java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.updateFileEntry(groupId, folderId, name,
-			sourceFileName, title, description, changeLog, majorVersion,
-			extraSettings, file, serviceContext);
+		return _dlAppService.updateFileEntry(fileEntryId, sourceFileName,
+			title, description, changeLog, majorVersion, extraSettings, file,
+			serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
-		long groupId, long folderId, java.lang.String name,
-		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, java.lang.String changeLog,
-		boolean majorVersion, java.lang.String extraSettings,
-		java.io.InputStream is, long size,
+		long fileEntryId, java.lang.String sourceFileName,
+		java.lang.String title, java.lang.String description,
+		java.lang.String changeLog, boolean majorVersion,
+		java.lang.String extraSettings, java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.updateFileEntry(groupId, folderId, name,
-			sourceFileName, title, description, changeLog, majorVersion,
-			extraSettings, is, size, serviceContext);
+		return _dlAppService.updateFileEntry(fileEntryId, sourceFileName,
+			title, description, changeLog, majorVersion, extraSettings, is,
+			size, serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(
@@ -553,12 +532,11 @@ public class DLAppServiceWrapper implements DLAppService {
 			description, serviceContext);
 	}
 
-	public boolean verifyFileEntryLock(long groupId, long folderId,
-		java.lang.String name, java.lang.String lockUuid)
+	public boolean verifyFileEntryLock(long fileEntryId,
+		java.lang.String lockUuid)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.verifyFileEntryLock(groupId, folderId, name,
-			lockUuid);
+		return _dlAppService.verifyFileEntryLock(fileEntryId, lockUuid);
 	}
 
 	public boolean verifyInheritableLock(long folderId,
