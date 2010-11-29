@@ -14,6 +14,8 @@
  */
 --%>
 
+<%@ page import="com.liferay.portal.kernel.log.Log" %>
+<%@ page import="com.liferay.portal.kernel.log.LogFactoryUtil" %>
 <%@ page import="com.liferay.portal.kernel.servlet.HttpHeaders" %>
 <%@ page import="com.liferay.portal.model.LayoutSet" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
@@ -45,6 +47,13 @@ if (!request.isRequestedSessionIdFromCookie()) {
 response.setHeader(HttpHeaders.CONNECTION, HttpHeaders.CONNECTION_CLOSE_VALUE);
 
 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+
+if (_log.isWarnEnabled()) {
+	_log.warn(
+			request.getAttribute("javax.servlet.error.message"),
+			(Throwable)request.getAttribute("javax.servlet.error.exception")
+	);
+}
 %>
 
 <html>
@@ -69,3 +78,5 @@ information on why this is necessary.
 </body>
 
 </html>
+
+<%! private static Log _log = LogFactoryUtil.getLog("jsp.errors.404"); %>
