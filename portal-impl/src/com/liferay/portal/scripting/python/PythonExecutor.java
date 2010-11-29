@@ -85,9 +85,9 @@ public class PythonExecutor implements ScriptingExecutor {
 	}
 
 	protected PyCode getCompiledScript(String script) {
-		if (_initialized == false) {
+		if (!_initialized) {
 			synchronized (this) {
-				if (_initialized == false) {
+				if (!_initialized) {
 					PySystemState.initialize();
 
 					_initialized = true;
