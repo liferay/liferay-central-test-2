@@ -79,8 +79,7 @@ public class DLIndexer extends BaseIndexer {
 		catch (WindowStateException wse) {
 		}
 
-		String groupId = document.get("scopeGroupId");
-		String folderId = document.get("folderId");
+		String fileEntryId = document.get(Field.ENTRY_CLASS_PK);
 		String fileName = document.get("path");
 
 		String title = fileName;
@@ -92,9 +91,7 @@ public class DLIndexer extends BaseIndexer {
 		}
 
 		portletURL.setParameter("struts_action", "/document_library/get_file");
-		portletURL.setParameter("groupId", groupId);
-		portletURL.setParameter("folderId", folderId);
-		portletURL.setParameter("name", fileName);
+		portletURL.setParameter("fileEntryId", fileEntryId);
 
 		return new Summary(title, content, portletURL);
 	}
