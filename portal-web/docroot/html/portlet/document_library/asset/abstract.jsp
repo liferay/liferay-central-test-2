@@ -21,6 +21,8 @@ int abstractLength = (Integer)request.getAttribute(WebKeys.ASSET_PUBLISHER_ABSTR
 AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute(WebKeys.ASSET_RENDERER);
 
 DLFileVersion fileVersion = (DLFileVersion)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_VERSION);
+
+DLFileEntry fileEntry = fileVersion.getFileEntry();
 %>
 
 <c:if test="<%= fileVersion.isApproved() %>">
@@ -29,7 +31,7 @@ DLFileVersion fileVersion = (DLFileVersion)request.getAttribute(WebKeys.DOCUMENT
 			image='<%= "../file_system/small/" + fileVersion.getIcon() %>'
 			label="<%= true %>"
 			message="<%= HtmlUtil.escape(fileVersion.getTitle()) %>"
-			url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + fileVersion.getGroupId() + StringPool.SLASH + fileVersion.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileVersion.getTitle())) %>'
+			url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + fileVersion.getGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileVersion.getTitle())) %>'
 		/>
 	</div>
 </c:if>

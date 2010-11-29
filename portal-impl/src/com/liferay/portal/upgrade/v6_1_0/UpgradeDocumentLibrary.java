@@ -169,8 +169,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				long fileEntryId = getFileEntryId(folderId, name);
 
 				runSQL(
-					"update DLFileVersion set fileEntryId = '" + fileEntryId +
-						"' where fileVersionId = " + fileVersionId);
+					"update DLFileVersion set fileEntryId = " + fileEntryId +
+						" where fileVersionId = " + fileVersionId);
 			}
 		}
 		finally {

@@ -386,8 +386,6 @@ public class DLRepositoryLocalServiceImpl
 		DLFileEntry fileEntry = dlFileEntryPersistence.findByG_F_N(
 			groupId, folderId, name);
 
-		long fileEntryId = fileEntry.getFileEntryId();
-
 		if (Validator.isNotNull(version)) {
 			try {
 				dlLocalService.deleteFile(
@@ -401,9 +399,11 @@ public class DLRepositoryLocalServiceImpl
 			}
 
 			long fileVersionsCount =
-				dlFileVersionPersistence.countByFileEntryId(fileEntryId);
+				dlFileVersionPersistence.countByFileEntryId(
+					fileEntry.getFileEntryId());
 
-			dlFileVersionPersistence.removeByF_V(fileEntryId, version);
+			dlFileVersionPersistence.removeByF_V(
+				fileEntry.getFileEntryId(), version);
 
 			if (fileVersionsCount == 1) {
 				dlFileEntryPersistence.remove(fileEntry);
@@ -412,7 +412,7 @@ public class DLRepositoryLocalServiceImpl
 				if (version.equals(fileEntry.getVersion())) {
 					try {
 						DLFileVersion fileVersion = getLatestFileVersion(
-							fileEntryId);
+							fileEntry.getFileEntryId());
 
 						fileEntry.setVersion(fileVersion.getVersion());
 						fileEntry.setSize(fileVersion.getSize());
@@ -931,8 +931,7 @@ public class DLRepositoryLocalServiceImpl
 			DLFileEntry.class.getName(), oldFileEntryId, newFileEntryId);
 
 		List<DLFileVersion> fileVersions =
-			dlFileVersionPersistence.findByFileEntryId(
-					oldFileEntryId);
+			dlFileVersionPersistence.findByFileEntryId(oldFileEntryId);
 
 		for (DLFileVersion fileVersion : fileVersions) {
 			long newFileVersionId = counterLocalService.increment();
@@ -940,6 +939,7 @@ public class DLRepositoryLocalServiceImpl
 			DLFileVersion newFileVersion = dlFileVersionPersistence.create(
 				newFileVersionId);
 
+			newFileVersion.setGroupId(fileVersion.getGroupId());
 			newFileVersion.setCompanyId(fileVersion.getCompanyId());
 			newFileVersion.setUserId(fileVersion.getUserId());
 			newFileVersion.setUserName(fileVersion.getUserName());
@@ -1005,10 +1005,8 @@ public class DLRepositoryLocalServiceImpl
 		if ((fileVersion != null) && !fileVersion.isApproved() &&
 			!version.equals(DLFileEntryConstants.DEFAULT_VERSION)) {
 
-			int approvedArticlesCount =
-				dlFileVersionPersistence.countByF_S(
-					fileEntry.getFileEntryId(),
-					WorkflowConstants.STATUS_APPROVED);
+			int approvedArticlesCount = dlFileVersionPersistence.countByF_S(
+				fileEntry.getFileEntryId(), WorkflowConstants.STATUS_APPROVED);
 
 			if (approvedArticlesCount > 0) {
 				addDraftAssetEntry = true;
@@ -1443,6 +1441,7 @@ public class DLRepositoryLocalServiceImpl
 		String versionUserName = GetterUtil.getString(
 			fileEntry.getVersionUserName(), fileEntry.getUserName());
 
+		fileVersion.setGroupId(fileEntry.getGroupId());
 		fileVersion.setCompanyId(fileEntry.getCompanyId());
 		fileVersion.setUserId(versionUserId);
 		fileVersion.setUserName(versionUserName);
