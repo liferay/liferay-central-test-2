@@ -110,38 +110,35 @@ public class CaptchaImpl implements Captcha {
 	}
 
 	private void _initialize() {
-		if (_captcha != null) {
-			return;
-		}
+		if (_captcha == null) {
+			synchronized (this) {
+				if (_captcha == null) {
+					try {
+						String captchaClassName = PrefsPropsUtil.getString(
+								PropsKeys.CAPTCHA_ENGINE_IMPL,
+								PropsValues.CAPTCHA_ENGINE_IMPL);
 
-		synchronized (this) {
-			if (_captcha != null) {
-				return;
-			}
+						if (_log.isInfoEnabled()) {
+							_log.info("Initializing " + captchaClassName);
+						}
 
-			try {
-				String captchaClassName = PrefsPropsUtil.getString(
-					PropsKeys.CAPTCHA_ENGINE_IMPL,
-					PropsValues.CAPTCHA_ENGINE_IMPL);
+						_captcha = (Captcha)InstanceFactory.newInstance(
+								PortalClassLoaderUtil.getClassLoader(),
+								captchaClassName);
 
-				if (_log.isInfoEnabled()) {
-					_log.info("Initializing " + captchaClassName);
+						_originalCaptcha = _captcha;
+					}
+					catch (Exception e) {
+						_log.error(e, e);
+					}
 				}
-
-				_captcha = (Captcha)InstanceFactory.newInstance(
-					PortalClassLoaderUtil.getClassLoader(), captchaClassName);
-
-				_originalCaptcha = _captcha;
-			}
-			catch (Exception e) {
-				_log.error(e, e);
 			}
 		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(CaptchaImpl.class);
 
-	private Captcha _captcha;
+	private volatile Captcha _captcha;
 	private Captcha _originalCaptcha;
 
 }

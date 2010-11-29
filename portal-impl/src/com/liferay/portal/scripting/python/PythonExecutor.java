@@ -85,11 +85,13 @@ public class PythonExecutor implements ScriptingExecutor {
 	}
 
 	protected PyCode getCompiledScript(String script) {
-		if (!_initialized) {
+		if (_initialized == false) {
 			synchronized (this) {
-				PySystemState.initialize();
+				if (_initialized == false) {
+					PySystemState.initialize();
 
-				_initialized = true;
+					_initialized = true;
+				}
 			}
 		}
 
@@ -107,6 +109,6 @@ public class PythonExecutor implements ScriptingExecutor {
 		return compiledScript;
 	}
 
-	private boolean _initialized;
+	private volatile boolean _initialized;
 
 }

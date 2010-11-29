@@ -79,7 +79,9 @@ public class GroovyExecutor implements ScriptingExecutor {
 	protected Script getCompiledScript(String script) {
 		if (_groovyShell == null) {
 			synchronized (this) {
-				_groovyShell = new GroovyShell();
+				if (_groovyShell == null) {
+					_groovyShell = new GroovyShell();
+				}
 			}
 		}
 
@@ -96,6 +98,6 @@ public class GroovyExecutor implements ScriptingExecutor {
 		return compiledScript;
 	}
 
-	private GroovyShell _groovyShell;
+	private volatile GroovyShell _groovyShell;
 
 }
