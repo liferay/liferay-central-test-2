@@ -222,10 +222,9 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 				String portletId = portlet.getPortletId();
 
 				if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY) || (portletId.equals(PortletKeys.SEARCH) && entryClassName.equals(DLFileEntry.class.getName()))) {
-					long folderId = GetterUtil.getLong(HttpUtil.getParameter(entryHref, "_20_folderId", false));
-					String name = GetterUtil.getString(HttpUtil.getParameter(entryHref, "_20_name", false));
+					long fileEntryId = GetterUtil.getLong(HttpUtil.getParameter(entryHref, "_20_fileEntryId", false));
 
-					DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(entryScopeGroupId, folderId, name);
+					DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(fileEntryId);
 
 					entryTitle = fileEntry.getTitle();
 
@@ -240,8 +239,7 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 
 						viewURL.setParameter("struts_action", "/document_library/view_file_entry");
 						viewURL.setParameter("redirect", currentURL);
-						viewURL.setParameter("folderId", String.valueOf(fileEntry.getFolderId()));
-						viewURL.setParameter("name", HtmlUtil.unescape(name));
+						viewURL.setParameter("fileEntryId", String.valueOf(fileEntry.getFileEntryId()));
 
 						entryHref = viewURL.toString();
 					}

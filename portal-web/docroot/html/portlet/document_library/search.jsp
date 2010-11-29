@@ -109,22 +109,22 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 			// Folder and document
 
+			long fileEntryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
+
 			long folderId = GetterUtil.getLong(doc.get("repositoryId"));
 
 			if (folderId == scopeGroupId) {
 				folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 			}
 
-			String fileName = doc.get("path");
-
 			DLFileEntry fileEntry = null;
 
 			try {
-				fileEntry = DLAppLocalServiceUtil.getFileEntry(scopeGroupId, folderId, fileName);
+				fileEntry = DLAppLocalServiceUtil.getFileEntry(fileEntryId);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("Document library search index is stale and contains file entry {" + folderId + ", " + fileName + "}");
+					_log.warn("Document library search index is stale and contains file entry {" + fileEntryId + "}");
 				}
 
 				continue;
