@@ -56,7 +56,7 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLRepositoryLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.comparator.FileEntryModifiedDateComparator;
-import com.liferay.portlet.documentlibrary.util.comparator.FileVersionVersionComparator;
+import com.liferay.portlet.documentlibrary.util.comparator.FileVersionCreateDateComparator;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -831,7 +831,7 @@ public class DLRepositoryLocalServiceImpl
 
 		List<DLFileVersion> fileVersions =
 			dlFileVersionPersistence.findByFileEntryId(
-				fileEntryId, 0, 1, new FileVersionVersionComparator());
+				fileEntryId, 0, 1, new FileVersionCreateDateComparator());
 
 		if (fileVersions.isEmpty()) {
 			throw new NoSuchFileVersionException();

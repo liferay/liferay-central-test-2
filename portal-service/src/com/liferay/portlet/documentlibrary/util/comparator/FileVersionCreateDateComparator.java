@@ -14,15 +14,15 @@
 
 package com.liferay.portlet.documentlibrary.util.comparator;
 
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 
 /**
  * @author Bruno Farache
+ * @author Hugo Huijser
  */
-public class FileVersionVersionComparator extends OrderByComparator {
+public class FileVersionCreateDateComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "createDate ASC";
 
@@ -30,11 +30,11 @@ public class FileVersionVersionComparator extends OrderByComparator {
 
 	public static String[] ORDER_BY_FIELDS = {"createDate"};
 
-	public FileVersionVersionComparator() {
+	public FileVersionCreateDateComparator() {
 		this(false);
 	}
 
-	public FileVersionVersionComparator(boolean ascending) {
+	public FileVersionCreateDateComparator(boolean ascending) {
 		_ascending = ascending;
 	}
 
@@ -42,34 +42,8 @@ public class FileVersionVersionComparator extends OrderByComparator {
 		DLFileVersion fileVersion1 = (DLFileVersion)obj1;
 		DLFileVersion fileVersion2 = (DLFileVersion)obj2;
 
-		int value = 0;
-
-		int[] versionParts1 = StringUtil.split(
-			fileVersion1.getVersion(), StringPool.PERIOD, 0);
-		int[] versionParts2 = StringUtil.split(
-			fileVersion2.getVersion(), StringPool.PERIOD, 0);
-
-		if ((versionParts1.length != 2) && (versionParts2.length != 2)) {
-			value = 0;
-		}
-		else if ((versionParts1.length != 2)) {
-			value = -1;
-		}
-		else if ((versionParts2.length != 2)) {
-			value = 1;
-		}
-		else if (versionParts1[0] > versionParts2[0]) {
-			value = 1;
-		}
-		else if (versionParts1[0] < versionParts2[0]) {
-			value = -1;
-		}
-		else if (versionParts1[1] > versionParts2[1]) {
-			value = 1;
-		}
-		else if (versionParts1[1] < versionParts2[1]) {
-			value = -1;
-		}
+		int value = DateUtil.compareTo(
+			fileVersion1.getCreateDate(), fileVersion2.getCreateDate());
 
 		if (_ascending) {
 			return value;
