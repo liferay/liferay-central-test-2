@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.messaging.MessageListenerException;
+import com.liferay.portal.kernel.messaging.SynchronousDestination;
 
 import java.util.Set;
 
@@ -52,15 +53,20 @@ public class DirectSynchronousMessageSender
 			return null;
 		}
 
-		Set<MessageListener> messageListeners =
-			destination.getMessageListeners();
+		if (destination instanceof SynchronousDestination) {
+			destination.send(message);
+		}
+		else {
+			Set<MessageListener> messageListeners =
+				destination.getMessageListeners();
 
-		for (MessageListener messageListener : messageListeners) {
-			try {
-				messageListener.receive(message);
-			}
-			catch (MessageListenerException mle) {
-				_log.error("Unable to process message " + message, mle);
+			for (MessageListener messageListener : messageListeners) {
+				try {
+					messageListener.receive(message);
+				}
+				catch (MessageListenerException mle) {
+					_log.error("Unable to process message " + message, mle);
+				}
 			}
 		}
 

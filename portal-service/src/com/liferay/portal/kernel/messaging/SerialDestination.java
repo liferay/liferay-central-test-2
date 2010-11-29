@@ -29,7 +29,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  *
  * @author Michael C. Han
  */
-public class SerialDestination extends BaseDestination {
+public class SerialDestination extends BaseAsyncDestination {
 
 	public SerialDestination() {
 		super();

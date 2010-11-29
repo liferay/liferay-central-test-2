@@ -67,7 +67,7 @@
 
 	<!-- Messaging -->
 
-	<bean id="destination.scripting" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+	<bean id="destination.scripting" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
 		<property name="name" value="liferay/scripting" />
 	</bean>
 	<bean id="messageListener.scripting" class="com.liferay.portal.kernel.messaging.proxy.ProxyMessageListener">

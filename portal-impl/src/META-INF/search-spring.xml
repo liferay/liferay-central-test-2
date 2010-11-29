@@ -87,11 +87,8 @@
 
 	<!-- Messaging -->
 
-	<bean id="destination.search_reader" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+	<bean id="destination.search_reader" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
 		<property name="name" value="liferay/search_reader" />
-	</bean>
-	<bean id="destination.search_reader.response" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<property name="name" value="liferay/search_reader/response" />
 	</bean>
 	<bean id="destination.search_writer" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/search_writer" />
@@ -124,7 +121,6 @@
 		<property name="destinations">
 			<list>
 				<ref bean="destination.search_reader" />
-				<ref bean="destination.search_reader.response" />
 				<ref bean="destination.search_writer" />
 			</list>
 		</property>

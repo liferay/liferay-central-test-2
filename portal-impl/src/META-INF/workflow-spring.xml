@@ -103,22 +103,22 @@
 
 	<!-- Messaging -->
 
-	<bean id="destination.workflow_definition" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+	<bean id="destination.workflow_definition" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
 		<property name="name" value="liferay/workflow_definition" />
 	</bean>
-	<bean id="destination.workflow_engine" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+	<bean id="destination.workflow_engine" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
 		<property name="name" value="liferay/workflow_engine" />
 	</bean>
-	<bean id="destination.workflow_instance" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+	<bean id="destination.workflow_instance" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
 		<property name="name" value="liferay/workflow_instance" />
 	</bean>
-	<bean id="destination.workflow_log" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+	<bean id="destination.workflow_log" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
 		<property name="name" value="liferay/workflow_log" />
 	</bean>
 	<bean id="destination.workflow_status" class="com.liferay.portal.kernel.messaging.SerialDestination">
 		<property name="name" value="liferay/workflow_status" />
 	</bean>
-	<bean id="destination.workflow_task" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+	<bean id="destination.workflow_task" class="com.liferay.portal.kernel.messaging.SynchronousDestination">
 		<property name="name" value="liferay/workflow_task" />
 	</bean>
 	<bean id="messageListener.workflow_status" class="com.liferay.portal.kernel.messaging.proxy.ProxyMessageListener">

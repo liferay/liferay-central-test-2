@@ -29,7 +29,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  *
  * @author Michael C. Han
  */
-public class ParallelDestination extends BaseDestination {
+public class ParallelDestination extends BaseAsyncDestination {
 
 	public ParallelDestination() {
 	}
