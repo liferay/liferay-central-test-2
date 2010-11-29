@@ -118,7 +118,7 @@ public class AddWebContentNameEscapeCharacterTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace("<!-- -->"),
 			selenium.getText("//td[3]/a"));

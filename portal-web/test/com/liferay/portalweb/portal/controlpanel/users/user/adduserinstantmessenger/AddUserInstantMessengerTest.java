@@ -107,7 +107,7 @@ public class AddUserInstantMessengerTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals("selenium01", selenium.getValue("_125_aimSn"));
 		assertEquals("selenium01", selenium.getValue("_125_jabberSn"));

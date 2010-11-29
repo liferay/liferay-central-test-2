@@ -77,7 +77,7 @@ public class AddSettingsWebsite3Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals("http://www.liferay.com",
 			selenium.getValue("_130_websiteUrl2"));

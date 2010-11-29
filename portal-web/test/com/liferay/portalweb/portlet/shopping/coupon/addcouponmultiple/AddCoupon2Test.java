@@ -66,7 +66,7 @@ public class AddCoupon2Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isTextPresent(
 				"Coupon2 Test2\nThis is a coupon2 test2."));
 	}

@@ -80,7 +80,7 @@ public class AddDuplicateTagTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

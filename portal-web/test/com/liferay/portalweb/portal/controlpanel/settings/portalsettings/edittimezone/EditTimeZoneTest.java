@@ -54,7 +54,7 @@ public class EditTimeZoneTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals("(UTC -08:00) Pacific Standard Time",
 			selenium.getSelectedLabel("_130_timeZoneId"));

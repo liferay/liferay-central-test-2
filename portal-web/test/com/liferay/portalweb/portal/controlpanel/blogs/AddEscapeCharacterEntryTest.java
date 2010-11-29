@@ -132,7 +132,7 @@ public class AddEscapeCharacterEntryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace(
 				"<!--Html Escape Character Test-->"),
 			selenium.getText("//div[2]/div[1]/div[1]/a"));

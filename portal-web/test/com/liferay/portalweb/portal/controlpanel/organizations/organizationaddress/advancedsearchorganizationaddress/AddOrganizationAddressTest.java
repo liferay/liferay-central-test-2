@@ -150,7 +150,7 @@ public class AddOrganizationAddressTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"Your request processed successfully."),
+						"Your request completed successfully."),
 					selenium.getText("//section/div/div/div/div[1]"));
 				assertEquals("12345 Selenium St",
 					selenium.getValue("_126_addressStreet1_0"));

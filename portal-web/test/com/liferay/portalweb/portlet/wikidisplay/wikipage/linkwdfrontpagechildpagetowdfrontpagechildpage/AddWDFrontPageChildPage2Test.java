@@ -60,7 +60,7 @@ public class AddWDFrontPageChildPage2Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("Front2 Page2 Child2 Page2 Test2"),
 			selenium.getText("//div[@class='child-pages']/ul/li[2]/a"));
 		selenium.clickAt("link=Front2 Page2 Child2 Page2 Test2",

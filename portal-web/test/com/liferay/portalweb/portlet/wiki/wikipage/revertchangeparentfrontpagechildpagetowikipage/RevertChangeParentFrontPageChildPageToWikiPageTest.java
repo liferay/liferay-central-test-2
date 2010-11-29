@@ -76,7 +76,7 @@ public class RevertChangeParentFrontPageChildPageToWikiPageTest
 			selenium.getText(
 				"//tr[@class='portlet-section-body results-row']/td[7]"));
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

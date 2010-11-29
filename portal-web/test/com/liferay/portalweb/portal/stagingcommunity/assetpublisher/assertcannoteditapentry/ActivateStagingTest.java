@@ -281,7 +281,7 @@ public class ActivateStagingTest extends BaseTestCase {
 								   .matches("^Are you sure you want to activate local staging for Staging[\\s\\S]$"));
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"Your request processed successfully."),
+						"Your request completed successfully."),
 					selenium.getText("//section/div/div/div/div"));
 				assertEquals(RuntimeVariables.replace("Staging (Staging)"),
 					selenium.getText("//li[4]/span"));

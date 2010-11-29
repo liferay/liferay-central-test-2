@@ -56,7 +56,7 @@ public class DeleteSecondEntryTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertFalse(selenium.isElementPresent("link=Second Test Entry"));
 		assertFalse(selenium.isTextPresent(
 				"This is an edited second test entry."));

@@ -96,7 +96,7 @@ public class ImportLARTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+							"Your request completed successfully.")) {
 					break;
 				}
 			}
@@ -108,6 +108,6 @@ public class ImportLARTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 	}
 }

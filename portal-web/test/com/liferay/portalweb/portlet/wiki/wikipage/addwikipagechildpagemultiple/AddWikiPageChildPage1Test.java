@@ -65,7 +65,7 @@ public class AddWikiPageChildPage1Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("Front1 Page1 Child1 Page1 Test1"),
 			selenium.getText("//div[@class='child-pages']/ul/li[1]/a"));
 		selenium.clickAt("link=Front1 Page1 Child1 Page1 Test1",

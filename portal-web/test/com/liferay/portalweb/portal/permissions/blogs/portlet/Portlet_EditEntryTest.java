@@ -121,7 +121,7 @@ public class Portlet_EditEntryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace(
 				"Edited1 Portlet1 Temporary1 Entry1"),
 			selenium.getText("//h1[@class='header-title']/span"));

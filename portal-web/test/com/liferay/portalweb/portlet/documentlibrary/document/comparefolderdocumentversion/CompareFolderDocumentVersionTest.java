@@ -83,7 +83,7 @@ public class CompareFolderDocumentVersionTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -171,7 +171,7 @@ public class CompareFolderDocumentVersionTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

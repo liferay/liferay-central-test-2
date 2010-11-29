@@ -103,7 +103,7 @@ public class ResubmitTaskWebContentDetailsTest extends BaseTestCase {
 
 			try {
 				if (RuntimeVariables.replace(
-							"Your request processed successfully.")
+							"Your request completed successfully.")
 										.equals(selenium.getText(
 								"//div[@class='portlet-msg-success']"))) {
 					break;
@@ -117,7 +117,7 @@ public class ResubmitTaskWebContentDetailsTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace(
 				"Task initially assigned to the Portal Content Reviewer role."),

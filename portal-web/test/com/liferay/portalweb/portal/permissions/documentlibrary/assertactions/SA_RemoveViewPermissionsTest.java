@@ -78,7 +78,7 @@ public class SA_RemoveViewPermissionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertFalse(selenium.isChecked("15_ACTION_VIEW"));
 		selenium.saveScreenShotAndSource();
@@ -143,7 +143,7 @@ public class SA_RemoveViewPermissionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertFalse(selenium.isChecked("15_ACTION_VIEW"));
 		selenium.saveScreenShotAndSource();

@@ -71,7 +71,7 @@ public class ViewTaskWebContentAssignedToUserTest extends BaseTestCase {
 			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("Withdraw Submission"),
 			selenium.getText(
-				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[1]/a"));
+				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right null']/ul/li[1]/a"));
 		assertEquals(RuntimeVariables.replace(
 				"Task initially assigned to the Portal Content Reviewer role."),
 			selenium.getText("//div[@class='task-activity task-type-1']/div[2]"));

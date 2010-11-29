@@ -84,6 +84,6 @@ public class AddSubcategoryTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("T\u00e9st Subcat\u00e9gory"));
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 	}
 }

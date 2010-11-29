@@ -57,7 +57,7 @@ public class AddFrontPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("Test Wiki Article#"),
 			selenium.getText("//div[@class='wiki-body']/h2"));
 		assertEquals(RuntimeVariables.replace("this is italics"),

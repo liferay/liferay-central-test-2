@@ -60,7 +60,7 @@ public class DeleteMessageTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		selenium.clickAt("link=Moved to Sujr", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

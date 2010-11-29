@@ -82,7 +82,7 @@ public class Member_EditDocumentTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isElementPresent(
 				"link=Member Permissions Edited Test Document"));
 	}

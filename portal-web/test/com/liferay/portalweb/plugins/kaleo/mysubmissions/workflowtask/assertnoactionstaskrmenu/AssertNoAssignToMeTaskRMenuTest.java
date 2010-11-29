@@ -66,7 +66,7 @@ public class AssertNoAssignToMeTaskRMenuTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isPartialText(
-				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']",
+				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right null']",
 				"Assign to Me"));
 	}
 }

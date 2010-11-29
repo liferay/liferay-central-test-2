@@ -127,7 +127,7 @@ public class MoveCategoryItemToCategoryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertFalse(selenium.isTextPresent("Item Test"));
 		selenium.open("/web/guest/home/");
 

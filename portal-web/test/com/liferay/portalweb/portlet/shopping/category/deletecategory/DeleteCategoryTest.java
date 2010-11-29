@@ -71,7 +71,7 @@ public class DeleteCategoryTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertFalse(selenium.isTextPresent(
 				"Category Test\nThis is a category test."));
 	}

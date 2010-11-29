@@ -119,7 +119,7 @@ public class AddPageTest extends BaseTestCase {
 				assertTrue(selenium.isPartialText("//nav/ul/li[2]",
 						"Manage Pages Test Page"));
 				assertEquals(RuntimeVariables.replace(
-						"Your request processed successfully."),
+						"Your request completed successfully."),
 					selenium.getText("//section/div/div/div/div"));
 
 				for (int second = 0;; second++) {

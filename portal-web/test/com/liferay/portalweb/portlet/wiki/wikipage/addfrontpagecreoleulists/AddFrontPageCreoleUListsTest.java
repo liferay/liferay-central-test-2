@@ -57,7 +57,7 @@ public class AddFrontPageCreoleUListsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("Item Subitem"),
 			selenium.getText("//div[@class='wiki-body']/ul/li[1]"));
 		assertEquals(RuntimeVariables.replace("Subitem"),

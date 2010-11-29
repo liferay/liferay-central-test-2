@@ -79,7 +79,7 @@ public class Portlet_DeleteFolderTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertFalse(selenium.isElementPresent(
 				"link=Portlet2 Temporary2 Folder2"));
 		assertFalse(selenium.isElementPresent(

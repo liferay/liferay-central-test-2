@@ -55,7 +55,7 @@ public class AddFrontPageTagTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("wiki1 tag1"),
 			selenium.getText("//a[@class='tag']"));
 	}

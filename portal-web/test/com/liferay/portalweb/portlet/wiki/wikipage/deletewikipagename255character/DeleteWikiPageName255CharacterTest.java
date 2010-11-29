@@ -77,7 +77,7 @@ public class DeleteWikiPageName255CharacterTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertFalse(selenium.isTextPresent(
 				"lllllllll1lllllllll2lllllllll3lllllllll4lllllllll5lllllllll6lllllllll7lllllllll8lllllllll9llllllll10llllllll11llllllll12llllllll13llllllll14llllllll15llllllll16llllllll17llllllll18llllllll19llllllll20llllllll21llllllll22llllllll23llllllll24llllllll25llll"));
 	}

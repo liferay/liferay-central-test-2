@@ -178,7 +178,7 @@ public class AddUserAddress2Test extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals("123 Lets", selenium.getValue("_125_addressStreet1_1"));
 		assertEquals("Other", selenium.getSelectedLabel("_125_addressTypeId1"));

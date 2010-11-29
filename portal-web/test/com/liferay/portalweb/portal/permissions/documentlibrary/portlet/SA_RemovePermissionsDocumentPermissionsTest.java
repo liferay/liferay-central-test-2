@@ -81,7 +81,7 @@ public class SA_RemovePermissionsDocumentPermissionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertFalse(selenium.isChecked("//tr[7]/td[5]/input"));
 		selenium.saveScreenShotAndSource();

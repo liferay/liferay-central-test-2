@@ -89,7 +89,7 @@ public class CA_EditImageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+							"Your request completed successfully.")) {
 					break;
 				}
 			}
@@ -101,7 +101,7 @@ public class CA_EditImageTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

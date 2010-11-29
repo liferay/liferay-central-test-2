@@ -121,7 +121,7 @@ public class AddOrganizationPhoneNumber1Test extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"Your request processed successfully."),
+						"Your request completed successfully."),
 					selenium.getText("//section/div/div/div/div[1]"));
 				assertEquals("5628020523",
 					selenium.getValue("_126_phoneNumber0"));

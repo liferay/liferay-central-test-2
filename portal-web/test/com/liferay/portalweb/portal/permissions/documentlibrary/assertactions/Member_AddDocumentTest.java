@@ -48,7 +48,7 @@ public class Member_AddDocumentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[2]/a",
+		selenium.clickAt("//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right null']/ul/li[2]/a",
 			RuntimeVariables.replace("Add Document"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -106,7 +106,7 @@ public class Member_AddDocumentTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isElementPresent(
 				"link=Member Permissions Test Document"));
 	}

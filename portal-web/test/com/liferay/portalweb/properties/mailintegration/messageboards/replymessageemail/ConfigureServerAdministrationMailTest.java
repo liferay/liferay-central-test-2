@@ -87,7 +87,7 @@ public class ConfigureServerAdministrationMailTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals("pop.gmail.com", selenium.getValue("_137_pop3Host"));
 		assertEquals("995", selenium.getValue("_137_pop3Port"));

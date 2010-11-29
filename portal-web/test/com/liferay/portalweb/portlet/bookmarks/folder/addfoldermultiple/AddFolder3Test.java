@@ -57,7 +57,7 @@ public class AddFolder3Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("Test3 Folder3"),
 			selenium.getText("//tr[5]/td[1]/a/strong"));

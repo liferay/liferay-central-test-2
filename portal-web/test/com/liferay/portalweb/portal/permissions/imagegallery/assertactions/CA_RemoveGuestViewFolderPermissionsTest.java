@@ -78,7 +78,7 @@ public class CA_RemoveGuestViewFolderPermissionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertFalse(selenium.isChecked("15_ACTION_VIEW"));
 		selenium.saveScreenShotAndSource();
 	}

@@ -117,7 +117,7 @@ public class Writer_AddArticleTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isElementPresent(
 				"link=Writer Permissions Web Content Test"));
 		assertTrue(selenium.isElementPresent("link=Not Approved"));

@@ -84,7 +84,7 @@ public class Portlet_DeleteDocumentTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertFalse(selenium.isTextPresent("Portlet1 Temporary1 Document1"));
 		assertFalse(selenium.isTextPresent(

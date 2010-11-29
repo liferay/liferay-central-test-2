@@ -120,7 +120,7 @@ public class SA_DisableAllowAccessInControlPanelPermissionsTest
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
 		assertFalse(selenium.isChecked("//tr[7]/td[2]/input[@disabled='']"));
 		selenium.saveScreenShotAndSource();

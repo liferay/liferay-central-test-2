@@ -57,7 +57,7 @@ public class AddFrontPageCreoleLinkedImageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace(""),
 			selenium.getText("//table[@class='imageplugin']//img"));
 		assertEquals(RuntimeVariables.replace("Wiki Attachment"),

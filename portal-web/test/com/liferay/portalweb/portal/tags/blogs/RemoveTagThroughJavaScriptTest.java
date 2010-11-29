@@ -80,7 +80,7 @@ public class RemoveTagThroughJavaScriptTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertFalse(selenium.isTextPresent("selenium3 liferay3"));
 	}
 }

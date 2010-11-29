@@ -62,7 +62,7 @@ public class EditGeneralTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals("LIFE", selenium.getValue("_130_legalId"));
 		assertEquals("1234", selenium.getValue("_130_sicCode"));

@@ -64,7 +64,7 @@ public class AssignToMeWebContentRMenuTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.click(
-			"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[1]/a");
+			"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right null']/ul/li[1]/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -94,7 +94,7 @@ public class AssignToMeWebContentRMenuTest extends BaseTestCase {
 
 			try {
 				if (RuntimeVariables.replace(
-							"Your request processed successfully.")
+							"Your request completed successfully.")
 										.equals(selenium.getText(
 								"//section/div/div/div/div"))) {
 					break;
@@ -108,7 +108,7 @@ public class AssignToMeWebContentRMenuTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		selenium.open("/web/guest/home/");
 

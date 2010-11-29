@@ -47,7 +47,7 @@ public class SA_AddTemporaryFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[2]/a"));
+				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right null']/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.type("_20_name",
@@ -57,7 +57,7 @@ public class SA_AddTemporaryFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isElementPresent("link=Portlet2 Temporary2 Folder2"));
 	}
 }

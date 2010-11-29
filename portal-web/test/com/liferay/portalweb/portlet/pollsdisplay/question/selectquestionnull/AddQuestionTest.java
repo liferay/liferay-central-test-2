@@ -92,7 +92,7 @@ public class AddQuestionTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("Test Poll Question"),
 			selenium.getText("//tr[3]/td[1]/a"));
 	}

@@ -176,7 +176,7 @@ public class AddCommunitiesPrivatePageTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
+						"Your request completed successfully."));
 
 				boolean privatePagePresent = selenium.isElementPresent(
 						"//li/ul/li/div/div[3]/a");

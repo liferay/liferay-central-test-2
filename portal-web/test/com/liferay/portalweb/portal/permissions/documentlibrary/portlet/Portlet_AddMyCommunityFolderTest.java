@@ -44,9 +44,9 @@ public class Portlet_AddMyCommunityFolderTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Add Folder"),
 			selenium.getText(
-				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[2]/a"));
+				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right null']/ul/li[2]/a"));
 		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[2]/a"));
+				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right null']/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.type("_20_name",
@@ -56,7 +56,7 @@ public class Portlet_AddMyCommunityFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("My1 Community1 Folder1"),
 			selenium.getText("//a/strong"));

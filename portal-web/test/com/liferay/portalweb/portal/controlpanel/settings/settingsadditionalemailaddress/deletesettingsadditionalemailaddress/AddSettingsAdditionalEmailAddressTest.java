@@ -61,7 +61,7 @@ public class AddSettingsAdditionalEmailAddressTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals("Admin@Liferay.com",
 			selenium.getValue("_130_emailAddressAddress0"));

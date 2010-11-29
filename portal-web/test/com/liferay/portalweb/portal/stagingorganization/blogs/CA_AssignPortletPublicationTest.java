@@ -120,7 +120,7 @@ public class CA_AssignPortletPublicationTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertFalse(selenium.isElementPresent("link=Stage 3 Review Unassigned"));
 		assertTrue(selenium.isElementPresent("link=Stage 3 Pending Review"));
 	}

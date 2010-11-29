@@ -61,7 +61,7 @@ public class AddWikiPage1Tag1Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("wiki tag multiple"),
 			selenium.getText("//a[@class='tag']"));
 	}

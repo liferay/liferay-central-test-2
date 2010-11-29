@@ -89,7 +89,7 @@ public class AddEntryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("Test Bookmark"),
 			selenium.getText("//td[1]/a"));
 		assertEquals(RuntimeVariables.replace("exact:http://www.liferay.com"),

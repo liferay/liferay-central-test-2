@@ -46,7 +46,7 @@ public class AddFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[2]/a"));
+				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right null']/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.type("_28_name", RuntimeVariables.replace("Folder Name"));
@@ -55,7 +55,7 @@ public class AddFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("Folder Name"),
 			selenium.getText("//a/strong"));

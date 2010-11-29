@@ -85,7 +85,7 @@ public class CA_DeleteImageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+							"Your request completed successfully.")) {
 					break;
 				}
 			}
@@ -97,7 +97,7 @@ public class CA_DeleteImageTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertFalse(selenium.isTextPresent("Edited Permissions Image"));
 		assertFalse(selenium.isElementPresent(
 				"//img[@alt='Edited Permissions Image - ']"));

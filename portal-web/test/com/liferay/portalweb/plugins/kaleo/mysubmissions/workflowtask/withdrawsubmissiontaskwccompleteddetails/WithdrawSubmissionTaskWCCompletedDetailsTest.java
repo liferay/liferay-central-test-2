@@ -66,7 +66,7 @@ public class WithdrawSubmissionTaskWCCompletedDetailsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent(
-				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[1]/a"));
+				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right null']/ul/li[1]/a"));
 		assertFalse(selenium.isTextPresent("Withdraw Submission"));
 	}
 }

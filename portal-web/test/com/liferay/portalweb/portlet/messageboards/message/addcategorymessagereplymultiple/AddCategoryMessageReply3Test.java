@@ -65,7 +65,7 @@ public class AddCategoryMessageReply3Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9"),
 			selenium.getText("//div[1]/h1/span"));

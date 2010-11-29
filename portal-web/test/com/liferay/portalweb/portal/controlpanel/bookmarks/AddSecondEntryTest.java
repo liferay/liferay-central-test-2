@@ -91,6 +91,6 @@ public class AddSecondEntryTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Test Bookmark 2"));
 		assertTrue(selenium.isElementPresent("link=http://www.digg.com"));
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 	}
 }

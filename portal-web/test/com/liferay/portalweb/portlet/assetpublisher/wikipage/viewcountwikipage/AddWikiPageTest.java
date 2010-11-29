@@ -56,7 +56,7 @@ public class AddWikiPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertTrue(selenium.isPartialText("//h1[@class='header-title']/span",
 				"FrontPage"));

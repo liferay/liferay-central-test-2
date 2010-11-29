@@ -106,7 +106,7 @@ public class DeleteOrganizationTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"Your request processed successfully."),
+						"Your request completed successfully."),
 					selenium.getText("//section/div/div/div/div[1]"));
 				selenium.clickAt("_126_TabsBack", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
@@ -119,7 +119,7 @@ public class DeleteOrganizationTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"Your request processed successfully."),
+						"Your request completed successfully."),
 					selenium.getText("//section/div/div/div/div[1]"));
 				assertFalse(selenium.isElementPresent("link=Selenium"));
 

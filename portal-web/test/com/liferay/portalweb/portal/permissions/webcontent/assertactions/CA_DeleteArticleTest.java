@@ -62,7 +62,7 @@ public class CA_DeleteArticleTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
 				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
+						"Your request completed successfully."));
 
 				boolean webContent1Present = selenium.isElementPresent(
 						"_15_rowIds");
@@ -81,7 +81,7 @@ public class CA_DeleteArticleTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
 				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
+						"Your request completed successfully."));
 
 			case 2:
 
@@ -102,7 +102,7 @@ public class CA_DeleteArticleTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
 				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
+						"Your request completed successfully."));
 
 			case 3:
 
@@ -123,7 +123,7 @@ public class CA_DeleteArticleTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
 				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
+						"Your request completed successfully."));
 
 			case 4:
 
@@ -144,7 +144,7 @@ public class CA_DeleteArticleTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
 				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
+						"Your request completed successfully."));
 
 			case 5:
 
@@ -165,7 +165,7 @@ public class CA_DeleteArticleTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
 				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
+						"Your request completed successfully."));
 
 			case 6:
 				assertTrue(selenium.isTextPresent("No Web Content was found."));

@@ -63,7 +63,7 @@ public class AddCategoryTest extends BaseTestCase {
 
 			try {
 				if (RuntimeVariables.replace(
-							"Your request processed successfully.")
+							"Your request completed successfully.")
 										.equals(selenium.getText(
 								"//section/div/div/div/div[1]"))) {
 					break;
@@ -77,7 +77,7 @@ public class AddCategoryTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("MB Category Name"),
 			selenium.getText("//a/strong"));

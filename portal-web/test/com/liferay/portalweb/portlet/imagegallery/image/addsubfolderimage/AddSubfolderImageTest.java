@@ -107,7 +107,7 @@ public class AddSubfolderImageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -116,7 +116,7 @@ public class AddSubfolderImageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+							"Your request completed successfully.")) {
 					break;
 				}
 			}

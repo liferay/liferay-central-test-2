@@ -63,7 +63,7 @@ public class LinkWikiPageToWikiPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isElementPresent("link=Wiki2 Page2 Test2"));
 		selenium.open("/web/guest/home/");
 

@@ -109,7 +109,7 @@ public class MoveFolderImageToFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertFalse(selenium.isElementPresent(
 				"//img[@alt='Test1 Image1 - This is Test1 Image1.']"));
 		selenium.open("/web/guest/home/");

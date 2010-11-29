@@ -82,7 +82,7 @@ public class Member_DeleteImageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+							"Your request completed successfully.")) {
 					break;
 				}
 			}
@@ -94,7 +94,7 @@ public class Member_DeleteImageTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertFalse(selenium.isTextPresent("Edited Second Permissions Image"));
 	}
 }

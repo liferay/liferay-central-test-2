@@ -135,7 +135,7 @@ public class Scope_AddGuestPortalScopeEntryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isElementPresent(
 				"link=Guest Portal Scope Permissions Blogs Entry"));
 		assertTrue(selenium.isTextPresent(

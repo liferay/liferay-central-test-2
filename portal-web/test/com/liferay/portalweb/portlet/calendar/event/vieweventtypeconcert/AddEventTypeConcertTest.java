@@ -62,7 +62,7 @@ public class AddEventTypeConcertTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("Caedmon's Call Concert."),
 			selenium.getText(
 				"//table[@class='taglib-search-iterator']/tbody/tr[3]/td[2]/a"));

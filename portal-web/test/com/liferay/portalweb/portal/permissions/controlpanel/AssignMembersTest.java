@@ -101,7 +101,7 @@ public class AssignMembersTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		selenium.typeKeys("_134_keywords", RuntimeVariables.replace("member"));
 		selenium.saveScreenShotAndSource();
 		selenium.type("_134_keywords", RuntimeVariables.replace("member"));
@@ -116,7 +116,7 @@ public class AssignMembersTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		selenium.typeKeys("_134_keywords", RuntimeVariables.replace("publisher"));
 		selenium.saveScreenShotAndSource();
 		selenium.type("_134_keywords", RuntimeVariables.replace("publisher"));
@@ -131,7 +131,7 @@ public class AssignMembersTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		selenium.typeKeys("_134_keywords", RuntimeVariables.replace("writer"));
 		selenium.saveScreenShotAndSource();
 		selenium.type("_134_keywords", RuntimeVariables.replace("writer"));
@@ -146,6 +146,6 @@ public class AssignMembersTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 	}
 }

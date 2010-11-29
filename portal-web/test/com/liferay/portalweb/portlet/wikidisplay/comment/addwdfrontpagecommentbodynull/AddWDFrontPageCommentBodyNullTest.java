@@ -55,7 +55,7 @@ public class AddWDFrontPageCommentBodyNullTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertFalse(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isElementPresent("//textarea"));
 	}
 }

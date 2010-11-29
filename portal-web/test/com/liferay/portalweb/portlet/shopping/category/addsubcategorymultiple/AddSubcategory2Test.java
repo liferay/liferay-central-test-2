@@ -63,7 +63,7 @@ public class AddSubcategory2Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isTextPresent(
 				"Subcategory2 Test2\nThis is a subcategory2 test2."));
 	}

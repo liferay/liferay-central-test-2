@@ -117,7 +117,7 @@ public class AddBlogsEntryTest extends BaseTestCase {
 
 			try {
 				if (RuntimeVariables.replace(
-							"Your request processed successfully.")
+							"Your request completed successfully.")
 										.equals(selenium.getText(
 								"//section/div/div/div/div"))) {
 					break;
@@ -131,7 +131,7 @@ public class AddBlogsEntryTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
 			selenium.getText("//div[2]/div[1]/div[1]/a"));

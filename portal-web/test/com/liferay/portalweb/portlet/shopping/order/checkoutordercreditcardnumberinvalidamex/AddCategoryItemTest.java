@@ -79,7 +79,7 @@ public class AddCategoryItemTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isTextPresent(
 				"Item Test\nThis is an item test.\nLimited: Time Only"));
 	}

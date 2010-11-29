@@ -78,7 +78,7 @@ public class LockFolderDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("Yes"),
 			selenium.getText("//td[4]/a"));
 	}

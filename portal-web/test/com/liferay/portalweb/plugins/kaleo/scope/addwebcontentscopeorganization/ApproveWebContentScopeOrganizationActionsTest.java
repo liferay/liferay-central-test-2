@@ -103,7 +103,7 @@ public class ApproveWebContentScopeOrganizationActionsTest extends BaseTestCase 
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to you."),

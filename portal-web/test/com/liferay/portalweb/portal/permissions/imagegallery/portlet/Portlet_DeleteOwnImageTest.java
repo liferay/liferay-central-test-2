@@ -83,7 +83,7 @@ public class Portlet_DeleteOwnImageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+							"Your request completed successfully.")) {
 					break;
 				}
 			}
@@ -95,7 +95,7 @@ public class Portlet_DeleteOwnImageTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertFalse(selenium.isElementPresent(
 				"//img[@alt='Portlet1 Permissions1 Image1. ']"));
 	}

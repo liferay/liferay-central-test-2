@@ -55,7 +55,7 @@ public class EmptyCartCategoryItemTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertFalse(selenium.isTextPresent("Item Test"));
 		assertFalse(selenium.isTextPresent("This is an item test."));
 		assertFalse(selenium.isTextPresent("Price for 1 Items and Above:$9.99"));

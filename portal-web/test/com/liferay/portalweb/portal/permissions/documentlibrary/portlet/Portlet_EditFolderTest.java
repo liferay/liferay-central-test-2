@@ -82,7 +82,7 @@ public class Portlet_EditFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertNotEquals(RuntimeVariables.replace("Portlet2 Temporary2 Folder2"),
 			selenium.getText("//a/strong"));

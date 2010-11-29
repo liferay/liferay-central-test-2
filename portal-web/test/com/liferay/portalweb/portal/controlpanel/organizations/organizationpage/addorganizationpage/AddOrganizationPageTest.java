@@ -112,7 +112,7 @@ public class AddOrganizationPageTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				Thread.sleep(5000);
 				assertEquals(RuntimeVariables.replace(
-						"Your request processed successfully."),
+						"Your request completed successfully."),
 					selenium.getText("//section/div/div/div/div"));
 
 				boolean pagePresent = selenium.isElementPresent(

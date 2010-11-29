@@ -119,7 +119,7 @@ public class DeactivateStagingTest extends BaseTestCase {
 						   .matches("^Are you sure you want to deactivate staging for Staging[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertNotEquals(RuntimeVariables.replace("Staging (Staging)"),
 			selenium.getText("//li[4]/span"));

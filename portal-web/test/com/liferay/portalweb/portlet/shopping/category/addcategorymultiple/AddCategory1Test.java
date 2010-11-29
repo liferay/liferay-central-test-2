@@ -57,7 +57,7 @@ public class AddCategory1Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isTextPresent("Category1 Test1"));
 		assertTrue(selenium.isTextPresent("This is a category1 test1."));
 	}

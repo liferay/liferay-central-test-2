@@ -111,7 +111,7 @@ public class AddFolderImage1Test extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+							"Your request completed successfully.")) {
 					break;
 				}
 			}
@@ -123,7 +123,7 @@ public class AddFolderImage1Test extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isElementPresent(
 				"//img[@alt='Test1 Image1 - This is Test1 Image1.']"));
 

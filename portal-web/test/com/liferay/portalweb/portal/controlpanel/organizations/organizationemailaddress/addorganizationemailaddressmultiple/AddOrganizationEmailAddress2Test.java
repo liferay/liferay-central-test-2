@@ -140,7 +140,7 @@ public class AddOrganizationEmailAddress2Test extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"Your request processed successfully."),
+						"Your request completed successfully."),
 					selenium.getText("//section/div/div/div/div[1]"));
 				assertEquals("Selenium@Selenium.com",
 					selenium.getValue("_126_emailAddressAddress1"));

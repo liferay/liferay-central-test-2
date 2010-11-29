@@ -74,7 +74,7 @@ public class SA_AllowDeleteCommentPermissionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isChecked("//tr[7]/td[4]/input"));
 		selenium.saveScreenShotAndSource();
 	}

@@ -88,7 +88,7 @@ public class ChangeParentWikiPage255ToWikiPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

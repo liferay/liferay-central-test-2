@@ -103,7 +103,7 @@ public class AddUserSocialNetworkTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals("selenium01", selenium.getValue("_125_facebookSn"));
 		assertEquals("selenium01", selenium.getValue("_125_mySpaceSn"));

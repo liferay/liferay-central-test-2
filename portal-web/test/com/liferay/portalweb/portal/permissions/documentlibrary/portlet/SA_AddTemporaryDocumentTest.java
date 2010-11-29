@@ -52,8 +52,8 @@ public class SA_AddTemporaryDocumentTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Add Document"),
 			selenium.getText(
-				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[5]/a"));
-		selenium.clickAt("//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[5]/a",
+				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right null']/ul/li[5]/a"));
+		selenium.clickAt("//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right null']/ul/li[5]/a",
 			RuntimeVariables.replace("Add Document"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -117,7 +117,7 @@ public class SA_AddTemporaryDocumentTest extends BaseTestCase {
 
 			try {
 				if (RuntimeVariables.replace(
-							"Your request processed successfully.")
+							"Your request completed successfully.")
 										.equals(selenium.getText(
 								"//section/div/div/div/div[1]"))) {
 					break;
@@ -131,7 +131,7 @@ public class SA_AddTemporaryDocumentTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertTrue(selenium.isElementPresent(
 				"link=Portlet1 Temporary1 Document1"));

@@ -79,6 +79,6 @@ public class CA_ApproveContentProposalTest extends BaseTestCase {
 						   .matches("^Are you sure you want to approve this proposal[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 	}
 }

@@ -175,7 +175,7 @@ public class SetDisplayOrderTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"Your request processed successfully."),
+						"Your request completed successfully."),
 					selenium.getText("//section/div/div/div/div"));
 				assertEquals(RuntimeVariables.replace("Child2 Test2 Page2"),
 					selenium.getText("//nav/ul/li[2]/ul/li[1]"));

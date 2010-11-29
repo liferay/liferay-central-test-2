@@ -64,7 +64,7 @@ public class AddMBMessage2Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("AP2 MB2 Message2 Subject2"),
 			selenium.getText("//td[1]/a"));

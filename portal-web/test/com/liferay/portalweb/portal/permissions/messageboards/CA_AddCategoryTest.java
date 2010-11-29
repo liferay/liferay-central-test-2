@@ -55,7 +55,7 @@ public class CA_AddCategoryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("Permissions Test 1"),
 			selenium.getText("//a/strong"));
 	}

@@ -58,7 +58,7 @@ public class CancelAddFrontPageChildPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertFalse(selenium.isElementPresent("link=Front Page Child Page Test"));
 		selenium.open("/web/guest/home/");
 

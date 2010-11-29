@@ -57,7 +57,7 @@ public class CA_AddMoveFoldersTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isTextPresent("Image Permissions Test Folder 2"));
 		selenium.clickAt("//tr[4]/td[1]/a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -73,7 +73,7 @@ public class CA_AddMoveFoldersTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isTextPresent("Image Permissions Test Subfolder 2"));
 	}
 }

@@ -218,7 +218,7 @@ public class SA_SetupTest extends BaseTestCase {
 								   .matches("^Are you sure you want to activate local staging for Liferay[\\s\\S]$"));
 				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
+						"Your request completed successfully."));
 
 			case 100:
 				label = -1;

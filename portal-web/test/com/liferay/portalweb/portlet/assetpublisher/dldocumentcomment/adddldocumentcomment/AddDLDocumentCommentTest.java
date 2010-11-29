@@ -73,7 +73,7 @@ public class AddDLDocumentCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("AP DL Document Comment."),
 			selenium.getText("//td[2]/div[1]"));

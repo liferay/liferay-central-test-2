@@ -53,7 +53,7 @@ public class UpdateCartCategoryItemQuantityTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isTextPresent("$99.90"));
 		selenium.select("//select", RuntimeVariables.replace("label=5"));
 		selenium.clickAt("//input[@value='Update Cart']",
@@ -61,7 +61,7 @@ public class UpdateCartCategoryItemQuantityTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isTextPresent("$49.95"));
 		selenium.select("//select", RuntimeVariables.replace("label=1"));
 		selenium.clickAt("//input[@value='Update Cart']",
@@ -69,7 +69,7 @@ public class UpdateCartCategoryItemQuantityTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isTextPresent("$9.99"));
 	}
 }

@@ -103,7 +103,7 @@ public class AddFrontPageAttachmentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isElementPresent("link=Wiki_Attachment.jpg"));
 		selenium.open("/web/guest/home/");
 

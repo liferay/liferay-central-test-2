@@ -77,7 +77,7 @@ public class AddTag3Test extends BaseTestCase {
 
 			try {
 				if (RuntimeVariables.replace(
-							"Your request processed successfully.")
+							"Your request completed successfully.")
 										.equals(selenium.getText(
 								"tag-portlet-messages"))) {
 					break;
@@ -91,7 +91,7 @@ public class AddTag3Test extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("tag-portlet-messages"));
 
 		for (int second = 0;; second++) {

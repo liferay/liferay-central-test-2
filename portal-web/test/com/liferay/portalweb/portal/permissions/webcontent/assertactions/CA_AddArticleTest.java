@@ -119,7 +119,7 @@ public class CA_AddArticleTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isElementPresent(
 				"link=CA Permissions Web Content Test"));
 		assertTrue(selenium.isElementPresent("link=Approved"));

@@ -108,7 +108,7 @@ public class AddSettingsAddressTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals("123. Liferay Ln.",
 			selenium.getValue("_130_addressStreet1_0"));

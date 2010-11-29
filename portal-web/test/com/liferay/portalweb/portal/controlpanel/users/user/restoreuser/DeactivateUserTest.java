@@ -101,7 +101,7 @@ public class DeactivateUserTest extends BaseTestCase {
 								   .matches("^Are you sure you want to deactivate the selected users[\\s\\S]$"));
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"Your request processed successfully."),
+						"Your request completed successfully."),
 					selenium.getText("//section/div/div/div/div[1]"));
 				assertFalse(selenium.isElementPresent("link=selen01"));
 

@@ -102,7 +102,7 @@ public class AddUserDisplaySettingsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals("(UTC -08:00) Pacific Standard Time",
 			selenium.getSelectedLabel("_125_timeZoneId"));

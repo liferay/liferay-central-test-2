@@ -95,7 +95,7 @@ public class Portlet_EditDocumentTest extends BaseTestCase {
 
 			try {
 				if (RuntimeVariables.replace(
-							"Your request processed successfully.")
+							"Your request completed successfully.")
 										.equals(selenium.getText(
 								"//section/div/div/div/div[1]"))) {
 					break;
@@ -109,7 +109,7 @@ public class Portlet_EditDocumentTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertNotEquals(RuntimeVariables.replace(
 				"Portlet1 Temporary1 Document1"), selenium.getText("//td[1]/a"));

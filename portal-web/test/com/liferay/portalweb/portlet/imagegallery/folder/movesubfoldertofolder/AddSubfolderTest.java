@@ -61,7 +61,7 @@ public class AddSubfolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace(
 				"Test1 Subfolder1\nThis is Test1 Subfolder1."),
 			selenium.getText("//td[1]/a"));

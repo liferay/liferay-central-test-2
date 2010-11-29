@@ -74,7 +74,7 @@ public class AddCommentReplyBodyNullTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertFalse(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

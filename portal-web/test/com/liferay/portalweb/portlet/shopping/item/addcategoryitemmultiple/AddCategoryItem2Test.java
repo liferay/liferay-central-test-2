@@ -72,7 +72,7 @@ public class AddCategoryItem2Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isTextPresent(
 				"M. Saech - How to Play Guitar - for Dummies.\nNoted guitarist and performer (for one) lays down how to thrash with the might battle axe of music."));
 	}

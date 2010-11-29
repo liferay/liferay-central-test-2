@@ -112,7 +112,7 @@ public class AddBlogsEntryXSSTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("<script>alert(hello)</script>"),
 			selenium.getText("//div[@class='entry-title']/a"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Content"),

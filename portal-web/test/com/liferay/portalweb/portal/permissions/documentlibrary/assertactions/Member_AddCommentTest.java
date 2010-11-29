@@ -99,7 +99,7 @@ public class Member_AddCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isElementPresent(
 				"link=Member Permissions Edited Test Document"));
 		assertTrue(selenium.isTextPresent(

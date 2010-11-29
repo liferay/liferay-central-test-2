@@ -61,7 +61,7 @@ public class AddWikiPage1Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("Wiki1 Page1 Test1"),
 			selenium.getText("//tr[4]/td[1]/a"));
 		selenium.clickAt("//tr[4]/td[1]/a", RuntimeVariables.replace(""));

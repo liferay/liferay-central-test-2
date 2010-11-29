@@ -80,7 +80,7 @@ public class Portlet_DeleteOwnSubfolderTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertFalse(selenium.isElementPresent(
 				"link=Portlet1 Portlet1 Permissions1 Subfolder1"));

@@ -157,7 +157,7 @@ public class MoveEntryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertFalse(selenium.isElementPresent("link=http://www.digg.com"));
 		selenium.open("/web/guest/home/");
 

@@ -50,8 +50,8 @@ public class AddFolderDocumentTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Add Document"),
 			selenium.getText(
-				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[5]/a"));
-		selenium.clickAt("//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[5]/a",
+				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right null']/ul/li[5]/a"));
+		selenium.clickAt("//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right null']/ul/li[5]/a",
 			RuntimeVariables.replace("Add Document"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -116,7 +116,7 @@ public class AddFolderDocumentTest extends BaseTestCase {
 
 			try {
 				if (RuntimeVariables.replace(
-							"Your request processed successfully.")
+							"Your request completed successfully.")
 										.equals(selenium.getText(
 								"//div[@class='portlet-msg-success']"))) {
 					break;
@@ -130,7 +130,7 @@ public class AddFolderDocumentTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("Test1 Document1"),
 			selenium.getText("//a/span/span"));

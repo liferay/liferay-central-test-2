@@ -106,7 +106,7 @@ public class DeleteQuestionSelectTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

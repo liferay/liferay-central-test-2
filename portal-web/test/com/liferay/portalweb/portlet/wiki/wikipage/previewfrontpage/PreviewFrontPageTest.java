@@ -64,7 +64,7 @@ public class PreviewFrontPageTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent(
 				"link=This page is empty. Edit it to add some text."));
 		assertFalse(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertFalse(selenium.isTextPresent("//div[5]/div"));
 	}
 }

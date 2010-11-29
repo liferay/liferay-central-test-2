@@ -75,7 +75,7 @@ public class EditCommentBodyNullTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 		assertFalse(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isVisible("_107_editReplyBody1"));
 		assertTrue(selenium.isVisible("//input[@value='Publish']"));
 		selenium.open("/web/guest/home/");

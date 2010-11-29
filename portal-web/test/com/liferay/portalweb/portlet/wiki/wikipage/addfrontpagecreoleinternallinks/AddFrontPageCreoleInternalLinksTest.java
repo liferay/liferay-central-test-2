@@ -56,7 +56,7 @@ public class AddFrontPageCreoleInternalLinksTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("Link to a page"),
 			selenium.getText("//div[@class='wiki-body']/a"));
 		assertEquals(RuntimeVariables.replace("Link to a page"),

@@ -61,7 +61,7 @@ public class EditCommentReplyBodyNullTest extends BaseTestCase {
 		assertTrue(selenium.isVisible(
 				"//tr[5]/td[2]/table[2]/tbody/tr[2]/td/input[1]"));
 		assertFalse(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

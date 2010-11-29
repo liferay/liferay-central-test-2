@@ -75,7 +75,7 @@ public class SA_AllowDeleteEntryPermissionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isChecked("//tr[7]/td[3]/input"));
 		selenium.saveScreenShotAndSource();
 	}

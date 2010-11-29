@@ -57,9 +57,9 @@ public class Portlet_AddShortcutTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Add Shortcut"),
 					selenium.getText(
-						"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[1]/a"));
+						"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right null']/ul/li[1]/a"));
 				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[1]/a"));
+						"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right null']/ul/li[1]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Select']",
@@ -179,7 +179,7 @@ public class Portlet_AddShortcutTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
+						"Your request completed successfully."));
 				assertTrue(selenium.isElementPresent(
 						"link=My1 Community1 Document1"));
 

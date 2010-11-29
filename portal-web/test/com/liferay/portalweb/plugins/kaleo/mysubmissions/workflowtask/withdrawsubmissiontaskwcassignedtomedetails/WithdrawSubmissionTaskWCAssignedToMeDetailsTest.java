@@ -69,13 +69,13 @@ public class WithdrawSubmissionTaskWCAssignedToMeDetailsTest
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Withdraw Submission"),
 			selenium.getText(
-				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[1]/a"));
-		selenium.clickAt("//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[1]/a",
+				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right null']/ul/li[1]/a"));
+		selenium.clickAt("//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right null']/ul/li[1]/a",
 			RuntimeVariables.replace("Withdraw Submission"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
 	}
 }

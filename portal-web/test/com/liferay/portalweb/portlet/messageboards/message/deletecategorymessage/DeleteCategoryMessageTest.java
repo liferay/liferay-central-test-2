@@ -77,7 +77,7 @@ public class DeleteCategoryMessageTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertFalse(selenium.isElementPresent(
 				"link=T\u00e9st M\u00e9ssag\u00e9"));

@@ -79,7 +79,7 @@ public class DeleteFolderEntryTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertFalse(selenium.isTextPresent("Test Folder Entry"));
 		assertFalse(selenium.isTextPresent("http://www.liferay.com"));

@@ -76,7 +76,7 @@ public class Portlet_DeleteImageTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertFalse(selenium.isElementPresent(
 				"//img[@alt='Edited2 Portlet2 Temporary2 Image2 - ']"));
 		assertFalse(selenium.isElementPresent(

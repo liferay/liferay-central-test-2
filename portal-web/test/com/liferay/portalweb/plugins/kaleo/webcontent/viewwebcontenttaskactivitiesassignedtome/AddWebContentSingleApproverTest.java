@@ -116,7 +116,7 @@ public class AddWebContentSingleApproverTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertTrue(selenium.isElementPresent("//td[2]/a"));
 		assertEquals(RuntimeVariables.replace("Web Content Name"),

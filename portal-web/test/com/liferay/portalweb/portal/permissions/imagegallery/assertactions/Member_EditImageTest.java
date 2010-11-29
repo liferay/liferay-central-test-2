@@ -97,7 +97,7 @@ public class Member_EditImageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		selenium.clickAt("//div[2]/a/img", RuntimeVariables.replace(""));
 		assertTrue(selenium.isTextPresent("Edited Third Permissions Image"));
 	}

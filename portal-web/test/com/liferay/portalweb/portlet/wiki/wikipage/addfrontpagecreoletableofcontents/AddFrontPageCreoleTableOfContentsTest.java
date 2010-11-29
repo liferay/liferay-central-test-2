@@ -58,7 +58,7 @@ public class AddFrontPageCreoleTableOfContentsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("Table of Contents [-]"),
 			selenium.getText("//div[@class='collapsebox']/h4"));
 		assertEquals(RuntimeVariables.replace("[-]"),

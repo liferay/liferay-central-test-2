@@ -92,7 +92,7 @@ public class EditFolderImageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+							"Your request completed successfully.")) {
 					break;
 				}
 			}
@@ -104,7 +104,7 @@ public class EditFolderImageTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

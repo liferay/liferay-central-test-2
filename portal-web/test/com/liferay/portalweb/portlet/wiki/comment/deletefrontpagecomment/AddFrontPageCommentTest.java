@@ -72,7 +72,7 @@ public class AddFrontPageCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace(
 				"This is a wiki page test comment."),
 			selenium.getText("//td[2]/div[1]"));

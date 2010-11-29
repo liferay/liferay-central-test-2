@@ -131,7 +131,7 @@ public class AddPageAPTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"Your request processed successfully."),
+						"Your request completed successfully."),
 					selenium.getText("//section/div/div/div/div"));
 				selenium.clickAt("//div[2]/ul/li/div/div[1]",
 					RuntimeVariables.replace("Arrow Down Arrow"));

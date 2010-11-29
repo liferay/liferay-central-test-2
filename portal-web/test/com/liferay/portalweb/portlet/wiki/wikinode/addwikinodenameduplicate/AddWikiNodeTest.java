@@ -60,7 +60,7 @@ public class AddWikiNodeTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("Wiki Node Test"),
 			selenium.getText("//tr[4]/td[1]/a"));
 		assertEquals(RuntimeVariables.replace("0"),

@@ -65,7 +65,7 @@ public class AddFolder3Test extends BaseTestCase {
 
 			try {
 				if (RuntimeVariables.replace(
-							"Your request processed successfully.")
+							"Your request completed successfully.")
 										.equals(selenium.getText(
 								"//section/div/div/div/div[1]"))) {
 					break;
@@ -79,7 +79,7 @@ public class AddFolder3Test extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertTrue(selenium.isTextPresent("This is test3 folder3."));
 	}

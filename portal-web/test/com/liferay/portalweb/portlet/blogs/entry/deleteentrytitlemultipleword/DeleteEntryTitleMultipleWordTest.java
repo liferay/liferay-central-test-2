@@ -61,7 +61,7 @@ public class DeleteEntryTitleMultipleWordTest extends BaseTestCase {
 
 			try {
 				if (RuntimeVariables.replace(
-							"Your request processed successfully.")
+							"Your request completed successfully.")
 										.equals(selenium.getText(
 								"//section/div/div/div/div"))) {
 					break;
@@ -75,7 +75,7 @@ public class DeleteEntryTitleMultipleWordTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertFalse(selenium.isTextPresent("Multiple Word Title Blogs Entry"));
 		assertFalse(selenium.isTextPresent("Content."));

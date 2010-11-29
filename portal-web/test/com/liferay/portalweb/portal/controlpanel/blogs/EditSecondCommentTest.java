@@ -80,7 +80,7 @@ public class EditSecondCommentTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isVisible("_33_editReplyBody1"));
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace(
 				"This is an edited second entry comment."),
 			selenium.getText("//td[2]/div[1]"));

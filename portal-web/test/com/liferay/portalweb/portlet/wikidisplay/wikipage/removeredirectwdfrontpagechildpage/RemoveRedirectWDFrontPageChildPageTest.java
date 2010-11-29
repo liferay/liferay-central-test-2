@@ -68,7 +68,7 @@ public class RemoveRedirectWDFrontPageChildPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("Front Page Child Page Test"),
 			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("This is a remove redirect test."),

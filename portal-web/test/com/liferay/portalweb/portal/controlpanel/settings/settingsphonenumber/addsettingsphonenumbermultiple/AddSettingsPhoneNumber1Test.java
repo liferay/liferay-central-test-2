@@ -60,7 +60,7 @@ public class AddSettingsPhoneNumber1Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals("1231231234", selenium.getValue("_130_phoneNumber0"));
 		assertEquals("123", selenium.getValue("_130_phoneExtension0"));

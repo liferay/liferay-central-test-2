@@ -79,7 +79,7 @@ public class AddPortalInstanceAbleTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isElementPresent("link=www.able.com"));
 		assertTrue(selenium.isElementPresent("link=able.com"));
 	}

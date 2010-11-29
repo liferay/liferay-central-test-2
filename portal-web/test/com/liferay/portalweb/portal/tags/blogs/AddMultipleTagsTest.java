@@ -145,7 +145,7 @@ public class AddMultipleTagsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isTextPresent("selenium3 liferay3"));
 		assertTrue(selenium.isTextPresent("selenium4 liferay4"));
 	}

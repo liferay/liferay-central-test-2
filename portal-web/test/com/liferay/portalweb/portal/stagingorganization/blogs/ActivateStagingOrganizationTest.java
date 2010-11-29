@@ -163,7 +163,7 @@ public class ActivateStagingOrganizationTest extends BaseTestCase {
 								   .matches("^Are you sure you want to activate local staging for Organization Name[\\s\\S]$"));
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"Your request processed successfully."),
+						"Your request completed successfully."),
 					selenium.getText("//section/div/div/div/div"));
 				assertTrue(selenium.isChecked("_126_staged-portlet_33Checkbox"));
 				selenium.saveScreenShotAndSource();

@@ -66,7 +66,7 @@ public class EditEntryTitleTest extends BaseTestCase {
 
 			try {
 				if (RuntimeVariables.replace(
-							"Your request processed successfully.")
+							"Your request completed successfully.")
 										.equals(selenium.getText(
 								"//section/div/div/div/div"))) {
 					break;
@@ -80,7 +80,7 @@ public class EditEntryTitleTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace("TitleEdit"),
 			selenium.getText("//div[@class='entry-title']/a"));

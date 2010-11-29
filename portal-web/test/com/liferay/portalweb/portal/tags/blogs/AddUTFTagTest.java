@@ -79,7 +79,7 @@ public class AddUTFTagTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isTextPresent("s\u00e9l\u00e9nium1 lif\u00e9ray1"));
 	}
 }

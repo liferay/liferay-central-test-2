@@ -57,7 +57,7 @@ public class AddFrontPageCreoleBoldItalicsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("this is bold italics"),
 			selenium.getText("//div[@class='wiki-body']/p[1]/b/i"));
 		assertEquals(RuntimeVariables.replace("this is bold italics"),

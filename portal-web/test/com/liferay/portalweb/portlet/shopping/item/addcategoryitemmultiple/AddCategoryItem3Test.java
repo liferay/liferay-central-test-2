@@ -69,7 +69,7 @@ public class AddCategoryItem3Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isTextPresent(
 				"The Prodigal Project - J. H.\nFor those on a journey, the end of which is faintly out of sight."));
 	}

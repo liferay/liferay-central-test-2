@@ -56,7 +56,7 @@ public class AddOrganizationTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
 
 		for (int second = 0;; second++) {
@@ -134,7 +134,7 @@ public class AddOrganizationTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
 	}
 }

@@ -88,7 +88,7 @@ public class Portlet_EditImageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+							"Your request completed successfully.")) {
 					break;
 				}
 			}
@@ -100,7 +100,7 @@ public class Portlet_EditImageTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertFalse(selenium.isElementPresent(
 				"//img[@alt='Portlet2 Temporary2 Image2 - ']"));
 		assertTrue(selenium.isElementPresent(

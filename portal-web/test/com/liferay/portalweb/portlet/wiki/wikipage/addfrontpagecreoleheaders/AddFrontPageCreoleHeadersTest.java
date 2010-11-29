@@ -57,7 +57,7 @@ public class AddFrontPageCreoleHeadersTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("Large heading #"),
 			selenium.getText("//div[@class='wiki-body']/h2"));
 		assertEquals(RuntimeVariables.replace("Medium heading #"),

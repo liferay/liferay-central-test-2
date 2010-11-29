@@ -68,7 +68,7 @@ public class AddSubfolder1Test extends BaseTestCase {
 
 			try {
 				if (RuntimeVariables.replace(
-							"Your request processed successfully.")
+							"Your request completed successfully.")
 										.equals(selenium.getText(
 								"//section/div/div/div/div[1]"))) {
 					break;
@@ -82,7 +82,7 @@ public class AddSubfolder1Test extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertTrue(selenium.isTextPresent(
 				"Test1 Subfolder1\nThis is test1 subfolder1."));

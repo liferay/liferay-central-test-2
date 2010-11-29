@@ -57,7 +57,7 @@ public class SA_AddTemporaryFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("Portlet2 Temporary2 Folder2"),
 			selenium.getText("//a/strong"));
 	}

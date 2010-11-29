@@ -76,7 +76,7 @@ public class DeleteCategoryItemTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertFalse(selenium.isTextPresent(
 				"Item Test\nThis is an item test.\nLimited: Time Only"));
 	}

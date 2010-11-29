@@ -83,7 +83,7 @@ public class EditCategoryItemTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isTextPresent(
 				"Item Test Edited\nThis is an item test. Edited.\nLimited:: Time Only Edited"));
 		assertFalse(selenium.isTextPresent(

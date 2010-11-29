@@ -82,7 +82,7 @@ public class EditFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace(
 				"Test1 Folder1 Edited1\nThis is Test1 Folder1. Edited1."),
 			selenium.getText("//td[1]/a"));

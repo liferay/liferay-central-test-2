@@ -80,7 +80,7 @@ public class SA_RemoveEditCommentPermissionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertFalse(selenium.isChecked("//tr[7]/td[7]/input"));
 		selenium.saveScreenShotAndSource();

@@ -59,7 +59,7 @@ public class AddWikiFrontPage3Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace(
 				"This is wiki frontpage article 3 test."),
 			selenium.getText("//div[6]/div"));

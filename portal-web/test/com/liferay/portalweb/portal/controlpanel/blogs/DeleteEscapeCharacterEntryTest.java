@@ -53,7 +53,7 @@ public class DeleteEscapeCharacterEntryTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertFalse(selenium.isElementPresent(
 				"link=<!--Html Escape Character Test-->"));
 		assertFalse(selenium.isTextPresent(

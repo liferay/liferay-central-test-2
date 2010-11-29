@@ -64,7 +64,7 @@ public class ExpireWebContentApprovedTest extends BaseTestCase {
 						   .matches("^Are you sure you want to expire the selected web content[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace("Web Content Name Approved"),
 			selenium.getText("//td[3]/a"));

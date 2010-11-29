@@ -96,7 +96,7 @@ public class SelectTimeZonePacificStandardTimeTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+							"Your request completed successfully.")) {
 					break;
 				}
 			}
@@ -127,7 +127,7 @@ public class SelectTimeZonePacificStandardTimeTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals("(UTC -08:00) Pacific Standard Time",
 			selenium.getSelectedLabel("_2_timeZoneId"));
 	}

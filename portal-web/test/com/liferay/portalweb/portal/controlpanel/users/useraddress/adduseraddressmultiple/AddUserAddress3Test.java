@@ -179,7 +179,7 @@ public class AddUserAddress3Test extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals("1220 Brea Canyon Rd",
 			selenium.getValue("_125_addressStreet1_2"));

@@ -113,7 +113,7 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+							"Your request completed successfully.")) {
 					break;
 				}
 			}
@@ -125,7 +125,7 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		selenium.type("page-name",
 			RuntimeVariables.replace("Hello World Page Name"));
 		selenium.saveScreenShotAndSource();
@@ -174,7 +174,7 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+							"Your request completed successfully.")) {
 					break;
 				}
 			}
@@ -186,7 +186,7 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

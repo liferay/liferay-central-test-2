@@ -94,7 +94,7 @@ public class AddTaskWebContentCommentCompletedTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("Workflow Task Comment"),
 			selenium.getText("//td[2]/div[1]"));

@@ -63,7 +63,7 @@ public class DeleteEntryCommentTest extends BaseTestCase {
 
 			try {
 				if (RuntimeVariables.replace(
-							"Your request processed successfully.")
+							"Your request completed successfully.")
 										.equals(selenium.getText(
 								"//section/div/div/div/div"))) {
 					break;
@@ -77,7 +77,7 @@ public class DeleteEntryCommentTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertFalse(selenium.isElementPresent("//td[2]/div[1]"));
 		assertFalse(selenium.isTextPresent("Comment."));

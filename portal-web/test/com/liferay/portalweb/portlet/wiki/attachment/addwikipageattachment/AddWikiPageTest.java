@@ -64,7 +64,7 @@ public class AddWikiPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("Wiki Page Test"),
 			selenium.getText("link=Wiki Page Test"));

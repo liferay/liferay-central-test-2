@@ -59,7 +59,7 @@ public class RevertEditWikiFrontPageMinorChangeTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isElementPresent("link=1.3"));
 		assertEquals(RuntimeVariables.replace("Reverted to 1.1"),
 			selenium.getText("//tr[3]/td[7]"));

@@ -81,7 +81,7 @@ public class DeactivatePageTemplateTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isElementPresent("link=No"));
 		assertFalse(selenium.isElementPresent("link=Yes"));
 	}

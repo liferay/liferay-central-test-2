@@ -83,7 +83,7 @@ public class AddCommunityInactiveTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"Your request processed successfully."),
+						"Your request completed successfully."),
 					selenium.getText("//section/div/div/div/div"));
 				assertEquals(RuntimeVariables.replace("Test Inactive Community"),
 					selenium.getText("//tr[4]/td[1]"));

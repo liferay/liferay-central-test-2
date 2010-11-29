@@ -127,7 +127,7 @@ public class AddUserAdditionalEmailAddress3Test extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"Your request processed successfully."),
+						"Your request completed successfully."),
 					selenium.getText("//section/div/div/div/div[1]"));
 				assertEquals("test01@selenium.com",
 					selenium.getValue("_125_emailAddressAddress2"));

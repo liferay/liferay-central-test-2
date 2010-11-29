@@ -127,7 +127,7 @@ public class DeleteArchivedSetupTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("There are no archived setups."),
 			selenium.getText("//div[@class='portlet-msg-info']"));

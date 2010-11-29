@@ -76,7 +76,7 @@ public class SubscribeCategoryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		Thread.sleep(5000);
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
