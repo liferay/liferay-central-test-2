@@ -51,7 +51,7 @@ response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 
 if (_log.isWarnEnabled()) {
 	Object msg = request.getAttribute(JavaConstants.JAVAX_SERVLET_ERROR_MESSAGE);
-	Throwable t = (Throwable)request.getAttribute(JavaConstants.JAVAX_SERVLET_ERROR_EXCEPTION;
+	Throwable t = (Throwable)request.getAttribute(JavaConstants.JAVAX_SERVLET_ERROR_EXCEPTION);
 
 	_log.warn(msg, t);
 }
