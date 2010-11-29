@@ -41,7 +41,7 @@ public class WorkflowStatusTag extends IncludeTag {
 		_status = status;
 	}
 
-	public void setVersion(String version) {
+	public void setVersion(double version) {
 		_version = version;
 	}
 
@@ -50,7 +50,7 @@ public class WorkflowStatusTag extends IncludeTag {
 		_id = null;
 		_model = null;
 		_status = 0;
-		_version = null;
+		_version = 0;
 	}
 
 	protected String getPage() {
@@ -80,7 +80,8 @@ public class WorkflowStatusTag extends IncludeTag {
 		request.setAttribute("aui:workflow-status:model", model);
 		request.setAttribute(
 			"aui:workflow-status:status", String.valueOf(_status));
-		request.setAttribute("aui:workflow-status:version", _version);
+		request.setAttribute(
+			"aui:workflow-status:version", String.valueOf(_version));
 	}
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
@@ -92,6 +93,6 @@ public class WorkflowStatusTag extends IncludeTag {
 	private String _id;
 	private Class<?> _model;
 	int _status;
-	private String _version;
+	private double _version;
 
 }
