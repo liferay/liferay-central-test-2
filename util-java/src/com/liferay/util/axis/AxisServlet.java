@@ -76,9 +76,7 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 	public void init(ServletConfig servletConfig) throws ServletException {
 		_servletConfig = servletConfig;
 
-		if (ServerDetector.isResin()) {
-			doInit();
-		} else if (ServerDetector.isWebLogic()) {
+		if (ServerDetector.isResin() || ServerDetector.isWebLogic()) {
 			doInit();
 		}
 		else {
