@@ -30,21 +30,9 @@ DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRA
 long fileEntryId = BeanParamUtil.getLong(fileEntry, request, "fileEntryId");
 long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 
-Lock lock = null;
-Boolean isLocked = Boolean.FALSE;
-Boolean hasLock = Boolean.FALSE;
-
-try {
-	lock = LockLocalServiceUtil.getLock(DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-
-	isLocked = Boolean.TRUE;
-
-	if (lock.getUserId() == user.getUserId()) {
-		hasLock = Boolean.TRUE;
-	}
-}
-catch (Exception e) {
-}
+Boolean isLocked = DLAppServiceUtil.isFileEntryLocked(fileEntry.getFileEntryId());
+Boolean hasLock = DLAppServiceUtil.hasFileEntryLock(fileEntry.getFileEntryId());
+long lockExpiration = DLAppServiceUtil.getFileEntryLockExpiration(fileEntry.getFileEntryId());
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -63,7 +51,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 		<c:when test="<%= hasLock %>">
 			<div class="portlet-msg-success">
 				<c:choose>
-					<c:when test="<%= lock.isNeverExpires() %>">
+					<c:when test="<%= lockExpiration == -1 %>">
 						<liferay-ui:message key="you-now-have-an-indefinite-lock-on-this-document" />
 					</c:when>
 					<c:otherwise>

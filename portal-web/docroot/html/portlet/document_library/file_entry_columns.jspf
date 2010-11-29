@@ -48,7 +48,7 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 		<c:when test='<%= fileEntryColumn.equals("locked") %>'>
 
 			<%
-			boolean isLocked = LockLocalServiceUtil.isLocked(DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+			boolean isLocked = DLAppServiceUtil.isFileEntryLocked(fileEntry.getFileEntryId());
 			%>
 
 			<liferay-ui:search-container-column-text

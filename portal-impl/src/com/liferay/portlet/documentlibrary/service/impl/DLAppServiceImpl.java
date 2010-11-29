@@ -404,6 +404,18 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		return dlRepositoryService.hasInheritableLock(folderId);
 	}
 
+	public boolean isFileEntryLocked(long fileEntryId)
+		throws PortalException, SystemException {
+
+		return dlRepositoryService.isFileEntryLocked(fileEntryId);
+	}
+
+	public boolean isFolderLocked(long folderId)
+		throws PortalException, SystemException {
+
+		return dlRepositoryService.isFolderLocked(folderId);
+	}
+
 	public Lock lockFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 

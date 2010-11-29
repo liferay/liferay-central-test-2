@@ -410,6 +410,18 @@ public class DLAppServiceUtil {
 		return getService().hasInheritableLock(folderId);
 	}
 
+	public static boolean isFileEntryLocked(long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().isFileEntryLocked(fileEntryId);
+	}
+
+	public static boolean isFolderLocked(long folderId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().isFolderLocked(folderId);
+	}
+
 	public static com.liferay.portal.model.Lock lockFileEntry(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

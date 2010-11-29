@@ -64,22 +64,15 @@ else if (fileEntry != null) {
 	assetClassPK = fileEntry.getFileEntryId();
 }
 
-Lock lock = null;
+
 Boolean isLocked = Boolean.FALSE;
 Boolean hasLock = Boolean.FALSE;
+Lock lock = null;
 
 if (fileEntry != null) {
-	try {
-		lock = LockLocalServiceUtil.getLock(DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-
-		isLocked = Boolean.TRUE;
-
-		if (lock.getUserId() == user.getUserId()) {
-			hasLock = Boolean.TRUE;
-		}
-	}
-	catch (Exception e) {
-	}
+	isLocked = DLAppServiceUtil.isFileEntryLocked(fileEntry.getFileEntryId());
+	hasLock = DLAppServiceUtil.hasFileEntryLock(fileEntry.getFileEntryId());
+	lock = DLAppServiceUtil.getFileEntryLock(fileEntry.getFileEntryId());
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();

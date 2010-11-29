@@ -59,21 +59,8 @@ if (PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.O
 	conversions = (String[])DocumentConversionUtil.getConversions(extension);
 }
 
-Lock lock = null;
-Boolean isLocked = Boolean.FALSE;
-Boolean hasLock = Boolean.FALSE;
-
-try {
-	lock = LockLocalServiceUtil.getLock(DLFileEntry.class.getName(), DLUtil.getLockId(toFileEntry.getGroupId(), toFileEntry.getFolderId(), toFileEntry.getName()));
-
-	isLocked = Boolean.TRUE;
-
-	if (lock.getUserId() == user.getUserId()) {
-		hasLock = Boolean.TRUE;
-	}
-}
-catch (Exception e) {
-}
+Boolean isLocked = DLAppServiceUtil.isFileEntryLocked(toFileEntry.getFileEntryId());
+Boolean hasLock = DLAppServiceUtil.hasFileEntryLock(toFileEntry.getFileEntryId());
 
 PortletURL portletURL = renderResponse.createRenderURL();
 

@@ -382,6 +382,18 @@ public class DLAppServiceWrapper implements DLAppService {
 		return _dlAppService.hasInheritableLock(folderId);
 	}
 
+	public boolean isFileEntryLocked(long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlAppService.isFileEntryLocked(fileEntryId);
+	}
+
+	public boolean isFolderLocked(long folderId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlAppService.isFolderLocked(folderId);
+	}
+
 	public com.liferay.portal.model.Lock lockFileEntry(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

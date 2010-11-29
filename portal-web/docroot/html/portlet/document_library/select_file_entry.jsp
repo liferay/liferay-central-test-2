@@ -181,7 +181,7 @@ if (folder != null) {
 
 		// Locked
 
-		boolean isLocked = LockLocalServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getGroupId(), fileEntry.getFolderId(), HtmlUtil.unescape(fileEntry.getName())));
+		boolean isLocked = DLAppServiceUtil.isFileEntryLocked(fileEntry.getFileEntryId());
 
 		row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowHREF);
 

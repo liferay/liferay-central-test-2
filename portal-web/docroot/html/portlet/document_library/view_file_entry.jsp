@@ -53,21 +53,9 @@ else if (fileEntry != null) {
 	assetClassPK = fileEntry.getFileEntryId();
 }
 
-Lock lock = null;
-Boolean isLocked = Boolean.FALSE;
-Boolean hasLock = Boolean.FALSE;
-
-try {
-	lock = LockLocalServiceUtil.getLock(DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-
-	isLocked = Boolean.TRUE;
-
-	if (lock.getUserId() == user.getUserId()) {
-		hasLock = Boolean.TRUE;
-	}
-}
-catch (Exception e) {
-}
+Boolean isLocked = DLAppServiceUtil.isFileEntryLocked(fileEntry.getFileEntryId());
+Boolean hasLock = DLAppServiceUtil.hasFileEntryLock(fileEntry.getFileEntryId());
+Lock lock = DLAppServiceUtil.getFileEntryLock(fileEntry.getFileEntryId());
 
 String fileUrl = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(title));
 String webDavUrl = StringPool.BLANK;

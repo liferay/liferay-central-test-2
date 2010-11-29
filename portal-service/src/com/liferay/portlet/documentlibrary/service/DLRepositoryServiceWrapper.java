@@ -364,6 +364,18 @@ public class DLRepositoryServiceWrapper implements DLRepositoryService {
 		return _dlRepositoryService.hasInheritableLock(folderId);
 	}
 
+	public boolean isFileEntryLocked(long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlRepositoryService.isFileEntryLocked(fileEntryId);
+	}
+
+	public boolean isFolderLocked(long folderId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlRepositoryService.isFolderLocked(folderId);
+	}
+
 	public com.liferay.portal.model.Lock lockFileEntry(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

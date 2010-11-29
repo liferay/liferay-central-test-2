@@ -659,6 +659,34 @@ public class DLAppServiceSoap {
 		}
 	}
 
+	public static boolean isFileEntryLocked(long fileEntryId)
+		throws RemoteException {
+		try {
+			boolean returnValue = DLAppServiceUtil.isFileEntryLocked(fileEntryId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static boolean isFolderLocked(long folderId)
+		throws RemoteException {
+		try {
+			boolean returnValue = DLAppServiceUtil.isFolderLocked(folderId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap moveFileEntry(
 		long fileEntryId, long newFolderId,
 		com.liferay.portal.service.ServiceContext serviceContext)
