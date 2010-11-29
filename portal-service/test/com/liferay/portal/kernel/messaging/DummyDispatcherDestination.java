@@ -14,15 +14,16 @@
 
 package com.liferay.portal.kernel.messaging;
 
-import java.util.Set;
-
 /**
  * @author Brian Wing Shun Chan
  */
 public class DummyDispatcherDestination extends BaseDestination {
 
-	protected void dispatch(
-		Set<MessageListener> listeners, Message message) {
+	public DestinationStatistics getDestinationStatistics() {
+		return new DestinationStatistics();
+	}
+
+	public void send(Message message) {
 	}
 
 }
