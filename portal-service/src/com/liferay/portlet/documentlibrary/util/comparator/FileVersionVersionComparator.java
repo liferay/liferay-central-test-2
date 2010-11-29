@@ -24,11 +24,11 @@ import com.liferay.portlet.documentlibrary.model.DLFileVersion;
  */
 public class FileVersionVersionComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "version ASC";
+	public static String ORDER_BY_ASC = "createDate ASC";
 
-	public static String ORDER_BY_DESC = "version DESC";
+	public static String ORDER_BY_DESC = "createDate DESC";
 
-	public static String[] ORDER_BY_FIELDS = {"version"};
+	public static String[] ORDER_BY_FIELDS = {"createDate"};
 
 	public FileVersionVersionComparator() {
 		this(false);
