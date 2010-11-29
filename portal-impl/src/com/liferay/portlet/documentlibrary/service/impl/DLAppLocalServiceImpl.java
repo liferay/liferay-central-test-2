@@ -345,20 +345,17 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		return dlRepositoryLocalService.getFileVersion(fileVersionId);
 	}
 
-	public DLFileVersion getFileVersion(
-			long groupId, long folderId, String name, String version)
+	public DLFileVersion getFileVersion(long fileEntryId, String version)
 		throws PortalException, SystemException {
 
 		return dlRepositoryLocalService.getFileVersion(
-			groupId, folderId, name, version);
+			fileEntryId, version);
 	}
 
-	public List<DLFileVersion> getFileVersions(
-		long groupId, long folderId, String name, int status)
+	public List<DLFileVersion> getFileVersions(long fileEntryId, int status)
 		throws SystemException {
 
-		return dlRepositoryLocalService.getFileVersions(
-			groupId, folderId, name, status);
+		return dlRepositoryLocalService.getFileVersions(fileEntryId, status);
 	}
 
 	public DLFolder getFolder(long folderId)
@@ -490,12 +487,10 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			groupId, userId);
 	}
 
-	public DLFileVersion getLatestFileVersion(
-			long groupId, long folderId, String name)
+	public DLFileVersion getLatestFileVersion(long fileEntryId)
 		throws PortalException, SystemException {
 
-		return dlRepositoryLocalService.getLatestFileVersion(
-			groupId, folderId, name);
+		return dlRepositoryLocalService.getLatestFileVersion(fileEntryId);
 	}
 
 	public List<DLFileEntry> getNoAssetFileEntries() throws SystemException {

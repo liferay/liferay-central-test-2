@@ -328,8 +328,7 @@ public class DLAppHelperLocalServiceImpl
 			// Social
 
 			socialActivityLocalService.addUniqueActivity(
-				latestFileVersion.getStatusByUserId(),
-				latestFileVersion.getGroupId(),
+				latestFileVersion.getStatusByUserId(), fileEntry.getGroupId(),
 				latestFileVersion.getCreateDate(), DLFileEntry.class.getName(),
 				fileEntry.getFileEntryId(), DLActivityKeys.ADD_FILE_ENTRY,
 				StringPool.BLANK, 0);

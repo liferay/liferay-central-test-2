@@ -963,11 +963,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		serviceContext.setAddGuestPermissions(true);
 
 		DLAppServiceUtil.updateFileEntry(
-			latestFileVersion.getGroupId(), latestFileVersion.getFolderId(),
-			latestFileVersion.getName(), fileEntry.getTitle(),
-			fileEntry.getTitle(), fileEntry.getDescription(),
-			latestFileVersion.getDescription(), true,
-			fileEntry.getExtraSettings(), null, 0, serviceContext);
+			fileEntry.getGroupId(), fileEntry.getFolderId(),
+			fileEntry.getName(), fileEntry.getTitle(), fileEntry.getTitle(),
+			fileEntry.getDescription(), latestFileVersion.getDescription(),
+			true, fileEntry.getExtraSettings(), null, 0, serviceContext);
 	}
 
 	protected Resource toResource(

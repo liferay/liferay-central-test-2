@@ -65,24 +65,6 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the group id of this d l file version.
-	*
-	* @return the group id of this d l file version
-	*/
-	public long getGroupId() {
-		return _dlFileVersion.getGroupId();
-	}
-
-	/**
-	* Sets the group id of this d l file version.
-	*
-	* @param groupId the group id of this d l file version
-	*/
-	public void setGroupId(long groupId) {
-		_dlFileVersion.setGroupId(groupId);
-	}
-
-	/**
 	* Gets the company id of this d l file version.
 	*
 	* @return the company id of this d l file version
@@ -175,39 +157,21 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the folder id of this d l file version.
+	* Gets the file entry id of this d l file version.
 	*
-	* @return the folder id of this d l file version
+	* @return the file entry id of this d l file version
 	*/
-	public long getFolderId() {
-		return _dlFileVersion.getFolderId();
+	public long getFileEntryId() {
+		return _dlFileVersion.getFileEntryId();
 	}
 
 	/**
-	* Sets the folder id of this d l file version.
+	* Sets the file entry id of this d l file version.
 	*
-	* @param folderId the folder id of this d l file version
+	* @param fileEntryId the file entry id of this d l file version
 	*/
-	public void setFolderId(long folderId) {
-		_dlFileVersion.setFolderId(folderId);
-	}
-
-	/**
-	* Gets the name of this d l file version.
-	*
-	* @return the name of this d l file version
-	*/
-	public java.lang.String getName() {
-		return _dlFileVersion.getName();
-	}
-
-	/**
-	* Sets the name of this d l file version.
-	*
-	* @param name the name of this d l file version
-	*/
-	public void setName(java.lang.String name) {
-		_dlFileVersion.setName(name);
+	public void setFileEntryId(long fileEntryId) {
+		_dlFileVersion.setFileEntryId(fileEntryId);
 	}
 
 	/**

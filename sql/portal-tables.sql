@@ -433,13 +433,11 @@ create table DLFileShortcut (
 
 create table DLFileVersion (
 	fileVersionId LONG not null primary key,
-	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
-	folderId LONG,
-	name VARCHAR(255) null,
+	fileEntryId LONG,
 	extension VARCHAR(75) null,
 	title VARCHAR(255) null,
 	description STRING null,

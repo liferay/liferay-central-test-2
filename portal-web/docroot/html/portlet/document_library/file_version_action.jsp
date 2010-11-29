@@ -33,15 +33,15 @@ Boolean hasLock = (Boolean)objArray[5];
 	<c:if test="<%= showActions && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) && (!isLocked || hasLock) %>">
 		<portlet:renderURL var="redirectURL">
 			<portlet:param name="struts_action" value="/document_library/view" />
-			<portlet:param name="folderId" value="<%= String.valueOf(fileVersion.getFolderId()) %>" />
+			<portlet:param name="folderId" value="<%= String.valueOf(fileEntry.getFolderId()) %>" />
 		</portlet:renderURL>
 
 		<portlet:actionURL var="portletURL">
 			<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= (fileVersionsCount == 1) ? redirectURL : currentURL %>" />
-			<portlet:param name="folderId" value="<%= String.valueOf(fileVersion.getFolderId()) %>" />
-			<portlet:param name="name" value="<%= fileVersion.getName() %>" />
+			<portlet:param name="folderId" value="<%= String.valueOf(fileEntry.getFolderId()) %>" />
+			<portlet:param name="name" value="<%= fileEntry.getName() %>" />
 			<portlet:param name="version" value="<%= String.valueOf(fileVersion.getVersion()) %>" />
 		</portlet:actionURL>
 

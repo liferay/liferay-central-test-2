@@ -7,6 +7,8 @@ alter table DLFileRank add fileEntryId LONG not null;
 
 alter table DLFileShortcut add toFileEntryId LONG not null;
 
+alter table DLFileVersion add fileEntryId LONG not null;
+
 update Group_ set type_ = 3 where type_ = 0;
 
 alter table Layout drop column dlFolderId;

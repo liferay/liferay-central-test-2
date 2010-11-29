@@ -61,13 +61,11 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	public static final String TABLE_NAME = "DLFileVersion";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "fileVersionId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.BIGINT) },
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "folderId", new Integer(Types.BIGINT) },
-			{ "name", new Integer(Types.VARCHAR) },
+			{ "fileEntryId", new Integer(Types.BIGINT) },
 			{ "extension", new Integer(Types.VARCHAR) },
 			{ "title", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
@@ -80,10 +78,10 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 			{ "statusByUserName", new Integer(Types.VARCHAR) },
 			{ "statusDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(255) null,extension VARCHAR(75) null,title VARCHAR(255) null,description STRING null,changeLog VARCHAR(75) null,extraSettings VARCHAR(75) null,version VARCHAR(75) null,size_ LONG,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,fileEntryId LONG,extension VARCHAR(75) null,title VARCHAR(255) null,description STRING null,changeLog VARCHAR(75) null,extraSettings VARCHAR(75) null,version VARCHAR(75) null,size_ LONG,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileVersion";
-	public static final String ORDER_BY_JPQL = " ORDER BY dlFileVersion.folderId DESC, dlFileVersion.name DESC, dlFileVersion.createDate DESC";
-	public static final String ORDER_BY_SQL = " ORDER BY DLFileVersion.folderId DESC, DLFileVersion.name DESC, DLFileVersion.createDate DESC";
+	public static final String ORDER_BY_JPQL = " ORDER BY dlFileVersion.fileEntryId DESC, dlFileVersion.createDate DESC";
+	public static final String ORDER_BY_SQL = " ORDER BY DLFileVersion.fileEntryId DESC, DLFileVersion.createDate DESC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -117,24 +115,6 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 
 	public void setFileVersionId(long fileVersionId) {
 		_fileVersionId = fileVersionId;
-	}
-
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = groupId;
-		}
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -182,43 +162,22 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		_createDate = createDate;
 	}
 
-	public long getFolderId() {
-		return _folderId;
+	public long getFileEntryId() {
+		return _fileEntryId;
 	}
 
-	public void setFolderId(long folderId) {
-		_folderId = folderId;
+	public void setFileEntryId(long fileEntryId) {
+		_fileEntryId = fileEntryId;
 
-		if (!_setOriginalFolderId) {
-			_setOriginalFolderId = true;
+		if (!_setOriginalFileEntryId) {
+			_setOriginalFileEntryId = true;
 
-			_originalFolderId = folderId;
+			_originalFileEntryId = fileEntryId;
 		}
 	}
 
-	public long getOriginalFolderId() {
-		return _originalFolderId;
-	}
-
-	public String getName() {
-		if (_name == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _name;
-		}
-	}
-
-	public void setName(String name) {
-		_name = name;
-
-		if (_originalName == null) {
-			_originalName = name;
-		}
-	}
-
-	public String getOriginalName() {
-		return GetterUtil.getString(_originalName);
+	public long getOriginalFileEntryId() {
+		return _originalFileEntryId;
 	}
 
 	public String getExtension() {
@@ -432,13 +391,11 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		DLFileVersionImpl clone = new DLFileVersionImpl();
 
 		clone.setFileVersionId(getFileVersionId());
-		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
-		clone.setFolderId(getFolderId());
-		clone.setName(getName());
+		clone.setFileEntryId(getFileEntryId());
 		clone.setExtension(getExtension());
 		clone.setTitle(getTitle());
 		clone.setDescription(getDescription());
@@ -457,23 +414,15 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	public int compareTo(DLFileVersion dlFileVersion) {
 		int value = 0;
 
-		if (getFolderId() < dlFileVersion.getFolderId()) {
+		if (getFileEntryId() < dlFileVersion.getFileEntryId()) {
 			value = -1;
 		}
-		else if (getFolderId() > dlFileVersion.getFolderId()) {
+		else if (getFileEntryId() > dlFileVersion.getFileEntryId()) {
 			value = 1;
 		}
 		else {
 			value = 0;
 		}
-
-		value = value * -1;
-
-		if (value != 0) {
-			return value;
-		}
-
-		value = getName().compareTo(dlFileVersion.getName());
 
 		value = value * -1;
 
@@ -522,12 +471,10 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(39);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{fileVersionId=");
 		sb.append(getFileVersionId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
@@ -536,10 +483,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		sb.append(getUserName());
 		sb.append(", createDate=");
 		sb.append(getCreateDate());
-		sb.append(", folderId=");
-		sb.append(getFolderId());
-		sb.append(", name=");
-		sb.append(getName());
+		sb.append(", fileEntryId=");
+		sb.append(getFileEntryId());
 		sb.append(", extension=");
 		sb.append(getExtension());
 		sb.append(", title=");
@@ -568,7 +513,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(61);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.documentlibrary.model.DLFileVersion");
@@ -577,10 +522,6 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		sb.append(
 			"<column><column-name>fileVersionId</column-name><column-value><![CDATA[");
 		sb.append(getFileVersionId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
@@ -599,12 +540,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		sb.append(getCreateDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>folderId</column-name><column-value><![CDATA[");
-		sb.append(getFolderId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>name</column-name><column-value><![CDATA[");
-		sb.append(getName());
+			"<column><column-name>fileEntryId</column-name><column-value><![CDATA[");
+		sb.append(getFileEntryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>extension</column-name><column-value><![CDATA[");
@@ -657,19 +594,14 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	}
 
 	private long _fileVersionId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
 	private Date _createDate;
-	private long _folderId;
-	private long _originalFolderId;
-	private boolean _setOriginalFolderId;
-	private String _name;
-	private String _originalName;
+	private long _fileEntryId;
+	private long _originalFileEntryId;
+	private boolean _setOriginalFileEntryId;
 	private String _extension;
 	private String _title;
 	private String _description;

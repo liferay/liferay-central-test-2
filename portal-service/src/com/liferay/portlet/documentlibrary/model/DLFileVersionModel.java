@@ -74,20 +74,6 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 	public void setFileVersionId(long fileVersionId);
 
 	/**
-	 * Gets the group id of this d l file version.
-	 *
-	 * @return the group id of this d l file version
-	 */
-	public long getGroupId();
-
-	/**
-	 * Sets the group id of this d l file version.
-	 *
-	 * @param groupId the group id of this d l file version
-	 */
-	public void setGroupId(long groupId);
-
-	/**
 	 * Gets the company id of this d l file version.
 	 *
 	 * @return the company id of this d l file version
@@ -160,33 +146,18 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the folder id of this d l file version.
+	 * Gets the file entry id of this d l file version.
 	 *
-	 * @return the folder id of this d l file version
+	 * @return the file entry id of this d l file version
 	 */
-	public long getFolderId();
+	public long getFileEntryId();
 
 	/**
-	 * Sets the folder id of this d l file version.
+	 * Sets the file entry id of this d l file version.
 	 *
-	 * @param folderId the folder id of this d l file version
+	 * @param fileEntryId the file entry id of this d l file version
 	 */
-	public void setFolderId(long folderId);
-
-	/**
-	 * Gets the name of this d l file version.
-	 *
-	 * @return the name of this d l file version
-	 */
-	@AutoEscape
-	public String getName();
-
-	/**
-	 * Sets the name of this d l file version.
-	 *
-	 * @param name the name of this d l file version
-	 */
-	public void setName(String name);
+	public void setFileEntryId(long fileEntryId);
 
 	/**
 	 * Gets the extension of this d l file version.

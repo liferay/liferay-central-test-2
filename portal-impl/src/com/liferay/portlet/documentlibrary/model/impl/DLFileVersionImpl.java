@@ -43,7 +43,7 @@ public class DLFileVersionImpl
 
 	public DLFileEntry getFileEntry() throws PortalException, SystemException {
 		return DLRepositoryLocalServiceUtil.getFileEntry(
-			getGroupId(), getFolderId(), getName());
+			getFileEntryId());
 	}
 
 	public String getIcon() {

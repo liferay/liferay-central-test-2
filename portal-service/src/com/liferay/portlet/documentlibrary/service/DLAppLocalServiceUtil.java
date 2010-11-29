@@ -350,17 +350,16 @@ public class DLAppLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersion(
-		long groupId, long folderId, java.lang.String name,
-		java.lang.String version)
+		long fileEntryId, java.lang.String version)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getFileVersion(groupId, folderId, name, version);
+		return getService().getFileVersion(fileEntryId, version);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
-		long groupId, long folderId, java.lang.String name, int status)
+		long fileEntryId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getFileVersions(groupId, folderId, name, status);
+		return getService().getFileVersions(fileEntryId, status);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
@@ -477,10 +476,10 @@ public class DLAppLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion getLatestFileVersion(
-		long groupId, long folderId, java.lang.String name)
+		long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getLatestFileVersion(groupId, folderId, name);
+		return getService().getLatestFileVersion(fileEntryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getNoAssetFileEntries()

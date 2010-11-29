@@ -35,13 +35,11 @@ public class DLFileVersionSoap implements Serializable {
 		DLFileVersionSoap soapModel = new DLFileVersionSoap();
 
 		soapModel.setFileVersionId(model.getFileVersionId());
-		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
-		soapModel.setFolderId(model.getFolderId());
-		soapModel.setName(model.getName());
+		soapModel.setFileEntryId(model.getFileEntryId());
 		soapModel.setExtension(model.getExtension());
 		soapModel.setTitle(model.getTitle());
 		soapModel.setDescription(model.getDescription());
@@ -113,14 +111,6 @@ public class DLFileVersionSoap implements Serializable {
 		_fileVersionId = fileVersionId;
 	}
 
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-	}
-
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -153,20 +143,12 @@ public class DLFileVersionSoap implements Serializable {
 		_createDate = createDate;
 	}
 
-	public long getFolderId() {
-		return _folderId;
+	public long getFileEntryId() {
+		return _fileEntryId;
 	}
 
-	public void setFolderId(long folderId) {
-		_folderId = folderId;
-	}
-
-	public String getName() {
-		return _name;
-	}
-
-	public void setName(String name) {
-		_name = name;
+	public void setFileEntryId(long fileEntryId) {
+		_fileEntryId = fileEntryId;
 	}
 
 	public String getExtension() {
@@ -258,13 +240,11 @@ public class DLFileVersionSoap implements Serializable {
 	}
 
 	private long _fileVersionId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
-	private long _folderId;
-	private String _name;
+	private long _fileEntryId;
 	private String _extension;
 	private String _title;
 	private String _description;

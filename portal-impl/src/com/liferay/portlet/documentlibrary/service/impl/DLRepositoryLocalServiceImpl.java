@@ -334,9 +334,9 @@ public class DLRepositoryLocalServiceImpl
 
 		// File versions
 
-		List<DLFileVersion> fileVersions = dlFileVersionPersistence.findByG_F_N(
-			fileEntry.getGroupId(), fileEntry.getFolderId(),
-			fileEntry.getName());
+		List<DLFileVersion> fileVersions =
+			dlFileVersionPersistence.findByFileEntryId(
+				fileEntry.getFileEntryId());
 
 		for (DLFileVersion fileVersion : fileVersions) {
 			dlFileVersionPersistence.remove(fileVersion);
@@ -386,6 +386,8 @@ public class DLRepositoryLocalServiceImpl
 		DLFileEntry fileEntry = dlFileEntryPersistence.findByG_F_N(
 			groupId, folderId, name);
 
+		long fileEntryId = fileEntry.getFileEntryId();
+
 		if (Validator.isNotNull(version)) {
 			try {
 				dlLocalService.deleteFile(
@@ -398,11 +400,10 @@ public class DLRepositoryLocalServiceImpl
 				}
 			}
 
-			long fileVersionsCount = dlFileVersionPersistence.countByG_F_N(
-				groupId, folderId, name);
+			long fileVersionsCount =
+				dlFileVersionPersistence.countByFileEntryId(fileEntryId);
 
-			dlFileVersionPersistence.removeByG_F_N_V(
-				groupId, folderId, name, version);
+			dlFileVersionPersistence.removeByF_V(fileEntryId, version);
 
 			if (fileVersionsCount == 1) {
 				dlFileEntryPersistence.remove(fileEntry);
@@ -411,7 +412,7 @@ public class DLRepositoryLocalServiceImpl
 				if (version.equals(fileEntry.getVersion())) {
 					try {
 						DLFileVersion fileVersion = getLatestFileVersion(
-							groupId, folderId, name);
+							fileEntryId);
 
 						fileEntry.setVersion(fileVersion.getVersion());
 						fileEntry.setSize(fileVersion.getSize());
@@ -675,25 +676,20 @@ public class DLRepositoryLocalServiceImpl
 		return dlFileVersionPersistence.findByPrimaryKey(fileVersionId);
 	}
 
-	public DLFileVersion getFileVersion(
-			long groupId, long folderId, String name, String version)
+	public DLFileVersion getFileVersion(long fileEntryId, String version)
 		throws PortalException, SystemException {
 
-		return dlFileVersionPersistence.findByG_F_N_V(
-			groupId, folderId, name, version);
+		return dlFileVersionPersistence.findByF_V(fileEntryId, version);
 	}
 
-	public List<DLFileVersion> getFileVersions(
-			long groupId, long folderId, String name, int status)
+	public List<DLFileVersion> getFileVersions(long fileEntryId, int status)
 		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
-			return dlFileVersionPersistence.findByG_F_N(
-				groupId, folderId, name);
+			return dlFileVersionPersistence.findByFileEntryId(fileEntryId);
 		}
 		else {
-			return dlFileVersionPersistence.findByG_F_N_S(
-				groupId, folderId, name, status);
+			return dlFileVersionPersistence.findByF_S(fileEntryId, status);
 		}
 	}
 
@@ -848,12 +844,12 @@ public class DLRepositoryLocalServiceImpl
 		}
 	}
 
-	public DLFileVersion getLatestFileVersion(
-			long groupId, long folderId, String name)
+	public DLFileVersion getLatestFileVersion(long fileEntryId)
 		throws PortalException, SystemException {
 
-		List<DLFileVersion> fileVersions = dlFileVersionPersistence.findByG_F_N(
-			groupId, folderId, name, 0, 1, new FileVersionVersionComparator());
+		List<DLFileVersion> fileVersions =
+			dlFileVersionPersistence.findByFileEntryId(
+				fileEntryId, 0, 1, new FileVersionVersionComparator());
 
 		if (fileVersions.isEmpty()) {
 			throw new NoSuchFileVersionException();
@@ -934,8 +930,9 @@ public class DLRepositoryLocalServiceImpl
 			fileEntry.getCompanyId(), fileEntry.getGroupId(),
 			DLFileEntry.class.getName(), oldFileEntryId, newFileEntryId);
 
-		List<DLFileVersion> fileVersions = dlFileVersionPersistence.findByG_F_N(
-			groupId, folderId, name);
+		List<DLFileVersion> fileVersions =
+			dlFileVersionPersistence.findByFileEntryId(
+					oldFileEntryId);
 
 		for (DLFileVersion fileVersion : fileVersions) {
 			long newFileVersionId = counterLocalService.increment();
@@ -943,13 +940,11 @@ public class DLRepositoryLocalServiceImpl
 			DLFileVersion newFileVersion = dlFileVersionPersistence.create(
 				newFileVersionId);
 
-			newFileVersion.setGroupId(fileVersion.getGroupId());
 			newFileVersion.setCompanyId(fileVersion.getCompanyId());
 			newFileVersion.setUserId(fileVersion.getUserId());
 			newFileVersion.setUserName(fileVersion.getUserName());
 			newFileVersion.setCreateDate(fileVersion.getCreateDate());
-			newFileVersion.setFolderId(newFolderId);
-			newFileVersion.setName(name);
+			newFileVersion.setFileEntryId(newFileEntryId);
 			newFileVersion.setExtension(fileVersion.getExtension());
 			newFileVersion.setTitle(fileVersion.getTitle());
 			newFileVersion.setDescription(fileVersion.getDescription());
@@ -1011,9 +1006,9 @@ public class DLRepositoryLocalServiceImpl
 			!version.equals(DLFileEntryConstants.DEFAULT_VERSION)) {
 
 			int approvedArticlesCount =
-				dlFileVersionPersistence.countByG_F_N_S(
-					fileEntry.getGroupId(), fileEntry.getFolderId(),
-					fileEntry.getName(), WorkflowConstants.STATUS_APPROVED);
+				dlFileVersionPersistence.countByF_S(
+					fileEntry.getFileEntryId(),
+					WorkflowConstants.STATUS_APPROVED);
 
 			if (approvedArticlesCount > 0) {
 				addDraftAssetEntry = true;
@@ -1303,8 +1298,7 @@ public class DLRepositoryLocalServiceImpl
 		// File version
 
 		DLFileVersion latestFileVersion = getLatestFileVersion(
-			fileEntry.getGroupId(), fileEntry.getFolderId(),
-			fileEntry.getName());
+			fileEntry.getFileEntryId());
 
 		latestFileVersion.setStatus(status);
 		latestFileVersion.setStatusByUserId(user.getUserId());
@@ -1348,9 +1342,9 @@ public class DLRepositoryLocalServiceImpl
 				String newVersion = DLFileEntryConstants.DEFAULT_VERSION;
 
 				List<DLFileVersion> approvedFileVersions =
-					dlFileVersionPersistence.findByG_F_N_S(
-						fileEntry.getGroupId(), fileEntry.getFolderId(),
-						fileEntry.getName(), WorkflowConstants.STATUS_APPROVED);
+					dlFileVersionPersistence.findByF_S(
+						fileEntry.getFileEntryId(),
+						WorkflowConstants.STATUS_APPROVED);
 
 				if (!approvedFileVersions.isEmpty()) {
 					newVersion = approvedFileVersions.get(0).getVersion();
@@ -1449,13 +1443,11 @@ public class DLRepositoryLocalServiceImpl
 		String versionUserName = GetterUtil.getString(
 			fileEntry.getVersionUserName(), fileEntry.getUserName());
 
-		fileVersion.setGroupId(fileEntry.getGroupId());
 		fileVersion.setCompanyId(fileEntry.getCompanyId());
 		fileVersion.setUserId(versionUserId);
 		fileVersion.setUserName(versionUserName);
 		fileVersion.setCreateDate(modifiedDate);
-		fileVersion.setFolderId(fileEntry.getFolderId());
-		fileVersion.setName(fileEntry.getName());
+		fileVersion.setFileEntryId(fileEntry.getFileEntryId());
 		fileVersion.setExtension(extension);
 		fileVersion.setTitle(title);
 		fileVersion.setDescription(description);

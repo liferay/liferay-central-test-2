@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -801,6 +802,26 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		return lockLocalService.refresh(lockUuid, expirationTime);
 	}
 
+	public void revertFileEntry(long fileEntryId)
+		throws PortalException, SystemException {
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), fileEntryId, ActionKeys.DELETE);
+
+		DLFileVersion fileVersion =
+			dlRepositoryLocalService.getLatestFileVersion(fileEntryId);
+
+		if (fileVersion.getStatus() != WorkflowConstants.STATUS_DRAFT) {
+			return;
+		}
+
+		DLFileEntry fileEntry = fileVersion.getFileEntry();
+
+		dlRepositoryLocalService.deleteFileEntry(
+			fileEntry.getGroupId(), fileEntry.getFolderId(),
+			fileEntry.getName(), fileVersion.getVersion());
+	}
+
 	public void unlockFileEntry(long groupId, long folderId, String name)
 		throws SystemException {
 
@@ -1007,8 +1028,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 			fileVersionId);
 
 		DLFileEntryPermission.check(
-			getPermissionChecker(), fileVersion.getGroupId(),
-			fileVersion.getFolderId(), fileVersion.getName(),
+			getPermissionChecker(), fileVersion.getFileEntryId(),
 			ActionKeys.UPDATE);
 
 		return dlRepositoryLocalService.updateFileVersionDescription(

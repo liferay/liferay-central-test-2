@@ -93,22 +93,21 @@ public class DLFileEntryImpl
 	public DLFileVersion getFileVersion()
 		throws PortalException, SystemException {
 
-		return DLRepositoryLocalServiceUtil.getFileVersion(
-			getGroupId(), getFolderId(), getName(), getVersion());
+		return getFileVersion(getVersion());
 	}
 
 	public DLFileVersion getFileVersion(String version)
 		throws PortalException, SystemException {
 
 		return DLRepositoryLocalServiceUtil.getFileVersion(
-			getGroupId(), getFolderId(), getName(), version);
+			getFileEntryId(), version);
 	}
 
 	public List<DLFileVersion> getFileVersions(int status)
 		throws SystemException {
 
 		return DLRepositoryLocalServiceUtil.getFileVersions(
-			getGroupId(), getFolderId(), getName(), status);
+			getFileEntryId(), status);
 	}
 
 	public DLFolder getFolder() {
@@ -139,7 +138,7 @@ public class DLFileEntryImpl
 		throws PortalException, SystemException {
 
 		return DLRepositoryLocalServiceUtil.getLatestFileVersion(
-			getGroupId(), getFolderId(), getName());
+			getFileEntryId());
 	}
 
 	public Lock getLock() {

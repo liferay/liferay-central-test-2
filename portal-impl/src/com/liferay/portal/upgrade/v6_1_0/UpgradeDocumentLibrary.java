@@ -148,6 +148,37 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 			upgradeTable.updateTable();
 		}
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select fileVersionId, folderId, name from DLFileVersion");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long fileVersionId = rs.getLong("fileVersionId");
+				long folderId = rs.getLong("folderId");
+				String name = rs.getString("name");
+
+				long fileEntryId = getFileEntryId(folderId, name);
+
+				runSQL(
+					"update DLFileVersion set fileEntryId = '" + fileEntryId +
+						"' where fileVersionId = " + fileVersionId);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		runSQL("alter table DLFileVersion drop column folderId");
+		runSQL("alter table DLFileVersion drop column name");
 	}
 
 }

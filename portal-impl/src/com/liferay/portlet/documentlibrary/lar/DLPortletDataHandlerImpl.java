@@ -329,8 +329,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			else {
 				DLFileVersion latestFileVersion =
 					DLAppLocalServiceUtil.getLatestFileVersion(
-						portletDataContext.getScopeGroupId(), folderId,
-						existingFileEntry.getName());
+						existingFileEntry.getFileEntryId());
 
 				DLAppLocalServiceUtil.updateAsset(
 					userId, existingFileEntry, latestFileVersion,

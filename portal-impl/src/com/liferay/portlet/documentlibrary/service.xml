@@ -200,10 +200,6 @@
 
 		<column name="fileVersionId" type="long" primary="true" />
 
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -213,8 +209,7 @@
 
 		<!-- Other fields -->
 
-		<column name="folderId" type="long" />
-		<column name="name" type="String" />
+		<column name="fileEntryId" type="long" />
         <column name="extension" type="String" />
 		<column name="title" type="String" />
 		<column name="description" type="String" />
@@ -230,28 +225,21 @@
 		<!-- Order -->
 
 		<order by="desc">
-			<order-column name="folderId" />
-			<order-column name="name" />
+			<order-column name="fileEntryId" />
 			<order-column name="createDate" />
 		</order>
 
 		<!-- Finders -->
 
-		<finder name="G_F_N" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column name="folderId" />
-			<finder-column name="name" />
+		<finder name="FileEntryId" return-type="Collection">
+			<finder-column name="fileEntryId" />
 		</finder>
-		<finder name="G_F_N_V" return-type="DLFileVersion" unique="true">
-			<finder-column name="groupId" />
-			<finder-column name="folderId" />
-			<finder-column name="name" />
+		<finder name="F_V" return-type="DLFileVersion" unique="true">
+			<finder-column name="fileEntryId" />
 			<finder-column name="version" />
 		</finder>
-		<finder name="G_F_N_S" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column name="folderId" />
-			<finder-column name="name" />
+		<finder name="F_S" return-type="Collection">
+			<finder-column name="fileEntryId" />
 			<finder-column name="status" />
 		</finder>
 	</entity>

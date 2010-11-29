@@ -4,13 +4,12 @@
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByG_F_S">
 		<![CDATA[
 			SELECT
-				COUNT(DISTINCT fileEntryId) AS COUNT_VALUE
+				COUNT(DISTINCT DLFileEntry.fileEntryId) AS COUNT_VALUE
 			FROM
 				DLFileEntry
 			INNER JOIN
 				DLFileVersion ON
-					(DLFileVersion.folderId = DLFileEntry.folderId) AND
-					(DLFileVersion.name = DLFileEntry.name)
+					(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId)
 			WHERE
 				(DLFileEntry.groupId = ?) AND
 				(DLFileVersion.status = ?) AND
@@ -48,13 +47,12 @@
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.countFE_ByG_F_S">
 		<![CDATA[
 			SELECT
-				COUNT(DISTINCT fileEntryId) AS COUNT_VALUE
+				COUNT(DISTINCT DLFileEntry.fileEntryId) AS COUNT_VALUE
 			FROM
 				DLFileEntry
 			INNER JOIN
 				DLFileVersion ON
-					(DLFileVersion.folderId = DLFileEntry.folderId) AND
-					(DLFileVersion.name = DLFileEntry.name)
+					(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId)
 			WHERE
 				(DLFileEntry.groupId = ?) AND
 				(DLFileVersion.status = ?) AND
@@ -95,8 +93,7 @@
 				DLFileEntry
 			INNER JOIN
 				DLFileVersion ON
-					(DLFileVersion.folderId = DLFileEntry.folderId) AND
-					(DLFileVersion.name = DLFileEntry.name)
+					(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId)
 			WHERE
 				(DLFileEntry.groupId = ?) AND
 				(DLFileVersion.status = ?) AND

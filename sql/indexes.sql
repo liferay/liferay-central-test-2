@@ -148,9 +148,9 @@ create index IX_4B7247F6 on DLFileShortcut (toFileEntryId);
 create index IX_4831EBE4 on DLFileShortcut (uuid_);
 create unique index IX_FDB4A946 on DLFileShortcut (uuid_, groupId);
 
-create index IX_B413F1EC on DLFileVersion (groupId, folderId, name);
-create index IX_94E784D2 on DLFileVersion (groupId, folderId, name, status);
-create unique index IX_2F8FED9C on DLFileVersion (groupId, folderId, name, version);
+create index IX_C68DC967 on DLFileVersion (fileEntryId);
+create index IX_D47BB14D on DLFileVersion (fileEntryId, status);
+create unique index IX_E2815081 on DLFileVersion (fileEntryId, version);
 
 create index IX_A74DB14C on DLFolder (companyId);
 create index IX_F2EA1ACE on DLFolder (groupId);

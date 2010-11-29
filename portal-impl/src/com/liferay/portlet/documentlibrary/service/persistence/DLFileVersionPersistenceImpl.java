@@ -73,54 +73,40 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	public static final String FINDER_CLASS_NAME_ENTITY = DLFileVersionImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
-	public static final FinderPath FINDER_PATH_FIND_BY_G_F_N = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_FILEENTRYID = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileVersionModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByG_F_N",
+			FINDER_CLASS_NAME_LIST, "findByFileEntryId",
 			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				String.class.getName(),
+				Long.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_F_N = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_FILEENTRYID = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileVersionModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByG_F_N",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				String.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FETCH_BY_G_F_N_V = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByFileEntryId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_F_V = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileVersionModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_ENTITY, "fetchByG_F_N_V",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				String.class.getName(), String.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_F_N_V = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByF_V",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_F_V = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileVersionModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByG_F_N_V",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				String.class.getName(), String.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_G_F_N_S = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByF_V",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_F_S = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileVersionModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByG_F_N_S",
+			FINDER_CLASS_NAME_LIST, "findByF_S",
 			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				String.class.getName(), Integer.class.getName(),
+				Long.class.getName(), Integer.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_F_N_S = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_F_S = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileVersionModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByG_F_N_S",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				String.class.getName(), Integer.class.getName()
-			});
+			FINDER_CLASS_NAME_LIST, "countByF_S",
+			new String[] { Long.class.getName(), Integer.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileVersionModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
@@ -138,12 +124,9 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			DLFileVersionImpl.class, dlFileVersion.getPrimaryKey(),
 			dlFileVersion);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F_N_V,
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_V,
 			new Object[] {
-				new Long(dlFileVersion.getGroupId()),
-				new Long(dlFileVersion.getFolderId()),
-				
-			dlFileVersion.getName(),
+				new Long(dlFileVersion.getFileEntryId()),
 				
 			dlFileVersion.getVersion()
 			}, dlFileVersion);
@@ -190,12 +173,9 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		EntityCacheUtil.removeResult(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileVersionImpl.class, dlFileVersion.getPrimaryKey());
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F_N_V,
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_F_V,
 			new Object[] {
-				new Long(dlFileVersion.getGroupId()),
-				new Long(dlFileVersion.getFolderId()),
-				
-			dlFileVersion.getName(),
+				new Long(dlFileVersion.getFileEntryId()),
 				
 			dlFileVersion.getVersion()
 			});
@@ -291,12 +271,9 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 		DLFileVersionModelImpl dlFileVersionModelImpl = (DLFileVersionModelImpl)dlFileVersion;
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F_N_V,
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_F_V,
 			new Object[] {
-				new Long(dlFileVersionModelImpl.getOriginalGroupId()),
-				new Long(dlFileVersionModelImpl.getOriginalFolderId()),
-				
-			dlFileVersionModelImpl.getOriginalName(),
+				new Long(dlFileVersionModelImpl.getOriginalFileEntryId()),
 				
 			dlFileVersionModelImpl.getOriginalVersion()
 			});
@@ -339,36 +316,24 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			dlFileVersion);
 
 		if (!isNew &&
-				((dlFileVersion.getGroupId() != dlFileVersionModelImpl.getOriginalGroupId()) ||
-				(dlFileVersion.getFolderId() != dlFileVersionModelImpl.getOriginalFolderId()) ||
-				!Validator.equals(dlFileVersion.getName(),
-					dlFileVersionModelImpl.getOriginalName()) ||
+				((dlFileVersion.getFileEntryId() != dlFileVersionModelImpl.getOriginalFileEntryId()) ||
 				!Validator.equals(dlFileVersion.getVersion(),
 					dlFileVersionModelImpl.getOriginalVersion()))) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F_N_V,
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_F_V,
 				new Object[] {
-					new Long(dlFileVersionModelImpl.getOriginalGroupId()),
-					new Long(dlFileVersionModelImpl.getOriginalFolderId()),
-					
-				dlFileVersionModelImpl.getOriginalName(),
+					new Long(dlFileVersionModelImpl.getOriginalFileEntryId()),
 					
 				dlFileVersionModelImpl.getOriginalVersion()
 				});
 		}
 
 		if (isNew ||
-				((dlFileVersion.getGroupId() != dlFileVersionModelImpl.getOriginalGroupId()) ||
-				(dlFileVersion.getFolderId() != dlFileVersionModelImpl.getOriginalFolderId()) ||
-				!Validator.equals(dlFileVersion.getName(),
-					dlFileVersionModelImpl.getOriginalName()) ||
+				((dlFileVersion.getFileEntryId() != dlFileVersionModelImpl.getOriginalFileEntryId()) ||
 				!Validator.equals(dlFileVersion.getVersion(),
 					dlFileVersionModelImpl.getOriginalVersion()))) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F_N_V,
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_V,
 				new Object[] {
-					new Long(dlFileVersion.getGroupId()),
-					new Long(dlFileVersion.getFolderId()),
-					
-				dlFileVersion.getName(),
+					new Long(dlFileVersion.getFileEntryId()),
 					
 				dlFileVersion.getVersion()
 				}, dlFileVersion);
@@ -388,13 +353,11 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		dlFileVersionImpl.setPrimaryKey(dlFileVersion.getPrimaryKey());
 
 		dlFileVersionImpl.setFileVersionId(dlFileVersion.getFileVersionId());
-		dlFileVersionImpl.setGroupId(dlFileVersion.getGroupId());
 		dlFileVersionImpl.setCompanyId(dlFileVersion.getCompanyId());
 		dlFileVersionImpl.setUserId(dlFileVersion.getUserId());
 		dlFileVersionImpl.setUserName(dlFileVersion.getUserName());
 		dlFileVersionImpl.setCreateDate(dlFileVersion.getCreateDate());
-		dlFileVersionImpl.setFolderId(dlFileVersion.getFolderId());
-		dlFileVersionImpl.setName(dlFileVersion.getName());
+		dlFileVersionImpl.setFileEntryId(dlFileVersion.getFileEntryId());
 		dlFileVersionImpl.setExtension(dlFileVersion.getExtension());
 		dlFileVersionImpl.setTitle(dlFileVersion.getTitle());
 		dlFileVersionImpl.setDescription(dlFileVersion.getDescription());
@@ -496,97 +459,76 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	}
 
 	/**
-	 * Finds all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 * Finds all the d l file versions where fileEntryId = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @return the matching d l file versions
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileVersion> findByG_F_N(long groupId, long folderId,
-		String name) throws SystemException {
-		return findByG_F_N(groupId, folderId, name, QueryUtil.ALL_POS,
+	public List<DLFileVersion> findByFileEntryId(long fileEntryId)
+		throws SystemException {
+		return findByFileEntryId(fileEntryId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Finds a range of all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 * Finds a range of all the d l file versions where fileEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param start the lower bound of the range of d l file versions to return
 	 * @param end the upper bound of the range of d l file versions to return (not inclusive)
 	 * @return the range of matching d l file versions
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileVersion> findByG_F_N(long groupId, long folderId,
-		String name, int start, int end) throws SystemException {
-		return findByG_F_N(groupId, folderId, name, start, end, null);
+	public List<DLFileVersion> findByFileEntryId(long fileEntryId, int start,
+		int end) throws SystemException {
+		return findByFileEntryId(fileEntryId, start, end, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 * Finds an ordered range of all the d l file versions where fileEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param start the lower bound of the range of d l file versions to return
 	 * @param end the upper bound of the range of d l file versions to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
 	 * @return the ordered range of matching d l file versions
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileVersion> findByG_F_N(long groupId, long folderId,
-		String name, int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	public List<DLFileVersion> findByFileEntryId(long fileEntryId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				groupId, folderId, name,
+				fileEntryId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
-		List<DLFileVersion> list = (List<DLFileVersion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_F_N,
+		List<DLFileVersion> list = (List<DLFileVersion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_FILEENTRYID,
 				finderArgs, this);
 
 		if (list == null) {
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(5 +
+				query = new StringBundler(3 +
 						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
-				query = new StringBundler(5);
+				query = new StringBundler(3);
 			}
 
 			query.append(_SQL_SELECT_DLFILEVERSION_WHERE);
 
-			query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_F_N_FOLDERID_2);
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_G_F_N_NAME_1);
-			}
-			else {
-				if (name.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_F_N_NAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_F_N_NAME_2);
-				}
-			}
+			query.append(_FINDER_COLUMN_FILEENTRYID_FILEENTRYID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -608,13 +550,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
-
-				qPos.add(folderId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
+				qPos.add(fileEntryId);
 
 				list = (List<DLFileVersion>)QueryUtil.list(q, getDialect(),
 						start, end);
@@ -624,13 +560,13 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			}
 			finally {
 				if (list == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_F_N,
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_FILEENTRYID,
 						finderArgs);
 				}
 				else {
 					cacheResult(list);
 
-					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_F_N,
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_FILEENTRYID,
 						finderArgs, list);
 				}
 
@@ -642,39 +578,31 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	}
 
 	/**
-	 * Finds the first d l file version in the ordered set where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 * Finds the first d l file version in the ordered set where fileEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching d l file version
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching d l file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileVersion findByG_F_N_First(long groupId, long folderId,
-		String name, OrderByComparator orderByComparator)
+	public DLFileVersion findByFileEntryId_First(long fileEntryId,
+		OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
-		List<DLFileVersion> list = findByG_F_N(groupId, folderId, name, 0, 1,
+		List<DLFileVersion> list = findByFileEntryId(fileEntryId, 0, 1,
 				orderByComparator);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(8);
+			StringBundler msg = new StringBundler(4);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=");
-			msg.append(groupId);
-
-			msg.append(", folderId=");
-			msg.append(folderId);
-
-			msg.append(", name=");
-			msg.append(name);
+			msg.append("fileEntryId=");
+			msg.append(fileEntryId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -686,41 +614,33 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	}
 
 	/**
-	 * Finds the last d l file version in the ordered set where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 * Finds the last d l file version in the ordered set where fileEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching d l file version
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching d l file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileVersion findByG_F_N_Last(long groupId, long folderId,
-		String name, OrderByComparator orderByComparator)
+	public DLFileVersion findByFileEntryId_Last(long fileEntryId,
+		OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
-		int count = countByG_F_N(groupId, folderId, name);
+		int count = countByFileEntryId(fileEntryId);
 
-		List<DLFileVersion> list = findByG_F_N(groupId, folderId, name,
-				count - 1, count, orderByComparator);
+		List<DLFileVersion> list = findByFileEntryId(fileEntryId, count - 1,
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(8);
+			StringBundler msg = new StringBundler(4);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=");
-			msg.append(groupId);
-
-			msg.append(", folderId=");
-			msg.append(folderId);
-
-			msg.append(", name=");
-			msg.append(name);
+			msg.append("fileEntryId=");
+			msg.append(fileEntryId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -732,24 +652,21 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	}
 
 	/**
-	 * Finds the d l file versions before and after the current d l file version in the ordered set where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 * Finds the d l file versions before and after the current d l file version in the ordered set where fileEntryId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param fileVersionId the primary key of the current d l file version
-	 * @param groupId the group id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next d l file version
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a d l file version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileVersion[] findByG_F_N_PrevAndNext(long fileVersionId,
-		long groupId, long folderId, String name,
-		OrderByComparator orderByComparator)
+	public DLFileVersion[] findByFileEntryId_PrevAndNext(long fileVersionId,
+		long fileEntryId, OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
 		DLFileVersion dlFileVersion = findByPrimaryKey(fileVersionId);
 
@@ -760,13 +677,13 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 			DLFileVersion[] array = new DLFileVersionImpl[3];
 
-			array[0] = getByG_F_N_PrevAndNext(session, dlFileVersion, groupId,
-					folderId, name, orderByComparator, true);
+			array[0] = getByFileEntryId_PrevAndNext(session, dlFileVersion,
+					fileEntryId, orderByComparator, true);
 
 			array[1] = dlFileVersion;
 
-			array[2] = getByG_F_N_PrevAndNext(session, dlFileVersion, groupId,
-					folderId, name, orderByComparator, false);
+			array[2] = getByFileEntryId_PrevAndNext(session, dlFileVersion,
+					fileEntryId, orderByComparator, false);
 
 			return array;
 		}
@@ -778,8 +695,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		}
 	}
 
-	protected DLFileVersion getByG_F_N_PrevAndNext(Session session,
-		DLFileVersion dlFileVersion, long groupId, long folderId, String name,
+	protected DLFileVersion getByFileEntryId_PrevAndNext(Session session,
+		DLFileVersion dlFileVersion, long fileEntryId,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -793,21 +710,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 		query.append(_SQL_SELECT_DLFILEVERSION_WHERE);
 
-		query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
-
-		query.append(_FINDER_COLUMN_G_F_N_FOLDERID_2);
-
-		if (name == null) {
-			query.append(_FINDER_COLUMN_G_F_N_NAME_1);
-		}
-		else {
-			if (name.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_G_F_N_NAME_3);
-			}
-			else {
-				query.append(_FINDER_COLUMN_G_F_N_NAME_2);
-			}
-		}
+		query.append(_FINDER_COLUMN_FILEENTRYID_FILEENTRYID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -876,13 +779,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(groupId);
-
-		qPos.add(folderId);
-
-		if (name != null) {
-			qPos.add(name);
-		}
+		qPos.add(fileEntryId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByValues(dlFileVersion);
@@ -903,35 +800,25 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	}
 
 	/**
-	 * Finds the d l file version where groupId = &#63; and folderId = &#63; and name = &#63; and version = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileVersionException} if it could not be found.
+	 * Finds the d l file version where fileEntryId = &#63; and version = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileVersionException} if it could not be found.
 	 *
-	 * @param groupId the group id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param version the version to search with
 	 * @return the matching d l file version
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching d l file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileVersion findByG_F_N_V(long groupId, long folderId,
-		String name, String version)
+	public DLFileVersion findByF_V(long fileEntryId, String version)
 		throws NoSuchFileVersionException, SystemException {
-		DLFileVersion dlFileVersion = fetchByG_F_N_V(groupId, folderId, name,
-				version);
+		DLFileVersion dlFileVersion = fetchByF_V(fileEntryId, version);
 
 		if (dlFileVersion == null) {
-			StringBundler msg = new StringBundler(10);
+			StringBundler msg = new StringBundler(6);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=");
-			msg.append(groupId);
-
-			msg.append(", folderId=");
-			msg.append(folderId);
-
-			msg.append(", name=");
-			msg.append(name);
+			msg.append("fileEntryId=");
+			msg.append(fileEntryId);
 
 			msg.append(", version=");
 			msg.append(version);
@@ -949,72 +836,53 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	}
 
 	/**
-	 * Finds the d l file version where groupId = &#63; and folderId = &#63; and name = &#63; and version = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Finds the d l file version where fileEntryId = &#63; and version = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param version the version to search with
 	 * @return the matching d l file version, or <code>null</code> if a matching d l file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileVersion fetchByG_F_N_V(long groupId, long folderId,
-		String name, String version) throws SystemException {
-		return fetchByG_F_N_V(groupId, folderId, name, version, true);
+	public DLFileVersion fetchByF_V(long fileEntryId, String version)
+		throws SystemException {
+		return fetchByF_V(fileEntryId, version, true);
 	}
 
 	/**
-	 * Finds the d l file version where groupId = &#63; and folderId = &#63; and name = &#63; and version = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Finds the d l file version where fileEntryId = &#63; and version = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param version the version to search with
 	 * @return the matching d l file version, or <code>null</code> if a matching d l file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileVersion fetchByG_F_N_V(long groupId, long folderId,
-		String name, String version, boolean retrieveFromCache)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, folderId, name, version };
+	public DLFileVersion fetchByF_V(long fileEntryId, String version,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { fileEntryId, version };
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_F_N_V,
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_F_V,
 					finderArgs, this);
 		}
 
 		if (result == null) {
-			StringBundler query = new StringBundler(6);
+			StringBundler query = new StringBundler(4);
 
 			query.append(_SQL_SELECT_DLFILEVERSION_WHERE);
 
-			query.append(_FINDER_COLUMN_G_F_N_V_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_F_N_V_FOLDERID_2);
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_G_F_N_V_NAME_1);
-			}
-			else {
-				if (name.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_F_N_V_NAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_F_N_V_NAME_2);
-				}
-			}
+			query.append(_FINDER_COLUMN_F_V_FILEENTRYID_2);
 
 			if (version == null) {
-				query.append(_FINDER_COLUMN_G_F_N_V_VERSION_1);
+				query.append(_FINDER_COLUMN_F_V_VERSION_1);
 			}
 			else {
 				if (version.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_F_N_V_VERSION_3);
+					query.append(_FINDER_COLUMN_F_V_VERSION_3);
 				}
 				else {
-					query.append(_FINDER_COLUMN_G_F_N_V_VERSION_2);
+					query.append(_FINDER_COLUMN_F_V_VERSION_2);
 				}
 			}
 
@@ -1031,13 +899,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
-
-				qPos.add(folderId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
+				qPos.add(fileEntryId);
 
 				if (version != null) {
 					qPos.add(version);
@@ -1050,7 +912,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 				DLFileVersion dlFileVersion = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F_N_V,
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_V,
 						finderArgs, list);
 				}
 				else {
@@ -1058,13 +920,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 					cacheResult(dlFileVersion);
 
-					if ((dlFileVersion.getGroupId() != groupId) ||
-							(dlFileVersion.getFolderId() != folderId) ||
-							(dlFileVersion.getName() == null) ||
-							!dlFileVersion.getName().equals(name) ||
+					if ((dlFileVersion.getFileEntryId() != fileEntryId) ||
 							(dlFileVersion.getVersion() == null) ||
 							!dlFileVersion.getVersion().equals(version)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F_N_V,
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_V,
 							finderArgs, dlFileVersion);
 					}
 				}
@@ -1076,7 +935,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F_N_V,
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_F_V,
 						finderArgs);
 				}
 
@@ -1094,52 +953,46 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	}
 
 	/**
-	 * Finds all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63; and status = &#63;.
+	 * Finds all the d l file versions where fileEntryId = &#63; and status = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param status the status to search with
 	 * @return the matching d l file versions
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileVersion> findByG_F_N_S(long groupId, long folderId,
-		String name, int status) throws SystemException {
-		return findByG_F_N_S(groupId, folderId, name, status,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<DLFileVersion> findByF_S(long fileEntryId, int status)
+		throws SystemException {
+		return findByF_S(fileEntryId, status, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Finds a range of all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63; and status = &#63;.
+	 * Finds a range of all the d l file versions where fileEntryId = &#63; and status = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of d l file versions to return
 	 * @param end the upper bound of the range of d l file versions to return (not inclusive)
 	 * @return the range of matching d l file versions
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileVersion> findByG_F_N_S(long groupId, long folderId,
-		String name, int status, int start, int end) throws SystemException {
-		return findByG_F_N_S(groupId, folderId, name, status, start, end, null);
+	public List<DLFileVersion> findByF_S(long fileEntryId, int status,
+		int start, int end) throws SystemException {
+		return findByF_S(fileEntryId, status, start, end, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63; and status = &#63;.
+	 * Finds an ordered range of all the d l file versions where fileEntryId = &#63; and status = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of d l file versions to return
 	 * @param end the upper bound of the range of d l file versions to return (not inclusive)
@@ -1147,49 +1000,35 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 * @return the ordered range of matching d l file versions
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DLFileVersion> findByG_F_N_S(long groupId, long folderId,
-		String name, int status, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+	public List<DLFileVersion> findByF_S(long fileEntryId, int status,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				groupId, folderId, name, status,
+				fileEntryId, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
-		List<DLFileVersion> list = (List<DLFileVersion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_F_N_S,
+		List<DLFileVersion> list = (List<DLFileVersion>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_F_S,
 				finderArgs, this);
 
 		if (list == null) {
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(6 +
+				query = new StringBundler(4 +
 						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
-				query = new StringBundler(6);
+				query = new StringBundler(4);
 			}
 
 			query.append(_SQL_SELECT_DLFILEVERSION_WHERE);
 
-			query.append(_FINDER_COLUMN_G_F_N_S_GROUPID_2);
+			query.append(_FINDER_COLUMN_F_S_FILEENTRYID_2);
 
-			query.append(_FINDER_COLUMN_G_F_N_S_FOLDERID_2);
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_G_F_N_S_NAME_1);
-			}
-			else {
-				if (name.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_F_N_S_NAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_F_N_S_NAME_2);
-				}
-			}
-
-			query.append(_FINDER_COLUMN_G_F_N_S_STATUS_2);
+			query.append(_FINDER_COLUMN_F_S_STATUS_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1211,13 +1050,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
-
-				qPos.add(folderId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
+				qPos.add(fileEntryId);
 
 				qPos.add(status);
 
@@ -1229,13 +1062,13 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			}
 			finally {
 				if (list == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_F_N_S,
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_F_S,
 						finderArgs);
 				}
 				else {
 					cacheResult(list);
 
-					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_F_N_S,
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_F_S,
 						finderArgs, list);
 				}
 
@@ -1247,40 +1080,32 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	}
 
 	/**
-	 * Finds the first d l file version in the ordered set where groupId = &#63; and folderId = &#63; and name = &#63; and status = &#63;.
+	 * Finds the first d l file version in the ordered set where fileEntryId = &#63; and status = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching d l file version
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching d l file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileVersion findByG_F_N_S_First(long groupId, long folderId,
-		String name, int status, OrderByComparator orderByComparator)
+	public DLFileVersion findByF_S_First(long fileEntryId, int status,
+		OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
-		List<DLFileVersion> list = findByG_F_N_S(groupId, folderId, name,
-				status, 0, 1, orderByComparator);
+		List<DLFileVersion> list = findByF_S(fileEntryId, status, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(10);
+			StringBundler msg = new StringBundler(6);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=");
-			msg.append(groupId);
-
-			msg.append(", folderId=");
-			msg.append(folderId);
-
-			msg.append(", name=");
-			msg.append(name);
+			msg.append("fileEntryId=");
+			msg.append(fileEntryId);
 
 			msg.append(", status=");
 			msg.append(status);
@@ -1295,42 +1120,34 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	}
 
 	/**
-	 * Finds the last d l file version in the ordered set where groupId = &#63; and folderId = &#63; and name = &#63; and status = &#63;.
+	 * Finds the last d l file version in the ordered set where fileEntryId = &#63; and status = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching d l file version
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching d l file version could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileVersion findByG_F_N_S_Last(long groupId, long folderId,
-		String name, int status, OrderByComparator orderByComparator)
+	public DLFileVersion findByF_S_Last(long fileEntryId, int status,
+		OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
-		int count = countByG_F_N_S(groupId, folderId, name, status);
+		int count = countByF_S(fileEntryId, status);
 
-		List<DLFileVersion> list = findByG_F_N_S(groupId, folderId, name,
-				status, count - 1, count, orderByComparator);
+		List<DLFileVersion> list = findByF_S(fileEntryId, status, count - 1,
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(10);
+			StringBundler msg = new StringBundler(6);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("groupId=");
-			msg.append(groupId);
-
-			msg.append(", folderId=");
-			msg.append(folderId);
-
-			msg.append(", name=");
-			msg.append(name);
+			msg.append("fileEntryId=");
+			msg.append(fileEntryId);
 
 			msg.append(", status=");
 			msg.append(status);
@@ -1345,25 +1162,22 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	}
 
 	/**
-	 * Finds the d l file versions before and after the current d l file version in the ordered set where groupId = &#63; and folderId = &#63; and name = &#63; and status = &#63;.
+	 * Finds the d l file versions before and after the current d l file version in the ordered set where fileEntryId = &#63; and status = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param fileVersionId the primary key of the current d l file version
-	 * @param groupId the group id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next d l file version
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a d l file version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFileVersion[] findByG_F_N_S_PrevAndNext(long fileVersionId,
-		long groupId, long folderId, String name, int status,
-		OrderByComparator orderByComparator)
+	public DLFileVersion[] findByF_S_PrevAndNext(long fileVersionId,
+		long fileEntryId, int status, OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
 		DLFileVersion dlFileVersion = findByPrimaryKey(fileVersionId);
 
@@ -1374,13 +1188,13 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 			DLFileVersion[] array = new DLFileVersionImpl[3];
 
-			array[0] = getByG_F_N_S_PrevAndNext(session, dlFileVersion,
-					groupId, folderId, name, status, orderByComparator, true);
+			array[0] = getByF_S_PrevAndNext(session, dlFileVersion,
+					fileEntryId, status, orderByComparator, true);
 
 			array[1] = dlFileVersion;
 
-			array[2] = getByG_F_N_S_PrevAndNext(session, dlFileVersion,
-					groupId, folderId, name, status, orderByComparator, false);
+			array[2] = getByF_S_PrevAndNext(session, dlFileVersion,
+					fileEntryId, status, orderByComparator, false);
 
 			return array;
 		}
@@ -1392,9 +1206,9 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		}
 	}
 
-	protected DLFileVersion getByG_F_N_S_PrevAndNext(Session session,
-		DLFileVersion dlFileVersion, long groupId, long folderId, String name,
-		int status, OrderByComparator orderByComparator, boolean previous) {
+	protected DLFileVersion getByF_S_PrevAndNext(Session session,
+		DLFileVersion dlFileVersion, long fileEntryId, int status,
+		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -1407,23 +1221,9 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 		query.append(_SQL_SELECT_DLFILEVERSION_WHERE);
 
-		query.append(_FINDER_COLUMN_G_F_N_S_GROUPID_2);
+		query.append(_FINDER_COLUMN_F_S_FILEENTRYID_2);
 
-		query.append(_FINDER_COLUMN_G_F_N_S_FOLDERID_2);
-
-		if (name == null) {
-			query.append(_FINDER_COLUMN_G_F_N_S_NAME_1);
-		}
-		else {
-			if (name.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_G_F_N_S_NAME_3);
-			}
-			else {
-				query.append(_FINDER_COLUMN_G_F_N_S_NAME_2);
-			}
-		}
-
-		query.append(_FINDER_COLUMN_G_F_N_S_STATUS_2);
+		query.append(_FINDER_COLUMN_F_S_STATUS_2);
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -1492,13 +1292,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		qPos.add(groupId);
-
-		qPos.add(folderId);
-
-		if (name != null) {
-			qPos.add(name);
-		}
+		qPos.add(fileEntryId);
 
 		qPos.add(status);
 
@@ -1630,50 +1424,41 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	}
 
 	/**
-	 * Removes all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63; from the database.
+	 * Removes all the d l file versions where fileEntryId = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByG_F_N(long groupId, long folderId, String name)
-		throws SystemException {
-		for (DLFileVersion dlFileVersion : findByG_F_N(groupId, folderId, name)) {
+	public void removeByFileEntryId(long fileEntryId) throws SystemException {
+		for (DLFileVersion dlFileVersion : findByFileEntryId(fileEntryId)) {
 			remove(dlFileVersion);
 		}
 	}
 
 	/**
-	 * Removes the d l file version where groupId = &#63; and folderId = &#63; and name = &#63; and version = &#63; from the database.
+	 * Removes the d l file version where fileEntryId = &#63; and version = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param version the version to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByG_F_N_V(long groupId, long folderId, String name,
-		String version) throws NoSuchFileVersionException, SystemException {
-		DLFileVersion dlFileVersion = findByG_F_N_V(groupId, folderId, name,
-				version);
+	public void removeByF_V(long fileEntryId, String version)
+		throws NoSuchFileVersionException, SystemException {
+		DLFileVersion dlFileVersion = findByF_V(fileEntryId, version);
 
 		remove(dlFileVersion);
 	}
 
 	/**
-	 * Removes all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63; and status = &#63; from the database.
+	 * Removes all the d l file versions where fileEntryId = &#63; and status = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param status the status to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByG_F_N_S(long groupId, long folderId, String name,
-		int status) throws SystemException {
-		for (DLFileVersion dlFileVersion : findByG_F_N_S(groupId, folderId,
-				name, status)) {
+	public void removeByF_S(long fileEntryId, int status)
+		throws SystemException {
+		for (DLFileVersion dlFileVersion : findByF_S(fileEntryId, status)) {
 			remove(dlFileVersion);
 		}
 	}
@@ -1690,41 +1475,24 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	}
 
 	/**
-	 * Counts all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 * Counts all the d l file versions where fileEntryId = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @return the number of matching d l file versions
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByG_F_N(long groupId, long folderId, String name)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, folderId, name };
+	public int countByFileEntryId(long fileEntryId) throws SystemException {
+		Object[] finderArgs = new Object[] { fileEntryId };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_F_N,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_FILEENTRYID,
 				finderArgs, this);
 
 		if (count == null) {
-			StringBundler query = new StringBundler(4);
+			StringBundler query = new StringBundler(2);
 
 			query.append(_SQL_COUNT_DLFILEVERSION_WHERE);
 
-			query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_F_N_FOLDERID_2);
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_G_F_N_NAME_1);
-			}
-			else {
-				if (name.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_F_N_NAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_F_N_NAME_2);
-				}
-			}
+			query.append(_FINDER_COLUMN_FILEENTRYID_FILEENTRYID_2);
 
 			String sql = query.toString();
 
@@ -1737,13 +1505,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
-
-				qPos.add(folderId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
+				qPos.add(fileEntryId);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1755,7 +1517,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_F_N,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_FILEENTRYID,
 					finderArgs, count);
 
 				closeSession(session);
@@ -1766,52 +1528,36 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	}
 
 	/**
-	 * Counts all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63; and version = &#63;.
+	 * Counts all the d l file versions where fileEntryId = &#63; and version = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param version the version to search with
 	 * @return the number of matching d l file versions
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByG_F_N_V(long groupId, long folderId, String name,
-		String version) throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, folderId, name, version };
+	public int countByF_V(long fileEntryId, String version)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { fileEntryId, version };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_F_N_V,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_F_V,
 				finderArgs, this);
 
 		if (count == null) {
-			StringBundler query = new StringBundler(5);
+			StringBundler query = new StringBundler(3);
 
 			query.append(_SQL_COUNT_DLFILEVERSION_WHERE);
 
-			query.append(_FINDER_COLUMN_G_F_N_V_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_F_N_V_FOLDERID_2);
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_G_F_N_V_NAME_1);
-			}
-			else {
-				if (name.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_F_N_V_NAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_F_N_V_NAME_2);
-				}
-			}
+			query.append(_FINDER_COLUMN_F_V_FILEENTRYID_2);
 
 			if (version == null) {
-				query.append(_FINDER_COLUMN_G_F_N_V_VERSION_1);
+				query.append(_FINDER_COLUMN_F_V_VERSION_1);
 			}
 			else {
 				if (version.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_F_N_V_VERSION_3);
+					query.append(_FINDER_COLUMN_F_V_VERSION_3);
 				}
 				else {
-					query.append(_FINDER_COLUMN_G_F_N_V_VERSION_2);
+					query.append(_FINDER_COLUMN_F_V_VERSION_2);
 				}
 			}
 
@@ -1826,13 +1572,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
-
-				qPos.add(folderId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
+				qPos.add(fileEntryId);
 
 				if (version != null) {
 					qPos.add(version);
@@ -1848,8 +1588,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_F_N_V,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_F_V, finderArgs,
+					count);
 
 				closeSession(session);
 			}
@@ -1859,44 +1599,28 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	}
 
 	/**
-	 * Counts all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63; and status = &#63;.
+	 * Counts all the d l file versions where fileEntryId = &#63; and status = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param folderId the folder id to search with
-	 * @param name the name to search with
+	 * @param fileEntryId the file entry id to search with
 	 * @param status the status to search with
 	 * @return the number of matching d l file versions
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByG_F_N_S(long groupId, long folderId, String name,
-		int status) throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, folderId, name, status };
+	public int countByF_S(long fileEntryId, int status)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { fileEntryId, status };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_F_N_S,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_F_S,
 				finderArgs, this);
 
 		if (count == null) {
-			StringBundler query = new StringBundler(5);
+			StringBundler query = new StringBundler(3);
 
 			query.append(_SQL_COUNT_DLFILEVERSION_WHERE);
 
-			query.append(_FINDER_COLUMN_G_F_N_S_GROUPID_2);
+			query.append(_FINDER_COLUMN_F_S_FILEENTRYID_2);
 
-			query.append(_FINDER_COLUMN_G_F_N_S_FOLDERID_2);
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_G_F_N_S_NAME_1);
-			}
-			else {
-				if (name.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_F_N_S_NAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_F_N_S_NAME_2);
-				}
-			}
-
-			query.append(_FINDER_COLUMN_G_F_N_S_STATUS_2);
+			query.append(_FINDER_COLUMN_F_S_STATUS_2);
 
 			String sql = query.toString();
 
@@ -1909,13 +1633,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
-
-				qPos.add(folderId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
+				qPos.add(fileEntryId);
 
 				qPos.add(status);
 
@@ -1929,8 +1647,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_F_N_S,
-					finderArgs, count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_F_S, finderArgs,
+					count);
 
 				closeSession(session);
 			}
@@ -2028,25 +1746,13 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	private static final String _SQL_SELECT_DLFILEVERSION_WHERE = "SELECT dlFileVersion FROM DLFileVersion dlFileVersion WHERE ";
 	private static final String _SQL_COUNT_DLFILEVERSION = "SELECT COUNT(dlFileVersion) FROM DLFileVersion dlFileVersion";
 	private static final String _SQL_COUNT_DLFILEVERSION_WHERE = "SELECT COUNT(dlFileVersion) FROM DLFileVersion dlFileVersion WHERE ";
-	private static final String _FINDER_COLUMN_G_F_N_GROUPID_2 = "dlFileVersion.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_F_N_FOLDERID_2 = "dlFileVersion.folderId = ? AND ";
-	private static final String _FINDER_COLUMN_G_F_N_NAME_1 = "dlFileVersion.name IS NULL";
-	private static final String _FINDER_COLUMN_G_F_N_NAME_2 = "dlFileVersion.name = ?";
-	private static final String _FINDER_COLUMN_G_F_N_NAME_3 = "(dlFileVersion.name IS NULL OR dlFileVersion.name = ?)";
-	private static final String _FINDER_COLUMN_G_F_N_V_GROUPID_2 = "dlFileVersion.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_F_N_V_FOLDERID_2 = "dlFileVersion.folderId = ? AND ";
-	private static final String _FINDER_COLUMN_G_F_N_V_NAME_1 = "dlFileVersion.name IS NULL AND ";
-	private static final String _FINDER_COLUMN_G_F_N_V_NAME_2 = "dlFileVersion.name = ? AND ";
-	private static final String _FINDER_COLUMN_G_F_N_V_NAME_3 = "(dlFileVersion.name IS NULL OR dlFileVersion.name = ?) AND ";
-	private static final String _FINDER_COLUMN_G_F_N_V_VERSION_1 = "dlFileVersion.version IS NULL";
-	private static final String _FINDER_COLUMN_G_F_N_V_VERSION_2 = "dlFileVersion.version = ?";
-	private static final String _FINDER_COLUMN_G_F_N_V_VERSION_3 = "(dlFileVersion.version IS NULL OR dlFileVersion.version = ?)";
-	private static final String _FINDER_COLUMN_G_F_N_S_GROUPID_2 = "dlFileVersion.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_F_N_S_FOLDERID_2 = "dlFileVersion.folderId = ? AND ";
-	private static final String _FINDER_COLUMN_G_F_N_S_NAME_1 = "dlFileVersion.name IS NULL AND ";
-	private static final String _FINDER_COLUMN_G_F_N_S_NAME_2 = "dlFileVersion.name = ? AND ";
-	private static final String _FINDER_COLUMN_G_F_N_S_NAME_3 = "(dlFileVersion.name IS NULL OR dlFileVersion.name = ?) AND ";
-	private static final String _FINDER_COLUMN_G_F_N_S_STATUS_2 = "dlFileVersion.status = ?";
+	private static final String _FINDER_COLUMN_FILEENTRYID_FILEENTRYID_2 = "dlFileVersion.fileEntryId = ?";
+	private static final String _FINDER_COLUMN_F_V_FILEENTRYID_2 = "dlFileVersion.fileEntryId = ? AND ";
+	private static final String _FINDER_COLUMN_F_V_VERSION_1 = "dlFileVersion.version IS NULL";
+	private static final String _FINDER_COLUMN_F_V_VERSION_2 = "dlFileVersion.version = ?";
+	private static final String _FINDER_COLUMN_F_V_VERSION_3 = "(dlFileVersion.version IS NULL OR dlFileVersion.version = ?)";
+	private static final String _FINDER_COLUMN_F_S_FILEENTRYID_2 = "dlFileVersion.fileEntryId = ? AND ";
+	private static final String _FINDER_COLUMN_F_S_STATUS_2 = "dlFileVersion.status = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "dlFileVersion.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No DLFileVersion exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No DLFileVersion exists with the key {";

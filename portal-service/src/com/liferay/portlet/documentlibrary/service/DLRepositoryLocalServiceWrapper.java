@@ -275,19 +275,16 @@ public class DLRepositoryLocalServiceWrapper implements DLRepositoryLocalService
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersion(
-		long groupId, long folderId, java.lang.String name,
-		java.lang.String version)
+		long fileEntryId, java.lang.String version)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlRepositoryLocalService.getFileVersion(groupId, folderId,
-			name, version);
+		return _dlRepositoryLocalService.getFileVersion(fileEntryId, version);
 	}
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
-		long groupId, long folderId, java.lang.String name, int status)
+		long fileEntryId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlRepositoryLocalService.getFileVersions(groupId, folderId,
-			name, status);
+		return _dlRepositoryLocalService.getFileVersions(fileEntryId, status);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
@@ -405,11 +402,10 @@ public class DLRepositoryLocalServiceWrapper implements DLRepositoryLocalService
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion getLatestFileVersion(
-		long groupId, long folderId, java.lang.String name)
+		long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlRepositoryLocalService.getLatestFileVersion(groupId,
-			folderId, name);
+		return _dlRepositoryLocalService.getLatestFileVersion(fileEntryId);
 	}
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getNoAssetFileEntries()
