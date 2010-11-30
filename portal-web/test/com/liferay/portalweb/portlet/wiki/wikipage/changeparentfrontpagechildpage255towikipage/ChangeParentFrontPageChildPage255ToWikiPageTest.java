@@ -54,11 +54,11 @@ public class ChangeParentFrontPageChildPage255ToWikiPageTest
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("FrontPage"),
 			selenium.getText(
-				"//ul[@class='breadcrumbs lfr-component']/li[3]/span/a"));
+				"//ul[@class='breadcrumbs breadcrumbs-style-1 lfr-component']/li[3]/span/a"));
 		assertEquals(RuntimeVariables.replace(
 				"lllllllll1lllllllll2lllllllll3lllllllll4lllllllll5lllllllll6lllllllll7lllllllll8lllllllll9llllllll10llllllll11llllllll12llllllll13llllllll14llllllll15llllllll16llllllll17llllllll18llllllll19llllllll20llllllll21llllllll22llllllll23llllllll24llllllll25llll"),
 			selenium.getText(
-				"//ul[@class='breadcrumbs lfr-component']/li[4]/span/a"));
+				"//ul[@class='breadcrumbs breadcrumbs-style-1 lfr-component']/li[4]/span/a"));
 		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -152,10 +152,10 @@ public class ChangeParentFrontPageChildPage255ToWikiPageTest
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Wiki Page Test"),
 			selenium.getText(
-				"//ul[@class='breadcrumbs lfr-component']/li[3]/span/a"));
+				"//ul[@class='breadcrumbs breadcrumbs-style-1 lfr-component']/li[3]/span/a"));
 		assertEquals(RuntimeVariables.replace(
 				"lllllllll1lllllllll2lllllllll3lllllllll4lllllllll5lllllllll6lllllllll7lllllllll8lllllllll9llllllll10llllllll11llllllll12llllllll13llllllll14llllllll15llllllll16llllllll17llllllll18llllllll19llllllll20llllllll21llllllll22llllllll23llllllll24llllllll25llll"),
 			selenium.getText(
-				"//ul[@class='breadcrumbs lfr-component']/li[4]/span/a"));
+				"//ul[@class='breadcrumbs breadcrumbs-style-1 lfr-component']/li[4]/span/a"));
 	}
 }

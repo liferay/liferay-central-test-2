@@ -56,10 +56,10 @@ public class RevertChangeParentFrontPageChildPageToWikiPageTest
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Wiki Page Test"),
 			selenium.getText(
-				"//ul[@class='breadcrumbs lfr-component']/li[3]/span/a"));
+				"//ul[@class='breadcrumbs breadcrumbs-style-1 lfr-component']/li[3]/span/a"));
 		assertEquals(RuntimeVariables.replace("Front Page Child Page Test"),
 			selenium.getText(
-				"//ul[@class='breadcrumbs lfr-component']/li[4]/span/a"));
+				"//ul[@class='breadcrumbs breadcrumbs-style-1 lfr-component']/li[4]/span/a"));
 		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -109,9 +109,9 @@ public class RevertChangeParentFrontPageChildPageToWikiPageTest
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("FrontPage"),
 			selenium.getText(
-				"//ul[@class='breadcrumbs lfr-component']/li[3]/span/a"));
+				"//ul[@class='breadcrumbs breadcrumbs-style-1 lfr-component']/li[3]/span/a"));
 		assertEquals(RuntimeVariables.replace("Front Page Child Page Test"),
 			selenium.getText(
-				"//ul[@class='breadcrumbs lfr-component']/li[4]/span/a"));
+				"//ul[@class='breadcrumbs breadcrumbs-style-1 lfr-component']/li[4]/span/a"));
 	}
 }

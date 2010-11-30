@@ -58,6 +58,6 @@ public class AddFrontPageTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("This is a wiki frontpage test."),
-			selenium.getText("//div[6]/div"));
+			selenium.getText("//div[@class='wiki-body']"));
 	}
 }
