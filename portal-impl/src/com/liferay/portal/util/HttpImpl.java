@@ -654,6 +654,18 @@ public class HttpImpl implements Http {
 		return protocolize(url, renderRequest.isSecure());
 	}
 
+	public void proxifyState(HttpState state, HostConfiguration hostConfig) {
+		Credentials proxyCredentials = _proxyCredentials;
+
+		String host = hostConfig.getHost();
+
+		if (isProxyHost(host) && (proxyCredentials != null)) {
+			AuthScope scope = new AuthScope(_PROXY_HOST, _PROXY_PORT, null);
+
+			state.setProxyCredentials(scope, proxyCredentials);
+		}
+	}
+
 	public String removeDomain(String url) {
 		url = removeProtocol(url);
 
@@ -853,18 +865,6 @@ public class HttpImpl implements Http {
 		}
 
 		return xml;
-	}
-
-	protected void proxifyState(HttpState state, HostConfiguration hostConfig) {
-		Credentials proxyCredentials = _proxyCredentials;
-
-		String host = hostConfig.getHost();
-
-		if (isProxyHost(host) && (proxyCredentials != null)) {
-			AuthScope scope = new AuthScope(_PROXY_HOST, _PROXY_PORT, null);
-
-			state.setProxyCredentials(scope, proxyCredentials);
-		}
 	}
 
 	protected org.apache.commons.httpclient.Cookie toCommonsCookie(

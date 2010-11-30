@@ -66,6 +66,8 @@ public class RSSWebCacheItem implements WebCacheItem {
 
 			HttpClient httpClient = httpImpl.getClient(hostConfiguration);
 
+			httpImpl.proxifyState(httpClient.getState(), hostConfiguration);
+
 			HttpClientParams httpClientParams = httpClient.getParams();
 
 			httpClientParams.setConnectionManagerTimeout(

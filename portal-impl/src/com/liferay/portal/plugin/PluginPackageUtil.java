@@ -628,6 +628,8 @@ public class PluginPackageUtil {
 
 			HttpClient httpClient = httpImpl.getClient(hostConfiguration);
 
+			httpImpl.proxifyState(httpClient.getState(), hostConfiguration);
+
 			GetMethod getFileMethod = new GetMethod(pluginsXmlURL);
 
 			byte[] bytes = null;
