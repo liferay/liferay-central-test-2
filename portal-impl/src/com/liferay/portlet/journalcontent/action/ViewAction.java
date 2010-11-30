@@ -52,7 +52,7 @@ public class ViewAction extends WebContentAction {
 
 		long groupId = ParamUtil.getLong(renderRequest, "groupId");
 
-		if (groupId < 1) {
+		if (groupId <= 0) {
 			groupId = GetterUtil.getLong(
 				preferences.getValue("group-id", StringPool.BLANK));
 		}
