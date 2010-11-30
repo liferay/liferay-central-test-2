@@ -51,7 +51,7 @@ if (Validator.isNotNull(portletResource)) {
 
 long groupId = ParamUtil.getLong(renderRequest, "groupId");
 
-if (groupId < 1) {
+if (groupId <= 0) {
 	groupId = GetterUtil.getLong(preferences.getValue("group-id", scopeGroupId.toString()));
 }
 
