@@ -44,7 +44,7 @@
 <#assign full_templates_path = fullTemplatesPath/>
 
 <#assign css_main_file = htmlUtil.escape(portalUtil.getStaticResourceURL(request, "${css_folder}/main.css")) />
-<#assign js_main_file = htmlUtil.escape(portalUtil.getStaticResourceURL(request, "${javascript_folder}/javascript.js")) />
+<#assign js_main_file = htmlUtil.escape(portalUtil.getStaticResourceURL(request, "${javascript_folder}/main.js")) />
 
 <#assign company_id = company.getCompanyId() />
 <#assign company_name = company.getName() />
