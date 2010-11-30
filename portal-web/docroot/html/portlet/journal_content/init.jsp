@@ -49,9 +49,20 @@ if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-long groupId = GetterUtil.getLong(preferences.getValue("group-id", scopeGroupId.toString()));
-String articleId = GetterUtil.getString(preferences.getValue("article-id", StringPool.BLANK));
-String templateId = GetterUtil.getString(preferences.getValue("template-id", StringPool.BLANK));
+long groupId = ParamUtil.getLong(renderRequest, "groupId");
+
+if (groupId < 1) {
+	groupId = GetterUtil.getLong(preferences.getValue("group-id", scopeGroupId.toString()));
+}
+
+String articleId = ParamUtil.getString(renderRequest, "articleId");
+String templateId = ParamUtil.getString(renderRequest, "templateId");
+
+if (Validator.isNull(articleId)) {
+	articleId = GetterUtil.getString(preferences.getValue("article-id", StringPool.BLANK));
+	templateId = GetterUtil.getString(preferences.getValue("template-id", StringPool.BLANK));
+}
+
 boolean showAvailableLocales = GetterUtil.getBoolean(preferences.getValue("show-available-locales", StringPool.BLANK));
 String[] extensions = preferences.getValues("extensions", null);
 boolean enablePrint = GetterUtil.getBoolean(preferences.getValue("enable-print", null));
