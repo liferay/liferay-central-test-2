@@ -32,7 +32,7 @@ long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 
 Boolean isLocked = DLAppServiceUtil.isFileEntryLocked(fileEntry.getFileEntryId());
 Boolean hasLock = DLAppServiceUtil.hasFileEntryLock(fileEntry.getFileEntryId());
-long lockExpiration = DLAppServiceUtil.getFileEntryLockExpiration(fileEntry.getFileEntryId());
+Lock lock = DLAppServiceUtil.getFileEntryLock(fileEntry.getFileEntryId());
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -51,7 +51,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 		<c:when test="<%= hasLock %>">
 			<div class="portlet-msg-success">
 				<c:choose>
-					<c:when test="<%= lockExpiration == -1 %>">
+					<c:when test="<%= lock.isNeverExpires() %>">
 						<liferay-ui:message key="you-now-have-an-indefinite-lock-on-this-document" />
 					</c:when>
 					<c:otherwise>
