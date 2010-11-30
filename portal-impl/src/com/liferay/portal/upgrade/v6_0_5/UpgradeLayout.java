@@ -118,7 +118,7 @@ public class UpgradeLayout extends UpgradeProcess {
 
 				rs = ps.executeQuery();
 
-				if(!rs.next()) {
+				if (!rs.next()) {
 					return;
 				}
 			}
