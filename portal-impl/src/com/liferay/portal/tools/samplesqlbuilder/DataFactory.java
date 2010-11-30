@@ -87,11 +87,12 @@ import java.util.Map;
 public class DataFactory {
 
 	public DataFactory(
-		int maxGroupsCount, int maxUserToGroupCount, SimpleCounter counter,
-		SimpleCounter permissionCounter, SimpleCounter resourceCounter,
-		SimpleCounter resourceCodeCounter) {
+		String baseDir, int maxGroupsCount, int maxUserToGroupCount,
+		SimpleCounter counter, SimpleCounter permissionCounter,
+		SimpleCounter resourceCounter, SimpleCounter resourceCodeCounter) {
 
 		try {
+			_baseDir = baseDir;
 			_maxGroupsCount = maxGroupsCount;
 			_maxUserToGroupCount = maxUserToGroupCount;
 
@@ -689,7 +690,8 @@ public class DataFactory {
 		}
 
 		Document doc = SAXReaderUtil.read(
-			new File("../portal-web/docroot/WEB-INF/portlet-custom.xml"),
+			new File(_baseDir,
+				"../portal-web/docroot/WEB-INF/portlet-custom.xml"),
 			false);
 
 		Element root = doc.getRootElement();
@@ -888,9 +890,9 @@ public class DataFactory {
 				"dependencies/";
 
 		List<String> firstNames = ListUtil.fromFile(
-			dependenciesDir + "first_names.txt");
+			new File(_baseDir, dependenciesDir + "first_names.txt"));
 		List<String> lastNames = ListUtil.fromFile(
-			dependenciesDir + "last_names.txt");
+			new File(_baseDir, dependenciesDir + "last_names.txt"));
 
 		_userNames[0] = firstNames;
 		_userNames[1] = lastNames;
@@ -919,6 +921,7 @@ public class DataFactory {
 	}
 
 	private Role _administratorRole;
+	private String _baseDir;
 	private ClassName _blogsEntryClassName;
 	private List<ClassName> _classNames;
 	private Role _communityAdministratorRole;

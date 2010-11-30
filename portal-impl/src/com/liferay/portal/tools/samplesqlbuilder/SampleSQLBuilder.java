@@ -63,6 +63,7 @@ public class SampleSQLBuilder {
 
 		InitUtil.initWithSpring();
 
+		String baseDir = arguments.get("sample.sql.base.dir");
 		String outputDir = arguments.get("sample.sql.output.dir");
 		String dbType = arguments.get("sample.sql.db.type");
 		int maxBlogsEntryCommentCount = GetterUtil.getInteger(
@@ -91,19 +92,19 @@ public class SampleSQLBuilder {
 			arguments.get("sample.sql.security.enabled"));
 
 		new SampleSQLBuilder(
-			outputDir, dbType, maxBlogsEntryCommentCount, maxBlogsEntryCount,
-			maxGroupCount, maxMBCategoryCount, maxMBMessageCount,
-			maxMBThreadCount, maxUserCount, maxUserToGroupCount,
-			maxWikiNodeCount, maxWikiPageCommentCount, maxWikiPageCount,
-			securityEnabled);
+			baseDir, outputDir, dbType, maxBlogsEntryCommentCount,
+			maxBlogsEntryCount,	maxGroupCount, maxMBCategoryCount,
+			maxMBMessageCount, maxMBThreadCount, maxUserCount,
+			maxUserToGroupCount, maxWikiNodeCount, maxWikiPageCommentCount,
+			maxWikiPageCount, securityEnabled);
 	}
 
 	public SampleSQLBuilder(
-		String outputDir, String dbType, int maxBlogsEntryCommentCount,
-		int maxBlogsEntryCount, int maxGroupCount, int maxMBCategoryCount,
-		int maxMBMessageCount, int maxMBThreadCount, int maxUserCount,
-		int maxUserToGroupCount, int maxWikiNodeCount,
-		int maxWikiPageCommentCount, int maxWikiPageCount,
+		String baseDir, String outputDir, String dbType,
+		int maxBlogsEntryCommentCount, int maxBlogsEntryCount,
+		int maxGroupCount, int maxMBCategoryCount, int maxMBMessageCount,
+		int maxMBThreadCount, int maxUserCount, int maxUserToGroupCount,
+		int maxWikiNodeCount, int maxWikiPageCommentCount, int maxWikiPageCount,
 		boolean securityEnabled) {
 
 		try {
@@ -140,7 +141,7 @@ public class SampleSQLBuilder {
 			_userScreenNameIncrementer = new SimpleCounter();
 
 			_dataFactory = new DataFactory(
-				_maxGroupCount, _maxUserToGroupCount, _counter,
+				baseDir, _maxGroupCount, _maxUserToGroupCount, _counter,
 				_permissionCounter, _resourceCounter, _resourceCodeCounter);
 
 			// Generic
