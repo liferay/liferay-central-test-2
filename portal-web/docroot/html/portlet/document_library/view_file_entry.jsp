@@ -157,7 +157,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 		<div class="lfr-asset-metadata">
 			<div class="lfr-asset-icon lfr-asset-author">
-				<%= LanguageUtil.format(pageContext, "last-updated-by-x", HtmlUtil.escape(PortalUtil.getUserName(fileEntry.getUserId(), fileEntry.getUserName()))) %>
+				<%= LanguageUtil.format(pageContext, "last-updated-by-x", HtmlUtil.escape(PortalUtil.getUserName(fileVersion.getStatusByUserId(), fileVersion.getStatusByUserName()))) %>
 			</div>
 
 			<div class="lfr-asset-icon lfr-asset-date">
