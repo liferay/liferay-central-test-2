@@ -83,24 +83,28 @@ if (Validator.isNotNull(target)) {
 		>
 
 			<%
-			StringBundler sb = new StringBundler(10);
+			String rowHREF = null;
 
-			sb.append("javascript:opener.");
-			sb.append(renderResponse.getNamespace());
-			sb.append("selectOrganization('");
-			sb.append(organization.getOrganizationId());
-			sb.append("', '");
-			sb.append(organization.getGroup().getGroupId());
-			sb.append("', '");
-			sb.append(UnicodeFormatter.toString(organization.getName()));
-			sb.append("', '");
-			sb.append(UnicodeLanguageUtil.get(pageContext, organization.getType()));
-			sb.append("', '");
-			sb.append(target);
-			sb.append("');");
-			sb.append("window.close();");
+			if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.ASSIGN_MEMBERS)) {
+				StringBundler sb = new StringBundler(10);
 
-			String rowHREF = sb.toString();
+				sb.append("javascript:opener.");
+				sb.append(renderResponse.getNamespace());
+				sb.append("selectOrganization('");
+				sb.append(organization.getOrganizationId());
+				sb.append("', '");
+				sb.append(organization.getGroup().getGroupId());
+				sb.append("', '");
+				sb.append(UnicodeFormatter.toString(organization.getName()));
+				sb.append("', '");
+				sb.append(UnicodeLanguageUtil.get(pageContext, organization.getType()));
+				sb.append("', '");
+				sb.append(target);
+				sb.append("');");
+				sb.append("window.close();");
+
+				rowHREF = sb.toString();
+			}
 			%>
 
 			<liferay-ui:search-container-column-text
