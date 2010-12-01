@@ -112,11 +112,11 @@ public class AddWebContentReviewDateTest extends BaseTestCase {
 		selenium.selectFrame("relative=top");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
-				"//select[@id='_15_reviewDateMonth' and @disabled='']"));
+				"//select[@id='_15_reviewDateMonth' and @disabled='disabled']"));
 		assertTrue(selenium.isElementPresent(
-				"//select[@id='_15_reviewDateDay' and @disabled='']"));
+				"//select[@id='_15_reviewDateDay' and @disabled='disabled']"));
 		assertTrue(selenium.isElementPresent(
-				"//select[@id='_15_reviewDateYear' and @disabled='']"));
+				"//select[@id='_15_reviewDateYear' and @disabled='disabled']"));
 		assertTrue(selenium.isElementPresent(
 				"//select[@name='_15_reviewDateHour' and @disabled='disabled']"));
 		assertTrue(selenium.isElementPresent(
@@ -130,11 +130,11 @@ public class AddWebContentReviewDateTest extends BaseTestCase {
 		assertFalse(selenium.isChecked("_15_neverReviewCheckbox"));
 		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent(
-				"//select[@id='_15_reviewDateMonth' and @disabled='']"));
+				"//select[@id='_15_reviewDateMonth' and @disabled='disabled']"));
 		assertFalse(selenium.isElementPresent(
-				"//select[@id='_15_reviewDateDay' and @disabled='']"));
+				"//select[@id='_15_reviewDateDay' and @disabled='disabled']"));
 		assertFalse(selenium.isElementPresent(
-				"//select[@id='_15_reviewDateYear' and @disabled='']"));
+				"//select[@id='_15_reviewDateYear' and @disabled='disabled']"));
 		assertFalse(selenium.isElementPresent(
 				"//select[@name='_15_reviewDateHour' and @disabled='disabled']"));
 		assertFalse(selenium.isElementPresent(
@@ -158,7 +158,7 @@ public class AddWebContentReviewDateTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request completed successfully."),
+				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace("Web Content Name"),
 			selenium.getText("//td[3]/a"));

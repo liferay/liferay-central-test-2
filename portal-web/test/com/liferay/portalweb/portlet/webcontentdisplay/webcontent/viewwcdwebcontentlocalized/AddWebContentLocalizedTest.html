@@ -34,14 +34,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
+	<td>type</td>
+	<td>_15_title</td>
+	<td>Hello World Localized Article</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>_15_selectTemplateBtn</td>
-	<td></td>
+	<td>//fieldset/div/div/span/span/input</td>
+	<td>Select Template</td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>
@@ -80,77 +80,62 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertPartialText</td>
+	<td>//fieldset/div/div/div/div/span</td>
+	<td>Test Localized Structure</td>
+</tr>
+<tr>
+	<td>assertNotChecked</td>
+	<td>//span[2]/div/span/span/span/input[2]</td>
+	<td>Localized</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//span[2]/div/span/span/span/input[2]</td>
+	<td>Localized</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//span[2]/div/span/span/span/input[2]</td>
+	<td>Localized</td>
+</tr>
+<tr>
+	<td>assertNotChecked</td>
+	<td>//li[2]/span[2]/div/span/span/span/input[2]</td>
+	<td>Localized</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//li[2]/span[2]/div/span/span/span/input[2]</td>
+	<td>Localized</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//li[2]/span[2]/div/span/span/span/input[2]</td>
+	<td>Localized</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Save as Draft']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Your request completed successfully.</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertTextPresent</td>
-	<td>Test Localized Structure</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=Test Localized Template</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>page-name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>//span[2]/div/span/span/span/input[2]</td>
-	<td>localized checkbox</td>
-</tr>
-<tr>
-	<td>store</td>
-	<td>eval(selenium.isChecked('//span[2]/div/span/span/span/input[2]'))</td>
-	<td>localized1Checked</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>${localized1Checked}</td>
-	<td>Localized1Checked</td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>//span[2]/div/span/span/span/input[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>Localized1Checked</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForValue</td>
-	<td>page-description</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>//li[2]/span[2]/div/span/span/span/input[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>store</td>
-	<td>eval(selenium.isChecked('//li[2]/span[2]/div/span/span/span/input[2]'))</td>
-	<td>localized2Checked</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>${localized2Checked}</td>
-	<td>Localized2Checked</td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>//li[2]/span[2]/div/span/span/span/input[2]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>Localized2Checked</td>
+	<td>Your request completed successfully.</td>
 	<td></td>
 </tr>
 <tr>
@@ -164,24 +149,9 @@
 	<td>Hello World Page Description</td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>_15_title</td>
-	<td>Hello World Localized Article</td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>//input[@value='Save as Draft']</td>
+	<td>waitForElementPresent</td>
+	<td>_15_languageId</td>
 	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//input[@value='Save as Draft']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//section/div/div/div/div</td>
-	<td>Your request completed successfully.</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -189,14 +159,9 @@
 	<td>label=Chinese (China)</td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
+	<td>assertConfirmation</td>
+	<td>Would you like to save the changes made to this language?</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertSelectedLabel</td>
-	<td>_15_languageId</td>
-	<td>Chinese (China)</td>
 </tr>
 <tr>
 	<td>pause</td>
@@ -214,7 +179,12 @@
 	<td>世界您好 Page Description</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
 	<td>//input[@value='Publish']</td>
 	<td></td>
 </tr>

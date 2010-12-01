@@ -53,7 +53,6 @@ public class AddCategoryMessageTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
 		selenium.type("_19_subject",
 			RuntimeVariables.replace("MB Message Subject"));
 		selenium.saveScreenShotAndSource();

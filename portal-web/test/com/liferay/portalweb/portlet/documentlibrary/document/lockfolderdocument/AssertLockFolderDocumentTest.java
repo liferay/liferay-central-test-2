@@ -51,8 +51,9 @@ public class AssertLockFolderDocumentTest extends BaseTestCase {
 		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You now have a lock on this document. No one else can edit this document until you unlock it. This lock will automatically expire in 1 day."));
+		assertEquals(RuntimeVariables.replace(
+				"You now have a lock on this document. No one else can edit this document until you unlock it. This lock will automatically expire in 1 day."),
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -79,7 +80,8 @@ public class AssertLockFolderDocumentTest extends BaseTestCase {
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//td[5]/ul/li/strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[5]/ul/li/strong/a",
+			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -87,7 +89,7 @@ public class AssertLockFolderDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
+				if (selenium.isVisible(
 							"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
 					break;
 				}
@@ -99,11 +101,15 @@ public class AssertLockFolderDocumentTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Edit"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You now have a lock on this document. No one else can edit this document until you unlock it. This lock will automatically expire in 1 day."));
+		assertEquals(RuntimeVariables.replace(
+				"You now have a lock on this document. No one else can edit this document until you unlock it. This lock will automatically expire in 1 day."),
+			selenium.getText("//div[@class='portlet-msg-success']"));
 	}
 }

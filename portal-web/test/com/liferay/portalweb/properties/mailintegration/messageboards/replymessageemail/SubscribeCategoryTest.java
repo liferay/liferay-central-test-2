@@ -45,7 +45,6 @@ public class SubscribeCategoryTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("MB Category Name"),
 			selenium.getText("//a/strong"));
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
@@ -78,7 +77,6 @@ public class SubscribeCategoryTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
-		Thread.sleep(5000);
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
