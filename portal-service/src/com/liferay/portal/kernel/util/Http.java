@@ -454,7 +454,7 @@ public interface Http {
 				_headers = new HashMap<String, String>();
 			}
 
-			_headers.put(name, value);
+			_headers.put(name.toLowerCase(), value);
 		}
 
 		public int getContentLength() {
@@ -470,7 +470,7 @@ public interface Http {
 				return null;
 			}
 			else {
-				return _headers.get(name);
+				return _headers.get(name.toLowerCase());
 			}
 		}
 
