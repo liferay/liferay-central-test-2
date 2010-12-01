@@ -22,11 +22,14 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 
+import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.sql.DataSource;
 
@@ -45,14 +48,11 @@ public class DialectDetector {
 
 		DBFactoryUtil.setDB(dialect);
 
-		if (_log.isInfoEnabled()) {
-			_log.info("Using dialect " + dialect.getClass().getName());
-		}
-
 		return dialect.getClass().getName();
 	}
 
 	public static Dialect getDialect(DataSource dataSource) {
+		String dialectKey = null;
 		Dialect dialect = null;
 
 		Connection connection = null;
@@ -65,9 +65,18 @@ public class DialectDetector {
 			String dbName = databaseMetaData.getDatabaseProductName();
 			int dbMajorVersion = databaseMetaData.getDatabaseMajorVersion();
 
+			dialectKey = dbName.concat(StringPool.COLON).concat(
+				String.valueOf(dbMajorVersion));
+
+			dialect = _dialects.get(dialectKey);
+
+			if (dialect != null) {
+				return dialect;
+			}
+
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Determining dialect for " + dbName + " " + dbMajorVersion);
+					"Determine dialect for " + dbName + " " + dbMajorVersion);
 			}
 
 			if (dbName.startsWith("HSQL")) {
@@ -123,10 +132,20 @@ public class DialectDetector {
 		if (dialect == null) {
 			throw new RuntimeException("No dialect found");
 		}
+		else if (dialectKey != null) {
+			if (_log.isInfoEnabled()) {
+				_log.info("Found dialect " + dialect.getClass().getName());
+			}
+
+			_dialects.put(dialectKey, dialect);
+		}
 
 		return dialect;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DialectDetector.class);
+
+	private static Map<String, Dialect> _dialects =
+		new ConcurrentHashMap<String, Dialect>();
 
 }
