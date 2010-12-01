@@ -60,6 +60,7 @@ import javax.naming.ldap.PagedResultsResponseControl;
  * @author Ryan Park
  * @author Wesley Gong
  * @author Marcellus Tavares
+ * @author Hugo Huijser
  */
 public class PortalLDAPUtil {
 
@@ -412,18 +413,44 @@ public class PortalLDAPUtil {
 			Properties userMappings = LDAPSettingsUtil.getUserMappings(
 				ldapServerId, companyId);
 
-			StringBundler filter = new StringBundler(5);
+			String userFilter = PrefsPropsUtil.getString(
+				companyId, PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER + postfix);
 
-			filter.append(StringPool.OPEN_PARENTHESIS);
-			filter.append(userMappings.getProperty("screenName"));
-			filter.append(StringPool.EQUAL);
-			filter.append(screenName);
-			filter.append(StringPool.CLOSE_PARENTHESIS);
+			String filter = null;
+
+			if (Validator.isNotNull(userFilter)) {
+				StringBundler sb = new StringBundler(11);
+
+				sb.append(StringPool.OPEN_PARENTHESIS);
+				sb.append(StringPool.AMPERSAND);
+				sb.append(StringPool.OPEN_PARENTHESIS);
+				sb.append(userMappings.getProperty("screenName"));
+				sb.append(StringPool.EQUAL);
+				sb.append(screenName);
+				sb.append(StringPool.CLOSE_PARENTHESIS);
+				sb.append(StringPool.OPEN_PARENTHESIS);
+				sb.append(userFilter);
+				sb.append(StringPool.CLOSE_PARENTHESIS);
+				sb.append(StringPool.CLOSE_PARENTHESIS);
+
+				filter = sb.toString();
+			}
+			else {
+				StringBundler sb = new StringBundler(5);
+
+				sb.append(StringPool.OPEN_PARENTHESIS);
+				sb.append(userMappings.getProperty("screenName"));
+				sb.append(StringPool.EQUAL);
+				sb.append(screenName);
+				sb.append(StringPool.CLOSE_PARENTHESIS);
+
+				filter = sb.toString();
+			}
 
 			SearchControls searchControls = new SearchControls(
 				SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
 
-			enu = ldapContext.search(baseDN, filter.toString(), searchControls);
+			enu = ldapContext.search(baseDN, filter, searchControls);
 		}
 		catch (Exception e) {
 			throw e;
