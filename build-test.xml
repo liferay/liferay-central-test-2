@@ -1095,7 +1095,7 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="plugins-clp" />
+			<param name="test.ant.script.command" value="plugins-test-clp" />
 			<param name="test.ant.script.plugins" value="chat-portlet,test-clp-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 			<param name="test.ant.script.suite" value="PluginsTestCLPTestSuite" />
