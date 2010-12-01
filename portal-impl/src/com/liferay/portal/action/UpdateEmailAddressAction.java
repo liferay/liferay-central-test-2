@@ -66,7 +66,7 @@ public class UpdateEmailAddressAction extends Action {
 
 				SessionErrors.add(request, e.getClass().getName());
 
-				return mapping.findForward(ActionConstants.COMMON_REFERER);
+				return mapping.findForward("portal.update_email_address");
 			}
 			else if (e instanceof NoSuchUserException ||
 					 e instanceof PrincipalException) {
