@@ -177,6 +177,7 @@ if (workflowTask.getDueDate() != null) {
 	var onTaskClickFn = A.rbind(Liferay.WorkflowTasks.onTaskClick, Liferay.WorkflowTasks, '<%= randomId %>');
 
 	<c:if test="<%= !workflowTask.isCompleted() && isAssignedToUser(workflowTask, user) %>">
+
 		<%
 		List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(company.getCompanyId(), user.getUserId(), workflowTask.getWorkflowTaskId());
 
@@ -187,10 +188,13 @@ if (workflowTask.getDueDate() != null) {
 				message = transitionName;
 			}
 		%>
+
 			Liferay.delegateClick('<portlet:namespace /><%= randomId + transitionName %>taskChangeStatusLink', onTaskClickFn);
+
 		<%
 		}
 		%>
+
 	</c:if>
 
 	Liferay.delegateClick('<portlet:namespace /><%= randomId %>taskAssignToMeLink', onTaskClickFn);
