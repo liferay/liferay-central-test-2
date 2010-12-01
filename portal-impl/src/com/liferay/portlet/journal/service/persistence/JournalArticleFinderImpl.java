@@ -482,7 +482,10 @@ public class JournalArticleFinderImpl
 				StringBundler sb = new StringBundler(groupBy);
 
 				for (String field : orderByComparator.getOrderByFields()) {
-					if (field.equals("articleId") || field.equals("version")) {
+					if (field.equals("articleId") ||
+							field.equals("modifiedDate") ||
+							field.equals("version")) {
+
 						continue;
 					}
 
@@ -492,6 +495,7 @@ public class JournalArticleFinderImpl
 
 				groupBy = sb.toString();
 
+				sb.append(", MAX(modifiedDate) as modifiedDate");
 				sb.append(", MAX(version) as version");
 
 				sql = StringUtil.replace(sql, "id_ AS id", sb.toString());
