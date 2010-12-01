@@ -20,6 +20,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -72,6 +74,14 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 			searchContext.setScopeStrict(false);
 			searchContext.setStart(start);
 			searchContext.setUserId(userId);
+
+			Layout layout = themeDisplay.getLayout();
+			Group layoutGroup = layout.getGroup();
+
+			if (!layoutGroup.isStagingGroup() &&
+				!layoutGroup.isControlPanel()) {
+				searchContext.setIncludeStagingGroups(false);
+			}
 
 			addSearchAttributes(
 				themeDisplay.getCompanyId(), searchContext, keywords);

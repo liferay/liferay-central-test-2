@@ -67,6 +67,12 @@ public class OrganizationIndexer extends BaseIndexer {
 	public static final String PORTLET_ID =
 		PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS;
 
+	public OrganizationIndexer() {
+		super();
+
+		setStagingAware(false);
+	}
+
 	public String[] getClassNames() {
 		return CLASS_NAMES;
 	}

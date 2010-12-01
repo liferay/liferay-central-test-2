@@ -38,6 +38,7 @@ import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -60,13 +61,49 @@ public abstract class BaseIndexer implements Indexer {
 
 	public Document getDocument(Object obj) throws SearchException {
 		try {
-			return doGetDocument(obj);
+			Document document = doGetDocument(obj);
+
+			Map<String, Field> fields = document.getFields();
+
+			Field groupIdField = fields.get(Field.GROUP_ID);
+
+			if (groupIdField != null) {
+				long groupId = Long.parseLong(groupIdField.getValue());
+
+				addStagingGroupTypeKeyword(document, groupId);
+			}
+
+			return document;
 		}
 		catch (SearchException se) {
 			throw se;
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
+		}
+	}
+
+	protected void addStagingGroupTypeKeyword(Document document, long groupId) {
+		if (isStagingAware()) {
+			String stagingGroupType = Field.STAGING_GROUP_TYPE_LIVE_VALUE;
+
+			try {
+				Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+				if (group.isLayout()) {
+					group = GroupLocalServiceUtil.getGroup(
+						group.getParentGroupId());
+				}
+
+				if (group.isStagingGroup()) {
+					stagingGroupType = Field.STAGING_GROUP_TYPE_STAGE_VALUE;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			document.addKeyword(
+				Field.STAGING_GROUP_TYPE, stagingGroupType);
 		}
 	}
 
@@ -131,6 +168,7 @@ public abstract class BaseIndexer implements Indexer {
 
 			addSearchAssetCategoryIds(contextQuery, searchContext);
 			addSearchAssetTagNames(contextQuery, searchContext);
+			addSearchStagingGroup(contextQuery, searchContext);
 			addSearchGroupId(contextQuery, searchContext);
 			addSearchOwnerUserId(contextQuery, searchContext);
 			addSearchCategoryIds(contextQuery, searchContext);
@@ -430,6 +468,28 @@ public abstract class BaseIndexer implements Indexer {
 		}
 	}
 
+	protected void addSearchStagingGroup(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
+
+		if (!isStagingAware()) {
+			return;
+		}
+
+		if (!searchContext.isIncludeLiveGroups() &&
+			searchContext.isIncludeStagingGroups()) {
+
+			contextQuery.addRequiredTerm(
+				Field.STAGING_GROUP_TYPE, Field.STAGING_GROUP_TYPE_STAGE_VALUE);
+		}
+		else if (searchContext.isIncludeLiveGroups() &&
+				 !searchContext.isIncludeStagingGroups()) {
+
+			contextQuery.addRequiredTerm(
+				Field.STAGING_GROUP_TYPE, Field.STAGING_GROUP_TYPE_LIVE_VALUE);
+		}
+	}
+
 	protected void addSearchOwnerUserId(
 		BooleanQuery contextQuery, SearchContext searchContext) {
 
@@ -622,6 +682,10 @@ public abstract class BaseIndexer implements Indexer {
 		return _FILTER_SEARCH;
 	}
 
+	protected boolean isStagingAware() {
+		return _stagingAware;
+	}
+
 	protected void postProcessContextQuery(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
@@ -637,6 +701,10 @@ public abstract class BaseIndexer implements Indexer {
 		throws Exception {
 	}
 
+	public void setStagingAware(boolean stagingAware) {
+		_stagingAware = stagingAware;
+	}
+
 	private static final boolean _FILTER_SEARCH = false;
 
 	public static final int INDEX_FILTER_SEARCH_LIMIT = GetterUtil.getInteger(
@@ -649,4 +717,5 @@ public abstract class BaseIndexer implements Indexer {
 
 	private static Log _log = LogFactoryUtil.getLog(BaseIndexer.class);
 
+	private boolean _stagingAware = true;
 }

@@ -98,6 +98,14 @@ public class SearchContext implements Serializable {
 		return _andSearch;
 	}
 
+	public boolean isIncludeLiveGroups() {
+		return _includeLiveGroups;
+	}
+
+	public boolean isIncludeStagingGroups() {
+		return _includeStagingGroups;
+	}
+
 	public boolean isScopeStrict() {
 		return _scopeStrict;
 	}
@@ -146,6 +154,14 @@ public class SearchContext implements Serializable {
 		_groupIds = groupIds;
 	}
 
+	public void setIncludeLiveGroups(boolean includeLiveGroups) {
+		_includeLiveGroups = includeLiveGroups;
+	}
+
+	public void setIncludeStagingGroups(boolean includeStagingGroups) {
+		_includeStagingGroups = includeStagingGroups;
+	}
+
 	public void setKeywords(String keywords) {
 		_keywords = keywords;
 	}
@@ -188,6 +204,8 @@ public class SearchContext implements Serializable {
 	private int _end = QueryUtil.ALL_POS;
 	private long[] _folderIds;
 	private long[] _groupIds;
+	private boolean _includeLiveGroups = true;
+	private boolean _includeStagingGroups = true;
 	private String _keywords;
 	private long[] _nodeIds;
 	private long _ownerUserId;

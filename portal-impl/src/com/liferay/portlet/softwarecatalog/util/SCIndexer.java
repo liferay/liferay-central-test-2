@@ -59,6 +59,12 @@ public class SCIndexer extends BaseIndexer {
 
 	public static final String PORTLET_ID = PortletKeys.SOFTWARE_CATALOG;
 
+	public SCIndexer() {
+		super();
+
+		setStagingAware(false);
+	}
+
 	public String[] getClassNames() {
 		return CLASS_NAMES;
 	}
