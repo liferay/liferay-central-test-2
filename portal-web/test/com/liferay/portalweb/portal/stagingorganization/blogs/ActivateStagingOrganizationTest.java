@@ -89,7 +89,9 @@ public class ActivateStagingOrganizationTest extends BaseTestCase {
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("//li[@id='_126_tabs1settingsTabsId']/span/span/a",
+				assertEquals(RuntimeVariables.replace("Settings"),
+					selenium.getText("//ul[1]/li[3]/span/span/a"));
+				selenium.clickAt("//ul[1]/li[3]/span/span/a",
 					RuntimeVariables.replace("Settings"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
