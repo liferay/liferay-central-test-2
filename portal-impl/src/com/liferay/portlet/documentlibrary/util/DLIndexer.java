@@ -79,7 +79,6 @@ public class DLIndexer extends BaseIndexer {
 		catch (WindowStateException wse) {
 		}
 
-		String fileEntryId = document.get(Field.ENTRY_CLASS_PK);
 		String fileName = document.get("path");
 
 		String title = fileName;
@@ -89,6 +88,8 @@ public class DLIndexer extends BaseIndexer {
 		if (Validator.isNull(snippet)) {
 			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
 		}
+
+		String fileEntryId = document.get(Field.ENTRY_CLASS_PK);
 
 		portletURL.setParameter("struts_action", "/document_library/get_file");
 		portletURL.setParameter("fileEntryId", fileEntryId);

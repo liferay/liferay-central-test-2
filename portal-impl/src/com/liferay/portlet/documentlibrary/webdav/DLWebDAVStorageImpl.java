@@ -614,7 +614,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			String[] pathArray = webDavRequest.getPathArray();
 
-			long fileEntryId = 0;
 			long companyId = webDavRequest.getCompanyId();
 			long groupId = webDavRequest.getGroupId();
 			long parentFolderId = getParentFolderId(companyId, pathArray);
@@ -645,7 +644,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 					return WebDAVUtil.SC_LOCKED;
 				}
 
-				fileEntryId = fileEntry.getFileEntryId();
+				long fileEntryId = fileEntry.getFileEntryId();
+
 				description = fileEntry.getDescription();
 				extraSettings = fileEntry.getExtraSettings();
 
@@ -656,14 +656,13 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 				if (contentLength > 0) {
 					DLAppServiceUtil.updateFileEntry(
-						fileEntryId, title, title,
-						description, changeLog, false, extraSettings,
-						request.getInputStream(), contentLength,
-						serviceContext);
+						fileEntryId, title, title, description, changeLog,
+						false, extraSettings, request.getInputStream(),
+						contentLength, serviceContext);
 				}
 				else {
-					file =
-						FileUtil.createTempFile(FileUtil.getExtension(title));
+					file = FileUtil.createTempFile(
+						FileUtil.getExtension(title));
 
 					FileUtil.write(file, request.getInputStream());
 

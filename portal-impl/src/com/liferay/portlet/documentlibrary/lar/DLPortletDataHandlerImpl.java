@@ -104,7 +104,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			fileEntry.setUserUuid(fileEntry.getUserUuid());
 
 			portletDataContext.addLocks(
-				DLFileEntry.class, Long.toString(fileEntry.getFileEntryId()));
+				DLFileEntry.class, String.valueOf(fileEntry.getFileEntryId()));
 
 			portletDataContext.addPermissions(
 				DLFileEntry.class, fileEntry.getFileEntryId());
@@ -292,9 +292,9 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 						String dotExtension = StringPool.PERIOD + extension;
 
 						if (originalTitle.endsWith(dotExtension)) {
-							int end = originalTitle.lastIndexOf(dotExtension);
+							int pos = originalTitle.lastIndexOf(dotExtension);
 
-							originalTitle = originalTitle.substring(0, end);
+							originalTitle = originalTitle.substring(0, pos);
 						}
 
 						for (int i = 1;; i++) {
@@ -391,9 +391,9 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		fileEntryNames.put(fileEntry.getName(), importedFileEntry.getName());
 
-		String lockKey = Long.toString(fileEntry.getFileEntryId());
+		String lockKey = String.valueOf(fileEntry.getFileEntryId());
 
-		String newLockKey = Long.toString(importedFileEntry.getFileEntryId());
+		String newLockKey = String.valueOf(importedFileEntry.getFileEntryId());
 
 		portletDataContext.importLocks(DLFileEntry.class, lockKey, newLockKey);
 

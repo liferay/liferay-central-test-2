@@ -231,10 +231,9 @@ public class EditFileEntryAction extends PortletAction {
 			WebKeys.THEME_DISPLAY);
 
 		long fileEntryId = ParamUtil.getLong(uploadRequest, "fileEntryId");
-		long groupId = themeDisplay.getScopeGroupId();
+
 		long folderId = ParamUtil.getLong(uploadRequest, "folderId");
 		String sourceFileName = uploadRequest.getFileName("file");
-
 		String title = ParamUtil.getString(uploadRequest, "title");
 		String description = ParamUtil.getString(uploadRequest, "description");
 		String changeLog = ParamUtil.getString(
@@ -275,8 +274,8 @@ public class EditFileEntryAction extends PortletAction {
 			// Add file entry
 
 			DLFileEntry fileEntry = DLAppServiceUtil.addFileEntry(
-				groupId, folderId, title, description, changeLog,
-				extraSettings, file, serviceContext);
+				themeDisplay.getScopeGroupId(), folderId, title, description,
+				changeLog, extraSettings, file, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, DLFileEntry.class.getName(),
@@ -287,9 +286,8 @@ public class EditFileEntryAction extends PortletAction {
 			// Update file entry
 
 			DLAppServiceUtil.updateFileEntry(
-				fileEntryId, sourceFileName, title, description,
-				changeLog, majorVersion, extraSettings, file,
-				serviceContext);
+				fileEntryId, sourceFileName, title, description, changeLog,
+				majorVersion, extraSettings, file, serviceContext);
 		}
 
 		AssetPublisherUtil.addRecentFolderId(

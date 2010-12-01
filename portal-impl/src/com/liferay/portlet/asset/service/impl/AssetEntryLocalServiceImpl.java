@@ -420,9 +420,9 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 		List<Document> hitsList = hits.toList();
 
-		for (Document doc : hitsList) {
+		for (Document document : hitsList) {
 			try {
-				AssetEntry entry = getEntry(doc);
+				AssetEntry entry = getEntry(document);
 
 				if (entry != null) {
 					entries.add(entry);
@@ -683,13 +683,14 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		validator.validate(className, categoryIds, tagNames);
 	}
 
-	protected AssetEntry getEntry(Document doc)
+	protected AssetEntry getEntry(Document document)
 		throws PortalException, SystemException {
 
-		String portletId = GetterUtil.getString(doc.get(Field.PORTLET_ID));
+		String portletId = GetterUtil.getString(document.get(Field.PORTLET_ID));
 
 		if (portletId.equals(PortletKeys.BLOGS)) {
-			long entryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
+			long entryId = GetterUtil.getLong(
+				document.get(Field.ENTRY_CLASS_PK));
 
 			long classNameId = PortalUtil.getClassNameId(
 				BlogsEntry.class.getName());
@@ -698,7 +699,8 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			return assetEntryPersistence.findByC_C(classNameId, classPK);
 		}
 		else if (portletId.equals(PortletKeys.BOOKMARKS)) {
-			long entryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
+			long entryId = GetterUtil.getLong(
+				document.get(Field.ENTRY_CLASS_PK));
 
 			long classNameId = PortalUtil.getClassNameId(
 				BookmarksEntry.class.getName());
@@ -707,16 +709,18 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			return assetEntryPersistence.findByC_C(classNameId, classPK);
 		}
 		else if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
-			long entryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
+			long fileEntryId = GetterUtil.getLong(
+				document.get(Field.ENTRY_CLASS_PK));
 
 			long classNameId = PortalUtil.getClassNameId(
 				DLFileEntry.class.getName());
-			long classPK = entryId;
+			long classPK = fileEntryId;
 
 			return assetEntryPersistence.findByC_C(classNameId, classPK);
 		}
 		else if (portletId.equals(PortletKeys.IMAGE_GALLERY)) {
-			long imageId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
+			long imageId = GetterUtil.getLong(
+				document.get(Field.ENTRY_CLASS_PK));
 
 			long classNameId = PortalUtil.getClassNameId(
 				IGImage.class.getName());
@@ -725,9 +729,9 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			return assetEntryPersistence.findByC_C(classNameId, classPK);
 		}
 		else if (portletId.equals(PortletKeys.JOURNAL)) {
-			long groupId = GetterUtil.getLong(doc.get(Field.GROUP_ID));
-			String articleId = doc.get(Field.ENTRY_CLASS_PK);
-			//double version = GetterUtil.getDouble(doc.get("version"));
+			long groupId = GetterUtil.getLong(document.get(Field.GROUP_ID));
+			String articleId = document.get(Field.ENTRY_CLASS_PK);
+			//double version = GetterUtil.getDouble(document.get("version"));
 
 			long articleResourcePrimKey =
 				journalArticleResourceLocalService.getArticleResourcePrimKey(
@@ -740,7 +744,8 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			return assetEntryPersistence.findByC_C(classNameId, classPK);
 		}
 		else if (portletId.equals(PortletKeys.MESSAGE_BOARDS)) {
-			long messageId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
+			long messageId = GetterUtil.getLong(
+				document.get(Field.ENTRY_CLASS_PK));
 
 			long classNameId = PortalUtil.getClassNameId(
 				MBMessage.class.getName());
@@ -749,8 +754,9 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			return assetEntryPersistence.findByC_C(classNameId, classPK);
 		}
 		else if (portletId.equals(PortletKeys.WIKI)) {
-			long nodeId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
-			String title = doc.get(Field.TITLE);
+			long nodeId = GetterUtil.getLong(
+				document.get(Field.ENTRY_CLASS_PK));
+			String title = document.get(Field.TITLE);
 
 			long pageResourcePrimKey =
 				wikiPageResourceLocalService.getPageResourcePrimKey(

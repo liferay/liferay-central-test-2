@@ -368,9 +368,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		return fileEntry;
 	}
 
-	public Lock getFileEntryLock(long fileEntryId)
-		throws PortalException, SystemException {
-
+	public Lock getFileEntryLock(long fileEntryId) {
 		try {
 			return lockLocalService.getLock(
 				DLFileEntry.class.getName(), fileEntryId);
@@ -1076,9 +1074,8 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 				DLFileEntry fileEntry = dlRepositoryLocalService.getFileEntry(
 					fileEntryId);
 
-				long folderId = fileEntry.getFolderId();
-
-				verified = verifyInheritableLock(folderId, lockUuid);
+				verified = verifyInheritableLock(
+					fileEntry.getFolderId(), lockUuid);
 			}
 			else {
 				throw pe;

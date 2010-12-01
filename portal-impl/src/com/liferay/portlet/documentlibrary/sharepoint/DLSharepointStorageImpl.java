@@ -242,6 +242,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 		if (fileEntry != null) {
 			long fileEntryId = fileEntry.getFileEntryId();
+
 			long folderId = fileEntry.getFolderId();
 			String description = fileEntry.getDescription();
 			String changeLog = StringPool.BLANK;
@@ -258,8 +259,8 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			serviceContext.setAssetTagNames(assetTagNames);
 
 			fileEntry = DLAppServiceUtil.updateFileEntry(
-				fileEntryId, newName, newName, description,
-				changeLog, false, extraSettings, bytes, serviceContext);
+				fileEntryId, newName, newName, description, changeLog, false,
+				extraSettings, bytes, serviceContext);
 
 			if (folderId != newParentFolderId) {
 				fileEntry = DLAppServiceUtil.moveFileEntry(
@@ -293,7 +294,6 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		String documentPath = sharepointRequest.getRootPath();
 		String parentFolderPath = getParentFolderPath(documentPath);
 
-		long fileEntryId = 0;
 		long groupId = SharepointUtil.getGroupId(parentFolderPath);
 		long parentFolderId = getLastFolderId(
 			groupId, parentFolderPath,
@@ -311,7 +311,8 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		try {
 			DLFileEntry fileEntry = getFileEntry(sharepointRequest);
 
-			fileEntryId = fileEntry.getFileEntryId();
+			long fileEntryId = fileEntry.getFileEntryId();
+
 			description = fileEntry.getDescription();
 			extraSettings = fileEntry.getExtraSettings();
 
@@ -321,9 +322,8 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			serviceContext.setAssetTagNames(assetTagNames);
 
 			DLAppServiceUtil.updateFileEntry(
-				fileEntryId, title, title, description,
-				changeLog, false, extraSettings, sharepointRequest.getBytes(),
-				serviceContext);
+				fileEntryId, title, title, description, changeLog, false,
+				extraSettings, sharepointRequest.getBytes(), serviceContext);
 		}
 		catch (NoSuchFileEntryException nsfee) {
 			File file = FileUtil.createTempFile(FileUtil.getExtension(title));

@@ -61,6 +61,7 @@ public class GetFileAction extends PortletAction {
 
 		try {
 			long fileEntryId = ParamUtil.getLong(request, "fileEntryId");
+
 			long folderId = ParamUtil.getLong(request, "folderId");
 			String title = ParamUtil.getString(request, "title");
 			String version = ParamUtil.getString(request, "version");
@@ -99,6 +100,7 @@ public class GetFileAction extends PortletAction {
 
 		try {
 			long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
+
 			long folderId = ParamUtil.getLong(actionRequest, "folderId");
 			String title = ParamUtil.getString(actionRequest, "title");
 			String version = ParamUtil.getString(actionRequest, "version");
@@ -123,9 +125,8 @@ public class GetFileAction extends PortletAction {
 				actionResponse);
 
 			getFile(
-				fileEntryId, folderId, title, version, fileShortcutId,
-				uuid, groupId, targetExtension, themeDisplay, request,
-				response);
+				fileEntryId, folderId, title, version, fileShortcutId, uuid,
+				groupId, targetExtension, themeDisplay, request, response);
 
 			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}
@@ -140,8 +141,8 @@ public class GetFileAction extends PortletAction {
 	}
 
 	protected void getFile(
-			long fileEntryId, long folderId, String title,
-			String version, long fileShortcutId, String uuid, long groupId,
+			long fileEntryId, long folderId, String title, String version,
+			long fileShortcutId, String uuid, long groupId,
 			String targetExtension, ThemeDisplay themeDisplay,
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {

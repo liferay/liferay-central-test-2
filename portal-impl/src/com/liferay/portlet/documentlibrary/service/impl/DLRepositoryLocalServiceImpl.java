@@ -135,12 +135,9 @@ public class DLRepositoryLocalServiceImpl
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		folderId = getFolderId(user.getCompanyId(), folderId);
-
-		String extension = FileUtil.getExtension(title);
-
 		String name = String.valueOf(
 			counterLocalService.increment(DLFileEntry.class.getName()));
-
+		String extension = FileUtil.getExtension(title);
 		Date now = new Date();
 
 		validateFile(groupId, folderId, title, is);
@@ -188,8 +185,8 @@ public class DLRepositoryLocalServiceImpl
 		// File version
 
 		DLFileVersion fileVersion = addFileVersion(
-			user, fileEntry, serviceContext.getModifiedDate(now),
-			extension, title, description, null, extraSettings,
+			user, fileEntry, serviceContext.getModifiedDate(now), extension,
+			title, description, null, extraSettings,
 			DLFileEntryConstants.DEFAULT_VERSION, size,
 			WorkflowConstants.STATUS_DRAFT, serviceContext);
 
@@ -347,7 +344,7 @@ public class DLRepositoryLocalServiceImpl
 
 		// Lock
 
-		String lockId = Long.toString(fileEntry.getFileEntryId());
+		String lockId = String.valueOf(fileEntry.getFileEntryId());
 
 		lockLocalService.unlock(DLFileEntry.class.getName(), lockId);
 
@@ -557,16 +554,13 @@ public class DLRepositoryLocalServiceImpl
 
 		dlAppHelperLocalService.getFileAsStream(userId, fileEntry);
 
-		long companyId = fileEntry.getCompanyId();
-		long repositoryId = fileEntry.getRepositoryId();
-		String name = fileEntry.getName();
-
 		if (Validator.isNull(version)) {
 			version = fileEntry.getVersion();
 		}
 
 		return dlLocalService.getFileAsStream(
-			companyId, repositoryId, name, version);
+			fileEntry.getCompanyId(), fileEntry.getRepositoryId(),
+			fileEntry.getName(), version);
 	}
 
 	public List<DLFileEntry> getFileEntries(long groupId, long folderId)
@@ -870,9 +864,6 @@ public class DLRepositoryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
-
-		Date now = new Date();
-
 		DLFileEntry fileEntry = dlFileEntryPersistence.findByPrimaryKey(
 			fileEntryId);
 
@@ -886,6 +877,8 @@ public class DLRepositoryLocalServiceImpl
 
 			throw new DuplicateFileException(fileEntry.getName());
 		}
+
+		Date now = new Date();
 
 		long newFileEntryId = counterLocalService.increment();
 
@@ -1065,7 +1058,6 @@ public class DLRepositoryLocalServiceImpl
 		// File entry
 
 		User user = userPersistence.findByPrimaryKey(userId);
-
 		DLFileEntry fileEntry = dlFileEntryPersistence.findByPrimaryKey(
 			fileEntryId);
 
@@ -1629,48 +1621,6 @@ public class DLRepositoryLocalServiceImpl
 		dlFileVersionPersistence.update(fileVersion, false);
 	}
 
-	protected void validateFolder(
-			long folderId, long groupId, long parentFolderId, String name)
-		throws PortalException, SystemException {
-
-		if (!AssetUtil.isValidWord(name)) {
-			throw new FolderNameException();
-		}
-
-		try {
-			getFileEntryByTitle(groupId, parentFolderId, name);
-
-			throw new DuplicateFileException();
-		}
-		catch (NoSuchFileEntryException nsfee) {
-		}
-
-		DLFolder folder = dlFolderPersistence.fetchByG_P_N(
-			groupId, parentFolderId, name);
-
-		if ((folder != null) && (folder.getFolderId() != folderId)) {
-			throw new DuplicateFolderNameException();
-		}
-	}
-
-	protected void validateFolder(
-			long groupId, long parentFolderId, String name)
-		throws PortalException, SystemException {
-
-		long folderId = 0;
-
-		validateFolder(folderId, groupId, parentFolderId, name);
-	}
-
-	protected void validateFile(
-			long groupId, long folderId, String title, InputStream is)
-		throws PortalException, SystemException {
-
-		dlLocalService.validate(title, true, is);
-
-		validateFile(groupId, folderId, 0, title);
-	}
-
 	protected void validateFile(
 			long groupId, long folderId, long fileEntryId, String title)
 		throws PortalException, SystemException {
@@ -1706,6 +1656,48 @@ public class DLRepositoryLocalServiceImpl
 		}
 
 		validateFile(groupId, folderId, fileEntryId, title);
+	}
+
+	protected void validateFile(
+			long groupId, long folderId, String title, InputStream is)
+		throws PortalException, SystemException {
+
+		dlLocalService.validate(title, true, is);
+
+		validateFile(groupId, folderId, 0, title);
+	}
+
+	protected void validateFolder(
+			long folderId, long groupId, long parentFolderId, String name)
+		throws PortalException, SystemException {
+
+		if (!AssetUtil.isValidWord(name)) {
+			throw new FolderNameException();
+		}
+
+		try {
+			getFileEntryByTitle(groupId, parentFolderId, name);
+
+			throw new DuplicateFileException();
+		}
+		catch (NoSuchFileEntryException nsfee) {
+		}
+
+		DLFolder folder = dlFolderPersistence.fetchByG_P_N(
+			groupId, parentFolderId, name);
+
+		if ((folder != null) && (folder.getFolderId() != folderId)) {
+			throw new DuplicateFolderNameException();
+		}
+	}
+
+	protected void validateFolder(
+			long groupId, long parentFolderId, String name)
+		throws PortalException, SystemException {
+
+		long folderId = 0;
+
+		validateFolder(folderId, groupId, parentFolderId, name);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

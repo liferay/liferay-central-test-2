@@ -28,6 +28,7 @@ String referringPortletResource = ParamUtil.getString(request, "referringPortlet
 DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
 
 long fileEntryId = BeanParamUtil.getLong(fileEntry, request, "fileEntryId");
+
 long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 
 Boolean isLocked = DLAppServiceUtil.isFileEntryLocked(fileEntry.getFileEntryId());
