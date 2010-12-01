@@ -654,15 +654,17 @@ public class HttpImpl implements Http {
 		return protocolize(url, renderRequest.isSecure());
 	}
 
-	public void proxifyState(HttpState state, HostConfiguration hostConfig) {
+	public void proxifyState(
+		HttpState httpState, HostConfiguration hostConfiguration) {
+
 		Credentials proxyCredentials = _proxyCredentials;
 
-		String host = hostConfig.getHost();
+		String host = hostConfiguration.getHost();
 
 		if (isProxyHost(host) && (proxyCredentials != null)) {
 			AuthScope scope = new AuthScope(_PROXY_HOST, _PROXY_PORT, null);
 
-			state.setProxyCredentials(scope, proxyCredentials);
+			httpState.setProxyCredentials(scope, proxyCredentials);
 		}
 	}
 
