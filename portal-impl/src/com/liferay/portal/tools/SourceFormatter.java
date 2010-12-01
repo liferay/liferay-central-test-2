@@ -64,16 +64,8 @@ public class SourceFormatter {
 
 			_readExclusions();
 
-			final boolean fast = (args.length == 1 && args[0].equals("fast"));
-
-			if (fast) {
-				System.out.println("Skipping Java test files");
-			}
-
 			Thread thread1 = new Thread () {
 				public void run() {
-					long now = System.currentTimeMillis();
-
 					try {
 						_checkPersistenceTestSuite();
 						_formatJSP();
@@ -85,27 +77,17 @@ public class SourceFormatter {
 					catch (Exception e) {
 						e.printStackTrace();
 					}
-
-					long time = (System.currentTimeMillis() - now) / 1000;
-
-					System.out.println("T1 completed in " + time + "s");
 				}
 			};
 
 			Thread thread2 = new Thread () {
 				public void run() {
-					long now = System.currentTimeMillis();
-
 					try {
-						_formatJava(fast);
+						_formatJava();
 					}
 					catch (Exception e) {
 						e.printStackTrace();
 					}
-
-					long time = (System.currentTimeMillis() - now) / 1000;
-
-					System.out.println("T2 completed in " + time + "s");
 				}
 			};
 
@@ -661,7 +643,7 @@ public class SourceFormatter {
 		return sb.toString();
 	}
 
-	private static void _formatJava(boolean fast) throws IOException {
+	private static void _formatJava() throws IOException {
 		String basedir = "./";
 
 		String copyright = _getCopyright();
@@ -680,21 +662,7 @@ public class SourceFormatter {
 			fileNames = _getPluginJavaFiles();
 		}
 
-		int skipCount = 0;
-
 		for (String fileName : fileNames) {
-			if (fast) {
-				if (fileName.endsWith("Test.java") ||
-					fileName.endsWith("TestCase.java") ||
-					fileName.endsWith("TestSetup.java") ||
-					fileName.endsWith("TestSuite.java")) {
-
-					skipCount++;
-
-					continue;
-				}
-			}
-
 			File file = new File(fileName);
 
 			String content = _fileUtil.read(file);
@@ -854,10 +822,6 @@ public class SourceFormatter {
 
 				_sourceFormatterHelper.printError(fileName, file);
 			}
-		}
-
-		if (fast) {
-			System.out.println("Skipped " + skipCount + " files");
 		}
 	}
 
