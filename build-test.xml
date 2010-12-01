@@ -407,7 +407,7 @@
 			<param name="test.ant.script.command" value="db-sharding-knowledge-base-admin" />
 			<param name="test.ant.script.plugins" value="knowledge-base-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
-			<param name="test.ant.script.suite" value="PluginsKnowledgeAdminBaseTestSuite" />
+			<param name="test.ant.script.suite" value="PluginsKnowledgeBaseAdminTestSuite" />
 			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
 		</antcall>
 
@@ -415,7 +415,7 @@
 			<param name="test.ant.script.command" value="db-sharding-knowledge-base-aggregator" />
 			<param name="test.ant.script.plugins" value="knowledge-base-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
-			<param name="test.ant.script.suite" value="PluginsKnowledgeAggregatorBaseTestSuite" />
+			<param name="test.ant.script.suite" value="PluginsKnowledgeBaseAggregatorTestSuite" />
 			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
 		</antcall>
 
