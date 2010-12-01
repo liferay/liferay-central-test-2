@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.util.PropsValues;
 
 import org.hibernate.dialect.DB2Dialect;
@@ -55,8 +56,8 @@ public class DBFactoryImpl implements DBFactory {
 					_log.info("Using dialect " + PropsValues.HIBERNATE_DIALECT);
 				}
 
-				Dialect dialect = (Dialect)Class.forName(
-					PropsValues.HIBERNATE_DIALECT).newInstance();
+				Dialect dialect = (Dialect)InstanceFactory.newInstance(
+					PropsValues.HIBERNATE_DIALECT);
 
 				setDB(dialect);
 			}
