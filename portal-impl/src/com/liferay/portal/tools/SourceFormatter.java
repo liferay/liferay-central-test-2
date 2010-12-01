@@ -16,8 +16,10 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ClassUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -58,6 +60,10 @@ public class SourceFormatter {
 
 	public static void main(String[] args) {
 		try {
+			_excludes = StringUtil.split(
+				GetterUtil.getString(
+					System.getProperty("source.formatter.excludes")));
+
 			_sourceFormatterHelper = new SourceFormatterHelper(false);
 
 			_sourceFormatterHelper.init();
@@ -891,12 +897,12 @@ public class SourceFormatter {
 				longLogFactoryUtil = true;
 			}
 
-			String excluded = _exclusions.getProperty(
+			String excluded = _exclusionsProperties.getProperty(
 				StringUtil.replace(fileName, "\\", "/") + StringPool.AT +
 					lineCount);
 
 			if (excluded == null) {
-				excluded = _exclusions.getProperty(
+				excluded = _exclusionsProperties.getProperty(
 					StringUtil.replace(fileName, "\\", "/"));
 			}
 
@@ -946,11 +952,16 @@ public class SourceFormatter {
 		DirectoryScanner directoryScanner = new DirectoryScanner();
 
 		directoryScanner.setBasedir(basedir);
-		directoryScanner.setExcludes(
-			new String[] {
-				"**\\portal\\aui\\**", "**\\bin\\**", "**\\null.jsp",
-				"**\\tmp\\**", "**\\tools\\**"
-			});
+
+		String[] excludes = {
+			"**\\portal\\aui\\**", "**\\bin\\**", "**\\null.jsp",
+			"**\\tmp\\**", "**\\tools\\**"
+		};
+
+		excludes = ArrayUtil.append(excludes, _excludes);
+
+		directoryScanner.setExcludes(excludes);
+
 		directoryScanner.setIncludes(
 			new String[] {"**\\*.jsp", "**\\*.jspf", "**\\*.vm"});
 
@@ -1328,31 +1339,35 @@ public class SourceFormatter {
 		DirectoryScanner directoryScanner = new DirectoryScanner();
 
 		directoryScanner.setBasedir(basedir);
-		directoryScanner.setExcludes(
-			new String[] {
-				"**\\bin\\**", "**\\model\\*Clp.java",
-				"**\\model\\impl\\*ModelImpl.java",
-				"**\\service\\**\\model\\*Model.java",
-				"**\\service\\**\\model\\*Soap.java",
-				"**\\service\\**\\model\\*Wrapper.java",
-				"**\\service\\**\\service\\*Service.java",
-				"**\\service\\**\\service\\*ServiceClp.java",
-				"**\\service\\**\\service\\*ServiceFactory.java",
-				"**\\service\\**\\service\\*ServiceUtil.java",
-				"**\\service\\**\\service\\*ServiceWrapper.java",
-				"**\\service\\**\\service\\ClpSerializer.java",
-				"**\\service\\**\\service\\messaging\\*ClpMessageListener.java",
-				"**\\service\\**\\service\\persistence\\*Finder.java",
-				"**\\service\\**\\service\\persistence\\*Persistence.java",
-				"**\\service\\**\\service\\persistence\\*Util.java",
-				"**\\service\\base\\*ServiceBaseImpl.java",
-				"**\\service\\http\\*JSONSerializer.java",
-				"**\\service\\http\\*ServiceHttp.java",
-				"**\\service\\http\\*ServiceJSON.java",
-				"**\\service\\http\\*ServiceSoap.java",
-				"**\\service\\persistence\\*PersistenceImpl.java",
-				"**\\tmp\\**"
-			});
+
+		String[] excludes = {
+			"**\\bin\\**", "**\\model\\*Clp.java",
+			"**\\model\\impl\\*ModelImpl.java",
+			"**\\service\\**\\model\\*Model.java",
+			"**\\service\\**\\model\\*Soap.java",
+			"**\\service\\**\\model\\*Wrapper.java",
+			"**\\service\\**\\service\\*Service.java",
+			"**\\service\\**\\service\\*ServiceClp.java",
+			"**\\service\\**\\service\\*ServiceFactory.java",
+			"**\\service\\**\\service\\*ServiceUtil.java",
+			"**\\service\\**\\service\\*ServiceWrapper.java",
+			"**\\service\\**\\service\\ClpSerializer.java",
+			"**\\service\\**\\service\\messaging\\*ClpMessageListener.java",
+			"**\\service\\**\\service\\persistence\\*Finder.java",
+			"**\\service\\**\\service\\persistence\\*Persistence.java",
+			"**\\service\\**\\service\\persistence\\*Util.java",
+			"**\\service\\base\\*ServiceBaseImpl.java",
+			"**\\service\\http\\*JSONSerializer.java",
+			"**\\service\\http\\*ServiceHttp.java",
+			"**\\service\\http\\*ServiceJSON.java",
+			"**\\service\\http\\*ServiceSoap.java",
+			"**\\service\\persistence\\*PersistenceImpl.java", "**\\tmp\\**"
+		};
+
+		excludes = ArrayUtil.append(excludes, _excludes);
+
+		directoryScanner.setExcludes(excludes);
+
 		directoryScanner.setIncludes(new String[] {"**\\*.java"});
 
 		fileNames.addAll(_sourceFormatterHelper.scanForFiles(directoryScanner));
@@ -1368,23 +1383,27 @@ public class SourceFormatter {
 		DirectoryScanner directoryScanner = new DirectoryScanner();
 
 		directoryScanner.setBasedir(basedir);
-		directoryScanner.setExcludes(
-			new String[] {
-				"**\\InstanceWrapperBuilder.java", "**\\*_IW.java",
-				"**\\PropsKeys.java", "**\\PropsValues.java",
-				"**\\ServiceBuilder.java", "**\\SourceFormatter.java",
-				"**\\UserAttributes.java", "**\\WebKeys.java",
-				"**\\bin\\**", "**\\classes\\*", "**\\counter\\service\\**",
-				"**\\jsp\\*", "**\\model\\impl\\*ModelImpl.java",
-				"**\\portal\\service\\**", "**\\portal-client\\**",
-				"**\\portal-service\\**\\model\\*Model.java",
-				"**\\portal-service\\**\\model\\*Soap.java",
-				"**\\portal-service\\**\\model\\*Wrapper.java",
-				"**\\portal-web\\classes\\**\\*.java",
-				"**\\portal-web\\test\\**\\*Test.java",
-				"**\\portlet\\**\\service\\**", "**\\tmp\\**",
-				"**\\tools\\tck\\**"
-			});
+
+		String[] excludes = {
+			"**\\InstanceWrapperBuilder.java", "**\\*_IW.java",
+			"**\\PropsKeys.java", "**\\PropsValues.java",
+			"**\\ServiceBuilder.java", "**\\SourceFormatter.java",
+			"**\\UserAttributes.java", "**\\WebKeys.java",
+			"**\\bin\\**", "**\\classes\\*", "**\\counter\\service\\**",
+			"**\\jsp\\*", "**\\model\\impl\\*ModelImpl.java",
+			"**\\portal\\service\\**", "**\\portal-client\\**",
+			"**\\portal-service\\**\\model\\*Model.java",
+			"**\\portal-service\\**\\model\\*Soap.java",
+			"**\\portal-service\\**\\model\\*Wrapper.java",
+			"**\\portal-web\\classes\\**\\*.java",
+			"**\\portal-web\\test\\**\\*Test.java",
+			"**\\portlet\\**\\service\\**", "**\\tmp\\**", "**\\tools\\tck\\**"
+		};
+
+		excludes = ArrayUtil.append(excludes, _excludes);
+
+		directoryScanner.setExcludes(excludes);
+
 		directoryScanner.setIncludes(new String[] {"**\\*.java"});
 
 		fileNames.addAll(_sourceFormatterHelper.scanForFiles(directoryScanner));
@@ -1392,12 +1411,16 @@ public class SourceFormatter {
 		directoryScanner = new DirectoryScanner();
 
 		directoryScanner.setBasedir(basedir);
-		directoryScanner.setExcludes(
-			new String[] {
-				"**\\bin\\**", "**\\portal-client\\**",
-				"**\\tools\\ext_tmpl\\**", "**\\*_IW.java",
-				"**\\test\\**\\*PersistenceTest.java"
-			});
+
+		excludes = new String[] {
+			"**\\bin\\**", "**\\portal-client\\**", "**\\tools\\ext_tmpl\\**",
+			"**\\*_IW.java", "**\\test\\**\\*PersistenceTest.java"
+		};
+
+		excludes = ArrayUtil.append(excludes, _excludes);
+
+		directoryScanner.setExcludes(excludes);
+
 		directoryScanner.setIncludes(
 			new String[] {
 				"**\\com\\liferay\\portal\\service\\ServiceContext*.java",
@@ -1449,7 +1472,7 @@ public class SourceFormatter {
 	}
 
 	private static void _readExclusions() throws IOException {
-		_exclusions = new Properties();
+		_exclusionsProperties = new Properties();
 
 		ClassLoader classLoader = SourceFormatter.class.getClassLoader();
 
@@ -1464,11 +1487,11 @@ public class SourceFormatter {
 			return;
 		}
 
-		InputStream is = url.openStream();
+		InputStream inputStream = url.openStream();
 
-		_exclusions.load(is);
+		_exclusionsProperties.load(inputStream);
 
-		is.close();
+		inputStream.close();
 	}
 
 	private static final String[] _TAG_LIBRARIES = new String[] {
@@ -1477,7 +1500,8 @@ public class SourceFormatter {
 		"tiles"
 	};
 
-	private static Properties _exclusions;
+	private static String[] _excludes;
+	private static Properties _exclusionsProperties;
 	private static FileImpl _fileUtil = FileImpl.getInstance();
 	private static SAXReaderImpl _saxReaderUtil = SAXReaderImpl.getInstance();
 	private static SourceFormatterHelper _sourceFormatterHelper;

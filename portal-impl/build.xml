@@ -947,6 +947,7 @@ ${exception.message}
 			newenvironment="true"
 		>
 			<jvmarg value="-Xmx256m" />
+			<jvmarg value="-Dsource.formatter.excludes=${source.formatter.excludes}" />
 		</java>
 
 		<delete file="ServiceBuilder.temp" />
