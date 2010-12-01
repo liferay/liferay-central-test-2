@@ -64,7 +64,6 @@ else if (fileEntry != null) {
 	assetClassPK = fileEntry.getFileEntryId();
 }
 
-
 Boolean isLocked = Boolean.FALSE;
 Boolean hasLock = Boolean.FALSE;
 Lock lock = null;
