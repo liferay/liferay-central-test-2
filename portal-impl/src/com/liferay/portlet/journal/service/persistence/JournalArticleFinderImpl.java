@@ -482,9 +482,8 @@ public class JournalArticleFinderImpl
 				StringBundler sb = new StringBundler(groupBy);
 
 				for (String field : orderByComparator.getOrderByFields()) {
-					if (field.equals("articleId") ||
-							field.equals("modifiedDate") ||
-							field.equals("version")) {
+					if (field.equals("modifiedDate") ||
+						field.equals("articleId") || field.equals("version")) {
 
 						continue;
 					}
