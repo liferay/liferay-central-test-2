@@ -420,7 +420,8 @@ public class SourceFormatter {
 
 				if (name.compareTo(previousName) < -1) {
 					_sourceFormatterHelper.printError(
-						fileName, fileName + " has an unordered target " + name);
+						fileName,
+						fileName + " has an unordered target " + name);
 
 					break;
 				}
@@ -1381,7 +1382,8 @@ public class SourceFormatter {
 				"**\\portal-service\\**\\model\\*Wrapper.java",
 				"**\\portal-web\\classes\\**\\*.java",
 				"**\\portal-web\\test\\**\\*Test.java",
-				"**\\portlet\\**\\service\\**", "**\\tmp\\**", "**\\tools\\tck\\**"
+				"**\\portlet\\**\\service\\**", "**\\tmp\\**",
+				"**\\tools\\tck\\**"
 			});
 		directoryScanner.setIncludes(new String[] {"**\\*.java"});
 
