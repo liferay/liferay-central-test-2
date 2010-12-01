@@ -912,8 +912,7 @@ public class DLRepositoryServiceHttp {
 
 	public static com.liferay.portal.model.Lock getFileEntryLock(
 		HttpPrincipal httpPrincipal, long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLRepositoryServiceUtil.class.getName(),
 					"getFileEntryLock", _getFileEntryLockParameterTypes23);
@@ -927,14 +926,6 @@ public class DLRepositoryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
 

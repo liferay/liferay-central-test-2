@@ -209,9 +209,7 @@ public class DLRepositoryServiceWrapper implements DLRepositoryService {
 		return _dlRepositoryService.getFileEntryByUuidAndGroupId(uuid, groupId);
 	}
 
-	public com.liferay.portal.model.Lock getFileEntryLock(long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+	public com.liferay.portal.model.Lock getFileEntryLock(long fileEntryId) {
 		return _dlRepositoryService.getFileEntryLock(fileEntryId);
 	}
 
