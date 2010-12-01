@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -64,6 +65,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -830,12 +832,15 @@ public class DLRepositoryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		List<DLFileVersion> fileVersions =
-			dlFileVersionPersistence.findByFileEntryId(
-				fileEntryId, 0, 1, new FileVersionVersionComparator());
+			dlFileVersionPersistence.findByFileEntryId(fileEntryId);
 
 		if (fileVersions.isEmpty()) {
 			throw new NoSuchFileVersionException();
 		}
+
+		fileVersions = ListUtil.copy(fileVersions);
+
+		Collections.sort(fileVersions, new FileVersionVersionComparator());
 
 		return fileVersions.get(0);
 	}

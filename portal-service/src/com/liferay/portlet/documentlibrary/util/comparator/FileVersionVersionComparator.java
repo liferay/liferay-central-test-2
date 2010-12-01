@@ -14,21 +14,17 @@
 
 package com.liferay.portlet.documentlibrary.util.comparator;
 
-import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 
+import java.util.Comparator;
+
 /**
  * @author Bruno Farache
  */
-public class FileVersionVersionComparator extends OrderByComparator {
-
-	public static String ORDER_BY_ASC = "version ASC";
-
-	public static String ORDER_BY_DESC = "version DESC";
-
-	public static String[] ORDER_BY_FIELDS = {"version"};
+public class FileVersionVersionComparator
+	implements Comparator<DLFileVersion> {
 
 	public FileVersionVersionComparator() {
 		this(false);
@@ -38,10 +34,7 @@ public class FileVersionVersionComparator extends OrderByComparator {
 		_ascending = ascending;
 	}
 
-	public int compare(Object obj1, Object obj2) {
-		DLFileVersion fileVersion1 = (DLFileVersion)obj1;
-		DLFileVersion fileVersion2 = (DLFileVersion)obj2;
-
+	public int compare(DLFileVersion fileVersion1, DLFileVersion fileVersion2) {
 		int value = 0;
 
 		int[] versionParts1 = StringUtil.split(
@@ -77,19 +70,6 @@ public class FileVersionVersionComparator extends OrderByComparator {
 		else {
 			return -value;
 		}
-	}
-
-	public String getOrderBy() {
-		if (_ascending) {
-			return ORDER_BY_ASC;
-		}
-		else {
-			return ORDER_BY_DESC;
-		}
-	}
-
-	public String[] getOrderByFields() {
-		return ORDER_BY_FIELDS;
 	}
 
 	public boolean isAscending() {
