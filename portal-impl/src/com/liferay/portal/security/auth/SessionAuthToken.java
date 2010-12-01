@@ -15,13 +15,11 @@
 package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.Encryptor;
 import com.liferay.util.PwdGenerator;
@@ -37,14 +35,6 @@ import javax.servlet.http.HttpSession;
  * @author Amos Fong
  */
 public class SessionAuthToken implements AuthToken {
-
-	public SessionAuthToken() {
-		_ignoreActions = SetUtil.fromArray(
-			PropsUtil.getArray(PropsKeys.AUTH_TOKEN_IGNORE_ACTIONS));
-		_ignorePortlets = SetUtil.fromArray(
-			PropsUtil.getArray(
-				PropsKeys.AUTH_TOKEN_IGNORE_PORTLETS));
-	}
 
 	public void check(HttpServletRequest request) throws PrincipalException {
 		if (isIgnoreAction(request) || isIgnorePortlet(request)) {
@@ -132,7 +122,10 @@ public class SessionAuthToken implements AuthToken {
 	}
 
 	protected boolean isIgnoreAction(String strutsAction) {
-		return _ignoreActions.contains(strutsAction);
+		Set<String> authTokenIgnoreActions =
+			PortalUtil.getAuthTokenIgnoreActions();
+
+		return authTokenIgnoreActions.contains(strutsAction);
 	}
 
 	protected boolean isIgnorePortlet(HttpServletRequest request) {
@@ -142,12 +135,14 @@ public class SessionAuthToken implements AuthToken {
 	}
 
 	protected boolean isIgnorePortlet(String portletId) {
-		return _ignorePortlets.contains(portletId);
+		String rootPortletId = PortletConstants.getRootPortletId(portletId);
+
+		Set<String> authTokenIgnorePortlets =
+			PortalUtil.getAuthTokenIgnorePortlets();
+
+		return authTokenIgnorePortlets.contains(rootPortletId);
 	}
 
 	private static final String _PORTAL = "PORTAL";
-
-	private Set<String> _ignoreActions;
-	private Set<String> _ignorePortlets;
 
 }

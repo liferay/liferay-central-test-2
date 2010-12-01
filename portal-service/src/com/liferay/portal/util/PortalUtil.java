@@ -172,6 +172,10 @@ public class PortalUtil {
 		return getPortal().generateRandomKey(request, input);
 	}
 
+	public static Set<String> getAuthTokenIgnoreActions() {
+		return getPortal().getAuthTokenIgnoreActions();
+	}
+
 	public static Set<String> getAuthTokenIgnorePortlets() {
 		return getPortal().getAuthTokenIgnorePortlets();
 	}

@@ -408,7 +408,7 @@ public class PortalImpl implements Portal {
 
 		Arrays.sort(_sortedSystemCommunityRoles, new StringComparator());
 
-		// Organization Roles
+		// Organization roles
 
 		String customSystemOrganizationRoles[] =
 			PropsUtil.getArray(PropsKeys.SYSTEM_ORGANIZATION_ROLES);
@@ -434,8 +434,10 @@ public class PortalImpl implements Portal {
 
 		Arrays.sort(_sortedSystemOrganizationRoles, new StringComparator());
 
-		// Authentication token ignore portlets check white list
+		// Authentication token ignore actions and tokens
 
+		_authTokenIgnoreActions = SetUtil.fromArray(
+			PropsValues.AUTH_TOKEN_IGNORE_ACTIONS);
 		_authTokenIgnorePortlets = SetUtil.fromArray(
 			PropsValues.AUTH_TOKEN_IGNORE_PORTLETS);
 
@@ -751,6 +753,10 @@ public class PortalImpl implements Portal {
 		else {
 			return DeterminateKeyGenerator.generate(input);
 		}
+	}
+
+	public Set<String> getAuthTokenIgnoreActions() {
+		return _authTokenIgnoreActions;
 	}
 
 	public Set<String> getAuthTokenIgnorePortlets() {
@@ -4665,6 +4671,7 @@ public class PortalImpl implements Portal {
 	private String[] _allSystemGroups;
 	private String[] _allSystemOrganizationRoles;
 	private String[] _allSystemRoles;
+	private Set<String> _authTokenIgnoreActions;
 	private Set<String> _authTokenIgnorePortlets;
 	private Pattern _bannedResourceIdPattern = Pattern.compile(
 		PropsValues.PORTLET_RESOURCE_ID_BANNED_PATHS_REGEXP,
