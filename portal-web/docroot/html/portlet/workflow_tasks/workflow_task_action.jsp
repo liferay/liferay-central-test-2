@@ -71,7 +71,7 @@ if (workflowTask.getDueDate() != null) {
 
 			<liferay-ui:icon
 				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
-				id='<%= randomId + "taskChangeStatusLink" %>'
+				id='<%= randomId + transitionName + "taskChangeStatusLink" %>'
 				image="../aui/shuffle"
 				message="<%= message %>"
 				method="get"
@@ -176,7 +176,23 @@ if (workflowTask.getDueDate() != null) {
 <aui:script use="liferay-workflow-tasks">
 	var onTaskClickFn = A.rbind(Liferay.WorkflowTasks.onTaskClick, Liferay.WorkflowTasks, '<%= randomId %>');
 
-	Liferay.delegateClick('<portlet:namespace /><%= randomId %>taskChangeStatusLink', onTaskClickFn);
+	<c:if test="<%= !workflowTask.isCompleted() && isAssignedToUser(workflowTask, user) %>">
+		<%
+		List<String> transitionNames = WorkflowTaskManagerUtil.getNextTransitionNames(company.getCompanyId(), user.getUserId(), workflowTask.getWorkflowTaskId());
+
+		for (String transitionName : transitionNames) {
+			String message = "proceed";
+
+			if (Validator.isNotNull(transitionName)) {
+				message = transitionName;
+			}
+		%>
+			Liferay.delegateClick('<portlet:namespace /><%= randomId + transitionName %>taskChangeStatusLink', onTaskClickFn);
+		<%
+		}
+		%>
+	</c:if>
+
 	Liferay.delegateClick('<portlet:namespace /><%= randomId %>taskAssignToMeLink', onTaskClickFn);
 	Liferay.delegateClick('<portlet:namespace /><%= randomId %>taskAssignLink', onTaskClickFn);
 	Liferay.delegateClick('<portlet:namespace /><%= randomId %>taskDueDateLink', onTaskClickFn);
