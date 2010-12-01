@@ -231,9 +231,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		return dlRepositoryService.getFileEntryByUuidAndGroupId(uuid, groupId);
 	}
 
-	public Lock getFileEntryLock(long fileEntryId)
-		throws PortalException, SystemException {
-
+	public Lock getFileEntryLock(long fileEntryId) {
 		return dlRepositoryService.getFileEntryLock(fileEntryId);
 	}
 

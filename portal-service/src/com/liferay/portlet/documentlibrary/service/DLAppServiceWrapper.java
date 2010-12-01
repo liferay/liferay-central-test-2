@@ -223,9 +223,7 @@ public class DLAppServiceWrapper implements DLAppService {
 		return _dlAppService.getFileEntryByUuidAndGroupId(uuid, groupId);
 	}
 
-	public com.liferay.portal.model.Lock getFileEntryLock(long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+	public com.liferay.portal.model.Lock getFileEntryLock(long fileEntryId) {
 		return _dlAppService.getFileEntryLock(fileEntryId);
 	}
 

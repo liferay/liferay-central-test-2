@@ -245,9 +245,7 @@ public class DLAppServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Lock getFileEntryLock(
-		long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		long fileEntryId) {
 		return getService().getFileEntryLock(fileEntryId);
 	}
 
