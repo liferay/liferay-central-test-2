@@ -27,6 +27,8 @@ AUI().add(
 					return instance[instance._prefix + id];
 				},
 
+				NAME: 'liferaypanel',
+
 				prototype: {
 					initializer: function(config) {
 						var instance = this;
@@ -42,6 +44,8 @@ AUI().add(
 							persistState: false,
 							titles: '.lfr-panel-titlebar'
 						};
+
+						instance.addTarget(Liferay);
 
 						config = A.merge(defaults, config);
 
@@ -105,16 +109,30 @@ AUI().add(
 							}
 						);
 
+						instance.publish(
+							'collapse',
+							{
+								defaultFn: instance._defCollapseFn
+							}
+						);
+
 						instance._panelTitles.on(
 							'mousedown',
 							function(event) {
-								instance.onTitleClick(event.currentTarget);
+								instance.fire(
+									'collapse',
+									{
+										panelTitle: event.currentTarget
+									}
+								);
 							}
 						);
 					},
 
-					onTitleClick: function(el) {
+					_defCollapseFn: function(event) {
 						var instance = this;
+
+						var el = event.panelTitle;
 
 						var currentContainer = el.ancestor('.lfr-panel');
 

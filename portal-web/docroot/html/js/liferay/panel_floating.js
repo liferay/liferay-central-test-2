@@ -20,6 +20,8 @@ AUI().add(
 			{
 				EXTENDS: Liferay.Panel,
 
+				NAME: 'liferaypanelfloating',
+
 				constructor: function(options) {
 					var instance = this;
 
@@ -66,7 +68,12 @@ AUI().add(
 						var target = event.target;
 
 						if (!target.hasClass('lfr-panel') && !target.ancestor('.lfr-position-helper')) {
-							instance.onOuterClick(target);
+							instance.fire(
+								'outerClick',
+								{
+									targetEl: target
+								}
+							);
 
 							A.getDoc().detach('click', instance._hideAllPanels);
 						}
@@ -77,11 +84,44 @@ AUI().add(
 					instance._trigger.on(
 						'click',
 						function(event) {
-							instance.onTriggerClick(event.target);
+							instance.fire(
+								'triggerClick',
+								{
+									trigger: event.target
+								}
+							);
 
 							A.getDoc().on('click', instance._hideAllPanels);
 
 							event.stopPropagation();
+						}
+					);
+
+					instance.publish(
+						'hide',
+						{
+							defaultFn: instance._defHideFn
+						}
+					);
+
+					instance.publish(
+						'outerClick',
+						{
+							defaultFn: instance._defOuterClickFn
+						}
+					);
+
+					instance.publish(
+						'show',
+						{
+							defaultFn: instance._defShowFn
+						}
+					);
+
+					instance.publish(
+						'triggerClick',
+						{
+							defaultFn: instance._defTriggerClickFn
 						}
 					);
 
@@ -92,19 +132,7 @@ AUI().add(
 					hide: function() {
 						var instance = this;
 
-						instance._positionHelper.hide();
-
-						instance._trigger.removeClass('lfr-trigger-selected');
-
 						instance.fire('hide');
-					},
-
-					onOuterClick: function() {
-						var instance = this;
-
-						instance.hide();
-
-						instance.fire('outerClick');
 					},
 
 					onTitleClick: function(el) {
@@ -118,21 +146,6 @@ AUI().add(
 						if (sets.size() && !sets.all('.current-set').size()) {
 							sets.item(0).addClass('current-set');
 						}
-					},
-
-					onTriggerClick: function(trigger) {
-						var instance = this;
-
-						var panelHidden = instance._positionHelper.test(':hidden');
-
-						if (panelHidden) {
-							instance.show(trigger);
-						}
-						else {
-							instance.hide(trigger);
-						}
-
-						instance.fire('triggerClick');
 					},
 
 					paginate: function(currentPanelContent) {
@@ -207,20 +220,52 @@ AUI().add(
 						);
 					},
 
-					show: function(trigger) {
+					show: function() {
 						var instance = this;
+
+						instance.fire('show');
+					},
+
+					_defHideFn: function(event) {
+						var instance = this;
+
+						instance._positionHelper.hide();
+
+						instance._trigger.removeClass('lfr-trigger-selected');
+					},
+
+					_defOuterClickFn: function(event) {
+						var instance = this;
+
+						instance.fire('hide', event);
+					},
+
+					_defShowFn: function(event) {
+						var instance = this;
+
+						var trigger = event.trigger || instance._trigger;
 
 						instance._container.setStyle('width', instance._containerWidth + 'px');
 
 						instance.position(trigger);
 
-						instance._trigger.addClass('lfr-trigger-selected');
+						trigger.addClass('lfr-trigger-selected');
 
 						if (instance._paging) {
 							instance._setMaxPageHeight();
 						}
+					},
 
-						instance.fire('show');
+					_defTriggerClickFn: function(event) {
+						var instance = this;
+
+						var eventType = 'hide';
+
+						if (instance._positionHelper.test(':hidden')) {
+							eventType = 'show';
+						}
+
+						instance.fire(eventType, event);
 					},
 
 					_setMaxPageHeight: function() {
