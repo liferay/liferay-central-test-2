@@ -77,7 +77,6 @@ import java.io.File;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -689,19 +688,17 @@ public class DataFactory {
 			initResourceCodes(model);
 		}
 
-		Document doc = SAXReaderUtil.read(
-			new File(_baseDir,
-				"../portal-web/docroot/WEB-INF/portlet-custom.xml"),
+		Document document = SAXReaderUtil.read(
+			new File(
+				_baseDir, "../portal-web/docroot/WEB-INF/portlet-custom.xml"),
 			false);
 
-		Element root = doc.getRootElement();
+		Element rootElement = document.getRootElement();
 
-		Iterator<Element> itr = root.elements("portlet").iterator();
+		List<Element> portletElements = rootElement.elements("portlet");
 
-		while (itr.hasNext()) {
-			Element portlet = itr.next();
-
-			String portletName = portlet.elementText("portlet-name");
+		for (Element portletElement : portletElements) {
+			String portletName = portletElement.elementText("portlet-name");
 
 			initResourceCodes(portletName);
 		}
