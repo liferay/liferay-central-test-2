@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
-import com.liferay.portal.kernel.dao.shard.ShardUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -34,12 +33,10 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ServiceComponent;
 import com.liferay.portal.service.base.ServiceComponentLocalServiceBaseImpl;
 import com.liferay.portal.tools.servicebuilder.Entity;
-import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -232,19 +229,8 @@ public class ServiceComponentLocalServiceImpl
 	}
 
 	public void verifyDB() throws PortalException, SystemException {
-		Company defaultCompany = companyPersistence.findByWebId(
-			PropsValues.COMPANY_DEFAULT_WEB_ID);
-
-		ShardUtil.pushCompanyService(defaultCompany.getCompanyId());
-
-		List<ServiceComponent> serviceComponents = null;
-
-		try {
-			serviceComponents = serviceComponentPersistence.findAll();
-		}
-		finally {
-			ShardUtil.popCompanyService();
-		}
+		List<ServiceComponent> serviceComponents =
+			serviceComponentPersistence.findAll();
 
 		for (ServiceComponent serviceComponent : serviceComponents) {
 			String buildNamespace = serviceComponent.getBuildNamespace();
