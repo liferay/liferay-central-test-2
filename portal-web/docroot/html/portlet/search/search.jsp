@@ -212,6 +212,10 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 				if (Validator.isNotNull(entryScopeGroupId) && (inactiveGroupsCount > 0)) {
 					Group entryGroup = GroupServiceUtil.getGroup(entryScopeGroupId);
 
+					if (entryGroup.isLayout()) {
+						entryGroup = GroupLocalServiceUtil.getGroup(entryGroup.getParentGroupId());
+					}
+					
 					if (!entryGroup.isActive()) {
 						total--;
 
