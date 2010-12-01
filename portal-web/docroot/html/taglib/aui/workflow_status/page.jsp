@@ -20,10 +20,10 @@
 
 <%
 Object bean = request.getAttribute("aui:workflow-status:bean");
-String id = (String)request.getAttribute("aui:workflow-status:id");
+String id = GetterUtil.getString((String)request.getAttribute("aui:workflow-status:id"));
 Class<?> model = (Class<?>)request.getAttribute("aui:workflow-status:model");
 int status = GetterUtil.getInteger((String)request.getAttribute("aui:workflow-status:status"));
-String version = (String)request.getAttribute("aui:workflow-status:version");
+String version = GetterUtil.getString((String)request.getAttribute("aui:workflow-status:version"));
 %>
 
 <div class="taglib-workflow-status">
@@ -74,7 +74,7 @@ String version = (String)request.getAttribute("aui:workflow-status:version");
 
 	<span class="workflow-status"><liferay-ui:message key="status" />: <strong class="workflow-status-<%= statusMessage %>"><liferay-ui:message key="<%= statusMessage %>" /><%= additionalText %></strong></span>
 
-	<c:if test="<%= (status == WorkflowConstants.STATUS_APPROVED) && (Validator.isNotNull(version)) %>">
+	<c:if test="<%= (status == WorkflowConstants.STATUS_APPROVED) && Validator.isNotNull(version) %>">
 		<liferay-ui:icon-help message="a-new-version-will-be-created-automatically-if-this-content-is-modified" />
 	</c:if>
 </div>
