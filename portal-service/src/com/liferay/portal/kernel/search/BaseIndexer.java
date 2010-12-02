@@ -369,10 +369,6 @@ public abstract class BaseIndexer implements Indexer {
 
 				long parentGroupId = groupId;
 
-				if (group.isLayout() || searchContext.isScopeStrict()) {
-					scopeGroupIdsQuery.addTerm(Field.SCOPE_GROUP_ID, groupId);
-				}
-
 				if (group.isLayout()) {
 					parentGroupId = group.getParentGroupId();
 				}
@@ -380,6 +376,10 @@ public abstract class BaseIndexer implements Indexer {
 				groupIdsQuery.addTerm(Field.GROUP_ID, parentGroupId);
 
 				groupIds[i] = parentGroupId;
+
+				if (group.isLayout() || searchContext.isScopeStrict()) {
+					scopeGroupIdsQuery.addTerm(Field.SCOPE_GROUP_ID, groupId);
+				}
 			}
 			catch (Exception e) {
 				continue;
