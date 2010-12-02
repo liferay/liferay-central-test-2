@@ -37,15 +37,6 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 	}
 
 	protected long getMessageIdsCount() throws Exception {
-		StringBundler sb = new StringBundler(6);
-
-		sb.append("select count(*) from ");
-		sb.append("MBMessage childMessage ");
-		sb.append("inner join MBMessage parentMessage on ");
-		sb.append("childMessage.parentMessageId = parentMessage.messageId ");
-		sb.append("where parentMessage.categoryId != childMessage.categoryId ");
-		sb.append("or parentMessage.threadId != childMessage.threadId");
-
 		String sql = sb.toString();
 
 		Connection con = null;
@@ -54,6 +45,16 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		try {
 			con = DataAccess.getConnection();
+
+			StringBundler sb = new StringBundler(7);
+
+			sb.append("select count(*) from ");
+			sb.append("MBMessage childMessage ");
+			sb.append("inner join MBMessage parentMessage on ");
+			sb.append("childMessage.parentMessageId = ");
+			sb.append("parentMessage.messageId where ");
+			sb.append("parentMessage.categoryId != childMessage.categoryId ");
+			sb.append("or parentMessage.threadId != childMessage.threadId");
 
 			ps = con.prepareStatement(sql);
 
@@ -71,24 +72,25 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 	}
 
 	protected void updateMessage() throws Exception {
-		StringBundler sb = new StringBundler(7);
-
-		sb.append("select childMessage.messageId, parentMessage.categoryId, ");
-		sb.append("parentMessage.threadId ");
-		sb.append("from MBMessage childMessage ");
-		sb.append("inner join MBMessage parentMessage on ");
-		sb.append("childMessage.parentMessageId = parentMessage.messageId ");
-		sb.append("where parentMessage.categoryId != childMessage.categoryId ");
-		sb.append("or parentMessage.threadId != childMessage.threadId");
-
-		String sql = sb.toString();
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
 		try {
 			con = DataAccess.getConnection();
+
+			StringBundler sb = new StringBundler(8);
+
+			sb.append("select childMessage.messageId, ");
+			sb.append("parentMessage.categoryId, parentMessage.threadId ");
+			sb.append("from MBMessage childMessage ");
+			sb.append("inner join MBMessage parentMessage on ");
+			sb.append("childMessage.parentMessageId = ");
+			sb.append("parentMessage.messageId where ");
+			sb.append("parentMessage.categoryId != childMessage.categoryId ");
+			sb.append("or parentMessage.threadId != childMessage.threadId");
+
+			String sql = sb.toString();
 
 			ps = con.prepareStatement(sql);
 
