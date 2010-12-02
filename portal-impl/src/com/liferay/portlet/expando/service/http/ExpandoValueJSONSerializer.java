@@ -28,18 +28,18 @@ import java.util.List;
  */
 public class ExpandoValueJSONSerializer {
 	public static JSONObject toJSONObject(ExpandoValue model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("valueId", model.getValueId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("tableId", model.getTableId());
-		jsonObj.put("columnId", model.getColumnId());
-		jsonObj.put("rowId", model.getRowId());
-		jsonObj.put("classNameId", model.getClassNameId());
-		jsonObj.put("classPK", model.getClassPK());
-		jsonObj.put("data", model.getData());
+		jsonObject.put("valueId", model.getValueId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("tableId", model.getTableId());
+		jsonObject.put("columnId", model.getColumnId());
+		jsonObject.put("rowId", model.getRowId());
+		jsonObject.put("classNameId", model.getClassNameId());
+		jsonObject.put("classPK", model.getClassPK());
+		jsonObject.put("data", model.getData());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

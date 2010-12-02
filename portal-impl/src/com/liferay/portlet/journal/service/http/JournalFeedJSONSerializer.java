@@ -30,14 +30,14 @@ import java.util.List;
  */
 public class JournalFeedJSONSerializer {
 	public static JSONObject toJSONObject(JournalFeed model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("uuid", model.getUuid());
-		jsonObj.put("id", model.getId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("uuid", model.getUuid());
+		jsonObject.put("id", model.getId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -47,7 +47,7 @@ public class JournalFeedJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -57,25 +57,25 @@ public class JournalFeedJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("feedId", model.getFeedId());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("description", model.getDescription());
-		jsonObj.put("type", model.getType());
-		jsonObj.put("structureId", model.getStructureId());
-		jsonObj.put("templateId", model.getTemplateId());
-		jsonObj.put("rendererTemplateId", model.getRendererTemplateId());
-		jsonObj.put("delta", model.getDelta());
-		jsonObj.put("orderByCol", model.getOrderByCol());
-		jsonObj.put("orderByType", model.getOrderByType());
-		jsonObj.put("targetLayoutFriendlyUrl",
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("feedId", model.getFeedId());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("description", model.getDescription());
+		jsonObject.put("type", model.getType());
+		jsonObject.put("structureId", model.getStructureId());
+		jsonObject.put("templateId", model.getTemplateId());
+		jsonObject.put("rendererTemplateId", model.getRendererTemplateId());
+		jsonObject.put("delta", model.getDelta());
+		jsonObject.put("orderByCol", model.getOrderByCol());
+		jsonObject.put("orderByType", model.getOrderByType());
+		jsonObject.put("targetLayoutFriendlyUrl",
 			model.getTargetLayoutFriendlyUrl());
-		jsonObj.put("targetPortletId", model.getTargetPortletId());
-		jsonObj.put("contentField", model.getContentField());
-		jsonObj.put("feedType", model.getFeedType());
-		jsonObj.put("feedVersion", model.getFeedVersion());
+		jsonObject.put("targetPortletId", model.getTargetPortletId());
+		jsonObject.put("contentField", model.getContentField());
+		jsonObject.put("feedType", model.getFeedType());
+		jsonObject.put("feedVersion", model.getFeedVersion());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

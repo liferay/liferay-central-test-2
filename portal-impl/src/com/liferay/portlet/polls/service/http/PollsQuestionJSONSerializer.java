@@ -30,14 +30,14 @@ import java.util.List;
  */
 public class PollsQuestionJSONSerializer {
 	public static JSONObject toJSONObject(PollsQuestion model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("uuid", model.getUuid());
-		jsonObj.put("questionId", model.getQuestionId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("uuid", model.getUuid());
+		jsonObject.put("questionId", model.getQuestionId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -47,7 +47,7 @@ public class PollsQuestionJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -57,9 +57,9 @@ public class PollsQuestionJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("title", model.getTitle());
-		jsonObj.put("description", model.getDescription());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("title", model.getTitle());
+		jsonObject.put("description", model.getDescription());
 
 		Date expirationDate = model.getExpirationDate();
 
@@ -69,7 +69,7 @@ public class PollsQuestionJSONSerializer {
 			expirationDateJSON = String.valueOf(expirationDate.getTime());
 		}
 
-		jsonObj.put("expirationDate", expirationDateJSON);
+		jsonObject.put("expirationDate", expirationDateJSON);
 
 		Date lastVoteDate = model.getLastVoteDate();
 
@@ -79,9 +79,9 @@ public class PollsQuestionJSONSerializer {
 			lastVoteDateJSON = String.valueOf(lastVoteDate.getTime());
 		}
 
-		jsonObj.put("lastVoteDate", lastVoteDateJSON);
+		jsonObject.put("lastVoteDate", lastVoteDateJSON);
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

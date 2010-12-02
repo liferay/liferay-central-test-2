@@ -29,11 +29,11 @@ import java.util.List;
  */
 public class UserJSONSerializer {
 	public static JSONObject toJSONObject(User model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("uuid", model.getUuid());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("companyId", model.getCompanyId());
+		jsonObject.put("uuid", model.getUuid());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("companyId", model.getCompanyId());
 
 		Date createDate = model.getCreateDate();
 
@@ -43,7 +43,7 @@ public class UserJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -53,12 +53,12 @@ public class UserJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("defaultUser", model.getDefaultUser());
-		jsonObj.put("contactId", model.getContactId());
-		jsonObj.put("password", model.getPassword());
-		jsonObj.put("passwordEncrypted", model.getPasswordEncrypted());
-		jsonObj.put("passwordReset", model.getPasswordReset());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("defaultUser", model.getDefaultUser());
+		jsonObject.put("contactId", model.getContactId());
+		jsonObject.put("password", model.getPassword());
+		jsonObject.put("passwordEncrypted", model.getPasswordEncrypted());
+		jsonObject.put("passwordReset", model.getPasswordReset());
 
 		Date passwordModifiedDate = model.getPasswordModifiedDate();
 
@@ -68,24 +68,24 @@ public class UserJSONSerializer {
 			passwordModifiedDateJSON = String.valueOf(passwordModifiedDate.getTime());
 		}
 
-		jsonObj.put("passwordModifiedDate", passwordModifiedDateJSON);
-		jsonObj.put("digest", model.getDigest());
-		jsonObj.put("reminderQueryQuestion", model.getReminderQueryQuestion());
-		jsonObj.put("reminderQueryAnswer", model.getReminderQueryAnswer());
-		jsonObj.put("graceLoginCount", model.getGraceLoginCount());
-		jsonObj.put("screenName", model.getScreenName());
-		jsonObj.put("emailAddress", model.getEmailAddress());
-		jsonObj.put("facebookId", model.getFacebookId());
-		jsonObj.put("openId", model.getOpenId());
-		jsonObj.put("portraitId", model.getPortraitId());
-		jsonObj.put("languageId", model.getLanguageId());
-		jsonObj.put("timeZoneId", model.getTimeZoneId());
-		jsonObj.put("greeting", model.getGreeting());
-		jsonObj.put("comments", model.getComments());
-		jsonObj.put("firstName", model.getFirstName());
-		jsonObj.put("middleName", model.getMiddleName());
-		jsonObj.put("lastName", model.getLastName());
-		jsonObj.put("jobTitle", model.getJobTitle());
+		jsonObject.put("passwordModifiedDate", passwordModifiedDateJSON);
+		jsonObject.put("digest", model.getDigest());
+		jsonObject.put("reminderQueryQuestion", model.getReminderQueryQuestion());
+		jsonObject.put("reminderQueryAnswer", model.getReminderQueryAnswer());
+		jsonObject.put("graceLoginCount", model.getGraceLoginCount());
+		jsonObject.put("screenName", model.getScreenName());
+		jsonObject.put("emailAddress", model.getEmailAddress());
+		jsonObject.put("facebookId", model.getFacebookId());
+		jsonObject.put("openId", model.getOpenId());
+		jsonObject.put("portraitId", model.getPortraitId());
+		jsonObject.put("languageId", model.getLanguageId());
+		jsonObject.put("timeZoneId", model.getTimeZoneId());
+		jsonObject.put("greeting", model.getGreeting());
+		jsonObject.put("comments", model.getComments());
+		jsonObject.put("firstName", model.getFirstName());
+		jsonObject.put("middleName", model.getMiddleName());
+		jsonObject.put("lastName", model.getLastName());
+		jsonObject.put("jobTitle", model.getJobTitle());
 
 		Date loginDate = model.getLoginDate();
 
@@ -95,8 +95,8 @@ public class UserJSONSerializer {
 			loginDateJSON = String.valueOf(loginDate.getTime());
 		}
 
-		jsonObj.put("loginDate", loginDateJSON);
-		jsonObj.put("loginIP", model.getLoginIP());
+		jsonObject.put("loginDate", loginDateJSON);
+		jsonObject.put("loginIP", model.getLoginIP());
 
 		Date lastLoginDate = model.getLastLoginDate();
 
@@ -106,8 +106,8 @@ public class UserJSONSerializer {
 			lastLoginDateJSON = String.valueOf(lastLoginDate.getTime());
 		}
 
-		jsonObj.put("lastLoginDate", lastLoginDateJSON);
-		jsonObj.put("lastLoginIP", model.getLastLoginIP());
+		jsonObject.put("lastLoginDate", lastLoginDateJSON);
+		jsonObject.put("lastLoginIP", model.getLastLoginIP());
 
 		Date lastFailedLoginDate = model.getLastFailedLoginDate();
 
@@ -117,9 +117,9 @@ public class UserJSONSerializer {
 			lastFailedLoginDateJSON = String.valueOf(lastFailedLoginDate.getTime());
 		}
 
-		jsonObj.put("lastFailedLoginDate", lastFailedLoginDateJSON);
-		jsonObj.put("failedLoginAttempts", model.getFailedLoginAttempts());
-		jsonObj.put("lockout", model.getLockout());
+		jsonObject.put("lastFailedLoginDate", lastFailedLoginDateJSON);
+		jsonObject.put("failedLoginAttempts", model.getFailedLoginAttempts());
+		jsonObject.put("lockout", model.getLockout());
 
 		Date lockoutDate = model.getLockoutDate();
 
@@ -129,11 +129,11 @@ public class UserJSONSerializer {
 			lockoutDateJSON = String.valueOf(lockoutDate.getTime());
 		}
 
-		jsonObj.put("lockoutDate", lockoutDateJSON);
-		jsonObj.put("agreedToTermsOfUse", model.getAgreedToTermsOfUse());
-		jsonObj.put("active", model.getActive());
+		jsonObject.put("lockoutDate", lockoutDateJSON);
+		jsonObject.put("agreedToTermsOfUse", model.getAgreedToTermsOfUse());
+		jsonObject.put("active", model.getActive());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(com.liferay.portal.model.User[] models) {

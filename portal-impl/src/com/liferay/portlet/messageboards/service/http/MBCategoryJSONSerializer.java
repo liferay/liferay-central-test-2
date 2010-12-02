@@ -30,14 +30,14 @@ import java.util.List;
  */
 public class MBCategoryJSONSerializer {
 	public static JSONObject toJSONObject(MBCategory model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("uuid", model.getUuid());
-		jsonObj.put("categoryId", model.getCategoryId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("uuid", model.getUuid());
+		jsonObject.put("categoryId", model.getCategoryId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -47,7 +47,7 @@ public class MBCategoryJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -57,12 +57,12 @@ public class MBCategoryJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("parentCategoryId", model.getParentCategoryId());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("description", model.getDescription());
-		jsonObj.put("threadCount", model.getThreadCount());
-		jsonObj.put("messageCount", model.getMessageCount());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("parentCategoryId", model.getParentCategoryId());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("description", model.getDescription());
+		jsonObject.put("threadCount", model.getThreadCount());
+		jsonObject.put("messageCount", model.getMessageCount());
 
 		Date lastPostDate = model.getLastPostDate();
 
@@ -72,9 +72,9 @@ public class MBCategoryJSONSerializer {
 			lastPostDateJSON = String.valueOf(lastPostDate.getTime());
 		}
 
-		jsonObj.put("lastPostDate", lastPostDateJSON);
+		jsonObject.put("lastPostDate", lastPostDateJSON);
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

@@ -30,14 +30,14 @@ import java.util.List;
  */
 public class CalEventJSONSerializer {
 	public static JSONObject toJSONObject(CalEvent model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("uuid", model.getUuid());
-		jsonObj.put("eventId", model.getEventId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("uuid", model.getUuid());
+		jsonObject.put("eventId", model.getEventId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -47,7 +47,7 @@ public class CalEventJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -57,9 +57,9 @@ public class CalEventJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("title", model.getTitle());
-		jsonObj.put("description", model.getDescription());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("title", model.getTitle());
+		jsonObject.put("description", model.getDescription());
 
 		Date startDate = model.getStartDate();
 
@@ -69,7 +69,7 @@ public class CalEventJSONSerializer {
 			startDateJSON = String.valueOf(startDate.getTime());
 		}
 
-		jsonObj.put("startDate", startDateJSON);
+		jsonObject.put("startDate", startDateJSON);
 
 		Date endDate = model.getEndDate();
 
@@ -79,19 +79,19 @@ public class CalEventJSONSerializer {
 			endDateJSON = String.valueOf(endDate.getTime());
 		}
 
-		jsonObj.put("endDate", endDateJSON);
-		jsonObj.put("durationHour", model.getDurationHour());
-		jsonObj.put("durationMinute", model.getDurationMinute());
-		jsonObj.put("allDay", model.getAllDay());
-		jsonObj.put("timeZoneSensitive", model.getTimeZoneSensitive());
-		jsonObj.put("type", model.getType());
-		jsonObj.put("repeating", model.getRepeating());
-		jsonObj.put("recurrence", model.getRecurrence());
-		jsonObj.put("remindBy", model.getRemindBy());
-		jsonObj.put("firstReminder", model.getFirstReminder());
-		jsonObj.put("secondReminder", model.getSecondReminder());
+		jsonObject.put("endDate", endDateJSON);
+		jsonObject.put("durationHour", model.getDurationHour());
+		jsonObject.put("durationMinute", model.getDurationMinute());
+		jsonObject.put("allDay", model.getAllDay());
+		jsonObject.put("timeZoneSensitive", model.getTimeZoneSensitive());
+		jsonObject.put("type", model.getType());
+		jsonObject.put("repeating", model.getRepeating());
+		jsonObject.put("recurrence", model.getRecurrence());
+		jsonObject.put("remindBy", model.getRemindBy());
+		jsonObject.put("firstReminder", model.getFirstReminder());
+		jsonObject.put("secondReminder", model.getSecondReminder());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

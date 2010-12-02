@@ -28,17 +28,17 @@ import java.util.List;
  */
 public class AnnouncementsDeliveryJSONSerializer {
 	public static JSONObject toJSONObject(AnnouncementsDelivery model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("deliveryId", model.getDeliveryId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("type", model.getType());
-		jsonObj.put("email", model.getEmail());
-		jsonObj.put("sms", model.getSms());
-		jsonObj.put("website", model.getWebsite());
+		jsonObject.put("deliveryId", model.getDeliveryId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("type", model.getType());
+		jsonObject.put("email", model.getEmail());
+		jsonObject.put("sms", model.getSms());
+		jsonObject.put("website", model.getWebsite());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

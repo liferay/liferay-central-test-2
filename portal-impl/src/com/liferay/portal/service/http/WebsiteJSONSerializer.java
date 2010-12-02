@@ -29,12 +29,12 @@ import java.util.List;
  */
 public class WebsiteJSONSerializer {
 	public static JSONObject toJSONObject(Website model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("websiteId", model.getWebsiteId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("websiteId", model.getWebsiteId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -44,7 +44,7 @@ public class WebsiteJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -54,14 +54,14 @@ public class WebsiteJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("classNameId", model.getClassNameId());
-		jsonObj.put("classPK", model.getClassPK());
-		jsonObj.put("url", model.getUrl());
-		jsonObj.put("typeId", model.getTypeId());
-		jsonObj.put("primary", model.getPrimary());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("classNameId", model.getClassNameId());
+		jsonObject.put("classPK", model.getClassPK());
+		jsonObject.put("url", model.getUrl());
+		jsonObject.put("typeId", model.getTypeId());
+		jsonObject.put("primary", model.getPrimary());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

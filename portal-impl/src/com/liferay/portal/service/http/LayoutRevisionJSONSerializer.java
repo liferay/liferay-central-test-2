@@ -29,13 +29,13 @@ import java.util.List;
  */
 public class LayoutRevisionJSONSerializer {
 	public static JSONObject toJSONObject(LayoutRevision model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("layoutRevisionId", model.getLayoutRevisionId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("layoutRevisionId", model.getLayoutRevisionId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -45,7 +45,7 @@ public class LayoutRevisionJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -55,25 +55,26 @@ public class LayoutRevisionJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("layoutSetBranchId", model.getLayoutSetBranchId());
-		jsonObj.put("parentLayoutRevisionId", model.getParentLayoutRevisionId());
-		jsonObj.put("head", model.getHead());
-		jsonObj.put("plid", model.getPlid());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("title", model.getTitle());
-		jsonObj.put("description", model.getDescription());
-		jsonObj.put("typeSettings", model.getTypeSettings());
-		jsonObj.put("iconImage", model.getIconImage());
-		jsonObj.put("iconImageId", model.getIconImageId());
-		jsonObj.put("themeId", model.getThemeId());
-		jsonObj.put("colorSchemeId", model.getColorSchemeId());
-		jsonObj.put("wapThemeId", model.getWapThemeId());
-		jsonObj.put("wapColorSchemeId", model.getWapColorSchemeId());
-		jsonObj.put("css", model.getCss());
-		jsonObj.put("status", model.getStatus());
-		jsonObj.put("statusByUserId", model.getStatusByUserId());
-		jsonObj.put("statusByUserName", model.getStatusByUserName());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("layoutSetBranchId", model.getLayoutSetBranchId());
+		jsonObject.put("parentLayoutRevisionId",
+			model.getParentLayoutRevisionId());
+		jsonObject.put("head", model.getHead());
+		jsonObject.put("plid", model.getPlid());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("title", model.getTitle());
+		jsonObject.put("description", model.getDescription());
+		jsonObject.put("typeSettings", model.getTypeSettings());
+		jsonObject.put("iconImage", model.getIconImage());
+		jsonObject.put("iconImageId", model.getIconImageId());
+		jsonObject.put("themeId", model.getThemeId());
+		jsonObject.put("colorSchemeId", model.getColorSchemeId());
+		jsonObject.put("wapThemeId", model.getWapThemeId());
+		jsonObject.put("wapColorSchemeId", model.getWapColorSchemeId());
+		jsonObject.put("css", model.getCss());
+		jsonObject.put("status", model.getStatus());
+		jsonObject.put("statusByUserId", model.getStatusByUserId());
+		jsonObject.put("statusByUserName", model.getStatusByUserName());
 
 		Date statusDate = model.getStatusDate();
 
@@ -83,9 +84,9 @@ public class LayoutRevisionJSONSerializer {
 			statusDateJSON = String.valueOf(statusDate.getTime());
 		}
 
-		jsonObj.put("statusDate", statusDateJSON);
+		jsonObject.put("statusDate", statusDateJSON);
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

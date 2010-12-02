@@ -30,13 +30,13 @@ import java.util.List;
  */
 public class ShoppingItemJSONSerializer {
 	public static JSONObject toJSONObject(ShoppingItem model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("itemId", model.getItemId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("itemId", model.getItemId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -46,7 +46,7 @@ public class ShoppingItemJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -56,36 +56,36 @@ public class ShoppingItemJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("categoryId", model.getCategoryId());
-		jsonObj.put("sku", model.getSku());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("description", model.getDescription());
-		jsonObj.put("properties", model.getProperties());
-		jsonObj.put("fields", model.getFields());
-		jsonObj.put("fieldsQuantities", model.getFieldsQuantities());
-		jsonObj.put("minQuantity", model.getMinQuantity());
-		jsonObj.put("maxQuantity", model.getMaxQuantity());
-		jsonObj.put("price", model.getPrice());
-		jsonObj.put("discount", model.getDiscount());
-		jsonObj.put("taxable", model.getTaxable());
-		jsonObj.put("shipping", model.getShipping());
-		jsonObj.put("useShippingFormula", model.getUseShippingFormula());
-		jsonObj.put("requiresShipping", model.getRequiresShipping());
-		jsonObj.put("stockQuantity", model.getStockQuantity());
-		jsonObj.put("featured", model.getFeatured());
-		jsonObj.put("sale", model.getSale());
-		jsonObj.put("smallImage", model.getSmallImage());
-		jsonObj.put("smallImageId", model.getSmallImageId());
-		jsonObj.put("smallImageURL", model.getSmallImageURL());
-		jsonObj.put("mediumImage", model.getMediumImage());
-		jsonObj.put("mediumImageId", model.getMediumImageId());
-		jsonObj.put("mediumImageURL", model.getMediumImageURL());
-		jsonObj.put("largeImage", model.getLargeImage());
-		jsonObj.put("largeImageId", model.getLargeImageId());
-		jsonObj.put("largeImageURL", model.getLargeImageURL());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("categoryId", model.getCategoryId());
+		jsonObject.put("sku", model.getSku());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("description", model.getDescription());
+		jsonObject.put("properties", model.getProperties());
+		jsonObject.put("fields", model.getFields());
+		jsonObject.put("fieldsQuantities", model.getFieldsQuantities());
+		jsonObject.put("minQuantity", model.getMinQuantity());
+		jsonObject.put("maxQuantity", model.getMaxQuantity());
+		jsonObject.put("price", model.getPrice());
+		jsonObject.put("discount", model.getDiscount());
+		jsonObject.put("taxable", model.getTaxable());
+		jsonObject.put("shipping", model.getShipping());
+		jsonObject.put("useShippingFormula", model.getUseShippingFormula());
+		jsonObject.put("requiresShipping", model.getRequiresShipping());
+		jsonObject.put("stockQuantity", model.getStockQuantity());
+		jsonObject.put("featured", model.getFeatured());
+		jsonObject.put("sale", model.getSale());
+		jsonObject.put("smallImage", model.getSmallImage());
+		jsonObject.put("smallImageId", model.getSmallImageId());
+		jsonObject.put("smallImageURL", model.getSmallImageURL());
+		jsonObject.put("mediumImage", model.getMediumImage());
+		jsonObject.put("mediumImageId", model.getMediumImageId());
+		jsonObject.put("mediumImageURL", model.getMediumImageURL());
+		jsonObject.put("largeImage", model.getLargeImage());
+		jsonObject.put("largeImageId", model.getLargeImageId());
+		jsonObject.put("largeImageURL", model.getLargeImageURL());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

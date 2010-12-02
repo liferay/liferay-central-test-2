@@ -27,16 +27,16 @@ import java.util.List;
  */
 public class PortletPreferencesJSONSerializer {
 	public static JSONObject toJSONObject(PortletPreferences model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("portletPreferencesId", model.getPortletPreferencesId());
-		jsonObj.put("ownerId", model.getOwnerId());
-		jsonObj.put("ownerType", model.getOwnerType());
-		jsonObj.put("plid", model.getPlid());
-		jsonObj.put("portletId", model.getPortletId());
-		jsonObj.put("preferences", model.getPreferences());
+		jsonObject.put("portletPreferencesId", model.getPortletPreferencesId());
+		jsonObject.put("ownerId", model.getOwnerId());
+		jsonObject.put("ownerType", model.getOwnerType());
+		jsonObject.put("plid", model.getPlid());
+		jsonObject.put("portletId", model.getPortletId());
+		jsonObject.put("preferences", model.getPreferences());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

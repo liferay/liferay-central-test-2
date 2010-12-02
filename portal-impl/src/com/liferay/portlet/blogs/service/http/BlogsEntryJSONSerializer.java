@@ -30,14 +30,14 @@ import java.util.List;
  */
 public class BlogsEntryJSONSerializer {
 	public static JSONObject toJSONObject(BlogsEntry model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("uuid", model.getUuid());
-		jsonObj.put("entryId", model.getEntryId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("uuid", model.getUuid());
+		jsonObject.put("entryId", model.getEntryId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -47,7 +47,7 @@ public class BlogsEntryJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -57,11 +57,11 @@ public class BlogsEntryJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("title", model.getTitle());
-		jsonObj.put("urlTitle", model.getUrlTitle());
-		jsonObj.put("description", model.getDescription());
-		jsonObj.put("content", model.getContent());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("title", model.getTitle());
+		jsonObject.put("urlTitle", model.getUrlTitle());
+		jsonObject.put("description", model.getDescription());
+		jsonObject.put("content", model.getContent());
 
 		Date displayDate = model.getDisplayDate();
 
@@ -71,16 +71,16 @@ public class BlogsEntryJSONSerializer {
 			displayDateJSON = String.valueOf(displayDate.getTime());
 		}
 
-		jsonObj.put("displayDate", displayDateJSON);
-		jsonObj.put("allowPingbacks", model.getAllowPingbacks());
-		jsonObj.put("allowTrackbacks", model.getAllowTrackbacks());
-		jsonObj.put("trackbacks", model.getTrackbacks());
-		jsonObj.put("smallImage", model.getSmallImage());
-		jsonObj.put("smallImageId", model.getSmallImageId());
-		jsonObj.put("smallImageURL", model.getSmallImageURL());
-		jsonObj.put("status", model.getStatus());
-		jsonObj.put("statusByUserId", model.getStatusByUserId());
-		jsonObj.put("statusByUserName", model.getStatusByUserName());
+		jsonObject.put("displayDate", displayDateJSON);
+		jsonObject.put("allowPingbacks", model.getAllowPingbacks());
+		jsonObject.put("allowTrackbacks", model.getAllowTrackbacks());
+		jsonObject.put("trackbacks", model.getTrackbacks());
+		jsonObject.put("smallImage", model.getSmallImage());
+		jsonObject.put("smallImageId", model.getSmallImageId());
+		jsonObject.put("smallImageURL", model.getSmallImageURL());
+		jsonObject.put("status", model.getStatus());
+		jsonObject.put("statusByUserId", model.getStatusByUserId());
+		jsonObject.put("statusByUserName", model.getStatusByUserName());
 
 		Date statusDate = model.getStatusDate();
 
@@ -90,9 +90,9 @@ public class BlogsEntryJSONSerializer {
 			statusDateJSON = String.valueOf(statusDate.getTime());
 		}
 
-		jsonObj.put("statusDate", statusDateJSON);
+		jsonObject.put("statusDate", statusDateJSON);
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

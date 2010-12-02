@@ -30,13 +30,13 @@ import java.util.List;
  */
 public class IGFolderJSONSerializer {
 	public static JSONObject toJSONObject(IGFolder model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("uuid", model.getUuid());
-		jsonObj.put("folderId", model.getFolderId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
+		jsonObject.put("uuid", model.getUuid());
+		jsonObject.put("folderId", model.getFolderId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
 
 		Date createDate = model.getCreateDate();
 
@@ -46,7 +46,7 @@ public class IGFolderJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -56,12 +56,12 @@ public class IGFolderJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("parentFolderId", model.getParentFolderId());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("description", model.getDescription());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("parentFolderId", model.getParentFolderId());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("description", model.getDescription());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

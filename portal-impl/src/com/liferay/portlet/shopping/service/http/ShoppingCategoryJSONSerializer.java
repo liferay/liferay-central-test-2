@@ -30,13 +30,13 @@ import java.util.List;
  */
 public class ShoppingCategoryJSONSerializer {
 	public static JSONObject toJSONObject(ShoppingCategory model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("categoryId", model.getCategoryId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("categoryId", model.getCategoryId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -46,7 +46,7 @@ public class ShoppingCategoryJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -56,12 +56,12 @@ public class ShoppingCategoryJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("parentCategoryId", model.getParentCategoryId());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("description", model.getDescription());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("parentCategoryId", model.getParentCategoryId());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("description", model.getDescription());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

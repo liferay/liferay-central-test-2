@@ -27,14 +27,14 @@ import java.util.List;
  */
 public class PermissionJSONSerializer {
 	public static JSONObject toJSONObject(Permission model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("permissionId", model.getPermissionId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("actionId", model.getActionId());
-		jsonObj.put("resourceId", model.getResourceId());
+		jsonObject.put("permissionId", model.getPermissionId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("actionId", model.getActionId());
+		jsonObject.put("resourceId", model.getResourceId());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

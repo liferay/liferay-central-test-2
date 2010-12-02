@@ -29,9 +29,9 @@ import java.util.List;
  */
 public class ImageJSONSerializer {
 	public static JSONObject toJSONObject(Image model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("imageId", model.getImageId());
+		jsonObject.put("imageId", model.getImageId());
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -41,14 +41,14 @@ public class ImageJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("text", model.getText());
-		jsonObj.put("type", model.getType());
-		jsonObj.put("height", model.getHeight());
-		jsonObj.put("width", model.getWidth());
-		jsonObj.put("size", model.getSize());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("text", model.getText());
+		jsonObject.put("type", model.getType());
+		jsonObject.put("height", model.getHeight());
+		jsonObject.put("width", model.getWidth());
+		jsonObject.put("size", model.getSize());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(com.liferay.portal.model.Image[] models) {

@@ -30,13 +30,13 @@ import java.util.List;
  */
 public class TasksReviewJSONSerializer {
 	public static JSONObject toJSONObject(TasksReview model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("reviewId", model.getReviewId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("reviewId", model.getReviewId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -46,7 +46,7 @@ public class TasksReviewJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -56,15 +56,15 @@ public class TasksReviewJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("proposalId", model.getProposalId());
-		jsonObj.put("assignedByUserId", model.getAssignedByUserId());
-		jsonObj.put("assignedByUserName", model.getAssignedByUserName());
-		jsonObj.put("stage", model.getStage());
-		jsonObj.put("completed", model.getCompleted());
-		jsonObj.put("rejected", model.getRejected());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("proposalId", model.getProposalId());
+		jsonObject.put("assignedByUserId", model.getAssignedByUserId());
+		jsonObject.put("assignedByUserName", model.getAssignedByUserName());
+		jsonObject.put("stage", model.getStage());
+		jsonObject.put("completed", model.getCompleted());
+		jsonObject.put("rejected", model.getRejected());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

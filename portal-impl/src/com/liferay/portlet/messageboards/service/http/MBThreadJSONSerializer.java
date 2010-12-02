@@ -30,15 +30,15 @@ import java.util.List;
  */
 public class MBThreadJSONSerializer {
 	public static JSONObject toJSONObject(MBThread model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("threadId", model.getThreadId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("categoryId", model.getCategoryId());
-		jsonObj.put("rootMessageId", model.getRootMessageId());
-		jsonObj.put("messageCount", model.getMessageCount());
-		jsonObj.put("viewCount", model.getViewCount());
-		jsonObj.put("lastPostByUserId", model.getLastPostByUserId());
+		jsonObject.put("threadId", model.getThreadId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("categoryId", model.getCategoryId());
+		jsonObject.put("rootMessageId", model.getRootMessageId());
+		jsonObject.put("messageCount", model.getMessageCount());
+		jsonObject.put("viewCount", model.getViewCount());
+		jsonObject.put("lastPostByUserId", model.getLastPostByUserId());
 
 		Date lastPostDate = model.getLastPostDate();
 
@@ -48,11 +48,11 @@ public class MBThreadJSONSerializer {
 			lastPostDateJSON = String.valueOf(lastPostDate.getTime());
 		}
 
-		jsonObj.put("lastPostDate", lastPostDateJSON);
-		jsonObj.put("priority", model.getPriority());
-		jsonObj.put("status", model.getStatus());
-		jsonObj.put("statusByUserId", model.getStatusByUserId());
-		jsonObj.put("statusByUserName", model.getStatusByUserName());
+		jsonObject.put("lastPostDate", lastPostDateJSON);
+		jsonObject.put("priority", model.getPriority());
+		jsonObject.put("status", model.getStatus());
+		jsonObject.put("statusByUserId", model.getStatusByUserId());
+		jsonObject.put("statusByUserName", model.getStatusByUserName());
 
 		Date statusDate = model.getStatusDate();
 
@@ -62,9 +62,9 @@ public class MBThreadJSONSerializer {
 			statusDateJSON = String.valueOf(statusDate.getTime());
 		}
 
-		jsonObj.put("statusDate", statusDateJSON);
+		jsonObject.put("statusDate", statusDateJSON);
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

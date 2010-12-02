@@ -30,13 +30,13 @@ import java.util.List;
  */
 public class AnnouncementsEntryJSONSerializer {
 	public static JSONObject toJSONObject(AnnouncementsEntry model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("uuid", model.getUuid());
-		jsonObj.put("entryId", model.getEntryId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("uuid", model.getUuid());
+		jsonObject.put("entryId", model.getEntryId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -46,7 +46,7 @@ public class AnnouncementsEntryJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -56,13 +56,13 @@ public class AnnouncementsEntryJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("classNameId", model.getClassNameId());
-		jsonObj.put("classPK", model.getClassPK());
-		jsonObj.put("title", model.getTitle());
-		jsonObj.put("content", model.getContent());
-		jsonObj.put("url", model.getUrl());
-		jsonObj.put("type", model.getType());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("classNameId", model.getClassNameId());
+		jsonObject.put("classPK", model.getClassPK());
+		jsonObject.put("title", model.getTitle());
+		jsonObject.put("content", model.getContent());
+		jsonObject.put("url", model.getUrl());
+		jsonObject.put("type", model.getType());
 
 		Date displayDate = model.getDisplayDate();
 
@@ -72,7 +72,7 @@ public class AnnouncementsEntryJSONSerializer {
 			displayDateJSON = String.valueOf(displayDate.getTime());
 		}
 
-		jsonObj.put("displayDate", displayDateJSON);
+		jsonObject.put("displayDate", displayDateJSON);
 
 		Date expirationDate = model.getExpirationDate();
 
@@ -82,11 +82,11 @@ public class AnnouncementsEntryJSONSerializer {
 			expirationDateJSON = String.valueOf(expirationDate.getTime());
 		}
 
-		jsonObj.put("expirationDate", expirationDateJSON);
-		jsonObj.put("priority", model.getPriority());
-		jsonObj.put("alert", model.getAlert());
+		jsonObject.put("expirationDate", expirationDateJSON);
+		jsonObject.put("priority", model.getPriority());
+		jsonObject.put("alert", model.getAlert());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

@@ -29,12 +29,12 @@ import java.util.List;
  */
 public class PhoneJSONSerializer {
 	public static JSONObject toJSONObject(Phone model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("phoneId", model.getPhoneId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("phoneId", model.getPhoneId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -44,7 +44,7 @@ public class PhoneJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -54,15 +54,15 @@ public class PhoneJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("classNameId", model.getClassNameId());
-		jsonObj.put("classPK", model.getClassPK());
-		jsonObj.put("number", model.getNumber());
-		jsonObj.put("extension", model.getExtension());
-		jsonObj.put("typeId", model.getTypeId());
-		jsonObj.put("primary", model.getPrimary());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("classNameId", model.getClassNameId());
+		jsonObject.put("classPK", model.getClassPK());
+		jsonObject.put("number", model.getNumber());
+		jsonObject.put("extension", model.getExtension());
+		jsonObject.put("typeId", model.getTypeId());
+		jsonObject.put("primary", model.getPrimary());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(com.liferay.portal.model.Phone[] models) {

@@ -27,33 +27,33 @@ import java.util.List;
  */
 public class LayoutJSONSerializer {
 	public static JSONObject toJSONObject(Layout model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("uuid", model.getUuid());
-		jsonObj.put("plid", model.getPlid());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("privateLayout", model.getPrivateLayout());
-		jsonObj.put("layoutId", model.getLayoutId());
-		jsonObj.put("parentLayoutId", model.getParentLayoutId());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("title", model.getTitle());
-		jsonObj.put("description", model.getDescription());
-		jsonObj.put("type", model.getType());
-		jsonObj.put("typeSettings", model.getTypeSettings());
-		jsonObj.put("hidden", model.getHidden());
-		jsonObj.put("friendlyURL", model.getFriendlyURL());
-		jsonObj.put("iconImage", model.getIconImage());
-		jsonObj.put("iconImageId", model.getIconImageId());
-		jsonObj.put("themeId", model.getThemeId());
-		jsonObj.put("colorSchemeId", model.getColorSchemeId());
-		jsonObj.put("wapThemeId", model.getWapThemeId());
-		jsonObj.put("wapColorSchemeId", model.getWapColorSchemeId());
-		jsonObj.put("css", model.getCss());
-		jsonObj.put("priority", model.getPriority());
-		jsonObj.put("layoutPrototypeId", model.getLayoutPrototypeId());
+		jsonObject.put("uuid", model.getUuid());
+		jsonObject.put("plid", model.getPlid());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("privateLayout", model.getPrivateLayout());
+		jsonObject.put("layoutId", model.getLayoutId());
+		jsonObject.put("parentLayoutId", model.getParentLayoutId());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("title", model.getTitle());
+		jsonObject.put("description", model.getDescription());
+		jsonObject.put("type", model.getType());
+		jsonObject.put("typeSettings", model.getTypeSettings());
+		jsonObject.put("hidden", model.getHidden());
+		jsonObject.put("friendlyURL", model.getFriendlyURL());
+		jsonObject.put("iconImage", model.getIconImage());
+		jsonObject.put("iconImageId", model.getIconImageId());
+		jsonObject.put("themeId", model.getThemeId());
+		jsonObject.put("colorSchemeId", model.getColorSchemeId());
+		jsonObject.put("wapThemeId", model.getWapThemeId());
+		jsonObject.put("wapColorSchemeId", model.getWapColorSchemeId());
+		jsonObject.put("css", model.getCss());
+		jsonObject.put("priority", model.getPriority());
+		jsonObject.put("layoutPrototypeId", model.getLayoutPrototypeId());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

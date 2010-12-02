@@ -30,13 +30,13 @@ import java.util.List;
  */
 public class ShoppingOrderJSONSerializer {
 	public static JSONObject toJSONObject(ShoppingOrder model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("orderId", model.getOrderId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("orderId", model.getOrderId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -46,7 +46,7 @@ public class ShoppingOrderJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -56,53 +56,53 @@ public class ShoppingOrderJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("number", model.getNumber());
-		jsonObj.put("tax", model.getTax());
-		jsonObj.put("shipping", model.getShipping());
-		jsonObj.put("altShipping", model.getAltShipping());
-		jsonObj.put("requiresShipping", model.getRequiresShipping());
-		jsonObj.put("insure", model.getInsure());
-		jsonObj.put("insurance", model.getInsurance());
-		jsonObj.put("couponCodes", model.getCouponCodes());
-		jsonObj.put("couponDiscount", model.getCouponDiscount());
-		jsonObj.put("billingFirstName", model.getBillingFirstName());
-		jsonObj.put("billingLastName", model.getBillingLastName());
-		jsonObj.put("billingEmailAddress", model.getBillingEmailAddress());
-		jsonObj.put("billingCompany", model.getBillingCompany());
-		jsonObj.put("billingStreet", model.getBillingStreet());
-		jsonObj.put("billingCity", model.getBillingCity());
-		jsonObj.put("billingState", model.getBillingState());
-		jsonObj.put("billingZip", model.getBillingZip());
-		jsonObj.put("billingCountry", model.getBillingCountry());
-		jsonObj.put("billingPhone", model.getBillingPhone());
-		jsonObj.put("shipToBilling", model.getShipToBilling());
-		jsonObj.put("shippingFirstName", model.getShippingFirstName());
-		jsonObj.put("shippingLastName", model.getShippingLastName());
-		jsonObj.put("shippingEmailAddress", model.getShippingEmailAddress());
-		jsonObj.put("shippingCompany", model.getShippingCompany());
-		jsonObj.put("shippingStreet", model.getShippingStreet());
-		jsonObj.put("shippingCity", model.getShippingCity());
-		jsonObj.put("shippingState", model.getShippingState());
-		jsonObj.put("shippingZip", model.getShippingZip());
-		jsonObj.put("shippingCountry", model.getShippingCountry());
-		jsonObj.put("shippingPhone", model.getShippingPhone());
-		jsonObj.put("ccName", model.getCcName());
-		jsonObj.put("ccType", model.getCcType());
-		jsonObj.put("ccNumber", model.getCcNumber());
-		jsonObj.put("ccExpMonth", model.getCcExpMonth());
-		jsonObj.put("ccExpYear", model.getCcExpYear());
-		jsonObj.put("ccVerNumber", model.getCcVerNumber());
-		jsonObj.put("comments", model.getComments());
-		jsonObj.put("ppTxnId", model.getPpTxnId());
-		jsonObj.put("ppPaymentStatus", model.getPpPaymentStatus());
-		jsonObj.put("ppPaymentGross", model.getPpPaymentGross());
-		jsonObj.put("ppReceiverEmail", model.getPpReceiverEmail());
-		jsonObj.put("ppPayerEmail", model.getPpPayerEmail());
-		jsonObj.put("sendOrderEmail", model.getSendOrderEmail());
-		jsonObj.put("sendShippingEmail", model.getSendShippingEmail());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("number", model.getNumber());
+		jsonObject.put("tax", model.getTax());
+		jsonObject.put("shipping", model.getShipping());
+		jsonObject.put("altShipping", model.getAltShipping());
+		jsonObject.put("requiresShipping", model.getRequiresShipping());
+		jsonObject.put("insure", model.getInsure());
+		jsonObject.put("insurance", model.getInsurance());
+		jsonObject.put("couponCodes", model.getCouponCodes());
+		jsonObject.put("couponDiscount", model.getCouponDiscount());
+		jsonObject.put("billingFirstName", model.getBillingFirstName());
+		jsonObject.put("billingLastName", model.getBillingLastName());
+		jsonObject.put("billingEmailAddress", model.getBillingEmailAddress());
+		jsonObject.put("billingCompany", model.getBillingCompany());
+		jsonObject.put("billingStreet", model.getBillingStreet());
+		jsonObject.put("billingCity", model.getBillingCity());
+		jsonObject.put("billingState", model.getBillingState());
+		jsonObject.put("billingZip", model.getBillingZip());
+		jsonObject.put("billingCountry", model.getBillingCountry());
+		jsonObject.put("billingPhone", model.getBillingPhone());
+		jsonObject.put("shipToBilling", model.getShipToBilling());
+		jsonObject.put("shippingFirstName", model.getShippingFirstName());
+		jsonObject.put("shippingLastName", model.getShippingLastName());
+		jsonObject.put("shippingEmailAddress", model.getShippingEmailAddress());
+		jsonObject.put("shippingCompany", model.getShippingCompany());
+		jsonObject.put("shippingStreet", model.getShippingStreet());
+		jsonObject.put("shippingCity", model.getShippingCity());
+		jsonObject.put("shippingState", model.getShippingState());
+		jsonObject.put("shippingZip", model.getShippingZip());
+		jsonObject.put("shippingCountry", model.getShippingCountry());
+		jsonObject.put("shippingPhone", model.getShippingPhone());
+		jsonObject.put("ccName", model.getCcName());
+		jsonObject.put("ccType", model.getCcType());
+		jsonObject.put("ccNumber", model.getCcNumber());
+		jsonObject.put("ccExpMonth", model.getCcExpMonth());
+		jsonObject.put("ccExpYear", model.getCcExpYear());
+		jsonObject.put("ccVerNumber", model.getCcVerNumber());
+		jsonObject.put("comments", model.getComments());
+		jsonObject.put("ppTxnId", model.getPpTxnId());
+		jsonObject.put("ppPaymentStatus", model.getPpPaymentStatus());
+		jsonObject.put("ppPaymentGross", model.getPpPaymentGross());
+		jsonObject.put("ppReceiverEmail", model.getPpReceiverEmail());
+		jsonObject.put("ppPayerEmail", model.getPpPayerEmail());
+		jsonObject.put("sendOrderEmail", model.getSendOrderEmail());
+		jsonObject.put("sendShippingEmail", model.getSendShippingEmail());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

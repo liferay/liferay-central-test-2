@@ -27,22 +27,22 @@ import java.util.List;
  */
 public class OrganizationJSONSerializer {
 	public static JSONObject toJSONObject(Organization model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("organizationId", model.getOrganizationId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("parentOrganizationId", model.getParentOrganizationId());
-		jsonObj.put("leftOrganizationId", model.getLeftOrganizationId());
-		jsonObj.put("rightOrganizationId", model.getRightOrganizationId());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("type", model.getType());
-		jsonObj.put("recursable", model.getRecursable());
-		jsonObj.put("regionId", model.getRegionId());
-		jsonObj.put("countryId", model.getCountryId());
-		jsonObj.put("statusId", model.getStatusId());
-		jsonObj.put("comments", model.getComments());
+		jsonObject.put("organizationId", model.getOrganizationId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("parentOrganizationId", model.getParentOrganizationId());
+		jsonObject.put("leftOrganizationId", model.getLeftOrganizationId());
+		jsonObject.put("rightOrganizationId", model.getRightOrganizationId());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("type", model.getType());
+		jsonObject.put("recursable", model.getRecursable());
+		jsonObject.put("regionId", model.getRegionId());
+		jsonObject.put("countryId", model.getCountryId());
+		jsonObject.put("statusId", model.getStatusId());
+		jsonObject.put("comments", model.getComments());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

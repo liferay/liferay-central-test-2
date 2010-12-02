@@ -30,14 +30,14 @@ import java.util.List;
  */
 public class DLFileShortcutJSONSerializer {
 	public static JSONObject toJSONObject(DLFileShortcut model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("uuid", model.getUuid());
-		jsonObj.put("fileShortcutId", model.getFileShortcutId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("uuid", model.getUuid());
+		jsonObject.put("fileShortcutId", model.getFileShortcutId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -47,7 +47,7 @@ public class DLFileShortcutJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -57,12 +57,12 @@ public class DLFileShortcutJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("folderId", model.getFolderId());
-		jsonObj.put("toFileEntryId", model.getToFileEntryId());
-		jsonObj.put("status", model.getStatus());
-		jsonObj.put("statusByUserId", model.getStatusByUserId());
-		jsonObj.put("statusByUserName", model.getStatusByUserName());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("folderId", model.getFolderId());
+		jsonObject.put("toFileEntryId", model.getToFileEntryId());
+		jsonObject.put("status", model.getStatus());
+		jsonObject.put("statusByUserId", model.getStatusByUserId());
+		jsonObject.put("statusByUserName", model.getStatusByUserName());
 
 		Date statusDate = model.getStatusDate();
 
@@ -72,9 +72,9 @@ public class DLFileShortcutJSONSerializer {
 			statusDateJSON = String.valueOf(statusDate.getTime());
 		}
 
-		jsonObj.put("statusDate", statusDateJSON);
+		jsonObject.put("statusDate", statusDateJSON);
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

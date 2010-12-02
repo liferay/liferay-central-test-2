@@ -27,15 +27,15 @@ import java.util.List;
  */
 public class RegionJSONSerializer {
 	public static JSONObject toJSONObject(Region model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("regionId", model.getRegionId());
-		jsonObj.put("countryId", model.getCountryId());
-		jsonObj.put("regionCode", model.getRegionCode());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("active", model.getActive());
+		jsonObject.put("regionId", model.getRegionId());
+		jsonObject.put("countryId", model.getCountryId());
+		jsonObject.put("regionCode", model.getRegionCode());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("active", model.getActive());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

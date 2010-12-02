@@ -30,13 +30,13 @@ import java.util.List;
  */
 public class ShoppingCouponJSONSerializer {
 	public static JSONObject toJSONObject(ShoppingCoupon model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("couponId", model.getCouponId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("couponId", model.getCouponId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -46,7 +46,7 @@ public class ShoppingCouponJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -56,10 +56,10 @@ public class ShoppingCouponJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("code", model.getCode());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("description", model.getDescription());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("code", model.getCode());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("description", model.getDescription());
 
 		Date startDate = model.getStartDate();
 
@@ -69,7 +69,7 @@ public class ShoppingCouponJSONSerializer {
 			startDateJSON = String.valueOf(startDate.getTime());
 		}
 
-		jsonObj.put("startDate", startDateJSON);
+		jsonObject.put("startDate", startDateJSON);
 
 		Date endDate = model.getEndDate();
 
@@ -79,15 +79,15 @@ public class ShoppingCouponJSONSerializer {
 			endDateJSON = String.valueOf(endDate.getTime());
 		}
 
-		jsonObj.put("endDate", endDateJSON);
-		jsonObj.put("active", model.getActive());
-		jsonObj.put("limitCategories", model.getLimitCategories());
-		jsonObj.put("limitSkus", model.getLimitSkus());
-		jsonObj.put("minOrder", model.getMinOrder());
-		jsonObj.put("discount", model.getDiscount());
-		jsonObj.put("discountType", model.getDiscountType());
+		jsonObject.put("endDate", endDateJSON);
+		jsonObject.put("active", model.getActive());
+		jsonObject.put("limitCategories", model.getLimitCategories());
+		jsonObject.put("limitSkus", model.getLimitSkus());
+		jsonObject.put("minOrder", model.getMinOrder());
+		jsonObject.put("discount", model.getDiscount());
+		jsonObject.put("discountType", model.getDiscountType());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

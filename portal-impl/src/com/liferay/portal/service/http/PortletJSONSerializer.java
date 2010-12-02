@@ -27,15 +27,15 @@ import java.util.List;
  */
 public class PortletJSONSerializer {
 	public static JSONObject toJSONObject(Portlet model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("id", model.getId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("portletId", model.getPortletId());
-		jsonObj.put("roles", model.getRoles());
-		jsonObj.put("active", model.getActive());
+		jsonObject.put("id", model.getId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("portletId", model.getPortletId());
+		jsonObject.put("roles", model.getRoles());
+		jsonObject.put("active", model.getActive());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

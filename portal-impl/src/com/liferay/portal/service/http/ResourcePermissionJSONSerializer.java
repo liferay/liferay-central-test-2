@@ -27,17 +27,17 @@ import java.util.List;
  */
 public class ResourcePermissionJSONSerializer {
 	public static JSONObject toJSONObject(ResourcePermission model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("resourcePermissionId", model.getResourcePermissionId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("scope", model.getScope());
-		jsonObj.put("primKey", model.getPrimKey());
-		jsonObj.put("roleId", model.getRoleId());
-		jsonObj.put("actionIds", model.getActionIds());
+		jsonObject.put("resourcePermissionId", model.getResourcePermissionId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("scope", model.getScope());
+		jsonObject.put("primKey", model.getPrimKey());
+		jsonObject.put("roleId", model.getRoleId());
+		jsonObject.put("actionIds", model.getActionIds());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

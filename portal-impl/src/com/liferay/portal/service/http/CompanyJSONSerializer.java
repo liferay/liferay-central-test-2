@@ -27,20 +27,20 @@ import java.util.List;
  */
 public class CompanyJSONSerializer {
 	public static JSONObject toJSONObject(Company model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("accountId", model.getAccountId());
-		jsonObj.put("webId", model.getWebId());
-		jsonObj.put("key", model.getKey());
-		jsonObj.put("virtualHost", model.getVirtualHost());
-		jsonObj.put("mx", model.getMx());
-		jsonObj.put("homeURL", model.getHomeURL());
-		jsonObj.put("logoId", model.getLogoId());
-		jsonObj.put("system", model.getSystem());
-		jsonObj.put("maxUsers", model.getMaxUsers());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("accountId", model.getAccountId());
+		jsonObject.put("webId", model.getWebId());
+		jsonObject.put("key", model.getKey());
+		jsonObject.put("virtualHost", model.getVirtualHost());
+		jsonObject.put("mx", model.getMx());
+		jsonObject.put("homeURL", model.getHomeURL());
+		jsonObject.put("logoId", model.getLogoId());
+		jsonObject.put("system", model.getSystem());
+		jsonObject.put("maxUsers", model.getMaxUsers());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

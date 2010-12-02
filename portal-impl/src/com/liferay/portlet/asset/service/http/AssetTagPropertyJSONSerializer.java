@@ -30,12 +30,12 @@ import java.util.List;
  */
 public class AssetTagPropertyJSONSerializer {
 	public static JSONObject toJSONObject(AssetTagProperty model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("tagPropertyId", model.getTagPropertyId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("tagPropertyId", model.getTagPropertyId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -45,7 +45,7 @@ public class AssetTagPropertyJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -55,12 +55,12 @@ public class AssetTagPropertyJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("tagId", model.getTagId());
-		jsonObj.put("key", model.getKey());
-		jsonObj.put("value", model.getValue());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("tagId", model.getTagId());
+		jsonObject.put("key", model.getKey());
+		jsonObject.put("value", model.getValue());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

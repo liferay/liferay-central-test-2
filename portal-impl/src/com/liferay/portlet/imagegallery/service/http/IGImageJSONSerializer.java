@@ -30,13 +30,13 @@ import java.util.List;
  */
 public class IGImageJSONSerializer {
 	public static JSONObject toJSONObject(IGImage model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("uuid", model.getUuid());
-		jsonObj.put("imageId", model.getImageId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
+		jsonObject.put("uuid", model.getUuid());
+		jsonObject.put("imageId", model.getImageId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
 
 		Date createDate = model.getCreateDate();
 
@@ -46,7 +46,7 @@ public class IGImageJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -56,16 +56,16 @@ public class IGImageJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("folderId", model.getFolderId());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("description", model.getDescription());
-		jsonObj.put("smallImageId", model.getSmallImageId());
-		jsonObj.put("largeImageId", model.getLargeImageId());
-		jsonObj.put("custom1ImageId", model.getCustom1ImageId());
-		jsonObj.put("custom2ImageId", model.getCustom2ImageId());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("folderId", model.getFolderId());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("description", model.getDescription());
+		jsonObject.put("smallImageId", model.getSmallImageId());
+		jsonObject.put("largeImageId", model.getLargeImageId());
+		jsonObject.put("custom1ImageId", model.getCustom1ImageId());
+		jsonObject.put("custom2ImageId", model.getCustom2ImageId());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

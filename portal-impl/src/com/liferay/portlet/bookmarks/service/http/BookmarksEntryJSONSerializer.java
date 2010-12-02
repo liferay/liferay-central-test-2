@@ -30,13 +30,13 @@ import java.util.List;
  */
 public class BookmarksEntryJSONSerializer {
 	public static JSONObject toJSONObject(BookmarksEntry model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("uuid", model.getUuid());
-		jsonObj.put("entryId", model.getEntryId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
+		jsonObject.put("uuid", model.getUuid());
+		jsonObject.put("entryId", model.getEntryId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
 
 		Date createDate = model.getCreateDate();
 
@@ -46,7 +46,7 @@ public class BookmarksEntryJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -56,15 +56,15 @@ public class BookmarksEntryJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("folderId", model.getFolderId());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("url", model.getUrl());
-		jsonObj.put("comments", model.getComments());
-		jsonObj.put("visits", model.getVisits());
-		jsonObj.put("priority", model.getPriority());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("folderId", model.getFolderId());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("url", model.getUrl());
+		jsonObject.put("comments", model.getComments());
+		jsonObject.put("visits", model.getVisits());
+		jsonObject.put("priority", model.getPriority());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

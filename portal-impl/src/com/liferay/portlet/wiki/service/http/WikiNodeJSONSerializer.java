@@ -30,14 +30,14 @@ import java.util.List;
  */
 public class WikiNodeJSONSerializer {
 	public static JSONObject toJSONObject(WikiNode model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("uuid", model.getUuid());
-		jsonObj.put("nodeId", model.getNodeId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("uuid", model.getUuid());
+		jsonObject.put("nodeId", model.getNodeId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -47,7 +47,7 @@ public class WikiNodeJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -57,9 +57,9 @@ public class WikiNodeJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("name", model.getName());
-		jsonObj.put("description", model.getDescription());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("name", model.getName());
+		jsonObject.put("description", model.getDescription());
 
 		Date lastPostDate = model.getLastPostDate();
 
@@ -69,9 +69,9 @@ public class WikiNodeJSONSerializer {
 			lastPostDateJSON = String.valueOf(lastPostDate.getTime());
 		}
 
-		jsonObj.put("lastPostDate", lastPostDateJSON);
+		jsonObject.put("lastPostDate", lastPostDateJSON);
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

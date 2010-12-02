@@ -27,27 +27,27 @@ import java.util.List;
  */
 public class OrgLaborJSONSerializer {
 	public static JSONObject toJSONObject(OrgLabor model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("orgLaborId", model.getOrgLaborId());
-		jsonObj.put("organizationId", model.getOrganizationId());
-		jsonObj.put("typeId", model.getTypeId());
-		jsonObj.put("sunOpen", model.getSunOpen());
-		jsonObj.put("sunClose", model.getSunClose());
-		jsonObj.put("monOpen", model.getMonOpen());
-		jsonObj.put("monClose", model.getMonClose());
-		jsonObj.put("tueOpen", model.getTueOpen());
-		jsonObj.put("tueClose", model.getTueClose());
-		jsonObj.put("wedOpen", model.getWedOpen());
-		jsonObj.put("wedClose", model.getWedClose());
-		jsonObj.put("thuOpen", model.getThuOpen());
-		jsonObj.put("thuClose", model.getThuClose());
-		jsonObj.put("friOpen", model.getFriOpen());
-		jsonObj.put("friClose", model.getFriClose());
-		jsonObj.put("satOpen", model.getSatOpen());
-		jsonObj.put("satClose", model.getSatClose());
+		jsonObject.put("orgLaborId", model.getOrgLaborId());
+		jsonObject.put("organizationId", model.getOrganizationId());
+		jsonObject.put("typeId", model.getTypeId());
+		jsonObject.put("sunOpen", model.getSunOpen());
+		jsonObject.put("sunClose", model.getSunClose());
+		jsonObject.put("monOpen", model.getMonOpen());
+		jsonObject.put("monClose", model.getMonClose());
+		jsonObject.put("tueOpen", model.getTueOpen());
+		jsonObject.put("tueClose", model.getTueClose());
+		jsonObject.put("wedOpen", model.getWedOpen());
+		jsonObject.put("wedClose", model.getWedClose());
+		jsonObject.put("thuOpen", model.getThuOpen());
+		jsonObject.put("thuClose", model.getThuClose());
+		jsonObject.put("friOpen", model.getFriOpen());
+		jsonObject.put("friClose", model.getFriClose());
+		jsonObject.put("satOpen", model.getSatOpen());
+		jsonObject.put("satClose", model.getSatClose());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

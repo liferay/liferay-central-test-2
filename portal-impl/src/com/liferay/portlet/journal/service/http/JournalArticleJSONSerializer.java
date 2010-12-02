@@ -30,15 +30,15 @@ import java.util.List;
  */
 public class JournalArticleJSONSerializer {
 	public static JSONObject toJSONObject(JournalArticle model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("uuid", model.getUuid());
-		jsonObj.put("id", model.getId());
-		jsonObj.put("resourcePrimKey", model.getResourcePrimKey());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("uuid", model.getUuid());
+		jsonObject.put("id", model.getId());
+		jsonObject.put("resourcePrimKey", model.getResourcePrimKey());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -48,7 +48,7 @@ public class JournalArticleJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -58,16 +58,16 @@ public class JournalArticleJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("articleId", model.getArticleId());
-		jsonObj.put("version", model.getVersion());
-		jsonObj.put("title", model.getTitle());
-		jsonObj.put("urlTitle", model.getUrlTitle());
-		jsonObj.put("description", model.getDescription());
-		jsonObj.put("content", model.getContent());
-		jsonObj.put("type", model.getType());
-		jsonObj.put("structureId", model.getStructureId());
-		jsonObj.put("templateId", model.getTemplateId());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("articleId", model.getArticleId());
+		jsonObject.put("version", model.getVersion());
+		jsonObject.put("title", model.getTitle());
+		jsonObject.put("urlTitle", model.getUrlTitle());
+		jsonObject.put("description", model.getDescription());
+		jsonObject.put("content", model.getContent());
+		jsonObject.put("type", model.getType());
+		jsonObject.put("structureId", model.getStructureId());
+		jsonObject.put("templateId", model.getTemplateId());
 
 		Date displayDate = model.getDisplayDate();
 
@@ -77,7 +77,7 @@ public class JournalArticleJSONSerializer {
 			displayDateJSON = String.valueOf(displayDate.getTime());
 		}
 
-		jsonObj.put("displayDate", displayDateJSON);
+		jsonObject.put("displayDate", displayDateJSON);
 
 		Date expirationDate = model.getExpirationDate();
 
@@ -87,7 +87,7 @@ public class JournalArticleJSONSerializer {
 			expirationDateJSON = String.valueOf(expirationDate.getTime());
 		}
 
-		jsonObj.put("expirationDate", expirationDateJSON);
+		jsonObject.put("expirationDate", expirationDateJSON);
 
 		Date reviewDate = model.getReviewDate();
 
@@ -97,14 +97,14 @@ public class JournalArticleJSONSerializer {
 			reviewDateJSON = String.valueOf(reviewDate.getTime());
 		}
 
-		jsonObj.put("reviewDate", reviewDateJSON);
-		jsonObj.put("indexable", model.getIndexable());
-		jsonObj.put("smallImage", model.getSmallImage());
-		jsonObj.put("smallImageId", model.getSmallImageId());
-		jsonObj.put("smallImageURL", model.getSmallImageURL());
-		jsonObj.put("status", model.getStatus());
-		jsonObj.put("statusByUserId", model.getStatusByUserId());
-		jsonObj.put("statusByUserName", model.getStatusByUserName());
+		jsonObject.put("reviewDate", reviewDateJSON);
+		jsonObject.put("indexable", model.getIndexable());
+		jsonObject.put("smallImage", model.getSmallImage());
+		jsonObject.put("smallImageId", model.getSmallImageId());
+		jsonObject.put("smallImageURL", model.getSmallImageURL());
+		jsonObject.put("status", model.getStatus());
+		jsonObject.put("statusByUserId", model.getStatusByUserId());
+		jsonObject.put("statusByUserName", model.getStatusByUserName());
 
 		Date statusDate = model.getStatusDate();
 
@@ -114,9 +114,9 @@ public class JournalArticleJSONSerializer {
 			statusDateJSON = String.valueOf(statusDate.getTime());
 		}
 
-		jsonObj.put("statusDate", statusDateJSON);
+		jsonObject.put("statusDate", statusDateJSON);
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

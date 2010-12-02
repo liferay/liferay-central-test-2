@@ -30,13 +30,13 @@ import java.util.List;
  */
 public class SCProductEntryJSONSerializer {
 	public static JSONObject toJSONObject(SCProductEntry model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("productEntryId", model.getProductEntryId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("productEntryId", model.getProductEntryId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -46,7 +46,7 @@ public class SCProductEntryJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -56,18 +56,18 @@ public class SCProductEntryJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("name", model.getName());
-		jsonObj.put("type", model.getType());
-		jsonObj.put("tags", model.getTags());
-		jsonObj.put("shortDescription", model.getShortDescription());
-		jsonObj.put("longDescription", model.getLongDescription());
-		jsonObj.put("pageURL", model.getPageURL());
-		jsonObj.put("author", model.getAuthor());
-		jsonObj.put("repoGroupId", model.getRepoGroupId());
-		jsonObj.put("repoArtifactId", model.getRepoArtifactId());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("name", model.getName());
+		jsonObject.put("type", model.getType());
+		jsonObject.put("tags", model.getTags());
+		jsonObject.put("shortDescription", model.getShortDescription());
+		jsonObject.put("longDescription", model.getLongDescription());
+		jsonObject.put("pageURL", model.getPageURL());
+		jsonObject.put("author", model.getAuthor());
+		jsonObject.put("repoGroupId", model.getRepoGroupId());
+		jsonObject.put("repoArtifactId", model.getRepoArtifactId());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

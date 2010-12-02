@@ -30,15 +30,15 @@ import java.util.List;
  */
 public class WikiPageJSONSerializer {
 	public static JSONObject toJSONObject(WikiPage model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("uuid", model.getUuid());
-		jsonObj.put("pageId", model.getPageId());
-		jsonObj.put("resourcePrimKey", model.getResourcePrimKey());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("uuid", model.getUuid());
+		jsonObject.put("pageId", model.getPageId());
+		jsonObject.put("resourcePrimKey", model.getResourcePrimKey());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -48,7 +48,7 @@ public class WikiPageJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -58,20 +58,20 @@ public class WikiPageJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("nodeId", model.getNodeId());
-		jsonObj.put("title", model.getTitle());
-		jsonObj.put("version", model.getVersion());
-		jsonObj.put("minorEdit", model.getMinorEdit());
-		jsonObj.put("content", model.getContent());
-		jsonObj.put("summary", model.getSummary());
-		jsonObj.put("format", model.getFormat());
-		jsonObj.put("head", model.getHead());
-		jsonObj.put("parentTitle", model.getParentTitle());
-		jsonObj.put("redirectTitle", model.getRedirectTitle());
-		jsonObj.put("status", model.getStatus());
-		jsonObj.put("statusByUserId", model.getStatusByUserId());
-		jsonObj.put("statusByUserName", model.getStatusByUserName());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("nodeId", model.getNodeId());
+		jsonObject.put("title", model.getTitle());
+		jsonObject.put("version", model.getVersion());
+		jsonObject.put("minorEdit", model.getMinorEdit());
+		jsonObject.put("content", model.getContent());
+		jsonObject.put("summary", model.getSummary());
+		jsonObject.put("format", model.getFormat());
+		jsonObject.put("head", model.getHead());
+		jsonObject.put("parentTitle", model.getParentTitle());
+		jsonObject.put("redirectTitle", model.getRedirectTitle());
+		jsonObject.put("status", model.getStatus());
+		jsonObject.put("statusByUserId", model.getStatusByUserId());
+		jsonObject.put("statusByUserName", model.getStatusByUserName());
 
 		Date statusDate = model.getStatusDate();
 
@@ -81,9 +81,9 @@ public class WikiPageJSONSerializer {
 			statusDateJSON = String.valueOf(statusDate.getTime());
 		}
 
-		jsonObj.put("statusDate", statusDateJSON);
+		jsonObject.put("statusDate", statusDateJSON);
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

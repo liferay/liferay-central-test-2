@@ -27,13 +27,13 @@ import java.util.List;
  */
 public class ResourceJSONSerializer {
 	public static JSONObject toJSONObject(Resource model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("resourceId", model.getResourceId());
-		jsonObj.put("codeId", model.getCodeId());
-		jsonObj.put("primKey", model.getPrimKey());
+		jsonObject.put("resourceId", model.getResourceId());
+		jsonObject.put("codeId", model.getCodeId());
+		jsonObject.put("primKey", model.getPrimKey());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

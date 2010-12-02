@@ -27,12 +27,12 @@ import java.util.List;
  */
 public class ClassNameJSONSerializer {
 	public static JSONObject toJSONObject(ClassName model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("classNameId", model.getClassNameId());
-		jsonObj.put("value", model.getValue());
+		jsonObject.put("classNameId", model.getClassNameId());
+		jsonObject.put("value", model.getValue());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

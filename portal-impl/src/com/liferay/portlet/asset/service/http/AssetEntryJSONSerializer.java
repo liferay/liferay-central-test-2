@@ -30,13 +30,13 @@ import java.util.List;
  */
 public class AssetEntryJSONSerializer {
 	public static JSONObject toJSONObject(AssetEntry model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("entryId", model.getEntryId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("entryId", model.getEntryId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -46,7 +46,7 @@ public class AssetEntryJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -56,11 +56,11 @@ public class AssetEntryJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("classNameId", model.getClassNameId());
-		jsonObj.put("classPK", model.getClassPK());
-		jsonObj.put("classUuid", model.getClassUuid());
-		jsonObj.put("visible", model.getVisible());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("classNameId", model.getClassNameId());
+		jsonObject.put("classPK", model.getClassPK());
+		jsonObject.put("classUuid", model.getClassUuid());
+		jsonObject.put("visible", model.getVisible());
 
 		Date startDate = model.getStartDate();
 
@@ -70,7 +70,7 @@ public class AssetEntryJSONSerializer {
 			startDateJSON = String.valueOf(startDate.getTime());
 		}
 
-		jsonObj.put("startDate", startDateJSON);
+		jsonObject.put("startDate", startDateJSON);
 
 		Date endDate = model.getEndDate();
 
@@ -80,7 +80,7 @@ public class AssetEntryJSONSerializer {
 			endDateJSON = String.valueOf(endDate.getTime());
 		}
 
-		jsonObj.put("endDate", endDateJSON);
+		jsonObject.put("endDate", endDateJSON);
 
 		Date publishDate = model.getPublishDate();
 
@@ -90,7 +90,7 @@ public class AssetEntryJSONSerializer {
 			publishDateJSON = String.valueOf(publishDate.getTime());
 		}
 
-		jsonObj.put("publishDate", publishDateJSON);
+		jsonObject.put("publishDate", publishDateJSON);
 
 		Date expirationDate = model.getExpirationDate();
 
@@ -100,18 +100,18 @@ public class AssetEntryJSONSerializer {
 			expirationDateJSON = String.valueOf(expirationDate.getTime());
 		}
 
-		jsonObj.put("expirationDate", expirationDateJSON);
-		jsonObj.put("mimeType", model.getMimeType());
-		jsonObj.put("title", model.getTitle());
-		jsonObj.put("description", model.getDescription());
-		jsonObj.put("summary", model.getSummary());
-		jsonObj.put("url", model.getUrl());
-		jsonObj.put("height", model.getHeight());
-		jsonObj.put("width", model.getWidth());
-		jsonObj.put("priority", model.getPriority());
-		jsonObj.put("viewCount", model.getViewCount());
+		jsonObject.put("expirationDate", expirationDateJSON);
+		jsonObject.put("mimeType", model.getMimeType());
+		jsonObject.put("title", model.getTitle());
+		jsonObject.put("description", model.getDescription());
+		jsonObject.put("summary", model.getSummary());
+		jsonObject.put("url", model.getUrl());
+		jsonObject.put("height", model.getHeight());
+		jsonObject.put("width", model.getWidth());
+		jsonObject.put("priority", model.getPriority());
+		jsonObject.put("viewCount", model.getViewCount());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

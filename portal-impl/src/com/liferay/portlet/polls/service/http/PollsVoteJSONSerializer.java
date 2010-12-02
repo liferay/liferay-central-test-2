@@ -30,12 +30,12 @@ import java.util.List;
  */
 public class PollsVoteJSONSerializer {
 	public static JSONObject toJSONObject(PollsVote model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("voteId", model.getVoteId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("questionId", model.getQuestionId());
-		jsonObj.put("choiceId", model.getChoiceId());
+		jsonObject.put("voteId", model.getVoteId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("questionId", model.getQuestionId());
+		jsonObject.put("choiceId", model.getChoiceId());
 
 		Date voteDate = model.getVoteDate();
 
@@ -45,9 +45,9 @@ public class PollsVoteJSONSerializer {
 			voteDateJSON = String.valueOf(voteDate.getTime());
 		}
 
-		jsonObj.put("voteDate", voteDateJSON);
+		jsonObject.put("voteDate", voteDateJSON);
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

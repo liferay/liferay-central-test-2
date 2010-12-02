@@ -27,19 +27,19 @@ import java.util.List;
  */
 public class RoleJSONSerializer {
 	public static JSONObject toJSONObject(Role model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("roleId", model.getRoleId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("classNameId", model.getClassNameId());
-		jsonObj.put("classPK", model.getClassPK());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("title", model.getTitle());
-		jsonObj.put("description", model.getDescription());
-		jsonObj.put("type", model.getType());
-		jsonObj.put("subtype", model.getSubtype());
+		jsonObject.put("roleId", model.getRoleId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("classNameId", model.getClassNameId());
+		jsonObject.put("classPK", model.getClassPK());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("title", model.getTitle());
+		jsonObject.put("description", model.getDescription());
+		jsonObject.put("type", model.getType());
+		jsonObject.put("subtype", model.getSubtype());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(com.liferay.portal.model.Role[] models) {

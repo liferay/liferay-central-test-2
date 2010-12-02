@@ -27,13 +27,13 @@ import java.util.List;
  */
 public class UserGroupRoleJSONSerializer {
 	public static JSONObject toJSONObject(UserGroupRole model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("roleId", model.getRoleId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("roleId", model.getRoleId());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

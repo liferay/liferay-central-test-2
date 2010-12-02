@@ -27,17 +27,17 @@ import java.util.List;
  */
 public class CountryJSONSerializer {
 	public static JSONObject toJSONObject(Country model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("countryId", model.getCountryId());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("a2", model.getA2());
-		jsonObj.put("a3", model.getA3());
-		jsonObj.put("number", model.getNumber());
-		jsonObj.put("idd", model.getIdd());
-		jsonObj.put("active", model.getActive());
+		jsonObject.put("countryId", model.getCountryId());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("a2", model.getA2());
+		jsonObject.put("a3", model.getA3());
+		jsonObject.put("number", model.getNumber());
+		jsonObject.put("idd", model.getIdd());
+		jsonObject.put("active", model.getActive());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

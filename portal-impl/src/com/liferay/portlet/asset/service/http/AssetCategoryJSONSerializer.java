@@ -30,14 +30,14 @@ import java.util.List;
  */
 public class AssetCategoryJSONSerializer {
 	public static JSONObject toJSONObject(AssetCategory model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("uuid", model.getUuid());
-		jsonObj.put("categoryId", model.getCategoryId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("uuid", model.getUuid());
+		jsonObject.put("categoryId", model.getCategoryId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -47,7 +47,7 @@ public class AssetCategoryJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -57,15 +57,15 @@ public class AssetCategoryJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("parentCategoryId", model.getParentCategoryId());
-		jsonObj.put("leftCategoryId", model.getLeftCategoryId());
-		jsonObj.put("rightCategoryId", model.getRightCategoryId());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("title", model.getTitle());
-		jsonObj.put("vocabularyId", model.getVocabularyId());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("parentCategoryId", model.getParentCategoryId());
+		jsonObject.put("leftCategoryId", model.getLeftCategoryId());
+		jsonObject.put("rightCategoryId", model.getRightCategoryId());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("title", model.getTitle());
+		jsonObject.put("vocabularyId", model.getVocabularyId());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

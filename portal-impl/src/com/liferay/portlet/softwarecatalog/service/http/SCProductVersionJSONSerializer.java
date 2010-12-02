@@ -30,12 +30,12 @@ import java.util.List;
  */
 public class SCProductVersionJSONSerializer {
 	public static JSONObject toJSONObject(SCProductVersion model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("productVersionId", model.getProductVersionId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("productVersionId", model.getProductVersionId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -45,7 +45,7 @@ public class SCProductVersionJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -55,15 +55,15 @@ public class SCProductVersionJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("productEntryId", model.getProductEntryId());
-		jsonObj.put("version", model.getVersion());
-		jsonObj.put("changeLog", model.getChangeLog());
-		jsonObj.put("downloadPageURL", model.getDownloadPageURL());
-		jsonObj.put("directDownloadURL", model.getDirectDownloadURL());
-		jsonObj.put("repoStoreArtifact", model.getRepoStoreArtifact());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("productEntryId", model.getProductEntryId());
+		jsonObject.put("version", model.getVersion());
+		jsonObject.put("changeLog", model.getChangeLog());
+		jsonObject.put("downloadPageURL", model.getDownloadPageURL());
+		jsonObject.put("directDownloadURL", model.getDirectDownloadURL());
+		jsonObject.put("repoStoreArtifact", model.getRepoStoreArtifact());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

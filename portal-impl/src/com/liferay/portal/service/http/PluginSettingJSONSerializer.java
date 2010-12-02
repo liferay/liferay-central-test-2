@@ -27,16 +27,16 @@ import java.util.List;
  */
 public class PluginSettingJSONSerializer {
 	public static JSONObject toJSONObject(PluginSetting model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("pluginSettingId", model.getPluginSettingId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("pluginId", model.getPluginId());
-		jsonObj.put("pluginType", model.getPluginType());
-		jsonObj.put("roles", model.getRoles());
-		jsonObj.put("active", model.getActive());
+		jsonObject.put("pluginSettingId", model.getPluginSettingId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("pluginId", model.getPluginId());
+		jsonObject.put("pluginType", model.getPluginType());
+		jsonObject.put("roles", model.getRoles());
+		jsonObject.put("active", model.getActive());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

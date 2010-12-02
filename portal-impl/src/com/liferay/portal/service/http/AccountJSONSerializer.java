@@ -29,12 +29,12 @@ import java.util.List;
  */
 public class AccountJSONSerializer {
 	public static JSONObject toJSONObject(Account model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("accountId", model.getAccountId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("accountId", model.getAccountId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -44,7 +44,7 @@ public class AccountJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -54,19 +54,19 @@ public class AccountJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("parentAccountId", model.getParentAccountId());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("legalName", model.getLegalName());
-		jsonObj.put("legalId", model.getLegalId());
-		jsonObj.put("legalType", model.getLegalType());
-		jsonObj.put("sicCode", model.getSicCode());
-		jsonObj.put("tickerSymbol", model.getTickerSymbol());
-		jsonObj.put("industry", model.getIndustry());
-		jsonObj.put("type", model.getType());
-		jsonObj.put("size", model.getSize());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("parentAccountId", model.getParentAccountId());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("legalName", model.getLegalName());
+		jsonObject.put("legalId", model.getLegalId());
+		jsonObject.put("legalType", model.getLegalType());
+		jsonObject.put("sicCode", model.getSicCode());
+		jsonObject.put("tickerSymbol", model.getTickerSymbol());
+		jsonObject.put("industry", model.getIndustry());
+		jsonObject.put("type", model.getType());
+		jsonObject.put("size", model.getSize());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

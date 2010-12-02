@@ -27,13 +27,13 @@ import java.util.List;
  */
 public class ListTypeJSONSerializer {
 	public static JSONObject toJSONObject(ListType model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("listTypeId", model.getListTypeId());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("type", model.getType());
+		jsonObject.put("listTypeId", model.getListTypeId());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("type", model.getType());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

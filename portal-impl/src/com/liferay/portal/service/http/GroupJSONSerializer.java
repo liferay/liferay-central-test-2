@@ -27,23 +27,23 @@ import java.util.List;
  */
 public class GroupJSONSerializer {
 	public static JSONObject toJSONObject(Group model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("creatorUserId", model.getCreatorUserId());
-		jsonObj.put("classNameId", model.getClassNameId());
-		jsonObj.put("classPK", model.getClassPK());
-		jsonObj.put("parentGroupId", model.getParentGroupId());
-		jsonObj.put("liveGroupId", model.getLiveGroupId());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("description", model.getDescription());
-		jsonObj.put("type", model.getType());
-		jsonObj.put("typeSettings", model.getTypeSettings());
-		jsonObj.put("friendlyURL", model.getFriendlyURL());
-		jsonObj.put("active", model.getActive());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("creatorUserId", model.getCreatorUserId());
+		jsonObject.put("classNameId", model.getClassNameId());
+		jsonObject.put("classPK", model.getClassPK());
+		jsonObject.put("parentGroupId", model.getParentGroupId());
+		jsonObject.put("liveGroupId", model.getLiveGroupId());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("description", model.getDescription());
+		jsonObject.put("type", model.getType());
+		jsonObject.put("typeSettings", model.getTypeSettings());
+		jsonObject.put("friendlyURL", model.getFriendlyURL());
+		jsonObject.put("active", model.getActive());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(com.liferay.portal.model.Group[] models) {

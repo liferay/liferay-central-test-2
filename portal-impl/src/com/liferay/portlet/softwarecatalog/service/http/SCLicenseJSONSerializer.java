@@ -28,16 +28,16 @@ import java.util.List;
  */
 public class SCLicenseJSONSerializer {
 	public static JSONObject toJSONObject(SCLicense model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("licenseId", model.getLicenseId());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("url", model.getUrl());
-		jsonObj.put("openSource", model.getOpenSource());
-		jsonObj.put("active", model.getActive());
-		jsonObj.put("recommended", model.getRecommended());
+		jsonObject.put("licenseId", model.getLicenseId());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("url", model.getUrl());
+		jsonObject.put("openSource", model.getOpenSource());
+		jsonObject.put("active", model.getActive());
+		jsonObject.put("recommended", model.getRecommended());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

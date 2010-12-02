@@ -27,25 +27,25 @@ import java.util.List;
  */
 public class LayoutSetJSONSerializer {
 	public static JSONObject toJSONObject(LayoutSet model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("layoutSetId", model.getLayoutSetId());
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("privateLayout", model.getPrivateLayout());
-		jsonObj.put("logo", model.getLogo());
-		jsonObj.put("logoId", model.getLogoId());
-		jsonObj.put("themeId", model.getThemeId());
-		jsonObj.put("colorSchemeId", model.getColorSchemeId());
-		jsonObj.put("wapThemeId", model.getWapThemeId());
-		jsonObj.put("wapColorSchemeId", model.getWapColorSchemeId());
-		jsonObj.put("css", model.getCss());
-		jsonObj.put("pageCount", model.getPageCount());
-		jsonObj.put("virtualHost", model.getVirtualHost());
-		jsonObj.put("settings", model.getSettings());
-		jsonObj.put("layoutSetPrototypeId", model.getLayoutSetPrototypeId());
+		jsonObject.put("layoutSetId", model.getLayoutSetId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("privateLayout", model.getPrivateLayout());
+		jsonObject.put("logo", model.getLogo());
+		jsonObject.put("logoId", model.getLogoId());
+		jsonObject.put("themeId", model.getThemeId());
+		jsonObject.put("colorSchemeId", model.getColorSchemeId());
+		jsonObject.put("wapThemeId", model.getWapThemeId());
+		jsonObject.put("wapColorSchemeId", model.getWapColorSchemeId());
+		jsonObject.put("css", model.getCss());
+		jsonObject.put("pageCount", model.getPageCount());
+		jsonObject.put("virtualHost", model.getVirtualHost());
+		jsonObject.put("settings", model.getSettings());
+		jsonObject.put("layoutSetPrototypeId", model.getLayoutSetPrototypeId());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

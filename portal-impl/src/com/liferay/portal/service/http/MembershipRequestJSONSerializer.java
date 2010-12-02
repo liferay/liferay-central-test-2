@@ -29,11 +29,11 @@ import java.util.List;
  */
 public class MembershipRequestJSONSerializer {
 	public static JSONObject toJSONObject(MembershipRequest model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("membershipRequestId", model.getMembershipRequestId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
+		jsonObject.put("membershipRequestId", model.getMembershipRequestId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
 
 		Date createDate = model.getCreateDate();
 
@@ -43,10 +43,10 @@ public class MembershipRequestJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
-		jsonObj.put("groupId", model.getGroupId());
-		jsonObj.put("comments", model.getComments());
-		jsonObj.put("replyComments", model.getReplyComments());
+		jsonObject.put("createDate", createDateJSON);
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("comments", model.getComments());
+		jsonObject.put("replyComments", model.getReplyComments());
 
 		Date replyDate = model.getReplyDate();
 
@@ -56,11 +56,11 @@ public class MembershipRequestJSONSerializer {
 			replyDateJSON = String.valueOf(replyDate.getTime());
 		}
 
-		jsonObj.put("replyDate", replyDateJSON);
-		jsonObj.put("replierUserId", model.getReplierUserId());
-		jsonObj.put("statusId", model.getStatusId());
+		jsonObject.put("replyDate", replyDateJSON);
+		jsonObject.put("replierUserId", model.getReplierUserId());
+		jsonObject.put("statusId", model.getStatusId());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

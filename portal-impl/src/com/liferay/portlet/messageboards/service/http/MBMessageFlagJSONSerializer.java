@@ -30,10 +30,10 @@ import java.util.List;
  */
 public class MBMessageFlagJSONSerializer {
 	public static JSONObject toJSONObject(MBMessageFlag model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("messageFlagId", model.getMessageFlagId());
-		jsonObj.put("userId", model.getUserId());
+		jsonObject.put("messageFlagId", model.getMessageFlagId());
+		jsonObject.put("userId", model.getUserId());
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -43,12 +43,12 @@ public class MBMessageFlagJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("threadId", model.getThreadId());
-		jsonObj.put("messageId", model.getMessageId());
-		jsonObj.put("flag", model.getFlag());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("threadId", model.getThreadId());
+		jsonObject.put("messageId", model.getMessageId());
+		jsonObject.put("flag", model.getFlag());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

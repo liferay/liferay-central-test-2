@@ -29,12 +29,12 @@ import java.util.List;
  */
 public class ContactJSONSerializer {
 	public static JSONObject toJSONObject(Contact model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("contactId", model.getContactId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("contactId", model.getContactId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -44,7 +44,7 @@ public class ContactJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -54,15 +54,15 @@ public class ContactJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("accountId", model.getAccountId());
-		jsonObj.put("parentContactId", model.getParentContactId());
-		jsonObj.put("firstName", model.getFirstName());
-		jsonObj.put("middleName", model.getMiddleName());
-		jsonObj.put("lastName", model.getLastName());
-		jsonObj.put("prefixId", model.getPrefixId());
-		jsonObj.put("suffixId", model.getSuffixId());
-		jsonObj.put("male", model.getMale());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("accountId", model.getAccountId());
+		jsonObject.put("parentContactId", model.getParentContactId());
+		jsonObject.put("firstName", model.getFirstName());
+		jsonObject.put("middleName", model.getMiddleName());
+		jsonObject.put("lastName", model.getLastName());
+		jsonObject.put("prefixId", model.getPrefixId());
+		jsonObject.put("suffixId", model.getSuffixId());
+		jsonObject.put("male", model.getMale());
 
 		Date birthday = model.getBirthday();
 
@@ -72,24 +72,24 @@ public class ContactJSONSerializer {
 			birthdayJSON = String.valueOf(birthday.getTime());
 		}
 
-		jsonObj.put("birthday", birthdayJSON);
-		jsonObj.put("smsSn", model.getSmsSn());
-		jsonObj.put("aimSn", model.getAimSn());
-		jsonObj.put("facebookSn", model.getFacebookSn());
-		jsonObj.put("icqSn", model.getIcqSn());
-		jsonObj.put("jabberSn", model.getJabberSn());
-		jsonObj.put("msnSn", model.getMsnSn());
-		jsonObj.put("mySpaceSn", model.getMySpaceSn());
-		jsonObj.put("skypeSn", model.getSkypeSn());
-		jsonObj.put("twitterSn", model.getTwitterSn());
-		jsonObj.put("ymSn", model.getYmSn());
-		jsonObj.put("employeeStatusId", model.getEmployeeStatusId());
-		jsonObj.put("employeeNumber", model.getEmployeeNumber());
-		jsonObj.put("jobTitle", model.getJobTitle());
-		jsonObj.put("jobClass", model.getJobClass());
-		jsonObj.put("hoursOfOperation", model.getHoursOfOperation());
+		jsonObject.put("birthday", birthdayJSON);
+		jsonObject.put("smsSn", model.getSmsSn());
+		jsonObject.put("aimSn", model.getAimSn());
+		jsonObject.put("facebookSn", model.getFacebookSn());
+		jsonObject.put("icqSn", model.getIcqSn());
+		jsonObject.put("jabberSn", model.getJabberSn());
+		jsonObject.put("msnSn", model.getMsnSn());
+		jsonObject.put("mySpaceSn", model.getMySpaceSn());
+		jsonObject.put("skypeSn", model.getSkypeSn());
+		jsonObject.put("twitterSn", model.getTwitterSn());
+		jsonObject.put("ymSn", model.getYmSn());
+		jsonObject.put("employeeStatusId", model.getEmployeeStatusId());
+		jsonObject.put("employeeNumber", model.getEmployeeNumber());
+		jsonObject.put("jobTitle", model.getJobTitle());
+		jsonObject.put("jobClass", model.getJobClass());
+		jsonObject.put("hoursOfOperation", model.getHoursOfOperation());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

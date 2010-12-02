@@ -29,12 +29,12 @@ import java.util.List;
  */
 public class AddressJSONSerializer {
 	public static JSONObject toJSONObject(Address model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("addressId", model.getAddressId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("addressId", model.getAddressId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -44,7 +44,7 @@ public class AddressJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -54,21 +54,21 @@ public class AddressJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("classNameId", model.getClassNameId());
-		jsonObj.put("classPK", model.getClassPK());
-		jsonObj.put("street1", model.getStreet1());
-		jsonObj.put("street2", model.getStreet2());
-		jsonObj.put("street3", model.getStreet3());
-		jsonObj.put("city", model.getCity());
-		jsonObj.put("zip", model.getZip());
-		jsonObj.put("regionId", model.getRegionId());
-		jsonObj.put("countryId", model.getCountryId());
-		jsonObj.put("typeId", model.getTypeId());
-		jsonObj.put("mailing", model.getMailing());
-		jsonObj.put("primary", model.getPrimary());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("classNameId", model.getClassNameId());
+		jsonObject.put("classPK", model.getClassPK());
+		jsonObject.put("street1", model.getStreet1());
+		jsonObject.put("street2", model.getStreet2());
+		jsonObject.put("street3", model.getStreet3());
+		jsonObject.put("city", model.getCity());
+		jsonObject.put("zip", model.getZip());
+		jsonObject.put("regionId", model.getRegionId());
+		jsonObject.put("countryId", model.getCountryId());
+		jsonObject.put("typeId", model.getTypeId());
+		jsonObject.put("mailing", model.getMailing());
+		jsonObject.put("primary", model.getPrimary());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

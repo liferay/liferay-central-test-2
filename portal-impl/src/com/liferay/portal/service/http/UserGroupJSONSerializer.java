@@ -27,15 +27,15 @@ import java.util.List;
  */
 public class UserGroupJSONSerializer {
 	public static JSONObject toJSONObject(UserGroup model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("userGroupId", model.getUserGroupId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("parentUserGroupId", model.getParentUserGroupId());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("description", model.getDescription());
+		jsonObject.put("userGroupId", model.getUserGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("parentUserGroupId", model.getParentUserGroupId());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("description", model.getDescription());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

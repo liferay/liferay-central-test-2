@@ -30,10 +30,10 @@ import java.util.List;
  */
 public class AnnouncementsFlagJSONSerializer {
 	public static JSONObject toJSONObject(AnnouncementsFlag model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("flagId", model.getFlagId());
-		jsonObj.put("userId", model.getUserId());
+		jsonObject.put("flagId", model.getFlagId());
+		jsonObject.put("userId", model.getUserId());
 
 		Date createDate = model.getCreateDate();
 
@@ -43,11 +43,11 @@ public class AnnouncementsFlagJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
-		jsonObj.put("entryId", model.getEntryId());
-		jsonObj.put("value", model.getValue());
+		jsonObject.put("createDate", createDateJSON);
+		jsonObject.put("entryId", model.getEntryId());
+		jsonObject.put("value", model.getValue());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

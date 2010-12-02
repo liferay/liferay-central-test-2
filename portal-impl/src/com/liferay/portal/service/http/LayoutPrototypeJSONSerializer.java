@@ -27,16 +27,16 @@ import java.util.List;
  */
 public class LayoutPrototypeJSONSerializer {
 	public static JSONObject toJSONObject(LayoutPrototype model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("layoutPrototypeId", model.getLayoutPrototypeId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("description", model.getDescription());
-		jsonObj.put("settings", model.getSettings());
-		jsonObj.put("active", model.getActive());
+		jsonObject.put("layoutPrototypeId", model.getLayoutPrototypeId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("description", model.getDescription());
+		jsonObject.put("settings", model.getSettings());
+		jsonObject.put("active", model.getActive());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(

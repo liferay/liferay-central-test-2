@@ -29,12 +29,12 @@ import java.util.List;
  */
 public class PasswordPolicyJSONSerializer {
 	public static JSONObject toJSONObject(PasswordPolicy model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObj.put("passwordPolicyId", model.getPasswordPolicyId());
-		jsonObj.put("companyId", model.getCompanyId());
-		jsonObj.put("userId", model.getUserId());
-		jsonObj.put("userName", model.getUserName());
+		jsonObject.put("passwordPolicyId", model.getPasswordPolicyId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
 
 		Date createDate = model.getCreateDate();
 
@@ -44,7 +44,7 @@ public class PasswordPolicyJSONSerializer {
 			createDateJSON = String.valueOf(createDate.getTime());
 		}
 
-		jsonObj.put("createDate", createDateJSON);
+		jsonObject.put("createDate", createDateJSON);
 
 		Date modifiedDate = model.getModifiedDate();
 
@@ -54,35 +54,35 @@ public class PasswordPolicyJSONSerializer {
 			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
 		}
 
-		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("defaultPolicy", model.getDefaultPolicy());
-		jsonObj.put("name", model.getName());
-		jsonObj.put("description", model.getDescription());
-		jsonObj.put("changeable", model.getChangeable());
-		jsonObj.put("changeRequired", model.getChangeRequired());
-		jsonObj.put("minAge", model.getMinAge());
-		jsonObj.put("checkSyntax", model.getCheckSyntax());
-		jsonObj.put("allowDictionaryWords", model.getAllowDictionaryWords());
-		jsonObj.put("minAlphanumeric", model.getMinAlphanumeric());
-		jsonObj.put("minLength", model.getMinLength());
-		jsonObj.put("minLowerCase", model.getMinLowerCase());
-		jsonObj.put("minNumbers", model.getMinNumbers());
-		jsonObj.put("minSymbols", model.getMinSymbols());
-		jsonObj.put("minUpperCase", model.getMinUpperCase());
-		jsonObj.put("history", model.getHistory());
-		jsonObj.put("historyCount", model.getHistoryCount());
-		jsonObj.put("expireable", model.getExpireable());
-		jsonObj.put("maxAge", model.getMaxAge());
-		jsonObj.put("warningTime", model.getWarningTime());
-		jsonObj.put("graceLimit", model.getGraceLimit());
-		jsonObj.put("lockout", model.getLockout());
-		jsonObj.put("maxFailure", model.getMaxFailure());
-		jsonObj.put("lockoutDuration", model.getLockoutDuration());
-		jsonObj.put("requireUnlock", model.getRequireUnlock());
-		jsonObj.put("resetFailureCount", model.getResetFailureCount());
-		jsonObj.put("resetTicketMaxAge", model.getResetTicketMaxAge());
+		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("defaultPolicy", model.getDefaultPolicy());
+		jsonObject.put("name", model.getName());
+		jsonObject.put("description", model.getDescription());
+		jsonObject.put("changeable", model.getChangeable());
+		jsonObject.put("changeRequired", model.getChangeRequired());
+		jsonObject.put("minAge", model.getMinAge());
+		jsonObject.put("checkSyntax", model.getCheckSyntax());
+		jsonObject.put("allowDictionaryWords", model.getAllowDictionaryWords());
+		jsonObject.put("minAlphanumeric", model.getMinAlphanumeric());
+		jsonObject.put("minLength", model.getMinLength());
+		jsonObject.put("minLowerCase", model.getMinLowerCase());
+		jsonObject.put("minNumbers", model.getMinNumbers());
+		jsonObject.put("minSymbols", model.getMinSymbols());
+		jsonObject.put("minUpperCase", model.getMinUpperCase());
+		jsonObject.put("history", model.getHistory());
+		jsonObject.put("historyCount", model.getHistoryCount());
+		jsonObject.put("expireable", model.getExpireable());
+		jsonObject.put("maxAge", model.getMaxAge());
+		jsonObject.put("warningTime", model.getWarningTime());
+		jsonObject.put("graceLimit", model.getGraceLimit());
+		jsonObject.put("lockout", model.getLockout());
+		jsonObject.put("maxFailure", model.getMaxFailure());
+		jsonObject.put("lockoutDuration", model.getLockoutDuration());
+		jsonObject.put("requireUnlock", model.getRequireUnlock());
+		jsonObject.put("resetFailureCount", model.getResetFailureCount());
+		jsonObject.put("resetTicketMaxAge", model.getResetTicketMaxAge());
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(
