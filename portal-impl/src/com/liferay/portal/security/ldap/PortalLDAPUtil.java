@@ -410,13 +410,13 @@ public class PortalLDAPUtil {
 			String baseDN = PrefsPropsUtil.getString(
 				companyId, PropsKeys.LDAP_BASE_DN + postfix);
 
-			Properties userMappings = LDAPSettingsUtil.getUserMappings(
-				ldapServerId, companyId);
+			String filter = null;
 
 			String userFilter = PrefsPropsUtil.getString(
 				companyId, PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER + postfix);
 
-			String filter = null;
+			Properties userMappings = LDAPSettingsUtil.getUserMappings(
+				ldapServerId, companyId);
 
 			if (Validator.isNotNull(userFilter)) {
 				StringBundler sb = new StringBundler(11);
