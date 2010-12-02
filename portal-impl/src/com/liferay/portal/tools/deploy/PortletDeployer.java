@@ -193,10 +193,11 @@ public class PortletDeployer extends BaseDeployer {
 			String portletName = PortalUtil.getJsSafePortletId(
 				portlet.elementText("portlet-name"));
 			String portletClass = portlet.elementText("portlet-class");
+			String servletName = portletName + "servlet";
 
 			sb.append("<servlet>");
 			sb.append("<servlet-name>");
-			sb.append(portletName);
+			sb.append(servletName);
 			sb.append("</servlet-name>");
 			sb.append("<servlet-class>");
 			sb.append("com.liferay.portal.kernel.servlet.PortletServlet");
@@ -212,10 +213,10 @@ public class PortletDeployer extends BaseDeployer {
 
 			sb.append("<servlet-mapping>");
 			sb.append("<servlet-name>");
-			sb.append(portletName);
+			sb.append(servletName);
 			sb.append("</servlet-name>");
 			sb.append("<url-pattern>/");
-			sb.append(portletName);
+			sb.append(servletName);
 			sb.append("/*</url-pattern>");
 			sb.append("</servlet-mapping>");
 		}
