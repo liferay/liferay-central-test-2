@@ -68,9 +68,9 @@ public abstract class BaseIndexer implements Indexer {
 			Field groupIdField = fields.get(Field.GROUP_ID);
 
 			if (groupIdField != null) {
-				long groupId = Long.parseLong(groupIdField.getValue());
+				long groupId = GetterUtil.getLong(groupIdField.getValue());
 
-				addStagingGroupTypeKeyword(document, groupId);
+				addStagingGroupKeyword(document, groupId);
 			}
 
 			return document;
@@ -80,30 +80,6 @@ public abstract class BaseIndexer implements Indexer {
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
-		}
-	}
-
-	protected void addStagingGroupTypeKeyword(Document document, long groupId) {
-		if (isStagingAware()) {
-			String stagingGroupType = Field.STAGING_GROUP_TYPE_LIVE_VALUE;
-
-			try {
-				Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-				if (group.isLayout()) {
-					group = GroupLocalServiceUtil.getGroup(
-						group.getParentGroupId());
-				}
-
-				if (group.isStagingGroup()) {
-					stagingGroupType = Field.STAGING_GROUP_TYPE_STAGE_VALUE;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			document.addKeyword(
-				Field.STAGING_GROUP_TYPE, stagingGroupType);
 		}
 	}
 
@@ -168,8 +144,8 @@ public abstract class BaseIndexer implements Indexer {
 
 			addSearchAssetCategoryIds(contextQuery, searchContext);
 			addSearchAssetTagNames(contextQuery, searchContext);
-			addSearchStagingGroup(contextQuery, searchContext);
 			addSearchGroupId(contextQuery, searchContext);
+			addSearchStagingGroup(contextQuery, searchContext);
 			addSearchOwnerUserId(contextQuery, searchContext);
 			addSearchCategoryIds(contextQuery, searchContext);
 			addSearchNodeIds(contextQuery, searchContext);
@@ -479,14 +455,12 @@ public abstract class BaseIndexer implements Indexer {
 		if (!searchContext.isIncludeLiveGroups() &&
 			searchContext.isIncludeStagingGroups()) {
 
-			contextQuery.addRequiredTerm(
-				Field.STAGING_GROUP_TYPE, Field.STAGING_GROUP_TYPE_STAGE_VALUE);
+			contextQuery.addRequiredTerm(Field.STAGING_GROUP, true);
 		}
 		else if (searchContext.isIncludeLiveGroups() &&
 				 !searchContext.isIncludeStagingGroups()) {
 
-			contextQuery.addRequiredTerm(
-				Field.STAGING_GROUP_TYPE, Field.STAGING_GROUP_TYPE_LIVE_VALUE);
+			contextQuery.addRequiredTerm(Field.STAGING_GROUP, false);
 		}
 	}
 
@@ -528,6 +502,28 @@ public abstract class BaseIndexer implements Indexer {
 				contextQuery.add(portletIdsQuery, BooleanClauseOccur.MUST);
 			}
 		}
+	}
+
+	protected void addStagingGroupKeyword(Document document, long groupId)
+		throws Exception {
+
+		if (!isStagingAware()) {
+			return;
+		}
+
+		boolean stagingGroup = false;
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		if (group.isLayout()) {
+			group = GroupLocalServiceUtil.getGroup(group.getParentGroupId());
+		}
+
+		if (group.isStagingGroup()) {
+			stagingGroup = true;
+		}
+
+		document.addKeyword(Field.STAGING_GROUP, stagingGroup);
 	}
 
 	protected void checkSearchCategoryId(
@@ -701,7 +697,7 @@ public abstract class BaseIndexer implements Indexer {
 		throws Exception {
 	}
 
-	public void setStagingAware(boolean stagingAware) {
+	protected void setStagingAware(boolean stagingAware) {
 		_stagingAware = stagingAware;
 	}
 
@@ -718,4 +714,5 @@ public abstract class BaseIndexer implements Indexer {
 	private static Log _log = LogFactoryUtil.getLog(BaseIndexer.class);
 
 	private boolean _stagingAware = true;
+
 }

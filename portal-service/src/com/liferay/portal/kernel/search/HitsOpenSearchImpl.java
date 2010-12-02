@@ -62,26 +62,33 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-			int start = (startPage * itemsPerPage) - itemsPerPage;
-			int end = startPage * itemsPerPage;
-
 			SearchContext searchContext = SearchContextFactory.getInstance(
 				request);
 
 			searchContext.setGroupIds(new long[] {groupId});
+
+			int end = startPage * itemsPerPage;
+
 			searchContext.setEnd(end);
-			searchContext.setKeywords(keywords);
-			searchContext.setScopeStrict(false);
-			searchContext.setStart(start);
-			searchContext.setUserId(userId);
 
 			Layout layout = themeDisplay.getLayout();
+
 			Group layoutGroup = layout.getGroup();
 
 			if (!layoutGroup.isStagingGroup() &&
 				!layoutGroup.isControlPanel()) {
+
 				searchContext.setIncludeStagingGroups(false);
 			}
+
+			searchContext.setKeywords(keywords);
+			searchContext.setScopeStrict(false);
+
+			int start = (startPage * itemsPerPage) - itemsPerPage;
+
+			searchContext.setStart(start);
+
+			searchContext.setUserId(userId);
 
 			addSearchAttributes(
 				themeDisplay.getCompanyId(), searchContext, keywords);

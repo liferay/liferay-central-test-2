@@ -55,11 +55,9 @@ public class PluginPackageIndexer extends BaseIndexer {
 	public static final String PORTLET_ID = "PluginPackageIndexer";
 
 	public PluginPackageIndexer() {
-		super();
-
 		setStagingAware(false);
 	}
-	
+
 	public String[] getClassNames() {
 		return CLASS_NAMES;
 	}

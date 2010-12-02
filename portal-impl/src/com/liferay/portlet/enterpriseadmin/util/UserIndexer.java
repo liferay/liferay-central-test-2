@@ -58,8 +58,6 @@ public class UserIndexer extends BaseIndexer {
 	public static final String PORTLET_ID = PortletKeys.ENTERPRISE_ADMIN_USERS;
 
 	public UserIndexer() {
-		super();
-		
 		setStagingAware(false);
 	}
 

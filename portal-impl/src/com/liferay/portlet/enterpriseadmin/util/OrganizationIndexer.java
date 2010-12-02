@@ -68,8 +68,6 @@ public class OrganizationIndexer extends BaseIndexer {
 		PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS;
 
 	public OrganizationIndexer() {
-		super();
-
 		setStagingAware(false);
 	}
 
