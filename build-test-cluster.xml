@@ -289,7 +289,7 @@ JkShmFile logs/jk-runtime-status</echo>
 		</echo>
 
 		<antcall target="execute-remote-command">
-			<param name="vm.host" value="${vm.host.cluster-node-1}" />
+			<param name="vm.host" value="${vm.host.cluster-node-2}" />
 		</antcall>
 	</target>
 
