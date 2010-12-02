@@ -270,6 +270,11 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		updateDisplaySettings(actionRequest, preferences);
 		updateRssSettings(actionRequest, preferences);
+
+		boolean defaultScope = ParamUtil.getBoolean(
+			actionRequest, "defaultScope");
+
+		preferences.setValue("default-scope", String.valueOf(defaultScope));
 	}
 
 	protected void updateDisplaySettings(
@@ -282,6 +287,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			actionRequest, "anyAssetType");
 		long[] classNameIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "classNameIds"), 0L);
+		String[] scopeIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "scopeIds"));
 		boolean showAssetTitle = ParamUtil.getBoolean(
 			actionRequest, "showAssetTitle");
 		boolean showContextLink = ParamUtil.getBoolean(
@@ -313,6 +320,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		preferences.setValue("any-asset-type", String.valueOf(anyAssetType));
 		preferences.setValues(
 			"class-name-ids", ArrayUtil.toStringArray(classNameIds));
+		preferences.setValues("scope-ids", ArrayUtil.toStringArray(scopeIds));
 		preferences.setValue(
 			"show-asset-title", String.valueOf(showAssetTitle));
 		preferences.setValue(

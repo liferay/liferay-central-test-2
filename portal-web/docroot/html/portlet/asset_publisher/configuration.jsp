@@ -48,6 +48,64 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 			<aui:option label="manual" selected='<%= selectionStyle.equals("manual") %>'/>
 		</aui:select>
 
+		<liferay-util:buffer var="selectScope">
+			<aui:select label="" name="defaultScope">
+				<aui:option label="<%= _getName(scopeGroup, pageContext) %>" selected="<%= defaultScope %>" value="<%= true %>" />
+				<aui:option label='<%= LanguageUtil.get(pageContext,"select") + "..." %>' selected="<%= !defaultScope %>" value="<%= false %>" />
+			</aui:select>
+
+			<aui:input name="scopeIds" type="hidden" />
+
+			<%
+			Set<Group> groups = new HashSet<Group>();
+
+			groups.add(company.getGroup());
+			groups.add(scopeGroup);
+
+			for (Layout curLayout : LayoutLocalServiceUtil.getLayouts(layout.getGroupId(), layout.isPrivateLayout())) {
+				if (curLayout.hasScopeGroup()) {
+					groups.add(curLayout.getScopeGroup());
+				}
+			}
+
+			// Left list
+
+			List<KeyValuePair> scopesLeftList = new ArrayList<KeyValuePair>();
+
+			for (long groupId : groupIds) {
+				Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+				scopesLeftList.add(new KeyValuePair(_getKey(group), _getName(group, pageContext)));
+			}
+
+			// Right list
+
+			List<KeyValuePair> scopesRightList = new ArrayList<KeyValuePair>();
+
+			Arrays.sort(groupIds);
+
+			for (Group group : groups) {
+				if (Arrays.binarySearch(groupIds, group.getGroupId()) < 0) {
+					scopesRightList.add(new KeyValuePair(_getKey(group), _getName(group, pageContext)));
+				}
+			}
+
+			scopesRightList = ListUtil.sort(scopesRightList, new KeyValuePairComparator(false, true));
+			%>
+
+			<div class="<%= defaultScope ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />scopesBoxes">
+				<liferay-ui:input-move-boxes
+					leftTitle="current"
+					rightTitle="available"
+					leftBoxName="currentScopeIds"
+					rightBoxName="availableScopeIds"
+					leftReorder="true"
+					leftList="<%= scopesLeftList %>"
+					rightList="<%= scopesRightList %>"
+				/>
+			</div>
+		</liferay-util:buffer>
+
 		<liferay-util:buffer var="selectAssetTypeInput">
 			<aui:select label='<%= selectionStyle.equals("manual") ? "asset-type" : StringPool.BLANK %>' name="anyAssetType">
 				<aui:option label="any" selected="<%= anyAssetType %>" value="<%= true %>" />
@@ -103,6 +161,10 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 			<c:when test='<%= selectionStyle.equals("manual") %>'>
 				<liferay-ui:panel-container extended="<%= true %>" id="assetPublisherSelectionStylePanelContainer" persistState="<%= true %>">
 					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="assetPublisherSelectionStylePanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "selection") %>' >
+						<aui:fieldset label="scope">
+							<%= selectScope %>
+						</aui:fieldset>
+
 						<aui:fieldset>
 
 							<%
@@ -280,59 +342,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 				<liferay-ui:panel-container extended="<%= true %>" id="assetPublisherDynamicSelectionStylePanelContainer" persistState="<%= true %>">
 					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="assetPublisherSourcePanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "source") %>'>
 						<aui:fieldset label="scope">
-							<aui:select label="" name="defaultScope">
-								<aui:option label="<%= _getName(scopeGroup, pageContext) %>" selected="<%= defaultScope %>" value="<%= true %>" />
-								<aui:option label='<%= LanguageUtil.get(pageContext,"select") + "..." %>' selected="<%= !defaultScope %>" value="<%= false %>" />
-							</aui:select>
-
-							<aui:input name="scopeIds" type="hidden" />
-
-							<%
-							Set<Group> groups = new HashSet<Group>();
-
-							groups.add(company.getGroup());
-							groups.add(scopeGroup);
-
-							for (Layout curLayout : LayoutLocalServiceUtil.getScopeGroupLayouts(layout.getGroupId(), layout.isPrivateLayout())) {
-								groups.add(curLayout.getScopeGroup());
-							}
-
-							// Left list
-
-							List<KeyValuePair> scopesLeftList = new ArrayList<KeyValuePair>();
-
-							for (long groupId : groupIds) {
-								Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-								scopesLeftList.add(new KeyValuePair(_getKey(group), _getName(group, pageContext)));
-							}
-
-							// Right list
-
-							List<KeyValuePair> scopesRightList = new ArrayList<KeyValuePair>();
-
-							Arrays.sort(groupIds);
-
-							for (Group group : groups) {
-								if (Arrays.binarySearch(groupIds, group.getGroupId()) < 0) {
-									scopesRightList.add(new KeyValuePair(_getKey(group), _getName(group, pageContext)));
-								}
-							}
-
-							scopesRightList = ListUtil.sort(scopesRightList, new KeyValuePairComparator(false, true));
-							%>
-
-							<div class="<%= defaultScope ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />scopesBoxes">
-								<liferay-ui:input-move-boxes
-									leftTitle="current"
-									rightTitle="available"
-									leftBoxName="currentScopeIds"
-									rightBoxName="availableScopeIds"
-									leftReorder="true"
-									leftList="<%= scopesLeftList %>"
-									rightList="<%= scopesRightList %>"
-								/>
-							</div>
+							<%= selectScope %>
 						</aui:fieldset>
 
 						<aui:fieldset label="asset-entry-type">
@@ -596,6 +606,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 	);
 
 	Liferay.Util.toggleSelectBox('<portlet:namespace />anyAssetType','false','<portlet:namespace />classNamesBoxes');
+	Liferay.Util.toggleSelectBox('<portlet:namespace />defaultScope','false','<portlet:namespace />scopesBoxes');
 	Liferay.Util.toggleBoxes('<portlet:namespace />enableRSSCheckbox','<portlet:namespace />rssOptions');
 
 	Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />selectionStyle);
