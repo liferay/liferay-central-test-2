@@ -37,8 +37,6 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 	}
 
 	protected long getMessageIdsCount() throws Exception {
-		String sql = sb.toString();
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -55,6 +53,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			sb.append("parentMessage.messageId where ");
 			sb.append("parentMessage.categoryId != childMessage.categoryId ");
 			sb.append("or parentMessage.threadId != childMessage.threadId");
+
+			String sql = sb.toString();
 
 			ps = con.prepareStatement(sql);
 
