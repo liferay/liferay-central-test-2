@@ -17,6 +17,8 @@ package com.liferay.portal.kernel.servlet;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 
 import java.io.Serializable;
 
@@ -32,6 +34,10 @@ public class SerializableSessionAttributeListener
 	implements HttpSessionAttributeListener {
 
 	public void attributeAdded(HttpSessionBindingEvent event) {
+		if (!_active) {
+			return;
+		}
+		
 		String name = event.getName();
 		Object value = event.getValue();
 
@@ -69,6 +75,9 @@ public class SerializableSessionAttributeListener
 
 	private static Log _log = LogFactoryUtil.getLog(
 		SerializableSessionAttributeListener.class);
+
+	private boolean _active = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.SESSION_VERIFY_SERIALIZABLE_ATTRIBUTE), true);
 
 	private Boolean _requiresSerializable;
 

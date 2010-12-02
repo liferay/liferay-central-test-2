@@ -1503,6 +1503,8 @@ public interface PropsKeys {
 
 	public static final String SESSION_TRACKER_PERSISTENCE_ENABLED = "session.tracker.persistence.enabled";
 
+	public static final String SESSION_VERIFY_SERIALIZABLE_ATTRIBUTE = "session.verify.serializable.attribute";
+
 	public static final String SHARD_AVAILABLE_NAMES = "shard.available.names";
 
 	public static final String SHARD_DEFAULT_NAME = "shard.default.name";
