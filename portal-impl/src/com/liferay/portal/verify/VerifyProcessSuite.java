@@ -23,6 +23,7 @@ public class VerifyProcessSuite extends VerifyProcess {
 		verify(new VerifyProperties());
 
 		verify(new VerifyMySQL());
+		verify(new VerifySQLServer());
 
 		verify(new VerifyCounter());
 		verify(new VerifyUUID());
