@@ -228,7 +228,7 @@ public class ServiceComponentLocalServiceImpl
 		}
 	}
 
-	public void verifyDB() throws PortalException, SystemException {
+	public void verifyDB() throws SystemException {
 		List<ServiceComponent> serviceComponents =
 			serviceComponentPersistence.findAll();
 

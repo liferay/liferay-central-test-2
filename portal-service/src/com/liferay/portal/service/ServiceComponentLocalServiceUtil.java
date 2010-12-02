@@ -261,8 +261,7 @@ public class ServiceComponentLocalServiceUtil {
 	}
 
 	public static void verifyDB()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().verifyDB();
 	}
 

@@ -255,8 +255,7 @@ public class ServiceComponentLocalServiceWrapper
 	}
 
 	public void verifyDB()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_serviceComponentLocalService.verifyDB();
 	}
 

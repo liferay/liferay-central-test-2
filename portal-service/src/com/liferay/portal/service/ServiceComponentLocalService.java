@@ -230,6 +230,5 @@ public interface ServiceComponentLocalService {
 		java.lang.String indexesSQL) throws java.lang.Exception;
 
 	public void verifyDB()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 }
