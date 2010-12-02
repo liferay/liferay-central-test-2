@@ -17,7 +17,7 @@ import java.util.List;
 public class ${entity.name}JSONSerializer {
 
 	public static JSONObject toJSONObject(${entity.name} model) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		<#list entity.regularColList as column>
 			<#if column.type == "Date">
@@ -29,13 +29,13 @@ public class ${entity.name}JSONSerializer {
 					${column.name}JSON = String.valueOf(${column.name}.getTime());
 				}
 
-				jsonObj.put("${column.name}", ${column.name}JSON);
+				jsonObject.put("${column.name}", ${column.name}JSON);
 			<#else>
-				jsonObj.put("${column.name}", model.get${column.methodName}());
+				jsonObject.put("${column.name}", model.get${column.methodName}());
 			</#if>
 		</#list>
 
-		return jsonObj;
+		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(${packagePath}.model.${entity.name}[] models) {
