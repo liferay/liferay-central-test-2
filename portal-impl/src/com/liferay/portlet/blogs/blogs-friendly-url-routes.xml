@@ -59,7 +59,7 @@
 		<implicit-parameter name="struts_action">/blogs/view_entry</implicit-parameter>
 	</route>
 	<route>
-		<pattern>/{p_p_state}</pattern>
+		<pattern>/maximized</pattern>
 		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
 		<implicit-parameter name="struts_action">/blogs/view</implicit-parameter>
 	</route>
