@@ -9,6 +9,12 @@
 		<implicit-parameter name="struts_action">/blogs/view</implicit-parameter>
 	</route>
 	<route>
+		<pattern>/maximized</pattern>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="p_p_state">maximized</implicit-parameter>
+		<implicit-parameter name="struts_action">/blogs/view</implicit-parameter>
+	</route>
+	<route>
 		<pattern>/rss</pattern>
 		<ignored-parameter name="p_p_cacheability" />
 		<implicit-parameter name="p_p_lifecycle">2</implicit-parameter>
@@ -57,12 +63,6 @@
 		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
 		<implicit-parameter name="p_p_state">normal</implicit-parameter>
 		<implicit-parameter name="struts_action">/blogs/view_entry</implicit-parameter>
-	</route>
-	<route>
-		<pattern>/maximized</pattern>
-		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
-		<implicit-parameter name="p_p_state">maximized</implicit-parameter>
-		<implicit-parameter name="struts_action">/blogs/view</implicit-parameter>
 	</route>
 	<route>
 		<pattern>/{urlTitle}/{p_p_state}</pattern>
