@@ -355,6 +355,7 @@ public abstract class BaseIndexer implements Indexer {
 		}
 
 		BooleanQuery groupIdsQuery = BooleanQueryFactoryUtil.create();
+		BooleanQuery scopeGroupIdsQuery = BooleanQueryFactoryUtil.create();
 
 		for (int i = 0; i < groupIds.length; i ++) {
 			long groupId = groupIds[i];
@@ -369,8 +370,7 @@ public abstract class BaseIndexer implements Indexer {
 				long parentGroupId = groupId;
 
 				if (group.isLayout() || searchContext.isScopeStrict()) {
-					contextQuery.addRequiredTerm(
-						Field.SCOPE_GROUP_ID, groupId);
+					scopeGroupIdsQuery.addTerm(Field.SCOPE_GROUP_ID, groupId);
 				}
 
 				if (group.isLayout()) {
@@ -390,6 +390,10 @@ public abstract class BaseIndexer implements Indexer {
 
 		if (!groupIdsQuery.clauses().isEmpty()) {
 			contextQuery.add(groupIdsQuery, BooleanClauseOccur.MUST);
+		}
+
+		if (!scopeGroupIdsQuery.clauses().isEmpty()) {
+			contextQuery.add(scopeGroupIdsQuery, BooleanClauseOccur.MUST);
 		}
 	}
 

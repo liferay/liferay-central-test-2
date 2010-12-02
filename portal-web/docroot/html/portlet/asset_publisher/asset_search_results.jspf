@@ -24,7 +24,7 @@ if (searchTerms.isAdvancedSearch()) {
 
 }
 else {
-	results = AssetEntryLocalServiceUtil.search(company.getCompanyId(), assetRendererFactory.getPortletId(), searchTerms.getKeywords(), searchContainer.getStart(), searchContainer.getEnd());
+	results = AssetEntryLocalServiceUtil.search(company.getCompanyId(), groupIds, assetRendererFactory.getPortletId(), searchTerms.getKeywords(), searchContainer.getStart(), searchContainer.getEnd());
 }
 
 int total = results.getLength();

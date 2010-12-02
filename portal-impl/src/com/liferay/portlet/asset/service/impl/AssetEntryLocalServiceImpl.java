@@ -354,8 +354,8 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-			long companyId, String portletId, String keywords, int start,
-			int end)
+			long companyId, long[] groupIds, String portletId, String keywords,
+			int start, int end)
 		throws SystemException {
 
 		try {
@@ -363,6 +363,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 			searchContext.setCompanyId(companyId);
 			searchContext.setEnd(end);
+			searchContext.setGroupIds(groupIds);
 			searchContext.setKeywords(keywords);
 			searchContext.setPortletIds(getPortletIds(portletId));
 			searchContext.setStart(start);
@@ -410,13 +411,14 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	}
 
 	public AssetEntryDisplay[] searchEntryDisplays(
-			long companyId, String portletId, String keywords,
+			long companyId, long[] groupIds, String portletId, String keywords,
 			String languageId, int start, int end)
 		throws SystemException {
 
 		List<AssetEntry> entries = new ArrayList<AssetEntry>();
 
-		Hits hits = search(companyId, portletId, keywords, start, end);
+		Hits hits = search(
+			companyId, groupIds, portletId, keywords, start, end);
 
 		List<Document> hitsList = hits.toList();
 
@@ -439,12 +441,12 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	}
 
 	public int searchEntryDisplaysCount(
-			long companyId, String portletId, String keywords,
+			long companyId, long[] groupIds, String portletId, String keywords,
 			String languageId)
 		throws SystemException {
 
 		Hits hits = search(
-			companyId, portletId, keywords, QueryUtil.ALL_POS,
+			companyId, groupIds, portletId, keywords, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 
 		return hits.getLength();
