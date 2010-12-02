@@ -193,7 +193,8 @@ public class PortletDeployer extends BaseDeployer {
 			String portletName = PortalUtil.getJsSafePortletId(
 				portlet.elementText("portlet-name"));
 			String portletClass = portlet.elementText("portlet-class");
-			String servletName = portletName + "servlet";
+
+			String servletName = portletName + " Servlet";
 
 			sb.append("<servlet>");
 			sb.append("<servlet-name>");
@@ -216,7 +217,7 @@ public class PortletDeployer extends BaseDeployer {
 			sb.append(servletName);
 			sb.append("</servlet-name>");
 			sb.append("<url-pattern>/");
-			sb.append(servletName);
+			sb.append(portletName);
 			sb.append("/*</url-pattern>");
 			sb.append("</servlet-mapping>");
 		}
