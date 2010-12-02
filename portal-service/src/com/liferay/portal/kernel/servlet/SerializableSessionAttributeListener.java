@@ -34,10 +34,10 @@ public class SerializableSessionAttributeListener
 	implements HttpSessionAttributeListener {
 
 	public void attributeAdded(HttpSessionBindingEvent event) {
-		if (!_active) {
+		if (!_SESSION_VERIFY_SERIALIZABLE_ATTRIBUTE) {
 			return;
 		}
-		
+
 		String name = event.getName();
 		Object value = event.getValue();
 
@@ -73,11 +73,13 @@ public class SerializableSessionAttributeListener
 		attributeAdded(event);
 	}
 
+	private boolean _SESSION_VERIFY_SERIALIZABLE_ATTRIBUTE =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.SESSION_VERIFY_SERIALIZABLE_ATTRIBUTE),
+			true);
+
 	private static Log _log = LogFactoryUtil.getLog(
 		SerializableSessionAttributeListener.class);
-
-	private boolean _active = GetterUtil.getBoolean(
-		PropsUtil.get(PropsKeys.SESSION_VERIFY_SERIALIZABLE_ATTRIBUTE), true);
 
 	private Boolean _requiresSerializable;
 
