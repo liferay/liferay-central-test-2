@@ -107,21 +107,21 @@ public class AssetEntryServiceUtil {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetEntryDisplay[] searchEntryDisplays(
-		long companyId, java.lang.String portletId, java.lang.String keywords,
-		java.lang.String languageId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		long companyId, long[] groupIds, java.lang.String portletId,
+		java.lang.String keywords, java.lang.String languageId, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .searchEntryDisplays(companyId, portletId, keywords,
-			languageId, start, end);
+				   .searchEntryDisplays(companyId, groupIds, portletId,
+			keywords, languageId, start, end);
 	}
 
-	public static int searchEntryDisplaysCount(long companyId,
+	public static int searchEntryDisplaysCount(long companyId, long[] groupIds,
 		java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .searchEntryDisplaysCount(companyId, portletId, keywords,
-			languageId);
+				   .searchEntryDisplaysCount(companyId, groupIds, portletId,
+			keywords, languageId);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetEntry updateEntry(

@@ -377,7 +377,7 @@ public class AssetEntryServiceHttp {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetEntryDisplay[] searchEntryDisplays(
-		HttpPrincipal httpPrincipal, long companyId,
+		HttpPrincipal httpPrincipal, long companyId, long[] groupIds,
 		java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -386,7 +386,8 @@ public class AssetEntryServiceHttp {
 					"searchEntryDisplays", _searchEntryDisplaysParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, portletId, keywords, languageId, start, end);
+					companyId, groupIds, portletId, keywords, languageId,
+					start, end);
 
 			Object returnObj = null;
 
@@ -411,8 +412,8 @@ public class AssetEntryServiceHttp {
 	}
 
 	public static int searchEntryDisplaysCount(HttpPrincipal httpPrincipal,
-		long companyId, java.lang.String portletId, java.lang.String keywords,
-		java.lang.String languageId)
+		long companyId, long[] groupIds, java.lang.String portletId,
+		java.lang.String keywords, java.lang.String languageId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
@@ -420,7 +421,7 @@ public class AssetEntryServiceHttp {
 					_searchEntryDisplaysCountParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, portletId, keywords, languageId);
+					companyId, groupIds, portletId, keywords, languageId);
 
 			Object returnObj = null;
 
@@ -525,12 +526,12 @@ public class AssetEntryServiceHttp {
 			java.lang.String.class, long.class
 		};
 	private static final Class<?>[] _searchEntryDisplaysParameterTypes9 = new Class[] {
-			long.class, java.lang.String.class, java.lang.String.class,
-			java.lang.String.class, int.class, int.class
+			long.class, long[].class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class, int.class, int.class
 		};
 	private static final Class<?>[] _searchEntryDisplaysCountParameterTypes10 = new Class[] {
-			long.class, java.lang.String.class, java.lang.String.class,
-			java.lang.String.class
+			long.class, long[].class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class
 		};
 	private static final Class<?>[] _updateEntryParameterTypes11 = new Class[] {
 			long.class, java.lang.String.class, long.class,

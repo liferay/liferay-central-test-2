@@ -203,12 +203,12 @@ public class AssetEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetEntryDisplay[] searchEntryDisplays(
-		long companyId, java.lang.String portletId, java.lang.String keywords,
-		java.lang.String languageId, int start, int end)
-		throws RemoteException {
+		long companyId, long[] groupIds, java.lang.String portletId,
+		java.lang.String keywords, java.lang.String languageId, int start,
+		int end) throws RemoteException {
 		try {
 			com.liferay.portlet.asset.model.AssetEntryDisplay[] returnValue = AssetEntryServiceUtil.searchEntryDisplays(companyId,
-					portletId, keywords, languageId, start, end);
+					groupIds, portletId, keywords, languageId, start, end);
 
 			return returnValue;
 		}
@@ -219,12 +219,12 @@ public class AssetEntryServiceSoap {
 		}
 	}
 
-	public static int searchEntryDisplaysCount(long companyId,
+	public static int searchEntryDisplaysCount(long companyId, long[] groupIds,
 		java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId) throws RemoteException {
 		try {
 			int returnValue = AssetEntryServiceUtil.searchEntryDisplaysCount(companyId,
-					portletId, keywords, languageId);
+					groupIds, portletId, keywords, languageId);
 
 			return returnValue;
 		}

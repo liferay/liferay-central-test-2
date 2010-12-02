@@ -313,8 +313,9 @@ public interface AssetEntryLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		java.lang.String portletId, java.lang.String keywords, int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException;
+		long[] groupIds, java.lang.String portletId, java.lang.String keywords,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
@@ -326,12 +327,12 @@ public interface AssetEntryLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.asset.model.AssetEntryDisplay[] searchEntryDisplays(
-		long companyId, java.lang.String portletId, java.lang.String keywords,
-		java.lang.String languageId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		long companyId, long[] groupIds, java.lang.String portletId,
+		java.lang.String keywords, java.lang.String languageId, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int searchEntryDisplaysCount(long companyId,
+	public int searchEntryDisplaysCount(long companyId, long[] groupIds,
 		java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId)
 		throws com.liferay.portal.kernel.exception.SystemException;
