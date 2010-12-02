@@ -4,21 +4,30 @@
 	<import file="build-test.xml" />
 
 	<target name="prepare-db-sharding">
+		<echo file="create-mysql-sharded.sql">drop database if exists lportal;
+create database lportal character set utf8;
+drop database if exists lportal1;
+create database lportal1 character set utf8;
+drop database if exists lportal2;
+create database lportal2 character set utf8;</echo>
+
 		<exec executable="cmd.exe">
-			<arg line="/c mysql &lt; sql/create-sharded/create-sharded-mysql.sql" />
+			<arg line="/c mysql &lt; create-mysql-sharded.sql" />
 		</exec>
+
+		<delete file="create-mysql-sharded.sql" />
 	</target>
 
 	<target name="prepare-sharding-properties">
 		<echo file="portal-impl/src/portal-ext.properties" append="true"><![CDATA[
 
 jdbc.one.driverClassName=com.mysql.jdbc.Driver
-jdbc.one.url=jdbc:mysql://localhost/lportal1?useUnicode=true&characterEncoding=UTF-8&useFastDateParsing=false
+jdbc.one.url=jdbc:mysql://${db.mysql.host}/lportal1?useUnicode=true&characterEncoding=UTF-8&useFastDateParsing=false
 jdbc.one.username=
 jdbc.one.password=
 
 jdbc.two.driverClassName=com.mysql.jdbc.Driver
-jdbc.two.url=jdbc:mysql://localhost/lportal2?useUnicode=true&characterEncoding=UTF-8&useFastDateParsing=false
+jdbc.two.url=jdbc:mysql://${db.mysql.host}/lportal2?useUnicode=true&characterEncoding=UTF-8&useFastDateParsing=false
 jdbc.two.username=
 jdbc.two.password=
 
