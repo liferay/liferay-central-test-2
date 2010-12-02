@@ -76,8 +76,8 @@ public class ViewDocumentVersionTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("1.1"),
 			selenium.getText("//span[1]/strong"));
 		assertEquals(RuntimeVariables.replace("1.1"),
-			selenium.getText("//tr[3]/td[1]/a"));
+			selenium.getText("//tr[3]/td[2]/a"));
 		assertEquals(RuntimeVariables.replace("1.0"),
-			selenium.getText("//tr[4]/td[1]/a"));
+			selenium.getText("//tr[4]/td[2]/a"));
 	}
 }
