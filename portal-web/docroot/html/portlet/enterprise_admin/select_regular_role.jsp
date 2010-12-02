@@ -43,7 +43,7 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_regular_role"
 
 			<%
 			if (filterManageableRoles) {
-				List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), new Integer[] {RoleConstants.TYPE_REGULAR}, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+				List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), new Integer[] {RoleConstants.TYPE_REGULAR}, QueryUtil.ALL_POS, QueryUtil.ALL_POS, searchContainer.getOrderByComparator());
 
 				roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
 
