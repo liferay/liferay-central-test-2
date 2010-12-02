@@ -313,8 +313,8 @@ public class FileSystemHook extends BaseHook {
 
 		indexer.delete(fileModel);
 
-		fileModel.setRepositoryId(newRepositoryId);
 		fileModel.setGroupId(groupId);
+		fileModel.setRepositoryId(newRepositoryId);
 
 		indexer.reindex(fileModel);
 	}
