@@ -143,7 +143,7 @@ public class ViewOrganizationTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				selenium.click(
-					"//ul[@class='lfr-component lfr-actions right&nbsp;&nbsp;show-arrow']/li/strong/a");
+					"//ul[@class='lfr-component lfr-actions right show-arrow']/li/strong/a");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {

@@ -68,5 +68,6 @@ public class ReindexAllSearchIndexesTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
+		Thread.sleep(30000);
 	}
 }
