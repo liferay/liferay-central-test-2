@@ -24,25 +24,14 @@ import com.liferay.portal.kernel.util.StringBundler;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * @author Douglas Wong
  */
 public class VerifySQLServer extends VerifyProcess {
 
-	protected void doVerify() throws Exception {
-		DB db = DBFactoryUtil.getDB();
-
-		if (!db.getType().equals(DB.TYPE_SQLSERVER)) {
-			return;
-		}
-
-		_convertColumnsToUnicode();
-	}
-
-	private void _convertColumnsToUnicode() {
-		_dropNonUnicodeTableIndexes();
+	protected void convertColumnsToUnicode() {
+		dropNonunicodeTableIndexes();
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -51,24 +40,40 @@ public class VerifySQLServer extends VerifyProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement(_SQL_GET_NON_UNICODE_COLUMNS);
+			StringBundler sb = new StringBundler(11);
+
+			sb.append("select sysobjects.name as table_name, syscolumns.name ");
+			sb.append("AS column_name, systypes.name as data_type, ");
+			sb.append("syscolumns.length, syscolumns.isnullable as ");
+			sb.append("is_nullable FROM sysobjects inner join syscolumns on ");
+			sb.append("sysobjects.id = syscolumns.id inner join systypes on ");
+			sb.append("syscolumns.xtype = systypes.xtype where ");
+			sb.append("(sysobjects.xtype = 'U') and ");
+			sb.append(_FILTER_NONUNICODE_DATA_TYPES);
+			sb.append(" and ");
+			sb.append(_FILTER_EXCLUDED_TABLES);
+			sb.append(" order by sysobjects.name, syscolumns.colid");
+
+			String sql = sb.toString();
+
+			ps = con.prepareStatement(sql);
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
+				String tableName = rs.getString("table_name");
 				String columnName = rs.getString("column_name");
 				String dataType = rs.getString("data_type");
-				boolean isNullable = rs.getBoolean("is_nullable");
 				int length = rs.getInt("length");
-				String tableName = rs.getString("table_name");
+				boolean nullable = rs.getBoolean("is_nullable");
 
 				if (dataType.equals("varchar")) {
-					_convertVarcharColumn(
-						tableName, columnName, length, isNullable);
+					convertVarcharColumn(
+						tableName, columnName, length, nullable);
 				}
 				else if (dataType.equals("text")) {
-					_convertTextColumn(
-						tableName, columnName, length, isNullable);
+					convertTextColumn(
+						tableName, columnName, length, nullable);
 				}
 			}
 		}
@@ -80,8 +85,38 @@ public class VerifySQLServer extends VerifyProcess {
 		}
 	}
 
-	private void _convertVarcharColumn(
-			String tableName, String columnName, int length, boolean isNullable)
+	protected void convertTextColumn(
+			String tableName, String columnName, int length, boolean nullable)
+		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Updating " + tableName + "." + columnName + " to use ntext");
+		}
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append("alter table ");
+		sb.append(tableName);
+		sb.append(" add temp ntext");
+
+		if (!nullable) {
+			sb.append(" not null");
+		}
+
+		runSQL(sb.toString());
+
+		runSQL("update " + tableName + " set temp = " + columnName);
+
+		runSQL("alter table " + tableName + " drop column " + columnName);
+
+		runSQL(
+			"exec sp_rename \'" + tableName + ".temp\', \'" + columnName +
+				"\', \'column\'");
+	}
+
+	protected void convertVarcharColumn(
+			String tableName, String columnName, int length, boolean nullable)
 		throws Exception {
 
 		if (_log.isInfoEnabled()) {
@@ -90,57 +125,34 @@ public class VerifySQLServer extends VerifyProcess {
 					" to use nvarchar");
 		}
 
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(8);
 
-		sb.append("ALTER TABLE ");
+		sb.append("alter table ");
 		sb.append(tableName);
-		sb.append(" ALTER COLUMN ");
+		sb.append(" alter column ");
 		sb.append(columnName);
-		sb.append(" NVARCHAR(");
+		sb.append(" nvarchar(");
 		sb.append(length);
 		sb.append(")");
 
-		if (!isNullable) {
-			sb.append(" NOT NULL");
+		if (!nullable) {
+			sb.append(" not null");
 		}
 
-		_executeMsSqlCommand(sb.toString());
+		runSQL(sb.toString());
 	}
 
-	private void _convertTextColumn(
-			String tableName, String columnName, int length, boolean isNullable)
-		throws Exception {
+	protected void doVerify() throws Exception {
+		DB db = DBFactoryUtil.getDB();
 
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Updating " + tableName + "." + columnName +
-					" to use ntext");
+		if (!db.getType().equals(DB.TYPE_SQLSERVER)) {
+			return;
 		}
 
-		StringBundler sb = new StringBundler();
-
-		sb.append("ALTER TABLE ");
-		sb.append(tableName);
-		sb.append(" ADD temp NTEXT");
-
-		if (!isNullable) {
-			sb.append(" NOT NULL");
-		}
-
-		_executeMsSqlCommand(sb.toString());
-
-		_executeMsSqlCommand(
-			"UPDATE " + tableName + " SET temp = " + columnName);
-
-		_executeMsSqlCommand(
-			"ALTER TABLE " + tableName + " DROP COLUMN " + columnName);
-
-		_executeMsSqlCommand(
-			"EXEC SP_RENAME \'" + tableName + ".temp\', \'" + columnName +
-				"\', \'column\';");
+		convertColumnsToUnicode();
 	}
 
-	private void _dropNonUnicodeTableIndexes() {
+	protected void dropNonunicodeTableIndexes() {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -148,21 +160,38 @@ public class VerifySQLServer extends VerifyProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement(_SQL_GET_NON_UNICODE_TABLE_INDEXES);
+			StringBundler sb = new StringBundler(11);
+
+			sb.append("select distinct sysobjects.name as table_name, ");
+			sb.append("sysindexes.name as index_name FROM sysobjects inner ");
+			sb.append("join sysindexes on sysobjects.id = sysindexes.id ");
+			sb.append("inner join syscolumns on sysobjects.id = ");
+			sb.append("syscolumns.id inner join sysindexkeys on ");
+			sb.append("((sysobjects.id = sysindexkeys.id) and ");
+			sb.append("(syscolumns.colid = sysindexkeys.colid) and ");
+			sb.append("(sysindexes.indid = sysindexkeys.indid)) inner join ");
+			sb.append("systypes on syscolumns.xtype = systypes.xtype where ");
+			sb.append("sysobjects.type = 'U' and ");
+			sb.append(_FILTER_NONUNICODE_DATA_TYPES);
+			sb.append(" and ");
+			sb.append(_FILTER_EXCLUDED_TABLES);
+			sb.append(" order by sysobjects.name, sysindexes.name");
+
+			String sql = sb.toString();
+
+			ps = con.prepareStatement(sql);
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				String indexName = rs.getString("index_name");
 				String tableName = rs.getString("table_name");
+				String indexName = rs.getString("index_name");
 
 				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Dropping index " + tableName + "." + indexName);
+					_log.info("Dropping index " + tableName + "." + indexName);
 				}
 
-				_executeMsSqlCommand(
-					"DROP INDEX " + indexName + " ON " + tableName);
+				runSQL("drop index " + indexName + " on " + tableName);
 			}
 		}
 		catch (Exception e) {
@@ -173,53 +202,12 @@ public class VerifySQLServer extends VerifyProcess {
 		}
 	}
 
-	private void _executeMsSqlCommand(String sql) throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(sql);
-
-			ps.executeUpdate();
-		}
-		catch (SQLException se) {
-			_log.error(se, se);
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
-		}
-	}
-
 	private static final String _FILTER_EXCLUDED_TABLES =
-		"(sysobjects.name not like 'Counter') AND " +
-		"(sysobjects.name not like 'Cyrus%') AND " +
-		"(sysobjects.name not like 'QUARTZ%')";
+		"(sysobjects.name not like 'Counter') and (sysobjects.name not like " +
+			"'Cyrus%') and (sysobjects.name not like 'QUARTZ%')";
 
-	private static final String _FILTER_NON_UNICODE_DATA_TYPES =
+	private static final String _FILTER_NONUNICODE_DATA_TYPES =
 		"((systypes.name = 'varchar') OR (systypes.name = 'text'))";
-
-	private static final String _SQL_GET_NON_UNICODE_COLUMNS =
-		"SELECT sysobjects.name AS table_name, syscolumns.name AS " +
-		"column_name, systypes.name AS data_type, syscolumns.length, " +
-		"syscolumns.isnullable AS is_nullable FROM sysobjects INNER JOIN " +
-		"syscolumns ON sysobjects.id = syscolumns.id INNER JOIN systypes ON " +
-		"syscolumns.xtype = systypes.xtype WHERE (sysobjects.xtype = 'U') " +
-		"AND " + _FILTER_NON_UNICODE_DATA_TYPES + " AND " +
-		_FILTER_EXCLUDED_TABLES + " ORDER BY sysobjects.name, syscolumns.colid";
-
-	private static final String _SQL_GET_NON_UNICODE_TABLE_INDEXES =
-		"SELECT DISTINCT sysobjects.name AS table_name, sysindexes.name AS " +
-		"index_name FROM sysobjects INNER JOIN sysindexes ON " +
-		"sysobjects.id = sysindexes.id INNER JOIN syscolumns ON " +
-		"sysobjects.id = syscolumns.id INNER JOIN sysindexkeys ON " +
-		"((sysobjects.id = sysindexkeys.id) AND " +
-		"(syscolumns.colid = sysindexkeys.colid) AND " +
-		"(sysindexes.indid = sysindexkeys.indid)) INNER JOIN systypes ON " +
-		"syscolumns.xtype = systypes.xtype WHERE sysobjects.type = 'U' AND " +
-		_FILTER_NON_UNICODE_DATA_TYPES + " AND " + _FILTER_EXCLUDED_TABLES +
-		" ORDER BY sysobjects.name, sysindexes.name";
 
 	private static Log _log = LogFactoryUtil.getLog(VerifySQLServer.class);
 
