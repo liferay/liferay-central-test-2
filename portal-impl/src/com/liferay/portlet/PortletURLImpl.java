@@ -271,6 +271,10 @@ public class PortletURLImpl
 			_reservedParameters.put("p_p_state", _windowState.toString());
 		}
 
+		if (_windowStateChange == true) {
+			_reservedParameters.put("p_p_state_change", "1");
+		}
+
 		if (_portletMode != null) {
 			_reservedParameters.put("p_p_mode", _portletMode.toString());
 		}
@@ -622,6 +626,10 @@ public class PortletURLImpl
 		clearCache();
 	}
 
+	public void setWindowStateChange(boolean windowStateChange) {
+		_windowStateChange = windowStateChange;
+	}
+	
 	public String toString() {
 		if (_toString != null) {
 			return _toString;
@@ -1394,6 +1402,7 @@ public class PortletURLImpl
 	private boolean _secure;
 	private String _toString;
 	private WindowState _windowState;
+	private boolean _windowStateChange;
 	private boolean _wsrp;
 
 }

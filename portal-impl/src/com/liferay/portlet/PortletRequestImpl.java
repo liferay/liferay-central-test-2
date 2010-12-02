@@ -567,8 +567,12 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		boolean portletFocus = false;
 
 		String ppid = ParamUtil.getString(request, "p_p_id");
-
-		if (_portletName.equals(ppid)) {
+		
+		boolean ppStateChange = 
+			ParamUtil.getBoolean(request, "p_p_state_change");
+		
+		if (_portletName.equals(ppid) && 
+			!(ppStateChange && portlet.isRestoreCurrentView())) {
 
 			// Request was targeted to this portlet
 

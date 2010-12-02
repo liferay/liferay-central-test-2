@@ -550,6 +550,8 @@ else {
 	urlMax.setWindowState(WindowState.MAXIMIZED);
 }
 
+urlMax.setWindowStateChange(true);
+
 urlMax.setEscapeXml(false);
 
 if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
