@@ -48,6 +48,57 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 			<aui:option label="manual" selected='<%= selectionStyle.equals("manual") %>'/>
 		</aui:select>
 
+		<liferay-util:buffer var="selectAssetTypeInput">
+			<aui:select label='<%= selectionStyle.equals("manual") ? "asset-type" : StringPool.BLANK %>' name="anyAssetType">
+				<aui:option label="any" selected="<%= anyAssetType %>" value="<%= true %>" />
+				<aui:option label='<%= LanguageUtil.get(pageContext, "filter[action]") + "..." %>' selected="<%= !anyAssetType %>" value="<%= false %>" />
+			</aui:select>
+
+			<aui:input name="classNameIds" type="hidden" />
+
+			<%
+			Set<Long> availableClassNameIdsSet = SetUtil.fromArray(availableClassNameIds);
+
+			// Left list
+
+			List<KeyValuePair> typesLeftList = new ArrayList<KeyValuePair>();
+
+			for (long classNameId : classNameIds) {
+				ClassName className = ClassNameServiceUtil.getClassName(classNameId);
+
+				typesLeftList.add(new KeyValuePair(String.valueOf(classNameId), LanguageUtil.get(pageContext, "model.resource." + className.getValue())));
+			}
+
+			// Right list
+
+			List<KeyValuePair> typesRightList = new ArrayList<KeyValuePair>();
+
+			Arrays.sort(classNameIds);
+
+			for (long classNameId : availableClassNameIdsSet) {
+				if (Arrays.binarySearch(classNameIds, classNameId) < 0) {
+					ClassName className = ClassNameServiceUtil.getClassName(classNameId);
+
+					typesRightList.add(new KeyValuePair(String.valueOf(classNameId), LanguageUtil.get(pageContext, "model.resource." + className.getValue())));
+				}
+			}
+
+			typesRightList = ListUtil.sort(typesRightList, new KeyValuePairComparator(false, true));
+			%>
+
+			<div class="<%= anyAssetType ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />classNamesBoxes">
+				<liferay-ui:input-move-boxes
+					leftTitle="current"
+					rightTitle="available"
+					leftBoxName="currentClassNameIds"
+					rightBoxName="availableClassNameIds"
+					leftReorder="true"
+					leftList="<%= typesLeftList %>"
+					rightList="<%= typesRightList %>"
+				/>
+			</div>
+		</liferay-util:buffer>
+
 		<liferay-util:buffer var="selectScope">
 			<aui:select label="" name="defaultScope">
 				<aui:option label="<%= _getName(scopeGroup, pageContext) %>" selected="<%= defaultScope %>" value="<%= true %>" />
@@ -102,57 +153,6 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 					leftReorder="true"
 					leftList="<%= scopesLeftList %>"
 					rightList="<%= scopesRightList %>"
-				/>
-			</div>
-		</liferay-util:buffer>
-
-		<liferay-util:buffer var="selectAssetTypeInput">
-			<aui:select label='<%= selectionStyle.equals("manual") ? "asset-type" : StringPool.BLANK %>' name="anyAssetType">
-				<aui:option label="any" selected="<%= anyAssetType %>" value="<%= true %>" />
-				<aui:option label='<%= LanguageUtil.get(pageContext, "filter[action]") + "..." %>' selected="<%= !anyAssetType %>" value="<%= false %>" />
-			</aui:select>
-
-			<aui:input name="classNameIds" type="hidden" />
-
-			<%
-			Set<Long> availableClassNameIdsSet = SetUtil.fromArray(availableClassNameIds);
-
-			// Left list
-
-			List<KeyValuePair> typesLeftList = new ArrayList<KeyValuePair>();
-
-			for (long classNameId : classNameIds) {
-				ClassName className = ClassNameServiceUtil.getClassName(classNameId);
-
-				typesLeftList.add(new KeyValuePair(String.valueOf(classNameId), LanguageUtil.get(pageContext, "model.resource." + className.getValue())));
-			}
-
-			// Right list
-
-			List<KeyValuePair> typesRightList = new ArrayList<KeyValuePair>();
-
-			Arrays.sort(classNameIds);
-
-			for (long classNameId : availableClassNameIdsSet) {
-				if (Arrays.binarySearch(classNameIds, classNameId) < 0) {
-					ClassName className = ClassNameServiceUtil.getClassName(classNameId);
-
-					typesRightList.add(new KeyValuePair(String.valueOf(classNameId), LanguageUtil.get(pageContext, "model.resource." + className.getValue())));
-				}
-			}
-
-			typesRightList = ListUtil.sort(typesRightList, new KeyValuePairComparator(false, true));
-			%>
-
-			<div class="<%= anyAssetType ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />classNamesBoxes">
-				<liferay-ui:input-move-boxes
-					leftTitle="current"
-					rightTitle="available"
-					leftBoxName="currentClassNameIds"
-					rightBoxName="availableClassNameIds"
-					leftReorder="true"
-					leftList="<%= typesLeftList %>"
-					rightList="<%= typesRightList %>"
 				/>
 			</div>
 		</liferay-util:buffer>
