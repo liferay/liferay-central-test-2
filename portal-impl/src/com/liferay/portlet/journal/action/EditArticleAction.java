@@ -87,6 +87,7 @@ import org.apache.struts.action.ActionMapping;
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
  * @author Eduardo Lundgren
+ * @author Juan Fernández
  */
 public class EditArticleAction extends PortletAction {
 
@@ -100,10 +101,14 @@ public class EditArticleAction extends PortletAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		JournalArticle article = null;
+		String oldUrlTitle = StringPool.BLANK;
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				article = updateArticle(actionRequest);
+				Object[] returnValue = updateArticle(actionRequest);
+
+				article = (JournalArticle)returnValue[0];
+				oldUrlTitle = ((String)returnValue[1]);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteArticles(actionRequest);
@@ -134,6 +139,31 @@ public class EditArticleAction extends PortletAction {
 
 					redirect = getSaveAndContinueRedirect(
 						portletConfig, actionRequest, article, redirect);
+				}
+
+				if (redirect.indexOf("/content/" + oldUrlTitle + "?") != -1) {
+
+					int pos = redirect.indexOf("?");
+
+					if (pos == -1) {
+						pos = redirect.length();
+					}
+
+					String newRedirect = redirect.substring(
+						0, pos - oldUrlTitle.length());
+
+					newRedirect += article.getUrlTitle();
+
+					if (oldUrlTitle.indexOf("/maximized") != -1) {
+						newRedirect += "/maximized";
+					}
+
+					if (pos < redirect.length()) {
+						newRedirect +=
+							"?" + redirect.substring(pos + 1, redirect.length());
+					}
+
+					redirect = newRedirect;
 				}
 
 				String referringPortletResource = ParamUtil.getString(
@@ -403,7 +433,7 @@ public class EditArticleAction extends PortletAction {
 		}
 	}
 
-	protected JournalArticle updateArticle(ActionRequest actionRequest)
+	protected Object[] updateArticle(ActionRequest actionRequest)
 		throws Exception {
 
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
@@ -504,6 +534,7 @@ public class EditArticleAction extends PortletAction {
 			JournalArticle.class.getName(), actionRequest);
 
 		JournalArticle article = null;
+		String oldUrlTitle = StringPool.BLANK;
 
 		if (cmd.equals(Constants.ADD)) {
 			if (Validator.isNull(structureId)) {
@@ -575,6 +606,7 @@ public class EditArticleAction extends PortletAction {
 			}
 
 			// Update article
+			String tempOldUrlTitle = article.getUrlTitle();
 
 			article = JournalArticleServiceUtil.updateArticle(
 				groupId, articleId, version, title, description, content, type,
@@ -585,6 +617,11 @@ public class EditArticleAction extends PortletAction {
 				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
 				reviewDateMinute, neverReview, indexable, smallImage,
 				smallImageURL, smallFile, images, articleURL, serviceContext);
+
+			if (!tempOldUrlTitle.equals(article.getUrlTitle())) {
+				oldUrlTitle = tempOldUrlTitle;
+			}
+
 		}
 
 		// Recent articles
@@ -611,7 +648,7 @@ public class EditArticleAction extends PortletAction {
 				actionRequest, portletResource, article.getArticleId());
 		}
 
-		return article;
+		return new Object[] {article, oldUrlTitle};
 	}
 
 	protected void updateContentSearch(

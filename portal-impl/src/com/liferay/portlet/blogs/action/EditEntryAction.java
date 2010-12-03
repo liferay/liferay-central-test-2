@@ -125,7 +125,8 @@ public class EditEntryAction extends PortletAction {
 
 			if ((entry != null) && (Validator.isNotNull(oldUrlTitle)) &&
 				(redirect.endsWith("/blogs/" + oldUrlTitle) ||
-				 redirect.indexOf("/blogs/" + oldUrlTitle + "?") != -1)) {
+			    (redirect.indexOf("/blogs/" + oldUrlTitle + "?") != -1) ||
+			    (redirect.indexOf("/blog/" + oldUrlTitle + "?") != -1))) {
 
 				int pos = redirect.indexOf("?");
 
