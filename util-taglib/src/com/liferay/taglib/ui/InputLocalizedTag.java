@@ -30,6 +30,9 @@ public class InputLocalizedTag extends IncludeTag {
 	public void setDisabled(boolean disabled) {
 		_disabled = disabled;
 	}
+	public void setFormName(String formName) {
+		_formName = formName;
+	}
 
 	public void setName(String name) {
 		_name = name;
@@ -46,6 +49,7 @@ public class InputLocalizedTag extends IncludeTag {
 	protected void cleanUp() {
 		_cssClass = null;
 		_disabled = false;
+		_formName = "fm";
 		_name = null;
 		_type = "input";
 		_xml = null;
@@ -62,6 +66,7 @@ public class InputLocalizedTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:input-localized:dynamicAttributes",
 			getDynamicAttributes());
+		request.setAttribute("liferay-ui:input-localized:formName", _formName);
 		request.setAttribute("liferay-ui:input-localized:name", _name);
 		request.setAttribute("liferay-ui:input-localized:type", _type);
 		request.setAttribute("liferay-ui:input-localized:xml", _xml);
@@ -72,6 +77,7 @@ public class InputLocalizedTag extends IncludeTag {
 
 	private String _cssClass;
 	private boolean _disabled;
+	private String _formName = "fm";
 	private String _name;
 	private String _type = "input";
 	private String _xml;

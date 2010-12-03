@@ -22,6 +22,7 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_ui_input_
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-localized:cssClass"));
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-localized:disabled"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("liferay-ui:input-localized:dynamicAttributes");
+String formName = (String)request.getAttribute("liferay-ui:input-localized:formName");
 String name = (String)request.getAttribute("liferay-ui:input-localized:name");
 String xml = (String)request.getAttribute("liferay-ui:input-localized:xml");
 String type = (String)request.getAttribute("liferay-ui:input-localized:type");
@@ -211,7 +212,7 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 				hide: function(event) {
 					var instance = this;
 
-					instance._positionHelper.appendTo(document.<portlet:namespace />fm);
+					instance._positionHelper.appendTo(document.<portlet:namespace /><%= formName %>);
 				},
 				show: function(event) {
 					var instance = this;
@@ -224,7 +225,7 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 		}
 	);
 
-	panel._positionHelper.appendTo(document.<portlet:namespace />fm);
+	panel._positionHelper.appendTo(document.<portlet:namespace /><%= formName %>);
 
 	A.all('#<%= randomNamespace %>languageSelector select').each(
 		function(item) {
