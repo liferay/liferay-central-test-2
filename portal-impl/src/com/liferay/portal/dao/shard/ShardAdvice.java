@@ -38,6 +38,7 @@ import com.liferay.portal.service.persistence.ServiceComponentPersistence;
 import com.liferay.portal.service.persistence.ShardPersistence;
 import com.liferay.portal.util.PropsValues;
 
+import java.util.EmptyStackException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -362,7 +363,13 @@ public class ShardAdvice {
 	}
 
 	protected String getCurrentShardName() {
-		String shardName = _getCompanyServiceStack().peek();
+		String shardName = null;
+
+		try {
+			shardName = _getCompanyServiceStack().peek();
+		}
+		catch (EmptyStackException ese) {
+		}
 
 		if (shardName == null) {
 			shardName = PropsValues.SHARD_DEFAULT_NAME;
