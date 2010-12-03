@@ -44,7 +44,7 @@ public class UpgradeJournal extends UpgradeProcess {
 		try {
 			runSQL(
 				"alter_column_type JournalFeed targetLayoutFriendlyUrl " +
-				"VARCHAR(255) null");
+					"VARCHAR(255) null");
 		}
 		catch (Exception e) {
 			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
