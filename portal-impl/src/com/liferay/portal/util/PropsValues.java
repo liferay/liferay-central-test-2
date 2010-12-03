@@ -632,6 +632,8 @@ public class PropsValues {
 
 	public static final boolean LDAP_EXPORT_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LDAP_EXPORT_ENABLED));
 
+	public static final boolean LDAP_GROUP_EXPORT_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LDAP_GROUP_EXPORT_ENABLED));
+
 	public static final boolean LDAP_IMPORT_CREATE_ROLE_PER_GROUP = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LDAP_IMPORT_CREATE_ROLE_PER_GROUP));
 
 	public static final boolean LDAP_IMPORT_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LDAP_IMPORT_ENABLED));

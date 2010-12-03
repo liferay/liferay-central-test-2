@@ -186,7 +186,8 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 		long companyId = user.getCompanyId();
 
 		if (!AuthSettingsUtil.isLDAPAuthEnabled(companyId) ||
-			!LDAPSettingsUtil.isExportEnabled(companyId)) {
+			!LDAPSettingsUtil.isExportEnabled(companyId) ||
+			!LDAPSettingsUtil.isGroupExportEnabled(companyId)) {
 
 			return;
 		}

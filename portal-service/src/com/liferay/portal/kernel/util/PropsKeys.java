@@ -951,6 +951,8 @@ public interface PropsKeys {
 
 	public static final String LDAP_GROUP_DEFAULT_OBJECT_CLASSES = "ldap.group.default.object.classes";
 
+	public static final String LDAP_GROUP_EXPORT_ENABLED = "ldap.group.export.enabled";
+
 	public static final String LDAP_GROUP_MAPPINGS = "ldap.group.mappings";
 
 	public static final String LDAP_GROUPS_DN = "ldap.groups.dn";
