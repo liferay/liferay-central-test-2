@@ -47,6 +47,6 @@ public class Writer_AssertCannotAddWCDArticleTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertFalse(selenium.isElementPresent("//img[@alt='Add Web Content']"));
+		assertTrue(selenium.isElementPresent("//img[@alt='Add Web Content']"));
 	}
 }

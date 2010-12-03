@@ -114,7 +114,7 @@ public class CA_EditArticleTest extends BaseTestCase {
 				"This is a ca edited permissions web content article!"));
 		selenium.selectFrame("relative=top");
 		selenium.saveScreenShotAndSource();
-		selenium.click(RuntimeVariables.replace("_15_publishBtn"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Publish']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(

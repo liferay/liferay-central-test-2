@@ -57,6 +57,11 @@ public class CA_AddMessageTest extends BaseTestCase {
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("Test Thread Message 1"));
 		selenium.saveScreenShotAndSource();
+		assertTrue(selenium.isChecked("_19_subscribeCheckbox"));
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("_19_subscribeCheckbox", RuntimeVariables.replace(""));
+		assertFalse(selenium.isChecked("_19_subscribeCheckbox"));
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

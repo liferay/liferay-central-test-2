@@ -49,7 +49,23 @@ public class Writer_AddConfigurationWCDPortletTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//img[@alt='Select Web Content']",
 			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_86_showAvailableLocalesCheckbox")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isChecked("_86_showAvailableLocalesCheckbox"));
 		selenium.saveScreenShotAndSource();

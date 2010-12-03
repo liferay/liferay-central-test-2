@@ -76,7 +76,7 @@ public class SA_RemoveConfigurePortletPermissionsTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//li[@id='_86_tabs1permissionsTabsId']/span/span/a")) {
+							"//div[@id='p_p_id_86_']/div/ul/li[2]/span/span/a")) {
 					break;
 				}
 			}
@@ -87,7 +87,7 @@ public class SA_RemoveConfigurePortletPermissionsTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//li[@id='_86_tabs1permissionsTabsId']/span/span/a",
+		selenium.clickAt("//div[@id='p_p_id_86_']/div/ul/li[2]/span/span/a",
 			RuntimeVariables.replace("Permissions"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

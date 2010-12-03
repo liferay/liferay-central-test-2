@@ -54,6 +54,6 @@ public class Writer_AssertCannotApproveArticleTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 		assertFalse(selenium.isElementPresent("//input[@value='Approve']"));
-		assertFalse(selenium.isElementPresent("//input[@value='Publish']"));
+		assertTrue(selenium.isElementPresent("//input[@value='Publish']"));
 	}
 }

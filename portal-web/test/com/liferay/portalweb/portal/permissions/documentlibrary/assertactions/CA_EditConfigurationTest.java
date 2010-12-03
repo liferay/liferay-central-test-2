@@ -86,13 +86,14 @@ public class CA_EditConfigurationTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("//input[@value='Select']"));
 		assertEquals(RuntimeVariables.replace("Folders Listing"),
-			selenium.getText("//div[@id='foldersListingPanel']/div[1]/div/span"));
+			selenium.getText(
+				"//div[@id='documentLibraryFoldersListingPanel']/div/div/span"));
 		assertEquals(RuntimeVariables.replace("Documents Listing"),
 			selenium.getText(
-				"//div[@id='documentsListingPanel']/div[1]/div/span"));
+				"//div[@id='documentLibraryDocumentsListingPanel']/div/div/span"));
 		assertEquals(RuntimeVariables.replace("Ratings"),
 			selenium.getText(
-				"//div[@id='documentsRatingsPanel']/div[1]/div/span"));
+				"//div[@id='documentLibraryDocumentsRatingsPanel']/div[1]/div/span"));
 		assertTrue(selenium.isChecked("_86_showFoldersSearchCheckbox"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_86_showFoldersSearchCheckbox",
