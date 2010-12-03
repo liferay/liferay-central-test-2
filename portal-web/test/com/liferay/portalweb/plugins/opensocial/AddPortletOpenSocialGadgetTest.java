@@ -66,7 +66,7 @@ public class AddPortletOpenSocialGadgetTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		selenium.typeKeys("layout_configuration_content",
-			RuntimeVariables.replace("g"));
+			RuntimeVariables.replace("h"));
 		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
@@ -75,8 +75,7 @@ public class AddPortletOpenSocialGadgetTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//div[@title='Google Hello World Sample']/p/a")) {
+				if (selenium.isVisible("//div[@title='Hello World!']/p/a")) {
 					break;
 				}
 			}
@@ -87,7 +86,7 @@ public class AddPortletOpenSocialGadgetTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//div[@title='Google Hello World Sample']/p/a",
+		selenium.clickAt("//div[@title='Hello World!']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -107,7 +106,7 @@ public class AddPortletOpenSocialGadgetTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Google Hello World Sample"),
+		assertEquals(RuntimeVariables.replace("Hello World!"),
 			selenium.getText("//header/h1/span"));
 		Thread.sleep(5000);
 		selenium.selectFrame("//iframe[@class=\"aui-gadget\"]");

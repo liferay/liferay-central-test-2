@@ -65,7 +65,7 @@ public class AddPortletYoutube3Test extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		selenium.typeKeys("layout_configuration_content",
-			RuntimeVariables.replace("y"));
+			RuntimeVariables.replace("Y"));
 		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
@@ -74,7 +74,7 @@ public class AddPortletYoutube3Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//div[@title='Youtube']/p/a")) {
+				if (selenium.isVisible("//div[@title='YouTube']/p/a")) {
 					break;
 				}
 			}
@@ -85,7 +85,7 @@ public class AddPortletYoutube3Test extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//div[@title='Youtube']/p/a",
+		selenium.clickAt("//div[@title='YouTube']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
