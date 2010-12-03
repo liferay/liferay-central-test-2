@@ -59,6 +59,11 @@ public class RuntimeVariables {
 
 	private String _replace(String text) {
 
+		// Portal URL
+
+		text = StringUtil.replace(
+			text, "http://localhost:8080", TestPropsValues.PORTAL_URL);
+
 		// Root directory
 
 		text = StringUtil.replace(text, "L:\\portal\\build\\", _sourceDir);
