@@ -550,7 +550,7 @@ else {
 	urlMax.setWindowState(WindowState.MAXIMIZED);
 }
 
-urlMax.setWindowStateChange(true);
+urlMax.setWindowStateRestoreCurrentView(true);
 
 urlMax.setEscapeXml(false);
 
