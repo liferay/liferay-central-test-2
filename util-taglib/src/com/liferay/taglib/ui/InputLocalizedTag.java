@@ -30,6 +30,7 @@ public class InputLocalizedTag extends IncludeTag {
 	public void setDisabled(boolean disabled) {
 		_disabled = disabled;
 	}
+
 	public void setFormName(String formName) {
 		_formName = formName;
 	}
