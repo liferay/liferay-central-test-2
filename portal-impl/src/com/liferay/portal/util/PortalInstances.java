@@ -201,7 +201,7 @@ public class PortalInstances {
 		CompanyThreadLocal.setCompanyId(companyId);
 
 		if (Validator.isNotNull(
-			PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME)) {
+				PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME)) {
 
 			try {
 				Group group = GroupLocalServiceUtil.getGroup(
