@@ -107,11 +107,10 @@ public class UpgradeTags extends UpgradeProcess {
 	}
 
 	protected long addVocabulary(
-			long groupId, long companyId, long userId, String userName,
-			String name)
+			long vocabularyId, long groupId, long companyId, long userId,
+			String userName, String name)
 		throws Exception {
 
-		long vocabularyId = increment();
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 
 		Connection con = null;
@@ -296,7 +295,7 @@ public class UpgradeTags extends UpgradeProcess {
 		if (Validator.isNull(name) ||
 			ArrayUtil.contains(_DEFAULT_CATEGORY_PROPERTY_VALUES, name)) {
 
-			name = _TAGS_VOCABULARY_DEFAULT;
+			name = _DEFAULT_TAGS_VOCABULARY;
 		}
 
 		String key = groupId + StringPool.UNDERLINE + name;
@@ -327,8 +326,11 @@ public class UpgradeTags extends UpgradeProcess {
 				vocabularyId = rs.getLong("vocabularyId");
 			}
 			else {
+				long newVocabularyId = increment();
+
 				vocabularyId = addVocabulary(
-					groupId, companyId, userId, userName, name);
+					newVocabularyId, groupId, companyId, userId, userName,
+					name);
 			}
 		}
 		finally {
@@ -457,11 +459,11 @@ public class UpgradeTags extends UpgradeProcess {
 		deleteEntries();
 	}
 
-	private static final String _TAGS_VOCABULARY_DEFAULT = "Default Tag Set";
-
-	private String[] _DEFAULT_CATEGORY_PROPERTY_VALUES = new String[] {
+	private static final String[] _DEFAULT_CATEGORY_PROPERTY_VALUES = {
 		"undefined", "no category", "category"
 	};
+
+	private static final String _DEFAULT_TAGS_VOCABULARY = "Default Tag Set";
 
 	private Map<String, Long> _entryIdsMap = new HashMap<String, Long>();
 	private Map<String, Long> _vocabularyIdsMap = new HashMap<String, Long>();
