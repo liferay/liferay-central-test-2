@@ -294,6 +294,7 @@ public class DLUtil {
 		_genericNames.put("acc", "music");
 		_genericNames.put("mid", "music");
 		_genericNames.put("mp3", "music");
+		_genericNames.put("ogg", "music");
 		_genericNames.put("wav", "music");
 		_genericNames.put("wma", "music");
 
