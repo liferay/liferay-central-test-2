@@ -230,7 +230,7 @@
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
-		<finder name="G_U" return-type="Collection">
+		<finder name="G_U" return-type="Collection" where="categoryId != -1">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
 		</finder>
@@ -238,7 +238,7 @@
 			<finder-column name="groupId" />
 			<finder-column name="categoryId" />
 		</finder>
-		<finder name="G_S" return-type="Collection">
+		<finder name="G_S" return-type="Collection" where="categoryId != -1">
 			<finder-column name="groupId" />
 			<finder-column name="status" />
 		</finder>
@@ -440,7 +440,7 @@
 			<finder-column name="groupId" />
 			<finder-column name="categoryId" comparator="!=" />
 		</finder>
-		<finder name="G_S" return-type="Collection">
+		<finder name="G_S" return-type="Collection" where="categoryId != -1">
 			<finder-column name="groupId" />
 			<finder-column name="status" />
 		</finder>
