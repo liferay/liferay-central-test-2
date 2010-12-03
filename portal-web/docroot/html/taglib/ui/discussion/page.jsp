@@ -42,8 +42,7 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_ui_discus
 String className = (String)request.getAttribute("liferay-ui:discussion:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discussion:classPK"));
 String formAction = (String)request.getAttribute("liferay-ui:discussion:formAction");
-String originalFormName = (String)request.getAttribute("liferay-ui:discussion:formName");
-String formName = namespace + originalFormName;
+String formName = (String)request.getAttribute("liferay-ui:discussion:formName");
 String permissionClassName = (String)request.getAttribute("liferay-ui:discussion:permissionClassName");
 long permissionClassPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discussion:permissionClassPK"));
 boolean ratingsEnabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:discussion:ratingsEnabled"));
@@ -77,7 +76,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 <c:if test="<%= (messagesCount > 1) || MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.VIEW) %>">
 	<div class="taglib-discussion">
-		<aui:form action="<%= formAction %>" method="post" name="<%= originalFormName %>">
+		<aui:form action="<%= formAction %>" method="post" name="<%= formName %>">
 			<aui:input name="<%= Constants.CMD %>" type="hidden" />
 			<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 			<aui:input name="className" type="hidden" value="<%= className %>" />
@@ -90,7 +89,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			<aui:input name="parentMessageId" type="hidden" />
 			<aui:input name="body" type="hidden" />
 			<aui:input name="workflowAction" type="hidden" value="<%= String.valueOf(WorkflowConstants.ACTION_PUBLISH) %>" />
-			
+
 			<%
 			int i = 0;
 
@@ -99,7 +98,6 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 			<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.ADD_DISCUSSION) %>">
 				<aui:fieldset cssClass="add-comment" id='<%= randomNamespace + "messageScroll0" %>'>
-
 					<div id="<%= randomNamespace %>messageScroll<%= message.getMessageId() %>">
 						<aui:input name='<%= "messageId" + i %>' type="hidden" value="<%= message.getMessageId() %>" />
 						<aui:input name='<%= "parentMessageId" + i %>' type="hidden" value="<%= message.getMessageId() %>" />
@@ -126,7 +124,6 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 					<div id="<%= randomNamespace %>postReplyForm<%= i %>" style="display: none;">
 						<aui:input type="textarea" id='<%= randomNamespace + "postReplyBody" + i %>' label="" name='<%= "postReplyBody" + i %>' style='<%= "height: " + ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT + "px; width: " + ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH + "px;" %>' wrap="soft" />
 
-
 						<%
 						String postReplyButtonLabel = LanguageUtil.get(pageContext, "reply");
 
@@ -138,9 +135,11 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 						<aui:button-row>
 							<aui:button disabled="<%= true %>" id='<%= namespace + randomNamespace + "postReplyButton" + i %>' onClick='<%= randomNamespace + "postReply(" + i + ");" %>' type="submit" value="<%= postReplyButtonLabel %>"  />
 
-							<% String taglibOnClick = "document.getElementById('" + randomNamespace + "postReplyForm" + i +"').style.display = 'none'; void('');"; %>
+							<%
+							String taglibCancel = "document.getElementById('" + randomNamespace + "postReplyForm" + i +"').style.display = 'none'; void('');";
+							%>
 
-							<aui:button type="cancel" onClick="<%= taglibOnClick %>" />
+							<aui:button onClick="<%= taglibCancel %>" type="cancel" />
 						</aui:button-row>
 					</div>
 				</aui:fieldset>
@@ -388,24 +387,25 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 									<aui:input id='<%= randomNamespace + "postReplyBody" + i %>' label="" name='<%= "postReplyBody" + i %>' style='<%= "height: " + ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT + "px; width: " + ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH + "px;" %>' type="textarea"  wrap="soft" />
 
 									<aui:button-row>
-										<aui:button disabled="<%= true %>" id='<%= namespace + randomNamespace + "postReplyButton" + i %>' value="reply" type="submit" onClick='<%= randomNamespace + "postReply(" + i + ");" %>' />
+										<aui:button disabled="<%= true %>" id='<%= namespace + randomNamespace + "postReplyButton" + i %>' onClick='<%= randomNamespace + "postReply(" + i + ");" %>' type="submit" value="reply" />
 
-										<% String taglibOnClick = "document.getElementById('" + randomNamespace + "postReplyForm" + i +"').style.display = 'none'; void('');"; %>
+										<%
+										String taglibCancel = "document.getElementById('" + randomNamespace + "postReplyForm" + i +"').style.display = 'none'; void('');";
+										%>
 
-										<aui:button onClick="<%= taglibOnClick %>" type="cancel" />
+										<aui:button onClick="<%= taglibCancel %>" type="cancel" />
 									</aui:button-row>
 								</div>
 
 								<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, message.getMessageId(), userId, ActionKeys.UPDATE_DISCUSSION) %>">
 									<div id="<%= randomNamespace %>editForm<%= i %>" style="display: none;">
-
 										<aui:input id='<%= randomNamespace + "editReplyBody" + i %>' label="" name='<%= "editReplyBody" + i %>' style='<%= "height: " + ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT + "px; width: " + ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH + "px;" %>'  value="<%= message.getBody() %>" type="textarea" wrap="soft" />
 
 										<%
 										boolean pending = message.isPending();
 
 										String publishButtonLabel = LanguageUtil.get(pageContext, "publish");
-	
+
 										if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, MBDiscussion.class.getName())) {
 											if (pending) {
 												publishButtonLabel = "save";
@@ -417,18 +417,21 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 										%>
 
 										<aui:button-row>
-											<aui:button name='<%= randomNamespace + "editReplyButton" + i %>' value="<%= publishButtonLabel %>" onClick='<%= randomNamespace + "updateMessage(" + i + ");" %>' type="submit"  />
+											<aui:button name='<%= randomNamespace + "editReplyButton" + i %>' onClick='<%= randomNamespace + "updateMessage(" + i + ");" %>' type="submit" value="<%= publishButtonLabel %>" />
 
-											<% String taglibOnClick = "document.getElementById('" + randomNamespace + "ditForm" + i +"').style.display = 'none'; void('');"; %>
+											<%
+											String taglibCancel = "document.getElementById('" + randomNamespace + "ditForm" + i +"').style.display = 'none'; void('');";
+											%>
 
-											<aui:button onClick="<%= taglibOnClick %>" type="cancel" />
+											<aui:button onClick="<%= taglibCancel %>" type="cancel" />
 										</aui:button-row>
 									</div>
 								</c:if>
 
 								</aui:layout>
 							</aui:column>
-					    </aui:layout>
+						</aui:layout>
+
 						<c:if test="<%= i < messages.size() %>">
 							<div class="separator"><!-- --></div>
 						</c:if>
@@ -448,21 +451,21 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 	<aui:script>
 		function <%= randomNamespace %>deleteMessage(i) {
-			eval("var messageId = document.<%= formName %>.<%= namespace %>messageId" + i + ".value;");
+			eval("var messageId = document.<%= namespace %><%= formName %>.<%= namespace %>messageId" + i + ".value;");
 
-			document.<%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-			document.<%= formName %>.<%= namespace %>messageId.value = messageId;
-			submitForm(document.<%= formName %>);
+			document.<%= namespace %><%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
+			document.<%= namespace %><%= formName %>.<%= namespace %>messageId.value = messageId;
+			submitForm(document.<%= namespace %><%= formName %>);
 		}
 
 		function <%= randomNamespace %>postReply(i) {
-			eval("var parentMessageId = document.<%= formName %>.<%= namespace %>parentMessageId" + i + ".value;");
-			eval("var body = document.<%= formName %>.<%= namespace %>postReplyBody" + i + ".value;");
+			eval("var parentMessageId = document.<%= namespace %><%= formName %>.<%= namespace %>parentMessageId" + i + ".value;");
+			eval("var body = document.<%= namespace %><%= formName %>.<%= namespace %>postReplyBody" + i + ".value;");
 
-			document.<%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.ADD %>";
-			document.<%= formName %>.<%= namespace %>parentMessageId.value = parentMessageId;
-			document.<%= formName %>.<%= namespace %>body.value = body;
-			submitForm(document.<%= formName %>);
+			document.<%= namespace %><%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.ADD %>";
+			document.<%= namespace %><%= formName %>.<%= namespace %>parentMessageId.value = parentMessageId;
+			document.<%= namespace %><%= formName %>.<%= namespace %>body.value = body;
+			submitForm(document.<%= namespace %><%= formName %>);
 		}
 
 		function <%= randomNamespace %>scrollIntoView(messageId) {
@@ -475,22 +478,22 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 		}
 
 		function <%= randomNamespace %>updateMessage(i, pending) {
-			eval("var messageId = document.<%= formName %>.<%= namespace %>messageId" + i + ".value;");
-			eval("var body = document.<%= formName %>.<%= namespace %>editReplyBody" + i + ".value;");
+			eval("var messageId = document.<%= namespace %><%= formName %>.<%= namespace %>messageId" + i + ".value;");
+			eval("var body = document.<%= namespace %><%= formName %>.<%= namespace %>editReplyBody" + i + ".value;");
 
 			if (pending) {
-				document.<%= formName %>.<%= namespace %>workflowAction.value = <%= WorkflowConstants.ACTION_SAVE_DRAFT %>;
+				document.<%= namespace %><%= formName %>.<%= namespace %>workflowAction.value = <%= WorkflowConstants.ACTION_SAVE_DRAFT %>;
 			}
 
-			document.<%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
-			document.<%= formName %>.<%= namespace %>messageId.value = messageId;
-			document.<%= formName %>.<%= namespace %>body.value = body;
-			submitForm(document.<%= formName %>);
+			document.<%= namespace %><%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
+			document.<%= namespace %><%= formName %>.<%= namespace %>messageId.value = messageId;
+			document.<%= namespace %><%= formName %>.<%= namespace %>body.value = body;
+			submitForm(document.<%= namespace %><%= formName %>);
 		}
 	</aui:script>
 
 	<aui:script use="aui-event-input">
-		var form = A.one(document.<%= formName %>);
+		var form = A.one(document.<%= namespace %><%= formName %>);
 
 		if (form) {
 			var textareas = form.all('textarea');
@@ -509,7 +512,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 						if (button) {
 							button.set('disabled', !currentValue.length);
 
-							if(currentValue.length) {
+							if (currentValue.length) {
 								button.ancestor('.aui-button').removeClass('aui-button-disabled');
 							}
 							else {
