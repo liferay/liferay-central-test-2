@@ -148,11 +148,18 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		}
 
 		try {
-
 			Group group = null;
 
 			if (groupId > 0) {
 				group = GroupLocalServiceUtil.getGroup(groupId);
+
+				if (group.isLayout())) {
+					long parentGroupId = group.getParentGroupId();
+
+					if (parentGroupId > 0) {
+						group = GroupLocalServiceUtil.getGroup(parentGroupId);
+					}
+				}
 			}
 
 			List<Group> userGroups = GroupLocalServiceUtil.getUserGroups(
@@ -205,14 +212,6 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 						userId, groupId);
 
 				roles.addAll(userGroupGroupRoles);
-
-				if ((group != null) && (group.isLayout())) {
-					long parentGroupId = group.getParentGroupId();
-
-					if (parentGroupId > 0) {
-						group = GroupLocalServiceUtil.getGroup(parentGroupId);
-					}
-				}
 
 				if ((group != null) &&
 					((group.isCommunity() && userGroups.contains(group)) ||
