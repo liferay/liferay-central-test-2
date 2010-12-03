@@ -17,4 +17,5 @@
 .taglib-user-display .user-details .user-name {
 	clear: both;
 	display: block;
+	text-align: center;
 }

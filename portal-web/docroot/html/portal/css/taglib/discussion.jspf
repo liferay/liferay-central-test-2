@@ -14,16 +14,6 @@
  */
 --%>
 
-.taglib-discussion table.add-comment {
-	border-width: 0;
-	border-collapse: collapse;
-	width: 100%;
-}
-
-.taglib-discussion table.add-comment td {
-	padding: 0
-}
-
 .taglib-discussion table.tree-walker {
 	border-width: 0;
 	border-collapse: collapse;
@@ -32,8 +22,4 @@
 
 .taglib-discussion table.tree-walker td {
 	padding: 4px;
-}
-
-.taglib-discussion td img {
-	vertical-align: middle;
 }

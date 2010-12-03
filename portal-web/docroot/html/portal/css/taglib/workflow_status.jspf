@@ -14,6 +14,10 @@
  */
 --%>
 
+.taglib-workflow-status {
+	margin: 0.5em 0;
+}
+
 .taglib-workflow-status .workflow-id {
 	background: url(<%= themeImagesPath %>/common/history.png) no-repeat 0 50%;
 	color: #999;
