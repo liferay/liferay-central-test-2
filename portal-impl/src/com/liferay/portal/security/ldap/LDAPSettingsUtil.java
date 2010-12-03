@@ -158,12 +158,12 @@ public class LDAPSettingsUtil {
 		}
 	}
 
-	public static boolean isGroupExportEnabled(long companyId)
+	public static boolean isExportGroupEnabled(long companyId)
 		throws SystemException {
 
 		if (PrefsPropsUtil.getBoolean(
-				companyId, PropsKeys.LDAP_GROUP_EXPORT_ENABLED,
-				PropsValues.LDAP_GROUP_EXPORT_ENABLED)) {
+				companyId, PropsKeys.LDAP_EXPORT_GROUP_ENABLED,
+				PropsValues.LDAP_EXPORT_GROUP_ENABLED)) {
 
 			return true;
 		}

@@ -947,11 +947,11 @@ public interface PropsKeys {
 
 	public static final String LDAP_EXPORT_ENABLED = "ldap.export.enabled";
 
+	public static final String LDAP_EXPORT_GROUP_ENABLED = "ldap.export.group.enabled";
+
 	public static final String LDAP_FACTORY_INITIAL = "ldap.factory.initial";
 
 	public static final String LDAP_GROUP_DEFAULT_OBJECT_CLASSES = "ldap.group.default.object.classes";
-
-	public static final String LDAP_GROUP_EXPORT_ENABLED = "ldap.group.export.enabled";
 
 	public static final String LDAP_GROUP_MAPPINGS = "ldap.group.mappings";
 
