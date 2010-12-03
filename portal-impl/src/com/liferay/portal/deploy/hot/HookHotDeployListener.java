@@ -1009,15 +1009,19 @@ public class HookHotDeployListener
 
 			Long companyId = CompanyThreadLocal.getCompanyId();
 
-			long[] companyIds = PortalInstances.getCompanyIds();
+			try {
+				long[] companyIds = PortalInstances.getCompanyIds();
 
-			for (long curCompanyId : companyIds) {
-				CompanyThreadLocal.setCompanyId(curCompanyId);
+				for (long curCompanyId : companyIds) {
+					CompanyThreadLocal.setCompanyId(curCompanyId);
 
-				simpleAction.run(new String[] {String.valueOf(curCompanyId)});
+					simpleAction.run(
+						new String[] {String.valueOf(curCompanyId)});
+				}
 			}
-
-			CompanyThreadLocal.setCompanyId(companyId);
+			finally {
+				CompanyThreadLocal.setCompanyId(companyId);
+			}
 
 			return null;
 		}
