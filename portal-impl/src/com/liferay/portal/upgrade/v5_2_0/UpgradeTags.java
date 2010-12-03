@@ -17,7 +17,9 @@ package com.liferay.portal.upgrade.v5_2_0;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.dao.jdbc.SmartResultSet;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.asset.NoSuchTagException;
 
 import java.sql.Connection;
@@ -104,6 +106,53 @@ public class UpgradeTags extends UpgradeProcess {
 		}
 	}
 
+	protected long addVocabulary(
+			long groupId, long companyId, long userId, String userName,
+			String name)
+		throws Exception {
+
+		long vocabularyId = increment();
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("insert into TagsVocabulary (vocabularyId, groupId, ");
+			sb.append("companyId, userId, userName, createDate, ");
+			sb.append("modifiedDate, name, description, folksonomy) values (");
+			sb.append("?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+			String sql = sb.toString();
+
+			ps = con.prepareStatement(sql);
+
+			ps.setLong(1, vocabularyId);
+			ps.setLong(2, groupId);
+			ps.setLong(3, companyId);
+			ps.setLong(4, userId);
+			ps.setString(5, userName);
+			ps.setTimestamp(6, now);
+			ps.setTimestamp(7, now);
+			ps.setString(8, name);
+			ps.setString(9, StringPool.BLANK);
+			ps.setBoolean(10, true);
+
+			ps.executeUpdate();
+
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return vocabularyId;
+	}
+
 	protected long copyEntry(long groupId, long entryId) throws Exception {
 		String key = groupId + StringPool.UNDERLINE + entryId;
 
@@ -161,7 +210,9 @@ public class UpgradeTags extends UpgradeProcess {
 			"No AssetTag exists with the primary key " + entryId);
 	}
 
-	public void copyProperties(long entryId, long newEntryId) throws Exception {
+	protected void copyProperties(long entryId, long newEntryId)
+		throws Exception {
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -231,7 +282,62 @@ public class UpgradeTags extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 		updateGroupIds();
+		updateCategories();
 		updateAssets();
+	}
+
+	protected long getVocabularyId(
+			long groupId, long companyId, long userId, String userName,
+			String name)
+		throws Exception {
+
+		name = name.trim();
+
+		if (Validator.isNull(name) ||
+			ArrayUtil.contains(_DEFAULT_CATEGORY_PROPERTY_VALUES, name)) {
+
+			name = _TAGS_VOCABULARY_DEFAULT;
+		}
+
+		String key = groupId + StringPool.UNDERLINE + name;
+
+		Long vocabularyId = _vocabularyIdsMap.get(key);
+
+		if (vocabularyId != null) {
+			return vocabularyId.longValue();
+		}
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select vocabularyId from TagsVocabulary where groupId = ? " +
+					"and name = ?");
+
+			ps.setLong(1, groupId);
+			ps.setString(2, name);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				vocabularyId = rs.getLong("vocabularyId");
+			}
+			else {
+				vocabularyId = addVocabulary(
+					groupId, companyId, userId, userName, name);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		_vocabularyIdsMap.put(key, vocabularyId);
+
+		return vocabularyId.longValue();
 	}
 
 	protected void updateAssets() throws Exception {
@@ -256,6 +362,56 @@ public class UpgradeTags extends UpgradeProcess {
 				runSQL(
 					"update TagsAsset set visible = FALSE where classPK = " +
 						resourcePrimKey);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updateCategories() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("select TE.entryId, TE.groupId, TE.companyId, ");
+			sb.append("TE.userId, TE.userName, TP.propertyId, TP.value from ");
+			sb.append("TagsEntry TE, TagsProperty TP where TE.entryId = ");
+			sb.append("TP.entryId and TE.vocabularyId <= 0 and TP.key_ = ");
+			sb.append("'category'");
+
+			String sql = sb.toString();
+
+			ps = con.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+
+			SmartResultSet srs = new SmartResultSet(rs);
+
+			while (srs.next()) {
+				long entryId = srs.getLong("TE.entryId");
+				long groupId = srs.getLong("TE.groupId");
+				long companyId = srs.getLong("TE.companyId");
+				long userId = srs.getLong("TE.userId");
+				String userName = srs.getString("TE.userName");
+				long propertyId = srs.getLong("TP.propertyId");
+				String value = srs.getString("TP.value");
+
+				long vocabularyId = getVocabularyId(
+					groupId, companyId, userId, userName, value);
+
+				runSQL(
+					"update TagsEntry set vocabularyId = " + vocabularyId +
+						" where entryId = " + entryId);
+
+				runSQL(
+					"delete from TagsProperty where propertyId = " +
+						propertyId);
 			}
 		}
 		finally {
@@ -301,6 +457,13 @@ public class UpgradeTags extends UpgradeProcess {
 		deleteEntries();
 	}
 
+	private static final String _TAGS_VOCABULARY_DEFAULT = "Default Tag Set";
+
+	private String[] _DEFAULT_CATEGORY_PROPERTY_VALUES = new String[] {
+		"undefined", "no category", "category"
+	};
+
 	private Map<String, Long> _entryIdsMap = new HashMap<String, Long>();
+	private Map<String, Long> _vocabularyIdsMap = new HashMap<String, Long>();
 
 }
