@@ -271,6 +271,8 @@ public class EditFileEntryAction extends PortletAction {
 				title = sourceFileName;
 			}
 
+			serviceContext.setAttribute("extension", extension);
+
 			// Add file entry
 
 			DLFileEntry fileEntry = DLAppServiceUtil.addFileEntry(
@@ -282,6 +284,14 @@ public class EditFileEntryAction extends PortletAction {
 				fileEntry.getFileEntryId(), -1);
 		}
 		else {
+
+			if (Validator.isNull(sourceFileName)) {
+				sourceFileName = title;
+			}
+
+			String extension = FileUtil.getExtension(sourceFileName);
+
+			serviceContext.setAttribute("extension", extension);
 
 			// Update file entry
 
