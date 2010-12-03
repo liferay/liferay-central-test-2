@@ -137,7 +137,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 	protected void updateFileVersions() throws Exception {
 		try {
-			runSQL("alter_column_type DLFileVersion title VARCHAR(255)");
+			runSQL("alter_column_type DLFileVersion extraSettings TEXT null")
+			runSQL("alter_column_type DLFileVersion title VARCHAR(255) null");
 		}
 		catch (Exception e) {
 			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
