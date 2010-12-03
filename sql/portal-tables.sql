@@ -443,7 +443,7 @@ create table DLFileVersion (
 	title VARCHAR(255) null,
 	description STRING null,
 	changeLog VARCHAR(75) null,
-	extraSettings VARCHAR(75) null,
+	extraSettings TEXT null,
 	version VARCHAR(75) null,
 	size_ LONG,
 	status INTEGER,

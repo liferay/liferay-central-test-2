@@ -1203,7 +1203,9 @@
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="changeLog" type="String" />
-		<field name="extraSettings" type="String" />
+		<field name="extraSettings" type="String">
+			<hint-collection name="CLOB" />
+		</field>
 		<field name="version" type="String" />
 		<field name="size" type="long" />
 		<field name="status" type="int" />
