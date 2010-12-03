@@ -257,9 +257,6 @@ public class EditFileEntryAction extends PortletAction {
 			DLFileEntry.class.getName(), actionRequest);
 
 		if (cmd.equals(Constants.ADD)) {
-
-			// Get title with extension
-
 			String extension = FileUtil.getExtension(sourceFileName);
 
 			if (Validator.isNotNull(title)) {
@@ -284,7 +281,6 @@ public class EditFileEntryAction extends PortletAction {
 				fileEntry.getFileEntryId(), -1);
 		}
 		else {
-
 			if (Validator.isNull(sourceFileName)) {
 				sourceFileName = title;
 			}
