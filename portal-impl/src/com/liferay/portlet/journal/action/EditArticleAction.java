@@ -607,6 +607,9 @@ public class EditArticleAction extends PortletAction {
 
 			// Update article
 
+			article = JournalArticleServiceUtil.getArticle(
+				groupId, articleId, version);
+
 			String tempOldUrlTitle = article.getUrlTitle();
 
 			article = JournalArticleServiceUtil.updateArticle(
