@@ -141,8 +141,7 @@ public class EditArticleAction extends PortletAction {
 						portletConfig, actionRequest, article, redirect);
 				}
 
-				if (redirect.indexOf("/content/" + oldUrlTitle + "?") != -1) {
-
+				if (redirect.contains("/content/" + oldUrlTitle + "?")) {
 					int pos = redirect.indexOf("?");
 
 					if (pos == -1) {
@@ -154,13 +153,14 @@ public class EditArticleAction extends PortletAction {
 
 					newRedirect += article.getUrlTitle();
 
-					if (oldUrlTitle.indexOf("/maximized") != -1) {
+					if (oldUrlTitle.contains("/maximized")) {
 						newRedirect += "/maximized";
 					}
 
 					if (pos < redirect.length()) {
 						newRedirect +=
-							"?" + redirect.substring(pos + 1, redirect.length());
+							"?" +
+								redirect.substring(pos + 1, redirect.length());
 					}
 
 					redirect = newRedirect;
@@ -606,6 +606,7 @@ public class EditArticleAction extends PortletAction {
 			}
 
 			// Update article
+
 			String tempOldUrlTitle = article.getUrlTitle();
 
 			article = JournalArticleServiceUtil.updateArticle(
@@ -621,7 +622,6 @@ public class EditArticleAction extends PortletAction {
 			if (!tempOldUrlTitle.equals(article.getUrlTitle())) {
 				oldUrlTitle = tempOldUrlTitle;
 			}
-
 		}
 
 		// Recent articles
