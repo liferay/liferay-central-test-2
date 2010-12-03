@@ -174,26 +174,6 @@ public class PortalInstances {
 					WebKeys.VIRTUAL_HOST_LAYOUT_SET, layoutSet);
 			}
 		}
-		else if (Validator.isNotNull(
-					PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME)) {
-
-			try {
-				Group group = GroupLocalServiceUtil.getGroup(
-					companyId,
-					PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME);
-
-				LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-					group.getGroupId(), false);
-
-				if (Validator.isNull(layoutSet.getVirtualHost())) {
-					request.setAttribute(
-						WebKeys.VIRTUAL_HOST_LAYOUT_SET, layoutSet);
-				}
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-		}
 
 		if (companyId <= 0) {
 			companyId = GetterUtil.getLong(
@@ -219,6 +199,27 @@ public class PortalInstances {
 		request.setAttribute(WebKeys.COMPANY_ID, new Long(companyId));
 
 		CompanyThreadLocal.setCompanyId(companyId);
+
+		if (Validator.isNotNull(
+			PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME)) {
+
+			try {
+				Group group = GroupLocalServiceUtil.getGroup(
+					companyId,
+					PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME);
+
+				LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+					group.getGroupId(), false);
+
+				if (Validator.isNull(layoutSet.getVirtualHost())) {
+					request.setAttribute(
+						WebKeys.VIRTUAL_HOST_LAYOUT_SET, layoutSet);
+				}
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
 
 		return companyId;
 	}
