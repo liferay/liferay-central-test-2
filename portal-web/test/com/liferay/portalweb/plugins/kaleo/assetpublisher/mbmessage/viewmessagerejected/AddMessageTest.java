@@ -51,7 +51,6 @@ public class AddMessageTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
 		selenium.type("_19_subject",
 			RuntimeVariables.replace("Message Boards Message Subject"));
 		selenium.saveScreenShotAndSource();
@@ -62,33 +61,12 @@ public class AddMessageTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace(
-							"Your request completed successfully.")
-										.equals(selenium.getText(
-								"//section/div/div/div/div[1]"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace(
 				"There are no threads in this category."),
-			selenium.getText("//div[5]/div/div[2]/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		selenium.clickAt("link=My Posts", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

@@ -88,11 +88,11 @@ public class AddWorkflowCommentAssignedToMyRolesTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-success'][1]"));
 		assertEquals(RuntimeVariables.replace(
 				"My Workflow Tasks Workflow Task Comment"),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//form/div/div/div/div/div[3]/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
-			selenium.getText("//td[1]/div/div/div[2]/a"));
+			selenium.getText("//div[2]/a"));
 	}
 }

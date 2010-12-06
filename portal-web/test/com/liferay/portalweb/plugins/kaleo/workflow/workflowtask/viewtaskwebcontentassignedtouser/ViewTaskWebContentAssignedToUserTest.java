@@ -96,6 +96,6 @@ public class ViewTaskWebContentAssignedToUserTest extends BaseTestCase {
 			selenium.getText(
 				"//div[@class='task-activity task-type-1'][2]/div[3]"));
 		assertEquals(RuntimeVariables.replace("Be the first."),
-			selenium.getText("//td/a"));
+			selenium.getText("//fieldset/div/a"));
 	}
 }

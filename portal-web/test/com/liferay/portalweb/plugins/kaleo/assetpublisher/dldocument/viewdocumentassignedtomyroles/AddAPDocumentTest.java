@@ -45,7 +45,6 @@ public class AddAPDocumentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
 		selenium.clickAt("//div/ul/li/strong/a",
 			RuntimeVariables.replace("Add New"));
 
@@ -67,14 +66,16 @@ public class AddAPDocumentTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Document Library Document"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a"));
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
 		selenium.type("_20_file",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\plugins\\kaleo\\assetpublisher\\viewdocumentassignedtome\\dependencies\\test_document.txt"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\plugins\\kaleo\\assetpublisher\\viewdocumentassignedtomyroles\\dependencies\\test_document.txt"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Submit for Publication']",
 			RuntimeVariables.replace(""));

@@ -45,7 +45,6 @@ public class AddAPWebContentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
 		selenium.clickAt("//div/ul/li/strong/a",
 			RuntimeVariables.replace("Add New"));
 
@@ -67,6 +66,9 @@ public class AddAPWebContentTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Web Content"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a"));
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a"));
 		selenium.waitForPageToLoad("30000");

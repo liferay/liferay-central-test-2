@@ -49,7 +49,7 @@ public class AssignToMeMessageActionsTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to you."),
-			selenium.getText("//div[@id='myTasksPanel']/div[2]/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		assertEquals(RuntimeVariables.replace("Review"),
 			selenium.getText("//td[1]/a"));
 		assertEquals(RuntimeVariables.replace("Message Boards Message Subject"),
@@ -59,7 +59,6 @@ public class AssignToMeMessageActionsTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("//td[4]/a"));
 		assertEquals(RuntimeVariables.replace("Never"),
 			selenium.getText("//td[5]/a"));
-		Thread.sleep(5000);
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -80,6 +79,9 @@ public class AssignToMeMessageActionsTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Assign to Me"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a");
 
 		for (int second = 0;; second++) {
@@ -102,30 +104,9 @@ public class AssignToMeMessageActionsTest extends BaseTestCase {
 		selenium.clickAt("//div/button[1]", RuntimeVariables.replace("OK"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace(
-							"Your request completed successfully.")
-										.equals(selenium.getText(
-								"//section/div/div/div/div"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("Review"),
 			selenium.getText("//td[1]/a"));
 		assertEquals(RuntimeVariables.replace("Message Boards Message Subject"),
@@ -137,6 +118,6 @@ public class AssignToMeMessageActionsTest extends BaseTestCase {
 			selenium.getText("//td[5]/a"));
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to your roles."),
-			selenium.getText("//div[@id='myRolesTasksPanel']/div[2]/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 	}
 }

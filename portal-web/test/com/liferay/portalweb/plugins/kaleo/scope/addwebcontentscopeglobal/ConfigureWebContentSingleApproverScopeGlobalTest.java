@@ -104,7 +104,7 @@ public class ConfigureWebContentSingleApproverScopeGlobalTest
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals("Single Approver (Version 1)",
 			selenium.getSelectedLabel(
 				"_152_workflowDefinitionName@com.liferay.portlet.journal.model.JournalArticle"));

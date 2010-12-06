@@ -100,7 +100,7 @@ public class AddTaskWebContentCommentCompletedTest extends BaseTestCase {
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("Workflow Task Comment"),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//form/div/div/div/div/div[3]/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
 			selenium.getText("//a[@class='user-name']"));
 	}

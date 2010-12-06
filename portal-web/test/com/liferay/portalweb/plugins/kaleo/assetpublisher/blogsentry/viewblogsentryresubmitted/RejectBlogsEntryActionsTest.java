@@ -58,8 +58,7 @@ public class RejectBlogsEntryActionsTest extends BaseTestCase {
 			selenium.getText("//td[5]/a"));
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to your roles."),
-			selenium.getText("//div[@id='myRolesTasksPanel']/div[2]/div[1]"));
-		Thread.sleep(5000);
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -80,6 +79,9 @@ public class RejectBlogsEntryActionsTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Reject"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
 
 		for (int second = 0;; second++) {
@@ -112,7 +114,7 @@ public class RejectBlogsEntryActionsTest extends BaseTestCase {
 				if (RuntimeVariables.replace(
 							"Your request completed successfully.")
 										.equals(selenium.getText(
-								"//section/div/div/div/div"))) {
+								"//div[@class='portlet-msg-success']"))) {
 					break;
 				}
 			}
@@ -125,7 +127,7 @@ public class RejectBlogsEntryActionsTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -162,6 +164,6 @@ public class RejectBlogsEntryActionsTest extends BaseTestCase {
 			selenium.getText("//td[5]/a"));
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to your roles."),
-			selenium.getText("//div[@id='myRolesTasksPanel']/div[2]/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 	}
 }

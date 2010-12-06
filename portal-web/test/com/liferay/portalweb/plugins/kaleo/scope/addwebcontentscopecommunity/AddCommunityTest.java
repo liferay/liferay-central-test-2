@@ -50,7 +50,6 @@ public class AddCommunityTest extends BaseTestCase {
 		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
 		selenium.type("_134_name", RuntimeVariables.replace("Community Name"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
@@ -58,7 +57,7 @@ public class AddCommunityTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("Community Name"),
 			selenium.getText("//tr[3]/td[1]"));
 	}

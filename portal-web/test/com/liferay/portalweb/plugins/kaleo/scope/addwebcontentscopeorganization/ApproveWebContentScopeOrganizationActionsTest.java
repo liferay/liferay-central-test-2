@@ -59,7 +59,7 @@ public class ApproveWebContentScopeOrganizationActionsTest extends BaseTestCase 
 			selenium.getText("//td[5]/a"));
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to your roles."),
-			selenium.getText("//div[@id='myRolesTasksPanel']/div[2]/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -80,6 +80,9 @@ public class ApproveWebContentScopeOrganizationActionsTest extends BaseTestCase 
 		}
 
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Approve"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a");
 
 		for (int second = 0;; second++) {
@@ -104,12 +107,12 @@ public class ApproveWebContentScopeOrganizationActionsTest extends BaseTestCase 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to you."),
-			selenium.getText("//div[@id='myTasksPanel']/div[2]/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to your roles."),
-			selenium.getText("//div[@id='myRolesTasksPanel']/div[2]/div[1]"));
+			selenium.getText("xPath=(//div[@class='portlet-msg-info'])[2]"));
 	}
 }

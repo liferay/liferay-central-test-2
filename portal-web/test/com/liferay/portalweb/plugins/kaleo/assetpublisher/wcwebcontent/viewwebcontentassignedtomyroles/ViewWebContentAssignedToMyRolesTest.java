@@ -79,7 +79,7 @@ public class ViewWebContentAssignedToMyRolesTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to you."),
-			selenium.getText("//div[@id='myTasksPanel']/div[2]/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		assertEquals(RuntimeVariables.replace("Review"),
 			selenium.getText("//td[1]/a"));
 		assertEquals(RuntimeVariables.replace("Web Content Name"),
@@ -93,6 +93,6 @@ public class ViewWebContentAssignedToMyRolesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("There are no completed tasks."),
-			selenium.getText("//form/div[2]/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 	}
 }

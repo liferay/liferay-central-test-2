@@ -68,7 +68,7 @@ public class ViewTaskWebContentCommentAssignedToMyRolesTest extends BaseTestCase
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Workflow Task Comment"),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//form/div/div/div/div/div[3]/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
 			selenium.getText("//a[@class='user-name']"));
 		selenium.open("/web/guest/home/");
@@ -115,7 +115,7 @@ public class ViewTaskWebContentCommentAssignedToMyRolesTest extends BaseTestCase
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Workflow Task Comment"),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//form/div/div/div/div/div[3]/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
 			selenium.getText("//a[@class='user-name']"));
 		selenium.open("/web/guest/home/");
@@ -165,7 +165,7 @@ public class ViewTaskWebContentCommentAssignedToMyRolesTest extends BaseTestCase
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Workflow Task Comment"),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//form/div/div/div/div/div[3]/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
 			selenium.getText("//a[@class='user-name']"));
 	}

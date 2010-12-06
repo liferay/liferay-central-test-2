@@ -87,6 +87,9 @@ public class TearDownMessageTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("Delete"),
+					selenium.getText(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
 				selenium.waitForPageToLoad("30000");
@@ -126,6 +129,9 @@ public class TearDownMessageTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("Delete"),
+					selenium.getText(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
 				selenium.waitForPageToLoad("30000");
@@ -165,6 +171,9 @@ public class TearDownMessageTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("Delete"),
+					selenium.getText(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
 				selenium.waitForPageToLoad("30000");
@@ -204,6 +213,9 @@ public class TearDownMessageTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("Delete"),
+					selenium.getText(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
 				selenium.waitForPageToLoad("30000");
@@ -243,6 +255,9 @@ public class TearDownMessageTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("Delete"),
+					selenium.getText(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
 				selenium.waitForPageToLoad("30000");
