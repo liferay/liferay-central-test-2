@@ -63,6 +63,10 @@ public abstract class BaseIndexer implements Indexer {
 		try {
 			Document document = doGetDocument(obj);
 
+			if (document == null) {
+				return null;
+			}
+
 			Map<String, Field> fields = document.getFields();
 
 			Field groupIdField = fields.get(Field.GROUP_ID);
