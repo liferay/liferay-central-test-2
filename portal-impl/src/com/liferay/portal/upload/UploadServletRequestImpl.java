@@ -14,6 +14,7 @@
 
 package com.liferay.portal.upload;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
@@ -48,7 +49,14 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 public class UploadServletRequestImpl
 	extends HttpServletRequestWrapper implements UploadServletRequest {
 
-	public static File getTempDir() {
+	public static File getTempDir() throws SystemException {
+		if (_tempDir == null) {
+			_tempDir = new File(
+				PrefsPropsUtil.getString(
+					PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR,
+					SystemProperties.get(SystemProperties.TMP_DIR)));
+		}
+
 		return _tempDir;
 	}
 
@@ -63,7 +71,7 @@ public class UploadServletRequestImpl
 
 		try {
 			ServletFileUpload servletFileUpload = new LiferayFileUpload(
-				new LiferayFileItemFactory(_tempDir), request);
+				new LiferayFileItemFactory(getTempDir()), request);
 
 			servletFileUpload.setSizeMax(
 				PrefsPropsUtil.getLong(
@@ -264,18 +272,6 @@ public class UploadServletRequestImpl
 		UploadServletRequestImpl.class);
 
 	private static File _tempDir;
-
-	static {
-		try {
-			_tempDir = new File(
-				PrefsPropsUtil.getString(
-					PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR,
-					SystemProperties.get(SystemProperties.TMP_DIR)));
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	private LiferayServletRequest _liferayServletRequest;
 	private Map<String, LiferayFileItem[]> _params;
