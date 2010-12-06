@@ -15,6 +15,8 @@
 package com.liferay.portal.scheduler.quartz;
 
 import com.liferay.portal.kernel.bean.BeanReference;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
@@ -550,6 +552,12 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 	}
 
 	protected void cleanTemporaryJobs() throws Exception {
+		DB db = DBFactoryUtil.getDB();
+
+		if (db.getType().equals(DB.TYPE_HYPERSONIC)) {
+			return;
+		}
+
 		String[] groupNames = _scheduler.getJobGroupNames();
 
 		for (String groupName : groupNames) {
