@@ -682,10 +682,11 @@ public class OrganizationLocalServiceImpl
 			attributes.put("name", name);
 			attributes.put("params", params);
 
-			if (parentOrganizationId > 0) {
-				attributes.put(
-					"parentOrganizationId",
-					String.valueOf(parentOrganizationId));
+			if (parentOrganizationId !=
+				OrganizationConstants.ANY_PARENT_ORGANIZATION_ID) {
+					attributes.put(
+						"parentOrganizationId",
+						String.valueOf(parentOrganizationId));
 			}
 
 			attributes.put("region", region);
