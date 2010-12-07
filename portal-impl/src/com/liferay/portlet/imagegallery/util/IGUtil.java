@@ -88,6 +88,9 @@ public class IGUtil {
 
 			portletURL.setParameter("struts_action", strutsAction);
 
+			portletURL.setParameter(
+				"groupId", String.valueOf(folder.getGroupId()));
+
 			PortalUtil.addPortletBreadcrumbEntry(
 				request, themeDisplay.translate("images-home"),
 				portletURL.toString());
@@ -105,12 +108,18 @@ public class IGUtil {
 			portletURL.setParameter(
 				"folderId", String.valueOf(ancestorFolder.getFolderId()));
 
+			portletURL.setParameter(
+				"groupId", String.valueOf(folder.getGroupId()));
+
 			PortalUtil.addPortletBreadcrumbEntry(
 				request, ancestorFolder.getName(), portletURL.toString());
 		}
 
 		portletURL.setParameter(
 			"folderId", String.valueOf(folder.getFolderId()));
+
+		portletURL.setParameter(
+			"groupId", String.valueOf(folder.getGroupId()));
 
 		PortalUtil.addPortletBreadcrumbEntry(
 			request, folder.getName(), portletURL.toString());
