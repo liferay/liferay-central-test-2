@@ -371,9 +371,9 @@ public class SeleneseToJavaBuilder {
 					sb.append("assertNotEquals");
 				}
 
-				sb.append("(\"");
+				sb.append("(RuntimeVariables.replace(\"");
 				sb.append(param2);
-				sb.append("\", selenium.getLocation());");
+				sb.append("\"), selenium.getLocation());");
 			}
 			else if (param1.equals("assertElementNotPresent") ||
 					 param1.equals("assertElementPresent")) {
