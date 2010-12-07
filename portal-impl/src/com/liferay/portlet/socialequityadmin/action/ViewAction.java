@@ -117,6 +117,15 @@ public class ViewAction extends PortletAction {
 		updateModel(actionRequest, mergedMapping, "participationLifespan");
 		updateModel(actionRequest, mergedMapping, "participationValue");
 
+		String className = equityActionMapping.getClassName();
+
+		boolean isUnique = ParamUtil.getBoolean(
+			actionRequest,
+			className + "." + equityActionMapping.getActionId() + ".unique",
+			false);
+
+		mergedMapping.setUnique(isUnique);
+
 		return mergedMapping;
 	}
 
@@ -133,6 +142,9 @@ public class ViewAction extends PortletAction {
 				equityActionMapping.getActionId());
 
 		for (SocialEquitySetting equitySetting : equitySettings) {
+			mergedEquityActionMapping.setUnique(
+				equitySetting.isUniqueEntry());
+
 			if (equitySetting.getType() ==
 					SocialEquitySettingConstants.TYPE_INFORMATION) {
 

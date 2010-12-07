@@ -64,6 +64,10 @@ boolean enabled = SocialEquityGroupSettingLocalServiceUtil.isEnabled(themeDispla
 						value="<%= ResourceActionsUtil.getAction(locale, equityActionMapping.getActionId()) %>"
 					/>
 
+					<liferay-ui:search-container-column-text name="unique">
+						<aui:input label="" name='<%= className + "." + equityActionMapping.getActionId() + ".unique" %>' type="checkbox" value="<%= equityActionMapping.isUnique() %>" />
+					</liferay-ui:search-container-column-text>
+
 					<liferay-ui:search-container-column-text name="information-value">
 						<aui:input label="" name='<%= className + "." + equityActionMapping.getActionId() + ".informationValue" %>' size="4" type="text" value="<%= equityActionMapping.getInformationValue() %>" />
 					</liferay-ui:search-container-column-text>
