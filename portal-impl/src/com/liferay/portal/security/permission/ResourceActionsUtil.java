@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -1148,6 +1149,14 @@ public class ResourceActionsUtil {
 			return;
 		}
 
+		boolean isUnique = false;
+
+		Attribute uniqueAttribute = actionKeyElement.attribute("unique");
+
+		if (uniqueAttribute != null) {
+			isUnique = GetterUtil.getBoolean(uniqueAttribute.getStringValue());
+		}
+
 		int informationDailyLimit = GetterUtil.getInteger(
 			socialEquityMappingElement.elementText("information-daily-limit"));
 		int informationLifespan = GetterUtil.getInteger(
@@ -1167,6 +1176,7 @@ public class ResourceActionsUtil {
 
 		socialEquityActionMapping.setActionId(actionKey);
 		socialEquityActionMapping.setClassName(name);
+		socialEquityActionMapping.setUnique(isUnique);
 		socialEquityActionMapping.setInformationDailyLimit(
 			informationDailyLimit);
 		socialEquityActionMapping.setInformationLifespan(informationLifespan);
