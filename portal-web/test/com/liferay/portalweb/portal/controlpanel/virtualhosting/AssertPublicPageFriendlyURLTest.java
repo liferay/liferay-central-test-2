@@ -24,14 +24,16 @@ public class AssertPublicPageFriendlyURLTest extends BaseTestCase {
 	public void testAssertPublicPageFriendlyURL() throws Exception {
 		selenium.open("/web/alpha/");
 		Thread.sleep(5000);
-		assertEquals("http://localhost:8080/web/alpha/", selenium.getLocation());
+		assertEquals(RuntimeVariables.replace(
+				"http://localhost:8080/web/alpha/"), selenium.getLocation());
 		assertEquals(RuntimeVariables.replace("Virtual Hosting Community"),
 			selenium.getText("//li[2]/span/a"));
 		assertTrue(selenium.isElementPresent("link=Public Page"));
 		selenium.clickAt("link=Public Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals("http://localhost:8080/web/alpha/public-page",
+		assertEquals(RuntimeVariables.replace(
+				"http://localhost:8080/web/alpha/public-page"),
 			selenium.getLocation());
 	}
 }

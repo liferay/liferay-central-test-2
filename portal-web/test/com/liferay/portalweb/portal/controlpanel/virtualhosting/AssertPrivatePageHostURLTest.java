@@ -51,8 +51,8 @@ public class AssertPrivatePageHostURLTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 
 			case 2:
-				assertEquals("http://www.baker.com:8080/",
-					selenium.getLocation());
+				assertEquals(RuntimeVariables.replace(
+						"http://www.baker.com:8080/"), selenium.getLocation());
 				assertEquals(RuntimeVariables.replace(
 						"Virtual Hosting Community"),
 					selenium.getText("//li[2]/span/a"));
@@ -61,7 +61,8 @@ public class AssertPrivatePageHostURLTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				assertEquals("http://www.baker.com:8080/private-page",
+				assertEquals(RuntimeVariables.replace(
+						"http://www.baker.com:8080/private-page"),
 					selenium.getLocation());
 
 			case 100:
