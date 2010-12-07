@@ -215,8 +215,18 @@ public interface SocialEquityLogLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public void addEquityLogs(long userId, long assetEntryId,
+		java.lang.String actionId, java.lang.String extraData)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public void addEquityLogs(long userId, java.lang.String className,
 		long classPK, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void addEquityLogs(long userId, java.lang.String className,
+		long classPK, java.lang.String actionId, java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -240,8 +250,18 @@ public interface SocialEquityLogLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public void deactivateEquityLogs(long userId, long assetEntryId,
+		java.lang.String actionId, java.lang.String extraData)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public void deactivateEquityLogs(long userId, java.lang.String className,
 		long classPK, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void deactivateEquityLogs(long userId, java.lang.String className,
+		long classPK, java.lang.String actionId, java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

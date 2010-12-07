@@ -234,6 +234,21 @@ public interface SocialEquityLogModel extends BaseModel<SocialEquityLog> {
 	 */
 	public void setValue(int value);
 
+	/**
+	 * Gets the extra data of this social equity log.
+	 *
+	 * @return the extra data of this social equity log
+	 */
+	@AutoEscape
+	public String getExtraData();
+
+	/**
+	 * Sets the extra data of this social equity log.
+	 *
+	 * @param extraData the extra data of this social equity log
+	 */
+	public void setExtraData(String extraData);
+
 	public boolean isNew();
 
 	public void setNew(boolean n);

@@ -237,11 +237,26 @@ public class SocialEquityLogLocalServiceUtil {
 		getService().addEquityLogs(userId, assetEntryId, actionId);
 	}
 
+	public static void addEquityLogs(long userId, long assetEntryId,
+		java.lang.String actionId, java.lang.String extraData)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().addEquityLogs(userId, assetEntryId, actionId, extraData);
+	}
+
 	public static void addEquityLogs(long userId, java.lang.String className,
 		long classPK, java.lang.String actionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().addEquityLogs(userId, className, classPK, actionId);
+	}
+
+	public static void addEquityLogs(long userId, java.lang.String className,
+		long classPK, java.lang.String actionId, java.lang.String extraData)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.addEquityLogs(userId, className, classPK, actionId, extraData);
 	}
 
 	public static void addSocialEquityAssetEntry(
@@ -274,11 +289,29 @@ public class SocialEquityLogLocalServiceUtil {
 		getService().deactivateEquityLogs(userId, assetEntryId, actionId);
 	}
 
+	public static void deactivateEquityLogs(long userId, long assetEntryId,
+		java.lang.String actionId, java.lang.String extraData)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.deactivateEquityLogs(userId, assetEntryId, actionId, extraData);
+	}
+
 	public static void deactivateEquityLogs(long userId,
 		java.lang.String className, long classPK, java.lang.String actionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deactivateEquityLogs(userId, className, classPK, actionId);
+	}
+
+	public static void deactivateEquityLogs(long userId,
+		java.lang.String className, long classPK, java.lang.String actionId,
+		java.lang.String extraData)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.deactivateEquityLogs(userId, className, classPK, actionId,
+			extraData);
 	}
 
 	public static void incrementSocialEquityAssetEntry_IQ(long assetEntryId,

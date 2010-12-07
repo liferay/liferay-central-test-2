@@ -66,9 +66,10 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 			{ "active_", new Integer(Types.BOOLEAN) },
 			{ "expiration", new Integer(Types.INTEGER) },
 			{ "type_", new Integer(Types.INTEGER) },
-			{ "value", new Integer(Types.INTEGER) }
+			{ "value", new Integer(Types.INTEGER) },
+			{ "extraData", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table SocialEquityLog (equityLogId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,assetEntryId LONG,actionId VARCHAR(75) null,actionDate INTEGER,active_ BOOLEAN,expiration INTEGER,type_ INTEGER,value INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table SocialEquityLog (equityLogId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,assetEntryId LONG,actionId VARCHAR(75) null,actionDate INTEGER,active_ BOOLEAN,expiration INTEGER,type_ INTEGER,value INTEGER,extraData VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table SocialEquityLog";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -260,6 +261,27 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		_value = value;
 	}
 
+	public String getExtraData() {
+		if (_extraData == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _extraData;
+		}
+	}
+
+	public void setExtraData(String extraData) {
+		_extraData = extraData;
+
+		if (_originalExtraData == null) {
+			_originalExtraData = extraData;
+		}
+	}
+
+	public String getOriginalExtraData() {
+		return GetterUtil.getString(_originalExtraData);
+	}
+
 	public SocialEquityLog toEscapedModel() {
 		if (isEscapedModel()) {
 			return (SocialEquityLog)this;
@@ -298,6 +320,7 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		clone.setExpiration(getExpiration());
 		clone.setType(getType());
 		clone.setValue(getValue());
+		clone.setExtraData(getExtraData());
 
 		return clone;
 	}
@@ -345,7 +368,7 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{equityLogId=");
 		sb.append(getEquityLogId());
@@ -369,13 +392,15 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		sb.append(getType());
 		sb.append(", value=");
 		sb.append(getValue());
+		sb.append(", extraData=");
+		sb.append(getExtraData());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.social.model.SocialEquityLog");
@@ -425,6 +450,10 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 			"<column><column-name>value</column-name><column-value><![CDATA[");
 		sb.append(getValue());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>extraData</column-name><column-value><![CDATA[");
+		sb.append(getExtraData());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -454,5 +483,7 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 	private int _originalType;
 	private boolean _setOriginalType;
 	private int _value;
+	private String _extraData;
+	private String _originalExtraData;
 	private transient ExpandoBridge _expandoBridge;
 }

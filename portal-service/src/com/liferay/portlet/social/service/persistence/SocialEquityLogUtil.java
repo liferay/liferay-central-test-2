@@ -338,275 +338,137 @@ public class SocialEquityLogUtil {
 	}
 
 	/**
-	* Finds all the social equity logs where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
+	* Finds all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
-	* @param userId the user id to search with
+	* @param assetEntryId the asset entry id to search with
 	* @param actionId the action id to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @return the matching social equity logs
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AID_A_T(
-		long userId, java.lang.String actionId, boolean active, int type)
+	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByAEI_AID_A_T_E(
+		long assetEntryId, java.lang.String actionId, boolean active, int type,
+		java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByU_AID_A_T(userId, actionId, active, type);
+		return getPersistence()
+				   .findByAEI_AID_A_T_E(assetEntryId, actionId, active, type,
+			extraData);
 	}
 
 	/**
-	* Finds a range of all the social equity logs where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
+	* Finds a range of all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param assetEntryId the asset entry id to search with
 	* @param actionId the action id to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @param start the lower bound of the range of social equity logs to return
 	* @param end the upper bound of the range of social equity logs to return (not inclusive)
 	* @return the range of matching social equity logs
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AID_A_T(
-		long userId, java.lang.String actionId, boolean active, int type,
-		int start, int end)
+	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByAEI_AID_A_T_E(
+		long assetEntryId, java.lang.String actionId, boolean active, int type,
+		java.lang.String extraData, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByU_AID_A_T(userId, actionId, active, type, start, end);
+				   .findByAEI_AID_A_T_E(assetEntryId, actionId, active, type,
+			extraData, start, end);
 	}
 
 	/**
-	* Finds an ordered range of all the social equity logs where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
+	* Finds an ordered range of all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param assetEntryId the asset entry id to search with
 	* @param actionId the action id to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @param start the lower bound of the range of social equity logs to return
 	* @param end the upper bound of the range of social equity logs to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
 	* @return the ordered range of matching social equity logs
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AID_A_T(
-		long userId, java.lang.String actionId, boolean active, int type,
-		int start, int end,
+	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByAEI_AID_A_T_E(
+		long assetEntryId, java.lang.String actionId, boolean active, int type,
+		java.lang.String extraData, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByU_AID_A_T(userId, actionId, active, type, start, end,
-			orderByComparator);
+				   .findByAEI_AID_A_T_E(assetEntryId, actionId, active, type,
+			extraData, start, end, orderByComparator);
 	}
 
 	/**
-	* Finds the first social equity log in the ordered set where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
+	* Finds the first social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param assetEntryId the asset entry id to search with
 	* @param actionId the action id to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching social equity log
 	* @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portlet.social.model.SocialEquityLog findByU_AID_A_T_First(
-		long userId, java.lang.String actionId, boolean active, int type,
+	public static com.liferay.portlet.social.model.SocialEquityLog findByAEI_AID_A_T_E_First(
+		long assetEntryId, java.lang.String actionId, boolean active, int type,
+		java.lang.String extraData,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityLogException {
 		return getPersistence()
-				   .findByU_AID_A_T_First(userId, actionId, active, type,
-			orderByComparator);
+				   .findByAEI_AID_A_T_E_First(assetEntryId, actionId, active,
+			type, extraData, orderByComparator);
 	}
 
 	/**
-	* Finds the last social equity log in the ordered set where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
+	* Finds the last social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param assetEntryId the asset entry id to search with
 	* @param actionId the action id to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching social equity log
 	* @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portlet.social.model.SocialEquityLog findByU_AID_A_T_Last(
-		long userId, java.lang.String actionId, boolean active, int type,
+	public static com.liferay.portlet.social.model.SocialEquityLog findByAEI_AID_A_T_E_Last(
+		long assetEntryId, java.lang.String actionId, boolean active, int type,
+		java.lang.String extraData,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityLogException {
 		return getPersistence()
-				   .findByU_AID_A_T_Last(userId, actionId, active, type,
-			orderByComparator);
+				   .findByAEI_AID_A_T_E_Last(assetEntryId, actionId, active,
+			type, extraData, orderByComparator);
 	}
 
 	/**
-	* Finds the social equity logs before and after the current social equity log in the ordered set where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param equityLogId the primary key of the current social equity log
-	* @param userId the user id to search with
-	* @param actionId the action id to search with
-	* @param active the active to search with
-	* @param type the type to search with
-	* @param orderByComparator the comparator to order the set by
-	* @return the previous, current, and next social equity log
-	* @throws com.liferay.portlet.social.NoSuchEquityLogException if a social equity log with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.social.model.SocialEquityLog[] findByU_AID_A_T_PrevAndNext(
-		long equityLogId, long userId, java.lang.String actionId,
-		boolean active, int type,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.social.NoSuchEquityLogException {
-		return getPersistence()
-				   .findByU_AID_A_T_PrevAndNext(equityLogId, userId, actionId,
-			active, type, orderByComparator);
-	}
-
-	/**
-	* Finds all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
-	*
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
-	* @param active the active to search with
-	* @param type the type to search with
-	* @return the matching social equity logs
-	* @throws SystemException if a system exception occurred
-	*/
-	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByAEI_AID_A_T(
-		long assetEntryId, java.lang.String actionId, boolean active, int type)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByAEI_AID_A_T(assetEntryId, actionId, active, type);
-	}
-
-	/**
-	* Finds a range of all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
-	* @param active the active to search with
-	* @param type the type to search with
-	* @param start the lower bound of the range of social equity logs to return
-	* @param end the upper bound of the range of social equity logs to return (not inclusive)
-	* @return the range of matching social equity logs
-	* @throws SystemException if a system exception occurred
-	*/
-	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByAEI_AID_A_T(
-		long assetEntryId, java.lang.String actionId, boolean active, int type,
-		int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByAEI_AID_A_T(assetEntryId, actionId, active, type,
-			start, end);
-	}
-
-	/**
-	* Finds an ordered range of all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
-	* @param active the active to search with
-	* @param type the type to search with
-	* @param start the lower bound of the range of social equity logs to return
-	* @param end the upper bound of the range of social equity logs to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
-	* @return the ordered range of matching social equity logs
-	* @throws SystemException if a system exception occurred
-	*/
-	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByAEI_AID_A_T(
-		long assetEntryId, java.lang.String actionId, boolean active, int type,
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .findByAEI_AID_A_T(assetEntryId, actionId, active, type,
-			start, end, orderByComparator);
-	}
-
-	/**
-	* Finds the first social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
-	* @param active the active to search with
-	* @param type the type to search with
-	* @param orderByComparator the comparator to order the set by
-	* @return the first matching social equity log
-	* @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.social.model.SocialEquityLog findByAEI_AID_A_T_First(
-		long assetEntryId, java.lang.String actionId, boolean active, int type,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.social.NoSuchEquityLogException {
-		return getPersistence()
-				   .findByAEI_AID_A_T_First(assetEntryId, actionId, active,
-			type, orderByComparator);
-	}
-
-	/**
-	* Finds the last social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
-	* @param active the active to search with
-	* @param type the type to search with
-	* @param orderByComparator the comparator to order the set by
-	* @return the last matching social equity log
-	* @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.social.model.SocialEquityLog findByAEI_AID_A_T_Last(
-		long assetEntryId, java.lang.String actionId, boolean active, int type,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.social.NoSuchEquityLogException {
-		return getPersistence()
-				   .findByAEI_AID_A_T_Last(assetEntryId, actionId, active,
-			type, orderByComparator);
-	}
-
-	/**
-	* Finds the social equity logs before and after the current social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
+	* Finds the social equity logs before and after the current social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -617,125 +479,203 @@ public class SocialEquityLogUtil {
 	* @param actionId the action id to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next social equity log
 	* @throws com.liferay.portlet.social.NoSuchEquityLogException if a social equity log with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portlet.social.model.SocialEquityLog[] findByAEI_AID_A_T_PrevAndNext(
+	public static com.liferay.portlet.social.model.SocialEquityLog[] findByAEI_AID_A_T_E_PrevAndNext(
 		long equityLogId, long assetEntryId, java.lang.String actionId,
-		boolean active, int type,
+		boolean active, int type, java.lang.String extraData,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityLogException {
 		return getPersistence()
-				   .findByAEI_AID_A_T_PrevAndNext(equityLogId, assetEntryId,
-			actionId, active, type, orderByComparator);
+				   .findByAEI_AID_A_T_E_PrevAndNext(equityLogId, assetEntryId,
+			actionId, active, type, extraData, orderByComparator);
 	}
 
 	/**
-	* Finds all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	* Finds all the social equity logs where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and active = &#63; and extraData = &#63;.
 	*
 	* @param userId the user id to search with
+	* @param assetEntryId the asset entry id to search with
 	* @param actionId the action id to search with
-	* @param actionDate the action date to search with
 	* @param active the active to search with
-	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @return the matching social equity logs
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AID_AD_A_T(
-		long userId, java.lang.String actionId, int actionDate, boolean active,
-		int type) throws com.liferay.portal.kernel.exception.SystemException {
+	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AEI_AID_A_E(
+		long userId, long assetEntryId, java.lang.String actionId,
+		boolean active, java.lang.String extraData)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByU_AID_AD_A_T(userId, actionId, actionDate, active,
-			type);
+				   .findByU_AEI_AID_A_E(userId, assetEntryId, actionId, active,
+			extraData);
 	}
 
 	/**
-	* Finds a range of all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	* Finds a range of all the social equity logs where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and active = &#63; and extraData = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param userId the user id to search with
+	* @param assetEntryId the asset entry id to search with
 	* @param actionId the action id to search with
-	* @param actionDate the action date to search with
 	* @param active the active to search with
-	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @param start the lower bound of the range of social equity logs to return
 	* @param end the upper bound of the range of social equity logs to return (not inclusive)
 	* @return the range of matching social equity logs
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AID_AD_A_T(
-		long userId, java.lang.String actionId, int actionDate, boolean active,
-		int type, int start, int end)
+	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AEI_AID_A_E(
+		long userId, long assetEntryId, java.lang.String actionId,
+		boolean active, java.lang.String extraData, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByU_AID_AD_A_T(userId, actionId, actionDate, active,
-			type, start, end);
+				   .findByU_AEI_AID_A_E(userId, assetEntryId, actionId, active,
+			extraData, start, end);
 	}
 
 	/**
-	* Finds an ordered range of all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	* Finds an ordered range of all the social equity logs where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and active = &#63; and extraData = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param userId the user id to search with
+	* @param assetEntryId the asset entry id to search with
 	* @param actionId the action id to search with
-	* @param actionDate the action date to search with
 	* @param active the active to search with
-	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @param start the lower bound of the range of social equity logs to return
 	* @param end the upper bound of the range of social equity logs to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
 	* @return the ordered range of matching social equity logs
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AID_AD_A_T(
-		long userId, java.lang.String actionId, int actionDate, boolean active,
-		int type, int start, int end,
+	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AEI_AID_A_E(
+		long userId, long assetEntryId, java.lang.String actionId,
+		boolean active, java.lang.String extraData, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByU_AID_AD_A_T(userId, actionId, actionDate, active,
-			type, start, end, orderByComparator);
+				   .findByU_AEI_AID_A_E(userId, assetEntryId, actionId, active,
+			extraData, start, end, orderByComparator);
 	}
 
 	/**
-	* Finds the first social equity log in the ordered set where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	* Finds the first social equity log in the ordered set where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and active = &#63; and extraData = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param userId the user id to search with
+	* @param assetEntryId the asset entry id to search with
 	* @param actionId the action id to search with
-	* @param actionDate the action date to search with
 	* @param active the active to search with
-	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching social equity log
 	* @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portlet.social.model.SocialEquityLog findByU_AID_AD_A_T_First(
-		long userId, java.lang.String actionId, int actionDate, boolean active,
-		int type,
+	public static com.liferay.portlet.social.model.SocialEquityLog findByU_AEI_AID_A_E_First(
+		long userId, long assetEntryId, java.lang.String actionId,
+		boolean active, java.lang.String extraData,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityLogException {
 		return getPersistence()
-				   .findByU_AID_AD_A_T_First(userId, actionId, actionDate,
-			active, type, orderByComparator);
+				   .findByU_AEI_AID_A_E_First(userId, assetEntryId, actionId,
+			active, extraData, orderByComparator);
 	}
 
 	/**
-	* Finds the last social equity log in the ordered set where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	* Finds the last social equity log in the ordered set where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and active = &#63; and extraData = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param assetEntryId the asset entry id to search with
+	* @param actionId the action id to search with
+	* @param active the active to search with
+	* @param extraData the extra data to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching social equity log
+	* @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.social.model.SocialEquityLog findByU_AEI_AID_A_E_Last(
+		long userId, long assetEntryId, java.lang.String actionId,
+		boolean active, java.lang.String extraData,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquityLogException {
+		return getPersistence()
+				   .findByU_AEI_AID_A_E_Last(userId, assetEntryId, actionId,
+			active, extraData, orderByComparator);
+	}
+
+	/**
+	* Finds the social equity logs before and after the current social equity log in the ordered set where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and active = &#63; and extraData = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param equityLogId the primary key of the current social equity log
+	* @param userId the user id to search with
+	* @param assetEntryId the asset entry id to search with
+	* @param actionId the action id to search with
+	* @param active the active to search with
+	* @param extraData the extra data to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next social equity log
+	* @throws com.liferay.portlet.social.NoSuchEquityLogException if a social equity log with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.social.model.SocialEquityLog[] findByU_AEI_AID_A_E_PrevAndNext(
+		long equityLogId, long userId, long assetEntryId,
+		java.lang.String actionId, boolean active, java.lang.String extraData,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquityLogException {
+		return getPersistence()
+				   .findByU_AEI_AID_A_E_PrevAndNext(equityLogId, userId,
+			assetEntryId, actionId, active, extraData, orderByComparator);
+	}
+
+	/**
+	* Finds all the social equity logs where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
+	*
+	* @param userId the user id to search with
+	* @param actionId the action id to search with
+	* @param active the active to search with
+	* @param type the type to search with
+	* @param extraData the extra data to search with
+	* @return the matching social equity logs
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AID_A_T_E(
+		long userId, java.lang.String actionId, boolean active, int type,
+		java.lang.String extraData)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByU_AID_A_T_E(userId, actionId, active, type, extraData);
+	}
+
+	/**
+	* Finds a range of all the social equity logs where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -743,27 +683,109 @@ public class SocialEquityLogUtil {
 	*
 	* @param userId the user id to search with
 	* @param actionId the action id to search with
-	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
+	* @param start the lower bound of the range of social equity logs to return
+	* @param end the upper bound of the range of social equity logs to return (not inclusive)
+	* @return the range of matching social equity logs
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AID_A_T_E(
+		long userId, java.lang.String actionId, boolean active, int type,
+		java.lang.String extraData, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByU_AID_A_T_E(userId, actionId, active, type,
+			extraData, start, end);
+	}
+
+	/**
+	* Finds an ordered range of all the social equity logs where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param actionId the action id to search with
+	* @param active the active to search with
+	* @param type the type to search with
+	* @param extraData the extra data to search with
+	* @param start the lower bound of the range of social equity logs to return
+	* @param end the upper bound of the range of social equity logs to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching social equity logs
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AID_A_T_E(
+		long userId, java.lang.String actionId, boolean active, int type,
+		java.lang.String extraData, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByU_AID_A_T_E(userId, actionId, active, type,
+			extraData, start, end, orderByComparator);
+	}
+
+	/**
+	* Finds the first social equity log in the ordered set where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param actionId the action id to search with
+	* @param active the active to search with
+	* @param type the type to search with
+	* @param extraData the extra data to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching social equity log
+	* @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.social.model.SocialEquityLog findByU_AID_A_T_E_First(
+		long userId, java.lang.String actionId, boolean active, int type,
+		java.lang.String extraData,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquityLogException {
+		return getPersistence()
+				   .findByU_AID_A_T_E_First(userId, actionId, active, type,
+			extraData, orderByComparator);
+	}
+
+	/**
+	* Finds the last social equity log in the ordered set where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param actionId the action id to search with
+	* @param active the active to search with
+	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching social equity log
 	* @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portlet.social.model.SocialEquityLog findByU_AID_AD_A_T_Last(
-		long userId, java.lang.String actionId, int actionDate, boolean active,
-		int type,
+	public static com.liferay.portlet.social.model.SocialEquityLog findByU_AID_A_T_E_Last(
+		long userId, java.lang.String actionId, boolean active, int type,
+		java.lang.String extraData,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityLogException {
 		return getPersistence()
-				   .findByU_AID_AD_A_T_Last(userId, actionId, actionDate,
-			active, type, orderByComparator);
+				   .findByU_AID_A_T_E_Last(userId, actionId, active, type,
+			extraData, orderByComparator);
 	}
 
 	/**
-	* Finds the social equity logs before and after the current social equity log in the ordered set where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	* Finds the social equity logs before and after the current social equity log in the ordered set where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -772,129 +794,213 @@ public class SocialEquityLogUtil {
 	* @param equityLogId the primary key of the current social equity log
 	* @param userId the user id to search with
 	* @param actionId the action id to search with
-	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next social equity log
 	* @throws com.liferay.portlet.social.NoSuchEquityLogException if a social equity log with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portlet.social.model.SocialEquityLog[] findByU_AID_AD_A_T_PrevAndNext(
+	public static com.liferay.portlet.social.model.SocialEquityLog[] findByU_AID_A_T_E_PrevAndNext(
 		long equityLogId, long userId, java.lang.String actionId,
-		int actionDate, boolean active, int type,
+		boolean active, int type, java.lang.String extraData,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityLogException {
 		return getPersistence()
-				   .findByU_AID_AD_A_T_PrevAndNext(equityLogId, userId,
-			actionId, actionDate, active, type, orderByComparator);
+				   .findByU_AID_A_T_E_PrevAndNext(equityLogId, userId,
+			actionId, active, type, extraData, orderByComparator);
 	}
 
 	/**
-	* Finds all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	* Finds all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
-	* @param assetEntryId the asset entry id to search with
+	* @param userId the user id to search with
 	* @param actionId the action id to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @return the matching social equity logs
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByAEI_AID_AD_A_T(
-		long assetEntryId, java.lang.String actionId, int actionDate,
-		boolean active, int type)
+	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AID_AD_A_T_E(
+		long userId, java.lang.String actionId, int actionDate, boolean active,
+		int type, java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByAEI_AID_AD_A_T(assetEntryId, actionId, actionDate,
-			active, type);
+				   .findByU_AID_AD_A_T_E(userId, actionId, actionDate, active,
+			type, extraData);
 	}
 
 	/**
-	* Finds a range of all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	* Finds a range of all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param assetEntryId the asset entry id to search with
+	* @param userId the user id to search with
 	* @param actionId the action id to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @param start the lower bound of the range of social equity logs to return
 	* @param end the upper bound of the range of social equity logs to return (not inclusive)
 	* @return the range of matching social equity logs
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByAEI_AID_AD_A_T(
-		long assetEntryId, java.lang.String actionId, int actionDate,
-		boolean active, int type, int start, int end)
+	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AID_AD_A_T_E(
+		long userId, java.lang.String actionId, int actionDate, boolean active,
+		int type, java.lang.String extraData, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByAEI_AID_AD_A_T(assetEntryId, actionId, actionDate,
-			active, type, start, end);
+				   .findByU_AID_AD_A_T_E(userId, actionId, actionDate, active,
+			type, extraData, start, end);
 	}
 
 	/**
-	* Finds an ordered range of all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	* Finds an ordered range of all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param assetEntryId the asset entry id to search with
+	* @param userId the user id to search with
 	* @param actionId the action id to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @param start the lower bound of the range of social equity logs to return
 	* @param end the upper bound of the range of social equity logs to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
 	* @return the ordered range of matching social equity logs
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByAEI_AID_AD_A_T(
-		long assetEntryId, java.lang.String actionId, int actionDate,
-		boolean active, int type, int start, int end,
+	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByU_AID_AD_A_T_E(
+		long userId, java.lang.String actionId, int actionDate, boolean active,
+		int type, java.lang.String extraData, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByAEI_AID_AD_A_T(assetEntryId, actionId, actionDate,
-			active, type, start, end, orderByComparator);
+				   .findByU_AID_AD_A_T_E(userId, actionId, actionDate, active,
+			type, extraData, start, end, orderByComparator);
 	}
 
 	/**
-	* Finds the first social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	* Finds the first social equity log in the ordered set where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param assetEntryId the asset entry id to search with
+	* @param userId the user id to search with
 	* @param actionId the action id to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching social equity log
 	* @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portlet.social.model.SocialEquityLog findByAEI_AID_AD_A_T_First(
-		long assetEntryId, java.lang.String actionId, int actionDate,
-		boolean active, int type,
+	public static com.liferay.portlet.social.model.SocialEquityLog findByU_AID_AD_A_T_E_First(
+		long userId, java.lang.String actionId, int actionDate, boolean active,
+		int type, java.lang.String extraData,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityLogException {
 		return getPersistence()
-				   .findByAEI_AID_AD_A_T_First(assetEntryId, actionId,
-			actionDate, active, type, orderByComparator);
+				   .findByU_AID_AD_A_T_E_First(userId, actionId, actionDate,
+			active, type, extraData, orderByComparator);
 	}
 
 	/**
-	* Finds the last social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	* Finds the last social equity log in the ordered set where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param actionId the action id to search with
+	* @param actionDate the action date to search with
+	* @param active the active to search with
+	* @param type the type to search with
+	* @param extraData the extra data to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching social equity log
+	* @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.social.model.SocialEquityLog findByU_AID_AD_A_T_E_Last(
+		long userId, java.lang.String actionId, int actionDate, boolean active,
+		int type, java.lang.String extraData,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquityLogException {
+		return getPersistence()
+				   .findByU_AID_AD_A_T_E_Last(userId, actionId, actionDate,
+			active, type, extraData, orderByComparator);
+	}
+
+	/**
+	* Finds the social equity logs before and after the current social equity log in the ordered set where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param equityLogId the primary key of the current social equity log
+	* @param userId the user id to search with
+	* @param actionId the action id to search with
+	* @param actionDate the action date to search with
+	* @param active the active to search with
+	* @param type the type to search with
+	* @param extraData the extra data to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next social equity log
+	* @throws com.liferay.portlet.social.NoSuchEquityLogException if a social equity log with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.social.model.SocialEquityLog[] findByU_AID_AD_A_T_E_PrevAndNext(
+		long equityLogId, long userId, java.lang.String actionId,
+		int actionDate, boolean active, int type, java.lang.String extraData,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquityLogException {
+		return getPersistence()
+				   .findByU_AID_AD_A_T_E_PrevAndNext(equityLogId, userId,
+			actionId, actionDate, active, type, extraData, orderByComparator);
+	}
+
+	/**
+	* Finds all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
+	*
+	* @param assetEntryId the asset entry id to search with
+	* @param actionId the action id to search with
+	* @param actionDate the action date to search with
+	* @param active the active to search with
+	* @param type the type to search with
+	* @param extraData the extra data to search with
+	* @return the matching social equity logs
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByAEI_AID_AD_A_T_E(
+		long assetEntryId, java.lang.String actionId, int actionDate,
+		boolean active, int type, java.lang.String extraData)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByAEI_AID_AD_A_T_E(assetEntryId, actionId, actionDate,
+			active, type, extraData);
+	}
+
+	/**
+	* Finds a range of all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -905,24 +1011,111 @@ public class SocialEquityLogUtil {
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
+	* @param start the lower bound of the range of social equity logs to return
+	* @param end the upper bound of the range of social equity logs to return (not inclusive)
+	* @return the range of matching social equity logs
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByAEI_AID_AD_A_T_E(
+		long assetEntryId, java.lang.String actionId, int actionDate,
+		boolean active, int type, java.lang.String extraData, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByAEI_AID_AD_A_T_E(assetEntryId, actionId, actionDate,
+			active, type, extraData, start, end);
+	}
+
+	/**
+	* Finds an ordered range of all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param assetEntryId the asset entry id to search with
+	* @param actionId the action id to search with
+	* @param actionDate the action date to search with
+	* @param active the active to search with
+	* @param type the type to search with
+	* @param extraData the extra data to search with
+	* @param start the lower bound of the range of social equity logs to return
+	* @param end the upper bound of the range of social equity logs to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching social equity logs
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> findByAEI_AID_AD_A_T_E(
+		long assetEntryId, java.lang.String actionId, int actionDate,
+		boolean active, int type, java.lang.String extraData, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByAEI_AID_AD_A_T_E(assetEntryId, actionId, actionDate,
+			active, type, extraData, start, end, orderByComparator);
+	}
+
+	/**
+	* Finds the first social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param assetEntryId the asset entry id to search with
+	* @param actionId the action id to search with
+	* @param actionDate the action date to search with
+	* @param active the active to search with
+	* @param type the type to search with
+	* @param extraData the extra data to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching social equity log
+	* @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.social.model.SocialEquityLog findByAEI_AID_AD_A_T_E_First(
+		long assetEntryId, java.lang.String actionId, int actionDate,
+		boolean active, int type, java.lang.String extraData,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.social.NoSuchEquityLogException {
+		return getPersistence()
+				   .findByAEI_AID_AD_A_T_E_First(assetEntryId, actionId,
+			actionDate, active, type, extraData, orderByComparator);
+	}
+
+	/**
+	* Finds the last social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param assetEntryId the asset entry id to search with
+	* @param actionId the action id to search with
+	* @param actionDate the action date to search with
+	* @param active the active to search with
+	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching social equity log
 	* @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portlet.social.model.SocialEquityLog findByAEI_AID_AD_A_T_Last(
+	public static com.liferay.portlet.social.model.SocialEquityLog findByAEI_AID_AD_A_T_E_Last(
 		long assetEntryId, java.lang.String actionId, int actionDate,
-		boolean active, int type,
+		boolean active, int type, java.lang.String extraData,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityLogException {
 		return getPersistence()
-				   .findByAEI_AID_AD_A_T_Last(assetEntryId, actionId,
-			actionDate, active, type, orderByComparator);
+				   .findByAEI_AID_AD_A_T_E_Last(assetEntryId, actionId,
+			actionDate, active, type, extraData, orderByComparator);
 	}
 
 	/**
-	* Finds the social equity logs before and after the current social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	* Finds the social equity logs before and after the current social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -934,24 +1127,26 @@ public class SocialEquityLogUtil {
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next social equity log
 	* @throws com.liferay.portlet.social.NoSuchEquityLogException if a social equity log with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portlet.social.model.SocialEquityLog[] findByAEI_AID_AD_A_T_PrevAndNext(
+	public static com.liferay.portlet.social.model.SocialEquityLog[] findByAEI_AID_AD_A_T_E_PrevAndNext(
 		long equityLogId, long assetEntryId, java.lang.String actionId,
-		int actionDate, boolean active, int type,
+		int actionDate, boolean active, int type, java.lang.String extraData,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityLogException {
 		return getPersistence()
-				   .findByAEI_AID_AD_A_T_PrevAndNext(equityLogId, assetEntryId,
-			actionId, actionDate, active, type, orderByComparator);
+				   .findByAEI_AID_AD_A_T_E_PrevAndNext(equityLogId,
+			assetEntryId, actionId, actionDate, active, type, extraData,
+			orderByComparator);
 	}
 
 	/**
-	* Finds the social equity log where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; or throws a {@link com.liferay.portlet.social.NoSuchEquityLogException} if it could not be found.
+	* Finds the social equity log where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63; or throws a {@link com.liferay.portlet.social.NoSuchEquityLogException} if it could not be found.
 	*
 	* @param userId the user id to search with
 	* @param assetEntryId the asset entry id to search with
@@ -959,22 +1154,23 @@ public class SocialEquityLogUtil {
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @return the matching social equity log
 	* @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portlet.social.model.SocialEquityLog findByU_AEI_AID_AD_A_T(
+	public static com.liferay.portlet.social.model.SocialEquityLog findByU_AEI_AID_AD_A_T_E(
 		long userId, long assetEntryId, java.lang.String actionId,
-		int actionDate, boolean active, int type)
+		int actionDate, boolean active, int type, java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityLogException {
 		return getPersistence()
-				   .findByU_AEI_AID_AD_A_T(userId, assetEntryId, actionId,
-			actionDate, active, type);
+				   .findByU_AEI_AID_AD_A_T_E(userId, assetEntryId, actionId,
+			actionDate, active, type, extraData);
 	}
 
 	/**
-	* Finds the social equity log where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Finds the social equity log where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
 	* @param userId the user id to search with
 	* @param assetEntryId the asset entry id to search with
@@ -982,20 +1178,21 @@ public class SocialEquityLogUtil {
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @return the matching social equity log, or <code>null</code> if a matching social equity log could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portlet.social.model.SocialEquityLog fetchByU_AEI_AID_AD_A_T(
+	public static com.liferay.portlet.social.model.SocialEquityLog fetchByU_AEI_AID_AD_A_T_E(
 		long userId, long assetEntryId, java.lang.String actionId,
-		int actionDate, boolean active, int type)
+		int actionDate, boolean active, int type, java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .fetchByU_AEI_AID_AD_A_T(userId, assetEntryId, actionId,
-			actionDate, active, type);
+				   .fetchByU_AEI_AID_AD_A_T_E(userId, assetEntryId, actionId,
+			actionDate, active, type, extraData);
 	}
 
 	/**
-	* Finds the social equity log where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Finds the social equity log where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param userId the user id to search with
 	* @param assetEntryId the asset entry id to search with
@@ -1003,16 +1200,18 @@ public class SocialEquityLogUtil {
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @return the matching social equity log, or <code>null</code> if a matching social equity log could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portlet.social.model.SocialEquityLog fetchByU_AEI_AID_AD_A_T(
+	public static com.liferay.portlet.social.model.SocialEquityLog fetchByU_AEI_AID_AD_A_T_E(
 		long userId, long assetEntryId, java.lang.String actionId,
-		int actionDate, boolean active, int type, boolean retrieveFromCache)
+		int actionDate, boolean active, int type, java.lang.String extraData,
+		boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .fetchByU_AEI_AID_AD_A_T(userId, assetEntryId, actionId,
-			actionDate, active, type, retrieveFromCache);
+				   .fetchByU_AEI_AID_AD_A_T_E(userId, assetEntryId, actionId,
+			actionDate, active, type, extraData, retrieveFromCache);
 	}
 
 	/**
@@ -1079,73 +1278,102 @@ public class SocialEquityLogUtil {
 	}
 
 	/**
-	* Removes all the social equity logs where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63; from the database.
-	*
-	* @param userId the user id to search with
-	* @param actionId the action id to search with
-	* @param active the active to search with
-	* @param type the type to search with
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void removeByU_AID_A_T(long userId,
-		java.lang.String actionId, boolean active, int type)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByU_AID_A_T(userId, actionId, active, type);
-	}
-
-	/**
-	* Removes all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63; from the database.
+	* Removes all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63; from the database.
 	*
 	* @param assetEntryId the asset entry id to search with
 	* @param actionId the action id to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeByAEI_AID_A_T(long assetEntryId,
-		java.lang.String actionId, boolean active, int type)
+	public static void removeByAEI_AID_A_T_E(long assetEntryId,
+		java.lang.String actionId, boolean active, int type,
+		java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence()
-			.removeByAEI_AID_A_T(assetEntryId, actionId, active, type);
+			.removeByAEI_AID_A_T_E(assetEntryId, actionId, active, type,
+			extraData);
 	}
 
 	/**
-	* Removes all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; from the database.
+	* Removes all the social equity logs where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and active = &#63; and extraData = &#63; from the database.
+	*
+	* @param userId the user id to search with
+	* @param assetEntryId the asset entry id to search with
+	* @param actionId the action id to search with
+	* @param active the active to search with
+	* @param extraData the extra data to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByU_AEI_AID_A_E(long userId, long assetEntryId,
+		java.lang.String actionId, boolean active, java.lang.String extraData)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence()
+			.removeByU_AEI_AID_A_E(userId, assetEntryId, actionId, active,
+			extraData);
+	}
+
+	/**
+	* Removes all the social equity logs where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63; from the database.
+	*
+	* @param userId the user id to search with
+	* @param actionId the action id to search with
+	* @param active the active to search with
+	* @param type the type to search with
+	* @param extraData the extra data to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByU_AID_A_T_E(long userId,
+		java.lang.String actionId, boolean active, int type,
+		java.lang.String extraData)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence()
+			.removeByU_AID_A_T_E(userId, actionId, active, type, extraData);
+	}
+
+	/**
+	* Removes all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63; from the database.
 	*
 	* @param userId the user id to search with
 	* @param actionId the action id to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeByU_AID_AD_A_T(long userId,
-		java.lang.String actionId, int actionDate, boolean active, int type)
+	public static void removeByU_AID_AD_A_T_E(long userId,
+		java.lang.String actionId, int actionDate, boolean active, int type,
+		java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence()
-			.removeByU_AID_AD_A_T(userId, actionId, actionDate, active, type);
+			.removeByU_AID_AD_A_T_E(userId, actionId, actionDate, active, type,
+			extraData);
 	}
 
 	/**
-	* Removes all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; from the database.
+	* Removes all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63; from the database.
 	*
 	* @param assetEntryId the asset entry id to search with
 	* @param actionId the action id to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeByAEI_AID_AD_A_T(long assetEntryId,
-		java.lang.String actionId, int actionDate, boolean active, int type)
+	public static void removeByAEI_AID_AD_A_T_E(long assetEntryId,
+		java.lang.String actionId, int actionDate, boolean active, int type,
+		java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence()
-			.removeByAEI_AID_AD_A_T(assetEntryId, actionId, actionDate, active,
-			type);
+			.removeByAEI_AID_AD_A_T_E(assetEntryId, actionId, actionDate,
+			active, type, extraData);
 	}
 
 	/**
-	* Removes the social equity log where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; from the database.
+	* Removes the social equity log where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63; from the database.
 	*
 	* @param userId the user id to search with
 	* @param assetEntryId the asset entry id to search with
@@ -1153,15 +1381,17 @@ public class SocialEquityLogUtil {
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeByU_AEI_AID_AD_A_T(long userId, long assetEntryId,
-		java.lang.String actionId, int actionDate, boolean active, int type)
+	public static void removeByU_AEI_AID_AD_A_T_E(long userId,
+		long assetEntryId, java.lang.String actionId, int actionDate,
+		boolean active, int type, java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityLogException {
 		getPersistence()
-			.removeByU_AEI_AID_AD_A_T(userId, assetEntryId, actionId,
-			actionDate, active, type);
+			.removeByU_AEI_AID_AD_A_T_E(userId, assetEntryId, actionId,
+			actionDate, active, type, extraData);
 	}
 
 	/**
@@ -1189,78 +1419,107 @@ public class SocialEquityLogUtil {
 	}
 
 	/**
-	* Counts all the social equity logs where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
-	*
-	* @param userId the user id to search with
-	* @param actionId the action id to search with
-	* @param active the active to search with
-	* @param type the type to search with
-	* @return the number of matching social equity logs
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int countByU_AID_A_T(long userId, java.lang.String actionId,
-		boolean active, int type)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByU_AID_A_T(userId, actionId, active, type);
-	}
-
-	/**
-	* Counts all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
+	* Counts all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
 	* @param assetEntryId the asset entry id to search with
 	* @param actionId the action id to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @return the number of matching social equity logs
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByAEI_AID_A_T(long assetEntryId,
-		java.lang.String actionId, boolean active, int type)
+	public static int countByAEI_AID_A_T_E(long assetEntryId,
+		java.lang.String actionId, boolean active, int type,
+		java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .countByAEI_AID_A_T(assetEntryId, actionId, active, type);
+				   .countByAEI_AID_A_T_E(assetEntryId, actionId, active, type,
+			extraData);
 	}
 
 	/**
-	* Counts all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	* Counts all the social equity logs where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and active = &#63; and extraData = &#63;.
+	*
+	* @param userId the user id to search with
+	* @param assetEntryId the asset entry id to search with
+	* @param actionId the action id to search with
+	* @param active the active to search with
+	* @param extraData the extra data to search with
+	* @return the number of matching social equity logs
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByU_AEI_AID_A_E(long userId, long assetEntryId,
+		java.lang.String actionId, boolean active, java.lang.String extraData)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .countByU_AEI_AID_A_E(userId, assetEntryId, actionId,
+			active, extraData);
+	}
+
+	/**
+	* Counts all the social equity logs where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
+	*
+	* @param userId the user id to search with
+	* @param actionId the action id to search with
+	* @param active the active to search with
+	* @param type the type to search with
+	* @param extraData the extra data to search with
+	* @return the number of matching social equity logs
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByU_AID_A_T_E(long userId,
+		java.lang.String actionId, boolean active, int type,
+		java.lang.String extraData)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .countByU_AID_A_T_E(userId, actionId, active, type, extraData);
+	}
+
+	/**
+	* Counts all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
 	* @param userId the user id to search with
 	* @param actionId the action id to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @return the number of matching social equity logs
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByU_AID_AD_A_T(long userId,
-		java.lang.String actionId, int actionDate, boolean active, int type)
+	public static int countByU_AID_AD_A_T_E(long userId,
+		java.lang.String actionId, int actionDate, boolean active, int type,
+		java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .countByU_AID_AD_A_T(userId, actionId, actionDate, active,
-			type);
+				   .countByU_AID_AD_A_T_E(userId, actionId, actionDate, active,
+			type, extraData);
 	}
 
 	/**
-	* Counts all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	* Counts all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
 	* @param assetEntryId the asset entry id to search with
 	* @param actionId the action id to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @return the number of matching social equity logs
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByAEI_AID_AD_A_T(long assetEntryId,
-		java.lang.String actionId, int actionDate, boolean active, int type)
+	public static int countByAEI_AID_AD_A_T_E(long assetEntryId,
+		java.lang.String actionId, int actionDate, boolean active, int type,
+		java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .countByAEI_AID_AD_A_T(assetEntryId, actionId, actionDate,
-			active, type);
+				   .countByAEI_AID_AD_A_T_E(assetEntryId, actionId, actionDate,
+			active, type, extraData);
 	}
 
 	/**
-	* Counts all the social equity logs where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	* Counts all the social equity logs where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
 	* @param userId the user id to search with
 	* @param assetEntryId the asset entry id to search with
@@ -1268,15 +1527,17 @@ public class SocialEquityLogUtil {
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
+	* @param extraData the extra data to search with
 	* @return the number of matching social equity logs
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByU_AEI_AID_AD_A_T(long userId, long assetEntryId,
-		java.lang.String actionId, int actionDate, boolean active, int type)
+	public static int countByU_AEI_AID_AD_A_T_E(long userId, long assetEntryId,
+		java.lang.String actionId, int actionDate, boolean active, int type,
+		java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .countByU_AEI_AID_AD_A_T(userId, assetEntryId, actionId,
-			actionDate, active, type);
+				   .countByU_AEI_AID_AD_A_T_E(userId, assetEntryId, actionId,
+			actionDate, active, type, extraData);
 	}
 
 	/**

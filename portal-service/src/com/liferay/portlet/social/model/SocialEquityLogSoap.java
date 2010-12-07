@@ -44,6 +44,7 @@ public class SocialEquityLogSoap implements Serializable {
 		soapModel.setExpiration(model.getExpiration());
 		soapModel.setType(model.getType());
 		soapModel.setValue(model.getValue());
+		soapModel.setExtraData(model.getExtraData());
 
 		return soapModel;
 	}
@@ -190,6 +191,14 @@ public class SocialEquityLogSoap implements Serializable {
 		_value = value;
 	}
 
+	public String getExtraData() {
+		return _extraData;
+	}
+
+	public void setExtraData(String extraData) {
+		_extraData = extraData;
+	}
+
 	private long _equityLogId;
 	private long _groupId;
 	private long _companyId;
@@ -201,4 +210,5 @@ public class SocialEquityLogSoap implements Serializable {
 	private int _expiration;
 	private int _type;
 	private int _value;
+	private String _extraData;
 }
