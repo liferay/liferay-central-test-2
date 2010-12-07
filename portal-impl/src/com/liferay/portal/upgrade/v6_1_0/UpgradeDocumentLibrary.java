@@ -136,20 +136,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 	}
 
 	protected void updateFileVersions() throws Exception {
-		try {
-			runSQL("alter_column_type DLFileVersion extraSettings TEXT null");
-			runSQL("alter_column_type DLFileVersion title VARCHAR(255) null");
-		}
-		catch (Exception e) {
-			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
-				DLFileVersionTable.TABLE_NAME,
-				DLFileVersionTable.TABLE_COLUMNS);
-
-			upgradeTable.setCreateSQL(DLFileVersionTable.TABLE_SQL_CREATE);
-
-			upgradeTable.updateTable();
-		}
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -178,8 +164,21 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 
-		runSQL("alter table DLFileVersion drop column folderId");
-		runSQL("alter table DLFileVersion drop column name");
+		try {
+			runSQL("alter_column_type DLFileVersion extraSettings TEXT null");
+			runSQL("alter_column_type DLFileVersion title VARCHAR(255) null");
+			runSQL("alter table DLFileVersion drop column folderId");
+			runSQL("alter table DLFileVersion drop column name");
+		}
+		catch (Exception e) {
+			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
+				DLFileVersionTable.TABLE_NAME,
+				DLFileVersionTable.TABLE_COLUMNS);
+
+			upgradeTable.setCreateSQL(DLFileVersionTable.TABLE_SQL_CREATE);
+
+			upgradeTable.updateTable();
+		}
 	}
 
 }
