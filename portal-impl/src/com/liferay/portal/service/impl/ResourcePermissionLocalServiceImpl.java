@@ -41,6 +41,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 
+import javax.portlet.PortletException;
+
 /**
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
@@ -78,6 +80,34 @@ public class ResourcePermissionLocalServiceImpl
 			ResourcePermissionConstants.OPERATOR_ADD);
 
 		PermissionCacheUtil.clearCache();
+	}
+
+	public void deleteResourcePermission(long resourcePermissionId)
+		throws PortalException, SystemException {
+
+		resourcePermissionPersistence.remove(resourcePermissionId);
+	}
+
+	public void deleteResourcePermissions(
+			long companyId, String name, int scope, long primKey)
+		throws PortalException, SystemException {
+
+		deleteResourcePermissions(
+			companyId, name, scope, String.valueOf(primKey));
+	}
+
+	public void deleteResourcePermissions(
+			long companyId, String name, int scope, String primKey)
+		throws PortalException, SystemException {
+
+		List<ResourcePermission> resourcePermissions =
+			resourcePermissionPersistence.findByC_N_S_P(
+				companyId, name, scope, primKey);
+
+		for (ResourcePermission resourcePermission : resourcePermissions) {
+			deleteResourcePermission(
+				resourcePermission.getResourcePermissionId());
+		}
 	}
 
 	public List<String> getAvailableResourcePermissionActionIds(

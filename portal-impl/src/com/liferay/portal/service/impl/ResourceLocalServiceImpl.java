@@ -275,6 +275,9 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+			resourcePermissionLocalService.deleteResourcePermissions(
+				companyId, name, scope, primKey);
+
 			return;
 		}
 
