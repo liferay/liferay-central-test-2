@@ -1578,7 +1578,8 @@ create table SocialEquityLog (
 	active_ BOOLEAN,
 	expiration INTEGER,
 	type_ INTEGER,
-	value INTEGER
+	value INTEGER,
+	extraData VARCHAR(75) null
 );
 
 create table SocialEquitySetting (

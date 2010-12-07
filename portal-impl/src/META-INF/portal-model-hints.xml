@@ -1939,6 +1939,7 @@
 		<field name="expiration" type="int" />
 		<field name="type" type="int" />
 		<field name="value" type="int" />
+		<field name="extraData" type="String" />
 	</model>
 	<model name="com.liferay.portlet.social.model.SocialEquitySetting">
 		<field name="equitySettingId" type="long" />

@@ -1992,6 +1992,7 @@
 		<property name="expiration" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="type" column="type_" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="value" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="extraData" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portlet.social.model.impl.SocialEquitySettingImpl" table="SocialEquitySetting">
 		<cache usage="read-write" />
