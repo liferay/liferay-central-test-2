@@ -3250,7 +3250,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * is shown in a group layout. <code>False</code> if preferences are owned
 	 * by the user at all times.
 	 */
-	private boolean _preferencesOwnedByGroup = true;
+	private boolean _preferencesOwnedByGroup =
+		PropsValues.DEFAULT_PREFERENCES_OWNED_BY_GROUP;
 
 	/**
 	 * The name of the category of the Control Panel where this portlet will be

@@ -415,7 +415,7 @@ preferences-owned-by-group element for more information.
 Set the preferences-owned-by-group value to true if the preferences for the
 portlet are owned by the group when the portlet is shown in a group page. If
 set to false, the preferences are owned by the user at all times. The default
-value is true.
+value is set in portal.properties.
 
 Suppose the Stocks portlet has preferences-unique-per-layout set to true and
 preferences-owned-by-group set to false. Users can set a different list of

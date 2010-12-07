@@ -332,6 +332,8 @@ public class PropsValues {
 
 	public static final String DEFAULT_LOGOUT_PAGE_PATH = PropsUtil.get(PropsKeys.DEFAULT_LOGOUT_PAGE_PATH);
 
+	public static final boolean DEFAULT_PREFERENCES_OWNED_BY_GROUP = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DEFAULT_PREFERENCES_OWNED_BY_GROUP));
+
 	public static final String DEFAULT_REGULAR_COLOR_SCHEME_ID = PropsUtil.get(PropsKeys.DEFAULT_REGULAR_COLOR_SCHEME_ID);
 
 	public static final String DEFAULT_REGULAR_THEME_ID = PropsUtil.get(PropsKeys.DEFAULT_REGULAR_THEME_ID);
