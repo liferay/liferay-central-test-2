@@ -15,7 +15,6 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.kernel.dao.orm.QueryPos;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
@@ -35,7 +34,6 @@ import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.sql.Timestamp;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -463,42 +461,7 @@ public class JournalArticleFinderImpl
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "articleId", StringPool.LIKE, false, articleIds);
 
-			String groupBy = "articleId";
-
-			if (version == null) {
-				StringBundler sb = new StringBundler("id_ AS id");
-
-				for (String field : orderByComparator.getOrderByFields()) {
-					sb.append(", ");
-					sb.append(field);
-				}
-
-				sql = StringUtil.replace(sql, "id_ AS id", sb.toString());
-
-				sql = StringUtil.replace(
-					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
-			}
-			else if (version <= 0) {
-				StringBundler sb = new StringBundler(groupBy);
-
-				for (String field : orderByComparator.getOrderByFields()) {
-					if (field.equals("modifiedDate") ||
-						field.equals("articleId") || field.equals("version")) {
-
-						continue;
-					}
-
-					sb.append(", ");
-					sb.append(field);
-				}
-
-				groupBy = sb.toString();
-
-				sb.append(", MAX(modifiedDate) as modifiedDate");
-				sb.append(", MAX(version) as version");
-
-				sql = StringUtil.replace(sql, "id_ AS id", sb.toString());
-
+			if ((version == null) || (version <= 0)) {
 				sql = StringUtil.replace(
 					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
 			}
@@ -520,24 +483,24 @@ public class JournalArticleFinderImpl
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
-			if ((version != null) && (version <= 0)) {
+			if ((articleIds != null) &&
+				((articleIds.length > 1) ||
+					((articleIds.length == 1) && (articleIds[0] != null)))) {
+
 				sql = StringUtil.replace(
-					sql, "[$GROUP_BY_CLAUSE$]", "GROUP BY " + groupBy);
+					sql, "MAX(version) as version", "version");
+				sql = StringUtil.replace(sql, "[$GROUP_BY_CLAUSE$]", "");
 			}
 			else {
-				sql = StringUtil.replace(sql, "[$GROUP_BY_CLAUSE$]", "");
+				sql = StringUtil.replace(
+					sql, "[$GROUP_BY_CLAUSE$]", "GROUP BY articleId");
 			}
 
 			sql = CustomSQLUtil.replaceOrderBy(sql, orderByComparator);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			if ((version != null) && (version <= 0)) {
-				q.addScalar("articleId", Type.STRING);
-			}
-			else {
-				q.addScalar("id", Type.LONG);
-			}
+			q.addEntity("JournalArticle", JournalArticleImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -572,33 +535,7 @@ public class JournalArticleFinderImpl
 			qPos.add(reviewDate_TS);
 			qPos.add(reviewDate_TS);
 
-			List<JournalArticle> articles = new ArrayList<JournalArticle>();
-
-			Iterator<Object[]> itr = (Iterator<Object[]>)QueryUtil.iterate(
-				q, getDialect(), start, end);
-
-			while (itr.hasNext()) {
-				Object value = itr.next();
-
-				JournalArticle article = null;
-
-				if ((version != null) && (version <= 0)) {
-					String articleId = (String)value;
-
-					article = getLatestArticle(groupId, articleId, status);
-				}
-				else {
-					long id = (Long)value;
-
-					article = JournalArticleUtil.findByPrimaryKey(id);
-				}
-
-				if (article != null) {
-					articles.add(article);
-				}
-			}
-
-			return articles;
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
