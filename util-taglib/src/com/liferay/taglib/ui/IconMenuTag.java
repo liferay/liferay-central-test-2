@@ -204,6 +204,9 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 					jspWriter.write("menu\">");
 				}
 				else {
+					jspWriter.write("<span title=\"");
+					jspWriter.write(LanguageUtil.get(pageContext, _message));
+					jspWriter.write("\">");
 					jspWriter.write("<ul class='lfr-component lfr-actions ");
 					jspWriter.write(_align);
 					jspWriter.write(" ");
@@ -253,7 +256,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 						pageContext);
 				}
 				else {
-					jspWriter.write("</li></ul>");
+					jspWriter.write("</li></ul></span>");
 				}
 			}
 			else {
