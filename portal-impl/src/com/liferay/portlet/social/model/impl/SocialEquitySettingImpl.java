@@ -31,13 +31,13 @@ public class SocialEquitySettingImpl
 		if (getType() == SocialEquitySettingConstants.TYPE_INFORMATION) {
 			setDailyLimit(equityActionMapping.getInformationDailyLimit());
 			setLifespan(equityActionMapping.getInformationLifespan());
-			setUniqueEntry(equityActionMapping.isInformationUnique());
+			setUniqueEntry(equityActionMapping.isUnique());
 			setValue(equityActionMapping.getInformationValue());
 		}
 		else {
 			setDailyLimit(equityActionMapping.getParticipationDailyLimit());
 			setLifespan(equityActionMapping.getParticipationLifespan());
-			setUniqueEntry(equityActionMapping.isParticipationUnique());
+			setUniqueEntry(equityActionMapping.isUnique());
 			setValue(equityActionMapping.getParticipationValue());
 		}
 	}

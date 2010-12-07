@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.social.NoSuchEquitySettingException;
 import com.liferay.portlet.social.model.SocialEquityActionMapping;
 import com.liferay.portlet.social.model.SocialEquitySetting;
 import com.liferay.portlet.social.model.SocialEquitySettingConstants;
@@ -54,6 +53,7 @@ public class SocialEquitySettingLocalServiceImpl
 		return getEquitySettings(groupId, classNameId, actionId);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<SocialEquitySetting> getEquitySettings(
 			long groupId, long classNameId, String actionId)
 		throws SystemException {
@@ -156,36 +156,6 @@ public class SocialEquitySettingLocalServiceImpl
 		return sb.toString();
 	}
 
-	protected SocialEquitySetting getEquitySetting(
-			long groupId, String className, String actionId, int type)
-		throws PortalException, SystemException {
-
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		SocialEquitySetting equitySetting = null;
-
-		try {
-			equitySetting = socialEquitySettingPersistence.findByG_C_A_T(
-				groupId, classNameId, actionId, type);
-		}
-		catch (NoSuchEquitySettingException nsqse) {
-			Group group = groupLocalService.getGroup(groupId);
-
-			long equitySettingId = counterLocalService.increment();
-
-			equitySetting = socialEquitySettingPersistence.create(
-				equitySettingId);
-
-			equitySetting.setGroupId(groupId);
-			equitySetting.setCompanyId(group.getCompanyId());
-			equitySetting.setClassNameId(classNameId);
-			equitySetting.setActionId(actionId);
-			equitySetting.setType(type);
-		}
-
-		return equitySetting;
-	}
-
 	protected SocialEquitySetting getInformationEquitySetting(
 		String actionId, SocialEquityActionMapping equityActionMapping) {
 
@@ -196,7 +166,7 @@ public class SocialEquitySettingLocalServiceImpl
 			equityActionMapping.getInformationDailyLimit());
 		equitySetting.setLifespan(equityActionMapping.getInformationLifespan());
 		equitySetting.setType(SocialEquitySettingConstants.TYPE_INFORMATION);
-		equitySetting.setUniqueEntry(equityActionMapping.isInformationUnique());
+		equitySetting.setUniqueEntry(equityActionMapping.isUnique());
 		equitySetting.setValue(equityActionMapping.getInformationValue());
 
 		return equitySetting;
@@ -214,7 +184,7 @@ public class SocialEquitySettingLocalServiceImpl
 			equityActionMapping.getParticipationLifespan());
 		equitySetting.setType(SocialEquitySettingConstants.TYPE_PARTICIPATION);
 		equitySetting.setUniqueEntry(
-			equityActionMapping.isParticipationUnique());
+			equityActionMapping.isUnique());
 		equitySetting.setValue(equityActionMapping.getParticipationValue());
 
 		return equitySetting;
@@ -225,43 +195,28 @@ public class SocialEquitySettingLocalServiceImpl
 			SocialEquityActionMapping equityActionMapping)
 		throws PortalException, SystemException {
 
-		SocialEquityActionMapping defaultEquityActionMapping =
-			PortalUtil.getSocialEquityActionMapping(
-				className, equityActionMapping.getActionId());
-
-		if ((equityActionMapping.getInformationValue() > 0) &&
-			!equityActionMapping.equals(
-				defaultEquityActionMapping,
-				SocialEquitySettingConstants.TYPE_INFORMATION)) {
-
-			SocialEquitySetting equitySetting = getEquitySetting(
-				groupId, className, equityActionMapping.getActionId(),
-				SocialEquitySettingConstants.TYPE_INFORMATION);
-
-			if (!equityActionMapping.equals(equitySetting)) {
-				equitySetting.update(equityActionMapping);
-
-				socialEquitySettingPersistence.update(equitySetting, false);
-			}
-		}
-
-		if ((equityActionMapping.getParticipationValue() > 0) &&
-			!equityActionMapping.equals(
-				defaultEquityActionMapping,
-				SocialEquitySettingConstants.TYPE_PARTICIPATION)) {
-
-			SocialEquitySetting equitySetting = getEquitySetting(
-				groupId, className, equityActionMapping.getActionId(),
-				SocialEquitySettingConstants.TYPE_PARTICIPATION);
-
-			if (!equityActionMapping.equals(equitySetting)) {
-				equitySetting.update(equityActionMapping);
-
-				socialEquitySettingPersistence.update(equitySetting, false);
-			}
-		}
-
 		long classNameId = PortalUtil.getClassNameId(className);
+
+		List<SocialEquitySetting> equitySettings = getEquitySettings(
+			groupId, className, equityActionMapping.getActionId());
+
+		for (SocialEquitySetting equitySetting : equitySettings) {
+			if (!equityActionMapping.equals(equitySetting)) {
+				equitySetting.update(equityActionMapping);
+
+				if (equitySetting.getPrimaryKey() == 0) {
+					Group group = groupLocalService.getGroup(groupId);
+
+					equitySetting.setPrimaryKey(
+						counterLocalService.increment());
+					equitySetting.setGroupId(groupId);
+					equitySetting.setCompanyId(group.getCompanyId());
+					equitySetting.setClassNameId(classNameId);
+				}
+
+				socialEquitySettingPersistence.update(equitySetting, false);
+			}
+		}
 
 		String key = encodeKey(classNameId, equityActionMapping.getActionId());
 

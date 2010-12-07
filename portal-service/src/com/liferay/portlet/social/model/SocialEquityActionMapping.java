@@ -20,6 +20,7 @@ import java.io.Serializable;
  * @author Brian Wing Shun Chan
  * @author Zsolt Berentey
  */
+@SuppressWarnings("serial")
 public class SocialEquityActionMapping implements Serializable {
 
 	public SocialEquityActionMapping clone() {
@@ -30,13 +31,12 @@ public class SocialEquityActionMapping implements Serializable {
 		equityActionMapping.setClassName(_className);
 		equityActionMapping.setInformationDailyLimit(_informationDailyLimit);
 		equityActionMapping.setInformationLifespan(_informationLifespan);
-		equityActionMapping.setInformationUnique(_informationUnique);
 		equityActionMapping.setInformationValue(_informationValue);
 		equityActionMapping.setParticipationDailyLimit(
 			_participationDailyLimit);
 		equityActionMapping.setParticipationLifespan(_participationLifespan);
-		equityActionMapping.setParticipationUnique(_participationUnique);
 		equityActionMapping.setParticipationValue(_participationValue);
+		equityActionMapping.setUnique(_unique);
 
 		return equityActionMapping;
 	}
@@ -48,14 +48,14 @@ public class SocialEquityActionMapping implements Serializable {
 			return equals(
 				equityActionMapping.getInformationDailyLimit(),
 				equityActionMapping.getInformationLifespan(), type,
-				equityActionMapping.isInformationUnique(),
+				equityActionMapping.isUnique(),
 				equityActionMapping.getInformationValue());
 		}
 		else {
 			return equals(
 				equityActionMapping.getParticipationDailyLimit(),
 				equityActionMapping.getParticipationLifespan(), type,
-				equityActionMapping.isParticipationUnique(),
+				equityActionMapping.isUnique(),
 				equityActionMapping.getParticipationValue());
 		}
 	}
@@ -99,12 +99,8 @@ public class SocialEquityActionMapping implements Serializable {
 		return _participationValue;
 	}
 
-	public boolean isInformationUnique() {
-		return _informationUnique;
-	}
-
-	public boolean isParticipationUnique() {
-		return _participationUnique;
+	public boolean isUnique() {
+		return _unique;
 	}
 
 	public void setActionId(String actionId) {
@@ -123,10 +119,6 @@ public class SocialEquityActionMapping implements Serializable {
 		_informationLifespan = informationLifespan;
 	}
 
-	public void setInformationUnique(boolean informationUnique) {
-		_informationUnique = informationUnique;
-	}
-
 	public void setInformationValue(int informationValue) {
 		_informationValue = informationValue;
 	}
@@ -139,21 +131,24 @@ public class SocialEquityActionMapping implements Serializable {
 		_participationLifespan = participationLifespan;
 	}
 
-	public void setParticipationUnique(boolean participationUnique) {
-		_participationUnique = participationUnique;
-	}
-
 	public void setParticipationValue(int participationValue) {
 		_participationValue = participationValue;
+	}
+
+	public void setUnique(boolean unique) {
+		_unique = unique;
 	}
 
 	protected boolean equals(
 		int dailyLimit, int lifeSpan, int type, boolean unique, int value) {
 
+		if (_unique != unique) {
+			return false;
+		}
+
 		if (type == SocialEquitySettingConstants.TYPE_INFORMATION) {
 			if ((_informationDailyLimit != dailyLimit) ||
 				(_informationLifespan != lifeSpan) ||
-				(_informationUnique == unique) ||
 				(_informationValue != value)) {
 
 				return false;
@@ -162,7 +157,6 @@ public class SocialEquityActionMapping implements Serializable {
 		else {
 			if ((_participationDailyLimit != dailyLimit) ||
 				(_participationLifespan != lifeSpan) ||
-				(_participationUnique == unique) ||
 				(_participationValue != value)) {
 
 				return false;
@@ -176,11 +170,10 @@ public class SocialEquityActionMapping implements Serializable {
 	private String _className;
 	private int _informationDailyLimit;
 	private int _informationLifespan;
-	private boolean _informationUnique;
 	private int _informationValue;
 	private int _participationDailyLimit;
 	private int _participationLifespan;
-	private boolean _participationUnique;
 	private int _participationValue;
+	private boolean _unique;
 
 }
