@@ -219,6 +219,17 @@ public interface SubscriptionLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public com.liferay.portal.model.Subscription addSubscription(long userId,
+		long groupId, java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.Subscription addSubscription(long userId,
+		long groupId, java.lang.String className, long classPK,
+		java.lang.String frequency)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public void deleteSubscription(long userId, java.lang.String className,
 		long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,

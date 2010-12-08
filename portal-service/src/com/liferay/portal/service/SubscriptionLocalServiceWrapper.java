@@ -236,6 +236,23 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 			classPK, frequency);
 	}
 
+	public com.liferay.portal.model.Subscription addSubscription(long userId,
+		long groupId, java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _subscriptionLocalService.addSubscription(userId, groupId,
+			className, classPK);
+	}
+
+	public com.liferay.portal.model.Subscription addSubscription(long userId,
+		long groupId, java.lang.String className, long classPK,
+		java.lang.String frequency)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _subscriptionLocalService.addSubscription(userId, groupId,
+			className, classPK, frequency);
+	}
+
 	public void deleteSubscription(long userId, java.lang.String className,
 		long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,

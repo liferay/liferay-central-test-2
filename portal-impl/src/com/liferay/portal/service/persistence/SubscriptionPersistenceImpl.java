@@ -40,6 +40,9 @@ import com.liferay.portal.model.impl.SubscriptionImpl;
 import com.liferay.portal.model.impl.SubscriptionModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
+import com.liferay.portlet.social.service.persistence.SocialEquityLogPersistence;
+
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -2305,6 +2308,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	protected WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(type = WorkflowInstanceLinkPersistence.class)
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	@BeanReference(type = AssetEntryPersistence.class)
+	protected AssetEntryPersistence assetEntryPersistence;
+	@BeanReference(type = SocialEquityLogPersistence.class)
+	protected SocialEquityLogPersistence socialEquityLogPersistence;
 	private static final String _SQL_SELECT_SUBSCRIPTION = "SELECT subscription FROM Subscription subscription";
 	private static final String _SQL_SELECT_SUBSCRIPTION_WHERE = "SELECT subscription FROM Subscription subscription WHERE ";
 	private static final String _SQL_COUNT_SUBSCRIPTION = "SELECT COUNT(subscription) FROM Subscription subscription";

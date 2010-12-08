@@ -187,6 +187,13 @@ import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence;
 import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
 
+import com.liferay.portlet.asset.service.AssetEntryLocalService;
+import com.liferay.portlet.asset.service.AssetEntryService;
+import com.liferay.portlet.asset.service.persistence.AssetEntryFinder;
+import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
+import com.liferay.portlet.social.service.SocialEquityLogLocalService;
+import com.liferay.portlet.social.service.persistence.SocialEquityLogPersistence;
+
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -3412,6 +3419,118 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	/**
+	 * Gets the asset entry local service.
+	 *
+	 * @return the asset entry local service
+	 */
+	public AssetEntryLocalService getAssetEntryLocalService() {
+		return assetEntryLocalService;
+	}
+
+	/**
+	 * Sets the asset entry local service.
+	 *
+	 * @param assetEntryLocalService the asset entry local service
+	 */
+	public void setAssetEntryLocalService(
+		AssetEntryLocalService assetEntryLocalService) {
+		this.assetEntryLocalService = assetEntryLocalService;
+	}
+
+	/**
+	 * Gets the asset entry remote service.
+	 *
+	 * @return the asset entry remote service
+	 */
+	public AssetEntryService getAssetEntryService() {
+		return assetEntryService;
+	}
+
+	/**
+	 * Sets the asset entry remote service.
+	 *
+	 * @param assetEntryService the asset entry remote service
+	 */
+	public void setAssetEntryService(AssetEntryService assetEntryService) {
+		this.assetEntryService = assetEntryService;
+	}
+
+	/**
+	 * Gets the asset entry persistence.
+	 *
+	 * @return the asset entry persistence
+	 */
+	public AssetEntryPersistence getAssetEntryPersistence() {
+		return assetEntryPersistence;
+	}
+
+	/**
+	 * Sets the asset entry persistence.
+	 *
+	 * @param assetEntryPersistence the asset entry persistence
+	 */
+	public void setAssetEntryPersistence(
+		AssetEntryPersistence assetEntryPersistence) {
+		this.assetEntryPersistence = assetEntryPersistence;
+	}
+
+	/**
+	 * Gets the asset entry finder.
+	 *
+	 * @return the asset entry finder
+	 */
+	public AssetEntryFinder getAssetEntryFinder() {
+		return assetEntryFinder;
+	}
+
+	/**
+	 * Sets the asset entry finder.
+	 *
+	 * @param assetEntryFinder the asset entry finder
+	 */
+	public void setAssetEntryFinder(AssetEntryFinder assetEntryFinder) {
+		this.assetEntryFinder = assetEntryFinder;
+	}
+
+	/**
+	 * Gets the social equity log local service.
+	 *
+	 * @return the social equity log local service
+	 */
+	public SocialEquityLogLocalService getSocialEquityLogLocalService() {
+		return socialEquityLogLocalService;
+	}
+
+	/**
+	 * Sets the social equity log local service.
+	 *
+	 * @param socialEquityLogLocalService the social equity log local service
+	 */
+	public void setSocialEquityLogLocalService(
+		SocialEquityLogLocalService socialEquityLogLocalService) {
+		this.socialEquityLogLocalService = socialEquityLogLocalService;
+	}
+
+	/**
+	 * Gets the social equity log persistence.
+	 *
+	 * @return the social equity log persistence
+	 */
+	public SocialEquityLogPersistence getSocialEquityLogPersistence() {
+		return socialEquityLogPersistence;
+	}
+
+	/**
+	 * Sets the social equity log persistence.
+	 *
+	 * @param socialEquityLogPersistence the social equity log persistence
+	 */
+	public void setSocialEquityLogPersistence(
+		SocialEquityLogPersistence socialEquityLogPersistence) {
+		this.socialEquityLogPersistence = socialEquityLogPersistence;
+	}
+
+	/**
 	 * Performs an SQL query.
 	 *
 	 * @param sql the sql query to perform
@@ -3756,4 +3875,16 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	@BeanReference(type = AssetEntryLocalService.class)
+	protected AssetEntryLocalService assetEntryLocalService;
+	@BeanReference(type = AssetEntryService.class)
+	protected AssetEntryService assetEntryService;
+	@BeanReference(type = AssetEntryPersistence.class)
+	protected AssetEntryPersistence assetEntryPersistence;
+	@BeanReference(type = AssetEntryFinder.class)
+	protected AssetEntryFinder assetEntryFinder;
+	@BeanReference(type = SocialEquityLogLocalService.class)
+	protected SocialEquityLogLocalService socialEquityLogLocalService;
+	@BeanReference(type = SocialEquityLogPersistence.class)
+	protected SocialEquityLogPersistence socialEquityLogPersistence;
 }
