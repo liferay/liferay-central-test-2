@@ -24,6 +24,40 @@
 	<property name="tinymce.file" value="tinymce_3_2_1.zip" />
 	<property name="vaadin.file" value="vaadin-6.4.6.zip" />
 
+	<path id="jspc.common.lib">
+		<pathelement path="docroot/WEB-INF/classes" />
+		<pathelement path="${classpath.jsp}" />
+		<pathelement location="${project.dir}/portal-impl/portal-impl.jar" />
+		<pathelement location="${project.dir}/portal-service/portal-service.jar" />
+		<pathelement location="${project.dir}/util-java/util-java.jar" />
+		<pathelement location="${project.dir}/util-taglib/util-taglib.jar" />
+
+		<pathelement location="${project.dir}/lib/development/activation.jar" />
+		<pathelement location="${project.dir}/lib/development/mail.jar" />
+		<pathelement location="${project.dir}/lib/global/portlet.jar" />
+		<pathelement location="${project.dir}/lib/portal/ant.jar" />
+		<pathelement location="${project.dir}/lib/portal/backport-concurrent.jar" />
+		<pathelement location="${project.dir}/lib/portal/commons-collections.jar" />
+		<pathelement location="${project.dir}/lib/portal/commons-fileupload.jar" />
+		<pathelement location="${project.dir}/lib/portal/commons-lang.jar" />
+		<pathelement location="${project.dir}/lib/portal/commons-logging.jar" />
+		<pathelement location="${project.dir}/lib/portal/commons-math.jar" />
+		<pathelement location="${project.dir}/lib/portal/displaytag.jar" />
+		<pathelement location="${project.dir}/lib/portal/dom4j.jar" />
+		<pathelement location="${project.dir}/lib/portal/jabsorb.jar" />
+		<pathelement location="${project.dir}/lib/portal/jcifs.jar" />
+		<pathelement location="${project.dir}/lib/portal/jcommon.jar" />
+		<pathelement location="${project.dir}/lib/portal/jdom.jar" />
+		<pathelement location="${project.dir}/lib/portal/jfreechart.jar" />
+		<pathelement location="${project.dir}/lib/portal/jstl-api.jar" />
+		<pathelement location="${project.dir}/lib/portal/jstl-impl.jar" />
+		<pathelement location="${project.dir}/lib/portal/log4j.jar" />
+		<pathelement location="${project.dir}/lib/portal/openid4java.jar" />
+		<pathelement location="${project.dir}/lib/portal/rome.jar" />
+		<pathelement location="${project.dir}/lib/portal/struts.jar" />
+		<pathelement location="${project.dir}/lib/portal/velocity.jar" />
+	</path>
+
 	<target name="build-alloy">
 		<if>
 			<not>
@@ -583,11 +617,13 @@
 	</target>
 
 	<target name="compile-common-jsp">
-		<delete dir="${jspc.classes.dir}" />
+		<delete quiet="true" includeemptydirs="true">
+			<fileset dir="${jspc.classes.dir}" includes="**/*" />
+		</delete>
 
 		<java
 			classname="org.apache.jasper.JspC"
-			classpath="${jspc.classpath}"
+			classpathref="jspc.classpath"
 			fork="true"
 			newenvironment="true"
 			outputproperty="jspc.output"
@@ -605,7 +641,7 @@
 		</if>
 
 		<javac
-			classpath="${jspc.classpath}"
+			classpathref="jspc.classpath"
 			compiler="${javac.compiler}"
 			deprecation="${javac.deprecation}"
 			destdir="${jspc.classes.dir}"
@@ -616,126 +652,83 @@
 		/>
 	</target>
 
-	<target name="compile-common-lib">
-		<if>
-			<available file="${project.dir}/portal-impl/portal-impl.jar" />
-			<then>
-				<unjar src="${project.dir}/portal-impl/portal-impl.jar" dest="${classpath.jsp}" />
-			</then>
-		</if>
-
-		<unjar src="${project.dir}/portal-service/portal-service.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/util-java/util-java.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/util-taglib/util-taglib.jar" dest="${classpath.jsp}" />
-
-		<unjar src="${project.dir}/lib/development/activation.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/development/mail.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/global/portlet.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/ant.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/backport-concurrent.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/commons-collections.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/commons-fileupload.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/commons-lang.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/commons-logging.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/commons-math.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/displaytag.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/dom4j.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/jabsorb.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/jcifs.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/jcommon.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/jdom.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/jfreechart.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/jstl-api.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/jstl-impl.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/log4j.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/openid4java.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/rome.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/struts.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/velocity.jar" dest="${classpath.jsp}" />
-
-		<if>
-			<available file="docroot/WEB-INF/classes" />
-			<then>
-				<copy todir="${classpath.jsp}">
-					<fileset dir="docroot/WEB-INF/classes" />
-				</copy>
-			</then>
-		</if>
-	</target>
-
 	<target name="compile-jboss">
 		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
-		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/lib/jboss-logging-spi.jar;${app.server.deploy.dir}/jbossweb.sar/jasper-jdt.jar;${app.server.deploy.dir}/jbossweb.sar/jbossweb.jar;${app.server.dir}/common/lib/el-api.jar" />
 
-		<if>
-			<not>
-				<available file="${classpath.jsp}" />
-			</not>
-			<then>
-				<antcall target="compile-common-lib" />
+		<path id="jspc.classpath">
+			<pathelement location="${env.JAVA_HOME}/jre/lib/rt.jar" />
 
-				<unjar src="${app.server.dir}/common/lib/jsp-api.jar" dest="${classpath.jsp}" />
-				<unjar src="${app.server.dir}/common/lib/servlet-api.jar" dest="${classpath.jsp}" />
-				<unjar src="${app.server.deploy.dir}/jbossweb.sar/jstl.jar" dest="${classpath.jsp}" />
-			</then>
-		</if>
+			<path refid="jspc.common.lib" />
 
-		<antcall target="compile-common-jsp">
-			<param name="arg.line" value="-classpath ${jspc.classpath} -d ${jspc.classes.dir} -webapp ${jsp.precompile.dir}" />
+			<pathelement location="${app.server.dir}/lib/jboss-logging-spi.jar" />
+			<pathelement location="${app.server.deploy.dir}/jbossweb.sar/jasper-jdt.jar" />
+			<pathelement location="${app.server.deploy.dir}/jbossweb.sar/jbossweb.jar" />
+			<pathelement location="${app.server.dir}/common/lib/el-api.jar" />
+
+			<pathelement location="${app.server.dir}/common/lib/jsp-api.jar" />
+			<pathelement location="${app.server.dir}/common/lib/servlet-api.jar" />
+			<pathelement location="${app.server.deploy.dir}/jbossweb.sar/jstl.jar" />
+		</path>
+
+		<antcall target="compile-common-jsp" inheritrefs="true">
+			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp ${jsp.precompile.dir}" />
 		</antcall>
 	</target>
 
 	<target name="compile-jonas">
 		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
-		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/repositories/maven2-internal/org/ow2/jonas/jonas-web-container-tomcat-6.0/5.1.2/jonas-web-container-tomcat-6.0-5.1.2-ipojo.jar;${app.server.dir}/repositories/maven2-internal/org/ow2/jonas/osgi/javaee-api/5.1.2/javaee-api-5.1.2.jar" />
 
-		<if>
-			<not>
-				<available file="${classpath.jsp}" />
-			</not>
-			<then>
-				<antcall target="compile-common-lib" />
-			</then>
-		</if>
+		<path id="jspc.classpath">
+			<pathelement location="${env.JAVA_HOME}/jre/lib/rt.jar" />
 
-		<antcall target="compile-common-jsp">
+			<path refid="jspc.common.lib" />
+
+			<pathelement location="${app.server.dir}/repositories/maven2-internal/org/ow2/jonas/jonas-web-container-tomcat-6.0/5.1.2/jonas-web-container-tomcat-6.0-5.1.2-ipojo.jar" />
+			<pathelement location="${app.server.dir}/repositories/maven2-internal/org/ow2/jonas/osgi/javaee-api/5.1.2/javaee-api-5.1.2.jar" />
+		</path>
+
+		<antcall target="compile-common-jsp" inheritrefs="true">
 			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp ${jsp.precompile.dir}" />
 		</antcall>
 	</target>
 
 	<target name="compile-resin">
 		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
-		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${env.JAVA_HOME}/lib/tools.jar;${classpath.jsp};${app.server.dir}/lib/jaxws-api.jar;${app.server.dir}/lib/jms-11.jar;${app.server.dir}/lib/jsdk-15.jar;${app.server.dir}/lib/jstl-11.jar;${app.server.dir}/lib/jta-101.jar;${app.server.dir}/lib/resin.jar" />
 
-		<if>
-			<not>
-				<available file="${classpath.jsp}" />
-			</not>
-			<then>
-				<antcall target="compile-common-lib" />
+		<path id="jspc.classpath">
+			<pathelement location="${env.JAVA_HOME}/jre/lib/rt.jar" />
+			<pathelement location="${env.JAVA_HOME}/lib/tools.jar" />
 
-				<unjar src="${project.dir}/lib/development/saxpath.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/axis.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/cas-client-core.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/commons-beanutils.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/commons-digester.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/commons-httpclient.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/pdfbox.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/poi.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/poi-scratchpad.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/portletbridge-core.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/portletbridge-portlet.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/simplecaptcha.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/slf4j-api.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/slf4j-log4j12.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/spring-beans.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/spring-context.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/spring-core.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/spring-web.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/struts-el.jar" dest="${classpath.jsp}" />
-				<unjar src="${project.dir}/lib/portal/urlrewrite.jar" dest="${classpath.jsp}" />
-			</then>
-		</if>
+			<path refid="jspc.common.lib" />
+
+			<pathelement location="${project.dir}/lib/development/saxpath.jar" />
+			<pathelement location="${project.dir}/lib/portal/axis.jar" />
+			<pathelement location="${project.dir}/lib/portal/cas-client-core.jar" />
+			<pathelement location="${project.dir}/lib/portal/commons-beanutils.jar" />
+			<pathelement location="${project.dir}/lib/portal/commons-digester.jar" />
+			<pathelement location="${project.dir}/lib/portal/commons-httpclient.jar" />
+			<pathelement location="${project.dir}/lib/portal/pdfbox.jar" />
+			<pathelement location="${project.dir}/lib/portal/poi.jar" />
+			<pathelement location="${project.dir}/lib/portal/poi-scratchpad.jar" />
+			<pathelement location="${project.dir}/lib/portal/portletbridge-core.jar" />
+			<pathelement location="${project.dir}/lib/portal/portletbridge-portlet.jar" />
+			<pathelement location="${project.dir}/lib/portal/simplecaptcha.jar" />
+			<pathelement location="${project.dir}/lib/portal/slf4j-api.jar" />
+			<pathelement location="${project.dir}/lib/portal/slf4j-log4j12.jar" />
+			<pathelement location="${project.dir}/lib/portal/spring-beans.jar" />
+			<pathelement location="${project.dir}/lib/portal/spring-context.jar" />
+			<pathelement location="${project.dir}/lib/portal/spring-core.jar" />
+			<pathelement location="${project.dir}/lib/portal/spring-web.jar" />
+			<pathelement location="${project.dir}/lib/portal/struts-el.jar" />
+			<pathelement location="${project.dir}/lib/portal/urlrewrite.jar" />
+
+			<pathelement location="${app.server.dir}/lib/jaxws-api.jar" />
+			<pathelement location="${app.server.dir}/lib/jms-11.jar" />
+			<pathelement location="${app.server.dir}/lib/jsdk-15.jar" />
+			<pathelement location="${app.server.dir}/lib/jstl-11.jar" />
+			<pathelement location="${app.server.dir}/lib/jta-101.jar" />
+			<pathelement location="${app.server.dir}/lib/resin.jar" />
+		</path>
 
 		<copy file="docroot/WEB-INF/web.xml" tofile="docroot/WEB-INF/web.xml.bak" />
 
@@ -751,11 +744,13 @@
 			<replacefilter token="&lt;/session-config&gt;" value="&lt;/session-config--&gt;" />
 		</replace>
 
-		<delete dir="${jspc.classes.dir}" />
+		<delete quiet="true" includeemptydirs="true">
+			<fileset dir="${jspc.classes.dir}" includes="**/*" />
+		</delete>
 
 		<java
 			classname="com.liferay.portal.tools.jspc.resin.BatchJspCompiler"
-			classpath="${jspc.classpath}"
+			classpathref="jspc.classpath"
 			fork="true"
 			maxmemory="512m"
 			newenvironment="true"
@@ -769,22 +764,23 @@
 
 	<target name="compile-tomcat">
 		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
-		<property name="jspc.classpath" value="${env.JAVA_HOME}/jre/lib/rt.jar;${classpath.jsp};${app.server.dir}/lib/jasper.jar;${app.server.dir}/lib/jasper-el.jar;${app.server.dir}/lib/jasper-jdt.jar;${app.server.bin.dir}/tomcat-juli.jar" />
 
-		<if>
-			<not>
-				<available file="${classpath.jsp}" />
-			</not>
-			<then>
-				<antcall target="compile-common-lib" />
+		<path id="jspc.classpath">
+			<pathelement location="${env.JAVA_HOME}/jre/lib/rt.jar" />
 
-				<unjar src="${app.server.dir}/lib/el-api.jar" dest="${classpath.jsp}" />
-				<unjar src="${app.server.dir}/lib/jsp-api.jar" dest="${classpath.jsp}" />
-				<unjar src="${app.server.dir}/lib/servlet-api.jar" dest="${classpath.jsp}" />
-			</then>
-		</if>
+			<path refid="jspc.common.lib" />
 
-		<antcall target="compile-common-jsp">
+			<pathelement location="${app.server.dir}/lib/el-api.jar" />
+			<pathelement location="${app.server.dir}/lib/jsp-api.jar" />
+			<pathelement location="${app.server.dir}/lib/servlet-api.jar" />
+
+			<pathelement location="${app.server.dir}/lib/jasper.jar" />
+			<pathelement location="${app.server.dir}/lib/jasper-el.jar" />
+			<pathelement location="${app.server.dir}/lib/jasper-jdt.jar" />
+			<pathelement location="${app.server.bin.dir}/tomcat-juli.jar" />
+		</path>
+
+		<antcall target="compile-common-jsp" inheritrefs="true">
 			<param name="arg.line" value="-d ${jspc.classes.dir} -webapp ${jsp.precompile.dir}" />
 		</antcall>
 	</target>
