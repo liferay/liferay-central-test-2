@@ -302,8 +302,8 @@ public class StagingImpl implements Staging {
 		UnicodeProperties typeSettingsProperties =
 			liveGroup.getTypeSettingsProperties();
 
-		typeSettingsProperties.remove("branching");
-		typeSettingsProperties.remove("locking");
+		typeSettingsProperties.remove("branchingPrivate");
+		typeSettingsProperties.remove("branchingPublic");
 		typeSettingsProperties.remove("remoteAddress");
 		typeSettingsProperties.remove("remoteGroupId");
 		typeSettingsProperties.remove("remotePort");
@@ -345,13 +345,17 @@ public class StagingImpl implements Staging {
 			Group stagingGroup = liveGroup.getStagingGroup();
 
 			LayoutSetBranchLocalServiceUtil.deleteLayoutSetBranches(
-				stagingGroup.getGroupId(), true);
+				stagingGroup.getGroupId(), true, true);
+			LayoutSetBranchLocalServiceUtil.deleteLayoutSetBranches(
+				stagingGroup.getGroupId(), false, true);
 
 			GroupLocalServiceUtil.deleteGroup(stagingGroup.getGroupId());
 		}
 		else {
 			LayoutSetBranchLocalServiceUtil.deleteLayoutSetBranches(
-				liveGroup.getGroupId(), true);
+				liveGroup.getGroupId(), true, true);
+			LayoutSetBranchLocalServiceUtil.deleteLayoutSetBranches(
+				liveGroup.getGroupId(), false, true);
 		}
 
 		GroupLocalServiceUtil.updateGroup(
@@ -361,7 +365,6 @@ public class StagingImpl implements Staging {
 	public void enableLocalStaging(
 			long userId, long scopeGroupId, long liveGroupId,
 			boolean branchingPublic, boolean branchingPrivate,
-			boolean lockingPublic, boolean lockingPrivate,
 			ServiceContext serviceContext)
 		throws Exception {
 
@@ -375,13 +378,9 @@ public class StagingImpl implements Staging {
 			liveGroup.getTypeSettingsProperties();
 
 		typeSettingsProperties.setProperty(
-			"branching-private", String.valueOf(branchingPrivate));
+			"branchingPrivate", String.valueOf(branchingPrivate));
 		typeSettingsProperties.setProperty(
-			"branching-public", String.valueOf(branchingPublic));
-		typeSettingsProperties.setProperty(
-			"locking-private", String.valueOf(lockingPrivate));
-		typeSettingsProperties.setProperty(
-			"locking-public", String.valueOf(lockingPublic));
+			"branchingPublic", String.valueOf(branchingPublic));
 		typeSettingsProperties.setProperty(
 			"staged", Boolean.TRUE.toString());
 		typeSettingsProperties.setProperty(
@@ -451,9 +450,8 @@ public class StagingImpl implements Staging {
 	public void enableRemoteStaging(
 			long userId, long scopeGroupId, long liveGroupId,
 			boolean branchingPublic, boolean branchingPrivate,
-			boolean lockingPublic, boolean lockingPrivate, String remoteAddress,
-			long remoteGroupId, int remotePort, boolean secureConnection,
-			ServiceContext serviceContext)
+			String remoteAddress, long remoteGroupId, int remotePort,
+			boolean secureConnection, ServiceContext serviceContext)
 		throws Exception {
 
 		Group liveGroup = GroupLocalServiceUtil.getGroup(liveGroupId);
@@ -468,13 +466,9 @@ public class StagingImpl implements Staging {
 			liveGroup.getTypeSettingsProperties();
 
 		typeSettingsProperties.setProperty(
-			"branching-public", String.valueOf(branchingPublic));
+			"branchingPublic", String.valueOf(branchingPublic));
 		typeSettingsProperties.setProperty(
-			"branching-private", String.valueOf(branchingPrivate));
-		typeSettingsProperties.setProperty(
-			"locking-public", String.valueOf(lockingPublic));
-		typeSettingsProperties.setProperty(
-			"locking-private", String.valueOf(lockingPrivate));
+			"branchingPrivate", String.valueOf(branchingPrivate));
 		typeSettingsProperties.setProperty("remoteAddress", remoteAddress);
 		typeSettingsProperties.setProperty(
 			"remoteGroupId", String.valueOf(remoteGroupId));
@@ -983,10 +977,6 @@ public class StagingImpl implements Staging {
 			portletRequest, "branchingPublic");
 		boolean branchingPrivate = ParamUtil.getBoolean(
 			portletRequest, "branchingPrivate");
-		boolean lockingPublic = ParamUtil.getBoolean(
-			portletRequest, "lockingPublic");
-		boolean lockingPrivate = ParamUtil.getBoolean(
-			portletRequest, "lockingPrivate");
 
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
@@ -998,8 +988,7 @@ public class StagingImpl implements Staging {
 		else if (stagingType == StagingConstants.TYPE_LOCAL_STAGING) {
 			enableLocalStaging(
 				userId, scopeGroupId, liveGroupId, branchingPublic,
-				branchingPrivate, lockingPublic, lockingPrivate,
-				serviceContext);
+				branchingPrivate, serviceContext);
 		}
 		else if (stagingType == StagingConstants.TYPE_REMOTE_STAGING) {
 			String remoteAddress = ParamUtil.getString(
@@ -1012,9 +1001,8 @@ public class StagingImpl implements Staging {
 
 			enableRemoteStaging(
 				userId, scopeGroupId, liveGroupId, branchingPublic,
-				branchingPrivate, lockingPublic, lockingPrivate,
-				remoteAddress, remoteGroupId, remotePort, secureConnection,
-				serviceContext);
+				branchingPrivate, remoteAddress, remoteGroupId, remotePort,
+				secureConnection, serviceContext);
 		}
 	}
 

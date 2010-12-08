@@ -62,16 +62,14 @@ public interface Staging {
 	public void enableLocalStaging(
 			long userId, long scopeGroupId, long liveGroupId,
 			boolean branchingPublic, boolean branchingPrivate,
-			boolean lockingPublic, boolean lockingPrivate,
 			ServiceContext serviceContext)
 		throws Exception;
 
 	public void enableRemoteStaging(
 			long userId, long scopeGroupId, long liveGroupId,
 			boolean branchingPublic, boolean branchingPrivate,
-			boolean lockingPublic, boolean lockingPrivate, String remoteAddress,
-			long remoteGroupId, int remotePort, boolean secureConnection,
-			ServiceContext serviceContext)
+			String remoteAddress, long remoteGroupId, int remotePort,
+			boolean secureConnection, ServiceContext serviceContext)
 		throws Exception;
 
 	public List<Layout> getMissingParentLayouts(Layout layout, long liveGroupId)

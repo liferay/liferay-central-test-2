@@ -88,27 +88,25 @@ public class StagingUtil {
 	public static void enableLocalStaging(
 			long userId, long scopeGroupId, long liveGroupId,
 			boolean branchingPublic, boolean branchingPrivate,
-			boolean lockingPublic, boolean lockingPrivate,
 			ServiceContext serviceContext)
 		throws Exception {
 
 		getStaging().enableLocalStaging(
 			userId, scopeGroupId, liveGroupId, branchingPublic,
-			branchingPrivate, lockingPublic, lockingPrivate, serviceContext);
+			branchingPrivate, serviceContext);
 	}
 
 	public static void enableRemoteStaging(
 			long userId, long scopeGroupId, long liveGroupId,
 			boolean branchingPublic, boolean branchingPrivate,
-			boolean lockingPublic, boolean lockingPrivate, String remoteAddress,
-			long remoteGroupId, int remotePort, boolean secureConnection,
-			ServiceContext serviceContext)
+			String remoteAddress, long remoteGroupId, int remotePort,
+			boolean secureConnection, ServiceContext serviceContext)
 		throws Exception {
 
 		getStaging().enableRemoteStaging(
 			userId, scopeGroupId, liveGroupId, branchingPublic,
-			branchingPrivate, lockingPublic, lockingPrivate, remoteAddress,
-			remoteGroupId, remotePort, secureConnection, serviceContext);
+			branchingPrivate, remoteAddress, remoteGroupId, remotePort,
+			secureConnection, serviceContext);
 	}
 
 	public static List<Layout> getMissingParentLayouts(
