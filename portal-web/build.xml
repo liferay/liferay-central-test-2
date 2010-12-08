@@ -27,12 +27,10 @@
 	<path id="jspc.common.classpath">
 		<pathelement path="docroot/WEB-INF/classes" />
 		<pathelement path="${classpath.jsp}" />
-
 		<pathelement location="${project.dir}/portal-impl/portal-impl.jar" />
 		<pathelement location="${project.dir}/portal-service/portal-service.jar" />
 		<pathelement location="${project.dir}/util-java/util-java.jar" />
 		<pathelement location="${project.dir}/util-taglib/util-taglib.jar" />
-
 		<pathelement location="${project.dir}/lib/development/activation.jar" />
 		<pathelement location="${project.dir}/lib/development/mail.jar" />
 		<pathelement location="${project.dir}/lib/global/portlet.jar" />
