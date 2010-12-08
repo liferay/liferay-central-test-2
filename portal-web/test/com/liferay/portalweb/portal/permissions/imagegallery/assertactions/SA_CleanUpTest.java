@@ -62,7 +62,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 				}
 
 				boolean Folder1Present = selenium.isElementPresent(
-						"//td[4]/ul/li/strong/a");
+						"//td[4]/span/ul/li/strong/a");
 
 				if (!Folder1Present) {
 					label = 2;
@@ -70,7 +70,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/ul/li/strong/a",
+				selenium.clickAt("//td[4]/span/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -101,7 +101,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 			case 2:
 
 				boolean Folder2Present = selenium.isElementPresent(
-						"//td[4]/ul/li/strong/a");
+						"//td[4]/span/ul/li/strong/a");
 
 				if (!Folder2Present) {
 					label = 3;
@@ -109,7 +109,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/ul/li/strong/a",
+				selenium.clickAt("//td[4]/span/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {

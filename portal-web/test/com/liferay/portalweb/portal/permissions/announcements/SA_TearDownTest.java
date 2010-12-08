@@ -107,7 +107,7 @@ public class SA_TearDownTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 
 				boolean GuestAnnouncementPresent = selenium.isElementPresent(
-						"//td[6]/ul/li/strong/a");
+						"//td[6]/span/ul/li/strong/a");
 
 				if (!GuestAnnouncementPresent) {
 					label = 2;
@@ -115,7 +115,7 @@ public class SA_TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[6]/ul/li/strong/a",
+				selenium.clickAt("//td[6]/span/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -148,7 +148,7 @@ public class SA_TearDownTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 
 				boolean GeneralAnnouncementPresent = selenium.isElementPresent(
-						"//td[6]/ul/li/strong/a");
+						"//td[6]/span/ul/li/strong/a");
 
 				if (!GeneralAnnouncementPresent) {
 					label = 3;
@@ -156,7 +156,7 @@ public class SA_TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[6]/ul/li/strong/a",
+				selenium.clickAt("//td[6]/span/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -189,7 +189,7 @@ public class SA_TearDownTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 
 				boolean CAAnnouncementPresent = selenium.isElementPresent(
-						"//td[6]/ul/li/strong/a");
+						"//td[6]/span/ul/li/strong/a");
 
 				if (!CAAnnouncementPresent) {
 					label = 4;
@@ -197,7 +197,7 @@ public class SA_TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[6]/ul/li/strong/a",
+				selenium.clickAt("//td[6]/span/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -230,7 +230,7 @@ public class SA_TearDownTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 
 				boolean MemberAnnouncementPresent = selenium.isElementPresent(
-						"//td[6]/ul/li/strong/a");
+						"//td[6]/span/ul/li/strong/a");
 
 				if (!MemberAnnouncementPresent) {
 					label = 5;
@@ -238,7 +238,7 @@ public class SA_TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[6]/ul/li/strong/a",
+				selenium.clickAt("//td[6]/span/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {

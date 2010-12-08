@@ -49,7 +49,8 @@ public class CA_DeleteMessageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Test Thread 1"));
-		selenium.clickAt("//td[7]/ul/li/strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[7]/span/ul/li/strong/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

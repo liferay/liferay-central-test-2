@@ -50,7 +50,7 @@ public class ManagePortletConsumerHWTest extends BaseTestCase {
 		selenium.clickAt("link=Consumers", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//td[2]/ul/li/strong/a",
+		selenium.clickAt("//td[2]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {

@@ -96,7 +96,7 @@ public class TearDownArchivedSetupTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 
 				boolean archiveSetup1Present = selenium.isElementPresent(
-						"//td[4]/ul/li/strong/a");
+						"//td[4]/span/ul/li/strong/a");
 
 				if (!archiveSetup1Present) {
 					label = 2;
@@ -104,7 +104,7 @@ public class TearDownArchivedSetupTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/ul/li/strong/a",
+				selenium.clickAt("//td[4]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -135,7 +135,7 @@ public class TearDownArchivedSetupTest extends BaseTestCase {
 			case 2:
 
 				boolean archiveSetup2Present = selenium.isElementPresent(
-						"//td[4]/ul/li/strong/a");
+						"//td[4]/span/ul/li/strong/a");
 
 				if (!archiveSetup2Present) {
 					label = 3;
@@ -143,7 +143,7 @@ public class TearDownArchivedSetupTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/ul/li/strong/a",
+				selenium.clickAt("//td[4]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -174,7 +174,7 @@ public class TearDownArchivedSetupTest extends BaseTestCase {
 			case 3:
 
 				boolean archiveSetup3Present = selenium.isElementPresent(
-						"//td[4]/ul/li/strong/a");
+						"//td[4]/span/ul/li/strong/a");
 
 				if (!archiveSetup3Present) {
 					label = 4;
@@ -182,7 +182,7 @@ public class TearDownArchivedSetupTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/ul/li/strong/a",
+				selenium.clickAt("//td[4]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -213,7 +213,7 @@ public class TearDownArchivedSetupTest extends BaseTestCase {
 			case 4:
 
 				boolean archiveSetup4Present = selenium.isElementPresent(
-						"//td[4]/ul/li/strong/a");
+						"//td[4]/span/ul/li/strong/a");
 
 				if (!archiveSetup4Present) {
 					label = 5;
@@ -221,7 +221,7 @@ public class TearDownArchivedSetupTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/ul/li/strong/a",
+				selenium.clickAt("//td[4]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -252,7 +252,7 @@ public class TearDownArchivedSetupTest extends BaseTestCase {
 			case 5:
 
 				boolean archiveSetup5Present = selenium.isElementPresent(
-						"//td[4]/ul/li/strong/a");
+						"//td[4]/span/ul/li/strong/a");
 
 				if (!archiveSetup5Present) {
 					label = 6;
@@ -260,7 +260,7 @@ public class TearDownArchivedSetupTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/ul/li/strong/a",
+				selenium.clickAt("//td[4]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
