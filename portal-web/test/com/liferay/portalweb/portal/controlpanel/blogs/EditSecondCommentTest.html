@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>EditSecondCommentTest</title>
 </head>
 <body>
@@ -37,9 +34,14 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>//div[3]/div/div[4]/div/span/a/span</td>
+	<td>Edit</td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>//td[4]/span/a/span</td>
-	<td></td>
+	<td>//div[3]/div/div[4]/div/span/a/span</td>
+	<td>Edit</td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
@@ -63,7 +65,7 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//tr[2]/td/input[1]</td>
+	<td>//input[@value='Publish']</td>
 	<td>Publish</td>
 </tr>
 <tr>
@@ -78,7 +80,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//td[2]/div[1]</td>
+	<td>//form/div/div/div/div/div[3]/div/div[1]</td>
 	<td>This is an edited second entry comment.</td>
 </tr>
 

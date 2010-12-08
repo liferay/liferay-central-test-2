@@ -50,7 +50,10 @@ public class DeleteSecondCommentTest extends BaseTestCase {
 		selenium.clickAt("link=Second Test Entry", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.click(RuntimeVariables.replace("//td[5]/span/a/span"));
+		assertEquals(RuntimeVariables.replace("Delete"),
+			selenium.getText("//div[3]/div/div[5]/div/span/a/span"));
+		selenium.click(RuntimeVariables.replace(
+				"//div[3]/div/div[5]/div/span/a/span"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));

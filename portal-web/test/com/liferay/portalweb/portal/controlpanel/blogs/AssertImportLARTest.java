@@ -93,6 +93,6 @@ public class AssertImportLARTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("This is a test entry."),
 			selenium.getText("//p"));
 		assertEquals(RuntimeVariables.replace("This is a test entry comment."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//form/div/div/div/div/div[3]/div/div[1]"));
 	}
 }

@@ -50,7 +50,9 @@ public class EditSecondCommentTest extends BaseTestCase {
 		selenium.clickAt("link=Second Test Entry", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.click("//td[4]/span/a/span");
+		assertEquals(RuntimeVariables.replace("Edit"),
+			selenium.getText("//div[3]/div/div[4]/div/span/a/span"));
+		selenium.click("//div[3]/div/div[4]/div/span/a/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -74,7 +76,7 @@ public class EditSecondCommentTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.keyPress("_33_editReplyBody1", RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_33_editReplyBody1", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("//tr[2]/td/input[1]",
+		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace("Publish"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -83,6 +85,6 @@ public class EditSecondCommentTest extends BaseTestCase {
 				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace(
 				"This is an edited second entry comment."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//form/div/div/div/div/div[3]/div/div[1]"));
 	}
 }

@@ -51,7 +51,8 @@ public class AddSecondEntryCommentTest extends BaseTestCase {
 			RuntimeVariables.replace("0 Comments"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//td/a", RuntimeVariables.replace("Be the first."));
+		selenium.clickAt("//fieldset/div/a",
+			RuntimeVariables.replace("Be the first."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -82,6 +83,6 @@ public class AddSecondEntryCommentTest extends BaseTestCase {
 				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("This is a second entry comment."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//form/div/div/div/div/div[3]/div/div[1]"));
 	}
 }
