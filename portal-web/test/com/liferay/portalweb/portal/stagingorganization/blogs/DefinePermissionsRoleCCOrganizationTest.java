@@ -55,7 +55,7 @@ public class DefinePermissionsRoleCCOrganizationTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"This is the Content Creator Role."),
 			selenium.getText("//tr[10]/td[3]/a"));
-		selenium.clickAt("//tr[10]/td[4]/ul/li/strong/a",
+		selenium.clickAt("//tr[10]/td[4]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {

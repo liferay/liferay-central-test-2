@@ -52,7 +52,7 @@ public class Portlet_AssertEditDocumentPermissionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Permissions"));
-		selenium.clickAt("//td[5]/ul/li/strong/a",
+		selenium.clickAt("//td[5]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {

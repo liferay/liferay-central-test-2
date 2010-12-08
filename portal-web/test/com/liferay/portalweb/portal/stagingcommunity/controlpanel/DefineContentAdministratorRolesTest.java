@@ -42,7 +42,7 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 		selenium.clickAt("link=Roles", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//tr[7]/td[4]/ul/li/strong/a",
+		selenium.clickAt("//tr[7]/td[4]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {

@@ -30,7 +30,7 @@ public class N2_UpdateMessageBoardsContentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//td[5]/ul/li/strong/a")) {
+				if (selenium.isVisible("//td[5]/span/ul/li/strong/a")) {
 					break;
 				}
 			}
@@ -41,7 +41,7 @@ public class N2_UpdateMessageBoardsContentTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//td[5]/ul/li/strong/a",
+		selenium.clickAt("//td[5]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {

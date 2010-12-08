@@ -53,7 +53,7 @@ public class Portlet_DeleteDocumentTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Delete"));
 		assertTrue(selenium.isPartialText("//td[1]/a",
 				"Portlet1 Temporary1 Document1"));
-		selenium.clickAt("//td[5]/ul/li/strong/a",
+		selenium.clickAt("//td[5]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {

@@ -62,7 +62,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 				}
 
 				boolean DLFoldersNotPresent1 = selenium.isElementPresent(
-						"//td[4]/ul/li/strong/a");
+						"//td[4]/span/ul/li/strong/a");
 
 				if (!DLFoldersNotPresent1) {
 					label = 2;
@@ -70,7 +70,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/ul/li/strong/a",
+				selenium.clickAt("//td[4]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -101,7 +101,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 			case 2:
 
 				boolean DLFoldersNotPresent2 = selenium.isElementPresent(
-						"//td[4]/ul/li/strong/a");
+						"//td[4]/span/ul/li/strong/a");
 
 				if (!DLFoldersNotPresent2) {
 					label = 3;
@@ -109,7 +109,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/ul/li/strong/a",
+				selenium.clickAt("//td[4]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
