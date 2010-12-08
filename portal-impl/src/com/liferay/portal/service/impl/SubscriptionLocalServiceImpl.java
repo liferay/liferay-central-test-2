@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.SubscriptionConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.base.SubscriptionLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 
@@ -27,21 +28,41 @@ import java.util.List;
 
 /**
  * @author Charles May
+ * @author Zsolt Berentey
  */
 public class SubscriptionLocalServiceImpl
 	extends SubscriptionLocalServiceBaseImpl {
 
+	@Deprecated
 	public Subscription addSubscription(
 			long userId, String className, long classPK)
 		throws PortalException, SystemException {
 
 		return addSubscription(
-			userId, className, classPK,
+			userId, -1, className, classPK,
+			SubscriptionConstants.FREQUENCY_INSTANT);
+	}
+
+	@Deprecated
+	public Subscription addSubscription(
+			long userId, String className, long classPK, String frequency)
+		throws PortalException, SystemException {
+
+		return addSubscription(userId, -1, className, classPK, frequency);
+	}
+
+	public Subscription addSubscription(
+			long userId, long groupId, String className, long classPK)
+		throws PortalException, SystemException {
+
+		return addSubscription(
+			userId, groupId, className, classPK,
 			SubscriptionConstants.FREQUENCY_INSTANT);
 	}
 
 	public Subscription addSubscription(
-			long userId, String className, long classPK, String frequency)
+			long userId, long groupId, String className, long classPK,
+			String frequency)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -66,6 +87,24 @@ public class SubscriptionLocalServiceImpl
 			subscription.setFrequency(frequency);
 
 			subscriptionPersistence.update(subscription, false);
+		}
+
+		// social - we need an asset for social equity
+
+		if (groupId > -1) {
+			try {
+				assetEntryLocalService.getEntry(className, classPK);
+			}
+			catch (Exception e) {
+				assetEntryLocalService.updateEntry(
+					userId, groupId, className, classPK, null,
+					null, null, false, null, null, null, null, null,
+					String.valueOf(groupId), null, null, null, 0, 0, null,
+					false);
+			}
+
+			socialEquityLogLocalService.addEquityLogs(
+				userId, className, classPK, ActionKeys.SUBSCRIBE);
 		}
 
 		return subscription;
