@@ -6,11 +6,11 @@
 		<portlet-name>2</portlet-name>
 		<icon>/html/icons/my_account.png</icon>
 		<struts-path>my_account</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>my</control-panel-entry-category>
 		<control-panel-entry-weight>1.0</control-panel-entry-weight>
 		<control-panel-entry-class>com.liferay.portlet.myaccount.MyAccountControlPanelEntry</control-panel-entry-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -25,8 +25,8 @@
 		<portlet-name>3</portlet-name>
 		<icon>/html/icons/search.png</icon>
 		<struts-path>search</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<!--<open-search-class>com.liferay.portal.search.PortalOpenSearchImpl</open-search-class>-->
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -38,7 +38,6 @@
 		<portlet-name>8</portlet-name>
 		<icon>/html/icons/calendar.png</icon>
 		<struts-path>calendar</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.calendar.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.calendar.util.CalIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.calendar.util.CalendarOpenSearchImpl</open-search-class>
@@ -57,6 +56,7 @@
 		<control-panel-entry-weight>5.0</control-panel-entry-weight>
 		<asset-renderer-factory>com.liferay.portlet.calendar.asset.CalEventAssetRendererFactory</asset-renderer-factory>
 		<custom-attributes-display>com.liferay.portlet.calendar.CalEventCustomAttributesDisplay</custom-attributes-display>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<show-portlet-access-denied>true</show-portlet-access-denied>
 		<show-portlet-inactive>true</show-portlet-inactive>
@@ -72,7 +72,6 @@
 		<portlet-name>9</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>admin</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<scheduler-entry>
 			<scheduler-event-listener-class>com.liferay.portlet.admin.messaging.PluginRepositoriesMessageListener</scheduler-event-listener-class>
 			<trigger>
@@ -92,6 +91,7 @@
 			</trigger>
 		</scheduler-entry>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -114,10 +114,10 @@
 		<portlet-name>11</portlet-name>
 		<icon>/html/icons/directory.png</icon>
 		<struts-path>directory</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<indexer-class>com.liferay.portlet.directory.util.DirectoryIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.directory.util.DirectoryOpenSearchImpl</open-search-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -129,7 +129,6 @@
 		<portlet-name>15</portlet-name>
 		<icon>/html/icons/journal.png</icon>
 		<struts-path>journal</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.journal.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.journal.util.JournalIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.journal.util.JournalOpenSearchImpl</open-search-class>
@@ -153,6 +152,7 @@
 		<asset-renderer-factory>com.liferay.portlet.journal.asset.JournalArticleAssetRendererFactory</asset-renderer-factory>
 		<workflow-handler>com.liferay.portlet.journal.workflow.JournalArticleWorkflowHandler</workflow-handler>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
@@ -179,7 +179,6 @@
 		<portlet-name>19</portlet-name>
 		<icon>/html/icons/message_boards.png</icon>
 		<struts-path>message_boards</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.messageboards.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.messageboards.util.MBIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.messageboards.util.MBOpenSearchImpl</open-search-class>
@@ -204,6 +203,7 @@
 		<custom-attributes-display>com.liferay.portlet.messageboards.MBMessageCustomAttributesDisplay</custom-attributes-display>
 		<workflow-handler>com.liferay.portlet.messageboards.workflow.MBDiscussionWorkflowHandler</workflow-handler>
 		<workflow-handler>com.liferay.portlet.messageboards.workflow.MBMessageWorkflowHandler</workflow-handler>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
 		<!--<user-principal-strategy>screenName</user-principal-strategy>-->
@@ -220,7 +220,6 @@
 		<portlet-name>20</portlet-name>
 		<icon>/html/icons/document_library.png</icon>
 		<struts-path>document_library</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.documentlibrary.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.documentlibrary.util.DLIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.documentlibrary.util.DLOpenSearchImpl</open-search-class>
@@ -237,6 +236,7 @@
 		<custom-attributes-display>com.liferay.portlet.documentlibrary.DLFileEntryCustomAttributesDisplay</custom-attributes-display>
 		<custom-attributes-display>com.liferay.portlet.documentlibrary.DLFolderCustomAttributesDisplay</custom-attributes-display>
 		<workflow-handler>com.liferay.portlet.documentlibrary.workflow.DLFileEntryWorkflowHandler</workflow-handler>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
@@ -261,12 +261,12 @@
 		<portlet-name>25</portlet-name>
 		<icon>/html/icons/polls.png</icon>
 		<struts-path>polls</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-data-handler-class>com.liferay.portlet.polls.lar.PollsPortletDataHandlerImpl</portlet-data-handler-class>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>9.0</control-panel-entry-weight>
 		<control-panel-entry-class>com.liferay.portlet.polls.PollsControlPanelEntry</control-panel-entry-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -300,7 +300,6 @@
 		<portlet-name>28</portlet-name>
 		<icon>/html/icons/bookmarks.png</icon>
 		<struts-path>bookmarks</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.bookmarks.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.bookmarks.util.BookmarksIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.bookmarks.util.BookmarksOpenSearchImpl</open-search-class>
@@ -310,6 +309,7 @@
 		<asset-renderer-factory>com.liferay.portlet.bookmarks.asset.BookmarksEntryAssetRendererFactory</asset-renderer-factory>
 		<custom-attributes-display>com.liferay.portlet.bookmarks.BookmarksEntryCustomAttributesDisplay</custom-attributes-display>
 		<custom-attributes-display>com.liferay.portlet.bookmarks.BookmarksFolderCustomAttributesDisplay</custom-attributes-display>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
@@ -323,8 +323,8 @@
 		<portlet-name>29</portlet-name>
 		<icon>/html/icons/communities.png</icon>
 		<struts-path>communities</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<workflow-handler>com.liferay.portal.workflow.LayoutRevisionWorkflowHandler</workflow-handler>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -348,7 +348,6 @@
 		<portlet-name>31</portlet-name>
 		<icon>/html/icons/image_gallery.png</icon>
 		<struts-path>image_gallery</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<indexer-class>com.liferay.portlet.imagegallery.util.IGIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.imagegallery.util.IGOpenSearchImpl</open-search-class>
 		<portlet-data-handler-class>com.liferay.portlet.imagegallery.lar.IGPortletDataHandlerImpl</portlet-data-handler-class>
@@ -360,6 +359,7 @@
 		<asset-renderer-factory>com.liferay.portlet.imagegallery.asset.IGImageAssetRendererFactory</asset-renderer-factory>
 		<custom-attributes-display>com.liferay.portlet.imagegallery.IGImageCustomAttributesDisplay</custom-attributes-display>
 		<custom-attributes-display>com.liferay.portlet.imagegallery.IGFolderCustomAttributesDisplay</custom-attributes-display>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
@@ -373,7 +373,6 @@
 		<portlet-name>33</portlet-name>
 		<icon>/html/icons/blogs.png</icon>
 		<struts-path>blogs</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.blogs.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.blogs.util.BlogsIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.blogs.util.BlogsOpenSearchImpl</open-search-class>
@@ -395,6 +394,7 @@
 		<asset-renderer-factory>com.liferay.portlet.blogs.asset.BlogsEntryAssetRendererFactory</asset-renderer-factory>
 		<custom-attributes-display>com.liferay.portlet.blogs.BlogsEntryCustomAttributesDisplay</custom-attributes-display>
 		<workflow-handler>com.liferay.portlet.blogs.workflow.BlogsEntryWorkflowHandler</workflow-handler>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
@@ -408,8 +408,8 @@
 		<portlet-name>34</portlet-name>
 		<icon>/html/icons/shopping.png</icon>
 		<struts-path>shopping</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.shopping.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
@@ -421,7 +421,6 @@
 		<portlet-name>36</portlet-name>
 		<icon>/html/icons/wiki.png</icon>
 		<struts-path>wiki</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<indexer-class>com.liferay.portlet.wiki.util.WikiIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.wiki.util.WikiOpenSearchImpl</open-search-class>
 		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
@@ -432,6 +431,7 @@
 		<asset-renderer-factory>com.liferay.portlet.wiki.asset.WikiPageAssetRendererFactory</asset-renderer-factory>
 		<custom-attributes-display>com.liferay.portlet.wiki.WikiPageCustomAttributesDisplay</custom-attributes-display>
 		<workflow-handler>com.liferay.portlet.wiki.workflow.WikiPageWorkflowHandler</workflow-handler>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
@@ -457,9 +457,9 @@
 		<portlet-name>39</portlet-name>
 		<icon>/html/icons/rss.png</icon>
 		<struts-path>rss</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.rss.action.ConfigurationActionImpl</configuration-action-class>
 		<portlet-data-handler-class>com.liferay.portlet.rss.lar.RSSPortletDataHandlerImpl</portlet-data-handler-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<instanceable>true</instanceable>
 		<remoteable>true</remoteable>
@@ -484,8 +484,8 @@
 		<portlet-name>48</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>iframe</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.iframe.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<instanceable>true</instanceable>
 		<remoteable>true</remoteable>
@@ -499,6 +499,7 @@
 		<portlet-name>49</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>my_places</struts-path>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<show-portlet-access-denied>false</show-portlet-access-denied>
 		<show-portlet-inactive>false</show-portlet-inactive>
@@ -523,10 +524,10 @@
 		<portlet-name>54</portlet-name>
 		<icon>/html/icons/wiki_display.png</icon>
 		<struts-path>wiki_display</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.wikidisplay.action.ConfigurationActionImpl</configuration-action-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<portlet-data-handler-class>com.liferay.portlet.wiki.lar.WikiDisplayPortletDataHandlerImpl</portlet-data-handler-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<instanceable>true</instanceable>
 		<scopeable>true</scopeable>
@@ -540,7 +541,6 @@
 		<portlet-name>56</portlet-name>
 		<icon>/html/icons/journal_content.png</icon>
 		<struts-path>journal_content</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.journalcontent.action.ConfigurationActionImpl</configuration-action-class>
 		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
 		<friendly-url-mapping>journal_content</friendly-url-mapping>
@@ -548,6 +548,7 @@
 		<portlet-data-handler-class>com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl</portlet-data-handler-class>
 		<portlet-layout-listener-class>com.liferay.portlet.journalcontent.JournalContentPortletLayoutListener</portlet-layout-listener-class>
 		<custom-attributes-display>com.liferay.portlet.journal.JournalArticleCustomAttributesDisplay</custom-attributes-display>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
@@ -563,8 +564,8 @@
 		<portlet-name>58</portlet-name>
 		<icon>/html/icons/login.png</icon>
 		<struts-path>login</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.login.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -577,9 +578,9 @@
 		<portlet-name>59</portlet-name>
 		<icon>/html/icons/polls_display.png</icon>
 		<struts-path>polls_display</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.pollsdisplay.action.ConfigurationActionImpl</configuration-action-class>
 		<portlet-data-handler-class>com.liferay.portlet.polls.lar.PollsDisplayPortletDataHandlerImpl</portlet-data-handler-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
@@ -602,8 +603,8 @@
 		<portlet-name>62</portlet-name>
 		<icon>/html/icons/journal_articles.png</icon>
 		<struts-path>journal_articles</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.journalarticles.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
@@ -627,8 +628,8 @@
 		<portlet-name>66</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>web_proxy</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.webproxy.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<instanceable>true</instanceable>
 		<remoteable>true</remoteable>
 		<private-request-attributes>false</private-request-attributes>
@@ -640,8 +641,8 @@
 		<portlet-name>67</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>amazon_rankings</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.amazonrankings.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<remoteable>true</remoteable>
 		<private-request-attributes>false</private-request-attributes>
@@ -664,8 +665,8 @@
 		<portlet-name>71</portlet-name>
 		<icon>/html/icons/navigation.png</icon>
 		<struts-path>navigation</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.navigation.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
@@ -679,8 +680,8 @@
 		<portlet-name>73</portlet-name>
 		<icon>/html/icons/breadcrumb.png</icon>
 		<struts-path>breadcrumb</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.breadcrumb.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
@@ -694,8 +695,8 @@
 		<portlet-name>77</portlet-name>
 		<icon>/html/icons/journal_content_search.png</icon>
 		<struts-path>journal_content_search</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.journalcontentsearch.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
 		<private-request-attributes>false</private-request-attributes>
@@ -708,8 +709,8 @@
 		<portlet-name>79</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>enterprise_admin</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -722,8 +723,8 @@
 		<portlet-name>82</portlet-name>
 		<icon>/html/icons/language.png</icon>
 		<struts-path>language</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.language.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
 		<private-request-attributes>false</private-request-attributes>
@@ -736,9 +737,9 @@
 		<portlet-name>83</portlet-name>
 		<icon>/html/icons/announcements.png</icon>
 		<struts-path>alerts</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<preferences-company-wide>false</preferences-company-wide>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<instanceable>false</instanceable>
 		<private-request-attributes>false</private-request-attributes>
@@ -751,7 +752,6 @@
 		<portlet-name>84</portlet-name>
 		<icon>/html/icons/announcements.png</icon>
 		<struts-path>announcements</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<scheduler-entry>
 			<scheduler-event-listener-class>com.liferay.portlet.announcements.messaging.CheckEntryMessageListener</scheduler-event-listener-class>
 			<trigger>
@@ -763,6 +763,7 @@
 		</scheduler-entry>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<preferences-company-wide>true</preferences-company-wide>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<instanceable>false</instanceable>
 		<private-request-attributes>false</private-request-attributes>
@@ -775,8 +776,8 @@
 		<portlet-name>85</portlet-name>
 		<icon>/html/icons/site_map.png</icon>
 		<struts-path>site_map</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.sitemap.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
@@ -819,8 +820,8 @@
 		<portlet-name>88</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>layout_management</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -856,13 +857,13 @@
 		<portlet-name>98</portlet-name>
 		<icon>/html/icons/software_catalog.png</icon>
 		<struts-path>software_catalog</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<indexer-class>com.liferay.portlet.softwarecatalog.util.SCIndexer</indexer-class>
 		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
 		<friendly-url-mapping>software_catalog</friendly-url-mapping>
 		<friendly-url-routes>com/liferay/portlet/softwarecatalog/software-catalog-friendly-url-routes.xml</friendly-url-routes>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>10.0</control-panel-entry-weight>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
@@ -874,9 +875,9 @@
 		<portlet-name>99</portlet-name>
 		<icon>/html/icons/asset_tags_admin.png</icon>
 		<struts-path>asset_tags_admin</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>11.0</control-panel-entry-weight>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -890,8 +891,8 @@
 		<portlet-name>100</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>invitation</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.invitation.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -902,12 +903,12 @@
 		<portlet-name>101</portlet-name>
 		<icon>/html/icons/asset_publisher.png</icon>
 		<struts-path>asset_publisher</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.assetpublisher.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.assetpublisher.util.AssetIndexer</indexer-class>
 		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
 		<friendly-url-mapping>asset_publisher</friendly-url-mapping>
 		<friendly-url-routes>com/liferay/portlet/assetpublisher/asset-publisher-friendly-url-routes.xml</friendly-url-routes>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
@@ -922,8 +923,8 @@
 		<portlet-name>102</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>xsl_content</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.xslcontent.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
@@ -937,9 +938,9 @@
 		<portlet-name>103</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>tags_compiler</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<friendly-url-mapper-class>com.liferay.portlet.tagscompiler.TagsCompilerFriendlyURLMapper</friendly-url-mapper-class>
 		<friendly-url-mapping>tags</friendly-url-mapping>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<show-portlet-access-denied>false</show-portlet-access-denied>
 		<show-portlet-inactive>false</show-portlet-inactive>
@@ -953,10 +954,10 @@
 		<portlet-name>104</portlet-name>
 		<icon>/html/icons/update_manager.png</icon>
 		<struts-path>update_manager</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<control-panel-entry-category>server</control-panel-entry-category>
 		<control-panel-entry-weight>4.0</control-panel-entry-weight>
 		<control-panel-entry-class>com.liferay.portlet.admin.OmniadminControlPanelEntry</control-panel-entry-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -969,8 +970,8 @@
 		<portlet-name>107</portlet-name>
 		<icon>/html/icons/page_comments.png</icon>
 		<struts-path>page_comments</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-data-handler-class>com.liferay.portlet.pagecomments.lar.PageCommentsPortletDataHandlerImpl</portlet-data-handler-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -981,8 +982,8 @@
 		<portlet-name>108</portlet-name>
 		<icon>/html/icons/page_ratings.png</icon>
 		<struts-path>page_ratings</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-data-handler-class>com.liferay.portlet.pageratings.lar.PageRatingsPortletDataHandlerImpl</portlet-data-handler-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -993,13 +994,13 @@
 		<portlet-name>110</portlet-name>
 		<icon>/html/icons/document_library_display.png</icon>
 		<struts-path>document_library_display</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.documentlibrary.action.ConfigurationActionImpl</configuration-action-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
 		<friendly-url-mapping>document_library_display</friendly-url-mapping>
 		<friendly-url-routes>com/liferay/portlet/documentlibrary/document-library-display-friendly-url-routes.xml</friendly-url-routes>
 		<portlet-data-handler-class>com.liferay.portlet.documentlibrary.lar.DLDisplayPortletDataHandlerImpl</portlet-data-handler-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<instanceable>true</instanceable>
 		<scopeable>true</scopeable>
@@ -1013,8 +1014,8 @@
 		<portlet-name>111</portlet-name>
 		<icon>/html/icons/admin_plugins.png</icon>
 		<struts-path>plugin_installer</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1038,8 +1039,8 @@
 		<portlet-name>114</portlet-name>
 		<icon>/html/icons/recent_bloggers.png</icon>
 		<struts-path>recent_bloggers</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.recentbloggers.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1050,9 +1051,9 @@
 		<portlet-name>115</portlet-name>
 		<icon>/html/icons/blogs_aggregator.png</icon>
 		<struts-path>blogs_aggregator</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.blogsaggregator.action.ConfigurationActionImpl</configuration-action-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
@@ -1064,10 +1065,10 @@
 	<portlet>
 		<portlet-name>116</portlet-name>
 		<struts-path>activities</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
 		<friendly-url-mapping>activities</friendly-url-mapping>
 		<friendly-url-routes>com/liferay/portal/kernel/portlet/rss-friendly-url-routes.xml</friendly-url-routes>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1078,8 +1079,8 @@
 		<portlet-name>118</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>nested_portlets</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.nestedportlets.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
@@ -1103,8 +1104,8 @@
 		<portlet-name>120</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>tasks</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<social-activity-interpreter-class>com.liferay.portlet.tasks.social.TasksActivityInterpreter</social-activity-interpreter-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1125,8 +1126,8 @@
 		<portlet-name>122</portlet-name>
 		<icon>/html/icons/asset_categories_navigation.png</icon>
 		<struts-path>asset_categories_navigation</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.assetcategoriesnavigation.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
@@ -1139,16 +1140,15 @@
 		<portlet-name>124</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>social</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<social-activity-interpreter-class>com.liferay.portlet.social.util.PortalActivityInterpreter</social-activity-interpreter-class>
 		<social-request-interpreter-class>com.liferay.portlet.social.util.PortalRequestInterpreter</social-request-interpreter-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<system>true</system>
 	</portlet>
 	<portlet>
 		<portlet-name>125</portlet-name>
 		<icon>/html/icons/enterprise_admin_users.png</icon>
 		<struts-path>enterprise_admin_users</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<indexer-class>com.liferay.portlet.enterpriseadmin.util.UserIndexer</indexer-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
@@ -1157,6 +1157,7 @@
 		<custom-attributes-display>com.liferay.portlet.enterpriseadmin.LayoutCustomAttributesDisplay</custom-attributes-display>
 		<custom-attributes-display>com.liferay.portlet.enterpriseadmin.OrganizationCustomAttributesDisplay</custom-attributes-display>
 		<custom-attributes-display>com.liferay.portlet.enterpriseadmin.UserCustomAttributesDisplay</custom-attributes-display>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1170,12 +1171,12 @@
 		<portlet-name>126</portlet-name>
 		<icon>/html/icons/enterprise_admin_organizations.png</icon>
 		<struts-path>enterprise_admin_organizations</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<indexer-class>com.liferay.portlet.enterpriseadmin.util.OrganizationIndexer</indexer-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>2.0</control-panel-entry-weight>
 		<control-panel-entry-class>com.liferay.portlet.enterpriseadmin.UsersControlPanelEntry</control-panel-entry-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1189,10 +1190,10 @@
 		<portlet-name>127</portlet-name>
 		<icon>/html/icons/enterprise_admin_user_groups.png</icon>
 		<struts-path>enterprise_admin_user_groups</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>4.0</control-panel-entry-weight>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1206,10 +1207,10 @@
 		<portlet-name>128</portlet-name>
 		<icon>/html/icons/enterprise_admin_roles.png</icon>
 		<struts-path>enterprise_admin_roles</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>5.0</control-panel-entry-weight>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1222,10 +1223,10 @@
 		<portlet-name>129</portlet-name>
 		<icon>/html/icons/enterprise_admin_password_policies.png</icon>
 		<struts-path>enterprise_admin_password_policies</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>6.0</control-panel-entry-weight>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1237,10 +1238,10 @@
 		<portlet-name>130</portlet-name>
 		<icon>/html/icons/enterprise_admin_settings.png</icon>
 		<struts-path>enterprise_admin_settings</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>7.0</control-panel-entry-weight>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1253,10 +1254,10 @@
 		<portlet-name>131</portlet-name>
 		<icon>/html/icons/enterprise_admin_monitoring.png</icon>
 		<struts-path>enterprise_admin_monitoring</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>9.0</control-panel-entry-weight>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1268,10 +1269,10 @@
 		<portlet-name>132</portlet-name>
 		<icon>/html/icons/enterprise_admin_plugins.png</icon>
 		<struts-path>enterprise_admin_plugins</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>10.0</control-panel-entry-weight>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1295,11 +1296,11 @@
 		<portlet-name>134</portlet-name>
 		<icon>/html/icons/enterprise_admin_communities.png</icon>
 		<struts-path>enterprise_admin_communities</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>3.0</control-panel-entry-weight>
 		<control-panel-entry-class>com.liferay.portlet.enterpriseadmin.CommunitiesControlPanelEntry</control-panel-entry-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1313,11 +1314,11 @@
 		<portlet-name>135</portlet-name>
 		<icon>/html/icons/admin_instances.png</icon>
 		<struts-path>admin_instances</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>server</control-panel-entry-category>
 		<control-panel-entry-weight>2.0</control-panel-entry-weight>
 		<control-panel-entry-class>com.liferay.portlet.admin.OmniadminControlPanelEntry</control-panel-entry-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1328,11 +1329,11 @@
 		<portlet-name>136</portlet-name>
 		<icon>/html/icons/admin_plugins.png</icon>
 		<struts-path>admin_plugins</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>server</control-panel-entry-category>
 		<control-panel-entry-weight>3.0</control-panel-entry-weight>
 		<control-panel-entry-class>com.liferay.portlet.admin.OmniadminControlPanelEntry</control-panel-entry-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1343,11 +1344,11 @@
 		<portlet-name>137</portlet-name>
 		<icon>/html/icons/admin_server.png</icon>
 		<struts-path>admin_server</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>server</control-panel-entry-category>
 		<control-panel-entry-weight>1.0</control-panel-entry-weight>
 		<control-panel-entry-class>com.liferay.portlet.admin.OmniadminControlPanelEntry</control-panel-entry-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1358,9 +1359,9 @@
 		<portlet-name>139</portlet-name>
 		<icon>/html/icons/expando.png</icon>
 		<struts-path>expando</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>8.0</control-panel-entry-weight>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1374,11 +1375,11 @@
 		<portlet-name>140</portlet-name>
 		<icon>/html/icons/my_pages.png</icon>
 		<struts-path>my_pages</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>my</control-panel-entry-category>
 		<control-panel-entry-weight>2.0</control-panel-entry-weight>
 		<control-panel-entry-class>com.liferay.portlet.mypages.MyPagesControlPanelEntry</control-panel-entry-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1392,8 +1393,8 @@
 		<portlet-name>141</portlet-name>
 		<icon>/html/icons/asset_tags_navigation.png</icon>
 		<struts-path>asset_tags_navigation</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.assettagsnavigation.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
@@ -1457,10 +1458,10 @@
 		<portlet-name>146</portlet-name>
 		<icon>/html/icons/layout_prototypes.png</icon>
 		<struts-path>layout_prototypes</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>11.0</control-panel-entry-weight>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
@@ -1474,9 +1475,9 @@
 		<portlet-name>147</portlet-name>
 		<icon>/html/icons/asset_category_admin.png</icon>
 		<struts-path>asset_category_admin</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>12.0</control-panel-entry-weight>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1503,10 +1504,10 @@
 		<portlet-name>149</portlet-name>
 		<icon>/html/icons/layout_set_prototypes.png</icon>
 		<struts-path>layout_set_prototypes</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>12.0</control-panel-entry-weight>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
@@ -1520,8 +1521,8 @@
 		<portlet-name>150</portlet-name>
 		<icon>/html/icons/workflow_tasks.png</icon>
 		<struts-path>workflow_tasks</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1535,11 +1536,11 @@
 		<portlet-name>151</portlet-name>
 		<icon>/html/icons/workflow_definitions.png</icon>
 		<struts-path>workflow_definitions</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>13.0</control-panel-entry-weight>
 		<control-panel-entry-class>com.liferay.portal.workflow.WorkflowControlPanelEntry</control-panel-entry-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1552,11 +1553,11 @@
 		<portlet-name>152</portlet-name>
 		<icon>/html/icons/workflow_definition_links.png</icon>
 		<struts-path>workflow_definition_links</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>13.0</control-panel-entry-weight>
 		<control-panel-entry-class>com.liferay.portal.workflow.WorkflowControlPanelEntry</control-panel-entry-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1568,11 +1569,11 @@
 		<portlet-name>153</portlet-name>
 		<icon>/html/icons/my_workflow_tasks.png</icon>
 		<struts-path>my_workflow_tasks</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>my</control-panel-entry-category>
 		<control-panel-entry-weight>3.0</control-panel-entry-weight>
 		<control-panel-entry-class>com.liferay.portal.workflow.MyWorkflowControlPanelEntry</control-panel-entry-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1587,12 +1588,12 @@
 		<portlet-name>154</portlet-name>
 		<icon>/html/icons/wiki.png</icon>
 		<struts-path>wiki_admin</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<configuration-action-class>com.liferay.portlet.wiki.action.ConfigurationActionImpl</configuration-action-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>8.0</control-panel-entry-weight>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
@@ -1604,11 +1605,11 @@
 		<portlet-name>155</portlet-name>
 		<icon>/html/icons/social_equity_admin.png</icon>
 		<struts-path>social_equity_admin</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>14.0</control-panel-entry-weight>
 		<control-panel-entry-class>com.liferay.portlet.socialequityadmin.SocialEquityAdminControlPanelEntry</control-panel-entry-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
@@ -1620,11 +1621,11 @@
 		<portlet-name>156</portlet-name>
 		<icon>/html/icons/group_pages.png</icon>
 		<struts-path>group_pages</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>0.0</control-panel-entry-weight>
 		<control-panel-entry-class>com.liferay.portlet.grouppages.GroupPagesControlPanelEntry</control-panel-entry-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1638,8 +1639,8 @@
 		<portlet-name>157</portlet-name>
 		<icon>/html/icons/workflow_instances.png</icon>
 		<struts-path>workflow_instances</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1651,11 +1652,11 @@
 		<portlet-name>158</portlet-name>
 		<icon>/html/icons/my_workflow_instances.png</icon>
 		<struts-path>my_workflow_instances</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>my</control-panel-entry-category>
 		<control-panel-entry-weight>4.0</control-panel-entry-weight>
 		<control-panel-entry-class>com.liferay.portal.workflow.MyWorkflowControlPanelEntry</control-panel-entry-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1692,11 +1693,11 @@
 		<portlet-name>161</portlet-name>
 		<icon>/html/icons/blogs.png</icon>
 		<struts-path>blogs_admin</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<portlet-data-handler-class>com.liferay.portlet.blogs.lar.BlogsPortletDataHandlerImpl</portlet-data-handler-class>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>7.0</control-panel-entry-weight>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
@@ -1709,11 +1710,11 @@
 		<portlet-name>162</portlet-name>
 		<icon>/html/icons/message_boards.png</icon>
 		<struts-path>message_boards_admin</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<portlet-data-handler-class>com.liferay.portlet.messageboards.lar.MBPortletDataHandlerImpl</portlet-data-handler-class>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>6.0</control-panel-entry-weight>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
@@ -1727,8 +1728,8 @@
 		<portlet-name>163</portlet-name>
 		<icon>/html/icons/my_organizations.png</icon>
 		<struts-path>my_organizations</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
