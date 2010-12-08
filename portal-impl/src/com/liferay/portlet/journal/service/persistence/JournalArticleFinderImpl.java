@@ -485,7 +485,7 @@ public class JournalArticleFinderImpl
 
 			if ((articleIds != null) &&
 				((articleIds.length > 1) ||
-					((articleIds.length == 1) && (articleIds[0] != null)))) {
+				 ((articleIds.length == 1) && (articleIds[0] != null)))) {
 
 				sql = StringUtil.replace(
 					sql, "MAX(version) as version", "version");
