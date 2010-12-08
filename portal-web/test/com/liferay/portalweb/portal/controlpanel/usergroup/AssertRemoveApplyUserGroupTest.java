@@ -47,8 +47,8 @@ public class AssertRemoveApplyUserGroupTest extends BaseTestCase {
 		selenium.clickAt("link=User Groups", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
-		selenium.clickAt("//td[4]/ul/li/strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[4]/span/ul/li/strong/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

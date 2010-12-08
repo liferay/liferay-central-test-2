@@ -56,8 +56,7 @@ public class AddWeeklyRepeatingEventTest extends BaseTestCase {
 				selenium.clickAt("link=Events", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				Thread.sleep(5000);
-				selenium.clickAt("//td[6]/ul/li/strong/a",
+				selenium.clickAt("//td[6]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {

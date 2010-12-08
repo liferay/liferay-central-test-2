@@ -72,27 +72,7 @@ public class DeleteTemporaryCommunityTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
-		Thread.sleep(5000);
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//td[6]/ul/li/strong/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//td[6]/ul/li/strong/a",
+		selenium.clickAt("//td[6]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -101,8 +81,8 @@ public class DeleteTemporaryCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//div[@class='lfr-component lfr-menu-list']/ul/li[8]/a")) {
+				if (selenium.isElementPresent(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a")) {
 					break;
 				}
 			}
@@ -113,11 +93,8 @@ public class DeleteTemporaryCommunityTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Delete"),
-			selenium.getText(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[8]/a"));
 		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[8]/a"));
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));

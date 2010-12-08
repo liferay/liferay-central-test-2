@@ -98,8 +98,6 @@ public class ImportLARTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_86_DELETE_PORTLET_DATACheckbox",
 			RuntimeVariables.replace(""));
-		selenium.clickAt("_86_PORTLET_DATACheckbox",
-			RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Import']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

@@ -47,8 +47,7 @@ public class EditFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
-		selenium.click("//td[4]/ul/li/strong/a");
+		selenium.click("//td[4]/span/ul/li/strong/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -77,7 +76,6 @@ public class EditFolderTest extends BaseTestCase {
 		selenium.type("_28_description",
 			RuntimeVariables.replace("This is an edited test folder!"));
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

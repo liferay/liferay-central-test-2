@@ -175,7 +175,14 @@ public class ImportCommunityLARTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\controlpanel\\communities\\community\\dependencies\\Community-Selenium.portlet.lar"));
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("_134_PERMISSIONS", RuntimeVariables.replace(""));
+		selenium.type("_134_importFileName",
+			RuntimeVariables.replace(
+				"L:\\projects\\6.0.x\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\controlpanel\\communities\\general\\dependencies\\Community-Selenium.portlet.lar"));
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("_134_DELETE_MISSING_LAYOUTSCheckbox",
+			RuntimeVariables.replace(""));
+		selenium.clickAt("_134_PERMISSIONSCheckbox",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Import']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

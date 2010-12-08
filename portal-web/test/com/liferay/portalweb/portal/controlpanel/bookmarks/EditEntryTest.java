@@ -47,7 +47,6 @@ public class EditEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
 		assertTrue(selenium.isPartialText("//a/strong", "Test Folder"));
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -56,8 +55,7 @@ public class EditEntryTest extends BaseTestCase {
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
-		selenium.clickAt("//td[5]/ul/li/strong/a",
+		selenium.clickAt("//td[5]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -91,7 +89,6 @@ public class EditEntryTest extends BaseTestCase {
 		selenium.type("_28_comments",
 			RuntimeVariables.replace("This is an edited test bookmark!"));
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

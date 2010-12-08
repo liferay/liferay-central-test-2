@@ -58,7 +58,7 @@ public class TearDownEventCPTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 
 				boolean event1Present = selenium.isElementPresent(
-						"//td[6]/ul/li/strong/a");
+						"//td[6]/span/ul/li/strong/a");
 
 				if (!event1Present) {
 					label = 2;
@@ -66,7 +66,7 @@ public class TearDownEventCPTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[6]/ul/li/strong/a",
+				selenium.clickAt("//td[6]/span/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -97,7 +97,7 @@ public class TearDownEventCPTest extends BaseTestCase {
 			case 2:
 
 				boolean event2Present = selenium.isElementPresent(
-						"//td[6]/ul/li/strong/a");
+						"//td[6]/span/ul/li/strong/a");
 
 				if (!event2Present) {
 					label = 3;
@@ -105,7 +105,7 @@ public class TearDownEventCPTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[6]/ul/li/strong/a",
+				selenium.clickAt("//td[6]/span/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -136,7 +136,7 @@ public class TearDownEventCPTest extends BaseTestCase {
 			case 3:
 
 				boolean event3Present = selenium.isElementPresent(
-						"//td[6]/ul/li/strong/a");
+						"//td[6]/span/ul/li/strong/a");
 
 				if (!event3Present) {
 					label = 4;
@@ -144,7 +144,7 @@ public class TearDownEventCPTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[6]/ul/li/strong/a",
+				selenium.clickAt("//td[6]/span/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -175,7 +175,7 @@ public class TearDownEventCPTest extends BaseTestCase {
 			case 4:
 
 				boolean event4Present = selenium.isElementPresent(
-						"//td[6]/ul/li/strong/a");
+						"//td[6]/span/ul/li/strong/a");
 
 				if (!event4Present) {
 					label = 5;
@@ -183,7 +183,7 @@ public class TearDownEventCPTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[6]/ul/li/strong/a",
+				selenium.clickAt("//td[6]/span/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -214,7 +214,7 @@ public class TearDownEventCPTest extends BaseTestCase {
 			case 5:
 
 				boolean event5Present = selenium.isElementPresent(
-						"//td[6]/ul/li/strong/a");
+						"//td[6]/span/ul/li/strong/a");
 
 				if (!event5Present) {
 					label = 6;
@@ -222,7 +222,7 @@ public class TearDownEventCPTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[6]/ul/li/strong/a",
+				selenium.clickAt("//td[6]/span/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {

@@ -47,8 +47,7 @@ public class EditEventTest extends BaseTestCase {
 		selenium.clickAt("link=Calendar", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
-		selenium.clickAt("//tr[5]/td[4]/ul/li/strong/a",
+		selenium.clickAt("//tr[5]/td[4]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -99,7 +98,6 @@ public class EditEventTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.select("_8_startDateHour", RuntimeVariables.replace("label=5"));
 		selenium.select("_8_startDateAmPm", RuntimeVariables.replace("label=AM"));
-		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

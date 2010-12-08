@@ -52,8 +52,7 @@ public class CombineToParentFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent("link=Edited Test Bookmark"));
-		Thread.sleep(5000);
-		selenium.clickAt("//td[4]/ul/li/strong/a",
+		selenium.clickAt("//td[4]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -80,7 +79,6 @@ public class CombineToParentFolderTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_28_mergeWithParentFolderCheckbox",
 			RuntimeVariables.replace(""));
-		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

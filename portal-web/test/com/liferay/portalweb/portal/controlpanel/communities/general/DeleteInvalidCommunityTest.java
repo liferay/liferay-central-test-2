@@ -47,13 +47,12 @@ public class DeleteInvalidCommunityTest extends BaseTestCase {
 		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("_134_name", RuntimeVariables.replace("Liferay"));
+		selenium.type("_134_name", RuntimeVariables.replace("Guest"));
 		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
-		selenium.clickAt("//td[6]/ul/li/strong/a",
+		selenium.clickAt("//td[6]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -63,7 +62,7 @@ public class DeleteInvalidCommunityTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@class='lfr-component lfr-menu-list']/ul/li[8]/a")) {
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a")) {
 					break;
 				}
 			}
@@ -74,11 +73,8 @@ public class DeleteInvalidCommunityTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Delete"),
-			selenium.getText(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[8]/a"));
 		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[8]/a"));
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -105,6 +101,6 @@ public class DeleteInvalidCommunityTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent(
-				"The group cannot be deleted or deactivated because it is a required system group. "));
+				"The group cannot be deleted because it is a required system group."));
 	}
 }

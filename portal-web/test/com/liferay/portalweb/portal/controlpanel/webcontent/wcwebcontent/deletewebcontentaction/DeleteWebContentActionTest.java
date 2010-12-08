@@ -50,7 +50,7 @@ public class DeleteWebContentActionTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Web Content Name"),
 			selenium.getText("//td[3]/a"));
 		Thread.sleep(5000);
-		selenium.clickAt("//td[9]/ul/li/strong/a",
+		selenium.clickAt("//td[9]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
