@@ -1647,8 +1647,8 @@ jdbc.default.numHelperThreads=1</echo>
 					<echo file="portal-impl/src/portal-ext.properties" append="true">
 
 hibernate.dialect=org.hibernate.dialect.SybaseDialect
-custom.sql.function.isnull=ISNULL(CONVERT(VARCHAR,?), '1') = '1'
-custom.sql.function.isnotnull=ISNULL(CONVERT(VARCHAR,?), '1') = '0'</echo>
+custom.sql.function.isnull=CONVERT(VARCHAR,?) IS NULL
+custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 				</then>
 			</elseif>
 		</if>

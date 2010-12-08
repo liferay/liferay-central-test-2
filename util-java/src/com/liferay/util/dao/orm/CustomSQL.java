@@ -66,9 +66,10 @@ public class CustomSQL {
 	public static final String MYSQL_FUNCTION_IS_NULL = "IFNULL(?, '1') = '1'";
 
 	public static final String SYBASE_FUNCTION_IS_NOT_NULL =
-		"ISNULL(?, '1') = '0'";
+		"CONVERT(VARCHAR,?) IS NOT NULL";
 
-	public static final String SYBASE_FUNCTION_IS_NULL = "ISNULL(?, '1') = '1'";
+	public static final String SYBASE_FUNCTION_IS_NULL =
+		"CONVERT(VARCHAR,?) IS NULL";
 
 	public CustomSQL() throws SQLException {
 		Connection con = DataAccess.getConnection();
