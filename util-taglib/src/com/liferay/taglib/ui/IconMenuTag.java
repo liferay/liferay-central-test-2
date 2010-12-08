@@ -206,8 +206,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 				else {
 					jspWriter.write("<span title=\"");
 					jspWriter.write(LanguageUtil.get(pageContext, _message));
-					jspWriter.write("\">");
-					jspWriter.write("<ul class='lfr-component lfr-actions ");
+					jspWriter.write("\"><ul class='lfr-component lfr-actions ");
 					jspWriter.write(_align);
 					jspWriter.write(" ");
 					jspWriter.print(_cssClass);
@@ -250,6 +249,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 
 				if (_showExpanded) {
 					jspWriter.write("</div>");
+
 					ScriptTag.doTag(
 						null, "liferay-menu",
 						"Liferay.Menu.handleFocus('#" + _id + "menu');",
