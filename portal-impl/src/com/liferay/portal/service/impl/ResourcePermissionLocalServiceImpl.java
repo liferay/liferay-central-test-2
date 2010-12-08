@@ -41,8 +41,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 
-import javax.portlet.PortletException;
-
 /**
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
