@@ -102,7 +102,6 @@
 		<portlet-name>10</portlet-name>
 		<icon>/html/icons/address_book.png</icon>
 		<struts-path>address_book</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -250,7 +249,6 @@
 		<portlet-name>23</portlet-name>
 		<icon>/html/icons/dictionary.png</icon>
 		<struts-path>dictionary</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<remoteable>true</remoteable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -278,7 +276,6 @@
 		<portlet-name>26</portlet-name>
 		<icon>/html/icons/translator.png</icon>
 		<struts-path>translator</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<remoteable>true</remoteable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -289,7 +286,6 @@
 		<portlet-name>27</portlet-name>
 		<icon>/html/icons/unit_converter.png</icon>
 		<struts-path>unit_converter</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<remoteable>true</remoteable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -336,7 +332,6 @@
 		<portlet-name>30</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>network</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<remoteable>true</remoteable>
 		<private-request-attributes>false</private-request-attributes>
@@ -445,7 +440,6 @@
 		<portlet-name>37</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>words</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<remoteable>true</remoteable>
 		<private-request-attributes>false</private-request-attributes>
@@ -473,7 +467,6 @@
 		<portlet-name>47</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>hello_world</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<remoteable>true</remoteable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -513,7 +506,6 @@
 		<portlet-name>50</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>hello_velocity</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<remoteable>true</remoteable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -592,7 +584,6 @@
 		<portlet-name>61</portlet-name>
 		<icon>/html/icons/loan_calculator.png</icon>
 		<struts-path>loan_calculator</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<remoteable>true</remoteable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -616,7 +607,6 @@
 		<portlet-name>64</portlet-name>
 		<icon>/html/icons/recent_documents.png</icon>
 		<struts-path>recent_documents</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
@@ -654,7 +644,6 @@
 		<portlet-name>70</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>password_generator</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<remoteable>true</remoteable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -792,7 +781,6 @@
 		<portlet-name>86</portlet-name>
 		<icon>/html/icons/enterprise_admin_settings.png</icon>
 		<struts-path>portlet_configuration</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -806,7 +794,6 @@
 		<portlet-name>87</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>layout_configuration</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<show-portlet-access-denied>false</show-portlet-access-denied>
 		<show-portlet-inactive>false</show-portlet-inactive>
@@ -835,14 +822,12 @@
 		<portlet-name>90</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>portal</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<system>true</system>
 	</portlet>
 	<portlet>
 		<portlet-name>97</portlet-name>
 		<icon>/html/icons/quick_note.png</icon>
 		<struts-path>quick_note</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
@@ -1027,7 +1012,6 @@
 		<portlet-name>113</portlet-name>
 		<icon>/html/icons/portlet_css.png</icon>
 		<struts-path>portlet_css</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1093,7 +1077,6 @@
 		<portlet-name>119</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>asset</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1115,7 +1098,6 @@
 	<portlet>
 		<portlet-name>121</portlet-name>
 		<struts-path>requests</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1284,7 +1266,6 @@
 		<portlet-name>133</portlet-name>
 		<icon>/html/icons/portlet_sharing.png</icon>
 		<struts-path>portlet_sharing</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1407,7 +1388,6 @@
 		<portlet-name>142</portlet-name>
 		<icon>/html/icons/flags.png</icon>
 		<struts-path>flags</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1420,7 +1400,6 @@
 		<portlet-name>143</portlet-name>
 		<icon>/html/icons/page_flags.png</icon>
 		<struts-path>page_flags</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1431,7 +1410,6 @@
 		<portlet-name>144</portlet-name>
 		<icon>/html/icons/ratings.png</icon>
 		<struts-path>ratings</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -1444,7 +1422,6 @@
 		<portlet-name>145</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>dockbar</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<show-portlet-access-denied>false</show-portlet-access-denied>
 		<show-portlet-inactive>false</show-portlet-inactive>
@@ -1491,7 +1468,6 @@
 		<portlet-name>148</portlet-name>
 		<icon>/html/icons/asset_tags_cloud.png</icon>
 		<struts-path>asset_tags_cloud</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
@@ -1679,7 +1655,6 @@
 		<portlet-name>160</portlet-name>
 		<icon>/html/icons/default.png</icon>
 		<struts-path>control_panel_menu</struts-path>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<show-portlet-access-denied>false</show-portlet-access-denied>
 		<show-portlet-inactive>false</show-portlet-inactive>
