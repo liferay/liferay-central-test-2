@@ -58,7 +58,6 @@ import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -1288,7 +1287,7 @@ public class ServicePreAction extends Action {
 			// Updates to shared layouts are not reflected until the next time
 			// the user logs in because group layouts are cached in the session
 
-			layout = (Layout)((LayoutImpl)layout).clone();
+			layout = (Layout)layout.clone();
 
 			layoutTypePortlet = (LayoutTypePortlet)layout.getLayoutType();
 
