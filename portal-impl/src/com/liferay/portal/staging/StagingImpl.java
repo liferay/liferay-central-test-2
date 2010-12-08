@@ -466,9 +466,9 @@ public class StagingImpl implements Staging {
 			liveGroup.getTypeSettingsProperties();
 
 		typeSettingsProperties.setProperty(
-			"branchingPublic", String.valueOf(branchingPublic));
-		typeSettingsProperties.setProperty(
 			"branchingPrivate", String.valueOf(branchingPrivate));
+		typeSettingsProperties.setProperty(
+			"branchingPublic", String.valueOf(branchingPublic));
 		typeSettingsProperties.setProperty("remoteAddress", remoteAddress);
 		typeSettingsProperties.setProperty(
 			"remoteGroupId", String.valueOf(remoteGroupId));
