@@ -87,7 +87,6 @@ public class IGUtil {
 			portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 			portletURL.setParameter("struts_action", strutsAction);
-
 			portletURL.setParameter(
 				"groupId", String.valueOf(folder.getGroupId()));
 
@@ -104,22 +103,19 @@ public class IGUtil {
 		Collections.reverse(ancestorFolders);
 
 		for (IGFolder ancestorFolder : ancestorFolders) {
-
-			portletURL.setParameter(
-				"folderId", String.valueOf(ancestorFolder.getFolderId()));
-
 			portletURL.setParameter(
 				"groupId", String.valueOf(folder.getGroupId()));
+			portletURL.setParameter(
+				"folderId", String.valueOf(ancestorFolder.getFolderId()));
 
 			PortalUtil.addPortletBreadcrumbEntry(
 				request, ancestorFolder.getName(), portletURL.toString());
 		}
 
 		portletURL.setParameter(
-			"folderId", String.valueOf(folder.getFolderId()));
-
-		portletURL.setParameter(
 			"groupId", String.valueOf(folder.getGroupId()));
+		portletURL.setParameter(
+			"folderId", String.valueOf(folder.getFolderId()));
 
 		PortalUtil.addPortletBreadcrumbEntry(
 			request, folder.getName(), portletURL.toString());
