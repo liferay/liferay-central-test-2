@@ -202,8 +202,7 @@ public class PortalInstances {
 
 		if (Validator.isNotNull(
 				PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME) &&
-			Validator.isNull(
-				request.getAttribute(WebKeys.VIRTUAL_HOST_LAYOUT_SET))) {
+			(request.getAttribute(WebKeys.VIRTUAL_HOST_LAYOUT_SET) == null)) {
 
 			try {
 				Group group = GroupLocalServiceUtil.getGroup(
