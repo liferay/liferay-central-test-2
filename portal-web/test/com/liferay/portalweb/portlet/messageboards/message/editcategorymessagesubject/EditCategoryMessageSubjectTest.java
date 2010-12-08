@@ -51,7 +51,8 @@ public class EditCategoryMessageSubjectTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9"),
 			selenium.getText("//td[1]/a"));
-		selenium.clickAt("//td[7]/ul/li/strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[7]/span/ul/li/strong/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

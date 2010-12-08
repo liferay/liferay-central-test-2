@@ -52,7 +52,7 @@ public class TearDownMBMessageTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 
 				boolean category1Present = selenium.isElementPresent(
-						"//td[7]/ul/li/strong/a");
+						"//td[7]/span/ul/li/strong/a");
 
 				if (!category1Present) {
 					label = 2;
@@ -60,7 +60,7 @@ public class TearDownMBMessageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("//td[7]/ul/li/strong/a");
+				selenium.click("//td[7]/span/ul/li/strong/a");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -90,7 +90,7 @@ public class TearDownMBMessageTest extends BaseTestCase {
 			case 2:
 
 				boolean category2Present = selenium.isElementPresent(
-						"//td[7]/ul/li/strong/a");
+						"//td[7]/span/ul/li/strong/a");
 
 				if (!category2Present) {
 					label = 3;
@@ -98,7 +98,7 @@ public class TearDownMBMessageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("//td[7]/ul/li/strong/a");
+				selenium.click("//td[7]/span/ul/li/strong/a");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -128,7 +128,7 @@ public class TearDownMBMessageTest extends BaseTestCase {
 			case 3:
 
 				boolean category3Present = selenium.isElementPresent(
-						"//td[7]/ul/li/strong/a");
+						"//td[7]/span/ul/li/strong/a");
 
 				if (!category3Present) {
 					label = 4;
@@ -136,7 +136,7 @@ public class TearDownMBMessageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("//td[7]/ul/li/strong/a");
+				selenium.click("//td[7]/span/ul/li/strong/a");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -166,7 +166,7 @@ public class TearDownMBMessageTest extends BaseTestCase {
 			case 4:
 
 				boolean category4Present = selenium.isElementPresent(
-						"//td[7]/ul/li/strong/a");
+						"//td[7]/span/ul/li/strong/a");
 
 				if (!category4Present) {
 					label = 5;
@@ -174,7 +174,7 @@ public class TearDownMBMessageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("//td[7]/ul/li/strong/a");
+				selenium.click("//td[7]/span/ul/li/strong/a");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -204,7 +204,7 @@ public class TearDownMBMessageTest extends BaseTestCase {
 			case 5:
 
 				boolean category5Present = selenium.isElementPresent(
-						"//td[7]/ul/li/strong/a");
+						"//td[7]/span/ul/li/strong/a");
 
 				if (!category5Present) {
 					label = 6;
@@ -212,7 +212,7 @@ public class TearDownMBMessageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("//td[7]/ul/li/strong/a");
+				selenium.click("//td[7]/span/ul/li/strong/a");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {

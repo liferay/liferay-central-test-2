@@ -50,7 +50,8 @@ public class DeleteCategoryMessageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=T\u00e9st M\u00e9ssag\u00e9"));
-		selenium.clickAt("//td[7]/ul/li/strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[7]/span/ul/li/strong/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

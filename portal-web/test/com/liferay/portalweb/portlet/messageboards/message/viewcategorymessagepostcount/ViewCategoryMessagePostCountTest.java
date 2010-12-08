@@ -172,7 +172,8 @@ public class ViewCategoryMessagePostCountTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("1"),
 			selenium.getText(
 				"//table[@class='taglib-search-iterator']/tbody/tr[5]/td[4]"));
-		selenium.clickAt("//td[7]/ul/li/strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[7]/span/ul/li/strong/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

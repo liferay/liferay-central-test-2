@@ -48,7 +48,8 @@ public class EditCategoryTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("T\u00e9st Cat\u00e9gory"),
 			selenium.getText("//a/strong"));
-		selenium.clickAt("//td[5]/ul/li/strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[5]/span/ul/li/strong/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

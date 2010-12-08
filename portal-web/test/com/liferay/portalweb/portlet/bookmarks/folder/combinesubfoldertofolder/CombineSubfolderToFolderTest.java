@@ -49,7 +49,7 @@ public class CombineSubfolderToFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent("link=Test Subfolder Entry"));
-		selenium.click("//td[4]/ul/li/strong/a");
+		selenium.click("//td[4]/span/ul/li/strong/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

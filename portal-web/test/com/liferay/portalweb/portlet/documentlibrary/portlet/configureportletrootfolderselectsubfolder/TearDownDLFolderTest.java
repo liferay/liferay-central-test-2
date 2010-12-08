@@ -53,7 +53,7 @@ public class TearDownDLFolderTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 
 				boolean dlFolder1Present = selenium.isElementPresent(
-						"//td[4]/ul/li/strong/a");
+						"//td[4]/span/ul/li/strong/a");
 
 				if (!dlFolder1Present) {
 					label = 2;
@@ -61,7 +61,7 @@ public class TearDownDLFolderTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/ul/li/strong/a",
+				selenium.clickAt("//td[4]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -95,7 +95,7 @@ public class TearDownDLFolderTest extends BaseTestCase {
 			case 2:
 
 				boolean dlFolder2Present = selenium.isElementPresent(
-						"//td[4]/ul/li/strong/a");
+						"//td[4]/span/ul/li/strong/a");
 
 				if (!dlFolder2Present) {
 					label = 3;
@@ -103,7 +103,7 @@ public class TearDownDLFolderTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/ul/li/strong/a",
+				selenium.clickAt("//td[4]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -137,7 +137,7 @@ public class TearDownDLFolderTest extends BaseTestCase {
 			case 3:
 
 				boolean dlFolder3Present = selenium.isElementPresent(
-						"//td[4]/ul/li/strong/a");
+						"//td[4]/span/ul/li/strong/a");
 
 				if (!dlFolder3Present) {
 					label = 4;
@@ -145,7 +145,7 @@ public class TearDownDLFolderTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/ul/li/strong/a",
+				selenium.clickAt("//td[4]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -179,7 +179,7 @@ public class TearDownDLFolderTest extends BaseTestCase {
 			case 4:
 
 				boolean dlFolder4Present = selenium.isElementPresent(
-						"//td[4]/ul/li/strong/a");
+						"//td[4]/span/ul/li/strong/a");
 
 				if (!dlFolder4Present) {
 					label = 5;
@@ -187,7 +187,7 @@ public class TearDownDLFolderTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/ul/li/strong/a",
+				selenium.clickAt("//td[4]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -221,7 +221,7 @@ public class TearDownDLFolderTest extends BaseTestCase {
 			case 5:
 
 				boolean dlFolder5Present = selenium.isElementPresent(
-						"//td[4]/ul/li/strong/a");
+						"//td[4]/span/ul/li/strong/a");
 
 				if (!dlFolder5Present) {
 					label = 6;
@@ -229,7 +229,7 @@ public class TearDownDLFolderTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/ul/li/strong/a",
+				selenium.clickAt("//td[4]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {

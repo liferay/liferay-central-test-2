@@ -48,7 +48,7 @@ public class DeleteEventTest extends BaseTestCase {
 			selenium.getText(
 				"//table[@class='taglib-search-iterator']/tbody/tr[3]/td[2]/a"));
 		Thread.sleep(5000);
-		selenium.clickAt("//td[4]/ul/li/strong/a",
+		selenium.clickAt("//td[4]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {

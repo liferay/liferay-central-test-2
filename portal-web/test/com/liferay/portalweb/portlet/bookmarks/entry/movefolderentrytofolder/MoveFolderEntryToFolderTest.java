@@ -52,7 +52,8 @@ public class MoveFolderEntryToFolderTest extends BaseTestCase {
 			selenium.getText("//td[1]/a"));
 		assertEquals(RuntimeVariables.replace("http://www.liferay.com"),
 			selenium.getText("//td[2]/a"));
-		selenium.clickAt("//td[5]/ul/li/strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[5]/span/ul/li/strong/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

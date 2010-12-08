@@ -51,7 +51,8 @@ public class DeleteFrontPageTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("FrontPage"),
 			selenium.getText("//td[1]/a"));
-		selenium.clickAt("//td[6]/ul/li/strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[6]/span/ul/li/strong/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

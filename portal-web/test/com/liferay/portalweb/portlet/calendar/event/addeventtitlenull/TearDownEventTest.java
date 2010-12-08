@@ -73,7 +73,7 @@ public class TearDownEventTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 
 				boolean event1Present = selenium.isElementPresent(
-						"//td[6]/ul/li/strong/a");
+						"//td[6]/span/ul/li/strong/a");
 
 				if (!event1Present) {
 					label = 2;
@@ -81,7 +81,7 @@ public class TearDownEventTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[6]/ul/li/strong/a",
+				selenium.clickAt("//td[6]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -130,7 +130,7 @@ public class TearDownEventTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 
 				boolean event2Present = selenium.isElementPresent(
-						"//td[6]/ul/li/strong/a");
+						"//td[6]/span/ul/li/strong/a");
 
 				if (!event2Present) {
 					label = 3;
@@ -138,7 +138,7 @@ public class TearDownEventTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[6]/ul/li/strong/a",
+				selenium.clickAt("//td[6]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -187,7 +187,7 @@ public class TearDownEventTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 
 				boolean event3Present = selenium.isElementPresent(
-						"//td[6]/ul/li/strong/a");
+						"//td[6]/span/ul/li/strong/a");
 
 				if (!event3Present) {
 					label = 4;
@@ -195,7 +195,7 @@ public class TearDownEventTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[6]/ul/li/strong/a",
+				selenium.clickAt("//td[6]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -244,7 +244,7 @@ public class TearDownEventTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 
 				boolean event4Present = selenium.isElementPresent(
-						"//td[6]/ul/li/strong/a");
+						"//td[6]/span/ul/li/strong/a");
 
 				if (!event4Present) {
 					label = 5;
@@ -252,7 +252,7 @@ public class TearDownEventTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[6]/ul/li/strong/a",
+				selenium.clickAt("//td[6]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -301,7 +301,7 @@ public class TearDownEventTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 
 				boolean event5Present = selenium.isElementPresent(
-						"//td[6]/ul/li/strong/a");
+						"//td[6]/span/ul/li/strong/a");
 
 				if (!event5Present) {
 					label = 6;
@@ -309,7 +309,7 @@ public class TearDownEventTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[6]/ul/li/strong/a",
+				selenium.clickAt("//td[6]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {

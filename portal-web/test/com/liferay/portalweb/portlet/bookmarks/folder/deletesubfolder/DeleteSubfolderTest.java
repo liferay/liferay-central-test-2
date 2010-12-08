@@ -50,7 +50,8 @@ public class DeleteSubfolderTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Test Subfolder"));
 		assertTrue(selenium.isTextPresent("This is a test subfolder."));
-		selenium.clickAt("//td[4]/ul/li/strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[4]/span/ul/li/strong/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

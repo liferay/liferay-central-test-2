@@ -50,7 +50,7 @@ public class LockFolderDocumentTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("No"),
 			selenium.getText("//td[4]/a"));
-		selenium.clickAt("//td[5]/ul/li/strong/a",
+		selenium.clickAt("//td[5]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {

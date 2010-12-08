@@ -48,7 +48,8 @@ public class DeleteCouponTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Coupon Test\nThis is a coupon test."));
-		selenium.clickAt("//td[7]/ul/li/strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[7]/span/ul/li/strong/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

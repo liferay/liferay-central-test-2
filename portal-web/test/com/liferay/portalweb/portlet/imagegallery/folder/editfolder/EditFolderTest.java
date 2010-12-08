@@ -48,7 +48,8 @@ public class EditFolderTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Test1 Folder1\nThis is Test1 Folder1."),
 			selenium.getText("//td[1]/a"));
-		selenium.clickAt("//td[4]/ul/li/strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[4]/span/ul/li/strong/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

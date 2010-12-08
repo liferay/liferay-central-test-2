@@ -94,7 +94,7 @@ public class RestoreArchivedSetupTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
 			selenium.getText(
 				"//tr[@class='portlet-section-body results-row last']/td[2]"));
-		selenium.clickAt("//td[4]/ul/li/strong/a",
+		selenium.clickAt("//td[4]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
