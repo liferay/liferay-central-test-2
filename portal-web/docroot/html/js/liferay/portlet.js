@@ -352,7 +352,13 @@
 							link.attr('title', title);
 							img.attr('src', imgSrc);
 
-							img.setStyles({backgroundImage: 'none', height: 16, width: 16});
+							img.setStyles(
+								{
+									backgroundImage: 'none',
+									height: 16,
+									width: 16
+								}
+							);
 						}
 					}
 
