@@ -59,7 +59,7 @@ public class DeleteWebContentAssignedToMeActionsTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("//td[7]/a"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
 			selenium.getText("//td[8]/a"));
-		selenium.clickAt("//td[9]/ul/li/strong/a",
+		selenium.clickAt("//td[9]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -80,6 +80,9 @@ public class DeleteWebContentAssignedToMeActionsTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Delete"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
 		selenium.waitForPageToLoad("30000");
@@ -88,7 +91,7 @@ public class DeleteWebContentAssignedToMeActionsTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("No Web Content was found."),
 			selenium.getText("//form/div[4]"));
 		assertFalse(selenium.isElementPresent("link=Web Content Name"));

@@ -53,15 +53,15 @@ public class ViewWebContentSingleApproverDraftTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to you."),
-			selenium.getText("//div[@id='myTasksPanel']/div[2]/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to your roles."),
-			selenium.getText("//div[@id='myRolesTasksPanel']/div[2]/div[1]"));
+			selenium.getText("xPath=(//div[@class='portlet-msg-info'])[2]"));
 		selenium.clickAt("link=Completed", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("There are no completed tasks."),
-			selenium.getText("//form/div[2]/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		selenium.click(RuntimeVariables.replace("link=My Submissions"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

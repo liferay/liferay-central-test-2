@@ -59,8 +59,7 @@ public class UpdateDueDateWebContentAssignedToMeActionsTest extends BaseTestCase
 			selenium.getText("//td[5]/a"));
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to your roles."),
-			selenium.getText("//div[@id='myRolesTasksPanel']/div[2]/div[1]"));
-		Thread.sleep(5000);
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -81,6 +80,9 @@ public class UpdateDueDateWebContentAssignedToMeActionsTest extends BaseTestCase
 		}
 
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Update Due Date"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
 		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a");
 
 		for (int second = 0;; second++) {
@@ -115,7 +117,7 @@ public class UpdateDueDateWebContentAssignedToMeActionsTest extends BaseTestCase
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("Review"),
 			selenium.getText("//td[1]/a"));
 		assertEquals(RuntimeVariables.replace("Web Content Name"),
@@ -127,6 +129,6 @@ public class UpdateDueDateWebContentAssignedToMeActionsTest extends BaseTestCase
 			selenium.getText("//td[5]/a"));
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to your roles."),
-			selenium.getText("//div[@id='myRolesTasksPanel']/div[2]/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 	}
 }

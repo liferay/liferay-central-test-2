@@ -42,10 +42,11 @@ public class ConfigureWebContentSingleApproverTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.click(RuntimeVariables.replace("link=Workflow Configuration"));
+		selenium.clickAt("link=Workflow Configuration",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.select("_152_workflowDefinitionName@com.liferay.portlet.journal.model.JournalArticle",
@@ -55,7 +56,7 @@ public class ConfigureWebContentSingleApproverTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals("Single Approver (Version 1)",
 			selenium.getSelectedLabel(
 				"_152_workflowDefinitionName@com.liferay.portlet.journal.model.JournalArticle"));

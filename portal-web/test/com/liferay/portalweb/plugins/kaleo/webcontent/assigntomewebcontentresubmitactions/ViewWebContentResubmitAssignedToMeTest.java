@@ -62,7 +62,7 @@ public class ViewWebContentResubmitAssignedToMeTest extends BaseTestCase {
 			selenium.getText("//td[5]/a"));
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to your roles."),
-			selenium.getText("//div[@id='myRolesTasksPanel']/div[2]/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		selenium.clickAt("link=Completed", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -108,7 +108,7 @@ public class ViewWebContentResubmitAssignedToMeTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"There are no completed publications requested by me."),
-			selenium.getText("//section/div/div/div/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -148,6 +148,6 @@ public class ViewWebContentResubmitAssignedToMeTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"There are no completed publication requests."),
-			selenium.getText("//section/div/div/div/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 	}
 }

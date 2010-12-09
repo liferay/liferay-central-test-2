@@ -52,7 +52,7 @@ public class ViewWebContentResubmittedTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to you."),
-			selenium.getText("//div[@id='myTasksPanel']/div[2]/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		assertEquals(RuntimeVariables.replace("Review"),
 			selenium.getText("//td[1]/a"));
 		assertEquals(RuntimeVariables.replace("Web Content Name"),
@@ -107,7 +107,7 @@ public class ViewWebContentResubmittedTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"There are no completed publications requested by me."),
-			selenium.getText("//section/div/div/div/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -147,6 +147,6 @@ public class ViewWebContentResubmittedTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"There are no completed publication requests."),
-			selenium.getText("//section/div/div/div/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 	}
 }

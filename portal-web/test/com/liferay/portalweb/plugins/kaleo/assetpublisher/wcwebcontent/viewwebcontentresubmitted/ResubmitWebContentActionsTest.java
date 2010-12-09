@@ -104,6 +104,27 @@ public class ResubmitWebContentActionsTest extends BaseTestCase {
 		selenium.clickAt("//div/button[1]", RuntimeVariables.replace("OK"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace(
+							"Your request completed successfully.")
+										.equals(selenium.getText(
+								"//div[@class='portlet-msg-success']"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));

@@ -58,12 +58,14 @@ public class RejectWebContentRMenuTest extends BaseTestCase {
 			selenium.getText("//td[5]/a"));
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to your roles."),
-			selenium.getText("//div[@id='myRolesTasksPanel']/div[2]/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		selenium.clickAt("//td[2]/a",
 			RuntimeVariables.replace("Web Content Name"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
+		assertEquals(RuntimeVariables.replace("Reject"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right null']/ul/li[2]/a"));
 		selenium.click(
 			"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right null']/ul/li[2]/a");
 
@@ -97,7 +99,7 @@ public class RejectWebContentRMenuTest extends BaseTestCase {
 				if (RuntimeVariables.replace(
 							"Your request completed successfully.")
 										.equals(selenium.getText(
-								"//section/div/div/div/div"))) {
+								"//div[@class='portlet-msg-success']"))) {
 					break;
 				}
 			}
@@ -110,7 +112,7 @@ public class RejectWebContentRMenuTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -147,6 +149,6 @@ public class RejectWebContentRMenuTest extends BaseTestCase {
 			selenium.getText("//td[5]/a"));
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to your roles."),
-			selenium.getText("//div[@id='myRolesTasksPanel']/div[2]/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 	}
 }

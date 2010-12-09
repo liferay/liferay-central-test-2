@@ -57,8 +57,8 @@ public class ViewWebContentAssignedToMyRolesUpdateDueDateDetailsTest
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Due Date 12/31/15 12:00 AM - ( Change )"),
-			selenium.getText("//div[2]/div/div[2]/div/div"));
+				"Due Date 12/31/15 12:00 AM - (Change)"),
+			selenium.getText("//div/div[2]/div/div[2]/div/div"));
 		selenium.clickAt("link=My Submissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -66,12 +66,6 @@ public class ViewWebContentAssignedToMyRolesUpdateDueDateDetailsTest
 			RuntimeVariables.replace("Web Content Name"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Review"),
-			selenium.getText("//td[1]/span"));
-		assertEquals(RuntimeVariables.replace("12/31/15 12:00 AM"),
-			selenium.getText("//tr[3]/td[2]"));
-		assertEquals(RuntimeVariables.replace("No"),
-			selenium.getText("//tr[3]/td[3]"));
 		selenium.clickAt("link=Workflow", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

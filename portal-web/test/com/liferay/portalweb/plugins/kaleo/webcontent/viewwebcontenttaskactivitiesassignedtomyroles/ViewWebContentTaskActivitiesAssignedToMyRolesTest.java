@@ -62,7 +62,7 @@ public class ViewWebContentTaskActivitiesAssignedToMyRolesTest
 				"Task initially assigned to the Portal Content Reviewer role."),
 			selenium.getText("//div[2]/div[2]/div[1]/div[2]"));
 		assertEquals(RuntimeVariables.replace("Assigned initial task."),
-			selenium.getText("//div[2]/div[1]/div[3]"));
+			selenium.getText("//div[2]/div[2]/div[1]/div[3]"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -101,7 +101,7 @@ public class ViewWebContentTaskActivitiesAssignedToMyRolesTest
 				"Task initially assigned to the Portal Content Reviewer role."),
 			selenium.getText("//div[2]/div[2]/div/div[2]"));
 		assertEquals(RuntimeVariables.replace("Assigned initial task."),
-			selenium.getText("//div[2]/div/div[3]"));
+			selenium.getText("//div[2]/div[2]/div/div[3]"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -143,6 +143,6 @@ public class ViewWebContentTaskActivitiesAssignedToMyRolesTest
 				"Task initially assigned to the Portal Content Reviewer role."),
 			selenium.getText("//div[3]/div[2]/div/div[2]"));
 		assertEquals(RuntimeVariables.replace("Assigned initial task."),
-			selenium.getText("//div[2]/div/div[3]"));
+			selenium.getText("//div[3]/div[2]/div/div[3]"));
 	}
 }

@@ -55,7 +55,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@id='myRolesTasksPanel']/div[2]/div[1]</td>
+	<td>//div[@class='portlet-msg-info']</td>
 	<td>There are no pending tasks assigned to your roles.</td>
 </tr>
 <tr>
@@ -70,6 +70,11 @@
 </tr>
 <tr>
 	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a</td>
+	<td>Resubmit</td>
+</tr>
+<tr>
+	<td>assertText</td>
 	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a</td>
 	<td>Resubmit</td>
 </tr>
@@ -90,12 +95,12 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//section/div/div/div/div</td>
+	<td>//div[@class='portlet-msg-success']</td>
 	<td>Your request completed successfully.</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//section/div/div/div/div</td>
+	<td>//div[@class='portlet-msg-success']</td>
 	<td>Your request completed successfully.</td>
 </tr>
 <tr>
@@ -120,7 +125,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@id='myTasksPanel']/div[2]/div[1]</td>
+	<td>//div[@class='portlet-msg-info']</td>
 	<td>There are no pending tasks assigned to you.</td>
 </tr>
 <tr>

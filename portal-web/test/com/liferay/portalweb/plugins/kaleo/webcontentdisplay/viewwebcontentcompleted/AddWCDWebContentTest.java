@@ -115,6 +115,6 @@ public class AddWCDWebContentTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Web Content Name is not approved."),
-			selenium.getText("//section/div/div/div/div[1]/a"));
+			selenium.getText("//div[@class='portlet-msg-alert']"));
 	}
 }

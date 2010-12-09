@@ -61,7 +61,7 @@ public class ViewWebContentTaskActivitiesCompletedTest extends BaseTestCase {
 				"Task initially assigned to the Portal Content Reviewer role."),
 			selenium.getText("//div[2]/div[2]/div[1]/div[2]"));
 		assertEquals(RuntimeVariables.replace("Assigned initial task."),
-			selenium.getText("//div[2]/div[1]/div[3]"));
+			selenium.getText("//div[2]/div[2]/div[1]/div[3]"));
 		assertEquals(RuntimeVariables.replace(
 				"Joe Bloggs assigned the task to himself."),
 			selenium.getText("//div[2]/div[2]/div[2]/div[2]/div[2]"));
@@ -106,7 +106,7 @@ public class ViewWebContentTaskActivitiesCompletedTest extends BaseTestCase {
 				"Task initially assigned to the Portal Content Reviewer role."),
 			selenium.getText("//div[2]/div[2]/div[1]/div[2]"));
 		assertEquals(RuntimeVariables.replace("Assigned initial task."),
-			selenium.getText("//div[2]/div[1]/div[3]"));
+			selenium.getText("//div[2]/div[2]/div[1]/div[3]"));
 		assertEquals(RuntimeVariables.replace(
 				"Joe Bloggs assigned the task to himself."),
 			selenium.getText("//div[2]/div[2]/div[2]/div[2]/div[2]"));
@@ -154,7 +154,7 @@ public class ViewWebContentTaskActivitiesCompletedTest extends BaseTestCase {
 				"Task initially assigned to the Portal Content Reviewer role."),
 			selenium.getText("//div[3]/div[2]/div/div[2]"));
 		assertEquals(RuntimeVariables.replace("Assigned initial task."),
-			selenium.getText("//div[2]/div/div[3]"));
+			selenium.getText("//div[3]/div[2]/div/div[3]"));
 		assertEquals(RuntimeVariables.replace(
 				"Joe Bloggs assigned the task to himself."),
 			selenium.getText("//div[3]/div[2]/div[2]/div[2]"));

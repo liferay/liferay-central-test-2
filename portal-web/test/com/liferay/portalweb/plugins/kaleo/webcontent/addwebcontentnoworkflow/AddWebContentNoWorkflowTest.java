@@ -117,7 +117,7 @@ public class AddWebContentNoWorkflowTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertTrue(selenium.isElementPresent("//td[2]/a"));
 		assertEquals(RuntimeVariables.replace("Web Content Name"),
 			selenium.getText("//td[3]/a"));

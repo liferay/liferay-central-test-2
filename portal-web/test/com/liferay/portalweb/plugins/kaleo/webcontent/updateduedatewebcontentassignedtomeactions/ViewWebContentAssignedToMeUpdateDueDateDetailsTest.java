@@ -57,8 +57,8 @@ public class ViewWebContentAssignedToMeUpdateDueDateDetailsTest
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Due Date 12/31/15 12:00 AM - ( Change )"),
-			selenium.getText("//div[2]/div/div[2]/div/div"));
+				"Due Date 12/31/15 12:00 AM - (Change)"),
+			selenium.getText("//div/div[2]/div/div[2]/div/div"));
 		selenium.clickAt("link=My Submissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

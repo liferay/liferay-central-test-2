@@ -47,7 +47,7 @@ public class ViewWebContentRejectedTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Web Content Name is not approved."),
-			selenium.getText("//section/div/div/div/div[1]/a"));
+			selenium.getText("//div[@class='portlet-msg-alert']"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -87,7 +87,7 @@ public class ViewWebContentRejectedTest extends BaseTestCase {
 			selenium.getText("//td[5]/a"));
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to your roles."),
-			selenium.getText("//div[@id='myRolesTasksPanel']/div[2]/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		selenium.clickAt("link=Completed", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

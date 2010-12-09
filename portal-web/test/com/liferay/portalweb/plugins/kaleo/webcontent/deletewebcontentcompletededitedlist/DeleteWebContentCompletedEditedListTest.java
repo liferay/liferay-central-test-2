@@ -66,7 +66,7 @@ public class DeleteWebContentCompletedEditedListTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("Web Content Name"),
 			selenium.getText("//td[3]/a"));
 		assertEquals(RuntimeVariables.replace("1.0"),

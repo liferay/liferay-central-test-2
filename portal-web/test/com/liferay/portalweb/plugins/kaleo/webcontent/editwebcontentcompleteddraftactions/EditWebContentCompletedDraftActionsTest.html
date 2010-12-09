@@ -59,17 +59,17 @@
 	<td>Joe Bloggs</td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAt</td>
-	<td>//td[9]/ul/li/strong/a</td>
+	<td>//td[9]/span/ul/li/strong/a</td>
 	<td>Actions</td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a</td>
+	<td>Edit</td>
+</tr>
+<tr>
+	<td>assertText</td>
 	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a</td>
 	<td>Edit</td>
 </tr>
@@ -140,7 +140,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//section/div/div/div/div</td>
+	<td>//div[@class='portlet-msg-success']</td>
 	<td>Your request completed successfully.</td>
 </tr>
 <tr>
