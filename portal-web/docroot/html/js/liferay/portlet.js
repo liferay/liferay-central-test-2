@@ -337,13 +337,13 @@
 						if (img) {
 							var title = (restore) ? Liferay.Language.get('minimize') : Liferay.Language.get('restore');
 
-							var imgSrc = img.attr('src');
+							var imgSrc = themeDisplay.getPathThemeImages() + '/portlet/';
 
 							if (restore) {
-								imgSrc = imgSrc.replace(/restore.png$/, 'minimize.png');
+								imgSrc += 'minimize.png';
 							}
 							else {
-								imgSrc = imgSrc.replace(/minimize.png$/, 'restore.png');
+								imgSrc += 'restore.png';
 							}
 
 							img.attr('alt', title);
@@ -351,6 +351,8 @@
 
 							link.attr('title', title);
 							img.attr('src', imgSrc);
+
+							img.setStyles({backgroundImage: 'none', height: 16, width: 16});
 						}
 					}
 
