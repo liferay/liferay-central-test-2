@@ -223,7 +223,7 @@ public interface LayoutSetLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.LayoutSet getLayoutSet(
-		java.lang.String virtualHost)
+		java.lang.String virtualHostname)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -259,7 +259,7 @@ public interface LayoutSetLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.LayoutSet updateVirtualHost(long groupId,
-		boolean privateLayout, java.lang.String virtualHost)
+		boolean privateLayout, java.lang.String virtualHostname)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 }

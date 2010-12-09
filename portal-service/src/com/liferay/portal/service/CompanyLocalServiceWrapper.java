@@ -217,11 +217,11 @@ public class CompanyLocalServiceWrapper implements CompanyLocalService {
 	}
 
 	public com.liferay.portal.model.Company addCompany(java.lang.String webId,
-		java.lang.String virtualHost, java.lang.String mx,
+		java.lang.String virtualHostname, java.lang.String mx,
 		java.lang.String shardName, boolean system, int maxUsers)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _companyLocalService.addCompany(webId, virtualHost, mx,
+		return _companyLocalService.addCompany(webId, virtualHostname, mx,
 			shardName, system, maxUsers);
 	}
 
@@ -285,10 +285,10 @@ public class CompanyLocalServiceWrapper implements CompanyLocalService {
 	}
 
 	public com.liferay.portal.model.Company getCompanyByVirtualHost(
-		java.lang.String virtualHost)
+		java.lang.String virtualHostname)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _companyLocalService.getCompanyByVirtualHost(virtualHost);
+		return _companyLocalService.getCompanyByVirtualHost(virtualHostname);
 	}
 
 	public com.liferay.portal.model.Company getCompanyByWebId(
@@ -319,15 +319,15 @@ public class CompanyLocalServiceWrapper implements CompanyLocalService {
 	}
 
 	public com.liferay.portal.model.Company updateCompany(long companyId,
-		java.lang.String virtualHost, java.lang.String mx, int maxUsers)
+		java.lang.String virtualHostname, java.lang.String mx, int maxUsers)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _companyLocalService.updateCompany(companyId, virtualHost, mx,
-			maxUsers);
+		return _companyLocalService.updateCompany(companyId, virtualHostname,
+			mx, maxUsers);
 	}
 
 	public com.liferay.portal.model.Company updateCompany(long companyId,
-		java.lang.String virtualHost, java.lang.String mx,
+		java.lang.String virtualHostname, java.lang.String mx,
 		java.lang.String homeURL, java.lang.String name,
 		java.lang.String legalName, java.lang.String legalId,
 		java.lang.String legalType, java.lang.String sicCode,
@@ -335,8 +335,8 @@ public class CompanyLocalServiceWrapper implements CompanyLocalService {
 		java.lang.String type, java.lang.String size)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _companyLocalService.updateCompany(companyId, virtualHost, mx,
-			homeURL, name, legalName, legalId, legalType, sicCode,
+		return _companyLocalService.updateCompany(companyId, virtualHostname,
+			mx, homeURL, name, legalName, legalId, legalType, sicCode,
 			tickerSymbol, industry, type, size);
 	}
 

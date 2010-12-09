@@ -56,9 +56,9 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 			{ "virtualHostId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
 			{ "layoutSetId", new Integer(Types.BIGINT) },
-			{ "virtualHostName", new Integer(Types.VARCHAR) }
+			{ "hostname", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table VirtualHost (virtualHostId LONG not null primary key,companyId LONG,layoutSetId LONG,virtualHostName VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table VirtualHost (virtualHostId LONG not null primary key,companyId LONG,layoutSetId LONG,hostname VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table VirtualHost";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -131,25 +131,25 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 		return _originalLayoutSetId;
 	}
 
-	public String getVirtualHostName() {
-		if (_virtualHostName == null) {
+	public String getHostname() {
+		if (_hostname == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _virtualHostName;
+			return _hostname;
 		}
 	}
 
-	public void setVirtualHostName(String virtualHostName) {
-		_virtualHostName = virtualHostName;
+	public void setHostname(String hostname) {
+		_hostname = hostname;
 
-		if (_originalVirtualHostName == null) {
-			_originalVirtualHostName = virtualHostName;
+		if (_originalHostname == null) {
+			_originalHostname = hostname;
 		}
 	}
 
-	public String getOriginalVirtualHostName() {
-		return GetterUtil.getString(_originalVirtualHostName);
+	public String getOriginalHostname() {
+		return GetterUtil.getString(_originalHostname);
 	}
 
 	public VirtualHost toEscapedModel() {
@@ -182,7 +182,7 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 		clone.setVirtualHostId(getVirtualHostId());
 		clone.setCompanyId(getCompanyId());
 		clone.setLayoutSetId(getLayoutSetId());
-		clone.setVirtualHostName(getVirtualHostName());
+		clone.setHostname(getHostname());
 
 		return clone;
 	}
@@ -238,8 +238,8 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 		sb.append(getCompanyId());
 		sb.append(", layoutSetId=");
 		sb.append(getLayoutSetId());
-		sb.append(", virtualHostName=");
-		sb.append(getVirtualHostName());
+		sb.append(", hostname=");
+		sb.append(getHostname());
 		sb.append("}");
 
 		return sb.toString();
@@ -265,8 +265,8 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 		sb.append(getLayoutSetId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>virtualHostName</column-name><column-value><![CDATA[");
-		sb.append(getVirtualHostName());
+			"<column><column-name>hostname</column-name><column-value><![CDATA[");
+		sb.append(getHostname());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -281,7 +281,7 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 	private long _layoutSetId;
 	private long _originalLayoutSetId;
 	private boolean _setOriginalLayoutSetId;
-	private String _virtualHostName;
-	private String _originalVirtualHostName;
+	private String _hostname;
+	private String _originalHostname;
 	private transient ExpandoBridge _expandoBridge;
 }

@@ -99,6 +99,41 @@ public interface VirtualHostPersistence extends BasePersistence<VirtualHost> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Finds the virtual host where hostname = &#63; or throws a {@link com.liferay.portal.NoSuchVirtualHostException} if it could not be found.
+	*
+	* @param hostname the hostname to search with
+	* @return the matching virtual host
+	* @throws com.liferay.portal.NoSuchVirtualHostException if a matching virtual host could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.VirtualHost findByHostname(
+		java.lang.String hostname)
+		throws com.liferay.portal.NoSuchVirtualHostException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Finds the virtual host where hostname = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param hostname the hostname to search with
+	* @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.VirtualHost fetchByHostname(
+		java.lang.String hostname)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Finds the virtual host where hostname = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param hostname the hostname to search with
+	* @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.VirtualHost fetchByHostname(
+		java.lang.String hostname, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Finds the virtual host where companyId = &#63; and layoutSetId = &#63; or throws a {@link com.liferay.portal.NoSuchVirtualHostException} if it could not be found.
 	*
 	* @param companyId the company id to search with
@@ -134,41 +169,6 @@ public interface VirtualHostPersistence extends BasePersistence<VirtualHost> {
 	*/
 	public com.liferay.portal.model.VirtualHost fetchByC_L(long companyId,
 		long layoutSetId, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Finds the virtual host where virtualHostName = &#63; or throws a {@link com.liferay.portal.NoSuchVirtualHostException} if it could not be found.
-	*
-	* @param virtualHostName the virtual host name to search with
-	* @return the matching virtual host
-	* @throws com.liferay.portal.NoSuchVirtualHostException if a matching virtual host could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.VirtualHost findByVirtualHostName(
-		java.lang.String virtualHostName)
-		throws com.liferay.portal.NoSuchVirtualHostException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Finds the virtual host where virtualHostName = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param virtualHostName the virtual host name to search with
-	* @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.VirtualHost fetchByVirtualHostName(
-		java.lang.String virtualHostName)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Finds the virtual host where virtualHostName = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param virtualHostName the virtual host name to search with
-	* @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.VirtualHost fetchByVirtualHostName(
-		java.lang.String virtualHostName, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -215,6 +215,16 @@ public interface VirtualHostPersistence extends BasePersistence<VirtualHost> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Removes the virtual host where hostname = &#63; from the database.
+	*
+	* @param hostname the hostname to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByHostname(java.lang.String hostname)
+		throws com.liferay.portal.NoSuchVirtualHostException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Removes the virtual host where companyId = &#63; and layoutSetId = &#63; from the database.
 	*
 	* @param companyId the company id to search with
@@ -222,16 +232,6 @@ public interface VirtualHostPersistence extends BasePersistence<VirtualHost> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByC_L(long companyId, long layoutSetId)
-		throws com.liferay.portal.NoSuchVirtualHostException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Removes the virtual host where virtualHostName = &#63; from the database.
-	*
-	* @param virtualHostName the virtual host name to search with
-	* @throws SystemException if a system exception occurred
-	*/
-	public void removeByVirtualHostName(java.lang.String virtualHostName)
 		throws com.liferay.portal.NoSuchVirtualHostException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -244,6 +244,16 @@ public interface VirtualHostPersistence extends BasePersistence<VirtualHost> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Counts all the virtual hosts where hostname = &#63;.
+	*
+	* @param hostname the hostname to search with
+	* @return the number of matching virtual hosts
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByHostname(java.lang.String hostname)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Counts all the virtual hosts where companyId = &#63; and layoutSetId = &#63;.
 	*
 	* @param companyId the company id to search with
@@ -252,16 +262,6 @@ public interface VirtualHostPersistence extends BasePersistence<VirtualHost> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByC_L(long companyId, long layoutSetId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Counts all the virtual hosts where virtualHostName = &#63;.
-	*
-	* @param virtualHostName the virtual host name to search with
-	* @return the number of matching virtual hosts
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByVirtualHostName(java.lang.String virtualHostName)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

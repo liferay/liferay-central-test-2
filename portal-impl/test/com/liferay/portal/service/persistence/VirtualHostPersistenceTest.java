@@ -65,7 +65,7 @@ public class VirtualHostPersistenceTest extends BasePersistenceTestCase {
 
 		newVirtualHost.setCompanyId(nextLong());
 		newVirtualHost.setLayoutSetId(nextLong());
-		newVirtualHost.setVirtualHostName(randomString());
+		newVirtualHost.setHostname(randomString());
 
 		_persistence.update(newVirtualHost, false);
 
@@ -77,8 +77,8 @@ public class VirtualHostPersistenceTest extends BasePersistenceTestCase {
 			newVirtualHost.getCompanyId());
 		assertEquals(existingVirtualHost.getLayoutSetId(),
 			newVirtualHost.getLayoutSetId());
-		assertEquals(existingVirtualHost.getVirtualHostName(),
-			newVirtualHost.getVirtualHostName());
+		assertEquals(existingVirtualHost.getHostname(),
+			newVirtualHost.getHostname());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -154,7 +154,7 @@ public class VirtualHostPersistenceTest extends BasePersistenceTestCase {
 
 		virtualHost.setCompanyId(nextLong());
 		virtualHost.setLayoutSetId(nextLong());
-		virtualHost.setVirtualHostName(randomString());
+		virtualHost.setHostname(randomString());
 
 		_persistence.update(virtualHost, false);
 

@@ -900,7 +900,7 @@
 		</id>
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="layoutSetId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="virtualHostName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="hostname" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.WebDAVPropsImpl" table="WebDAVProps">
 		<cache usage="read-write" />

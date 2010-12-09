@@ -401,8 +401,8 @@ public class LayoutSetWrapper implements LayoutSet {
 		return _layoutSet.getSettingsProperty(key);
 	}
 
-	public java.lang.String getVirtualHost() {
-		return _layoutSet.getVirtualHost();
+	public java.lang.String getVirtualHostname() {
+		return _layoutSet.getVirtualHostname();
 	}
 
 	public com.liferay.portal.model.Theme getWapTheme()

@@ -65,5 +65,5 @@ create table VirtualHost (
 	virtualHostId LONG not null primary key,
 	companyId LONG,
 	layoutSetId LONG,
-	virtualHostName VARCHAR(75) null
+	hostname VARCHAR(75) null
 );

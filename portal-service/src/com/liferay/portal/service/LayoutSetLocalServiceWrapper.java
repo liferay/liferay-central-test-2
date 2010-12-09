@@ -238,10 +238,10 @@ public class LayoutSetLocalServiceWrapper implements LayoutSetLocalService {
 	}
 
 	public com.liferay.portal.model.LayoutSet getLayoutSet(
-		java.lang.String virtualHost)
+		java.lang.String virtualHostname)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _layoutSetLocalService.getLayoutSet(virtualHost);
+		return _layoutSetLocalService.getLayoutSet(virtualHostname);
 	}
 
 	public void updateLogo(long groupId, boolean privateLayout, boolean logo,
@@ -291,11 +291,11 @@ public class LayoutSetLocalServiceWrapper implements LayoutSetLocalService {
 	}
 
 	public com.liferay.portal.model.LayoutSet updateVirtualHost(long groupId,
-		boolean privateLayout, java.lang.String virtualHost)
+		boolean privateLayout, java.lang.String virtualHostname)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetLocalService.updateVirtualHost(groupId, privateLayout,
-			virtualHost);
+			virtualHostname);
 	}
 
 	public LayoutSetLocalService getWrappedLayoutSetLocalService() {

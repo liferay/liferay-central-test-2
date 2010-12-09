@@ -101,21 +101,21 @@ public class VirtualHostWrapper implements VirtualHost {
 	}
 
 	/**
-	* Gets the virtual host name of this virtual host.
+	* Gets the hostname of this virtual host.
 	*
-	* @return the virtual host name of this virtual host
+	* @return the hostname of this virtual host
 	*/
-	public java.lang.String getVirtualHostName() {
-		return _virtualHost.getVirtualHostName();
+	public java.lang.String getHostname() {
+		return _virtualHost.getHostname();
 	}
 
 	/**
-	* Sets the virtual host name of this virtual host.
+	* Sets the hostname of this virtual host.
 	*
-	* @param virtualHostName the virtual host name of this virtual host
+	* @param hostname the hostname of this virtual host
 	*/
-	public void setVirtualHostName(java.lang.String virtualHostName) {
-		_virtualHost.setVirtualHostName(virtualHostName);
+	public void setHostname(java.lang.String hostname) {
+		_virtualHost.setHostname(hostname);
 	}
 
 	public boolean isNew() {
@@ -159,7 +159,7 @@ public class VirtualHostWrapper implements VirtualHost {
 		return new VirtualHostWrapper((VirtualHost)_virtualHost.clone());
 	}
 
-	public int compareTo(com.liferay.portal.model.VirtualHost virtualHost) {
+	public int compareTo(VirtualHost virtualHost) {
 		return _virtualHost.compareTo(virtualHost);
 	}
 
@@ -167,7 +167,7 @@ public class VirtualHostWrapper implements VirtualHost {
 		return _virtualHost.hashCode();
 	}
 
-	public com.liferay.portal.model.VirtualHost toEscapedModel() {
+	public VirtualHost toEscapedModel() {
 		return new VirtualHostWrapper(_virtualHost.toEscapedModel());
 	}
 

@@ -36,7 +36,7 @@ public class VirtualHostSoap implements Serializable {
 		soapModel.setVirtualHostId(model.getVirtualHostId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setLayoutSetId(model.getLayoutSetId());
-		soapModel.setVirtualHostName(model.getVirtualHostName());
+		soapModel.setHostname(model.getHostname());
 
 		return soapModel;
 	}
@@ -113,16 +113,16 @@ public class VirtualHostSoap implements Serializable {
 		_layoutSetId = layoutSetId;
 	}
 
-	public String getVirtualHostName() {
-		return _virtualHostName;
+	public String getHostname() {
+		return _hostname;
 	}
 
-	public void setVirtualHostName(String virtualHostName) {
-		_virtualHostName = virtualHostName;
+	public void setHostname(String hostname) {
+		_hostname = hostname;
 	}
 
 	private long _virtualHostId;
 	private long _companyId;
 	private long _layoutSetId;
-	private String _virtualHostName;
+	private String _hostname;
 }

@@ -963,7 +963,7 @@
 			<id name="virtualHostId" />
 			<basic name="companyId" />
 			<basic name="layoutSetId" />
-			<basic name="virtualHostName" />
+			<basic name="hostname" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

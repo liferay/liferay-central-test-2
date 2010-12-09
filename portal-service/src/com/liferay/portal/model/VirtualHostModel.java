@@ -98,19 +98,19 @@ public interface VirtualHostModel extends BaseModel<VirtualHost> {
 	public void setLayoutSetId(long layoutSetId);
 
 	/**
-	 * Gets the virtual host name of this virtual host.
+	 * Gets the hostname of this virtual host.
 	 *
-	 * @return the virtual host name of this virtual host
+	 * @return the hostname of this virtual host
 	 */
 	@AutoEscape
-	public String getVirtualHostName();
+	public String getHostname();
 
 	/**
-	 * Sets the virtual host name of this virtual host.
+	 * Sets the hostname of this virtual host.
 	 *
-	 * @param virtualHostName the virtual host name of this virtual host
+	 * @param hostname the hostname of this virtual host
 	 */
-	public void setVirtualHostName(String virtualHostName);
+	public void setHostname(String hostname);
 
 	public boolean isNew();
 

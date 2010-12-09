@@ -198,6 +198,47 @@ public class VirtualHostUtil {
 	}
 
 	/**
+	* Finds the virtual host where hostname = &#63; or throws a {@link com.liferay.portal.NoSuchVirtualHostException} if it could not be found.
+	*
+	* @param hostname the hostname to search with
+	* @return the matching virtual host
+	* @throws com.liferay.portal.NoSuchVirtualHostException if a matching virtual host could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.VirtualHost findByHostname(
+		java.lang.String hostname)
+		throws com.liferay.portal.NoSuchVirtualHostException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByHostname(hostname);
+	}
+
+	/**
+	* Finds the virtual host where hostname = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param hostname the hostname to search with
+	* @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.VirtualHost fetchByHostname(
+		java.lang.String hostname)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByHostname(hostname);
+	}
+
+	/**
+	* Finds the virtual host where hostname = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param hostname the hostname to search with
+	* @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.VirtualHost fetchByHostname(
+		java.lang.String hostname, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByHostname(hostname, retrieveFromCache);
+	}
+
+	/**
 	* Finds the virtual host where companyId = &#63; and layoutSetId = &#63; or throws a {@link com.liferay.portal.NoSuchVirtualHostException} if it could not be found.
 	*
 	* @param companyId the company id to search with
@@ -240,48 +281,6 @@ public class VirtualHostUtil {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .fetchByC_L(companyId, layoutSetId, retrieveFromCache);
-	}
-
-	/**
-	* Finds the virtual host where virtualHostName = &#63; or throws a {@link com.liferay.portal.NoSuchVirtualHostException} if it could not be found.
-	*
-	* @param virtualHostName the virtual host name to search with
-	* @return the matching virtual host
-	* @throws com.liferay.portal.NoSuchVirtualHostException if a matching virtual host could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portal.model.VirtualHost findByVirtualHostName(
-		java.lang.String virtualHostName)
-		throws com.liferay.portal.NoSuchVirtualHostException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByVirtualHostName(virtualHostName);
-	}
-
-	/**
-	* Finds the virtual host where virtualHostName = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param virtualHostName the virtual host name to search with
-	* @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portal.model.VirtualHost fetchByVirtualHostName(
-		java.lang.String virtualHostName)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByVirtualHostName(virtualHostName);
-	}
-
-	/**
-	* Finds the virtual host where virtualHostName = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param virtualHostName the virtual host name to search with
-	* @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portal.model.VirtualHost fetchByVirtualHostName(
-		java.lang.String virtualHostName, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .fetchByVirtualHostName(virtualHostName, retrieveFromCache);
 	}
 
 	/**
@@ -334,6 +333,18 @@ public class VirtualHostUtil {
 	}
 
 	/**
+	* Removes the virtual host where hostname = &#63; from the database.
+	*
+	* @param hostname the hostname to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByHostname(java.lang.String hostname)
+		throws com.liferay.portal.NoSuchVirtualHostException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByHostname(hostname);
+	}
+
+	/**
 	* Removes the virtual host where companyId = &#63; and layoutSetId = &#63; from the database.
 	*
 	* @param companyId the company id to search with
@@ -347,18 +358,6 @@ public class VirtualHostUtil {
 	}
 
 	/**
-	* Removes the virtual host where virtualHostName = &#63; from the database.
-	*
-	* @param virtualHostName the virtual host name to search with
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void removeByVirtualHostName(java.lang.String virtualHostName)
-		throws com.liferay.portal.NoSuchVirtualHostException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByVirtualHostName(virtualHostName);
-	}
-
-	/**
 	* Removes all the virtual hosts from the database.
 	*
 	* @throws SystemException if a system exception occurred
@@ -366,6 +365,18 @@ public class VirtualHostUtil {
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
+	}
+
+	/**
+	* Counts all the virtual hosts where hostname = &#63;.
+	*
+	* @param hostname the hostname to search with
+	* @return the number of matching virtual hosts
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByHostname(java.lang.String hostname)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByHostname(hostname);
 	}
 
 	/**
@@ -379,18 +390,6 @@ public class VirtualHostUtil {
 	public static int countByC_L(long companyId, long layoutSetId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_L(companyId, layoutSetId);
-	}
-
-	/**
-	* Counts all the virtual hosts where virtualHostName = &#63;.
-	*
-	* @param virtualHostName the virtual host name to search with
-	* @return the number of matching virtual hosts
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int countByVirtualHostName(java.lang.String virtualHostName)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByVirtualHostName(virtualHostName);
 	}
 
 	/**

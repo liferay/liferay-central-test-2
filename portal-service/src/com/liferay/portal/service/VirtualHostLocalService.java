@@ -210,7 +210,7 @@ public interface VirtualHostLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.VirtualHost addVirtualHost(long companyId,
-		long layoutSetId, java.lang.String virtualHostName)
+		long layoutSetId, java.lang.String hostname)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -221,7 +221,7 @@ public interface VirtualHostLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.VirtualHost getVirtualHost(
-		java.lang.String virtualHostName)
+		java.lang.String hostname)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 }

@@ -207,7 +207,7 @@ public interface CompanyLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Company addCompany(java.lang.String webId,
-		java.lang.String virtualHost, java.lang.String mx,
+		java.lang.String virtualHostname, java.lang.String mx,
 		java.lang.String shardName, boolean system, int maxUsers)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -259,7 +259,7 @@ public interface CompanyLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Company getCompanyByVirtualHost(
-		java.lang.String virtualHost)
+		java.lang.String virtualHostname)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -284,12 +284,12 @@ public interface CompanyLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Company updateCompany(long companyId,
-		java.lang.String virtualHost, java.lang.String mx, int maxUsers)
+		java.lang.String virtualHostname, java.lang.String mx, int maxUsers)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Company updateCompany(long companyId,
-		java.lang.String virtualHost, java.lang.String mx,
+		java.lang.String virtualHostname, java.lang.String mx,
 		java.lang.String homeURL, java.lang.String name,
 		java.lang.String legalName, java.lang.String legalId,
 		java.lang.String legalType, java.lang.String sicCode,

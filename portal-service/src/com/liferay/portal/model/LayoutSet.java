@@ -49,7 +49,7 @@ public interface LayoutSet extends LayoutSetModel {
 
 	public java.lang.String getSettingsProperty(java.lang.String key);
 
-	public java.lang.String getVirtualHost();
+	public java.lang.String getVirtualHostname();
 
 	public com.liferay.portal.model.Theme getWapTheme()
 		throws com.liferay.portal.kernel.exception.SystemException;

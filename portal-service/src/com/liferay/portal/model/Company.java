@@ -78,7 +78,7 @@ public interface Company extends CompanyModel {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public java.lang.String getVirtualHost();
+	public java.lang.String getVirtualHostname();
 
 	public boolean hasCompanyMx(java.lang.String emailAddress)
 		throws com.liferay.portal.kernel.exception.SystemException;

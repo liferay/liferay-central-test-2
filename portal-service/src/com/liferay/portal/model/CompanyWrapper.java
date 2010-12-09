@@ -347,8 +347,8 @@ public class CompanyWrapper implements Company {
 		return _company.getTimeZone();
 	}
 
-	public java.lang.String getVirtualHost() {
-		return _company.getVirtualHost();
+	public java.lang.String getVirtualHostname() {
+		return _company.getVirtualHostname();
 	}
 
 	public boolean hasCompanyMx(java.lang.String emailAddress)

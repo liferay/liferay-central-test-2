@@ -221,10 +221,10 @@ public class VirtualHostLocalServiceWrapper implements VirtualHostLocalService {
 	}
 
 	public com.liferay.portal.model.VirtualHost addVirtualHost(long companyId,
-		long layoutSetId, java.lang.String virtualHostName)
+		long layoutSetId, java.lang.String hostname)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _virtualHostLocalService.addVirtualHost(companyId, layoutSetId,
-			virtualHostName);
+			hostname);
 	}
 
 	public com.liferay.portal.model.VirtualHost getVirtualHost(long companyId,
@@ -235,10 +235,10 @@ public class VirtualHostLocalServiceWrapper implements VirtualHostLocalService {
 	}
 
 	public com.liferay.portal.model.VirtualHost getVirtualHost(
-		java.lang.String virtualHostName)
+		java.lang.String hostname)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _virtualHostLocalService.getVirtualHost(virtualHostName);
+		return _virtualHostLocalService.getVirtualHost(hostname);
 	}
 
 	public VirtualHostLocalService getWrappedVirtualHostLocalService() {

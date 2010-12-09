@@ -227,13 +227,13 @@ public class CompanyLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Company addCompany(
-		java.lang.String webId, java.lang.String virtualHost,
+		java.lang.String webId, java.lang.String virtualHostname,
 		java.lang.String mx, java.lang.String shardName, boolean system,
 		int maxUsers)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addCompany(webId, virtualHost, mx, shardName, system,
+				   .addCompany(webId, virtualHostname, mx, shardName, system,
 			maxUsers);
 	}
 
@@ -301,10 +301,10 @@ public class CompanyLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Company getCompanyByVirtualHost(
-		java.lang.String virtualHost)
+		java.lang.String virtualHostname)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getCompanyByVirtualHost(virtualHost);
+		return getService().getCompanyByVirtualHost(virtualHostname);
 	}
 
 	public static com.liferay.portal.model.Company getCompanyByWebId(
@@ -335,15 +335,16 @@ public class CompanyLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Company updateCompany(
-		long companyId, java.lang.String virtualHost, java.lang.String mx,
+		long companyId, java.lang.String virtualHostname, java.lang.String mx,
 		int maxUsers)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateCompany(companyId, virtualHost, mx, maxUsers);
+		return getService()
+				   .updateCompany(companyId, virtualHostname, mx, maxUsers);
 	}
 
 	public static com.liferay.portal.model.Company updateCompany(
-		long companyId, java.lang.String virtualHost, java.lang.String mx,
+		long companyId, java.lang.String virtualHostname, java.lang.String mx,
 		java.lang.String homeURL, java.lang.String name,
 		java.lang.String legalName, java.lang.String legalId,
 		java.lang.String legalType, java.lang.String sicCode,
@@ -352,9 +353,9 @@ public class CompanyLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateCompany(companyId, virtualHost, mx, homeURL, name,
-			legalName, legalId, legalType, sicCode, tickerSymbol, industry,
-			type, size);
+				   .updateCompany(companyId, virtualHostname, mx, homeURL,
+			name, legalName, legalId, legalType, sicCode, tickerSymbol,
+			industry, type, size);
 	}
 
 	public static void updateDisplay(long companyId,
