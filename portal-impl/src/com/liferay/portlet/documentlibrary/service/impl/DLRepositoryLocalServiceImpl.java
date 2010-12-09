@@ -1103,9 +1103,6 @@ public class DLRepositoryLocalServiceImpl
 
 			if (!latestFileVersion.isApproved()) {
 				if (!PropsValues.DL_FILE_ENTRY_DRAFTS_ENABLED) {
-					serviceContext.setWorkflowAction(
-						WorkflowConstants.ACTION_SAVE_DRAFT);
-
 					version = latestFileVersion.getVersion();
 				}
 
