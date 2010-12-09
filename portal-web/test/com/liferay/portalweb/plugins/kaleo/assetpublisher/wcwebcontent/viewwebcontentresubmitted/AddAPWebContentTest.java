@@ -45,7 +45,7 @@ public class AddAPWebContentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//div/ul/li/strong/a",
+		selenium.clickAt("//div/span/ul/li/strong/a",
 			RuntimeVariables.replace("Add New"));
 
 		for (int second = 0;; second++) {
