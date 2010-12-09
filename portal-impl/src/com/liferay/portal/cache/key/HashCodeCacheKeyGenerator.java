@@ -39,7 +39,7 @@ public class HashCodeCacheKeyGenerator extends BaseCacheKeyGenerator {
 		for (int i = keys.length - 1; i >= 0; i--) {
 			String s = keys[i];
 
-			hashCode = hashCode * weight + s.hashCode();
+			hashCode = s.hashCode() * weight + hashCode;
 
 			for (int j = 0; j < s.length(); j++) {
 				weight *= 31;
@@ -56,7 +56,7 @@ public class HashCodeCacheKeyGenerator extends BaseCacheKeyGenerator {
 		for (int i = sb.index() - 1; i >= 0; i--) {
 			String s = sb.stringAt(i);
 
-			hashCode = hashCode * weight + s.hashCode();
+			hashCode = s.hashCode() * weight + hashCode;
 
 			for (int j = 0; j < s.length(); j++) {
 				weight *= 31;
