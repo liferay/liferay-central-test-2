@@ -91,6 +91,9 @@ public class RoleFinderImpl
 	public static String FIND_BY_C_N_S_P =
 		RoleFinder.class.getName() + ".findByC_N_S_P";
 
+	public static String FIND_BY_C_N_S_P_A =
+		RoleFinder.class.getName() + ".findByC_N_S_P_A";
+
 	public static String JOIN_BY_ROLES_PERMISSIONS =
 		RoleFinder.class.getName() + ".joinByRolesPermissions";
 
@@ -546,6 +549,40 @@ public class RoleFinderImpl
 			}
 
 			return roleMap;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<Role> findByC_N_S_P_A(
+			long companyId, String name, int scope, String primKey,
+			String actionId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_C_N_S_P_A);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("Role_", RoleImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+			qPos.add(name);
+			qPos.add(scope);
+			qPos.add(primKey);
+			qPos.add(actionId);
+
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

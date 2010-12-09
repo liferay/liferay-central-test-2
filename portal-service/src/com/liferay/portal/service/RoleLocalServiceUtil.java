@@ -280,6 +280,14 @@ public class RoleLocalServiceUtil {
 		return getService().getResourceRoles(companyId, name, scope, primKey);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Role> getResourceRoles(
+		long companyId, java.lang.String name, int scope,
+		java.lang.String primKey, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getResourceRoles(companyId, name, scope, primKey, actionId);
+	}
+
 	public static com.liferay.portal.model.Role getRole(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,

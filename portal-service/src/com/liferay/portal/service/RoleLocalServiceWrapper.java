@@ -268,6 +268,14 @@ public class RoleLocalServiceWrapper implements RoleLocalService {
 			primKey);
 	}
 
+	public java.util.List<com.liferay.portal.model.Role> getResourceRoles(
+		long companyId, java.lang.String name, int scope,
+		java.lang.String primKey, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _roleLocalService.getResourceRoles(companyId, name, scope,
+			primKey, actionId);
+	}
+
 	public com.liferay.portal.model.Role getRole(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,

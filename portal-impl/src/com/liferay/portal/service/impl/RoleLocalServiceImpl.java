@@ -268,6 +268,15 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return roleFinder.findByC_N_S_P(companyId, name, scope, primKey);
 	}
 
+	public List<Role> getResourceRoles(
+			long companyId, String name, int scope, String primKey,
+			String actionId)
+		throws SystemException {
+
+		return roleFinder.findByC_N_S_P_A(
+			companyId, name, scope, primKey, actionId);
+	}
+
 	public Role getRole(long roleId) throws PortalException, SystemException {
 		return rolePersistence.findByPrimaryKey(roleId);
 	}

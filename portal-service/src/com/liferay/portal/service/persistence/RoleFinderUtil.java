@@ -131,6 +131,14 @@ public class RoleFinderUtil {
 		return getFinder().findByC_N_S_P(companyId, name, scope, primKey);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Role> findByC_N_S_P_A(
+		long companyId, java.lang.String name, int scope,
+		java.lang.String primKey, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .findByC_N_S_P_A(companyId, name, scope, primKey, actionId);
+	}
+
 	public static java.util.List<com.liferay.portal.model.Role> findByKeywords(
 		long companyId, java.lang.String keywords, java.lang.Integer[] types,
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)

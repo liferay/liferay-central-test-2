@@ -90,6 +90,11 @@ public interface RoleFinder {
 		java.lang.String primKey)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public java.util.List<com.liferay.portal.model.Role> findByC_N_S_P_A(
+		long companyId, java.lang.String name, int scope,
+		java.lang.String primKey, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portal.model.Role> findByKeywords(
 		long companyId, java.lang.String keywords, java.lang.Integer[] types,
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
