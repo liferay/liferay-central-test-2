@@ -665,7 +665,7 @@ public class ShoppingOrderLocalServiceImpl
 				order.getNumber(),
 				shippingAddress,
 				String.valueOf(total),
-				company.getVirtualHost(),
+				company.getVirtualHostname(),
 				portletName,
 				toAddress,
 				toName
@@ -694,7 +694,7 @@ public class ShoppingOrderLocalServiceImpl
 				order.getNumber(),
 				shippingAddress,
 				String.valueOf(total),
-				company.getVirtualHost(),
+				company.getVirtualHostname(),
 				portletName,
 				toAddress,
 				toName

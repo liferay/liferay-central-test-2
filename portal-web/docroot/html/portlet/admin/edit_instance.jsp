@@ -23,10 +23,10 @@ Company company2 = (Company)request.getAttribute(WebKeys.SEL_COMPANY);
 
 long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 
-VirtualHost virtualHostObj2 = null;
+VirtualHost virtualHost = null;
 
 try {
-	virtualHostObj2 = VirtualHostLocalServiceUtil.getVirtualHost(companyId, 0);
+	virtualHost = VirtualHostLocalServiceUtil.getVirtualHost(companyId, 0);
 }
 catch (Exception e) {
 }
@@ -67,7 +67,7 @@ catch (Exception e) {
 			<aui:input name="webId" />
 		</c:if>
 
-		<aui:input bean="<%= virtualHostObj2 %>" label="virtual-host" model="<%= VirtualHost.class %>" name="virtualHostName"  />
+		<aui:input bean="<%= virtualHost %>" fieldParam="virtualHostname" label="virtual-host" model="<%= VirtualHost.class %>" name="hostname" />
 
 		<aui:input label="mail-domain" name="mx" />
 

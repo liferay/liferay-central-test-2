@@ -473,7 +473,7 @@ public class AnnouncementsEntryLocalServiceImpl
 				entry.getUrl(),
 				fromAddress,
 				fromName,
-				company.getVirtualHost(),
+				company.getVirtualHostname(),
 				LanguageUtil.get(
 					company.getLocale(),
 					(entry.isAlert() ? "alert" : "announcement")),
@@ -504,7 +504,7 @@ public class AnnouncementsEntryLocalServiceImpl
 				entry.getUrl(),
 				fromAddress,
 				fromName,
-				company.getVirtualHost(),
+				company.getVirtualHostname(),
 				LanguageUtil.get(
 					company.getLocale(),
 					(entry.isAlert() ? "alert" : "announcement")),

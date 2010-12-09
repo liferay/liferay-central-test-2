@@ -137,12 +137,12 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 		return getDefaultUser().getTimeZone();
 	}
 
-	public String getVirtualHost() {
+	public String getVirtualHostname() {
 		try {
 			VirtualHost virtualHost =
 				VirtualHostLocalServiceUtil.getVirtualHost(getCompanyId(), 0);
 
-			return virtualHost.getVirtualHostName();
+			return virtualHost.getHostname();
 		}
 		catch (Exception e) {
 			return StringPool.BLANK;

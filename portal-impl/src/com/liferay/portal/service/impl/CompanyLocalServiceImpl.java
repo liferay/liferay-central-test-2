@@ -75,13 +75,13 @@ import javax.portlet.PortletPreferences;
 public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 	public Company addCompany(
-			String webId, String virtualHost, String mx, String shardName,
+			String webId, String virtualHostname, String mx, String shardName,
 			boolean system, int maxUsers)
 		throws PortalException, SystemException {
 
 		// Company
 
-		virtualHost = virtualHost.trim().toLowerCase();
+		virtualHostname = virtualHostname.trim().toLowerCase();
 
 		if ((Validator.isNull(webId)) ||
 			(webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) ||
@@ -90,7 +90,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			throw new CompanyWebIdException();
 		}
 
-		validate(webId, virtualHost, mx);
+		validate(webId, virtualHostname, mx);
 
 		Company company = checkCompany(webId, mx, shardName);
 
@@ -100,9 +100,9 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		companyPersistence.update(company, false);
 
-		// Virtual Host
+		// Virtual host
 
-		updateVirtualHost(company.getCompanyId(), virtualHost);
+		updateVirtualHost(company.getCompanyId(), virtualHostname);
 
 		return company;
 	}
@@ -126,10 +126,10 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		Company company = companyPersistence.fetchByWebId(webId);
 
 		if (company == null) {
-			String virtualHost = webId;
+			String virtualHostname = webId;
 
 			if (webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
-				virtualHost = _DEFAULT_VIRTUAL_HOST;
+				virtualHostname = _DEFAULT_VIRTUAL_HOST;
 			}
 
 			String homeURL = null;
@@ -167,12 +167,13 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			// Company
 
 			updateCompany(
-				companyId, virtualHost, mx, homeURL, name, legalName, legalId,
-				legalType, sicCode, tickerSymbol, industry, type, size);
+				companyId, virtualHostname, mx, homeURL, name, legalName,
+				legalId, legalType, sicCode, tickerSymbol, industry, type,
+				size);
 
-			// Virtual Host
+			// Virtual host
 
-			updateVirtualHost(companyId, virtualHost);
+			updateVirtualHost(companyId, virtualHostname);
 
 			// Demo settings
 
@@ -433,23 +434,23 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		return companyPersistence.findByMx(mx);
 	}
 
-	public Company getCompanyByVirtualHost(String virtualHost)
+	public Company getCompanyByVirtualHost(String virtualHostname)
 		throws PortalException, SystemException {
 
-		virtualHost = virtualHost.trim().toLowerCase();
-
 		try {
-			VirtualHost virtualHostObj =
-				virtualHostPersistence.findByVirtualHostName(virtualHost);
+			virtualHostname = virtualHostname.trim().toLowerCase();
 
-			if (virtualHostObj.getLayoutSetId() != 0) {
+			VirtualHost virtualHost = virtualHostPersistence.findByHostname(
+				virtualHostname);
+
+			if (virtualHost.getLayoutSetId() != 0) {
 				throw new CompanyVirtualHostException(
-					"Virtual host is for layout set " + virtualHostObj);
+					"Virtual host is associated with layout set " +
+						virtualHost.getLayoutSetId());
 			}
 
-			long companyId = virtualHostObj.getCompanyId();
-
-			return companyPersistence.findByPrimaryKey(companyId);
+			return companyPersistence.findByPrimaryKey(
+				virtualHost.getCompanyId());
 		}
 		catch (NoSuchVirtualHostException nsvhe) {
 			throw new CompanyVirtualHostException(nsvhe);
@@ -531,14 +532,16 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	}
 
 	public Company updateCompany(
-			long companyId, String virtualHost, String mx, int maxUsers)
+			long companyId, String virtualHostname, String mx, int maxUsers)
 		throws PortalException, SystemException {
 
-		virtualHost = virtualHost.trim().toLowerCase();
+		// Company
+
+		virtualHostname = virtualHostname.trim().toLowerCase();
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
-		validate(company.getWebId(), virtualHost, mx);
+		validate(company.getWebId(), virtualHostname, mx);
 
 		if (PropsValues.MAIL_MX_UPDATE) {
 			company.setMx(mx);
@@ -548,15 +551,15 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		companyPersistence.update(company, false);
 
-		// Virtual Host
+		// Virtual host
 
-		updateVirtualHost(companyId, virtualHost);
+		updateVirtualHost(companyId, virtualHostname);
 
 		return company;
 	}
 
 	public Company updateCompany(
-			long companyId, String virtualHost, String mx, String homeURL,
+			long companyId, String virtualHostname, String mx, String homeURL,
 			String name, String legalName, String legalId, String legalType,
 			String sicCode, String tickerSymbol, String industry, String type,
 			String size)
@@ -564,12 +567,12 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		// Company
 
-		virtualHost = virtualHost.trim().toLowerCase();
+		virtualHostname = virtualHostname.trim().toLowerCase();
 		Date now = new Date();
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
-		validate(company.getWebId(), virtualHost, mx);
+		validate(company.getWebId(), virtualHostname, mx);
 		validate(name);
 
 		if (PropsValues.MAIL_MX_UPDATE) {
@@ -613,9 +616,9 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		accountPersistence.update(account, false);
 
-		// Virtual Host
+		// Virtual host
 
-		updateVirtualHost(companyId, virtualHost);
+		updateVirtualHost(companyId, virtualHostname);
 
 		return company;
 	}
@@ -748,18 +751,16 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		return logoId;
 	}
 
-	protected void updateVirtualHost(long companyId, String virtualHost)
+	protected void updateVirtualHost(long companyId, String virtualHostname)
 		throws CompanyVirtualHostException, SystemException {
 
-		if (Validator.isNotNull(virtualHost)) {
+		if (Validator.isNotNull(virtualHostname)) {
 			try {
-				VirtualHost virtualHostObj =
-					virtualHostPersistence.findByVirtualHostName(virtualHost);
+				VirtualHost virtualHost = virtualHostPersistence.findByHostname(
+					virtualHostname);
 
-				if (virtualHostObj.getCompanyId() == companyId &&
-					virtualHostObj.getLayoutSetId() == 0) {
-
-					return;
+				if ((virtualHost.getCompanyId() == companyId) &&
+					(virtualHost.getLayoutSetId() == 0)) {
 				}
 				else {
 					throw new CompanyVirtualHostException();
@@ -767,7 +768,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			}
 			catch (NoSuchVirtualHostException nsvhe) {
 				virtualHostLocalService.addVirtualHost(
-					companyId, 0, virtualHost);
+					companyId, 0, virtualHostname);
 			}
 		}
 		else {
@@ -785,31 +786,31 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		}
 	}
 
-	protected void validate(String webId, String virtualHost, String mx)
+	protected void validate(String webId, String virtualHostname, String mx)
 		throws PortalException, SystemException {
 
-		if (Validator.isNull(virtualHost)) {
+		if (Validator.isNull(virtualHostname)) {
 			throw new CompanyVirtualHostException();
 		}
-		else if (virtualHost.equals(_DEFAULT_VIRTUAL_HOST) &&
+		else if (virtualHostname.equals(_DEFAULT_VIRTUAL_HOST) &&
 				 !webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
 
 			throw new CompanyVirtualHostException();
 		}
-		else if (!Validator.isDomain(virtualHost)) {
+		else if (!Validator.isDomain(virtualHostname)) {
 			throw new CompanyVirtualHostException();
 		}
 		else {
 			try {
-				VirtualHost virtualHostObj =
-					virtualHostPersistence.findByVirtualHostName(virtualHost);
+				VirtualHost virtualHost = virtualHostPersistence.findByHostname(
+					virtualHostname);
 
-				long companyId = virtualHostObj.getCompanyId();
+				long companyId = virtualHost.getCompanyId();
 
-				Company virtualHostCompany =
+				Company virtualHostnameCompany =
 					companyPersistence.findByPrimaryKey(companyId);
 
-				if (!virtualHostCompany.getWebId().equals(webId)) {
+				if (!virtualHostnameCompany.getWebId().equals(webId)) {
 					throw new CompanyVirtualHostException();
 				}
 			}

@@ -43,7 +43,7 @@
 		[$PORTAL_URL$]
 	</dt>
 	<dd>
-		<%= company.getVirtualHost() %>
+		<%= company.getVirtualHostname() %>
 	</dd>
 	<dt class="password-changed-notification">
 		[$REMOTE_ADDRESS$]

@@ -44,12 +44,13 @@ public class RobotsAction extends Action {
 		throws Exception {
 
 		try {
-			String virtualHost = PortalUtil.getHost(request);
+			String virtualHostname = PortalUtil.getHost(request);
 
 			LayoutSet layoutSet = null;
 
 			try {
-				layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(virtualHost);
+				layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+					virtualHostname);
 			}
 			catch (NoSuchLayoutSetException nslse) {
 			}

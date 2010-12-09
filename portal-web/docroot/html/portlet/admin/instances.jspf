@@ -68,7 +68,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Virtual Host
 
-	row.addText(company2.getVirtualHost(), rowURL);
+	row.addText(company2.getVirtualHostname(), rowURL);
 
 	// Mail Domain
 

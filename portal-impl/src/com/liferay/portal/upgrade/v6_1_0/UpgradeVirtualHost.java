@@ -33,15 +33,14 @@ public class UpgradeVirtualHost extends UpgradeProcess {
 	}
 
 	protected void addVirtualHost(
-			long companyId, long layoutSetId, String virtualHostName)
+			long virtualHostId, long companyId, long layoutSetId,
+			String hostname)
 		throws Exception {
-
-		long virtualHostId = increment();
 
 		runSQL(
 			"insert into VirtualHost (virtualHostId, companyId, layoutSetId, " +
-				"virtualHostName) values (" + virtualHostId + ", " + companyId +
-					", " + layoutSetId + ", '" + virtualHostName + "')");
+				"hostname) values (" + virtualHostId + ", " + companyId +
+					", " + layoutSetId + ", '" + hostname + "')");
 	}
 
 	protected void updateCompany() throws Exception {
@@ -53,8 +52,8 @@ public class UpgradeVirtualHost extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select companyId, virtualHost from " +
-					"Company where virtualHost != ?");
+				"select companyId, virtualHost from Company where " +
+					"virtualHost != ?");
 
 			ps.setString(1, StringPool.BLANK);
 
@@ -62,9 +61,11 @@ public class UpgradeVirtualHost extends UpgradeProcess {
 
 			while (rs.next()) {
 				long companyId = rs.getLong("companyId");
-				String virtualHostName = rs.getString("virtualHost");
+				String hostname = rs.getString("virtualHost");
 
-				addVirtualHost(companyId, 0, virtualHostName);
+				long virtualHostId = increment();
+
+				addVirtualHost(virtualHostId, companyId, 0, hostname);
 			}
 		}
 		finally {
@@ -83,8 +84,8 @@ public class UpgradeVirtualHost extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select layoutSetId, companyId, virtualHost from " +
-					"LayoutSet where virtualHost != ?");
+				"select layoutSetId, companyId, virtualHost from LayoutSet " +
+					"where virtualHost != ?");
 
 			ps.setString(1, StringPool.BLANK);
 
@@ -93,9 +94,11 @@ public class UpgradeVirtualHost extends UpgradeProcess {
 			while (rs.next()) {
 				long layoutSetId = rs.getLong("layoutSetId");
 				long companyId = rs.getLong("companyId");
-				String virtualHostName = rs.getString("virtualHost");
+				String hostname = rs.getString("virtualHost");
 
-				addVirtualHost(companyId, layoutSetId, virtualHostName);
+				long virtualHostId = increment();
+
+				addVirtualHost(virtualHostId, companyId, layoutSetId, hostname);
 			}
 		}
 		finally {

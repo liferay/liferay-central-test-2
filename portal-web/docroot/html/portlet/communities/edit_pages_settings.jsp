@@ -152,7 +152,7 @@ if (!tabs2.equals("pages")) {
 				<%
 				LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroupId, false);
 
-				String publicVirtualHost = ParamUtil.getString(request, "publicVirtualHost", BeanParamUtil.getString(publicLayoutSet, request, "virtualHost"));
+				String publicVirtualHost = ParamUtil.getString(request, "publicVirtualHost", BeanParamUtil.getString(publicLayoutSet, request, "virtualHostname"));
 				%>
 
 				<input name="<portlet:namespace />publicVirtualHost" size="50" type="text" value="<%= HtmlUtil.escape(publicVirtualHost) %>" />
@@ -167,7 +167,7 @@ if (!tabs2.equals("pages")) {
 				<%
 				LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroupId, true);
 
-				String privateVirtualHost = ParamUtil.getString(request, "privateVirtualHost", BeanParamUtil.getString(privateLayoutSet, request, "virtualHost"));
+				String privateVirtualHost = ParamUtil.getString(request, "privateVirtualHost", BeanParamUtil.getString(privateLayoutSet, request, "virtualHostname"));
 				%>
 
 				<input name="<portlet:namespace />privateVirtualHost" size="50" type="text" value="<%= HtmlUtil.escape(privateVirtualHost) %>" />
@@ -218,7 +218,7 @@ if (!tabs2.equals("pages")) {
 
 					LayoutSet stagingPublicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(stagingGroupId, false);
 
-					String stagingPublicVirtualHost = ParamUtil.getString(request, "stagingPublicVirtualHost", stagingPublicLayoutSet.getVirtualHost());
+					String stagingPublicVirtualHost = ParamUtil.getString(request, "stagingPublicVirtualHost", stagingPublicLayoutSet.getVirtualHostname());
 					%>
 
 					<input name="<portlet:namespace />stagingPublicVirtualHost" size="50" type="text" value="<%= HtmlUtil.escape(stagingPublicVirtualHost) %>" />
@@ -233,7 +233,7 @@ if (!tabs2.equals("pages")) {
 					<%
 					LayoutSet stagingPrivateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(stagingGroupId, true);
 
-					String stagingPrivateVirtualHost = ParamUtil.getString(request, "stagingPrivateVirtualHost", stagingPrivateLayoutSet.getVirtualHost());
+					String stagingPrivateVirtualHost = ParamUtil.getString(request, "stagingPrivateVirtualHost", stagingPrivateLayoutSet.getVirtualHostname());
 					%>
 
 					<input name="<portlet:namespace />stagingPrivateVirtualHost" size="50" type="text" value="<%= HtmlUtil.escape(stagingPrivateVirtualHost) %>" />
@@ -275,9 +275,9 @@ if (!tabs2.equals("pages")) {
 
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, privateLayout);
 
-		String virtualHost = layoutSet.getVirtualHost();
+		String virtualHostname = layoutSet.getVirtualHostname();
 
-		if (!host.equals(virtualHost)) {
+		if (!host.equals(virtualHostname)) {
 			sitemapUrl += "?groupId=" + groupId + "&privateLayout=" + privateLayout;
 		}
 		%>
@@ -326,7 +326,7 @@ if (!tabs2.equals("pages")) {
 		<tr>
 			<td>
 				<c:choose>
-					<c:when test="<%= Validator.isNotNull(publicLayoutSet.getVirtualHost()) %>">
+					<c:when test="<%= Validator.isNotNull(publicLayoutSet.getVirtualHostname()) %>">
 						<textarea cols="60" name="<portlet:namespace />publicRobots" rows="15"><%= HtmlUtil.escape(publicRobots) %></textarea>
 					</c:when>
 					<c:otherwise>
@@ -350,7 +350,7 @@ if (!tabs2.equals("pages")) {
 		<tr>
 			<td>
 				<c:choose>
-					<c:when test="<%= Validator.isNotNull(privateLayoutSet.getVirtualHost()) %>">
+					<c:when test="<%= Validator.isNotNull(privateLayoutSet.getVirtualHostname()) %>">
 						<textarea cols="60" name="<portlet:namespace />privateRobots" rows="15"><%= HtmlUtil.escape(privateRobots) %></textarea>
 					</c:when>
 					<c:otherwise>

@@ -73,7 +73,7 @@ String editorContent = emailMessageBody;
 				  [$PORTAL_URL$]
 			</dt>
 			<dd>
-				<%= company.getVirtualHost() %>
+				<%= company.getVirtualHostname() %>
 			</dd>
 		</dl>
 	</div>

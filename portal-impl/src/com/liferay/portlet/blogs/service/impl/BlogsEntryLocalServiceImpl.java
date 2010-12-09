@@ -876,7 +876,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				group.getName(),
 				fromAddress,
 				fromName,
-				company.getVirtualHost(),
+				company.getVirtualHostname(),
 				portletName
 			});
 
@@ -905,7 +905,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				group.getName(),
 				fromAddress,
 				fromName,
-				company.getVirtualHost(),
+				company.getVirtualHostname(),
 				portletName
 			});
 

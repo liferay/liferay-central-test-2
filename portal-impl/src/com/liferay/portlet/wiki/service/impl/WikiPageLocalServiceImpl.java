@@ -1639,7 +1639,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				page.getTitle(),
 				user.getEmailAddress(),
 				user.getFullName(),
-				company.getVirtualHost(),
+				company.getVirtualHostname(),
 				portletName
 			});
 
@@ -1684,7 +1684,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				pageURL,
 				user.getEmailAddress(),
 				user.getFullName(),
-				company.getVirtualHost(),
+				company.getVirtualHostname(),
 				portletName
 			});
 

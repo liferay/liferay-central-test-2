@@ -84,13 +84,13 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 		return settingsProperties.getProperty(key);
 	}
 
-	public String getVirtualHost() {
+	public String getVirtualHostname() {
 		try {
 			VirtualHost virtualHost =
 				VirtualHostLocalServiceUtil.getVirtualHost(
 					getCompanyId(), getLayoutSetId());
 
-			return virtualHost.getVirtualHostName();
+			return virtualHost.getHostname();
 		}
 		catch (Exception e) {
 			return StringPool.BLANK;

@@ -271,7 +271,7 @@ else if (tabs2.equals("page-updated-email")) {
 						[$PORTAL_URL$]
 					</dt>
 					<dd>
-						<%= company.getVirtualHost() %>
+						<%= company.getVirtualHostname() %>
 					</dd>
 					<dt>
 						[$PORTLET_NAME$]

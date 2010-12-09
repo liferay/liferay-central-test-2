@@ -1101,7 +1101,7 @@ public class PortalImpl implements Portal {
 			group.getCompanyId());
 
 		sb.append(
-			getPortalURL(company.getVirtualHost(), getPortalPort(), false));
+			getPortalURL(company.getVirtualHostname(), getPortalPort(), false));
 		sb.append(PortalUtil.getPathFriendlyURLPrivateGroup());
 		sb.append(GroupConstants.CONTROL_PANEL_FRIENDLY_URL);
 		sb.append(PropsValues.CONTROL_PANEL_LAYOUT_FRIENDLY_URL);
@@ -1622,9 +1622,9 @@ public class PortalImpl implements Portal {
 		String portalURL = StringPool.BLANK;
 
 		if (!themeDisplay.getServerName().equals(_LOCALHOST)) {
-			String virtualHost = layoutSet.getVirtualHost();
+			String virtualHostname = layoutSet.getVirtualHostname();
 
-			if (Validator.isNull(virtualHost) &&
+			if (Validator.isNull(virtualHostname) &&
 				Validator.isNotNull(
 					PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME) &&
 				!layoutSet.isPrivateLayout()) {
@@ -1637,7 +1637,7 @@ public class PortalImpl implements Portal {
 					if (layoutSet.getGroupId() == group.getGroupId()) {
 						Company company = themeDisplay.getCompany();
 
-						virtualHost = company.getVirtualHost();
+						virtualHostname = company.getVirtualHostname();
 					}
 				}
 				catch (Exception e) {
@@ -1645,17 +1645,17 @@ public class PortalImpl implements Portal {
 				}
 			}
 
-			if (Validator.isNotNull(virtualHost) &&
-				!virtualHost.equalsIgnoreCase(_LOCALHOST)) {
+			if (Validator.isNotNull(virtualHostname) &&
+				!virtualHostname.equalsIgnoreCase(_LOCALHOST)) {
 
-				virtualHost = getPortalURL(
-					virtualHost, themeDisplay.getServerPort(),
+				virtualHostname = getPortalURL(
+					virtualHostname, themeDisplay.getServerPort(),
 					themeDisplay.isSecure());
 
 				String portalDomain = HttpUtil.getDomain(
 					themeDisplay.getPortalURL());
 
-				if (virtualHost.contains(portalDomain)) {
+				if (virtualHostname.contains(portalDomain)) {
 					if (themeDisplay.isWidget()) {
 						layoutFriendlyURL =
 							PropsValues.WIDGET_SERVLET_MAPPING +
@@ -1667,7 +1667,7 @@ public class PortalImpl implements Portal {
 							themeDisplay.getI18nPath() + layoutFriendlyURL;
 					}
 
-					return virtualHost + _pathContext + layoutFriendlyURL;
+					return virtualHostname + _pathContext + layoutFriendlyURL;
 				}
 			}
 			else {
@@ -1675,11 +1675,13 @@ public class PortalImpl implements Portal {
 					(layout.getGroup().getClassPK() !=
 						themeDisplay.getUserId())) {
 
-					virtualHost = themeDisplay.getCompany().getVirtualHost();
+					Company company = themeDisplay.getCompany();
 
-					if (!virtualHost.equalsIgnoreCase(_LOCALHOST)) {
+					virtualHostname = company.getVirtualHostname();
+
+					if (!virtualHostname.equalsIgnoreCase(_LOCALHOST)) {
 						portalURL = getPortalURL(
-							virtualHost, themeDisplay.getServerPort(),
+							virtualHostname, themeDisplay.getServerPort(),
 							themeDisplay.isSecure());
 					}
 				}
@@ -1799,22 +1801,22 @@ public class PortalImpl implements Portal {
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-		String virtualHost = null;
+		String virtualHostname = null;
 
 		LayoutSet layoutSet = layout.getLayoutSet();
 
-		if (Validator.isNotNull(layoutSet.getVirtualHost())) {
-			virtualHost = layoutSet.getVirtualHost();
+		if (Validator.isNotNull(layoutSet.getVirtualHostname())) {
+			virtualHostname = layoutSet.getVirtualHostname();
 		}
 		else {
 			Company company = CompanyLocalServiceUtil.getCompany(
 				layout.getCompanyId());
 
-			virtualHost = company.getVirtualHost();
+			virtualHostname = company.getVirtualHostname();
 		}
 
 		String portalURL = getPortalURL(
-			virtualHost, getPortalPort(), false);
+			virtualHostname, getPortalPort(), false);
 
 		sb.append(portalURL);
 
@@ -1846,9 +1848,9 @@ public class PortalImpl implements Portal {
 			LayoutSet layoutSet, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		String virtualHost = layoutSet.getVirtualHost();
+		String virtualHostname = layoutSet.getVirtualHostname();
 
-		if (Validator.isNull(virtualHost) &&
+		if (Validator.isNull(virtualHostname) &&
 			Validator.isNotNull(
 				PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME) &&
 			!layoutSet.isPrivateLayout()) {
@@ -1861,7 +1863,7 @@ public class PortalImpl implements Portal {
 				if (layoutSet.getGroupId() == group.getGroupId()) {
 					Company company = themeDisplay.getCompany();
 
-					virtualHost = company.getVirtualHost();
+					virtualHostname = company.getVirtualHostname();
 				}
 			}
 			catch (Exception e) {
@@ -1869,9 +1871,9 @@ public class PortalImpl implements Portal {
 			}
 		}
 
-		if (Validator.isNotNull(virtualHost)) {
+		if (Validator.isNotNull(virtualHostname)) {
 			String portalURL = getPortalURL(
-				virtualHost, themeDisplay.getServerPort(),
+				virtualHostname, themeDisplay.getServerPort(),
 				themeDisplay.isSecure());
 
 			// Use the layout set's virtual host setting only if the layout set
@@ -2334,10 +2336,10 @@ public class PortalImpl implements Portal {
 		if (layout != null) {
 			LayoutSet layoutSet = layout.getLayoutSet();
 
-			String virtualHost = layoutSet.getVirtualHost();
+			String virtualHostname = layoutSet.getVirtualHostname();
 
-			if (Validator.isNotNull(virtualHost)) {
-				serverName = virtualHost;
+			if (Validator.isNotNull(virtualHostname)) {
+				serverName = virtualHostname;
 			}
 		}
 

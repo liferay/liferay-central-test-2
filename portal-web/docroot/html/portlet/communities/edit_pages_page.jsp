@@ -231,9 +231,9 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 
 						friendlyURLBase.append(themeDisplay.getPortalURL());
 
-						String virtualHost = selLayout.getLayoutSet().getVirtualHost();
+						String virtualHostname = selLayout.getLayoutSet().getVirtualHostname();
 
-						if (Validator.isNull(virtualHost) || (friendlyURLBase.indexOf(virtualHost) == -1)) {
+						if (Validator.isNull(virtualHostname) || (friendlyURLBase.indexOf(virtualHostname) == -1)) {
 							friendlyURLBase.append(group.getPathFriendlyURL(privateLayout, themeDisplay));
 							friendlyURLBase.append(group.getFriendlyURL());
 						}

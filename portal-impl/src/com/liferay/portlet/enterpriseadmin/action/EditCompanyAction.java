@@ -116,7 +116,8 @@ public class EditCompanyAction extends PortletAction {
 	protected void updateCompany(ActionRequest actionRequest) throws Exception {
 		long companyId = PortalUtil.getCompanyId(actionRequest);
 
-		String virtualHost = ParamUtil.getString(actionRequest, "virtualHost");
+		String virtualHostname = ParamUtil.getString(
+			actionRequest, "virtualHostname");
 		String mx = ParamUtil.getString(actionRequest, "mx");
 		String homeURL = ParamUtil.getString(actionRequest, "homeURL");
 		String name = ParamUtil.getString(actionRequest, "name");
@@ -141,7 +142,7 @@ public class EditCompanyAction extends PortletAction {
 			actionRequest, "settings--");
 
 		CompanyServiceUtil.updateCompany(
-			companyId, virtualHost, mx, homeURL, name, legalName, legalId,
+			companyId, virtualHostname, mx, homeURL, name, legalName, legalId,
 			legalType, sicCode, tickerSymbol, industry, type, size, languageId,
 			timeZoneId, addresses, emailAddresses, phones, websites,
 			properties);

@@ -1392,10 +1392,11 @@ public class JournalUtil {
 
 		String layoutSetFriendlyUrl = StringPool.BLANK;
 
-		String virtualHost = layoutSet.getVirtualHost();
+		String virtualHostname = layoutSet.getVirtualHostname();
 
-		if (Validator.isNull(virtualHost) ||
-			!virtualHost.equals(themeDisplayEl.elementText("server-name"))) {
+		if (Validator.isNull(virtualHostname) ||
+			!virtualHostname.equals(
+				themeDisplayEl.elementText("server-name"))) {
 
 			layoutSetFriendlyUrl = friendlyUrlCurrent + group.getFriendlyURL();
 		}
@@ -1467,10 +1468,10 @@ public class JournalUtil {
 
 		String layoutSetFriendlyUrl = StringPool.BLANK;
 
-		String virtualHost = layoutSet.getVirtualHost();
+		String virtualHostname = layoutSet.getVirtualHostname();
 
-		if (Validator.isNull(virtualHost) ||
-			!virtualHost.equals(themeDisplay.getServerName())) {
+		if (Validator.isNull(virtualHostname) ||
+			!virtualHostname.equals(themeDisplay.getServerName())) {
 
 			layoutSetFriendlyUrl = friendlyUrlCurrent + group.getFriendlyURL();
 		}

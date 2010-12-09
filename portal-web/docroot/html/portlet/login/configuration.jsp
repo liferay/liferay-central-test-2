@@ -148,7 +148,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 								[$PORTAL_URL$]
 							</dt>
 							<dd>
-								<%= company.getVirtualHost() %>
+								<%= company.getVirtualHostname() %>
 							</dd>
 							<dt>
 								[$REMOTE_ADDRESS$]

@@ -192,7 +192,7 @@ public class PortalInstances {
 				LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 					group.getGroupId(), false);
 
-				if (Validator.isNull(layoutSet.getVirtualHost())) {
+				if (Validator.isNull(layoutSet.getVirtualHostname())) {
 					request.setAttribute(
 						WebKeys.VIRTUAL_HOST_LAYOUT_SET, layoutSet);
 				}
@@ -220,17 +220,14 @@ public class PortalInstances {
 			VirtualHost virtualHost =
 				VirtualHostLocalServiceUtil.getVirtualHost(host);
 
-			long companyId = virtualHost.getCompanyId();
-			long layoutSetId = virtualHost.getLayoutSetId();
-
-			if (layoutSetId != 0) {
+			if (virtualHost.getLayoutSetId() != 0) {
 				LayoutSet layoutSet = null;
 
 				try {
-					ShardUtil.pushCompanyService(companyId);
+					ShardUtil.pushCompanyService(virtualHost.getCompanyId());
 
 					layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-						layoutSetId);
+						virtualHost.getLayoutSetId());
 				}
 				finally {
 					ShardUtil.popCompanyService();
@@ -238,15 +235,16 @@ public class PortalInstances {
 
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Company id " + companyId + " is associated with " +
-							"layout set " + layoutSetId);
+						"Company " + virtualHost.getCompanyId() +
+							" is associated with layout set " +
+								virtualHost.getLayoutSetId());
 				}
 
 				request.setAttribute(
 					WebKeys.VIRTUAL_HOST_LAYOUT_SET, layoutSet);
 			}
 
-			return companyId;
+			return virtualHost.getCompanyId();
 		}
 		catch (NoSuchVirtualHostException nsvhe) {
 		}

@@ -2559,7 +2559,7 @@ public class JournalArticleLocalServiceImpl
 				String.valueOf(article.getVersion()),
 				fromAddress,
 				fromName,
-				company.getVirtualHost(),
+				company.getVirtualHostname(),
 				portletName,
 			});
 
@@ -2584,7 +2584,7 @@ public class JournalArticleLocalServiceImpl
 				String.valueOf(article.getVersion()),
 				fromAddress,
 				fromName,
-				company.getVirtualHost(),
+				company.getVirtualHostname(),
 				portletName,
 			});
 
@@ -2623,7 +2623,7 @@ public class JournalArticleLocalServiceImpl
 				String.valueOf(article.getVersion()),
 				fromAddress,
 				fromName,
-				company.getVirtualHost(),
+				company.getVirtualHostname(),
 				portletName,
 			});
 
@@ -2650,7 +2650,7 @@ public class JournalArticleLocalServiceImpl
 				String.valueOf(article.getVersion()),
 				fromAddress,
 				fromName,
-				company.getVirtualHost(),
+				company.getVirtualHostname(),
 				portletName,
 			});
 
@@ -2793,7 +2793,7 @@ public class JournalArticleLocalServiceImpl
 				String.valueOf(article.getVersion()),
 				fromAddress,
 				fromName,
-				company.getVirtualHost(),
+				company.getVirtualHostname(),
 				portletName,
 				toAddress,
 				toName,
@@ -2822,7 +2822,7 @@ public class JournalArticleLocalServiceImpl
 				String.valueOf(article.getVersion()),
 				fromAddress,
 				fromName,
-				company.getVirtualHost(),
+				company.getVirtualHostname(),
 				portletName,
 				toAddress,
 				toName,

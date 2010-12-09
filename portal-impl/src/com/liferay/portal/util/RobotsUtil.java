@@ -15,6 +15,7 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutSet;
 
@@ -38,10 +39,10 @@ public class RobotsUtil {
 
 	public static String getRobots(LayoutSet layoutSet) {
 		if (layoutSet != null) {
-			String virtualHost = "";
+			String virtualHostname = StringPool.BLANK;
 
 			try {
-				virtualHost = layoutSet.getVirtualHost();
+				virtualHostname = layoutSet.getVirtualHostname();
 			}
 			catch (Exception e) {
 			}
@@ -49,7 +50,7 @@ public class RobotsUtil {
 			return GetterUtil.get(
 				layoutSet.getSettingsProperty(
 					layoutSet.getPrivateLayout() + "-robots.txt"),
-					getDefaultRobots(virtualHost));
+					getDefaultRobots(virtualHostname));
 		}
 
 		return getDefaultRobots(null);

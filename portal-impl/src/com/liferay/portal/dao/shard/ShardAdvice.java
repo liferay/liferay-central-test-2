@@ -110,11 +110,12 @@ public class ShardAdvice {
 
 		if (methodName.equals("addCompany")) {
 			String webId = (String)arguments[0];
-			String virtualHost = (String)arguments[1];
+			String virtualHostname = (String)arguments[1];
 			String mx = (String)arguments[2];
 			shardName = (String)arguments[3];
 
-			shardName = _getCompanyShardName(webId, virtualHost, mx, shardName);
+			shardName = _getCompanyShardName(
+				webId, virtualHostname, mx, shardName);
 
 			arguments[3] = shardName;
 		}
@@ -419,15 +420,15 @@ public class ShardAdvice {
 	}
 
 	private String _getCompanyShardName(
-		String webId, String virtualHost, String mx, String shardName) {
+		String webId, String virtualHostname, String mx, String shardName) {
 
 		Map<String, String> shardParams = new HashMap<String, String>();
 
 		shardParams.put("webId", webId);
 		shardParams.put("mx", mx);
 
-		if (virtualHost != null) {
-			shardParams.put("virtualHost", virtualHost);
+		if (virtualHostname != null) {
+			shardParams.put("virtualHostname", virtualHostname);
 		}
 
 		shardName = _shardSelector.getShardName(

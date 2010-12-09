@@ -81,9 +81,6 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		LayoutSet layoutSet = layoutSetPersistence.findByG_P(
 			groupId, privateLayout);
 
-		long companyId = layoutSet.getCompanyId();
-		long layoutSetId = layoutSet.getLayoutSetId();
-
 		// Layouts
 
 		List<Layout> layouts = layoutPersistence.findByG_P_P(
@@ -110,10 +107,11 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		counterLocalService.reset(
 			LayoutLocalServiceImpl.getCounterName(groupId, privateLayout));
 
-		// Virtual Host
+		// Virtual host
 
 		try {
-			virtualHostPersistence.removeByC_L(companyId, layoutSetId);
+			virtualHostPersistence.removeByC_L(
+				layoutSet.getCompanyId(), layoutSet.getLayoutSetId());
 		}
 		catch (NoSuchVirtualHostException nsvhe) {
 		}
@@ -125,22 +123,22 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		return layoutSetPersistence.findByG_P(groupId, privateLayout);
 	}
 
-	public LayoutSet getLayoutSet(String virtualHost)
+	public LayoutSet getLayoutSet(String virtualHostname)
 		throws PortalException, SystemException {
 
-		virtualHost = virtualHost.trim().toLowerCase();
+		virtualHostname = virtualHostname.trim().toLowerCase();
 
-		VirtualHost virtualHostObj =
-			virtualHostPersistence.findByVirtualHostName(virtualHost);
+		VirtualHost virtualHost = virtualHostPersistence.findByHostname(
+			virtualHostname);
 
-		long layoutSetId = virtualHostObj.getLayoutSetId();
-
-		if (layoutSetId == 0) {
+		if (virtualHost.getLayoutSetId() == 0) {
 			throw new LayoutSetVirtualHostException(
-				"Virtual host is for portal instance " + virtualHostObj);
+				"Virtual host is associated with company " +
+					virtualHost.getCompanyId());
 		}
 
-		return layoutSetPersistence.findByPrimaryKey(layoutSetId);
+		return layoutSetPersistence.findByPrimaryKey(
+			virtualHost.getLayoutSetId());
 	}
 
 	public void updateLogo(
@@ -273,13 +271,13 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 	}
 
 	public LayoutSet updateVirtualHost(
-			long groupId, boolean privateLayout, String virtualHost)
+			long groupId, boolean privateLayout, String virtualHostname)
 		throws PortalException, SystemException {
 
-		virtualHost = virtualHost.trim().toLowerCase();
+		virtualHostname = virtualHostname.trim().toLowerCase();
 
-		if (virtualHost.startsWith(Http.HTTP_WITH_SLASH) ||
-			virtualHost.startsWith(Http.HTTPS_WITH_SLASH)) {
+		if (virtualHostname.startsWith(Http.HTTP_WITH_SLASH) ||
+			virtualHostname.startsWith(Http.HTTPS_WITH_SLASH)) {
 
 			throw new LayoutSetVirtualHostException();
 		}
@@ -287,21 +285,21 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		LayoutSet layoutSet = layoutSetPersistence.findByG_P(
 			groupId, privateLayout);
 
-		if (Validator.isNotNull(virtualHost)) {
-			long companyId = layoutSet.getCompanyId();
-			long layoutSetId = layoutSet.getLayoutSetId();
-
+		if (Validator.isNotNull(virtualHostname)) {
 			try {
-				VirtualHost virtualHostObj =
-					virtualHostPersistence.findByVirtualHostName(virtualHost);
+				VirtualHost virtualHost = virtualHostPersistence.findByHostname(
+					virtualHostname);
 
-				if (layoutSetId != virtualHostObj.getLayoutSetId()) {
+				if (virtualHost.getLayoutSetId() !=
+						layoutSet.getLayoutSetId()) {
+
 					throw new LayoutSetVirtualHostException();
 				}
 			}
 			catch (NoSuchVirtualHostException nsvhe) {
 				virtualHostLocalService.addVirtualHost(
-					companyId, layoutSetId, virtualHost);
+					layoutSet.getCompanyId(), layoutSet.getLayoutSetId(),
+					virtualHostname);
 			}
 		}
 		else {

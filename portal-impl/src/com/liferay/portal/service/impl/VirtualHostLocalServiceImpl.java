@@ -26,21 +26,21 @@ public class VirtualHostLocalServiceImpl
 	extends VirtualHostLocalServiceBaseImpl {
 
 	public VirtualHost addVirtualHost(
-			long companyId, long layoutSetId, String virtualHostName)
+			long companyId, long layoutSetId, String hostname)
 		throws SystemException {
 
 		long virtualHostId = counterLocalService.increment();
 
-		VirtualHost virtualHostObj = virtualHostPersistence.create(
+		VirtualHost virtualHost = virtualHostPersistence.create(
 			virtualHostId);
 
-		virtualHostObj.setCompanyId(companyId);
-		virtualHostObj.setLayoutSetId(layoutSetId);
-		virtualHostObj.setVirtualHostName(virtualHostName);
+		virtualHost.setCompanyId(companyId);
+		virtualHost.setLayoutSetId(layoutSetId);
+		virtualHost.setHostname(hostname);
 
-		virtualHostPersistence.update(virtualHostObj, false);
+		virtualHostPersistence.update(virtualHost, false);
 
-		return virtualHostObj;
+		return virtualHost;
 	}
 
 	public VirtualHost getVirtualHost(long companyId, long layoutSetId)
@@ -49,10 +49,10 @@ public class VirtualHostLocalServiceImpl
 		return virtualHostPersistence.findByC_L(companyId, layoutSetId);
 	}
 
-	public VirtualHost getVirtualHost(String virtualHostName)
+	public VirtualHost getVirtualHost(String hostname)
 		throws PortalException, SystemException {
 
-		return virtualHostPersistence.findByVirtualHostName(virtualHostName);
+		return virtualHostPersistence.findByHostname(hostname);
 	}
 
 }

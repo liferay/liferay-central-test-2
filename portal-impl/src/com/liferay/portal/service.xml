@@ -1994,20 +1994,23 @@
 
 		<column name="virtualHostId" type="long" primary="true" />
 
-		<!-- Other fields -->
+		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
+
+		<!-- Other fields -->
+
 		<column name="layoutSetId" type="long" />
-		<column name="virtualHostName" type="String" />
+		<column name="hostname" type="String" />
 
 		<!-- Finder methods -->
 
+		<finder name="Hostname" return-type="VirtualHost" unique="true">
+			<finder-column name="hostname" />
+		</finder>
 		<finder name="C_L" return-type="VirtualHost" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="layoutSetId" />
-		</finder>
-		<finder name="VirtualHostName" return-type="VirtualHost" unique="true">
-			<finder-column name="virtualHostName" />
 		</finder>
 	</entity>
 	<entity name="WebDAVProps" local-service="true" remote-service="false">
