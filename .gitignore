@@ -1,8 +1,8 @@
 *~
 *.bak
+*.iml
 *.swp
 
-/*.iml
 /*.ipr
 /*.iws
 /*.patch
@@ -97,7 +97,7 @@
 
 /portal-web/docroot/html/VAADIN
 
-/portal-web/docroot/html/icons/.sprite*
+/portal-web/docroot/html/icons/_sprite.*
 
 /portal-web/docroot/html/js/aui
 
