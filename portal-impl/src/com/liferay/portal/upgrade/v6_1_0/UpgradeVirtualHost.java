@@ -16,6 +16,7 @@ package com.liferay.portal.upgrade.v6_1_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -40,7 +41,7 @@ public class UpgradeVirtualHost extends UpgradeProcess {
 		runSQL(
 			"insert into VirtualHost (virtualHostId, companyId, layoutSetId, " +
 				"virtualHostName) values (" + virtualHostId + ", " + companyId +
-					", " + layoutSetId + ", " + virtualHostName + ")");
+					", " + layoutSetId + ", '" + virtualHostName + "')");
 	}
 
 	protected void updateCompany() throws Exception {
@@ -53,7 +54,9 @@ public class UpgradeVirtualHost extends UpgradeProcess {
 
 			ps = con.prepareStatement(
 				"select companyId, virtualHost from " +
-					"Company where virtualHost != ''");
+					"Company where virtualHost != ?");
+
+			ps.setString(1, StringPool.BLANK);
 
 			rs = ps.executeQuery();
 
@@ -81,7 +84,9 @@ public class UpgradeVirtualHost extends UpgradeProcess {
 
 			ps = con.prepareStatement(
 				"select layoutSetId, companyId, virtualHost from " +
-					"LayoutSet where virtualHost != ''");
+					"LayoutSet where virtualHost != ?");
+
+			ps.setString(1, StringPool.BLANK);
 
 			rs = ps.executeQuery();
 
