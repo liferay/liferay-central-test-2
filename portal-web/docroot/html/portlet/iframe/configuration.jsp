@@ -79,7 +79,7 @@ String htmlAttributes =
 									<aui:input cssClass="lfr-input-text-container" label="field-name" name="userNameField" type="text" value="<%= userNameField %>" />
 								</td>
 								<td>
-									<aui:input cssClass="lfr-input-text-container" label="value" name="userName" type="text" value="<%= userName %>" />
+									<aui:input cssClass="lfr-input-text-container" label="value" name="formUserName" type="text" value="<%= userName %>" />
 								</td>
 							</tr>
 							</table>
@@ -92,7 +92,7 @@ String htmlAttributes =
 									<aui:input cssClass="lfr-input-text-container" label="field-name" name="passwordField" type="text" value="<%= passwordField %>" />
 								</td>
 								<td>
-									<aui:input cssClass="lfr-input-text-container" label="value" name="password" type="text" value="<%= password %>" />
+									<aui:input cssClass="lfr-input-text-container" label="value" name="formPassword" type="text" value="<%= password %>" />
 								</td>
 							</tr>
 							</table>
@@ -102,9 +102,9 @@ String htmlAttributes =
 					</div>
 
 					<div id="<portlet:namespace />basicAuthOptions">
-						<aui:input cssClass="lfr-input-text-container" name="userName" type="text" value="<%= userName %>" />
+						<aui:input cssClass="lfr-input-text-container" label="user-name" name="basicUserName" type="text" value="<%= userName %>" />
 
-						<aui:input cssClass="lfr-input-text-container" name="password" type="text" value="<%= password %>" />
+						<aui:input cssClass="lfr-input-text-container" label="password" name="basicPassword" type="text" value="<%= password %>" />
 					</div>
 				</div>
 			</aui:fieldset>

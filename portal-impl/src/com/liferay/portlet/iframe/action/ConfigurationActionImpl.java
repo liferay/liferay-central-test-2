@@ -62,10 +62,12 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		boolean auth = ParamUtil.getBoolean(actionRequest, "auth");
 		String authType = ParamUtil.getString(actionRequest, "authType");
 		String formMethod = ParamUtil.getString(actionRequest, "formMethod");
-		String userName = ParamUtil.getString(actionRequest, "userName");
+		String userName = ParamUtil.getString(
+			actionRequest, authType + "UserName");
 		String userNameField = ParamUtil.getString(
 			actionRequest, "userNameField");
-		String password = ParamUtil.getString(actionRequest, "password");
+		String password = ParamUtil.getString(
+			actionRequest, authType + "Password");
 		String passwordField = ParamUtil.getString(
 			actionRequest, "passwordField");
 		String hiddenVariables = ParamUtil.getString(
