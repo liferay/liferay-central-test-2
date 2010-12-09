@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
 import com.liferay.portal.kernel.scheduler.TimeUnit;
@@ -78,7 +79,6 @@ import com.liferay.portlet.expando.model.CustomAttributesDisplay;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import java.io.File;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -93,7 +93,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.portlet.PortletMode;
 import javax.portlet.PreferencesValidator;
 import javax.portlet.WindowState;
-
 import javax.servlet.ServletContext;
 
 /**
@@ -573,6 +572,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 					!portletModel.isInclude()) {
 
 					portletPoolsItr.remove();
+					_friendlyURLMapperPortlets.remove(
+						portletModel.getPortletId());
 				}
 			}
 
