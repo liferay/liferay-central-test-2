@@ -56,6 +56,42 @@ public class AddArticleTest extends BaseTestCase {
 			RuntimeVariables.replace("Knowledge Base Admin Article Title"));
 		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"_1_WAR_knowledgebaseportlet_editor")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("cke_contents_CKEditor1")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.selectFrame(
 			"//iframe[@id='_1_WAR_knowledgebaseportlet_editor']");
 		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");

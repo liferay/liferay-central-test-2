@@ -105,6 +105,40 @@ public class TearDownArticleTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 
 			case 4:
+
+				boolean kbArticle4Present = selenium.isElementPresent(
+						"link=Delete");
+
+				if (!kbArticle4Present) {
+					label = 5;
+
+					continue;
+				}
+
+				selenium.click(RuntimeVariables.replace("link=Delete"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
+
+			case 5:
+
+				boolean kbArticle5Present = selenium.isElementPresent(
+						"link=Delete");
+
+				if (!kbArticle5Present) {
+					label = 6;
+
+					continue;
+				}
+
+				selenium.click(RuntimeVariables.replace("link=Delete"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+				selenium.saveScreenShotAndSource();
+
+			case 6:
 			case 100:
 				label = -1;
 			}

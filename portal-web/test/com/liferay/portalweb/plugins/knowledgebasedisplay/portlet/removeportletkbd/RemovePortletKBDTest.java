@@ -45,7 +45,7 @@ public class RemovePortletKBDTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.click("//span[3]/a/img");
+		selenium.click("//img[@title='Remove'");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
