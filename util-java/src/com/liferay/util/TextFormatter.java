@@ -366,13 +366,13 @@ public class TextFormatter {
 			if (Character.isUpperCase(c) && (i > 0) &&
 				((i + 1) < s.length())) {
 
-				int diff = sb.length() - s.length();
+				int delta = sb.length() - s.length();
 
 				if (Character.isLowerCase(s.charAt(i + 1))) {
-					sb.insert(i + diff, CharPool.DASH);
+					sb.insert(i + delta, CharPool.DASH);
 				}
 				else if (Character.isLowerCase(s.charAt(i - 1))) {
-					sb.insert(i + diff, CharPool.DASH);
+					sb.insert(i + delta, CharPool.DASH);
 				}
 			}
 		}
