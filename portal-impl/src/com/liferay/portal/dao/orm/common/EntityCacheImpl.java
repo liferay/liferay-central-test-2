@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
 import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
+import com.liferay.portal.kernel.dao.shard.ShardUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
@@ -291,8 +292,10 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		CacheKeyGenerator cacheKeyGenerator =
 			CacheKeyGeneratorUtil.getCacheKeyGenerator(CACHE_NAME);
 
-		return cacheKeyGenerator.getCacheKey(
-			StringUtil.toHexString(primaryKeyObj));
+		cacheKeyGenerator.append(StringUtil.toHexString(primaryKeyObj));
+		cacheKeyGenerator.append(ShardUtil.getCurrentShardName());
+
+		return cacheKeyGenerator.finish();
 	}
 
 	private String _encodeLocalCacheKey(
@@ -303,6 +306,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 		cacheKeyGenerator.append(classObj.getName());
 		cacheKeyGenerator.append(StringUtil.toHexString(primaryKeyObj));
+		cacheKeyGenerator.append(ShardUtil.getCurrentShardName());
 
 		return cacheKeyGenerator.finish();
 	}

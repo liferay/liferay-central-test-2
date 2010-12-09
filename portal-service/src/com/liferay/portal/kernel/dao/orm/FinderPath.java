@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.dao.orm;
 
 import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
 import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
+import com.liferay.portal.kernel.dao.shard.ShardUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -40,9 +41,11 @@ public class FinderPath {
 	}
 
 	public String encodeCacheKey(Object[] args) {
-		StringBundler sb = new StringBundler(args.length * 2 + 1);
+		StringBundler sb = new StringBundler(args.length * 2 + 3);
 
 		sb.append(_cacheKeyPrefix);
+		sb.append(StringPool.PERIOD);
+		sb.append(ShardUtil.getCurrentShardName());
 
 		for (Object arg : args) {
 			sb.append(StringPool.PERIOD);
@@ -57,9 +60,11 @@ public class FinderPath {
 	}
 
 	public String encodeLocalCacheKey(Object[] args) {
-		StringBundler sb = new StringBundler(args.length * 2 + 1);
+		StringBundler sb = new StringBundler(args.length * 2 + 3);
 
 		sb.append(_localCacheKeyPrefix);
+		sb.append(StringPool.PERIOD);
+		sb.append(ShardUtil.getCurrentShardName());
 
 		for (Object arg : args) {
 			sb.append(StringPool.PERIOD);
