@@ -154,6 +154,8 @@
 	<bean id="com.liferay.portal.service.persistence.UserTrackerPersistence" class="com.liferay.portal.service.persistence.UserTrackerPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.UserTrackerPathLocalService" class="com.liferay.portal.service.impl.UserTrackerPathLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.persistence.UserTrackerPathPersistence" class="com.liferay.portal.service.persistence.UserTrackerPathPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portal.service.VirtualHostLocalService" class="com.liferay.portal.service.impl.VirtualHostLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.persistence.VirtualHostPersistence" class="com.liferay.portal.service.persistence.VirtualHostPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.WebDAVPropsLocalService" class="com.liferay.portal.service.impl.WebDAVPropsLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.persistence.WebDAVPropsPersistence" class="com.liferay.portal.service.persistence.WebDAVPropsPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.WebsiteLocalService" class="com.liferay.portal.service.impl.WebsiteLocalServiceImpl" />

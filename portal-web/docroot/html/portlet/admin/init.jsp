@@ -29,8 +29,10 @@
 <%@ page import="com.liferay.portal.kernel.xml.Document" %>
 <%@ page import="com.liferay.portal.kernel.xml.Element" %>
 <%@ page import="com.liferay.portal.kernel.xml.SAXReaderUtil" %>
+<%@ page import="com.liferay.portal.model.VirtualHost" %>
 <%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
 <%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
+<%@ page import="com.liferay.portal.service.VirtualHostLocalServiceUtil" %>
 
 <%@ page import="java.awt.BasicStroke" %>
 <%@ page import="java.awt.Color" %>

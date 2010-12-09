@@ -15,9 +15,8 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.LayoutSetVirtualHostException;
-import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.NoSuchLayoutException;
-import com.liferay.portal.NoSuchLayoutSetException;
+import com.liferay.portal.NoSuchVirtualHostException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.Http;
@@ -28,6 +27,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.VirtualHost;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
 import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.service.base.LayoutSetLocalServiceBaseImpl;
@@ -81,6 +81,9 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		LayoutSet layoutSet = layoutSetPersistence.findByG_P(
 			groupId, privateLayout);
 
+		long companyId = layoutSet.getCompanyId();
+		long layoutSetId = layoutSet.getLayoutSetId();
+
 		// Layouts
 
 		List<Layout> layouts = layoutPersistence.findByG_P_P(
@@ -106,6 +109,14 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
 		counterLocalService.reset(
 			LayoutLocalServiceImpl.getCounterName(groupId, privateLayout));
+
+		// Virtual Host
+
+		try {
+			virtualHostPersistence.removeByC_L(companyId, layoutSetId);
+		}
+		catch (NoSuchVirtualHostException nsvhe) {
+		}
 	}
 
 	public LayoutSet getLayoutSet(long groupId, boolean privateLayout)
@@ -119,7 +130,17 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
 		virtualHost = virtualHost.trim().toLowerCase();
 
-		return layoutSetPersistence.findByVirtualHost(virtualHost);
+		VirtualHost virtualHostObj =
+			virtualHostPersistence.findByVirtualHostName(virtualHost);
+
+		long layoutSetId = virtualHostObj.getLayoutSetId();
+
+		if (layoutSetId == 0) {
+			throw new LayoutSetVirtualHostException(
+				"Virtual host is for portal instance " + virtualHostObj);
+		}
+
+		return layoutSetPersistence.findByPrimaryKey(layoutSetId);
 	}
 
 	public void updateLogo(
@@ -267,28 +288,30 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 			groupId, privateLayout);
 
 		if (Validator.isNotNull(virtualHost)) {
-			try {
-				LayoutSet virtualHostLayoutSet = getLayoutSet(virtualHost);
+			long companyId = layoutSet.getCompanyId();
+			long layoutSetId = layoutSet.getLayoutSetId();
 
-				if (!layoutSet.equals(virtualHostLayoutSet)) {
+			try {
+				VirtualHost virtualHostObj =
+					virtualHostPersistence.findByVirtualHostName(virtualHost);
+
+				if (layoutSetId != virtualHostObj.getLayoutSetId()) {
 					throw new LayoutSetVirtualHostException();
 				}
 			}
-			catch (NoSuchLayoutSetException nslse) {
-			}
-
-			try {
-				companyLocalService.getCompanyByVirtualHost(virtualHost);
-
-				throw new LayoutSetVirtualHostException();
-			}
-			catch (NoSuchCompanyException nsce) {
+			catch (NoSuchVirtualHostException nsvhe) {
+				virtualHostLocalService.addVirtualHost(
+					companyId, layoutSetId, virtualHost);
 			}
 		}
-
-		layoutSet.setVirtualHost(virtualHost);
-
-		layoutSetPersistence.update(layoutSet, false);
+		else {
+			try {
+				virtualHostPersistence.removeByC_L(
+					layoutSet.getCompanyId(), layoutSet.getLayoutSetId());
+			}
+			catch (NoSuchVirtualHostException nsvhe) {
+			}
+		}
 
 		return layoutSet;
 	}

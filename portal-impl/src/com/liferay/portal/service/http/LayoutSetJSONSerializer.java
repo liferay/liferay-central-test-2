@@ -41,7 +41,6 @@ public class LayoutSetJSONSerializer {
 		jsonObject.put("wapColorSchemeId", model.getWapColorSchemeId());
 		jsonObject.put("css", model.getCss());
 		jsonObject.put("pageCount", model.getPageCount());
-		jsonObject.put("virtualHost", model.getVirtualHost());
 		jsonObject.put("settings", model.getSettings());
 		jsonObject.put("layoutSetPrototypeId", model.getLayoutSetPrototypeId());
 

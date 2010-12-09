@@ -98,9 +98,6 @@
 		<field name="key" type="String">
 			<hint-collection name="CLOB" />
 		</field>
-		<field name="virtualHost" type="String">
-			<validator name="required" />
-		</field>
 		<field name="mx" type="String">
 			<validator name="required" />
 		</field>
@@ -318,7 +315,6 @@
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="pageCount" type="int" />
-		<field name="virtualHost" type="String" />
 		<field name="settings" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
@@ -807,6 +803,15 @@
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="pathDate" type="Date" />
+	</model>
+	<model name="com.liferay.portal.model.VirtualHost">
+		<default-hints>
+			<hint name="display-width">150</hint>
+		</default-hints>
+		<field name="virtualHostId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="layoutSetId" type="long" />
+		<field name="virtualHostName" type="String" />
 	</model>
 	<model name="com.liferay.portal.model.WebDAVProps">
 		<field name="webDavPropsId" type="long" />

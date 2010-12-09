@@ -74,7 +74,6 @@ public class LayoutSetPersistenceTest extends BasePersistenceTestCase {
 		newLayoutSet.setWapColorSchemeId(randomString());
 		newLayoutSet.setCss(randomString());
 		newLayoutSet.setPageCount(nextInt());
-		newLayoutSet.setVirtualHost(randomString());
 		newLayoutSet.setSettings(randomString());
 		newLayoutSet.setLayoutSetPrototypeId(nextLong());
 
@@ -101,8 +100,6 @@ public class LayoutSetPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingLayoutSet.getCss(), newLayoutSet.getCss());
 		assertEquals(existingLayoutSet.getPageCount(),
 			newLayoutSet.getPageCount());
-		assertEquals(existingLayoutSet.getVirtualHost(),
-			newLayoutSet.getVirtualHost());
 		assertEquals(existingLayoutSet.getSettings(), newLayoutSet.getSettings());
 		assertEquals(existingLayoutSet.getLayoutSetPrototypeId(),
 			newLayoutSet.getLayoutSetPrototypeId());
@@ -190,7 +187,6 @@ public class LayoutSetPersistenceTest extends BasePersistenceTestCase {
 		layoutSet.setWapColorSchemeId(randomString());
 		layoutSet.setCss(randomString());
 		layoutSet.setPageCount(nextInt());
-		layoutSet.setVirtualHost(randomString());
 		layoutSet.setSettings(randomString());
 		layoutSet.setLayoutSetPrototypeId(nextLong());
 

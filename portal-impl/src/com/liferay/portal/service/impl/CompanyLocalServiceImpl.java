@@ -18,10 +18,9 @@ import com.liferay.portal.AccountNameException;
 import com.liferay.portal.CompanyMxException;
 import com.liferay.portal.CompanyVirtualHostException;
 import com.liferay.portal.CompanyWebIdException;
-import com.liferay.portal.NoSuchCompanyException;
-import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.NoSuchShardException;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.NoSuchVirtualHostException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -47,6 +46,7 @@ import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.VirtualHost;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
 import com.liferay.portal.util.Portal;
@@ -94,12 +94,15 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		Company company = checkCompany(webId, mx, shardName);
 
-		company.setVirtualHost(virtualHost);
 		company.setMx(mx);
 		company.setSystem(system);
 		company.setMaxUsers(maxUsers);
 
 		companyPersistence.update(company, false);
+
+		// Virtual Host
+
+		updateVirtualHost(company.getCompanyId(), virtualHost);
 
 		return company;
 	}
@@ -152,7 +155,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			}
 
 			company.setWebId(webId);
-			company.setVirtualHost(virtualHost);
 			company.setMx(mx);
 
 			companyPersistence.update(company, false);
@@ -168,14 +170,16 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				companyId, virtualHost, mx, homeURL, name, legalName, legalId,
 				legalType, sicCode, tickerSymbol, industry, type, size);
 
+			// Virtual Host
+
+			updateVirtualHost(companyId, virtualHost);
+
 			// Demo settings
 
 			if (webId.equals("liferay.net")) {
 				company = companyPersistence.findByWebId(webId);
 
-				company.setVirtualHost("demo.liferay.net");
-
-				companyPersistence.update(company, false);
+				updateVirtualHost(companyId, "demo.liferay.net");
 
 				updateSecurity(
 					companyId, CompanyConstants.AUTH_TYPE_EA, true, true, true,
@@ -434,7 +438,22 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		virtualHost = virtualHost.trim().toLowerCase();
 
-		return companyPersistence.findByVirtualHost(virtualHost);
+		try {
+			VirtualHost virtualHostObj =
+				virtualHostPersistence.findByVirtualHostName(virtualHost);
+
+			if (virtualHostObj.getLayoutSetId() != 0) {
+				throw new CompanyVirtualHostException(
+					"Virtual host is for layout set " + virtualHostObj);
+			}
+
+			long companyId = virtualHostObj.getCompanyId();
+
+			return companyPersistence.findByPrimaryKey(companyId);
+		}
+		catch (NoSuchVirtualHostException nsvhe) {
+			throw new CompanyVirtualHostException(nsvhe);
+		}
 	}
 
 	public Company getCompanyByWebId(String webId)
@@ -521,8 +540,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		validate(company.getWebId(), virtualHost, mx);
 
-		company.setVirtualHost(virtualHost);
-
 		if (PropsValues.MAIL_MX_UPDATE) {
 			company.setMx(mx);
 		}
@@ -530,6 +547,10 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		company.setMaxUsers(maxUsers);
 
 		companyPersistence.update(company, false);
+
+		// Virtual Host
+
+		updateVirtualHost(companyId, virtualHost);
 
 		return company;
 	}
@@ -550,8 +571,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		validate(company.getWebId(), virtualHost, mx);
 		validate(name);
-
-		company.setVirtualHost(virtualHost);
 
 		if (PropsValues.MAIL_MX_UPDATE) {
 			company.setMx(mx);
@@ -593,6 +612,10 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		account.setSize(size);
 
 		accountPersistence.update(account, false);
+
+		// Virtual Host
+
+		updateVirtualHost(companyId, virtualHost);
 
 		return company;
 	}
@@ -725,6 +748,37 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		return logoId;
 	}
 
+	protected void updateVirtualHost(long companyId, String virtualHost)
+		throws CompanyVirtualHostException, SystemException {
+
+		if (Validator.isNotNull(virtualHost)) {
+			try {
+				VirtualHost virtualHostObj =
+					virtualHostPersistence.findByVirtualHostName(virtualHost);
+
+				if (virtualHostObj.getCompanyId() == companyId &&
+					virtualHostObj.getLayoutSetId() == 0) {
+
+					return;
+				}
+				else {
+					throw new CompanyVirtualHostException();
+				}
+			}
+			catch (NoSuchVirtualHostException nsvhe) {
+				virtualHostLocalService.addVirtualHost(
+					companyId, 0, virtualHost);
+			}
+		}
+		else {
+			try {
+				virtualHostPersistence.removeByC_L(companyId, 0);
+			}
+			catch (NoSuchVirtualHostException nsvhe) {
+			}
+		}
+	}
+
 	protected void validate(String name) throws PortalException {
 		if (Validator.isNull(name)) {
 			throw new AccountNameException();
@@ -747,24 +801,19 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		}
 		else {
 			try {
-				Company virtualHostCompany = getCompanyByVirtualHost(
-					virtualHost);
+				VirtualHost virtualHostObj =
+					virtualHostPersistence.findByVirtualHostName(virtualHost);
 
-				if ((virtualHostCompany != null) &&
-					(!virtualHostCompany.getWebId().equals(webId))) {
+				long companyId = virtualHostObj.getCompanyId();
 
+				Company virtualHostCompany =
+					companyPersistence.findByPrimaryKey(companyId);
+
+				if (!virtualHostCompany.getWebId().equals(webId)) {
 					throw new CompanyVirtualHostException();
 				}
 			}
-			catch (NoSuchCompanyException nsce) {
-			}
-
-			try {
-				layoutSetLocalService.getLayoutSet(virtualHost);
-
-				throw new CompanyVirtualHostException();
-			}
-			catch (NoSuchLayoutSetException nslse) {
+			catch (NoSuchVirtualHostException nsvhe) {
 			}
 		}
 

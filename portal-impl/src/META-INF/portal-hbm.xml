@@ -60,6 +60,7 @@
 	<import class="com.liferay.portal.model.UserIdMapper" />
 	<import class="com.liferay.portal.model.UserTracker" />
 	<import class="com.liferay.portal.model.UserTrackerPath" />
+	<import class="com.liferay.portal.model.VirtualHost" />
 	<import class="com.liferay.portal.model.WebDAVProps" />
 	<import class="com.liferay.portal.model.Website" />
 	<import class="com.liferay.portal.model.WorkflowDefinitionLink" />
@@ -221,7 +222,6 @@
 		<property name="accountId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="webId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="key" column="key_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="virtualHost" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="mx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="homeURL" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="logoId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
@@ -407,7 +407,6 @@
 		<property name="wapColorSchemeId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="css" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="pageCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="virtualHost" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="settings" column="settings_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="layoutSetPrototypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
@@ -893,6 +892,15 @@
 		<property name="userTrackerId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="path" column="path_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="pathDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.liferay.portal.model.impl.VirtualHostImpl" table="VirtualHost">
+		<cache usage="read-write" />
+		<id name="virtualHostId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="layoutSetId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="virtualHostName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.WebDAVPropsImpl" table="WebDAVProps">
 		<cache usage="read-write" />

@@ -18,13 +18,16 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Theme;
+import com.liferay.portal.model.VirtualHost;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
+import com.liferay.portal.service.VirtualHostLocalServiceUtil;
 
 import java.io.IOException;
 
@@ -79,6 +82,19 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 		UnicodeProperties settingsProperties = getSettingsProperties();
 
 		return settingsProperties.getProperty(key);
+	}
+
+	public String getVirtualHost() {
+		try {
+			VirtualHost virtualHost =
+				VirtualHostLocalServiceUtil.getVirtualHost(
+					getCompanyId(), getLayoutSetId());
+
+			return virtualHost.getVirtualHostName();
+		}
+		catch (Exception e) {
+			return StringPool.BLANK;
+		}
 	}
 
 	public Theme getWapTheme() throws SystemException {

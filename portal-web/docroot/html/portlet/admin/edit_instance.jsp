@@ -22,6 +22,14 @@ String redirect = ParamUtil.getString(request, "redirect");
 Company company2 = (Company)request.getAttribute(WebKeys.SEL_COMPANY);
 
 long companyId = BeanParamUtil.getLong(company2, request, "companyId");
+
+VirtualHost virtualHostObj2 = null;
+
+try {
+	virtualHostObj2 = VirtualHostLocalServiceUtil.getVirtualHost(companyId, 0);
+}
+catch (Exception e) {
+}
 %>
 
 <liferay-ui:header
@@ -59,7 +67,7 @@ long companyId = BeanParamUtil.getLong(company2, request, "companyId");
 			<aui:input name="webId" />
 		</c:if>
 
-		<aui:input name="virtualHost" />
+		<aui:input bean="<%= virtualHostObj2 %>" label="virtual-host" model="<%= VirtualHost.class %>" name="virtualHostName"  />
 
 		<aui:input label="mail-domain" name="mx" />
 

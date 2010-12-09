@@ -130,41 +130,6 @@ public interface CompanyPersistence extends BasePersistence<Company> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the company where virtualHost = &#63; or throws a {@link com.liferay.portal.NoSuchCompanyException} if it could not be found.
-	*
-	* @param virtualHost the virtual host to search with
-	* @return the matching company
-	* @throws com.liferay.portal.NoSuchCompanyException if a matching company could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.Company findByVirtualHost(
-		java.lang.String virtualHost)
-		throws com.liferay.portal.NoSuchCompanyException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Finds the company where virtualHost = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param virtualHost the virtual host to search with
-	* @return the matching company, or <code>null</code> if a matching company could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.Company fetchByVirtualHost(
-		java.lang.String virtualHost)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Finds the company where virtualHost = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param virtualHost the virtual host to search with
-	* @return the matching company, or <code>null</code> if a matching company could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.Company fetchByVirtualHost(
-		java.lang.String virtualHost, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Finds the company where mx = &#63; or throws a {@link com.liferay.portal.NoSuchCompanyException} if it could not be found.
 	*
 	* @param mx the mx to search with
@@ -386,16 +351,6 @@ public interface CompanyPersistence extends BasePersistence<Company> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Removes the company where virtualHost = &#63; from the database.
-	*
-	* @param virtualHost the virtual host to search with
-	* @throws SystemException if a system exception occurred
-	*/
-	public void removeByVirtualHost(java.lang.String virtualHost)
-		throws com.liferay.portal.NoSuchCompanyException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Removes the company where mx = &#63; from the database.
 	*
 	* @param mx the mx to search with
@@ -440,16 +395,6 @@ public interface CompanyPersistence extends BasePersistence<Company> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByWebId(java.lang.String webId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Counts all the companies where virtualHost = &#63;.
-	*
-	* @param virtualHost the virtual host to search with
-	* @return the number of matching companies
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByVirtualHost(java.lang.String virtualHost)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

@@ -281,24 +281,6 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	/**
-	* Gets the virtual host of this layout set.
-	*
-	* @return the virtual host of this layout set
-	*/
-	public java.lang.String getVirtualHost() {
-		return _layoutSet.getVirtualHost();
-	}
-
-	/**
-	* Sets the virtual host of this layout set.
-	*
-	* @param virtualHost the virtual host of this layout set
-	*/
-	public void setVirtualHost(java.lang.String virtualHost) {
-		_layoutSet.setVirtualHost(virtualHost);
-	}
-
-	/**
 	* Gets the settings of this layout set.
 	*
 	* @return the settings of this layout set
@@ -417,6 +399,10 @@ public class LayoutSetWrapper implements LayoutSet {
 
 	public java.lang.String getSettingsProperty(java.lang.String key) {
 		return _layoutSet.getSettingsProperty(key);
+	}
+
+	public java.lang.String getVirtualHost() {
+		return _layoutSet.getVirtualHost();
 	}
 
 	public com.liferay.portal.model.Theme getWapTheme()

@@ -154,7 +154,6 @@
 		<column name="accountId" type="long" />
 		<column name="webId" type="String" />
 		<column name="key" type="String" />
-		<column name="virtualHost" type="String" />
 		<column name="mx" type="String" />
 		<column name="homeURL" type="String" />
 		<column name="logoId" type="long" />
@@ -165,9 +164,6 @@
 
 		<finder name="WebId" return-type="Company" unique="true">
 			<finder-column name="webId" />
-		</finder>
-		<finder name="VirtualHost" return-type="Company" unique="true">
-			<finder-column name="virtualHost" />
 		</finder>
 		<finder name="Mx" return-type="Company">
 			<finder-column name="mx" />
@@ -656,7 +652,6 @@
 		<column name="wapColorSchemeId" type="String" />
 		<column name="css" type="String" />
 		<column name="pageCount" type="int" />
-		<column name="virtualHost" type="String" />
 		<column name="settings" type="String" />
 		<column name="layoutSetPrototypeId" type="long" />
 
@@ -664,9 +659,6 @@
 
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
-		</finder>
-		<finder name="VirtualHost" return-type="LayoutSet">
-			<finder-column name="virtualHost" />
 		</finder>
 		<finder name="G_P" return-type="LayoutSet" unique="true">
 			<finder-column name="groupId" />
@@ -1994,6 +1986,28 @@
 
 		<finder name="UserTrackerId" return-type="Collection">
 			<finder-column name="userTrackerId" />
+		</finder>
+	</entity>
+	<entity name="VirtualHost" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="virtualHostId" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="companyId" type="long" />
+		<column name="layoutSetId" type="long" />
+		<column name="virtualHostName" type="String" />
+
+		<!-- Finder methods -->
+
+		<finder name="C_L" return-type="VirtualHost" unique="true">
+			<finder-column name="companyId" />
+			<finder-column name="layoutSetId" />
+		</finder>
+		<finder name="VirtualHostName" return-type="VirtualHost" unique="true">
+			<finder-column name="virtualHostName" />
 		</finder>
 	</entity>
 	<entity name="WebDAVProps" local-service="true" remote-service="false">

@@ -27,10 +27,12 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Shard;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.VirtualHost;
 import com.liferay.portal.service.AccountLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ShardLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.VirtualHostLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -133,6 +135,18 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 
 	public TimeZone getTimeZone() throws PortalException, SystemException {
 		return getDefaultUser().getTimeZone();
+	}
+
+	public String getVirtualHost() {
+		try {
+			VirtualHost virtualHost =
+				VirtualHostLocalServiceUtil.getVirtualHost(getCompanyId(), 0);
+
+			return virtualHost.getVirtualHostName();
+		}
+		catch (Exception e) {
+			return StringPool.BLANK;
+		}
 	}
 
 	public boolean hasCompanyMx(String emailAddress)

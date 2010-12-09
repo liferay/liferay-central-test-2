@@ -202,41 +202,6 @@ public interface LayoutSetPersistence extends BasePersistence<LayoutSet> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the layout set where virtualHost = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutSetException} if it could not be found.
-	*
-	* @param virtualHost the virtual host to search with
-	* @return the matching layout set
-	* @throws com.liferay.portal.NoSuchLayoutSetException if a matching layout set could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.LayoutSet findByVirtualHost(
-		java.lang.String virtualHost)
-		throws com.liferay.portal.NoSuchLayoutSetException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Finds the layout set where virtualHost = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param virtualHost the virtual host to search with
-	* @return the matching layout set, or <code>null</code> if a matching layout set could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.LayoutSet fetchByVirtualHost(
-		java.lang.String virtualHost)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Finds the layout set where virtualHost = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param virtualHost the virtual host to search with
-	* @return the matching layout set, or <code>null</code> if a matching layout set could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.LayoutSet fetchByVirtualHost(
-		java.lang.String virtualHost, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Finds the layout set where groupId = &#63; and privateLayout = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutSetException} if it could not be found.
 	*
 	* @param groupId the group id to search with
@@ -327,16 +292,6 @@ public interface LayoutSetPersistence extends BasePersistence<LayoutSet> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Removes the layout set where virtualHost = &#63; from the database.
-	*
-	* @param virtualHost the virtual host to search with
-	* @throws SystemException if a system exception occurred
-	*/
-	public void removeByVirtualHost(java.lang.String virtualHost)
-		throws com.liferay.portal.NoSuchLayoutSetException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Removes the layout set where groupId = &#63; and privateLayout = &#63; from the database.
 	*
 	* @param groupId the group id to search with
@@ -363,16 +318,6 @@ public interface LayoutSetPersistence extends BasePersistence<LayoutSet> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByGroupId(long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Counts all the layout sets where virtualHost = &#63;.
-	*
-	* @param virtualHost the virtual host to search with
-	* @return the number of matching layout sets
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByVirtualHost(java.lang.String virtualHost)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

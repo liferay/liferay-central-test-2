@@ -106,7 +106,8 @@ public class EditInstanceAction extends PortletAction {
 		long companyId = ParamUtil.getLong(actionRequest, "companyId");
 
 		String webId = ParamUtil.getString(actionRequest, "webId");
-		String virtualHost = ParamUtil.getString(actionRequest, "virtualHost");
+		String virtualHost = ParamUtil.getString(
+			actionRequest, "virtualHostName");
 		String mx = ParamUtil.getString(actionRequest, "mx");
 		String shardName = ParamUtil.getString(
 			actionRequest, "shardName", PropsValues.SHARD_DEFAULT_NAME);

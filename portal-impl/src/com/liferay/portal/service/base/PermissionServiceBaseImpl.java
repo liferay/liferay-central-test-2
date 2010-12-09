@@ -107,6 +107,7 @@ import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserTrackerLocalService;
 import com.liferay.portal.service.UserTrackerPathLocalService;
+import com.liferay.portal.service.VirtualHostLocalService;
 import com.liferay.portal.service.WebDAVPropsLocalService;
 import com.liferay.portal.service.WebsiteLocalService;
 import com.liferay.portal.service.WebsiteService;
@@ -178,6 +179,7 @@ import com.liferay.portal.service.persistence.UserIdMapperPersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserTrackerPathPersistence;
 import com.liferay.portal.service.persistence.UserTrackerPersistence;
+import com.liferay.portal.service.persistence.VirtualHostPersistence;
 import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence;
@@ -3037,6 +3039,44 @@ public abstract class PermissionServiceBaseImpl extends PrincipalBean
 	}
 
 	/**
+	 * Gets the virtual host local service.
+	 *
+	 * @return the virtual host local service
+	 */
+	public VirtualHostLocalService getVirtualHostLocalService() {
+		return virtualHostLocalService;
+	}
+
+	/**
+	 * Sets the virtual host local service.
+	 *
+	 * @param virtualHostLocalService the virtual host local service
+	 */
+	public void setVirtualHostLocalService(
+		VirtualHostLocalService virtualHostLocalService) {
+		this.virtualHostLocalService = virtualHostLocalService;
+	}
+
+	/**
+	 * Gets the virtual host persistence.
+	 *
+	 * @return the virtual host persistence
+	 */
+	public VirtualHostPersistence getVirtualHostPersistence() {
+		return virtualHostPersistence;
+	}
+
+	/**
+	 * Sets the virtual host persistence.
+	 *
+	 * @param virtualHostPersistence the virtual host persistence
+	 */
+	public void setVirtualHostPersistence(
+		VirtualHostPersistence virtualHostPersistence) {
+		this.virtualHostPersistence = virtualHostPersistence;
+	}
+
+	/**
 	 * Gets the web d a v props local service.
 	 *
 	 * @return the web d a v props local service
@@ -3547,6 +3587,10 @@ public abstract class PermissionServiceBaseImpl extends PrincipalBean
 	protected UserTrackerPathLocalService userTrackerPathLocalService;
 	@BeanReference(type = UserTrackerPathPersistence.class)
 	protected UserTrackerPathPersistence userTrackerPathPersistence;
+	@BeanReference(type = VirtualHostLocalService.class)
+	protected VirtualHostLocalService virtualHostLocalService;
+	@BeanReference(type = VirtualHostPersistence.class)
+	protected VirtualHostPersistence virtualHostPersistence;
 	@BeanReference(type = WebDAVPropsLocalService.class)
 	protected WebDAVPropsLocalService webDAVPropsLocalService;
 	@BeanReference(type = WebDAVPropsPersistence.class)

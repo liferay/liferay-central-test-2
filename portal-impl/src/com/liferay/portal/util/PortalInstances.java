@@ -14,9 +14,10 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.NoSuchCompanyException;
+import com.liferay.portal.NoSuchVirtualHostException;
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.dao.shard.ShardUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -29,6 +30,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.PortletCategory;
+import com.liferay.portal.model.VirtualHost;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.security.ldap.PortalLDAPImporterUtil;
@@ -36,6 +38,7 @@ import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.VirtualHostLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 
 import java.sql.Connection;
@@ -146,33 +149,10 @@ public class PortalInstances {
 			return companyIdObj.longValue();
 		}
 
-		String host = PortalUtil.getHost(request);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Host " + host);
-		}
-
-		long companyId = _getCompanyIdByVirtualHosts(host);
+		long companyId = _getCompanyIdByVirtualHosts(request);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Company id from host " + companyId);
-		}
-
-		if (companyId <= 0) {
-			LayoutSet layoutSet = _getLayoutSetByVirtualHosts(host);
-
-			if (layoutSet != null) {
-				companyId = layoutSet.getCompanyId();
-
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Company id " + companyId + " is associated with " +
-							"layout set " + layoutSet.getLayoutSetId());
-				}
-
-				request.setAttribute(
-					WebKeys.VIRTUAL_HOST_LAYOUT_SET, layoutSet);
-			}
 		}
 
 		if (companyId <= 0) {
@@ -225,18 +205,50 @@ public class PortalInstances {
 		return companyId;
 	}
 
-	private long _getCompanyIdByVirtualHosts(String host) {
-		if (Validator.isNull(host)) {
+	private long _getCompanyIdByVirtualHosts(HttpServletRequest request) {
+		String host = PortalUtil.getHost(request);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Host " + host);
+		}
+
+		if (Validator.isNull(host) || _isVirtualHostsIgnoreHost(host)) {
 			return 0;
 		}
 
 		try {
-			Company company = CompanyLocalServiceUtil.getCompanyByVirtualHost(
-				host);
+			VirtualHost virtualHost =
+				VirtualHostLocalServiceUtil.getVirtualHost(host);
 
-			return company.getCompanyId();
+			long companyId = virtualHost.getCompanyId();
+			long layoutSetId = virtualHost.getLayoutSetId();
+
+			if (layoutSetId != 0) {
+				LayoutSet layoutSet = null;
+
+				try {
+					ShardUtil.pushCompanyService(companyId);
+
+					layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+						layoutSetId);
+				}
+				finally {
+					ShardUtil.popCompanyService();
+				}
+
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Company id " + companyId + " is associated with " +
+							"layout set " + layoutSetId);
+				}
+
+				request.setAttribute(
+					WebKeys.VIRTUAL_HOST_LAYOUT_SET, layoutSet);
+			}
+
+			return companyId;
 		}
-		catch (NoSuchCompanyException nsce) {
+		catch (NoSuchVirtualHostException nsvhe) {
 		}
 		catch (Exception e) {
 			_log.error(e, e);

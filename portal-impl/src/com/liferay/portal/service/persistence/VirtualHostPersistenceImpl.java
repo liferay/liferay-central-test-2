@@ -1,0 +1,1190 @@
+/**
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
+package com.liferay.portal.service.persistence;
+
+import com.liferay.portal.NoSuchModelException;
+import com.liferay.portal.NoSuchVirtualHostException;
+import com.liferay.portal.kernel.bean.BeanReference;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
+import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.model.VirtualHost;
+import com.liferay.portal.model.impl.VirtualHostImpl;
+import com.liferay.portal.model.impl.VirtualHostModelImpl;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+
+import java.io.Serializable;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * The persistence implementation for the virtual host service.
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see VirtualHostPersistence
+ * @see VirtualHostUtil
+ * @generated
+ */
+public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
+	implements VirtualHostPersistence {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. Always use {@link VirtualHostUtil} to access the virtual host persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 */
+	public static final String FINDER_CLASS_NAME_ENTITY = VirtualHostImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
+		".List";
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_L = new FinderPath(VirtualHostModelImpl.ENTITY_CACHE_ENABLED,
+			VirtualHostModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByC_L",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_L = new FinderPath(VirtualHostModelImpl.ENTITY_CACHE_ENABLED,
+			VirtualHostModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByC_L",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_VIRTUALHOSTNAME = new FinderPath(VirtualHostModelImpl.ENTITY_CACHE_ENABLED,
+			VirtualHostModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByVirtualHostName",
+			new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_VIRTUALHOSTNAME = new FinderPath(VirtualHostModelImpl.ENTITY_CACHE_ENABLED,
+			VirtualHostModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByVirtualHostName", new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(VirtualHostModelImpl.ENTITY_CACHE_ENABLED,
+			VirtualHostModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(VirtualHostModelImpl.ENTITY_CACHE_ENABLED,
+			VirtualHostModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countAll", new String[0]);
+
+	/**
+	 * Caches the virtual host in the entity cache if it is enabled.
+	 *
+	 * @param virtualHost the virtual host to cache
+	 */
+	public void cacheResult(VirtualHost virtualHost) {
+		EntityCacheUtil.putResult(VirtualHostModelImpl.ENTITY_CACHE_ENABLED,
+			VirtualHostImpl.class, virtualHost.getPrimaryKey(), virtualHost);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_L,
+			new Object[] {
+				new Long(virtualHost.getCompanyId()),
+				new Long(virtualHost.getLayoutSetId())
+			}, virtualHost);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOSTNAME,
+			new Object[] { virtualHost.getVirtualHostName() }, virtualHost);
+	}
+
+	/**
+	 * Caches the virtual hosts in the entity cache if it is enabled.
+	 *
+	 * @param virtualHosts the virtual hosts to cache
+	 */
+	public void cacheResult(List<VirtualHost> virtualHosts) {
+		for (VirtualHost virtualHost : virtualHosts) {
+			if (EntityCacheUtil.getResult(
+						VirtualHostModelImpl.ENTITY_CACHE_ENABLED,
+						VirtualHostImpl.class, virtualHost.getPrimaryKey(), this) == null) {
+				cacheResult(virtualHost);
+			}
+		}
+	}
+
+	/**
+	 * Clears the cache for all virtual hosts.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
+	public void clearCache() {
+		CacheRegistryUtil.clear(VirtualHostImpl.class.getName());
+		EntityCacheUtil.clearCache(VirtualHostImpl.class.getName());
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+	}
+
+	/**
+	 * Clears the cache for the virtual host.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
+	public void clearCache(VirtualHost virtualHost) {
+		EntityCacheUtil.removeResult(VirtualHostModelImpl.ENTITY_CACHE_ENABLED,
+			VirtualHostImpl.class, virtualHost.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_L,
+			new Object[] {
+				new Long(virtualHost.getCompanyId()),
+				new Long(virtualHost.getLayoutSetId())
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VIRTUALHOSTNAME,
+			new Object[] { virtualHost.getVirtualHostName() });
+	}
+
+	/**
+	 * Creates a new virtual host with the primary key. Does not add the virtual host to the database.
+	 *
+	 * @param virtualHostId the primary key for the new virtual host
+	 * @return the new virtual host
+	 */
+	public VirtualHost create(long virtualHostId) {
+		VirtualHost virtualHost = new VirtualHostImpl();
+
+		virtualHost.setNew(true);
+		virtualHost.setPrimaryKey(virtualHostId);
+
+		return virtualHost;
+	}
+
+	/**
+	 * Removes the virtual host with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the virtual host to remove
+	 * @return the virtual host that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a virtual host with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public VirtualHost remove(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return remove(((Long)primaryKey).longValue());
+	}
+
+	/**
+	 * Removes the virtual host with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param virtualHostId the primary key of the virtual host to remove
+	 * @return the virtual host that was removed
+	 * @throws com.liferay.portal.NoSuchVirtualHostException if a virtual host with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public VirtualHost remove(long virtualHostId)
+		throws NoSuchVirtualHostException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			VirtualHost virtualHost = (VirtualHost)session.get(VirtualHostImpl.class,
+					new Long(virtualHostId));
+
+			if (virtualHost == null) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + virtualHostId);
+				}
+
+				throw new NoSuchVirtualHostException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					virtualHostId);
+			}
+
+			return remove(virtualHost);
+		}
+		catch (NoSuchVirtualHostException nsee) {
+			throw nsee;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected VirtualHost removeImpl(VirtualHost virtualHost)
+		throws SystemException {
+		virtualHost = toUnwrappedModel(virtualHost);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			BatchSessionUtil.delete(session, virtualHost);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		VirtualHostModelImpl virtualHostModelImpl = (VirtualHostModelImpl)virtualHost;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_L,
+			new Object[] {
+				new Long(virtualHostModelImpl.getOriginalCompanyId()),
+				new Long(virtualHostModelImpl.getOriginalLayoutSetId())
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VIRTUALHOSTNAME,
+			new Object[] { virtualHostModelImpl.getOriginalVirtualHostName() });
+
+		EntityCacheUtil.removeResult(VirtualHostModelImpl.ENTITY_CACHE_ENABLED,
+			VirtualHostImpl.class, virtualHost.getPrimaryKey());
+
+		return virtualHost;
+	}
+
+	public VirtualHost updateImpl(
+		com.liferay.portal.model.VirtualHost virtualHost, boolean merge)
+		throws SystemException {
+		virtualHost = toUnwrappedModel(virtualHost);
+
+		boolean isNew = virtualHost.isNew();
+
+		VirtualHostModelImpl virtualHostModelImpl = (VirtualHostModelImpl)virtualHost;
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			BatchSessionUtil.update(session, virtualHost, merge);
+
+			virtualHost.setNew(false);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+
+		EntityCacheUtil.putResult(VirtualHostModelImpl.ENTITY_CACHE_ENABLED,
+			VirtualHostImpl.class, virtualHost.getPrimaryKey(), virtualHost);
+
+		if (!isNew &&
+				((virtualHost.getCompanyId() != virtualHostModelImpl.getOriginalCompanyId()) ||
+				(virtualHost.getLayoutSetId() != virtualHostModelImpl.getOriginalLayoutSetId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_L,
+				new Object[] {
+					new Long(virtualHostModelImpl.getOriginalCompanyId()),
+					new Long(virtualHostModelImpl.getOriginalLayoutSetId())
+				});
+		}
+
+		if (isNew ||
+				((virtualHost.getCompanyId() != virtualHostModelImpl.getOriginalCompanyId()) ||
+				(virtualHost.getLayoutSetId() != virtualHostModelImpl.getOriginalLayoutSetId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_L,
+				new Object[] {
+					new Long(virtualHost.getCompanyId()),
+					new Long(virtualHost.getLayoutSetId())
+				}, virtualHost);
+		}
+
+		if (!isNew &&
+				(!Validator.equals(virtualHost.getVirtualHostName(),
+					virtualHostModelImpl.getOriginalVirtualHostName()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VIRTUALHOSTNAME,
+				new Object[] { virtualHostModelImpl.getOriginalVirtualHostName() });
+		}
+
+		if (isNew ||
+				(!Validator.equals(virtualHost.getVirtualHostName(),
+					virtualHostModelImpl.getOriginalVirtualHostName()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOSTNAME,
+				new Object[] { virtualHost.getVirtualHostName() }, virtualHost);
+		}
+
+		return virtualHost;
+	}
+
+	protected VirtualHost toUnwrappedModel(VirtualHost virtualHost) {
+		if (virtualHost instanceof VirtualHostImpl) {
+			return virtualHost;
+		}
+
+		VirtualHostImpl virtualHostImpl = new VirtualHostImpl();
+
+		virtualHostImpl.setNew(virtualHost.isNew());
+		virtualHostImpl.setPrimaryKey(virtualHost.getPrimaryKey());
+
+		virtualHostImpl.setVirtualHostId(virtualHost.getVirtualHostId());
+		virtualHostImpl.setCompanyId(virtualHost.getCompanyId());
+		virtualHostImpl.setLayoutSetId(virtualHost.getLayoutSetId());
+		virtualHostImpl.setVirtualHostName(virtualHost.getVirtualHostName());
+
+		return virtualHostImpl;
+	}
+
+	/**
+	 * Finds the virtual host with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the virtual host to find
+	 * @return the virtual host
+	 * @throws com.liferay.portal.NoSuchModelException if a virtual host with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public VirtualHost findByPrimaryKey(Serializable primaryKey)
+		throws NoSuchModelException, SystemException {
+		return findByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
+	/**
+	 * Finds the virtual host with the primary key or throws a {@link com.liferay.portal.NoSuchVirtualHostException} if it could not be found.
+	 *
+	 * @param virtualHostId the primary key of the virtual host to find
+	 * @return the virtual host
+	 * @throws com.liferay.portal.NoSuchVirtualHostException if a virtual host with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public VirtualHost findByPrimaryKey(long virtualHostId)
+		throws NoSuchVirtualHostException, SystemException {
+		VirtualHost virtualHost = fetchByPrimaryKey(virtualHostId);
+
+		if (virtualHost == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + virtualHostId);
+			}
+
+			throw new NoSuchVirtualHostException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				virtualHostId);
+		}
+
+		return virtualHost;
+	}
+
+	/**
+	 * Finds the virtual host with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the virtual host to find
+	 * @return the virtual host, or <code>null</code> if a virtual host with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public VirtualHost fetchByPrimaryKey(Serializable primaryKey)
+		throws SystemException {
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
+	}
+
+	/**
+	 * Finds the virtual host with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param virtualHostId the primary key of the virtual host to find
+	 * @return the virtual host, or <code>null</code> if a virtual host with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public VirtualHost fetchByPrimaryKey(long virtualHostId)
+		throws SystemException {
+		VirtualHost virtualHost = (VirtualHost)EntityCacheUtil.getResult(VirtualHostModelImpl.ENTITY_CACHE_ENABLED,
+				VirtualHostImpl.class, virtualHostId, this);
+
+		if (virtualHost == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				virtualHost = (VirtualHost)session.get(VirtualHostImpl.class,
+						new Long(virtualHostId));
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (virtualHost != null) {
+					cacheResult(virtualHost);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return virtualHost;
+	}
+
+	/**
+	 * Finds the virtual host where companyId = &#63; and layoutSetId = &#63; or throws a {@link com.liferay.portal.NoSuchVirtualHostException} if it could not be found.
+	 *
+	 * @param companyId the company id to search with
+	 * @param layoutSetId the layout set id to search with
+	 * @return the matching virtual host
+	 * @throws com.liferay.portal.NoSuchVirtualHostException if a matching virtual host could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public VirtualHost findByC_L(long companyId, long layoutSetId)
+		throws NoSuchVirtualHostException, SystemException {
+		VirtualHost virtualHost = fetchByC_L(companyId, layoutSetId);
+
+		if (virtualHost == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", layoutSetId=");
+			msg.append(layoutSetId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchVirtualHostException(msg.toString());
+		}
+
+		return virtualHost;
+	}
+
+	/**
+	 * Finds the virtual host where companyId = &#63; and layoutSetId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param layoutSetId the layout set id to search with
+	 * @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public VirtualHost fetchByC_L(long companyId, long layoutSetId)
+		throws SystemException {
+		return fetchByC_L(companyId, layoutSetId, true);
+	}
+
+	/**
+	 * Finds the virtual host where companyId = &#63; and layoutSetId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param layoutSetId the layout set id to search with
+	 * @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public VirtualHost fetchByC_L(long companyId, long layoutSetId,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { companyId, layoutSetId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_L,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_VIRTUALHOST_WHERE);
+
+			query.append(_FINDER_COLUMN_C_L_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_L_LAYOUTSETID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(layoutSetId);
+
+				List<VirtualHost> list = q.list();
+
+				result = list;
+
+				VirtualHost virtualHost = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_L,
+						finderArgs, list);
+				}
+				else {
+					virtualHost = list.get(0);
+
+					cacheResult(virtualHost);
+
+					if ((virtualHost.getCompanyId() != companyId) ||
+							(virtualHost.getLayoutSetId() != layoutSetId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_L,
+							finderArgs, virtualHost);
+					}
+				}
+
+				return virtualHost;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_L,
+						finderArgs);
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (VirtualHost)result;
+			}
+		}
+	}
+
+	/**
+	 * Finds the virtual host where virtualHostName = &#63; or throws a {@link com.liferay.portal.NoSuchVirtualHostException} if it could not be found.
+	 *
+	 * @param virtualHostName the virtual host name to search with
+	 * @return the matching virtual host
+	 * @throws com.liferay.portal.NoSuchVirtualHostException if a matching virtual host could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public VirtualHost findByVirtualHostName(String virtualHostName)
+		throws NoSuchVirtualHostException, SystemException {
+		VirtualHost virtualHost = fetchByVirtualHostName(virtualHostName);
+
+		if (virtualHost == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("virtualHostName=");
+			msg.append(virtualHostName);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchVirtualHostException(msg.toString());
+		}
+
+		return virtualHost;
+	}
+
+	/**
+	 * Finds the virtual host where virtualHostName = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param virtualHostName the virtual host name to search with
+	 * @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public VirtualHost fetchByVirtualHostName(String virtualHostName)
+		throws SystemException {
+		return fetchByVirtualHostName(virtualHostName, true);
+	}
+
+	/**
+	 * Finds the virtual host where virtualHostName = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param virtualHostName the virtual host name to search with
+	 * @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public VirtualHost fetchByVirtualHostName(String virtualHostName,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { virtualHostName };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_VIRTUALHOSTNAME,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_SELECT_VIRTUALHOST_WHERE);
+
+			if (virtualHostName == null) {
+				query.append(_FINDER_COLUMN_VIRTUALHOSTNAME_VIRTUALHOSTNAME_1);
+			}
+			else {
+				if (virtualHostName.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_VIRTUALHOSTNAME_VIRTUALHOSTNAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_VIRTUALHOSTNAME_VIRTUALHOSTNAME_2);
+				}
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (virtualHostName != null) {
+					qPos.add(virtualHostName);
+				}
+
+				List<VirtualHost> list = q.list();
+
+				result = list;
+
+				VirtualHost virtualHost = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOSTNAME,
+						finderArgs, list);
+				}
+				else {
+					virtualHost = list.get(0);
+
+					cacheResult(virtualHost);
+
+					if ((virtualHost.getVirtualHostName() == null) ||
+							!virtualHost.getVirtualHostName()
+											.equals(virtualHostName)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOSTNAME,
+							finderArgs, virtualHost);
+					}
+				}
+
+				return virtualHost;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VIRTUALHOSTNAME,
+						finderArgs);
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (VirtualHost)result;
+			}
+		}
+	}
+
+	/**
+	 * Finds all the virtual hosts.
+	 *
+	 * @return the virtual hosts
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<VirtualHost> findAll() throws SystemException {
+		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Finds a range of all the virtual hosts.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of virtual hosts to return
+	 * @param end the upper bound of the range of virtual hosts to return (not inclusive)
+	 * @return the range of virtual hosts
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<VirtualHost> findAll(int start, int end)
+		throws SystemException {
+		return findAll(start, end, null);
+	}
+
+	/**
+	 * Finds an ordered range of all the virtual hosts.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of virtual hosts to return
+	 * @param end the upper bound of the range of virtual hosts to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of virtual hosts
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<VirtualHost> findAll(int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<VirtualHost> list = (List<VirtualHost>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+				finderArgs, this);
+
+		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_VIRTUALHOST);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_VIRTUALHOST;
+			}
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				if (orderByComparator == null) {
+					list = (List<VirtualHost>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+				}
+				else {
+					list = (List<VirtualHost>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
+						finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
+						list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Removes the virtual host where companyId = &#63; and layoutSetId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param layoutSetId the layout set id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByC_L(long companyId, long layoutSetId)
+		throws NoSuchVirtualHostException, SystemException {
+		VirtualHost virtualHost = findByC_L(companyId, layoutSetId);
+
+		remove(virtualHost);
+	}
+
+	/**
+	 * Removes the virtual host where virtualHostName = &#63; from the database.
+	 *
+	 * @param virtualHostName the virtual host name to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByVirtualHostName(String virtualHostName)
+		throws NoSuchVirtualHostException, SystemException {
+		VirtualHost virtualHost = findByVirtualHostName(virtualHostName);
+
+		remove(virtualHost);
+	}
+
+	/**
+	 * Removes all the virtual hosts from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeAll() throws SystemException {
+		for (VirtualHost virtualHost : findAll()) {
+			remove(virtualHost);
+		}
+	}
+
+	/**
+	 * Counts all the virtual hosts where companyId = &#63; and layoutSetId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param layoutSetId the layout set id to search with
+	 * @return the number of matching virtual hosts
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByC_L(long companyId, long layoutSetId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { companyId, layoutSetId };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_L,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_VIRTUALHOST_WHERE);
+
+			query.append(_FINDER_COLUMN_C_L_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_L_LAYOUTSETID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(layoutSetId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_L, finderArgs,
+					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Counts all the virtual hosts where virtualHostName = &#63;.
+	 *
+	 * @param virtualHostName the virtual host name to search with
+	 * @return the number of matching virtual hosts
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByVirtualHostName(String virtualHostName)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { virtualHostName };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_VIRTUALHOSTNAME,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_VIRTUALHOST_WHERE);
+
+			if (virtualHostName == null) {
+				query.append(_FINDER_COLUMN_VIRTUALHOSTNAME_VIRTUALHOSTNAME_1);
+			}
+			else {
+				if (virtualHostName.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_VIRTUALHOSTNAME_VIRTUALHOSTNAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_VIRTUALHOSTNAME_VIRTUALHOSTNAME_2);
+				}
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (virtualHostName != null) {
+					qPos.add(virtualHostName);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_VIRTUALHOSTNAME,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Counts all the virtual hosts.
+	 *
+	 * @return the number of virtual hosts
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countAll() throws SystemException {
+		Object[] finderArgs = new Object[0];
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(_SQL_COUNT_VIRTUALHOST);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_ALL, finderArgs,
+					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Initializes the virtual host persistence.
+	 */
+	public void afterPropertiesSet() {
+		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
+					com.liferay.portal.util.PropsUtil.get(
+						"value.object.listener.com.liferay.portal.model.VirtualHost")));
+
+		if (listenerClassNames.length > 0) {
+			try {
+				List<ModelListener<VirtualHost>> listenersList = new ArrayList<ModelListener<VirtualHost>>();
+
+				for (String listenerClassName : listenerClassNames) {
+					listenersList.add((ModelListener<VirtualHost>)InstanceFactory.newInstance(
+							listenerClassName));
+				}
+
+				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+	}
+
+	public void destroy() {
+		EntityCacheUtil.removeCache(VirtualHostImpl.class.getName());
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
+	}
+
+	@BeanReference(type = AccountPersistence.class)
+	protected AccountPersistence accountPersistence;
+	@BeanReference(type = AddressPersistence.class)
+	protected AddressPersistence addressPersistence;
+	@BeanReference(type = BrowserTrackerPersistence.class)
+	protected BrowserTrackerPersistence browserTrackerPersistence;
+	@BeanReference(type = ClassNamePersistence.class)
+	protected ClassNamePersistence classNamePersistence;
+	@BeanReference(type = ClusterGroupPersistence.class)
+	protected ClusterGroupPersistence clusterGroupPersistence;
+	@BeanReference(type = CompanyPersistence.class)
+	protected CompanyPersistence companyPersistence;
+	@BeanReference(type = ContactPersistence.class)
+	protected ContactPersistence contactPersistence;
+	@BeanReference(type = CountryPersistence.class)
+	protected CountryPersistence countryPersistence;
+	@BeanReference(type = EmailAddressPersistence.class)
+	protected EmailAddressPersistence emailAddressPersistence;
+	@BeanReference(type = GroupPersistence.class)
+	protected GroupPersistence groupPersistence;
+	@BeanReference(type = ImagePersistence.class)
+	protected ImagePersistence imagePersistence;
+	@BeanReference(type = LayoutPersistence.class)
+	protected LayoutPersistence layoutPersistence;
+	@BeanReference(type = LayoutPrototypePersistence.class)
+	protected LayoutPrototypePersistence layoutPrototypePersistence;
+	@BeanReference(type = LayoutRevisionPersistence.class)
+	protected LayoutRevisionPersistence layoutRevisionPersistence;
+	@BeanReference(type = LayoutSetPersistence.class)
+	protected LayoutSetPersistence layoutSetPersistence;
+	@BeanReference(type = LayoutSetBranchPersistence.class)
+	protected LayoutSetBranchPersistence layoutSetBranchPersistence;
+	@BeanReference(type = LayoutSetPrototypePersistence.class)
+	protected LayoutSetPrototypePersistence layoutSetPrototypePersistence;
+	@BeanReference(type = ListTypePersistence.class)
+	protected ListTypePersistence listTypePersistence;
+	@BeanReference(type = LockPersistence.class)
+	protected LockPersistence lockPersistence;
+	@BeanReference(type = MembershipRequestPersistence.class)
+	protected MembershipRequestPersistence membershipRequestPersistence;
+	@BeanReference(type = OrganizationPersistence.class)
+	protected OrganizationPersistence organizationPersistence;
+	@BeanReference(type = OrgGroupPermissionPersistence.class)
+	protected OrgGroupPermissionPersistence orgGroupPermissionPersistence;
+	@BeanReference(type = OrgGroupRolePersistence.class)
+	protected OrgGroupRolePersistence orgGroupRolePersistence;
+	@BeanReference(type = OrgLaborPersistence.class)
+	protected OrgLaborPersistence orgLaborPersistence;
+	@BeanReference(type = PasswordPolicyPersistence.class)
+	protected PasswordPolicyPersistence passwordPolicyPersistence;
+	@BeanReference(type = PasswordPolicyRelPersistence.class)
+	protected PasswordPolicyRelPersistence passwordPolicyRelPersistence;
+	@BeanReference(type = PasswordTrackerPersistence.class)
+	protected PasswordTrackerPersistence passwordTrackerPersistence;
+	@BeanReference(type = PermissionPersistence.class)
+	protected PermissionPersistence permissionPersistence;
+	@BeanReference(type = PhonePersistence.class)
+	protected PhonePersistence phonePersistence;
+	@BeanReference(type = PluginSettingPersistence.class)
+	protected PluginSettingPersistence pluginSettingPersistence;
+	@BeanReference(type = PortletPersistence.class)
+	protected PortletPersistence portletPersistence;
+	@BeanReference(type = PortletItemPersistence.class)
+	protected PortletItemPersistence portletItemPersistence;
+	@BeanReference(type = PortletPreferencesPersistence.class)
+	protected PortletPreferencesPersistence portletPreferencesPersistence;
+	@BeanReference(type = RegionPersistence.class)
+	protected RegionPersistence regionPersistence;
+	@BeanReference(type = ReleasePersistence.class)
+	protected ReleasePersistence releasePersistence;
+	@BeanReference(type = ResourcePersistence.class)
+	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = ResourceActionPersistence.class)
+	protected ResourceActionPersistence resourceActionPersistence;
+	@BeanReference(type = ResourceCodePersistence.class)
+	protected ResourceCodePersistence resourceCodePersistence;
+	@BeanReference(type = ResourcePermissionPersistence.class)
+	protected ResourcePermissionPersistence resourcePermissionPersistence;
+	@BeanReference(type = RolePersistence.class)
+	protected RolePersistence rolePersistence;
+	@BeanReference(type = ServiceComponentPersistence.class)
+	protected ServiceComponentPersistence serviceComponentPersistence;
+	@BeanReference(type = ShardPersistence.class)
+	protected ShardPersistence shardPersistence;
+	@BeanReference(type = SubscriptionPersistence.class)
+	protected SubscriptionPersistence subscriptionPersistence;
+	@BeanReference(type = TicketPersistence.class)
+	protected TicketPersistence ticketPersistence;
+	@BeanReference(type = TeamPersistence.class)
+	protected TeamPersistence teamPersistence;
+	@BeanReference(type = UserPersistence.class)
+	protected UserPersistence userPersistence;
+	@BeanReference(type = UserGroupPersistence.class)
+	protected UserGroupPersistence userGroupPersistence;
+	@BeanReference(type = UserGroupGroupRolePersistence.class)
+	protected UserGroupGroupRolePersistence userGroupGroupRolePersistence;
+	@BeanReference(type = UserGroupRolePersistence.class)
+	protected UserGroupRolePersistence userGroupRolePersistence;
+	@BeanReference(type = UserIdMapperPersistence.class)
+	protected UserIdMapperPersistence userIdMapperPersistence;
+	@BeanReference(type = UserTrackerPersistence.class)
+	protected UserTrackerPersistence userTrackerPersistence;
+	@BeanReference(type = UserTrackerPathPersistence.class)
+	protected UserTrackerPathPersistence userTrackerPathPersistence;
+	@BeanReference(type = VirtualHostPersistence.class)
+	protected VirtualHostPersistence virtualHostPersistence;
+	@BeanReference(type = WebDAVPropsPersistence.class)
+	protected WebDAVPropsPersistence webDAVPropsPersistence;
+	@BeanReference(type = WebsitePersistence.class)
+	protected WebsitePersistence websitePersistence;
+	@BeanReference(type = WorkflowDefinitionLinkPersistence.class)
+	protected WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
+	@BeanReference(type = WorkflowInstanceLinkPersistence.class)
+	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	private static final String _SQL_SELECT_VIRTUALHOST = "SELECT virtualHost FROM VirtualHost virtualHost";
+	private static final String _SQL_SELECT_VIRTUALHOST_WHERE = "SELECT virtualHost FROM VirtualHost virtualHost WHERE ";
+	private static final String _SQL_COUNT_VIRTUALHOST = "SELECT COUNT(virtualHost) FROM VirtualHost virtualHost";
+	private static final String _SQL_COUNT_VIRTUALHOST_WHERE = "SELECT COUNT(virtualHost) FROM VirtualHost virtualHost WHERE ";
+	private static final String _FINDER_COLUMN_C_L_COMPANYID_2 = "virtualHost.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_L_LAYOUTSETID_2 = "virtualHost.layoutSetId = ?";
+	private static final String _FINDER_COLUMN_VIRTUALHOSTNAME_VIRTUALHOSTNAME_1 =
+		"virtualHost.virtualHostName IS NULL";
+	private static final String _FINDER_COLUMN_VIRTUALHOSTNAME_VIRTUALHOSTNAME_2 =
+		"virtualHost.virtualHostName = ?";
+	private static final String _FINDER_COLUMN_VIRTUALHOSTNAME_VIRTUALHOSTNAME_3 =
+		"(virtualHost.virtualHostName IS NULL OR virtualHost.virtualHostName = ?)";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "virtualHost.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No VirtualHost exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No VirtualHost exists with the key {";
+	private static Log _log = LogFactoryUtil.getLog(VirtualHostPersistenceImpl.class);
+}

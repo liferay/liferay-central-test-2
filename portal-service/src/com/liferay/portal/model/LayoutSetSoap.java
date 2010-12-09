@@ -45,7 +45,6 @@ public class LayoutSetSoap implements Serializable {
 		soapModel.setWapColorSchemeId(model.getWapColorSchemeId());
 		soapModel.setCss(model.getCss());
 		soapModel.setPageCount(model.getPageCount());
-		soapModel.setVirtualHost(model.getVirtualHost());
 		soapModel.setSettings(model.getSettings());
 		soapModel.setLayoutSetPrototypeId(model.getLayoutSetPrototypeId());
 
@@ -204,14 +203,6 @@ public class LayoutSetSoap implements Serializable {
 		_pageCount = pageCount;
 	}
 
-	public String getVirtualHost() {
-		return _virtualHost;
-	}
-
-	public void setVirtualHost(String virtualHost) {
-		_virtualHost = virtualHost;
-	}
-
 	public String getSettings() {
 		return _settings;
 	}
@@ -240,7 +231,6 @@ public class LayoutSetSoap implements Serializable {
 	private String _wapColorSchemeId;
 	private String _css;
 	private int _pageCount;
-	private String _virtualHost;
 	private String _settings;
 	private long _layoutSetPrototypeId;
 }

@@ -34,7 +34,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.LayoutSetImpl;
@@ -81,12 +80,6 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutSetModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByGroupId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FETCH_BY_VIRTUALHOST = new FinderPath(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
-			LayoutSetModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
-			"fetchByVirtualHost", new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_COUNT_BY_VIRTUALHOST = new FinderPath(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
-			LayoutSetModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByVirtualHost", new String[] { String.class.getName() });
 	public static final FinderPath FINDER_PATH_FETCH_BY_G_P = new FinderPath(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutSetModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
 			"fetchByG_P",
@@ -110,9 +103,6 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 	public void cacheResult(LayoutSet layoutSet) {
 		EntityCacheUtil.putResult(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutSetImpl.class, layoutSet.getPrimaryKey(), layoutSet);
-
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-			new Object[] { layoutSet.getVirtualHost() }, layoutSet);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P,
 			new Object[] {
@@ -160,9 +150,6 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 	public void clearCache(LayoutSet layoutSet) {
 		EntityCacheUtil.removeResult(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutSetImpl.class, layoutSet.getPrimaryKey());
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-			new Object[] { layoutSet.getVirtualHost() });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P,
 			new Object[] {
@@ -261,9 +248,6 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 
 		LayoutSetModelImpl layoutSetModelImpl = (LayoutSetModelImpl)layoutSet;
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-			new Object[] { layoutSetModelImpl.getOriginalVirtualHost() });
-
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P,
 			new Object[] {
 				new Long(layoutSetModelImpl.getOriginalGroupId()),
@@ -304,20 +288,6 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 
 		EntityCacheUtil.putResult(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutSetImpl.class, layoutSet.getPrimaryKey(), layoutSet);
-
-		if (!isNew &&
-				(!Validator.equals(layoutSet.getVirtualHost(),
-					layoutSetModelImpl.getOriginalVirtualHost()))) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-				new Object[] { layoutSetModelImpl.getOriginalVirtualHost() });
-		}
-
-		if (isNew ||
-				(!Validator.equals(layoutSet.getVirtualHost(),
-					layoutSetModelImpl.getOriginalVirtualHost()))) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-				new Object[] { layoutSet.getVirtualHost() }, layoutSet);
-		}
 
 		if (!isNew &&
 				((layoutSet.getGroupId() != layoutSetModelImpl.getOriginalGroupId()) ||
@@ -365,7 +335,6 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 		layoutSetImpl.setWapColorSchemeId(layoutSet.getWapColorSchemeId());
 		layoutSetImpl.setCss(layoutSet.getCss());
 		layoutSetImpl.setPageCount(layoutSet.getPageCount());
-		layoutSetImpl.setVirtualHost(layoutSet.getVirtualHost());
 		layoutSetImpl.setSettings(layoutSet.getSettings());
 		layoutSetImpl.setLayoutSetPrototypeId(layoutSet.getLayoutSetPrototypeId());
 
@@ -789,146 +758,6 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 	}
 
 	/**
-	 * Finds the layout set where virtualHost = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutSetException} if it could not be found.
-	 *
-	 * @param virtualHost the virtual host to search with
-	 * @return the matching layout set
-	 * @throws com.liferay.portal.NoSuchLayoutSetException if a matching layout set could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public LayoutSet findByVirtualHost(String virtualHost)
-		throws NoSuchLayoutSetException, SystemException {
-		LayoutSet layoutSet = fetchByVirtualHost(virtualHost);
-
-		if (layoutSet == null) {
-			StringBundler msg = new StringBundler(4);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("virtualHost=");
-			msg.append(virtualHost);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchLayoutSetException(msg.toString());
-		}
-
-		return layoutSet;
-	}
-
-	/**
-	 * Finds the layout set where virtualHost = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param virtualHost the virtual host to search with
-	 * @return the matching layout set, or <code>null</code> if a matching layout set could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public LayoutSet fetchByVirtualHost(String virtualHost)
-		throws SystemException {
-		return fetchByVirtualHost(virtualHost, true);
-	}
-
-	/**
-	 * Finds the layout set where virtualHost = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param virtualHost the virtual host to search with
-	 * @return the matching layout set, or <code>null</code> if a matching layout set could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public LayoutSet fetchByVirtualHost(String virtualHost,
-		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { virtualHost };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-					finderArgs, this);
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(2);
-
-			query.append(_SQL_SELECT_LAYOUTSET_WHERE);
-
-			if (virtualHost == null) {
-				query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_1);
-			}
-			else {
-				if (virtualHost.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_2);
-				}
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (virtualHost != null) {
-					qPos.add(virtualHost);
-				}
-
-				List<LayoutSet> list = q.list();
-
-				result = list;
-
-				LayoutSet layoutSet = null;
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-						finderArgs, list);
-				}
-				else {
-					layoutSet = list.get(0);
-
-					cacheResult(layoutSet);
-
-					if ((layoutSet.getVirtualHost() == null) ||
-							!layoutSet.getVirtualHost().equals(virtualHost)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-							finderArgs, layoutSet);
-					}
-				}
-
-				return layoutSet;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (result == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-						finderArgs);
-				}
-
-				closeSession(session);
-			}
-		}
-		else {
-			if (result instanceof List<?>) {
-				return null;
-			}
-			else {
-				return (LayoutSet)result;
-			}
-		}
-	}
-
-	/**
 	 * Finds the layout set where groupId = &#63; and privateLayout = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutSetException} if it could not be found.
 	 *
 	 * @param groupId the group id to search with
@@ -1188,19 +1017,6 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 	}
 
 	/**
-	 * Removes the layout set where virtualHost = &#63; from the database.
-	 *
-	 * @param virtualHost the virtual host to search with
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void removeByVirtualHost(String virtualHost)
-		throws NoSuchLayoutSetException, SystemException {
-		LayoutSet layoutSet = findByVirtualHost(virtualHost);
-
-		remove(layoutSet);
-	}
-
-	/**
 	 * Removes the layout set where groupId = &#63; and privateLayout = &#63; from the database.
 	 *
 	 * @param groupId the group id to search with
@@ -1269,71 +1085,6 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
-					finderArgs, count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	/**
-	 * Counts all the layout sets where virtualHost = &#63;.
-	 *
-	 * @param virtualHost the virtual host to search with
-	 * @return the number of matching layout sets
-	 * @throws SystemException if a system exception occurred
-	 */
-	public int countByVirtualHost(String virtualHost) throws SystemException {
-		Object[] finderArgs = new Object[] { virtualHost };
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_VIRTUALHOST,
-				finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(2);
-
-			query.append(_SQL_COUNT_LAYOUTSET_WHERE);
-
-			if (virtualHost == null) {
-				query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_1);
-			}
-			else {
-				if (virtualHost.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_2);
-				}
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (virtualHost != null) {
-					qPos.add(virtualHost);
-				}
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_VIRTUALHOST,
 					finderArgs, count);
 
 				closeSession(session);
@@ -1577,6 +1328,8 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 	protected UserTrackerPersistence userTrackerPersistence;
 	@BeanReference(type = UserTrackerPathPersistence.class)
 	protected UserTrackerPathPersistence userTrackerPathPersistence;
+	@BeanReference(type = VirtualHostPersistence.class)
+	protected VirtualHostPersistence virtualHostPersistence;
 	@BeanReference(type = WebDAVPropsPersistence.class)
 	protected WebDAVPropsPersistence webDAVPropsPersistence;
 	@BeanReference(type = WebsitePersistence.class)
@@ -1590,9 +1343,6 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 	private static final String _SQL_COUNT_LAYOUTSET = "SELECT COUNT(layoutSet) FROM LayoutSet layoutSet";
 	private static final String _SQL_COUNT_LAYOUTSET_WHERE = "SELECT COUNT(layoutSet) FROM LayoutSet layoutSet WHERE ";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "layoutSet.groupId = ?";
-	private static final String _FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_1 = "layoutSet.virtualHost IS NULL";
-	private static final String _FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_2 = "layoutSet.virtualHost = ?";
-	private static final String _FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_3 = "(layoutSet.virtualHost IS NULL OR layoutSet.virtualHost = ?)";
 	private static final String _FINDER_COLUMN_G_P_GROUPID_2 = "layoutSet.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_P_PRIVATELAYOUT_2 = "layoutSet.privateLayout = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "layoutSet.";

@@ -317,7 +317,6 @@ create table Company (
 	accountId LONG,
 	webId VARCHAR(75) null,
 	key_ TEXT null,
-	virtualHost VARCHAR(75) null,
 	mx VARCHAR(75) null,
 	homeURL STRING null,
 	logoId LONG,
@@ -796,7 +795,6 @@ create table LayoutSet (
 	wapColorSchemeId VARCHAR(75) null,
 	css STRING null,
 	pageCount INTEGER,
-	virtualHost VARCHAR(75) null,
 	settings_ STRING null,
 	layoutSetPrototypeId LONG
 );
@@ -1822,6 +1820,13 @@ create table UserTrackerPath (
 	userTrackerId LONG,
 	path_ STRING null,
 	pathDate DATE null
+);
+
+create table VirtualHost (
+	virtualHostId LONG not null primary key,
+	companyId LONG,
+	layoutSetId LONG,
+	virtualHostName VARCHAR(75) null
 );
 
 create table Vocabulary (

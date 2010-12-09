@@ -119,24 +119,6 @@ public class CompanyWrapper implements Company {
 	}
 
 	/**
-	* Gets the virtual host of this company.
-	*
-	* @return the virtual host of this company
-	*/
-	public java.lang.String getVirtualHost() {
-		return _company.getVirtualHost();
-	}
-
-	/**
-	* Sets the virtual host of this company.
-	*
-	* @param virtualHost the virtual host of this company
-	*/
-	public void setVirtualHost(java.lang.String virtualHost) {
-		_company.setVirtualHost(virtualHost);
-	}
-
-	/**
 	* Gets the mx of this company.
 	*
 	* @return the mx of this company
@@ -363,6 +345,10 @@ public class CompanyWrapper implements Company {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _company.getTimeZone();
+	}
+
+	public java.lang.String getVirtualHost() {
+		return _company.getVirtualHost();
 	}
 
 	public boolean hasCompanyMx(java.lang.String emailAddress)

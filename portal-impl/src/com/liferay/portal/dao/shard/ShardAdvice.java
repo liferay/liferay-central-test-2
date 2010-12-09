@@ -36,6 +36,7 @@ import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.ReleasePersistence;
 import com.liferay.portal.service.persistence.ServiceComponentPersistence;
 import com.liferay.portal.service.persistence.ShardPersistence;
+import com.liferay.portal.service.persistence.VirtualHostPersistence;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.EmptyStackException;
@@ -251,7 +252,8 @@ public class ShardAdvice {
 			target instanceof CounterPersistence ||
 			target instanceof ReleasePersistence ||
 			target instanceof ServiceComponentPersistence ||
-			target instanceof ShardPersistence) {
+			target instanceof ShardPersistence ||
+			target instanceof VirtualHostPersistence) {
 
 			_shardDataSourceTargetSource.setDataSource(
 				PropsValues.SHARD_DEFAULT_NAME);

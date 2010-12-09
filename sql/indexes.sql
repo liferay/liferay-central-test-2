@@ -117,7 +117,6 @@ create unique index IX_B27A301F on ClassName_ (value);
 create index IX_38EFE3FD on Company (logoId);
 create index IX_12566EC2 on Company (mx);
 create index IX_35E3E7C6 on Company (system);
-create unique index IX_975996C0 on Company (virtualHost);
 create unique index IX_EC00543C on Company (webId);
 
 create index IX_66D496A3 on Contact_ (companyId);
@@ -303,7 +302,6 @@ create index IX_9329C9D6 on LayoutRevision (plid);
 
 create index IX_A40B8BEC on LayoutSet (groupId);
 create unique index IX_48550691 on LayoutSet (groupId, privateLayout);
-create index IX_5ABC2905 on LayoutSet (virtualHost);
 
 create index IX_8FF5D6EA on LayoutSetBranch (groupId);
 create index IX_C4079FD3 on LayoutSetBranch (groupId, privateLayout);
@@ -665,6 +663,9 @@ create index IX_A098EFBF on Users_Teams (userId);
 
 create index IX_66FF2503 on Users_UserGroups (userGroupId);
 create index IX_BE8102D6 on Users_UserGroups (userId);
+
+create unique index IX_A083D394 on VirtualHost (companyId, layoutSetId);
+create unique index IX_D465A515 on VirtualHost (virtualHostName);
 
 create unique index IX_97DFA146 on WebDAVProps (classNameId, classPK);
 

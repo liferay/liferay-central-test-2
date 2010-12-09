@@ -114,21 +114,6 @@ public interface CompanyModel extends BaseModel<Company> {
 	public void setKey(String key);
 
 	/**
-	 * Gets the virtual host of this company.
-	 *
-	 * @return the virtual host of this company
-	 */
-	@AutoEscape
-	public String getVirtualHost();
-
-	/**
-	 * Sets the virtual host of this company.
-	 *
-	 * @param virtualHost the virtual host of this company
-	 */
-	public void setVirtualHost(String virtualHost);
-
-	/**
 	 * Gets the mx of this company.
 	 *
 	 * @return the mx of this company

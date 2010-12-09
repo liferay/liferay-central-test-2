@@ -66,7 +66,6 @@ public class CompanyPersistenceTest extends BasePersistenceTestCase {
 		newCompany.setAccountId(nextLong());
 		newCompany.setWebId(randomString());
 		newCompany.setKey(randomString());
-		newCompany.setVirtualHost(randomString());
 		newCompany.setMx(randomString());
 		newCompany.setHomeURL(randomString());
 		newCompany.setLogoId(nextLong());
@@ -81,8 +80,6 @@ public class CompanyPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingCompany.getAccountId(), newCompany.getAccountId());
 		assertEquals(existingCompany.getWebId(), newCompany.getWebId());
 		assertEquals(existingCompany.getKey(), newCompany.getKey());
-		assertEquals(existingCompany.getVirtualHost(),
-			newCompany.getVirtualHost());
 		assertEquals(existingCompany.getMx(), newCompany.getMx());
 		assertEquals(existingCompany.getHomeURL(), newCompany.getHomeURL());
 		assertEquals(existingCompany.getLogoId(), newCompany.getLogoId());
@@ -164,7 +161,6 @@ public class CompanyPersistenceTest extends BasePersistenceTestCase {
 		company.setAccountId(nextLong());
 		company.setWebId(randomString());
 		company.setKey(randomString());
-		company.setVirtualHost(randomString());
 		company.setMx(randomString());
 		company.setHomeURL(randomString());
 		company.setLogoId(nextLong());

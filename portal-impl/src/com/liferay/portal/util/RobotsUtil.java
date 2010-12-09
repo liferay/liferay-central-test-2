@@ -38,10 +38,18 @@ public class RobotsUtil {
 
 	public static String getRobots(LayoutSet layoutSet) {
 		if (layoutSet != null) {
+			String virtualHost = "";
+
+			try {
+				virtualHost = layoutSet.getVirtualHost();
+			}
+			catch (Exception e) {
+			}
+
 			return GetterUtil.get(
 				layoutSet.getSettingsProperty(
 					layoutSet.getPrivateLayout() + "-robots.txt"),
-					getDefaultRobots(layoutSet.getVirtualHost()));
+					getDefaultRobots(virtualHost));
 		}
 
 		return getDefaultRobots(null);

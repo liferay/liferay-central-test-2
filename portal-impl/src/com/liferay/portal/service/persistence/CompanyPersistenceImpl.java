@@ -75,12 +75,6 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	public static final FinderPath FINDER_PATH_COUNT_BY_WEBID = new FinderPath(CompanyModelImpl.ENTITY_CACHE_ENABLED,
 			CompanyModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByWebId", new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FETCH_BY_VIRTUALHOST = new FinderPath(CompanyModelImpl.ENTITY_CACHE_ENABLED,
-			CompanyModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
-			"fetchByVirtualHost", new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_COUNT_BY_VIRTUALHOST = new FinderPath(CompanyModelImpl.ENTITY_CACHE_ENABLED,
-			CompanyModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByVirtualHost", new String[] { String.class.getName() });
 	public static final FinderPath FINDER_PATH_FETCH_BY_MX = new FinderPath(CompanyModelImpl.ENTITY_CACHE_ENABLED,
 			CompanyModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
 			"fetchByMx", new String[] { String.class.getName() });
@@ -123,9 +117,6 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_WEBID,
 			new Object[] { company.getWebId() }, company);
-
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-			new Object[] { company.getVirtualHost() }, company);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_MX,
 			new Object[] { company.getMx() }, company);
@@ -176,9 +167,6 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_WEBID,
 			new Object[] { company.getWebId() });
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-			new Object[] { company.getVirtualHost() });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_MX,
 			new Object[] { company.getMx() });
@@ -279,9 +267,6 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_WEBID,
 			new Object[] { companyModelImpl.getOriginalWebId() });
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-			new Object[] { companyModelImpl.getOriginalVirtualHost() });
-
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_MX,
 			new Object[] { companyModelImpl.getOriginalMx() });
 
@@ -338,20 +323,6 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		}
 
 		if (!isNew &&
-				(!Validator.equals(company.getVirtualHost(),
-					companyModelImpl.getOriginalVirtualHost()))) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-				new Object[] { companyModelImpl.getOriginalVirtualHost() });
-		}
-
-		if (isNew ||
-				(!Validator.equals(company.getVirtualHost(),
-					companyModelImpl.getOriginalVirtualHost()))) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-				new Object[] { company.getVirtualHost() }, company);
-		}
-
-		if (!isNew &&
 				(!Validator.equals(company.getMx(),
 					companyModelImpl.getOriginalMx()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_MX,
@@ -394,7 +365,6 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		companyImpl.setAccountId(company.getAccountId());
 		companyImpl.setWebId(company.getWebId());
 		companyImpl.setKey(company.getKey());
-		companyImpl.setVirtualHost(company.getVirtualHost());
 		companyImpl.setMx(company.getMx());
 		companyImpl.setHomeURL(company.getHomeURL());
 		companyImpl.setLogoId(company.getLogoId());
@@ -611,146 +581,6 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			finally {
 				if (result == null) {
 					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_WEBID,
-						finderArgs);
-				}
-
-				closeSession(session);
-			}
-		}
-		else {
-			if (result instanceof List<?>) {
-				return null;
-			}
-			else {
-				return (Company)result;
-			}
-		}
-	}
-
-	/**
-	 * Finds the company where virtualHost = &#63; or throws a {@link com.liferay.portal.NoSuchCompanyException} if it could not be found.
-	 *
-	 * @param virtualHost the virtual host to search with
-	 * @return the matching company
-	 * @throws com.liferay.portal.NoSuchCompanyException if a matching company could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public Company findByVirtualHost(String virtualHost)
-		throws NoSuchCompanyException, SystemException {
-		Company company = fetchByVirtualHost(virtualHost);
-
-		if (company == null) {
-			StringBundler msg = new StringBundler(4);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("virtualHost=");
-			msg.append(virtualHost);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchCompanyException(msg.toString());
-		}
-
-		return company;
-	}
-
-	/**
-	 * Finds the company where virtualHost = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param virtualHost the virtual host to search with
-	 * @return the matching company, or <code>null</code> if a matching company could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public Company fetchByVirtualHost(String virtualHost)
-		throws SystemException {
-		return fetchByVirtualHost(virtualHost, true);
-	}
-
-	/**
-	 * Finds the company where virtualHost = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param virtualHost the virtual host to search with
-	 * @return the matching company, or <code>null</code> if a matching company could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public Company fetchByVirtualHost(String virtualHost,
-		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { virtualHost };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-					finderArgs, this);
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(2);
-
-			query.append(_SQL_SELECT_COMPANY_WHERE);
-
-			if (virtualHost == null) {
-				query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_1);
-			}
-			else {
-				if (virtualHost.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_2);
-				}
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (virtualHost != null) {
-					qPos.add(virtualHost);
-				}
-
-				List<Company> list = q.list();
-
-				result = list;
-
-				Company company = null;
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-						finderArgs, list);
-				}
-				else {
-					company = list.get(0);
-
-					cacheResult(company);
-
-					if ((company.getVirtualHost() == null) ||
-							!company.getVirtualHost().equals(virtualHost)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
-							finderArgs, company);
-					}
-				}
-
-				return company;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (result == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_VIRTUALHOST,
 						finderArgs);
 				}
 
@@ -1482,19 +1312,6 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	}
 
 	/**
-	 * Removes the company where virtualHost = &#63; from the database.
-	 *
-	 * @param virtualHost the virtual host to search with
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void removeByVirtualHost(String virtualHost)
-		throws NoSuchCompanyException, SystemException {
-		Company company = findByVirtualHost(virtualHost);
-
-		remove(company);
-	}
-
-	/**
 	 * Removes the company where mx = &#63; from the database.
 	 *
 	 * @param mx the mx to search with
@@ -1599,71 +1416,6 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_WEBID,
-					finderArgs, count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	/**
-	 * Counts all the companies where virtualHost = &#63;.
-	 *
-	 * @param virtualHost the virtual host to search with
-	 * @return the number of matching companies
-	 * @throws SystemException if a system exception occurred
-	 */
-	public int countByVirtualHost(String virtualHost) throws SystemException {
-		Object[] finderArgs = new Object[] { virtualHost };
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_VIRTUALHOST,
-				finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(2);
-
-			query.append(_SQL_COUNT_COMPANY_WHERE);
-
-			if (virtualHost == null) {
-				query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_1);
-			}
-			else {
-				if (virtualHost.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_2);
-				}
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				if (virtualHost != null) {
-					qPos.add(virtualHost);
-				}
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_VIRTUALHOST,
 					finderArgs, count);
 
 				closeSession(session);
@@ -2019,6 +1771,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	protected UserTrackerPersistence userTrackerPersistence;
 	@BeanReference(type = UserTrackerPathPersistence.class)
 	protected UserTrackerPathPersistence userTrackerPathPersistence;
+	@BeanReference(type = VirtualHostPersistence.class)
+	protected VirtualHostPersistence virtualHostPersistence;
 	@BeanReference(type = WebDAVPropsPersistence.class)
 	protected WebDAVPropsPersistence webDAVPropsPersistence;
 	@BeanReference(type = WebsitePersistence.class)
@@ -2034,9 +1788,6 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	private static final String _FINDER_COLUMN_WEBID_WEBID_1 = "company.webId IS NULL";
 	private static final String _FINDER_COLUMN_WEBID_WEBID_2 = "company.webId = ?";
 	private static final String _FINDER_COLUMN_WEBID_WEBID_3 = "(company.webId IS NULL OR company.webId = ?)";
-	private static final String _FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_1 = "company.virtualHost IS NULL";
-	private static final String _FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_2 = "company.virtualHost = ?";
-	private static final String _FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_3 = "(company.virtualHost IS NULL OR company.virtualHost = ?)";
 	private static final String _FINDER_COLUMN_MX_MX_1 = "company.mx IS NULL";
 	private static final String _FINDER_COLUMN_MX_MX_2 = "company.mx = ?";
 	private static final String _FINDER_COLUMN_MX_MX_3 = "(company.mx IS NULL OR company.mx = ?)";

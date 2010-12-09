@@ -243,21 +243,6 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 	public void setPageCount(int pageCount);
 
 	/**
-	 * Gets the virtual host of this layout set.
-	 *
-	 * @return the virtual host of this layout set
-	 */
-	@AutoEscape
-	public String getVirtualHost();
-
-	/**
-	 * Sets the virtual host of this layout set.
-	 *
-	 * @param virtualHost the virtual host of this layout set
-	 */
-	public void setVirtualHost(String virtualHost);
-
-	/**
 	 * Gets the settings of this layout set.
 	 *
 	 * @return the settings of this layout set

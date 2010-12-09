@@ -2759,6 +2759,8 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 	protected UserTrackerPersistence userTrackerPersistence;
 	@BeanReference(type = UserTrackerPathPersistence.class)
 	protected UserTrackerPathPersistence userTrackerPathPersistence;
+	@BeanReference(type = VirtualHostPersistence.class)
+	protected VirtualHostPersistence virtualHostPersistence;
 	@BeanReference(type = WebDAVPropsPersistence.class)
 	protected WebDAVPropsPersistence webDAVPropsPersistence;
 	@BeanReference(type = WebsitePersistence.class)

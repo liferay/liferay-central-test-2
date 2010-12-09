@@ -315,48 +315,6 @@ public class LayoutSetUtil {
 	}
 
 	/**
-	* Finds the layout set where virtualHost = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutSetException} if it could not be found.
-	*
-	* @param virtualHost the virtual host to search with
-	* @return the matching layout set
-	* @throws com.liferay.portal.NoSuchLayoutSetException if a matching layout set could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portal.model.LayoutSet findByVirtualHost(
-		java.lang.String virtualHost)
-		throws com.liferay.portal.NoSuchLayoutSetException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByVirtualHost(virtualHost);
-	}
-
-	/**
-	* Finds the layout set where virtualHost = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param virtualHost the virtual host to search with
-	* @return the matching layout set, or <code>null</code> if a matching layout set could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portal.model.LayoutSet fetchByVirtualHost(
-		java.lang.String virtualHost)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByVirtualHost(virtualHost);
-	}
-
-	/**
-	* Finds the layout set where virtualHost = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param virtualHost the virtual host to search with
-	* @return the matching layout set, or <code>null</code> if a matching layout set could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portal.model.LayoutSet fetchByVirtualHost(
-		java.lang.String virtualHost, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .fetchByVirtualHost(virtualHost, retrieveFromCache);
-	}
-
-	/**
 	* Finds the layout set where groupId = &#63; and privateLayout = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutSetException} if it could not be found.
 	*
 	* @param groupId the group id to search with
@@ -462,18 +420,6 @@ public class LayoutSetUtil {
 	}
 
 	/**
-	* Removes the layout set where virtualHost = &#63; from the database.
-	*
-	* @param virtualHost the virtual host to search with
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void removeByVirtualHost(java.lang.String virtualHost)
-		throws com.liferay.portal.NoSuchLayoutSetException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByVirtualHost(virtualHost);
-	}
-
-	/**
 	* Removes the layout set where groupId = &#63; and privateLayout = &#63; from the database.
 	*
 	* @param groupId the group id to search with
@@ -506,18 +452,6 @@ public class LayoutSetUtil {
 	public static int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByGroupId(groupId);
-	}
-
-	/**
-	* Counts all the layout sets where virtualHost = &#63;.
-	*
-	* @param virtualHost the virtual host to search with
-	* @return the number of matching layout sets
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int countByVirtualHost(java.lang.String virtualHost)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByVirtualHost(virtualHost);
 	}
 
 	/**

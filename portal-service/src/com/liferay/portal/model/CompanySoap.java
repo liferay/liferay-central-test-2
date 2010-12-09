@@ -37,7 +37,6 @@ public class CompanySoap implements Serializable {
 		soapModel.setAccountId(model.getAccountId());
 		soapModel.setWebId(model.getWebId());
 		soapModel.setKey(model.getKey());
-		soapModel.setVirtualHost(model.getVirtualHost());
 		soapModel.setMx(model.getMx());
 		soapModel.setHomeURL(model.getHomeURL());
 		soapModel.setLogoId(model.getLogoId());
@@ -127,14 +126,6 @@ public class CompanySoap implements Serializable {
 		_key = key;
 	}
 
-	public String getVirtualHost() {
-		return _virtualHost;
-	}
-
-	public void setVirtualHost(String virtualHost) {
-		_virtualHost = virtualHost;
-	}
-
 	public String getMx() {
 		return _mx;
 	}
@@ -183,7 +174,6 @@ public class CompanySoap implements Serializable {
 	private long _accountId;
 	private String _webId;
 	private String _key;
-	private String _virtualHost;
 	private String _mx;
 	private String _homeURL;
 	private long _logoId;

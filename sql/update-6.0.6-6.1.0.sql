@@ -60,3 +60,10 @@ alter table MBMessage add format VARCHAR(75) null;
 COMMIT_TRANSACTION;
 
 update MBMessage set format = 'bbcode';
+
+create table VirtualHost (
+	virtualHostId LONG not null primary key,
+	companyId LONG,
+	layoutSetId LONG,
+	virtualHostName VARCHAR(75) null
+);

@@ -61,14 +61,13 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 			{ "accountId", new Integer(Types.BIGINT) },
 			{ "webId", new Integer(Types.VARCHAR) },
 			{ "key_", new Integer(Types.CLOB) },
-			{ "virtualHost", new Integer(Types.VARCHAR) },
 			{ "mx", new Integer(Types.VARCHAR) },
 			{ "homeURL", new Integer(Types.VARCHAR) },
 			{ "logoId", new Integer(Types.BIGINT) },
 			{ "system", new Integer(Types.BOOLEAN) },
 			{ "maxUsers", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,virtualHost VARCHAR(75) null,mx VARCHAR(75) null,homeURL STRING null,logoId LONG,system BOOLEAN,maxUsers INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,mx VARCHAR(75) null,homeURL STRING null,logoId LONG,system BOOLEAN,maxUsers INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table Company";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -93,7 +92,6 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		model.setAccountId(soapModel.getAccountId());
 		model.setWebId(soapModel.getWebId());
 		model.setKey(soapModel.getKey());
-		model.setVirtualHost(soapModel.getVirtualHost());
 		model.setMx(soapModel.getMx());
 		model.setHomeURL(soapModel.getHomeURL());
 		model.setLogoId(soapModel.getLogoId());
@@ -185,27 +183,6 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 
 	public void setKey(String key) {
 		_key = key;
-	}
-
-	public String getVirtualHost() {
-		if (_virtualHost == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _virtualHost;
-		}
-	}
-
-	public void setVirtualHost(String virtualHost) {
-		_virtualHost = virtualHost;
-
-		if (_originalVirtualHost == null) {
-			_originalVirtualHost = virtualHost;
-		}
-	}
-
-	public String getOriginalVirtualHost() {
-		return GetterUtil.getString(_originalVirtualHost);
 	}
 
 	public String getMx() {
@@ -310,7 +287,6 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		clone.setAccountId(getAccountId());
 		clone.setWebId(getWebId());
 		clone.setKey(getKey());
-		clone.setVirtualHost(getVirtualHost());
 		clone.setMx(getMx());
 		clone.setHomeURL(getHomeURL());
 		clone.setLogoId(getLogoId());
@@ -363,7 +339,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{companyId=");
 		sb.append(getCompanyId());
@@ -373,8 +349,6 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		sb.append(getWebId());
 		sb.append(", key=");
 		sb.append(getKey());
-		sb.append(", virtualHost=");
-		sb.append(getVirtualHost());
 		sb.append(", mx=");
 		sb.append(getMx());
 		sb.append(", homeURL=");
@@ -391,7 +365,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Company");
@@ -412,10 +386,6 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		sb.append(
 			"<column><column-name>key</column-name><column-value><![CDATA[");
 		sb.append(getKey());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>virtualHost</column-name><column-value><![CDATA[");
-		sb.append(getVirtualHost());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>mx</column-name><column-value><![CDATA[");
@@ -448,8 +418,6 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	private String _webId;
 	private String _originalWebId;
 	private String _key;
-	private String _virtualHost;
-	private String _originalVirtualHost;
 	private String _mx;
 	private String _originalMx;
 	private String _homeURL;
