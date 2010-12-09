@@ -178,8 +178,13 @@ public class URLCodec {
 						j++) {
 
 					sb.append(CharPool.PERCENT);
-					sb.append(
+
+					String hex = new String(
 						UnicodeFormatter.byteToHex(byteBuffer.get(), hexes));
+
+					hex = hex.toUpperCase();
+
+					sb.append(hex);
 				}
 			}
 		}
