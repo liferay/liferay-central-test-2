@@ -43,9 +43,9 @@ public class FinderPath {
 	public String encodeCacheKey(Object[] args) {
 		StringBundler sb = new StringBundler(args.length * 2 + 3);
 
-		sb.append(_cacheKeyPrefix);
-		sb.append(StringPool.PERIOD);
 		sb.append(ShardUtil.getCurrentShardName());
+		sb.append(StringPool.PERIOD);
+		sb.append(_cacheKeyPrefix);
 
 		for (Object arg : args) {
 			sb.append(StringPool.PERIOD);
@@ -62,9 +62,9 @@ public class FinderPath {
 	public String encodeLocalCacheKey(Object[] args) {
 		StringBundler sb = new StringBundler(args.length * 2 + 3);
 
-		sb.append(_localCacheKeyPrefix);
-		sb.append(StringPool.PERIOD);
 		sb.append(ShardUtil.getCurrentShardName());
+		sb.append(StringPool.PERIOD);
+		sb.append(_localCacheKeyPrefix);
 
 		for (Object arg : args) {
 			sb.append(StringPool.PERIOD);

@@ -292,8 +292,8 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		CacheKeyGenerator cacheKeyGenerator =
 			CacheKeyGeneratorUtil.getCacheKeyGenerator(CACHE_NAME);
 
-		cacheKeyGenerator.append(StringUtil.toHexString(primaryKeyObj));
 		cacheKeyGenerator.append(ShardUtil.getCurrentShardName());
+		cacheKeyGenerator.append(StringUtil.toHexString(primaryKeyObj));
 
 		return cacheKeyGenerator.finish();
 	}
@@ -304,9 +304,9 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		CacheKeyGenerator cacheKeyGenerator =
 			CacheKeyGeneratorUtil.getCacheKeyGenerator(CACHE_NAME);
 
+		cacheKeyGenerator.append(ShardUtil.getCurrentShardName());
 		cacheKeyGenerator.append(classObj.getName());
 		cacheKeyGenerator.append(StringUtil.toHexString(primaryKeyObj));
-		cacheKeyGenerator.append(ShardUtil.getCurrentShardName());
 
 		return cacheKeyGenerator.finish();
 	}
