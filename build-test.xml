@@ -94,7 +94,7 @@
 						<if>
 							<equals arg1="@{test.ant.script.version}" arg2="5.1.2" />
 							<then>
-								<var name="test.ant.script.file.plugins" value="&lt;param name=&quot;${test.ant.script.plugins.type}.plugins.includes&quot; value=&quot;${test.ant.script.plugins}&quot; /&gt;" />
+								<var name="test.ant.script.file.plugins" value="&lt;param name=&quot;${test.ant.script.plugins.type}.plugins.upgrade.includes&quot; value=&quot;${test.ant.script.plugins}&quot; /&gt;" />
 								<var name="test.ant.script.file.plugins.ee" value=" " />
 							</then>
 							<elseif>
@@ -105,7 +105,7 @@
 								</then>
 							</elseif>
 							<else>
-								<var name="test.ant.script.file.plugins" value="&lt;param name=&quot;${test.ant.script.plugins.type}.plugins.includes&quot; value=&quot;${test.ant.script.plugins}&quot; /&gt;" />
+								<var name="test.ant.script.file.plugins" value="&lt;param name=&quot;${test.ant.script.plugins.type}.plugins.upgrade.includes&quot; value=&quot;${test.ant.script.plugins}&quot; /&gt;" />
 								<var name="test.ant.script.file.plugins.ee" value="&lt;param name=&quot;plugins.version.includes&quot; value=&quot;${test.ant.script.plugins}**.war&quot; /&gt;" />
 							</else>
 						</if>
