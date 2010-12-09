@@ -293,23 +293,6 @@ public class PortalInstances {
 		return _companyIds[0];
 	}
 
-	private LayoutSet _getLayoutSetByVirtualHosts(String host) {
-		if (Validator.isNull(host)) {
-			return null;
-		}
-
-		if (_isVirtualHostsIgnoreHost(host)) {
-			return null;
-		}
-
-		try {
-			return LayoutSetLocalServiceUtil.getLayoutSet(host);
-		}
-		catch (Exception e) {
-			return null;
-		}
-	}
-
 	private String[] _getWebIds() {
 		if (_webIds != null) {
 			return _webIds;
