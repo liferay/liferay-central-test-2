@@ -293,17 +293,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 	}
 
-	/**
-	 * @deprecated {@link #addPageAttachments(long, long, String, List)}
-	 */
-	public void addPageAttachments(
-			long nodeId, String title,
-			List<ObjectValuePair<String, byte[]>> files)
-		throws PortalException, SystemException {
-
-		addPageAttachments(0, nodeId, title, files);
-	}
-
 	public void addPageResources(
 			long nodeId, String title, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
