@@ -156,18 +156,20 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 		function() {
 			var A = AUI();
 
-			var hash = document.location.hash;
+			var hash = document.location.hash.replace('#', '');
 
-			if ((hash != '#') && (hash != '')) {
+			var hashObj = A.QueryString.parse(hash);
+
+			hash = hashObj['<portlet:namespace />'];
+
+			if (hash) {
 				var src = '';
 
-				var path = hash.substring(1);
-
-				if (path.indexOf('http://') != 0) {
+				if (hash.indexOf('http://') != 0) {
 					src = '<%= baseSrc %>';
 				}
 
-				src += path;
+				src += hash;
 
 				var iframe = A.one('#<portlet:namespace />iframe');
 
@@ -176,7 +178,7 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 				}
 			}
 		},
-		['aui-base']
+		['aui-base', 'querystring']
 	);
 
 	Liferay.provide(
@@ -185,18 +187,22 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 		function(url) {
 			var A = AUI();
 
-			document.location.hash = url;
+			var hash = document.location.hash.replace('#', '');
+
+			var hashObj = A.QueryString.parse(hash);
+
+			hashObj['<portlet:namespace />'] = url;
 
 			var maximize = A.one('#p_p_id<portlet:namespace /> .portlet-maximize-icon a');
+
+			hash = A.QueryString.stringify(hashObj);
 
 			if (maximize) {
 				var href = maximize.attr('href');
 
-				if (href.indexOf('#') != -1) {
-					href = href.substring(0, href.indexOf('#'));
-				}
+				href = href.split('#')[0];
 
-				maximize.attr('href', href + '#' + url);
+				maximize.attr('href', href + '#' + hash);
 			}
 
 			var restore = A.one('#p_p_id<portlet:namespace /> a.portlet-icon-back');
@@ -204,14 +210,14 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 			if (restore) {
 				var href = restore.attr('href');
 
-				if (href.indexOf('#') != -1) {
-					href = href.substring(0, href.indexOf('#'));
-				}
+				href = href.split('#')[0];
 
-				restore.attr('href', href + '#' + url);
+				restore.attr('href', href + '#' + hash);
 			}
+
+			location.hash = hash;
 		},
-		['aui-base']
+		['aui-base', 'querystring']
 	);
 
 	<portlet:namespace />init();
