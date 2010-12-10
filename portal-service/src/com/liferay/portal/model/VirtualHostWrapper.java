@@ -159,7 +159,7 @@ public class VirtualHostWrapper implements VirtualHost {
 		return new VirtualHostWrapper((VirtualHost)_virtualHost.clone());
 	}
 
-	public int compareTo(VirtualHost virtualHost) {
+	public int compareTo(com.liferay.portal.model.VirtualHost virtualHost) {
 		return _virtualHost.compareTo(virtualHost);
 	}
 
@@ -167,7 +167,7 @@ public class VirtualHostWrapper implements VirtualHost {
 		return _virtualHost.hashCode();
 	}
 
-	public VirtualHost toEscapedModel() {
+	public com.liferay.portal.model.VirtualHost toEscapedModel() {
 		return new VirtualHostWrapper(_virtualHost.toEscapedModel());
 	}
 
