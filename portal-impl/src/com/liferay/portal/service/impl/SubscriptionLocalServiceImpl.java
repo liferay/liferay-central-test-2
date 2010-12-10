@@ -99,28 +99,6 @@ public class SubscriptionLocalServiceImpl
 		return subscription;
 	}
 
-	/**
-	 * @deprecated {@link #addSubscription(long, long, String, long)}
-	 */
-	public Subscription addSubscription(
-			long userId, String className, long classPK)
-		throws PortalException, SystemException {
-
-		return addSubscription(
-			userId, 0, className, classPK,
-			SubscriptionConstants.FREQUENCY_INSTANT);
-	}
-
-	/**
-	 * @deprecated {@link #addSubscription(long, long, String, long, String)}
-	 */
-	public Subscription addSubscription(
-			long userId, String className, long classPK, String frequency)
-		throws PortalException, SystemException {
-
-		return addSubscription(userId, 0, className, classPK, frequency);
-	}
-
 	public void deleteSubscription(long subscriptionId)
 		throws PortalException, SystemException {
 

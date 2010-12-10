@@ -246,28 +246,6 @@ public class SubscriptionLocalServiceUtil {
 			frequency);
 	}
 
-	/**
-	* @deprecated {@link #addSubscription(long, long, String, long)}
-	*/
-	public static com.liferay.portal.model.Subscription addSubscription(
-		long userId, java.lang.String className, long classPK)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().addSubscription(userId, className, classPK);
-	}
-
-	/**
-	* @deprecated {@link #addSubscription(long, long, String, long, String)}
-	*/
-	public static com.liferay.portal.model.Subscription addSubscription(
-		long userId, java.lang.String className, long classPK,
-		java.lang.String frequency)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .addSubscription(userId, className, classPK, frequency);
-	}
-
 	public static void deleteSubscription(long userId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,

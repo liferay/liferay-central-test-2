@@ -237,28 +237,6 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 			className, classPK, frequency);
 	}
 
-	/**
-	* @deprecated {@link #addSubscription(long, long, String, long)}
-	*/
-	public com.liferay.portal.model.Subscription addSubscription(long userId,
-		java.lang.String className, long classPK)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _subscriptionLocalService.addSubscription(userId, className,
-			classPK);
-	}
-
-	/**
-	* @deprecated {@link #addSubscription(long, long, String, long, String)}
-	*/
-	public com.liferay.portal.model.Subscription addSubscription(long userId,
-		java.lang.String className, long classPK, java.lang.String frequency)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _subscriptionLocalService.addSubscription(userId, className,
-			classPK, frequency);
-	}
-
 	public void deleteSubscription(long userId, java.lang.String className,
 		long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
