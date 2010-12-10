@@ -1141,22 +1141,8 @@ public class UserWrapper implements User {
 		_user.setPasswordUnencrypted(passwordUnencrypted);
 	}
 
-	/**
-	* @deprecated {@link #updateSocialContributionEquity(long, double)}
-	*/
-	public void updateSocialContributionEquity(double value) {
-		_user.updateSocialContributionEquity(value);
-	}
-
 	public void updateSocialContributionEquity(long groupId, double value) {
 		_user.updateSocialContributionEquity(groupId, value);
-	}
-
-	/**
-	* @deprecated {@link #updateSocialParticipationEquity(long, double)}
-	*/
-	public void updateSocialParticipationEquity(double value) {
-		_user.updateSocialParticipationEquity(value);
 	}
 
 	public void updateSocialParticipationEquity(long groupId, double value) {

@@ -686,13 +686,6 @@ public class UserImpl extends UserModelImpl implements User {
 		super.setTimeZoneId(timeZoneId);
 	}
 
-	/**
-	 * @deprecated {@link #updateSocialContributionEquity(long, double)}
-	 */
-	public void updateSocialContributionEquity(double value) {
-		updateSocialContributionEquity(0, value);
-	}
-
 	public void updateSocialContributionEquity(long groupId, double value) {
 		double currentValue = 0;
 		double newValue = 0;
@@ -710,13 +703,6 @@ public class UserImpl extends UserModelImpl implements User {
 			newValue = currentValue + value;
 		}
 		while (!socialContributionEquity.compareAndSet(currentValue, newValue));
-	}
-
-	/**
-	 * @deprecated {@link #updateSocialParticipationEquity(long, double)}
-	 */
-	public void updateSocialParticipationEquity(double value) {
-		updateSocialParticipationEquity(0, value);
 	}
 
 	public void updateSocialParticipationEquity(long groupId, double value) {

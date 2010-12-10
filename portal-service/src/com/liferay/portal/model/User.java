@@ -212,17 +212,7 @@ public interface User extends UserModel {
 
 	public void setTimeZoneId(java.lang.String timeZoneId);
 
-	/**
-	* @deprecated {@link #updateSocialContributionEquity(long, double)}
-	*/
-	public void updateSocialContributionEquity(double value);
-
 	public void updateSocialContributionEquity(long groupId, double value);
-
-	/**
-	* @deprecated {@link #updateSocialParticipationEquity(long, double)}
-	*/
-	public void updateSocialParticipationEquity(double value);
 
 	public void updateSocialParticipationEquity(long groupId, double value);
 }
