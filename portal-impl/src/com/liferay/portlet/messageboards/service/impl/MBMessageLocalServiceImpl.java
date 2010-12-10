@@ -1164,12 +1164,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public void subscribeMessage(long userId, long messageId)
 		throws PortalException, SystemException {
 
-		// Message
-
 		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
-		// Subscription
-	
 		subscriptionLocalService.addSubscription(
 			userId, message.getGroupId(), MBThread.class.getName(),
 			message.getThreadId());
@@ -1178,17 +1174,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public void unsubscribeMessage(long userId, long messageId)
 		throws PortalException, SystemException {
 
-		// Message
-
 		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
-
-		// Social
-
-		socialEquityLogLocalService.deactivateEquityLogs(
-			userId, MBMessage.class.getName(), messageId, ActionKeys.SUBSCRIBE,
-			StringPool.BLANK);
-
-		// Subscription
 
 		subscriptionLocalService.deleteSubscription(
 			userId, MBThread.class.getName(), message.getThreadId());
