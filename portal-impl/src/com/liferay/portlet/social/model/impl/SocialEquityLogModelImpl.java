@@ -69,7 +69,7 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 			{ "value", new Integer(Types.INTEGER) },
 			{ "extraData", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table SocialEquityLog (equityLogId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,assetEntryId LONG,actionId VARCHAR(75) null,actionDate INTEGER,active_ BOOLEAN,expiration INTEGER,type_ INTEGER,value INTEGER,extraData VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table SocialEquityLog (equityLogId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,assetEntryId LONG,actionId VARCHAR(75) null,actionDate INTEGER,active_ BOOLEAN,expiration INTEGER,type_ INTEGER,value INTEGER,extraData STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table SocialEquityLog";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";

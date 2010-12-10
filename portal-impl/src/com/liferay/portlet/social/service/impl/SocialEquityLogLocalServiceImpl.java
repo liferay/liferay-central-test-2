@@ -61,6 +61,9 @@ import org.springframework.jdbc.core.RowCallbackHandler;
 public class SocialEquityLogLocalServiceImpl
 	extends SocialEquityLogLocalServiceBaseImpl {
 
+	/**
+	 * @deprecated {@link #addEquityLogs(long, long, String, String)}
+	 */
 	public void addEquityLogs(
 			long userId, long assetEntryId, String actionId)
 		throws PortalException, SystemException {
@@ -105,6 +108,9 @@ public class SocialEquityLogLocalServiceImpl
 		}
 	}
 
+	/**
+	 * @deprecated {@link #addEquityLogs(long, String, long, String, String)}
+	 */
 	public void addEquityLogs(
 			long userId, String className, long classPK, String actionId)
 		throws PortalException, SystemException {
@@ -260,6 +266,9 @@ public class SocialEquityLogLocalServiceImpl
 		}
 	}
 
+	/**
+	 * @deprecated {@link #deactivateEquityLogs(long, long, String, String)}
+	 */
 	public void deactivateEquityLogs(
 			long userId, long assetEntryId, String actionId)
 		throws PortalException, SystemException {
@@ -343,6 +352,9 @@ public class SocialEquityLogLocalServiceImpl
 		}
 	}
 
+	/**
+	 * @deprecated {@link #deactivateEquityLogs(long, String, long, String, String)}
+	 */
 	public void deactivateEquityLogs(
 			long userId, String className, long classPK, String actionId)
 		throws PortalException, SystemException {
@@ -586,11 +598,11 @@ public class SocialEquityLogLocalServiceImpl
 		equityLog.setAssetEntryId(assetEntry.getEntryId());
 		equityLog.setActionId(equitySetting.getActionId());
 		equityLog.setActionDate(actionDate);
+		equityLog.setActive(true);
+		equityLog.setExpiration(actionDate + equitySetting.getLifespan());
 		equityLog.setType(equitySetting.getType());
 		equityLog.setValue(equitySetting.getValue());
-		equityLog.setExpiration(actionDate + equitySetting.getLifespan());
 		equityLog.setExtraData(extraData);
-		equityLog.setActive(true);
 
 		socialEquityLogPersistence.update(equityLog, false);
 	}
@@ -652,8 +664,8 @@ public class SocialEquityLogLocalServiceImpl
 			return false;
 		}
 
-		// Unique - no duplicate active action on the same entry by the same
-		// user
+		// Unique because a user cannot have a duplicate active action on the
+		// same entry
 
 		if (equitySetting.isUniqueEntry()) {
 			count = socialEquityLogPersistence.countByU_AEI_AID_A_E(
@@ -832,10 +844,6 @@ public class SocialEquityLogLocalServiceImpl
 			}
 		}
 
-		public int getBatchSize() {
-			return _sqlParams.size();
-		}
-
 		public void flush() {
 			try {
 				_jdbcTemplate.batchUpdate(_sql, this);
@@ -846,6 +854,10 @@ public class SocialEquityLogLocalServiceImpl
 			finally {
 				_sqlParams.clear();
 			}
+		}
+
+		public int getBatchSize() {
+			return _sqlParams.size();
 		}
 
 		public void setValues(PreparedStatement ps, int index)
