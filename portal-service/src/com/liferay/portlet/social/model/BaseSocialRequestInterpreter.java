@@ -17,6 +17,7 @@ package com.liferay.portlet.social.model;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
@@ -42,7 +43,7 @@ public abstract class BaseSocialRequestInterpreter
 			User user = UserLocalServiceUtil.getUserById(userId);
 
 			if (user.getUserId() == themeDisplay.getUserId()) {
-				return user.getFirstName();
+				return HtmlUtil.escape(user.getFirstName());
 			}
 
 			String userName = user.getFullName();
@@ -50,13 +51,14 @@ public abstract class BaseSocialRequestInterpreter
 			Group group = user.getGroup();
 
 			if (group.getGroupId() == themeDisplay.getScopeGroupId()) {
-				return userName;
+				return HtmlUtil.escape(userName);
 			}
 
 			String userDisplayURL = user.getDisplayURL(themeDisplay);
 
 			userName =
-				"<a href=\"" + userDisplayURL + "\">" + userName + "</a>";
+				"<a href=\"" + userDisplayURL + "\">" +
+					HtmlUtil.escape(userName) + "</a>";
 
 			return userName;
 		}
