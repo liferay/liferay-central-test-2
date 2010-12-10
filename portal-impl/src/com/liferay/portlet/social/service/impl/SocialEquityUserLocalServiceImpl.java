@@ -41,7 +41,7 @@ public class SocialEquityUserLocalServiceImpl
 	}
 
 	public SocialEquityValue getContributionEquity(long userId, long groupId)
-	throws SystemException {
+		throws SystemException {
 
 		ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
 
@@ -103,8 +103,9 @@ public class SocialEquityUserLocalServiceImpl
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("userId", userId));
 
-		if (groupId > 0)
+		if (groupId > 0) {
 			dynamicQuery.add(RestrictionsFactoryUtil.eq("groupId", groupId));
+		}
 
 		List<?> results = dynamicQuery(dynamicQuery);
 
