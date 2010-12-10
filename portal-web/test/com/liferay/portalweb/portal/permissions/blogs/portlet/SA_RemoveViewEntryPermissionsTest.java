@@ -68,14 +68,14 @@ public class SA_RemoveViewEntryPermissionsTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.uncheck("15_ACTION_VIEW");
+		selenium.uncheck("16_ACTION_VIEW");
 		selenium.uncheck("//tr[7]/td[8]/input");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request completed successfully."));
-		assertFalse(selenium.isChecked("15_ACTION_VIEW"));
+				"Your request processed successfully."));
+		assertFalse(selenium.isChecked("16_ACTION_VIEW"));
 		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isChecked("//tr[7]/td[8]/input"));
 		selenium.saveScreenShotAndSource();

@@ -50,14 +50,14 @@ public class SA_EditPermissionsTest extends BaseTestCase {
 				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right null']/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.check("15_ACTION_VIEW");
+		selenium.check("16_ACTION_VIEW");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request completed successfully."),
+				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
-		assertTrue(selenium.isChecked("15_ACTION_VIEW"));
+		assertTrue(selenium.isChecked("16_ACTION_VIEW"));
 		selenium.saveScreenShotAndSource();
 		selenium.open("/web/guest/home/");
 
@@ -110,14 +110,14 @@ public class SA_EditPermissionsTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Permissions Edited Test Folder"),
 			selenium.getText("//h1[@class='header-title']/span"));
-		selenium.check("15_ACTION_VIEW");
+		selenium.check("16_ACTION_VIEW");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request completed successfully."),
+				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
-		assertTrue(selenium.isChecked("15_ACTION_VIEW"));
+		assertTrue(selenium.isChecked("16_ACTION_VIEW"));
 		selenium.saveScreenShotAndSource();
 		selenium.open("/web/guest/home/");
 
@@ -174,14 +174,14 @@ public class SA_EditPermissionsTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Permissions Test Subfolder"),
 			selenium.getText("//h1[@class='header-title']/span"));
-		selenium.check("15_ACTION_VIEW");
+		selenium.check("16_ACTION_VIEW");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request completed successfully."),
+				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
-		assertTrue(selenium.isChecked("15_ACTION_VIEW"));
+		assertTrue(selenium.isChecked("16_ACTION_VIEW"));
 		selenium.saveScreenShotAndSource();
 		selenium.open("/web/guest/home/");
 
@@ -243,14 +243,14 @@ public class SA_EditPermissionsTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Admin Permissions Edited Test Document.txt"),
 			selenium.getText("//h1[@class='header-title']/span"));
-		selenium.check("15_ACTION_VIEW");
+		selenium.check("16_ACTION_VIEW");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request completed successfully."),
+				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
-		assertTrue(selenium.isChecked("15_ACTION_VIEW"));
+		assertTrue(selenium.isChecked("16_ACTION_VIEW"));
 		selenium.saveScreenShotAndSource();
 		selenium.open("/web/guest/home/");
 
@@ -303,14 +303,14 @@ public class SA_EditPermissionsTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Permissions2 Test2 Folder2"),
 			selenium.getText("//h1[@class='header-title']/span"));
-		selenium.check("15_ACTION_VIEW");
+		selenium.check("16_ACTION_VIEW");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request completed successfully."),
+				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
-		assertTrue(selenium.isChecked("15_ACTION_VIEW"));
+		assertTrue(selenium.isChecked("16_ACTION_VIEW"));
 		selenium.saveScreenShotAndSource();
 		selenium.open("/web/guest/home/");
 
@@ -367,14 +367,14 @@ public class SA_EditPermissionsTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Permissions2 Test2 Subfolder2"),
 			selenium.getText("//h1[@class='header-title']/span"));
-		selenium.check("15_ACTION_VIEW");
+		selenium.check("16_ACTION_VIEW");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request completed successfully."),
+				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
-		assertTrue(selenium.isChecked("15_ACTION_VIEW"));
+		assertTrue(selenium.isChecked("16_ACTION_VIEW"));
 		selenium.saveScreenShotAndSource();
 		selenium.open("/web/guest/home/");
 
@@ -436,14 +436,14 @@ public class SA_EditPermissionsTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Member Permissions Edited Test Document.txt"),
 			selenium.getText("//h1[@class='header-title']/span"));
-		selenium.check("15_ACTION_VIEW");
+		selenium.check("16_ACTION_VIEW");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request completed successfully."),
+				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
-		assertTrue(selenium.isChecked("15_ACTION_VIEW"));
+		assertTrue(selenium.isChecked("16_ACTION_VIEW"));
 		selenium.saveScreenShotAndSource();
 	}
 }
