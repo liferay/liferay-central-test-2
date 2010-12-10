@@ -103,13 +103,6 @@ public class DLRepositoryLocalServiceUtil {
 		getService().deleteFileEntry(fileEntryId);
 	}
 
-	public static void deleteFileEntry(long fileEntryId,
-		java.lang.String version)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteFileEntry(fileEntryId, version);
-	}
-
 	public static void deleteFolder(
 		com.liferay.portlet.documentlibrary.model.DLFolder folder)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -420,6 +413,15 @@ public class DLRepositoryLocalServiceUtil {
 		return getService()
 				   .moveFileEntry(userId, fileEntryId, newFolderId,
 			serviceContext);
+	}
+
+	public static void revertFileEntry(long userId, long fileEntryId,
+		java.lang.String version,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.revertFileEntry(userId, fileEntryId, version, serviceContext);
 	}
 
 	public static void updateAsset(long userId,

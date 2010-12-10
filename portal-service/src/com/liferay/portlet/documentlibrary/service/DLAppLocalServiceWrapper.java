@@ -108,12 +108,6 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService {
 		_dlAppLocalService.deleteFileEntry(fileEntryId);
 	}
 
-	public void deleteFileEntry(long fileEntryId, java.lang.String version)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlAppLocalService.deleteFileEntry(fileEntryId, version);
-	}
-
 	public void deleteFileRanksByFileEntryId(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_dlAppLocalService.deleteFileRanksByFileEntryId(fileEntryId);

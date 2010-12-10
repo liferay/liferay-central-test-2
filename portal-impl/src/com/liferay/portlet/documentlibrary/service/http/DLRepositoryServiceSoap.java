@@ -124,18 +124,6 @@ public class DLRepositoryServiceSoap {
 		}
 	}
 
-	public static void deleteFileEntry(long fileEntryId,
-		java.lang.String version) throws RemoteException {
-		try {
-			DLRepositoryServiceUtil.deleteFileEntry(fileEntryId, version);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void deleteFileEntryByTitle(long groupId, long folderId,
 		java.lang.String titleWithExtension) throws RemoteException {
 		try {
@@ -663,10 +651,13 @@ public class DLRepositoryServiceSoap {
 		}
 	}
 
-	public static void revertFileEntry(long fileEntryId)
+	public static void revertFileEntry(long fileEntryId,
+		java.lang.String version,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			DLRepositoryServiceUtil.revertFileEntry(fileEntryId);
+			DLRepositoryServiceUtil.revertFileEntry(fileEntryId, version,
+				serviceContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

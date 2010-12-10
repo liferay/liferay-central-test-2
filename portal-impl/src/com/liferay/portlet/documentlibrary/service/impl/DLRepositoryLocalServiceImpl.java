@@ -369,54 +369,9 @@ public class DLRepositoryLocalServiceImpl
 	public void deleteFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 
-		deleteFileEntry(fileEntryId, null);
-	}
+		DLFileEntry fileEntry = getFileEntry(fileEntryId);
 
-	public void deleteFileEntry(long fileEntryId, String version)
-		throws PortalException, SystemException {
-
-		DLFileEntry fileEntry = dlFileEntryPersistence.findByPrimaryKey(
-			fileEntryId);
-
-		if (Validator.isNotNull(version)) {
-			try {
-				dlLocalService.deleteFile(
-					fileEntry.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-					fileEntry.getRepositoryId(), fileEntry.getName(), version);
-			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(e, e);
-				}
-			}
-
-			long fileVersionsCount =
-				dlFileVersionPersistence.countByFileEntryId(fileEntryId);
-
-			dlFileVersionPersistence.removeByF_V(fileEntryId, version);
-
-			if (fileVersionsCount == 1) {
-				dlFileEntryPersistence.remove(fileEntry);
-			}
-			else {
-				if (version.equals(fileEntry.getVersion())) {
-					try {
-						DLFileVersion fileVersion = getLatestFileVersion(
-							fileEntryId);
-
-						fileEntry.setVersion(fileVersion.getVersion());
-						fileEntry.setSize(fileVersion.getSize());
-					}
-					catch (NoSuchFileVersionException nsfve) {
-					}
-				}
-
-				dlFileEntryPersistence.update(fileEntry, false);
-			}
-		}
-		else {
-			deleteFileEntry(fileEntry);
-		}
+		deleteFileEntry(fileEntry);
 	}
 
 	public void deleteFolder(DLFolder folder)
@@ -969,6 +924,33 @@ public class DLRepositoryLocalServiceImpl
 			newFileEntryId);
 
 		return newFileEntry;
+	}
+
+	public void revertFileEntry(
+			long userId, long fileEntryId, String version,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DLFileVersion fileVersion =
+			dlRepositoryLocalService.getFileVersion(fileEntryId, version);
+
+		if (fileVersion.getStatus() != WorkflowConstants.STATUS_APPROVED) {
+			return;
+		}
+
+		String sourceFileName = fileVersion.getTitle();
+		String title = fileVersion.getTitle();
+		String description = fileVersion.getDescription();
+		String changeLog = DLFileEntryConstants.REVERTED + " to " + version;
+		boolean majorVersion = true;
+		String extraSettings = fileVersion.getExtraSettings();
+		InputStream is = getFileAsStream(userId, fileEntryId, version);
+		long size = fileVersion.getSize();
+
+		updateFileEntry(
+			userId, fileEntryId, sourceFileName, title, description,
+			changeLog, majorVersion, extraSettings, is, size,
+			serviceContext);
 	}
 
 	public void updateAsset(

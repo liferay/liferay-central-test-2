@@ -85,10 +85,6 @@ public interface DLRepositoryLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteFileEntry(long fileEntryId, java.lang.String version)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
 	public void deleteFolder(
 		com.liferay.portlet.documentlibrary.model.DLFolder folder)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -323,6 +319,12 @@ public interface DLRepositoryLocalService {
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry moveFileEntry(
 		long userId, long fileEntryId, long newFolderId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void revertFileEntry(long userId, long fileEntryId,
+		java.lang.String version,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

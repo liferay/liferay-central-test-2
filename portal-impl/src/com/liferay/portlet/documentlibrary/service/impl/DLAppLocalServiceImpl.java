@@ -113,12 +113,6 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		dlRepositoryLocalService.deleteFileEntry(fileEntryId);
 	}
 
-	public void deleteFileEntry(long fileEntryId, String version)
-		throws PortalException, SystemException {
-
-		dlRepositoryLocalService.deleteFileEntry(fileEntryId, version);
-	}
-
 	public void deleteFileRanksByFileEntryId(long fileEntryId)
 		throws SystemException {
 

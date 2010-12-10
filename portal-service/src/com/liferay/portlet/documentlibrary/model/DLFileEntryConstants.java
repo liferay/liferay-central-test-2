@@ -23,4 +23,6 @@ public class DLFileEntryConstants {
 
 	public static final String DEFAULT_VERSION = "1.0";
 
+	public static final String REVERTED = "Reverted";
+
 }

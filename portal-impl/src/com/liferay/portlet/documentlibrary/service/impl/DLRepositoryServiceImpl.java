@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -147,32 +146,6 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 
 		try {
 			dlRepositoryLocalService.deleteFileEntry(fileEntryId);
-		}
-		finally {
-
-			// Unlock
-
-			unlockFileEntry(fileEntryId);
-		}
-	}
-
-	public void deleteFileEntry(long fileEntryId, String version)
-		throws PortalException, SystemException {
-
-		DLFileEntryPermission.check(
-			getPermissionChecker(), fileEntryId, ActionKeys.DELETE);
-
-		boolean hasLock = hasFileEntryLock(fileEntryId);
-
-		if (!hasLock) {
-
-			// Lock
-
-			lockFileEntry(fileEntryId);
-		}
-
-		try {
-			dlRepositoryLocalService.deleteFileEntry(fileEntryId, version);
 		}
 		finally {
 
@@ -795,23 +768,32 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		return lockLocalService.refresh(lockUuid, expirationTime);
 	}
 
-	public void revertFileEntry(long fileEntryId)
+	public void revertFileEntry(
+			long fileEntryId, String version, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFileEntryPermission.check(
-			getPermissionChecker(), fileEntryId, ActionKeys.DELETE);
+			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
 
-		DLFileVersion fileVersion =
-			dlRepositoryLocalService.getLatestFileVersion(fileEntryId);
+		boolean hasLock = hasFileEntryLock(fileEntryId);
 
-		if (fileVersion.getStatus() != WorkflowConstants.STATUS_DRAFT) {
-			return;
+		if (!hasLock) {
+
+			// Lock
+
+			lockFileEntry(fileEntryId);
 		}
 
-		DLFileEntry fileEntry = fileVersion.getFileEntry();
+		try {
+			dlRepositoryLocalService.revertFileEntry(
+				getUserId(), fileEntryId, version, serviceContext);
+		}
+		finally {
 
-		dlRepositoryLocalService.deleteFileEntry(
-			fileEntry.getFileEntryId(), fileVersion.getVersion());
+			// Unlock
+
+			unlockFileEntry(fileEntryId);
+		}
 	}
 
 	public void unlockFileEntry(long fileEntryId)

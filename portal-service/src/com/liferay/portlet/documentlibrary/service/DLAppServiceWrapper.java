@@ -97,12 +97,6 @@ public class DLAppServiceWrapper implements DLAppService {
 		_dlAppService.deleteFileEntry(fileEntryId);
 	}
 
-	public void deleteFileEntry(long fileEntryId, java.lang.String version)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlAppService.deleteFileEntry(fileEntryId, version);
-	}
-
 	public void deleteFileEntryByTitle(long groupId, long folderId,
 		java.lang.String titleWithExtension)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -444,10 +438,11 @@ public class DLAppServiceWrapper implements DLAppService {
 		return _dlAppService.refreshFolderLock(lockUuid, expirationTime);
 	}
 
-	public void revertFileEntry(long fileEntryId)
+	public void revertFileEntry(long fileEntryId, java.lang.String version,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_dlAppService.revertFileEntry(fileEntryId);
+		_dlAppService.revertFileEntry(fileEntryId, version, serviceContext);
 	}
 
 	public void unlockFileEntry(long fileEntryId)

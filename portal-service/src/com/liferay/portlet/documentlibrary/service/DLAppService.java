@@ -90,10 +90,6 @@ public interface DLAppService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteFileEntry(long fileEntryId, java.lang.String version)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
 	public void deleteFileEntryByTitle(long groupId, long folderId,
 		java.lang.String titleWithExtension)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -355,7 +351,8 @@ public interface DLAppService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void revertFileEntry(long fileEntryId)
+	public void revertFileEntry(long fileEntryId, java.lang.String version,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

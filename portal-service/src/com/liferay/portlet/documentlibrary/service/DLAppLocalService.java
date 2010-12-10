@@ -96,10 +96,6 @@ public interface DLAppLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteFileEntry(long fileEntryId, java.lang.String version)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
 	public void deleteFileRanksByFileEntryId(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

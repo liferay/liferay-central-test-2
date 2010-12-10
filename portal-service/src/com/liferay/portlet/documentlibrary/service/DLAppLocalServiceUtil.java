@@ -122,13 +122,6 @@ public class DLAppLocalServiceUtil {
 		getService().deleteFileEntry(fileEntryId);
 	}
 
-	public static void deleteFileEntry(long fileEntryId,
-		java.lang.String version)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteFileEntry(fileEntryId, version);
-	}
-
 	public static void deleteFileRanksByFileEntryId(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteFileRanksByFileEntryId(fileEntryId);

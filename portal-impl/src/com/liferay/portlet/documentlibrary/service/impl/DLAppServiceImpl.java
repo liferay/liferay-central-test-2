@@ -104,12 +104,6 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		dlRepositoryService.deleteFileEntry(fileEntryId);
 	}
 
-	public void deleteFileEntry(long fileEntryId, String version)
-		throws PortalException, SystemException {
-
-		dlRepositoryService.deleteFileEntry(fileEntryId, version);
-	}
-
 	public void deleteFileEntryByTitle(
 			long groupId, long folderId, String titleWithExtension)
 		throws PortalException, SystemException {
@@ -464,10 +458,12 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		return dlRepositoryService.refreshFolderLock(lockUuid, expirationTime);
 	}
 
-	public void revertFileEntry(long fileEntryId)
+	public void revertFileEntry(
+			long fileEntryId, String version, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		dlRepositoryService.revertFileEntry(fileEntryId);
+		dlRepositoryService.revertFileEntry(
+			fileEntryId, version, serviceContext);
 	}
 
 	public void unlockFileEntry(long fileEntryId) throws SystemException {

@@ -75,9 +75,6 @@ public class EditFileEntryAction extends PortletAction {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
 				updateFileEntry(actionRequest, actionResponse);
 			}
-			else if (cmd.equals(Constants.DELETE)) {
-				deleteFileEntry(actionRequest);
-			}
 			else if (cmd.equals(Constants.LOCK)) {
 				lockFileEntry(actionRequest);
 			}
@@ -176,15 +173,6 @@ public class EditFileEntryAction extends PortletAction {
 		return mapping.findForward(getForward(renderRequest, forward));
 	}
 
-	protected void deleteFileEntry(ActionRequest actionRequest)
-		throws Exception {
-
-		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
-		String version = ParamUtil.getString(actionRequest, "version");
-
-		DLAppServiceUtil.deleteFileEntry(fileEntryId, version);
-	}
-
 	protected void lockFileEntry(ActionRequest actionRequest) throws Exception {
 		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
 
@@ -206,8 +194,12 @@ public class EditFileEntryAction extends PortletAction {
 		throws Exception {
 
 		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
+		String version = ParamUtil.getString(actionRequest, "version");
 
-		DLAppServiceUtil.revertFileEntry(fileEntryId);
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			DLFileEntry.class.getName(), actionRequest);
+
+		DLAppServiceUtil.revertFileEntry(fileEntryId, version, serviceContext);
 	}
 
 	protected void unlockFileEntry(ActionRequest actionRequest)

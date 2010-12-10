@@ -88,12 +88,6 @@ public class DLRepositoryServiceWrapper implements DLRepositoryService {
 		_dlRepositoryService.deleteFileEntry(fileEntryId);
 	}
 
-	public void deleteFileEntry(long fileEntryId, java.lang.String version)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlRepositoryService.deleteFileEntry(fileEntryId, version);
-	}
-
 	public void deleteFileEntryByTitle(long groupId, long folderId,
 		java.lang.String titleWithExtension)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -428,10 +422,12 @@ public class DLRepositoryServiceWrapper implements DLRepositoryService {
 		return _dlRepositoryService.refreshFolderLock(lockUuid, expirationTime);
 	}
 
-	public void revertFileEntry(long fileEntryId)
+	public void revertFileEntry(long fileEntryId, java.lang.String version,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_dlRepositoryService.revertFileEntry(fileEntryId);
+		_dlRepositoryService.revertFileEntry(fileEntryId, version,
+			serviceContext);
 	}
 
 	public void unlockFileEntry(long fileEntryId)
