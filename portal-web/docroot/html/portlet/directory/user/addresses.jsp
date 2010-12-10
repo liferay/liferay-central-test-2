@@ -59,15 +59,15 @@ for (int i = 0; i < organizations.size(); i++) {
 					<em class="mailing-name"><%= mailingName %></em>
 
 					<c:if test="<%= Validator.isNotNull(street1) %>">
-						<%= street1 %><br />
+						<%= HtmlUtil.escape(street1) %><br />
 					</c:if>
 
 					<c:if test="<%= Validator.isNotNull(street2) %>">
-						<%= street2 %><br />
+						<%= HtmlUtil.escape(street2) %><br />
 					</c:if>
 
 					<c:if test="<%= Validator.isNotNull(street3) %>">
-						<%= street3 %><br />
+						<%= HtmlUtil.escape(street3) %><br />
 					</c:if>
 
 					<c:if test="<%= Validator.isNotNull(zipCode) %>">
@@ -75,7 +75,7 @@ for (int i = 0; i < organizations.size(); i++) {
 					</c:if>
 
 					<c:if test="<%= Validator.isNotNull(city) %>">
-						<%= city %>
+						<%= HtmlUtil.escape(city) %>
 					</c:if>
 
 					<c:if test="<%= address.isMailing() %>">(<liferay-ui:message key="mailing" />)</c:if>
@@ -110,15 +110,15 @@ for (int i = 0; i < organizations.size(); i++) {
 				<li class="<%= address.isPrimary() ? "primary" : "" %>">
 					<em class="mailing-name"><%= mailingName %></em>
 					<c:if test="<%= Validator.isNotNull(street1) %>">
-						<%= street1 %><br />
+						<%= HtmlUtil.escape(street1) %><br />
 					</c:if>
 
 					<c:if test="<%= Validator.isNotNull(street2) %>">
-						<%= street2 %><br />
+						<%= HtmlUtil.escape(street2) %><br />
 					</c:if>
 
 					<c:if test="<%= Validator.isNotNull(street3) %>">
-						<%= street3 %><br />
+						<%= HtmlUtil.escape(street3) %><br />
 					</c:if>
 
 					<c:if test="<%= Validator.isNotNull(zipCode) %>">
@@ -126,7 +126,7 @@ for (int i = 0; i < organizations.size(); i++) {
 					</c:if>
 
 					<c:if test="<%= Validator.isNotNull(city) %>">
-						<%= city %>
+						<%= HtmlUtil.escape(city) %>
 					</c:if>
 
 					<c:if test="<%= address.isMailing() %>">(<liferay-ui:message key="mailing" />)</c:if>
