@@ -76,7 +76,7 @@ public class SA_RemoveViewDocumentPermissionsTest extends BaseTestCase {
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.uncheck("15_ACTION_VIEW");
+		selenium.uncheck("16_ACTION_VIEW");
 		selenium.uncheck("//tr[7]/td[8]/input");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -84,7 +84,7 @@ public class SA_RemoveViewDocumentPermissionsTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
-		assertFalse(selenium.isChecked("15_ACTION_VIEW"));
+		assertFalse(selenium.isChecked("16_ACTION_VIEW"));
 		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isChecked("//tr[7]/td[8]/input"));
 		selenium.saveScreenShotAndSource();

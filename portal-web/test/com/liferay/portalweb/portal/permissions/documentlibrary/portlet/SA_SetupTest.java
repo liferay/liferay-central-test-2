@@ -81,11 +81,11 @@ public class SA_SetupTest extends BaseTestCase {
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.check("15_ACTION_VIEW");
+		selenium.check("16_ACTION_VIEW");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isChecked("15_ACTION_VIEW"));
+		assertTrue(selenium.isChecked("16_ACTION_VIEW"));
 		selenium.saveScreenShotAndSource();
 	}
 }

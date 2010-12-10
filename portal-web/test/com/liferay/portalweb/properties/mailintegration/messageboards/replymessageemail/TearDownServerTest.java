@@ -112,7 +112,7 @@ public class TearDownServerTest extends BaseTestCase {
 				selenium.clickAt("//td[4]/a", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.type("_135_virtualHost",
+				selenium.type("_135_virtualHostname",
 					RuntimeVariables.replace("localhost"));
 				selenium.saveScreenShotAndSource();
 				selenium.type("_135_mx", RuntimeVariables.replace("liferay.com"));
