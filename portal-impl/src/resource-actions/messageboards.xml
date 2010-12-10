@@ -120,24 +120,44 @@
 		</permissions>
 		<social-equity>
 			<social-equity-mapping>
-				<action-key>ADD_MESSAGE</action-key>
-				<participation-value>20</participation-value>
+				<action-key>ADD_ATTACHMENT</action-key>
+				<information-value>2</information-value>
+				<information-lifespan>30</information-lifespan>
+				<participation-value>2</participation-value>
 				<participation-lifespan>30</participation-lifespan>
+			</social-equity-mapping>		
+			<social-equity-mapping>
+				<action-key>ADD_MESSAGE</action-key>
+				<participation-value>5</participation-value>
+				<participation-lifespan>30</participation-lifespan>
+				<social-activity-mapping class="com.liferay.portlet.messageboards.social.MBActivityKeys">
+					ADD_MESSAGE
+				</social-activity-mapping>
 			</social-equity-mapping>
 			<social-equity-mapping>
 				<action-key>ADD_VOTE</action-key>
-				<information-value>10</information-value>
-				<information-lifespan>365</information-lifespan>
+				<information-value>5</information-value>
+				<information-lifespan>30</information-lifespan>
 			</social-equity-mapping>
 			<social-equity-mapping>
 				<action-key>REPLY_TO_MESSAGE</action-key>
-				<participation-value>10</participation-value>
+				<participation-value>2</participation-value>
 				<participation-lifespan>30</participation-lifespan>
+				<social-activity-mapping class="com.liferay.portlet.messageboards.social.MBActivityKeys">
+					REPLY_MESSAGE
+				</social-activity-mapping>
 			</social-equity-mapping>
+			<social-equity-mapping>
+				<action-key>SUBSCRIBE</action-key>
+				<information-value>2</information-value>
+				<information-lifespan>36500</information-lifespan>
+				<participation-value>2</participation-value>
+				<participation-lifespan>36500</participation-lifespan>
+			</social-equity-mapping>			
 			<social-equity-mapping>
 				<action-key>VIEW</action-key>
 				<participation-value>1</participation-value>
-				<participation-lifespan>30</participation-lifespan>
+				<participation-lifespan>5</participation-lifespan>
 			</social-equity-mapping>
 		</social-equity>		
 	</model-resource>

@@ -352,7 +352,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		}
 
 		subscriptionLocalService.addSubscription(
-			userId, MBCategory.class.getName(), categoryId);
+			userId, groupId, MBCategory.class.getName(), categoryId);
 	}
 
 	public void unsubscribeCategory(long userId, long groupId, long categoryId)
