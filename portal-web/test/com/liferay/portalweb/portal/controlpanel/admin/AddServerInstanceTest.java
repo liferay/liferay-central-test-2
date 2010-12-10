@@ -72,7 +72,7 @@ public class AddServerInstanceTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("_135_webId", RuntimeVariables.replace("test.com"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_135_virtualHost", RuntimeVariables.replace("guest"));
+		selenium.type("_135_virtualHostname", RuntimeVariables.replace("guest"));
 		selenium.saveScreenShotAndSource();
 		selenium.type("_135_mx", RuntimeVariables.replace("test.com"));
 		selenium.saveScreenShotAndSource();

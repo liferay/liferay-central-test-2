@@ -24,7 +24,8 @@ public class AssertPublicPageHostURLTest extends BaseTestCase {
 	public void testAssertPublicPageHostURL() throws Exception {
 		selenium.open("http://www.able.com:8080/");
 		Thread.sleep(5000);
-		assertEquals("http://www.able.com:8080/", selenium.getLocation());
+		assertEquals(RuntimeVariables.replace("http://www.able.com:8080/"),
+			selenium.getLocation());
 		assertEquals(RuntimeVariables.replace("Virtual Hosting Community"),
 			selenium.getText("//li[2]/span/a"));
 		assertTrue(selenium.isElementPresent("link=Public Page"));
@@ -34,7 +35,7 @@ public class AssertPublicPageHostURLTest extends BaseTestCase {
 		selenium.clickAt("link=Public Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals("http://www.able.com:8080/public-page",
-			selenium.getLocation());
+		assertEquals(RuntimeVariables.replace(
+				"http://www.able.com:8080/public-page"), selenium.getLocation());
 	}
 }

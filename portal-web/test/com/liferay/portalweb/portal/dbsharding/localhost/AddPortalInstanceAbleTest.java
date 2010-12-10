@@ -70,7 +70,7 @@ public class AddPortalInstanceAbleTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("_135_webId", RuntimeVariables.replace("www.able.com"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_135_virtualHost",
+		selenium.type("_135_virtualHostname",
 			RuntimeVariables.replace("www.able.com"));
 		selenium.saveScreenShotAndSource();
 		selenium.type("_135_mx", RuntimeVariables.replace("able.com"));

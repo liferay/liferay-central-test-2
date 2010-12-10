@@ -70,7 +70,8 @@ public class AddDuplicateServerInstanceWebIDTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("_135_webId", RuntimeVariables.replace("liferay.com"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_135_virtualHost", RuntimeVariables.replace("localhost1"));
+		selenium.type("_135_virtualHostname",
+			RuntimeVariables.replace("localhost1"));
 		selenium.saveScreenShotAndSource();
 		selenium.type("_135_mx", RuntimeVariables.replace("liferay1.com"));
 		selenium.saveScreenShotAndSource();

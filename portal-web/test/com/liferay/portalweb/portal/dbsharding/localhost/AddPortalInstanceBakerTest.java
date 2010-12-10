@@ -70,7 +70,7 @@ public class AddPortalInstanceBakerTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("_135_webId", RuntimeVariables.replace("www.baker.com"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_135_virtualHost",
+		selenium.type("_135_virtualHostname",
 			RuntimeVariables.replace("www.baker.com"));
 		selenium.saveScreenShotAndSource();
 		selenium.type("_135_mx", RuntimeVariables.replace("baker.com"));
