@@ -144,9 +144,15 @@ public interface User extends UserModel {
 
 	public double getSocialContributionEquity();
 
+	public double getSocialContributionEquity(long groupId);
+
 	public double getSocialParticipationEquity();
 
+	public double getSocialParticipationEquity(long groupId);
+
 	public double getSocialPersonalEquity();
+
+	public double getSocialPersonalEquity(long groupId);
 
 	public long[] getTeamIds()
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -206,7 +212,7 @@ public interface User extends UserModel {
 
 	public void setTimeZoneId(java.lang.String timeZoneId);
 
-	public void updateSocialContributionEquity(double value);
+	public void updateSocialContributionEquity(long groupId, double value);
 
-	public void updateSocialParticipationEquity(double value);
+	public void updateSocialParticipationEquity(long groupId, double value);
 }

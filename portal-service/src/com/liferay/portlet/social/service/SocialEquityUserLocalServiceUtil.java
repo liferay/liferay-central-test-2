@@ -235,9 +235,21 @@ public class SocialEquityUserLocalServiceUtil {
 		return getService().getContributionEquity(userId);
 	}
 
+	public static com.liferay.portlet.social.model.SocialEquityValue getContributionEquity(
+		long userId, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getContributionEquity(userId, groupId);
+	}
+
 	public static com.liferay.portlet.social.model.SocialEquityValue getParticipationEquity(
 		long userId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getParticipationEquity(userId);
+	}
+
+	public static com.liferay.portlet.social.model.SocialEquityValue getParticipationEquity(
+		long userId, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getParticipationEquity(userId, groupId);
 	}
 
 	public static int getRank(long groupId, long userId)

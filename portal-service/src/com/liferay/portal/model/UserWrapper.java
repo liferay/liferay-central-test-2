@@ -1033,12 +1033,24 @@ public class UserWrapper implements User {
 		return _user.getSocialContributionEquity();
 	}
 
+	public double getSocialContributionEquity(long groupId) {
+		return _user.getSocialContributionEquity(groupId);
+	}
+
 	public double getSocialParticipationEquity() {
 		return _user.getSocialParticipationEquity();
 	}
 
+	public double getSocialParticipationEquity(long groupId) {
+		return _user.getSocialParticipationEquity(groupId);
+	}
+
 	public double getSocialPersonalEquity() {
 		return _user.getSocialPersonalEquity();
+	}
+
+	public double getSocialPersonalEquity(long groupId) {
+		return _user.getSocialPersonalEquity(groupId);
 	}
 
 	public long[] getTeamIds()
@@ -1129,12 +1141,12 @@ public class UserWrapper implements User {
 		_user.setPasswordUnencrypted(passwordUnencrypted);
 	}
 
-	public void updateSocialContributionEquity(double value) {
-		_user.updateSocialContributionEquity(value);
+	public void updateSocialContributionEquity(long groupId, double value) {
+		_user.updateSocialContributionEquity(groupId, value);
 	}
 
-	public void updateSocialParticipationEquity(double value) {
-		_user.updateSocialParticipationEquity(value);
+	public void updateSocialParticipationEquity(long groupId, double value) {
+		_user.updateSocialParticipationEquity(groupId, value);
 	}
 
 	public User getWrappedUser() {
