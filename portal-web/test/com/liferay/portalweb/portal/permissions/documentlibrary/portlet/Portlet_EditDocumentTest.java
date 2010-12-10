@@ -51,7 +51,8 @@ public class Portlet_EditDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent("link=Edit"));
-		assertEquals(RuntimeVariables.replace("Portlet1 Temporary1 Document1"),
+		assertEquals(RuntimeVariables.replace(
+				"Portlet1 Temporary1 Document1.txt"),
 			selenium.getText("//td[1]/a"));
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
 
@@ -81,7 +82,8 @@ public class Portlet_EditDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.type("_20_title",
-			RuntimeVariables.replace("Edited1 Portlet1 Temporary1 Document1"));
+			RuntimeVariables.replace(
+				"Edited1 Portlet1 Temporary1 Document1.txt"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
@@ -112,9 +114,10 @@ public class Portlet_EditDocumentTest extends BaseTestCase {
 				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertNotEquals(RuntimeVariables.replace(
-				"Portlet1 Temporary1 Document1"), selenium.getText("//td[1]/a"));
+				"Portlet1 Temporary1 Document1.txt"),
+			selenium.getText("//td[1]/a"));
 		assertEquals(RuntimeVariables.replace(
-				"Edited1 Portlet1 Temporary1 Document1"),
+				"Edited1 Portlet1 Temporary1 Document1.txt"),
 			selenium.getText("//td[1]/a"));
 	}
 }

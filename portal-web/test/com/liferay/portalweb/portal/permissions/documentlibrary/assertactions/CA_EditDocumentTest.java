@@ -80,7 +80,8 @@ public class CA_EditDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.type("_20_title",
-			RuntimeVariables.replace("Admin Permissions Edited Test Document"));
+			RuntimeVariables.replace(
+				"Admin Permissions Edited Test Document.txt"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
@@ -90,6 +91,6 @@ public class CA_EditDocumentTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request completed successfully."));
 		assertTrue(selenium.isElementPresent(
-				"link=Admin Permissions Edited Test Document"));
+				"link=Admin Permissions Edited Test Document.txt"));
 	}
 }

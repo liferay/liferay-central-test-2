@@ -114,6 +114,6 @@ public class CA_AddDocumentTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request completed successfully."));
 		assertTrue(selenium.isElementPresent(
-				"link=Admin Permissions Test Document"));
+				"link=Admin Permissions Test Document.txt"));
 	}
 }

@@ -50,7 +50,7 @@ public class Portlet_AddCommentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Portlet1 Temporary1 Document1",
+		selenium.clickAt("link=Portlet1 Temporary1 Document1.txt",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -90,6 +90,6 @@ public class Portlet_AddCommentTest extends BaseTestCase {
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a portlet permissions test comment."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div[3]/div/div[1]"));
 	}
 }

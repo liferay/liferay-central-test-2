@@ -108,7 +108,7 @@ public class Portlet_AddMyCommunityDocumentTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
-		assertEquals(RuntimeVariables.replace("My1 Community1 Document1"),
+		assertEquals(RuntimeVariables.replace("My1 Community1 Document1.txt"),
 			selenium.getText("//a/span/span"));
 	}
 }

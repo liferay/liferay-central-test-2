@@ -108,6 +108,6 @@ public class Member_AddDocumentTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request completed successfully."));
 		assertTrue(selenium.isElementPresent(
-				"link=Member Permissions Test Document"));
+				"link=Member Permissions Test Document.txt"));
 	}
 }

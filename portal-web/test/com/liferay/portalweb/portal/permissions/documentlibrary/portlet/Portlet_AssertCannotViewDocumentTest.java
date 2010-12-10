@@ -52,19 +52,19 @@ public class Portlet_AssertCannotViewDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent(
-				"link=Portlet1 Temporary1 Document1"));
-		assertFalse(selenium.isTextPresent("Portlet1 Temporary1 Document1"));
+				"link=Portlet1 Temporary1 Document1.txt"));
+		assertFalse(selenium.isTextPresent("Portlet1 Temporary1 Document1.txt"));
 		selenium.click(RuntimeVariables.replace("link=My Documents"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent(
-				"link=Portlet1 Temporary1 Document1"));
-		assertFalse(selenium.isTextPresent("Portlet1 Temporary1 Document1"));
+				"link=Portlet1 Temporary1 Document1.txt"));
+		assertFalse(selenium.isTextPresent("Portlet1 Temporary1 Document1.txt"));
 		selenium.click(RuntimeVariables.replace("link=Recent Documents"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent(
-				"link=Portlet1 Temporary1 Document1"));
-		assertFalse(selenium.isTextPresent("Portlet1 Temporary1 Document1"));
+				"link=Portlet1 Temporary1 Document1.txt"));
+		assertFalse(selenium.isTextPresent("Portlet1 Temporary1 Document1.txt"));
 	}
 }

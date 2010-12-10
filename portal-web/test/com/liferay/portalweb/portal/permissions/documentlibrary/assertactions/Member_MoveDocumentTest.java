@@ -78,18 +78,7 @@ public class Member_MoveDocumentTest extends BaseTestCase {
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=folder");
 		selenium.saveScreenShotAndSource();
-
-		String moveFolderURL = selenium.getLocation();
-		RuntimeVariables.setValue("moveFolderURL", moveFolderURL);
-		selenium.close();
-		selenium.selectWindow("null");
-		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
-		selenium.openWindow(RuntimeVariables.getValue("moveFolderURL"),
-			RuntimeVariables.replace("moveFolder"));
-		selenium.waitForPopUp("moveFolder", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("name=moveFolder");
-		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -154,6 +143,6 @@ public class Member_MoveDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
-				"link=Member Permissions Edited Test Document"));
+				"link=Member Permissions Edited Test Document.txt"));
 	}
 }

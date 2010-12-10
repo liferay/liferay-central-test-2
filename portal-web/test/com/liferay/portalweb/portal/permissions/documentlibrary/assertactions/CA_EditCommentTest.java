@@ -54,30 +54,13 @@ public class CA_EditCommentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Admin Permissions Edited Test Document",
+		selenium.clickAt("link=Admin Permissions Edited Test Document.txt",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//td[2]/table[1]/tbody/tr/td[4]/span/a/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//td[2]/table[1]/tbody/tr/td[4]/span/a/span",
+		assertEquals(RuntimeVariables.replace("Edit"),
+			selenium.getText("//div[4]/div/span/a/span"));
+		selenium.clickAt("//div[4]/div/span/a/span",
 			RuntimeVariables.replace("Edit"));
 
 		for (int second = 0;; second++) {

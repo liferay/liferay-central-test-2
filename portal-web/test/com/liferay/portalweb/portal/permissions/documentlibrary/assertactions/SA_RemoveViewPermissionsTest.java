@@ -136,7 +136,7 @@ public class SA_RemoveViewPermissionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Member Permissions Edited Test Document"),
+				"Member Permissions Edited Test Document.txt"),
 			selenium.getText("//h1[@class='header-title']/span"));
 		selenium.uncheck("15_ACTION_VIEW");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

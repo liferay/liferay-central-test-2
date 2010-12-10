@@ -241,7 +241,7 @@ public class SA_EditPermissionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Admin Permissions Edited Test Document"),
+				"Admin Permissions Edited Test Document.txt"),
 			selenium.getText("//h1[@class='header-title']/span"));
 		selenium.check("15_ACTION_VIEW");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
@@ -434,7 +434,7 @@ public class SA_EditPermissionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Member Permissions Edited Test Document"),
+				"Member Permissions Edited Test Document.txt"),
 			selenium.getText("//h1[@class='header-title']/span"));
 		selenium.check("15_ACTION_VIEW");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

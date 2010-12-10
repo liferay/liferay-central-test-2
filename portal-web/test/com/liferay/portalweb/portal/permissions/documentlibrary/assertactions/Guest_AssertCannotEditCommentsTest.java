@@ -52,7 +52,7 @@ public class Guest_AssertCannotEditCommentsTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Admin Permissions Edited Test Document",
+		selenium.clickAt("link=Admin Permissions Edited Test Document.txt",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -88,7 +88,7 @@ public class Guest_AssertCannotEditCommentsTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Member Permissions Edited Test Document",
+		selenium.clickAt("link=Member Permissions Edited Test Document.txt",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

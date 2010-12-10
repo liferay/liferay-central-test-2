@@ -61,7 +61,7 @@ public class Guest_AssertViewFoldersTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
-				"link=Member Permissions Edited Test Document"));
+				"link=Member Permissions Edited Test Document.txt"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -95,6 +95,6 @@ public class Guest_AssertViewFoldersTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
-				"link=Admin Permissions Edited Test Document"));
+				"link=Admin Permissions Edited Test Document.txt"));
 	}
 }

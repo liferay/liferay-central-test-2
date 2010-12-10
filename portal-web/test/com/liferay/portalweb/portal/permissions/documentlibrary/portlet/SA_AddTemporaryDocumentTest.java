@@ -134,6 +134,6 @@ public class SA_AddTemporaryDocumentTest extends BaseTestCase {
 				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertTrue(selenium.isElementPresent(
-				"link=Portlet1 Temporary1 Document1"));
+				"link=Portlet1 Temporary1 Document1.txt"));
 	}
 }

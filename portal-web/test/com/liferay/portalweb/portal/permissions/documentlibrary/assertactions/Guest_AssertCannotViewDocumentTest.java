@@ -54,10 +54,10 @@ public class Guest_AssertCannotViewDocumentTest extends BaseTestCase {
 				"link=Permissions2 Test2 Subfolder2"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertFalse(selenium.isElementPresent(
-				"link=Member Permissions Edited Test Document"));
 		assertFalse(selenium.isTextPresent(
-				"Member Permissions Edited Test Document"));
+				"Member Permissions Edited Test Document.txt"));
+		assertFalse(selenium.isElementPresent(
+				"link=Member Permissions Edited Test Document.txt"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -88,12 +88,12 @@ public class Guest_AssertCannotViewDocumentTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("There are no documents."),
 			selenium.getText("//div[2]/div/div[2]"));
 		assertFalse(selenium.isElementPresent(
-				"link=Member Permissions Edited Test Document"));
+				"link=Member Permissions Edited Test Document.txt"));
 		assertFalse(selenium.isTextPresent(
-				"Member Permissions Edited Test Document"));
+				"Member Permissions Edited Test Document.txt"));
 		assertFalse(selenium.isElementPresent(
-				"link=Admin Permissions Edited Test Document"));
+				"link=Admin Permissions Edited Test Document.txt"));
 		assertFalse(selenium.isTextPresent(
-				"Admin Permissions Edited Test Document"));
+				"Admin Permissions Edited Test Document.txt"));
 	}
 }

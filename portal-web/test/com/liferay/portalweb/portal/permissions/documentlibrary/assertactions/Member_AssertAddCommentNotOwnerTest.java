@@ -49,7 +49,8 @@ public class Member_AssertAddCommentNotOwnerTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//a/span/span",
-			RuntimeVariables.replace("Admin Permissions Edited Test Document"));
+			RuntimeVariables.replace(
+				"Admin Permissions Edited Test Document.txt"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Post Reply", RuntimeVariables.replace(""));

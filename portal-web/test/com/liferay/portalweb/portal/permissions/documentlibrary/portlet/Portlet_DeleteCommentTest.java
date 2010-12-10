@@ -50,13 +50,14 @@ public class Portlet_DeleteCommentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Portlet1 Temporary1 Document1",
+		selenium.clickAt("link=Portlet1 Temporary1 Document1.txt",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Comments"),
 			selenium.getText("//div[4]/div/div[2]/div[1]/div/span"));
-		assertTrue(selenium.isPartialText("//td[2]/div[1]",
+		assertTrue(selenium.isPartialText(
+				"//div/div/div/div/div[3]/div/div[1]",
 				"This is a portlet permissions test comment."));
 		assertTrue(selenium.isElementPresent("link=Delete"));
 		selenium.click(RuntimeVariables.replace("link=Delete"));

@@ -50,7 +50,7 @@ public class Portlet_AssertCannotAddCommentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Portlet1 Temporary1 Document1",
+		selenium.clickAt("link=Portlet1 Temporary1 Document1.txt",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

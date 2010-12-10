@@ -159,7 +159,7 @@ public class CA_AssertEditPermissionsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Admin Permissions Edited Test Document"),
+				"Admin Permissions Edited Test Document.txt"),
 			selenium.getText("//h1[@class='header-title']/span"));
 		assertTrue(selenium.isElementPresent("//input[@value='Save']"));
 	}

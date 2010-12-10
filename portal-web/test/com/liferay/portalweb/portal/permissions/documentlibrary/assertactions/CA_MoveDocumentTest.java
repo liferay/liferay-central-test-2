@@ -84,18 +84,7 @@ public class CA_MoveDocumentTest extends BaseTestCase {
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=folder");
 		selenium.saveScreenShotAndSource();
-
-		String moveFolderURL = selenium.getLocation();
-		RuntimeVariables.setValue("moveFolderURL", moveFolderURL);
-		selenium.close();
-		selenium.selectWindow("null");
-		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
-		selenium.openWindow(RuntimeVariables.getValue("moveFolderURL"),
-			RuntimeVariables.replace("moveFolder"));
-		selenium.waitForPopUp("moveFolder", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("name=moveFolder");
-		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -160,7 +149,7 @@ public class CA_MoveDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
-				"link=Admin Permissions Edited Test Document"));
+				"link=Admin Permissions Edited Test Document.txt"));
 		selenium.clickAt("//td[5]/span/ul/li/strong/a",
 			RuntimeVariables.replace(""));
 
@@ -191,18 +180,7 @@ public class CA_MoveDocumentTest extends BaseTestCase {
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=folder");
 		selenium.saveScreenShotAndSource();
-
-		String moveFolder2URL = selenium.getLocation();
-		RuntimeVariables.setValue("moveFolder2URL", moveFolder2URL);
-		selenium.close();
-		selenium.selectWindow("null");
-		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
-		selenium.openWindow(RuntimeVariables.getValue("moveFolder2URL"),
-			RuntimeVariables.replace("moveFolder"));
-		selenium.waitForPopUp("moveFolder", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("name=moveFolder");
-		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -267,6 +245,6 @@ public class CA_MoveDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
-				"link=Admin Permissions Edited Test Document"));
+				"link=Admin Permissions Edited Test Document.txt"));
 	}
 }

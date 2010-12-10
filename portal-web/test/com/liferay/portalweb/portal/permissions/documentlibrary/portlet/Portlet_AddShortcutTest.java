@@ -140,7 +140,7 @@ public class Portlet_AddShortcutTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 
 				boolean DocumentPresent1 = selenium.isElementPresent(
-						"link=My1 Community1 Document1");
+						"link=My1 Community1 Document1.txt");
 				Thread.sleep(5000);
 
 				if (DocumentPresent1) {
@@ -156,7 +156,7 @@ public class Portlet_AddShortcutTest extends BaseTestCase {
 			case 5:
 
 				boolean DocumentPresent2 = selenium.isElementPresent(
-						"link=My1 Community1 Document1");
+						"link=My1 Community1 Document1.txt");
 
 				if (!DocumentPresent2) {
 					label = 6;
@@ -164,7 +164,7 @@ public class Portlet_AddShortcutTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click("link=My1 Community1 Document1");
+				selenium.click("link=My1 Community1 Document1.txt");
 				selenium.selectWindow("null");
 				selenium.saveScreenShotAndSource();
 
@@ -172,7 +172,7 @@ public class Portlet_AddShortcutTest extends BaseTestCase {
 			case 7:
 				Thread.sleep(5000);
 				assertEquals(RuntimeVariables.replace(
-						"My1 Community1 Document1"),
+						"My1 Community1 Document1.txt"),
 					selenium.getText("_20_toFileEntryTitle"));
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
@@ -181,7 +181,7 @@ public class Portlet_AddShortcutTest extends BaseTestCase {
 				assertTrue(selenium.isTextPresent(
 						"Your request completed successfully."));
 				assertTrue(selenium.isElementPresent(
-						"link=My1 Community1 Document1"));
+						"link=My1 Community1 Document1.txt"));
 
 			case 100:
 				label = -1;

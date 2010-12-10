@@ -51,18 +51,20 @@ public class Portlet_AssertViewDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
-				"link=Portlet1 Temporary1 Document1"));
-		selenium.clickAt("link=Portlet1 Temporary1 Document1",
+				"link=Portlet1 Temporary1 Document1.txt"));
+		selenium.clickAt("link=Portlet1 Temporary1 Document1.txt",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Portlet1 Temporary1 Document1"),
+		assertEquals(RuntimeVariables.replace(
+				"Portlet1 Temporary1 Document1.txt"),
 			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("Version: 1.0"),
 			selenium.getText("//span[@class='workflow-version']"));
 		assertEquals(RuntimeVariables.replace("Status: Approved"),
 			selenium.getText("//span[@class='workflow-status']"));
-		assertEquals(RuntimeVariables.replace("Portlet1 Temporary1 Document1"),
+		assertEquals(RuntimeVariables.replace(
+				"Portlet1 Temporary1 Document1.txt"),
 			selenium.getText("//div[@class='lfr-asset-name']/a"));
 		selenium.open("/web/guest/home/");
 
@@ -92,8 +94,8 @@ public class Portlet_AssertViewDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isElementPresent(
-				"link=Portlet1 Temporary1 Document1"));
-		assertFalse(selenium.isTextPresent("Portlet1 Temporary1 Document1"));
+				"link=Portlet1 Temporary1 Document1.txt"));
+		assertFalse(selenium.isTextPresent("Portlet1 Temporary1 Document1.txt"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -121,7 +123,8 @@ public class Portlet_AssertViewDocumentTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("link=Recent Documents"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Portlet1 Temporary1 Document1"),
+		assertEquals(RuntimeVariables.replace(
+				"Portlet1 Temporary1 Document1.txt"),
 			selenium.getText("//td[1]/a/span/span"));
 		assertEquals(RuntimeVariables.replace("0.1k"),
 			selenium.getText("//td[2]/a"));

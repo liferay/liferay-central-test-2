@@ -49,7 +49,8 @@ public class Member_AssertDeleteCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//a/span/span",
-			RuntimeVariables.replace("Member Permissions Edited Test Document"));
+			RuntimeVariables.replace(
+				"Member Permissions Edited Test Document.txt"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 

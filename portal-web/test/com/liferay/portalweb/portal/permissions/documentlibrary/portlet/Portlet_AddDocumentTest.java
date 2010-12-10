@@ -95,7 +95,7 @@ public class Portlet_AddDocumentTest extends BaseTestCase {
 				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace(
-				"Portlet1 Portlet1 Permissions1 Document1"),
+				"Portlet1 Portlet1 Permissions1 Document1.txt"),
 			selenium.getText("//a/span/span"));
 	}
 }

@@ -80,7 +80,8 @@ public class Portlet_AssertEditDocumentPermissionsTest extends BaseTestCase {
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Portlet1 Temporary1 Document1"),
+		assertEquals(RuntimeVariables.replace(
+				"Portlet1 Temporary1 Document1.txt"),
 			selenium.getText("//h1[@class='header-title']/span"));
 		assertTrue(selenium.isElementPresent("//input[@value='Save']"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
