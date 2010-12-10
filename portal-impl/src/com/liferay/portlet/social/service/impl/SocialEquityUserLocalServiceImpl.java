@@ -97,7 +97,7 @@ public class SocialEquityUserLocalServiceImpl
 		throws SystemException {
 
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
-			SocialEquityUser.class);
+			SocialEquityUser.class, PortalClassLoaderUtil.getClassLoader());
 
 		dynamicQuery.setProjection(projectionList);
 
