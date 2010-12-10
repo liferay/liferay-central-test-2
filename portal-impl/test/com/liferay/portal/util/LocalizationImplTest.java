@@ -110,6 +110,46 @@ public class LocalizationImplTest extends BaseTestCase {
 				preferences, "greeting", _germanId));
 	}
 
+
+	public void testLongTranslationText() {
+		StringBuilder xml = new StringBuilder();
+		xml.append("<?xml version='1.0' encoding='UTF-8'?>" +
+					"<root available-locales=\"en_US,es_ES\" " +
+							"default-locale=\"en_US\">" +
+					"<static-content language-id=\"es_ES\">" +
+					"<![CDATA[");
+
+		int loops = 2000000;
+
+		for (int i = 0; i < loops; i++) {
+			xml.append("1234567890");
+		}
+
+		xml.append("]]>");
+
+		xml.append("</static-content>" +
+					"<static-content language-id=\"en_US\">" +
+					"<![CDATA[Example in English]]>" +
+					"</static-content>" +
+					"</root>");
+
+		int totalSize = loops * 10;
+
+		assertTrue(xml.length() > totalSize);
+
+		String translation =
+				LocalizationUtil.getLocalization(xml.toString(), "es_ES");
+
+		assertNotNull(translation);
+		assertEquals(totalSize, translation.length());
+
+		translation = LocalizationUtil.getLocalization(xml.toString(), "en_US");
+
+		assertNotNull(translation);
+		assertEquals(18, translation.length());
+	}
+
+
 	private Locale _english;
 	private String _englishHello = "Hello World";
 	private String _englishId;
