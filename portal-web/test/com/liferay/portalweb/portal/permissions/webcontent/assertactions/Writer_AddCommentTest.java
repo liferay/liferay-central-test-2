@@ -70,11 +70,11 @@ public class Writer_AddCommentTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.keyPress("//textarea", RuntimeVariables.replace("\\48"));
 		selenium.keyPress("//textarea", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("//tr[3]/td/input[1]", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request completed successfully."));
+				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("This is a writer test comment!"));
 	}
 }

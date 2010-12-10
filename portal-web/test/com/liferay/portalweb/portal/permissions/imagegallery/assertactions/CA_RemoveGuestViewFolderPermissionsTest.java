@@ -74,13 +74,13 @@ public class CA_RemoveGuestViewFolderPermissionsTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Image Permissions Test Folder"),
 			selenium.getText("//h1[@class='header-title']/span"));
-		selenium.uncheck("15_ACTION_VIEW");
+		selenium.uncheck("16_ACTION_VIEW");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request completed successfully."));
-		assertFalse(selenium.isChecked("15_ACTION_VIEW"));
+				"Your request processed successfully."));
+		assertFalse(selenium.isChecked("16_ACTION_VIEW"));
 		selenium.saveScreenShotAndSource();
 	}
 }

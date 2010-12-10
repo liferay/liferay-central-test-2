@@ -82,7 +82,7 @@ public class CA_RestoreGuestViewImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("15_ACTION_VIEW")) {
+				if (selenium.isElementPresent("16_ACTION_VIEW")) {
 					break;
 				}
 			}
@@ -93,15 +93,15 @@ public class CA_RestoreGuestViewImageTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.check("15_ACTION_VIEW");
+		selenium.check("16_ACTION_VIEW");
 		assertEquals(RuntimeVariables.replace("Edited Permissions Image"),
 			selenium.getText("//h1[@class='header-title']/span"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request completed successfully."));
-		assertTrue(selenium.isChecked("15_ACTION_VIEW"));
+				"Your request processed successfully."));
+		assertTrue(selenium.isChecked("16_ACTION_VIEW"));
 		selenium.saveScreenShotAndSource();
 	}
 }

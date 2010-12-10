@@ -46,7 +46,7 @@ public class CA_DeleteFolderTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//tr[4]/td[4]/ul/li/strong/a",
+		selenium.clickAt("//tr[4]/td[4]/span/ul/li/strong/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -74,7 +74,7 @@ public class CA_DeleteFolderTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request completed successfully."));
+				"Your request processed successfully."));
 		assertFalse(selenium.isTextPresent("Image Permissions Folder 2"));
 	}
 }

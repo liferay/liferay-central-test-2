@@ -54,7 +54,7 @@ public class Member_AddCommentReplyTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//table[2]/tbody/tr/td/div/textarea")) {
+				if (selenium.isVisible("//div[1]/span/span/span/textarea")) {
 					break;
 				}
 			}
@@ -65,19 +65,19 @@ public class Member_AddCommentReplyTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.type("//table[2]/tbody/tr/td/div/textarea",
+		selenium.type("//div[1]/span/span/span/textarea",
 			RuntimeVariables.replace("This is a member test comment reply."));
 		selenium.saveScreenShotAndSource();
-		selenium.keyPress("//table[2]/tbody/tr/td/div/textarea",
+		selenium.keyPress("//div[1]/span/span/span/textarea",
 			RuntimeVariables.replace("\\48"));
-		selenium.keyPress("//table[2]/tbody/tr/td/div/textarea",
+		selenium.keyPress("//div[1]/span/span/span/textarea",
 			RuntimeVariables.replace("\\8"));
-		selenium.clickAt("//td[2]/table[2]/tbody/tr/td/input[1]",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[1]/div/span[1]/span/input",
+			RuntimeVariables.replace("Reply"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request completed successfully."));
+				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent(
 				"This is a member test comment reply."));
 	}

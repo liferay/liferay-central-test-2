@@ -54,7 +54,8 @@ public class CA_EditCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//tr[2]/td/div/textarea")) {
+				if (selenium.isVisible(
+							"//div[4]/div/div[2]/span/span/span/textarea")) {
 					break;
 				}
 			}
@@ -65,19 +66,20 @@ public class CA_EditCommentTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.type("//tr[2]/td/div/textarea",
+		selenium.type("//div[4]/div/div[2]/span/span/span/textarea",
 			RuntimeVariables.replace(
 				"This is a ca test WCD comment! That is now edited."));
 		selenium.saveScreenShotAndSource();
-		selenium.keyPress("//tr[2]/td/div/textarea",
+		selenium.keyPress("//div[4]/div/div[2]/span/span/span/textarea",
 			RuntimeVariables.replace("\\48"));
-		selenium.keyPress("//tr[2]/td/div/textarea",
+		selenium.keyPress("//div[4]/div/div[2]/span/span/span/textarea",
 			RuntimeVariables.replace("\\8"));
-		selenium.clickAt("//tr[2]/td/input[1]", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request completed successfully."));
+				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("This is a ca test WCD comment!"));
 		assertTrue(selenium.isTextPresent("That is now edited."));
 	}

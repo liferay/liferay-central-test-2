@@ -100,18 +100,7 @@ public class CA_MoveImageTest extends BaseTestCase {
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=folder");
 		selenium.saveScreenShotAndSource();
-
-		String folderWindow = selenium.getLocation();
-		RuntimeVariables.setValue("folderWindow", folderWindow);
-		selenium.close();
-		selenium.selectWindow("null");
-		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
-		selenium.openWindow(RuntimeVariables.getValue("folderWindow"),
-			RuntimeVariables.replace("FolderWindow"));
-		selenium.waitForPopUp("FolderWindow", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("name=FolderWindow");
-		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -168,7 +157,7 @@ public class CA_MoveImageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request completed successfully."));
+				"Your request processed successfully."));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

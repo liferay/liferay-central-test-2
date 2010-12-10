@@ -78,7 +78,7 @@ public class SA_RemoveViewFolderPermissionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("15_ACTION_VIEW")) {
+				if (selenium.isVisible("16_ACTION_VIEW")) {
 					break;
 				}
 			}
@@ -89,15 +89,15 @@ public class SA_RemoveViewFolderPermissionsTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.uncheck("15_ACTION_VIEW");
+		selenium.uncheck("16_ACTION_VIEW");
 		selenium.uncheck("//tr[7]/td[8]/input");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request completed successfully."),
+				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
-		assertFalse(selenium.isChecked("15_ACTION_VIEW"));
+		assertFalse(selenium.isChecked("16_ACTION_VIEW"));
 		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isChecked("//tr[7]/td[8]/input"));
 		selenium.saveScreenShotAndSource();

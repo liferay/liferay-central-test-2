@@ -52,7 +52,8 @@ public class CA_AssertActionTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("//img[@alt='Remove']"));
 		assertEquals(RuntimeVariables.replace("Add Folder"),
 			selenium.getText("//div[2]/ul/li[1]/a"));
-		selenium.clickAt("//td[4]/ul/li/strong", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[4]/span/ul/li/strong/a",
+			RuntimeVariables.replace(""));
 		assertEquals(RuntimeVariables.replace("Edit"),
 			selenium.getText(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));

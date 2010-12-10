@@ -89,8 +89,7 @@ public class CA_EnableWCDCommentsTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		selenium.check("_86_enableCommentsCheckbox");
-		selenium.clickAt("//div/span[1]/span/input",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 

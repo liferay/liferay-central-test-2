@@ -47,7 +47,7 @@ public class Member_AddCommentRatingTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("0 (0 Votes)"));
-		selenium.clickAt("//table[1]/tbody/tr/td[1]/div/div/div/a[1]",
+		selenium.clickAt("//div[3]/div/div[1]/div/div/div/div/a[1]",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -68,7 +68,7 @@ public class Member_AddCommentRatingTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("+1 (1 Vote)"));
-		selenium.clickAt("//table[1]/tbody/tr/td[1]/div/div/div/a[2]",
+		selenium.clickAt("//div[3]/div/div[1]/div/div/div/div/a[2]",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -89,7 +89,7 @@ public class Member_AddCommentRatingTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("-1 (1 Vote)"));
-		selenium.clickAt("//table[1]/tbody/tr/td[1]/div/div/div/a[2]",
+		selenium.clickAt("//div[3]/div/div[1]/div/div/div/div/a[2]",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {

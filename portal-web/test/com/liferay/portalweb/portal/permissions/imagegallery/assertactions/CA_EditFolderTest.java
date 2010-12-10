@@ -46,8 +46,8 @@ public class CA_EditFolderTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//tr[4]/td[4]/ul/li/strong/a",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//tr[4]/td[4]/span/ul/li/strong/a",
+			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -78,7 +78,7 @@ public class CA_EditFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request completed successfully."));
+				"Your request processed successfully."));
 		assertTrue(selenium.isTextPresent("Edited Image Permissions Folder 2"));
 	}
 }
