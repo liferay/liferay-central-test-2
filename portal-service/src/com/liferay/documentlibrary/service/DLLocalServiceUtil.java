@@ -250,6 +250,12 @@ public class DLLocalServiceUtil {
 			modifiedDate, serviceContext, file);
 	}
 
+	public static void validate(String fileName, boolean validateFileExtension)
+		throws PortalException, SystemException {
+
+		getService().validate(fileName, validateFileExtension);
+	}
+
 	public static void validate(
 			String fileName, boolean validateFileExtension, byte[] bytes)
 		throws PortalException, SystemException {
