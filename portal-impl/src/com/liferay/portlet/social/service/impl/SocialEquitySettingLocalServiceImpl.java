@@ -53,7 +53,6 @@ public class SocialEquitySettingLocalServiceImpl
 		return getEquitySettings(groupId, classNameId, actionId);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<SocialEquitySetting> getEquitySettings(
 			long groupId, long classNameId, String actionId)
 		throws SystemException {
@@ -207,7 +206,7 @@ public class SocialEquitySettingLocalServiceImpl
 				if (equitySetting.getPrimaryKey() == 0) {
 					Group group = groupLocalService.getGroup(groupId);
 
-					equitySetting.setPrimaryKey(
+					equitySetting.setEquitySettingId(
 						counterLocalService.increment());
 					equitySetting.setGroupId(groupId);
 					equitySetting.setCompanyId(group.getCompanyId());

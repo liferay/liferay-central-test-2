@@ -20,7 +20,6 @@ import java.io.Serializable;
  * @author Brian Wing Shun Chan
  * @author Zsolt Berentey
  */
-@SuppressWarnings("serial")
 public class SocialEquityActionMapping implements Serializable {
 
 	public SocialEquityActionMapping clone() {

@@ -117,14 +117,12 @@ public class ViewAction extends PortletAction {
 		updateModel(actionRequest, mergedMapping, "participationLifespan");
 		updateModel(actionRequest, mergedMapping, "participationValue");
 
-		String className = equityActionMapping.getClassName();
-
-		boolean isUnique = ParamUtil.getBoolean(
+		boolean unique = ParamUtil.getBoolean(
 			actionRequest,
-			className + "." + equityActionMapping.getActionId() + ".unique",
-			false);
+			equityActionMapping.getClassName() + "." +
+				equityActionMapping.getActionId() + ".unique");
 
-		mergedMapping.setUnique(isUnique);
+		mergedMapping.setUnique(unique);
 
 		return mergedMapping;
 	}
@@ -142,9 +140,6 @@ public class ViewAction extends PortletAction {
 				equityActionMapping.getActionId());
 
 		for (SocialEquitySetting equitySetting : equitySettings) {
-			mergedEquityActionMapping.setUnique(
-				equitySetting.isUniqueEntry());
-
 			if (equitySetting.getType() ==
 					SocialEquitySettingConstants.TYPE_INFORMATION) {
 
@@ -163,6 +158,8 @@ public class ViewAction extends PortletAction {
 				mergedEquityActionMapping.setParticipationValue(
 					equitySetting.getValue());
 			}
+
+			mergedEquityActionMapping.setUnique(equitySetting.isUniqueEntry());
 		}
 
 		return mergedEquityActionMapping;
