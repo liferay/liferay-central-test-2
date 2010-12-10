@@ -1294,7 +1294,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 			socialEquityLogLocalService.addEquityLogs(
 				userId, WikiPage.class.getName(), page.getResourcePrimKey(),
-				actionId);
+				actionId, StringPool.BLANK);
 
 			// Subscriptions
 

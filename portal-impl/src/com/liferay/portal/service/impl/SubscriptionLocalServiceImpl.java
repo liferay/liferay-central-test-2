@@ -16,6 +16,7 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.SubscriptionConstants;
 import com.liferay.portal.model.User;
@@ -91,7 +92,8 @@ public class SubscriptionLocalServiceImpl
 			// Social
 
 			socialEquityLogLocalService.addEquityLogs(
-				userId, className, classPK, ActionKeys.SUBSCRIBE);
+				userId, className, classPK, ActionKeys.SUBSCRIBE,
+				StringPool.BLANK);
 		}
 
 		return subscription;

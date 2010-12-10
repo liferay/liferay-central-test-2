@@ -1478,7 +1478,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 						socialEquityLogLocalService.addEquityLogs(
 							userId, MBMessage.class.getName(), messageId,
-							actionId);
+							actionId, StringPool.BLANK);
 					}
 				}
 				else {
@@ -1492,7 +1492,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					if (!message.isRoot()) {
 						socialEquityLogLocalService.addEquityLogs(
 							userId, className, classPK,
-							ActionKeys.ADD_DISCUSSION);
+							ActionKeys.ADD_DISCUSSION, StringPool.BLANK);
 					}
 
 					long parentMessageId = message.getParentMessageId();

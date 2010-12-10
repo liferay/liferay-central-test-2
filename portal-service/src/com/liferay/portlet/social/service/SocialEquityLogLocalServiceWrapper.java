@@ -224,34 +224,12 @@ public class SocialEquityLogLocalServiceWrapper
 			merge);
 	}
 
-	/**
-	* @deprecated {@link #addEquityLogs(long, long, String, String)}
-	*/
-	public void addEquityLogs(long userId, long assetEntryId,
-		java.lang.String actionId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_socialEquityLogLocalService.addEquityLogs(userId, assetEntryId,
-			actionId);
-	}
-
 	public void addEquityLogs(long userId, long assetEntryId,
 		java.lang.String actionId, java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_socialEquityLogLocalService.addEquityLogs(userId, assetEntryId,
 			actionId, extraData);
-	}
-
-	/**
-	* @deprecated {@link #addEquityLogs(long, String, long, String, String)}
-	*/
-	public void addEquityLogs(long userId, java.lang.String className,
-		long classPK, java.lang.String actionId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_socialEquityLogLocalService.addEquityLogs(userId, className, classPK,
-			actionId);
 	}
 
 	public void addEquityLogs(long userId, java.lang.String className,
@@ -285,34 +263,12 @@ public class SocialEquityLogLocalServiceWrapper
 		_socialEquityLogLocalService.deactivateEquityLogs(assetEntryId);
 	}
 
-	/**
-	* @deprecated {@link #deactivateEquityLogs(long, long, String, String)}
-	*/
-	public void deactivateEquityLogs(long userId, long assetEntryId,
-		java.lang.String actionId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_socialEquityLogLocalService.deactivateEquityLogs(userId, assetEntryId,
-			actionId);
-	}
-
 	public void deactivateEquityLogs(long userId, long assetEntryId,
 		java.lang.String actionId, java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_socialEquityLogLocalService.deactivateEquityLogs(userId, assetEntryId,
 			actionId, extraData);
-	}
-
-	/**
-	* @deprecated {@link #deactivateEquityLogs(long, String, long, String, String)}
-	*/
-	public void deactivateEquityLogs(long userId, java.lang.String className,
-		long classPK, java.lang.String actionId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_socialEquityLogLocalService.deactivateEquityLogs(userId, className,
-			classPK, actionId);
 	}
 
 	public void deactivateEquityLogs(long userId, java.lang.String className,

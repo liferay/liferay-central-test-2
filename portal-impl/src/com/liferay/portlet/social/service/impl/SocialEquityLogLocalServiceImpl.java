@@ -61,16 +61,6 @@ import org.springframework.jdbc.core.RowCallbackHandler;
 public class SocialEquityLogLocalServiceImpl
 	extends SocialEquityLogLocalServiceBaseImpl {
 
-	/**
-	 * @deprecated {@link #addEquityLogs(long, long, String, String)}
-	 */
-	public void addEquityLogs(
-			long userId, long assetEntryId, String actionId)
-		throws PortalException, SystemException {
-
-		addEquityLogs(userId, assetEntryId, actionId, StringPool.BLANK);
-	}
-
 	public void addEquityLogs(
 			long userId, long assetEntryId, String actionId, String extraData)
 		throws PortalException, SystemException {
@@ -106,16 +96,6 @@ public class SocialEquityLogLocalServiceImpl
 					user, assetEntry, assetEntryUser, equitySetting, extraData);
 			}
 		}
-	}
-
-	/**
-	 * @deprecated {@link #addEquityLogs(long, String, long, String, String)}
-	 */
-	public void addEquityLogs(
-			long userId, String className, long classPK, String actionId)
-		throws PortalException, SystemException {
-
-		addEquityLogs(userId, className, classPK, actionId, StringPool.BLANK);
 	}
 
 	public void addEquityLogs(
@@ -266,16 +246,6 @@ public class SocialEquityLogLocalServiceImpl
 		}
 	}
 
-	/**
-	 * @deprecated {@link #deactivateEquityLogs(long, long, String, String)}
-	 */
-	public void deactivateEquityLogs(
-			long userId, long assetEntryId, String actionId)
-		throws PortalException, SystemException {
-
-		deactivateEquityLogs(userId, assetEntryId, actionId, StringPool.BLANK);
-	}
-
 	public void deactivateEquityLogs(
 			long userId, long assetEntryId, String actionId, String extraData)
 		throws PortalException, SystemException {
@@ -289,7 +259,7 @@ public class SocialEquityLogLocalServiceImpl
 		AssetEntry assetEntry = assetEntryPersistence.findByPrimaryKey(
 			assetEntryId);
 
-		// Information Equity
+		// Information equity
 
 		if (isSocialEquityEnabled(
 				assetEntry.getGroupId(), assetEntry.getClassName(),
@@ -322,7 +292,7 @@ public class SocialEquityLogLocalServiceImpl
 				socialEquityValue);
 		}
 
-		// Participation Equity
+		// Participation equity
 
 		if (isSocialEquityEnabled(
 				assetEntry.getGroupId(), assetEntry.getClassName(),
@@ -350,17 +320,6 @@ public class SocialEquityLogLocalServiceImpl
 			socialEquityLogLocalService.incrementSocialEquityUser_PQ(
 				user.getGroup().getGroupId(), userId, socialEquityValue);
 		}
-	}
-
-	/**
-	 * @deprecated {@link #deactivateEquityLogs(long, String, long, String, String)}
-	 */
-	public void deactivateEquityLogs(
-			long userId, String className, long classPK, String actionId)
-		throws PortalException, SystemException {
-
-		deactivateEquityLogs(
-			userId, className, classPK, actionId, StringPool.BLANK);
 	}
 
 	public void deactivateEquityLogs(

@@ -348,7 +348,8 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 			if ((userId > 0) && (entry.getUserId() != userId)) {
 				socialEquityLogLocalService.addEquityLogs(
-					userId, entry.getEntryId(), ActionKeys.VIEW);
+					userId, entry.getEntryId(), ActionKeys.VIEW,
+					StringPool.BLANK);
 			}
 		}
 	}

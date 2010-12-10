@@ -16,6 +16,7 @@ package com.liferay.portlet.ratings.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
@@ -76,7 +77,8 @@ public class RatingsEntryLocalServiceImpl
 		// Social
 
 		socialEquityLogLocalService.deactivateEquityLogs(
-			userId, className, classPK, ActionKeys.ADD_VOTE);
+			userId, className, classPK, ActionKeys.ADD_VOTE,
+			StringPool.BLANK);
 	}
 
 	public List<RatingsEntry> getEntries(
@@ -208,7 +210,7 @@ public class RatingsEntryLocalServiceImpl
 		// Social
 
 		socialEquityLogLocalService.addEquityLogs(
-			userId, className, classPK, ActionKeys.ADD_VOTE);
+			userId, className, classPK, ActionKeys.ADD_VOTE, StringPool.BLANK);
 
 		return entry;
 	}
