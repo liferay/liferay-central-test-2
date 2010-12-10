@@ -1973,6 +1973,17 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 
+		// Social
+
+		if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&
+			(status == WorkflowConstants.STATUS_APPROVED)) {
+
+			socialEquityLogLocalService.addEquityLogs(
+				userId, JournalArticle.class.getName(),
+				article.getResourcePrimKey(), ActionKeys.ADD_ARTICLE,
+				StringPool.BLANK);
+		}
+
 		// Email
 
 		if ((oldStatus == WorkflowConstants.STATUS_PENDING) &&
@@ -2002,17 +2013,6 @@ public class JournalArticleLocalServiceImpl
 		// Subscriptions
 
 		notifySubscribers(article, serviceContext);
-
-		// Social
-
-		if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&
-			(status == WorkflowConstants.STATUS_APPROVED)) {
-
-			socialEquityLogLocalService.addEquityLogs(
-				userId, JournalArticle.class.getName(),
-				article.getResourcePrimKey(), ActionKeys.ADD_ARTICLE,
-				StringPool.BLANK);
-		}
 
 		return article;
 	}
