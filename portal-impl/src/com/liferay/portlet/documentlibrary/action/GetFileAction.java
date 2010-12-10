@@ -187,8 +187,7 @@ public class GetFileAction extends PortletAction {
 			}
 		}
 
-		InputStream is = DLAppServiceUtil.getFileAsStream(
-			fileEntry.getFileEntryId(), version);
+		InputStream is = fileEntry.getContentStream(version);
 
 		boolean converted = false;
 

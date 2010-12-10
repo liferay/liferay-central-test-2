@@ -30,9 +30,11 @@ import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLRepositoryServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import java.util.Iterator;
 import java.util.List;
@@ -64,6 +66,19 @@ public class DLFileEntryImpl
 	}
 
 	public DLFileEntryImpl() {
+	}
+
+	public InputStream getContentStream()
+		throws PortalException, SystemException {
+
+		return getContentStream(getVersion());
+	}
+
+	public InputStream getContentStream(String version)
+		throws PortalException, SystemException {
+
+		return DLRepositoryServiceUtil.getFileAsStream(
+			getFileEntryId(), version);
 	}
 
 	public String getExtraSettings() {

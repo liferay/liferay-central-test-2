@@ -30,6 +30,7 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 
@@ -92,10 +93,10 @@ public class CompareVersionsAction extends PortletAction {
 		String targetVersion = ParamUtil.getString(
 			renderRequest, "targetVersion");
 
-		InputStream sourceIs = DLAppServiceUtil.getFileAsStream(
-			fileEntryId, sourceVersion);
-		InputStream targetIs = DLAppServiceUtil.getFileAsStream(
-			fileEntryId, targetVersion);
+		DLFileEntry fileEntry = DLAppServiceUtil.getFileEntry(fileEntryId);
+
+		InputStream sourceIs = fileEntry.getContentStream(sourceVersion);
+		InputStream targetIs = fileEntry.getContentStream(targetVersion);
 
 		if (extension.equals("htm") || extension.equals("html") ||
 			extension.equals("xml")) {

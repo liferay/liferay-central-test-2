@@ -33,7 +33,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
-import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -102,7 +102,7 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 	}
 
 	protected void migrateDL() throws Exception {
-		int count = DLAppLocalServiceUtil.getDLFileEntriesCount();
+		int count = DLRepositoryLocalServiceUtil.getAllFileEntriesCount();
 		int pages = count / Indexer.DEFAULT_INTERVAL;
 
 		MaintenanceUtil.appendStatus(
@@ -113,7 +113,7 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 			int end = start + Indexer.DEFAULT_INTERVAL;
 
 			List<DLFileEntry> dlFileEntries =
-				DLAppLocalServiceUtil.getDLFileEntries(start, end);
+				DLRepositoryLocalServiceUtil.getAllFileEntries(start, end);
 
 			String portletId = PortletKeys.DOCUMENT_LIBRARY;
 
@@ -187,6 +187,7 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 			_log.error("Migration failed for " + fileName, e);
 		}
 	}
+
 	protected void migrateFiles(
 			long companyId, String dirName, String[] fileNames)
 		throws Exception {

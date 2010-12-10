@@ -141,19 +141,6 @@ public class DLAppServiceUtil {
 		getService().deleteFolder(groupId, parentFolderId, name);
 	}
 
-	public static java.io.InputStream getFileAsStream(long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getFileAsStream(fileEntryId);
-	}
-
-	public static java.io.InputStream getFileAsStream(long fileEntryId,
-		java.lang.String version)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getFileAsStream(fileEntryId, version);
-	}
-
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
 		long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -261,18 +248,6 @@ public class DLAppServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFolder(groupId, parentFolderId, name);
-	}
-
-	public static long getFolderId(long groupId, long parentFolderId,
-		java.lang.String name)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getFolderId(groupId, parentFolderId, name);
-	}
-
-	public static long[] getFolderIds(long groupId, long folderId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getFolderIds(groupId, folderId);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(

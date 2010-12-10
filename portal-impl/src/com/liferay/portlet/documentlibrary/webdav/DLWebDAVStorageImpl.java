@@ -164,8 +164,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			file = FileUtil.createTempFile(
 				FileUtil.getExtension(fileEntry.getName()));
 
-			InputStream is = DLAppServiceUtil.getFileAsStream(
-				fileEntry.getFileEntryId());
+			InputStream is = fileEntry.getContentStream();
 
 			FileUtil.write(file, is);
 
@@ -556,8 +555,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 						DLAppServiceUtil.getFileEntryByTitle(
 							groupId, newParentFolderId, title);
 
-					InputStream is = DLAppServiceUtil.getFileAsStream(
-						fileEntry.getFileEntryId());
+					InputStream is = fileEntry.getContentStream();
 
 					bytes = FileUtil.getBytes(is);
 

@@ -33,6 +33,14 @@ public interface DLFileEntry extends DLFileEntryModel {
 	 *
 	 * Never reference this interface directly. All methods that expect a d l file entry model instance should use the {@link DLFileEntry} interface instead.
 	 */
+	public java.io.InputStream getContentStream()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public java.io.InputStream getContentStream(java.lang.String version)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public java.lang.String getExtraSettings();
 
 	public com.liferay.portal.kernel.util.UnicodeProperties getExtraSettingsProperties();

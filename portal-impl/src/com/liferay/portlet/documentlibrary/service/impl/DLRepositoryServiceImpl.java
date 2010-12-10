@@ -17,12 +17,12 @@ package com.liferay.portlet.documentlibrary.service.impl;
 import com.liferay.portal.ExpiredLockException;
 import com.liferay.portal.InvalidLockException;
 import com.liferay.portal.NoSuchLockException;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Lock;
@@ -39,9 +39,7 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLRepositoryServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
-import com.liferay.portlet.documentlibrary.util.comparator.FileEntryModifiedDateComparator;
 
-import java.io.File;
 import java.io.InputStream;
 
 import java.rmi.RemoteException;
@@ -57,34 +55,6 @@ import java.util.Set;
  * @author Alexander Chow
  */
 public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
-
-	public DLFileEntry addFileEntry(
-			long groupId, long folderId, String title, String description,
-			String changeLog, String extraSettings, byte[] bytes,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		DLFolderPermission.check(
-			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
-
-		return dlRepositoryLocalService.addFileEntry(
-			getUserId(), groupId, folderId, title, description, changeLog,
-			extraSettings, bytes, serviceContext);
-	}
-
-	public DLFileEntry addFileEntry(
-			long groupId, long folderId, String title, String description,
-			String changeLog, String extraSettings, File file,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		DLFolderPermission.check(
-			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
-
-		return dlRepositoryLocalService.addFileEntry(
-			getUserId(), groupId, folderId, title, description, changeLog,
-			extraSettings, file, serviceContext);
-	}
 
 	public DLFileEntry addFileEntry(
 			long groupId, long folderId, String title, String description,
@@ -201,19 +171,9 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	public void deleteFolder(long groupId, long parentFolderId, String name)
 		throws PortalException, RemoteException, SystemException {
 
-		long folderId = getFolderId(groupId, parentFolderId, name);
+		DLFolder folder = getFolder(groupId, parentFolderId, name);
 
-		deleteFolder(folderId);
-	}
-
-	public InputStream getFileAsStream(long fileEntryId)
-		throws PortalException, SystemException {
-
-		DLFileEntryPermission.check(
-			getPermissionChecker(), fileEntryId, ActionKeys.VIEW);
-
-		return dlRepositoryLocalService.getFileAsStream(
-			getUserId(), fileEntryId);
+		deleteFolder(folder.getFolderId());
 	}
 
 	public InputStream getFileAsStream(long fileEntryId, String version)
@@ -224,26 +184,6 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 
 		return dlRepositoryLocalService.getFileAsStream(
 			getUserId(), fileEntryId, version);
-	}
-
-	public List<DLFileEntry> getFileEntries(long groupId, long folderId)
-		throws PortalException, SystemException {
-
-		DLFolderPermission.check(
-			getPermissionChecker(), groupId, folderId, ActionKeys.VIEW);
-
-		return dlFileEntryPersistence.filterFindByG_F(groupId, folderId);
-	}
-
-	public List<DLFileEntry> getFileEntries(
-			long groupId, long folderId, int start, int end)
-		throws PortalException, SystemException {
-
-		DLFolderPermission.check(
-			getPermissionChecker(), groupId, folderId, ActionKeys.VIEW);
-
-		return dlFileEntryPersistence.filterFindByG_F(
-			groupId, folderId, start, end);
 	}
 
 	public List<DLFileEntry> getFileEntries(
@@ -266,33 +206,9 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 			groupId, folderIds, status, start, end);
 	}
 
-	public List<Object> getFileEntriesAndFileShortcuts(
-			long groupId, long folderId, int status, int start, int end)
-		throws SystemException {
-
-		List<Long> folderIds = new ArrayList<Long>();
-
-		folderIds.add(folderId);
-
-		return dlFolderFinder.filterFindFE_FS_ByG_F_S(
-			groupId, folderIds, status, start, end);
-	}
-
 	public int getFileEntriesAndFileShortcutsCount(
 			long groupId, List<Long> folderIds, int status)
 		throws SystemException {
-
-		return dlFolderFinder.filterCountFE_FS_ByG_F_S(
-			groupId, folderIds, status);
-	}
-
-	public int getFileEntriesAndFileShortcutsCount(
-			long groupId, long folderId, int status)
-		throws SystemException {
-
-		List<Long> folderIds = new ArrayList<Long>();
-
-		folderIds.add(folderId);
 
 		return dlFolderFinder.filterCountFE_FS_ByG_F_S(
 			groupId, folderIds, status);
@@ -372,33 +288,6 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 			getPermissionChecker(), folder, ActionKeys.VIEW);
 
 		return folder;
-	}
-
-	public long getFolderId(long groupId, long parentFolderId, String name)
-		throws PortalException, SystemException {
-
-		DLFolder folder = getFolder(groupId, parentFolderId, name);
-
-		return folder.getFolderId();
-	}
-
-	public long[] getFolderIds(long groupId, long folderId)
-		throws SystemException {
-
-		List<Long> folderIds = new ArrayList<Long>();
-
-		folderIds.add(folderId);
-
-		getSubfolderIds(folderIds, groupId, folderId);
-
-		return ArrayUtil.toArray(
-			folderIds.toArray(new Long[folderIds.size()]));
-	}
-
-	public List<DLFolder> getFolders(long groupId, long parentFolderId)
-		throws SystemException {
-
-		return dlFolderPersistence.filterFindByG_P(groupId, parentFolderId);
 	}
 
 	public List<DLFolder> getFolders(
@@ -486,34 +375,6 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	}
 
 	public List<DLFileEntry> getGroupFileEntries(
-			long groupId, long userId, int start, int end)
-		throws SystemException {
-
-		return getGroupFileEntries(
-			groupId, userId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, start,
-			end, new FileEntryModifiedDateComparator());
-	}
-
-	public List<DLFileEntry> getGroupFileEntries(
-			long groupId, long userId, int start, int end,
-			OrderByComparator obc)
-		throws SystemException {
-
-		return getGroupFileEntries(
-			groupId, userId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, start,
-			end, obc);
-	}
-
-	public List<DLFileEntry> getGroupFileEntries(
-			long groupId, long userId, long rootFolderId, int start, int end)
-		throws SystemException {
-
-		return getGroupFileEntries(
-			groupId, userId, rootFolderId, start, end,
-			new FileEntryModifiedDateComparator());
-	}
-
-	public List<DLFileEntry> getGroupFileEntries(
 			long groupId, long userId, long rootFolderId, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
@@ -531,13 +392,6 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 			return dlFileEntryPersistence.filterFindByG_U_F(
 				groupId, userId, folderIds, start, end, obc);
 		}
-	}
-
-	public int getGroupFileEntriesCount(long groupId, long userId)
-		throws SystemException {
-
-		return getGroupFileEntriesCount(
-			groupId, userId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 	}
 
 	public int getGroupFileEntriesCount(
@@ -559,13 +413,6 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	}
 
 	public void getSubfolderIds(
-			List<Long> folderIds, long groupId, long folderId)
-		throws SystemException {
-
-		getSubfolderIds(folderIds, groupId, folderId, true);
-	}
-
-	public void getSubfolderIds(
 			List<Long> folderIds, long groupId, long folderId, boolean recurse)
 		throws SystemException {
 
@@ -575,10 +422,8 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		for (DLFolder folder : folders) {
 			folderIds.add(folder.getFolderId());
 
-			if (recurse) {
-				getSubfolderIds(
-					folderIds, folder.getGroupId(), folder.getFolderId());
-			}
+			getSubfolderIds(
+				folderIds, folder.getGroupId(), folder.getFolderId(), recurse);
 		}
 	}
 
@@ -689,7 +534,8 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		long groupId = folder.getGroupId();
 
 		try {
-			List<DLFileEntry> fileEntries = getFileEntries(groupId, folderId);
+			List<DLFileEntry> fileEntries = getFileEntries(
+				groupId, folderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 			for (DLFileEntry fileEntry : fileEntries) {
 				lockFileEntry(
@@ -852,7 +698,8 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		lockLocalService.unlock(DLFolder.class.getName(), folderId);
 
 		try {
-			List<DLFileEntry> fileEntries = getFileEntries(groupId, folderId);
+			List<DLFileEntry> fileEntries = getFileEntries(
+				groupId, folderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 			for (DLFileEntry fileEntry : fileEntries) {
 				unlockFileEntry(fileEntry.getFileEntryId());
@@ -867,83 +714,9 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 			long groupId, long parentFolderId, String name, String lockUuid)
 		throws PortalException, SystemException {
 
-		long folderId = getFolderId(groupId, parentFolderId, name);
+		DLFolder folder = getFolder(groupId, parentFolderId, name);
 
-		unlockFolder(groupId, folderId, lockUuid);
-	}
-
-	public DLFileEntry updateFileEntry(
-			long fileEntryId, String sourceFileName, String title,
-			String description, String changeLog, boolean majorVersion,
-			String extraSettings, byte[] bytes, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		DLFileEntryPermission.check(
-			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
-
-		boolean hasLock = hasFileEntryLock(fileEntryId);
-
-		if (!hasLock) {
-
-			// Lock
-
-			lockFileEntry(fileEntryId);
-		}
-
-		DLFileEntry fileEntry = null;
-
-		try {
-			fileEntry = dlRepositoryLocalService.updateFileEntry(
-				getUserId(), fileEntryId, sourceFileName, title, description,
-				changeLog, majorVersion, extraSettings, bytes, serviceContext);
-		}
-		finally {
-			if (!hasLock) {
-
-				// Unlock
-
-				unlockFileEntry(fileEntryId);
-			}
-		}
-
-		return fileEntry;
-	}
-
-	public DLFileEntry updateFileEntry(
-			long fileEntryId, String sourceFileName, String title,
-			String description, String changeLog, boolean majorVersion,
-			String extraSettings, File file, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		DLFileEntryPermission.check(
-			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
-
-		boolean hasLock = hasFileEntryLock(fileEntryId);
-
-		if (!hasLock) {
-
-			// Lock
-
-			lockFileEntry(fileEntryId);
-		}
-
-		DLFileEntry fileEntry = null;
-
-		try {
-			fileEntry = dlRepositoryLocalService.updateFileEntry(
-				getUserId(), fileEntryId, sourceFileName, title, description,
-				changeLog, majorVersion, extraSettings, file, serviceContext);
-		}
-		finally {
-			if (!hasLock) {
-
-				// Unlock
-
-				unlockFileEntry(fileEntryId);
-			}
-		}
-
-		return fileEntry;
+		unlockFolder(groupId, folder.getFolderId(), lockUuid);
 	}
 
 	public DLFileEntry updateFileEntry(
@@ -1097,39 +870,35 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		throws PortalException, RemoteException, SystemException {
 
 		List<DLFileEntry> srcFileEntries = getFileEntries(
-			srcFolder.getGroupId(), srcFolder.getFolderId());
+			srcFolder.getGroupId(), srcFolder.getFolderId(), QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 
 		for (DLFileEntry srcFileEntry : srcFileEntries) {
 			String name = srcFileEntry.getName();
 			String title = srcFileEntry.getTitle();
 			String description = srcFileEntry.getDescription();
 			String extraSettings = srcFileEntry.getExtraSettings();
-
-			File file = null;
+			long size = srcFileEntry.getSize();
 
 			try {
-				file = FileUtil.createTempFile(FileUtil.getExtension(title));
-
 				InputStream is = dlLocalService.getFileAsStream(
 					srcFolder.getCompanyId(), srcFolder.getFolderId(), name);
 
-				FileUtil.write(file, is);
+				addFileEntry(
+					destFolder.getGroupId(), destFolder.getFolderId(), title,
+					description, null, extraSettings, is, size,
+					serviceContext);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
 
 				continue;
 			}
-
-			addFileEntry(
-				destFolder.getGroupId(), destFolder.getFolderId(), title,
-				description, null, extraSettings, file, serviceContext);
-
-			file.delete();
 		}
 
 		List<DLFolder> srcSubfolders = getFolders(
-			srcFolder.getGroupId(), srcFolder.getFolderId());
+			srcFolder.getGroupId(), srcFolder.getFolderId(), QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS);
 
 		for (DLFolder srcSubfolder : srcSubfolders) {
 			String name = srcSubfolder.getName();
@@ -1141,6 +910,19 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 
 			copyFolder(srcSubfolder, destSubfolder, serviceContext);
 		}
+	}
+
+	protected long[] getFolderIds(long groupId, long folderId)
+		throws SystemException {
+
+		List<Long> folderIds = new ArrayList<Long>();
+
+		folderIds.add(folderId);
+
+		getSubfolderIds(folderIds, groupId, folderId, true);
+
+		return ArrayUtil.toArray(
+			folderIds.toArray(new Long[folderIds.size()]));
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

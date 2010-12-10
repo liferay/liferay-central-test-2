@@ -14,8 +14,13 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
+import com.liferay.documentlibrary.FileSizeException;
+import com.liferay.documentlibrary.NoSuchFileException;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.service.ServiceContext;
@@ -23,13 +28,18 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.base.DLAppServiceBaseImpl;
+import com.liferay.portlet.documentlibrary.util.comparator.FileEntryModifiedDateComparator;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import java.rmi.RemoteException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,9 +53,15 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		if (bytes == null) {
+			throw new FileSizeException();
+		}
+
+		InputStream is = new UnsyncByteArrayInputStream(bytes);
+
 		return dlRepositoryService.addFileEntry(
 			groupId, folderId, title, description, changeLog,
-			extraSettings, bytes, serviceContext);
+			extraSettings, is, bytes.length, serviceContext);
 	}
 
 	public DLFileEntry addFileEntry(
@@ -54,9 +70,21 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return dlRepositoryService.addFileEntry(
-			groupId, folderId, title, description, changeLog,
-			extraSettings, file, serviceContext);
+		if (file == null) {
+			throw new FileSizeException();
+		}
+
+		try {
+			InputStream is = new UnsyncBufferedInputStream(
+				new FileInputStream(file));
+
+			return dlRepositoryService.addFileEntry(
+				groupId, folderId, title, description, changeLog,
+				extraSettings, is, file.length(), serviceContext);
+		}
+		catch (FileNotFoundException fnfe) {
+			throw new FileSizeException();
+		}
 	}
 
 	public DLFileEntry addFileEntry(
@@ -130,31 +158,18 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		dlRepositoryService.deleteFolder(groupId, parentFolderId, name);
 	}
 
-	public InputStream getFileAsStream(long fileEntryId)
-		throws PortalException, SystemException {
-
-		return dlRepositoryService.getFileAsStream(fileEntryId);
-	}
-
-	public java.io.InputStream getFileAsStream(
-			long fileEntryId, String version)
-		throws PortalException, SystemException {
-
-		return dlRepositoryService.getFileAsStream(fileEntryId, version);
-	}
-
 	public List<DLFileEntry> getFileEntries(long groupId, long folderId)
 		throws PortalException, SystemException {
 
-		return dlRepositoryService.getFileEntries(groupId, folderId);
+		return getFileEntries(
+			groupId, folderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	public List<DLFileEntry> getFileEntries(
 			long groupId, long folderId, int start, int end)
 		throws PortalException, SystemException {
 
-		return dlRepositoryService.getFileEntries(
-			groupId, folderId, start, end);
+		return getFileEntries(groupId, folderId, start, end, null);
 	}
 
 	public List<DLFileEntry> getFileEntries(
@@ -178,8 +193,12 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			long groupId, long folderId, int status, int start, int end)
 		throws SystemException {
 
-		return dlRepositoryService.getFileEntriesAndFileShortcuts(
-			groupId, folderId, status, start, end);
+		List<Long> folderIds = new ArrayList<Long>();
+
+		folderIds.add(folderId);
+
+		return getFileEntriesAndFileShortcuts(
+			groupId, folderIds, status, start, end);
 	}
 
 	public int getFileEntriesAndFileShortcutsCount(
@@ -194,8 +213,11 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			long groupId, long folderId, int status)
 		throws SystemException {
 
-		return dlRepositoryService.getFileEntriesAndFileShortcutsCount(
-			groupId, folderId, status);
+		List<Long> folderIds = new ArrayList<Long>();
+
+		folderIds.add(folderId);
+
+		return getFileEntriesAndFileShortcutsCount(groupId, folderIds, status);
 	}
 
 	public int getFileEntriesCount(long groupId, long folderId)
@@ -247,22 +269,11 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		return dlRepositoryService.getFolder(groupId, parentFolderId, name);
 	}
 
-	public long getFolderId(long groupId, long parentFolderId, String name)
-		throws PortalException, SystemException {
-
-		return dlRepositoryService.getFolderId(groupId, parentFolderId, name);
-	}
-
-	public long[] getFolderIds(long groupId, long folderId)
-		throws SystemException {
-
-		return dlRepositoryService.getFolderIds(groupId, folderId);
-	}
-
 	public List<DLFolder> getFolders(long groupId, long parentFolderId)
 		throws SystemException {
 
-		return dlRepositoryService.getFolders(groupId, parentFolderId);
+		return getFolders(
+			groupId, parentFolderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
 	public List<DLFolder> getFolders(
@@ -325,8 +336,9 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			long groupId, long userId, int start, int end)
 		throws SystemException {
 
-		return dlRepositoryService.getGroupFileEntries(
-			groupId, userId, start, end);
+		return getGroupFileEntries(
+			groupId, userId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, start,
+			end, new FileEntryModifiedDateComparator());
 	}
 
 	public List<DLFileEntry> getGroupFileEntries(
@@ -334,16 +346,18 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			OrderByComparator obc)
 		throws SystemException {
 
-		return dlRepositoryService.getGroupFileEntries(
-			groupId, userId, start, end, obc);
+		return getGroupFileEntries(
+			groupId, userId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, start,
+			end, obc);
 	}
 
 	public List<DLFileEntry> getGroupFileEntries(
 			long groupId, long userId, long rootFolderId, int start, int end)
 		throws SystemException {
 
-		return dlRepositoryService.getGroupFileEntries(
-			groupId, userId, rootFolderId, start, end);
+		return getGroupFileEntries(
+			groupId, userId, rootFolderId, start, end,
+			new FileEntryModifiedDateComparator());
 	}
 
 	public List<DLFileEntry> getGroupFileEntries(
@@ -358,7 +372,8 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	public int getGroupFileEntriesCount(long groupId, long userId)
 		throws SystemException {
 
-		return dlRepositoryService.getGroupFileEntriesCount(groupId, userId);
+		return getGroupFileEntriesCount(
+			groupId, userId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 	}
 
 	public int getGroupFileEntriesCount(
@@ -373,7 +388,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			List<Long> folderIds, long groupId, long folderId)
 		throws SystemException {
 
-		dlRepositoryService.getSubfolderIds(folderIds, groupId, folderId);
+		getSubfolderIds(folderIds, groupId, folderId, true);
 	}
 
 	public void getSubfolderIds(
@@ -497,9 +512,17 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			String extraSettings, byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		InputStream is = null;
+		long size = 0;
+
+		if (bytes != null) {
+			is = new UnsyncByteArrayInputStream(bytes);
+			size = bytes.length;
+		}
+
 		return dlRepositoryService.updateFileEntry(
-				fileEntryId, sourceFileName, title, description,
-			changeLog, majorVersion, extraSettings, bytes, serviceContext);
+			fileEntryId, sourceFileName, title, description,
+			changeLog, majorVersion, extraSettings, is, size, serviceContext);
 	}
 
 	public DLFileEntry updateFileEntry(
@@ -508,9 +531,22 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			String extraSettings, File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		return dlRepositoryService.updateFileEntry(
-			fileEntryId, sourceFileName, title, description, changeLog,
-			majorVersion, extraSettings, file, serviceContext);
+		try {
+			InputStream is = null;
+			long size = 0;
+
+			if ((file != null) && file.exists()) {
+				is = new UnsyncBufferedInputStream(new FileInputStream(file));
+				size = file.length();
+			}
+
+			return dlRepositoryService.updateFileEntry(
+				fileEntryId, sourceFileName, title, description, changeLog,
+				majorVersion, extraSettings, is, size, serviceContext);
+		}
+		catch (FileNotFoundException fnfe) {
+			throw new NoSuchFileException();
+		}
 	}
 
 	public DLFileEntry updateFileEntry(

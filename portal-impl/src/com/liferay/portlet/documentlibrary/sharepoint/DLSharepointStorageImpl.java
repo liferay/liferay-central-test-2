@@ -96,7 +96,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 		DLFileEntry fileEntry = getFileEntry(sharepointRequest);
 
-		return DLAppServiceUtil.getFileAsStream(fileEntry.getFileEntryId());
+		return fileEntry.getContentStream();
 	}
 
 	public Tree getDocumentTree(SharepointRequest sharepointRequest)
@@ -185,10 +185,10 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		}
 
 		long parentFolderId = folderIds.get(folderIds.size() - 1);
-		long folderId = DLAppServiceUtil.getFolderId(
+		DLFolder folder = DLAppServiceUtil.getFolder(
 			groupId, parentFolderId, pathArray[0]);
 
-		folderIds.add(folderId);
+		folderIds.add(folder.getFolderId());
 
 		if (pathArray.length > 1) {
 			path = removeFoldersFromPath(path, 1);
@@ -248,8 +248,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			String changeLog = StringPool.BLANK;
 			String extraSettings = fileEntry.getExtraSettings();
 
-			InputStream is = DLAppServiceUtil.getFileAsStream(
-				fileEntry.getFileEntryId());
+			InputStream is = fileEntry.getContentStream();
 
 			byte[] bytes = FileUtil.getBytes(is);
 

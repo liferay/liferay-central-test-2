@@ -15,14 +15,11 @@
 package com.liferay.portlet.documentlibrary.service.impl;
 
 import com.liferay.documentlibrary.DuplicateFileException;
-import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.documentlibrary.util.JCRHook;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
-import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
@@ -56,12 +53,8 @@ import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLRepositoryLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
-import com.liferay.portlet.documentlibrary.util.comparator.FileEntryModifiedDateComparator;
 import com.liferay.portlet.documentlibrary.util.comparator.FileVersionVersionComparator;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import java.util.ArrayList;
@@ -84,46 +77,6 @@ import java.util.List;
  */
 public class DLRepositoryLocalServiceImpl
 	extends DLRepositoryLocalServiceBaseImpl {
-
-	public DLFileEntry addFileEntry(
-			long userId, long groupId, long folderId, String title,
-			String description, String changeLog, String extraSettings,
-			byte[] bytes, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		if (bytes == null) {
-			throw new FileSizeException();
-		}
-
-		InputStream is = new UnsyncByteArrayInputStream(bytes);
-
-		return addFileEntry(
-			userId, groupId, folderId, title, description, changeLog,
-			extraSettings, is, bytes.length, serviceContext);
-	}
-
-	public DLFileEntry addFileEntry(
-			long userId, long groupId, long folderId, String title,
-			String description, String changeLog, String extraSettings,
-			File file, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		if (file == null) {
-			throw new FileSizeException();
-		}
-
-		try {
-			InputStream is = new UnsyncBufferedInputStream(
-				new FileInputStream(file));
-
-			return addFileEntry(
-				userId, groupId, folderId, title, description, changeLog,
-				extraSettings, is, file.length(), serviceContext);
-		}
-		catch (FileNotFoundException fnfe) {
-			throw new FileSizeException();
-		}
-	}
 
 	public DLFileEntry addFileEntry(
 			long userId, long groupId, long folderId, String title,
@@ -292,78 +245,17 @@ public class DLRepositoryLocalServiceImpl
 		return folder;
 	}
 
-	public void deleteFileEntries(long groupId, long folderId)
+	public void deleteAll(long groupId)
 		throws PortalException, SystemException {
 
-		List<DLFileEntry> fileEntries = dlFileEntryPersistence.findByG_F(
-			groupId, folderId);
+		List<DLFolder> folders = dlFolderPersistence.findByG_P(
+			groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
-		for (DLFileEntry fileEntry : fileEntries) {
-			deleteFileEntry(fileEntry);
-		}
-	}
-
-	public void deleteFileEntry(DLFileEntry fileEntry)
-		throws PortalException, SystemException {
-
-		// File entry
-
-		dlFileEntryPersistence.remove(fileEntry);
-
-		// Resources
-
-		resourceLocalService.deleteResource(
-			fileEntry.getCompanyId(), DLFileEntry.class.getName(),
-			ResourceConstants.SCOPE_INDIVIDUAL, fileEntry.getFileEntryId());
-
-		// WebDAVProps
-
-		webDAVPropsLocalService.deleteWebDAVProps(
-			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-
-		// Workflow
-
-		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
-			fileEntry.getCompanyId(), fileEntry.getGroupId(),
-			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-
-		// File versions
-
-		List<DLFileVersion> fileVersions =
-			dlFileVersionPersistence.findByFileEntryId(
-				fileEntry.getFileEntryId());
-
-		for (DLFileVersion fileVersion : fileVersions) {
-			dlFileVersionPersistence.remove(fileVersion);
+		for (DLFolder folder : folders) {
+			deleteFolder(folder);
 		}
 
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
-
-		// Lock
-
-		String lockId = String.valueOf(fileEntry.getFileEntryId());
-
-		lockLocalService.unlock(DLFileEntry.class.getName(), lockId);
-
-		// DLApp
-
-		dlAppHelperLocalService.deleteFileEntry(fileEntry);
-
-		// File
-
-		try {
-			dlLocalService.deleteFile(
-				fileEntry.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-				fileEntry.getRepositoryId(), fileEntry.getName());
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e, e);
-			}
-		}
+		deleteFileEntries(groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 	}
 
 	public void deleteFileEntry(long fileEntryId)
@@ -374,60 +266,6 @@ public class DLRepositoryLocalServiceImpl
 		deleteFileEntry(fileEntry);
 	}
 
-	public void deleteFolder(DLFolder folder)
-		throws PortalException, SystemException {
-
-		// Folders
-
-		List<DLFolder> folders = dlFolderPersistence.findByG_P(
-			folder.getGroupId(), folder.getFolderId());
-
-		for (DLFolder curFolder : folders) {
-			deleteFolder(curFolder);
-		}
-
-		// Folder
-
-		dlFolderPersistence.remove(folder);
-
-		// Resources
-
-		resourceLocalService.deleteResource(
-			folder.getCompanyId(), DLFolder.class.getName(),
-			ResourceConstants.SCOPE_INDIVIDUAL, folder.getFolderId());
-
-		// WebDAVProps
-
-		webDAVPropsLocalService.deleteWebDAVProps(
-			DLFolder.class.getName(), folder.getFolderId());
-
-		// File entries
-
-		deleteFileEntries(folder.getGroupId(), folder.getFolderId());
-
-		// Expando
-
-		expandoValueLocalService.deleteValues(
-			DLFolder.class.getName(), folder.getFolderId());
-
-		// DLApp
-
-		dlAppHelperLocalService.deleteFolder(folder);
-
-		// Directory
-
-		try {
-			dlLocalService.deleteDirectory(
-				folder.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-				folder.getFolderId(), StringPool.BLANK);
-		}
-		catch (NoSuchDirectoryException nsde) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(nsde.getMessage());
-			}
-		}
-	}
-
 	public void deleteFolder(long folderId)
 		throws PortalException, SystemException {
 
@@ -436,36 +274,14 @@ public class DLRepositoryLocalServiceImpl
 		deleteFolder(folder);
 	}
 
-	public void deleteFolders(long groupId)
-		throws PortalException, SystemException {
-
-		List<DLFolder> folders = dlFolderPersistence.findByG_P(
-			groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-
-		for (DLFolder folder : folders) {
-			deleteFolder(folder);
-		}
-	}
-
-	public List<DLFileEntry> getCompanyFileEntries(
-			long companyId, int start, int end)
+	public List<DLFileEntry> getAllFileEntries(int start, int end)
 		throws SystemException {
 
-		return dlFileEntryPersistence.findByCompanyId(companyId, start, end);
+		return dlFileEntryPersistence.findAll(start, end);
 	}
 
-	public List<DLFileEntry> getCompanyFileEntries(
-			long companyId, int start, int end, OrderByComparator obc)
-		throws SystemException {
-
-		return dlFileEntryPersistence.findByCompanyId(
-			companyId, start, end, obc);
-	}
-
-	public int getCompanyFileEntriesCount(long companyId)
-		throws SystemException {
-
-		return dlFileEntryPersistence.countByCompanyId(companyId);
+	public int getAllFileEntriesCount() throws SystemException {
+		return dlFileEntryPersistence.countAll();
 	}
 
 	public List<DLFolder> getCompanyFolders(long companyId, int start, int end)
@@ -476,22 +292,6 @@ public class DLRepositoryLocalServiceImpl
 
 	public int getCompanyFoldersCount(long companyId) throws SystemException {
 		return dlFolderPersistence.countByCompanyId(companyId);
-	}
-
-	public List<DLFileEntry> getDLFileEntries(int start, int end)
-		throws SystemException {
-
-		return dlFileEntryPersistence.findAll(start, end);
-	}
-
-	public int getDLFileEntriesCount() throws SystemException {
-		return dlFileEntryPersistence.countAll();
-	}
-
-	public InputStream getFileAsStream(long userId, long fileEntryId)
-		throws PortalException, SystemException {
-
-		return getFileAsStream(userId, fileEntryId, StringPool.BLANK);
 	}
 
 	public InputStream getFileAsStream(
@@ -509,26 +309,9 @@ public class DLRepositoryLocalServiceImpl
 
 		dlAppHelperLocalService.getFileAsStream(userId, fileEntry);
 
-		if (Validator.isNull(version)) {
-			version = fileEntry.getVersion();
-		}
-
 		return dlLocalService.getFileAsStream(
 			fileEntry.getCompanyId(), fileEntry.getRepositoryId(),
 			fileEntry.getName(), version);
-	}
-
-	public List<DLFileEntry> getFileEntries(long groupId, long folderId)
-		throws SystemException {
-
-		return dlFileEntryPersistence.findByG_F(groupId, folderId);
-	}
-
-	public List<DLFileEntry> getFileEntries(
-			long groupId, long folderId, int start, int end)
-		throws SystemException {
-
-		return dlFileEntryPersistence.findByG_F(groupId, folderId, start, end);
 	}
 
 	public List<DLFileEntry> getFileEntries(
@@ -543,18 +326,6 @@ public class DLRepositoryLocalServiceImpl
 	public List<Object> getFileEntriesAndFileShortcuts(
 			long groupId, List<Long> folderIds, int status, int start, int end)
 		throws SystemException {
-
-		return dlFolderFinder.findFE_FS_ByG_F_S(
-			groupId, folderIds, status, start, end);
-	}
-
-	public List<Object> getFileEntriesAndFileShortcuts(
-			long groupId, long folderId, int status, int start, int end)
-		throws SystemException {
-
-		List<Long> folderIds = new ArrayList<Long>();
-
-		folderIds.add(folderId);
 
 		return dlFolderFinder.findFE_FS_ByG_F_S(
 			groupId, folderIds, status, start, end);
@@ -575,7 +346,7 @@ public class DLRepositoryLocalServiceImpl
 
 		folderIds.add(folderId);
 
-		return dlFolderFinder.countFE_FS_ByG_F_S(groupId, folderIds, status);
+		return getFileEntriesAndFileShortcutsCount(groupId, folderIds, status);
 	}
 
 	public int getFileEntriesCount(long groupId, long folderId)
@@ -636,10 +407,6 @@ public class DLRepositoryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return dlFolderPersistence.findByG_P_N(groupId, parentFolderId, name);
-	}
-
-	public List<DLFolder> getFolders(long companyId) throws SystemException {
-		return dlFolderPersistence.findByCompanyId(companyId);
 	}
 
 	public List<DLFolder> getFolders(long groupId, long parentFolderId)
@@ -724,59 +491,6 @@ public class DLRepositoryLocalServiceImpl
 		}
 	}
 
-	public List<DLFileEntry> getGroupFileEntries(
-			long groupId, int start, int end)
-		throws SystemException {
-
-		return getGroupFileEntries(
-			groupId, start, end, new FileEntryModifiedDateComparator());
-	}
-
-	public List<DLFileEntry> getGroupFileEntries(
-			long groupId, int start, int end, OrderByComparator obc)
-		throws SystemException {
-
-		return dlFileEntryPersistence.findByGroupId(groupId, start, end, obc);
-	}
-
-	public List<DLFileEntry> getGroupFileEntries(
-			long groupId, long userId, int start, int end)
-		throws SystemException {
-
-		return getGroupFileEntries(
-			groupId, userId, start, end, new FileEntryModifiedDateComparator());
-	}
-
-	public List<DLFileEntry> getGroupFileEntries(
-			long groupId, long userId, int start, int end,
-			OrderByComparator obc)
-		throws SystemException {
-
-		if (userId <= 0) {
-			return dlFileEntryPersistence.findByGroupId(
-				groupId, start, end, obc);
-		}
-		else {
-			return dlFileEntryPersistence.findByG_U(
-				groupId, userId, start, end, obc);
-		}
-	}
-
-	public int getGroupFileEntriesCount(long groupId) throws SystemException {
-		return dlFileEntryPersistence.countByGroupId(groupId);
-	}
-
-	public int getGroupFileEntriesCount(long groupId, long userId)
-		throws SystemException {
-
-		if (userId <= 0) {
-			return dlFileEntryPersistence.countByGroupId(groupId);
-		}
-		else {
-			return dlFileEntryPersistence.countByG_U(groupId, userId);
-		}
-	}
-
 	public DLFileVersion getLatestFileVersion(long fileEntryId)
 		throws PortalException, SystemException {
 
@@ -796,21 +510,6 @@ public class DLRepositoryLocalServiceImpl
 
 	public List<DLFileEntry> getNoAssetFileEntries() throws SystemException {
 		return dlFileEntryFinder.findByNoAssets();
-	}
-
-	public void getSubfolderIds(
-			List<Long> folderIds, long groupId, long folderId)
-		throws SystemException {
-
-		List<DLFolder> folders = dlFolderPersistence.findByG_P(
-			groupId, folderId);
-
-		for (DLFolder folder : folders) {
-			folderIds.add(folder.getFolderId());
-
-			getSubfolderIds(
-				folderIds, folder.getGroupId(), folder.getFolderId());
-		}
 	}
 
 	public DLFileEntry moveFileEntry(
@@ -984,50 +683,6 @@ public class DLRepositoryLocalServiceImpl
 		dlAppHelperLocalService.updateAsset(
 			userId, fileEntry, fileVersion, assetCategoryIds, assetTagNames,
 			mimeType, addDraftAssetEntry, visible);
-	}
-
-	public DLFileEntry updateFileEntry(
-			long userId, long fileEntryId, String sourceFileName, String title,
-			String description, String changeLog, boolean majorVersion,
-			String extraSettings, byte[] bytes, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		InputStream is = null;
-		long size = 0;
-
-		if (bytes != null) {
-			is = new UnsyncByteArrayInputStream(bytes);
-			size = bytes.length;
-		}
-
-		return updateFileEntry(
-			userId, fileEntryId, sourceFileName, title, description, changeLog,
-			majorVersion, extraSettings, is, size, serviceContext);
-	}
-
-	public DLFileEntry updateFileEntry(
-			long userId, long fileEntryId, String sourceFileName, String title,
-			String description, String changeLog, boolean majorVersion,
-			String extraSettings, File file, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		try {
-			InputStream is = null;
-			long size = 0;
-
-			if ((file != null) && file.exists()) {
-				is = new UnsyncBufferedInputStream(new FileInputStream(file));
-				size = file.length();
-			}
-
-			return updateFileEntry(
-				userId, fileEntryId, sourceFileName, title, description,
-				changeLog, majorVersion, extraSettings, is, size,
-				serviceContext);
-		}
-		catch (FileNotFoundException fnfe) {
-			throw new NoSuchFileException();
-		}
 	}
 
 	public DLFileEntry updateFileEntry(
@@ -1467,6 +1122,134 @@ public class DLRepositoryLocalServiceImpl
 		addFolderResources(folder, communityPermissions, guestPermissions);
 	}
 
+	protected void deleteFileEntries(long groupId, long folderId)
+		throws PortalException, SystemException {
+
+		List<DLFileEntry> fileEntries = dlFileEntryPersistence.findByG_F(
+			groupId, folderId);
+
+		for (DLFileEntry fileEntry : fileEntries) {
+			deleteFileEntry(fileEntry);
+		}
+	}
+
+	protected void deleteFileEntry(DLFileEntry fileEntry)
+		throws PortalException, SystemException {
+
+		// File entry
+
+		dlFileEntryPersistence.remove(fileEntry);
+
+		// Resources
+
+		resourceLocalService.deleteResource(
+			fileEntry.getCompanyId(), DLFileEntry.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL, fileEntry.getFileEntryId());
+
+		// WebDAVProps
+
+		webDAVPropsLocalService.deleteWebDAVProps(
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
+		// Workflow
+
+		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
+			fileEntry.getCompanyId(), fileEntry.getGroupId(),
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
+		// File versions
+
+		List<DLFileVersion> fileVersions =
+			dlFileVersionPersistence.findByFileEntryId(
+				fileEntry.getFileEntryId());
+
+		for (DLFileVersion fileVersion : fileVersions) {
+			dlFileVersionPersistence.remove(fileVersion);
+		}
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
+		// Lock
+
+		String lockId = String.valueOf(fileEntry.getFileEntryId());
+
+		lockLocalService.unlock(DLFileEntry.class.getName(), lockId);
+
+		// DLApp
+
+		dlAppHelperLocalService.deleteFileEntry(fileEntry);
+
+		// File
+
+		try {
+			dlLocalService.deleteFile(
+				fileEntry.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
+				fileEntry.getRepositoryId(), fileEntry.getName());
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+		}
+	}
+
+	protected void deleteFolder(DLFolder folder)
+		throws PortalException, SystemException {
+
+		// Folders
+
+		List<DLFolder> folders = dlFolderPersistence.findByG_P(
+			folder.getGroupId(), folder.getFolderId());
+
+		for (DLFolder curFolder : folders) {
+			deleteFolder(curFolder);
+		}
+
+		// Folder
+
+		dlFolderPersistence.remove(folder);
+
+		// Resources
+
+		resourceLocalService.deleteResource(
+			folder.getCompanyId(), DLFolder.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL, folder.getFolderId());
+
+		// WebDAVProps
+
+		webDAVPropsLocalService.deleteWebDAVProps(
+			DLFolder.class.getName(), folder.getFolderId());
+
+		// File entries
+
+		deleteFileEntries(folder.getGroupId(), folder.getFolderId());
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(
+			DLFolder.class.getName(), folder.getFolderId());
+
+		// DLApp
+
+		dlAppHelperLocalService.deleteFolder(folder);
+
+		// Directory
+
+		try {
+			dlLocalService.deleteDirectory(
+				folder.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
+				folder.getFolderId(), StringPool.BLANK);
+		}
+		catch (NoSuchDirectoryException nsde) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(nsde.getMessage());
+			}
+		}
+	}
+
 	protected long getFolderId(long companyId, long folderId)
 		throws SystemException {
 
@@ -1572,6 +1355,21 @@ public class DLRepositoryLocalServiceImpl
 		}
 
 		return parentFolderId;
+	}
+
+	protected void getSubfolderIds(
+			List<Long> folderIds, long groupId, long folderId)
+		throws SystemException {
+
+		List<DLFolder> folders = dlFolderPersistence.findByG_P(
+			groupId, folderId);
+
+		for (DLFolder folder : folders) {
+			folderIds.add(folder.getFolderId());
+
+			getSubfolderIds(
+				folderIds, folder.getGroupId(), folder.getFolderId());
+		}
 	}
 
 	protected void updateFileVersion(

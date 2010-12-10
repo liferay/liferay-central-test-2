@@ -490,6 +490,18 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return _dlFileEntry.toXmlString();
 	}
 
+	public java.io.InputStream getContentStream()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntry.getContentStream();
+	}
+
+	public java.io.InputStream getContentStream(java.lang.String version)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntry.getContentStream(version);
+	}
+
 	public com.liferay.portal.kernel.util.UnicodeProperties getExtraSettingsProperties() {
 		return _dlFileEntry.getExtraSettingsProperties();
 	}

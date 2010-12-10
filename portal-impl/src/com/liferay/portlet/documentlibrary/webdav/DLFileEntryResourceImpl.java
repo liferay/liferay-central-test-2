@@ -91,8 +91,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 				version = fileVersion.getVersion();
 			}
 
-			return DLAppServiceUtil.getFileAsStream(
-				_fileEntry.getFileEntryId(), version);
+			return _fileEntry.getContentStream(version);
 		}
 		catch (Exception e) {
 			throw new WebDAVException(e);

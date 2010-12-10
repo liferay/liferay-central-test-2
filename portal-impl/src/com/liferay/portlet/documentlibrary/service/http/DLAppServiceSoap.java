@@ -374,35 +374,6 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static long getFolderId(long groupId, long parentFolderId,
-		java.lang.String name) throws RemoteException {
-		try {
-			long returnValue = DLAppServiceUtil.getFolderId(groupId,
-					parentFolderId, name);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static long[] getFolderIds(long groupId, long folderId)
-		throws RemoteException {
-		try {
-			long[] returnValue = DLAppServiceUtil.getFolderIds(groupId, folderId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
 		long groupId, long parentFolderId) throws RemoteException {
 		try {

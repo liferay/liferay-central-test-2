@@ -285,7 +285,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 							isDataStrategyMirrorWithOverwritting()) {
 
 						DLAppLocalServiceUtil.deleteFileEntry(
-							existingTitleFileEntry);
+							existingTitleFileEntry.getFileEntryId());
 					}
 					else {
 						String originalTitle = fileEntry.getTitle();
@@ -332,8 +332,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 			else {
 				DLFileVersion latestFileVersion =
-					DLAppLocalServiceUtil.getLatestFileVersion(
-						existingFileEntry.getFileEntryId());
+					existingFileEntry.getLatestFileVersion();
 
 				DLAppLocalServiceUtil.updateAsset(
 					userId, existingFileEntry, latestFileVersion,
@@ -953,12 +952,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (!portletDataContext.addPrimaryKey(
 				DLPortletDataHandlerImpl.class, "deleteData")) {
 
-			DLAppLocalServiceUtil.deleteFolders(
+			DLAppLocalServiceUtil.deleteAll(
 				portletDataContext.getScopeGroupId());
-
-			DLAppLocalServiceUtil.deleteFileEntries(
-				portletDataContext.getScopeGroupId(),
-				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 		}
 
 		return null;
