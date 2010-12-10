@@ -209,10 +209,6 @@ public interface VirtualHostLocalService {
 		com.liferay.portal.model.VirtualHost virtualHost, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.VirtualHost addVirtualHost(long companyId,
-		long layoutSetId, java.lang.String hostname)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.VirtualHost getVirtualHost(long companyId,
 		long layoutSetId)
@@ -224,4 +220,8 @@ public interface VirtualHostLocalService {
 		java.lang.String hostname)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.VirtualHost updateVirtualHost(
+		long companyId, long layoutSetId, java.lang.String hostname)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

@@ -759,15 +759,14 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				VirtualHost virtualHost = virtualHostPersistence.findByHostname(
 					virtualHostname);
 
-				if ((virtualHost.getCompanyId() == companyId) &&
-					(virtualHost.getLayoutSetId() == 0)) {
-				}
-				else {
+				if ((virtualHost.getCompanyId() != companyId) ||
+					(virtualHost.getLayoutSetId() != 0)) {
+
 					throw new CompanyVirtualHostException();
 				}
 			}
 			catch (NoSuchVirtualHostException nsvhe) {
-				virtualHostLocalService.addVirtualHost(
+				virtualHostLocalService.updateVirtualHost(
 					companyId, 0, virtualHostname);
 			}
 		}

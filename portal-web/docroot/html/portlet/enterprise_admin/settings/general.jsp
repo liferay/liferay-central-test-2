@@ -17,6 +17,14 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
+VirtualHost virtualHost = null;
+
+try {
+	virtualHost = VirtualHostLocalServiceUtil.getVirtualHost(company.getCompanyId(), 0);
+}
+catch (Exception e) {
+}
+
 String defaultLandingPagePath = ParamUtil.getString(request, "settings--" + PropsKeys.DEFAULT_LANDING_PAGE_PATH + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_LANDING_PAGE_PATH, PropsValues.DEFAULT_LANDING_PAGE_PATH));
 String defaultLogoutPagePath = ParamUtil.getString(request, "settings--" + PropsKeys.DEFAULT_LOGOUT_PAGE_PATH + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_LOGOUT_PAGE_PATH, PropsValues.DEFAULT_LOGOUT_PAGE_PATH));
 %>
@@ -40,7 +48,7 @@ String defaultLogoutPagePath = ParamUtil.getString(request, "settings--" + Props
 <aui:fieldset column="<%= true %>" cssClass="aui-w50">
 	<liferay-ui:error exception="<%= CompanyVirtualHostException.class %>" message="please-enter-a-valid-virtual-host" />
 
-	<aui:input bean="<%= company %>" name="virtualHost" model="<%= Company.class %>" />
+	<aui:input bean="<%= virtualHost %>" fieldParam="virtualHostname" label="virtual-host" model="<%= VirtualHost.class %>" name="hostname" />
 </aui:fieldset>
 
 <h3><liferay-ui:message key="navigation" /></h3>

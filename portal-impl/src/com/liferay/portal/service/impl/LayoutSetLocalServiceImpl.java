@@ -290,14 +290,15 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 				VirtualHost virtualHost = virtualHostPersistence.findByHostname(
 					virtualHostname);
 
-				if (virtualHost.getLayoutSetId() !=
-						layoutSet.getLayoutSetId()) {
+				if ((virtualHost.getCompanyId() != layoutSet.getCompanyId()) ||
+					(virtualHost.getLayoutSetId() !=
+						layoutSet.getLayoutSetId())) {
 
 					throw new LayoutSetVirtualHostException();
 				}
 			}
 			catch (NoSuchVirtualHostException nsvhe) {
-				virtualHostLocalService.addVirtualHost(
+				virtualHostLocalService.updateVirtualHost(
 					layoutSet.getCompanyId(), layoutSet.getLayoutSetId(),
 					virtualHostname);
 			}

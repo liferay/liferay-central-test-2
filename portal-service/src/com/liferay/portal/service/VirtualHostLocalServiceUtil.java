@@ -229,12 +229,6 @@ public class VirtualHostLocalServiceUtil {
 		return getService().updateVirtualHost(virtualHost, merge);
 	}
 
-	public static com.liferay.portal.model.VirtualHost addVirtualHost(
-		long companyId, long layoutSetId, java.lang.String hostname)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().addVirtualHost(companyId, layoutSetId, hostname);
-	}
-
 	public static com.liferay.portal.model.VirtualHost getVirtualHost(
 		long companyId, long layoutSetId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -247,6 +241,12 @@ public class VirtualHostLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getVirtualHost(hostname);
+	}
+
+	public static com.liferay.portal.model.VirtualHost updateVirtualHost(
+		long companyId, long layoutSetId, java.lang.String hostname)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().updateVirtualHost(companyId, layoutSetId, hostname);
 	}
 
 	public static VirtualHostLocalService getService() {

@@ -25,24 +25,6 @@ import com.liferay.portal.service.base.VirtualHostLocalServiceBaseImpl;
 public class VirtualHostLocalServiceImpl
 	extends VirtualHostLocalServiceBaseImpl {
 
-	public VirtualHost addVirtualHost(
-			long companyId, long layoutSetId, String hostname)
-		throws SystemException {
-
-		long virtualHostId = counterLocalService.increment();
-
-		VirtualHost virtualHost = virtualHostPersistence.create(
-			virtualHostId);
-
-		virtualHost.setCompanyId(companyId);
-		virtualHost.setLayoutSetId(layoutSetId);
-		virtualHost.setHostname(hostname);
-
-		virtualHostPersistence.update(virtualHost, false);
-
-		return virtualHost;
-	}
-
 	public VirtualHost getVirtualHost(long companyId, long layoutSetId)
 		throws PortalException, SystemException {
 
@@ -53,6 +35,29 @@ public class VirtualHostLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return virtualHostPersistence.findByHostname(hostname);
+	}
+
+	public VirtualHost updateVirtualHost(
+			long companyId, long layoutSetId, String hostname)
+		throws SystemException {
+
+		VirtualHost virtualHost = virtualHostPersistence.fetchByC_L(
+			companyId, layoutSetId);
+
+		if (virtualHost == null) {
+			long virtualHostId = counterLocalService.increment();
+
+			virtualHost = virtualHostPersistence.create(virtualHostId);
+
+			virtualHost.setCompanyId(companyId);
+			virtualHost.setLayoutSetId(layoutSetId);
+		}
+
+		virtualHost.setHostname(hostname);
+
+		virtualHostPersistence.update(virtualHost, false);
+
+		return virtualHost;
 	}
 
 }

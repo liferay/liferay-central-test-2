@@ -805,6 +805,9 @@
 		<field name="pathDate" type="Date" />
 	</model>
 	<model name="com.liferay.portal.model.VirtualHost">
+		<default-hints>
+			<hint name="display-width">150</hint>
+		</default-hints>
 		<field name="virtualHostId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="layoutSetId" type="long" />
