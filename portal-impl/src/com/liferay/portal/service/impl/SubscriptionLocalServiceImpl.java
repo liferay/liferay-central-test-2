@@ -33,24 +33,6 @@ import java.util.List;
 public class SubscriptionLocalServiceImpl
 	extends SubscriptionLocalServiceBaseImpl {
 
-	@Deprecated
-	public Subscription addSubscription(
-			long userId, String className, long classPK)
-		throws PortalException, SystemException {
-
-		return addSubscription(
-			userId, -1, className, classPK,
-			SubscriptionConstants.FREQUENCY_INSTANT);
-	}
-
-	@Deprecated
-	public Subscription addSubscription(
-			long userId, String className, long classPK, String frequency)
-		throws PortalException, SystemException {
-
-		return addSubscription(userId, -1, className, classPK, frequency);
-	}
-
 	public Subscription addSubscription(
 			long userId, long groupId, String className, long classPK)
 		throws PortalException, SystemException {
@@ -64,6 +46,8 @@ public class SubscriptionLocalServiceImpl
 			long userId, long groupId, String className, long classPK,
 			String frequency)
 		throws PortalException, SystemException {
+
+		// Subscription
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		long classNameId = PortalUtil.getClassNameId(className);
@@ -89,9 +73,10 @@ public class SubscriptionLocalServiceImpl
 			subscriptionPersistence.update(subscription, false);
 		}
 
-		// social - we need an asset for social equity
+		if (groupId > 0) {
 
-		if (groupId > -1) {
+			// Asset
+
 			try {
 				assetEntryLocalService.getEntry(className, classPK);
 			}
@@ -103,11 +88,35 @@ public class SubscriptionLocalServiceImpl
 					false);
 			}
 
+			// Social
+
 			socialEquityLogLocalService.addEquityLogs(
 				userId, className, classPK, ActionKeys.SUBSCRIBE);
 		}
 
 		return subscription;
+	}
+
+	/**
+	 * @deprecated {@link #addSubscription(long, long, String, long)}
+	 */
+	public Subscription addSubscription(
+			long userId, String className, long classPK)
+		throws PortalException, SystemException {
+
+		return addSubscription(
+			userId, 0, className, classPK,
+			SubscriptionConstants.FREQUENCY_INSTANT);
+	}
+
+	/**
+	 * @deprecated {@link #addSubscription(long, long, String, long, String)}
+	 */
+	public Subscription addSubscription(
+			long userId, String className, long classPK, String frequency)
+		throws PortalException, SystemException {
+
+		return addSubscription(userId, 0, className, classPK, frequency);
 	}
 
 	public void deleteSubscription(long subscriptionId)
