@@ -49,7 +49,8 @@ public class TearDownSettingsConfigurationTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("_130_name", RuntimeVariables.replace("Liferay"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_130_virtualHost", RuntimeVariables.replace("localhost"));
+		selenium.type("_130_virtualHostname",
+			RuntimeVariables.replace("localhost"));
 		selenium.saveScreenShotAndSource();
 		selenium.type("_130_mx", RuntimeVariables.replace("liferay.com"));
 		selenium.saveScreenShotAndSource();
