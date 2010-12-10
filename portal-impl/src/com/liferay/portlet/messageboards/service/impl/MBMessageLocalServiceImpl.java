@@ -395,22 +395,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			throw new SystemException("Testing roll back");
 		}*/
 
-		// Social
-
-		if (files.size() > 0) {
-			String dirName = message.getAttachmentsDir();
-
-			for (int i = 0; i < files.size(); i++) {
-				ObjectValuePair<String, byte[]> ovp = files.get(i);
-
-				String fileName = ovp.getKey();
-
-				socialEquityLogLocalService.addEquityLogs(
-					userId, MBMessage.class.getName(), message.getMessageId(),
-					ActionKeys.ADD_ATTACHMENT, dirName + "/" + fileName);
-			}
-		}
-
 		return message;
 	}
 
@@ -1180,8 +1164,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public void subscribeMessage(long userId, long messageId)
 		throws PortalException, SystemException {
 
+		// Message
+
 		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
+		// Subscription
+	
 		subscriptionLocalService.addSubscription(
 			userId, message.getGroupId(), MBThread.class.getName(),
 			message.getThreadId());
@@ -1190,16 +1178,20 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public void unsubscribeMessage(long userId, long messageId)
 		throws PortalException, SystemException {
 
-		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
+		// Message
 
-		subscriptionLocalService.deleteSubscription(
-			userId, MBThread.class.getName(), message.getThreadId());
+		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
 		// Social
 
 		socialEquityLogLocalService.deactivateEquityLogs(
 			userId, MBMessage.class.getName(), messageId, ActionKeys.SUBSCRIBE,
 			StringPool.BLANK);
+
+		// Subscription
+
+		subscriptionLocalService.deleteSubscription(
+			userId, MBThread.class.getName(), message.getThreadId());
 	}
 
 	public void updateAsset(
@@ -1300,11 +1292,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				if (!existingFiles.contains(fileName)) {
 					dlLocalService.deleteFile(
 						companyId, portletId, repositoryId, fileName);
-
-					socialEquityLogLocalService.deactivateEquityLogs(
-						userId, MBMessage.class.getName(),
-						message.getMessageId(), ActionKeys.ADD_ATTACHMENT,
-						fileName);
 				}
 			}
 
@@ -1319,11 +1306,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 						companyId, portletId, groupId, repositoryId,
 						dirName + "/" + fileName, 0, StringPool.BLANK,
 						message.getModifiedDate(), new ServiceContext(), bytes);
-
-					socialEquityLogLocalService.addEquityLogs(
-						userId, MBMessage.class.getName(),
-						message.getMessageId(), ActionKeys.ADD_ATTACHMENT,
-						dirName + "/" + fileName);
 				}
 				catch (DuplicateFileException dfe) {
 				}
