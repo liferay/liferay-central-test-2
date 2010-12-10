@@ -30,6 +30,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
@@ -704,6 +705,8 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 			for (DLFileEntry fileEntry : fileEntries) {
 				unlockFileEntry(fileEntry.getFileEntryId());
 			}
+		}
+		catch (NoSuchFolderException nsfe) {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
