@@ -75,7 +75,7 @@ public class Portlet_AddCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("This is a portlet comment!"),
 			selenium.getText("//div/div/div[3]/div/div[1]"));
 	}

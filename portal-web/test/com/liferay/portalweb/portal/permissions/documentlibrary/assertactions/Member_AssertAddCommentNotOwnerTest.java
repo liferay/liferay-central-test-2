@@ -83,7 +83,7 @@ public class Member_AssertAddCommentNotOwnerTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+				"Your request completed successfully."));
 		assertTrue(selenium.isTextPresent(
 				"I am a Member and I can write a comment on a different user's uploaded document!"));
 	}
