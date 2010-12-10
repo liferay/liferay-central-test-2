@@ -19,7 +19,6 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-int pos = row.getPos();
 Object[] objArray = (Object[])row.getObject();
 
 DLFileEntry fileEntry = (DLFileEntry)objArray[0];
@@ -31,7 +30,7 @@ Boolean hasLock = (Boolean)objArray[5];
 %>
 
 <liferay-ui:icon-menu>
-	<c:if test="<%= showActions && (fileVersion.getStatus() == WorkflowConstants.STATUS_APPROVED) && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) && (!isLocked || hasLock) && pos != 0 %>">
+	<c:if test="<%= showActions && (fileVersion.getStatus() == WorkflowConstants.STATUS_APPROVED) && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) && (!isLocked || hasLock) && (row.getPos() != 0) %>">
 		<portlet:renderURL var="redirectURL">
 			<portlet:param name="struts_action" value="/document_library/view" />
 			<portlet:param name="folderId" value="<%= String.valueOf(fileEntry.getFolderId()) %>" />

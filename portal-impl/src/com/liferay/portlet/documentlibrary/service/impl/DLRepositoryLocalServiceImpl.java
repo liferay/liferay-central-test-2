@@ -630,8 +630,8 @@ public class DLRepositoryLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		DLFileVersion fileVersion =
-			dlRepositoryLocalService.getFileVersion(fileEntryId, version);
+		DLFileVersion fileVersion = dlRepositoryLocalService.getFileVersion(
+			fileEntryId, version);
 
 		if (fileVersion.getStatus() != WorkflowConstants.STATUS_APPROVED) {
 			return;
@@ -640,16 +640,15 @@ public class DLRepositoryLocalServiceImpl
 		String sourceFileName = fileVersion.getTitle();
 		String title = fileVersion.getTitle();
 		String description = fileVersion.getDescription();
-		String changeLog = DLFileEntryConstants.REVERTED + " to " + version;
+		String changeLog = "Reverted to " + version;
 		boolean majorVersion = true;
 		String extraSettings = fileVersion.getExtraSettings();
 		InputStream is = getFileAsStream(userId, fileEntryId, version);
 		long size = fileVersion.getSize();
 
 		updateFileEntry(
-			userId, fileEntryId, sourceFileName, title, description,
-			changeLog, majorVersion, extraSettings, is, size,
-			serviceContext);
+			userId, fileEntryId, sourceFileName, title, description, changeLog,
+			majorVersion, extraSettings, is, size, serviceContext);
 	}
 
 	public void updateAsset(
