@@ -58,6 +58,7 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
@@ -2001,6 +2002,17 @@ public class JournalArticleLocalServiceImpl
 		// Subscriptions
 
 		notifySubscribers(article, serviceContext);
+
+		// Social
+
+		if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&
+			(status == WorkflowConstants.STATUS_APPROVED)) {
+
+			socialEquityLogLocalService.addEquityLogs(
+				userId, JournalArticle.class.getName(),
+				article.getResourcePrimKey(), ActionKeys.ADD_ARTICLE,
+				StringPool.BLANK);
+		}
 
 		return article;
 	}

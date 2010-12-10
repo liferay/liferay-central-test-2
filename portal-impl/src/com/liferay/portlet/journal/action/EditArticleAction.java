@@ -409,8 +409,8 @@ public class EditArticleAction extends PortletAction {
 				ActionKeys.SUBSCRIBE)) {
 
 			SubscriptionLocalServiceUtil.addSubscription(
-				themeDisplay.getUserId(), JournalArticle.class.getName(),
-				themeDisplay.getScopeGroupId());
+				themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
+				JournalArticle.class.getName(),	themeDisplay.getScopeGroupId());
 		}
 	}
 
