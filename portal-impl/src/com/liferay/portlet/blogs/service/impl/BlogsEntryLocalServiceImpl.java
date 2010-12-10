@@ -84,6 +84,7 @@ import net.htmlparser.jericho.StartTag;
  * @author Raymond Augé
  * @author Thiago Moreira
  * @author Juan Fernández
+ * @author Zsolt Berentey
  */
 public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
@@ -606,6 +607,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			user.getCompanyId(), entry.getGroupId(), userId,
 			BlogsEntry.class.getName(), entry.getEntryId(), entry,
 			serviceContext);
+
+		// Social
+
+		socialEquityLogLocalService.addEquityLogs(
+			userId, BlogsEntry.class.getName(), entry.getEntryId(),
+			ActionKeys.UPDATE, StringPool.BLANK);
 
 		return entry;
 	}

@@ -81,6 +81,7 @@ import org.apache.struts.action.ActionMapping;
  * @author Wilson S. Man
  * @author Thiago Moreira
  * @author Juan Fernández
+ * @author Zsolt Berentey
  */
 public class EditEntryAction extends PortletAction {
 
@@ -324,8 +325,8 @@ public class EditEntryAction extends PortletAction {
 				ActionKeys.SUBSCRIBE)) {
 
 			SubscriptionLocalServiceUtil.addSubscription(
-				themeDisplay.getUserId(), BlogsEntry.class.getName(),
-				themeDisplay.getScopeGroupId());
+				themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
+				BlogsEntry.class.getName(), themeDisplay.getScopeGroupId());
 		}
 	}
 
