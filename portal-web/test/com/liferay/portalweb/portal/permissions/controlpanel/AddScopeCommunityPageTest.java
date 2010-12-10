@@ -119,6 +119,9 @@ public class AddScopeCommunityPageTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("Manage Pages"),
+					selenium.getText(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 				selenium.waitForPageToLoad("30000");
@@ -173,7 +176,7 @@ public class AddScopeCommunityPageTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent(
-						"Your request completed successfully."));
+						"Your request processed successfully."));
 
 				boolean publicPagePresent = selenium.isElementPresent(
 						"//li/ul/li/div/div[3]/a");

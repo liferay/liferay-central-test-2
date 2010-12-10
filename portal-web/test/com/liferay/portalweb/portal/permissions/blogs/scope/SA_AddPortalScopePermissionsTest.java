@@ -65,7 +65,7 @@ public class SA_AddPortalScopePermissionsTest extends BaseTestCase {
 		selenium.clickAt("link=Roles", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//tr[17]/td[4]/ul/li/strong/a",
+		selenium.clickAt("//tr[17]/td[4]/span/ul/li/strong/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {

@@ -72,7 +72,7 @@ public class SA_RemovePortalScopePermissionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//tr[17]/td[4]/ul/li/strong/a")) {
+				if (selenium.isVisible("//tr[17]/td[4]/span/ul/li/strong/a")) {
 					break;
 				}
 			}
@@ -83,7 +83,7 @@ public class SA_RemovePortalScopePermissionsTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//tr[17]/td[4]/ul/li/strong/a",
+		selenium.clickAt("//tr[17]/td[4]/span/ul/li/strong/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {

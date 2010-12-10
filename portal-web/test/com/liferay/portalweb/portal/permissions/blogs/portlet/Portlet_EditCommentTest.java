@@ -74,11 +74,11 @@ public class Portlet_EditCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
-				"Your request completed successfully."));
+				"Your request processed successfully."));
 		assertEquals(RuntimeVariables.replace(
 				"This is a portlet comment! Edited!"),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div/div[3]/div/div[1]"));
 		assertNotEquals(RuntimeVariables.replace("This is a portlet comment!"),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div/div[3]/div/div[1]"));
 	}
 }

@@ -47,7 +47,8 @@ public class Portlet_DeleteCommentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isPartialText("//td[2]/div[1]",
+		assertTrue(selenium.isPartialText(
+				"//div/div/div/div/div[3]/div/div[1]",
 				"This is a portlet comment!"));
 		selenium.click(RuntimeVariables.replace("link=Delete"));
 		selenium.waitForPageToLoad("30000");
@@ -55,7 +56,7 @@ public class Portlet_DeleteCommentTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request completed successfully."),
+				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertFalse(selenium.isTextPresent("This is a portlet comment! Edited!"));
 		assertFalse(selenium.isTextPresent("This is a portlet comment!"));
