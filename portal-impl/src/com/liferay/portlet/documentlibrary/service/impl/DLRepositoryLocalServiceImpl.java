@@ -1432,6 +1432,8 @@ public class DLRepositoryLocalServiceImpl
 				sourceFileName, extension, sourceFileName, true, is);
 		}
 
+		dlLocalService.validate(title, true);
+
 		validateFile(groupId, folderId, fileEntryId, title);
 	}
 

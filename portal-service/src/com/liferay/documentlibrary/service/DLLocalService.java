@@ -140,6 +140,10 @@ public interface DLLocalService {
 		throws PortalException, SystemException;
 
 	public void validate(
+			String fileName, boolean validateFileExtension)
+		throws PortalException, SystemException;
+
+	public void validate(
 			String fileName, boolean validateFileExtension, byte[] bytes)
 		throws PortalException, SystemException;
 
