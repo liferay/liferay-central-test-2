@@ -29,6 +29,7 @@
 	<xs:element name="assignments">
 		<xs:complexType>
 			<xs:choice>
+				<xs:element ref="resource-actions" minOccurs="0" maxOccurs="1" />
 				<xs:element ref="roles" minOccurs="0" maxOccurs="1" />
 				<xs:element ref="user" minOccurs="0" maxOccurs="1" />
 			</xs:choice>
@@ -100,6 +101,13 @@
 					</xs:simpleType>
 				</xs:element>
 				<xs:element ref="recipients" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="resource-actions">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="resource-action" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
