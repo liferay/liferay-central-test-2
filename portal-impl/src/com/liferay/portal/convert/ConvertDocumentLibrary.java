@@ -102,7 +102,7 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 	}
 
 	protected void migrateDL() throws Exception {
-		int count = DLRepositoryLocalServiceUtil.getAllFileEntriesCount();
+		int count = DLRepositoryLocalServiceUtil.getFileEntriesCount();
 		int pages = count / Indexer.DEFAULT_INTERVAL;
 
 		MaintenanceUtil.appendStatus(
@@ -113,7 +113,7 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 			int end = start + Indexer.DEFAULT_INTERVAL;
 
 			List<DLFileEntry> dlFileEntries =
-				DLRepositoryLocalServiceUtil.getAllFileEntries(start, end);
+				DLRepositoryLocalServiceUtil.getFileEntries(start, end);
 
 			String portletId = PortletKeys.DOCUMENT_LIBRARY;
 

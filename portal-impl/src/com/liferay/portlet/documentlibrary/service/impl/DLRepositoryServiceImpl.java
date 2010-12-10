@@ -889,8 +889,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 
 				addFileEntry(
 					destFolder.getGroupId(), destFolder.getFolderId(), title,
-					description, null, extraSettings, is, size,
-					serviceContext);
+					description, null, extraSettings, is, size, serviceContext);
 			}
 			catch (Exception e) {
 				_log.error(e, e);

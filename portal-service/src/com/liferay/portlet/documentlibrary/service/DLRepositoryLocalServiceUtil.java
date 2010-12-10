@@ -78,17 +78,6 @@ public class DLRepositoryLocalServiceUtil {
 		getService().deleteFolder(folderId);
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getAllFileEntries(
-		int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getAllFileEntries(start, end);
-	}
-
-	public static int getAllFileEntriesCount()
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getAllFileEntriesCount();
-	}
-
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getCompanyFolders(
 		long companyId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -105,6 +94,12 @@ public class DLRepositoryLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFileAsStream(userId, fileEntryId, version);
+	}
+
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFileEntries(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
@@ -137,6 +132,11 @@ public class DLRepositoryLocalServiceUtil {
 		return getService()
 				   .getFileEntriesAndFileShortcutsCount(groupId, folderId,
 			status);
+	}
+
+	public static int getFileEntriesCount()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFileEntriesCount();
 	}
 
 	public static int getFileEntriesCount(long groupId, long folderId)

@@ -70,11 +70,11 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		if (file == null) {
-			throw new FileSizeException();
-		}
-
 		try {
+			if (file == null) {
+				throw new FileSizeException();
+			}
+
 			InputStream is = new UnsyncBufferedInputStream(
 				new FileInputStream(file));
 

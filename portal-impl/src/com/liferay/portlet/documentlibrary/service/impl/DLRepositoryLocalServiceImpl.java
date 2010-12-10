@@ -274,16 +274,6 @@ public class DLRepositoryLocalServiceImpl
 		deleteFolder(folder);
 	}
 
-	public List<DLFileEntry> getAllFileEntries(int start, int end)
-		throws SystemException {
-
-		return dlFileEntryPersistence.findAll(start, end);
-	}
-
-	public int getAllFileEntriesCount() throws SystemException {
-		return dlFileEntryPersistence.countAll();
-	}
-
 	public List<DLFolder> getCompanyFolders(long companyId, int start, int end)
 		throws SystemException {
 
@@ -312,6 +302,12 @@ public class DLRepositoryLocalServiceImpl
 		return dlLocalService.getFileAsStream(
 			fileEntry.getCompanyId(), fileEntry.getRepositoryId(),
 			fileEntry.getName(), version);
+	}
+
+	public List<DLFileEntry> getFileEntries(int start, int end)
+		throws SystemException {
+
+		return dlFileEntryPersistence.findAll(start, end);
 	}
 
 	public List<DLFileEntry> getFileEntries(
@@ -347,6 +343,10 @@ public class DLRepositoryLocalServiceImpl
 		folderIds.add(folderId);
 
 		return getFileEntriesAndFileShortcutsCount(groupId, folderIds, status);
+	}
+
+	public int getFileEntriesCount() throws SystemException {
+		return dlFileEntryPersistence.countAll();
 	}
 
 	public int getFileEntriesCount(long groupId, long folderId)
