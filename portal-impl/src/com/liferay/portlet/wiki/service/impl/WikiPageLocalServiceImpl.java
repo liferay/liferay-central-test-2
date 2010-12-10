@@ -1046,7 +1046,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		WikiPage page = getPage(nodeId, title);
 
 		subscriptionLocalService.addSubscription(
-			userId, WikiPage.class.getName(), page.getResourcePrimKey());
+			userId, page.getGroupId(), WikiPage.class.getName(),
+			page.getResourcePrimKey());
 	}
 
 	public void unsubscribePage(long userId, long nodeId, String title)

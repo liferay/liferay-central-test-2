@@ -284,8 +284,10 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	public void subscribeNode(long userId, long nodeId)
 		throws PortalException, SystemException {
 
+		WikiNode node = getNode(nodeId);
+
 		subscriptionLocalService.addSubscription(
-			userId, WikiNode.class.getName(), nodeId);
+			userId, node.getGroupId(), WikiNode.class.getName(), nodeId);
 	}
 
 	public void unsubscribeNode(long userId, long nodeId)
