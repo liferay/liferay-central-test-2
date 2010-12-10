@@ -402,7 +402,8 @@ public class SocialEquityLogLocalServiceImpl
 			}
 		}
 
-		user.updateSocialContributionEquity(socialEquityValue.getValue());
+		user.updateSocialContributionEquity(
+			groupId, socialEquityValue.getValue());
 
 		String sql = CustomSQLUtil.get(_UPDATE_SOCIAL_EQUITY_USER_CQ);
 
@@ -441,7 +442,8 @@ public class SocialEquityLogLocalServiceImpl
 			}
 		}
 
-		user.updateSocialParticipationEquity(socialEquityValue.getValue());
+		user.updateSocialParticipationEquity(
+			groupId, socialEquityValue.getValue());
 
 		String sql = CustomSQLUtil.get(_UPDATE_SOCIAL_EQUITY_USER_PQ);
 

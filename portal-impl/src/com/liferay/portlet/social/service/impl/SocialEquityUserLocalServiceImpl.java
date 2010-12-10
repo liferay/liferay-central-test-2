@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.dao.orm.ProjectionList;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portlet.social.model.SocialEquityUser;
 import com.liferay.portlet.social.model.SocialEquityValue;
 import com.liferay.portlet.social.service.base.SocialEquityUserLocalServiceBaseImpl;
@@ -36,15 +37,27 @@ public class SocialEquityUserLocalServiceImpl
 	public SocialEquityValue getContributionEquity(long userId)
 		throws SystemException {
 
+		return getContributionEquity(userId, 0);
+	}
+
+	public SocialEquityValue getContributionEquity(long userId, long groupId)
+	throws SystemException {
+
 		ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
 
 		projectionList.add(ProjectionFactoryUtil.sum("contributionK"));
 		projectionList.add(ProjectionFactoryUtil.sum("contributionB"));
 
-		return getEquityValue(userId, projectionList);
+		return getEquityValue(userId, groupId, projectionList);
 	}
 
 	public SocialEquityValue getParticipationEquity(long userId)
+		throws SystemException {
+
+		return getParticipationEquity(userId, 0);
+	}
+
+	public SocialEquityValue getParticipationEquity(long userId, long groupId)
 		throws SystemException {
 
 		ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
@@ -52,7 +65,7 @@ public class SocialEquityUserLocalServiceImpl
 		projectionList.add(ProjectionFactoryUtil.sum("participationK"));
 		projectionList.add(ProjectionFactoryUtil.sum("participationB"));
 
-		return getEquityValue(userId, projectionList);
+		return getEquityValue(userId, groupId, projectionList);
 	}
 
 	public int getRank(long groupId, long userId) throws SystemException {
@@ -80,7 +93,7 @@ public class SocialEquityUserLocalServiceImpl
 	}
 
 	protected SocialEquityValue getEquityValue(
-			long userId, ProjectionList projectionList)
+			long userId, long groupId, ProjectionList projectionList)
 		throws SystemException {
 
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
@@ -89,6 +102,9 @@ public class SocialEquityUserLocalServiceImpl
 		dynamicQuery.setProjection(projectionList);
 
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("userId", userId));
+
+		if (groupId > 0)
+			dynamicQuery.add(RestrictionsFactoryUtil.eq("groupId", groupId));
 
 		List<?> results = dynamicQuery(dynamicQuery);
 

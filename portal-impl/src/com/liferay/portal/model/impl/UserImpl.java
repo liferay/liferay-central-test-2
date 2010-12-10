@@ -67,9 +67,11 @@ import com.liferay.util.UniqueList;
 
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.TimeZone;
 import java.util.TreeSet;
@@ -491,6 +493,30 @@ public class UserImpl extends UserModelImpl implements User {
 		return _socialContributionEquity.get();
 	}
 
+	public double getSocialContributionEquity(long groupId) {
+		AtomicReference<Double> contributionEquityByGroup =
+			_contributionEquityByGroup.get(groupId);
+
+		if (contributionEquityByGroup == null) {
+			try {
+				SocialEquityValue socialEquityValue =
+					SocialEquityUserLocalServiceUtil.getContributionEquity(
+						getUserId(), groupId);
+
+				contributionEquityByGroup = new AtomicReference<Double>(
+					socialEquityValue.getValue());
+
+				_contributionEquityByGroup.put(
+					groupId, contributionEquityByGroup);
+			}
+			catch (SystemException se) {
+				return 0;
+			}
+		}
+
+		return contributionEquityByGroup.get();
+	}
+
 	public double getSocialParticipationEquity() {
 		if (_socialParticipationEquity == null) {
 			try {
@@ -509,8 +535,37 @@ public class UserImpl extends UserModelImpl implements User {
 		return _socialParticipationEquity.get();
 	}
 
+	public double getSocialParticipationEquity(long groupId) {
+		AtomicReference<Double> participationEquityByGroup =
+			_participationEquityByGroup.get(groupId);
+
+		if (participationEquityByGroup == null) {
+			try {
+				SocialEquityValue socialEquityValue =
+					SocialEquityUserLocalServiceUtil.getParticipationEquity(
+						getUserId(), groupId);
+
+				participationEquityByGroup = new AtomicReference<Double>(
+					socialEquityValue.getValue());
+
+				_participationEquityByGroup.put(
+					groupId, participationEquityByGroup);
+			}
+			catch (SystemException se) {
+				return 0;
+			}
+		}
+
+		return participationEquityByGroup.get();
+	}
+
 	public double getSocialPersonalEquity() {
 		return getSocialContributionEquity() + getSocialParticipationEquity();
+	}
+
+	public double getSocialPersonalEquity(long groupId) {
+		return getSocialContributionEquity(groupId) +
+			getSocialParticipationEquity(groupId);
 	}
 
 	public long[] getTeamIds() throws SystemException {
@@ -659,11 +714,24 @@ public class UserImpl extends UserModelImpl implements User {
 		super.setTimeZoneId(timeZoneId);
 	}
 
-	public void updateSocialContributionEquity(double value) {
-		if (_socialContributionEquity != null) {
-			double currentValue = 0;
-			double newValue = 0;
+	public void updateSocialContributionEquity(long groupId, double value) {
+		double currentValue = 0;
+		double newValue = 0;
 
+		AtomicReference<Double> contributionEquityByGroup =
+			_contributionEquityByGroup.get(groupId);
+
+		if (contributionEquityByGroup != null) {
+			do {
+				currentValue = contributionEquityByGroup.get();
+
+				newValue = currentValue + value;
+			}
+			while (!contributionEquityByGroup.compareAndSet(
+						currentValue, newValue));
+		}
+
+		if (_socialContributionEquity != null) {
 			do {
 				currentValue = _socialContributionEquity.get();
 
@@ -674,11 +742,24 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 	}
 
-	public void updateSocialParticipationEquity(double value) {
-		if (_socialParticipationEquity != null) {
-			double currentValue = 0;
-			double newValue = 0;
+	public void updateSocialParticipationEquity(long groupId, double value) {
+		double currentValue = 0;
+		double newValue = 0;
 
+		AtomicReference<Double> participationEquityByGroup =
+			_participationEquityByGroup.get(groupId);
+
+		if (participationEquityByGroup != null) {
+			do {
+				currentValue = participationEquityByGroup.get();
+
+				newValue = currentValue + value;
+			}
+			while (!participationEquityByGroup.compareAndSet(
+						currentValue, newValue));
+		}
+
+		if (_socialParticipationEquity != null) {
 			do {
 				currentValue = _socialParticipationEquity.get();
 
@@ -691,7 +772,11 @@ public class UserImpl extends UserModelImpl implements User {
 
 	private static final String _GET_MY_PLACES_CACHE_NAME = "GET_MY_PLACES";
 
+	private Map<Long, AtomicReference<Double>> _contributionEquityByGroup =
+		new HashMap<Long, AtomicReference<Double>>();
 	private Locale _locale;
+	private Map<Long, AtomicReference<Double>> _participationEquityByGroup =
+		new HashMap<Long, AtomicReference<Double>>();
 	private boolean _passwordModified;
 	private String _passwordUnencrypted;
 	private AtomicReference<Double> _socialContributionEquity;
