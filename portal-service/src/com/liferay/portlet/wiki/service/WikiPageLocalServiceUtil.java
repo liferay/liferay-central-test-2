@@ -279,6 +279,17 @@ public class WikiPageLocalServiceUtil {
 			inputStream);
 	}
 
+	public static void addPageAttachments(long userId, long nodeId,
+		java.lang.String title,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<java.lang.String, byte[]>> files)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().addPageAttachments(userId, nodeId, title, files);
+	}
+
+	/**
+	* @deprecated {@link #addPageAttachments(long, long, String, List)}
+	*/
 	public static void addPageAttachments(long nodeId, java.lang.String title,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<java.lang.String, byte[]>> files)
 		throws com.liferay.portal.kernel.exception.PortalException,

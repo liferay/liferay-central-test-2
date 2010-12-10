@@ -360,7 +360,7 @@ public class MediaWikiImporter implements WikiImporter {
 
 			if ((i % 5) == 0) {
 				WikiPageLocalServiceUtil.addPageAttachments(
-					node.getNodeId(), SHARED_IMAGES_TITLE, attachments);
+					userId, node.getNodeId(), SHARED_IMAGES_TITLE, attachments);
 
 				attachments.clear();
 
@@ -372,7 +372,7 @@ public class MediaWikiImporter implements WikiImporter {
 
 		if (!attachments.isEmpty()) {
 			WikiPageLocalServiceUtil.addPageAttachments(
-				node.getNodeId(), SHARED_IMAGES_TITLE, attachments);
+				userId, node.getNodeId(), SHARED_IMAGES_TITLE, attachments);
 		}
 
 		zipReader.close();

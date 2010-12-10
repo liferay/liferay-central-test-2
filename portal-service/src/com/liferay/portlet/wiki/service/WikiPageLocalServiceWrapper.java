@@ -265,6 +265,17 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 			modifiedDate, fileName, inputStream);
 	}
 
+	public void addPageAttachments(long userId, long nodeId,
+		java.lang.String title,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<java.lang.String, byte[]>> files)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_wikiPageLocalService.addPageAttachments(userId, nodeId, title, files);
+	}
+
+	/**
+	* @deprecated {@link #addPageAttachments(long, long, String, List)}
+	*/
 	public void addPageAttachments(long nodeId, java.lang.String title,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<java.lang.String, byte[]>> files)
 		throws com.liferay.portal.kernel.exception.PortalException,

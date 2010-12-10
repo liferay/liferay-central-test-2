@@ -104,7 +104,8 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		WikiNodePermission.check(
 			getPermissionChecker(), nodeId, ActionKeys.ADD_ATTACHMENT);
 
-		wikiPageLocalService.addPageAttachments(nodeId, title, files);
+		wikiPageLocalService.addPageAttachments(
+			getUserId(), nodeId, title, files);
 	}
 
 	public void changeParent(

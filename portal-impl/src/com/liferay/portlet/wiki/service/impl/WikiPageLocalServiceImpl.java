@@ -246,7 +246,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public void addPageAttachments(
-			long nodeId, String title,
+			long userId, long nodeId, String title,
 			List<ObjectValuePair<String, byte[]>> files)
 		throws PortalException, SystemException {
 
@@ -255,6 +255,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 
 		WikiPage page = getPage(nodeId, title);
+
+		if (userId == 0) {
+			userId = page.getUserId();
+		}
 
 		long companyId = page.getCompanyId();
 		String portletId = CompanyConstants.SYSTEM_STRING;
@@ -278,11 +282,26 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				continue;
 			}
 
+			socialEquityLogLocalService.addEquityLogs(
+				userId, WikiPage.class.getName(), page.getResourcePrimKey(),
+				ActionKeys.ADD_ATTACHMENT, dirName + "/" + fileName);
+
 			dlLocalService.addFile(
 				companyId, portletId, groupId, repositoryId,
 				dirName + "/" + fileName, 0, StringPool.BLANK,
 				page.getModifiedDate(), new ServiceContext(), bytes);
 		}
+	}
+
+	/**
+	 * @deprecated {@link #addPageAttachments(long, long, String, List)}
+	 */
+	public void addPageAttachments(
+			long nodeId, String title,
+			List<ObjectValuePair<String, byte[]>> files)
+		throws PortalException, SystemException {
+
+		addPageAttachments(0, nodeId, title, files);
 	}
 
 	public void addPageResources(
@@ -496,6 +515,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 
 		WikiPage page = getPage(nodeId, title);
+
+		socialEquityLogLocalService.deactivateEquityLogs(
+			page.getUserId(), WikiPage.class.getName(),
+			page.getResourcePrimKey(), ActionKeys.ADD_ATTACHMENT,
+			fileName.substring(1));
 
 		long companyId = page.getCompanyId();
 		String portletId = CompanyConstants.SYSTEM_STRING;

@@ -22,13 +22,10 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.social.service.SocialEquityLogLocalServiceUtil;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
-import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 
 import java.io.File;
@@ -159,23 +156,6 @@ public class EditPageAttachmentAction extends PortletAction {
 		}
 
 		WikiPageServiceUtil.addPageAttachments(nodeId, title, files);
-
-		// social
-
-		WikiPage page = WikiPageServiceUtil.getPage(nodeId, title);
-
-		String dirName = page.getAttachmentsDir();
-
-		for (int i = 0; i < files.size(); i++) {
-			ObjectValuePair<String, byte[]> ovp = files.get(i);
-
-			String fileName = ovp.getKey();
-
-			SocialEquityLogLocalServiceUtil.addEquityLogs(
-				PortalUtil.getUserId(actionRequest), WikiPage.class.getName(),
-				page.getResourcePrimKey(), ActionKeys.ADD_ATTACHMENT,
-				dirName + "/" + fileName);
-		}
 	}
 
 	protected void deleteAttachment(ActionRequest actionRequest)
@@ -186,15 +166,6 @@ public class EditPageAttachmentAction extends PortletAction {
 		String attachment = ParamUtil.getString(actionRequest, "fileName");
 
 		WikiPageServiceUtil.deletePageAttachment(nodeId, title, attachment);
-
-		// social
-
-		WikiPage page = WikiPageServiceUtil.getPage(nodeId, title);
-
-		SocialEquityLogLocalServiceUtil.deactivateEquityLogs(
-			PortalUtil.getUserId(actionRequest), WikiPage.class.getName(),
-			page.getResourcePrimKey(), ActionKeys.ADD_ATTACHMENT,
-			attachment.substring(1));
 	}
 
 }
