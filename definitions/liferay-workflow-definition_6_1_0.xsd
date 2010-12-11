@@ -104,16 +104,16 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="resource-actions">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="resource-action" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
 	<xs:element name="recipients">
 		<xs:complexType>
 			<xs:group ref="recipients-group" />
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="resource-actions">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="resource-action" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="role">
