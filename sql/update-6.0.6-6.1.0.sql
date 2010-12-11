@@ -3,6 +3,12 @@ alter table BlogsEntry add smallImage BOOLEAN null;
 alter table BlogsEntry add smallImageId VARCHAR(75) null;
 alter table BlogsEntry add smallImageURL STRING null;
 
+drop index IX_55C736AC on DLFileShortcut;
+drop index IX_346A0992 on DLFileShortcut;
+
+drop index IX_CE705D48 on DLFileVersion;
+drop index IX_40B56512 on DLFileVersion;
+
 alter table DLFileRank add fileEntryId LONG null;
 
 alter table DLFileShortcut add toFileEntryId LONG null;
