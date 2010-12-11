@@ -14,6 +14,7 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.NoSuchVirtualHostException;
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
@@ -156,11 +157,29 @@ public class PortalInstances {
 		}
 
 		if (companyId <= 0) {
-			companyId = GetterUtil.getLong(
+			long companyIdFromCookie = GetterUtil.getLong(
 				CookieKeys.getCookie(request, CookieKeys.COMPANY_ID));
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Company id from cookie " + companyId);
+			try {
+				if (CompanyLocalServiceUtil.getCompanyById(
+						companyIdFromCookie) != null) {
+
+					companyId = companyIdFromCookie;
+
+					if (_log.isDebugEnabled()) {
+						_log.debug("Company id from cookie " + companyId);
+					}
+				}
+			}
+			catch (NoSuchCompanyException nsce) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Company id from cookie " + companyIdFromCookie +
+							" does not exist");
+				}
+			}
+			catch (Exception e) {
+				_log.error(e, e);
 			}
 		}
 
