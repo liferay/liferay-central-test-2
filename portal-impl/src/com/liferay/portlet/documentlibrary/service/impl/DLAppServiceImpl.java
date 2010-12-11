@@ -570,14 +570,6 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			fileShortcutId, folderId, toFileEntryId, serviceContext);
 	}
 
-	public DLFileVersion updateFileVersionDescription(
-			long fileVersionId, String description)
-		throws PortalException, SystemException {
-
-		return dlRepositoryService.updateFileVersionDescription(
-			fileVersionId, description);
-	}
-
 	public DLFolder updateFolder(
 			long folderId, long parentFolderId, String name, String description,
 			ServiceContext serviceContext)

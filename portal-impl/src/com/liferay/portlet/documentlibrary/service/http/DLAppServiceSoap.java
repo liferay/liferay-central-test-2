@@ -767,22 +767,6 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileVersionSoap updateFileVersionDescription(
-		long fileVersionId, java.lang.String description)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.documentlibrary.model.DLFileVersion returnValue = DLAppServiceUtil.updateFileVersionDescription(fileVersionId,
-					description);
-
-			return com.liferay.portlet.documentlibrary.model.DLFileVersionSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description,

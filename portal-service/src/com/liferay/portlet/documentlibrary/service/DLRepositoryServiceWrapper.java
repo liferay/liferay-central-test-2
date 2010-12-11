@@ -363,14 +363,6 @@ public class DLRepositoryServiceWrapper implements DLRepositoryService {
 			extraSettings, is, size, serviceContext);
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileVersion updateFileVersionDescription(
-		long fileVersionId, java.lang.String description)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlRepositoryService.updateFileVersionDescription(fileVersionId,
-			description);
-	}
-
 	public com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description,

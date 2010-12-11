@@ -380,14 +380,6 @@ public class DLRepositoryServiceUtil {
 			serviceContext);
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileVersion updateFileVersionDescription(
-		long fileVersionId, java.lang.String description)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .updateFileVersionDescription(fileVersionId, description);
-	}
-
 	public static com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description,

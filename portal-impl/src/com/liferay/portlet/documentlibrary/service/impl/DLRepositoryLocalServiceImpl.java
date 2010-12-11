@@ -855,20 +855,6 @@ public class DLRepositoryLocalServiceImpl
 		return fileEntry;
 	}
 
-	public DLFileVersion updateFileVersionDescription(
-			long fileVersionId, String description)
-		throws PortalException, SystemException {
-
-		DLFileVersion fileVersion = dlFileVersionPersistence.findByPrimaryKey(
-			fileVersionId);
-
-		fileVersion.setDescription(description);
-
-		dlFileVersionPersistence.update(fileVersion, false);
-
-		return fileVersion;
-	}
-
 	public DLFolder updateFolder(
 			long folderId, long parentFolderId, String name,
 			String description, ServiceContext serviceContext)

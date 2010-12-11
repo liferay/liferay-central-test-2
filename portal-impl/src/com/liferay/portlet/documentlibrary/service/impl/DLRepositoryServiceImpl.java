@@ -761,21 +761,6 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		return fileEntry;
 	}
 
-	public DLFileVersion updateFileVersionDescription(
-			long fileVersionId, String description)
-		throws PortalException, SystemException {
-
-		DLFileVersion fileVersion = dlFileVersionPersistence.findByPrimaryKey(
-			fileVersionId);
-
-		DLFileEntryPermission.check(
-			getPermissionChecker(), fileVersion.getFileEntryId(),
-			ActionKeys.UPDATE);
-
-		return dlRepositoryLocalService.updateFileVersionDescription(
-			fileVersionId, description);
-	}
-
 	public DLFolder updateFolder(
 			long folderId, long parentFolderId, String name, String description,
 			ServiceContext serviceContext)

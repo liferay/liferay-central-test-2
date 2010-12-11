@@ -619,7 +619,6 @@ Liferay.Service.registerClass(
 		unlockFileEntry: true,
 		unlockFolder: true,
 		updateFileShortcut: true,
-		updateFileVersionDescription: true,
 		updateFolder: true,
 		verifyFileEntryLock: true,
 		verifyInheritableLock: true
@@ -671,7 +670,6 @@ Liferay.Service.registerClass(
 		revertFileEntry: true,
 		unlockFileEntry: true,
 		unlockFolder: true,
-		updateFileVersionDescription: true,
 		updateFolder: true,
 		verifyFileEntryLock: true,
 		verifyInheritableLock: true
