@@ -152,7 +152,7 @@ public class PortletURLUtil {
 		WindowState windowState = WindowState.NORMAL;
 
 		if (themeDisplay.isStatePopUp()) {
-			windowState = LiferayWindowState.POP_UP;		
+			windowState = LiferayWindowState.POP_UP;
 		}
 		else {
 			LayoutTypePortlet layoutTypePortlet =

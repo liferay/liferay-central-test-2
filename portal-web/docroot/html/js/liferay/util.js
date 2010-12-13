@@ -243,11 +243,11 @@
 			var params = {};
 
 			url.replace(
-				new RegExp( "([^?=&]+)(=([^&]*))?", "g" ),
-					function( $0, $1, $2, $3 ){
-						params[$1] = $3;
-					}
-				);
+				new RegExp("([^?=&]+)(=([^&]*))?", "g"),
+				function($0, $1, $2, $3) {
+					params[$1] = $3;
+				}
+			);
 
 			return params;
 		},

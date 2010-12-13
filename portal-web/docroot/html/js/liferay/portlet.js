@@ -589,6 +589,7 @@
 				portlet.remove(true);
 
 				var params = {};
+
 				var pos = url.indexOf('?');
 
 				if (pos != -1) {
