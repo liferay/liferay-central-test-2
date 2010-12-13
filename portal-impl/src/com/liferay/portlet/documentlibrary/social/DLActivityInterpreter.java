@@ -15,6 +15,7 @@
 package com.liferay.portlet.documentlibrary.social;
 
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -69,8 +70,8 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 		String link =
 			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 				"/document_library/get_file?groupId=" + fileEntry.getGroupId() +
-					"&folderId=" + fileEntry.getFolderId() + "&name=" +
-						fileEntry.getName();
+					"&folderId=" + fileEntry.getFolderId() + "&title=" +
+						HttpUtil.encodeURL(fileEntry.getTitle());
 
 		// Title
 

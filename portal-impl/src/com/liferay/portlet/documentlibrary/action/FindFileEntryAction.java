@@ -65,12 +65,7 @@ public class FindFileEntryAction extends Action {
 			portletURL.setParameter(
 				"struts_action", "/document_library/view_file_entry");
 
-			DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(
-				fileEntryId);
-
-			portletURL.setParameter(
-				"folderId", String.valueOf(fileEntry.getFolderId()));
-			portletURL.setParameter("name", fileEntry.getName());
+			portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 
 			response.sendRedirect(portletURL.toString());
 
