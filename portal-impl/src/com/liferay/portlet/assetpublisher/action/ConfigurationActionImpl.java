@@ -273,8 +273,11 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		boolean defaultScope = ParamUtil.getBoolean(
 			actionRequest, "defaultScope");
+		String[] scopeIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "scopeIds"));
 
 		preferences.setValue("default-scope", String.valueOf(defaultScope));
+		preferences.setValues("scope-ids", ArrayUtil.toStringArray(scopeIds));
 	}
 
 	protected void updateDisplaySettings(
