@@ -99,7 +99,7 @@ public class SQLTransformer {
 		Matcher matcher = _castTextPattern.matcher(sql);
 
 		if (_vendorDB2) {
-			return matcher.replaceAll("CHAR($1)");
+			return matcher.replaceAll("CAST($1 AS VARCHAR(500))");
 		}
 		else if (_vendorDerby) {
 			return matcher.replaceAll("CAST($1 AS CHAR(254))");
