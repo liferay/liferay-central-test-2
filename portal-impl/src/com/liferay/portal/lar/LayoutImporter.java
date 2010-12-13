@@ -704,8 +704,9 @@ public class LayoutImporter {
 			String localizedName = layout.getName(locale);
 
 			for (Layout curLayout : previousLayouts) {
-				if (curLayout.getName(locale).equals(localizedName) ||
-						curLayout.getFriendlyURL().equals(friendlyURL)) {
+				if (localizedName.equals(curLayout.getName(locale)) ||
+					friendlyURL.equals(curLayout.getFriendlyURL())) {
+
 					existingLayout = curLayout;
 
 					break;
