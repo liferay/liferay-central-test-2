@@ -60,8 +60,7 @@ public class Member_AssertDeleteCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//td[2]/table[1]/tbody/tr/td[5]/span/a/span")) {
+				if (selenium.isVisible("//div[5]/div/span/a/span")) {
 					break;
 				}
 			}
@@ -73,6 +72,6 @@ public class Member_AssertDeleteCommentTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Delete"),
-			selenium.getText("//td[2]/table[1]/tbody/tr/td[5]/span/a/span"));
+			selenium.getText("//div[5]/div/span/a/span"));
 	}
 }

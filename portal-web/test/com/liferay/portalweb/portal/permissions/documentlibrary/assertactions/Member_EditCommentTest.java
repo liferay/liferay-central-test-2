@@ -60,8 +60,7 @@ public class Member_EditCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//td[2]/table[1]/tbody/tr/td[4]/span/a/span")) {
+				if (selenium.isVisible("//div[4]/div/span/a/span")) {
 					break;
 				}
 			}
@@ -72,7 +71,7 @@ public class Member_EditCommentTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//td[2]/table[1]/tbody/tr/td[4]/span/a/span",
+		selenium.clickAt("//div[4]/div/span/a/span",
 			RuntimeVariables.replace("Edit"));
 
 		for (int second = 0;; second++) {
