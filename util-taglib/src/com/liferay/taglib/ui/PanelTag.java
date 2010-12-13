@@ -37,7 +37,7 @@ public class PanelTag extends IncludeTag {
 			_id = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 		}
 
-		BaseBodyTagSupport parentTag =
+		BaseBodyTagSupport baseBodyTagSupport =
 			(BaseBodyTagSupport)findAncestorWithClass(
 				this, BaseBodyTagSupport.class);
 
@@ -45,14 +45,14 @@ public class PanelTag extends IncludeTag {
 
 		try {
 			PanelFloatingContainerTag panelFloatingContainerTag	=
-				(PanelFloatingContainerTag)parentTag;
+				(PanelFloatingContainerTag)baseBodyTagSupport;
 
 			parentId = panelFloatingContainerTag.getId();
 		}
 		catch (ClassCastException cce){
 			try {
 				PanelContainerTag panelContainerTag	=
-					(PanelContainerTag)parentTag;
+					(PanelContainerTag)baseBodyTagSupport;
 
 				parentId = panelContainerTag.getId();
 			}

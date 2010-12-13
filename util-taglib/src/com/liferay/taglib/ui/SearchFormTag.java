@@ -38,12 +38,12 @@ public class SearchFormTag<R> extends IncludeTag {
 	}
 
 	protected void setAttributes(HttpServletRequest request) {
-		SearchContainerTag<R> parentTag =
+		SearchContainerTag<R> searchContainerTag =
 			(SearchContainerTag<R>)findAncestorWithClass(
 				this, SearchContainerTag.class);
 
-		if (parentTag != null) {
-			_searchContainer = parentTag.getSearchContainer();
+		if (searchContainerTag != null) {
+			_searchContainer = searchContainerTag.getSearchContainer();
 		}
 
 		request.setAttribute(

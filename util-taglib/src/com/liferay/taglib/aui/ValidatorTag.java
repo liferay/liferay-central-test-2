@@ -52,10 +52,10 @@ public class ValidatorTag extends BaseBodyTagSupport implements BodyTag {
 	public int doStartTag() {
 		processCustom();
 
-		InputTag parentInputTag = (InputTag)findAncestorWithClass(
+		InputTag inputTag = (InputTag)findAncestorWithClass(
 			this, InputTag.class);
 
-		parentInputTag.addValidatorTag(_name, this);
+		inputTag.addValidatorTag(_name, this);
 
 		return EVAL_BODY_BUFFERED;
 	}

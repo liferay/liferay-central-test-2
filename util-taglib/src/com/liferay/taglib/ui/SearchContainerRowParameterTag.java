@@ -27,16 +27,16 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class SearchContainerRowParameterTag<R> extends TagSupport {
 
 	public int doStartTag() throws JspException {
-		SearchContainerRowTag<R> parentRowTag =
+		SearchContainerRowTag<R> searchContainerRowTag =
 			(SearchContainerRowTag<R>)findAncestorWithClass(
 				this, SearchContainerRowTag.class);
 
-		if (parentRowTag == null) {
+		if (searchContainerRowTag == null) {
 			throw new JspTagException(
 				"Requires liferay-ui:search-container-row");
 		}
 
-		ResultRow row = parentRowTag.getRow();
+		ResultRow row = searchContainerRowTag.getRow();
 
 		if (_name.equals("className")) {
 			row.setClassName(_name);

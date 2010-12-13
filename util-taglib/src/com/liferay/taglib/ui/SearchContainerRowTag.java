@@ -69,11 +69,12 @@ public class SearchContainerRowTag<R>
 
 	public int doAfterBody() {
 		if (!_headerNamesAssigned) {
-			SearchContainerTag<R> parentTag =
+			SearchContainerTag<R> searchContainerTag =
 				(SearchContainerTag<R>)findAncestorWithClass(
 					this, SearchContainerTag.class);
 
-			SearchContainer<R> searchContainer = parentTag.getSearchContainer();
+			SearchContainer<R> searchContainer =
+				searchContainerTag.getSearchContainer();
 
 			searchContainer.setHeaderNames(_headerNames);
 			searchContainer.setOrderableHeaders(_orderableHeaders);
@@ -118,20 +119,23 @@ public class SearchContainerRowTag<R>
 	}
 
 	public int doStartTag() throws JspException {
-		SearchContainerTag<R> parentTag =
+		SearchContainerTag<R> searchContainerTag =
 			(SearchContainerTag<R>)findAncestorWithClass(
 				this, SearchContainerTag.class);
 
-		if (parentTag == null) {
+		if (searchContainerTag == null) {
 			throw new JspException("Requires liferay-ui:search-container");
 		}
-		else if (!parentTag.isHasResults()) {
+		else if (!searchContainerTag.isHasResults()) {
 			throw new JspException(
 				"Requires liferay-ui:search-container-results");
 		}
 
-		_resultRows = parentTag.getSearchContainer().getResultRows();
-		_results = parentTag.getSearchContainer().getResults();
+		SearchContainer<R> searchContainer =
+			searchContainerTag.getSearchContainer();
+
+		_resultRows = searchContainer.getResultRows();
+		_results = searchContainer.getResults();
 
 		if ((_results != null) && (!_results.isEmpty())) {
 			processRow();

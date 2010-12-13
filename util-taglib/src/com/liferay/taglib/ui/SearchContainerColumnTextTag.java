@@ -40,11 +40,11 @@ public class SearchContainerColumnTextTag<R>
 
 	public int doEndTag() {
 		try {
-			SearchContainerRowTag<R> parentTag =
+			SearchContainerRowTag<R> searchContainerRowTag =
 				(SearchContainerRowTag<R>)findAncestorWithClass(
 					this, SearchContainerRowTag.class);
 
-			ResultRow row = parentTag.getRow();
+			ResultRow row = searchContainerRowTag.getRow();
 
 			if (Validator.isNotNull(_property)) {
 				_value = String.valueOf(
@@ -108,17 +108,17 @@ public class SearchContainerColumnTextTag<R>
 			_orderableProperty = name;
 		}
 
-		SearchContainerRowTag<R> parentRowTag =
+		SearchContainerRowTag<R> searchContainerRowTag =
 			(SearchContainerRowTag<R>)findAncestorWithClass(
 				this, SearchContainerRowTag.class);
 
-		if (parentRowTag == null) {
+		if (searchContainerRowTag == null) {
 			throw new JspTagException(
 				"Requires liferay-ui:search-container-row");
 		}
 
-		if (!parentRowTag.isHeaderNamesAssigned()) {
-			List<String> headerNames = parentRowTag.getHeaderNames();
+		if (!searchContainerRowTag.isHeaderNamesAssigned()) {
+			List<String> headerNames = searchContainerRowTag.getHeaderNames();
 
 			String name = getName();
 
@@ -130,7 +130,7 @@ public class SearchContainerColumnTextTag<R>
 
 			if (_orderable) {
 				Map<String,String> orderableHeaders =
-					parentRowTag.getOrderableHeaders();
+					searchContainerRowTag.getOrderableHeaders();
 
 				if (Validator.isNotNull(_orderableProperty)) {
 					orderableHeaders.put(name, _orderableProperty);

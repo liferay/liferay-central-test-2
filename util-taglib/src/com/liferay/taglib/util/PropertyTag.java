@@ -23,15 +23,15 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class PropertyTag extends TagSupport {
 
 	public int doStartTag() throws JspException {
-		PropertyAncestorTag propertyAncestor =
+		PropertyAncestorTag propertyAncestorTag =
 			(PropertyAncestorTag)findAncestorWithClass(
 				this, PropertyAncestorTag.class);
 
-		if (propertyAncestor == null) {
+		if (propertyAncestorTag == null) {
 			throw new JspException();
 		}
 
-		propertyAncestor.addProperty(_name, _value);
+		propertyAncestorTag.addProperty(_name, _value);
 
 		return EVAL_BODY_INCLUDE;
 	}

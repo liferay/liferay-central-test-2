@@ -23,15 +23,15 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class ParamTag extends TagSupport {
 
 	public int doStartTag() throws JspException {
-		ParamAncestorTag paramAncestor =
+		ParamAncestorTag paramAncestorTag =
 			(ParamAncestorTag)findAncestorWithClass(
 				this, ParamAncestorTag.class);
 
-		if (paramAncestor == null) {
+		if (paramAncestorTag == null) {
 			throw new JspException();
 		}
 
-		paramAncestor.addParam(_name, _value);
+		paramAncestorTag.addParam(_name, _value);
 
 		return EVAL_BODY_INCLUDE;
 	}

@@ -23,10 +23,10 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class ToolTag extends TagSupport {
 
 	public int doStartTag() {
-		PanelTag parentTag = (PanelTag)findAncestorWithClass(
+		PanelTag panelTag = (PanelTag)findAncestorWithClass(
 			this, PanelTag.class);
 
-		parentTag.addToolTag(this);
+		panelTag.addToolTag(this);
 
 		return EVAL_PAGE;
 	}

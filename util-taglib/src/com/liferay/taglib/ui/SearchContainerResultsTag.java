@@ -46,16 +46,17 @@ public class SearchContainerResultsTag<R> extends TagSupport {
 				}
 			}
 
-			SearchContainerTag<R> parentTag =
+			SearchContainerTag<R> searchContainerTag =
 				(SearchContainerTag<R>)findAncestorWithClass(
 					this, SearchContainerTag.class);
 
-			SearchContainer<R> searchContainer = parentTag.getSearchContainer();
+			SearchContainer<R> searchContainer =
+				searchContainerTag.getSearchContainer();
 
 			searchContainer.setResults(_results);
 			searchContainer.setTotal(_total);
 
-			parentTag.setHasResults(true);
+			searchContainerTag.setHasResults(true);
 
 			pageContext.setAttribute(_resultsVar, _results);
 			pageContext.setAttribute(_totalVar, _total);
@@ -76,11 +77,11 @@ public class SearchContainerResultsTag<R> extends TagSupport {
 	}
 
 	public int doStartTag() throws JspException {
-		SearchContainerTag<R> parentTag =
+		SearchContainerTag<R> searchContainerTag =
 			(SearchContainerTag<R>)findAncestorWithClass(
 				this, SearchContainerTag.class);
 
-		if (parentTag == null) {
+		if (searchContainerTag == null) {
 			throw new JspTagException("Requires liferay-ui:search-container");
 		}
 

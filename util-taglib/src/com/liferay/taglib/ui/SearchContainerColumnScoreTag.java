@@ -31,11 +31,11 @@ public class SearchContainerColumnScoreTag<R> extends SearchContainerColumnTag {
 
 	public int doEndTag() {
 		try {
-			SearchContainerRowTag<R> parentTag =
+			SearchContainerRowTag<R> searchContainerRowTag =
 				(SearchContainerRowTag<R>)findAncestorWithClass(
 					this, SearchContainerRowTag.class);
 
-			ResultRow row = parentTag.getRow();
+			ResultRow row = searchContainerRowTag.getRow();
 
 			if (index <= -1) {
 				index = row.getEntries().size();
@@ -56,17 +56,17 @@ public class SearchContainerColumnScoreTag<R> extends SearchContainerColumnTag {
 	}
 
 	public int doStartTag() throws JspException {
-		SearchContainerRowTag<R> parentRowTag =
+		SearchContainerRowTag<R> searchContainerRowTag =
 			(SearchContainerRowTag<R>)findAncestorWithClass(
 				this, SearchContainerRowTag.class);
 
-		if (parentRowTag == null) {
+		if (searchContainerRowTag == null) {
 			throw new JspTagException(
 				"Requires liferay-ui:search-container-row");
 		}
 
-		if (!parentRowTag.isHeaderNamesAssigned()) {
-			List<String> headerNames = parentRowTag.getHeaderNames();
+		if (!searchContainerRowTag.isHeaderNamesAssigned()) {
+			List<String> headerNames = searchContainerRowTag.getHeaderNames();
 
 			headerNames.add(_name);
 		}
