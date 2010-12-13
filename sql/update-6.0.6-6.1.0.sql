@@ -65,7 +65,7 @@ COMMIT_TRANSACTION;
 
 update MBMessage set format = 'bbcode';
 
-alter table SocialEquityLog add extraData STRING null;
+alter table SocialEquityLog add extraData VARCHAR(255) null;
 
 create table VirtualHost (
 	virtualHostId LONG not null primary key,
