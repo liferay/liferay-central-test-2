@@ -364,10 +364,6 @@ if (assetEntry != null) {
 	</aui:column>
 </aui:layout>
 
-<%
-PortalUtil.addPortletBreadcrumbEntry(request, headerTitle, currentURL);
-%>
-
 <aui:script use="liferay-workflow-tasks">
 	var onTaskClickFn = A.rbind(Liferay.WorkflowTasks.onTaskClick, Liferay.WorkflowTasks, '');
 
@@ -375,3 +371,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, headerTitle, currentURL);
 	Liferay.delegateClick('<portlet:namespace /><%= randomId %>taskAssignLink', onTaskClickFn);
 	Liferay.delegateClick('<portlet:namespace /><%= randomId %>taskDueDateLink', onTaskClickFn);
 </aui:script>
+
+<%
+PortalUtil.addPortletBreadcrumbEntry(request, headerTitle, currentURL);
+%>
