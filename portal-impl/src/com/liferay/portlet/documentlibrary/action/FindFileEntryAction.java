@@ -64,7 +64,6 @@ public class FindFileEntryAction extends Action {
 
 			portletURL.setParameter(
 				"struts_action", "/document_library/view_file_entry");
-
 			portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 
 			response.sendRedirect(portletURL.toString());
