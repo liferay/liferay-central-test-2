@@ -18,7 +18,6 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
-String backURL = ParamUtil.getString(request, "backURL");
 
 String originalRedirect = ParamUtil.getString(request, "originalRedirect", StringPool.BLANK);
 
@@ -28,6 +27,8 @@ if (originalRedirect.equals(StringPool.BLANK)) {
 else {
 	redirect = originalRedirect;
 }
+
+String backURL = ParamUtil.getString(request, "backURL");
 
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
 

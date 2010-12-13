@@ -22,7 +22,6 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 String tabs2 = ParamUtil.getString(request, "tabs2");
 
 String redirect = ParamUtil.getString(request, "redirect");
-String backURL = ParamUtil.getString(request, "backURL");
 
 // Make sure the redirect is correct. This is a workaround for a layout that
 // has both the Journal and Journal Content portlets and the user edits an
@@ -47,6 +46,8 @@ if (originalRedirect.equals(StringPool.BLANK)) {
 else {
 	redirect = originalRedirect;
 }
+
+String backURL = ParamUtil.getString(request, "backURL");
 
 String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
@@ -257,8 +258,8 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
 	<aui:input name="originalRedirect" type="hidden" value="<%= originalRedirect %>" />
+	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
 	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="articleId" type="hidden" value="<%= articleId %>" />
