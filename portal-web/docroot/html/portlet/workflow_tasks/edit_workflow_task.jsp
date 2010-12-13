@@ -17,6 +17,8 @@
 <%@ include file="/html/portlet/workflow_tasks/init.jsp" %>
 
 <%
+String randomId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
+
 String redirect = ParamUtil.getString(request, "redirect");
 
 WorkflowTask workflowTask = (WorkflowTask)request.getAttribute(WebKeys.WORKFLOW_TASK);
@@ -105,7 +107,7 @@ if (assetEntry != null) {
 								<portlet:param name="assigneeUserId" value="<%= String.valueOf(user.getUserId()) %>" />
 							</portlet:actionURL>
 
-							<span class="workflow-task- task-assign-to-me-link"><aui:a href="<%= assignToMeURL %>" label="assign-to-me" /></span>
+							<span class="workflow-task- task-assign-to-me-link"><aui:a href="<%= assignToMeURL %>" id='<%= randomId + "taskAssignToMeLink" %>' label="assign-to-me" /></span>
 						</c:if>
 
 						&nbsp;
@@ -120,7 +122,7 @@ if (assetEntry != null) {
 								<portlet:param name="workflowTaskId" value="<%= String.valueOf(workflowTask.getWorkflowTaskId()) %>" />
 							</portlet:actionURL>
 
-							<span class="workflow-task- task-assign-link"><aui:a href="<%= assignURL %>" label="assign-to-..." /></span>
+							<span class="workflow-task- task-assign-link"><aui:a href="<%= assignURL %>" id='<%= randomId + "taskAssignLink" %>' label="assign-to-..." /></span>
 						</c:if>
 					</aui:field-wrapper>
 				</div>
@@ -151,7 +153,7 @@ if (assetEntry != null) {
 								<portlet:param name="workflowTaskId" value="<%= StringUtil.valueOf(workflowTask.getWorkflowTaskId()) %>" />
 							</portlet:actionURL>
 
-							<%= StringPool.DASH %> (<span class="workflow-task- task-due-date-link"><aui:a href="<%= updateDueDateURL %>" label="change" />)
+							<%= StringPool.DASH %> (<span class="workflow-task- task-due-date-link"><aui:a href="<%= updateDueDateURL %>" id='<%= randomId + "taskDueDateLink" %>' label="change" />)
 						</c:if>
 					</aui:field-wrapper>
 				</div>
@@ -365,3 +367,11 @@ if (assetEntry != null) {
 <%
 PortalUtil.addPortletBreadcrumbEntry(request, headerTitle, currentURL);
 %>
+
+<aui:script use="liferay-workflow-tasks">
+	var onTaskClickFn = A.rbind(Liferay.WorkflowTasks.onTaskClick, Liferay.WorkflowTasks, '');
+
+	Liferay.delegateClick('<portlet:namespace /><%= randomId %>taskAssignToMeLink', onTaskClickFn);
+	Liferay.delegateClick('<portlet:namespace /><%= randomId %>taskAssignLink', onTaskClickFn);
+	Liferay.delegateClick('<portlet:namespace /><%= randomId %>taskDueDateLink', onTaskClickFn);
+</aui:script>
