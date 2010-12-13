@@ -15,6 +15,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -150,14 +151,19 @@ public class PortletURLUtil {
 
 		WindowState windowState = WindowState.NORMAL;
 
-		LayoutTypePortlet layoutTypePortlet =
-			themeDisplay.getLayoutTypePortlet();
-
-		if (layoutTypePortlet.hasStateMaxPortletId(portletId)) {
-			windowState = WindowState.MAXIMIZED;
+		if (themeDisplay.isStatePopUp()) {
+			windowState = LiferayWindowState.POP_UP;		
 		}
-		else if (layoutTypePortlet.hasStateMinPortletId(portletId)) {
-			windowState = WindowState.MINIMIZED;
+		else {
+			LayoutTypePortlet layoutTypePortlet =
+				themeDisplay.getLayoutTypePortlet();
+
+			if (layoutTypePortlet.hasStateMaxPortletId(portletId)) {
+				windowState = WindowState.MAXIMIZED;
+			}
+			else if (layoutTypePortlet.hasStateMinPortletId(portletId)) {
+				windowState = WindowState.MINIMIZED;
+			}
 		}
 
 		sb.append("&p_p_state=");

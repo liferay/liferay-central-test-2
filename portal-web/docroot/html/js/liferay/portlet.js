@@ -574,7 +574,7 @@
 	Liferay.provide(
 		Portlet,
 		'refresh',
-		function(portlet) {
+		function(portlet, data) {
 			var instance = this;
 
 			portlet = A.one(portlet);
@@ -588,11 +588,18 @@
 				portlet.placeBefore(placeHolder);
 				portlet.remove(true);
 
+				var params = {};
+				var pos = url.indexOf('?');
+
+				if (pos != -1) {
+					params = Util.getParams(url);
+
+				    url = url.substring(0,pos);
+				}
+
 				instance.addHTML(
 					{
-						data: {
-							p_p_state: 'normal'
-						},
+						data: A.mix(params, data, true),
 						onComplete: function(portlet, portletId) {
 							portlet.refreshURL = url;
 						},
