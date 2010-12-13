@@ -590,12 +590,12 @@
 
 				var params = {};
 
-				var pos = url.indexOf('?');
+				var urlPieces = url.split('?');
 
-				if (pos != -1) {
-					params = Util.getParams(url);
+				if (urlPieces.length > 1) {
+					params = A.QueryString.parse(urlPieces[1]);
 
-				    url = url.substring(0,pos);
+				    url = urlPieces[0];
 				}
 
 				instance.addHTML(
@@ -610,7 +610,7 @@
 				);
 			}
 		},
-		['aui-base']
+		['aui-base', 'querystring-parse']
 	);
 
 	Liferay.provide(

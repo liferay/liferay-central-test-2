@@ -239,19 +239,6 @@
 			return historyParam;
 		},
 
-		getParams: function(url) {
-			var params = {};
-
-			url.replace(
-				new RegExp("([^?=&]+)(=([^&]*))?", "g"),
-				function($0, $1, $2, $3) {
-					params[$1] = $3;
-				}
-			);
-
-			return params;
-		},
-
 		getPortletId: function(portletId) {
 			portletId = portletId.replace(/^p_p_id_/i, '');
 			portletId = portletId.replace(/_$/, '');
