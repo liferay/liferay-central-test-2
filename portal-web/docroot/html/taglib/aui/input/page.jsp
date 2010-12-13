@@ -30,6 +30,7 @@ Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribut
 String field = GetterUtil.getString((String)request.getAttribute("aui:input:field"));
 String fieldParam = GetterUtil.getString((String)request.getAttribute("aui:input:fieldParam"));
 boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:input:first"));
+String formName = GetterUtil.getString((String)request.getAttribute("aui:input:formName"));
 String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:input:helpMessage"));
 String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:input:id"));
 boolean inlineField = GetterUtil.getBoolean((String)request.getAttribute("aui:input:inlineField"));
@@ -161,7 +162,7 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 			field="<%= field %>"
 			fieldParam='<%= fieldParam %>'
 			format='<%= (Format)dynamicAttributes.get("format") %>'
-			formName='<%= (String)dynamicAttributes.get("formName") %>'
+			formName='<%= formName %>'
 			model="<%= model %>"
 		/>
 	</c:when>

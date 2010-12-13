@@ -88,6 +88,10 @@ public class InputTag extends IncludeTag {
 		_first = first;
 	}
 
+	public void setFormName(String formName) {
+		_formName = formName;
+	}
+
 	public void setHelpMessage(String helpMessage) {
 		_helpMessage = helpMessage;
 	}
@@ -210,6 +214,7 @@ public class InputTag extends IncludeTag {
 		_field = null;
 		_fieldParam = null;
 		_first = false;
+		_formName = null;
 		_helpMessage = null;
 		_id = null;
 		_inlineField = false;
@@ -248,6 +253,17 @@ public class InputTag extends IncludeTag {
 
 		if (Validator.isNull(field)) {
 			field = _name;
+		}
+
+		String formName = _formName;
+
+		if (formName == null) {
+			FormTag parentFormTag = (FormTag)findAncestorWithClass(
+				this, FormTag.class);
+
+			if (parentFormTag != null) {
+				formName = parentFormTag.getName();
+			}
 		}
 
 		String id = _id;
@@ -293,6 +309,7 @@ public class InputTag extends IncludeTag {
 		request.setAttribute("aui:input:field", field);
 		request.setAttribute("aui:input:fieldParam", _fieldParam);
 		request.setAttribute("aui:input:first", String.valueOf(_first));
+		request.setAttribute("aui:input:formName", formName);
 		request.setAttribute("aui:input:helpMessage", _helpMessage);
 		request.setAttribute("aui:input:id", id);
 		request.setAttribute(
@@ -345,6 +362,7 @@ public class InputTag extends IncludeTag {
 	private String _field;
 	private String _fieldParam;
 	private boolean _first;
+	private String _formName;
 	private String _helpMessage;
 	private String _id;
 	private boolean _inlineField;

@@ -32,6 +32,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class FormTag extends IncludeTag {
 
+	public String getName() {
+		return _name;
+	}
+
 	public void setAction(PortletURL portletURL) {
 		if (portletURL != null) {
 			_action = portletURL.toString();
