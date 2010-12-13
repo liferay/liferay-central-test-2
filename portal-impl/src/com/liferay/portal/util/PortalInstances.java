@@ -157,24 +157,22 @@ public class PortalInstances {
 		}
 
 		if (companyId <= 0) {
-			long companyIdFromCookie = GetterUtil.getLong(
+			long cookieCompanyId = GetterUtil.getLong(
 				CookieKeys.getCookie(request, CookieKeys.COMPANY_ID));
 
 			try {
-				if (CompanyLocalServiceUtil.getCompanyById(
-						companyIdFromCookie) != null) {
+				CompanyLocalServiceUtil.getCompanyById(cookieCompanyId);
 
-					companyId = companyIdFromCookie;
+				companyId = cookieCompanyId;
 
-					if (_log.isDebugEnabled()) {
-						_log.debug("Company id from cookie " + companyId);
-					}
+				if (_log.isDebugEnabled()) {
+					_log.debug("Company id from cookie " + companyId);
 				}
 			}
 			catch (NoSuchCompanyException nsce) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Company id from cookie " + companyIdFromCookie +
+						"Company id from cookie " + cookieCompanyId +
 							" does not exist");
 				}
 			}
