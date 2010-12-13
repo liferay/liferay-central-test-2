@@ -258,11 +258,11 @@ public class InputTag extends IncludeTag {
 		String formName = _formName;
 
 		if (formName == null) {
-			FormTag parentFormTag = (FormTag)findAncestorWithClass(
+			FormTag formTag = (FormTag)findAncestorWithClass(
 				this, FormTag.class);
 
-			if (parentFormTag != null) {
-				formName = parentFormTag.getName();
+			if (formTag != null) {
+				formName = formTag.getName();
 			}
 		}
 

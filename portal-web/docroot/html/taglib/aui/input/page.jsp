@@ -162,7 +162,7 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 			field="<%= field %>"
 			fieldParam='<%= fieldParam %>'
 			format='<%= (Format)dynamicAttributes.get("format") %>'
-			formName='<%= formName %>'
+			formName="<%= formName %>"
 			model="<%= model %>"
 		/>
 	</c:when>
