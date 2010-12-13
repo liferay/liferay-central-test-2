@@ -192,7 +192,7 @@ public class EditTemplateAction extends PortletAction {
 			(ActionRequestImpl)actionRequest, portletConfig.getPortletName(),
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
-		portletURL.setWindowState(WindowState.MAXIMIZED);
+		portletURL.setWindowState(actionRequest.getWindowState());
 
 		portletURL.setParameter("struts_action", "/journal/edit_template");
 		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);

@@ -292,7 +292,7 @@ public class EditEntryAction extends PortletAction {
 			(ActionRequestImpl)actionRequest, portletConfig.getPortletName(),
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
-		portletURL.setWindowState(WindowState.MAXIMIZED);
+		portletURL.setWindowState(actionRequest.getWindowState());
 
 		String portletName = portletConfig.getPortletName();
 
