@@ -48,6 +48,7 @@ boolean view = GetterUtil.getBoolean((String)request.getAttribute("view_image.js
 	<portlet:renderURL var="editURL">
 		<portlet:param name="struts_action" value="/image_gallery/edit_image" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="backURL" value="<%= currentURL %>" />
 		<portlet:param name="imageId" value="<%= String.valueOf(image.getImageId()) %>" />
 	</portlet:renderURL>
 

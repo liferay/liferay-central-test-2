@@ -22,6 +22,7 @@ String strutsAction = ParamUtil.getString(request, "struts_action");
 String tabs2 = ParamUtil.getString(request, "tabs2", "version-history");
 
 String redirect = ParamUtil.getString(request, "redirect");
+String backURL = ParamUtil.getString(request, "backURL");
 
 String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
@@ -114,7 +115,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 </c:if>
 
 <liferay-ui:header
-	backURL="<%= redirect %>"
+	backURL="<%= backURL %>"
 	title='<%= (fileEntry != null) ? fileEntry.getTitle() : "new-document" %>'
 />
 
@@ -148,6 +149,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 <aui:form action="<%= editFileEntryURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveFileEntry(false);" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
 	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 	<aui:input name="uploadProgressId" type="hidden" value="<%= uploadProgressId %>" />
 	<aui:input name="fileEntryId" type="hidden" value="<%= fileEntryId %>" />

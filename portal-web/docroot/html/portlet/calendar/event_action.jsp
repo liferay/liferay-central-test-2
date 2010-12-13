@@ -38,6 +38,7 @@ else {
 		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/calendar/edit_event" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="backURL" value="<%= currentURL %>" />
 			<portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />
 		</portlet:renderURL>
 

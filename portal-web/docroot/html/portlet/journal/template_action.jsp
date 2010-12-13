@@ -61,6 +61,7 @@ JournalTemplate template = (JournalTemplate)row.getObject();
 			<portlet:renderURL var="addArticleURL">
 				<portlet:param name="struts_action" value="/journal/edit_article" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="backURL" value="<%= currentURL %>" />
 				<portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" />
 				<portlet:param name="structureId" value="<%= template.getStructureId() %>" />
 				<portlet:param name="templateId" value="<%= template.getTemplateId() %>" />

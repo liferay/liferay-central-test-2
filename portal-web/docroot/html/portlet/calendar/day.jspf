@@ -84,6 +84,7 @@ dateFormatDate = FastDateFormatFactoryUtil.getSimpleDateFormat("MMMMM d, yyyy", 
 		<portlet:renderURL var="editEventURL">
 			<portlet:param name="struts_action" value="/calendar/edit_event" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="backURL" value="<%= currentURL %>" />
 			<portlet:param name="month" value="<%= String.valueOf(selMonth) %>" />
 			<portlet:param name="day" value="<%= String.valueOf(selDay) %>" />
 			<portlet:param name="year" value="<%= String.valueOf(selYear) %>" />
@@ -196,6 +197,7 @@ if (!partDayResults.isEmpty()) {
 							<portlet:renderURL var="editAllDayEventURL">
 								<portlet:param name="struts_action" value="/calendar/edit_event" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
+								<portlet:param name="backURL" value="<%= currentURL %>" />
 								<portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />
 							</portlet:renderURL>
 
@@ -270,6 +272,7 @@ if (!partDayResults.isEmpty()) {
 							<portlet:renderURL var="editDayEventURL">
 								<portlet:param name="struts_action" value="/calendar/edit_event" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
+								<portlet:param name="backURL" value="<%= currentURL %>" />
 								<portlet:param name="eventId" value="<%= String.valueOf(event.getEventId()) %>" />
 							</portlet:renderURL>
 

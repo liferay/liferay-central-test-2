@@ -18,6 +18,7 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
+String backURL = ParamUtil.getString(request, "backURL");
 
 String originalRedirect = ParamUtil.getString(request, "originalRedirect", StringPool.BLANK);
 
@@ -66,7 +67,7 @@ if (article != null) {
 	</c:when>
 	<c:otherwise>
 		<liferay-ui:header
-			backURL="<%= redirect %>"
+			backURL="<%= backURL %>"
 			title="new-web-content"
 		/>
 	</c:otherwise>

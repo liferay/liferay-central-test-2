@@ -69,6 +69,7 @@ JournalStructure structure = (JournalStructure)row.getObject();
 		<portlet:renderURL var="addArticleURL">
 			<portlet:param name="struts_action" value="/journal/edit_article" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="backURL" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(structure.getGroupId()) %>" />
 			<portlet:param name="structureId" value="<%= structure.getStructureId() %>" />
 		</portlet:renderURL>

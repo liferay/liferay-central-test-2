@@ -90,6 +90,7 @@ boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, 
 		<portlet:renderURL var="editEventURL">
 			<portlet:param name="struts_action" value="/calendar/edit_event" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="backURL" value="<%= currentURL %>" />
 			<portlet:param name="month" value="<%= String.valueOf(selMonth) %>" />
 			<portlet:param name="day" value="<%= String.valueOf(selDay) %>" />
 			<portlet:param name="year" value="<%= String.valueOf(selYear) %>" />

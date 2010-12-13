@@ -73,6 +73,7 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 								<portlet:renderURL var="editEntryURL">
 									<portlet:param name="struts_action" value="/blogs/edit_entry" />
 									<portlet:param name="redirect" value="<%= currentURL %>" />
+									<portlet:param name="backURL" value="<%= currentURL %>" />
 									<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 								</portlet:renderURL>
 

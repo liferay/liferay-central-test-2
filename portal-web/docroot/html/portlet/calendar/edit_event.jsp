@@ -18,6 +18,7 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
+String backURL = ParamUtil.getString(request, "backURL");
 
 String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
@@ -104,12 +105,13 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 <aui:form action="<%= editEventURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveEvent();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
 	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 	<aui:input name="eventId" type="hidden" value="<%= eventId %>" />
 	<aui:input name="description" type="hidden" />
 
 	<liferay-ui:header
-		backURL="<%= redirect %>"
+		backURL="<%= backURL %>"
 		title='<%= (event != null) ? event.getTitle() : "new-event" %>'
 	/>
 
