@@ -48,7 +48,8 @@ public class AddEntryCommentTest extends BaseTestCase {
 			RuntimeVariables.replace("Title"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//td/a", RuntimeVariables.replace("Be the first."));
+		selenium.clickAt("//fieldset/div/a",
+			RuntimeVariables.replace("Be the first."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -74,31 +75,10 @@ public class AddEntryCommentTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace(
-							"Your request completed successfully.")
-										.equals(selenium.getText(
-								"//section/div/div/div/div"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace("Comment."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div[3]/div/div[1]"));
 	}
 }

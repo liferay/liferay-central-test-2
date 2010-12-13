@@ -49,8 +49,9 @@ public class EditEntryCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Comment."),
-			selenium.getText("//td[2]/div[1]"));
-		selenium.clickAt("//td[4]/span/a/span", RuntimeVariables.replace("Edit"));
+			selenium.getText("//div/div/div/div/div[3]/div/div[1]"));
+		selenium.clickAt("//div[3]/div/div[4]/div/span/a/span",
+			RuntimeVariables.replace("Edit"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -103,8 +104,8 @@ public class EditEntryCommentTest extends BaseTestCase {
 				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace("CommentEdit."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div/div/div/div[3]/div/div[1]"));
 		assertNotEquals(RuntimeVariables.replace("Comment."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div/div/div/div[3]/div/div[1]"));
 	}
 }

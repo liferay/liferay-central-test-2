@@ -45,21 +45,21 @@ public class ViewDLDocumentAbstractsTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+		assertEquals(RuntimeVariables.replace("AP DL Document Title.txt"),
 			selenium.getText("//h3[@class='asset-title']/a"));
-		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+		assertEquals(RuntimeVariables.replace("AP DL Document Title.txt"),
 			selenium.getText("xPath=(//span[@class='taglib-text'])[2]"));
 		assertEquals(RuntimeVariables.replace(
-				"Read More About AP DL Document Title \u00bb"),
+				"Read More About AP DL Document Title.txt \u00bb"),
 			selenium.getText("//div[@class='asset-more']/a"));
 		selenium.clickAt("//div[@class='asset-more']/a",
 			RuntimeVariables.replace(
-				"Read More About AP DL Document Title \u00bb"));
+				"Read More About AP DL Document Title.txt \u00bb"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+		assertEquals(RuntimeVariables.replace("AP DL Document Title.txt"),
 			selenium.getText("//h1[@class='header-title']/span"));
-		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+		assertEquals(RuntimeVariables.replace("AP DL Document Title.txt"),
 			selenium.getText("//div[@class='asset-resource-info']/a"));
 		assertEquals(RuntimeVariables.replace("View in Context \u00bb"),
 			selenium.getText("//div[@class='asset-more']/a"));
@@ -67,9 +67,9 @@ public class ViewDLDocumentAbstractsTest extends BaseTestCase {
 			RuntimeVariables.replace("View in Context \u00bb"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+		assertEquals(RuntimeVariables.replace("AP DL Document Title.txt"),
 			selenium.getText("//h1[@class='header-title']/span"));
-		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+		assertEquals(RuntimeVariables.replace("AP DL Document Title.txt"),
 			selenium.getText("//div[@class='lfr-asset-name']/a"));
 	}
 }

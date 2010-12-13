@@ -45,9 +45,9 @@ public class ViewDLDocumentCurrentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+		assertEquals(RuntimeVariables.replace("AP DL Document Title.txt"),
 			selenium.getText("//h3[@class='asset-title']/a"));
-		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+		assertEquals(RuntimeVariables.replace("AP DL Document Title.txt"),
 			selenium.getText("xPath=(//span[@class='taglib-text'])[2]"));
 	}
 }

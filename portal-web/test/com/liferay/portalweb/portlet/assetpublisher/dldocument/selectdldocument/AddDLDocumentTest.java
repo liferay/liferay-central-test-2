@@ -173,7 +173,7 @@ public class AddDLDocumentTest extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace("AP DL Document Title")
+						if (RuntimeVariables.replace("AP DL Document Title.txt")
 												.equals(selenium.getText(
 										"//h3[@class='asset-title']/a"))) {
 							break;
@@ -186,9 +186,11 @@ public class AddDLDocumentTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
-				assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+				assertEquals(RuntimeVariables.replace(
+						"AP DL Document Title.txt"),
 					selenium.getText("//h3[@class='asset-title']/a"));
-				assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+				assertEquals(RuntimeVariables.replace(
+						"AP DL Document Title.txt"),
 					selenium.getText("xPath=(//span[@class='taglib-text'])[2]"));
 
 			case 100:

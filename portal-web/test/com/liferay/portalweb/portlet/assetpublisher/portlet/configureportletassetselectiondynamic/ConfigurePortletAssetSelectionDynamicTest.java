@@ -66,6 +66,9 @@ public class ConfigurePortletAssetSelectionDynamicTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Configuration"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
 
 		for (int second = 0;; second++) {
@@ -87,26 +90,6 @@ public class ConfigurePortletAssetSelectionDynamicTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.select("_86_selectionStyle",
 			RuntimeVariables.replace("label=Dynamic"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace("Source")
-										.equals(selenium.getText(
-								"//form[@id='_86_fm']/div[1]/div[1]/div[1]/div/span"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

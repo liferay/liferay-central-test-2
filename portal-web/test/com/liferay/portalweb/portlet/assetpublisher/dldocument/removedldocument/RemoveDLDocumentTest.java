@@ -65,6 +65,9 @@ public class RemoveDLDocumentTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Configuration"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
 
 		for (int second = 0;; second++) {
@@ -86,7 +89,7 @@ public class RemoveDLDocumentTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Document Library Document"),
 			selenium.getText("//td[1]/a"));
-		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+		assertEquals(RuntimeVariables.replace("AP DL Document Title.txt"),
 			selenium.getText("//td[2]/a"));
 		selenium.click(RuntimeVariables.replace("//img[@alt='Delete']"));
 		selenium.waitForPageToLoad("30000");

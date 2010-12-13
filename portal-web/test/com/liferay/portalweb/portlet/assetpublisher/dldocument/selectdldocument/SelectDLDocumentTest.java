@@ -65,6 +65,9 @@ public class SelectDLDocumentTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Configuration"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
 		Thread.sleep(5000);
 
@@ -74,7 +77,7 @@ public class SelectDLDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//div[2]/ul/li/strong/a")) {
+				if (selenium.isVisible("//div[2]/span/ul/li/strong/a")) {
 					break;
 				}
 			}
@@ -85,7 +88,7 @@ public class SelectDLDocumentTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//div[2]/ul/li/strong/a",
+		selenium.clickAt("//div[2]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Select Existing"));
 
 		for (int second = 0;; second++) {
@@ -106,14 +109,17 @@ public class SelectDLDocumentTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Document Library Document"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[8]/a"));
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[8]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+		assertEquals(RuntimeVariables.replace("AP DL Document Title.txt"),
 			selenium.getText("//td[1]/a"));
 		selenium.clickAt("//td[1]/a",
-			RuntimeVariables.replace("AP DL Document Title"));
+			RuntimeVariables.replace("AP DL Document Title.txt"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
@@ -121,7 +127,7 @@ public class SelectDLDocumentTest extends BaseTestCase {
 			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("Document Library Document"),
 			selenium.getText("//td[1]/a"));
-		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+		assertEquals(RuntimeVariables.replace("AP DL Document Title.txt"),
 			selenium.getText("//td[2]/a"));
 		selenium.open("/web/guest/home/");
 
@@ -146,9 +152,9 @@ public class SelectDLDocumentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+		assertEquals(RuntimeVariables.replace("AP DL Document Title.txt"),
 			selenium.getText("//h3[@class='asset-title']/a"));
-		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+		assertEquals(RuntimeVariables.replace("AP DL Document Title.txt"),
 			selenium.getText("xPath=(//span[@class='taglib-text'])[2]"));
 	}
 }

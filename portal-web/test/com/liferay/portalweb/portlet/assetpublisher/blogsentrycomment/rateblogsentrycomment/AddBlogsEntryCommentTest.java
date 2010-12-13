@@ -45,7 +45,10 @@ public class AddBlogsEntryCommentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//td/a", RuntimeVariables.replace("Be the first."));
+		assertEquals(RuntimeVariables.replace("Be the first."),
+			selenium.getText("//fieldset/div/a"));
+		selenium.clickAt("//fieldset/div/a",
+			RuntimeVariables.replace("Be the first."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -76,6 +79,6 @@ public class AddBlogsEntryCommentTest extends BaseTestCase {
 				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("AP Blogs Entry Comment."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div[3]/div/div[1]"));
 	}
 }

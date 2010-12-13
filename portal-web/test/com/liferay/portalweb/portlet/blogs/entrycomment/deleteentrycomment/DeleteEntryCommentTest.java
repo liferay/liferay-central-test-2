@@ -49,8 +49,8 @@ public class DeleteEntryCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Comment."),
-			selenium.getText("//td[2]/div[1]"));
-		selenium.click(RuntimeVariables.replace("//td[5]/span/a/span"));
+			selenium.getText("//div/div/div/div/div[3]/div/div[1]"));
+		selenium.click(RuntimeVariables.replace("//div[5]/div/span/a/span"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -79,7 +79,8 @@ public class DeleteEntryCommentTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
-		assertFalse(selenium.isElementPresent("//td[2]/div[1]"));
+		assertFalse(selenium.isElementPresent(
+				"//div/div/div/div/div[3]/div/div[1]"));
 		assertFalse(selenium.isTextPresent("Comment."));
 	}
 }

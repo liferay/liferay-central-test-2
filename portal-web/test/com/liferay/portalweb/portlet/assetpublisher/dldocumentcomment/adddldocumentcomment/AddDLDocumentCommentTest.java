@@ -45,7 +45,10 @@ public class AddDLDocumentCommentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//td/a", RuntimeVariables.replace("Be the first."));
+		assertEquals(RuntimeVariables.replace("Be the first."),
+			selenium.getText("//fieldset/div/a"));
+		selenium.clickAt("//fieldset/div/a",
+			RuntimeVariables.replace("Be the first."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

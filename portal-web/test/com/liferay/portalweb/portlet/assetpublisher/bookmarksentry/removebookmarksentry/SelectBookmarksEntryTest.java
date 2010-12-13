@@ -65,6 +65,9 @@ public class SelectBookmarksEntryTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Configuration"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
 		Thread.sleep(5000);
 
@@ -74,7 +77,7 @@ public class SelectBookmarksEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//div[2]/ul/li/strong/a")) {
+				if (selenium.isVisible("//div[2]/span/ul/li/strong/a")) {
 					break;
 				}
 			}
@@ -85,7 +88,7 @@ public class SelectBookmarksEntryTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//div[2]/ul/li/strong/a",
+		selenium.clickAt("//div[2]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Select Existing"));
 
 		for (int second = 0;; second++) {
@@ -106,6 +109,9 @@ public class SelectBookmarksEntryTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Bookmarks Entry"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
 		selenium.waitForPageToLoad("30000");
