@@ -18,7 +18,6 @@ import com.liferay.portal.NoSuchWorkflowDefinitionLinkException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.service.ServiceContext;
 
 import java.io.Serializable;
@@ -58,35 +57,6 @@ public class WorkflowHandlerRegistryUtil {
 
 	public static void register(WorkflowHandler workflowHandler) {
 		getWorkflowHandlerRegistry().register(workflowHandler);
-	}
-
-	public static void startWorkflowInstance(
-			long companyId, long userId, String className,
-			long classPK, Object model, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		Map<String, Serializable> workflowContext =
-			(Map<String, Serializable>)serviceContext.removeAttribute(
-				"workflowContext");
-
-		if (workflowContext == null) {
-			workflowContext = Collections.EMPTY_MAP;
-		}
-
-		startWorkflowInstance(
-			companyId, WorkflowConstants.DEFAULT_GROUP_ID, userId, className,
-			classPK, model, serviceContext, workflowContext);
-	}
-
-	public static void startWorkflowInstance(
-			long companyId, long userId, String className,
-			long classPK, Object model, ServiceContext serviceContext,
-			Map<String, Serializable> workflowContext)
-		throws PortalException, SystemException {
-
-		startWorkflowInstance(
-			companyId, WorkflowConstants.DEFAULT_GROUP_ID, userId, className,
-			classPK, model, serviceContext, workflowContext);
 	}
 
 	public static void startWorkflowInstance(
@@ -167,6 +137,35 @@ public class WorkflowHandlerRegistryUtil {
 					WorkflowConstants.STATUS_APPROVED, workflowContext);
 			}
 		}
+	}
+
+	public static void startWorkflowInstance(
+			long companyId, long userId, String className, long classPK,
+			Object model, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		Map<String, Serializable> workflowContext =
+			(Map<String, Serializable>)serviceContext.removeAttribute(
+				"workflowContext");
+
+		if (workflowContext == null) {
+			workflowContext = Collections.EMPTY_MAP;
+		}
+
+		startWorkflowInstance(
+			companyId, WorkflowConstants.DEFAULT_GROUP_ID, userId, className,
+			classPK, model, serviceContext, workflowContext);
+	}
+
+	public static void startWorkflowInstance(
+			long companyId, long userId, String className, long classPK,
+			Object model, ServiceContext serviceContext,
+			Map<String, Serializable> workflowContext)
+		throws PortalException, SystemException {
+
+		startWorkflowInstance(
+			companyId, WorkflowConstants.DEFAULT_GROUP_ID, userId, className,
+			classPK, model, serviceContext, workflowContext);
 	}
 
 	public static void unregister(List<WorkflowHandler> workflowHandlers) {

@@ -150,7 +150,7 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 	}
 
 	public boolean isScopeable() {
-		return true;
+		return _SCOPEABLE;
 	}
 
 	public String render(
@@ -187,6 +187,8 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/page.png";
 	}
+
+	private static final boolean _SCOPEABLE = true;
 
 	private static Log _log = LogFactoryUtil.getLog(BaseWorkflowHandler.class);
 

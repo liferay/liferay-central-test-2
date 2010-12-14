@@ -63,12 +63,9 @@ public class WorkflowHandlerRegistryImpl implements WorkflowHandlerRegistry {
 		}
 	}
 
-	// Note: Mograte to ConcurrentSkipListMap upon upgrade to Java 6.
-	// For now use TreeMap since the risk of concurrent modification is
-	// minimal
 	private Map<String, WorkflowHandler> _scopeableWorkflowHandlerMap =
+		//new ConcurrentSkipListMap<String, WorkflowHandler>();
 		new TreeMap<String, WorkflowHandler>();
-
 	private Map<String, WorkflowHandler> _workflowHandlerMap =
 		new TreeMap<String, WorkflowHandler>();
 
