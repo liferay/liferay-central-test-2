@@ -16,12 +16,12 @@
 	</bean>
 	<bean name="dynamicDataSourceTargetSource" class="com.liferay.portal.dao.jdbc.aop.DynamicDataSourceTargetSource">
 		<property name="readDataSource">
-			<bean class="com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean">
+			<bean class="com.liferay.portal.dao.jdbc.spring.DataSourceFactoryBean">
 				<property name="propertyPrefix" value="jdbc.read." />
 			</bean>
 		</property>
 		<property name="writeDataSource">
-			<bean class="com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean">
+			<bean class="com.liferay.portal.dao.jdbc.spring.DataSourceFactoryBean">
 				<property name="propertyPrefix" value="jdbc.write." />
 			</bean>
 		</property>

@@ -20,21 +20,21 @@
 	</bean>
 	<bean id="shardDataSource0" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
 		<property name="targetDataSource">
-			<bean class="com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean">
+			<bean class="com.liferay.portal.dao.jdbc.spring.DataSourceFactoryBean">
 				<property name="propertyPrefix" value="jdbc.default." />
 			</bean>
 		</property>
 	</bean>
 	<bean id="shardDataSource1" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
 		<property name="targetDataSource">
-			<bean class="com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean">
+			<bean class="com.liferay.portal.dao.jdbc.spring.DataSourceFactoryBean">
 				<property name="propertyPrefix" value="jdbc.one." />
 			</bean>
 		</property>
 	</bean>
 	<bean id="shardDataSource2" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
 		<property name="targetDataSource">
-			<bean class="com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean">
+			<bean class="com.liferay.portal.dao.jdbc.spring.DataSourceFactoryBean">
 				<property name="propertyPrefix" value="jdbc.two." />
 			</bean>
 		</property>

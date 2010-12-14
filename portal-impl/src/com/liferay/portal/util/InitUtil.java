@@ -17,9 +17,11 @@ package com.liferay.portal.util;
 import com.liferay.portal.cache.CacheRegistryImpl;
 import com.liferay.portal.configuration.ConfigurationFactoryImpl;
 import com.liferay.portal.dao.db.DBFactoryImpl;
+import com.liferay.portal.dao.jdbc.DataSourceFactoryImpl;
 import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.jdbc.DataSourceFactoryUtil;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaProps;
@@ -109,6 +111,10 @@ public class InitUtil {
 
 		ConfigurationFactoryUtil.setConfigurationFactory(
 			new ConfigurationFactoryImpl());
+
+		// Data source factory
+
+		DataSourceFactoryUtil.setDataSourceFactory(new DataSourceFactoryImpl());
 
 		// DB factory
 

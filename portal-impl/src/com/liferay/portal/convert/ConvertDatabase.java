@@ -16,10 +16,10 @@ package com.liferay.portal.convert;
 
 import com.liferay.mail.model.CyrusUser;
 import com.liferay.mail.model.CyrusVirtual;
-import com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.dao.jdbc.DataSourceFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.PortletServlet;
@@ -40,7 +40,6 @@ import java.sql.Connection;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import javax.servlet.ServletContext;
 
@@ -167,25 +166,13 @@ public class ConvertDatabase extends ConvertProcess {
 	protected DataSource getDataSource() throws Exception {
 		String[] values = getParameterValues();
 
-		String jdbcDriverClassName = values[0];
-		String jdbcURL = values[1];
-		String jdbcUserName = values[2];
-		String jdbcPassword = values[3];
+		String driverClassName = values[0];
+		String url = values[1];
+		String userName = values[2];
+		String password = values[3];
 
-		Properties properties = new Properties();
-
-		properties.setProperty(
-			_JDBC_PREFIX + "driverClassName", jdbcDriverClassName);
-		properties.setProperty(_JDBC_PREFIX + "url", jdbcURL);
-		properties.setProperty(_JDBC_PREFIX + "username", jdbcUserName);
-		properties.setProperty(_JDBC_PREFIX + "password", jdbcPassword);
-
-		DataSourceFactoryBean dataSourceFactory = new DataSourceFactoryBean();
-
-		dataSourceFactory.setProperties(properties);
-		dataSourceFactory.setPropertyPrefix(_JDBC_PREFIX);
-
-		return dataSourceFactory.createInstance();
+		return DataSourceFactoryUtil.initDataSource(
+			driverClassName, url, userName, password);
 	}
 
 	public Class<?> getImplClass(String implClassName) throws Exception {
@@ -254,8 +241,6 @@ public class ConvertDatabase extends ConvertProcess {
 			table.populateTable(tempFileName, connection);
 		}
 	}
-
-	private static final String _JDBC_PREFIX = "jdbc.upgrade.";
 
 	private static final Tuple[] _UNMAPPED_TABLES = new Tuple[] {
 		new Tuple(

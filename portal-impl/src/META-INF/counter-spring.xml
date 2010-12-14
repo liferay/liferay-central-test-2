@@ -9,7 +9,7 @@
 >
 	<bean id="counterDataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
 		<property name="targetDataSource">
-			<bean class="com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean">
+			<bean class="com.liferay.portal.dao.jdbc.spring.DataSourceFactoryBean">
 				<property name="propertyPrefixLookup" value="counter.jdbc.prefix" />
 			</bean>
 		</property>

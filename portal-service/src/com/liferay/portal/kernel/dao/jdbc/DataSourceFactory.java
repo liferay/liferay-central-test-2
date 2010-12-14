@@ -12,12 +12,24 @@
  * details.
  */
 
-package com.liferay.portal.dao.jdbc.util;
+package com.liferay.portal.kernel.dao.jdbc;
+
+import java.util.Properties;
+
+import javax.sql.DataSource;
 
 /**
- * @author	   Brian Wing Shun Chan
- * @deprecated {@link com.liferay.portal.dao.jdbc.spring.DataSourceFactoryBean}
+ * @author Brian Wing Shun Chan
  */
-public class DataSourceFactoryBean
-	extends com.liferay.portal.dao.jdbc.spring.DataSourceFactoryBean {
+public interface DataSourceFactory {
+
+	public void destroyDataSource(DataSource dataSource) throws Exception;
+
+	public DataSource initDataSource(Properties properties) throws Exception;
+
+	public DataSource initDataSource(
+			String driverClassName, String url, String userName,
+			String password)
+		throws Exception;
+
 }

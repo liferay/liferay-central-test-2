@@ -116,16 +116,16 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.dao.jdbc.DataSourceFactoryImpl">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.portal.dao.jdbc.aop">
 		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.dao.jdbc.pool">
 		<priority value="ERROR" />
-	</category>
-
-	<category name="com.liferay.portal.dao.jdbc.util.DataSourceFactoryBean">
-		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.portal.dao.orm.common.SQLTransformer">
