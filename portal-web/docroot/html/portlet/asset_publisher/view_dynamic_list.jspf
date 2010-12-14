@@ -34,6 +34,10 @@ if (assetVocabularyId > 0) {
 
 	List<AssetCategory> assetCategories = AssetCategoryLocalServiceUtil.getVocabularyRootCategories(assetVocabulary.getVocabularyId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
+	if(!anyAssetType) {
+		assetEntryQuery.setClassNameIds(classNameIds);
+	}
+
 	for (AssetCategory assetCategory : assetCategories) {
 		long[] oldAllCategoryIds = assetEntryQuery.getAllCategoryIds();
 
