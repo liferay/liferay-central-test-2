@@ -53,3 +53,22 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<aui:button type="submit" />
 	</aui:button-row>
 </aui:form>
+
+<aui:script use="aui-base">
+	var selectDisplayStyle = A.one('#<portlet:namespace />displayStyle');
+
+	var curPortletBoundaryId = '#p_p_id_<%= portletResource %>_';
+
+	var toggleCustomFields = function() {
+		var data = {};
+		data['_<%= portletResource %>_display-style'] = selectDisplayStyle.get('value');
+
+		Liferay.Portlet.refresh(curPortletBoundaryId, data);
+	}
+
+	if (selectDisplayStyle) {
+		selectDisplayStyle.on('change', toggleCustomFields);
+
+		toggleCustomFields();
+	}
+</aui:script>
