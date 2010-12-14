@@ -30,7 +30,7 @@ if (Validator.isNull(width)) {
 }
 %>
 
-<div id="<%= randomNamespace %>" style="height: 150px; margin: auto; overflow: auto; width: 95%">
+<div id="<%= randomNamespace %>" style='min-height: 100px; margin: auto;'>
 	<div style="margin: 3px; width: <%= Validator.isNotNull(previewWidth) ? ((GetterUtil.getInteger(previewWidth) + 20) + "px") : "100%" %>;">
 		<liferay-portlet:runtime
 			portletName="<%= portletResource %>"
