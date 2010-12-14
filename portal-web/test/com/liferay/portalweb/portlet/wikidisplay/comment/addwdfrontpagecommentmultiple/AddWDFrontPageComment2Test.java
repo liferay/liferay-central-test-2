@@ -57,7 +57,10 @@ public class AddWDFrontPageComment2Test extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace(
+				"This is a wiki page test comment."),
+			selenium.getText("//div/div[3]/div/div[1]"));
+		assertEquals(RuntimeVariables.replace(
 				"This is a wiki page test2 comment2."),
-			selenium.getText("//tr[5]/td[2]/div[1]"));
+			selenium.getText("//form/div/div/div[3]/div/div[3]/div/div[1]"));
 	}
 }

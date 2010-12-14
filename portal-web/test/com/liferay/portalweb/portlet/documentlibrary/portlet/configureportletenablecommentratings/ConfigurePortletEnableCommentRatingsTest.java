@@ -151,8 +151,7 @@ public class ConfigurePortletEnableCommentRatingsTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isPartialText("//td[1]/div/div/div/div",
-									"0 Votes")) {
+						if (selenium.isTextPresent("0 Votes")) {
 							break;
 						}
 					}
@@ -163,8 +162,7 @@ public class ConfigurePortletEnableCommentRatingsTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
-				assertTrue(selenium.isPartialText("//td[1]/div/div/div/div",
-						"0 Votes"));
+				assertTrue(selenium.isTextPresent("0 Votes"));
 
 			case 100:
 				label = -1;

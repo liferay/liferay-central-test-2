@@ -70,31 +70,13 @@ public class AddWCDWebContentCommentTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.keyPress("//textarea", RuntimeVariables.replace("\\48"));
 		selenium.keyPress("//textarea", RuntimeVariables.replace("\\8"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//tr[3]/td/input[1]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//tr[3]/td/input[1]", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace(
 				"This is a test wcd web content comment."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div[3]/div/div[1]"));
 	}
 }

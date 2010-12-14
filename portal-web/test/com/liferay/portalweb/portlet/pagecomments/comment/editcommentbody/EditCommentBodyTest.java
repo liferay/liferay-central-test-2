@@ -46,7 +46,7 @@ public class EditCommentBodyTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("This is a test page comment."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div[3]/div/div[1]"));
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -78,9 +78,9 @@ public class EditCommentBodyTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a test page comment. Edited."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div[3]/div/div[1]"));
 	}
 }

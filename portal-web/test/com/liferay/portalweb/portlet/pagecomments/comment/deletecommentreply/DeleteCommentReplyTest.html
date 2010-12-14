@@ -25,13 +25,18 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[5]/td[2]/div[1]</td>
+	<td>//form/div/div/div[3]/div/div[3]/div/div[1]</td>
 	<td>This is a test reply comment.</td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>//div[3]/div/div[3]/div/div[3]/div/div[5]/div/span/a/span</td>
+	<td>Delete</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//tr[5]/td[2]/table[1]/tbody/tr/td[5]/span/a/span</td>
-	<td></td>
+	<td>//div[3]/div/div[3]/div/div[3]/div/div[5]/div/span/a/span</td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>
@@ -39,9 +44,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//div[@class='portlet-msg-success']</td>
 	<td>Your request completed successfully.</td>
-	<td></td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>

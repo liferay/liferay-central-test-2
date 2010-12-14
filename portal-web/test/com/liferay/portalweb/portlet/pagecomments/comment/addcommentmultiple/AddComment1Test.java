@@ -76,8 +76,8 @@ public class AddComment1Test extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("This is a test page1 comment1."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div[3]/div/div[1]"));
 	}
 }

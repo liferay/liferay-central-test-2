@@ -45,8 +45,11 @@ public class AddCommentReply3Test extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//tr[8]/td[2]/table[1]/tbody/tr/td[2]/span/a/span",
-			RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("Post Reply"),
+			selenium.getText(
+				"//div[5]/div/div[3]/div/div[3]/div/div[2]/div/span/a/span"));
+		selenium.clickAt("//div[5]/div/div[3]/div/div[3]/div/div[2]/div/span/a/span",
+			RuntimeVariables.replace("Post Reply"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -72,18 +75,18 @@ public class AddCommentReply3Test extends BaseTestCase {
 		selenium.keyPress("_107_postReplyBody3",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_107_postReplyBody3", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("//tr[8]/td[2]/table[2]/tbody/tr[1]/td/input[1]",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[5]/div/div[3]/div/div[4]/div/div[1]/div/span[1]/span/input",
+			RuntimeVariables.replace("Reply"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("This is a test reply1 comment1."),
-			selenium.getText("//tr[5]/td[2]/div[1]"));
+			selenium.getText("//form/div/div/div[3]/div/div[3]/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("This is a test reply2 comment2."),
-			selenium.getText("//tr[8]/td[2]/div[1]"));
+			selenium.getText("//div[5]/div/div[3]/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("This is a test reply3 comment3."),
-			selenium.getText("//tr[11]/td[2]/div[1]"));
+			selenium.getText("//div[7]/div/div[3]/div/div[1]"));
 	}
 }

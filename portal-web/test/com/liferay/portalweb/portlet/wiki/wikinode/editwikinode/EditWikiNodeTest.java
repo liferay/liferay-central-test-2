@@ -49,7 +49,7 @@ public class EditWikiNodeTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Wiki Node Test"),
 			selenium.getText("//tr[4]/td[1]/a"));
-		selenium.clickAt("//tr[4]/td[4]/ul/li/strong/a",
+		selenium.clickAt("//tr[4]/td[4]/span/ul/li/strong/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {

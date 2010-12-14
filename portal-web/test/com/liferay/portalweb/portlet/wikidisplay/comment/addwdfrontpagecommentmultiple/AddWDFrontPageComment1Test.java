@@ -58,6 +58,6 @@ public class AddWDFrontPageComment1Test extends BaseTestCase {
 				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace(
 				"This is a wiki page test comment."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div[3]/div/div[1]"));
 	}
 }

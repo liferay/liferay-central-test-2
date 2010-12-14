@@ -54,6 +54,6 @@ public class AssertMoveFolderDocumentCommentToFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("This is a test1 comment1."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div/div/div/div[3]/div/div[1]"));
 	}
 }

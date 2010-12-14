@@ -78,19 +78,7 @@ public class MoveFolderDocumentCommentToFolderTest extends BaseTestCase {
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=folder");
 		selenium.saveScreenShotAndSource();
-
-		String moveFolderURL = selenium.getLocation();
-		RuntimeVariables.setValue("moveFolderURL", moveFolderURL);
-		selenium.close();
-		selenium.selectWindow("null");
-		selenium.saveScreenShotAndSource();
-		selenium.openWindow(RuntimeVariables.getValue("moveFolderURL"),
-			RuntimeVariables.replace("folderSelectionWindow"));
 		Thread.sleep(5000);
-		selenium.waitForPopUp("folderSelectionWindow",
-			RuntimeVariables.replace(""));
-		selenium.selectWindow("name=folderSelectionWindow");
-		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -213,6 +201,6 @@ public class MoveFolderDocumentCommentToFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("This is a test1 comment1."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div/div/div/div[3]/div/div[1]"));
 	}
 }

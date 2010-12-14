@@ -48,7 +48,7 @@ public class DeleteWikiNodeTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("Wiki Node Test"));
-		selenium.clickAt("//tr[4]/td[4]/ul/li/strong/a",
+		selenium.clickAt("//tr[4]/td[4]/span/ul/li/strong/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {

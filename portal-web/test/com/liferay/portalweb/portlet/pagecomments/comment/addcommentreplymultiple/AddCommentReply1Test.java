@@ -71,14 +71,14 @@ public class AddCommentReply1Test extends BaseTestCase {
 		selenium.keyPress("_107_postReplyBody1",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_107_postReplyBody1", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("//td[2]/table[2]/tbody/tr[1]/td/input[1]",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[1]/div/span[1]/span/input",
+			RuntimeVariables.replace("Reply"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("This is a test reply1 comment1."),
-			selenium.getText("//tr[5]/td[2]/div[1]"));
+			selenium.getText("//form/div/div/div[3]/div/div[3]/div/div[1]"));
 	}
 }

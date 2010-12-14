@@ -96,7 +96,7 @@ public class DeleteArchivedSetupTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
 			selenium.getText("//tr[3]/td[2]"));
 		assertTrue(selenium.isElementPresent("//tr[3]/td[3]"));
-		selenium.clickAt("//tr[3]/td[4]/ul/li/strong/a",
+		selenium.clickAt("//tr[3]/td[4]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {

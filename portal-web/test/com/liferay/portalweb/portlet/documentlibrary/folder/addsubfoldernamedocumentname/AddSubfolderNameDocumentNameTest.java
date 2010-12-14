@@ -68,7 +68,8 @@ public class AddSubfolderNameDocumentNameTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.type("_20_name", RuntimeVariables.replace("Test1 Document1"));
+		selenium.type("_20_name",
+			RuntimeVariables.replace("Test1 Document1.txt"));
 		selenium.saveScreenShotAndSource();
 		selenium.type("_20_description",
 			RuntimeVariables.replace("This is test1 subfolder1."));

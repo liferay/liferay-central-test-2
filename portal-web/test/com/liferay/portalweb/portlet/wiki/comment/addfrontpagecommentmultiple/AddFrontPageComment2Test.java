@@ -75,6 +75,6 @@ public class AddFrontPageComment2Test extends BaseTestCase {
 				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace(
 				"This is a wiki page test2 comment2."),
-			selenium.getText("//tr[5]/td[2]/div[1]"));
+			selenium.getText("//form/div/div/div[3]/div/div[3]/div/div[1]"));
 	}
 }

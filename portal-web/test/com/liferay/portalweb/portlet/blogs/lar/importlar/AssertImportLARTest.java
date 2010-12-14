@@ -59,7 +59,7 @@ public class AssertImportLARTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Blogs Entry Content"),
 			selenium.getText("//div[@class='entry-body']/p"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Comment Body"),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div/div/div/div[3]/div/div[1]"));
 		assertFalse(selenium.isTextPresent("Read More"));
 	}
 }

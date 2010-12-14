@@ -70,8 +70,8 @@ public class AddCommentReplyBodyNullTest extends BaseTestCase {
 		selenium.keyPress("_107_postReplyBody1",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_107_postReplyBody1", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("//td[2]/table[2]/tbody/tr[1]/td/input[1]",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[1]/div/span[1]/span/input",
+			RuntimeVariables.replace("Reply"));
 		Thread.sleep(5000);
 		assertFalse(selenium.isTextPresent(
 				"Your request completed successfully."));
@@ -98,6 +98,7 @@ public class AddCommentReplyBodyNullTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertFalse(selenium.isElementPresent("//tr[5]/td[2]/div[1]"));
+		assertFalse(selenium.isElementPresent(
+				"//form/div/div/div[3]/div/div[3]/div/div[1]"));
 	}
 }

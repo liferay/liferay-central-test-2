@@ -65,7 +65,7 @@ public class AddCommentBodySpaceTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isVisible("_107_postReplyBody0"));
-		selenium.type("_107_postReplyBody0", RuntimeVariables.replace(""));
+		selenium.type("_107_postReplyBody0", RuntimeVariables.replace(" "));
 		selenium.saveScreenShotAndSource();
 		selenium.keyPress("_107_postReplyBody0",
 			RuntimeVariables.replace("\\48"));

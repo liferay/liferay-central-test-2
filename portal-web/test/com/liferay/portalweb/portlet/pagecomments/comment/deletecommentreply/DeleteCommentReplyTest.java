@@ -46,15 +46,19 @@ public class DeleteCommentReplyTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("This is a test reply comment."),
-			selenium.getText("//tr[5]/td[2]/div[1]"));
+			selenium.getText("//form/div/div/div[3]/div/div[3]/div/div[1]"));
+		assertEquals(RuntimeVariables.replace("Delete"),
+			selenium.getText(
+				"//div[3]/div/div[3]/div/div[3]/div/div[5]/div/span/a/span"));
 		selenium.click(RuntimeVariables.replace(
-				"//tr[5]/td[2]/table[1]/tbody/tr/td[5]/span/a/span"));
+				"//div[3]/div/div[3]/div/div[3]/div/div[5]/div/span/a/span"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"Your request completed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request completed successfully."),
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertFalse(selenium.isTextPresent("This is a test reply comment."));
 	}
 }

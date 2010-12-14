@@ -46,8 +46,11 @@ public class EditFrontPageCommentBodyTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"This is a wiki page test comment."),
-			selenium.getText("//td[2]/div[1]"));
-		selenium.clickAt("//td[4]/span/a/span", RuntimeVariables.replace(""));
+			selenium.getText("//div/div[3]/div/div[1]"));
+		assertEquals(RuntimeVariables.replace("Edit"),
+			selenium.getText("//div[4]/div/span/a/span"));
+		selenium.clickAt("//div[4]/div/span/a/span",
+			RuntimeVariables.replace("Edit"));
 		selenium.type("_36_editReplyBody1",
 			RuntimeVariables.replace(
 				"This is a wiki page test comment. Edited."));
@@ -63,9 +66,9 @@ public class EditFrontPageCommentBodyTest extends BaseTestCase {
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a wiki page test comment. Edited."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div[3]/div/div[1]"));
 		assertNotEquals(RuntimeVariables.replace(
 				"This is a wiki page test comment."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div[3]/div/div[1]"));
 	}
 }

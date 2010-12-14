@@ -48,26 +48,45 @@ public class EditWCDWebContentCommentTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"This is a test wcd web content comment."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div[3]/div/div[1]"));
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
-		selenium.type("//tr[2]/td/div/textarea",
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[4]/div/div[2]/span/span/span/textarea")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		selenium.type("//div[4]/div/div[2]/span/span/span/textarea",
 			RuntimeVariables.replace(
 				"This is a test wcd web content comment. Edited."));
 		selenium.saveScreenShotAndSource();
-		selenium.keyPress("//tr[2]/td/div/textarea",
+		selenium.keyPress("//div[4]/div/div[2]/span/span/span/textarea",
 			RuntimeVariables.replace("\\48"));
-		selenium.keyPress("//tr[2]/td/div/textarea",
+		selenium.keyPress("//div[4]/div/div[2]/span/span/span/textarea",
 			RuntimeVariables.replace("\\8"));
-		selenium.click(RuntimeVariables.replace("//tr[2]/td/input[1]"));
+		selenium.click(RuntimeVariables.replace("//input[@value='Publish']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace(
 				"This is a test wcd web content comment. Edited."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div[3]/div/div[1]"));
 		assertNotEquals(RuntimeVariables.replace(
 				"This is a test wcd web content comment."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div[3]/div/div[1]"));
 	}
 }

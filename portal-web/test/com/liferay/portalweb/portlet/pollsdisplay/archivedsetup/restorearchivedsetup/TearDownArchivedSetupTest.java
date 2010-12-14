@@ -101,7 +101,7 @@ public class TearDownArchivedSetupTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 
 				boolean pdArchivedSetup1Present = selenium.isElementPresent(
-						"//tr[3]/td[4]/ul/li/strong/a");
+						"//tr[3]/td[4]/span/ul/li/strong/a");
 
 				if (!pdArchivedSetup1Present) {
 					label = 2;
@@ -109,7 +109,7 @@ public class TearDownArchivedSetupTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//tr[3]/td[4]/ul/li/strong/a",
+				selenium.clickAt("//tr[3]/td[4]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -143,7 +143,7 @@ public class TearDownArchivedSetupTest extends BaseTestCase {
 			case 2:
 
 				boolean pdArchivedSetup2Present = selenium.isElementPresent(
-						"//tr[3]/td[4]/ul/li/strong/a");
+						"//tr[3]/td[4]/span/ul/li/strong/a");
 
 				if (!pdArchivedSetup2Present) {
 					label = 3;
@@ -151,7 +151,7 @@ public class TearDownArchivedSetupTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//tr[3]/td[4]/ul/li/strong/a",
+				selenium.clickAt("//tr[3]/td[4]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -185,7 +185,7 @@ public class TearDownArchivedSetupTest extends BaseTestCase {
 			case 3:
 
 				boolean pdArchivedSetup3Present = selenium.isElementPresent(
-						"//tr[3]/td[4]/ul/li/strong/a");
+						"//tr[3]/td[4]/span/ul/li/strong/a");
 
 				if (!pdArchivedSetup3Present) {
 					label = 4;
@@ -193,7 +193,7 @@ public class TearDownArchivedSetupTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//tr[3]/td[4]/ul/li/strong/a",
+				selenium.clickAt("//tr[3]/td[4]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -227,7 +227,7 @@ public class TearDownArchivedSetupTest extends BaseTestCase {
 			case 4:
 
 				boolean pdArchivedSetup4Present = selenium.isElementPresent(
-						"//tr[3]/td[4]/ul/li/strong/a");
+						"//tr[3]/td[4]/span/ul/li/strong/a");
 
 				if (!pdArchivedSetup4Present) {
 					label = 5;
@@ -235,7 +235,7 @@ public class TearDownArchivedSetupTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//tr[3]/td[4]/ul/li/strong/a",
+				selenium.clickAt("//tr[3]/td[4]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -269,7 +269,7 @@ public class TearDownArchivedSetupTest extends BaseTestCase {
 			case 5:
 
 				boolean pdArchivedSetup5Present = selenium.isElementPresent(
-						"//tr[3]/td[4]/ul/li/strong/a");
+						"//tr[3]/td[4]/span/ul/li/strong/a");
 
 				if (!pdArchivedSetup5Present) {
 					label = 6;
@@ -277,7 +277,7 @@ public class TearDownArchivedSetupTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//tr[3]/td[4]/ul/li/strong/a",
+				selenium.clickAt("//tr[3]/td[4]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {

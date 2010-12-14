@@ -136,7 +136,7 @@ public class AddFolderDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace("Test1 Document1")
+				if (RuntimeVariables.replace("Test1 Document1.txt")
 										.equals(selenium.getText(
 								"//a/span/span"))) {
 					break;
@@ -149,7 +149,7 @@ public class AddFolderDocumentTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Test1 Document1"),
+		assertEquals(RuntimeVariables.replace("Test1 Document1.txt"),
 			selenium.getText("//a/span/span"));
 
 		for (int second = 0;; second++) {

@@ -49,7 +49,7 @@ public class ViewFolderDocumentMyDocumentsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Test1 Document1 This is test1 document1."),
+				"Test1 Document1.txt This is test1 document1."),
 			selenium.getText("//td[1]/a"));
 		assertTrue(selenium.isElementPresent("//td[2]/a"));
 		assertEquals(RuntimeVariables.replace("0"),

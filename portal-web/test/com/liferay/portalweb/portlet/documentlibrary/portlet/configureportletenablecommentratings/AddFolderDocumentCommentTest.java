@@ -104,6 +104,6 @@ public class AddFolderDocumentCommentTest extends BaseTestCase {
 				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("This is a test1 comment1."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div[3]/div/div[1]"));
 	}
 }

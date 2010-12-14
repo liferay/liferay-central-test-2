@@ -30,8 +30,8 @@ public class WebContentDisplayTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(PortletTests.suite());
 		testSuite.addTest(CommentTests.suite());
+		testSuite.addTest(PortletTests.suite());
 		testSuite.addTest(WebContentTests.suite());
 
 		return testSuite;

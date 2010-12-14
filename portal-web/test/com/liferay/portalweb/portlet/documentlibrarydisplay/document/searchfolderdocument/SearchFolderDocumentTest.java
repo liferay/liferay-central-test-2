@@ -53,7 +53,7 @@ public class SearchFolderDocumentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isElementPresent("link=Test1 Document1"));
+		assertTrue(selenium.isElementPresent("link=Test1 Document1.txt"));
 		selenium.type("//input[@title='Search Documents']",
 			RuntimeVariables.replace("Test2 Document2"));
 		selenium.saveScreenShotAndSource();

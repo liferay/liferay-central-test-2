@@ -46,24 +46,27 @@ public class EditCommentReplyBodyTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("This is a test reply comment."),
-			selenium.getText("//tr[5]/td[2]/div[1]"));
-		selenium.clickAt("//tr[5]/td[2]/table[1]/tbody/tr/td[4]/span/a/span",
-			RuntimeVariables.replace(""));
+			selenium.getText("//form/div/div/div[3]/div/div[3]/div/div[1]"));
+		assertEquals(RuntimeVariables.replace("Edit"),
+			selenium.getText(
+				"//div[3]/div/div[3]/div/div[3]/div/div[4]/div/span/a/span"));
+		selenium.clickAt("//div[3]/div/div[3]/div/div[3]/div/div[4]/div/span/a/span",
+			RuntimeVariables.replace("Edit"));
 		selenium.type("_107_editReplyBody2",
 			RuntimeVariables.replace("This is a test reply comment. Edited."));
 		selenium.saveScreenShotAndSource();
 		selenium.keyPress("_107_editReplyBody2",
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_107_editReplyBody2", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("//tr[5]/td[2]/table[2]/tbody/tr[2]/td/input[1]",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[3]/div/div[3]/div/div[4]/div/div[2]/div/span[1]/span/input",
+			RuntimeVariables.replace("Publish"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a test reply comment. Edited."),
-			selenium.getText("//tr[5]/td[2]/div[1]"));
+			selenium.getText("//form/div/div/div[3]/div/div[3]/div/div[1]"));
 	}
 }

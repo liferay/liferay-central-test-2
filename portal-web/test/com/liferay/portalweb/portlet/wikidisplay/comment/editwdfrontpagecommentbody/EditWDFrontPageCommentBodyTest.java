@@ -47,8 +47,11 @@ public class EditWDFrontPageCommentBodyTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"This is a wiki page test comment."),
-			selenium.getText("//td[2]/div[1]"));
-		selenium.clickAt("//td[4]/span/a/span", RuntimeVariables.replace(""));
+			selenium.getText("//div/div[3]/div/div[1]"));
+		assertEquals(RuntimeVariables.replace("Edit"),
+			selenium.getText("//div[4]/div/span/a/span"));
+		selenium.clickAt("//div[4]/div/span/a/span",
+			RuntimeVariables.replace("Edit"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -56,7 +59,8 @@ public class EditWDFrontPageCommentBodyTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//tr[2]/td/div/textarea")) {
+				if (selenium.isElementPresent(
+							"//div[4]/div/div[2]/span/span/span/textarea")) {
 					break;
 				}
 			}
@@ -67,13 +71,13 @@ public class EditWDFrontPageCommentBodyTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.type("//tr[2]/td/div/textarea",
+		selenium.type("//div[4]/div/div[2]/span/span/span/textarea",
 			RuntimeVariables.replace(
 				"This is a wiki page test comment. Edited."));
 		selenium.saveScreenShotAndSource();
-		selenium.keyPress("//tr[2]/td/div/textarea",
+		selenium.keyPress("//div[4]/div/div[2]/span/span/span/textarea",
 			RuntimeVariables.replace("\\48"));
-		selenium.keyPress("//tr[2]/td/div/textarea",
+		selenium.keyPress("//div[4]/div/div[2]/span/span/span/textarea",
 			RuntimeVariables.replace("\\8"));
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
@@ -83,9 +87,9 @@ public class EditWDFrontPageCommentBodyTest extends BaseTestCase {
 				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace(
 				"This is a wiki page test comment. Edited."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div[3]/div/div[1]"));
 		assertNotEquals(RuntimeVariables.replace(
 				"This is a wiki page test comment."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div[3]/div/div[1]"));
 	}
 }

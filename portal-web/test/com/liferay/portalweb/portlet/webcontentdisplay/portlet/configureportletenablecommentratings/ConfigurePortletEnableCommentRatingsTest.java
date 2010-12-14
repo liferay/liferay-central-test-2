@@ -128,9 +128,9 @@ public class ConfigurePortletEnableCommentRatingsTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent("This is a test wcd web content."));
 		assertEquals(RuntimeVariables.replace(
 				"This is a test wcd web content comment."),
-			selenium.getText("//td[2]/div[1]"));
+			selenium.getText("//div/div[3]/div/div[1]"));
 		assertEquals(RuntimeVariables.replace(
 				"0 (0 Votes) The average rating is 0 stars out of 5."),
-			selenium.getText("//td[1]/div/div/div/div"));
+			selenium.getText("//div[3]/div/div[1]/div/div/div/div/div"));
 	}
 }
