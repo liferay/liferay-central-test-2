@@ -121,24 +121,28 @@ public class HttpImpl implements Http {
 		_proxyHttpClient.setHttpConnectionManager(httpConnectionManager);
 
 		if (hasProxyConfig() && Validator.isNotNull(_PROXY_USERNAME)) {
+			List<String> authPrefs = new ArrayList<String>();
+
 			if (_PROXY_AUTH_TYPE.equals("username-password")) {
 				_proxyCredentials = new UsernamePasswordCredentials(
 					_PROXY_USERNAME, _PROXY_PASSWORD);
+
+				authPrefs.add(AuthPolicy.BASIC);
+				authPrefs.add(AuthPolicy.DIGEST);
+				authPrefs.add(AuthPolicy.NTLM);
 			}
 			else if (_PROXY_AUTH_TYPE.equals("ntlm")) {
 				_proxyCredentials = new NTCredentials(
 					_PROXY_USERNAME, _PROXY_PASSWORD, _PROXY_NTLM_HOST,
 					_PROXY_NTLM_DOMAIN);
 
-				List<String> authPrefs = new ArrayList<String>();
-
 				authPrefs.add(AuthPolicy.NTLM);
 				authPrefs.add(AuthPolicy.BASIC);
 				authPrefs.add(AuthPolicy.DIGEST);
-
-				_proxyHttpClient.getParams().setParameter(
-					AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
 			}
+
+			_proxyHttpClient.getParams().setParameter(
+				AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
 		}
 	}
 
