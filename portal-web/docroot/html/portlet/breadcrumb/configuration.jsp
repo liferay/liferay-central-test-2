@@ -20,59 +20,36 @@
 String redirect = ParamUtil.getString(request, "redirect");
 %>
 
-<aui:layout>
-	<aui:column columnWidth="50">
-		<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
+<liferay-portlet:preview
+	portletName="<%= portletResource %>"
+	queryString="struts_action=/breadcrumb/view"
+/>
 
-		<aui:form action="<%= configurationURL %>" method="post" name="fm">
-			<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-			<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+<div class="separator"><!-- --></div>
 
-			<aui:fieldset>
-				<aui:select name="displayStyle">
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-					<%
-					for (String displayStyleOption : PropsValues.BREADCRUMB_DISPLAY_STYLE_OPTIONS) {
-					%>
+<aui:form action="<%= configurationURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-						<aui:option label="<%= displayStyleOption %>" selected="<%= displayStyle.equals(displayStyleOption) %>" />
+	<aui:fieldset>
+		<aui:select name="displayStyle">
 
-					<%
-					}
-					%>
+			<%
+			for (String displayStyleOption : PropsValues.BREADCRUMB_DISPLAY_STYLE_OPTIONS) {
+			%>
 
-				</aui:select>
-			</aui:fieldset>
+				<aui:option label="<%= displayStyleOption %>" selected="<%= displayStyle.equals(displayStyleOption) %>" />
 
-			<aui:button-row>
-				<aui:button type="submit" />
-			</aui:button-row>
-		</aui:form>
-	</aui:column>
-	<aui:column columnWidth="50">
-		<liferay-portlet:preview
-			portletName="<%= portletResource %>"
-			queryString="struts_action=/breadcrumb/view"
-			showBorders="<%= true %>"
-		/>
-	</aui:column>
-</aui:layout>
+			<%
+			}
+			%>
 
-<aui:script use="aui-base">
-	var selectDisplayStyle = A.one('#<portlet:namespace />displayStyle');
+		</aui:select>
+	</aui:fieldset>
 
-	var curPortletBoundaryId = '#p_p_id_<%= portletResource %>_';
-
-	var toggleCustomFields = function() {
-		var data = {};
-		data['_<%= portletResource %>_display-style'] = selectDisplayStyle.get('value');
-
-		Liferay.Portlet.refresh(curPortletBoundaryId, data);
-	}
-
-	if (selectDisplayStyle) {
-		selectDisplayStyle.on('change', toggleCustomFields);
-
-		toggleCustomFields();
-	}
-</aui:script>
+	<aui:button-row>
+		<aui:button type="submit" />
+	</aui:button-row>
+</aui:form>
