@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.IOException;
@@ -127,8 +128,14 @@ public class SybaseDB extends BaseDB {
 			else if (line.indexOf(DROP_INDEX) != -1) {
 				String[] tokens = StringUtil.split(line, " ");
 
+				String tableName = tokens[4];
+
+				if (tableName.endsWith(StringPool.SEMICOLON)) {
+					tableName = tableName.substring(0, tableName.length() - 1);
+				}
+
 				line = StringUtil.replace(
-					"drop index @table@.@index@;", "@table@", tokens[4]);
+					"drop index @table@.@index@;", "@table@", tableName);
 				line = StringUtil.replace(line, "@index@", tokens[2]);
 			}
 

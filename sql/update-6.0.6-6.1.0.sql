@@ -5,14 +5,17 @@ alter table BlogsEntry add smallImage BOOLEAN null;
 alter table BlogsEntry add smallImageId VARCHAR(75) null;
 alter table BlogsEntry add smallImageURL STRING null;
 
+drop index IX_CE705D48 on DLFileRank;
+drop index IX_40B56512 on DLFileRank;
 alter table DLFileRank add fileEntryId LONG null;
 
 drop index IX_55C736AC on DLFileShortcut;
 drop index IX_346A0992 on DLFileShortcut;
 alter table DLFileShortcut add toFileEntryId LONG null;
 
-drop index IX_CE705D48 on DLFileVersion;
-drop index IX_40B56512 on DLFileVersion;
+drop index IX_B413F1EC on DLFileVersion;
+drop index IX_94E784D2 on DLFileVersion;
+drop index IX_2F8FED9C on DLFileVersion;
 alter table DLFileVersion add fileEntryId LONG null;
 
 update Group_ set type_ = 3 where type_ = 0;
