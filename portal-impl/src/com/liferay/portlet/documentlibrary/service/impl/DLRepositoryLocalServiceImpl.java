@@ -53,6 +53,7 @@ import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLRepositoryLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
+import com.liferay.portlet.documentlibrary.util.comparator.FileEntryModifiedDateComparator;
 import com.liferay.portlet.documentlibrary.util.comparator.FileVersionVersionComparator;
 
 import java.io.InputStream;
@@ -488,6 +489,59 @@ public class DLRepositoryLocalServiceImpl
 				groupId, folderIds, status);
 
 			return filesCount;
+		}
+	}
+
+	public List<DLFileEntry> getGroupFileEntries(
+			long groupId, int start, int end)
+		throws SystemException {
+
+		return getGroupFileEntries(
+			groupId, start, end, new FileEntryModifiedDateComparator());
+	}
+
+	public List<DLFileEntry> getGroupFileEntries(
+			long groupId, int start, int end, OrderByComparator obc)
+		throws SystemException {
+
+		return dlFileEntryPersistence.findByGroupId(groupId, start, end, obc);
+	}
+
+	public List<DLFileEntry> getGroupFileEntries(
+			long groupId, long userId, int start, int end)
+		throws SystemException {
+
+		return getGroupFileEntries(
+			groupId, userId, start, end, new FileEntryModifiedDateComparator());
+	}
+
+	public List<DLFileEntry> getGroupFileEntries(
+			long groupId, long userId, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		if (userId <= 0) {
+			return dlFileEntryPersistence.findByGroupId(
+				groupId, start, end, obc);
+		}
+		else {
+			return dlFileEntryPersistence.findByG_U(
+				groupId, userId, start, end, obc);
+		}
+	}
+
+	public int getGroupFileEntriesCount(long groupId) throws SystemException {
+		return dlFileEntryPersistence.countByGroupId(groupId);
+	}
+
+	public int getGroupFileEntriesCount(long groupId, long userId)
+		throws SystemException {
+
+		if (userId <= 0) {
+			return dlFileEntryPersistence.countByGroupId(groupId);
+		}
+		else {
+			return dlFileEntryPersistence.countByG_U(groupId, userId);
 		}
 	}
 

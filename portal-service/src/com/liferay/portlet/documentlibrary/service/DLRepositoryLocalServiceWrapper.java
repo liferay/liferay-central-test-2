@@ -244,6 +244,46 @@ public class DLRepositoryLocalServiceWrapper implements DLRepositoryLocalService
 			folderIds, status);
 	}
 
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getGroupFileEntries(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlRepositoryLocalService.getGroupFileEntries(groupId, start, end);
+	}
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getGroupFileEntries(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlRepositoryLocalService.getGroupFileEntries(groupId, start,
+			end, obc);
+	}
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getGroupFileEntries(
+		long groupId, long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlRepositoryLocalService.getGroupFileEntries(groupId, userId,
+			start, end);
+	}
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getGroupFileEntries(
+		long groupId, long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlRepositoryLocalService.getGroupFileEntries(groupId, userId,
+			start, end, obc);
+	}
+
+	public int getGroupFileEntriesCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlRepositoryLocalService.getGroupFileEntriesCount(groupId);
+	}
+
+	public int getGroupFileEntriesCount(long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlRepositoryLocalService.getGroupFileEntriesCount(groupId,
+			userId);
+	}
+
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion getLatestFileVersion(
 		long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,

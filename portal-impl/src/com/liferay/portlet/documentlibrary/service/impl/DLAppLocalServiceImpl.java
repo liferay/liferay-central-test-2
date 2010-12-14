@@ -371,6 +371,52 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			groupId, folderIds, status);
 	}
 
+	public List<DLFileEntry> getGroupFileEntries(
+			long groupId, int start, int end)
+		throws SystemException {
+
+		return dlRepositoryLocalService.getGroupFileEntries(
+			groupId, start, end);
+	}
+
+	public List<DLFileEntry> getGroupFileEntries(
+			long groupId, int start, int end, OrderByComparator obc)
+		throws SystemException {
+
+		return dlRepositoryLocalService.getGroupFileEntries(
+			groupId, start, end, obc);
+	}
+
+	public List<DLFileEntry> getGroupFileEntries(
+			long groupId, long userId, int start, int end)
+		throws SystemException {
+
+		return dlRepositoryLocalService.getGroupFileEntries(
+			groupId, userId, start, end);
+	}
+
+	public List<DLFileEntry> getGroupFileEntries(
+			long groupId, long userId, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return dlRepositoryLocalService.getGroupFileEntries(
+			groupId, start, end, obc);
+	}
+
+	public int getGroupFileEntriesCount(long groupId)
+		throws SystemException {
+
+		return dlRepositoryLocalService.getGroupFileEntriesCount(groupId);
+	}
+
+	public int getGroupFileEntriesCount(long groupId, long userId)
+		throws SystemException {
+
+		return dlRepositoryLocalService.getGroupFileEntriesCount(
+			groupId, userId);
+	}
+
 	public DLFileEntry moveFileEntry(
 			long userId, long fileEntryId, long newFolderId,
 			ServiceContext serviceContext)
