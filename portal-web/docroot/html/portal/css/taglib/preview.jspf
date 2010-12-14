@@ -29,6 +29,6 @@
 }
 
 .taglib-portlet-preview .preview {
-	min-height: 100px;
+	min-height: 90px;
 	margin: 1em;
 }
