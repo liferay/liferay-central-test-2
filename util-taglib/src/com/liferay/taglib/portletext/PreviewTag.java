@@ -59,36 +59,6 @@ public class PreviewTag extends IncludeTag {
 		requestDispatcher.include(request, response);
 	}
 
-	/**
-	 * @deprecated {@link #doTag(String, String, boolean, String,
-	 *			   ServletContext, HttpServletRequest, HttpServletResponse)}
-	 */
-	public static void doTag(
-			String portletName, String queryString,
-			String width, ServletContext servletContext,
-			HttpServletRequest request, HttpServletResponse response)
-		throws Exception {
-
-		doTag(
-			portletName, queryString, false, width, servletContext, request,
-			response);
-	}
-
-	/**
-	 * @deprecated {@link #doTag(String, String, String, boolean, String,
-	 *			   ServletContext, HttpServletRequest, HttpServletResponse)}
-	 */
-	public static void doTag(
-			String page, String portletName, String queryString, String width,
-			ServletContext servletContext, HttpServletRequest request,
-			HttpServletResponse response)
-		throws Exception {
-
-		doTag(
-			page, portletName, queryString, false, width, servletContext,
-			request, response);
-	}
-
 	public int doEndTag() throws JspException {
 		try {
 			ServletContext servletContext = getServletContext();
