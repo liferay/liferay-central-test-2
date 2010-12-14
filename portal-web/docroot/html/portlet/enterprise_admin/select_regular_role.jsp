@@ -63,7 +63,6 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_regular_role"
 
 		<liferay-ui:search-container-row
 			className="com.liferay.portal.model.Role"
-			escapedModel="<%= false %>"
 			keyProperty="roleId"
 			modelVar="role"
 		>

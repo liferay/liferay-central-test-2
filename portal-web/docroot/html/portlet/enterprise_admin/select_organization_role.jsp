@@ -237,7 +237,6 @@ if (step == 1) {
 
 				<liferay-ui:search-container-row
 					className="com.liferay.portal.model.Role"
-					escapedModel="<%= false %>"
 					keyProperty="roleId"
 					modelVar="role"
 				>

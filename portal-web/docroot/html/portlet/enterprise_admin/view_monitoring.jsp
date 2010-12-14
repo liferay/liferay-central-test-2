@@ -48,7 +48,6 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 
 			<liferay-ui:search-container-row
 				className="com.liferay.portal.model.UserTracker"
-				escapedModel="<%= false %>"
 				keyProperty="userTrackerId"
 				modelVar="userTracker"
 			>
