@@ -254,3 +254,7 @@
 	padding-left: 25px;
 	width: 250px;
 }
+
+.lfr-position-helper {
+	z-index: 10000;
+}

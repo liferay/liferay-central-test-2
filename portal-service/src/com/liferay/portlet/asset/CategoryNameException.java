@@ -1,4 +1,3 @@
-<%--
 /**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
@@ -12,11 +11,30 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
---%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+package com.liferay.portlet.asset;
 
-<%@ page import="com.liferay.portlet.asset.model.AssetCategory" %>
-<%@ page import="com.liferay.portlet.asset.model.AssetVocabulary" %>
-<%@ page import="com.liferay.portlet.asset.service.AssetVocabularyServiceUtil" %>
-<%@ page import="com.liferay.portlet.asset.service.permission.AssetPermission" %>
+import com.liferay.portal.kernel.exception.PortalException;
+
+/**
+ * @author Brian Wing Shun Chan
+ */
+public class CategoryNameException extends PortalException {
+
+	public CategoryNameException() {
+		super();
+	}
+
+	public CategoryNameException(String msg) {
+		super(msg);
+	}
+
+	public CategoryNameException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public CategoryNameException(Throwable cause) {
+		super(cause);
+	}
+
+}

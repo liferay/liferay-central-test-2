@@ -50,68 +50,6 @@
 
 					<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
 				</c:if>
-
-				<div class="asset-category-layer-wrapper">
-					<div class="add-category-layer asset-category-layer">
-						<span class="aui-field">
-							<span class="aui-field-content">
-								<label class="vocabulary-label" for="vocabulary-category-name">
-									<liferay-ui:message key="name" />
-								</label>
-
-								<input class="vocabulary-category-name" name="vocabulary-category-name" type="text" value="" />
-							</span>
-						</span>
-
-						<span class="aui-field">
-							<span class="aui-field-content">
-								<label for="vocabulary-select-list">
-									<liferay-ui:message key="to-vocabulary" />
-								</label>
-
-								<select class="vocabulary-select-list" name="vocabulary-select-list"></select>
-							</span>
-						</span>
-
-						<div class="category-permissions-actions">
-							<liferay-ui:input-permissions
-								modelName="<%= AssetCategory.class.getName() %>"
-							/>
-						</div>
-
-						<div class="button-holder">
-							<input class="category-save-button" type="button" value="<liferay-ui:message key="save" />" />
-
-							<input class="close-panel" type="button" value="<liferay-ui:message key="close" />" />
-						</div>
-					</div>
-				</div>
-
-				<div class="asset-category-layer-wrapper">
-					<div class="add-vocabulary-layer asset-category-layer">
-						<span class="aui-field">
-							<span class="aui-field-content">
-								<label for="vocabulary-name">
-									<liferay-ui:message key="add-vocabulary" />
-								</label>
-
-								<input class="vocabulary-name" name="vocabulary-name" type="text" value="" />
-							</span>
-						</span>
-
-						<div class="vocabulary-permissions-actions">
-							<liferay-ui:input-permissions
-								modelName="<%= AssetVocabulary.class.getName() %>"
-							/>
-						</div>
-
-						<div class="button-holder">
-							<input class="vocabulary-save-button" type="button" value="<liferay-ui:message key="save" />" />
-
-							<input class="close-panel" type="button" value="<liferay-ui:message key="close" />" />
-						</div>
-					</div>
-				</div>
 			</span>
 		</div>
 	</td>
@@ -203,5 +141,5 @@
 </form>
 
 <aui:script use="liferay-category-admin">
-	new Liferay.Portlet.AssetCategoryAdmin('<%= portletDisplay.getId() %>');
+	new Liferay.Portlet.AssetCategoryAdmin( {portletId: '<%= portletDisplay.getId() %>'});
 </aui:script>

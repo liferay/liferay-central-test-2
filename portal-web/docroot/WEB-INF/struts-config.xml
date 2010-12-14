@@ -211,6 +211,14 @@
 
 		<action path="/asset_category_admin/view" forward="portlet.asset_category_admin.view" />
 
+        <action path="/asset_category_admin/edit_category" type="com.liferay.portlet.assetcategoryadmin.action.EditCategoryAction">
+			<forward name="portlet.asset_category_admin.edit_category" path="portlet.asset_category_admin.edit_category" />
+		</action>
+
+		<action path="/asset_category_admin/edit_vocabulary" type="com.liferay.portlet.assetcategoryadmin.action.EditVocabularyAction">
+			<forward name="portlet.asset_category_admin.edit_vocabulary" path="portlet.asset_category_admin.edit_vocabulary" />
+		</action>
+
 		<!-- Asset Categories Navigation -->
 
 		<action path="/asset_categories_navigation/view" forward="portlet.asset_categories_navigation.view" />
