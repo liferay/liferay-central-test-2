@@ -184,10 +184,10 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	public List<DLFileEntry> getFileEntries(
 			long groupId, long folderId, int start, int end,
 			OrderByComparator obc)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws SystemException {
 
 		return dlRepositoryLocalService.getFileEntries(
-				groupId, folderId, start, end, obc);
+			groupId, folderId, start, end, obc);
 	}
 
 	public List<Object> getFileEntriesAndFileShortcuts(
@@ -365,7 +365,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 
 	public int getFoldersFileEntriesCount(
 			long groupId, List<Long> folderIds, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws SystemException {
 
 		return dlRepositoryLocalService.getFoldersFileEntriesCount(
 			groupId, folderIds, status);
