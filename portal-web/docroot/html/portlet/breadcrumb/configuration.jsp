@@ -20,39 +20,43 @@
 String redirect = ParamUtil.getString(request, "redirect");
 %>
 
-<liferay-portlet:preview
-	portletName="<%= portletResource %>"
-	queryString="struts_action=/breadcrumb/view"
-/>
+<aui:layout>
+	<aui:column columnWidth="50">
+		<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<div class="separator"><!-- --></div>
+		<aui:form action="<%= configurationURL %>" method="post" name="fm">
+			<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+			<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
+			<aui:fieldset>
+				<aui:select name="displayStyle">
 
-<aui:form action="<%= configurationURL %>" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+					<%
+					for (String displayStyleOption : PropsValues.BREADCRUMB_DISPLAY_STYLE_OPTIONS) {
+					%>
 
-	<aui:fieldset>
-		<aui:select name="displayStyle">
+						<aui:option label="<%= displayStyleOption %>" selected="<%= displayStyle.equals(displayStyleOption) %>" />
 
-			<%
-			for (String displayStyleOption : PropsValues.BREADCRUMB_DISPLAY_STYLE_OPTIONS) {
-			%>
+					<%
+					}
+					%>
 
-				<aui:option label="<%= displayStyleOption %>" selected="<%= displayStyle.equals(displayStyleOption) %>" />
+				</aui:select>
+			</aui:fieldset>
 
-			<%
-			}
-			%>
-
-		</aui:select>
-	</aui:fieldset>
-
-	<aui:button-row>
-		<aui:button type="submit" />
-	</aui:button-row>
-</aui:form>
+			<aui:button-row>
+				<aui:button type="submit" />
+			</aui:button-row>
+		</aui:form>
+	</aui:column>
+	<aui:column columnWidth="50">
+		<liferay-portlet:preview
+			portletName="<%= portletResource %>"
+			queryString="struts_action=/breadcrumb/view"
+			showBorders="<%= true %>"
+		/>
+	</aui:column>
+</aui:layout>
 
 <aui:script use="aui-base">
 	var selectDisplayStyle = A.one('#<portlet:namespace />displayStyle');

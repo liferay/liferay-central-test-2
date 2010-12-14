@@ -20,102 +20,106 @@
 String redirect = ParamUtil.getString(request, "redirect");
 %>
 
-<liferay-portlet:preview
-	portletName="<%= portletResource %>"
-	queryString="struts_action=/navigation/view"
-/>
+<aui:layout>
+	<aui:column columnWidth="50">
+		<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<div class="separator"><!-- --></div>
+		<aui:form action="<%= configurationURL %>" method="post" name="fm">
+			<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+			<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
+			<aui:fieldset column="<%= true %>">
+				<aui:select name="displayStyle">
+					<aui:option label="custom" selected='<%= displayStyle.equals("[custom]") %>' value="[custom]" />
 
-<aui:form action="<%= configurationURL %>" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+					<optgroup label="<liferay-ui:message key="predefined" />">
 
-	<aui:fieldset column="<%= true %>">
-		<aui:select name="displayStyle">
-			<aui:option label="custom" selected='<%= displayStyle.equals("[custom]") %>' value="[custom]" />
+						<%
+						for (String displayStyleOption : PropsValues.NAVIGATION_DISPLAY_STYLE_OPTIONS) {
+						%>
 
-			<optgroup label="<liferay-ui:message key="predefined" />">
+							<aui:option label="<%= displayStyleOption %>" selected="<%= displayStyle.equals(displayStyleOption) %>" />
 
-				<%
-				for (String displayStyleOption : PropsValues.NAVIGATION_DISPLAY_STYLE_OPTIONS) {
-				%>
+						<%
+						}
+						%>
 
-					<aui:option label="<%= displayStyleOption %>" selected="<%= displayStyle.equals(displayStyleOption) %>" />
+					</optgroup>
+				</aui:select>
 
-				<%
-				}
-				%>
+				<aui:select name="bulletStyle">
 
-			</optgroup>
-		</aui:select>
+					<%
+					String[] bulletStyleOptions = StringUtil.split(theme.getSetting("bullet-style-options"));
 
-		<aui:select name="bulletStyle">
+					for (String bulletStyleOption : bulletStyleOptions) {
+					%>
 
-			<%
-			String[] bulletStyleOptions = StringUtil.split(theme.getSetting("bullet-style-options"));
+						<aui:option label="<%= LanguageUtil.get(pageContext, bulletStyleOption) %>" selected="<%= bulletStyle.equals(bulletStyleOption) %>" />
 
-			for (String bulletStyleOption : bulletStyleOptions) {
-			%>
+					<%
+					}
+					%>
 
-				<aui:option label="<%= LanguageUtil.get(pageContext, bulletStyleOption) %>" selected="<%= bulletStyle.equals(bulletStyleOption) %>" />
+					<c:if test="<%= bulletStyleOptions.length == 0 %>">
+						<aui:option label="default" value="" />
+					</c:if>
+				</aui:select>
+			</aui:fieldset>
 
-			<%
-			}
-			%>
+			<aui:fieldset column="<%= true %>">
+				<div id="<portlet:namespace />customDisplayOptions">
+					<aui:select label="header" name="headerType">
+						<aui:option label="none" selected='<%= headerType.equals("none") %>' />
+						<aui:option label="portlet-title" selected='<%= headerType.equals("portlet-title") %>' />
+						<aui:option label="root-layout" selected='<%= headerType.equals("root-layout") %>' />
+						<aui:option label="breadcrumb" selected='<%= headerType.equals("breadcrumb") %>' />
+					</aui:select>
 
-			<c:if test="<%= bulletStyleOptions.length == 0 %>">
-				<aui:option label="default" value="" />
-			</c:if>
-		</aui:select>
-	</aui:fieldset>
+					<aui:select label="root-layout" name="rootLayoutType">
+						<aui:option label="parent-at-level" selected='<%= rootLayoutType.equals("absolute") %>' value="absolute" />
+						<aui:option label="relative-parent-up-by" selected='<%= rootLayoutType.equals("relative") %>' value="relative" />
+					</aui:select>
 
-	<aui:fieldset column="<%= true %>">
-		<div id="<portlet:namespace />customDisplayOptions">
-			<aui:select label="header" name="headerType">
-				<aui:option label="none" selected='<%= headerType.equals("none") %>' />
-				<aui:option label="portlet-title" selected='<%= headerType.equals("portlet-title") %>' />
-				<aui:option label="root-layout" selected='<%= headerType.equals("root-layout") %>' />
-				<aui:option label="breadcrumb" selected='<%= headerType.equals("breadcrumb") %>' />
-			</aui:select>
+					<aui:select name="rootLayoutLevel">
 
-			<aui:select label="root-layout" name="rootLayoutType">
-				<aui:option label="parent-at-level" selected='<%= rootLayoutType.equals("absolute") %>' value="absolute" />
-				<aui:option label="relative-parent-up-by" selected='<%= rootLayoutType.equals("relative") %>' value="relative" />
-			</aui:select>
+						<%
+						for (int i = 0; i <= 4; i++) {
+						%>
 
-			<aui:select name="rootLayoutLevel">
+							<aui:option label="<%= i %>" selected="<%= rootLayoutLevel == i %>" />
 
-				<%
-				for (int i = 0; i <= 4; i++) {
-				%>
+						<%
+						}
+						%>
 
-					<aui:option label="<%= i %>" selected="<%= rootLayoutLevel == i %>" />
+					</aui:select>
 
-				<%
-				}
-				%>
+					<aui:select name="includedLayouts">
+						<aui:option label="auto" selected='<%= includedLayouts.equals("auto") %>' />
+						<aui:option label="all" selected='<%= includedLayouts.equals("all") %>' />
+					</aui:select>
 
-			</aui:select>
+					<aui:select name="nestedChildren">
+						<aui:option label="yes" selected="<%= nestedChildren %>" value="1" />
+						<aui:option label="no" selected="<%= !nestedChildren %>" value="0" />
+					</aui:select>
+				</div>
+			</aui:fieldset>
 
-			<aui:select name="includedLayouts">
-				<aui:option label="auto" selected='<%= includedLayouts.equals("auto") %>' />
-				<aui:option label="all" selected='<%= includedLayouts.equals("all") %>' />
-			</aui:select>
-
-			<aui:select name="nestedChildren">
-				<aui:option label="yes" selected="<%= nestedChildren %>" value="1" />
-				<aui:option label="no" selected="<%= !nestedChildren %>" value="0" />
-			</aui:select>
-		</div>
-	</aui:fieldset>
-
-	<aui:button-row>
-		<aui:button type="submit" />
-	</aui:button-row>
-</aui:form>
+			<aui:button-row>
+				<aui:button type="submit" />
+			</aui:button-row>
+		</aui:form>
+	</aui:column>
+	<aui:column columnWidth="50">
+		<liferay-portlet:preview
+			portletName="<%= portletResource %>"
+			queryString="struts_action=/navigation/view"
+			showBorders="<%= true %>"
+		/>
+	</aui:column>
+</aui:layout>
 
 <aui:script use="aui-base">
 	var selectDisplayStyle = A.one('#<portlet:namespace />displayStyle');
