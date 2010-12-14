@@ -43,6 +43,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 
 	public AssetCategory addCategory(
 			long parentCategoryId, Map<Locale, String> titleMap,
+            Map<Locale, String> descriptionMap,
 			long vocabularyId, String[] categoryProperties,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -52,7 +53,8 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			parentCategoryId, ActionKeys.ADD_CATEGORY);
 
 		return assetCategoryLocalService.addCategory(
-			getUserId(), parentCategoryId, titleMap, vocabularyId,
+			getUserId(), parentCategoryId, titleMap,
+            descriptionMap, vocabularyId,
 			categoryProperties, serviceContext);
 	}
 
@@ -140,7 +142,9 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 
 	public AssetCategory updateCategory(
 			long categoryId, long parentCategoryId,
-			Map<Locale, String> titleMap, long vocabularyId,
+            Map<Locale, String> titleMap,
+            Map<Locale, String> descriptionMap,
+            long vocabularyId,
 			String[] categoryProperties, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -148,7 +152,8 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			getPermissionChecker(), categoryId, ActionKeys.UPDATE);
 
 		return assetCategoryLocalService.updateCategory(
-			getUserId(), categoryId, parentCategoryId, titleMap, vocabularyId,
+			getUserId(), categoryId, parentCategoryId, titleMap,
+            descriptionMap, vocabularyId,
 			categoryProperties, serviceContext);
 	}
 

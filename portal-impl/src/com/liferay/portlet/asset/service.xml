@@ -28,6 +28,7 @@
 		<column name="rightCategoryId" type="long" />
 		<column name="name" type="String" />
 		<column name="title" type="String" localized="true" />
+		<column name="description" type="String" localized="true" />
 		<column name="vocabularyId" type="long" />
 
 		<!-- Relationships -->
