@@ -17,12 +17,18 @@
 <%
 long groupId = themeDisplay.getScopeGroupId();
 
+List<WorkflowHandler> workflowHandlers = null;
+
 if (portletName.equals(PortletKeys.WORKFLOW_DEFINITIONS)) {
 	groupId = WorkflowConstants.DEFAULT_GROUP_ID;
+
+	workflowHandlers = WorkflowHandlerRegistryUtil.getWorkflowHandlers();
+}
+else {
+	workflowHandlers = WorkflowHandlerRegistryUtil.getScopeableWorkflowHandlers();
 }
 
 List<WorkflowDefinition> workflowDefinitions = WorkflowDefinitionManagerUtil.getActiveWorkflowDefinitions(company.getCompanyId(), 0, 100, null);
-List<WorkflowHandler> workflowHandlers = WorkflowHandlerRegistryUtil.getWorkflowHandlers();
 
 PortletURL portletURL = renderResponse.createRenderURL();
 

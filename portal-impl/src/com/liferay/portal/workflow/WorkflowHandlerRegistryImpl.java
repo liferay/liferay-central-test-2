@@ -20,13 +20,17 @@ import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistry;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.TreeMap;
 
 /**
  * @author Bruno Farache
  * @author Marcellus Tavares
  */
 public class WorkflowHandlerRegistryImpl implements WorkflowHandlerRegistry {
+
+	public List<WorkflowHandler> getScopeableWorkflowHandlers() {
+		return ListUtil.fromCollection(_scopeableWorkflowHandlerMap.values());
+	}
 
 	public WorkflowHandler getWorkflowHandler(String className) {
 		return _workflowHandlerMap.get(className);
@@ -37,15 +41,35 @@ public class WorkflowHandlerRegistryImpl implements WorkflowHandlerRegistry {
 	}
 
 	public void register(WorkflowHandler workflowHandler) {
-		_workflowHandlerMap.put(
-			workflowHandler.getClassName(), workflowHandler);
+		synchronized (this) {
+			_workflowHandlerMap.put(
+				workflowHandler.getClassName(), workflowHandler);
+
+			if (workflowHandler.isScopeable()) {
+				_scopeableWorkflowHandlerMap.put(
+					workflowHandler.getClassName(), workflowHandler);
+			}
+		}
 	}
 
 	public void unregister(WorkflowHandler workflowHandler) {
-		_workflowHandlerMap.remove(workflowHandler.getClassName());
+		synchronized (this) {
+			_workflowHandlerMap.remove(workflowHandler.getClassName());
+
+			if (workflowHandler.isScopeable()) {
+				_scopeableWorkflowHandlerMap.remove(
+					workflowHandler.getClassName());
+			}
+		}
 	}
 
+	// Note: Mograte to ConcurrentSkipListMap upon upgrade to Java 6.
+	// For now use TreeMap since the risk of concurrent modification is
+	// minimal
+	private Map<String, WorkflowHandler> _scopeableWorkflowHandlerMap =
+		new TreeMap<String, WorkflowHandler>();
+
 	private Map<String, WorkflowHandler> _workflowHandlerMap =
-		new ConcurrentHashMap<String, WorkflowHandler>();
+		new TreeMap<String, WorkflowHandler>();
 
 }

@@ -62,6 +62,8 @@ public interface WorkflowHandler {
 		LiferayPortletResponse liferayPortletResponse,
 		String noSuchEntryRedirect);
 
+	public boolean isScopeable();
+
 	public String render(
 		long classPK, RenderRequest renderRequest,
 		RenderResponse renderResponse, String template);

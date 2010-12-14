@@ -149,6 +149,10 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 		return null;
 	}
 
+	public boolean isScopeable() {
+		return true;
+	}
+
 	public String render(
 		long classPK, RenderRequest renderRequest,
 		RenderResponse renderResponse, String template) {

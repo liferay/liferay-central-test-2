@@ -22,6 +22,8 @@ import java.util.List;
  */
 public interface WorkflowHandlerRegistry {
 
+	public List<WorkflowHandler> getScopeableWorkflowHandlers();
+
 	public WorkflowHandler getWorkflowHandler(String className);
 
 	public List<WorkflowHandler> getWorkflowHandlers();
