@@ -318,6 +318,76 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory> {
 	public void setTitleMap(Map<Locale, String> titleMap);
 
 	/**
+	 * Gets the description of this asset category.
+	 *
+	 * @return the description of this asset category
+	 */
+	public String getDescription();
+
+	/**
+	 * Gets the localized description of this asset category. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale to get the localized description for
+	 * @return the localized description of this asset category
+	 */
+	public String getDescription(Locale locale);
+
+	/**
+	 * Gets the localized description of this asset category, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local to get the localized description for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized description of this asset category. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
+	public String getDescription(Locale locale, boolean useDefault);
+
+	/**
+	 * Gets the localized description of this asset category. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized description for
+	 * @return the localized description of this asset category
+	 */
+	public String getDescription(String languageId);
+
+	/**
+	 * Gets the localized description of this asset category, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized description for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized description of this asset category
+	 */
+	public String getDescription(String languageId, boolean useDefault);
+
+	/**
+	 * Gets a map of the locales and localized description of this asset category.
+	 *
+	 * @return the locales and localized description
+	 */
+	public Map<Locale, String> getDescriptionMap();
+
+	/**
+	 * Sets the description of this asset category.
+	 *
+	 * @param description the description of this asset category
+	 */
+	public void setDescription(String description);
+
+	/**
+	 * Sets the localized description of this asset category.
+	 *
+	 * @param locale the locale to set the localized description for
+	 * @param description the localized description of this asset category
+	 */
+	public void setDescription(Locale locale, String description);
+
+	/**
+	 * Sets the localized descriptions of this asset category from the map of locales and localized descriptions.
+	 *
+	 * @param descriptionMap the locales and localized descriptions of this asset category
+	 */
+	public void setDescriptionMap(Map<Locale, String> descriptionMap);
+
+	/**
 	 * Gets the vocabulary id of this asset category.
 	 *
 	 * @return the vocabulary id of this asset category

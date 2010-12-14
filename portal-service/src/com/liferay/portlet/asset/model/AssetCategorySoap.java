@@ -47,6 +47,7 @@ public class AssetCategorySoap implements Serializable {
 		soapModel.setRightCategoryId(model.getRightCategoryId());
 		soapModel.setName(model.getName());
 		soapModel.setTitle(model.getTitle());
+		soapModel.setDescription(model.getDescription());
 		soapModel.setVocabularyId(model.getVocabularyId());
 
 		return soapModel;
@@ -204,6 +205,14 @@ public class AssetCategorySoap implements Serializable {
 		_title = title;
 	}
 
+	public String getDescription() {
+		return _description;
+	}
+
+	public void setDescription(String description) {
+		_description = description;
+	}
+
 	public long getVocabularyId() {
 		return _vocabularyId;
 	}
@@ -225,5 +234,6 @@ public class AssetCategorySoap implements Serializable {
 	private long _rightCategoryId;
 	private String _name;
 	private String _title;
+	private String _description;
 	private long _vocabularyId;
 }

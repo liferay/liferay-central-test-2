@@ -90,6 +90,7 @@ create table AssetCategory (
 	rightCategoryId LONG,
 	name VARCHAR(75) null,
 	title STRING null,
+	description STRING null,
 	vocabularyId LONG
 );
 

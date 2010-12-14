@@ -249,13 +249,14 @@ public class AssetCategoryLocalServiceUtil {
 	public static com.liferay.portlet.asset.model.AssetCategory addCategory(
 		long userId, long parentCategoryId,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		long vocabularyId, java.lang.String[] categoryProperties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addCategory(userId, parentCategoryId, titleMap,
-			vocabularyId, categoryProperties, serviceContext);
+			descriptionMap, vocabularyId, categoryProperties, serviceContext);
 	}
 
 	public static void addCategoryResources(
@@ -409,13 +410,15 @@ public class AssetCategoryLocalServiceUtil {
 	public static com.liferay.portlet.asset.model.AssetCategory updateCategory(
 		long userId, long categoryId, long parentCategoryId,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		long vocabularyId, java.lang.String[] categoryProperties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateCategory(userId, categoryId, parentCategoryId,
-			titleMap, vocabularyId, categoryProperties, serviceContext);
+			titleMap, descriptionMap, vocabularyId, categoryProperties,
+			serviceContext);
 	}
 
 	public static AssetCategoryLocalService getService() {

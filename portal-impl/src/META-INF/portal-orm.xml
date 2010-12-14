@@ -1130,7 +1130,9 @@
 			<basic name="rightCategoryId" />
 			<basic name="name" />
 			<basic name="title" />
+			<basic name="description" />
 			<basic name="vocabularyId" />
+			<transient name="descriptionMap" />
 			<transient name="primaryKey" />
 			<transient name="titleMap" />
 			<transient name="userUuid" />

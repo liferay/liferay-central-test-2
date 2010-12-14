@@ -373,6 +373,98 @@ public class AssetCategoryWrapper implements AssetCategory {
 	}
 
 	/**
+	* Gets the description of this asset category.
+	*
+	* @return the description of this asset category
+	*/
+	public java.lang.String getDescription() {
+		return _assetCategory.getDescription();
+	}
+
+	/**
+	* Gets the localized description of this asset category. Uses the default language if no localization exists for the requested language.
+	*
+	* @param locale the locale to get the localized description for
+	* @return the localized description of this asset category
+	*/
+	public java.lang.String getDescription(java.util.Locale locale) {
+		return _assetCategory.getDescription(locale);
+	}
+
+	/**
+	* Gets the localized description of this asset category, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param locale the local to get the localized description for
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized description of this asset category. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	*/
+	public java.lang.String getDescription(java.util.Locale locale,
+		boolean useDefault) {
+		return _assetCategory.getDescription(locale, useDefault);
+	}
+
+	/**
+	* Gets the localized description of this asset category. Uses the default language if no localization exists for the requested language.
+	*
+	* @param languageId the id of the language to get the localized description for
+	* @return the localized description of this asset category
+	*/
+	public java.lang.String getDescription(java.lang.String languageId) {
+		return _assetCategory.getDescription(languageId);
+	}
+
+	/**
+	* Gets the localized description of this asset category, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param languageId the id of the language to get the localized description for
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized description of this asset category
+	*/
+	public java.lang.String getDescription(java.lang.String languageId,
+		boolean useDefault) {
+		return _assetCategory.getDescription(languageId, useDefault);
+	}
+
+	/**
+	* Gets a map of the locales and localized description of this asset category.
+	*
+	* @return the locales and localized description
+	*/
+	public java.util.Map<java.util.Locale, java.lang.String> getDescriptionMap() {
+		return _assetCategory.getDescriptionMap();
+	}
+
+	/**
+	* Sets the description of this asset category.
+	*
+	* @param description the description of this asset category
+	*/
+	public void setDescription(java.lang.String description) {
+		_assetCategory.setDescription(description);
+	}
+
+	/**
+	* Sets the localized description of this asset category.
+	*
+	* @param locale the locale to set the localized description for
+	* @param description the localized description of this asset category
+	*/
+	public void setDescription(java.util.Locale locale,
+		java.lang.String description) {
+		_assetCategory.setDescription(locale, description);
+	}
+
+	/**
+	* Sets the localized descriptions of this asset category from the map of locales and localized descriptions.
+	*
+	* @param descriptionMap the locales and localized descriptions of this asset category
+	*/
+	public void setDescriptionMap(
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap) {
+		_assetCategory.setDescriptionMap(descriptionMap);
+	}
+
+	/**
 	* Gets the vocabulary id of this asset category.
 	*
 	* @return the vocabulary id of this asset category

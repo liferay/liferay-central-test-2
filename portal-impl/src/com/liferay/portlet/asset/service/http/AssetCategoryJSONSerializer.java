@@ -63,6 +63,7 @@ public class AssetCategoryJSONSerializer {
 		jsonObject.put("rightCategoryId", model.getRightCategoryId());
 		jsonObject.put("name", model.getName());
 		jsonObject.put("title", model.getTitle());
+		jsonObject.put("description", model.getDescription());
 		jsonObject.put("vocabularyId", model.getVocabularyId());
 
 		return jsonObject;
