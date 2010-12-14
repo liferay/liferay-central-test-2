@@ -54,7 +54,7 @@ public class AssetCategoryLocalServiceImpl
 
 	public AssetCategory addCategory(
 			long userId, long parentCategoryId, Map<Locale, String> titleMap,
-            Map<Locale, String> descriptionMap,
+			Map<Locale, String> descriptionMap,
 			long vocabularyId, String[] categoryProperties,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -93,7 +93,7 @@ public class AssetCategoryLocalServiceImpl
 		category.setParentCategoryId(parentCategoryId);
 		category.setName(name);
 		category.setTitleMap(titleMap);
-        category.setDescriptionMap(descriptionMap);
+		category.setDescriptionMap(descriptionMap);
 		category.setVocabularyId(vocabularyId);
 
 		assetCategoryPersistence.update(category, false);
@@ -348,7 +348,7 @@ public class AssetCategoryLocalServiceImpl
 	public AssetCategory updateCategory(
 			long userId, long categoryId, long parentCategoryId,
 			Map<Locale, String> titleMap,
-            Map<Locale, String> descriptionMap, long vocabularyId,
+			Map<Locale, String> descriptionMap, long vocabularyId,
 			String[] categoryProperties, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -375,7 +375,7 @@ public class AssetCategoryLocalServiceImpl
 		category.setParentCategoryId(parentCategoryId);
 		category.setName(name);
 		category.setTitleMap(titleMap);
-        category.setDescriptionMap(descriptionMap);
+		category.setDescriptionMap(descriptionMap);
 		category.setVocabularyId(vocabularyId);
 
 		assetCategoryPersistence.update(category, false);
