@@ -29,26 +29,28 @@ import javax.servlet.jsp.JspException;
 public class PreviewTag extends IncludeTag {
 
 	public static void doTag(
-			String portletName, String queryString, String width,
-			ServletContext servletContext, HttpServletRequest request,
-			HttpServletResponse response)
+			String portletName, String queryString, boolean showBorders,
+			String width, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		doTag(
-			_PAGE, portletName, queryString, width, servletContext, request,
-			response);
+			_PAGE, portletName, queryString, showBorders, width, servletContext,
+			request, response);
 	}
 
 	public static void doTag(
-			String page, String portletName, String queryString, String width,
-			ServletContext servletContext, HttpServletRequest request,
-			HttpServletResponse response)
+			String page, String portletName, String queryString,
+			boolean showBorders, String width, ServletContext servletContext,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		request.setAttribute(
 			"liferay-portlet:preview:portletName", portletName);
 		request.setAttribute(
 			"liferay-portlet:preview:queryString", queryString);
+		request.setAttribute(
+			"liferay-portlet:preview:showBorders", String.valueOf(showBorders));
 		request.setAttribute("liferay-portlet:preview:width", width);
 
 		RequestDispatcher requestDispatcher =
@@ -63,8 +65,9 @@ public class PreviewTag extends IncludeTag {
 			HttpServletRequest request = getServletRequest();
 
 			doTag(
-				getPage(), _portletName, _queryString, _width, servletContext,
-				request, new PipingServletResponse(pageContext));
+				getPage(), _portletName, _queryString, _showBorders, _width,
+				servletContext, request,
+				new PipingServletResponse(pageContext));
 
 			return EVAL_PAGE;
 		}
@@ -81,6 +84,10 @@ public class PreviewTag extends IncludeTag {
 		_queryString = queryString;
 	}
 
+	public void setShowBorders(boolean showBorders) {
+		_showBorders = showBorders;
+	}
+
 	public void setWidth(String width) {
 		_width = width;
 	}
@@ -93,6 +100,7 @@ public class PreviewTag extends IncludeTag {
 
 	private String _portletName;
 	private String _queryString;
+	private boolean _showBorders;
 	private String _width;
 
 }
