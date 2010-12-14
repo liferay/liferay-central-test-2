@@ -118,27 +118,46 @@ String redirect = ParamUtil.getString(request, "redirect");
 </aui:form>
 
 <aui:script use="aui-base">
-	var select = A.one('#<portlet:namespace />displayStyle');
+	var selectDisplayStyle = A.one('#<portlet:namespace />displayStyle');
+	var selectBulletStyle = A.one('#<portlet:namespace />bulletStyle');
+	var selectHeaderType = A.one('#<portlet:namespace />headerType');
+	var selectRootLayoutType = A.one('#<portlet:namespace />rootLayoutType');
+	var selectRootLayoutLevel = A.one('#<portlet:namespace />rootLayoutLevel');
+	var selectIncludedLayouts = A.one('#<portlet:namespace />includedLayouts');
+	var selectNestedChildren = A.one('#<portlet:namespace />nestedChildren');
+	var customDisplayOptions = A.one('#<portlet:namespace />customDisplayOptions');
+
+	var selects = A.all('#<portlet:namespace />fm select');
+
+	var curPortletBoundaryId = '#p_p_id_<%= portletResource %>_';
 
 	var toggleCustomFields = function() {
-		var customDisplayOptions = A.one('#<portlet:namespace />customDisplayOptions');
-
 		if (customDisplayOptions) {
+			var data = {};
 			var action = 'hide';
 
-			var displayStyle = select.val();
+			var displayStyle = selectDisplayStyle.val();
 
 			if (displayStyle == '[custom]') {
 				action = 'show';
+
+				data['_<%= portletResource %>_header-type'] = selectHeaderType.get('value');
+				data['_<%= portletResource %>_root-layout-type'] = selectRootLayoutType.get('value');
+				data['_<%= portletResource %>_root-layout-level'] = selectRootLayoutLevel.get('value');
+				data['_<%= portletResource %>_included-layouts'] = selectIncludedLayouts.get('value');
+				data['_<%= portletResource %>_nested-children'] = selectNestedChildren.get('value');
 			}
 
 			customDisplayOptions[action]();
+
+			data['_<%= portletResource %>_bullet-style'] = selectBulletStyle.get('value');
+			data['_<%= portletResource %>_display-style'] = selectDisplayStyle.get('value');
+
+			Liferay.Portlet.refresh(curPortletBoundaryId, data);
 		}
 	}
 
-	if (select) {
-		select.on('change', toggleCustomFields);
+	selects.on('change', toggleCustomFields);
 
-		toggleCustomFields();
-	}
+	toggleCustomFields();
 </aui:script>
