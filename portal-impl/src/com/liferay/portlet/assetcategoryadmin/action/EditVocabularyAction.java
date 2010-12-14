@@ -110,14 +110,15 @@ public class EditVocabularyAction extends PortletAction {
 			// Add vocabulary
 
 			vocabulary = AssetVocabularyServiceUtil.addVocabulary(
-				titleMap, descriptionMap, null, serviceContext);
+				null, titleMap, descriptionMap, null, serviceContext);
 		}
 		else {
 
 			// Update vocabulary
 
 			vocabulary = AssetVocabularyServiceUtil.updateVocabulary(
-				vocabularyId, titleMap, descriptionMap, null, serviceContext);
+				vocabularyId, null, titleMap, descriptionMap, null,
+				serviceContext);
 		}
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
