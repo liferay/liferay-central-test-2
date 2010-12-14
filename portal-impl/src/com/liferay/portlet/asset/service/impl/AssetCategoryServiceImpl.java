@@ -43,9 +43,8 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 
 	public AssetCategory addCategory(
 			long parentCategoryId, Map<Locale, String> titleMap,
-			Map<Locale, String> descriptionMap,
-			long vocabularyId, String[] categoryProperties,
-			ServiceContext serviceContext)
+			Map<Locale, String> descriptionMap, long vocabularyId,
+			String[] categoryProperties, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		AssetCategoryPermission.check(
@@ -53,9 +52,8 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			parentCategoryId, ActionKeys.ADD_CATEGORY);
 
 		return assetCategoryLocalService.addCategory(
-			getUserId(), parentCategoryId, titleMap,
-			descriptionMap, vocabularyId,
-			categoryProperties, serviceContext);
+			getUserId(), parentCategoryId, titleMap, descriptionMap,
+			vocabularyId, categoryProperties, serviceContext);
 	}
 
 	public void deleteCategory(long categoryId)
@@ -142,19 +140,17 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 
 	public AssetCategory updateCategory(
 			long categoryId, long parentCategoryId,
-			Map<Locale, String> titleMap,
-			Map<Locale, String> descriptionMap,
-			long vocabularyId,
-			String[] categoryProperties, ServiceContext serviceContext)
+			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
+			long vocabularyId, String[] categoryProperties,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		AssetCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.UPDATE);
 
 		return assetCategoryLocalService.updateCategory(
-			getUserId(), categoryId, parentCategoryId, titleMap,
-			descriptionMap, vocabularyId,
-			categoryProperties, serviceContext);
+			getUserId(), categoryId, parentCategoryId, titleMap, descriptionMap,
+			vocabularyId, categoryProperties, serviceContext);
 	}
 
 	protected List<AssetCategory> filterCategories(

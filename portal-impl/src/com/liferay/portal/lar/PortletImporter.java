@@ -458,8 +458,8 @@ public class PortletImporter {
 
 				importedCategory = AssetCategoryLocalServiceUtil.addCategory(
 					userId, parentCategoryId, category.getTitleMap(),
-					category.getDescriptionMap(),
-					vocabularyId, properties, serviceContext);
+					category.getDescriptionMap(), vocabularyId, properties,
+					serviceContext);
 			}
 			else {
 				importedCategory = AssetCategoryLocalServiceUtil.updateCategory(

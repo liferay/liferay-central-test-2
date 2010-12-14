@@ -54,9 +54,8 @@ public class AssetCategoryLocalServiceImpl
 
 	public AssetCategory addCategory(
 			long userId, long parentCategoryId, Map<Locale, String> titleMap,
-			Map<Locale, String> descriptionMap,
-			long vocabularyId, String[] categoryProperties,
-			ServiceContext serviceContext)
+			Map<Locale, String> descriptionMap, long vocabularyId,
+			String[] categoryProperties, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Category
@@ -347,9 +346,9 @@ public class AssetCategoryLocalServiceImpl
 
 	public AssetCategory updateCategory(
 			long userId, long categoryId, long parentCategoryId,
-			Map<Locale, String> titleMap,
-			Map<Locale, String> descriptionMap, long vocabularyId,
-			String[] categoryProperties, ServiceContext serviceContext)
+			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
+			long vocabularyId, String[] categoryProperties,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Category
