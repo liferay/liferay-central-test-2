@@ -48,7 +48,6 @@ import org.apache.struts.action.ActionMapping;
  * @author Brian Wing Shun Chan
  * @author Julio Camarero
  */
-
 public class EditVocabularyAction extends PortletAction {
 
 	public void processAction(
@@ -69,8 +68,8 @@ public class EditVocabularyAction extends PortletAction {
 			jsonObject.put("exception", e.getClass() + e.getMessage());
 		}
 
-		HttpServletResponse response =
-			PortalUtil.getHttpServletResponse(actionResponse);
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
+			actionResponse);
 
 		response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 
@@ -86,33 +85,32 @@ public class EditVocabularyAction extends PortletAction {
 
 		ActionUtil.getVocabulary(renderRequest);
 
-		return mapping.findForward(getForward(
-				renderRequest,"portlet.asset_category_admin.edit_vocabulary"));
+		return mapping.findForward(
+			getForward(
+				renderRequest, "portlet.asset_category_admin.edit_vocabulary"));
 	}
 
 	protected JSONObject updateVocabulary(ActionRequest actionRequest)
-			throws Exception {
+		throws Exception {
 
 		long vocabularyId = ParamUtil.getLong(actionRequest, "vocabularyId");
 
 		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
-				actionRequest, "title");
-
+			actionRequest, "title");
 		Map<Locale, String> descriptionMap =
-				LocalizationUtil.getLocalizationMap(
-				actionRequest, "description");
+			LocalizationUtil.getLocalizationMap(actionRequest, "description");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-				AssetVocabulary.class.getName(), actionRequest);
+			AssetVocabulary.class.getName(), actionRequest);
 
-		AssetVocabulary vocabulary;
+		AssetVocabulary vocabulary = null;
 
 		if (vocabularyId <= 0) {
 
 			// Add vocabulary
 
 			vocabulary = AssetVocabularyServiceUtil.addVocabulary(
-					titleMap, descriptionMap, null, serviceContext);
+				titleMap, descriptionMap, null, serviceContext);
 		}
 		else {
 
@@ -124,7 +122,7 @@ public class EditVocabularyAction extends PortletAction {
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObject.put("vocabularyId", vocabulary.getPrimaryKey());
+		jsonObject.put("vocabularyId", vocabulary.getVocabularyId());
 
 		return jsonObject;
 	}

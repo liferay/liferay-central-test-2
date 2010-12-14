@@ -409,6 +409,7 @@
 		<exception>DuplicateCategory</exception>
 		<exception>DuplicateTag</exception>
 		<exception>DuplicateVocabulary</exception>
+		<exception>CategoryName</exception>
 		<exception>CategoryPropertyKey</exception>
 		<exception>CategoryPropertyValue</exception>
 		<exception>TagPropertyKey</exception>

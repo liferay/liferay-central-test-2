@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ActionUtil {
 
 	public static void getCategory(HttpServletRequest request)
-			throws Exception {
+		throws Exception {
 
 		long categoryId = ParamUtil.getLong(request, "categoryId");
 
@@ -47,16 +47,16 @@ public class ActionUtil {
 	}
 
 	public static void getCategory(PortletRequest portletRequest)
-			throws Exception {
+		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-				portletRequest);
+			portletRequest);
 
 		getCategory(request);
 	}
 
 	public static void getVocabulary(HttpServletRequest request)
-			throws Exception {
+		throws Exception {
 
 		long vocabularyId = ParamUtil.getLong(request, "vocabularyId");
 
@@ -70,10 +70,10 @@ public class ActionUtil {
 	}
 
 	public static void getVocabulary(PortletRequest portletRequest)
-			throws Exception {
+		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-				portletRequest);
+			portletRequest);
 
 		getVocabulary(request);
 	}

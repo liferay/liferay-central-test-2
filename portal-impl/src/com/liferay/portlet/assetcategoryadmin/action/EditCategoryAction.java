@@ -44,7 +44,6 @@ import org.apache.struts.action.ActionMapping;
  * @author Brian Wing Shun Chan
  * @author Julio Camarero
  */
-
 public class EditCategoryAction extends PortletAction {
 
 	public void processAction(
@@ -65,8 +64,8 @@ public class EditCategoryAction extends PortletAction {
 			jsonObject.put("exception", e.getClass() + e.getMessage());
 		}
 
-		HttpServletResponse response =
-			PortalUtil.getHttpServletResponse(actionResponse);
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
+			actionResponse);
 
 		response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 
@@ -78,56 +77,53 @@ public class EditCategoryAction extends PortletAction {
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)
-			throws Exception {
+		throws Exception {
 
 		ActionUtil.getCategory(renderRequest);
 
 		return mapping.findForward(
-				getForward(
-				renderRequest,
-				"portlet.asset_category_admin.edit_category"));
+			getForward(
+				renderRequest, "portlet.asset_category_admin.edit_category"));
 	}
 
 	protected JSONObject updateCategory(ActionRequest actionRequest)
-			throws Exception {
+		throws Exception {
 
 		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
-		long parentCategoryId = ParamUtil.getLong(actionRequest,
-				"parentCategoryId");
+
+		long parentCategoryId = ParamUtil.getLong(
+			actionRequest, "parentCategoryId");
 		long vocabularyId = ParamUtil.getLong(actionRequest, "vocabularyId");
-
 		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
-				actionRequest, "title");
-
+			actionRequest, "title");
 		Map<Locale, String> descriptionMap =
-				LocalizationUtil.getLocalizationMap(
-				actionRequest, "description");
+			LocalizationUtil.getLocalizationMap(actionRequest, "description");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-				AssetCategory.class.getName(), actionRequest);
+			AssetCategory.class.getName(), actionRequest);
 
-		AssetCategory category;
+		AssetCategory category = null;
 
 		if (categoryId <= 0) {
 
 			// Add category
 
 			category = AssetCategoryServiceUtil.addCategory(
-				parentCategoryId, titleMap, descriptionMap,
-				vocabularyId, null, serviceContext);
+				parentCategoryId, titleMap, descriptionMap, vocabularyId, null,
+				serviceContext);
 		}
 		else {
 
 			// Update category
 
 			category = AssetCategoryServiceUtil.updateCategory(
-				categoryId, parentCategoryId, titleMap,
-				descriptionMap, vocabularyId, null, serviceContext );
+				categoryId, parentCategoryId, titleMap, descriptionMap,
+				vocabularyId, null, serviceContext );
 		}
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObject.put("categoryId", category.getPrimaryKey());
+		jsonObject.put("categoryId", category.getCategoryId());
 
 		return jsonObject;
 	}
