@@ -88,7 +88,7 @@ if (assetVocabularyId > 0) {
 	searchContainer.setTotal(total);
 }
 else if (!groupByClass) {
-	if(!anyAssetType) {
+	if (!anyAssetType) {
 		assetEntryQuery.setClassNameIds(classNameIds);
 	}
 
