@@ -72,9 +72,19 @@ Group group = themeDisplay.getScopeGroup();
 
 <c:if test="<%= (group != null) && (!group.hasStagingGroup() || group.isStagingGroup()) %>">
 	<aui:form name="fm">
-		<div class="add-asset-selector">
-			<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
-		</div>
+
+		<%
+		for (long groupId : groupIds) {
+		%>
+
+			<div class="add-asset-selector">
+				<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
+			</div>
+
+		<%
+		}
+		%>
+
 	</aui:form>
 </c:if>
 

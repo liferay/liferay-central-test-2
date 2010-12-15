@@ -173,6 +173,10 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 							<%= selectAssetTypeInput %>
 
+							<%
+							for (long groupId : groupIds) {
+							%>
+
 							<div class="add-asset-selector">
 								<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
 
@@ -195,6 +199,10 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 								</liferay-ui:icon-menu>
 							</div>
+
+							<%
+							}
+							%>
 
 							<%
 							List<String> deletedAssets = new ArrayList<String>();
@@ -244,12 +252,23 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 								AssetEntry assetEntry = null;
 
-								try {
-									assetEntry = AssetEntryLocalServiceUtil.getEntry(scopeGroupId, assetEntryUuid);
+								boolean deleteEntry = true;
 
-									assetEntry = assetEntry.toEscapedModel();
+								for (long groupId : groupIds) {
+									try {
+										assetEntry = AssetEntryLocalServiceUtil.getEntry(groupId, assetEntryUuid);
+
+										assetEntry = assetEntry.toEscapedModel();
+
+										deleteEntry = false;
+									}
+
+									catch (NoSuchEntryException nsee) {
+										continue;
+									}
 								}
-								catch (NoSuchEntryException nsee) {
+
+								if (deleteEntry) {
 									deletedAssets.add(assetEntryUuid);
 
 									continue;

@@ -33,7 +33,7 @@ body {
 body.portal-popup {
 }
 
-body.configuration-popup {
+body.configuration-popup, body.controlPanel-popup {
 }
 
 body.portal-iframe {

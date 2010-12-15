@@ -132,8 +132,6 @@ public class JournalArticleAssetRendererFactory
 				PortletRequest.RENDER_PHASE);
 
 			addAssetURL.setParameter("struts_action", "/journal/edit_article");
-			addAssetURL.setParameter(
-				"groupId", String.valueOf(themeDisplay.getScopeGroupId()));
 		}
 
 		return addAssetURL;
