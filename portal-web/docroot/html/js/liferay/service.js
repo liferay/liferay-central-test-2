@@ -539,7 +539,9 @@ Liferay.Service.registerClass(
 		getGroupEntries: true,
 		getGroupEntriesCount: true,
 		getGroupsEntries: true,
-		getOrganizationEntries: true
+		getOrganizationEntries: true,
+		subscribe: true,
+		unsubscribe: true
 	}
 );
 
@@ -752,6 +754,8 @@ Liferay.Service.registerClass(
 		getArticleByUrlTitle: true,
 		getLatestArticle: true,
 		removeArticleLocale: true,
+		subscribe: true,
+		unsubscribe: true,
 		updateArticle: true,
 		updateContent: true
 	}

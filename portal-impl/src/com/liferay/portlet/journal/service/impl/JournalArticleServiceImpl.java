@@ -233,6 +233,24 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			groupId, articleId, version, languageId);
 	}
 
+	public void subscribe(long groupId)
+		throws PortalException, SystemException {
+
+		JournalPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.SUBSCRIBE);
+
+		journalArticleLocalService.subscribe(getUserId(), groupId);
+	}
+
+	public void unsubscribe(long groupId)
+		throws PortalException, SystemException {
+
+		JournalPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.SUBSCRIBE);
+
+		journalArticleLocalService.unsubscribe(getUserId(), groupId);
+	}
+
 	public JournalArticle updateArticle(
 			long groupId, String articleId, double version, String content)
 		throws PortalException, SystemException {

@@ -1489,6 +1489,20 @@ public class JournalArticleLocalServiceImpl
 			status, reviewDate, andOperator);
 	}
 
+	public void subscribe(long userId, long groupId)
+		throws PortalException, SystemException {
+
+		subscriptionLocalService.addSubscription(
+			userId, groupId, JournalArticle.class.getName(), groupId);
+	}
+
+	public void unsubscribe(long userId, long groupId)
+		throws PortalException, SystemException {
+
+		subscriptionLocalService.deleteSubscription(
+			userId, JournalArticle.class.getName(), groupId);
+	}
+
 	public JournalArticle updateArticle(
 			long userId, long groupId, String articleId, double version,
 			String content)

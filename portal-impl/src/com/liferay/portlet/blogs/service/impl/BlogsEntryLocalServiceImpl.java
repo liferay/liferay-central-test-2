@@ -489,6 +489,20 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			organizationId, new Date(), status);
 	}
 
+	public void subscribe(long userId, long groupId)
+		throws PortalException, SystemException {
+
+		subscriptionLocalService.addSubscription(
+			userId, groupId, BlogsEntry.class.getName(), groupId);
+	}
+
+	public void unsubscribe(long userId, long groupId)
+		throws PortalException, SystemException {
+
+		subscriptionLocalService.deleteSubscription(
+			userId, BlogsEntry.class.getName(), groupId);
+	}
+
 	public void updateAsset(
 			long userId, BlogsEntry entry, long[] assetCategoryIds,
 			String[] assetTagNames)

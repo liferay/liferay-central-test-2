@@ -299,6 +299,24 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			blogsEntries, themeDisplay);
 	}
 
+	public void subscribe(long groupId)
+		throws PortalException, SystemException {
+
+		BlogsPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.SUBSCRIBE);
+
+		blogsEntryLocalService.subscribe(getUserId(), groupId);
+	}
+
+	public void unsubscribe(long groupId)
+		throws PortalException, SystemException {
+
+		BlogsPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.SUBSCRIBE);
+
+		blogsEntryLocalService.unsubscribe(getUserId(), groupId);
+	}
+
 	public BlogsEntry updateEntry(
 			long entryId, String title, String description, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,

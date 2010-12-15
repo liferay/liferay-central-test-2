@@ -28,11 +28,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
-import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -53,7 +50,6 @@ import com.liferay.portlet.blogs.NoSuchEntryException;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
-import com.liferay.portlet.blogs.service.permission.BlogsPermission;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.File;
@@ -316,34 +312,14 @@ public class EditEntryAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PermissionChecker permissionChecker =
-			themeDisplay.getPermissionChecker();
-
-		if (BlogsPermission.contains(
-				permissionChecker, themeDisplay.getScopeGroupId(),
-				ActionKeys.SUBSCRIBE)) {
-
-			SubscriptionLocalServiceUtil.addSubscription(
-				themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
-				BlogsEntry.class.getName(), themeDisplay.getScopeGroupId());
-		}
+		BlogsEntryServiceUtil.subscribe(themeDisplay.getScopeGroupId());
 	}
 
 	protected void unsubscribe(ActionRequest actionRequest) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		PermissionChecker permissionChecker =
-			themeDisplay.getPermissionChecker();
-
-		if (BlogsPermission.contains(
-				permissionChecker, themeDisplay.getScopeGroupId(),
-				ActionKeys.SUBSCRIBE)) {
-
-			SubscriptionLocalServiceUtil.deleteSubscription(
-				themeDisplay.getUserId(), BlogsEntry.class.getName(),
-				themeDisplay.getScopeGroupId());
-		}
+		BlogsEntryServiceUtil.unsubscribe(themeDisplay.getScopeGroupId());
 	}
 
 	protected Object[] updateEntry(ActionRequest actionRequest)
