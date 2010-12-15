@@ -86,6 +86,15 @@
 				<action-key>UPDATE</action-key>
 			</guest-unsupported>
 		</permissions>
+		<social-equity>
+			<social-equity-mapping>
+				<action-key>SUBSCRIBE</action-key>
+				<information-value>2</information-value>
+				<information-lifespan>36500</information-lifespan>
+				<participation-value>2</participation-value>
+				<participation-lifespan>36500</participation-lifespan>
+			</social-equity-mapping>
+		</social-equity>
 	</model-resource>
 	<model-resource>
 		<model-name>com.liferay.portlet.wiki.model.WikiPage</model-name>

@@ -102,6 +102,20 @@ public class SubscriptionLocalServiceImpl
 	public void deleteSubscription(long subscriptionId)
 		throws PortalException, SystemException {
 
+		Subscription subscription = subscriptionPersistence.fetchByPrimaryKey(
+			subscriptionId);
+
+		String className = PortalUtil.getClassName(
+			subscription.getClassNameId());
+
+		if (assetEntryPersistence.countByC_C(
+				subscription.getClassNameId(), subscription.getClassPK()) > 0) {
+
+			socialEquityLogLocalService.deactivateEquityLogs(
+				subscription.getUserId(), className, subscription.getClassPK(),
+				ActionKeys.SUBSCRIBE, StringPool.BLANK);
+		}
+
 		subscriptionPersistence.remove(subscriptionId);
 	}
 
@@ -112,19 +126,59 @@ public class SubscriptionLocalServiceImpl
 		User user = userPersistence.findByPrimaryKey(userId);
 		long classNameId = PortalUtil.getClassNameId(className);
 
+		if (assetEntryPersistence.countByC_C(classNameId, classPK) > 0) {
+			socialEquityLogLocalService.deactivateEquityLogs(
+				userId, className, classPK,	ActionKeys.SUBSCRIBE,
+				StringPool.BLANK);
+		}
+
 		subscriptionPersistence.removeByC_U_C_C(
 			user.getCompanyId(), userId, classNameId, classPK);
 	}
 
-	public void deleteSubscriptions(long userId) throws SystemException {
+	public void deleteSubscriptions(long userId)
+		throws PortalException, SystemException {
+
+		List<Subscription> subscriptions = subscriptionPersistence.findByUserId(
+			userId);
+
+		for (Subscription subscription : subscriptions) {
+			if (assetEntryPersistence.countByC_C(
+					subscription.getClassNameId(),
+					subscription.getClassPK()) > 0) {
+
+				socialEquityLogLocalService.deactivateEquityLogs(
+					subscription.getUserId(),
+					PortalUtil.getClassName(subscription.getClassNameId()),
+					subscription.getClassPK(),
+					ActionKeys.SUBSCRIBE, StringPool.BLANK);
+			}
+		}
+
 		subscriptionPersistence.removeByUserId(userId);
 	}
 
 	public void deleteSubscriptions(
 			long companyId, String className, long classPK)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
+
+		List<Subscription> subscriptions = subscriptionPersistence.findByC_C_C(
+			companyId, classNameId, classPK);
+
+		for (Subscription subscription : subscriptions) {
+			if (assetEntryPersistence.countByC_C(
+					subscription.getClassNameId(),
+					subscription.getClassPK()) > 0) {
+
+				socialEquityLogLocalService.deactivateEquityLogs(
+					subscription.getUserId(),
+					PortalUtil.getClassName(subscription.getClassNameId()),
+					subscription.getClassPK(),
+					ActionKeys.SUBSCRIBE, StringPool.BLANK);
+			}
+		}
 
 		subscriptionPersistence.removeByC_C_C(companyId, classNameId, classPK);
 	}
