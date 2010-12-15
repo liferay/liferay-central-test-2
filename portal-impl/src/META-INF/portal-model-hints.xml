@@ -918,10 +918,10 @@
 		<field name="rightCategoryId" type="long" />
 		<field name="name" type="String" />
 		<field name="title" type="String" localized="true" />
-		<field name="description" type="String" localized="true" >
-            <hint-collection name="TEXTAREA" />
+		<field name="description" type="String" localized="true">
+			<hint-collection name="TEXTAREA" />
 			<hint name="display-width">350</hint>
-        </field>
+		</field>
 		<field name="vocabularyId" type="long" />
 	</model>
 	<model name="com.liferay.portlet.asset.model.AssetCategoryProperty">
