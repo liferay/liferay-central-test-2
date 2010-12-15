@@ -18,11 +18,16 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.BaseAssetRendererFactory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -31,12 +36,16 @@ import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
 import com.liferay.portlet.blogs.service.permission.BlogsPermission;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Jorge Ferrer
  * @author Juan Fernández
  * @author Raymond Augé
+ * @author Sergio González
  */
 public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 
@@ -69,12 +78,22 @@ public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 	}
 
 	public PortletURL getURLAdd(
-		LiferayPortletRequest liferayPortletRequest,
-		LiferayPortletResponse liferayPortletResponse) {
+			LiferayPortletRequest liferayPortletRequest,
+			LiferayPortletResponse liferayPortletResponse)
+		throws PortalException, SystemException {
+
+		HttpServletRequest request =
+			liferayPortletRequest.getHttpServletRequest();
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)liferayPortletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
+
+		Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
+			themeDisplay.getCompanyId(), GroupConstants.CONTROL_PANEL);
+
+		long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(
+			controlPanelGroup.getGroupId(), true);
 
 		PortletURL addAssetURL = null;
 
@@ -82,8 +101,9 @@ public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 				themeDisplay.getPermissionChecker(),
 				themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY)) {
 
-			addAssetURL = liferayPortletResponse.createRenderURL(
-				PortletKeys.BLOGS);
+			addAssetURL = new PortletURLImpl(
+				request, PortletKeys.BLOGS, controlPanelPlid,
+				PortletRequest.RENDER_PHASE);
 
 			addAssetURL.setParameter("struts_action", "/blogs/edit_entry");
 		}

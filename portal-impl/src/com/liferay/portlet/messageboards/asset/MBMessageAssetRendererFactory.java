@@ -32,6 +32,8 @@ import javax.portlet.PortletURL;
  * @author Julio Camarero
  * @author Juan Fernández
  * @author Raymond Augé
+ * @author Sergio González
+
  */
 public class MBMessageAssetRendererFactory extends BaseAssetRendererFactory {
 
@@ -56,8 +58,9 @@ public class MBMessageAssetRendererFactory extends BaseAssetRendererFactory {
 	}
 
 	public PortletURL getURLAdd(
-		LiferayPortletRequest liferayPortletRequest,
-		LiferayPortletResponse liferayPortletResponse) {
+			LiferayPortletRequest liferayPortletRequest,
+			LiferayPortletResponse liferayPortletResponse)
+		throws PortalException, SystemException {
 
 		return null;
 	}

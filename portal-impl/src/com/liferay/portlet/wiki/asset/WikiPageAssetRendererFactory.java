@@ -36,6 +36,7 @@ import javax.portlet.PortletURL;
  * @author Juan Fernández
  * @author Jorge Ferrer
  * @author Raymond Augé
+ * @author Sergio González
  */
 public class WikiPageAssetRendererFactory extends BaseAssetRendererFactory {
 
@@ -78,8 +79,9 @@ public class WikiPageAssetRendererFactory extends BaseAssetRendererFactory {
 	}
 
 	public PortletURL getURLAdd(
-		LiferayPortletRequest liferayPortletRequest,
-		LiferayPortletResponse liferayPortletResponse) {
+			LiferayPortletRequest liferayPortletRequest,
+			LiferayPortletResponse liferayPortletResponse)
+		throws PortalException, SystemException {
 
 		return null;
 	}

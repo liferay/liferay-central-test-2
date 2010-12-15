@@ -29,6 +29,7 @@ import javax.portlet.PortletURL;
  * @author Jorge Ferrer
  * @author Juan Fernández
  * @author Raymond Augé
+ * @author Sergio González
  */
 public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 
@@ -61,8 +62,9 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 	}
 
 	public PortletURL getURLAdd(
-		LiferayPortletRequest liferayPortletRequest,
-		LiferayPortletResponse liferayPortletResponse) {
+			LiferayPortletRequest liferayPortletRequest,
+			LiferayPortletResponse liferayPortletResponse)
+		throws PortalException, SystemException {
 
 		return null;
 	}

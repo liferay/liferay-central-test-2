@@ -27,6 +27,7 @@ import javax.portlet.PortletURL;
  * @author Jorge Ferrer
  * @author Juan Fernández
  * @author Raymond Augé
+ * @author Sergio González
  */
 public interface AssetRendererFactory {
 
@@ -54,8 +55,9 @@ public interface AssetRendererFactory {
 	public String getType();
 
 	public PortletURL getURLAdd(
-		LiferayPortletRequest liferayPortletRequest,
-		LiferayPortletResponse liferayPortletResponse);
+			LiferayPortletRequest liferayPortletRequest,
+			LiferayPortletResponse liferayPortletResponse)
+		throws PortalException, SystemException;
 
 	public boolean hasPermission(
 			PermissionChecker permissionChecker, long entryClassPK,

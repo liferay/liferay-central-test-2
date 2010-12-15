@@ -19,11 +19,16 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.BaseAssetRendererFactory;
 import com.liferay.portlet.journal.NoSuchArticleException;
@@ -35,12 +40,16 @@ import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
 import com.liferay.portlet.journal.service.permission.JournalPermission;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Julio Camarero
  * @author Juan Fernández
  * @author Raymond Augé
+ * @author Sergio González
  */
 public class JournalArticleAssetRendererFactory
 	extends BaseAssetRendererFactory {
@@ -95,12 +104,22 @@ public class JournalArticleAssetRendererFactory
 	}
 
 	public PortletURL getURLAdd(
-		LiferayPortletRequest liferayPortletRequest,
-		LiferayPortletResponse liferayPortletResponse) {
+			LiferayPortletRequest liferayPortletRequest,
+			LiferayPortletResponse liferayPortletResponse)
+		throws PortalException, SystemException {
+
+		HttpServletRequest request =
+			liferayPortletRequest.getHttpServletRequest();
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)liferayPortletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
+
+		Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
+			themeDisplay.getCompanyId(), GroupConstants.CONTROL_PANEL);
+
+		long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(
+			controlPanelGroup.getGroupId(), true);
 
 		PortletURL addAssetURL = null;
 
@@ -108,8 +127,9 @@ public class JournalArticleAssetRendererFactory
 				themeDisplay.getPermissionChecker(),
 				themeDisplay.getScopeGroupId(), ActionKeys.ADD_ARTICLE)) {
 
-			addAssetURL = liferayPortletResponse.createRenderURL(
-				PortletKeys.JOURNAL);
+			addAssetURL = new PortletURLImpl(
+				request, PortletKeys.JOURNAL, controlPanelPlid,
+				PortletRequest.RENDER_PHASE);
 
 			addAssetURL.setParameter("struts_action", "/journal/edit_article");
 			addAssetURL.setParameter(
