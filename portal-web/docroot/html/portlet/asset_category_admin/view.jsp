@@ -141,5 +141,9 @@
 </form>
 
 <aui:script use="liferay-category-admin">
-	new Liferay.Portlet.AssetCategoryAdmin( {portletId: '<%= portletDisplay.getId() %>'});
+	new Liferay.Portlet.AssetCategoryAdmin(
+		{
+			portletId: '<%= portletDisplay.getId() %>'
+		}
+	);
 </aui:script>
