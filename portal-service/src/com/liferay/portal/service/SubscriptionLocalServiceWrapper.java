@@ -245,13 +245,15 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	}
 
 	public void deleteSubscriptions(long userId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_subscriptionLocalService.deleteSubscriptions(userId);
 	}
 
 	public void deleteSubscriptions(long companyId, java.lang.String className,
 		long classPK)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_subscriptionLocalService.deleteSubscriptions(companyId, className,
 			classPK);
 	}

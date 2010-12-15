@@ -226,11 +226,13 @@ public interface SubscriptionLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteSubscriptions(long userId)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteSubscriptions(long companyId, java.lang.String className,
 		long classPK)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Subscription getSubscription(

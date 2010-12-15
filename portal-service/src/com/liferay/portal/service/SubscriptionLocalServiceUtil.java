@@ -254,13 +254,15 @@ public class SubscriptionLocalServiceUtil {
 	}
 
 	public static void deleteSubscriptions(long userId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteSubscriptions(userId);
 	}
 
 	public static void deleteSubscriptions(long companyId,
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteSubscriptions(companyId, className, classPK);
 	}
 
