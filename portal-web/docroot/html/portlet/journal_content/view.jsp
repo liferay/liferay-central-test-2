@@ -220,7 +220,6 @@ try {
 								<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
 									<portlet:param name="struts_action" value="/journal/edit_article" />
 									<portlet:param name="redirect" value="<%= currentURL %>" />
-									<portlet:param name="referringPortletResource" value="<%= PortletKeys.JOURNAL_CONTENT %>" />
 									<portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
 									<portlet:param name="articleId" value="<%= article.getArticleId() %>" />
 									<portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
@@ -293,7 +292,6 @@ boolean showIconsActions = themeDisplay.isSignedIn() && ((showEditArticleIcon ||
 				<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
 					<portlet:param name="struts_action" value="/journal/edit_article" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="referringPortletResource" value="<%= PortletKeys.JOURNAL_CONTENT %>" />
 					<portlet:param name="groupId" value="<%= String.valueOf(articleDisplay.getGroupId()) %>" />
 					<portlet:param name="articleId" value="<%= articleDisplay.getArticleId() %>" />
 					<portlet:param name="version" value="<%= String.valueOf(articleDisplay.getVersion()) %>" />
@@ -310,7 +308,6 @@ boolean showIconsActions = themeDisplay.isSignedIn() && ((showEditArticleIcon ||
 				<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editTemplateURL" portletName="<%= PortletKeys.JOURNAL %>">
 					<portlet:param name="struts_action" value="/journal/edit_template" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="referringPortletResource" value="<%= PortletKeys.JOURNAL_CONTENT %>" />
 					<portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" />
 					<portlet:param name="templateId" value="<%= template.getTemplateId() %>" />
 				</liferay-portlet:renderURL>
@@ -337,7 +334,6 @@ boolean showIconsActions = themeDisplay.isSignedIn() && ((showEditArticleIcon ||
 					<portlet:param name="struts_action" value="/journal/edit_article" />
 					<portlet:param name="portletResource" value="<%= portletDisplay.getId() %>" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="referringPortletResource" value="<%= PortletKeys.JOURNAL_CONTENT %>" />
 					<portlet:param name="groupId" value="<%= String.valueOf(scopeGroupId) %>" />
 				</liferay-portlet:renderURL>
 
