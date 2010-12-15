@@ -255,6 +255,28 @@ public class JournalArticleServiceSoap {
 		}
 	}
 
+	public static void subscribe(long groupId) throws RemoteException {
+		try {
+			JournalArticleServiceUtil.subscribe(groupId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void unsubscribe(long groupId) throws RemoteException {
+		try {
+			JournalArticleServiceUtil.unsubscribe(groupId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticleSoap updateArticle(
 		long groupId, java.lang.String articleId, double version,
 		java.lang.String content) throws RemoteException {

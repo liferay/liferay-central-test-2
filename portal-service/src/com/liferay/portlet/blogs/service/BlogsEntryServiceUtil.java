@@ -148,6 +148,18 @@ public class BlogsEntryServiceUtil {
 			type, version, displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
+	public static void subscribe(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().subscribe(groupId);
+	}
+
+	public static void unsubscribe(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().unsubscribe(groupId);
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateEntry(
 		long entryId, java.lang.String title, java.lang.String description,
 		java.lang.String content, int displayDateMonth, int displayDateDay,

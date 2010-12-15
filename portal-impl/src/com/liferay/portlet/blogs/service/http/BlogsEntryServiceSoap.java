@@ -199,5 +199,27 @@ public class BlogsEntryServiceSoap {
 		}
 	}
 
+	public static void subscribe(long groupId) throws RemoteException {
+		try {
+			BlogsEntryServiceUtil.subscribe(groupId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void unsubscribe(long groupId) throws RemoteException {
+		try {
+			BlogsEntryServiceUtil.unsubscribe(groupId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(BlogsEntryServiceSoap.class);
 }

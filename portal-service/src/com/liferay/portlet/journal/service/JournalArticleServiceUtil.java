@@ -197,6 +197,18 @@ public class JournalArticleServiceUtil {
 				   .removeArticleLocale(groupId, articleId, version, languageId);
 	}
 
+	public static void subscribe(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().subscribe(groupId);
+	}
+
+	public static void unsubscribe(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().unsubscribe(groupId);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(
 		long groupId, java.lang.String articleId, double version,
 		java.lang.String content)

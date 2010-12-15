@@ -819,6 +819,18 @@ public class JournalArticleLocalServiceWrapper
 			reviewDate, andOperator);
 	}
 
+	public void subscribe(long userId, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_journalArticleLocalService.subscribe(userId, groupId);
+	}
+
+	public void unsubscribe(long userId, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_journalArticleLocalService.unsubscribe(userId, groupId);
+	}
+
 	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
 		long userId, long groupId, java.lang.String articleId, double version,
 		java.lang.String content)

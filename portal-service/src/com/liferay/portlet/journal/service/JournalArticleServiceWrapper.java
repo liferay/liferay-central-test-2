@@ -182,6 +182,18 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 			version, languageId);
 	}
 
+	public void subscribe(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_journalArticleService.subscribe(groupId);
+	}
+
+	public void unsubscribe(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_journalArticleService.unsubscribe(groupId);
+	}
+
 	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
 		long groupId, java.lang.String articleId, double version,
 		java.lang.String content)

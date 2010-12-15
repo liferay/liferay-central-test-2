@@ -137,6 +137,18 @@ public class BlogsEntryServiceWrapper implements BlogsEntryService {
 			themeDisplay);
 	}
 
+	public void subscribe(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_blogsEntryService.subscribe(groupId);
+	}
+
+	public void unsubscribe(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_blogsEntryService.unsubscribe(groupId);
+	}
+
 	public com.liferay.portlet.blogs.model.BlogsEntry updateEntry(
 		long entryId, java.lang.String title, java.lang.String description,
 		java.lang.String content, int displayDateMonth, int displayDateDay,

@@ -420,6 +420,18 @@ public class BlogsEntryLocalServiceUtil {
 		return getService().getOrganizationEntriesCount(organizationId, status);
 	}
 
+	public static void subscribe(long userId, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().subscribe(userId, groupId);
+	}
+
+	public static void unsubscribe(long userId, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().unsubscribe(userId, groupId);
+	}
+
 	public static void updateAsset(long userId,
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames)
