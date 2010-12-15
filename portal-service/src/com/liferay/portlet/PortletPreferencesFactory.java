@@ -73,6 +73,11 @@ public interface PortletPreferencesFactory {
 			PortletRequest portletRequest, String portletId)
 		throws PortalException, SystemException;
 
+	public PortletPreferences getPortletSetup(
+			long scopeGroupId, Layout layout, String portletId,
+			String defaultPreferences)
+		throws SystemException;
+
 	public PortletPreferences getPreferences(HttpServletRequest request);
 
 	public PreferencesValidator getPreferencesValidator(Portlet portlet);

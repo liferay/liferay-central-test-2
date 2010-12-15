@@ -333,7 +333,7 @@ public class PortletPreferencesFactoryImpl
 		return PortalUtil.getPreferencesValidator(portlet);
 	}
 
-	protected PortletPreferences getPortletSetup(
+	public PortletPreferences getPortletSetup(
 			long scopeGroupId, Layout layout, String portletId,
 			String defaultPreferences)
 		throws SystemException {

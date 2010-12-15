@@ -122,6 +122,15 @@ public class PortletPreferencesFactoryUtil {
 			portletRequest, portletId);
 	}
 
+	public static PortletPreferences getPortletSetup(
+			long scopeGroupId, Layout layout, String portletId,
+			String defaultPreferences)
+		throws SystemException {
+
+		return getPortletPreferencesFactory().getPortletSetup(
+			scopeGroupId,layout, portletId, defaultPreferences);
+	}
+
 	public static PortletPreferences getPreferences(
 		HttpServletRequest request) {
 

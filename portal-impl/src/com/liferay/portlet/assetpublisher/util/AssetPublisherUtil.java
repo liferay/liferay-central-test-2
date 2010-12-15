@@ -72,9 +72,16 @@ public class AssetPublisherUtil {
 			return;
 		}
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Layout layout = LayoutLocalServiceUtil.getLayout(
+			themeDisplay.getRefererPlid());
+
 		PortletPreferences preferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-				portletRequest, referringPortletResource);
+				themeDisplay.getScopeGroupId(), layout,
+				referringPortletResource, null);
 
 		String selectionStyle = preferences.getValue(
 			"selection-style", "dynamic");
