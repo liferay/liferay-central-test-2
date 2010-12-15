@@ -120,6 +120,17 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 	}
 
+	public void destroy() {
+		try {
+			shutdown();
+		}
+		catch (SchedulerException e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Error shutting down", e);
+			}
+		}
+	}
+
 	public SchedulerRequest getScheduledJob(String jobName, String groupName)
 		throws SchedulerException {
 
@@ -379,6 +390,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 
 		try {
+			if (_scheduler.isShutdown()) {
+				return;
+			}
+
 			_scheduler.shutdown(false);
 		}
 		catch (Exception e) {
