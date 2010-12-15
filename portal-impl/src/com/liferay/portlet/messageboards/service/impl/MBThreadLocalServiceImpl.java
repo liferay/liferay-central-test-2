@@ -101,13 +101,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			assetEntryLocalService.deleteEntry(
 				MBMessage.class.getName(), message.getMessageId());
 
-			// Statistics
-
-			if (!message.isDiscussion()) {
-				mbStatsUserLocalService.updateStatsUser(
-					message.getGroupId(), message.getUserId());
-			}
-
 			// Message flags
 
 			mbMessageFlagPersistence.removeByMessageId(message.getMessageId());
@@ -123,6 +116,13 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			// Message
 
 			mbMessagePersistence.remove(message);
+
+			// Statistics
+
+			if (!message.isDiscussion()) {
+				mbStatsUserLocalService.updateStatsUser(
+					message.getGroupId(), message.getUserId());
+			}
 
 			// Workflow
 

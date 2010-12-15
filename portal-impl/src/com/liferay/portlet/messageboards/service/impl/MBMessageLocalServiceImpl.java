@@ -695,13 +695,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		ratingsStatsLocalService.deleteStats(
 			MBMessage.class.getName(), message.getMessageId());
 
-		// Statistics
-
-		if (!message.isDiscussion()) {
-			mbStatsUserLocalService.updateStatsUser(
-				message.getGroupId(), message.getUserId());
-		}
-
 		// Message flags
 
 		mbMessageFlagPersistence.removeByMessageId(message.getMessageId());
@@ -717,6 +710,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Message
 
 		mbMessagePersistence.remove(message);
+
+		// Statistics
+
+		if (!message.isDiscussion()) {
+			mbStatsUserLocalService.updateStatsUser(
+				message.getGroupId(), message.getUserId());
+		}
 
 		// Workflow
 
