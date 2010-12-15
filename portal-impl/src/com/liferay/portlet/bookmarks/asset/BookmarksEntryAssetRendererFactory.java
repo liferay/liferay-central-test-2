@@ -81,8 +81,6 @@ public class BookmarksEntryAssetRendererFactory
 			addAssetURL.setParameter(
 				"struts_action", "/bookmarks/edit_entry");
 			addAssetURL.setParameter(
-				"groupId", String.valueOf(themeDisplay.getScopeGroupId()));
-			addAssetURL.setParameter(
 				"folderId",
 				String.valueOf(
 					AssetPublisherUtil.getRecentFolderId(

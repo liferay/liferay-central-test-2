@@ -80,8 +80,6 @@ public class IGImageAssetRendererFactory extends BaseAssetRendererFactory {
 			addAssetURL.setParameter(
 				"struts_action", "/image_gallery/edit_image");
 			addAssetURL.setParameter(
-				"groupId", String.valueOf(themeDisplay.getScopeGroupId()));
-			addAssetURL.setParameter(
 				"folderId",
 				String.valueOf(
 					AssetPublisherUtil.getRecentFolderId(

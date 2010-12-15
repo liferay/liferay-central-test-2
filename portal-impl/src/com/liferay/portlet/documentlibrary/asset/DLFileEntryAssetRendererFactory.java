@@ -98,8 +98,6 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 			addAssetURL.setParameter(
 				"struts_action", "/document_library/edit_file_entry");
 			addAssetURL.setParameter(
-				"groupId", String.valueOf(themeDisplay.getScopeGroupId()));
-			addAssetURL.setParameter(
 				"folderId",
 				String.valueOf(
 					AssetPublisherUtil.getRecentFolderId(
