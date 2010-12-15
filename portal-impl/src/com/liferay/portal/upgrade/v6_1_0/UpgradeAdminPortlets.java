@@ -16,6 +16,8 @@ package com.liferay.portal.upgrade.v6_1_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -35,25 +37,7 @@ import java.util.List;
  */
 public class UpgradeAdminPortlets extends UpgradeProcess {
 
-	protected void doUpgrade() throws Exception {
-		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
-			updateAccessInControlPanelPermission_5(
-				PortletKeys.BLOGS, PortletKeys.BLOGS_ADMIN);
-
-			updateAccessInControlPanelPermission_5(
-				PortletKeys.MESSAGE_BOARDS, PortletKeys.MESSAGE_BOARDS_ADMIN);
-		}
-		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-			updateAccessInControlPanelPermission_6(
-				PortletKeys.BLOGS, PortletKeys.BLOGS_ADMIN);
-
-			updateAccessInControlPanelPermission_6(
-				PortletKeys.MESSAGE_BOARDS, PortletKeys.MESSAGE_BOARDS_ADMIN);
-		}
-	}
-
-	protected void addResource(
-			long resourceId, String codeId, long primKey)
+	protected void addResource(long resourceId, String codeId, long primKey)
 		throws Exception {
 
 		Connection con = null;
@@ -63,8 +47,8 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"insert into Resource_ (resourceId, codeId, primKey) " +
-					"values (?, ?, ?)");
+				"insert into Resource_ (resourceId, codeId, primKey) values " +
+					"(?, ?, ?)");
 
 			ps.setLong(1, resourceId);
 			ps.setString(2, codeId);
@@ -77,41 +61,41 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 		}
 	}
 
-	protected Long[] addResourceIds(long companyId, String name)
+	protected long[] addResourceIds(long companyId, String name)
 		throws Exception {
 
-		Long[] resourceIds = new Long[2];
-		long resourceId = 0;
-		long codeId = 0;
+		long[] resourceIds = new long[2];
 
-		// Company Scope
+		// Company scope
 
-		codeId = increment();
+		long codeId = increment();
 
 		runSQL(
 			"insert into ResourceCode (codeId, companyId, name, scope) values" +
-				" (" + codeId + ", " + companyId + ", " + name +
-				", " + ResourceConstants.SCOPE_COMPANY + ")");
+				" (" + codeId + ", " + companyId + ", " + name + ", " +
+					ResourceConstants.SCOPE_COMPANY + ")");
 
-		resourceId = increment();
+		long resourceId = increment();
 
 		addResource(resourceId, String.valueOf(codeId), companyId);
+
 		resourceIds[0] = resourceId;
 
-		// Individual Scope
+		// Individual scope
 
 		codeId = increment();
 
 		runSQL(
 			"insert into ResourceCode (codeId, companyId, name, scope) values" +
-				" (" + codeId + ", " + companyId + ", " + name +
-				", " + ResourceConstants.SCOPE_INDIVIDUAL + ")");
+				" (" + codeId + ", " + companyId + ", " + name + ", " +
+					ResourceConstants.SCOPE_INDIVIDUAL + ")");
 
 		resourceId = increment();
 
 		long controlPanelGroupId = getControlPanelGroupId();
 
 		addResource(resourceId, String.valueOf(codeId), controlPanelGroupId);
+
 		resourceIds[1] = resourceId;
 
 		return resourceIds;
@@ -131,7 +115,7 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 			ps = con.prepareStatement(
 				"insert into ResourcePermission (resourcePermissionId, " +
 					"companyId, name, scope, primKey, roleId, actionIds) " +
-					"values (?, ?, ?, ?, ?, ?, ?)");
+						"values (?, ?, ?, ?, ?, ?, ?)");
 
 			ps.setLong(1, resourcePermissionId);
 			ps.setLong(2, companyId);
@@ -148,6 +132,23 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 		}
 	}
 
+	protected void doUpgrade() throws Exception {
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+			updateAccessInControlPanelPermission_5(
+				PortletKeys.BLOGS, PortletKeys.BLOGS_ADMIN);
+
+			updateAccessInControlPanelPermission_5(
+				PortletKeys.MESSAGE_BOARDS, PortletKeys.MESSAGE_BOARDS_ADMIN);
+		}
+		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+			updateAccessInControlPanelPermission_6(
+				PortletKeys.BLOGS, PortletKeys.BLOGS_ADMIN);
+
+			updateAccessInControlPanelPermission_6(
+				PortletKeys.MESSAGE_BOARDS, PortletKeys.MESSAGE_BOARDS_ADMIN);
+		}
+	}
+
 	protected long getBitwiseValue(String name, String actionId)
 		throws Exception {
 
@@ -155,14 +156,12 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		long bitwiseValue = 0;
-
 		try {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select bitwiseValue from ResourceAction where name= ? " +
-					"and actionId=?");
+				"select bitwiseValue from ResourceAction where name = ? and " +
+					"actionId = ?");
 
 			ps.setString(1, name);
 			ps.setString(2, actionId);
@@ -170,20 +169,17 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				bitwiseValue = rs.getLong("bitwiseValue");
+				return rs.getLong("bitwiseValue");
 			}
+
+			return 0;
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
-		return bitwiseValue;
 	}
 
 	protected long getControlPanelGroupId() throws Exception {
-
-		long groupId = 0;
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -192,25 +188,23 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select groupId from Group_ where name= \"" +
-					GroupConstants.CONTROL_PANEL + "\"");
+				"select groupId from Group_ where name = '" +
+					GroupConstants.CONTROL_PANEL + "'");
 
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				groupId = rs.getLong("groupId");
+				return rs.getLong("groupId");
 			}
+
+			return 0;
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
-		return groupId;
 	}
 
-	protected Long[] getOldResourceIds(String portletFrom)
-		throws Exception {
-
+	protected long[] getOldResourceIds(String name) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -218,24 +212,33 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement(
-				"select Permission_.resourceId from Resource_ inner join " +
-					"ResourceCode inner join Permission_ on " +
-					"ResourceCode.codeId = Resource_.codeId and " +
-					"ResourceCode.name=\"" + portletFrom +
-					"\" and Permission_.actionId=\"" +
-					ActionKeys.ACCESS_IN_CONTROL_PANEL +
-					"\" and Permission_.resourceId = Resource_.resourceId;");
+			StringBundler sb = new StringBundler();
+
+			sb.append("select Permission_.resourceId from Resource_ inner ");
+			sb.append("join ResourceCode inner join Permission_ on ");
+			sb.append("ResourceCode.codeId = Resource_.codeId and ");
+			sb.append("ResourceCode.name = '");
+			sb.append(name);
+			sb.append("' and Permission_.actionId = '");
+			sb.append(ActionKeys.ACCESS_IN_CONTROL_PANEL);
+			sb.append("' and Permission_.resourceId = Resource_.resourceId");
+
+			String sql = sb.toString();
+
+			ps = con.prepareStatement(sql);
 
 			rs = ps.executeQuery();
 
 			List<Long> resourceIds = new ArrayList<Long>();
 
 			while (rs.next()) {
-				resourceIds.add(rs.getLong("resourceId"));
+				long resourceId = rs.getLong("resourceId");
+
+				resourceIds.add(resourceId);
 			}
 
-			return resourceIds.toArray(new Long[resourceIds.size()]);
+			return ArrayUtil.toArray(
+				resourceIds.toArray(new Long[resourceIds.size()]));
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
@@ -254,8 +257,9 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 
 		for (int i = 0; i < companyIds.length; i++) {
 			long companyId = companyIds[i];
-			Long[] newResourceIds = addResourceIds(companyId, portletTo);
-			Long[] oldResourceIds = getOldResourceIds(portletFrom);
+
+			long[] newResourceIds = addResourceIds(companyId, portletTo);
+			long[] oldResourceIds = getOldResourceIds(portletFrom);
 
 			updatePermission(oldResourceIds, newResourceIds);
 		}
@@ -290,8 +294,8 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 					actionIds = actionIds & (~bitwiseValue);
 
 					runSQL(
-						"update ResourcePermission set actionIds = '" +
-							actionIds + "' where resourcePermissionId = " +
+						"update ResourcePermission set actionIds = " +
+							actionIds + " where resourcePermissionId = " +
 								resourcePermissionId);
 
 					resourcePermissionId = increment();
@@ -302,6 +306,7 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 					long roleId = rs.getLong("roleId");
 
 					actionIds = rs.getLong("actionIds");
+
 					actionIds |= bitwiseValue;
 
 					addResourcePermission(
@@ -316,13 +321,13 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 	}
 
 	protected void updatePermission(
-			Long[] oldResourceIds, Long[] newResourceIds)
+			long[] oldResourceIds, long[] newResourceIds)
 		throws Exception {
 
 		for (int i = 0; i < oldResourceIds.length; i++) {
 			runSQL(
-				"update Permission_ set resourceId = '" + newResourceIds[i] +
-					"' where resourceId = " + oldResourceIds[i]);
+				"update Permission_ set resourceId = " + newResourceIds[i] +
+					" where resourceId = " + oldResourceIds[i]);
 		}
 	}
 
