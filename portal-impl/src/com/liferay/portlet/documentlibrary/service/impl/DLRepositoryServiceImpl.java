@@ -306,41 +306,11 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 			groupId, folderIds, status, start, end);
 	}
 
-	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-			long groupId, long folderId, int status, int start, int end)
-		throws PortalException, SystemException {
-
-		DLFolderPermission.check(
-			getPermissionChecker(), groupId, folderId, ActionKeys.VIEW);
-
-		List<Long> folderIds = new ArrayList<Long>();
-
-		folderIds.add(folderId);
-
-		return getFoldersAndFileEntriesAndFileShortcuts(
-			groupId, folderIds, status, start, end);
-	}
-
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
 			long groupId, List<Long> folderIds, int status)
 		throws SystemException {
 
 		return dlFolderFinder.filterCountF_FE_FS_ByG_F_S(
-			groupId, folderIds, status);
-	}
-
-	public int getFoldersAndFileEntriesAndFileShortcutsCount(
-			long groupId, long folderId, int status)
-		throws PortalException, SystemException {
-
-		DLFolderPermission.check(
-			getPermissionChecker(), groupId, folderId, ActionKeys.VIEW);
-
-		List<Long> folderIds = new ArrayList<Long>();
-
-		folderIds.add(folderId);
-
-		return getFoldersAndFileEntriesAndFileShortcutsCount(
 			groupId, folderIds, status);
 	}
 

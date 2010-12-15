@@ -295,8 +295,12 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			long groupId, long folderId, int status, int start, int end)
 		throws PortalException, SystemException {
 
-		return dlRepositoryService.getFoldersAndFileEntriesAndFileShortcuts(
-			groupId, folderId, status, start, end);
+		List<Long> folderIds = new ArrayList<Long>();
+
+		folderIds.add(folderId);
+
+		return getFoldersAndFileEntriesAndFileShortcuts(
+			groupId, folderIds, status, start, end);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
@@ -312,9 +316,12 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			long groupId, long folderId, int status)
 		throws PortalException, SystemException {
 
-		return
-			dlRepositoryService.getFoldersAndFileEntriesAndFileShortcutsCount(
-				groupId, folderId, status);
+		List<Long> folderIds = new ArrayList<Long>();
+
+		folderIds.add(folderId);
+
+		return getFoldersAndFileEntriesAndFileShortcutsCount(
+			groupId, folderIds, status);
 	}
 
 	public int getFoldersCount(long groupId, long parentFolderId)
