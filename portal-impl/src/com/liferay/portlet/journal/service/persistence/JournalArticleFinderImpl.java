@@ -488,7 +488,8 @@ public class JournalArticleFinderImpl
 				 ((articleIds.length == 1) && (articleIds[0] != null)))) {
 
 				sql = StringUtil.replace(
-					sql, "MAX(version) as version", "version");
+					sql, "MAX(version) AS tempVersion",
+					"version AS tempVersion");
 				sql = StringUtil.replace(sql, "[$GROUP_BY_CLAUSE$]", "");
 			}
 			else {

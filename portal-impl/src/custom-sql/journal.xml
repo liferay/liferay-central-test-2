@@ -73,7 +73,7 @@
 			FROM
 				(
 					SELECT
-						articleId, MAX(version) as version
+						articleId AS tempArticleId, MAX(version) AS tempVersion
 					FROM
 						JournalArticle
 					WHERE
@@ -99,8 +99,8 @@
 				) TEMP_TABLE
 				INNER JOIN
 					JournalArticle ON
-						(TEMP_TABLE.articleId = JournalArticle.articleId) AND
-						(TEMP_TABLE.version = JournalArticle.version)
+						(TEMP_TABLE.tempArticleId = JournalArticle.articleId) AND
+						(TEMP_TABLE.tempVersion = JournalArticle.version)
 			ORDER BY
 				id ASC
 		]]>
