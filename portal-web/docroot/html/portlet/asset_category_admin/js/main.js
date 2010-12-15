@@ -34,12 +34,12 @@ AUI().add(
 
 						var childrenContainer = A.one(instance._categoryContainerSelector);
 
-						var categoryRenderURL = instance._createRenderURL(CATEGORY);
-						var vocabularyRenderURL = instance._createRenderURL(VOCABULARY);
-
 						instance.portletId = config.portletId;
 						instance._prefixedPortletId = ['_', config.portletId, '_'].join('');
 						instance._container = A.one('.vocabulary-container');
+
+						var categoryRenderURL = instance._createRenderURL(CATEGORY);
+						var vocabularyRenderURL = instance._createRenderURL(VOCABULARY);
 
 						A.all('.vocabulary-close').on(
 							'click',
