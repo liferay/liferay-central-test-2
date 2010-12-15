@@ -122,14 +122,14 @@ String redirect = ParamUtil.getString(request, "redirect");
 </aui:layout>
 
 <aui:script use="aui-base">
-	var selectDisplayStyle = A.one('#<portlet:namespace />displayStyle');
+	var customDisplayOptions = A.one('#<portlet:namespace />customDisplayOptions');
 	var selectBulletStyle = A.one('#<portlet:namespace />bulletStyle');
+	var selectDisplayStyle = A.one('#<portlet:namespace />displayStyle');
 	var selectHeaderType = A.one('#<portlet:namespace />headerType');
-	var selectRootLayoutType = A.one('#<portlet:namespace />rootLayoutType');
-	var selectRootLayoutLevel = A.one('#<portlet:namespace />rootLayoutLevel');
 	var selectIncludedLayouts = A.one('#<portlet:namespace />includedLayouts');
 	var selectNestedChildren = A.one('#<portlet:namespace />nestedChildren');
-	var customDisplayOptions = A.one('#<portlet:namespace />customDisplayOptions');
+	var selectRootLayoutLevel = A.one('#<portlet:namespace />rootLayoutLevel');
+	var selectRootLayoutType = A.one('#<portlet:namespace />rootLayoutType');
 
 	var selects = A.all('#<portlet:namespace />fm select');
 
@@ -138,6 +138,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	var toggleCustomFields = function() {
 		if (customDisplayOptions) {
 			var data = {};
+
 			var action = 'hide';
 
 			var displayStyle = selectDisplayStyle.val();
@@ -145,17 +146,17 @@ String redirect = ParamUtil.getString(request, "redirect");
 			if (displayStyle == '[custom]') {
 				action = 'show';
 
-				data['_<%= portletResource %>_header-type'] = selectHeaderType.get('value');
-				data['_<%= portletResource %>_root-layout-type'] = selectRootLayoutType.get('value');
-				data['_<%= portletResource %>_root-layout-level'] = selectRootLayoutLevel.get('value');
-				data['_<%= portletResource %>_included-layouts'] = selectIncludedLayouts.get('value');
-				data['_<%= portletResource %>_nested-children'] = selectNestedChildren.get('value');
+				data['_<%= portletResource %>_header-type'] = selectHeaderType.val();
+				data['_<%= portletResource %>_included-layouts'] = selectIncludedLayouts.val();
+				data['_<%= portletResource %>_nested-children'] = selectNestedChildren.val();
+				data['_<%= portletResource %>_root-layout-level'] = selectRootLayoutLevel.val();
+				data['_<%= portletResource %>_root-layout-type'] = selectRootLayoutType.val();
 			}
 
 			customDisplayOptions[action]();
 
-			data['_<%= portletResource %>_bullet-style'] = selectBulletStyle.get('value');
-			data['_<%= portletResource %>_display-style'] = selectDisplayStyle.get('value');
+			data['_<%= portletResource %>_bullet-style'] = selectBulletStyle.val();
+			data['_<%= portletResource %>_display-style'] = selectDisplayStyle.val();
 
 			Liferay.Portlet.refresh(curPortletBoundaryId, data);
 		}

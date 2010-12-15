@@ -15,17 +15,16 @@
 --%>
 
 .taglib-portlet-preview.show-borders {
-	border: 2px solid #EDEDED;
+	border: 1px solid #828F95;
+	margin-bottom: 1em;
+	padding: 3px 3px 1em;
 }
 
 .taglib-portlet-preview.show-borders .title {
-	background-color: #EDEDED;
-	color: #666;
-	font-size: 1.5em;
-	font-variant: small-caps;
-	margin: 0.1em;
-	padding: 0.2em 0.5em;
-	text-shadow: 1px 1px #FFF;
+	background-color: #D3DADD;
+	font-size: 1.4em;
+	font-weight: bold;
+	padding: 0.5em;
 }
 
 .taglib-portlet-preview .preview {
