@@ -366,7 +366,7 @@ public class HtmlImpl implements Html {
 				pos += columns - length;
 
 				sb.append(text.substring(lastWrite, pos));
-				sb.append("<wbr/>");
+				sb.append("<wbr/>&shy;");
 
 				length = 0;
 				lastWrite = pos;
