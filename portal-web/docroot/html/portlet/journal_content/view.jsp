@@ -25,16 +25,20 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 <%
 JournalArticle article = null;
 
+boolean expired = true;
+
 try {
-	article = JournalArticleLocalServiceUtil.getLatestArticle(scopeGroupId, articleId, WorkflowConstants.STATUS_ANY);
+	if (Validator.isNotNull(articleId)) {
+		article = JournalArticleLocalServiceUtil.getLatestArticle(scopeGroupId, articleId, WorkflowConstants.STATUS_ANY);
 
-	boolean expired = article.isExpired();
+		expired = article.isExpired();
 
-	if (!expired) {
-		Date expirationDate = article.getExpirationDate();
+		if (!expired) {
+			Date expirationDate = article.getExpirationDate();
 
-		if ((expirationDate != null) && expirationDate.before(new Date())) {
-			expired = true;
+			if ((expirationDate != null) && expirationDate.before(new Date())) {
+				expired = true;
+			}
 		}
 	}
 %>
