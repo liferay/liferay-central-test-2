@@ -117,12 +117,6 @@ public class DLRepositoryLocalServiceWrapper implements DLRepositoryLocalService
 			folderIds, status);
 	}
 
-	public int getFileEntriesAndFileShortcutsCount(long groupId, long folderId,
-		int status) throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlRepositoryLocalService.getFileEntriesAndFileShortcutsCount(groupId,
-			folderId, status);
-	}
-
 	public int getFileEntriesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlRepositoryLocalService.getFileEntriesCount();
@@ -211,25 +205,11 @@ public class DLRepositoryLocalServiceWrapper implements DLRepositoryLocalService
 			folderIds, status, start, end);
 	}
 
-	public java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
-		long groupId, long folderId, int status, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlRepositoryLocalService.getFoldersAndFileEntriesAndFileShortcuts(groupId,
-			folderId, status, start, end);
-	}
-
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(long groupId,
 		java.util.List<java.lang.Long> folderIds, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlRepositoryLocalService.getFoldersAndFileEntriesAndFileShortcutsCount(groupId,
 			folderIds, status);
-	}
-
-	public int getFoldersAndFileEntriesAndFileShortcutsCount(long groupId,
-		long folderId, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlRepositoryLocalService.getFoldersAndFileEntriesAndFileShortcutsCount(groupId,
-			folderId, status);
 	}
 
 	public int getFoldersCount(long groupId, long parentFolderId)

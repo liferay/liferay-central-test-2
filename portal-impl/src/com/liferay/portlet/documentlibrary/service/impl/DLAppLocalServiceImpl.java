@@ -222,8 +222,11 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long groupId, long folderId, int status)
 		throws SystemException {
 
-		return dlRepositoryLocalService.getFileEntriesAndFileShortcutsCount(
-			groupId, folderId, status);
+		List<Long> folderIds = new ArrayList<Long>();
+
+		folderIds.add(folderId);
+
+		return getFileEntriesAndFileShortcutsCount(groupId, folderIds, status);
 	}
 
 	public int getFileEntriesCount(long groupId, long folderId)
@@ -333,9 +336,12 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long groupId, long folderId, int status, int start, int end)
 		throws SystemException {
 
-		return
-			dlRepositoryLocalService.getFoldersAndFileEntriesAndFileShortcuts(
-				groupId, folderId, status, start, end);
+		List<Long> folderIds = new ArrayList<Long>();
+
+		folderIds.add(folderId);
+
+		return getFoldersAndFileEntriesAndFileShortcuts(
+			groupId, folderIds, status, start, end);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
@@ -351,9 +357,12 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long groupId, long folderId, int status)
 		throws SystemException {
 
-		return dlRepositoryLocalService.
-			getFoldersAndFileEntriesAndFileShortcutsCount(
-				groupId, folderId, status);
+		List<Long> folderIds = new ArrayList<Long>();
+
+		folderIds.add(folderId);
+
+		return getFoldersAndFileEntriesAndFileShortcutsCount(
+			groupId, folderIds, status);
 	}
 
 	public int getFoldersCount(long groupId, long parentFolderId)
