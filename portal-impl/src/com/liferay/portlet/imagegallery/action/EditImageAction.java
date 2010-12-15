@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -62,6 +63,9 @@ public class EditImageAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
@@ -72,7 +76,19 @@ public class EditImageAction extends PortletAction {
 				deleteImage(actionRequest);
 			}
 
-			sendRedirect(actionRequest, actionResponse);
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
+
+			LayoutTypePortlet layoutTypePortlet =
+				themeDisplay.getLayoutTypePortlet();
+
+			if (layoutTypePortlet.hasPortletId(
+					portletConfig.getPortletName())) {
+
+				sendRedirect(actionRequest, actionResponse, redirect);
+			}
+			else {
+				actionResponse.sendRedirect(redirect);
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchImageException ||
