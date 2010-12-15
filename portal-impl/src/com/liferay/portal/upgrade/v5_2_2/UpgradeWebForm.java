@@ -57,8 +57,6 @@ public class UpgradeWebForm extends UpgradeProcess {
 	}
 
 	protected long getClassNameId(String className) throws Exception {
-		long classNameId = 0;
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -74,14 +72,14 @@ public class UpgradeWebForm extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				classNameId = rs.getLong("classNameId");
+				return rs.getLong("classNameId");
 			}
+
+			return 0;
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
-		return classNameId;
 	}
 
 	private static final String _NEW_WEBFORM_CLASS_NAME =

@@ -39,8 +39,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		long fileVersionId = 0;
-
 		try {
 			con = DataAccess.getConnection();
 
@@ -54,14 +52,14 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				fileVersionId = rs.getLong("fileVersionId");
+				return rs.getLong("fileVersionId");
 			}
+
+			return 0;
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
-		return fileVersionId;
 	}
 
 	protected void updateFileEntries() throws Exception {

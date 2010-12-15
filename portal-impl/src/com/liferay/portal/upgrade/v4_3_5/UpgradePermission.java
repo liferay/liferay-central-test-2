@@ -222,8 +222,6 @@ public class UpgradePermission extends UpgradeProcess {
 	}
 
 	protected long getDefaultUserId(long companyId) throws Exception {
-		long userId = 0;
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -239,19 +237,17 @@ public class UpgradePermission extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				userId = rs.getLong("userId");
+				return rs.getLong("userId");
 			}
+
+			return 0;
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
-		return userId;
 	}
 
 	protected long getGuestGroupId(long companyId) throws Exception {
-		long groupId = 0;
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -267,14 +263,14 @@ public class UpgradePermission extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				groupId = rs.getLong("groupId");
+				return rs.getLong("groupId");
 			}
+
+			return 0;
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
-		return groupId;
 	}
 
 	protected List<Long> getPermissionIds(String primKey, long guestGroupId)

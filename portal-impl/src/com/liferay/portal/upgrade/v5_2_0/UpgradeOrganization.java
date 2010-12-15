@@ -64,8 +64,6 @@ public class UpgradeOrganization extends UpgradeProcess {
 	protected long getCodeId(long companyId, String name, int scope)
 		throws Exception {
 
-		long codeId = 0;
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -84,14 +82,14 @@ public class UpgradeOrganization extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				codeId = rs.getLong("codeId");
+				return rs.getLong("codeId");
 			}
+
+			return 0;
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
-		return codeId;
 	}
 
 	protected void updateCodeId(long companyId, int scope) throws Exception {
