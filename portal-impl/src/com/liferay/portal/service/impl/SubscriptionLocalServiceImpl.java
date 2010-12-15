@@ -105,18 +105,7 @@ public class SubscriptionLocalServiceImpl
 		Subscription subscription = subscriptionPersistence.fetchByPrimaryKey(
 			subscriptionId);
 
-		String className = PortalUtil.getClassName(
-			subscription.getClassNameId());
-
-		if (assetEntryPersistence.countByC_C(
-				subscription.getClassNameId(), subscription.getClassPK()) > 0) {
-
-			socialEquityLogLocalService.deactivateEquityLogs(
-				subscription.getUserId(), className, subscription.getClassPK(),
-				ActionKeys.SUBSCRIBE, StringPool.BLANK);
-		}
-
-		subscriptionPersistence.remove(subscriptionId);
+		deleteSubscription(subscription);
 	}
 
 	public void deleteSubscription(
@@ -126,14 +115,31 @@ public class SubscriptionLocalServiceImpl
 		User user = userPersistence.findByPrimaryKey(userId);
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		if (assetEntryPersistence.countByC_C(classNameId, classPK) > 0) {
-			socialEquityLogLocalService.deactivateEquityLogs(
-				userId, className, classPK,	ActionKeys.SUBSCRIBE,
-				StringPool.BLANK);
-		}
-
-		subscriptionPersistence.removeByC_U_C_C(
+		Subscription subscription = subscriptionPersistence.findByC_U_C_C(
 			user.getCompanyId(), userId, classNameId, classPK);
+
+		deleteSubscription(subscription);
+	}
+
+	public void deleteSubscription(Subscription subscription)
+		throws PortalException, SystemException {
+
+		// Subscription
+
+		subscriptionPersistence.remove(subscription);
+
+		// Social equity
+
+		if (assetEntryPersistence.countByC_C(
+				subscription.getClassNameId(), subscription.getClassPK()) > 0) {
+
+			String className = PortalUtil.getClassName(
+				subscription.getClassNameId());
+
+			socialEquityLogLocalService.deactivateEquityLogs(
+				subscription.getUserId(), className, subscription.getClassPK(),
+				ActionKeys.SUBSCRIBE, StringPool.BLANK);
+		}
 	}
 
 	public void deleteSubscriptions(long userId)
@@ -143,19 +149,8 @@ public class SubscriptionLocalServiceImpl
 			userId);
 
 		for (Subscription subscription : subscriptions) {
-			if (assetEntryPersistence.countByC_C(
-					subscription.getClassNameId(),
-					subscription.getClassPK()) > 0) {
-
-				socialEquityLogLocalService.deactivateEquityLogs(
-					subscription.getUserId(),
-					PortalUtil.getClassName(subscription.getClassNameId()),
-					subscription.getClassPK(),
-					ActionKeys.SUBSCRIBE, StringPool.BLANK);
-			}
+			deleteSubscription(subscription);
 		}
-
-		subscriptionPersistence.removeByUserId(userId);
 	}
 
 	public void deleteSubscriptions(
@@ -168,19 +163,8 @@ public class SubscriptionLocalServiceImpl
 			companyId, classNameId, classPK);
 
 		for (Subscription subscription : subscriptions) {
-			if (assetEntryPersistence.countByC_C(
-					subscription.getClassNameId(),
-					subscription.getClassPK()) > 0) {
-
-				socialEquityLogLocalService.deactivateEquityLogs(
-					subscription.getUserId(),
-					PortalUtil.getClassName(subscription.getClassNameId()),
-					subscription.getClassPK(),
-					ActionKeys.SUBSCRIBE, StringPool.BLANK);
-			}
+			deleteSubscription(subscription);
 		}
-
-		subscriptionPersistence.removeByC_C_C(companyId, classNameId, classPK);
 	}
 
 	public Subscription getSubscription(

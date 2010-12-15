@@ -260,10 +260,11 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	 * Deletes the subscription from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param subscription the subscription to delete
+	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteSubscription(Subscription subscription)
-		throws SystemException {
+		throws PortalException, SystemException {
 		subscriptionPersistence.remove(subscription);
 	}
 

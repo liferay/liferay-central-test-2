@@ -70,11 +70,13 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 	* Deletes the subscription from the database. Also notifies the appropriate model listeners.
 	*
 	* @param subscription the subscription to delete
+	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteSubscription(
 		com.liferay.portal.model.Subscription subscription)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_subscriptionLocalService.deleteSubscription(subscription);
 	}
 
