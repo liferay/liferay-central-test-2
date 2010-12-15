@@ -57,6 +57,7 @@ if (Validator.isNotNull(structureId)) {
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="journalArticlesFilterPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "filter") %>' >
 			<aui:fieldset>
 				<aui:select label="community" name="groupId">
+					<aui:option label="global" selected="<%= groupId == themeDisplay.getCompanyGroupId() %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
 
 					<%
 					List<Group> myPlaces = user.getMyPlaces();
