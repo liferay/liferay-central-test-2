@@ -534,10 +534,10 @@
 
 		<action path="/document_library/get_folders" type="com.liferay.portlet.documentlibrary.action.GetFoldersAction" />
 
-        <action path="/document_library/move_file_entry" type="com.liferay.portlet.documentlibrary.action.EditFileEntryAction">
-            <forward name="portlet.document_library.edit_file_entry" path="portlet.document_library.move_file_entry" />
-            <forward name="portlet.document_library.error" path="portlet.document_library.error" />
-        </action>
+		<action path="/document_library/move_file_entry" type="com.liferay.portlet.documentlibrary.action.EditFileEntryAction">
+			<forward name="portlet.document_library.edit_file_entry" path="portlet.document_library.move_file_entry" />
+			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
+		</action>
 
 		<action path="/document_library/search" forward="portlet.document_library.search" />
 
@@ -1422,10 +1422,10 @@
 			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
 		</action>
 
-        <action path="/message_boards/edit_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
-            <forward name="portlet.message_boards.edit_discussion" path="portlet.message_boards.edit_discussion" />
-            <forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
-        </action>
+		<action path="/message_boards/edit_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
+			<forward name="portlet.message_boards.edit_discussion" path="portlet.message_boards.edit_discussion" />
+			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
+		</action>
 
 		<action path="/message_boards/edit_message" type="com.liferay.portlet.messageboards.action.EditMessageAction">
 			<forward name="portlet.message_boards.edit_message" path="portlet.message_boards.edit_message" />
@@ -1486,10 +1486,10 @@
 			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
 		</action>
 
-        <action path="/message_boards_admin/edit_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
-            <forward name="portlet.message_boards.edit_discussion" path="portlet.message_boards.edit_discussion" />
-            <forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
-        </action>
+		<action path="/message_boards_admin/edit_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
+			<forward name="portlet.message_boards.edit_discussion" path="portlet.message_boards.edit_discussion" />
+			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
+		</action>
 
 		<action path="/message_boards_admin/edit_message" type="com.liferay.portlet.messageboards.action.EditMessageAction">
 			<forward name="portlet.message_boards.edit_message" path="portlet.message_boards.edit_message" />
@@ -2297,7 +2297,7 @@
 
 		<action path="/wiki_display/view_tagged_pages" type="com.liferay.portlet.wiki.action.ViewNodeAction">
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
-	 		<forward name="portlet.wiki.view_node" path="portlet.wiki.view_tagged_pages" />
+			<forward name="portlet.wiki.view_node" path="portlet.wiki.view_tagged_pages" />
 		</action>
 
 		<!-- Words -->

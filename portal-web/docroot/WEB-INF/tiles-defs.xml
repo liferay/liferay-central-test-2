@@ -433,9 +433,9 @@
 		<put name="portlet_content" value="/portlet/document_library/error.jsp" />
 	</definition>
 
-    <definition name="portlet.document_library.move_file_entry" extends="portlet.document_library">
-        <put name="portlet_content" value="/portlet/document_library/move_file_entry.jsp" />
-    </definition>
+	<definition name="portlet.document_library.move_file_entry" extends="portlet.document_library">
+		<put name="portlet_content" value="/portlet/document_library/move_file_entry.jsp" />
+	</definition>
 
 	<definition name="portlet.document_library.search" extends="portlet.document_library">
 		<put name="portlet_content" value="/portlet/document_library/search.jsp" />
@@ -863,9 +863,9 @@
 		<put name="portlet_content" value="/portlet/message_boards/edit_category.jsp" />
 	</definition>
 
-    <definition name="portlet.message_boards.edit_discussion" extends="portlet.message_boards">
-        <put name="portlet_content" value="/portlet/message_boards/edit_discussion.jsp" />
-    </definition>
+	<definition name="portlet.message_boards.edit_discussion" extends="portlet.message_boards">
+		<put name="portlet_content" value="/portlet/message_boards/edit_discussion.jsp" />
+	</definition>
 
 	<definition name="portlet.message_boards.edit_message" extends="portlet.message_boards">
 		<put name="portlet_content" value="/portlet/message_boards/edit_message.jsp" />
