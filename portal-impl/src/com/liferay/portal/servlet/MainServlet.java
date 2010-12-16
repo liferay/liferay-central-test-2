@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
 import com.liferay.portal.kernel.scheduler.TimeUnit;
 import com.liferay.portal.kernel.scheduler.TriggerType;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
@@ -56,7 +55,6 @@ import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.model.User;
-import com.liferay.portal.plugin.PluginPackageIndexer;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
@@ -89,7 +87,6 @@ import com.liferay.portlet.PortletConfigFactoryUtil;
 import com.liferay.portlet.PortletFilterFactory;
 import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletURLListenerFactory;
-import com.liferay.portlet.messageboards.util.MBIndexer;
 import com.liferay.portlet.social.messaging.CheckEquityLogMessageListener;
 import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.EncryptedServletRequest;
@@ -811,9 +808,6 @@ public class MainServlet extends ActionServlet {
 
 	protected PluginPackage initPluginPackage() throws Exception {
 		ServletContext servletContext = getServletContext();
-
-		IndexerRegistryUtil.register(new MBIndexer());
-		IndexerRegistryUtil.register(new PluginPackageIndexer());
 
 		return PluginPackageUtil.readPluginPackageServletContext(
 			servletContext);

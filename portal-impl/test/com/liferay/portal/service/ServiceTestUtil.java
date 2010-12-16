@@ -107,6 +107,14 @@ public class ServiceTestUtil {
 			e.printStackTrace();
 		}
 
+		// Indexers
+
+		IndexerRegistryUtil.register(new UserIndexer());
+		IndexerRegistryUtil.register(new BookmarksIndexer());
+		IndexerRegistryUtil.register(new DLIndexer());
+		IndexerRegistryUtil.register(new IGIndexer());
+		IndexerRegistryUtil.register(new MBIndexer());
+
 		// Upgrade
 
 		try {
@@ -156,14 +164,6 @@ public class ServiceTestUtil {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		// Indexers
-
-		IndexerRegistryUtil.register(new UserIndexer());
-		IndexerRegistryUtil.register(new BookmarksIndexer());
-		IndexerRegistryUtil.register(new DLIndexer());
-		IndexerRegistryUtil.register(new IGIndexer());
-		IndexerRegistryUtil.register(new MBIndexer());
 
 		// Workflow
 
