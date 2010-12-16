@@ -537,6 +537,10 @@ public class DLRepositoryLocalServiceImpl
 		return dlFileEntryFinder.findByNoAssets();
 	}
 
+	public List<DLFileEntry> getOrphanedFileEntries() throws SystemException {
+		return dlFileEntryFinder.findOrphanedFileEntries();
+	}
+
 	public DLFileEntry moveFileEntry(
 			long userId, long fileEntryId, long newFolderId,
 			ServiceContext serviceContext)

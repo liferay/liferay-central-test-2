@@ -44,6 +44,9 @@ public class DLFileEntryFinderImpl
 	public static String FIND_BY_NO_ASSETS =
 		DLFileEntryFinder.class.getName() + ".findByNoAssets";
 
+	public static String FIND_ORPHANED_FILE_ENTRIES =
+		DLFileEntryFinder.class.getName() + ".findOrphanedFileEntries";
+
 	public int countByG_F_S(long groupId, List<Long> folderIds, int status)
 		throws SystemException {
 
@@ -64,6 +67,28 @@ public class DLFileEntryFinderImpl
 			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_NO_ASSETS);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("DLFileEntry", DLFileEntryImpl.class);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<DLFileEntry> findOrphanedFileEntries() throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_ORPHANED_FILE_ENTRIES);
 
 			SQLQuery q = session.createSQLQuery(sql);
 

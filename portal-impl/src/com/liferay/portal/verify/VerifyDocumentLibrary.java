@@ -23,10 +23,46 @@ import java.util.List;
 
 /**
  * @author Raymond Augé
+ * @author Douglas Wong
  */
 public class VerifyDocumentLibrary extends VerifyProcess {
 
 	protected void doVerify() throws Exception {
+		removeOrphanedFileEntries();
+		updateAssets();
+	}
+
+	protected void removeOrphanedFileEntries() throws Exception {
+		List<DLFileEntry> fileEntries =
+			DLRepositoryLocalServiceUtil.getOrphanedFileEntries();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Processing " + fileEntries.size() +
+					" file entries with no group");
+		}
+
+		for (DLFileEntry fileEntry : fileEntries) {
+			try {
+				DLRepositoryLocalServiceUtil.deleteFileEntry(
+					fileEntry.getFileEntryId());
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Unable to remove file entry " +
+							fileEntry.getFileEntryId() + " with group " +
+								fileEntry.getGroupId() + ": " + e.getMessage());
+				}
+			}
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Removed orphaned file entries");
+		}
+	}
+
+	protected void updateAssets() throws Exception {
 		List<DLFileEntry> fileEntries =
 			DLRepositoryLocalServiceUtil.getNoAssetFileEntries();
 

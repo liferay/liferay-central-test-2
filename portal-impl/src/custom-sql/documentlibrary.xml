@@ -33,6 +33,21 @@
 				))
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findOrphanedFileEntries">
+		<![CDATA[
+			SELECT
+				{DLFileEntry.*}
+			FROM
+				DLFileEntry
+			WHERE
+				(groupId NOT IN(
+					SELECT
+						DISTINCT groupId
+					FROM
+						Group_
+				))
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.countF_ByG_F_S">
 		<![CDATA[
 			SELECT
