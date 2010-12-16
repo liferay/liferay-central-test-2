@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.PropertiesParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -70,9 +69,6 @@ public class EditFileEntryAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
@@ -92,19 +88,7 @@ public class EditFileEntryAction extends PortletAction {
 				unlockFileEntry(actionRequest);
 			}
 
-			String redirect = ParamUtil.getString(actionRequest, "redirect");
-
-			LayoutTypePortlet layoutTypePortlet =
-				themeDisplay.getLayoutTypePortlet();
-
-			if (layoutTypePortlet.hasPortletId(
-					portletConfig.getPortletName())) {
-
-				sendRedirect(actionRequest, actionResponse, redirect);
-			}
-			else {
-				actionResponse.sendRedirect(redirect);
-			}
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof DuplicateLockException ||
