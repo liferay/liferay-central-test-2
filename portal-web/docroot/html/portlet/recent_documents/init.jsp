@@ -16,7 +16,7 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntry" %>
+<%@ page import="com.liferay.portal.kernel.repository.model.FileEntry" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileRank" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>

@@ -32,7 +32,7 @@ List fileRanks = DLAppLocalServiceUtil.getFileRanks(scopeGroupId, user.getUserId
 			DLFileRank fileRank = (DLFileRank)fileRanks.get(i);
 
 			try {
-				DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(fileRank.getFileEntryId());
+				FileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(fileRank.getFileEntryId());
 
 				fileEntry = fileEntry.toEscapedModel();
 

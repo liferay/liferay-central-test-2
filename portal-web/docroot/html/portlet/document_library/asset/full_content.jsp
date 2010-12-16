@@ -17,22 +17,22 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
-DLFileVersion fileVersion = (DLFileVersion)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_VERSION);
+FileVersion fileVersion = (FileVersion)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_VERSION);
 
-DLFileEntry fileEntry = fileVersion.getFileEntry();
+FileEntry fileEntry = fileVersion.getFileEntry();
 %>
 
 <div class="asset-resource-info">
-	<aui:a href='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + fileVersion.getGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileVersion.getTitle())) %>'>
+	<aui:a href='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + fileVersion.getRepositoryId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileVersion.getTitle())) %>'>
 		<img class="dl-file-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/small/<%= fileVersion.getIcon() %>.png" /><%= HtmlUtil.escape(fileVersion.getTitle()) %>
 	</aui:a>
 </div>
 
 <p class="asset-description"><%= HtmlUtil.escape(fileVersion.getDescription()) %></p>
 
-<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
+<liferay-ui:custom-attributes-available className="<%= DLFileEntryConstants.getClassName() %>">
 	<liferay-ui:custom-attribute-list
-		className="<%= DLFileEntry.class.getName() %>"
+		className="<%= DLFileEntryConstants.getClassName() %>"
 		classPK="<%= (fileVersion != null) ? fileVersion.getFileVersionId() : 0 %>"
 		editable="<%= false %>"
 		label="<%= true %>"

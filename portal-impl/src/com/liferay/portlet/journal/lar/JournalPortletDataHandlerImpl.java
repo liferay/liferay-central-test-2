@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
@@ -430,7 +431,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 						StringPool.EQUAL);
 				}
 
-				DLFileEntry fileEntry = null;
+				FileEntry fileEntry = null;
 
 				String uuid = map.get("uuid");
 
@@ -444,7 +445,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					}
 
 					fileEntry =
-						DLAppLocalServiceUtil.getFileEntryByUuidAndGroupId(
+						DLAppLocalServiceUtil.getFileEntryByUuidAndRepositoryId(
 							uuid, groupId);
 				}
 				else {
@@ -462,7 +463,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 							groupId = portletDataContext.getScopeGroupId();
 						}
 
-						fileEntry = DLAppLocalServiceUtil.getFileEntryByTitle(
+						fileEntry = DLAppLocalServiceUtil.getFileEntry(
 							groupId, folderId, name);
 					}
 				}

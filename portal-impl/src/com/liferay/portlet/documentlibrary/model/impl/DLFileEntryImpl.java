@@ -196,10 +196,9 @@ public class DLFileEntryImpl
 		return getRepositoryId(getGroupId(), getFolderId());
 	}
 
-	public boolean hasLock(long userId) {
+	public boolean hasLock() {
 		try {
-			return LockLocalServiceUtil.hasLock(
-				userId, DLFileEntry.class.getName(), getFileEntryId());
+			return DLRepositoryServiceUtil.hasFileEntryLock(getFileEntryId());
 		}
 		catch (Exception e) {
 		}
@@ -209,8 +208,7 @@ public class DLFileEntryImpl
 
 	public boolean isLocked() {
 		try {
-			return LockLocalServiceUtil.isLocked(
-				DLFileEntry.class.getName(), getFileEntryId());
+			return DLRepositoryServiceUtil.isFileEntryLocked(getFileEntryId());
 		}
 		catch (Exception e) {
 		}

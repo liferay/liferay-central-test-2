@@ -21,4 +21,28 @@ public class DLFolderConstants {
 
 	public static final long DEFAULT_PARENT_FOLDER_ID = 0;
 
+	public static String getClassName() {
+		return DLFolder.class.getName();
+	}
+
+	public static long getFolderId(long groupId, long folderId) {
+		long repositoryId = getSearchRepositoryId(groupId, folderId);
+
+		if (groupId != repositoryId) {
+			return repositoryId;
+		}
+		else {
+			return DEFAULT_PARENT_FOLDER_ID;
+		}
+	}
+
+	public static long getSearchRepositoryId(long groupId, long folderId) {
+		if (folderId == DEFAULT_PARENT_FOLDER_ID) {
+			return groupId;
+		}
+		else {
+			return folderId;
+		}
+	}
+
 }

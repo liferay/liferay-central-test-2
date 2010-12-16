@@ -1,0 +1,90 @@
+/**
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
+package com.liferay.portlet.documentlibrary.lar;
+
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
+import com.liferay.portal.repository.liferayrepository.util.LiferayBase;
+import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil;
+
+import java.io.InputStream;
+
+import java.util.List;
+
+/**
+ * @author Alexander Chow
+ */
+public class FileEntryUtil extends LiferayBase {
+
+	private static FileEntryUtil _instance = new FileEntryUtil();
+
+	public static InputStream getContentStream(FileEntry fileEntry)
+		throws PortalException, SystemException {
+
+		long repositoryId = DLFolderConstants.getSearchRepositoryId(
+			fileEntry.getRepositoryId(), fileEntry.getFolderId());
+
+		String name = ((DLFileEntry)fileEntry.getModel()).getName();
+
+		return DLLocalServiceUtil.getFileAsStream(
+			fileEntry.getCompanyId(), repositoryId, name,
+			fileEntry.getVersion());
+
+	}
+	public static FileEntry fetchByUUID_R(String uuid, long repositoryId)
+		throws SystemException {
+
+		DLFileEntry fileEntry = DLFileEntryUtil.fetchByUUID_G(
+			uuid, repositoryId);
+
+		return new LiferayFileEntry(fileEntry);
+	}
+
+	public static FileEntry fetchByR_F_T(
+			long repositoryId, long folderId, String title)
+		throws SystemException {
+
+		DLFileEntry fileEntry = DLFileEntryUtil.fetchByG_F_T(
+			repositoryId, folderId, title);
+
+		return new LiferayFileEntry(fileEntry);
+	}
+
+	public static FileEntry findByR_F_T(
+			long repositoryId, long folderId, String title)
+		throws NoSuchFileEntryException, SystemException {
+
+		DLFileEntry fileEntry = DLFileEntryUtil.findByG_F_T(
+			repositoryId, folderId, title);
+
+		return new LiferayFileEntry(fileEntry);
+	}
+
+	public static List<FileEntry> findByR_F(long repositoryId, long folderId)
+		throws SystemException {
+
+		List<DLFileEntry> list = DLFileEntryUtil.findByG_F(
+			repositoryId, folderId);
+
+		return _instance.convertFileEntries(list);
+	}
+
+}

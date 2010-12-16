@@ -14,12 +14,12 @@
 
 package com.liferay.portlet.documentlibrary.action;
 
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 
@@ -37,7 +37,7 @@ public class ActionUtil {
 
 		long fileEntryId = ParamUtil.getLong(request, "fileEntryId");
 
-		DLFileEntry fileEntry = null;
+		FileEntry fileEntry = null;
 
 		if (fileEntryId > 0) {
 			fileEntry = DLAppServiceUtil.getFileEntry(fileEntryId);
@@ -82,7 +82,7 @@ public class ActionUtil {
 	public static void getFolder(HttpServletRequest request) throws Exception {
 		long folderId = ParamUtil.getLong(request, "folderId");
 
-		DLFolder folder = null;
+		Folder folder = null;
 
 		if ((folderId > 0) &&
 			(folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {

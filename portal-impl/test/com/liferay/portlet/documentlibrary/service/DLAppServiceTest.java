@@ -17,6 +17,8 @@ package com.liferay.portlet.documentlibrary.service;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Indexer;
@@ -30,7 +32,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 
 import java.util.List;
@@ -43,8 +44,6 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 
-		long groupId = PortalUtil.getScopeGroupId(TestPropsValues.LAYOUT_PLID);
-
 		String name = "Test Folder";
 		String description = "This is a test folder.";
 
@@ -55,20 +54,19 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 
 		try {
 			DLAppServiceUtil.deleteFolder(
-				groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, name);
+				_groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, name);
 		}
 		catch (NoSuchFolderException nsfe) {
 		}
 
 		_folder = DLAppServiceUtil.addFolder(
-			groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			_groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			name, description, serviceContext);
 	}
 
 	public void tearDown() throws Exception {
 		if (_fileEntry != null) {
-			DLAppServiceUtil.deleteFileEntry(
-				_fileEntry.getFileEntryId());
+			DLAppServiceUtil.deleteFileEntry(_fileEntry.getFileEntryId());
 		}
 
 		if (_folder != null) {
@@ -110,8 +108,6 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 	protected void addFileEntry(boolean rootFolder)
 		throws PortalException, SystemException {
 
-		long groupId = _folder.getGroupId();
-
 		long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
 		if (!rootFolder) {
@@ -133,7 +129,7 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		serviceContext.setAddGuestPermissions(true);
 
 		_fileEntry = DLAppServiceUtil.addFileEntry(
-			groupId, folderId, fileName, description, changeLog, extraSettings,
+			_groupId, folderId, fileName, description, changeLog, extraSettings,
 			bytes, serviceContext);
 	}
 
@@ -144,7 +140,7 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 
 		searchContext.setCompanyId(_fileEntry.getCompanyId());
 		searchContext.setFolderIds(new long[] {_fileEntry.getFolderId()});
-		searchContext.setGroupIds(new long[] {_fileEntry.getGroupId()});
+		searchContext.setGroupIds(new long[] {_fileEntry.getRepositoryId()});
 		searchContext.setKeywords(keywords);
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(DLFileEntry.class);
@@ -185,7 +181,9 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		search(rootFolder, "content");
 	}
 
-	private DLFileEntry _fileEntry;
-	private DLFolder _folder;
+	private FileEntry _fileEntry;
+	private Folder _folder;
+	private long _groupId = PortalUtil.getScopeGroupId(
+		TestPropsValues.LAYOUT_PLID);
 
 }

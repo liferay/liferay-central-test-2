@@ -25,13 +25,12 @@ String referringPortletResource = ParamUtil.getString(request, "referringPortlet
 
 String uploadProgressId = "dlFileEntryUploadProgress";
 
-DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
+FileEntry fileEntry = (FileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
 
 fileEntry = fileEntry.toEscapedModel();
 
 long fileEntryId = fileEntry.getFileEntryId();
 long folderId = fileEntry.getFolderId();
-String name = fileEntry.getName();
 String extension = fileEntry.getExtension();
 String title = fileEntry.getTitle();
 
@@ -41,8 +40,8 @@ if (PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.O
 	conversions = (String[])DocumentConversionUtil.getConversions(extension);
 }
 
-DLFolder folder = fileEntry.getFolder();
-DLFileVersion fileVersion = fileEntry.getFileVersion();
+Folder folder = fileEntry.getFolder();
+FileVersion fileVersion = fileEntry.getFileVersion();
 
 long assetClassPK = 0;
 
@@ -53,9 +52,9 @@ else if (fileEntry != null) {
 	assetClassPK = fileEntry.getFileEntryId();
 }
 
-Boolean isLocked = DLAppServiceUtil.isFileEntryLocked(fileEntry.getFileEntryId());
-Boolean hasLock = DLAppServiceUtil.hasFileEntryLock(fileEntry.getFileEntryId());
-Lock lock = DLAppServiceUtil.getFileEntryLock(fileEntry.getFileEntryId());
+Boolean isLocked = fileEntry.isLocked();
+Boolean hasLock = fileEntry.hasLock();
+Lock lock = fileEntry.getLock();
 
 String fileUrl = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(title));
 String webDavUrl = StringPool.BLANK;
@@ -64,7 +63,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 	StringBuilder sb = new StringBuilder();
 
 	if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-		DLFolder curFolder = DLAppLocalServiceUtil.getFolder(folderId);
+		Folder curFolder = DLAppLocalServiceUtil.getFolder(folderId);
 
 		while (true) {
 			sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
@@ -133,7 +132,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					<c:otherwise>
 
 						<%
-						String lockExpirationTime = LanguageUtil.getTimeDescription(pageContext, DLFileEntryImpl.LOCK_EXPIRATION_TIME).toLowerCase();
+						String lockExpirationTime = LanguageUtil.getTimeDescription(pageContext, DLFileEntryConstants.LOCK_EXPIRATION_TIME).toLowerCase();
 						%>
 
 						<%= LanguageUtil.format(pageContext, "you-now-have-a-lock-on-this-document", lockExpirationTime, false) %>
@@ -178,14 +177,14 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 		<div class="lfr-asset-categories">
 			<liferay-ui:asset-categories-summary
-				className="<%= DLFileEntry.class.getName() %>"
+				className="<%= DLFileEntryConstants.getClassName() %>"
 				classPK="<%= assetClassPK %>"
 			/>
 		</div>
 
 		<div class="lfr-asset-tags">
 			<liferay-ui:asset-tags-summary
-				className="<%= DLFileEntry.class.getName() %>"
+				className="<%= DLFileEntryConstants.getClassName() %>"
 				classPK="<%= assetClassPK %>"
 				message="tags"
 			/>
@@ -197,9 +196,9 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			</div>
 		</c:if>
 
-		<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
+		<liferay-ui:custom-attributes-available className="<%= DLFileEntryConstants.getClassName() %>">
 			<liferay-ui:custom-attribute-list
-				className="<%= DLFileEntry.class.getName() %>"
+				className="<%= DLFileEntryConstants.getClassName() %>"
 				classPK="<%= (fileVersion != null) ? fileVersion.getFileVersionId() : 0 %>"
 				editable="<%= false %>"
 				label="<%= true %>"
@@ -208,7 +207,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 		<div class="lfr-asset-ratings">
 			<liferay-ui:ratings
-				className="<%= DLFileEntry.class.getName() %>"
+				className="<%= DLFileEntryConstants.getClassName() %>"
 				classPK="<%= fileEntryId %>"
 			/>
 		</div>
@@ -353,7 +352,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			List resultRows = searchContainer.getResultRows();
 
 			for (int i = 0; i < results.size(); i++) {
-				DLFileVersion curFileVersion = (DLFileVersion)results.get(i);
+				FileVersion curFileVersion = (FileVersion)results.get(i);
 
 				ResultRow row = new ResultRow(new Object[] {fileEntry, curFileVersion, results.size(), conversions, isLocked, hasLock}, String.valueOf(curFileVersion.getVersion()), i);
 
@@ -404,7 +403,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			}
 
 			if (comparableFileEntry && !results.isEmpty()) {
-				DLFileVersion curFileVersion = (DLFileVersion)results.get(0);
+				FileVersion curFileVersion = (FileVersion)results.get(0);
 			%>
 
 				<portlet:actionURL var="compareVersionsURL">
@@ -415,7 +414,6 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					<aui:input name="backURL" type="hidden" value="<%= currentURL %>" />
 					<aui:input name="fileEntryId" type="hidden" value="<%= fileEntryId %>" />
 					<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
-					<aui:input name="name" type="hidden" value="<%= name %>" />
 					<aui:input name="title" type="hidden" value="<%= title %>" />
 					<aui:input name="sourceVersion" type="hidden" value="<%= curFileVersion.getVersion() %>" />
 					<aui:input name="targetVersion" type="hidden" value="<%= fileEntry.getVersion() %>" />
@@ -438,7 +436,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			</portlet:actionURL>
 
 			<liferay-ui:discussion
-				className="<%= DLFileEntry.class.getName() %>"
+				className="<%= DLFileEntryConstants.getClassName() %>"
 				classPK="<%= fileEntryId %>"
 				formAction="<%= discussionURL %>"
 				formName="fm2"

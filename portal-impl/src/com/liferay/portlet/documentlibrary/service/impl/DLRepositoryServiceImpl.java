@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.LockLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
@@ -125,12 +126,10 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		}
 	}
 
-	public void deleteFileEntryByTitle(
-			long groupId, long folderId, String titleWithExtension)
+	public void deleteFileEntry(long groupId, long folderId, String title)
 		throws PortalException, SystemException {
 
-		DLFileEntry fileEntry = getFileEntryByTitle(
-			groupId, folderId, titleWithExtension);
+		DLFileEntry fileEntry = getFileEntry(groupId, folderId, title);
 
 		deleteFileEntry(fileEntry.getFileEntryId());
 	}
@@ -232,12 +231,11 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		return dlRepositoryLocalService.getFileEntry(fileEntryId);
 	}
 
-	public DLFileEntry getFileEntryByTitle(
-			long groupId, long folderId, String titleWithExtension)
+	public DLFileEntry getFileEntry(long groupId, long folderId, String title)
 		throws PortalException, SystemException {
 
-		DLFileEntry fileEntry = dlRepositoryLocalService.getFileEntryByTitle(
-			groupId, folderId, titleWithExtension);
+		DLFileEntry fileEntry = dlRepositoryLocalService.getFileEntry(
+			groupId, folderId, title);
 
 		DLFileEntryPermission.check(
 			getPermissionChecker(), fileEntry, ActionKeys.VIEW);
@@ -415,6 +413,13 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		}
 
 		return hasLock;
+	}
+
+	public boolean hasFolderLock(long folderId)
+		throws PortalException, SystemException {
+
+		return LockLocalServiceUtil.hasLock(
+			getUserId(), DLFileEntry.class.getName(), folderId);
 	}
 
 	public boolean hasInheritableLock(long folderId)

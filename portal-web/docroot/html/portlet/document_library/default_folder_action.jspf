@@ -30,7 +30,7 @@
 
 	<c:if test="<%= DLFolderPermission.contains(permissionChecker, curFolder, ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
-			modelResource="<%= DLFolder.class.getName() %>"
+			modelResource="<%= DLFolderConstants.getClassName() %>"
 			modelResourceDescription="<%= curFolder.getName() %>"
 			resourcePrimKey="<%= String.valueOf(curFolder.getFolderId()) %>"
 			var="permissionsURL"

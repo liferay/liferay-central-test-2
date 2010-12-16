@@ -24,7 +24,7 @@
 		StringBuilder sb = new StringBuilder();
 
 		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			DLFolder curFolder = DLAppLocalServiceUtil.getFolder(folderId);
+			Folder curFolder = DLAppLocalServiceUtil.getFolder(folderId);
 
 			while (true) {
 				sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));

@@ -143,11 +143,11 @@ public class DLRepositoryLocalServiceUtil {
 		return getService().getFileEntry(fileEntryId);
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
 		long groupId, long folderId, java.lang.String title)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getFileEntryByTitle(groupId, folderId, title);
+		return getService().getFileEntry(groupId, folderId, title);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByUuidAndGroupId(

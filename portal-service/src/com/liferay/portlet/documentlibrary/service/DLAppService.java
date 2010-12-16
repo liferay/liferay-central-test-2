@@ -41,24 +41,24 @@ public interface DLAppService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link DLAppServiceUtil} to access the d l app remote service. Add custom service methods to {@link com.liferay.portlet.documentlibrary.service.impl.DLAppServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long groupId, long folderId, java.lang.String title,
+	public com.liferay.portal.kernel.repository.model.FileEntry addFileEntry(
+		long repositoryId, long folderId, java.lang.String title,
 		java.lang.String description, java.lang.String changeLog,
 		java.lang.String extraSettings, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long groupId, long folderId, java.lang.String title,
+	public com.liferay.portal.kernel.repository.model.FileEntry addFileEntry(
+		long repositoryId, long folderId, java.lang.String title,
 		java.lang.String description, java.lang.String changeLog,
 		java.lang.String extraSettings, java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long groupId, long folderId, java.lang.String title,
+	public com.liferay.portal.kernel.repository.model.FileEntry addFileEntry(
+		long repositoryId, long folderId, java.lang.String title,
 		java.lang.String description, java.lang.String changeLog,
 		java.lang.String extraSettings, java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -66,20 +66,20 @@ public interface DLAppService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
-		long groupId, long folderId, long toFileEntryId,
+		long repositoryId, long folderId, long toFileEntryId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		long groupId, long parentFolderId, java.lang.String name,
+	public com.liferay.portal.kernel.repository.model.Folder addFolder(
+		long repositoryId, long parentFolderId, java.lang.String name,
 		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.documentlibrary.model.DLFolder copyFolder(
-		long groupId, long sourceFolderId, long parentFolderId,
+	public com.liferay.portal.kernel.repository.model.Folder copyFolder(
+		long repositoryId, long sourceFolderId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -90,8 +90,8 @@ public interface DLAppService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteFileEntryByTitle(long groupId, long folderId,
-		java.lang.String titleWithExtension)
+	public void deleteFileEntryByTitle(long repositoryId, long folderId,
+		java.lang.String title)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -104,76 +104,74 @@ public interface DLAppService {
 			com.liferay.portal.kernel.exception.SystemException,
 			java.rmi.RemoteException;
 
-	public void deleteFolder(long groupId, long parentFolderId,
+	public void deleteFolder(long repositoryId, long parentFolderId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException,
 			java.rmi.RemoteException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
-		long groupId, long folderId)
+	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
+		long repositoryId, long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
-		long groupId, long folderId, int start, int end)
+	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
+		long repositoryId, long folderId, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
-		long groupId, long folderId, int start, int end,
+	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
+		long repositoryId, long folderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<java.lang.Object> getFileEntriesAndFileShortcuts(
-		long groupId, java.util.List<java.lang.Long> folderIds, int status,
-		int start, int end)
+		long repositoryId, java.util.List<java.lang.Long> folderIds,
+		int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<java.lang.Object> getFileEntriesAndFileShortcuts(
-		long groupId, long folderId, int status, int start, int end)
+		long repositoryId, long folderId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getFileEntriesAndFileShortcutsCount(long groupId,
+	public int getFileEntriesAndFileShortcutsCount(long repositoryId,
 		java.util.List<java.lang.Long> folderIds, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getFileEntriesAndFileShortcutsCount(long groupId, long folderId,
-		int status) throws com.liferay.portal.kernel.exception.SystemException;
+	public int getFileEntriesAndFileShortcutsCount(long repositoryId,
+		long folderId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getFileEntriesCount(long groupId, long folderId)
+	public int getFileEntriesCount(long repositoryId, long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
+	public com.liferay.portal.kernel.repository.model.FileEntry getFileEntry(
 		long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
-		long groupId, long folderId, java.lang.String titleWithExtension)
+	public com.liferay.portal.kernel.repository.model.FileEntry getFileEntry(
+		long repositoryId, long folderId, java.lang.String title)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByUuidAndGroupId(
-		java.lang.String uuid, long groupId)
+	public com.liferay.portal.kernel.repository.model.FileEntry getFileEntryByUuidAndRepositoryId(
+		java.lang.String uuid, long repositoryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.model.Lock getFileEntryLock(long fileEntryId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut getFileShortcut(
@@ -182,119 +180,99 @@ public interface DLAppService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
+	public com.liferay.portal.kernel.repository.model.Folder getFolder(
 		long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
-		long groupId, long parentFolderId, java.lang.String name)
+	public com.liferay.portal.kernel.repository.model.Folder getFolder(
+		long repositoryId, long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
-		long groupId, long parentFolderId)
+	public java.util.List<com.liferay.portal.kernel.repository.model.Folder> getFolders(
+		long repositoryId, long parentFolderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
-		long groupId, long parentFolderId, int start, int end)
+	public java.util.List<com.liferay.portal.kernel.repository.model.Folder> getFolders(
+		long repositoryId, long parentFolderId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
-		long groupId, java.util.List<java.lang.Long> folderIds, int status,
-		int start, int end)
+		long repositoryId, java.util.List<java.lang.Long> folderIds,
+		int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
-		long groupId, long folderId, int status, int start, int end)
+		long repositoryId, long folderId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getFoldersAndFileEntriesAndFileShortcutsCount(long groupId,
-		java.util.List<java.lang.Long> folderIds, int status)
+	public int getFoldersAndFileEntriesAndFileShortcutsCount(
+		long repositoryId, java.util.List<java.lang.Long> folderIds, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getFoldersAndFileEntriesAndFileShortcutsCount(long groupId,
-		long folderId, int status)
+	public int getFoldersAndFileEntriesAndFileShortcutsCount(
+		long repositoryId, long folderId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getFoldersCount(long groupId, long parentFolderId)
+	public int getFoldersCount(long repositoryId, long parentFolderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getFoldersFileEntriesCount(long groupId,
+	public int getFoldersFileEntriesCount(long repositoryId,
 		java.util.List<java.lang.Long> folderIds, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getGroupFileEntries(
-		long groupId, long userId, int start, int end)
+	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getGroupFileEntries(
+		long repositoryId, long userId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getGroupFileEntries(
-		long groupId, long userId, int start, int end,
+	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getGroupFileEntries(
+		long repositoryId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getGroupFileEntries(
-		long groupId, long userId, long rootFolderId, int start, int end)
+	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getGroupFileEntries(
+		long repositoryId, long userId, long rootFolderId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getGroupFileEntries(
-		long groupId, long userId, long rootFolderId, int start, int end,
+	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getGroupFileEntries(
+		long repositoryId, long userId, long rootFolderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getGroupFileEntriesCount(long groupId, long userId)
+	public int getGroupFileEntriesCount(long repositoryId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getGroupFileEntriesCount(long groupId, long userId,
+	public int getGroupFileEntriesCount(long repositoryId, long userId,
 		long rootFolderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void getSubfolderIds(java.util.List<java.lang.Long> folderIds,
-		long groupId, long folderId)
+		long repositoryId, long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void getSubfolderIds(java.util.List<java.lang.Long> folderIds,
-		long groupId, long folderId, boolean recurse)
+		long repositoryId, long folderId, boolean recurse)
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public boolean hasFileEntryLock(long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public boolean hasInheritableLock(long folderId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public boolean isFileEntryLocked(long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public boolean isFolderLocked(long folderId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Lock lockFileEntry(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -316,7 +294,7 @@ public interface DLAppService {
 			com.liferay.portal.kernel.exception.SystemException,
 			java.rmi.RemoteException;
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry moveFileEntry(
+	public com.liferay.portal.kernel.repository.model.FileEntry moveFileEntry(
 		long fileEntryId, long newFolderId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -344,17 +322,17 @@ public interface DLAppService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void unlockFolder(long groupId, long folderId,
+	public void unlockFolder(long repositoryId, long folderId,
 		java.lang.String lockUuid)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void unlockFolder(long groupId, long parentFolderId,
+	public void unlockFolder(long repositoryId, long parentFolderId,
 		java.lang.String name, java.lang.String lockUuid)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
+	public com.liferay.portal.kernel.repository.model.FileEntry updateFileEntry(
 		long fileEntryId, java.lang.String sourceFileName,
 		java.lang.String title, java.lang.String description,
 		java.lang.String changeLog, boolean majorVersion,
@@ -363,7 +341,7 @@ public interface DLAppService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
+	public com.liferay.portal.kernel.repository.model.FileEntry updateFileEntry(
 		long fileEntryId, java.lang.String sourceFileName,
 		java.lang.String title, java.lang.String description,
 		java.lang.String changeLog, boolean majorVersion,
@@ -372,7 +350,7 @@ public interface DLAppService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
+	public com.liferay.portal.kernel.repository.model.FileEntry updateFileEntry(
 		long fileEntryId, java.lang.String sourceFileName,
 		java.lang.String title, java.lang.String description,
 		java.lang.String changeLog, boolean majorVersion,
@@ -387,7 +365,7 @@ public interface DLAppService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
+	public com.liferay.portal.kernel.repository.model.Folder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -395,12 +373,12 @@ public interface DLAppService {
 			com.liferay.portal.kernel.exception.SystemException,
 			java.rmi.RemoteException;
 
-	public boolean verifyFileEntryLock(long fileEntryId,
+	public boolean verifyFileEntryLock(long repositoryId, long fileEntryId,
 		java.lang.String lockUuid)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public boolean verifyInheritableLock(long folderId,
+	public boolean verifyInheritableLock(long repositoryId, long folderId,
 		java.lang.String lockUuid)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

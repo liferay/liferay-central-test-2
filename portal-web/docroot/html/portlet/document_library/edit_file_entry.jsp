@@ -28,7 +28,7 @@ String referringPortletResource = ParamUtil.getString(request, "referringPortlet
 
 String uploadProgressId = "dlFileEntryUploadProgress";
 
-DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
+FileEntry fileEntry = (FileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
 
 long fileEntryId = BeanParamUtil.getLong(fileEntry, request, "fileEntryId");
 
@@ -44,13 +44,13 @@ if (PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.O
 	conversions = (String[])DocumentConversionUtil.getConversions(extension);
 }
 
-DLFolder folder = null;
+Folder folder = null;
 
 if (fileEntry != null) {
 	folder = fileEntry.getFolder();
 }
 
-DLFileVersion fileVersion = null;
+FileVersion fileVersion = null;
 
 if (fileEntry != null) {
 	fileVersion = fileEntry.getLatestFileVersion();
@@ -70,9 +70,9 @@ Boolean hasLock = Boolean.FALSE;
 Lock lock = null;
 
 if (fileEntry != null) {
-	isLocked = DLAppServiceUtil.isFileEntryLocked(fileEntry.getFileEntryId());
-	hasLock = DLAppServiceUtil.hasFileEntryLock(fileEntry.getFileEntryId());
-	lock = DLAppServiceUtil.getFileEntryLock(fileEntry.getFileEntryId());
+	isLocked = fileEntry.isLocked();
+	hasLock = fileEntry.hasLock();
+	lock = fileEntry.getLock();
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -98,7 +98,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 					<c:otherwise>
 
 						<%
-						String lockExpirationTime = LanguageUtil.getTimeDescription(pageContext, DLFileEntryImpl.LOCK_EXPIRATION_TIME).toLowerCase();
+						String lockExpirationTime = LanguageUtil.getTimeDescription(pageContext, DLFileEntryConstants.LOCK_EXPIRATION_TIME).toLowerCase();
 						%>
 
 						<%= LanguageUtil.format(pageContext, "you-now-have-a-lock-on-this-document", lockExpirationTime, false) %>
@@ -135,7 +135,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 				fallbackContainer: '#<portlet:namespace />fallback',
 				maxFileSize: <%= PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) %> / 1024,
 				namespace: '<portlet:namespace />',
-				uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></liferay-portlet:actionURL><liferay-ui:input-permissions-params modelName="<%= DLFileEntry.class.getName() %>" />'
+				uploadFile: '<liferay-portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></liferay-portlet:actionURL><liferay-ui:input-permissions-params modelName="<%= DLFileEntryConstants.getClassName() %>" />'
 			}
 		);
 	</aui:script>
@@ -174,7 +174,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 
 	<aui:model-context bean="<%= fileVersion %>" model="<%= DLFileVersion.class %>" />
 
-	<c:if test="<%= (fileVersion != null) && (!fileVersion.isNew()) %>">
+	<c:if test="<%= fileVersion != null %>">
 		<aui:workflow-status status="<%= fileVersion.getStatus() %>" version="<%= fileVersion.getVersion() %>" />
 	</c:if>
 
@@ -250,9 +250,9 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 
 		<aui:input name="description" />
 
-		<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
+		<liferay-ui:custom-attributes-available className="<%= DLFileEntryConstants.getClassName() %>">
 			<liferay-ui:custom-attribute-list
-				className="<%= DLFileEntry.class.getName() %>"
+				className="<%= DLFileEntryConstants.getClassName() %>"
 				classPK="<%= (fileVersion != null) ? fileVersion.getFileVersionId() : 0 %>"
 				editable="<%= true %>"
 				label="<%= true %>"
@@ -263,24 +263,12 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 
 		<aui:input classPK="<%= assetClassPK %>" model="<%= DLFileEntry.class %>" name="tags" type="assetTags" />
 
-		<%
-		if (fileEntry == null) {
-			request.setAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, new DLFileEntryImpl());
-		}
-		%>
-
 		<%@ include file="/html/portlet/document_library/edit_file_entry_form_extra_fields.jsp" %>
-
-		<%
-		if (fileEntry == null) {
-			request.removeAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
-		}
-		%>
 
 		<c:if test="<%= fileEntry == null %>">
 			<aui:field-wrapper label="permissions">
 				<liferay-ui:input-permissions
-					modelName="<%= DLFileEntry.class.getName() %>"
+					modelName="<%= DLFileEntryConstants.getClassName() %>"
 				/>
 			</aui:field-wrapper>
 		</c:if>
@@ -320,7 +308,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 
 			String publishButtonLabel = "publish";
 
-			if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, DLFileEntry.class.getName())) {
+			if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, DLFileEntryConstants.getClassName())) {
 				publishButtonLabel = "submit-for-publication";
 			}
 

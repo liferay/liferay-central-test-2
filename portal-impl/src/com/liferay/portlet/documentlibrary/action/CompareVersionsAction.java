@@ -15,6 +15,7 @@
 package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.DiffResult;
 import com.liferay.portal.kernel.util.DiffUtil;
@@ -30,7 +31,6 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 
@@ -93,7 +93,7 @@ public class CompareVersionsAction extends PortletAction {
 		String targetVersion = ParamUtil.getString(
 			renderRequest, "targetVersion");
 
-		DLFileEntry fileEntry = DLAppServiceUtil.getFileEntry(fileEntryId);
+		FileEntry fileEntry = DLAppServiceUtil.getFileEntry(fileEntryId);
 
 		InputStream sourceIs = fileEntry.getContentStream(sourceVersion);
 		InputStream targetIs = fileEntry.getContentStream(targetVersion);

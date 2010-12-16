@@ -225,10 +225,10 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 
 				String portletId = portlet.getPortletId();
 
-				if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY) || (portletId.equals(PortletKeys.SEARCH) && entryClassName.equals(DLFileEntry.class.getName()))) {
+				if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY) || (portletId.equals(PortletKeys.SEARCH) && entryClassName.equals(DLFileEntryConstants.getClassName()))) {
 					long fileEntryId = GetterUtil.getLong(HttpUtil.getParameter(entryHref, "_20_fileEntryId", false));
 
-					DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(fileEntryId);
+					FileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(fileEntryId);
 
 					entryTitle = fileEntry.getTitle();
 
@@ -237,7 +237,7 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 					}
 
 					if (dlLinkToViewURL) {
-						long dlPlid = PortalUtil.getPlidFromPortletId(fileEntry.getGroupId(), PortletKeys.DOCUMENT_LIBRARY);
+						long dlPlid = PortalUtil.getPlidFromPortletId(fileEntry.getRepositoryId(), PortletKeys.DOCUMENT_LIBRARY);
 
 						PortletURL viewURL = new PortletURLImpl(request, PortletKeys.DOCUMENT_LIBRARY, dlPlid, PortletRequest.RENDER_PHASE);
 

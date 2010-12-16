@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.documentlibrary.webdav;
 
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.webdav.BaseResourceImpl;
@@ -22,8 +24,6 @@ import com.liferay.portal.kernel.webdav.WebDAVRequest;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.DLFileVersion;
-import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 
 import java.io.InputStream;
 
@@ -33,7 +33,7 @@ import java.io.InputStream;
 public class DLFileEntryResourceImpl extends BaseResourceImpl {
 
 	public DLFileEntryResourceImpl(
-		WebDAVRequest webDavRequest, DLFileEntry fileEntry, String parentPath,
+		WebDAVRequest webDavRequest, FileEntry fileEntry, String parentPath,
 		String name) {
 
 		super(
@@ -54,8 +54,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 
 	public Lock getLock() {
 		try {
-			return DLAppServiceUtil.getFileEntryLock(
-				_fileEntry.getFileEntryId());
+			return _fileEntry.getLock();
 		}
 		catch (Exception e) {
 		}
@@ -65,8 +64,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 
 	public boolean isLocked() {
 		try {
-			return DLAppServiceUtil.hasFileEntryLock(
-				_fileEntry.getFileEntryId());
+			return _fileEntry.hasLock();
 		}
 		catch (Exception e) {
 		}
@@ -86,7 +84,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 
 				// Get last version regardless of status
 
-				DLFileVersion fileVersion = _fileEntry.getLatestFileVersion();
+				FileVersion fileVersion = _fileEntry.getLatestFileVersion();
 
 				version = fileVersion.getVersion();
 			}
@@ -98,7 +96,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 		}
 	}
 
-	private DLFileEntry _fileEntry;
+	private FileEntry _fileEntry;
 	//private WebDAVRequest _webDavRequest;
 
 }

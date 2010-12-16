@@ -16,13 +16,13 @@ package com.liferay.portlet.documentlibrary.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
@@ -98,7 +98,7 @@ public class DLFileShortcutLocalServiceImpl
 
 		// Asset
 
-		DLFileEntry fileEntry = dlAppLocalService.getFileEntry(toFileEntryId);
+		FileEntry fileEntry = dlAppLocalService.getFileEntry(toFileEntryId);
 
 		copyAssetTags(fileEntry, serviceContext);
 
@@ -208,7 +208,7 @@ public class DLFileShortcutLocalServiceImpl
 			String[] assetTagNames)
 		throws PortalException, SystemException {
 
-		DLFileEntry fileEntry = dlAppLocalService.getFileEntry(
+		FileEntry fileEntry = dlAppLocalService.getFileEntry(
 			fileShortcut.getToFileEntryId());
 
 		String mimeType = MimeTypesUtil.getContentType(fileEntry.getTitle());
@@ -254,7 +254,7 @@ public class DLFileShortcutLocalServiceImpl
 
 		// Asset
 
-		DLFileEntry fileEntry = dlAppLocalService.getFileEntry(toFileEntryId);
+		FileEntry fileEntry = dlAppLocalService.getFileEntry(toFileEntryId);
 
 		copyAssetTags(fileEntry, serviceContext);
 
@@ -280,11 +280,11 @@ public class DLFileShortcutLocalServiceImpl
 	}
 
 	protected void copyAssetTags(
-			DLFileEntry fileEntry, ServiceContext serviceContext)
+			FileEntry fileEntry, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		String[] assetTagNames = assetTagLocalService.getTagNames(
-			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+			FileEntry.class.getName(), fileEntry.getFileEntryId());
 
 		assetTagLocalService.checkTags(
 			serviceContext.getUserId(), serviceContext.getScopeGroupId(),
@@ -313,7 +313,7 @@ public class DLFileShortcutLocalServiceImpl
 	protected void validate(User user, long toFileEntryId)
 		throws PortalException, SystemException {
 
-		DLFileEntry fileEntry = dlAppLocalService.getFileEntry(toFileEntryId);
+		FileEntry fileEntry = dlAppLocalService.getFileEntry(toFileEntryId);
 
 		if (user.getCompanyId() != fileEntry.getCompanyId()) {
 			throw new NoSuchFileEntryException();

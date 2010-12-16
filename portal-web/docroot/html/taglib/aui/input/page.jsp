@@ -307,6 +307,11 @@ private long _getClassPK(Object bean, long classPK) {
 				classPK = GetterUtil.getLong(primaryKeyObj.toString());
 			}
 		}
+		else if (bean instanceof RepositoryModel) {
+			RepositoryModel repositoryModel = (RepositoryModel)bean;
+
+			classPK = repositoryModel.getPrimaryKey();
+		}
 	}
 
 	return classPK;

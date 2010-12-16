@@ -25,15 +25,15 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
-DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
+FileEntry fileEntry = (FileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
 
 long fileEntryId = BeanParamUtil.getLong(fileEntry, request, "fileEntryId");
 
 long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 
-Boolean isLocked = DLAppServiceUtil.isFileEntryLocked(fileEntry.getFileEntryId());
-Boolean hasLock = DLAppServiceUtil.hasFileEntryLock(fileEntry.getFileEntryId());
-Lock lock = DLAppServiceUtil.getFileEntryLock(fileEntry.getFileEntryId());
+Boolean isLocked = fileEntry.isLocked();
+Boolean hasLock = fileEntry.hasLock();
+Lock lock = fileEntry.getLock();
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -58,7 +58,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 					<c:otherwise>
 
 						<%
-						String lockExpirationTime = LanguageUtil.getTimeDescription(pageContext, DLFileEntryImpl.LOCK_EXPIRATION_TIME).toLowerCase();
+						String lockExpirationTime = LanguageUtil.getTimeDescription(pageContext, DLFileEntryConstants.LOCK_EXPIRATION_TIME).toLowerCase();
 						%>
 
 						<%= LanguageUtil.format(pageContext, "you-now-have-a-lock-on-this-document", lockExpirationTime, false) %>
@@ -99,7 +99,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 		String folderName = StringPool.BLANK;
 
 		if (folderId > 0) {
-			DLFolder folder = DLAppLocalServiceUtil.getFolder(folderId);
+			Folder folder = DLAppLocalServiceUtil.getFolder(folderId);
 
 			folder = folder.toEscapedModel();
 

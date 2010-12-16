@@ -23,17 +23,17 @@ String redirect = currentURL;
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-DLFolder folder = null;
+Folder folder = null;
 
 long folderId = 0;
 
 if (row != null) {
-	folder = (DLFolder)row.getObject();
+	folder = (Folder)row.getObject();
 
 	folderId = folder.getFolderId();
 }
 else {
-	folder = (DLFolder)request.getAttribute("view.jsp-folder");
+	folder = (Folder)request.getAttribute("view.jsp-folder");
 
 	folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
 }
@@ -45,7 +45,7 @@ String resourcePrimKey = null;
 boolean showPermissionsURL = false;
 
 if (folder != null) {
-	modelResource = DLFolder.class.getName();
+	modelResource = DLFolderConstants.getClassName();
 	modelResourceDescription = folder.getName();
 	resourcePrimKey = String.valueOf(folderId);
 
@@ -168,7 +168,7 @@ if (row == null) {
 			StringBuilder sb = new StringBuilder();
 
 			if (folder != null) {
-				DLFolder curFolder = folder;
+				Folder curFolder = folder;
 
 				while (true) {
 					sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));

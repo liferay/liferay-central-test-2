@@ -33,7 +33,7 @@ public interface DLFileShortcut extends DLFileShortcutModel {
 	 *
 	 * Never reference this interface directly. All methods that expect a d l file shortcut model instance should use the {@link DLFileShortcut} interface instead.
 	 */
-	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder();
+	public com.liferay.portal.kernel.repository.model.Folder getFolder();
 
 	public java.lang.String getToTitle();
 }

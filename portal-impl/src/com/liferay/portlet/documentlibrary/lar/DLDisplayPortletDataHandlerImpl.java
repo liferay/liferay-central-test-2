@@ -18,15 +18,14 @@ import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -96,17 +95,17 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		Element fileRanksElement = rootElement.addElement("file-ranks");
 
 		if (rootFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			List<DLFolder> folders = DLFolderUtil.findByGroupId(
+			List<Folder> folders = FolderUtil.findByRepositoryId(
 				portletDataContext.getScopeGroupId());
 
-			for (DLFolder folder : folders) {
+			for (Folder folder : folders) {
 				DLPortletDataHandlerImpl.exportFolder(
 					portletDataContext, foldersElement, fileEntriesElement,
 					fileShortcutsElement, fileRanksElement, folder, false);
 			}
 		}
 		else {
-			DLFolder folder = DLFolderUtil.findByPrimaryKey(rootFolderId);
+			Folder folder = FolderUtil.findByPrimaryKey(rootFolderId);
 
 			rootElement.addAttribute(
 				"root-folder-id", String.valueOf(folder.getFolderId()));
@@ -180,7 +179,7 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (rootFolderId > 0) {
 			Map<Long, Long> folderPKs =
 				(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-					DLFolder.class);
+					Folder.class);
 
 			rootFolderId = MapUtil.getLong(
 				folderPKs, rootFolderId, rootFolderId);

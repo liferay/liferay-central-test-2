@@ -273,8 +273,8 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 								// Title
 
-								if (assetEntryClassName.equals(DLFileEntry.class.getName())) {
-									DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(assetEntry.getClassPK());
+								if (assetEntryClassName.equals(DLFileEntryConstants.getClassName())) {
+									FileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(assetEntry.getClassPK());
 
 									fileEntry = fileEntry.toEscapedModel();
 

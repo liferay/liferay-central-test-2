@@ -16,6 +16,8 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+<%@ page import="com.liferay.portal.kernel.repository.model.FileEntry" %>
+<%@ page import="com.liferay.portal.kernel.repository.model.Folder" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
 <%@ page import="com.liferay.portal.kernel.search.Indexer" %>
 <%@ page import="com.liferay.portal.kernel.search.IndexerRegistryUtil" %>
@@ -67,11 +69,8 @@
 <%@ page import="com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermission" %>
 <%@ page import="com.liferay.portlet.bookmarks.service.permission.BookmarksPermission" %>
 <%@ page import="com.liferay.portlet.bookmarks.util.BookmarksUtil" %>
-<%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntry" %>
-<%@ page import="com.liferay.portlet.documentlibrary.model.DLFolder" %>
+<%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntryConstants" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFolderConstants" %>
-<%@ page import="com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl" %>
-<%@ page import="com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLAppServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission" %>

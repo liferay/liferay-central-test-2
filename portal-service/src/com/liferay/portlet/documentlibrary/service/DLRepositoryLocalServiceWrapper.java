@@ -134,12 +134,11 @@ public class DLRepositoryLocalServiceWrapper implements DLRepositoryLocalService
 		return _dlRepositoryLocalService.getFileEntry(fileEntryId);
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
 		long groupId, long folderId, java.lang.String title)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlRepositoryLocalService.getFileEntryByTitle(groupId, folderId,
-			title);
+		return _dlRepositoryLocalService.getFileEntry(groupId, folderId, title);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByUuidAndGroupId(

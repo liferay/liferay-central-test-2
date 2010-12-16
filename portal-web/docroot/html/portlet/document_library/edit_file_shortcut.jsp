@@ -33,11 +33,11 @@ Group toGroup = null;
 
 long folderId = BeanParamUtil.getLong(fileShortcut, request, "folderId");
 
-DLFolder toFolder = null;
+Folder toFolder = null;
 
 long toFileEntryId = BeanParamUtil.getLong(fileShortcut, request, "toFileEntryId");
 
-DLFileEntry toFileEntry = null;
+FileEntry toFileEntry = null;
 
 if (toFileEntryId > 0) {
 	try {
@@ -47,7 +47,7 @@ if (toFileEntryId > 0) {
 
 		toFolder = toFileEntry.getFolder();
 
-		toGroupId = toFolder.getGroupId();
+		toGroupId = toFolder.getRepositoryId();
 
 		toGroup = GroupLocalServiceUtil.getGroup(toGroupId);
 

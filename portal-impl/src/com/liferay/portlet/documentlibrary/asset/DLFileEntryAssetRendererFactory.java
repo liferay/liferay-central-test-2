@@ -18,6 +18,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -29,7 +31,6 @@ import com.liferay.portlet.asset.model.BaseAssetRendererFactory;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.service.permission.DLPermission;
@@ -54,8 +55,8 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 	public AssetRenderer getAssetRenderer(long classPK, int type)
 		throws PortalException, SystemException {
 
-		DLFileEntry fileEntry = null;
-		DLFileVersion fileVersion = null;
+		FileEntry fileEntry = null;
+		FileVersion fileVersion = null;
 
 		try {
 			fileEntry = DLAppLocalServiceUtil.getFileEntry(classPK);

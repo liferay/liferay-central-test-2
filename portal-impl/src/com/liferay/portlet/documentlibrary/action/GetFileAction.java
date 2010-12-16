@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.documentlibrary.action;
 
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -25,9 +27,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
-import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
@@ -147,11 +147,11 @@ public class GetFileAction extends PortletAction {
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		DLFileEntry fileEntry = null;
+		FileEntry fileEntry = null;
 
 		if (Validator.isNotNull(uuid) && (groupId > 0)) {
 			try {
-				fileEntry = DLAppServiceUtil.getFileEntryByUuidAndGroupId(
+				fileEntry = DLAppServiceUtil.getFileEntryByUuidAndRepositoryId(
 					uuid, groupId);
 
 				folderId = fileEntry.getFolderId();
@@ -165,7 +165,7 @@ public class GetFileAction extends PortletAction {
 		}
 		else if (fileShortcutId <= 0) {
 			if (Validator.isNotNull(title)) {
-				fileEntry = DLAppServiceUtil.getFileEntryByTitle(
+				fileEntry = DLAppServiceUtil.getFileEntry(
 					groupId, folderId, title);
 			}
 		}
@@ -220,7 +220,7 @@ public class GetFileAction extends PortletAction {
 				contentLength = (int)fileEntry.getSize();
 			}
 			else {
-				DLFileVersion fileVersion = fileEntry.getFileVersion(version);
+				FileVersion fileVersion = fileEntry.getFileVersion(version);
 
 				contentLength = (int)fileVersion.getSize();
 			}

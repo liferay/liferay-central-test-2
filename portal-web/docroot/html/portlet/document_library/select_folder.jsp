@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
-DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
+Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
 long folderId = BeanParamUtil.getLong(folder, request, "folderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 String folderName = LanguageUtil.get(pageContext, "documents-home");
@@ -62,7 +62,7 @@ if (folder != null) {
 	List resultRows = searchContainer.getResultRows();
 
 	for (int i = 0; i < results.size(); i++) {
-		DLFolder curFolder = (DLFolder)results.get(i);
+		Folder curFolder = (Folder)results.get(i);
 
 		curFolder = curFolder.toEscapedModel();
 

@@ -17,6 +17,7 @@ package com.liferay.portlet.journal.util;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
@@ -25,7 +26,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ImageLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
@@ -108,7 +108,7 @@ public class JournalRSSUtil {
 
 		List<SyndEnclosure> enclosures = new ArrayList<SyndEnclosure>();
 
-		DLFileEntry fileEntry = getDLFileEntry(url);
+		FileEntry fileEntry = getFileEntry(url);
 
 		if (fileEntry != null) {
 			SyndEnclosure enclosure = new SyndEnclosureImpl();
@@ -126,8 +126,8 @@ public class JournalRSSUtil {
 		return enclosures;
 	}
 
-	public static DLFileEntry getDLFileEntry(String url) {
-		DLFileEntry fileEntry = null;
+	public static FileEntry getFileEntry(String url) {
+		FileEntry fileEntry = null;
 
 		String queryString = HttpUtil.getQueryString(url);
 
@@ -156,8 +156,9 @@ public class JournalRSSUtil {
 				String uuid = parameters.get("uuid")[0];
 				long groupId = GetterUtil.getLong(parameters.get("groupId")[0]);
 
-				fileEntry = DLAppLocalServiceUtil.getFileEntryByUuidAndGroupId(
-					uuid, groupId);
+				fileEntry =
+					DLAppLocalServiceUtil.getFileEntryByUuidAndRepositoryId(
+						uuid, groupId);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
@@ -172,7 +173,7 @@ public class JournalRSSUtil {
 	public static List<SyndLink> getDLLinks(String portalURL, String url) {
 		List<SyndLink> links = new ArrayList<SyndLink>();
 
-		DLFileEntry fileEntry = getDLFileEntry(url);
+		FileEntry fileEntry = getFileEntry(url);
 
 		if (fileEntry != null) {
 			SyndLink link = new SyndLinkImpl();

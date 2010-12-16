@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.dao.search.ResultRow;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.repository.model.RepositoryModel;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
@@ -258,10 +259,17 @@ public class SearchContainerRowTag<R>
 		Object model = _results.get(_rowIndex);
 
 		if (isEscapedModel()) {
-			BaseModel<?> baseModel = (BaseModel<?>)model;
+			if (model instanceof RepositoryModel) {
+				RepositoryModel<?> repositoryModel = (RepositoryModel<?>)model;
 
-			model = baseModel.toEscapedModel();
-		}
+				model = repositoryModel.toEscapedModel();
+			}
+			else {
+				BaseModel<?> baseModel = (BaseModel<?>)model;
+
+				model = baseModel.toEscapedModel();
+			}
+ 		}
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(BeanPropertiesUtil.getBoolean(model, "escapedModel"));

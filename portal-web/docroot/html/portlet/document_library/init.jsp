@@ -25,6 +25,9 @@
 <%@ page import="com.liferay.documentlibrary.NoSuchFileException" %>
 <%@ page import="com.liferay.documentlibrary.SourceFileNameException" %>
 <%@ page import="com.liferay.portal.DuplicateLockException" %>
+<%@ page import="com.liferay.portal.kernel.repository.model.FileEntry" %>
+<%@ page import="com.liferay.portal.kernel.repository.model.FileVersion" %>
+<%@ page import="com.liferay.portal.kernel.repository.model.Folder" %>
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
 <%@ page import="com.liferay.portal.kernel.search.Indexer" %>
@@ -54,8 +57,6 @@
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileVersion" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFolder" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFolderConstants" %>
-<%@ page import="com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl" %>
-<%@ page import="com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLAppServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission" %>
@@ -80,7 +81,7 @@ else if (layout.isTypeControlPanel()) {
 	preferences = PortletPreferencesLocalServiceUtil.getPreferences(themeDisplay.getCompanyId(), scopeGroupId, PortletKeys.PREFS_OWNER_TYPE_GROUP, 0, PortletKeys.DOCUMENT_LIBRARY, null);
 }
 
-DLFolder rootFolder = null;
+Folder rootFolder = null;
 
 long rootFolderId = PrefsParamUtil.getLong(preferences, request, "rootFolderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 String rootFolderName = StringPool.BLANK;
@@ -170,7 +171,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 <%@ include file="/html/portlet/document_library/init-ext.jsp" %>
 
 <%!
-private static final String _getFileEntryImage(DLFileEntry fileEntry, ThemeDisplay themeDisplay) {
+private static final String _getFileEntryImage(FileEntry fileEntry, ThemeDisplay themeDisplay) {
 	StringBundler sb = new StringBundler(5);
 
 	sb.append("<img style=\"border-width: 0; text-align: left;\" src=\"");

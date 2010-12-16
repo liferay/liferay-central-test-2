@@ -14,6 +14,9 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsUtil;
+
 /**
  * @author Samuel Kong
  */
@@ -22,5 +25,13 @@ public class DLFileEntryConstants {
 	public static final int DEFAULT_READ_COUNT = 0;
 
 	public static final String DEFAULT_VERSION = "1.0";
+
+	public static final long LOCK_EXPIRATION_TIME =
+		GetterUtil.getLong(PropsUtil.get(
+			"lock.expiration.time" + getClassName()));
+
+	public static String getClassName() {
+		return DLFileEntry.class.getName();
+	}
 
 }

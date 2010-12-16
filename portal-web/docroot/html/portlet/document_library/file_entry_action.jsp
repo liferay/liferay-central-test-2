@@ -19,7 +19,7 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-DLFileEntry fileEntry = null;
+FileEntry fileEntry = null;
 DLFileShortcut fileShortcut = null;
 
 boolean view = false;
@@ -30,15 +30,15 @@ if (row != null) {
 	if (result instanceof AssetEntry) {
 		AssetEntry assetEntry = (AssetEntry)result;
 
-		if (assetEntry.getClassName().equals(DLFileEntry.class.getName())) {
+		if (assetEntry.getClassName().equals(DLFileEntryConstants.getClassName())) {
 			fileEntry = DLAppLocalServiceUtil.getFileEntry(assetEntry.getClassPK());
 		}
 		else {
 			fileShortcut = DLAppLocalServiceUtil.getFileShortcut(assetEntry.getClassPK());
 		}
 	}
-	else if (result instanceof DLFileEntry) {
-		fileEntry = (DLFileEntry)result;
+	else if (result instanceof FileEntry) {
+		fileEntry = (FileEntry)result;
 	}
 	else {
 		fileShortcut = (DLFileShortcut)result;
@@ -46,7 +46,7 @@ if (row != null) {
 }
 else {
 	if (request.getAttribute("view_file_entry.jsp-fileEntry") != null) {
-		fileEntry = (DLFileEntry)request.getAttribute("view_file_entry.jsp-fileEntry");
+		fileEntry = (FileEntry)request.getAttribute("view_file_entry.jsp-fileEntry");
 	}
 	else {
 		fileShortcut = (DLFileShortcut)request.getAttribute("view_file_shortcut.jsp-fileShortcut");
@@ -117,7 +117,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 
 			<c:if test="<%= showActions && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.PERMISSIONS) %>">
 				<liferay-security:permissionsURL
-					modelResource="<%= DLFileEntry.class.getName() %>"
+					modelResource="<%= DLFileEntryConstants.getClassName() %>"
 					modelResourceDescription="<%= HtmlUtil.unescape(fileEntry.getTitle()) %>"
 					resourcePrimKey="<%= String.valueOf(fileEntry.getFileEntryId()) %>"
 					var="permissionsURL"

@@ -15,6 +15,7 @@
 package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
@@ -23,7 +24,6 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 
 import javax.portlet.PortletMode;
@@ -99,9 +99,9 @@ public class FindFolderAction extends Action {
 		}
 
 		if (groupId <= 0) {
-			DLFolder folder = DLAppLocalServiceUtil.getFolder(folderId);
+			Folder folder = DLAppLocalServiceUtil.getFolder(folderId);
 
-			groupId = folder.getGroupId();
+			groupId = folder.getRepositoryId();
 		}
 
 		plid = PortalUtil.getPlidFromPortletId(

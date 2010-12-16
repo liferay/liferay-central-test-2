@@ -21,8 +21,8 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 
 Object[] objArray = (Object[])row.getObject();
 
-DLFileEntry fileEntry = (DLFileEntry)objArray[0];
-DLFileVersion fileVersion = (DLFileVersion)objArray[1];
+FileEntry fileEntry = (FileEntry)objArray[0];
+FileVersion fileVersion = (FileVersion)objArray[1];
 String[] conversions = (String[])objArray[3];
 Boolean isLocked = (Boolean)objArray[4];
 Boolean hasLock = (Boolean)objArray[5];

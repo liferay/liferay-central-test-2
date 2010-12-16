@@ -55,18 +55,18 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class DLAppServiceSoap {
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap addFileEntry(
-		long groupId, long folderId, java.lang.String title,
+	public static com.liferay.portal.kernel.repository.model.FileEntry addFileEntry(
+		long repositoryId, long folderId, java.lang.String title,
 		java.lang.String description, java.lang.String changeLog,
 		java.lang.String extraSettings, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLAppServiceUtil.addFileEntry(groupId,
+			com.liferay.portal.kernel.repository.model.FileEntry returnValue = DLAppServiceUtil.addFileEntry(repositoryId,
 					folderId, title, description, changeLog, extraSettings,
 					bytes, serviceContext);
 
-			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -76,12 +76,12 @@ public class DLAppServiceSoap {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap addFileShortcut(
-		long groupId, long folderId, long toFileEntryId,
+		long repositoryId, long folderId, long toFileEntryId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileShortcut returnValue =
-				DLAppServiceUtil.addFileShortcut(groupId, folderId,
+				DLAppServiceUtil.addFileShortcut(repositoryId, folderId,
 					toFileEntryId, serviceContext);
 
 			return com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap.toSoapModel(returnValue);
@@ -93,16 +93,16 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap addFolder(
-		long groupId, long parentFolderId, java.lang.String name,
+	public static com.liferay.portal.kernel.repository.model.Folder addFolder(
+		long repositoryId, long parentFolderId, java.lang.String name,
 		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLAppServiceUtil.addFolder(groupId,
+			com.liferay.portal.kernel.repository.model.Folder returnValue = DLAppServiceUtil.addFolder(repositoryId,
 					parentFolderId, name, description, serviceContext);
 
-			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -111,17 +111,17 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap copyFolder(
-		long groupId, long sourceFolderId, long parentFolderId,
+	public static com.liferay.portal.kernel.repository.model.Folder copyFolder(
+		long repositoryId, long sourceFolderId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLAppServiceUtil.copyFolder(groupId,
+			com.liferay.portal.kernel.repository.model.Folder returnValue = DLAppServiceUtil.copyFolder(repositoryId,
 					sourceFolderId, parentFolderId, name, description,
 					serviceContext);
 
-			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -142,11 +142,11 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static void deleteFileEntryByTitle(long groupId, long folderId,
-		java.lang.String titleWithExtension) throws RemoteException {
+	public static void deleteFileEntryByTitle(long repositoryId, long folderId,
+		java.lang.String title) throws RemoteException {
 		try {
-			DLAppServiceUtil.deleteFileEntryByTitle(groupId, folderId,
-				titleWithExtension);
+			DLAppServiceUtil.deleteFileEntryByTitle(repositoryId, folderId,
+				title);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -178,10 +178,10 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static void deleteFolder(long groupId, long parentFolderId,
+	public static void deleteFolder(long repositoryId, long parentFolderId,
 		java.lang.String name) throws RemoteException {
 		try {
-			DLAppServiceUtil.deleteFolder(groupId, parentFolderId, name);
+			DLAppServiceUtil.deleteFolder(repositoryId, parentFolderId, name);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -190,11 +190,11 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
-		long groupId, long folderId) throws RemoteException {
+	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
+		long repositoryId, long folderId) throws RemoteException {
 		try {
-			java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> returnValue =
-				DLAppServiceUtil.getFileEntries(groupId, folderId);
+			java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> returnValue =
+				DLAppServiceUtil.getFileEntries(repositoryId, folderId);
 
 			return returnValue;
 		}
@@ -205,12 +205,13 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
-		long groupId, long folderId, int start, int end)
+	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
+		long repositoryId, long folderId, int start, int end)
 		throws RemoteException {
 		try {
-			java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> returnValue =
-				DLAppServiceUtil.getFileEntries(groupId, folderId, start, end);
+			java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> returnValue =
+				DLAppServiceUtil.getFileEntries(repositoryId, folderId, start,
+					end);
 
 			return returnValue;
 		}
@@ -221,14 +222,14 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
-		long groupId, long folderId, int start, int end,
+	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
+		long repositoryId, long folderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws RemoteException {
 		try {
-			java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> returnValue =
-				DLAppServiceUtil.getFileEntries(groupId, folderId, start, end,
-					obc);
+			java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> returnValue =
+				DLAppServiceUtil.getFileEntries(repositoryId, folderId, start,
+					end, obc);
 
 			return returnValue;
 		}
@@ -239,10 +240,10 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static int getFileEntriesAndFileShortcutsCount(long groupId,
+	public static int getFileEntriesAndFileShortcutsCount(long repositoryId,
 		Long[] folderIds, int status) throws RemoteException {
 		try {
-			int returnValue = DLAppServiceUtil.getFileEntriesAndFileShortcutsCount(groupId,
+			int returnValue = DLAppServiceUtil.getFileEntriesAndFileShortcutsCount(repositoryId,
 					ListUtil.toList(folderIds), status);
 
 			return returnValue;
@@ -254,10 +255,10 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static int getFileEntriesAndFileShortcutsCount(long groupId,
+	public static int getFileEntriesAndFileShortcutsCount(long repositoryId,
 		long folderId, int status) throws RemoteException {
 		try {
-			int returnValue = DLAppServiceUtil.getFileEntriesAndFileShortcutsCount(groupId,
+			int returnValue = DLAppServiceUtil.getFileEntriesAndFileShortcutsCount(repositoryId,
 					folderId, status);
 
 			return returnValue;
@@ -269,10 +270,10 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static int getFileEntriesCount(long groupId, long folderId)
+	public static int getFileEntriesCount(long repositoryId, long folderId)
 		throws RemoteException {
 		try {
-			int returnValue = DLAppServiceUtil.getFileEntriesCount(groupId,
+			int returnValue = DLAppServiceUtil.getFileEntriesCount(repositoryId,
 					folderId);
 
 			return returnValue;
@@ -284,12 +285,12 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap getFileEntry(
+	public static com.liferay.portal.kernel.repository.model.FileEntry getFileEntry(
 		long fileEntryId) throws RemoteException {
 		try {
-			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLAppServiceUtil.getFileEntry(fileEntryId);
+			com.liferay.portal.kernel.repository.model.FileEntry returnValue = DLAppServiceUtil.getFileEntry(fileEntryId);
 
-			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -298,14 +299,14 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap getFileEntryByTitle(
-		long groupId, long folderId, java.lang.String titleWithExtension)
+	public static com.liferay.portal.kernel.repository.model.FileEntry getFileEntry(
+		long repositoryId, long folderId, java.lang.String title)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLAppServiceUtil.getFileEntryByTitle(groupId,
-					folderId, titleWithExtension);
+			com.liferay.portal.kernel.repository.model.FileEntry returnValue = DLAppServiceUtil.getFileEntry(repositoryId,
+					folderId, title);
 
-			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -314,13 +315,13 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap getFileEntryByUuidAndGroupId(
-		java.lang.String uuid, long groupId) throws RemoteException {
+	public static com.liferay.portal.kernel.repository.model.FileEntry getFileEntryByUuidAndRepositoryId(
+		java.lang.String uuid, long repositoryId) throws RemoteException {
 		try {
-			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLAppServiceUtil.getFileEntryByUuidAndGroupId(uuid,
-					groupId);
+			com.liferay.portal.kernel.repository.model.FileEntry returnValue = DLAppServiceUtil.getFileEntryByUuidAndRepositoryId(uuid,
+					repositoryId);
 
-			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -344,41 +345,10 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap getFolder(
+	public static com.liferay.portal.kernel.repository.model.Folder getFolder(
 		long folderId) throws RemoteException {
 		try {
-			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLAppServiceUtil.getFolder(folderId);
-
-			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap getFolder(
-		long groupId, long parentFolderId, java.lang.String name)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLAppServiceUtil.getFolder(groupId,
-					parentFolderId, name);
-
-			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
-		long groupId, long parentFolderId) throws RemoteException {
-		try {
-			java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> returnValue =
-				DLAppServiceUtil.getFolders(groupId, parentFolderId);
+			com.liferay.portal.kernel.repository.model.Folder returnValue = DLAppServiceUtil.getFolder(folderId);
 
 			return returnValue;
 		}
@@ -389,12 +359,44 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
-		long groupId, long parentFolderId, int start, int end)
+	public static com.liferay.portal.kernel.repository.model.Folder getFolder(
+		long repositoryId, long parentFolderId, java.lang.String name)
 		throws RemoteException {
 		try {
-			java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> returnValue =
-				DLAppServiceUtil.getFolders(groupId, parentFolderId, start, end);
+			com.liferay.portal.kernel.repository.model.Folder returnValue = DLAppServiceUtil.getFolder(repositoryId,
+					parentFolderId, name);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.util.List<com.liferay.portal.kernel.repository.model.Folder> getFolders(
+		long repositoryId, long parentFolderId) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portal.kernel.repository.model.Folder> returnValue =
+				DLAppServiceUtil.getFolders(repositoryId, parentFolderId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.util.List<com.liferay.portal.kernel.repository.model.Folder> getFolders(
+		long repositoryId, long parentFolderId, int start, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portal.kernel.repository.model.Folder> returnValue =
+				DLAppServiceUtil.getFolders(repositoryId, parentFolderId,
+					start, end);
 
 			return returnValue;
 		}
@@ -406,9 +408,10 @@ public class DLAppServiceSoap {
 	}
 
 	public static int getFoldersAndFileEntriesAndFileShortcutsCount(
-		long groupId, Long[] folderIds, int status) throws RemoteException {
+		long repositoryId, Long[] folderIds, int status)
+		throws RemoteException {
 		try {
-			int returnValue = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(groupId,
+			int returnValue = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(repositoryId,
 					ListUtil.toList(folderIds), status);
 
 			return returnValue;
@@ -421,9 +424,9 @@ public class DLAppServiceSoap {
 	}
 
 	public static int getFoldersAndFileEntriesAndFileShortcutsCount(
-		long groupId, long folderId, int status) throws RemoteException {
+		long repositoryId, long folderId, int status) throws RemoteException {
 		try {
-			int returnValue = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(groupId,
+			int returnValue = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(repositoryId,
 					folderId, status);
 
 			return returnValue;
@@ -435,10 +438,10 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static int getFoldersCount(long groupId, long parentFolderId)
+	public static int getFoldersCount(long repositoryId, long parentFolderId)
 		throws RemoteException {
 		try {
-			int returnValue = DLAppServiceUtil.getFoldersCount(groupId,
+			int returnValue = DLAppServiceUtil.getFoldersCount(repositoryId,
 					parentFolderId);
 
 			return returnValue;
@@ -450,10 +453,10 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static int getFoldersFileEntriesCount(long groupId,
+	public static int getFoldersFileEntriesCount(long repositoryId,
 		Long[] folderIds, int status) throws RemoteException {
 		try {
-			int returnValue = DLAppServiceUtil.getFoldersFileEntriesCount(groupId,
+			int returnValue = DLAppServiceUtil.getFoldersFileEntriesCount(repositoryId,
 					ListUtil.toList(folderIds), status);
 
 			return returnValue;
@@ -465,12 +468,13 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getGroupFileEntries(
-		long groupId, long userId, int start, int end)
+	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getGroupFileEntries(
+		long repositoryId, long userId, int start, int end)
 		throws RemoteException {
 		try {
-			java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> returnValue =
-				DLAppServiceUtil.getGroupFileEntries(groupId, userId, start, end);
+			java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> returnValue =
+				DLAppServiceUtil.getGroupFileEntries(repositoryId, userId,
+					start, end);
 
 			return returnValue;
 		}
@@ -481,14 +485,14 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getGroupFileEntries(
-		long groupId, long userId, int start, int end,
+	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getGroupFileEntries(
+		long repositoryId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws RemoteException {
 		try {
-			java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> returnValue =
-				DLAppServiceUtil.getGroupFileEntries(groupId, userId, start,
-					end, obc);
+			java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> returnValue =
+				DLAppServiceUtil.getGroupFileEntries(repositoryId, userId,
+					start, end, obc);
 
 			return returnValue;
 		}
@@ -499,12 +503,12 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getGroupFileEntries(
-		long groupId, long userId, long rootFolderId, int start, int end)
+	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getGroupFileEntries(
+		long repositoryId, long userId, long rootFolderId, int start, int end)
 		throws RemoteException {
 		try {
-			java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> returnValue =
-				DLAppServiceUtil.getGroupFileEntries(groupId, userId,
+			java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> returnValue =
+				DLAppServiceUtil.getGroupFileEntries(repositoryId, userId,
 					rootFolderId, start, end);
 
 			return returnValue;
@@ -516,13 +520,13 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getGroupFileEntries(
-		long groupId, long userId, long rootFolderId, int start, int end,
+	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getGroupFileEntries(
+		long repositoryId, long userId, long rootFolderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws RemoteException {
 		try {
-			java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> returnValue =
-				DLAppServiceUtil.getGroupFileEntries(groupId, userId,
+			java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> returnValue =
+				DLAppServiceUtil.getGroupFileEntries(repositoryId, userId,
 					rootFolderId, start, end, obc);
 
 			return returnValue;
@@ -534,10 +538,10 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static int getGroupFileEntriesCount(long groupId, long userId)
+	public static int getGroupFileEntriesCount(long repositoryId, long userId)
 		throws RemoteException {
 		try {
-			int returnValue = DLAppServiceUtil.getGroupFileEntriesCount(groupId,
+			int returnValue = DLAppServiceUtil.getGroupFileEntriesCount(repositoryId,
 					userId);
 
 			return returnValue;
@@ -549,10 +553,10 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static int getGroupFileEntriesCount(long groupId, long userId,
+	public static int getGroupFileEntriesCount(long repositoryId, long userId,
 		long rootFolderId) throws RemoteException {
 		try {
-			int returnValue = DLAppServiceUtil.getGroupFileEntriesCount(groupId,
+			int returnValue = DLAppServiceUtil.getGroupFileEntriesCount(repositoryId,
 					userId, rootFolderId);
 
 			return returnValue;
@@ -564,11 +568,11 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static void getSubfolderIds(Long[] folderIds, long groupId,
+	public static void getSubfolderIds(Long[] folderIds, long repositoryId,
 		long folderId) throws RemoteException {
 		try {
 			DLAppServiceUtil.getSubfolderIds(ListUtil.toList(folderIds),
-				groupId, folderId);
+				repositoryId, folderId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -577,11 +581,11 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static void getSubfolderIds(Long[] folderIds, long groupId,
+	public static void getSubfolderIds(Long[] folderIds, long repositoryId,
 		long folderId, boolean recurse) throws RemoteException {
 		try {
 			DLAppServiceUtil.getSubfolderIds(ListUtil.toList(folderIds),
-				groupId, folderId, recurse);
+				repositoryId, folderId, recurse);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -590,71 +594,15 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static boolean hasFileEntryLock(long fileEntryId)
-		throws RemoteException {
-		try {
-			boolean returnValue = DLAppServiceUtil.hasFileEntryLock(fileEntryId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static boolean hasInheritableLock(long folderId)
-		throws RemoteException {
-		try {
-			boolean returnValue = DLAppServiceUtil.hasInheritableLock(folderId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static boolean isFileEntryLocked(long fileEntryId)
-		throws RemoteException {
-		try {
-			boolean returnValue = DLAppServiceUtil.isFileEntryLocked(fileEntryId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static boolean isFolderLocked(long folderId)
-		throws RemoteException {
-		try {
-			boolean returnValue = DLAppServiceUtil.isFolderLocked(folderId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap moveFileEntry(
+	public static com.liferay.portal.kernel.repository.model.FileEntry moveFileEntry(
 		long fileEntryId, long newFolderId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLAppServiceUtil.moveFileEntry(fileEntryId,
+			com.liferay.portal.kernel.repository.model.FileEntry returnValue = DLAppServiceUtil.moveFileEntry(fileEntryId,
 					newFolderId, serviceContext);
 
-			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -702,10 +650,10 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static void unlockFolder(long groupId, long folderId,
+	public static void unlockFolder(long repositoryId, long folderId,
 		java.lang.String lockUuid) throws RemoteException {
 		try {
-			DLAppServiceUtil.unlockFolder(groupId, folderId, lockUuid);
+			DLAppServiceUtil.unlockFolder(repositoryId, folderId, lockUuid);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -714,11 +662,11 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static void unlockFolder(long groupId, long parentFolderId,
+	public static void unlockFolder(long repositoryId, long parentFolderId,
 		java.lang.String name, java.lang.String lockUuid)
 		throws RemoteException {
 		try {
-			DLAppServiceUtil.unlockFolder(groupId, parentFolderId, name,
+			DLAppServiceUtil.unlockFolder(repositoryId, parentFolderId, name,
 				lockUuid);
 		}
 		catch (Exception e) {
@@ -728,7 +676,7 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap updateFileEntry(
+	public static com.liferay.portal.kernel.repository.model.FileEntry updateFileEntry(
 		long fileEntryId, java.lang.String sourceFileName,
 		java.lang.String title, java.lang.String description,
 		java.lang.String changeLog, boolean majorVersion,
@@ -736,11 +684,11 @@ public class DLAppServiceSoap {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLAppServiceUtil.updateFileEntry(fileEntryId,
+			com.liferay.portal.kernel.repository.model.FileEntry returnValue = DLAppServiceUtil.updateFileEntry(fileEntryId,
 					sourceFileName, title, description, changeLog,
 					majorVersion, extraSettings, bytes, serviceContext);
 
-			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -767,29 +715,14 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap updateFolder(
+	public static com.liferay.portal.kernel.repository.model.Folder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLAppServiceUtil.updateFolder(folderId,
+			com.liferay.portal.kernel.repository.model.Folder returnValue = DLAppServiceUtil.updateFolder(folderId,
 					parentFolderId, name, description, serviceContext);
-
-			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static boolean verifyFileEntryLock(long fileEntryId,
-		java.lang.String lockUuid) throws RemoteException {
-		try {
-			boolean returnValue = DLAppServiceUtil.verifyFileEntryLock(fileEntryId,
-					lockUuid);
 
 			return returnValue;
 		}
@@ -800,11 +733,26 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static boolean verifyInheritableLock(long folderId,
-		java.lang.String lockUuid) throws RemoteException {
+	public static boolean verifyFileEntryLock(long repositoryId,
+		long fileEntryId, java.lang.String lockUuid) throws RemoteException {
 		try {
-			boolean returnValue = DLAppServiceUtil.verifyInheritableLock(folderId,
-					lockUuid);
+			boolean returnValue = DLAppServiceUtil.verifyFileEntryLock(repositoryId,
+					fileEntryId, lockUuid);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static boolean verifyInheritableLock(long repositoryId,
+		long folderId, java.lang.String lockUuid) throws RemoteException {
+		try {
+			boolean returnValue = DLAppServiceUtil.verifyInheritableLock(repositoryId,
+					folderId, lockUuid);
 
 			return returnValue;
 		}

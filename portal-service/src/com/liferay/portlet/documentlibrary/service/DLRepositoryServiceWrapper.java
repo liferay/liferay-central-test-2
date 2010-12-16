@@ -66,12 +66,11 @@ public class DLRepositoryServiceWrapper implements DLRepositoryService {
 		_dlRepositoryService.deleteFileEntry(fileEntryId);
 	}
 
-	public void deleteFileEntryByTitle(long groupId, long folderId,
-		java.lang.String titleWithExtension)
+	public void deleteFileEntry(long groupId, long folderId,
+		java.lang.String title)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_dlRepositoryService.deleteFileEntryByTitle(groupId, folderId,
-			titleWithExtension);
+		_dlRepositoryService.deleteFileEntry(groupId, folderId, title);
 	}
 
 	public void deleteFolder(long folderId)
@@ -133,12 +132,11 @@ public class DLRepositoryServiceWrapper implements DLRepositoryService {
 		return _dlRepositoryService.getFileEntry(fileEntryId);
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
-		long groupId, long folderId, java.lang.String titleWithExtension)
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
+		long groupId, long folderId, java.lang.String title)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlRepositoryService.getFileEntryByTitle(groupId, folderId,
-			titleWithExtension);
+		return _dlRepositoryService.getFileEntry(groupId, folderId, title);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByUuidAndGroupId(
@@ -226,6 +224,12 @@ public class DLRepositoryServiceWrapper implements DLRepositoryService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlRepositoryService.hasFileEntryLock(fileEntryId);
+	}
+
+	public boolean hasFolderLock(long folderId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlRepositoryService.hasFolderLock(folderId);
 	}
 
 	public boolean hasInheritableLock(long folderId)

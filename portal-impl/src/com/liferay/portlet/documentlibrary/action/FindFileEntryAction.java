@@ -15,6 +15,7 @@
 package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
@@ -23,7 +24,6 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 
 import javax.portlet.PortletMode;
@@ -95,10 +95,10 @@ public class FindFileEntryAction extends Action {
 			}
 		}
 
-		DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(fileEntryId);
+		FileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(fileEntryId);
 
 		plid = PortalUtil.getPlidFromPortletId(
-			fileEntry.getGroupId(), PortletKeys.DOCUMENT_LIBRARY);
+			fileEntry.getRepositoryId(), PortletKeys.DOCUMENT_LIBRARY);
 
 		if (plid != LayoutConstants.DEFAULT_PLID) {
 			return plid;

@@ -19,6 +19,7 @@ import com.liferay.documentlibrary.FileNameException;
 import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.documentlibrary.SourceFileNameException;
 import com.liferay.portal.DuplicateLockException;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.servlet.ServletResponseConstants;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
@@ -264,7 +265,7 @@ public class EditFileEntryAction extends PortletAction {
 
 			// Add file entry
 
-			DLFileEntry fileEntry = DLAppServiceUtil.addFileEntry(
+			FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
 				themeDisplay.getScopeGroupId(), folderId, title, description,
 				changeLog, extraSettings, file, serviceContext);
 

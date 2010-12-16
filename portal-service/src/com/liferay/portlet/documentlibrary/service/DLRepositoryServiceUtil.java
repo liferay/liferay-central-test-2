@@ -78,12 +78,11 @@ public class DLRepositoryServiceUtil {
 		getService().deleteFileEntry(fileEntryId);
 	}
 
-	public static void deleteFileEntryByTitle(long groupId, long folderId,
-		java.lang.String titleWithExtension)
+	public static void deleteFileEntry(long groupId, long folderId,
+		java.lang.String title)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.deleteFileEntryByTitle(groupId, folderId, titleWithExtension);
+		getService().deleteFileEntry(groupId, folderId, title);
 	}
 
 	public static void deleteFolder(long folderId)
@@ -146,12 +145,11 @@ public class DLRepositoryServiceUtil {
 		return getService().getFileEntry(fileEntryId);
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
-		long groupId, long folderId, java.lang.String titleWithExtension)
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
+		long groupId, long folderId, java.lang.String title)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getFileEntryByTitle(groupId, folderId, titleWithExtension);
+		return getService().getFileEntry(groupId, folderId, title);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByUuidAndGroupId(
@@ -242,6 +240,12 @@ public class DLRepositoryServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().hasFileEntryLock(fileEntryId);
+	}
+
+	public static boolean hasFolderLock(long folderId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().hasFolderLock(folderId);
 	}
 
 	public static boolean hasInheritableLock(long folderId)

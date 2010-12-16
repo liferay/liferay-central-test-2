@@ -17,6 +17,8 @@ package com.liferay.portlet.documentlibrary.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
@@ -27,9 +29,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 
@@ -53,11 +53,11 @@ import javax.servlet.http.HttpServletRequest;
 public class DLUtil {
 
 	public static void addPortletBreadcrumbEntries(
-			DLFileEntry fileEntry, HttpServletRequest request,
+			FileEntry fileEntry, HttpServletRequest request,
 			RenderResponse renderResponse)
 		throws Exception {
 
-		DLFolder folder = fileEntry.getFolder();
+		Folder folder = fileEntry.getFolder();
 
 		if (folder.getFolderId() !=
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
@@ -71,7 +71,7 @@ public class DLUtil {
 			"struts_action", "/document_library/view_file_entry");
 		portletURL.setParameter(
 			"folderId", String.valueOf(fileEntry.getFolderId()));
-		portletURL.setParameter("name", fileEntry.getName());
+		portletURL.setParameter("title", fileEntry.getTitle());
 
 		PortalUtil.addPortletBreadcrumbEntry(
 			request, fileEntry.getTitle(), portletURL.toString());
@@ -82,7 +82,7 @@ public class DLUtil {
 			RenderResponse renderResponse)
 		throws Exception {
 
-		DLFolder folder = fileShortcut.getFolder();
+		Folder folder = fileShortcut.getFolder();
 
 		if (folder.getFolderId() !=
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
@@ -107,7 +107,7 @@ public class DLUtil {
 		throws Exception {
 
 		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			DLFolder folder = DLAppLocalServiceUtil.getFolder(folderId);
+			Folder folder = DLAppLocalServiceUtil.getFolder(folderId);
 
 			if (folder.getFolderId() !=
 					DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
@@ -118,7 +118,7 @@ public class DLUtil {
 	}
 
 	public static void addPortletBreadcrumbEntries(
-			DLFolder folder, HttpServletRequest request,
+			Folder folder, HttpServletRequest request,
 			RenderResponse renderResponse)
 		throws Exception {
 
@@ -159,7 +159,7 @@ public class DLUtil {
 				"rootFolderId",
 				String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)));
 
-		List<DLFolder> ancestorFolders = Collections.EMPTY_LIST;
+		List<Folder> ancestorFolders = Collections.EMPTY_LIST;
 
 		if (folder.getFolderId() != defaultFolderId) {
 			ancestorFolders = folder.getAncestors();
@@ -167,7 +167,7 @@ public class DLUtil {
 			int indexOfRootFolder = -1;
 
 			for (int i = 0; i < ancestorFolders.size(); i++) {
-				DLFolder ancestorFolder = ancestorFolders.get(i);
+				Folder ancestorFolder = ancestorFolders.get(i);
 
 				if (defaultFolderId == ancestorFolder.getFolderId()) {
 					indexOfRootFolder = i;
@@ -181,7 +181,7 @@ public class DLUtil {
 
 		Collections.reverse(ancestorFolders);
 
-		for (DLFolder ancestorFolder : ancestorFolders) {
+		for (Folder ancestorFolder : ancestorFolders) {
 			portletURL.setParameter(
 				"folderId", String.valueOf(ancestorFolder.getFolderId()));
 

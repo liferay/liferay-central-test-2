@@ -16,15 +16,16 @@ package com.liferay.portal.editor.fckeditor.receiver.impl;
 
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.repository.liferayrepository.model.LiferayFolder;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
@@ -47,7 +48,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		try {
 			Group group = arg.getCurrentGroup();
 
-			DLFolder folder = _getFolder(
+			Folder folder = _getFolder(
 				group.getGroupId(), StringPool.SLASH + arg.getCurrentFolder());
 
 			long parentFolderId = folder.getFolderId();
@@ -76,7 +77,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		try {
 			Group group = arg.getCurrentGroup();
 
-			DLFolder folder = _getFolder(
+			Folder folder = _getFolder(
 				group.getGroupId(), arg.getCurrentFolder());
 
 			long folderId = folder.getFolderId();
@@ -139,13 +140,13 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 
 		Group group = arg.getCurrentGroup();
 
-		DLFolder folder = _getFolder(
+		Folder folder = _getFolder(
 			group.getGroupId(), arg.getCurrentFolder());
 
-		List<DLFileEntry> fileEntries = DLAppServiceUtil.getFileEntries(
-			folder.getGroupId(), folder.getFolderId());
+		List<FileEntry> fileEntries = DLAppServiceUtil.getFileEntries(
+			group.getGroupId(), folder.getFolderId());
 
-		for (DLFileEntry fileEntry : fileEntries) {
+		for (FileEntry fileEntry : fileEntries) {
 			Element fileEl = doc.createElement("File");
 
 			filesEl.appendChild(fileEl);
@@ -162,33 +163,35 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			url.append("/document_library/get_file?uuid=");
 			url.append(fileEntry.getUuid());
 			url.append("&groupId=");
-			url.append(folder.getGroupId());
+			url.append(group.getGroupId());
 
 			fileEl.setAttribute("url", url.toString());
 		}
 	}
 
-	private DLFolder _getFolder(long groupId, String folderName)
+	private Folder _getFolder(long groupId, String folderName)
 		throws Exception {
 
-		DLFolder folder = new DLFolderImpl();
-
-		folder.setFolderId(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-		folder.setGroupId(groupId);
-
 		if (folderName.equals(StringPool.SLASH)) {
-			return folder;
+			DLFolderImpl folder = new DLFolderImpl();
+
+			folder.setFolderId(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+			folder.setGroupId(groupId);
+
+			return new LiferayFolder(folder);
 		}
 
 		StringTokenizer st = new StringTokenizer(folderName, StringPool.SLASH);
 
+		Folder folder = null;
+
 		while (st.hasMoreTokens()) {
 			String curFolderName = st.nextToken();
 
-			List<DLFolder> folders = DLAppServiceUtil.getFolders(
+			List<Folder> folders = DLAppServiceUtil.getFolders(
 				groupId, folder.getFolderId());
 
-			for (DLFolder curFolder : folders) {
+			for (Folder curFolder : folders) {
 				if (curFolder.getName().equals(curFolderName)) {
 					folder = curFolder;
 
@@ -213,13 +216,13 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		else {
 			Group group = arg.getCurrentGroup();
 
-			DLFolder folder = _getFolder(
+			Folder folder = _getFolder(
 				group.getGroupId(), arg.getCurrentFolder());
 
-			List<DLFolder> folders = DLAppServiceUtil.getFolders(
+			List<Folder> folders = DLAppServiceUtil.getFolders(
 				group.getGroupId(), folder.getFolderId());
 
-			for (DLFolder curFolder : folders) {
+			for (Folder curFolder : folders) {
 				Element folderEl = doc.createElement("Folder");
 
 				foldersEl.appendChild(folderEl);

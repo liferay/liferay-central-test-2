@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.documentlibrary.social;
 
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -45,11 +46,12 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(
+		FileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(
 			activity.getClassPK());
 
 		if (!DLFileEntryPermission.contains(
-				permissionChecker, fileEntry, ActionKeys.VIEW)) {
+				permissionChecker, fileEntry.getFileEntryId(),
+				ActionKeys.VIEW)) {
 
 			return null;
 		}
@@ -69,9 +71,10 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String link =
 			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
-				"/document_library/get_file?groupId=" + fileEntry.getGroupId() +
-					"&folderId=" + fileEntry.getFolderId() + "&title=" +
-						HttpUtil.encodeURL(fileEntry.getTitle());
+				"/document_library/get_file?groupId=" +
+					fileEntry.getRepositoryId() + "&folderId=" +
+						fileEntry.getFolderId() + "&title=" +
+							HttpUtil.encodeURL(fileEntry.getTitle());
 
 		// Title
 
@@ -112,7 +115,7 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 		String folderLink =
 			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 				"/document_library/find_folder?groupId=" +
-					fileEntry.getGroupId() + "&folderId=" +
+					fileEntry.getRepositoryId() + "&folderId=" +
 						fileEntry.getFolderId();
 
 		sb.append(wrapLink(folderLink, "go-to-folder", themeDisplay));

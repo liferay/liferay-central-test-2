@@ -32,7 +32,7 @@ if (searchFolderId > 0) {
 else {
 	List folderIds = new ArrayList();
 
-	long folderId = DLFileEntryImpl.getFolderId(scopeGroupId, DLFileEntryImpl.getRepositoryId(scopeGroupId, searchFolderIds));
+	long folderId = DLFolderConstants.getFolderId(scopeGroupId, searchFolderIds);
 
 	folderIds.add(new Long(folderId));
 
@@ -81,7 +81,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-documents-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>"));
 
 	try {
-		Indexer indexer = IndexerRegistryUtil.getIndexer(DLFileEntry.class);
+		Indexer indexer = IndexerRegistryUtil.getIndexer(DLFileEntryConstants.getClassName());
 
 		SearchContext searchContext = SearchContextFactory.getInstance(request);
 
@@ -117,7 +117,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 				folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 			}
 
-			DLFileEntry fileEntry = null;
+			FileEntry fileEntry = null;
 
 			try {
 				fileEntry = DLAppLocalServiceUtil.getFileEntry(fileEntryId);
@@ -132,7 +132,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 			row.setObject(fileEntry);
 
-			DLFolder folder = fileEntry.getFolder();
+			Folder folder = fileEntry.getFolder();
 
 			String rowHREF = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + scopeGroupId + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle()));
 

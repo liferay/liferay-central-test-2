@@ -88,7 +88,7 @@ for (int j = 0; j < folderColumns.length; j++) {
 						buffer.append("</u>: ");
 
 						for (int k = 0; k < subfolders.size(); k++) {
-							DLFolder subfolder = (DLFolder)subfolders.get(k);
+							Folder subfolder = (Folder)subfolders.get(k);
 
 							rowURL.setParameter("folderId", String.valueOf(subfolder.getFolderId()));
 
@@ -124,7 +124,7 @@ for (int j = 0; j < folderColumns.length; j++) {
 		<c:when test='<%= folderColumn.equals("locked") %>'>
 
 			<%
-			boolean isLocked = DLAppServiceUtil.isFolderLocked(curFolder.getFolderId());
+			boolean isLocked = curFolder.isLocked();
 			%>
 
 			<liferay-ui:search-container-column-text

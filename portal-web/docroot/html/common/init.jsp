@@ -80,6 +80,7 @@
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletResponse" %>
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletURL" %>
 <%@ page import="com.liferay.portal.kernel.portlet.LiferayWindowState" %>
+<%@ page import="com.liferay.portal.kernel.repository.model.RepositoryModel" %>
 <%@ page import="com.liferay.portal.kernel.search.Field" %>
 <%@ page import="com.liferay.portal.kernel.servlet.BrowserSnifferUtil" %>
 <%@ page import="com.liferay.portal.kernel.servlet.ImageServletTokenUtil" %>

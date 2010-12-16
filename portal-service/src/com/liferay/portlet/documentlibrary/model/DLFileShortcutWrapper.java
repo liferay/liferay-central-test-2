@@ -443,7 +443,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 		return _dlFileShortcut.toXmlString();
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder() {
+	public com.liferay.portal.kernel.repository.model.Folder getFolder() {
 		return _dlFileShortcut.getFolder();
 	}
 

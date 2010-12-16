@@ -71,7 +71,7 @@ public interface DLFileEntry extends DLFileEntryModel {
 
 	public long getRepositoryId();
 
-	public boolean hasLock(long userId);
+	public boolean hasLock();
 
 	public boolean isLocked();
 

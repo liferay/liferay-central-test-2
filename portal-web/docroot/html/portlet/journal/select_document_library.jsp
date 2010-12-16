@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
-DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
+Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
 long folderId = BeanParamUtil.getLong(folder, request, "folderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
@@ -61,7 +61,7 @@ if (folder != null) {
 	List resultRows = searchContainer.getResultRows();
 
 	for (int i = 0; i < results.size(); i++) {
-		DLFolder curFolder = (DLFolder)results.get(i);
+		Folder curFolder = (Folder)results.get(i);
 
 		ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
 
@@ -136,7 +136,7 @@ if (folder != null) {
 	resultRows = searchContainer.getResultRows();
 
 	for (int i = 0; i < results.size(); i++) {
-		DLFileEntry fileEntry = (DLFileEntry)results.get(i);
+		FileEntry fileEntry = (FileEntry)results.get(i);
 
 		ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
 
@@ -165,7 +165,7 @@ if (folder != null) {
 
 		// Locked
 
-		boolean isLocked = DLAppServiceUtil.isFileEntryLocked(fileEntry.getFileEntryId());
+		boolean isLocked = fileEntry.isLocked();
 
 		row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowHREF);
 

@@ -19,7 +19,7 @@
 <%
 String topLink = ParamUtil.getString(request, "topLink", "documents-home");
 
-DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
+Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
 long defaultFolderId = GetterUtil.getLong(preferences.getValue("rootFolderId", StringPool.BLANK), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
@@ -113,7 +113,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 				String parentFolderName = LanguageUtil.get(pageContext, "documents-home");
 
 				if (!folder.isRoot()) {
-					DLFolder parentFolder = folder.getParentFolder();
+					Folder parentFolder = folder.getParentFolder();
 
 					parentFolderId = parentFolder.getFolderId();
 
@@ -158,9 +158,9 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 							</div>
 						</div>
 
-						<liferay-ui:custom-attributes-available className="<%= DLFolder.class.getName() %>">
+						<liferay-ui:custom-attributes-available className="<%= DLFolderConstants.getClassName() %>">
 							<liferay-ui:custom-attribute-list
-								className="<%= DLFolder.class.getName() %>"
+								className="<%= DLFolderConstants.getClassName() %>"
 								classPK="<%= (folder != null) ? folder.getFolderId() : 0 %>"
 								editable="<%= false %>"
 								label="<%= true %>"
@@ -183,7 +183,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 								/>
 
 								<liferay-ui:search-container-row
-									className="com.liferay.portlet.documentlibrary.model.DLFolder"
+									className="com.liferay.portal.kernel.repository.model.Folder"
 									escapedModel="<%= true %>"
 									keyProperty="folderId"
 									modelVar="curFolder"
@@ -276,7 +276,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 				/>
 
 				<liferay-ui:search-container-row
-					className="com.liferay.portlet.documentlibrary.model.DLFileEntry"
+					className="com.liferay.portal.kernel.repository.model.FileEntry"
 					escapedModel="<%= true %>"
 					keyProperty="fileEntryId"
 					modelVar="fileEntry"

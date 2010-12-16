@@ -16,13 +16,14 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+<%@ page import="com.liferay.portal.kernel.repository.model.FileEntry" %>
 <%@ page import="com.liferay.portal.kernel.search.OpenSearch" %>
 <%@ page import="com.liferay.portal.kernel.search.OpenSearchUtil" %>
 <%@ page import="com.liferay.portal.kernel.search.SearchException" %>
 <%@ page import="com.liferay.portal.kernel.xml.Document" %>
 <%@ page import="com.liferay.portal.kernel.xml.Element" %>
 <%@ page import="com.liferay.portal.kernel.xml.SAXReaderUtil" %>
-<%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntry" %>
+<%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntryConstants" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
 <%@ page import="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil" %>

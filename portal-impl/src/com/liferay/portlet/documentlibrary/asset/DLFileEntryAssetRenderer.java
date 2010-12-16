@@ -18,6 +18,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -26,9 +28,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
-import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 
 import javax.portlet.PortletURL;
@@ -42,7 +42,7 @@ import javax.portlet.RenderResponse;
 public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 
 	public DLFileEntryAssetRenderer(
-		DLFileEntry fileEntry, DLFileVersion fileVersion) {
+		FileEntry fileEntry, FileVersion fileVersion) {
 
 		_fileEntry = fileEntry;
 		_fileVersion = fileVersion;
@@ -70,7 +70,7 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public long getGroupId() {
-		return _fileEntry.getGroupId();
+		return _fileEntry.getRepositoryId();
 	}
 
 	public String getSummary() {
@@ -91,10 +91,10 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		portletURL.setParameter(
 			"struts_action", "/document_library/edit_file_entry");
 		portletURL.setParameter(
-			"groupId", String.valueOf(_fileEntry.getGroupId()));
+			"groupId", String.valueOf(_fileEntry.getRepositoryId()));
 		portletURL.setParameter(
 			"folderId", String.valueOf(_fileEntry.getFolderId()));
-		portletURL.setParameter("name", String.valueOf(_fileEntry.getName()));
+		portletURL.setParameter("title", String.valueOf(_fileEntry.getTitle()));
 
 		return portletURL;
 	}
@@ -107,7 +107,7 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 
 		portletURL.setParameter("struts_action", "/asset_publisher/get_file");
 		portletURL.setParameter(
-			"groupId", String.valueOf(_fileEntry.getGroupId()));
+			"groupId", String.valueOf(_fileEntry.getRepositoryId()));
 		portletURL.setParameter(
 			"folderId", String.valueOf(_fileEntry.getFolderId()));
 		portletURL.setParameter("title", String.valueOf(_fileEntry.getTitle()));
@@ -142,14 +142,14 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		throws PortalException, SystemException {
 
 		return DLFileEntryPermission.contains(
-			permissionChecker, _fileEntry, ActionKeys.UPDATE);
+			permissionChecker, _fileEntry.getFileEntryId(), ActionKeys.UPDATE);
 	}
 
 	public boolean hasViewPermission(PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 
 		return DLFileEntryPermission.contains(
-			permissionChecker, _fileEntry, ActionKeys.VIEW);
+			permissionChecker, _fileEntry.getFileEntryId(), ActionKeys.VIEW);
 	}
 
 	public boolean isConvertible() {
@@ -184,7 +184,7 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		return themeDisplay.getPathThemeImages() + "/common/clip.png";
 	}
 
-	private DLFileEntry _fileEntry;
-	private DLFileVersion _fileVersion;
+	private FileEntry _fileEntry;
+	private FileVersion _fileVersion;
 
 }

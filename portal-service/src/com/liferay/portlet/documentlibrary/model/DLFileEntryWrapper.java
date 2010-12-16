@@ -550,8 +550,8 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return _dlFileEntry.getRepositoryId();
 	}
 
-	public boolean hasLock(long userId) {
-		return _dlFileEntry.hasLock(userId);
+	public boolean hasLock() {
+		return _dlFileEntry.hasLock();
 	}
 
 	public boolean isLocked() {

@@ -26,7 +26,7 @@
 
 		<%
 		if (useAssetEntryQuery) {
-			long[] classNameIds = {PortalUtil.getClassNameId(DLFileEntry.class.getName()), PortalUtil.getClassNameId(DLFileShortcut.class.getName())};
+			long[] classNameIds = {PortalUtil.getClassNameId(DLFileEntryConstants.getClassName()), PortalUtil.getClassNameId(DLFileShortcut.class.getName())};
 
 			AssetEntryQuery assetEntryQuery = new AssetEntryQuery(classNameIds, searchContainer);
 
@@ -58,8 +58,8 @@
 	</liferay-ui:search-container-results>
 
 	<liferay-ui:search-container-row
-		className="com.liferay.portal.model.BaseModel"
-		keyProperty="primaryKeyObj"
+		className="com.liferay.portal.kernel.repository.model.RepositoryModel"
+		keyProperty="primaryKey"
 		modelVar="result"
 	>
 		<%@ include file="/html/portlet/document_library/cast_result.jspf" %>

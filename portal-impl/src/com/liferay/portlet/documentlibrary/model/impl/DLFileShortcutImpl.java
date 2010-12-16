@@ -16,9 +16,10 @@ package com.liferay.portlet.documentlibrary.model.impl;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.repository.liferayrepository.model.LiferayFolder;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 
 /**
@@ -30,21 +31,21 @@ public class DLFileShortcutImpl
 	public DLFileShortcutImpl() {
 	}
 
-	public DLFolder getFolder() {
-		DLFolder folder = null;
+	public Folder getFolder() {
+		Folder folder = null;
 
 		if (getFolderId() > 0) {
 			try {
 				folder = DLAppLocalServiceUtil.getFolder(getFolderId());
 			}
 			catch (Exception e) {
-				folder = new DLFolderImpl();
+				folder = new LiferayFolder(new DLFolderImpl());
 
 				_log.error(e);
 			}
 		}
 		else {
-			folder = new DLFolderImpl();
+			folder = new LiferayFolder(new DLFolderImpl());
 		}
 
 		return folder;
@@ -54,7 +55,7 @@ public class DLFileShortcutImpl
 		String toTitle = null;
 
 		try {
-			DLFileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(
+			FileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(
 				getToFileEntryId());
 
 			toTitle = fileEntry.getTitle();

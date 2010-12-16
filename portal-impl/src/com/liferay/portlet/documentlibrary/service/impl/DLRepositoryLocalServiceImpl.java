@@ -351,7 +351,7 @@ public class DLRepositoryLocalServiceImpl
 		return dlFileEntryPersistence.findByPrimaryKey(fileEntryId);
 	}
 
-	public DLFileEntry getFileEntryByTitle(
+	public DLFileEntry getFileEntry(
 			long groupId, long folderId, String title)
 		throws PortalException, SystemException {
 
@@ -1459,7 +1459,7 @@ public class DLRepositoryLocalServiceImpl
 		}
 
 		try {
-			getFileEntryByTitle(groupId, parentFolderId, name);
+			getFileEntry(groupId, parentFolderId, name);
 
 			throw new DuplicateFileException();
 		}

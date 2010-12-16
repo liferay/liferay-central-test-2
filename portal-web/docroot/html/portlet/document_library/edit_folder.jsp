@@ -19,7 +19,7 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
+Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
 long folderId = BeanParamUtil.getLong(folder, request, "folderId");
 
@@ -57,7 +57,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 				String parentFolderName = "";
 
 				try {
-					DLFolder parentFolder = DLAppLocalServiceUtil.getFolder(parentFolderId);
+					Folder parentFolder = DLAppLocalServiceUtil.getFolder(parentFolderId);
 
 					parentFolderName = parentFolder.getName();
 				}
@@ -91,9 +91,9 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 
 		<aui:input name="description" />
 
-		<liferay-ui:custom-attributes-available className="<%= DLFolder.class.getName() %>">
+		<liferay-ui:custom-attributes-available className="<%= DLFolderConstants.getClassName() %>">
 			<liferay-ui:custom-attribute-list
-				className="<%= DLFolder.class.getName() %>"
+				className="<%= DLFolderConstants.getClassName() %>"
 				classPK="<%= (folder != null) ? folder.getFolderId() : 0 %>"
 				editable="<%= true %>"
 				label="<%= true %>"
@@ -103,7 +103,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 		<c:if test="<%= folder == null %>">
 			<aui:field-wrapper label="permissions">
 				<liferay-ui:input-permissions
-					modelName="<%= DLFolder.class.getName() %>"
+					modelName="<%= DLFolderConstants.getClassName() %>"
 				/>
 			</aui:field-wrapper>
 		</c:if>

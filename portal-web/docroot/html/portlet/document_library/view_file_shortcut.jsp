@@ -31,11 +31,11 @@ long fileShortcutId = fileShortcut.getFileShortcutId();
 
 Group toGroup = null;
 
-DLFolder toFolder = null;
+Folder toFolder = null;
 
 long toFileEntryId = fileShortcut.getToFileEntryId();
 
-DLFileEntry toFileEntry = null;
+FileEntry toFileEntry = null;
 
 if (toFileEntryId > 0) {
 	try {
@@ -43,7 +43,7 @@ if (toFileEntryId > 0) {
 
 		toFolder = toFileEntry.getFolder();
 
-		toGroup = GroupLocalServiceUtil.getGroup(toFileEntry.getGroupId());
+		toGroup = GroupLocalServiceUtil.getGroup(toFileEntry.getRepositoryId());
 	}
 	catch (Exception e) {
 	}
@@ -59,8 +59,8 @@ if (PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.O
 	conversions = (String[])DocumentConversionUtil.getConversions(extension);
 }
 
-Boolean isLocked = DLAppServiceUtil.isFileEntryLocked(toFileEntry.getFileEntryId());
-Boolean hasLock = DLAppServiceUtil.hasFileEntryLock(toFileEntry.getFileEntryId());
+Boolean isLocked = toFileEntry.isLocked();
+Boolean hasLock = toFileEntry.hasLock();
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -75,7 +75,7 @@ request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 <liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 
 <%
-DLFolder folder = fileShortcut.getFolder();
+Folder folder = fileShortcut.getFolder();
 
 String parentFolderName = LanguageUtil.get(pageContext, "document-home");
 
@@ -108,14 +108,14 @@ if (Validator.isNotNull(folder.getName())) {
 
 		<div class="file-entry-categories">
 			<liferay-ui:asset-categories-summary
-				className="<%= DLFileEntry.class.getName() %>"
+				className="<%= DLFileEntryConstants.getClassName() %>"
 				classPK="<%= toFileEntry.getFileEntryId() %>"
 			/>
 		</div>
 
 		<div class="file-entry-tags">
 			<liferay-ui:asset-tags-summary
-				className="<%= DLFileEntry.class.getName() %>"
+				className="<%= DLFileEntryConstants.getClassName() %>"
 				classPK="<%= toFileEntry.getFileEntryId() %>"
 				message="tags"
 			/>
@@ -125,9 +125,9 @@ if (Validator.isNotNull(folder.getName())) {
 			<%= toFileEntry.getDescription() %>
 		</div>
 
-		<liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
+		<liferay-ui:custom-attributes-available className="<%= DLFileEntryConstants.getClassName() %>">
 			<liferay-ui:custom-attribute-list
-				className="<%= DLFileEntry.class.getName() %>"
+				className="<%= DLFileEntryConstants.getClassName() %>"
 				classPK="<%= (toFileEntry != null) ? toFileEntry.getFileEntryId() : 0 %>"
 				editable="<%= false %>"
 				label="<%= true %>"
@@ -150,7 +150,7 @@ if (Validator.isNotNull(folder.getName())) {
 
 		<div class="file-entry-ratings">
 			<liferay-ui:ratings
-				className="<%= DLFileEntry.class.getName() %>"
+				className="<%= DLFileEntryConstants.getClassName() %>"
 				classPK="<%= toFileEntry.getFileEntryId() %>"
 			/>
 		</div>
@@ -256,7 +256,7 @@ if (Validator.isNotNull(folder.getName())) {
 			List resultRows = searchContainer.getResultRows();
 
 			for (int i = 0; i < results.size(); i++) {
-				DLFileVersion fileVersion = (DLFileVersion)results.get(i);
+				FileVersion fileVersion = (FileVersion)results.get(i);
 
 				ResultRow row = new ResultRow(new Object[] {toFileEntry, fileVersion, results.size(), conversions, isLocked, hasLock}, fileVersion.getFileVersionId(), i);
 
@@ -303,7 +303,7 @@ if (Validator.isNotNull(folder.getName())) {
 				</portlet:actionURL>
 
 				<liferay-ui:discussion
-					className="<%= DLFileEntry.class.getName() %>"
+					className="<%= DLFileEntryConstants.getClassName() %>"
 					classPK="<%= toFileEntry.getFileEntryId() %>"
 					formAction="<%= discussionURL %>"
 					formName="fm2"

@@ -16,6 +16,7 @@ package com.liferay.portlet.documentlibrary.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.staging.permission.StagingPermissionUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -30,6 +31,14 @@ import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
  * @author Brian Wing Shun Chan
  */
 public class DLFolderPermission {
+
+	public static void check(
+			PermissionChecker permissionChecker, Folder folder,
+			String actionId)
+		throws PortalException, SystemException {
+
+		check(permissionChecker, (DLFolder)folder.getModel(), actionId);
+	}
 
 	public static void check(
 			PermissionChecker permissionChecker, DLFolder folder,
@@ -49,6 +58,14 @@ public class DLFolderPermission {
 		if (!contains(permissionChecker, groupId, folderId, actionId)) {
 			throw new PrincipalException();
 		}
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, Folder folder, String actionId)
+		throws PortalException, SystemException {
+
+		return contains(
+			permissionChecker, (DLFolder)folder.getModel(), actionId);
 	}
 
 	public static boolean contains(
