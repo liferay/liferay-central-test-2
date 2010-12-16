@@ -16,6 +16,9 @@ package com.liferay.portlet.documentlibrary.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.FileVersion;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -24,11 +27,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.NoSuchEntryException;
 import com.liferay.portlet.asset.model.AssetEntry;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
-import com.liferay.portlet.documentlibrary.model.DLFileVersion;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.base.DLAppHelperLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.social.DLActivityKeys;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
@@ -45,12 +45,12 @@ public class DLAppHelperLocalServiceImpl
 	extends DLAppHelperLocalServiceBaseImpl {
 
 	public void addFileEntry(
-			DLFileEntry fileEntry, DLFileVersion fileVersion,
+			FileEntry fileEntry, FileVersion fileVersion, 
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		long userId = fileEntry.getUserId();
-		long groupId = fileEntry.getGroupId();
+		long groupId = fileEntry.getRepositoryId();
 		long fileEntryId = fileEntry.getFileEntryId();
 
 		// Message boards
@@ -58,16 +58,16 @@ public class DLAppHelperLocalServiceImpl
 		if (PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
 				userId, fileEntry.getUserName(), groupId,
-				DLFileEntry.class.getName(), fileEntryId,
+				DLFileEntryConstants.getClassName(), fileEntryId,
 				WorkflowConstants.ACTION_PUBLISH);
 		}
 	}
 
-	public void addFolder(DLFolder folder, ServiceContext serviceContext)
+	public void addFolder(Folder folder, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 	}
 
-	public void deleteFileEntry(DLFileEntry fileEntry)
+	public void deleteFileEntry(FileEntry fileEntry)
 		throws PortalException, SystemException {
 
 		// File ranks
@@ -83,36 +83,36 @@ public class DLAppHelperLocalServiceImpl
 		// Asset
 
 		assetEntryLocalService.deleteEntry(
-			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+			DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId());
 
 		// Message boards
 
 		mbMessageLocalService.deleteDiscussionMessages(
-			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+			DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId());
 
 		// Ratings
 
 		ratingsStatsLocalService.deleteStats(
-			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+			DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId());
 
 		// Social
 
 		socialActivityLocalService.deleteActivities(
-			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+			DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId());
 	}
 
-	public void deleteFolder(DLFolder folder)
+	public void deleteFolder(Folder folder)
 		throws PortalException, SystemException {
 	}
 
-	public void getFileAsStream(long userId, DLFileEntry fileEntry)
+	public void getFileAsStream(long userId, FileEntry fileEntry)
 		throws PortalException, SystemException {
 
 		// File rank
 
 		if (userId > 0) {
 			dlFileRankLocalService.updateFileRank(
-				fileEntry.getGroupId(), fileEntry.getCompanyId(), userId,
+				fileEntry.getRepositoryId(), fileEntry.getCompanyId(), userId,
 				fileEntry.getFileEntryId(), new ServiceContext());
 		}
 
@@ -120,7 +120,7 @@ public class DLAppHelperLocalServiceImpl
 
 		if (PropsValues.DL_FILE_ENTRY_READ_COUNT_ENABLED) {
 			assetEntryLocalService.incrementViewCounter(
-				userId, DLFileEntry.class.getName(),
+				userId, DLFileEntryConstants.getClassName(),
 				fileEntry.getFileEntryId());
 
 			List<DLFileShortcut> fileShortcuts =
@@ -176,7 +176,7 @@ public class DLAppHelperLocalServiceImpl
 			groupId, folderId, status);
 	}
 
-	public List<DLFileEntry> getNoAssetFileEntries() throws SystemException {
+	public List<FileEntry> getNoAssetFileEntries() throws SystemException {
 		return null;
 	}
 
@@ -191,7 +191,7 @@ public class DLAppHelperLocalServiceImpl
 		// Asset
 
 		assetEntryLocalService.deleteEntry(
-			DLFileEntry.class.getName(), oldFileEntryId);
+			DLFileEntryConstants.getClassName(), oldFileEntryId);
 
 		List<DLFileShortcut> fileShortcuts =
 			dlFileShortcutPersistence.findByToFileEntryId(oldFileEntryId);
@@ -205,14 +205,14 @@ public class DLAppHelperLocalServiceImpl
 		// Ratings
 
 		RatingsStats stats = ratingsStatsLocalService.getStats(
-			DLFileEntry.class.getName(), oldFileEntryId);
+			DLFileEntryConstants.getClassName(), oldFileEntryId);
 
 		stats.setClassPK(newFileEntryId);
 
 		ratingsStatsPersistence.update(stats, false);
 
 		long classNameId = PortalUtil.getClassNameId(
-			DLFileEntry.class.getName());
+			DLFileEntryConstants.getClassName());
 
 		List<RatingsEntry> entries = ratingsEntryPersistence.findByC_C(
 			classNameId, oldFileEntryId);
@@ -237,18 +237,19 @@ public class DLAppHelperLocalServiceImpl
 		// Social
 
 		socialActivityLocalService.deleteActivities(
-			DLFileEntry.class.getName(), oldFileEntryId);
+			DLFileEntryConstants.getClassName(), oldFileEntryId);
 	}
 
 	public void updateAsset(
-			long userId, DLFileEntry fileEntry, DLFileVersion fileVersion,
+			long userId, FileEntry fileEntry, FileVersion fileVersion,
 			long[] assetCategoryIds, String[] assetTagNames, String mimeType,
 			boolean addDraftAssetEntry, boolean visible)
 		throws PortalException, SystemException {
 
 		if (addDraftAssetEntry) {
 			assetEntryLocalService.updateEntry(
-				userId, fileEntry.getGroupId(), DLFileEntry.class.getName(),
+				userId, fileEntry.getRepositoryId(), 
+				DLFileEntryConstants.getClassName(),
 				fileVersion.getFileVersionId(), fileEntry.getUuid(),
 				assetCategoryIds, assetTagNames, false, null, null, null, null,
 				mimeType, fileEntry.getTitle(), fileEntry.getDescription(),
@@ -256,7 +257,8 @@ public class DLAppHelperLocalServiceImpl
 		}
 		else {
 			assetEntryLocalService.updateEntry(
-				userId, fileEntry.getGroupId(), DLFileEntry.class.getName(),
+				userId, fileEntry.getRepositoryId(),
+				DLFileEntryConstants.getClassName(),
 				fileEntry.getFileEntryId(), fileEntry.getUuid(),
 				assetCategoryIds, assetTagNames, visible, null, null, null,
 				null, mimeType, fileEntry.getTitle(),
@@ -279,7 +281,7 @@ public class DLAppHelperLocalServiceImpl
 	}
 
 	public void updateStatus(
-			long userId, DLFileEntry fileEntry, DLFileVersion latestFileVersion,
+			long userId, FileEntry fileEntry, FileVersion latestFileVersion,
 			int status)
 		throws PortalException, SystemException {
 
@@ -295,7 +297,7 @@ public class DLAppHelperLocalServiceImpl
 
 					try {
 						draftAssetEntry = assetEntryLocalService.getEntry(
-							DLFileEntry.class.getName(),
+							DLFileEntryConstants.getClassName(),
 							latestFileVersion.getPrimaryKey());
 
 						long[] assetCategoryIds =
@@ -303,8 +305,8 @@ public class DLAppHelperLocalServiceImpl
 						String[] assetTagNames = draftAssetEntry.getTagNames();
 
 						assetEntryLocalService.updateEntry(
-							userId, fileEntry.getGroupId(),
-							DLFileEntry.class.getName(),
+							userId, fileEntry.getRepositoryId(),
+							DLFileEntryConstants.getClassName(),
 							fileEntry.getFileEntryId(), fileEntry.getUuid(),
 							assetCategoryIds, assetTagNames, true, null, null,
 							null, null, draftAssetEntry.getMimeType(),
@@ -319,17 +321,18 @@ public class DLAppHelperLocalServiceImpl
 				}
 
 				assetEntryLocalService.updateVisible(
-					DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
-					true);
+					DLFileEntryConstants.getClassName(), 
+					fileEntry.getFileEntryId(), true);
 			}
 
 			// Social
 
 			socialActivityLocalService.addUniqueActivity(
-				latestFileVersion.getStatusByUserId(), fileEntry.getGroupId(),
-				latestFileVersion.getCreateDate(), DLFileEntry.class.getName(),
-				fileEntry.getFileEntryId(), DLActivityKeys.ADD_FILE_ENTRY,
-				StringPool.BLANK, 0);
+				latestFileVersion.getStatusByUserId(), 
+				fileEntry.getRepositoryId(),
+				latestFileVersion.getCreateDate(),
+				DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId(), 
+				DLActivityKeys.ADD_FILE_ENTRY, StringPool.BLANK, 0);
 		}
 		else {
 
@@ -337,8 +340,8 @@ public class DLAppHelperLocalServiceImpl
 
 			if (Validator.isNull(fileEntry.getVersion())) {
 				assetEntryLocalService.updateVisible(
-					DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
-					false);
+					DLFileEntryConstants.getClassName(), 
+					fileEntry.getFileEntryId(), false);
 			}
 		}
 	}

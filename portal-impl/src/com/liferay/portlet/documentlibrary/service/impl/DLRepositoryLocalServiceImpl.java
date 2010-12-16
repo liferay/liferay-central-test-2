@@ -36,6 +36,9 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
+import com.liferay.portal.repository.liferayrepository.model.LiferayFileVersion;
+import com.liferay.portal.repository.liferayrepository.model.LiferayFolder;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
@@ -164,7 +167,8 @@ public class DLRepositoryLocalServiceImpl
 		// DLApp
 
 		dlAppHelperLocalService.addFileEntry(
-			fileEntry, fileVersion, serviceContext);
+			new LiferayFileEntry(fileEntry),
+			new LiferayFileVersion(fileVersion), serviceContext);
 
 		// File
 
@@ -241,7 +245,8 @@ public class DLRepositoryLocalServiceImpl
 
 		// DLApp
 
-		dlAppHelperLocalService.addFolder(folder, serviceContext);
+		dlAppHelperLocalService.addFolder(
+			new LiferayFolder(folder), serviceContext);
 
 		return folder;
 	}
@@ -298,7 +303,8 @@ public class DLRepositoryLocalServiceImpl
 			dlFileEntryPersistence.update(fileEntry, false);
 		}
 
-		dlAppHelperLocalService.getFileAsStream(userId, fileEntry);
+		dlAppHelperLocalService.getFileAsStream(
+			userId, new LiferayFileEntry(fileEntry));
 
 		return dlLocalService.getFileAsStream(
 			fileEntry.getCompanyId(), fileEntry.getRepositoryId(),
@@ -699,8 +705,9 @@ public class DLRepositoryLocalServiceImpl
 		}
 
 		dlAppHelperLocalService.updateAsset(
-			userId, fileEntry, fileVersion, assetCategoryIds, assetTagNames,
-			mimeType, addDraftAssetEntry, visible);
+			userId, new LiferayFileEntry(fileEntry),
+			new LiferayFileVersion(fileVersion), assetCategoryIds,
+			assetTagNames, mimeType, addDraftAssetEntry, visible);
 	}
 
 	public DLFileEntry updateFileEntry(
@@ -986,7 +993,8 @@ public class DLRepositoryLocalServiceImpl
 		// DLApp
 
 		dlAppHelperLocalService.updateStatus(
-			userId, fileEntry, latestFileVersion, status);
+			userId, new LiferayFileEntry(fileEntry),
+			new LiferayFileVersion(latestFileVersion), status);
 
 		return fileEntry;
 	}
@@ -1184,7 +1192,8 @@ public class DLRepositoryLocalServiceImpl
 
 		// DLApp
 
-		dlAppHelperLocalService.deleteFileEntry(fileEntry);
+		dlAppHelperLocalService.deleteFileEntry(
+			new LiferayFileEntry(fileEntry));
 
 		// File
 
@@ -1238,7 +1247,7 @@ public class DLRepositoryLocalServiceImpl
 
 		// DLApp
 
-		dlAppHelperLocalService.deleteFolder(folder);
+		dlAppHelperLocalService.deleteFolder(new LiferayFolder(folder));
 
 		// Directory
 

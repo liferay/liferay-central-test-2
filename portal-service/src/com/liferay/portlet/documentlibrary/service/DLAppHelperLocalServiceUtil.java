@@ -38,8 +38,8 @@ public class DLAppHelperLocalServiceUtil {
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.documentlibrary.service.impl.DLAppHelperLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static void addFileEntry(
-		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
-		com.liferay.portlet.documentlibrary.model.DLFileVersion fileVersion,
+		com.liferay.portal.kernel.repository.model.FileEntry fileEntry,
+		com.liferay.portal.kernel.repository.model.FileVersion fileVersion,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -47,7 +47,7 @@ public class DLAppHelperLocalServiceUtil {
 	}
 
 	public static void addFolder(
-		com.liferay.portlet.documentlibrary.model.DLFolder folder,
+		com.liferay.portal.kernel.repository.model.Folder folder,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -55,21 +55,21 @@ public class DLAppHelperLocalServiceUtil {
 	}
 
 	public static void deleteFileEntry(
-		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry)
+		com.liferay.portal.kernel.repository.model.FileEntry fileEntry)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteFileEntry(fileEntry);
 	}
 
 	public static void deleteFolder(
-		com.liferay.portlet.documentlibrary.model.DLFolder folder)
+		com.liferay.portal.kernel.repository.model.Folder folder)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteFolder(folder);
 	}
 
 	public static void getFileAsStream(long userId,
-		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry)
+		com.liferay.portal.kernel.repository.model.FileEntry fileEntry)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().getFileAsStream(userId, fileEntry);
@@ -98,7 +98,7 @@ public class DLAppHelperLocalServiceUtil {
 		return getService().getFileShortcutsCount(groupId, folderId, status);
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getNoAssetFileEntries()
+	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getNoAssetFileEntries()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getNoAssetFileEntries();
 	}
@@ -110,8 +110,8 @@ public class DLAppHelperLocalServiceUtil {
 	}
 
 	public static void updateAsset(long userId,
-		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
-		com.liferay.portlet.documentlibrary.model.DLFileVersion fileVersion,
+		com.liferay.portal.kernel.repository.model.FileEntry fileEntry,
+		com.liferay.portal.kernel.repository.model.FileVersion fileVersion,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames,
 		java.lang.String mimeType, boolean addDraftAssetEntry, boolean visible)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -122,8 +122,8 @@ public class DLAppHelperLocalServiceUtil {
 	}
 
 	public static void updateStatus(long userId,
-		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
-		com.liferay.portlet.documentlibrary.model.DLFileVersion latestFileVersion,
+		com.liferay.portal.kernel.repository.model.FileEntry fileEntry,
+		com.liferay.portal.kernel.repository.model.FileVersion latestFileVersion,
 		int status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
