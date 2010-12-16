@@ -113,7 +113,7 @@ public class PortletPreferencesFactoryUtil {
 		throws SystemException {
 
 		return getPortletPreferencesFactory().getPortletSetup(
-			scopeGroupId,layout, portletId, defaultPreferences);
+			scopeGroupId, layout, portletId, defaultPreferences);
 	}
 
 	public static PortletPreferences getPortletSetup(
