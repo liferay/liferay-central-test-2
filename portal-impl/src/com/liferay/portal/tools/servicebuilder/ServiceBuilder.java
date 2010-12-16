@@ -822,7 +822,8 @@ public class ServiceBuilder {
 
 							if (finderWhere.indexOf(name) != -1) {
 								finderWhere = finderWhere.replaceAll(
-									name, alias + "." + name);
+									"(?<!\\.)\\b" + name + "\\b",
+									alias + "." + name);
 							}
 						}
 					}
