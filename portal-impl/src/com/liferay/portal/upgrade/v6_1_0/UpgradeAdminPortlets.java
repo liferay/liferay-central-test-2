@@ -325,7 +325,6 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 		throws Exception {
 
 		for (int i = 0; i < newResourceIds.length; i++) {
-
 			try {
 				long newResourceId = newResourceIds[i];
 				long oldResourceId = oldResourceIds[i];
