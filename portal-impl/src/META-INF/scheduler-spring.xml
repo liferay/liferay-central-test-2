@@ -7,15 +7,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
 >
-	<bean id="com.liferay.portal.scheduler.QuartzSchedulerEngine" class="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineImpl" />
-
 	<bean id="com.liferay.portal.kernel.scheduler.SchedulerEngine" class="com.liferay.portal.scheduler.SchedulerEngineProxy">
-		<property name="delegate" ref="com.liferay.portal.scheduler.QuartzSchedulerEngine" />
+		<property name="schedulerEngine" ref="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineImpl" />
 	</bean>
-
 	<bean id="com.liferay.portal.kernel.scheduler.SchedulerEngineUtil" class="com.liferay.portal.kernel.scheduler.SchedulerEngineUtil">
 		<property name="schedulerEngine" ref="com.liferay.portal.kernel.scheduler.SchedulerEngine" />
 	</bean>
+	<bean id="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineImpl" class="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineImpl" />
+
 	<!-- Messaging -->
 
 	<bean id="destination.scheduler_dispatch" class="com.liferay.portal.kernel.messaging.ParallelDestination">
@@ -32,7 +31,7 @@
 	</bean>
 	<bean id="messageListener.scheduler_engine" class="com.liferay.portal.scheduler.messaging.SchedulerMessageListener">
 		<property name="messageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
-		<property name="schedulerEngine" ref="com.liferay.portal.scheduler.QuartzSchedulerEngine" />
+		<property name="schedulerEngine" ref="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineImpl" />
 	</bean>
 	<bean id="messageListener.scheduler_scripting" class="com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper">
 		<property name="className" value="com.liferay.portal.scheduler.messaging.ScriptingMessageListener" />

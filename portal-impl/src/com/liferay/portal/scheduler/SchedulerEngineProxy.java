@@ -150,29 +150,25 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
 	}
 
-	public void setDelegate(SchedulerEngine delegate) {
-		_delegate = delegate;
+	public void setSchedulerEngine(SchedulerEngine schedulerEngine) {
+		_schedulerEngine = schedulerEngine;
 	}
 
 	public void shutdown() {
 		try {
-			_delegate.shutdown();
+			_schedulerEngine.shutdown();
 		}
 		catch (SchedulerException se) {
-			if (_log.isErrorEnabled()) {
-				_log.error("Unable to shutdown", se);
-			}
+			_log.error("Unable to shutdown", se);
 		}
 	}
 
 	public void start() {
 		try {
-			_delegate.start();
+			_schedulerEngine.start();
 		}
 		catch (SchedulerException se) {
-			if (_log.isErrorEnabled()) {
-				_log.error("Unable to shutdown", se);
-			}
+			_log.error("Unable to shutdown", se);
 		}
 	}
 
@@ -186,27 +182,23 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 
 	public void unschedule(String groupName) {
 		try {
-			_delegate.unschedule(groupName);
+			_schedulerEngine.unschedule(groupName);
 		}
 		catch (SchedulerException se) {
-			if (_log.isErrorEnabled()) {
-				_log.error(
-					"Unable to unschedule job: " + groupName,
-					se);
-			}
+			_log.error(
+				"Unable to unschedule job {groupName=" + groupName + "}", se);
 		}
 	}
 
 	public void unschedule(String jobName, String groupName) {
 		try {
-			_delegate.unschedule(jobName, groupName);
+			_schedulerEngine.unschedule(jobName, groupName);
 		}
 		catch (SchedulerException se) {
-			if (_log.isErrorEnabled()) {
-				_log.error(
-					"Unable to unschedule job: " + groupName + ":" + jobName,
-					se);
-			}
+			_log.error(
+				"Unable to unschedule job {jobName=" + jobName +
+					", groupName=" + groupName + "}",
+				se);
 		}
 	}
 
@@ -215,15 +207,14 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 	 */
 	public void unschedule(Trigger trigger) {
 		try {
-			_delegate.unschedule(trigger.getJobName(), trigger.getGroupName());
+			_schedulerEngine.unschedule(
+				trigger.getJobName(), trigger.getGroupName());
 		}
 		catch (SchedulerException se) {
-			if (_log.isErrorEnabled()) {
-				_log.error(
-					"Unable to unschedule job: " +
-					trigger.getGroupName()+ ":" + trigger.getJobName(),
-					se);
-			}
+			_log.error(
+				"Unable to unschedule job {jobName=" + trigger.getJobName() +
+					", groupName=" + trigger.getGroupName() + "}",
+				se);
 		}
 	}
 
@@ -235,9 +226,8 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		SchedulerEngineProxy.class);
+	private static Log _log = LogFactoryUtil.getLog(SchedulerEngineProxy.class);
 
-	private SchedulerEngine _delegate;
+	private SchedulerEngine _schedulerEngine;
 
 }
