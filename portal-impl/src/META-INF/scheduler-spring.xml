@@ -9,12 +9,12 @@
 >
 	<bean id="com.liferay.portal.scheduler.QuartzSchedulerEngine" class="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineImpl" />
 
-	<bean id="com.liferay.portal.scheduler.SchedulerEngine" class="com.liferay.portal.scheduler.SchedulerEngineProxy">
+	<bean id="com.liferay.portal.kernel.scheduler.SchedulerEngine" class="com.liferay.portal.scheduler.SchedulerEngineProxy">
 		<property name="delegate" ref="com.liferay.portal.scheduler.QuartzSchedulerEngine" />
 	</bean>
 
-	<bean id="com.liferay.portal.kernel.scheduler." class="com.liferay.portal.kernel.scheduler.SchedulerEngineUtil">
-		<property name="schedulerEngine" ref="com.liferay.portal.scheduler.SchedulerEngine" />
+	<bean id="com.liferay.portal.kernel.scheduler.SchedulerEngineUtil" class="com.liferay.portal.kernel.scheduler.SchedulerEngineUtil">
+		<property name="schedulerEngine" ref="com.liferay.portal.kernel.scheduler.SchedulerEngine" />
 	</bean>
 	<!-- Messaging -->
 

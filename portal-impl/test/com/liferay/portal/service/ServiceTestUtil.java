@@ -134,12 +134,8 @@ public class ServiceTestUtil {
 
 		// Scheduler
 
-		SchedulerEngine schedulerEngine =
-			(SchedulerEngine)PortalBeanLocatorUtil.locate(
-				SchedulerEngine.class.getName());
-
 		try {
-			schedulerEngine.start();
+			SchedulerEngineUtil.start();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
