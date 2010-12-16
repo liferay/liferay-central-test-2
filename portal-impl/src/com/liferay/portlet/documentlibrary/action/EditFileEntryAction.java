@@ -76,6 +76,9 @@ public class EditFileEntryAction extends PortletAction {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
 				updateFileEntry(actionRequest, actionResponse);
 			}
+			else if (cmd.equals(Constants.DELETE)) {
+				deleteFileEntry(actionRequest);
+			}
 			else if (cmd.equals(Constants.LOCK)) {
 				lockFileEntry(actionRequest);
 			}
@@ -172,6 +175,14 @@ public class EditFileEntryAction extends PortletAction {
 		String forward = "portlet.document_library.edit_file_entry";
 
 		return mapping.findForward(getForward(renderRequest, forward));
+	}
+
+	protected void deleteFileEntry(ActionRequest actionRequest)
+		throws Exception {
+
+		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
+
+		DLAppServiceUtil.deleteFileEntry(fileEntryId);
 	}
 
 	protected void lockFileEntry(ActionRequest actionRequest) throws Exception {
