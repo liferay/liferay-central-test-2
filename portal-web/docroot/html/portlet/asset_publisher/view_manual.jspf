@@ -40,18 +40,14 @@ for (int assetEntryIndex = 0; assetEntryIndex < results.size(); assetEntryIndex+
 
 	AssetEntry assetEntry = null;
 
-	for (long groupId : groupIds) {
-		try {
-			assetEntry = AssetEntryLocalServiceUtil.getEntry(groupId, assetEntryUuid);
-
-			break;
-		}
-		catch (NoSuchEntryException nsee) {
-			continue;
-		}
+	try {
+		assetEntry = AssetEntryLocalServiceUtil.getEntry(scopeGroupId, assetEntryUuid);
+	}
+	catch (NoSuchEntryException nsee) {
+		continue;
 	}
 
-	if ((assetEntry == null) || !assetEntry.isVisible()) {
+	if (!assetEntry.isVisible()) {
 		continue;
 	}
 

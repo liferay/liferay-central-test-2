@@ -32,7 +32,7 @@
 	display: block;
 }
 
-.configuration-frame, .controlPanel-frame {
+.configuration-frame {
 	border-width: 0;
 	overflow: auto;
 	width: 100%;

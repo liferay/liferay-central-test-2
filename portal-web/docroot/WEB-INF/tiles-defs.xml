@@ -173,10 +173,6 @@
 		<put name="portlet_content" value="/portlet/asset_publisher/view_content.jsp" />
 	</definition>
 
-	<definition name="portlet.asset_publisher.added_asset" extends="portlet.asset_publisher">
-		<put name="portlet_content" value="/portlet/asset_publisher/added_asset.jsp" />
-	</definition>
-
 	<!-- Asset Tags Admin -->
 
 	<definition name="portlet.asset_tags_admin" extends="portlet" />

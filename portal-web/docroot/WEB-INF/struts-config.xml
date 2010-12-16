@@ -257,8 +257,6 @@
 
 		<action path="/asset_publisher/view_content" forward="portlet.asset_publisher.view_content" />
 
-		<action path="/asset_publisher/added_asset" forward="portlet.asset_publisher.added_asset" />
-
 		<!-- Asset Tags Admin -->
 
 		<action path="/asset_tags_admin/view" forward="portlet.asset_tags_admin.view" />
@@ -1770,8 +1768,6 @@
 		<action path="/portlet_configuration/update_look_and_feel" type="com.liferay.portlet.portletconfiguration.action.UpdateLookAndFeelAction" />
 
 		<action path="/portlet_configuration/update_title" type="com.liferay.portlet.portletconfiguration.action.UpdateTitleAction" />
-
-		<action path="/portlet_configuration/added_asset" forward="portlet.asset_publisher.added_asset" />
 
 		<!-- Portlet CSS -->
 
