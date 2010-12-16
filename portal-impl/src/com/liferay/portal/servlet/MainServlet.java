@@ -89,6 +89,7 @@ import com.liferay.portlet.PortletConfigFactoryUtil;
 import com.liferay.portlet.PortletFilterFactory;
 import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletURLListenerFactory;
+import com.liferay.portlet.messageboards.util.MBIndexer;
 import com.liferay.portlet.social.messaging.CheckEquityLogMessageListener;
 import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.EncryptedServletRequest;
@@ -811,6 +812,7 @@ public class MainServlet extends ActionServlet {
 	protected PluginPackage initPluginPackage() throws Exception {
 		ServletContext servletContext = getServletContext();
 
+		IndexerRegistryUtil.register(new MBIndexer());
 		IndexerRegistryUtil.register(new PluginPackageIndexer());
 
 		return PluginPackageUtil.readPluginPackageServletContext(
