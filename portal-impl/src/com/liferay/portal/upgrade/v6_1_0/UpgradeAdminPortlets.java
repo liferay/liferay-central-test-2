@@ -324,10 +324,19 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 			long[] oldResourceIds, long[] newResourceIds)
 		throws Exception {
 
-		for (int i = 0; i < oldResourceIds.length; i++) {
-			runSQL(
-				"update Permission_ set resourceId = " + newResourceIds[i] +
-					" where resourceId = " + oldResourceIds[i]);
+		for (int i = 0; i < newResourceIds.length; i++) {
+
+			try {
+				long newResourceId = newResourceIds[i];
+				long oldResourceId = oldResourceIds[i];
+
+				runSQL(
+					"update Permission_ set resourceId = " + newResourceId +
+						" where resourceId = " + oldResourceId);
+			}
+			catch (ArrayIndexOutOfBoundsException aioobe) {
+				return;
+			}
 		}
 	}
 
