@@ -124,9 +124,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		try {
 			shutdown();
 		}
-		catch (SchedulerException e) {
+		catch (SchedulerException se) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Error shutting down", e);
+				_log.warn("Unable to shutdown", se);
 			}
 		}
 	}
@@ -390,11 +390,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 
 		try {
-			if (_scheduler.isShutdown()) {
-				return;
+			if (!_scheduler.isShutdown()) {
+				_scheduler.shutdown(false);
 			}
-
-			_scheduler.shutdown(false);
 		}
 		catch (Exception e) {
 			throw new SchedulerException("Unable to shutdown scheduler", e);
