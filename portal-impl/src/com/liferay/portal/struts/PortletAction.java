@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -62,21 +63,25 @@ import org.apache.struts.util.MessageResources;
 public class PortletAction extends Action {
 
 	public static String getForwardKey(HttpServletRequest request) {
-		PortletConfigImpl portletConfig =
+		PortletConfigImpl portletConfigImpl =
 			(PortletConfigImpl)request.getAttribute(
 				JavaConstants.JAVAX_PORTLET_CONFIG);
 
-		return PortalUtil.getPortletNamespace(portletConfig.getPortletId()) +
-			WebKeys.PORTLET_STRUTS_FORWARD;
+		String portletNamespace = PortalUtil.getPortletNamespace(
+			portletConfigImpl.getPortletId());
+
+		return portletNamespace.concat(WebKeys.PORTLET_STRUTS_FORWARD);
 	}
 
 	public static String getForwardKey(PortletRequest portletRequest) {
-		PortletConfigImpl portletConfig =
+		PortletConfigImpl portletConfigImpl =
 			(PortletConfigImpl)portletRequest.getAttribute(
 				JavaConstants.JAVAX_PORTLET_CONFIG);
 
-		return PortalUtil.getPortletNamespace(portletConfig.getPortletId()) +
-			WebKeys.PORTLET_STRUTS_FORWARD;
+		String portletNamespace = PortalUtil.getPortletNamespace(
+			portletConfigImpl.getPortletId());
+
+		return portletNamespace.concat(WebKeys.PORTLET_STRUTS_FORWARD);
 	}
 
 	public ActionForward execute(
@@ -226,7 +231,29 @@ public class PortletAction extends Action {
 		throws IOException {
 
 		if (SessionErrors.isEmpty(actionRequest)) {
-			addSuccessMessage(actionRequest, actionResponse);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)actionRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
+
+			LayoutTypePortlet layoutTypePortlet =
+				themeDisplay.getLayoutTypePortlet();
+
+			PortletConfig portletConfig =
+				(PortletConfig)actionRequest.getAttribute(
+					JavaConstants.JAVAX_PORTLET_CONFIG);
+
+			boolean hasPortletId = false;
+
+			try {
+				hasPortletId = layoutTypePortlet.hasPortletId(
+					portletConfig.getPortletName());
+			}
+			catch (Exception e) {
+			}
+
+			if (hasPortletId) {
+				addSuccessMessage(actionRequest, actionResponse);
+			}
 		}
 
 		if (Validator.isNull(redirect)) {
