@@ -26,9 +26,13 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -57,6 +61,7 @@ import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
+import com.liferay.portlet.journal.service.permission.JournalPermission;
 import com.liferay.portlet.journal.util.JournalUtil;
 
 import java.io.File;
@@ -92,6 +97,9 @@ public class EditArticleAction extends PortletAction {
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
@@ -161,16 +169,16 @@ public class EditArticleAction extends PortletAction {
 					redirect = newRedirect;
 				}
 
-				String referringPortletResource = ParamUtil.getString(
-					actionRequest, "referringPortletResource");
+				LayoutTypePortlet layoutTypePortlet =
+					themeDisplay.getLayoutTypePortlet();
 
-				if (referringPortletResource.equals(
-						PortletKeys.JOURNAL_CONTENT)) {
+				if (layoutTypePortlet.hasPortletId(
+						portletConfig.getPortletName())) {
 
-					actionResponse.sendRedirect(redirect);
+					sendRedirect(actionRequest, actionResponse, redirect);
 				}
 				else {
-					sendRedirect(actionRequest, actionResponse, redirect);
+					actionResponse.sendRedirect(redirect);
 				}
 			}
 		}
