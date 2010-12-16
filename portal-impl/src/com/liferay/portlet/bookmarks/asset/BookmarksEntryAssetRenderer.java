@@ -60,16 +60,15 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse) {
 
-		PortletURL editPortletURL = liferayPortletResponse.createRenderURL(
+		PortletURL portletURL = liferayPortletResponse.createRenderURL(
 			PortletKeys.BOOKMARKS);
 
-		editPortletURL.setParameter("struts_action", "/bookmarks/edit_entry");
-		editPortletURL.setParameter(
+		portletURL.setParameter("struts_action", "/bookmarks/edit_entry");
+		portletURL.setParameter(
 			"folderId", String.valueOf(_entry.getFolderId()));
- 		editPortletURL.setParameter(
-			"entryId", String.valueOf(_entry.getEntryId()));
+ 		portletURL.setParameter("entryId", String.valueOf(_entry.getEntryId()));
 
-		return editPortletURL;
+		return portletURL;
 	}
 
 	public String getURLViewInContext(

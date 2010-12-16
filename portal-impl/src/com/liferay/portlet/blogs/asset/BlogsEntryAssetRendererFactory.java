@@ -18,16 +18,12 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.BaseAssetRendererFactory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -85,30 +81,23 @@ public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 		HttpServletRequest request =
 			liferayPortletRequest.getHttpServletRequest();
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)liferayPortletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
-			themeDisplay.getCompanyId(), GroupConstants.CONTROL_PANEL);
-
-		long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(
-			controlPanelGroup.getGroupId(), true);
-
-		PortletURL addAssetURL = null;
-
-		if (BlogsPermission.contains(
+		if (!BlogsPermission.contains(
 				themeDisplay.getPermissionChecker(),
 				themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY)) {
 
-			addAssetURL = new PortletURLImpl(
-				request, PortletKeys.BLOGS, controlPanelPlid,
-				PortletRequest.RENDER_PHASE);
-
-			addAssetURL.setParameter("struts_action", "/blogs/edit_entry");
+			return null;
 		}
 
-		return addAssetURL;
+		PortletURL portletURL = PortletURLFactoryUtil.create(
+			request, PortletKeys.BLOGS, getControlPanelPlid(themeDisplay),
+			PortletRequest.RENDER_PHASE);
+
+		portletURL.setParameter("struts_action", "/blogs/edit_entry");
+
+		return portletURL;
 	}
 
 	public boolean hasPermission(

@@ -85,37 +85,34 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse) {
 
-		PortletURL editPortletURL = liferayPortletResponse.createRenderURL(
+		PortletURL portletURL = liferayPortletResponse.createRenderURL(
 			PortletKeys.DOCUMENT_LIBRARY);
 
-		editPortletURL.setParameter(
+		portletURL.setParameter(
 			"struts_action", "/document_library/edit_file_entry");
-		editPortletURL.setParameter(
+		portletURL.setParameter(
 			"groupId", String.valueOf(_fileEntry.getGroupId()));
-		editPortletURL.setParameter(
+		portletURL.setParameter(
 			"folderId", String.valueOf(_fileEntry.getFolderId()));
-		editPortletURL.setParameter(
-			"name", String.valueOf(_fileEntry.getName()));
+		portletURL.setParameter("name", String.valueOf(_fileEntry.getName()));
 
-		return editPortletURL;
+		return portletURL;
 	}
 
 	public PortletURL getURLExport(
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse) {
 
-		PortletURL exportPortletURL = liferayPortletResponse.createActionURL();
+		PortletURL portletURL = liferayPortletResponse.createActionURL();
 
-		exportPortletURL.setParameter(
-			"struts_action", "/asset_publisher/get_file");
-		exportPortletURL.setParameter(
+		portletURL.setParameter("struts_action", "/asset_publisher/get_file");
+		portletURL.setParameter(
 			"groupId", String.valueOf(_fileEntry.getGroupId()));
-		exportPortletURL.setParameter(
+		portletURL.setParameter(
 			"folderId", String.valueOf(_fileEntry.getFolderId()));
-		exportPortletURL.setParameter(
-			"title", String.valueOf(_fileEntry.getTitle()));
+		portletURL.setParameter("title", String.valueOf(_fileEntry.getTitle()));
 
-		return exportPortletURL;
+		return portletURL;
 	}
 
 	public String getURLViewInContext(

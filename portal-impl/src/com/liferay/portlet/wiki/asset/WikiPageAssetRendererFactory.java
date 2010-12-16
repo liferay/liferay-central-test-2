@@ -16,8 +16,6 @@ package com.liferay.portlet.wiki.asset;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
-import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.asset.model.AssetRenderer;
@@ -28,8 +26,6 @@ import com.liferay.portlet.wiki.model.WikiPageResource;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
 import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
-
-import javax.portlet.PortletURL;
 
 /**
  * @author Julio Camarero
@@ -76,14 +72,6 @@ public class WikiPageAssetRendererFactory extends BaseAssetRendererFactory {
 
 	public String getType() {
 		return TYPE;
-	}
-
-	public PortletURL getURLAdd(
-			LiferayPortletRequest liferayPortletRequest,
-			LiferayPortletResponse liferayPortletResponse)
-		throws PortalException, SystemException {
-
-		return null;
 	}
 
 	public boolean hasPermission(

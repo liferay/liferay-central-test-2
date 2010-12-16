@@ -87,34 +87,32 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse) {
 
-		PortletURL editPortletURL = liferayPortletResponse.createRenderURL(
+		PortletURL portletURL = liferayPortletResponse.createRenderURL(
 			PortletKeys.JOURNAL);
 
-		editPortletURL.setParameter(
-			"struts_action", "/journal/edit_article");
-		editPortletURL.setParameter(
+		portletURL.setParameter("struts_action", "/journal/edit_article");
+		portletURL.setParameter(
 			"groupId", String.valueOf(_article.getGroupId()));
-		editPortletURL.setParameter(
-			"articleId", _article.getArticleId());
-		editPortletURL.setParameter(
+		portletURL.setParameter("articleId", _article.getArticleId());
+		portletURL.setParameter(
 			"version", String.valueOf(_article.getVersion()));
 
-		return editPortletURL;
+		return portletURL;
 	}
 
 	public PortletURL getURLExport(
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse) {
 
-		PortletURL exportPortletURL = liferayPortletResponse.createActionURL();
+		PortletURL portletURL = liferayPortletResponse.createActionURL();
 
-		exportPortletURL.setParameter(
+		portletURL.setParameter(
 			"struts_action", "/asset_publisher/export_journal_article");
-		exportPortletURL.setParameter(
+		portletURL.setParameter(
 			"groupId", String.valueOf(_article.getGroupId()));
-		exportPortletURL.setParameter("articleId", _article.getArticleId());
+		portletURL.setParameter("articleId", _article.getArticleId());
 
-		return exportPortletURL;
+		return portletURL;
 	}
 
 	public String getUrlTitle() {
@@ -133,28 +131,23 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 
 		String languageId = LanguageUtil.getLanguageId(liferayPortletRequest);
 
-		JournalArticleDisplay articleDisplay =
-			JournalContentUtil.getDisplay(
-				_article.getGroupId(), _article.getArticleId(),
-				null, null, languageId, themeDisplay);
+		JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(
+			_article.getGroupId(), _article.getArticleId(), null, null,
+			languageId, themeDisplay);
 
-		String viewURL = StringPool.BLANK;
-
-		if (articleDisplay != null) {
-
-			PortletURL viewPortletURL =
-				liferayPortletResponse.createRenderURL();
-
-			viewPortletURL.setParameter(
-				"struts_action", "/asset_publisher/view_content");
-			viewPortletURL.setParameter("urlTitle", _article.getUrlTitle());
-			viewPortletURL.setParameter(
-				"type", JournalArticleAssetRendererFactory.TYPE);
-
-			viewURL = viewPortletURL.toString();
+		if (articleDisplay == null) {
+			return StringPool.BLANK;
 		}
 
-		return viewURL;
+		PortletURL portletURL = liferayPortletResponse.createRenderURL();
+
+		portletURL.setParameter(
+			"struts_action", "/asset_publisher/view_content");
+		portletURL.setParameter("urlTitle", _article.getUrlTitle());
+		portletURL.setParameter(
+			"type", JournalArticleAssetRendererFactory.TYPE);
+
+		return portletURL.toString();
 	}
 
 	public long getUserId() {

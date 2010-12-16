@@ -63,17 +63,15 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse) {
 
-		PortletURL editPortletURL = liferayPortletResponse.createRenderURL(
+		PortletURL portletURL = liferayPortletResponse.createRenderURL(
 			PortletKeys.IMAGE_GALLERY);
 
-		editPortletURL.setParameter(
-			"struts_action", "/image_gallery/edit_image");
-		editPortletURL.setParameter(
+		portletURL.setParameter("struts_action", "/image_gallery/edit_image");
+		portletURL.setParameter(
 			"folderId", String.valueOf(_image.getFolderId()));
-		editPortletURL.setParameter(
-			"imageId", String.valueOf(_image.getImageId()));
+		portletURL.setParameter("imageId", String.valueOf(_image.getImageId()));
 
-		return editPortletURL;
+		return portletURL;
 	}
 
 	public String getURLViewInContext(
@@ -82,18 +80,17 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 			String noSuchEntryRedirect)
 		throws Exception {
 
-		PortletURL viewPortletURL = liferayPortletResponse.createRenderURL(
+		PortletURL portletURL = liferayPortletResponse.createRenderURL(
 			PortletKeys.IMAGE_GALLERY);
 
-		viewPortletURL.setWindowState(WindowState.MAXIMIZED);
+		portletURL.setWindowState(WindowState.MAXIMIZED);
 
-		viewPortletURL.setParameter("struts_action", "/image_gallery/view");
-		viewPortletURL.setParameter(
-			"groupId", String.valueOf(_image.getGroupId()));
-		viewPortletURL.setParameter(
+		portletURL.setParameter("struts_action", "/image_gallery/view");
+		portletURL.setParameter("groupId", String.valueOf(_image.getGroupId()));
+		portletURL.setParameter(
 			"folderId", String.valueOf(_image.getFolderId()));
 
-		return viewPortletURL.toString();
+		return portletURL.toString();
 	}
 
 	public long getUserId() {

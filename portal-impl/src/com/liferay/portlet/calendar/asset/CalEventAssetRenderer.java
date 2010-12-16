@@ -68,15 +68,13 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse) {
 
-		PortletURL editPortletURL = liferayPortletResponse.createRenderURL(
+		PortletURL portletURL = liferayPortletResponse.createRenderURL(
 			PortletKeys.CALENDAR);
 
-		editPortletURL.setParameter(
-			"struts_action", "/calendar/edit_event");
-		editPortletURL.setParameter(
-			"eventId", String.valueOf(_event.getEventId()));
+		portletURL.setParameter("struts_action", "/calendar/edit_event");
+		portletURL.setParameter("eventId", String.valueOf(_event.getEventId()));
 
-		return editPortletURL;
+		return portletURL;
 	}
 
 	public String getURLViewInContext(

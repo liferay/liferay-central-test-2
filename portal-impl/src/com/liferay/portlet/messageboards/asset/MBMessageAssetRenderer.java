@@ -63,15 +63,15 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse) {
 
-		PortletURL editPortletURL = liferayPortletResponse.createRenderURL(
+		PortletURL portletURL = liferayPortletResponse.createRenderURL(
 			PortletKeys.MESSAGE_BOARDS);
 
-		editPortletURL.setParameter(
+		portletURL.setParameter(
 			"struts_action", "/message_boards/edit_message");
-		editPortletURL.setParameter(
+		portletURL.setParameter(
 			"messageId", String.valueOf(_message.getMessageId()));
 
-		return editPortletURL;
+		return portletURL;
 	}
 	public String getURLViewInContext(
 		LiferayPortletRequest liferayPortletRequest,

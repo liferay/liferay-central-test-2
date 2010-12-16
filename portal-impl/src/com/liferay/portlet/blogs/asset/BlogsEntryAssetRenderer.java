@@ -71,14 +71,13 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse) {
 
-		PortletURL editPortletURL = liferayPortletResponse.createRenderURL(
+		PortletURL portletURL = liferayPortletResponse.createRenderURL(
 			PortletKeys.BLOGS);
 
-		editPortletURL.setParameter("struts_action", "/blogs/edit_entry");
-		editPortletURL.setParameter(
-			"entryId", String.valueOf(_entry.getEntryId()));
+		portletURL.setParameter("struts_action", "/blogs/edit_entry");
+		portletURL.setParameter("entryId", String.valueOf(_entry.getEntryId()));
 
-		return editPortletURL;
+		return portletURL;
 	}
 
 	public String getUrlTitle() {
