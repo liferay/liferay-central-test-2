@@ -275,6 +275,11 @@ public class DLRepositoryLocalServiceWrapper implements DLRepositoryLocalService
 		return _dlRepositoryLocalService.getNoAssetFileEntries();
 	}
 
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getOrphanedFileEntries()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlRepositoryLocalService.getOrphanedFileEntries();
+	}
+
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry moveFileEntry(
 		long userId, long fileEntryId, long newFolderId,
 		com.liferay.portal.service.ServiceContext serviceContext)

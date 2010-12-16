@@ -38,6 +38,11 @@ public class DLFileEntryFinderUtil {
 		return getFinder().findByNoAssets();
 	}
 
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findOrphanedFileEntries()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().findOrphanedFileEntries();
+	}
+
 	public static DLFileEntryFinder getFinder() {
 		if (_finder == null) {
 			_finder = (DLFileEntryFinder)PortalBeanLocatorUtil.locate(DLFileEntryFinder.class.getName());

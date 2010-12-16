@@ -736,6 +736,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			String sql = query.toString();
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 			Session session = null;
 
 			try {
@@ -978,6 +980,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 		String sql = query.toString();
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 		Query q = session.createQuery(sql);
 
 		q.setFirstResult(0);
@@ -1097,6 +1101,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			query.append(DLFileEntryModelImpl.ORDER_BY_JPQL);
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
 
 			Session session = null;
 
@@ -1241,6 +1247,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			}
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
 
 			Session session = null;
 
@@ -1472,6 +1480,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 		String sql = query.toString();
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 		Query q = session.createQuery(sql);
 
 		q.setFirstResult(0);
@@ -1597,6 +1607,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				DLFileEntry.class.getName(), _FILTER_COLUMN_PK,
 				_FILTER_COLUMN_USERID, groupId);
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 		Session session = null;
 
 		try {
@@ -1707,6 +1719,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			}
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
 
 			Session session = null;
 
@@ -1939,6 +1953,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 		String sql = query.toString();
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 		Query q = session.createQuery(sql);
 
 		q.setFirstResult(0);
@@ -2053,6 +2069,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			}
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
 
 			Session session = null;
 
@@ -2298,6 +2316,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 		String sql = query.toString();
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 		Query q = session.createQuery(sql);
 
 		q.setFirstResult(0);
@@ -2431,6 +2451,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				DLFileEntry.class.getName(), _FILTER_COLUMN_PK,
 				_FILTER_COLUMN_USERID, groupId);
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 		Session session = null;
 
 		try {
@@ -2548,6 +2570,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			}
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
 
 			Session session = null;
 
@@ -2793,6 +2817,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 		String sql = query.toString();
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 		Query q = session.createQuery(sql);
 
 		q.setFirstResult(0);
@@ -2932,6 +2958,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			}
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
 
 			Session session = null;
 
@@ -3076,6 +3104,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
 				DLFileEntry.class.getName(), _FILTER_COLUMN_PK,
 				_FILTER_COLUMN_USERID, groupId);
+
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
 
 		Session session = null;
 
@@ -3233,6 +3263,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				DLFileEntry.class.getName(), _FILTER_COLUMN_PK,
 				_FILTER_COLUMN_USERID, groupId);
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 		Session session = null;
 
 		try {
@@ -3358,6 +3390,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			}
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
 
 			Session session = null;
 
@@ -3617,6 +3651,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 		String sql = query.toString();
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 		Query q = session.createQuery(sql);
 
 		q.setFirstResult(0);
@@ -3770,6 +3806,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			String sql = query.toString();
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 			Session session = null;
 
 			try {
@@ -3921,6 +3959,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
 				DLFileEntry.class.getName(), _FILTER_COLUMN_PK,
 				_FILTER_COLUMN_USERID, groupId);
+
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
 
 		Session session = null;
 
@@ -4092,6 +4132,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				DLFileEntry.class.getName(), _FILTER_COLUMN_PK,
 				_FILTER_COLUMN_USERID, groupId);
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 		Session session = null;
 
 		try {
@@ -4224,6 +4266,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			query.append(DLFileEntryModelImpl.ORDER_BY_JPQL);
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
 
 			Session session = null;
 
@@ -4389,6 +4433,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			String sql = query.toString();
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 			Session session = null;
 
 			try {
@@ -4522,6 +4568,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			else {
 				sql = _SQL_SELECT_DLFILEENTRY.concat(DLFileEntryModelImpl.ORDER_BY_JPQL);
 			}
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
 
 			Session session = null;
 
@@ -4729,6 +4777,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			String sql = query.toString();
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 			Session session = null;
 
 			try {
@@ -4798,6 +4848,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			String sql = query.toString();
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 			Session session = null;
 
 			try {
@@ -4855,6 +4907,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			String sql = query.toString();
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 			Session session = null;
 
 			try {
@@ -4908,6 +4962,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				DLFileEntry.class.getName(), _FILTER_COLUMN_PK,
 				_FILTER_COLUMN_USERID, groupId);
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 		Session session = null;
 
 		try {
@@ -4955,6 +5011,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
 
 			Session session = null;
 
@@ -5011,6 +5069,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
 
 			Session session = null;
 
@@ -5071,6 +5131,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				DLFileEntry.class.getName(), _FILTER_COLUMN_PK,
 				_FILTER_COLUMN_USERID, groupId);
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 		Session session = null;
 
 		try {
@@ -5124,6 +5186,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
 
 			Session session = null;
 
@@ -5210,6 +5274,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			String sql = query.toString();
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 			Session session = null;
 
 			try {
@@ -5270,6 +5336,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
 				DLFileEntry.class.getName(), _FILTER_COLUMN_PK,
 				_FILTER_COLUMN_USERID, groupId);
+
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
 
 		Session session = null;
 
@@ -5351,6 +5419,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				DLFileEntry.class.getName(), _FILTER_COLUMN_PK,
 				_FILTER_COLUMN_USERID, groupId);
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 		Session session = null;
 
 		try {
@@ -5409,6 +5479,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			query.append(_FINDER_COLUMN_G_U_F_FOLDERID_2);
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
 
 			Session session = null;
 
@@ -5508,6 +5580,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 			String sql = query.toString();
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 			Session session = null;
 
 			try {
@@ -5573,6 +5647,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
 				DLFileEntry.class.getName(), _FILTER_COLUMN_PK,
 				_FILTER_COLUMN_USERID, groupId);
+
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
 
 		Session session = null;
 
@@ -5665,6 +5741,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				DLFileEntry.class.getName(), _FILTER_COLUMN_PK,
 				_FILTER_COLUMN_USERID, groupId);
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
+
 		Session session = null;
 
 		try {
@@ -5735,6 +5813,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			}
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
 
 			Session session = null;
 
@@ -5811,6 +5891,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			}
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileEntry");
 
 			Session session = null;
 

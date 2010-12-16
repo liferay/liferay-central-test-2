@@ -582,6 +582,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 			String sql = query.toString();
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileShortcut");
+
 			Session session = null;
 
 			try {
@@ -820,6 +822,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 		String sql = query.toString();
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileShortcut");
+
 		Query q = session.createQuery(sql);
 
 		q.setFirstResult(0);
@@ -937,6 +941,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileShortcut");
 
 			Session session = null;
 
@@ -1079,6 +1085,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			}
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileShortcut");
 
 			Session session = null;
 
@@ -1308,6 +1316,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 		String sql = query.toString();
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileShortcut");
+
 		Query q = session.createQuery(sql);
 
 		q.setFirstResult(0);
@@ -1419,6 +1429,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			}
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileShortcut");
 
 			Session session = null;
 
@@ -1660,6 +1672,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 		String sql = query.toString();
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileShortcut");
+
 		Query q = session.createQuery(sql);
 
 		q.setFirstResult(0);
@@ -1784,6 +1798,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				DLFileShortcut.class.getName(), _FILTER_COLUMN_PK,
 				_FILTER_COLUMN_USERID, groupId);
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileShortcut");
+
 		Session session = null;
 
 		try {
@@ -1904,6 +1920,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			}
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileShortcut");
 
 			Session session = null;
 
@@ -2159,6 +2177,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 		String sql = query.toString();
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileShortcut");
+
 		Query q = session.createQuery(sql);
 
 		q.setFirstResult(0);
@@ -2291,6 +2311,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				DLFileShortcut.class.getName(), _FILTER_COLUMN_PK,
 				_FILTER_COLUMN_USERID, groupId);
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileShortcut");
+
 		Session session = null;
 
 		try {
@@ -2392,6 +2414,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			else {
 				sql = _SQL_SELECT_DLFILESHORTCUT;
 			}
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileShortcut");
 
 			Session session = null;
 
@@ -2545,6 +2569,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 			String sql = query.toString();
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileShortcut");
+
 			Session session = null;
 
 			try {
@@ -2614,6 +2640,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 			String sql = query.toString();
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileShortcut");
+
 			Session session = null;
 
 			try {
@@ -2672,6 +2700,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 			String sql = query.toString();
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileShortcut");
+
 			Session session = null;
 
 			try {
@@ -2728,6 +2758,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			query.append(_FINDER_COLUMN_G_F_FOLDERID_2);
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileShortcut");
 
 			Session session = null;
 
@@ -2788,6 +2820,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				DLFileShortcut.class.getName(), _FILTER_COLUMN_PK,
 				_FILTER_COLUMN_USERID, groupId);
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileShortcut");
+
 		Session session = null;
 
 		try {
@@ -2844,6 +2878,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			query.append(_FINDER_COLUMN_G_F_S_STATUS_2);
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileShortcut");
 
 			Session session = null;
 
@@ -2908,6 +2944,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
 				DLFileShortcut.class.getName(), _FILTER_COLUMN_PK,
 				_FILTER_COLUMN_USERID, groupId);
+
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileShortcut");
 
 		Session session = null;
 

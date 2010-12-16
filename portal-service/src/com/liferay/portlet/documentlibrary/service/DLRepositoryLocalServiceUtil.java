@@ -280,6 +280,11 @@ public class DLRepositoryLocalServiceUtil {
 		return getService().getNoAssetFileEntries();
 	}
 
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getOrphanedFileEntries()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getOrphanedFileEntries();
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry moveFileEntry(
 		long userId, long fileEntryId, long newFolderId,
 		com.liferay.portal.service.ServiceContext serviceContext)

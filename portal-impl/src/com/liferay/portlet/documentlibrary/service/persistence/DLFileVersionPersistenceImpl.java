@@ -542,6 +542,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 			String sql = query.toString();
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileVersion");
+
 			Session session = null;
 
 			try {
@@ -773,6 +775,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 		String sql = query.toString();
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileVersion");
+
 		Query q = session.createQuery(sql);
 
 		q.setFirstResult(0);
@@ -890,6 +894,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			query.append(DLFileVersionModelImpl.ORDER_BY_JPQL);
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileVersion");
 
 			Session session = null;
 
@@ -1041,6 +1047,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			}
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileVersion");
 
 			Session session = null;
 
@@ -1286,6 +1294,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 		String sql = query.toString();
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileVersion");
+
 		Query q = session.createQuery(sql);
 
 		q.setFirstResult(0);
@@ -1383,6 +1393,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			else {
 				sql = _SQL_SELECT_DLFILEVERSION.concat(DLFileVersionModelImpl.ORDER_BY_JPQL);
 			}
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileVersion");
 
 			Session session = null;
 
@@ -1497,6 +1509,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 			String sql = query.toString();
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileVersion");
+
 			Session session = null;
 
 			try {
@@ -1564,6 +1578,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 			String sql = query.toString();
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileVersion");
+
 			Session session = null;
 
 			try {
@@ -1624,6 +1640,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			query.append(_FINDER_COLUMN_F_S_STATUS_2);
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileVersion");
 
 			Session session = null;
 

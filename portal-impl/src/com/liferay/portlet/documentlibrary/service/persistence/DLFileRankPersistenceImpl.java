@@ -540,6 +540,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 			String sql = query.toString();
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileRank");
+
 			Session session = null;
 
 			try {
@@ -770,6 +772,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 		String sql = query.toString();
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileRank");
+
 		Query q = session.createQuery(sql);
 
 		q.setFirstResult(0);
@@ -879,6 +883,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			}
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileRank");
 
 			Session session = null;
 
@@ -1111,6 +1117,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 		String sql = query.toString();
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileRank");
+
 		Query q = session.createQuery(sql);
 
 		q.setFirstResult(0);
@@ -1225,6 +1233,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			}
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileRank");
 
 			Session session = null;
 
@@ -1470,6 +1480,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 		String sql = query.toString();
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileRank");
+
 		Query q = session.createQuery(sql);
 
 		q.setFirstResult(0);
@@ -1587,6 +1599,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			query.append(DLFileRankModelImpl.ORDER_BY_JPQL);
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileRank");
 
 			Session session = null;
 
@@ -1719,6 +1733,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 				sql = _SQL_SELECT_DLFILERANK.concat(DLFileRankModelImpl.ORDER_BY_JPQL);
 			}
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileRank");
+
 			Session session = null;
 
 			try {
@@ -1845,6 +1861,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 			String sql = query.toString();
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileRank");
+
 			Session session = null;
 
 			try {
@@ -1897,6 +1915,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			query.append(_FINDER_COLUMN_FILEENTRYID_FILEENTRYID_2);
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileRank");
 
 			Session session = null;
 
@@ -1953,6 +1973,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileRank");
 
 			Session session = null;
 
@@ -2015,6 +2037,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			query.append(_FINDER_COLUMN_C_U_F_FILEENTRYID_2);
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFileRank");
 
 			Session session = null;
 

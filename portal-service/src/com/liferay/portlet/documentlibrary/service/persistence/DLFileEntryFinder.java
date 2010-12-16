@@ -28,4 +28,7 @@ public interface DLFileEntryFinder {
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByNoAssets()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findOrphanedFileEntries()
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

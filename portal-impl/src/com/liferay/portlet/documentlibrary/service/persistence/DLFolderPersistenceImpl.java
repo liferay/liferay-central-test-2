@@ -642,6 +642,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 			String sql = query.toString();
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
+
 			Session session = null;
 
 			try {
@@ -884,6 +886,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 		String sql = query.toString();
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
+
 		Query q = session.createQuery(sql);
 
 		q.setFirstResult(0);
@@ -1003,6 +1007,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 			query.append(DLFolderModelImpl.ORDER_BY_JPQL);
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
 
 			Session session = null;
 
@@ -1146,6 +1152,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 			}
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
 
 			Session session = null;
 
@@ -1377,6 +1385,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 		String sql = query.toString();
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
+
 		Query q = session.createQuery(sql);
 
 		q.setFirstResult(0);
@@ -1502,6 +1512,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 				DLFolder.class.getName(), _FILTER_COLUMN_PK,
 				_FILTER_COLUMN_USERID, groupId);
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
+
 		Session session = null;
 
 		try {
@@ -1612,6 +1624,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 			}
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
 
 			Session session = null;
 
@@ -1843,6 +1857,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 		String sql = query.toString();
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
+
 		Query q = session.createQuery(sql);
 
 		q.setFirstResult(0);
@@ -1958,6 +1974,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 			}
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
 
 			Session session = null;
 
@@ -2203,6 +2221,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 		String sql = query.toString();
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
+
 		Query q = session.createQuery(sql);
 
 		q.setFirstResult(0);
@@ -2337,6 +2357,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 				DLFolder.class.getName(), _FILTER_COLUMN_PK,
 				_FILTER_COLUMN_USERID, groupId);
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
+
 		Session session = null;
 
 		try {
@@ -2465,6 +2487,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 			}
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
 
 			Session session = null;
 
@@ -2722,6 +2746,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 		String sql = query.toString();
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
+
 		Query q = session.createQuery(sql);
 
 		q.setFirstResult(0);
@@ -2851,6 +2877,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 			query.append(DLFolderModelImpl.ORDER_BY_JPQL);
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
 
 			Session session = null;
 
@@ -2984,6 +3012,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 			else {
 				sql = _SQL_SELECT_DLFOLDER.concat(DLFolderModelImpl.ORDER_BY_JPQL);
 			}
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
 
 			Session session = null;
 
@@ -3161,6 +3191,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 			String sql = query.toString();
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
+
 			Session session = null;
 
 			try {
@@ -3230,6 +3262,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 			String sql = query.toString();
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
+
 			Session session = null;
 
 			try {
@@ -3287,6 +3321,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 			String sql = query.toString();
 
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
+
 			Session session = null;
 
 			try {
@@ -3340,6 +3376,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 				DLFolder.class.getName(), _FILTER_COLUMN_PK,
 				_FILTER_COLUMN_USERID, groupId);
 
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
+
 		Session session = null;
 
 		try {
@@ -3387,6 +3425,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
 
 			Session session = null;
 
@@ -3444,6 +3484,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 			query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
 
 			Session session = null;
 
@@ -3503,6 +3545,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
 				DLFolder.class.getName(), _FILTER_COLUMN_PK,
 				_FILTER_COLUMN_USERID, groupId);
+
+		sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
 
 		Session session = null;
 
@@ -3567,6 +3611,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 			}
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
 
 			Session session = null;
 
@@ -3641,6 +3687,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 			}
 
 			String sql = query.toString();
+
+			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "DLFolder");
 
 			Session session = null;
 
