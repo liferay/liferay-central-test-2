@@ -76,7 +76,7 @@ public abstract class BasePropMethodImpl implements Method {
 	public static final String GETLASTMODIFIED = "getlastmodified";
 
 	public static final Tuple GETLASTMODIFIED_PAIR = new Tuple(
-		GETCONTENTLENGTH, WebDAVUtil.DAV_URI);
+		GETLASTMODIFIED, WebDAVUtil.DAV_URI);
 
 	public static final String LOCKDISCOVERY = "lockdiscovery";
 
