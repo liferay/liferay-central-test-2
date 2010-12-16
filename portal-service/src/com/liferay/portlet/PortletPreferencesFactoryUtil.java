@@ -67,14 +67,6 @@ public class PortletPreferencesFactoryUtil {
 	}
 
 	public static PortletPreferencesIds getPortletPreferencesIds(
-			HttpServletRequest request, String portletId)
-		throws PortalException, SystemException {
-
-		return getPortletPreferencesFactory().getPortletPreferencesIds(
-			request, portletId);
-	}
-
-	public static PortletPreferencesIds getPortletPreferencesIds(
 			HttpServletRequest request, Layout selLayout, String portletId)
 		throws PortalException, SystemException {
 
@@ -82,12 +74,12 @@ public class PortletPreferencesFactoryUtil {
 			request, selLayout, portletId);
 	}
 
-	public static PortletPreferences getPortletSetup(
-			Layout layout, String portletId, String defaultPreferences)
-		throws SystemException {
+	public static PortletPreferencesIds getPortletPreferencesIds(
+			HttpServletRequest request, String portletId)
+		throws PortalException, SystemException {
 
-		return getPortletPreferencesFactory().getPortletSetup(
-			layout, portletId, defaultPreferences);
+		return getPortletPreferencesFactory().getPortletPreferencesIds(
+			request, portletId);
 	}
 
 	public static PortletPreferences getPortletSetup(
@@ -108,6 +100,23 @@ public class PortletPreferencesFactoryUtil {
 	}
 
 	public static PortletPreferences getPortletSetup(
+			Layout layout, String portletId, String defaultPreferences)
+		throws SystemException {
+
+		return getPortletPreferencesFactory().getPortletSetup(
+			layout, portletId, defaultPreferences);
+	}
+
+	public static PortletPreferences getPortletSetup(
+			long scopeGroupId, Layout layout, String portletId,
+			String defaultPreferences)
+		throws SystemException {
+
+		return getPortletPreferencesFactory().getPortletSetup(
+			scopeGroupId,layout, portletId, defaultPreferences);
+	}
+
+	public static PortletPreferences getPortletSetup(
 			PortletRequest portletRequest)
 		throws PortalException, SystemException {
 
@@ -120,15 +129,6 @@ public class PortletPreferencesFactoryUtil {
 
 		return getPortletPreferencesFactory().getPortletSetup(
 			portletRequest, portletId);
-	}
-
-	public static PortletPreferences getPortletSetup(
-			long scopeGroupId, Layout layout, String portletId,
-			String defaultPreferences)
-		throws SystemException {
-
-		return getPortletPreferencesFactory().getPortletSetup(
-			scopeGroupId,layout, portletId, defaultPreferences);
 	}
 
 	public static PortletPreferences getPreferences(

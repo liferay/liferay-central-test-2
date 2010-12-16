@@ -78,12 +78,12 @@ public class AssetPublisherUtil {
 		Layout layout = LayoutLocalServiceUtil.getLayout(
 			themeDisplay.getRefererPlid());
 
-		PortletPreferences preferences =
+		PortletPreferences portletPreferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				themeDisplay.getScopeGroupId(), layout,
 				referringPortletResource, null);
 
-		String selectionStyle = preferences.getValue(
+		String selectionStyle = portletPreferences.getValue(
 			"selection-style", "dynamic");
 
 		if (selectionStyle.equals("dynamic")) {
@@ -94,9 +94,10 @@ public class AssetPublisherUtil {
 			className, classPK);
 
 		addSelection(
-			className, assetEntry.getEntryId(), assetEntryOrder, preferences);
+			className, assetEntry.getEntryId(), assetEntryOrder,
+			portletPreferences);
 
-		preferences.store();
+		portletPreferences.store();
 	}
 
 	public static void addRecentFolderId(
@@ -106,7 +107,8 @@ public class AssetPublisherUtil {
 	}
 
 	public static void addSelection(
-			PortletRequest portletRequest, PortletPreferences preferences)
+			PortletRequest portletRequest,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
 		String assetEntryType = ParamUtil.getString(
@@ -116,12 +118,12 @@ public class AssetPublisherUtil {
 			portletRequest, "assetEntryOrder");
 
 		addSelection(
-			assetEntryType, assetEntryId, assetEntryOrder, preferences);
+			assetEntryType, assetEntryId, assetEntryOrder, portletPreferences);
 	}
 
 	public static void addSelection(
 			String assetEntryType, long assetEntryId, int assetEntryOrder,
-			PortletPreferences preferences)
+			PortletPreferences portletPreferences)
 		throws Exception {
 
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(
@@ -134,7 +136,7 @@ public class AssetPublisherUtil {
 		AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(
 			assetEntry.getClassPK(), AssetRendererFactory.TYPE_LATEST);
 
-		String[] assetEntryXmls = preferences.getValues(
+		String[] assetEntryXmls = portletPreferences.getValues(
 			"asset-entry-xml", new String[0]);
 
 		String assetEntryXml = _getAssetEntryXml(
@@ -147,11 +149,11 @@ public class AssetPublisherUtil {
 			assetEntryXmls = ArrayUtil.append(assetEntryXmls, assetEntryXml);
 		}
 
-		preferences.setValues("asset-entry-xml", assetEntryXmls);
+		portletPreferences.setValues("asset-entry-xml", assetEntryXmls);
 	}
 
 	public static AssetEntryQuery getAssetEntryQuery(
-			PortletPreferences preferences, long[] scopeGroupIds)
+			PortletPreferences portletPreferences, long[] scopeGroupIds)
 		throws Exception {
 
 		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
@@ -167,7 +169,7 @@ public class AssetPublisherUtil {
 		String[] notAnyAssetTagNames = new String[0];
 
 		for (int i = 0; true; i++) {
-			String[] queryValues = preferences.getValues(
+			String[] queryValues = portletPreferences.getValues(
 				"queryValues" + i, null);
 
 			if ((queryValues == null) || (queryValues.length == 0)) {
@@ -175,10 +177,12 @@ public class AssetPublisherUtil {
 			}
 
 			boolean queryContains = GetterUtil.getBoolean(
-				preferences.getValue("queryContains" + i, StringPool.BLANK));
+				portletPreferences.getValue(
+					"queryContains" + i, StringPool.BLANK));
 			boolean queryAndOperator = GetterUtil.getBoolean(
-				preferences.getValue("queryAndOperator" + i, StringPool.BLANK));
-			String queryName = preferences.getValue(
+				portletPreferences.getValue(
+					"queryAndOperator" + i, StringPool.BLANK));
+			String queryName = portletPreferences.getValue(
 				"queryName" + i, StringPool.BLANK);
 
 			if (Validator.equals(queryName, "assetCategories")) {
@@ -237,13 +241,13 @@ public class AssetPublisherUtil {
 	}
 
 	public static String[] getAssetTagNames(
-			PortletPreferences preferences, long scopeGroupId)
+			PortletPreferences portletPreferences, long scopeGroupId)
 		throws Exception {
 
 		String[] allAssetTagNames = new String[0];
 
 		for (int i = 0; true; i++) {
-			String[] queryValues = preferences.getValues(
+			String[] queryValues = portletPreferences.getValues(
 				"queryValues" + i, null);
 
 			if ((queryValues == null) || (queryValues.length == 0)) {
@@ -251,10 +255,12 @@ public class AssetPublisherUtil {
 			}
 
 			boolean queryContains = GetterUtil.getBoolean(
-				preferences.getValue("queryContains" + i, StringPool.BLANK));
+				portletPreferences.getValue(
+					"queryContains" + i, StringPool.BLANK));
 			boolean queryAndOperator = GetterUtil.getBoolean(
-				preferences.getValue("queryAndOperator" + i, StringPool.BLANK));
-			String queryName = preferences.getValue(
+				portletPreferences.getValue(
+					"queryAndOperator" + i, StringPool.BLANK));
+			String queryName = portletPreferences.getValue(
 				"queryName" + i, StringPool.BLANK);
 
 			if (!Validator.equals(queryName, "assetCategories") &&
@@ -269,18 +275,19 @@ public class AssetPublisherUtil {
 	}
 
 	public static long[] getClassNameIds(
-		PortletPreferences preferences, long[] availableClassNameIds) {
+		PortletPreferences portletPreferences, long[] availableClassNameIds) {
 
 		boolean anyAssetType = GetterUtil.getBoolean(
-			preferences.getValue("any-asset-type", Boolean.TRUE.toString()));
+			portletPreferences.getValue(
+				"any-asset-type", Boolean.TRUE.toString()));
 
 		long[] classNameIds = null;
 
 		if (!anyAssetType &&
-			(preferences.getValues("class-name-ids", null) != null)) {
+			(portletPreferences.getValues("class-name-ids", null) != null)) {
 
 			classNameIds = GetterUtil.getLongValues(
-				preferences.getValues("class-name-ids", null));
+				portletPreferences.getValues("class-name-ids", null));
 		}
 		else {
 			classNameIds = availableClassNameIds;
@@ -290,15 +297,16 @@ public class AssetPublisherUtil {
 	}
 
 	public static long[] getGroupIds(
-		PortletPreferences preferences, long scopeGroupId, Layout layout) {
+		PortletPreferences portletPreferences, long scopeGroupId,
+		Layout layout) {
 
 		long[] groupIds = new long[] {scopeGroupId};
 
 		boolean defaultScope = GetterUtil.getBoolean(
-			preferences.getValue("default-scope", null), true);
+			portletPreferences.getValue("default-scope", null), true);
 
 		if (!defaultScope) {
-			String[] scopeIds = preferences.getValues(
+			String[] scopeIds = portletPreferences.getValues(
 				"scope-ids",
 				new String[] {"group" + StringPool.UNDERLINE + scopeGroupId});
 
@@ -359,14 +367,15 @@ public class AssetPublisherUtil {
 	}
 
 	public static void removeAndStoreSelection(
-			List<String> assetEntryUuids, PortletPreferences preferences)
+			List<String> assetEntryUuids,
+			PortletPreferences portletPreferences)
 		throws Exception {
 
 		if (assetEntryUuids.size() == 0) {
 			return;
 		}
 
-		String[] assetEntryXmls = preferences.getValues(
+		String[] assetEntryXmls = portletPreferences.getValues(
 			"asset-entry-xml", new String[0]);
 
 		List<String> assetEntryXmlsList = ListUtil.fromArray(assetEntryXmls);
@@ -387,11 +396,11 @@ public class AssetPublisherUtil {
 			}
 		}
 
-		preferences.setValues(
+		portletPreferences.setValues(
 			"asset-entry-xml",
 			assetEntryXmlsList.toArray(new String[assetEntryXmlsList.size()]));
 
-		preferences.store();
+		portletPreferences.store();
 	}
 
 	public static void removeRecentFolderId(

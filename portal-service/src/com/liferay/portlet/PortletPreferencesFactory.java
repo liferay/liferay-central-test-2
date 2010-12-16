@@ -46,16 +46,12 @@ public interface PortletPreferencesFactory {
 		throws PortalException, SystemException;
 
 	public PortletPreferencesIds getPortletPreferencesIds(
-			HttpServletRequest request, String portletId)
-		throws PortalException, SystemException;
-
-	public PortletPreferencesIds getPortletPreferencesIds(
 			HttpServletRequest request, Layout selLayout, String portletId)
 		throws PortalException, SystemException;
 
-	public PortletPreferences getPortletSetup(
-			Layout layout, String portletId, String defaultPreferences)
-		throws SystemException;
+	public PortletPreferencesIds getPortletPreferencesIds(
+			HttpServletRequest request, String portletId)
+		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletSetup(
 			HttpServletRequest request, String portletId)
@@ -66,17 +62,21 @@ public interface PortletPreferencesFactory {
 			String defaultPreferences)
 		throws PortalException, SystemException;
 
+	public PortletPreferences getPortletSetup(
+			Layout layout, String portletId, String defaultPreferences)
+		throws SystemException;
+
+	public PortletPreferences getPortletSetup(
+			long scopeGroupId, Layout layout, String portletId,
+			String defaultPreferences)
+		throws SystemException;
+
 	public PortletPreferences getPortletSetup(PortletRequest portletRequest)
 		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletSetup(
 			PortletRequest portletRequest, String portletId)
 		throws PortalException, SystemException;
-
-	public PortletPreferences getPortletSetup(
-			long scopeGroupId, Layout layout, String portletId,
-			String defaultPreferences)
-		throws SystemException;
 
 	public PortletPreferences getPreferences(HttpServletRequest request);
 
