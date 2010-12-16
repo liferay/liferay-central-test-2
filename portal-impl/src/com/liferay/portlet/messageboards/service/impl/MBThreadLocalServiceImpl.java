@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.GroupConstants;
@@ -36,6 +37,7 @@ import com.liferay.portlet.messageboards.model.MBMessageFlagConstants;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.MBThreadConstants;
 import com.liferay.portlet.messageboards.service.base.MBThreadLocalServiceBaseImpl;
+import com.liferay.portlet.messageboards.util.MBIndexer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +64,12 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		// Indexer
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(MBMessage.class);
+
+		if (Validator.isNull(indexer)) {
+			indexer = new MBIndexer();
+
+			IndexerRegistryUtil.register(indexer);
+		}
 
 		indexer.delete(thread);
 
