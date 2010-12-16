@@ -138,8 +138,6 @@ public class ServiceTestUtil {
 			(SchedulerEngine)PortalBeanLocatorUtil.locate(
 				SchedulerEngine.class.getName());
 
-		SchedulerEngineUtil.init(new SchedulerEngineProxy());
-
 		try {
 			schedulerEngine.start();
 		}

@@ -182,10 +182,6 @@ public class SchedulerEngineUtil {
 		return _instance._getStartTime(jobName, groupName);
 	}
 
-	public static void init(SchedulerEngine defaultScheduler) {
-		_instance._init(defaultScheduler);
-	}
-
 	public static void pause(String groupName) throws SchedulerException {
 		_instance._pause(groupName);
 	}
@@ -313,6 +309,10 @@ public class SchedulerEngineUtil {
 
 	public static void update(Trigger trigger) throws SchedulerException {
 		_instance._update(trigger);
+	}
+
+	public void setSchedulerEngine(SchedulerEngine schedulerEngine) {
+		_schedulerEngine = schedulerEngine;
 	}
 
 	private void _addScriptingJob(
@@ -635,10 +635,6 @@ public class SchedulerEngineUtil {
 		return null;
 	}
 
-	private void _init(SchedulerEngine schedulerEngine) {
-		_schedulerEngine = schedulerEngine;
-	}
-
 	private void _pause(String groupName) throws SchedulerException {
 		_schedulerEngine.pause(groupName);
 	}
@@ -906,6 +902,6 @@ public class SchedulerEngineUtil {
 
 	private static SchedulerEngineUtil _instance = new SchedulerEngineUtil();
 
-	private SchedulerEngine _schedulerEngine;
+	private static SchedulerEngine _schedulerEngine;
 
 }

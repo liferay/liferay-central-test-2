@@ -140,8 +140,6 @@ public class StartupAction extends SimpleAction {
 			_log.debug("Initialize scheduler engine");
 		}
 
-		SchedulerEngineUtil.init(new SchedulerEngineProxy());
-
 		SchedulerEngineUtil.start();
 
 		// Verify

@@ -14,6 +14,8 @@
 
 package com.liferay.portal.scheduler;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
@@ -148,16 +150,30 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
 	}
 
+	public void setDelegate(SchedulerEngine delegate) {
+		_delegate = delegate;
+	}
+
 	public void shutdown() {
-		MessageBusUtil.sendMessage(
-			DestinationNames.SCHEDULER_ENGINE,
-			SchedulerRequest.createShutdownRequest());
+		try {
+			_delegate.shutdown();
+		}
+		catch (SchedulerException se) {
+			if (_log.isErrorEnabled()) {
+				_log.error("Unable to shutdown", se);
+			}
+		}
 	}
 
 	public void start() {
-		MessageBusUtil.sendMessage(
-			DestinationNames.SCHEDULER_ENGINE,
-			SchedulerRequest.createStartupRequest());
+		try {
+			_delegate.start();
+		}
+		catch (SchedulerException se) {
+			if (_log.isErrorEnabled()) {
+				_log.error("Unable to shutdown", se);
+			}
+		}
 	}
 
 	public void suppressError(String jobName, String groupName) {
@@ -169,30 +185,46 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 	}
 
 	public void unschedule(String groupName) {
-		SchedulerRequest schedulerRequest =
-			SchedulerRequest.createUnregisterRequest(groupName);
-
-		MessageBusUtil.sendMessage(
-			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
+		try {
+			_delegate.unschedule(groupName);
+		}
+		catch (SchedulerException se) {
+			if (_log.isErrorEnabled()) {
+				_log.error(
+					"Unable to unschedule job: " + groupName,
+					se);
+			}
+		}
 	}
 
 	public void unschedule(String jobName, String groupName) {
-		SchedulerRequest schedulerRequest =
-			SchedulerRequest.createUnregisterRequest(jobName, groupName);
-
-		MessageBusUtil.sendMessage(
-			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
+		try {
+			_delegate.unschedule(jobName, groupName);
+		}
+		catch (SchedulerException se) {
+			if (_log.isErrorEnabled()) {
+				_log.error(
+					"Unable to unschedule job: " + groupName + ":" + jobName,
+					se);
+			}
+		}
 	}
 
 	/**
 	 * @deprecated {@link #unschedule(String, String)}
 	 */
 	public void unschedule(Trigger trigger) {
-		SchedulerRequest schedulerRequest =
-			SchedulerRequest.createUnregisterRequest(trigger);
-
-		MessageBusUtil.sendMessage(
-			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
+		try {
+			_delegate.unschedule(trigger.getJobName(), trigger.getGroupName());
+		}
+		catch (SchedulerException se) {
+			if (_log.isErrorEnabled()) {
+				_log.error(
+					"Unable to unschedule job: " +
+					trigger.getGroupName()+ ":" + trigger.getJobName(),
+					se);
+			}
+		}
 	}
 
 	public void update(Trigger trigger) {
@@ -202,5 +234,10 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 		MessageBusUtil.sendMessage(
 			DestinationNames.SCHEDULER_ENGINE, schedulerRequest);
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		SchedulerEngineProxy.class);
+
+	private SchedulerEngine _delegate;
 
 }
