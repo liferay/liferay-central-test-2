@@ -26,13 +26,16 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.sender.MessageSender;
 import com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.JspFactorySwapper;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
+import com.liferay.portal.plugin.PluginPackageIndexer;
 import com.liferay.portal.security.lang.PortalSecurityManager;
 import com.liferay.portal.service.LockLocalServiceUtil;
 import com.liferay.portal.tools.DBUpgrader;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.messageboards.util.MBIndexer;
 
 /**
  * @author Brian Wing Shun Chan
@@ -106,6 +109,11 @@ public class StartupAction extends SimpleAction {
 		}
 
 		VelocityEngineUtil.init();
+
+		// Indexers
+
+		IndexerRegistryUtil.register(new MBIndexer());
+		IndexerRegistryUtil.register(new PluginPackageIndexer());
 
 		// Upgrade
 
