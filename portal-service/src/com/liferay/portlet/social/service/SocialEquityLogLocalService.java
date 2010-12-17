@@ -235,6 +235,9 @@ public interface SocialEquityLogLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* @deprecated {@link #deactivateEquityLogs(long, String, long, String, String)}
+	*/
 	public void deactivateEquityLogs(long userId, long assetEntryId,
 		java.lang.String actionId, java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -242,6 +245,11 @@ public interface SocialEquityLogLocalService {
 
 	public void deactivateEquityLogs(long userId, java.lang.String className,
 		long classPK, java.lang.String actionId, java.lang.String extraData)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void deactivateEquityLogs(java.lang.String className, long classPK,
+		java.lang.String actionId, java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
