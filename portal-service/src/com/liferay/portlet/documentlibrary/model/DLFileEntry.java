@@ -41,6 +41,8 @@ public interface DLFileEntry extends DLFileEntryModel {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public long getDataRepositoryId();
+
 	public java.lang.String getExtraSettings();
 
 	public com.liferay.portal.kernel.util.UnicodeProperties getExtraSettingsProperties();
@@ -68,8 +70,6 @@ public interface DLFileEntry extends DLFileEntryModel {
 	public com.liferay.portal.model.Lock getLock();
 
 	public java.lang.String getLuceneProperties();
-
-	public long getDataRepositoryId();
 
 	public boolean hasLock();
 

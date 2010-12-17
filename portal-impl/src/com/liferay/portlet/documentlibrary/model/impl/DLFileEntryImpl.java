@@ -63,6 +63,11 @@ public class DLFileEntryImpl
 			getFileEntryId(), version);
 	}
 
+	public long getDataRepositoryId() {
+		return DLFolderConstants.getDataRepositoryId(
+			getGroupId(), getFolderId());
+	}
+
 	public String getExtraSettings() {
 		if (_extraSettingsProperties == null) {
 			return super.getExtraSettings();
@@ -172,11 +177,6 @@ public class DLFileEntryImpl
 		}
 
 		return sb.toString();
-	}
-
-	public long getDataRepositoryId() {
-		return DLFolderConstants.getDataRepositoryId(
-			getGroupId(), getFolderId());
 	}
 
 	public boolean hasLock() {

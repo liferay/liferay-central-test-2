@@ -502,6 +502,10 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return _dlFileEntry.getContentStream(version);
 	}
 
+	public long getDataRepositoryId() {
+		return _dlFileEntry.getDataRepositoryId();
+	}
+
 	public com.liferay.portal.kernel.util.UnicodeProperties getExtraSettingsProperties() {
 		return _dlFileEntry.getExtraSettingsProperties();
 	}
@@ -544,10 +548,6 @@ public class DLFileEntryWrapper implements DLFileEntry {
 
 	public java.lang.String getLuceneProperties() {
 		return _dlFileEntry.getLuceneProperties();
-	}
-
-	public long getDataRepositoryId() {
-		return _dlFileEntry.getDataRepositoryId();
 	}
 
 	public boolean hasLock() {

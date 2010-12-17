@@ -17,9 +17,9 @@ package com.liferay.portlet.documentlibrary.model;
 /**
  * <p>
  * This contains several utility methods for the purpose of determining
- * folderIds and dataRepositoryIds as used by back-end data systems like search
- * and Document Library hooks.  These repository IDs should not be confused with
- * the repositoryId used by in
+ * folder IDs and data repository IDs as used by back-end data systems like
+ * search and Document Library hooks. These repository IDs should not be
+ * confused with the repository ID used by in
  * {@link com.liferay.portal.kernel.repository.RepositoryFactory}.
  * </p>
  *
@@ -35,20 +35,8 @@ public class DLFolderConstants {
 	}
 
 	/**
-	 * Determine the folderId when no knowledge of it currently exists.
-	 */
-	public static long getFolderId(long groupId, long dataRepositoryId) {
-		if (groupId != dataRepositoryId) {
-			return dataRepositoryId;
-		}
-		else {
-			return DEFAULT_PARENT_FOLDER_ID;
-		}
-	}
-
-	/**
-	 * Determine the data repository ID from the groupId and folderId.  The
-	 * folderId may be zero, implying that it is the root folder for the given
+	 * Determine the data repository ID from the group ID and folder ID. The
+	 * folder ID may be zero, implying that it is the root folder for the given
 	 * group.
 	 */
 	public static long getDataRepositoryId(long groupId, long folderId) {
@@ -57,6 +45,18 @@ public class DLFolderConstants {
 		}
 		else {
 			return groupId;
+		}
+	}
+
+	/**
+	 * Determine the folder ID when no knowledge of it currently exists.
+	 */
+	public static long getFolderId(long groupId, long dataRepositoryId) {
+		if (groupId != dataRepositoryId) {
+			return dataRepositoryId;
+		}
+		else {
+			return DEFAULT_PARENT_FOLDER_ID;
 		}
 	}
 
