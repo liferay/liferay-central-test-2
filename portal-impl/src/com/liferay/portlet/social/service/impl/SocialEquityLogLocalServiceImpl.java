@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.increment.BufferedIncrement;
 import com.liferay.portal.kernel.increment.SocialEquityIncrement;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
@@ -59,6 +60,16 @@ import org.springframework.jdbc.core.RowCallbackHandler;
  */
 public class SocialEquityLogLocalServiceImpl
 	extends SocialEquityLogLocalServiceBaseImpl {
+
+	/**
+	 * @deprecated {@link #addEquityLogs(long, long, String, String)}
+	 */
+	public void addEquityLogs(
+			long userId, long assetEntryId, String actionId)
+		throws PortalException, SystemException {
+
+		addEquityLogs(userId, assetEntryId, actionId, StringPool.BLANK);
+	}
 
 	public void addEquityLogs(
 			long userId, long assetEntryId, String actionId, String extraData)
@@ -246,10 +257,10 @@ public class SocialEquityLogLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated {@link #deactivateEquityLogs(long, String, long, String, String)}
+	 * @deprecated {@link #deactivateEquityLogs(long, long, String, String)}
 	 */
 	public void deactivateEquityLogs(
-			long userId, long assetEntryId, String actionId, String extraData)
+			long userId, long assetEntryId, String actionId)
 		throws PortalException, SystemException {
 
 		AssetEntry assetEntry = assetEntryPersistence.findByPrimaryKey(
@@ -257,7 +268,19 @@ public class SocialEquityLogLocalServiceImpl
 
 		deactivateEquityLogs(
 			userId, assetEntry.getClassName(), assetEntry.getClassPK(),
-			actionId, extraData);
+			actionId, StringPool.BLANK);
+	}
+
+	/**
+	 * @deprecated {@link #deactivateEquityLogs(long, String, long, String,
+	 *			   String)}
+	 */
+	public void deactivateEquityLogs(
+			long userId, String className, long classPK, String actionId)
+		throws PortalException, SystemException {
+
+		deactivateEquityLogs(
+			userId, className, classPK, actionId, StringPool.BLANK);
 	}
 
 	public void deactivateEquityLogs(
@@ -536,10 +559,6 @@ public class SocialEquityLogLocalServiceImpl
 		return ((double)value / lifespan) * -1;
 	}
 
-	protected int getEquityDate() {
-		return getEquityDate(new Date());
-	}
-
 	protected void deactivateEquityLogs(List<SocialEquityLog> equityLogs)
 		throws PortalException, SystemException {
 
@@ -583,6 +602,10 @@ public class SocialEquityLogLocalServiceImpl
 
 			socialEquityLogPersistence.remove(equityLog);
 		}
+	}
+
+	protected int getEquityDate() {
+		return getEquityDate(new Date());
 	}
 
 	protected int getEquityDate(Date date) {

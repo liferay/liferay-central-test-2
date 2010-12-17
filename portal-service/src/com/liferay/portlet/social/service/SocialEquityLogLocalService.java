@@ -210,6 +210,14 @@ public interface SocialEquityLogLocalService {
 		boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* @deprecated {@link #addEquityLogs(long, long, String, String)}
+	*/
+	public void addEquityLogs(long userId, long assetEntryId,
+		java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public void addEquityLogs(long userId, long assetEntryId,
 		java.lang.String actionId, java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -236,10 +244,19 @@ public interface SocialEquityLogLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* @deprecated {@link #deactivateEquityLogs(long, String, long, String, String)}
+	* @deprecated {@link #deactivateEquityLogs(long, long, String, String)}
 	*/
 	public void deactivateEquityLogs(long userId, long assetEntryId,
-		java.lang.String actionId, java.lang.String extraData)
+		java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @deprecated {@link #deactivateEquityLogs(long, String, long, String,
+	String)}
+	*/
+	public void deactivateEquityLogs(long userId, java.lang.String className,
+		long classPK, java.lang.String actionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

@@ -230,6 +230,16 @@ public class SocialEquityLogLocalServiceUtil {
 		return getService().updateSocialEquityLog(socialEquityLog, merge);
 	}
 
+	/**
+	* @deprecated {@link #addEquityLogs(long, long, String, String)}
+	*/
+	public static void addEquityLogs(long userId, long assetEntryId,
+		java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().addEquityLogs(userId, assetEntryId, actionId);
+	}
+
 	public static void addEquityLogs(long userId, long assetEntryId,
 		java.lang.String actionId, java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -269,14 +279,24 @@ public class SocialEquityLogLocalServiceUtil {
 	}
 
 	/**
-	* @deprecated {@link #deactivateEquityLogs(long, String, long, String, String)}
+	* @deprecated {@link #deactivateEquityLogs(long, long, String, String)}
 	*/
 	public static void deactivateEquityLogs(long userId, long assetEntryId,
-		java.lang.String actionId, java.lang.String extraData)
+		java.lang.String actionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.deactivateEquityLogs(userId, assetEntryId, actionId, extraData);
+		getService().deactivateEquityLogs(userId, assetEntryId, actionId);
+	}
+
+	/**
+	* @deprecated {@link #deactivateEquityLogs(long, String, long, String,
+	String)}
+	*/
+	public static void deactivateEquityLogs(long userId,
+		java.lang.String className, long classPK, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deactivateEquityLogs(userId, className, classPK, actionId);
 	}
 
 	public static void deactivateEquityLogs(long userId,

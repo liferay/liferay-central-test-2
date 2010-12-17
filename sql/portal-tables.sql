@@ -1578,7 +1578,7 @@ create table SocialEquityLog (
 	expiration INTEGER,
 	type_ INTEGER,
 	value INTEGER,
-	extraData STRING null
+	extraData VARCHAR(255) null
 );
 
 create table SocialEquitySetting (
