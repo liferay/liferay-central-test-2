@@ -347,12 +347,12 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService {
 	}
 
 	public com.liferay.portal.kernel.repository.model.FileEntry moveFileEntry(
-		long userId, long repositoryId, long fileEntryId, long newFolderId,
+		long userId, long fileEntryId, long newFolderId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppLocalService.moveFileEntry(userId, repositoryId,
-			fileEntryId, newFolderId, serviceContext);
+		return _dlAppLocalService.moveFileEntry(userId, fileEntryId,
+			newFolderId, serviceContext);
 	}
 
 	public void updateAsset(long userId,

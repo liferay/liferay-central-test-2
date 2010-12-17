@@ -364,13 +364,13 @@ public class DLAppLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.repository.model.FileEntry moveFileEntry(
-		long userId, long repositoryId, long fileEntryId, long newFolderId,
+		long userId, long fileEntryId, long newFolderId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .moveFileEntry(userId, repositoryId, fileEntryId,
-			newFolderId, serviceContext);
+				   .moveFileEntry(userId, fileEntryId, newFolderId,
+			serviceContext);
 	}
 
 	public static void updateAsset(long userId,

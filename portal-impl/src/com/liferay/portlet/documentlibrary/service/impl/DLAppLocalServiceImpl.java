@@ -456,11 +456,11 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	}
 
 	public FileEntry moveFileEntry(
-			long userId, long repositoryId, long fileEntryId, long newFolderId,
+			long userId, long fileEntryId, long newFolderId,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		LocalRepository localRepository = getLocalRepository(repositoryId);
+		LocalRepository localRepository = getLocalRepository();
 
 		return localRepository.moveFileEntry(
 			userId, fileEntryId, newFolderId, serviceContext);
