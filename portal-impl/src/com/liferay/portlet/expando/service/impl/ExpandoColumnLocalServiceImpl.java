@@ -202,7 +202,7 @@ public class ExpandoColumnLocalServiceImpl
 			companyId, classNameId, tableName);
 
 		if (table == null) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		return expandoColumnPersistence.findByTableId(table.getTableId());
@@ -272,7 +272,7 @@ public class ExpandoColumnLocalServiceImpl
 			companyId, classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME);
 
 		if (table == null) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		return expandoColumnPersistence.findByTableId(table.getTableId());

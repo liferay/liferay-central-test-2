@@ -20,7 +20,7 @@
 String className = (String)request.getAttribute("emailAddresses.className");
 long classPK = (Long)request.getAttribute("emailAddresses.classPK");
 
-List<EmailAddress> emailAddresses = Collections.EMPTY_LIST;
+List<EmailAddress> emailAddresses = Collections.emptyList();
 
 int[] emailAddressesIndexes = null;
 

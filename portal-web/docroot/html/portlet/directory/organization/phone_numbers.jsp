@@ -20,7 +20,7 @@
 String className = (String)request.getAttribute("phones.className");
 long classPK = (Long)request.getAttribute("phones.classPK");
 
-List<Phone> phones = Collections.EMPTY_LIST;
+List<Phone> phones = Collections.emptyList();
 
 if (classPK > 0) {
 	phones = PhoneServiceUtil.getPhones(className, classPK);

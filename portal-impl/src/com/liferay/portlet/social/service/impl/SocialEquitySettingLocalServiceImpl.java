@@ -73,7 +73,7 @@ public class SocialEquitySettingLocalServiceImpl
 				className, actionId);
 
 		if (equityActionMapping == null) {
-			socialEquitySettings = Collections.EMPTY_LIST;
+			socialEquitySettings = Collections.emptyList();
 
 			_portalCache.put(key, socialEquitySettings);
 

@@ -40,7 +40,7 @@ public class DataSampleThreadLocal implements Cloneable {
 
 	public static List<DataSample> getDataSamples() {
 		if (!_monitoringDataSampleThreadLocal) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		return _dataSampleThreadLocal.get()._getDataSamples();

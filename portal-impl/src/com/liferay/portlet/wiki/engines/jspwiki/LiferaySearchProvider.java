@@ -28,7 +28,7 @@ import java.util.Properties;
 public class LiferaySearchProvider implements SearchProvider {
 
 	public Collection<WikiPage> findPages(String query) {
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	public String getProviderInfo() {

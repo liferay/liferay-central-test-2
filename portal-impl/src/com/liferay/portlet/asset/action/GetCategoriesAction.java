@@ -74,7 +74,7 @@ public class GetCategoriesAction extends JSONAction {
 		int start = ParamUtil.getInteger(request, "start", QueryUtil.ALL_POS);
 		int end = ParamUtil.getInteger(request, "end", QueryUtil.ALL_POS);
 
-		List<AssetCategory> categories = Collections.EMPTY_LIST;
+		List<AssetCategory> categories = Collections.emptyList();
 
 		if (categoryId > 0) {
 			categories = AssetCategoryServiceUtil.getChildCategories(

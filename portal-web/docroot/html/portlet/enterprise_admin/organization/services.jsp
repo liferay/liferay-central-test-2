@@ -21,7 +21,7 @@ Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZAT
 
 long organizationId = (organization != null) ? organization.getOrganizationId() : 0;
 
-List<OrgLabor> orgLabors = Collections.EMPTY_LIST;
+List<OrgLabor> orgLabors = Collections.emptyList();
 
 int[] orgLaborsIndexes = null;
 

@@ -176,7 +176,7 @@ public class ResourceActionsUtil {
 		catch (Exception e) {
 			_log.error(e, e);
 
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 	}
 
@@ -811,7 +811,7 @@ public class ResourceActionsUtil {
 			_socialEquityActionMappings.get(name);
 
 		if (socialEquityActionMappings == null) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		List<SocialEquityActionMapping> socialEquityActionMappingList =

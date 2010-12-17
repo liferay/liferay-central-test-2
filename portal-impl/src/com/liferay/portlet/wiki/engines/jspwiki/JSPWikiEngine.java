@@ -74,7 +74,7 @@ public class JSPWikiEngine implements WikiEngine {
 		throws PageContentException {
 
 		if (Validator.isNull(page.getContent())) {
-			return Collections.EMPTY_MAP;
+			return Collections.emptyMap();
 		}
 
 		try {

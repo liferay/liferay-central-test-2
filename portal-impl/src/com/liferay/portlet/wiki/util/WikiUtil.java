@@ -560,7 +560,7 @@ public class WikiUtil {
 			return _getEngine(page.getFormat()).getOutgoingLinks(page);
 		}
 		catch (WikiFormatException wfe) {
-			return Collections.EMPTY_MAP;
+			return Collections.emptyMap();
 		}
 	}
 

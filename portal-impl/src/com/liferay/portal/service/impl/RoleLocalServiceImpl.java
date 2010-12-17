@@ -349,7 +349,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		throws SystemException {
 
 		if ((groups == null) || groups.isEmpty()) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		return roleFinder.findByU_G(userId, groups);

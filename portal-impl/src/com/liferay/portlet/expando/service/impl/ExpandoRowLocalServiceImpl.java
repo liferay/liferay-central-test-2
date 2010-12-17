@@ -97,7 +97,7 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 			companyId, classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME);
 
 		if (table == null) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		return expandoRowPersistence.findByTableId(
@@ -184,7 +184,7 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 			companyId, classNameId, tableName);
 
 		if (table == null) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		return expandoRowPersistence.findByTableId(

@@ -69,7 +69,7 @@ public class WorkflowHandlerRegistryUtil {
 				"workflowContext");
 
 		if (workflowContext == null) {
-			workflowContext = Collections.EMPTY_MAP;
+			workflowContext = Collections.emptyMap();
 		}
 
 		startWorkflowInstance(
@@ -149,7 +149,7 @@ public class WorkflowHandlerRegistryUtil {
 				"workflowContext");
 
 		if (workflowContext == null) {
-			workflowContext = Collections.EMPTY_MAP;
+			workflowContext = Collections.emptyMap();
 		}
 
 		startWorkflowInstance(

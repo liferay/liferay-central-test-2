@@ -172,7 +172,7 @@ public class LanguageResources {
 			}
 		}
 		else {
-			languageMap = Collections.EMPTY_MAP;
+			languageMap = Collections.emptyMap();
 		}
 
 		_languageMaps.put(locale, languageMap);

@@ -635,7 +635,7 @@ public class MediaWikiImporter implements WikiImporter {
 		throws IOException {
 
 		if ((usersFile == null) || (!usersFile.exists())) {
-			return Collections.EMPTY_MAP;
+			return Collections.emptyMap();
 		}
 
 		Map<String, String> usersMap = new HashMap<String, String>();

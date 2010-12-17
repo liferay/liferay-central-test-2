@@ -85,7 +85,7 @@ public class DefaultWorkflowTask implements Serializable, WorkflowTask {
 
 	public List<WorkflowTaskAssignee> getWorkflowTaskAssignees() {
 		if (_workflowTaskAssignees == null) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		return _workflowTaskAssignees;

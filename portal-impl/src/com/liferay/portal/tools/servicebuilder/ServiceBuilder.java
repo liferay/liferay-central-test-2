@@ -1504,7 +1504,7 @@ public class ServiceBuilder {
 			return exceptions;
 		}
 		else {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 	}
 

@@ -122,7 +122,7 @@ public abstract class ClusterBase {
 		Vector<org.jgroups.Address> jGroupsAddresses = view.getMembers();
 
 		if (jGroupsAddresses == null) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		List<Address> addresses = new ArrayList<Address>(

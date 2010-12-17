@@ -70,7 +70,7 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 			groupId, MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 
 		if (categoryIds.length == 0) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		if (userId <= 0) {

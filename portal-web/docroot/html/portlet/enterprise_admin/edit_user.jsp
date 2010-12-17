@@ -41,7 +41,7 @@ else {
 
 String groupIds = ParamUtil.getString(request, "groupsSearchContainerPrimaryKeys");
 
-List<Group> groups = Collections.EMPTY_LIST;
+List<Group> groups = Collections.emptyList();
 
 if (Validator.isNotNull(groupIds)) {
 	long[] groupIdsArray = StringUtil.split(groupIds, 0L);
@@ -58,7 +58,7 @@ else if (selUser != null) {
 
 String organizationIds = ParamUtil.getString(request, "organizationsSearchContainerPrimaryKeys");
 
-List<Organization> organizations = Collections.EMPTY_LIST;
+List<Organization> organizations = Collections.emptyList();
 
 if (Validator.isNotNull(organizationIds)) {
 	long[] organizationIdsArray = StringUtil.split(organizationIds, 0L);
@@ -77,7 +77,7 @@ else {
 
 String roleIds = ParamUtil.getString(request, "rolesSearchContainerPrimaryKeys");
 
-List<Role> roles = Collections.EMPTY_LIST;
+List<Role> roles = Collections.emptyList();
 
 if (Validator.isNotNull(roleIds)) {
 	long[] roleIdsArray = StringUtil.split(roleIds, 0L);
@@ -118,7 +118,7 @@ for (UserGroupRole userGroupRole : userGroupRoles) {
 
 String userGroupIds = ParamUtil.getString(request, "userGroupsSearchContainerPrimaryKeys");
 
-List<UserGroup> userGroups = Collections.EMPTY_LIST;
+List<UserGroup> userGroups = Collections.emptyList();
 
 if (Validator.isNotNull(userGroupIds)) {
 	long[] userGroupIdsArray = StringUtil.split(userGroupIds, 0L);

@@ -118,7 +118,7 @@ public class ResourcePermissionLocalServiceImpl
 				companyId, name, scope, primKey, roleId);
 
 		if (resourcePermission == null) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		List<String> availableActionIds = new ArrayList<String>(

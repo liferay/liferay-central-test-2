@@ -71,7 +71,7 @@ public class LiferayPageProvider implements WikiPageProvider {
 			_log.debug("Invoking findPages(" + Arrays.toString(query) + ")");
 		}
 
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	public Collection<WikiPage> getAllChangedSince(Date date) {
@@ -85,7 +85,7 @@ public class LiferayPageProvider implements WikiPageProvider {
 		catch (ProviderException e) {
 			_log.error("Could not get changed pages", e);
 
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 	}
 
@@ -178,7 +178,7 @@ public class LiferayPageProvider implements WikiPageProvider {
 			_log.debug("Invoking getVersionHistory(" + title + ")");
 		}
 
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	public void initialize(WikiEngine engine, Properties props) {

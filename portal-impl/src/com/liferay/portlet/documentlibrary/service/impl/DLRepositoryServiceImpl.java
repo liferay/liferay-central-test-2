@@ -349,7 +349,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		long[] folderIds = getFolderIds(groupId, rootFolderId);
 
 		if (folderIds.length == 0) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 		else if (userId <= 0) {
 			return dlFileEntryPersistence.filterFindByG_F(

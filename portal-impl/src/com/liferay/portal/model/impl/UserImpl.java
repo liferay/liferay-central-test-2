@@ -265,7 +265,7 @@ public class UserImpl extends UserModelImpl implements User {
 		throws PortalException, SystemException {
 
 		if (isDefaultUser()) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		ThreadLocalCache<List<Group>> threadLocalCache =

@@ -50,7 +50,7 @@ public class ClusterLinkImpl extends ClusterBase implements ClusterLink {
 
 	public List<Address> getLocalTransportAddresses() {
 		if (!PropsValues.CLUSTER_LINK_ENABLED) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		List<Address> addresses = new ArrayList<Address>(
@@ -65,7 +65,7 @@ public class ClusterLinkImpl extends ClusterBase implements ClusterLink {
 
 	public List<Address> getTransportAddresses(Priority priority) {
 		if (!PropsValues.CLUSTER_LINK_ENABLED) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		JChannel jChannel = getChannel(priority);

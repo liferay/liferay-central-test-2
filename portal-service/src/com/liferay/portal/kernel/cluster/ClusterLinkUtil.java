@@ -48,7 +48,7 @@ public class ClusterLinkUtil {
 				_log.warn("ClusterLinkUtil has not been initialized");
 			}
 
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		return _clusterLink.getLocalTransportAddresses();
@@ -60,7 +60,7 @@ public class ClusterLinkUtil {
 				_log.warn("ClusterLinkUtil has not been initialized");
 			}
 
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		return _clusterLink.getTransportAddresses(priority);

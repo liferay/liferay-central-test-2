@@ -234,7 +234,7 @@ public class AssetTagFinderImpl
 				classNameId, classPK);
 
 			if (entry == null) {
-				return Collections.EMPTY_LIST;
+				return Collections.emptyList();
 			}
 
 			session = openSession();

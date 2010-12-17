@@ -20,7 +20,7 @@
 String className = (String)request.getAttribute("websites.className");
 long classPK = (Long)request.getAttribute("websites.classPK");
 
-List<Website> websites = Collections.EMPTY_LIST;
+List<Website> websites = Collections.emptyList();
 
 if (classPK > 0) {
 	websites = WebsiteServiceUtil.getWebsites(className, classPK);

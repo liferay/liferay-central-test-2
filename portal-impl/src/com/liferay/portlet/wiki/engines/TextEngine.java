@@ -40,7 +40,7 @@ public class TextEngine implements WikiEngine {
 	}
 
 	public Map<String, Boolean> getOutgoingLinks(WikiPage page) {
-		return Collections.EMPTY_MAP;
+		return Collections.emptyMap();
 	}
 
 	public void setInterWikiConfiguration(String interWikiConfiguration) {

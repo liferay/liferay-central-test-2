@@ -32,7 +32,7 @@ public class TrackedServletRequest extends HttpServletRequestWrapper {
 
 	public Set<String> getSetAttributes() {
 		if (_setAttributes == null) {
-			return Collections.EMPTY_SET;
+			return Collections.emptySet();
 		}
 		else {
 			return _setAttributes;

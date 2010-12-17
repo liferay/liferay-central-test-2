@@ -72,7 +72,7 @@ public class ClusterExecutorUtil {
 				_log.warn("ClusterExecutorUtil has not been initialized");
 			}
 
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		return _clusterExecutor.getClusterNodes();

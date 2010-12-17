@@ -222,7 +222,7 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 
 		Element dlFoldersElement = rootElement.element("dl-folders");
 
-		List<Element> dlFolderElements = Collections.EMPTY_LIST;
+		List<Element> dlFolderElements = Collections.emptyList();
 
 		if (dlFoldersElement != null) {
 			dlFolderElements = dlFoldersElement.elements("folder");
@@ -235,7 +235,7 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 
 		Element dlFileEntriesElement = rootElement.element("dl-file-entries");
 
-		List<Element> dlFileEntryElements = Collections.EMPTY_LIST;
+		List<Element> dlFileEntryElements = Collections.emptyList();
 
 		if (dlFileEntriesElement != null) {
 			dlFileEntryElements = dlFileEntriesElement.elements("file-entry");
@@ -248,7 +248,7 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 
 		Element dlFileRanksElement = rootElement.element("dl-file-ranks");
 
-		List<Element> dlFileRankElements = Collections.EMPTY_LIST;
+		List<Element> dlFileRankElements = Collections.emptyList();
 
 		if (dlFileRanksElement != null) {
 			dlFileRankElements = dlFileRanksElement.elements("file-rank");
@@ -261,7 +261,7 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 
 		Element igFoldersElement = rootElement.element("ig-folders");
 
-		List<Element> igFolderElements = Collections.EMPTY_LIST;
+		List<Element> igFolderElements = Collections.emptyList();
 
 		if (igFoldersElement != null) {
 			igFolderElements = igFoldersElement.elements("folder");
@@ -274,7 +274,7 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 
 		Element igImagesElement = rootElement.element("ig-images");
 
-		List<Element> igImageElements = Collections.EMPTY_LIST;
+		List<Element> igImageElements = Collections.emptyList();
 
 		if (igImagesElement != null) {
 			igImageElements = igImagesElement.elements("image");

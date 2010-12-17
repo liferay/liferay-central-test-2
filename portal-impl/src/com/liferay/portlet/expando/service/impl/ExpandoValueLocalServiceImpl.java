@@ -915,14 +915,14 @@ public class ExpandoValueLocalServiceImpl
 			companyId, classNameId, tableName);
 
 		if (table == null) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		ExpandoColumn column = expandoColumnPersistence.fetchByT_N(
 			table.getTableId(), columnName);
 
 		if (column == null) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		return expandoValuePersistence.findByT_C(
@@ -938,14 +938,14 @@ public class ExpandoValueLocalServiceImpl
 			companyId, classNameId, tableName);
 
 		if (table == null) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		ExpandoColumn column = expandoColumnPersistence.fetchByT_N(
 			table.getTableId(), columnName);
 
 		if (column == null) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		return expandoValuePersistence.findByT_C_D(
@@ -1729,7 +1729,7 @@ public class ExpandoValueLocalServiceImpl
 			companyId, classNameId, tableName);
 
 		if (table == null) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		return expandoValuePersistence.findByT_CPK(

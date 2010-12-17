@@ -28,7 +28,7 @@ import java.util.Map;
 public class LastPath implements Serializable {
 
 	public LastPath(String contextPath, String path) {
-		this(contextPath, path, Collections.EMPTY_MAP);
+		this(contextPath, path, Collections.<String, String[]>emptyMap());
 	}
 
 	public LastPath(

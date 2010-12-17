@@ -132,7 +132,7 @@ public abstract class BaseDB implements DB {
 
 	@SuppressWarnings("unused")
 	public List<Index> getIndexes() throws SQLException {
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	public String getTemplateFalse() {

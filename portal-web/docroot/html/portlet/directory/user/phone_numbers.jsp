@@ -22,7 +22,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 String className = (String)request.getAttribute("phones.className");
 long classPK = (Long)request.getAttribute("phones.classPK");
 
-List<Phone> personalPhones = Collections.EMPTY_LIST;
+List<Phone> personalPhones = Collections.emptyList();
 List<Phone> organizationPhones = new ArrayList<Phone>();
 
 if (classPK > 0) {

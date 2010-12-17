@@ -52,7 +52,7 @@ public class FilterChainImpl implements FilterChain {
 			_portletFilters = portletFilters;
 		}
 		else {
-			_portletFilters = Collections.EMPTY_LIST;
+			_portletFilters = Collections.emptyList();
 		}
 	}
 

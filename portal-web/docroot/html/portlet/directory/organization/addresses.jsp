@@ -20,7 +20,7 @@
 String className = (String)request.getAttribute("addresses.className");
 long classPK = (Long)request.getAttribute("addresses.classPK");
 
-List<Address> addresses = Collections.EMPTY_LIST;
+List<Address> addresses = Collections.emptyList();
 
 if (classPK > 0) {
 	addresses = AddressServiceUtil.getAddresses(className, classPK);

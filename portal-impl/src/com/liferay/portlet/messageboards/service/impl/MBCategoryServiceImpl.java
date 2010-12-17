@@ -143,7 +143,7 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 			groupId, MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 
 		if (categoryIds.length == 0) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 		else {
 			return mbCategoryFinder.filterFindByS_G_U_P(

@@ -22,7 +22,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 String className = (String)request.getAttribute("addresses.className");
 long classPK = (Long)request.getAttribute("addresses.classPK");
 
-List<Address> personalAddresses = Collections.EMPTY_LIST;
+List<Address> personalAddresses = Collections.emptyList();
 List<Address> organizationAddresses = new ArrayList<Address>();
 
 if (classPK > 0) {

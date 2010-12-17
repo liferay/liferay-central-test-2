@@ -238,7 +238,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 			List<Object> cachedList = (List<Object>)primaryKey;
 
 			if (cachedList.isEmpty()) {
-				return Collections.EMPTY_LIST;
+				return Collections.emptyList();
 			}
 
 			List<Object> list = new ArrayList<Object>(cachedList.size());
@@ -270,7 +270,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 			List<Object> list = (List<Object>)result;
 
 			if (list.isEmpty()) {
-				return Collections.EMPTY_LIST;
+				return Collections.emptyList();
 			}
 
 			List<Object> cachedList = new ArrayList<Object>(list.size());

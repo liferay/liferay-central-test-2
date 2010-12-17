@@ -177,7 +177,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	ResultRow row = new ResultRow(new Object[] {permission, role}, actionId, i);
 
-	List groups = Collections.EMPTY_LIST;
+	List groups = Collections.emptyList();
 
 	int scope;
 

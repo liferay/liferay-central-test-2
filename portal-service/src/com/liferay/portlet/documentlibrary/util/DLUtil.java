@@ -160,7 +160,7 @@ public class DLUtil {
 				"rootFolderId",
 				String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)));
 
-		List<Folder> ancestorFolders = Collections.EMPTY_LIST;
+		List<Folder> ancestorFolders = Collections.emptyList();
 
 		if (folder.getFolderId() != defaultFolderId) {
 			ancestorFolders = folder.getAncestors();

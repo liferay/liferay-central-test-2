@@ -51,7 +51,7 @@ public class DatabaseValueMapper implements ValueMapper {
 	}
 
 	public Iterator<Object> iterator() throws Exception {
-		return Collections.EMPTY_LIST.iterator();
+		return Collections.emptyList().iterator();
 	}
 
 	public int size() throws Exception {

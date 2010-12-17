@@ -125,7 +125,7 @@ public class ModelHintsImpl implements ModelHints {
 			model);
 
 		if (fields == null) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 		else {
 			List<Tuple> sanitizeTuples = new ArrayList<Tuple>();

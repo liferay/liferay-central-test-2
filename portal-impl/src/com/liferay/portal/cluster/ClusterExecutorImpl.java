@@ -127,7 +127,7 @@ public class ClusterExecutorImpl
 
 	public List<ClusterEventListener> getClusterEventListeners() {
 		if (!isEnabled()) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		return Collections.unmodifiableList(_clusterEventListeners);
@@ -135,7 +135,7 @@ public class ClusterExecutorImpl
 
 	public List<ClusterNode> getClusterNodes() {
 		if (!isEnabled()) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		return new ArrayList<ClusterNode>(_addressMap.values());
