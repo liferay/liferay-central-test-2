@@ -733,8 +733,8 @@ public class BaseDeployer implements Deployer {
 		File deployDirFile = new File(deployDir);
 
 		try {
-			PluginPackage previousPluginPackage =
-				readPluginPackage(deployDirFile);
+			PluginPackage previousPluginPackage = readPluginPackage(
+				deployDirFile);
 
 			if ((pluginPackage != null) && (previousPluginPackage != null)) {
 				if (_log.isInfoEnabled()) {
