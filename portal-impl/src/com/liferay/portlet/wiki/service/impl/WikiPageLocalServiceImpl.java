@@ -282,14 +282,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				continue;
 			}
 
+			socialEquityLogLocalService.addEquityLogs(
+				userId, WikiPage.class.getName(), page.getResourcePrimKey(),
+				ActionKeys.ADD_ATTACHMENT, dirName + "/" + fileName);
+
 			dlLocalService.addFile(
 				companyId, portletId, groupId, repositoryId,
 				dirName + "/" + fileName, 0, StringPool.BLANK,
 				page.getModifiedDate(), new ServiceContext(), bytes);
-
-			socialEquityLogLocalService.addEquityLogs(
-					userId, WikiPage.class.getName(), page.getResourcePrimKey(),
-					ActionKeys.ADD_ATTACHMENT, dirName + "/" + fileName);
 		}
 	}
 
