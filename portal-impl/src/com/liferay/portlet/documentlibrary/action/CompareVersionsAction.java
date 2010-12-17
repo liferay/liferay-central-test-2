@@ -88,7 +88,8 @@ public class CompareVersionsAction extends PortletAction {
 		FileEntry fileEntry = DLAppServiceUtil.getFileEntry(fileEntryId);
 
 		String extension = fileEntry.getExtension();
-		String title = fileEntry.getTitle();
+		String sourceTitle = fileEntry.getFileVersion(sourceVersion).getTitle();
+		String targetTitle = fileEntry.getFileVersion(targetVersion).getTitle();
 
 		InputStream sourceIs = fileEntry.getContentStream(sourceVersion);
 		InputStream targetIs = fileEntry.getContentStream(targetVersion);
@@ -126,10 +127,10 @@ public class CompareVersionsAction extends PortletAction {
 
 		renderRequest.setAttribute(
 			WebKeys.SOURCE_NAME,
-			title + StringPool.SPACE + sourceVersion);
+			sourceTitle + StringPool.SPACE + sourceVersion);
 		renderRequest.setAttribute(
 			WebKeys.TARGET_NAME,
-			title + StringPool.SPACE + targetVersion);
+			targetTitle + StringPool.SPACE + targetVersion);
 		renderRequest.setAttribute(WebKeys.DIFF_RESULTS, diffResults);
 	}
 

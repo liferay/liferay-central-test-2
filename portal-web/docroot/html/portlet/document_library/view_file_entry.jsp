@@ -401,8 +401,6 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 				<aui:form action="<%= compareVersionsURL %>" method="post" name="fm1" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "compare();" %>'>
 					<aui:input name="backURL" type="hidden" value="<%= currentURL %>" />
 					<aui:input name="fileEntryId" type="hidden" value="<%= fileEntryId %>" />
-					<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
-					<aui:input name="title" type="hidden" value="<%= title %>" />
 					<aui:input name="sourceVersion" type="hidden" value="<%= curFileVersion.getVersion() %>" />
 					<aui:input name="targetVersion" type="hidden" value="<%= fileEntry.getVersion() %>" />
 
