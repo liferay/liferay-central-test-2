@@ -32,7 +32,7 @@ if (searchFolderId > 0) {
 else {
 	List folderIds = new ArrayList();
 
-	long folderId = DLFolderConstants.getFolderId(scopeGroupId, searchFolderIds);
+	long folderId = DLFolderConstants.getFolderId(scopeGroupId, DLFolderConstants.getDataRepositoryId(scopeGroupId, searchFolderIds));
 
 	folderIds.add(new Long(folderId));
 

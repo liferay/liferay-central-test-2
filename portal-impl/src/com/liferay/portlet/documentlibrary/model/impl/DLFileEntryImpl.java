@@ -47,24 +47,6 @@ import java.util.Map;
 public class DLFileEntryImpl
 	extends DLFileEntryModelImpl implements DLFileEntry {
 
-	public static long getFolderId(long groupId, long repositoryId) {
-		if (groupId != repositoryId) {
-			return repositoryId;
-		}
-		else {
-			return DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
-		}
-	}
-
-	public static long getRepositoryId(long groupId, long folderId) {
-		if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			return groupId;
-		}
-		else {
-			return folderId;
-		}
-	}
-
 	public DLFileEntryImpl() {
 	}
 
@@ -192,8 +174,9 @@ public class DLFileEntryImpl
 		return sb.toString();
 	}
 
-	public long getRepositoryId() {
-		return getRepositoryId(getGroupId(), getFolderId());
+	public long getDataRepositoryId() {
+		return DLFolderConstants.getDataRepositoryId(
+			getGroupId(), getFolderId());
 	}
 
 	public boolean hasLock() {

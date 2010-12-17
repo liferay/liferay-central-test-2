@@ -75,7 +75,7 @@ public class FileEntryUtil extends LiferayBase {
 	public static InputStream getContentStream(FileEntry fileEntry)
 		throws PortalException, SystemException {
 
-		long repositoryId = DLFolderConstants.getSearchRepositoryId(
+		long repositoryId = DLFolderConstants.getDataRepositoryId(
 			fileEntry.getRepositoryId(), fileEntry.getFolderId());
 
 		String name = ((DLFileEntry)fileEntry.getModel()).getName();

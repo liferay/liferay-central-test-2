@@ -53,7 +53,6 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLRepositoryLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.comparator.FileEntryModifiedDateComparator;
@@ -174,7 +173,7 @@ public class DLRepositoryLocalServiceImpl
 
 		dlLocalService.addFile(
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-			dlFileEntry.getGroupId(), dlFileEntry.getRepositoryId(), name,
+			dlFileEntry.getGroupId(), dlFileEntry.getDataRepositoryId(), name,
 			false, fileEntryId, dlFileEntry.getLuceneProperties(),
 			dlFileEntry.getModifiedDate(), serviceContext, is);
 
@@ -307,7 +306,7 @@ public class DLRepositoryLocalServiceImpl
 			userId, new LiferayFileEntry(dlFileEntry));
 
 		return dlLocalService.getFileAsStream(
-			dlFileEntry.getCompanyId(), dlFileEntry.getRepositoryId(),
+			dlFileEntry.getCompanyId(), dlFileEntry.getDataRepositoryId(),
 			dlFileEntry.getName(), version);
 	}
 
@@ -553,7 +552,7 @@ public class DLRepositoryLocalServiceImpl
 
 		if (dlLocalService.hasFile(
 				user.getCompanyId(),
-				DLFileEntryImpl.getRepositoryId(
+				DLFolderConstants.getDataRepositoryId(
 					dlFileEntry.getGroupId(), newFolderId),
 				dlFileEntry.getName(), StringPool.BLANK)) {
 
@@ -646,8 +645,8 @@ public class DLRepositoryLocalServiceImpl
 
 		dlLocalService.updateFile(
 			user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-			newDLFileEntry.getGroupId(), dlFileEntry.getRepositoryId(),
-			newDLFileEntry.getRepositoryId(), dlFileEntry.getName(),
+			newDLFileEntry.getGroupId(), dlFileEntry.getDataRepositoryId(),
+			newDLFileEntry.getDataRepositoryId(), dlFileEntry.getName(),
 			newFileEntryId);
 
 		return newDLFileEntry;
@@ -808,7 +807,7 @@ public class DLRepositoryLocalServiceImpl
 			while (is == null) {
 				try {
 					is = dlLocalService.getFileAsStream(
-						user.getCompanyId(), dlFileEntry.getRepositoryId(),
+						user.getCompanyId(), dlFileEntry.getDataRepositoryId(),
 						dlFileEntry.getName());
 				}
 				catch (NoSuchFileException nsfe) {
@@ -858,7 +857,7 @@ public class DLRepositoryLocalServiceImpl
 			try {
 				dlLocalService.deleteFile(
 					user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-					dlFileEntry.getRepositoryId(), dlFileEntry.getName(),
+					dlFileEntry.getDataRepositoryId(), dlFileEntry.getName(),
 					version);
 			}
 			catch (NoSuchFileException nsfe) {
@@ -866,7 +865,7 @@ public class DLRepositoryLocalServiceImpl
 
 			dlLocalService.updateFile(
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-				dlFileEntry.getGroupId(), dlFileEntry.getRepositoryId(),
+				dlFileEntry.getGroupId(), dlFileEntry.getDataRepositoryId(),
 				dlFileEntry.getName(), dlFileEntry.getExtension(), false,
 				version, sourceFileName, dlFileEntry.getFileEntryId(),
 				dlFileEntry.getLuceneProperties(),
@@ -1212,7 +1211,7 @@ public class DLRepositoryLocalServiceImpl
 		try {
 			dlLocalService.deleteFile(
 				dlFileEntry.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-				dlFileEntry.getRepositoryId(), dlFileEntry.getName());
+				dlFileEntry.getDataRepositoryId(), dlFileEntry.getName());
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {

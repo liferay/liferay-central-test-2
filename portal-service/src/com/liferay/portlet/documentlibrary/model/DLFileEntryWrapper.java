@@ -546,8 +546,8 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return _dlFileEntry.getLuceneProperties();
 	}
 
-	public long getRepositoryId() {
-		return _dlFileEntry.getRepositoryId();
+	public long getDataRepositoryId() {
+		return _dlFileEntry.getDataRepositoryId();
 	}
 
 	public boolean hasLock() {

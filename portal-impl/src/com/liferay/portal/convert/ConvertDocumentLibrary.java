@@ -120,7 +120,7 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 			for (DLFileEntry dlFileEntry : dlFileEntries) {
 				long companyId = dlFileEntry.getCompanyId();
 				long groupId = dlFileEntry.getGroupId();
-				long repositoryId = dlFileEntry.getRepositoryId();
+				long repositoryId = dlFileEntry.getDataRepositoryId();
 
 				migrateDLFileEntry(
 					companyId, portletId, groupId, repositoryId, dlFileEntry);

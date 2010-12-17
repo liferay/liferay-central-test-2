@@ -105,7 +105,7 @@ public class DLIndexer extends BaseIndexer {
 		fileModel.setCompanyId(fileEntry.getCompanyId());
 		fileModel.setFileName(fileEntry.getName());
 		fileModel.setPortletId(PORTLET_ID);
-		fileModel.setRepositoryId(fileEntry.getRepositoryId());
+		fileModel.setRepositoryId(fileEntry.getDataRepositoryId());
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
 
@@ -142,7 +142,7 @@ public class DLIndexer extends BaseIndexer {
 		long companyId = fileEntry.getCompanyId();
 		long groupId = fileEntry.getGroupId();
 		long userId = fileEntry.getUserId();
-		long repositoryId = fileEntry.getRepositoryId();
+		long repositoryId = fileEntry.getDataRepositoryId();
 		String fileName = fileEntry.getName();
 		long fileEntryId = fileEntry.getFileEntryId();
 		String properties = fileEntry.getLuceneProperties();

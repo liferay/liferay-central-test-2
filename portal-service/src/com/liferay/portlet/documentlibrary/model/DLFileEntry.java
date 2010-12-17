@@ -69,7 +69,7 @@ public interface DLFileEntry extends DLFileEntryModel {
 
 	public java.lang.String getLuceneProperties();
 
-	public long getRepositoryId();
+	public long getDataRepositoryId();
 
 	public boolean hasLock();
 
