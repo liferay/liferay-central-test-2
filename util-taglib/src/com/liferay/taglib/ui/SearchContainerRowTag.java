@@ -259,15 +259,15 @@ public class SearchContainerRowTag<R>
 		Object model = _results.get(_rowIndex);
 
 		if (isEscapedModel()) {
-			if (model instanceof RepositoryModel) {
-				RepositoryModel<?> repositoryModel = (RepositoryModel<?>)model;
-
-				model = repositoryModel.toEscapedModel();
-			}
-			else {
+			if (model instanceof BaseModel) {
 				BaseModel<?> baseModel = (BaseModel<?>)model;
 
 				model = baseModel.toEscapedModel();
+			}
+			else if (model instanceof RepositoryModel) {
+				RepositoryModel<?> repositoryModel = (RepositoryModel<?>)model;
+
+				model = repositoryModel.toEscapedModel();
 			}
  		}
 

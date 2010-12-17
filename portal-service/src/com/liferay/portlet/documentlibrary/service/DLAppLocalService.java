@@ -98,7 +98,7 @@ public interface DLAppLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteFileShortcut(
-		com.liferay.portlet.documentlibrary.model.DLFileShortcut fileShortcut)
+		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -174,12 +174,6 @@ public interface DLAppLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.kernel.repository.model.FileVersion getFileVersion(
-		long fileVersionId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> getFileRanks(
 		long repositoryId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -192,6 +186,12 @@ public interface DLAppLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut getFileShortcut(
 		long fileShortcutId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.repository.model.FileVersion getFileVersion(
+		long fileVersionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -278,7 +278,7 @@ public interface DLAppLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.kernel.repository.model.FileEntry moveFileEntry(
-		long repositoryId, long userId, long fileEntryId, long newFolderId,
+		long userId, long repositoryId, long fileEntryId, long newFolderId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

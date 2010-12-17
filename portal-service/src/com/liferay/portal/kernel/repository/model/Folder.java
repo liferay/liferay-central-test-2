@@ -18,13 +18,14 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Alexander Chow
  */
 public interface Folder extends RepositoryModel<Folder> {
 
-	public java.util.List<Folder> getAncestors()
+	public List<Folder> getAncestors()
 		throws PortalException, SystemException;
 
 	public long getCompanyId();
@@ -45,10 +46,9 @@ public interface Folder extends RepositoryModel<Folder> {
 
 	public long getParentFolderId();
 
-	public java.lang.String getPath() throws PortalException, SystemException;
+	public String getPath() throws PortalException, SystemException;
 
-	public java.lang.String[] getPathArray()
-		throws PortalException, SystemException;
+	public String[] getPathArray() throws PortalException, SystemException;
 
 	public long getRepositoryId();
 

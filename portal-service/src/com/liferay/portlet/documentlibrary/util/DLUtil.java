@@ -78,11 +78,11 @@ public class DLUtil {
 	}
 
 	public static void addPortletBreadcrumbEntries(
-			DLFileShortcut fileShortcut, HttpServletRequest request,
+			DLFileShortcut dlFileShortcut, HttpServletRequest request,
 			RenderResponse renderResponse)
 		throws Exception {
 
-		Folder folder = fileShortcut.getFolder();
+		Folder folder = dlFileShortcut.getFolder();
 
 		if (folder.getFolderId() !=
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
@@ -95,10 +95,11 @@ public class DLUtil {
 		portletURL.setParameter(
 			"struts_action", "/document_library/view_file_shortcut");
 		portletURL.setParameter(
-			"fileShortcutId", String.valueOf(fileShortcut.getFileShortcutId()));
+			"fileShortcutId",
+			String.valueOf(dlFileShortcut.getFileShortcutId()));
 
 		PortalUtil.addPortletBreadcrumbEntry(
-			request, fileShortcut.getToTitle(), portletURL.toString());
+			request, dlFileShortcut.getToTitle(), portletURL.toString());
 	}
 
 	public static void addPortletBreadcrumbEntries(

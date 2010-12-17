@@ -197,8 +197,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		FileEntry fileEntry =
-			(FileEntry)portletDataContext.getZipEntryAsObject(path);
+		FileEntry fileEntry = (FileEntry)portletDataContext.getZipEntryAsObject(
+			path);
 
 		String binPath = fileEntryElement.attributeValue("bin-path");
 
@@ -265,10 +265,9 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				fileEntry.getUuid(), portletDataContext.getScopeGroupId());
 
 			if (existingFileEntry == null) {
-				FileEntry existingTitleFileEntry =
-					FileEntryUtil.fetchByR_F_T(
-						portletDataContext.getScopeGroupId(), folderId,
-						fileEntry.getTitle());
+				FileEntry existingTitleFileEntry = FileEntryUtil.fetchByR_F_T(
+					portletDataContext.getScopeGroupId(), folderId,
+					fileEntry.getTitle());
 
 				if (existingTitleFileEntry != null) {
 					if (portletDataContext.
@@ -292,10 +291,9 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 								originalTitle + StringPool.SPACE + i +
 									dotExtension;
 
-							existingTitleFileEntry =
-								FileEntryUtil.findByR_F_T(
-									portletDataContext.getScopeGroupId(),
-									folderId, titleWithExtension);
+							existingTitleFileEntry = FileEntryUtil.findByR_F_T(
+								portletDataContext.getScopeGroupId(), folderId,
+								titleWithExtension);
 
 							if (existingTitleFileEntry == null) {
 								break;
@@ -430,8 +428,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		Folder folder = (Folder)portletDataContext.getZipEntryAsObject(
-			path);
+		Folder folder = (Folder)portletDataContext.getZipEntryAsObject(path);
 
 		importFolder(portletDataContext, folder);
 	}

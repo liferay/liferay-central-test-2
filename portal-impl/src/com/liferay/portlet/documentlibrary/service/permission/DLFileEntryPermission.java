@@ -37,21 +37,21 @@ import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
 public class DLFileEntryPermission {
 
 	public static void check(
+			PermissionChecker permissionChecker, DLFileEntry dlFileEntry,
+			String actionId)
+		throws PortalException, SystemException {
+
+		if (!contains(permissionChecker, dlFileEntry, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static void check(
 			PermissionChecker permissionChecker, FileEntry fileEntry,
 			String actionId)
 		throws PortalException, SystemException {
 
 		check(permissionChecker, (DLFileEntry)fileEntry.getModel(), actionId);
-	}
-
-	public static void check(
-			PermissionChecker permissionChecker, DLFileEntry fileEntry,
-			String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, fileEntry, actionId)) {
-			throw new PrincipalException();
-		}
 	}
 
 	public static void check(
@@ -65,6 +65,63 @@ public class DLFileEntryPermission {
 	}
 
 	public static boolean contains(
+			PermissionChecker permissionChecker, DLFileEntry dlFileEntry,
+			String actionId)
+		throws PortalException, SystemException {
+
+		Boolean hasPermission = StagingPermissionUtil.hasPermission(
+			permissionChecker, dlFileEntry.getGroupId(),
+			DLFileEntry.class.getName(), dlFileEntry.getFileEntryId(),
+			PortletKeys.DOCUMENT_LIBRARY, actionId);
+
+		if (hasPermission != null) {
+			return hasPermission.booleanValue();
+		}
+
+		DLFileVersion latestDLFileVersion = dlFileEntry.getLatestFileVersion();
+
+		if (latestDLFileVersion.isPending()) {
+			hasPermission = WorkflowPermissionUtil.hasPermission(
+				permissionChecker, dlFileEntry.getGroupId(),
+				DLFileEntry.class.getName(), dlFileEntry.getFileEntryId(),
+				actionId);
+
+			if (hasPermission != null) {
+				return hasPermission.booleanValue();
+			}
+		}
+
+		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
+			if (dlFileEntry.getFolderId() !=
+					DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
+				DLFolder dlFolder = DLRepositoryLocalServiceUtil.getFolder(
+					dlFileEntry.getFolderId());
+
+				if (!DLFolderPermission.contains(
+						permissionChecker, dlFolder, ActionKeys.ACCESS) &&
+					!DLFolderPermission.contains(
+						permissionChecker, dlFolder, ActionKeys.VIEW)) {
+
+					return false;
+				}
+			}
+		}
+
+		if (permissionChecker.hasOwnerPermission(
+				dlFileEntry.getCompanyId(), DLFileEntry.class.getName(),
+				dlFileEntry.getFileEntryId(), dlFileEntry.getUserId(),
+				actionId)) {
+
+			return true;
+		}
+
+		return permissionChecker.hasPermission(
+			dlFileEntry.getGroupId(), DLFileEntry.class.getName(),
+			dlFileEntry.getFileEntryId(), actionId);
+	}
+
+	public static boolean contains(
 			PermissionChecker permissionChecker, FileEntry fileEntry,
 			String actionId)
 		throws PortalException, SystemException {
@@ -74,70 +131,14 @@ public class DLFileEntryPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, DLFileEntry fileEntry,
-			String actionId)
-		throws PortalException, SystemException {
-
-		Boolean hasPermission = StagingPermissionUtil.hasPermission(
-			permissionChecker, fileEntry.getGroupId(),
-			DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
-			PortletKeys.DOCUMENT_LIBRARY, actionId);
-
-		if (hasPermission != null) {
-			return hasPermission.booleanValue();
-		}
-
-		DLFileVersion latestFileVersion = fileEntry.getLatestFileVersion();
-
-		if (latestFileVersion.isPending()) {
-			hasPermission = WorkflowPermissionUtil.hasPermission(
-				permissionChecker, fileEntry.getGroupId(),
-				DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
-				actionId);
-
-			if (hasPermission != null) {
-				return hasPermission.booleanValue();
-			}
-		}
-
-		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
-			if (fileEntry.getFolderId() !=
-					DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-
-				DLFolder folder = DLRepositoryLocalServiceUtil.getFolder(
-					fileEntry.getFolderId());
-
-				if (!DLFolderPermission.contains(
-						permissionChecker, folder, ActionKeys.ACCESS) &&
-					!DLFolderPermission.contains(
-						permissionChecker, folder, ActionKeys.VIEW)) {
-
-					return false;
-				}
-			}
-		}
-
-		if (permissionChecker.hasOwnerPermission(
-				fileEntry.getCompanyId(), DLFileEntry.class.getName(),
-				fileEntry.getFileEntryId(), fileEntry.getUserId(), actionId)) {
-
-			return true;
-		}
-
-		return permissionChecker.hasPermission(
-			fileEntry.getGroupId(), DLFileEntry.class.getName(),
-			fileEntry.getFileEntryId(), actionId);
-	}
-
-	public static boolean contains(
 			PermissionChecker permissionChecker, long fileEntryId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		DLFileEntry fileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
+		DLFileEntry dlFileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
 			fileEntryId);
 
-		return contains(permissionChecker, fileEntry, actionId);
+		return contains(permissionChecker, dlFileEntry, actionId);
 	}
 
 }

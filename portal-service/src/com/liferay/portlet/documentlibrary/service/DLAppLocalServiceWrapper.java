@@ -112,10 +112,10 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService {
 	}
 
 	public void deleteFileShortcut(
-		com.liferay.portlet.documentlibrary.model.DLFileShortcut fileShortcut)
+		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_dlAppLocalService.deleteFileShortcut(fileShortcut);
+		_dlAppLocalService.deleteFileShortcut(dlFileShortcut);
 	}
 
 	public void deleteFileShortcut(long fileShortcutId)
@@ -213,13 +213,6 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService {
 			repositoryId);
 	}
 
-	public com.liferay.portal.kernel.repository.model.FileVersion getFileVersion(
-		long fileVersionId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppLocalService.getFileVersion(fileVersionId);
-	}
-
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> getFileRanks(
 		long repositoryId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -237,6 +230,13 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlAppLocalService.getFileShortcut(fileShortcutId);
+	}
+
+	public com.liferay.portal.kernel.repository.model.FileVersion getFileVersion(
+		long fileVersionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlAppLocalService.getFileVersion(fileVersionId);
 	}
 
 	public com.liferay.portal.kernel.repository.model.Folder getFolder(
@@ -347,11 +347,11 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService {
 	}
 
 	public com.liferay.portal.kernel.repository.model.FileEntry moveFileEntry(
-		long repositoryId, long userId, long fileEntryId, long newFolderId,
+		long userId, long repositoryId, long fileEntryId, long newFolderId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppLocalService.moveFileEntry(repositoryId, userId,
+		return _dlAppLocalService.moveFileEntry(userId, repositoryId,
 			fileEntryId, newFolderId, serviceContext);
 	}
 

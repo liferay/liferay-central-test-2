@@ -34,7 +34,43 @@ import java.util.List;
  */
 public class FileEntryUtil extends LiferayBase {
 
-	private static FileEntryUtil _instance = new FileEntryUtil();
+	public static FileEntry fetchByR_F_T(
+			long repositoryId, long folderId, String title)
+		throws SystemException {
+
+		DLFileEntry dlFileEntry = DLFileEntryUtil.fetchByG_F_T(
+			repositoryId, folderId, title);
+
+		return new LiferayFileEntry(dlFileEntry);
+	}
+
+	public static FileEntry fetchByUUID_R(String uuid, long repositoryId)
+		throws SystemException {
+
+		DLFileEntry dlFileEntry = DLFileEntryUtil.fetchByUUID_G(
+			uuid, repositoryId);
+
+		return new LiferayFileEntry(dlFileEntry);
+	}
+
+	public static List<FileEntry> findByR_F(long repositoryId, long folderId)
+		throws SystemException {
+
+		List<DLFileEntry> dlFileEntries = DLFileEntryUtil.findByG_F(
+			repositoryId, folderId);
+
+		return _instance.toFileEntries(dlFileEntries);
+	}
+
+	public static FileEntry findByR_F_T(
+			long repositoryId, long folderId, String title)
+		throws NoSuchFileEntryException, SystemException {
+
+		DLFileEntry dlFileEntry = DLFileEntryUtil.findByG_F_T(
+			repositoryId, folderId, title);
+
+		return new LiferayFileEntry(dlFileEntry);
+	}
 
 	public static InputStream getContentStream(FileEntry fileEntry)
 		throws PortalException, SystemException {
@@ -49,42 +85,7 @@ public class FileEntryUtil extends LiferayBase {
 			fileEntry.getVersion());
 
 	}
-	public static FileEntry fetchByUUID_R(String uuid, long repositoryId)
-		throws SystemException {
 
-		DLFileEntry fileEntry = DLFileEntryUtil.fetchByUUID_G(
-			uuid, repositoryId);
-
-		return new LiferayFileEntry(fileEntry);
-	}
-
-	public static FileEntry fetchByR_F_T(
-			long repositoryId, long folderId, String title)
-		throws SystemException {
-
-		DLFileEntry fileEntry = DLFileEntryUtil.fetchByG_F_T(
-			repositoryId, folderId, title);
-
-		return new LiferayFileEntry(fileEntry);
-	}
-
-	public static FileEntry findByR_F_T(
-			long repositoryId, long folderId, String title)
-		throws NoSuchFileEntryException, SystemException {
-
-		DLFileEntry fileEntry = DLFileEntryUtil.findByG_F_T(
-			repositoryId, folderId, title);
-
-		return new LiferayFileEntry(fileEntry);
-	}
-
-	public static List<FileEntry> findByR_F(long repositoryId, long folderId)
-		throws SystemException {
-
-		List<DLFileEntry> list = DLFileEntryUtil.findByG_F(
-			repositoryId, folderId);
-
-		return _instance.convertFileEntries(list);
-	}
+	private static FileEntryUtil _instance = new FileEntryUtil();
 
 }

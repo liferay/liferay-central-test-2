@@ -27,97 +27,97 @@ import java.util.List;
  */
 public class LiferayFolder extends LiferayModel implements Folder {
 
-	public LiferayFolder(DLFolder folder) {
-		_folder = folder;
+	public LiferayFolder(DLFolder dlFolder) {
+		_dlFolder = dlFolder;
 	}
 
-	public LiferayFolder(DLFolder folder, boolean escapedModel) {
-		_folder = folder;
+	public LiferayFolder(DLFolder dlFolder, boolean escapedModel) {
+		_dlFolder = dlFolder;
 		_escapedModel = escapedModel;
 	}
 
 	public List<Folder> getAncestors() throws PortalException, SystemException {
-		return convertFolders(_folder.getAncestors());
+		return toFolders(_dlFolder.getAncestors());
 	}
 
 	public long getCompanyId() {
-		return _folder.getCompanyId();
+		return _dlFolder.getCompanyId();
 	}
 
 	public Date getCreateDate() {
-		return _folder.getCreateDate();
+		return _dlFolder.getCreateDate();
 	}
 
 	public String getDescription() {
-		return _folder.getDescription();
+		return _dlFolder.getDescription();
 	}
 
 	public long getFolderId() {
-		return _folder.getFolderId();
+		return _dlFolder.getFolderId();
 	}
 
 	public Date getLastPostDate() {
-		return _folder.getLastPostDate();
+		return _dlFolder.getLastPostDate();
 	}
 
 	public Object getModel() {
-		return _folder;
+		return _dlFolder;
 	}
 
 	public Date getModifiedDate() {
-		return _folder.getCreateDate();
+		return _dlFolder.getCreateDate();
 	}
 
 	public String getName() {
-		return _folder.getName();
+		return _dlFolder.getName();
 	}
 
 	public Folder getParentFolder() throws PortalException, SystemException {
-		return new LiferayFolder(_folder.getParentFolder());
+		return new LiferayFolder(_dlFolder.getParentFolder());
 	}
 
 	public long getParentFolderId() {
-		return _folder.getParentFolderId();
+		return _dlFolder.getParentFolderId();
 	}
 
 	public String getPath() throws PortalException, SystemException {
-		return _folder.getPath();
+		return _dlFolder.getPath();
 	}
 
 	public String[] getPathArray() throws PortalException, SystemException {
-		return _folder.getPathArray();
+		return _dlFolder.getPathArray();
 	}
 
 	public long getPrimaryKey() {
-		return _folder.getPrimaryKey();
+		return _dlFolder.getPrimaryKey();
 	}
 
 	public long getRepositoryId() {
-		return _folder.getGroupId();
+		return _dlFolder.getGroupId();
 	}
 
 	public long getUserId() {
-		return _folder.getUserId();
+		return _dlFolder.getUserId();
 	}
 
 	public String getUserName() {
-		return _folder.getUserName();
+		return _dlFolder.getUserName();
 	}
 
 	public String getUserUuid() throws SystemException {
-		return _folder.getUserUuid();
+		return _dlFolder.getUserUuid();
 	}
 
 	public String getUuid() {
-		return _folder.getUuid();
+		return _dlFolder.getUuid();
 	}
 
 	public boolean hasInheritableLock() {
-		return _folder.hasInheritableLock();
+		return _dlFolder.hasInheritableLock();
 	}
 
 	public boolean hasLock() {
-		return _folder.hasLock();
+		return _dlFolder.hasLock();
 	}
 
 	public boolean isEscapedModel() {
@@ -125,15 +125,15 @@ public class LiferayFolder extends LiferayModel implements Folder {
 	}
 
 	public boolean isLocked() {
-		return _folder.isLocked();
+		return _dlFolder.isLocked();
 	}
 
 	public boolean isRoot() {
-		return _folder.isRoot();
+		return _dlFolder.isRoot();
 	}
 
 	public void prepare() throws SystemException {
-		_folder.setUserUuid(getUserUuid());
+		_dlFolder.setUserUuid(getUserUuid());
 	}
 
 	public Folder toEscapedModel() {
@@ -141,12 +141,11 @@ public class LiferayFolder extends LiferayModel implements Folder {
 			return this;
 		}
 		else {
-			return new LiferayFolder(_folder.toEscapedModel(), true);
+			return new LiferayFolder(_dlFolder.toEscapedModel(), true);
 		}
 	}
 
-	private boolean _escapedModel = false;
-
-	private DLFolder _folder;
+	private DLFolder _dlFolder;
+	private boolean _escapedModel;
 
 }

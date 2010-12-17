@@ -368,12 +368,12 @@ public class DLFolderWrapper implements DLFolder {
 		return _dlFolder.getPathArray();
 	}
 
-	public boolean hasLock() {
-		return _dlFolder.hasLock();
-	}
-
 	public boolean hasInheritableLock() {
 		return _dlFolder.hasInheritableLock();
+	}
+
+	public boolean hasLock() {
+		return _dlFolder.hasLock();
 	}
 
 	public boolean isLocked() {

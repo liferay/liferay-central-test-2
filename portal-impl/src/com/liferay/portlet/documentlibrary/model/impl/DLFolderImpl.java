@@ -98,9 +98,9 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 		return StringUtil.split(path, StringPool.SLASH);
 	}
 
-	public boolean hasLock() {
+	public boolean hasInheritableLock() {
 		try {
-			return DLRepositoryServiceUtil.hasFolderLock(getFolderId());
+			return DLRepositoryServiceUtil.hasInheritableLock(getFolderId());
 		}
 		catch (Exception e) {
 		}
@@ -108,9 +108,9 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 		return false;
 	}
 
-	public boolean hasInheritableLock() {
+	public boolean hasLock() {
 		try {
-			return DLRepositoryServiceUtil.hasInheritableLock(getFolderId());
+			return DLRepositoryServiceUtil.hasFolderLock(getFolderId());
 		}
 		catch (Exception e) {
 		}

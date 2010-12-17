@@ -282,10 +282,9 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				try {
 					String titleWithExtension = name;
 
-					FileEntry fileEntry =
-						DLAppServiceUtil.getFileEntry(
-							webDavRequest.getGroupId(), parentFolderId,
-							titleWithExtension);
+					FileEntry fileEntry = DLAppServiceUtil.getFileEntry(
+						webDavRequest.getGroupId(), parentFolderId,
+						titleWithExtension);
 
 					return toResource(webDavRequest, fileEntry, false);
 				}
@@ -906,9 +905,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 	protected boolean isLocked(FileEntry fileEntry, String lockUuid)
 		throws Exception {
 
-		long fileEntryId = fileEntry.getFileEntryId();
-		long repositoryId = fileEntry.getRepositoryId();
-
 		if (Validator.isNull(lockUuid)) {
 
 			// Client does not claim to know of a lock
@@ -921,7 +917,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			try {
 				boolean verified = DLAppServiceUtil.verifyFileEntryLock(
-					repositoryId, fileEntryId, lockUuid);
+					fileEntry.getRepositoryId(), fileEntry.getFileEntryId(),
+					lockUuid);
 
 				return !verified;
 			}

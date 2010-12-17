@@ -98,14 +98,14 @@ public class WebServerServlet extends HttpServlet {
 			}
 			else {
 				long groupId = _getGroupId(user.getCompanyId(), pathArray[0]);
-				long dlFolderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+				long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
 				for (int i = 1; i < pathArray.length; i++) {
 					try {
-						Folder dlFolder = DLAppLocalServiceUtil.getFolder(
-							groupId, dlFolderId, pathArray[i]);
+						Folder folder = DLAppLocalServiceUtil.getFolder(
+							groupId, folderId, pathArray[i]);
 
-						dlFolderId = dlFolder.getFolderId();
+						folderId = folder.getFolderId();
 					}
 					catch (NoSuchFolderException nsfe) {
 						if (i != pathArray.length - 1) {
@@ -113,7 +113,7 @@ public class WebServerServlet extends HttpServlet {
 						}
 
 						pathArray = new String[] {
-							String.valueOf(groupId), String.valueOf(dlFolderId),
+							String.valueOf(groupId), String.valueOf(folderId),
 							pathArray[i]
 						};
 
@@ -172,7 +172,7 @@ public class WebServerServlet extends HttpServlet {
 		}
 	}
 
-	protected FileEntry getDLFileEntry(String[] pathArray) throws Exception {
+	protected FileEntry getFileEntry(String[] pathArray) throws Exception {
 		if (pathArray.length == 1) {
 			long dlFileShortcutId = GetterUtil.getLong(pathArray[0]);
 
@@ -190,10 +190,10 @@ public class WebServerServlet extends HttpServlet {
 		}
 		else {
 			long groupId = GetterUtil.getLong(pathArray[0]);
-			long dlFolderId = GetterUtil.getLong(pathArray[1]);
+			long folderId = GetterUtil.getLong(pathArray[1]);
 			String fileName = HttpUtil.decodeURL(pathArray[2], true);
 
-			return DLAppServiceUtil.getFileEntry(groupId, dlFolderId, fileName);
+			return DLAppServiceUtil.getFileEntry(groupId, folderId, fileName);
 		}
 	}
 
@@ -255,26 +255,27 @@ public class WebServerServlet extends HttpServlet {
 
 		webServerEntries.add(new WebServerEntry(path, "../"));
 
-		List<Folder> folders = DLAppServiceUtil.getFolders(
-			groupId, folderId);
+		List<Folder> folders = DLAppServiceUtil.getFolders(groupId, folderId);
 
 		for (Folder folder : folders) {
-			webServerEntries.add(
-				new WebServerEntry(
-					path, folder.getName() + StringPool.SLASH,
-					folder.getCreateDate(), folder.getModifiedDate(),
-					folder.getDescription(), 0));
+			WebServerEntry webServerEntry = new WebServerEntry(
+				path, folder.getName() + StringPool.SLASH,
+				folder.getCreateDate(), folder.getModifiedDate(),
+				folder.getDescription(), 0);
+
+			webServerEntries.add(webServerEntry);
 		}
 
 		List<FileEntry> fileEntries = DLAppServiceUtil.getFileEntries(
 			groupId, folderId);
 
 		for (FileEntry fileEntry : fileEntries) {
-			webServerEntries.add(
-				new WebServerEntry(
-					path, fileEntry.getTitle(),
-					fileEntry.getCreateDate(), fileEntry.getModifiedDate(),
-					fileEntry.getDescription(), fileEntry.getSize()));
+			WebServerEntry webServerEntry = new WebServerEntry(
+				path, fileEntry.getTitle(), fileEntry.getCreateDate(),
+				fileEntry.getModifiedDate(), fileEntry.getDescription(),
+				fileEntry.getSize());
+
+			webServerEntries.add(webServerEntry);
 		}
 
 		sendHTML(response, path, webServerEntries);
@@ -285,13 +286,13 @@ public class WebServerServlet extends HttpServlet {
 			User user, String[] pathArray)
 		throws Exception {
 
-		FileEntry dlFileEntry = getDLFileEntry(pathArray);
+		FileEntry fileEntry = getFileEntry(pathArray);
 
-		if (dlFileEntry == null) {
+		if (fileEntry == null) {
 			throw new NoSuchFileEntryException();
 		}
 
-		String fileName = dlFileEntry.getTitle();
+		String fileName = fileEntry.getTitle();
 
 		String version = ParamUtil.getString(request, "version");
 
@@ -299,34 +300,34 @@ public class WebServerServlet extends HttpServlet {
 			request, "targetExtension");
 
 		if (Validator.isNull(version)) {
-			if (Validator.isNotNull(dlFileEntry.getVersion())) {
-				version = dlFileEntry.getVersion();
+			if (Validator.isNotNull(fileEntry.getVersion())) {
+				version = fileEntry.getVersion();
 			}
 			else {
 				throw new NoSuchFileEntryException();
 			}
 		}
 
-		FileVersion dlFileVersion = dlFileEntry.getFileVersion(version);
+		FileVersion fileVersion = fileEntry.getFileVersion(version);
 
-		fileName = dlFileVersion.getTitle();
+		fileName = fileVersion.getTitle();
 
 		String extension = GetterUtil.getString(
 			FileUtil.getExtension(fileName));
 
 		if (Validator.isNull(extension) ||
-			!extension.equals(dlFileVersion.getExtension())) {
+			!extension.equals(fileVersion.getExtension())) {
 
-			fileName += StringPool.PERIOD + dlFileVersion.getExtension();
+			fileName += StringPool.PERIOD + fileVersion.getExtension();
 		}
 
-		InputStream inputStream = dlFileEntry.getContentStream(version);
+		InputStream inputStream = fileEntry.getContentStream(version);
 
 		boolean converted = false;
 
 		if (Validator.isNotNull(targetExtension)) {
 			String id = DocumentConversionUtil.getTempFileId(
-				dlFileEntry.getFileEntryId(), version);
+				fileEntry.getFileEntryId(), version);
 
 			String sourceExtension = FileUtil.getExtension(fileName);
 
@@ -348,13 +349,11 @@ public class WebServerServlet extends HttpServlet {
 		int contentLength = 0;
 
 		if (!converted) {
-			if (DLUtil.compareVersions(version, dlFileEntry.getVersion()) >=
-					0) {
-
-				contentLength = (int)dlFileEntry.getSize();
+			if (DLUtil.compareVersions(version, fileEntry.getVersion()) >= 0) {
+				contentLength = (int)fileEntry.getSize();
 			}
 			else {
-				contentLength = (int)dlFileVersion.getSize();
+				contentLength = (int)fileVersion.getSize();
 			}
 		}
 
@@ -394,10 +393,11 @@ public class WebServerServlet extends HttpServlet {
 		for (Group group : groups) {
 			String name = HttpUtil.fixPath(group.getFriendlyURL());
 
-			webServerEntries.add(
-				new WebServerEntry(
-					path, name + StringPool.SLASH, null, null,
-					group.getDescription(), 0));
+			WebServerEntry webServerEntry = new WebServerEntry(
+				path, name + StringPool.SLASH, null, null,
+				group.getDescription(), 0);
+
+			webServerEntries.add(webServerEntry);
 		}
 
 		sendHTML(response, path, webServerEntries);
@@ -444,11 +444,11 @@ public class WebServerServlet extends HttpServlet {
 		}
 		else {
 			long groupId = GetterUtil.getLong(pathArray[0]);
-			long dlFolderId = GetterUtil.getLong(pathArray[1]);
+			long folderId = GetterUtil.getLong(pathArray[1]);
 			String fileName = HttpUtil.decodeURL(pathArray[2], true);
 
 			return DLAppLocalServiceUtil.getFileEntry(
-				groupId, dlFolderId, fileName);
+				groupId, folderId, fileName);
 		}
 	}
 

@@ -33,71 +33,92 @@ import java.util.List;
  */
 public abstract class LiferayBase {
 
-	public List<FileEntry> convertFileEntries(List<DLFileEntry> list) {
-		List<FileEntry> list2 = new ArrayList<FileEntry>(list.size());
+	public List<FileEntry> toFileEntries(List<DLFileEntry> dlFileEntries) {
+		List<FileEntry> fileEntries = new ArrayList<FileEntry>(
+			dlFileEntries.size());
 
-		for (DLFileEntry fileEntry : list) {
-			list2.add(new LiferayFileEntry(fileEntry));
+		for (DLFileEntry dlFileEntry : dlFileEntries) {
+			FileEntry fileEntry = new LiferayFileEntry(dlFileEntry);
+
+			fileEntries.add(fileEntry);
 		}
 
-		if (list instanceof UnmodifiableList) {
-			return new UnmodifiableList<FileEntry>(list2);
+		if (dlFileEntries instanceof UnmodifiableList) {
+			return new UnmodifiableList<FileEntry>(fileEntries);
 		}
 		else {
-			return list2;
+			return fileEntries;
 		}
 	}
 
-	public List<Object> convertFileEntriesAndFolders(List<Object> list) {
-		List<Object> list2 = new ArrayList<Object>(list.size());
+	public List<Object> toFileEntriesAndFolders(
+		List<Object> dlFileEntriesAndDLFolders) {
 
-		for (Object object : list) {
+		List<Object> fileEntriesAndFolders = new ArrayList<Object>(
+			dlFileEntriesAndDLFolders.size());
+
+		for (Object object : dlFileEntriesAndDLFolders) {
 			if (object instanceof DLFileEntry) {
-				list2.add(new LiferayFileEntry((DLFileEntry)object));
+				DLFileEntry dlFileEntry = (DLFileEntry)object;
+
+				FileEntry fileEntry = new LiferayFileEntry(dlFileEntry);
+
+				fileEntriesAndFolders.add(fileEntry);
 			}
 			else if (object instanceof DLFolder) {
-				list2.add(new LiferayFolder((DLFolder)object));
+				DLFolder dlFolder = (DLFolder)object;
+
+				Folder folder = new LiferayFolder(dlFolder);
+
+				fileEntriesAndFolders.add(folder);
 			}
 			else {
-				list2.add(object);
+				fileEntriesAndFolders.add(object);
 			}
 		}
 
-		if (list instanceof UnmodifiableList) {
-			return new UnmodifiableList<Object>(list2);
+		if (dlFileEntriesAndDLFolders instanceof UnmodifiableList) {
+			return new UnmodifiableList<Object>(fileEntriesAndFolders);
 		}
 		else {
-			return list2;
+			return fileEntriesAndFolders;
 		}
 	}
 
-	public List<FileVersion> convertFileVersions(List<DLFileVersion> list) {
-		List<FileVersion> list2 = new ArrayList<FileVersion>(list.size());
+	public List<FileVersion> toFileVersions(
+		List<DLFileVersion> dlFileVersions) {
 
-		for (DLFileVersion fileVersion : list) {
-			list2.add(new LiferayFileVersion(fileVersion));
+		List<FileVersion> fileVersions = new ArrayList<FileVersion>(
+			dlFileVersions.size());
+
+		for (DLFileVersion dlFileVersion : dlFileVersions) {
+			FileVersion fileVersion = new LiferayFileVersion(dlFileVersion);
+
+			fileVersions.add(fileVersion);
 		}
 
-		if (list instanceof UnmodifiableList) {
-			return new UnmodifiableList<FileVersion>(list2);
+		if (dlFileVersions instanceof UnmodifiableList) {
+			return new UnmodifiableList<FileVersion>(fileVersions);
 		}
 		else {
-			return list2;
+			return fileVersions;
 		}
 	}
 
-	public List<Folder> convertFolders(List<DLFolder> list) {
-		List<Folder> list2 = new ArrayList<Folder>(list.size());
+	public List<Folder> toFolders(List<DLFolder> dlFolders) {
+		List<Folder> folders = new ArrayList<Folder>(dlFolders.size());
 
-		for (DLFolder folder : list) {
-			list2.add(new LiferayFolder(folder));
+		for (DLFolder dlFolder : dlFolders) {
+			Folder folder = new LiferayFolder(dlFolder);
+
+			folders.add(folder);
 		}
 
-		if (list instanceof UnmodifiableList) {
-			return new UnmodifiableList<Folder>(list2);
+		if (dlFolders instanceof UnmodifiableList) {
+			return new UnmodifiableList<Folder>(folders);
 		}
 		else {
-			return list2;
+			return folders;
 		}
 	}
 

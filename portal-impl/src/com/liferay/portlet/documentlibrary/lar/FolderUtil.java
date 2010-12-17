@@ -29,49 +29,49 @@ import java.util.List;
  */
 public class FolderUtil extends LiferayBase {
 
-	private static FolderUtil _instance = new FolderUtil();
-
 	public static Folder fetchByR_P_N(
 			long groupId, long parentFolderId, String name)
 		throws SystemException {
 
-		DLFolder folder = DLFolderUtil.fetchByG_P_N(
+		DLFolder dlFolder = DLFolderUtil.fetchByG_P_N(
 			groupId, parentFolderId, name);
 
-		return new LiferayFolder(folder);
-	}
-
-	public static List<Folder> findByRepositoryId(long repositoryId)
-		throws SystemException {
-
-		List<DLFolder> list = DLFolderUtil.findByGroupId(repositoryId);
-
-		return _instance.convertFolders(list);
+		return new LiferayFolder(dlFolder);
 	}
 
 	public static Folder fetchByUUID_R(String uuid, long repositoryId)
 		throws SystemException {
 
-		DLFolder folder = DLFolderUtil.fetchByUUID_G(uuid, repositoryId);
+		DLFolder dlFolder = DLFolderUtil.fetchByUUID_G(uuid, repositoryId);
 
-		return new LiferayFolder(folder);
-	}
-
-	public static List<Folder> findByR_P(long repositoryId, long parentFolderId)
-		throws SystemException {
-
-		List<DLFolder> list = DLFolderUtil.findByG_P(
-			repositoryId, parentFolderId);
-
-		return _instance.convertFolders(list);
+		return new LiferayFolder(dlFolder);
 	}
 
 	public static Folder findByPrimaryKey(long folderId)
 		throws SystemException, NoSuchFolderException {
 
-		DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
+		DLFolder dlFolder = DLFolderUtil.findByPrimaryKey(folderId);
 
-		return new LiferayFolder(folder);
+		return new LiferayFolder(dlFolder);
 	}
+
+	public static List<Folder> findByR_P(long repositoryId, long parentFolderId)
+		throws SystemException {
+
+		List<DLFolder> dlFolders = DLFolderUtil.findByG_P(
+			repositoryId, parentFolderId);
+
+		return _instance.toFolders(dlFolders);
+	}
+
+	public static List<Folder> findByRepositoryId(long repositoryId)
+		throws SystemException {
+
+		List<DLFolder> dlFolders = DLFolderUtil.findByGroupId(repositoryId);
+
+		return _instance.toFolders(dlFolders);
+	}
+
+	private static FolderUtil _instance = new FolderUtil();
 
 }

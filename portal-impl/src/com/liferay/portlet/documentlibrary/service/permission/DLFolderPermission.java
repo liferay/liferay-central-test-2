@@ -33,21 +33,21 @@ import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
 public class DLFolderPermission {
 
 	public static void check(
+			PermissionChecker permissionChecker, DLFolder dlFolder,
+			String actionId)
+		throws PortalException, SystemException {
+
+		if (!contains(permissionChecker, dlFolder, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static void check(
 			PermissionChecker permissionChecker, Folder folder,
 			String actionId)
 		throws PortalException, SystemException {
 
 		check(permissionChecker, (DLFolder)folder.getModel(), actionId);
-	}
-
-	public static void check(
-			PermissionChecker permissionChecker, DLFolder folder,
-			String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, folder, actionId)) {
-			throw new PrincipalException();
-		}
 	}
 
 	public static void check(
@@ -61,15 +61,7 @@ public class DLFolderPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, Folder folder, String actionId)
-		throws PortalException, SystemException {
-
-		return contains(
-			permissionChecker, (DLFolder)folder.getModel(), actionId);
-	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, DLFolder folder,
+			PermissionChecker permissionChecker, DLFolder dlFolder,
 			String actionId)
 		throws PortalException, SystemException {
 
@@ -78,27 +70,28 @@ public class DLFolderPermission {
 		}
 
 		Boolean hasPermission = StagingPermissionUtil.hasPermission(
-			permissionChecker, folder.getGroupId(), DLFolder.class.getName(),
-			folder.getFolderId(), PortletKeys.DOCUMENT_LIBRARY, actionId);
+			permissionChecker, dlFolder.getGroupId(), DLFolder.class.getName(),
+			dlFolder.getFolderId(), PortletKeys.DOCUMENT_LIBRARY, actionId);
 
 		if (hasPermission != null) {
 			return hasPermission.booleanValue();
 		}
 
-		long folderId = folder.getFolderId();
+		long folderId = dlFolder.getFolderId();
 
 		if (actionId.equals(ActionKeys.VIEW)) {
 			while (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-				folder = DLRepositoryLocalServiceUtil.getFolder(folderId);
+				dlFolder = DLRepositoryLocalServiceUtil.getFolder(folderId);
 
-				folderId = folder.getParentFolderId();
+				folderId = dlFolder.getParentFolderId();
 
 				if (!permissionChecker.hasOwnerPermission(
-						folder.getCompanyId(), DLFolder.class.getName(),
-						folder.getFolderId(), folder.getUserId(), actionId) &&
+						dlFolder.getCompanyId(), DLFolder.class.getName(),
+						dlFolder.getFolderId(), dlFolder.getUserId(),
+						actionId) &&
 					!permissionChecker.hasPermission(
-						folder.getGroupId(), DLFolder.class.getName(),
-						folder.getFolderId(), actionId)) {
+						dlFolder.getGroupId(), DLFolder.class.getName(),
+						dlFolder.getFolderId(), actionId)) {
 
 					return false;
 				}
@@ -112,20 +105,21 @@ public class DLFolderPermission {
 		}
 		else {
 			while (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-				folder = DLRepositoryLocalServiceUtil.getFolder(folderId);
+				dlFolder = DLRepositoryLocalServiceUtil.getFolder(folderId);
 
-				folderId = folder.getParentFolderId();
+				folderId = dlFolder.getParentFolderId();
 
 				if (permissionChecker.hasOwnerPermission(
-						folder.getCompanyId(), DLFolder.class.getName(),
-						folder.getFolderId(), folder.getUserId(), actionId)) {
+						dlFolder.getCompanyId(), DLFolder.class.getName(),
+						dlFolder.getFolderId(), dlFolder.getUserId(),
+						actionId)) {
 
 					return true;
 				}
 
 				if (permissionChecker.hasPermission(
-						folder.getGroupId(), DLFolder.class.getName(),
-						folder.getFolderId(), actionId)) {
+						dlFolder.getGroupId(), DLFolder.class.getName(),
+						dlFolder.getFolderId(), actionId)) {
 
 					return true;
 				}
@@ -133,6 +127,14 @@ public class DLFolderPermission {
 
 			return false;
 		}
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, Folder folder, String actionId)
+		throws PortalException, SystemException {
+
+		return contains(
+			permissionChecker, (DLFolder)folder.getModel(), actionId);
 	}
 
 	public static boolean contains(
@@ -144,9 +146,10 @@ public class DLFolderPermission {
 			return DLPermission.contains(permissionChecker, groupId, actionId);
 		}
 		else {
-			DLFolder folder = DLRepositoryLocalServiceUtil.getFolder(folderId);
+			DLFolder dlFolder = DLRepositoryLocalServiceUtil.getFolder(
+				folderId);
 
-			return contains(permissionChecker, folder, actionId);
+			return contains(permissionChecker, dlFolder, actionId);
 		}
 	}
 

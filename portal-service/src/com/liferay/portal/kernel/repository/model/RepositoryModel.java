@@ -16,7 +16,6 @@ package com.liferay.portal.kernel.repository.model;
 
 import com.liferay.portal.kernel.exception.SystemException;
 
-
 /**
  * @author Alexander Chow
  */

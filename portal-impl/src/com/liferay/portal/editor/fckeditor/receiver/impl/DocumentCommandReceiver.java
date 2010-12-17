@@ -26,6 +26,7 @@ import com.liferay.portal.repository.liferayrepository.model.LiferayFolder;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
@@ -173,12 +174,12 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		throws Exception {
 
 		if (folderName.equals(StringPool.SLASH)) {
-			DLFolderImpl folder = new DLFolderImpl();
+			DLFolder dolFolder = new DLFolderImpl();
 
-			folder.setFolderId(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-			folder.setGroupId(groupId);
+			dolFolder.setFolderId(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+			dolFolder.setGroupId(groupId);
 
-			return new LiferayFolder(folder);
+			return new LiferayFolder(dolFolder);
 		}
 
 		StringTokenizer st = new StringTokenizer(folderName, StringPool.SLASH);

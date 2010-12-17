@@ -246,8 +246,8 @@ public interface DLRepositoryLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void updateAsset(long userId,
-		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
-		com.liferay.portlet.documentlibrary.model.DLFileVersion fileVersion,
+		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
+		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

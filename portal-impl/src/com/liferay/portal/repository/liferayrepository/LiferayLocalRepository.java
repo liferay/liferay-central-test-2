@@ -51,11 +51,11 @@ public class LiferayLocalRepository extends LiferayBase
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		DLFileEntry fileEntry = DLRepositoryLocalServiceUtil.addFileEntry(
+		DLFileEntry dlFileEntry = DLRepositoryLocalServiceUtil.addFileEntry(
 			userId, _groupId, folderId, title, description, changeLog,
 			extraSettings, is, size, serviceContext);
 
-		return new LiferayFileEntry(fileEntry);
+		return new LiferayFileEntry(dlFileEntry);
 	}
 
 	public Folder addFolder(
@@ -63,11 +63,11 @@ public class LiferayLocalRepository extends LiferayBase
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		DLFolder folder = DLRepositoryLocalServiceUtil.addFolder(
+		DLFolder dlFolder = DLRepositoryLocalServiceUtil.addFolder(
 			userId, _groupId, parentFolderId, title, description,
 			serviceContext);
 
-		return new LiferayFolder(folder);
+		return new LiferayFolder(dlFolder);
 	}
 
 	public void deleteAll() throws PortalException, SystemException {
@@ -90,21 +90,22 @@ public class LiferayLocalRepository extends LiferayBase
 			long folderId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		List<DLFileEntry> list = DLRepositoryLocalServiceUtil.getFileEntries(
-			_groupId, folderId, start, end, obc);
+		List<DLFileEntry> dlFileEntries =
+			DLRepositoryLocalServiceUtil.getFileEntries(
+				_groupId, folderId, start, end, obc);
 
-		return convertFileEntries(list);
+		return toFileEntries(dlFileEntries);
 	}
 
 	public List<Object> getFileEntriesAndFileShortcuts(
 			List<Long> folderIds, int status, int start, int end)
 		throws SystemException {
 
-		List<Object> list =
+		List<Object> dlFileEntriesAndFileShortcuts =
 			DLRepositoryLocalServiceUtil.getFileEntriesAndFileShortcuts(
 				_groupId, folderIds, status, start, end);
 
-		return convertFileEntriesAndFolders(list);
+		return toFileEntriesAndFolders(dlFileEntriesAndFileShortcuts);
 	}
 
 	public int getFileEntriesAndFileShortcutsCount(
@@ -112,7 +113,7 @@ public class LiferayLocalRepository extends LiferayBase
 		throws SystemException {
 
 		return DLRepositoryLocalServiceUtil.getFileEntriesAndFileShortcutsCount(
-				_groupId, folderIds, status);
+			_groupId, folderIds, status);
 	}
 
 	public int getFileEntriesCount(long folderId) throws SystemException {
@@ -123,76 +124,76 @@ public class LiferayLocalRepository extends LiferayBase
 	public FileEntry getFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 
-		DLFileEntry fileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
+		DLFileEntry dlFileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
 			fileEntryId);
 
-		return new LiferayFileEntry(fileEntry);
+		return new LiferayFileEntry(dlFileEntry);
 	}
 
 	public FileEntry getFileEntry(long folderId, String title)
 		throws PortalException, SystemException {
 
-		DLFileEntry fileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
+		DLFileEntry dlFileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
 			_groupId, folderId, title);
 
-		return new LiferayFileEntry(fileEntry);
+		return new LiferayFileEntry(dlFileEntry);
 	}
 
 	public FileEntry getFileEntryByUuid(String uuid)
 		throws PortalException, SystemException {
 
-		DLFileEntry fileEntry =
+		DLFileEntry dlFileEntry =
 			DLRepositoryLocalServiceUtil.getFileEntryByUuidAndGroupId(
 				uuid, _groupId);
 
-		return new LiferayFileEntry(fileEntry);
+		return new LiferayFileEntry(dlFileEntry);
 	}
 
 	public FileVersion getFileVersion(long fileVersionId)
 		throws PortalException, SystemException {
 
-		DLFileVersion fileVersion = DLRepositoryLocalServiceUtil.getFileVersion(
-			fileVersionId);
+		DLFileVersion dlFileVersion =
+			DLRepositoryLocalServiceUtil.getFileVersion(fileVersionId);
 
-		return new LiferayFileVersion(fileVersion);
+		return new LiferayFileVersion(dlFileVersion);
 	}
 
 	public Folder getFolder(long folderId)
 		throws PortalException, SystemException {
 
-		DLFolder folder = DLRepositoryLocalServiceUtil.getFolder(folderId);
+		DLFolder dlFolder = DLRepositoryLocalServiceUtil.getFolder(folderId);
 
-		return new LiferayFolder(folder);
+		return new LiferayFolder(dlFolder);
 	}
 
 	public Folder getFolder(long parentFolderId, String title)
 		throws PortalException, SystemException {
 
-		DLFolder folder = DLRepositoryLocalServiceUtil.getFolder(
+		DLFolder dlFolder = DLRepositoryLocalServiceUtil.getFolder(
 			_groupId, parentFolderId, title);
 
-		return new LiferayFolder(folder);
+		return new LiferayFolder(dlFolder);
 	}
 
 	public List<Folder> getFolders(long parentFolderId, int start, int end)
 		throws SystemException {
 
-		List<DLFolder> list = DLRepositoryLocalServiceUtil.getFolders(
+		List<DLFolder> dlFolders = DLRepositoryLocalServiceUtil.getFolders(
 			_groupId, parentFolderId, start, end);
 
-		return convertFolders(list);
+		return toFolders(dlFolders);
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
 			List<Long> folderIds, int status, int start, int end)
 		throws SystemException {
 
-		List<Object> list =
+		List<Object> dlFoldersAndFileEntriesAndFileShortcuts =
 			DLRepositoryLocalServiceUtil.
 				getFoldersAndFileEntriesAndFileShortcuts(
 					_groupId, folderIds, status, start, end);
 
-		return convertFileEntriesAndFolders(list);
+		return toFileEntriesAndFolders(dlFoldersAndFileEntriesAndFileShortcuts);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
@@ -220,22 +221,22 @@ public class LiferayLocalRepository extends LiferayBase
 			int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		List<DLFileEntry> list =
+		List<DLFileEntry> dlFileEntries =
 			DLRepositoryLocalServiceUtil.getGroupFileEntries(
 				_groupId, start, end, obc);
 
-		return convertFileEntries(list);
+		return toFileEntries(dlFileEntries);
 	}
 
 	public List<FileEntry> getRepositoryFileEntries(
 			long userId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		List<DLFileEntry> list =
+		List<DLFileEntry> dlFileEntries =
 			DLRepositoryLocalServiceUtil.getGroupFileEntries(
 				_groupId, userId, start, end, obc);
 
-		return convertFileEntries(list);
+		return toFileEntries(dlFileEntries);
 	}
 
 	public int getRepositoryFileEntriesCount()
@@ -256,10 +257,10 @@ public class LiferayLocalRepository extends LiferayBase
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		DLFileEntry fileEntry = DLRepositoryLocalServiceUtil.moveFileEntry(
+		DLFileEntry dlFileEntry = DLRepositoryLocalServiceUtil.moveFileEntry(
 			userId, fileEntryId, newFolderId, serviceContext);
 
-		return new LiferayFileEntry(fileEntry);
+		return new LiferayFileEntry(dlFileEntry);
 	}
 
 	public void updateAsset(
@@ -282,11 +283,11 @@ public class LiferayLocalRepository extends LiferayBase
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		DLFileEntry fileEntry = DLRepositoryLocalServiceUtil.updateFileEntry(
+		DLFileEntry dlFileEntry = DLRepositoryLocalServiceUtil.updateFileEntry(
 			userId, fileEntryId, sourceFileName, title, description, changeLog,
 			majorVersion, extraSettings, is, size, serviceContext);
 
-		return new LiferayFileEntry(fileEntry);
+		return new LiferayFileEntry(dlFileEntry);
 	}
 
 	public Folder updateFolder(
@@ -294,10 +295,10 @@ public class LiferayLocalRepository extends LiferayBase
 			String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		DLFolder folder = DLRepositoryLocalServiceUtil.updateFolder(
+		DLFolder dlFolder = DLRepositoryLocalServiceUtil.updateFolder(
 			folderId, parentFolderId, title, description, serviceContext);
 
-		return new LiferayFolder(folder);
+		return new LiferayFolder(dlFolder);
 	}
 
 	private long _groupId;

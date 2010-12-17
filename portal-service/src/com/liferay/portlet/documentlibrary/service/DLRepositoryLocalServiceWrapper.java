@@ -299,13 +299,13 @@ public class DLRepositoryLocalServiceWrapper implements DLRepositoryLocalService
 	}
 
 	public void updateAsset(long userId,
-		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
-		com.liferay.portlet.documentlibrary.model.DLFileVersion fileVersion,
+		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
+		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_dlRepositoryLocalService.updateAsset(userId, fileEntry, fileVersion,
-			assetCategoryIds, assetTagNames);
+		_dlRepositoryLocalService.updateAsset(userId, dlFileEntry,
+			dlFileVersion, assetCategoryIds, assetTagNames);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(

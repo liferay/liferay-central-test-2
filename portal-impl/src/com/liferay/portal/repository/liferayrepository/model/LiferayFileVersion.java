@@ -28,121 +28,123 @@ import java.util.Date;
  */
 public class LiferayFileVersion extends LiferayModel implements FileVersion {
 
-	public LiferayFileVersion(DLFileVersion fileVersion) {
-		_fileVersion = fileVersion;
+	public LiferayFileVersion(DLFileVersion dlFileVersion) {
+		_dlFileVersion = dlFileVersion;
 	}
 
-	public LiferayFileVersion(DLFileVersion fileVersion, boolean escapedModel) {
-		_fileVersion = fileVersion;
+	public LiferayFileVersion(
+		DLFileVersion dlFileVersion, boolean escapedModel) {
+
+		_dlFileVersion = dlFileVersion;
 		_escapedModel = escapedModel;
 	}
 
 	public String getChangeLog() {
-		return _fileVersion.getChangeLog();
+		return _dlFileVersion.getChangeLog();
 	}
 
 	public long getCompanyId() {
-		return _fileVersion.getCompanyId();
+		return _dlFileVersion.getCompanyId();
 	}
 
 	public Date getCreateDate() {
-		return _fileVersion.getCreateDate();
+		return _dlFileVersion.getCreateDate();
 	}
 
 	public String getDescription() {
-		return _fileVersion.getDescription();
+		return _dlFileVersion.getDescription();
 	}
 
 	public ExpandoBridge getExpandoBridge() {
-		return _fileVersion.getExpandoBridge();
+		return _dlFileVersion.getExpandoBridge();
 	}
 
 	public String getExtension() {
-		return _fileVersion.getExtension();
+		return _dlFileVersion.getExtension();
 	}
 
 	public String getExtraSettings() {
-		return _fileVersion.getExtraSettings();
+		return _dlFileVersion.getExtraSettings();
 	}
 
 	public FileEntry getFileEntry() throws PortalException, SystemException {
-		return new LiferayFileEntry(_fileVersion.getFileEntry());
+		return new LiferayFileEntry(_dlFileVersion.getFileEntry());
 	}
 
 	public long getFileEntryId() {
-		return _fileVersion.getFileEntryId();
+		return _dlFileVersion.getFileEntryId();
 	}
 
 	public long getFileVersionId() {
-		return _fileVersion.getFileVersionId();
+		return _dlFileVersion.getFileVersionId();
 	}
 
 	public String getIcon() {
-		return _fileVersion.getIcon();
+		return _dlFileVersion.getIcon();
 	}
 
 	public Object getModel() {
-		return _fileVersion;
+		return _dlFileVersion;
 	}
 
 	public long getPrimaryKey() {
-		return _fileVersion.getPrimaryKey();
+		return _dlFileVersion.getPrimaryKey();
 	}
 
 	public long getRepositoryId() {
-		return _fileVersion.getGroupId();
+		return _dlFileVersion.getGroupId();
 	}
 
 	public long getSize() {
-		return _fileVersion.getSize();
+		return _dlFileVersion.getSize();
 	}
 
 	public int getStatus() {
-		return _fileVersion.getStatus();
+		return _dlFileVersion.getStatus();
 	}
 
 	public long getStatusByUserId() {
-		return _fileVersion.getStatusByUserId();
+		return _dlFileVersion.getStatusByUserId();
 	}
 
 	public String getStatusByUserName() {
-		return _fileVersion.getStatusByUserName();
+		return _dlFileVersion.getStatusByUserName();
 	}
 
 	public String getStatusByUserUuid() throws SystemException {
-		return _fileVersion.getStatusByUserUuid();
+		return _dlFileVersion.getStatusByUserUuid();
 	}
 
 	public Date getStatusDate() {
-		return _fileVersion.getStatusDate();
+		return _dlFileVersion.getStatusDate();
 	}
 
 	public String getTitle() {
-		return _fileVersion.getTitle();
+		return _dlFileVersion.getTitle();
 	}
 
 	public long getUserId() {
-		return _fileVersion.getUserId();
+		return _dlFileVersion.getUserId();
 	}
 
 	public String getUserName() {
-		return _fileVersion.getUserName();
+		return _dlFileVersion.getUserName();
 	}
 
 	public String getUserUuid() throws SystemException {
-		return _fileVersion.getUserUuid();
+		return _dlFileVersion.getUserUuid();
 	}
 
 	public String getVersion() {
-		return _fileVersion.getVersion();
+		return _dlFileVersion.getVersion();
 	}
 
 	public boolean isApproved() {
-		return _fileVersion.isApproved();
+		return _dlFileVersion.isApproved();
 	}
 
 	public boolean isDraft() {
-		return _fileVersion.isDraft();
+		return _dlFileVersion.isDraft();
 	}
 
 	public boolean isEscapedModel() {
@@ -150,27 +152,28 @@ public class LiferayFileVersion extends LiferayModel implements FileVersion {
 	}
 
 	public boolean isExpired() {
-		return _fileVersion.isExpired();
+		return _dlFileVersion.isExpired();
 	}
 
 	public boolean isPending() {
-		return _fileVersion.isPending();
+		return _dlFileVersion.isPending();
 	}
 
 	public void prepare() throws SystemException {
-		_fileVersion.setUserUuid(getUserUuid());
+		_dlFileVersion.setUserUuid(getUserUuid());
 	}
+
 	public FileVersion toEscapedModel() {
 		if (isEscapedModel()) {
 			return this;
 		}
 		else {
-			return new LiferayFileVersion(_fileVersion.toEscapedModel(), true);
+			return new LiferayFileVersion(
+				_dlFileVersion.toEscapedModel(), true);
 		}
 	}
 
-	private boolean _escapedModel = false;
-
-	private DLFileVersion _fileVersion;
+	private DLFileVersion _dlFileVersion;
+	private boolean _escapedModel;
 
 }

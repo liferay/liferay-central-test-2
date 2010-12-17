@@ -267,8 +267,7 @@ public class DLAppServiceUtil {
 
 	public static java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
 		long repositoryId, long folderId, int status, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .getFoldersAndFileEntriesAndFileShortcuts(repositoryId,
 			folderId, status, start, end);
@@ -284,8 +283,7 @@ public class DLAppServiceUtil {
 
 	public static int getFoldersAndFileEntriesAndFileShortcutsCount(
 		long repositoryId, long folderId, int status)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .getFoldersAndFileEntriesAndFileShortcutsCount(repositoryId,
 			folderId, status);

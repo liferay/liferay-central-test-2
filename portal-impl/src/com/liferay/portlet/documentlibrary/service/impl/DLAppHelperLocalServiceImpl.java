@@ -45,7 +45,7 @@ public class DLAppHelperLocalServiceImpl
 	extends DLAppHelperLocalServiceBaseImpl {
 
 	public void addFileEntry(
-			FileEntry fileEntry, FileVersion fileVersion, 
+			FileEntry fileEntry, FileVersion fileVersion,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -248,7 +248,7 @@ public class DLAppHelperLocalServiceImpl
 
 		if (addDraftAssetEntry) {
 			assetEntryLocalService.updateEntry(
-				userId, fileEntry.getRepositoryId(), 
+				userId, fileEntry.getRepositoryId(),
 				DLFileEntryConstants.getClassName(),
 				fileVersion.getFileVersionId(), fileEntry.getUuid(),
 				assetCategoryIds, assetTagNames, false, null, null, null, null,
@@ -321,17 +321,16 @@ public class DLAppHelperLocalServiceImpl
 				}
 
 				assetEntryLocalService.updateVisible(
-					DLFileEntryConstants.getClassName(), 
+					DLFileEntryConstants.getClassName(),
 					fileEntry.getFileEntryId(), true);
 			}
 
 			// Social
 
 			socialActivityLocalService.addUniqueActivity(
-				latestFileVersion.getStatusByUserId(), 
-				fileEntry.getRepositoryId(),
-				latestFileVersion.getCreateDate(),
-				DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId(), 
+				latestFileVersion.getStatusByUserId(),
+				fileEntry.getRepositoryId(), latestFileVersion.getCreateDate(),
+				DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId(),
 				DLActivityKeys.ADD_FILE_ENTRY, StringPool.BLANK, 0);
 		}
 		else {
@@ -340,7 +339,7 @@ public class DLAppHelperLocalServiceImpl
 
 			if (Validator.isNull(fileEntry.getVersion())) {
 				assetEntryLocalService.updateVisible(
-					DLFileEntryConstants.getClassName(), 
+					DLFileEntryConstants.getClassName(),
 					fileEntry.getFileEntryId(), false);
 			}
 		}

@@ -248,8 +248,7 @@ public class DLAppServiceWrapper implements DLAppService {
 
 	public java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
 		long repositoryId, long folderId, int status, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlAppService.getFoldersAndFileEntriesAndFileShortcuts(repositoryId,
 			folderId, status, start, end);
 	}
@@ -263,8 +262,7 @@ public class DLAppServiceWrapper implements DLAppService {
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
 		long repositoryId, long folderId, int status)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlAppService.getFoldersAndFileEntriesAndFileShortcutsCount(repositoryId,
 			folderId, status);
 	}

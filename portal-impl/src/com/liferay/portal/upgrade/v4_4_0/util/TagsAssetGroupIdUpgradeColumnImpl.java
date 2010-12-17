@@ -84,47 +84,48 @@ public class TagsAssetGroupIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	protected long getGroupId(String className, long classPK) throws Exception {
 		if (className.equals(BlogsEntry.class.getName())) {
-			BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
+			BlogsEntry blogsEntry = BlogsEntryLocalServiceUtil.getEntry(
+				classPK);
 
-			return entry.getGroupId();
+			return blogsEntry.getGroupId();
 		}
 		else if (className.equals(BookmarksEntry.class.getName())) {
-			BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(
-				classPK);
+			BookmarksEntry bookmarksEntry =
+				BookmarksEntryLocalServiceUtil.getEntry(classPK);
 
-			return entry.getFolder().getGroupId();
+			return bookmarksEntry.getFolder().getGroupId();
 		}
 		else if (className.equals(DLFileEntry.class.getName())) {
-			DLFileEntry fileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
+			DLFileEntry dlFileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
 				classPK);
 
-			return fileEntry.getFolder().getGroupId();
+			return dlFileEntry.getFolder().getGroupId();
 		}
 		else if (className.equals(IGImage.class.getName())) {
-			IGImage image = IGImageLocalServiceUtil.getImage(classPK);
+			IGImage igImage = IGImageLocalServiceUtil.getImage(classPK);
 
-			return image.getFolder().getGroupId();
+			return igImage.getFolder().getGroupId();
 		}
 		else if (className.equals(JournalArticle.class.getName())) {
-			JournalArticleResource articleResource =
+			JournalArticleResource journalArticleResource =
 				JournalArticleResourceLocalServiceUtil.getArticleResource(
 					classPK);
 
-			return articleResource.getGroupId();
+			return journalArticleResource.getGroupId();
 		}
 		else if (className.equals(MBMessage.class.getName())) {
-			MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
+			MBMessage mbMessage = MBMessageLocalServiceUtil.getMessage(classPK);
 
-			return message.getCategory().getGroupId();
+			return mbMessage.getCategory().getGroupId();
 		}
 		else if (className.equals(WikiPage.class.getName())) {
-			WikiPageResource pageResource =
+			WikiPageResource wikiPageResource =
 				WikiPageResourceLocalServiceUtil.getPageResource(classPK);
 
-			WikiNode node = WikiNodeLocalServiceUtil.getNode(
-				pageResource.getNodeId());
+			WikiNode wikiNode = WikiNodeLocalServiceUtil.getNode(
+				wikiPageResource.getNodeId());
 
-			return node.getGroupId();
+			return wikiNode.getGroupId();
 		}
 		else {
 			return 0;

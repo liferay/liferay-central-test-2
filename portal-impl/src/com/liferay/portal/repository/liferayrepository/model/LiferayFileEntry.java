@@ -33,157 +33,157 @@ import java.util.List;
  */
 public class LiferayFileEntry extends LiferayModel implements FileEntry {
 
-	public LiferayFileEntry(DLFileEntry fileEntry) {
-		_fileEntry = fileEntry;
+	public LiferayFileEntry(DLFileEntry dlFileEntry) {
+		_dlFileEntry = dlFileEntry;
 	}
 
 	public LiferayFileEntry(DLFileEntry fileEntry, boolean escapedModel) {
-		_fileEntry = fileEntry;
+		_dlFileEntry = fileEntry;
 		_escapedModel = escapedModel;
 	}
 
 	public long getCompanyId() {
-		return _fileEntry.getCompanyId();
+		return _dlFileEntry.getCompanyId();
 	}
 
 	public InputStream getContentStream()
 		throws PortalException, SystemException {
 
-		return _fileEntry.getContentStream();
+		return _dlFileEntry.getContentStream();
 	}
 
 	public InputStream getContentStream(String version)
 		throws PortalException, SystemException {
 
-		return _fileEntry.getContentStream(version);
+		return _dlFileEntry.getContentStream(version);
 	}
 
 	public Date getCreateDate() {
-		return _fileEntry.getCreateDate();
+		return _dlFileEntry.getCreateDate();
 	}
 
 	public String getDescription() {
-		return _fileEntry.getDescription();
+		return _dlFileEntry.getDescription();
 	}
 
 	public String getExtension() {
-		return _fileEntry.getExtension();
+		return _dlFileEntry.getExtension();
 	}
 
 	public String getExtraSettings() {
-		return _fileEntry.getExtraSettings();
+		return _dlFileEntry.getExtraSettings();
 	}
 
 	public UnicodeProperties getExtraSettingsProperties() {
-		return _fileEntry.getExtraSettingsProperties();
+		return _dlFileEntry.getExtraSettingsProperties();
 	}
 
 	public long getFileEntryId() {
-		return _fileEntry.getFileEntryId();
+		return _dlFileEntry.getFileEntryId();
 	}
 
 	public FileVersion getFileVersion()
 		throws PortalException, SystemException {
 
-		return new LiferayFileVersion(_fileEntry.getFileVersion());
+		return new LiferayFileVersion(_dlFileEntry.getFileVersion());
 	}
 
 	public FileVersion getFileVersion(String version)
 		throws PortalException, SystemException {
 
-		return new LiferayFileVersion(_fileEntry.getFileVersion(version));
+		return new LiferayFileVersion(_dlFileEntry.getFileVersion(version));
 	}
 
 	public List<FileVersion> getFileVersions(int status)
 		throws SystemException {
 
-		return convertFileVersions(_fileEntry.getFileVersions(status));
+		return toFileVersions(_dlFileEntry.getFileVersions(status));
 	}
 
 	public Folder getFolder() {
-		return new LiferayFolder(_fileEntry.getFolder());
+		return new LiferayFolder(_dlFileEntry.getFolder());
 	}
 
 	public long getFolderId() {
-		return _fileEntry.getFolderId();
+		return _dlFileEntry.getFolderId();
 	}
 
 	public String getIcon() {
-		return _fileEntry.getIcon();
+		return _dlFileEntry.getIcon();
 	}
 
 	public FileVersion getLatestFileVersion()
 		throws PortalException, SystemException {
 
-		return new LiferayFileVersion(_fileEntry.getFileVersion());
+		return new LiferayFileVersion(_dlFileEntry.getFileVersion());
 	}
 
 	public Lock getLock() {
-		return _fileEntry.getLock();
+		return _dlFileEntry.getLock();
 	}
 
 	public Object getModel() {
-		return _fileEntry;
+		return _dlFileEntry;
 	}
 
 	public Date getModifiedDate() {
-		return _fileEntry.getModifiedDate();
+		return _dlFileEntry.getModifiedDate();
 	}
 
 	public long getPrimaryKey() {
-		return _fileEntry.getPrimaryKey();
+		return _dlFileEntry.getPrimaryKey();
 	}
 
 	public int getReadCount() {
-		return _fileEntry.getReadCount();
+		return _dlFileEntry.getReadCount();
 	}
 
 	public long getRepositoryId() {
-		return _fileEntry.getGroupId();
+		return _dlFileEntry.getGroupId();
 	}
 
 	public long getSize() {
-		return _fileEntry.getSize();
+		return _dlFileEntry.getSize();
 	}
 
 	public String getTitle() {
-		return _fileEntry.getTitle();
+		return _dlFileEntry.getTitle();
 	}
 
 	public long getUserId() {
-		return _fileEntry.getUserId();
+		return _dlFileEntry.getUserId();
 	}
 
 	public String getUserName() {
-		return _fileEntry.getVersionUserName();
+		return _dlFileEntry.getVersionUserName();
 	}
 
 	public String getUserUuid() throws SystemException {
-		return _fileEntry.getUserUuid();
+		return _dlFileEntry.getUserUuid();
 	}
 
 	public String getUuid() {
-		return _fileEntry.getUuid();
+		return _dlFileEntry.getUuid();
 	}
 
 	public String getVersion() {
-		return _fileEntry.getVersion();
+		return _dlFileEntry.getVersion();
 	}
 
 	public long getVersionUserId() {
-		return _fileEntry.getVersionUserId();
+		return _dlFileEntry.getVersionUserId();
 	}
 
 	public String getVersionUserName() {
-		return _fileEntry.getVersionUserName();
+		return _dlFileEntry.getVersionUserName();
 	}
 
 	public String getVersionUserUuid() throws SystemException {
-		return _fileEntry.getVersionUserUuid();
+		return _dlFileEntry.getVersionUserUuid();
 	}
 
 	public boolean hasLock() {
-		return _fileEntry.hasLock();
+		return _dlFileEntry.hasLock();
 	}
 
 	public boolean isEscapedModel() {
@@ -191,11 +191,11 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 	}
 
 	public boolean isLocked() {
-		return _fileEntry.isLocked();
+		return _dlFileEntry.isLocked();
 	}
 
 	public void prepare() throws SystemException {
-		_fileEntry.setUserUuid(getUserUuid());
+		_dlFileEntry.setUserUuid(getUserUuid());
 	}
 
 	public FileEntry toEscapedModel() {
@@ -203,12 +203,11 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 			return this;
 		}
 		else {
-			return new LiferayFileEntry(_fileEntry.toEscapedModel(), true);
+			return new LiferayFileEntry(_dlFileEntry.toEscapedModel(), true);
 		}
 	}
 
-	private boolean _escapedModel = false;
-
-	private DLFileEntry _fileEntry;
+	private DLFileEntry _dlFileEntry;
+	private boolean _escapedModel;
 
 }

@@ -29,11 +29,11 @@ import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUti
 public class DLFileShortcutPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, DLFileShortcut fileShortcut,
+			PermissionChecker permissionChecker, DLFileShortcut dlFileShortcut,
 			String actionId)
 		throws PortalException {
 
-		if (!contains(permissionChecker, fileShortcut, actionId)) {
+		if (!contains(permissionChecker, dlFileShortcut, actionId)) {
 			throw new PrincipalException();
 		}
 	}
@@ -49,12 +49,12 @@ public class DLFileShortcutPermission {
 	}
 
 	public static boolean contains(
-		PermissionChecker permissionChecker, DLFileShortcut fileShortcut,
+		PermissionChecker permissionChecker, DLFileShortcut dlFileShortcut,
 		String actionId) {
 
 		Boolean hasPermission = StagingPermissionUtil.hasPermission(
-			permissionChecker, fileShortcut.getGroupId(),
-			DLFileShortcut.class.getName(), fileShortcut.getFileShortcutId(),
+			permissionChecker, dlFileShortcut.getGroupId(),
+			DLFileShortcut.class.getName(), dlFileShortcut.getFileShortcutId(),
 			PortletKeys.DOCUMENT_LIBRARY, actionId);
 
 		if (hasPermission != null) {
@@ -62,16 +62,16 @@ public class DLFileShortcutPermission {
 		}
 
 		if (permissionChecker.hasOwnerPermission(
-				fileShortcut.getCompanyId(), DLFileShortcut.class.getName(),
-				fileShortcut.getFileShortcutId(), fileShortcut.getUserId(),
+				dlFileShortcut.getCompanyId(), DLFileShortcut.class.getName(),
+				dlFileShortcut.getFileShortcutId(), dlFileShortcut.getUserId(),
 				actionId)) {
 
 			return true;
 		}
 
 		return permissionChecker.hasPermission(
-			fileShortcut.getGroupId(), DLFileShortcut.class.getName(),
-			fileShortcut.getFileShortcutId(), actionId);
+			dlFileShortcut.getGroupId(), DLFileShortcut.class.getName(),
+			dlFileShortcut.getFileShortcutId(), actionId);
 	}
 
 	public static boolean contains(
@@ -79,10 +79,10 @@ public class DLFileShortcutPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		DLFileShortcut fileShortcut =
+		DLFileShortcut dlFileShortcut =
 			DLFileShortcutLocalServiceUtil.getFileShortcut(fileShortcutId);
 
-		return contains(permissionChecker, fileShortcut, actionId);
+		return contains(permissionChecker, dlFileShortcut, actionId);
 	}
 
 }
