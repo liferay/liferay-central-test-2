@@ -282,14 +282,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				continue;
 			}
 
-			socialEquityLogLocalService.addEquityLogs(
-				userId, WikiPage.class.getName(), page.getResourcePrimKey(),
-				ActionKeys.ADD_ATTACHMENT, dirName + "/" + fileName);
-
 			dlLocalService.addFile(
 				companyId, portletId, groupId, repositoryId,
 				dirName + "/" + fileName, 0, StringPool.BLANK,
 				page.getModifiedDate(), new ServiceContext(), bytes);
+
+			socialEquityLogLocalService.addEquityLogs(
+					userId, WikiPage.class.getName(), page.getResourcePrimKey(),
+					ActionKeys.ADD_ATTACHMENT, dirName + "/" + fileName);
 		}
 	}
 
@@ -506,9 +506,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		WikiPage page = getPage(nodeId, title);
 
 		socialEquityLogLocalService.deactivateEquityLogs(
-			page.getUserId(), WikiPage.class.getName(),
-			page.getResourcePrimKey(), ActionKeys.ADD_ATTACHMENT,
-			fileName.substring(1));
+			WikiPage.class.getName(), page.getResourcePrimKey(),
+			ActionKeys.ADD_ATTACHMENT, fileName.substring(1));
 
 		long companyId = page.getCompanyId();
 		String portletId = CompanyConstants.SYSTEM_STRING;
