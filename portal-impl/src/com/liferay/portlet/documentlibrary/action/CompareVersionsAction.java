@@ -88,8 +88,14 @@ public class CompareVersionsAction extends PortletAction {
 		FileEntry fileEntry = DLAppServiceUtil.getFileEntry(fileEntryId);
 
 		String extension = fileEntry.getExtension();
-		String sourceTitle = fileEntry.getFileVersion(sourceVersion).getTitle();
-		String targetTitle = fileEntry.getFileVersion(targetVersion).getTitle();
+
+		FileVersion sourceFileVersion = fileEntry.getFileVersion(sourceVersion);
+
+		String sourceTitle = sourceFileVersion.getTitle();
+
+		FileVersion targetFileVersion = fileEntry.getFileVersion(targetVersion);
+
+		String targetTitle = targetFileVersion.getTitle();
 
 		InputStream sourceIs = fileEntry.getContentStream(sourceVersion);
 		InputStream targetIs = fileEntry.getContentStream(targetVersion);
