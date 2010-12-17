@@ -30,7 +30,6 @@ import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.User;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.social.model.SocialEquityActionMapping;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -492,14 +491,6 @@ public interface Portal {
 
 	public ServletContext getServletContext(
 		Portlet portlet, ServletContext servletContext);
-
-	public SocialEquityActionMapping getSocialEquityActionMapping(
-		String name, String actionId);
-
-	public List<SocialEquityActionMapping> getSocialEquityActionMappings(
-		String name);
-
-	public String[] getSocialEquityClassNames();
 
 	public String getStaticResourceURL(
 		HttpServletRequest request, String uri);

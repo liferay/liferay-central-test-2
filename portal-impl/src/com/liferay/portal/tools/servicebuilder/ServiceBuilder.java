@@ -37,7 +37,6 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
-import com.liferay.portal.security.permission.ResourceActionsUtil_IW;
 import com.liferay.portal.tools.ArgumentsUtil;
 import com.liferay.portal.tools.SourceFormatter;
 import com.liferay.portal.util.InitUtil;
@@ -3937,7 +3936,7 @@ public class ServiceBuilder {
 		context.put("arrayUtil", ArrayUtil_IW.getInstance());
 		context.put("modelHintsUtil", ModelHintsUtil.getModelHints());
 		context.put(
-			"resourceActionsUtil", ResourceActionsUtil_IW.getInstance());
+			"resourceActionsUtil", ResourceActionsUtil.getResourceActions());
 		context.put("stringUtil", StringUtil_IW.getInstance());
 		context.put("system", staticModels.get("java.lang.System"));
 		context.put("tempMap", wrapper.wrap(new HashMap<String, Object>()));

@@ -153,7 +153,6 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.login.util.LoginUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.social.model.SocialEquityActionMapping;
 import com.liferay.portlet.social.util.FacebookUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.Encryptor;
@@ -2849,22 +2848,6 @@ public class PortalImpl implements Portal {
 			(PortletContextImpl)portletConfig.getPortletContext();
 
 		return portletContextImpl.getServletContext();
-	}
-
-	public SocialEquityActionMapping getSocialEquityActionMapping(
-		String name, String actionId) {
-
-		return ResourceActionsUtil.getSocialEquityActionMapping(name, actionId);
-	}
-
-	public List<SocialEquityActionMapping> getSocialEquityActionMappings(
-		String name) {
-
-		return ResourceActionsUtil.getSocialEquityActionMappings(name);
-	}
-
-	public String[] getSocialEquityClassNames() {
-		return ResourceActionsUtil.getSocialEquityClassNames();
 	}
 
 	public String getStaticResourceURL(

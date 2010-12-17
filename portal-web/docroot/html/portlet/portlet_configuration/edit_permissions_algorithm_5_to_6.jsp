@@ -346,7 +346,7 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 
 						if (Validator.isNotNull(preselectedMsg)) {
 							buffer.append("onclick=\"return false;\" onmouseover=\"Liferay.Portal.ToolTip.show(this, '");
-							buffer.append(UnicodeLanguageUtil.format(pageContext, preselectedMsg, new Object[] {HtmlUtil.escape(role.getTitle(locale)), ResourceActionsUtil.getAction(pageContext, action), LanguageUtil.get(pageContext, ResourceActionsUtil.MODEL_RESOURCE_NAME_PREFIX + resource.getName()), HtmlUtil.escape(group.getDescriptiveName())}));
+							buffer.append(UnicodeLanguageUtil.format(pageContext, preselectedMsg, new Object[] {HtmlUtil.escape(role.getTitle(locale)), ResourceActionsUtil.getAction(pageContext, action), LanguageUtil.get(pageContext, ResourceActionsUtil.getModelResourceNamePrefix() + resource.getName()), HtmlUtil.escape(group.getDescriptiveName())}));
 							buffer.append("'); return false;\" ");
 						}
 

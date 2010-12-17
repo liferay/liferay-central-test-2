@@ -18,10 +18,10 @@ import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.security.permission.comparator.ModelResourceComparator;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.social.model.SocialEquityActionMapping;
 import com.liferay.portlet.social.model.SocialEquitySetting;
@@ -82,7 +82,7 @@ public class ViewAction extends PortletAction {
 		Map<String, List<SocialEquityActionMapping>> equityActionMappingsMap =
 			new LinkedHashMap<String, List<SocialEquityActionMapping>>();
 
-		String[] classNames = PortalUtil.getSocialEquityClassNames();
+		String[] classNames = ResourceActionsUtil.getSocialEquityClassNames();
 
 		Comparator<String> comparator = new ModelResourceComparator(
 			themeDisplay.getLocale());
@@ -173,7 +173,7 @@ public class ViewAction extends PortletAction {
 			new ArrayList<SocialEquityActionMapping>();
 
 		List<SocialEquityActionMapping> equityActionMappings =
-			PortalUtil.getSocialEquityActionMappings(className);
+			ResourceActionsUtil.getSocialEquityActionMappings(className);
 
 		for (SocialEquityActionMapping equityActionMapping :
 				equityActionMappings) {
@@ -196,7 +196,7 @@ public class ViewAction extends PortletAction {
 			new ArrayList<SocialEquityActionMapping>();
 
 		List<SocialEquityActionMapping> equityActionMappings =
-			PortalUtil.getSocialEquityActionMappings(className);
+			ResourceActionsUtil.getSocialEquityActionMappings(className);
 
 		for (SocialEquityActionMapping equityActionMapping :
 				equityActionMappings) {
@@ -251,7 +251,7 @@ public class ViewAction extends PortletAction {
 			themeDisplay.getScopeGroupId(), Group.class.getName(),
 			SocialEquitySettingConstants.TYPE_PARTICIPATION, enabled);
 
-		String[] classNames = PortalUtil.getSocialEquityClassNames();
+		String[] classNames = ResourceActionsUtil.getSocialEquityClassNames();
 
 		for (String className : classNames) {
 			List<SocialEquityActionMapping> mergedEquityActionMappings =

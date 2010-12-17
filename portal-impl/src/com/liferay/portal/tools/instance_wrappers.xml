@@ -3,10 +3,6 @@
 <instance-wrappers>
 	<instance-wrapper
 		parent-dir="../portal-impl/src"
-		src-file="com/liferay/portal/security/permission/ResourceActionsUtil.java"
-	/>
-	<instance-wrapper
-		parent-dir="../portal-impl/src"
 		src-file="com/liferay/portal/util/PrefsPropsUtil.java"
 	/>
 	<instance-wrapper

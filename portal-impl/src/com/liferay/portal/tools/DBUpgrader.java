@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.model.ReleaseConstants;
-import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.service.ResourceActionLocalServiceUtil;
@@ -106,8 +105,6 @@ public class DBUpgrader {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Check resource actions");
 		}
-
-		ResourceActionsUtil.init();
 
 		ResourceActionLocalServiceUtil.checkResourceActions();
 
