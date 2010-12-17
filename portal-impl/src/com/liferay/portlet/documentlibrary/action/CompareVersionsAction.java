@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.DiffResult;
 import com.liferay.portal.kernel.util.DiffUtil;
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -81,19 +80,15 @@ public class CompareVersionsAction extends PortletAction {
 
 		long fileEntryId = ParamUtil.getLong(renderRequest, "fileEntryId");
 
-		String name = ParamUtil.getString(renderRequest, "name");
-
-		String extension = FileUtil.getExtension(name);
-
-		String titleWithExtension = ParamUtil.getString(
-			renderRequest, "titleWithExtension");
-
 		String sourceVersion = ParamUtil.getString(
 			renderRequest, "sourceVersion");
 		String targetVersion = ParamUtil.getString(
 			renderRequest, "targetVersion");
 
 		FileEntry fileEntry = DLAppServiceUtil.getFileEntry(fileEntryId);
+
+		String extension = fileEntry.getExtension();
+		String title = fileEntry.getTitle();
 
 		InputStream sourceIs = fileEntry.getContentStream(sourceVersion);
 		InputStream targetIs = fileEntry.getContentStream(targetVersion);
@@ -131,10 +126,10 @@ public class CompareVersionsAction extends PortletAction {
 
 		renderRequest.setAttribute(
 			WebKeys.SOURCE_NAME,
-			titleWithExtension + StringPool.SPACE + sourceVersion);
+			title + StringPool.SPACE + sourceVersion);
 		renderRequest.setAttribute(
 			WebKeys.TARGET_NAME,
-			titleWithExtension + StringPool.SPACE + targetVersion);
+			title + StringPool.SPACE + targetVersion);
 		renderRequest.setAttribute(WebKeys.DIFF_RESULTS, diffResults);
 	}
 
