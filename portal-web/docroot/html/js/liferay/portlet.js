@@ -656,6 +656,7 @@
 						},
 						destroyOnClose: true,
 						draggable: true,
+						stack: true,
 						title: title.html() + ' - ' + Liferay.Language.get('configuration'),
 						width: 820
 					}

@@ -409,11 +409,20 @@ AUI().add(
 					var columnHasPortlets = Layout.hasPortlets(columnNode);
 					var originalColumnHasPortlets = Layout.hasPortlets(originalParent);
 
-					var dropZoneId = columnNode.ancestor(Layout.options.dropNodes).get('id');
-					var originalDropZoneId = originalParent.ancestor(Layout.options.dropNodes).get('id');
+					var currentColumn = columnNode.ancestor(Layout.options.dropNodes);
+					var originalColumn = originalParent.ancestor(Layout.options.dropNodes);
 
-					Layout.EMPTY_COLUMNS[dropZoneId] = !columnHasPortlets;
-					Layout.EMPTY_COLUMNS[originalDropZoneId] = !originalColumnHasPortlets;
+					if (currentColumn) {
+						var dropZoneId = currentColumn.get('id');
+
+						Layout.EMPTY_COLUMNS[dropZoneId] = !columnHasPortlets;
+					}
+
+					if (originalColumn) {
+						var originalDropZoneId = originalColumn.get('id');
+
+						Layout.EMPTY_COLUMNS[originalDropZoneId] = !originalColumnHasPortlets;
+					}
 
 					columnNode.toggleClass(emptyColumnClass, !columnHasPortlets);
 					originalParent.toggleClass(emptyColumnClass, !originalColumnHasPortlets);

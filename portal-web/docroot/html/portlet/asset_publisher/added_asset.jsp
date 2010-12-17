@@ -21,18 +21,12 @@ Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId
 %>
 
 <aui:script use="aui-base">
-	if (window.parent) {
-		<c:choose>
-			<c:when test="<%= !selPortlet.isAjaxable() %>">
-				window.parent.location.reload();
-			</c:when>
-			<c:otherwise>
-				var curPortletBoundaryId = '#p_p_id_<%= portletDisplay.getId() %>_';
-
-				window.parent.Liferay.Portlet.refresh(curPortletBoundaryId);
-			</c:otherwise>
-		</c:choose>
-	}
-
-	window.parent.Liferay.fire('closeDialog');
+	window.parent.Liferay.fire(
+		'assetAdded',
+		{
+			portletAjaxable: '<%= selPortlet.isAjaxable() %>',
+			portletId: '<%= portletDisplay.getId() %>',
+			frame: window
+		}
+	);
 </aui:script>

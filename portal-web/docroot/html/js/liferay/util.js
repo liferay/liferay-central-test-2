@@ -287,6 +287,25 @@
 			return !!(window.Array && object.constructor == window.Array);
 		},
 
+		openControlPanelPopUp: function(portlet, portletId, controlPanelURL, namespacedId, className) {
+			var instance = this;
+
+			var parentUtil = Util;
+
+			if (themeDisplay.isStatePopUp()) {
+				parentUtil = window.parent.Liferay.Util;
+			}
+
+			return parentUtil._controlPanelPopup(
+				portlet,
+				portletId,
+				controlPanelURL,
+				namespacedId,
+				className,
+				window
+			);
+		},
+
 		processTab: function(id) {
 			document.all[id].selection.text = String.fromCharCode(9);
 			document.all[id].focus();
@@ -945,51 +964,6 @@
 
 	Liferay.provide(
 		Util,
-		'openControlPanelPopUp',
-		function(portlet, portletId, controlPanelURL, namespacedId, className) {
-			var instance = this;
-
-			if (controlPanelURL) {
-				var title = Liferay.Language.get('add-new') + ' ' + Liferay.Language.get('model.resource.' + className);
-
-				var iframeId = namespacedId + 'controlPanelIframe';
-
-				var dialog = new A.Dialog(
-					{
-						align: {
-							node: null,
-							points: ['tc', 'tc']
-						},
-						destroyOnClose: true,
-						draggable: true,
-						title: title,
-						width: 820
-					}
-				).plug(
-					A.Plugin.DialogIframe,
-					{
-						after: {
-							load: Liferay.Util.afterIframeLoaded
-						},
-						iframeCssClass: 'control-panel-frame',
-						iframeId: iframeId,
-						uri: controlPanelURL
-					}
-				).render();
-
-				Liferay.on(
-					'closeDialog',
-					function() {
-						dialog.close();
-					}
-				);
-			}
-		},
-		['aui-dialog', 'aui-dialog-iframe']
-	);
-
-	Liferay.provide(
-		Util,
 		'portletTitleEdit',
 		function(options) {
 			var obj = options.obj;
@@ -1458,6 +1432,67 @@
 		{
 			defaultFn: Util._defaultSubmitFormFn
 		}
+	);
+
+	Liferay.provide(
+		Util,
+		'_controlPanelPopup',
+		function(portlet, portletId, controlPanelURL, namespacedId, className, openingWindow) {
+			if (controlPanelURL) {
+				var title = Liferay.Language.get('add-new') + ' ' + Liferay.Language.get('model.resource.' + className);
+
+				var iframeId = namespacedId + 'controlPanelIframe';
+
+				var dialog = new A.Dialog(
+					{
+						align: {
+							node: null,
+							points: ['tc', 'tc']
+						},
+						draggable: true,
+						stack: true,
+						title: title,
+						width: 820
+					}
+				).plug(
+					A.Plugin.DialogIframe,
+					{
+						after: {
+							load: Liferay.Util.afterIframeLoaded
+						},
+						iframeCssClass: 'control-panel-frame',
+						iframeId: iframeId,
+						uri: controlPanelURL
+					}
+				).render();
+
+				var handle = Liferay.on(
+					'assetAdded',
+					function(event) {
+						if (event.frame == dialog.iframe.node.get('contentWindow').getDOM()) {
+							dialog.hide();
+
+							if (!event.portletAjaxable) {
+								openingWindow.location.reload();
+							}
+							else {
+								openingWindow.Liferay.Portlet.refresh('#p_p_id_' + event.portletId + '_');
+							}
+
+							setTimeout(
+								function() {
+									dialog.destroy();
+								},
+								0
+							);
+
+							handle.detach();
+						}
+					}
+				);
+			}
+		},
+		['aui-dialog', 'aui-dialog-iframe']
 	);
 
 	Liferay.Util = Util;
