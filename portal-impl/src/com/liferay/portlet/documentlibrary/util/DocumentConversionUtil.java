@@ -23,8 +23,11 @@ import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConne
 import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
 import com.artofsolving.jodconverter.openoffice.converter.StreamOpenOfficeDocumentConverter;
 
+import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -32,6 +35,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.SystemProperties;
 
@@ -47,6 +51,7 @@ import java.util.Map;
 
 /**
  * @author Bruno Farache
+ * @author Alexander Chow
  */
 public class DocumentConversionUtil {
 
@@ -71,30 +76,10 @@ public class DocumentConversionUtil {
 	}
 
 	private DocumentConversionUtil() {
-		_conversionsMap.put("svg", _DRAWING_CONVERSIONS);
-		_conversionsMap.put("swf", _DRAWING_CONVERSIONS);
-
-		_conversionsMap.put("odp", _PRESENTATION_CONVERSIONS);
-		_conversionsMap.put("ppt", _PRESENTATION_CONVERSIONS);
-		_conversionsMap.put("pptx", _PRESENTATION_CONVERSIONS);
-		_conversionsMap.put("sxi", _PRESENTATION_CONVERSIONS);
-
-		_conversionsMap.put("csv", _SPREADSHEET_CONVERSIONS);
-		_conversionsMap.put("ods", _SPREADSHEET_CONVERSIONS);
-		_conversionsMap.put("sxc", _SPREADSHEET_CONVERSIONS);
-		_conversionsMap.put("tsv", _SPREADSHEET_CONVERSIONS);
-		_conversionsMap.put("xls", _SPREADSHEET_CONVERSIONS);
-		_conversionsMap.put("xlsx", _SPREADSHEET_CONVERSIONS);
-
-		_conversionsMap.put("doc", _TEXT_CONVERSIONS);
-		_conversionsMap.put("docx", _TEXT_CONVERSIONS);
-		_conversionsMap.put("htm", _TEXT_CONVERSIONS);
-		_conversionsMap.put("html", _TEXT_CONVERSIONS);
-		_conversionsMap.put("odt", _TEXT_CONVERSIONS);
-		_conversionsMap.put("rtf", _TEXT_CONVERSIONS);
-		_conversionsMap.put("sxw", _TEXT_CONVERSIONS);
-		_conversionsMap.put("txt", _TEXT_CONVERSIONS);
-		_conversionsMap.put("wpd", _TEXT_CONVERSIONS);
+		_populateConversionsMap("drawing");
+		_populateConversionsMap("presentation");
+		_populateConversionsMap("spreadsheet");
+		_populateConversionsMap("text");
 	}
 
 	private InputStream _convert(
@@ -108,6 +93,9 @@ public class DocumentConversionUtil {
 
 			return null;
 		}
+
+		sourceExtension = _fixExtension(sourceExtension);
+		targetExtension = _fixExtension(targetExtension);
 
 		StringBundler sb = new StringBundler(5);
 
@@ -124,21 +112,27 @@ public class DocumentConversionUtil {
 		if (!PropsValues.OPENOFFICE_CACHE_ENABLED || !file.exists()) {
 			DocumentFormatRegistry registry =
 				new DefaultDocumentFormatRegistry();
-
-			DocumentConverter converter = _getConverter(registry);
-
-			if (sourceExtension.equals("htm")) {
-				sourceExtension = "html";
-			}
+			DocumentConverter converter = _getConverter();
 
 			DocumentFormat inputFormat = registry.getFormatByFileExtension(
 				sourceExtension);
+			DocumentFormat outputFormat = registry.getFormatByFileExtension(
+				targetExtension);
+
+			if (!inputFormat.isImportable()) {
+				throw new SystemException(
+					"Conversion is not supported from " +
+						inputFormat.getName());
+			}
+			else if (!inputFormat.isExportableTo(outputFormat)) {
+				throw new SystemException(
+					"Conversion is not supported from " +
+						inputFormat.getName() + " to " +
+						outputFormat.getName());
+			}
 
 			UnsyncByteArrayOutputStream ubaos =
 				new UnsyncByteArrayOutputStream();
-
-			DocumentFormat outputFormat = registry.getFormatByFileExtension(
-				targetExtension);
 
 			converter.convert(is, inputFormat, ubaos, outputFormat);
 
@@ -154,8 +148,16 @@ public class DocumentConversionUtil {
 		}
 	}
 
+	private String _fixExtension(String extension) {
+		if (extension.equals("htm")) {
+			extension = "html";
+		}
+
+		return extension;
+	}
+
 	private String[] _getConversions(String extension) {
-		String[] conversions = _conversionsMap.get(extension);
+		String[] conversions = _conversionsMap.get(_fixExtension(extension));
 
 		if (conversions == null) {
 			conversions = _DEFAULT_CONVERSIONS;
@@ -179,9 +181,7 @@ public class DocumentConversionUtil {
 		return conversions;
 	}
 
-	private DocumentConverter _getConverter(DocumentFormatRegistry registry)
-		throws SystemException {
-
+	private DocumentConverter _getConverter() throws SystemException {
 		if ((_connection == null) || (_converter == null)) {
 			String host = PrefsPropsUtil.getString(
 				PropsKeys.OPENOFFICE_SERVER_HOST);
@@ -213,25 +213,79 @@ public class DocumentConversionUtil {
 		}
 	}
 
-	private static final String[] _DEFAULT_CONVERSIONS = new String[0];
+	private void _populateConversionsMap(String documentFamily) {
+		Filter filter = new Filter(documentFamily);
 
-	private static final String[] _DRAWING_CONVERSIONS = new String[] {"odg"};
+		DocumentFormatRegistry registry = new DefaultDocumentFormatRegistry();
+
+		String[] sourceExtensions = PropsUtil.getArray(
+			PropsKeys.OPENOFFICE_CONVERSION_SOURCE_EXTENSIONS, filter);
+		String[] targetExtensions = PropsUtil.getArray(
+			PropsKeys.OPENOFFICE_CONVERSION_TARGET_EXTENSIONS, filter);
+
+		for (String sourceExtension : sourceExtensions) {
+			List<String> list = new ArrayList<String>(targetExtensions.length);
+
+			DocumentFormat sourceFormat =
+				registry.getFormatByFileExtension(sourceExtension);
+
+			if (sourceFormat == null) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"This is not a valid source extension " +
+							sourceExtension);
+				}
+
+				continue;
+			}
+
+			for (String targetExtension : targetExtensions) {
+				DocumentFormat targetFormat =
+					registry.getFormatByFileExtension(targetExtension);
+
+				if (targetFormat == null) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"This is not a valid target extension " +
+								targetFormat);
+					}
+
+					continue;
+				}
+
+				if (sourceFormat.isExportableTo(targetFormat)) {
+					list.add(targetExtension);
+				}
+			}
+
+			if (list.isEmpty()) {
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"There are no conversions supported from " +
+							sourceExtension);
+				}
+			}
+			else {
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Conversions supported from " + sourceExtension +
+							" to " + list);
+				}
+
+				_conversionsMap.put(
+					sourceExtension, list.toArray(new String[list.size()]));
+			}
+		}
+	}
+
+	private static final String[] _DEFAULT_CONVERSIONS = new String[0];
 
 	private static final String _LOCALHOST = "localhost";
 
 	private static final String _LOCALHOST_IP = "127.0.0.1";
 
-	private static final String[] _PRESENTATION_CONVERSIONS = new String[] {
-		"odp", "pdf", "ppt", "swf", "sxi"
-	};
-
-	private static final String[] _SPREADSHEET_CONVERSIONS = new String[] {
-		"csv", "ods", "pdf", "sxc", "tsv", "xls"
-	};
-
-	private static final String[] _TEXT_CONVERSIONS = new String[] {
-		"doc", "odt", "pdf", "rtf", "sxw", "txt"
-	};
+	private static Log _log = LogFactoryUtil.getLog(
+		DocumentConversionUtil.class);
 
 	private static DocumentConversionUtil _instance =
 		new DocumentConversionUtil();

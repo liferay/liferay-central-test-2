@@ -1249,6 +1249,10 @@ public interface PropsKeys {
 
 	public static final String OPENOFFICE_CACHE_ENABLED = "openoffice.cache.enabled";
 
+	public static final String OPENOFFICE_CONVERSION_SOURCE_EXTENSIONS = "openoffice.conversion.source.extensions";
+
+	public static final String OPENOFFICE_CONVERSION_TARGET_EXTENSIONS = "openoffice.conversion.target.extensions";
+
 	public static final String OPENOFFICE_SERVER_ENABLED = "openoffice.server.enabled";
 
 	public static final String OPENOFFICE_SERVER_HOST = "openoffice.server.host";
