@@ -13,7 +13,7 @@ fieldset {
 	position: relative;
 }
 
-.configuration-popup .aui-fieldset .controlPanel-popup .aui-fieldset {
+.aui-dialog-iframe-popup .aui-fieldset {
 	margin-bottom: 0;
 }
 

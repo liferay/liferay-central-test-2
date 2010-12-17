@@ -52,7 +52,7 @@ body.portal-popup {
 	padding: 10px;
 }
 
-body.configuration-popup, body.controlPanel-popup {
+body.aui-dialog-iframe-popup {
 	padding-bottom: 0;
 }
 

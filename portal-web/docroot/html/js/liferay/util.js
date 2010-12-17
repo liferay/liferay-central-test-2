@@ -527,6 +527,41 @@
 
 	Liferay.provide(
 		Util,
+		'afterIframeLoaded',
+		function(event) {
+			var iframePlugin = event.currentTarget;
+
+			var iframeBody = iframePlugin.node.get('contentWindow.document.body');
+
+			iframeBody.addClass('aui-dialog-iframe-popup');
+
+			var closeButton = iframeBody.one('.aui-button-input-cancel');
+
+			if (closeButton) {
+				var dialog = iframePlugin.get('host');
+
+				closeButton.on('click', dialog.close, dialog);
+			}
+
+			var rolesSearchContainer = iframeBody.one('#rolesSearchContainerSearchContainer');
+
+			if (rolesSearchContainer) {
+				rolesSearchContainer.delegate(
+					'click',
+					function(event){
+						event.preventDefault();
+
+						submitForm(document.hrefFm, event.currentTarget.attr('href'));
+					},
+					'a'
+				);
+			}
+		},
+		['aui-base']
+	);
+
+	Liferay.provide(
+		Util,
 		'check',
 		function(form, name, checked) {
 			var checkbox = A.one(form[name]);
@@ -919,55 +954,28 @@
 
 				var iframeId = namespacedId + 'controlPanelIframe';
 
-				var iframeTPL = '<iframe class="controlPanel-frame" frameborder="0" id="' + iframeId + '" name="' + iframeId + '" src="' + controlPanelURL + '"></iframe>';
-				var iframe = A.Node.create(iframeTPL);
-
-				var bodyContent = A.Node.create('<div></div>');
-
-				if (window.parent) {
-					bodyContent.append(iframe);
-				}
-
-				var fixSize = function(number) {
-					return ((parseInt(number, 10) || 0) - 5) + 'px';
-				};
-
-				var updateIframeSize = function(event) {
-					setTimeout(
-						function() {
-							var bodyHeight = bodyNode.getStyle('height');
-
-							iframe.setStyle('height', fixSize(bodyHeight));
-
-							bodyNode.loadingmask.refreshMask();
-						},
-						50
-					);
-				};
-
 				var dialog = new A.Dialog(
 					{
-						after: {
-							heightChange: updateIframeSize,
-							widthChange: updateIframeSize
-						},
 						align: {
 							node: null,
 							points: ['tc', 'tc']
 						},
-						bodyContent: bodyContent,
 						destroyOnClose: true,
 						draggable: true,
 						title: title,
 						width: 820
 					}
+				).plug(
+					A.Plugin.DialogIframe,
+					{
+						after: {
+							load: Liferay.Util.afterIframeLoaded
+						},
+						iframeCssClass: 'control-panel-frame',
+						iframeId: iframeId,
+						uri: controlPanelURL
+					}
 				).render();
-
-				dialog.move(dialog.get('x'), dialog.get('y') + 100);
-
-				var bodyNode = dialog.bodyNode;
-
-				bodyNode.plug(A.LoadingMask).loadingmask.show();
 
 				Liferay.on(
 					'closeDialog',
@@ -975,55 +983,9 @@
 						dialog.close();
 					}
 				);
-
-				iframe.on(
-					'load',
-					function(event) {
-						var iframeDoc = iframe.get('contentWindow.document');
-
-						iframeDoc.get('documentElement').setStyle('overflow', 'visible');
-
-						var iframeBody = iframeDoc.get('body');
-
-						iframeBody.addClass('controlPanel-popup');
-
-						iframe.set('height', iframeBody.get('scrollHeight'));
-
-						A.on(
-							'key',
-							function(event) {
-								dialog.close();
-							},
-							[iframeBody],
-							'down:27'
-						);
-
-						var closeButton = iframeBody.one('.aui-button-input-cancel');
-
-						if (closeButton) {
-							closeButton.on('click', dialog.close, dialog);
-						}
-
-						var rolesSearchContainer = iframeBody.one('#rolesSearchContainerSearchContainer');
-
-						if (rolesSearchContainer) {
-							rolesSearchContainer.delegate(
-								'click',
-								function(event){
-									event.preventDefault();
-
-									submitForm(document.hrefFm, event.currentTarget.attr('href'));
-								},
-								'a'
-							);
-						}
-
-						bodyNode.loadingmask.hide();
-					}
-				);
 			}
 		},
-		['aui-dialog', 'aui-loading-mask']
+		['aui-dialog', 'aui-dialog-iframe']
 	);
 
 	Liferay.provide(
