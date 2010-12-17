@@ -712,13 +712,13 @@
 		<priority value="INFO" />
 	</category>
 
-    <category name="com.liferay.portlet.documentlibrary.util.DocumentConversionUtil">
-        <priority value="WARN" />
-    </category>
-
 	<category name="com.liferay.portlet.documentlibrary.lar">
 		<priority value="WARN" />
 	</category>
+
+    <category name="com.liferay.portlet.documentlibrary.util.DocumentConversionUtil">
+        <priority value="WARN" />
+    </category>
 
 	<category name="com.liferay.portlet.documentlibrary.webdav">
 		<priority value="WARN" />

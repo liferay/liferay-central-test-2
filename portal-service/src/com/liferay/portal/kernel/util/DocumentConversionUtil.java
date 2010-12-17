@@ -22,12 +22,13 @@ import java.io.InputStream;
 public class DocumentConversionUtil {
 
 	public static InputStream convert(
-			String id, InputStream is, String sourceExtension,
+			String id, InputStream inputStream, String sourceExtension,
 			String targetExtension)
 		throws Exception {
 
 		Object returnObj = PortalClassInvoker.invoke(
-			false, _convertMethodKey, id, is, sourceExtension, targetExtension);
+			false, _convertMethodKey, id, inputStream, sourceExtension,
+			targetExtension);
 
 		if (returnObj != null) {
 			return (InputStream)returnObj;

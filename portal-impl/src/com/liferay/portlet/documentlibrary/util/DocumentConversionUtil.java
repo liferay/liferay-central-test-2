@@ -56,11 +56,12 @@ import java.util.Map;
 public class DocumentConversionUtil {
 
 	public static InputStream convert(
-			String id, InputStream is, String sourceExtension,
+			String id, InputStream inputStream, String sourceExtension,
 			String targetExtension)
 		throws IOException, SystemException {
 
-		return _instance._convert(id, is, sourceExtension, targetExtension);
+		return _instance._convert(
+			id, inputStream, sourceExtension, targetExtension);
 	}
 
 	public static void disconnect() {
@@ -83,7 +84,7 @@ public class DocumentConversionUtil {
 	}
 
 	private InputStream _convert(
-			String id, InputStream is, String sourceExtension,
+			String id, InputStream inputStream, String sourceExtension,
 			String targetExtension)
 		throws IOException, SystemException {
 
@@ -110,41 +111,50 @@ public class DocumentConversionUtil {
 		File file = new File(fileName);
 
 		if (!PropsValues.OPENOFFICE_CACHE_ENABLED || !file.exists()) {
-			DocumentFormatRegistry registry =
+			DocumentFormatRegistry documentFormatRegistry =
 				new DefaultDocumentFormatRegistry();
-			DocumentConverter converter = _getConverter();
 
-			DocumentFormat inputFormat = registry.getFormatByFileExtension(
-				sourceExtension);
-			DocumentFormat outputFormat = registry.getFormatByFileExtension(
-				targetExtension);
+			DocumentFormat inputDocumentFormat =
+				documentFormatRegistry.getFormatByFileExtension(
+					sourceExtension);
+			DocumentFormat outputDocumentFormat =
+				documentFormatRegistry.getFormatByFileExtension(
+					targetExtension);
 
-			if (!inputFormat.isImportable()) {
+			if (!inputDocumentFormat.isImportable()) {
 				throw new SystemException(
 					"Conversion is not supported from " +
-						inputFormat.getName());
+						inputDocumentFormat.getName());
 			}
-			else if (!inputFormat.isExportableTo(outputFormat)) {
+			else if (!inputDocumentFormat.isExportableTo(
+						outputDocumentFormat)) {
+
 				throw new SystemException(
 					"Conversion is not supported from " +
-						inputFormat.getName() + " to " +
-						outputFormat.getName());
+						inputDocumentFormat.getName() + " to " +
+							outputDocumentFormat.getName());
 			}
 
-			UnsyncByteArrayOutputStream ubaos =
+			UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 				new UnsyncByteArrayOutputStream();
 
-			converter.convert(is, inputFormat, ubaos, outputFormat);
+			DocumentConverter documentConverter = _getDocumentConverter();
 
-			FileUtil.write(file, ubaos.unsafeGetByteArray(), 0, ubaos.size());
+			documentConverter.convert(
+				inputStream, inputDocumentFormat, unsyncByteArrayOutputStream,
+				outputDocumentFormat);
+
+			FileUtil.write(
+				file, unsyncByteArrayOutputStream.unsafeGetByteArray(), 0,
+				unsyncByteArrayOutputStream.size());
 		}
 
 		return new FileInputStream(file);
 	}
 
 	private void _disconnect() {
-		if (_connection != null) {
-			_connection.disconnect();
+		if (_openOfficeConnection != null) {
+			_openOfficeConnection.disconnect();
 		}
 	}
 
@@ -157,51 +167,57 @@ public class DocumentConversionUtil {
 	}
 
 	private String[] _getConversions(String extension) {
-		String[] conversions = _conversionsMap.get(_fixExtension(extension));
+		extension = _fixExtension(extension);
+
+		String[] conversions = _conversionsMap.get(extension);
 
 		if (conversions == null) {
 			conversions = _DEFAULT_CONVERSIONS;
 		}
 		else {
 			if (ArrayUtil.contains(conversions, extension)) {
-				List<String> list = new ArrayList<String>();
+				List<String> conversionsList = new ArrayList<String>();
 
 				for (int i = 0; i < conversions.length; i++) {
 					String conversion = conversions[i];
 
 					if (!conversion.equals(extension)) {
-						list.add(conversion);
+						conversionsList.add(conversion);
 					}
 				}
 
-				conversions = list.toArray(new String[list.size()]);
+				conversions = conversionsList.toArray(
+					new String[conversionsList.size()]);
 			}
 		}
 
 		return conversions;
 	}
 
-	private DocumentConverter _getConverter() throws SystemException {
-		if ((_connection == null) || (_converter == null)) {
-			String host = PrefsPropsUtil.getString(
-				PropsKeys.OPENOFFICE_SERVER_HOST);
-			int port = PrefsPropsUtil.getInteger(
-				PropsKeys.OPENOFFICE_SERVER_PORT,
-				PropsValues.OPENOFFICE_SERVER_PORT);
-
-			if (_isRemoteOpenOfficeHost(host)) {
-				_connection = new SocketOpenOfficeConnection(host, port);
-				_converter = new StreamOpenOfficeDocumentConverter(_connection);
-			}
-			else {
-				_connection = new SocketOpenOfficeConnection(port);
-				_converter = new OpenOfficeDocumentConverter(_connection);
-			}
+	private DocumentConverter _getDocumentConverter() throws SystemException {
+		if ((_openOfficeConnection != null) && (_documentConverter != null)) {
+			return _documentConverter;
 		}
 
-		return _converter;
-	}
+		String host = PrefsPropsUtil.getString(
+			PropsKeys.OPENOFFICE_SERVER_HOST);
+		int port = PrefsPropsUtil.getInteger(
+			PropsKeys.OPENOFFICE_SERVER_PORT,
+			PropsValues.OPENOFFICE_SERVER_PORT);
 
+		if (_isRemoteOpenOfficeHost(host)) {
+			_openOfficeConnection = new SocketOpenOfficeConnection(host, port);
+			_documentConverter = new StreamOpenOfficeDocumentConverter(
+				_openOfficeConnection);
+		}
+		else {
+			_openOfficeConnection = new SocketOpenOfficeConnection(port);
+			_documentConverter = new OpenOfficeDocumentConverter(
+				_openOfficeConnection);
+		}
+
+		return _documentConverter;
+	}
 	private boolean _isRemoteOpenOfficeHost(String host) {
 		if (Validator.isNotNull(host) && !host.equals(_LOCALHOST_IP) &&
 			!host.startsWith(_LOCALHOST)) {
@@ -212,11 +228,11 @@ public class DocumentConversionUtil {
 			return false;
 		}
 	}
-
 	private void _populateConversionsMap(String documentFamily) {
 		Filter filter = new Filter(documentFamily);
 
-		DocumentFormatRegistry registry = new DefaultDocumentFormatRegistry();
+		DocumentFormatRegistry documentFormatRegistry =
+			new DefaultDocumentFormatRegistry();
 
 		String[] sourceExtensions = PropsUtil.getArray(
 			PropsKeys.OPENOFFICE_CONVERSION_SOURCE_EXTENSIONS, filter);
@@ -224,41 +240,41 @@ public class DocumentConversionUtil {
 			PropsKeys.OPENOFFICE_CONVERSION_TARGET_EXTENSIONS, filter);
 
 		for (String sourceExtension : sourceExtensions) {
-			List<String> list = new ArrayList<String>(targetExtensions.length);
+			List<String> conversions = new ArrayList<String>(
+				targetExtensions.length);
 
-			DocumentFormat sourceFormat =
-				registry.getFormatByFileExtension(sourceExtension);
+			DocumentFormat sourceDocumentFormat =
+				documentFormatRegistry.getFormatByFileExtension(
+					sourceExtension);
 
-			if (sourceFormat == null) {
+			if (sourceDocumentFormat == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"This is not a valid source extension " +
-							sourceExtension);
+					_log.warn("Invalid source extension " + sourceExtension);
 				}
 
 				continue;
 			}
 
 			for (String targetExtension : targetExtensions) {
-				DocumentFormat targetFormat =
-					registry.getFormatByFileExtension(targetExtension);
+				DocumentFormat targetDocumentFormat =
+					documentFormatRegistry.getFormatByFileExtension(
+						targetExtension);
 
-				if (targetFormat == null) {
+				if (targetDocumentFormat == null) {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
-							"This is not a valid target extension " +
-								targetFormat);
+							"Invalid target extension " + targetDocumentFormat);
 					}
 
 					continue;
 				}
 
-				if (sourceFormat.isExportableTo(targetFormat)) {
-					list.add(targetExtension);
+				if (sourceDocumentFormat.isExportableTo(targetDocumentFormat)) {
+					conversions.add(targetExtension);
 				}
 			}
 
-			if (list.isEmpty()) {
+			if (conversions.isEmpty()) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
 						"There are no conversions supported from " +
@@ -269,11 +285,12 @@ public class DocumentConversionUtil {
 				if (_log.isInfoEnabled()) {
 					_log.info(
 						"Conversions supported from " + sourceExtension +
-							" to " + list);
+							" to " + conversions);
 				}
 
 				_conversionsMap.put(
-					sourceExtension, list.toArray(new String[list.size()]));
+					sourceExtension,
+					conversions.toArray(new String[conversions.size()]));
 			}
 		}
 	}
@@ -292,7 +309,7 @@ public class DocumentConversionUtil {
 
 	private Map<String, String[]> _conversionsMap =
 		new HashMap<String, String[]>();
-	private OpenOfficeConnection _connection;
-	private DocumentConverter _converter;
+	private DocumentConverter _documentConverter;
+	private OpenOfficeConnection _openOfficeConnection;
 
 }
