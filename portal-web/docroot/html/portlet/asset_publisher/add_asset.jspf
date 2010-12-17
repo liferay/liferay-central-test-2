@@ -23,7 +23,7 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 		<liferay-ui:icon-menu
 			align="left"
 			icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>'
-			message="add-new"
+			message='<%= LanguageUtil.format(pageContext, "add-new-in-x", new Object[] {(GroupLocalServiceUtil.getGroup(groupId)).getDescriptiveName()}) %>'
 			showWhenSingleIcon="<%= true %>"
 		>
 
@@ -32,13 +32,22 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 				String className = entry.getKey();
 				PortletURL addPortletURL = entry.getValue();
 
+				addPortletURL.setParameter("groupId", String.valueOf(groupId));
+
+				String addPortletURLString = addPortletURL.toString();
+
+				addPortletURLString = HttpUtil.addParameter(addPortletURLString, "doAsGroupId", groupId);
+				addPortletURLString = HttpUtil.addParameter(addPortletURLString, "refererPlid", plid);
+
+				String taglibEditURL = "javascript:Liferay.Util.openControlPanelPopUp('','', '" + addPortletURLString + "', '" + renderResponse.getNamespace() + "','" + className + "');";
+
 				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
 			%>
 
 				<liferay-ui:icon
 					message='<%= "model.resource." + className %>'
 					src="<%= assetRendererFactory.getIconPath(renderRequest) %>"
-					url='<%= addPortletURL.toString() %>'
+					url='<%= taglibEditURL %>'
 				/>
 
 			<%
@@ -50,7 +59,7 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 </c:if>
 
 <%!
-public PortletURL getAddPortletURL(RenderRequest renderRequest, PortletResponse portletResponse, String className, long[] allAssetCategoryIds, String[] allAssetTagNames) throws Exception {
+public PortletURL getAddPortletURL(RenderRequest renderRequest, RenderResponse renderResponse, String className, long[] allAssetCategoryIds, String[] allAssetTagNames) throws Exception {
 	ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 	AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
@@ -58,14 +67,18 @@ public PortletURL getAddPortletURL(RenderRequest renderRequest, PortletResponse 
 	PortletURL addPortletURL = null;
 
 	if (assetRendererFactory != null) {
-		addPortletURL = assetRendererFactory.getURLAdd((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)portletResponse);
+		addPortletURL = assetRendererFactory.getURLAdd((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
 
 		if (addPortletURL != null) {
-			addPortletURL.setWindowState(WindowState.MAXIMIZED);
+			PortletURL addedAssetURL = renderResponse.createRenderURL();
+
+			addedAssetURL.setParameter("struts_action", "/asset_publisher/added_asset");
+			addedAssetURL.setWindowState(LiferayWindowState.POP_UP);
+
+			addPortletURL.setWindowState(LiferayWindowState.POP_UP);
 			addPortletURL.setPortletMode(PortletMode.VIEW);
 
-			addPortletURL.setParameter("redirect", themeDisplay.getURLCurrent());
-			addPortletURL.setParameter("backURL", themeDisplay.getURLCurrent());
+			addPortletURL.setParameter("redirect", HtmlUtil.escapeURL(addedAssetURL.toString()));
 
 			String referringPortletResource = ParamUtil.getString(renderRequest, "portletResource");
 
@@ -86,7 +99,7 @@ public PortletURL getAddPortletURL(RenderRequest renderRequest, PortletResponse 
 	return addPortletURL;
 }
 
-public Map<String, PortletURL> getAddPortletURLs(RenderRequest renderRequest, PortletResponse portletResponse, long[] classNameIds, long[] allAssetCategoryIds, String[] allAssetTagNames) throws Exception {
+public Map<String, PortletURL> getAddPortletURLs(RenderRequest renderRequest, RenderResponse renderResponse, long[] classNameIds, long[] allAssetCategoryIds, String[] allAssetTagNames) throws Exception {
 	ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 	Map<String, PortletURL> addPortletURLs = new TreeMap<String, PortletURL>(new ModelResourceComparator(themeDisplay.getLocale()));
@@ -94,7 +107,7 @@ public Map<String, PortletURL> getAddPortletURLs(RenderRequest renderRequest, Po
 	for (long classNameId : classNameIds) {
 		ClassName className = ClassNameServiceUtil.getClassName(classNameId);
 
-		PortletURL addPortletURL = getAddPortletURL(renderRequest, portletResponse, className.getValue(), allAssetCategoryIds, allAssetTagNames);
+		PortletURL addPortletURL = getAddPortletURL(renderRequest, renderResponse, className.getValue(), allAssetCategoryIds, allAssetTagNames);
 
 		if (addPortletURL != null) {
 			addPortletURLs.put(className.getValue(), addPortletURL);

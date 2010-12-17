@@ -52,7 +52,7 @@ body.portal-popup {
 	padding: 10px;
 }
 
-body.configuration-popup {
+body.configuration-popup, body.controlPanel-popup {
 	padding-bottom: 0;
 }
 
