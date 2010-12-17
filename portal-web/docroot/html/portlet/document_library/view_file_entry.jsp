@@ -297,20 +297,8 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 		<liferay-ui:panel collapsible="<%= true %>" cssClass="version-history" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "version-history") %>'>
 
 			<%
-			boolean comparableFileEntry = false;
+			boolean comparableFileEntry = DocumentConversionUtil.isComparableVersion(extension);
 			boolean showNonApprovedDocuments = false;
-
-			String[] comparableFileExtensions = PropsValues.DL_COMPARABLE_FILE_EXTENSIONS;
-
-			for (int i = 0; i < comparableFileExtensions.length; i++) {
-				if (StringPool.STAR.equals(comparableFileExtensions[i]) ||
-					StringUtil.endsWith(title, comparableFileExtensions[i])) {
-
-					comparableFileEntry = true;
-
-					break;
-				}
-			}
 
 			if ((user.getUserId() == fileEntry.getUserId()) || permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(scopeGroupId)) {
 				showNonApprovedDocuments = true;

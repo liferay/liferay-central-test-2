@@ -113,7 +113,7 @@ public class CompareVersionsAction extends PortletAction {
 		if (PrefsPropsUtil.getBoolean(
 				PropsKeys.OPENOFFICE_SERVER_ENABLED,
 				PropsValues.OPENOFFICE_SERVER_ENABLED) &&
-			isConvertBeforeCompare(extension)) {
+			DocumentConversionUtil.isConvertBeforeCompare(extension)) {
 
 			String sourceTempFileId = DocumentConversionUtil.getTempFileId(
 				fileEntryId, sourceVersion);
@@ -136,22 +136,6 @@ public class CompareVersionsAction extends PortletAction {
 			WebKeys.TARGET_NAME,
 			titleWithExtension + StringPool.SPACE + targetVersion);
 		renderRequest.setAttribute(WebKeys.DIFF_RESULTS, diffResults);
-	}
-
-	protected boolean isConvertBeforeCompare(String extension) {
-		if (extension.equals("txt")) {
-			return false;
-		}
-
-		String[] conversions = DocumentConversionUtil.getConversions(extension);
-
-		for (int i = 0; i < conversions.length; i++) {
-			if (conversions[i].equals("txt")) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 }

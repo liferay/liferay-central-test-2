@@ -76,6 +76,66 @@ public class DocumentConversionUtil {
 		return String.valueOf(id).concat(StringPool.PERIOD).concat(version);
 	}
 
+	public static boolean isComparableVersion(String extension) {
+		boolean enabled = false;
+
+		String dotExtension = StringPool.PERIOD + extension;
+
+		for (int i = 0; i < _COMPARABLE_FILE_EXTENSIONS.length; i++) {
+			if (StringPool.STAR.equals(_COMPARABLE_FILE_EXTENSIONS[i]) ||
+				dotExtension.equals(_COMPARABLE_FILE_EXTENSIONS[i])) {
+
+				enabled = true;
+
+				break;
+			}
+		}
+
+		if (!enabled) {
+			return false;
+		}
+
+		if (extension.equals("css") || extension.equals("js") ||
+			extension.equals("htm") || extension.equals("html") ||
+			extension.equals("txt") || extension.equals("xml")) {
+
+			return true;
+		}
+
+		try {
+			if (PrefsPropsUtil.getBoolean(
+					PropsKeys.OPENOFFICE_SERVER_ENABLED,
+					PropsValues.OPENOFFICE_SERVER_ENABLED) &&
+				isConvertBeforeCompare(extension)) {
+
+				return true;
+			}
+		}
+		catch (Exception e) {
+			if (_log.isErrorEnabled()) {
+				_log.error(e, e);
+			}
+		}
+
+		return false;
+	}
+
+	public static boolean isConvertBeforeCompare(String extension) {
+		if (extension.equals("txt")) {
+			return false;
+		}
+
+		String[] conversions = DocumentConversionUtil.getConversions(extension);
+
+		for (int i = 0; i < conversions.length; i++) {
+			if (conversions[i].equals("txt")) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	private DocumentConversionUtil() {
 		_populateConversionsMap("drawing");
 		_populateConversionsMap("presentation");
@@ -294,6 +354,9 @@ public class DocumentConversionUtil {
 			}
 		}
 	}
+
+	private static final String[] _COMPARABLE_FILE_EXTENSIONS =
+		PropsValues.DL_COMPARABLE_FILE_EXTENSIONS;
 
 	private static final String[] _DEFAULT_CONVERSIONS = new String[0];
 
