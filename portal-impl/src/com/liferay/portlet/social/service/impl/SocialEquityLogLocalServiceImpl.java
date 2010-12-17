@@ -245,80 +245,19 @@ public class SocialEquityLogLocalServiceImpl
 		}
 	}
 
+	/**
+	 * @deprecated {@link #deactivateEquityLogs(long, String, long, String, String)}
+	 */
 	public void deactivateEquityLogs(
 			long userId, long assetEntryId, String actionId, String extraData)
 		throws PortalException, SystemException {
 
-		if (!PropsValues.SOCIAL_EQUITY_EQUITY_LOG_ENABLED) {
-			return;
-		}
-
-		User user = userPersistence.findByPrimaryKey(userId);
-
 		AssetEntry assetEntry = assetEntryPersistence.findByPrimaryKey(
 			assetEntryId);
 
-		// Information equity
-
-		if (isSocialEquityEnabled(
-				assetEntry.getGroupId(), assetEntry.getClassName(),
-				SocialEquitySettingConstants.TYPE_INFORMATION)) {
-
-			List<SocialEquityLog> equityLogs =
-				socialEquityLogPersistence.findByAEI_AID_A_T_E(
-					assetEntryId, actionId, true,
-					SocialEquitySettingConstants.TYPE_INFORMATION, extraData);
-
-			SocialEquityValue socialEquityValue = new SocialEquityValue(0,0);
-
-			for (SocialEquityLog equityLog : equityLogs) {
-				double k = calculateK(
-					equityLog.getValue(),equityLog.getLifespan());
-				double b = calculateB(
-					equityLog.getActionDate(), equityLog.getValue(),
-					equityLog.getLifespan());
-
-				socialEquityValue.subtract(new SocialEquityValue(k,b));
-
-				socialEquityLogPersistence.remove(equityLog);
-			}
-
-			socialEquityLogLocalService.incrementSocialEquityAssetEntry_IQ(
-				assetEntryId, socialEquityValue);
-
-			socialEquityLogLocalService.incrementSocialEquityUser_CQ(
-				assetEntry.getGroupId(), assetEntry.getUserId(),
-				socialEquityValue);
-		}
-
-		// Participation equity
-
-		if (isSocialEquityEnabled(
-				assetEntry.getGroupId(), assetEntry.getClassName(),
-				SocialEquitySettingConstants.TYPE_PARTICIPATION)) {
-
-			List<SocialEquityLog> equityLogs =
-				socialEquityLogPersistence.findByU_AID_A_T_E(
-					userId, actionId, true,
-					SocialEquitySettingConstants.TYPE_PARTICIPATION, extraData);
-
-			SocialEquityValue socialEquityValue = new SocialEquityValue(0,0);
-
-			for (SocialEquityLog equityLog : equityLogs) {
-				double k = calculateK(
-					equityLog.getValue(),equityLog.getLifespan());
-				double b = calculateB(
-					equityLog.getActionDate(), equityLog.getValue(),
-					equityLog.getLifespan());
-
-				socialEquityValue.subtract(new SocialEquityValue(k,b));
-
-				socialEquityLogPersistence.remove(equityLog);
-			}
-
-			socialEquityLogLocalService.incrementSocialEquityUser_PQ(
-				user.getGroup().getGroupId(), userId, socialEquityValue);
-		}
+		deactivateEquityLogs(
+			userId, assetEntry.getClassName(), assetEntry.getClassPK(),
+			actionId, extraData);
 	}
 
 	public void deactivateEquityLogs(
@@ -330,18 +269,32 @@ public class SocialEquityLogLocalServiceImpl
 			return;
 		}
 
-		AssetEntry assetEntry = null;
+		AssetEntry assetEntry = assetEntryLocalService.getEntry(
+			className, classPK);
 
-		try {
-			assetEntry = assetEntryLocalService.getEntry(
-				className, classPK);
-		}
-		catch (NoSuchEntryException nsee) {
+		List<SocialEquityLog> equityLogs =
+			socialEquityLogPersistence.findByU_AEI_AID_A_E(
+				userId, assetEntry.getEntryId(), actionId, true, extraData);
+
+		deactivateEquityLogs(equityLogs);
+	}
+
+	public void deactivateEquityLogs(
+			String className, long classPK, String actionId, String extraData)
+		throws PortalException, SystemException {
+
+		if (!PropsValues.SOCIAL_EQUITY_EQUITY_LOG_ENABLED) {
 			return;
 		}
 
-		deactivateEquityLogs(
-			userId, assetEntry.getEntryId(), actionId, extraData);
+		AssetEntry assetEntry = assetEntryLocalService.getEntry(
+			className, classPK);
+
+		List<SocialEquityLog> equityLogs =
+			socialEquityLogPersistence.findByAEI_AID_A_E(
+				assetEntry.getEntryId(), actionId, true, extraData);
+
+		deactivateEquityLogs(equityLogs);
 	}
 
 	@BufferedIncrement(incrementClass = SocialEquityIncrement.class)
@@ -585,6 +538,51 @@ public class SocialEquityLogLocalServiceImpl
 
 	protected int getEquityDate() {
 		return getEquityDate(new Date());
+	}
+
+	protected void deactivateEquityLogs(List<SocialEquityLog> equityLogs)
+		throws PortalException, SystemException {
+
+		SocialEquityValue socialEquityValue = new SocialEquityValue();
+
+		for (SocialEquityLog equityLog : equityLogs) {
+			AssetEntry assetEntry = assetEntryLocalService.getEntry(
+				equityLog.getAssetEntryId());
+
+			if (!isSocialEquityEnabled(
+					assetEntry.getGroupId(), assetEntry.getClassName(),
+					equityLog.getType())) {
+
+				continue;
+			}
+
+			double k = calculateK(
+				equityLog.getValue(),equityLog.getLifespan());
+			double b = calculateB(
+				equityLog.getActionDate(), equityLog.getValue(),
+				equityLog.getLifespan());
+
+			socialEquityValue.setValue(0,0);
+			socialEquityValue.subtract(k,b);
+
+			if (equityLog.getType() ==
+					SocialEquitySettingConstants.TYPE_INFORMATION) {
+
+				socialEquityLogLocalService.incrementSocialEquityAssetEntry_IQ(
+					assetEntry.getEntryId(), socialEquityValue);
+
+				socialEquityLogLocalService.incrementSocialEquityUser_CQ(
+					assetEntry.getGroupId(), assetEntry.getUserId(),
+					socialEquityValue);
+			}
+			else {
+				socialEquityLogLocalService.incrementSocialEquityUser_PQ(
+					equityLog.getGroupId(), equityLog.getUserId(),
+					socialEquityValue);
+			}
+
+			socialEquityLogPersistence.remove(equityLog);
+		}
 	}
 
 	protected int getEquityDate(Date date) {

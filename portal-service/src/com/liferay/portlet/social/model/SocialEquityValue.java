@@ -24,6 +24,16 @@ import java.util.GregorianCalendar;
  */
 public class SocialEquityValue {
 
+	public SocialEquityValue() {
+		_k = 0;
+		_b = 0;
+	}
+
+	public void add(double k, double b) {
+		_k = _k + k;
+		_b = _b + b;
+	}
+
 	public SocialEquityValue(double k, double b) {
 		_k = k;
 		_b = b;
@@ -48,6 +58,16 @@ public class SocialEquityValue {
 
 	public double getValue(int equityDate) {
 		return _k * equityDate + _b;
+	}
+
+	public void setValue(double k, double b) {
+		_k = k;
+		_b = b;
+	}
+
+	public void subtract(double k, double b) {
+		_k = _k - k;
+		_b = _b - b;
 	}
 
 	public void subtract(SocialEquityValue socialEquityValue) {

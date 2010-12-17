@@ -191,11 +191,10 @@
 			<finder-column name="type" />
 			<finder-column name="active" />
 		</finder>
-		<finder name="AEI_AID_A_T_E" return-type="Collection">
+		<finder name="AEI_AID_A_E" return-type="Collection">
 			<finder-column name="assetEntryId" />
 			<finder-column name="actionId" />
 			<finder-column name="active" />
-			<finder-column name="type" />
 			<finder-column name="extraData" />
 		</finder>
 		<finder name="U_AEI_AID_A_E" return-type="Collection">
@@ -203,13 +202,6 @@
 			<finder-column name="assetEntryId" />
 			<finder-column name="actionId" />
 			<finder-column name="active" />
-			<finder-column name="extraData" />
-		</finder>
-		<finder name="U_AID_A_T_E" return-type="Collection">
-			<finder-column name="userId" />
-			<finder-column name="actionId" />
-			<finder-column name="active" />
-			<finder-column name="type" />
 			<finder-column name="extraData" />
 		</finder>
 		<finder name="U_AID_AD_A_T_E" return-type="Collection">
