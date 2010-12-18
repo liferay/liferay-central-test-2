@@ -177,6 +177,38 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 				</c:otherwise>
 			</c:choose>
 		</c:if>
+
+		<%
+		Set<String> servletContextNames = CustomJspRegistryUtil.getServletContextNames();
+		%>
+
+		<c:if test="<%= !servletContextNames.isEmpty() %>">
+
+			<%
+			String customJspServletContextName = StringPool.BLANK;
+
+			if (group != null) {
+				UnicodeProperties typeSettingsProperties = group.getTypeSettingsProperties();
+
+				customJspServletContextName = GetterUtil.getString(typeSettingsProperties.get("customJspServletContextName"));
+			}
+			%>
+
+			<aui:select label="apply-add-on" name="customJspServletContextName">
+				<aui:option label="none" />
+
+				<%
+				for (String servletContextName : servletContextNames) {
+				%>
+
+					<aui:option label="<%= servletContextName %>" selected="<%= customJspServletContextName.equals(servletContextName) %>" value="<%= servletContextName %>" />
+
+				<%
+				}
+				%>
+
+			</aui:select>
+		</c:if>
 	</aui:fieldset>
 
 	<aui:button-row>

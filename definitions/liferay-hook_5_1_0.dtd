@@ -6,8 +6,8 @@ This is the DTD for the Hook parameters for Liferay Portal.
 	"http://www.liferay.com/dtd/liferay-hook_5_1_0.dtd">
 -->
 
-<!ELEMENT hook (event*, model-listener*, portal-properties?, custom-jsp-dir?,
-service*)>
+<!ELEMENT hook (portal-properties?, language-properties*, custom-jsp-dir?,
+custom-jsp-global?, service*)>
 
 <!ELEMENT event (event-class, event-type)>
 

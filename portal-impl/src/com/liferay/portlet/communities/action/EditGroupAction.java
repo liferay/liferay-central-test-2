@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.liveusers.LiveUsers;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
@@ -207,6 +208,20 @@ public class EditGroupAction extends PortletAction {
 				}
 			}
 		}
+
+		// Custom JSPs
+
+		String customJspServletContextName = ParamUtil.getString(
+			actionRequest, "customJspServletContextName");
+
+		UnicodeProperties typeSettingsProperties =
+			group.getTypeSettingsProperties();
+
+		typeSettingsProperties.setProperty(
+			"customJspServletContextName", customJspServletContextName);
+
+		group = GroupServiceUtil.updateGroup(
+			groupId, typeSettingsProperties.toString());
 
 		// Layout set prototypes
 

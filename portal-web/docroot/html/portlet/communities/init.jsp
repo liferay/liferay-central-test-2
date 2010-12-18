@@ -58,6 +58,7 @@
 <%@ page import="com.liferay.portal.plugin.PluginUtil" %>
 <%@ page import="com.liferay.portal.service.permission.GroupPermissionUtil" %>
 <%@ page import="com.liferay.portal.service.permission.TeamPermissionUtil" %>
+<%@ page import="com.liferay.portal.util.CustomJspRegistryUtil" %>
 <%@ page import="com.liferay.portal.util.LayoutLister" %>
 <%@ page import="com.liferay.portal.util.LayoutView" %>
 <%@ page import="com.liferay.portal.util.RobotsUtil" %>

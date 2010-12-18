@@ -90,6 +90,7 @@ import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.autologin.AutoLoginFilter;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.upgrade.UpgradeProcessUtil;
+import com.liferay.portal.util.CustomJspRegistryUtil;
 import com.liferay.portal.util.JavaScriptBundleUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
@@ -130,6 +131,7 @@ import org.springframework.aop.target.SingletonTargetSource;
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
  * @author Wesley Gong
+ * @author Ryan Park
  */
 public class HookHotDeployListener
 	extends BaseHotDeployListener implements PropsKeys {
@@ -244,30 +246,49 @@ public class HookHotDeployListener
 		}
 	}
 
-	protected void destroyCustomJspBag(CustomJspBag customJspBag) {
+	protected void destroyCustomJspBag(
+		String servletContextName, CustomJspBag customJspBag) {
+
 		String customJspDir = customJspBag.getCustomJspDir();
+		boolean customJspGlobal = customJspBag.isCustomJspGlobal();
 		List<String> customJsps = customJspBag.getCustomJsps();
-		//String timestamp = customJspBag.getTimestamp();
 
 		String portalWebDir = PortalUtil.getPortalWebDir();
 
 		for (String customJsp : customJsps) {
 			int pos = customJsp.indexOf(customJspDir);
 
-			String portalJsp = customJsp.substring(
-				pos + customJspDir.length(), customJsp.length());
+			String portalJsp = customJsp.substring(pos + customJspDir.length());
 
-			File portalJspFile = new File(portalWebDir + portalJsp);
-			File portalJspBackupFile = getPortalJspBackupFile(portalJspFile);
+			if (customJspGlobal) {
+				File portalJspFile = new File(portalWebDir + portalJsp);
+				File portalJspBackupFile = getPortalJspBackupFile(
+					portalJspFile);
 
-			if (portalJspBackupFile.exists()) {
-				FileUtil.copyFile(portalJspBackupFile, portalJspFile);
+				if (portalJspBackupFile.exists()) {
+					FileUtil.copyFile(portalJspBackupFile, portalJspFile);
 
-				portalJspBackupFile.delete();
+					portalJspBackupFile.delete();
+				}
+				else if (portalJspFile.exists()) {
+					portalJspFile.delete();
+				}
 			}
-			else if (portalJspFile.exists()) {
-				portalJspFile.delete();
+			else {
+				portalJsp = CustomJspRegistryUtil.getCustomJspFileName(
+					servletContextName, portalJsp);
+
+				File portalJspFile = new File(portalWebDir + portalJsp);
+
+				if (portalJspFile.exists()) {
+					portalJspFile.delete();
+				}
 			}
+		}
+
+		if (customJspGlobal) {
+			CustomJspRegistryUtil.unregisterServletContextName(
+				servletContextName);
 		}
 	}
 
@@ -535,6 +556,9 @@ public class HookHotDeployListener
 				_log.debug("Custom JSP directory: " + customJspDir);
 			}
 
+			boolean customJspGlobal = GetterUtil.getBoolean(
+				rootElement.elementText("custom-jsp-global"), true);
+
 			List<String> customJsps = new ArrayList<String>();
 
 			String webDir = servletContext.getRealPath(StringPool.SLASH);
@@ -543,7 +567,7 @@ public class HookHotDeployListener
 
 			if (customJsps.size() > 0) {
 				CustomJspBag customJspBag = new CustomJspBag(
-					customJspDir, customJsps);
+					customJspDir, customJspGlobal, customJsps);
 
 				if (_log.isDebugEnabled()) {
 					StringBundler sb = new StringBundler(customJsps.size() * 2);
@@ -567,7 +591,7 @@ public class HookHotDeployListener
 
 				_customJspBagsMap.put(servletContextName, customJspBag);
 
-				initCustomJspBag(customJspBag);
+				initCustomJspBag(servletContextName, customJspBag);
 			}
 		}
 
@@ -709,7 +733,7 @@ public class HookHotDeployListener
 			servletContextName);
 
 		if (customJspBag != null) {
-			destroyCustomJspBag(customJspBag);
+			destroyCustomJspBag(servletContextName, customJspBag);
 		}
 
 		EventsContainer eventsContainer = _eventsContainerMap.remove(
@@ -968,12 +992,13 @@ public class HookHotDeployListener
 		}
 	}
 
-	protected void initCustomJspBag(CustomJspBag customJspBag)
+	protected void initCustomJspBag(
+			String servletContextName, CustomJspBag customJspBag)
 		throws Exception {
 
 		String customJspDir = customJspBag.getCustomJspDir();
+		boolean customJspGlobal = customJspBag.isCustomJspGlobal();
 		List<String> customJsps = customJspBag.getCustomJsps();
-		//String timestamp = customJspBag.getTimestamp();
 
 		String portalWebDir = PortalUtil.getPortalWebDir();
 
@@ -983,14 +1008,26 @@ public class HookHotDeployListener
 			String portalJsp = customJsp.substring(
 				pos + customJspDir.length(), customJsp.length());
 
-			File portalJspFile = new File(portalWebDir + portalJsp);
-			File portalJspBackupFile = getPortalJspBackupFile(portalJspFile);
+			if (customJspGlobal) {
+				File portalJspFile = new File(portalWebDir + portalJsp);
+				File portalJspBackupFile = getPortalJspBackupFile(
+					portalJspFile);
 
-			if (portalJspFile.exists() && !portalJspBackupFile.exists()) {
-				FileUtil.copyFile(portalJspFile, portalJspBackupFile);
+				if (portalJspFile.exists() && !portalJspBackupFile.exists()) {
+					FileUtil.copyFile(portalJspFile, portalJspBackupFile);
+				}
+			}
+			else {
+				portalJsp = CustomJspRegistryUtil.getCustomJspFileName(
+					servletContextName, portalJsp);
 			}
 
 			FileUtil.copyFile(customJsp, portalWebDir + portalJsp);
+		}
+
+		if (customJspGlobal) {
+			CustomJspRegistryUtil.registerServletContextName(
+				servletContextName);
 		}
 	}
 
@@ -1834,8 +1871,12 @@ public class HookHotDeployListener
 
 	private class CustomJspBag {
 
-		public CustomJspBag(String customJspDir, List<String> customJsps) {
+		public CustomJspBag(
+			String customJspDir, boolean customJspGlobal,
+			List<String> customJsps) {
+
 			_customJspDir = customJspDir;
+			_customJspGlobal = customJspGlobal;
 			_customJsps = customJsps;
 		}
 
@@ -1847,7 +1888,12 @@ public class HookHotDeployListener
 			return _customJsps;
 		}
 
+		public boolean isCustomJspGlobal() {
+			return _customJspGlobal;
+		}
+
 		private String _customJspDir;
+		private boolean _customJspGlobal;
 		private List<String> _customJsps;
 
 	}

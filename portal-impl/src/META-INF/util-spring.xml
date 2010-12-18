@@ -407,6 +407,11 @@
 			<bean class="com.liferay.portal.service.persistence.BatchSessionImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.util.CustomJspRegistryUtil" class="com.liferay.portal.util.CustomJspRegistryUtil">
+		<property name="customJspRegistry">
+			<bean class="com.liferay.portal.util.CustomJspRegistryImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.util.Portal" class="com.liferay.portal.util.PortalImpl" />
 	<bean id="com.liferay.portal.util.PortalUtil" class="com.liferay.portal.util.PortalUtil">
 		<property name="portal" ref="com.liferay.portal.util.Portal" />

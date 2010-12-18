@@ -27,12 +27,15 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.CustomJspRegistryUtil;
 import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
@@ -62,7 +65,11 @@ public class IncludeTag
 
 	public int doEndTag() throws JspException {
 		try {
-			String page = getPage();
+			String page = getCustomPage();
+
+			if (Validator.isNull(page)) {
+				page = getPage();
+			}
 
 			if (Validator.isNull(page)) {
 				page = getEndPage();
@@ -212,6 +219,44 @@ public class IncludeTag
 
 			_trackedRequest = null;
 		}
+	}
+
+	protected String getCustomPage() {
+		HttpServletRequest request = getServletRequest();
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Group group = themeDisplay.getScopeGroup();
+
+		UnicodeProperties typeSettingsProperties =
+			group.getTypeSettingsProperties();
+
+		String customJspServletContextName =
+			typeSettingsProperties.getProperty("customJspServletContextName");
+
+		if (Validator.isNull(customJspServletContextName)) {
+			return null;
+		}
+
+		String page = getPage();
+
+		if (Validator.isNull(page)) {
+			page = getEndPage();
+		}
+
+		if (Validator.isNull(page)) {
+			return null;
+		}
+
+		String customPage = CustomJspRegistryUtil.getCustomJspFileName(
+			customJspServletContextName, page);
+
+		if (FileAvailabilityUtil.isAvailable(getServletContext(), customPage)) {
+			return customPage;
+		}
+
+		return null;
 	}
 
 	protected Map<String, Object> getDynamicAttributes() {
