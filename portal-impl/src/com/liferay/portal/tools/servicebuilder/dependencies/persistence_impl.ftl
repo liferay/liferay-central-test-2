@@ -873,8 +873,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					String sql = query.toString();
 
-					sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "${entity.name}");
-
 					Session session = null;
 
 					try {
@@ -1170,8 +1168,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 				String sql = query.toString();
 
-				sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "${entity.name}");
-
 				Query q = session.createQuery(sql);
 
 				q.setFirstResult(0);
@@ -1353,8 +1349,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						String sql = query.toString();
 
-						sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "${entity.name}");
-
 						Session session = null;
 
 						try {
@@ -1526,8 +1520,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					</#if>
 
 					String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID<#if finder.hasColumn("groupId")>, groupId</#if>);
-
-					sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "${entity.table}");
 
 					Session session = null;
 
@@ -1744,8 +1736,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 							</#if>
 						</#if>);
 
-						sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "${entity.table}");
-
 						Session session = null;
 
 						try {
@@ -1909,8 +1899,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					String sql = query.toString();
 
-					sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "${entity.name}");
-
 					Session session = null;
 
 					try {
@@ -2045,8 +2033,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					sql = _SQL_SELECT_${entity.alias?upper_case};
 				</#if>
 			}
-
-			sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "${entity.name}");
 
 			Session session = null;
 
@@ -2209,8 +2195,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 				String sql = query.toString();
 
-				sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "${entity.name}");
-
 				Session session = null;
 
 				try {
@@ -2295,8 +2279,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					String sql = query.toString();
 
-					sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "${entity.name}");
-
 					Session session = null;
 
 					try {
@@ -2370,8 +2352,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				<#include "persistence_impl_finder_cols.ftl">
 
 				String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID<#if finder.hasColumn("groupId")>, groupId</#if>);
-
-				sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "${entity.table}");
 
 				Session session = null;
 
@@ -2468,8 +2448,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 							groupId
 						</#if>
 					</#if>);
-
-					sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "${entity.table}");
 
 					Session session = null;
 
@@ -2634,8 +2612,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 								sql = _SQL_GET${tempEntity.names?upper_case};
 							</#if>
 						}
-
-						sql = StringUtil.replace(sql, "[$ENTITY_TABLE$]", "${entity.table}");
 
 						SQLQuery q = session.createSQLQuery(sql);
 
