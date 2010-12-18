@@ -149,6 +149,11 @@ public class PortletURLUtil {
 
 		sb.append("&p_p_lifecycle=0");
 
+		sb.append("&p_t_lifecycle=");
+		sb.append(themeDisplay.getLifecycle());
+
+		sb.append(portletId);
+
 		WindowState windowState = WindowState.NORMAL;
 
 		if (themeDisplay.isStatePopUp()) {

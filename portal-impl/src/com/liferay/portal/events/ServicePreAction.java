@@ -1428,6 +1428,9 @@ public class ServicePreAction extends Action {
 			request, "js_fast_load", PropsValues.JAVASCRIPT_FAST_LOAD);
 
 		String lifecycle = ParamUtil.getString(request, "p_p_lifecycle", "0");
+
+		lifecycle = ParamUtil.getString(request, "p_t_lifecycle", lifecycle);
+
 		boolean isolated = ParamUtil.getBoolean(request, "p_p_isolated");
 
 		String facebookCanvasPageURL = (String)request.getAttribute(

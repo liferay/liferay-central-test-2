@@ -458,6 +458,7 @@ public class PortalImpl implements Portal {
 		_reservedParams.add("p_p_auth");
 		_reservedParams.add("p_p_id");
 		_reservedParams.add("p_p_lifecycle");
+		_reservedParams.add("p_t_lifecycle");
 		_reservedParams.add("p_p_url_type");
 		_reservedParams.add("p_p_state");
 		_reservedParams.add("p_p_state_rcv");
