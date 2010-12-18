@@ -47,7 +47,6 @@ for (int assetEntryIndex = 0; assetEntryIndex < results.size(); assetEntryIndex+
 			break;
 		}
 		catch (NoSuchEntryException nsee) {
-			continue;
 		}
 	}
 

@@ -24,9 +24,9 @@ Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId
 	window.parent.Liferay.fire(
 		'assetAdded',
 		{
+			frame: window,
 			portletAjaxable: '<%= selPortlet.isAjaxable() %>',
-			portletId: '<%= portletDisplay.getId() %>',
-			frame: window
+			portletId: '<%= portletDisplay.getId() %>'
 		}
 	);
 </aui:script>

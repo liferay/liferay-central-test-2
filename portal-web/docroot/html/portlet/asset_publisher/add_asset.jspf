@@ -70,15 +70,17 @@ public PortletURL getAddPortletURL(RenderRequest renderRequest, RenderResponse r
 		addPortletURL = assetRendererFactory.getURLAdd((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
 
 		if (addPortletURL != null) {
-			PortletURL addedAssetURL = renderResponse.createRenderURL();
-
-			addedAssetURL.setParameter("struts_action", "/asset_publisher/added_asset");
-			addedAssetURL.setWindowState(LiferayWindowState.POP_UP);
-
 			addPortletURL.setWindowState(LiferayWindowState.POP_UP);
+
 			addPortletURL.setPortletMode(PortletMode.VIEW);
 
-			addPortletURL.setParameter("redirect", HtmlUtil.escapeURL(addedAssetURL.toString()));
+			PortletURL redirectURL = renderResponse.createRenderURL();
+
+			redirectURL.setWindowState(LiferayWindowState.POP_UP);
+
+			redirectURL.setParameter("struts_action", "/asset_publisher/add_asset_redirect");
+
+			addPortletURL.setParameter("redirect", HtmlUtil.escapeURL(redirectURL.toString()));
 
 			String referringPortletResource = ParamUtil.getString(renderRequest, "portletResource");
 
