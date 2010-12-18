@@ -458,7 +458,6 @@ public class PortalImpl implements Portal {
 		_reservedParams.add("p_p_auth");
 		_reservedParams.add("p_p_id");
 		_reservedParams.add("p_p_lifecycle");
-		_reservedParams.add("p_t_lifecycle");
 		_reservedParams.add("p_p_url_type");
 		_reservedParams.add("p_p_state");
 		_reservedParams.add("p_p_state_rcv");
@@ -471,6 +470,7 @@ public class PortalImpl implements Portal {
 		_reservedParams.add("p_p_col_count");
 		_reservedParams.add("p_p_static");
 		_reservedParams.add("p_p_isolated");
+		_reservedParams.add("p_t_lifecycle");
 		_reservedParams.add("p_o_p_id");
 		_reservedParams.add("p_f_id");
 		_reservedParams.add("saveLastPath");
