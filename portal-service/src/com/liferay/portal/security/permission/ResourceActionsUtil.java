@@ -237,7 +237,7 @@ public class ResourceActionsUtil {
 			long companyId, Group group, String modelResource)
 		throws SystemException {
 
-		return getRoles(companyId, group, modelResource);
+		return getResourceActions().getRoles(companyId, group, modelResource);
 	}
 
 	public static List<Role> getRoles(
