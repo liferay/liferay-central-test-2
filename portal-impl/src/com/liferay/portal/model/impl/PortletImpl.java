@@ -2389,7 +2389,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * Set to <code>true</code> if the portlet is ready to be used.
 	 *
-	 * @param system boolean value for whether the portlet is ready to be used
+	 * @param ready whether the portlet is ready to be used
 	 */
 	public void setReady(boolean ready) {
 		_readyMap.put(getRootPortletId(), ready);

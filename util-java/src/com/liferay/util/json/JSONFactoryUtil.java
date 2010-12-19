@@ -16,7 +16,7 @@ package com.liferay.util.json;
 
 /**
  * @author	  Brian Wing Shun Chan
- * @deprecate {@link com.liferay.portal.kernel.json.JSONFactoryUtil}
+ * @deprecated {@link com.liferay.portal.kernel.json.JSONFactoryUtil}
  */
 public class JSONFactoryUtil
 	extends com.liferay.portal.kernel.json.JSONFactoryUtil {

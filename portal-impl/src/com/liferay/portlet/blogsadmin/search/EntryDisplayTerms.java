@@ -22,7 +22,6 @@ import javax.portlet.PortletRequest;
 /**
  * @author Juan Fernández
  */
-
 public class EntryDisplayTerms extends DisplayTerms {
 
 	public static final String AUTHOR = "author";
