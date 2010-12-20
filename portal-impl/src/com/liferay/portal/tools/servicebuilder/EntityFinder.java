@@ -27,12 +27,16 @@ import java.util.List;
 public class EntityFinder {
 
 	public EntityFinder(
-		String name, String returnType, boolean unique, String where,
-		boolean dbIndex, List<EntityColumn> columns) {
+		String name, String returnType, boolean unique, String scopeComparator,
+		boolean scopeMax, String join, String where, boolean dbIndex,
+		List<EntityColumn> columns) {
 
 		_name = name;
 		_returnType = returnType;
 		_unique = unique;
+		_scopeComparator = scopeComparator;
+		_scopeMax = scopeMax;
+		_join = join;
 		_where = where;
 		_dbIndex = dbIndex;
 		_columns = columns;
@@ -74,6 +78,10 @@ public class EntityFinder {
 		return sb.toString();
 	}
 
+	public String getJoin() {
+		return _join;
+	}
+
 	public String getName() {
 		return _name;
 	}
@@ -84,6 +92,10 @@ public class EntityFinder {
 
 	public String getReturnType() {
 		return _returnType;
+	}
+
+	public String getScopeComparator() {
+		return _scopeComparator;
 	}
 
 	public String getWhere() {
@@ -117,14 +129,21 @@ public class EntityFinder {
 		return _dbIndex;
 	}
 
+	public boolean isScopeMax() {
+		return _scopeMax;
+	}
+
 	public boolean isUnique() {
 		return _unique;
 	}
 
 	private List<EntityColumn> _columns;
 	private boolean _dbIndex;
+	private String _join;
 	private String _name;
 	private String _returnType;
+	private String _scopeComparator;
+	private boolean _scopeMax;
 	private boolean _unique;
 	private String _where;
 

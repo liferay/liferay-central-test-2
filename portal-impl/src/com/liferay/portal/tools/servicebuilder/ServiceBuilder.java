@@ -642,6 +642,8 @@ public class ServiceBuilder {
 						column.attributeValue("primary"));
 					boolean filterPrimary = GetterUtil.getBoolean(
 						column.attributeValue("filter-primary"));
+					boolean scopePrimary = GetterUtil.getBoolean(
+						column.attributeValue("scope-primary"));
 					String collectionEntity = column.attributeValue("entity");
 					String mappingKey = column.attributeValue("mapping-key");
 
@@ -669,8 +671,9 @@ public class ServiceBuilder {
 
 					EntityColumn col = new EntityColumn(
 						columnName, columnDBName, columnType, primary,
-						filterPrimary, collectionEntity, mappingKey,
-						mappingTable, idType, idParam, convertNull, localized);
+						filterPrimary, scopePrimary, collectionEntity,
+						mappingKey, mappingTable, idType, idParam, convertNull,
+						localized);
 
 					if (primary) {
 						pkList.add(col);
@@ -808,23 +811,22 @@ public class ServiceBuilder {
 					Element finderEl = itr2.next();
 
 					String finderName = finderEl.attributeValue("name");
-					String finderReturn =
-						finderEl.attributeValue("return-type");
+					String finderReturn = finderEl.attributeValue(
+						"return-type");
 					boolean finderUnique = GetterUtil.getBoolean(
 						finderEl.attributeValue("unique"), false);
+					String finderScopeComparator = finderEl.attributeValue(
+						"scope-comparator");
+					boolean finderScopeMax = GetterUtil.getBoolean(
+						finderEl.attributeValue("scope-max"), true);
 
-					String finderWhere = finderEl.attributeValue("where");
+					String finderJoin = _getFinderJoin(
+						table, alias, finderScopeComparator, finderScopeMax,
+						columnList);
 
-					if (Validator.isNotNull(finderWhere)) {
-						for (EntityColumn column: columnList) {
-							String name = column.getName();
-
-							if (finderWhere.indexOf(name) != -1) {
-								finderWhere = finderWhere.replaceAll(
-									name, alias + "." + name);
-							}
-						}
-					}
+					String finderWhere = _getFinderWhere(
+						alias, finderScopeComparator, finderScopeMax,
+						finderEl.attributeValue("where"), columnList);
 
 					boolean finderDBIndex = GetterUtil.getBoolean(
 						finderEl.attributeValue("db-index"), true);
@@ -872,8 +874,9 @@ public class ServiceBuilder {
 
 					finderList.add(
 						new EntityFinder(
-							finderName, finderReturn, finderUnique, finderWhere,
-							finderDBIndex, finderColsList));
+							finderName, finderReturn, finderUnique,
+							finderScopeComparator, finderScopeMax, finderJoin,
+							finderWhere, finderDBIndex, finderColsList));
 				}
 
 				List<Entity> referenceList = new ArrayList<Entity>();
@@ -3467,6 +3470,8 @@ public class ServiceBuilder {
 			_getCreateMappingTableIndex(entityMapping, indexSQLs, indexProps);
 		}
 
+		_getFinderScopeIndexes(indexSQLs, indexProps);
+
 		StringBundler sb = new StringBundler();
 
 		Iterator<String> itr = indexSQLs.values().iterator();
@@ -4237,6 +4242,213 @@ public class ServiceBuilder {
 		}
 
 		return dimensions;
+	}
+
+	private EntityColumn _getFinderComparatorColumn(
+		String scopeComparator, List<EntityColumn> columns) {
+
+		for (EntityColumn column : columns) {
+			if (Validator.equals(
+					StringUtil.lowerCase(column.getName()),
+					StringUtil.lowerCase(scopeComparator))) {
+
+				return column;
+			}
+		}
+
+		throw new RuntimeException(
+			"Cannot find scope-comparator " + scopeComparator + " in " +
+				ListUtil.toString(columns, "name"));
+	}
+
+	private String _getFinderJoin(
+		String table, String alias, String scopeComparator, boolean scopeMax,
+		List<EntityColumn> columns) {
+
+		if (Validator.isNull(scopeComparator)) {
+			return null;
+		}
+
+		EntityColumn primaryColumn = _getFinderPrimaryColumn(columns);
+		EntityColumn comparatorColumn = _getFinderComparatorColumn(
+			scopeComparator, columns);
+
+		if (Validator.equals(comparatorColumn, primaryColumn)) {
+			throw new RuntimeException(
+				"The scope-primary column and scope-comparator column must " +
+					"be different.");
+		}
+
+		String scopeAlias = null;
+
+		if (scopeMax) {
+			scopeAlias = alias.concat("Max");
+		}
+		else {
+			scopeAlias = alias.concat("Min");
+		}
+
+		StringBundler sb = new StringBundler(19);
+
+		sb.append(" LEFT JOIN ");
+		sb.append(table);
+		sb.append(StringPool.SPACE);
+		sb.append(scopeAlias);
+		sb.append(" ON ");
+		sb.append(StringPool.OPEN_PARENTHESIS);
+		sb.append(primaryColumn.getName());
+		sb.append(" = ");
+		sb.append(scopeAlias);
+		sb.append(StringPool.PERIOD);
+		sb.append(primaryColumn.getName());
+		sb.append(" AND ");
+		sb.append(comparatorColumn.getName());
+
+		if (scopeMax) {
+			sb.append(" < ");
+		}
+		else {
+			sb.append(" > ");
+		}
+
+		sb.append(scopeAlias);
+		sb.append(StringPool.PERIOD);
+		sb.append(comparatorColumn.getName());
+		sb.append(StringPool.CLOSE_PARENTHESIS);
+		sb.append(StringPool.SPACE);
+
+		return _getFinderSQL(sb.toString(), alias, columns);
+	}
+
+	private EntityColumn _getFinderPrimaryColumn(List<EntityColumn> columns) {
+		for (EntityColumn column : columns) {
+			if (column.isScopePrimary()) {
+				return column;
+			}
+		}
+
+		throw new RuntimeException(
+			"Cannot find scope-primary column in " +
+				ListUtil.toString(columns, "name"));
+	}
+
+	private String _getFinderSQL(
+		String sql, String alias, List<EntityColumn> columns) {
+
+		if (Validator.isNull(sql)) {
+			return sql;
+		}
+
+		for (EntityColumn column : columns) {
+			String name = column.getName();
+			String dbName = column.getDBName();
+
+			String regex = "(?<!\\.)\\b" + name + "\\b";
+
+			if (sql.indexOf(name) != -1) {
+				sql = sql.replaceAll(regex, alias + "." + dbName);
+			}
+		}
+
+		return sql;
+	}
+
+	private void _getFinderScopeIndexes(
+		Map<String, String> indexSQLs, Map<String, String> indexProps) {
+
+		for (Entity entity : _ejbList) {
+			if (!entity.isDefaultDataSource()) {
+				continue;
+			}
+
+			for (EntityFinder finder : entity.getFinderList()) {
+				if (!finder.isDBIndex()) {
+					continue;
+				}
+
+				String scopeComparator = finder.getScopeComparator();
+
+				if (Validator.isNull(scopeComparator)) {
+					continue;
+				}
+
+				List<EntityColumn> columns = entity.getColumnList();
+
+				EntityColumn primaryColumn = _getFinderPrimaryColumn(columns);
+				EntityColumn comparatorColumn =
+					_getFinderComparatorColumn(scopeComparator, columns);
+
+				StringBundler sb = new StringBundler(6);
+
+				sb.append(entity.getTable());
+				sb.append(" (");
+				sb.append(primaryColumn.getDBName());
+				sb.append(", ");
+				sb.append(comparatorColumn.getDBName());
+				sb.append(");");
+
+				String indexSpec = sb.toString();
+
+				String indexHash =
+					Integer.toHexString(indexSpec.hashCode()).toUpperCase();
+
+				String indexName = "IX_".concat(indexHash);
+
+				if (!indexSQLs.containsKey(indexSpec)) {
+					sb = new StringBundler(4);
+
+					sb.append("create index ");
+					sb.append(indexName);
+					sb.append(" on ");
+					sb.append(indexSpec);
+
+					indexSQLs.put(indexSpec, sb.toString());
+				}
+
+				String finderName =
+					entity.getTable() + StringPool.PERIOD +
+						finder.getName() + StringPool.UNDERLINE + "JOIN";
+
+				indexProps.put(finderName, indexName);
+			}
+		}
+	}
+
+	private String _getFinderWhere(
+		String alias, String scopeComparator, boolean scopeMax, String where,
+		List<EntityColumn> columns) {
+
+		if (Validator.isNull(scopeComparator)) {
+			return where;
+		}
+
+		EntityColumn comparatorColumn = _getFinderComparatorColumn(
+			scopeComparator, columns);
+
+		String scopeAlias = null;
+
+		if (scopeMax) {
+			scopeAlias = alias.concat("Max");
+		}
+		else {
+			scopeAlias = alias.concat("Min");
+		}
+
+		StringBundler sb = new StringBundler(5);
+
+		if (Validator.isNotNull(where)) {
+			sb.append(where.concat(" AND "));
+		}
+		else {
+			sb.append(StringPool.BLANK);
+		}
+
+		sb.append(scopeAlias);
+		sb.append(StringPool.PERIOD);
+		sb.append(comparatorColumn.getName());
+		sb.append(" IS NULL");
+
+		return _getFinderSQL(sb.toString(), alias, columns);
 	}
 
 	private JavaClass _getJavaClass(String fileName) throws IOException {

@@ -268,6 +268,10 @@ when using filter finders. Only one column should ever have this value set to
 true. If no column has this set to true, then the default primary column be
 used.
 
+The scope-primary value is used in conjunction with the finder element
+attributes scope-comparator and scope-max. See the finder element comments for
+an example on how to use these attributes.
+
 The convert-null value specifies whether or not the column value is
 automatically converted to a non null value if it is null. This only applies if
 the type value is String. This is particularly useful if your entity is
@@ -283,6 +287,7 @@ different values for different locales. The default value is false.
 	type CDATA #REQUIRED
 	primary CDATA #IMPLIED
 	filter-primary CDATA #IMPLIED
+	scope-primary CDATA #IMPLIED
 	entity CDATA #IMPLIED
 	mapping-key CDATA #IMPLIED
 	mapping-table CDATA #IMPLIED
@@ -363,6 +368,23 @@ this finder returns at most one entity.
 
 If the unique value is true, then the finder must return a unique entity.
 
+The scope-comparator and scope-max values are used in conjunction with the
+scope-primary value to refine the behavior of generated finder methods.
+
+For example:
+
+<column name="articleId" type="long" primary="true" />
+<column name="resourcePrimKey" type="long" scope-primary="true" />
+<column name="companyId" type="long" />
+<column name="version" type="int" />
+
+<finder name="C_MaxV" return-type="Collection" scope-comparator="version">
+	<finder-column name="companyId" />
+</finder>
+
+The above settings will create a finder with the name findByC_MaxV that will
+return the highest versioned article per resourcePrimKey for a given companyId.
+
 If the db-index value is true, then the service will automatically generate a
 SQL index for this finder. The default value is true.
 -->
@@ -370,6 +392,8 @@ SQL index for this finder. The default value is true.
 	name CDATA #REQUIRED
 	return-type CDATA #REQUIRED
 	unique CDATA #IMPLIED
+	scope-comparator CDATA #IMPLIED
+	scope-max CDATA #IMPLIED
 	where CDATA #IMPLIED
 	db-index CDATA #IMPLIED
 >

@@ -26,22 +26,23 @@ public class EntityColumn implements Cloneable {
 
 	public EntityColumn(String name) {
 		this(
-			name, null, null, false, false, null, null, null, true, true, null,
-			null, null, null, true, false);
+			name, null, null, false, false, false, null, null, null, true, true,
+			null, null, null, null, true, false);
 	}
 
 	public EntityColumn(
 		String name, String dbName, String type, boolean primary,
-		boolean filterPrimary, String ejbName, String mappingKey,
-		String mappingTable, boolean caseSensitive, boolean orderByAscending,
-		String comparator, String arrayableOperator, String idType,
-		String idParam, boolean convertNull, boolean localized) {
+		boolean filterPrimary, boolean scopePrimary, String ejbName,
+		String mappingKey, String mappingTable, boolean caseSensitive,
+		boolean orderByAscending, String comparator, String arrayableOperator,
+		String idType, String idParam, boolean convertNull, boolean localized) {
 
 		_name = name;
 		_dbName = dbName;
 		_type = type;
 		_primary = primary;
 		_filterPrimary = filterPrimary;
+		_scopePrimary = scopePrimary;
 		_humanName = TextFormatter.format(name, TextFormatter.H);
 		_methodName = TextFormatter.format(name, TextFormatter.G);
 		_ejbName = ejbName;
@@ -59,22 +60,23 @@ public class EntityColumn implements Cloneable {
 
 	public EntityColumn(
 		String name, String dbName, String type, boolean primary,
-		boolean filterPrimary, String ejbName, String mappingKey,
-		String mappingTable, String idType, String idParam, boolean convertNull,
-		boolean localized) {
+		boolean filterPrimary, boolean scopePrimary, String ejbName,
+		String mappingKey, String mappingTable, String idType, String idParam,
+		boolean convertNull, boolean localized) {
 
 		this(
-			name, dbName, type, primary, filterPrimary, ejbName, mappingKey,
-			mappingTable, true, true, null, null, idType, idParam, convertNull,
-			localized);
+			name, dbName, type, primary, filterPrimary, scopePrimary, ejbName,
+			mappingKey, mappingTable, true, true, null, null, idType, idParam,
+			convertNull, localized);
 	}
 
 	public Object clone() {
 		return new EntityColumn(
 			getName(), getDBName(), getType(), isPrimary(), isFilterPrimary(),
-			getEJBName(), getMappingKey(), getMappingTable(), isCaseSensitive(),
-			isOrderByAscending(), getComparator(), getArrayableOperator(),
-			getIdType(), getIdParam(), isConvertNull(), isLocalized());
+			isScopePrimary(), getEJBName(), getMappingKey(), getMappingTable(),
+			isCaseSensitive(), isOrderByAscending(), getComparator(),
+			getArrayableOperator(), getIdType(), getIdParam(), isConvertNull(),
+			isLocalized());
 	}
 
 	public boolean equals(Object obj) {
@@ -287,6 +289,10 @@ public class EntityColumn implements Cloneable {
 		}
 	}
 
+	public boolean isScopePrimary() {
+		return _scopePrimary;
+	}
+
 	public boolean isUserUuid() {
 		if (_type.equals("long") && _methodName.endsWith("UserId")) {
 			return true;
@@ -378,6 +384,7 @@ public class EntityColumn implements Cloneable {
 	private String _name;
 	private boolean _orderByAscending;
 	private boolean _primary;
+	private boolean _scopePrimary;
 	private String _type;
 
 }
