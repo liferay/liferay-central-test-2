@@ -57,6 +57,7 @@ import com.liferay.portlet.documentlibrary.service.base.DLRepositoryLocalService
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.comparator.FileEntryModifiedDateComparator;
 import com.liferay.portlet.documentlibrary.util.comparator.FileVersionVersionComparator;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.InputStream;
 
@@ -566,6 +567,7 @@ public class DLRepositoryLocalServiceImpl
 		DLFileEntry newDLFileEntry = dlFileEntryPersistence.create(
 			newFileEntryId);
 
+		newDLFileEntry.setUuid(dlFileEntry.getUuid());
 		newDLFileEntry.setGroupId(dlFileEntry.getGroupId());
 		newDLFileEntry.setCompanyId(dlFileEntry.getCompanyId());
 		newDLFileEntry.setUserId(dlFileEntry.getUserId());
@@ -583,10 +585,11 @@ public class DLRepositoryLocalServiceImpl
 		newDLFileEntry.setVersion(dlFileEntry.getVersion());
 		newDLFileEntry.setSize(dlFileEntry.getSize());
 		newDLFileEntry.setReadCount(dlFileEntry.getReadCount());
-
-		dlFileEntryPersistence.update(newDLFileEntry, false);
+		newDLFileEntry.setExpandoBridgeAttributes(serviceContext);
 
 		dlFileEntryPersistence.remove(dlFileEntry);
+
+		dlFileEntryPersistence.update(newDLFileEntry, false);
 
 		workflowInstanceLinkLocalService.updateClassPK(
 			dlFileEntry.getCompanyId(), dlFileEntry.getGroupId(),
@@ -618,6 +621,11 @@ public class DLRepositoryLocalServiceImpl
 			newDLFileVersion.setStatusByUserId(userId);
 			newDLFileVersion.setStatusByUserName(user.getFullName());
 			newDLFileVersion.setStatusDate(serviceContext.getModifiedDate(now));
+
+			ExpandoBridge expandoBridge = dlFileVersion.getExpandoBridge();
+
+			newDLFileVersion.getExpandoBridge().setAttributes(
+				expandoBridge.getAttributes());
 
 			dlFileVersionPersistence.update(newDLFileVersion, false);
 
