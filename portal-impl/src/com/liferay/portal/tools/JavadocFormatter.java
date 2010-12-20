@@ -462,16 +462,6 @@ public class JavadocFormatter {
 		return javaField.getName();
 	}
 
-	private String _getSpacesIndent(int length) {
-		String indent = "";
-
-		for (int i = 0; i < length; i++) {
-			indent += StringPool.SPACE;
-		}
-
-		return indent;
-	}
-
 	private int _getIndentLength(String indent) {
 		int indentLength = 0;
 
@@ -755,6 +745,16 @@ public class JavadocFormatter {
 		sb.append(")");
 
 		return sb.toString();
+	}
+
+	private String _getSpacesIndent(int length) {
+		String indent = StringPool.BLANK;
+
+		for (int i = 0; i < length; i++) {
+			indent += StringPool.SPACE;
+		}
+
+		return indent;
 	}
 
 	private boolean _isGenerated(String content) {
