@@ -25,7 +25,7 @@ package com.liferay.portal.kernel.exception;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see	   SystemException
+ * @see    SystemException
  */
 public class PortalException extends NestableException {
 

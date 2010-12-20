@@ -62,8 +62,8 @@ public interface Method {
 	 * the caller.
 	 *
 	 * @return -1 or a supported HTTP status code. If it is -1, then the status
-	 *		   code has already been set. Otherwise, the status code needs to be
-	 *		   set by the caller.
+	 *         code has already been set. Otherwise, the status code needs to be
+	 *         set by the caller.
 	 */
 	public int process(WebDAVRequest webDavRequest) throws WebDAVException;
 

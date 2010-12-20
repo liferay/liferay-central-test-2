@@ -24,7 +24,7 @@ import java.io.Serializable;
  * be used directly.
  *
  * @author Brian Wing Shun Chan
- * @see	   com.liferay.portal.model.impl.BaseModelImpl
+ * @see    com.liferay.portal.model.impl.BaseModelImpl
  */
 public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
 
@@ -32,7 +32,7 @@ public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
 	 * Determines if this model instance does not yet exist in the database.
 	 *
 	 * @return <code>true</code> if this model instance does not yet exist in
-	 *		   the database; <code>false</code> otherwise
+	 *         the database; <code>false</code> otherwise
 	 */
 	public boolean isNew();
 
@@ -47,8 +47,8 @@ public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
 	 * Determines if this model instance was retrieved from the entity cache.
 	 *
 	 * @return <code>true</code> if this model instance was retrieved from the
-	 *		   entity cache; <code>false</code> otherwise
-	 * @see	   #setCachedModel(boolean)
+	 *         entity cache; <code>false</code> otherwise
+	 * @see    #setCachedModel(boolean)
 	 */
 	public boolean isCachedModel();
 
@@ -56,8 +56,8 @@ public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
 	 * Sets whether this model instance was retrieved from the entity cache.
 	 *
 	 * @param cachedModel whether this model instance was retrieved from the
-	 *		  entity cache
-	 * @see	  com.liferay.portal.kernel.dao.orm.EntityCache
+	 *        entity cache
+	 * @see   com.liferay.portal.kernel.dao.orm.EntityCache
 	 */
 	public void setCachedModel(boolean cachedModel);
 
@@ -65,8 +65,8 @@ public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
 	 * Determines if this model instance is escaped.
 	 *
 	 * @return <code>true</code> if this model instance is escaped;
-	 *		   <code>false</code> otherwise
-	 * @see	   #setEscapedModel(boolean)
+	 *         <code>false</code> otherwise
+	 * @see    #setEscapedModel(boolean)
 	 */
 	public boolean isEscapedModel();
 
@@ -81,7 +81,7 @@ public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
 	 * </p>
 	 *
 	 * @param escapedModel whether this model instance is escaped
-	 * @see	  com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
+	 * @see   com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
 	 */
 	public void setEscapedModel(boolean escapedModel);
 
@@ -104,9 +104,9 @@ public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
 	 * attributes stored in the service context.
 	 *
 	 * @param serviceContext the service context to retrieve the expando bridge
-	 *		  attributes from
-	 * @see	  com.liferay.portal.service.ServiceContext#getExpandoBridgeAttributes(
-	 *		  )
+	 *        attributes from
+	 * @see   com.liferay.portal.service.ServiceContext#getExpandoBridgeAttributes(
+	 *        )
 	 */
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext);
 
@@ -122,7 +122,7 @@ public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
 	 * with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *
 	 * @return the escaped model instance
-	 * @see	   com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
+	 * @see    com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
 	 */
 	public T toEscapedModel();
 

@@ -17,9 +17,9 @@ package com.liferay.portal.util;
 import com.liferay.portal.kernel.util.ContentTypes;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated This class has been repackaged at
- *			   <code>com.liferay.portal.kernel.util</code>.
+ *             <code>com.liferay.portal.kernel.util</code>.
  */
 public class Constants
 	implements com.liferay.portal.kernel.util.Constants, ContentTypes {

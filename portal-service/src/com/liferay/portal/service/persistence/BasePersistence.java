@@ -38,7 +38,7 @@ import javax.sql.DataSource;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see	   com.liferay.portal.service.persistence.impl.BasePersistenceImpl
+ * @see    com.liferay.portal.service.persistence.impl.BasePersistenceImpl
  */
 public interface BasePersistence<T extends BaseModel<T>> {
 
@@ -82,9 +82,9 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 *
 	 * @param  primaryKey the primary key of the model instance to find
 	 * @return the model instance, or <code>null</code> if an instance of this
-	 *		   model with the primary key could not be found
+	 *         model with the primary key could not be found
 	 * @throws SystemException if the primary key is <code>null</code>, or if a
-	 *		   system exception occurred
+	 *         system exception occurred
 	 */
 	public T fetchByPrimaryKey(Serializable primaryKey) throws SystemException;
 
@@ -95,9 +95,9 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 * @param  primaryKey the primary key of the model instance to find
 	 * @return the model instance
 	 * @throws NoSuchModelException if an instance of this model with the
-	 *		   primary key could not be found
+	 *         primary key could not be found
 	 * @throws SystemException if the primary key is <code>null</code>, or if a
-	 *		   system exception occurred
+	 *         system exception occurred
 	 */
 	public T findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException;
@@ -130,12 +130,12 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 * @param  dynamicQuery the dynamic query to search with
 	 * @param  start the lower bound of the range of model instances to return
 	 * @param  end the upper bound of the range of model instances to return
-	 *		   (not inclusive)
+	 *         (not inclusive)
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
-	 * @see	   com.liferay.portal.kernel.dao.orm.QueryUtil#list(
-	 *		   com.liferay.portal.kernel.dao.orm.Query,
-	 *		   com.liferay.portal.kernel.dao.orm.Dialect, int, int)
+	 * @see    com.liferay.portal.kernel.dao.orm.QueryUtil#list(
+	 *         com.liferay.portal.kernel.dao.orm.Query,
+	 *         com.liferay.portal.kernel.dao.orm.Dialect, int, int)
 	 */
 	@SuppressWarnings("rawtypes")
 	public List findWithDynamicQuery(
@@ -159,7 +159,7 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 * @param  dynamicQuery the dynamic query to search with
 	 * @param  start the lower bound of the range of model instances to return
 	 * @param  end the upper bound of the range of model instances to return
-	 *		   (not inclusive)
+	 *         (not inclusive)
 	 * @param  orderByComparator the comparator to order the results by
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
@@ -174,7 +174,7 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 * Gets the data source for this model.
 	 *
 	 * @return the data source for this model
-	 * @see	   #setDataSource(DataSource)
+	 * @see    #setDataSource(DataSource)
 	 */
 	public DataSource getDataSource();
 
@@ -182,7 +182,7 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 * Gets the listeners registered for this model.
 	 *
 	 * @return the listeners registered for this model
-	 * @see	   #registerListener(ModelListener)
+	 * @see    #registerListener(ModelListener)
 	 */
 	public ModelListener<T>[] getListeners();
 
@@ -205,7 +205,7 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 * @param  primaryKey the primary key of the model instance to remove
 	 * @return the model instance that was removed
 	 * @throws NoSuchModelException if an instance of this model with the
-	 *		   primary key could not be found
+	 *         primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public T remove(Serializable primaryKey)
@@ -232,7 +232,7 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 * Unregisters the model listener.
 	 *
 	 * @param listener the model listener to unregister
-	 * @see	  #registerListener(ModelListener)
+	 * @see   #registerListener(ModelListener)
 	 */
 	public void unregisterListener(ModelListener<T> listener);
 
@@ -249,9 +249,9 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 *
 	 * @param  model the model instance to update
 	 * @param  merge whether to merge the model instance with the current
-	 *		   session. See {@link
-	 *		   BatchSession#update(com.liferay.portal.kernel.dao.orm.Session,
-	 *		   BaseModel, boolean)} for an explanation.
+	 *         session. See {@link
+	 *         BatchSession#update(com.liferay.portal.kernel.dao.orm.Session,
+	 *         BaseModel, boolean)} for an explanation.
 	 * @return the model instance that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -264,9 +264,9 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 *
 	 * @param  model the model instance to update
 	 * @param  merge whether to merge the model instance with the current
-	 *		   session. See {@link
-	 *		   BatchSession#update(com.liferay.portal.kernel.dao.orm.Session,
-	 *		   BaseModel, boolean)} for an explanation.
+	 *         session. See {@link
+	 *         BatchSession#update(com.liferay.portal.kernel.dao.orm.Session,
+	 *         BaseModel, boolean)} for an explanation.
 	 * @param  serviceContext the service context to perform the update in
 	 * @return the model instance that was updated
 	 * @throws SystemException if a system exception occurred

@@ -38,11 +38,11 @@ public interface PortletDataHandler {
 	 * does not exist anymore.
 	 *
 	 * @param  portletDataContext the context of the data deletion
-	 * @param  portletId the portlet id of the portlet
+	 * @param  portletId the portlet ID of the portlet
 	 * @param  portletPreferences the portlet preferences of the portlet
 	 * @return A modified version of portlet preferences that should be saved.
-	 *		   <code>Null</code> if the portlet preferences were unmodified by
-	 *		   this data handler.
+	 *         <code>Null</code> if the portlet preferences were unmodified by
+	 *         this data handler.
 	 */
 	public PortletPreferences deleteData(
 			PortletDataContext portletDataContext, String portletId,
@@ -55,11 +55,11 @@ public interface PortletDataHandler {
 	 * parameter of <code>importData()</code>.
 	 *
 	 * @param  portletDataContext the context of the data export
-	 * @param  portletId the portlet id of the portlet
+	 * @param  portletId the portlet ID of the portlet
 	 * @param  portletPreferences the portlet preferences of the portlet
 	 * @return A string of data to be placed in the LAR. It may be XML, but not
-	 *		   necessarily. <code>Null</code> should be returned if no portlet
-	 *		   data is to be written out.
+	 *         necessarily. <code>Null</code> should be returned if no portlet
+	 *         data is to be written out.
 	 */
 	public String exportData(
 			PortletDataContext portletDataContext, String portletId,
@@ -92,13 +92,13 @@ public interface PortletDataHandler {
 	 * <code>preferences</code> to be saved in the new portlet.
 	 *
 	 * @param  portletDataContext the context of the data import
-	 * @param  portletId the portlet id of the portlet
+	 * @param  portletId the portlet ID of the portlet
 	 * @param  portletPreferences the portlet preferences of the portlet
 	 * @param  data the string data that was returned by
-	 *		   <code>exportData()</code>
+	 *         <code>exportData()</code>
 	 * @return A modified version of portlet preferences that should be saved.
-	 *		   <code>Null</code> if the portlet preferences were unmodified by
-	 *		   this data handler.
+	 *         <code>Null</code> if the portlet preferences were unmodified by
+	 *         this data handler.
 	 */
 	public PortletPreferences importData(
 			PortletDataContext portletDataContext, String portletId,
@@ -110,7 +110,7 @@ public interface PortletDataHandler {
 	 * portlet even though it may not belong to any pages. See LPS-1624.
 	 *
 	 * @return <code>true</code> to allow the user to export data for this
-	 *		   portlet even though it may not belong to any pages
+	 *         portlet even though it may not belong to any pages
 	 */
 	public boolean isAlwaysExportable();
 

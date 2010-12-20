@@ -31,8 +31,8 @@ public interface JournalCreationStrategy {
 
 	/**
 	 * Constant returned by getAuthorUserId() that indicates the default portlet
-	 * data import user id strategy that should be used to determine the user
-	 * id.
+	 * data import user ID strategy that should be used to determine the user
+	 * ID.
 	 */
 	public static final long USE_DEFAULT_USER_ID_STRATEGY = 0;
 
@@ -43,12 +43,12 @@ public interface JournalCreationStrategy {
 	public static final String ARTICLE_CONTENT_UNCHANGED = null;
 
 	/**
-	 * Returns the author's user id to assign to newly created content. If zero
-	 * is returned, the default user id import strategy will determine the
-	 * author id.
+	 * Returns the author's user ID to assign to newly created content. If zero
+	 * is returned, the default user ID import strategy will determine the
+	 * author ID.
 	 *
-	 * @return the author's user id or USE_DEFAULT_USER_ID_STRATEGY to use the
-	 *		   default user id strategy
+	 * @return the author's user ID or USE_DEFAULT_USER_ID_STRATEGY to use the
+	 *         default user ID strategy
 	 */
 	public long getAuthorUserId(PortletDataContext context, Object journalObj)
 		throws Exception;
@@ -62,8 +62,8 @@ public interface JournalCreationStrategy {
 	 * unchanged.
 	 *
 	 * @return the transformed content to save in the database or
-	 *		   ARTICLE_CONTENT_UNCHANGED if the content should be added
-	 *		   unchanged
+	 *         ARTICLE_CONTENT_UNCHANGED if the content should be added
+	 *         unchanged
 	 */
 	public String getTransformedContent(
 			PortletDataContext context, JournalArticle newArticle)
@@ -74,7 +74,7 @@ public interface JournalCreationStrategy {
 	 * added when the specified journalObj is created.
 	 *
 	 * @return <code>true</code> if default community permissions should be
-	 *		   added to the specified journalObj
+	 *         added to the specified journalObj
 	 */
 	public boolean addCommunityPermissions(
 			PortletDataContext context, Object journalObj)
@@ -85,7 +85,7 @@ public interface JournalCreationStrategy {
 	 * added when the specified journalObj is created.
 	 *
 	 * @return <code>true</code> if default guest permissions should be added to
-	 *		   the specified journalObj
+	 *         the specified journalObj
 	 */
 	public boolean addGuestPermissions(
 			PortletDataContext context, Object journalObj)

@@ -60,8 +60,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author	   Alexander Chow
- * @author	   Brian Wing Shun Chan
+ * @author     Alexander Chow
+ * @author     Brian Wing Shun Chan
  * @deprecated
  */
 public class UpgradeResource extends UpgradeProcess {

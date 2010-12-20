@@ -25,7 +25,7 @@ import javax.portlet.PortletURL;
 /**
  * @author Gavin Wan
  * @author Brian Wing Shun Chan
- * @see	   org.apache.portals.bridges.common.ScriptPostProcess
+ * @see    org.apache.portals.bridges.common.ScriptPostProcess
  */
 public class ScriptPostProcess {
 

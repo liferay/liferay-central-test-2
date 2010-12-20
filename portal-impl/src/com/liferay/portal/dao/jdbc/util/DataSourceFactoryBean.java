@@ -15,7 +15,7 @@
 package com.liferay.portal.dao.jdbc.util;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated {@link com.liferay.portal.dao.jdbc.spring.DataSourceFactoryBean}
  */
 public class DataSourceFactoryBean

@@ -17,7 +17,7 @@ package com.liferay.portal.kernel.util;
 import java.util.Properties;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated This class has been renamed to <code>SafeProperties</code>.
  */
 public class NullSafeProperties extends Properties {

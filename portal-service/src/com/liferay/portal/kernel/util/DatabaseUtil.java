@@ -24,8 +24,8 @@ import java.sql.SQLException;
 import javax.naming.NamingException;
 
 /**
- * @author	   Ganesh Ram
- * @author	   Brian Wing Shun Chan
+ * @author     Ganesh Ram
+ * @author     Brian Wing Shun Chan
  * @deprecated {@link DBFactoryUtil}
  */
 public class DatabaseUtil {

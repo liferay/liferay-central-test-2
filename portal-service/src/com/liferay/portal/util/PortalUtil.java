@@ -910,8 +910,8 @@ public class PortalUtil {
 
 	/**
 	 * @deprecated {@link
-	 *			   ResourceActionsUtil#getSocialEquityActionMapping(String,
-	 *			   String)}
+	 *             ResourceActionsUtil#getSocialEquityActionMapping(String,
+	 *             String)}
 	 */
 	public static SocialEquityActionMapping getSocialEquityActionMapping(
 		String name, String actionId) {
@@ -921,7 +921,7 @@ public class PortalUtil {
 
 	/**
 	 * @deprecated {@link
-	 *			   ResourceActionsUtil#getSocialEquityActionMappingss(String)}
+	 *             ResourceActionsUtil#getSocialEquityActionMappingss(String)}
 	 */
 	public static List<SocialEquityActionMapping> getSocialEquityActionMappings(
 		String name) {

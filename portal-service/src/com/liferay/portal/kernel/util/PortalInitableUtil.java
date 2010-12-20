@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated {@link PortalLifecycleUtil}
  */
 public class PortalInitableUtil {

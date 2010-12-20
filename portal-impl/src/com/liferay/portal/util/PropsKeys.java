@@ -15,7 +15,7 @@
 package com.liferay.portal.util;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated Use {@link com.liferay.portal.kernel.util.PropsKeys}.
  */
 public interface PropsKeys extends com.liferay.portal.kernel.util.PropsKeys {

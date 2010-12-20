@@ -57,7 +57,7 @@ public interface Localization {
 	 * Gets the available locales from the localizations XML
 	 *
 	 * @param  xml the localizations XML to get the available locales from
-	 * @return the language ids of the available locales
+	 * @return the language IDs of the available locales
 	 */
 	public String[] getAvailableLocales(String xml);
 
@@ -65,8 +65,8 @@ public interface Localization {
 	 * Gets the default locale from the localizations XML.
 	 *
 	 * @param  xml the localizations XML to get the default locale from
-	 * @return the language id of the default locale, or the system default
-	 *		   locale if the default locale cannot be retrieved from the XML
+	 * @return the language ID of the default locale, or the system default
+	 *         locale if the default locale cannot be retrieved from the XML
 	 */
 	public String getDefaultLocale(String xml);
 
@@ -75,8 +75,8 @@ public interface Localization {
 	 * language if no localization exists for the requested language.
 	 *
 	 * @param  xml the localizations XML to get the localized string from
-	 * @param  requestedLanguageId the id of the language to get the
-	 *		   localization for
+	 * @param  requestedLanguageId the ID of the language to get the
+	 *         localization for
 	 * @return the localized string
 	 */
 	public String getLocalization(String xml, String requestedLanguageId);
@@ -87,13 +87,13 @@ public interface Localization {
 	 * language.
 	 *
 	 * @param  xml the localizations XML to get the localized string from
-	 * @param  requestedLanguageId the id of the language to get the
-	 *		   localization for
+	 * @param  requestedLanguageId the ID of the language to get the
+	 *         localization for
 	 * @param  useDefault whether to use the default language if no localization
-	 *		   exists for the requested language
+	 *         exists for the requested language
 	 * @return the localized string. If <code>useDefault</code> is
-	 *		   <code>false</code> and no localization exists for the requested
-	 *		   language, an empty string will be returned.
+	 *         <code>false</code> and no localization exists for the requested
+	 *         language, an empty string will be returned.
 	 */
 	public String getLocalization(
 		String xml, String requestedLanguageId, boolean useDefault);
@@ -103,10 +103,10 @@ public interface Localization {
 	 * portlet request.
 	 *
 	 * @param  portletRequest the portlet request to get the locales and
-	 *		   localized strings from
+	 *         localized strings from
 	 * @param  parameter the prefix of the parameters containing the localized
-	 *		   strings. Each localization will be loaded from a parameter with
-	 *		   this prefix, followed by an underscore, and the language id.
+	 *         strings. Each localization will be loaded from a parameter with
+	 *         this prefix, followed by an underscore, and the language ID.
 	 * @return the locales and localized strings
 	 */
 	public Map<Locale, String> getLocalizationMap(
@@ -116,7 +116,7 @@ public interface Localization {
 	 * Gets a map of locales and localized strings from the localizations XML.
 	 *
 	 * @param  xml the localizations XML to get the locales and localized
-	 *		   strings from
+	 *         strings from
 	 * @return the locales and localized strings
 	 */
 	public Map<Locale, String> getLocalizationMap(String xml);
@@ -126,12 +126,12 @@ public interface Localization {
 	 * portlet request.
 	 *
 	 * @param  preferences the preferences container to get the localized value
-	 *		   from
+	 *         from
 	 * @param  portletRequest the portlet request to get the locales and
-	 *		   localized strings from
+	 *         localized strings from
 	 * @param  parameter the prefix of the parameters containing the localized
-	 *		   strings. Each localization will be loaded from a parameter with
-	 *		   this prefix, followed by an underscore, and the language id.
+	 *         strings. Each localization will be loaded from a parameter with
+	 *         this prefix, followed by an underscore, and the language ID.
 	 * @return the locales and localized strings
 	 */
 	public String getLocalizationXmlFromPreferences(
@@ -140,7 +140,7 @@ public interface Localization {
 
 	/**
 	 * @deprecated use {@link #getLocalizationMap(PortletRequest, String)}
-	 *			   instead.
+	 *             instead.
 	 */
 	public Map<Locale, String> getLocalizedParameter(
 		PortletRequest portletRequest, String parameter);
@@ -150,9 +150,9 @@ public interface Localization {
 	 * language if no localization exists for the requested language.
 	 *
 	 * @param  preferences the preferences container to get the localized value
-	 *		   from
+	 *         from
 	 * @param  key the preferences key to get the localized value for
-	 * @param  languageId the id of the language to get the localization for
+	 * @param  languageId the ID of the language to get the localization for
 	 * @return the localized preferences value
 	 */
 	public String getPreferencesValue(
@@ -164,14 +164,14 @@ public interface Localization {
 	 * language.
 	 *
 	 * @param  preferences the preferences container to get the localized value
-	 *		   from
+	 *         from
 	 * @param  key the preferences key to get the localized value for
-	 * @param  languageId the id of the language to get the localization for
+	 * @param  languageId the ID of the language to get the localization for
 	 * @param  useDefault whether to use the default language if no localization
-	 *		   exists for the requested language
+	 *         exists for the requested language
 	 * @return the localized preferences value. If <code>useDefault</code> is
-	 *		   <code>false</code> and no localization exists for the requested
-	 *		   language, an empty string will be returned.
+	 *         <code>false</code> and no localization exists for the requested
+	 *         language, an empty string will be returned.
 	 */
 	public String getPreferencesValue(
 		PortletPreferences preferences, String key, String languageId,
@@ -182,9 +182,9 @@ public interface Localization {
 	 * language if no localization exists for the requested language.
 	 *
 	 * @param  preferences the preferences container to get the localized values
-	 *		   from
+	 *         from
 	 * @param  key the preferences key to get localized values for
-	 * @param  languageId the id of the language to get the localizations for
+	 * @param  languageId the ID of the language to get the localizations for
 	 * @return the localized preferences values
 	 */
 	public String[] getPreferencesValues(
@@ -196,14 +196,14 @@ public interface Localization {
 	 * language.
 	 *
 	 * @param  preferences the preferences container to get the localized values
-	 *		   from
+	 *         from
 	 * @param  key the preferences key to get localized values for
-	 * @param  languageId the id of the language to get the localizations for
+	 * @param  languageId the ID of the language to get the localizations for
 	 * @param  useDefault whether to use the default language if no localization
-	 *		   exists for the requested language
+	 *         exists for the requested language
 	 * @return the localized preferences values. If <code>useDefault</code> is
-	 *		   <code>false</code> and no localization exists for the requested
-	 *		   language, an empty array will be returned.
+	 *         <code>false</code> and no localization exists for the requested
+	 *         language, an empty array will be returned.
 	 */
 	public String[] getPreferencesValues(
 		PortletPreferences preferences, String key, String languageId,
@@ -214,10 +214,10 @@ public interface Localization {
 	 * Stores the localized strings as characters in the XML.
 	 *
 	 * @param  xml the localizations XML to remove the localization for the
-	 *		   language from
+	 *         language from
 	 * @param  key the name of the localized string, such as &quot;Title&quot;
-	 * @param  requestedLanguageId the id of the language to remove from the
-	 *		   localizations XML
+	 * @param  requestedLanguageId the ID of the language to remove from the
+	 *         localizations XML
 	 * @return the localizations XML with the language removed
 	 */
 	public String removeLocalization(
@@ -228,10 +228,10 @@ public interface Localization {
 	 * optionally storing the localized strings as CDATA in the XML.
 	 *
 	 * @param  xml the localizations XML to remove the localization for the
-	 *		   language from
+	 *         language from
 	 * @param  key the name of the localized string, such as &quot;Title&quot;
-	 * @param  requestedLanguageId the id of the language to remove from the
-	 *		   localizations XML
+	 * @param  requestedLanguageId the ID of the language to remove from the
+	 *         localizations XML
 	 * @param  cdata whether to store localized strings as CDATA in the XML
 	 * @return the localizations XML with the language removed
 	 */
@@ -243,12 +243,12 @@ public interface Localization {
 	 * request.
 	 *
 	 * @param  portletRequest the portlet request to get the localized values
-	 *		   from
+	 *         from
 	 * @param  preferences the preferences container to set the localized values
-	 *		   in
+	 *         in
 	 * @param  parameter the prefix of the parameters containing the localized
-	 *		   strings. Each localization will be loaded from a parameter with
-	 *		   this prefix, followed by an underscore, and the language id.
+	 *         strings. Each localization will be loaded from a parameter with
+	 *         this prefix, followed by an underscore, and the language ID.
 	 * @throws Exception if an exception occurred
 	 */
 	public void setLocalizedPreferencesValues (
@@ -260,9 +260,9 @@ public interface Localization {
 	 * Sets the localized preferences value for the key.
 	 *
 	 * @param  preferences the preferences container to store the localized
-	 *		   value in
+	 *         value in
 	 * @param  key the preferences key to set the localized value for
-	 * @param  languageId the id of the language to set the localization for
+	 * @param  languageId the ID of the language to set the localization for
 	 * @param  value the localized value
 	 * @throws Exception if an exception occurred
 	 */
@@ -275,9 +275,9 @@ public interface Localization {
 	 * Sets the localized preferences values for the key.
 	 *
 	 * @param  preferences the preferences container to store the localized
-	 *		   values in
+	 *         values in
 	 * @param  key the preferences key to set the localized values for
-	 * @param  languageId the id of the language to set the localizations for
+	 * @param  languageId the ID of the language to set the localizations for
 	 * @param  values the localized values
 	 * @throws Exception if an exception occurred
 	 */
@@ -304,8 +304,8 @@ public interface Localization {
 	 * @param  xml the localizations XML to update the localized string in
 	 * @param  key the name of the localized string, such as &quot;Title&quot;
 	 * @param  value the localized string
-	 * @param  requestedLanguageId the id of the language to update the
-	 *		   localization for
+	 * @param  requestedLanguageId the ID of the language to update the
+	 *         localization for
 	 * @return the updated localizations XML
 	 */
 	public String updateLocalization(
@@ -319,9 +319,9 @@ public interface Localization {
 	 * @param  xml the localizations XML to update the localized string in
 	 * @param  key the name of the localized string, such as &quot;Title&quot;
 	 * @param  value the localized string
-	 * @param  requestedLanguageId the id of the language to update the
-	 *		   localization for
-	 * @param  defaultLanguageId the id of the default language
+	 * @param  requestedLanguageId the ID of the language to update the
+	 *         localization for
+	 * @param  defaultLanguageId the ID of the default language
 	 * @return the updated localizations XML
 	 */
 	public String updateLocalization(
@@ -336,9 +336,9 @@ public interface Localization {
 	 * @param  xml the localizations XML to update the localized string in
 	 * @param  key the name of the localized string, such as &quot;Title&quot;
 	 * @param  value the localized string
-	 * @param  requestedLanguageId the id of the language to update the
-	 *		   localization for
-	 * @param  defaultLanguageId the id of the default language
+	 * @param  requestedLanguageId the ID of the language to update the
+	 *         localization for
+	 * @param  defaultLanguageId the ID of the default language
 	 * @param  cdata whether to store localized strings as CDATA in the XML
 	 * @return the updated localizations XML
 	 */

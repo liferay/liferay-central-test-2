@@ -278,7 +278,7 @@ public class HttpUtil {
 	 * implementation is used.
 	 *
 	 * @return A string representation of the resource referenced by the URL
-	 *		   object
+	 *         object
 	 */
 	public static String URLtoString(URL url) throws IOException {
 		return getHttp().URLtoString(url);

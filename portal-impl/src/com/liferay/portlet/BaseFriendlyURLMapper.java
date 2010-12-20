@@ -15,10 +15,10 @@
 package com.liferay.portlet;
 
 /**
- * @author	   Jorge Ferrer
- * @author	   Brian Wing Shun Chan
+ * @author     Jorge Ferrer
+ * @author     Brian Wing Shun Chan
  * @deprecated This class has been repackaged at
- *			   <code>com.liferay.portal.kernel.portlet</code>.
+ *             <code>com.liferay.portal.kernel.portlet</code>.
  */
 public abstract class BaseFriendlyURLMapper
 	extends com.liferay.portal.kernel.portlet.BaseFriendlyURLMapper {

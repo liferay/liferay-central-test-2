@@ -61,9 +61,9 @@ public class PortletConstants {
 	public static final String FACEBOOK_INTEGRATION_IFRAME = "iframe";
 
 	/**
-	 * Gets the root portlet id of the portlet.
+	 * Gets the root portlet ID of the portlet.
 	 *
-	 * @return the root portlet id of the portlet
+	 * @return the root portlet ID of the portlet
 	 */
 	public static String getRootPortletId(String portletId) {
 		int pos = portletId.indexOf(INSTANCE_SEPARATOR);
@@ -77,9 +77,9 @@ public class PortletConstants {
 	}
 
 	/**
-	 * Gets the instance id of the portlet.
+	 * Gets the instance ID of the portlet.
 	 *
-	 * @return the instance id of the portlet
+	 * @return the instance ID of the portlet
 	 */
 	public static String getInstanceId(String portletId) {
 		int pos = portletId.indexOf(INSTANCE_SEPARATOR);

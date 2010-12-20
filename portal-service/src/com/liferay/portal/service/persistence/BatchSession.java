@@ -72,7 +72,7 @@ public interface BatchSession {
 	 * Determines if update batching is enabled
 	 *
 	 * @return <code>true</code> if update batching is enabled;
-	 *		   <code>false</code> otherwise
+	 *         <code>false</code> otherwise
 	 */
 	public boolean isEnabled();
 
@@ -131,7 +131,7 @@ public interface BatchSession {
 	 * @param  session the session to perform the update on
 	 * @param  model the model instance to update
 	 * @param  merge whether to merge the model instance with the current
-	 *		   session
+	 *         session
 	 * @throws ORMException if a database exception occurred
 	 */
 	public void update(Session session, BaseModel<?> model, boolean merge)

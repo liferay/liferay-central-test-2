@@ -27,7 +27,7 @@ public class SearchEngineUtil {
 
 	/**
 	 * @deprecated Use {@link
-	 *			   com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}.
+	 *             com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}.
 	 */
 	public static final int ALL_POS = -1;
 

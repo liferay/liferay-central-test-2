@@ -17,7 +17,7 @@ package com.liferay.portal.kernel.bean;
 import java.lang.Object;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated
  */
 public class ContextClassLoaderBeanHandler extends ClassLoaderBeanHandler {

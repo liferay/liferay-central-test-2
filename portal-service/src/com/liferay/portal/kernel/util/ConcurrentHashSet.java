@@ -17,7 +17,7 @@ package com.liferay.portal.kernel.util;
 import java.util.Set;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated {@link com.liferay.portal.kernel.concurrent.ConcurrentHashSet}
  */
 public class ConcurrentHashSet<E>

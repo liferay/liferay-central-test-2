@@ -32,7 +32,7 @@ import java.util.Map;
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  * @author Connor McKay
- * @see	   DefaultFriendlyURLMapper
+ * @see    DefaultFriendlyURLMapper
  */
 public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 
@@ -83,7 +83,7 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 
 	/**
 	 * @deprecated use {@link #addParameter(String, Map, String, String)}
-	 *			   instead
+	 *             instead
 	 */
 	protected void addParam(
 		Map<String, String[]> parameterMap, String name, String value) {
@@ -102,7 +102,7 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 	 * @param parameterMap the parameter map to populate
 	 * @param name the name of the parameter
 	 * @param value the value of the parameter
-	 * @see	  #addParameter(Map, String, String)
+	 * @see   #addParameter(Map, String, String)
 	 */
 	protected void addParameter(
 		Map<String, String[]> parameterMap, String name, Object value) {
@@ -121,7 +121,7 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 	 * @param parameterMap the parameter map to populate
 	 * @param name the name of the parameter
 	 * @param value the value of the parameter
-	 * @see	  #getNamespace()
+	 * @see   #getNamespace()
 	 */
 	protected void addParameter(
 		Map<String, String[]> parameterMap, String name, String value) {
@@ -133,12 +133,12 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 	 * Adds a namespaced parameter of any type to the parameter map.
 	 *
 	 * @param namespace the namespace for portlet parameters. For instanceable
-	 *		  portlets this must include the instance id.
+	 *        portlets this must include the instance ID.
 	 * @param parameterMap the parameter map to populate
 	 * @param name space the namespace for portlet parameters. For instanceable
-	 *		  portlets this must include the instance id.
+	 *        portlets this must include the instance ID.
 	 * @param value the value of the parameter
-	 * @see	  #addParameter(String, Map, String, String)
+	 * @see   #addParameter(String, Map, String, String)
 	 */
 	protected void addParameter(
 		String namespace, Map<String, String[]> parameterMap, String name,
@@ -151,13 +151,13 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 	 * Adds a namespaced string parameter to the parameter map.
 	 *
 	 * @param namespace the namespace for portlet parameters. For instanceable
-	 *		  portlets this must include the instance id.
+	 *        portlets this must include the instance ID.
 	 * @param parameterMap the parameter map to populate
 	 * @param name space the namespace for portlet parameters. For instanceable
-	 *		  portlets this must include the instance id.
+	 *        portlets this must include the instance ID.
 	 * @param value the value of the parameter
-	 * @see	  PortalUtil#getPortletNamespace(String)
-	 * @see	  DefaultFriendlyURLMapper#getPortletId(Map)
+	 * @see   PortalUtil#getPortletNamespace(String)
+	 * @see   DefaultFriendlyURLMapper#getPortletId(Map)
 	 */
 	protected void addParameter(
 		String namespace, Map<String, String[]> parameterMap, String name,
@@ -188,11 +188,11 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 	 *
 	 * <p>
 	 * <b>Do not use this method with an instanceable portlet, it will not
-	 * include the instance id.</b>
+	 * include the instance ID.</b>
 	 * </p>
 	 *
-	 * @return the default namespace, not including the instance id
-	 * @see	   PortalUtil#getPortletNamespace(String)
+	 * @return the default namespace, not including the instance ID
+	 * @see    PortalUtil#getPortletNamespace(String)
 	 */
 	protected String getNamespace() {
 		return PortalUtil.getPortletNamespace(getPortletId());

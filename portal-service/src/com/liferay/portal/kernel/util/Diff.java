@@ -20,7 +20,7 @@ import java.util.List;
 
 /**
  * @author Bruno Farache
- * @see	   com.liferay.portal.kernel.util.DiffUtil
+ * @see    com.liferay.portal.kernel.util.DiffUtil
  */
 public interface Diff {
 

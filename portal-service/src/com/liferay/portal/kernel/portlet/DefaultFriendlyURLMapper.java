@@ -47,7 +47,7 @@ import javax.portlet.WindowState;
  * </p>
  *
  * @author Connor McKay
- * @see	   Router
+ * @see    Router
  */
 public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 
@@ -118,7 +118,7 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 	 * Gets the default ignored parameters.
 	 *
 	 * @return the ignored parameter names
-	 * @see	   #addDefaultIgnoredParameter(String)
+	 * @see    #addDefaultIgnoredParameter(String)
 	 */
 	public Set<String> getDefaultIgnoredParameters() {
 		return defaultIgnoredParameters;
@@ -128,7 +128,7 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 	 * Gets the default reserved parameters.
 	 *
 	 * @return the default reserved parameter names and values
-	 * @see	   #addDefaultReservedParameter(String, String)
+	 * @see    #addDefaultReservedParameter(String, String)
 	 */
 	public Map<String, String> getDefaultReservedParameters() {
 		return defaultReservedParameters;
@@ -181,7 +181,7 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 	 *
 	 * @param liferayPortletURL the portlet URL to copy parameters from
 	 * @param routeParameters the parameter map to populate for use by the
-	 *		  router
+	 *        router
 	 */
 	protected void buildRouteParameters(
 		LiferayPortletURL liferayPortletURL,
@@ -225,14 +225,14 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	/**
-	 * Gets the portlet id, including the instance id if applicable, from the
+	 * Gets the portlet ID, including the instance ID if applicable, from the
 	 * parameter map.
 	 *
-	 * @param  routeParameters the parameter map to get the portlet id from. For
-	 *		   an instanceable portlet, this must contain either
-	 *		   <code>p_p_id</code> or <code>instanceId</code>.
-	 * @return the portlet id, including the instance id if applicable, or
-	 *		   <code>null</code> if it cannot be determined
+	 * @param  routeParameters the parameter map to get the portlet ID from. For
+	 *         an instanceable portlet, this must contain either
+	 *         <code>p_p_id</code> or <code>instanceId</code>.
+	 * @return the portlet ID, including the instance ID if applicable, or
+	 *         <code>null</code> if it cannot be determined
 	 */
 	protected String getPortletId(Map<String, String> routeParameters) {
 		if (!isPortletInstanceable()) {
@@ -267,10 +267,10 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 	 * default reserved parameters.
 	 *
 	 * @param parameterMap the parameter map to populate. This should be the map
-	 *		  passed to {@link #populateParams(String, Map, Map)} by {@link
-	 *		  com.liferay.portal.util.PortalImpl}.
+	 *        passed to {@link #populateParams(String, Map, Map)} by {@link
+	 *        com.liferay.portal.util.PortalImpl}.
 	 * @param namespace the namespace to use for parameters added to
-	 *		  <code>parameterMap</code>
+	 *        <code>parameterMap</code>
 	 * @param routeParameters the parameter map populated by the router
 	 */
 	protected void populateParams(
@@ -308,10 +308,10 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 	 * </p>
 	 *
 	 * @param liferayPortletURL the portlet URL to add the parameters included
-	 *		  in the path to
+	 *        in the path to
 	 * @param routeParameters the parameter map populated by the router
-	 * @see	  com.liferay.portlet.PortletURLImpl#addParameterIncludedInPath(
-	 *		  String)
+	 * @see   com.liferay.portlet.PortletURLImpl#addParameterIncludedInPath(
+	 *        String)
 	 */
 	protected void addParametersIncludedInPath(
 		LiferayPortletURL liferayPortletURL,

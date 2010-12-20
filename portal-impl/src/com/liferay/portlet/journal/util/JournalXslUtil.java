@@ -17,8 +17,8 @@ package com.liferay.portlet.journal.util;
 import java.util.Map;
 
 /**
- * @author	   Alexander Chow
- * @author	   Raymond Augé
+ * @author     Alexander Chow
+ * @author     Raymond Augé
  * @deprecated
  */
 public class JournalXslUtil {

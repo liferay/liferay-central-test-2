@@ -29,8 +29,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * </p>
  *
  * @author Shuyang Zhou
- * @see	   ReadWriteLock
- * @see	   ReadWriteLockKey
+ * @see    ReadWriteLock
+ * @see    ReadWriteLockKey
  */
 public class ReadWriteLockRegistry {
 

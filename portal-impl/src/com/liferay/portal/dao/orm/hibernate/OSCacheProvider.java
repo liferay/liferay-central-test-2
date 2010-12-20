@@ -28,8 +28,8 @@ import org.hibernate.cache.Timestamper;
 import org.hibernate.util.StringHelper;
 
 /**
- * @author	   Mathias Bogaert
- * @author	   Brian Wing Shun Chan
+ * @author     Mathias Bogaert
+ * @author     Brian Wing Shun Chan
  * @deprecated
  */
 public class OSCacheProvider implements CacheProvider {

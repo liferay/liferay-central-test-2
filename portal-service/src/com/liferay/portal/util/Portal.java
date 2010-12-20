@@ -246,12 +246,13 @@ public interface Portal {
 	 * @param  year the year
 	 * @param  hour the hour (0-24)
 	 * @param  min the minute of the hour
-	 * @param  pe the exception to throw if the date is invalid. If null, no
-	 *		   exception will be thrown for an invalid date.
-	 * @return the date object, or null if the date is invalid and no exception
-	 *		   to throw was provided
+	 * @param  pe the exception to throw if the date is invalid. If
+	 *         <code>null</code>, no exception will be thrown for an invalid
+	 *         date.
+	 * @return the date object, or <code>null</code> if the date is invalid and
+	 *         no exception to throw was provided
 	 * @throws PortalException if the date was invalid and <code>pe</code> was
-	 *		   not null
+	 *         not <code>null</code>
 	 */
 	public Date getDate(
 			int month, int day, int year, int hour, int min, PortalException pe)
@@ -267,12 +268,13 @@ public interface Portal {
 	 * @param  hour the hour (0-24)
 	 * @param  min the minute of the hour
 	 * @param  timeZone the time zone of the date
-	 * @param  pe the exception to throw if the date is invalid. If null, no
-	 *		   exception will be thrown for an invalid date.
-	 * @return the date object, or null if the date is invalid and no exception
-	 *		   to throw was provided
+	 * @param  pe the exception to throw if the date is invalid. If
+	 *         <code>null</code>, no exception will be thrown for an invalid
+	 *         date.
+	 * @return the date object, or <code>null</code> if the date is invalid and
+	 *         no exception to throw was provided
 	 * @throws PortalException if the date was invalid and <code>pe</code> was
-	 *		   not null
+	 *         not <code>null</code>
 	 */
 	public Date getDate(
 			int month, int day, int year, int hour, int min, TimeZone timeZone,
@@ -286,12 +288,13 @@ public interface Portal {
 	 * @param  month the month (0-based, meaning 0 for January)
 	 * @param  day the day of the month
 	 * @param  year the year
-	 * @param  pe the exception to throw if the date is invalid. If null, no
-	 *		   exception will be thrown for an invalid date.
-	 * @return the date object, or null if the date is invalid and no exception
-	 *		   to throw was provided
+	 * @param  pe the exception to throw if the date is invalid. If
+	 *         <code>null</code>, no exception will be thrown for an invalid
+	 *         date.
+	 * @return the date object, or <code>null</code> if the date is invalid and
+	 *         no exception to throw was provided
 	 * @throws PortalException if the date was invalid and <code>pe</code> was
-	 *		   not null
+	 *         not <code>null</code>
 	 */
 	public Date getDate(int month, int day, int year, PortalException pe)
 		throws PortalException;
@@ -304,12 +307,13 @@ public interface Portal {
 	 * @param  day the day of the month
 	 * @param  year the year
 	 * @param  timeZone the time zone of the date
-	 * @param  pe the exception to throw if the date is invalid. If null, no
-	 *		   exception will be thrown for an invalid date.
-	 * @return the date object, or null if the date is invalid and no exception
-	 *		   to throw was provided
+	 * @param  pe the exception to throw if the date is invalid. If
+	 *         <code>null</code>, no exception will be thrown for an invalid
+	 *         date.
+	 * @return the date object, or <code>null</code> if the date is invalid and
+	 *         no exception to throw was provided
 	 * @throws PortalException if the date was invalid and <code>pe</code> was
-	 *		   not null
+	 *         not <code>null</code>
 	 */
 	public Date getDate(
 			int month, int day, int year, TimeZone timeZone, PortalException pe)

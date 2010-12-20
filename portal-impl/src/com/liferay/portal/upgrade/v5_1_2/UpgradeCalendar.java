@@ -22,7 +22,7 @@ import com.liferay.portal.upgrade.v5_1_2.util.CalEventRecurrenceUpgradeColumnImp
 import com.liferay.portal.upgrade.v5_1_2.util.CalEventTable;
 
 /**
- * @author	   Samuel Kong
+ * @author     Samuel Kong
  * @deprecated
  */
 public class UpgradeCalendar extends UpgradeProcess {

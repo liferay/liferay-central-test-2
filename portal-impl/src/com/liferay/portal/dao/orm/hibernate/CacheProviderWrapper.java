@@ -24,7 +24,7 @@ import org.hibernate.cache.CacheException;
 import org.hibernate.cache.CacheProvider;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated
  */
 public class CacheProviderWrapper implements CacheProvider {

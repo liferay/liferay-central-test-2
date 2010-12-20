@@ -19,9 +19,9 @@ import java.sql.Timestamp;
 import org.hibernate.Query;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated This class has been repackaged at
- *			   <code>com.liferay.portal.kernel.dao.orm</code>.
+ *             <code>com.liferay.portal.kernel.dao.orm</code>.
  */
 public class QueryPos {
 

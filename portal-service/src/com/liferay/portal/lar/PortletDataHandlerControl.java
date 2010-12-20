@@ -15,9 +15,9 @@
 package com.liferay.portal.lar;
 
 /**
- * @author	   Raymond Augé
+ * @author     Raymond Augé
  * @deprecated This class has been repackaged at
- *			   <code>com.liferay.portal.kernel.lar</code>.
+ *             <code>com.liferay.portal.kernel.lar</code>.
  */
 public class PortletDataHandlerControl
 	extends com.liferay.portal.kernel.lar.PortletDataHandlerControl {

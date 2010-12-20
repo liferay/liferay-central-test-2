@@ -20,7 +20,7 @@ import com.liferay.portal.model.BaseModel;
 
 /**
  * @author Brian Wing Shun Chan
- * @see	   BatchSession
+ * @see    BatchSession
  */
 public class BatchSessionUtil {
 

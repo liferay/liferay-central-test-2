@@ -46,8 +46,8 @@ public class DiffImpl implements com.liferay.portal.kernel.util.Diff {
 	 * This is a diff method with default values.
 	 *
 	 * @return an array containing two lists of <code>DiffResults</code>, the
-	 *		   first element contains DiffResults related to changes in source
-	 *		   and the second element to changes in target
+	 *         first element contains DiffResults related to changes in source
+	 *         and the second element to changes in target
 	 */
 	public List<DiffResult>[] diff(Reader source, Reader target) {
 		int margin = 2;
@@ -62,8 +62,8 @@ public class DiffImpl implements com.liferay.portal.kernel.util.Diff {
 	 * <code>DiffResults</code>.
 	 *
 	 * @return an array containing two lists of <code>DiffResults</code>, the
-	 *		   first element contains DiffResults related to changes in source
-	 *		   and the second element to changes in target
+	 *         first element contains DiffResults related to changes in source
+	 *         and the second element to changes in target
 	 */
 	public List<DiffResult>[] diff(
 		Reader source, Reader target, String addedMarkerStart,

@@ -15,7 +15,7 @@
 package com.liferay.util;
 
 /**
- * @author	   Jorge Ferrer
+ * @author     Jorge Ferrer
  * @deprecated {@link com.liferay.portal.kernel.plugin.License}
  */
 public class License extends com.liferay.portal.kernel.plugin.License {

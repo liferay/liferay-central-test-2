@@ -15,9 +15,9 @@
 package com.liferay.portal.struts;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated This class has been repackaged at
- *			   <code>com.liferay.portal.kernel.events</code>.
+ *             <code>com.liferay.portal.kernel.events</code>.
  */
 public abstract class Action extends com.liferay.portal.kernel.events.Action {
 }

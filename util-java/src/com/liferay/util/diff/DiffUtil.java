@@ -37,9 +37,9 @@ import org.incava.util.diff.Difference;
  * Take a look at <code>DiffTest</code> to see the expected inputs and outputs.
  * </p>
  *
- * @author	   Bruno Farache
+ * @author     Bruno Farache
  * @deprecated This class has been repackaged at
- *			   <code>com.liferay.portal.kernel.util</code>.
+ *             <code>com.liferay.portal.kernel.util</code>.
  */
 public class DiffUtil {
 
@@ -57,8 +57,8 @@ public class DiffUtil {
 	 * This is a diff method with default values.
 	 *
 	 * @return an array containing two lists of <code>DiffResults</code>, the
-	 *		   first element contains DiffResults related to changes in source
-	 *		   and the second element to changes in target
+	 *         first element contains DiffResults related to changes in source
+	 *         and the second element to changes in target
 	 */
 	public static List<DiffResult>[] diff(Reader source, Reader target) {
 		int margin = 2;
@@ -73,8 +73,8 @@ public class DiffUtil {
 	 * <code>DiffResults</code>.
 	 *
 	 * @return an array containing two lists of <code>DiffResults</code>, the
-	 *		   first element contains DiffResults related to changes in source
-	 *		   and the second element to changes in target
+	 *         first element contains DiffResults related to changes in source
+	 *         and the second element to changes in target
 	 */
 	public static List<DiffResult>[] diff(
 		Reader source, Reader target, String addedMarkerStart,

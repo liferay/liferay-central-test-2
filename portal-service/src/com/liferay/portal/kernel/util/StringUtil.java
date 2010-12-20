@@ -1282,7 +1282,7 @@ public class StringUtil {
 	 * before they deviate.
 	 *
 	 * @return the number of starting letters that s1 and s2 have in common
-	 *		   before they deviate
+	 *         before they deviate
 	 */
 	public static int startsWithWeight(String s1, String s2) {
 		if ((s1 == null) || (s2 == null)) {

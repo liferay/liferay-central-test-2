@@ -21,8 +21,8 @@ import org.springframework.web.context.ContextLoader;
 
 /**
  * @author Brian Wing Shun Chan
- * @see	   PortletApplicationContext
- * @see	   PortletContextLoaderListener
+ * @see    PortletApplicationContext
+ * @see    PortletContextLoaderListener
  */
 public class PortletContextLoader extends ContextLoader {
 

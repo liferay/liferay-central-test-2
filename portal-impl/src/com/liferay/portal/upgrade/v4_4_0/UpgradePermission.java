@@ -33,7 +33,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated
  */
 public class UpgradePermission extends UpgradeProcess {

@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.servlet.ServletContextPool;
 import javax.servlet.ServletContext;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated This class has been renamed to {@link ServletContextPool}.
  */
 public class VelocityContextPool {

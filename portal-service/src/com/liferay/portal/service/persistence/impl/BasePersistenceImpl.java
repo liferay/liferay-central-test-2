@@ -331,10 +331,10 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	 *
 	 * @param  model the model instance to update
 	 * @param  merge whether to merge the model instance with the current
-	 *		   session. See {@link
-	 *		   com.liferay.portal.service.persistence.BatchSession#update(
-	 *		   com.liferay.portal.kernel.dao.orm.Session, BaseModel, boolean)}
-	 *		   for an explanation.
+	 *         session. See {@link
+	 *         com.liferay.portal.service.persistence.BatchSession#update(
+	 *         com.liferay.portal.kernel.dao.orm.Session, BaseModel, boolean)}
+	 *         for an explanation.
 	 * @return the model instance that was updated
 	 * @throws SystemException if a system exception occurred
 	 */

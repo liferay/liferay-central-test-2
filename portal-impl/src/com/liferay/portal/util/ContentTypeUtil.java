@@ -17,7 +17,7 @@ package com.liferay.portal.util;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 
 /**
- * @author	   Alexander Chow
+ * @author     Alexander Chow
  * @deprecated {@link MimeTypesUtil}
  */
 public class ContentTypeUtil {

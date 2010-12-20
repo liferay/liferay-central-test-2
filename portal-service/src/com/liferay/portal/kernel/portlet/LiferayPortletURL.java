@@ -26,7 +26,7 @@ import javax.portlet.ResourceURL;
  * Represents a URL pointing to a portlet.
  *
  * @author Brian Wing Shun Chan
- * @see	   com.liferay.portlet.PortletURLImpl
+ * @see    com.liferay.portlet.PortletURLImpl
  */
 public interface LiferayPortletURL
 	extends PortletURL, ResourceURL, Serializable {
@@ -43,7 +43,7 @@ public interface LiferayPortletURL
 	 * Gets the lifecycle of the portlet this URL points to.
 	 *
 	 * @return the portlet lifecycle
-	 * @see	   #setLifecycle(String)
+	 * @see    #setLifecycle(String)
 	 */
 	public String getLifecycle();
 
@@ -56,9 +56,9 @@ public interface LiferayPortletURL
 	public String getParameter(String name);
 
 	/**
-	 * Gets the id of the portlet this URL points to.
+	 * Gets the ID of the portlet this URL points to.
 	 *
-	 * @return the id of the portlet this URL points to
+	 * @return the ID of the portlet this URL points to
 	 */
 	public String getPortletId();
 
@@ -76,9 +76,9 @@ public interface LiferayPortletURL
 	public Map<String, String> getReservedParameterMap();
 
 	/**
-	 * Gets the id of the resource this URL points to.
+	 * Gets the ID of the resource this URL points to.
 	 *
-	 * @return the id of the resource this URL points to
+	 * @return the ID of the resource this URL points to
 	 */
 	public String getResourceID();
 
@@ -87,8 +87,8 @@ public interface LiferayPortletURL
 	 * the page.
 	 *
 	 * @return whether this URL is an anchor pointing to the specified portlet
-	 *		   on the page
-	 * @see	   #setAnchor(boolean)
+	 *         on the page
+	 * @see    #setAnchor(boolean)
 	 */
 	public boolean isAnchor();
 
@@ -97,24 +97,26 @@ public interface LiferayPortletURL
 	 * copied to this URL.
 	 *
 	 * @return whether the render parameters in the current request should be
-	 *		   copied to this URL
-	 * @see	   #setCopyCurrentRenderParameters(boolean)
+	 *         copied to this URL
+	 * @see    #setCopyCurrentRenderParameters(boolean)
 	 */
 	public boolean isCopyCurrentRenderParameters();
 
 	/**
 	 * Determines if this URL should be encrypted.
 	 *
-	 * @return true if this URL should be encrypted; false otherwise
-	 * @see	   #setEncrypt(boolean)
+	 * @return <code>true</code> if this URL should be encrypted;
+	 *         <code>false</code> otherwise
+	 * @see    #setEncrypt(boolean)
 	 */
 	public boolean isEncrypt();
 
 	/**
 	 * Determines if this URL should be XML escaped.
 	 *
-	 * @return true if this URL should be XML escaped; false otherwise
-	 * @see	   #setEscapeXml(boolean)
+	 * @return <code>true</code> if this URL should be XML escaped;
+	 *         <code>false</code> otherwise
+	 * @see    #setEscapeXml(boolean)
 	 */
 	public boolean isEscapeXml();
 
@@ -123,14 +125,15 @@ public interface LiferayPortletURL
 	 *
 	 * @param  name the name of the parameter to check for inclusion in the path
 	 * @return whether the parameter is included in the friendly URL path
-	 * @see	   #addParameterIncludedInPath(String)
+	 * @see    #addParameterIncludedInPath(String)
 	 */
 	public boolean isParameterIncludedInPath(String name);
 
 	/**
 	 * Determines if this URL is secure (https).
 	 *
-	 * @return true if this URL is secure; false otherwise
+	 * @return <code>true</code> if this URL is secure; <code>false</code>
+	 *         otherwise
 	 */
 	public boolean isSecure();
 
@@ -163,9 +166,9 @@ public interface LiferayPortletURL
 	 * @param name the name of the URL parameter
 	 * @param value the value of the URL parameter
 	 * @param append whether the new value should be appended to any existing
-	 *		  values for the parameter. If <code>append</code> is
-	 *		  <code>false</code> any existing values will be overwritten with
-	 *		  the new value.
+	 *        values for the parameter. If <code>append</code> is
+	 *        <code>false</code> any existing values will be overwritten with
+	 *        the new value.
 	 */
 	public void setParameter(String name, String value, boolean append);
 
@@ -174,9 +177,9 @@ public interface LiferayPortletURL
 	 *
 	 * @param name the name of the URL parameter
 	 * @param append whether the new values should be appended to any existing
-	 *		  values for the parameter. If <code>append</code> is
-	 *		  <code>false</code> any existing values will be overwritten with
-	 *		  the new values.
+	 *        values for the parameter. If <code>append</code> is
+	 *        <code>false</code> any existing values will be overwritten with
+	 *        the new values.
 	 */
 	public void setParameter(String name, String[] values, boolean append);
 
@@ -192,7 +195,7 @@ public interface LiferayPortletURL
 	 * </p>
 	 *
 	 * @param anchor whether this URL is an anchor pointing to the specified
-	 *		  portlet on the page
+	 *        portlet on the page
 	 */
 	public void setAnchor(boolean anchor);
 
@@ -206,21 +209,21 @@ public interface LiferayPortletURL
 	 * </p>
 	 *
 	 * @param copyCurrentRenderParameters whether the render parameters in the
-	 *		  current request should be copied to this URL
+	 *        current request should be copied to this URL
 	 */
 	public void setCopyCurrentRenderParameters(
 		boolean copyCurrentRenderParameters);
 
 	/**
-	 * Sets the id of the user to impersonate.
+	 * Sets the ID of the user to impersonate.
 	 *
 	 * <p>
 	 * When a page is accessed while impersonating a user, it will appear
 	 * exactly as it would to that user.
 	 * </p>
 	 *
-	 * @param doAsUserId the id of the user to impersonate in the portlet this
-	 *		  URL points to
+	 * @param doAsUserId the ID of the user to impersonate in the portlet this
+	 *        URL points to
 	 */
 	public void setDoAsUserId(long doAsUserId);
 
@@ -256,14 +259,14 @@ public interface LiferayPortletURL
 	public void setEscapeXml(boolean escapeXml);
 
 	/**
-	 * Sets the portlet layout id.
+	 * Sets the portlet layout ID.
 	 *
-	 * @param plid the portlet layout id
+	 * @param plid the portlet layout ID
 	 */
 	public void setPlid(long plid);
 
 	/**
-	 * Sets the id of the target portlet.
+	 * Sets the ID of the target portlet.
 	 */
 	public void setPortletId(String portletId);
 

@@ -15,9 +15,9 @@
 package com.liferay.taglib.util;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated This class has been repackaged at
- *			   <code>com.liferay.portal.kernel.servlet</code>.
+ *             <code>com.liferay.portal.kernel.servlet</code>.
  */
 public class PortalIncludeUtil
 	extends com.liferay.portal.kernel.servlet.PortalIncludeUtil {

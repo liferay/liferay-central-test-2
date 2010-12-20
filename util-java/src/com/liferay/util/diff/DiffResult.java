@@ -30,9 +30,9 @@ import java.util.List;
  * already highlighted, indicating where the changes are.
  * </p>
  *
- * @author	   Bruno Farache
+ * @author     Bruno Farache
  * @deprecated This class has been repackaged at
- *			   <code>com.liferay.portal.kernel.util</code>.
+ *             <code>com.liferay.portal.kernel.util</code>.
  */
 public class DiffResult {
 

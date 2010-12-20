@@ -29,7 +29,7 @@ import java.util.List;
  * </p>
  *
  * @author Bruno Farache
- * @see	   com.liferay.portal.kernel.util.DiffUtil
+ * @see    com.liferay.portal.kernel.util.DiffUtil
  */
 public class DiffUtil {
 

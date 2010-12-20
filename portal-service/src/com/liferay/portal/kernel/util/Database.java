@@ -21,8 +21,8 @@ import java.sql.SQLException;
 import javax.naming.NamingException;
 
 /**
- * @author	   Ganesh Ram
- * @author	   Brian Wing Shun Chan
+ * @author     Ganesh Ram
+ * @author     Brian Wing Shun Chan
  * @deprecated {@link com.liferay.portal.kernel.dao.db.DB}
  */
 public interface Database {

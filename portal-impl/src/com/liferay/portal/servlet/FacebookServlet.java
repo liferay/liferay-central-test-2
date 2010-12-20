@@ -15,7 +15,7 @@
 package com.liferay.portal.servlet;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated {@link com.liferay.portal.facebook.FacebookServlet}
  */
 public class FacebookServlet

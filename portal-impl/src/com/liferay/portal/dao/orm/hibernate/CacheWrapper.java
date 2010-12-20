@@ -25,7 +25,7 @@ import org.hibernate.cache.Cache;
 import org.hibernate.cache.CacheException;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated
  */
 public class CacheWrapper implements Cache, CacheRegistryItem {

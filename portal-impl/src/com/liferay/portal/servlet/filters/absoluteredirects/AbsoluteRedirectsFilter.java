@@ -30,8 +30,8 @@ import javax.servlet.http.HttpSession;
 /**
  * <p>
  * This filter is used to ensure that all redirects are absolute. It should not
- * be disabled because it also sets the company id in the request so that
- * subsequent calls in the thread have the company id properly set. This filter
+ * be disabled because it also sets the company ID in the request so that
+ * subsequent calls in the thread have the company ID properly set. This filter
  * should also always be the first filter in the list of filters.
  * </p>
  *

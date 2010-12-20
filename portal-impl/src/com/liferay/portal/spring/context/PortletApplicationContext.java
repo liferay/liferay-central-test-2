@@ -39,8 +39,8 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see	   PortletContextLoader
- * @see	   PortletContextLoaderListener
+ * @see    PortletContextLoader
+ * @see    PortletContextLoaderListener
  */
 public class PortletApplicationContext extends XmlWebApplicationContext {
 

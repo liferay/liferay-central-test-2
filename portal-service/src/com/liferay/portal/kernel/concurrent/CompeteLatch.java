@@ -59,8 +59,8 @@ public class CompeteLatch {
 	 * winner thread calls this method before his job completed, then all
 	 * threads will deadlock.
 	 *
-	 * @return true if the latch was open, false if the waiting time elapsed
-	 *		   before the latch be opened.
+	 * @return <code>true</code> if the latch was open, <code>false</code> if
+	 *         the waiting time elapsed before the latch be opened.
 	 * @throws InterruptedException if the current thread is interrupted
 	 */
 	public boolean await(long timeout, TimeUnit timeUnit)
@@ -91,8 +91,8 @@ public class CompeteLatch {
 	 * get out of a deadlock. If no one threads have locked the latch, then
 	 * calling this method has no effect. This method will return immediately.
 	 *
-	 * @return true if this call opens the latch, <code>false</code> if the
-	 *		   latch is already open
+	 * @return <code>true</code> if this call opens the latch,
+	 *         <code>false</code> if the latch is already open
 	 */
 	public boolean done() {
 		return _sync.releaseShared(1);

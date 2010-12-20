@@ -35,8 +35,8 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
  * @author Brian Wing Shun Chan
- * @see	   PortletApplicationContext
- * @see	   PortletContextLoader
+ * @see    PortletApplicationContext
+ * @see    PortletContextLoader
  */
 public class PortletContextLoaderListener extends ContextLoaderListener {
 

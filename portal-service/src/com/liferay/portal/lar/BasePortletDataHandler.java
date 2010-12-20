@@ -15,9 +15,9 @@
 package com.liferay.portal.lar;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated This class has been repackaged at
- *			   <code>com.liferay.portal.kernel.lar</code>.
+ *             <code>com.liferay.portal.kernel.lar</code>.
  */
 public abstract class BasePortletDataHandler
 	extends com.liferay.portal.kernel.lar.BasePortletDataHandler {

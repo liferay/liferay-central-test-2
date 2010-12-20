@@ -25,8 +25,8 @@ import java.util.regex.Pattern;
  *
  * @author Connor McKay
  * @author Brian Wing Shun Chan
- * @see	   com.liferay.portal.kernel.portlet.Route
- * @see	   Pattern
+ * @see    com.liferay.portal.kernel.portlet.Route
+ * @see    Pattern
  */
 public class StringParser {
 
@@ -143,7 +143,7 @@ public class StringParser {
 	 *
 	 * @param  parameters the parameter map to build the string from
 	 * @return the string, or <code>null</code> if this parser is not
-	 *		   appropriate
+	 *         appropriate
 	 */
 	public String build(Map<String, String> parameters) {
 		String s = _builder;
@@ -203,9 +203,9 @@ public class StringParser {
 	 *
 	 * @param  s the string to parse
 	 * @param  parameters the parameter map to populate if this parser matches
-	 *		   the string
+	 *         the string
 	 * @return <code>true</code> if this parser matches; <code>false</code>
-	 *		   otherwise
+	 *         otherwise
 	 */
 	public boolean parse(String s, Map<String, String> parameters) {
 		Matcher matcher = _pattern.matcher(s);
@@ -239,8 +239,8 @@ public class StringParser {
 	 * </p>
 	 *
 	 * @param stringEncoder the string encoder to use for parsing or building a
-	 *		  string
-	 * @see	  StringEncoder
+	 *        string
+	 * @see   StringEncoder
 	 */
 	public void setStringEncoder(StringEncoder stringEncoder) {
 		_stringEncoder = stringEncoder;

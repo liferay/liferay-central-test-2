@@ -20,9 +20,9 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated Use {@link DateFormatFactoryUtil} or {@link
- *			   FastDateFormatFactoryUtil}
+ *             FastDateFormatFactoryUtil}
  */
 public class DateFormats {
 

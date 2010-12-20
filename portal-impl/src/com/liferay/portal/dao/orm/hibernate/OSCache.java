@@ -29,8 +29,8 @@ import org.hibernate.cache.CacheException;
 import org.hibernate.cache.Timestamper;
 
 /**
- * @author	   Mathias Bogaert
- * @author	   Brian Wing Shun Chan
+ * @author     Mathias Bogaert
+ * @author     Brian Wing Shun Chan
  * @deprecated
  */
 public class OSCache implements Cache {

@@ -33,7 +33,7 @@ import java.lang.reflect.Method;
  * </p>
  *
  * @author Shuyang Zhou
- * @see	   AutoEscape
+ * @see    AutoEscape
  */
 public class AutoEscapeBeanHandler implements InvocationHandler {
 

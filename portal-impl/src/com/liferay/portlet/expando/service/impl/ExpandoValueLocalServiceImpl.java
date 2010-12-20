@@ -531,7 +531,7 @@ public class ExpandoValueLocalServiceImpl
 
 	/**
 	 * @deprecated {@link #addValue(long, String, String, String, long,
-	 *			   boolean[])}
+	 *             boolean[])}
 	 */
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
@@ -546,7 +546,7 @@ public class ExpandoValueLocalServiceImpl
 
 	/**
 	 * @deprecated {@link #addValue(long, String, String, String, long,
-	 *			   boolean[])}
+	 *             boolean[])}
 	 */
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
@@ -589,7 +589,7 @@ public class ExpandoValueLocalServiceImpl
 
 	/**
 	 * @deprecated {@link #addValue(long, String, String, String, long,
-	 *			   double[])}
+	 *             double[])}
 	 */
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
@@ -604,7 +604,7 @@ public class ExpandoValueLocalServiceImpl
 
 	/**
 	 * @deprecated {@link #addValue(long, String, String, String, long,
-	 *			   double[])}
+	 *             double[])}
 	 */
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
@@ -619,7 +619,7 @@ public class ExpandoValueLocalServiceImpl
 
 	/**
 	 * @deprecated {@link #addValue(long, String, String, String, long,
-	 *			   float[])}
+	 *             float[])}
 	 */
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
@@ -634,7 +634,7 @@ public class ExpandoValueLocalServiceImpl
 
 	/**
 	 * @deprecated {@link #addValue(long, String, String, String, long,
-	 *			   float[])}
+	 *             float[])}
 	 */
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
@@ -719,7 +719,7 @@ public class ExpandoValueLocalServiceImpl
 
 	/**
 	 * @deprecated {@link #addValue(long, String, String, String, long,
-	 *			   short[])}
+	 *             short[])}
 	 */
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
@@ -734,7 +734,7 @@ public class ExpandoValueLocalServiceImpl
 
 	/**
 	 * @deprecated {@link #addValue(long, String, String, String, long,
-	 *			   short[])}
+	 *             short[])}
 	 */
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
@@ -749,7 +749,7 @@ public class ExpandoValueLocalServiceImpl
 
 	/**
 	 * @deprecated {@link #addValue(long, String, String, String, long,
-	 *			   String[])}
+	 *             String[])}
 	 */
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
@@ -764,7 +764,7 @@ public class ExpandoValueLocalServiceImpl
 
 	/**
 	 * @deprecated {@link #addValue(long, String, String, String, long,
-	 *			   String[])}
+	 *             String[])}
 	 */
 	public ExpandoValue addValue(
 			String className, String tableName, String columnName, long classPK,
@@ -976,7 +976,7 @@ public class ExpandoValueLocalServiceImpl
 
 	/**
 	 * @deprecated {@link #getColumnValues(long, String, String, String, String,
-	 *			   int, int)}
+	 *             int, int)}
 	 */
 	public List<ExpandoValue> getColumnValues(
 			String className, String tableName, String columnName, String data,
@@ -1063,7 +1063,7 @@ public class ExpandoValueLocalServiceImpl
 
 	/**
 	 * @deprecated {@link #getColumnValuesCount(long, String, String, String,
-	 *			   String)}
+	 *             String)}
 	 */
 	public int getColumnValuesCount(
 			String className, String tableName, String columnName, String data)
@@ -1442,7 +1442,7 @@ public class ExpandoValueLocalServiceImpl
 
 	/**
 	 * @deprecated {@link #getData(long, String, String, String, long,
-	 *			   boolean[])}
+	 *             boolean[])}
 	 */
 	public boolean getData(
 			String className, String tableName, String columnName, long classPK,
@@ -1457,7 +1457,7 @@ public class ExpandoValueLocalServiceImpl
 
 	/**
 	 * @deprecated {@link #getData(long, String, String, String, long,
-	 *			   boolean[])}
+	 *             boolean[])}
 	 */
 	public boolean[] getData(
 			String className, String tableName, String columnName, long classPK,
@@ -1500,7 +1500,7 @@ public class ExpandoValueLocalServiceImpl
 
 	/**
 	 * @deprecated {@link #getData(long, String, String, String, long,
-	 *			   double[])}
+	 *             double[])}
 	 */
 	public double getData(
 			String className, String tableName, String columnName, long classPK,
@@ -1515,7 +1515,7 @@ public class ExpandoValueLocalServiceImpl
 
 	/**
 	 * @deprecated {@link #getData(long, String, String, String, long,
-	 *			   double[])}
+	 *             double[])}
 	 */
 	public double[] getData(
 			String className, String tableName, String columnName, long classPK,
@@ -1642,7 +1642,7 @@ public class ExpandoValueLocalServiceImpl
 
 	/**
 	 * @deprecated {@link #getData(long, String, String, String, long,
-	 *			   String[])}
+	 *             String[])}
 	 */
 	public String getData(
 			String className, String tableName, String columnName, long classPK,
@@ -1657,7 +1657,7 @@ public class ExpandoValueLocalServiceImpl
 
 	/**
 	 * @deprecated {@link #getData(long, String, String, String, long,
-	 *			   String[])}
+	 *             String[])}
 	 */
 	public String[] getData(
 			String className, String tableName, String columnName, long classPK,

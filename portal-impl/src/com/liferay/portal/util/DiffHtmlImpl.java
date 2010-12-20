@@ -54,7 +54,7 @@ public class DiffHtmlImpl implements DiffHtml {
 	 * This is a diff method with default values.
 	 *
 	 * @return a string containing the HTML code of the source text showing the
-	 *		   differences with the target text
+	 *         differences with the target text
 	 */
 	public String diff(Reader source, Reader target) throws Exception {
 		InputSource oldSource = new InputSource(source);

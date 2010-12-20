@@ -307,11 +307,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @param  creatorUserId the user ID of the creator
 	 * @param  companyId the company ID the user
 	 * @param  autoPassword whether a password should be automatically generated
-	 *		   for the user
+	 *         for the user
 	 * @param  password1 the user's password
 	 * @param  password2 the user's password confirmation
 	 * @param  autoScreenName whether a screen name should be automatically
-	 *		   generated for the user
+	 *         generated for the user
 	 * @param  screenName the user's screen name
 	 * @param  emailAddress the user's email address
 	 * @param  facebookId the user's facebook ID
@@ -324,7 +324,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @param  suffixId the user's name suffix ID
 	 * @param  male whether the user is male
 	 * @param  birthdayMonth the user's birthday month (0-based, meaning 0 for
-	 *		   January)
+	 *         January)
 	 * @param  birthdayDay the user's birthday day
 	 * @param  birthdayYear the user's birthday year
 	 * @param  jobTitle the user's job title
@@ -333,7 +333,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @param  roleIds the IDs of the roles this user possesses
 	 * @param  userGroupIds the IDs of the user groups this user belongs to
 	 * @param  sendEmail whether to send the user an email notification about
-	 *		   their new account
+	 *         their new account
 	 * @param  serviceContext the service context for the user
 	 * @return the new user
 	 * @throws PortalException if the user's information is invalid

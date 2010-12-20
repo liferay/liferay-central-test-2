@@ -15,7 +15,7 @@
 package com.liferay.util;
 
 /**
- * @author	   Jorge Ferrer
+ * @author     Jorge Ferrer
  * @deprecated {@link com.liferay.portal.kernel.plugin.Version}
  */
 public class Version extends com.liferay.portal.kernel.plugin.Version {

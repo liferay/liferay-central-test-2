@@ -38,7 +38,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
  * <p>
  * A transaction manager class loader proxy delegating the method invocations to
  * the transaction manager in the portal implementation. The transaction manager
- * within the portal must be specified as a Spring bean having id
+ * within the portal must be specified as a Spring bean having ID
  * <code>"liferayTransactionManager"</code>.
  * </p>
  *

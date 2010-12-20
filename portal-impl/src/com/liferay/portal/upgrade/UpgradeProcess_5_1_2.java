@@ -20,7 +20,7 @@ import com.liferay.portal.upgrade.v5_1_2.UpgradeCalendar;
 import com.liferay.portal.upgrade.v5_1_2.UpgradeSchema;
 
 /**
- * @author	   Jorge Ferrer
+ * @author     Jorge Ferrer
  * @deprecated
  */
 public class UpgradeProcess_5_1_2 extends UpgradeProcess {

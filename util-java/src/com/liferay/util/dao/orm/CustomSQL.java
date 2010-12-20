@@ -236,7 +236,7 @@ public class CustomSQL {
 	 * database.
 	 *
 	 * @return <code>true</code> if Hibernate is connecting to an Informix
-	 *		   database
+	 *         database
 	 */
 	public boolean isVendorInformix() {
 		return _vendorInformix;
@@ -259,7 +259,7 @@ public class CustomSQL {
 	 * this nasty bug.
 	 *
 	 * @return <code>true</code> if Hibernate is connecting to an Oracle
-	 *		   database
+	 *         database
 	 */
 	public boolean isVendorOracle() {
 		return _vendorOracle;
@@ -270,7 +270,7 @@ public class CustomSQL {
 	 * database.
 	 *
 	 * @return <code>true</code> if Hibernate is connecting to a PostgreSQL
-	 *		   database
+	 *         database
 	 */
 	public boolean isVendorPostgreSQL() {
 		return _vendorPostgreSQL;

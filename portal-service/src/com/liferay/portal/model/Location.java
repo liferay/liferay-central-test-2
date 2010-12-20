@@ -17,7 +17,7 @@ package com.liferay.portal.model;
 import java.io.Serializable;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated
  */
 public interface Location extends Serializable {

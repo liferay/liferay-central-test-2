@@ -32,9 +32,9 @@ public class MimeTypesUtil {
 	 * Determine the content type from an input stream and file name.
 	 *
 	 * @param  fileName full name or extension of file (e.g., "Test.doc",
-	 *		   ".doc")
+	 *         ".doc")
 	 * @return content type if it is a supported format or an empty string if it
-	 *		   is an unsupported format
+	 *         is an unsupported format
 	 */
 	public static String getContentType(
 		InputStream inputStream, String fileName) {
@@ -46,9 +46,9 @@ public class MimeTypesUtil {
 	 * Determine the content type from a file name.
 	 *
 	 * @param  fileName full name or extension of file (e.g., "Test.doc",
-	 *		   ".doc")
+	 *         ".doc")
 	 * @return content type if it is a supported format or an empty string if it
-	 *		   is an unsupported format
+	 *         is an unsupported format
 	 */
 	public static String getContentType(String fileName) {
 		return getMimeTypes().getContentType(fileName);

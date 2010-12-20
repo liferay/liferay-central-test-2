@@ -15,7 +15,7 @@
 package com.liferay.util;
 
 /**
- * @author	   Jorge Ferrer
+ * @author     Jorge Ferrer
  * @deprecated {@link com.liferay.portal.kernel.plugin.Screenshot}
  */
 public class Screenshot extends com.liferay.portal.kernel.plugin.Screenshot {

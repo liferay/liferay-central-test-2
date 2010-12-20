@@ -37,8 +37,8 @@ import java.util.Map;
  *
  * @author Connor McKay
  * @author Brian Wing Shun Chan
- * @see	   Route
- * @see	   DefaultFriendlyURLMapper
+ * @see    Route
+ * @see    DefaultFriendlyURLMapper
  */
 public interface Router {
 
@@ -55,7 +55,7 @@ public interface Router {
 	 *
 	 * @param  parameters the parameter map
 	 * @return the URL path, or <code>null</code> if an applicable route was not
-	 *		   found
+	 *         found
 	 */
 	public String parametersToUrl(Map<String, String> parameters);
 
@@ -65,8 +65,8 @@ public interface Router {
 	 * @param  url the URL to be parsed
 	 * @param  parameters the parameter map to be populated
 	 * @return <code>true</code> if a match was found and
-	 *		   <code>parameters</code> was populated; <code>false</code>
-	 *		   otherwise
+	 *         <code>parameters</code> was populated; <code>false</code>
+	 *         otherwise
 	 */
 	public boolean urlToParameters(String url, Map<String, String> parameters);
 

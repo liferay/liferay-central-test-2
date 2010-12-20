@@ -49,9 +49,9 @@ import com.liferay.portal.kernel.util.StringBundler;
 import java.io.Serializable;
 
 /**
- * @author	   Jonathan Lennox
+ * @author     Jonathan Lennox
  * @deprecated This class has been repackaged at
- *			   <code>com.liferay.portal.kernel.cal</code>.
+ *             <code>com.liferay.portal.kernel.cal</code>.
  */
 public class Duration implements Cloneable, Serializable {
 

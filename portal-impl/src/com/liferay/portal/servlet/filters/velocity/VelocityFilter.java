@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author	   Brian Wing Shun Chan
- * @author	   Raymond Aug�
+ * @author     Brian Wing Shun Chan
+ * @author     Raymond Aug�
  * @deprecated
  */
 public class VelocityFilter extends BasePortalFilter {

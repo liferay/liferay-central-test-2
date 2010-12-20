@@ -28,9 +28,9 @@ import java.util.Map;
  * @author Brian Myunghun Kim
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
- * @see	   BaseFriendlyURLMapper
- * @see	   DefaultFriendlyURLMapper
- * @see	   com.liferay.portlet.PortletURLImpl
+ * @see    BaseFriendlyURLMapper
+ * @see    DefaultFriendlyURLMapper
+ * @see    com.liferay.portlet.PortletURLImpl
  */
 public interface FriendlyURLMapper {
 
@@ -38,10 +38,10 @@ public interface FriendlyURLMapper {
 	 * Generates a friendly URL path from the portlet URL object.
 	 *
 	 * @param  liferayPortletURL the portlet URL object to generate a friendly
-	 *		   URL for
+	 *         URL for
 	 * @return the generated friendly URL, or <code>null</code> if one cannot be
-	 *		   built. Returning <code>null</code> will cause a normal portlet
-	 *		   URL to be generated.
+	 *         built. Returning <code>null</code> will cause a normal portlet
+	 *         URL to be generated.
 	 */
 	public String buildPath(LiferayPortletURL liferayPortletURL);
 
@@ -61,14 +61,14 @@ public interface FriendlyURLMapper {
 	 * </p>
 	 *
 	 * @return the friendly URL mapping for this portlet, not including any
-	 *		   leading or trailing slashes
+	 *         leading or trailing slashes
 	 */
 	public String getMapping();
 
 	/**
-	 * Gets the id of this portlet
+	 * Gets the ID of this portlet
 	 *
-	 * @return the id of this portlet, not including the instance id
+	 * @return the ID of this portlet, not including the instance ID
 	 */
 	public String getPortletId();
 
@@ -100,8 +100,8 @@ public interface FriendlyURLMapper {
 	 * </p>
 	 *
 	 * @return <code>true</code> if the &quot;/-/&quot; separator should be
-	 *		   included in friendly URLs, or <code>false</code> if only a
-	 *		   &quot;/&quot; should be used
+	 *         included in friendly URLs, or <code>false</code> if only a
+	 *         &quot;/&quot; should be used
 	 */
 	public boolean isCheckMappingWithPrefix();
 
@@ -110,12 +110,12 @@ public interface FriendlyURLMapper {
 	 *
 	 * <p>
 	 * The value returned from this method has no effect on whether a portlet is
-	 * instanceable, it is a helper method used to determine if the instance id
+	 * instanceable, it is a helper method used to determine if the instance ID
 	 * should be included in the URL.
 	 * </p>
 	 *
 	 * @return <code>true</code> if the portlet is instanceable;
-	 *		   <code>false</code> otherwise
+	 *         <code>false</code> otherwise
 	 */
 	public boolean isPortletInstanceable();
 
@@ -129,13 +129,13 @@ public interface FriendlyURLMapper {
 	 * </p>
 	 *
 	 * @param friendlyURLPath the friendly URL path to parse, including a
-	 *		  leading slash and the friendly URL mapping. For example:
-	 *		  <code>/blogs/example-post</code>
+	 *        leading slash and the friendly URL mapping. For example:
+	 *        <code>/blogs/example-post</code>
 	 * @param parameterMap the parameter map to populate. Entries added to this
-	 *		  map must be namespaced.
+	 *        map must be namespaced.
 	 * @param requestContext the request context
-	 * @see	  BaseFriendlyURLMapper#addParameter(Map, String, String)
-	 * @see	  BaseFriendlyURLMapper#addParameter(String, Map, String, String)
+	 * @see   BaseFriendlyURLMapper#addParameter(Map, String, String)
+	 * @see   BaseFriendlyURLMapper#addParameter(String, Map, String, String)
 	 */
 	public void populateParams(
 		String friendlyURLPath, Map<String, String[]> parameterMap,
@@ -155,15 +155,15 @@ public interface FriendlyURLMapper {
 	public void setMapping(String mapping);
 
 	/**
-	 * Sets the id of this portlet.
+	 * Sets the ID of this portlet.
 	 *
 	 * <p>
 	 * This method is automatically called by {@link
-	 * com.liferay.portlet.PortletBagFactory} with the portlet id defined in
+	 * com.liferay.portlet.PortletBagFactory} with the portlet ID defined in
 	 * <code>liferay-portlet.xml</code>.
 	 * </p>
 	 *
-	 * @param portletId the id of this portlet.
+	 * @param portletId the ID of this portlet.
 	 */
 	public void setPortletId(String portletId);
 

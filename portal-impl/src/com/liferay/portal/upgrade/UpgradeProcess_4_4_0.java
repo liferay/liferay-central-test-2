@@ -25,7 +25,7 @@ import com.liferay.portal.upgrade.v4_4_0.UpgradeTags;
 import com.liferay.portal.upgrade.v4_4_0.UpgradeUUID;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated
  */
 public class UpgradeProcess_4_4_0 extends UpgradeProcess {

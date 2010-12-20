@@ -27,8 +27,8 @@ import org.springframework.transaction.annotation.TransactionAnnotationParser;
 import org.springframework.transaction.interceptor.TransactionAttribute;
 
 /**
- * @author	   Michael Young
- * @author	   Shuyang Zhou
+ * @author     Michael Young
+ * @author     Shuyang Zhou
  * @deprecated
  */
 public class PortalTransactionAnnotationParser

@@ -25,9 +25,9 @@ import java.util.Set;
  *
  * @author Connor McKay
  * @author Brian Wing Shun Chan
- * @see	   Router
- * @see	   com.liferay.portlet.RouteImpl
- * @see	   com.liferay.portal.kernel.util.StringParser
+ * @see    Router
+ * @see    com.liferay.portlet.RouteImpl
+ * @see    com.liferay.portal.kernel.util.StringParser
  */
 public interface Route {
 
@@ -154,7 +154,7 @@ public interface Route {
 	 * Gets the generated parameters for this route.
 	 *
 	 * @return the generated parameter names and string parsers
-	 * @see	   #addGeneratedParameter(String, String)
+	 * @see    #addGeneratedParameter(String, String)
 	 */
 	public Map<String, StringParser> getGeneratedParameters();
 
@@ -162,7 +162,7 @@ public interface Route {
 	 * Gets the ignored parameters for this route.
 	 *
 	 * @return the ignored parameter names
-	 * @see	   #addIgnoredParameter(String)
+	 * @see    #addIgnoredParameter(String)
 	 */
 	public Set<String> getIgnoredParameters();
 
@@ -170,7 +170,7 @@ public interface Route {
 	 * Gets the implicit parameters for this route.
 	 *
 	 * @return the implicit parameter names and values
-	 * @see	   #addImplicitParameter(String, String)
+	 * @see    #addImplicitParameter(String, String)
 	 */
 	public Map<String, String> getImplicitParameters();
 
@@ -178,7 +178,7 @@ public interface Route {
 	 * Gets the overridden parameters for this route.
 	 *
 	 * @return the overridden parameter names and values
-	 * @see	   #addOverriddenParameter(String, String)
+	 * @see    #addOverriddenParameter(String, String)
 	 */
 	public Map<String, String> getOverriddenParameters();
 
@@ -205,7 +205,7 @@ public interface Route {
 	 *
 	 * @param  parameters the parameter map to build the URL from
 	 * @return the URL path, or <code>null</code> if this route is not
-	 *		   appropriate
+	 *         appropriate
 	 */
 	public String parametersToUrl(Map<String, String> parameters);
 
@@ -226,9 +226,9 @@ public interface Route {
 	 *
 	 * @param  url the URL path to parse
 	 * @param  parameters the parameter map to populate if this route matches
-	 *		   the URL
+	 *         the URL
 	 * @return <code>true</code> if the route matches; <code>false</code>
-	 *		   otherwise
+	 *         otherwise
 	 */
 	public boolean urlToParameters(String url, Map<String, String> parameters);
 

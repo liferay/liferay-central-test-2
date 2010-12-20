@@ -273,7 +273,7 @@ public class SocialEquityLogLocalServiceImpl
 
 	/**
 	 * @deprecated {@link #deactivateEquityLogs(long, String, long, String,
-	 *			   String)}
+	 *             String)}
 	 */
 	public void deactivateEquityLogs(
 			long userId, String className, long classPK, String actionId)

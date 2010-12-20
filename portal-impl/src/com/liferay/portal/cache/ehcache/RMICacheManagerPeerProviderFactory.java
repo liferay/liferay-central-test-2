@@ -15,7 +15,7 @@
 package com.liferay.portal.cache.ehcache;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated {@link LiferayCacheManagerPeerProviderFactory}
  */
 public class RMICacheManagerPeerProviderFactory

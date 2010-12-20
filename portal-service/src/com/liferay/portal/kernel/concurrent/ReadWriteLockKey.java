@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.util.Validator;
  * </p>
  *
  * @author Shuyang Zhou
- * @see	   ReadWriteLockRegistry
+ * @see    ReadWriteLockRegistry
  */
 public class ReadWriteLockKey<T> {
 

@@ -110,9 +110,9 @@ public class FileUtil {
 	 *
 	 * @param  is input stream of file
 	 * @param  fileName full name or extension of file (e.g., "Test.doc",
-	 *		   ".doc")
+	 *         ".doc")
 	 * @return Extracted text if it is a supported format or an empty string if
-	 *		   it is an unsupported format
+	 *         it is an unsupported format
 	 */
 	public static String extractText(InputStream is, String fileName) {
 		return getFile().extractText(is, fileName);

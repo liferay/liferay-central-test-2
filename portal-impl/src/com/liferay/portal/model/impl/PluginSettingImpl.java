@@ -49,7 +49,7 @@ public class PluginSettingImpl
 	}
 
 	/**
-	 * Sets a string of ordered comma delimited plugin ids.
+	 * Sets a string of ordered comma delimited plugin IDs.
 	 */
 	public void setRoles(String roles) {
 		_rolesArray = StringUtil.split(roles);
@@ -80,7 +80,7 @@ public class PluginSettingImpl
 	 * name.
 	 *
 	 * @return <code>true</code> if the plugin has a role with the specified
-	 *		   name
+	 *         name
 	 */
 	public boolean hasRoleWithName(String roleName) {
 		for (int i = 0; i < _rolesArray.length; i++) {

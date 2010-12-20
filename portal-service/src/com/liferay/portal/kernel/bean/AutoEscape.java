@@ -29,7 +29,7 @@ import java.lang.annotation.Target;
  * </p>
  *
  * @author Shuyang Zhou
- * @see	   AutoEscapeBeanHandler
+ * @see    AutoEscapeBeanHandler
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

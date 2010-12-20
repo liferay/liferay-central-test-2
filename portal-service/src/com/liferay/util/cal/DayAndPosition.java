@@ -53,9 +53,9 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 /**
- * @author	   Jonathan Lennox
+ * @author     Jonathan Lennox
  * @deprecated This class has been repackaged at
- *			   <code>com.liferay.portal.kernel.cal</code>.
+ *             <code>com.liferay.portal.kernel.cal</code>.
  */
 public class DayAndPosition implements Cloneable, Serializable {
 

@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.util.Validator;
 import java.util.TimeZone;
 
 /**
- * @author	   Samuel Kong
+ * @author     Samuel Kong
  * @deprecated
  */
 public class CalEventRecurrenceUpgradeColumnImpl extends BaseUpgradeColumnImpl {

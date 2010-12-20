@@ -21,9 +21,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author	   Alexander Chow
- * @author	   Brian Wing Shun Chan
- * @author	   Raymond Augé
+ * @author     Alexander Chow
+ * @author     Brian Wing Shun Chan
+ * @author     Raymond Augé
  * @deprecated
  */
 public class JournalVmUtil {

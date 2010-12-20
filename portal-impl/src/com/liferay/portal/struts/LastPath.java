@@ -17,7 +17,7 @@ package com.liferay.portal.struts;
 import java.util.Map;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated {@link com.liferay.portal.kernel.struts.LastPath}
  */
 public class LastPath extends com.liferay.portal.kernel.struts.LastPath {

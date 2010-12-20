@@ -165,7 +165,7 @@ public interface Http {
 	 * implementation is used.
 	 *
 	 * @return A string representation of the resource referenced by the URL
-	 *		   object
+	 *         object
 	 */
 	public String URLtoString(URL url) throws IOException;
 

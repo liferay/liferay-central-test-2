@@ -17,9 +17,9 @@ package com.liferay.util.servlet;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author	   Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated This class has been repackaged at
- *			   <code>com.liferay.portal.kernel.servlet</code>.
+ *             <code>com.liferay.portal.kernel.servlet</code>.
  */
 public class ProtectedServletRequest
 	extends com.liferay.portal.kernel.servlet.ProtectedServletRequest {
