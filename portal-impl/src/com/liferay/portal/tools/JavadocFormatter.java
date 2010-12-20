@@ -210,54 +210,15 @@ public class JavadocFormatter {
 			}
 		}
 
-		int indentLength =_getIndentLength(indent) + maxNameLength;
+		// There should be one space after the name and an @ before it
 
-		String maxNameIndent = "\t ";
+		maxNameLength += 2;
 
-		for (int i = 0; i < maxNameLength; i++) {
-			maxNameIndent += " ";
-		}
+		int indentLength = _getIndentLength(indent) + maxNameLength;
 
-		maxNameIndent = StringUtil.replace(
-			maxNameIndent, StringPool.FOUR_SPACES, "\t");
+		String nameIndent = _getSpacesIndent(maxNameLength);
 
 		for (String name : names) {
-			String curNameIndent = " ";
-
-			if (name.length() < maxNameLength) {
-				int firstTab = 4 - (name.length() % 4);
-
-				int delta = (maxNameLength + 1) - (name.length() + firstTab);
-
-				if (delta == 0) {
-					curNameIndent = "\t";
-				}
-				else if (delta < 0) {
-					for (int i = 0; i < (maxNameLength - name.length()); i++) {
-						curNameIndent += " ";
-					}
-				}
-				else if (delta > 0) {
-					curNameIndent = "\t";
-
-					int numberOfTabs = delta / 4;
-
-					if (numberOfTabs > 0) {
-						for (int i = 0; i < numberOfTabs; i++) {
-							curNameIndent += "\t";
-						}
-					}
-
-					int numberOfSpaces = delta % 4;
-
-					if (numberOfSpaces > 0) {
-						for (int i = 0; i < numberOfSpaces; i++) {
-							curNameIndent += " ";
-						}
-					}
-				}
-			}
-
 			List<Element> elements = parentElement.elements(name);
 
 			for (Element element : elements) {
@@ -278,35 +239,28 @@ public class JavadocFormatter {
 					continue;
 				}
 
-				sb.append(indent);
-				sb.append(" * @");
-				sb.append(name);
-
-				if (Validator.isNotNull(comment) || (commentElement != null)) {
-					sb.append(curNameIndent);
-				}
-
 				if (commentElement != null) {
 					comment = element.elementText("name") + " " + comment;
 				}
 
-				comment = StringUtil.wrap(comment, 80 - indentLength - 5, "\n");
-
-				comment = comment.trim();
-
-				comment = StringUtil.replace(
-					comment, "\n", "\n" + indent + " *" + maxNameIndent);
-
-				while (comment.contains(" \n")) {
-					comment = StringUtil.replace(comment, " \n", "\n");
+				if (Validator.isNull(comment)) {
+					sb.append(indent);
+					sb.append(StringPool.AT);
+					sb.append(name);
+					sb.append(StringPool.NEW_LINE);
 				}
+				else {
+					comment = _wrapText(comment, indent + nameIndent);
 
-				while (comment.startsWith("\n")) {
-					comment = comment.substring(1, comment.length());
+					String extraSpace = _getSpacesIndent(
+						maxNameLength - name.length() - 1);
+
+					comment = comment.replaceFirst(
+						Pattern.quote(indent + nameIndent),
+						indent + "@" + name + extraSpace);
+
+					sb.append(comment);
 				}
-
-				sb.append(comment);
-				sb.append("\n");
 			}
 		}
 
@@ -508,6 +462,16 @@ public class JavadocFormatter {
 		return javaField.getName();
 	}
 
+	private String _getSpacesIndent(int length) {
+		String indent = "";
+
+		for (int i = 0; i < length; i++) {
+			indent += StringPool.SPACE;
+		}
+
+		return indent;
+	}
+
 	private int _getIndentLength(String indent) {
 		int indentLength = 0;
 
@@ -572,7 +536,7 @@ public class JavadocFormatter {
 		String comment = rootElement.elementText("comment");
 
 		if (_initializeMissingJavadocs || Validator.isNotNull(comment)) {
-			sb.append(_wrapText(comment, indent));
+			sb.append(_wrapText(comment, indent + " * "));
 		}
 
 		String docletTags = _addDocletTags(
@@ -580,7 +544,7 @@ public class JavadocFormatter {
 			new String[] {
 				"author", "version", "see", "since", "serial", "deprecated"
 			},
-			indent);
+			indent + " * ");
 
 		if (docletTags.length() > 0) {
 			if (_initializeMissingJavadocs || Validator.isNotNull(comment)) {
@@ -659,12 +623,13 @@ public class JavadocFormatter {
 		String comment = fieldElement.elementText("comment");
 
 		if (_initializeMissingJavadocs || Validator.isNotNull(comment)) {
-			sb.append(_wrapText(comment, indent));
+			sb.append(_wrapText(comment, indent + " * "));
 		}
 
 		String docletTags = _addDocletTags(
 			fieldElement,
-			new String[] {"version", "see", "since", "deprecated"}, indent);
+			new String[] {"version", "see", "since", "deprecated"},
+			indent + " * ");
 
 		if (docletTags.length() > 0) {
 			if (_initializeMissingJavadocs || Validator.isNotNull(comment)) {
@@ -720,7 +685,7 @@ public class JavadocFormatter {
 		String comment = methodElement.elementText("comment");
 
 		if (_initializeMissingJavadocs || Validator.isNotNull(comment)) {
-			sb.append(_wrapText(comment, indent));
+			sb.append(_wrapText(comment, indent + " * "));
 		}
 
 		String docletTags = _addDocletTags(
@@ -729,7 +694,7 @@ public class JavadocFormatter {
 				"version", "param", "return", "throws", "see", "since",
 				"deprecated"
 			},
-			indent);
+			indent + " * ");
 
 		if (docletTags.length() > 0) {
 			if (_initializeMissingJavadocs || Validator.isNotNull(comment)) {
@@ -888,6 +853,11 @@ public class JavadocFormatter {
 
 	private String _formatInlines(String text) {
 
+		// Capitalize ID
+
+		text = text.replaceAll("(?i)\\bid\\b", "ID");
+		text = text.replaceAll("(?i)\\bids\\b", "IDs");
+
 		// Wrap special constants in code tags
 
 		text = text.replaceAll(
@@ -1035,7 +1005,7 @@ public class JavadocFormatter {
 				String wrapped = _formatInlines(matcher.group());
 
 				wrapped = StringUtil.wrap(
-					wrapped, 80 - indentLength - 3, "\n");
+					wrapped, 80 - indentLength, "\n");
 
 				matcher.appendReplacement(sb, wrapped);
 			}
@@ -1049,10 +1019,10 @@ public class JavadocFormatter {
 		else {
 			text = _formatInlines(text);
 
-			text = StringUtil.wrap(text, 80 - indentLength - 3, "\n");
+			text = StringUtil.wrap(text, 80 - indentLength, "\n");
 		}
 
-		text = text.replaceAll("(?m)^", indent + " * ");
+		text = text.replaceAll("(?m)^", indent);
 		text = text.replaceAll("(?m) +$", StringPool.BLANK);
 
 		return text;
