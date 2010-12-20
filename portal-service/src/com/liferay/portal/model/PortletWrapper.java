@@ -47,54 +47,54 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Gets the id of this portlet.
+	* Gets the ID of this portlet.
 	*
-	* @return the id of this portlet
+	* @return the ID of this portlet
 	*/
 	public long getId() {
 		return _portlet.getId();
 	}
 
 	/**
-	* Sets the id of this portlet.
+	* Sets the ID of this portlet.
 	*
-	* @param id the id of this portlet
+	* @param id the ID of this portlet
 	*/
 	public void setId(long id) {
 		_portlet.setId(id);
 	}
 
 	/**
-	* Gets the company id of this portlet.
+	* Gets the company ID of this portlet.
 	*
-	* @return the company id of this portlet
+	* @return the company ID of this portlet
 	*/
 	public long getCompanyId() {
 		return _portlet.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this portlet.
+	* Sets the company ID of this portlet.
 	*
-	* @param companyId the company id of this portlet
+	* @param companyId the company ID of this portlet
 	*/
 	public void setCompanyId(long companyId) {
 		_portlet.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the portlet id of this portlet.
+	* Gets the portlet ID of this portlet.
 	*
-	* @return the portlet id of this portlet
+	* @return the portlet ID of this portlet
 	*/
 	public java.lang.String getPortletId() {
 		return _portlet.getPortletId();
 	}
 
 	/**
-	* Sets the portlet id of this portlet.
+	* Sets the portlet ID of this portlet.
 	*
-	* @param portletId the portlet id of this portlet
+	* @param portletId the portlet ID of this portlet
 	*/
 	public void setPortletId(java.lang.String portletId) {
 		_portlet.setPortletId(portletId);
@@ -207,27 +207,27 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Gets the root portlet id of the portlet.
+	* Gets the root portlet ID of the portlet.
 	*
-	* @return the root portlet id of the portlet
+	* @return the root portlet ID of the portlet
 	*/
 	public java.lang.String getRootPortletId() {
 		return _portlet.getRootPortletId();
 	}
 
 	/**
-	* Gets the instance id of the portlet.
+	* Gets the instance ID of the portlet.
 	*
-	* @return the instance id of the portlet
+	* @return the instance ID of the portlet
 	*/
 	public java.lang.String getInstanceId() {
 		return _portlet.getInstanceId();
 	}
 
 	/**
-	* Gets the plugin id of the portlet.
+	* Gets the plugin ID of the portlet.
 	*
-	* @return the plugin id of the portlet
+	* @return the plugin ID of the portlet
 	*/
 	public java.lang.String getPluginId() {
 		return _portlet.getPluginId();
@@ -2135,7 +2135,7 @@ public class PortletWrapper implements Portlet {
 	/**
 	* Set to <code>true</code> if the portlet is ready to be used.
 	*
-	* @param system boolean value for whether the portlet is ready to be used
+	* @param ready whether the portlet is ready to be used
 	*/
 	public void setReady(boolean ready) {
 		_portlet.setReady(ready);
@@ -2499,7 +2499,7 @@ public class PortletWrapper implements Portlet {
 	/**
 	* Returns <code>true</code> if the portlet is found in a WAR file.
 	*
-	* @param portletId the cloned instance portlet id
+	* @param portletId the cloned instance portlet ID
 	* @return a cloned instance of the portlet
 	*/
 	public com.liferay.portal.model.Portlet getClonedInstance(

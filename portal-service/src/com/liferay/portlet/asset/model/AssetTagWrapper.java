@@ -47,72 +47,72 @@ public class AssetTagWrapper implements AssetTag {
 	}
 
 	/**
-	* Gets the tag id of this asset tag.
+	* Gets the tag ID of this asset tag.
 	*
-	* @return the tag id of this asset tag
+	* @return the tag ID of this asset tag
 	*/
 	public long getTagId() {
 		return _assetTag.getTagId();
 	}
 
 	/**
-	* Sets the tag id of this asset tag.
+	* Sets the tag ID of this asset tag.
 	*
-	* @param tagId the tag id of this asset tag
+	* @param tagId the tag ID of this asset tag
 	*/
 	public void setTagId(long tagId) {
 		_assetTag.setTagId(tagId);
 	}
 
 	/**
-	* Gets the group id of this asset tag.
+	* Gets the group ID of this asset tag.
 	*
-	* @return the group id of this asset tag
+	* @return the group ID of this asset tag
 	*/
 	public long getGroupId() {
 		return _assetTag.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this asset tag.
+	* Sets the group ID of this asset tag.
 	*
-	* @param groupId the group id of this asset tag
+	* @param groupId the group ID of this asset tag
 	*/
 	public void setGroupId(long groupId) {
 		_assetTag.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this asset tag.
+	* Gets the company ID of this asset tag.
 	*
-	* @return the company id of this asset tag
+	* @return the company ID of this asset tag
 	*/
 	public long getCompanyId() {
 		return _assetTag.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this asset tag.
+	* Sets the company ID of this asset tag.
 	*
-	* @param companyId the company id of this asset tag
+	* @param companyId the company ID of this asset tag
 	*/
 	public void setCompanyId(long companyId) {
 		_assetTag.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this asset tag.
+	* Gets the user ID of this asset tag.
 	*
-	* @return the user id of this asset tag
+	* @return the user ID of this asset tag
 	*/
 	public long getUserId() {
 		return _assetTag.getUserId();
 	}
 
 	/**
-	* Sets the user id of this asset tag.
+	* Sets the user ID of this asset tag.
 	*
-	* @param userId the user id of this asset tag
+	* @param userId the user ID of this asset tag
 	*/
 	public void setUserId(long userId) {
 		_assetTag.setUserId(userId);

@@ -47,36 +47,36 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	}
 
 	/**
-	* Gets the layout set prototype id of this layout set prototype.
+	* Gets the layout set prototype ID of this layout set prototype.
 	*
-	* @return the layout set prototype id of this layout set prototype
+	* @return the layout set prototype ID of this layout set prototype
 	*/
 	public long getLayoutSetPrototypeId() {
 		return _layoutSetPrototype.getLayoutSetPrototypeId();
 	}
 
 	/**
-	* Sets the layout set prototype id of this layout set prototype.
+	* Sets the layout set prototype ID of this layout set prototype.
 	*
-	* @param layoutSetPrototypeId the layout set prototype id of this layout set prototype
+	* @param layoutSetPrototypeId the layout set prototype ID of this layout set prototype
 	*/
 	public void setLayoutSetPrototypeId(long layoutSetPrototypeId) {
 		_layoutSetPrototype.setLayoutSetPrototypeId(layoutSetPrototypeId);
 	}
 
 	/**
-	* Gets the company id of this layout set prototype.
+	* Gets the company ID of this layout set prototype.
 	*
-	* @return the company id of this layout set prototype
+	* @return the company ID of this layout set prototype
 	*/
 	public long getCompanyId() {
 		return _layoutSetPrototype.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this layout set prototype.
+	* Sets the company ID of this layout set prototype.
 	*
-	* @param companyId the company id of this layout set prototype
+	* @param companyId the company ID of this layout set prototype
 	*/
 	public void setCompanyId(long companyId) {
 		_layoutSetPrototype.setCompanyId(companyId);

@@ -59,44 +59,44 @@ public interface UserTrackerModel extends BaseModel<UserTracker> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the user tracker id of this user tracker.
+	 * Gets the user tracker ID of this user tracker.
 	 *
-	 * @return the user tracker id of this user tracker
+	 * @return the user tracker ID of this user tracker
 	 */
 	public long getUserTrackerId();
 
 	/**
-	 * Sets the user tracker id of this user tracker.
+	 * Sets the user tracker ID of this user tracker.
 	 *
-	 * @param userTrackerId the user tracker id of this user tracker
+	 * @param userTrackerId the user tracker ID of this user tracker
 	 */
 	public void setUserTrackerId(long userTrackerId);
 
 	/**
-	 * Gets the company id of this user tracker.
+	 * Gets the company ID of this user tracker.
 	 *
-	 * @return the company id of this user tracker
+	 * @return the company ID of this user tracker
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this user tracker.
+	 * Sets the company ID of this user tracker.
 	 *
-	 * @param companyId the company id of this user tracker
+	 * @param companyId the company ID of this user tracker
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this user tracker.
+	 * Gets the user ID of this user tracker.
 	 *
-	 * @return the user id of this user tracker
+	 * @return the user ID of this user tracker
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this user tracker.
+	 * Sets the user ID of this user tracker.
 	 *
-	 * @param userId the user id of this user tracker
+	 * @param userId the user ID of this user tracker
 	 */
 	public void setUserId(long userId);
 
@@ -130,17 +130,17 @@ public interface UserTrackerModel extends BaseModel<UserTracker> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the session id of this user tracker.
+	 * Gets the session ID of this user tracker.
 	 *
-	 * @return the session id of this user tracker
+	 * @return the session ID of this user tracker
 	 */
 	@AutoEscape
 	public String getSessionId();
 
 	/**
-	 * Sets the session id of this user tracker.
+	 * Sets the session ID of this user tracker.
 	 *
-	 * @param sessionId the session id of this user tracker
+	 * @param sessionId the session ID of this user tracker
 	 */
 	public void setSessionId(String sessionId);
 

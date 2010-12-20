@@ -56,44 +56,44 @@ public interface UserGroupModel extends BaseModel<UserGroup> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the user group id of this user group.
+	 * Gets the user group ID of this user group.
 	 *
-	 * @return the user group id of this user group
+	 * @return the user group ID of this user group
 	 */
 	public long getUserGroupId();
 
 	/**
-	 * Sets the user group id of this user group.
+	 * Sets the user group ID of this user group.
 	 *
-	 * @param userGroupId the user group id of this user group
+	 * @param userGroupId the user group ID of this user group
 	 */
 	public void setUserGroupId(long userGroupId);
 
 	/**
-	 * Gets the company id of this user group.
+	 * Gets the company ID of this user group.
 	 *
-	 * @return the company id of this user group
+	 * @return the company ID of this user group
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this user group.
+	 * Sets the company ID of this user group.
 	 *
-	 * @param companyId the company id of this user group
+	 * @param companyId the company ID of this user group
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the parent user group id of this user group.
+	 * Gets the parent user group ID of this user group.
 	 *
-	 * @return the parent user group id of this user group
+	 * @return the parent user group ID of this user group
 	 */
 	public long getParentUserGroupId();
 
 	/**
-	 * Sets the parent user group id of this user group.
+	 * Sets the parent user group ID of this user group.
 	 *
-	 * @param parentUserGroupId the parent user group id of this user group
+	 * @param parentUserGroupId the parent user group ID of this user group
 	 */
 	public void setParentUserGroupId(long parentUserGroupId);
 

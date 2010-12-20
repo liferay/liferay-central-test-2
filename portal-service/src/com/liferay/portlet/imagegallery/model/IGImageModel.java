@@ -75,58 +75,58 @@ public interface IGImageModel extends BaseModel<IGImage> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the image id of this i g image.
+	 * Gets the image ID of this i g image.
 	 *
-	 * @return the image id of this i g image
+	 * @return the image ID of this i g image
 	 */
 	public long getImageId();
 
 	/**
-	 * Sets the image id of this i g image.
+	 * Sets the image ID of this i g image.
 	 *
-	 * @param imageId the image id of this i g image
+	 * @param imageId the image ID of this i g image
 	 */
 	public void setImageId(long imageId);
 
 	/**
-	 * Gets the group id of this i g image.
+	 * Gets the group ID of this i g image.
 	 *
-	 * @return the group id of this i g image
+	 * @return the group ID of this i g image
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this i g image.
+	 * Sets the group ID of this i g image.
 	 *
-	 * @param groupId the group id of this i g image
+	 * @param groupId the group ID of this i g image
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this i g image.
+	 * Gets the company ID of this i g image.
 	 *
-	 * @return the company id of this i g image
+	 * @return the company ID of this i g image
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this i g image.
+	 * Sets the company ID of this i g image.
 	 *
-	 * @param companyId the company id of this i g image
+	 * @param companyId the company ID of this i g image
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this i g image.
+	 * Gets the user ID of this i g image.
 	 *
-	 * @return the user id of this i g image
+	 * @return the user ID of this i g image
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this i g image.
+	 * Sets the user ID of this i g image.
 	 *
-	 * @param userId the user id of this i g image
+	 * @param userId the user ID of this i g image
 	 */
 	public void setUserId(long userId);
 
@@ -174,16 +174,16 @@ public interface IGImageModel extends BaseModel<IGImage> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the folder id of this i g image.
+	 * Gets the folder ID of this i g image.
 	 *
-	 * @return the folder id of this i g image
+	 * @return the folder ID of this i g image
 	 */
 	public long getFolderId();
 
 	/**
-	 * Sets the folder id of this i g image.
+	 * Sets the folder ID of this i g image.
 	 *
-	 * @param folderId the folder id of this i g image
+	 * @param folderId the folder ID of this i g image
 	 */
 	public void setFolderId(long folderId);
 
@@ -218,58 +218,58 @@ public interface IGImageModel extends BaseModel<IGImage> {
 	public void setDescription(String description);
 
 	/**
-	 * Gets the small image id of this i g image.
+	 * Gets the small image ID of this i g image.
 	 *
-	 * @return the small image id of this i g image
+	 * @return the small image ID of this i g image
 	 */
 	public long getSmallImageId();
 
 	/**
-	 * Sets the small image id of this i g image.
+	 * Sets the small image ID of this i g image.
 	 *
-	 * @param smallImageId the small image id of this i g image
+	 * @param smallImageId the small image ID of this i g image
 	 */
 	public void setSmallImageId(long smallImageId);
 
 	/**
-	 * Gets the large image id of this i g image.
+	 * Gets the large image ID of this i g image.
 	 *
-	 * @return the large image id of this i g image
+	 * @return the large image ID of this i g image
 	 */
 	public long getLargeImageId();
 
 	/**
-	 * Sets the large image id of this i g image.
+	 * Sets the large image ID of this i g image.
 	 *
-	 * @param largeImageId the large image id of this i g image
+	 * @param largeImageId the large image ID of this i g image
 	 */
 	public void setLargeImageId(long largeImageId);
 
 	/**
-	 * Gets the custom1 image id of this i g image.
+	 * Gets the custom1 image ID of this i g image.
 	 *
-	 * @return the custom1 image id of this i g image
+	 * @return the custom1 image ID of this i g image
 	 */
 	public long getCustom1ImageId();
 
 	/**
-	 * Sets the custom1 image id of this i g image.
+	 * Sets the custom1 image ID of this i g image.
 	 *
-	 * @param custom1ImageId the custom1 image id of this i g image
+	 * @param custom1ImageId the custom1 image ID of this i g image
 	 */
 	public void setCustom1ImageId(long custom1ImageId);
 
 	/**
-	 * Gets the custom2 image id of this i g image.
+	 * Gets the custom2 image ID of this i g image.
 	 *
-	 * @return the custom2 image id of this i g image
+	 * @return the custom2 image ID of this i g image
 	 */
 	public long getCustom2ImageId();
 
 	/**
-	 * Sets the custom2 image id of this i g image.
+	 * Sets the custom2 image ID of this i g image.
 	 *
-	 * @param custom2ImageId the custom2 image id of this i g image
+	 * @param custom2ImageId the custom2 image ID of this i g image
 	 */
 	public void setCustom2ImageId(long custom2ImageId);
 

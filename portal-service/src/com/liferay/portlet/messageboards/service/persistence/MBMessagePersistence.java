@@ -213,7 +213,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Finds the message-boards message where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchMessageException} if it could not be found.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	* @throws SystemException if a system exception occurred
@@ -227,7 +227,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Finds the message-boards message where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -239,7 +239,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Finds the message-boards message where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching message-boards message, or <code>null</code> if a matching message-boards message could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -250,7 +250,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Finds all the message-boards messages where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching message-boards messages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -265,7 +265,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @return the range of matching message-boards messages
@@ -282,7 +282,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -301,7 +301,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
@@ -320,7 +320,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
@@ -340,7 +340,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* </p>
 	*
 	* @param messageId the primary key of the current message-boards message
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
@@ -355,7 +355,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Filters by the user's permissions and finds all the message-boards messages where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching message-boards messages that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -370,7 +370,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @return the range of matching message-boards messages that the user has permission to view
@@ -387,7 +387,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -402,7 +402,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Finds all the message-boards messages where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the matching message-boards messages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -417,7 +417,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @return the range of matching message-boards messages
@@ -434,7 +434,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -453,7 +453,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
@@ -472,7 +472,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
@@ -492,7 +492,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* </p>
 	*
 	* @param messageId the primary key of the current message-boards message
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
@@ -507,7 +507,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Finds all the message-boards messages where threadId = &#63;.
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @return the matching message-boards messages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -522,7 +522,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @return the range of matching message-boards messages
@@ -539,7 +539,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -558,7 +558,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
@@ -577,7 +577,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
@@ -597,7 +597,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* </p>
 	*
 	* @param messageId the primary key of the current message-boards message
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
@@ -612,7 +612,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Finds all the message-boards messages where threadId = &#63;.
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @return the matching message-boards messages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -627,7 +627,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @return the range of matching message-boards messages
@@ -644,7 +644,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -663,7 +663,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
@@ -682,7 +682,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
@@ -702,7 +702,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* </p>
 	*
 	* @param messageId the primary key of the current message-boards message
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
@@ -717,7 +717,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Finds all the message-boards messages where userId = &#63;.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @return the matching message-boards messages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -731,7 +731,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @return the range of matching message-boards messages
@@ -748,7 +748,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -767,7 +767,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
@@ -786,7 +786,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
@@ -806,7 +806,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* </p>
 	*
 	* @param messageId the primary key of the current message-boards message
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
@@ -821,8 +821,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Finds all the message-boards messages where groupId = &#63; and userId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @return the matching message-boards messages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -837,8 +837,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @return the range of matching message-boards messages
@@ -855,8 +855,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -875,8 +875,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
@@ -895,8 +895,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
@@ -916,8 +916,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* </p>
 	*
 	* @param messageId the primary key of the current message-boards message
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
@@ -932,8 +932,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Filters by the user's permissions and finds all the message-boards messages where groupId = &#63; and userId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @return the matching message-boards messages that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -948,8 +948,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @return the range of matching message-boards messages that the user has permission to view
@@ -966,8 +966,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -982,8 +982,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Finds all the message-boards messages where groupId = &#63; and categoryId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @return the matching message-boards messages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -998,8 +998,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @return the range of matching message-boards messages
@@ -1016,8 +1016,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -1036,8 +1036,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
@@ -1056,8 +1056,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
@@ -1077,8 +1077,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* </p>
 	*
 	* @param messageId the primary key of the current message-boards message
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
@@ -1093,8 +1093,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Filters by the user's permissions and finds all the message-boards messages where groupId = &#63; and categoryId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @return the matching message-boards messages that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1109,8 +1109,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @return the range of matching message-boards messages that the user has permission to view
@@ -1127,8 +1127,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -1143,7 +1143,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Finds all the message-boards messages where groupId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @return the matching message-boards messages
 	* @throws SystemException if a system exception occurred
@@ -1159,7 +1159,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -1177,7 +1177,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -1197,7 +1197,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message-boards message
@@ -1217,7 +1217,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message-boards message
@@ -1238,7 +1238,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* </p>
 	*
 	* @param messageId the primary key of the current message-boards message
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message-boards message
@@ -1254,7 +1254,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Filters by the user's permissions and finds all the message-boards messages where groupId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @return the matching message-boards messages that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -1270,7 +1270,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -1288,7 +1288,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -1304,7 +1304,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Finds all the message-boards messages where companyId = &#63; and status = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param status the status to search with
 	* @return the matching message-boards messages
 	* @throws SystemException if a system exception occurred
@@ -1320,7 +1320,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -1338,7 +1338,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -1358,7 +1358,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message-boards message
@@ -1378,7 +1378,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message-boards message
@@ -1399,7 +1399,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* </p>
 	*
 	* @param messageId the primary key of the current message-boards message
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message-boards message
@@ -1415,7 +1415,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Finds all the message-boards messages where classNameId = &#63; and classPK = &#63;.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching message-boards messages
 	* @throws SystemException if a system exception occurred
@@ -1431,7 +1431,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -1449,7 +1449,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -1469,7 +1469,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message-boards message
@@ -1489,7 +1489,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message-boards message
@@ -1510,7 +1510,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* </p>
 	*
 	* @param messageId the primary key of the current message-boards message
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message-boards message
@@ -1526,8 +1526,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Finds all the message-boards messages where threadId = &#63; and parentMessageId = &#63;.
 	*
-	* @param threadId the thread id to search with
-	* @param parentMessageId the parent message id to search with
+	* @param threadId the thread ID to search with
+	* @param parentMessageId the parent message ID to search with
 	* @return the matching message-boards messages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1542,8 +1542,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param threadId the thread id to search with
-	* @param parentMessageId the parent message id to search with
+	* @param threadId the thread ID to search with
+	* @param parentMessageId the parent message ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @return the range of matching message-boards messages
@@ -1560,8 +1560,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param threadId the thread id to search with
-	* @param parentMessageId the parent message id to search with
+	* @param threadId the thread ID to search with
+	* @param parentMessageId the parent message ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -1580,8 +1580,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param threadId the thread id to search with
-	* @param parentMessageId the parent message id to search with
+	* @param threadId the thread ID to search with
+	* @param parentMessageId the parent message ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
@@ -1600,8 +1600,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param threadId the thread id to search with
-	* @param parentMessageId the parent message id to search with
+	* @param threadId the thread ID to search with
+	* @param parentMessageId the parent message ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
@@ -1621,8 +1621,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* </p>
 	*
 	* @param messageId the primary key of the current message-boards message
-	* @param threadId the thread id to search with
-	* @param parentMessageId the parent message id to search with
+	* @param threadId the thread ID to search with
+	* @param parentMessageId the parent message ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
@@ -1637,7 +1637,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Finds all the message-boards messages where threadId = &#63; and status = &#63;.
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @return the matching message-boards messages
 	* @throws SystemException if a system exception occurred
@@ -1653,7 +1653,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -1671,7 +1671,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -1691,7 +1691,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message-boards message
@@ -1711,7 +1711,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message-boards message
@@ -1732,7 +1732,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* </p>
 	*
 	* @param messageId the primary key of the current message-boards message
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message-boards message
@@ -1748,7 +1748,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Finds all the message-boards messages where threadId = &#63; and status = &#63;.
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @return the matching message-boards messages
 	* @throws SystemException if a system exception occurred
@@ -1764,7 +1764,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -1782,7 +1782,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -1802,7 +1802,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message-boards message
@@ -1822,7 +1822,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message-boards message
@@ -1843,7 +1843,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* </p>
 	*
 	* @param messageId the primary key of the current message-boards message
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message-boards message
@@ -1859,8 +1859,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Finds all the message-boards messages where groupId = &#63; and userId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param status the status to search with
 	* @return the matching message-boards messages
 	* @throws SystemException if a system exception occurred
@@ -1876,8 +1876,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -1895,8 +1895,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -1916,8 +1916,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message-boards message
@@ -1937,8 +1937,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message-boards message
@@ -1959,8 +1959,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* </p>
 	*
 	* @param messageId the primary key of the current message-boards message
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message-boards message
@@ -1976,8 +1976,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Filters by the user's permissions and finds all the message-boards messages where groupId = &#63; and userId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param status the status to search with
 	* @return the matching message-boards messages that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -1993,8 +1993,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -2012,8 +2012,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -2029,9 +2029,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Finds all the message-boards messages where groupId = &#63; and categoryId = &#63; and threadId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @return the matching message-boards messages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2046,9 +2046,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @return the range of matching message-boards messages
@@ -2065,9 +2065,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -2086,9 +2086,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
@@ -2107,9 +2107,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
@@ -2129,9 +2129,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* </p>
 	*
 	* @param messageId the primary key of the current message-boards message
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message-boards message
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
@@ -2146,9 +2146,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Filters by the user's permissions and finds all the message-boards messages where groupId = &#63; and categoryId = &#63; and threadId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @return the matching message-boards messages that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2163,9 +2163,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @return the range of matching message-boards messages that the user has permission to view
@@ -2182,9 +2182,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -2199,8 +2199,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Finds all the message-boards messages where groupId = &#63; and categoryId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @return the matching message-boards messages
 	* @throws SystemException if a system exception occurred
@@ -2216,8 +2216,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -2235,8 +2235,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -2256,8 +2256,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message-boards message
@@ -2277,8 +2277,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message-boards message
@@ -2299,8 +2299,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* </p>
 	*
 	* @param messageId the primary key of the current message-boards message
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message-boards message
@@ -2316,8 +2316,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Filters by the user's permissions and finds all the message-boards messages where groupId = &#63; and categoryId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @return the matching message-boards messages that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -2333,8 +2333,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -2352,8 +2352,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -2369,7 +2369,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Finds all the message-boards messages where classNameId = &#63; and classPK = &#63; and status = &#63;.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param status the status to search with
 	* @return the matching message-boards messages
@@ -2386,7 +2386,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
@@ -2405,7 +2405,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
@@ -2426,7 +2426,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
@@ -2447,7 +2447,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
@@ -2469,7 +2469,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* </p>
 	*
 	* @param messageId the primary key of the current message-boards message
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
@@ -2486,9 +2486,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Finds all the message-boards messages where groupId = &#63; and categoryId = &#63; and threadId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @return the matching message-boards messages
 	* @throws SystemException if a system exception occurred
@@ -2504,9 +2504,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -2524,9 +2524,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -2547,9 +2547,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message-boards message
@@ -2569,9 +2569,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message-boards message
@@ -2592,9 +2592,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* </p>
 	*
 	* @param messageId the primary key of the current message-boards message
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message-boards message
@@ -2611,9 +2611,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Filters by the user's permissions and finds all the message-boards messages where groupId = &#63; and categoryId = &#63; and threadId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @return the matching message-boards messages that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -2629,9 +2629,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -2649,9 +2649,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message-boards messages to return
 	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
@@ -2721,7 +2721,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Removes the message-boards message where uuid = &#63; and groupId = &#63; from the database.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUUID_G(java.lang.String uuid, long groupId)
@@ -2731,7 +2731,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Removes all the message-boards messages where groupId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByGroupId(long groupId)
@@ -2740,7 +2740,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Removes all the message-boards messages where companyId = &#63; from the database.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByCompanyId(long companyId)
@@ -2749,7 +2749,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Removes all the message-boards messages where threadId = &#63; from the database.
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByThreadId(long threadId)
@@ -2758,7 +2758,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Removes all the message-boards messages where threadId = &#63; from the database.
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByThreadReplies(long threadId)
@@ -2767,7 +2767,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Removes all the message-boards messages where userId = &#63; from the database.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUserId(long userId)
@@ -2776,8 +2776,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Removes all the message-boards messages where groupId = &#63; and userId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByG_U(long groupId, long userId)
@@ -2786,8 +2786,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Removes all the message-boards messages where groupId = &#63; and categoryId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByG_C(long groupId, long categoryId)
@@ -2796,7 +2796,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Removes all the message-boards messages where groupId = &#63; and status = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2806,7 +2806,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Removes all the message-boards messages where companyId = &#63; and status = &#63; from the database.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2816,7 +2816,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Removes all the message-boards messages where classNameId = &#63; and classPK = &#63; from the database.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2826,8 +2826,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Removes all the message-boards messages where threadId = &#63; and parentMessageId = &#63; from the database.
 	*
-	* @param threadId the thread id to search with
-	* @param parentMessageId the parent message id to search with
+	* @param threadId the thread ID to search with
+	* @param parentMessageId the parent message ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByT_P(long threadId, long parentMessageId)
@@ -2836,7 +2836,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Removes all the message-boards messages where threadId = &#63; and status = &#63; from the database.
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2846,7 +2846,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Removes all the message-boards messages where threadId = &#63; and status = &#63; from the database.
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2856,8 +2856,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Removes all the message-boards messages where groupId = &#63; and userId = &#63; and status = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2867,9 +2867,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Removes all the message-boards messages where groupId = &#63; and categoryId = &#63; and threadId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByG_C_T(long groupId, long categoryId, long threadId)
@@ -2878,8 +2878,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Removes all the message-boards messages where groupId = &#63; and categoryId = &#63; and status = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2889,7 +2889,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Removes all the message-boards messages where classNameId = &#63; and classPK = &#63; and status = &#63; from the database.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
@@ -2900,9 +2900,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Removes all the message-boards messages where groupId = &#63; and categoryId = &#63; and threadId = &#63; and status = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2931,7 +2931,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	* Counts all the message-boards messages where uuid = &#63; and groupId = &#63;.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching message-boards messages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2941,7 +2941,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Counts all the message-boards messages where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching message-boards messages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2951,7 +2951,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Filters by the user's permissions and counts all the message-boards messages where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching message-boards messages that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2961,7 +2961,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Counts all the message-boards messages where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the number of matching message-boards messages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2971,7 +2971,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Counts all the message-boards messages where threadId = &#63;.
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @return the number of matching message-boards messages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2981,7 +2981,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Counts all the message-boards messages where threadId = &#63;.
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @return the number of matching message-boards messages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2991,7 +2991,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Counts all the message-boards messages where userId = &#63;.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @return the number of matching message-boards messages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -3001,8 +3001,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Counts all the message-boards messages where groupId = &#63; and userId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @return the number of matching message-boards messages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -3012,8 +3012,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Filters by the user's permissions and counts all the message-boards messages where groupId = &#63; and userId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @return the number of matching message-boards messages that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -3023,8 +3023,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Counts all the message-boards messages where groupId = &#63; and categoryId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @return the number of matching message-boards messages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -3034,8 +3034,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Filters by the user's permissions and counts all the message-boards messages where groupId = &#63; and categoryId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @return the number of matching message-boards messages that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -3045,7 +3045,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Counts all the message-boards messages where groupId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @return the number of matching message-boards messages
 	* @throws SystemException if a system exception occurred
@@ -3056,7 +3056,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Filters by the user's permissions and counts all the message-boards messages where groupId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @return the number of matching message-boards messages that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -3067,7 +3067,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Counts all the message-boards messages where companyId = &#63; and status = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param status the status to search with
 	* @return the number of matching message-boards messages
 	* @throws SystemException if a system exception occurred
@@ -3078,7 +3078,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Counts all the message-boards messages where classNameId = &#63; and classPK = &#63;.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the number of matching message-boards messages
 	* @throws SystemException if a system exception occurred
@@ -3089,8 +3089,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Counts all the message-boards messages where threadId = &#63; and parentMessageId = &#63;.
 	*
-	* @param threadId the thread id to search with
-	* @param parentMessageId the parent message id to search with
+	* @param threadId the thread ID to search with
+	* @param parentMessageId the parent message ID to search with
 	* @return the number of matching message-boards messages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -3100,7 +3100,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Counts all the message-boards messages where threadId = &#63; and status = &#63;.
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @return the number of matching message-boards messages
 	* @throws SystemException if a system exception occurred
@@ -3111,7 +3111,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Counts all the message-boards messages where threadId = &#63; and status = &#63;.
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @return the number of matching message-boards messages
 	* @throws SystemException if a system exception occurred
@@ -3122,8 +3122,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Counts all the message-boards messages where groupId = &#63; and userId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param status the status to search with
 	* @return the number of matching message-boards messages
 	* @throws SystemException if a system exception occurred
@@ -3134,8 +3134,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Filters by the user's permissions and counts all the message-boards messages where groupId = &#63; and userId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param status the status to search with
 	* @return the number of matching message-boards messages that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -3146,9 +3146,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Counts all the message-boards messages where groupId = &#63; and categoryId = &#63; and threadId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @return the number of matching message-boards messages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -3158,9 +3158,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Filters by the user's permissions and counts all the message-boards messages where groupId = &#63; and categoryId = &#63; and threadId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @return the number of matching message-boards messages that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -3170,8 +3170,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Counts all the message-boards messages where groupId = &#63; and categoryId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @return the number of matching message-boards messages
 	* @throws SystemException if a system exception occurred
@@ -3182,8 +3182,8 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Filters by the user's permissions and counts all the message-boards messages where groupId = &#63; and categoryId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @return the number of matching message-boards messages that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -3194,7 +3194,7 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Counts all the message-boards messages where classNameId = &#63; and classPK = &#63; and status = &#63;.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param status the status to search with
 	* @return the number of matching message-boards messages
@@ -3206,9 +3206,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Counts all the message-boards messages where groupId = &#63; and categoryId = &#63; and threadId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @return the number of matching message-boards messages
 	* @throws SystemException if a system exception occurred
@@ -3219,9 +3219,9 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	/**
 	* Filters by the user's permissions and counts all the message-boards messages where groupId = &#63; and categoryId = &#63; and threadId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
-	* @param threadId the thread id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
 	* @param status the status to search with
 	* @return the number of matching message-boards messages that the user has permission to view
 	* @throws SystemException if a system exception occurred

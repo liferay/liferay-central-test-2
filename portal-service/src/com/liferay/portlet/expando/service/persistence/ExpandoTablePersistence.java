@@ -105,8 +105,8 @@ public interface ExpandoTablePersistence extends BasePersistence<ExpandoTable> {
 	/**
 	* Finds all the expando tables where companyId = &#63; and classNameId = &#63;.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @return the matching expando tables
 	* @throws SystemException if a system exception occurred
 	*/
@@ -121,8 +121,8 @@ public interface ExpandoTablePersistence extends BasePersistence<ExpandoTable> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param start the lower bound of the range of expando tables to return
 	* @param end the upper bound of the range of expando tables to return (not inclusive)
 	* @return the range of matching expando tables
@@ -139,8 +139,8 @@ public interface ExpandoTablePersistence extends BasePersistence<ExpandoTable> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param start the lower bound of the range of expando tables to return
 	* @param end the upper bound of the range of expando tables to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -159,8 +159,8 @@ public interface ExpandoTablePersistence extends BasePersistence<ExpandoTable> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching expando table
 	* @throws com.liferay.portlet.expando.NoSuchTableException if a matching expando table could not be found
@@ -179,8 +179,8 @@ public interface ExpandoTablePersistence extends BasePersistence<ExpandoTable> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching expando table
 	* @throws com.liferay.portlet.expando.NoSuchTableException if a matching expando table could not be found
@@ -200,8 +200,8 @@ public interface ExpandoTablePersistence extends BasePersistence<ExpandoTable> {
 	* </p>
 	*
 	* @param tableId the primary key of the current expando table
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next expando table
 	* @throws com.liferay.portlet.expando.NoSuchTableException if a expando table with the primary key could not be found
@@ -216,8 +216,8 @@ public interface ExpandoTablePersistence extends BasePersistence<ExpandoTable> {
 	/**
 	* Finds the expando table where companyId = &#63; and classNameId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.expando.NoSuchTableException} if it could not be found.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param name the name to search with
 	* @return the matching expando table
 	* @throws com.liferay.portlet.expando.NoSuchTableException if a matching expando table could not be found
@@ -231,8 +231,8 @@ public interface ExpandoTablePersistence extends BasePersistence<ExpandoTable> {
 	/**
 	* Finds the expando table where companyId = &#63; and classNameId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param name the name to search with
 	* @return the matching expando table, or <code>null</code> if a matching expando table could not be found
 	* @throws SystemException if a system exception occurred
@@ -244,8 +244,8 @@ public interface ExpandoTablePersistence extends BasePersistence<ExpandoTable> {
 	/**
 	* Finds the expando table where companyId = &#63; and classNameId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param name the name to search with
 	* @return the matching expando table, or <code>null</code> if a matching expando table could not be found
 	* @throws SystemException if a system exception occurred
@@ -301,8 +301,8 @@ public interface ExpandoTablePersistence extends BasePersistence<ExpandoTable> {
 	/**
 	* Removes all the expando tables where companyId = &#63; and classNameId = &#63; from the database.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByC_C(long companyId, long classNameId)
@@ -311,8 +311,8 @@ public interface ExpandoTablePersistence extends BasePersistence<ExpandoTable> {
 	/**
 	* Removes the expando table where companyId = &#63; and classNameId = &#63; and name = &#63; from the database.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param name the name to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -332,8 +332,8 @@ public interface ExpandoTablePersistence extends BasePersistence<ExpandoTable> {
 	/**
 	* Counts all the expando tables where companyId = &#63; and classNameId = &#63;.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @return the number of matching expando tables
 	* @throws SystemException if a system exception occurred
 	*/
@@ -343,8 +343,8 @@ public interface ExpandoTablePersistence extends BasePersistence<ExpandoTable> {
 	/**
 	* Counts all the expando tables where companyId = &#63; and classNameId = &#63; and name = &#63;.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param name the name to search with
 	* @return the number of matching expando tables
 	* @throws SystemException if a system exception occurred

@@ -59,45 +59,45 @@ public interface ShoppingOrderItemModel extends BaseModel<ShoppingOrderItem> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the order item id of this shopping order item.
+	 * Gets the order item ID of this shopping order item.
 	 *
-	 * @return the order item id of this shopping order item
+	 * @return the order item ID of this shopping order item
 	 */
 	public long getOrderItemId();
 
 	/**
-	 * Sets the order item id of this shopping order item.
+	 * Sets the order item ID of this shopping order item.
 	 *
-	 * @param orderItemId the order item id of this shopping order item
+	 * @param orderItemId the order item ID of this shopping order item
 	 */
 	public void setOrderItemId(long orderItemId);
 
 	/**
-	 * Gets the order id of this shopping order item.
+	 * Gets the order ID of this shopping order item.
 	 *
-	 * @return the order id of this shopping order item
+	 * @return the order ID of this shopping order item
 	 */
 	public long getOrderId();
 
 	/**
-	 * Sets the order id of this shopping order item.
+	 * Sets the order ID of this shopping order item.
 	 *
-	 * @param orderId the order id of this shopping order item
+	 * @param orderId the order ID of this shopping order item
 	 */
 	public void setOrderId(long orderId);
 
 	/**
-	 * Gets the item id of this shopping order item.
+	 * Gets the item ID of this shopping order item.
 	 *
-	 * @return the item id of this shopping order item
+	 * @return the item ID of this shopping order item
 	 */
 	@AutoEscape
 	public String getItemId();
 
 	/**
-	 * Sets the item id of this shopping order item.
+	 * Sets the item ID of this shopping order item.
 	 *
-	 * @param itemId the item id of this shopping order item
+	 * @param itemId the item ID of this shopping order item
 	 */
 	public void setItemId(String itemId);
 

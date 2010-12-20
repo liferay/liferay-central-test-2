@@ -47,72 +47,72 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	}
 
 	/**
-	* Gets the layout revision id of this layout revision.
+	* Gets the layout revision ID of this layout revision.
 	*
-	* @return the layout revision id of this layout revision
+	* @return the layout revision ID of this layout revision
 	*/
 	public long getLayoutRevisionId() {
 		return _layoutRevision.getLayoutRevisionId();
 	}
 
 	/**
-	* Sets the layout revision id of this layout revision.
+	* Sets the layout revision ID of this layout revision.
 	*
-	* @param layoutRevisionId the layout revision id of this layout revision
+	* @param layoutRevisionId the layout revision ID of this layout revision
 	*/
 	public void setLayoutRevisionId(long layoutRevisionId) {
 		_layoutRevision.setLayoutRevisionId(layoutRevisionId);
 	}
 
 	/**
-	* Gets the group id of this layout revision.
+	* Gets the group ID of this layout revision.
 	*
-	* @return the group id of this layout revision
+	* @return the group ID of this layout revision
 	*/
 	public long getGroupId() {
 		return _layoutRevision.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this layout revision.
+	* Sets the group ID of this layout revision.
 	*
-	* @param groupId the group id of this layout revision
+	* @param groupId the group ID of this layout revision
 	*/
 	public void setGroupId(long groupId) {
 		_layoutRevision.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this layout revision.
+	* Gets the company ID of this layout revision.
 	*
-	* @return the company id of this layout revision
+	* @return the company ID of this layout revision
 	*/
 	public long getCompanyId() {
 		return _layoutRevision.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this layout revision.
+	* Sets the company ID of this layout revision.
 	*
-	* @param companyId the company id of this layout revision
+	* @param companyId the company ID of this layout revision
 	*/
 	public void setCompanyId(long companyId) {
 		_layoutRevision.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this layout revision.
+	* Gets the user ID of this layout revision.
 	*
-	* @return the user id of this layout revision
+	* @return the user ID of this layout revision
 	*/
 	public long getUserId() {
 		return _layoutRevision.getUserId();
 	}
 
 	/**
-	* Sets the user id of this layout revision.
+	* Sets the user ID of this layout revision.
 	*
-	* @param userId the user id of this layout revision
+	* @param userId the user ID of this layout revision
 	*/
 	public void setUserId(long userId) {
 		_layoutRevision.setUserId(userId);
@@ -193,36 +193,36 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	}
 
 	/**
-	* Gets the layout set branch id of this layout revision.
+	* Gets the layout set branch ID of this layout revision.
 	*
-	* @return the layout set branch id of this layout revision
+	* @return the layout set branch ID of this layout revision
 	*/
 	public long getLayoutSetBranchId() {
 		return _layoutRevision.getLayoutSetBranchId();
 	}
 
 	/**
-	* Sets the layout set branch id of this layout revision.
+	* Sets the layout set branch ID of this layout revision.
 	*
-	* @param layoutSetBranchId the layout set branch id of this layout revision
+	* @param layoutSetBranchId the layout set branch ID of this layout revision
 	*/
 	public void setLayoutSetBranchId(long layoutSetBranchId) {
 		_layoutRevision.setLayoutSetBranchId(layoutSetBranchId);
 	}
 
 	/**
-	* Gets the parent layout revision id of this layout revision.
+	* Gets the parent layout revision ID of this layout revision.
 	*
-	* @return the parent layout revision id of this layout revision
+	* @return the parent layout revision ID of this layout revision
 	*/
 	public long getParentLayoutRevisionId() {
 		return _layoutRevision.getParentLayoutRevisionId();
 	}
 
 	/**
-	* Sets the parent layout revision id of this layout revision.
+	* Sets the parent layout revision ID of this layout revision.
 	*
-	* @param parentLayoutRevisionId the parent layout revision id of this layout revision
+	* @param parentLayoutRevisionId the parent layout revision ID of this layout revision
 	*/
 	public void setParentLayoutRevisionId(long parentLayoutRevisionId) {
 		_layoutRevision.setParentLayoutRevisionId(parentLayoutRevisionId);
@@ -373,90 +373,90 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	}
 
 	/**
-	* Gets the icon image id of this layout revision.
+	* Gets the icon image ID of this layout revision.
 	*
-	* @return the icon image id of this layout revision
+	* @return the icon image ID of this layout revision
 	*/
 	public long getIconImageId() {
 		return _layoutRevision.getIconImageId();
 	}
 
 	/**
-	* Sets the icon image id of this layout revision.
+	* Sets the icon image ID of this layout revision.
 	*
-	* @param iconImageId the icon image id of this layout revision
+	* @param iconImageId the icon image ID of this layout revision
 	*/
 	public void setIconImageId(long iconImageId) {
 		_layoutRevision.setIconImageId(iconImageId);
 	}
 
 	/**
-	* Gets the theme id of this layout revision.
+	* Gets the theme ID of this layout revision.
 	*
-	* @return the theme id of this layout revision
+	* @return the theme ID of this layout revision
 	*/
 	public java.lang.String getThemeId() {
 		return _layoutRevision.getThemeId();
 	}
 
 	/**
-	* Sets the theme id of this layout revision.
+	* Sets the theme ID of this layout revision.
 	*
-	* @param themeId the theme id of this layout revision
+	* @param themeId the theme ID of this layout revision
 	*/
 	public void setThemeId(java.lang.String themeId) {
 		_layoutRevision.setThemeId(themeId);
 	}
 
 	/**
-	* Gets the color scheme id of this layout revision.
+	* Gets the color scheme ID of this layout revision.
 	*
-	* @return the color scheme id of this layout revision
+	* @return the color scheme ID of this layout revision
 	*/
 	public java.lang.String getColorSchemeId() {
 		return _layoutRevision.getColorSchemeId();
 	}
 
 	/**
-	* Sets the color scheme id of this layout revision.
+	* Sets the color scheme ID of this layout revision.
 	*
-	* @param colorSchemeId the color scheme id of this layout revision
+	* @param colorSchemeId the color scheme ID of this layout revision
 	*/
 	public void setColorSchemeId(java.lang.String colorSchemeId) {
 		_layoutRevision.setColorSchemeId(colorSchemeId);
 	}
 
 	/**
-	* Gets the wap theme id of this layout revision.
+	* Gets the wap theme ID of this layout revision.
 	*
-	* @return the wap theme id of this layout revision
+	* @return the wap theme ID of this layout revision
 	*/
 	public java.lang.String getWapThemeId() {
 		return _layoutRevision.getWapThemeId();
 	}
 
 	/**
-	* Sets the wap theme id of this layout revision.
+	* Sets the wap theme ID of this layout revision.
 	*
-	* @param wapThemeId the wap theme id of this layout revision
+	* @param wapThemeId the wap theme ID of this layout revision
 	*/
 	public void setWapThemeId(java.lang.String wapThemeId) {
 		_layoutRevision.setWapThemeId(wapThemeId);
 	}
 
 	/**
-	* Gets the wap color scheme id of this layout revision.
+	* Gets the wap color scheme ID of this layout revision.
 	*
-	* @return the wap color scheme id of this layout revision
+	* @return the wap color scheme ID of this layout revision
 	*/
 	public java.lang.String getWapColorSchemeId() {
 		return _layoutRevision.getWapColorSchemeId();
 	}
 
 	/**
-	* Sets the wap color scheme id of this layout revision.
+	* Sets the wap color scheme ID of this layout revision.
 	*
-	* @param wapColorSchemeId the wap color scheme id of this layout revision
+	* @param wapColorSchemeId the wap color scheme ID of this layout revision
 	*/
 	public void setWapColorSchemeId(java.lang.String wapColorSchemeId) {
 		_layoutRevision.setWapColorSchemeId(wapColorSchemeId);
@@ -499,18 +499,18 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	}
 
 	/**
-	* Gets the status by user id of this layout revision.
+	* Gets the status by user ID of this layout revision.
 	*
-	* @return the status by user id of this layout revision
+	* @return the status by user ID of this layout revision
 	*/
 	public long getStatusByUserId() {
 		return _layoutRevision.getStatusByUserId();
 	}
 
 	/**
-	* Sets the status by user id of this layout revision.
+	* Sets the status by user ID of this layout revision.
 	*
-	* @param statusByUserId the status by user id of this layout revision
+	* @param statusByUserId the status by user ID of this layout revision
 	*/
 	public void setStatusByUserId(long statusByUserId) {
 		_layoutRevision.setStatusByUserId(statusByUserId);

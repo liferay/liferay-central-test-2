@@ -47,54 +47,54 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the contact id of this contact.
+	* Gets the contact ID of this contact.
 	*
-	* @return the contact id of this contact
+	* @return the contact ID of this contact
 	*/
 	public long getContactId() {
 		return _contact.getContactId();
 	}
 
 	/**
-	* Sets the contact id of this contact.
+	* Sets the contact ID of this contact.
 	*
-	* @param contactId the contact id of this contact
+	* @param contactId the contact ID of this contact
 	*/
 	public void setContactId(long contactId) {
 		_contact.setContactId(contactId);
 	}
 
 	/**
-	* Gets the company id of this contact.
+	* Gets the company ID of this contact.
 	*
-	* @return the company id of this contact
+	* @return the company ID of this contact
 	*/
 	public long getCompanyId() {
 		return _contact.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this contact.
+	* Sets the company ID of this contact.
 	*
-	* @param companyId the company id of this contact
+	* @param companyId the company ID of this contact
 	*/
 	public void setCompanyId(long companyId) {
 		_contact.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this contact.
+	* Gets the user ID of this contact.
 	*
-	* @return the user id of this contact
+	* @return the user ID of this contact
 	*/
 	public long getUserId() {
 		return _contact.getUserId();
 	}
 
 	/**
-	* Sets the user id of this contact.
+	* Sets the user ID of this contact.
 	*
-	* @param userId the user id of this contact
+	* @param userId the user ID of this contact
 	*/
 	public void setUserId(long userId) {
 		_contact.setUserId(userId);
@@ -175,36 +175,36 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the account id of this contact.
+	* Gets the account ID of this contact.
 	*
-	* @return the account id of this contact
+	* @return the account ID of this contact
 	*/
 	public long getAccountId() {
 		return _contact.getAccountId();
 	}
 
 	/**
-	* Sets the account id of this contact.
+	* Sets the account ID of this contact.
 	*
-	* @param accountId the account id of this contact
+	* @param accountId the account ID of this contact
 	*/
 	public void setAccountId(long accountId) {
 		_contact.setAccountId(accountId);
 	}
 
 	/**
-	* Gets the parent contact id of this contact.
+	* Gets the parent contact ID of this contact.
 	*
-	* @return the parent contact id of this contact
+	* @return the parent contact ID of this contact
 	*/
 	public long getParentContactId() {
 		return _contact.getParentContactId();
 	}
 
 	/**
-	* Sets the parent contact id of this contact.
+	* Sets the parent contact ID of this contact.
 	*
-	* @param parentContactId the parent contact id of this contact
+	* @param parentContactId the parent contact ID of this contact
 	*/
 	public void setParentContactId(long parentContactId) {
 		_contact.setParentContactId(parentContactId);
@@ -265,36 +265,36 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the prefix id of this contact.
+	* Gets the prefix ID of this contact.
 	*
-	* @return the prefix id of this contact
+	* @return the prefix ID of this contact
 	*/
 	public int getPrefixId() {
 		return _contact.getPrefixId();
 	}
 
 	/**
-	* Sets the prefix id of this contact.
+	* Sets the prefix ID of this contact.
 	*
-	* @param prefixId the prefix id of this contact
+	* @param prefixId the prefix ID of this contact
 	*/
 	public void setPrefixId(int prefixId) {
 		_contact.setPrefixId(prefixId);
 	}
 
 	/**
-	* Gets the suffix id of this contact.
+	* Gets the suffix ID of this contact.
 	*
-	* @return the suffix id of this contact
+	* @return the suffix ID of this contact
 	*/
 	public int getSuffixId() {
 		return _contact.getSuffixId();
 	}
 
 	/**
-	* Sets the suffix id of this contact.
+	* Sets the suffix ID of this contact.
 	*
-	* @param suffixId the suffix id of this contact
+	* @param suffixId the suffix ID of this contact
 	*/
 	public void setSuffixId(int suffixId) {
 		_contact.setSuffixId(suffixId);
@@ -526,18 +526,18 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Gets the employee status id of this contact.
+	* Gets the employee status ID of this contact.
 	*
-	* @return the employee status id of this contact
+	* @return the employee status ID of this contact
 	*/
 	public java.lang.String getEmployeeStatusId() {
 		return _contact.getEmployeeStatusId();
 	}
 
 	/**
-	* Sets the employee status id of this contact.
+	* Sets the employee status ID of this contact.
 	*
-	* @param employeeStatusId the employee status id of this contact
+	* @param employeeStatusId the employee status ID of this contact
 	*/
 	public void setEmployeeStatusId(java.lang.String employeeStatusId) {
 		_contact.setEmployeeStatusId(employeeStatusId);

@@ -461,7 +461,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	/**
 	 * Finds all the tasks proposals where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching tasks proposals
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -477,7 +477,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of tasks proposals to return
 	 * @param end the upper bound of the range of tasks proposals to return (not inclusive)
 	 * @return the range of matching tasks proposals
@@ -495,7 +495,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of tasks proposals to return
 	 * @param end the upper bound of the range of tasks proposals to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -583,7 +583,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching tasks proposal
 	 * @throws com.liferay.portlet.tasks.NoSuchProposalException if a matching tasks proposal could not be found
@@ -619,7 +619,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching tasks proposal
 	 * @throws com.liferay.portlet.tasks.NoSuchProposalException if a matching tasks proposal could not be found
@@ -658,7 +658,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	 * </p>
 	 *
 	 * @param proposalId the primary key of the current tasks proposal
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next tasks proposal
 	 * @throws com.liferay.portlet.tasks.NoSuchProposalException if a tasks proposal with the primary key could not be found
@@ -801,7 +801,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	/**
 	 * Filters by the user's permissions and finds all the tasks proposals where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching tasks proposals that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -818,7 +818,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of tasks proposals to return
 	 * @param end the upper bound of the range of tasks proposals to return (not inclusive)
 	 * @return the range of matching tasks proposals that the user has permission to view
@@ -836,7 +836,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of tasks proposals to return
 	 * @param end the upper bound of the range of tasks proposals to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -928,8 +928,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	/**
 	 * Finds all the tasks proposals where groupId = &#63; and userId = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @return the matching tasks proposals
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -946,8 +946,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param start the lower bound of the range of tasks proposals to return
 	 * @param end the upper bound of the range of tasks proposals to return (not inclusive)
 	 * @return the range of matching tasks proposals
@@ -965,8 +965,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param start the lower bound of the range of tasks proposals to return
 	 * @param end the upper bound of the range of tasks proposals to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -1058,8 +1058,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching tasks proposal
 	 * @throws com.liferay.portlet.tasks.NoSuchProposalException if a matching tasks proposal could not be found
@@ -1098,8 +1098,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching tasks proposal
 	 * @throws com.liferay.portlet.tasks.NoSuchProposalException if a matching tasks proposal could not be found
@@ -1141,8 +1141,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	 * </p>
 	 *
 	 * @param proposalId the primary key of the current tasks proposal
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next tasks proposal
 	 * @throws com.liferay.portlet.tasks.NoSuchProposalException if a tasks proposal with the primary key could not be found
@@ -1289,8 +1289,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	/**
 	 * Filters by the user's permissions and finds all the tasks proposals where groupId = &#63; and userId = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @return the matching tasks proposals that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1307,8 +1307,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param start the lower bound of the range of tasks proposals to return
 	 * @param end the upper bound of the range of tasks proposals to return (not inclusive)
 	 * @return the range of matching tasks proposals that the user has permission to view
@@ -1326,8 +1326,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param start the lower bound of the range of tasks proposals to return
 	 * @param end the upper bound of the range of tasks proposals to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -1424,7 +1424,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	/**
 	 * Finds the tasks proposal where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.tasks.NoSuchProposalException} if it could not be found.
 	 *
-	 * @param classNameId the class name id to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @return the matching tasks proposal
 	 * @throws com.liferay.portlet.tasks.NoSuchProposalException if a matching tasks proposal could not be found
@@ -1460,7 +1460,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	/**
 	 * Finds the tasks proposal where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param classNameId the class name id to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @return the matching tasks proposal, or <code>null</code> if a matching tasks proposal could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1473,7 +1473,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	/**
 	 * Finds the tasks proposal where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param classNameId the class name id to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @return the matching tasks proposal, or <code>null</code> if a matching tasks proposal could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1686,7 +1686,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	/**
 	 * Removes all the tasks proposals where groupId = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -1698,8 +1698,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	/**
 	 * Removes all the tasks proposals where groupId = &#63; and userId = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByG_U(long groupId, long userId)
@@ -1712,7 +1712,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	/**
 	 * Removes the tasks proposal where classNameId = &#63; and classPK = &#63; from the database.
 	 *
-	 * @param classNameId the class name id to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1737,7 +1737,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	/**
 	 * Counts all the tasks proposals where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the number of matching tasks proposals
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1790,7 +1790,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	/**
 	 * Filters by the user's permissions and counts all the tasks proposals where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the number of matching tasks proposals that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1838,8 +1838,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	/**
 	 * Counts all the tasks proposals where groupId = &#63; and userId = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @return the number of matching tasks proposals
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1896,8 +1896,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	/**
 	 * Filters by the user's permissions and counts all the tasks proposals where groupId = &#63; and userId = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @return the number of matching tasks proposals that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1950,7 +1950,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	/**
 	 * Counts all the tasks proposals where classNameId = &#63; and classPK = &#63;.
 	 *
-	 * @param classNameId the class name id to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @return the number of matching tasks proposals
 	 * @throws SystemException if a system exception occurred

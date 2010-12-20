@@ -103,7 +103,7 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 	/**
 	* Finds all the expando rows where tableId = &#63;.
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @return the matching expando rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -118,7 +118,7 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param start the lower bound of the range of expando rows to return
 	* @param end the upper bound of the range of expando rows to return (not inclusive)
 	* @return the range of matching expando rows
@@ -135,7 +135,7 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param start the lower bound of the range of expando rows to return
 	* @param end the upper bound of the range of expando rows to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -154,7 +154,7 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching expando row
 	* @throws com.liferay.portlet.expando.NoSuchRowException if a matching expando row could not be found
@@ -173,7 +173,7 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching expando row
 	* @throws com.liferay.portlet.expando.NoSuchRowException if a matching expando row could not be found
@@ -193,7 +193,7 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 	* </p>
 	*
 	* @param rowId the primary key of the current expando row
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next expando row
 	* @throws com.liferay.portlet.expando.NoSuchRowException if a expando row with the primary key could not be found
@@ -208,7 +208,7 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 	/**
 	* Finds the expando row where tableId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.expando.NoSuchRowException} if it could not be found.
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching expando row
 	* @throws com.liferay.portlet.expando.NoSuchRowException if a matching expando row could not be found
@@ -222,7 +222,7 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 	/**
 	* Finds the expando row where tableId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching expando row, or <code>null</code> if a matching expando row could not be found
 	* @throws SystemException if a system exception occurred
@@ -234,7 +234,7 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 	/**
 	* Finds the expando row where tableId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching expando row, or <code>null</code> if a matching expando row could not be found
 	* @throws SystemException if a system exception occurred
@@ -289,7 +289,7 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 	/**
 	* Removes all the expando rows where tableId = &#63; from the database.
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByTableId(long tableId)
@@ -298,7 +298,7 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 	/**
 	* Removes the expando row where tableId = &#63; and classPK = &#63; from the database.
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param classPK the class p k to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -317,7 +317,7 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 	/**
 	* Counts all the expando rows where tableId = &#63;.
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @return the number of matching expando rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -327,7 +327,7 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 	/**
 	* Counts all the expando rows where tableId = &#63; and classPK = &#63;.
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param classPK the class p k to search with
 	* @return the number of matching expando rows
 	* @throws SystemException if a system exception occurred

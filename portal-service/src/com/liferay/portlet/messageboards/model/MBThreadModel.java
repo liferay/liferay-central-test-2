@@ -60,58 +60,58 @@ public interface MBThreadModel extends BaseModel<MBThread> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the thread id of this message boards thread.
+	 * Gets the thread ID of this message boards thread.
 	 *
-	 * @return the thread id of this message boards thread
+	 * @return the thread ID of this message boards thread
 	 */
 	public long getThreadId();
 
 	/**
-	 * Sets the thread id of this message boards thread.
+	 * Sets the thread ID of this message boards thread.
 	 *
-	 * @param threadId the thread id of this message boards thread
+	 * @param threadId the thread ID of this message boards thread
 	 */
 	public void setThreadId(long threadId);
 
 	/**
-	 * Gets the group id of this message boards thread.
+	 * Gets the group ID of this message boards thread.
 	 *
-	 * @return the group id of this message boards thread
+	 * @return the group ID of this message boards thread
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this message boards thread.
+	 * Sets the group ID of this message boards thread.
 	 *
-	 * @param groupId the group id of this message boards thread
+	 * @param groupId the group ID of this message boards thread
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the category id of this message boards thread.
+	 * Gets the category ID of this message boards thread.
 	 *
-	 * @return the category id of this message boards thread
+	 * @return the category ID of this message boards thread
 	 */
 	public long getCategoryId();
 
 	/**
-	 * Sets the category id of this message boards thread.
+	 * Sets the category ID of this message boards thread.
 	 *
-	 * @param categoryId the category id of this message boards thread
+	 * @param categoryId the category ID of this message boards thread
 	 */
 	public void setCategoryId(long categoryId);
 
 	/**
-	 * Gets the root message id of this message boards thread.
+	 * Gets the root message ID of this message boards thread.
 	 *
-	 * @return the root message id of this message boards thread
+	 * @return the root message ID of this message boards thread
 	 */
 	public long getRootMessageId();
 
 	/**
-	 * Sets the root message id of this message boards thread.
+	 * Sets the root message ID of this message boards thread.
 	 *
-	 * @param rootMessageId the root message id of this message boards thread
+	 * @param rootMessageId the root message ID of this message boards thread
 	 */
 	public void setRootMessageId(long rootMessageId);
 
@@ -144,16 +144,16 @@ public interface MBThreadModel extends BaseModel<MBThread> {
 	public void setViewCount(int viewCount);
 
 	/**
-	 * Gets the last post by user id of this message boards thread.
+	 * Gets the last post by user ID of this message boards thread.
 	 *
-	 * @return the last post by user id of this message boards thread
+	 * @return the last post by user ID of this message boards thread
 	 */
 	public long getLastPostByUserId();
 
 	/**
-	 * Sets the last post by user id of this message boards thread.
+	 * Sets the last post by user ID of this message boards thread.
 	 *
-	 * @param lastPostByUserId the last post by user id of this message boards thread
+	 * @param lastPostByUserId the last post by user ID of this message boards thread
 	 */
 	public void setLastPostByUserId(long lastPostByUserId);
 
@@ -215,16 +215,16 @@ public interface MBThreadModel extends BaseModel<MBThread> {
 	public void setStatus(int status);
 
 	/**
-	 * Gets the status by user id of this message boards thread.
+	 * Gets the status by user ID of this message boards thread.
 	 *
-	 * @return the status by user id of this message boards thread
+	 * @return the status by user ID of this message boards thread
 	 */
 	public long getStatusByUserId();
 
 	/**
-	 * Sets the status by user id of this message boards thread.
+	 * Sets the status by user ID of this message boards thread.
 	 *
-	 * @param statusByUserId the status by user id of this message boards thread
+	 * @param statusByUserId the status by user ID of this message boards thread
 	 */
 	public void setStatusByUserId(long statusByUserId);
 

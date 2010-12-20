@@ -58,16 +58,16 @@ public interface ImageModel extends BaseModel<Image> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the image id of this image.
+	 * Gets the image ID of this image.
 	 *
-	 * @return the image id of this image
+	 * @return the image ID of this image
 	 */
 	public long getImageId();
 
 	/**
-	 * Sets the image id of this image.
+	 * Sets the image ID of this image.
 	 *
-	 * @param imageId the image id of this image
+	 * @param imageId the image ID of this image
 	 */
 	public void setImageId(long imageId);
 

@@ -65,72 +65,72 @@ public class MBMessageWrapper implements MBMessage {
 	}
 
 	/**
-	* Gets the message id of this message-boards message.
+	* Gets the message ID of this message-boards message.
 	*
-	* @return the message id of this message-boards message
+	* @return the message ID of this message-boards message
 	*/
 	public long getMessageId() {
 		return _mbMessage.getMessageId();
 	}
 
 	/**
-	* Sets the message id of this message-boards message.
+	* Sets the message ID of this message-boards message.
 	*
-	* @param messageId the message id of this message-boards message
+	* @param messageId the message ID of this message-boards message
 	*/
 	public void setMessageId(long messageId) {
 		_mbMessage.setMessageId(messageId);
 	}
 
 	/**
-	* Gets the group id of this message-boards message.
+	* Gets the group ID of this message-boards message.
 	*
-	* @return the group id of this message-boards message
+	* @return the group ID of this message-boards message
 	*/
 	public long getGroupId() {
 		return _mbMessage.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this message-boards message.
+	* Sets the group ID of this message-boards message.
 	*
-	* @param groupId the group id of this message-boards message
+	* @param groupId the group ID of this message-boards message
 	*/
 	public void setGroupId(long groupId) {
 		_mbMessage.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this message-boards message.
+	* Gets the company ID of this message-boards message.
 	*
-	* @return the company id of this message-boards message
+	* @return the company ID of this message-boards message
 	*/
 	public long getCompanyId() {
 		return _mbMessage.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this message-boards message.
+	* Sets the company ID of this message-boards message.
 	*
-	* @param companyId the company id of this message-boards message
+	* @param companyId the company ID of this message-boards message
 	*/
 	public void setCompanyId(long companyId) {
 		_mbMessage.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this message-boards message.
+	* Gets the user ID of this message-boards message.
 	*
-	* @return the user id of this message-boards message
+	* @return the user ID of this message-boards message
 	*/
 	public long getUserId() {
 		return _mbMessage.getUserId();
 	}
 
 	/**
-	* Sets the user id of this message-boards message.
+	* Sets the user ID of this message-boards message.
 	*
-	* @param userId the user id of this message-boards message
+	* @param userId the user ID of this message-boards message
 	*/
 	public void setUserId(long userId) {
 		_mbMessage.setUserId(userId);
@@ -220,18 +220,18 @@ public class MBMessageWrapper implements MBMessage {
 	}
 
 	/**
-	* Gets the class name id of this message-boards message.
+	* Gets the class name ID of this message-boards message.
 	*
-	* @return the class name id of this message-boards message
+	* @return the class name ID of this message-boards message
 	*/
 	public long getClassNameId() {
 		return _mbMessage.getClassNameId();
 	}
 
 	/**
-	* Sets the class name id of this message-boards message.
+	* Sets the class name ID of this message-boards message.
 	*
-	* @param classNameId the class name id of this message-boards message
+	* @param classNameId the class name ID of this message-boards message
 	*/
 	public void setClassNameId(long classNameId) {
 		_mbMessage.setClassNameId(classNameId);
@@ -256,72 +256,72 @@ public class MBMessageWrapper implements MBMessage {
 	}
 
 	/**
-	* Gets the category id of this message-boards message.
+	* Gets the category ID of this message-boards message.
 	*
-	* @return the category id of this message-boards message
+	* @return the category ID of this message-boards message
 	*/
 	public long getCategoryId() {
 		return _mbMessage.getCategoryId();
 	}
 
 	/**
-	* Sets the category id of this message-boards message.
+	* Sets the category ID of this message-boards message.
 	*
-	* @param categoryId the category id of this message-boards message
+	* @param categoryId the category ID of this message-boards message
 	*/
 	public void setCategoryId(long categoryId) {
 		_mbMessage.setCategoryId(categoryId);
 	}
 
 	/**
-	* Gets the thread id of this message-boards message.
+	* Gets the thread ID of this message-boards message.
 	*
-	* @return the thread id of this message-boards message
+	* @return the thread ID of this message-boards message
 	*/
 	public long getThreadId() {
 		return _mbMessage.getThreadId();
 	}
 
 	/**
-	* Sets the thread id of this message-boards message.
+	* Sets the thread ID of this message-boards message.
 	*
-	* @param threadId the thread id of this message-boards message
+	* @param threadId the thread ID of this message-boards message
 	*/
 	public void setThreadId(long threadId) {
 		_mbMessage.setThreadId(threadId);
 	}
 
 	/**
-	* Gets the root message id of this message-boards message.
+	* Gets the root message ID of this message-boards message.
 	*
-	* @return the root message id of this message-boards message
+	* @return the root message ID of this message-boards message
 	*/
 	public long getRootMessageId() {
 		return _mbMessage.getRootMessageId();
 	}
 
 	/**
-	* Sets the root message id of this message-boards message.
+	* Sets the root message ID of this message-boards message.
 	*
-	* @param rootMessageId the root message id of this message-boards message
+	* @param rootMessageId the root message ID of this message-boards message
 	*/
 	public void setRootMessageId(long rootMessageId) {
 		_mbMessage.setRootMessageId(rootMessageId);
 	}
 
 	/**
-	* Gets the parent message id of this message-boards message.
+	* Gets the parent message ID of this message-boards message.
 	*
-	* @return the parent message id of this message-boards message
+	* @return the parent message ID of this message-boards message
 	*/
 	public long getParentMessageId() {
 		return _mbMessage.getParentMessageId();
 	}
 
 	/**
-	* Sets the parent message id of this message-boards message.
+	* Sets the parent message ID of this message-boards message.
 	*
-	* @param parentMessageId the parent message id of this message-boards message
+	* @param parentMessageId the parent message ID of this message-boards message
 	*/
 	public void setParentMessageId(long parentMessageId) {
 		_mbMessage.setParentMessageId(parentMessageId);
@@ -499,18 +499,18 @@ public class MBMessageWrapper implements MBMessage {
 	}
 
 	/**
-	* Gets the status by user id of this message-boards message.
+	* Gets the status by user ID of this message-boards message.
 	*
-	* @return the status by user id of this message-boards message
+	* @return the status by user ID of this message-boards message
 	*/
 	public long getStatusByUserId() {
 		return _mbMessage.getStatusByUserId();
 	}
 
 	/**
-	* Sets the status by user id of this message-boards message.
+	* Sets the status by user ID of this message-boards message.
 	*
-	* @param statusByUserId the status by user id of this message-boards message
+	* @param statusByUserId the status by user ID of this message-boards message
 	*/
 	public void setStatusByUserId(long statusByUserId) {
 		_mbMessage.setStatusByUserId(statusByUserId);

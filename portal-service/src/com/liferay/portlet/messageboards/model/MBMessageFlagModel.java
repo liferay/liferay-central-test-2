@@ -59,30 +59,30 @@ public interface MBMessageFlagModel extends BaseModel<MBMessageFlag> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the message flag id of this message boards message flag.
+	 * Gets the message flag ID of this message boards message flag.
 	 *
-	 * @return the message flag id of this message boards message flag
+	 * @return the message flag ID of this message boards message flag
 	 */
 	public long getMessageFlagId();
 
 	/**
-	 * Sets the message flag id of this message boards message flag.
+	 * Sets the message flag ID of this message boards message flag.
 	 *
-	 * @param messageFlagId the message flag id of this message boards message flag
+	 * @param messageFlagId the message flag ID of this message boards message flag
 	 */
 	public void setMessageFlagId(long messageFlagId);
 
 	/**
-	 * Gets the user id of this message boards message flag.
+	 * Gets the user ID of this message boards message flag.
 	 *
-	 * @return the user id of this message boards message flag
+	 * @return the user ID of this message boards message flag
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this message boards message flag.
+	 * Sets the user ID of this message boards message flag.
 	 *
-	 * @param userId the user id of this message boards message flag
+	 * @param userId the user ID of this message boards message flag
 	 */
 	public void setUserId(long userId);
 
@@ -116,30 +116,30 @@ public interface MBMessageFlagModel extends BaseModel<MBMessageFlag> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the thread id of this message boards message flag.
+	 * Gets the thread ID of this message boards message flag.
 	 *
-	 * @return the thread id of this message boards message flag
+	 * @return the thread ID of this message boards message flag
 	 */
 	public long getThreadId();
 
 	/**
-	 * Sets the thread id of this message boards message flag.
+	 * Sets the thread ID of this message boards message flag.
 	 *
-	 * @param threadId the thread id of this message boards message flag
+	 * @param threadId the thread ID of this message boards message flag
 	 */
 	public void setThreadId(long threadId);
 
 	/**
-	 * Gets the message id of this message boards message flag.
+	 * Gets the message ID of this message boards message flag.
 	 *
-	 * @return the message id of this message boards message flag
+	 * @return the message ID of this message boards message flag
 	 */
 	public long getMessageId();
 
 	/**
-	 * Sets the message id of this message boards message flag.
+	 * Sets the message ID of this message boards message flag.
 	 *
-	 * @param messageId the message id of this message boards message flag
+	 * @param messageId the message ID of this message boards message flag
 	 */
 	public void setMessageId(long messageId);
 

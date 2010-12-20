@@ -56,16 +56,16 @@ public interface ServiceComponentModel extends BaseModel<ServiceComponent> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the service component id of this service component.
+	 * Gets the service component ID of this service component.
 	 *
-	 * @return the service component id of this service component
+	 * @return the service component ID of this service component
 	 */
 	public long getServiceComponentId();
 
 	/**
-	 * Sets the service component id of this service component.
+	 * Sets the service component ID of this service component.
 	 *
-	 * @param serviceComponentId the service component id of this service component
+	 * @param serviceComponentId the service component ID of this service component
 	 */
 	public void setServiceComponentId(long serviceComponentId);
 

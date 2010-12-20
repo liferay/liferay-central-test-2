@@ -47,54 +47,54 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	/**
-	* Gets the product version id of this s c product version.
+	* Gets the product version ID of this s c product version.
 	*
-	* @return the product version id of this s c product version
+	* @return the product version ID of this s c product version
 	*/
 	public long getProductVersionId() {
 		return _scProductVersion.getProductVersionId();
 	}
 
 	/**
-	* Sets the product version id of this s c product version.
+	* Sets the product version ID of this s c product version.
 	*
-	* @param productVersionId the product version id of this s c product version
+	* @param productVersionId the product version ID of this s c product version
 	*/
 	public void setProductVersionId(long productVersionId) {
 		_scProductVersion.setProductVersionId(productVersionId);
 	}
 
 	/**
-	* Gets the company id of this s c product version.
+	* Gets the company ID of this s c product version.
 	*
-	* @return the company id of this s c product version
+	* @return the company ID of this s c product version
 	*/
 	public long getCompanyId() {
 		return _scProductVersion.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this s c product version.
+	* Sets the company ID of this s c product version.
 	*
-	* @param companyId the company id of this s c product version
+	* @param companyId the company ID of this s c product version
 	*/
 	public void setCompanyId(long companyId) {
 		_scProductVersion.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this s c product version.
+	* Gets the user ID of this s c product version.
 	*
-	* @return the user id of this s c product version
+	* @return the user ID of this s c product version
 	*/
 	public long getUserId() {
 		return _scProductVersion.getUserId();
 	}
 
 	/**
-	* Sets the user id of this s c product version.
+	* Sets the user ID of this s c product version.
 	*
-	* @param userId the user id of this s c product version
+	* @param userId the user ID of this s c product version
 	*/
 	public void setUserId(long userId) {
 		_scProductVersion.setUserId(userId);
@@ -175,18 +175,18 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	/**
-	* Gets the product entry id of this s c product version.
+	* Gets the product entry ID of this s c product version.
 	*
-	* @return the product entry id of this s c product version
+	* @return the product entry ID of this s c product version
 	*/
 	public long getProductEntryId() {
 		return _scProductVersion.getProductEntryId();
 	}
 
 	/**
-	* Sets the product entry id of this s c product version.
+	* Sets the product entry ID of this s c product version.
 	*
-	* @param productEntryId the product entry id of this s c product version
+	* @param productEntryId the product entry ID of this s c product version
 	*/
 	public void setProductEntryId(long productEntryId) {
 		_scProductVersion.setProductEntryId(productEntryId);

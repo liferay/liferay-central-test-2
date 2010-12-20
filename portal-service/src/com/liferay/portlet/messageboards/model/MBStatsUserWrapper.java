@@ -47,18 +47,18 @@ public class MBStatsUserWrapper implements MBStatsUser {
 	}
 
 	/**
-	* Gets the stats user id of this message boards stats user.
+	* Gets the stats user ID of this message boards stats user.
 	*
-	* @return the stats user id of this message boards stats user
+	* @return the stats user ID of this message boards stats user
 	*/
 	public long getStatsUserId() {
 		return _mbStatsUser.getStatsUserId();
 	}
 
 	/**
-	* Sets the stats user id of this message boards stats user.
+	* Sets the stats user ID of this message boards stats user.
 	*
-	* @param statsUserId the stats user id of this message boards stats user
+	* @param statsUserId the stats user ID of this message boards stats user
 	*/
 	public void setStatsUserId(long statsUserId) {
 		_mbStatsUser.setStatsUserId(statsUserId);
@@ -85,36 +85,36 @@ public class MBStatsUserWrapper implements MBStatsUser {
 	}
 
 	/**
-	* Gets the group id of this message boards stats user.
+	* Gets the group ID of this message boards stats user.
 	*
-	* @return the group id of this message boards stats user
+	* @return the group ID of this message boards stats user
 	*/
 	public long getGroupId() {
 		return _mbStatsUser.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this message boards stats user.
+	* Sets the group ID of this message boards stats user.
 	*
-	* @param groupId the group id of this message boards stats user
+	* @param groupId the group ID of this message boards stats user
 	*/
 	public void setGroupId(long groupId) {
 		_mbStatsUser.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the user id of this message boards stats user.
+	* Gets the user ID of this message boards stats user.
 	*
-	* @return the user id of this message boards stats user
+	* @return the user ID of this message boards stats user
 	*/
 	public long getUserId() {
 		return _mbStatsUser.getUserId();
 	}
 
 	/**
-	* Sets the user id of this message boards stats user.
+	* Sets the user ID of this message boards stats user.
 	*
-	* @param userId the user id of this message boards stats user
+	* @param userId the user ID of this message boards stats user
 	*/
 	public void setUserId(long userId) {
 		_mbStatsUser.setUserId(userId);

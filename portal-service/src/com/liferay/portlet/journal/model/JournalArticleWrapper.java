@@ -65,18 +65,18 @@ public class JournalArticleWrapper implements JournalArticle {
 	}
 
 	/**
-	* Gets the id of this journal article.
+	* Gets the ID of this journal article.
 	*
-	* @return the id of this journal article
+	* @return the ID of this journal article
 	*/
 	public long getId() {
 		return _journalArticle.getId();
 	}
 
 	/**
-	* Sets the id of this journal article.
+	* Sets the ID of this journal article.
 	*
-	* @param id the id of this journal article
+	* @param id the ID of this journal article
 	*/
 	public void setId(long id) {
 		_journalArticle.setId(id);
@@ -101,54 +101,54 @@ public class JournalArticleWrapper implements JournalArticle {
 	}
 
 	/**
-	* Gets the group id of this journal article.
+	* Gets the group ID of this journal article.
 	*
-	* @return the group id of this journal article
+	* @return the group ID of this journal article
 	*/
 	public long getGroupId() {
 		return _journalArticle.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this journal article.
+	* Sets the group ID of this journal article.
 	*
-	* @param groupId the group id of this journal article
+	* @param groupId the group ID of this journal article
 	*/
 	public void setGroupId(long groupId) {
 		_journalArticle.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this journal article.
+	* Gets the company ID of this journal article.
 	*
-	* @return the company id of this journal article
+	* @return the company ID of this journal article
 	*/
 	public long getCompanyId() {
 		return _journalArticle.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this journal article.
+	* Sets the company ID of this journal article.
 	*
-	* @param companyId the company id of this journal article
+	* @param companyId the company ID of this journal article
 	*/
 	public void setCompanyId(long companyId) {
 		_journalArticle.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this journal article.
+	* Gets the user ID of this journal article.
 	*
-	* @return the user id of this journal article
+	* @return the user ID of this journal article
 	*/
 	public long getUserId() {
 		return _journalArticle.getUserId();
 	}
 
 	/**
-	* Sets the user id of this journal article.
+	* Sets the user ID of this journal article.
 	*
-	* @param userId the user id of this journal article
+	* @param userId the user ID of this journal article
 	*/
 	public void setUserId(long userId) {
 		_journalArticle.setUserId(userId);
@@ -229,18 +229,18 @@ public class JournalArticleWrapper implements JournalArticle {
 	}
 
 	/**
-	* Gets the article id of this journal article.
+	* Gets the article ID of this journal article.
 	*
-	* @return the article id of this journal article
+	* @return the article ID of this journal article
 	*/
 	public java.lang.String getArticleId() {
 		return _journalArticle.getArticleId();
 	}
 
 	/**
-	* Sets the article id of this journal article.
+	* Sets the article ID of this journal article.
 	*
-	* @param articleId the article id of this journal article
+	* @param articleId the article ID of this journal article
 	*/
 	public void setArticleId(java.lang.String articleId) {
 		_journalArticle.setArticleId(articleId);
@@ -355,36 +355,36 @@ public class JournalArticleWrapper implements JournalArticle {
 	}
 
 	/**
-	* Gets the structure id of this journal article.
+	* Gets the structure ID of this journal article.
 	*
-	* @return the structure id of this journal article
+	* @return the structure ID of this journal article
 	*/
 	public java.lang.String getStructureId() {
 		return _journalArticle.getStructureId();
 	}
 
 	/**
-	* Sets the structure id of this journal article.
+	* Sets the structure ID of this journal article.
 	*
-	* @param structureId the structure id of this journal article
+	* @param structureId the structure ID of this journal article
 	*/
 	public void setStructureId(java.lang.String structureId) {
 		_journalArticle.setStructureId(structureId);
 	}
 
 	/**
-	* Gets the template id of this journal article.
+	* Gets the template ID of this journal article.
 	*
-	* @return the template id of this journal article
+	* @return the template ID of this journal article
 	*/
 	public java.lang.String getTemplateId() {
 		return _journalArticle.getTemplateId();
 	}
 
 	/**
-	* Sets the template id of this journal article.
+	* Sets the template ID of this journal article.
 	*
-	* @param templateId the template id of this journal article
+	* @param templateId the template ID of this journal article
 	*/
 	public void setTemplateId(java.lang.String templateId) {
 		_journalArticle.setTemplateId(templateId);
@@ -499,18 +499,18 @@ public class JournalArticleWrapper implements JournalArticle {
 	}
 
 	/**
-	* Gets the small image id of this journal article.
+	* Gets the small image ID of this journal article.
 	*
-	* @return the small image id of this journal article
+	* @return the small image ID of this journal article
 	*/
 	public long getSmallImageId() {
 		return _journalArticle.getSmallImageId();
 	}
 
 	/**
-	* Sets the small image id of this journal article.
+	* Sets the small image ID of this journal article.
 	*
-	* @param smallImageId the small image id of this journal article
+	* @param smallImageId the small image ID of this journal article
 	*/
 	public void setSmallImageId(long smallImageId) {
 		_journalArticle.setSmallImageId(smallImageId);
@@ -553,18 +553,18 @@ public class JournalArticleWrapper implements JournalArticle {
 	}
 
 	/**
-	* Gets the status by user id of this journal article.
+	* Gets the status by user ID of this journal article.
 	*
-	* @return the status by user id of this journal article
+	* @return the status by user ID of this journal article
 	*/
 	public long getStatusByUserId() {
 		return _journalArticle.getStatusByUserId();
 	}
 
 	/**
-	* Sets the status by user id of this journal article.
+	* Sets the status by user ID of this journal article.
 	*
-	* @param statusByUserId the status by user id of this journal article
+	* @param statusByUserId the status by user ID of this journal article
 	*/
 	public void setStatusByUserId(long statusByUserId) {
 		_journalArticle.setStatusByUserId(statusByUserId);

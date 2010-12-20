@@ -75,58 +75,58 @@ public interface JournalTemplateModel extends BaseModel<JournalTemplate> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the id of this journal template.
+	 * Gets the ID of this journal template.
 	 *
-	 * @return the id of this journal template
+	 * @return the ID of this journal template
 	 */
 	public long getId();
 
 	/**
-	 * Sets the id of this journal template.
+	 * Sets the ID of this journal template.
 	 *
-	 * @param id the id of this journal template
+	 * @param id the ID of this journal template
 	 */
 	public void setId(long id);
 
 	/**
-	 * Gets the group id of this journal template.
+	 * Gets the group ID of this journal template.
 	 *
-	 * @return the group id of this journal template
+	 * @return the group ID of this journal template
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this journal template.
+	 * Sets the group ID of this journal template.
 	 *
-	 * @param groupId the group id of this journal template
+	 * @param groupId the group ID of this journal template
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this journal template.
+	 * Gets the company ID of this journal template.
 	 *
-	 * @return the company id of this journal template
+	 * @return the company ID of this journal template
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this journal template.
+	 * Sets the company ID of this journal template.
 	 *
-	 * @param companyId the company id of this journal template
+	 * @param companyId the company ID of this journal template
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this journal template.
+	 * Gets the user ID of this journal template.
 	 *
-	 * @return the user id of this journal template
+	 * @return the user ID of this journal template
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this journal template.
+	 * Sets the user ID of this journal template.
 	 *
-	 * @param userId the user id of this journal template
+	 * @param userId the user ID of this journal template
 	 */
 	public void setUserId(long userId);
 
@@ -189,30 +189,30 @@ public interface JournalTemplateModel extends BaseModel<JournalTemplate> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the template id of this journal template.
+	 * Gets the template ID of this journal template.
 	 *
-	 * @return the template id of this journal template
+	 * @return the template ID of this journal template
 	 */
 	public String getTemplateId();
 
 	/**
-	 * Sets the template id of this journal template.
+	 * Sets the template ID of this journal template.
 	 *
-	 * @param templateId the template id of this journal template
+	 * @param templateId the template ID of this journal template
 	 */
 	public void setTemplateId(String templateId);
 
 	/**
-	 * Gets the structure id of this journal template.
+	 * Gets the structure ID of this journal template.
 	 *
-	 * @return the structure id of this journal template
+	 * @return the structure ID of this journal template
 	 */
 	public String getStructureId();
 
 	/**
-	 * Sets the structure id of this journal template.
+	 * Sets the structure ID of this journal template.
 	 *
-	 * @param structureId the structure id of this journal template
+	 * @param structureId the structure ID of this journal template
 	 */
 	public void setStructureId(String structureId);
 
@@ -319,16 +319,16 @@ public interface JournalTemplateModel extends BaseModel<JournalTemplate> {
 	public void setSmallImage(boolean smallImage);
 
 	/**
-	 * Gets the small image id of this journal template.
+	 * Gets the small image ID of this journal template.
 	 *
-	 * @return the small image id of this journal template
+	 * @return the small image ID of this journal template
 	 */
 	public long getSmallImageId();
 
 	/**
-	 * Sets the small image id of this journal template.
+	 * Sets the small image ID of this journal template.
 	 *
-	 * @param smallImageId the small image id of this journal template
+	 * @param smallImageId the small image ID of this journal template
 	 */
 	public void setSmallImageId(long smallImageId);
 

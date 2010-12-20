@@ -47,54 +47,54 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	/**
-	* Gets the layout set id of this layout set.
+	* Gets the layout set ID of this layout set.
 	*
-	* @return the layout set id of this layout set
+	* @return the layout set ID of this layout set
 	*/
 	public long getLayoutSetId() {
 		return _layoutSet.getLayoutSetId();
 	}
 
 	/**
-	* Sets the layout set id of this layout set.
+	* Sets the layout set ID of this layout set.
 	*
-	* @param layoutSetId the layout set id of this layout set
+	* @param layoutSetId the layout set ID of this layout set
 	*/
 	public void setLayoutSetId(long layoutSetId) {
 		_layoutSet.setLayoutSetId(layoutSetId);
 	}
 
 	/**
-	* Gets the group id of this layout set.
+	* Gets the group ID of this layout set.
 	*
-	* @return the group id of this layout set
+	* @return the group ID of this layout set
 	*/
 	public long getGroupId() {
 		return _layoutSet.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this layout set.
+	* Sets the group ID of this layout set.
 	*
-	* @param groupId the group id of this layout set
+	* @param groupId the group ID of this layout set
 	*/
 	public void setGroupId(long groupId) {
 		_layoutSet.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this layout set.
+	* Gets the company ID of this layout set.
 	*
-	* @return the company id of this layout set
+	* @return the company ID of this layout set
 	*/
 	public long getCompanyId() {
 		return _layoutSet.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this layout set.
+	* Sets the company ID of this layout set.
 	*
-	* @param companyId the company id of this layout set
+	* @param companyId the company ID of this layout set
 	*/
 	public void setCompanyId(long companyId) {
 		_layoutSet.setCompanyId(companyId);
@@ -155,90 +155,90 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	/**
-	* Gets the logo id of this layout set.
+	* Gets the logo ID of this layout set.
 	*
-	* @return the logo id of this layout set
+	* @return the logo ID of this layout set
 	*/
 	public long getLogoId() {
 		return _layoutSet.getLogoId();
 	}
 
 	/**
-	* Sets the logo id of this layout set.
+	* Sets the logo ID of this layout set.
 	*
-	* @param logoId the logo id of this layout set
+	* @param logoId the logo ID of this layout set
 	*/
 	public void setLogoId(long logoId) {
 		_layoutSet.setLogoId(logoId);
 	}
 
 	/**
-	* Gets the theme id of this layout set.
+	* Gets the theme ID of this layout set.
 	*
-	* @return the theme id of this layout set
+	* @return the theme ID of this layout set
 	*/
 	public java.lang.String getThemeId() {
 		return _layoutSet.getThemeId();
 	}
 
 	/**
-	* Sets the theme id of this layout set.
+	* Sets the theme ID of this layout set.
 	*
-	* @param themeId the theme id of this layout set
+	* @param themeId the theme ID of this layout set
 	*/
 	public void setThemeId(java.lang.String themeId) {
 		_layoutSet.setThemeId(themeId);
 	}
 
 	/**
-	* Gets the color scheme id of this layout set.
+	* Gets the color scheme ID of this layout set.
 	*
-	* @return the color scheme id of this layout set
+	* @return the color scheme ID of this layout set
 	*/
 	public java.lang.String getColorSchemeId() {
 		return _layoutSet.getColorSchemeId();
 	}
 
 	/**
-	* Sets the color scheme id of this layout set.
+	* Sets the color scheme ID of this layout set.
 	*
-	* @param colorSchemeId the color scheme id of this layout set
+	* @param colorSchemeId the color scheme ID of this layout set
 	*/
 	public void setColorSchemeId(java.lang.String colorSchemeId) {
 		_layoutSet.setColorSchemeId(colorSchemeId);
 	}
 
 	/**
-	* Gets the wap theme id of this layout set.
+	* Gets the wap theme ID of this layout set.
 	*
-	* @return the wap theme id of this layout set
+	* @return the wap theme ID of this layout set
 	*/
 	public java.lang.String getWapThemeId() {
 		return _layoutSet.getWapThemeId();
 	}
 
 	/**
-	* Sets the wap theme id of this layout set.
+	* Sets the wap theme ID of this layout set.
 	*
-	* @param wapThemeId the wap theme id of this layout set
+	* @param wapThemeId the wap theme ID of this layout set
 	*/
 	public void setWapThemeId(java.lang.String wapThemeId) {
 		_layoutSet.setWapThemeId(wapThemeId);
 	}
 
 	/**
-	* Gets the wap color scheme id of this layout set.
+	* Gets the wap color scheme ID of this layout set.
 	*
-	* @return the wap color scheme id of this layout set
+	* @return the wap color scheme ID of this layout set
 	*/
 	public java.lang.String getWapColorSchemeId() {
 		return _layoutSet.getWapColorSchemeId();
 	}
 
 	/**
-	* Sets the wap color scheme id of this layout set.
+	* Sets the wap color scheme ID of this layout set.
 	*
-	* @param wapColorSchemeId the wap color scheme id of this layout set
+	* @param wapColorSchemeId the wap color scheme ID of this layout set
 	*/
 	public void setWapColorSchemeId(java.lang.String wapColorSchemeId) {
 		_layoutSet.setWapColorSchemeId(wapColorSchemeId);
@@ -299,18 +299,18 @@ public class LayoutSetWrapper implements LayoutSet {
 	}
 
 	/**
-	* Gets the layout set prototype id of this layout set.
+	* Gets the layout set prototype ID of this layout set.
 	*
-	* @return the layout set prototype id of this layout set
+	* @return the layout set prototype ID of this layout set
 	*/
 	public long getLayoutSetPrototypeId() {
 		return _layoutSet.getLayoutSetPrototypeId();
 	}
 
 	/**
-	* Sets the layout set prototype id of this layout set.
+	* Sets the layout set prototype ID of this layout set.
 	*
-	* @param layoutSetPrototypeId the layout set prototype id of this layout set
+	* @param layoutSetPrototypeId the layout set prototype ID of this layout set
 	*/
 	public void setLayoutSetPrototypeId(long layoutSetPrototypeId) {
 		_layoutSet.setLayoutSetPrototypeId(layoutSetPrototypeId);

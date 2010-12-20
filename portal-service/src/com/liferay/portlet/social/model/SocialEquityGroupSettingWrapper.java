@@ -48,54 +48,54 @@ public class SocialEquityGroupSettingWrapper implements SocialEquityGroupSetting
 	}
 
 	/**
-	* Gets the equity group setting id of this social equity group setting.
+	* Gets the equity group setting ID of this social equity group setting.
 	*
-	* @return the equity group setting id of this social equity group setting
+	* @return the equity group setting ID of this social equity group setting
 	*/
 	public long getEquityGroupSettingId() {
 		return _socialEquityGroupSetting.getEquityGroupSettingId();
 	}
 
 	/**
-	* Sets the equity group setting id of this social equity group setting.
+	* Sets the equity group setting ID of this social equity group setting.
 	*
-	* @param equityGroupSettingId the equity group setting id of this social equity group setting
+	* @param equityGroupSettingId the equity group setting ID of this social equity group setting
 	*/
 	public void setEquityGroupSettingId(long equityGroupSettingId) {
 		_socialEquityGroupSetting.setEquityGroupSettingId(equityGroupSettingId);
 	}
 
 	/**
-	* Gets the group id of this social equity group setting.
+	* Gets the group ID of this social equity group setting.
 	*
-	* @return the group id of this social equity group setting
+	* @return the group ID of this social equity group setting
 	*/
 	public long getGroupId() {
 		return _socialEquityGroupSetting.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this social equity group setting.
+	* Sets the group ID of this social equity group setting.
 	*
-	* @param groupId the group id of this social equity group setting
+	* @param groupId the group ID of this social equity group setting
 	*/
 	public void setGroupId(long groupId) {
 		_socialEquityGroupSetting.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this social equity group setting.
+	* Gets the company ID of this social equity group setting.
 	*
-	* @return the company id of this social equity group setting
+	* @return the company ID of this social equity group setting
 	*/
 	public long getCompanyId() {
 		return _socialEquityGroupSetting.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this social equity group setting.
+	* Sets the company ID of this social equity group setting.
 	*
-	* @param companyId the company id of this social equity group setting
+	* @param companyId the company ID of this social equity group setting
 	*/
 	public void setCompanyId(long companyId) {
 		_socialEquityGroupSetting.setCompanyId(companyId);
@@ -111,18 +111,18 @@ public class SocialEquityGroupSettingWrapper implements SocialEquityGroupSetting
 	}
 
 	/**
-	* Gets the class name id of this social equity group setting.
+	* Gets the class name ID of this social equity group setting.
 	*
-	* @return the class name id of this social equity group setting
+	* @return the class name ID of this social equity group setting
 	*/
 	public long getClassNameId() {
 		return _socialEquityGroupSetting.getClassNameId();
 	}
 
 	/**
-	* Sets the class name id of this social equity group setting.
+	* Sets the class name ID of this social equity group setting.
 	*
-	* @param classNameId the class name id of this social equity group setting
+	* @param classNameId the class name ID of this social equity group setting
 	*/
 	public void setClassNameId(long classNameId) {
 		_socialEquityGroupSetting.setClassNameId(classNameId);

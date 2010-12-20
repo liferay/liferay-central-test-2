@@ -47,36 +47,36 @@ public class UserTrackerPathWrapper implements UserTrackerPath {
 	}
 
 	/**
-	* Gets the user tracker path id of this user tracker path.
+	* Gets the user tracker path ID of this user tracker path.
 	*
-	* @return the user tracker path id of this user tracker path
+	* @return the user tracker path ID of this user tracker path
 	*/
 	public long getUserTrackerPathId() {
 		return _userTrackerPath.getUserTrackerPathId();
 	}
 
 	/**
-	* Sets the user tracker path id of this user tracker path.
+	* Sets the user tracker path ID of this user tracker path.
 	*
-	* @param userTrackerPathId the user tracker path id of this user tracker path
+	* @param userTrackerPathId the user tracker path ID of this user tracker path
 	*/
 	public void setUserTrackerPathId(long userTrackerPathId) {
 		_userTrackerPath.setUserTrackerPathId(userTrackerPathId);
 	}
 
 	/**
-	* Gets the user tracker id of this user tracker path.
+	* Gets the user tracker ID of this user tracker path.
 	*
-	* @return the user tracker id of this user tracker path
+	* @return the user tracker ID of this user tracker path
 	*/
 	public long getUserTrackerId() {
 		return _userTrackerPath.getUserTrackerId();
 	}
 
 	/**
-	* Sets the user tracker id of this user tracker path.
+	* Sets the user tracker ID of this user tracker path.
 	*
-	* @param userTrackerId the user tracker id of this user tracker path
+	* @param userTrackerId the user tracker ID of this user tracker path
 	*/
 	public void setUserTrackerId(long userTrackerId) {
 		_userTrackerPath.setUserTrackerId(userTrackerId);

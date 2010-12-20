@@ -57,58 +57,58 @@ public interface SocialEquityAssetEntryModel extends BaseModel<SocialEquityAsset
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the equity asset entry id of this social equity asset entry.
+	 * Gets the equity asset entry ID of this social equity asset entry.
 	 *
-	 * @return the equity asset entry id of this social equity asset entry
+	 * @return the equity asset entry ID of this social equity asset entry
 	 */
 	public long getEquityAssetEntryId();
 
 	/**
-	 * Sets the equity asset entry id of this social equity asset entry.
+	 * Sets the equity asset entry ID of this social equity asset entry.
 	 *
-	 * @param equityAssetEntryId the equity asset entry id of this social equity asset entry
+	 * @param equityAssetEntryId the equity asset entry ID of this social equity asset entry
 	 */
 	public void setEquityAssetEntryId(long equityAssetEntryId);
 
 	/**
-	 * Gets the group id of this social equity asset entry.
+	 * Gets the group ID of this social equity asset entry.
 	 *
-	 * @return the group id of this social equity asset entry
+	 * @return the group ID of this social equity asset entry
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this social equity asset entry.
+	 * Sets the group ID of this social equity asset entry.
 	 *
-	 * @param groupId the group id of this social equity asset entry
+	 * @param groupId the group ID of this social equity asset entry
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this social equity asset entry.
+	 * Gets the company ID of this social equity asset entry.
 	 *
-	 * @return the company id of this social equity asset entry
+	 * @return the company ID of this social equity asset entry
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this social equity asset entry.
+	 * Sets the company ID of this social equity asset entry.
 	 *
-	 * @param companyId the company id of this social equity asset entry
+	 * @param companyId the company ID of this social equity asset entry
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this social equity asset entry.
+	 * Gets the user ID of this social equity asset entry.
 	 *
-	 * @return the user id of this social equity asset entry
+	 * @return the user ID of this social equity asset entry
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this social equity asset entry.
+	 * Sets the user ID of this social equity asset entry.
 	 *
-	 * @param userId the user id of this social equity asset entry
+	 * @param userId the user ID of this social equity asset entry
 	 */
 	public void setUserId(long userId);
 
@@ -128,16 +128,16 @@ public interface SocialEquityAssetEntryModel extends BaseModel<SocialEquityAsset
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the asset entry id of this social equity asset entry.
+	 * Gets the asset entry ID of this social equity asset entry.
 	 *
-	 * @return the asset entry id of this social equity asset entry
+	 * @return the asset entry ID of this social equity asset entry
 	 */
 	public long getAssetEntryId();
 
 	/**
-	 * Sets the asset entry id of this social equity asset entry.
+	 * Sets the asset entry ID of this social equity asset entry.
 	 *
-	 * @param assetEntryId the asset entry id of this social equity asset entry
+	 * @param assetEntryId the asset entry ID of this social equity asset entry
 	 */
 	public void setAssetEntryId(long assetEntryId);
 

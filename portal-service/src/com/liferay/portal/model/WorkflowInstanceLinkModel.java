@@ -59,58 +59,58 @@ public interface WorkflowInstanceLinkModel extends BaseModel<WorkflowInstanceLin
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the workflow instance link id of this workflow instance link.
+	 * Gets the workflow instance link ID of this workflow instance link.
 	 *
-	 * @return the workflow instance link id of this workflow instance link
+	 * @return the workflow instance link ID of this workflow instance link
 	 */
 	public long getWorkflowInstanceLinkId();
 
 	/**
-	 * Sets the workflow instance link id of this workflow instance link.
+	 * Sets the workflow instance link ID of this workflow instance link.
 	 *
-	 * @param workflowInstanceLinkId the workflow instance link id of this workflow instance link
+	 * @param workflowInstanceLinkId the workflow instance link ID of this workflow instance link
 	 */
 	public void setWorkflowInstanceLinkId(long workflowInstanceLinkId);
 
 	/**
-	 * Gets the group id of this workflow instance link.
+	 * Gets the group ID of this workflow instance link.
 	 *
-	 * @return the group id of this workflow instance link
+	 * @return the group ID of this workflow instance link
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this workflow instance link.
+	 * Sets the group ID of this workflow instance link.
 	 *
-	 * @param groupId the group id of this workflow instance link
+	 * @param groupId the group ID of this workflow instance link
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this workflow instance link.
+	 * Gets the company ID of this workflow instance link.
 	 *
-	 * @return the company id of this workflow instance link
+	 * @return the company ID of this workflow instance link
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this workflow instance link.
+	 * Sets the company ID of this workflow instance link.
 	 *
-	 * @param companyId the company id of this workflow instance link
+	 * @param companyId the company ID of this workflow instance link
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this workflow instance link.
+	 * Gets the user ID of this workflow instance link.
 	 *
-	 * @return the user id of this workflow instance link
+	 * @return the user ID of this workflow instance link
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this workflow instance link.
+	 * Sets the user ID of this workflow instance link.
 	 *
-	 * @param userId the user id of this workflow instance link
+	 * @param userId the user ID of this workflow instance link
 	 */
 	public void setUserId(long userId);
 
@@ -180,16 +180,16 @@ public interface WorkflowInstanceLinkModel extends BaseModel<WorkflowInstanceLin
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this workflow instance link.
+	 * Gets the class name ID of this workflow instance link.
 	 *
-	 * @return the class name id of this workflow instance link
+	 * @return the class name ID of this workflow instance link
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this workflow instance link.
+	 * Sets the class name ID of this workflow instance link.
 	 *
-	 * @param classNameId the class name id of this workflow instance link
+	 * @param classNameId the class name ID of this workflow instance link
 	 */
 	public void setClassNameId(long classNameId);
 
@@ -208,16 +208,16 @@ public interface WorkflowInstanceLinkModel extends BaseModel<WorkflowInstanceLin
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the workflow instance id of this workflow instance link.
+	 * Gets the workflow instance ID of this workflow instance link.
 	 *
-	 * @return the workflow instance id of this workflow instance link
+	 * @return the workflow instance ID of this workflow instance link
 	 */
 	public long getWorkflowInstanceId();
 
 	/**
-	 * Sets the workflow instance id of this workflow instance link.
+	 * Sets the workflow instance ID of this workflow instance link.
 	 *
-	 * @param workflowInstanceId the workflow instance id of this workflow instance link
+	 * @param workflowInstanceId the workflow instance ID of this workflow instance link
 	 */
 	public void setWorkflowInstanceId(long workflowInstanceId);
 

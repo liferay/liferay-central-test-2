@@ -47,54 +47,54 @@ public class EmailAddressWrapper implements EmailAddress {
 	}
 
 	/**
-	* Gets the email address id of this email address.
+	* Gets the email address ID of this email address.
 	*
-	* @return the email address id of this email address
+	* @return the email address ID of this email address
 	*/
 	public long getEmailAddressId() {
 		return _emailAddress.getEmailAddressId();
 	}
 
 	/**
-	* Sets the email address id of this email address.
+	* Sets the email address ID of this email address.
 	*
-	* @param emailAddressId the email address id of this email address
+	* @param emailAddressId the email address ID of this email address
 	*/
 	public void setEmailAddressId(long emailAddressId) {
 		_emailAddress.setEmailAddressId(emailAddressId);
 	}
 
 	/**
-	* Gets the company id of this email address.
+	* Gets the company ID of this email address.
 	*
-	* @return the company id of this email address
+	* @return the company ID of this email address
 	*/
 	public long getCompanyId() {
 		return _emailAddress.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this email address.
+	* Sets the company ID of this email address.
 	*
-	* @param companyId the company id of this email address
+	* @param companyId the company ID of this email address
 	*/
 	public void setCompanyId(long companyId) {
 		_emailAddress.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this email address.
+	* Gets the user ID of this email address.
 	*
-	* @return the user id of this email address
+	* @return the user ID of this email address
 	*/
 	public long getUserId() {
 		return _emailAddress.getUserId();
 	}
 
 	/**
-	* Sets the user id of this email address.
+	* Sets the user ID of this email address.
 	*
-	* @param userId the user id of this email address
+	* @param userId the user ID of this email address
 	*/
 	public void setUserId(long userId) {
 		_emailAddress.setUserId(userId);
@@ -184,18 +184,18 @@ public class EmailAddressWrapper implements EmailAddress {
 	}
 
 	/**
-	* Gets the class name id of this email address.
+	* Gets the class name ID of this email address.
 	*
-	* @return the class name id of this email address
+	* @return the class name ID of this email address
 	*/
 	public long getClassNameId() {
 		return _emailAddress.getClassNameId();
 	}
 
 	/**
-	* Sets the class name id of this email address.
+	* Sets the class name ID of this email address.
 	*
-	* @param classNameId the class name id of this email address
+	* @param classNameId the class name ID of this email address
 	*/
 	public void setClassNameId(long classNameId) {
 		_emailAddress.setClassNameId(classNameId);
@@ -238,18 +238,18 @@ public class EmailAddressWrapper implements EmailAddress {
 	}
 
 	/**
-	* Gets the type id of this email address.
+	* Gets the type ID of this email address.
 	*
-	* @return the type id of this email address
+	* @return the type ID of this email address
 	*/
 	public int getTypeId() {
 		return _emailAddress.getTypeId();
 	}
 
 	/**
-	* Sets the type id of this email address.
+	* Sets the type ID of this email address.
 	*
-	* @param typeId the type id of this email address
+	* @param typeId the type ID of this email address
 	*/
 	public void setTypeId(int typeId) {
 		_emailAddress.setTypeId(typeId);

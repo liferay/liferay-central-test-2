@@ -84,36 +84,36 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 	}
 
 	/**
-	* Gets the group id of this journal article resource.
+	* Gets the group ID of this journal article resource.
 	*
-	* @return the group id of this journal article resource
+	* @return the group ID of this journal article resource
 	*/
 	public long getGroupId() {
 		return _journalArticleResource.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this journal article resource.
+	* Sets the group ID of this journal article resource.
 	*
-	* @param groupId the group id of this journal article resource
+	* @param groupId the group ID of this journal article resource
 	*/
 	public void setGroupId(long groupId) {
 		_journalArticleResource.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the article id of this journal article resource.
+	* Gets the article ID of this journal article resource.
 	*
-	* @return the article id of this journal article resource
+	* @return the article ID of this journal article resource
 	*/
 	public java.lang.String getArticleId() {
 		return _journalArticleResource.getArticleId();
 	}
 
 	/**
-	* Sets the article id of this journal article resource.
+	* Sets the article ID of this journal article resource.
 	*
-	* @param articleId the article id of this journal article resource
+	* @param articleId the article ID of this journal article resource
 	*/
 	public void setArticleId(java.lang.String articleId) {
 		_journalArticleResource.setArticleId(articleId);

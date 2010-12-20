@@ -60,58 +60,58 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the product entry id of this s c product entry.
+	 * Gets the product entry ID of this s c product entry.
 	 *
-	 * @return the product entry id of this s c product entry
+	 * @return the product entry ID of this s c product entry
 	 */
 	public long getProductEntryId();
 
 	/**
-	 * Sets the product entry id of this s c product entry.
+	 * Sets the product entry ID of this s c product entry.
 	 *
-	 * @param productEntryId the product entry id of this s c product entry
+	 * @param productEntryId the product entry ID of this s c product entry
 	 */
 	public void setProductEntryId(long productEntryId);
 
 	/**
-	 * Gets the group id of this s c product entry.
+	 * Gets the group ID of this s c product entry.
 	 *
-	 * @return the group id of this s c product entry
+	 * @return the group ID of this s c product entry
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this s c product entry.
+	 * Sets the group ID of this s c product entry.
 	 *
-	 * @param groupId the group id of this s c product entry
+	 * @param groupId the group ID of this s c product entry
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this s c product entry.
+	 * Gets the company ID of this s c product entry.
 	 *
-	 * @return the company id of this s c product entry
+	 * @return the company ID of this s c product entry
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this s c product entry.
+	 * Sets the company ID of this s c product entry.
 	 *
-	 * @param companyId the company id of this s c product entry
+	 * @param companyId the company ID of this s c product entry
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this s c product entry.
+	 * Gets the user ID of this s c product entry.
 	 *
-	 * @return the user id of this s c product entry
+	 * @return the user ID of this s c product entry
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this s c product entry.
+	 * Sets the user ID of this s c product entry.
 	 *
-	 * @param userId the user id of this s c product entry
+	 * @param userId the user ID of this s c product entry
 	 */
 	public void setUserId(long userId);
 
@@ -279,32 +279,32 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry> {
 	public void setAuthor(String author);
 
 	/**
-	 * Gets the repo group id of this s c product entry.
+	 * Gets the repo group ID of this s c product entry.
 	 *
-	 * @return the repo group id of this s c product entry
+	 * @return the repo group ID of this s c product entry
 	 */
 	@AutoEscape
 	public String getRepoGroupId();
 
 	/**
-	 * Sets the repo group id of this s c product entry.
+	 * Sets the repo group ID of this s c product entry.
 	 *
-	 * @param repoGroupId the repo group id of this s c product entry
+	 * @param repoGroupId the repo group ID of this s c product entry
 	 */
 	public void setRepoGroupId(String repoGroupId);
 
 	/**
-	 * Gets the repo artifact id of this s c product entry.
+	 * Gets the repo artifact ID of this s c product entry.
 	 *
-	 * @return the repo artifact id of this s c product entry
+	 * @return the repo artifact ID of this s c product entry
 	 */
 	@AutoEscape
 	public String getRepoArtifactId();
 
 	/**
-	 * Sets the repo artifact id of this s c product entry.
+	 * Sets the repo artifact ID of this s c product entry.
 	 *
-	 * @param repoArtifactId the repo artifact id of this s c product entry
+	 * @param repoArtifactId the repo artifact ID of this s c product entry
 	 */
 	public void setRepoArtifactId(String repoArtifactId);
 

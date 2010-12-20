@@ -58,30 +58,30 @@ public interface TicketModel extends BaseModel<Ticket> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the ticket id of this ticket.
+	 * Gets the ticket ID of this ticket.
 	 *
-	 * @return the ticket id of this ticket
+	 * @return the ticket ID of this ticket
 	 */
 	public long getTicketId();
 
 	/**
-	 * Sets the ticket id of this ticket.
+	 * Sets the ticket ID of this ticket.
 	 *
-	 * @param ticketId the ticket id of this ticket
+	 * @param ticketId the ticket ID of this ticket
 	 */
 	public void setTicketId(long ticketId);
 
 	/**
-	 * Gets the company id of this ticket.
+	 * Gets the company ID of this ticket.
 	 *
-	 * @return the company id of this ticket
+	 * @return the company ID of this ticket
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this ticket.
+	 * Sets the company ID of this ticket.
 	 *
-	 * @param companyId the company id of this ticket
+	 * @param companyId the company ID of this ticket
 	 */
 	public void setCompanyId(long companyId);
 
@@ -107,16 +107,16 @@ public interface TicketModel extends BaseModel<Ticket> {
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this ticket.
+	 * Gets the class name ID of this ticket.
 	 *
-	 * @return the class name id of this ticket
+	 * @return the class name ID of this ticket
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this ticket.
+	 * Sets the class name ID of this ticket.
 	 *
-	 * @param classNameId the class name id of this ticket
+	 * @param classNameId the class name ID of this ticket
 	 */
 	public void setClassNameId(long classNameId);
 

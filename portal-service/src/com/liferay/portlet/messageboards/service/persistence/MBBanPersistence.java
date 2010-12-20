@@ -102,7 +102,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	/**
 	* Finds all the message boards bans where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching message boards bans
 	* @throws SystemException if a system exception occurred
 	*/
@@ -117,7 +117,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of message boards bans to return
 	* @param end the upper bound of the range of message boards bans to return (not inclusive)
 	* @return the range of matching message boards bans
@@ -134,7 +134,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of message boards bans to return
 	* @param end the upper bound of the range of message boards bans to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -153,7 +153,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a matching message boards ban could not be found
@@ -172,7 +172,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a matching message boards ban could not be found
@@ -192,7 +192,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	* </p>
 	*
 	* @param banId the primary key of the current message boards ban
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a message boards ban with the primary key could not be found
@@ -207,7 +207,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	/**
 	* Finds all the message boards bans where userId = &#63;.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @return the matching message boards bans
 	* @throws SystemException if a system exception occurred
 	*/
@@ -221,7 +221,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of message boards bans to return
 	* @param end the upper bound of the range of message boards bans to return (not inclusive)
 	* @return the range of matching message boards bans
@@ -238,7 +238,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of message boards bans to return
 	* @param end the upper bound of the range of message boards bans to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -257,7 +257,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a matching message boards ban could not be found
@@ -276,7 +276,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a matching message boards ban could not be found
@@ -296,7 +296,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	* </p>
 	*
 	* @param banId the primary key of the current message boards ban
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a message boards ban with the primary key could not be found
@@ -311,7 +311,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	/**
 	* Finds all the message boards bans where banUserId = &#63;.
 	*
-	* @param banUserId the ban user id to search with
+	* @param banUserId the ban user ID to search with
 	* @return the matching message boards bans
 	* @throws SystemException if a system exception occurred
 	*/
@@ -326,7 +326,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param banUserId the ban user id to search with
+	* @param banUserId the ban user ID to search with
 	* @param start the lower bound of the range of message boards bans to return
 	* @param end the upper bound of the range of message boards bans to return (not inclusive)
 	* @return the range of matching message boards bans
@@ -343,7 +343,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param banUserId the ban user id to search with
+	* @param banUserId the ban user ID to search with
 	* @param start the lower bound of the range of message boards bans to return
 	* @param end the upper bound of the range of message boards bans to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -362,7 +362,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param banUserId the ban user id to search with
+	* @param banUserId the ban user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a matching message boards ban could not be found
@@ -381,7 +381,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param banUserId the ban user id to search with
+	* @param banUserId the ban user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a matching message boards ban could not be found
@@ -401,7 +401,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	* </p>
 	*
 	* @param banId the primary key of the current message boards ban
-	* @param banUserId the ban user id to search with
+	* @param banUserId the ban user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a message boards ban with the primary key could not be found
@@ -416,8 +416,8 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	/**
 	* Finds the message boards ban where groupId = &#63; and banUserId = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchBanException} if it could not be found.
 	*
-	* @param groupId the group id to search with
-	* @param banUserId the ban user id to search with
+	* @param groupId the group ID to search with
+	* @param banUserId the ban user ID to search with
 	* @return the matching message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a matching message boards ban could not be found
 	* @throws SystemException if a system exception occurred
@@ -430,8 +430,8 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	/**
 	* Finds the message boards ban where groupId = &#63; and banUserId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group id to search with
-	* @param banUserId the ban user id to search with
+	* @param groupId the group ID to search with
+	* @param banUserId the ban user ID to search with
 	* @return the matching message boards ban, or <code>null</code> if a matching message boards ban could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -442,8 +442,8 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	/**
 	* Finds the message boards ban where groupId = &#63; and banUserId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group id to search with
-	* @param banUserId the ban user id to search with
+	* @param groupId the group ID to search with
+	* @param banUserId the ban user ID to search with
 	* @return the matching message boards ban, or <code>null</code> if a matching message boards ban could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -497,7 +497,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	/**
 	* Removes all the message boards bans where groupId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByGroupId(long groupId)
@@ -506,7 +506,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	/**
 	* Removes all the message boards bans where userId = &#63; from the database.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUserId(long userId)
@@ -515,7 +515,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	/**
 	* Removes all the message boards bans where banUserId = &#63; from the database.
 	*
-	* @param banUserId the ban user id to search with
+	* @param banUserId the ban user ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByBanUserId(long banUserId)
@@ -524,8 +524,8 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	/**
 	* Removes the message boards ban where groupId = &#63; and banUserId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param banUserId the ban user id to search with
+	* @param groupId the group ID to search with
+	* @param banUserId the ban user ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByG_B(long groupId, long banUserId)
@@ -543,7 +543,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	/**
 	* Counts all the message boards bans where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching message boards bans
 	* @throws SystemException if a system exception occurred
 	*/
@@ -553,7 +553,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	/**
 	* Counts all the message boards bans where userId = &#63;.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @return the number of matching message boards bans
 	* @throws SystemException if a system exception occurred
 	*/
@@ -563,7 +563,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	/**
 	* Counts all the message boards bans where banUserId = &#63;.
 	*
-	* @param banUserId the ban user id to search with
+	* @param banUserId the ban user ID to search with
 	* @return the number of matching message boards bans
 	* @throws SystemException if a system exception occurred
 	*/
@@ -573,8 +573,8 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	/**
 	* Counts all the message boards bans where groupId = &#63; and banUserId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param banUserId the ban user id to search with
+	* @param groupId the group ID to search with
+	* @param banUserId the ban user ID to search with
 	* @return the number of matching message boards bans
 	* @throws SystemException if a system exception occurred
 	*/

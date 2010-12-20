@@ -60,58 +60,58 @@ public interface TasksReviewModel extends BaseModel<TasksReview> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the review id of this tasks review.
+	 * Gets the review ID of this tasks review.
 	 *
-	 * @return the review id of this tasks review
+	 * @return the review ID of this tasks review
 	 */
 	public long getReviewId();
 
 	/**
-	 * Sets the review id of this tasks review.
+	 * Sets the review ID of this tasks review.
 	 *
-	 * @param reviewId the review id of this tasks review
+	 * @param reviewId the review ID of this tasks review
 	 */
 	public void setReviewId(long reviewId);
 
 	/**
-	 * Gets the group id of this tasks review.
+	 * Gets the group ID of this tasks review.
 	 *
-	 * @return the group id of this tasks review
+	 * @return the group ID of this tasks review
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this tasks review.
+	 * Sets the group ID of this tasks review.
 	 *
-	 * @param groupId the group id of this tasks review
+	 * @param groupId the group ID of this tasks review
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this tasks review.
+	 * Gets the company ID of this tasks review.
 	 *
-	 * @return the company id of this tasks review
+	 * @return the company ID of this tasks review
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this tasks review.
+	 * Sets the company ID of this tasks review.
 	 *
-	 * @param companyId the company id of this tasks review
+	 * @param companyId the company ID of this tasks review
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this tasks review.
+	 * Gets the user ID of this tasks review.
 	 *
-	 * @return the user id of this tasks review
+	 * @return the user ID of this tasks review
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this tasks review.
+	 * Sets the user ID of this tasks review.
 	 *
-	 * @param userId the user id of this tasks review
+	 * @param userId the user ID of this tasks review
 	 */
 	public void setUserId(long userId);
 
@@ -174,30 +174,30 @@ public interface TasksReviewModel extends BaseModel<TasksReview> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the proposal id of this tasks review.
+	 * Gets the proposal ID of this tasks review.
 	 *
-	 * @return the proposal id of this tasks review
+	 * @return the proposal ID of this tasks review
 	 */
 	public long getProposalId();
 
 	/**
-	 * Sets the proposal id of this tasks review.
+	 * Sets the proposal ID of this tasks review.
 	 *
-	 * @param proposalId the proposal id of this tasks review
+	 * @param proposalId the proposal ID of this tasks review
 	 */
 	public void setProposalId(long proposalId);
 
 	/**
-	 * Gets the assigned by user id of this tasks review.
+	 * Gets the assigned by user ID of this tasks review.
 	 *
-	 * @return the assigned by user id of this tasks review
+	 * @return the assigned by user ID of this tasks review
 	 */
 	public long getAssignedByUserId();
 
 	/**
-	 * Sets the assigned by user id of this tasks review.
+	 * Sets the assigned by user ID of this tasks review.
 	 *
-	 * @param assignedByUserId the assigned by user id of this tasks review
+	 * @param assignedByUserId the assigned by user ID of this tasks review
 	 */
 	public void setAssignedByUserId(long assignedByUserId);
 

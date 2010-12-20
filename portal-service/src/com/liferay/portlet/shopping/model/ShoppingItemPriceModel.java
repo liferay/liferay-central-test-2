@@ -56,30 +56,30 @@ public interface ShoppingItemPriceModel extends BaseModel<ShoppingItemPrice> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the item price id of this shopping item price.
+	 * Gets the item price ID of this shopping item price.
 	 *
-	 * @return the item price id of this shopping item price
+	 * @return the item price ID of this shopping item price
 	 */
 	public long getItemPriceId();
 
 	/**
-	 * Sets the item price id of this shopping item price.
+	 * Sets the item price ID of this shopping item price.
 	 *
-	 * @param itemPriceId the item price id of this shopping item price
+	 * @param itemPriceId the item price ID of this shopping item price
 	 */
 	public void setItemPriceId(long itemPriceId);
 
 	/**
-	 * Gets the item id of this shopping item price.
+	 * Gets the item ID of this shopping item price.
 	 *
-	 * @return the item id of this shopping item price
+	 * @return the item ID of this shopping item price
 	 */
 	public long getItemId();
 
 	/**
-	 * Sets the item id of this shopping item price.
+	 * Sets the item ID of this shopping item price.
 	 *
-	 * @param itemId the item id of this shopping item price
+	 * @param itemId the item ID of this shopping item price
 	 */
 	public void setItemId(long itemId);
 

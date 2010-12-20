@@ -387,7 +387,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	/**
 	 * Finds all the org group permissions where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching org group permissions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -403,7 +403,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of org group permissions to return
 	 * @param end the upper bound of the range of org group permissions to return (not inclusive)
 	 * @return the range of matching org group permissions
@@ -421,7 +421,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of org group permissions to return
 	 * @param end the upper bound of the range of org group permissions to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -505,7 +505,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching org group permission
 	 * @throws com.liferay.portal.NoSuchOrgGroupPermissionException if a matching org group permission could not be found
@@ -541,7 +541,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching org group permission
 	 * @throws com.liferay.portal.NoSuchOrgGroupPermissionException if a matching org group permission could not be found
@@ -580,7 +580,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	 * </p>
 	 *
 	 * @param orgGroupPermissionPK the primary key of the current org group permission
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next org group permission
 	 * @throws com.liferay.portal.NoSuchOrgGroupPermissionException if a org group permission with the primary key could not be found
@@ -720,7 +720,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	/**
 	 * Finds all the org group permissions where permissionId = &#63;.
 	 *
-	 * @param permissionId the permission id to search with
+	 * @param permissionId the permission ID to search with
 	 * @return the matching org group permissions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -737,7 +737,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param permissionId the permission id to search with
+	 * @param permissionId the permission ID to search with
 	 * @param start the lower bound of the range of org group permissions to return
 	 * @param end the upper bound of the range of org group permissions to return (not inclusive)
 	 * @return the range of matching org group permissions
@@ -755,7 +755,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param permissionId the permission id to search with
+	 * @param permissionId the permission ID to search with
 	 * @param start the lower bound of the range of org group permissions to return
 	 * @param end the upper bound of the range of org group permissions to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -840,7 +840,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param permissionId the permission id to search with
+	 * @param permissionId the permission ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching org group permission
 	 * @throws com.liferay.portal.NoSuchOrgGroupPermissionException if a matching org group permission could not be found
@@ -876,7 +876,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param permissionId the permission id to search with
+	 * @param permissionId the permission ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching org group permission
 	 * @throws com.liferay.portal.NoSuchOrgGroupPermissionException if a matching org group permission could not be found
@@ -915,7 +915,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	 * </p>
 	 *
 	 * @param orgGroupPermissionPK the primary key of the current org group permission
-	 * @param permissionId the permission id to search with
+	 * @param permissionId the permission ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next org group permission
 	 * @throws com.liferay.portal.NoSuchOrgGroupPermissionException if a org group permission with the primary key could not be found
@@ -1164,7 +1164,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	/**
 	 * Removes all the org group permissions where groupId = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -1176,7 +1176,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	/**
 	 * Removes all the org group permissions where permissionId = &#63; from the database.
 	 *
-	 * @param permissionId the permission id to search with
+	 * @param permissionId the permission ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByPermissionId(long permissionId)
@@ -1201,7 +1201,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	/**
 	 * Counts all the org group permissions where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the number of matching org group permissions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1254,7 +1254,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	/**
 	 * Counts all the org group permissions where permissionId = &#63;.
 	 *
-	 * @param permissionId the permission id to search with
+	 * @param permissionId the permission ID to search with
 	 * @return the number of matching org group permissions
 	 * @throws SystemException if a system exception occurred
 	 */

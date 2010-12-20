@@ -54,44 +54,44 @@ public interface ExpandoRowModel extends BaseModel<ExpandoRow> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the row id of this expando row.
+	 * Gets the row ID of this expando row.
 	 *
-	 * @return the row id of this expando row
+	 * @return the row ID of this expando row
 	 */
 	public long getRowId();
 
 	/**
-	 * Sets the row id of this expando row.
+	 * Sets the row ID of this expando row.
 	 *
-	 * @param rowId the row id of this expando row
+	 * @param rowId the row ID of this expando row
 	 */
 	public void setRowId(long rowId);
 
 	/**
-	 * Gets the company id of this expando row.
+	 * Gets the company ID of this expando row.
 	 *
-	 * @return the company id of this expando row
+	 * @return the company ID of this expando row
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this expando row.
+	 * Sets the company ID of this expando row.
 	 *
-	 * @param companyId the company id of this expando row
+	 * @param companyId the company ID of this expando row
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the table id of this expando row.
+	 * Gets the table ID of this expando row.
 	 *
-	 * @return the table id of this expando row
+	 * @return the table ID of this expando row
 	 */
 	public long getTableId();
 
 	/**
-	 * Sets the table id of this expando row.
+	 * Sets the table ID of this expando row.
 	 *
-	 * @param tableId the table id of this expando row
+	 * @param tableId the table ID of this expando row
 	 */
 	public void setTableId(long tableId);
 

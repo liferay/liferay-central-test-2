@@ -47,54 +47,54 @@ public class TeamWrapper implements Team {
 	}
 
 	/**
-	* Gets the team id of this team.
+	* Gets the team ID of this team.
 	*
-	* @return the team id of this team
+	* @return the team ID of this team
 	*/
 	public long getTeamId() {
 		return _team.getTeamId();
 	}
 
 	/**
-	* Sets the team id of this team.
+	* Sets the team ID of this team.
 	*
-	* @param teamId the team id of this team
+	* @param teamId the team ID of this team
 	*/
 	public void setTeamId(long teamId) {
 		_team.setTeamId(teamId);
 	}
 
 	/**
-	* Gets the company id of this team.
+	* Gets the company ID of this team.
 	*
-	* @return the company id of this team
+	* @return the company ID of this team
 	*/
 	public long getCompanyId() {
 		return _team.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this team.
+	* Sets the company ID of this team.
 	*
-	* @param companyId the company id of this team
+	* @param companyId the company ID of this team
 	*/
 	public void setCompanyId(long companyId) {
 		_team.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this team.
+	* Gets the user ID of this team.
 	*
-	* @return the user id of this team
+	* @return the user ID of this team
 	*/
 	public long getUserId() {
 		return _team.getUserId();
 	}
 
 	/**
-	* Sets the user id of this team.
+	* Sets the user ID of this team.
 	*
-	* @param userId the user id of this team
+	* @param userId the user ID of this team
 	*/
 	public void setUserId(long userId) {
 		_team.setUserId(userId);
@@ -175,18 +175,18 @@ public class TeamWrapper implements Team {
 	}
 
 	/**
-	* Gets the group id of this team.
+	* Gets the group ID of this team.
 	*
-	* @return the group id of this team
+	* @return the group ID of this team
 	*/
 	public long getGroupId() {
 		return _team.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this team.
+	* Sets the group ID of this team.
 	*
-	* @param groupId the group id of this team
+	* @param groupId the group ID of this team
 	*/
 	public void setGroupId(long groupId) {
 		_team.setGroupId(groupId);

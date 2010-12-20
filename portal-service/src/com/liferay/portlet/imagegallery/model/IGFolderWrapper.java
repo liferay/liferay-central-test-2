@@ -65,72 +65,72 @@ public class IGFolderWrapper implements IGFolder {
 	}
 
 	/**
-	* Gets the folder id of this i g folder.
+	* Gets the folder ID of this i g folder.
 	*
-	* @return the folder id of this i g folder
+	* @return the folder ID of this i g folder
 	*/
 	public long getFolderId() {
 		return _igFolder.getFolderId();
 	}
 
 	/**
-	* Sets the folder id of this i g folder.
+	* Sets the folder ID of this i g folder.
 	*
-	* @param folderId the folder id of this i g folder
+	* @param folderId the folder ID of this i g folder
 	*/
 	public void setFolderId(long folderId) {
 		_igFolder.setFolderId(folderId);
 	}
 
 	/**
-	* Gets the group id of this i g folder.
+	* Gets the group ID of this i g folder.
 	*
-	* @return the group id of this i g folder
+	* @return the group ID of this i g folder
 	*/
 	public long getGroupId() {
 		return _igFolder.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this i g folder.
+	* Sets the group ID of this i g folder.
 	*
-	* @param groupId the group id of this i g folder
+	* @param groupId the group ID of this i g folder
 	*/
 	public void setGroupId(long groupId) {
 		_igFolder.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this i g folder.
+	* Gets the company ID of this i g folder.
 	*
-	* @return the company id of this i g folder
+	* @return the company ID of this i g folder
 	*/
 	public long getCompanyId() {
 		return _igFolder.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this i g folder.
+	* Sets the company ID of this i g folder.
 	*
-	* @param companyId the company id of this i g folder
+	* @param companyId the company ID of this i g folder
 	*/
 	public void setCompanyId(long companyId) {
 		_igFolder.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this i g folder.
+	* Gets the user ID of this i g folder.
 	*
-	* @return the user id of this i g folder
+	* @return the user ID of this i g folder
 	*/
 	public long getUserId() {
 		return _igFolder.getUserId();
 	}
 
 	/**
-	* Sets the user id of this i g folder.
+	* Sets the user ID of this i g folder.
 	*
-	* @param userId the user id of this i g folder
+	* @param userId the user ID of this i g folder
 	*/
 	public void setUserId(long userId) {
 		_igFolder.setUserId(userId);
@@ -193,18 +193,18 @@ public class IGFolderWrapper implements IGFolder {
 	}
 
 	/**
-	* Gets the parent folder id of this i g folder.
+	* Gets the parent folder ID of this i g folder.
 	*
-	* @return the parent folder id of this i g folder
+	* @return the parent folder ID of this i g folder
 	*/
 	public long getParentFolderId() {
 		return _igFolder.getParentFolderId();
 	}
 
 	/**
-	* Sets the parent folder id of this i g folder.
+	* Sets the parent folder ID of this i g folder.
 	*
-	* @param parentFolderId the parent folder id of this i g folder
+	* @param parentFolderId the parent folder ID of this i g folder
 	*/
 	public void setParentFolderId(long parentFolderId) {
 		_igFolder.setParentFolderId(parentFolderId);

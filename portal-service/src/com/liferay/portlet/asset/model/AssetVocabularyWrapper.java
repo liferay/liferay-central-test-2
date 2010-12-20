@@ -65,72 +65,72 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	}
 
 	/**
-	* Gets the vocabulary id of this asset vocabulary.
+	* Gets the vocabulary ID of this asset vocabulary.
 	*
-	* @return the vocabulary id of this asset vocabulary
+	* @return the vocabulary ID of this asset vocabulary
 	*/
 	public long getVocabularyId() {
 		return _assetVocabulary.getVocabularyId();
 	}
 
 	/**
-	* Sets the vocabulary id of this asset vocabulary.
+	* Sets the vocabulary ID of this asset vocabulary.
 	*
-	* @param vocabularyId the vocabulary id of this asset vocabulary
+	* @param vocabularyId the vocabulary ID of this asset vocabulary
 	*/
 	public void setVocabularyId(long vocabularyId) {
 		_assetVocabulary.setVocabularyId(vocabularyId);
 	}
 
 	/**
-	* Gets the group id of this asset vocabulary.
+	* Gets the group ID of this asset vocabulary.
 	*
-	* @return the group id of this asset vocabulary
+	* @return the group ID of this asset vocabulary
 	*/
 	public long getGroupId() {
 		return _assetVocabulary.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this asset vocabulary.
+	* Sets the group ID of this asset vocabulary.
 	*
-	* @param groupId the group id of this asset vocabulary
+	* @param groupId the group ID of this asset vocabulary
 	*/
 	public void setGroupId(long groupId) {
 		_assetVocabulary.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this asset vocabulary.
+	* Gets the company ID of this asset vocabulary.
 	*
-	* @return the company id of this asset vocabulary
+	* @return the company ID of this asset vocabulary
 	*/
 	public long getCompanyId() {
 		return _assetVocabulary.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this asset vocabulary.
+	* Sets the company ID of this asset vocabulary.
 	*
-	* @param companyId the company id of this asset vocabulary
+	* @param companyId the company ID of this asset vocabulary
 	*/
 	public void setCompanyId(long companyId) {
 		_assetVocabulary.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this asset vocabulary.
+	* Gets the user ID of this asset vocabulary.
 	*
-	* @return the user id of this asset vocabulary
+	* @return the user ID of this asset vocabulary
 	*/
 	public long getUserId() {
 		return _assetVocabulary.getUserId();
 	}
 
 	/**
-	* Sets the user id of this asset vocabulary.
+	* Sets the user ID of this asset vocabulary.
 	*
-	* @param userId the user id of this asset vocabulary
+	* @param userId the user ID of this asset vocabulary
 	*/
 	public void setUserId(long userId) {
 		_assetVocabulary.setUserId(userId);

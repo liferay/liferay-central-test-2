@@ -60,58 +60,58 @@ public interface SCFrameworkVersionModel extends BaseModel<SCFrameworkVersion> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the framework version id of this s c framework version.
+	 * Gets the framework version ID of this s c framework version.
 	 *
-	 * @return the framework version id of this s c framework version
+	 * @return the framework version ID of this s c framework version
 	 */
 	public long getFrameworkVersionId();
 
 	/**
-	 * Sets the framework version id of this s c framework version.
+	 * Sets the framework version ID of this s c framework version.
 	 *
-	 * @param frameworkVersionId the framework version id of this s c framework version
+	 * @param frameworkVersionId the framework version ID of this s c framework version
 	 */
 	public void setFrameworkVersionId(long frameworkVersionId);
 
 	/**
-	 * Gets the group id of this s c framework version.
+	 * Gets the group ID of this s c framework version.
 	 *
-	 * @return the group id of this s c framework version
+	 * @return the group ID of this s c framework version
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this s c framework version.
+	 * Sets the group ID of this s c framework version.
 	 *
-	 * @param groupId the group id of this s c framework version
+	 * @param groupId the group ID of this s c framework version
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this s c framework version.
+	 * Gets the company ID of this s c framework version.
 	 *
-	 * @return the company id of this s c framework version
+	 * @return the company ID of this s c framework version
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this s c framework version.
+	 * Sets the company ID of this s c framework version.
 	 *
-	 * @param companyId the company id of this s c framework version
+	 * @param companyId the company ID of this s c framework version
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this s c framework version.
+	 * Gets the user ID of this s c framework version.
 	 *
-	 * @return the user id of this s c framework version
+	 * @return the user ID of this s c framework version
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this s c framework version.
+	 * Sets the user ID of this s c framework version.
 	 *
-	 * @param userId the user id of this s c framework version
+	 * @param userId the user ID of this s c framework version
 	 */
 	public void setUserId(long userId);
 

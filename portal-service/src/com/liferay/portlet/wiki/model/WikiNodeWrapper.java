@@ -65,72 +65,72 @@ public class WikiNodeWrapper implements WikiNode {
 	}
 
 	/**
-	* Gets the node id of this wiki node.
+	* Gets the node ID of this wiki node.
 	*
-	* @return the node id of this wiki node
+	* @return the node ID of this wiki node
 	*/
 	public long getNodeId() {
 		return _wikiNode.getNodeId();
 	}
 
 	/**
-	* Sets the node id of this wiki node.
+	* Sets the node ID of this wiki node.
 	*
-	* @param nodeId the node id of this wiki node
+	* @param nodeId the node ID of this wiki node
 	*/
 	public void setNodeId(long nodeId) {
 		_wikiNode.setNodeId(nodeId);
 	}
 
 	/**
-	* Gets the group id of this wiki node.
+	* Gets the group ID of this wiki node.
 	*
-	* @return the group id of this wiki node
+	* @return the group ID of this wiki node
 	*/
 	public long getGroupId() {
 		return _wikiNode.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this wiki node.
+	* Sets the group ID of this wiki node.
 	*
-	* @param groupId the group id of this wiki node
+	* @param groupId the group ID of this wiki node
 	*/
 	public void setGroupId(long groupId) {
 		_wikiNode.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this wiki node.
+	* Gets the company ID of this wiki node.
 	*
-	* @return the company id of this wiki node
+	* @return the company ID of this wiki node
 	*/
 	public long getCompanyId() {
 		return _wikiNode.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this wiki node.
+	* Sets the company ID of this wiki node.
 	*
-	* @param companyId the company id of this wiki node
+	* @param companyId the company ID of this wiki node
 	*/
 	public void setCompanyId(long companyId) {
 		_wikiNode.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this wiki node.
+	* Gets the user ID of this wiki node.
 	*
-	* @return the user id of this wiki node
+	* @return the user ID of this wiki node
 	*/
 	public long getUserId() {
 		return _wikiNode.getUserId();
 	}
 
 	/**
-	* Sets the user id of this wiki node.
+	* Sets the user ID of this wiki node.
 	*
-	* @param userId the user id of this wiki node
+	* @param userId the user ID of this wiki node
 	*/
 	public void setUserId(long userId) {
 		_wikiNode.setUserId(userId);

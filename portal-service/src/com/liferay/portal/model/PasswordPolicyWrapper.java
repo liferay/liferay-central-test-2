@@ -47,54 +47,54 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	}
 
 	/**
-	* Gets the password policy id of this password policy.
+	* Gets the password policy ID of this password policy.
 	*
-	* @return the password policy id of this password policy
+	* @return the password policy ID of this password policy
 	*/
 	public long getPasswordPolicyId() {
 		return _passwordPolicy.getPasswordPolicyId();
 	}
 
 	/**
-	* Sets the password policy id of this password policy.
+	* Sets the password policy ID of this password policy.
 	*
-	* @param passwordPolicyId the password policy id of this password policy
+	* @param passwordPolicyId the password policy ID of this password policy
 	*/
 	public void setPasswordPolicyId(long passwordPolicyId) {
 		_passwordPolicy.setPasswordPolicyId(passwordPolicyId);
 	}
 
 	/**
-	* Gets the company id of this password policy.
+	* Gets the company ID of this password policy.
 	*
-	* @return the company id of this password policy
+	* @return the company ID of this password policy
 	*/
 	public long getCompanyId() {
 		return _passwordPolicy.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this password policy.
+	* Sets the company ID of this password policy.
 	*
-	* @param companyId the company id of this password policy
+	* @param companyId the company ID of this password policy
 	*/
 	public void setCompanyId(long companyId) {
 		_passwordPolicy.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this password policy.
+	* Gets the user ID of this password policy.
 	*
-	* @return the user id of this password policy
+	* @return the user ID of this password policy
 	*/
 	public long getUserId() {
 		return _passwordPolicy.getUserId();
 	}
 
 	/**
-	* Sets the user id of this password policy.
+	* Sets the user ID of this password policy.
 	*
-	* @param userId the user id of this password policy
+	* @param userId the user ID of this password policy
 	*/
 	public void setUserId(long userId) {
 		_passwordPolicy.setUserId(userId);

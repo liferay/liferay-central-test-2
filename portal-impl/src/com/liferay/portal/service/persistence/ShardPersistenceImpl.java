@@ -568,7 +568,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	/**
 	 * Finds the shard where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portal.NoSuchShardException} if it could not be found.
 	 *
-	 * @param classNameId the class name id to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @return the matching shard
 	 * @throws com.liferay.portal.NoSuchShardException if a matching shard could not be found
@@ -604,7 +604,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	/**
 	 * Finds the shard where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param classNameId the class name id to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @return the matching shard, or <code>null</code> if a matching shard could not be found
 	 * @throws SystemException if a system exception occurred
@@ -617,7 +617,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	/**
 	 * Finds the shard where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param classNameId the class name id to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @return the matching shard, or <code>null</code> if a matching shard could not be found
 	 * @throws SystemException if a system exception occurred
@@ -827,7 +827,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	/**
 	 * Removes the shard where classNameId = &#63; and classPK = &#63; from the database.
 	 *
-	 * @param classNameId the class name id to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -917,7 +917,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	/**
 	 * Counts all the shards where classNameId = &#63; and classPK = &#63;.
 	 *
-	 * @param classNameId the class name id to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @return the number of matching shards
 	 * @throws SystemException if a system exception occurred

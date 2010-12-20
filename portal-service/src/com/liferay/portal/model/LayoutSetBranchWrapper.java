@@ -47,72 +47,72 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 	}
 
 	/**
-	* Gets the layout set branch id of this layout set branch.
+	* Gets the layout set branch ID of this layout set branch.
 	*
-	* @return the layout set branch id of this layout set branch
+	* @return the layout set branch ID of this layout set branch
 	*/
 	public long getLayoutSetBranchId() {
 		return _layoutSetBranch.getLayoutSetBranchId();
 	}
 
 	/**
-	* Sets the layout set branch id of this layout set branch.
+	* Sets the layout set branch ID of this layout set branch.
 	*
-	* @param layoutSetBranchId the layout set branch id of this layout set branch
+	* @param layoutSetBranchId the layout set branch ID of this layout set branch
 	*/
 	public void setLayoutSetBranchId(long layoutSetBranchId) {
 		_layoutSetBranch.setLayoutSetBranchId(layoutSetBranchId);
 	}
 
 	/**
-	* Gets the group id of this layout set branch.
+	* Gets the group ID of this layout set branch.
 	*
-	* @return the group id of this layout set branch
+	* @return the group ID of this layout set branch
 	*/
 	public long getGroupId() {
 		return _layoutSetBranch.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this layout set branch.
+	* Sets the group ID of this layout set branch.
 	*
-	* @param groupId the group id of this layout set branch
+	* @param groupId the group ID of this layout set branch
 	*/
 	public void setGroupId(long groupId) {
 		_layoutSetBranch.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this layout set branch.
+	* Gets the company ID of this layout set branch.
 	*
-	* @return the company id of this layout set branch
+	* @return the company ID of this layout set branch
 	*/
 	public long getCompanyId() {
 		return _layoutSetBranch.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this layout set branch.
+	* Sets the company ID of this layout set branch.
 	*
-	* @param companyId the company id of this layout set branch
+	* @param companyId the company ID of this layout set branch
 	*/
 	public void setCompanyId(long companyId) {
 		_layoutSetBranch.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this layout set branch.
+	* Gets the user ID of this layout set branch.
 	*
-	* @return the user id of this layout set branch
+	* @return the user ID of this layout set branch
 	*/
 	public long getUserId() {
 		return _layoutSetBranch.getUserId();
 	}
 
 	/**
-	* Sets the user id of this layout set branch.
+	* Sets the user ID of this layout set branch.
 	*
-	* @param userId the user id of this layout set branch
+	* @param userId the user ID of this layout set branch
 	*/
 	public void setUserId(long userId) {
 		_layoutSetBranch.setUserId(userId);

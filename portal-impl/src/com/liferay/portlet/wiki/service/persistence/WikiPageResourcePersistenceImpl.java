@@ -803,7 +803,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 	/**
 	 * Finds the wiki page resource where nodeId = &#63; and title = &#63; or throws a {@link com.liferay.portlet.wiki.NoSuchPageResourceException} if it could not be found.
 	 *
-	 * @param nodeId the node id to search with
+	 * @param nodeId the node ID to search with
 	 * @param title the title to search with
 	 * @return the matching wiki page resource
 	 * @throws com.liferay.portlet.wiki.NoSuchPageResourceException if a matching wiki page resource could not be found
@@ -839,7 +839,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 	/**
 	 * Finds the wiki page resource where nodeId = &#63; and title = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param nodeId the node id to search with
+	 * @param nodeId the node ID to search with
 	 * @param title the title to search with
 	 * @return the matching wiki page resource, or <code>null</code> if a matching wiki page resource could not be found
 	 * @throws SystemException if a system exception occurred
@@ -852,7 +852,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 	/**
 	 * Finds the wiki page resource where nodeId = &#63; and title = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param nodeId the node id to search with
+	 * @param nodeId the node ID to search with
 	 * @param title the title to search with
 	 * @return the matching wiki page resource, or <code>null</code> if a matching wiki page resource could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1075,7 +1075,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 	/**
 	 * Removes the wiki page resource where nodeId = &#63; and title = &#63; from the database.
 	 *
-	 * @param nodeId the node id to search with
+	 * @param nodeId the node ID to search with
 	 * @param title the title to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1165,7 +1165,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 	/**
 	 * Counts all the wiki page resources where nodeId = &#63; and title = &#63;.
 	 *
-	 * @param nodeId the node id to search with
+	 * @param nodeId the node ID to search with
 	 * @param title the title to search with
 	 * @return the number of matching wiki page resources
 	 * @throws SystemException if a system exception occurred

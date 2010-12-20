@@ -47,18 +47,18 @@ public class SocialEquityUserWrapper implements SocialEquityUser {
 	}
 
 	/**
-	* Gets the equity user id of this social equity user.
+	* Gets the equity user ID of this social equity user.
 	*
-	* @return the equity user id of this social equity user
+	* @return the equity user ID of this social equity user
 	*/
 	public long getEquityUserId() {
 		return _socialEquityUser.getEquityUserId();
 	}
 
 	/**
-	* Sets the equity user id of this social equity user.
+	* Sets the equity user ID of this social equity user.
 	*
-	* @param equityUserId the equity user id of this social equity user
+	* @param equityUserId the equity user ID of this social equity user
 	*/
 	public void setEquityUserId(long equityUserId) {
 		_socialEquityUser.setEquityUserId(equityUserId);
@@ -85,54 +85,54 @@ public class SocialEquityUserWrapper implements SocialEquityUser {
 	}
 
 	/**
-	* Gets the group id of this social equity user.
+	* Gets the group ID of this social equity user.
 	*
-	* @return the group id of this social equity user
+	* @return the group ID of this social equity user
 	*/
 	public long getGroupId() {
 		return _socialEquityUser.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this social equity user.
+	* Sets the group ID of this social equity user.
 	*
-	* @param groupId the group id of this social equity user
+	* @param groupId the group ID of this social equity user
 	*/
 	public void setGroupId(long groupId) {
 		_socialEquityUser.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this social equity user.
+	* Gets the company ID of this social equity user.
 	*
-	* @return the company id of this social equity user
+	* @return the company ID of this social equity user
 	*/
 	public long getCompanyId() {
 		return _socialEquityUser.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this social equity user.
+	* Sets the company ID of this social equity user.
 	*
-	* @param companyId the company id of this social equity user
+	* @param companyId the company ID of this social equity user
 	*/
 	public void setCompanyId(long companyId) {
 		_socialEquityUser.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this social equity user.
+	* Gets the user ID of this social equity user.
 	*
-	* @return the user id of this social equity user
+	* @return the user ID of this social equity user
 	*/
 	public long getUserId() {
 		return _socialEquityUser.getUserId();
 	}
 
 	/**
-	* Sets the user id of this social equity user.
+	* Sets the user ID of this social equity user.
 	*
-	* @param userId the user id of this social equity user
+	* @param userId the user ID of this social equity user
 	*/
 	public void setUserId(long userId) {
 		_socialEquityUser.setUserId(userId);

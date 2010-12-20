@@ -99,7 +99,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Finds all the groups where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the matching groups
 	* @throws SystemException if a system exception occurred
 	*/
@@ -114,7 +114,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of groups to return
 	* @param end the upper bound of the range of groups to return (not inclusive)
 	* @return the range of matching groups
@@ -131,7 +131,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of groups to return
 	* @param end the upper bound of the range of groups to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -150,7 +150,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching group
 	* @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
@@ -169,7 +169,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching group
 	* @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
@@ -188,7 +188,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	* </p>
 	*
 	* @param groupId the primary key of the current group
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next group
 	* @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
@@ -203,7 +203,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Finds the group where liveGroupId = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
 	*
-	* @param liveGroupId the live group id to search with
+	* @param liveGroupId the live group ID to search with
 	* @return the matching group
 	* @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	* @throws SystemException if a system exception occurred
@@ -215,7 +215,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Finds the group where liveGroupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param liveGroupId the live group id to search with
+	* @param liveGroupId the live group ID to search with
 	* @return the matching group, or <code>null</code> if a matching group could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -225,7 +225,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Finds the group where liveGroupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param liveGroupId the live group id to search with
+	* @param liveGroupId the live group ID to search with
 	* @return the matching group, or <code>null</code> if a matching group could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -236,7 +236,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Finds the group where companyId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param name the name to search with
 	* @return the matching group
 	* @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
@@ -250,7 +250,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Finds the group where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param name the name to search with
 	* @return the matching group, or <code>null</code> if a matching group could not be found
 	* @throws SystemException if a system exception occurred
@@ -262,7 +262,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Finds the group where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param name the name to search with
 	* @return the matching group, or <code>null</code> if a matching group could not be found
 	* @throws SystemException if a system exception occurred
@@ -274,7 +274,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Finds the group where companyId = &#63; and friendlyURL = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param friendlyURL the friendly u r l to search with
 	* @return the matching group
 	* @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
@@ -288,7 +288,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Finds the group where companyId = &#63; and friendlyURL = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param friendlyURL the friendly u r l to search with
 	* @return the matching group, or <code>null</code> if a matching group could not be found
 	* @throws SystemException if a system exception occurred
@@ -300,7 +300,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Finds the group where companyId = &#63; and friendlyURL = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param friendlyURL the friendly u r l to search with
 	* @return the matching group, or <code>null</code> if a matching group could not be found
 	* @throws SystemException if a system exception occurred
@@ -423,8 +423,8 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Finds the group where companyId = &#63; and classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching group
 	* @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
@@ -438,8 +438,8 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Finds the group where companyId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching group, or <code>null</code> if a matching group could not be found
 	* @throws SystemException if a system exception occurred
@@ -451,8 +451,8 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Finds the group where companyId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching group, or <code>null</code> if a matching group could not be found
 	* @throws SystemException if a system exception occurred
@@ -464,8 +464,8 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Finds the group where companyId = &#63; and liveGroupId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
 	*
-	* @param companyId the company id to search with
-	* @param liveGroupId the live group id to search with
+	* @param companyId the company ID to search with
+	* @param liveGroupId the live group ID to search with
 	* @param name the name to search with
 	* @return the matching group
 	* @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
@@ -479,8 +479,8 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Finds the group where companyId = &#63; and liveGroupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param companyId the company id to search with
-	* @param liveGroupId the live group id to search with
+	* @param companyId the company ID to search with
+	* @param liveGroupId the live group ID to search with
 	* @param name the name to search with
 	* @return the matching group, or <code>null</code> if a matching group could not be found
 	* @throws SystemException if a system exception occurred
@@ -492,8 +492,8 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Finds the group where companyId = &#63; and liveGroupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param companyId the company id to search with
-	* @param liveGroupId the live group id to search with
+	* @param companyId the company ID to search with
+	* @param liveGroupId the live group ID to search with
 	* @param name the name to search with
 	* @return the matching group, or <code>null</code> if a matching group could not be found
 	* @throws SystemException if a system exception occurred
@@ -505,9 +505,9 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Finds the group where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
-	* @param liveGroupId the live group id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
+	* @param liveGroupId the live group ID to search with
 	* @param name the name to search with
 	* @return the matching group
 	* @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
@@ -521,9 +521,9 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Finds the group where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
-	* @param liveGroupId the live group id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
+	* @param liveGroupId the live group ID to search with
 	* @param name the name to search with
 	* @return the matching group, or <code>null</code> if a matching group could not be found
 	* @throws SystemException if a system exception occurred
@@ -535,9 +535,9 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Finds the group where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
-	* @param liveGroupId the live group id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
+	* @param liveGroupId the live group ID to search with
 	* @param name the name to search with
 	* @return the matching group, or <code>null</code> if a matching group could not be found
 	* @throws SystemException if a system exception occurred
@@ -592,7 +592,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Removes all the groups where companyId = &#63; from the database.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByCompanyId(long companyId)
@@ -601,7 +601,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Removes the group where liveGroupId = &#63; from the database.
 	*
-	* @param liveGroupId the live group id to search with
+	* @param liveGroupId the live group ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByLiveGroupId(long liveGroupId)
@@ -611,7 +611,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Removes the group where companyId = &#63; and name = &#63; from the database.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param name the name to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -622,7 +622,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Removes the group where companyId = &#63; and friendlyURL = &#63; from the database.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param friendlyURL the friendly u r l to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -643,8 +643,8 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Removes the group where companyId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -655,8 +655,8 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Removes the group where companyId = &#63; and liveGroupId = &#63; and name = &#63; from the database.
 	*
-	* @param companyId the company id to search with
-	* @param liveGroupId the live group id to search with
+	* @param companyId the company ID to search with
+	* @param liveGroupId the live group ID to search with
 	* @param name the name to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -668,9 +668,9 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Removes the group where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63; from the database.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
-	* @param liveGroupId the live group id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
+	* @param liveGroupId the live group ID to search with
 	* @param name the name to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -690,7 +690,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Counts all the groups where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the number of matching groups
 	* @throws SystemException if a system exception occurred
 	*/
@@ -700,7 +700,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Counts all the groups where liveGroupId = &#63;.
 	*
-	* @param liveGroupId the live group id to search with
+	* @param liveGroupId the live group ID to search with
 	* @return the number of matching groups
 	* @throws SystemException if a system exception occurred
 	*/
@@ -710,7 +710,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Counts all the groups where companyId = &#63; and name = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param name the name to search with
 	* @return the number of matching groups
 	* @throws SystemException if a system exception occurred
@@ -721,7 +721,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Counts all the groups where companyId = &#63; and friendlyURL = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param friendlyURL the friendly u r l to search with
 	* @return the number of matching groups
 	* @throws SystemException if a system exception occurred
@@ -743,8 +743,8 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Counts all the groups where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the number of matching groups
 	* @throws SystemException if a system exception occurred
@@ -755,8 +755,8 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Counts all the groups where companyId = &#63; and liveGroupId = &#63; and name = &#63;.
 	*
-	* @param companyId the company id to search with
-	* @param liveGroupId the live group id to search with
+	* @param companyId the company ID to search with
+	* @param liveGroupId the live group ID to search with
 	* @param name the name to search with
 	* @return the number of matching groups
 	* @throws SystemException if a system exception occurred
@@ -768,9 +768,9 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	/**
 	* Counts all the groups where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63;.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
-	* @param liveGroupId the live group id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
+	* @param liveGroupId the live group ID to search with
 	* @param name the name to search with
 	* @return the number of matching groups
 	* @throws SystemException if a system exception occurred

@@ -86,31 +86,31 @@ public interface JournalArticleResourceModel extends BaseModel<JournalArticleRes
 	public void setResourcePrimKey(long resourcePrimKey);
 
 	/**
-	 * Gets the group id of this journal article resource.
+	 * Gets the group ID of this journal article resource.
 	 *
-	 * @return the group id of this journal article resource
+	 * @return the group ID of this journal article resource
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this journal article resource.
+	 * Sets the group ID of this journal article resource.
 	 *
-	 * @param groupId the group id of this journal article resource
+	 * @param groupId the group ID of this journal article resource
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the article id of this journal article resource.
+	 * Gets the article ID of this journal article resource.
 	 *
-	 * @return the article id of this journal article resource
+	 * @return the article ID of this journal article resource
 	 */
 	@AutoEscape
 	public String getArticleId();
 
 	/**
-	 * Sets the article id of this journal article resource.
+	 * Sets the article ID of this journal article resource.
 	 *
-	 * @param articleId the article id of this journal article resource
+	 * @param articleId the article ID of this journal article resource
 	 */
 	public void setArticleId(String articleId);
 

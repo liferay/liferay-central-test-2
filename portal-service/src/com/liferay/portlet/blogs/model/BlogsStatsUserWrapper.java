@@ -47,18 +47,18 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 	}
 
 	/**
-	* Gets the stats user id of this blogs stats user.
+	* Gets the stats user ID of this blogs stats user.
 	*
-	* @return the stats user id of this blogs stats user
+	* @return the stats user ID of this blogs stats user
 	*/
 	public long getStatsUserId() {
 		return _blogsStatsUser.getStatsUserId();
 	}
 
 	/**
-	* Sets the stats user id of this blogs stats user.
+	* Sets the stats user ID of this blogs stats user.
 	*
-	* @param statsUserId the stats user id of this blogs stats user
+	* @param statsUserId the stats user ID of this blogs stats user
 	*/
 	public void setStatsUserId(long statsUserId) {
 		_blogsStatsUser.setStatsUserId(statsUserId);
@@ -85,54 +85,54 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 	}
 
 	/**
-	* Gets the group id of this blogs stats user.
+	* Gets the group ID of this blogs stats user.
 	*
-	* @return the group id of this blogs stats user
+	* @return the group ID of this blogs stats user
 	*/
 	public long getGroupId() {
 		return _blogsStatsUser.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this blogs stats user.
+	* Sets the group ID of this blogs stats user.
 	*
-	* @param groupId the group id of this blogs stats user
+	* @param groupId the group ID of this blogs stats user
 	*/
 	public void setGroupId(long groupId) {
 		_blogsStatsUser.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this blogs stats user.
+	* Gets the company ID of this blogs stats user.
 	*
-	* @return the company id of this blogs stats user
+	* @return the company ID of this blogs stats user
 	*/
 	public long getCompanyId() {
 		return _blogsStatsUser.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this blogs stats user.
+	* Sets the company ID of this blogs stats user.
 	*
-	* @param companyId the company id of this blogs stats user
+	* @param companyId the company ID of this blogs stats user
 	*/
 	public void setCompanyId(long companyId) {
 		_blogsStatsUser.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this blogs stats user.
+	* Gets the user ID of this blogs stats user.
 	*
-	* @return the user id of this blogs stats user
+	* @return the user ID of this blogs stats user
 	*/
 	public long getUserId() {
 		return _blogsStatsUser.getUserId();
 	}
 
 	/**
-	* Sets the user id of this blogs stats user.
+	* Sets the user ID of this blogs stats user.
 	*
-	* @param userId the user id of this blogs stats user
+	* @param userId the user ID of this blogs stats user
 	*/
 	public void setUserId(long userId) {
 		_blogsStatsUser.setUserId(userId);

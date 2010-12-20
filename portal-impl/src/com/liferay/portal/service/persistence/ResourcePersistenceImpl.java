@@ -417,7 +417,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	/**
 	 * Finds all the resources where codeId = &#63;.
 	 *
-	 * @param codeId the code id to search with
+	 * @param codeId the code ID to search with
 	 * @return the matching resources
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -432,7 +432,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param codeId the code id to search with
+	 * @param codeId the code ID to search with
 	 * @param start the lower bound of the range of resources to return
 	 * @param end the upper bound of the range of resources to return (not inclusive)
 	 * @return the range of matching resources
@@ -450,7 +450,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param codeId the code id to search with
+	 * @param codeId the code ID to search with
 	 * @param start the lower bound of the range of resources to return
 	 * @param end the upper bound of the range of resources to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -534,7 +534,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param codeId the code id to search with
+	 * @param codeId the code ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching resource
 	 * @throws com.liferay.portal.NoSuchResourceException if a matching resource could not be found
@@ -569,7 +569,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param codeId the code id to search with
+	 * @param codeId the code ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching resource
 	 * @throws com.liferay.portal.NoSuchResourceException if a matching resource could not be found
@@ -608,7 +608,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	 * </p>
 	 *
 	 * @param resourceId the primary key of the current resource
-	 * @param codeId the code id to search with
+	 * @param codeId the code ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next resource
 	 * @throws com.liferay.portal.NoSuchResourceException if a resource with the primary key could not be found
@@ -747,7 +747,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	/**
 	 * Finds the resource where codeId = &#63; and primKey = &#63; or throws a {@link com.liferay.portal.NoSuchResourceException} if it could not be found.
 	 *
-	 * @param codeId the code id to search with
+	 * @param codeId the code ID to search with
 	 * @param primKey the prim key to search with
 	 * @return the matching resource
 	 * @throws com.liferay.portal.NoSuchResourceException if a matching resource could not be found
@@ -783,7 +783,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	/**
 	 * Finds the resource where codeId = &#63; and primKey = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param codeId the code id to search with
+	 * @param codeId the code ID to search with
 	 * @param primKey the prim key to search with
 	 * @return the matching resource, or <code>null</code> if a matching resource could not be found
 	 * @throws SystemException if a system exception occurred
@@ -796,7 +796,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	/**
 	 * Finds the resource where codeId = &#63; and primKey = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param codeId the code id to search with
+	 * @param codeId the code ID to search with
 	 * @param primKey the prim key to search with
 	 * @return the matching resource, or <code>null</code> if a matching resource could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1006,7 +1006,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	/**
 	 * Removes all the resources where codeId = &#63; from the database.
 	 *
-	 * @param codeId the code id to search with
+	 * @param codeId the code ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByCodeId(long codeId) throws SystemException {
@@ -1018,7 +1018,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	/**
 	 * Removes the resource where codeId = &#63; and primKey = &#63; from the database.
 	 *
-	 * @param codeId the code id to search with
+	 * @param codeId the code ID to search with
 	 * @param primKey the prim key to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1043,7 +1043,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	/**
 	 * Counts all the resources where codeId = &#63;.
 	 *
-	 * @param codeId the code id to search with
+	 * @param codeId the code ID to search with
 	 * @return the number of matching resources
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1096,7 +1096,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	/**
 	 * Counts all the resources where codeId = &#63; and primKey = &#63;.
 	 *
-	 * @param codeId the code id to search with
+	 * @param codeId the code ID to search with
 	 * @param primKey the prim key to search with
 	 * @return the number of matching resources
 	 * @throws SystemException if a system exception occurred

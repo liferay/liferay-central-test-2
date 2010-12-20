@@ -210,7 +210,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Finds the journal article where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchArticleException} if it could not be found.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	* @throws SystemException if a system exception occurred
@@ -224,7 +224,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Finds the journal article where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching journal article, or <code>null</code> if a matching journal article could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -236,7 +236,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Finds the journal article where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching journal article, or <code>null</code> if a matching journal article could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -352,7 +352,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Finds all the journal articles where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching journal articles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -367,7 +367,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
 	* @return the range of matching journal articles
@@ -384,7 +384,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -403,7 +403,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
@@ -422,7 +422,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
@@ -442,7 +442,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* </p>
 	*
 	* @param id the primary key of the current journal article
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
@@ -457,7 +457,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Filters by the user's permissions and finds all the journal articles where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching journal articles that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -472,7 +472,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
 	* @return the range of matching journal articles that the user has permission to view
@@ -489,7 +489,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -504,7 +504,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Finds all the journal articles where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the matching journal articles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -519,7 +519,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
 	* @return the range of matching journal articles
@@ -536,7 +536,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -555,7 +555,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
@@ -574,7 +574,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
@@ -594,7 +594,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* </p>
 	*
 	* @param id the primary key of the current journal article
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
@@ -609,7 +609,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Finds all the journal articles where smallImageId = &#63;.
 	*
-	* @param smallImageId the small image id to search with
+	* @param smallImageId the small image ID to search with
 	* @return the matching journal articles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -624,7 +624,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param smallImageId the small image id to search with
+	* @param smallImageId the small image ID to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
 	* @return the range of matching journal articles
@@ -641,7 +641,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param smallImageId the small image id to search with
+	* @param smallImageId the small image ID to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -660,7 +660,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param smallImageId the small image id to search with
+	* @param smallImageId the small image ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
@@ -679,7 +679,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param smallImageId the small image id to search with
+	* @param smallImageId the small image ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
@@ -699,7 +699,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* </p>
 	*
 	* @param id the primary key of the current journal article
-	* @param smallImageId the small image id to search with
+	* @param smallImageId the small image ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
@@ -825,8 +825,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Finds all the journal articles where groupId = &#63; and articleId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @return the matching journal articles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -841,8 +841,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
 	* @return the range of matching journal articles
@@ -859,8 +859,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -879,8 +879,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
@@ -899,8 +899,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
@@ -920,8 +920,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* </p>
 	*
 	* @param id the primary key of the current journal article
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
@@ -936,8 +936,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Filters by the user's permissions and finds all the journal articles where groupId = &#63; and articleId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @return the matching journal articles that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -952,8 +952,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
 	* @return the range of matching journal articles that the user has permission to view
@@ -970,8 +970,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -986,8 +986,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Finds all the journal articles where groupId = &#63; and structureId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param structureId the structure id to search with
+	* @param groupId the group ID to search with
+	* @param structureId the structure ID to search with
 	* @return the matching journal articles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1002,8 +1002,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param structureId the structure id to search with
+	* @param groupId the group ID to search with
+	* @param structureId the structure ID to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
 	* @return the range of matching journal articles
@@ -1020,8 +1020,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param structureId the structure id to search with
+	* @param groupId the group ID to search with
+	* @param structureId the structure ID to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -1040,8 +1040,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param structureId the structure id to search with
+	* @param groupId the group ID to search with
+	* @param structureId the structure ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
@@ -1060,8 +1060,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param structureId the structure id to search with
+	* @param groupId the group ID to search with
+	* @param structureId the structure ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
@@ -1081,8 +1081,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* </p>
 	*
 	* @param id the primary key of the current journal article
-	* @param groupId the group id to search with
-	* @param structureId the structure id to search with
+	* @param groupId the group ID to search with
+	* @param structureId the structure ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
@@ -1097,8 +1097,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Filters by the user's permissions and finds all the journal articles where groupId = &#63; and structureId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param structureId the structure id to search with
+	* @param groupId the group ID to search with
+	* @param structureId the structure ID to search with
 	* @return the matching journal articles that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1113,8 +1113,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param structureId the structure id to search with
+	* @param groupId the group ID to search with
+	* @param structureId the structure ID to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
 	* @return the range of matching journal articles that the user has permission to view
@@ -1131,8 +1131,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param structureId the structure id to search with
+	* @param groupId the group ID to search with
+	* @param structureId the structure ID to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -1147,8 +1147,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Finds all the journal articles where groupId = &#63; and templateId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param templateId the template id to search with
+	* @param groupId the group ID to search with
+	* @param templateId the template ID to search with
 	* @return the matching journal articles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1163,8 +1163,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param templateId the template id to search with
+	* @param groupId the group ID to search with
+	* @param templateId the template ID to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
 	* @return the range of matching journal articles
@@ -1181,8 +1181,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param templateId the template id to search with
+	* @param groupId the group ID to search with
+	* @param templateId the template ID to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -1201,8 +1201,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param templateId the template id to search with
+	* @param groupId the group ID to search with
+	* @param templateId the template ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
@@ -1221,8 +1221,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param templateId the template id to search with
+	* @param groupId the group ID to search with
+	* @param templateId the template ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
@@ -1242,8 +1242,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* </p>
 	*
 	* @param id the primary key of the current journal article
-	* @param groupId the group id to search with
-	* @param templateId the template id to search with
+	* @param groupId the group ID to search with
+	* @param templateId the template ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
@@ -1258,8 +1258,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Filters by the user's permissions and finds all the journal articles where groupId = &#63; and templateId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param templateId the template id to search with
+	* @param groupId the group ID to search with
+	* @param templateId the template ID to search with
 	* @return the matching journal articles that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1274,8 +1274,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param templateId the template id to search with
+	* @param groupId the group ID to search with
+	* @param templateId the template ID to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
 	* @return the range of matching journal articles that the user has permission to view
@@ -1292,8 +1292,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param templateId the template id to search with
+	* @param groupId the group ID to search with
+	* @param templateId the template ID to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -1308,7 +1308,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Finds all the journal articles where groupId = &#63; and urlTitle = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @return the matching journal articles
 	* @throws SystemException if a system exception occurred
@@ -1324,7 +1324,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
@@ -1342,7 +1342,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
@@ -1362,7 +1362,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching journal article
@@ -1382,7 +1382,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching journal article
@@ -1403,7 +1403,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* </p>
 	*
 	* @param id the primary key of the current journal article
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next journal article
@@ -1419,7 +1419,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Filters by the user's permissions and finds all the journal articles where groupId = &#63; and urlTitle = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @return the matching journal articles that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -1435,7 +1435,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
@@ -1453,7 +1453,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
@@ -1469,7 +1469,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Finds all the journal articles where groupId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @return the matching journal articles
 	* @throws SystemException if a system exception occurred
@@ -1485,7 +1485,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
@@ -1503,7 +1503,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
@@ -1523,7 +1523,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching journal article
@@ -1543,7 +1543,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching journal article
@@ -1564,7 +1564,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* </p>
 	*
 	* @param id the primary key of the current journal article
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next journal article
@@ -1580,7 +1580,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Filters by the user's permissions and finds all the journal articles where groupId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @return the matching journal articles that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -1596,7 +1596,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
@@ -1614,7 +1614,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
@@ -1630,7 +1630,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Finds all the journal articles where companyId = &#63; and status = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param status the status to search with
 	* @return the matching journal articles
 	* @throws SystemException if a system exception occurred
@@ -1646,7 +1646,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
@@ -1664,7 +1664,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
@@ -1684,7 +1684,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching journal article
@@ -1704,7 +1704,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching journal article
@@ -1725,7 +1725,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* </p>
 	*
 	* @param id the primary key of the current journal article
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next journal article
@@ -1741,8 +1741,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Finds the journal article where groupId = &#63; and articleId = &#63; and version = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchArticleException} if it could not be found.
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param version the version to search with
 	* @return the matching journal article
 	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
@@ -1756,8 +1756,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Finds the journal article where groupId = &#63; and articleId = &#63; and version = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param version the version to search with
 	* @return the matching journal article, or <code>null</code> if a matching journal article could not be found
 	* @throws SystemException if a system exception occurred
@@ -1769,8 +1769,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Finds the journal article where groupId = &#63; and articleId = &#63; and version = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param version the version to search with
 	* @return the matching journal article, or <code>null</code> if a matching journal article could not be found
 	* @throws SystemException if a system exception occurred
@@ -1783,8 +1783,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Finds all the journal articles where groupId = &#63; and articleId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param status the status to search with
 	* @return the matching journal articles
 	* @throws SystemException if a system exception occurred
@@ -1800,8 +1800,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
@@ -1819,8 +1819,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
@@ -1841,8 +1841,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching journal article
@@ -1862,8 +1862,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching journal article
@@ -1884,8 +1884,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* </p>
 	*
 	* @param id the primary key of the current journal article
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next journal article
@@ -1901,8 +1901,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Filters by the user's permissions and finds all the journal articles where groupId = &#63; and articleId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param status the status to search with
 	* @return the matching journal articles that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -1918,8 +1918,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
@@ -1937,8 +1937,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of journal articles to return
 	* @param end the upper bound of the range of journal articles to return (not inclusive)
@@ -1955,7 +1955,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Finds all the journal articles where groupId = &#63; and urlTitle = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @param status the status to search with
 	* @return the matching journal articles
@@ -1972,7 +1972,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of journal articles to return
@@ -1991,7 +1991,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of journal articles to return
@@ -2013,7 +2013,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
@@ -2034,7 +2034,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
@@ -2056,7 +2056,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* </p>
 	*
 	* @param id the primary key of the current journal article
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
@@ -2073,7 +2073,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Filters by the user's permissions and finds all the journal articles where groupId = &#63; and urlTitle = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @param status the status to search with
 	* @return the matching journal articles that the user has permission to view
@@ -2090,7 +2090,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of journal articles to return
@@ -2109,7 +2109,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of journal articles to return
@@ -2180,7 +2180,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Removes the journal article where uuid = &#63; and groupId = &#63; from the database.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUUID_G(java.lang.String uuid, long groupId)
@@ -2199,7 +2199,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Removes all the journal articles where groupId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByGroupId(long groupId)
@@ -2208,7 +2208,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Removes all the journal articles where companyId = &#63; from the database.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByCompanyId(long companyId)
@@ -2217,7 +2217,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Removes all the journal articles where smallImageId = &#63; from the database.
 	*
-	* @param smallImageId the small image id to search with
+	* @param smallImageId the small image ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeBySmallImageId(long smallImageId)
@@ -2236,8 +2236,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Removes all the journal articles where groupId = &#63; and articleId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByG_A(long groupId, java.lang.String articleId)
@@ -2246,8 +2246,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Removes all the journal articles where groupId = &#63; and structureId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param structureId the structure id to search with
+	* @param groupId the group ID to search with
+	* @param structureId the structure ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByG_S(long groupId, java.lang.String structureId)
@@ -2256,8 +2256,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Removes all the journal articles where groupId = &#63; and templateId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param templateId the template id to search with
+	* @param groupId the group ID to search with
+	* @param templateId the template ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByG_T(long groupId, java.lang.String templateId)
@@ -2266,7 +2266,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Removes all the journal articles where groupId = &#63; and urlTitle = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2276,7 +2276,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Removes all the journal articles where groupId = &#63; and status = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2286,7 +2286,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Removes all the journal articles where companyId = &#63; and status = &#63; from the database.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2296,8 +2296,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Removes the journal article where groupId = &#63; and articleId = &#63; and version = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param version the version to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2309,8 +2309,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Removes all the journal articles where groupId = &#63; and articleId = &#63; and status = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2320,7 +2320,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Removes all the journal articles where groupId = &#63; and urlTitle = &#63; and status = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
@@ -2350,7 +2350,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* Counts all the journal articles where uuid = &#63; and groupId = &#63;.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching journal articles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2370,7 +2370,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Counts all the journal articles where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching journal articles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2380,7 +2380,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Filters by the user's permissions and counts all the journal articles where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching journal articles that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2390,7 +2390,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Counts all the journal articles where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the number of matching journal articles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2400,7 +2400,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Counts all the journal articles where smallImageId = &#63;.
 	*
-	* @param smallImageId the small image id to search with
+	* @param smallImageId the small image ID to search with
 	* @return the number of matching journal articles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2421,8 +2421,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Counts all the journal articles where groupId = &#63; and articleId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @return the number of matching journal articles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2432,8 +2432,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Filters by the user's permissions and counts all the journal articles where groupId = &#63; and articleId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @return the number of matching journal articles that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2443,8 +2443,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Counts all the journal articles where groupId = &#63; and structureId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param structureId the structure id to search with
+	* @param groupId the group ID to search with
+	* @param structureId the structure ID to search with
 	* @return the number of matching journal articles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2454,8 +2454,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Filters by the user's permissions and counts all the journal articles where groupId = &#63; and structureId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param structureId the structure id to search with
+	* @param groupId the group ID to search with
+	* @param structureId the structure ID to search with
 	* @return the number of matching journal articles that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2465,8 +2465,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Counts all the journal articles where groupId = &#63; and templateId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param templateId the template id to search with
+	* @param groupId the group ID to search with
+	* @param templateId the template ID to search with
 	* @return the number of matching journal articles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2476,8 +2476,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Filters by the user's permissions and counts all the journal articles where groupId = &#63; and templateId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param templateId the template id to search with
+	* @param groupId the group ID to search with
+	* @param templateId the template ID to search with
 	* @return the number of matching journal articles that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2487,7 +2487,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Counts all the journal articles where groupId = &#63; and urlTitle = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @return the number of matching journal articles
 	* @throws SystemException if a system exception occurred
@@ -2498,7 +2498,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Filters by the user's permissions and counts all the journal articles where groupId = &#63; and urlTitle = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @return the number of matching journal articles that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -2509,7 +2509,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Counts all the journal articles where groupId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @return the number of matching journal articles
 	* @throws SystemException if a system exception occurred
@@ -2520,7 +2520,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Filters by the user's permissions and counts all the journal articles where groupId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @return the number of matching journal articles that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -2531,7 +2531,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Counts all the journal articles where companyId = &#63; and status = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param status the status to search with
 	* @return the number of matching journal articles
 	* @throws SystemException if a system exception occurred
@@ -2542,8 +2542,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Counts all the journal articles where groupId = &#63; and articleId = &#63; and version = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param version the version to search with
 	* @return the number of matching journal articles
 	* @throws SystemException if a system exception occurred
@@ -2555,8 +2555,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Counts all the journal articles where groupId = &#63; and articleId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param status the status to search with
 	* @return the number of matching journal articles
 	* @throws SystemException if a system exception occurred
@@ -2567,8 +2567,8 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Filters by the user's permissions and counts all the journal articles where groupId = &#63; and articleId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
 	* @param status the status to search with
 	* @return the number of matching journal articles that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -2579,7 +2579,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Counts all the journal articles where groupId = &#63; and urlTitle = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @param status the status to search with
 	* @return the number of matching journal articles
@@ -2591,7 +2591,7 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	/**
 	* Filters by the user's permissions and counts all the journal articles where groupId = &#63; and urlTitle = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param urlTitle the url title to search with
 	* @param status the status to search with
 	* @return the number of matching journal articles that the user has permission to view

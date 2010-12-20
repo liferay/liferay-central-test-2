@@ -211,7 +211,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Finds the asset category where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchCategoryException} if it could not be found.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
@@ -225,7 +225,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Finds the asset category where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching asset category, or <code>null</code> if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -237,7 +237,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Finds the asset category where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching asset category, or <code>null</code> if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -248,7 +248,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Finds all the asset categories where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -263,7 +263,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
 	* @return the range of matching asset categories
@@ -280,7 +280,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -299,7 +299,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -318,7 +318,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -338,7 +338,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* </p>
 	*
 	* @param categoryId the primary key of the current asset category
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
@@ -353,7 +353,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Filters by the user's permissions and finds all the asset categories where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching asset categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -368,7 +368,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
 	* @return the range of matching asset categories that the user has permission to view
@@ -385,7 +385,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -400,7 +400,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Finds all the asset categories where parentCategoryId = &#63;.
 	*
-	* @param parentCategoryId the parent category id to search with
+	* @param parentCategoryId the parent category ID to search with
 	* @return the matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -415,7 +415,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category id to search with
+	* @param parentCategoryId the parent category ID to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
 	* @return the range of matching asset categories
@@ -432,7 +432,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category id to search with
+	* @param parentCategoryId the parent category ID to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -451,7 +451,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category id to search with
+	* @param parentCategoryId the parent category ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -470,7 +470,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category id to search with
+	* @param parentCategoryId the parent category ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -490,7 +490,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* </p>
 	*
 	* @param categoryId the primary key of the current asset category
-	* @param parentCategoryId the parent category id to search with
+	* @param parentCategoryId the parent category ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
@@ -505,7 +505,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Finds all the asset categories where vocabularyId = &#63;.
 	*
-	* @param vocabularyId the vocabulary id to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @return the matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -520,7 +520,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param vocabularyId the vocabulary id to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
 	* @return the range of matching asset categories
@@ -537,7 +537,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param vocabularyId the vocabulary id to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -556,7 +556,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param vocabularyId the vocabulary id to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -575,7 +575,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param vocabularyId the vocabulary id to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -595,7 +595,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* </p>
 	*
 	* @param categoryId the primary key of the current asset category
-	* @param vocabularyId the vocabulary id to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
@@ -610,7 +610,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Finds all the asset categories where parentCategoryId = &#63; and name = &#63;.
 	*
-	* @param parentCategoryId the parent category id to search with
+	* @param parentCategoryId the parent category ID to search with
 	* @param name the name to search with
 	* @return the matching asset categories
 	* @throws SystemException if a system exception occurred
@@ -626,7 +626,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category id to search with
+	* @param parentCategoryId the parent category ID to search with
 	* @param name the name to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
@@ -644,7 +644,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category id to search with
+	* @param parentCategoryId the parent category ID to search with
 	* @param name the name to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
@@ -664,7 +664,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category id to search with
+	* @param parentCategoryId the parent category ID to search with
 	* @param name the name to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching asset category
@@ -684,7 +684,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category id to search with
+	* @param parentCategoryId the parent category ID to search with
 	* @param name the name to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching asset category
@@ -705,7 +705,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* </p>
 	*
 	* @param categoryId the primary key of the current asset category
-	* @param parentCategoryId the parent category id to search with
+	* @param parentCategoryId the parent category ID to search with
 	* @param name the name to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next asset category
@@ -721,8 +721,8 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Finds all the asset categories where parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
-	* @param parentCategoryId the parent category id to search with
-	* @param vocabularyId the vocabulary id to search with
+	* @param parentCategoryId the parent category ID to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @return the matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -737,8 +737,8 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category id to search with
-	* @param vocabularyId the vocabulary id to search with
+	* @param parentCategoryId the parent category ID to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
 	* @return the range of matching asset categories
@@ -755,8 +755,8 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category id to search with
-	* @param vocabularyId the vocabulary id to search with
+	* @param parentCategoryId the parent category ID to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -775,8 +775,8 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category id to search with
-	* @param vocabularyId the vocabulary id to search with
+	* @param parentCategoryId the parent category ID to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -795,8 +795,8 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param parentCategoryId the parent category id to search with
-	* @param vocabularyId the vocabulary id to search with
+	* @param parentCategoryId the parent category ID to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -816,8 +816,8 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* </p>
 	*
 	* @param categoryId the primary key of the current asset category
-	* @param parentCategoryId the parent category id to search with
-	* @param vocabularyId the vocabulary id to search with
+	* @param parentCategoryId the parent category ID to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
@@ -833,7 +833,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Finds all the asset categories where name = &#63; and vocabularyId = &#63;.
 	*
 	* @param name the name to search with
-	* @param vocabularyId the vocabulary id to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @return the matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -849,7 +849,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* </p>
 	*
 	* @param name the name to search with
-	* @param vocabularyId the vocabulary id to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
 	* @return the range of matching asset categories
@@ -867,7 +867,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* </p>
 	*
 	* @param name the name to search with
-	* @param vocabularyId the vocabulary id to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -887,7 +887,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* </p>
 	*
 	* @param name the name to search with
-	* @param vocabularyId the vocabulary id to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -907,7 +907,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* </p>
 	*
 	* @param name the name to search with
-	* @param vocabularyId the vocabulary id to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
@@ -928,7 +928,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	*
 	* @param categoryId the primary key of the current asset category
 	* @param name the name to search with
-	* @param vocabularyId the vocabulary id to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
@@ -943,9 +943,9 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Finds the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchCategoryException} if it could not be found.
 	*
-	* @param parentCategoryId the parent category id to search with
+	* @param parentCategoryId the parent category ID to search with
 	* @param name the name to search with
-	* @param vocabularyId the vocabulary id to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @return the matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
@@ -958,9 +958,9 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Finds the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param parentCategoryId the parent category id to search with
+	* @param parentCategoryId the parent category ID to search with
 	* @param name the name to search with
-	* @param vocabularyId the vocabulary id to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @return the matching asset category, or <code>null</code> if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -971,9 +971,9 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Finds the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param parentCategoryId the parent category id to search with
+	* @param parentCategoryId the parent category ID to search with
 	* @param name the name to search with
-	* @param vocabularyId the vocabulary id to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @return the matching asset category, or <code>null</code> if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1038,7 +1038,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Removes the asset category where uuid = &#63; and groupId = &#63; from the database.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUUID_G(java.lang.String uuid, long groupId)
@@ -1048,7 +1048,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Removes all the asset categories where groupId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByGroupId(long groupId)
@@ -1057,7 +1057,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Removes all the asset categories where parentCategoryId = &#63; from the database.
 	*
-	* @param parentCategoryId the parent category id to search with
+	* @param parentCategoryId the parent category ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByParentCategoryId(long parentCategoryId)
@@ -1066,7 +1066,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Removes all the asset categories where vocabularyId = &#63; from the database.
 	*
-	* @param vocabularyId the vocabulary id to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByVocabularyId(long vocabularyId)
@@ -1075,7 +1075,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Removes all the asset categories where parentCategoryId = &#63; and name = &#63; from the database.
 	*
-	* @param parentCategoryId the parent category id to search with
+	* @param parentCategoryId the parent category ID to search with
 	* @param name the name to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1085,8 +1085,8 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Removes all the asset categories where parentCategoryId = &#63; and vocabularyId = &#63; from the database.
 	*
-	* @param parentCategoryId the parent category id to search with
-	* @param vocabularyId the vocabulary id to search with
+	* @param parentCategoryId the parent category ID to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByP_V(long parentCategoryId, long vocabularyId)
@@ -1096,7 +1096,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Removes all the asset categories where name = &#63; and vocabularyId = &#63; from the database.
 	*
 	* @param name the name to search with
-	* @param vocabularyId the vocabulary id to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByN_V(java.lang.String name, long vocabularyId)
@@ -1105,9 +1105,9 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Removes the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; from the database.
 	*
-	* @param parentCategoryId the parent category id to search with
+	* @param parentCategoryId the parent category ID to search with
 	* @param name the name to search with
-	* @param vocabularyId the vocabulary id to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByP_N_V(long parentCategoryId, java.lang.String name,
@@ -1137,7 +1137,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Counts all the asset categories where uuid = &#63; and groupId = &#63;.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1147,7 +1147,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Counts all the asset categories where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1157,7 +1157,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Filters by the user's permissions and counts all the asset categories where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching asset categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1167,7 +1167,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Counts all the asset categories where parentCategoryId = &#63;.
 	*
-	* @param parentCategoryId the parent category id to search with
+	* @param parentCategoryId the parent category ID to search with
 	* @return the number of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1177,7 +1177,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Counts all the asset categories where vocabularyId = &#63;.
 	*
-	* @param vocabularyId the vocabulary id to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @return the number of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1187,7 +1187,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Counts all the asset categories where parentCategoryId = &#63; and name = &#63;.
 	*
-	* @param parentCategoryId the parent category id to search with
+	* @param parentCategoryId the parent category ID to search with
 	* @param name the name to search with
 	* @return the number of matching asset categories
 	* @throws SystemException if a system exception occurred
@@ -1198,8 +1198,8 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Counts all the asset categories where parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
-	* @param parentCategoryId the parent category id to search with
-	* @param vocabularyId the vocabulary id to search with
+	* @param parentCategoryId the parent category ID to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @return the number of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1210,7 +1210,7 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* Counts all the asset categories where name = &#63; and vocabularyId = &#63;.
 	*
 	* @param name the name to search with
-	* @param vocabularyId the vocabulary id to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @return the number of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1220,9 +1220,9 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	/**
 	* Counts all the asset categories where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
 	*
-	* @param parentCategoryId the parent category id to search with
+	* @param parentCategoryId the parent category ID to search with
 	* @param name the name to search with
-	* @param vocabularyId the vocabulary id to search with
+	* @param vocabularyId the vocabulary ID to search with
 	* @return the number of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/

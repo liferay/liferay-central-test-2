@@ -56,44 +56,44 @@ public interface SocialEquityGroupSettingModel extends BaseModel<SocialEquityGro
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the equity group setting id of this social equity group setting.
+	 * Gets the equity group setting ID of this social equity group setting.
 	 *
-	 * @return the equity group setting id of this social equity group setting
+	 * @return the equity group setting ID of this social equity group setting
 	 */
 	public long getEquityGroupSettingId();
 
 	/**
-	 * Sets the equity group setting id of this social equity group setting.
+	 * Sets the equity group setting ID of this social equity group setting.
 	 *
-	 * @param equityGroupSettingId the equity group setting id of this social equity group setting
+	 * @param equityGroupSettingId the equity group setting ID of this social equity group setting
 	 */
 	public void setEquityGroupSettingId(long equityGroupSettingId);
 
 	/**
-	 * Gets the group id of this social equity group setting.
+	 * Gets the group ID of this social equity group setting.
 	 *
-	 * @return the group id of this social equity group setting
+	 * @return the group ID of this social equity group setting
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this social equity group setting.
+	 * Sets the group ID of this social equity group setting.
 	 *
-	 * @param groupId the group id of this social equity group setting
+	 * @param groupId the group ID of this social equity group setting
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this social equity group setting.
+	 * Gets the company ID of this social equity group setting.
 	 *
-	 * @return the company id of this social equity group setting
+	 * @return the company ID of this social equity group setting
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this social equity group setting.
+	 * Sets the company ID of this social equity group setting.
 	 *
-	 * @param companyId the company id of this social equity group setting
+	 * @param companyId the company ID of this social equity group setting
 	 */
 	public void setCompanyId(long companyId);
 
@@ -105,16 +105,16 @@ public interface SocialEquityGroupSettingModel extends BaseModel<SocialEquityGro
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this social equity group setting.
+	 * Gets the class name ID of this social equity group setting.
 	 *
-	 * @return the class name id of this social equity group setting
+	 * @return the class name ID of this social equity group setting
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this social equity group setting.
+	 * Sets the class name ID of this social equity group setting.
 	 *
-	 * @param classNameId the class name id of this social equity group setting
+	 * @param classNameId the class name ID of this social equity group setting
 	 */
 	public void setClassNameId(long classNameId);
 

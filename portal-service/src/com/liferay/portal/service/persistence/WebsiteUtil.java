@@ -196,7 +196,7 @@ public class WebsiteUtil {
 	/**
 	* Finds all the websites where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the matching websites
 	* @throws SystemException if a system exception occurred
 	*/
@@ -213,7 +213,7 @@ public class WebsiteUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of websites to return
 	* @param end the upper bound of the range of websites to return (not inclusive)
 	* @return the range of matching websites
@@ -232,7 +232,7 @@ public class WebsiteUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of websites to return
 	* @param end the upper bound of the range of websites to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -254,7 +254,7 @@ public class WebsiteUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
@@ -276,7 +276,7 @@ public class WebsiteUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
@@ -299,7 +299,7 @@ public class WebsiteUtil {
 	* </p>
 	*
 	* @param websiteId the primary key of the current website
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a website with the primary key could not be found
@@ -318,7 +318,7 @@ public class WebsiteUtil {
 	/**
 	* Finds all the websites where userId = &#63;.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @return the matching websites
 	* @throws SystemException if a system exception occurred
 	*/
@@ -334,7 +334,7 @@ public class WebsiteUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of websites to return
 	* @param end the upper bound of the range of websites to return (not inclusive)
 	* @return the range of matching websites
@@ -353,7 +353,7 @@ public class WebsiteUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of websites to return
 	* @param end the upper bound of the range of websites to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -375,7 +375,7 @@ public class WebsiteUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
@@ -396,7 +396,7 @@ public class WebsiteUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
@@ -418,7 +418,7 @@ public class WebsiteUtil {
 	* </p>
 	*
 	* @param websiteId the primary key of the current website
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a website with the primary key could not be found
@@ -437,8 +437,8 @@ public class WebsiteUtil {
 	/**
 	* Finds all the websites where companyId = &#63; and classNameId = &#63;.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @return the matching websites
 	* @throws SystemException if a system exception occurred
 	*/
@@ -455,8 +455,8 @@ public class WebsiteUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param start the lower bound of the range of websites to return
 	* @param end the upper bound of the range of websites to return (not inclusive)
 	* @return the range of matching websites
@@ -475,8 +475,8 @@ public class WebsiteUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param start the lower bound of the range of websites to return
 	* @param end the upper bound of the range of websites to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -499,8 +499,8 @@ public class WebsiteUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
@@ -522,8 +522,8 @@ public class WebsiteUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
@@ -546,8 +546,8 @@ public class WebsiteUtil {
 	* </p>
 	*
 	* @param websiteId the primary key of the current website
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a website with the primary key could not be found
@@ -566,8 +566,8 @@ public class WebsiteUtil {
 	/**
 	* Finds all the websites where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching websites
 	* @throws SystemException if a system exception occurred
@@ -585,8 +585,8 @@ public class WebsiteUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param start the lower bound of the range of websites to return
 	* @param end the upper bound of the range of websites to return (not inclusive)
@@ -607,8 +607,8 @@ public class WebsiteUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param start the lower bound of the range of websites to return
 	* @param end the upper bound of the range of websites to return (not inclusive)
@@ -632,8 +632,8 @@ public class WebsiteUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching website
@@ -657,8 +657,8 @@ public class WebsiteUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching website
@@ -683,8 +683,8 @@ public class WebsiteUtil {
 	* </p>
 	*
 	* @param websiteId the primary key of the current website
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next website
@@ -704,8 +704,8 @@ public class WebsiteUtil {
 	/**
 	* Finds all the websites where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
 	* @return the matching websites
@@ -725,8 +725,8 @@ public class WebsiteUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
 	* @param start the lower bound of the range of websites to return
@@ -750,8 +750,8 @@ public class WebsiteUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
 	* @param start the lower bound of the range of websites to return
@@ -777,8 +777,8 @@ public class WebsiteUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
 	* @param orderByComparator the comparator to order the set by
@@ -803,8 +803,8 @@ public class WebsiteUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
 	* @param orderByComparator the comparator to order the set by
@@ -830,8 +830,8 @@ public class WebsiteUtil {
 	* </p>
 	*
 	* @param websiteId the primary key of the current website
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
 	* @param orderByComparator the comparator to order the set by
@@ -902,7 +902,7 @@ public class WebsiteUtil {
 	/**
 	* Removes all the websites where companyId = &#63; from the database.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByCompanyId(long companyId)
@@ -913,7 +913,7 @@ public class WebsiteUtil {
 	/**
 	* Removes all the websites where userId = &#63; from the database.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUserId(long userId)
@@ -924,8 +924,8 @@ public class WebsiteUtil {
 	/**
 	* Removes all the websites where companyId = &#63; and classNameId = &#63; from the database.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByC_C(long companyId, long classNameId)
@@ -936,8 +936,8 @@ public class WebsiteUtil {
 	/**
 	* Removes all the websites where companyId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -950,8 +950,8 @@ public class WebsiteUtil {
 	/**
 	* Removes all the websites where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63; from the database.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
 	* @throws SystemException if a system exception occurred
@@ -976,7 +976,7 @@ public class WebsiteUtil {
 	/**
 	* Counts all the websites where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the number of matching websites
 	* @throws SystemException if a system exception occurred
 	*/
@@ -988,7 +988,7 @@ public class WebsiteUtil {
 	/**
 	* Counts all the websites where userId = &#63;.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @return the number of matching websites
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1000,8 +1000,8 @@ public class WebsiteUtil {
 	/**
 	* Counts all the websites where companyId = &#63; and classNameId = &#63;.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @return the number of matching websites
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1013,8 +1013,8 @@ public class WebsiteUtil {
 	/**
 	* Counts all the websites where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the number of matching websites
 	* @throws SystemException if a system exception occurred
@@ -1028,8 +1028,8 @@ public class WebsiteUtil {
 	/**
 	* Counts all the websites where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
 	* @return the number of matching websites

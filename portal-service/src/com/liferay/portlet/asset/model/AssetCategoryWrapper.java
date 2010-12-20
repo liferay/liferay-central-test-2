@@ -65,72 +65,72 @@ public class AssetCategoryWrapper implements AssetCategory {
 	}
 
 	/**
-	* Gets the category id of this asset category.
+	* Gets the category ID of this asset category.
 	*
-	* @return the category id of this asset category
+	* @return the category ID of this asset category
 	*/
 	public long getCategoryId() {
 		return _assetCategory.getCategoryId();
 	}
 
 	/**
-	* Sets the category id of this asset category.
+	* Sets the category ID of this asset category.
 	*
-	* @param categoryId the category id of this asset category
+	* @param categoryId the category ID of this asset category
 	*/
 	public void setCategoryId(long categoryId) {
 		_assetCategory.setCategoryId(categoryId);
 	}
 
 	/**
-	* Gets the group id of this asset category.
+	* Gets the group ID of this asset category.
 	*
-	* @return the group id of this asset category
+	* @return the group ID of this asset category
 	*/
 	public long getGroupId() {
 		return _assetCategory.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this asset category.
+	* Sets the group ID of this asset category.
 	*
-	* @param groupId the group id of this asset category
+	* @param groupId the group ID of this asset category
 	*/
 	public void setGroupId(long groupId) {
 		_assetCategory.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this asset category.
+	* Gets the company ID of this asset category.
 	*
-	* @return the company id of this asset category
+	* @return the company ID of this asset category
 	*/
 	public long getCompanyId() {
 		return _assetCategory.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this asset category.
+	* Sets the company ID of this asset category.
 	*
-	* @param companyId the company id of this asset category
+	* @param companyId the company ID of this asset category
 	*/
 	public void setCompanyId(long companyId) {
 		_assetCategory.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this asset category.
+	* Gets the user ID of this asset category.
 	*
-	* @return the user id of this asset category
+	* @return the user ID of this asset category
 	*/
 	public long getUserId() {
 		return _assetCategory.getUserId();
 	}
 
 	/**
-	* Sets the user id of this asset category.
+	* Sets the user ID of this asset category.
 	*
-	* @param userId the user id of this asset category
+	* @param userId the user ID of this asset category
 	*/
 	public void setUserId(long userId) {
 		_assetCategory.setUserId(userId);
@@ -211,54 +211,54 @@ public class AssetCategoryWrapper implements AssetCategory {
 	}
 
 	/**
-	* Gets the parent category id of this asset category.
+	* Gets the parent category ID of this asset category.
 	*
-	* @return the parent category id of this asset category
+	* @return the parent category ID of this asset category
 	*/
 	public long getParentCategoryId() {
 		return _assetCategory.getParentCategoryId();
 	}
 
 	/**
-	* Sets the parent category id of this asset category.
+	* Sets the parent category ID of this asset category.
 	*
-	* @param parentCategoryId the parent category id of this asset category
+	* @param parentCategoryId the parent category ID of this asset category
 	*/
 	public void setParentCategoryId(long parentCategoryId) {
 		_assetCategory.setParentCategoryId(parentCategoryId);
 	}
 
 	/**
-	* Gets the left category id of this asset category.
+	* Gets the left category ID of this asset category.
 	*
-	* @return the left category id of this asset category
+	* @return the left category ID of this asset category
 	*/
 	public long getLeftCategoryId() {
 		return _assetCategory.getLeftCategoryId();
 	}
 
 	/**
-	* Sets the left category id of this asset category.
+	* Sets the left category ID of this asset category.
 	*
-	* @param leftCategoryId the left category id of this asset category
+	* @param leftCategoryId the left category ID of this asset category
 	*/
 	public void setLeftCategoryId(long leftCategoryId) {
 		_assetCategory.setLeftCategoryId(leftCategoryId);
 	}
 
 	/**
-	* Gets the right category id of this asset category.
+	* Gets the right category ID of this asset category.
 	*
-	* @return the right category id of this asset category
+	* @return the right category ID of this asset category
 	*/
 	public long getRightCategoryId() {
 		return _assetCategory.getRightCategoryId();
 	}
 
 	/**
-	* Sets the right category id of this asset category.
+	* Sets the right category ID of this asset category.
 	*
-	* @param rightCategoryId the right category id of this asset category
+	* @param rightCategoryId the right category ID of this asset category
 	*/
 	public void setRightCategoryId(long rightCategoryId) {
 		_assetCategory.setRightCategoryId(rightCategoryId);
@@ -465,18 +465,18 @@ public class AssetCategoryWrapper implements AssetCategory {
 	}
 
 	/**
-	* Gets the vocabulary id of this asset category.
+	* Gets the vocabulary ID of this asset category.
 	*
-	* @return the vocabulary id of this asset category
+	* @return the vocabulary ID of this asset category
 	*/
 	public long getVocabularyId() {
 		return _assetCategory.getVocabularyId();
 	}
 
 	/**
-	* Sets the vocabulary id of this asset category.
+	* Sets the vocabulary ID of this asset category.
 	*
-	* @param vocabularyId the vocabulary id of this asset category
+	* @param vocabularyId the vocabulary ID of this asset category
 	*/
 	public void setVocabularyId(long vocabularyId) {
 		_assetCategory.setVocabularyId(vocabularyId);

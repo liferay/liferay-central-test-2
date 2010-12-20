@@ -382,7 +382,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 	/**
 	 * Finds all the shopping item prices where itemId = &#63;.
 	 *
-	 * @param itemId the item id to search with
+	 * @param itemId the item ID to search with
 	 * @return the matching shopping item prices
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -398,7 +398,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param itemId the item id to search with
+	 * @param itemId the item ID to search with
 	 * @param start the lower bound of the range of shopping item prices to return
 	 * @param end the upper bound of the range of shopping item prices to return (not inclusive)
 	 * @return the range of matching shopping item prices
@@ -416,7 +416,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param itemId the item id to search with
+	 * @param itemId the item ID to search with
 	 * @param start the lower bound of the range of shopping item prices to return
 	 * @param end the upper bound of the range of shopping item prices to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -504,7 +504,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param itemId the item id to search with
+	 * @param itemId the item ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching shopping item price
 	 * @throws com.liferay.portlet.shopping.NoSuchItemPriceException if a matching shopping item price could not be found
@@ -540,7 +540,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param itemId the item id to search with
+	 * @param itemId the item ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching shopping item price
 	 * @throws com.liferay.portlet.shopping.NoSuchItemPriceException if a matching shopping item price could not be found
@@ -579,7 +579,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 	 * </p>
 	 *
 	 * @param itemPriceId the primary key of the current shopping item price
-	 * @param itemId the item id to search with
+	 * @param itemId the item ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next shopping item price
 	 * @throws com.liferay.portlet.shopping.NoSuchItemPriceException if a shopping item price with the primary key could not be found
@@ -831,7 +831,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 	/**
 	 * Removes all the shopping item prices where itemId = &#63; from the database.
 	 *
-	 * @param itemId the item id to search with
+	 * @param itemId the item ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByItemId(long itemId) throws SystemException {
@@ -854,7 +854,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 	/**
 	 * Counts all the shopping item prices where itemId = &#63;.
 	 *
-	 * @param itemId the item id to search with
+	 * @param itemId the item ID to search with
 	 * @return the number of matching shopping item prices
 	 * @throws SystemException if a system exception occurred
 	 */

@@ -47,36 +47,36 @@ public class TicketWrapper implements Ticket {
 	}
 
 	/**
-	* Gets the ticket id of this ticket.
+	* Gets the ticket ID of this ticket.
 	*
-	* @return the ticket id of this ticket
+	* @return the ticket ID of this ticket
 	*/
 	public long getTicketId() {
 		return _ticket.getTicketId();
 	}
 
 	/**
-	* Sets the ticket id of this ticket.
+	* Sets the ticket ID of this ticket.
 	*
-	* @param ticketId the ticket id of this ticket
+	* @param ticketId the ticket ID of this ticket
 	*/
 	public void setTicketId(long ticketId) {
 		_ticket.setTicketId(ticketId);
 	}
 
 	/**
-	* Gets the company id of this ticket.
+	* Gets the company ID of this ticket.
 	*
-	* @return the company id of this ticket
+	* @return the company ID of this ticket
 	*/
 	public long getCompanyId() {
 		return _ticket.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this ticket.
+	* Sets the company ID of this ticket.
 	*
-	* @param companyId the company id of this ticket
+	* @param companyId the company ID of this ticket
 	*/
 	public void setCompanyId(long companyId) {
 		_ticket.setCompanyId(companyId);
@@ -110,18 +110,18 @@ public class TicketWrapper implements Ticket {
 	}
 
 	/**
-	* Gets the class name id of this ticket.
+	* Gets the class name ID of this ticket.
 	*
-	* @return the class name id of this ticket
+	* @return the class name ID of this ticket
 	*/
 	public long getClassNameId() {
 		return _ticket.getClassNameId();
 	}
 
 	/**
-	* Sets the class name id of this ticket.
+	* Sets the class name ID of this ticket.
 	*
-	* @param classNameId the class name id of this ticket
+	* @param classNameId the class name ID of this ticket
 	*/
 	public void setClassNameId(long classNameId) {
 		_ticket.setClassNameId(classNameId);

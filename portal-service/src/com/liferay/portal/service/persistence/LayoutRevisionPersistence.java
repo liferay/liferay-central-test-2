@@ -102,7 +102,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	/**
 	* Finds all the layout revisions where layoutSetBranchId = &#63;.
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @return the matching layout revisions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -117,7 +117,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param start the lower bound of the range of layout revisions to return
 	* @param end the upper bound of the range of layout revisions to return (not inclusive)
 	* @return the range of matching layout revisions
@@ -134,7 +134,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param start the lower bound of the range of layout revisions to return
 	* @param end the upper bound of the range of layout revisions to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -153,7 +153,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching layout revision
 	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a matching layout revision could not be found
@@ -172,7 +172,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching layout revision
 	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a matching layout revision could not be found
@@ -192,7 +192,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* </p>
 	*
 	* @param layoutRevisionId the primary key of the current layout revision
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next layout revision
 	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a layout revision with the primary key could not be found
@@ -309,7 +309,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	/**
 	* Finds all the layout revisions where layoutSetBranchId = &#63; and plid = &#63;.
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
 	* @return the matching layout revisions
 	* @throws SystemException if a system exception occurred
@@ -325,7 +325,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
 	* @param start the lower bound of the range of layout revisions to return
 	* @param end the upper bound of the range of layout revisions to return (not inclusive)
@@ -343,7 +343,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
 	* @param start the lower bound of the range of layout revisions to return
 	* @param end the upper bound of the range of layout revisions to return (not inclusive)
@@ -363,7 +363,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching layout revision
@@ -383,7 +383,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching layout revision
@@ -404,7 +404,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* </p>
 	*
 	* @param layoutRevisionId the primary key of the current layout revision
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next layout revision
@@ -420,7 +420,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	/**
 	* Finds the layout revision where layoutSetBranchId = &#63; and head = &#63; and plid = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutRevisionException} if it could not be found.
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param head the head to search with
 	* @param plid the plid to search with
 	* @return the matching layout revision
@@ -435,7 +435,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	/**
 	* Finds the layout revision where layoutSetBranchId = &#63; and head = &#63; and plid = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param head the head to search with
 	* @param plid the plid to search with
 	* @return the matching layout revision, or <code>null</code> if a matching layout revision could not be found
@@ -448,7 +448,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	/**
 	* Finds the layout revision where layoutSetBranchId = &#63; and head = &#63; and plid = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param head the head to search with
 	* @param plid the plid to search with
 	* @return the matching layout revision, or <code>null</code> if a matching layout revision could not be found
@@ -462,7 +462,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	/**
 	* Finds all the layout revisions where layoutSetBranchId = &#63; and plid = &#63; and status = &#63;.
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
 	* @param status the status to search with
 	* @return the matching layout revisions
@@ -479,7 +479,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of layout revisions to return
@@ -498,7 +498,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of layout revisions to return
@@ -519,7 +519,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
@@ -540,7 +540,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
@@ -562,7 +562,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* </p>
 	*
 	* @param layoutRevisionId the primary key of the current layout revision
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
@@ -622,7 +622,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	/**
 	* Removes all the layout revisions where layoutSetBranchId = &#63; from the database.
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByLayoutSetBranchId(long layoutSetBranchId)
@@ -640,7 +640,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	/**
 	* Removes all the layout revisions where layoutSetBranchId = &#63; and plid = &#63; from the database.
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -650,7 +650,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	/**
 	* Removes the layout revision where layoutSetBranchId = &#63; and head = &#63; and plid = &#63; from the database.
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param head the head to search with
 	* @param plid the plid to search with
 	* @throws SystemException if a system exception occurred
@@ -662,7 +662,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	/**
 	* Removes all the layout revisions where layoutSetBranchId = &#63; and plid = &#63; and status = &#63; from the database.
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
@@ -681,7 +681,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	/**
 	* Counts all the layout revisions where layoutSetBranchId = &#63;.
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @return the number of matching layout revisions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -701,7 +701,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	/**
 	* Counts all the layout revisions where layoutSetBranchId = &#63; and plid = &#63;.
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
 	* @return the number of matching layout revisions
 	* @throws SystemException if a system exception occurred
@@ -712,7 +712,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	/**
 	* Counts all the layout revisions where layoutSetBranchId = &#63; and head = &#63; and plid = &#63;.
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param head the head to search with
 	* @param plid the plid to search with
 	* @return the number of matching layout revisions
@@ -724,7 +724,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	/**
 	* Counts all the layout revisions where layoutSetBranchId = &#63; and plid = &#63; and status = &#63;.
 	*
-	* @param layoutSetBranchId the layout set branch id to search with
+	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
 	* @param status the status to search with
 	* @return the number of matching layout revisions

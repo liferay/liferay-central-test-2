@@ -77,58 +77,58 @@ public interface PollsQuestionModel extends BaseModel<PollsQuestion> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the question id of this polls question.
+	 * Gets the question ID of this polls question.
 	 *
-	 * @return the question id of this polls question
+	 * @return the question ID of this polls question
 	 */
 	public long getQuestionId();
 
 	/**
-	 * Sets the question id of this polls question.
+	 * Sets the question ID of this polls question.
 	 *
-	 * @param questionId the question id of this polls question
+	 * @param questionId the question ID of this polls question
 	 */
 	public void setQuestionId(long questionId);
 
 	/**
-	 * Gets the group id of this polls question.
+	 * Gets the group ID of this polls question.
 	 *
-	 * @return the group id of this polls question
+	 * @return the group ID of this polls question
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this polls question.
+	 * Sets the group ID of this polls question.
 	 *
-	 * @param groupId the group id of this polls question
+	 * @param groupId the group ID of this polls question
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this polls question.
+	 * Gets the company ID of this polls question.
 	 *
-	 * @return the company id of this polls question
+	 * @return the company ID of this polls question
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this polls question.
+	 * Sets the company ID of this polls question.
 	 *
-	 * @param companyId the company id of this polls question
+	 * @param companyId the company ID of this polls question
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this polls question.
+	 * Gets the user ID of this polls question.
 	 *
-	 * @return the user id of this polls question
+	 * @return the user ID of this polls question
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this polls question.
+	 * Sets the user ID of this polls question.
 	 *
-	 * @param userId the user id of this polls question
+	 * @param userId the user ID of this polls question
 	 */
 	public void setUserId(long userId);
 

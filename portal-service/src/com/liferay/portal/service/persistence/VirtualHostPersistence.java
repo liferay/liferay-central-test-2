@@ -136,8 +136,8 @@ public interface VirtualHostPersistence extends BasePersistence<VirtualHost> {
 	/**
 	* Finds the virtual host where companyId = &#63; and layoutSetId = &#63; or throws a {@link com.liferay.portal.NoSuchVirtualHostException} if it could not be found.
 	*
-	* @param companyId the company id to search with
-	* @param layoutSetId the layout set id to search with
+	* @param companyId the company ID to search with
+	* @param layoutSetId the layout set ID to search with
 	* @return the matching virtual host
 	* @throws com.liferay.portal.NoSuchVirtualHostException if a matching virtual host could not be found
 	* @throws SystemException if a system exception occurred
@@ -150,8 +150,8 @@ public interface VirtualHostPersistence extends BasePersistence<VirtualHost> {
 	/**
 	* Finds the virtual host where companyId = &#63; and layoutSetId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param companyId the company id to search with
-	* @param layoutSetId the layout set id to search with
+	* @param companyId the company ID to search with
+	* @param layoutSetId the layout set ID to search with
 	* @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -162,8 +162,8 @@ public interface VirtualHostPersistence extends BasePersistence<VirtualHost> {
 	/**
 	* Finds the virtual host where companyId = &#63; and layoutSetId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param companyId the company id to search with
-	* @param layoutSetId the layout set id to search with
+	* @param companyId the company ID to search with
+	* @param layoutSetId the layout set ID to search with
 	* @return the matching virtual host, or <code>null</code> if a matching virtual host could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -227,8 +227,8 @@ public interface VirtualHostPersistence extends BasePersistence<VirtualHost> {
 	/**
 	* Removes the virtual host where companyId = &#63; and layoutSetId = &#63; from the database.
 	*
-	* @param companyId the company id to search with
-	* @param layoutSetId the layout set id to search with
+	* @param companyId the company ID to search with
+	* @param layoutSetId the layout set ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByC_L(long companyId, long layoutSetId)
@@ -256,8 +256,8 @@ public interface VirtualHostPersistence extends BasePersistence<VirtualHost> {
 	/**
 	* Counts all the virtual hosts where companyId = &#63; and layoutSetId = &#63;.
 	*
-	* @param companyId the company id to search with
-	* @param layoutSetId the layout set id to search with
+	* @param companyId the company ID to search with
+	* @param layoutSetId the layout set ID to search with
 	* @return the number of matching virtual hosts
 	* @throws SystemException if a system exception occurred
 	*/

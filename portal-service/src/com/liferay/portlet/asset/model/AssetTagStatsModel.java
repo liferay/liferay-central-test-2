@@ -56,30 +56,30 @@ public interface AssetTagStatsModel extends BaseModel<AssetTagStats> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the tag stats id of this asset tag stats.
+	 * Gets the tag stats ID of this asset tag stats.
 	 *
-	 * @return the tag stats id of this asset tag stats
+	 * @return the tag stats ID of this asset tag stats
 	 */
 	public long getTagStatsId();
 
 	/**
-	 * Sets the tag stats id of this asset tag stats.
+	 * Sets the tag stats ID of this asset tag stats.
 	 *
-	 * @param tagStatsId the tag stats id of this asset tag stats
+	 * @param tagStatsId the tag stats ID of this asset tag stats
 	 */
 	public void setTagStatsId(long tagStatsId);
 
 	/**
-	 * Gets the tag id of this asset tag stats.
+	 * Gets the tag ID of this asset tag stats.
 	 *
-	 * @return the tag id of this asset tag stats
+	 * @return the tag ID of this asset tag stats
 	 */
 	public long getTagId();
 
 	/**
-	 * Sets the tag id of this asset tag stats.
+	 * Sets the tag ID of this asset tag stats.
 	 *
-	 * @param tagId the tag id of this asset tag stats
+	 * @param tagId the tag ID of this asset tag stats
 	 */
 	public void setTagId(long tagId);
 
@@ -91,16 +91,16 @@ public interface AssetTagStatsModel extends BaseModel<AssetTagStats> {
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this asset tag stats.
+	 * Gets the class name ID of this asset tag stats.
 	 *
-	 * @return the class name id of this asset tag stats
+	 * @return the class name ID of this asset tag stats
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this asset tag stats.
+	 * Sets the class name ID of this asset tag stats.
 	 *
-	 * @param classNameId the class name id of this asset tag stats
+	 * @param classNameId the class name ID of this asset tag stats
 	 */
 	public void setClassNameId(long classNameId);
 

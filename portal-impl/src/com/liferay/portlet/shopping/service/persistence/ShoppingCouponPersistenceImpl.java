@@ -427,7 +427,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 	/**
 	 * Finds all the shopping coupons where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching shopping coupons
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -443,7 +443,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of shopping coupons to return
 	 * @param end the upper bound of the range of shopping coupons to return (not inclusive)
 	 * @return the range of matching shopping coupons
@@ -461,7 +461,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of shopping coupons to return
 	 * @param end the upper bound of the range of shopping coupons to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -549,7 +549,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching shopping coupon
 	 * @throws com.liferay.portlet.shopping.NoSuchCouponException if a matching shopping coupon could not be found
@@ -585,7 +585,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching shopping coupon
 	 * @throws com.liferay.portlet.shopping.NoSuchCouponException if a matching shopping coupon could not be found
@@ -624,7 +624,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 	 * </p>
 	 *
 	 * @param couponId the primary key of the current shopping coupon
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next shopping coupon
 	 * @throws com.liferay.portlet.shopping.NoSuchCouponException if a shopping coupon with the primary key could not be found
@@ -1017,7 +1017,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 	/**
 	 * Removes all the shopping coupons where groupId = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -1053,7 +1053,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 	/**
 	 * Counts all the shopping coupons where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the number of matching shopping coupons
 	 * @throws SystemException if a system exception occurred
 	 */

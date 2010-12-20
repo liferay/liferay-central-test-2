@@ -59,44 +59,44 @@ public interface AccountModel extends BaseModel<Account> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the account id of this account.
+	 * Gets the account ID of this account.
 	 *
-	 * @return the account id of this account
+	 * @return the account ID of this account
 	 */
 	public long getAccountId();
 
 	/**
-	 * Sets the account id of this account.
+	 * Sets the account ID of this account.
 	 *
-	 * @param accountId the account id of this account
+	 * @param accountId the account ID of this account
 	 */
 	public void setAccountId(long accountId);
 
 	/**
-	 * Gets the company id of this account.
+	 * Gets the company ID of this account.
 	 *
-	 * @return the company id of this account
+	 * @return the company ID of this account
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this account.
+	 * Sets the company ID of this account.
 	 *
-	 * @param companyId the company id of this account
+	 * @param companyId the company ID of this account
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this account.
+	 * Gets the user ID of this account.
 	 *
-	 * @return the user id of this account
+	 * @return the user ID of this account
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this account.
+	 * Sets the user ID of this account.
 	 *
-	 * @param userId the user id of this account
+	 * @param userId the user ID of this account
 	 */
 	public void setUserId(long userId);
 
@@ -159,16 +159,16 @@ public interface AccountModel extends BaseModel<Account> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the parent account id of this account.
+	 * Gets the parent account ID of this account.
 	 *
-	 * @return the parent account id of this account
+	 * @return the parent account ID of this account
 	 */
 	public long getParentAccountId();
 
 	/**
-	 * Sets the parent account id of this account.
+	 * Sets the parent account ID of this account.
 	 *
-	 * @param parentAccountId the parent account id of this account
+	 * @param parentAccountId the parent account ID of this account
 	 */
 	public void setParentAccountId(long parentAccountId);
 
@@ -203,17 +203,17 @@ public interface AccountModel extends BaseModel<Account> {
 	public void setLegalName(String legalName);
 
 	/**
-	 * Gets the legal id of this account.
+	 * Gets the legal ID of this account.
 	 *
-	 * @return the legal id of this account
+	 * @return the legal ID of this account
 	 */
 	@AutoEscape
 	public String getLegalId();
 
 	/**
-	 * Sets the legal id of this account.
+	 * Sets the legal ID of this account.
 	 *
-	 * @param legalId the legal id of this account
+	 * @param legalId the legal ID of this account
 	 */
 	public void setLegalId(String legalId);
 

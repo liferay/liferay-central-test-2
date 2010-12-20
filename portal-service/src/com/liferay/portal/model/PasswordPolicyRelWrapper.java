@@ -47,36 +47,36 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel {
 	}
 
 	/**
-	* Gets the password policy rel id of this password policy rel.
+	* Gets the password policy rel ID of this password policy rel.
 	*
-	* @return the password policy rel id of this password policy rel
+	* @return the password policy rel ID of this password policy rel
 	*/
 	public long getPasswordPolicyRelId() {
 		return _passwordPolicyRel.getPasswordPolicyRelId();
 	}
 
 	/**
-	* Sets the password policy rel id of this password policy rel.
+	* Sets the password policy rel ID of this password policy rel.
 	*
-	* @param passwordPolicyRelId the password policy rel id of this password policy rel
+	* @param passwordPolicyRelId the password policy rel ID of this password policy rel
 	*/
 	public void setPasswordPolicyRelId(long passwordPolicyRelId) {
 		_passwordPolicyRel.setPasswordPolicyRelId(passwordPolicyRelId);
 	}
 
 	/**
-	* Gets the password policy id of this password policy rel.
+	* Gets the password policy ID of this password policy rel.
 	*
-	* @return the password policy id of this password policy rel
+	* @return the password policy ID of this password policy rel
 	*/
 	public long getPasswordPolicyId() {
 		return _passwordPolicyRel.getPasswordPolicyId();
 	}
 
 	/**
-	* Sets the password policy id of this password policy rel.
+	* Sets the password policy ID of this password policy rel.
 	*
-	* @param passwordPolicyId the password policy id of this password policy rel
+	* @param passwordPolicyId the password policy ID of this password policy rel
 	*/
 	public void setPasswordPolicyId(long passwordPolicyId) {
 		_passwordPolicyRel.setPasswordPolicyId(passwordPolicyId);
@@ -92,18 +92,18 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel {
 	}
 
 	/**
-	* Gets the class name id of this password policy rel.
+	* Gets the class name ID of this password policy rel.
 	*
-	* @return the class name id of this password policy rel
+	* @return the class name ID of this password policy rel
 	*/
 	public long getClassNameId() {
 		return _passwordPolicyRel.getClassNameId();
 	}
 
 	/**
-	* Sets the class name id of this password policy rel.
+	* Sets the class name ID of this password policy rel.
 	*
-	* @param classNameId the class name id of this password policy rel
+	* @param classNameId the class name ID of this password policy rel
 	*/
 	public void setClassNameId(long classNameId) {
 		_passwordPolicyRel.setClassNameId(classNameId);

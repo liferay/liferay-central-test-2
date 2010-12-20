@@ -47,72 +47,72 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 	}
 
 	/**
-	* Gets the category id of this shopping category.
+	* Gets the category ID of this shopping category.
 	*
-	* @return the category id of this shopping category
+	* @return the category ID of this shopping category
 	*/
 	public long getCategoryId() {
 		return _shoppingCategory.getCategoryId();
 	}
 
 	/**
-	* Sets the category id of this shopping category.
+	* Sets the category ID of this shopping category.
 	*
-	* @param categoryId the category id of this shopping category
+	* @param categoryId the category ID of this shopping category
 	*/
 	public void setCategoryId(long categoryId) {
 		_shoppingCategory.setCategoryId(categoryId);
 	}
 
 	/**
-	* Gets the group id of this shopping category.
+	* Gets the group ID of this shopping category.
 	*
-	* @return the group id of this shopping category
+	* @return the group ID of this shopping category
 	*/
 	public long getGroupId() {
 		return _shoppingCategory.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this shopping category.
+	* Sets the group ID of this shopping category.
 	*
-	* @param groupId the group id of this shopping category
+	* @param groupId the group ID of this shopping category
 	*/
 	public void setGroupId(long groupId) {
 		_shoppingCategory.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this shopping category.
+	* Gets the company ID of this shopping category.
 	*
-	* @return the company id of this shopping category
+	* @return the company ID of this shopping category
 	*/
 	public long getCompanyId() {
 		return _shoppingCategory.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this shopping category.
+	* Sets the company ID of this shopping category.
 	*
-	* @param companyId the company id of this shopping category
+	* @param companyId the company ID of this shopping category
 	*/
 	public void setCompanyId(long companyId) {
 		_shoppingCategory.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this shopping category.
+	* Gets the user ID of this shopping category.
 	*
-	* @return the user id of this shopping category
+	* @return the user ID of this shopping category
 	*/
 	public long getUserId() {
 		return _shoppingCategory.getUserId();
 	}
 
 	/**
-	* Sets the user id of this shopping category.
+	* Sets the user ID of this shopping category.
 	*
-	* @param userId the user id of this shopping category
+	* @param userId the user ID of this shopping category
 	*/
 	public void setUserId(long userId) {
 		_shoppingCategory.setUserId(userId);
@@ -193,18 +193,18 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 	}
 
 	/**
-	* Gets the parent category id of this shopping category.
+	* Gets the parent category ID of this shopping category.
 	*
-	* @return the parent category id of this shopping category
+	* @return the parent category ID of this shopping category
 	*/
 	public long getParentCategoryId() {
 		return _shoppingCategory.getParentCategoryId();
 	}
 
 	/**
-	* Sets the parent category id of this shopping category.
+	* Sets the parent category ID of this shopping category.
 	*
-	* @param parentCategoryId the parent category id of this shopping category
+	* @param parentCategoryId the parent category ID of this shopping category
 	*/
 	public void setParentCategoryId(long parentCategoryId) {
 		_shoppingCategory.setParentCategoryId(parentCategoryId);

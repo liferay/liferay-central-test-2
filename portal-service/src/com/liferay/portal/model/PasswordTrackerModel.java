@@ -59,30 +59,30 @@ public interface PasswordTrackerModel extends BaseModel<PasswordTracker> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the password tracker id of this password tracker.
+	 * Gets the password tracker ID of this password tracker.
 	 *
-	 * @return the password tracker id of this password tracker
+	 * @return the password tracker ID of this password tracker
 	 */
 	public long getPasswordTrackerId();
 
 	/**
-	 * Sets the password tracker id of this password tracker.
+	 * Sets the password tracker ID of this password tracker.
 	 *
-	 * @param passwordTrackerId the password tracker id of this password tracker
+	 * @param passwordTrackerId the password tracker ID of this password tracker
 	 */
 	public void setPasswordTrackerId(long passwordTrackerId);
 
 	/**
-	 * Gets the user id of this password tracker.
+	 * Gets the user ID of this password tracker.
 	 *
-	 * @return the user id of this password tracker
+	 * @return the user ID of this password tracker
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this password tracker.
+	 * Sets the user ID of this password tracker.
 	 *
-	 * @param userId the user id of this password tracker
+	 * @param userId the user ID of this password tracker
 	 */
 	public void setUserId(long userId);
 

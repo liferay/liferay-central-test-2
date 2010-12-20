@@ -47,72 +47,72 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	}
 
 	/**
-	* Gets the equity log id of this social equity log.
+	* Gets the equity log ID of this social equity log.
 	*
-	* @return the equity log id of this social equity log
+	* @return the equity log ID of this social equity log
 	*/
 	public long getEquityLogId() {
 		return _socialEquityLog.getEquityLogId();
 	}
 
 	/**
-	* Sets the equity log id of this social equity log.
+	* Sets the equity log ID of this social equity log.
 	*
-	* @param equityLogId the equity log id of this social equity log
+	* @param equityLogId the equity log ID of this social equity log
 	*/
 	public void setEquityLogId(long equityLogId) {
 		_socialEquityLog.setEquityLogId(equityLogId);
 	}
 
 	/**
-	* Gets the group id of this social equity log.
+	* Gets the group ID of this social equity log.
 	*
-	* @return the group id of this social equity log
+	* @return the group ID of this social equity log
 	*/
 	public long getGroupId() {
 		return _socialEquityLog.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this social equity log.
+	* Sets the group ID of this social equity log.
 	*
-	* @param groupId the group id of this social equity log
+	* @param groupId the group ID of this social equity log
 	*/
 	public void setGroupId(long groupId) {
 		_socialEquityLog.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this social equity log.
+	* Gets the company ID of this social equity log.
 	*
-	* @return the company id of this social equity log
+	* @return the company ID of this social equity log
 	*/
 	public long getCompanyId() {
 		return _socialEquityLog.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this social equity log.
+	* Sets the company ID of this social equity log.
 	*
-	* @param companyId the company id of this social equity log
+	* @param companyId the company ID of this social equity log
 	*/
 	public void setCompanyId(long companyId) {
 		_socialEquityLog.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this social equity log.
+	* Gets the user ID of this social equity log.
 	*
-	* @return the user id of this social equity log
+	* @return the user ID of this social equity log
 	*/
 	public long getUserId() {
 		return _socialEquityLog.getUserId();
 	}
 
 	/**
-	* Sets the user id of this social equity log.
+	* Sets the user ID of this social equity log.
 	*
-	* @param userId the user id of this social equity log
+	* @param userId the user ID of this social equity log
 	*/
 	public void setUserId(long userId) {
 		_socialEquityLog.setUserId(userId);
@@ -139,36 +139,36 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	}
 
 	/**
-	* Gets the asset entry id of this social equity log.
+	* Gets the asset entry ID of this social equity log.
 	*
-	* @return the asset entry id of this social equity log
+	* @return the asset entry ID of this social equity log
 	*/
 	public long getAssetEntryId() {
 		return _socialEquityLog.getAssetEntryId();
 	}
 
 	/**
-	* Sets the asset entry id of this social equity log.
+	* Sets the asset entry ID of this social equity log.
 	*
-	* @param assetEntryId the asset entry id of this social equity log
+	* @param assetEntryId the asset entry ID of this social equity log
 	*/
 	public void setAssetEntryId(long assetEntryId) {
 		_socialEquityLog.setAssetEntryId(assetEntryId);
 	}
 
 	/**
-	* Gets the action id of this social equity log.
+	* Gets the action ID of this social equity log.
 	*
-	* @return the action id of this social equity log
+	* @return the action ID of this social equity log
 	*/
 	public java.lang.String getActionId() {
 		return _socialEquityLog.getActionId();
 	}
 
 	/**
-	* Sets the action id of this social equity log.
+	* Sets the action ID of this social equity log.
 	*
-	* @param actionId the action id of this social equity log
+	* @param actionId the action ID of this social equity log
 	*/
 	public void setActionId(java.lang.String actionId) {
 		_socialEquityLog.setActionId(actionId);

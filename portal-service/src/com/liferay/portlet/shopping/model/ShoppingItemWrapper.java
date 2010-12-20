@@ -47,72 +47,72 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the item id of this shopping item.
+	* Gets the item ID of this shopping item.
 	*
-	* @return the item id of this shopping item
+	* @return the item ID of this shopping item
 	*/
 	public long getItemId() {
 		return _shoppingItem.getItemId();
 	}
 
 	/**
-	* Sets the item id of this shopping item.
+	* Sets the item ID of this shopping item.
 	*
-	* @param itemId the item id of this shopping item
+	* @param itemId the item ID of this shopping item
 	*/
 	public void setItemId(long itemId) {
 		_shoppingItem.setItemId(itemId);
 	}
 
 	/**
-	* Gets the group id of this shopping item.
+	* Gets the group ID of this shopping item.
 	*
-	* @return the group id of this shopping item
+	* @return the group ID of this shopping item
 	*/
 	public long getGroupId() {
 		return _shoppingItem.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this shopping item.
+	* Sets the group ID of this shopping item.
 	*
-	* @param groupId the group id of this shopping item
+	* @param groupId the group ID of this shopping item
 	*/
 	public void setGroupId(long groupId) {
 		_shoppingItem.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this shopping item.
+	* Gets the company ID of this shopping item.
 	*
-	* @return the company id of this shopping item
+	* @return the company ID of this shopping item
 	*/
 	public long getCompanyId() {
 		return _shoppingItem.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this shopping item.
+	* Sets the company ID of this shopping item.
 	*
-	* @param companyId the company id of this shopping item
+	* @param companyId the company ID of this shopping item
 	*/
 	public void setCompanyId(long companyId) {
 		_shoppingItem.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this shopping item.
+	* Gets the user ID of this shopping item.
 	*
-	* @return the user id of this shopping item
+	* @return the user ID of this shopping item
 	*/
 	public long getUserId() {
 		return _shoppingItem.getUserId();
 	}
 
 	/**
-	* Sets the user id of this shopping item.
+	* Sets the user ID of this shopping item.
 	*
-	* @param userId the user id of this shopping item
+	* @param userId the user ID of this shopping item
 	*/
 	public void setUserId(long userId) {
 		_shoppingItem.setUserId(userId);
@@ -193,18 +193,18 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the category id of this shopping item.
+	* Gets the category ID of this shopping item.
 	*
-	* @return the category id of this shopping item
+	* @return the category ID of this shopping item
 	*/
 	public long getCategoryId() {
 		return _shoppingItem.getCategoryId();
 	}
 
 	/**
-	* Sets the category id of this shopping item.
+	* Sets the category ID of this shopping item.
 	*
-	* @param categoryId the category id of this shopping item
+	* @param categoryId the category ID of this shopping item
 	*/
 	public void setCategoryId(long categoryId) {
 		_shoppingItem.setCategoryId(categoryId);
@@ -598,18 +598,18 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the small image id of this shopping item.
+	* Gets the small image ID of this shopping item.
 	*
-	* @return the small image id of this shopping item
+	* @return the small image ID of this shopping item
 	*/
 	public long getSmallImageId() {
 		return _shoppingItem.getSmallImageId();
 	}
 
 	/**
-	* Sets the small image id of this shopping item.
+	* Sets the small image ID of this shopping item.
 	*
-	* @param smallImageId the small image id of this shopping item
+	* @param smallImageId the small image ID of this shopping item
 	*/
 	public void setSmallImageId(long smallImageId) {
 		_shoppingItem.setSmallImageId(smallImageId);
@@ -661,18 +661,18 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the medium image id of this shopping item.
+	* Gets the medium image ID of this shopping item.
 	*
-	* @return the medium image id of this shopping item
+	* @return the medium image ID of this shopping item
 	*/
 	public long getMediumImageId() {
 		return _shoppingItem.getMediumImageId();
 	}
 
 	/**
-	* Sets the medium image id of this shopping item.
+	* Sets the medium image ID of this shopping item.
 	*
-	* @param mediumImageId the medium image id of this shopping item
+	* @param mediumImageId the medium image ID of this shopping item
 	*/
 	public void setMediumImageId(long mediumImageId) {
 		_shoppingItem.setMediumImageId(mediumImageId);
@@ -724,18 +724,18 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Gets the large image id of this shopping item.
+	* Gets the large image ID of this shopping item.
 	*
-	* @return the large image id of this shopping item
+	* @return the large image ID of this shopping item
 	*/
 	public long getLargeImageId() {
 		return _shoppingItem.getLargeImageId();
 	}
 
 	/**
-	* Sets the large image id of this shopping item.
+	* Sets the large image ID of this shopping item.
 	*
-	* @param largeImageId the large image id of this shopping item
+	* @param largeImageId the large image ID of this shopping item
 	*/
 	public void setLargeImageId(long largeImageId) {
 		_shoppingItem.setLargeImageId(largeImageId);

@@ -57,16 +57,16 @@ public interface SocialEquityUserModel extends BaseModel<SocialEquityUser> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the equity user id of this social equity user.
+	 * Gets the equity user ID of this social equity user.
 	 *
-	 * @return the equity user id of this social equity user
+	 * @return the equity user ID of this social equity user
 	 */
 	public long getEquityUserId();
 
 	/**
-	 * Sets the equity user id of this social equity user.
+	 * Sets the equity user ID of this social equity user.
 	 *
-	 * @param equityUserId the equity user id of this social equity user
+	 * @param equityUserId the equity user ID of this social equity user
 	 */
 	public void setEquityUserId(long equityUserId);
 
@@ -86,44 +86,44 @@ public interface SocialEquityUserModel extends BaseModel<SocialEquityUser> {
 	public void setEquityUserUuid(String equityUserUuid);
 
 	/**
-	 * Gets the group id of this social equity user.
+	 * Gets the group ID of this social equity user.
 	 *
-	 * @return the group id of this social equity user
+	 * @return the group ID of this social equity user
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this social equity user.
+	 * Sets the group ID of this social equity user.
 	 *
-	 * @param groupId the group id of this social equity user
+	 * @param groupId the group ID of this social equity user
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this social equity user.
+	 * Gets the company ID of this social equity user.
 	 *
-	 * @return the company id of this social equity user
+	 * @return the company ID of this social equity user
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this social equity user.
+	 * Sets the company ID of this social equity user.
 	 *
-	 * @param companyId the company id of this social equity user
+	 * @param companyId the company ID of this social equity user
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this social equity user.
+	 * Gets the user ID of this social equity user.
 	 *
-	 * @return the user id of this social equity user
+	 * @return the user ID of this social equity user
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this social equity user.
+	 * Sets the user ID of this social equity user.
 	 *
-	 * @param userId the user id of this social equity user
+	 * @param userId the user ID of this social equity user
 	 */
 	public void setUserId(long userId);
 

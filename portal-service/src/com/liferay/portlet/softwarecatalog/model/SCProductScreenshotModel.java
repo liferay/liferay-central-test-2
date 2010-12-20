@@ -56,86 +56,86 @@ public interface SCProductScreenshotModel extends BaseModel<SCProductScreenshot>
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the product screenshot id of this s c product screenshot.
+	 * Gets the product screenshot ID of this s c product screenshot.
 	 *
-	 * @return the product screenshot id of this s c product screenshot
+	 * @return the product screenshot ID of this s c product screenshot
 	 */
 	public long getProductScreenshotId();
 
 	/**
-	 * Sets the product screenshot id of this s c product screenshot.
+	 * Sets the product screenshot ID of this s c product screenshot.
 	 *
-	 * @param productScreenshotId the product screenshot id of this s c product screenshot
+	 * @param productScreenshotId the product screenshot ID of this s c product screenshot
 	 */
 	public void setProductScreenshotId(long productScreenshotId);
 
 	/**
-	 * Gets the company id of this s c product screenshot.
+	 * Gets the company ID of this s c product screenshot.
 	 *
-	 * @return the company id of this s c product screenshot
+	 * @return the company ID of this s c product screenshot
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this s c product screenshot.
+	 * Sets the company ID of this s c product screenshot.
 	 *
-	 * @param companyId the company id of this s c product screenshot
+	 * @param companyId the company ID of this s c product screenshot
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the group id of this s c product screenshot.
+	 * Gets the group ID of this s c product screenshot.
 	 *
-	 * @return the group id of this s c product screenshot
+	 * @return the group ID of this s c product screenshot
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this s c product screenshot.
+	 * Sets the group ID of this s c product screenshot.
 	 *
-	 * @param groupId the group id of this s c product screenshot
+	 * @param groupId the group ID of this s c product screenshot
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the product entry id of this s c product screenshot.
+	 * Gets the product entry ID of this s c product screenshot.
 	 *
-	 * @return the product entry id of this s c product screenshot
+	 * @return the product entry ID of this s c product screenshot
 	 */
 	public long getProductEntryId();
 
 	/**
-	 * Sets the product entry id of this s c product screenshot.
+	 * Sets the product entry ID of this s c product screenshot.
 	 *
-	 * @param productEntryId the product entry id of this s c product screenshot
+	 * @param productEntryId the product entry ID of this s c product screenshot
 	 */
 	public void setProductEntryId(long productEntryId);
 
 	/**
-	 * Gets the thumbnail id of this s c product screenshot.
+	 * Gets the thumbnail ID of this s c product screenshot.
 	 *
-	 * @return the thumbnail id of this s c product screenshot
+	 * @return the thumbnail ID of this s c product screenshot
 	 */
 	public long getThumbnailId();
 
 	/**
-	 * Sets the thumbnail id of this s c product screenshot.
+	 * Sets the thumbnail ID of this s c product screenshot.
 	 *
-	 * @param thumbnailId the thumbnail id of this s c product screenshot
+	 * @param thumbnailId the thumbnail ID of this s c product screenshot
 	 */
 	public void setThumbnailId(long thumbnailId);
 
 	/**
-	 * Gets the full image id of this s c product screenshot.
+	 * Gets the full image ID of this s c product screenshot.
 	 *
-	 * @return the full image id of this s c product screenshot
+	 * @return the full image ID of this s c product screenshot
 	 */
 	public long getFullImageId();
 
 	/**
-	 * Sets the full image id of this s c product screenshot.
+	 * Sets the full image ID of this s c product screenshot.
 	 *
-	 * @param fullImageId the full image id of this s c product screenshot
+	 * @param fullImageId the full image ID of this s c product screenshot
 	 */
 	public void setFullImageId(long fullImageId);
 

@@ -65,72 +65,72 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	}
 
 	/**
-	* Gets the question id of this polls question.
+	* Gets the question ID of this polls question.
 	*
-	* @return the question id of this polls question
+	* @return the question ID of this polls question
 	*/
 	public long getQuestionId() {
 		return _pollsQuestion.getQuestionId();
 	}
 
 	/**
-	* Sets the question id of this polls question.
+	* Sets the question ID of this polls question.
 	*
-	* @param questionId the question id of this polls question
+	* @param questionId the question ID of this polls question
 	*/
 	public void setQuestionId(long questionId) {
 		_pollsQuestion.setQuestionId(questionId);
 	}
 
 	/**
-	* Gets the group id of this polls question.
+	* Gets the group ID of this polls question.
 	*
-	* @return the group id of this polls question
+	* @return the group ID of this polls question
 	*/
 	public long getGroupId() {
 		return _pollsQuestion.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this polls question.
+	* Sets the group ID of this polls question.
 	*
-	* @param groupId the group id of this polls question
+	* @param groupId the group ID of this polls question
 	*/
 	public void setGroupId(long groupId) {
 		_pollsQuestion.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this polls question.
+	* Gets the company ID of this polls question.
 	*
-	* @return the company id of this polls question
+	* @return the company ID of this polls question
 	*/
 	public long getCompanyId() {
 		return _pollsQuestion.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this polls question.
+	* Sets the company ID of this polls question.
 	*
-	* @param companyId the company id of this polls question
+	* @param companyId the company ID of this polls question
 	*/
 	public void setCompanyId(long companyId) {
 		_pollsQuestion.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this polls question.
+	* Gets the user ID of this polls question.
 	*
-	* @return the user id of this polls question
+	* @return the user ID of this polls question
 	*/
 	public long getUserId() {
 		return _pollsQuestion.getUserId();
 	}
 
 	/**
-	* Sets the user id of this polls question.
+	* Sets the user ID of this polls question.
 	*
-	* @param userId the user id of this polls question
+	* @param userId the user ID of this polls question
 	*/
 	public void setUserId(long userId) {
 		_pollsQuestion.setUserId(userId);

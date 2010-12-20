@@ -60,44 +60,44 @@ public interface RatingsEntryModel extends BaseModel<RatingsEntry> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the entry id of this ratings entry.
+	 * Gets the entry ID of this ratings entry.
 	 *
-	 * @return the entry id of this ratings entry
+	 * @return the entry ID of this ratings entry
 	 */
 	public long getEntryId();
 
 	/**
-	 * Sets the entry id of this ratings entry.
+	 * Sets the entry ID of this ratings entry.
 	 *
-	 * @param entryId the entry id of this ratings entry
+	 * @param entryId the entry ID of this ratings entry
 	 */
 	public void setEntryId(long entryId);
 
 	/**
-	 * Gets the company id of this ratings entry.
+	 * Gets the company ID of this ratings entry.
 	 *
-	 * @return the company id of this ratings entry
+	 * @return the company ID of this ratings entry
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this ratings entry.
+	 * Sets the company ID of this ratings entry.
 	 *
-	 * @param companyId the company id of this ratings entry
+	 * @param companyId the company ID of this ratings entry
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this ratings entry.
+	 * Gets the user ID of this ratings entry.
 	 *
-	 * @return the user id of this ratings entry
+	 * @return the user ID of this ratings entry
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this ratings entry.
+	 * Sets the user ID of this ratings entry.
 	 *
-	 * @param userId the user id of this ratings entry
+	 * @param userId the user ID of this ratings entry
 	 */
 	public void setUserId(long userId);
 
@@ -167,16 +167,16 @@ public interface RatingsEntryModel extends BaseModel<RatingsEntry> {
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this ratings entry.
+	 * Gets the class name ID of this ratings entry.
 	 *
-	 * @return the class name id of this ratings entry
+	 * @return the class name ID of this ratings entry
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this ratings entry.
+	 * Sets the class name ID of this ratings entry.
 	 *
-	 * @param classNameId the class name id of this ratings entry
+	 * @param classNameId the class name ID of this ratings entry
 	 */
 	public void setClassNameId(long classNameId);
 

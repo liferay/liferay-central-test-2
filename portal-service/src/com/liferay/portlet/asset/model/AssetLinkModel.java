@@ -60,44 +60,44 @@ public interface AssetLinkModel extends BaseModel<AssetLink> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the link id of this asset link.
+	 * Gets the link ID of this asset link.
 	 *
-	 * @return the link id of this asset link
+	 * @return the link ID of this asset link
 	 */
 	public long getLinkId();
 
 	/**
-	 * Sets the link id of this asset link.
+	 * Sets the link ID of this asset link.
 	 *
-	 * @param linkId the link id of this asset link
+	 * @param linkId the link ID of this asset link
 	 */
 	public void setLinkId(long linkId);
 
 	/**
-	 * Gets the company id of this asset link.
+	 * Gets the company ID of this asset link.
 	 *
-	 * @return the company id of this asset link
+	 * @return the company ID of this asset link
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this asset link.
+	 * Sets the company ID of this asset link.
 	 *
-	 * @param companyId the company id of this asset link
+	 * @param companyId the company ID of this asset link
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this asset link.
+	 * Gets the user ID of this asset link.
 	 *
-	 * @return the user id of this asset link
+	 * @return the user ID of this asset link
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this asset link.
+	 * Sets the user ID of this asset link.
 	 *
-	 * @param userId the user id of this asset link
+	 * @param userId the user ID of this asset link
 	 */
 	public void setUserId(long userId);
 

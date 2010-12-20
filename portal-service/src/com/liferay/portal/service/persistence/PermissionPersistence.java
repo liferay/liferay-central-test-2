@@ -101,7 +101,7 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	/**
 	* Finds all the permissions where resourceId = &#63;.
 	*
-	* @param resourceId the resource id to search with
+	* @param resourceId the resource ID to search with
 	* @return the matching permissions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -116,7 +116,7 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param resourceId the resource id to search with
+	* @param resourceId the resource ID to search with
 	* @param start the lower bound of the range of permissions to return
 	* @param end the upper bound of the range of permissions to return (not inclusive)
 	* @return the range of matching permissions
@@ -133,7 +133,7 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param resourceId the resource id to search with
+	* @param resourceId the resource ID to search with
 	* @param start the lower bound of the range of permissions to return
 	* @param end the upper bound of the range of permissions to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -152,7 +152,7 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param resourceId the resource id to search with
+	* @param resourceId the resource ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching permission
 	* @throws com.liferay.portal.NoSuchPermissionException if a matching permission could not be found
@@ -171,7 +171,7 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param resourceId the resource id to search with
+	* @param resourceId the resource ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching permission
 	* @throws com.liferay.portal.NoSuchPermissionException if a matching permission could not be found
@@ -191,7 +191,7 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	* </p>
 	*
 	* @param permissionId the primary key of the current permission
-	* @param resourceId the resource id to search with
+	* @param resourceId the resource ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next permission
 	* @throws com.liferay.portal.NoSuchPermissionException if a permission with the primary key could not be found
@@ -206,8 +206,8 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	/**
 	* Finds the permission where actionId = &#63; and resourceId = &#63; or throws a {@link com.liferay.portal.NoSuchPermissionException} if it could not be found.
 	*
-	* @param actionId the action id to search with
-	* @param resourceId the resource id to search with
+	* @param actionId the action ID to search with
+	* @param resourceId the resource ID to search with
 	* @return the matching permission
 	* @throws com.liferay.portal.NoSuchPermissionException if a matching permission could not be found
 	* @throws SystemException if a system exception occurred
@@ -220,8 +220,8 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	/**
 	* Finds the permission where actionId = &#63; and resourceId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param actionId the action id to search with
-	* @param resourceId the resource id to search with
+	* @param actionId the action ID to search with
+	* @param resourceId the resource ID to search with
 	* @return the matching permission, or <code>null</code> if a matching permission could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -232,8 +232,8 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	/**
 	* Finds the permission where actionId = &#63; and resourceId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param actionId the action id to search with
-	* @param resourceId the resource id to search with
+	* @param actionId the action ID to search with
+	* @param resourceId the resource ID to search with
 	* @return the matching permission, or <code>null</code> if a matching permission could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -287,7 +287,7 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	/**
 	* Removes all the permissions where resourceId = &#63; from the database.
 	*
-	* @param resourceId the resource id to search with
+	* @param resourceId the resource ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByResourceId(long resourceId)
@@ -296,8 +296,8 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	/**
 	* Removes the permission where actionId = &#63; and resourceId = &#63; from the database.
 	*
-	* @param actionId the action id to search with
-	* @param resourceId the resource id to search with
+	* @param actionId the action ID to search with
+	* @param resourceId the resource ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByA_R(java.lang.String actionId, long resourceId)
@@ -315,7 +315,7 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	/**
 	* Counts all the permissions where resourceId = &#63;.
 	*
-	* @param resourceId the resource id to search with
+	* @param resourceId the resource ID to search with
 	* @return the number of matching permissions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -325,8 +325,8 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	/**
 	* Counts all the permissions where actionId = &#63; and resourceId = &#63;.
 	*
-	* @param actionId the action id to search with
-	* @param resourceId the resource id to search with
+	* @param actionId the action ID to search with
+	* @param resourceId the resource ID to search with
 	* @return the number of matching permissions
 	* @throws SystemException if a system exception occurred
 	*/

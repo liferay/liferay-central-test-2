@@ -47,36 +47,36 @@ public class ExpandoTableWrapper implements ExpandoTable {
 	}
 
 	/**
-	* Gets the table id of this expando table.
+	* Gets the table ID of this expando table.
 	*
-	* @return the table id of this expando table
+	* @return the table ID of this expando table
 	*/
 	public long getTableId() {
 		return _expandoTable.getTableId();
 	}
 
 	/**
-	* Sets the table id of this expando table.
+	* Sets the table ID of this expando table.
 	*
-	* @param tableId the table id of this expando table
+	* @param tableId the table ID of this expando table
 	*/
 	public void setTableId(long tableId) {
 		_expandoTable.setTableId(tableId);
 	}
 
 	/**
-	* Gets the company id of this expando table.
+	* Gets the company ID of this expando table.
 	*
-	* @return the company id of this expando table
+	* @return the company ID of this expando table
 	*/
 	public long getCompanyId() {
 		return _expandoTable.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this expando table.
+	* Sets the company ID of this expando table.
 	*
-	* @param companyId the company id of this expando table
+	* @param companyId the company ID of this expando table
 	*/
 	public void setCompanyId(long companyId) {
 		_expandoTable.setCompanyId(companyId);
@@ -92,18 +92,18 @@ public class ExpandoTableWrapper implements ExpandoTable {
 	}
 
 	/**
-	* Gets the class name id of this expando table.
+	* Gets the class name ID of this expando table.
 	*
-	* @return the class name id of this expando table
+	* @return the class name ID of this expando table
 	*/
 	public long getClassNameId() {
 		return _expandoTable.getClassNameId();
 	}
 
 	/**
-	* Sets the class name id of this expando table.
+	* Sets the class name ID of this expando table.
 	*
-	* @param classNameId the class name id of this expando table
+	* @param classNameId the class name ID of this expando table
 	*/
 	public void setClassNameId(long classNameId) {
 		_expandoTable.setClassNameId(classNameId);

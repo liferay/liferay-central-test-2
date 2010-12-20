@@ -47,54 +47,54 @@ public class AddressWrapper implements Address {
 	}
 
 	/**
-	* Gets the address id of this address.
+	* Gets the address ID of this address.
 	*
-	* @return the address id of this address
+	* @return the address ID of this address
 	*/
 	public long getAddressId() {
 		return _address.getAddressId();
 	}
 
 	/**
-	* Sets the address id of this address.
+	* Sets the address ID of this address.
 	*
-	* @param addressId the address id of this address
+	* @param addressId the address ID of this address
 	*/
 	public void setAddressId(long addressId) {
 		_address.setAddressId(addressId);
 	}
 
 	/**
-	* Gets the company id of this address.
+	* Gets the company ID of this address.
 	*
-	* @return the company id of this address
+	* @return the company ID of this address
 	*/
 	public long getCompanyId() {
 		return _address.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this address.
+	* Sets the company ID of this address.
 	*
-	* @param companyId the company id of this address
+	* @param companyId the company ID of this address
 	*/
 	public void setCompanyId(long companyId) {
 		_address.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this address.
+	* Gets the user ID of this address.
 	*
-	* @return the user id of this address
+	* @return the user ID of this address
 	*/
 	public long getUserId() {
 		return _address.getUserId();
 	}
 
 	/**
-	* Sets the user id of this address.
+	* Sets the user ID of this address.
 	*
-	* @param userId the user id of this address
+	* @param userId the user ID of this address
 	*/
 	public void setUserId(long userId) {
 		_address.setUserId(userId);
@@ -184,18 +184,18 @@ public class AddressWrapper implements Address {
 	}
 
 	/**
-	* Gets the class name id of this address.
+	* Gets the class name ID of this address.
 	*
-	* @return the class name id of this address
+	* @return the class name ID of this address
 	*/
 	public long getClassNameId() {
 		return _address.getClassNameId();
 	}
 
 	/**
-	* Sets the class name id of this address.
+	* Sets the class name ID of this address.
 	*
-	* @param classNameId the class name id of this address
+	* @param classNameId the class name ID of this address
 	*/
 	public void setClassNameId(long classNameId) {
 		_address.setClassNameId(classNameId);
@@ -310,54 +310,54 @@ public class AddressWrapper implements Address {
 	}
 
 	/**
-	* Gets the region id of this address.
+	* Gets the region ID of this address.
 	*
-	* @return the region id of this address
+	* @return the region ID of this address
 	*/
 	public long getRegionId() {
 		return _address.getRegionId();
 	}
 
 	/**
-	* Sets the region id of this address.
+	* Sets the region ID of this address.
 	*
-	* @param regionId the region id of this address
+	* @param regionId the region ID of this address
 	*/
 	public void setRegionId(long regionId) {
 		_address.setRegionId(regionId);
 	}
 
 	/**
-	* Gets the country id of this address.
+	* Gets the country ID of this address.
 	*
-	* @return the country id of this address
+	* @return the country ID of this address
 	*/
 	public long getCountryId() {
 		return _address.getCountryId();
 	}
 
 	/**
-	* Sets the country id of this address.
+	* Sets the country ID of this address.
 	*
-	* @param countryId the country id of this address
+	* @param countryId the country ID of this address
 	*/
 	public void setCountryId(long countryId) {
 		_address.setCountryId(countryId);
 	}
 
 	/**
-	* Gets the type id of this address.
+	* Gets the type ID of this address.
 	*
-	* @return the type id of this address
+	* @return the type ID of this address
 	*/
 	public int getTypeId() {
 		return _address.getTypeId();
 	}
 
 	/**
-	* Sets the type id of this address.
+	* Sets the type ID of this address.
 	*
-	* @param typeId the type id of this address
+	* @param typeId the type ID of this address
 	*/
 	public void setTypeId(int typeId) {
 		_address.setTypeId(typeId);

@@ -48,18 +48,18 @@ public class UserGroupRoleWrapper implements UserGroupRole {
 	}
 
 	/**
-	* Gets the user id of this user group role.
+	* Gets the user ID of this user group role.
 	*
-	* @return the user id of this user group role
+	* @return the user ID of this user group role
 	*/
 	public long getUserId() {
 		return _userGroupRole.getUserId();
 	}
 
 	/**
-	* Sets the user id of this user group role.
+	* Sets the user ID of this user group role.
 	*
-	* @param userId the user id of this user group role
+	* @param userId the user ID of this user group role
 	*/
 	public void setUserId(long userId) {
 		_userGroupRole.setUserId(userId);
@@ -86,36 +86,36 @@ public class UserGroupRoleWrapper implements UserGroupRole {
 	}
 
 	/**
-	* Gets the group id of this user group role.
+	* Gets the group ID of this user group role.
 	*
-	* @return the group id of this user group role
+	* @return the group ID of this user group role
 	*/
 	public long getGroupId() {
 		return _userGroupRole.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this user group role.
+	* Sets the group ID of this user group role.
 	*
-	* @param groupId the group id of this user group role
+	* @param groupId the group ID of this user group role
 	*/
 	public void setGroupId(long groupId) {
 		_userGroupRole.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the role id of this user group role.
+	* Gets the role ID of this user group role.
 	*
-	* @return the role id of this user group role
+	* @return the role ID of this user group role
 	*/
 	public long getRoleId() {
 		return _userGroupRole.getRoleId();
 	}
 
 	/**
-	* Sets the role id of this user group role.
+	* Sets the role ID of this user group role.
 	*
-	* @param roleId the role id of this user group role
+	* @param roleId the role ID of this user group role
 	*/
 	public void setRoleId(long roleId) {
 		_userGroupRole.setRoleId(roleId);

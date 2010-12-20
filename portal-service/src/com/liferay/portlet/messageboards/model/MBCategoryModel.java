@@ -75,58 +75,58 @@ public interface MBCategoryModel extends BaseModel<MBCategory> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the category id of this message boards category.
+	 * Gets the category ID of this message boards category.
 	 *
-	 * @return the category id of this message boards category
+	 * @return the category ID of this message boards category
 	 */
 	public long getCategoryId();
 
 	/**
-	 * Sets the category id of this message boards category.
+	 * Sets the category ID of this message boards category.
 	 *
-	 * @param categoryId the category id of this message boards category
+	 * @param categoryId the category ID of this message boards category
 	 */
 	public void setCategoryId(long categoryId);
 
 	/**
-	 * Gets the group id of this message boards category.
+	 * Gets the group ID of this message boards category.
 	 *
-	 * @return the group id of this message boards category
+	 * @return the group ID of this message boards category
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this message boards category.
+	 * Sets the group ID of this message boards category.
 	 *
-	 * @param groupId the group id of this message boards category
+	 * @param groupId the group ID of this message boards category
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this message boards category.
+	 * Gets the company ID of this message boards category.
 	 *
-	 * @return the company id of this message boards category
+	 * @return the company ID of this message boards category
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this message boards category.
+	 * Sets the company ID of this message boards category.
 	 *
-	 * @param companyId the company id of this message boards category
+	 * @param companyId the company ID of this message boards category
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this message boards category.
+	 * Gets the user ID of this message boards category.
 	 *
-	 * @return the user id of this message boards category
+	 * @return the user ID of this message boards category
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this message boards category.
+	 * Sets the user ID of this message boards category.
 	 *
-	 * @param userId the user id of this message boards category
+	 * @param userId the user ID of this message boards category
 	 */
 	public void setUserId(long userId);
 
@@ -189,16 +189,16 @@ public interface MBCategoryModel extends BaseModel<MBCategory> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the parent category id of this message boards category.
+	 * Gets the parent category ID of this message boards category.
 	 *
-	 * @return the parent category id of this message boards category
+	 * @return the parent category ID of this message boards category
 	 */
 	public long getParentCategoryId();
 
 	/**
-	 * Sets the parent category id of this message boards category.
+	 * Sets the parent category ID of this message boards category.
 	 *
-	 * @param parentCategoryId the parent category id of this message boards category
+	 * @param parentCategoryId the parent category ID of this message boards category
 	 */
 	public void setParentCategoryId(long parentCategoryId);
 

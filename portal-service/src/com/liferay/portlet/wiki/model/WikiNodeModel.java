@@ -75,58 +75,58 @@ public interface WikiNodeModel extends BaseModel<WikiNode> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the node id of this wiki node.
+	 * Gets the node ID of this wiki node.
 	 *
-	 * @return the node id of this wiki node
+	 * @return the node ID of this wiki node
 	 */
 	public long getNodeId();
 
 	/**
-	 * Sets the node id of this wiki node.
+	 * Sets the node ID of this wiki node.
 	 *
-	 * @param nodeId the node id of this wiki node
+	 * @param nodeId the node ID of this wiki node
 	 */
 	public void setNodeId(long nodeId);
 
 	/**
-	 * Gets the group id of this wiki node.
+	 * Gets the group ID of this wiki node.
 	 *
-	 * @return the group id of this wiki node
+	 * @return the group ID of this wiki node
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this wiki node.
+	 * Sets the group ID of this wiki node.
 	 *
-	 * @param groupId the group id of this wiki node
+	 * @param groupId the group ID of this wiki node
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this wiki node.
+	 * Gets the company ID of this wiki node.
 	 *
-	 * @return the company id of this wiki node
+	 * @return the company ID of this wiki node
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this wiki node.
+	 * Sets the company ID of this wiki node.
 	 *
-	 * @param companyId the company id of this wiki node
+	 * @param companyId the company ID of this wiki node
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this wiki node.
+	 * Gets the user ID of this wiki node.
 	 *
-	 * @return the user id of this wiki node
+	 * @return the user ID of this wiki node
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this wiki node.
+	 * Sets the user ID of this wiki node.
 	 *
-	 * @param userId the user id of this wiki node
+	 * @param userId the user ID of this wiki node
 	 */
 	public void setUserId(long userId);
 

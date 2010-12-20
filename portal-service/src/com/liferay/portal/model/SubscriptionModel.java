@@ -59,44 +59,44 @@ public interface SubscriptionModel extends BaseModel<Subscription> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the subscription id of this subscription.
+	 * Gets the subscription ID of this subscription.
 	 *
-	 * @return the subscription id of this subscription
+	 * @return the subscription ID of this subscription
 	 */
 	public long getSubscriptionId();
 
 	/**
-	 * Sets the subscription id of this subscription.
+	 * Sets the subscription ID of this subscription.
 	 *
-	 * @param subscriptionId the subscription id of this subscription
+	 * @param subscriptionId the subscription ID of this subscription
 	 */
 	public void setSubscriptionId(long subscriptionId);
 
 	/**
-	 * Gets the company id of this subscription.
+	 * Gets the company ID of this subscription.
 	 *
-	 * @return the company id of this subscription
+	 * @return the company ID of this subscription
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this subscription.
+	 * Sets the company ID of this subscription.
 	 *
-	 * @param companyId the company id of this subscription
+	 * @param companyId the company ID of this subscription
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this subscription.
+	 * Gets the user ID of this subscription.
 	 *
-	 * @return the user id of this subscription
+	 * @return the user ID of this subscription
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this subscription.
+	 * Sets the user ID of this subscription.
 	 *
-	 * @param userId the user id of this subscription
+	 * @param userId the user ID of this subscription
 	 */
 	public void setUserId(long userId);
 
@@ -166,16 +166,16 @@ public interface SubscriptionModel extends BaseModel<Subscription> {
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this subscription.
+	 * Gets the class name ID of this subscription.
 	 *
-	 * @return the class name id of this subscription
+	 * @return the class name ID of this subscription
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this subscription.
+	 * Sets the class name ID of this subscription.
 	 *
-	 * @param classNameId the class name id of this subscription
+	 * @param classNameId the class name ID of this subscription
 	 */
 	public void setClassNameId(long classNameId);
 

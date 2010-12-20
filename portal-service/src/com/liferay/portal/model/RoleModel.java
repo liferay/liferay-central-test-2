@@ -59,30 +59,30 @@ public interface RoleModel extends BaseModel<Role> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the role id of this role.
+	 * Gets the role ID of this role.
 	 *
-	 * @return the role id of this role
+	 * @return the role ID of this role
 	 */
 	public long getRoleId();
 
 	/**
-	 * Sets the role id of this role.
+	 * Sets the role ID of this role.
 	 *
-	 * @param roleId the role id of this role
+	 * @param roleId the role ID of this role
 	 */
 	public void setRoleId(long roleId);
 
 	/**
-	 * Gets the company id of this role.
+	 * Gets the company ID of this role.
 	 *
-	 * @return the company id of this role
+	 * @return the company ID of this role
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this role.
+	 * Sets the company ID of this role.
 	 *
-	 * @param companyId the company id of this role
+	 * @param companyId the company ID of this role
 	 */
 	public void setCompanyId(long companyId);
 
@@ -94,16 +94,16 @@ public interface RoleModel extends BaseModel<Role> {
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this role.
+	 * Gets the class name ID of this role.
 	 *
-	 * @return the class name id of this role
+	 * @return the class name ID of this role
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this role.
+	 * Sets the class name ID of this role.
 	 *
-	 * @param classNameId the class name id of this role
+	 * @param classNameId the class name ID of this role
 	 */
 	public void setClassNameId(long classNameId);
 

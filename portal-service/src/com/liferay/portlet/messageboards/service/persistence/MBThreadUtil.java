@@ -200,7 +200,7 @@ public class MBThreadUtil {
 	/**
 	* Finds all the message boards threads where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching message boards threads
 	* @throws SystemException if a system exception occurred
 	*/
@@ -217,7 +217,7 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of message boards threads to return
 	* @param end the upper bound of the range of message boards threads to return (not inclusive)
 	* @return the range of matching message boards threads
@@ -236,7 +236,7 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of message boards threads to return
 	* @param end the upper bound of the range of message boards threads to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -258,7 +258,7 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message boards thread
 	* @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
@@ -279,7 +279,7 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message boards thread
 	* @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
@@ -301,7 +301,7 @@ public class MBThreadUtil {
 	* </p>
 	*
 	* @param threadId the primary key of the current message boards thread
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message boards thread
 	* @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
@@ -320,8 +320,8 @@ public class MBThreadUtil {
 	/**
 	* Finds all the message boards threads where groupId = &#63; and categoryId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @return the matching message boards threads
 	* @throws SystemException if a system exception occurred
 	*/
@@ -338,8 +338,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param start the lower bound of the range of message boards threads to return
 	* @param end the upper bound of the range of message boards threads to return (not inclusive)
 	* @return the range of matching message boards threads
@@ -358,8 +358,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param start the lower bound of the range of message boards threads to return
 	* @param end the upper bound of the range of message boards threads to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -381,8 +381,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message boards thread
 	* @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
@@ -404,8 +404,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message boards thread
 	* @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
@@ -428,8 +428,8 @@ public class MBThreadUtil {
 	* </p>
 	*
 	* @param threadId the primary key of the current message boards thread
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message boards thread
 	* @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
@@ -452,8 +452,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryIds the category ids to search with
+	* @param groupId the group ID to search with
+	* @param categoryIds the category IDs to search with
 	* @return the matching message boards threads
 	* @throws SystemException if a system exception occurred
 	*/
@@ -470,8 +470,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryIds the category ids to search with
+	* @param groupId the group ID to search with
+	* @param categoryIds the category IDs to search with
 	* @param start the lower bound of the range of message boards threads to return
 	* @param end the upper bound of the range of message boards threads to return (not inclusive)
 	* @return the range of matching message boards threads
@@ -490,8 +490,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryIds the category ids to search with
+	* @param groupId the group ID to search with
+	* @param categoryIds the category IDs to search with
 	* @param start the lower bound of the range of message boards threads to return
 	* @param end the upper bound of the range of message boards threads to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -510,8 +510,8 @@ public class MBThreadUtil {
 	/**
 	* Finds all the message boards threads where groupId = &#63; and categoryId &ne; &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @return the matching message boards threads
 	* @throws SystemException if a system exception occurred
 	*/
@@ -528,8 +528,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param start the lower bound of the range of message boards threads to return
 	* @param end the upper bound of the range of message boards threads to return (not inclusive)
 	* @return the range of matching message boards threads
@@ -548,8 +548,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param start the lower bound of the range of message boards threads to return
 	* @param end the upper bound of the range of message boards threads to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -572,8 +572,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message boards thread
 	* @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
@@ -595,8 +595,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message boards thread
 	* @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
@@ -619,8 +619,8 @@ public class MBThreadUtil {
 	* </p>
 	*
 	* @param threadId the primary key of the current message boards thread
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message boards thread
 	* @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
@@ -639,7 +639,7 @@ public class MBThreadUtil {
 	/**
 	* Finds all the message boards threads where groupId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @return the matching message boards threads
 	* @throws SystemException if a system exception occurred
@@ -657,7 +657,7 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message boards threads to return
 	* @param end the upper bound of the range of message boards threads to return (not inclusive)
@@ -677,7 +677,7 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message boards threads to return
 	* @param end the upper bound of the range of message boards threads to return (not inclusive)
@@ -700,7 +700,7 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message boards thread
@@ -723,7 +723,7 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message boards thread
@@ -747,7 +747,7 @@ public class MBThreadUtil {
 	* </p>
 	*
 	* @param threadId the primary key of the current message boards thread
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message boards thread
@@ -767,7 +767,7 @@ public class MBThreadUtil {
 	/**
 	* Finds all the message boards threads where categoryId = &#63; and priority = &#63;.
 	*
-	* @param categoryId the category id to search with
+	* @param categoryId the category ID to search with
 	* @param priority the priority to search with
 	* @return the matching message boards threads
 	* @throws SystemException if a system exception occurred
@@ -785,7 +785,7 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param categoryId the category id to search with
+	* @param categoryId the category ID to search with
 	* @param priority the priority to search with
 	* @param start the lower bound of the range of message boards threads to return
 	* @param end the upper bound of the range of message boards threads to return (not inclusive)
@@ -805,7 +805,7 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param categoryId the category id to search with
+	* @param categoryId the category ID to search with
 	* @param priority the priority to search with
 	* @param start the lower bound of the range of message boards threads to return
 	* @param end the upper bound of the range of message boards threads to return (not inclusive)
@@ -829,7 +829,7 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param categoryId the category id to search with
+	* @param categoryId the category ID to search with
 	* @param priority the priority to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message boards thread
@@ -852,7 +852,7 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param categoryId the category id to search with
+	* @param categoryId the category ID to search with
 	* @param priority the priority to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message boards thread
@@ -876,7 +876,7 @@ public class MBThreadUtil {
 	* </p>
 	*
 	* @param threadId the primary key of the current message boards thread
-	* @param categoryId the category id to search with
+	* @param categoryId the category ID to search with
 	* @param priority the priority to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message boards thread
@@ -896,8 +896,8 @@ public class MBThreadUtil {
 	/**
 	* Finds all the message boards threads where groupId = &#63; and categoryId = &#63; and lastPostDate = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param lastPostDate the last post date to search with
 	* @return the matching message boards threads
 	* @throws SystemException if a system exception occurred
@@ -915,8 +915,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param lastPostDate the last post date to search with
 	* @param start the lower bound of the range of message boards threads to return
 	* @param end the upper bound of the range of message boards threads to return (not inclusive)
@@ -937,8 +937,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param lastPostDate the last post date to search with
 	* @param start the lower bound of the range of message boards threads to return
 	* @param end the upper bound of the range of message boards threads to return (not inclusive)
@@ -963,8 +963,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param lastPostDate the last post date to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message boards thread
@@ -988,8 +988,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param lastPostDate the last post date to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message boards thread
@@ -1014,8 +1014,8 @@ public class MBThreadUtil {
 	* </p>
 	*
 	* @param threadId the primary key of the current message boards thread
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param lastPostDate the last post date to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message boards thread
@@ -1036,8 +1036,8 @@ public class MBThreadUtil {
 	/**
 	* Finds all the message boards threads where groupId = &#63; and categoryId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @return the matching message boards threads
 	* @throws SystemException if a system exception occurred
@@ -1055,8 +1055,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message boards threads to return
 	* @param end the upper bound of the range of message boards threads to return (not inclusive)
@@ -1077,8 +1077,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message boards threads to return
 	* @param end the upper bound of the range of message boards threads to return (not inclusive)
@@ -1102,8 +1102,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message boards thread
@@ -1127,8 +1127,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message boards thread
@@ -1153,8 +1153,8 @@ public class MBThreadUtil {
 	* </p>
 	*
 	* @param threadId the primary key of the current message boards thread
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message boards thread
@@ -1178,8 +1178,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryIds the category ids to search with
+	* @param groupId the group ID to search with
+	* @param categoryIds the category IDs to search with
 	* @param status the status to search with
 	* @return the matching message boards threads
 	* @throws SystemException if a system exception occurred
@@ -1197,8 +1197,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryIds the category ids to search with
+	* @param groupId the group ID to search with
+	* @param categoryIds the category IDs to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message boards threads to return
 	* @param end the upper bound of the range of message boards threads to return (not inclusive)
@@ -1219,8 +1219,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryIds the category ids to search with
+	* @param groupId the group ID to search with
+	* @param categoryIds the category IDs to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message boards threads to return
 	* @param end the upper bound of the range of message boards threads to return (not inclusive)
@@ -1240,8 +1240,8 @@ public class MBThreadUtil {
 	/**
 	* Finds all the message boards threads where groupId = &#63; and categoryId &ne; &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @return the matching message boards threads
 	* @throws SystemException if a system exception occurred
@@ -1259,8 +1259,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message boards threads to return
 	* @param end the upper bound of the range of message boards threads to return (not inclusive)
@@ -1281,8 +1281,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of message boards threads to return
 	* @param end the upper bound of the range of message boards threads to return (not inclusive)
@@ -1306,8 +1306,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message boards thread
@@ -1331,8 +1331,8 @@ public class MBThreadUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message boards thread
@@ -1357,8 +1357,8 @@ public class MBThreadUtil {
 	* </p>
 	*
 	* @param threadId the primary key of the current message boards thread
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message boards thread
@@ -1427,7 +1427,7 @@ public class MBThreadUtil {
 	/**
 	* Removes all the message boards threads where groupId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByGroupId(long groupId)
@@ -1438,8 +1438,8 @@ public class MBThreadUtil {
 	/**
 	* Removes all the message boards threads where groupId = &#63; and categoryId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_C(long groupId, long categoryId)
@@ -1450,8 +1450,8 @@ public class MBThreadUtil {
 	/**
 	* Removes all the message boards threads where groupId = &#63; and categoryId &ne; &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_NotC(long groupId, long categoryId)
@@ -1462,7 +1462,7 @@ public class MBThreadUtil {
 	/**
 	* Removes all the message boards threads where groupId = &#63; and status = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1474,7 +1474,7 @@ public class MBThreadUtil {
 	/**
 	* Removes all the message boards threads where categoryId = &#63; and priority = &#63; from the database.
 	*
-	* @param categoryId the category id to search with
+	* @param categoryId the category ID to search with
 	* @param priority the priority to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1486,8 +1486,8 @@ public class MBThreadUtil {
 	/**
 	* Removes all the message boards threads where groupId = &#63; and categoryId = &#63; and lastPostDate = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param lastPostDate the last post date to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1500,8 +1500,8 @@ public class MBThreadUtil {
 	/**
 	* Removes all the message boards threads where groupId = &#63; and categoryId = &#63; and status = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1513,8 +1513,8 @@ public class MBThreadUtil {
 	/**
 	* Removes all the message boards threads where groupId = &#63; and categoryId &ne; &#63; and status = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1536,7 +1536,7 @@ public class MBThreadUtil {
 	/**
 	* Counts all the message boards threads where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching message boards threads
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1548,8 +1548,8 @@ public class MBThreadUtil {
 	/**
 	* Counts all the message boards threads where groupId = &#63; and categoryId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @return the number of matching message boards threads
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1561,8 +1561,8 @@ public class MBThreadUtil {
 	/**
 	* Counts all the message boards threads where groupId = &#63; and categoryId = any &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryIds the category ids to search with
+	* @param groupId the group ID to search with
+	* @param categoryIds the category IDs to search with
 	* @return the number of matching message boards threads
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1574,8 +1574,8 @@ public class MBThreadUtil {
 	/**
 	* Counts all the message boards threads where groupId = &#63; and categoryId &ne; &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @return the number of matching message boards threads
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1587,7 +1587,7 @@ public class MBThreadUtil {
 	/**
 	* Counts all the message boards threads where groupId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param status the status to search with
 	* @return the number of matching message boards threads
 	* @throws SystemException if a system exception occurred
@@ -1600,7 +1600,7 @@ public class MBThreadUtil {
 	/**
 	* Counts all the message boards threads where categoryId = &#63; and priority = &#63;.
 	*
-	* @param categoryId the category id to search with
+	* @param categoryId the category ID to search with
 	* @param priority the priority to search with
 	* @return the number of matching message boards threads
 	* @throws SystemException if a system exception occurred
@@ -1613,8 +1613,8 @@ public class MBThreadUtil {
 	/**
 	* Counts all the message boards threads where groupId = &#63; and categoryId = &#63; and lastPostDate = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param lastPostDate the last post date to search with
 	* @return the number of matching message boards threads
 	* @throws SystemException if a system exception occurred
@@ -1628,8 +1628,8 @@ public class MBThreadUtil {
 	/**
 	* Counts all the message boards threads where groupId = &#63; and categoryId = &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @return the number of matching message boards threads
 	* @throws SystemException if a system exception occurred
@@ -1642,8 +1642,8 @@ public class MBThreadUtil {
 	/**
 	* Counts all the message boards threads where groupId = &#63; and categoryId = any &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryIds the category ids to search with
+	* @param groupId the group ID to search with
+	* @param categoryIds the category IDs to search with
 	* @param status the status to search with
 	* @return the number of matching message boards threads
 	* @throws SystemException if a system exception occurred
@@ -1656,8 +1656,8 @@ public class MBThreadUtil {
 	/**
 	* Counts all the message boards threads where groupId = &#63; and categoryId &ne; &#63; and status = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param categoryId the category id to search with
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
 	* @param status the status to search with
 	* @return the number of matching message boards threads
 	* @throws SystemException if a system exception occurred

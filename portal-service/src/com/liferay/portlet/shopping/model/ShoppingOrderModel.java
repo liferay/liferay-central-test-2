@@ -60,58 +60,58 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the order id of this shopping order.
+	 * Gets the order ID of this shopping order.
 	 *
-	 * @return the order id of this shopping order
+	 * @return the order ID of this shopping order
 	 */
 	public long getOrderId();
 
 	/**
-	 * Sets the order id of this shopping order.
+	 * Sets the order ID of this shopping order.
 	 *
-	 * @param orderId the order id of this shopping order
+	 * @param orderId the order ID of this shopping order
 	 */
 	public void setOrderId(long orderId);
 
 	/**
-	 * Gets the group id of this shopping order.
+	 * Gets the group ID of this shopping order.
 	 *
-	 * @return the group id of this shopping order
+	 * @return the group ID of this shopping order
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this shopping order.
+	 * Sets the group ID of this shopping order.
 	 *
-	 * @param groupId the group id of this shopping order
+	 * @param groupId the group ID of this shopping order
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this shopping order.
+	 * Gets the company ID of this shopping order.
 	 *
-	 * @return the company id of this shopping order
+	 * @return the company ID of this shopping order
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this shopping order.
+	 * Sets the company ID of this shopping order.
 	 *
-	 * @param companyId the company id of this shopping order
+	 * @param companyId the company ID of this shopping order
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this shopping order.
+	 * Gets the user ID of this shopping order.
 	 *
-	 * @return the user id of this shopping order
+	 * @return the user ID of this shopping order
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this shopping order.
+	 * Sets the user ID of this shopping order.
 	 *
-	 * @param userId the user id of this shopping order
+	 * @param userId the user ID of this shopping order
 	 */
 	public void setUserId(long userId);
 
@@ -741,17 +741,17 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder> {
 	public void setComments(String comments);
 
 	/**
-	 * Gets the pp txn id of this shopping order.
+	 * Gets the pp txn ID of this shopping order.
 	 *
-	 * @return the pp txn id of this shopping order
+	 * @return the pp txn ID of this shopping order
 	 */
 	@AutoEscape
 	public String getPpTxnId();
 
 	/**
-	 * Sets the pp txn id of this shopping order.
+	 * Sets the pp txn ID of this shopping order.
 	 *
-	 * @param ppTxnId the pp txn id of this shopping order
+	 * @param ppTxnId the pp txn ID of this shopping order
 	 */
 	public void setPpTxnId(String ppTxnId);
 

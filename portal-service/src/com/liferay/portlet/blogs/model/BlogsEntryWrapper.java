@@ -65,72 +65,72 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the entry id of this blogs entry.
+	* Gets the entry ID of this blogs entry.
 	*
-	* @return the entry id of this blogs entry
+	* @return the entry ID of this blogs entry
 	*/
 	public long getEntryId() {
 		return _blogsEntry.getEntryId();
 	}
 
 	/**
-	* Sets the entry id of this blogs entry.
+	* Sets the entry ID of this blogs entry.
 	*
-	* @param entryId the entry id of this blogs entry
+	* @param entryId the entry ID of this blogs entry
 	*/
 	public void setEntryId(long entryId) {
 		_blogsEntry.setEntryId(entryId);
 	}
 
 	/**
-	* Gets the group id of this blogs entry.
+	* Gets the group ID of this blogs entry.
 	*
-	* @return the group id of this blogs entry
+	* @return the group ID of this blogs entry
 	*/
 	public long getGroupId() {
 		return _blogsEntry.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this blogs entry.
+	* Sets the group ID of this blogs entry.
 	*
-	* @param groupId the group id of this blogs entry
+	* @param groupId the group ID of this blogs entry
 	*/
 	public void setGroupId(long groupId) {
 		_blogsEntry.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this blogs entry.
+	* Gets the company ID of this blogs entry.
 	*
-	* @return the company id of this blogs entry
+	* @return the company ID of this blogs entry
 	*/
 	public long getCompanyId() {
 		return _blogsEntry.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this blogs entry.
+	* Sets the company ID of this blogs entry.
 	*
-	* @param companyId the company id of this blogs entry
+	* @param companyId the company ID of this blogs entry
 	*/
 	public void setCompanyId(long companyId) {
 		_blogsEntry.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this blogs entry.
+	* Gets the user ID of this blogs entry.
 	*
-	* @return the user id of this blogs entry
+	* @return the user ID of this blogs entry
 	*/
 	public long getUserId() {
 		return _blogsEntry.getUserId();
 	}
 
 	/**
-	* Sets the user id of this blogs entry.
+	* Sets the user ID of this blogs entry.
 	*
-	* @param userId the user id of this blogs entry
+	* @param userId the user ID of this blogs entry
 	*/
 	public void setUserId(long userId) {
 		_blogsEntry.setUserId(userId);
@@ -400,18 +400,18 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the small image id of this blogs entry.
+	* Gets the small image ID of this blogs entry.
 	*
-	* @return the small image id of this blogs entry
+	* @return the small image ID of this blogs entry
 	*/
 	public long getSmallImageId() {
 		return _blogsEntry.getSmallImageId();
 	}
 
 	/**
-	* Sets the small image id of this blogs entry.
+	* Sets the small image ID of this blogs entry.
 	*
-	* @param smallImageId the small image id of this blogs entry
+	* @param smallImageId the small image ID of this blogs entry
 	*/
 	public void setSmallImageId(long smallImageId) {
 		_blogsEntry.setSmallImageId(smallImageId);
@@ -454,18 +454,18 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Gets the status by user id of this blogs entry.
+	* Gets the status by user ID of this blogs entry.
 	*
-	* @return the status by user id of this blogs entry
+	* @return the status by user ID of this blogs entry
 	*/
 	public long getStatusByUserId() {
 		return _blogsEntry.getStatusByUserId();
 	}
 
 	/**
-	* Sets the status by user id of this blogs entry.
+	* Sets the status by user ID of this blogs entry.
 	*
-	* @param statusByUserId the status by user id of this blogs entry
+	* @param statusByUserId the status by user ID of this blogs entry
 	*/
 	public void setStatusByUserId(long statusByUserId) {
 		_blogsEntry.setStatusByUserId(statusByUserId);

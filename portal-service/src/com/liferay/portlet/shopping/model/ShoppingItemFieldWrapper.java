@@ -47,36 +47,36 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField {
 	}
 
 	/**
-	* Gets the item field id of this shopping item field.
+	* Gets the item field ID of this shopping item field.
 	*
-	* @return the item field id of this shopping item field
+	* @return the item field ID of this shopping item field
 	*/
 	public long getItemFieldId() {
 		return _shoppingItemField.getItemFieldId();
 	}
 
 	/**
-	* Sets the item field id of this shopping item field.
+	* Sets the item field ID of this shopping item field.
 	*
-	* @param itemFieldId the item field id of this shopping item field
+	* @param itemFieldId the item field ID of this shopping item field
 	*/
 	public void setItemFieldId(long itemFieldId) {
 		_shoppingItemField.setItemFieldId(itemFieldId);
 	}
 
 	/**
-	* Gets the item id of this shopping item field.
+	* Gets the item ID of this shopping item field.
 	*
-	* @return the item id of this shopping item field
+	* @return the item ID of this shopping item field
 	*/
 	public long getItemId() {
 		return _shoppingItemField.getItemId();
 	}
 
 	/**
-	* Sets the item id of this shopping item field.
+	* Sets the item ID of this shopping item field.
 	*
-	* @param itemId the item id of this shopping item field
+	* @param itemId the item ID of this shopping item field
 	*/
 	public void setItemId(long itemId) {
 		_shoppingItemField.setItemId(itemId);

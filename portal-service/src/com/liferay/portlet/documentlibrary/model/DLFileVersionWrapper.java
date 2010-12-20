@@ -47,72 +47,72 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the file version id of this d l file version.
+	* Gets the file version ID of this d l file version.
 	*
-	* @return the file version id of this d l file version
+	* @return the file version ID of this d l file version
 	*/
 	public long getFileVersionId() {
 		return _dlFileVersion.getFileVersionId();
 	}
 
 	/**
-	* Sets the file version id of this d l file version.
+	* Sets the file version ID of this d l file version.
 	*
-	* @param fileVersionId the file version id of this d l file version
+	* @param fileVersionId the file version ID of this d l file version
 	*/
 	public void setFileVersionId(long fileVersionId) {
 		_dlFileVersion.setFileVersionId(fileVersionId);
 	}
 
 	/**
-	* Gets the group id of this d l file version.
+	* Gets the group ID of this d l file version.
 	*
-	* @return the group id of this d l file version
+	* @return the group ID of this d l file version
 	*/
 	public long getGroupId() {
 		return _dlFileVersion.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this d l file version.
+	* Sets the group ID of this d l file version.
 	*
-	* @param groupId the group id of this d l file version
+	* @param groupId the group ID of this d l file version
 	*/
 	public void setGroupId(long groupId) {
 		_dlFileVersion.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this d l file version.
+	* Gets the company ID of this d l file version.
 	*
-	* @return the company id of this d l file version
+	* @return the company ID of this d l file version
 	*/
 	public long getCompanyId() {
 		return _dlFileVersion.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this d l file version.
+	* Sets the company ID of this d l file version.
 	*
-	* @param companyId the company id of this d l file version
+	* @param companyId the company ID of this d l file version
 	*/
 	public void setCompanyId(long companyId) {
 		_dlFileVersion.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this d l file version.
+	* Gets the user ID of this d l file version.
 	*
-	* @return the user id of this d l file version
+	* @return the user ID of this d l file version
 	*/
 	public long getUserId() {
 		return _dlFileVersion.getUserId();
 	}
 
 	/**
-	* Sets the user id of this d l file version.
+	* Sets the user ID of this d l file version.
 	*
-	* @param userId the user id of this d l file version
+	* @param userId the user ID of this d l file version
 	*/
 	public void setUserId(long userId) {
 		_dlFileVersion.setUserId(userId);
@@ -175,18 +175,18 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the file entry id of this d l file version.
+	* Gets the file entry ID of this d l file version.
 	*
-	* @return the file entry id of this d l file version
+	* @return the file entry ID of this d l file version
 	*/
 	public long getFileEntryId() {
 		return _dlFileVersion.getFileEntryId();
 	}
 
 	/**
-	* Sets the file entry id of this d l file version.
+	* Sets the file entry ID of this d l file version.
 	*
-	* @param fileEntryId the file entry id of this d l file version
+	* @param fileEntryId the file entry ID of this d l file version
 	*/
 	public void setFileEntryId(long fileEntryId) {
 		_dlFileVersion.setFileEntryId(fileEntryId);
@@ -337,18 +337,18 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
-	* Gets the status by user id of this d l file version.
+	* Gets the status by user ID of this d l file version.
 	*
-	* @return the status by user id of this d l file version
+	* @return the status by user ID of this d l file version
 	*/
 	public long getStatusByUserId() {
 		return _dlFileVersion.getStatusByUserId();
 	}
 
 	/**
-	* Sets the status by user id of this d l file version.
+	* Sets the status by user ID of this d l file version.
 	*
-	* @param statusByUserId the status by user id of this d l file version
+	* @param statusByUserId the status by user ID of this d l file version
 	*/
 	public void setStatusByUserId(long statusByUserId) {
 		_dlFileVersion.setStatusByUserId(statusByUserId);

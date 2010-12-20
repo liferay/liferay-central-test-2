@@ -791,7 +791,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * Finds the resource action where name = &#63; and actionId = &#63; or throws a {@link com.liferay.portal.NoSuchResourceActionException} if it could not be found.
 	 *
 	 * @param name the name to search with
-	 * @param actionId the action id to search with
+	 * @param actionId the action ID to search with
 	 * @return the matching resource action
 	 * @throws com.liferay.portal.NoSuchResourceActionException if a matching resource action could not be found
 	 * @throws SystemException if a system exception occurred
@@ -827,7 +827,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * Finds the resource action where name = &#63; and actionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param name the name to search with
-	 * @param actionId the action id to search with
+	 * @param actionId the action ID to search with
 	 * @return the matching resource action, or <code>null</code> if a matching resource action could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -840,7 +840,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * Finds the resource action where name = &#63; and actionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param name the name to search with
-	 * @param actionId the action id to search with
+	 * @param actionId the action ID to search with
 	 * @return the matching resource action, or <code>null</code> if a matching resource action could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1078,7 +1078,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * Removes the resource action where name = &#63; and actionId = &#63; from the database.
 	 *
 	 * @param name the name to search with
-	 * @param actionId the action id to search with
+	 * @param actionId the action ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByN_A(String name, String actionId)
@@ -1168,7 +1168,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * Counts all the resource actions where name = &#63; and actionId = &#63;.
 	 *
 	 * @param name the name to search with
-	 * @param actionId the action id to search with
+	 * @param actionId the action ID to search with
 	 * @return the number of matching resource actions
 	 * @throws SystemException if a system exception occurred
 	 */

@@ -83,36 +83,36 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the group id of this layout.
+	* Gets the group ID of this layout.
 	*
-	* @return the group id of this layout
+	* @return the group ID of this layout
 	*/
 	public long getGroupId() {
 		return _layout.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this layout.
+	* Sets the group ID of this layout.
 	*
-	* @param groupId the group id of this layout
+	* @param groupId the group ID of this layout
 	*/
 	public void setGroupId(long groupId) {
 		_layout.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this layout.
+	* Gets the company ID of this layout.
 	*
-	* @return the company id of this layout
+	* @return the company ID of this layout
 	*/
 	public long getCompanyId() {
 		return _layout.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this layout.
+	* Sets the company ID of this layout.
 	*
-	* @param companyId the company id of this layout
+	* @param companyId the company ID of this layout
 	*/
 	public void setCompanyId(long companyId) {
 		_layout.setCompanyId(companyId);
@@ -146,36 +146,36 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the layout id of this layout.
+	* Gets the layout ID of this layout.
 	*
-	* @return the layout id of this layout
+	* @return the layout ID of this layout
 	*/
 	public long getLayoutId() {
 		return _layout.getLayoutId();
 	}
 
 	/**
-	* Sets the layout id of this layout.
+	* Sets the layout ID of this layout.
 	*
-	* @param layoutId the layout id of this layout
+	* @param layoutId the layout ID of this layout
 	*/
 	public void setLayoutId(long layoutId) {
 		_layout.setLayoutId(layoutId);
 	}
 
 	/**
-	* Gets the parent layout id of this layout.
+	* Gets the parent layout ID of this layout.
 	*
-	* @return the parent layout id of this layout
+	* @return the parent layout ID of this layout
 	*/
 	public long getParentLayoutId() {
 		return _layout.getParentLayoutId();
 	}
 
 	/**
-	* Sets the parent layout id of this layout.
+	* Sets the parent layout ID of this layout.
 	*
-	* @param parentLayoutId the parent layout id of this layout
+	* @param parentLayoutId the parent layout ID of this layout
 	*/
 	public void setParentLayoutId(long parentLayoutId) {
 		_layout.setParentLayoutId(parentLayoutId);
@@ -344,90 +344,90 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the icon image id of this layout.
+	* Gets the icon image ID of this layout.
 	*
-	* @return the icon image id of this layout
+	* @return the icon image ID of this layout
 	*/
 	public long getIconImageId() {
 		return _layout.getIconImageId();
 	}
 
 	/**
-	* Sets the icon image id of this layout.
+	* Sets the icon image ID of this layout.
 	*
-	* @param iconImageId the icon image id of this layout
+	* @param iconImageId the icon image ID of this layout
 	*/
 	public void setIconImageId(long iconImageId) {
 		_layout.setIconImageId(iconImageId);
 	}
 
 	/**
-	* Gets the theme id of this layout.
+	* Gets the theme ID of this layout.
 	*
-	* @return the theme id of this layout
+	* @return the theme ID of this layout
 	*/
 	public java.lang.String getThemeId() {
 		return _layout.getThemeId();
 	}
 
 	/**
-	* Sets the theme id of this layout.
+	* Sets the theme ID of this layout.
 	*
-	* @param themeId the theme id of this layout
+	* @param themeId the theme ID of this layout
 	*/
 	public void setThemeId(java.lang.String themeId) {
 		_layout.setThemeId(themeId);
 	}
 
 	/**
-	* Gets the color scheme id of this layout.
+	* Gets the color scheme ID of this layout.
 	*
-	* @return the color scheme id of this layout
+	* @return the color scheme ID of this layout
 	*/
 	public java.lang.String getColorSchemeId() {
 		return _layout.getColorSchemeId();
 	}
 
 	/**
-	* Sets the color scheme id of this layout.
+	* Sets the color scheme ID of this layout.
 	*
-	* @param colorSchemeId the color scheme id of this layout
+	* @param colorSchemeId the color scheme ID of this layout
 	*/
 	public void setColorSchemeId(java.lang.String colorSchemeId) {
 		_layout.setColorSchemeId(colorSchemeId);
 	}
 
 	/**
-	* Gets the wap theme id of this layout.
+	* Gets the wap theme ID of this layout.
 	*
-	* @return the wap theme id of this layout
+	* @return the wap theme ID of this layout
 	*/
 	public java.lang.String getWapThemeId() {
 		return _layout.getWapThemeId();
 	}
 
 	/**
-	* Sets the wap theme id of this layout.
+	* Sets the wap theme ID of this layout.
 	*
-	* @param wapThemeId the wap theme id of this layout
+	* @param wapThemeId the wap theme ID of this layout
 	*/
 	public void setWapThemeId(java.lang.String wapThemeId) {
 		_layout.setWapThemeId(wapThemeId);
 	}
 
 	/**
-	* Gets the wap color scheme id of this layout.
+	* Gets the wap color scheme ID of this layout.
 	*
-	* @return the wap color scheme id of this layout
+	* @return the wap color scheme ID of this layout
 	*/
 	public java.lang.String getWapColorSchemeId() {
 		return _layout.getWapColorSchemeId();
 	}
 
 	/**
-	* Sets the wap color scheme id of this layout.
+	* Sets the wap color scheme ID of this layout.
 	*
-	* @param wapColorSchemeId the wap color scheme id of this layout
+	* @param wapColorSchemeId the wap color scheme ID of this layout
 	*/
 	public void setWapColorSchemeId(java.lang.String wapColorSchemeId) {
 		_layout.setWapColorSchemeId(wapColorSchemeId);
@@ -470,18 +470,18 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Gets the layout prototype id of this layout.
+	* Gets the layout prototype ID of this layout.
 	*
-	* @return the layout prototype id of this layout
+	* @return the layout prototype ID of this layout
 	*/
 	public long getLayoutPrototypeId() {
 		return _layout.getLayoutPrototypeId();
 	}
 
 	/**
-	* Sets the layout prototype id of this layout.
+	* Sets the layout prototype ID of this layout.
 	*
-	* @param layoutPrototypeId the layout prototype id of this layout
+	* @param layoutPrototypeId the layout prototype ID of this layout
 	*/
 	public void setLayoutPrototypeId(long layoutPrototypeId) {
 		_layout.setLayoutPrototypeId(layoutPrototypeId);

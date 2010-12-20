@@ -106,7 +106,7 @@ public interface AnnouncementsFlagPersistence extends BasePersistence<Announceme
 	/**
 	* Finds all the announcements flags where entryId = &#63;.
 	*
-	* @param entryId the entry id to search with
+	* @param entryId the entry ID to search with
 	* @return the matching announcements flags
 	* @throws SystemException if a system exception occurred
 	*/
@@ -121,7 +121,7 @@ public interface AnnouncementsFlagPersistence extends BasePersistence<Announceme
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param entryId the entry id to search with
+	* @param entryId the entry ID to search with
 	* @param start the lower bound of the range of announcements flags to return
 	* @param end the upper bound of the range of announcements flags to return (not inclusive)
 	* @return the range of matching announcements flags
@@ -138,7 +138,7 @@ public interface AnnouncementsFlagPersistence extends BasePersistence<Announceme
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param entryId the entry id to search with
+	* @param entryId the entry ID to search with
 	* @param start the lower bound of the range of announcements flags to return
 	* @param end the upper bound of the range of announcements flags to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -157,7 +157,7 @@ public interface AnnouncementsFlagPersistence extends BasePersistence<Announceme
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param entryId the entry id to search with
+	* @param entryId the entry ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching announcements flag
 	* @throws com.liferay.portlet.announcements.NoSuchFlagException if a matching announcements flag could not be found
@@ -176,7 +176,7 @@ public interface AnnouncementsFlagPersistence extends BasePersistence<Announceme
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param entryId the entry id to search with
+	* @param entryId the entry ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching announcements flag
 	* @throws com.liferay.portlet.announcements.NoSuchFlagException if a matching announcements flag could not be found
@@ -196,7 +196,7 @@ public interface AnnouncementsFlagPersistence extends BasePersistence<Announceme
 	* </p>
 	*
 	* @param flagId the primary key of the current announcements flag
-	* @param entryId the entry id to search with
+	* @param entryId the entry ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next announcements flag
 	* @throws com.liferay.portlet.announcements.NoSuchFlagException if a announcements flag with the primary key could not be found
@@ -211,8 +211,8 @@ public interface AnnouncementsFlagPersistence extends BasePersistence<Announceme
 	/**
 	* Finds the announcements flag where userId = &#63; and entryId = &#63; and value = &#63; or throws a {@link com.liferay.portlet.announcements.NoSuchFlagException} if it could not be found.
 	*
-	* @param userId the user id to search with
-	* @param entryId the entry id to search with
+	* @param userId the user ID to search with
+	* @param entryId the entry ID to search with
 	* @param value the value to search with
 	* @return the matching announcements flag
 	* @throws com.liferay.portlet.announcements.NoSuchFlagException if a matching announcements flag could not be found
@@ -226,8 +226,8 @@ public interface AnnouncementsFlagPersistence extends BasePersistence<Announceme
 	/**
 	* Finds the announcements flag where userId = &#63; and entryId = &#63; and value = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param userId the user id to search with
-	* @param entryId the entry id to search with
+	* @param userId the user ID to search with
+	* @param entryId the entry ID to search with
 	* @param value the value to search with
 	* @return the matching announcements flag, or <code>null</code> if a matching announcements flag could not be found
 	* @throws SystemException if a system exception occurred
@@ -239,8 +239,8 @@ public interface AnnouncementsFlagPersistence extends BasePersistence<Announceme
 	/**
 	* Finds the announcements flag where userId = &#63; and entryId = &#63; and value = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param userId the user id to search with
-	* @param entryId the entry id to search with
+	* @param userId the user ID to search with
+	* @param entryId the entry ID to search with
 	* @param value the value to search with
 	* @return the matching announcements flag, or <code>null</code> if a matching announcements flag could not be found
 	* @throws SystemException if a system exception occurred
@@ -295,7 +295,7 @@ public interface AnnouncementsFlagPersistence extends BasePersistence<Announceme
 	/**
 	* Removes all the announcements flags where entryId = &#63; from the database.
 	*
-	* @param entryId the entry id to search with
+	* @param entryId the entry ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByEntryId(long entryId)
@@ -304,8 +304,8 @@ public interface AnnouncementsFlagPersistence extends BasePersistence<Announceme
 	/**
 	* Removes the announcements flag where userId = &#63; and entryId = &#63; and value = &#63; from the database.
 	*
-	* @param userId the user id to search with
-	* @param entryId the entry id to search with
+	* @param userId the user ID to search with
+	* @param entryId the entry ID to search with
 	* @param value the value to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -324,7 +324,7 @@ public interface AnnouncementsFlagPersistence extends BasePersistence<Announceme
 	/**
 	* Counts all the announcements flags where entryId = &#63;.
 	*
-	* @param entryId the entry id to search with
+	* @param entryId the entry ID to search with
 	* @return the number of matching announcements flags
 	* @throws SystemException if a system exception occurred
 	*/
@@ -334,8 +334,8 @@ public interface AnnouncementsFlagPersistence extends BasePersistence<Announceme
 	/**
 	* Counts all the announcements flags where userId = &#63; and entryId = &#63; and value = &#63;.
 	*
-	* @param userId the user id to search with
-	* @param entryId the entry id to search with
+	* @param userId the user ID to search with
+	* @param entryId the entry ID to search with
 	* @param value the value to search with
 	* @return the number of matching announcements flags
 	* @throws SystemException if a system exception occurred

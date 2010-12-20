@@ -59,44 +59,44 @@ public interface WebsiteModel extends BaseModel<Website> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the website id of this website.
+	 * Gets the website ID of this website.
 	 *
-	 * @return the website id of this website
+	 * @return the website ID of this website
 	 */
 	public long getWebsiteId();
 
 	/**
-	 * Sets the website id of this website.
+	 * Sets the website ID of this website.
 	 *
-	 * @param websiteId the website id of this website
+	 * @param websiteId the website ID of this website
 	 */
 	public void setWebsiteId(long websiteId);
 
 	/**
-	 * Gets the company id of this website.
+	 * Gets the company ID of this website.
 	 *
-	 * @return the company id of this website
+	 * @return the company ID of this website
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this website.
+	 * Sets the company ID of this website.
 	 *
-	 * @param companyId the company id of this website
+	 * @param companyId the company ID of this website
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this website.
+	 * Gets the user ID of this website.
 	 *
-	 * @return the user id of this website
+	 * @return the user ID of this website
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this website.
+	 * Sets the user ID of this website.
 	 *
-	 * @param userId the user id of this website
+	 * @param userId the user ID of this website
 	 */
 	public void setUserId(long userId);
 
@@ -166,16 +166,16 @@ public interface WebsiteModel extends BaseModel<Website> {
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this website.
+	 * Gets the class name ID of this website.
 	 *
-	 * @return the class name id of this website
+	 * @return the class name ID of this website
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this website.
+	 * Sets the class name ID of this website.
 	 *
-	 * @param classNameId the class name id of this website
+	 * @param classNameId the class name ID of this website
 	 */
 	public void setClassNameId(long classNameId);
 
@@ -209,16 +209,16 @@ public interface WebsiteModel extends BaseModel<Website> {
 	public void setUrl(String url);
 
 	/**
-	 * Gets the type id of this website.
+	 * Gets the type ID of this website.
 	 *
-	 * @return the type id of this website
+	 * @return the type ID of this website
 	 */
 	public int getTypeId();
 
 	/**
-	 * Sets the type id of this website.
+	 * Sets the type ID of this website.
 	 *
-	 * @param typeId the type id of this website
+	 * @param typeId the type ID of this website
 	 */
 	public void setTypeId(int typeId);
 

@@ -56,16 +56,16 @@ public interface ListTypeModel extends BaseModel<ListType> {
 	public void setPrimaryKey(int pk);
 
 	/**
-	 * Gets the list type id of this list type.
+	 * Gets the list type ID of this list type.
 	 *
-	 * @return the list type id of this list type
+	 * @return the list type ID of this list type
 	 */
 	public int getListTypeId();
 
 	/**
-	 * Sets the list type id of this list type.
+	 * Sets the list type ID of this list type.
 	 *
-	 * @param listTypeId the list type id of this list type
+	 * @param listTypeId the list type ID of this list type
 	 */
 	public void setListTypeId(int listTypeId);
 

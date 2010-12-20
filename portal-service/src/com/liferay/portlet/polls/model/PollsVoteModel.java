@@ -59,30 +59,30 @@ public interface PollsVoteModel extends BaseModel<PollsVote> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the vote id of this polls vote.
+	 * Gets the vote ID of this polls vote.
 	 *
-	 * @return the vote id of this polls vote
+	 * @return the vote ID of this polls vote
 	 */
 	public long getVoteId();
 
 	/**
-	 * Sets the vote id of this polls vote.
+	 * Sets the vote ID of this polls vote.
 	 *
-	 * @param voteId the vote id of this polls vote
+	 * @param voteId the vote ID of this polls vote
 	 */
 	public void setVoteId(long voteId);
 
 	/**
-	 * Gets the user id of this polls vote.
+	 * Gets the user ID of this polls vote.
 	 *
-	 * @return the user id of this polls vote
+	 * @return the user ID of this polls vote
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this polls vote.
+	 * Sets the user ID of this polls vote.
 	 *
-	 * @param userId the user id of this polls vote
+	 * @param userId the user ID of this polls vote
 	 */
 	public void setUserId(long userId);
 
@@ -102,30 +102,30 @@ public interface PollsVoteModel extends BaseModel<PollsVote> {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the question id of this polls vote.
+	 * Gets the question ID of this polls vote.
 	 *
-	 * @return the question id of this polls vote
+	 * @return the question ID of this polls vote
 	 */
 	public long getQuestionId();
 
 	/**
-	 * Sets the question id of this polls vote.
+	 * Sets the question ID of this polls vote.
 	 *
-	 * @param questionId the question id of this polls vote
+	 * @param questionId the question ID of this polls vote
 	 */
 	public void setQuestionId(long questionId);
 
 	/**
-	 * Gets the choice id of this polls vote.
+	 * Gets the choice ID of this polls vote.
 	 *
-	 * @return the choice id of this polls vote
+	 * @return the choice ID of this polls vote
 	 */
 	public long getChoiceId();
 
 	/**
-	 * Sets the choice id of this polls vote.
+	 * Sets the choice ID of this polls vote.
 	 *
-	 * @param choiceId the choice id of this polls vote
+	 * @param choiceId the choice ID of this polls vote
 	 */
 	public void setChoiceId(long choiceId);
 

@@ -47,72 +47,72 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the order id of this shopping order.
+	* Gets the order ID of this shopping order.
 	*
-	* @return the order id of this shopping order
+	* @return the order ID of this shopping order
 	*/
 	public long getOrderId() {
 		return _shoppingOrder.getOrderId();
 	}
 
 	/**
-	* Sets the order id of this shopping order.
+	* Sets the order ID of this shopping order.
 	*
-	* @param orderId the order id of this shopping order
+	* @param orderId the order ID of this shopping order
 	*/
 	public void setOrderId(long orderId) {
 		_shoppingOrder.setOrderId(orderId);
 	}
 
 	/**
-	* Gets the group id of this shopping order.
+	* Gets the group ID of this shopping order.
 	*
-	* @return the group id of this shopping order
+	* @return the group ID of this shopping order
 	*/
 	public long getGroupId() {
 		return _shoppingOrder.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this shopping order.
+	* Sets the group ID of this shopping order.
 	*
-	* @param groupId the group id of this shopping order
+	* @param groupId the group ID of this shopping order
 	*/
 	public void setGroupId(long groupId) {
 		_shoppingOrder.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this shopping order.
+	* Gets the company ID of this shopping order.
 	*
-	* @return the company id of this shopping order
+	* @return the company ID of this shopping order
 	*/
 	public long getCompanyId() {
 		return _shoppingOrder.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this shopping order.
+	* Sets the company ID of this shopping order.
 	*
-	* @param companyId the company id of this shopping order
+	* @param companyId the company ID of this shopping order
 	*/
 	public void setCompanyId(long companyId) {
 		_shoppingOrder.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this shopping order.
+	* Gets the user ID of this shopping order.
 	*
-	* @return the user id of this shopping order
+	* @return the user ID of this shopping order
 	*/
 	public long getUserId() {
 		return _shoppingOrder.getUserId();
 	}
 
 	/**
-	* Sets the user id of this shopping order.
+	* Sets the user ID of this shopping order.
 	*
-	* @param userId the user id of this shopping order
+	* @param userId the user ID of this shopping order
 	*/
 	public void setUserId(long userId) {
 		_shoppingOrder.setUserId(userId);
@@ -886,18 +886,18 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Gets the pp txn id of this shopping order.
+	* Gets the pp txn ID of this shopping order.
 	*
-	* @return the pp txn id of this shopping order
+	* @return the pp txn ID of this shopping order
 	*/
 	public java.lang.String getPpTxnId() {
 		return _shoppingOrder.getPpTxnId();
 	}
 
 	/**
-	* Sets the pp txn id of this shopping order.
+	* Sets the pp txn ID of this shopping order.
 	*
-	* @param ppTxnId the pp txn id of this shopping order
+	* @param ppTxnId the pp txn ID of this shopping order
 	*/
 	public void setPpTxnId(java.lang.String ppTxnId) {
 		_shoppingOrder.setPpTxnId(ppTxnId);

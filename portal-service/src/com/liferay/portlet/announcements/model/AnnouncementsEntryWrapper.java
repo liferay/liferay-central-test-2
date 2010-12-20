@@ -65,54 +65,54 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Gets the entry id of this announcements entry.
+	* Gets the entry ID of this announcements entry.
 	*
-	* @return the entry id of this announcements entry
+	* @return the entry ID of this announcements entry
 	*/
 	public long getEntryId() {
 		return _announcementsEntry.getEntryId();
 	}
 
 	/**
-	* Sets the entry id of this announcements entry.
+	* Sets the entry ID of this announcements entry.
 	*
-	* @param entryId the entry id of this announcements entry
+	* @param entryId the entry ID of this announcements entry
 	*/
 	public void setEntryId(long entryId) {
 		_announcementsEntry.setEntryId(entryId);
 	}
 
 	/**
-	* Gets the company id of this announcements entry.
+	* Gets the company ID of this announcements entry.
 	*
-	* @return the company id of this announcements entry
+	* @return the company ID of this announcements entry
 	*/
 	public long getCompanyId() {
 		return _announcementsEntry.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this announcements entry.
+	* Sets the company ID of this announcements entry.
 	*
-	* @param companyId the company id of this announcements entry
+	* @param companyId the company ID of this announcements entry
 	*/
 	public void setCompanyId(long companyId) {
 		_announcementsEntry.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this announcements entry.
+	* Gets the user ID of this announcements entry.
 	*
-	* @return the user id of this announcements entry
+	* @return the user ID of this announcements entry
 	*/
 	public long getUserId() {
 		return _announcementsEntry.getUserId();
 	}
 
 	/**
-	* Sets the user id of this announcements entry.
+	* Sets the user ID of this announcements entry.
 	*
-	* @param userId the user id of this announcements entry
+	* @param userId the user ID of this announcements entry
 	*/
 	public void setUserId(long userId) {
 		_announcementsEntry.setUserId(userId);
@@ -202,18 +202,18 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Gets the class name id of this announcements entry.
+	* Gets the class name ID of this announcements entry.
 	*
-	* @return the class name id of this announcements entry
+	* @return the class name ID of this announcements entry
 	*/
 	public long getClassNameId() {
 		return _announcementsEntry.getClassNameId();
 	}
 
 	/**
-	* Sets the class name id of this announcements entry.
+	* Sets the class name ID of this announcements entry.
 	*
-	* @param classNameId the class name id of this announcements entry
+	* @param classNameId the class name ID of this announcements entry
 	*/
 	public void setClassNameId(long classNameId) {
 		_announcementsEntry.setClassNameId(classNameId);

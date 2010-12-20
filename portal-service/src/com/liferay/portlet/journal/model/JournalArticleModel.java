@@ -75,16 +75,16 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the id of this journal article.
+	 * Gets the ID of this journal article.
 	 *
-	 * @return the id of this journal article
+	 * @return the ID of this journal article
 	 */
 	public long getId();
 
 	/**
-	 * Sets the id of this journal article.
+	 * Sets the ID of this journal article.
 	 *
-	 * @param id the id of this journal article
+	 * @param id the ID of this journal article
 	 */
 	public void setId(long id);
 
@@ -103,44 +103,44 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 	public void setResourcePrimKey(long resourcePrimKey);
 
 	/**
-	 * Gets the group id of this journal article.
+	 * Gets the group ID of this journal article.
 	 *
-	 * @return the group id of this journal article
+	 * @return the group ID of this journal article
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this journal article.
+	 * Sets the group ID of this journal article.
 	 *
-	 * @param groupId the group id of this journal article
+	 * @param groupId the group ID of this journal article
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this journal article.
+	 * Gets the company ID of this journal article.
 	 *
-	 * @return the company id of this journal article
+	 * @return the company ID of this journal article
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this journal article.
+	 * Sets the company ID of this journal article.
 	 *
-	 * @param companyId the company id of this journal article
+	 * @param companyId the company ID of this journal article
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this journal article.
+	 * Gets the user ID of this journal article.
 	 *
-	 * @return the user id of this journal article
+	 * @return the user ID of this journal article
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this journal article.
+	 * Sets the user ID of this journal article.
 	 *
-	 * @param userId the user id of this journal article
+	 * @param userId the user ID of this journal article
 	 */
 	public void setUserId(long userId);
 
@@ -203,16 +203,16 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the article id of this journal article.
+	 * Gets the article ID of this journal article.
 	 *
-	 * @return the article id of this journal article
+	 * @return the article ID of this journal article
 	 */
 	public String getArticleId();
 
 	/**
-	 * Sets the article id of this journal article.
+	 * Sets the article ID of this journal article.
 	 *
-	 * @param articleId the article id of this journal article
+	 * @param articleId the article ID of this journal article
 	 */
 	public void setArticleId(String articleId);
 
@@ -306,30 +306,30 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 	public void setType(String type);
 
 	/**
-	 * Gets the structure id of this journal article.
+	 * Gets the structure ID of this journal article.
 	 *
-	 * @return the structure id of this journal article
+	 * @return the structure ID of this journal article
 	 */
 	public String getStructureId();
 
 	/**
-	 * Sets the structure id of this journal article.
+	 * Sets the structure ID of this journal article.
 	 *
-	 * @param structureId the structure id of this journal article
+	 * @param structureId the structure ID of this journal article
 	 */
 	public void setStructureId(String structureId);
 
 	/**
-	 * Gets the template id of this journal article.
+	 * Gets the template ID of this journal article.
 	 *
-	 * @return the template id of this journal article
+	 * @return the template ID of this journal article
 	 */
 	public String getTemplateId();
 
 	/**
-	 * Sets the template id of this journal article.
+	 * Sets the template ID of this journal article.
 	 *
-	 * @param templateId the template id of this journal article
+	 * @param templateId the template ID of this journal article
 	 */
 	public void setTemplateId(String templateId);
 
@@ -418,16 +418,16 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 	public void setSmallImage(boolean smallImage);
 
 	/**
-	 * Gets the small image id of this journal article.
+	 * Gets the small image ID of this journal article.
 	 *
-	 * @return the small image id of this journal article
+	 * @return the small image ID of this journal article
 	 */
 	public long getSmallImageId();
 
 	/**
-	 * Sets the small image id of this journal article.
+	 * Sets the small image ID of this journal article.
 	 *
-	 * @param smallImageId the small image id of this journal article
+	 * @param smallImageId the small image ID of this journal article
 	 */
 	public void setSmallImageId(long smallImageId);
 
@@ -461,16 +461,16 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 	public void setStatus(int status);
 
 	/**
-	 * Gets the status by user id of this journal article.
+	 * Gets the status by user ID of this journal article.
 	 *
-	 * @return the status by user id of this journal article
+	 * @return the status by user ID of this journal article
 	 */
 	public long getStatusByUserId();
 
 	/**
-	 * Sets the status by user id of this journal article.
+	 * Sets the status by user ID of this journal article.
 	 *
-	 * @param statusByUserId the status by user id of this journal article
+	 * @param statusByUserId the status by user ID of this journal article
 	 */
 	public void setStatusByUserId(long statusByUserId);
 

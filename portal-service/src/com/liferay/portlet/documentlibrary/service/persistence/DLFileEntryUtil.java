@@ -321,7 +321,7 @@ public class DLFileEntryUtil {
 	* Finds the d l file entry where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileEntryException} if it could not be found.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -337,7 +337,7 @@ public class DLFileEntryUtil {
 	* Finds the d l file entry where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -351,7 +351,7 @@ public class DLFileEntryUtil {
 	* Finds the d l file entry where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -364,7 +364,7 @@ public class DLFileEntryUtil {
 	/**
 	* Finds all the d l file entries where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -381,7 +381,7 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @return the range of matching d l file entries
@@ -400,7 +400,7 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -422,7 +422,7 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
@@ -443,7 +443,7 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
@@ -465,7 +465,7 @@ public class DLFileEntryUtil {
 	* </p>
 	*
 	* @param fileEntryId the primary key of the current d l file entry
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a d l file entry with the primary key could not be found
@@ -484,7 +484,7 @@ public class DLFileEntryUtil {
 	/**
 	* Filters by the user's permissions and finds all the d l file entries where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -501,7 +501,7 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @return the range of matching d l file entries that the user has permission to view
@@ -520,7 +520,7 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -538,7 +538,7 @@ public class DLFileEntryUtil {
 	/**
 	* Finds all the d l file entries where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -555,7 +555,7 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @return the range of matching d l file entries
@@ -574,7 +574,7 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -596,7 +596,7 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
@@ -618,7 +618,7 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
@@ -641,7 +641,7 @@ public class DLFileEntryUtil {
 	* </p>
 	*
 	* @param fileEntryId the primary key of the current d l file entry
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a d l file entry with the primary key could not be found
@@ -660,8 +660,8 @@ public class DLFileEntryUtil {
 	/**
 	* Finds all the d l file entries where groupId = &#63; and userId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @return the matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -678,8 +678,8 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @return the range of matching d l file entries
@@ -698,8 +698,8 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -721,8 +721,8 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
@@ -744,8 +744,8 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
@@ -768,8 +768,8 @@ public class DLFileEntryUtil {
 	* </p>
 	*
 	* @param fileEntryId the primary key of the current d l file entry
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a d l file entry with the primary key could not be found
@@ -788,8 +788,8 @@ public class DLFileEntryUtil {
 	/**
 	* Filters by the user's permissions and finds all the d l file entries where groupId = &#63; and userId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @return the matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -806,8 +806,8 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @return the range of matching d l file entries that the user has permission to view
@@ -826,8 +826,8 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -846,8 +846,8 @@ public class DLFileEntryUtil {
 	/**
 	* Finds all the d l file entries where groupId = &#63; and folderId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @return the matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -864,8 +864,8 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @return the range of matching d l file entries
@@ -884,8 +884,8 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -907,8 +907,8 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
@@ -930,8 +930,8 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
@@ -954,8 +954,8 @@ public class DLFileEntryUtil {
 	* </p>
 	*
 	* @param fileEntryId the primary key of the current d l file entry
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a d l file entry with the primary key could not be found
@@ -978,8 +978,8 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param folderIds the folder ids to search with
+	* @param groupId the group ID to search with
+	* @param folderIds the folder IDs to search with
 	* @return the matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -996,8 +996,8 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param folderIds the folder ids to search with
+	* @param groupId the group ID to search with
+	* @param folderIds the folder IDs to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @return the range of matching d l file entries
@@ -1016,8 +1016,8 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param folderIds the folder ids to search with
+	* @param groupId the group ID to search with
+	* @param folderIds the folder IDs to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -1035,8 +1035,8 @@ public class DLFileEntryUtil {
 	/**
 	* Filters by the user's permissions and finds all the d l file entries where groupId = &#63; and folderId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @return the matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1053,8 +1053,8 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @return the range of matching d l file entries that the user has permission to view
@@ -1073,8 +1073,8 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -1097,8 +1097,8 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param folderIds the folder ids to search with
+	* @param groupId the group ID to search with
+	* @param folderIds the folder IDs to search with
 	* @return the matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1115,8 +1115,8 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param folderIds the folder ids to search with
+	* @param groupId the group ID to search with
+	* @param folderIds the folder IDs to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @return the range of matching d l file entries that the user has permission to view
@@ -1135,8 +1135,8 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param folderIds the folder ids to search with
+	* @param groupId the group ID to search with
+	* @param folderIds the folder IDs to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -1155,9 +1155,9 @@ public class DLFileEntryUtil {
 	/**
 	* Finds all the d l file entries where groupId = &#63; and userId = &#63; and folderId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param folderId the folder ID to search with
 	* @return the matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1174,9 +1174,9 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param folderId the folder ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @return the range of matching d l file entries
@@ -1196,9 +1196,9 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param folderId the folder ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -1221,9 +1221,9 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param folderId the folder ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
@@ -1246,9 +1246,9 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param folderId the folder ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
@@ -1272,9 +1272,9 @@ public class DLFileEntryUtil {
 	* </p>
 	*
 	* @param fileEntryId the primary key of the current d l file entry
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param folderId the folder ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a d l file entry with the primary key could not be found
@@ -1297,9 +1297,9 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
-	* @param folderIds the folder ids to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param folderIds the folder IDs to search with
 	* @return the matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1316,9 +1316,9 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
-	* @param folderIds the folder ids to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param folderIds the folder IDs to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @return the range of matching d l file entries
@@ -1338,9 +1338,9 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
-	* @param folderIds the folder ids to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param folderIds the folder IDs to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -1359,9 +1359,9 @@ public class DLFileEntryUtil {
 	/**
 	* Filters by the user's permissions and finds all the d l file entries where groupId = &#63; and userId = &#63; and folderId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param folderId the folder ID to search with
 	* @return the matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1378,9 +1378,9 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param folderId the folder ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @return the range of matching d l file entries that the user has permission to view
@@ -1400,9 +1400,9 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param folderId the folder ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -1425,9 +1425,9 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
-	* @param folderIds the folder ids to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param folderIds the folder IDs to search with
 	* @return the matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1444,9 +1444,9 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
-	* @param folderIds the folder ids to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param folderIds the folder IDs to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @return the range of matching d l file entries that the user has permission to view
@@ -1466,9 +1466,9 @@ public class DLFileEntryUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
-	* @param folderIds the folder ids to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param folderIds the folder IDs to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -1487,8 +1487,8 @@ public class DLFileEntryUtil {
 	/**
 	* Finds the d l file entry where groupId = &#63; and folderId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileEntryException} if it could not be found.
 	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @param name the name to search with
 	* @return the matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
@@ -1504,8 +1504,8 @@ public class DLFileEntryUtil {
 	/**
 	* Finds the d l file entry where groupId = &#63; and folderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @param name the name to search with
 	* @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -1519,8 +1519,8 @@ public class DLFileEntryUtil {
 	/**
 	* Finds the d l file entry where groupId = &#63; and folderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @param name the name to search with
 	* @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -1536,8 +1536,8 @@ public class DLFileEntryUtil {
 	/**
 	* Finds the d l file entry where groupId = &#63; and folderId = &#63; and title = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileEntryException} if it could not be found.
 	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @param title the title to search with
 	* @return the matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
@@ -1553,8 +1553,8 @@ public class DLFileEntryUtil {
 	/**
 	* Finds the d l file entry where groupId = &#63; and folderId = &#63; and title = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @param title the title to search with
 	* @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -1568,8 +1568,8 @@ public class DLFileEntryUtil {
 	/**
 	* Finds the d l file entry where groupId = &#63; and folderId = &#63; and title = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @param title the title to search with
 	* @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -1646,7 +1646,7 @@ public class DLFileEntryUtil {
 	* Removes the d l file entry where uuid = &#63; and groupId = &#63; from the database.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUUID_G(java.lang.String uuid, long groupId)
@@ -1658,7 +1658,7 @@ public class DLFileEntryUtil {
 	/**
 	* Removes all the d l file entries where groupId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByGroupId(long groupId)
@@ -1669,7 +1669,7 @@ public class DLFileEntryUtil {
 	/**
 	* Removes all the d l file entries where companyId = &#63; from the database.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByCompanyId(long companyId)
@@ -1680,8 +1680,8 @@ public class DLFileEntryUtil {
 	/**
 	* Removes all the d l file entries where groupId = &#63; and userId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_U(long groupId, long userId)
@@ -1692,8 +1692,8 @@ public class DLFileEntryUtil {
 	/**
 	* Removes all the d l file entries where groupId = &#63; and folderId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_F(long groupId, long folderId)
@@ -1704,9 +1704,9 @@ public class DLFileEntryUtil {
 	/**
 	* Removes all the d l file entries where groupId = &#63; and userId = &#63; and folderId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param folderId the folder ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_U_F(long groupId, long userId, long folderId)
@@ -1717,8 +1717,8 @@ public class DLFileEntryUtil {
 	/**
 	* Removes the d l file entry where groupId = &#63; and folderId = &#63; and name = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @param name the name to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1732,8 +1732,8 @@ public class DLFileEntryUtil {
 	/**
 	* Removes the d l file entry where groupId = &#63; and folderId = &#63; and title = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @param title the title to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1770,7 +1770,7 @@ public class DLFileEntryUtil {
 	* Counts all the d l file entries where uuid = &#63; and groupId = &#63;.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1782,7 +1782,7 @@ public class DLFileEntryUtil {
 	/**
 	* Counts all the d l file entries where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1794,7 +1794,7 @@ public class DLFileEntryUtil {
 	/**
 	* Filters by the user's permissions and counts all the d l file entries where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1806,7 +1806,7 @@ public class DLFileEntryUtil {
 	/**
 	* Counts all the d l file entries where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the number of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1818,8 +1818,8 @@ public class DLFileEntryUtil {
 	/**
 	* Counts all the d l file entries where groupId = &#63; and userId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @return the number of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1831,8 +1831,8 @@ public class DLFileEntryUtil {
 	/**
 	* Filters by the user's permissions and counts all the d l file entries where groupId = &#63; and userId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @return the number of matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1844,8 +1844,8 @@ public class DLFileEntryUtil {
 	/**
 	* Counts all the d l file entries where groupId = &#63; and folderId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @return the number of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1857,8 +1857,8 @@ public class DLFileEntryUtil {
 	/**
 	* Counts all the d l file entries where groupId = &#63; and folderId = any &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param folderIds the folder ids to search with
+	* @param groupId the group ID to search with
+	* @param folderIds the folder IDs to search with
 	* @return the number of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1870,8 +1870,8 @@ public class DLFileEntryUtil {
 	/**
 	* Filters by the user's permissions and counts all the d l file entries where groupId = &#63; and folderId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @return the number of matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1883,8 +1883,8 @@ public class DLFileEntryUtil {
 	/**
 	* Filters by the user's permissions and counts all the d l file entries where groupId = &#63; and folderId = any &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param folderIds the folder ids to search with
+	* @param groupId the group ID to search with
+	* @param folderIds the folder IDs to search with
 	* @return the number of matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1896,9 +1896,9 @@ public class DLFileEntryUtil {
 	/**
 	* Counts all the d l file entries where groupId = &#63; and userId = &#63; and folderId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param folderId the folder ID to search with
 	* @return the number of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1910,9 +1910,9 @@ public class DLFileEntryUtil {
 	/**
 	* Counts all the d l file entries where groupId = &#63; and userId = &#63; and folderId = any &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
-	* @param folderIds the folder ids to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param folderIds the folder IDs to search with
 	* @return the number of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1924,9 +1924,9 @@ public class DLFileEntryUtil {
 	/**
 	* Filters by the user's permissions and counts all the d l file entries where groupId = &#63; and userId = &#63; and folderId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param folderId the folder ID to search with
 	* @return the number of matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1939,9 +1939,9 @@ public class DLFileEntryUtil {
 	/**
 	* Filters by the user's permissions and counts all the d l file entries where groupId = &#63; and userId = &#63; and folderId = any &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
-	* @param folderIds the folder ids to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param folderIds the folder IDs to search with
 	* @return the number of matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1954,8 +1954,8 @@ public class DLFileEntryUtil {
 	/**
 	* Counts all the d l file entries where groupId = &#63; and folderId = &#63; and name = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @param name the name to search with
 	* @return the number of matching d l file entries
 	* @throws SystemException if a system exception occurred
@@ -1969,8 +1969,8 @@ public class DLFileEntryUtil {
 	/**
 	* Counts all the d l file entries where groupId = &#63; and folderId = &#63; and title = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
 	* @param title the title to search with
 	* @return the number of matching d l file entries
 	* @throws SystemException if a system exception occurred

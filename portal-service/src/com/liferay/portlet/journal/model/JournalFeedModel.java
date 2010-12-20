@@ -75,58 +75,58 @@ public interface JournalFeedModel extends BaseModel<JournalFeed> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the id of this journal feed.
+	 * Gets the ID of this journal feed.
 	 *
-	 * @return the id of this journal feed
+	 * @return the ID of this journal feed
 	 */
 	public long getId();
 
 	/**
-	 * Sets the id of this journal feed.
+	 * Sets the ID of this journal feed.
 	 *
-	 * @param id the id of this journal feed
+	 * @param id the ID of this journal feed
 	 */
 	public void setId(long id);
 
 	/**
-	 * Gets the group id of this journal feed.
+	 * Gets the group ID of this journal feed.
 	 *
-	 * @return the group id of this journal feed
+	 * @return the group ID of this journal feed
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this journal feed.
+	 * Sets the group ID of this journal feed.
 	 *
-	 * @param groupId the group id of this journal feed
+	 * @param groupId the group ID of this journal feed
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this journal feed.
+	 * Gets the company ID of this journal feed.
 	 *
-	 * @return the company id of this journal feed
+	 * @return the company ID of this journal feed
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this journal feed.
+	 * Sets the company ID of this journal feed.
 	 *
-	 * @param companyId the company id of this journal feed
+	 * @param companyId the company ID of this journal feed
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this journal feed.
+	 * Gets the user ID of this journal feed.
 	 *
-	 * @return the user id of this journal feed
+	 * @return the user ID of this journal feed
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this journal feed.
+	 * Sets the user ID of this journal feed.
 	 *
-	 * @param userId the user id of this journal feed
+	 * @param userId the user ID of this journal feed
 	 */
 	public void setUserId(long userId);
 
@@ -189,16 +189,16 @@ public interface JournalFeedModel extends BaseModel<JournalFeed> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the feed id of this journal feed.
+	 * Gets the feed ID of this journal feed.
 	 *
-	 * @return the feed id of this journal feed
+	 * @return the feed ID of this journal feed
 	 */
 	public String getFeedId();
 
 	/**
-	 * Sets the feed id of this journal feed.
+	 * Sets the feed ID of this journal feed.
 	 *
-	 * @param feedId the feed id of this journal feed
+	 * @param feedId the feed ID of this journal feed
 	 */
 	public void setFeedId(String feedId);
 
@@ -248,45 +248,45 @@ public interface JournalFeedModel extends BaseModel<JournalFeed> {
 	public void setType(String type);
 
 	/**
-	 * Gets the structure id of this journal feed.
+	 * Gets the structure ID of this journal feed.
 	 *
-	 * @return the structure id of this journal feed
+	 * @return the structure ID of this journal feed
 	 */
 	public String getStructureId();
 
 	/**
-	 * Sets the structure id of this journal feed.
+	 * Sets the structure ID of this journal feed.
 	 *
-	 * @param structureId the structure id of this journal feed
+	 * @param structureId the structure ID of this journal feed
 	 */
 	public void setStructureId(String structureId);
 
 	/**
-	 * Gets the template id of this journal feed.
+	 * Gets the template ID of this journal feed.
 	 *
-	 * @return the template id of this journal feed
+	 * @return the template ID of this journal feed
 	 */
 	public String getTemplateId();
 
 	/**
-	 * Sets the template id of this journal feed.
+	 * Sets the template ID of this journal feed.
 	 *
-	 * @param templateId the template id of this journal feed
+	 * @param templateId the template ID of this journal feed
 	 */
 	public void setTemplateId(String templateId);
 
 	/**
-	 * Gets the renderer template id of this journal feed.
+	 * Gets the renderer template ID of this journal feed.
 	 *
-	 * @return the renderer template id of this journal feed
+	 * @return the renderer template ID of this journal feed
 	 */
 	@AutoEscape
 	public String getRendererTemplateId();
 
 	/**
-	 * Sets the renderer template id of this journal feed.
+	 * Sets the renderer template ID of this journal feed.
 	 *
-	 * @param rendererTemplateId the renderer template id of this journal feed
+	 * @param rendererTemplateId the renderer template ID of this journal feed
 	 */
 	public void setRendererTemplateId(String rendererTemplateId);
 
@@ -350,17 +350,17 @@ public interface JournalFeedModel extends BaseModel<JournalFeed> {
 	public void setTargetLayoutFriendlyUrl(String targetLayoutFriendlyUrl);
 
 	/**
-	 * Gets the target portlet id of this journal feed.
+	 * Gets the target portlet ID of this journal feed.
 	 *
-	 * @return the target portlet id of this journal feed
+	 * @return the target portlet ID of this journal feed
 	 */
 	@AutoEscape
 	public String getTargetPortletId();
 
 	/**
-	 * Sets the target portlet id of this journal feed.
+	 * Sets the target portlet ID of this journal feed.
 	 *
-	 * @param targetPortletId the target portlet id of this journal feed
+	 * @param targetPortletId the target portlet ID of this journal feed
 	 */
 	public void setTargetPortletId(String targetPortletId);
 

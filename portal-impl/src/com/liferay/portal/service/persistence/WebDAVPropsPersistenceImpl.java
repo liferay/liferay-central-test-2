@@ -410,7 +410,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	/**
 	 * Finds the web d a v props where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portal.NoSuchWebDAVPropsException} if it could not be found.
 	 *
-	 * @param classNameId the class name id to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @return the matching web d a v props
 	 * @throws com.liferay.portal.NoSuchWebDAVPropsException if a matching web d a v props could not be found
@@ -446,7 +446,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	/**
 	 * Finds the web d a v props where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param classNameId the class name id to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @return the matching web d a v props, or <code>null</code> if a matching web d a v props could not be found
 	 * @throws SystemException if a system exception occurred
@@ -459,7 +459,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	/**
 	 * Finds the web d a v props where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param classNameId the class name id to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @return the matching web d a v props, or <code>null</code> if a matching web d a v props could not be found
 	 * @throws SystemException if a system exception occurred
@@ -657,7 +657,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	/**
 	 * Removes the web d a v props where classNameId = &#63; and classPK = &#63; from the database.
 	 *
-	 * @param classNameId the class name id to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -682,7 +682,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	/**
 	 * Counts all the web d a v propses where classNameId = &#63; and classPK = &#63;.
 	 *
-	 * @param classNameId the class name id to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @return the number of matching web d a v propses
 	 * @throws SystemException if a system exception occurred

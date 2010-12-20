@@ -85,30 +85,30 @@ public interface LayoutModel extends BaseModel<Layout> {
 	public void setPlid(long plid);
 
 	/**
-	 * Gets the group id of this layout.
+	 * Gets the group ID of this layout.
 	 *
-	 * @return the group id of this layout
+	 * @return the group ID of this layout
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this layout.
+	 * Sets the group ID of this layout.
 	 *
-	 * @param groupId the group id of this layout
+	 * @param groupId the group ID of this layout
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this layout.
+	 * Gets the company ID of this layout.
 	 *
-	 * @return the company id of this layout
+	 * @return the company ID of this layout
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this layout.
+	 * Sets the company ID of this layout.
 	 *
-	 * @param companyId the company id of this layout
+	 * @param companyId the company ID of this layout
 	 */
 	public void setCompanyId(long companyId);
 
@@ -134,30 +134,30 @@ public interface LayoutModel extends BaseModel<Layout> {
 	public void setPrivateLayout(boolean privateLayout);
 
 	/**
-	 * Gets the layout id of this layout.
+	 * Gets the layout ID of this layout.
 	 *
-	 * @return the layout id of this layout
+	 * @return the layout ID of this layout
 	 */
 	public long getLayoutId();
 
 	/**
-	 * Sets the layout id of this layout.
+	 * Sets the layout ID of this layout.
 	 *
-	 * @param layoutId the layout id of this layout
+	 * @param layoutId the layout ID of this layout
 	 */
 	public void setLayoutId(long layoutId);
 
 	/**
-	 * Gets the parent layout id of this layout.
+	 * Gets the parent layout ID of this layout.
 	 *
-	 * @return the parent layout id of this layout
+	 * @return the parent layout ID of this layout
 	 */
 	public long getParentLayoutId();
 
 	/**
-	 * Sets the parent layout id of this layout.
+	 * Sets the parent layout ID of this layout.
 	 *
-	 * @param parentLayoutId the parent layout id of this layout
+	 * @param parentLayoutId the parent layout ID of this layout
 	 */
 	public void setParentLayoutId(long parentLayoutId);
 
@@ -294,76 +294,76 @@ public interface LayoutModel extends BaseModel<Layout> {
 	public void setIconImage(boolean iconImage);
 
 	/**
-	 * Gets the icon image id of this layout.
+	 * Gets the icon image ID of this layout.
 	 *
-	 * @return the icon image id of this layout
+	 * @return the icon image ID of this layout
 	 */
 	public long getIconImageId();
 
 	/**
-	 * Sets the icon image id of this layout.
+	 * Sets the icon image ID of this layout.
 	 *
-	 * @param iconImageId the icon image id of this layout
+	 * @param iconImageId the icon image ID of this layout
 	 */
 	public void setIconImageId(long iconImageId);
 
 	/**
-	 * Gets the theme id of this layout.
+	 * Gets the theme ID of this layout.
 	 *
-	 * @return the theme id of this layout
+	 * @return the theme ID of this layout
 	 */
 	@AutoEscape
 	public String getThemeId();
 
 	/**
-	 * Sets the theme id of this layout.
+	 * Sets the theme ID of this layout.
 	 *
-	 * @param themeId the theme id of this layout
+	 * @param themeId the theme ID of this layout
 	 */
 	public void setThemeId(String themeId);
 
 	/**
-	 * Gets the color scheme id of this layout.
+	 * Gets the color scheme ID of this layout.
 	 *
-	 * @return the color scheme id of this layout
+	 * @return the color scheme ID of this layout
 	 */
 	@AutoEscape
 	public String getColorSchemeId();
 
 	/**
-	 * Sets the color scheme id of this layout.
+	 * Sets the color scheme ID of this layout.
 	 *
-	 * @param colorSchemeId the color scheme id of this layout
+	 * @param colorSchemeId the color scheme ID of this layout
 	 */
 	public void setColorSchemeId(String colorSchemeId);
 
 	/**
-	 * Gets the wap theme id of this layout.
+	 * Gets the wap theme ID of this layout.
 	 *
-	 * @return the wap theme id of this layout
+	 * @return the wap theme ID of this layout
 	 */
 	@AutoEscape
 	public String getWapThemeId();
 
 	/**
-	 * Sets the wap theme id of this layout.
+	 * Sets the wap theme ID of this layout.
 	 *
-	 * @param wapThemeId the wap theme id of this layout
+	 * @param wapThemeId the wap theme ID of this layout
 	 */
 	public void setWapThemeId(String wapThemeId);
 
 	/**
-	 * Gets the wap color scheme id of this layout.
+	 * Gets the wap color scheme ID of this layout.
 	 *
-	 * @return the wap color scheme id of this layout
+	 * @return the wap color scheme ID of this layout
 	 */
 	@AutoEscape
 	public String getWapColorSchemeId();
 
 	/**
-	 * Sets the wap color scheme id of this layout.
+	 * Sets the wap color scheme ID of this layout.
 	 *
-	 * @param wapColorSchemeId the wap color scheme id of this layout
+	 * @param wapColorSchemeId the wap color scheme ID of this layout
 	 */
 	public void setWapColorSchemeId(String wapColorSchemeId);
 
@@ -397,16 +397,16 @@ public interface LayoutModel extends BaseModel<Layout> {
 	public void setPriority(int priority);
 
 	/**
-	 * Gets the layout prototype id of this layout.
+	 * Gets the layout prototype ID of this layout.
 	 *
-	 * @return the layout prototype id of this layout
+	 * @return the layout prototype ID of this layout
 	 */
 	public long getLayoutPrototypeId();
 
 	/**
-	 * Sets the layout prototype id of this layout.
+	 * Sets the layout prototype ID of this layout.
 	 *
-	 * @param layoutPrototypeId the layout prototype id of this layout
+	 * @param layoutPrototypeId the layout prototype ID of this layout
 	 */
 	public void setLayoutPrototypeId(long layoutPrototypeId);
 

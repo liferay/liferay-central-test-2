@@ -56,18 +56,18 @@ public class ClassNameWrapper implements ClassName {
 	}
 
 	/**
-	* Gets the class name id of this class name.
+	* Gets the class name ID of this class name.
 	*
-	* @return the class name id of this class name
+	* @return the class name ID of this class name
 	*/
 	public long getClassNameId() {
 		return _className.getClassNameId();
 	}
 
 	/**
-	* Sets the class name id of this class name.
+	* Sets the class name ID of this class name.
 	*
-	* @param classNameId the class name id of this class name
+	* @param classNameId the class name ID of this class name
 	*/
 	public void setClassNameId(long classNameId) {
 		_className.setClassNameId(classNameId);

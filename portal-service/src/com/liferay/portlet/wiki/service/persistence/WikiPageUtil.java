@@ -316,7 +316,7 @@ public class WikiPageUtil {
 	* Finds the wiki page where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.wiki.NoSuchPageException} if it could not be found.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -332,7 +332,7 @@ public class WikiPageUtil {
 	* Finds the wiki page where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -346,7 +346,7 @@ public class WikiPageUtil {
 	* Finds the wiki page where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -359,7 +359,7 @@ public class WikiPageUtil {
 	/**
 	* Finds all the wiki pages where nodeId = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @return the matching wiki pages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -375,7 +375,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
 	* @return the range of matching wiki pages
@@ -394,7 +394,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -416,7 +416,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
@@ -437,7 +437,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
@@ -459,7 +459,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param pageId the primary key of the current wiki page
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
@@ -597,7 +597,7 @@ public class WikiPageUtil {
 	* Finds all the wiki pages where resourcePrimKey = &#63; and nodeId = &#63;.
 	*
 	* @param resourcePrimKey the resource prim key to search with
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @return the matching wiki pages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -615,7 +615,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param resourcePrimKey the resource prim key to search with
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
 	* @return the range of matching wiki pages
@@ -635,7 +635,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param resourcePrimKey the resource prim key to search with
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -659,7 +659,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param resourcePrimKey the resource prim key to search with
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
@@ -682,7 +682,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param resourcePrimKey the resource prim key to search with
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
@@ -706,7 +706,7 @@ public class WikiPageUtil {
 	*
 	* @param pageId the primary key of the current wiki page
 	* @param resourcePrimKey the resource prim key to search with
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
@@ -725,7 +725,7 @@ public class WikiPageUtil {
 	/**
 	* Finds all the wiki pages where nodeId = &#63; and title = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @return the matching wiki pages
 	* @throws SystemException if a system exception occurred
@@ -743,7 +743,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
@@ -763,7 +763,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
@@ -786,7 +786,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching wiki page
@@ -808,7 +808,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching wiki page
@@ -831,7 +831,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param pageId the primary key of the current wiki page
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next wiki page
@@ -851,7 +851,7 @@ public class WikiPageUtil {
 	/**
 	* Finds all the wiki pages where nodeId = &#63; and head = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @return the matching wiki pages
 	* @throws SystemException if a system exception occurred
@@ -869,7 +869,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
@@ -889,7 +889,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
@@ -912,7 +912,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching wiki page
@@ -934,7 +934,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching wiki page
@@ -957,7 +957,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param pageId the primary key of the current wiki page
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next wiki page
@@ -977,7 +977,7 @@ public class WikiPageUtil {
 	/**
 	* Finds all the wiki pages where nodeId = &#63; and parentTitle = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param parentTitle the parent title to search with
 	* @return the matching wiki pages
 	* @throws SystemException if a system exception occurred
@@ -995,7 +995,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param parentTitle the parent title to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
@@ -1015,7 +1015,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param parentTitle the parent title to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
@@ -1038,7 +1038,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param parentTitle the parent title to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching wiki page
@@ -1061,7 +1061,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param parentTitle the parent title to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching wiki page
@@ -1085,7 +1085,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param pageId the primary key of the current wiki page
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param parentTitle the parent title to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next wiki page
@@ -1105,7 +1105,7 @@ public class WikiPageUtil {
 	/**
 	* Finds all the wiki pages where nodeId = &#63; and redirectTitle = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param redirectTitle the redirect title to search with
 	* @return the matching wiki pages
 	* @throws SystemException if a system exception occurred
@@ -1123,7 +1123,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param redirectTitle the redirect title to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
@@ -1143,7 +1143,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param redirectTitle the redirect title to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
@@ -1167,7 +1167,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param redirectTitle the redirect title to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching wiki page
@@ -1190,7 +1190,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param redirectTitle the redirect title to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching wiki page
@@ -1214,7 +1214,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param pageId the primary key of the current wiki page
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param redirectTitle the redirect title to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next wiki page
@@ -1234,7 +1234,7 @@ public class WikiPageUtil {
 	/**
 	* Finds all the wiki pages where nodeId = &#63; and status = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @return the matching wiki pages
 	* @throws SystemException if a system exception occurred
@@ -1252,7 +1252,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
@@ -1272,7 +1272,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
@@ -1295,7 +1295,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching wiki page
@@ -1318,7 +1318,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching wiki page
@@ -1341,7 +1341,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param pageId the primary key of the current wiki page
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next wiki page
@@ -1362,7 +1362,7 @@ public class WikiPageUtil {
 	* Finds the wiki page where resourcePrimKey = &#63; and nodeId = &#63; and version = &#63; or throws a {@link com.liferay.portlet.wiki.NoSuchPageException} if it could not be found.
 	*
 	* @param resourcePrimKey the resource prim key to search with
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param version the version to search with
 	* @return the matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
@@ -1379,7 +1379,7 @@ public class WikiPageUtil {
 	* Finds the wiki page where resourcePrimKey = &#63; and nodeId = &#63; and version = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
 	* @param resourcePrimKey the resource prim key to search with
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param version the version to search with
 	* @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -1394,7 +1394,7 @@ public class WikiPageUtil {
 	* Finds the wiki page where resourcePrimKey = &#63; and nodeId = &#63; and version = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param resourcePrimKey the resource prim key to search with
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param version the version to search with
 	* @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -1412,7 +1412,7 @@ public class WikiPageUtil {
 	* Finds all the wiki pages where resourcePrimKey = &#63; and nodeId = &#63; and status = &#63;.
 	*
 	* @param resourcePrimKey the resource prim key to search with
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @return the matching wiki pages
 	* @throws SystemException if a system exception occurred
@@ -1431,7 +1431,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param resourcePrimKey the resource prim key to search with
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
@@ -1453,7 +1453,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param resourcePrimKey the resource prim key to search with
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
@@ -1478,7 +1478,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param resourcePrimKey the resource prim key to search with
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching wiki page
@@ -1503,7 +1503,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param resourcePrimKey the resource prim key to search with
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching wiki page
@@ -1529,7 +1529,7 @@ public class WikiPageUtil {
 	*
 	* @param pageId the primary key of the current wiki page
 	* @param resourcePrimKey the resource prim key to search with
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next wiki page
@@ -1549,8 +1549,8 @@ public class WikiPageUtil {
 	/**
 	* Finds all the wiki pages where userId = &#63; and nodeId = &#63; and status = &#63;.
 	*
-	* @param userId the user id to search with
-	* @param nodeId the node id to search with
+	* @param userId the user ID to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @return the matching wiki pages
 	* @throws SystemException if a system exception occurred
@@ -1568,8 +1568,8 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
-	* @param nodeId the node id to search with
+	* @param userId the user ID to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
@@ -1589,8 +1589,8 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
-	* @param nodeId the node id to search with
+	* @param userId the user ID to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
@@ -1614,8 +1614,8 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
-	* @param nodeId the node id to search with
+	* @param userId the user ID to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching wiki page
@@ -1638,8 +1638,8 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
-	* @param nodeId the node id to search with
+	* @param userId the user ID to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching wiki page
@@ -1663,8 +1663,8 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param pageId the primary key of the current wiki page
-	* @param userId the user id to search with
-	* @param nodeId the node id to search with
+	* @param userId the user ID to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next wiki page
@@ -1684,7 +1684,7 @@ public class WikiPageUtil {
 	/**
 	* Finds the wiki page where nodeId = &#63; and title = &#63; and version = &#63; or throws a {@link com.liferay.portlet.wiki.NoSuchPageException} if it could not be found.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param version the version to search with
 	* @return the matching wiki page
@@ -1701,7 +1701,7 @@ public class WikiPageUtil {
 	/**
 	* Finds the wiki page where nodeId = &#63; and title = &#63; and version = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param version the version to search with
 	* @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
@@ -1716,7 +1716,7 @@ public class WikiPageUtil {
 	/**
 	* Finds the wiki page where nodeId = &#63; and title = &#63; and version = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param version the version to search with
 	* @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
@@ -1733,7 +1733,7 @@ public class WikiPageUtil {
 	/**
 	* Finds all the wiki pages where nodeId = &#63; and title = &#63; and head = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param head the head to search with
 	* @return the matching wiki pages
@@ -1752,7 +1752,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param head the head to search with
 	* @param start the lower bound of the range of wiki pages to return
@@ -1773,7 +1773,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param head the head to search with
 	* @param start the lower bound of the range of wiki pages to return
@@ -1798,7 +1798,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param head the head to search with
 	* @param orderByComparator the comparator to order the set by
@@ -1822,7 +1822,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param head the head to search with
 	* @param orderByComparator the comparator to order the set by
@@ -1847,7 +1847,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param pageId the primary key of the current wiki page
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param head the head to search with
 	* @param orderByComparator the comparator to order the set by
@@ -1868,7 +1868,7 @@ public class WikiPageUtil {
 	/**
 	* Finds all the wiki pages where nodeId = &#63; and title = &#63; and status = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param status the status to search with
 	* @return the matching wiki pages
@@ -1887,7 +1887,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of wiki pages to return
@@ -1908,7 +1908,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of wiki pages to return
@@ -1933,7 +1933,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
@@ -1957,7 +1957,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
@@ -1982,7 +1982,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param pageId the primary key of the current wiki page
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
@@ -2003,7 +2003,7 @@ public class WikiPageUtil {
 	/**
 	* Finds all the wiki pages where nodeId = &#63; and head = &#63; and parentTitle = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
 	* @return the matching wiki pages
@@ -2022,7 +2022,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
 	* @param start the lower bound of the range of wiki pages to return
@@ -2044,7 +2044,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
 	* @param start the lower bound of the range of wiki pages to return
@@ -2070,7 +2070,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
 	* @param orderByComparator the comparator to order the set by
@@ -2095,7 +2095,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
 	* @param orderByComparator the comparator to order the set by
@@ -2121,7 +2121,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param pageId the primary key of the current wiki page
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
 	* @param orderByComparator the comparator to order the set by
@@ -2142,7 +2142,7 @@ public class WikiPageUtil {
 	/**
 	* Finds all the wiki pages where nodeId = &#63; and head = &#63; and status = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param status the status to search with
 	* @return the matching wiki pages
@@ -2161,7 +2161,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of wiki pages to return
@@ -2182,7 +2182,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of wiki pages to return
@@ -2207,7 +2207,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
@@ -2231,7 +2231,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
@@ -2256,7 +2256,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param pageId the primary key of the current wiki page
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
@@ -2277,7 +2277,7 @@ public class WikiPageUtil {
 	/**
 	* Finds all the wiki pages where nodeId = &#63; and head = &#63; and parentTitle = &#63; and status = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
 	* @param status the status to search with
@@ -2297,7 +2297,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
 	* @param status the status to search with
@@ -2321,7 +2321,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
 	* @param status the status to search with
@@ -2348,7 +2348,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
 	* @param status the status to search with
@@ -2374,7 +2374,7 @@ public class WikiPageUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
 	* @param status the status to search with
@@ -2401,7 +2401,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param pageId the primary key of the current wiki page
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
 	* @param status the status to search with
@@ -2485,7 +2485,7 @@ public class WikiPageUtil {
 	* Removes the wiki page where uuid = &#63; and groupId = &#63; from the database.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUUID_G(java.lang.String uuid, long groupId)
@@ -2497,7 +2497,7 @@ public class WikiPageUtil {
 	/**
 	* Removes all the wiki pages where nodeId = &#63; from the database.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByNodeId(long nodeId)
@@ -2520,7 +2520,7 @@ public class WikiPageUtil {
 	* Removes all the wiki pages where resourcePrimKey = &#63; and nodeId = &#63; from the database.
 	*
 	* @param resourcePrimKey the resource prim key to search with
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByR_N(long resourcePrimKey, long nodeId)
@@ -2531,7 +2531,7 @@ public class WikiPageUtil {
 	/**
 	* Removes all the wiki pages where nodeId = &#63; and title = &#63; from the database.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2543,7 +2543,7 @@ public class WikiPageUtil {
 	/**
 	* Removes all the wiki pages where nodeId = &#63; and head = &#63; from the database.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2555,7 +2555,7 @@ public class WikiPageUtil {
 	/**
 	* Removes all the wiki pages where nodeId = &#63; and parentTitle = &#63; from the database.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param parentTitle the parent title to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2567,7 +2567,7 @@ public class WikiPageUtil {
 	/**
 	* Removes all the wiki pages where nodeId = &#63; and redirectTitle = &#63; from the database.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param redirectTitle the redirect title to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2579,7 +2579,7 @@ public class WikiPageUtil {
 	/**
 	* Removes all the wiki pages where nodeId = &#63; and status = &#63; from the database.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2592,7 +2592,7 @@ public class WikiPageUtil {
 	* Removes the wiki page where resourcePrimKey = &#63; and nodeId = &#63; and version = &#63; from the database.
 	*
 	* @param resourcePrimKey the resource prim key to search with
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param version the version to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2607,7 +2607,7 @@ public class WikiPageUtil {
 	* Removes all the wiki pages where resourcePrimKey = &#63; and nodeId = &#63; and status = &#63; from the database.
 	*
 	* @param resourcePrimKey the resource prim key to search with
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2619,8 +2619,8 @@ public class WikiPageUtil {
 	/**
 	* Removes all the wiki pages where userId = &#63; and nodeId = &#63; and status = &#63; from the database.
 	*
-	* @param userId the user id to search with
-	* @param nodeId the node id to search with
+	* @param userId the user ID to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2632,7 +2632,7 @@ public class WikiPageUtil {
 	/**
 	* Removes the wiki page where nodeId = &#63; and title = &#63; and version = &#63; from the database.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param version the version to search with
 	* @throws SystemException if a system exception occurred
@@ -2647,7 +2647,7 @@ public class WikiPageUtil {
 	/**
 	* Removes all the wiki pages where nodeId = &#63; and title = &#63; and head = &#63; from the database.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param head the head to search with
 	* @throws SystemException if a system exception occurred
@@ -2661,7 +2661,7 @@ public class WikiPageUtil {
 	/**
 	* Removes all the wiki pages where nodeId = &#63; and title = &#63; and status = &#63; from the database.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
@@ -2674,7 +2674,7 @@ public class WikiPageUtil {
 	/**
 	* Removes all the wiki pages where nodeId = &#63; and head = &#63; and parentTitle = &#63; from the database.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
 	* @throws SystemException if a system exception occurred
@@ -2688,7 +2688,7 @@ public class WikiPageUtil {
 	/**
 	* Removes all the wiki pages where nodeId = &#63; and head = &#63; and status = &#63; from the database.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
@@ -2701,7 +2701,7 @@ public class WikiPageUtil {
 	/**
 	* Removes all the wiki pages where nodeId = &#63; and head = &#63; and parentTitle = &#63; and status = &#63; from the database.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
 	* @param status the status to search with
@@ -2739,7 +2739,7 @@ public class WikiPageUtil {
 	* Counts all the wiki pages where uuid = &#63; and groupId = &#63;.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching wiki pages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2751,7 +2751,7 @@ public class WikiPageUtil {
 	/**
 	* Counts all the wiki pages where nodeId = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @return the number of matching wiki pages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2776,7 +2776,7 @@ public class WikiPageUtil {
 	* Counts all the wiki pages where resourcePrimKey = &#63; and nodeId = &#63;.
 	*
 	* @param resourcePrimKey the resource prim key to search with
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @return the number of matching wiki pages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2788,7 +2788,7 @@ public class WikiPageUtil {
 	/**
 	* Counts all the wiki pages where nodeId = &#63; and title = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @return the number of matching wiki pages
 	* @throws SystemException if a system exception occurred
@@ -2801,7 +2801,7 @@ public class WikiPageUtil {
 	/**
 	* Counts all the wiki pages where nodeId = &#63; and head = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @return the number of matching wiki pages
 	* @throws SystemException if a system exception occurred
@@ -2814,7 +2814,7 @@ public class WikiPageUtil {
 	/**
 	* Counts all the wiki pages where nodeId = &#63; and parentTitle = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param parentTitle the parent title to search with
 	* @return the number of matching wiki pages
 	* @throws SystemException if a system exception occurred
@@ -2827,7 +2827,7 @@ public class WikiPageUtil {
 	/**
 	* Counts all the wiki pages where nodeId = &#63; and redirectTitle = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param redirectTitle the redirect title to search with
 	* @return the number of matching wiki pages
 	* @throws SystemException if a system exception occurred
@@ -2840,7 +2840,7 @@ public class WikiPageUtil {
 	/**
 	* Counts all the wiki pages where nodeId = &#63; and status = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @return the number of matching wiki pages
 	* @throws SystemException if a system exception occurred
@@ -2854,7 +2854,7 @@ public class WikiPageUtil {
 	* Counts all the wiki pages where resourcePrimKey = &#63; and nodeId = &#63; and version = &#63;.
 	*
 	* @param resourcePrimKey the resource prim key to search with
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param version the version to search with
 	* @return the number of matching wiki pages
 	* @throws SystemException if a system exception occurred
@@ -2869,7 +2869,7 @@ public class WikiPageUtil {
 	* Counts all the wiki pages where resourcePrimKey = &#63; and nodeId = &#63; and status = &#63;.
 	*
 	* @param resourcePrimKey the resource prim key to search with
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @return the number of matching wiki pages
 	* @throws SystemException if a system exception occurred
@@ -2882,8 +2882,8 @@ public class WikiPageUtil {
 	/**
 	* Counts all the wiki pages where userId = &#63; and nodeId = &#63; and status = &#63;.
 	*
-	* @param userId the user id to search with
-	* @param nodeId the node id to search with
+	* @param userId the user ID to search with
+	* @param nodeId the node ID to search with
 	* @param status the status to search with
 	* @return the number of matching wiki pages
 	* @throws SystemException if a system exception occurred
@@ -2896,7 +2896,7 @@ public class WikiPageUtil {
 	/**
 	* Counts all the wiki pages where nodeId = &#63; and title = &#63; and version = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param version the version to search with
 	* @return the number of matching wiki pages
@@ -2911,7 +2911,7 @@ public class WikiPageUtil {
 	/**
 	* Counts all the wiki pages where nodeId = &#63; and title = &#63; and head = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param head the head to search with
 	* @return the number of matching wiki pages
@@ -2926,7 +2926,7 @@ public class WikiPageUtil {
 	/**
 	* Counts all the wiki pages where nodeId = &#63; and title = &#63; and status = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param status the status to search with
 	* @return the number of matching wiki pages
@@ -2940,7 +2940,7 @@ public class WikiPageUtil {
 	/**
 	* Counts all the wiki pages where nodeId = &#63; and head = &#63; and parentTitle = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
 	* @return the number of matching wiki pages
@@ -2955,7 +2955,7 @@ public class WikiPageUtil {
 	/**
 	* Counts all the wiki pages where nodeId = &#63; and head = &#63; and status = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param status the status to search with
 	* @return the number of matching wiki pages
@@ -2969,7 +2969,7 @@ public class WikiPageUtil {
 	/**
 	* Counts all the wiki pages where nodeId = &#63; and head = &#63; and parentTitle = &#63; and status = &#63;.
 	*
-	* @param nodeId the node id to search with
+	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
 	* @param status the status to search with

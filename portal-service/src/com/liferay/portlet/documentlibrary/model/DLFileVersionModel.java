@@ -60,58 +60,58 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the file version id of this d l file version.
+	 * Gets the file version ID of this d l file version.
 	 *
-	 * @return the file version id of this d l file version
+	 * @return the file version ID of this d l file version
 	 */
 	public long getFileVersionId();
 
 	/**
-	 * Sets the file version id of this d l file version.
+	 * Sets the file version ID of this d l file version.
 	 *
-	 * @param fileVersionId the file version id of this d l file version
+	 * @param fileVersionId the file version ID of this d l file version
 	 */
 	public void setFileVersionId(long fileVersionId);
 
 	/**
-	 * Gets the group id of this d l file version.
+	 * Gets the group ID of this d l file version.
 	 *
-	 * @return the group id of this d l file version
+	 * @return the group ID of this d l file version
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this d l file version.
+	 * Sets the group ID of this d l file version.
 	 *
-	 * @param groupId the group id of this d l file version
+	 * @param groupId the group ID of this d l file version
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this d l file version.
+	 * Gets the company ID of this d l file version.
 	 *
-	 * @return the company id of this d l file version
+	 * @return the company ID of this d l file version
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this d l file version.
+	 * Sets the company ID of this d l file version.
 	 *
-	 * @param companyId the company id of this d l file version
+	 * @param companyId the company ID of this d l file version
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this d l file version.
+	 * Gets the user ID of this d l file version.
 	 *
-	 * @return the user id of this d l file version
+	 * @return the user ID of this d l file version
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this d l file version.
+	 * Sets the user ID of this d l file version.
 	 *
-	 * @param userId the user id of this d l file version
+	 * @param userId the user ID of this d l file version
 	 */
 	public void setUserId(long userId);
 
@@ -160,16 +160,16 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the file entry id of this d l file version.
+	 * Gets the file entry ID of this d l file version.
 	 *
-	 * @return the file entry id of this d l file version
+	 * @return the file entry ID of this d l file version
 	 */
 	public long getFileEntryId();
 
 	/**
-	 * Sets the file entry id of this d l file version.
+	 * Sets the file entry ID of this d l file version.
 	 *
-	 * @param fileEntryId the file entry id of this d l file version
+	 * @param fileEntryId the file entry ID of this d l file version
 	 */
 	public void setFileEntryId(long fileEntryId);
 
@@ -292,16 +292,16 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 	public void setStatus(int status);
 
 	/**
-	 * Gets the status by user id of this d l file version.
+	 * Gets the status by user ID of this d l file version.
 	 *
-	 * @return the status by user id of this d l file version
+	 * @return the status by user ID of this d l file version
 	 */
 	public long getStatusByUserId();
 
 	/**
-	 * Sets the status by user id of this d l file version.
+	 * Sets the status by user ID of this d l file version.
 	 *
-	 * @param statusByUserId the status by user id of this d l file version
+	 * @param statusByUserId the status by user ID of this d l file version
 	 */
 	public void setStatusByUserId(long statusByUserId);
 

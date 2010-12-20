@@ -47,18 +47,18 @@ public class SCLicenseWrapper implements SCLicense {
 	}
 
 	/**
-	* Gets the license id of this s c license.
+	* Gets the license ID of this s c license.
 	*
-	* @return the license id of this s c license
+	* @return the license ID of this s c license
 	*/
 	public long getLicenseId() {
 		return _scLicense.getLicenseId();
 	}
 
 	/**
-	* Sets the license id of this s c license.
+	* Sets the license ID of this s c license.
 	*
-	* @param licenseId the license id of this s c license
+	* @param licenseId the license ID of this s c license
 	*/
 	public void setLicenseId(long licenseId) {
 		_scLicense.setLicenseId(licenseId);

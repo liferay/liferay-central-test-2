@@ -58,30 +58,30 @@ public interface WebDAVPropsModel extends BaseModel<WebDAVProps> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the web dav props id of this web d a v props.
+	 * Gets the web dav props ID of this web d a v props.
 	 *
-	 * @return the web dav props id of this web d a v props
+	 * @return the web dav props ID of this web d a v props
 	 */
 	public long getWebDavPropsId();
 
 	/**
-	 * Sets the web dav props id of this web d a v props.
+	 * Sets the web dav props ID of this web d a v props.
 	 *
-	 * @param webDavPropsId the web dav props id of this web d a v props
+	 * @param webDavPropsId the web dav props ID of this web d a v props
 	 */
 	public void setWebDavPropsId(long webDavPropsId);
 
 	/**
-	 * Gets the company id of this web d a v props.
+	 * Gets the company ID of this web d a v props.
 	 *
-	 * @return the company id of this web d a v props
+	 * @return the company ID of this web d a v props
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this web d a v props.
+	 * Sets the company ID of this web d a v props.
 	 *
-	 * @param companyId the company id of this web d a v props
+	 * @param companyId the company ID of this web d a v props
 	 */
 	public void setCompanyId(long companyId);
 
@@ -121,16 +121,16 @@ public interface WebDAVPropsModel extends BaseModel<WebDAVProps> {
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this web d a v props.
+	 * Gets the class name ID of this web d a v props.
 	 *
-	 * @return the class name id of this web d a v props
+	 * @return the class name ID of this web d a v props
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this web d a v props.
+	 * Sets the class name ID of this web d a v props.
 	 *
-	 * @param classNameId the class name id of this web d a v props
+	 * @param classNameId the class name ID of this web d a v props
 	 */
 	public void setClassNameId(long classNameId);
 

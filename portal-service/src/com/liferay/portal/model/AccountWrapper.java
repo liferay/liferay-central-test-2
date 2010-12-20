@@ -47,54 +47,54 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Gets the account id of this account.
+	* Gets the account ID of this account.
 	*
-	* @return the account id of this account
+	* @return the account ID of this account
 	*/
 	public long getAccountId() {
 		return _account.getAccountId();
 	}
 
 	/**
-	* Sets the account id of this account.
+	* Sets the account ID of this account.
 	*
-	* @param accountId the account id of this account
+	* @param accountId the account ID of this account
 	*/
 	public void setAccountId(long accountId) {
 		_account.setAccountId(accountId);
 	}
 
 	/**
-	* Gets the company id of this account.
+	* Gets the company ID of this account.
 	*
-	* @return the company id of this account
+	* @return the company ID of this account
 	*/
 	public long getCompanyId() {
 		return _account.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this account.
+	* Sets the company ID of this account.
 	*
-	* @param companyId the company id of this account
+	* @param companyId the company ID of this account
 	*/
 	public void setCompanyId(long companyId) {
 		_account.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this account.
+	* Gets the user ID of this account.
 	*
-	* @return the user id of this account
+	* @return the user ID of this account
 	*/
 	public long getUserId() {
 		return _account.getUserId();
 	}
 
 	/**
-	* Sets the user id of this account.
+	* Sets the user ID of this account.
 	*
-	* @param userId the user id of this account
+	* @param userId the user ID of this account
 	*/
 	public void setUserId(long userId) {
 		_account.setUserId(userId);
@@ -175,18 +175,18 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Gets the parent account id of this account.
+	* Gets the parent account ID of this account.
 	*
-	* @return the parent account id of this account
+	* @return the parent account ID of this account
 	*/
 	public long getParentAccountId() {
 		return _account.getParentAccountId();
 	}
 
 	/**
-	* Sets the parent account id of this account.
+	* Sets the parent account ID of this account.
 	*
-	* @param parentAccountId the parent account id of this account
+	* @param parentAccountId the parent account ID of this account
 	*/
 	public void setParentAccountId(long parentAccountId) {
 		_account.setParentAccountId(parentAccountId);
@@ -229,18 +229,18 @@ public class AccountWrapper implements Account {
 	}
 
 	/**
-	* Gets the legal id of this account.
+	* Gets the legal ID of this account.
 	*
-	* @return the legal id of this account
+	* @return the legal ID of this account
 	*/
 	public java.lang.String getLegalId() {
 		return _account.getLegalId();
 	}
 
 	/**
-	* Sets the legal id of this account.
+	* Sets the legal ID of this account.
 	*
-	* @param legalId the legal id of this account
+	* @param legalId the legal ID of this account
 	*/
 	public void setLegalId(java.lang.String legalId) {
 		_account.setLegalId(legalId);

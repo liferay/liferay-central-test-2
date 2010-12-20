@@ -205,7 +205,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Finds the layout where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
@@ -219,7 +219,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Finds the layout where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -231,7 +231,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Finds the layout where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -242,7 +242,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Finds all the layouts where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -257,7 +257,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
 	* @return the range of matching layouts
@@ -274,7 +274,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -293,7 +293,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
@@ -311,7 +311,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
@@ -330,7 +330,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* </p>
 	*
 	* @param plid the primary key of the current layout
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
@@ -345,7 +345,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Filters by the user's permissions and finds all the layouts where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -360,7 +360,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
 	* @return the range of matching layouts that the user has permission to view
@@ -377,7 +377,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -392,7 +392,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Finds all the layouts where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -407,7 +407,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
 	* @return the range of matching layouts
@@ -424,7 +424,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -443,7 +443,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
@@ -462,7 +462,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
@@ -482,7 +482,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* </p>
 	*
 	* @param plid the primary key of the current layout
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
@@ -497,7 +497,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Finds the layout where iconImageId = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
 	*
-	* @param iconImageId the icon image id to search with
+	* @param iconImageId the icon image ID to search with
 	* @return the matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
@@ -509,7 +509,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Finds the layout where iconImageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param iconImageId the icon image id to search with
+	* @param iconImageId the icon image ID to search with
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -519,7 +519,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Finds the layout where iconImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param iconImageId the icon image id to search with
+	* @param iconImageId the icon image ID to search with
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -530,7 +530,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Finds all the layouts where groupId = &#63; and privateLayout = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @return the matching layouts
 	* @throws SystemException if a system exception occurred
@@ -546,7 +546,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
@@ -564,7 +564,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
@@ -584,7 +584,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching layout
@@ -604,7 +604,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching layout
@@ -625,7 +625,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* </p>
 	*
 	* @param plid the primary key of the current layout
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next layout
@@ -641,7 +641,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Filters by the user's permissions and finds all the layouts where groupId = &#63; and privateLayout = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @return the matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -657,7 +657,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
@@ -675,7 +675,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
@@ -691,9 +691,9 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Finds the layout where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
-	* @param layoutId the layout id to search with
+	* @param layoutId the layout ID to search with
 	* @return the matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
@@ -706,9 +706,9 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Finds the layout where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
-	* @param layoutId the layout id to search with
+	* @param layoutId the layout ID to search with
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -719,9 +719,9 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Finds the layout where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
-	* @param layoutId the layout id to search with
+	* @param layoutId the layout ID to search with
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -732,9 +732,9 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Finds all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout id to search with
+	* @param parentLayoutId the parent layout ID to search with
 	* @return the matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -749,9 +749,9 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout id to search with
+	* @param parentLayoutId the parent layout ID to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
 	* @return the range of matching layouts
@@ -768,9 +768,9 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout id to search with
+	* @param parentLayoutId the parent layout ID to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -790,9 +790,9 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout id to search with
+	* @param parentLayoutId the parent layout ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
@@ -811,9 +811,9 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout id to search with
+	* @param parentLayoutId the parent layout ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
@@ -833,9 +833,9 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* </p>
 	*
 	* @param plid the primary key of the current layout
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout id to search with
+	* @param parentLayoutId the parent layout ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
@@ -850,9 +850,9 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Filters by the user's permissions and finds all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout id to search with
+	* @param parentLayoutId the parent layout ID to search with
 	* @return the matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -867,9 +867,9 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout id to search with
+	* @param parentLayoutId the parent layout ID to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
 	* @return the range of matching layouts that the user has permission to view
@@ -886,9 +886,9 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout id to search with
+	* @param parentLayoutId the parent layout ID to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -904,7 +904,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Finds the layout where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param friendlyURL the friendly u r l to search with
 	* @return the matching layout
@@ -919,7 +919,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Finds the layout where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param friendlyURL the friendly u r l to search with
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
@@ -932,7 +932,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Finds the layout where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param friendlyURL the friendly u r l to search with
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
@@ -946,7 +946,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Finds all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param type the type to search with
 	* @return the matching layouts
@@ -963,7 +963,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param type the type to search with
 	* @param start the lower bound of the range of layouts to return
@@ -982,7 +982,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param type the type to search with
 	* @param start the lower bound of the range of layouts to return
@@ -1004,7 +1004,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param type the type to search with
 	* @param orderByComparator the comparator to order the set by
@@ -1025,7 +1025,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param type the type to search with
 	* @param orderByComparator the comparator to order the set by
@@ -1047,7 +1047,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* </p>
 	*
 	* @param plid the primary key of the current layout
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param type the type to search with
 	* @param orderByComparator the comparator to order the set by
@@ -1064,7 +1064,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Filters by the user's permissions and finds all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param type the type to search with
 	* @return the matching layouts that the user has permission to view
@@ -1081,7 +1081,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param type the type to search with
 	* @param start the lower bound of the range of layouts to return
@@ -1100,7 +1100,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param type the type to search with
 	* @param start the lower bound of the range of layouts to return
@@ -1170,7 +1170,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Removes the layout where uuid = &#63; and groupId = &#63; from the database.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUUID_G(java.lang.String uuid, long groupId)
@@ -1180,7 +1180,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Removes all the layouts where groupId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByGroupId(long groupId)
@@ -1189,7 +1189,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Removes all the layouts where companyId = &#63; from the database.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByCompanyId(long companyId)
@@ -1198,7 +1198,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Removes the layout where iconImageId = &#63; from the database.
 	*
-	* @param iconImageId the icon image id to search with
+	* @param iconImageId the icon image ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByIconImageId(long iconImageId)
@@ -1208,7 +1208,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Removes all the layouts where groupId = &#63; and privateLayout = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1218,9 +1218,9 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Removes the layout where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
-	* @param layoutId the layout id to search with
+	* @param layoutId the layout ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByG_P_L(long groupId, boolean privateLayout, long layoutId)
@@ -1230,9 +1230,9 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Removes all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout id to search with
+	* @param parentLayoutId the parent layout ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByG_P_P(long groupId, boolean privateLayout,
@@ -1242,7 +1242,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Removes the layout where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param friendlyURL the friendly u r l to search with
 	* @throws SystemException if a system exception occurred
@@ -1255,7 +1255,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Removes all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param type the type to search with
 	* @throws SystemException if a system exception occurred
@@ -1286,7 +1286,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* Counts all the layouts where uuid = &#63; and groupId = &#63;.
 	*
 	* @param uuid the uuid to search with
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1296,7 +1296,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Counts all the layouts where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1306,7 +1306,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Filters by the user's permissions and counts all the layouts where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1316,7 +1316,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Counts all the layouts where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the number of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1326,7 +1326,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Counts all the layouts where iconImageId = &#63;.
 	*
-	* @param iconImageId the icon image id to search with
+	* @param iconImageId the icon image ID to search with
 	* @return the number of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1336,7 +1336,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Counts all the layouts where groupId = &#63; and privateLayout = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @return the number of matching layouts
 	* @throws SystemException if a system exception occurred
@@ -1347,7 +1347,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Filters by the user's permissions and counts all the layouts where groupId = &#63; and privateLayout = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @return the number of matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -1358,9 +1358,9 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Counts all the layouts where groupId = &#63; and privateLayout = &#63; and layoutId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
-	* @param layoutId the layout id to search with
+	* @param layoutId the layout ID to search with
 	* @return the number of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1370,9 +1370,9 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Counts all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout id to search with
+	* @param parentLayoutId the parent layout ID to search with
 	* @return the number of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1383,9 +1383,9 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Filters by the user's permissions and counts all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
-	* @param parentLayoutId the parent layout id to search with
+	* @param parentLayoutId the parent layout ID to search with
 	* @return the number of matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1396,7 +1396,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Counts all the layouts where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param friendlyURL the friendly u r l to search with
 	* @return the number of matching layouts
@@ -1409,7 +1409,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Counts all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param type the type to search with
 	* @return the number of matching layouts
@@ -1422,7 +1422,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	/**
 	* Filters by the user's permissions and counts all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param type the type to search with
 	* @return the number of matching layouts that the user has permission to view

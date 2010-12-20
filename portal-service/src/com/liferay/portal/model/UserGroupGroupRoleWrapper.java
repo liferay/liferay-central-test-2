@@ -48,54 +48,54 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole {
 	}
 
 	/**
-	* Gets the user group id of this user group group role.
+	* Gets the user group ID of this user group group role.
 	*
-	* @return the user group id of this user group group role
+	* @return the user group ID of this user group group role
 	*/
 	public long getUserGroupId() {
 		return _userGroupGroupRole.getUserGroupId();
 	}
 
 	/**
-	* Sets the user group id of this user group group role.
+	* Sets the user group ID of this user group group role.
 	*
-	* @param userGroupId the user group id of this user group group role
+	* @param userGroupId the user group ID of this user group group role
 	*/
 	public void setUserGroupId(long userGroupId) {
 		_userGroupGroupRole.setUserGroupId(userGroupId);
 	}
 
 	/**
-	* Gets the group id of this user group group role.
+	* Gets the group ID of this user group group role.
 	*
-	* @return the group id of this user group group role
+	* @return the group ID of this user group group role
 	*/
 	public long getGroupId() {
 		return _userGroupGroupRole.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this user group group role.
+	* Sets the group ID of this user group group role.
 	*
-	* @param groupId the group id of this user group group role
+	* @param groupId the group ID of this user group group role
 	*/
 	public void setGroupId(long groupId) {
 		_userGroupGroupRole.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the role id of this user group group role.
+	* Gets the role ID of this user group group role.
 	*
-	* @return the role id of this user group group role
+	* @return the role ID of this user group group role
 	*/
 	public long getRoleId() {
 		return _userGroupGroupRole.getRoleId();
 	}
 
 	/**
-	* Sets the role id of this user group group role.
+	* Sets the role ID of this user group group role.
 	*
-	* @param roleId the role id of this user group group role
+	* @param roleId the role ID of this user group group role
 	*/
 	public void setRoleId(long roleId) {
 		_userGroupGroupRole.setRoleId(roleId);

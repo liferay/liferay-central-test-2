@@ -848,7 +848,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Finds the message boards category where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchCategoryException} if it could not be found.
 	 *
 	 * @param uuid the uuid to search with
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching message boards category
 	 * @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
 	 * @throws SystemException if a system exception occurred
@@ -884,7 +884,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Finds the message boards category where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param uuid the uuid to search with
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching message boards category, or <code>null</code> if a matching message boards category could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -897,7 +897,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Finds the message boards category where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param uuid the uuid to search with
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching message boards category, or <code>null</code> if a matching message boards category could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1000,7 +1000,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	/**
 	 * Finds all the message boards categories where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching message boards categories
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1016,7 +1016,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of message boards categories to return
 	 * @param end the upper bound of the range of message boards categories to return (not inclusive)
 	 * @return the range of matching message boards categories
@@ -1034,7 +1034,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of message boards categories to return
 	 * @param end the upper bound of the range of message boards categories to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -1122,7 +1122,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching message boards category
 	 * @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
@@ -1157,7 +1157,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching message boards category
 	 * @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
@@ -1196,7 +1196,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * </p>
 	 *
 	 * @param categoryId the primary key of the current message boards category
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next message boards category
 	 * @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a message boards category with the primary key could not be found
@@ -1339,7 +1339,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	/**
 	 * Filters by the user's permissions and finds all the message boards categories where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching message boards categories that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1356,7 +1356,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of message boards categories to return
 	 * @param end the upper bound of the range of message boards categories to return (not inclusive)
 	 * @return the range of matching message boards categories that the user has permission to view
@@ -1374,7 +1374,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of message boards categories to return
 	 * @param end the upper bound of the range of message boards categories to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -1465,7 +1465,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	/**
 	 * Finds all the message boards categories where companyId = &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @return the matching message boards categories
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1482,7 +1482,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of message boards categories to return
 	 * @param end the upper bound of the range of message boards categories to return (not inclusive)
 	 * @return the range of matching message boards categories
@@ -1500,7 +1500,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of message boards categories to return
 	 * @param end the upper bound of the range of message boards categories to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -1588,7 +1588,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching message boards category
 	 * @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
@@ -1624,7 +1624,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching message boards category
 	 * @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
@@ -1663,7 +1663,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * </p>
 	 *
 	 * @param categoryId the primary key of the current message boards category
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next message boards category
 	 * @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a message boards category with the primary key could not be found
@@ -1806,8 +1806,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	/**
 	 * Finds all the message boards categories where groupId = &#63; and parentCategoryId = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param parentCategoryId the parent category id to search with
+	 * @param groupId the group ID to search with
+	 * @param parentCategoryId the parent category ID to search with
 	 * @return the matching message boards categories
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1824,8 +1824,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param parentCategoryId the parent category id to search with
+	 * @param groupId the group ID to search with
+	 * @param parentCategoryId the parent category ID to search with
 	 * @param start the lower bound of the range of message boards categories to return
 	 * @param end the upper bound of the range of message boards categories to return (not inclusive)
 	 * @return the range of matching message boards categories
@@ -1843,8 +1843,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param parentCategoryId the parent category id to search with
+	 * @param groupId the group ID to search with
+	 * @param parentCategoryId the parent category ID to search with
 	 * @param start the lower bound of the range of message boards categories to return
 	 * @param end the upper bound of the range of message boards categories to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -1937,8 +1937,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param parentCategoryId the parent category id to search with
+	 * @param groupId the group ID to search with
+	 * @param parentCategoryId the parent category ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching message boards category
 	 * @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
@@ -1977,8 +1977,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param parentCategoryId the parent category id to search with
+	 * @param groupId the group ID to search with
+	 * @param parentCategoryId the parent category ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching message boards category
 	 * @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
@@ -2020,8 +2020,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * </p>
 	 *
 	 * @param categoryId the primary key of the current message boards category
-	 * @param groupId the group id to search with
-	 * @param parentCategoryId the parent category id to search with
+	 * @param groupId the group ID to search with
+	 * @param parentCategoryId the parent category ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next message boards category
 	 * @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a message boards category with the primary key could not be found
@@ -2172,8 +2172,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param parentCategoryIds the parent category ids to search with
+	 * @param groupId the group ID to search with
+	 * @param parentCategoryIds the parent category IDs to search with
 	 * @return the matching message boards categories
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2190,8 +2190,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param parentCategoryIds the parent category ids to search with
+	 * @param groupId the group ID to search with
+	 * @param parentCategoryIds the parent category IDs to search with
 	 * @param start the lower bound of the range of message boards categories to return
 	 * @param end the upper bound of the range of message boards categories to return (not inclusive)
 	 * @return the range of matching message boards categories
@@ -2209,8 +2209,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param parentCategoryIds the parent category ids to search with
+	 * @param groupId the group ID to search with
+	 * @param parentCategoryIds the parent category IDs to search with
 	 * @param start the lower bound of the range of message boards categories to return
 	 * @param end the upper bound of the range of message boards categories to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -2319,8 +2319,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	/**
 	 * Filters by the user's permissions and finds all the message boards categories where groupId = &#63; and parentCategoryId = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param parentCategoryId the parent category id to search with
+	 * @param groupId the group ID to search with
+	 * @param parentCategoryId the parent category ID to search with
 	 * @return the matching message boards categories that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2337,8 +2337,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param parentCategoryId the parent category id to search with
+	 * @param groupId the group ID to search with
+	 * @param parentCategoryId the parent category ID to search with
 	 * @param start the lower bound of the range of message boards categories to return
 	 * @param end the upper bound of the range of message boards categories to return (not inclusive)
 	 * @return the range of matching message boards categories that the user has permission to view
@@ -2356,8 +2356,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param parentCategoryId the parent category id to search with
+	 * @param groupId the group ID to search with
+	 * @param parentCategoryId the parent category ID to search with
 	 * @param start the lower bound of the range of message boards categories to return
 	 * @param end the upper bound of the range of message boards categories to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -2458,8 +2458,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param parentCategoryIds the parent category ids to search with
+	 * @param groupId the group ID to search with
+	 * @param parentCategoryIds the parent category IDs to search with
 	 * @return the matching message boards categories that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2476,8 +2476,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param parentCategoryIds the parent category ids to search with
+	 * @param groupId the group ID to search with
+	 * @param parentCategoryIds the parent category IDs to search with
 	 * @param start the lower bound of the range of message boards categories to return
 	 * @param end the upper bound of the range of message boards categories to return (not inclusive)
 	 * @return the range of matching message boards categories that the user has permission to view
@@ -2495,8 +2495,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param parentCategoryIds the parent category ids to search with
+	 * @param groupId the group ID to search with
+	 * @param parentCategoryIds the parent category IDs to search with
 	 * @param start the lower bound of the range of message boards categories to return
 	 * @param end the upper bound of the range of message boards categories to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -2735,7 +2735,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Removes the message boards category where uuid = &#63; and groupId = &#63; from the database.
 	 *
 	 * @param uuid the uuid to search with
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUUID_G(String uuid, long groupId)
@@ -2748,7 +2748,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	/**
 	 * Removes all the message boards categories where groupId = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -2760,7 +2760,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	/**
 	 * Removes all the message boards categories where companyId = &#63; from the database.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
@@ -2772,8 +2772,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	/**
 	 * Removes all the message boards categories where groupId = &#63; and parentCategoryId = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
-	 * @param parentCategoryId the parent category id to search with
+	 * @param groupId the group ID to search with
+	 * @param parentCategoryId the parent category ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByG_P(long groupId, long parentCategoryId)
@@ -2863,7 +2863,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * Counts all the message boards categories where uuid = &#63; and groupId = &#63;.
 	 *
 	 * @param uuid the uuid to search with
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the number of matching message boards categories
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2933,7 +2933,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	/**
 	 * Counts all the message boards categories where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the number of matching message boards categories
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2986,7 +2986,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	/**
 	 * Filters by the user's permissions and counts all the message boards categories where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the number of matching message boards categories that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3034,7 +3034,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	/**
 	 * Counts all the message boards categories where companyId = &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @return the number of matching message boards categories
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3087,8 +3087,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	/**
 	 * Counts all the message boards categories where groupId = &#63; and parentCategoryId = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param parentCategoryId the parent category id to search with
+	 * @param groupId the group ID to search with
+	 * @param parentCategoryId the parent category ID to search with
 	 * @return the number of matching message boards categories
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3146,8 +3146,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	/**
 	 * Counts all the message boards categories where groupId = &#63; and parentCategoryId = any &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param parentCategoryIds the parent category ids to search with
+	 * @param groupId the group ID to search with
+	 * @param parentCategoryIds the parent category IDs to search with
 	 * @return the number of matching message boards categories
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3235,8 +3235,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	/**
 	 * Filters by the user's permissions and counts all the message boards categories where groupId = &#63; and parentCategoryId = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param parentCategoryId the parent category id to search with
+	 * @param groupId the group ID to search with
+	 * @param parentCategoryId the parent category ID to search with
 	 * @return the number of matching message boards categories that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3289,8 +3289,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	/**
 	 * Filters by the user's permissions and counts all the message boards categories where groupId = &#63; and parentCategoryId = any &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param parentCategoryIds the parent category ids to search with
+	 * @param groupId the group ID to search with
+	 * @param parentCategoryIds the parent category IDs to search with
 	 * @return the number of matching message boards categories that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */

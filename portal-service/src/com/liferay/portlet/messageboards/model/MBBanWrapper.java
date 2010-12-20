@@ -47,72 +47,72 @@ public class MBBanWrapper implements MBBan {
 	}
 
 	/**
-	* Gets the ban id of this message boards ban.
+	* Gets the ban ID of this message boards ban.
 	*
-	* @return the ban id of this message boards ban
+	* @return the ban ID of this message boards ban
 	*/
 	public long getBanId() {
 		return _mbBan.getBanId();
 	}
 
 	/**
-	* Sets the ban id of this message boards ban.
+	* Sets the ban ID of this message boards ban.
 	*
-	* @param banId the ban id of this message boards ban
+	* @param banId the ban ID of this message boards ban
 	*/
 	public void setBanId(long banId) {
 		_mbBan.setBanId(banId);
 	}
 
 	/**
-	* Gets the group id of this message boards ban.
+	* Gets the group ID of this message boards ban.
 	*
-	* @return the group id of this message boards ban
+	* @return the group ID of this message boards ban
 	*/
 	public long getGroupId() {
 		return _mbBan.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this message boards ban.
+	* Sets the group ID of this message boards ban.
 	*
-	* @param groupId the group id of this message boards ban
+	* @param groupId the group ID of this message boards ban
 	*/
 	public void setGroupId(long groupId) {
 		_mbBan.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this message boards ban.
+	* Gets the company ID of this message boards ban.
 	*
-	* @return the company id of this message boards ban
+	* @return the company ID of this message boards ban
 	*/
 	public long getCompanyId() {
 		return _mbBan.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this message boards ban.
+	* Sets the company ID of this message boards ban.
 	*
-	* @param companyId the company id of this message boards ban
+	* @param companyId the company ID of this message boards ban
 	*/
 	public void setCompanyId(long companyId) {
 		_mbBan.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this message boards ban.
+	* Gets the user ID of this message boards ban.
 	*
-	* @return the user id of this message boards ban
+	* @return the user ID of this message boards ban
 	*/
 	public long getUserId() {
 		return _mbBan.getUserId();
 	}
 
 	/**
-	* Sets the user id of this message boards ban.
+	* Sets the user ID of this message boards ban.
 	*
-	* @param userId the user id of this message boards ban
+	* @param userId the user ID of this message boards ban
 	*/
 	public void setUserId(long userId) {
 		_mbBan.setUserId(userId);
@@ -193,18 +193,18 @@ public class MBBanWrapper implements MBBan {
 	}
 
 	/**
-	* Gets the ban user id of this message boards ban.
+	* Gets the ban user ID of this message boards ban.
 	*
-	* @return the ban user id of this message boards ban
+	* @return the ban user ID of this message boards ban
 	*/
 	public long getBanUserId() {
 		return _mbBan.getBanUserId();
 	}
 
 	/**
-	* Sets the ban user id of this message boards ban.
+	* Sets the ban user ID of this message boards ban.
 	*
-	* @param banUserId the ban user id of this message boards ban
+	* @param banUserId the ban user ID of this message boards ban
 	*/
 	public void setBanUserId(long banUserId) {
 		_mbBan.setBanUserId(banUserId);

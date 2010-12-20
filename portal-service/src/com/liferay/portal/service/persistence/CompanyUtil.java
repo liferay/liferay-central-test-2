@@ -196,7 +196,7 @@ public class CompanyUtil {
 	/**
 	* Finds the company where webId = &#63; or throws a {@link com.liferay.portal.NoSuchCompanyException} if it could not be found.
 	*
-	* @param webId the web id to search with
+	* @param webId the web ID to search with
 	* @return the matching company
 	* @throws com.liferay.portal.NoSuchCompanyException if a matching company could not be found
 	* @throws SystemException if a system exception occurred
@@ -211,7 +211,7 @@ public class CompanyUtil {
 	/**
 	* Finds the company where webId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param webId the web id to search with
+	* @param webId the web ID to search with
 	* @return the matching company, or <code>null</code> if a matching company could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -224,7 +224,7 @@ public class CompanyUtil {
 	/**
 	* Finds the company where webId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param webId the web id to search with
+	* @param webId the web ID to search with
 	* @return the matching company, or <code>null</code> if a matching company could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -277,7 +277,7 @@ public class CompanyUtil {
 	/**
 	* Finds the company where logoId = &#63; or throws a {@link com.liferay.portal.NoSuchCompanyException} if it could not be found.
 	*
-	* @param logoId the logo id to search with
+	* @param logoId the logo ID to search with
 	* @return the matching company
 	* @throws com.liferay.portal.NoSuchCompanyException if a matching company could not be found
 	* @throws SystemException if a system exception occurred
@@ -291,7 +291,7 @@ public class CompanyUtil {
 	/**
 	* Finds the company where logoId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param logoId the logo id to search with
+	* @param logoId the logo ID to search with
 	* @return the matching company, or <code>null</code> if a matching company could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -303,7 +303,7 @@ public class CompanyUtil {
 	/**
 	* Finds the company where logoId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param logoId the logo id to search with
+	* @param logoId the logo ID to search with
 	* @return the matching company, or <code>null</code> if a matching company could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -485,7 +485,7 @@ public class CompanyUtil {
 	/**
 	* Removes the company where webId = &#63; from the database.
 	*
-	* @param webId the web id to search with
+	* @param webId the web ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByWebId(java.lang.String webId)
@@ -509,7 +509,7 @@ public class CompanyUtil {
 	/**
 	* Removes the company where logoId = &#63; from the database.
 	*
-	* @param logoId the logo id to search with
+	* @param logoId the logo ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByLogoId(long logoId)
@@ -542,7 +542,7 @@ public class CompanyUtil {
 	/**
 	* Counts all the companies where webId = &#63;.
 	*
-	* @param webId the web id to search with
+	* @param webId the web ID to search with
 	* @return the number of matching companies
 	* @throws SystemException if a system exception occurred
 	*/
@@ -566,7 +566,7 @@ public class CompanyUtil {
 	/**
 	* Counts all the companies where logoId = &#63;.
 	*
-	* @param logoId the logo id to search with
+	* @param logoId the logo ID to search with
 	* @return the number of matching companies
 	* @throws SystemException if a system exception occurred
 	*/

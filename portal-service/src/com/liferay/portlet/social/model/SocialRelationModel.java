@@ -72,30 +72,30 @@ public interface SocialRelationModel extends BaseModel<SocialRelation> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the relation id of this social relation.
+	 * Gets the relation ID of this social relation.
 	 *
-	 * @return the relation id of this social relation
+	 * @return the relation ID of this social relation
 	 */
 	public long getRelationId();
 
 	/**
-	 * Sets the relation id of this social relation.
+	 * Sets the relation ID of this social relation.
 	 *
-	 * @param relationId the relation id of this social relation
+	 * @param relationId the relation ID of this social relation
 	 */
 	public void setRelationId(long relationId);
 
 	/**
-	 * Gets the company id of this social relation.
+	 * Gets the company ID of this social relation.
 	 *
-	 * @return the company id of this social relation
+	 * @return the company ID of this social relation
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this social relation.
+	 * Sets the company ID of this social relation.
 	 *
-	 * @param companyId the company id of this social relation
+	 * @param companyId the company ID of this social relation
 	 */
 	public void setCompanyId(long companyId);
 

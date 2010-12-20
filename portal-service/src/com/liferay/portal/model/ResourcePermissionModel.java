@@ -56,30 +56,30 @@ public interface ResourcePermissionModel extends BaseModel<ResourcePermission> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the resource permission id of this resource permission.
+	 * Gets the resource permission ID of this resource permission.
 	 *
-	 * @return the resource permission id of this resource permission
+	 * @return the resource permission ID of this resource permission
 	 */
 	public long getResourcePermissionId();
 
 	/**
-	 * Sets the resource permission id of this resource permission.
+	 * Sets the resource permission ID of this resource permission.
 	 *
-	 * @param resourcePermissionId the resource permission id of this resource permission
+	 * @param resourcePermissionId the resource permission ID of this resource permission
 	 */
 	public void setResourcePermissionId(long resourcePermissionId);
 
 	/**
-	 * Gets the company id of this resource permission.
+	 * Gets the company ID of this resource permission.
 	 *
-	 * @return the company id of this resource permission
+	 * @return the company ID of this resource permission
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this resource permission.
+	 * Sets the company ID of this resource permission.
 	 *
-	 * @param companyId the company id of this resource permission
+	 * @param companyId the company ID of this resource permission
 	 */
 	public void setCompanyId(long companyId);
 
@@ -128,30 +128,30 @@ public interface ResourcePermissionModel extends BaseModel<ResourcePermission> {
 	public void setPrimKey(String primKey);
 
 	/**
-	 * Gets the role id of this resource permission.
+	 * Gets the role ID of this resource permission.
 	 *
-	 * @return the role id of this resource permission
+	 * @return the role ID of this resource permission
 	 */
 	public long getRoleId();
 
 	/**
-	 * Sets the role id of this resource permission.
+	 * Sets the role ID of this resource permission.
 	 *
-	 * @param roleId the role id of this resource permission
+	 * @param roleId the role ID of this resource permission
 	 */
 	public void setRoleId(long roleId);
 
 	/**
-	 * Gets the action ids of this resource permission.
+	 * Gets the action IDs of this resource permission.
 	 *
-	 * @return the action ids of this resource permission
+	 * @return the action IDs of this resource permission
 	 */
 	public long getActionIds();
 
 	/**
-	 * Sets the action ids of this resource permission.
+	 * Sets the action IDs of this resource permission.
 	 *
-	 * @param actionIds the action ids of this resource permission
+	 * @param actionIds the action IDs of this resource permission
 	 */
 	public void setActionIds(long actionIds);
 

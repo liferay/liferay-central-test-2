@@ -48,7 +48,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence implementation for the user id mapper service.
+ * The persistence implementation for the user ID mapper service.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
@@ -64,7 +64,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link UserIdMapperUtil} to access the user id mapper persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use {@link UserIdMapperUtil} to access the user ID mapper persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = UserIdMapperImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
@@ -105,9 +105,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 			"countAll", new String[0]);
 
 	/**
-	 * Caches the user id mapper in the entity cache if it is enabled.
+	 * Caches the user ID mapper in the entity cache if it is enabled.
 	 *
-	 * @param userIdMapper the user id mapper to cache
+	 * @param userIdMapper the user ID mapper to cache
 	 */
 	public void cacheResult(UserIdMapper userIdMapper) {
 		EntityCacheUtil.putResult(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
@@ -129,9 +129,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Caches the user id mappers in the entity cache if it is enabled.
+	 * Caches the user ID mappers in the entity cache if it is enabled.
 	 *
-	 * @param userIdMappers the user id mappers to cache
+	 * @param userIdMappers the user ID mappers to cache
 	 */
 	public void cacheResult(List<UserIdMapper> userIdMappers) {
 		for (UserIdMapper userIdMapper : userIdMappers) {
@@ -145,7 +145,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Clears the cache for all user id mappers.
+	 * Clears the cache for all user ID mappers.
 	 *
 	 * <p>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
@@ -159,7 +159,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Clears the cache for the user id mapper.
+	 * Clears the cache for the user ID mapper.
 	 *
 	 * <p>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
@@ -185,10 +185,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Creates a new user id mapper with the primary key. Does not add the user id mapper to the database.
+	 * Creates a new user ID mapper with the primary key. Does not add the user ID mapper to the database.
 	 *
-	 * @param userIdMapperId the primary key for the new user id mapper
-	 * @return the new user id mapper
+	 * @param userIdMapperId the primary key for the new user ID mapper
+	 * @return the new user ID mapper
 	 */
 	public UserIdMapper create(long userIdMapperId) {
 		UserIdMapper userIdMapper = new UserIdMapperImpl();
@@ -200,11 +200,11 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Removes the user id mapper with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the user ID mapper with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the user id mapper to remove
-	 * @return the user id mapper that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a user id mapper with the primary key could not be found
+	 * @param primaryKey the primary key of the user ID mapper to remove
+	 * @return the user ID mapper that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a user ID mapper with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public UserIdMapper remove(Serializable primaryKey)
@@ -213,11 +213,11 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Removes the user id mapper with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the user ID mapper with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param userIdMapperId the primary key of the user id mapper to remove
-	 * @return the user id mapper that was removed
-	 * @throws com.liferay.portal.NoSuchUserIdMapperException if a user id mapper with the primary key could not be found
+	 * @param userIdMapperId the primary key of the user ID mapper to remove
+	 * @return the user ID mapper that was removed
+	 * @throws com.liferay.portal.NoSuchUserIdMapperException if a user ID mapper with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public UserIdMapper remove(long userIdMapperId)
@@ -398,11 +398,11 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Finds the user id mapper with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Finds the user ID mapper with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the user id mapper to find
-	 * @return the user id mapper
-	 * @throws com.liferay.portal.NoSuchModelException if a user id mapper with the primary key could not be found
+	 * @param primaryKey the primary key of the user ID mapper to find
+	 * @return the user ID mapper
+	 * @throws com.liferay.portal.NoSuchModelException if a user ID mapper with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public UserIdMapper findByPrimaryKey(Serializable primaryKey)
@@ -411,11 +411,11 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Finds the user id mapper with the primary key or throws a {@link com.liferay.portal.NoSuchUserIdMapperException} if it could not be found.
+	 * Finds the user ID mapper with the primary key or throws a {@link com.liferay.portal.NoSuchUserIdMapperException} if it could not be found.
 	 *
-	 * @param userIdMapperId the primary key of the user id mapper to find
-	 * @return the user id mapper
-	 * @throws com.liferay.portal.NoSuchUserIdMapperException if a user id mapper with the primary key could not be found
+	 * @param userIdMapperId the primary key of the user ID mapper to find
+	 * @return the user ID mapper
+	 * @throws com.liferay.portal.NoSuchUserIdMapperException if a user ID mapper with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public UserIdMapper findByPrimaryKey(long userIdMapperId)
@@ -435,10 +435,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Finds the user id mapper with the primary key or returns <code>null</code> if it could not be found.
+	 * Finds the user ID mapper with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the user id mapper to find
-	 * @return the user id mapper, or <code>null</code> if a user id mapper with the primary key could not be found
+	 * @param primaryKey the primary key of the user ID mapper to find
+	 * @return the user ID mapper, or <code>null</code> if a user ID mapper with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public UserIdMapper fetchByPrimaryKey(Serializable primaryKey)
@@ -447,10 +447,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Finds the user id mapper with the primary key or returns <code>null</code> if it could not be found.
+	 * Finds the user ID mapper with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param userIdMapperId the primary key of the user id mapper to find
-	 * @return the user id mapper, or <code>null</code> if a user id mapper with the primary key could not be found
+	 * @param userIdMapperId the primary key of the user ID mapper to find
+	 * @return the user ID mapper, or <code>null</code> if a user ID mapper with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public UserIdMapper fetchByPrimaryKey(long userIdMapperId)
@@ -483,10 +483,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Finds all the user id mappers where userId = &#63;.
+	 * Finds all the user ID mappers where userId = &#63;.
 	 *
-	 * @param userId the user id to search with
-	 * @return the matching user id mappers
+	 * @param userId the user ID to search with
+	 * @return the matching user ID mappers
 	 * @throws SystemException if a system exception occurred
 	 */
 	public List<UserIdMapper> findByUserId(long userId)
@@ -495,16 +495,16 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Finds a range of all the user id mappers where userId = &#63;.
+	 * Finds a range of all the user ID mappers where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user id to search with
-	 * @param start the lower bound of the range of user id mappers to return
-	 * @param end the upper bound of the range of user id mappers to return (not inclusive)
-	 * @return the range of matching user id mappers
+	 * @param userId the user ID to search with
+	 * @param start the lower bound of the range of user ID mappers to return
+	 * @param end the upper bound of the range of user ID mappers to return (not inclusive)
+	 * @return the range of matching user ID mappers
 	 * @throws SystemException if a system exception occurred
 	 */
 	public List<UserIdMapper> findByUserId(long userId, int start, int end)
@@ -513,17 +513,17 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Finds an ordered range of all the user id mappers where userId = &#63;.
+	 * Finds an ordered range of all the user ID mappers where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user id to search with
-	 * @param start the lower bound of the range of user id mappers to return
-	 * @param end the upper bound of the range of user id mappers to return (not inclusive)
+	 * @param userId the user ID to search with
+	 * @param start the lower bound of the range of user ID mappers to return
+	 * @param end the upper bound of the range of user ID mappers to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
-	 * @return the ordered range of matching user id mappers
+	 * @return the ordered range of matching user ID mappers
 	 * @throws SystemException if a system exception occurred
 	 */
 	public List<UserIdMapper> findByUserId(long userId, int start, int end,
@@ -597,16 +597,16 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Finds the first user id mapper in the ordered set where userId = &#63;.
+	 * Finds the first user ID mapper in the ordered set where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user id to search with
+	 * @param userId the user ID to search with
 	 * @param orderByComparator the comparator to order the set by
-	 * @return the first matching user id mapper
-	 * @throws com.liferay.portal.NoSuchUserIdMapperException if a matching user id mapper could not be found
+	 * @return the first matching user ID mapper
+	 * @throws com.liferay.portal.NoSuchUserIdMapperException if a matching user ID mapper could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public UserIdMapper findByUserId_First(long userId,
@@ -632,16 +632,16 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Finds the last user id mapper in the ordered set where userId = &#63;.
+	 * Finds the last user ID mapper in the ordered set where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user id to search with
+	 * @param userId the user ID to search with
 	 * @param orderByComparator the comparator to order the set by
-	 * @return the last matching user id mapper
-	 * @throws com.liferay.portal.NoSuchUserIdMapperException if a matching user id mapper could not be found
+	 * @return the last matching user ID mapper
+	 * @throws com.liferay.portal.NoSuchUserIdMapperException if a matching user ID mapper could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public UserIdMapper findByUserId_Last(long userId,
@@ -670,17 +670,17 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Finds the user id mappers before and after the current user id mapper in the ordered set where userId = &#63;.
+	 * Finds the user ID mappers before and after the current user ID mapper in the ordered set where userId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userIdMapperId the primary key of the current user id mapper
-	 * @param userId the user id to search with
+	 * @param userIdMapperId the primary key of the current user ID mapper
+	 * @param userId the user ID to search with
 	 * @param orderByComparator the comparator to order the set by
-	 * @return the previous, current, and next user id mapper
-	 * @throws com.liferay.portal.NoSuchUserIdMapperException if a user id mapper with the primary key could not be found
+	 * @return the previous, current, and next user ID mapper
+	 * @throws com.liferay.portal.NoSuchUserIdMapperException if a user ID mapper with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public UserIdMapper[] findByUserId_PrevAndNext(long userIdMapperId,
@@ -814,12 +814,12 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Finds the user id mapper where userId = &#63; and type = &#63; or throws a {@link com.liferay.portal.NoSuchUserIdMapperException} if it could not be found.
+	 * Finds the user ID mapper where userId = &#63; and type = &#63; or throws a {@link com.liferay.portal.NoSuchUserIdMapperException} if it could not be found.
 	 *
-	 * @param userId the user id to search with
+	 * @param userId the user ID to search with
 	 * @param type the type to search with
-	 * @return the matching user id mapper
-	 * @throws com.liferay.portal.NoSuchUserIdMapperException if a matching user id mapper could not be found
+	 * @return the matching user ID mapper
+	 * @throws com.liferay.portal.NoSuchUserIdMapperException if a matching user ID mapper could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public UserIdMapper findByU_T(long userId, String type)
@@ -850,11 +850,11 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Finds the user id mapper where userId = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Finds the user ID mapper where userId = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param userId the user id to search with
+	 * @param userId the user ID to search with
 	 * @param type the type to search with
-	 * @return the matching user id mapper, or <code>null</code> if a matching user id mapper could not be found
+	 * @return the matching user ID mapper, or <code>null</code> if a matching user ID mapper could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public UserIdMapper fetchByU_T(long userId, String type)
@@ -863,11 +863,11 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Finds the user id mapper where userId = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Finds the user ID mapper where userId = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param userId the user id to search with
+	 * @param userId the user ID to search with
 	 * @param type the type to search with
-	 * @return the matching user id mapper, or <code>null</code> if a matching user id mapper could not be found
+	 * @return the matching user ID mapper, or <code>null</code> if a matching user ID mapper could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public UserIdMapper fetchByU_T(long userId, String type,
@@ -965,12 +965,12 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Finds the user id mapper where type = &#63; and externalUserId = &#63; or throws a {@link com.liferay.portal.NoSuchUserIdMapperException} if it could not be found.
+	 * Finds the user ID mapper where type = &#63; and externalUserId = &#63; or throws a {@link com.liferay.portal.NoSuchUserIdMapperException} if it could not be found.
 	 *
 	 * @param type the type to search with
-	 * @param externalUserId the external user id to search with
-	 * @return the matching user id mapper
-	 * @throws com.liferay.portal.NoSuchUserIdMapperException if a matching user id mapper could not be found
+	 * @param externalUserId the external user ID to search with
+	 * @return the matching user ID mapper
+	 * @throws com.liferay.portal.NoSuchUserIdMapperException if a matching user ID mapper could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public UserIdMapper findByT_E(String type, String externalUserId)
@@ -1001,11 +1001,11 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Finds the user id mapper where type = &#63; and externalUserId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Finds the user ID mapper where type = &#63; and externalUserId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param type the type to search with
-	 * @param externalUserId the external user id to search with
-	 * @return the matching user id mapper, or <code>null</code> if a matching user id mapper could not be found
+	 * @param externalUserId the external user ID to search with
+	 * @return the matching user ID mapper, or <code>null</code> if a matching user ID mapper could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public UserIdMapper fetchByT_E(String type, String externalUserId)
@@ -1014,11 +1014,11 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Finds the user id mapper where type = &#63; and externalUserId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Finds the user ID mapper where type = &#63; and externalUserId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param type the type to search with
-	 * @param externalUserId the external user id to search with
-	 * @return the matching user id mapper, or <code>null</code> if a matching user id mapper could not be found
+	 * @param externalUserId the external user ID to search with
+	 * @return the matching user ID mapper, or <code>null</code> if a matching user ID mapper could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public UserIdMapper fetchByT_E(String type, String externalUserId,
@@ -1130,9 +1130,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Finds all the user id mappers.
+	 * Finds all the user ID mappers.
 	 *
-	 * @return the user id mappers
+	 * @return the user ID mappers
 	 * @throws SystemException if a system exception occurred
 	 */
 	public List<UserIdMapper> findAll() throws SystemException {
@@ -1140,15 +1140,15 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Finds a range of all the user id mappers.
+	 * Finds a range of all the user ID mappers.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of user id mappers to return
-	 * @param end the upper bound of the range of user id mappers to return (not inclusive)
-	 * @return the range of user id mappers
+	 * @param start the lower bound of the range of user ID mappers to return
+	 * @param end the upper bound of the range of user ID mappers to return (not inclusive)
+	 * @return the range of user ID mappers
 	 * @throws SystemException if a system exception occurred
 	 */
 	public List<UserIdMapper> findAll(int start, int end)
@@ -1157,16 +1157,16 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Finds an ordered range of all the user id mappers.
+	 * Finds an ordered range of all the user ID mappers.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of user id mappers to return
-	 * @param end the upper bound of the range of user id mappers to return (not inclusive)
+	 * @param start the lower bound of the range of user ID mappers to return
+	 * @param end the upper bound of the range of user ID mappers to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
-	 * @return the ordered range of user id mappers
+	 * @return the ordered range of user ID mappers
 	 * @throws SystemException if a system exception occurred
 	 */
 	public List<UserIdMapper> findAll(int start, int end,
@@ -1239,9 +1239,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Removes all the user id mappers where userId = &#63; from the database.
+	 * Removes all the user ID mappers where userId = &#63; from the database.
 	 *
-	 * @param userId the user id to search with
+	 * @param userId the user ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUserId(long userId) throws SystemException {
@@ -1251,9 +1251,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Removes the user id mapper where userId = &#63; and type = &#63; from the database.
+	 * Removes the user ID mapper where userId = &#63; and type = &#63; from the database.
 	 *
-	 * @param userId the user id to search with
+	 * @param userId the user ID to search with
 	 * @param type the type to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1265,10 +1265,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Removes the user id mapper where type = &#63; and externalUserId = &#63; from the database.
+	 * Removes the user ID mapper where type = &#63; and externalUserId = &#63; from the database.
 	 *
 	 * @param type the type to search with
-	 * @param externalUserId the external user id to search with
+	 * @param externalUserId the external user ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByT_E(String type, String externalUserId)
@@ -1279,7 +1279,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Removes all the user id mappers from the database.
+	 * Removes all the user ID mappers from the database.
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1290,10 +1290,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Counts all the user id mappers where userId = &#63;.
+	 * Counts all the user ID mappers where userId = &#63;.
 	 *
-	 * @param userId the user id to search with
-	 * @return the number of matching user id mappers
+	 * @param userId the user ID to search with
+	 * @return the number of matching user ID mappers
 	 * @throws SystemException if a system exception occurred
 	 */
 	public int countByUserId(long userId) throws SystemException {
@@ -1343,11 +1343,11 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Counts all the user id mappers where userId = &#63; and type = &#63;.
+	 * Counts all the user ID mappers where userId = &#63; and type = &#63;.
 	 *
-	 * @param userId the user id to search with
+	 * @param userId the user ID to search with
 	 * @param type the type to search with
-	 * @return the number of matching user id mappers
+	 * @return the number of matching user ID mappers
 	 * @throws SystemException if a system exception occurred
 	 */
 	public int countByU_T(long userId, String type) throws SystemException {
@@ -1413,11 +1413,11 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Counts all the user id mappers where type = &#63; and externalUserId = &#63;.
+	 * Counts all the user ID mappers where type = &#63; and externalUserId = &#63;.
 	 *
 	 * @param type the type to search with
-	 * @param externalUserId the external user id to search with
-	 * @return the number of matching user id mappers
+	 * @param externalUserId the external user ID to search with
+	 * @return the number of matching user ID mappers
 	 * @throws SystemException if a system exception occurred
 	 */
 	public int countByT_E(String type, String externalUserId)
@@ -1496,9 +1496,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Counts all the user id mappers.
+	 * Counts all the user ID mappers.
 	 *
-	 * @return the number of user id mappers
+	 * @return the number of user ID mappers
 	 * @throws SystemException if a system exception occurred
 	 */
 	public int countAll() throws SystemException {
@@ -1536,7 +1536,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Initializes the user id mapper persistence.
+	 * Initializes the user ID mapper persistence.
 	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(

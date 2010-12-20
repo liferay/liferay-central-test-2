@@ -75,16 +75,16 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the page id of this wiki page.
+	 * Gets the page ID of this wiki page.
 	 *
-	 * @return the page id of this wiki page
+	 * @return the page ID of this wiki page
 	 */
 	public long getPageId();
 
 	/**
-	 * Sets the page id of this wiki page.
+	 * Sets the page ID of this wiki page.
 	 *
-	 * @param pageId the page id of this wiki page
+	 * @param pageId the page ID of this wiki page
 	 */
 	public void setPageId(long pageId);
 
@@ -103,44 +103,44 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 	public void setResourcePrimKey(long resourcePrimKey);
 
 	/**
-	 * Gets the group id of this wiki page.
+	 * Gets the group ID of this wiki page.
 	 *
-	 * @return the group id of this wiki page
+	 * @return the group ID of this wiki page
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this wiki page.
+	 * Sets the group ID of this wiki page.
 	 *
-	 * @param groupId the group id of this wiki page
+	 * @param groupId the group ID of this wiki page
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this wiki page.
+	 * Gets the company ID of this wiki page.
 	 *
-	 * @return the company id of this wiki page
+	 * @return the company ID of this wiki page
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this wiki page.
+	 * Sets the company ID of this wiki page.
 	 *
-	 * @param companyId the company id of this wiki page
+	 * @param companyId the company ID of this wiki page
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this wiki page.
+	 * Gets the user ID of this wiki page.
 	 *
-	 * @return the user id of this wiki page
+	 * @return the user ID of this wiki page
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this wiki page.
+	 * Sets the user ID of this wiki page.
 	 *
-	 * @param userId the user id of this wiki page
+	 * @param userId the user ID of this wiki page
 	 */
 	public void setUserId(long userId);
 
@@ -203,16 +203,16 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the node id of this wiki page.
+	 * Gets the node ID of this wiki page.
 	 *
-	 * @return the node id of this wiki page
+	 * @return the node ID of this wiki page
 	 */
 	public long getNodeId();
 
 	/**
-	 * Sets the node id of this wiki page.
+	 * Sets the node ID of this wiki page.
 	 *
-	 * @param nodeId the node id of this wiki page
+	 * @param nodeId the node ID of this wiki page
 	 */
 	public void setNodeId(long nodeId);
 
@@ -377,16 +377,16 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 	public void setStatus(int status);
 
 	/**
-	 * Gets the status by user id of this wiki page.
+	 * Gets the status by user ID of this wiki page.
 	 *
-	 * @return the status by user id of this wiki page
+	 * @return the status by user ID of this wiki page
 	 */
 	public long getStatusByUserId();
 
 	/**
-	 * Sets the status by user id of this wiki page.
+	 * Sets the status by user ID of this wiki page.
 	 *
-	 * @param statusByUserId the status by user id of this wiki page
+	 * @param statusByUserId the status by user ID of this wiki page
 	 */
 	public void setStatusByUserId(long statusByUserId);
 

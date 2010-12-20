@@ -107,7 +107,7 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	/**
 	* Finds all the social equity logs where assetEntryId = &#63; and type = &#63; and active = &#63;.
 	*
-	* @param assetEntryId the asset entry id to search with
+	* @param assetEntryId the asset entry ID to search with
 	* @param type the type to search with
 	* @param active the active to search with
 	* @return the matching social equity logs
@@ -124,7 +124,7 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param assetEntryId the asset entry id to search with
+	* @param assetEntryId the asset entry ID to search with
 	* @param type the type to search with
 	* @param active the active to search with
 	* @param start the lower bound of the range of social equity logs to return
@@ -143,7 +143,7 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param assetEntryId the asset entry id to search with
+	* @param assetEntryId the asset entry ID to search with
 	* @param type the type to search with
 	* @param active the active to search with
 	* @param start the lower bound of the range of social equity logs to return
@@ -164,7 +164,7 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param assetEntryId the asset entry id to search with
+	* @param assetEntryId the asset entry ID to search with
 	* @param type the type to search with
 	* @param active the active to search with
 	* @param orderByComparator the comparator to order the set by
@@ -185,7 +185,7 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param assetEntryId the asset entry id to search with
+	* @param assetEntryId the asset entry ID to search with
 	* @param type the type to search with
 	* @param active the active to search with
 	* @param orderByComparator the comparator to order the set by
@@ -207,7 +207,7 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* </p>
 	*
 	* @param equityLogId the primary key of the current social equity log
-	* @param assetEntryId the asset entry id to search with
+	* @param assetEntryId the asset entry ID to search with
 	* @param type the type to search with
 	* @param active the active to search with
 	* @param orderByComparator the comparator to order the set by
@@ -224,8 +224,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	/**
 	* Finds all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and extraData = &#63;.
 	*
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param active the active to search with
 	* @param extraData the extra data to search with
 	* @return the matching social equity logs
@@ -243,8 +243,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param active the active to search with
 	* @param extraData the extra data to search with
 	* @param start the lower bound of the range of social equity logs to return
@@ -264,8 +264,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param active the active to search with
 	* @param extraData the extra data to search with
 	* @param start the lower bound of the range of social equity logs to return
@@ -287,8 +287,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param active the active to search with
 	* @param extraData the extra data to search with
 	* @param orderByComparator the comparator to order the set by
@@ -310,8 +310,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param active the active to search with
 	* @param extraData the extra data to search with
 	* @param orderByComparator the comparator to order the set by
@@ -334,8 +334,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* </p>
 	*
 	* @param equityLogId the primary key of the current social equity log
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param active the active to search with
 	* @param extraData the extra data to search with
 	* @param orderByComparator the comparator to order the set by
@@ -353,9 +353,9 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	/**
 	* Finds all the social equity logs where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and active = &#63; and extraData = &#63;.
 	*
-	* @param userId the user id to search with
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param userId the user ID to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param active the active to search with
 	* @param extraData the extra data to search with
 	* @return the matching social equity logs
@@ -373,9 +373,9 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param userId the user ID to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param active the active to search with
 	* @param extraData the extra data to search with
 	* @param start the lower bound of the range of social equity logs to return
@@ -395,9 +395,9 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param userId the user ID to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param active the active to search with
 	* @param extraData the extra data to search with
 	* @param start the lower bound of the range of social equity logs to return
@@ -419,9 +419,9 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param userId the user ID to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param active the active to search with
 	* @param extraData the extra data to search with
 	* @param orderByComparator the comparator to order the set by
@@ -443,9 +443,9 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param userId the user ID to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param active the active to search with
 	* @param extraData the extra data to search with
 	* @param orderByComparator the comparator to order the set by
@@ -468,9 +468,9 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* </p>
 	*
 	* @param equityLogId the primary key of the current social equity log
-	* @param userId the user id to search with
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param userId the user ID to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param active the active to search with
 	* @param extraData the extra data to search with
 	* @param orderByComparator the comparator to order the set by
@@ -488,8 +488,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	/**
 	* Finds all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
-	* @param userId the user id to search with
-	* @param actionId the action id to search with
+	* @param userId the user ID to search with
+	* @param actionId the action ID to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
@@ -509,8 +509,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
-	* @param actionId the action id to search with
+	* @param userId the user ID to search with
+	* @param actionId the action ID to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
@@ -532,8 +532,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
-	* @param actionId the action id to search with
+	* @param userId the user ID to search with
+	* @param actionId the action ID to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
@@ -557,8 +557,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
-	* @param actionId the action id to search with
+	* @param userId the user ID to search with
+	* @param actionId the action ID to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
@@ -582,8 +582,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
-	* @param actionId the action id to search with
+	* @param userId the user ID to search with
+	* @param actionId the action ID to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
@@ -608,8 +608,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* </p>
 	*
 	* @param equityLogId the primary key of the current social equity log
-	* @param userId the user id to search with
-	* @param actionId the action id to search with
+	* @param userId the user ID to search with
+	* @param actionId the action ID to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
@@ -629,8 +629,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	/**
 	* Finds all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
@@ -650,8 +650,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
@@ -673,8 +673,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
@@ -699,8 +699,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
@@ -724,8 +724,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
@@ -750,8 +750,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	* </p>
 	*
 	* @param equityLogId the primary key of the current social equity log
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
@@ -771,9 +771,9 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	/**
 	* Finds the social equity log where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63; or throws a {@link com.liferay.portlet.social.NoSuchEquityLogException} if it could not be found.
 	*
-	* @param userId the user id to search with
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param userId the user ID to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
@@ -791,9 +791,9 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	/**
 	* Finds the social equity log where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param userId the user id to search with
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param userId the user ID to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
@@ -809,9 +809,9 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	/**
 	* Finds the social equity log where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param userId the user id to search with
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param userId the user ID to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
@@ -871,7 +871,7 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	/**
 	* Removes all the social equity logs where assetEntryId = &#63; and type = &#63; and active = &#63; from the database.
 	*
-	* @param assetEntryId the asset entry id to search with
+	* @param assetEntryId the asset entry ID to search with
 	* @param type the type to search with
 	* @param active the active to search with
 	* @throws SystemException if a system exception occurred
@@ -882,8 +882,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	/**
 	* Removes all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and extraData = &#63; from the database.
 	*
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param active the active to search with
 	* @param extraData the extra data to search with
 	* @throws SystemException if a system exception occurred
@@ -895,9 +895,9 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	/**
 	* Removes all the social equity logs where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and active = &#63; and extraData = &#63; from the database.
 	*
-	* @param userId the user id to search with
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param userId the user ID to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param active the active to search with
 	* @param extraData the extra data to search with
 	* @throws SystemException if a system exception occurred
@@ -909,8 +909,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	/**
 	* Removes all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63; from the database.
 	*
-	* @param userId the user id to search with
-	* @param actionId the action id to search with
+	* @param userId the user ID to search with
+	* @param actionId the action ID to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
@@ -924,8 +924,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	/**
 	* Removes all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63; from the database.
 	*
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
@@ -940,9 +940,9 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	/**
 	* Removes the social equity log where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63; from the database.
 	*
-	* @param userId the user id to search with
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param userId the user ID to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
@@ -966,7 +966,7 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	/**
 	* Counts all the social equity logs where assetEntryId = &#63; and type = &#63; and active = &#63;.
 	*
-	* @param assetEntryId the asset entry id to search with
+	* @param assetEntryId the asset entry ID to search with
 	* @param type the type to search with
 	* @param active the active to search with
 	* @return the number of matching social equity logs
@@ -978,8 +978,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	/**
 	* Counts all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and extraData = &#63;.
 	*
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param active the active to search with
 	* @param extraData the extra data to search with
 	* @return the number of matching social equity logs
@@ -992,9 +992,9 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	/**
 	* Counts all the social equity logs where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and active = &#63; and extraData = &#63;.
 	*
-	* @param userId the user id to search with
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param userId the user ID to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param active the active to search with
 	* @param extraData the extra data to search with
 	* @return the number of matching social equity logs
@@ -1007,8 +1007,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	/**
 	* Counts all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
-	* @param userId the user id to search with
-	* @param actionId the action id to search with
+	* @param userId the user ID to search with
+	* @param actionId the action ID to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
@@ -1023,8 +1023,8 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	/**
 	* Counts all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with
@@ -1040,9 +1040,9 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	/**
 	* Counts all the social equity logs where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	*
-	* @param userId the user id to search with
-	* @param assetEntryId the asset entry id to search with
-	* @param actionId the action id to search with
+	* @param userId the user ID to search with
+	* @param assetEntryId the asset entry ID to search with
+	* @param actionId the action ID to search with
 	* @param actionDate the action date to search with
 	* @param active the active to search with
 	* @param type the type to search with

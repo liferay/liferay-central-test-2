@@ -202,7 +202,7 @@ public class MBStatsUserUtil {
 	/**
 	* Finds all the message boards stats users where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching message boards stats users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -219,7 +219,7 @@ public class MBStatsUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of message boards stats users to return
 	* @param end the upper bound of the range of message boards stats users to return (not inclusive)
 	* @return the range of matching message boards stats users
@@ -238,7 +238,7 @@ public class MBStatsUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of message boards stats users to return
 	* @param end the upper bound of the range of message boards stats users to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -260,7 +260,7 @@ public class MBStatsUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message boards stats user
 	* @throws com.liferay.portlet.messageboards.NoSuchStatsUserException if a matching message boards stats user could not be found
@@ -281,7 +281,7 @@ public class MBStatsUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message boards stats user
 	* @throws com.liferay.portlet.messageboards.NoSuchStatsUserException if a matching message boards stats user could not be found
@@ -303,7 +303,7 @@ public class MBStatsUserUtil {
 	* </p>
 	*
 	* @param statsUserId the primary key of the current message boards stats user
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message boards stats user
 	* @throws com.liferay.portlet.messageboards.NoSuchStatsUserException if a message boards stats user with the primary key could not be found
@@ -322,7 +322,7 @@ public class MBStatsUserUtil {
 	/**
 	* Finds all the message boards stats users where userId = &#63;.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @return the matching message boards stats users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -338,7 +338,7 @@ public class MBStatsUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of message boards stats users to return
 	* @param end the upper bound of the range of message boards stats users to return (not inclusive)
 	* @return the range of matching message boards stats users
@@ -357,7 +357,7 @@ public class MBStatsUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of message boards stats users to return
 	* @param end the upper bound of the range of message boards stats users to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -379,7 +379,7 @@ public class MBStatsUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message boards stats user
 	* @throws com.liferay.portlet.messageboards.NoSuchStatsUserException if a matching message boards stats user could not be found
@@ -400,7 +400,7 @@ public class MBStatsUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message boards stats user
 	* @throws com.liferay.portlet.messageboards.NoSuchStatsUserException if a matching message boards stats user could not be found
@@ -422,7 +422,7 @@ public class MBStatsUserUtil {
 	* </p>
 	*
 	* @param statsUserId the primary key of the current message boards stats user
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message boards stats user
 	* @throws com.liferay.portlet.messageboards.NoSuchStatsUserException if a message boards stats user with the primary key could not be found
@@ -441,8 +441,8 @@ public class MBStatsUserUtil {
 	/**
 	* Finds the message boards stats user where groupId = &#63; and userId = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchStatsUserException} if it could not be found.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @return the matching message boards stats user
 	* @throws com.liferay.portlet.messageboards.NoSuchStatsUserException if a matching message boards stats user could not be found
 	* @throws SystemException if a system exception occurred
@@ -457,8 +457,8 @@ public class MBStatsUserUtil {
 	/**
 	* Finds the message boards stats user where groupId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @return the matching message boards stats user, or <code>null</code> if a matching message boards stats user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -471,8 +471,8 @@ public class MBStatsUserUtil {
 	/**
 	* Finds the message boards stats user where groupId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @return the matching message boards stats user, or <code>null</code> if a matching message boards stats user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -485,7 +485,7 @@ public class MBStatsUserUtil {
 	/**
 	* Finds all the message boards stats users where groupId = &#63; and messageCount &ne; &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param messageCount the message count to search with
 	* @return the matching message boards stats users
 	* @throws SystemException if a system exception occurred
@@ -503,7 +503,7 @@ public class MBStatsUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param messageCount the message count to search with
 	* @param start the lower bound of the range of message boards stats users to return
 	* @param end the upper bound of the range of message boards stats users to return (not inclusive)
@@ -523,7 +523,7 @@ public class MBStatsUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param messageCount the message count to search with
 	* @param start the lower bound of the range of message boards stats users to return
 	* @param end the upper bound of the range of message boards stats users to return (not inclusive)
@@ -547,7 +547,7 @@ public class MBStatsUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param messageCount the message count to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message boards stats user
@@ -570,7 +570,7 @@ public class MBStatsUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param messageCount the message count to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message boards stats user
@@ -594,7 +594,7 @@ public class MBStatsUserUtil {
 	* </p>
 	*
 	* @param statsUserId the primary key of the current message boards stats user
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param messageCount the message count to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message boards stats user
@@ -663,7 +663,7 @@ public class MBStatsUserUtil {
 	/**
 	* Removes all the message boards stats users where groupId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByGroupId(long groupId)
@@ -674,7 +674,7 @@ public class MBStatsUserUtil {
 	/**
 	* Removes all the message boards stats users where userId = &#63; from the database.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUserId(long userId)
@@ -685,8 +685,8 @@ public class MBStatsUserUtil {
 	/**
 	* Removes the message boards stats user where groupId = &#63; and userId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_U(long groupId, long userId)
@@ -698,7 +698,7 @@ public class MBStatsUserUtil {
 	/**
 	* Removes all the message boards stats users where groupId = &#63; and messageCount &ne; &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param messageCount the message count to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -720,7 +720,7 @@ public class MBStatsUserUtil {
 	/**
 	* Counts all the message boards stats users where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching message boards stats users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -732,7 +732,7 @@ public class MBStatsUserUtil {
 	/**
 	* Counts all the message boards stats users where userId = &#63;.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @return the number of matching message boards stats users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -744,8 +744,8 @@ public class MBStatsUserUtil {
 	/**
 	* Counts all the message boards stats users where groupId = &#63; and userId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @return the number of matching message boards stats users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -757,7 +757,7 @@ public class MBStatsUserUtil {
 	/**
 	* Counts all the message boards stats users where groupId = &#63; and messageCount &ne; &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param messageCount the message count to search with
 	* @return the number of matching message boards stats users
 	* @throws SystemException if a system exception occurred

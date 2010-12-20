@@ -384,9 +384,9 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	/**
 	 * Finds all the workflow instance links where groupId = &#63; and companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @return the matching workflow instance links
 	 * @throws SystemException if a system exception occurred
@@ -405,9 +405,9 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param start the lower bound of the range of workflow instance links to return
 	 * @param end the upper bound of the range of workflow instance links to return (not inclusive)
@@ -428,9 +428,9 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param start the lower bound of the range of workflow instance links to return
 	 * @param end the upper bound of the range of workflow instance links to return (not inclusive)
@@ -532,9 +532,9 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching workflow instance link
@@ -581,9 +581,9 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching workflow instance link
@@ -633,9 +633,9 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * </p>
 	 *
 	 * @param workflowInstanceLinkId the primary key of the current workflow instance link
-	 * @param groupId the group id to search with
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next workflow instance link
@@ -904,9 +904,9 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	/**
 	 * Removes all the workflow instance links where groupId = &#63; and companyId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -932,9 +932,9 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	/**
 	 * Counts all the workflow instance links where groupId = &#63; and companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @return the number of matching workflow instance links
 	 * @throws SystemException if a system exception occurred

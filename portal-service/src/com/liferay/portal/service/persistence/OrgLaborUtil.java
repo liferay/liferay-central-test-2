@@ -196,7 +196,7 @@ public class OrgLaborUtil {
 	/**
 	* Finds all the org labors where organizationId = &#63;.
 	*
-	* @param organizationId the organization id to search with
+	* @param organizationId the organization ID to search with
 	* @return the matching org labors
 	* @throws SystemException if a system exception occurred
 	*/
@@ -213,7 +213,7 @@ public class OrgLaborUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param organizationId the organization id to search with
+	* @param organizationId the organization ID to search with
 	* @param start the lower bound of the range of org labors to return
 	* @param end the upper bound of the range of org labors to return (not inclusive)
 	* @return the range of matching org labors
@@ -232,7 +232,7 @@ public class OrgLaborUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param organizationId the organization id to search with
+	* @param organizationId the organization ID to search with
 	* @param start the lower bound of the range of org labors to return
 	* @param end the upper bound of the range of org labors to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -255,7 +255,7 @@ public class OrgLaborUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param organizationId the organization id to search with
+	* @param organizationId the organization ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching org labor
 	* @throws com.liferay.portal.NoSuchOrgLaborException if a matching org labor could not be found
@@ -277,7 +277,7 @@ public class OrgLaborUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param organizationId the organization id to search with
+	* @param organizationId the organization ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching org labor
 	* @throws com.liferay.portal.NoSuchOrgLaborException if a matching org labor could not be found
@@ -300,7 +300,7 @@ public class OrgLaborUtil {
 	* </p>
 	*
 	* @param orgLaborId the primary key of the current org labor
-	* @param organizationId the organization id to search with
+	* @param organizationId the organization ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next org labor
 	* @throws com.liferay.portal.NoSuchOrgLaborException if a org labor with the primary key could not be found
@@ -368,7 +368,7 @@ public class OrgLaborUtil {
 	/**
 	* Removes all the org labors where organizationId = &#63; from the database.
 	*
-	* @param organizationId the organization id to search with
+	* @param organizationId the organization ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByOrganizationId(long organizationId)
@@ -389,7 +389,7 @@ public class OrgLaborUtil {
 	/**
 	* Counts all the org labors where organizationId = &#63;.
 	*
-	* @param organizationId the organization id to search with
+	* @param organizationId the organization ID to search with
 	* @return the number of matching org labors
 	* @throws SystemException if a system exception occurred
 	*/

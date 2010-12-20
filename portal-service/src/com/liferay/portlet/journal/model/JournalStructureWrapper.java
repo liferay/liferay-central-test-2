@@ -65,72 +65,72 @@ public class JournalStructureWrapper implements JournalStructure {
 	}
 
 	/**
-	* Gets the id of this journal structure.
+	* Gets the ID of this journal structure.
 	*
-	* @return the id of this journal structure
+	* @return the ID of this journal structure
 	*/
 	public long getId() {
 		return _journalStructure.getId();
 	}
 
 	/**
-	* Sets the id of this journal structure.
+	* Sets the ID of this journal structure.
 	*
-	* @param id the id of this journal structure
+	* @param id the ID of this journal structure
 	*/
 	public void setId(long id) {
 		_journalStructure.setId(id);
 	}
 
 	/**
-	* Gets the group id of this journal structure.
+	* Gets the group ID of this journal structure.
 	*
-	* @return the group id of this journal structure
+	* @return the group ID of this journal structure
 	*/
 	public long getGroupId() {
 		return _journalStructure.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this journal structure.
+	* Sets the group ID of this journal structure.
 	*
-	* @param groupId the group id of this journal structure
+	* @param groupId the group ID of this journal structure
 	*/
 	public void setGroupId(long groupId) {
 		_journalStructure.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this journal structure.
+	* Gets the company ID of this journal structure.
 	*
-	* @return the company id of this journal structure
+	* @return the company ID of this journal structure
 	*/
 	public long getCompanyId() {
 		return _journalStructure.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this journal structure.
+	* Sets the company ID of this journal structure.
 	*
-	* @param companyId the company id of this journal structure
+	* @param companyId the company ID of this journal structure
 	*/
 	public void setCompanyId(long companyId) {
 		_journalStructure.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this journal structure.
+	* Gets the user ID of this journal structure.
 	*
-	* @return the user id of this journal structure
+	* @return the user ID of this journal structure
 	*/
 	public long getUserId() {
 		return _journalStructure.getUserId();
 	}
 
 	/**
-	* Sets the user id of this journal structure.
+	* Sets the user ID of this journal structure.
 	*
-	* @param userId the user id of this journal structure
+	* @param userId the user ID of this journal structure
 	*/
 	public void setUserId(long userId) {
 		_journalStructure.setUserId(userId);
@@ -211,36 +211,36 @@ public class JournalStructureWrapper implements JournalStructure {
 	}
 
 	/**
-	* Gets the structure id of this journal structure.
+	* Gets the structure ID of this journal structure.
 	*
-	* @return the structure id of this journal structure
+	* @return the structure ID of this journal structure
 	*/
 	public java.lang.String getStructureId() {
 		return _journalStructure.getStructureId();
 	}
 
 	/**
-	* Sets the structure id of this journal structure.
+	* Sets the structure ID of this journal structure.
 	*
-	* @param structureId the structure id of this journal structure
+	* @param structureId the structure ID of this journal structure
 	*/
 	public void setStructureId(java.lang.String structureId) {
 		_journalStructure.setStructureId(structureId);
 	}
 
 	/**
-	* Gets the parent structure id of this journal structure.
+	* Gets the parent structure ID of this journal structure.
 	*
-	* @return the parent structure id of this journal structure
+	* @return the parent structure ID of this journal structure
 	*/
 	public java.lang.String getParentStructureId() {
 		return _journalStructure.getParentStructureId();
 	}
 
 	/**
-	* Sets the parent structure id of this journal structure.
+	* Sets the parent structure ID of this journal structure.
 	*
-	* @param parentStructureId the parent structure id of this journal structure
+	* @param parentStructureId the parent structure ID of this journal structure
 	*/
 	public void setParentStructureId(java.lang.String parentStructureId) {
 		_journalStructure.setParentStructureId(parentStructureId);

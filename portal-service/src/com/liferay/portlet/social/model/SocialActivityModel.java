@@ -58,58 +58,58 @@ public interface SocialActivityModel extends BaseModel<SocialActivity> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the activity id of this social activity.
+	 * Gets the activity ID of this social activity.
 	 *
-	 * @return the activity id of this social activity
+	 * @return the activity ID of this social activity
 	 */
 	public long getActivityId();
 
 	/**
-	 * Sets the activity id of this social activity.
+	 * Sets the activity ID of this social activity.
 	 *
-	 * @param activityId the activity id of this social activity
+	 * @param activityId the activity ID of this social activity
 	 */
 	public void setActivityId(long activityId);
 
 	/**
-	 * Gets the group id of this social activity.
+	 * Gets the group ID of this social activity.
 	 *
-	 * @return the group id of this social activity
+	 * @return the group ID of this social activity
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this social activity.
+	 * Sets the group ID of this social activity.
 	 *
-	 * @param groupId the group id of this social activity
+	 * @param groupId the group ID of this social activity
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this social activity.
+	 * Gets the company ID of this social activity.
 	 *
-	 * @return the company id of this social activity
+	 * @return the company ID of this social activity
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this social activity.
+	 * Sets the company ID of this social activity.
 	 *
-	 * @param companyId the company id of this social activity
+	 * @param companyId the company ID of this social activity
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this social activity.
+	 * Gets the user ID of this social activity.
 	 *
-	 * @return the user id of this social activity
+	 * @return the user ID of this social activity
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this social activity.
+	 * Sets the user ID of this social activity.
 	 *
-	 * @param userId the user id of this social activity
+	 * @param userId the user ID of this social activity
 	 */
 	public void setUserId(long userId);
 
@@ -143,16 +143,16 @@ public interface SocialActivityModel extends BaseModel<SocialActivity> {
 	public void setCreateDate(long createDate);
 
 	/**
-	 * Gets the mirror activity id of this social activity.
+	 * Gets the mirror activity ID of this social activity.
 	 *
-	 * @return the mirror activity id of this social activity
+	 * @return the mirror activity ID of this social activity
 	 */
 	public long getMirrorActivityId();
 
 	/**
-	 * Sets the mirror activity id of this social activity.
+	 * Sets the mirror activity ID of this social activity.
 	 *
-	 * @param mirrorActivityId the mirror activity id of this social activity
+	 * @param mirrorActivityId the mirror activity ID of this social activity
 	 */
 	public void setMirrorActivityId(long mirrorActivityId);
 
@@ -164,16 +164,16 @@ public interface SocialActivityModel extends BaseModel<SocialActivity> {
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this social activity.
+	 * Gets the class name ID of this social activity.
 	 *
-	 * @return the class name id of this social activity
+	 * @return the class name ID of this social activity
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this social activity.
+	 * Sets the class name ID of this social activity.
 	 *
-	 * @param classNameId the class name id of this social activity
+	 * @param classNameId the class name ID of this social activity
 	 */
 	public void setClassNameId(long classNameId);
 
@@ -221,16 +221,16 @@ public interface SocialActivityModel extends BaseModel<SocialActivity> {
 	public void setExtraData(String extraData);
 
 	/**
-	 * Gets the receiver user id of this social activity.
+	 * Gets the receiver user ID of this social activity.
 	 *
-	 * @return the receiver user id of this social activity
+	 * @return the receiver user ID of this social activity
 	 */
 	public long getReceiverUserId();
 
 	/**
-	 * Sets the receiver user id of this social activity.
+	 * Sets the receiver user ID of this social activity.
 	 *
-	 * @param receiverUserId the receiver user id of this social activity
+	 * @param receiverUserId the receiver user ID of this social activity
 	 */
 	public void setReceiverUserId(long receiverUserId);
 

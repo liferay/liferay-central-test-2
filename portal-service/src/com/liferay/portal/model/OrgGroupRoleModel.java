@@ -56,44 +56,44 @@ public interface OrgGroupRoleModel extends BaseModel<OrgGroupRole> {
 	public void setPrimaryKey(OrgGroupRolePK pk);
 
 	/**
-	 * Gets the organization id of this org group role.
+	 * Gets the organization ID of this org group role.
 	 *
-	 * @return the organization id of this org group role
+	 * @return the organization ID of this org group role
 	 */
 	public long getOrganizationId();
 
 	/**
-	 * Sets the organization id of this org group role.
+	 * Sets the organization ID of this org group role.
 	 *
-	 * @param organizationId the organization id of this org group role
+	 * @param organizationId the organization ID of this org group role
 	 */
 	public void setOrganizationId(long organizationId);
 
 	/**
-	 * Gets the group id of this org group role.
+	 * Gets the group ID of this org group role.
 	 *
-	 * @return the group id of this org group role
+	 * @return the group ID of this org group role
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this org group role.
+	 * Sets the group ID of this org group role.
 	 *
-	 * @param groupId the group id of this org group role
+	 * @param groupId the group ID of this org group role
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the role id of this org group role.
+	 * Gets the role ID of this org group role.
 	 *
-	 * @return the role id of this org group role
+	 * @return the role ID of this org group role
 	 */
 	public long getRoleId();
 
 	/**
-	 * Sets the role id of this org group role.
+	 * Sets the role ID of this org group role.
 	 *
-	 * @param roleId the role id of this org group role
+	 * @param roleId the role ID of this org group role
 	 */
 	public void setRoleId(long roleId);
 

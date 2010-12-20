@@ -60,44 +60,44 @@ public interface SCProductVersionModel extends BaseModel<SCProductVersion> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the product version id of this s c product version.
+	 * Gets the product version ID of this s c product version.
 	 *
-	 * @return the product version id of this s c product version
+	 * @return the product version ID of this s c product version
 	 */
 	public long getProductVersionId();
 
 	/**
-	 * Sets the product version id of this s c product version.
+	 * Sets the product version ID of this s c product version.
 	 *
-	 * @param productVersionId the product version id of this s c product version
+	 * @param productVersionId the product version ID of this s c product version
 	 */
 	public void setProductVersionId(long productVersionId);
 
 	/**
-	 * Gets the company id of this s c product version.
+	 * Gets the company ID of this s c product version.
 	 *
-	 * @return the company id of this s c product version
+	 * @return the company ID of this s c product version
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this s c product version.
+	 * Sets the company ID of this s c product version.
 	 *
-	 * @param companyId the company id of this s c product version
+	 * @param companyId the company ID of this s c product version
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this s c product version.
+	 * Gets the user ID of this s c product version.
 	 *
-	 * @return the user id of this s c product version
+	 * @return the user ID of this s c product version
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this s c product version.
+	 * Sets the user ID of this s c product version.
 	 *
-	 * @param userId the user id of this s c product version
+	 * @param userId the user ID of this s c product version
 	 */
 	public void setUserId(long userId);
 
@@ -160,16 +160,16 @@ public interface SCProductVersionModel extends BaseModel<SCProductVersion> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the product entry id of this s c product version.
+	 * Gets the product entry ID of this s c product version.
 	 *
-	 * @return the product entry id of this s c product version
+	 * @return the product entry ID of this s c product version
 	 */
 	public long getProductEntryId();
 
 	/**
-	 * Sets the product entry id of this s c product version.
+	 * Sets the product entry ID of this s c product version.
 	 *
-	 * @param productEntryId the product entry id of this s c product version
+	 * @param productEntryId the product entry ID of this s c product version
 	 */
 	public void setProductEntryId(long productEntryId);
 

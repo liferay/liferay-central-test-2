@@ -56,44 +56,44 @@ public interface VirtualHostModel extends BaseModel<VirtualHost> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the virtual host id of this virtual host.
+	 * Gets the virtual host ID of this virtual host.
 	 *
-	 * @return the virtual host id of this virtual host
+	 * @return the virtual host ID of this virtual host
 	 */
 	public long getVirtualHostId();
 
 	/**
-	 * Sets the virtual host id of this virtual host.
+	 * Sets the virtual host ID of this virtual host.
 	 *
-	 * @param virtualHostId the virtual host id of this virtual host
+	 * @param virtualHostId the virtual host ID of this virtual host
 	 */
 	public void setVirtualHostId(long virtualHostId);
 
 	/**
-	 * Gets the company id of this virtual host.
+	 * Gets the company ID of this virtual host.
 	 *
-	 * @return the company id of this virtual host
+	 * @return the company ID of this virtual host
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this virtual host.
+	 * Sets the company ID of this virtual host.
 	 *
-	 * @param companyId the company id of this virtual host
+	 * @param companyId the company ID of this virtual host
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the layout set id of this virtual host.
+	 * Gets the layout set ID of this virtual host.
 	 *
-	 * @return the layout set id of this virtual host
+	 * @return the layout set ID of this virtual host
 	 */
 	public long getLayoutSetId();
 
 	/**
-	 * Sets the layout set id of this virtual host.
+	 * Sets the layout set ID of this virtual host.
 	 *
-	 * @param layoutSetId the layout set id of this virtual host
+	 * @param layoutSetId the layout set ID of this virtual host
 	 */
 	public void setLayoutSetId(long layoutSetId);
 

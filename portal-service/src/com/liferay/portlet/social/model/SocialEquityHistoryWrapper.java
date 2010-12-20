@@ -47,72 +47,72 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 	}
 
 	/**
-	* Gets the equity history id of this social equity history.
+	* Gets the equity history ID of this social equity history.
 	*
-	* @return the equity history id of this social equity history
+	* @return the equity history ID of this social equity history
 	*/
 	public long getEquityHistoryId() {
 		return _socialEquityHistory.getEquityHistoryId();
 	}
 
 	/**
-	* Sets the equity history id of this social equity history.
+	* Sets the equity history ID of this social equity history.
 	*
-	* @param equityHistoryId the equity history id of this social equity history
+	* @param equityHistoryId the equity history ID of this social equity history
 	*/
 	public void setEquityHistoryId(long equityHistoryId) {
 		_socialEquityHistory.setEquityHistoryId(equityHistoryId);
 	}
 
 	/**
-	* Gets the group id of this social equity history.
+	* Gets the group ID of this social equity history.
 	*
-	* @return the group id of this social equity history
+	* @return the group ID of this social equity history
 	*/
 	public long getGroupId() {
 		return _socialEquityHistory.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this social equity history.
+	* Sets the group ID of this social equity history.
 	*
-	* @param groupId the group id of this social equity history
+	* @param groupId the group ID of this social equity history
 	*/
 	public void setGroupId(long groupId) {
 		_socialEquityHistory.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this social equity history.
+	* Gets the company ID of this social equity history.
 	*
-	* @return the company id of this social equity history
+	* @return the company ID of this social equity history
 	*/
 	public long getCompanyId() {
 		return _socialEquityHistory.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this social equity history.
+	* Sets the company ID of this social equity history.
 	*
-	* @param companyId the company id of this social equity history
+	* @param companyId the company ID of this social equity history
 	*/
 	public void setCompanyId(long companyId) {
 		_socialEquityHistory.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this social equity history.
+	* Gets the user ID of this social equity history.
 	*
-	* @return the user id of this social equity history
+	* @return the user ID of this social equity history
 	*/
 	public long getUserId() {
 		return _socialEquityHistory.getUserId();
 	}
 
 	/**
-	* Sets the user id of this social equity history.
+	* Sets the user ID of this social equity history.
 	*
-	* @param userId the user id of this social equity history
+	* @param userId the user ID of this social equity history
 	*/
 	public void setUserId(long userId) {
 		_socialEquityHistory.setUserId(userId);

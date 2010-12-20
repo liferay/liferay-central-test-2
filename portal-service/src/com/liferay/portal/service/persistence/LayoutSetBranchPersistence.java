@@ -104,7 +104,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	/**
 	* Finds all the layout set branchs where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching layout set branchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -119,7 +119,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of layout set branchs to return
 	* @param end the upper bound of the range of layout set branchs to return (not inclusive)
 	* @return the range of matching layout set branchs
@@ -136,7 +136,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of layout set branchs to return
 	* @param end the upper bound of the range of layout set branchs to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -155,7 +155,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching layout set branch
 	* @throws com.liferay.portal.NoSuchLayoutSetBranchException if a matching layout set branch could not be found
@@ -174,7 +174,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching layout set branch
 	* @throws com.liferay.portal.NoSuchLayoutSetBranchException if a matching layout set branch could not be found
@@ -194,7 +194,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	* </p>
 	*
 	* @param layoutSetBranchId the primary key of the current layout set branch
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next layout set branch
 	* @throws com.liferay.portal.NoSuchLayoutSetBranchException if a layout set branch with the primary key could not be found
@@ -209,7 +209,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	/**
 	* Filters by the user's permissions and finds all the layout set branchs where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching layout set branchs that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -224,7 +224,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of layout set branchs to return
 	* @param end the upper bound of the range of layout set branchs to return (not inclusive)
 	* @return the range of matching layout set branchs that the user has permission to view
@@ -241,7 +241,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of layout set branchs to return
 	* @param end the upper bound of the range of layout set branchs to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -256,7 +256,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	/**
 	* Finds all the layout set branchs where groupId = &#63; and privateLayout = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @return the matching layout set branchs
 	* @throws SystemException if a system exception occurred
@@ -272,7 +272,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param start the lower bound of the range of layout set branchs to return
 	* @param end the upper bound of the range of layout set branchs to return (not inclusive)
@@ -290,7 +290,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param start the lower bound of the range of layout set branchs to return
 	* @param end the upper bound of the range of layout set branchs to return (not inclusive)
@@ -310,7 +310,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching layout set branch
@@ -330,7 +330,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching layout set branch
@@ -351,7 +351,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	* </p>
 	*
 	* @param layoutSetBranchId the primary key of the current layout set branch
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next layout set branch
@@ -367,7 +367,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	/**
 	* Filters by the user's permissions and finds all the layout set branchs where groupId = &#63; and privateLayout = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @return the matching layout set branchs that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -383,7 +383,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param start the lower bound of the range of layout set branchs to return
 	* @param end the upper bound of the range of layout set branchs to return (not inclusive)
@@ -401,7 +401,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param start the lower bound of the range of layout set branchs to return
 	* @param end the upper bound of the range of layout set branchs to return (not inclusive)
@@ -417,7 +417,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	/**
 	* Finds the layout set branch where groupId = &#63; and privateLayout = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutSetBranchException} if it could not be found.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param name the name to search with
 	* @return the matching layout set branch
@@ -432,7 +432,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	/**
 	* Finds the layout set branch where groupId = &#63; and privateLayout = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param name the name to search with
 	* @return the matching layout set branch, or <code>null</code> if a matching layout set branch could not be found
@@ -445,7 +445,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	/**
 	* Finds the layout set branch where groupId = &#63; and privateLayout = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param name the name to search with
 	* @return the matching layout set branch, or <code>null</code> if a matching layout set branch could not be found
@@ -501,7 +501,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	/**
 	* Removes all the layout set branchs where groupId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByGroupId(long groupId)
@@ -510,7 +510,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	/**
 	* Removes all the layout set branchs where groupId = &#63; and privateLayout = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -520,7 +520,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	/**
 	* Removes the layout set branch where groupId = &#63; and privateLayout = &#63; and name = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param name the name to search with
 	* @throws SystemException if a system exception occurred
@@ -541,7 +541,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	/**
 	* Counts all the layout set branchs where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching layout set branchs
 	* @throws SystemException if a system exception occurred
 	*/
@@ -551,7 +551,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	/**
 	* Filters by the user's permissions and counts all the layout set branchs where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching layout set branchs that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -561,7 +561,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	/**
 	* Counts all the layout set branchs where groupId = &#63; and privateLayout = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @return the number of matching layout set branchs
 	* @throws SystemException if a system exception occurred
@@ -572,7 +572,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	/**
 	* Filters by the user's permissions and counts all the layout set branchs where groupId = &#63; and privateLayout = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @return the number of matching layout set branchs that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -583,7 +583,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	/**
 	* Counts all the layout set branchs where groupId = &#63; and privateLayout = &#63; and name = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param name the name to search with
 	* @return the number of matching layout set branchs

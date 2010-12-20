@@ -65,72 +65,72 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the id of this journal template.
+	* Gets the ID of this journal template.
 	*
-	* @return the id of this journal template
+	* @return the ID of this journal template
 	*/
 	public long getId() {
 		return _journalTemplate.getId();
 	}
 
 	/**
-	* Sets the id of this journal template.
+	* Sets the ID of this journal template.
 	*
-	* @param id the id of this journal template
+	* @param id the ID of this journal template
 	*/
 	public void setId(long id) {
 		_journalTemplate.setId(id);
 	}
 
 	/**
-	* Gets the group id of this journal template.
+	* Gets the group ID of this journal template.
 	*
-	* @return the group id of this journal template
+	* @return the group ID of this journal template
 	*/
 	public long getGroupId() {
 		return _journalTemplate.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this journal template.
+	* Sets the group ID of this journal template.
 	*
-	* @param groupId the group id of this journal template
+	* @param groupId the group ID of this journal template
 	*/
 	public void setGroupId(long groupId) {
 		_journalTemplate.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this journal template.
+	* Gets the company ID of this journal template.
 	*
-	* @return the company id of this journal template
+	* @return the company ID of this journal template
 	*/
 	public long getCompanyId() {
 		return _journalTemplate.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this journal template.
+	* Sets the company ID of this journal template.
 	*
-	* @param companyId the company id of this journal template
+	* @param companyId the company ID of this journal template
 	*/
 	public void setCompanyId(long companyId) {
 		_journalTemplate.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this journal template.
+	* Gets the user ID of this journal template.
 	*
-	* @return the user id of this journal template
+	* @return the user ID of this journal template
 	*/
 	public long getUserId() {
 		return _journalTemplate.getUserId();
 	}
 
 	/**
-	* Sets the user id of this journal template.
+	* Sets the user ID of this journal template.
 	*
-	* @param userId the user id of this journal template
+	* @param userId the user ID of this journal template
 	*/
 	public void setUserId(long userId) {
 		_journalTemplate.setUserId(userId);
@@ -211,36 +211,36 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the template id of this journal template.
+	* Gets the template ID of this journal template.
 	*
-	* @return the template id of this journal template
+	* @return the template ID of this journal template
 	*/
 	public java.lang.String getTemplateId() {
 		return _journalTemplate.getTemplateId();
 	}
 
 	/**
-	* Sets the template id of this journal template.
+	* Sets the template ID of this journal template.
 	*
-	* @param templateId the template id of this journal template
+	* @param templateId the template ID of this journal template
 	*/
 	public void setTemplateId(java.lang.String templateId) {
 		_journalTemplate.setTemplateId(templateId);
 	}
 
 	/**
-	* Gets the structure id of this journal template.
+	* Gets the structure ID of this journal template.
 	*
-	* @return the structure id of this journal template
+	* @return the structure ID of this journal template
 	*/
 	public java.lang.String getStructureId() {
 		return _journalTemplate.getStructureId();
 	}
 
 	/**
-	* Sets the structure id of this journal template.
+	* Sets the structure ID of this journal template.
 	*
-	* @param structureId the structure id of this journal template
+	* @param structureId the structure ID of this journal template
 	*/
 	public void setStructureId(java.lang.String structureId) {
 		_journalTemplate.setStructureId(structureId);
@@ -373,18 +373,18 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Gets the small image id of this journal template.
+	* Gets the small image ID of this journal template.
 	*
-	* @return the small image id of this journal template
+	* @return the small image ID of this journal template
 	*/
 	public long getSmallImageId() {
 		return _journalTemplate.getSmallImageId();
 	}
 
 	/**
-	* Sets the small image id of this journal template.
+	* Sets the small image ID of this journal template.
 	*
-	* @param smallImageId the small image id of this journal template
+	* @param smallImageId the small image ID of this journal template
 	*/
 	public void setSmallImageId(long smallImageId) {
 		_journalTemplate.setSmallImageId(smallImageId);

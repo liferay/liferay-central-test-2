@@ -83,18 +83,18 @@ public class WikiPageResourceWrapper implements WikiPageResource {
 	}
 
 	/**
-	* Gets the node id of this wiki page resource.
+	* Gets the node ID of this wiki page resource.
 	*
-	* @return the node id of this wiki page resource
+	* @return the node ID of this wiki page resource
 	*/
 	public long getNodeId() {
 		return _wikiPageResource.getNodeId();
 	}
 
 	/**
-	* Sets the node id of this wiki page resource.
+	* Sets the node ID of this wiki page resource.
 	*
-	* @param nodeId the node id of this wiki page resource
+	* @param nodeId the node ID of this wiki page resource
 	*/
 	public void setNodeId(long nodeId) {
 		_wikiPageResource.setNodeId(nodeId);

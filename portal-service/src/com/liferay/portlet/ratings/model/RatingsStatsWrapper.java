@@ -47,18 +47,18 @@ public class RatingsStatsWrapper implements RatingsStats {
 	}
 
 	/**
-	* Gets the stats id of this ratings stats.
+	* Gets the stats ID of this ratings stats.
 	*
-	* @return the stats id of this ratings stats
+	* @return the stats ID of this ratings stats
 	*/
 	public long getStatsId() {
 		return _ratingsStats.getStatsId();
 	}
 
 	/**
-	* Sets the stats id of this ratings stats.
+	* Sets the stats ID of this ratings stats.
 	*
-	* @param statsId the stats id of this ratings stats
+	* @param statsId the stats ID of this ratings stats
 	*/
 	public void setStatsId(long statsId) {
 		_ratingsStats.setStatsId(statsId);
@@ -74,18 +74,18 @@ public class RatingsStatsWrapper implements RatingsStats {
 	}
 
 	/**
-	* Gets the class name id of this ratings stats.
+	* Gets the class name ID of this ratings stats.
 	*
-	* @return the class name id of this ratings stats
+	* @return the class name ID of this ratings stats
 	*/
 	public long getClassNameId() {
 		return _ratingsStats.getClassNameId();
 	}
 
 	/**
-	* Sets the class name id of this ratings stats.
+	* Sets the class name ID of this ratings stats.
 	*
-	* @param classNameId the class name id of this ratings stats
+	* @param classNameId the class name ID of this ratings stats
 	*/
 	public void setClassNameId(long classNameId) {
 		_ratingsStats.setClassNameId(classNameId);

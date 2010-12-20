@@ -47,18 +47,18 @@ public class ReleaseWrapper implements Release {
 	}
 
 	/**
-	* Gets the release id of this release.
+	* Gets the release ID of this release.
 	*
-	* @return the release id of this release
+	* @return the release ID of this release
 	*/
 	public long getReleaseId() {
 		return _release.getReleaseId();
 	}
 
 	/**
-	* Sets the release id of this release.
+	* Sets the release ID of this release.
 	*
-	* @param releaseId the release id of this release
+	* @param releaseId the release ID of this release
 	*/
 	public void setReleaseId(long releaseId) {
 		_release.setReleaseId(releaseId);

@@ -65,72 +65,72 @@ public class BookmarksFolderWrapper implements BookmarksFolder {
 	}
 
 	/**
-	* Gets the folder id of this bookmarks folder.
+	* Gets the folder ID of this bookmarks folder.
 	*
-	* @return the folder id of this bookmarks folder
+	* @return the folder ID of this bookmarks folder
 	*/
 	public long getFolderId() {
 		return _bookmarksFolder.getFolderId();
 	}
 
 	/**
-	* Sets the folder id of this bookmarks folder.
+	* Sets the folder ID of this bookmarks folder.
 	*
-	* @param folderId the folder id of this bookmarks folder
+	* @param folderId the folder ID of this bookmarks folder
 	*/
 	public void setFolderId(long folderId) {
 		_bookmarksFolder.setFolderId(folderId);
 	}
 
 	/**
-	* Gets the group id of this bookmarks folder.
+	* Gets the group ID of this bookmarks folder.
 	*
-	* @return the group id of this bookmarks folder
+	* @return the group ID of this bookmarks folder
 	*/
 	public long getGroupId() {
 		return _bookmarksFolder.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this bookmarks folder.
+	* Sets the group ID of this bookmarks folder.
 	*
-	* @param groupId the group id of this bookmarks folder
+	* @param groupId the group ID of this bookmarks folder
 	*/
 	public void setGroupId(long groupId) {
 		_bookmarksFolder.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this bookmarks folder.
+	* Gets the company ID of this bookmarks folder.
 	*
-	* @return the company id of this bookmarks folder
+	* @return the company ID of this bookmarks folder
 	*/
 	public long getCompanyId() {
 		return _bookmarksFolder.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this bookmarks folder.
+	* Sets the company ID of this bookmarks folder.
 	*
-	* @param companyId the company id of this bookmarks folder
+	* @param companyId the company ID of this bookmarks folder
 	*/
 	public void setCompanyId(long companyId) {
 		_bookmarksFolder.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this bookmarks folder.
+	* Gets the user ID of this bookmarks folder.
 	*
-	* @return the user id of this bookmarks folder
+	* @return the user ID of this bookmarks folder
 	*/
 	public long getUserId() {
 		return _bookmarksFolder.getUserId();
 	}
 
 	/**
-	* Sets the user id of this bookmarks folder.
+	* Sets the user ID of this bookmarks folder.
 	*
-	* @param userId the user id of this bookmarks folder
+	* @param userId the user ID of this bookmarks folder
 	*/
 	public void setUserId(long userId) {
 		_bookmarksFolder.setUserId(userId);
@@ -193,18 +193,18 @@ public class BookmarksFolderWrapper implements BookmarksFolder {
 	}
 
 	/**
-	* Gets the parent folder id of this bookmarks folder.
+	* Gets the parent folder ID of this bookmarks folder.
 	*
-	* @return the parent folder id of this bookmarks folder
+	* @return the parent folder ID of this bookmarks folder
 	*/
 	public long getParentFolderId() {
 		return _bookmarksFolder.getParentFolderId();
 	}
 
 	/**
-	* Sets the parent folder id of this bookmarks folder.
+	* Sets the parent folder ID of this bookmarks folder.
 	*
-	* @param parentFolderId the parent folder id of this bookmarks folder
+	* @param parentFolderId the parent folder ID of this bookmarks folder
 	*/
 	public void setParentFolderId(long parentFolderId) {
 		_bookmarksFolder.setParentFolderId(parentFolderId);

@@ -104,7 +104,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	/**
 	* Finds all the asset entries where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the matching asset entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -119,7 +119,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of asset entries to return
 	* @param end the upper bound of the range of asset entries to return (not inclusive)
 	* @return the range of matching asset entries
@@ -136,7 +136,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of asset entries to return
 	* @param end the upper bound of the range of asset entries to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -155,7 +155,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching asset entry
 	* @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
@@ -174,7 +174,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching asset entry
 	* @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
@@ -194,7 +194,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	* </p>
 	*
 	* @param entryId the primary key of the current asset entry
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next asset entry
 	* @throws com.liferay.portlet.asset.NoSuchEntryException if a asset entry with the primary key could not be found
@@ -209,7 +209,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	/**
 	* Finds the asset entry where groupId = &#63; and classUuid = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchEntryException} if it could not be found.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param classUuid the class uuid to search with
 	* @return the matching asset entry
 	* @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
@@ -223,7 +223,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	/**
 	* Finds the asset entry where groupId = &#63; and classUuid = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param classUuid the class uuid to search with
 	* @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -235,7 +235,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	/**
 	* Finds the asset entry where groupId = &#63; and classUuid = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param classUuid the class uuid to search with
 	* @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -247,7 +247,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	/**
 	* Finds the asset entry where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchEntryException} if it could not be found.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching asset entry
 	* @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
@@ -261,7 +261,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	/**
 	* Finds the asset entry where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -273,7 +273,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	/**
 	* Finds the asset entry where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -328,7 +328,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	/**
 	* Removes all the asset entries where companyId = &#63; from the database.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByCompanyId(long companyId)
@@ -337,7 +337,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	/**
 	* Removes the asset entry where groupId = &#63; and classUuid = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param classUuid the class uuid to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -348,7 +348,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	/**
 	* Removes the asset entry where classNameId = &#63; and classPK = &#63; from the database.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -367,7 +367,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	/**
 	* Counts all the asset entries where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the number of matching asset entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -377,7 +377,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	/**
 	* Counts all the asset entries where groupId = &#63; and classUuid = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param classUuid the class uuid to search with
 	* @return the number of matching asset entries
 	* @throws SystemException if a system exception occurred
@@ -388,7 +388,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	/**
 	* Counts all the asset entries where classNameId = &#63; and classPK = &#63;.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the number of matching asset entries
 	* @throws SystemException if a system exception occurred

@@ -47,54 +47,54 @@ public class CompanyWrapper implements Company {
 	}
 
 	/**
-	* Gets the company id of this company.
+	* Gets the company ID of this company.
 	*
-	* @return the company id of this company
+	* @return the company ID of this company
 	*/
 	public long getCompanyId() {
 		return _company.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this company.
+	* Sets the company ID of this company.
 	*
-	* @param companyId the company id of this company
+	* @param companyId the company ID of this company
 	*/
 	public void setCompanyId(long companyId) {
 		_company.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the account id of this company.
+	* Gets the account ID of this company.
 	*
-	* @return the account id of this company
+	* @return the account ID of this company
 	*/
 	public long getAccountId() {
 		return _company.getAccountId();
 	}
 
 	/**
-	* Sets the account id of this company.
+	* Sets the account ID of this company.
 	*
-	* @param accountId the account id of this company
+	* @param accountId the account ID of this company
 	*/
 	public void setAccountId(long accountId) {
 		_company.setAccountId(accountId);
 	}
 
 	/**
-	* Gets the web id of this company.
+	* Gets the web ID of this company.
 	*
-	* @return the web id of this company
+	* @return the web ID of this company
 	*/
 	public java.lang.String getWebId() {
 		return _company.getWebId();
 	}
 
 	/**
-	* Sets the web id of this company.
+	* Sets the web ID of this company.
 	*
-	* @param webId the web id of this company
+	* @param webId the web ID of this company
 	*/
 	public void setWebId(java.lang.String webId) {
 		_company.setWebId(webId);
@@ -155,18 +155,18 @@ public class CompanyWrapper implements Company {
 	}
 
 	/**
-	* Gets the logo id of this company.
+	* Gets the logo ID of this company.
 	*
-	* @return the logo id of this company
+	* @return the logo ID of this company
 	*/
 	public long getLogoId() {
 		return _company.getLogoId();
 	}
 
 	/**
-	* Sets the logo id of this company.
+	* Sets the logo ID of this company.
 	*
-	* @param logoId the logo id of this company
+	* @param logoId the logo ID of this company
 	*/
 	public void setLogoId(long logoId) {
 		_company.setLogoId(logoId);

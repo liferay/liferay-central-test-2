@@ -102,7 +102,7 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	/**
 	* Finds all the polls votes where questionId = &#63;.
 	*
-	* @param questionId the question id to search with
+	* @param questionId the question ID to search with
 	* @return the matching polls votes
 	* @throws SystemException if a system exception occurred
 	*/
@@ -117,7 +117,7 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param questionId the question id to search with
+	* @param questionId the question ID to search with
 	* @param start the lower bound of the range of polls votes to return
 	* @param end the upper bound of the range of polls votes to return (not inclusive)
 	* @return the range of matching polls votes
@@ -134,7 +134,7 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param questionId the question id to search with
+	* @param questionId the question ID to search with
 	* @param start the lower bound of the range of polls votes to return
 	* @param end the upper bound of the range of polls votes to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -153,7 +153,7 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param questionId the question id to search with
+	* @param questionId the question ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching polls vote
 	* @throws com.liferay.portlet.polls.NoSuchVoteException if a matching polls vote could not be found
@@ -172,7 +172,7 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param questionId the question id to search with
+	* @param questionId the question ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching polls vote
 	* @throws com.liferay.portlet.polls.NoSuchVoteException if a matching polls vote could not be found
@@ -192,7 +192,7 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	* </p>
 	*
 	* @param voteId the primary key of the current polls vote
-	* @param questionId the question id to search with
+	* @param questionId the question ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next polls vote
 	* @throws com.liferay.portlet.polls.NoSuchVoteException if a polls vote with the primary key could not be found
@@ -207,7 +207,7 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	/**
 	* Finds all the polls votes where choiceId = &#63;.
 	*
-	* @param choiceId the choice id to search with
+	* @param choiceId the choice ID to search with
 	* @return the matching polls votes
 	* @throws SystemException if a system exception occurred
 	*/
@@ -222,7 +222,7 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param choiceId the choice id to search with
+	* @param choiceId the choice ID to search with
 	* @param start the lower bound of the range of polls votes to return
 	* @param end the upper bound of the range of polls votes to return (not inclusive)
 	* @return the range of matching polls votes
@@ -239,7 +239,7 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param choiceId the choice id to search with
+	* @param choiceId the choice ID to search with
 	* @param start the lower bound of the range of polls votes to return
 	* @param end the upper bound of the range of polls votes to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -258,7 +258,7 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param choiceId the choice id to search with
+	* @param choiceId the choice ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching polls vote
 	* @throws com.liferay.portlet.polls.NoSuchVoteException if a matching polls vote could not be found
@@ -277,7 +277,7 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param choiceId the choice id to search with
+	* @param choiceId the choice ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching polls vote
 	* @throws com.liferay.portlet.polls.NoSuchVoteException if a matching polls vote could not be found
@@ -297,7 +297,7 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	* </p>
 	*
 	* @param voteId the primary key of the current polls vote
-	* @param choiceId the choice id to search with
+	* @param choiceId the choice ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next polls vote
 	* @throws com.liferay.portlet.polls.NoSuchVoteException if a polls vote with the primary key could not be found
@@ -312,8 +312,8 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	/**
 	* Finds the polls vote where questionId = &#63; and userId = &#63; or throws a {@link com.liferay.portlet.polls.NoSuchVoteException} if it could not be found.
 	*
-	* @param questionId the question id to search with
-	* @param userId the user id to search with
+	* @param questionId the question ID to search with
+	* @param userId the user ID to search with
 	* @return the matching polls vote
 	* @throws com.liferay.portlet.polls.NoSuchVoteException if a matching polls vote could not be found
 	* @throws SystemException if a system exception occurred
@@ -326,8 +326,8 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	/**
 	* Finds the polls vote where questionId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param questionId the question id to search with
-	* @param userId the user id to search with
+	* @param questionId the question ID to search with
+	* @param userId the user ID to search with
 	* @return the matching polls vote, or <code>null</code> if a matching polls vote could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -338,8 +338,8 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	/**
 	* Finds the polls vote where questionId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param questionId the question id to search with
-	* @param userId the user id to search with
+	* @param questionId the question ID to search with
+	* @param userId the user ID to search with
 	* @return the matching polls vote, or <code>null</code> if a matching polls vote could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -393,7 +393,7 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	/**
 	* Removes all the polls votes where questionId = &#63; from the database.
 	*
-	* @param questionId the question id to search with
+	* @param questionId the question ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByQuestionId(long questionId)
@@ -402,7 +402,7 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	/**
 	* Removes all the polls votes where choiceId = &#63; from the database.
 	*
-	* @param choiceId the choice id to search with
+	* @param choiceId the choice ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByChoiceId(long choiceId)
@@ -411,8 +411,8 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	/**
 	* Removes the polls vote where questionId = &#63; and userId = &#63; from the database.
 	*
-	* @param questionId the question id to search with
-	* @param userId the user id to search with
+	* @param questionId the question ID to search with
+	* @param userId the user ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByQ_U(long questionId, long userId)
@@ -430,7 +430,7 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	/**
 	* Counts all the polls votes where questionId = &#63;.
 	*
-	* @param questionId the question id to search with
+	* @param questionId the question ID to search with
 	* @return the number of matching polls votes
 	* @throws SystemException if a system exception occurred
 	*/
@@ -440,7 +440,7 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	/**
 	* Counts all the polls votes where choiceId = &#63;.
 	*
-	* @param choiceId the choice id to search with
+	* @param choiceId the choice ID to search with
 	* @return the number of matching polls votes
 	* @throws SystemException if a system exception occurred
 	*/
@@ -450,8 +450,8 @@ public interface PollsVotePersistence extends BasePersistence<PollsVote> {
 	/**
 	* Counts all the polls votes where questionId = &#63; and userId = &#63;.
 	*
-	* @param questionId the question id to search with
-	* @param userId the user id to search with
+	* @param questionId the question ID to search with
+	* @param userId the user ID to search with
 	* @return the number of matching polls votes
 	* @throws SystemException if a system exception occurred
 	*/

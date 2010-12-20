@@ -60,44 +60,44 @@ public interface AssetCategoryPropertyModel extends BaseModel<AssetCategoryPrope
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the category property id of this asset category property.
+	 * Gets the category property ID of this asset category property.
 	 *
-	 * @return the category property id of this asset category property
+	 * @return the category property ID of this asset category property
 	 */
 	public long getCategoryPropertyId();
 
 	/**
-	 * Sets the category property id of this asset category property.
+	 * Sets the category property ID of this asset category property.
 	 *
-	 * @param categoryPropertyId the category property id of this asset category property
+	 * @param categoryPropertyId the category property ID of this asset category property
 	 */
 	public void setCategoryPropertyId(long categoryPropertyId);
 
 	/**
-	 * Gets the company id of this asset category property.
+	 * Gets the company ID of this asset category property.
 	 *
-	 * @return the company id of this asset category property
+	 * @return the company ID of this asset category property
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this asset category property.
+	 * Sets the company ID of this asset category property.
 	 *
-	 * @param companyId the company id of this asset category property
+	 * @param companyId the company ID of this asset category property
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this asset category property.
+	 * Gets the user ID of this asset category property.
 	 *
-	 * @return the user id of this asset category property
+	 * @return the user ID of this asset category property
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this asset category property.
+	 * Sets the user ID of this asset category property.
 	 *
-	 * @param userId the user id of this asset category property
+	 * @param userId the user ID of this asset category property
 	 */
 	public void setUserId(long userId);
 
@@ -160,16 +160,16 @@ public interface AssetCategoryPropertyModel extends BaseModel<AssetCategoryPrope
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the category id of this asset category property.
+	 * Gets the category ID of this asset category property.
 	 *
-	 * @return the category id of this asset category property
+	 * @return the category ID of this asset category property
 	 */
 	public long getCategoryId();
 
 	/**
-	 * Sets the category id of this asset category property.
+	 * Sets the category ID of this asset category property.
 	 *
-	 * @param categoryId the category id of this asset category property
+	 * @param categoryId the category ID of this asset category property
 	 */
 	public void setCategoryId(long categoryId);
 

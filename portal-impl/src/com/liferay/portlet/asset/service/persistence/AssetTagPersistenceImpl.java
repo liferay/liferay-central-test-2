@@ -393,7 +393,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	/**
 	 * Finds all the asset tags where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching asset tags
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -408,7 +408,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of asset tags to return
 	 * @param end the upper bound of the range of asset tags to return (not inclusive)
 	 * @return the range of matching asset tags
@@ -426,7 +426,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of asset tags to return
 	 * @param end the upper bound of the range of asset tags to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -514,7 +514,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching asset tag
 	 * @throws com.liferay.portlet.asset.NoSuchTagException if a matching asset tag could not be found
@@ -549,7 +549,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching asset tag
 	 * @throws com.liferay.portlet.asset.NoSuchTagException if a matching asset tag could not be found
@@ -588,7 +588,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * </p>
 	 *
 	 * @param tagId the primary key of the current asset tag
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next asset tag
 	 * @throws com.liferay.portlet.asset.NoSuchTagException if a asset tag with the primary key could not be found
@@ -731,7 +731,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	/**
 	 * Filters by the user's permissions and finds all the asset tags where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching asset tags that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -748,7 +748,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of asset tags to return
 	 * @param end the upper bound of the range of asset tags to return (not inclusive)
 	 * @return the range of matching asset tags that the user has permission to view
@@ -766,7 +766,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of asset tags to return
 	 * @param end the upper bound of the range of asset tags to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -965,7 +965,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	/**
 	 * Removes all the asset tags where groupId = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -988,7 +988,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	/**
 	 * Counts all the asset tags where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the number of matching asset tags
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1041,7 +1041,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	/**
 	 * Filters by the user's permissions and counts all the asset tags where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the number of matching asset tags that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */

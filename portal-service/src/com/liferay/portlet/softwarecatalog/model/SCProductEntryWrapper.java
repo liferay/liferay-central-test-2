@@ -47,72 +47,72 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	/**
-	* Gets the product entry id of this s c product entry.
+	* Gets the product entry ID of this s c product entry.
 	*
-	* @return the product entry id of this s c product entry
+	* @return the product entry ID of this s c product entry
 	*/
 	public long getProductEntryId() {
 		return _scProductEntry.getProductEntryId();
 	}
 
 	/**
-	* Sets the product entry id of this s c product entry.
+	* Sets the product entry ID of this s c product entry.
 	*
-	* @param productEntryId the product entry id of this s c product entry
+	* @param productEntryId the product entry ID of this s c product entry
 	*/
 	public void setProductEntryId(long productEntryId) {
 		_scProductEntry.setProductEntryId(productEntryId);
 	}
 
 	/**
-	* Gets the group id of this s c product entry.
+	* Gets the group ID of this s c product entry.
 	*
-	* @return the group id of this s c product entry
+	* @return the group ID of this s c product entry
 	*/
 	public long getGroupId() {
 		return _scProductEntry.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this s c product entry.
+	* Sets the group ID of this s c product entry.
 	*
-	* @param groupId the group id of this s c product entry
+	* @param groupId the group ID of this s c product entry
 	*/
 	public void setGroupId(long groupId) {
 		_scProductEntry.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this s c product entry.
+	* Gets the company ID of this s c product entry.
 	*
-	* @return the company id of this s c product entry
+	* @return the company ID of this s c product entry
 	*/
 	public long getCompanyId() {
 		return _scProductEntry.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this s c product entry.
+	* Sets the company ID of this s c product entry.
 	*
-	* @param companyId the company id of this s c product entry
+	* @param companyId the company ID of this s c product entry
 	*/
 	public void setCompanyId(long companyId) {
 		_scProductEntry.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this s c product entry.
+	* Gets the user ID of this s c product entry.
 	*
-	* @return the user id of this s c product entry
+	* @return the user ID of this s c product entry
 	*/
 	public long getUserId() {
 		return _scProductEntry.getUserId();
 	}
 
 	/**
-	* Sets the user id of this s c product entry.
+	* Sets the user ID of this s c product entry.
 	*
-	* @param userId the user id of this s c product entry
+	* @param userId the user ID of this s c product entry
 	*/
 	public void setUserId(long userId) {
 		_scProductEntry.setUserId(userId);
@@ -319,36 +319,36 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	}
 
 	/**
-	* Gets the repo group id of this s c product entry.
+	* Gets the repo group ID of this s c product entry.
 	*
-	* @return the repo group id of this s c product entry
+	* @return the repo group ID of this s c product entry
 	*/
 	public java.lang.String getRepoGroupId() {
 		return _scProductEntry.getRepoGroupId();
 	}
 
 	/**
-	* Sets the repo group id of this s c product entry.
+	* Sets the repo group ID of this s c product entry.
 	*
-	* @param repoGroupId the repo group id of this s c product entry
+	* @param repoGroupId the repo group ID of this s c product entry
 	*/
 	public void setRepoGroupId(java.lang.String repoGroupId) {
 		_scProductEntry.setRepoGroupId(repoGroupId);
 	}
 
 	/**
-	* Gets the repo artifact id of this s c product entry.
+	* Gets the repo artifact ID of this s c product entry.
 	*
-	* @return the repo artifact id of this s c product entry
+	* @return the repo artifact ID of this s c product entry
 	*/
 	public java.lang.String getRepoArtifactId() {
 		return _scProductEntry.getRepoArtifactId();
 	}
 
 	/**
-	* Sets the repo artifact id of this s c product entry.
+	* Sets the repo artifact ID of this s c product entry.
 	*
-	* @param repoArtifactId the repo artifact id of this s c product entry
+	* @param repoArtifactId the repo artifact ID of this s c product entry
 	*/
 	public void setRepoArtifactId(java.lang.String repoArtifactId) {
 		_scProductEntry.setRepoArtifactId(repoArtifactId);

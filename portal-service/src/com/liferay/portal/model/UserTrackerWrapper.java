@@ -47,54 +47,54 @@ public class UserTrackerWrapper implements UserTracker {
 	}
 
 	/**
-	* Gets the user tracker id of this user tracker.
+	* Gets the user tracker ID of this user tracker.
 	*
-	* @return the user tracker id of this user tracker
+	* @return the user tracker ID of this user tracker
 	*/
 	public long getUserTrackerId() {
 		return _userTracker.getUserTrackerId();
 	}
 
 	/**
-	* Sets the user tracker id of this user tracker.
+	* Sets the user tracker ID of this user tracker.
 	*
-	* @param userTrackerId the user tracker id of this user tracker
+	* @param userTrackerId the user tracker ID of this user tracker
 	*/
 	public void setUserTrackerId(long userTrackerId) {
 		_userTracker.setUserTrackerId(userTrackerId);
 	}
 
 	/**
-	* Gets the company id of this user tracker.
+	* Gets the company ID of this user tracker.
 	*
-	* @return the company id of this user tracker
+	* @return the company ID of this user tracker
 	*/
 	public long getCompanyId() {
 		return _userTracker.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this user tracker.
+	* Sets the company ID of this user tracker.
 	*
-	* @param companyId the company id of this user tracker
+	* @param companyId the company ID of this user tracker
 	*/
 	public void setCompanyId(long companyId) {
 		_userTracker.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this user tracker.
+	* Gets the user ID of this user tracker.
 	*
-	* @return the user id of this user tracker
+	* @return the user ID of this user tracker
 	*/
 	public long getUserId() {
 		return _userTracker.getUserId();
 	}
 
 	/**
-	* Sets the user id of this user tracker.
+	* Sets the user ID of this user tracker.
 	*
-	* @param userId the user id of this user tracker
+	* @param userId the user ID of this user tracker
 	*/
 	public void setUserId(long userId) {
 		_userTracker.setUserId(userId);
@@ -139,18 +139,18 @@ public class UserTrackerWrapper implements UserTracker {
 	}
 
 	/**
-	* Gets the session id of this user tracker.
+	* Gets the session ID of this user tracker.
 	*
-	* @return the session id of this user tracker
+	* @return the session ID of this user tracker
 	*/
 	public java.lang.String getSessionId() {
 		return _userTracker.getSessionId();
 	}
 
 	/**
-	* Sets the session id of this user tracker.
+	* Sets the session ID of this user tracker.
 	*
-	* @param sessionId the session id of this user tracker
+	* @param sessionId the session ID of this user tracker
 	*/
 	public void setSessionId(java.lang.String sessionId) {
 		_userTracker.setSessionId(sessionId);

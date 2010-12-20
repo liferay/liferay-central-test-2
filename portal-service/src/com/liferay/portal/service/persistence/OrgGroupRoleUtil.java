@@ -200,7 +200,7 @@ public class OrgGroupRoleUtil {
 	/**
 	* Finds all the org group roles where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching org group roles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -217,7 +217,7 @@ public class OrgGroupRoleUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of org group roles to return
 	* @param end the upper bound of the range of org group roles to return (not inclusive)
 	* @return the range of matching org group roles
@@ -236,7 +236,7 @@ public class OrgGroupRoleUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of org group roles to return
 	* @param end the upper bound of the range of org group roles to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -258,7 +258,7 @@ public class OrgGroupRoleUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching org group role
 	* @throws com.liferay.portal.NoSuchOrgGroupRoleException if a matching org group role could not be found
@@ -279,7 +279,7 @@ public class OrgGroupRoleUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching org group role
 	* @throws com.liferay.portal.NoSuchOrgGroupRoleException if a matching org group role could not be found
@@ -301,7 +301,7 @@ public class OrgGroupRoleUtil {
 	* </p>
 	*
 	* @param orgGroupRolePK the primary key of the current org group role
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next org group role
 	* @throws com.liferay.portal.NoSuchOrgGroupRoleException if a org group role with the primary key could not be found
@@ -321,7 +321,7 @@ public class OrgGroupRoleUtil {
 	/**
 	* Finds all the org group roles where roleId = &#63;.
 	*
-	* @param roleId the role id to search with
+	* @param roleId the role ID to search with
 	* @return the matching org group roles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -337,7 +337,7 @@ public class OrgGroupRoleUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param roleId the role id to search with
+	* @param roleId the role ID to search with
 	* @param start the lower bound of the range of org group roles to return
 	* @param end the upper bound of the range of org group roles to return (not inclusive)
 	* @return the range of matching org group roles
@@ -356,7 +356,7 @@ public class OrgGroupRoleUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param roleId the role id to search with
+	* @param roleId the role ID to search with
 	* @param start the lower bound of the range of org group roles to return
 	* @param end the upper bound of the range of org group roles to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -378,7 +378,7 @@ public class OrgGroupRoleUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param roleId the role id to search with
+	* @param roleId the role ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching org group role
 	* @throws com.liferay.portal.NoSuchOrgGroupRoleException if a matching org group role could not be found
@@ -399,7 +399,7 @@ public class OrgGroupRoleUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param roleId the role id to search with
+	* @param roleId the role ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching org group role
 	* @throws com.liferay.portal.NoSuchOrgGroupRoleException if a matching org group role could not be found
@@ -421,7 +421,7 @@ public class OrgGroupRoleUtil {
 	* </p>
 	*
 	* @param orgGroupRolePK the primary key of the current org group role
-	* @param roleId the role id to search with
+	* @param roleId the role ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next org group role
 	* @throws com.liferay.portal.NoSuchOrgGroupRoleException if a org group role with the primary key could not be found
@@ -490,7 +490,7 @@ public class OrgGroupRoleUtil {
 	/**
 	* Removes all the org group roles where groupId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByGroupId(long groupId)
@@ -501,7 +501,7 @@ public class OrgGroupRoleUtil {
 	/**
 	* Removes all the org group roles where roleId = &#63; from the database.
 	*
-	* @param roleId the role id to search with
+	* @param roleId the role ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByRoleId(long roleId)
@@ -522,7 +522,7 @@ public class OrgGroupRoleUtil {
 	/**
 	* Counts all the org group roles where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching org group roles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -534,7 +534,7 @@ public class OrgGroupRoleUtil {
 	/**
 	* Counts all the org group roles where roleId = &#63;.
 	*
-	* @param roleId the role id to search with
+	* @param roleId the role ID to search with
 	* @return the number of matching org group roles
 	* @throws SystemException if a system exception occurred
 	*/

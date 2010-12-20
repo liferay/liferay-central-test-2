@@ -107,7 +107,7 @@ public interface ShoppingItemFieldPersistence extends BasePersistence<ShoppingIt
 	/**
 	* Finds all the shopping item fields where itemId = &#63;.
 	*
-	* @param itemId the item id to search with
+	* @param itemId the item ID to search with
 	* @return the matching shopping item fields
 	* @throws SystemException if a system exception occurred
 	*/
@@ -121,7 +121,7 @@ public interface ShoppingItemFieldPersistence extends BasePersistence<ShoppingIt
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param itemId the item id to search with
+	* @param itemId the item ID to search with
 	* @param start the lower bound of the range of shopping item fields to return
 	* @param end the upper bound of the range of shopping item fields to return (not inclusive)
 	* @return the range of matching shopping item fields
@@ -138,7 +138,7 @@ public interface ShoppingItemFieldPersistence extends BasePersistence<ShoppingIt
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param itemId the item id to search with
+	* @param itemId the item ID to search with
 	* @param start the lower bound of the range of shopping item fields to return
 	* @param end the upper bound of the range of shopping item fields to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -157,7 +157,7 @@ public interface ShoppingItemFieldPersistence extends BasePersistence<ShoppingIt
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param itemId the item id to search with
+	* @param itemId the item ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching shopping item field
 	* @throws com.liferay.portlet.shopping.NoSuchItemFieldException if a matching shopping item field could not be found
@@ -176,7 +176,7 @@ public interface ShoppingItemFieldPersistence extends BasePersistence<ShoppingIt
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param itemId the item id to search with
+	* @param itemId the item ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching shopping item field
 	* @throws com.liferay.portlet.shopping.NoSuchItemFieldException if a matching shopping item field could not be found
@@ -196,7 +196,7 @@ public interface ShoppingItemFieldPersistence extends BasePersistence<ShoppingIt
 	* </p>
 	*
 	* @param itemFieldId the primary key of the current shopping item field
-	* @param itemId the item id to search with
+	* @param itemId the item ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next shopping item field
 	* @throws com.liferay.portlet.shopping.NoSuchItemFieldException if a shopping item field with the primary key could not be found
@@ -254,7 +254,7 @@ public interface ShoppingItemFieldPersistence extends BasePersistence<ShoppingIt
 	/**
 	* Removes all the shopping item fields where itemId = &#63; from the database.
 	*
-	* @param itemId the item id to search with
+	* @param itemId the item ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByItemId(long itemId)
@@ -271,7 +271,7 @@ public interface ShoppingItemFieldPersistence extends BasePersistence<ShoppingIt
 	/**
 	* Counts all the shopping item fields where itemId = &#63;.
 	*
-	* @param itemId the item id to search with
+	* @param itemId the item ID to search with
 	* @return the number of matching shopping item fields
 	* @throws SystemException if a system exception occurred
 	*/

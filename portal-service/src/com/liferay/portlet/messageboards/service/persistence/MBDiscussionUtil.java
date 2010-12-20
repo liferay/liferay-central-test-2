@@ -202,7 +202,7 @@ public class MBDiscussionUtil {
 	/**
 	* Finds all the message boards discussions where classNameId = &#63;.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @return the matching message boards discussions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -219,7 +219,7 @@ public class MBDiscussionUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param start the lower bound of the range of message boards discussions to return
 	* @param end the upper bound of the range of message boards discussions to return (not inclusive)
 	* @return the range of matching message boards discussions
@@ -238,7 +238,7 @@ public class MBDiscussionUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param start the lower bound of the range of message boards discussions to return
 	* @param end the upper bound of the range of message boards discussions to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -260,7 +260,7 @@ public class MBDiscussionUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching message boards discussion
 	* @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a matching message boards discussion could not be found
@@ -282,7 +282,7 @@ public class MBDiscussionUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching message boards discussion
 	* @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a matching message boards discussion could not be found
@@ -305,7 +305,7 @@ public class MBDiscussionUtil {
 	* </p>
 	*
 	* @param discussionId the primary key of the current message boards discussion
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next message boards discussion
 	* @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a message boards discussion with the primary key could not be found
@@ -324,7 +324,7 @@ public class MBDiscussionUtil {
 	/**
 	* Finds the message boards discussion where threadId = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchDiscussionException} if it could not be found.
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @return the matching message boards discussion
 	* @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a matching message boards discussion could not be found
 	* @throws SystemException if a system exception occurred
@@ -339,7 +339,7 @@ public class MBDiscussionUtil {
 	/**
 	* Finds the message boards discussion where threadId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @return the matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -352,7 +352,7 @@ public class MBDiscussionUtil {
 	/**
 	* Finds the message boards discussion where threadId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @return the matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -365,7 +365,7 @@ public class MBDiscussionUtil {
 	/**
 	* Finds the message boards discussion where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchDiscussionException} if it could not be found.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching message boards discussion
 	* @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a matching message boards discussion could not be found
@@ -381,7 +381,7 @@ public class MBDiscussionUtil {
 	/**
 	* Finds the message boards discussion where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	* @throws SystemException if a system exception occurred
@@ -395,7 +395,7 @@ public class MBDiscussionUtil {
 	/**
 	* Finds the message boards discussion where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching message boards discussion, or <code>null</code> if a matching message boards discussion could not be found
 	* @throws SystemException if a system exception occurred
@@ -459,7 +459,7 @@ public class MBDiscussionUtil {
 	/**
 	* Removes all the message boards discussions where classNameId = &#63; from the database.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByClassNameId(long classNameId)
@@ -470,7 +470,7 @@ public class MBDiscussionUtil {
 	/**
 	* Removes the message boards discussion where threadId = &#63; from the database.
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByThreadId(long threadId)
@@ -482,7 +482,7 @@ public class MBDiscussionUtil {
 	/**
 	* Removes the message boards discussion where classNameId = &#63; and classPK = &#63; from the database.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -505,7 +505,7 @@ public class MBDiscussionUtil {
 	/**
 	* Counts all the message boards discussions where classNameId = &#63;.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @return the number of matching message boards discussions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -517,7 +517,7 @@ public class MBDiscussionUtil {
 	/**
 	* Counts all the message boards discussions where threadId = &#63;.
 	*
-	* @param threadId the thread id to search with
+	* @param threadId the thread ID to search with
 	* @return the number of matching message boards discussions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -529,7 +529,7 @@ public class MBDiscussionUtil {
 	/**
 	* Counts all the message boards discussions where classNameId = &#63; and classPK = &#63;.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the number of matching message boards discussions
 	* @throws SystemException if a system exception occurred

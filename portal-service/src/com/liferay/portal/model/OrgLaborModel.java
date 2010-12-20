@@ -55,44 +55,44 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the org labor id of this org labor.
+	 * Gets the org labor ID of this org labor.
 	 *
-	 * @return the org labor id of this org labor
+	 * @return the org labor ID of this org labor
 	 */
 	public long getOrgLaborId();
 
 	/**
-	 * Sets the org labor id of this org labor.
+	 * Sets the org labor ID of this org labor.
 	 *
-	 * @param orgLaborId the org labor id of this org labor
+	 * @param orgLaborId the org labor ID of this org labor
 	 */
 	public void setOrgLaborId(long orgLaborId);
 
 	/**
-	 * Gets the organization id of this org labor.
+	 * Gets the organization ID of this org labor.
 	 *
-	 * @return the organization id of this org labor
+	 * @return the organization ID of this org labor
 	 */
 	public long getOrganizationId();
 
 	/**
-	 * Sets the organization id of this org labor.
+	 * Sets the organization ID of this org labor.
 	 *
-	 * @param organizationId the organization id of this org labor
+	 * @param organizationId the organization ID of this org labor
 	 */
 	public void setOrganizationId(long organizationId);
 
 	/**
-	 * Gets the type id of this org labor.
+	 * Gets the type ID of this org labor.
 	 *
-	 * @return the type id of this org labor
+	 * @return the type ID of this org labor
 	 */
 	public int getTypeId();
 
 	/**
-	 * Sets the type id of this org labor.
+	 * Sets the type ID of this org labor.
 	 *
-	 * @param typeId the type id of this org labor
+	 * @param typeId the type ID of this org labor
 	 */
 	public void setTypeId(int typeId);
 

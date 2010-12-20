@@ -75,58 +75,58 @@ public interface BookmarksEntryModel extends BaseModel<BookmarksEntry> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the entry id of this bookmarks entry.
+	 * Gets the entry ID of this bookmarks entry.
 	 *
-	 * @return the entry id of this bookmarks entry
+	 * @return the entry ID of this bookmarks entry
 	 */
 	public long getEntryId();
 
 	/**
-	 * Sets the entry id of this bookmarks entry.
+	 * Sets the entry ID of this bookmarks entry.
 	 *
-	 * @param entryId the entry id of this bookmarks entry
+	 * @param entryId the entry ID of this bookmarks entry
 	 */
 	public void setEntryId(long entryId);
 
 	/**
-	 * Gets the group id of this bookmarks entry.
+	 * Gets the group ID of this bookmarks entry.
 	 *
-	 * @return the group id of this bookmarks entry
+	 * @return the group ID of this bookmarks entry
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this bookmarks entry.
+	 * Sets the group ID of this bookmarks entry.
 	 *
-	 * @param groupId the group id of this bookmarks entry
+	 * @param groupId the group ID of this bookmarks entry
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this bookmarks entry.
+	 * Gets the company ID of this bookmarks entry.
 	 *
-	 * @return the company id of this bookmarks entry
+	 * @return the company ID of this bookmarks entry
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this bookmarks entry.
+	 * Sets the company ID of this bookmarks entry.
 	 *
-	 * @param companyId the company id of this bookmarks entry
+	 * @param companyId the company ID of this bookmarks entry
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this bookmarks entry.
+	 * Gets the user ID of this bookmarks entry.
 	 *
-	 * @return the user id of this bookmarks entry
+	 * @return the user ID of this bookmarks entry
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this bookmarks entry.
+	 * Sets the user ID of this bookmarks entry.
 	 *
-	 * @param userId the user id of this bookmarks entry
+	 * @param userId the user ID of this bookmarks entry
 	 */
 	public void setUserId(long userId);
 
@@ -174,16 +174,16 @@ public interface BookmarksEntryModel extends BaseModel<BookmarksEntry> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the folder id of this bookmarks entry.
+	 * Gets the folder ID of this bookmarks entry.
 	 *
-	 * @return the folder id of this bookmarks entry
+	 * @return the folder ID of this bookmarks entry
 	 */
 	public long getFolderId();
 
 	/**
-	 * Sets the folder id of this bookmarks entry.
+	 * Sets the folder ID of this bookmarks entry.
 	 *
-	 * @param folderId the folder id of this bookmarks entry
+	 * @param folderId the folder ID of this bookmarks entry
 	 */
 	public void setFolderId(long folderId);
 

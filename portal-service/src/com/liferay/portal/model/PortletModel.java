@@ -56,45 +56,45 @@ public interface PortletModel extends BaseModel<Portlet> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the id of this portlet.
+	 * Gets the ID of this portlet.
 	 *
-	 * @return the id of this portlet
+	 * @return the ID of this portlet
 	 */
 	public long getId();
 
 	/**
-	 * Sets the id of this portlet.
+	 * Sets the ID of this portlet.
 	 *
-	 * @param id the id of this portlet
+	 * @param id the ID of this portlet
 	 */
 	public void setId(long id);
 
 	/**
-	 * Gets the company id of this portlet.
+	 * Gets the company ID of this portlet.
 	 *
-	 * @return the company id of this portlet
+	 * @return the company ID of this portlet
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this portlet.
+	 * Sets the company ID of this portlet.
 	 *
-	 * @param companyId the company id of this portlet
+	 * @param companyId the company ID of this portlet
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the portlet id of this portlet.
+	 * Gets the portlet ID of this portlet.
 	 *
-	 * @return the portlet id of this portlet
+	 * @return the portlet ID of this portlet
 	 */
 	@AutoEscape
 	public String getPortletId();
 
 	/**
-	 * Sets the portlet id of this portlet.
+	 * Sets the portlet ID of this portlet.
 	 *
-	 * @param portletId the portlet id of this portlet
+	 * @param portletId the portlet ID of this portlet
 	 */
 	public void setPortletId(String portletId);
 

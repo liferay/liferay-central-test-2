@@ -452,7 +452,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	/**
 	 * Finds all the addresses where companyId = &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @return the matching addresses
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -469,7 +469,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of addresses to return
 	 * @param end the upper bound of the range of addresses to return (not inclusive)
 	 * @return the range of matching addresses
@@ -487,7 +487,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of addresses to return
 	 * @param end the upper bound of the range of addresses to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -574,7 +574,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching address
 	 * @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
@@ -609,7 +609,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching address
 	 * @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
@@ -648,7 +648,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * </p>
 	 *
 	 * @param addressId the primary key of the current address
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next address
 	 * @throws com.liferay.portal.NoSuchAddressException if a address with the primary key could not be found
@@ -791,7 +791,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	/**
 	 * Finds all the addresses where userId = &#63;.
 	 *
-	 * @param userId the user id to search with
+	 * @param userId the user ID to search with
 	 * @return the matching addresses
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -806,7 +806,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user id to search with
+	 * @param userId the user ID to search with
 	 * @param start the lower bound of the range of addresses to return
 	 * @param end the upper bound of the range of addresses to return (not inclusive)
 	 * @return the range of matching addresses
@@ -824,7 +824,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user id to search with
+	 * @param userId the user ID to search with
 	 * @param start the lower bound of the range of addresses to return
 	 * @param end the upper bound of the range of addresses to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -911,7 +911,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user id to search with
+	 * @param userId the user ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching address
 	 * @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
@@ -946,7 +946,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param userId the user id to search with
+	 * @param userId the user ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching address
 	 * @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
@@ -985,7 +985,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * </p>
 	 *
 	 * @param addressId the primary key of the current address
-	 * @param userId the user id to search with
+	 * @param userId the user ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next address
 	 * @throws com.liferay.portal.NoSuchAddressException if a address with the primary key could not be found
@@ -1127,8 +1127,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	/**
 	 * Finds all the addresses where companyId = &#63; and classNameId = &#63;.
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @return the matching addresses
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1145,8 +1145,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param start the lower bound of the range of addresses to return
 	 * @param end the upper bound of the range of addresses to return (not inclusive)
 	 * @return the range of matching addresses
@@ -1164,8 +1164,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param start the lower bound of the range of addresses to return
 	 * @param end the upper bound of the range of addresses to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -1256,8 +1256,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching address
 	 * @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
@@ -1296,8 +1296,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching address
 	 * @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
@@ -1339,8 +1339,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * </p>
 	 *
 	 * @param addressId the primary key of the current address
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next address
 	 * @throws com.liferay.portal.NoSuchAddressException if a address with the primary key could not be found
@@ -1487,8 +1487,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	/**
 	 * Finds all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @return the matching addresses
 	 * @throws SystemException if a system exception occurred
@@ -1506,8 +1506,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param start the lower bound of the range of addresses to return
 	 * @param end the upper bound of the range of addresses to return (not inclusive)
@@ -1526,8 +1526,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param start the lower bound of the range of addresses to return
 	 * @param end the upper bound of the range of addresses to return (not inclusive)
@@ -1624,8 +1624,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching address
@@ -1668,8 +1668,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching address
@@ -1715,8 +1715,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * </p>
 	 *
 	 * @param addressId the primary key of the current address
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next address
@@ -1868,8 +1868,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	/**
 	 * Finds all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and mailing = &#63;.
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param mailing the mailing to search with
 	 * @return the matching addresses
@@ -1888,8 +1888,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param mailing the mailing to search with
 	 * @param start the lower bound of the range of addresses to return
@@ -1911,8 +1911,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param mailing the mailing to search with
 	 * @param start the lower bound of the range of addresses to return
@@ -2014,8 +2014,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param mailing the mailing to search with
 	 * @param orderByComparator the comparator to order the set by
@@ -2062,8 +2062,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param mailing the mailing to search with
 	 * @param orderByComparator the comparator to order the set by
@@ -2113,8 +2113,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * </p>
 	 *
 	 * @param addressId the primary key of the current address
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param mailing the mailing to search with
 	 * @param orderByComparator the comparator to order the set by
@@ -2272,8 +2272,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	/**
 	 * Finds all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param primary the primary to search with
 	 * @return the matching addresses
@@ -2292,8 +2292,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param primary the primary to search with
 	 * @param start the lower bound of the range of addresses to return
@@ -2315,8 +2315,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param primary the primary to search with
 	 * @param start the lower bound of the range of addresses to return
@@ -2418,8 +2418,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param primary the primary to search with
 	 * @param orderByComparator the comparator to order the set by
@@ -2466,8 +2466,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param primary the primary to search with
 	 * @param orderByComparator the comparator to order the set by
@@ -2517,8 +2517,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 * </p>
 	 *
 	 * @param addressId the primary key of the current address
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param primary the primary to search with
 	 * @param orderByComparator the comparator to order the set by
@@ -2784,7 +2784,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	/**
 	 * Removes all the addresses where companyId = &#63; from the database.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
@@ -2796,7 +2796,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	/**
 	 * Removes all the addresses where userId = &#63; from the database.
 	 *
-	 * @param userId the user id to search with
+	 * @param userId the user ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUserId(long userId) throws SystemException {
@@ -2808,8 +2808,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	/**
 	 * Removes all the addresses where companyId = &#63; and classNameId = &#63; from the database.
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByC_C(long companyId, long classNameId)
@@ -2822,8 +2822,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	/**
 	 * Removes all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2837,8 +2837,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	/**
 	 * Removes all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and mailing = &#63; from the database.
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param mailing the mailing to search with
 	 * @throws SystemException if a system exception occurred
@@ -2854,8 +2854,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	/**
 	 * Removes all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63; from the database.
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param primary the primary to search with
 	 * @throws SystemException if a system exception occurred
@@ -2882,7 +2882,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	/**
 	 * Counts all the addresses where companyId = &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @return the number of matching addresses
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2935,7 +2935,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	/**
 	 * Counts all the addresses where userId = &#63;.
 	 *
-	 * @param userId the user id to search with
+	 * @param userId the user ID to search with
 	 * @return the number of matching addresses
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2988,8 +2988,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	/**
 	 * Counts all the addresses where companyId = &#63; and classNameId = &#63;.
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @return the number of matching addresses
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3047,8 +3047,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	/**
 	 * Counts all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @return the number of matching addresses
 	 * @throws SystemException if a system exception occurred
@@ -3111,8 +3111,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	/**
 	 * Counts all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and mailing = &#63;.
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param mailing the mailing to search with
 	 * @return the number of matching addresses
@@ -3182,8 +3182,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	/**
 	 * Counts all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param primary the primary to search with
 	 * @return the number of matching addresses

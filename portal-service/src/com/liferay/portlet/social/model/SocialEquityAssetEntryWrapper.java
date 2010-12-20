@@ -48,72 +48,72 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 	}
 
 	/**
-	* Gets the equity asset entry id of this social equity asset entry.
+	* Gets the equity asset entry ID of this social equity asset entry.
 	*
-	* @return the equity asset entry id of this social equity asset entry
+	* @return the equity asset entry ID of this social equity asset entry
 	*/
 	public long getEquityAssetEntryId() {
 		return _socialEquityAssetEntry.getEquityAssetEntryId();
 	}
 
 	/**
-	* Sets the equity asset entry id of this social equity asset entry.
+	* Sets the equity asset entry ID of this social equity asset entry.
 	*
-	* @param equityAssetEntryId the equity asset entry id of this social equity asset entry
+	* @param equityAssetEntryId the equity asset entry ID of this social equity asset entry
 	*/
 	public void setEquityAssetEntryId(long equityAssetEntryId) {
 		_socialEquityAssetEntry.setEquityAssetEntryId(equityAssetEntryId);
 	}
 
 	/**
-	* Gets the group id of this social equity asset entry.
+	* Gets the group ID of this social equity asset entry.
 	*
-	* @return the group id of this social equity asset entry
+	* @return the group ID of this social equity asset entry
 	*/
 	public long getGroupId() {
 		return _socialEquityAssetEntry.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this social equity asset entry.
+	* Sets the group ID of this social equity asset entry.
 	*
-	* @param groupId the group id of this social equity asset entry
+	* @param groupId the group ID of this social equity asset entry
 	*/
 	public void setGroupId(long groupId) {
 		_socialEquityAssetEntry.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this social equity asset entry.
+	* Gets the company ID of this social equity asset entry.
 	*
-	* @return the company id of this social equity asset entry
+	* @return the company ID of this social equity asset entry
 	*/
 	public long getCompanyId() {
 		return _socialEquityAssetEntry.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this social equity asset entry.
+	* Sets the company ID of this social equity asset entry.
 	*
-	* @param companyId the company id of this social equity asset entry
+	* @param companyId the company ID of this social equity asset entry
 	*/
 	public void setCompanyId(long companyId) {
 		_socialEquityAssetEntry.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this social equity asset entry.
+	* Gets the user ID of this social equity asset entry.
 	*
-	* @return the user id of this social equity asset entry
+	* @return the user ID of this social equity asset entry
 	*/
 	public long getUserId() {
 		return _socialEquityAssetEntry.getUserId();
 	}
 
 	/**
-	* Sets the user id of this social equity asset entry.
+	* Sets the user ID of this social equity asset entry.
 	*
-	* @param userId the user id of this social equity asset entry
+	* @param userId the user ID of this social equity asset entry
 	*/
 	public void setUserId(long userId) {
 		_socialEquityAssetEntry.setUserId(userId);
@@ -140,18 +140,18 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 	}
 
 	/**
-	* Gets the asset entry id of this social equity asset entry.
+	* Gets the asset entry ID of this social equity asset entry.
 	*
-	* @return the asset entry id of this social equity asset entry
+	* @return the asset entry ID of this social equity asset entry
 	*/
 	public long getAssetEntryId() {
 		return _socialEquityAssetEntry.getAssetEntryId();
 	}
 
 	/**
-	* Sets the asset entry id of this social equity asset entry.
+	* Sets the asset entry ID of this social equity asset entry.
 	*
-	* @param assetEntryId the asset entry id of this social equity asset entry
+	* @param assetEntryId the asset entry ID of this social equity asset entry
 	*/
 	public void setAssetEntryId(long assetEntryId) {
 		_socialEquityAssetEntry.setAssetEntryId(assetEntryId);

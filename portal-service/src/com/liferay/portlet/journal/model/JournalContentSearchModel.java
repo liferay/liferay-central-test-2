@@ -57,44 +57,44 @@ public interface JournalContentSearchModel extends BaseModel<JournalContentSearc
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the content search id of this journal content search.
+	 * Gets the content search ID of this journal content search.
 	 *
-	 * @return the content search id of this journal content search
+	 * @return the content search ID of this journal content search
 	 */
 	public long getContentSearchId();
 
 	/**
-	 * Sets the content search id of this journal content search.
+	 * Sets the content search ID of this journal content search.
 	 *
-	 * @param contentSearchId the content search id of this journal content search
+	 * @param contentSearchId the content search ID of this journal content search
 	 */
 	public void setContentSearchId(long contentSearchId);
 
 	/**
-	 * Gets the group id of this journal content search.
+	 * Gets the group ID of this journal content search.
 	 *
-	 * @return the group id of this journal content search
+	 * @return the group ID of this journal content search
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this journal content search.
+	 * Sets the group ID of this journal content search.
 	 *
-	 * @param groupId the group id of this journal content search
+	 * @param groupId the group ID of this journal content search
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this journal content search.
+	 * Gets the company ID of this journal content search.
 	 *
-	 * @return the company id of this journal content search
+	 * @return the company ID of this journal content search
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this journal content search.
+	 * Sets the company ID of this journal content search.
 	 *
-	 * @param companyId the company id of this journal content search
+	 * @param companyId the company ID of this journal content search
 	 */
 	public void setCompanyId(long companyId);
 
@@ -120,46 +120,46 @@ public interface JournalContentSearchModel extends BaseModel<JournalContentSearc
 	public void setPrivateLayout(boolean privateLayout);
 
 	/**
-	 * Gets the layout id of this journal content search.
+	 * Gets the layout ID of this journal content search.
 	 *
-	 * @return the layout id of this journal content search
+	 * @return the layout ID of this journal content search
 	 */
 	public long getLayoutId();
 
 	/**
-	 * Sets the layout id of this journal content search.
+	 * Sets the layout ID of this journal content search.
 	 *
-	 * @param layoutId the layout id of this journal content search
+	 * @param layoutId the layout ID of this journal content search
 	 */
 	public void setLayoutId(long layoutId);
 
 	/**
-	 * Gets the portlet id of this journal content search.
+	 * Gets the portlet ID of this journal content search.
 	 *
-	 * @return the portlet id of this journal content search
+	 * @return the portlet ID of this journal content search
 	 */
 	@AutoEscape
 	public String getPortletId();
 
 	/**
-	 * Sets the portlet id of this journal content search.
+	 * Sets the portlet ID of this journal content search.
 	 *
-	 * @param portletId the portlet id of this journal content search
+	 * @param portletId the portlet ID of this journal content search
 	 */
 	public void setPortletId(String portletId);
 
 	/**
-	 * Gets the article id of this journal content search.
+	 * Gets the article ID of this journal content search.
 	 *
-	 * @return the article id of this journal content search
+	 * @return the article ID of this journal content search
 	 */
 	@AutoEscape
 	public String getArticleId();
 
 	/**
-	 * Sets the article id of this journal content search.
+	 * Sets the article ID of this journal content search.
 	 *
-	 * @param articleId the article id of this journal content search
+	 * @param articleId the article ID of this journal content search
 	 */
 	public void setArticleId(String articleId);
 

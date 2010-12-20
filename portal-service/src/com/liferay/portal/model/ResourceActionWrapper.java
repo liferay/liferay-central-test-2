@@ -47,18 +47,18 @@ public class ResourceActionWrapper implements ResourceAction {
 	}
 
 	/**
-	* Gets the resource action id of this resource action.
+	* Gets the resource action ID of this resource action.
 	*
-	* @return the resource action id of this resource action
+	* @return the resource action ID of this resource action
 	*/
 	public long getResourceActionId() {
 		return _resourceAction.getResourceActionId();
 	}
 
 	/**
-	* Sets the resource action id of this resource action.
+	* Sets the resource action ID of this resource action.
 	*
-	* @param resourceActionId the resource action id of this resource action
+	* @param resourceActionId the resource action ID of this resource action
 	*/
 	public void setResourceActionId(long resourceActionId) {
 		_resourceAction.setResourceActionId(resourceActionId);
@@ -83,18 +83,18 @@ public class ResourceActionWrapper implements ResourceAction {
 	}
 
 	/**
-	* Gets the action id of this resource action.
+	* Gets the action ID of this resource action.
 	*
-	* @return the action id of this resource action
+	* @return the action ID of this resource action
 	*/
 	public java.lang.String getActionId() {
 		return _resourceAction.getActionId();
 	}
 
 	/**
-	* Sets the action id of this resource action.
+	* Sets the action ID of this resource action.
 	*
-	* @param actionId the action id of this resource action
+	* @param actionId the action ID of this resource action
 	*/
 	public void setActionId(java.lang.String actionId) {
 		_resourceAction.setActionId(actionId);

@@ -57,44 +57,44 @@ public interface GroupModel extends BaseModel<Group> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the group id of this group.
+	 * Gets the group ID of this group.
 	 *
-	 * @return the group id of this group
+	 * @return the group ID of this group
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this group.
+	 * Sets the group ID of this group.
 	 *
-	 * @param groupId the group id of this group
+	 * @param groupId the group ID of this group
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this group.
+	 * Gets the company ID of this group.
 	 *
-	 * @return the company id of this group
+	 * @return the company ID of this group
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this group.
+	 * Sets the company ID of this group.
 	 *
-	 * @param companyId the company id of this group
+	 * @param companyId the company ID of this group
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the creator user id of this group.
+	 * Gets the creator user ID of this group.
 	 *
-	 * @return the creator user id of this group
+	 * @return the creator user ID of this group
 	 */
 	public long getCreatorUserId();
 
 	/**
-	 * Sets the creator user id of this group.
+	 * Sets the creator user ID of this group.
 	 *
-	 * @param creatorUserId the creator user id of this group
+	 * @param creatorUserId the creator user ID of this group
 	 */
 	public void setCreatorUserId(long creatorUserId);
 
@@ -121,16 +121,16 @@ public interface GroupModel extends BaseModel<Group> {
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this group.
+	 * Gets the class name ID of this group.
 	 *
-	 * @return the class name id of this group
+	 * @return the class name ID of this group
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this group.
+	 * Sets the class name ID of this group.
 	 *
-	 * @param classNameId the class name id of this group
+	 * @param classNameId the class name ID of this group
 	 */
 	public void setClassNameId(long classNameId);
 
@@ -149,30 +149,30 @@ public interface GroupModel extends BaseModel<Group> {
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the parent group id of this group.
+	 * Gets the parent group ID of this group.
 	 *
-	 * @return the parent group id of this group
+	 * @return the parent group ID of this group
 	 */
 	public long getParentGroupId();
 
 	/**
-	 * Sets the parent group id of this group.
+	 * Sets the parent group ID of this group.
 	 *
-	 * @param parentGroupId the parent group id of this group
+	 * @param parentGroupId the parent group ID of this group
 	 */
 	public void setParentGroupId(long parentGroupId);
 
 	/**
-	 * Gets the live group id of this group.
+	 * Gets the live group ID of this group.
 	 *
-	 * @return the live group id of this group
+	 * @return the live group ID of this group
 	 */
 	public long getLiveGroupId();
 
 	/**
-	 * Sets the live group id of this group.
+	 * Sets the live group ID of this group.
 	 *
-	 * @param liveGroupId the live group id of this group
+	 * @param liveGroupId the live group ID of this group
 	 */
 	public void setLiveGroupId(long liveGroupId);
 

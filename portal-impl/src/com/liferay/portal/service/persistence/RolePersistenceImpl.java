@@ -532,7 +532,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Finds all the roles where companyId = &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @return the matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -548,7 +548,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of roles to return
 	 * @param end the upper bound of the range of roles to return (not inclusive)
 	 * @return the range of matching roles
@@ -566,7 +566,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of roles to return
 	 * @param end the upper bound of the range of roles to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -653,7 +653,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching role
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
@@ -688,7 +688,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching role
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
@@ -727,7 +727,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * </p>
 	 *
 	 * @param roleId the primary key of the current role
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next role
 	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
@@ -869,7 +869,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Filters by the user's permissions and finds all the roles where companyId = &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @return the matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -886,7 +886,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of roles to return
 	 * @param end the upper bound of the range of roles to return (not inclusive)
 	 * @return the range of matching roles that the user has permission to view
@@ -904,7 +904,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of roles to return
 	 * @param end the upper bound of the range of roles to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -1491,7 +1491,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Finds the role where companyId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchRoleException} if it could not be found.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param name the name to search with
 	 * @return the matching role
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
@@ -1527,7 +1527,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Finds the role where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param name the name to search with
 	 * @return the matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1540,7 +1540,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Finds the role where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param name the name to search with
 	 * @return the matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2170,8 +2170,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Finds the role where companyId = &#63; and classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portal.NoSuchRoleException} if it could not be found.
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @return the matching role
 	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
@@ -2210,8 +2210,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Finds the role where companyId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @return the matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2224,8 +2224,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Finds the role where companyId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @return the matching role, or <code>null</code> if a matching role could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2429,7 +2429,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Removes all the roles where companyId = &#63; from the database.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
@@ -2453,7 +2453,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Removes the role where companyId = &#63; and name = &#63; from the database.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param name the name to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2480,8 +2480,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Removes the role where companyId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2506,7 +2506,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Counts all the roles where companyId = &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @return the number of matching roles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2559,7 +2559,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Filters by the user's permissions and counts all the roles where companyId = &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @return the number of matching roles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2730,7 +2730,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Counts all the roles where companyId = &#63; and name = &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param name the name to search with
 	 * @return the number of matching roles
 	 * @throws SystemException if a system exception occurred
@@ -2936,8 +2936,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	/**
 	 * Counts all the roles where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
+	 * @param companyId the company ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @return the number of matching roles
 	 * @throws SystemException if a system exception occurred

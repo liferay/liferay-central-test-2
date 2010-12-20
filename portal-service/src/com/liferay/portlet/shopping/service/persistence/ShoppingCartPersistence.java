@@ -104,7 +104,7 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	/**
 	* Finds all the shopping carts where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching shopping carts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -119,7 +119,7 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of shopping carts to return
 	* @param end the upper bound of the range of shopping carts to return (not inclusive)
 	* @return the range of matching shopping carts
@@ -136,7 +136,7 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of shopping carts to return
 	* @param end the upper bound of the range of shopping carts to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -155,7 +155,7 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching shopping cart
 	* @throws com.liferay.portlet.shopping.NoSuchCartException if a matching shopping cart could not be found
@@ -174,7 +174,7 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching shopping cart
 	* @throws com.liferay.portlet.shopping.NoSuchCartException if a matching shopping cart could not be found
@@ -194,7 +194,7 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	* </p>
 	*
 	* @param cartId the primary key of the current shopping cart
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next shopping cart
 	* @throws com.liferay.portlet.shopping.NoSuchCartException if a shopping cart with the primary key could not be found
@@ -209,7 +209,7 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	/**
 	* Finds all the shopping carts where userId = &#63;.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @return the matching shopping carts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -223,7 +223,7 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of shopping carts to return
 	* @param end the upper bound of the range of shopping carts to return (not inclusive)
 	* @return the range of matching shopping carts
@@ -240,7 +240,7 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of shopping carts to return
 	* @param end the upper bound of the range of shopping carts to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -259,7 +259,7 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching shopping cart
 	* @throws com.liferay.portlet.shopping.NoSuchCartException if a matching shopping cart could not be found
@@ -278,7 +278,7 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching shopping cart
 	* @throws com.liferay.portlet.shopping.NoSuchCartException if a matching shopping cart could not be found
@@ -298,7 +298,7 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	* </p>
 	*
 	* @param cartId the primary key of the current shopping cart
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next shopping cart
 	* @throws com.liferay.portlet.shopping.NoSuchCartException if a shopping cart with the primary key could not be found
@@ -313,8 +313,8 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	/**
 	* Finds the shopping cart where groupId = &#63; and userId = &#63; or throws a {@link com.liferay.portlet.shopping.NoSuchCartException} if it could not be found.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @return the matching shopping cart
 	* @throws com.liferay.portlet.shopping.NoSuchCartException if a matching shopping cart could not be found
 	* @throws SystemException if a system exception occurred
@@ -327,8 +327,8 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	/**
 	* Finds the shopping cart where groupId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @return the matching shopping cart, or <code>null</code> if a matching shopping cart could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -339,8 +339,8 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	/**
 	* Finds the shopping cart where groupId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @return the matching shopping cart, or <code>null</code> if a matching shopping cart could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -394,7 +394,7 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	/**
 	* Removes all the shopping carts where groupId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByGroupId(long groupId)
@@ -403,7 +403,7 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	/**
 	* Removes all the shopping carts where userId = &#63; from the database.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUserId(long userId)
@@ -412,8 +412,8 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	/**
 	* Removes the shopping cart where groupId = &#63; and userId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByG_U(long groupId, long userId)
@@ -431,7 +431,7 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	/**
 	* Counts all the shopping carts where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching shopping carts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -441,7 +441,7 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	/**
 	* Counts all the shopping carts where userId = &#63;.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @return the number of matching shopping carts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -451,8 +451,8 @@ public interface ShoppingCartPersistence extends BasePersistence<ShoppingCart> {
 	/**
 	* Counts all the shopping carts where groupId = &#63; and userId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @return the number of matching shopping carts
 	* @throws SystemException if a system exception occurred
 	*/

@@ -57,16 +57,16 @@ public interface UserGroupRoleModel extends BaseModel<UserGroupRole> {
 	public void setPrimaryKey(UserGroupRolePK pk);
 
 	/**
-	 * Gets the user id of this user group role.
+	 * Gets the user ID of this user group role.
 	 *
-	 * @return the user id of this user group role
+	 * @return the user ID of this user group role
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this user group role.
+	 * Sets the user ID of this user group role.
 	 *
-	 * @param userId the user id of this user group role
+	 * @param userId the user ID of this user group role
 	 */
 	public void setUserId(long userId);
 
@@ -86,30 +86,30 @@ public interface UserGroupRoleModel extends BaseModel<UserGroupRole> {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the group id of this user group role.
+	 * Gets the group ID of this user group role.
 	 *
-	 * @return the group id of this user group role
+	 * @return the group ID of this user group role
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this user group role.
+	 * Sets the group ID of this user group role.
 	 *
-	 * @param groupId the group id of this user group role
+	 * @param groupId the group ID of this user group role
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the role id of this user group role.
+	 * Gets the role ID of this user group role.
 	 *
-	 * @return the role id of this user group role
+	 * @return the role ID of this user group role
 	 */
 	public long getRoleId();
 
 	/**
-	 * Sets the role id of this user group role.
+	 * Sets the role ID of this user group role.
 	 *
-	 * @param roleId the role id of this user group role
+	 * @param roleId the role ID of this user group role
 	 */
 	public void setRoleId(long roleId);
 

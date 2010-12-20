@@ -56,45 +56,45 @@ public interface CompanyModel extends BaseModel<Company> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the company id of this company.
+	 * Gets the company ID of this company.
 	 *
-	 * @return the company id of this company
+	 * @return the company ID of this company
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this company.
+	 * Sets the company ID of this company.
 	 *
-	 * @param companyId the company id of this company
+	 * @param companyId the company ID of this company
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the account id of this company.
+	 * Gets the account ID of this company.
 	 *
-	 * @return the account id of this company
+	 * @return the account ID of this company
 	 */
 	public long getAccountId();
 
 	/**
-	 * Sets the account id of this company.
+	 * Sets the account ID of this company.
 	 *
-	 * @param accountId the account id of this company
+	 * @param accountId the account ID of this company
 	 */
 	public void setAccountId(long accountId);
 
 	/**
-	 * Gets the web id of this company.
+	 * Gets the web ID of this company.
 	 *
-	 * @return the web id of this company
+	 * @return the web ID of this company
 	 */
 	@AutoEscape
 	public String getWebId();
 
 	/**
-	 * Sets the web id of this company.
+	 * Sets the web ID of this company.
 	 *
-	 * @param webId the web id of this company
+	 * @param webId the web ID of this company
 	 */
 	public void setWebId(String webId);
 
@@ -144,16 +144,16 @@ public interface CompanyModel extends BaseModel<Company> {
 	public void setHomeURL(String homeURL);
 
 	/**
-	 * Gets the logo id of this company.
+	 * Gets the logo ID of this company.
 	 *
-	 * @return the logo id of this company
+	 * @return the logo ID of this company
 	 */
 	public long getLogoId();
 
 	/**
-	 * Sets the logo id of this company.
+	 * Sets the logo ID of this company.
 	 *
-	 * @param logoId the logo id of this company
+	 * @param logoId the logo ID of this company
 	 */
 	public void setLogoId(long logoId);
 

@@ -47,72 +47,72 @@ public class TasksProposalWrapper implements TasksProposal {
 	}
 
 	/**
-	* Gets the proposal id of this tasks proposal.
+	* Gets the proposal ID of this tasks proposal.
 	*
-	* @return the proposal id of this tasks proposal
+	* @return the proposal ID of this tasks proposal
 	*/
 	public long getProposalId() {
 		return _tasksProposal.getProposalId();
 	}
 
 	/**
-	* Sets the proposal id of this tasks proposal.
+	* Sets the proposal ID of this tasks proposal.
 	*
-	* @param proposalId the proposal id of this tasks proposal
+	* @param proposalId the proposal ID of this tasks proposal
 	*/
 	public void setProposalId(long proposalId) {
 		_tasksProposal.setProposalId(proposalId);
 	}
 
 	/**
-	* Gets the group id of this tasks proposal.
+	* Gets the group ID of this tasks proposal.
 	*
-	* @return the group id of this tasks proposal
+	* @return the group ID of this tasks proposal
 	*/
 	public long getGroupId() {
 		return _tasksProposal.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this tasks proposal.
+	* Sets the group ID of this tasks proposal.
 	*
-	* @param groupId the group id of this tasks proposal
+	* @param groupId the group ID of this tasks proposal
 	*/
 	public void setGroupId(long groupId) {
 		_tasksProposal.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this tasks proposal.
+	* Gets the company ID of this tasks proposal.
 	*
-	* @return the company id of this tasks proposal
+	* @return the company ID of this tasks proposal
 	*/
 	public long getCompanyId() {
 		return _tasksProposal.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this tasks proposal.
+	* Sets the company ID of this tasks proposal.
 	*
-	* @param companyId the company id of this tasks proposal
+	* @param companyId the company ID of this tasks proposal
 	*/
 	public void setCompanyId(long companyId) {
 		_tasksProposal.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this tasks proposal.
+	* Gets the user ID of this tasks proposal.
 	*
-	* @return the user id of this tasks proposal
+	* @return the user ID of this tasks proposal
 	*/
 	public long getUserId() {
 		return _tasksProposal.getUserId();
 	}
 
 	/**
-	* Sets the user id of this tasks proposal.
+	* Sets the user ID of this tasks proposal.
 	*
-	* @param userId the user id of this tasks proposal
+	* @param userId the user ID of this tasks proposal
 	*/
 	public void setUserId(long userId) {
 		_tasksProposal.setUserId(userId);
@@ -202,18 +202,18 @@ public class TasksProposalWrapper implements TasksProposal {
 	}
 
 	/**
-	* Gets the class name id of this tasks proposal.
+	* Gets the class name ID of this tasks proposal.
 	*
-	* @return the class name id of this tasks proposal
+	* @return the class name ID of this tasks proposal
 	*/
 	public long getClassNameId() {
 		return _tasksProposal.getClassNameId();
 	}
 
 	/**
-	* Sets the class name id of this tasks proposal.
+	* Sets the class name ID of this tasks proposal.
 	*
-	* @param classNameId the class name id of this tasks proposal
+	* @param classNameId the class name ID of this tasks proposal
 	*/
 	public void setClassNameId(long classNameId) {
 		_tasksProposal.setClassNameId(classNameId);

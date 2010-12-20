@@ -60,44 +60,44 @@ public interface AssetTagPropertyModel extends BaseModel<AssetTagProperty> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the tag property id of this asset tag property.
+	 * Gets the tag property ID of this asset tag property.
 	 *
-	 * @return the tag property id of this asset tag property
+	 * @return the tag property ID of this asset tag property
 	 */
 	public long getTagPropertyId();
 
 	/**
-	 * Sets the tag property id of this asset tag property.
+	 * Sets the tag property ID of this asset tag property.
 	 *
-	 * @param tagPropertyId the tag property id of this asset tag property
+	 * @param tagPropertyId the tag property ID of this asset tag property
 	 */
 	public void setTagPropertyId(long tagPropertyId);
 
 	/**
-	 * Gets the company id of this asset tag property.
+	 * Gets the company ID of this asset tag property.
 	 *
-	 * @return the company id of this asset tag property
+	 * @return the company ID of this asset tag property
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this asset tag property.
+	 * Sets the company ID of this asset tag property.
 	 *
-	 * @param companyId the company id of this asset tag property
+	 * @param companyId the company ID of this asset tag property
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this asset tag property.
+	 * Gets the user ID of this asset tag property.
 	 *
-	 * @return the user id of this asset tag property
+	 * @return the user ID of this asset tag property
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this asset tag property.
+	 * Sets the user ID of this asset tag property.
 	 *
-	 * @param userId the user id of this asset tag property
+	 * @param userId the user ID of this asset tag property
 	 */
 	public void setUserId(long userId);
 
@@ -160,16 +160,16 @@ public interface AssetTagPropertyModel extends BaseModel<AssetTagProperty> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the tag id of this asset tag property.
+	 * Gets the tag ID of this asset tag property.
 	 *
-	 * @return the tag id of this asset tag property
+	 * @return the tag ID of this asset tag property
 	 */
 	public long getTagId();
 
 	/**
-	 * Sets the tag id of this asset tag property.
+	 * Sets the tag ID of this asset tag property.
 	 *
-	 * @param tagId the tag id of this asset tag property
+	 * @param tagId the tag ID of this asset tag property
 	 */
 	public void setTagId(long tagId);
 

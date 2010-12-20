@@ -75,58 +75,58 @@ public interface JournalStructureModel extends BaseModel<JournalStructure> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the id of this journal structure.
+	 * Gets the ID of this journal structure.
 	 *
-	 * @return the id of this journal structure
+	 * @return the ID of this journal structure
 	 */
 	public long getId();
 
 	/**
-	 * Sets the id of this journal structure.
+	 * Sets the ID of this journal structure.
 	 *
-	 * @param id the id of this journal structure
+	 * @param id the ID of this journal structure
 	 */
 	public void setId(long id);
 
 	/**
-	 * Gets the group id of this journal structure.
+	 * Gets the group ID of this journal structure.
 	 *
-	 * @return the group id of this journal structure
+	 * @return the group ID of this journal structure
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this journal structure.
+	 * Sets the group ID of this journal structure.
 	 *
-	 * @param groupId the group id of this journal structure
+	 * @param groupId the group ID of this journal structure
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this journal structure.
+	 * Gets the company ID of this journal structure.
 	 *
-	 * @return the company id of this journal structure
+	 * @return the company ID of this journal structure
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this journal structure.
+	 * Sets the company ID of this journal structure.
 	 *
-	 * @param companyId the company id of this journal structure
+	 * @param companyId the company ID of this journal structure
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this journal structure.
+	 * Gets the user ID of this journal structure.
 	 *
-	 * @return the user id of this journal structure
+	 * @return the user ID of this journal structure
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this journal structure.
+	 * Sets the user ID of this journal structure.
 	 *
-	 * @param userId the user id of this journal structure
+	 * @param userId the user ID of this journal structure
 	 */
 	public void setUserId(long userId);
 
@@ -189,31 +189,31 @@ public interface JournalStructureModel extends BaseModel<JournalStructure> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the structure id of this journal structure.
+	 * Gets the structure ID of this journal structure.
 	 *
-	 * @return the structure id of this journal structure
+	 * @return the structure ID of this journal structure
 	 */
 	public String getStructureId();
 
 	/**
-	 * Sets the structure id of this journal structure.
+	 * Sets the structure ID of this journal structure.
 	 *
-	 * @param structureId the structure id of this journal structure
+	 * @param structureId the structure ID of this journal structure
 	 */
 	public void setStructureId(String structureId);
 
 	/**
-	 * Gets the parent structure id of this journal structure.
+	 * Gets the parent structure ID of this journal structure.
 	 *
-	 * @return the parent structure id of this journal structure
+	 * @return the parent structure ID of this journal structure
 	 */
 	@AutoEscape
 	public String getParentStructureId();
 
 	/**
-	 * Sets the parent structure id of this journal structure.
+	 * Sets the parent structure ID of this journal structure.
 	 *
-	 * @param parentStructureId the parent structure id of this journal structure
+	 * @param parentStructureId the parent structure ID of this journal structure
 	 */
 	public void setParentStructureId(String parentStructureId);
 

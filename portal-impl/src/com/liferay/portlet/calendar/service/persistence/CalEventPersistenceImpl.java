@@ -880,7 +880,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Finds the cal event where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.calendar.NoSuchEventException} if it could not be found.
 	 *
 	 * @param uuid the uuid to search with
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
 	 * @throws SystemException if a system exception occurred
@@ -916,7 +916,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Finds the cal event where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param uuid the uuid to search with
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching cal event, or <code>null</code> if a matching cal event could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -929,7 +929,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Finds the cal event where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param uuid the uuid to search with
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching cal event, or <code>null</code> if a matching cal event could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1032,7 +1032,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	/**
 	 * Finds all the cal events where companyId = &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @return the matching cal events
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1049,7 +1049,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
 	 * @return the range of matching cal events
@@ -1067,7 +1067,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -1155,7 +1155,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
@@ -1190,7 +1190,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
@@ -1229,7 +1229,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * </p>
 	 *
 	 * @param eventId the primary key of the current cal event
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
@@ -1372,7 +1372,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	/**
 	 * Finds all the cal events where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching cal events
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1387,7 +1387,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
 	 * @return the range of matching cal events
@@ -1405,7 +1405,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -1493,7 +1493,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
@@ -1528,7 +1528,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
@@ -1567,7 +1567,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * </p>
 	 *
 	 * @param eventId the primary key of the current cal event
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
@@ -1710,7 +1710,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	/**
 	 * Filters by the user's permissions and finds all the cal events where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching cal events that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1727,7 +1727,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
 	 * @return the range of matching cal events that the user has permission to view
@@ -1745,7 +1745,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -2177,7 +2177,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	/**
 	 * Finds all the cal events where groupId = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param type the type to search with
 	 * @return the matching cal events
 	 * @throws SystemException if a system exception occurred
@@ -2195,7 +2195,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param type the type to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
@@ -2214,7 +2214,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param type the type to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
@@ -2319,7 +2319,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param type the type to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching cal event
@@ -2358,7 +2358,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param type the type to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching cal event
@@ -2401,7 +2401,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * </p>
 	 *
 	 * @param eventId the primary key of the current cal event
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param type the type to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next cal event
@@ -2561,7 +2561,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	/**
 	 * Filters by the user's permissions and finds all the cal events where groupId = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param type the type to search with
 	 * @return the matching cal events that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -2579,7 +2579,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param type the type to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
@@ -2598,7 +2598,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param type the type to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
@@ -2706,7 +2706,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	/**
 	 * Finds all the cal events where groupId = &#63; and repeating = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param repeating the repeating to search with
 	 * @return the matching cal events
 	 * @throws SystemException if a system exception occurred
@@ -2724,7 +2724,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param repeating the repeating to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
@@ -2743,7 +2743,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param repeating the repeating to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
@@ -2836,7 +2836,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param repeating the repeating to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching cal event
@@ -2876,7 +2876,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param repeating the repeating to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching cal event
@@ -2919,7 +2919,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * </p>
 	 *
 	 * @param eventId the primary key of the current cal event
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param repeating the repeating to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next cal event
@@ -3067,7 +3067,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	/**
 	 * Filters by the user's permissions and finds all the cal events where groupId = &#63; and repeating = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param repeating the repeating to search with
 	 * @return the matching cal events that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -3085,7 +3085,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param repeating the repeating to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
@@ -3104,7 +3104,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param repeating the repeating to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
@@ -3322,7 +3322,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Removes the cal event where uuid = &#63; and groupId = &#63; from the database.
 	 *
 	 * @param uuid the uuid to search with
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUUID_G(String uuid, long groupId)
@@ -3335,7 +3335,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	/**
 	 * Removes all the cal events where companyId = &#63; from the database.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
@@ -3347,7 +3347,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	/**
 	 * Removes all the cal events where groupId = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -3371,7 +3371,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	/**
 	 * Removes all the cal events where groupId = &#63; and type = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param type the type to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3385,7 +3385,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	/**
 	 * Removes all the cal events where groupId = &#63; and repeating = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param repeating the repeating to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3476,7 +3476,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * Counts all the cal events where uuid = &#63; and groupId = &#63;.
 	 *
 	 * @param uuid the uuid to search with
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the number of matching cal events
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3546,7 +3546,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	/**
 	 * Counts all the cal events where companyId = &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @return the number of matching cal events
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3599,7 +3599,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	/**
 	 * Counts all the cal events where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the number of matching cal events
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3652,7 +3652,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	/**
 	 * Filters by the user's permissions and counts all the cal events where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the number of matching cal events that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3753,7 +3753,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	/**
 	 * Counts all the cal events where groupId = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param type the type to search with
 	 * @return the number of matching cal events
 	 * @throws SystemException if a system exception occurred
@@ -3823,7 +3823,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	/**
 	 * Filters by the user's permissions and counts all the cal events where groupId = &#63; and type = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param type the type to search with
 	 * @return the number of matching cal events that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -3889,7 +3889,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	/**
 	 * Counts all the cal events where groupId = &#63; and repeating = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param repeating the repeating to search with
 	 * @return the number of matching cal events
 	 * @throws SystemException if a system exception occurred
@@ -3948,7 +3948,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	/**
 	 * Filters by the user's permissions and counts all the cal events where groupId = &#63; and repeating = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param repeating the repeating to search with
 	 * @return the number of matching cal events that the user has permission to view
 	 * @throws SystemException if a system exception occurred

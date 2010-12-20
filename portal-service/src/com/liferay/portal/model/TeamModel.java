@@ -59,44 +59,44 @@ public interface TeamModel extends BaseModel<Team> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the team id of this team.
+	 * Gets the team ID of this team.
 	 *
-	 * @return the team id of this team
+	 * @return the team ID of this team
 	 */
 	public long getTeamId();
 
 	/**
-	 * Sets the team id of this team.
+	 * Sets the team ID of this team.
 	 *
-	 * @param teamId the team id of this team
+	 * @param teamId the team ID of this team
 	 */
 	public void setTeamId(long teamId);
 
 	/**
-	 * Gets the company id of this team.
+	 * Gets the company ID of this team.
 	 *
-	 * @return the company id of this team
+	 * @return the company ID of this team
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this team.
+	 * Sets the company ID of this team.
 	 *
-	 * @param companyId the company id of this team
+	 * @param companyId the company ID of this team
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this team.
+	 * Gets the user ID of this team.
 	 *
-	 * @return the user id of this team
+	 * @return the user ID of this team
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this team.
+	 * Sets the user ID of this team.
 	 *
-	 * @param userId the user id of this team
+	 * @param userId the user ID of this team
 	 */
 	public void setUserId(long userId);
 
@@ -159,16 +159,16 @@ public interface TeamModel extends BaseModel<Team> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the group id of this team.
+	 * Gets the group ID of this team.
 	 *
-	 * @return the group id of this team
+	 * @return the group ID of this team
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this team.
+	 * Sets the group ID of this team.
 	 *
-	 * @param groupId the group id of this team
+	 * @param groupId the group ID of this team
 	 */
 	public void setGroupId(long groupId);
 

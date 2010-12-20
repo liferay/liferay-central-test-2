@@ -75,58 +75,58 @@ public interface IGFolderModel extends BaseModel<IGFolder> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the folder id of this i g folder.
+	 * Gets the folder ID of this i g folder.
 	 *
-	 * @return the folder id of this i g folder
+	 * @return the folder ID of this i g folder
 	 */
 	public long getFolderId();
 
 	/**
-	 * Sets the folder id of this i g folder.
+	 * Sets the folder ID of this i g folder.
 	 *
-	 * @param folderId the folder id of this i g folder
+	 * @param folderId the folder ID of this i g folder
 	 */
 	public void setFolderId(long folderId);
 
 	/**
-	 * Gets the group id of this i g folder.
+	 * Gets the group ID of this i g folder.
 	 *
-	 * @return the group id of this i g folder
+	 * @return the group ID of this i g folder
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this i g folder.
+	 * Sets the group ID of this i g folder.
 	 *
-	 * @param groupId the group id of this i g folder
+	 * @param groupId the group ID of this i g folder
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this i g folder.
+	 * Gets the company ID of this i g folder.
 	 *
-	 * @return the company id of this i g folder
+	 * @return the company ID of this i g folder
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this i g folder.
+	 * Sets the company ID of this i g folder.
 	 *
-	 * @param companyId the company id of this i g folder
+	 * @param companyId the company ID of this i g folder
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this i g folder.
+	 * Gets the user ID of this i g folder.
 	 *
-	 * @return the user id of this i g folder
+	 * @return the user ID of this i g folder
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this i g folder.
+	 * Sets the user ID of this i g folder.
 	 *
-	 * @param userId the user id of this i g folder
+	 * @param userId the user ID of this i g folder
 	 */
 	public void setUserId(long userId);
 
@@ -174,16 +174,16 @@ public interface IGFolderModel extends BaseModel<IGFolder> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the parent folder id of this i g folder.
+	 * Gets the parent folder ID of this i g folder.
 	 *
-	 * @return the parent folder id of this i g folder
+	 * @return the parent folder ID of this i g folder
 	 */
 	public long getParentFolderId();
 
 	/**
-	 * Sets the parent folder id of this i g folder.
+	 * Sets the parent folder ID of this i g folder.
 	 *
-	 * @param parentFolderId the parent folder id of this i g folder
+	 * @param parentFolderId the parent folder ID of this i g folder
 	 */
 	public void setParentFolderId(long parentFolderId);
 

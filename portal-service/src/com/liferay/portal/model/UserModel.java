@@ -74,16 +74,16 @@ public interface UserModel extends BaseModel<User> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the user id of this user.
+	 * Gets the user ID of this user.
 	 *
-	 * @return the user id of this user
+	 * @return the user ID of this user
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this user.
+	 * Sets the user ID of this user.
 	 *
-	 * @param userId the user id of this user
+	 * @param userId the user ID of this user
 	 */
 	public void setUserId(long userId);
 
@@ -103,16 +103,16 @@ public interface UserModel extends BaseModel<User> {
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the company id of this user.
+	 * Gets the company ID of this user.
 	 *
-	 * @return the company id of this user
+	 * @return the company ID of this user
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this user.
+	 * Sets the company ID of this user.
 	 *
-	 * @param companyId the company id of this user
+	 * @param companyId the company ID of this user
 	 */
 	public void setCompanyId(long companyId);
 
@@ -166,16 +166,16 @@ public interface UserModel extends BaseModel<User> {
 	public void setDefaultUser(boolean defaultUser);
 
 	/**
-	 * Gets the contact id of this user.
+	 * Gets the contact ID of this user.
 	 *
-	 * @return the contact id of this user
+	 * @return the contact ID of this user
 	 */
 	public long getContactId();
 
 	/**
-	 * Sets the contact id of this user.
+	 * Sets the contact ID of this user.
 	 *
-	 * @param contactId the contact id of this user
+	 * @param contactId the contact ID of this user
 	 */
 	public void setContactId(long contactId);
 
@@ -340,75 +340,75 @@ public interface UserModel extends BaseModel<User> {
 	public void setEmailAddress(String emailAddress);
 
 	/**
-	 * Gets the facebook id of this user.
+	 * Gets the facebook ID of this user.
 	 *
-	 * @return the facebook id of this user
+	 * @return the facebook ID of this user
 	 */
 	public long getFacebookId();
 
 	/**
-	 * Sets the facebook id of this user.
+	 * Sets the facebook ID of this user.
 	 *
-	 * @param facebookId the facebook id of this user
+	 * @param facebookId the facebook ID of this user
 	 */
 	public void setFacebookId(long facebookId);
 
 	/**
-	 * Gets the open id of this user.
+	 * Gets the open ID of this user.
 	 *
-	 * @return the open id of this user
+	 * @return the open ID of this user
 	 */
 	@AutoEscape
 	public String getOpenId();
 
 	/**
-	 * Sets the open id of this user.
+	 * Sets the open ID of this user.
 	 *
-	 * @param openId the open id of this user
+	 * @param openId the open ID of this user
 	 */
 	public void setOpenId(String openId);
 
 	/**
-	 * Gets the portrait id of this user.
+	 * Gets the portrait ID of this user.
 	 *
-	 * @return the portrait id of this user
+	 * @return the portrait ID of this user
 	 */
 	public long getPortraitId();
 
 	/**
-	 * Sets the portrait id of this user.
+	 * Sets the portrait ID of this user.
 	 *
-	 * @param portraitId the portrait id of this user
+	 * @param portraitId the portrait ID of this user
 	 */
 	public void setPortraitId(long portraitId);
 
 	/**
-	 * Gets the language id of this user.
+	 * Gets the language ID of this user.
 	 *
-	 * @return the language id of this user
+	 * @return the language ID of this user
 	 */
 	@AutoEscape
 	public String getLanguageId();
 
 	/**
-	 * Sets the language id of this user.
+	 * Sets the language ID of this user.
 	 *
-	 * @param languageId the language id of this user
+	 * @param languageId the language ID of this user
 	 */
 	public void setLanguageId(String languageId);
 
 	/**
-	 * Gets the time zone id of this user.
+	 * Gets the time zone ID of this user.
 	 *
-	 * @return the time zone id of this user
+	 * @return the time zone ID of this user
 	 */
 	@AutoEscape
 	public String getTimeZoneId();
 
 	/**
-	 * Sets the time zone id of this user.
+	 * Sets the time zone ID of this user.
 	 *
-	 * @param timeZoneId the time zone id of this user
+	 * @param timeZoneId the time zone ID of this user
 	 */
 	public void setTimeZoneId(String timeZoneId);
 

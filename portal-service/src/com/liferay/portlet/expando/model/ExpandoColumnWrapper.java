@@ -47,54 +47,54 @@ public class ExpandoColumnWrapper implements ExpandoColumn {
 	}
 
 	/**
-	* Gets the column id of this expando column.
+	* Gets the column ID of this expando column.
 	*
-	* @return the column id of this expando column
+	* @return the column ID of this expando column
 	*/
 	public long getColumnId() {
 		return _expandoColumn.getColumnId();
 	}
 
 	/**
-	* Sets the column id of this expando column.
+	* Sets the column ID of this expando column.
 	*
-	* @param columnId the column id of this expando column
+	* @param columnId the column ID of this expando column
 	*/
 	public void setColumnId(long columnId) {
 		_expandoColumn.setColumnId(columnId);
 	}
 
 	/**
-	* Gets the company id of this expando column.
+	* Gets the company ID of this expando column.
 	*
-	* @return the company id of this expando column
+	* @return the company ID of this expando column
 	*/
 	public long getCompanyId() {
 		return _expandoColumn.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this expando column.
+	* Sets the company ID of this expando column.
 	*
-	* @param companyId the company id of this expando column
+	* @param companyId the company ID of this expando column
 	*/
 	public void setCompanyId(long companyId) {
 		_expandoColumn.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the table id of this expando column.
+	* Gets the table ID of this expando column.
 	*
-	* @return the table id of this expando column
+	* @return the table ID of this expando column
 	*/
 	public long getTableId() {
 		return _expandoColumn.getTableId();
 	}
 
 	/**
-	* Sets the table id of this expando column.
+	* Sets the table ID of this expando column.
 	*
-	* @param tableId the table id of this expando column
+	* @param tableId the table ID of this expando column
 	*/
 	public void setTableId(long tableId) {
 		_expandoColumn.setTableId(tableId);

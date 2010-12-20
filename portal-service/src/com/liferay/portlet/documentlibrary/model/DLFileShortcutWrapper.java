@@ -65,72 +65,72 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the file shortcut id of this d l file shortcut.
+	* Gets the file shortcut ID of this d l file shortcut.
 	*
-	* @return the file shortcut id of this d l file shortcut
+	* @return the file shortcut ID of this d l file shortcut
 	*/
 	public long getFileShortcutId() {
 		return _dlFileShortcut.getFileShortcutId();
 	}
 
 	/**
-	* Sets the file shortcut id of this d l file shortcut.
+	* Sets the file shortcut ID of this d l file shortcut.
 	*
-	* @param fileShortcutId the file shortcut id of this d l file shortcut
+	* @param fileShortcutId the file shortcut ID of this d l file shortcut
 	*/
 	public void setFileShortcutId(long fileShortcutId) {
 		_dlFileShortcut.setFileShortcutId(fileShortcutId);
 	}
 
 	/**
-	* Gets the group id of this d l file shortcut.
+	* Gets the group ID of this d l file shortcut.
 	*
-	* @return the group id of this d l file shortcut
+	* @return the group ID of this d l file shortcut
 	*/
 	public long getGroupId() {
 		return _dlFileShortcut.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this d l file shortcut.
+	* Sets the group ID of this d l file shortcut.
 	*
-	* @param groupId the group id of this d l file shortcut
+	* @param groupId the group ID of this d l file shortcut
 	*/
 	public void setGroupId(long groupId) {
 		_dlFileShortcut.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this d l file shortcut.
+	* Gets the company ID of this d l file shortcut.
 	*
-	* @return the company id of this d l file shortcut
+	* @return the company ID of this d l file shortcut
 	*/
 	public long getCompanyId() {
 		return _dlFileShortcut.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this d l file shortcut.
+	* Sets the company ID of this d l file shortcut.
 	*
-	* @param companyId the company id of this d l file shortcut
+	* @param companyId the company ID of this d l file shortcut
 	*/
 	public void setCompanyId(long companyId) {
 		_dlFileShortcut.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this d l file shortcut.
+	* Gets the user ID of this d l file shortcut.
 	*
-	* @return the user id of this d l file shortcut
+	* @return the user ID of this d l file shortcut
 	*/
 	public long getUserId() {
 		return _dlFileShortcut.getUserId();
 	}
 
 	/**
-	* Sets the user id of this d l file shortcut.
+	* Sets the user ID of this d l file shortcut.
 	*
-	* @param userId the user id of this d l file shortcut
+	* @param userId the user ID of this d l file shortcut
 	*/
 	public void setUserId(long userId) {
 		_dlFileShortcut.setUserId(userId);
@@ -211,36 +211,36 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the folder id of this d l file shortcut.
+	* Gets the folder ID of this d l file shortcut.
 	*
-	* @return the folder id of this d l file shortcut
+	* @return the folder ID of this d l file shortcut
 	*/
 	public long getFolderId() {
 		return _dlFileShortcut.getFolderId();
 	}
 
 	/**
-	* Sets the folder id of this d l file shortcut.
+	* Sets the folder ID of this d l file shortcut.
 	*
-	* @param folderId the folder id of this d l file shortcut
+	* @param folderId the folder ID of this d l file shortcut
 	*/
 	public void setFolderId(long folderId) {
 		_dlFileShortcut.setFolderId(folderId);
 	}
 
 	/**
-	* Gets the to file entry id of this d l file shortcut.
+	* Gets the to file entry ID of this d l file shortcut.
 	*
-	* @return the to file entry id of this d l file shortcut
+	* @return the to file entry ID of this d l file shortcut
 	*/
 	public long getToFileEntryId() {
 		return _dlFileShortcut.getToFileEntryId();
 	}
 
 	/**
-	* Sets the to file entry id of this d l file shortcut.
+	* Sets the to file entry ID of this d l file shortcut.
 	*
-	* @param toFileEntryId the to file entry id of this d l file shortcut
+	* @param toFileEntryId the to file entry ID of this d l file shortcut
 	*/
 	public void setToFileEntryId(long toFileEntryId) {
 		_dlFileShortcut.setToFileEntryId(toFileEntryId);
@@ -265,18 +265,18 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Gets the status by user id of this d l file shortcut.
+	* Gets the status by user ID of this d l file shortcut.
 	*
-	* @return the status by user id of this d l file shortcut
+	* @return the status by user ID of this d l file shortcut
 	*/
 	public long getStatusByUserId() {
 		return _dlFileShortcut.getStatusByUserId();
 	}
 
 	/**
-	* Sets the status by user id of this d l file shortcut.
+	* Sets the status by user ID of this d l file shortcut.
 	*
-	* @param statusByUserId the status by user id of this d l file shortcut
+	* @param statusByUserId the status by user ID of this d l file shortcut
 	*/
 	public void setStatusByUserId(long statusByUserId) {
 		_dlFileShortcut.setStatusByUserId(statusByUserId);

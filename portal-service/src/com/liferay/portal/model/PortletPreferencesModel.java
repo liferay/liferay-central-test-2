@@ -56,30 +56,30 @@ public interface PortletPreferencesModel extends BaseModel<PortletPreferences> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the portlet preferences id of this portlet preferences.
+	 * Gets the portlet preferences ID of this portlet preferences.
 	 *
-	 * @return the portlet preferences id of this portlet preferences
+	 * @return the portlet preferences ID of this portlet preferences
 	 */
 	public long getPortletPreferencesId();
 
 	/**
-	 * Sets the portlet preferences id of this portlet preferences.
+	 * Sets the portlet preferences ID of this portlet preferences.
 	 *
-	 * @param portletPreferencesId the portlet preferences id of this portlet preferences
+	 * @param portletPreferencesId the portlet preferences ID of this portlet preferences
 	 */
 	public void setPortletPreferencesId(long portletPreferencesId);
 
 	/**
-	 * Gets the owner id of this portlet preferences.
+	 * Gets the owner ID of this portlet preferences.
 	 *
-	 * @return the owner id of this portlet preferences
+	 * @return the owner ID of this portlet preferences
 	 */
 	public long getOwnerId();
 
 	/**
-	 * Sets the owner id of this portlet preferences.
+	 * Sets the owner ID of this portlet preferences.
 	 *
-	 * @param ownerId the owner id of this portlet preferences
+	 * @param ownerId the owner ID of this portlet preferences
 	 */
 	public void setOwnerId(long ownerId);
 
@@ -112,17 +112,17 @@ public interface PortletPreferencesModel extends BaseModel<PortletPreferences> {
 	public void setPlid(long plid);
 
 	/**
-	 * Gets the portlet id of this portlet preferences.
+	 * Gets the portlet ID of this portlet preferences.
 	 *
-	 * @return the portlet id of this portlet preferences
+	 * @return the portlet ID of this portlet preferences
 	 */
 	@AutoEscape
 	public String getPortletId();
 
 	/**
-	 * Sets the portlet id of this portlet preferences.
+	 * Sets the portlet ID of this portlet preferences.
 	 *
-	 * @param portletId the portlet id of this portlet preferences
+	 * @param portletId the portlet ID of this portlet preferences
 	 */
 	public void setPortletId(String portletId);
 

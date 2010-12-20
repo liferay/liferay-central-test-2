@@ -105,7 +105,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Finds all the expando values where tableId = &#63;.
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @return the matching expando values
 	* @throws SystemException if a system exception occurred
 	*/
@@ -120,7 +120,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
 	* @return the range of matching expando values
@@ -137,7 +137,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -156,7 +156,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
@@ -175,7 +175,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
@@ -195,7 +195,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* </p>
 	*
 	* @param valueId the primary key of the current expando value
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
@@ -210,7 +210,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Finds all the expando values where columnId = &#63;.
 	*
-	* @param columnId the column id to search with
+	* @param columnId the column ID to search with
 	* @return the matching expando values
 	* @throws SystemException if a system exception occurred
 	*/
@@ -225,7 +225,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param columnId the column id to search with
+	* @param columnId the column ID to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
 	* @return the range of matching expando values
@@ -242,7 +242,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param columnId the column id to search with
+	* @param columnId the column ID to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -261,7 +261,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param columnId the column id to search with
+	* @param columnId the column ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
@@ -280,7 +280,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param columnId the column id to search with
+	* @param columnId the column ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
@@ -300,7 +300,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* </p>
 	*
 	* @param valueId the primary key of the current expando value
-	* @param columnId the column id to search with
+	* @param columnId the column ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
@@ -315,7 +315,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Finds all the expando values where rowId = &#63;.
 	*
-	* @param rowId the row id to search with
+	* @param rowId the row ID to search with
 	* @return the matching expando values
 	* @throws SystemException if a system exception occurred
 	*/
@@ -329,7 +329,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param rowId the row id to search with
+	* @param rowId the row ID to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
 	* @return the range of matching expando values
@@ -346,7 +346,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param rowId the row id to search with
+	* @param rowId the row ID to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -365,7 +365,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param rowId the row id to search with
+	* @param rowId the row ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
@@ -384,7 +384,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param rowId the row id to search with
+	* @param rowId the row ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
@@ -404,7 +404,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* </p>
 	*
 	* @param valueId the primary key of the current expando value
-	* @param rowId the row id to search with
+	* @param rowId the row ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
@@ -419,8 +419,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Finds all the expando values where tableId = &#63; and columnId = &#63;.
 	*
-	* @param tableId the table id to search with
-	* @param columnId the column id to search with
+	* @param tableId the table ID to search with
+	* @param columnId the column ID to search with
 	* @return the matching expando values
 	* @throws SystemException if a system exception occurred
 	*/
@@ -435,8 +435,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
-	* @param columnId the column id to search with
+	* @param tableId the table ID to search with
+	* @param columnId the column ID to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
 	* @return the range of matching expando values
@@ -453,8 +453,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
-	* @param columnId the column id to search with
+	* @param tableId the table ID to search with
+	* @param columnId the column ID to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -473,8 +473,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
-	* @param columnId the column id to search with
+	* @param tableId the table ID to search with
+	* @param columnId the column ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
@@ -493,8 +493,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
-	* @param columnId the column id to search with
+	* @param tableId the table ID to search with
+	* @param columnId the column ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
@@ -514,8 +514,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* </p>
 	*
 	* @param valueId the primary key of the current expando value
-	* @param tableId the table id to search with
-	* @param columnId the column id to search with
+	* @param tableId the table ID to search with
+	* @param columnId the column ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
@@ -530,7 +530,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Finds all the expando values where tableId = &#63; and classPK = &#63;.
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching expando values
 	* @throws SystemException if a system exception occurred
@@ -546,7 +546,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param classPK the class p k to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
@@ -564,7 +564,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param classPK the class p k to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
@@ -584,7 +584,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param classPK the class p k to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching expando value
@@ -604,7 +604,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param classPK the class p k to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching expando value
@@ -625,7 +625,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* </p>
 	*
 	* @param valueId the primary key of the current expando value
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param classPK the class p k to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next expando value
@@ -641,8 +641,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Finds all the expando values where tableId = &#63; and rowId = &#63;.
 	*
-	* @param tableId the table id to search with
-	* @param rowId the row id to search with
+	* @param tableId the table ID to search with
+	* @param rowId the row ID to search with
 	* @return the matching expando values
 	* @throws SystemException if a system exception occurred
 	*/
@@ -657,8 +657,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
-	* @param rowId the row id to search with
+	* @param tableId the table ID to search with
+	* @param rowId the row ID to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
 	* @return the range of matching expando values
@@ -675,8 +675,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
-	* @param rowId the row id to search with
+	* @param tableId the table ID to search with
+	* @param rowId the row ID to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -695,8 +695,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
-	* @param rowId the row id to search with
+	* @param tableId the table ID to search with
+	* @param rowId the row ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
@@ -715,8 +715,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
-	* @param rowId the row id to search with
+	* @param tableId the table ID to search with
+	* @param rowId the row ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
@@ -736,8 +736,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* </p>
 	*
 	* @param valueId the primary key of the current expando value
-	* @param tableId the table id to search with
-	* @param rowId the row id to search with
+	* @param tableId the table ID to search with
+	* @param rowId the row ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
@@ -752,8 +752,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Finds the expando value where columnId = &#63; and rowId = &#63; or throws a {@link com.liferay.portlet.expando.NoSuchValueException} if it could not be found.
 	*
-	* @param columnId the column id to search with
-	* @param rowId the row id to search with
+	* @param columnId the column ID to search with
+	* @param rowId the row ID to search with
 	* @return the matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	* @throws SystemException if a system exception occurred
@@ -766,8 +766,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Finds the expando value where columnId = &#63; and rowId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param columnId the column id to search with
-	* @param rowId the row id to search with
+	* @param columnId the column ID to search with
+	* @param rowId the row ID to search with
 	* @return the matching expando value, or <code>null</code> if a matching expando value could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -778,8 +778,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Finds the expando value where columnId = &#63; and rowId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param columnId the column id to search with
-	* @param rowId the row id to search with
+	* @param columnId the column ID to search with
+	* @param rowId the row ID to search with
 	* @return the matching expando value, or <code>null</code> if a matching expando value could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -790,7 +790,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Finds all the expando values where classNameId = &#63; and classPK = &#63;.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching expando values
 	* @throws SystemException if a system exception occurred
@@ -806,7 +806,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
@@ -824,7 +824,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
@@ -844,7 +844,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching expando value
@@ -864,7 +864,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching expando value
@@ -885,7 +885,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* </p>
 	*
 	* @param valueId the primary key of the current expando value
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next expando value
@@ -901,8 +901,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Finds the expando value where tableId = &#63; and columnId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.expando.NoSuchValueException} if it could not be found.
 	*
-	* @param tableId the table id to search with
-	* @param columnId the column id to search with
+	* @param tableId the table ID to search with
+	* @param columnId the column ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
@@ -916,8 +916,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Finds the expando value where tableId = &#63; and columnId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param tableId the table id to search with
-	* @param columnId the column id to search with
+	* @param tableId the table ID to search with
+	* @param columnId the column ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching expando value, or <code>null</code> if a matching expando value could not be found
 	* @throws SystemException if a system exception occurred
@@ -929,8 +929,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Finds the expando value where tableId = &#63; and columnId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param tableId the table id to search with
-	* @param columnId the column id to search with
+	* @param tableId the table ID to search with
+	* @param columnId the column ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching expando value, or <code>null</code> if a matching expando value could not be found
 	* @throws SystemException if a system exception occurred
@@ -942,8 +942,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Finds all the expando values where tableId = &#63; and columnId = &#63; and data = &#63;.
 	*
-	* @param tableId the table id to search with
-	* @param columnId the column id to search with
+	* @param tableId the table ID to search with
+	* @param columnId the column ID to search with
 	* @param data the data to search with
 	* @return the matching expando values
 	* @throws SystemException if a system exception occurred
@@ -959,8 +959,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
-	* @param columnId the column id to search with
+	* @param tableId the table ID to search with
+	* @param columnId the column ID to search with
 	* @param data the data to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
@@ -978,8 +978,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
-	* @param columnId the column id to search with
+	* @param tableId the table ID to search with
+	* @param columnId the column ID to search with
 	* @param data the data to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
@@ -999,8 +999,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
-	* @param columnId the column id to search with
+	* @param tableId the table ID to search with
+	* @param columnId the column ID to search with
 	* @param data the data to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching expando value
@@ -1020,8 +1020,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tableId the table id to search with
-	* @param columnId the column id to search with
+	* @param tableId the table ID to search with
+	* @param columnId the column ID to search with
 	* @param data the data to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching expando value
@@ -1042,8 +1042,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	* </p>
 	*
 	* @param valueId the primary key of the current expando value
-	* @param tableId the table id to search with
-	* @param columnId the column id to search with
+	* @param tableId the table ID to search with
+	* @param columnId the column ID to search with
 	* @param data the data to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next expando value
@@ -1102,7 +1102,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Removes all the expando values where tableId = &#63; from the database.
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByTableId(long tableId)
@@ -1111,7 +1111,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Removes all the expando values where columnId = &#63; from the database.
 	*
-	* @param columnId the column id to search with
+	* @param columnId the column ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByColumnId(long columnId)
@@ -1120,7 +1120,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Removes all the expando values where rowId = &#63; from the database.
 	*
-	* @param rowId the row id to search with
+	* @param rowId the row ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByRowId(long rowId)
@@ -1129,8 +1129,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Removes all the expando values where tableId = &#63; and columnId = &#63; from the database.
 	*
-	* @param tableId the table id to search with
-	* @param columnId the column id to search with
+	* @param tableId the table ID to search with
+	* @param columnId the column ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByT_C(long tableId, long columnId)
@@ -1139,7 +1139,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Removes all the expando values where tableId = &#63; and classPK = &#63; from the database.
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param classPK the class p k to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1149,8 +1149,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Removes all the expando values where tableId = &#63; and rowId = &#63; from the database.
 	*
-	* @param tableId the table id to search with
-	* @param rowId the row id to search with
+	* @param tableId the table ID to search with
+	* @param rowId the row ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByT_R(long tableId, long rowId)
@@ -1159,8 +1159,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Removes the expando value where columnId = &#63; and rowId = &#63; from the database.
 	*
-	* @param columnId the column id to search with
-	* @param rowId the row id to search with
+	* @param columnId the column ID to search with
+	* @param rowId the row ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByC_R(long columnId, long rowId)
@@ -1170,7 +1170,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Removes all the expando values where classNameId = &#63; and classPK = &#63; from the database.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1180,8 +1180,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Removes the expando value where tableId = &#63; and columnId = &#63; and classPK = &#63; from the database.
 	*
-	* @param tableId the table id to search with
-	* @param columnId the column id to search with
+	* @param tableId the table ID to search with
+	* @param columnId the column ID to search with
 	* @param classPK the class p k to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1192,8 +1192,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Removes all the expando values where tableId = &#63; and columnId = &#63; and data = &#63; from the database.
 	*
-	* @param tableId the table id to search with
-	* @param columnId the column id to search with
+	* @param tableId the table ID to search with
+	* @param columnId the column ID to search with
 	* @param data the data to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1211,7 +1211,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Counts all the expando values where tableId = &#63;.
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @return the number of matching expando values
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1221,7 +1221,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Counts all the expando values where columnId = &#63;.
 	*
-	* @param columnId the column id to search with
+	* @param columnId the column ID to search with
 	* @return the number of matching expando values
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1231,7 +1231,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Counts all the expando values where rowId = &#63;.
 	*
-	* @param rowId the row id to search with
+	* @param rowId the row ID to search with
 	* @return the number of matching expando values
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1241,8 +1241,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Counts all the expando values where tableId = &#63; and columnId = &#63;.
 	*
-	* @param tableId the table id to search with
-	* @param columnId the column id to search with
+	* @param tableId the table ID to search with
+	* @param columnId the column ID to search with
 	* @return the number of matching expando values
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1252,7 +1252,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Counts all the expando values where tableId = &#63; and classPK = &#63;.
 	*
-	* @param tableId the table id to search with
+	* @param tableId the table ID to search with
 	* @param classPK the class p k to search with
 	* @return the number of matching expando values
 	* @throws SystemException if a system exception occurred
@@ -1263,8 +1263,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Counts all the expando values where tableId = &#63; and rowId = &#63;.
 	*
-	* @param tableId the table id to search with
-	* @param rowId the row id to search with
+	* @param tableId the table ID to search with
+	* @param rowId the row ID to search with
 	* @return the number of matching expando values
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1274,8 +1274,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Counts all the expando values where columnId = &#63; and rowId = &#63;.
 	*
-	* @param columnId the column id to search with
-	* @param rowId the row id to search with
+	* @param columnId the column ID to search with
+	* @param rowId the row ID to search with
 	* @return the number of matching expando values
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1285,7 +1285,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Counts all the expando values where classNameId = &#63; and classPK = &#63;.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the number of matching expando values
 	* @throws SystemException if a system exception occurred
@@ -1296,8 +1296,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Counts all the expando values where tableId = &#63; and columnId = &#63; and classPK = &#63;.
 	*
-	* @param tableId the table id to search with
-	* @param columnId the column id to search with
+	* @param tableId the table ID to search with
+	* @param columnId the column ID to search with
 	* @param classPK the class p k to search with
 	* @return the number of matching expando values
 	* @throws SystemException if a system exception occurred
@@ -1308,8 +1308,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	/**
 	* Counts all the expando values where tableId = &#63; and columnId = &#63; and data = &#63;.
 	*
-	* @param tableId the table id to search with
-	* @param columnId the column id to search with
+	* @param tableId the table ID to search with
+	* @param columnId the column ID to search with
 	* @param data the data to search with
 	* @return the number of matching expando values
 	* @throws SystemException if a system exception occurred

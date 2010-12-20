@@ -59,44 +59,44 @@ public interface ContactModel extends BaseModel<Contact> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the contact id of this contact.
+	 * Gets the contact ID of this contact.
 	 *
-	 * @return the contact id of this contact
+	 * @return the contact ID of this contact
 	 */
 	public long getContactId();
 
 	/**
-	 * Sets the contact id of this contact.
+	 * Sets the contact ID of this contact.
 	 *
-	 * @param contactId the contact id of this contact
+	 * @param contactId the contact ID of this contact
 	 */
 	public void setContactId(long contactId);
 
 	/**
-	 * Gets the company id of this contact.
+	 * Gets the company ID of this contact.
 	 *
-	 * @return the company id of this contact
+	 * @return the company ID of this contact
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this contact.
+	 * Sets the company ID of this contact.
 	 *
-	 * @param companyId the company id of this contact
+	 * @param companyId the company ID of this contact
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this contact.
+	 * Gets the user ID of this contact.
 	 *
-	 * @return the user id of this contact
+	 * @return the user ID of this contact
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this contact.
+	 * Sets the user ID of this contact.
 	 *
-	 * @param userId the user id of this contact
+	 * @param userId the user ID of this contact
 	 */
 	public void setUserId(long userId);
 
@@ -159,30 +159,30 @@ public interface ContactModel extends BaseModel<Contact> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the account id of this contact.
+	 * Gets the account ID of this contact.
 	 *
-	 * @return the account id of this contact
+	 * @return the account ID of this contact
 	 */
 	public long getAccountId();
 
 	/**
-	 * Sets the account id of this contact.
+	 * Sets the account ID of this contact.
 	 *
-	 * @param accountId the account id of this contact
+	 * @param accountId the account ID of this contact
 	 */
 	public void setAccountId(long accountId);
 
 	/**
-	 * Gets the parent contact id of this contact.
+	 * Gets the parent contact ID of this contact.
 	 *
-	 * @return the parent contact id of this contact
+	 * @return the parent contact ID of this contact
 	 */
 	public long getParentContactId();
 
 	/**
-	 * Sets the parent contact id of this contact.
+	 * Sets the parent contact ID of this contact.
 	 *
-	 * @param parentContactId the parent contact id of this contact
+	 * @param parentContactId the parent contact ID of this contact
 	 */
 	public void setParentContactId(long parentContactId);
 
@@ -232,30 +232,30 @@ public interface ContactModel extends BaseModel<Contact> {
 	public void setLastName(String lastName);
 
 	/**
-	 * Gets the prefix id of this contact.
+	 * Gets the prefix ID of this contact.
 	 *
-	 * @return the prefix id of this contact
+	 * @return the prefix ID of this contact
 	 */
 	public int getPrefixId();
 
 	/**
-	 * Sets the prefix id of this contact.
+	 * Sets the prefix ID of this contact.
 	 *
-	 * @param prefixId the prefix id of this contact
+	 * @param prefixId the prefix ID of this contact
 	 */
 	public void setPrefixId(int prefixId);
 
 	/**
-	 * Gets the suffix id of this contact.
+	 * Gets the suffix ID of this contact.
 	 *
-	 * @return the suffix id of this contact
+	 * @return the suffix ID of this contact
 	 */
 	public int getSuffixId();
 
 	/**
-	 * Sets the suffix id of this contact.
+	 * Sets the suffix ID of this contact.
 	 *
-	 * @param suffixId the suffix id of this contact
+	 * @param suffixId the suffix ID of this contact
 	 */
 	public void setSuffixId(int suffixId);
 
@@ -445,17 +445,17 @@ public interface ContactModel extends BaseModel<Contact> {
 	public void setYmSn(String ymSn);
 
 	/**
-	 * Gets the employee status id of this contact.
+	 * Gets the employee status ID of this contact.
 	 *
-	 * @return the employee status id of this contact
+	 * @return the employee status ID of this contact
 	 */
 	@AutoEscape
 	public String getEmployeeStatusId();
 
 	/**
-	 * Sets the employee status id of this contact.
+	 * Sets the employee status ID of this contact.
 	 *
-	 * @param employeeStatusId the employee status id of this contact
+	 * @param employeeStatusId the employee status ID of this contact
 	 */
 	public void setEmployeeStatusId(String employeeStatusId);
 

@@ -504,7 +504,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	/**
 	 * Finds all the s c product screenshots where productEntryId = &#63;.
 	 *
-	 * @param productEntryId the product entry id to search with
+	 * @param productEntryId the product entry ID to search with
 	 * @return the matching s c product screenshots
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -521,7 +521,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param productEntryId the product entry id to search with
+	 * @param productEntryId the product entry ID to search with
 	 * @param start the lower bound of the range of s c product screenshots to return
 	 * @param end the upper bound of the range of s c product screenshots to return (not inclusive)
 	 * @return the range of matching s c product screenshots
@@ -539,7 +539,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param productEntryId the product entry id to search with
+	 * @param productEntryId the product entry ID to search with
 	 * @param start the lower bound of the range of s c product screenshots to return
 	 * @param end the upper bound of the range of s c product screenshots to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -628,7 +628,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param productEntryId the product entry id to search with
+	 * @param productEntryId the product entry ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching s c product screenshot
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException if a matching s c product screenshot could not be found
@@ -664,7 +664,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param productEntryId the product entry id to search with
+	 * @param productEntryId the product entry ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching s c product screenshot
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException if a matching s c product screenshot could not be found
@@ -703,7 +703,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	 * </p>
 	 *
 	 * @param productScreenshotId the primary key of the current s c product screenshot
-	 * @param productEntryId the product entry id to search with
+	 * @param productEntryId the product entry ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next s c product screenshot
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException if a s c product screenshot with the primary key could not be found
@@ -849,7 +849,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	/**
 	 * Finds the s c product screenshot where thumbnailId = &#63; or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException} if it could not be found.
 	 *
-	 * @param thumbnailId the thumbnail id to search with
+	 * @param thumbnailId the thumbnail ID to search with
 	 * @return the matching s c product screenshot
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException if a matching s c product screenshot could not be found
 	 * @throws SystemException if a system exception occurred
@@ -881,7 +881,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	/**
 	 * Finds the s c product screenshot where thumbnailId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param thumbnailId the thumbnail id to search with
+	 * @param thumbnailId the thumbnail ID to search with
 	 * @return the matching s c product screenshot, or <code>null</code> if a matching s c product screenshot could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -893,7 +893,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	/**
 	 * Finds the s c product screenshot where thumbnailId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param thumbnailId the thumbnail id to search with
+	 * @param thumbnailId the thumbnail ID to search with
 	 * @return the matching s c product screenshot, or <code>null</code> if a matching s c product screenshot could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -978,7 +978,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	/**
 	 * Finds the s c product screenshot where fullImageId = &#63; or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException} if it could not be found.
 	 *
-	 * @param fullImageId the full image id to search with
+	 * @param fullImageId the full image ID to search with
 	 * @return the matching s c product screenshot
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException if a matching s c product screenshot could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1010,7 +1010,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	/**
 	 * Finds the s c product screenshot where fullImageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param fullImageId the full image id to search with
+	 * @param fullImageId the full image ID to search with
 	 * @return the matching s c product screenshot, or <code>null</code> if a matching s c product screenshot could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1022,7 +1022,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	/**
 	 * Finds the s c product screenshot where fullImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param fullImageId the full image id to search with
+	 * @param fullImageId the full image ID to search with
 	 * @return the matching s c product screenshot, or <code>null</code> if a matching s c product screenshot could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1107,7 +1107,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	/**
 	 * Finds the s c product screenshot where productEntryId = &#63; and priority = &#63; or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException} if it could not be found.
 	 *
-	 * @param productEntryId the product entry id to search with
+	 * @param productEntryId the product entry ID to search with
 	 * @param priority the priority to search with
 	 * @return the matching s c product screenshot
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException if a matching s c product screenshot could not be found
@@ -1144,7 +1144,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	/**
 	 * Finds the s c product screenshot where productEntryId = &#63; and priority = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param productEntryId the product entry id to search with
+	 * @param productEntryId the product entry ID to search with
 	 * @param priority the priority to search with
 	 * @return the matching s c product screenshot, or <code>null</code> if a matching s c product screenshot could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1157,7 +1157,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	/**
 	 * Finds the s c product screenshot where productEntryId = &#63; and priority = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param productEntryId the product entry id to search with
+	 * @param productEntryId the product entry ID to search with
 	 * @param priority the priority to search with
 	 * @return the matching s c product screenshot, or <code>null</code> if a matching s c product screenshot could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1357,7 +1357,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	/**
 	 * Removes all the s c product screenshots where productEntryId = &#63; from the database.
 	 *
-	 * @param productEntryId the product entry id to search with
+	 * @param productEntryId the product entry ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByProductEntryId(long productEntryId)
@@ -1371,7 +1371,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	/**
 	 * Removes the s c product screenshot where thumbnailId = &#63; from the database.
 	 *
-	 * @param thumbnailId the thumbnail id to search with
+	 * @param thumbnailId the thumbnail ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByThumbnailId(long thumbnailId)
@@ -1384,7 +1384,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	/**
 	 * Removes the s c product screenshot where fullImageId = &#63; from the database.
 	 *
-	 * @param fullImageId the full image id to search with
+	 * @param fullImageId the full image ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByFullImageId(long fullImageId)
@@ -1397,7 +1397,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	/**
 	 * Removes the s c product screenshot where productEntryId = &#63; and priority = &#63; from the database.
 	 *
-	 * @param productEntryId the product entry id to search with
+	 * @param productEntryId the product entry ID to search with
 	 * @param priority the priority to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1423,7 +1423,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	/**
 	 * Counts all the s c product screenshots where productEntryId = &#63;.
 	 *
-	 * @param productEntryId the product entry id to search with
+	 * @param productEntryId the product entry ID to search with
 	 * @return the number of matching s c product screenshots
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1477,7 +1477,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	/**
 	 * Counts all the s c product screenshots where thumbnailId = &#63;.
 	 *
-	 * @param thumbnailId the thumbnail id to search with
+	 * @param thumbnailId the thumbnail ID to search with
 	 * @return the number of matching s c product screenshots
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1530,7 +1530,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	/**
 	 * Counts all the s c product screenshots where fullImageId = &#63;.
 	 *
-	 * @param fullImageId the full image id to search with
+	 * @param fullImageId the full image ID to search with
 	 * @return the number of matching s c product screenshots
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1583,7 +1583,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	/**
 	 * Counts all the s c product screenshots where productEntryId = &#63; and priority = &#63;.
 	 *
-	 * @param productEntryId the product entry id to search with
+	 * @param productEntryId the product entry ID to search with
 	 * @param priority the priority to search with
 	 * @return the number of matching s c product screenshots
 	 * @throws SystemException if a system exception occurred

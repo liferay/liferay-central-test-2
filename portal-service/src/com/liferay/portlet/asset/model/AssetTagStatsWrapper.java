@@ -47,36 +47,36 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 	}
 
 	/**
-	* Gets the tag stats id of this asset tag stats.
+	* Gets the tag stats ID of this asset tag stats.
 	*
-	* @return the tag stats id of this asset tag stats
+	* @return the tag stats ID of this asset tag stats
 	*/
 	public long getTagStatsId() {
 		return _assetTagStats.getTagStatsId();
 	}
 
 	/**
-	* Sets the tag stats id of this asset tag stats.
+	* Sets the tag stats ID of this asset tag stats.
 	*
-	* @param tagStatsId the tag stats id of this asset tag stats
+	* @param tagStatsId the tag stats ID of this asset tag stats
 	*/
 	public void setTagStatsId(long tagStatsId) {
 		_assetTagStats.setTagStatsId(tagStatsId);
 	}
 
 	/**
-	* Gets the tag id of this asset tag stats.
+	* Gets the tag ID of this asset tag stats.
 	*
-	* @return the tag id of this asset tag stats
+	* @return the tag ID of this asset tag stats
 	*/
 	public long getTagId() {
 		return _assetTagStats.getTagId();
 	}
 
 	/**
-	* Sets the tag id of this asset tag stats.
+	* Sets the tag ID of this asset tag stats.
 	*
-	* @param tagId the tag id of this asset tag stats
+	* @param tagId the tag ID of this asset tag stats
 	*/
 	public void setTagId(long tagId) {
 		_assetTagStats.setTagId(tagId);
@@ -92,18 +92,18 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 	}
 
 	/**
-	* Gets the class name id of this asset tag stats.
+	* Gets the class name ID of this asset tag stats.
 	*
-	* @return the class name id of this asset tag stats
+	* @return the class name ID of this asset tag stats
 	*/
 	public long getClassNameId() {
 		return _assetTagStats.getClassNameId();
 	}
 
 	/**
-	* Sets the class name id of this asset tag stats.
+	* Sets the class name ID of this asset tag stats.
 	*
-	* @param classNameId the class name id of this asset tag stats
+	* @param classNameId the class name ID of this asset tag stats
 	*/
 	public void setClassNameId(long classNameId) {
 		_assetTagStats.setClassNameId(classNameId);

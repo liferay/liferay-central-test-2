@@ -320,7 +320,7 @@ public class SocialRelationUtil {
 	/**
 	* Finds all the social relations where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -337,7 +337,7 @@ public class SocialRelationUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of social relations to return
 	* @param end the upper bound of the range of social relations to return (not inclusive)
 	* @return the range of matching social relations
@@ -356,7 +356,7 @@ public class SocialRelationUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of social relations to return
 	* @param end the upper bound of the range of social relations to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -378,7 +378,7 @@ public class SocialRelationUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
@@ -400,7 +400,7 @@ public class SocialRelationUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
@@ -423,7 +423,7 @@ public class SocialRelationUtil {
 	* </p>
 	*
 	* @param relationId the primary key of the current social relation
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next social relation
 	* @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
@@ -799,7 +799,7 @@ public class SocialRelationUtil {
 	/**
 	* Finds all the social relations where companyId = &#63; and type = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param type the type to search with
 	* @return the matching social relations
 	* @throws SystemException if a system exception occurred
@@ -817,7 +817,7 @@ public class SocialRelationUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param type the type to search with
 	* @param start the lower bound of the range of social relations to return
 	* @param end the upper bound of the range of social relations to return (not inclusive)
@@ -837,7 +837,7 @@ public class SocialRelationUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param type the type to search with
 	* @param start the lower bound of the range of social relations to return
 	* @param end the upper bound of the range of social relations to return (not inclusive)
@@ -860,7 +860,7 @@ public class SocialRelationUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param type the type to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching social relation
@@ -883,7 +883,7 @@ public class SocialRelationUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param type the type to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching social relation
@@ -907,7 +907,7 @@ public class SocialRelationUtil {
 	* </p>
 	*
 	* @param relationId the primary key of the current social relation
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param type the type to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next social relation
@@ -1289,7 +1289,7 @@ public class SocialRelationUtil {
 	/**
 	* Removes all the social relations where companyId = &#63; from the database.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByCompanyId(long companyId)
@@ -1333,7 +1333,7 @@ public class SocialRelationUtil {
 	/**
 	* Removes all the social relations where companyId = &#63; and type = &#63; from the database.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param type the type to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1405,7 +1405,7 @@ public class SocialRelationUtil {
 	/**
 	* Counts all the social relations where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the number of matching social relations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1453,7 +1453,7 @@ public class SocialRelationUtil {
 	/**
 	* Counts all the social relations where companyId = &#63; and type = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param type the type to search with
 	* @return the number of matching social relations
 	* @throws SystemException if a system exception occurred

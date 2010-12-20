@@ -56,16 +56,16 @@ public interface RatingsStatsModel extends BaseModel<RatingsStats> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the stats id of this ratings stats.
+	 * Gets the stats ID of this ratings stats.
 	 *
-	 * @return the stats id of this ratings stats
+	 * @return the stats ID of this ratings stats
 	 */
 	public long getStatsId();
 
 	/**
-	 * Sets the stats id of this ratings stats.
+	 * Sets the stats ID of this ratings stats.
 	 *
-	 * @param statsId the stats id of this ratings stats
+	 * @param statsId the stats ID of this ratings stats
 	 */
 	public void setStatsId(long statsId);
 
@@ -77,16 +77,16 @@ public interface RatingsStatsModel extends BaseModel<RatingsStats> {
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this ratings stats.
+	 * Gets the class name ID of this ratings stats.
 	 *
-	 * @return the class name id of this ratings stats
+	 * @return the class name ID of this ratings stats
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this ratings stats.
+	 * Sets the class name ID of this ratings stats.
 	 *
-	 * @param classNameId the class name id of this ratings stats
+	 * @param classNameId the class name ID of this ratings stats
 	 */
 	public void setClassNameId(long classNameId);
 

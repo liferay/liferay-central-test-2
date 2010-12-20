@@ -47,54 +47,54 @@ public class VirtualHostWrapper implements VirtualHost {
 	}
 
 	/**
-	* Gets the virtual host id of this virtual host.
+	* Gets the virtual host ID of this virtual host.
 	*
-	* @return the virtual host id of this virtual host
+	* @return the virtual host ID of this virtual host
 	*/
 	public long getVirtualHostId() {
 		return _virtualHost.getVirtualHostId();
 	}
 
 	/**
-	* Sets the virtual host id of this virtual host.
+	* Sets the virtual host ID of this virtual host.
 	*
-	* @param virtualHostId the virtual host id of this virtual host
+	* @param virtualHostId the virtual host ID of this virtual host
 	*/
 	public void setVirtualHostId(long virtualHostId) {
 		_virtualHost.setVirtualHostId(virtualHostId);
 	}
 
 	/**
-	* Gets the company id of this virtual host.
+	* Gets the company ID of this virtual host.
 	*
-	* @return the company id of this virtual host
+	* @return the company ID of this virtual host
 	*/
 	public long getCompanyId() {
 		return _virtualHost.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this virtual host.
+	* Sets the company ID of this virtual host.
 	*
-	* @param companyId the company id of this virtual host
+	* @param companyId the company ID of this virtual host
 	*/
 	public void setCompanyId(long companyId) {
 		_virtualHost.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the layout set id of this virtual host.
+	* Gets the layout set ID of this virtual host.
 	*
-	* @return the layout set id of this virtual host
+	* @return the layout set ID of this virtual host
 	*/
 	public long getLayoutSetId() {
 		return _virtualHost.getLayoutSetId();
 	}
 
 	/**
-	* Sets the layout set id of this virtual host.
+	* Sets the layout set ID of this virtual host.
 	*
-	* @param layoutSetId the layout set id of this virtual host
+	* @param layoutSetId the layout set ID of this virtual host
 	*/
 	public void setLayoutSetId(long layoutSetId) {
 		_virtualHost.setLayoutSetId(layoutSetId);

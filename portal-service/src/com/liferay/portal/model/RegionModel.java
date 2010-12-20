@@ -56,30 +56,30 @@ public interface RegionModel extends BaseModel<Region> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the region id of this region.
+	 * Gets the region ID of this region.
 	 *
-	 * @return the region id of this region
+	 * @return the region ID of this region
 	 */
 	public long getRegionId();
 
 	/**
-	 * Sets the region id of this region.
+	 * Sets the region ID of this region.
 	 *
-	 * @param regionId the region id of this region
+	 * @param regionId the region ID of this region
 	 */
 	public void setRegionId(long regionId);
 
 	/**
-	 * Gets the country id of this region.
+	 * Gets the country ID of this region.
 	 *
-	 * @return the country id of this region
+	 * @return the country ID of this region
 	 */
 	public long getCountryId();
 
 	/**
-	 * Sets the country id of this region.
+	 * Sets the country ID of this region.
 	 *
-	 * @param countryId the country id of this region
+	 * @param countryId the country ID of this region
 	 */
 	public void setCountryId(long countryId);
 

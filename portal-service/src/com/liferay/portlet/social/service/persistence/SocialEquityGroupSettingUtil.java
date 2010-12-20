@@ -207,8 +207,8 @@ public class SocialEquityGroupSettingUtil {
 	/**
 	* Finds the social equity group setting where groupId = &#63; and classNameId = &#63; and type = &#63; or throws a {@link com.liferay.portlet.social.NoSuchEquityGroupSettingException} if it could not be found.
 	*
-	* @param groupId the group id to search with
-	* @param classNameId the class name id to search with
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
 	* @param type the type to search with
 	* @return the matching social equity group setting
 	* @throws com.liferay.portlet.social.NoSuchEquityGroupSettingException if a matching social equity group setting could not be found
@@ -224,8 +224,8 @@ public class SocialEquityGroupSettingUtil {
 	/**
 	* Finds the social equity group setting where groupId = &#63; and classNameId = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group id to search with
-	* @param classNameId the class name id to search with
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
 	* @param type the type to search with
 	* @return the matching social equity group setting, or <code>null</code> if a matching social equity group setting could not be found
 	* @throws SystemException if a system exception occurred
@@ -239,8 +239,8 @@ public class SocialEquityGroupSettingUtil {
 	/**
 	* Finds the social equity group setting where groupId = &#63; and classNameId = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group id to search with
-	* @param classNameId the class name id to search with
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
 	* @param type the type to search with
 	* @return the matching social equity group setting, or <code>null</code> if a matching social equity group setting could not be found
 	* @throws SystemException if a system exception occurred
@@ -304,8 +304,8 @@ public class SocialEquityGroupSettingUtil {
 	/**
 	* Removes the social equity group setting where groupId = &#63; and classNameId = &#63; and type = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param classNameId the class name id to search with
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
 	* @param type the type to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -328,8 +328,8 @@ public class SocialEquityGroupSettingUtil {
 	/**
 	* Counts all the social equity group settings where groupId = &#63; and classNameId = &#63; and type = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param classNameId the class name id to search with
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
 	* @param type the type to search with
 	* @return the number of matching social equity group settings
 	* @throws SystemException if a system exception occurred

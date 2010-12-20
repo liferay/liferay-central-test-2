@@ -75,58 +75,58 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the file entry id of this d l file entry.
+	 * Gets the file entry ID of this d l file entry.
 	 *
-	 * @return the file entry id of this d l file entry
+	 * @return the file entry ID of this d l file entry
 	 */
 	public long getFileEntryId();
 
 	/**
-	 * Sets the file entry id of this d l file entry.
+	 * Sets the file entry ID of this d l file entry.
 	 *
-	 * @param fileEntryId the file entry id of this d l file entry
+	 * @param fileEntryId the file entry ID of this d l file entry
 	 */
 	public void setFileEntryId(long fileEntryId);
 
 	/**
-	 * Gets the group id of this d l file entry.
+	 * Gets the group ID of this d l file entry.
 	 *
-	 * @return the group id of this d l file entry
+	 * @return the group ID of this d l file entry
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this d l file entry.
+	 * Sets the group ID of this d l file entry.
 	 *
-	 * @param groupId the group id of this d l file entry
+	 * @param groupId the group ID of this d l file entry
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this d l file entry.
+	 * Gets the company ID of this d l file entry.
 	 *
-	 * @return the company id of this d l file entry
+	 * @return the company ID of this d l file entry
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this d l file entry.
+	 * Sets the company ID of this d l file entry.
 	 *
-	 * @param companyId the company id of this d l file entry
+	 * @param companyId the company ID of this d l file entry
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this d l file entry.
+	 * Gets the user ID of this d l file entry.
 	 *
-	 * @return the user id of this d l file entry
+	 * @return the user ID of this d l file entry
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this d l file entry.
+	 * Sets the user ID of this d l file entry.
 	 *
-	 * @param userId the user id of this d l file entry
+	 * @param userId the user ID of this d l file entry
 	 */
 	public void setUserId(long userId);
 
@@ -161,16 +161,16 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry> {
 	public void setUserName(String userName);
 
 	/**
-	 * Gets the version user id of this d l file entry.
+	 * Gets the version user ID of this d l file entry.
 	 *
-	 * @return the version user id of this d l file entry
+	 * @return the version user ID of this d l file entry
 	 */
 	public long getVersionUserId();
 
 	/**
-	 * Sets the version user id of this d l file entry.
+	 * Sets the version user ID of this d l file entry.
 	 *
-	 * @param versionUserId the version user id of this d l file entry
+	 * @param versionUserId the version user ID of this d l file entry
 	 */
 	public void setVersionUserId(long versionUserId);
 
@@ -233,16 +233,16 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the folder id of this d l file entry.
+	 * Gets the folder ID of this d l file entry.
 	 *
-	 * @return the folder id of this d l file entry
+	 * @return the folder ID of this d l file entry
 	 */
 	public long getFolderId();
 
 	/**
-	 * Sets the folder id of this d l file entry.
+	 * Sets the folder ID of this d l file entry.
 	 *
-	 * @param folderId the folder id of this d l file entry
+	 * @param folderId the folder ID of this d l file entry
 	 */
 	public void setFolderId(long folderId);
 

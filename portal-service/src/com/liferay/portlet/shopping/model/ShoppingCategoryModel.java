@@ -60,58 +60,58 @@ public interface ShoppingCategoryModel extends BaseModel<ShoppingCategory> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the category id of this shopping category.
+	 * Gets the category ID of this shopping category.
 	 *
-	 * @return the category id of this shopping category
+	 * @return the category ID of this shopping category
 	 */
 	public long getCategoryId();
 
 	/**
-	 * Sets the category id of this shopping category.
+	 * Sets the category ID of this shopping category.
 	 *
-	 * @param categoryId the category id of this shopping category
+	 * @param categoryId the category ID of this shopping category
 	 */
 	public void setCategoryId(long categoryId);
 
 	/**
-	 * Gets the group id of this shopping category.
+	 * Gets the group ID of this shopping category.
 	 *
-	 * @return the group id of this shopping category
+	 * @return the group ID of this shopping category
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this shopping category.
+	 * Sets the group ID of this shopping category.
 	 *
-	 * @param groupId the group id of this shopping category
+	 * @param groupId the group ID of this shopping category
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this shopping category.
+	 * Gets the company ID of this shopping category.
 	 *
-	 * @return the company id of this shopping category
+	 * @return the company ID of this shopping category
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this shopping category.
+	 * Sets the company ID of this shopping category.
 	 *
-	 * @param companyId the company id of this shopping category
+	 * @param companyId the company ID of this shopping category
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this shopping category.
+	 * Gets the user ID of this shopping category.
 	 *
-	 * @return the user id of this shopping category
+	 * @return the user ID of this shopping category
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this shopping category.
+	 * Sets the user ID of this shopping category.
 	 *
-	 * @param userId the user id of this shopping category
+	 * @param userId the user ID of this shopping category
 	 */
 	public void setUserId(long userId);
 
@@ -174,16 +174,16 @@ public interface ShoppingCategoryModel extends BaseModel<ShoppingCategory> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the parent category id of this shopping category.
+	 * Gets the parent category ID of this shopping category.
 	 *
-	 * @return the parent category id of this shopping category
+	 * @return the parent category ID of this shopping category
 	 */
 	public long getParentCategoryId();
 
 	/**
-	 * Sets the parent category id of this shopping category.
+	 * Sets the parent category ID of this shopping category.
 	 *
-	 * @param parentCategoryId the parent category id of this shopping category
+	 * @param parentCategoryId the parent category ID of this shopping category
 	 */
 	public void setParentCategoryId(long parentCategoryId);
 

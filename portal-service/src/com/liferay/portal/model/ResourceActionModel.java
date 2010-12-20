@@ -56,16 +56,16 @@ public interface ResourceActionModel extends BaseModel<ResourceAction> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the resource action id of this resource action.
+	 * Gets the resource action ID of this resource action.
 	 *
-	 * @return the resource action id of this resource action
+	 * @return the resource action ID of this resource action
 	 */
 	public long getResourceActionId();
 
 	/**
-	 * Sets the resource action id of this resource action.
+	 * Sets the resource action ID of this resource action.
 	 *
-	 * @param resourceActionId the resource action id of this resource action
+	 * @param resourceActionId the resource action ID of this resource action
 	 */
 	public void setResourceActionId(long resourceActionId);
 
@@ -85,17 +85,17 @@ public interface ResourceActionModel extends BaseModel<ResourceAction> {
 	public void setName(String name);
 
 	/**
-	 * Gets the action id of this resource action.
+	 * Gets the action ID of this resource action.
 	 *
-	 * @return the action id of this resource action
+	 * @return the action ID of this resource action
 	 */
 	@AutoEscape
 	public String getActionId();
 
 	/**
-	 * Sets the action id of this resource action.
+	 * Sets the action ID of this resource action.
 	 *
-	 * @param actionId the action id of this resource action
+	 * @param actionId the action ID of this resource action
 	 */
 	public void setActionId(String actionId);
 

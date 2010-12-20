@@ -60,58 +60,58 @@ public interface MBBanModel extends BaseModel<MBBan> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the ban id of this message boards ban.
+	 * Gets the ban ID of this message boards ban.
 	 *
-	 * @return the ban id of this message boards ban
+	 * @return the ban ID of this message boards ban
 	 */
 	public long getBanId();
 
 	/**
-	 * Sets the ban id of this message boards ban.
+	 * Sets the ban ID of this message boards ban.
 	 *
-	 * @param banId the ban id of this message boards ban
+	 * @param banId the ban ID of this message boards ban
 	 */
 	public void setBanId(long banId);
 
 	/**
-	 * Gets the group id of this message boards ban.
+	 * Gets the group ID of this message boards ban.
 	 *
-	 * @return the group id of this message boards ban
+	 * @return the group ID of this message boards ban
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this message boards ban.
+	 * Sets the group ID of this message boards ban.
 	 *
-	 * @param groupId the group id of this message boards ban
+	 * @param groupId the group ID of this message boards ban
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this message boards ban.
+	 * Gets the company ID of this message boards ban.
 	 *
-	 * @return the company id of this message boards ban
+	 * @return the company ID of this message boards ban
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this message boards ban.
+	 * Sets the company ID of this message boards ban.
 	 *
-	 * @param companyId the company id of this message boards ban
+	 * @param companyId the company ID of this message boards ban
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this message boards ban.
+	 * Gets the user ID of this message boards ban.
 	 *
-	 * @return the user id of this message boards ban
+	 * @return the user ID of this message boards ban
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this message boards ban.
+	 * Sets the user ID of this message boards ban.
 	 *
-	 * @param userId the user id of this message boards ban
+	 * @param userId the user ID of this message boards ban
 	 */
 	public void setUserId(long userId);
 
@@ -174,16 +174,16 @@ public interface MBBanModel extends BaseModel<MBBan> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the ban user id of this message boards ban.
+	 * Gets the ban user ID of this message boards ban.
 	 *
-	 * @return the ban user id of this message boards ban
+	 * @return the ban user ID of this message boards ban
 	 */
 	public long getBanUserId();
 
 	/**
-	 * Sets the ban user id of this message boards ban.
+	 * Sets the ban user ID of this message boards ban.
 	 *
-	 * @param banUserId the ban user id of this message boards ban
+	 * @param banUserId the ban user ID of this message boards ban
 	 */
 	public void setBanUserId(long banUserId);
 

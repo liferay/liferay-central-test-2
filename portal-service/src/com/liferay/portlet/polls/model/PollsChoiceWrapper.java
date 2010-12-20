@@ -65,36 +65,36 @@ public class PollsChoiceWrapper implements PollsChoice {
 	}
 
 	/**
-	* Gets the choice id of this polls choice.
+	* Gets the choice ID of this polls choice.
 	*
-	* @return the choice id of this polls choice
+	* @return the choice ID of this polls choice
 	*/
 	public long getChoiceId() {
 		return _pollsChoice.getChoiceId();
 	}
 
 	/**
-	* Sets the choice id of this polls choice.
+	* Sets the choice ID of this polls choice.
 	*
-	* @param choiceId the choice id of this polls choice
+	* @param choiceId the choice ID of this polls choice
 	*/
 	public void setChoiceId(long choiceId) {
 		_pollsChoice.setChoiceId(choiceId);
 	}
 
 	/**
-	* Gets the question id of this polls choice.
+	* Gets the question ID of this polls choice.
 	*
-	* @return the question id of this polls choice
+	* @return the question ID of this polls choice
 	*/
 	public long getQuestionId() {
 		return _pollsChoice.getQuestionId();
 	}
 
 	/**
-	* Sets the question id of this polls choice.
+	* Sets the question ID of this polls choice.
 	*
-	* @param questionId the question id of this polls choice
+	* @param questionId the question ID of this polls choice
 	*/
 	public void setQuestionId(long questionId) {
 		_pollsChoice.setQuestionId(questionId);

@@ -476,8 +476,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	/**
 	 * Finds all the portlet items where groupId = &#63; and classNameId = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @return the matching portlet items
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -494,8 +494,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param start the lower bound of the range of portlet items to return
 	 * @param end the upper bound of the range of portlet items to return (not inclusive)
 	 * @return the range of matching portlet items
@@ -513,8 +513,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param start the lower bound of the range of portlet items to return
 	 * @param end the upper bound of the range of portlet items to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -603,8 +603,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching portlet item
 	 * @throws com.liferay.portal.NoSuchPortletItemException if a matching portlet item could not be found
@@ -643,8 +643,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching portlet item
 	 * @throws com.liferay.portal.NoSuchPortletItemException if a matching portlet item could not be found
@@ -686,8 +686,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * </p>
 	 *
 	 * @param portletItemId the primary key of the current portlet item
-	 * @param groupId the group id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next portlet item
 	 * @throws com.liferay.portal.NoSuchPortletItemException if a portlet item with the primary key could not be found
@@ -830,9 +830,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	/**
 	 * Finds all the portlet items where groupId = &#63; and portletId = &#63; and classNameId = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param portletId the portlet id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param portletId the portlet ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @return the matching portlet items
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -849,9 +849,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param portletId the portlet id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param portletId the portlet ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param start the lower bound of the range of portlet items to return
 	 * @param end the upper bound of the range of portlet items to return (not inclusive)
 	 * @return the range of matching portlet items
@@ -869,9 +869,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param portletId the portlet id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param portletId the portlet ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param start the lower bound of the range of portlet items to return
 	 * @param end the upper bound of the range of portlet items to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -976,9 +976,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param portletId the portlet id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param portletId the portlet ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching portlet item
 	 * @throws com.liferay.portal.NoSuchPortletItemException if a matching portlet item could not be found
@@ -1020,9 +1020,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param portletId the portlet id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param portletId the portlet ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching portlet item
 	 * @throws com.liferay.portal.NoSuchPortletItemException if a matching portlet item could not be found
@@ -1067,9 +1067,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * </p>
 	 *
 	 * @param portletItemId the primary key of the current portlet item
-	 * @param groupId the group id to search with
-	 * @param portletId the portlet id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param portletId the portlet ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next portlet item
 	 * @throws com.liferay.portal.NoSuchPortletItemException if a portlet item with the primary key could not be found
@@ -1229,10 +1229,10 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	/**
 	 * Finds the portlet item where groupId = &#63; and name = &#63; and portletId = &#63; and classNameId = &#63; or throws a {@link com.liferay.portal.NoSuchPortletItemException} if it could not be found.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param name the name to search with
-	 * @param portletId the portlet id to search with
-	 * @param classNameId the class name id to search with
+	 * @param portletId the portlet ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @return the matching portlet item
 	 * @throws com.liferay.portal.NoSuchPortletItemException if a matching portlet item could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1275,10 +1275,10 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	/**
 	 * Finds the portlet item where groupId = &#63; and name = &#63; and portletId = &#63; and classNameId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param name the name to search with
-	 * @param portletId the portlet id to search with
-	 * @param classNameId the class name id to search with
+	 * @param portletId the portlet ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @return the matching portlet item, or <code>null</code> if a matching portlet item could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1290,10 +1290,10 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	/**
 	 * Finds the portlet item where groupId = &#63; and name = &#63; and portletId = &#63; and classNameId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param name the name to search with
-	 * @param portletId the portlet id to search with
-	 * @param classNameId the class name id to search with
+	 * @param portletId the portlet ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @return the matching portlet item, or <code>null</code> if a matching portlet item could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1527,8 +1527,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	/**
 	 * Removes all the portlet items where groupId = &#63; and classNameId = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByG_C(long groupId, long classNameId)
@@ -1541,9 +1541,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	/**
 	 * Removes all the portlet items where groupId = &#63; and portletId = &#63; and classNameId = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
-	 * @param portletId the portlet id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param portletId the portlet ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByG_P_C(long groupId, String portletId, long classNameId)
@@ -1557,10 +1557,10 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	/**
 	 * Removes the portlet item where groupId = &#63; and name = &#63; and portletId = &#63; and classNameId = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param name the name to search with
-	 * @param portletId the portlet id to search with
-	 * @param classNameId the class name id to search with
+	 * @param portletId the portlet ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByG_N_P_C(long groupId, String name, String portletId,
@@ -1585,8 +1585,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	/**
 	 * Counts all the portlet items where groupId = &#63; and classNameId = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @return the number of matching portlet items
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1644,9 +1644,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	/**
 	 * Counts all the portlet items where groupId = &#63; and portletId = &#63; and classNameId = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param portletId the portlet id to search with
-	 * @param classNameId the class name id to search with
+	 * @param groupId the group ID to search with
+	 * @param portletId the portlet ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @return the number of matching portlet items
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1720,10 +1720,10 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	/**
 	 * Counts all the portlet items where groupId = &#63; and name = &#63; and portletId = &#63; and classNameId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param name the name to search with
-	 * @param portletId the portlet id to search with
-	 * @param classNameId the class name id to search with
+	 * @param portletId the portlet ID to search with
+	 * @param classNameId the class name ID to search with
 	 * @return the number of matching portlet items
 	 * @throws SystemException if a system exception occurred
 	 */

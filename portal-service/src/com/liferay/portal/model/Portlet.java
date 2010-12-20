@@ -35,23 +35,23 @@ public interface Portlet extends PortletModel {
 	 */
 
 	/**
-	* Gets the root portlet id of the portlet.
+	* Gets the root portlet ID of the portlet.
 	*
-	* @return the root portlet id of the portlet
+	* @return the root portlet ID of the portlet
 	*/
 	public java.lang.String getRootPortletId();
 
 	/**
-	* Gets the instance id of the portlet.
+	* Gets the instance ID of the portlet.
 	*
-	* @return the instance id of the portlet
+	* @return the instance ID of the portlet
 	*/
 	public java.lang.String getInstanceId();
 
 	/**
-	* Gets the plugin id of the portlet.
+	* Gets the plugin ID of the portlet.
 	*
-	* @return the plugin id of the portlet
+	* @return the plugin ID of the portlet
 	*/
 	public java.lang.String getPluginId();
 
@@ -1446,9 +1446,9 @@ public interface Portlet extends PortletModel {
 	public void setAddDefaultResource(boolean addDefaultResource);
 
 	/**
-	* Sets a string of ordered comma delimited portlet ids.
+	* Sets a string of ordered comma delimited portlet IDs.
 	*
-	* @param roles a string of ordered comma delimited portlet ids
+	* @param roles a string of ordered comma delimited portlet IDs
 	*/
 	public void setRoles(java.lang.String roles);
 
@@ -1590,7 +1590,7 @@ public interface Portlet extends PortletModel {
 	/**
 	* Set to <code>true</code> if the portlet is ready to be used.
 	*
-	* @param system boolean value for whether the portlet is ready to be used
+	* @param ready whether the portlet is ready to be used
 	*/
 	public void setReady(boolean ready);
 
@@ -1878,7 +1878,7 @@ public interface Portlet extends PortletModel {
 	/**
 	* Returns <code>true</code> if the portlet is found in a WAR file.
 	*
-	* @param portletId the cloned instance portlet id
+	* @param portletId the cloned instance portlet ID
 	* @return a cloned instance of the portlet
 	*/
 	public com.liferay.portal.model.Portlet getClonedInstance(

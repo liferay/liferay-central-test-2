@@ -58,44 +58,44 @@ public interface AnnouncementsDeliveryModel extends BaseModel<AnnouncementsDeliv
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the delivery id of this announcements delivery.
+	 * Gets the delivery ID of this announcements delivery.
 	 *
-	 * @return the delivery id of this announcements delivery
+	 * @return the delivery ID of this announcements delivery
 	 */
 	public long getDeliveryId();
 
 	/**
-	 * Sets the delivery id of this announcements delivery.
+	 * Sets the delivery ID of this announcements delivery.
 	 *
-	 * @param deliveryId the delivery id of this announcements delivery
+	 * @param deliveryId the delivery ID of this announcements delivery
 	 */
 	public void setDeliveryId(long deliveryId);
 
 	/**
-	 * Gets the company id of this announcements delivery.
+	 * Gets the company ID of this announcements delivery.
 	 *
-	 * @return the company id of this announcements delivery
+	 * @return the company ID of this announcements delivery
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this announcements delivery.
+	 * Sets the company ID of this announcements delivery.
 	 *
-	 * @param companyId the company id of this announcements delivery
+	 * @param companyId the company ID of this announcements delivery
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this announcements delivery.
+	 * Gets the user ID of this announcements delivery.
 	 *
-	 * @return the user id of this announcements delivery
+	 * @return the user ID of this announcements delivery
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this announcements delivery.
+	 * Sets the user ID of this announcements delivery.
 	 *
-	 * @param userId the user id of this announcements delivery
+	 * @param userId the user ID of this announcements delivery
 	 */
 	public void setUserId(long userId);
 

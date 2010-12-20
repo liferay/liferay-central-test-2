@@ -202,7 +202,7 @@ public class SocialEquityUserUtil {
 	/**
 	* Finds all the social equity users where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching social equity users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -219,7 +219,7 @@ public class SocialEquityUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of social equity users to return
 	* @param end the upper bound of the range of social equity users to return (not inclusive)
 	* @return the range of matching social equity users
@@ -238,7 +238,7 @@ public class SocialEquityUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of social equity users to return
 	* @param end the upper bound of the range of social equity users to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -260,7 +260,7 @@ public class SocialEquityUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching social equity user
 	* @throws com.liferay.portlet.social.NoSuchEquityUserException if a matching social equity user could not be found
@@ -281,7 +281,7 @@ public class SocialEquityUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching social equity user
 	* @throws com.liferay.portlet.social.NoSuchEquityUserException if a matching social equity user could not be found
@@ -303,7 +303,7 @@ public class SocialEquityUserUtil {
 	* </p>
 	*
 	* @param equityUserId the primary key of the current social equity user
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next social equity user
 	* @throws com.liferay.portlet.social.NoSuchEquityUserException if a social equity user with the primary key could not be found
@@ -322,7 +322,7 @@ public class SocialEquityUserUtil {
 	/**
 	* Finds all the social equity users where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching social equity users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -339,7 +339,7 @@ public class SocialEquityUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of social equity users to return
 	* @param end the upper bound of the range of social equity users to return (not inclusive)
 	* @return the range of matching social equity users
@@ -358,7 +358,7 @@ public class SocialEquityUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of social equity users to return
 	* @param end the upper bound of the range of social equity users to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -380,7 +380,7 @@ public class SocialEquityUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching social equity user
 	* @throws com.liferay.portlet.social.NoSuchEquityUserException if a matching social equity user could not be found
@@ -402,7 +402,7 @@ public class SocialEquityUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching social equity user
 	* @throws com.liferay.portlet.social.NoSuchEquityUserException if a matching social equity user could not be found
@@ -425,7 +425,7 @@ public class SocialEquityUserUtil {
 	* </p>
 	*
 	* @param equityUserId the primary key of the current social equity user
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next social equity user
 	* @throws com.liferay.portlet.social.NoSuchEquityUserException if a social equity user with the primary key could not be found
@@ -444,7 +444,7 @@ public class SocialEquityUserUtil {
 	/**
 	* Finds all the social equity users where userId = &#63;.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @return the matching social equity users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -460,7 +460,7 @@ public class SocialEquityUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of social equity users to return
 	* @param end the upper bound of the range of social equity users to return (not inclusive)
 	* @return the range of matching social equity users
@@ -479,7 +479,7 @@ public class SocialEquityUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of social equity users to return
 	* @param end the upper bound of the range of social equity users to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -501,7 +501,7 @@ public class SocialEquityUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching social equity user
 	* @throws com.liferay.portlet.social.NoSuchEquityUserException if a matching social equity user could not be found
@@ -522,7 +522,7 @@ public class SocialEquityUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching social equity user
 	* @throws com.liferay.portlet.social.NoSuchEquityUserException if a matching social equity user could not be found
@@ -544,7 +544,7 @@ public class SocialEquityUserUtil {
 	* </p>
 	*
 	* @param equityUserId the primary key of the current social equity user
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next social equity user
 	* @throws com.liferay.portlet.social.NoSuchEquityUserException if a social equity user with the primary key could not be found
@@ -680,8 +680,8 @@ public class SocialEquityUserUtil {
 	/**
 	* Finds the social equity user where groupId = &#63; and userId = &#63; or throws a {@link com.liferay.portlet.social.NoSuchEquityUserException} if it could not be found.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @return the matching social equity user
 	* @throws com.liferay.portlet.social.NoSuchEquityUserException if a matching social equity user could not be found
 	* @throws SystemException if a system exception occurred
@@ -696,8 +696,8 @@ public class SocialEquityUserUtil {
 	/**
 	* Finds the social equity user where groupId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @return the matching social equity user, or <code>null</code> if a matching social equity user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -710,8 +710,8 @@ public class SocialEquityUserUtil {
 	/**
 	* Finds the social equity user where groupId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @return the matching social equity user, or <code>null</code> if a matching social equity user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -724,7 +724,7 @@ public class SocialEquityUserUtil {
 	/**
 	* Finds all the social equity users where groupId = &#63; and rank = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param rank the rank to search with
 	* @return the matching social equity users
 	* @throws SystemException if a system exception occurred
@@ -742,7 +742,7 @@ public class SocialEquityUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param rank the rank to search with
 	* @param start the lower bound of the range of social equity users to return
 	* @param end the upper bound of the range of social equity users to return (not inclusive)
@@ -762,7 +762,7 @@ public class SocialEquityUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param rank the rank to search with
 	* @param start the lower bound of the range of social equity users to return
 	* @param end the upper bound of the range of social equity users to return (not inclusive)
@@ -785,7 +785,7 @@ public class SocialEquityUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param rank the rank to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching social equity user
@@ -807,7 +807,7 @@ public class SocialEquityUserUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param rank the rank to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching social equity user
@@ -830,7 +830,7 @@ public class SocialEquityUserUtil {
 	* </p>
 	*
 	* @param equityUserId the primary key of the current social equity user
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param rank the rank to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next social equity user
@@ -899,7 +899,7 @@ public class SocialEquityUserUtil {
 	/**
 	* Removes all the social equity users where groupId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByGroupId(long groupId)
@@ -910,7 +910,7 @@ public class SocialEquityUserUtil {
 	/**
 	* Removes all the social equity users where groupId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByGroupRanked(long groupId)
@@ -921,7 +921,7 @@ public class SocialEquityUserUtil {
 	/**
 	* Removes all the social equity users where userId = &#63; from the database.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUserId(long userId)
@@ -943,8 +943,8 @@ public class SocialEquityUserUtil {
 	/**
 	* Removes the social equity user where groupId = &#63; and userId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByG_U(long groupId, long userId)
@@ -956,7 +956,7 @@ public class SocialEquityUserUtil {
 	/**
 	* Removes all the social equity users where groupId = &#63; and rank = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param rank the rank to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -978,7 +978,7 @@ public class SocialEquityUserUtil {
 	/**
 	* Counts all the social equity users where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching social equity users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -990,7 +990,7 @@ public class SocialEquityUserUtil {
 	/**
 	* Counts all the social equity users where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching social equity users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1002,7 +1002,7 @@ public class SocialEquityUserUtil {
 	/**
 	* Counts all the social equity users where userId = &#63;.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @return the number of matching social equity users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1026,8 +1026,8 @@ public class SocialEquityUserUtil {
 	/**
 	* Counts all the social equity users where groupId = &#63; and userId = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @return the number of matching social equity users
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1039,7 +1039,7 @@ public class SocialEquityUserUtil {
 	/**
 	* Counts all the social equity users where groupId = &#63; and rank = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param rank the rank to search with
 	* @return the number of matching social equity users
 	* @throws SystemException if a system exception occurred

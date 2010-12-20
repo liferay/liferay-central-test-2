@@ -55,30 +55,30 @@ public interface PasswordPolicyRelModel extends BaseModel<PasswordPolicyRel> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the password policy rel id of this password policy rel.
+	 * Gets the password policy rel ID of this password policy rel.
 	 *
-	 * @return the password policy rel id of this password policy rel
+	 * @return the password policy rel ID of this password policy rel
 	 */
 	public long getPasswordPolicyRelId();
 
 	/**
-	 * Sets the password policy rel id of this password policy rel.
+	 * Sets the password policy rel ID of this password policy rel.
 	 *
-	 * @param passwordPolicyRelId the password policy rel id of this password policy rel
+	 * @param passwordPolicyRelId the password policy rel ID of this password policy rel
 	 */
 	public void setPasswordPolicyRelId(long passwordPolicyRelId);
 
 	/**
-	 * Gets the password policy id of this password policy rel.
+	 * Gets the password policy ID of this password policy rel.
 	 *
-	 * @return the password policy id of this password policy rel
+	 * @return the password policy ID of this password policy rel
 	 */
 	public long getPasswordPolicyId();
 
 	/**
-	 * Sets the password policy id of this password policy rel.
+	 * Sets the password policy ID of this password policy rel.
 	 *
-	 * @param passwordPolicyId the password policy id of this password policy rel
+	 * @param passwordPolicyId the password policy ID of this password policy rel
 	 */
 	public void setPasswordPolicyId(long passwordPolicyId);
 
@@ -90,16 +90,16 @@ public interface PasswordPolicyRelModel extends BaseModel<PasswordPolicyRel> {
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this password policy rel.
+	 * Gets the class name ID of this password policy rel.
 	 *
-	 * @return the class name id of this password policy rel
+	 * @return the class name ID of this password policy rel
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this password policy rel.
+	 * Sets the class name ID of this password policy rel.
 	 *
-	 * @param classNameId the class name id of this password policy rel
+	 * @param classNameId the class name ID of this password policy rel
 	 */
 	public void setClassNameId(long classNameId);
 

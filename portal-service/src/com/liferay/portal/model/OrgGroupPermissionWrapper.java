@@ -48,54 +48,54 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 	}
 
 	/**
-	* Gets the organization id of this org group permission.
+	* Gets the organization ID of this org group permission.
 	*
-	* @return the organization id of this org group permission
+	* @return the organization ID of this org group permission
 	*/
 	public long getOrganizationId() {
 		return _orgGroupPermission.getOrganizationId();
 	}
 
 	/**
-	* Sets the organization id of this org group permission.
+	* Sets the organization ID of this org group permission.
 	*
-	* @param organizationId the organization id of this org group permission
+	* @param organizationId the organization ID of this org group permission
 	*/
 	public void setOrganizationId(long organizationId) {
 		_orgGroupPermission.setOrganizationId(organizationId);
 	}
 
 	/**
-	* Gets the group id of this org group permission.
+	* Gets the group ID of this org group permission.
 	*
-	* @return the group id of this org group permission
+	* @return the group ID of this org group permission
 	*/
 	public long getGroupId() {
 		return _orgGroupPermission.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this org group permission.
+	* Sets the group ID of this org group permission.
 	*
-	* @param groupId the group id of this org group permission
+	* @param groupId the group ID of this org group permission
 	*/
 	public void setGroupId(long groupId) {
 		_orgGroupPermission.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the permission id of this org group permission.
+	* Gets the permission ID of this org group permission.
 	*
-	* @return the permission id of this org group permission
+	* @return the permission ID of this org group permission
 	*/
 	public long getPermissionId() {
 		return _orgGroupPermission.getPermissionId();
 	}
 
 	/**
-	* Sets the permission id of this org group permission.
+	* Sets the permission ID of this org group permission.
 	*
-	* @param permissionId the permission id of this org group permission
+	* @param permissionId the permission ID of this org group permission
 	*/
 	public void setPermissionId(long permissionId) {
 		_orgGroupPermission.setPermissionId(permissionId);

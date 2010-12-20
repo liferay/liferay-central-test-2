@@ -47,18 +47,18 @@ public class ShardWrapper implements Shard {
 	}
 
 	/**
-	* Gets the shard id of this shard.
+	* Gets the shard ID of this shard.
 	*
-	* @return the shard id of this shard
+	* @return the shard ID of this shard
 	*/
 	public long getShardId() {
 		return _shard.getShardId();
 	}
 
 	/**
-	* Sets the shard id of this shard.
+	* Sets the shard ID of this shard.
 	*
-	* @param shardId the shard id of this shard
+	* @param shardId the shard ID of this shard
 	*/
 	public void setShardId(long shardId) {
 		_shard.setShardId(shardId);
@@ -74,18 +74,18 @@ public class ShardWrapper implements Shard {
 	}
 
 	/**
-	* Gets the class name id of this shard.
+	* Gets the class name ID of this shard.
 	*
-	* @return the class name id of this shard
+	* @return the class name ID of this shard
 	*/
 	public long getClassNameId() {
 		return _shard.getClassNameId();
 	}
 
 	/**
-	* Sets the class name id of this shard.
+	* Sets the class name ID of this shard.
 	*
-	* @param classNameId the class name id of this shard
+	* @param classNameId the class name ID of this shard
 	*/
 	public void setClassNameId(long classNameId) {
 		_shard.setClassNameId(classNameId);

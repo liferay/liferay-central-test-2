@@ -56,44 +56,44 @@ public interface OrgGroupPermissionModel extends BaseModel<OrgGroupPermission> {
 	public void setPrimaryKey(OrgGroupPermissionPK pk);
 
 	/**
-	 * Gets the organization id of this org group permission.
+	 * Gets the organization ID of this org group permission.
 	 *
-	 * @return the organization id of this org group permission
+	 * @return the organization ID of this org group permission
 	 */
 	public long getOrganizationId();
 
 	/**
-	 * Sets the organization id of this org group permission.
+	 * Sets the organization ID of this org group permission.
 	 *
-	 * @param organizationId the organization id of this org group permission
+	 * @param organizationId the organization ID of this org group permission
 	 */
 	public void setOrganizationId(long organizationId);
 
 	/**
-	 * Gets the group id of this org group permission.
+	 * Gets the group ID of this org group permission.
 	 *
-	 * @return the group id of this org group permission
+	 * @return the group ID of this org group permission
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this org group permission.
+	 * Sets the group ID of this org group permission.
 	 *
-	 * @param groupId the group id of this org group permission
+	 * @param groupId the group ID of this org group permission
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the permission id of this org group permission.
+	 * Gets the permission ID of this org group permission.
 	 *
-	 * @return the permission id of this org group permission
+	 * @return the permission ID of this org group permission
 	 */
 	public long getPermissionId();
 
 	/**
-	 * Sets the permission id of this org group permission.
+	 * Sets the permission ID of this org group permission.
 	 *
-	 * @param permissionId the permission id of this org group permission
+	 * @param permissionId the permission ID of this org group permission
 	 */
 	public void setPermissionId(long permissionId);
 

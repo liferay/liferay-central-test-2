@@ -390,7 +390,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 	/**
 	 * Finds all the contacts where companyId = &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @return the matching contacts
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -407,7 +407,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of contacts to return
 	 * @param end the upper bound of the range of contacts to return (not inclusive)
 	 * @return the range of matching contacts
@@ -425,7 +425,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of contacts to return
 	 * @param end the upper bound of the range of contacts to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -508,7 +508,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching contact
 	 * @throws com.liferay.portal.NoSuchContactException if a matching contact could not be found
@@ -543,7 +543,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching contact
 	 * @throws com.liferay.portal.NoSuchContactException if a matching contact could not be found
@@ -582,7 +582,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 	 * </p>
 	 *
 	 * @param contactId the primary key of the current contact
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next contact
 	 * @throws com.liferay.portal.NoSuchContactException if a contact with the primary key could not be found
@@ -829,7 +829,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 	/**
 	 * Removes all the contacts where companyId = &#63; from the database.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
@@ -852,7 +852,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 	/**
 	 * Counts all the contacts where companyId = &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @return the number of matching contacts
 	 * @throws SystemException if a system exception occurred
 	 */

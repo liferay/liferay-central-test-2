@@ -47,36 +47,36 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 	}
 
 	/**
-	* Gets the item price id of this shopping item price.
+	* Gets the item price ID of this shopping item price.
 	*
-	* @return the item price id of this shopping item price
+	* @return the item price ID of this shopping item price
 	*/
 	public long getItemPriceId() {
 		return _shoppingItemPrice.getItemPriceId();
 	}
 
 	/**
-	* Sets the item price id of this shopping item price.
+	* Sets the item price ID of this shopping item price.
 	*
-	* @param itemPriceId the item price id of this shopping item price
+	* @param itemPriceId the item price ID of this shopping item price
 	*/
 	public void setItemPriceId(long itemPriceId) {
 		_shoppingItemPrice.setItemPriceId(itemPriceId);
 	}
 
 	/**
-	* Gets the item id of this shopping item price.
+	* Gets the item ID of this shopping item price.
 	*
-	* @return the item id of this shopping item price
+	* @return the item ID of this shopping item price
 	*/
 	public long getItemId() {
 		return _shoppingItemPrice.getItemId();
 	}
 
 	/**
-	* Sets the item id of this shopping item price.
+	* Sets the item ID of this shopping item price.
 	*
-	* @param itemId the item id of this shopping item price
+	* @param itemId the item ID of this shopping item price
 	*/
 	public void setItemId(long itemId) {
 		_shoppingItemPrice.setItemId(itemId);

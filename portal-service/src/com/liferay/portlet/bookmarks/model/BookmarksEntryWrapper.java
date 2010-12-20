@@ -65,72 +65,72 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	/**
-	* Gets the entry id of this bookmarks entry.
+	* Gets the entry ID of this bookmarks entry.
 	*
-	* @return the entry id of this bookmarks entry
+	* @return the entry ID of this bookmarks entry
 	*/
 	public long getEntryId() {
 		return _bookmarksEntry.getEntryId();
 	}
 
 	/**
-	* Sets the entry id of this bookmarks entry.
+	* Sets the entry ID of this bookmarks entry.
 	*
-	* @param entryId the entry id of this bookmarks entry
+	* @param entryId the entry ID of this bookmarks entry
 	*/
 	public void setEntryId(long entryId) {
 		_bookmarksEntry.setEntryId(entryId);
 	}
 
 	/**
-	* Gets the group id of this bookmarks entry.
+	* Gets the group ID of this bookmarks entry.
 	*
-	* @return the group id of this bookmarks entry
+	* @return the group ID of this bookmarks entry
 	*/
 	public long getGroupId() {
 		return _bookmarksEntry.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this bookmarks entry.
+	* Sets the group ID of this bookmarks entry.
 	*
-	* @param groupId the group id of this bookmarks entry
+	* @param groupId the group ID of this bookmarks entry
 	*/
 	public void setGroupId(long groupId) {
 		_bookmarksEntry.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this bookmarks entry.
+	* Gets the company ID of this bookmarks entry.
 	*
-	* @return the company id of this bookmarks entry
+	* @return the company ID of this bookmarks entry
 	*/
 	public long getCompanyId() {
 		return _bookmarksEntry.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this bookmarks entry.
+	* Sets the company ID of this bookmarks entry.
 	*
-	* @param companyId the company id of this bookmarks entry
+	* @param companyId the company ID of this bookmarks entry
 	*/
 	public void setCompanyId(long companyId) {
 		_bookmarksEntry.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this bookmarks entry.
+	* Gets the user ID of this bookmarks entry.
 	*
-	* @return the user id of this bookmarks entry
+	* @return the user ID of this bookmarks entry
 	*/
 	public long getUserId() {
 		return _bookmarksEntry.getUserId();
 	}
 
 	/**
-	* Sets the user id of this bookmarks entry.
+	* Sets the user ID of this bookmarks entry.
 	*
-	* @param userId the user id of this bookmarks entry
+	* @param userId the user ID of this bookmarks entry
 	*/
 	public void setUserId(long userId) {
 		_bookmarksEntry.setUserId(userId);
@@ -193,18 +193,18 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	/**
-	* Gets the folder id of this bookmarks entry.
+	* Gets the folder ID of this bookmarks entry.
 	*
-	* @return the folder id of this bookmarks entry
+	* @return the folder ID of this bookmarks entry
 	*/
 	public long getFolderId() {
 		return _bookmarksEntry.getFolderId();
 	}
 
 	/**
-	* Sets the folder id of this bookmarks entry.
+	* Sets the folder ID of this bookmarks entry.
 	*
-	* @param folderId the folder id of this bookmarks entry
+	* @param folderId the folder ID of this bookmarks entry
 	*/
 	public void setFolderId(long folderId) {
 		_bookmarksEntry.setFolderId(folderId);

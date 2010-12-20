@@ -875,7 +875,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	 * Finds the message boards mailing list where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchMailingListException} if it could not be found.
 	 *
 	 * @param uuid the uuid to search with
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching message boards mailing list
 	 * @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a matching message boards mailing list could not be found
 	 * @throws SystemException if a system exception occurred
@@ -911,7 +911,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	 * Finds the message boards mailing list where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param uuid the uuid to search with
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching message boards mailing list, or <code>null</code> if a matching message boards mailing list could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -924,7 +924,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	 * Finds the message boards mailing list where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param uuid the uuid to search with
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching message boards mailing list, or <code>null</code> if a matching message boards mailing list could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1356,8 +1356,8 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	/**
 	 * Finds the message boards mailing list where groupId = &#63; and categoryId = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchMailingListException} if it could not be found.
 	 *
-	 * @param groupId the group id to search with
-	 * @param categoryId the category id to search with
+	 * @param groupId the group ID to search with
+	 * @param categoryId the category ID to search with
 	 * @return the matching message boards mailing list
 	 * @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a matching message boards mailing list could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1392,8 +1392,8 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	/**
 	 * Finds the message boards mailing list where groupId = &#63; and categoryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group id to search with
-	 * @param categoryId the category id to search with
+	 * @param groupId the group ID to search with
+	 * @param categoryId the category ID to search with
 	 * @return the matching message boards mailing list, or <code>null</code> if a matching message boards mailing list could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1405,8 +1405,8 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	/**
 	 * Finds the message boards mailing list where groupId = &#63; and categoryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group id to search with
-	 * @param categoryId the category id to search with
+	 * @param groupId the group ID to search with
+	 * @param categoryId the category ID to search with
 	 * @return the matching message boards mailing list, or <code>null</code> if a matching message boards mailing list could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1616,7 +1616,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	 * Removes the message boards mailing list where uuid = &#63; and groupId = &#63; from the database.
 	 *
 	 * @param uuid the uuid to search with
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUUID_G(String uuid, long groupId)
@@ -1641,8 +1641,8 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	/**
 	 * Removes the message boards mailing list where groupId = &#63; and categoryId = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
-	 * @param categoryId the category id to search with
+	 * @param groupId the group ID to search with
+	 * @param categoryId the category ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByG_C(long groupId, long categoryId)
@@ -1732,7 +1732,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	 * Counts all the message boards mailing lists where uuid = &#63; and groupId = &#63;.
 	 *
 	 * @param uuid the uuid to search with
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the number of matching message boards mailing lists
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1855,8 +1855,8 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	/**
 	 * Counts all the message boards mailing lists where groupId = &#63; and categoryId = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param categoryId the category id to search with
+	 * @param groupId the group ID to search with
+	 * @param categoryId the category ID to search with
 	 * @return the number of matching message boards mailing lists
 	 * @throws SystemException if a system exception occurred
 	 */

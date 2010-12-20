@@ -47,36 +47,36 @@ public class ResourceWrapper implements Resource {
 	}
 
 	/**
-	* Gets the resource id of this resource.
+	* Gets the resource ID of this resource.
 	*
-	* @return the resource id of this resource
+	* @return the resource ID of this resource
 	*/
 	public long getResourceId() {
 		return _resource.getResourceId();
 	}
 
 	/**
-	* Sets the resource id of this resource.
+	* Sets the resource ID of this resource.
 	*
-	* @param resourceId the resource id of this resource
+	* @param resourceId the resource ID of this resource
 	*/
 	public void setResourceId(long resourceId) {
 		_resource.setResourceId(resourceId);
 	}
 
 	/**
-	* Gets the code id of this resource.
+	* Gets the code ID of this resource.
 	*
-	* @return the code id of this resource
+	* @return the code ID of this resource
 	*/
 	public long getCodeId() {
 		return _resource.getCodeId();
 	}
 
 	/**
-	* Sets the code id of this resource.
+	* Sets the code ID of this resource.
 	*
-	* @param codeId the code id of this resource
+	* @param codeId the code ID of this resource
 	*/
 	public void setCodeId(long codeId) {
 		_resource.setCodeId(codeId);

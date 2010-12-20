@@ -203,7 +203,7 @@ public class PasswordPolicyRelUtil {
 	/**
 	* Finds all the password policy rels where passwordPolicyId = &#63;.
 	*
-	* @param passwordPolicyId the password policy id to search with
+	* @param passwordPolicyId the password policy ID to search with
 	* @return the matching password policy rels
 	* @throws SystemException if a system exception occurred
 	*/
@@ -220,7 +220,7 @@ public class PasswordPolicyRelUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param passwordPolicyId the password policy id to search with
+	* @param passwordPolicyId the password policy ID to search with
 	* @param start the lower bound of the range of password policy rels to return
 	* @param end the upper bound of the range of password policy rels to return (not inclusive)
 	* @return the range of matching password policy rels
@@ -240,7 +240,7 @@ public class PasswordPolicyRelUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param passwordPolicyId the password policy id to search with
+	* @param passwordPolicyId the password policy ID to search with
 	* @param start the lower bound of the range of password policy rels to return
 	* @param end the upper bound of the range of password policy rels to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -263,7 +263,7 @@ public class PasswordPolicyRelUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param passwordPolicyId the password policy id to search with
+	* @param passwordPolicyId the password policy ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching password policy rel
 	* @throws com.liferay.portal.NoSuchPasswordPolicyRelException if a matching password policy rel could not be found
@@ -286,7 +286,7 @@ public class PasswordPolicyRelUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param passwordPolicyId the password policy id to search with
+	* @param passwordPolicyId the password policy ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching password policy rel
 	* @throws com.liferay.portal.NoSuchPasswordPolicyRelException if a matching password policy rel could not be found
@@ -310,7 +310,7 @@ public class PasswordPolicyRelUtil {
 	* </p>
 	*
 	* @param passwordPolicyRelId the primary key of the current password policy rel
-	* @param passwordPolicyId the password policy id to search with
+	* @param passwordPolicyId the password policy ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next password policy rel
 	* @throws com.liferay.portal.NoSuchPasswordPolicyRelException if a password policy rel with the primary key could not be found
@@ -329,7 +329,7 @@ public class PasswordPolicyRelUtil {
 	/**
 	* Finds the password policy rel where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portal.NoSuchPasswordPolicyRelException} if it could not be found.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching password policy rel
 	* @throws com.liferay.portal.NoSuchPasswordPolicyRelException if a matching password policy rel could not be found
@@ -345,7 +345,7 @@ public class PasswordPolicyRelUtil {
 	/**
 	* Finds the password policy rel where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching password policy rel, or <code>null</code> if a matching password policy rel could not be found
 	* @throws SystemException if a system exception occurred
@@ -359,7 +359,7 @@ public class PasswordPolicyRelUtil {
 	/**
 	* Finds the password policy rel where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching password policy rel, or <code>null</code> if a matching password policy rel could not be found
 	* @throws SystemException if a system exception occurred
@@ -374,8 +374,8 @@ public class PasswordPolicyRelUtil {
 	/**
 	* Finds the password policy rel where passwordPolicyId = &#63; and classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portal.NoSuchPasswordPolicyRelException} if it could not be found.
 	*
-	* @param passwordPolicyId the password policy id to search with
-	* @param classNameId the class name id to search with
+	* @param passwordPolicyId the password policy ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching password policy rel
 	* @throws com.liferay.portal.NoSuchPasswordPolicyRelException if a matching password policy rel could not be found
@@ -392,8 +392,8 @@ public class PasswordPolicyRelUtil {
 	/**
 	* Finds the password policy rel where passwordPolicyId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param passwordPolicyId the password policy id to search with
-	* @param classNameId the class name id to search with
+	* @param passwordPolicyId the password policy ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching password policy rel, or <code>null</code> if a matching password policy rel could not be found
 	* @throws SystemException if a system exception occurred
@@ -408,8 +408,8 @@ public class PasswordPolicyRelUtil {
 	/**
 	* Finds the password policy rel where passwordPolicyId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param passwordPolicyId the password policy id to search with
-	* @param classNameId the class name id to search with
+	* @param passwordPolicyId the password policy ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching password policy rel, or <code>null</code> if a matching password policy rel could not be found
 	* @throws SystemException if a system exception occurred
@@ -475,7 +475,7 @@ public class PasswordPolicyRelUtil {
 	/**
 	* Removes all the password policy rels where passwordPolicyId = &#63; from the database.
 	*
-	* @param passwordPolicyId the password policy id to search with
+	* @param passwordPolicyId the password policy ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByPasswordPolicyId(long passwordPolicyId)
@@ -486,7 +486,7 @@ public class PasswordPolicyRelUtil {
 	/**
 	* Removes the password policy rel where classNameId = &#63; and classPK = &#63; from the database.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -499,8 +499,8 @@ public class PasswordPolicyRelUtil {
 	/**
 	* Removes the password policy rel where passwordPolicyId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
 	*
-	* @param passwordPolicyId the password policy id to search with
-	* @param classNameId the class name id to search with
+	* @param passwordPolicyId the password policy ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -524,7 +524,7 @@ public class PasswordPolicyRelUtil {
 	/**
 	* Counts all the password policy rels where passwordPolicyId = &#63;.
 	*
-	* @param passwordPolicyId the password policy id to search with
+	* @param passwordPolicyId the password policy ID to search with
 	* @return the number of matching password policy rels
 	* @throws SystemException if a system exception occurred
 	*/
@@ -536,7 +536,7 @@ public class PasswordPolicyRelUtil {
 	/**
 	* Counts all the password policy rels where classNameId = &#63; and classPK = &#63;.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the number of matching password policy rels
 	* @throws SystemException if a system exception occurred
@@ -549,8 +549,8 @@ public class PasswordPolicyRelUtil {
 	/**
 	* Counts all the password policy rels where passwordPolicyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	*
-	* @param passwordPolicyId the password policy id to search with
-	* @param classNameId the class name id to search with
+	* @param passwordPolicyId the password policy ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the number of matching password policy rels
 	* @throws SystemException if a system exception occurred

@@ -47,72 +47,72 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the entry id of this asset entry.
+	* Gets the entry ID of this asset entry.
 	*
-	* @return the entry id of this asset entry
+	* @return the entry ID of this asset entry
 	*/
 	public long getEntryId() {
 		return _assetEntry.getEntryId();
 	}
 
 	/**
-	* Sets the entry id of this asset entry.
+	* Sets the entry ID of this asset entry.
 	*
-	* @param entryId the entry id of this asset entry
+	* @param entryId the entry ID of this asset entry
 	*/
 	public void setEntryId(long entryId) {
 		_assetEntry.setEntryId(entryId);
 	}
 
 	/**
-	* Gets the group id of this asset entry.
+	* Gets the group ID of this asset entry.
 	*
-	* @return the group id of this asset entry
+	* @return the group ID of this asset entry
 	*/
 	public long getGroupId() {
 		return _assetEntry.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this asset entry.
+	* Sets the group ID of this asset entry.
 	*
-	* @param groupId the group id of this asset entry
+	* @param groupId the group ID of this asset entry
 	*/
 	public void setGroupId(long groupId) {
 		_assetEntry.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this asset entry.
+	* Gets the company ID of this asset entry.
 	*
-	* @return the company id of this asset entry
+	* @return the company ID of this asset entry
 	*/
 	public long getCompanyId() {
 		return _assetEntry.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this asset entry.
+	* Sets the company ID of this asset entry.
 	*
-	* @param companyId the company id of this asset entry
+	* @param companyId the company ID of this asset entry
 	*/
 	public void setCompanyId(long companyId) {
 		_assetEntry.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this asset entry.
+	* Gets the user ID of this asset entry.
 	*
-	* @return the user id of this asset entry
+	* @return the user ID of this asset entry
 	*/
 	public long getUserId() {
 		return _assetEntry.getUserId();
 	}
 
 	/**
-	* Sets the user id of this asset entry.
+	* Sets the user ID of this asset entry.
 	*
-	* @param userId the user id of this asset entry
+	* @param userId the user ID of this asset entry
 	*/
 	public void setUserId(long userId) {
 		_assetEntry.setUserId(userId);
@@ -202,18 +202,18 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Gets the class name id of this asset entry.
+	* Gets the class name ID of this asset entry.
 	*
-	* @return the class name id of this asset entry
+	* @return the class name ID of this asset entry
 	*/
 	public long getClassNameId() {
 		return _assetEntry.getClassNameId();
 	}
 
 	/**
-	* Sets the class name id of this asset entry.
+	* Sets the class name ID of this asset entry.
 	*
-	* @param classNameId the class name id of this asset entry
+	* @param classNameId the class name ID of this asset entry
 	*/
 	public void setClassNameId(long classNameId) {
 		_assetEntry.setClassNameId(classNameId);

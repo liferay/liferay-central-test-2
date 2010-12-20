@@ -47,18 +47,18 @@ public class CountryWrapper implements Country {
 	}
 
 	/**
-	* Gets the country id of this country.
+	* Gets the country ID of this country.
 	*
-	* @return the country id of this country
+	* @return the country ID of this country
 	*/
 	public long getCountryId() {
 		return _country.getCountryId();
 	}
 
 	/**
-	* Sets the country id of this country.
+	* Sets the country ID of this country.
 	*
-	* @param countryId the country id of this country
+	* @param countryId the country ID of this country
 	*/
 	public void setCountryId(long countryId) {
 		_country.setCountryId(countryId);

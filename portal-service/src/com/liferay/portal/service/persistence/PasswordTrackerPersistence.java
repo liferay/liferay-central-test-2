@@ -104,7 +104,7 @@ public interface PasswordTrackerPersistence extends BasePersistence<PasswordTrac
 	/**
 	* Finds all the password trackers where userId = &#63;.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @return the matching password trackers
 	* @throws SystemException if a system exception occurred
 	*/
@@ -118,7 +118,7 @@ public interface PasswordTrackerPersistence extends BasePersistence<PasswordTrac
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of password trackers to return
 	* @param end the upper bound of the range of password trackers to return (not inclusive)
 	* @return the range of matching password trackers
@@ -135,7 +135,7 @@ public interface PasswordTrackerPersistence extends BasePersistence<PasswordTrac
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of password trackers to return
 	* @param end the upper bound of the range of password trackers to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -154,7 +154,7 @@ public interface PasswordTrackerPersistence extends BasePersistence<PasswordTrac
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching password tracker
 	* @throws com.liferay.portal.NoSuchPasswordTrackerException if a matching password tracker could not be found
@@ -173,7 +173,7 @@ public interface PasswordTrackerPersistence extends BasePersistence<PasswordTrac
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching password tracker
 	* @throws com.liferay.portal.NoSuchPasswordTrackerException if a matching password tracker could not be found
@@ -193,7 +193,7 @@ public interface PasswordTrackerPersistence extends BasePersistence<PasswordTrac
 	* </p>
 	*
 	* @param passwordTrackerId the primary key of the current password tracker
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next password tracker
 	* @throws com.liferay.portal.NoSuchPasswordTrackerException if a password tracker with the primary key could not be found
@@ -251,7 +251,7 @@ public interface PasswordTrackerPersistence extends BasePersistence<PasswordTrac
 	/**
 	* Removes all the password trackers where userId = &#63; from the database.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUserId(long userId)
@@ -268,7 +268,7 @@ public interface PasswordTrackerPersistence extends BasePersistence<PasswordTrac
 	/**
 	* Counts all the password trackers where userId = &#63;.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @return the number of matching password trackers
 	* @throws SystemException if a system exception occurred
 	*/

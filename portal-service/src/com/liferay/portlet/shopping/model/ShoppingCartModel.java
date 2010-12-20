@@ -60,58 +60,58 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the cart id of this shopping cart.
+	 * Gets the cart ID of this shopping cart.
 	 *
-	 * @return the cart id of this shopping cart
+	 * @return the cart ID of this shopping cart
 	 */
 	public long getCartId();
 
 	/**
-	 * Sets the cart id of this shopping cart.
+	 * Sets the cart ID of this shopping cart.
 	 *
-	 * @param cartId the cart id of this shopping cart
+	 * @param cartId the cart ID of this shopping cart
 	 */
 	public void setCartId(long cartId);
 
 	/**
-	 * Gets the group id of this shopping cart.
+	 * Gets the group ID of this shopping cart.
 	 *
-	 * @return the group id of this shopping cart
+	 * @return the group ID of this shopping cart
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this shopping cart.
+	 * Sets the group ID of this shopping cart.
 	 *
-	 * @param groupId the group id of this shopping cart
+	 * @param groupId the group ID of this shopping cart
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this shopping cart.
+	 * Gets the company ID of this shopping cart.
 	 *
-	 * @return the company id of this shopping cart
+	 * @return the company ID of this shopping cart
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this shopping cart.
+	 * Sets the company ID of this shopping cart.
 	 *
-	 * @param companyId the company id of this shopping cart
+	 * @param companyId the company ID of this shopping cart
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this shopping cart.
+	 * Gets the user ID of this shopping cart.
 	 *
-	 * @return the user id of this shopping cart
+	 * @return the user ID of this shopping cart
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this shopping cart.
+	 * Sets the user ID of this shopping cart.
 	 *
-	 * @param userId the user id of this shopping cart
+	 * @param userId the user ID of this shopping cart
 	 */
 	public void setUserId(long userId);
 
@@ -174,17 +174,17 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the item ids of this shopping cart.
+	 * Gets the item IDs of this shopping cart.
 	 *
-	 * @return the item ids of this shopping cart
+	 * @return the item IDs of this shopping cart
 	 */
 	@AutoEscape
 	public String getItemIds();
 
 	/**
-	 * Sets the item ids of this shopping cart.
+	 * Sets the item IDs of this shopping cart.
 	 *
-	 * @param itemIds the item ids of this shopping cart
+	 * @param itemIds the item IDs of this shopping cart
 	 */
 	public void setItemIds(String itemIds);
 

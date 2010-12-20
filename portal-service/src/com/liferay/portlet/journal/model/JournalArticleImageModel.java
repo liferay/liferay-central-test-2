@@ -57,45 +57,45 @@ public interface JournalArticleImageModel extends BaseModel<JournalArticleImage>
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the article image id of this journal article image.
+	 * Gets the article image ID of this journal article image.
 	 *
-	 * @return the article image id of this journal article image
+	 * @return the article image ID of this journal article image
 	 */
 	public long getArticleImageId();
 
 	/**
-	 * Sets the article image id of this journal article image.
+	 * Sets the article image ID of this journal article image.
 	 *
-	 * @param articleImageId the article image id of this journal article image
+	 * @param articleImageId the article image ID of this journal article image
 	 */
 	public void setArticleImageId(long articleImageId);
 
 	/**
-	 * Gets the group id of this journal article image.
+	 * Gets the group ID of this journal article image.
 	 *
-	 * @return the group id of this journal article image
+	 * @return the group ID of this journal article image
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this journal article image.
+	 * Sets the group ID of this journal article image.
 	 *
-	 * @param groupId the group id of this journal article image
+	 * @param groupId the group ID of this journal article image
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the article id of this journal article image.
+	 * Gets the article ID of this journal article image.
 	 *
-	 * @return the article id of this journal article image
+	 * @return the article ID of this journal article image
 	 */
 	@AutoEscape
 	public String getArticleId();
 
 	/**
-	 * Sets the article id of this journal article image.
+	 * Sets the article ID of this journal article image.
 	 *
-	 * @param articleId the article id of this journal article image
+	 * @param articleId the article ID of this journal article image
 	 */
 	public void setArticleId(String articleId);
 
@@ -114,17 +114,17 @@ public interface JournalArticleImageModel extends BaseModel<JournalArticleImage>
 	public void setVersion(double version);
 
 	/**
-	 * Gets the el instance id of this journal article image.
+	 * Gets the el instance ID of this journal article image.
 	 *
-	 * @return the el instance id of this journal article image
+	 * @return the el instance ID of this journal article image
 	 */
 	@AutoEscape
 	public String getElInstanceId();
 
 	/**
-	 * Sets the el instance id of this journal article image.
+	 * Sets the el instance ID of this journal article image.
 	 *
-	 * @param elInstanceId the el instance id of this journal article image
+	 * @param elInstanceId the el instance ID of this journal article image
 	 */
 	public void setElInstanceId(String elInstanceId);
 
@@ -144,17 +144,17 @@ public interface JournalArticleImageModel extends BaseModel<JournalArticleImage>
 	public void setElName(String elName);
 
 	/**
-	 * Gets the language id of this journal article image.
+	 * Gets the language ID of this journal article image.
 	 *
-	 * @return the language id of this journal article image
+	 * @return the language ID of this journal article image
 	 */
 	@AutoEscape
 	public String getLanguageId();
 
 	/**
-	 * Sets the language id of this journal article image.
+	 * Sets the language ID of this journal article image.
 	 *
-	 * @param languageId the language id of this journal article image
+	 * @param languageId the language ID of this journal article image
 	 */
 	public void setLanguageId(String languageId);
 

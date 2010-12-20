@@ -74,44 +74,44 @@ public interface LockModel extends BaseModel<Lock> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the lock id of this lock.
+	 * Gets the lock ID of this lock.
 	 *
-	 * @return the lock id of this lock
+	 * @return the lock ID of this lock
 	 */
 	public long getLockId();
 
 	/**
-	 * Sets the lock id of this lock.
+	 * Sets the lock ID of this lock.
 	 *
-	 * @param lockId the lock id of this lock
+	 * @param lockId the lock ID of this lock
 	 */
 	public void setLockId(long lockId);
 
 	/**
-	 * Gets the company id of this lock.
+	 * Gets the company ID of this lock.
 	 *
-	 * @return the company id of this lock
+	 * @return the company ID of this lock
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this lock.
+	 * Sets the company ID of this lock.
 	 *
-	 * @param companyId the company id of this lock
+	 * @param companyId the company ID of this lock
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this lock.
+	 * Gets the user ID of this lock.
 	 *
-	 * @return the user id of this lock
+	 * @return the user ID of this lock
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this lock.
+	 * Sets the user ID of this lock.
 	 *
-	 * @param userId the user id of this lock
+	 * @param userId the user ID of this lock
 	 */
 	public void setUserId(long userId);
 

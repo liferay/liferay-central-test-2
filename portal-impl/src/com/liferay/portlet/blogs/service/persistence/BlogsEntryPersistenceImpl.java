@@ -1109,7 +1109,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Finds the blogs entry where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.blogs.NoSuchEntryException} if it could not be found.
 	 *
 	 * @param uuid the uuid to search with
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching blogs entry
 	 * @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1145,7 +1145,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Finds the blogs entry where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param uuid the uuid to search with
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching blogs entry, or <code>null</code> if a matching blogs entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1158,7 +1158,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Finds the blogs entry where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param uuid the uuid to search with
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching blogs entry, or <code>null</code> if a matching blogs entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1261,7 +1261,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Finds all the blogs entries where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching blogs entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1277,7 +1277,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
 	 * @return the range of matching blogs entries
@@ -1295,7 +1295,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -1383,7 +1383,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching blogs entry
 	 * @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
@@ -1418,7 +1418,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching blogs entry
 	 * @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
@@ -1457,7 +1457,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * </p>
 	 *
 	 * @param entryId the primary key of the current blogs entry
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next blogs entry
 	 * @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
@@ -1600,7 +1600,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Filters by the user's permissions and finds all the blogs entries where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching blogs entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1617,7 +1617,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
 	 * @return the range of matching blogs entries that the user has permission to view
@@ -1635,7 +1635,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -1726,7 +1726,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Finds all the blogs entries where companyId = &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @return the matching blogs entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1743,7 +1743,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
 	 * @return the range of matching blogs entries
@@ -1761,7 +1761,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -1849,7 +1849,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching blogs entry
 	 * @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
@@ -1885,7 +1885,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching blogs entry
 	 * @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
@@ -1924,7 +1924,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * </p>
 	 *
 	 * @param entryId the primary key of the current blogs entry
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next blogs entry
 	 * @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
@@ -2067,8 +2067,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Finds all the blogs entries where companyId = &#63; and userId = &#63;.
 	 *
-	 * @param companyId the company id to search with
-	 * @param userId the user id to search with
+	 * @param companyId the company ID to search with
+	 * @param userId the user ID to search with
 	 * @return the matching blogs entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2085,8 +2085,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param userId the user id to search with
+	 * @param companyId the company ID to search with
+	 * @param userId the user ID to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
 	 * @return the range of matching blogs entries
@@ -2104,8 +2104,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param userId the user id to search with
+	 * @param companyId the company ID to search with
+	 * @param userId the user ID to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -2197,8 +2197,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param userId the user id to search with
+	 * @param companyId the company ID to search with
+	 * @param userId the user ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching blogs entry
 	 * @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
@@ -2237,8 +2237,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param userId the user id to search with
+	 * @param companyId the company ID to search with
+	 * @param userId the user ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching blogs entry
 	 * @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
@@ -2280,8 +2280,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * </p>
 	 *
 	 * @param entryId the primary key of the current blogs entry
-	 * @param companyId the company id to search with
-	 * @param userId the user id to search with
+	 * @param companyId the company ID to search with
+	 * @param userId the user ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next blogs entry
 	 * @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
@@ -2428,7 +2428,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Finds all the blogs entries where companyId = &#63; and displayDate &lt; &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param displayDate the display date to search with
 	 * @return the matching blogs entries
 	 * @throws SystemException if a system exception occurred
@@ -2446,7 +2446,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param displayDate the display date to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -2465,7 +2465,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param displayDate the display date to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -2566,7 +2566,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param displayDate the display date to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching blogs entry
@@ -2606,7 +2606,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param displayDate the display date to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching blogs entry
@@ -2649,7 +2649,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * </p>
 	 *
 	 * @param entryId the primary key of the current blogs entry
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param displayDate the display date to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next blogs entry
@@ -2804,7 +2804,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Finds all the blogs entries where companyId = &#63; and status = &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param status the status to search with
 	 * @return the matching blogs entries
 	 * @throws SystemException if a system exception occurred
@@ -2822,7 +2822,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -2841,7 +2841,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -2934,7 +2934,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching blogs entry
@@ -2974,7 +2974,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching blogs entry
@@ -3017,7 +3017,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * </p>
 	 *
 	 * @param entryId the primary key of the current blogs entry
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next blogs entry
@@ -3165,7 +3165,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Finds the blogs entry where groupId = &#63; and urlTitle = &#63; or throws a {@link com.liferay.portlet.blogs.NoSuchEntryException} if it could not be found.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param urlTitle the url title to search with
 	 * @return the matching blogs entry
 	 * @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
@@ -3201,7 +3201,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Finds the blogs entry where groupId = &#63; and urlTitle = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param urlTitle the url title to search with
 	 * @return the matching blogs entry, or <code>null</code> if a matching blogs entry could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3214,7 +3214,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Finds the blogs entry where groupId = &#63; and urlTitle = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param urlTitle the url title to search with
 	 * @return the matching blogs entry, or <code>null</code> if a matching blogs entry could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3318,7 +3318,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Finds all the blogs entries where groupId = &#63; and displayDate &lt; &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @return the matching blogs entries
 	 * @throws SystemException if a system exception occurred
@@ -3336,7 +3336,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -3355,7 +3355,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -3456,7 +3456,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching blogs entry
@@ -3496,7 +3496,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching blogs entry
@@ -3539,7 +3539,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * </p>
 	 *
 	 * @param entryId the primary key of the current blogs entry
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next blogs entry
@@ -3694,7 +3694,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Filters by the user's permissions and finds all the blogs entries where groupId = &#63; and displayDate &lt; &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @return the matching blogs entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -3712,7 +3712,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -3731,7 +3731,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -3836,7 +3836,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Finds all the blogs entries where groupId = &#63; and status = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param status the status to search with
 	 * @return the matching blogs entries
 	 * @throws SystemException if a system exception occurred
@@ -3854,7 +3854,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -3873,7 +3873,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -3966,7 +3966,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching blogs entry
@@ -4006,7 +4006,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching blogs entry
@@ -4049,7 +4049,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * </p>
 	 *
 	 * @param entryId the primary key of the current blogs entry
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next blogs entry
@@ -4197,7 +4197,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Filters by the user's permissions and finds all the blogs entries where groupId = &#63; and status = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param status the status to search with
 	 * @return the matching blogs entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -4215,7 +4215,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -4234,7 +4234,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -4331,8 +4331,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Finds all the blogs entries where companyId = &#63; and userId = &#63; and status = &#63;.
 	 *
-	 * @param companyId the company id to search with
-	 * @param userId the user id to search with
+	 * @param companyId the company ID to search with
+	 * @param userId the user ID to search with
 	 * @param status the status to search with
 	 * @return the matching blogs entries
 	 * @throws SystemException if a system exception occurred
@@ -4350,8 +4350,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param userId the user id to search with
+	 * @param companyId the company ID to search with
+	 * @param userId the user ID to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -4370,8 +4370,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param userId the user id to search with
+	 * @param companyId the company ID to search with
+	 * @param userId the user ID to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -4469,8 +4469,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param userId the user id to search with
+	 * @param companyId the company ID to search with
+	 * @param userId the user ID to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching blogs entry
@@ -4513,8 +4513,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
-	 * @param userId the user id to search with
+	 * @param companyId the company ID to search with
+	 * @param userId the user ID to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching blogs entry
@@ -4560,8 +4560,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * </p>
 	 *
 	 * @param entryId the primary key of the current blogs entry
-	 * @param companyId the company id to search with
-	 * @param userId the user id to search with
+	 * @param companyId the company ID to search with
+	 * @param userId the user ID to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next blogs entry
@@ -4713,7 +4713,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Finds all the blogs entries where companyId = &#63; and displayDate &lt; &#63; and status = &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @return the matching blogs entries
@@ -4732,7 +4732,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
@@ -4752,7 +4752,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
@@ -4858,7 +4858,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
@@ -4902,7 +4902,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
@@ -4949,7 +4949,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * </p>
 	 *
 	 * @param entryId the primary key of the current blogs entry
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
@@ -5109,8 +5109,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Finds all the blogs entries where groupId = &#63; and userId = &#63; and displayDate &lt; &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @return the matching blogs entries
 	 * @throws SystemException if a system exception occurred
@@ -5128,8 +5128,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -5148,8 +5148,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -5254,8 +5254,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching blogs entry
@@ -5298,8 +5298,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching blogs entry
@@ -5345,8 +5345,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * </p>
 	 *
 	 * @param entryId the primary key of the current blogs entry
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next blogs entry
@@ -5505,8 +5505,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Filters by the user's permissions and finds all the blogs entries where groupId = &#63; and userId = &#63; and displayDate &lt; &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @return the matching blogs entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -5524,8 +5524,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -5545,8 +5545,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -5655,8 +5655,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Finds all the blogs entries where groupId = &#63; and userId = &#63; and status = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param status the status to search with
 	 * @return the matching blogs entries
 	 * @throws SystemException if a system exception occurred
@@ -5674,8 +5674,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -5694,8 +5694,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -5793,8 +5793,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching blogs entry
@@ -5837,8 +5837,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching blogs entry
@@ -5884,8 +5884,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * </p>
 	 *
 	 * @param entryId the primary key of the current blogs entry
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next blogs entry
@@ -6037,8 +6037,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Filters by the user's permissions and finds all the blogs entries where groupId = &#63; and userId = &#63; and status = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param status the status to search with
 	 * @return the matching blogs entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -6056,8 +6056,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -6076,8 +6076,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
 	 * @param end the upper bound of the range of blogs entries to return (not inclusive)
@@ -6179,7 +6179,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Finds all the blogs entries where groupId = &#63; and displayDate &lt; &#63; and status = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @return the matching blogs entries
@@ -6198,7 +6198,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
@@ -6218,7 +6218,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
@@ -6324,7 +6324,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
@@ -6368,7 +6368,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
@@ -6415,7 +6415,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * </p>
 	 *
 	 * @param entryId the primary key of the current blogs entry
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
@@ -6575,7 +6575,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Filters by the user's permissions and finds all the blogs entries where groupId = &#63; and displayDate &lt; &#63; and status = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @return the matching blogs entries that the user has permission to view
@@ -6594,7 +6594,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
@@ -6615,7 +6615,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
@@ -6725,8 +6725,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Finds all the blogs entries where groupId = &#63; and userId = &#63; and displayDate &lt; &#63; and status = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @return the matching blogs entries
@@ -6745,8 +6745,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
@@ -6768,8 +6768,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
@@ -6879,8 +6879,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
@@ -6927,8 +6927,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
@@ -6978,8 +6978,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * </p>
 	 *
 	 * @param entryId the primary key of the current blogs entry
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
@@ -7144,8 +7144,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Filters by the user's permissions and finds all the blogs entries where groupId = &#63; and userId = &#63; and displayDate &lt; &#63; and status = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @return the matching blogs entries that the user has permission to view
@@ -7164,8 +7164,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
@@ -7187,8 +7187,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of blogs entries to return
@@ -7424,7 +7424,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Removes the blogs entry where uuid = &#63; and groupId = &#63; from the database.
 	 *
 	 * @param uuid the uuid to search with
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUUID_G(String uuid, long groupId)
@@ -7437,7 +7437,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Removes all the blogs entries where groupId = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -7449,7 +7449,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Removes all the blogs entries where companyId = &#63; from the database.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
@@ -7461,8 +7461,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Removes all the blogs entries where companyId = &#63; and userId = &#63; from the database.
 	 *
-	 * @param companyId the company id to search with
-	 * @param userId the user id to search with
+	 * @param companyId the company ID to search with
+	 * @param userId the user ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByC_U(long companyId, long userId)
@@ -7475,7 +7475,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Removes all the blogs entries where companyId = &#63; and displayDate &lt; &#63; from the database.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param displayDate the display date to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -7489,7 +7489,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Removes all the blogs entries where companyId = &#63; and status = &#63; from the database.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param status the status to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -7503,7 +7503,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Removes the blogs entry where groupId = &#63; and urlTitle = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param urlTitle the url title to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -7517,7 +7517,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Removes all the blogs entries where groupId = &#63; and displayDate &lt; &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -7531,7 +7531,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Removes all the blogs entries where groupId = &#63; and status = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param status the status to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -7544,8 +7544,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Removes all the blogs entries where companyId = &#63; and userId = &#63; and status = &#63; from the database.
 	 *
-	 * @param companyId the company id to search with
-	 * @param userId the user id to search with
+	 * @param companyId the company ID to search with
+	 * @param userId the user ID to search with
 	 * @param status the status to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -7559,7 +7559,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Removes all the blogs entries where companyId = &#63; and displayDate &lt; &#63; and status = &#63; from the database.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @throws SystemException if a system exception occurred
@@ -7575,8 +7575,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Removes all the blogs entries where groupId = &#63; and userId = &#63; and displayDate &lt; &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -7590,8 +7590,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Removes all the blogs entries where groupId = &#63; and userId = &#63; and status = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param status the status to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -7605,7 +7605,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Removes all the blogs entries where groupId = &#63; and displayDate &lt; &#63; and status = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @throws SystemException if a system exception occurred
@@ -7620,8 +7620,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Removes all the blogs entries where groupId = &#63; and userId = &#63; and displayDate &lt; &#63; and status = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @throws SystemException if a system exception occurred
@@ -7714,7 +7714,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 * Counts all the blogs entries where uuid = &#63; and groupId = &#63;.
 	 *
 	 * @param uuid the uuid to search with
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the number of matching blogs entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -7784,7 +7784,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Counts all the blogs entries where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the number of matching blogs entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -7837,7 +7837,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Filters by the user's permissions and counts all the blogs entries where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the number of matching blogs entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -7885,7 +7885,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Counts all the blogs entries where companyId = &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @return the number of matching blogs entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -7938,8 +7938,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Counts all the blogs entries where companyId = &#63; and userId = &#63;.
 	 *
-	 * @param companyId the company id to search with
-	 * @param userId the user id to search with
+	 * @param companyId the company ID to search with
+	 * @param userId the user ID to search with
 	 * @return the number of matching blogs entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -7997,7 +7997,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Counts all the blogs entries where companyId = &#63; and displayDate &lt; &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param displayDate the display date to search with
 	 * @return the number of matching blogs entries
 	 * @throws SystemException if a system exception occurred
@@ -8063,7 +8063,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Counts all the blogs entries where companyId = &#63; and status = &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param status the status to search with
 	 * @return the number of matching blogs entries
 	 * @throws SystemException if a system exception occurred
@@ -8121,7 +8121,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Counts all the blogs entries where groupId = &#63; and urlTitle = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param urlTitle the url title to search with
 	 * @return the number of matching blogs entries
 	 * @throws SystemException if a system exception occurred
@@ -8192,7 +8192,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Counts all the blogs entries where groupId = &#63; and displayDate &lt; &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @return the number of matching blogs entries
 	 * @throws SystemException if a system exception occurred
@@ -8258,7 +8258,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Filters by the user's permissions and counts all the blogs entries where groupId = &#63; and displayDate &lt; &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @return the number of matching blogs entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -8319,7 +8319,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Counts all the blogs entries where groupId = &#63; and status = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param status the status to search with
 	 * @return the number of matching blogs entries
 	 * @throws SystemException if a system exception occurred
@@ -8377,7 +8377,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Filters by the user's permissions and counts all the blogs entries where groupId = &#63; and status = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param status the status to search with
 	 * @return the number of matching blogs entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -8431,8 +8431,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Counts all the blogs entries where companyId = &#63; and userId = &#63; and status = &#63;.
 	 *
-	 * @param companyId the company id to search with
-	 * @param userId the user id to search with
+	 * @param companyId the company ID to search with
+	 * @param userId the user ID to search with
 	 * @param status the status to search with
 	 * @return the number of matching blogs entries
 	 * @throws SystemException if a system exception occurred
@@ -8495,7 +8495,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Counts all the blogs entries where companyId = &#63; and displayDate &lt; &#63; and status = &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @return the number of matching blogs entries
@@ -8566,8 +8566,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Counts all the blogs entries where groupId = &#63; and userId = &#63; and displayDate &lt; &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @return the number of matching blogs entries
 	 * @throws SystemException if a system exception occurred
@@ -8637,8 +8637,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Filters by the user's permissions and counts all the blogs entries where groupId = &#63; and userId = &#63; and displayDate &lt; &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @return the number of matching blogs entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -8703,8 +8703,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Counts all the blogs entries where groupId = &#63; and userId = &#63; and status = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param status the status to search with
 	 * @return the number of matching blogs entries
 	 * @throws SystemException if a system exception occurred
@@ -8767,8 +8767,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Filters by the user's permissions and counts all the blogs entries where groupId = &#63; and userId = &#63; and status = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param status the status to search with
 	 * @return the number of matching blogs entries that the user has permission to view
 	 * @throws SystemException if a system exception occurred
@@ -8826,7 +8826,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Counts all the blogs entries where groupId = &#63; and displayDate &lt; &#63; and status = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @return the number of matching blogs entries
@@ -8897,7 +8897,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Filters by the user's permissions and counts all the blogs entries where groupId = &#63; and displayDate &lt; &#63; and status = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @return the number of matching blogs entries that the user has permission to view
@@ -8963,8 +8963,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Counts all the blogs entries where groupId = &#63; and userId = &#63; and displayDate &lt; &#63; and status = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @return the number of matching blogs entries
@@ -9039,8 +9039,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	/**
 	 * Filters by the user's permissions and counts all the blogs entries where groupId = &#63; and userId = &#63; and displayDate &lt; &#63; and status = &#63;.
 	 *
-	 * @param groupId the group id to search with
-	 * @param userId the user id to search with
+	 * @param groupId the group ID to search with
+	 * @param userId the user ID to search with
 	 * @param displayDate the display date to search with
 	 * @param status the status to search with
 	 * @return the number of matching blogs entries that the user has permission to view

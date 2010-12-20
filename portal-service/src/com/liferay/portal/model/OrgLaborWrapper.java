@@ -47,54 +47,54 @@ public class OrgLaborWrapper implements OrgLabor {
 	}
 
 	/**
-	* Gets the org labor id of this org labor.
+	* Gets the org labor ID of this org labor.
 	*
-	* @return the org labor id of this org labor
+	* @return the org labor ID of this org labor
 	*/
 	public long getOrgLaborId() {
 		return _orgLabor.getOrgLaborId();
 	}
 
 	/**
-	* Sets the org labor id of this org labor.
+	* Sets the org labor ID of this org labor.
 	*
-	* @param orgLaborId the org labor id of this org labor
+	* @param orgLaborId the org labor ID of this org labor
 	*/
 	public void setOrgLaborId(long orgLaborId) {
 		_orgLabor.setOrgLaborId(orgLaborId);
 	}
 
 	/**
-	* Gets the organization id of this org labor.
+	* Gets the organization ID of this org labor.
 	*
-	* @return the organization id of this org labor
+	* @return the organization ID of this org labor
 	*/
 	public long getOrganizationId() {
 		return _orgLabor.getOrganizationId();
 	}
 
 	/**
-	* Sets the organization id of this org labor.
+	* Sets the organization ID of this org labor.
 	*
-	* @param organizationId the organization id of this org labor
+	* @param organizationId the organization ID of this org labor
 	*/
 	public void setOrganizationId(long organizationId) {
 		_orgLabor.setOrganizationId(organizationId);
 	}
 
 	/**
-	* Gets the type id of this org labor.
+	* Gets the type ID of this org labor.
 	*
-	* @return the type id of this org labor
+	* @return the type ID of this org labor
 	*/
 	public int getTypeId() {
 		return _orgLabor.getTypeId();
 	}
 
 	/**
-	* Sets the type id of this org labor.
+	* Sets the type ID of this org labor.
 	*
-	* @param typeId the type id of this org labor
+	* @param typeId the type ID of this org labor
 	*/
 	public void setTypeId(int typeId) {
 		_orgLabor.setTypeId(typeId);

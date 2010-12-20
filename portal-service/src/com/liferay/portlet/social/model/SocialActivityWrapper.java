@@ -47,72 +47,72 @@ public class SocialActivityWrapper implements SocialActivity {
 	}
 
 	/**
-	* Gets the activity id of this social activity.
+	* Gets the activity ID of this social activity.
 	*
-	* @return the activity id of this social activity
+	* @return the activity ID of this social activity
 	*/
 	public long getActivityId() {
 		return _socialActivity.getActivityId();
 	}
 
 	/**
-	* Sets the activity id of this social activity.
+	* Sets the activity ID of this social activity.
 	*
-	* @param activityId the activity id of this social activity
+	* @param activityId the activity ID of this social activity
 	*/
 	public void setActivityId(long activityId) {
 		_socialActivity.setActivityId(activityId);
 	}
 
 	/**
-	* Gets the group id of this social activity.
+	* Gets the group ID of this social activity.
 	*
-	* @return the group id of this social activity
+	* @return the group ID of this social activity
 	*/
 	public long getGroupId() {
 		return _socialActivity.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this social activity.
+	* Sets the group ID of this social activity.
 	*
-	* @param groupId the group id of this social activity
+	* @param groupId the group ID of this social activity
 	*/
 	public void setGroupId(long groupId) {
 		_socialActivity.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this social activity.
+	* Gets the company ID of this social activity.
 	*
-	* @return the company id of this social activity
+	* @return the company ID of this social activity
 	*/
 	public long getCompanyId() {
 		return _socialActivity.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this social activity.
+	* Sets the company ID of this social activity.
 	*
-	* @param companyId the company id of this social activity
+	* @param companyId the company ID of this social activity
 	*/
 	public void setCompanyId(long companyId) {
 		_socialActivity.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this social activity.
+	* Gets the user ID of this social activity.
 	*
-	* @return the user id of this social activity
+	* @return the user ID of this social activity
 	*/
 	public long getUserId() {
 		return _socialActivity.getUserId();
 	}
 
 	/**
-	* Sets the user id of this social activity.
+	* Sets the user ID of this social activity.
 	*
-	* @param userId the user id of this social activity
+	* @param userId the user ID of this social activity
 	*/
 	public void setUserId(long userId) {
 		_socialActivity.setUserId(userId);
@@ -157,18 +157,18 @@ public class SocialActivityWrapper implements SocialActivity {
 	}
 
 	/**
-	* Gets the mirror activity id of this social activity.
+	* Gets the mirror activity ID of this social activity.
 	*
-	* @return the mirror activity id of this social activity
+	* @return the mirror activity ID of this social activity
 	*/
 	public long getMirrorActivityId() {
 		return _socialActivity.getMirrorActivityId();
 	}
 
 	/**
-	* Sets the mirror activity id of this social activity.
+	* Sets the mirror activity ID of this social activity.
 	*
-	* @param mirrorActivityId the mirror activity id of this social activity
+	* @param mirrorActivityId the mirror activity ID of this social activity
 	*/
 	public void setMirrorActivityId(long mirrorActivityId) {
 		_socialActivity.setMirrorActivityId(mirrorActivityId);
@@ -184,18 +184,18 @@ public class SocialActivityWrapper implements SocialActivity {
 	}
 
 	/**
-	* Gets the class name id of this social activity.
+	* Gets the class name ID of this social activity.
 	*
-	* @return the class name id of this social activity
+	* @return the class name ID of this social activity
 	*/
 	public long getClassNameId() {
 		return _socialActivity.getClassNameId();
 	}
 
 	/**
-	* Sets the class name id of this social activity.
+	* Sets the class name ID of this social activity.
 	*
-	* @param classNameId the class name id of this social activity
+	* @param classNameId the class name ID of this social activity
 	*/
 	public void setClassNameId(long classNameId) {
 		_socialActivity.setClassNameId(classNameId);
@@ -256,18 +256,18 @@ public class SocialActivityWrapper implements SocialActivity {
 	}
 
 	/**
-	* Gets the receiver user id of this social activity.
+	* Gets the receiver user ID of this social activity.
 	*
-	* @return the receiver user id of this social activity
+	* @return the receiver user ID of this social activity
 	*/
 	public long getReceiverUserId() {
 		return _socialActivity.getReceiverUserId();
 	}
 
 	/**
-	* Sets the receiver user id of this social activity.
+	* Sets the receiver user ID of this social activity.
 	*
-	* @param receiverUserId the receiver user id of this social activity
+	* @param receiverUserId the receiver user ID of this social activity
 	*/
 	public void setReceiverUserId(long receiverUserId) {
 		_socialActivity.setReceiverUserId(receiverUserId);

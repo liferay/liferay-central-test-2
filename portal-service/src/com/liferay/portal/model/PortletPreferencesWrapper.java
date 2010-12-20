@@ -47,36 +47,36 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 	}
 
 	/**
-	* Gets the portlet preferences id of this portlet preferences.
+	* Gets the portlet preferences ID of this portlet preferences.
 	*
-	* @return the portlet preferences id of this portlet preferences
+	* @return the portlet preferences ID of this portlet preferences
 	*/
 	public long getPortletPreferencesId() {
 		return _portletPreferences.getPortletPreferencesId();
 	}
 
 	/**
-	* Sets the portlet preferences id of this portlet preferences.
+	* Sets the portlet preferences ID of this portlet preferences.
 	*
-	* @param portletPreferencesId the portlet preferences id of this portlet preferences
+	* @param portletPreferencesId the portlet preferences ID of this portlet preferences
 	*/
 	public void setPortletPreferencesId(long portletPreferencesId) {
 		_portletPreferences.setPortletPreferencesId(portletPreferencesId);
 	}
 
 	/**
-	* Gets the owner id of this portlet preferences.
+	* Gets the owner ID of this portlet preferences.
 	*
-	* @return the owner id of this portlet preferences
+	* @return the owner ID of this portlet preferences
 	*/
 	public long getOwnerId() {
 		return _portletPreferences.getOwnerId();
 	}
 
 	/**
-	* Sets the owner id of this portlet preferences.
+	* Sets the owner ID of this portlet preferences.
 	*
-	* @param ownerId the owner id of this portlet preferences
+	* @param ownerId the owner ID of this portlet preferences
 	*/
 	public void setOwnerId(long ownerId) {
 		_portletPreferences.setOwnerId(ownerId);
@@ -119,18 +119,18 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 	}
 
 	/**
-	* Gets the portlet id of this portlet preferences.
+	* Gets the portlet ID of this portlet preferences.
 	*
-	* @return the portlet id of this portlet preferences
+	* @return the portlet ID of this portlet preferences
 	*/
 	public java.lang.String getPortletId() {
 		return _portletPreferences.getPortletId();
 	}
 
 	/**
-	* Sets the portlet id of this portlet preferences.
+	* Sets the portlet ID of this portlet preferences.
 	*
-	* @param portletId the portlet id of this portlet preferences
+	* @param portletId the portlet ID of this portlet preferences
 	*/
 	public void setPortletId(java.lang.String portletId) {
 		_portletPreferences.setPortletId(portletId);

@@ -58,16 +58,16 @@ public interface ReleaseModel extends BaseModel<Release> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the release id of this release.
+	 * Gets the release ID of this release.
 	 *
-	 * @return the release id of this release
+	 * @return the release ID of this release
 	 */
 	public long getReleaseId();
 
 	/**
-	 * Sets the release id of this release.
+	 * Sets the release ID of this release.
 	 *
-	 * @param releaseId the release id of this release
+	 * @param releaseId the release ID of this release
 	 */
 	public void setReleaseId(long releaseId);
 

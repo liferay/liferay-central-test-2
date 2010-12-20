@@ -47,36 +47,36 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 	}
 
 	/**
-	* Gets the message flag id of this message boards message flag.
+	* Gets the message flag ID of this message boards message flag.
 	*
-	* @return the message flag id of this message boards message flag
+	* @return the message flag ID of this message boards message flag
 	*/
 	public long getMessageFlagId() {
 		return _mbMessageFlag.getMessageFlagId();
 	}
 
 	/**
-	* Sets the message flag id of this message boards message flag.
+	* Sets the message flag ID of this message boards message flag.
 	*
-	* @param messageFlagId the message flag id of this message boards message flag
+	* @param messageFlagId the message flag ID of this message boards message flag
 	*/
 	public void setMessageFlagId(long messageFlagId) {
 		_mbMessageFlag.setMessageFlagId(messageFlagId);
 	}
 
 	/**
-	* Gets the user id of this message boards message flag.
+	* Gets the user ID of this message boards message flag.
 	*
-	* @return the user id of this message boards message flag
+	* @return the user ID of this message boards message flag
 	*/
 	public long getUserId() {
 		return _mbMessageFlag.getUserId();
 	}
 
 	/**
-	* Sets the user id of this message boards message flag.
+	* Sets the user ID of this message boards message flag.
 	*
-	* @param userId the user id of this message boards message flag
+	* @param userId the user ID of this message boards message flag
 	*/
 	public void setUserId(long userId) {
 		_mbMessageFlag.setUserId(userId);
@@ -121,36 +121,36 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 	}
 
 	/**
-	* Gets the thread id of this message boards message flag.
+	* Gets the thread ID of this message boards message flag.
 	*
-	* @return the thread id of this message boards message flag
+	* @return the thread ID of this message boards message flag
 	*/
 	public long getThreadId() {
 		return _mbMessageFlag.getThreadId();
 	}
 
 	/**
-	* Sets the thread id of this message boards message flag.
+	* Sets the thread ID of this message boards message flag.
 	*
-	* @param threadId the thread id of this message boards message flag
+	* @param threadId the thread ID of this message boards message flag
 	*/
 	public void setThreadId(long threadId) {
 		_mbMessageFlag.setThreadId(threadId);
 	}
 
 	/**
-	* Gets the message id of this message boards message flag.
+	* Gets the message ID of this message boards message flag.
 	*
-	* @return the message id of this message boards message flag
+	* @return the message ID of this message boards message flag
 	*/
 	public long getMessageId() {
 		return _mbMessageFlag.getMessageId();
 	}
 
 	/**
-	* Sets the message id of this message boards message flag.
+	* Sets the message ID of this message boards message flag.
 	*
-	* @param messageId the message id of this message boards message flag
+	* @param messageId the message ID of this message boards message flag
 	*/
 	public void setMessageId(long messageId) {
 		_mbMessageFlag.setMessageId(messageId);

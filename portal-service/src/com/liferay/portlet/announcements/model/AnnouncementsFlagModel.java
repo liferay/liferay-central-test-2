@@ -59,30 +59,30 @@ public interface AnnouncementsFlagModel extends BaseModel<AnnouncementsFlag> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the flag id of this announcements flag.
+	 * Gets the flag ID of this announcements flag.
 	 *
-	 * @return the flag id of this announcements flag
+	 * @return the flag ID of this announcements flag
 	 */
 	public long getFlagId();
 
 	/**
-	 * Sets the flag id of this announcements flag.
+	 * Sets the flag ID of this announcements flag.
 	 *
-	 * @param flagId the flag id of this announcements flag
+	 * @param flagId the flag ID of this announcements flag
 	 */
 	public void setFlagId(long flagId);
 
 	/**
-	 * Gets the user id of this announcements flag.
+	 * Gets the user ID of this announcements flag.
 	 *
-	 * @return the user id of this announcements flag
+	 * @return the user ID of this announcements flag
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this announcements flag.
+	 * Sets the user ID of this announcements flag.
 	 *
-	 * @param userId the user id of this announcements flag
+	 * @param userId the user ID of this announcements flag
 	 */
 	public void setUserId(long userId);
 
@@ -116,16 +116,16 @@ public interface AnnouncementsFlagModel extends BaseModel<AnnouncementsFlag> {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the entry id of this announcements flag.
+	 * Gets the entry ID of this announcements flag.
 	 *
-	 * @return the entry id of this announcements flag
+	 * @return the entry ID of this announcements flag
 	 */
 	public long getEntryId();
 
 	/**
-	 * Sets the entry id of this announcements flag.
+	 * Sets the entry ID of this announcements flag.
 	 *
-	 * @param entryId the entry id of this announcements flag
+	 * @param entryId the entry ID of this announcements flag
 	 */
 	public void setEntryId(long entryId);
 

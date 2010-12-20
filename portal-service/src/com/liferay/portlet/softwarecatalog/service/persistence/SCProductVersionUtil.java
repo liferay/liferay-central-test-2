@@ -202,7 +202,7 @@ public class SCProductVersionUtil {
 	/**
 	* Finds all the s c product versions where productEntryId = &#63;.
 	*
-	* @param productEntryId the product entry id to search with
+	* @param productEntryId the product entry ID to search with
 	* @return the matching s c product versions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -219,7 +219,7 @@ public class SCProductVersionUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param productEntryId the product entry id to search with
+	* @param productEntryId the product entry ID to search with
 	* @param start the lower bound of the range of s c product versions to return
 	* @param end the upper bound of the range of s c product versions to return (not inclusive)
 	* @return the range of matching s c product versions
@@ -238,7 +238,7 @@ public class SCProductVersionUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param productEntryId the product entry id to search with
+	* @param productEntryId the product entry ID to search with
 	* @param start the lower bound of the range of s c product versions to return
 	* @param end the upper bound of the range of s c product versions to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -261,7 +261,7 @@ public class SCProductVersionUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param productEntryId the product entry id to search with
+	* @param productEntryId the product entry ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching s c product version
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductVersionException if a matching s c product version could not be found
@@ -283,7 +283,7 @@ public class SCProductVersionUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param productEntryId the product entry id to search with
+	* @param productEntryId the product entry ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching s c product version
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductVersionException if a matching s c product version could not be found
@@ -306,7 +306,7 @@ public class SCProductVersionUtil {
 	* </p>
 	*
 	* @param productVersionId the primary key of the current s c product version
-	* @param productEntryId the product entry id to search with
+	* @param productEntryId the product entry ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next s c product version
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductVersionException if a s c product version with the primary key could not be found
@@ -417,7 +417,7 @@ public class SCProductVersionUtil {
 	/**
 	* Removes all the s c product versions where productEntryId = &#63; from the database.
 	*
-	* @param productEntryId the product entry id to search with
+	* @param productEntryId the product entry ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByProductEntryId(long productEntryId)
@@ -451,7 +451,7 @@ public class SCProductVersionUtil {
 	/**
 	* Counts all the s c product versions where productEntryId = &#63;.
 	*
-	* @param productEntryId the product entry id to search with
+	* @param productEntryId the product entry ID to search with
 	* @return the number of matching s c product versions
 	* @throws SystemException if a system exception occurred
 	*/

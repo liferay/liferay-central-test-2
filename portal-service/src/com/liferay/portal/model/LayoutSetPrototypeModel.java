@@ -59,30 +59,30 @@ public interface LayoutSetPrototypeModel extends BaseModel<LayoutSetPrototype> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the layout set prototype id of this layout set prototype.
+	 * Gets the layout set prototype ID of this layout set prototype.
 	 *
-	 * @return the layout set prototype id of this layout set prototype
+	 * @return the layout set prototype ID of this layout set prototype
 	 */
 	public long getLayoutSetPrototypeId();
 
 	/**
-	 * Sets the layout set prototype id of this layout set prototype.
+	 * Sets the layout set prototype ID of this layout set prototype.
 	 *
-	 * @param layoutSetPrototypeId the layout set prototype id of this layout set prototype
+	 * @param layoutSetPrototypeId the layout set prototype ID of this layout set prototype
 	 */
 	public void setLayoutSetPrototypeId(long layoutSetPrototypeId);
 
 	/**
-	 * Gets the company id of this layout set prototype.
+	 * Gets the company ID of this layout set prototype.
 	 *
-	 * @return the company id of this layout set prototype
+	 * @return the company ID of this layout set prototype
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this layout set prototype.
+	 * Sets the company ID of this layout set prototype.
 	 *
-	 * @param companyId the company id of this layout set prototype
+	 * @param companyId the company ID of this layout set prototype
 	 */
 	public void setCompanyId(long companyId);
 

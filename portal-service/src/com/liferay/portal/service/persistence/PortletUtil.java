@@ -194,7 +194,7 @@ public class PortletUtil {
 	/**
 	* Finds all the portlets where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the matching portlets
 	* @throws SystemException if a system exception occurred
 	*/
@@ -211,7 +211,7 @@ public class PortletUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of portlets to return
 	* @param end the upper bound of the range of portlets to return (not inclusive)
 	* @return the range of matching portlets
@@ -230,7 +230,7 @@ public class PortletUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of portlets to return
 	* @param end the upper bound of the range of portlets to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -252,7 +252,7 @@ public class PortletUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching portlet
 	* @throws com.liferay.portal.NoSuchPortletException if a matching portlet could not be found
@@ -274,7 +274,7 @@ public class PortletUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching portlet
 	* @throws com.liferay.portal.NoSuchPortletException if a matching portlet could not be found
@@ -297,7 +297,7 @@ public class PortletUtil {
 	* </p>
 	*
 	* @param id the primary key of the current portlet
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next portlet
 	* @throws com.liferay.portal.NoSuchPortletException if a portlet with the primary key could not be found
@@ -315,8 +315,8 @@ public class PortletUtil {
 	/**
 	* Finds the portlet where companyId = &#63; and portletId = &#63; or throws a {@link com.liferay.portal.NoSuchPortletException} if it could not be found.
 	*
-	* @param companyId the company id to search with
-	* @param portletId the portlet id to search with
+	* @param companyId the company ID to search with
+	* @param portletId the portlet ID to search with
 	* @return the matching portlet
 	* @throws com.liferay.portal.NoSuchPortletException if a matching portlet could not be found
 	* @throws SystemException if a system exception occurred
@@ -331,8 +331,8 @@ public class PortletUtil {
 	/**
 	* Finds the portlet where companyId = &#63; and portletId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param companyId the company id to search with
-	* @param portletId the portlet id to search with
+	* @param companyId the company ID to search with
+	* @param portletId the portlet ID to search with
 	* @return the matching portlet, or <code>null</code> if a matching portlet could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -345,8 +345,8 @@ public class PortletUtil {
 	/**
 	* Finds the portlet where companyId = &#63; and portletId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param companyId the company id to search with
-	* @param portletId the portlet id to search with
+	* @param companyId the company ID to search with
+	* @param portletId the portlet ID to search with
 	* @return the matching portlet, or <code>null</code> if a matching portlet could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -409,7 +409,7 @@ public class PortletUtil {
 	/**
 	* Removes all the portlets where companyId = &#63; from the database.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByCompanyId(long companyId)
@@ -420,8 +420,8 @@ public class PortletUtil {
 	/**
 	* Removes the portlet where companyId = &#63; and portletId = &#63; from the database.
 	*
-	* @param companyId the company id to search with
-	* @param portletId the portlet id to search with
+	* @param companyId the company ID to search with
+	* @param portletId the portlet ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByC_P(long companyId, java.lang.String portletId)
@@ -443,7 +443,7 @@ public class PortletUtil {
 	/**
 	* Counts all the portlets where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the number of matching portlets
 	* @throws SystemException if a system exception occurred
 	*/
@@ -455,8 +455,8 @@ public class PortletUtil {
 	/**
 	* Counts all the portlets where companyId = &#63; and portletId = &#63;.
 	*
-	* @param companyId the company id to search with
-	* @param portletId the portlet id to search with
+	* @param companyId the company ID to search with
+	* @param portletId the portlet ID to search with
 	* @return the number of matching portlets
 	* @throws SystemException if a system exception occurred
 	*/

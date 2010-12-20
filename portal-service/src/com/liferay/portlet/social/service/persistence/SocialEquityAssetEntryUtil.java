@@ -206,7 +206,7 @@ public class SocialEquityAssetEntryUtil {
 	/**
 	* Finds the social equity asset entry where assetEntryId = &#63; or throws a {@link com.liferay.portlet.social.NoSuchEquityAssetEntryException} if it could not be found.
 	*
-	* @param assetEntryId the asset entry id to search with
+	* @param assetEntryId the asset entry ID to search with
 	* @return the matching social equity asset entry
 	* @throws com.liferay.portlet.social.NoSuchEquityAssetEntryException if a matching social equity asset entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -221,7 +221,7 @@ public class SocialEquityAssetEntryUtil {
 	/**
 	* Finds the social equity asset entry where assetEntryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param assetEntryId the asset entry id to search with
+	* @param assetEntryId the asset entry ID to search with
 	* @return the matching social equity asset entry, or <code>null</code> if a matching social equity asset entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -234,7 +234,7 @@ public class SocialEquityAssetEntryUtil {
 	/**
 	* Finds the social equity asset entry where assetEntryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param assetEntryId the asset entry id to search with
+	* @param assetEntryId the asset entry ID to search with
 	* @return the matching social equity asset entry, or <code>null</code> if a matching social equity asset entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -297,7 +297,7 @@ public class SocialEquityAssetEntryUtil {
 	/**
 	* Removes the social equity asset entry where assetEntryId = &#63; from the database.
 	*
-	* @param assetEntryId the asset entry id to search with
+	* @param assetEntryId the asset entry ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByAssetEntryId(long assetEntryId)
@@ -319,7 +319,7 @@ public class SocialEquityAssetEntryUtil {
 	/**
 	* Counts all the social equity asset entries where assetEntryId = &#63;.
 	*
-	* @param assetEntryId the asset entry id to search with
+	* @param assetEntryId the asset entry ID to search with
 	* @return the number of matching social equity asset entries
 	* @throws SystemException if a system exception occurred
 	*/

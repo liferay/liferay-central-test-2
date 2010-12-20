@@ -56,45 +56,45 @@ public interface PluginSettingModel extends BaseModel<PluginSetting> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the plugin setting id of this plugin setting.
+	 * Gets the plugin setting ID of this plugin setting.
 	 *
-	 * @return the plugin setting id of this plugin setting
+	 * @return the plugin setting ID of this plugin setting
 	 */
 	public long getPluginSettingId();
 
 	/**
-	 * Sets the plugin setting id of this plugin setting.
+	 * Sets the plugin setting ID of this plugin setting.
 	 *
-	 * @param pluginSettingId the plugin setting id of this plugin setting
+	 * @param pluginSettingId the plugin setting ID of this plugin setting
 	 */
 	public void setPluginSettingId(long pluginSettingId);
 
 	/**
-	 * Gets the company id of this plugin setting.
+	 * Gets the company ID of this plugin setting.
 	 *
-	 * @return the company id of this plugin setting
+	 * @return the company ID of this plugin setting
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this plugin setting.
+	 * Sets the company ID of this plugin setting.
 	 *
-	 * @param companyId the company id of this plugin setting
+	 * @param companyId the company ID of this plugin setting
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the plugin id of this plugin setting.
+	 * Gets the plugin ID of this plugin setting.
 	 *
-	 * @return the plugin id of this plugin setting
+	 * @return the plugin ID of this plugin setting
 	 */
 	@AutoEscape
 	public String getPluginId();
 
 	/**
-	 * Sets the plugin id of this plugin setting.
+	 * Sets the plugin ID of this plugin setting.
 	 *
-	 * @param pluginId the plugin id of this plugin setting
+	 * @param pluginId the plugin ID of this plugin setting
 	 */
 	public void setPluginId(String pluginId);
 

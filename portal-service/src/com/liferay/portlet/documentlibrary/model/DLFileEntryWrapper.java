@@ -65,72 +65,72 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the file entry id of this d l file entry.
+	* Gets the file entry ID of this d l file entry.
 	*
-	* @return the file entry id of this d l file entry
+	* @return the file entry ID of this d l file entry
 	*/
 	public long getFileEntryId() {
 		return _dlFileEntry.getFileEntryId();
 	}
 
 	/**
-	* Sets the file entry id of this d l file entry.
+	* Sets the file entry ID of this d l file entry.
 	*
-	* @param fileEntryId the file entry id of this d l file entry
+	* @param fileEntryId the file entry ID of this d l file entry
 	*/
 	public void setFileEntryId(long fileEntryId) {
 		_dlFileEntry.setFileEntryId(fileEntryId);
 	}
 
 	/**
-	* Gets the group id of this d l file entry.
+	* Gets the group ID of this d l file entry.
 	*
-	* @return the group id of this d l file entry
+	* @return the group ID of this d l file entry
 	*/
 	public long getGroupId() {
 		return _dlFileEntry.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this d l file entry.
+	* Sets the group ID of this d l file entry.
 	*
-	* @param groupId the group id of this d l file entry
+	* @param groupId the group ID of this d l file entry
 	*/
 	public void setGroupId(long groupId) {
 		_dlFileEntry.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this d l file entry.
+	* Gets the company ID of this d l file entry.
 	*
-	* @return the company id of this d l file entry
+	* @return the company ID of this d l file entry
 	*/
 	public long getCompanyId() {
 		return _dlFileEntry.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this d l file entry.
+	* Sets the company ID of this d l file entry.
 	*
-	* @param companyId the company id of this d l file entry
+	* @param companyId the company ID of this d l file entry
 	*/
 	public void setCompanyId(long companyId) {
 		_dlFileEntry.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this d l file entry.
+	* Gets the user ID of this d l file entry.
 	*
-	* @return the user id of this d l file entry
+	* @return the user ID of this d l file entry
 	*/
 	public long getUserId() {
 		return _dlFileEntry.getUserId();
 	}
 
 	/**
-	* Sets the user id of this d l file entry.
+	* Sets the user ID of this d l file entry.
 	*
-	* @param userId the user id of this d l file entry
+	* @param userId the user ID of this d l file entry
 	*/
 	public void setUserId(long userId) {
 		_dlFileEntry.setUserId(userId);
@@ -175,18 +175,18 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the version user id of this d l file entry.
+	* Gets the version user ID of this d l file entry.
 	*
-	* @return the version user id of this d l file entry
+	* @return the version user ID of this d l file entry
 	*/
 	public long getVersionUserId() {
 		return _dlFileEntry.getVersionUserId();
 	}
 
 	/**
-	* Sets the version user id of this d l file entry.
+	* Sets the version user ID of this d l file entry.
 	*
-	* @param versionUserId the version user id of this d l file entry
+	* @param versionUserId the version user ID of this d l file entry
 	*/
 	public void setVersionUserId(long versionUserId) {
 		_dlFileEntry.setVersionUserId(versionUserId);
@@ -267,18 +267,18 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Gets the folder id of this d l file entry.
+	* Gets the folder ID of this d l file entry.
 	*
-	* @return the folder id of this d l file entry
+	* @return the folder ID of this d l file entry
 	*/
 	public long getFolderId() {
 		return _dlFileEntry.getFolderId();
 	}
 
 	/**
-	* Sets the folder id of this d l file entry.
+	* Sets the folder ID of this d l file entry.
 	*
-	* @param folderId the folder id of this d l file entry
+	* @param folderId the folder ID of this d l file entry
 	*/
 	public void setFolderId(long folderId) {
 		_dlFileEntry.setFolderId(folderId);

@@ -48,72 +48,72 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 	}
 
 	/**
-	* Gets the workflow instance link id of this workflow instance link.
+	* Gets the workflow instance link ID of this workflow instance link.
 	*
-	* @return the workflow instance link id of this workflow instance link
+	* @return the workflow instance link ID of this workflow instance link
 	*/
 	public long getWorkflowInstanceLinkId() {
 		return _workflowInstanceLink.getWorkflowInstanceLinkId();
 	}
 
 	/**
-	* Sets the workflow instance link id of this workflow instance link.
+	* Sets the workflow instance link ID of this workflow instance link.
 	*
-	* @param workflowInstanceLinkId the workflow instance link id of this workflow instance link
+	* @param workflowInstanceLinkId the workflow instance link ID of this workflow instance link
 	*/
 	public void setWorkflowInstanceLinkId(long workflowInstanceLinkId) {
 		_workflowInstanceLink.setWorkflowInstanceLinkId(workflowInstanceLinkId);
 	}
 
 	/**
-	* Gets the group id of this workflow instance link.
+	* Gets the group ID of this workflow instance link.
 	*
-	* @return the group id of this workflow instance link
+	* @return the group ID of this workflow instance link
 	*/
 	public long getGroupId() {
 		return _workflowInstanceLink.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this workflow instance link.
+	* Sets the group ID of this workflow instance link.
 	*
-	* @param groupId the group id of this workflow instance link
+	* @param groupId the group ID of this workflow instance link
 	*/
 	public void setGroupId(long groupId) {
 		_workflowInstanceLink.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this workflow instance link.
+	* Gets the company ID of this workflow instance link.
 	*
-	* @return the company id of this workflow instance link
+	* @return the company ID of this workflow instance link
 	*/
 	public long getCompanyId() {
 		return _workflowInstanceLink.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this workflow instance link.
+	* Sets the company ID of this workflow instance link.
 	*
-	* @param companyId the company id of this workflow instance link
+	* @param companyId the company ID of this workflow instance link
 	*/
 	public void setCompanyId(long companyId) {
 		_workflowInstanceLink.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this workflow instance link.
+	* Gets the user ID of this workflow instance link.
 	*
-	* @return the user id of this workflow instance link
+	* @return the user ID of this workflow instance link
 	*/
 	public long getUserId() {
 		return _workflowInstanceLink.getUserId();
 	}
 
 	/**
-	* Sets the user id of this workflow instance link.
+	* Sets the user ID of this workflow instance link.
 	*
-	* @param userId the user id of this workflow instance link
+	* @param userId the user ID of this workflow instance link
 	*/
 	public void setUserId(long userId) {
 		_workflowInstanceLink.setUserId(userId);
@@ -203,18 +203,18 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 	}
 
 	/**
-	* Gets the class name id of this workflow instance link.
+	* Gets the class name ID of this workflow instance link.
 	*
-	* @return the class name id of this workflow instance link
+	* @return the class name ID of this workflow instance link
 	*/
 	public long getClassNameId() {
 		return _workflowInstanceLink.getClassNameId();
 	}
 
 	/**
-	* Sets the class name id of this workflow instance link.
+	* Sets the class name ID of this workflow instance link.
 	*
-	* @param classNameId the class name id of this workflow instance link
+	* @param classNameId the class name ID of this workflow instance link
 	*/
 	public void setClassNameId(long classNameId) {
 		_workflowInstanceLink.setClassNameId(classNameId);
@@ -239,18 +239,18 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 	}
 
 	/**
-	* Gets the workflow instance id of this workflow instance link.
+	* Gets the workflow instance ID of this workflow instance link.
 	*
-	* @return the workflow instance id of this workflow instance link
+	* @return the workflow instance ID of this workflow instance link
 	*/
 	public long getWorkflowInstanceId() {
 		return _workflowInstanceLink.getWorkflowInstanceId();
 	}
 
 	/**
-	* Sets the workflow instance id of this workflow instance link.
+	* Sets the workflow instance ID of this workflow instance link.
 	*
-	* @param workflowInstanceId the workflow instance id of this workflow instance link
+	* @param workflowInstanceId the workflow instance ID of this workflow instance link
 	*/
 	public void setWorkflowInstanceId(long workflowInstanceId) {
 		_workflowInstanceLink.setWorkflowInstanceId(workflowInstanceId);

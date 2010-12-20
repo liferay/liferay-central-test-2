@@ -202,7 +202,7 @@ public class ShoppingOrderUtil {
 	/**
 	* Finds all the shopping orders where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching shopping orders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -219,7 +219,7 @@ public class ShoppingOrderUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of shopping orders to return
 	* @param end the upper bound of the range of shopping orders to return (not inclusive)
 	* @return the range of matching shopping orders
@@ -238,7 +238,7 @@ public class ShoppingOrderUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of shopping orders to return
 	* @param end the upper bound of the range of shopping orders to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -260,7 +260,7 @@ public class ShoppingOrderUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching shopping order
 	* @throws com.liferay.portlet.shopping.NoSuchOrderException if a matching shopping order could not be found
@@ -281,7 +281,7 @@ public class ShoppingOrderUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching shopping order
 	* @throws com.liferay.portlet.shopping.NoSuchOrderException if a matching shopping order could not be found
@@ -303,7 +303,7 @@ public class ShoppingOrderUtil {
 	* </p>
 	*
 	* @param orderId the primary key of the current shopping order
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next shopping order
 	* @throws com.liferay.portlet.shopping.NoSuchOrderException if a shopping order with the primary key could not be found
@@ -322,7 +322,7 @@ public class ShoppingOrderUtil {
 	/**
 	* Filters by the user's permissions and finds all the shopping orders where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the matching shopping orders that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -339,7 +339,7 @@ public class ShoppingOrderUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of shopping orders to return
 	* @param end the upper bound of the range of shopping orders to return (not inclusive)
 	* @return the range of matching shopping orders that the user has permission to view
@@ -358,7 +358,7 @@ public class ShoppingOrderUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of shopping orders to return
 	* @param end the upper bound of the range of shopping orders to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -417,7 +417,7 @@ public class ShoppingOrderUtil {
 	/**
 	* Finds the shopping order where ppTxnId = &#63; or throws a {@link com.liferay.portlet.shopping.NoSuchOrderException} if it could not be found.
 	*
-	* @param ppTxnId the pp txn id to search with
+	* @param ppTxnId the pp txn ID to search with
 	* @return the matching shopping order
 	* @throws com.liferay.portlet.shopping.NoSuchOrderException if a matching shopping order could not be found
 	* @throws SystemException if a system exception occurred
@@ -432,7 +432,7 @@ public class ShoppingOrderUtil {
 	/**
 	* Finds the shopping order where ppTxnId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param ppTxnId the pp txn id to search with
+	* @param ppTxnId the pp txn ID to search with
 	* @return the matching shopping order, or <code>null</code> if a matching shopping order could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -445,7 +445,7 @@ public class ShoppingOrderUtil {
 	/**
 	* Finds the shopping order where ppTxnId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param ppTxnId the pp txn id to search with
+	* @param ppTxnId the pp txn ID to search with
 	* @return the matching shopping order, or <code>null</code> if a matching shopping order could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -458,8 +458,8 @@ public class ShoppingOrderUtil {
 	/**
 	* Finds all the shopping orders where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param ppPaymentStatus the pp payment status to search with
 	* @return the matching shopping orders
 	* @throws SystemException if a system exception occurred
@@ -477,8 +477,8 @@ public class ShoppingOrderUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param ppPaymentStatus the pp payment status to search with
 	* @param start the lower bound of the range of shopping orders to return
 	* @param end the upper bound of the range of shopping orders to return (not inclusive)
@@ -499,8 +499,8 @@ public class ShoppingOrderUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param ppPaymentStatus the pp payment status to search with
 	* @param start the lower bound of the range of shopping orders to return
 	* @param end the upper bound of the range of shopping orders to return (not inclusive)
@@ -525,8 +525,8 @@ public class ShoppingOrderUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param ppPaymentStatus the pp payment status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching shopping order
@@ -550,8 +550,8 @@ public class ShoppingOrderUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param ppPaymentStatus the pp payment status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching shopping order
@@ -576,8 +576,8 @@ public class ShoppingOrderUtil {
 	* </p>
 	*
 	* @param orderId the primary key of the current shopping order
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param ppPaymentStatus the pp payment status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next shopping order
@@ -598,8 +598,8 @@ public class ShoppingOrderUtil {
 	/**
 	* Filters by the user's permissions and finds all the shopping orders where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param ppPaymentStatus the pp payment status to search with
 	* @return the matching shopping orders that the user has permission to view
 	* @throws SystemException if a system exception occurred
@@ -618,8 +618,8 @@ public class ShoppingOrderUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param ppPaymentStatus the pp payment status to search with
 	* @param start the lower bound of the range of shopping orders to return
 	* @param end the upper bound of the range of shopping orders to return (not inclusive)
@@ -641,8 +641,8 @@ public class ShoppingOrderUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param ppPaymentStatus the pp payment status to search with
 	* @param start the lower bound of the range of shopping orders to return
 	* @param end the upper bound of the range of shopping orders to return (not inclusive)
@@ -712,7 +712,7 @@ public class ShoppingOrderUtil {
 	/**
 	* Removes all the shopping orders where groupId = &#63; from the database.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByGroupId(long groupId)
@@ -735,7 +735,7 @@ public class ShoppingOrderUtil {
 	/**
 	* Removes the shopping order where ppTxnId = &#63; from the database.
 	*
-	* @param ppTxnId the pp txn id to search with
+	* @param ppTxnId the pp txn ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByPPTxnId(java.lang.String ppTxnId)
@@ -747,8 +747,8 @@ public class ShoppingOrderUtil {
 	/**
 	* Removes all the shopping orders where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63; from the database.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param ppPaymentStatus the pp payment status to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -771,7 +771,7 @@ public class ShoppingOrderUtil {
 	/**
 	* Counts all the shopping orders where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching shopping orders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -783,7 +783,7 @@ public class ShoppingOrderUtil {
 	/**
 	* Filters by the user's permissions and counts all the shopping orders where groupId = &#63;.
 	*
-	* @param groupId the group id to search with
+	* @param groupId the group ID to search with
 	* @return the number of matching shopping orders that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -807,7 +807,7 @@ public class ShoppingOrderUtil {
 	/**
 	* Counts all the shopping orders where ppTxnId = &#63;.
 	*
-	* @param ppTxnId the pp txn id to search with
+	* @param ppTxnId the pp txn ID to search with
 	* @return the number of matching shopping orders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -819,8 +819,8 @@ public class ShoppingOrderUtil {
 	/**
 	* Counts all the shopping orders where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param ppPaymentStatus the pp payment status to search with
 	* @return the number of matching shopping orders
 	* @throws SystemException if a system exception occurred
@@ -834,8 +834,8 @@ public class ShoppingOrderUtil {
 	/**
 	* Filters by the user's permissions and counts all the shopping orders where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
 	*
-	* @param groupId the group id to search with
-	* @param userId the user id to search with
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
 	* @param ppPaymentStatus the pp payment status to search with
 	* @return the number of matching shopping orders that the user has permission to view
 	* @throws SystemException if a system exception occurred

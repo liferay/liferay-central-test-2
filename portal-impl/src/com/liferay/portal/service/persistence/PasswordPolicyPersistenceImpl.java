@@ -495,7 +495,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 	/**
 	 * Finds the password policy where companyId = &#63; and defaultPolicy = &#63; or throws a {@link com.liferay.portal.NoSuchPasswordPolicyException} if it could not be found.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param defaultPolicy the default policy to search with
 	 * @return the matching password policy
 	 * @throws com.liferay.portal.NoSuchPasswordPolicyException if a matching password policy could not be found
@@ -531,7 +531,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 	/**
 	 * Finds the password policy where companyId = &#63; and defaultPolicy = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param defaultPolicy the default policy to search with
 	 * @return the matching password policy, or <code>null</code> if a matching password policy could not be found
 	 * @throws SystemException if a system exception occurred
@@ -544,7 +544,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 	/**
 	 * Finds the password policy where companyId = &#63; and defaultPolicy = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param defaultPolicy the default policy to search with
 	 * @return the matching password policy, or <code>null</code> if a matching password policy could not be found
 	 * @throws SystemException if a system exception occurred
@@ -633,7 +633,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 	/**
 	 * Finds the password policy where companyId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchPasswordPolicyException} if it could not be found.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param name the name to search with
 	 * @return the matching password policy
 	 * @throws com.liferay.portal.NoSuchPasswordPolicyException if a matching password policy could not be found
@@ -669,7 +669,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 	/**
 	 * Finds the password policy where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param name the name to search with
 	 * @return the matching password policy, or <code>null</code> if a matching password policy could not be found
 	 * @throws SystemException if a system exception occurred
@@ -682,7 +682,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 	/**
 	 * Finds the password policy where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param name the name to search with
 	 * @return the matching password policy, or <code>null</code> if a matching password policy could not be found
 	 * @throws SystemException if a system exception occurred
@@ -893,7 +893,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 	/**
 	 * Removes the password policy where companyId = &#63; and defaultPolicy = &#63; from the database.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param defaultPolicy the default policy to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -907,7 +907,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 	/**
 	 * Removes the password policy where companyId = &#63; and name = &#63; from the database.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param name the name to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -932,7 +932,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 	/**
 	 * Counts all the password policies where companyId = &#63; and defaultPolicy = &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param defaultPolicy the default policy to search with
 	 * @return the number of matching password policies
 	 * @throws SystemException if a system exception occurred
@@ -991,7 +991,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 	/**
 	 * Counts all the password policies where companyId = &#63; and name = &#63;.
 	 *
-	 * @param companyId the company id to search with
+	 * @param companyId the company ID to search with
 	 * @param name the name to search with
 	 * @return the number of matching password policies
 	 * @throws SystemException if a system exception occurred

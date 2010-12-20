@@ -60,58 +60,58 @@ public interface ShoppingCouponModel extends BaseModel<ShoppingCoupon> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the coupon id of this shopping coupon.
+	 * Gets the coupon ID of this shopping coupon.
 	 *
-	 * @return the coupon id of this shopping coupon
+	 * @return the coupon ID of this shopping coupon
 	 */
 	public long getCouponId();
 
 	/**
-	 * Sets the coupon id of this shopping coupon.
+	 * Sets the coupon ID of this shopping coupon.
 	 *
-	 * @param couponId the coupon id of this shopping coupon
+	 * @param couponId the coupon ID of this shopping coupon
 	 */
 	public void setCouponId(long couponId);
 
 	/**
-	 * Gets the group id of this shopping coupon.
+	 * Gets the group ID of this shopping coupon.
 	 *
-	 * @return the group id of this shopping coupon
+	 * @return the group ID of this shopping coupon
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this shopping coupon.
+	 * Sets the group ID of this shopping coupon.
 	 *
-	 * @param groupId the group id of this shopping coupon
+	 * @param groupId the group ID of this shopping coupon
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this shopping coupon.
+	 * Gets the company ID of this shopping coupon.
 	 *
-	 * @return the company id of this shopping coupon
+	 * @return the company ID of this shopping coupon
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this shopping coupon.
+	 * Sets the company ID of this shopping coupon.
 	 *
-	 * @param companyId the company id of this shopping coupon
+	 * @param companyId the company ID of this shopping coupon
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this shopping coupon.
+	 * Gets the user ID of this shopping coupon.
 	 *
-	 * @return the user id of this shopping coupon
+	 * @return the user ID of this shopping coupon
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this shopping coupon.
+	 * Sets the user ID of this shopping coupon.
 	 *
-	 * @param userId the user id of this shopping coupon
+	 * @param userId the user ID of this shopping coupon
 	 */
 	public void setUserId(long userId);
 

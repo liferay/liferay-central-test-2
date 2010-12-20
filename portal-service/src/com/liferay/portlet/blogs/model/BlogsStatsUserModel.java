@@ -59,16 +59,16 @@ public interface BlogsStatsUserModel extends BaseModel<BlogsStatsUser> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the stats user id of this blogs stats user.
+	 * Gets the stats user ID of this blogs stats user.
 	 *
-	 * @return the stats user id of this blogs stats user
+	 * @return the stats user ID of this blogs stats user
 	 */
 	public long getStatsUserId();
 
 	/**
-	 * Sets the stats user id of this blogs stats user.
+	 * Sets the stats user ID of this blogs stats user.
 	 *
-	 * @param statsUserId the stats user id of this blogs stats user
+	 * @param statsUserId the stats user ID of this blogs stats user
 	 */
 	public void setStatsUserId(long statsUserId);
 
@@ -88,44 +88,44 @@ public interface BlogsStatsUserModel extends BaseModel<BlogsStatsUser> {
 	public void setStatsUserUuid(String statsUserUuid);
 
 	/**
-	 * Gets the group id of this blogs stats user.
+	 * Gets the group ID of this blogs stats user.
 	 *
-	 * @return the group id of this blogs stats user
+	 * @return the group ID of this blogs stats user
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this blogs stats user.
+	 * Sets the group ID of this blogs stats user.
 	 *
-	 * @param groupId the group id of this blogs stats user
+	 * @param groupId the group ID of this blogs stats user
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this blogs stats user.
+	 * Gets the company ID of this blogs stats user.
 	 *
-	 * @return the company id of this blogs stats user
+	 * @return the company ID of this blogs stats user
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this blogs stats user.
+	 * Sets the company ID of this blogs stats user.
 	 *
-	 * @param companyId the company id of this blogs stats user
+	 * @param companyId the company ID of this blogs stats user
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this blogs stats user.
+	 * Gets the user ID of this blogs stats user.
 	 *
-	 * @return the user id of this blogs stats user
+	 * @return the user ID of this blogs stats user
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this blogs stats user.
+	 * Sets the user ID of this blogs stats user.
 	 *
-	 * @param userId the user id of this blogs stats user
+	 * @param userId the user ID of this blogs stats user
 	 */
 	public void setUserId(long userId);
 

@@ -47,54 +47,54 @@ public class SocialEquitySettingWrapper implements SocialEquitySetting {
 	}
 
 	/**
-	* Gets the equity setting id of this social equity setting.
+	* Gets the equity setting ID of this social equity setting.
 	*
-	* @return the equity setting id of this social equity setting
+	* @return the equity setting ID of this social equity setting
 	*/
 	public long getEquitySettingId() {
 		return _socialEquitySetting.getEquitySettingId();
 	}
 
 	/**
-	* Sets the equity setting id of this social equity setting.
+	* Sets the equity setting ID of this social equity setting.
 	*
-	* @param equitySettingId the equity setting id of this social equity setting
+	* @param equitySettingId the equity setting ID of this social equity setting
 	*/
 	public void setEquitySettingId(long equitySettingId) {
 		_socialEquitySetting.setEquitySettingId(equitySettingId);
 	}
 
 	/**
-	* Gets the group id of this social equity setting.
+	* Gets the group ID of this social equity setting.
 	*
-	* @return the group id of this social equity setting
+	* @return the group ID of this social equity setting
 	*/
 	public long getGroupId() {
 		return _socialEquitySetting.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this social equity setting.
+	* Sets the group ID of this social equity setting.
 	*
-	* @param groupId the group id of this social equity setting
+	* @param groupId the group ID of this social equity setting
 	*/
 	public void setGroupId(long groupId) {
 		_socialEquitySetting.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this social equity setting.
+	* Gets the company ID of this social equity setting.
 	*
-	* @return the company id of this social equity setting
+	* @return the company ID of this social equity setting
 	*/
 	public long getCompanyId() {
 		return _socialEquitySetting.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this social equity setting.
+	* Sets the company ID of this social equity setting.
 	*
-	* @param companyId the company id of this social equity setting
+	* @param companyId the company ID of this social equity setting
 	*/
 	public void setCompanyId(long companyId) {
 		_socialEquitySetting.setCompanyId(companyId);
@@ -110,36 +110,36 @@ public class SocialEquitySettingWrapper implements SocialEquitySetting {
 	}
 
 	/**
-	* Gets the class name id of this social equity setting.
+	* Gets the class name ID of this social equity setting.
 	*
-	* @return the class name id of this social equity setting
+	* @return the class name ID of this social equity setting
 	*/
 	public long getClassNameId() {
 		return _socialEquitySetting.getClassNameId();
 	}
 
 	/**
-	* Sets the class name id of this social equity setting.
+	* Sets the class name ID of this social equity setting.
 	*
-	* @param classNameId the class name id of this social equity setting
+	* @param classNameId the class name ID of this social equity setting
 	*/
 	public void setClassNameId(long classNameId) {
 		_socialEquitySetting.setClassNameId(classNameId);
 	}
 
 	/**
-	* Gets the action id of this social equity setting.
+	* Gets the action ID of this social equity setting.
 	*
-	* @return the action id of this social equity setting
+	* @return the action ID of this social equity setting
 	*/
 	public java.lang.String getActionId() {
 		return _socialEquitySetting.getActionId();
 	}
 
 	/**
-	* Sets the action id of this social equity setting.
+	* Sets the action ID of this social equity setting.
 	*
-	* @param actionId the action id of this social equity setting
+	* @param actionId the action ID of this social equity setting
 	*/
 	public void setActionId(java.lang.String actionId) {
 		_socialEquitySetting.setActionId(actionId);

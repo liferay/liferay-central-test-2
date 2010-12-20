@@ -40,7 +40,7 @@ public interface PluginSetting extends PluginSettingModel {
 	public void addRole(java.lang.String role);
 
 	/**
-	* Sets a string of ordered comma delimited plugin ids.
+	* Sets a string of ordered comma delimited plugin IDs.
 	*/
 	public void setRoles(java.lang.String roles);
 

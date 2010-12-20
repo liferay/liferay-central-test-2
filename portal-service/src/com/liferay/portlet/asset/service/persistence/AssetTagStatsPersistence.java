@@ -105,7 +105,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	/**
 	* Finds all the asset tag statses where tagId = &#63;.
 	*
-	* @param tagId the tag id to search with
+	* @param tagId the tag ID to search with
 	* @return the matching asset tag statses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -119,7 +119,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tagId the tag id to search with
+	* @param tagId the tag ID to search with
 	* @param start the lower bound of the range of asset tag statses to return
 	* @param end the upper bound of the range of asset tag statses to return (not inclusive)
 	* @return the range of matching asset tag statses
@@ -136,7 +136,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tagId the tag id to search with
+	* @param tagId the tag ID to search with
 	* @param start the lower bound of the range of asset tag statses to return
 	* @param end the upper bound of the range of asset tag statses to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -155,7 +155,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tagId the tag id to search with
+	* @param tagId the tag ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching asset tag stats
 	* @throws com.liferay.portlet.asset.NoSuchTagStatsException if a matching asset tag stats could not be found
@@ -174,7 +174,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tagId the tag id to search with
+	* @param tagId the tag ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching asset tag stats
 	* @throws com.liferay.portlet.asset.NoSuchTagStatsException if a matching asset tag stats could not be found
@@ -194,7 +194,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	* </p>
 	*
 	* @param tagStatsId the primary key of the current asset tag stats
-	* @param tagId the tag id to search with
+	* @param tagId the tag ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next asset tag stats
 	* @throws com.liferay.portlet.asset.NoSuchTagStatsException if a asset tag stats with the primary key could not be found
@@ -209,7 +209,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	/**
 	* Finds all the asset tag statses where classNameId = &#63;.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @return the matching asset tag statses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -224,7 +224,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param start the lower bound of the range of asset tag statses to return
 	* @param end the upper bound of the range of asset tag statses to return (not inclusive)
 	* @return the range of matching asset tag statses
@@ -241,7 +241,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param start the lower bound of the range of asset tag statses to return
 	* @param end the upper bound of the range of asset tag statses to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -260,7 +260,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching asset tag stats
 	* @throws com.liferay.portlet.asset.NoSuchTagStatsException if a matching asset tag stats could not be found
@@ -279,7 +279,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching asset tag stats
 	* @throws com.liferay.portlet.asset.NoSuchTagStatsException if a matching asset tag stats could not be found
@@ -299,7 +299,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	* </p>
 	*
 	* @param tagStatsId the primary key of the current asset tag stats
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next asset tag stats
 	* @throws com.liferay.portlet.asset.NoSuchTagStatsException if a asset tag stats with the primary key could not be found
@@ -314,8 +314,8 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	/**
 	* Finds the asset tag stats where tagId = &#63; and classNameId = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchTagStatsException} if it could not be found.
 	*
-	* @param tagId the tag id to search with
-	* @param classNameId the class name id to search with
+	* @param tagId the tag ID to search with
+	* @param classNameId the class name ID to search with
 	* @return the matching asset tag stats
 	* @throws com.liferay.portlet.asset.NoSuchTagStatsException if a matching asset tag stats could not be found
 	* @throws SystemException if a system exception occurred
@@ -328,8 +328,8 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	/**
 	* Finds the asset tag stats where tagId = &#63; and classNameId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param tagId the tag id to search with
-	* @param classNameId the class name id to search with
+	* @param tagId the tag ID to search with
+	* @param classNameId the class name ID to search with
 	* @return the matching asset tag stats, or <code>null</code> if a matching asset tag stats could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -340,8 +340,8 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	/**
 	* Finds the asset tag stats where tagId = &#63; and classNameId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param tagId the tag id to search with
-	* @param classNameId the class name id to search with
+	* @param tagId the tag ID to search with
+	* @param classNameId the class name ID to search with
 	* @return the matching asset tag stats, or <code>null</code> if a matching asset tag stats could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -395,7 +395,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	/**
 	* Removes all the asset tag statses where tagId = &#63; from the database.
 	*
-	* @param tagId the tag id to search with
+	* @param tagId the tag ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByTagId(long tagId)
@@ -404,7 +404,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	/**
 	* Removes all the asset tag statses where classNameId = &#63; from the database.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByClassNameId(long classNameId)
@@ -413,8 +413,8 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	/**
 	* Removes the asset tag stats where tagId = &#63; and classNameId = &#63; from the database.
 	*
-	* @param tagId the tag id to search with
-	* @param classNameId the class name id to search with
+	* @param tagId the tag ID to search with
+	* @param classNameId the class name ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByT_C(long tagId, long classNameId)
@@ -432,7 +432,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	/**
 	* Counts all the asset tag statses where tagId = &#63;.
 	*
-	* @param tagId the tag id to search with
+	* @param tagId the tag ID to search with
 	* @return the number of matching asset tag statses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -442,7 +442,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	/**
 	* Counts all the asset tag statses where classNameId = &#63;.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @return the number of matching asset tag statses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -452,8 +452,8 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	/**
 	* Counts all the asset tag statses where tagId = &#63; and classNameId = &#63;.
 	*
-	* @param tagId the tag id to search with
-	* @param classNameId the class name id to search with
+	* @param tagId the tag ID to search with
+	* @param classNameId the class name ID to search with
 	* @return the number of matching asset tag statses
 	* @throws SystemException if a system exception occurred
 	*/

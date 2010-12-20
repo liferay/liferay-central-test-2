@@ -65,18 +65,18 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the user id of this user.
+	* Gets the user ID of this user.
 	*
-	* @return the user id of this user
+	* @return the user ID of this user
 	*/
 	public long getUserId() {
 		return _user.getUserId();
 	}
 
 	/**
-	* Sets the user id of this user.
+	* Sets the user ID of this user.
 	*
-	* @param userId the user id of this user
+	* @param userId the user ID of this user
 	*/
 	public void setUserId(long userId) {
 		_user.setUserId(userId);
@@ -103,18 +103,18 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the company id of this user.
+	* Gets the company ID of this user.
 	*
-	* @return the company id of this user
+	* @return the company ID of this user
 	*/
 	public long getCompanyId() {
 		return _user.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this user.
+	* Sets the company ID of this user.
 	*
-	* @param companyId the company id of this user
+	* @param companyId the company ID of this user
 	*/
 	public void setCompanyId(long companyId) {
 		_user.setCompanyId(companyId);
@@ -184,18 +184,18 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the contact id of this user.
+	* Gets the contact ID of this user.
 	*
-	* @return the contact id of this user
+	* @return the contact ID of this user
 	*/
 	public long getContactId() {
 		return _user.getContactId();
 	}
 
 	/**
-	* Sets the contact id of this user.
+	* Sets the contact ID of this user.
 	*
-	* @param contactId the contact id of this user
+	* @param contactId the contact ID of this user
 	*/
 	public void setContactId(long contactId) {
 		_user.setContactId(contactId);
@@ -400,90 +400,90 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the facebook id of this user.
+	* Gets the facebook ID of this user.
 	*
-	* @return the facebook id of this user
+	* @return the facebook ID of this user
 	*/
 	public long getFacebookId() {
 		return _user.getFacebookId();
 	}
 
 	/**
-	* Sets the facebook id of this user.
+	* Sets the facebook ID of this user.
 	*
-	* @param facebookId the facebook id of this user
+	* @param facebookId the facebook ID of this user
 	*/
 	public void setFacebookId(long facebookId) {
 		_user.setFacebookId(facebookId);
 	}
 
 	/**
-	* Gets the open id of this user.
+	* Gets the open ID of this user.
 	*
-	* @return the open id of this user
+	* @return the open ID of this user
 	*/
 	public java.lang.String getOpenId() {
 		return _user.getOpenId();
 	}
 
 	/**
-	* Sets the open id of this user.
+	* Sets the open ID of this user.
 	*
-	* @param openId the open id of this user
+	* @param openId the open ID of this user
 	*/
 	public void setOpenId(java.lang.String openId) {
 		_user.setOpenId(openId);
 	}
 
 	/**
-	* Gets the portrait id of this user.
+	* Gets the portrait ID of this user.
 	*
-	* @return the portrait id of this user
+	* @return the portrait ID of this user
 	*/
 	public long getPortraitId() {
 		return _user.getPortraitId();
 	}
 
 	/**
-	* Sets the portrait id of this user.
+	* Sets the portrait ID of this user.
 	*
-	* @param portraitId the portrait id of this user
+	* @param portraitId the portrait ID of this user
 	*/
 	public void setPortraitId(long portraitId) {
 		_user.setPortraitId(portraitId);
 	}
 
 	/**
-	* Gets the language id of this user.
+	* Gets the language ID of this user.
 	*
-	* @return the language id of this user
+	* @return the language ID of this user
 	*/
 	public java.lang.String getLanguageId() {
 		return _user.getLanguageId();
 	}
 
 	/**
-	* Sets the language id of this user.
+	* Sets the language ID of this user.
 	*
-	* @param languageId the language id of this user
+	* @param languageId the language ID of this user
 	*/
 	public void setLanguageId(java.lang.String languageId) {
 		_user.setLanguageId(languageId);
 	}
 
 	/**
-	* Gets the time zone id of this user.
+	* Gets the time zone ID of this user.
 	*
-	* @return the time zone id of this user
+	* @return the time zone ID of this user
 	*/
 	public java.lang.String getTimeZoneId() {
 		return _user.getTimeZoneId();
 	}
 
 	/**
-	* Sets the time zone id of this user.
+	* Sets the time zone ID of this user.
 	*
-	* @param timeZoneId the time zone id of this user
+	* @param timeZoneId the time zone ID of this user
 	*/
 	public void setTimeZoneId(java.lang.String timeZoneId) {
 		_user.setTimeZoneId(timeZoneId);

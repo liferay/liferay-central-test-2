@@ -202,7 +202,7 @@ public class RatingsStatsUtil {
 	/**
 	* Finds the ratings stats where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.ratings.NoSuchStatsException} if it could not be found.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching ratings stats
 	* @throws com.liferay.portlet.ratings.NoSuchStatsException if a matching ratings stats could not be found
@@ -218,7 +218,7 @@ public class RatingsStatsUtil {
 	/**
 	* Finds the ratings stats where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching ratings stats, or <code>null</code> if a matching ratings stats could not be found
 	* @throws SystemException if a system exception occurred
@@ -232,7 +232,7 @@ public class RatingsStatsUtil {
 	/**
 	* Finds the ratings stats where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching ratings stats, or <code>null</code> if a matching ratings stats could not be found
 	* @throws SystemException if a system exception occurred
@@ -296,7 +296,7 @@ public class RatingsStatsUtil {
 	/**
 	* Removes the ratings stats where classNameId = &#63; and classPK = &#63; from the database.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -319,7 +319,7 @@ public class RatingsStatsUtil {
 	/**
 	* Counts all the ratings statses where classNameId = &#63; and classPK = &#63;.
 	*
-	* @param classNameId the class name id to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the number of matching ratings statses
 	* @throws SystemException if a system exception occurred

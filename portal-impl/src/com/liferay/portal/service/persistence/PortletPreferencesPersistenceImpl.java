@@ -819,7 +819,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 * Finds all the portlet preferenceses where plid = &#63; and portletId = &#63;.
 	 *
 	 * @param plid the plid to search with
-	 * @param portletId the portlet id to search with
+	 * @param portletId the portlet ID to search with
 	 * @return the matching portlet preferenceses
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -837,7 +837,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 * </p>
 	 *
 	 * @param plid the plid to search with
-	 * @param portletId the portlet id to search with
+	 * @param portletId the portlet ID to search with
 	 * @param start the lower bound of the range of portlet preferenceses to return
 	 * @param end the upper bound of the range of portlet preferenceses to return (not inclusive)
 	 * @return the range of matching portlet preferenceses
@@ -856,7 +856,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 * </p>
 	 *
 	 * @param plid the plid to search with
-	 * @param portletId the portlet id to search with
+	 * @param portletId the portlet ID to search with
 	 * @param start the lower bound of the range of portlet preferenceses to return
 	 * @param end the upper bound of the range of portlet preferenceses to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -958,7 +958,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 * </p>
 	 *
 	 * @param plid the plid to search with
-	 * @param portletId the portlet id to search with
+	 * @param portletId the portlet ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching portlet preferences
 	 * @throws com.liferay.portal.NoSuchPortletPreferencesException if a matching portlet preferences could not be found
@@ -998,7 +998,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 * </p>
 	 *
 	 * @param plid the plid to search with
-	 * @param portletId the portlet id to search with
+	 * @param portletId the portlet ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching portlet preferences
 	 * @throws com.liferay.portal.NoSuchPortletPreferencesException if a matching portlet preferences could not be found
@@ -1041,7 +1041,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 *
 	 * @param portletPreferencesId the primary key of the current portlet preferences
 	 * @param plid the plid to search with
-	 * @param portletId the portlet id to search with
+	 * @param portletId the portlet ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next portlet preferences
 	 * @throws com.liferay.portal.NoSuchPortletPreferencesException if a portlet preferences with the primary key could not be found
@@ -1197,7 +1197,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	/**
 	 * Finds all the portlet preferenceses where ownerId = &#63; and ownerType = &#63; and plid = &#63;.
 	 *
-	 * @param ownerId the owner id to search with
+	 * @param ownerId the owner ID to search with
 	 * @param ownerType the owner type to search with
 	 * @param plid the plid to search with
 	 * @return the matching portlet preferenceses
@@ -1216,7 +1216,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param ownerId the owner id to search with
+	 * @param ownerId the owner ID to search with
 	 * @param ownerType the owner type to search with
 	 * @param plid the plid to search with
 	 * @param start the lower bound of the range of portlet preferenceses to return
@@ -1236,7 +1236,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param ownerId the owner id to search with
+	 * @param ownerId the owner ID to search with
 	 * @param ownerType the owner type to search with
 	 * @param plid the plid to search with
 	 * @param start the lower bound of the range of portlet preferenceses to return
@@ -1331,7 +1331,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param ownerId the owner id to search with
+	 * @param ownerId the owner ID to search with
 	 * @param ownerType the owner type to search with
 	 * @param plid the plid to search with
 	 * @param orderByComparator the comparator to order the set by
@@ -1375,7 +1375,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param ownerId the owner id to search with
+	 * @param ownerId the owner ID to search with
 	 * @param ownerType the owner type to search with
 	 * @param plid the plid to search with
 	 * @param orderByComparator the comparator to order the set by
@@ -1422,7 +1422,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 * </p>
 	 *
 	 * @param portletPreferencesId the primary key of the current portlet preferences
-	 * @param ownerId the owner id to search with
+	 * @param ownerId the owner ID to search with
 	 * @param ownerType the owner type to search with
 	 * @param plid the plid to search with
 	 * @param orderByComparator the comparator to order the set by
@@ -1572,10 +1572,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	/**
 	 * Finds the portlet preferences where ownerId = &#63; and ownerType = &#63; and plid = &#63; and portletId = &#63; or throws a {@link com.liferay.portal.NoSuchPortletPreferencesException} if it could not be found.
 	 *
-	 * @param ownerId the owner id to search with
+	 * @param ownerId the owner ID to search with
 	 * @param ownerType the owner type to search with
 	 * @param plid the plid to search with
-	 * @param portletId the portlet id to search with
+	 * @param portletId the portlet ID to search with
 	 * @return the matching portlet preferences
 	 * @throws com.liferay.portal.NoSuchPortletPreferencesException if a matching portlet preferences could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1618,10 +1618,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	/**
 	 * Finds the portlet preferences where ownerId = &#63; and ownerType = &#63; and plid = &#63; and portletId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param ownerId the owner id to search with
+	 * @param ownerId the owner ID to search with
 	 * @param ownerType the owner type to search with
 	 * @param plid the plid to search with
-	 * @param portletId the portlet id to search with
+	 * @param portletId the portlet ID to search with
 	 * @return the matching portlet preferences, or <code>null</code> if a matching portlet preferences could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1633,10 +1633,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	/**
 	 * Finds the portlet preferences where ownerId = &#63; and ownerType = &#63; and plid = &#63; and portletId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param ownerId the owner id to search with
+	 * @param ownerId the owner ID to search with
 	 * @param ownerType the owner type to search with
 	 * @param plid the plid to search with
-	 * @param portletId the portlet id to search with
+	 * @param portletId the portlet ID to search with
 	 * @return the matching portlet preferences, or <code>null</code> if a matching portlet preferences could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1870,7 +1870,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 * Removes all the portlet preferenceses where plid = &#63; and portletId = &#63; from the database.
 	 *
 	 * @param plid the plid to search with
-	 * @param portletId the portlet id to search with
+	 * @param portletId the portlet ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByP_P(long plid, String portletId)
@@ -1883,7 +1883,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	/**
 	 * Removes all the portlet preferenceses where ownerId = &#63; and ownerType = &#63; and plid = &#63; from the database.
 	 *
-	 * @param ownerId the owner id to search with
+	 * @param ownerId the owner ID to search with
 	 * @param ownerType the owner type to search with
 	 * @param plid the plid to search with
 	 * @throws SystemException if a system exception occurred
@@ -1899,10 +1899,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	/**
 	 * Removes the portlet preferences where ownerId = &#63; and ownerType = &#63; and plid = &#63; and portletId = &#63; from the database.
 	 *
-	 * @param ownerId the owner id to search with
+	 * @param ownerId the owner ID to search with
 	 * @param ownerType the owner type to search with
 	 * @param plid the plid to search with
-	 * @param portletId the portlet id to search with
+	 * @param portletId the portlet ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByO_O_P_P(long ownerId, int ownerType, long plid,
@@ -1982,7 +1982,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 * Counts all the portlet preferenceses where plid = &#63; and portletId = &#63;.
 	 *
 	 * @param plid the plid to search with
-	 * @param portletId the portlet id to search with
+	 * @param portletId the portlet ID to search with
 	 * @return the number of matching portlet preferenceses
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2052,7 +2052,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	/**
 	 * Counts all the portlet preferenceses where ownerId = &#63; and ownerType = &#63; and plid = &#63;.
 	 *
-	 * @param ownerId the owner id to search with
+	 * @param ownerId the owner ID to search with
 	 * @param ownerType the owner type to search with
 	 * @param plid the plid to search with
 	 * @return the number of matching portlet preferenceses
@@ -2116,10 +2116,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	/**
 	 * Counts all the portlet preferenceses where ownerId = &#63; and ownerType = &#63; and plid = &#63; and portletId = &#63;.
 	 *
-	 * @param ownerId the owner id to search with
+	 * @param ownerId the owner ID to search with
 	 * @param ownerType the owner type to search with
 	 * @param plid the plid to search with
-	 * @param portletId the portlet id to search with
+	 * @param portletId the portlet ID to search with
 	 * @return the number of matching portlet preferenceses
 	 * @throws SystemException if a system exception occurred
 	 */

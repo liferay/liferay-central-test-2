@@ -65,72 +65,72 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the mailing list id of this message boards mailing list.
+	* Gets the mailing list ID of this message boards mailing list.
 	*
-	* @return the mailing list id of this message boards mailing list
+	* @return the mailing list ID of this message boards mailing list
 	*/
 	public long getMailingListId() {
 		return _mbMailingList.getMailingListId();
 	}
 
 	/**
-	* Sets the mailing list id of this message boards mailing list.
+	* Sets the mailing list ID of this message boards mailing list.
 	*
-	* @param mailingListId the mailing list id of this message boards mailing list
+	* @param mailingListId the mailing list ID of this message boards mailing list
 	*/
 	public void setMailingListId(long mailingListId) {
 		_mbMailingList.setMailingListId(mailingListId);
 	}
 
 	/**
-	* Gets the group id of this message boards mailing list.
+	* Gets the group ID of this message boards mailing list.
 	*
-	* @return the group id of this message boards mailing list
+	* @return the group ID of this message boards mailing list
 	*/
 	public long getGroupId() {
 		return _mbMailingList.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this message boards mailing list.
+	* Sets the group ID of this message boards mailing list.
 	*
-	* @param groupId the group id of this message boards mailing list
+	* @param groupId the group ID of this message boards mailing list
 	*/
 	public void setGroupId(long groupId) {
 		_mbMailingList.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this message boards mailing list.
+	* Gets the company ID of this message boards mailing list.
 	*
-	* @return the company id of this message boards mailing list
+	* @return the company ID of this message boards mailing list
 	*/
 	public long getCompanyId() {
 		return _mbMailingList.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this message boards mailing list.
+	* Sets the company ID of this message boards mailing list.
 	*
-	* @param companyId the company id of this message boards mailing list
+	* @param companyId the company ID of this message boards mailing list
 	*/
 	public void setCompanyId(long companyId) {
 		_mbMailingList.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this message boards mailing list.
+	* Gets the user ID of this message boards mailing list.
 	*
-	* @return the user id of this message boards mailing list
+	* @return the user ID of this message boards mailing list
 	*/
 	public long getUserId() {
 		return _mbMailingList.getUserId();
 	}
 
 	/**
-	* Sets the user id of this message boards mailing list.
+	* Sets the user ID of this message boards mailing list.
 	*
-	* @param userId the user id of this message boards mailing list
+	* @param userId the user ID of this message boards mailing list
 	*/
 	public void setUserId(long userId) {
 		_mbMailingList.setUserId(userId);
@@ -211,18 +211,18 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Gets the category id of this message boards mailing list.
+	* Gets the category ID of this message boards mailing list.
 	*
-	* @return the category id of this message boards mailing list
+	* @return the category ID of this message boards mailing list
 	*/
 	public long getCategoryId() {
 		return _mbMailingList.getCategoryId();
 	}
 
 	/**
-	* Sets the category id of this message boards mailing list.
+	* Sets the category ID of this message boards mailing list.
 	*
-	* @param categoryId the category id of this message boards mailing list
+	* @param categoryId the category ID of this message boards mailing list
 	*/
 	public void setCategoryId(long categoryId) {
 		_mbMailingList.setCategoryId(categoryId);

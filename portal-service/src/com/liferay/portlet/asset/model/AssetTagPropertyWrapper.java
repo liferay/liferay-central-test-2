@@ -47,54 +47,54 @@ public class AssetTagPropertyWrapper implements AssetTagProperty {
 	}
 
 	/**
-	* Gets the tag property id of this asset tag property.
+	* Gets the tag property ID of this asset tag property.
 	*
-	* @return the tag property id of this asset tag property
+	* @return the tag property ID of this asset tag property
 	*/
 	public long getTagPropertyId() {
 		return _assetTagProperty.getTagPropertyId();
 	}
 
 	/**
-	* Sets the tag property id of this asset tag property.
+	* Sets the tag property ID of this asset tag property.
 	*
-	* @param tagPropertyId the tag property id of this asset tag property
+	* @param tagPropertyId the tag property ID of this asset tag property
 	*/
 	public void setTagPropertyId(long tagPropertyId) {
 		_assetTagProperty.setTagPropertyId(tagPropertyId);
 	}
 
 	/**
-	* Gets the company id of this asset tag property.
+	* Gets the company ID of this asset tag property.
 	*
-	* @return the company id of this asset tag property
+	* @return the company ID of this asset tag property
 	*/
 	public long getCompanyId() {
 		return _assetTagProperty.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this asset tag property.
+	* Sets the company ID of this asset tag property.
 	*
-	* @param companyId the company id of this asset tag property
+	* @param companyId the company ID of this asset tag property
 	*/
 	public void setCompanyId(long companyId) {
 		_assetTagProperty.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this asset tag property.
+	* Gets the user ID of this asset tag property.
 	*
-	* @return the user id of this asset tag property
+	* @return the user ID of this asset tag property
 	*/
 	public long getUserId() {
 		return _assetTagProperty.getUserId();
 	}
 
 	/**
-	* Sets the user id of this asset tag property.
+	* Sets the user ID of this asset tag property.
 	*
-	* @param userId the user id of this asset tag property
+	* @param userId the user ID of this asset tag property
 	*/
 	public void setUserId(long userId) {
 		_assetTagProperty.setUserId(userId);
@@ -175,18 +175,18 @@ public class AssetTagPropertyWrapper implements AssetTagProperty {
 	}
 
 	/**
-	* Gets the tag id of this asset tag property.
+	* Gets the tag ID of this asset tag property.
 	*
-	* @return the tag id of this asset tag property
+	* @return the tag ID of this asset tag property
 	*/
 	public long getTagId() {
 		return _assetTagProperty.getTagId();
 	}
 
 	/**
-	* Sets the tag id of this asset tag property.
+	* Sets the tag ID of this asset tag property.
 	*
-	* @param tagId the tag id of this asset tag property
+	* @param tagId the tag ID of this asset tag property
 	*/
 	public void setTagId(long tagId) {
 		_assetTagProperty.setTagId(tagId);

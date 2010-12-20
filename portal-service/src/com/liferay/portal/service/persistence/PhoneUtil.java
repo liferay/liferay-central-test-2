@@ -193,7 +193,7 @@ public class PhoneUtil {
 	/**
 	* Finds all the phones where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the matching phones
 	* @throws SystemException if a system exception occurred
 	*/
@@ -210,7 +210,7 @@ public class PhoneUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of phones to return
 	* @param end the upper bound of the range of phones to return (not inclusive)
 	* @return the range of matching phones
@@ -229,7 +229,7 @@ public class PhoneUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of phones to return
 	* @param end the upper bound of the range of phones to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -251,7 +251,7 @@ public class PhoneUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a matching phone could not be found
@@ -273,7 +273,7 @@ public class PhoneUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a matching phone could not be found
@@ -296,7 +296,7 @@ public class PhoneUtil {
 	* </p>
 	*
 	* @param phoneId the primary key of the current phone
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a phone with the primary key could not be found
@@ -315,7 +315,7 @@ public class PhoneUtil {
 	/**
 	* Finds all the phones where userId = &#63;.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @return the matching phones
 	* @throws SystemException if a system exception occurred
 	*/
@@ -331,7 +331,7 @@ public class PhoneUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of phones to return
 	* @param end the upper bound of the range of phones to return (not inclusive)
 	* @return the range of matching phones
@@ -350,7 +350,7 @@ public class PhoneUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param start the lower bound of the range of phones to return
 	* @param end the upper bound of the range of phones to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -372,7 +372,7 @@ public class PhoneUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a matching phone could not be found
@@ -393,7 +393,7 @@ public class PhoneUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a matching phone could not be found
@@ -415,7 +415,7 @@ public class PhoneUtil {
 	* </p>
 	*
 	* @param phoneId the primary key of the current phone
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a phone with the primary key could not be found
@@ -433,8 +433,8 @@ public class PhoneUtil {
 	/**
 	* Finds all the phones where companyId = &#63; and classNameId = &#63;.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @return the matching phones
 	* @throws SystemException if a system exception occurred
 	*/
@@ -451,8 +451,8 @@ public class PhoneUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param start the lower bound of the range of phones to return
 	* @param end the upper bound of the range of phones to return (not inclusive)
 	* @return the range of matching phones
@@ -471,8 +471,8 @@ public class PhoneUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param start the lower bound of the range of phones to return
 	* @param end the upper bound of the range of phones to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -495,8 +495,8 @@ public class PhoneUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a matching phone could not be found
@@ -518,8 +518,8 @@ public class PhoneUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a matching phone could not be found
@@ -542,8 +542,8 @@ public class PhoneUtil {
 	* </p>
 	*
 	* @param phoneId the primary key of the current phone
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a phone with the primary key could not be found
@@ -562,8 +562,8 @@ public class PhoneUtil {
 	/**
 	* Finds all the phones where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the matching phones
 	* @throws SystemException if a system exception occurred
@@ -581,8 +581,8 @@ public class PhoneUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param start the lower bound of the range of phones to return
 	* @param end the upper bound of the range of phones to return (not inclusive)
@@ -603,8 +603,8 @@ public class PhoneUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param start the lower bound of the range of phones to return
 	* @param end the upper bound of the range of phones to return (not inclusive)
@@ -628,8 +628,8 @@ public class PhoneUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching phone
@@ -653,8 +653,8 @@ public class PhoneUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching phone
@@ -679,8 +679,8 @@ public class PhoneUtil {
 	* </p>
 	*
 	* @param phoneId the primary key of the current phone
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next phone
@@ -700,8 +700,8 @@ public class PhoneUtil {
 	/**
 	* Finds all the phones where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
 	* @return the matching phones
@@ -721,8 +721,8 @@ public class PhoneUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
 	* @param start the lower bound of the range of phones to return
@@ -746,8 +746,8 @@ public class PhoneUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
 	* @param start the lower bound of the range of phones to return
@@ -773,8 +773,8 @@ public class PhoneUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
 	* @param orderByComparator the comparator to order the set by
@@ -799,8 +799,8 @@ public class PhoneUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
 	* @param orderByComparator the comparator to order the set by
@@ -826,8 +826,8 @@ public class PhoneUtil {
 	* </p>
 	*
 	* @param phoneId the primary key of the current phone
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
 	* @param orderByComparator the comparator to order the set by
@@ -898,7 +898,7 @@ public class PhoneUtil {
 	/**
 	* Removes all the phones where companyId = &#63; from the database.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByCompanyId(long companyId)
@@ -909,7 +909,7 @@ public class PhoneUtil {
 	/**
 	* Removes all the phones where userId = &#63; from the database.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByUserId(long userId)
@@ -920,8 +920,8 @@ public class PhoneUtil {
 	/**
 	* Removes all the phones where companyId = &#63; and classNameId = &#63; from the database.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void removeByC_C(long companyId, long classNameId)
@@ -932,8 +932,8 @@ public class PhoneUtil {
 	/**
 	* Removes all the phones where companyId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -946,8 +946,8 @@ public class PhoneUtil {
 	/**
 	* Removes all the phones where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63; from the database.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
 	* @throws SystemException if a system exception occurred
@@ -972,7 +972,7 @@ public class PhoneUtil {
 	/**
 	* Counts all the phones where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the number of matching phones
 	* @throws SystemException if a system exception occurred
 	*/
@@ -984,7 +984,7 @@ public class PhoneUtil {
 	/**
 	* Counts all the phones where userId = &#63;.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @return the number of matching phones
 	* @throws SystemException if a system exception occurred
 	*/
@@ -996,8 +996,8 @@ public class PhoneUtil {
 	/**
 	* Counts all the phones where companyId = &#63; and classNameId = &#63;.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @return the number of matching phones
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1009,8 +1009,8 @@ public class PhoneUtil {
 	/**
 	* Counts all the phones where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @return the number of matching phones
 	* @throws SystemException if a system exception occurred
@@ -1024,8 +1024,8 @@ public class PhoneUtil {
 	/**
 	* Counts all the phones where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
 	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
+	* @param companyId the company ID to search with
+	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
 	* @return the number of matching phones

@@ -47,36 +47,36 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 	}
 
 	/**
-	* Gets the password tracker id of this password tracker.
+	* Gets the password tracker ID of this password tracker.
 	*
-	* @return the password tracker id of this password tracker
+	* @return the password tracker ID of this password tracker
 	*/
 	public long getPasswordTrackerId() {
 		return _passwordTracker.getPasswordTrackerId();
 	}
 
 	/**
-	* Sets the password tracker id of this password tracker.
+	* Sets the password tracker ID of this password tracker.
 	*
-	* @param passwordTrackerId the password tracker id of this password tracker
+	* @param passwordTrackerId the password tracker ID of this password tracker
 	*/
 	public void setPasswordTrackerId(long passwordTrackerId) {
 		_passwordTracker.setPasswordTrackerId(passwordTrackerId);
 	}
 
 	/**
-	* Gets the user id of this password tracker.
+	* Gets the user ID of this password tracker.
 	*
-	* @return the user id of this password tracker
+	* @return the user ID of this password tracker
 	*/
 	public long getUserId() {
 		return _passwordTracker.getUserId();
 	}
 
 	/**
-	* Sets the user id of this password tracker.
+	* Sets the user ID of this password tracker.
 	*
-	* @param userId the user id of this password tracker
+	* @param userId the user ID of this password tracker
 	*/
 	public void setUserId(long userId) {
 		_passwordTracker.setUserId(userId);

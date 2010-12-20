@@ -47,36 +47,36 @@ public class RoleWrapper implements Role {
 	}
 
 	/**
-	* Gets the role id of this role.
+	* Gets the role ID of this role.
 	*
-	* @return the role id of this role
+	* @return the role ID of this role
 	*/
 	public long getRoleId() {
 		return _role.getRoleId();
 	}
 
 	/**
-	* Sets the role id of this role.
+	* Sets the role ID of this role.
 	*
-	* @param roleId the role id of this role
+	* @param roleId the role ID of this role
 	*/
 	public void setRoleId(long roleId) {
 		_role.setRoleId(roleId);
 	}
 
 	/**
-	* Gets the company id of this role.
+	* Gets the company ID of this role.
 	*
-	* @return the company id of this role
+	* @return the company ID of this role
 	*/
 	public long getCompanyId() {
 		return _role.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this role.
+	* Sets the company ID of this role.
 	*
-	* @param companyId the company id of this role
+	* @param companyId the company ID of this role
 	*/
 	public void setCompanyId(long companyId) {
 		_role.setCompanyId(companyId);
@@ -92,18 +92,18 @@ public class RoleWrapper implements Role {
 	}
 
 	/**
-	* Gets the class name id of this role.
+	* Gets the class name ID of this role.
 	*
-	* @return the class name id of this role
+	* @return the class name ID of this role
 	*/
 	public long getClassNameId() {
 		return _role.getClassNameId();
 	}
 
 	/**
-	* Sets the class name id of this role.
+	* Sets the class name ID of this role.
 	*
-	* @param classNameId the class name id of this role
+	* @param classNameId the class name ID of this role
 	*/
 	public void setClassNameId(long classNameId) {
 		_role.setClassNameId(classNameId);

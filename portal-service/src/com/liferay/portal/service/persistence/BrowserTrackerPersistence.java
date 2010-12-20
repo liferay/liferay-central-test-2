@@ -102,7 +102,7 @@ public interface BrowserTrackerPersistence extends BasePersistence<BrowserTracke
 	/**
 	* Finds the browser tracker where userId = &#63; or throws a {@link com.liferay.portal.NoSuchBrowserTrackerException} if it could not be found.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @return the matching browser tracker
 	* @throws com.liferay.portal.NoSuchBrowserTrackerException if a matching browser tracker could not be found
 	* @throws SystemException if a system exception occurred
@@ -114,7 +114,7 @@ public interface BrowserTrackerPersistence extends BasePersistence<BrowserTracke
 	/**
 	* Finds the browser tracker where userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @return the matching browser tracker, or <code>null</code> if a matching browser tracker could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -124,7 +124,7 @@ public interface BrowserTrackerPersistence extends BasePersistence<BrowserTracke
 	/**
 	* Finds the browser tracker where userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @return the matching browser tracker, or <code>null</code> if a matching browser tracker could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -178,7 +178,7 @@ public interface BrowserTrackerPersistence extends BasePersistence<BrowserTracke
 	/**
 	* Removes the browser tracker where userId = &#63; from the database.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUserId(long userId)
@@ -196,7 +196,7 @@ public interface BrowserTrackerPersistence extends BasePersistence<BrowserTracke
 	/**
 	* Counts all the browser trackers where userId = &#63;.
 	*
-	* @param userId the user id to search with
+	* @param userId the user ID to search with
 	* @return the number of matching browser trackers
 	* @throws SystemException if a system exception occurred
 	*/

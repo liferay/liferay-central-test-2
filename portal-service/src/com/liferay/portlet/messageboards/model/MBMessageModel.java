@@ -75,58 +75,58 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the message id of this message-boards message.
+	 * Gets the message ID of this message-boards message.
 	 *
-	 * @return the message id of this message-boards message
+	 * @return the message ID of this message-boards message
 	 */
 	public long getMessageId();
 
 	/**
-	 * Sets the message id of this message-boards message.
+	 * Sets the message ID of this message-boards message.
 	 *
-	 * @param messageId the message id of this message-boards message
+	 * @param messageId the message ID of this message-boards message
 	 */
 	public void setMessageId(long messageId);
 
 	/**
-	 * Gets the group id of this message-boards message.
+	 * Gets the group ID of this message-boards message.
 	 *
-	 * @return the group id of this message-boards message
+	 * @return the group ID of this message-boards message
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this message-boards message.
+	 * Sets the group ID of this message-boards message.
 	 *
-	 * @param groupId the group id of this message-boards message
+	 * @param groupId the group ID of this message-boards message
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this message-boards message.
+	 * Gets the company ID of this message-boards message.
 	 *
-	 * @return the company id of this message-boards message
+	 * @return the company ID of this message-boards message
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this message-boards message.
+	 * Sets the company ID of this message-boards message.
 	 *
-	 * @param companyId the company id of this message-boards message
+	 * @param companyId the company ID of this message-boards message
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this message-boards message.
+	 * Gets the user ID of this message-boards message.
 	 *
-	 * @return the user id of this message-boards message
+	 * @return the user ID of this message-boards message
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this message-boards message.
+	 * Sets the user ID of this message-boards message.
 	 *
-	 * @param userId the user id of this message-boards message
+	 * @param userId the user ID of this message-boards message
 	 */
 	public void setUserId(long userId);
 
@@ -196,16 +196,16 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this message-boards message.
+	 * Gets the class name ID of this message-boards message.
 	 *
-	 * @return the class name id of this message-boards message
+	 * @return the class name ID of this message-boards message
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this message-boards message.
+	 * Sets the class name ID of this message-boards message.
 	 *
-	 * @param classNameId the class name id of this message-boards message
+	 * @param classNameId the class name ID of this message-boards message
 	 */
 	public void setClassNameId(long classNameId);
 
@@ -224,58 +224,58 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the category id of this message-boards message.
+	 * Gets the category ID of this message-boards message.
 	 *
-	 * @return the category id of this message-boards message
+	 * @return the category ID of this message-boards message
 	 */
 	public long getCategoryId();
 
 	/**
-	 * Sets the category id of this message-boards message.
+	 * Sets the category ID of this message-boards message.
 	 *
-	 * @param categoryId the category id of this message-boards message
+	 * @param categoryId the category ID of this message-boards message
 	 */
 	public void setCategoryId(long categoryId);
 
 	/**
-	 * Gets the thread id of this message-boards message.
+	 * Gets the thread ID of this message-boards message.
 	 *
-	 * @return the thread id of this message-boards message
+	 * @return the thread ID of this message-boards message
 	 */
 	public long getThreadId();
 
 	/**
-	 * Sets the thread id of this message-boards message.
+	 * Sets the thread ID of this message-boards message.
 	 *
-	 * @param threadId the thread id of this message-boards message
+	 * @param threadId the thread ID of this message-boards message
 	 */
 	public void setThreadId(long threadId);
 
 	/**
-	 * Gets the root message id of this message-boards message.
+	 * Gets the root message ID of this message-boards message.
 	 *
-	 * @return the root message id of this message-boards message
+	 * @return the root message ID of this message-boards message
 	 */
 	public long getRootMessageId();
 
 	/**
-	 * Sets the root message id of this message-boards message.
+	 * Sets the root message ID of this message-boards message.
 	 *
-	 * @param rootMessageId the root message id of this message-boards message
+	 * @param rootMessageId the root message ID of this message-boards message
 	 */
 	public void setRootMessageId(long rootMessageId);
 
 	/**
-	 * Gets the parent message id of this message-boards message.
+	 * Gets the parent message ID of this message-boards message.
 	 *
-	 * @return the parent message id of this message-boards message
+	 * @return the parent message ID of this message-boards message
 	 */
 	public long getParentMessageId();
 
 	/**
-	 * Sets the parent message id of this message-boards message.
+	 * Sets the parent message ID of this message-boards message.
 	 *
-	 * @param parentMessageId the parent message id of this message-boards message
+	 * @param parentMessageId the parent message ID of this message-boards message
 	 */
 	public void setParentMessageId(long parentMessageId);
 
@@ -416,16 +416,16 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 	public void setStatus(int status);
 
 	/**
-	 * Gets the status by user id of this message-boards message.
+	 * Gets the status by user ID of this message-boards message.
 	 *
-	 * @return the status by user id of this message-boards message
+	 * @return the status by user ID of this message-boards message
 	 */
 	public long getStatusByUserId();
 
 	/**
-	 * Sets the status by user id of this message-boards message.
+	 * Sets the status by user ID of this message-boards message.
 	 *
-	 * @param statusByUserId the status by user id of this message-boards message
+	 * @param statusByUserId the status by user ID of this message-boards message
 	 */
 	public void setStatusByUserId(long statusByUserId);
 

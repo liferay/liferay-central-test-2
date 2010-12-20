@@ -56,16 +56,16 @@ public interface MBDiscussionModel extends BaseModel<MBDiscussion> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the discussion id of this message boards discussion.
+	 * Gets the discussion ID of this message boards discussion.
 	 *
-	 * @return the discussion id of this message boards discussion
+	 * @return the discussion ID of this message boards discussion
 	 */
 	public long getDiscussionId();
 
 	/**
-	 * Sets the discussion id of this message boards discussion.
+	 * Sets the discussion ID of this message boards discussion.
 	 *
-	 * @param discussionId the discussion id of this message boards discussion
+	 * @param discussionId the discussion ID of this message boards discussion
 	 */
 	public void setDiscussionId(long discussionId);
 
@@ -77,16 +77,16 @@ public interface MBDiscussionModel extends BaseModel<MBDiscussion> {
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this message boards discussion.
+	 * Gets the class name ID of this message boards discussion.
 	 *
-	 * @return the class name id of this message boards discussion
+	 * @return the class name ID of this message boards discussion
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this message boards discussion.
+	 * Sets the class name ID of this message boards discussion.
 	 *
-	 * @param classNameId the class name id of this message boards discussion
+	 * @param classNameId the class name ID of this message boards discussion
 	 */
 	public void setClassNameId(long classNameId);
 
@@ -105,16 +105,16 @@ public interface MBDiscussionModel extends BaseModel<MBDiscussion> {
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the thread id of this message boards discussion.
+	 * Gets the thread ID of this message boards discussion.
 	 *
-	 * @return the thread id of this message boards discussion
+	 * @return the thread ID of this message boards discussion
 	 */
 	public long getThreadId();
 
 	/**
-	 * Sets the thread id of this message boards discussion.
+	 * Sets the thread ID of this message boards discussion.
 	 *
-	 * @param threadId the thread id of this message boards discussion
+	 * @param threadId the thread ID of this message boards discussion
 	 */
 	public void setThreadId(long threadId);
 

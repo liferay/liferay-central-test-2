@@ -47,72 +47,72 @@ public class ShoppingCartWrapper implements ShoppingCart {
 	}
 
 	/**
-	* Gets the cart id of this shopping cart.
+	* Gets the cart ID of this shopping cart.
 	*
-	* @return the cart id of this shopping cart
+	* @return the cart ID of this shopping cart
 	*/
 	public long getCartId() {
 		return _shoppingCart.getCartId();
 	}
 
 	/**
-	* Sets the cart id of this shopping cart.
+	* Sets the cart ID of this shopping cart.
 	*
-	* @param cartId the cart id of this shopping cart
+	* @param cartId the cart ID of this shopping cart
 	*/
 	public void setCartId(long cartId) {
 		_shoppingCart.setCartId(cartId);
 	}
 
 	/**
-	* Gets the group id of this shopping cart.
+	* Gets the group ID of this shopping cart.
 	*
-	* @return the group id of this shopping cart
+	* @return the group ID of this shopping cart
 	*/
 	public long getGroupId() {
 		return _shoppingCart.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this shopping cart.
+	* Sets the group ID of this shopping cart.
 	*
-	* @param groupId the group id of this shopping cart
+	* @param groupId the group ID of this shopping cart
 	*/
 	public void setGroupId(long groupId) {
 		_shoppingCart.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this shopping cart.
+	* Gets the company ID of this shopping cart.
 	*
-	* @return the company id of this shopping cart
+	* @return the company ID of this shopping cart
 	*/
 	public long getCompanyId() {
 		return _shoppingCart.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this shopping cart.
+	* Sets the company ID of this shopping cart.
 	*
-	* @param companyId the company id of this shopping cart
+	* @param companyId the company ID of this shopping cart
 	*/
 	public void setCompanyId(long companyId) {
 		_shoppingCart.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this shopping cart.
+	* Gets the user ID of this shopping cart.
 	*
-	* @return the user id of this shopping cart
+	* @return the user ID of this shopping cart
 	*/
 	public long getUserId() {
 		return _shoppingCart.getUserId();
 	}
 
 	/**
-	* Sets the user id of this shopping cart.
+	* Sets the user ID of this shopping cart.
 	*
-	* @param userId the user id of this shopping cart
+	* @param userId the user ID of this shopping cart
 	*/
 	public void setUserId(long userId) {
 		_shoppingCart.setUserId(userId);
@@ -193,18 +193,18 @@ public class ShoppingCartWrapper implements ShoppingCart {
 	}
 
 	/**
-	* Gets the item ids of this shopping cart.
+	* Gets the item IDs of this shopping cart.
 	*
-	* @return the item ids of this shopping cart
+	* @return the item IDs of this shopping cart
 	*/
 	public java.lang.String getItemIds() {
 		return _shoppingCart.getItemIds();
 	}
 
 	/**
-	* Sets the item ids of this shopping cart.
+	* Sets the item IDs of this shopping cart.
 	*
-	* @param itemIds the item ids of this shopping cart
+	* @param itemIds the item IDs of this shopping cart
 	*/
 	public void setItemIds(java.lang.String itemIds) {
 		_shoppingCart.setItemIds(itemIds);

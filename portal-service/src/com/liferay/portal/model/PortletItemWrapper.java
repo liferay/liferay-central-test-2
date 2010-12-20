@@ -47,72 +47,72 @@ public class PortletItemWrapper implements PortletItem {
 	}
 
 	/**
-	* Gets the portlet item id of this portlet item.
+	* Gets the portlet item ID of this portlet item.
 	*
-	* @return the portlet item id of this portlet item
+	* @return the portlet item ID of this portlet item
 	*/
 	public long getPortletItemId() {
 		return _portletItem.getPortletItemId();
 	}
 
 	/**
-	* Sets the portlet item id of this portlet item.
+	* Sets the portlet item ID of this portlet item.
 	*
-	* @param portletItemId the portlet item id of this portlet item
+	* @param portletItemId the portlet item ID of this portlet item
 	*/
 	public void setPortletItemId(long portletItemId) {
 		_portletItem.setPortletItemId(portletItemId);
 	}
 
 	/**
-	* Gets the group id of this portlet item.
+	* Gets the group ID of this portlet item.
 	*
-	* @return the group id of this portlet item
+	* @return the group ID of this portlet item
 	*/
 	public long getGroupId() {
 		return _portletItem.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this portlet item.
+	* Sets the group ID of this portlet item.
 	*
-	* @param groupId the group id of this portlet item
+	* @param groupId the group ID of this portlet item
 	*/
 	public void setGroupId(long groupId) {
 		_portletItem.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this portlet item.
+	* Gets the company ID of this portlet item.
 	*
-	* @return the company id of this portlet item
+	* @return the company ID of this portlet item
 	*/
 	public long getCompanyId() {
 		return _portletItem.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this portlet item.
+	* Sets the company ID of this portlet item.
 	*
-	* @param companyId the company id of this portlet item
+	* @param companyId the company ID of this portlet item
 	*/
 	public void setCompanyId(long companyId) {
 		_portletItem.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this portlet item.
+	* Gets the user ID of this portlet item.
 	*
-	* @return the user id of this portlet item
+	* @return the user ID of this portlet item
 	*/
 	public long getUserId() {
 		return _portletItem.getUserId();
 	}
 
 	/**
-	* Sets the user id of this portlet item.
+	* Sets the user ID of this portlet item.
 	*
-	* @param userId the user id of this portlet item
+	* @param userId the user ID of this portlet item
 	*/
 	public void setUserId(long userId) {
 		_portletItem.setUserId(userId);
@@ -211,18 +211,18 @@ public class PortletItemWrapper implements PortletItem {
 	}
 
 	/**
-	* Gets the portlet id of this portlet item.
+	* Gets the portlet ID of this portlet item.
 	*
-	* @return the portlet id of this portlet item
+	* @return the portlet ID of this portlet item
 	*/
 	public java.lang.String getPortletId() {
 		return _portletItem.getPortletId();
 	}
 
 	/**
-	* Sets the portlet id of this portlet item.
+	* Sets the portlet ID of this portlet item.
 	*
-	* @param portletId the portlet id of this portlet item
+	* @param portletId the portlet ID of this portlet item
 	*/
 	public void setPortletId(java.lang.String portletId) {
 		_portletItem.setPortletId(portletId);
@@ -238,18 +238,18 @@ public class PortletItemWrapper implements PortletItem {
 	}
 
 	/**
-	* Gets the class name id of this portlet item.
+	* Gets the class name ID of this portlet item.
 	*
-	* @return the class name id of this portlet item
+	* @return the class name ID of this portlet item
 	*/
 	public long getClassNameId() {
 		return _portletItem.getClassNameId();
 	}
 
 	/**
-	* Sets the class name id of this portlet item.
+	* Sets the class name ID of this portlet item.
 	*
-	* @param classNameId the class name id of this portlet item
+	* @param classNameId the class name ID of this portlet item
 	*/
 	public void setClassNameId(long classNameId) {
 		_portletItem.setClassNameId(classNameId);

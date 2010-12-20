@@ -58,30 +58,30 @@ public interface UserTrackerPathModel extends BaseModel<UserTrackerPath> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the user tracker path id of this user tracker path.
+	 * Gets the user tracker path ID of this user tracker path.
 	 *
-	 * @return the user tracker path id of this user tracker path
+	 * @return the user tracker path ID of this user tracker path
 	 */
 	public long getUserTrackerPathId();
 
 	/**
-	 * Sets the user tracker path id of this user tracker path.
+	 * Sets the user tracker path ID of this user tracker path.
 	 *
-	 * @param userTrackerPathId the user tracker path id of this user tracker path
+	 * @param userTrackerPathId the user tracker path ID of this user tracker path
 	 */
 	public void setUserTrackerPathId(long userTrackerPathId);
 
 	/**
-	 * Gets the user tracker id of this user tracker path.
+	 * Gets the user tracker ID of this user tracker path.
 	 *
-	 * @return the user tracker id of this user tracker path
+	 * @return the user tracker ID of this user tracker path
 	 */
 	public long getUserTrackerId();
 
 	/**
-	 * Sets the user tracker id of this user tracker path.
+	 * Sets the user tracker ID of this user tracker path.
 	 *
-	 * @param userTrackerId the user tracker id of this user tracker path
+	 * @param userTrackerId the user tracker ID of this user tracker path
 	 */
 	public void setUserTrackerId(long userTrackerId);
 

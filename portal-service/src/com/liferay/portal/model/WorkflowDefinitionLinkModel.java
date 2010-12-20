@@ -59,58 +59,58 @@ public interface WorkflowDefinitionLinkModel extends BaseModel<WorkflowDefinitio
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the workflow definition link id of this workflow definition link.
+	 * Gets the workflow definition link ID of this workflow definition link.
 	 *
-	 * @return the workflow definition link id of this workflow definition link
+	 * @return the workflow definition link ID of this workflow definition link
 	 */
 	public long getWorkflowDefinitionLinkId();
 
 	/**
-	 * Sets the workflow definition link id of this workflow definition link.
+	 * Sets the workflow definition link ID of this workflow definition link.
 	 *
-	 * @param workflowDefinitionLinkId the workflow definition link id of this workflow definition link
+	 * @param workflowDefinitionLinkId the workflow definition link ID of this workflow definition link
 	 */
 	public void setWorkflowDefinitionLinkId(long workflowDefinitionLinkId);
 
 	/**
-	 * Gets the group id of this workflow definition link.
+	 * Gets the group ID of this workflow definition link.
 	 *
-	 * @return the group id of this workflow definition link
+	 * @return the group ID of this workflow definition link
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this workflow definition link.
+	 * Sets the group ID of this workflow definition link.
 	 *
-	 * @param groupId the group id of this workflow definition link
+	 * @param groupId the group ID of this workflow definition link
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this workflow definition link.
+	 * Gets the company ID of this workflow definition link.
 	 *
-	 * @return the company id of this workflow definition link
+	 * @return the company ID of this workflow definition link
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this workflow definition link.
+	 * Sets the company ID of this workflow definition link.
 	 *
-	 * @param companyId the company id of this workflow definition link
+	 * @param companyId the company ID of this workflow definition link
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this workflow definition link.
+	 * Gets the user ID of this workflow definition link.
 	 *
-	 * @return the user id of this workflow definition link
+	 * @return the user ID of this workflow definition link
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this workflow definition link.
+	 * Sets the user ID of this workflow definition link.
 	 *
-	 * @param userId the user id of this workflow definition link
+	 * @param userId the user ID of this workflow definition link
 	 */
 	public void setUserId(long userId);
 
@@ -180,16 +180,16 @@ public interface WorkflowDefinitionLinkModel extends BaseModel<WorkflowDefinitio
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this workflow definition link.
+	 * Gets the class name ID of this workflow definition link.
 	 *
-	 * @return the class name id of this workflow definition link
+	 * @return the class name ID of this workflow definition link
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this workflow definition link.
+	 * Sets the class name ID of this workflow definition link.
 	 *
-	 * @param classNameId the class name id of this workflow definition link
+	 * @param classNameId the class name ID of this workflow definition link
 	 */
 	public void setClassNameId(long classNameId);
 

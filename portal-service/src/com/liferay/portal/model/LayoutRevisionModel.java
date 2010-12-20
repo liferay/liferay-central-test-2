@@ -59,58 +59,58 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the layout revision id of this layout revision.
+	 * Gets the layout revision ID of this layout revision.
 	 *
-	 * @return the layout revision id of this layout revision
+	 * @return the layout revision ID of this layout revision
 	 */
 	public long getLayoutRevisionId();
 
 	/**
-	 * Sets the layout revision id of this layout revision.
+	 * Sets the layout revision ID of this layout revision.
 	 *
-	 * @param layoutRevisionId the layout revision id of this layout revision
+	 * @param layoutRevisionId the layout revision ID of this layout revision
 	 */
 	public void setLayoutRevisionId(long layoutRevisionId);
 
 	/**
-	 * Gets the group id of this layout revision.
+	 * Gets the group ID of this layout revision.
 	 *
-	 * @return the group id of this layout revision
+	 * @return the group ID of this layout revision
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this layout revision.
+	 * Sets the group ID of this layout revision.
 	 *
-	 * @param groupId the group id of this layout revision
+	 * @param groupId the group ID of this layout revision
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this layout revision.
+	 * Gets the company ID of this layout revision.
 	 *
-	 * @return the company id of this layout revision
+	 * @return the company ID of this layout revision
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this layout revision.
+	 * Sets the company ID of this layout revision.
 	 *
-	 * @param companyId the company id of this layout revision
+	 * @param companyId the company ID of this layout revision
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this layout revision.
+	 * Gets the user ID of this layout revision.
 	 *
-	 * @return the user id of this layout revision
+	 * @return the user ID of this layout revision
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this layout revision.
+	 * Sets the user ID of this layout revision.
 	 *
-	 * @param userId the user id of this layout revision
+	 * @param userId the user ID of this layout revision
 	 */
 	public void setUserId(long userId);
 
@@ -173,30 +173,30 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the layout set branch id of this layout revision.
+	 * Gets the layout set branch ID of this layout revision.
 	 *
-	 * @return the layout set branch id of this layout revision
+	 * @return the layout set branch ID of this layout revision
 	 */
 	public long getLayoutSetBranchId();
 
 	/**
-	 * Sets the layout set branch id of this layout revision.
+	 * Sets the layout set branch ID of this layout revision.
 	 *
-	 * @param layoutSetBranchId the layout set branch id of this layout revision
+	 * @param layoutSetBranchId the layout set branch ID of this layout revision
 	 */
 	public void setLayoutSetBranchId(long layoutSetBranchId);
 
 	/**
-	 * Gets the parent layout revision id of this layout revision.
+	 * Gets the parent layout revision ID of this layout revision.
 	 *
-	 * @return the parent layout revision id of this layout revision
+	 * @return the parent layout revision ID of this layout revision
 	 */
 	public long getParentLayoutRevisionId();
 
 	/**
-	 * Sets the parent layout revision id of this layout revision.
+	 * Sets the parent layout revision ID of this layout revision.
 	 *
-	 * @param parentLayoutRevisionId the parent layout revision id of this layout revision
+	 * @param parentLayoutRevisionId the parent layout revision ID of this layout revision
 	 */
 	public void setParentLayoutRevisionId(long parentLayoutRevisionId);
 
@@ -317,76 +317,76 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	public void setIconImage(boolean iconImage);
 
 	/**
-	 * Gets the icon image id of this layout revision.
+	 * Gets the icon image ID of this layout revision.
 	 *
-	 * @return the icon image id of this layout revision
+	 * @return the icon image ID of this layout revision
 	 */
 	public long getIconImageId();
 
 	/**
-	 * Sets the icon image id of this layout revision.
+	 * Sets the icon image ID of this layout revision.
 	 *
-	 * @param iconImageId the icon image id of this layout revision
+	 * @param iconImageId the icon image ID of this layout revision
 	 */
 	public void setIconImageId(long iconImageId);
 
 	/**
-	 * Gets the theme id of this layout revision.
+	 * Gets the theme ID of this layout revision.
 	 *
-	 * @return the theme id of this layout revision
+	 * @return the theme ID of this layout revision
 	 */
 	@AutoEscape
 	public String getThemeId();
 
 	/**
-	 * Sets the theme id of this layout revision.
+	 * Sets the theme ID of this layout revision.
 	 *
-	 * @param themeId the theme id of this layout revision
+	 * @param themeId the theme ID of this layout revision
 	 */
 	public void setThemeId(String themeId);
 
 	/**
-	 * Gets the color scheme id of this layout revision.
+	 * Gets the color scheme ID of this layout revision.
 	 *
-	 * @return the color scheme id of this layout revision
+	 * @return the color scheme ID of this layout revision
 	 */
 	@AutoEscape
 	public String getColorSchemeId();
 
 	/**
-	 * Sets the color scheme id of this layout revision.
+	 * Sets the color scheme ID of this layout revision.
 	 *
-	 * @param colorSchemeId the color scheme id of this layout revision
+	 * @param colorSchemeId the color scheme ID of this layout revision
 	 */
 	public void setColorSchemeId(String colorSchemeId);
 
 	/**
-	 * Gets the wap theme id of this layout revision.
+	 * Gets the wap theme ID of this layout revision.
 	 *
-	 * @return the wap theme id of this layout revision
+	 * @return the wap theme ID of this layout revision
 	 */
 	@AutoEscape
 	public String getWapThemeId();
 
 	/**
-	 * Sets the wap theme id of this layout revision.
+	 * Sets the wap theme ID of this layout revision.
 	 *
-	 * @param wapThemeId the wap theme id of this layout revision
+	 * @param wapThemeId the wap theme ID of this layout revision
 	 */
 	public void setWapThemeId(String wapThemeId);
 
 	/**
-	 * Gets the wap color scheme id of this layout revision.
+	 * Gets the wap color scheme ID of this layout revision.
 	 *
-	 * @return the wap color scheme id of this layout revision
+	 * @return the wap color scheme ID of this layout revision
 	 */
 	@AutoEscape
 	public String getWapColorSchemeId();
 
 	/**
-	 * Sets the wap color scheme id of this layout revision.
+	 * Sets the wap color scheme ID of this layout revision.
 	 *
-	 * @param wapColorSchemeId the wap color scheme id of this layout revision
+	 * @param wapColorSchemeId the wap color scheme ID of this layout revision
 	 */
 	public void setWapColorSchemeId(String wapColorSchemeId);
 
@@ -420,16 +420,16 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	public void setStatus(int status);
 
 	/**
-	 * Gets the status by user id of this layout revision.
+	 * Gets the status by user ID of this layout revision.
 	 *
-	 * @return the status by user id of this layout revision
+	 * @return the status by user ID of this layout revision
 	 */
 	public long getStatusByUserId();
 
 	/**
-	 * Sets the status by user id of this layout revision.
+	 * Sets the status by user ID of this layout revision.
 	 *
-	 * @param statusByUserId the status by user id of this layout revision
+	 * @param statusByUserId the status by user ID of this layout revision
 	 */
 	public void setStatusByUserId(long statusByUserId);
 

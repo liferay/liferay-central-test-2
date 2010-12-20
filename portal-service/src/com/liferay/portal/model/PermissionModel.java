@@ -56,59 +56,59 @@ public interface PermissionModel extends BaseModel<Permission> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the permission id of this permission.
+	 * Gets the permission ID of this permission.
 	 *
-	 * @return the permission id of this permission
+	 * @return the permission ID of this permission
 	 */
 	public long getPermissionId();
 
 	/**
-	 * Sets the permission id of this permission.
+	 * Sets the permission ID of this permission.
 	 *
-	 * @param permissionId the permission id of this permission
+	 * @param permissionId the permission ID of this permission
 	 */
 	public void setPermissionId(long permissionId);
 
 	/**
-	 * Gets the company id of this permission.
+	 * Gets the company ID of this permission.
 	 *
-	 * @return the company id of this permission
+	 * @return the company ID of this permission
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this permission.
+	 * Sets the company ID of this permission.
 	 *
-	 * @param companyId the company id of this permission
+	 * @param companyId the company ID of this permission
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the action id of this permission.
+	 * Gets the action ID of this permission.
 	 *
-	 * @return the action id of this permission
+	 * @return the action ID of this permission
 	 */
 	@AutoEscape
 	public String getActionId();
 
 	/**
-	 * Sets the action id of this permission.
+	 * Sets the action ID of this permission.
 	 *
-	 * @param actionId the action id of this permission
+	 * @param actionId the action ID of this permission
 	 */
 	public void setActionId(String actionId);
 
 	/**
-	 * Gets the resource id of this permission.
+	 * Gets the resource ID of this permission.
 	 *
-	 * @return the resource id of this permission
+	 * @return the resource ID of this permission
 	 */
 	public long getResourceId();
 
 	/**
-	 * Sets the resource id of this permission.
+	 * Sets the resource ID of this permission.
 	 *
-	 * @param resourceId the resource id of this permission
+	 * @param resourceId the resource ID of this permission
 	 */
 	public void setResourceId(long resourceId);
 

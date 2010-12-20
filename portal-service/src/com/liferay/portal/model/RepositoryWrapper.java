@@ -47,36 +47,36 @@ public class RepositoryWrapper implements Repository {
 	}
 
 	/**
-	* Gets the repository id of this repository.
+	* Gets the repository ID of this repository.
 	*
-	* @return the repository id of this repository
+	* @return the repository ID of this repository
 	*/
 	public long getRepositoryId() {
 		return _repository.getRepositoryId();
 	}
 
 	/**
-	* Sets the repository id of this repository.
+	* Sets the repository ID of this repository.
 	*
-	* @param repositoryId the repository id of this repository
+	* @param repositoryId the repository ID of this repository
 	*/
 	public void setRepositoryId(long repositoryId) {
 		_repository.setRepositoryId(repositoryId);
 	}
 
 	/**
-	* Gets the company id of this repository.
+	* Gets the company ID of this repository.
 	*
-	* @return the company id of this repository
+	* @return the company ID of this repository
 	*/
 	public long getCompanyId() {
 		return _repository.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this repository.
+	* Sets the company ID of this repository.
 	*
-	* @param companyId the company id of this repository
+	* @param companyId the company ID of this repository
 	*/
 	public void setCompanyId(long companyId) {
 		_repository.setCompanyId(companyId);
@@ -119,18 +119,18 @@ public class RepositoryWrapper implements Repository {
 	}
 
 	/**
-	* Gets the group id of this repository.
+	* Gets the group ID of this repository.
 	*
-	* @return the group id of this repository
+	* @return the group ID of this repository
 	*/
 	public long getGroupId() {
 		return _repository.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this repository.
+	* Sets the group ID of this repository.
 	*
-	* @param groupId the group id of this repository
+	* @param groupId the group ID of this repository
 	*/
 	public void setGroupId(long groupId) {
 		_repository.setGroupId(groupId);
@@ -191,18 +191,18 @@ public class RepositoryWrapper implements Repository {
 	}
 
 	/**
-	* Gets the mapped folder id of this repository.
+	* Gets the mapped folder ID of this repository.
 	*
-	* @return the mapped folder id of this repository
+	* @return the mapped folder ID of this repository
 	*/
 	public long getMappedFolderId() {
 		return _repository.getMappedFolderId();
 	}
 
 	/**
-	* Sets the mapped folder id of this repository.
+	* Sets the mapped folder ID of this repository.
 	*
-	* @param mappedFolderId the mapped folder id of this repository
+	* @param mappedFolderId the mapped folder ID of this repository
 	*/
 	public void setMappedFolderId(long mappedFolderId) {
 		_repository.setMappedFolderId(mappedFolderId);

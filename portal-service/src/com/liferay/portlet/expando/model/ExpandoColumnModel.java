@@ -55,44 +55,44 @@ public interface ExpandoColumnModel extends BaseModel<ExpandoColumn> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the column id of this expando column.
+	 * Gets the column ID of this expando column.
 	 *
-	 * @return the column id of this expando column
+	 * @return the column ID of this expando column
 	 */
 	public long getColumnId();
 
 	/**
-	 * Sets the column id of this expando column.
+	 * Sets the column ID of this expando column.
 	 *
-	 * @param columnId the column id of this expando column
+	 * @param columnId the column ID of this expando column
 	 */
 	public void setColumnId(long columnId);
 
 	/**
-	 * Gets the company id of this expando column.
+	 * Gets the company ID of this expando column.
 	 *
-	 * @return the company id of this expando column
+	 * @return the company ID of this expando column
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this expando column.
+	 * Sets the company ID of this expando column.
 	 *
-	 * @param companyId the company id of this expando column
+	 * @param companyId the company ID of this expando column
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the table id of this expando column.
+	 * Gets the table ID of this expando column.
 	 *
-	 * @return the table id of this expando column
+	 * @return the table ID of this expando column
 	 */
 	public long getTableId();
 
 	/**
-	 * Sets the table id of this expando column.
+	 * Sets the table ID of this expando column.
 	 *
-	 * @param tableId the table id of this expando column
+	 * @param tableId the table ID of this expando column
 	 */
 	public void setTableId(long tableId);
 

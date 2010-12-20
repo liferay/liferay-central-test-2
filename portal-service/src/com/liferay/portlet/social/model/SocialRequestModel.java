@@ -73,58 +73,58 @@ public interface SocialRequestModel extends BaseModel<SocialRequest> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the request id of this social request.
+	 * Gets the request ID of this social request.
 	 *
-	 * @return the request id of this social request
+	 * @return the request ID of this social request
 	 */
 	public long getRequestId();
 
 	/**
-	 * Sets the request id of this social request.
+	 * Sets the request ID of this social request.
 	 *
-	 * @param requestId the request id of this social request
+	 * @param requestId the request ID of this social request
 	 */
 	public void setRequestId(long requestId);
 
 	/**
-	 * Gets the group id of this social request.
+	 * Gets the group ID of this social request.
 	 *
-	 * @return the group id of this social request
+	 * @return the group ID of this social request
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this social request.
+	 * Sets the group ID of this social request.
 	 *
-	 * @param groupId the group id of this social request
+	 * @param groupId the group ID of this social request
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this social request.
+	 * Gets the company ID of this social request.
 	 *
-	 * @return the company id of this social request
+	 * @return the company ID of this social request
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this social request.
+	 * Sets the company ID of this social request.
 	 *
-	 * @param companyId the company id of this social request
+	 * @param companyId the company ID of this social request
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this social request.
+	 * Gets the user ID of this social request.
 	 *
-	 * @return the user id of this social request
+	 * @return the user ID of this social request
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this social request.
+	 * Sets the user ID of this social request.
 	 *
-	 * @param userId the user id of this social request
+	 * @param userId the user ID of this social request
 	 */
 	public void setUserId(long userId);
 
@@ -179,16 +179,16 @@ public interface SocialRequestModel extends BaseModel<SocialRequest> {
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this social request.
+	 * Gets the class name ID of this social request.
 	 *
-	 * @return the class name id of this social request
+	 * @return the class name ID of this social request
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this social request.
+	 * Sets the class name ID of this social request.
 	 *
-	 * @param classNameId the class name id of this social request
+	 * @param classNameId the class name ID of this social request
 	 */
 	public void setClassNameId(long classNameId);
 
@@ -236,16 +236,16 @@ public interface SocialRequestModel extends BaseModel<SocialRequest> {
 	public void setExtraData(String extraData);
 
 	/**
-	 * Gets the receiver user id of this social request.
+	 * Gets the receiver user ID of this social request.
 	 *
-	 * @return the receiver user id of this social request
+	 * @return the receiver user ID of this social request
 	 */
 	public long getReceiverUserId();
 
 	/**
-	 * Sets the receiver user id of this social request.
+	 * Sets the receiver user ID of this social request.
 	 *
-	 * @param receiverUserId the receiver user id of this social request
+	 * @param receiverUserId the receiver user ID of this social request
 	 */
 	public void setReceiverUserId(long receiverUserId);
 

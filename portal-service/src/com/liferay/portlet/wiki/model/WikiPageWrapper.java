@@ -65,18 +65,18 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the page id of this wiki page.
+	* Gets the page ID of this wiki page.
 	*
-	* @return the page id of this wiki page
+	* @return the page ID of this wiki page
 	*/
 	public long getPageId() {
 		return _wikiPage.getPageId();
 	}
 
 	/**
-	* Sets the page id of this wiki page.
+	* Sets the page ID of this wiki page.
 	*
-	* @param pageId the page id of this wiki page
+	* @param pageId the page ID of this wiki page
 	*/
 	public void setPageId(long pageId) {
 		_wikiPage.setPageId(pageId);
@@ -101,54 +101,54 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the group id of this wiki page.
+	* Gets the group ID of this wiki page.
 	*
-	* @return the group id of this wiki page
+	* @return the group ID of this wiki page
 	*/
 	public long getGroupId() {
 		return _wikiPage.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this wiki page.
+	* Sets the group ID of this wiki page.
 	*
-	* @param groupId the group id of this wiki page
+	* @param groupId the group ID of this wiki page
 	*/
 	public void setGroupId(long groupId) {
 		_wikiPage.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this wiki page.
+	* Gets the company ID of this wiki page.
 	*
-	* @return the company id of this wiki page
+	* @return the company ID of this wiki page
 	*/
 	public long getCompanyId() {
 		return _wikiPage.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this wiki page.
+	* Sets the company ID of this wiki page.
 	*
-	* @param companyId the company id of this wiki page
+	* @param companyId the company ID of this wiki page
 	*/
 	public void setCompanyId(long companyId) {
 		_wikiPage.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this wiki page.
+	* Gets the user ID of this wiki page.
 	*
-	* @return the user id of this wiki page
+	* @return the user ID of this wiki page
 	*/
 	public long getUserId() {
 		return _wikiPage.getUserId();
 	}
 
 	/**
-	* Sets the user id of this wiki page.
+	* Sets the user ID of this wiki page.
 	*
-	* @param userId the user id of this wiki page
+	* @param userId the user ID of this wiki page
 	*/
 	public void setUserId(long userId) {
 		_wikiPage.setUserId(userId);
@@ -229,18 +229,18 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the node id of this wiki page.
+	* Gets the node ID of this wiki page.
 	*
-	* @return the node id of this wiki page
+	* @return the node ID of this wiki page
 	*/
 	public long getNodeId() {
 		return _wikiPage.getNodeId();
 	}
 
 	/**
-	* Sets the node id of this wiki page.
+	* Sets the node ID of this wiki page.
 	*
-	* @param nodeId the node id of this wiki page
+	* @param nodeId the node ID of this wiki page
 	*/
 	public void setNodeId(long nodeId) {
 		_wikiPage.setNodeId(nodeId);
@@ -445,18 +445,18 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Gets the status by user id of this wiki page.
+	* Gets the status by user ID of this wiki page.
 	*
-	* @return the status by user id of this wiki page
+	* @return the status by user ID of this wiki page
 	*/
 	public long getStatusByUserId() {
 		return _wikiPage.getStatusByUserId();
 	}
 
 	/**
-	* Sets the status by user id of this wiki page.
+	* Sets the status by user ID of this wiki page.
 	*
-	* @param statusByUserId the status by user id of this wiki page
+	* @param statusByUserId the status by user ID of this wiki page
 	*/
 	public void setStatusByUserId(long statusByUserId) {
 		_wikiPage.setStatusByUserId(statusByUserId);

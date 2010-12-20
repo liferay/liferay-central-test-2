@@ -433,7 +433,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	/**
 	 * Finds all the teams where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching teams
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -448,7 +448,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of teams to return
 	 * @param end the upper bound of the range of teams to return (not inclusive)
 	 * @return the range of matching teams
@@ -466,7 +466,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of teams to return
 	 * @param end the upper bound of the range of teams to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -553,7 +553,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching team
 	 * @throws com.liferay.portal.NoSuchTeamException if a matching team could not be found
@@ -588,7 +588,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching team
 	 * @throws com.liferay.portal.NoSuchTeamException if a matching team could not be found
@@ -627,7 +627,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * </p>
 	 *
 	 * @param teamId the primary key of the current team
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next team
 	 * @throws com.liferay.portal.NoSuchTeamException if a team with the primary key could not be found
@@ -769,7 +769,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	/**
 	 * Filters by the user's permissions and finds all the teams where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the matching teams that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -786,7 +786,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of teams to return
 	 * @param end the upper bound of the range of teams to return (not inclusive)
 	 * @return the range of matching teams that the user has permission to view
@@ -804,7 +804,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of teams to return
 	 * @param end the upper bound of the range of teams to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
@@ -895,7 +895,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	/**
 	 * Finds the team where groupId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchTeamException} if it could not be found.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param name the name to search with
 	 * @return the matching team
 	 * @throws com.liferay.portal.NoSuchTeamException if a matching team could not be found
@@ -931,7 +931,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	/**
 	 * Finds the team where groupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param name the name to search with
 	 * @return the matching team, or <code>null</code> if a matching team could not be found
 	 * @throws SystemException if a system exception occurred
@@ -943,7 +943,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	/**
 	 * Finds the team where groupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param name the name to search with
 	 * @return the matching team, or <code>null</code> if a matching team could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1155,7 +1155,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	/**
 	 * Removes all the teams where groupId = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
@@ -1167,7 +1167,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	/**
 	 * Removes the team where groupId = &#63; and name = &#63; from the database.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param name the name to search with
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1192,7 +1192,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	/**
 	 * Counts all the teams where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the number of matching teams
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1245,7 +1245,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	/**
 	 * Filters by the user's permissions and counts all the teams where groupId = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @return the number of matching teams that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1293,7 +1293,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	/**
 	 * Counts all the teams where groupId = &#63; and name = &#63;.
 	 *
-	 * @param groupId the group id to search with
+	 * @param groupId the group ID to search with
 	 * @param name the name to search with
 	 * @return the number of matching teams
 	 * @throws SystemException if a system exception occurred

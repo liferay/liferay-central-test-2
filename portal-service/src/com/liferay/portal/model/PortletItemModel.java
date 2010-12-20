@@ -59,58 +59,58 @@ public interface PortletItemModel extends BaseModel<PortletItem> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the portlet item id of this portlet item.
+	 * Gets the portlet item ID of this portlet item.
 	 *
-	 * @return the portlet item id of this portlet item
+	 * @return the portlet item ID of this portlet item
 	 */
 	public long getPortletItemId();
 
 	/**
-	 * Sets the portlet item id of this portlet item.
+	 * Sets the portlet item ID of this portlet item.
 	 *
-	 * @param portletItemId the portlet item id of this portlet item
+	 * @param portletItemId the portlet item ID of this portlet item
 	 */
 	public void setPortletItemId(long portletItemId);
 
 	/**
-	 * Gets the group id of this portlet item.
+	 * Gets the group ID of this portlet item.
 	 *
-	 * @return the group id of this portlet item
+	 * @return the group ID of this portlet item
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this portlet item.
+	 * Sets the group ID of this portlet item.
 	 *
-	 * @param groupId the group id of this portlet item
+	 * @param groupId the group ID of this portlet item
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this portlet item.
+	 * Gets the company ID of this portlet item.
 	 *
-	 * @return the company id of this portlet item
+	 * @return the company ID of this portlet item
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this portlet item.
+	 * Sets the company ID of this portlet item.
 	 *
-	 * @param companyId the company id of this portlet item
+	 * @param companyId the company ID of this portlet item
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this portlet item.
+	 * Gets the user ID of this portlet item.
 	 *
-	 * @return the user id of this portlet item
+	 * @return the user ID of this portlet item
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this portlet item.
+	 * Sets the user ID of this portlet item.
 	 *
-	 * @param userId the user id of this portlet item
+	 * @param userId the user ID of this portlet item
 	 */
 	public void setUserId(long userId);
 
@@ -188,17 +188,17 @@ public interface PortletItemModel extends BaseModel<PortletItem> {
 	public void setName(String name);
 
 	/**
-	 * Gets the portlet id of this portlet item.
+	 * Gets the portlet ID of this portlet item.
 	 *
-	 * @return the portlet id of this portlet item
+	 * @return the portlet ID of this portlet item
 	 */
 	@AutoEscape
 	public String getPortletId();
 
 	/**
-	 * Sets the portlet id of this portlet item.
+	 * Sets the portlet ID of this portlet item.
 	 *
-	 * @param portletId the portlet id of this portlet item
+	 * @param portletId the portlet ID of this portlet item
 	 */
 	public void setPortletId(String portletId);
 
@@ -210,16 +210,16 @@ public interface PortletItemModel extends BaseModel<PortletItem> {
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this portlet item.
+	 * Gets the class name ID of this portlet item.
 	 *
-	 * @return the class name id of this portlet item
+	 * @return the class name ID of this portlet item
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this portlet item.
+	 * Sets the class name ID of this portlet item.
 	 *
-	 * @param classNameId the class name id of this portlet item
+	 * @param classNameId the class name ID of this portlet item
 	 */
 	public void setClassNameId(long classNameId);
 

@@ -47,54 +47,54 @@ public class PhoneWrapper implements Phone {
 	}
 
 	/**
-	* Gets the phone id of this phone.
+	* Gets the phone ID of this phone.
 	*
-	* @return the phone id of this phone
+	* @return the phone ID of this phone
 	*/
 	public long getPhoneId() {
 		return _phone.getPhoneId();
 	}
 
 	/**
-	* Sets the phone id of this phone.
+	* Sets the phone ID of this phone.
 	*
-	* @param phoneId the phone id of this phone
+	* @param phoneId the phone ID of this phone
 	*/
 	public void setPhoneId(long phoneId) {
 		_phone.setPhoneId(phoneId);
 	}
 
 	/**
-	* Gets the company id of this phone.
+	* Gets the company ID of this phone.
 	*
-	* @return the company id of this phone
+	* @return the company ID of this phone
 	*/
 	public long getCompanyId() {
 		return _phone.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this phone.
+	* Sets the company ID of this phone.
 	*
-	* @param companyId the company id of this phone
+	* @param companyId the company ID of this phone
 	*/
 	public void setCompanyId(long companyId) {
 		_phone.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this phone.
+	* Gets the user ID of this phone.
 	*
-	* @return the user id of this phone
+	* @return the user ID of this phone
 	*/
 	public long getUserId() {
 		return _phone.getUserId();
 	}
 
 	/**
-	* Sets the user id of this phone.
+	* Sets the user ID of this phone.
 	*
-	* @param userId the user id of this phone
+	* @param userId the user ID of this phone
 	*/
 	public void setUserId(long userId) {
 		_phone.setUserId(userId);
@@ -184,18 +184,18 @@ public class PhoneWrapper implements Phone {
 	}
 
 	/**
-	* Gets the class name id of this phone.
+	* Gets the class name ID of this phone.
 	*
-	* @return the class name id of this phone
+	* @return the class name ID of this phone
 	*/
 	public long getClassNameId() {
 		return _phone.getClassNameId();
 	}
 
 	/**
-	* Sets the class name id of this phone.
+	* Sets the class name ID of this phone.
 	*
-	* @param classNameId the class name id of this phone
+	* @param classNameId the class name ID of this phone
 	*/
 	public void setClassNameId(long classNameId) {
 		_phone.setClassNameId(classNameId);
@@ -256,18 +256,18 @@ public class PhoneWrapper implements Phone {
 	}
 
 	/**
-	* Gets the type id of this phone.
+	* Gets the type ID of this phone.
 	*
-	* @return the type id of this phone
+	* @return the type ID of this phone
 	*/
 	public int getTypeId() {
 		return _phone.getTypeId();
 	}
 
 	/**
-	* Sets the type id of this phone.
+	* Sets the type ID of this phone.
 	*
-	* @param typeId the type id of this phone
+	* @param typeId the type ID of this phone
 	*/
 	public void setTypeId(int typeId) {
 		_phone.setTypeId(typeId);

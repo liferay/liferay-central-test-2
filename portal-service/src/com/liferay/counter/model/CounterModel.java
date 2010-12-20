@@ -72,16 +72,16 @@ public interface CounterModel extends BaseModel<Counter> {
 	public void setName(String name);
 
 	/**
-	 * Gets the current id of this counter.
+	 * Gets the current ID of this counter.
 	 *
-	 * @return the current id of this counter
+	 * @return the current ID of this counter
 	 */
 	public long getCurrentId();
 
 	/**
-	 * Sets the current id of this counter.
+	 * Sets the current ID of this counter.
 	 *
-	 * @param currentId the current id of this counter
+	 * @param currentId the current ID of this counter
 	 */
 	public void setCurrentId(long currentId);
 

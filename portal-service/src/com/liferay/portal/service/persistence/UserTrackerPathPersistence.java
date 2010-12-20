@@ -104,7 +104,7 @@ public interface UserTrackerPathPersistence extends BasePersistence<UserTrackerP
 	/**
 	* Finds all the user tracker paths where userTrackerId = &#63;.
 	*
-	* @param userTrackerId the user tracker id to search with
+	* @param userTrackerId the user tracker ID to search with
 	* @return the matching user tracker paths
 	* @throws SystemException if a system exception occurred
 	*/
@@ -119,7 +119,7 @@ public interface UserTrackerPathPersistence extends BasePersistence<UserTrackerP
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userTrackerId the user tracker id to search with
+	* @param userTrackerId the user tracker ID to search with
 	* @param start the lower bound of the range of user tracker paths to return
 	* @param end the upper bound of the range of user tracker paths to return (not inclusive)
 	* @return the range of matching user tracker paths
@@ -136,7 +136,7 @@ public interface UserTrackerPathPersistence extends BasePersistence<UserTrackerP
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userTrackerId the user tracker id to search with
+	* @param userTrackerId the user tracker ID to search with
 	* @param start the lower bound of the range of user tracker paths to return
 	* @param end the upper bound of the range of user tracker paths to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -155,7 +155,7 @@ public interface UserTrackerPathPersistence extends BasePersistence<UserTrackerP
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userTrackerId the user tracker id to search with
+	* @param userTrackerId the user tracker ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching user tracker path
 	* @throws com.liferay.portal.NoSuchUserTrackerPathException if a matching user tracker path could not be found
@@ -174,7 +174,7 @@ public interface UserTrackerPathPersistence extends BasePersistence<UserTrackerP
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param userTrackerId the user tracker id to search with
+	* @param userTrackerId the user tracker ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching user tracker path
 	* @throws com.liferay.portal.NoSuchUserTrackerPathException if a matching user tracker path could not be found
@@ -194,7 +194,7 @@ public interface UserTrackerPathPersistence extends BasePersistence<UserTrackerP
 	* </p>
 	*
 	* @param userTrackerPathId the primary key of the current user tracker path
-	* @param userTrackerId the user tracker id to search with
+	* @param userTrackerId the user tracker ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next user tracker path
 	* @throws com.liferay.portal.NoSuchUserTrackerPathException if a user tracker path with the primary key could not be found
@@ -252,7 +252,7 @@ public interface UserTrackerPathPersistence extends BasePersistence<UserTrackerP
 	/**
 	* Removes all the user tracker paths where userTrackerId = &#63; from the database.
 	*
-	* @param userTrackerId the user tracker id to search with
+	* @param userTrackerId the user tracker ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByUserTrackerId(long userTrackerId)
@@ -269,7 +269,7 @@ public interface UserTrackerPathPersistence extends BasePersistence<UserTrackerP
 	/**
 	* Counts all the user tracker paths where userTrackerId = &#63;.
 	*
-	* @param userTrackerId the user tracker id to search with
+	* @param userTrackerId the user tracker ID to search with
 	* @return the number of matching user tracker paths
 	* @throws SystemException if a system exception occurred
 	*/

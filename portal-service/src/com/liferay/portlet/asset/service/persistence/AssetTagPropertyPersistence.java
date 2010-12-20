@@ -107,7 +107,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	/**
 	* Finds all the asset tag properties where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the matching asset tag properties
 	* @throws SystemException if a system exception occurred
 	*/
@@ -122,7 +122,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of asset tag properties to return
 	* @param end the upper bound of the range of asset tag properties to return (not inclusive)
 	* @return the range of matching asset tag properties
@@ -139,7 +139,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of asset tag properties to return
 	* @param end the upper bound of the range of asset tag properties to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -158,7 +158,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching asset tag property
 	* @throws com.liferay.portlet.asset.NoSuchTagPropertyException if a matching asset tag property could not be found
@@ -177,7 +177,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching asset tag property
 	* @throws com.liferay.portlet.asset.NoSuchTagPropertyException if a matching asset tag property could not be found
@@ -197,7 +197,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	* </p>
 	*
 	* @param tagPropertyId the primary key of the current asset tag property
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next asset tag property
 	* @throws com.liferay.portlet.asset.NoSuchTagPropertyException if a asset tag property with the primary key could not be found
@@ -212,7 +212,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	/**
 	* Finds all the asset tag properties where tagId = &#63;.
 	*
-	* @param tagId the tag id to search with
+	* @param tagId the tag ID to search with
 	* @return the matching asset tag properties
 	* @throws SystemException if a system exception occurred
 	*/
@@ -226,7 +226,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tagId the tag id to search with
+	* @param tagId the tag ID to search with
 	* @param start the lower bound of the range of asset tag properties to return
 	* @param end the upper bound of the range of asset tag properties to return (not inclusive)
 	* @return the range of matching asset tag properties
@@ -243,7 +243,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tagId the tag id to search with
+	* @param tagId the tag ID to search with
 	* @param start the lower bound of the range of asset tag properties to return
 	* @param end the upper bound of the range of asset tag properties to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -262,7 +262,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tagId the tag id to search with
+	* @param tagId the tag ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching asset tag property
 	* @throws com.liferay.portlet.asset.NoSuchTagPropertyException if a matching asset tag property could not be found
@@ -281,7 +281,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param tagId the tag id to search with
+	* @param tagId the tag ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching asset tag property
 	* @throws com.liferay.portlet.asset.NoSuchTagPropertyException if a matching asset tag property could not be found
@@ -301,7 +301,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	* </p>
 	*
 	* @param tagPropertyId the primary key of the current asset tag property
-	* @param tagId the tag id to search with
+	* @param tagId the tag ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next asset tag property
 	* @throws com.liferay.portlet.asset.NoSuchTagPropertyException if a asset tag property with the primary key could not be found
@@ -316,7 +316,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	/**
 	* Finds all the asset tag properties where companyId = &#63; and key = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param key the key to search with
 	* @return the matching asset tag properties
 	* @throws SystemException if a system exception occurred
@@ -332,7 +332,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param key the key to search with
 	* @param start the lower bound of the range of asset tag properties to return
 	* @param end the upper bound of the range of asset tag properties to return (not inclusive)
@@ -350,7 +350,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param key the key to search with
 	* @param start the lower bound of the range of asset tag properties to return
 	* @param end the upper bound of the range of asset tag properties to return (not inclusive)
@@ -370,7 +370,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param key the key to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching asset tag property
@@ -390,7 +390,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param key the key to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching asset tag property
@@ -411,7 +411,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	* </p>
 	*
 	* @param tagPropertyId the primary key of the current asset tag property
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param key the key to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next asset tag property
@@ -427,7 +427,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	/**
 	* Finds the asset tag property where tagId = &#63; and key = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchTagPropertyException} if it could not be found.
 	*
-	* @param tagId the tag id to search with
+	* @param tagId the tag ID to search with
 	* @param key the key to search with
 	* @return the matching asset tag property
 	* @throws com.liferay.portlet.asset.NoSuchTagPropertyException if a matching asset tag property could not be found
@@ -441,7 +441,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	/**
 	* Finds the asset tag property where tagId = &#63; and key = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param tagId the tag id to search with
+	* @param tagId the tag ID to search with
 	* @param key the key to search with
 	* @return the matching asset tag property, or <code>null</code> if a matching asset tag property could not be found
 	* @throws SystemException if a system exception occurred
@@ -453,7 +453,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	/**
 	* Finds the asset tag property where tagId = &#63; and key = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param tagId the tag id to search with
+	* @param tagId the tag ID to search with
 	* @param key the key to search with
 	* @return the matching asset tag property, or <code>null</code> if a matching asset tag property could not be found
 	* @throws SystemException if a system exception occurred
@@ -508,7 +508,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	/**
 	* Removes all the asset tag properties where companyId = &#63; from the database.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByCompanyId(long companyId)
@@ -517,7 +517,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	/**
 	* Removes all the asset tag properties where tagId = &#63; from the database.
 	*
-	* @param tagId the tag id to search with
+	* @param tagId the tag ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByTagId(long tagId)
@@ -526,7 +526,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	/**
 	* Removes all the asset tag properties where companyId = &#63; and key = &#63; from the database.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param key the key to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -536,7 +536,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	/**
 	* Removes the asset tag property where tagId = &#63; and key = &#63; from the database.
 	*
-	* @param tagId the tag id to search with
+	* @param tagId the tag ID to search with
 	* @param key the key to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -555,7 +555,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	/**
 	* Counts all the asset tag properties where companyId = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @return the number of matching asset tag properties
 	* @throws SystemException if a system exception occurred
 	*/
@@ -565,7 +565,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	/**
 	* Counts all the asset tag properties where tagId = &#63;.
 	*
-	* @param tagId the tag id to search with
+	* @param tagId the tag ID to search with
 	* @return the number of matching asset tag properties
 	* @throws SystemException if a system exception occurred
 	*/
@@ -575,7 +575,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	/**
 	* Counts all the asset tag properties where companyId = &#63; and key = &#63;.
 	*
-	* @param companyId the company id to search with
+	* @param companyId the company ID to search with
 	* @param key the key to search with
 	* @return the number of matching asset tag properties
 	* @throws SystemException if a system exception occurred
@@ -586,7 +586,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	/**
 	* Counts all the asset tag properties where tagId = &#63; and key = &#63;.
 	*
-	* @param tagId the tag id to search with
+	* @param tagId the tag ID to search with
 	* @param key the key to search with
 	* @return the number of matching asset tag properties
 	* @throws SystemException if a system exception occurred

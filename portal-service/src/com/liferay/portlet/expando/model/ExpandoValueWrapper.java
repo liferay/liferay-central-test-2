@@ -47,90 +47,90 @@ public class ExpandoValueWrapper implements ExpandoValue {
 	}
 
 	/**
-	* Gets the value id of this expando value.
+	* Gets the value ID of this expando value.
 	*
-	* @return the value id of this expando value
+	* @return the value ID of this expando value
 	*/
 	public long getValueId() {
 		return _expandoValue.getValueId();
 	}
 
 	/**
-	* Sets the value id of this expando value.
+	* Sets the value ID of this expando value.
 	*
-	* @param valueId the value id of this expando value
+	* @param valueId the value ID of this expando value
 	*/
 	public void setValueId(long valueId) {
 		_expandoValue.setValueId(valueId);
 	}
 
 	/**
-	* Gets the company id of this expando value.
+	* Gets the company ID of this expando value.
 	*
-	* @return the company id of this expando value
+	* @return the company ID of this expando value
 	*/
 	public long getCompanyId() {
 		return _expandoValue.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this expando value.
+	* Sets the company ID of this expando value.
 	*
-	* @param companyId the company id of this expando value
+	* @param companyId the company ID of this expando value
 	*/
 	public void setCompanyId(long companyId) {
 		_expandoValue.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the table id of this expando value.
+	* Gets the table ID of this expando value.
 	*
-	* @return the table id of this expando value
+	* @return the table ID of this expando value
 	*/
 	public long getTableId() {
 		return _expandoValue.getTableId();
 	}
 
 	/**
-	* Sets the table id of this expando value.
+	* Sets the table ID of this expando value.
 	*
-	* @param tableId the table id of this expando value
+	* @param tableId the table ID of this expando value
 	*/
 	public void setTableId(long tableId) {
 		_expandoValue.setTableId(tableId);
 	}
 
 	/**
-	* Gets the column id of this expando value.
+	* Gets the column ID of this expando value.
 	*
-	* @return the column id of this expando value
+	* @return the column ID of this expando value
 	*/
 	public long getColumnId() {
 		return _expandoValue.getColumnId();
 	}
 
 	/**
-	* Sets the column id of this expando value.
+	* Sets the column ID of this expando value.
 	*
-	* @param columnId the column id of this expando value
+	* @param columnId the column ID of this expando value
 	*/
 	public void setColumnId(long columnId) {
 		_expandoValue.setColumnId(columnId);
 	}
 
 	/**
-	* Gets the row id of this expando value.
+	* Gets the row ID of this expando value.
 	*
-	* @return the row id of this expando value
+	* @return the row ID of this expando value
 	*/
 	public long getRowId() {
 		return _expandoValue.getRowId();
 	}
 
 	/**
-	* Sets the row id of this expando value.
+	* Sets the row ID of this expando value.
 	*
-	* @param rowId the row id of this expando value
+	* @param rowId the row ID of this expando value
 	*/
 	public void setRowId(long rowId) {
 		_expandoValue.setRowId(rowId);
@@ -146,18 +146,18 @@ public class ExpandoValueWrapper implements ExpandoValue {
 	}
 
 	/**
-	* Gets the class name id of this expando value.
+	* Gets the class name ID of this expando value.
 	*
-	* @return the class name id of this expando value
+	* @return the class name ID of this expando value
 	*/
 	public long getClassNameId() {
 		return _expandoValue.getClassNameId();
 	}
 
 	/**
-	* Sets the class name id of this expando value.
+	* Sets the class name ID of this expando value.
 	*
-	* @param classNameId the class name id of this expando value
+	* @param classNameId the class name ID of this expando value
 	*/
 	public void setClassNameId(long classNameId) {
 		_expandoValue.setClassNameId(classNameId);

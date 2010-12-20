@@ -47,54 +47,54 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 	}
 
 	/**
-	* Gets the article image id of this journal article image.
+	* Gets the article image ID of this journal article image.
 	*
-	* @return the article image id of this journal article image
+	* @return the article image ID of this journal article image
 	*/
 	public long getArticleImageId() {
 		return _journalArticleImage.getArticleImageId();
 	}
 
 	/**
-	* Sets the article image id of this journal article image.
+	* Sets the article image ID of this journal article image.
 	*
-	* @param articleImageId the article image id of this journal article image
+	* @param articleImageId the article image ID of this journal article image
 	*/
 	public void setArticleImageId(long articleImageId) {
 		_journalArticleImage.setArticleImageId(articleImageId);
 	}
 
 	/**
-	* Gets the group id of this journal article image.
+	* Gets the group ID of this journal article image.
 	*
-	* @return the group id of this journal article image
+	* @return the group ID of this journal article image
 	*/
 	public long getGroupId() {
 		return _journalArticleImage.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this journal article image.
+	* Sets the group ID of this journal article image.
 	*
-	* @param groupId the group id of this journal article image
+	* @param groupId the group ID of this journal article image
 	*/
 	public void setGroupId(long groupId) {
 		_journalArticleImage.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the article id of this journal article image.
+	* Gets the article ID of this journal article image.
 	*
-	* @return the article id of this journal article image
+	* @return the article ID of this journal article image
 	*/
 	public java.lang.String getArticleId() {
 		return _journalArticleImage.getArticleId();
 	}
 
 	/**
-	* Sets the article id of this journal article image.
+	* Sets the article ID of this journal article image.
 	*
-	* @param articleId the article id of this journal article image
+	* @param articleId the article ID of this journal article image
 	*/
 	public void setArticleId(java.lang.String articleId) {
 		_journalArticleImage.setArticleId(articleId);
@@ -119,18 +119,18 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 	}
 
 	/**
-	* Gets the el instance id of this journal article image.
+	* Gets the el instance ID of this journal article image.
 	*
-	* @return the el instance id of this journal article image
+	* @return the el instance ID of this journal article image
 	*/
 	public java.lang.String getElInstanceId() {
 		return _journalArticleImage.getElInstanceId();
 	}
 
 	/**
-	* Sets the el instance id of this journal article image.
+	* Sets the el instance ID of this journal article image.
 	*
-	* @param elInstanceId the el instance id of this journal article image
+	* @param elInstanceId the el instance ID of this journal article image
 	*/
 	public void setElInstanceId(java.lang.String elInstanceId) {
 		_journalArticleImage.setElInstanceId(elInstanceId);
@@ -155,18 +155,18 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 	}
 
 	/**
-	* Gets the language id of this journal article image.
+	* Gets the language ID of this journal article image.
 	*
-	* @return the language id of this journal article image
+	* @return the language ID of this journal article image
 	*/
 	public java.lang.String getLanguageId() {
 		return _journalArticleImage.getLanguageId();
 	}
 
 	/**
-	* Sets the language id of this journal article image.
+	* Sets the language ID of this journal article image.
 	*
-	* @param languageId the language id of this journal article image
+	* @param languageId the language ID of this journal article image
 	*/
 	public void setLanguageId(java.lang.String languageId) {
 		_journalArticleImage.setLanguageId(languageId);

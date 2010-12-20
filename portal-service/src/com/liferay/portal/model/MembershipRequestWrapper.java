@@ -47,54 +47,54 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	/**
-	* Gets the membership request id of this membership request.
+	* Gets the membership request ID of this membership request.
 	*
-	* @return the membership request id of this membership request
+	* @return the membership request ID of this membership request
 	*/
 	public long getMembershipRequestId() {
 		return _membershipRequest.getMembershipRequestId();
 	}
 
 	/**
-	* Sets the membership request id of this membership request.
+	* Sets the membership request ID of this membership request.
 	*
-	* @param membershipRequestId the membership request id of this membership request
+	* @param membershipRequestId the membership request ID of this membership request
 	*/
 	public void setMembershipRequestId(long membershipRequestId) {
 		_membershipRequest.setMembershipRequestId(membershipRequestId);
 	}
 
 	/**
-	* Gets the company id of this membership request.
+	* Gets the company ID of this membership request.
 	*
-	* @return the company id of this membership request
+	* @return the company ID of this membership request
 	*/
 	public long getCompanyId() {
 		return _membershipRequest.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this membership request.
+	* Sets the company ID of this membership request.
 	*
-	* @param companyId the company id of this membership request
+	* @param companyId the company ID of this membership request
 	*/
 	public void setCompanyId(long companyId) {
 		_membershipRequest.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this membership request.
+	* Gets the user ID of this membership request.
 	*
-	* @return the user id of this membership request
+	* @return the user ID of this membership request
 	*/
 	public long getUserId() {
 		return _membershipRequest.getUserId();
 	}
 
 	/**
-	* Sets the user id of this membership request.
+	* Sets the user ID of this membership request.
 	*
-	* @param userId the user id of this membership request
+	* @param userId the user ID of this membership request
 	*/
 	public void setUserId(long userId) {
 		_membershipRequest.setUserId(userId);
@@ -139,18 +139,18 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	/**
-	* Gets the group id of this membership request.
+	* Gets the group ID of this membership request.
 	*
-	* @return the group id of this membership request
+	* @return the group ID of this membership request
 	*/
 	public long getGroupId() {
 		return _membershipRequest.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this membership request.
+	* Sets the group ID of this membership request.
 	*
-	* @param groupId the group id of this membership request
+	* @param groupId the group ID of this membership request
 	*/
 	public void setGroupId(long groupId) {
 		_membershipRequest.setGroupId(groupId);
@@ -211,18 +211,18 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	/**
-	* Gets the replier user id of this membership request.
+	* Gets the replier user ID of this membership request.
 	*
-	* @return the replier user id of this membership request
+	* @return the replier user ID of this membership request
 	*/
 	public long getReplierUserId() {
 		return _membershipRequest.getReplierUserId();
 	}
 
 	/**
-	* Sets the replier user id of this membership request.
+	* Sets the replier user ID of this membership request.
 	*
-	* @param replierUserId the replier user id of this membership request
+	* @param replierUserId the replier user ID of this membership request
 	*/
 	public void setReplierUserId(long replierUserId) {
 		_membershipRequest.setReplierUserId(replierUserId);
@@ -249,18 +249,18 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	/**
-	* Gets the status id of this membership request.
+	* Gets the status ID of this membership request.
 	*
-	* @return the status id of this membership request
+	* @return the status ID of this membership request
 	*/
 	public int getStatusId() {
 		return _membershipRequest.getStatusId();
 	}
 
 	/**
-	* Sets the status id of this membership request.
+	* Sets the status ID of this membership request.
 	*
-	* @param statusId the status id of this membership request
+	* @param statusId the status ID of this membership request
 	*/
 	public void setStatusId(int statusId) {
 		_membershipRequest.setStatusId(statusId);

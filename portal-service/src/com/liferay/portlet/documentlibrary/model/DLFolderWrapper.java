@@ -65,72 +65,72 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
-	* Gets the folder id of this d l folder.
+	* Gets the folder ID of this d l folder.
 	*
-	* @return the folder id of this d l folder
+	* @return the folder ID of this d l folder
 	*/
 	public long getFolderId() {
 		return _dlFolder.getFolderId();
 	}
 
 	/**
-	* Sets the folder id of this d l folder.
+	* Sets the folder ID of this d l folder.
 	*
-	* @param folderId the folder id of this d l folder
+	* @param folderId the folder ID of this d l folder
 	*/
 	public void setFolderId(long folderId) {
 		_dlFolder.setFolderId(folderId);
 	}
 
 	/**
-	* Gets the group id of this d l folder.
+	* Gets the group ID of this d l folder.
 	*
-	* @return the group id of this d l folder
+	* @return the group ID of this d l folder
 	*/
 	public long getGroupId() {
 		return _dlFolder.getGroupId();
 	}
 
 	/**
-	* Sets the group id of this d l folder.
+	* Sets the group ID of this d l folder.
 	*
-	* @param groupId the group id of this d l folder
+	* @param groupId the group ID of this d l folder
 	*/
 	public void setGroupId(long groupId) {
 		_dlFolder.setGroupId(groupId);
 	}
 
 	/**
-	* Gets the company id of this d l folder.
+	* Gets the company ID of this d l folder.
 	*
-	* @return the company id of this d l folder
+	* @return the company ID of this d l folder
 	*/
 	public long getCompanyId() {
 		return _dlFolder.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this d l folder.
+	* Sets the company ID of this d l folder.
 	*
-	* @param companyId the company id of this d l folder
+	* @param companyId the company ID of this d l folder
 	*/
 	public void setCompanyId(long companyId) {
 		_dlFolder.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the user id of this d l folder.
+	* Gets the user ID of this d l folder.
 	*
-	* @return the user id of this d l folder
+	* @return the user ID of this d l folder
 	*/
 	public long getUserId() {
 		return _dlFolder.getUserId();
 	}
 
 	/**
-	* Sets the user id of this d l folder.
+	* Sets the user ID of this d l folder.
 	*
-	* @param userId the user id of this d l folder
+	* @param userId the user ID of this d l folder
 	*/
 	public void setUserId(long userId) {
 		_dlFolder.setUserId(userId);
@@ -211,18 +211,18 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
-	* Gets the parent folder id of this d l folder.
+	* Gets the parent folder ID of this d l folder.
 	*
-	* @return the parent folder id of this d l folder
+	* @return the parent folder ID of this d l folder
 	*/
 	public long getParentFolderId() {
 		return _dlFolder.getParentFolderId();
 	}
 
 	/**
-	* Sets the parent folder id of this d l folder.
+	* Sets the parent folder ID of this d l folder.
 	*
-	* @param parentFolderId the parent folder id of this d l folder
+	* @param parentFolderId the parent folder ID of this d l folder
 	*/
 	public void setParentFolderId(long parentFolderId) {
 		_dlFolder.setParentFolderId(parentFolderId);

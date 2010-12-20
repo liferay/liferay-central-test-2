@@ -56,72 +56,72 @@ public interface OrganizationModel extends BaseModel<Organization> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the organization id of this organization.
+	 * Gets the organization ID of this organization.
 	 *
-	 * @return the organization id of this organization
+	 * @return the organization ID of this organization
 	 */
 	public long getOrganizationId();
 
 	/**
-	 * Sets the organization id of this organization.
+	 * Sets the organization ID of this organization.
 	 *
-	 * @param organizationId the organization id of this organization
+	 * @param organizationId the organization ID of this organization
 	 */
 	public void setOrganizationId(long organizationId);
 
 	/**
-	 * Gets the company id of this organization.
+	 * Gets the company ID of this organization.
 	 *
-	 * @return the company id of this organization
+	 * @return the company ID of this organization
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this organization.
+	 * Sets the company ID of this organization.
 	 *
-	 * @param companyId the company id of this organization
+	 * @param companyId the company ID of this organization
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the parent organization id of this organization.
+	 * Gets the parent organization ID of this organization.
 	 *
-	 * @return the parent organization id of this organization
+	 * @return the parent organization ID of this organization
 	 */
 	public long getParentOrganizationId();
 
 	/**
-	 * Sets the parent organization id of this organization.
+	 * Sets the parent organization ID of this organization.
 	 *
-	 * @param parentOrganizationId the parent organization id of this organization
+	 * @param parentOrganizationId the parent organization ID of this organization
 	 */
 	public void setParentOrganizationId(long parentOrganizationId);
 
 	/**
-	 * Gets the left organization id of this organization.
+	 * Gets the left organization ID of this organization.
 	 *
-	 * @return the left organization id of this organization
+	 * @return the left organization ID of this organization
 	 */
 	public long getLeftOrganizationId();
 
 	/**
-	 * Sets the left organization id of this organization.
+	 * Sets the left organization ID of this organization.
 	 *
-	 * @param leftOrganizationId the left organization id of this organization
+	 * @param leftOrganizationId the left organization ID of this organization
 	 */
 	public void setLeftOrganizationId(long leftOrganizationId);
 
 	/**
-	 * Gets the right organization id of this organization.
+	 * Gets the right organization ID of this organization.
 	 *
-	 * @return the right organization id of this organization
+	 * @return the right organization ID of this organization
 	 */
 	public long getRightOrganizationId();
 
 	/**
-	 * Sets the right organization id of this organization.
+	 * Sets the right organization ID of this organization.
 	 *
-	 * @param rightOrganizationId the right organization id of this organization
+	 * @param rightOrganizationId the right organization ID of this organization
 	 */
 	public void setRightOrganizationId(long rightOrganizationId);
 
@@ -176,44 +176,44 @@ public interface OrganizationModel extends BaseModel<Organization> {
 	public void setRecursable(boolean recursable);
 
 	/**
-	 * Gets the region id of this organization.
+	 * Gets the region ID of this organization.
 	 *
-	 * @return the region id of this organization
+	 * @return the region ID of this organization
 	 */
 	public long getRegionId();
 
 	/**
-	 * Sets the region id of this organization.
+	 * Sets the region ID of this organization.
 	 *
-	 * @param regionId the region id of this organization
+	 * @param regionId the region ID of this organization
 	 */
 	public void setRegionId(long regionId);
 
 	/**
-	 * Gets the country id of this organization.
+	 * Gets the country ID of this organization.
 	 *
-	 * @return the country id of this organization
+	 * @return the country ID of this organization
 	 */
 	public long getCountryId();
 
 	/**
-	 * Sets the country id of this organization.
+	 * Sets the country ID of this organization.
 	 *
-	 * @param countryId the country id of this organization
+	 * @param countryId the country ID of this organization
 	 */
 	public void setCountryId(long countryId);
 
 	/**
-	 * Gets the status id of this organization.
+	 * Gets the status ID of this organization.
 	 *
-	 * @return the status id of this organization
+	 * @return the status ID of this organization
 	 */
 	public int getStatusId();
 
 	/**
-	 * Sets the status id of this organization.
+	 * Sets the status ID of this organization.
 	 *
-	 * @param statusId the status id of this organization
+	 * @param statusId the status ID of this organization
 	 */
 	public void setStatusId(int statusId);
 

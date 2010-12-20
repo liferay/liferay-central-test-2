@@ -47,90 +47,90 @@ public class OrganizationWrapper implements Organization {
 	}
 
 	/**
-	* Gets the organization id of this organization.
+	* Gets the organization ID of this organization.
 	*
-	* @return the organization id of this organization
+	* @return the organization ID of this organization
 	*/
 	public long getOrganizationId() {
 		return _organization.getOrganizationId();
 	}
 
 	/**
-	* Sets the organization id of this organization.
+	* Sets the organization ID of this organization.
 	*
-	* @param organizationId the organization id of this organization
+	* @param organizationId the organization ID of this organization
 	*/
 	public void setOrganizationId(long organizationId) {
 		_organization.setOrganizationId(organizationId);
 	}
 
 	/**
-	* Gets the company id of this organization.
+	* Gets the company ID of this organization.
 	*
-	* @return the company id of this organization
+	* @return the company ID of this organization
 	*/
 	public long getCompanyId() {
 		return _organization.getCompanyId();
 	}
 
 	/**
-	* Sets the company id of this organization.
+	* Sets the company ID of this organization.
 	*
-	* @param companyId the company id of this organization
+	* @param companyId the company ID of this organization
 	*/
 	public void setCompanyId(long companyId) {
 		_organization.setCompanyId(companyId);
 	}
 
 	/**
-	* Gets the parent organization id of this organization.
+	* Gets the parent organization ID of this organization.
 	*
-	* @return the parent organization id of this organization
+	* @return the parent organization ID of this organization
 	*/
 	public long getParentOrganizationId() {
 		return _organization.getParentOrganizationId();
 	}
 
 	/**
-	* Sets the parent organization id of this organization.
+	* Sets the parent organization ID of this organization.
 	*
-	* @param parentOrganizationId the parent organization id of this organization
+	* @param parentOrganizationId the parent organization ID of this organization
 	*/
 	public void setParentOrganizationId(long parentOrganizationId) {
 		_organization.setParentOrganizationId(parentOrganizationId);
 	}
 
 	/**
-	* Gets the left organization id of this organization.
+	* Gets the left organization ID of this organization.
 	*
-	* @return the left organization id of this organization
+	* @return the left organization ID of this organization
 	*/
 	public long getLeftOrganizationId() {
 		return _organization.getLeftOrganizationId();
 	}
 
 	/**
-	* Sets the left organization id of this organization.
+	* Sets the left organization ID of this organization.
 	*
-	* @param leftOrganizationId the left organization id of this organization
+	* @param leftOrganizationId the left organization ID of this organization
 	*/
 	public void setLeftOrganizationId(long leftOrganizationId) {
 		_organization.setLeftOrganizationId(leftOrganizationId);
 	}
 
 	/**
-	* Gets the right organization id of this organization.
+	* Gets the right organization ID of this organization.
 	*
-	* @return the right organization id of this organization
+	* @return the right organization ID of this organization
 	*/
 	public long getRightOrganizationId() {
 		return _organization.getRightOrganizationId();
 	}
 
 	/**
-	* Sets the right organization id of this organization.
+	* Sets the right organization ID of this organization.
 	*
-	* @param rightOrganizationId the right organization id of this organization
+	* @param rightOrganizationId the right organization ID of this organization
 	*/
 	public void setRightOrganizationId(long rightOrganizationId) {
 		_organization.setRightOrganizationId(rightOrganizationId);
@@ -200,54 +200,54 @@ public class OrganizationWrapper implements Organization {
 	}
 
 	/**
-	* Gets the region id of this organization.
+	* Gets the region ID of this organization.
 	*
-	* @return the region id of this organization
+	* @return the region ID of this organization
 	*/
 	public long getRegionId() {
 		return _organization.getRegionId();
 	}
 
 	/**
-	* Sets the region id of this organization.
+	* Sets the region ID of this organization.
 	*
-	* @param regionId the region id of this organization
+	* @param regionId the region ID of this organization
 	*/
 	public void setRegionId(long regionId) {
 		_organization.setRegionId(regionId);
 	}
 
 	/**
-	* Gets the country id of this organization.
+	* Gets the country ID of this organization.
 	*
-	* @return the country id of this organization
+	* @return the country ID of this organization
 	*/
 	public long getCountryId() {
 		return _organization.getCountryId();
 	}
 
 	/**
-	* Sets the country id of this organization.
+	* Sets the country ID of this organization.
 	*
-	* @param countryId the country id of this organization
+	* @param countryId the country ID of this organization
 	*/
 	public void setCountryId(long countryId) {
 		_organization.setCountryId(countryId);
 	}
 
 	/**
-	* Gets the status id of this organization.
+	* Gets the status ID of this organization.
 	*
-	* @return the status id of this organization
+	* @return the status ID of this organization
 	*/
 	public int getStatusId() {
 		return _organization.getStatusId();
 	}
 
 	/**
-	* Sets the status id of this organization.
+	* Sets the status ID of this organization.
 	*
-	* @param statusId the status id of this organization
+	* @param statusId the status ID of this organization
 	*/
 	public void setStatusId(int statusId) {
 		_organization.setStatusId(statusId);

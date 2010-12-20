@@ -57,16 +57,16 @@ public interface SCLicenseModel extends BaseModel<SCLicense> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the license id of this s c license.
+	 * Gets the license ID of this s c license.
 	 *
-	 * @return the license id of this s c license
+	 * @return the license ID of this s c license
 	 */
 	public long getLicenseId();
 
 	/**
-	 * Sets the license id of this s c license.
+	 * Sets the license ID of this s c license.
 	 *
-	 * @param licenseId the license id of this s c license
+	 * @param licenseId the license ID of this s c license
 	 */
 	public void setLicenseId(long licenseId);
 

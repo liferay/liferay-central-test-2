@@ -47,54 +47,54 @@ public class ShoppingOrderItemWrapper implements ShoppingOrderItem {
 	}
 
 	/**
-	* Gets the order item id of this shopping order item.
+	* Gets the order item ID of this shopping order item.
 	*
-	* @return the order item id of this shopping order item
+	* @return the order item ID of this shopping order item
 	*/
 	public long getOrderItemId() {
 		return _shoppingOrderItem.getOrderItemId();
 	}
 
 	/**
-	* Sets the order item id of this shopping order item.
+	* Sets the order item ID of this shopping order item.
 	*
-	* @param orderItemId the order item id of this shopping order item
+	* @param orderItemId the order item ID of this shopping order item
 	*/
 	public void setOrderItemId(long orderItemId) {
 		_shoppingOrderItem.setOrderItemId(orderItemId);
 	}
 
 	/**
-	* Gets the order id of this shopping order item.
+	* Gets the order ID of this shopping order item.
 	*
-	* @return the order id of this shopping order item
+	* @return the order ID of this shopping order item
 	*/
 	public long getOrderId() {
 		return _shoppingOrderItem.getOrderId();
 	}
 
 	/**
-	* Sets the order id of this shopping order item.
+	* Sets the order ID of this shopping order item.
 	*
-	* @param orderId the order id of this shopping order item
+	* @param orderId the order ID of this shopping order item
 	*/
 	public void setOrderId(long orderId) {
 		_shoppingOrderItem.setOrderId(orderId);
 	}
 
 	/**
-	* Gets the item id of this shopping order item.
+	* Gets the item ID of this shopping order item.
 	*
-	* @return the item id of this shopping order item
+	* @return the item ID of this shopping order item
 	*/
 	public java.lang.String getItemId() {
 		return _shoppingOrderItem.getItemId();
 	}
 
 	/**
-	* Sets the item id of this shopping order item.
+	* Sets the item ID of this shopping order item.
 	*
-	* @param itemId the item id of this shopping order item
+	* @param itemId the item ID of this shopping order item
 	*/
 	public void setItemId(java.lang.String itemId) {
 		_shoppingOrderItem.setItemId(itemId);

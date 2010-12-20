@@ -107,7 +107,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	/**
 	* Finds all the d l file versions where fileEntryId = &#63;.
 	*
-	* @param fileEntryId the file entry id to search with
+	* @param fileEntryId the file entry ID to search with
 	* @return the matching d l file versions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -122,7 +122,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param fileEntryId the file entry id to search with
+	* @param fileEntryId the file entry ID to search with
 	* @param start the lower bound of the range of d l file versions to return
 	* @param end the upper bound of the range of d l file versions to return (not inclusive)
 	* @return the range of matching d l file versions
@@ -139,7 +139,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param fileEntryId the file entry id to search with
+	* @param fileEntryId the file entry ID to search with
 	* @param start the lower bound of the range of d l file versions to return
 	* @param end the upper bound of the range of d l file versions to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -158,7 +158,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param fileEntryId the file entry id to search with
+	* @param fileEntryId the file entry ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching d l file version
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching d l file version could not be found
@@ -177,7 +177,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param fileEntryId the file entry id to search with
+	* @param fileEntryId the file entry ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching d l file version
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching d l file version could not be found
@@ -197,7 +197,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	* </p>
 	*
 	* @param fileVersionId the primary key of the current d l file version
-	* @param fileEntryId the file entry id to search with
+	* @param fileEntryId the file entry ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next d l file version
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a d l file version with the primary key could not be found
@@ -212,7 +212,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	/**
 	* Finds the d l file version where fileEntryId = &#63; and version = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileVersionException} if it could not be found.
 	*
-	* @param fileEntryId the file entry id to search with
+	* @param fileEntryId the file entry ID to search with
 	* @param version the version to search with
 	* @return the matching d l file version
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching d l file version could not be found
@@ -226,7 +226,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	/**
 	* Finds the d l file version where fileEntryId = &#63; and version = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param fileEntryId the file entry id to search with
+	* @param fileEntryId the file entry ID to search with
 	* @param version the version to search with
 	* @return the matching d l file version, or <code>null</code> if a matching d l file version could not be found
 	* @throws SystemException if a system exception occurred
@@ -238,7 +238,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	/**
 	* Finds the d l file version where fileEntryId = &#63; and version = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param fileEntryId the file entry id to search with
+	* @param fileEntryId the file entry ID to search with
 	* @param version the version to search with
 	* @return the matching d l file version, or <code>null</code> if a matching d l file version could not be found
 	* @throws SystemException if a system exception occurred
@@ -250,7 +250,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	/**
 	* Finds all the d l file versions where fileEntryId = &#63; and status = &#63;.
 	*
-	* @param fileEntryId the file entry id to search with
+	* @param fileEntryId the file entry ID to search with
 	* @param status the status to search with
 	* @return the matching d l file versions
 	* @throws SystemException if a system exception occurred
@@ -266,7 +266,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param fileEntryId the file entry id to search with
+	* @param fileEntryId the file entry ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of d l file versions to return
 	* @param end the upper bound of the range of d l file versions to return (not inclusive)
@@ -284,7 +284,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param fileEntryId the file entry id to search with
+	* @param fileEntryId the file entry ID to search with
 	* @param status the status to search with
 	* @param start the lower bound of the range of d l file versions to return
 	* @param end the upper bound of the range of d l file versions to return (not inclusive)
@@ -304,7 +304,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param fileEntryId the file entry id to search with
+	* @param fileEntryId the file entry ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching d l file version
@@ -324,7 +324,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param fileEntryId the file entry id to search with
+	* @param fileEntryId the file entry ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching d l file version
@@ -345,7 +345,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	* </p>
 	*
 	* @param fileVersionId the primary key of the current d l file version
-	* @param fileEntryId the file entry id to search with
+	* @param fileEntryId the file entry ID to search with
 	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next d l file version
@@ -404,7 +404,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	/**
 	* Removes all the d l file versions where fileEntryId = &#63; from the database.
 	*
-	* @param fileEntryId the file entry id to search with
+	* @param fileEntryId the file entry ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
 	public void removeByFileEntryId(long fileEntryId)
@@ -413,7 +413,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	/**
 	* Removes the d l file version where fileEntryId = &#63; and version = &#63; from the database.
 	*
-	* @param fileEntryId the file entry id to search with
+	* @param fileEntryId the file entry ID to search with
 	* @param version the version to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -424,7 +424,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	/**
 	* Removes all the d l file versions where fileEntryId = &#63; and status = &#63; from the database.
 	*
-	* @param fileEntryId the file entry id to search with
+	* @param fileEntryId the file entry ID to search with
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
 	*/
@@ -442,7 +442,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	/**
 	* Counts all the d l file versions where fileEntryId = &#63;.
 	*
-	* @param fileEntryId the file entry id to search with
+	* @param fileEntryId the file entry ID to search with
 	* @return the number of matching d l file versions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -452,7 +452,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	/**
 	* Counts all the d l file versions where fileEntryId = &#63; and version = &#63;.
 	*
-	* @param fileEntryId the file entry id to search with
+	* @param fileEntryId the file entry ID to search with
 	* @param version the version to search with
 	* @return the number of matching d l file versions
 	* @throws SystemException if a system exception occurred
@@ -463,7 +463,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	/**
 	* Counts all the d l file versions where fileEntryId = &#63; and status = &#63;.
 	*
-	* @param fileEntryId the file entry id to search with
+	* @param fileEntryId the file entry ID to search with
 	* @param status the status to search with
 	* @return the number of matching d l file versions
 	* @throws SystemException if a system exception occurred

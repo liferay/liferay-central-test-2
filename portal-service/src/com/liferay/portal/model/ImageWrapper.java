@@ -47,18 +47,18 @@ public class ImageWrapper implements Image {
 	}
 
 	/**
-	* Gets the image id of this image.
+	* Gets the image ID of this image.
 	*
-	* @return the image id of this image
+	* @return the image ID of this image
 	*/
 	public long getImageId() {
 		return _image.getImageId();
 	}
 
 	/**
-	* Sets the image id of this image.
+	* Sets the image ID of this image.
 	*
-	* @param imageId the image id of this image
+	* @param imageId the image ID of this image
 	*/
 	public void setImageId(long imageId) {
 		_image.setImageId(imageId);

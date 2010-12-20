@@ -59,44 +59,44 @@ public interface AddressModel extends BaseModel<Address> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the address id of this address.
+	 * Gets the address ID of this address.
 	 *
-	 * @return the address id of this address
+	 * @return the address ID of this address
 	 */
 	public long getAddressId();
 
 	/**
-	 * Sets the address id of this address.
+	 * Sets the address ID of this address.
 	 *
-	 * @param addressId the address id of this address
+	 * @param addressId the address ID of this address
 	 */
 	public void setAddressId(long addressId);
 
 	/**
-	 * Gets the company id of this address.
+	 * Gets the company ID of this address.
 	 *
-	 * @return the company id of this address
+	 * @return the company ID of this address
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this address.
+	 * Sets the company ID of this address.
 	 *
-	 * @param companyId the company id of this address
+	 * @param companyId the company ID of this address
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this address.
+	 * Gets the user ID of this address.
 	 *
-	 * @return the user id of this address
+	 * @return the user ID of this address
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this address.
+	 * Sets the user ID of this address.
 	 *
-	 * @param userId the user id of this address
+	 * @param userId the user ID of this address
 	 */
 	public void setUserId(long userId);
 
@@ -166,16 +166,16 @@ public interface AddressModel extends BaseModel<Address> {
 	public String getClassName();
 
 	/**
-	 * Gets the class name id of this address.
+	 * Gets the class name ID of this address.
 	 *
-	 * @return the class name id of this address
+	 * @return the class name ID of this address
 	 */
 	public long getClassNameId();
 
 	/**
-	 * Sets the class name id of this address.
+	 * Sets the class name ID of this address.
 	 *
-	 * @param classNameId the class name id of this address
+	 * @param classNameId the class name ID of this address
 	 */
 	public void setClassNameId(long classNameId);
 
@@ -269,44 +269,44 @@ public interface AddressModel extends BaseModel<Address> {
 	public void setZip(String zip);
 
 	/**
-	 * Gets the region id of this address.
+	 * Gets the region ID of this address.
 	 *
-	 * @return the region id of this address
+	 * @return the region ID of this address
 	 */
 	public long getRegionId();
 
 	/**
-	 * Sets the region id of this address.
+	 * Sets the region ID of this address.
 	 *
-	 * @param regionId the region id of this address
+	 * @param regionId the region ID of this address
 	 */
 	public void setRegionId(long regionId);
 
 	/**
-	 * Gets the country id of this address.
+	 * Gets the country ID of this address.
 	 *
-	 * @return the country id of this address
+	 * @return the country ID of this address
 	 */
 	public long getCountryId();
 
 	/**
-	 * Sets the country id of this address.
+	 * Sets the country ID of this address.
 	 *
-	 * @param countryId the country id of this address
+	 * @param countryId the country ID of this address
 	 */
 	public void setCountryId(long countryId);
 
 	/**
-	 * Gets the type id of this address.
+	 * Gets the type ID of this address.
 	 *
-	 * @return the type id of this address
+	 * @return the type ID of this address
 	 */
 	public int getTypeId();
 
 	/**
-	 * Sets the type id of this address.
+	 * Sets the type ID of this address.
 	 *
-	 * @param typeId the type id of this address
+	 * @param typeId the type ID of this address
 	 */
 	public void setTypeId(int typeId);
 

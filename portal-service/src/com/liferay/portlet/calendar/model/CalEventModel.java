@@ -75,58 +75,58 @@ public interface CalEventModel extends BaseModel<CalEvent> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the event id of this cal event.
+	 * Gets the event ID of this cal event.
 	 *
-	 * @return the event id of this cal event
+	 * @return the event ID of this cal event
 	 */
 	public long getEventId();
 
 	/**
-	 * Sets the event id of this cal event.
+	 * Sets the event ID of this cal event.
 	 *
-	 * @param eventId the event id of this cal event
+	 * @param eventId the event ID of this cal event
 	 */
 	public void setEventId(long eventId);
 
 	/**
-	 * Gets the group id of this cal event.
+	 * Gets the group ID of this cal event.
 	 *
-	 * @return the group id of this cal event
+	 * @return the group ID of this cal event
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this cal event.
+	 * Sets the group ID of this cal event.
 	 *
-	 * @param groupId the group id of this cal event
+	 * @param groupId the group ID of this cal event
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Gets the company id of this cal event.
+	 * Gets the company ID of this cal event.
 	 *
-	 * @return the company id of this cal event
+	 * @return the company ID of this cal event
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this cal event.
+	 * Sets the company ID of this cal event.
 	 *
-	 * @param companyId the company id of this cal event
+	 * @param companyId the company ID of this cal event
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this cal event.
+	 * Gets the user ID of this cal event.
 	 *
-	 * @return the user id of this cal event
+	 * @return the user ID of this cal event
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this cal event.
+	 * Sets the user ID of this cal event.
 	 *
-	 * @param userId the user id of this cal event
+	 * @param userId the user ID of this cal event
 	 */
 	public void setUserId(long userId);
 

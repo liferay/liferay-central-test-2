@@ -59,44 +59,44 @@ public interface MembershipRequestModel extends BaseModel<MembershipRequest> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the membership request id of this membership request.
+	 * Gets the membership request ID of this membership request.
 	 *
-	 * @return the membership request id of this membership request
+	 * @return the membership request ID of this membership request
 	 */
 	public long getMembershipRequestId();
 
 	/**
-	 * Sets the membership request id of this membership request.
+	 * Sets the membership request ID of this membership request.
 	 *
-	 * @param membershipRequestId the membership request id of this membership request
+	 * @param membershipRequestId the membership request ID of this membership request
 	 */
 	public void setMembershipRequestId(long membershipRequestId);
 
 	/**
-	 * Gets the company id of this membership request.
+	 * Gets the company ID of this membership request.
 	 *
-	 * @return the company id of this membership request
+	 * @return the company ID of this membership request
 	 */
 	public long getCompanyId();
 
 	/**
-	 * Sets the company id of this membership request.
+	 * Sets the company ID of this membership request.
 	 *
-	 * @param companyId the company id of this membership request
+	 * @param companyId the company ID of this membership request
 	 */
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the user id of this membership request.
+	 * Gets the user ID of this membership request.
 	 *
-	 * @return the user id of this membership request
+	 * @return the user ID of this membership request
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user id of this membership request.
+	 * Sets the user ID of this membership request.
 	 *
-	 * @param userId the user id of this membership request
+	 * @param userId the user ID of this membership request
 	 */
 	public void setUserId(long userId);
 
@@ -130,16 +130,16 @@ public interface MembershipRequestModel extends BaseModel<MembershipRequest> {
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Gets the group id of this membership request.
+	 * Gets the group ID of this membership request.
 	 *
-	 * @return the group id of this membership request
+	 * @return the group ID of this membership request
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group id of this membership request.
+	 * Sets the group ID of this membership request.
 	 *
-	 * @param groupId the group id of this membership request
+	 * @param groupId the group ID of this membership request
 	 */
 	public void setGroupId(long groupId);
 
@@ -188,16 +188,16 @@ public interface MembershipRequestModel extends BaseModel<MembershipRequest> {
 	public void setReplyDate(Date replyDate);
 
 	/**
-	 * Gets the replier user id of this membership request.
+	 * Gets the replier user ID of this membership request.
 	 *
-	 * @return the replier user id of this membership request
+	 * @return the replier user ID of this membership request
 	 */
 	public long getReplierUserId();
 
 	/**
-	 * Sets the replier user id of this membership request.
+	 * Sets the replier user ID of this membership request.
 	 *
-	 * @param replierUserId the replier user id of this membership request
+	 * @param replierUserId the replier user ID of this membership request
 	 */
 	public void setReplierUserId(long replierUserId);
 
@@ -217,16 +217,16 @@ public interface MembershipRequestModel extends BaseModel<MembershipRequest> {
 	public void setReplierUserUuid(String replierUserUuid);
 
 	/**
-	 * Gets the status id of this membership request.
+	 * Gets the status ID of this membership request.
 	 *
-	 * @return the status id of this membership request
+	 * @return the status ID of this membership request
 	 */
 	public int getStatusId();
 
 	/**
-	 * Sets the status id of this membership request.
+	 * Sets the status ID of this membership request.
 	 *
-	 * @param statusId the status id of this membership request
+	 * @param statusId the status ID of this membership request
 	 */
 	public void setStatusId(int statusId);
 

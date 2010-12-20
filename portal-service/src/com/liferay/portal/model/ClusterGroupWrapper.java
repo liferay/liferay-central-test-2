@@ -47,18 +47,18 @@ public class ClusterGroupWrapper implements ClusterGroup {
 	}
 
 	/**
-	* Gets the cluster group id of this cluster group.
+	* Gets the cluster group ID of this cluster group.
 	*
-	* @return the cluster group id of this cluster group
+	* @return the cluster group ID of this cluster group
 	*/
 	public long getClusterGroupId() {
 		return _clusterGroup.getClusterGroupId();
 	}
 
 	/**
-	* Sets the cluster group id of this cluster group.
+	* Sets the cluster group ID of this cluster group.
 	*
-	* @param clusterGroupId the cluster group id of this cluster group
+	* @param clusterGroupId the cluster group ID of this cluster group
 	*/
 	public void setClusterGroupId(long clusterGroupId) {
 		_clusterGroup.setClusterGroupId(clusterGroupId);
@@ -83,18 +83,18 @@ public class ClusterGroupWrapper implements ClusterGroup {
 	}
 
 	/**
-	* Gets the cluster node ids of this cluster group.
+	* Gets the cluster node IDs of this cluster group.
 	*
-	* @return the cluster node ids of this cluster group
+	* @return the cluster node IDs of this cluster group
 	*/
 	public java.lang.String getClusterNodeIds() {
 		return _clusterGroup.getClusterNodeIds();
 	}
 
 	/**
-	* Sets the cluster node ids of this cluster group.
+	* Sets the cluster node IDs of this cluster group.
 	*
-	* @param clusterNodeIds the cluster node ids of this cluster group
+	* @param clusterNodeIds the cluster node IDs of this cluster group
 	*/
 	public void setClusterNodeIds(java.lang.String clusterNodeIds) {
 		_clusterGroup.setClusterNodeIds(clusterNodeIds);

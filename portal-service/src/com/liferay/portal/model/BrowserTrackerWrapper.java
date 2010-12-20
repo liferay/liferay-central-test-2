@@ -47,36 +47,36 @@ public class BrowserTrackerWrapper implements BrowserTracker {
 	}
 
 	/**
-	* Gets the browser tracker id of this browser tracker.
+	* Gets the browser tracker ID of this browser tracker.
 	*
-	* @return the browser tracker id of this browser tracker
+	* @return the browser tracker ID of this browser tracker
 	*/
 	public long getBrowserTrackerId() {
 		return _browserTracker.getBrowserTrackerId();
 	}
 
 	/**
-	* Sets the browser tracker id of this browser tracker.
+	* Sets the browser tracker ID of this browser tracker.
 	*
-	* @param browserTrackerId the browser tracker id of this browser tracker
+	* @param browserTrackerId the browser tracker ID of this browser tracker
 	*/
 	public void setBrowserTrackerId(long browserTrackerId) {
 		_browserTracker.setBrowserTrackerId(browserTrackerId);
 	}
 
 	/**
-	* Gets the user id of this browser tracker.
+	* Gets the user ID of this browser tracker.
 	*
-	* @return the user id of this browser tracker
+	* @return the user ID of this browser tracker
 	*/
 	public long getUserId() {
 		return _browserTracker.getUserId();
 	}
 
 	/**
-	* Sets the user id of this browser tracker.
+	* Sets the user ID of this browser tracker.
 	*
-	* @param userId the user id of this browser tracker
+	* @param userId the user ID of this browser tracker
 	*/
 	public void setUserId(long userId) {
 		_browserTracker.setUserId(userId);

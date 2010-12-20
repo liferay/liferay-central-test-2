@@ -47,36 +47,36 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 	}
 
 	/**
-	* Gets the flag id of this announcements flag.
+	* Gets the flag ID of this announcements flag.
 	*
-	* @return the flag id of this announcements flag
+	* @return the flag ID of this announcements flag
 	*/
 	public long getFlagId() {
 		return _announcementsFlag.getFlagId();
 	}
 
 	/**
-	* Sets the flag id of this announcements flag.
+	* Sets the flag ID of this announcements flag.
 	*
-	* @param flagId the flag id of this announcements flag
+	* @param flagId the flag ID of this announcements flag
 	*/
 	public void setFlagId(long flagId) {
 		_announcementsFlag.setFlagId(flagId);
 	}
 
 	/**
-	* Gets the user id of this announcements flag.
+	* Gets the user ID of this announcements flag.
 	*
-	* @return the user id of this announcements flag
+	* @return the user ID of this announcements flag
 	*/
 	public long getUserId() {
 		return _announcementsFlag.getUserId();
 	}
 
 	/**
-	* Sets the user id of this announcements flag.
+	* Sets the user ID of this announcements flag.
 	*
-	* @param userId the user id of this announcements flag
+	* @param userId the user ID of this announcements flag
 	*/
 	public void setUserId(long userId) {
 		_announcementsFlag.setUserId(userId);
@@ -121,18 +121,18 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 	}
 
 	/**
-	* Gets the entry id of this announcements flag.
+	* Gets the entry ID of this announcements flag.
 	*
-	* @return the entry id of this announcements flag
+	* @return the entry ID of this announcements flag
 	*/
 	public long getEntryId() {
 		return _announcementsFlag.getEntryId();
 	}
 
 	/**
-	* Sets the entry id of this announcements flag.
+	* Sets the entry ID of this announcements flag.
 	*
-	* @param entryId the entry id of this announcements flag
+	* @param entryId the entry ID of this announcements flag
 	*/
 	public void setEntryId(long entryId) {
 		_announcementsFlag.setEntryId(entryId);
