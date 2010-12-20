@@ -800,13 +800,6 @@ public class SourceFormatter {
 					fileName, "package: " + fileName);
 			}
 
-			if (newContent.indexOf("    ") != -1) {
-				if (!fileName.endsWith("StringPool.java")) {
-					_sourceFormatterHelper.printError(
-						fileName, "tab: " + fileName);
-				}
-			}
-
 			if (newContent.indexOf("  {") != -1) {
 				_sourceFormatterHelper.printError(fileName, "{:" + fileName);
 			}
@@ -867,6 +860,13 @@ public class SourceFormatter {
 
 			sb.append(line);
 			sb.append("\n");
+
+			if (line.indexOf("    ") != -1 && !line.matches("\\s*\\*.*")) {
+				if (!fileName.endsWith("StringPool.java")) {
+					_sourceFormatterHelper.printError(
+						fileName, "tab: " + fileName + " " + lineCount);
+				}
+			}
 
 			StringBuilder lineSB = new StringBuilder();
 
