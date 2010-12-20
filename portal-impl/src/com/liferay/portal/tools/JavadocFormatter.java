@@ -214,8 +214,6 @@ public class JavadocFormatter {
 
 		maxNameLength += 2;
 
-		int indentLength = _getIndentLength(indent) + maxNameLength;
-
 		String nameIndent = _getSpacesIndent(maxNameLength);
 
 		for (String name : names) {
