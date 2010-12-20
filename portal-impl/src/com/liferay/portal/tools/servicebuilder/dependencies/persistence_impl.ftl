@@ -873,18 +873,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					String sql = query.toString();
 
-					<#if finder.join?? && validator.isNotNull(finder.getJoin())>
-						sql = _getJoin(sql, "${finder.join}");
-					</#if>
-
 					Session session = null;
 
 					try {
 						session = openSession();
 
-						SQLQuery q = session.createSQLQuery(sql);
-
-						q.addEntity("${entity.alias}", ${entity.name}Impl.class);
+						Query q = session.createQuery(sql);
 
 						QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1174,13 +1168,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 				String sql = query.toString();
 
-				<#if finder.join?? && validator.isNotNull(finder.getJoin())>
-					sql = _getJoin(sql, "${finder.join}");
-				</#if>
-
-				SQLQuery q = session.createSQLQuery(sql);
-
-				q.addEntity("${entity.alias}", ${entity.name}Impl.class);
+				Query q = session.createQuery(sql);
 
 				q.setFirstResult(0);
 				q.setMaxResults(2);
@@ -1361,18 +1349,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 						String sql = query.toString();
 
-						<#if finder.join?? && validator.isNotNull(finder.getJoin())>
-							sql = _getJoin(sql, "${finder.join}");
-						</#if>
-
 						Session session = null;
 
 						try {
 							session = openSession();
 
-							SQLQuery q = session.createSQLQuery(sql);
-
-							q.addEntity("${entity.alias}", ${entity.name}Impl.class);
+							Query q = session.createQuery(sql);
 
 							QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1538,10 +1520,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					</#if>
 
 					String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID<#if finder.hasColumn("groupId")>, groupId</#if>);
-
-					<#if finder.join?? && validator.isNotNull(finder.getJoin())>
-						sql = _getJoin(sql, "${finder.join}");
-					</#if>
 
 					Session session = null;
 
@@ -1758,10 +1736,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 							</#if>
 						</#if>);
 
-						<#if finder.join?? && validator.isNotNull(finder.getJoin())>
-							sql = _getJoin(sql, "${finder.join}");
-						</#if>
-
 						Session session = null;
 
 						try {
@@ -1925,18 +1899,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					String sql = query.toString();
 
-					<#if finder.join?? && validator.isNotNull(finder.getJoin())>
-						sql = _getJoin(sql, "${finder.join}");
-					</#if>
-
 					Session session = null;
 
 					try {
 						session = openSession();
 
-						SQLQuery q = session.createSQLQuery(sql);
-
-						q.addEntity("${entity.alias}", ${entity.name}Impl.class);
+						Query q = session.createQuery(sql);
 
 						QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2071,9 +2039,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			try {
 				session = openSession();
 
-				SQLQuery q = session.createSQLQuery(sql);
-
-				q.addEntity("${entity.alias}", ${entity.name}Impl.class);
+				Query q = session.createQuery(sql);
 
 				if (orderByComparator == null) {
 					list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end, false);
@@ -2229,18 +2195,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 				String sql = query.toString();
 
-				<#if finder.join?? && validator.isNotNull(finder.getJoin())>
-					sql = _getJoin(sql, "${finder.join}");
-				</#if>
-
 				Session session = null;
 
 				try {
 					session = openSession();
 
-					SQLQuery q = session.createSQLQuery(sql);
-
-					q.addScalar(COUNT_COLUMN_NAME, com.liferay.portal.kernel.dao.orm.Type.LONG);
+					Query q = session.createQuery(sql);
 
 					QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2319,18 +2279,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					String sql = query.toString();
 
-					<#if finder.join?? && validator.isNotNull(finder.getJoin())>
-						sql = _getJoin(sql, "${finder.join}");
-					</#if>
-
 					Session session = null;
 
 					try {
 						session = openSession();
 
-						SQLQuery q = session.createSQLQuery(sql);
-
-						q.addScalar(COUNT_COLUMN_NAME, com.liferay.portal.kernel.dao.orm.Type.LONG);
+						Query q = session.createQuery(sql);
 
 						QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2398,10 +2352,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				<#include "persistence_impl_finder_cols.ftl">
 
 				String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID<#if finder.hasColumn("groupId")>, groupId</#if>);
-
-				<#if finder.join?? && validator.isNotNull(finder.getJoin())>
-					sql = _getJoin(sql, "${finder.join}");
-				</#if>
 
 				Session session = null;
 
@@ -2499,10 +2449,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						</#if>
 					</#if>);
 
-					<#if finder.join?? && validator.isNotNull(finder.getJoin())>
-						sql = _getJoin(sql, "${finder.join}");
-					</#if>
-
 					Session session = null;
 
 					try {
@@ -2548,9 +2494,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			try {
 				session = openSession();
 
-				SQLQuery q = session.createSQLQuery(_SQL_COUNT_${entity.alias?upper_case});
-
-				q.addScalar(COUNT_COLUMN_NAME, com.liferay.portal.kernel.dao.orm.Type.LONG);
+				Query q = session.createQuery(_SQL_COUNT_${entity.alias?upper_case});
 
 				count = (Long)q.uniqueResult();
 			}
@@ -3573,34 +3517,16 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		}
 	</#if>
 
-	<#list entity.getFinderList() as finder>
-		<#if finder.join?? && validator.isNotNull(finder.getJoin())>
-			private String _getJoin(String sql, String join) {
-				int pos = sql.lastIndexOf(" WHERE ");
-
-				StringBundler sb = new StringBundler(3);
-
-				sb.append(sql.substring(0, pos));
-				sb.append(join);
-				sb.append(sql.substring(pos));
-
-				return sb.toString();
-			}
-
-			<#break>
-		</#if>
-	</#list>
-
-	private static final String _SQL_SELECT_${entity.alias?upper_case} = "SELECT {${entity.alias}.*} FROM ${entity.table} ${entity.alias}";
+	private static final String _SQL_SELECT_${entity.alias?upper_case} = "SELECT ${entity.alias} FROM ${entity.name} ${entity.alias}";
 
 	<#if entity.getFinderList()?size != 0>
-		private static final String _SQL_SELECT_${entity.alias?upper_case}_WHERE = "SELECT {${entity.alias}.*} FROM ${entity.table} ${entity.alias} WHERE ";
+		private static final String _SQL_SELECT_${entity.alias?upper_case}_WHERE = "SELECT ${entity.alias} FROM ${entity.name} ${entity.alias} WHERE ";
 	</#if>
 
-	private static final String _SQL_COUNT_${entity.alias?upper_case} = "SELECT COUNT(*) AS COUNT_VALUE FROM ${entity.table} ${entity.alias}";
+	private static final String _SQL_COUNT_${entity.alias?upper_case} = "SELECT COUNT(${entity.alias}) FROM ${entity.name} ${entity.alias}";
 
 	<#if entity.getFinderList()?size != 0>
-		private static final String _SQL_COUNT_${entity.alias?upper_case}_WHERE = "SELECT COUNT(*) AS COUNT_VALUE FROM ${entity.table} ${entity.alias} WHERE ";
+		private static final String _SQL_COUNT_${entity.alias?upper_case}_WHERE = "SELECT COUNT(${entity.alias}) FROM ${entity.name} ${entity.alias} WHERE ";
 	</#if>
 
 	<#list entity.columnList as column>
