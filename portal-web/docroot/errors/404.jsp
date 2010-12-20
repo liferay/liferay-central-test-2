@@ -45,8 +45,6 @@ if (!request.isRequestedSessionIdFromCookie()) {
 	redirect = PortalUtil.getURLWithSessionId(redirect, session.getId());
 }
 
-response.setHeader(HttpHeaders.CONNECTION, HttpHeaders.CONNECTION_CLOSE_VALUE);
-
 response.setStatus(HttpServletResponse.SC_NOT_FOUND);
 
 if (_log.isWarnEnabled()) {

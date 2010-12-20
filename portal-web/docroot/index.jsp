@@ -43,7 +43,6 @@ if (!request.isRequestedSessionIdFromCookie()) {
 }
 
 response.setHeader(HttpHeaders.LOCATION, redirect);
-response.setHeader(HttpHeaders.CONNECTION, HttpHeaders.CONNECTION_CLOSE_VALUE);
 
 response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 %>
