@@ -387,7 +387,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				Folder folder = (Folder)resource.getModel();
 
 				lock = DLAppServiceUtil.lockFolder(
-					folder.getFolderId(), owner, inheritable, timeout);
+					folder.getRepositoryId(), folder.getFolderId(), owner,
+					inheritable, timeout);
 			}
 		}
 		catch (Exception e) {

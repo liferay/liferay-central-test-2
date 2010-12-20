@@ -1141,6 +1141,8 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	protected RegionPersistence regionPersistence;
 	@BeanReference(type = ReleasePersistence.class)
 	protected ReleasePersistence releasePersistence;
+	@BeanReference(type = RepositoryPersistence.class)
+	protected RepositoryPersistence repositoryPersistence;
 	@BeanReference(type = ResourcePersistence.class)
 	protected ResourcePersistence resourcePersistence;
 	@BeanReference(type = ResourceActionPersistence.class)

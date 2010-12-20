@@ -30,6 +30,8 @@ public class DLFolderConstants {
 
 	public static final long DEFAULT_PARENT_FOLDER_ID = 0;
 
+	public static final long MAPPED_FOLDER_ID = -1;
+
 	public static String getClassName() {
 		return DLFolder.class.getName();
 	}

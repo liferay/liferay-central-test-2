@@ -42,6 +42,7 @@
 	<import class="com.liferay.portal.model.Quartz" />
 	<import class="com.liferay.portal.model.Region" />
 	<import class="com.liferay.portal.model.Release" />
+	<import class="com.liferay.portal.model.Repository" />
 	<import class="com.liferay.portal.model.Resource" />
 	<import class="com.liferay.portal.model.ResourceAction" />
 	<import class="com.liferay.portal.model.ResourceCode" />
@@ -680,6 +681,22 @@
 		<property name="buildDate" type="org.hibernate.type.TimestampType" />
 		<property name="verified" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="testString" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.portal.model.impl.RepositoryImpl" table="Repository">
+		<cache usage="read-write" />
+		<id name="repositoryId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="portletKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mappedFolderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="type" column="type_" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="typeSettings" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.ResourceImpl" table="Resource_">
 		<cache usage="read-write" />

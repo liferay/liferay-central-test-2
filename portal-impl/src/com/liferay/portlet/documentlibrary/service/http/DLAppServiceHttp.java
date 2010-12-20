@@ -1584,7 +1584,7 @@ public class DLAppServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Lock lockFolder(
-		HttpPrincipal httpPrincipal, long folderId)
+		HttpPrincipal httpPrincipal, long repositoryId, long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException,
 			java.rmi.RemoteException {
@@ -1592,7 +1592,8 @@ public class DLAppServiceHttp {
 			MethodKey methodKey = new MethodKey(DLAppServiceUtil.class.getName(),
 					"lockFolder", _lockFolderParameterTypes43);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, folderId);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					repositoryId, folderId);
 
 			Object returnObj = null;
 
@@ -1625,8 +1626,8 @@ public class DLAppServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Lock lockFolder(
-		HttpPrincipal httpPrincipal, long folderId, java.lang.String owner,
-		boolean inheritable, long expirationTime)
+		HttpPrincipal httpPrincipal, long repositoryId, long folderId,
+		java.lang.String owner, boolean inheritable, long expirationTime)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException,
 			java.rmi.RemoteException {
@@ -1635,7 +1636,7 @@ public class DLAppServiceHttp {
 					"lockFolder", _lockFolderParameterTypes44);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					folderId, owner, inheritable, expirationTime);
+					repositoryId, folderId, owner, inheritable, expirationTime);
 
 			Object returnObj = null;
 
@@ -2373,10 +2374,11 @@ public class DLAppServiceHttp {
 			long.class, java.lang.String.class, long.class
 		};
 	private static final Class<?>[] _lockFolderParameterTypes43 = new Class[] {
-			long.class
+			long.class, long.class
 		};
 	private static final Class<?>[] _lockFolderParameterTypes44 = new Class[] {
-			long.class, java.lang.String.class, boolean.class, long.class
+			long.class, long.class, java.lang.String.class, boolean.class,
+			long.class
 		};
 	private static final Class<?>[] _moveFileEntryParameterTypes45 = new Class[] {
 			long.class, long.class,

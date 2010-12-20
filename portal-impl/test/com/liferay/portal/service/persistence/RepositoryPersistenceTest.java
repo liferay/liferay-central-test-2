@@ -1,0 +1,192 @@
+/**
+ * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
+package com.liferay.portal.service.persistence;
+
+import com.liferay.portal.NoSuchRepositoryException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.model.Repository;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import java.util.List;
+
+/**
+ * @author Brian Wing Shun Chan
+ */
+public class RepositoryPersistenceTest extends BasePersistenceTestCase {
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (RepositoryPersistence)PortalBeanLocatorUtil.locate(RepositoryPersistence.class.getName());
+	}
+
+	public void testCreate() throws Exception {
+		long pk = nextLong();
+
+		Repository repository = _persistence.create(pk);
+
+		assertNotNull(repository);
+
+		assertEquals(repository.getPrimaryKey(), pk);
+	}
+
+	public void testRemove() throws Exception {
+		Repository newRepository = addRepository();
+
+		_persistence.remove(newRepository);
+
+		Repository existingRepository = _persistence.fetchByPrimaryKey(newRepository.getPrimaryKey());
+
+		assertNull(existingRepository);
+	}
+
+	public void testUpdateNew() throws Exception {
+		addRepository();
+	}
+
+	public void testUpdateExisting() throws Exception {
+		long pk = nextLong();
+
+		Repository newRepository = _persistence.create(pk);
+
+		newRepository.setCompanyId(nextLong());
+		newRepository.setCreateDate(nextDate());
+		newRepository.setModifiedDate(nextDate());
+		newRepository.setGroupId(nextLong());
+		newRepository.setName(randomString());
+		newRepository.setDescription(randomString());
+		newRepository.setPortletKey(randomString());
+		newRepository.setMappedFolderId(nextLong());
+		newRepository.setType(nextInt());
+		newRepository.setTypeSettings(randomString());
+
+		_persistence.update(newRepository, false);
+
+		Repository existingRepository = _persistence.findByPrimaryKey(newRepository.getPrimaryKey());
+
+		assertEquals(existingRepository.getRepositoryId(),
+			newRepository.getRepositoryId());
+		assertEquals(existingRepository.getCompanyId(),
+			newRepository.getCompanyId());
+		assertEquals(Time.getShortTimestamp(existingRepository.getCreateDate()),
+			Time.getShortTimestamp(newRepository.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingRepository.getModifiedDate()),
+			Time.getShortTimestamp(newRepository.getModifiedDate()));
+		assertEquals(existingRepository.getGroupId(), newRepository.getGroupId());
+		assertEquals(existingRepository.getName(), newRepository.getName());
+		assertEquals(existingRepository.getDescription(),
+			newRepository.getDescription());
+		assertEquals(existingRepository.getPortletKey(),
+			newRepository.getPortletKey());
+		assertEquals(existingRepository.getMappedFolderId(),
+			newRepository.getMappedFolderId());
+		assertEquals(existingRepository.getType(), newRepository.getType());
+		assertEquals(existingRepository.getTypeSettings(),
+			newRepository.getTypeSettings());
+	}
+
+	public void testFindByPrimaryKeyExisting() throws Exception {
+		Repository newRepository = addRepository();
+
+		Repository existingRepository = _persistence.findByPrimaryKey(newRepository.getPrimaryKey());
+
+		assertEquals(existingRepository, newRepository);
+	}
+
+	public void testFindByPrimaryKeyMissing() throws Exception {
+		long pk = nextLong();
+
+		try {
+			_persistence.findByPrimaryKey(pk);
+
+			fail("Missing entity did not throw NoSuchRepositoryException");
+		}
+		catch (NoSuchRepositoryException nsee) {
+		}
+	}
+
+	public void testFetchByPrimaryKeyExisting() throws Exception {
+		Repository newRepository = addRepository();
+
+		Repository existingRepository = _persistence.fetchByPrimaryKey(newRepository.getPrimaryKey());
+
+		assertEquals(existingRepository, newRepository);
+	}
+
+	public void testFetchByPrimaryKeyMissing() throws Exception {
+		long pk = nextLong();
+
+		Repository missingRepository = _persistence.fetchByPrimaryKey(pk);
+
+		assertNull(missingRepository);
+	}
+
+	public void testDynamicQueryByPrimaryKeyExisting()
+		throws Exception {
+		Repository newRepository = addRepository();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Repository.class,
+				Repository.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("repositoryId",
+				newRepository.getRepositoryId()));
+
+		List<Repository> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Repository existingRepository = result.get(0);
+
+		assertEquals(existingRepository, newRepository);
+	}
+
+	public void testDynamicQueryByPrimaryKeyMissing() throws Exception {
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Repository.class,
+				Repository.class.getClassLoader());
+
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("repositoryId", nextLong()));
+
+		List<Repository> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	protected Repository addRepository() throws Exception {
+		long pk = nextLong();
+
+		Repository repository = _persistence.create(pk);
+
+		repository.setCompanyId(nextLong());
+		repository.setCreateDate(nextDate());
+		repository.setModifiedDate(nextDate());
+		repository.setGroupId(nextLong());
+		repository.setName(randomString());
+		repository.setDescription(randomString());
+		repository.setPortletKey(randomString());
+		repository.setMappedFolderId(nextLong());
+		repository.setType(nextInt());
+		repository.setTypeSettings(randomString());
+
+		_persistence.update(repository, false);
+
+		return repository;
+	}
+
+	private RepositoryPersistence _persistence;
+}

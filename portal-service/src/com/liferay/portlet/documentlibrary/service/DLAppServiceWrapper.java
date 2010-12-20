@@ -346,20 +346,22 @@ public class DLAppServiceWrapper implements DLAppService {
 		return _dlAppService.lockFileEntry(fileEntryId, owner, expirationTime);
 	}
 
-	public com.liferay.portal.model.Lock lockFolder(long folderId)
+	public com.liferay.portal.model.Lock lockFolder(long repositoryId,
+		long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException,
 			java.rmi.RemoteException {
-		return _dlAppService.lockFolder(folderId);
+		return _dlAppService.lockFolder(repositoryId, folderId);
 	}
 
-	public com.liferay.portal.model.Lock lockFolder(long folderId,
-		java.lang.String owner, boolean inheritable, long expirationTime)
+	public com.liferay.portal.model.Lock lockFolder(long repositoryId,
+		long folderId, java.lang.String owner, boolean inheritable,
+		long expirationTime)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException,
 			java.rmi.RemoteException {
-		return _dlAppService.lockFolder(folderId, owner, inheritable,
-			expirationTime);
+		return _dlAppService.lockFolder(repositoryId, folderId, owner,
+			inheritable, expirationTime);
 	}
 
 	public com.liferay.portal.kernel.repository.model.FileEntry moveFileEntry(

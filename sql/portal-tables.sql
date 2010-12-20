@@ -1209,6 +1209,20 @@ create table Release_ (
 	testString VARCHAR(1024) null
 );
 
+create table Repository (
+	repositoryId LONG not null primary key,
+	companyId LONG,
+	createDate DATE null,
+	modifiedDate DATE null,
+	groupId LONG,
+	name VARCHAR(75) null,
+	description VARCHAR(75) null,
+	portletKey VARCHAR(75) null,
+	mappedFolderId LONG,
+	type_ INTEGER,
+	typeSettings VARCHAR(75) null
+);
+
 create table Resource_ (
 	resourceId LONG not null primary key,
 	codeId LONG,

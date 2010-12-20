@@ -467,20 +467,20 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			fileEntryId, owner, expirationTime);
 	}
 
-	public Lock lockFolder(long folderId)
+	public Lock lockFolder(long repositoryId, long folderId)
 		throws PortalException, RemoteException, SystemException {
 
-		Repository repository = getRepository();
+		Repository repository = getRepository(repositoryId);
 
 		return repository.lockFolder(folderId);
 	}
 
 	public Lock lockFolder(
-			long folderId, String owner, boolean inheritable,
+			long repositoryId, long folderId, String owner, boolean inheritable,
 			long expirationTime)
 		throws PortalException, RemoteException, SystemException {
 
-		Repository repository = getRepository();
+		Repository repository = getRepository(repositoryId);
 
 		return repository.lockFolder(
 			folderId, owner, inheritable, expirationTime);

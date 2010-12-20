@@ -84,6 +84,7 @@ import com.liferay.portal.service.PortletService;
 import com.liferay.portal.service.QuartzLocalService;
 import com.liferay.portal.service.RegionService;
 import com.liferay.portal.service.ReleaseLocalService;
+import com.liferay.portal.service.RepositoryLocalService;
 import com.liferay.portal.service.ResourceActionLocalService;
 import com.liferay.portal.service.ResourceCodeLocalService;
 import com.liferay.portal.service.ResourceLocalService;
@@ -159,6 +160,7 @@ import com.liferay.portal.service.persistence.PortletPreferencesFinder;
 import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
 import com.liferay.portal.service.persistence.RegionPersistence;
 import com.liferay.portal.service.persistence.ReleasePersistence;
+import com.liferay.portal.service.persistence.RepositoryPersistence;
 import com.liferay.portal.service.persistence.ResourceActionPersistence;
 import com.liferay.portal.service.persistence.ResourceCodePersistence;
 import com.liferay.portal.service.persistence.ResourceFinder;
@@ -2307,6 +2309,44 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService {
 	}
 
 	/**
+	 * Gets the repository local service.
+	 *
+	 * @return the repository local service
+	 */
+	public RepositoryLocalService getRepositoryLocalService() {
+		return repositoryLocalService;
+	}
+
+	/**
+	 * Sets the repository local service.
+	 *
+	 * @param repositoryLocalService the repository local service
+	 */
+	public void setRepositoryLocalService(
+		RepositoryLocalService repositoryLocalService) {
+		this.repositoryLocalService = repositoryLocalService;
+	}
+
+	/**
+	 * Gets the repository persistence.
+	 *
+	 * @return the repository persistence
+	 */
+	public RepositoryPersistence getRepositoryPersistence() {
+		return repositoryPersistence;
+	}
+
+	/**
+	 * Sets the repository persistence.
+	 *
+	 * @param repositoryPersistence the repository persistence
+	 */
+	public void setRepositoryPersistence(
+		RepositoryPersistence repositoryPersistence) {
+		this.repositoryPersistence = repositoryPersistence;
+	}
+
+	/**
 	 * Gets the resource local service.
 	 *
 	 * @return the resource local service
@@ -3997,6 +4037,10 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService {
 	protected ReleaseLocalService releaseLocalService;
 	@BeanReference(type = ReleasePersistence.class)
 	protected ReleasePersistence releasePersistence;
+	@BeanReference(type = RepositoryLocalService.class)
+	protected RepositoryLocalService repositoryLocalService;
+	@BeanReference(type = RepositoryPersistence.class)
+	protected RepositoryPersistence repositoryPersistence;
 	@BeanReference(type = ResourceLocalService.class)
 	protected ResourceLocalService resourceLocalService;
 	@BeanReference(type = ResourceService.class)

@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 
 import java.util.Date;
 import java.util.List;
@@ -53,7 +54,14 @@ public class LiferayFolder extends LiferayModel implements Folder {
 	}
 
 	public long getFolderId() {
-		return _dlFolder.getFolderId();
+		long folderId = _dlFolder.getFolderId();
+
+		if (folderId == DLFolderConstants.MAPPED_FOLDER_ID) {
+			return DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+		}
+		else {
+			return folderId;
+		}
 	}
 
 	public Date getLastPostDate() {
@@ -77,7 +85,14 @@ public class LiferayFolder extends LiferayModel implements Folder {
 	}
 
 	public long getParentFolderId() {
-		return _dlFolder.getParentFolderId();
+		long parentFolderId = _dlFolder.getParentFolderId();
+
+		if (parentFolderId == DLFolderConstants.MAPPED_FOLDER_ID) {
+			return DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+		}
+		else {
+			return parentFolderId;
+		}
 	}
 
 	public String getPath() throws PortalException, SystemException {

@@ -14,13 +14,34 @@
 
 package com.liferay.portal.kernel.repository;
 
+import com.liferay.portal.kernel.util.UnicodeProperties;
+
 /**
  * @author Alexander Chow
  */
 public interface RepositoryFactory {
 
+	public long createRepository(
+			long companyId, long groupId, String name, String description,
+			String portletKey, int type,
+			UnicodeProperties typeSettingsProperties)
+		throws RepositoryException;
+
+	public void deleteRepositories(long companyId, long groupId, int purge)
+		throws RepositoryException;
+
+	public void deleteRepository(long repositoryId) throws RepositoryException;
+
 	public LocalRepository getLocalRepository(long repositoryId);
 
 	public Repository getRepository(long repositoryId);
+
+	public UnicodeProperties getProperties(long repositoryId)
+		throws RepositoryException;
+
+	public void updateRepository(
+			long repositoryId, String name, String description,
+			UnicodeProperties typeSettingsProperties)
+		throws RepositoryException;
 
 }

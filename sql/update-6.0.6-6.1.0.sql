@@ -70,6 +70,20 @@ COMMIT_TRANSACTION;
 
 update MBMessage set format = 'bbcode';
 
+create table Repository (
+	repositoryId LONG not null primary key,
+	companyId LONG,
+	createDate DATE null,
+	modifiedDate DATE null,
+	groupId LONG,
+	name VARCHAR(75) null,
+	description VARCHAR(75) null,
+	portletKey VARCHAR(75) null,
+	mappedFolderId LONG,
+	type_ INTEGER,
+	typeSettings VARCHAR(75) null
+);
+
 alter table SocialEquityLog add extraData VARCHAR(255) null;
 
 create table VirtualHost (

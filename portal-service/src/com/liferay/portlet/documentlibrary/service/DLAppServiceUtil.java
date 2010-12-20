@@ -371,20 +371,23 @@ public class DLAppServiceUtil {
 		return getService().lockFileEntry(fileEntryId, owner, expirationTime);
 	}
 
-	public static com.liferay.portal.model.Lock lockFolder(long folderId)
+	public static com.liferay.portal.model.Lock lockFolder(long repositoryId,
+		long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException,
 			java.rmi.RemoteException {
-		return getService().lockFolder(folderId);
+		return getService().lockFolder(repositoryId, folderId);
 	}
 
-	public static com.liferay.portal.model.Lock lockFolder(long folderId,
-		java.lang.String owner, boolean inheritable, long expirationTime)
+	public static com.liferay.portal.model.Lock lockFolder(long repositoryId,
+		long folderId, java.lang.String owner, boolean inheritable,
+		long expirationTime)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException,
 			java.rmi.RemoteException {
 		return getService()
-				   .lockFolder(folderId, owner, inheritable, expirationTime);
+				   .lockFolder(repositoryId, folderId, owner, inheritable,
+			expirationTime);
 	}
 
 	public static com.liferay.portal.kernel.repository.model.FileEntry moveFileEntry(
