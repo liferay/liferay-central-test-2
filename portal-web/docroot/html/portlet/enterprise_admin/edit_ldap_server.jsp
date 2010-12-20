@@ -18,6 +18,7 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
+String backURL = ParamUtil.getString(request, "backURL", redirect);
 
 long ldapServerId = ParamUtil.getLong(request, "ldapServerId", 0);
 
@@ -143,6 +144,15 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		groupMappingUser = mapping[1];
 	}
 }
+%>
+
+<liferay-ui:header
+	backURL="<%= backURL %>"
+	title='<%= (ldapServerId == 0) ? "add-ldap-server" : "edit-ldap-server" %>'
+/>
+
+<%
+PortalUtil.addPortletBreadcrumbEntry(request, (ldapServerId == 0) ? LanguageUtil.get(pageContext, "add-ldap-server") : ldapServerName, currentURL);
 %>
 
 <portlet:actionURL var="editLDAPServerURL">
