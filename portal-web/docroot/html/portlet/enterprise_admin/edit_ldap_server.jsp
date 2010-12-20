@@ -151,10 +151,6 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 	title='<%= (ldapServerId == 0) ? "add-ldap-server" : "edit-ldap-server" %>'
 />
 
-<%
-PortalUtil.addPortletBreadcrumbEntry(request, (ldapServerId == 0) ? LanguageUtil.get(pageContext, "add-ldap-server") : ldapServerName, currentURL);
-%>
-
 <portlet:actionURL var="editLDAPServerURL">
 	<portlet:param name="struts_action" value="/enterprise_admin_settings/edit_ldap_server" />
 </portlet:actionURL>
@@ -589,3 +585,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, (ldapServerId == 0) ? LanguageUtil
 		<portlet:namespace />updateDefaultLdap('apache');
 	</c:if>
 </aui:script>
+
+<%
+PortalUtil.addPortletBreadcrumbEntry(request, (ldapServerId == 0) ? LanguageUtil.get(pageContext, "add-ldap-server") : ldapServerName, currentURL);
+%>
