@@ -150,26 +150,28 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0) && Validator.isNull(PrefsProp
 					</td>
 					<td align="right">
 						<div class="control">
+							<c:if test="<%= ldapServerIds.length > 1 %>">
 
-							<%
-							String taglibUpURL = "javascript:" + renderResponse.getNamespace() + "raiseLDAPServerPriority(" + ldapServerId + ");";
-							%>
+								<%
+									String taglibUpURL = "javascript:" + renderResponse.getNamespace() + "raiseLDAPServerPriority(" + ldapServerId + ");";
+								%>
 
-							<liferay-ui:icon
-								image="top"
-								message="up"
-								url="<%= taglibUpURL %>"
-							/>
+								<liferay-ui:icon
+									image="top"
+									message="up"
+									url="<%= taglibUpURL %>"
+								/>
 
-							<%
-							String taglibDownURL = "javascript:" + renderResponse.getNamespace() + "lowerLDAPServerPriority(" + ldapServerId + ");";
-							%>
+								<%
+								String taglibDownURL = "javascript:" + renderResponse.getNamespace() + "lowerLDAPServerPriority(" + ldapServerId + ");";
+								%>
 
-							<liferay-ui:icon
-								image="bottom"
-								message="down"
-								url="<%= taglibDownURL %>"
-							/>
+								<liferay-ui:icon
+									image="bottom"
+									message="down"
+									url="<%= taglibDownURL %>"
+								/>
+							</c:if>
 
 							<portlet:renderURL var="editURL">
 								<portlet:param name="struts_action" value="/enterprise_admin_settings/edit_ldap_server" />
