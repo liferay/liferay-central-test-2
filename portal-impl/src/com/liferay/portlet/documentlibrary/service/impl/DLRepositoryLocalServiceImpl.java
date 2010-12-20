@@ -622,10 +622,14 @@ public class DLRepositoryLocalServiceImpl
 			newDLFileVersion.setStatusByUserName(user.getFullName());
 			newDLFileVersion.setStatusDate(serviceContext.getModifiedDate(now));
 
-			ExpandoBridge expandoBridge = dlFileVersion.getExpandoBridge();
+			ExpandoBridge dlFileVersionExpandoBridge =
+				dlFileVersion.getExpandoBridge();
 
-			newDLFileVersion.getExpandoBridge().setAttributes(
-				expandoBridge.getAttributes());
+			ExpandoBridge newDLFileVersionExpandoBridge =
+				newDLFileVersion.getExpandoBridge();
+
+			newDLFileVersionExpandoBridge.setAttributes(
+				dlFileVersionExpandoBridge.getAttributes());
 
 			dlFileVersionPersistence.update(newDLFileVersion, false);
 
