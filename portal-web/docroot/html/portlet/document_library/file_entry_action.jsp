@@ -100,7 +100,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 			<c:if test="<%= showActions && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
 				<portlet:renderURL var="moveURL">
 					<portlet:param name="struts_action" value="/document_library/move_file_entry" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="redirect" value="<%= viewFolderURL.toString() %>" />
 					<portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntry.getFileEntryId()) %>" />
 				</portlet:renderURL>
 
