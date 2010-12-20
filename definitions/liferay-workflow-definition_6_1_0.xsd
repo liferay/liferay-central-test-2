@@ -31,6 +31,7 @@
 			<xs:choice>
 				<xs:element ref="resource-actions" minOccurs="0" maxOccurs="1" />
 				<xs:element ref="roles" minOccurs="0" maxOccurs="1" />
+				<xs:element ref="scripted-assignment" minOccurs="0" maxOccurs="1" />
 				<xs:element ref="user" minOccurs="0" maxOccurs="1" />
 			</xs:choice>
 		</xs:complexType>
@@ -142,6 +143,14 @@
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="script" type="xs:string" />
+	<xs:element name="scripted-assignment">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="script" minOccurs="1" maxOccurs="1" />
+				<xs:element ref="script-language" minOccurs="1" maxOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 	<xs:element name="script-language">
 		<xs:simpleType>
 			<xs:restriction base="xs:string">
