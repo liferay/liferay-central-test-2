@@ -136,7 +136,7 @@ public class ZipWriterImpl implements ZipWriter {
 			_log.error(ae, ae);
 		}
 
-		return _file;
+		return _file.getDelegate();
 	}
 
 	public String getPath() {

@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.zip.ZipReader;
 
 import de.schlichtherle.io.ArchiveDetector;
+import de.schlichtherle.io.ArchiveException;
 import de.schlichtherle.io.DefaultArchiveDetector;
 import de.schlichtherle.io.File;
 import de.schlichtherle.io.FileInputStream;
@@ -66,7 +67,12 @@ public class ZipReaderImpl implements ZipReader {
 	}
 
 	public void close() {
-		_zipFile.delete();
+		try {
+			File.umount(_zipFile);
+		}
+		catch (ArchiveException ae) {
+			_log.error(ae, ae);
+		}
 	}
 
 	public List<String> getEntries() {
