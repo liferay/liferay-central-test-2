@@ -37,7 +37,9 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		updateFileVersions();
 	}
 
-	protected long getFileEntryId(long folderId, String name) throws Exception {
+	protected long getFileEntryId(long groupId, long folderId, String name)
+		throws Exception {
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -65,6 +67,34 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 	}
 
+	protected long getGroupId(long folderId) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		long groupId = 0;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select groupId from DLFolder where folderId = ?");
+
+			ps.setLong(1, folderId);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				groupId = rs.getLong("groupId");
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return groupId;
+	}
+
 	protected void updateFileRanks() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -74,16 +104,17 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select fileRankId, folderId, name from DLFileRank");
+				"select groupId, fileRankId, folderId, name from DLFileRank");
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
+				long groupId = rs.getLong("groupId");
 				long fileRankId = rs.getLong("fileRankId");
 				long folderId = rs.getLong("folderId");
 				String name = rs.getString("name");
 
-				long fileEntryId = getFileEntryId(folderId, name);
+				long fileEntryId = getFileEntryId(groupId, folderId, name);
 
 				runSQL(
 					"update DLFileRank set fileEntryId = '" + fileEntryId +
@@ -117,7 +148,10 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				long toFolderId = rs.getLong("toFolderId");
 				String toName = rs.getString("toName");
 
-				long toFileEntryId = getFileEntryId(toFolderId, toName);
+				long groupId = getGroupId(toFolderId);
+
+				long toFileEntryId =
+					getFileEntryId(groupId, toFolderId, toName);
 
 				runSQL(
 					"update DLFileShortcut set toFileEntryId = " +
@@ -142,16 +176,18 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select fileVersionId, folderId, name from DLFileVersion");
+				"select groupId, fileVersionId, folderId, name from " +
+					"DLFileVersion");
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
+				long groupId = rs.getLong("groupId");
 				long fileVersionId = rs.getLong("fileVersionId");
 				long folderId = rs.getLong("folderId");
 				String name = rs.getString("name");
 
-				long fileEntryId = getFileEntryId(folderId, name);
+				long fileEntryId = getFileEntryId(groupId, folderId, name);
 
 				runSQL(
 					"update DLFileVersion set fileEntryId = " + fileEntryId +
