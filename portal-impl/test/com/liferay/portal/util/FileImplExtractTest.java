@@ -62,14 +62,6 @@ public class FileImplExtractTest extends BaseTestCase {
 		//text = _extractText("test.pdf");
 
 		//assertEquals("Extract test.", text);
-
-		// PDFBOX-918
-
-		try {
-			extractText("test2.pdf");
-		} catch (Exception ex) {
-			fail();
-		}
 	}
 
 	public void testPpt() {

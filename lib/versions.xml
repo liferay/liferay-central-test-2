@@ -1073,7 +1073,7 @@
 	<library>
 		<file-name>portal/bcmail.jar</file-name>
 		<version>1.45</version>
-		<project-name>Bouncy Castle SMIME/CMS</project-name>
+		<project-name>Bouncy Castle</project-name>
 		<project-url>http://www.bouncycastle.org</project-url>
 		<licenses>
 			<license>
@@ -1551,7 +1551,7 @@
 	</library>
 	<library>
 		<file-name>portal/fontbox.jar</file-name>
-		<version>1.4</version>
+		<version>1.4.0</version>
 		<project-name>PDFBox</project-name>
 		<project-url>http://www.pdfbox.org</project-url>
 		<licenses>
@@ -1685,17 +1685,6 @@
 			<license>
 				<license-name>LGPL 2.1</license-name>
 				<copyright-notice>Copyright (c) Fabrice Michellonet 2002</copyright-notice>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>portal/icu4j.jar</file-name>
-		<version>4.6</version>
-		<project-name>International Components for Unicode</project-name>
-		<project-url>http://site.icu-project.org</project-url>
-		<licenses>
-			<license>
-				<license-name>BSD Style License</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1904,7 +1893,7 @@
 	</library>
 	<library>
 		<file-name>portal/jempbox.jar</file-name>
-		<version>1.4</version>
+		<version>1.4.0</version>
 		<project-name>PDFBox</project-name>
 		<project-url>http://www.pdfbox.org</project-url>
 		<licenses>
@@ -2325,7 +2314,7 @@
 	</library>
 	<library>
 		<file-name>portal/pdfbox.jar</file-name>
-		<version>1.4</version>
+		<version>1.4.0</version>
 		<project-name>PDFBox</project-name>
 		<project-url>http://www.pdfbox.org</project-url>
 		<licenses>
