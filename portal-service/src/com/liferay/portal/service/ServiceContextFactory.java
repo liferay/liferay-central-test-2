@@ -157,6 +157,12 @@ public class ServiceContextFactory {
 
 		serviceContext.setCommand(cmd);
 
+		// Current URL
+
+		String currentURL = PortalUtil.getCurrentURL(portletRequest);
+
+		serviceContext.setCurrentURL(currentURL);
+
 		// Permissions
 
 		boolean addCommunityPermissions = ParamUtil.getBoolean(
@@ -195,12 +201,6 @@ public class ServiceContextFactory {
 
 		serviceContext.setAssetCategoryIds(assetCategoryIds);
 		serviceContext.setAssetTagNames(assetTagNames);
-
-		// Current URL
-
-		String currentURL = ParamUtil.getString(portletRequest, "currentURL");
-
-		serviceContext.setCurrentURL(currentURL);
 
 		// Workflow
 
