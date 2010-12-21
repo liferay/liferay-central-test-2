@@ -35,10 +35,10 @@ if (organizationId > 0) {
 <aui:form action="<%= configurationURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="organizationId" type="hidden" value="<%= organizationId %>" />
+	<aui:input name="preferences--organizationId--" type="hidden" value="<%= organizationId %>" />
 
 	<aui:fieldset>
-		<aui:select name="selectionMethod">
+		<aui:select name="preferences--selectionMethod--">
 			<aui:option label="users" selected='<%= selectionMethod.equals("users") %>' />
 			<aui:option label="scope" selected='<%= selectionMethod.equals("scope") %>' />
 		</aui:select>
@@ -53,12 +53,12 @@ if (organizationId > 0) {
 			</aui:field-wrapper>
 		</div>
 
-		<aui:select name="displayStyle">
+		<aui:select name="preferences--displayStyle--">
 			<aui:option label="user-name-and-image" selected='<%= displayStyle.equals("user-name-and-image") %>' />
 			<aui:option label="user-name" selected='<%= displayStyle.equals("user-name") %>' />
 		</aui:select>
 
-		<aui:select label="maximum-bloggers-to-display" name="max">
+		<aui:select label="maximum-bloggers-to-display" name="preferences--max--">
 			<aui:option label="1" selected="<%= max == 1 %>" />
 			<aui:option label="2" selected="<%= max == 2 %>" />
 			<aui:option label="3" selected="<%= max == 3 %>" />
