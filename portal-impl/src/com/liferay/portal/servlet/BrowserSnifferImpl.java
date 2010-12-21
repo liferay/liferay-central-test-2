@@ -235,9 +235,6 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	}
 
 	public boolean isRtf(HttpServletRequest request) {
-		boolean isMobile = isMobile(request);
-		boolean isOpera = isOpera(request);
-
 		float majorVersion = getMajorVersion(request);
 
 		if (isIe(request) && (majorVersion >= 5.5)) {
@@ -248,12 +245,14 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 			return true;
 		}
 
-		if (isOpera && (majorVersion >= 10.0) && !isMobile) {
-			return true;
-		}
+		if (!isMobile(request)) {
+			if (isOpera(request) && (majorVersion >= 10.0)) {
+				return true;
+			}
 
-		if (isSafari(request) && (majorVersion >= 3.0) && !isMobile) {
-			return true;
+			if (isSafari(request) && (majorVersion >= 3.0)) {
+				return true;
+			}
 		}
 
 		return false;
