@@ -31,6 +31,6 @@ public interface UserIdMapper extends UserIdMapperModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a user id mapper model instance should use the {@link UserIdMapper} interface instead.
+	 * Never reference this interface directly. All methods that expect a user ID mapper model instance should use the {@link UserIdMapper} interface instead.
 	 */
 }

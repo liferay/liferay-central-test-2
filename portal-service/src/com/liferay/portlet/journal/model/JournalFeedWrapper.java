@@ -65,18 +65,18 @@ public class JournalFeedWrapper implements JournalFeed {
 	}
 
 	/**
-	* Gets the ID of this journal feed.
+	* Gets the id of this journal feed.
 	*
-	* @return the ID of this journal feed
+	* @return the id of this journal feed
 	*/
 	public long getId() {
 		return _journalFeed.getId();
 	}
 
 	/**
-	* Sets the ID of this journal feed.
+	* Sets the id of this journal feed.
 	*
-	* @param id the ID of this journal feed
+	* @param id the id of this journal feed
 	*/
 	public void setId(long id) {
 		_journalFeed.setId(id);

@@ -75,16 +75,16 @@ public interface JournalTemplateModel extends BaseModel<JournalTemplate> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the ID of this journal template.
+	 * Gets the id of this journal template.
 	 *
-	 * @return the ID of this journal template
+	 * @return the id of this journal template
 	 */
 	public long getId();
 
 	/**
-	 * Sets the ID of this journal template.
+	 * Sets the id of this journal template.
 	 *
-	 * @param id the ID of this journal template
+	 * @param id the id of this journal template
 	 */
 	public void setId(long id);
 

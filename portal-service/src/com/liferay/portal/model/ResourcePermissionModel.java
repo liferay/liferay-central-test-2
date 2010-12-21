@@ -142,16 +142,16 @@ public interface ResourcePermissionModel extends BaseModel<ResourcePermission> {
 	public void setRoleId(long roleId);
 
 	/**
-	 * Gets the action ids of this resource permission.
+	 * Gets the action IDs of this resource permission.
 	 *
-	 * @return the action ids of this resource permission
+	 * @return the action IDs of this resource permission
 	 */
 	public long getActionIds();
 
 	/**
-	 * Sets the action ids of this resource permission.
+	 * Sets the action IDs of this resource permission.
 	 *
-	 * @param actionIds the action ids of this resource permission
+	 * @param actionIds the action IDs of this resource permission
 	 */
 	public void setActionIds(long actionIds);
 

@@ -75,16 +75,16 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the ID of this journal article.
+	 * Gets the id of this journal article.
 	 *
-	 * @return the ID of this journal article
+	 * @return the id of this journal article
 	 */
 	public long getId();
 
 	/**
-	 * Sets the ID of this journal article.
+	 * Sets the id of this journal article.
 	 *
-	 * @param id the ID of this journal article
+	 * @param id the id of this journal article
 	 */
 	public void setId(long id);
 

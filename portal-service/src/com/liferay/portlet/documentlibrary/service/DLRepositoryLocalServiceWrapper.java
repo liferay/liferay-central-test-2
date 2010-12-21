@@ -80,15 +80,15 @@ public class DLRepositoryLocalServiceWrapper implements DLRepositoryLocalService
 		return _dlRepositoryLocalService.getCompanyFolders(companyId, start, end);
 	}
 
+	public int getCompanyFoldersCount(long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlRepositoryLocalService.getCompanyFoldersCount(companyId);
+	}
+
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getExtraSettingsFileEntries(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlRepositoryLocalService.getExtraSettingsFileEntries(start, end);
-	}
-
-	public int getCompanyFoldersCount(long companyId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlRepositoryLocalService.getCompanyFoldersCount(companyId);
 	}
 
 	public java.io.InputStream getFileAsStream(long userId, long fileEntryId,

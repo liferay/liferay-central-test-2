@@ -78,12 +78,12 @@ public interface DLRepositoryLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getExtraSettingsFileEntries(
-		int start, int end)
+	public int getCompanyFoldersCount(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCompanyFoldersCount(long companyId)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getExtraSettingsFileEntries(
+		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.io.InputStream getFileAsStream(long userId, long fileEntryId,

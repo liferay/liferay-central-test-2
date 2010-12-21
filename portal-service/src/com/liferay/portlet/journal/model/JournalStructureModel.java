@@ -75,16 +75,16 @@ public interface JournalStructureModel extends BaseModel<JournalStructure> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the ID of this journal structure.
+	 * Gets the id of this journal structure.
 	 *
-	 * @return the ID of this journal structure
+	 * @return the id of this journal structure
 	 */
 	public long getId();
 
 	/**
-	 * Sets the ID of this journal structure.
+	 * Sets the id of this journal structure.
 	 *
-	 * @param id the ID of this journal structure
+	 * @param id the id of this journal structure
 	 */
 	public void setId(long id);
 

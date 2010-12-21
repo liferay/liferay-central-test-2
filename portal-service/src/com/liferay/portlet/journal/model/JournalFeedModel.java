@@ -75,16 +75,16 @@ public interface JournalFeedModel extends BaseModel<JournalFeed> {
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the ID of this journal feed.
+	 * Gets the id of this journal feed.
 	 *
-	 * @return the ID of this journal feed
+	 * @return the id of this journal feed
 	 */
 	public long getId();
 
 	/**
-	 * Sets the ID of this journal feed.
+	 * Sets the id of this journal feed.
 	 *
-	 * @param id the ID of this journal feed
+	 * @param id the id of this journal feed
 	 */
 	public void setId(long id);
 

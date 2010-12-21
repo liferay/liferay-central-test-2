@@ -90,15 +90,15 @@ public class DLRepositoryLocalServiceUtil {
 		return getService().getCompanyFolders(companyId, start, end);
 	}
 
+	public static int getCompanyFoldersCount(long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getCompanyFoldersCount(companyId);
+	}
+
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getExtraSettingsFileEntries(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getExtraSettingsFileEntries(start, end);
-	}
-
-	public static int getCompanyFoldersCount(long companyId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getCompanyFoldersCount(companyId);
 	}
 
 	public static java.io.InputStream getFileAsStream(long userId,
