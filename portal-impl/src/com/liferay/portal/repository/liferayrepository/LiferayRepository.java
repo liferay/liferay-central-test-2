@@ -303,8 +303,6 @@ public class LiferayRepository
 			long fileEntryId, long newFolderId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		initByFileEntryId(fileEntryId);
-
 		DLFileEntry dlFileEntry = DLRepositoryServiceUtil.moveFileEntry(
 			fileEntryId, toFolderId(newFolderId), serviceContext);
 
@@ -375,8 +373,6 @@ public class LiferayRepository
 			long folderId, long parentFolderId, String title,
 			String description, ServiceContext serviceContext)
 		throws RemoteException, PortalException, SystemException {
-
-		initByFolderId(folderId);
 
 		DLFolder dlFolder = DLRepositoryServiceUtil.updateFolder(
 			toFolderId(folderId), toFolderId(parentFolderId), title,

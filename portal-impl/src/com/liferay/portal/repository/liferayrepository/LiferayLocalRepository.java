@@ -271,8 +271,6 @@ public class LiferayLocalRepository
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		initByFileEntryId(fileEntryId);
-
 		DLFileEntry dlFileEntry = DLRepositoryLocalServiceUtil.moveFileEntry(
 			userId, fileEntryId, toFolderId(newFolderId), serviceContext);
 
@@ -283,8 +281,6 @@ public class LiferayLocalRepository
 			long userId, FileEntry fileEntry, FileVersion fileVersion,
 			long[] assetCategoryIds, String[] assetTagNames)
 		throws PortalException, SystemException {
-
-		initByFileEntryId(fileEntry.getFileEntryId());
 
 		DLFileEntry dlFileEntry = (DLFileEntry)fileEntry.getModel();
 		DLFileVersion dlFileVersion = (DLFileVersion)fileVersion.getModel();
@@ -312,8 +308,6 @@ public class LiferayLocalRepository
 			long folderId, long parentFolderId, String title,
 			String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
-
-		initByFolderId(folderId);
 
 		DLFolder dlFolder = DLRepositoryLocalServiceUtil.updateFolder(
 			toFolderId(folderId), toFolderId(parentFolderId), title,
