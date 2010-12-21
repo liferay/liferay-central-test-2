@@ -50,11 +50,13 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
+import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -108,6 +110,7 @@ import net.htmlparser.jericho.StartTag;
  * @author Raymond Augé
  * @author Mika Koivisto
  * @author Jorge Ferrer
+ * @author Juan Fernández
  */
 public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
@@ -1517,16 +1520,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 							BlogsEntry.class.getName(), classPK,
 							BlogsActivityKeys.ADD_COMMENT, extraData.toString(),
 							entry.getUserId());
-
-						// Email
-
-						try {
-							sendBlogsCommentsEmail(
-								userId, entry, message, serviceContext);
-						}
-						catch (Exception e) {
-							_log.error(e, e);
-						}
 					}
 				}
 
@@ -1659,13 +1652,20 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			MBMessage message, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		if (message.getStatus() != WorkflowConstants.STATUS_APPROVED) {
+		String layoutFullURL = serviceContext.getLayoutFullURL();
+
+		if (message.getStatus() != WorkflowConstants.STATUS_APPROVED ||
+				Validator.isNull(layoutFullURL)) {
 			return;
 		}
 
-		String layoutFullURL = serviceContext.getLayoutFullURL();
-
-		if (Validator.isNull(layoutFullURL) || message.isDiscussion()) {
+		if (message.isDiscussion()) {
+			try{
+				sendCommentsEmail(message.getUserId(), message, serviceContext);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
 			return;
 		}
 
@@ -1986,24 +1986,20 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 	}
 
-	protected void sendBlogsCommentsEmail(
-			long userId, BlogsEntry entry, MBMessage message,
-			ServiceContext serviceContext)
+	protected void sendCommentsEmail(
+			long userId, MBMessage message, ServiceContext serviceContext)
 		throws IOException, PortalException, SystemException {
+
+		String className =
+			(String)serviceContext.getAttribute("className");
+		long classPK =
+			GetterUtil.getLong((String)serviceContext.getAttribute("classPK"));
 
 		long companyId = message.getCompanyId();
 
-		if (!PrefsPropsUtil.getBoolean(
-				companyId, PropsKeys.BLOGS_EMAIL_COMMENTS_ADDED_ENABLED)) {
-
-			return;
-		}
-
-		String layoutFullURL = serviceContext.getLayoutFullURL();
-
-		String blogsEntryURL =
-			layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR + "blogs/" +
-				entry.getUrlTitle();
+		String contentURL =
+			serviceContext.getPortalURL().concat(
+				serviceContext.getCurrentURL());
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
@@ -2013,17 +2009,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			companyId, PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
 
 		String subject = PrefsPropsUtil.getContent(
-			companyId, PropsKeys.BLOGS_EMAIL_COMMENTS_ADDED_SUBJECT);
+			companyId, PropsKeys.DISCUSSION_EMAIL_SUBJECT);
 		String body = PrefsPropsUtil.getContent(
-			companyId, PropsKeys.BLOGS_EMAIL_COMMENTS_ADDED_BODY);
+			companyId, PropsKeys.DISCUSSION_EMAIL_BODY);
 
 		subject = StringUtil.replace(
 			subject,
 			new String[] {
-				"[$BLOGS_COMMENTS_BODY$]",
-				"[$BLOGS_COMMENTS_USER_ADDRESS$]",
-				"[$BLOGS_COMMENTS_USER_NAME$]",
-				"[$BLOGS_ENTRY_URL$]",
+				"[$COMMENTS_BODY$]",
+				"[$COMMENTS_USER_ADDRESS$]",
+				"[$COMMENTS_USER_NAME$]",
+				"[$CONTENT_URL$]",
 				"[$FROM_ADDRESS$]",
 				"[$FROM_NAME$]"
 			},
@@ -2031,7 +2027,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				message.getBody(),
 				user.getEmailAddress(),
 				user.getFullName(),
-				blogsEntryURL,
+				contentURL,
 				fromAddress,
 				fromName
 			});
@@ -2039,10 +2035,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		body = StringUtil.replace(
 			body,
 			new String[] {
-				"[$BLOGS_COMMENTS_BODY$]",
-				"[$BLOGS_COMMENTS_USER_ADDRESS$]",
-				"[$BLOGS_COMMENTS_USER_NAME$]",
-				"[$BLOGS_ENTRY_URL$]",
+				"[$COMMENTS_BODY$]",
+				"[$COMMENTS_USER_ADDRESS$]",
+				"[$COMMENTS_USER_NAME$]",
+				"[$ASSET_URL$]",
 				"[$FROM_ADDRESS$]",
 				"[$FROM_NAME$]"
 			},
@@ -2050,46 +2046,38 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				message.getBody(),
 				user.getEmailAddress(),
 				user.getFullName(),
-				blogsEntryURL,
+				contentURL,
 				fromAddress,
 				fromName
 			});
 
 		Set<Long> sent = new HashSet<Long>();
 
-		List<MBMessage> messages = mbMessagePersistence.findByThreadId(
-			message.getThreadId());
+		List<Subscription> subscriptions =
+			SubscriptionLocalServiceUtil.getSubscriptions(
+				companyId, className, classPK);
 
-		for (MBMessage curMessage : messages) {
-			long curMessageUserId = curMessage.getUserId();
+		for (Subscription subscription : subscriptions) {
 
-			if (curMessageUserId == userId) {
+			long subscriptorUserId = subscription.getUserId();
+
+			if (userId == subscriptorUserId) {
 				continue;
 			}
 
-			if (sent.contains(curMessageUserId)) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Do not send a duplicate email to user " +
-							curMessageUserId);
-				}
-
-				continue;
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Add user " + subscriptorUserId +
+						" to the list of users who have received an email");
 			}
-			else {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Add user " + curMessageUserId +
-							" to the list of users who have received an email");
-				}
 
-				sent.add(curMessageUserId);
-			}
+			sent.add(subscriptorUserId);
 
 			User curMessageUser = null;
 
 			try {
-				curMessageUser = userLocalService.getUserById(curMessageUserId);
+				curMessageUser =
+					userLocalService.getUserById(subscriptorUserId);
 			}
 			catch (NoSuchUserException nsue) {
 				continue;
