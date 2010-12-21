@@ -29,7 +29,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
 			<aui:fieldset>
-				<aui:select name="displayStyle">
+				<aui:select name="preferences--displayStyle--">
 
 					<%
 					for (String displayStyleOption : PropsValues.BREADCRUMB_DISPLAY_STYLE_OPTIONS) {

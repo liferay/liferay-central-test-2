@@ -27,7 +27,8 @@ import java.util.Map;
 public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 
 	protected String getUpdatePortletPreferencesWhereClause() {
-		return "portletId like '85_INSTANCE_%'";
+		return "portletId like '85_INSTANCE_%' OR " +
+			"portletId like '73_INSTANCE_%'";
 	}
 
 	protected String upgradePreferences(
