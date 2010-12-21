@@ -38,7 +38,7 @@ public class BlogsUtil {
 		PortletPreferences preferences) {
 
 		String emailEntryAddedBody = preferences.getValue(
-			"email-entry-added-body", StringPool.BLANK);
+			"emailEntryAddedBody", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailEntryAddedBody)) {
 			return emailEntryAddedBody;
@@ -53,7 +53,7 @@ public class BlogsUtil {
 		PortletPreferences preferences) {
 
 		String emailEntryAddedEnabled = preferences.getValue(
-			"email-entry-added-enabled", StringPool.BLANK);
+			"emailEntryAddedEnabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailEntryAddedEnabled)) {
 			return GetterUtil.getBoolean(emailEntryAddedEnabled);
@@ -68,7 +68,7 @@ public class BlogsUtil {
 		PortletPreferences preferences) {
 
 		String emailEntryAddedSubject = preferences.getValue(
-			"email-entry-added-subject", StringPool.BLANK);
+			"emailEntryAddedSubject", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailEntryAddedSubject)) {
 			return emailEntryAddedSubject;
@@ -83,7 +83,7 @@ public class BlogsUtil {
 		PortletPreferences preferences) {
 
 		String emailEntryUpdatedBody = preferences.getValue(
-			"email-entry-updated-body", StringPool.BLANK);
+			"emailEntryUpdatedBody", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailEntryUpdatedBody)) {
 			return emailEntryUpdatedBody;
@@ -98,7 +98,7 @@ public class BlogsUtil {
 		PortletPreferences preferences) {
 
 		String emailEntryUpdatedEnabled = preferences.getValue(
-			"email-entry-updated-enabled", StringPool.BLANK);
+			"emailEntryUpdatedEnabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailEntryUpdatedEnabled)) {
 			return GetterUtil.getBoolean(emailEntryUpdatedEnabled);
@@ -113,7 +113,7 @@ public class BlogsUtil {
 		PortletPreferences preferences) {
 
 		String emailEntryUpdatedSubject = preferences.getValue(
-			"email-entry-updated-subject", StringPool.BLANK);
+			"emailEntryUpdatedSubject", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailEntryUpdatedSubject)) {
 			return emailEntryUpdatedSubject;
@@ -128,13 +128,13 @@ public class BlogsUtil {
 		String emailFromAddress = PropsUtil.get(
 			PropsKeys.BLOGS_EMAIL_FROM_ADDRESS);
 
-		return preferences.getValue("email-from-address", emailFromAddress);
+		return preferences.getValue("emailFromAddress", emailFromAddress);
 	}
 
 	public static String getEmailFromName(PortletPreferences preferences) {
 		String emailFromName = PropsUtil.get(PropsKeys.BLOGS_EMAIL_FROM_NAME);
 
-		return preferences.getValue("email-from-name", emailFromName);
+		return preferences.getValue("emailFromName", emailFromName);
 	}
 
 	public static String getMailId(String mx, long entryId) {
