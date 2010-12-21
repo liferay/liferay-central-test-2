@@ -1160,41 +1160,42 @@ public class PortalImpl implements Portal {
 	public String getCurrentURL(HttpServletRequest request) {
 		String currentURL = (String)request.getAttribute(WebKeys.CURRENT_URL);
 
-		if (currentURL == null) {
-			currentURL = ParamUtil.getString(request, "currentURL");
-
-			if (Validator.isNull(currentURL)) {
-				currentURL = HttpUtil.getCompleteURL(request);
-
-				if ((Validator.isNotNull(currentURL)) &&
-					(currentURL.indexOf(_J_SECURITY_CHECK) == -1)) {
-
-					currentURL = currentURL.substring(
-						currentURL.indexOf(Http.PROTOCOL_DELIMITER) +
-							Http.PROTOCOL_DELIMITER.length());
-
-					currentURL = currentURL.substring(
-						currentURL.indexOf(CharPool.SLASH));
-				}
-
-				if (Validator.isNotNull(currentURL) &&
-					FacebookUtil.isFacebook(currentURL)) {
-
-					String[] facebookData = FacebookUtil.getFacebookData(
-						request);
-
-					currentURL =
-						FacebookUtil.FACEBOOK_APPS_URL + facebookData[0] +
-							facebookData[2];
-				}
-			}
-
-			if (Validator.isNull(currentURL)) {
-				currentURL = getPathMain();
-			}
-
-			request.setAttribute(WebKeys.CURRENT_URL, currentURL);
+		if (currentURL != null) {
+			return currentURL;
 		}
+
+		currentURL = ParamUtil.getString(request, "currentURL");
+
+		if (Validator.isNull(currentURL)) {
+			currentURL = HttpUtil.getCompleteURL(request);
+
+			if ((Validator.isNotNull(currentURL)) &&
+				(currentURL.indexOf(_J_SECURITY_CHECK) == -1)) {
+
+				currentURL = currentURL.substring(
+					currentURL.indexOf(Http.PROTOCOL_DELIMITER) +
+						Http.PROTOCOL_DELIMITER.length());
+
+				currentURL = currentURL.substring(
+					currentURL.indexOf(CharPool.SLASH));
+			}
+
+			if (Validator.isNotNull(currentURL) &&
+				FacebookUtil.isFacebook(currentURL)) {
+
+				String[] facebookData = FacebookUtil.getFacebookData(request);
+
+				currentURL =
+					FacebookUtil.FACEBOOK_APPS_URL + facebookData[0] +
+						facebookData[2];
+			}
+		}
+
+		if (Validator.isNull(currentURL)) {
+			currentURL = getPathMain();
+		}
+
+		request.setAttribute(WebKeys.CURRENT_URL, currentURL);
 
 		return currentURL;
 	}
