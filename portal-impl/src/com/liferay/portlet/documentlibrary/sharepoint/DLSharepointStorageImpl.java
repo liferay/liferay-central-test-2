@@ -319,8 +319,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 			DLAppServiceUtil.updateFileEntry(
 				fileEntryId, title, title, description, changeLog, false,
-				sharepointRequest.getBytes(),
-				serviceContext);
+				sharepointRequest.getBytes(), serviceContext);
 		}
 		catch (NoSuchFileEntryException nsfee) {
 			File file = FileUtil.createTempFile(FileUtil.getExtension(title));
@@ -328,8 +327,8 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			FileUtil.write(file, sharepointRequest.getBytes());
 
 			DLAppServiceUtil.addFileEntry(
-				groupId, parentFolderId, title, description, changeLog,
-				file, serviceContext);
+				groupId, parentFolderId, title, description, changeLog, file,
+				serviceContext);
 		}
 	}
 

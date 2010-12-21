@@ -185,8 +185,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			}
 
 			DLAppServiceUtil.addFileEntry(
-				groupId, parentFolderId, title, description, changeLog,
-				file, serviceContext);
+				groupId, parentFolderId, title, description, changeLog, file,
+				serviceContext);
 
 			return status;
 		}
@@ -559,8 +559,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 					DLAppServiceUtil.updateFileEntry(
 						destFileEntry.getFileEntryId(),
 						destFileEntry.getTitle(), destFileEntry.getTitle(),
-						destFileEntry.getDescription(), changeLog, false,
-						bytes, serviceContext);
+						destFileEntry.getDescription(), changeLog, false, bytes,
+						serviceContext);
 
 					DLAppServiceUtil.deleteFileEntry(
 						fileEntry.getFileEntryId());
@@ -649,8 +649,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				if (contentLength > 0) {
 					DLAppServiceUtil.updateFileEntry(
 						fileEntryId, title, title, description, changeLog,
-						false, request.getInputStream(),
-						contentLength, serviceContext);
+						false, request.getInputStream(), contentLength,
+						serviceContext);
 				}
 				else {
 					file = FileUtil.createTempFile(
@@ -667,8 +667,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				if (contentLength > 0) {
 					DLAppServiceUtil.addFileEntry(
 						groupId, parentFolderId, title, description,
-						changeLog, request.getInputStream(),
-						contentLength, serviceContext);
+						changeLog, request.getInputStream(), contentLength,
+						serviceContext);
 				}
 				else {
 					file =
@@ -677,8 +677,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 					FileUtil.write(file, request.getInputStream());
 
 					DLAppServiceUtil.addFileEntry(
-						groupId, parentFolderId, title, description,
-						changeLog, file, serviceContext);
+						groupId, parentFolderId, title, description, changeLog,
+						file, serviceContext);
 				}
 			}
 
@@ -941,8 +941,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		DLAppServiceUtil.updateFileEntry(
 			fileEntry.getFileEntryId(), fileEntry.getTitle(),
 			fileEntry.getTitle(), fileEntry.getDescription(),
-			latestFileVersion.getDescription(), true,
-			null, 0, serviceContext);
+			latestFileVersion.getDescription(), true, null, 0, serviceContext);
 	}
 
 	protected Resource toResource(
