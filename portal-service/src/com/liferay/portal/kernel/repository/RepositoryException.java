@@ -14,12 +14,12 @@
 
 package com.liferay.portal.kernel.repository;
 
-import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * @author Alexander Chow
  */
-public class RepositoryException extends PortalException {
+public class RepositoryException extends SystemException {
 
 	public RepositoryException() {
 		super();

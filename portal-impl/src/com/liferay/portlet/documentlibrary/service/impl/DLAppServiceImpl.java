@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.repository.Repository;
+import com.liferay.portal.kernel.repository.RepositoryException;
 import com.liferay.portal.kernel.repository.RepositoryFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
@@ -650,11 +651,13 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			folderId, lockUuid);
 	}
 
-	protected Repository getRepository() {
+	protected Repository getRepository() throws RepositoryException {
 		return getRepository(-1);
 	}
 
-	protected Repository getRepository(long repositoryId) {
+	protected Repository getRepository(long repositoryId)
+		throws RepositoryException {
+
 		return RepositoryFactoryUtil.getRepository(repositoryId);
 	}
 

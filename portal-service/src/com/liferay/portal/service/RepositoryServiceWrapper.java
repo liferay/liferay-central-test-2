@@ -37,6 +37,11 @@ public class RepositoryServiceWrapper implements RepositoryService {
 			portletId, type, typeSettingsProperties);
 	}
 
+	public void checkRepository(long repositoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_repositoryService.checkRepository(repositoryId);
+	}
+
 	public void deleteRepositories(long groupId, int purge)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

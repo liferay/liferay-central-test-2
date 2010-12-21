@@ -63,7 +63,8 @@ public class LiferayRepository
 		throws PortalException, SystemException {
 
 		DLFolder dlFolder = DLRepositoryServiceUtil.addFolder(
-			getGroupId(), parentFolderId, title, description, serviceContext);
+			getGroupId(), toFolderId(parentFolderId), title, description,
+			serviceContext);
 
 		return new LiferayFolder(dlFolder);
 	}

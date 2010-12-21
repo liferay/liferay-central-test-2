@@ -47,6 +47,11 @@ public class RepositoryServiceUtil {
 			typeSettingsProperties);
 	}
 
+	public static void checkRepository(long repositoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().checkRepository(repositoryId);
+	}
+
 	public static void deleteRepositories(long groupId, int purge)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

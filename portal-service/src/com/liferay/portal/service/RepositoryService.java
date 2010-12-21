@@ -47,6 +47,9 @@ public interface RepositoryService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public void checkRepository(long repositoryId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void deleteRepositories(long groupId, int purge)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

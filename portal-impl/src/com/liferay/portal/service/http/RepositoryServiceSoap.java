@@ -64,6 +64,18 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class RepositoryServiceSoap {
+	public static void checkRepository(long repositoryId)
+		throws RemoteException {
+		try {
+			RepositoryServiceUtil.checkRepository(repositoryId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteRepositories(long groupId, int purge)
 		throws RemoteException {
 		try {

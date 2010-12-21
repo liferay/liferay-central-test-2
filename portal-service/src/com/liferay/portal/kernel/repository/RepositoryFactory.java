@@ -32,9 +32,11 @@ public interface RepositoryFactory {
 	public void deleteRepository(long repositoryId, boolean purge)
 		throws RepositoryException;
 
-	public LocalRepository getLocalRepository(long repositoryId);
+	public LocalRepository getLocalRepository(long repositoryId)
+		throws RepositoryException;
 
-	public Repository getRepository(long repositoryId);
+	public Repository getRepository(long repositoryId)
+		throws RepositoryException;
 
 	public UnicodeProperties getTypeSettingsProperties(long repositoryId)
 		throws RepositoryException;

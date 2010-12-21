@@ -18,8 +18,10 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.LocalRepository;
 import com.liferay.portal.kernel.repository.RepositoryConstants;
+import com.liferay.portal.kernel.repository.RepositoryException;
 import com.liferay.portal.kernel.repository.RepositoryFactoryUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Repository;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
@@ -73,6 +75,20 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		return repositoryId;
 	}
 
+	public void checkRepository(long repositoryId) throws SystemException {
+		Group group = groupPersistence.fetchByPrimaryKey(repositoryId);
+
+		if (group == null) {
+			Repository repository = repositoryPersistence.fetchByPrimaryKey(
+				repositoryId);
+
+			if (repository == null) {
+				throw new RepositoryException(
+					"Repository ID invalid " + repositoryId);
+			}
+		}
+	}
+
 	public void deleteRepositories(long groupId, int purge)
 		throws PortalException, SystemException {
 
@@ -109,20 +125,22 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 	public void deleteRepository(long repositoryId, boolean purge)
 		throws PortalException, SystemException {
 
-		Repository repository = repositoryPersistence.fetchByPrimaryKey(
-			repositoryId);
-
-		if (repository != null) {
-			repositoryPersistence.remove(repository);
-
-			expandoValueLocalService.deleteValues(
-				Repository.class.getName(), repositoryId);
-		}
-
 		if (purge) {
 			LocalRepository localRepository = getLocalRepository(repositoryId);
 
 			localRepository.deleteAll();
+		}
+
+		Repository repository = repositoryPersistence.fetchByPrimaryKey(
+			repositoryId);
+
+		if (repository != null) {
+			expandoValueLocalService.deleteValues(
+				Repository.class.getName(), repositoryId);
+
+			dlRepositoryLocalService.deleteFolder(repository.getDlFolderId());
+
+			repositoryPersistence.remove(repository);
 		}
 	}
 
@@ -176,7 +194,9 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		return dlFolder.getFolderId();
 	}
 
-	protected LocalRepository getLocalRepository(long repositoryId) {
+	protected LocalRepository getLocalRepository(long repositoryId)
+		throws RepositoryException {
+
 		return RepositoryFactoryUtil.getLocalRepository(repositoryId);
 	}
 

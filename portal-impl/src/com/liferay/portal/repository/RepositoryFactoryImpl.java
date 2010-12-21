@@ -14,6 +14,7 @@
 
 package com.liferay.portal.repository;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.LocalRepository;
 import com.liferay.portal.kernel.repository.Repository;
 import com.liferay.portal.kernel.repository.RepositoryException;
@@ -65,11 +66,39 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
 		}
 	}
 
-	public LocalRepository getLocalRepository(long repositoryId) {
+	public LocalRepository getLocalRepository(long repositoryId)
+		throws RepositoryException {
+
+		try {
+			RepositoryServiceUtil.checkRepository(repositoryId);
+		}
+		catch (SystemException se) {
+			if (se instanceof RepositoryException) {
+				throw (RepositoryException)se;
+			}
+			else {
+				throw new RepositoryException(se);
+			}
+		}
+
 		return new LiferayLocalRepository(repositoryId);
 	}
 
-	public Repository getRepository(long repositoryId) {
+	public Repository getRepository(long repositoryId)
+		throws RepositoryException {
+
+		try {
+			RepositoryServiceUtil.checkRepository(repositoryId);
+		}
+		catch (SystemException se) {
+			if (se instanceof RepositoryException) {
+				throw (RepositoryException)se;
+			}
+			else {
+				throw new RepositoryException(se);
+			}
+		}
+
 		return new LiferayRepository(repositoryId);
 	}
 

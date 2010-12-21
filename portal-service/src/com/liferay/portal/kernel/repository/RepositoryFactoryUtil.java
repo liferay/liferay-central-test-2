@@ -43,11 +43,15 @@ public class RepositoryFactoryUtil {
 		getRepositoryFactory().deleteRepository(repositoryId, purge);
 	}
 
-	public static LocalRepository getLocalRepository(long repositoryId) {
+	public static LocalRepository getLocalRepository(long repositoryId)
+		throws RepositoryException {
+
 		return getRepositoryFactory().getLocalRepository(repositoryId);
 	}
 
-	public static Repository getRepository(long repositoryId) {
+	public static Repository getRepository(long repositoryId)
+		throws RepositoryException {
+
 		return getRepositoryFactory().getRepository(repositoryId);
 	}
 

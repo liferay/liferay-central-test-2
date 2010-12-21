@@ -91,13 +91,41 @@ public class RepositoryServiceHttp {
 		}
 	}
 
+	public static void checkRepository(HttpPrincipal httpPrincipal,
+		long repositoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(RepositoryServiceUtil.class.getName(),
+					"checkRepository", _checkRepositoryParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					repositoryId);
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static void deleteRepositories(HttpPrincipal httpPrincipal,
 		long groupId, int purge)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RepositoryServiceUtil.class.getName(),
-					"deleteRepositories", _deleteRepositoriesParameterTypes1);
+					"deleteRepositories", _deleteRepositoriesParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					purge);
@@ -130,7 +158,7 @@ public class RepositoryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RepositoryServiceUtil.class.getName(),
-					"deleteRepository", _deleteRepositoryParameterTypes2);
+					"deleteRepository", _deleteRepositoryParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					repositoryId, purge);
@@ -163,7 +191,7 @@ public class RepositoryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RepositoryServiceUtil.class.getName(),
-					"getRepository", _getRepositoryParameterTypes3);
+					"getRepository", _getRepositoryParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					repositoryId);
@@ -201,7 +229,7 @@ public class RepositoryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(RepositoryServiceUtil.class.getName(),
 					"getTypeSettingsProperties",
-					_getTypeSettingsPropertiesParameterTypes4);
+					_getTypeSettingsPropertiesParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					repositoryId);
@@ -239,7 +267,7 @@ public class RepositoryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RepositoryServiceUtil.class.getName(),
-					"updateRepository", _updateRepositoryParameterTypes5);
+					"updateRepository", _updateRepositoryParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					repositoryId, name, description, typeSettingsProperties);
@@ -272,19 +300,22 @@ public class RepositoryServiceHttp {
 			java.lang.String.class, int.class,
 			com.liferay.portal.kernel.util.UnicodeProperties.class
 		};
-	private static final Class<?>[] _deleteRepositoriesParameterTypes1 = new Class[] {
+	private static final Class<?>[] _checkRepositoryParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _deleteRepositoriesParameterTypes2 = new Class[] {
 			long.class, int.class
 		};
-	private static final Class<?>[] _deleteRepositoryParameterTypes2 = new Class[] {
+	private static final Class<?>[] _deleteRepositoryParameterTypes3 = new Class[] {
 			long.class, boolean.class
 		};
-	private static final Class<?>[] _getRepositoryParameterTypes3 = new Class[] {
+	private static final Class<?>[] _getRepositoryParameterTypes4 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getTypeSettingsPropertiesParameterTypes4 = new Class[] {
+	private static final Class<?>[] _getTypeSettingsPropertiesParameterTypes5 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _updateRepositoryParameterTypes5 = new Class[] {
+	private static final Class<?>[] _updateRepositoryParameterTypes6 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
 			com.liferay.portal.kernel.util.UnicodeProperties.class
 		};
