@@ -39,11 +39,11 @@ if (organizationId > 0) {
 
 <aui:form action="<%= configurationURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-	<aui:input name="organizationId" type="hidden" value="<%= organizationId %>" />
+	<aui:input name="preferences--organizationId--" type="hidden" value="<%= organizationId %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
 	<aui:fieldset>
-		<aui:select name="selectionMethod">
+		<aui:select name="preferences--selectionMethod--">
 			<aui:option label="users" selected='<%= selectionMethod.equals("users") %>' />
 			<aui:option label="scope" selected='<%= selectionMethod.equals("scope") %>' />
 		</aui:select>
@@ -58,7 +58,7 @@ if (organizationId > 0) {
 			</aui:field-wrapper>
 		</div>
 
-		<aui:select name="displayStyle">
+		<aui:select name="preferences--displayStyle--">
 			<aui:option label="body-and-image" selected='<%= displayStyle.equals("body-and-image") %>' />
 			<aui:option label="body" selected='<%= displayStyle.equals("body") %>' />
 			<aui:option label="abstract" selected='<%= displayStyle.equals("abstract") %>' />
@@ -68,7 +68,7 @@ if (organizationId > 0) {
 			<aui:option label="title" selected='<%= displayStyle.equals("title") %>' />
 		</aui:select>
 
-		<aui:select label="maximum-items-to-display" name="max">
+		<aui:select label="maximum-items-to-display" name="preferences--max--">
 			<aui:option label="1" selected="<%= max == 1 %>" />
 			<aui:option label="2" selected="<%= max == 2 %>" />
 			<aui:option label="3" selected="<%= max == 3 %>" />
@@ -88,9 +88,9 @@ if (organizationId > 0) {
 			<aui:option label="100" selected="<%= max == 100 %>" />
 		</aui:select>
 
-		<aui:input inlineLabel="left" name="enableRssSubscription" type="checkbox" value="<%= enableRssSubscription %>" />
+		<aui:input name="preferences--enableRssSubscription--" type="checkbox" value="<%= enableRssSubscription %>" />
 
-		<aui:input inlineLabel="left" name="showTags" type="checkbox" value="<%= showTags %>" />
+		<aui:input name="preferences--showTags--" type="checkbox" value="<%= showTags %>" />
 	</aui:fieldset>
 
 	<aui:button-row>
