@@ -29,6 +29,20 @@ import com.liferay.portal.service.RepositoryServiceUtil;
  */
 public class RepositoryFactoryImpl implements RepositoryFactory {
 
+	public void checkRepository(long repositoryId) throws RepositoryException {
+		try {
+			RepositoryServiceUtil.checkRepository(repositoryId);
+		}
+		catch (SystemException se) {
+			if (se instanceof RepositoryException) {
+				throw (RepositoryException)se;
+			}
+			else {
+				throw new RepositoryException(se);
+			}
+		}
+	}
+
 	public long createRepository(
 			long groupId, String name, String description, String portletId,
 			int type, UnicodeProperties typeSettingsProperties)
@@ -69,37 +83,50 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
 	public LocalRepository getLocalRepository(long repositoryId)
 		throws RepositoryException {
 
-		try {
-			RepositoryServiceUtil.checkRepository(repositoryId);
-		}
-		catch (SystemException se) {
-			if (se instanceof RepositoryException) {
-				throw (RepositoryException)se;
-			}
-			else {
-				throw new RepositoryException(se);
-			}
-		}
+		LocalRepository localRepository = new LiferayLocalRepository(
+			repositoryId);
 
-		return new LiferayLocalRepository(repositoryId);
+		checkRepository(repositoryId);
+
+		return localRepository;
+	}
+
+	public LocalRepository getLocalRepository(
+			long folderId, long fileEntryId, long fileVersionId)
+		throws RepositoryException {
+
+		LocalRepository localRepository = new LiferayLocalRepository(
+			folderId, fileEntryId, fileVersionId);
+
+		long repositoryId = localRepository.getRepositoryId();
+
+		checkRepository(repositoryId);
+
+		return localRepository;
 	}
 
 	public Repository getRepository(long repositoryId)
 		throws RepositoryException {
 
-		try {
-			RepositoryServiceUtil.checkRepository(repositoryId);
-		}
-		catch (SystemException se) {
-			if (se instanceof RepositoryException) {
-				throw (RepositoryException)se;
-			}
-			else {
-				throw new RepositoryException(se);
-			}
-		}
+		Repository repository = new LiferayRepository(repositoryId);
 
-		return new LiferayRepository(repositoryId);
+		checkRepository(repositoryId);
+
+		return repository;
+	}
+
+	public Repository getRepository(
+			long folderId, long fileEntryId, long fileVersionId)
+		throws RepositoryException {
+
+		Repository repository = new LiferayRepository(
+			folderId, fileEntryId, fileVersionId);
+
+		long repositoryId = repository.getRepositoryId();
+
+		checkRepository(repositoryId);
+
+		return repository;
 	}
 
 	public UnicodeProperties getTypeSettingsProperties(long repositoryId)

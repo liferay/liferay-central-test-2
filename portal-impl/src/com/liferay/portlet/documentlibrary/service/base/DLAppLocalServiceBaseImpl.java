@@ -21,10 +21,12 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
+import com.liferay.portal.service.LockLocalService;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
+import com.liferay.portal.service.persistence.LockPersistence;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
@@ -365,6 +367,42 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService {
 	}
 
 	/**
+	 * Gets the lock local service.
+	 *
+	 * @return the lock local service
+	 */
+	public LockLocalService getLockLocalService() {
+		return lockLocalService;
+	}
+
+	/**
+	 * Sets the lock local service.
+	 *
+	 * @param lockLocalService the lock local service
+	 */
+	public void setLockLocalService(LockLocalService lockLocalService) {
+		this.lockLocalService = lockLocalService;
+	}
+
+	/**
+	 * Gets the lock persistence.
+	 *
+	 * @return the lock persistence
+	 */
+	public LockPersistence getLockPersistence() {
+		return lockPersistence;
+	}
+
+	/**
+	 * Sets the lock persistence.
+	 *
+	 * @param lockPersistence the lock persistence
+	 */
+	public void setLockPersistence(LockPersistence lockPersistence) {
+		this.lockPersistence = lockPersistence;
+	}
+
+	/**
 	 * Gets the resource local service.
 	 *
 	 * @return the resource local service
@@ -560,6 +598,10 @@ public abstract class DLAppLocalServiceBaseImpl implements DLAppLocalService {
 	protected DLRepositoryService dlRepositoryService;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	@BeanReference(type = LockLocalService.class)
+	protected LockLocalService lockLocalService;
+	@BeanReference(type = LockPersistence.class)
+	protected LockPersistence lockPersistence;
 	@BeanReference(type = ResourceLocalService.class)
 	protected ResourceLocalService resourceLocalService;
 	@BeanReference(type = ResourceService.class)

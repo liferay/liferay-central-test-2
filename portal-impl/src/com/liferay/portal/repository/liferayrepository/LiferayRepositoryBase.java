@@ -20,6 +20,7 @@ import com.liferay.portal.model.Repository;
 import com.liferay.portal.repository.liferayrepository.util.LiferayBase;
 import com.liferay.portal.service.RepositoryServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
@@ -32,6 +33,20 @@ import java.util.List;
  */
 public abstract class LiferayRepositoryBase extends LiferayBase {
 
+	public LiferayRepositoryBase(
+		long folderId, long fileEntryId, long fileVersionId) {
+
+		if (folderId != 0) {
+			initByFolderId(folderId);
+		}
+		else if (fileEntryId != 0) {
+			initByFileEntryId(fileEntryId);
+		}
+		else if (fileVersionId != 0) {
+			initByFileVersionId(fileVersionId);
+		}
+	}
+
 	public LiferayRepositoryBase(long repositoryId) {
 		initByRepositoryId(repositoryId);
 	}
@@ -40,7 +55,7 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 		return _groupId;
 	}
 
-	protected long getRepositoryId() {
+	public long getRepositoryId() {
 		return _repositoryId;
 	}
 
@@ -50,6 +65,18 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 				fileEntryId);
 
 			initByRepositoryId(dlFileEntry.getGroupId());
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	protected void initByFileVersionId(long fileVersionId) {
+		try {
+			DLFileVersion dlFileVersion =
+				DLRepositoryLocalServiceUtil.getFileVersion(fileVersionId);
+
+			initByRepositoryId(dlFileVersion.getGroupId());
 		}
 		catch (Exception e) {
 			_log.error(e, e);

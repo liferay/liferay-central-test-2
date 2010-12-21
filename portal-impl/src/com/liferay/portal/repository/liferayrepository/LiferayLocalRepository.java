@@ -46,6 +46,12 @@ public class LiferayLocalRepository
 		super(repositoryId);
 	}
 
+	public LiferayLocalRepository(
+		long folderId, long fileEntryId, long fileVersionId) {
+
+		super(folderId, fileEntryId, fileVersionId);
+	}
+
 	public FileEntry addFileEntry(
 			long userId, long folderId, String title, String description,
 			String changeLog, String extraSettings, InputStream is, long size,

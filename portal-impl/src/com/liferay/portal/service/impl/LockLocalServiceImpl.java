@@ -55,6 +55,18 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 		return lock;
 	}
 
+	public Lock getLockByUuid(String uuid)
+		throws PortalException, SystemException {
+
+		List<Lock> locks = lockPersistence.findByUuid(uuid);
+
+		if (locks.isEmpty()) {
+			throw new NoSuchLockException();
+		}
+
+		return locks.get(0);
+	}
+
 	public boolean hasLock(long userId, String className, long key)
 		throws PortalException, SystemException {
 

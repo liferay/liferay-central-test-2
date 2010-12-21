@@ -107,6 +107,8 @@ public interface Repository {
 	public int getFoldersFileEntriesCount(List<Long> folderIds, int status)
 		throws SystemException;
 
+	public long getRepositoryId();
+
 	public List<FileEntry> getRepositoryFileEntries(
 			long userId, long rootFolderId, int start, int end,
 			OrderByComparator obc)

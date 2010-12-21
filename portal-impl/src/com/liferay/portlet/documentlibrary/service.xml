@@ -5,6 +5,10 @@
 	<namespace>DL</namespace>
 	<entity name="DLApp" local-service="true" remote-service="true">
 
+		<!-- References -->
+
+		<reference package-path="com.liferay.portal" entity="Lock" />
+
 		<!-- Transactions -->
 
 		<tx-required>getFileAsStream</tx-required>

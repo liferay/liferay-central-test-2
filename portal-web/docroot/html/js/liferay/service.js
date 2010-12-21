@@ -283,6 +283,7 @@ Liferay.Service.registerClass(
 	Liferay.Service.Portal, "Repository",
 	{
 		addRepository: true,
+		checkRepository: true,
 		deleteRepositories: true,
 		deleteRepository: true,
 		getRepository: true,

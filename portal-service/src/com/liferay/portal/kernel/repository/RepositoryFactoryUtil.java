@@ -21,6 +21,12 @@ import com.liferay.portal.kernel.util.UnicodeProperties;
  */
 public class RepositoryFactoryUtil {
 
+	public static void checkRepository(long repositoryId)
+		throws RepositoryException {
+
+		getRepositoryFactory().checkRepository(repositoryId);
+	}
+
 	public static long createRepository(
 			long groupId, String name, String description, String portletId,
 			int type, UnicodeProperties typeSettingsProperties)
@@ -49,10 +55,26 @@ public class RepositoryFactoryUtil {
 		return getRepositoryFactory().getLocalRepository(repositoryId);
 	}
 
+	public static LocalRepository getLocalRepository(
+			long folderId, long fileEntryId, long fileVersionId)
+		throws RepositoryException {
+
+		return getRepositoryFactory().getLocalRepository(
+			folderId, fileEntryId, fileVersionId);
+	}
+
 	public static Repository getRepository(long repositoryId)
 		throws RepositoryException {
 
 		return getRepositoryFactory().getRepository(repositoryId);
+	}
+
+	public static Repository getRepository(
+			long folderId, long fileEntryId, long fileVersionId)
+		throws RepositoryException {
+
+		return getRepositoryFactory().getRepository(
+			folderId, fileEntryId, fileVersionId);
 	}
 
 	public static RepositoryFactory getRepositoryFactory() {

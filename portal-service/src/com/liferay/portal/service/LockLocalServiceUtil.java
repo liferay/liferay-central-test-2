@@ -245,6 +245,13 @@ public class LockLocalServiceUtil {
 		return getService().getLock(className, key);
 	}
 
+	public static com.liferay.portal.model.Lock getLockByUuid(
+		java.lang.String uuid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getLockByUuid(uuid);
+	}
+
 	public static boolean hasLock(long userId, java.lang.String className,
 		long key)
 		throws com.liferay.portal.kernel.exception.PortalException,
