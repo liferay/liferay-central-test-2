@@ -35,8 +35,7 @@ public interface Repository {
 
 	public FileEntry addFileEntry(
 			long folderId, String title, String description, String changeLog,
-			String extraSettings, InputStream is, long size,
-			ServiceContext serviceContext)
+			InputStream is, long size, ServiceContext serviceContext)
 		throws PortalException, SystemException;
 
 	public Folder addFolder(
@@ -164,8 +163,7 @@ public interface Repository {
 	public FileEntry updateFileEntry(
 			long fileEntryId, String sourceFileName, String title,
 			String description, String changeLog, boolean majorVersion,
-			String extraSettings, InputStream is, long size,
-			ServiceContext serviceContext)
+			InputStream is, long size, ServiceContext serviceContext)
 		throws PortalException, SystemException;
 
 	public Folder updateFolder(

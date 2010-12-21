@@ -31,12 +31,12 @@ public class DLRepositoryServiceWrapper implements DLRepositoryService {
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		long groupId, long folderId, java.lang.String title,
 		java.lang.String description, java.lang.String changeLog,
-		java.lang.String extraSettings, java.io.InputStream is, long size,
+		java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlRepositoryService.addFileEntry(groupId, folderId, title,
-			description, changeLog, extraSettings, is, size, serviceContext);
+			description, changeLog, is, size, serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
@@ -342,13 +342,13 @@ public class DLRepositoryServiceWrapper implements DLRepositoryService {
 		long fileEntryId, java.lang.String sourceFileName,
 		java.lang.String title, java.lang.String description,
 		java.lang.String changeLog, boolean majorVersion,
-		java.lang.String extraSettings, java.io.InputStream is, long size,
+		java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlRepositoryService.updateFileEntry(fileEntryId,
-			sourceFileName, title, description, changeLog, majorVersion,
-			extraSettings, is, size, serviceContext);
+			sourceFileName, title, description, changeLog, majorVersion, is,
+			size, serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(

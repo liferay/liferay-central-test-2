@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Lock;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 
@@ -68,14 +67,6 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 
 	public String getExtension() {
 		return _dlFileEntry.getExtension();
-	}
-
-	public String getExtraSettings() {
-		return _dlFileEntry.getExtraSettings();
-	}
-
-	public UnicodeProperties getExtraSettingsProperties() {
-		return _dlFileEntry.getExtraSettingsProperties();
 	}
 
 	public long getFileEntryId() {

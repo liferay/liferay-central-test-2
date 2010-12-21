@@ -57,14 +57,13 @@ import java.rmi.RemoteException;
 public class DLAppServiceSoap {
 	public static com.liferay.portal.kernel.repository.model.FileEntry addFileEntry(
 		long repositoryId, long folderId, java.lang.String title,
-		java.lang.String description, java.lang.String changeLog,
-		java.lang.String extraSettings, byte[] bytes,
+		java.lang.String description, java.lang.String changeLog, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portal.kernel.repository.model.FileEntry returnValue = DLAppServiceUtil.addFileEntry(repositoryId,
-					folderId, title, description, changeLog, extraSettings,
-					bytes, serviceContext);
+					folderId, title, description, changeLog, bytes,
+					serviceContext);
 
 			return returnValue;
 		}
@@ -679,14 +678,13 @@ public class DLAppServiceSoap {
 	public static com.liferay.portal.kernel.repository.model.FileEntry updateFileEntry(
 		long fileEntryId, java.lang.String sourceFileName,
 		java.lang.String title, java.lang.String description,
-		java.lang.String changeLog, boolean majorVersion,
-		java.lang.String extraSettings, byte[] bytes,
+		java.lang.String changeLog, boolean majorVersion, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portal.kernel.repository.model.FileEntry returnValue = DLAppServiceUtil.updateFileEntry(fileEntryId,
 					sourceFileName, title, description, changeLog,
-					majorVersion, extraSettings, bytes, serviceContext);
+					majorVersion, bytes, serviceContext);
 
 			return returnValue;
 		}

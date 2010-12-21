@@ -103,7 +103,7 @@ public class RepositoryTest extends TestCase {
 				TestPropsValues.USER_ID,
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 				String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID),
-				StringPool.BLANK, StringPool.BLANK, null, inputStream,
+				StringPool.BLANK, StringPool.BLANK, inputStream,
 				_TEST_CONTENT.length(), new ServiceContext());
 
 			fileEntryIds[i] = fileEntry1.getFileEntryId();
@@ -119,7 +119,7 @@ public class RepositoryTest extends TestCase {
 			FileEntry fileEntry2 = localRepository.addFileEntry(
 				TestPropsValues.USER_ID, folderIds[i],
 				String.valueOf(folderIds[i]), StringPool.BLANK,
-				StringPool.BLANK, null, inputStream, _TEST_CONTENT.length(),
+				StringPool.BLANK, inputStream, _TEST_CONTENT.length(),
 				new ServiceContext());
 
 			fileEntryIds[i + 2] = fileEntry2.getFileEntryId();

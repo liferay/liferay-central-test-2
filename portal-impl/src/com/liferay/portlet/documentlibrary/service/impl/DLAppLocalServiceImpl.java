@@ -48,8 +48,8 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 
 	public FileEntry addFileEntry(
 			long userId, long repositoryId, long folderId, String title,
-			String description, String changeLog, String extraSettings,
-			byte[] bytes, ServiceContext serviceContext)
+			String description, String changeLog, byte[] bytes,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		if (bytes == null) {
@@ -60,13 +60,13 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 
 		return addFileEntry(
 			userId, repositoryId, folderId, title, description, changeLog,
-			extraSettings, is, bytes.length, serviceContext);
+			is, bytes.length, serviceContext);
 	}
 
 	public FileEntry addFileEntry(
 			long userId, long repositoryId, long folderId, String title,
-			String description, String changeLog, String extraSettings,
-			File file, ServiceContext serviceContext)
+			String description, String changeLog, File file,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		try {
@@ -79,7 +79,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 
 			return addFileEntry(
 				userId, repositoryId, folderId, title, description, changeLog,
-				extraSettings, is, file.length(), serviceContext);
+				is, file.length(), serviceContext);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new FileSizeException();
@@ -88,15 +88,15 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 
 	public FileEntry addFileEntry(
 			long userId, long repositoryId, long folderId, String title,
-			String description, String changeLog, String extraSettings,
-			InputStream is, long size, ServiceContext serviceContext)
+			String description, String changeLog, InputStream is, long size,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		LocalRepository localRepository = getLocalRepository(repositoryId);
 
 		return localRepository.addFileEntry(
-			userId, folderId, title, description, changeLog, extraSettings, is,
-			size, serviceContext);
+			userId, folderId, title, description, changeLog, is, size,
+			serviceContext);
 	}
 
 	public DLFileRank addFileRank(
@@ -483,7 +483,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	public FileEntry updateFileEntry(
 			long userId, long fileEntryId, String sourceFileName, String title,
 			String description, String changeLog, boolean majorVersion,
-			String extraSettings, byte[] bytes, ServiceContext serviceContext)
+			byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		InputStream is = null;
@@ -496,13 +496,13 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 
 		return updateFileEntry(
 			userId, fileEntryId, sourceFileName, title, description, changeLog,
-			majorVersion, extraSettings, is, size, serviceContext);
+			majorVersion, is, size, serviceContext);
 	}
 
 	public FileEntry updateFileEntry(
 			long userId, long fileEntryId, String sourceFileName, String title,
 			String description, String changeLog, boolean majorVersion,
-			String extraSettings, File file, ServiceContext serviceContext)
+			File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		try {
@@ -516,8 +516,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 
 			return updateFileEntry(
 				userId, fileEntryId, sourceFileName, title, description,
-				changeLog, majorVersion, extraSettings, is, size,
-				serviceContext);
+				changeLog, majorVersion, is, size, serviceContext);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new NoSuchFileException();
@@ -527,15 +526,14 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	public FileEntry updateFileEntry(
 			long userId, long fileEntryId, String sourceFileName, String title,
 			String description, String changeLog, boolean majorVersion,
-			String extraSettings, InputStream is, long size,
-			ServiceContext serviceContext)
+			InputStream is, long size, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		LocalRepository localRepository = getLocalRepository(0, fileEntryId, 0);
 
 		return localRepository.updateFileEntry(
 			userId, fileEntryId, sourceFileName, title, description,
-			changeLog, majorVersion, extraSettings, is, size, serviceContext);
+			changeLog, majorVersion, is, size, serviceContext);
 	}
 
 	public DLFileRank updateFileRank(

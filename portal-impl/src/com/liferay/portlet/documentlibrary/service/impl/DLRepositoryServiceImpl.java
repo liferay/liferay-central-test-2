@@ -58,7 +58,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 
 	public DLFileEntry addFileEntry(
 			long groupId, long folderId, String title, String description,
-			String changeLog, String extraSettings, InputStream is, long size,
+			String changeLog, InputStream is, long size,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -67,7 +67,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 
 		return dlRepositoryLocalService.addFileEntry(
 			getUserId(), groupId, folderId, title, description, changeLog,
-			extraSettings, is, size, serviceContext);
+			is, size, serviceContext);
 	}
 
 	public DLFolder addFolder(
@@ -698,8 +698,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	public DLFileEntry updateFileEntry(
 			long fileEntryId, String sourceFileName, String title,
 			String description, String changeLog, boolean majorVersion,
-			String extraSettings, InputStream is, long size,
-			ServiceContext serviceContext)
+			InputStream is, long size, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFileEntryPermission.check(
@@ -719,8 +718,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		try {
 			dlFileEntry = dlRepositoryLocalService.updateFileEntry(
 				getUserId(), fileEntryId, sourceFileName, title, description,
-				changeLog, majorVersion, extraSettings, is, size,
-				serviceContext);
+				changeLog, majorVersion, is, size, serviceContext);
 		}
 		finally {
 			if (!hasLock) {
@@ -838,7 +836,6 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 			String name = srcFileEntry.getName();
 			String title = srcFileEntry.getTitle();
 			String description = srcFileEntry.getDescription();
-			String extraSettings = srcFileEntry.getExtraSettings();
 			long size = srcFileEntry.getSize();
 
 			try {
@@ -847,7 +844,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 
 				addFileEntry(
 					destFolder.getGroupId(), destFolder.getFolderId(), title,
-					description, null, extraSettings, is, size, serviceContext);
+					description, null, is, size, serviceContext);
 			}
 			catch (Exception e) {
 				_log.error(e, e);

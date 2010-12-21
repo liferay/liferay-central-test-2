@@ -52,13 +52,12 @@ public class LiferayRepository
 
 	public FileEntry addFileEntry(
 			long folderId, String title, String description, String changeLog,
-			String extraSettings, InputStream is, long size,
-			ServiceContext serviceContext)
+			InputStream is, long size, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFileEntry dlFileEntry = DLRepositoryServiceUtil.addFileEntry(
 			getGroupId(), toFolderId(folderId), title, description, changeLog,
-			extraSettings, is, size, serviceContext);
+			is, size, serviceContext);
 
 		return new LiferayFileEntry(dlFileEntry);
 	}
@@ -358,13 +357,12 @@ public class LiferayRepository
 	public FileEntry updateFileEntry(
 			long fileEntryId, String sourceFileName, String title,
 			String description, String changeLog, boolean majorVersion,
-			String extraSettings, InputStream is, long size,
-			ServiceContext serviceContext)
+			InputStream is, long size, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFileEntry dlFileEntry = DLRepositoryServiceUtil.updateFileEntry(
 			fileEntryId, sourceFileName, title, description, changeLog,
-			majorVersion, extraSettings, is, size, serviceContext);
+			majorVersion, is, size, serviceContext);
 
 		return new LiferayFileEntry(dlFileEntry);
 	}

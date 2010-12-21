@@ -16,7 +16,6 @@ package com.liferay.portal.kernel.repository.model;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Lock;
 
 import java.io.InputStream;
@@ -42,10 +41,6 @@ public interface FileEntry extends RepositoryModel<FileEntry> {
 	public String getDescription();
 
 	public String getExtension();
-
-	public String getExtraSettings();
-
-	public UnicodeProperties getExtraSettingsProperties();
 
 	public long getFileEntryId();
 

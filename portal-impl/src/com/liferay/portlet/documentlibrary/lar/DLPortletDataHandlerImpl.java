@@ -307,16 +307,14 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				importedFileEntry = DLAppLocalServiceUtil.addFileEntry(
 					userId, portletDataContext.getScopeGroupId(), folderId,
 					titleWithExtension, fileEntry.getDescription(), null,
-					fileEntry.getExtraSettings(), is, fileEntry.getSize(),
-					serviceContext);
+					is, fileEntry.getSize(), serviceContext);
 			}
 			else if (!isDuplicateFileEntry(fileEntry, existingFileEntry)) {
 				importedFileEntry = DLAppLocalServiceUtil.updateFileEntry(
 					userId, existingFileEntry.getFileEntryId(),
 					fileEntry.getTitle(), fileEntry.getTitle(),
 					fileEntry.getDescription(), null, true,
-					fileEntry.getExtraSettings(), is, fileEntry.getSize(),
-					serviceContext);
+					is, fileEntry.getSize(), serviceContext);
 			}
 			else {
 				FileVersion latestFileVersion =
@@ -339,8 +337,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				importedFileEntry = DLAppLocalServiceUtil.addFileEntry(
 					userId, portletDataContext.getScopeGroupId(), folderId,
 					titleWithExtension, fileEntry.getDescription(), null,
-					fileEntry.getExtraSettings(), is, fileEntry.getSize(),
-					serviceContext);
+					is, fileEntry.getSize(), serviceContext);
 			}
 			catch (DuplicateFileException dfe) {
 				String title = fileEntry.getTitle();
@@ -360,8 +357,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				importedFileEntry = DLAppLocalServiceUtil.addFileEntry(
 					userId, portletDataContext.getScopeGroupId(), folderId,
 					title, fileEntry.getDescription(), null,
-					fileEntry.getExtraSettings(), is, fileEntry.getSize(),
-					serviceContext);
+					is, fileEntry.getSize(), serviceContext);
 			}
 		}
 

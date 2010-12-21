@@ -263,8 +263,6 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 
 		<aui:input classPK="<%= assetClassPK %>" model="<%= DLFileEntry.class %>" name="tags" type="assetTags" />
 
-		<%@ include file="/html/portlet/document_library/edit_file_entry_form_extra_fields.jsp" %>
-
 		<c:if test="<%= fileEntry == null %>">
 			<aui:field-wrapper label="permissions">
 				<liferay-ui:input-permissions

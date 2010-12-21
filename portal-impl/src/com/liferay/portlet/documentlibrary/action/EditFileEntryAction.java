@@ -26,9 +26,7 @@ import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PropertiesParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
@@ -245,12 +243,6 @@ public class EditFileEntryAction extends PortletAction {
 		boolean majorVersion = ParamUtil.getBoolean(
 			uploadRequest, "majorVersion");
 
-		UnicodeProperties extraSettingsProperties =
-			PropertiesParamUtil.getProperties(
-				actionRequest, "extraSettingsProperties--");
-
-		String extraSettings = extraSettingsProperties.toString();
-
 		File file = uploadRequest.getFile("file");
 
 		if (Validator.isNotNull(sourceFileName) && !file.exists()) {
@@ -278,7 +270,7 @@ public class EditFileEntryAction extends PortletAction {
 
 			FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
 				themeDisplay.getScopeGroupId(), folderId, title, description,
-				changeLog, extraSettings, file, serviceContext);
+				changeLog, file, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, DLFileEntry.class.getName(),
@@ -297,7 +289,7 @@ public class EditFileEntryAction extends PortletAction {
 
 			DLAppServiceUtil.updateFileEntry(
 				fileEntryId, sourceFileName, title, description, changeLog,
-				majorVersion, extraSettings, file, serviceContext);
+				majorVersion, file, serviceContext);
 		}
 
 		AssetPublisherUtil.addRecentFolderId(

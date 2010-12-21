@@ -52,8 +52,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 
 	public FileEntry addFileEntry(
 			long repositoryId, long folderId, String title, String description,
-			String changeLog, String extraSettings, byte[] bytes,
-			ServiceContext serviceContext)
+			String changeLog, byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		if (bytes == null) {
@@ -63,14 +62,13 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		InputStream is = new UnsyncByteArrayInputStream(bytes);
 
 		return addFileEntry(
-			repositoryId, folderId, title, description, changeLog,
-			extraSettings, is, bytes.length, serviceContext);
+			repositoryId, folderId, title, description, changeLog, is,
+			bytes.length, serviceContext);
 	}
 
 	public FileEntry addFileEntry(
 			long repositoryId, long folderId, String title, String description,
-			String changeLog, String extraSettings, File file,
-			ServiceContext serviceContext)
+			String changeLog, File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		try {
@@ -83,7 +81,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 
 			return addFileEntry(
 				repositoryId, folderId, title, description, changeLog,
-				extraSettings, is, file.length(), serviceContext);
+				is, file.length(), serviceContext);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new FileSizeException();
@@ -92,15 +90,14 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 
 	public FileEntry addFileEntry(
 			long repositoryId, long folderId, String title, String description,
-			String changeLog, String extraSettings, InputStream is, long size,
+			String changeLog, InputStream is, long size,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		Repository repository = getRepository(repositoryId);
 
 		return repository.addFileEntry(
-			folderId, title, description, changeLog, extraSettings, is, size,
-			serviceContext);
+			folderId, title, description, changeLog, is, size, serviceContext);
 	}
 
 	public DLFileShortcut addFileShortcut(
@@ -566,7 +563,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	public FileEntry updateFileEntry(
 			long fileEntryId, String sourceFileName, String title,
 			String description, String changeLog, boolean majorVersion,
-			String extraSettings, byte[] bytes, ServiceContext serviceContext)
+			byte[] bytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		InputStream is = null;
@@ -579,13 +576,13 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 
 		return updateFileEntry(
 			fileEntryId, sourceFileName, title, description, changeLog,
-			majorVersion, extraSettings, is, size, serviceContext);
+			majorVersion, is, size, serviceContext);
 	}
 
 	public FileEntry updateFileEntry(
 			long fileEntryId, String sourceFileName, String title,
 			String description, String changeLog, boolean majorVersion,
-			String extraSettings, File file, ServiceContext serviceContext)
+			File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		try {
@@ -599,7 +596,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 
 			return updateFileEntry(
 				fileEntryId, sourceFileName, title, description, changeLog,
-				majorVersion, extraSettings, is, size, serviceContext);
+				majorVersion, is, size, serviceContext);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new NoSuchFileException();
@@ -609,15 +606,14 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	public FileEntry updateFileEntry(
 			long fileEntryId, String sourceFileName, String title,
 			String description, String changeLog, boolean majorVersion,
-			String extraSettings, InputStream is, long size,
-			ServiceContext serviceContext)
+			InputStream is, long size, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		Repository repository = getRepository(0, fileEntryId, 0);
 
 		return repository.updateFileEntry(
 			fileEntryId, sourceFileName, title, description, changeLog,
-			majorVersion, extraSettings, is, size, serviceContext);
+			majorVersion, is, size, serviceContext);
 	}
 
 	public DLFileShortcut updateFileShortcut(

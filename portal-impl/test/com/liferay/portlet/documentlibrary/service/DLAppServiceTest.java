@@ -117,7 +117,6 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		String fileName = "Title.txt";
 		String description = StringPool.BLANK;
 		String changeLog = StringPool.BLANK;
-		String extraSettings = StringPool.BLANK;
 
 		String content = "Content: Enterprise. Open Source. For Life.";
 
@@ -129,8 +128,8 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		serviceContext.setAddGuestPermissions(true);
 
 		_fileEntry = DLAppServiceUtil.addFileEntry(
-			_groupId, folderId, fileName, description, changeLog, extraSettings,
-			bytes, serviceContext);
+			_groupId, folderId, fileName, description, changeLog, bytes,
+			serviceContext);
 	}
 
 	protected void search(boolean rootFolder, String keywords)
