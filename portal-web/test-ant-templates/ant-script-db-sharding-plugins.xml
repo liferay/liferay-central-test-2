@@ -1,5 +1,0 @@
-		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
-			<property name="${test.ant.script.plugins.type}.plugins.includes" value="${test.ant.script.plugins}" />
-			<property name="skip.rebuild-database" value="true" />
-			<property name="test.name" value="${test.ant.script.suite}" />
-		</ant>

@@ -14,7 +14,7 @@
 			<param name="legacy.config" value="true" />
 			<param name="legacy.theme.ids" value="classic" />
 			<param name="lp.version" value="5.1.2" />
-			${test.ant.script.file.plugins.ee}
+			${test.ant.script.file.plugin.portlets.ee}
 			<param name="test.name" value="DBUpgrade${test.ant.script.suite}512TestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-tomcat-6.0-5.1.2" />
 		</antcall>
@@ -26,7 +26,7 @@
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			${test.ant.script.file.plugins}
+			${test.ant.script.file.plugin.portlets}
 			<param name="test.name" value="DBUpgrade${test.ant.script.suite}512LatestTestSuite" />
 		</antcall>
 	</target>
@@ -42,7 +42,7 @@
 			<param name="legacy.config" value="true" />
 			<param name="legacy.theme.ids" value="classic" />
 			<param name="lp.version" value="5.1.2" />
-			${test.ant.script.file.plugins.ee}
+			${test.ant.script.file.plugin.portlets.ee}
 			<param name="test.name" value="DBUpgrade${test.ant.script.suite}512TestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-tomcat-6.0-5.1.2" />
 		</antcall>
@@ -54,7 +54,7 @@
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			${test.ant.script.file.plugins}
+			${test.ant.script.file.plugin.portlets}
 			<param name="test.name" value="DBUpgrade${test.ant.script.suite}512LatestTestSuite" />
 		</antcall>
 	</target>
@@ -70,7 +70,7 @@
 			<param name="legacy.config" value="true" />
 			<param name="legacy.theme.ids" value="classic" />
 			<param name="lp.version" value="5.1.2" />
-			${test.ant.script.file.plugins.ee}
+			${test.ant.script.file.plugin.portlets.ee}
 			<param name="test.name" value="DBUpgrade${test.ant.script.suite}512TestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-tomcat-6.0-5.1.2" />
 		</antcall>
@@ -82,7 +82,7 @@
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			${test.ant.script.file.plugins}
+			${test.ant.script.file.plugin.portlets}
 			<param name="test.name" value="DBUpgrade${test.ant.script.suite}512LatestTestSuite" />
 		</antcall>
 	</target>
@@ -98,7 +98,7 @@
 			<param name="legacy.config" value="true" />
 			<param name="legacy.theme.ids" value="classic" />
 			<param name="lp.version" value="5.1.2" />
-			${test.ant.script.file.plugins.ee}
+			${test.ant.script.file.plugin.portlets.ee}
 			<param name="test.name" value="DBUpgrade${test.ant.script.suite}512TestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-tomcat-6.0-5.1.2" />
 		</antcall>
@@ -110,7 +110,7 @@
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			${test.ant.script.file.plugins}
+			${test.ant.script.file.plugin.portlets}
 			<param name="test.name" value="DBUpgrade${test.ant.script.suite}512LatestTestSuite" />
 		</antcall>
 	</target>
@@ -126,7 +126,7 @@
 			<param name="legacy.config" value="true" />
 			<param name="legacy.theme.ids" value="classic" />
 			<param name="lp.version" value="5.1.2" />
-			${test.ant.script.file.plugins.ee}
+			${test.ant.script.file.plugin.portlets.ee}
 			<param name="test.name" value="DBUpgrade${test.ant.script.suite}512TestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-tomcat-6.0-5.1.2" />
 		</antcall>
@@ -138,7 +138,7 @@
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			${test.ant.script.file.plugins}
+			${test.ant.script.file.plugin.portlets}
 			<param name="test.name" value="DBUpgrade${test.ant.script.suite}512LatestTestSuite" />
 		</antcall>
 	</target>
@@ -154,7 +154,7 @@
 			<param name="legacy.config" value="true" />
 			<param name="legacy.theme.ids" value="classic" />
 			<param name="lp.version" value="5.1.2" />
-			${test.ant.script.file.plugins.ee}
+			${test.ant.script.file.plugin.portlets.ee}
 			<param name="test.name" value="DBUpgrade${test.ant.script.suite}512TestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-tomcat-6.0-5.1.2" />
 		</antcall>
@@ -166,7 +166,7 @@
 		</antcall>
 
 		<antcall target="run-latest-upgrade-test">
-			${test.ant.script.file.plugins}
+			${test.ant.script.file.plugin.portlets}
 			<param name="test.name" value="DBUpgrade${test.ant.script.suite}512LatestTestSuite" />
 		</antcall>
 	</target>

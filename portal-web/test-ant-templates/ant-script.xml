@@ -9,8 +9,10 @@
 		</antcall>
 
 		<ant antfile="build-test-glassfish.xml" target="run-selenium-glassfish">
-			${test.ant.script.file.plugins}
-			${test.ant.script.file.suite}
+			${test.ant.script.file.plugin.hooks}
+			${test.ant.script.file.plugin.portlets}
+			${test.ant.script.file.plugin.webs}
+			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
 	</target>
 
@@ -20,8 +22,10 @@
 		</antcall>
 
 		<ant antfile="build-test-jboss.xml" target="run-selenium-jboss">
-			${test.ant.script.file.plugins}
-			${test.ant.script.file.suite}
+			${test.ant.script.file.plugin.hooks}
+			${test.ant.script.file.plugin.portlets}
+			${test.ant.script.file.plugin.webs}
+			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
 	</target>
 
@@ -31,8 +35,10 @@
 		</antcall>
 
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
-			${test.ant.script.file.plugins}
-			${test.ant.script.file.suite}
+			${test.ant.script.file.plugin.hooks}
+			${test.ant.script.file.plugin.portlets}
+			${test.ant.script.file.plugin.webs}
+			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
 	</target>
 
@@ -42,8 +48,10 @@
 		</antcall>
 
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
-			${test.ant.script.file.plugins}
-			${test.ant.script.file.suite}
+			${test.ant.script.file.plugin.hooks}
+			${test.ant.script.file.plugin.portlets}
+			${test.ant.script.file.plugin.webs}
+			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
 	</target>
 
@@ -53,8 +61,10 @@
 		</antcall>
 
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
-			${test.ant.script.file.plugins}
-			${test.ant.script.file.suite}
+			${test.ant.script.file.plugin.hooks}
+			${test.ant.script.file.plugin.portlets}
+			${test.ant.script.file.plugin.webs}
+			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
 	</target>
 
@@ -64,8 +74,10 @@
 		</antcall>
 
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
-			${test.ant.script.file.plugins}
-			${test.ant.script.file.suite}
+			${test.ant.script.file.plugin.hooks}
+			${test.ant.script.file.plugin.portlets}
+			${test.ant.script.file.plugin.webs}
+			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
 	</target>
 
@@ -75,8 +87,10 @@
 		</antcall>
 
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
-			${test.ant.script.file.plugins}
-			${test.ant.script.file.suite}
+			${test.ant.script.file.plugin.hooks}
+			${test.ant.script.file.plugin.portlets}
+			${test.ant.script.file.plugin.webs}
+			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
 	</target>
 
@@ -86,8 +100,10 @@
 		</antcall>
 
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
-			${test.ant.script.file.plugins}
-			${test.ant.script.file.suite}
+			${test.ant.script.file.plugin.hooks}
+			${test.ant.script.file.plugin.portlets}
+			${test.ant.script.file.plugin.webs}
+			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
 	</target>
 
@@ -97,8 +113,10 @@
 		</antcall>
 
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
-			${test.ant.script.file.plugins}
-			${test.ant.script.file.suite}
+			${test.ant.script.file.plugin.hooks}
+			${test.ant.script.file.plugin.portlets}
+			${test.ant.script.file.plugin.webs}
+			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
 	</target>
 
@@ -108,7 +126,7 @@
 		</antcall>
 
 		<ant antfile="build-test-weblogic-10.3.xml" target="run-selenium-weblogic-10.3">
-			${test.ant.script.file.suite}
+			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
 	</target>
 
@@ -118,7 +136,7 @@
 		</antcall>
 
 		<ant antfile="build-test-websphere-6.1.xml" target="run-selenium-websphere-6.1">
-			${test.ant.script.file.suite}
+			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
 	</target>
 
@@ -128,7 +146,7 @@
 		</antcall>
 
 		<ant antfile="build-test-websphere-7.0.xml" target="run-selenium-websphere-7.0">
-			${test.ant.script.file.suite}
+			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
 	</target>
 </project>
