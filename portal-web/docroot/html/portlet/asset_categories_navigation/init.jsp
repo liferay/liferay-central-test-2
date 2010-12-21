@@ -40,11 +40,11 @@ for (int i = 0; i < vocabularies.size(); i++) {
 	availableAssetVocabularyIds[i] = vocabulary.getVocabularyId();
 }
 
-boolean allAssetVocabularies = GetterUtil.getBoolean(preferences.getValue("all-asset-vocabularies", Boolean.TRUE.toString()));
+boolean allAssetVocabularies = GetterUtil.getBoolean(preferences.getValue("allAssetVocabularies", Boolean.TRUE.toString()));
 
 long[] assetVocabularyIds = availableAssetVocabularyIds;
 
-if (!allAssetVocabularies && preferences.getValues("asset-vocabulary-ids", null) != null) {
-	assetVocabularyIds = GetterUtil.getLongValues(preferences.getValues("asset-vocabulary-ids", null));
+if (!allAssetVocabularies && preferences.getValues("assetVocabularyIds", null) != null) {
+	assetVocabularyIds = GetterUtil.getLongValues(preferences.getValues("assetVocabularyIds", null));
 }
 %>

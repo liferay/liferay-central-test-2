@@ -27,14 +27,12 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
 	<aui:fieldset>
-		<liferay-ui:message key="vocabularies" />
+		<aui:select label="vocabularies" name="preferences--allAssetVocabularies--">
+			<aui:option selected='<%= allAssetVocabularies %>' label="all" value="<%= true %>" />
+			<aui:option selected='<%= !allAssetVocabularies %>' label="filter[action]" value="<%= false %>" />
+		</aui:select>
 
-		<select name="<portlet:namespace />allAssetVocabularies" id="<portlet:namespace />allAssetVocabularies">
-			<option <%= allAssetVocabularies ? "selected" : StringPool.BLANK %> value="<%= true %>"><liferay-ui:message key="all" /></option>
-			<option <%= !allAssetVocabularies ? "selected" : StringPool.BLANK %> value="<%= false %>"><liferay-ui:message key="filter[action]" />...</option>
-		</select>
-
-		<input name="<portlet:namespace />assetVocabularyIds" type="hidden" value="" />
+		<aui:input name="preferences--assetVocabularyIds--" type="hidden" />
 
 		<%
 		Set<Long> availableAssetVocabularyIdsSet = SetUtil.fromArray(availableAssetVocabularyIds);
