@@ -28,6 +28,7 @@ import java.sql.ResultSet;
  * @author Brian Wing Shun Chan
  * @author Douglas Wong
  * @author Alexander Chow
+ * @author Minhchau Dang
  */
 public class UpgradeDocumentLibrary extends UpgradeProcess {
 
