@@ -3148,18 +3148,18 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 	}
 
 	/**
-	 * Gets the user ID mapper local service.
+	 * Gets the user id mapper local service.
 	 *
-	 * @return the user ID mapper local service
+	 * @return the user id mapper local service
 	 */
 	public UserIdMapperLocalService getUserIdMapperLocalService() {
 		return userIdMapperLocalService;
 	}
 
 	/**
-	 * Sets the user ID mapper local service.
+	 * Sets the user id mapper local service.
 	 *
-	 * @param userIdMapperLocalService the user ID mapper local service
+	 * @param userIdMapperLocalService the user id mapper local service
 	 */
 	public void setUserIdMapperLocalService(
 		UserIdMapperLocalService userIdMapperLocalService) {
@@ -3167,18 +3167,18 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 	}
 
 	/**
-	 * Gets the user ID mapper persistence.
+	 * Gets the user id mapper persistence.
 	 *
-	 * @return the user ID mapper persistence
+	 * @return the user id mapper persistence
 	 */
 	public UserIdMapperPersistence getUserIdMapperPersistence() {
 		return userIdMapperPersistence;
 	}
 
 	/**
-	 * Sets the user ID mapper persistence.
+	 * Sets the user id mapper persistence.
 	 *
-	 * @param userIdMapperPersistence the user ID mapper persistence
+	 * @param userIdMapperPersistence the user id mapper persistence
 	 */
 	public void setUserIdMapperPersistence(
 		UserIdMapperPersistence userIdMapperPersistence) {
