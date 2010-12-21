@@ -33,6 +33,10 @@ import java.util.List;
  */
 public abstract class LiferayRepositoryBase extends LiferayBase {
 
+	public LiferayRepositoryBase(long repositoryId) {
+		initByRepositoryId(repositoryId);
+	}
+
 	public LiferayRepositoryBase(
 		long folderId, long fileEntryId, long fileVersionId) {
 
@@ -47,16 +51,12 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 		}
 	}
 
-	public LiferayRepositoryBase(long repositoryId) {
-		initByRepositoryId(repositoryId);
+	public long getRepositoryId() {
+		return _repositoryId;
 	}
 
 	protected long getGroupId() {
 		return _groupId;
-	}
-
-	public long getRepositoryId() {
-		return _repositoryId;
 	}
 
 	protected void initByFileEntryId(long fileEntryId) {

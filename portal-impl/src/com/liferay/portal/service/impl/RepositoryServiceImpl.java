@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.NoSuchRepositoryException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.LocalRepository;
@@ -78,14 +79,15 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 	public void checkRepository(long repositoryId) throws SystemException {
 		Group group = groupPersistence.fetchByPrimaryKey(repositoryId);
 
-		if (group == null) {
-			Repository repository = repositoryPersistence.fetchByPrimaryKey(
-				repositoryId);
+		if (group != null) {
+			return;
+		}
 
-			if (repository == null) {
-				throw new RepositoryException(
-					"Repository ID invalid " + repositoryId);
-			}
+		try {
+			repositoryPersistence.findByPrimaryKey(repositoryId);
+		}
+		catch (NoSuchRepositoryException nsre) {
+			throw new RepositoryException(nsre.getMessage());
 		}
 	}
 

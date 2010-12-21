@@ -660,18 +660,18 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			folderId, lockUuid);
 	}
 
+	protected Repository getRepository(long repositoryId)
+		throws RepositoryException {
+
+		return RepositoryFactoryUtil.getRepository(repositoryId);
+	}
+
 	protected Repository getRepository(
 			long folderId, long fileEntryId, long fileVersionId)
 		throws RepositoryException {
 
 		return RepositoryFactoryUtil.getRepository(
 			folderId, fileEntryId, fileVersionId);
-	}
-
-	protected Repository getRepository(long repositoryId)
-		throws RepositoryException {
-
-		return RepositoryFactoryUtil.getRepository(repositoryId);
 	}
 
 }

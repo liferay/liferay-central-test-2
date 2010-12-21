@@ -98,9 +98,7 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
 		LocalRepository localRepository = new LiferayLocalRepository(
 			folderId, fileEntryId, fileVersionId);
 
-		long repositoryId = localRepository.getRepositoryId();
-
-		checkRepository(repositoryId);
+		checkRepository(localRepository.getRepositoryId());
 
 		return localRepository;
 	}
@@ -122,9 +120,7 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
 		Repository repository = new LiferayRepository(
 			folderId, fileEntryId, fileVersionId);
 
-		long repositoryId = repository.getRepositoryId();
-
-		checkRepository(repositoryId);
+		checkRepository(repository.getRepositoryId());
 
 		return repository;
 	}

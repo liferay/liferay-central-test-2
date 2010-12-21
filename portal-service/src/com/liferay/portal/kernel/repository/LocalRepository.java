@@ -106,8 +106,6 @@ public interface LocalRepository {
 	public int getFoldersFileEntriesCount(List<Long> folderIds, int status)
 		throws SystemException;
 
-	public long getRepositoryId();
-
 	public List<FileEntry> getRepositoryFileEntries(
 			int start, int end, OrderByComparator obc)
 		throws SystemException;
@@ -120,6 +118,8 @@ public interface LocalRepository {
 
 	public int getRepositoryFileEntriesCount(long userId)
 		throws SystemException;
+
+	public long getRepositoryId();
 
 	public FileEntry moveFileEntry(
 			long userId, long fileEntryId, long newFolderId,

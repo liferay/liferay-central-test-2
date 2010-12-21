@@ -41,9 +41,10 @@ import junit.framework.TestCase;
 public class RepositoryTest extends TestCase {
 
 	public void testBasic() throws Exception {
-		long[] repositoryIds = new long[2];
 
 		// Create repositories
+
+		long[] repositoryIds = new long[2];
 
 		repositoryIds[0] = RepositoryFactoryUtil.createRepository(
 			getGroupId(), "Test 1", "Test 1", PortletKeys.DOCUMENT_LIBRARY,
@@ -126,13 +127,13 @@ public class RepositoryTest extends TestCase {
 
 		// Verify mapped folder
 
-		DLFolder folder = DLRepositoryLocalServiceUtil.getFolder(folderIds[1]);
-		DLFolder repositoryFolder = folder.getParentFolder();
+		DLFolder dlFolder = DLRepositoryLocalServiceUtil.getFolder(
+			folderIds[1]);
+
+		DLFolder parentDLFolder = dlFolder.getParentFolder();
 
 		assertEquals(
-			"Parent folder of mapped repository must be " +
-				DLFolderConstants.MAPPED_PARENT_FOLDER_ID,
-			repositoryFolder.getParentFolderId(),
+			parentDLFolder.getParentFolderId(),
 			DLFolderConstants.MAPPED_PARENT_FOLDER_ID);
 
 		// Delete repositories

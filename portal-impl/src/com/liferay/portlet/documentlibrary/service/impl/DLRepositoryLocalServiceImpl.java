@@ -235,8 +235,8 @@ public class DLRepositoryLocalServiceImpl
 
 		// Parent folder
 
-		if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID &&
-			parentFolderId != DLFolderConstants.MAPPED_PARENT_FOLDER_ID) {
+		if ((parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
+			(parentFolderId != DLFolderConstants.MAPPED_PARENT_FOLDER_ID)) {
 
 			DLFolder parentFolder = dlFolderPersistence.findByPrimaryKey(
 				parentFolderId);

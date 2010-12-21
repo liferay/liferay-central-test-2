@@ -473,9 +473,8 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long[] assetCategoryIds, String[] assetTagNames)
 		throws PortalException, SystemException {
 
-		long fileEntryId = fileEntry.getFileEntryId();
-
-		LocalRepository localRepository = getLocalRepository(0, fileEntryId, 0);
+		LocalRepository localRepository = getLocalRepository(
+			0, fileEntry.getFileEntryId(), 0);
 
 		localRepository.updateAsset(
 			userId, fileEntry, fileVersion, assetCategoryIds, assetTagNames);
@@ -576,18 +575,18 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			folderId, parentFolderId, name, description, serviceContext);
 	}
 
+	protected LocalRepository getLocalRepository(long repositoryId)
+		throws RepositoryException {
+
+		return RepositoryFactoryUtil.getLocalRepository(repositoryId);
+	}
+
 	protected LocalRepository getLocalRepository(
 			long folderId, long fileEntryId, long fileVersionId)
 		throws RepositoryException {
 
 		return RepositoryFactoryUtil.getLocalRepository(
 			folderId, fileEntryId, fileVersionId);
-	}
-
-	protected LocalRepository getLocalRepository(long repositoryId)
-		throws RepositoryException {
-
-		return RepositoryFactoryUtil.getLocalRepository(repositoryId);
 	}
 
 }
