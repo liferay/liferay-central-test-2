@@ -42,7 +42,7 @@ public class EntityColumn implements Cloneable {
 		_type = type;
 		_primary = primary;
 		_filterPrimary = filterPrimary;
-		_humanName = TextFormatter.format(name, TextFormatter.H);
+		_humanName = ServiceBuilder.toHumanName(name);
 		_methodName = TextFormatter.format(name, TextFormatter.G);
 		_ejbName = ejbName;
 		_mappingKey = mappingKey;
@@ -177,7 +177,7 @@ public class EntityColumn implements Cloneable {
 	}
 
 	public String getUserUuidHumanName() {
-		return TextFormatter.format(getUserUuidName(), TextFormatter.H);
+		return ServiceBuilder.toHumanName(getUserUuidName());
 	}
 
 	public String getUserUuidName() {

@@ -83,7 +83,7 @@ public class Entity {
 		_portletShortName = portletShortName;
 		_name = name;
 		_humanName = GetterUtil.getString(
-			humanName, TextFormatter.format(name, TextFormatter.H));
+			humanName, ServiceBuilder.toHumanName(name));
 		_table = table;
 		_alias = alias;
 		_uuid = uuid;

@@ -217,6 +217,20 @@ public class ServiceBuilder {
 		}
 	}
 
+	public static String toHumanName(String name) {
+		if (name == null) {
+			return null;
+		}
+
+		String humanName = TextFormatter.format(name, TextFormatter.H);
+
+		if (humanName.endsWith(" id")) {
+			humanName = humanName.substring(0, humanName.length() - 3) + " ID";
+		}
+
+		return humanName;
+	}
+
 	public static void writeFile(File file, String content)
 		throws IOException {
 
