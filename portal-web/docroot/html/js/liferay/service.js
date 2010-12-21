@@ -280,6 +280,18 @@ Liferay.Service.registerClass(
 );
 
 Liferay.Service.registerClass(
+	Liferay.Service.Portal, "Repository",
+	{
+		addRepository: true,
+		deleteRepositories: true,
+		deleteRepository: true,
+		getRepository: true,
+		getTypeSettingsProperties: true,
+		updateRepository: true
+	}
+);
+
+Liferay.Service.registerClass(
 	Liferay.Service.Portal, "Resource",
 	{
 		getResource: true

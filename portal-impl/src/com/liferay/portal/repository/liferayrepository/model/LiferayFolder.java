@@ -56,7 +56,7 @@ public class LiferayFolder extends LiferayModel implements Folder {
 	public long getFolderId() {
 		long folderId = _dlFolder.getFolderId();
 
-		if (folderId == DLFolderConstants.MAPPED_FOLDER_ID) {
+		if (folderId == DLFolderConstants.MAPPED_PARENT_FOLDER_ID) {
 			return DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 		}
 		else {
@@ -87,7 +87,7 @@ public class LiferayFolder extends LiferayModel implements Folder {
 	public long getParentFolderId() {
 		long parentFolderId = _dlFolder.getParentFolderId();
 
-		if (parentFolderId == DLFolderConstants.MAPPED_FOLDER_ID) {
+		if (parentFolderId == DLFolderConstants.MAPPED_PARENT_FOLDER_ID) {
 			return DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 		}
 		else {

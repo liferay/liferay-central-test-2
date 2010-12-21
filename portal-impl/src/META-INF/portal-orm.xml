@@ -694,6 +694,7 @@
 	<mapped-superclass class="com.liferay.portal.model.impl.RepositoryModelImpl">
 		<attributes>
 			<id name="repositoryId" />
+			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="createDate">
 				<temporal>TIMESTAMP</temporal>
@@ -701,15 +702,14 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="groupId" />
 			<basic name="name" />
 			<basic name="description" />
-			<basic name="portletKey" />
-			<basic name="mappedFolderId" />
+			<basic name="portletId" />
 			<basic name="type">
 				<column name="TYPE_" />
 			</basic>
 			<basic name="typeSettings" />
+			<basic name="dlFolderId" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

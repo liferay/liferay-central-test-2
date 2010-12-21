@@ -22,21 +22,21 @@ import com.liferay.portal.kernel.util.UnicodeProperties;
 public interface RepositoryFactory {
 
 	public long createRepository(
-			long companyId, long groupId, String name, String description,
-			String portletKey, int type,
-			UnicodeProperties typeSettingsProperties)
+			long groupId, String name, String description, String portletId,
+			int type, UnicodeProperties typeSettingsProperties)
 		throws RepositoryException;
 
-	public void deleteRepositories(long companyId, long groupId, int purge)
+	public void deleteRepositories(long groupId, int purge)
 		throws RepositoryException;
 
-	public void deleteRepository(long repositoryId) throws RepositoryException;
+	public void deleteRepository(long repositoryId, boolean purge)
+		throws RepositoryException;
 
 	public LocalRepository getLocalRepository(long repositoryId);
 
 	public Repository getRepository(long repositoryId);
 
-	public UnicodeProperties getProperties(long repositoryId)
+	public UnicodeProperties getTypeSettingsProperties(long repositoryId)
 		throws RepositoryException;
 
 	public void updateRepository(

@@ -84,7 +84,7 @@ import com.liferay.portal.service.PortletService;
 import com.liferay.portal.service.QuartzLocalService;
 import com.liferay.portal.service.RegionService;
 import com.liferay.portal.service.ReleaseLocalService;
-import com.liferay.portal.service.RepositoryLocalService;
+import com.liferay.portal.service.RepositoryService;
 import com.liferay.portal.service.ResourceActionLocalService;
 import com.liferay.portal.service.ResourceCodeLocalService;
 import com.liferay.portal.service.ResourceLocalService;
@@ -2352,22 +2352,21 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService {
 	}
 
 	/**
-	 * Gets the repository local service.
+	 * Gets the repository remote service.
 	 *
-	 * @return the repository local service
+	 * @return the repository remote service
 	 */
-	public RepositoryLocalService getRepositoryLocalService() {
-		return repositoryLocalService;
+	public RepositoryService getRepositoryService() {
+		return repositoryService;
 	}
 
 	/**
-	 * Sets the repository local service.
+	 * Sets the repository remote service.
 	 *
-	 * @param repositoryLocalService the repository local service
+	 * @param repositoryService the repository remote service
 	 */
-	public void setRepositoryLocalService(
-		RepositoryLocalService repositoryLocalService) {
-		this.repositoryLocalService = repositoryLocalService;
+	public void setRepositoryService(RepositoryService repositoryService) {
+		this.repositoryService = repositoryService;
 	}
 
 	/**
@@ -5148,8 +5147,8 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService {
 	protected ReleaseLocalService releaseLocalService;
 	@BeanReference(type = ReleasePersistence.class)
 	protected ReleasePersistence releasePersistence;
-	@BeanReference(type = RepositoryLocalService.class)
-	protected RepositoryLocalService repositoryLocalService;
+	@BeanReference(type = RepositoryService.class)
+	protected RepositoryService repositoryService;
 	@BeanReference(type = RepositoryPersistence.class)
 	protected RepositoryPersistence repositoryPersistence;
 	@BeanReference(type = ResourceLocalService.class)

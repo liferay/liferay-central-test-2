@@ -16,8 +16,9 @@ package com.liferay.portal.repository.liferayrepository;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.model.Repository;
 import com.liferay.portal.repository.liferayrepository.util.LiferayBase;
-import com.liferay.portal.service.RepositoryLocalServiceUtil;
+import com.liferay.portal.service.RepositoryServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
@@ -32,28 +33,7 @@ import java.util.List;
 public abstract class LiferayRepositoryBase extends LiferayBase {
 
 	public LiferayRepositoryBase(long repositoryId) {
-		init(repositoryId);
-	}
-
-	protected long getFolderId(long folderId) {
-		if ((folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
-			isMappedRepository()) {
-
-			return _mappedFolderId;
-		}
-		else {
-			return folderId;
-		}
-	}
-
-	protected List<Long> getFolderIds(List<Long> folderIds) {
-		List<Long> list = new ArrayList<Long>(folderIds.size());
-
-		for (long folderId : folderIds) {
-			list.add(getFolderId(folderId));
-		}
-
-		return list;
+		initByRepositoryId(repositoryId);
 	}
 
 	protected long getGroupId() {
@@ -64,47 +44,47 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 		return _repositoryId;
 	}
 
-	protected void init(long repositoryId) {
+	protected void initByFileEntryId(long fileEntryId) {
+		try {
+			DLFileEntry dlFileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
+				fileEntryId);
+
+			initByRepositoryId(dlFileEntry.getGroupId());
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	protected void initByFolderId(long folderId) {
+		try {
+			DLFolder dlFolder = DLRepositoryLocalServiceUtil.getFolder(
+				folderId);
+
+			initByRepositoryId(dlFolder.getGroupId());
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	protected void initByRepositoryId(long repositoryId) {
 		_repositoryId = repositoryId;
 		_groupId = repositoryId;
 
 		try {
-			com.liferay.portal.model.Repository repository =
-				RepositoryLocalServiceUtil.getRepository(repositoryId);
+			Repository repository = RepositoryServiceUtil.getRepository(
+				repositoryId);
 
-			_groupId = repository.getGroupId();
 			_repositoryId = repository.getRepositoryId();
-			_mappedFolderId = repository.getMappedFolderId();
+			_groupId = repository.getGroupId();
+			_dlFolderId = repository.getDlFolderId();
 		}
 		catch (Exception e) {
 		}
 	}
 
-	protected void initByFolder(long folderId) {
-		try {
-			DLFolder folder = DLRepositoryLocalServiceUtil.getFolder(
-				folderId);
-
-			init(folder.getGroupId());
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
-
-	protected void initByFileEntry(long fileEntryId) {
-		try {
-			DLFileEntry fileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
-				fileEntryId);
-
-			init(fileEntry.getGroupId());
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
-
-	protected boolean isMappedRepository() {
+	protected boolean isDLRepository() {
 		if (_groupId == _repositoryId) {
 			return false;
 		}
@@ -113,11 +93,32 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 		}
 	}
 
-	private long _groupId;
-	private long _mappedFolderId;
-	private long _repositoryId;
+	protected long toFolderId(long folderId) {
+		if ((folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
+			isDLRepository()) {
+
+			return _dlFolderId;
+		}
+		else {
+			return folderId;
+		}
+	}
+
+	protected List<Long> toFolderIds(List<Long> folderIds) {
+		List<Long> toFolderIds = new ArrayList<Long>(folderIds.size());
+
+		for (long folderId : folderIds) {
+			toFolderIds.add(toFolderId(folderId));
+		}
+
+		return toFolderIds;
+	}
 
 	private static Log _log = LogFactoryUtil.getLog(
 		LiferayRepositoryBase.class);
+
+	private long _dlFolderId;
+	private long _groupId;
+	private long _repositoryId;
 
 }

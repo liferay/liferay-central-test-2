@@ -38,89 +38,85 @@ import junit.framework.TestCase;
  */
 public class RepositoryTest extends TestCase {
 
-	public void testCreateAndDeleteRepository() throws Exception {
-
-		RepositoryFactoryUtil.createRepository(
-			TestPropsValues.COMPANY_ID, getGroupId(), "Test 1", "Test 1",
-			PortletKeys.DOCUMENT_LIBRARY, RepositoryConstants.TYPE_LIFERAY,
-			new UnicodeProperties());
-		RepositoryFactoryUtil.createRepository(
-			TestPropsValues.COMPANY_ID, getGroupId(), "Test 2", "Test 2",
-			PortletKeys.DOCUMENT_LIBRARY, RepositoryConstants.TYPE_LIFERAY,
-			new UnicodeProperties());
-
-		RepositoryFactoryUtil.deleteRepositories(
-			TestPropsValues.COMPANY_ID, getGroupId(),
-			RepositoryConstants.PURGE_ALL);
-	}
-
 	public void testCreateAndDeleteFileEntries() throws Exception {
 		long defaultRepositoryId = getGroupId();
 
-		long otherRepositoryId = RepositoryFactoryUtil.createRepository(
-			TestPropsValues.COMPANY_ID, getGroupId(), "Test", "Test",
-			PortletKeys.DOCUMENT_LIBRARY, RepositoryConstants.TYPE_LIFERAY,
-			new UnicodeProperties());
+		long dlRepositoryId = RepositoryFactoryUtil.createRepository(
+			getGroupId(), "Test", "Test", PortletKeys.DOCUMENT_LIBRARY,
+			RepositoryConstants.TYPE_LIFERAY, new UnicodeProperties());
 
-		long repositoryIds[] = new long[] {
-				defaultRepositoryId, otherRepositoryId
-			};
+		long[] repositoryIds = {defaultRepositoryId, dlRepositoryId};
 
-		long fileEntryIds[] = new long[4];
+		long[] fileEntryIds = new long[4];
 
-		InputStream is = new UnsyncByteArrayInputStream(
+		InputStream inputStream = new UnsyncByteArrayInputStream(
 			_TEST_CONTENT.getBytes());
 
 		for (int i = 0; i < repositoryIds.length; i++) {
 			long repositoryId = repositoryIds[i];
-			String name = Long.toString(repositoryId);
 
 			LocalRepository localRepository =
 				RepositoryFactoryUtil.getLocalRepository(repositoryId);
 
-			// Root folder
-
 			FileEntry fileEntry1 = localRepository.addFileEntry(
 				TestPropsValues.USER_ID,
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-				Long.toString(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID),
-				StringPool.BLANK, StringPool.BLANK, null, is,
+				String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID),
+				StringPool.BLANK, StringPool.BLANK, null, inputStream,
 				_TEST_CONTENT.length(), new ServiceContext());
 
 			fileEntryIds[i] = fileEntry1.getFileEntryId();
 
-			// Subfolder
-
 			Folder folder = localRepository.addFolder(
 				TestPropsValues.USER_ID,
-				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, name, name,
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+				String.valueOf(repositoryId), String.valueOf(repositoryId),
 				new ServiceContext());
 
 			long folderId = folder.getFolderId();
 
 			FileEntry fileEntry2 = localRepository.addFileEntry(
-				TestPropsValues.USER_ID, folderId, Long.toString(folderId),
-				StringPool.BLANK, StringPool.BLANK, null, is,
+				TestPropsValues.USER_ID, folderId, String.valueOf(folderId),
+				StringPool.BLANK, StringPool.BLANK, null, inputStream,
 				_TEST_CONTENT.length(), new ServiceContext());
 
-			fileEntryIds[i+2] = fileEntry2.getFileEntryId();
+			fileEntryIds[i + 2] = fileEntry2.getFileEntryId();
 		}
 
 		RepositoryFactoryUtil.deleteRepositories(
-			TestPropsValues.COMPANY_ID, getGroupId(),
-			RepositoryConstants.PURGE_ALL);
+			getGroupId(), RepositoryConstants.PURGE_ALL);
 
 		for (int i = 0; i < repositoryIds.length; i++) {
-			try {
-				RepositoryFactoryUtil.getLocalRepository(
-					repositoryIds[i]).getFileEntry(fileEntryIds[i]);
+			long repositoryId = repositoryIds[i];
 
-				fail("Should not be able to get file entry " + fileEntryIds[i] +
-						" from repository " + repositoryIds[i]);
+			long fileEntryId = fileEntryIds[i];
+
+			try {
+				LocalRepository localRepository =
+					RepositoryFactoryUtil.getLocalRepository(repositoryId);
+
+				localRepository.getFileEntry(fileEntryId);
+
+				fail(
+					"Should not be able to get file entry " + fileEntryId +
+						" from repository " + repositoryId);
 			}
 			catch (Exception e) {
 			}
 		}
+	}
+
+	public void testCreateAndDeleteRepository() throws Exception {
+		RepositoryFactoryUtil.createRepository(
+			getGroupId(), "Test 1", "Test 1", PortletKeys.DOCUMENT_LIBRARY,
+			RepositoryConstants.TYPE_LIFERAY, new UnicodeProperties());
+
+		RepositoryFactoryUtil.createRepository(
+			getGroupId(), "Test 2", "Test 2", PortletKeys.DOCUMENT_LIBRARY,
+			RepositoryConstants.TYPE_LIFERAY, new UnicodeProperties());
+
+		RepositoryFactoryUtil.deleteRepositories(
+			getGroupId(), RepositoryConstants.PURGE_ALL);
 	}
 
 	protected static long getGroupId() throws Exception {
@@ -135,7 +131,7 @@ public class RepositoryTest extends TestCase {
 	}
 
 	private static final String _TEST_CONTENT =
-		"LIFERAY\n" + "Enterprise.  Open Source.  For Life.";
+		"LIFERAY\nEnterprise. Open Source. For Life.";
 
 	private static long _groupId;
 

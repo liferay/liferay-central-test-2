@@ -22,27 +22,25 @@ import com.liferay.portal.kernel.util.UnicodeProperties;
 public class RepositoryFactoryUtil {
 
 	public static long createRepository(
-			long companyId, long groupId, String name, String description,
-			String portletKey, int type,
-			UnicodeProperties typeSettingsProperties)
+			long groupId, String name, String description, String portletId,
+			int type, UnicodeProperties typeSettingsProperties)
 		throws RepositoryException {
 
 		return getRepositoryFactory().createRepository(
-			companyId, groupId, name, description, portletKey, type,
+			groupId, name, description, portletId, type,
 			typeSettingsProperties);
 	}
 
-	public static void deleteRepositories(
-			long companyId, long groupId, int purge)
+	public static void deleteRepositories(long groupId, int purge)
 		throws RepositoryException {
 
-		getRepositoryFactory().deleteRepositories(companyId, groupId, purge);
+		getRepositoryFactory().deleteRepositories(groupId, purge);
 	}
 
-	public static void deleteRepository(long repositoryId)
+	public static void deleteRepository(long repositoryId, boolean purge)
 		throws RepositoryException {
 
-		getRepositoryFactory().deleteRepository(repositoryId);
+		getRepositoryFactory().deleteRepository(repositoryId, purge);
 	}
 
 	public static LocalRepository getLocalRepository(long repositoryId) {
@@ -53,10 +51,14 @@ public class RepositoryFactoryUtil {
 		return getRepositoryFactory().getRepository(repositoryId);
 	}
 
-	public static UnicodeProperties getProperties(long repositoryId)
+	public static RepositoryFactory getRepositoryFactory() {
+		return _repositoryFactory;
+	}
+
+	public static UnicodeProperties getTypeSettingsProperties(long repositoryId)
 		throws RepositoryException {
 
-		return getRepositoryFactory().getProperties(repositoryId);
+		return getRepositoryFactory().getTypeSettingsProperties(repositoryId);
 	}
 
 	public static void updateRepository(
@@ -66,10 +68,6 @@ public class RepositoryFactoryUtil {
 
 		getRepositoryFactory().updateRepository(
 			repositoryId, name, description, typeSettingsProperties);
-	}
-
-	public static RepositoryFactory getRepositoryFactory() {
-		return _repositoryFactory;
 	}
 
 	public void setRepositoryFactory(RepositoryFactory repositoryFactory) {

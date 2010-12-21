@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.repository.RepositoryFactory;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.repository.liferayrepository.LiferayLocalRepository;
 import com.liferay.portal.repository.liferayrepository.LiferayRepository;
-import com.liferay.portal.service.RepositoryLocalServiceUtil;
+import com.liferay.portal.service.RepositoryServiceUtil;
 
 /**
  * @author Alexander Chow
@@ -29,14 +29,13 @@ import com.liferay.portal.service.RepositoryLocalServiceUtil;
 public class RepositoryFactoryImpl implements RepositoryFactory {
 
 	public long createRepository(
-			long companyId, long groupId, String name, String description,
-			String portletKey, int type,
-			UnicodeProperties typeSettingsProperties)
+			long groupId, String name, String description, String portletId,
+			int type, UnicodeProperties typeSettingsProperties)
 		throws RepositoryException {
 
 		try {
-			return RepositoryLocalServiceUtil.addRepository(
-				companyId, groupId, name, description, portletKey, type,
+			return RepositoryServiceUtil.addRepository(
+				groupId, name, description, portletId, type,
 				typeSettingsProperties);
 		}
 		catch (Exception e) {
@@ -44,21 +43,22 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
 		}
 	}
 
-	public void deleteRepositories(long companyId, long groupId, int purge)
+	public void deleteRepositories(long groupId, int purge)
 		throws RepositoryException {
 
 		try {
-			RepositoryLocalServiceUtil.deleteRepositories(
-				companyId, groupId, purge);
+			RepositoryServiceUtil.deleteRepositories(groupId, purge);
 		}
 		catch (Exception e) {
 			throw new RepositoryException(e);
 		}
 	}
 
-	public void deleteRepository(long repositoryId) throws RepositoryException {
+	public void deleteRepository(long repositoryId, boolean purge)
+		throws RepositoryException {
+
 		try {
-			RepositoryLocalServiceUtil.deleteRepository(repositoryId);
+			RepositoryServiceUtil.deleteRepository(repositoryId, purge);
 		}
 		catch (Exception e) {
 			throw new RepositoryException(e);
@@ -73,11 +73,12 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
 		return new LiferayRepository(repositoryId);
 	}
 
-	public UnicodeProperties getProperties(long repositoryId)
+	public UnicodeProperties getTypeSettingsProperties(long repositoryId)
 		throws RepositoryException {
 
 		try {
-			return RepositoryLocalServiceUtil.getProperties(repositoryId);
+			return RepositoryServiceUtil.getTypeSettingsProperties(
+				repositoryId);
 		}
 		catch (Exception e) {
 			throw new RepositoryException(e);
@@ -90,13 +91,12 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
 		throws RepositoryException {
 
 		try {
-			RepositoryLocalServiceUtil.updateRepository(
+			RepositoryServiceUtil.updateRepository(
 				repositoryId, name, description, typeSettingsProperties);
 		}
 		catch (Exception e) {
 			throw new RepositoryException(e);
 		}
-
 	}
 
 }

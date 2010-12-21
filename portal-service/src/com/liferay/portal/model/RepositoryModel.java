@@ -72,6 +72,20 @@ public interface RepositoryModel extends BaseModel<Repository> {
 	public void setRepositoryId(long repositoryId);
 
 	/**
+	 * Gets the group ID of this repository.
+	 *
+	 * @return the group ID of this repository
+	 */
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this repository.
+	 *
+	 * @param groupId the group ID of this repository
+	 */
+	public void setGroupId(long groupId);
+
+	/**
 	 * Gets the company ID of this repository.
 	 *
 	 * @return the company ID of this repository
@@ -114,20 +128,6 @@ public interface RepositoryModel extends BaseModel<Repository> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the group ID of this repository.
-	 *
-	 * @return the group ID of this repository
-	 */
-	public long getGroupId();
-
-	/**
-	 * Sets the group ID of this repository.
-	 *
-	 * @param groupId the group ID of this repository
-	 */
-	public void setGroupId(long groupId);
-
-	/**
 	 * Gets the name of this repository.
 	 *
 	 * @return the name of this repository
@@ -158,33 +158,19 @@ public interface RepositoryModel extends BaseModel<Repository> {
 	public void setDescription(String description);
 
 	/**
-	 * Gets the portlet key of this repository.
+	 * Gets the portlet ID of this repository.
 	 *
-	 * @return the portlet key of this repository
+	 * @return the portlet ID of this repository
 	 */
 	@AutoEscape
-	public String getPortletKey();
+	public String getPortletId();
 
 	/**
-	 * Sets the portlet key of this repository.
+	 * Sets the portlet ID of this repository.
 	 *
-	 * @param portletKey the portlet key of this repository
+	 * @param portletId the portlet ID of this repository
 	 */
-	public void setPortletKey(String portletKey);
-
-	/**
-	 * Gets the mapped folder ID of this repository.
-	 *
-	 * @return the mapped folder ID of this repository
-	 */
-	public long getMappedFolderId();
-
-	/**
-	 * Sets the mapped folder ID of this repository.
-	 *
-	 * @param mappedFolderId the mapped folder ID of this repository
-	 */
-	public void setMappedFolderId(long mappedFolderId);
+	public void setPortletId(String portletId);
 
 	/**
 	 * Gets the type of this repository.
@@ -214,6 +200,20 @@ public interface RepositoryModel extends BaseModel<Repository> {
 	 * @param typeSettings the type settings of this repository
 	 */
 	public void setTypeSettings(String typeSettings);
+
+	/**
+	 * Gets the dl folder ID of this repository.
+	 *
+	 * @return the dl folder ID of this repository
+	 */
+	public long getDlFolderId();
+
+	/**
+	 * Sets the dl folder ID of this repository.
+	 *
+	 * @param dlFolderId the dl folder ID of this repository
+	 */
+	public void setDlFolderId(long dlFolderId);
 
 	public boolean isNew();
 

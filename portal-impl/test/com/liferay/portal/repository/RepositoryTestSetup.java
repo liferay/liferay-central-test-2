@@ -14,10 +14,11 @@
 
 package com.liferay.portal.repository;
 
-import junit.extensions.TestSetup;
-import junit.framework.Test;
-
 import com.liferay.portal.service.ServiceTestUtil;
+
+import junit.extensions.TestSetup;
+
+import junit.framework.Test;
 
 /**
  * @author Alexander Chow
@@ -32,7 +33,7 @@ public class RepositoryTestSetup extends TestSetup {
 		ServiceTestUtil.initServices();
 		ServiceTestUtil.initPermissions();
 	}
-	
+
 	public void tearDown() {
 		ServiceTestUtil.destroyServices();
 	}

@@ -19,14 +19,11 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.LocalRepository;
 import com.liferay.portal.kernel.repository.RepositoryConstants;
 import com.liferay.portal.kernel.repository.RepositoryFactoryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Repository;
-import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.base.RepositoryLocalServiceBaseImpl;
+import com.liferay.portal.service.base.RepositoryServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 
@@ -36,83 +33,80 @@ import java.util.List;
 /**
  * @author Alexander Chow
  */
-public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
+public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 	public long addRepository(
-			long companyId, long groupId, String name, String description,
-			String portletKey, int type,
-			UnicodeProperties typeSettingsProperties)
+			long groupId, String name, String description, String portletId,
+			int type, UnicodeProperties typeSettingsProperties)
 		throws PortalException, SystemException {
-
-		// Remote folder
-
-		DLFolder mappedFolder = dlRepositoryLocalService.addFolder(
-			getUserId(), groupId, DLFolderConstants.MAPPED_FOLDER_ID,
-			name, description, new ServiceContext());
 
 		// Repository
 
+		User user = getUser();
 		Date now = new Date();
 
 		long repositoryId = counterLocalService.increment();
 
 		Repository repository = repositoryPersistence.create(repositoryId);
 
-		repository.setCompanyId(companyId);
 		repository.setGroupId(groupId);
+		repository.setCompanyId(user.getCompanyId());
 		repository.setCreateDate(now);
 		repository.setModifiedDate(now);
 		repository.setName(name);
 		repository.setDescription(description);
-		repository.setPortletKey(portletKey);
-		repository.setMappedFolderId(mappedFolder.getFolderId());
+		repository.setPortletId(portletId);
 		repository.setType(type);
 		repository.setTypeSettingsProperties(typeSettingsProperties);
+		repository.setDlFolderId(
+			getDLFolderId(user, groupId, name, description));
 
 		repositoryPersistence.update(repository, false);
 
-		// Sync
+		// Local repository
 
-		getLocalRepository(repositoryId).addRepository(
-			companyId, groupId, name, description, portletKey,
-			typeSettingsProperties);
+		LocalRepository localRepository = getLocalRepository(repositoryId);
+
+		localRepository.addRepository(
+			groupId, name, description, portletId, typeSettingsProperties);
 
 		return repositoryId;
 	}
 
-	public void deleteRepositories(long companyId, long groupId, int purge)
+	public void deleteRepositories(long groupId, int purge)
 		throws PortalException, SystemException {
 
 		// Default repository
 
-		boolean purgeDefaultData = false;
+		boolean purgeDefault = false;
 
-		if (purge == RepositoryConstants.PURGE_ALL ||
-			purge == RepositoryConstants.PURGE_DEFAULT) {
+		if ((purge == RepositoryConstants.PURGE_ALL) ||
+			(purge == RepositoryConstants.PURGE_DEFAULT)) {
 
-			purgeDefaultData = true;
+			purgeDefault = true;
 		}
 
-		deleteRepository(groupId, purgeDefaultData);
+		deleteRepository(groupId, purgeDefault);
 
-		// Mapped repository
+		// Mapped repositories
 
-		List<Repository> list = repositoryPersistence.findByGroupId(groupId);
+		List<Repository> repositories = repositoryPersistence.findByGroupId(
+			groupId);
 
-		boolean purgeNonDefaultData = false;
+		boolean purgeNonDefault = false;
 
-		if (purge == RepositoryConstants.PURGE_ALL ||
-			purge == RepositoryConstants.PURGE_MAPPED) {
+		if ((purge == RepositoryConstants.PURGE_ALL) ||
+			(purge == RepositoryConstants.PURGE_MAPPED)) {
 
-			purgeNonDefaultData = true;
+			purgeNonDefault = true;
 		}
 
-		for (Repository repository : list) {
-			deleteRepository(repository.getRepositoryId(), purgeNonDefaultData);
+		for (Repository repository : repositories) {
+			deleteRepository(repository.getRepositoryId(), purgeNonDefault);
 		}
 	}
 
-	public void deleteRepository(long repositoryId, boolean purgeData)
+	public void deleteRepository(long repositoryId, boolean purge)
 		throws PortalException, SystemException {
 
 		Repository repository = repositoryPersistence.fetchByPrimaryKey(
@@ -125,12 +119,20 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 				Repository.class.getName(), repositoryId);
 		}
 
-		if (purgeData) {
-			getLocalRepository(repositoryId).deleteAll();
+		if (purge) {
+			LocalRepository localRepository = getLocalRepository(repositoryId);
+
+			localRepository.deleteAll();
 		}
 	}
 
-	public UnicodeProperties getProperties(long repositoryId)
+	public Repository getRepository(long repositoryId)
+		throws PortalException, SystemException {
+
+		return repositoryPersistence.findByPrimaryKey(repositoryId);
+	}
+
+	public UnicodeProperties getTypeSettingsProperties(long repositoryId)
 		throws PortalException, SystemException {
 
 		Repository repository = repositoryPersistence.findByPrimaryKey(
@@ -144,13 +146,7 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 			UnicodeProperties typeSettingsProperties)
 		throws PortalException, SystemException {
 
-		// Sync
-
-		typeSettingsProperties =
-			getLocalRepository(repositoryId).updateRepository(
-				typeSettingsProperties);
-
-		// Update
+		// Repository
 
 		Repository repository = repositoryPersistence.findByPrimaryKey(
 			repositoryId);
@@ -159,24 +155,29 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 		repository.setTypeSettingsProperties(typeSettingsProperties);
 
 		repositoryPersistence.update(repository, false);
+
+		// Local repository
+
+		LocalRepository localRepository = getLocalRepository(repositoryId);
+
+		typeSettingsProperties = localRepository.updateRepository(
+			typeSettingsProperties);
+	}
+
+	protected long getDLFolderId(
+			User user, long groupId, String name, String description)
+		throws PortalException, SystemException {
+
+		DLFolder dlFolder = dlRepositoryLocalService.addFolder(
+			user.getUserId(), groupId,
+			DLFolderConstants.MAPPED_PARENT_FOLDER_ID, name, description,
+			new ServiceContext());
+
+		return dlFolder.getFolderId();
 	}
 
 	protected LocalRepository getLocalRepository(long repositoryId) {
 		return RepositoryFactoryUtil.getLocalRepository(repositoryId);
-	}
-
-	protected long getUserId() throws PrincipalException {
-		String name = PrincipalThreadLocal.getName();
-
-		if (name == null) {
-			throw new PrincipalException();
-		}
-
-		if (Validator.isNull(name)) {
-			throw new PrincipalException("Principal cannot be null");
-		}
-
-		return GetterUtil.getLong(name);
 	}
 
 }

@@ -64,16 +64,16 @@ public class RepositoryPersistenceTest extends BasePersistenceTestCase {
 
 		Repository newRepository = _persistence.create(pk);
 
+		newRepository.setGroupId(nextLong());
 		newRepository.setCompanyId(nextLong());
 		newRepository.setCreateDate(nextDate());
 		newRepository.setModifiedDate(nextDate());
-		newRepository.setGroupId(nextLong());
 		newRepository.setName(randomString());
 		newRepository.setDescription(randomString());
-		newRepository.setPortletKey(randomString());
-		newRepository.setMappedFolderId(nextLong());
+		newRepository.setPortletId(randomString());
 		newRepository.setType(nextInt());
 		newRepository.setTypeSettings(randomString());
+		newRepository.setDlFolderId(nextLong());
 
 		_persistence.update(newRepository, false);
 
@@ -81,6 +81,7 @@ public class RepositoryPersistenceTest extends BasePersistenceTestCase {
 
 		assertEquals(existingRepository.getRepositoryId(),
 			newRepository.getRepositoryId());
+		assertEquals(existingRepository.getGroupId(), newRepository.getGroupId());
 		assertEquals(existingRepository.getCompanyId(),
 			newRepository.getCompanyId());
 		assertEquals(Time.getShortTimestamp(existingRepository.getCreateDate()),
@@ -88,17 +89,16 @@ public class RepositoryPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(Time.getShortTimestamp(
 				existingRepository.getModifiedDate()),
 			Time.getShortTimestamp(newRepository.getModifiedDate()));
-		assertEquals(existingRepository.getGroupId(), newRepository.getGroupId());
 		assertEquals(existingRepository.getName(), newRepository.getName());
 		assertEquals(existingRepository.getDescription(),
 			newRepository.getDescription());
-		assertEquals(existingRepository.getPortletKey(),
-			newRepository.getPortletKey());
-		assertEquals(existingRepository.getMappedFolderId(),
-			newRepository.getMappedFolderId());
+		assertEquals(existingRepository.getPortletId(),
+			newRepository.getPortletId());
 		assertEquals(existingRepository.getType(), newRepository.getType());
 		assertEquals(existingRepository.getTypeSettings(),
 			newRepository.getTypeSettings());
+		assertEquals(existingRepository.getDlFolderId(),
+			newRepository.getDlFolderId());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -172,16 +172,16 @@ public class RepositoryPersistenceTest extends BasePersistenceTestCase {
 
 		Repository repository = _persistence.create(pk);
 
+		repository.setGroupId(nextLong());
 		repository.setCompanyId(nextLong());
 		repository.setCreateDate(nextDate());
 		repository.setModifiedDate(nextDate());
-		repository.setGroupId(nextLong());
 		repository.setName(randomString());
 		repository.setDescription(randomString());
-		repository.setPortletKey(randomString());
-		repository.setMappedFolderId(nextLong());
+		repository.setPortletId(randomString());
 		repository.setType(nextInt());
 		repository.setTypeSettings(randomString());
+		repository.setDlFolderId(nextLong());
 
 		_persistence.update(repository, false);
 

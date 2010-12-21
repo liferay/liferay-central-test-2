@@ -65,6 +65,24 @@ public class RepositoryWrapper implements Repository {
 	}
 
 	/**
+	* Gets the group ID of this repository.
+	*
+	* @return the group ID of this repository
+	*/
+	public long getGroupId() {
+		return _repository.getGroupId();
+	}
+
+	/**
+	* Sets the group ID of this repository.
+	*
+	* @param groupId the group ID of this repository
+	*/
+	public void setGroupId(long groupId) {
+		_repository.setGroupId(groupId);
+	}
+
+	/**
 	* Gets the company ID of this repository.
 	*
 	* @return the company ID of this repository
@@ -119,24 +137,6 @@ public class RepositoryWrapper implements Repository {
 	}
 
 	/**
-	* Gets the group ID of this repository.
-	*
-	* @return the group ID of this repository
-	*/
-	public long getGroupId() {
-		return _repository.getGroupId();
-	}
-
-	/**
-	* Sets the group ID of this repository.
-	*
-	* @param groupId the group ID of this repository
-	*/
-	public void setGroupId(long groupId) {
-		_repository.setGroupId(groupId);
-	}
-
-	/**
 	* Gets the name of this repository.
 	*
 	* @return the name of this repository
@@ -173,39 +173,21 @@ public class RepositoryWrapper implements Repository {
 	}
 
 	/**
-	* Gets the portlet key of this repository.
+	* Gets the portlet ID of this repository.
 	*
-	* @return the portlet key of this repository
+	* @return the portlet ID of this repository
 	*/
-	public java.lang.String getPortletKey() {
-		return _repository.getPortletKey();
+	public java.lang.String getPortletId() {
+		return _repository.getPortletId();
 	}
 
 	/**
-	* Sets the portlet key of this repository.
+	* Sets the portlet ID of this repository.
 	*
-	* @param portletKey the portlet key of this repository
+	* @param portletId the portlet ID of this repository
 	*/
-	public void setPortletKey(java.lang.String portletKey) {
-		_repository.setPortletKey(portletKey);
-	}
-
-	/**
-	* Gets the mapped folder ID of this repository.
-	*
-	* @return the mapped folder ID of this repository
-	*/
-	public long getMappedFolderId() {
-		return _repository.getMappedFolderId();
-	}
-
-	/**
-	* Sets the mapped folder ID of this repository.
-	*
-	* @param mappedFolderId the mapped folder ID of this repository
-	*/
-	public void setMappedFolderId(long mappedFolderId) {
-		_repository.setMappedFolderId(mappedFolderId);
+	public void setPortletId(java.lang.String portletId) {
+		_repository.setPortletId(portletId);
 	}
 
 	/**
@@ -242,6 +224,24 @@ public class RepositoryWrapper implements Repository {
 	*/
 	public void setTypeSettings(java.lang.String typeSettings) {
 		_repository.setTypeSettings(typeSettings);
+	}
+
+	/**
+	* Gets the dl folder ID of this repository.
+	*
+	* @return the dl folder ID of this repository
+	*/
+	public long getDlFolderId() {
+		return _repository.getDlFolderId();
+	}
+
+	/**
+	* Sets the dl folder ID of this repository.
+	*
+	* @param dlFolderId the dl folder ID of this repository
+	*/
+	public void setDlFolderId(long dlFolderId) {
+		_repository.setDlFolderId(dlFolderId);
 	}
 
 	public boolean isNew() {

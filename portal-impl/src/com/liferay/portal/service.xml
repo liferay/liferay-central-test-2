@@ -1347,12 +1347,16 @@
 		<finder name="ServletContextName" return-type="Release">
 			<finder-column name="servletContextName" />
 		</finder>
-	</entity>	
-	<entity name="Repository" local-service="true" remote-service="false">
-	
+	</entity>
+	<entity name="Repository" local-service="false" remote-service="true">
+
 		<!-- PK fields -->
 
 		<column name="repositoryId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
 
@@ -1362,13 +1366,12 @@
 
 		<!-- Other fields -->
 
-		<column name="groupId" type="long" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
-		<column name="portletKey" type="String" />
-		<column name="mappedFolderId" type="long" />
+		<column name="portletId" type="String" />
 		<column name="type" type="int" />
 		<column name="typeSettings" type="String" />
+		<column name="dlFolderId" type="long" />
 
 		<!-- Finder methods -->
 

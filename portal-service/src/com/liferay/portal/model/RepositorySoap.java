@@ -35,16 +35,16 @@ public class RepositorySoap implements Serializable {
 		RepositorySoap soapModel = new RepositorySoap();
 
 		soapModel.setRepositoryId(model.getRepositoryId());
+		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setGroupId(model.getGroupId());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
-		soapModel.setPortletKey(model.getPortletKey());
-		soapModel.setMappedFolderId(model.getMappedFolderId());
+		soapModel.setPortletId(model.getPortletId());
 		soapModel.setType(model.getType());
 		soapModel.setTypeSettings(model.getTypeSettings());
+		soapModel.setDlFolderId(model.getDlFolderId());
 
 		return soapModel;
 	}
@@ -105,6 +105,14 @@ public class RepositorySoap implements Serializable {
 		_repositoryId = repositoryId;
 	}
 
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -129,14 +137,6 @@ public class RepositorySoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-	}
-
 	public String getName() {
 		return _name;
 	}
@@ -153,20 +153,12 @@ public class RepositorySoap implements Serializable {
 		_description = description;
 	}
 
-	public String getPortletKey() {
-		return _portletKey;
+	public String getPortletId() {
+		return _portletId;
 	}
 
-	public void setPortletKey(String portletKey) {
-		_portletKey = portletKey;
-	}
-
-	public long getMappedFolderId() {
-		return _mappedFolderId;
-	}
-
-	public void setMappedFolderId(long mappedFolderId) {
-		_mappedFolderId = mappedFolderId;
+	public void setPortletId(String portletId) {
+		_portletId = portletId;
 	}
 
 	public int getType() {
@@ -185,15 +177,23 @@ public class RepositorySoap implements Serializable {
 		_typeSettings = typeSettings;
 	}
 
+	public long getDlFolderId() {
+		return _dlFolderId;
+	}
+
+	public void setDlFolderId(long dlFolderId) {
+		_dlFolderId = dlFolderId;
+	}
+
 	private long _repositoryId;
+	private long _groupId;
 	private long _companyId;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _groupId;
 	private String _name;
 	private String _description;
-	private String _portletKey;
-	private long _mappedFolderId;
+	private String _portletId;
 	private int _type;
 	private String _typeSettings;
+	private long _dlFolderId;
 }

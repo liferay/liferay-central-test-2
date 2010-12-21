@@ -38,15 +38,15 @@ public interface LocalRepository {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException;
 
-	public void addRepository(
-			long companyId, long groupId, String name, String description,
-			String portletKey, UnicodeProperties typeSettingsProperties)
-		throws RepositoryException;
-
 	public Folder addFolder(
 			long userId, long parentFolderId, String title, String description,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException;
+
+	public void addRepository(
+			long groupId, String name, String description, String portletKey,
+			UnicodeProperties typeSettingsProperties)
+		throws RepositoryException;
 
 	public void deleteAll() throws PortalException, SystemException;
 
@@ -141,7 +141,8 @@ public interface LocalRepository {
 			String description, ServiceContext serviceContext)
 		throws PortalException, SystemException;
 
-	public UnicodeProperties updateRepository(UnicodeProperties properties)
+	public UnicodeProperties updateRepository(
+			UnicodeProperties typeSettingsProperties)
 		throws RepositoryException;
 
 }

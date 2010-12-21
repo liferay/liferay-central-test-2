@@ -2309,6 +2309,10 @@ file.
 		</ant>
 
 		<ant dir="portal-impl" target="test-class" inheritAll="false">
+			<property name="class" value="RepositoryTestSuite" />
+		</ant>
+
+		<ant dir="portal-impl" target="test-class" inheritAll="false">
 			<property name="class" value="WebDAVTestSuite" />
 		</ant>
 
