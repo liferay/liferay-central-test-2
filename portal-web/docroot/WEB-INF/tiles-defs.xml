@@ -89,6 +89,10 @@
 
 	<definition name="portlet.admin" extends="portlet" />
 
+	<definition name="portlet.admin.edit_extra_settings" extends="portlet.admin">
+		<put name="portlet_content" value="/portlet/admin/edit_extra_settings.jsp" />
+	</definition>
+
 	<definition name="portlet.admin.edit_instance" extends="portlet.admin">
 		<put name="portlet_content" value="/portlet/admin/edit_instance.jsp" />
 	</definition>

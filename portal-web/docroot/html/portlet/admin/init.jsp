@@ -31,6 +31,10 @@
 <%@ page import="com.liferay.portal.kernel.xml.SAXReaderUtil" %>
 <%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
 <%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
+<%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntry" %>
+<%@ page import="com.liferay.portlet.documentlibrary.model.DLFileVersion" %>
+<%@ page import="com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.expando.model.ExpandoColumnConstants" %>
 
 <%@ page import="java.awt.BasicStroke" %>
 <%@ page import="java.awt.Color" %>

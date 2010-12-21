@@ -238,7 +238,7 @@ public class EditExpandoAction extends PortletAction {
 			themeDisplay.getCompanyId(), modelResource, resourcePrimKey);
 
 		if (preset.startsWith("Preset")) {
-			addPresetExpando(actionRequest, expandoBridge, preset, name);
+			addPresetExpando(expandoBridge, preset, name);
 		}
 		else {
 			int type = ParamUtil.getInteger(actionRequest, "type");
@@ -249,9 +249,8 @@ public class EditExpandoAction extends PortletAction {
 		}
 	}
 
-	protected void addPresetExpando(
-			ActionRequest actionRequest, ExpandoBridge expandoBridge,
-			String preset, String name)
+	protected int addPresetExpando(
+			ExpandoBridge expandoBridge, String preset, String name)
 		throws Exception {
 
 		int type = 0;
@@ -307,6 +306,8 @@ public class EditExpandoAction extends PortletAction {
 		expandoBridge.addAttribute(name, type);
 
 		expandoBridge.setAttributeProperties(name, properties);
+
+		return type;
 	}
 
 	protected void deleteExpando(ActionRequest actionRequest) throws Exception {

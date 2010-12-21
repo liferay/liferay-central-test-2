@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
@@ -253,6 +254,45 @@ public class DLRepositoryLocalServiceImpl
 		return folder;
 	}
 
+	public void convertExtraSettings(String[] keys)
+		throws PortalException, SystemException {
+
+		int count = dlFileEntryFinder.countByExtraSettings();
+		int pages = count / Indexer.DEFAULT_INTERVAL;
+
+		for (int i = 0; i <= pages; i++) {
+			int start = (i * Indexer.DEFAULT_INTERVAL);
+			int end = start + Indexer.DEFAULT_INTERVAL;
+
+			List<DLFileEntry> dlFileEntries =
+				dlFileEntryFinder.findByExtraSettings(start, end);
+
+			for (DLFileEntry dlFileEntry : dlFileEntries) {
+				convertExtraSettings(dlFileEntry, keys);
+
+				List<DLFileVersion> dlFileVersions = getFileVersions(
+					dlFileEntry.getFileEntryId(), WorkflowConstants.STATUS_ANY);
+
+				for (DLFileVersion dlFileVersion : dlFileVersions) {
+					convertExtraSettings(dlFileVersion, keys);
+
+					int status = dlFileVersion.getStatus();
+
+					if ((status == WorkflowConstants.STATUS_APPROVED) &&
+						(DLUtil.compareVersions(
+							dlFileEntry.getVersion(),
+							dlFileVersion.getVersion()) <= 0)) {
+
+						Indexer indexer = IndexerRegistryUtil.getIndexer(
+							DLFileEntry.class);
+
+						indexer.reindex(dlFileEntry);
+					}
+				}
+			}
+		}
+	}
+
 	public void deleteAll(long groupId)
 		throws PortalException, SystemException {
 
@@ -286,6 +326,12 @@ public class DLRepositoryLocalServiceImpl
 		throws SystemException {
 
 		return dlFolderPersistence.findByCompanyId(companyId, start, end);
+	}
+
+	public List<DLFileEntry> getExtraSettingsFileEntries(int start, int end)
+		throws SystemException {
+
+		return dlFileEntryFinder.findByExtraSettings(start, end);
 	}
 
 	public int getCompanyFoldersCount(long companyId) throws SystemException {
@@ -540,6 +586,15 @@ public class DLRepositoryLocalServiceImpl
 
 	public List<DLFileEntry> getOrphanedFileEntries() throws SystemException {
 		return dlFileEntryFinder.findOrphanedFileEntries();
+	}
+
+	public boolean hasExtraSettings() throws SystemException {
+		if (dlFileEntryFinder.countByExtraSettings() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public DLFileEntry moveFileEntry(
@@ -1157,6 +1212,50 @@ public class DLRepositoryLocalServiceImpl
 		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
 
 		addFolderResources(folder, communityPermissions, guestPermissions);
+	}
+
+	protected void convertExtraSettings(DLFileEntry dlFileEntry, String[] keys)
+		throws SystemException {
+
+		UnicodeProperties properties =
+			dlFileEntry.getExtraSettingsProperties();
+
+		ExpandoBridge expandoBridge = dlFileEntry.getExpandoBridge();
+
+		convertExtraSettings(properties, expandoBridge, keys);
+
+		dlFileEntry.setExtraSettingsProperties(properties);
+
+		dlFileEntryPersistence.update(dlFileEntry, false);
+	}
+
+	protected void convertExtraSettings(
+			DLFileVersion dlFileVersion, String[] keys)
+		throws SystemException {
+
+		UnicodeProperties properties =
+			dlFileVersion.getExtraSettingsProperties();
+
+		ExpandoBridge expandoBridge = dlFileVersion.getExpandoBridge();
+
+		convertExtraSettings(properties, expandoBridge, keys);
+
+		dlFileVersion.setExtraSettingsProperties(properties);
+
+		dlFileVersionPersistence.update(dlFileVersion, false);
+	}
+
+	protected void convertExtraSettings(
+		UnicodeProperties properties, ExpandoBridge expandoBridge,
+		String[] keys) {
+
+		for (String key : keys) {
+			String value = properties.remove(key);
+
+			if (Validator.isNotNull(value)) {
+				expandoBridge.setAttribute(key, value);
+			}
+		}
 	}
 
 	protected void deleteFileEntries(long groupId, long folderId)

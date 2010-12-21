@@ -16,6 +16,17 @@
 				[$FOLDER_ID$]
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByExtraSettings">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT DLFileEntry.fileEntryId) AS COUNT_VALUE
+			FROM
+				DLFileEntry, DLFileVersion
+			WHERE
+				(DLFileEntry.extraSettings != '') OR
+				((DLFileVersion.fileEntryId = DLFileEntry.fileEntryId) AND (DLFileVersion.extraSettings != ''))
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByNoAssets">
 		<![CDATA[
 			SELECT
@@ -31,6 +42,19 @@
 					WHERE
 						classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTLET.DOCUMENTLIBRARY.MODEL.DLFILEENTRY$]
 				))
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByExtraSettings">
+		<![CDATA[
+			SELECT
+				DISTINCT {DLFileEntry.*}
+			FROM
+				DLFileEntry, DLFileVersion
+			WHERE
+				(DLFileEntry.extraSettings != '') OR
+				((DLFileVersion.fileEntryId = DLFileEntry.fileEntryId) AND (DLFileVersion.extraSettings != ''))
+			ORDER BY
+				DLFileEntry.modifiedDate DESC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findOrphanedFileEntries">

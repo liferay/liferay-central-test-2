@@ -15,6 +15,7 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.kernel.dao.orm.QueryPos;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
@@ -38,14 +39,52 @@ import java.util.List;
 public class DLFileEntryFinderImpl
 	extends BasePersistenceImpl<DLFileEntry> implements DLFileEntryFinder {
 
+	public static String COUNT_BY_EXTRA_SETTINGS =
+		DLFileEntryFinder.class.getName() + ".countByExtraSettings";
+
 	public static String COUNT_BY_G_F_S =
 		DLFileEntryFinder.class.getName() + ".countByG_F_S";
+
+	public static String FIND_BY_EXTRA_SETTINGS =
+		DLFileEntryFinder.class.getName() + ".findByExtraSettings";
 
 	public static String FIND_BY_NO_ASSETS =
 		DLFileEntryFinder.class.getName() + ".findByNoAssets";
 
 	public static String FIND_ORPHANED_FILE_ENTRIES =
 		DLFileEntryFinder.class.getName() + ".findOrphanedFileEntries";
+
+	public int countByExtraSettings() throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_EXTRA_SETTINGS);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
 
 	public int countByG_F_S(long groupId, List<Long> folderIds, int status)
 		throws SystemException {
@@ -58,6 +97,31 @@ public class DLFileEntryFinderImpl
 		throws SystemException {
 
 		return doCountByG_F_S(groupId, folderIds, status, true);
+	}
+
+	public List<DLFileEntry> findByExtraSettings(int start, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_EXTRA_SETTINGS);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("DLFileEntry", DLFileEntryImpl.class);
+
+			return (List<DLFileEntry>)QueryUtil.list(
+				q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public List<DLFileEntry> findByNoAssets() throws SystemException {

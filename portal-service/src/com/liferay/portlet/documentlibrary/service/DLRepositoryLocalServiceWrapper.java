@@ -51,6 +51,12 @@ public class DLRepositoryLocalServiceWrapper implements DLRepositoryLocalService
 			parentFolderId, name, description, serviceContext);
 	}
 
+	public void convertExtraSettings(java.lang.String[] keys)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlRepositoryLocalService.convertExtraSettings(keys);
+	}
+
 	public void deleteAll(long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -73,6 +79,12 @@ public class DLRepositoryLocalServiceWrapper implements DLRepositoryLocalService
 		long companyId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlRepositoryLocalService.getCompanyFolders(companyId, start, end);
+	}
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getExtraSettingsFileEntries(
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlRepositoryLocalService.getExtraSettingsFileEntries(start, end);
 	}
 
 	public int getCompanyFoldersCount(long companyId)
@@ -278,6 +290,11 @@ public class DLRepositoryLocalServiceWrapper implements DLRepositoryLocalService
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getOrphanedFileEntries()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlRepositoryLocalService.getOrphanedFileEntries();
+	}
+
+	public boolean hasExtraSettings()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlRepositoryLocalService.hasExtraSettings();
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry moveFileEntry(

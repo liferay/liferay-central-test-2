@@ -515,6 +515,10 @@ public class DLFileVersionWrapper implements DLFileVersion {
 		return _dlFileVersion.toXmlString();
 	}
 
+	public com.liferay.portal.kernel.util.UnicodeProperties getExtraSettingsProperties() {
+		return _dlFileVersion.getExtraSettingsProperties();
+	}
+
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -523,6 +527,11 @@ public class DLFileVersionWrapper implements DLFileVersion {
 
 	public java.lang.String getIcon() {
 		return _dlFileVersion.getIcon();
+	}
+
+	public void setExtraSettingsProperties(
+		com.liferay.portal.kernel.util.UnicodeProperties extraSettingsProperties) {
+		_dlFileVersion.setExtraSettingsProperties(extraSettingsProperties);
 	}
 
 	public DLFileVersion getWrappedDLFileVersion() {

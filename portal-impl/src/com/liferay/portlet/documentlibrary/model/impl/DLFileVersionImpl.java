@@ -16,12 +16,17 @@ package com.liferay.portlet.documentlibrary.model.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
+
+import java.io.IOException;
 
 /**
  * @author Jorge Ferrer
@@ -41,6 +46,30 @@ public class DLFileVersionImpl
 		return _expandoBridge;
 	}
 
+	public String getExtraSettings() {
+		if (_extraSettingsProperties == null) {
+			return super.getExtraSettings();
+		}
+		else {
+			return _extraSettingsProperties.toString();
+		}
+	}
+
+	public UnicodeProperties getExtraSettingsProperties() {
+		if (_extraSettingsProperties == null) {
+			_extraSettingsProperties = new UnicodeProperties(true);
+
+			try {
+				_extraSettingsProperties.load(super.getExtraSettings());
+			}
+			catch (IOException ioe) {
+				_log.error(ioe, ioe);
+			}
+		}
+
+		return _extraSettingsProperties;
+	}
+
 	public DLFileEntry getFileEntry() throws PortalException, SystemException {
 		return DLRepositoryLocalServiceUtil.getFileEntry(
 			getFileEntryId());
@@ -50,6 +79,23 @@ public class DLFileVersionImpl
 		return DLUtil.getFileIcon(getExtension());
 	}
 
+	public void setExtraSettings(String extraSettings) {
+		_extraSettingsProperties = null;
+
+		super.setExtraSettings(extraSettings);
+	}
+
+	public void setExtraSettingsProperties(
+		UnicodeProperties extraSettingsProperties) {
+
+		_extraSettingsProperties = extraSettingsProperties;
+
+		super.setExtraSettings(_extraSettingsProperties.toString());
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(DLFileVersionImpl.class);
+
 	private ExpandoBridge _expandoBridge;
+	private UnicodeProperties _extraSettingsProperties = null;
 
 }

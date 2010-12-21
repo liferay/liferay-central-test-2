@@ -21,6 +21,11 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * @author Brian Wing Shun Chan
  */
 public class DLFileEntryFinderUtil {
+	public static int countByExtraSettings()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().countByExtraSettings();
+	}
+
 	public static int countByG_F_S(long groupId,
 		java.util.List<java.lang.Long> folderIds, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -31,6 +36,12 @@ public class DLFileEntryFinderUtil {
 		java.util.List<java.lang.Long> folderIds, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().filterCountByG_F_S(groupId, folderIds, status);
+	}
+
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByExtraSettings(
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().findByExtraSettings(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByNoAssets()

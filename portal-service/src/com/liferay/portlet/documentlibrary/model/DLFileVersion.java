@@ -35,9 +35,18 @@ public interface DLFileVersion extends DLFileVersionModel {
 	 */
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge();
 
+	public java.lang.String getExtraSettings();
+
+	public com.liferay.portal.kernel.util.UnicodeProperties getExtraSettingsProperties();
+
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public java.lang.String getIcon();
+
+	public void setExtraSettings(java.lang.String extraSettings);
+
+	public void setExtraSettingsProperties(
+		com.liferay.portal.kernel.util.UnicodeProperties extraSettingsProperties);
 }
