@@ -1071,6 +1071,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/bcmail.jar</file-name>
+		<version>1.45</version>
+		<project-name>Bouncy Castle SMIME/CMS</project-name>
+		<project-url>http://www.bouncycastle.org</project-url>
+		<licenses>
+			<license>
+				<license-name>BSD Style License</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/bcprov.jar</file-name>
 		<version>1.45</version>
 		<project-name>Bouncy Castle</project-name>
@@ -2315,7 +2326,7 @@
 	</library>
 	<library>
 		<file-name>portal/poi.jar</file-name>
-		<version>3.6</version>
+		<version>3.7</version>
 		<project-name>POI</project-name>
 		<project-url>http://poi.apache.org</project-url>
 		<licenses>
@@ -2326,19 +2337,8 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/poi-contrib.jar</file-name>
-		<version>3.6</version>
-		<project-name>POI</project-name>
-		<licenses>
-			<license>
-				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2001-2007 The Apache Software Foundation</copyright-notice>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>portal/poi-ooxml.jar</file-name>
-		<version>3.6</version>
+		<version>3.7</version>
 		<project-name>POI</project-name>
 		<licenses>
 			<license>
@@ -2349,7 +2349,7 @@
 	</library>
 	<library>
 		<file-name>portal/poi-ooxml-schemas.jar</file-name>
-		<version>3.6</version>
+		<version>3.7</version>
 		<project-name>POI</project-name>
 		<licenses>
 			<license>
@@ -2360,7 +2360,7 @@
 	</library>
 	<library>
 		<file-name>portal/poi-scratchpad.jar</file-name>
-		<version>3.6</version>
+		<version>3.7</version>
 		<project-name>POI</project-name>
 		<project-url>http://poi.apache.org</project-url>
 		<licenses>
@@ -2814,7 +2814,7 @@
 	</library>
 	<library>
 		<file-name>portal/tika-core.jar</file-name>
-		<version>0.7</version>
+		<version>0.8</version>
 		<project-name>Tika</project-name>
 		<project-url>http://tika.apache.org</project-url>
 		<licenses>
@@ -2825,7 +2825,7 @@
 	</library>
 	<library>
 		<file-name>portal/tika-parsers.jar</file-name>
-		<version>0.7</version>
+		<version>0.8</version>
 		<project-name>Tika</project-name>
 		<project-url>http://tika.apache.org</project-url>
 		<licenses>
