@@ -17,31 +17,31 @@
 <%@ include file="/html/portlet/admin/init.jsp" %>
 
 <%
-DLFileEntry fileEntry = null;
-Set<String> keys = null;
-List<String> keysList = null;
-List<String> duplicateNames = null;
+DLFileEntry dlFileEntry = null;
+
+List<String> keys = null;
+List<String> expandoBridgeAttributeNames = null;
 
 try {
-	fileEntry = DLRepositoryLocalServiceUtil.getExtraSettingsFileEntries(0, 1).get(0);
+	dlFileEntry = DLRepositoryLocalServiceUtil.getExtraSettingsFileEntries(0, 1).get(0);
 
-	List<DLFileVersion> fileVersions = fileEntry.getFileVersions(WorkflowConstants.STATUS_ANY);
+	List<DLFileVersion> dlFileVersions = dlFileEntry.getFileVersions(WorkflowConstants.STATUS_ANY);
 
-	for (DLFileVersion fileVersion : fileVersions) {
-		UnicodeProperties extraSettings = fileVersion.getExtraSettingsProperties();
+	for (DLFileVersion dlFileVersion : dlFileVersions) {
+		UnicodeProperties extraSettingsProperties = dlFileVersion.getExtraSettingsProperties();
 
-		if (!extraSettings.isEmpty()) {
-			keys = extraSettings.keySet();
+		if (!extraSettingsProperties.isEmpty()) {
+			keys = new ArrayList<String>(extraSettingsProperties.size());
+			expandoBridgeAttributeNames = new ArrayList<String>(extraSettingsProperties.size());
 
-			keysList = new ArrayList<String>(extraSettings.size());
-			duplicateNames = new ArrayList<String>(extraSettings.size());
+			ExpandoBridge expandoBridge = dlFileEntry.getExpandoBridge();
 
-			for (String key : keys) {
-				if (fileEntry.getExpandoBridge().hasAttribute(key)) {
-					duplicateNames.add(key);
+			for (String key : extraSettingsProperties.keySet()) {
+				if (expandoBridge.hasAttribute(key)) {
+					expandoBridgeAttributeNames.add(key);
 				}
 				else {
-					keysList.add(key);
+					keys.add(key);
 				}
 			}
 
@@ -54,30 +54,31 @@ catch (Exception e) {
 %>
 
 <c:choose>
-	<c:when test="<%= fileEntry == null %>">
+	<c:when test="<%= dlFileEntry == null %>">
 			<div class="portlet-msg-success">
 				<liferay-ui:message key="there-are-no-longer-any-document-library-files-with-extra-settings" />
 			</div>
 	</c:when>
 	<c:otherwise>
-		<c:if test="<%= (duplicateNames != null) && !duplicateNames.isEmpty() %>">
+		<c:if test="<%= (expandoBridgeAttributeNames != null) && !expandoBridgeAttributeNames.isEmpty() %>">
 			<div class="portlet-msg-error">
-				<%= LanguageUtil.format(pageContext, "custom-fields-already-exist-for-these-extra-settings-x", StringUtil.merge(duplicateNames)) %>
+				<%= LanguageUtil.format(pageContext, "custom-fields-already-exist-for-these-extra-settings-x", StringUtil.merge(expandoBridgeAttributeNames)) %>
 			</div>
 		</c:if>
 
-		<portlet:actionURL var="convertExtraSettingsURL">
-			<portlet:param name="struts_action" value="/admin_server/edit_extra_settings" />
+		<portlet:actionURL var="convertDocumentLibraryExtraSettingsURL">
+			<portlet:param name="struts_action" value="/admin_server/edit_document_library_extra_settings" />
 		</portlet:actionURL>
 
-		<aui:form action="<%= convertExtraSettingsURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "convertExtraSettings();" %>'>
+		<aui:form action="<%= convertDocumentLibraryExtraSettingsURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "convertDocumentLibraryExtraSettings();" %>'>
 			<aui:input name="<%= Constants.CMD %>" type="hidden" />
-			<aui:input name="mergedKeys" type="hidden" value="<%= StringUtil.merge(keysList) %>" />
+			<aui:input name="keys" type="hidden" value="<%= StringUtil.merge(keys) %>" />
 
 			<%
-			for (String key : keysList) {
+			for (String key : keys) {
 				String selectName = "type_" + key;
 			%>
+
 				<aui:fieldset>
 					<%= LanguageUtil.format(pageContext, "convert-extra-settings-key-from-x-to", key) %>
 
@@ -115,15 +116,15 @@ catch (Exception e) {
 			}
 			%>
 
-				<aui:button-row>
-					<aui:button type="submit" />
-				</aui:button-row>
-			</aui:form>
+			<aui:button-row>
+				<aui:button type="submit" />
+			</aui:button-row>
+		</aui:form>
 	</c:otherwise>
 </c:choose>
 
 <aui:script>
-	function <portlet:namespace />convertExtraSettings(options) {
+	function <portlet:namespace />convertDocumentLibraryExtraSettings(options) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "convert";
 		submitForm(document.<portlet:namespace />fm);
 	}

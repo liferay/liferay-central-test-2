@@ -96,6 +96,6 @@ public class DLFileVersionImpl
 	private static Log _log = LogFactoryUtil.getLog(DLFileVersionImpl.class);
 
 	private ExpandoBridge _expandoBridge;
-	private UnicodeProperties _extraSettingsProperties = null;
+	private UnicodeProperties _extraSettingsProperties;
 
 }

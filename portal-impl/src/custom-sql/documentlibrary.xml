@@ -1,6 +1,19 @@
 <?xml version="1.0"?>
 
 <custom-sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByExtraSettings">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT DLFileEntry.fileEntryId) AS COUNT_VALUE
+			FROM
+				DLFileEntry, DLFileVersion
+			WHERE
+				(DLFileEntry.extraSettings != '') OR
+				(
+					(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId) AND (DLFileVersion.extraSettings != '')
+				)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByG_F_S">
 		<![CDATA[
 			SELECT
@@ -14,17 +27,6 @@
 				(DLFileEntry.groupId = ?) AND
 				(DLFileVersion.status = ?) AND
 				[$FOLDER_ID$]
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByExtraSettings">
-		<![CDATA[
-			SELECT
-				COUNT(DISTINCT DLFileEntry.fileEntryId) AS COUNT_VALUE
-			FROM
-				DLFileEntry, DLFileVersion
-			WHERE
-				(DLFileEntry.extraSettings != '') OR
-				((DLFileVersion.fileEntryId = DLFileEntry.fileEntryId) AND (DLFileVersion.extraSettings != ''))
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByNoAssets">
@@ -52,7 +54,9 @@
 				DLFileEntry, DLFileVersion
 			WHERE
 				(DLFileEntry.extraSettings != '') OR
-				((DLFileVersion.fileEntryId = DLFileEntry.fileEntryId) AND (DLFileVersion.extraSettings != ''))
+				(
+					(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId) AND (DLFileVersion.extraSettings != '')
+				)
 			ORDER BY
 				DLFileEntry.modifiedDate DESC
 		]]>

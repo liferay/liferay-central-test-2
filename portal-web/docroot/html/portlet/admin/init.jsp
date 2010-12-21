@@ -34,6 +34,7 @@
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntry" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileVersion" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.expando.model.ExpandoBridge" %>
 <%@ page import="com.liferay.portlet.expando.model.ExpandoColumnConstants" %>
 
 <%@ page import="java.awt.BasicStroke" %>

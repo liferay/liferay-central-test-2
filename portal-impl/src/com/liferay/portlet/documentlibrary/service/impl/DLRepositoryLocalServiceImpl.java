@@ -268,26 +268,6 @@ public class DLRepositoryLocalServiceImpl
 
 			for (DLFileEntry dlFileEntry : dlFileEntries) {
 				convertExtraSettings(dlFileEntry, keys);
-
-				List<DLFileVersion> dlFileVersions = getFileVersions(
-					dlFileEntry.getFileEntryId(), WorkflowConstants.STATUS_ANY);
-
-				for (DLFileVersion dlFileVersion : dlFileVersions) {
-					convertExtraSettings(dlFileVersion, keys);
-
-					int status = dlFileVersion.getStatus();
-
-					if ((status == WorkflowConstants.STATUS_APPROVED) &&
-						(DLUtil.compareVersions(
-							dlFileEntry.getVersion(),
-							dlFileVersion.getVersion()) <= 0)) {
-
-						Indexer indexer = IndexerRegistryUtil.getIndexer(
-							DLFileEntry.class);
-
-						indexer.reindex(dlFileEntry);
-					}
-				}
 			}
 		}
 	}
@@ -327,14 +307,14 @@ public class DLRepositoryLocalServiceImpl
 		return dlFolderPersistence.findByCompanyId(companyId, start, end);
 	}
 
+	public int getCompanyFoldersCount(long companyId) throws SystemException {
+		return dlFolderPersistence.countByCompanyId(companyId);
+	}
+
 	public List<DLFileEntry> getExtraSettingsFileEntries(int start, int end)
 		throws SystemException {
 
 		return dlFileEntryFinder.findByExtraSettings(start, end);
-	}
-
-	public int getCompanyFoldersCount(long companyId) throws SystemException {
-		return dlFolderPersistence.countByCompanyId(companyId);
 	}
 
 	public InputStream getFileAsStream(
@@ -1053,43 +1033,63 @@ public class DLRepositoryLocalServiceImpl
 		addFolderResources(folder, communityPermissions, guestPermissions);
 	}
 
-	protected void convertExtraSettings(DLFileEntry dlFileEntry, String[] keys)
-		throws SystemException {
-
-		UnicodeProperties properties =
-			dlFileEntry.getExtraSettingsProperties();
-
-		ExpandoBridge expandoBridge = dlFileEntry.getExpandoBridge();
-
-		convertExtraSettings(properties, expandoBridge, keys);
-
-		dlFileEntry.setExtraSettingsProperties(properties);
-
-		dlFileEntryPersistence.update(dlFileEntry, false);
-	}
-
 	protected void convertExtraSettings(
-			DLFileVersion dlFileVersion, String[] keys)
-		throws SystemException {
+			DLFileEntry dlFileEntry, DLFileVersion dlFileVersion, String[] keys)
+		throws PortalException, SystemException {
 
-		UnicodeProperties properties =
+		UnicodeProperties extraSettingsProperties =
 			dlFileVersion.getExtraSettingsProperties();
 
 		ExpandoBridge expandoBridge = dlFileVersion.getExpandoBridge();
 
-		convertExtraSettings(properties, expandoBridge, keys);
+		convertExtraSettings(extraSettingsProperties, expandoBridge, keys);
 
-		dlFileVersion.setExtraSettingsProperties(properties);
+		dlFileVersion.setExtraSettingsProperties(extraSettingsProperties);
 
 		dlFileVersionPersistence.update(dlFileVersion, false);
+
+		int status = dlFileVersion.getStatus();
+
+		if ((status == WorkflowConstants.STATUS_APPROVED) &&
+			(DLUtil.compareVersions(
+				dlFileEntry.getVersion(),
+				dlFileVersion.getVersion()) <= 0)) {
+
+			Indexer indexer = IndexerRegistryUtil.getIndexer(
+				DLFileEntry.class);
+
+			indexer.reindex(dlFileEntry);
+		}
+	}
+
+	protected void convertExtraSettings(DLFileEntry dlFileEntry, String[] keys)
+		throws PortalException, SystemException {
+
+		UnicodeProperties extraSettingsProperties =
+			dlFileEntry.getExtraSettingsProperties();
+
+		ExpandoBridge expandoBridge = dlFileEntry.getExpandoBridge();
+
+		convertExtraSettings(extraSettingsProperties, expandoBridge, keys);
+
+		dlFileEntry.setExtraSettingsProperties(extraSettingsProperties);
+
+		dlFileEntryPersistence.update(dlFileEntry, false);
+
+		List<DLFileVersion> dlFileVersions = getFileVersions(
+			dlFileEntry.getFileEntryId(), WorkflowConstants.STATUS_ANY);
+
+		for (DLFileVersion dlFileVersion : dlFileVersions) {
+			convertExtraSettings(dlFileEntry, dlFileVersion, keys);
+		}
 	}
 
 	protected void convertExtraSettings(
-		UnicodeProperties properties, ExpandoBridge expandoBridge,
+		UnicodeProperties extraSettingsProperties, ExpandoBridge expandoBridge,
 		String[] keys) {
 
 		for (String key : keys) {
-			String value = properties.remove(key);
+			String value = extraSettingsProperties.remove(key);
 
 			if (Validator.isNotNull(value)) {
 				expandoBridge.setAttribute(key, value);

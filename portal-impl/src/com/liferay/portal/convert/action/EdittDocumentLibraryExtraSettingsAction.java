@@ -39,7 +39,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Alexander Chow
  */
-public class EditExtraSettingsAction extends EditExpandoAction {
+public class EdittDocumentLibraryExtraSettingsAction extends EditExpandoAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
@@ -64,38 +64,11 @@ public class EditExtraSettingsAction extends EditExpandoAction {
 			getForward(renderRequest, "portlet.admin.edit_extra_settings"));
 	}
 
-	protected void convert(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		long companyId = themeDisplay.getCompanyId();
-
-		String[] keys = StringUtil.split(
-			ParamUtil.getString(actionRequest, "mergedKeys"));
-
-		String[] presets = new String[keys.length];
-		int[] types = new int[keys.length];
-
-		for (int i = 0; i < keys.length; i++) {
-			presets[i] = ParamUtil.getString(actionRequest, "type_" + keys[i]);
-
-			types[i] = addCustomField(companyId, keys[i], presets[i]);
-		}
-
-		DLRepositoryLocalServiceUtil.convertExtraSettings(keys);
-	}
-
 	protected int addCustomField(long companyId, String name, String preset)
 		throws Exception {
 
-		String modelResource = DLFileEntryConstants.getClassName();
-		long resourcePrimKey = 0;
-
 		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
-			companyId, modelResource, resourcePrimKey);
+			companyId, DLFileEntryConstants.getClassName(), 0);
 
 		if (preset.startsWith("Preset")) {
 			return addPresetExpando(expandoBridge, preset, name);
@@ -107,6 +80,30 @@ public class EditExtraSettingsAction extends EditExpandoAction {
 
 			return type;
 		}
+	}
+
+	protected void convert(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String[] keys = StringUtil.split(
+			ParamUtil.getString(actionRequest, "keys"));
+
+		String[] presets = new String[keys.length];
+
+		int[] types = new int[keys.length];
+
+		for (int i = 0; i < keys.length; i++) {
+			presets[i] = ParamUtil.getString(actionRequest, "type_" + keys[i]);
+
+			types[i] = addCustomField(
+				themeDisplay.getCompanyId(), keys[i], presets[i]);
+		}
+
+		DLRepositoryLocalServiceUtil.convertExtraSettings(keys);
 	}
 
 }

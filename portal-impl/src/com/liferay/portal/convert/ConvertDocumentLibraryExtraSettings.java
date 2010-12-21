@@ -21,14 +21,14 @@ import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
 /**
  * @author Alexander Chow
  */
-public class ConvertExtraSettings extends ConvertProcess {
+public class ConvertDocumentLibraryExtraSettings extends ConvertProcess {
 
 	public String getDescription() {
 		return "convert-extra-settings-from-document-library-files";
 	}
 
 	public String getPath() {
-		return "/admin_server/edit_extra_settings";
+		return "/admin_server/edit_document_library_extra_settings";
 	}
 
 	public boolean isEnabled() {
@@ -46,6 +46,6 @@ public class ConvertExtraSettings extends ConvertProcess {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		ConvertExtraSettings.class);
+		ConvertDocumentLibraryExtraSettings.class);
 
 }
