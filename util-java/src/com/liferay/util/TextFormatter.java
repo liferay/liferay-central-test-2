@@ -257,14 +257,7 @@ public class TextFormatter {
 			}
 		}
 
-		// Capitalize ID
-
-		s = sb.toString().trim();
-
-		s = s.replaceAll("(?i)\\bid\\b", "ID");
-		s = s.replaceAll("(?i)\\bids\\b", "IDs");
-
-		return s;
+		return sb.toString().trim();
 	}
 
 	private static String _formatI(String s) {
