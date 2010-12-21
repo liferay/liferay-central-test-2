@@ -27,7 +27,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
 	<aui:fieldset label="languages">
-		<aui:input name="languageIds" type="hidden" />
+		<aui:input name="preferences--languageIds--" type="hidden" />
 
 		<%
 		Set availableLanguageIdsSet = SetUtil.fromArray(availableLanguageIds);
@@ -73,7 +73,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	</aui:fieldset>
 
 	<aui:fieldset>
-		<aui:select name="displayStyle">
+		<aui:select name="preferences--displayStyle--">
 			<aui:option label="icon" selected="<%= displayStyle == LanguageTag.LIST_ICON %>" value="<%= LanguageTag.LIST_ICON %>" />
 			<aui:option label="long-text" selected="<%= displayStyle == LanguageTag.LIST_LONG_TEXT %>" value="<%= LanguageTag.LIST_LONG_TEXT %>" />
 			<aui:option label="short-text" selected="<%= displayStyle == LanguageTag.LIST_SHORT_TEXT %>" value="<%= LanguageTag.LIST_SHORT_TEXT %>" />

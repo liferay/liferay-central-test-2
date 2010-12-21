@@ -30,9 +30,10 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 		return "portletId = '20' OR " +
 			"portletId = '33' OR " +
 			"portletId like '73_INSTANCE_%' OR " +
+			"portletId like '82_INSTANCE_%' OR " +
 			"portletId like '85_INSTANCE_%' OR " +
-			"portletId = '114' OR" +
-			"portletId = '115' OR" +
+			"portletId = '114' OR " +
+			"portletId = '115' OR " +
 			"portletId like '122_INSTANCE_%'";
 	}
 

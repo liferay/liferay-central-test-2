@@ -30,6 +30,6 @@ if (Validator.isNotNull(portletResource)) {
 Locale[] availableLocales = LanguageUtil.getAvailableLocales();
 String[] availableLanguageIds = LocaleUtil.toLanguageIds(availableLocales);
 
-String[] languageIds = StringUtil.split(preferences.getValue("language-ids", StringUtil.merge(availableLanguageIds)));
-int displayStyle = GetterUtil.getInteger(preferences.getValue("display-style", StringPool.BLANK));
+String[] languageIds = StringUtil.split(preferences.getValue("languageIds", StringUtil.merge(availableLanguageIds)));
+int displayStyle = GetterUtil.getInteger(preferences.getValue("displayStyle", StringPool.BLANK));
 %>
