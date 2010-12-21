@@ -29,6 +29,7 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 	protected String getUpdatePortletPreferencesWhereClause() {
 		return "portletId = '20' OR " +
 			"portletId = '33' OR " +
+			"portletId like '59_INSTANCE_%' OR " +
 			"portletId like '71_INSTANCE_%' OR " +
 			"portletId like '73_INSTANCE_%' OR " +
 			"portletId like '82_INSTANCE_%' OR " +
