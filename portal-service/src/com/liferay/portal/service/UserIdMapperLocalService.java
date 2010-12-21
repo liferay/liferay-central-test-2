@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 
 /**
- * The interface for the user ID mapper local service.
+ * The interface for the user id mapper local service.
  *
  * <p>
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
@@ -39,14 +39,14 @@ public interface UserIdMapperLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link UserIdMapperLocalServiceUtil} to access the user ID mapper local service. Add custom service methods to {@link com.liferay.portal.service.impl.UserIdMapperLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link UserIdMapperLocalServiceUtil} to access the user id mapper local service. Add custom service methods to {@link com.liferay.portal.service.impl.UserIdMapperLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 
 	/**
-	* Adds the user ID mapper to the database. Also notifies the appropriate model listeners.
+	* Adds the user id mapper to the database. Also notifies the appropriate model listeners.
 	*
-	* @param userIdMapper the user ID mapper to add
-	* @return the user ID mapper that was added
+	* @param userIdMapper the user id mapper to add
+	* @return the user id mapper that was added
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portal.model.UserIdMapper addUserIdMapper(
@@ -54,19 +54,19 @@ public interface UserIdMapperLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Creates a new user ID mapper with the primary key. Does not add the user ID mapper to the database.
+	* Creates a new user id mapper with the primary key. Does not add the user id mapper to the database.
 	*
-	* @param userIdMapperId the primary key for the new user ID mapper
-	* @return the new user ID mapper
+	* @param userIdMapperId the primary key for the new user id mapper
+	* @return the new user id mapper
 	*/
 	public com.liferay.portal.model.UserIdMapper createUserIdMapper(
 		long userIdMapperId);
 
 	/**
-	* Deletes the user ID mapper with the primary key from the database. Also notifies the appropriate model listeners.
+	* Deletes the user id mapper with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param userIdMapperId the primary key of the user ID mapper to delete
-	* @throws PortalException if a user ID mapper with the primary key could not be found
+	* @param userIdMapperId the primary key of the user id mapper to delete
+	* @throws PortalException if a user id mapper with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteUserIdMapper(long userIdMapperId)
@@ -74,9 +74,9 @@ public interface UserIdMapperLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Deletes the user ID mapper from the database. Also notifies the appropriate model listeners.
+	* Deletes the user id mapper from the database. Also notifies the appropriate model listeners.
 	*
-	* @param userIdMapper the user ID mapper to delete
+	* @param userIdMapper the user id mapper to delete
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteUserIdMapper(
@@ -146,11 +146,11 @@ public interface UserIdMapperLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the user ID mapper with the primary key.
+	* Gets the user id mapper with the primary key.
 	*
-	* @param userIdMapperId the primary key of the user ID mapper to get
-	* @return the user ID mapper
-	* @throws PortalException if a user ID mapper with the primary key could not be found
+	* @param userIdMapperId the primary key of the user id mapper to get
+	* @return the user id mapper
+	* @throws PortalException if a user id mapper with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -160,15 +160,15 @@ public interface UserIdMapperLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets a range of all the user ID mappers.
+	* Gets a range of all the user id mappers.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of user ID mappers to return
-	* @param end the upper bound of the range of user ID mappers to return (not inclusive)
-	* @return the range of user ID mappers
+	* @param start the lower bound of the range of user id mappers to return
+	* @param end the upper bound of the range of user id mappers to return (not inclusive)
+	* @return the range of user id mappers
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -177,9 +177,9 @@ public interface UserIdMapperLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Gets the number of user ID mappers.
+	* Gets the number of user id mappers.
 	*
-	* @return the number of user ID mappers
+	* @return the number of user id mappers
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -187,10 +187,10 @@ public interface UserIdMapperLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Updates the user ID mapper in the database. Also notifies the appropriate model listeners.
+	* Updates the user id mapper in the database. Also notifies the appropriate model listeners.
 	*
-	* @param userIdMapper the user ID mapper to update
-	* @return the user ID mapper that was updated
+	* @param userIdMapper the user id mapper to update
+	* @return the user id mapper that was updated
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portal.model.UserIdMapper updateUserIdMapper(
@@ -198,11 +198,11 @@ public interface UserIdMapperLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Updates the user ID mapper in the database. Also notifies the appropriate model listeners.
+	* Updates the user id mapper in the database. Also notifies the appropriate model listeners.
 	*
-	* @param userIdMapper the user ID mapper to update
-	* @param merge whether to merge the user ID mapper with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
-	* @return the user ID mapper that was updated
+	* @param userIdMapper the user id mapper to update
+	* @param merge whether to merge the user id mapper with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the user id mapper that was updated
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portal.model.UserIdMapper updateUserIdMapper(

@@ -39,108 +39,108 @@ public interface UserIdMapperModel extends BaseModel<UserIdMapper> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. All methods that expect a user ID mapper model instance should use the {@link UserIdMapper} interface instead.
+	 * Never modify or reference this interface directly. All methods that expect a user id mapper model instance should use the {@link UserIdMapper} interface instead.
 	 */
 
 	/**
-	 * Gets the primary key of this user ID mapper.
+	 * Gets the primary key of this user id mapper.
 	 *
-	 * @return the primary key of this user ID mapper
+	 * @return the primary key of this user id mapper
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this user ID mapper
+	 * Sets the primary key of this user id mapper
 	 *
-	 * @param pk the primary key of this user ID mapper
+	 * @param pk the primary key of this user id mapper
 	 */
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the user ID mapper ID of this user ID mapper.
+	 * Gets the user id mapper ID of this user id mapper.
 	 *
-	 * @return the user ID mapper ID of this user ID mapper
+	 * @return the user id mapper ID of this user id mapper
 	 */
 	public long getUserIdMapperId();
 
 	/**
-	 * Sets the user ID mapper ID of this user ID mapper.
+	 * Sets the user id mapper ID of this user id mapper.
 	 *
-	 * @param userIdMapperId the user ID mapper ID of this user ID mapper
+	 * @param userIdMapperId the user id mapper ID of this user id mapper
 	 */
 	public void setUserIdMapperId(long userIdMapperId);
 
 	/**
-	 * Gets the user ID of this user ID mapper.
+	 * Gets the user ID of this user id mapper.
 	 *
-	 * @return the user ID of this user ID mapper
+	 * @return the user ID of this user id mapper
 	 */
 	public long getUserId();
 
 	/**
-	 * Sets the user ID of this user ID mapper.
+	 * Sets the user ID of this user id mapper.
 	 *
-	 * @param userId the user ID of this user ID mapper
+	 * @param userId the user ID of this user id mapper
 	 */
 	public void setUserId(long userId);
 
 	/**
-	 * Gets the user uuid of this user ID mapper.
+	 * Gets the user uuid of this user id mapper.
 	 *
-	 * @return the user uuid of this user ID mapper
+	 * @return the user uuid of this user id mapper
 	 * @throws SystemException if a system exception occurred
 	 */
 	public String getUserUuid() throws SystemException;
 
 	/**
-	 * Sets the user uuid of this user ID mapper.
+	 * Sets the user uuid of this user id mapper.
 	 *
-	 * @param userUuid the user uuid of this user ID mapper
+	 * @param userUuid the user uuid of this user id mapper
 	 */
 	public void setUserUuid(String userUuid);
 
 	/**
-	 * Gets the type of this user ID mapper.
+	 * Gets the type of this user id mapper.
 	 *
-	 * @return the type of this user ID mapper
+	 * @return the type of this user id mapper
 	 */
 	@AutoEscape
 	public String getType();
 
 	/**
-	 * Sets the type of this user ID mapper.
+	 * Sets the type of this user id mapper.
 	 *
-	 * @param type the type of this user ID mapper
+	 * @param type the type of this user id mapper
 	 */
 	public void setType(String type);
 
 	/**
-	 * Gets the description of this user ID mapper.
+	 * Gets the description of this user id mapper.
 	 *
-	 * @return the description of this user ID mapper
+	 * @return the description of this user id mapper
 	 */
 	@AutoEscape
 	public String getDescription();
 
 	/**
-	 * Sets the description of this user ID mapper.
+	 * Sets the description of this user id mapper.
 	 *
-	 * @param description the description of this user ID mapper
+	 * @param description the description of this user id mapper
 	 */
 	public void setDescription(String description);
 
 	/**
-	 * Gets the external user ID of this user ID mapper.
+	 * Gets the external user ID of this user id mapper.
 	 *
-	 * @return the external user ID of this user ID mapper
+	 * @return the external user ID of this user id mapper
 	 */
 	@AutoEscape
 	public String getExternalUserId();
 
 	/**
-	 * Sets the external user ID of this user ID mapper.
+	 * Sets the external user ID of this user id mapper.
 	 *
-	 * @param externalUserId the external user ID of this user ID mapper
+	 * @param externalUserId the external user ID of this user id mapper
 	 */
 	public void setExternalUserId(String externalUserId);
 

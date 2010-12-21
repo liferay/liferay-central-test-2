@@ -56,16 +56,16 @@ public interface PortletModel extends BaseModel<Portlet> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the ID of this portlet.
+	 * Gets the id of this portlet.
 	 *
-	 * @return the ID of this portlet
+	 * @return the id of this portlet
 	 */
 	public long getId();
 
 	/**
-	 * Sets the ID of this portlet.
+	 * Sets the id of this portlet.
 	 *
-	 * @param id the ID of this portlet
+	 * @param id the id of this portlet
 	 */
 	public void setId(long id);
 

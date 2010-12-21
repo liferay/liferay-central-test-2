@@ -51,7 +51,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a user ID mapper model instance should use the {@link com.liferay.portal.model.UserIdMapper} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a user id mapper model instance should use the {@link com.liferay.portal.model.UserIdMapper} interface instead.
 	 */
 	public static final String TABLE_NAME = "UserIdMapper";
 	public static final Object[][] TABLE_COLUMNS = {
