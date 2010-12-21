@@ -48,11 +48,12 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select fileEntryId from DLFileEntry where folderId = ? " +
-					"and name = ?");
+				"select fileEntryId from DLFileEntry where " +
+					"groupId = ? and folderId = ? and name = ?");
 
-			ps.setLong(1, folderId);
-			ps.setString(2, name);
+			ps.setLong(1, groupId);
+			ps.setLong(2, folderId);
+			ps.setString(3, name);
 
 			rs = ps.executeQuery();
 
