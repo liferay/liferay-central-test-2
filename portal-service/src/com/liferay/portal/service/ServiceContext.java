@@ -49,6 +49,7 @@ public class ServiceContext implements Cloneable, Serializable {
 		serviceContext.setCommunityPermissions(getCommunityPermissions());
 		serviceContext.setCompanyId(getCompanyId());
 		serviceContext.setCreateDate(getCreateDate());
+		serviceContext.setCurrentURL(getCurrentURL());
 		serviceContext.setExpandoBridgeAttributes(getExpandoBridgeAttributes());
 		serviceContext.setGuestPermissions(getGuestPermissions());
 		serviceContext.setLanguageId(getLanguageId());
@@ -118,6 +119,10 @@ public class ServiceContext implements Cloneable, Serializable {
 		else {
 			return new Date();
 		}
+	}
+
+	public String getCurrentURL() {
+		return _currentURL;
 	}
 
 	public Map<String, Serializable> getExpandoBridgeAttributes() {
@@ -258,6 +263,10 @@ public class ServiceContext implements Cloneable, Serializable {
 		_createDate = createDate;
 	}
 
+	public void setCurrentURL(String currentURL) {
+		_currentURL = currentURL;
+	}
+
 	public void setExpandoBridgeAttributes(
 		Map<String, Serializable> expandoBridgeAttributes) {
 
@@ -331,6 +340,7 @@ public class ServiceContext implements Cloneable, Serializable {
 	private String[] _communityPermissions;
 	private long _companyId;
 	private Date _createDate;
+	private String _currentURL;
 	private Map<String, Serializable> _expandoBridgeAttributes;
 	private String[] _guestPermissions;
 	private String _languageId;
