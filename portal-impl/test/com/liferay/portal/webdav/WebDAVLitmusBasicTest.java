@@ -136,6 +136,6 @@ public class WebDAVLitmusBasicTest extends BaseWebDAVTestCase {
 	}
 
 	private static final String _TEST_CONTENT =
-		"LIFERAY\n" + "Enterprise.  Open Source.  For Life.";
+		"LIFERAY\nEnterprise. Open Source. For Life.";
 
 }
