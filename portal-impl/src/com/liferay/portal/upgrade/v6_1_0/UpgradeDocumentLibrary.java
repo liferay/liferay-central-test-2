@@ -48,8 +48,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select fileEntryId from DLFileEntry where " +
-					"groupId = ? and folderId = ? and name = ?");
+				"select fileEntryId from DLFileEntry where groupId = ? and " +
+					"folderId = ? and name = ?");
 
 			ps.setLong(1, groupId);
 			ps.setLong(2, folderId);
@@ -151,8 +151,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 				long groupId = getGroupId(toFolderId);
 
-				long toFileEntryId =
-					getFileEntryId(groupId, toFolderId, toName);
+				long toFileEntryId = getFileEntryId(
+					groupId, toFolderId, toName);
 
 				runSQL(
 					"update DLFileShortcut set toFileEntryId = " +
