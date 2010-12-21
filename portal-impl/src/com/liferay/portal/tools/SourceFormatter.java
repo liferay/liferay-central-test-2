@@ -861,7 +861,7 @@ public class SourceFormatter {
 			sb.append(line);
 			sb.append("\n");
 
-			if (line.indexOf("    ") != -1 && !line.matches("\\s*\\*.*")) {
+			if (line.contains("    ") && !line.matches("\\s*\\*.*")) {
 				if (!fileName.endsWith("StringPool.java")) {
 					_sourceFormatterHelper.printError(
 						fileName, "tab: " + fileName + " " + lineCount);
