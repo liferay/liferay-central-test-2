@@ -172,13 +172,6 @@ public class PortletPreferencesLocalServiceImpl
 		return portletPreferencesPersistence.findByPlid(plid);
 	}
 
-	public List<PortletPreferences> getPortletPreferencesByPortletId(
-			String portletId)
-		throws SystemException {
-
-		return portletPreferencesFinder.findByPortletId(portletId);
-	}
-
 	public javax.portlet.PortletPreferences getPreferences(
 			PortletPreferencesIds portletPreferencesIds)
 		throws SystemException {
