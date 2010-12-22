@@ -313,6 +313,7 @@
 				Layout
 			INNER JOIN
 				Group_ ON
+					(Group_.companyId = Layout.companyId) AND
 					(Group_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.LAYOUT$]) AND
 					(Group_.classPK = Layout.plid)
 			WHERE
@@ -358,6 +359,7 @@
 				Organization_
 			LEFT JOIN
 				Address ON
+					(Address.companyId = Organization_.companyId) AND
 					(Address.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$]) AND
 					(Address.classPK = Organization_.organizationId)
 			[$JOIN$]
@@ -387,6 +389,7 @@
 				Organization_
 			LEFT JOIN
 				Address ON
+					(Address.companyId = Organization_.companyId) AND
 					(Address.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$]) AND
 					(Address.classPK = Organization_.organizationId)
 			[$JOIN$]
@@ -417,6 +420,7 @@
 				Organization_
 			LEFT JOIN
 				Address ON
+					(Address.companyId = Organization_.companyId) AND
 					(Address.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$]) AND
 					(Address.classPK = Organization_.organizationId)
 			[$JOIN$]
@@ -447,6 +451,7 @@
 				Organization_
 			LEFT JOIN
 				Address ON
+					(Address.companyId = Organization_.companyId) AND
 					(Address.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$]) AND
 					(Address.classPK = Organization_.organizationId)
 			[$JOIN$]
@@ -1351,6 +1356,7 @@
 						User_
 					INNER JOIN
 						Group_ ON
+							(Group_.companyId = User_.companyId) AND
 							(Group_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.USER$]) AND
 							(Group_.classPK = User_.userId)
 				)) AND

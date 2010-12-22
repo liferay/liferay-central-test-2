@@ -9,6 +9,7 @@
 				MBCategory
 			INNER JOIN
 				Subscription ON
+					(Subscription.companyId = MBCategory.companyId) AND
 					(Subscription.classNameId = ?) AND
 					(Subscription.classPK = MBCategory.categoryId)
 			WHERE
@@ -25,6 +26,7 @@
 				MBCategory
 			INNER JOIN
 				Subscription ON
+					(Subscription.companyId = MBCategory.companyId) AND
 					(Subscription.classNameId = ?) AND
 					(Subscription.classPK = MBCategory.categoryId)
 			WHERE
@@ -174,6 +176,7 @@
 					(MBMessage.messageId = MBThread.rootMessageId)
 			INNER JOIN
 				Subscription ON
+					(Subscription.companyId = MBMessage.companyId) AND
 					(Subscription.classNameId = ?) AND
 					(Subscription.classPK = MBThread.threadId)
 			WHERE
@@ -227,6 +230,7 @@
 					(MBMessage.messageId = MBThread.rootMessageId)
 			INNER JOIN
 				Subscription ON
+					(Subscription.companyId = MBMessage.companyId) AND
 					(Subscription.classNameId = ?) AND
 					(Subscription.classPK = MBThread.threadId)
 			WHERE
