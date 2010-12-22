@@ -24,8 +24,8 @@ import com.liferay.portlet.PortletPreferencesSerializer;
  */
 public class UpgradeAssetPublisher extends BaseUpgradePortletPreferences {
 
-	protected String getUpdatePortletPreferencesWhereClause() {
-		return "portletId like '101_INSTANCE_%'";
+	protected String[] getPortletIds() {
+		return new String[] {"101_INSTANCE_%"};
 	}
 
 	protected String upgradePreferences(

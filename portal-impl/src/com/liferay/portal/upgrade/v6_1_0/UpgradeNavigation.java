@@ -25,8 +25,8 @@ import com.liferay.portlet.PortletPreferencesSerializer;
  */
 public class UpgradeNavigation extends BaseUpgradePortletPreferences {
 
-	protected String getUpdatePortletPreferencesWhereClause() {
-		return "portletId like '71_INSTANCE_%'";
+	protected String[] getPortletIds() {
+		return new String[] {"71_INSTANCE_%"};
 	}
 
 	protected String upgradePreferences(

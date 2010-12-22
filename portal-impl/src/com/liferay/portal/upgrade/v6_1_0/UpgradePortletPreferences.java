@@ -26,17 +26,11 @@ import java.util.Map;
  */
 public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 
-	protected String getUpdatePortletPreferencesWhereClause() {
-		return "portletId = '20' OR " +
-			"portletId = '33' OR " +
-			"portletId like '59_INSTANCE_%' OR " +
-			"portletId like '71_INSTANCE_%' OR " +
-			"portletId like '73_INSTANCE_%' OR " +
-			"portletId like '82_INSTANCE_%' OR " +
-			"portletId like '85_INSTANCE_%' OR " +
-			"portletId = '114' OR " +
-			"portletId = '115' OR " +
-			"portletId like '122_INSTANCE_%'";
+	protected String[] getPortletIds() {
+		return new String[] {
+			"20", "33", "59_INSTANCE_%", "71_INSTANCE_%", "73_INSTANCE_%",
+			"82_INSTANCE_%", "85_INSTANCE_%", "114", "115", "122_INSTANCE_%"
+		};
 	}
 
 	protected String upgradePreferences(

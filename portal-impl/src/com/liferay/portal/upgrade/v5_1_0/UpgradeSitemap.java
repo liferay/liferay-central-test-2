@@ -26,8 +26,8 @@ import com.liferay.portlet.PortletPreferencesSerializer;
  */
 public class UpgradeSitemap extends BaseUpgradePortletPreferences {
 
-	protected String getUpdatePortletPreferencesWhereClause() {
-		return "portletId like '85_%'";
+	protected String[] getPortletIds() {
+		return new String[] {"85_INSTANCE_%"};
 	}
 
 	protected String upgradePreferences(

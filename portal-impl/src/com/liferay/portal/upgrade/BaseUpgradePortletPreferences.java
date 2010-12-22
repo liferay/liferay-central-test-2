@@ -16,6 +16,8 @@ package com.liferay.portal.upgrade;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -110,7 +112,44 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 		return uuid;
 	}
 
-	protected abstract String getUpdatePortletPreferencesWhereClause();
+	protected String[] getPortletIds() {
+		return new String[0];
+	}
+
+	protected String getUpdatePortletPreferencesWhereClause() {
+		String[] portletIds = getPortletIds();
+
+		if (portletIds.length == 0) {
+			throw new IllegalArgumentException(
+				"Subclasses must override getPortletIds or " +
+					"getUpdatePortletPreferencesWhereClause");
+		}
+
+		StringBundler sb = new StringBundler(portletIds.length * 5 - 1);
+
+		for (int i = 0; i < portletIds.length; i++) {
+			String portletId = portletIds[i];
+
+			sb.append("portletId ");
+
+			if (portletId.contains(StringPool.PERCENT)) {
+				sb.append(" like '");
+				sb.append(portletId);
+				sb.append("'");
+			}
+			else {
+				sb.append(" = '");
+				sb.append(portletId);
+				sb.append("'");
+			}
+
+			if ((i + 1) < portletIds.length) {
+				sb.append(" or ");
+			}
+		}
+
+		return sb.toString();
+	}
 
 	protected void updatePortletPreferences() throws Exception {
 		Connection con = null;

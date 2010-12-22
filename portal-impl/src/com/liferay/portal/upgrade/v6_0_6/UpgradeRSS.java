@@ -63,8 +63,8 @@ public class UpgradeRSS extends BaseUpgradePortletPreferences {
 		return new String[] {String.valueOf(groupId), articleId};
 	}
 
-	protected String getUpdatePortletPreferencesWhereClause() {
-		return "portletId like '39_INSTANCE_%'";
+	protected String[] getPortletIds() {
+		return new String[] {"39_INSTANCE_%"};
 	}
 
 	protected void upgradeFooterValues(PortletPreferencesImpl preferences)

@@ -28,8 +28,8 @@ import com.liferay.portlet.PortletPreferencesSerializer;
  */
 public class UpgradeDocumentLibrary extends BaseUpgradePortletPreferences {
 
-	protected String getUpdatePortletPreferencesWhereClause() {
-		return "portletId = '20'";
+	protected String[] getPortletIds() {
+		return new String[] {"20"};
 	}
 
 	protected String upgradePreferences(
