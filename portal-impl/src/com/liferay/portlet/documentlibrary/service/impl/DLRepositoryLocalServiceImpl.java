@@ -1094,10 +1094,10 @@ public class DLRepositoryLocalServiceImpl
 			if (Validator.isNotNull(value)) {
 				int type = expandoBridge.getAttributeType(key);
 
-				Serializable serializedValue =
+				Serializable serializable =
 					ExpandoColumnConstants.getSerializable(type, value);
 
-				expandoBridge.setAttribute(key, serializedValue);
+				expandoBridge.setAttribute(key, serializable);
 			}
 		}
 	}

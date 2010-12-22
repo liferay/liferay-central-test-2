@@ -14,7 +14,10 @@
 
 package com.liferay.portlet.expando.model;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+
 import java.io.Serializable;
+
 import java.util.Date;
 
 /**
@@ -113,10 +116,10 @@ public class ExpandoColumnConstants {
 
 	public static final Serializable getSerializable(int type, String value) {
 		if (type == BOOLEAN) {
-			return Boolean.parseBoolean(value);
+			return GetterUtil.getBoolean(value);
 		}
 		else if (type == BOOLEAN_ARRAY) {
-			return new Boolean[] {Boolean.parseBoolean(value)};
+			return new Boolean[] {GetterUtil.getBoolean(value)};
 		}
 		else if (type == DATE) {
 			return new Date(value);
@@ -125,34 +128,34 @@ public class ExpandoColumnConstants {
 			return new Date[] {new Date(value)};
 		}
 		else if (type == DOUBLE) {
-			return Double.parseDouble(value);
+			return GetterUtil.getDouble(value);
 		}
 		else if (type == DOUBLE_ARRAY) {
-			return new double[] {Double.parseDouble(value)};
+			return new double[] {GetterUtil.getDouble(value)};
 		}
 		else if (type == FLOAT) {
-			return Float.parseFloat(value);
+			return GetterUtil.getFloat(value);
 		}
 		else if (type == FLOAT_ARRAY) {
-			return new float[] {Float.parseFloat(value)};
+			return new float[] {GetterUtil.getFloat(value)};
 		}
 		else if (type == INTEGER) {
-			return Integer.parseInt(value);
+			return GetterUtil.getInteger(value);
 		}
 		else if (type == INTEGER_ARRAY) {
-			return new int[] {Integer.parseInt(value)};
+			return new int[] {GetterUtil.getInteger(value)};
 		}
 		else if (type == LONG) {
-			return Long.parseLong(value);
+			return GetterUtil.getLong(value);
 		}
 		else if (type == LONG_ARRAY) {
-			return new long[] {Long.parseLong(value)};
+			return new long[] {GetterUtil.getLong(value)};
 		}
 		else if (type == SHORT) {
-			return Short.parseShort(value);
+			return GetterUtil.getShort(value);
 		}
 		else if (type == SHORT_ARRAY) {
-			return new short[] {Short.parseShort(value)};
+			return new short[] {GetterUtil.getShort(value)};
 		}
 		else if (type == STRING_ARRAY) {
 			return new String[] {value};
@@ -161,7 +164,7 @@ public class ExpandoColumnConstants {
 			return value;
 		}
 	}
-	
+
 	public static final String getTypeLabel(int type) {
 		if (type == BOOLEAN) {
 			return BOOLEAN_LABEL;
