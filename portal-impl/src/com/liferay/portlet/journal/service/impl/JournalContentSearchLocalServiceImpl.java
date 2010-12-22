@@ -89,7 +89,7 @@ public class JournalContentSearchLocalServiceImpl
 							layout.getPlid(), portletId);
 
 					String articleId = preferences.getValue(
-						"article-id", StringPool.BLANK);
+						"articleId", StringPool.BLANK);
 
 					if (Validator.isNotNull(articleId)) {
 						updateContentSearch(
