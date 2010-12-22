@@ -606,8 +606,8 @@ public class EditArticleAction extends PortletAction {
 					uploadRequest, portletResource);
 
 			preferences.setValue(
-				"group-id", String.valueOf(article.getGroupId()));
-			preferences.setValue("article-id", article.getArticleId());
+				"groupId", String.valueOf(article.getGroupId()));
+			preferences.setValue("articleId", article.getArticleId());
 
 			preferences.store();
 

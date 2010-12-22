@@ -344,7 +344,7 @@ public class JournalUtil {
 		PortletPreferences preferences) {
 
 		String emailArticleAddedBody = preferences.getValue(
-			"email-article-added-body", StringPool.BLANK);
+			"emailArticleAddedBody", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailArticleAddedBody)) {
 			return emailArticleAddedBody;
@@ -359,7 +359,7 @@ public class JournalUtil {
 		PortletPreferences preferences) {
 
 		String emailArticleAddedEnabled = preferences.getValue(
-			"email-article-added-enabled", StringPool.BLANK);
+			"emailArticleAddedEnabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailArticleAddedEnabled)) {
 			return GetterUtil.getBoolean(emailArticleAddedEnabled);
@@ -374,7 +374,7 @@ public class JournalUtil {
 		PortletPreferences preferences) {
 
 		String emailArticleAddedSubject = preferences.getValue(
-			"email-article-added-subject", StringPool.BLANK);
+			"emailArticleAddedSubject", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailArticleAddedSubject)) {
 			return emailArticleAddedSubject;
@@ -389,7 +389,7 @@ public class JournalUtil {
 		PortletPreferences preferences) {
 
 		String emailArticleApprovalDeniedBody = preferences.getValue(
-			"email-article-approval-denied-body", StringPool.BLANK);
+			"emailArticleApprovalDeniedBody", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailArticleApprovalDeniedBody)) {
 			return emailArticleApprovalDeniedBody;
@@ -404,7 +404,7 @@ public class JournalUtil {
 		PortletPreferences preferences) {
 
 		String emailArticleApprovalDeniedEnabled = preferences.getValue(
-			"email-article-approval-denied-enabled", StringPool.BLANK);
+			"emailArticleApprovalDeniedEnabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailArticleApprovalDeniedEnabled)) {
 			return GetterUtil.getBoolean(emailArticleApprovalDeniedEnabled);
@@ -419,7 +419,7 @@ public class JournalUtil {
 		PortletPreferences preferences) {
 
 		String emailArticleApprovalDeniedSubject = preferences.getValue(
-			"email-article-approval-denied-subject", StringPool.BLANK);
+			"emailArticleApprovalDeniedSubject", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailArticleApprovalDeniedSubject)) {
 			return emailArticleApprovalDeniedSubject;
@@ -434,7 +434,7 @@ public class JournalUtil {
 		PortletPreferences preferences) {
 
 		String emailArticleApprovalGrantedBody = preferences.getValue(
-			"email-article-approval-granted-body", StringPool.BLANK);
+			"emailArticleApprovalGrantedBody", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailArticleApprovalGrantedBody)) {
 			return emailArticleApprovalGrantedBody;
@@ -449,7 +449,7 @@ public class JournalUtil {
 		PortletPreferences preferences) {
 
 		String emailArticleApprovalGrantedEnabled = preferences.getValue(
-			"email-article-approval-granted-enabled", StringPool.BLANK);
+			"emailArticleApprovalGrantedEnabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailArticleApprovalGrantedEnabled)) {
 			return GetterUtil.getBoolean(emailArticleApprovalGrantedEnabled);
@@ -464,7 +464,7 @@ public class JournalUtil {
 		PortletPreferences preferences) {
 
 		String emailArticleApprovalGrantedSubject = preferences.getValue(
-			"email-article-approval-granted-subject", StringPool.BLANK);
+			"emailArticleApprovalGrantedSubject", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailArticleApprovalGrantedSubject)) {
 			return emailArticleApprovalGrantedSubject;
@@ -479,7 +479,7 @@ public class JournalUtil {
 		PortletPreferences preferences) {
 
 		String emailArticleApprovalRequestedBody = preferences.getValue(
-			"email-article-approval-requested-body", StringPool.BLANK);
+			"emailArticleApprovalRequestedBody", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailArticleApprovalRequestedBody)) {
 			return emailArticleApprovalRequestedBody;
@@ -494,7 +494,7 @@ public class JournalUtil {
 		PortletPreferences preferences) {
 
 		String emailArticleApprovalRequestedEnabled = preferences.getValue(
-			"email-article-approval-requested-enabled", StringPool.BLANK);
+			"emailArticleApprovalRequestedEnabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailArticleApprovalRequestedEnabled)) {
 			return GetterUtil.getBoolean(emailArticleApprovalRequestedEnabled);
@@ -509,7 +509,7 @@ public class JournalUtil {
 		PortletPreferences preferences) {
 
 		String emailArticleApprovalRequestedSubject = preferences.getValue(
-			"email-article-approval-requested-subject", StringPool.BLANK);
+			"emailArticleApprovalRequestedSubject", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailArticleApprovalRequestedSubject)) {
 			return emailArticleApprovalRequestedSubject;
@@ -524,7 +524,7 @@ public class JournalUtil {
 		PortletPreferences preferences) {
 
 		String emailArticleReviewBody = preferences.getValue(
-			"email-article-review-body", StringPool.BLANK);
+			"emailArticleReviewBody", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailArticleReviewBody)) {
 			return emailArticleReviewBody;
@@ -539,7 +539,7 @@ public class JournalUtil {
 		PortletPreferences preferences) {
 
 		String emailArticleReviewEnabled = preferences.getValue(
-			"email-article-review-enabled", StringPool.BLANK);
+			"emailArticleReviewEnabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailArticleReviewEnabled)) {
 			return GetterUtil.getBoolean(emailArticleReviewEnabled);
@@ -554,7 +554,7 @@ public class JournalUtil {
 		PortletPreferences preferences) {
 
 		String emailArticleReviewSubject = preferences.getValue(
-			"email-article-review-subject", StringPool.BLANK);
+			"emailArticleReviewSubject", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailArticleReviewSubject)) {
 			return emailArticleReviewSubject;
@@ -569,7 +569,7 @@ public class JournalUtil {
 		PortletPreferences preferences) {
 
 		String emailArticleUpdatedBody = preferences.getValue(
-			"email-article-updated-body", StringPool.BLANK);
+			"emailArticleUpdatedBody", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailArticleUpdatedBody)) {
 			return emailArticleUpdatedBody;
@@ -584,7 +584,7 @@ public class JournalUtil {
 		PortletPreferences preferences) {
 
 		String emailArticleUpdatedEnabled = preferences.getValue(
-			"email-article-updated-enabled", StringPool.BLANK);
+			"emailArticleUpdatedEnabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailArticleUpdatedEnabled)) {
 			return GetterUtil.getBoolean(emailArticleUpdatedEnabled);
@@ -599,7 +599,7 @@ public class JournalUtil {
 		PortletPreferences preferences) {
 
 		String emailArticleUpdatedSubject = preferences.getValue(
-			"email-article-updated-subject", StringPool.BLANK);
+			"emailArticleUpdatedSubject", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailArticleUpdatedSubject)) {
 			return emailArticleUpdatedSubject;
@@ -614,14 +614,14 @@ public class JournalUtil {
 		String emailFromAddress = PropsUtil.get(
 			PropsKeys.JOURNAL_EMAIL_FROM_ADDRESS);
 
-		return preferences.getValue("email-from-address", emailFromAddress);
+		return preferences.getValue("emailFromAddress", emailFromAddress);
 	}
 
 	public static String getEmailFromName(PortletPreferences preferences) {
 		String emailFromName = PropsUtil.get(
 			PropsKeys.JOURNAL_EMAIL_FROM_NAME);
 
-		return preferences.getValue("email-from-name", emailFromName);
+		return preferences.getValue("emailFromName", emailFromName);
 	}
 
 	public static String getMailId(String mx, String articleId) {

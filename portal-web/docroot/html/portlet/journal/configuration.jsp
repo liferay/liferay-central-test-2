@@ -111,59 +111,59 @@ else if (tabs2.equals("web-content-updated-email")) {
 	<c:choose>
 		<c:when test='<%= tabs2.equals("email-from") %>'>
 			<aui:fieldset>
-				<aui:input cssClass="lfr-input-text-container" label="name" name="emailFromName" type="text" value="<%= emailFromName %>" />
+				<aui:input cssClass="lfr-input-text-container" label="name" name="preferences--emailFromName--" type="text" value="<%= emailFromName %>" />
 
-				<aui:input cssClass="lfr-input-text-container" label="address" name="emailFromAddress" type="text" value="<%= emailFromAddress %>" />
+				<aui:input cssClass="lfr-input-text-container" label="address" name="preferences--emailFromAddress--" type="text" value="<%= emailFromAddress %>" />
 			</aui:fieldset>
 		</c:when>
 		<c:when test='<%= tabs2.startsWith("web-content-added-") || tabs2.startsWith("web-content-approval-") || tabs2.startsWith("web-content-review-") || tabs2.startsWith("web-content-updated-") %>'>
 			<aui:fieldset>
 				<c:choose>
 					<c:when test='<%= tabs2.equals("web-content-added-email") %>'>
-						<aui:input inlineLabel="left" label="enabled" name="emailArticleAddedEnabled" type="checkbox" value="<%= JournalUtil.getEmailArticleAddedEnabled(portletSetup) %>" />
+						<aui:input label="enabled" name="preferences--emailArticleAddedEnabled--" type="checkbox" value="<%= JournalUtil.getEmailArticleAddedEnabled(portletSetup) %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("web-content-approval-denied-email") %>'>
-						<aui:input inlineLabel="left" label="enabled" name="emailArticleApprovalDeniedEnabled" type="checkbox" value="<%= JournalUtil.getEmailArticleApprovalDeniedEnabled(portletSetup) %>" />
+						<aui:input label="enabled" name="preferences--emailArticleApprovalDeniedEnabled--" type="checkbox" value="<%= JournalUtil.getEmailArticleApprovalDeniedEnabled(portletSetup) %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("web-content-approval-granted-email") %>'>
-						<aui:input inlineLabel="left" label="enabled" name="emailArticleApprovalGrantedEnabled" type="checkbox" value="<%= JournalUtil.getEmailArticleApprovalGrantedEnabled(portletSetup) %>" />
+						<aui:input label="enabled" name="preferences--emailArticleApprovalGrantedEnabled--" type="checkbox" value="<%= JournalUtil.getEmailArticleApprovalGrantedEnabled(portletSetup) %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("web-content-approval-requested-email") %>'>
-						<aui:input inlineLabel="left" label="enabled" name="emailArticleApprovalRequestedEnabled" type="checkbox" value="<%= JournalUtil.getEmailArticleApprovalRequestedEnabled(portletSetup) %>" />
+						<aui:input label="enabled" name="preferences--emailArticleApprovalRequestedEnabled--" type="checkbox" value="<%= JournalUtil.getEmailArticleApprovalRequestedEnabled(portletSetup) %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("web-content-review-email") %>'>
-						<aui:input inlineLabel="left" label="enabled" name="emailArticleReviewEnabled" type="checkbox" value="<%= JournalUtil.getEmailArticleReviewEnabled(portletSetup) %>" />
+						<aui:input label="enabled" name="preferences--emailArticleReviewEnabled--" type="checkbox" value="<%= JournalUtil.getEmailArticleReviewEnabled(portletSetup) %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("web-content-updated-email") %>'>
-						<aui:input inlineLabel="left" label="enabled" name="emailArticleUpdatedEnabled" type="checkbox" value="<%= JournalUtil.getEmailArticleUpdatedEnabled(portletSetup) %>" />
+						<aui:input label="enabled" name="preferences--emailArticleUpdatedEnabled--" type="checkbox" value="<%= JournalUtil.getEmailArticleUpdatedEnabled(portletSetup) %>" />
 					</c:when>
 				</c:choose>
 
 				<c:choose>
 					<c:when test='<%= tabs2.equals("web-content-added-email") %>'>
-						<aui:input cssClass="lfr-input-text-container" label="subject" name="emailArticleAddedSubject" type="text" value="<%= emailArticleAddedSubject %>" />
+						<aui:input cssClass="lfr-input-text-container" label="subject" name="preferences--emailArticleAddedSubject--" type="text" value="<%= emailArticleAddedSubject %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("web-content-approval-denied-email") %>'>
-						<aui:input cssClass="lfr-input-text-container" label="subject" name="emailArticleApprovalDeniedSubject" type="text" value="<%= emailArticleApprovalDeniedSubject %>" />
+						<aui:input cssClass="lfr-input-text-container" label="subject" name="preferences--emailArticleApprovalDeniedSubject--" type="text" value="<%= emailArticleApprovalDeniedSubject %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("web-content-approval-granted-email") %>'>
-						<aui:input cssClass="lfr-input-text-container" label="subject" name="emailArticleApprovalGrantedSubject" type="text" value="<%= emailArticleApprovalGrantedSubject %>" />
+						<aui:input cssClass="lfr-input-text-container" label="subject" name="preferences--emailArticleApprovalGrantedSubject--" type="text" value="<%= emailArticleApprovalGrantedSubject %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("web-content-approval-requested-email") %>'>
-						<aui:input cssClass="lfr-input-text-container" label="subject" name="emailArticleApprovalRequestedSubject" type="text" value="<%= emailArticleApprovalRequestedSubject %>" />
+						<aui:input cssClass="lfr-input-text-container" label="subject" name="preferences--emailArticleApprovalRequestedSubject--" type="text" value="<%= emailArticleApprovalRequestedSubject %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("web-content-review-email") %>'>
-						<aui:input cssClass="lfr-input-text-container" label="subject" name="emailArticleReviewSubject" type="text" value="<%= emailArticleReviewSubject %>" />
+						<aui:input cssClass="lfr-input-text-container" label="subject" name="preferences--emailArticleReviewSubject--" type="text" value="<%= emailArticleReviewSubject %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("web-content-updated-email") %>'>
-						<aui:input cssClass="lfr-input-text-container" label="subject" name="emailArticleUpdatedSubject" type="text" value="<%= emailArticleUpdatedSubject %>" />
+						<aui:input cssClass="lfr-input-text-container" label="subject" name="preferences--emailArticleUpdatedSubject--" type="text" value="<%= emailArticleUpdatedSubject %>" />
 					</c:when>
 				</c:choose>
 
 				<aui:field-wrapper label="body">
 					<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-					<aui:input name="<%= editorParam %>" type="hidden" />
+					<aui:input name='<%= "preferences--" + editorParam + "--" %>' type="hidden" />
 				</aui:field-wrapper>
 			</aui:fieldset>
 
