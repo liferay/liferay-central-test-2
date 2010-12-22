@@ -139,7 +139,11 @@ public class ExpandoColumnConstants {
 			}
 		}
 		else if (type == DATE_ARRAY) {
-			return new Date[] {(Date)getSerializable(DATE, value)};
+			Serializable dateSerializable = getSerializable(DATE, value);
+
+			if (dateSerializable instanceof Date) {
+				return new Date[] {(Date)dateSerializable};
+			}
 		}
 		else if (type == DOUBLE) {
 			return GetterUtil.getDouble(value);
