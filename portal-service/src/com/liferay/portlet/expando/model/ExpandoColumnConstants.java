@@ -122,10 +122,10 @@ public class ExpandoColumnConstants {
 			return new Boolean[] {GetterUtil.getBoolean(value)};
 		}
 		else if (type == DATE) {
-			return new Date(value);
+			return new Date(GetterUtil.getLong(value));
 		}
 		else if (type == DATE_ARRAY) {
-			return new Date[] {new Date(value)};
+			return new Date[] {new Date(GetterUtil.getLong(value))};
 		}
 		else if (type == DOUBLE) {
 			return GetterUtil.getDouble(value);

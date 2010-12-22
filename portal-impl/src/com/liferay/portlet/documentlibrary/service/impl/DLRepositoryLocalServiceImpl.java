@@ -1091,14 +1091,16 @@ public class DLRepositoryLocalServiceImpl
 		for (String key : keys) {
 			String value = extraSettingsProperties.remove(key);
 
-			if (Validator.isNotNull(value)) {
-				int type = expandoBridge.getAttributeType(key);
-
-				Serializable serializable =
-					ExpandoColumnConstants.getSerializable(type, value);
-
-				expandoBridge.setAttribute(key, serializable);
+			if (Validator.isNull(value)) {
+				continue;
 			}
+
+			int type = expandoBridge.getAttributeType(key);
+
+			Serializable serializable = ExpandoColumnConstants.getSerializable(
+				type, value);
+
+			expandoBridge.setAttribute(key, serializable);
 		}
 	}
 
