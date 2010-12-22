@@ -1052,11 +1052,9 @@ public class DLRepositoryLocalServiceImpl
 
 		if ((status == WorkflowConstants.STATUS_APPROVED) &&
 			(DLUtil.compareVersions(
-				dlFileEntry.getVersion(),
-				dlFileVersion.getVersion()) <= 0)) {
+				dlFileEntry.getVersion(), dlFileVersion.getVersion()) <= 0)) {
 
-			Indexer indexer = IndexerRegistryUtil.getIndexer(
-				DLFileEntry.class);
+			Indexer indexer = IndexerRegistryUtil.getIndexer(DLFileEntry.class);
 
 			indexer.reindex(dlFileEntry);
 		}
