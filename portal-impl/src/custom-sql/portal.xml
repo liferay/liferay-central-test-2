@@ -68,7 +68,12 @@
 				Group_
 			WHERE
 				Group_.groupId IN (
-					SELECT Group_.liveGroupId from Group_
+					SELECT
+						Group_.liveGroupId
+					FROM
+						Group_
+					WHERE
+						Group_.liveGroupId != 0
 				)
 		]]>
 	</sql>
