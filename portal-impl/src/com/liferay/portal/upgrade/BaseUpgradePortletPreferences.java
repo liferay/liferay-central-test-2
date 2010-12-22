@@ -210,14 +210,14 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 					Object[] group = getGroup(ownerId);
 
 					if (group != null) {
-						companyId = group[1];
+						companyId = (Long)group[1];
 					}
 				}
 				else {
 					Object[] layout = getLayout(plid);
 
 					if (layout != null) {
-						companyId = layout[1];
+						companyId = (Long)layout[1];
 					}
 				}
 
