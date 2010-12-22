@@ -35,6 +35,11 @@ public class CalEventFinderUtil {
 			timeZoneSensitive);
 	}
 
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findFutureRemindByEvents()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().findFutureRemindByEvents();
+	}
+
 	public static CalEventFinder getFinder() {
 		if (_finder == null) {
 			_finder = (CalEventFinder)PortalBeanLocatorUtil.locate(CalEventFinder.class.getName());

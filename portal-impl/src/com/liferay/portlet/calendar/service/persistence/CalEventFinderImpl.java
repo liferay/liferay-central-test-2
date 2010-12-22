@@ -21,16 +21,19 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.calendar.model.CalEvent;
+import com.liferay.portlet.calendar.model.CalEventConstants;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.sql.Timestamp;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Zsolt Balogh
  */
 public class CalEventFinderImpl
 	extends BasePersistenceImpl<CalEvent> implements CalEventFinder {
@@ -40,6 +43,9 @@ public class CalEventFinderImpl
 
 	public static String FIND_BY_G_SD =
 		CalEventFinder.class.getName() + ".findByG_SD";
+
+	public static String FIND_FUTURE_REMIND_BY_EVENTS =
+		CalEventFinder.class.getName() + ".findFutureRemindByEvents";
 
 	public List<CalEvent> findByNoAssets() throws SystemException {
 		Session session = null;
@@ -89,6 +95,41 @@ public class CalEventFinderImpl
 			qPos.add(startDateLT_TS);
 			qPos.add(timeZoneSensitive);
 			qPos.add(false);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<CalEvent> findFutureRemindByEvents()
+		throws SystemException {
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.HOUR, -24);
+
+		Timestamp reference_TS = CalendarUtil.getTimestamp(calendar.getTime());
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_FUTURE_REMIND_BY_EVENTS);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("CalEvent", CalEventImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(CalEventConstants.REMIND_BY_NONE);
+			qPos.add(reference_TS);
+			qPos.add(reference_TS);
 
 			return q.list();
 		}

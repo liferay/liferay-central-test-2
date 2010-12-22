@@ -25,4 +25,7 @@ public interface CalEventFinder {
 		long groupId, java.util.Date startDateGT, java.util.Date startDateLT,
 		boolean timeZoneSensitive)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findFutureRemindByEvents()
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

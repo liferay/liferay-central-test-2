@@ -32,4 +32,24 @@
 				(repeating = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.calendar.service.persistence.CalEventFinder.findFutureRemindByEvents">
+		<![CDATA[
+			SELECT
+				{CalEvent.*}
+			FROM
+				CalEvent
+			WHERE
+				(remindBy != ?) AND
+				(
+					(
+						(repeating = [$FALSE$]) AND
+						(startDate >= ?)
+					) OR
+					(
+						(repeating = [$TRUE$]) AND
+						(endDate >= ?)
+					)
+				)
+		]]>
+	</sql>
 </custom-sql>
