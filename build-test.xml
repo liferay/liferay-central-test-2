@@ -2186,8 +2186,11 @@ file.
 			<then>
 				<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
 					<property name="plugin.types" value="hooks" />
+					<property name="plugins.deployed" value="${plugins.deployed}" />
 					<property name="plugins.includes" value="${hook.plugins.includes}" />
 				</ant>
+
+				<property name="plugins.deployed" value="true" />
 			</then>
 		</if>
 
@@ -2205,8 +2208,11 @@ file.
 			<then>
 				<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
 					<property name="plugin.types" value="portlets" />
+					<property name="plugins.deployed" value="${plugins.deployed}" />
 					<property name="plugins.includes" value="${portlet.plugins.includes}" />
 				</ant>
+
+				<property name="plugins.deployed" value="true" />
 			</then>
 		</if>
 
@@ -2225,8 +2231,11 @@ file.
 			<then>
 				<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
 					<property name="plugin.types" value="themes" />
+					<property name="plugins.deployed" value="${plugins.deployed}" />
 					<property name="plugins.includes" value="${theme.plugins.includes}" />
 				</ant>
+
+				<property name="plugins.deployed" value="true" />
 			</then>
 		</if>
 
@@ -2235,8 +2244,11 @@ file.
 			<then>
 				<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
 					<property name="plugin.types" value="webs" />
+					<property name="plugins.deployed" value="${plugins.deployed}" />
 					<property name="plugins.includes" value="${web.plugins.includes}" />
 				</ant>
+
+				<property name="plugins.deployed" value="true" />
 			</then>
 		</if>
 
