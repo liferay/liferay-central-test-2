@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.expando.model;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -133,14 +135,11 @@ public class ExpandoColumnConstants {
 				return dateFormat.parse(value);
 			}
 			catch (Exception e) {
+				_log.warn("Unable to parse date " + value, e);
 			}
 		}
 		else if (type == DATE_ARRAY) {
-			try {
-				return new Date[] {(Date)getSerializable(DATE, value)};
-			}
-			catch (Exception e) {
-			}
+			return new Date[] {(Date)getSerializable(DATE, value)};
 		}
 		else if (type == DOUBLE) {
 			return GetterUtil.getDouble(value);
@@ -231,5 +230,8 @@ public class ExpandoColumnConstants {
 
 		return UNKNOWN_LABEL;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		ExpandoColumnConstants.class);
 
 }
