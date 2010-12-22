@@ -40,6 +40,9 @@ public interface QuartzLocalService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link QuartzLocalServiceUtil} to access the quartz local service. Add custom service methods to {@link com.liferay.portal.service.impl.QuartzLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public void checkQuartzJobDetails()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void checkQuartzTables()
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

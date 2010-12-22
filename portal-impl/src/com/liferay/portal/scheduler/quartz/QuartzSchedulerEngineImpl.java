@@ -15,6 +15,7 @@
 package com.liferay.portal.scheduler.quartz;
 
 import com.liferay.portal.kernel.bean.BeanReference;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
@@ -71,6 +72,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				PropsUtil.getProperties("org.quartz.", false));
 
 			quartzLocalService.checkQuartzTables();
+			quartzLocalService.checkQuartzJobDetails();
 
 			_scheduler = schedulerFactory.getScheduler();
 
@@ -150,7 +152,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 			String description = jobDataMap.getString(DESCRIPTION);
 			String destinationName = jobDataMap.getString(DESTINATION_NAME);
-			Message message = (Message)jobDataMap.get(MESSAGE);
+			Message message = getMessage(jobDataMap);
 
 			SchedulerRequest schedulerRequest = null;
 
@@ -492,7 +494,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 			JobDataMap jobDataMap = jobDetail.getJobDataMap();
 
-			Message message = (Message)jobDataMap.get(MESSAGE);
+			Message message = getMessage(jobDataMap);
 
 			if (message.getBoolean(PERMANENT)) {
 				JobState jobStateClone = (JobState)jobState.clone();
@@ -576,7 +578,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 				JobDataMap jobDataMap = jobDetail.getJobDataMap();
 
-				Message message = (Message)jobDataMap.get(MESSAGE);
+				Message message = getMessage(jobDataMap);
 
 				if (!message.getBoolean(PERMANENT)) {
 					_scheduler.deleteJob(jobName, groupName);
@@ -598,6 +600,12 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			getFullName(jobName, groupName));
 
 		return jobState;
+	}
+
+	protected Message getMessage(JobDataMap jobDataMap) {
+		String jsonMessage = (String)jobDataMap.get(MESSAGE);
+
+		return (Message)JSONFactoryUtil.deserialize(jsonMessage);
 	}
 
 	protected Trigger getQuartzTrigger(
@@ -726,7 +734,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 		JobDataMap jobDataMap = jobDetail.getJobDataMap();
 
-		Message message = (Message)jobDataMap.get(MESSAGE);
+		Message message = getMessage(jobDataMap);
 
 		if (!message.getBoolean(PERMANENT)) {
 			return;
@@ -803,7 +811,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 			jobDataMap.put(DESCRIPTION, description);
 			jobDataMap.put(DESTINATION_NAME, destinationName);
-			jobDataMap.put(MESSAGE, message);
+			jobDataMap.put(MESSAGE, JSONFactoryUtil.serialize(message));
 
 			JobState jobState = new JobState(
 				TriggerState.NORMAL, message.getInteger(EXCEPTIONS_MAX_SIZE));

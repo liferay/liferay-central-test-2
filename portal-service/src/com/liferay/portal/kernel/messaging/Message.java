@@ -171,7 +171,7 @@ public class Message implements Serializable {
 
 	private String _destinationName;
 	private Object _payload;
-	private Object _response;
+	private transient Object _response;
 	private String _responseDestinationName;
 	private String _responseId;
 	private Map<String, Object> _values;

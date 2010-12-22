@@ -14,6 +14,7 @@
 
 package com.liferay.portal.scheduler.job;
 
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
@@ -55,10 +56,15 @@ public class MessageSenderJob implements Job {
 		String destinationName = jobDataMap.getString(
 			SchedulerEngine.DESTINATION_NAME);
 
-		Message message = (Message)jobDataMap.get(SchedulerEngine.MESSAGE);
+		String jsonMessage = (String)jobDataMap.get(SchedulerEngine.MESSAGE);
 
-		if (message == null) {
+		Message message = null;
+
+		if (jsonMessage == null) {
 			message = new Message();
+		}
+		else {
+			message = (Message)JSONFactoryUtil.deserialize(jsonMessage);
 		}
 
 		message.put(SchedulerEngine.DESTINATION_NAME, destinationName);
