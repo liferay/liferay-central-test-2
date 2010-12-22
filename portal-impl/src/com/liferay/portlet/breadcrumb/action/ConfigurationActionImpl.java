@@ -15,6 +15,7 @@
 package com.liferay.portlet.breadcrumb.action;
 
 import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
+
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;

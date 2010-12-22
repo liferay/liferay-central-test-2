@@ -14,6 +14,7 @@
 
 package com.liferay.taglib.aui;
 
+import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 import com.liferay.util.TextFormatter;
@@ -167,9 +168,10 @@ public class SelectTag extends IncludeTag {
 
 		String name = _name;
 
-		if (name.startsWith(_PREFERENCES_SUFFIX)) {
+		if (name.startsWith(BaseConfigurationAction.PREFERENCES_PREFIX)) {
 			name = name.substring(
-				_PREFERENCES_SUFFIX.length(), name.length() - 2);
+				BaseConfigurationAction.PREFERENCES_PREFIX.length(),
+				name.length() - 2);
 		}
 
 		String id = _id;
@@ -225,8 +227,6 @@ public class SelectTag extends IncludeTag {
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
 	private static final String _END_PAGE = "/html/taglib/aui/select/end.jsp";
-
-	private static final String _PREFERENCES_SUFFIX = "preferences--";
 
 	private static final String _START_PAGE =
 		"/html/taglib/aui/select/start.jsp";

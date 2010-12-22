@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Portlet;
@@ -48,10 +49,12 @@ import javax.servlet.ServletContext;
 public class BaseConfigurationAction
 	implements ConfigurationAction, ResourceServingConfigurationAction {
 
-	public String getParamProperty (ActionRequest actionRequest, String param) {
-		param = _PREFERENCES_PREFIX.concat(param).concat("--");
+	public final static String PREFERENCES_PREFIX = "preferences--";
 
-		return ParamUtil.get(actionRequest, param, null);
+	public String getParameter(PortletRequest portletRequest, String param) {
+		param = PREFERENCES_PREFIX.concat(param).concat(StringPool.DOUBLE_DASH);
+
+		return ParamUtil.getString(portletRequest, param);
 	}
 
 	public void processAction(
@@ -66,7 +69,7 @@ public class BaseConfigurationAction
 		}
 
 		UnicodeProperties properties = PropertiesParamUtil.getProperties(
-			actionRequest, _PREFERENCES_PREFIX);
+			actionRequest, PREFERENCES_PREFIX);
 
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
@@ -124,7 +127,5 @@ public class BaseConfigurationAction
 
 		return selPortletConfig;
 	}
-
-	public final static String _PREFERENCES_PREFIX = "preferences--";
 
 }

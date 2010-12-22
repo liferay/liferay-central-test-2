@@ -54,13 +54,13 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		throws Exception{
 
 		long rootFolderId = GetterUtil.getLong(
-				getParamProperty(actionRequest, "rootFolderId"));
+			getParameter(actionRequest, "rootFolderId"));
 
 		if (rootFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			try {
 				DLAppLocalServiceUtil.getFolder(rootFolderId);
 			}
-			catch (NoSuchFolderException e) {
+			catch (NoSuchFolderException nsfe) {
 				SessionErrors.add(actionRequest, "rootFolderIdInvalid");
 			}
 		}

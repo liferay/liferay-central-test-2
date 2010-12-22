@@ -62,8 +62,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 	protected void validateEmailFrom(ActionRequest actionRequest)
 		throws Exception {
 
-		String emailFromName = getParamProperty(actionRequest, "emailFromName");
-		String emailFromAddress = getParamProperty(
+		String emailFromName = getParameter(actionRequest, "emailFromName");
+		String emailFromAddress = getParameter(
 			actionRequest, "emailFromAddress");
 
 		if (Validator.isNull(emailFromName)) {
@@ -79,9 +79,9 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 	protected void validateEmailEntryAdded(ActionRequest actionRequest)
 		throws Exception {
 
-		String emailEntryAddedSubject = getParamProperty(
+		String emailEntryAddedSubject = getParameter(
 			actionRequest, "emailEntryAddedSubject");
-		String emailEntryAddedBody = getParamProperty(
+		String emailEntryAddedBody = getParameter(
 			actionRequest, "emailEntryAddedBody");
 
 		if (Validator.isNull(emailEntryAddedSubject)) {
@@ -95,9 +95,9 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 	protected void validateEmailEntryUpdated(ActionRequest actionRequest)
 		throws Exception {
 
-		String emailEntryUpdatedSubject = getParamProperty(
+		String emailEntryUpdatedSubject = getParameter(
 			actionRequest, "emailEntryUpdatedSubject");
-		String emailEntryUpdatedBody = getParamProperty(
+		String emailEntryUpdatedBody = getParameter(
 			actionRequest, "emailEntryUpdatedBody");
 
 		if (Validator.isNull(emailEntryUpdatedSubject)) {

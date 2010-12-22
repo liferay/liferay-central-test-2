@@ -50,17 +50,17 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		return "/html/portlet/bookmarks/configuration.jsp";
 	}
 
-	private void validateRootFolder(ActionRequest actionRequest)
+	protected void validateRootFolder(ActionRequest actionRequest)
 		throws Exception {
 
 		long rootFolderId = GetterUtil.getLong(
-			getParamProperty(actionRequest, "rootFolderId"));
+			getParameter(actionRequest, "rootFolderId"));
 
 		if (rootFolderId != BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			try {
 				BookmarksFolderLocalServiceUtil.getFolder(rootFolderId);
 			}
-			catch (NoSuchFolderException e) {
+			catch (NoSuchFolderException nsfe) {
 				SessionErrors.add(actionRequest, "rootFolderIdInvalid");
 			}
 		}
