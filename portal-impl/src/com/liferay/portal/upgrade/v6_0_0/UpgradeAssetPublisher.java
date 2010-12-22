@@ -15,14 +15,65 @@
 package com.liferay.portal.upgrade.v6_0_0;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.upgrade.BaseUpgradePortletPreferences;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 
 /**
  * @author Julio Camarero
+ * @author Douglas Wong
  */
 public class UpgradeAssetPublisher extends BaseUpgradePortletPreferences {
+
+	protected String[] getAssetEntryXmls(String[] manualEntries)
+		throws Exception {
+
+		String[] assetEntryXmls = new String[manualEntries.length];
+
+		for (int i = 0; i < manualEntries.length; i++) {
+			String manualEntry = manualEntries[i];
+
+			Document document = SAXReaderUtil.read(manualEntry);
+
+			Element rootElement = document.getRootElement();
+
+			Element assetIdElement = rootElement.element("asset-id");
+
+			if (Validator.isNotNull(assetIdElement)) {
+				String assetEntryId = assetIdElement.getText();
+
+				Element assetEntryIdElement = rootElement.addElement(
+					"asset-entry-id");
+
+				assetEntryIdElement.addText(assetEntryId);
+
+				rootElement.remove(assetIdElement);
+			}
+
+			Element assetTypeElement = rootElement.element("asset-type");
+
+			if (Validator.isNotNull(assetTypeElement)) {
+				String assetEntryType = assetTypeElement.getText();
+
+				Element assetEntryTypeElement = rootElement.addElement(
+					"asset-entry-type");
+
+				assetEntryTypeElement.addText(assetEntryType);
+
+				rootElement.remove(assetTypeElement);
+			}
+
+			assetEntryXmls[i] = document.formattedString(
+				StringPool.BLANK);
+		}
+
+		return assetEntryXmls;
+	}
 
 	protected String[] getPortletIds() {
 		return new String[] {"101_INSTANCE_%"};
@@ -93,6 +144,19 @@ public class UpgradeAssetPublisher extends BaseUpgradePortletPreferences {
 			preferences.setValues("queryValues" + i, notAssetTagNames);
 
 			i++;
+		}
+
+		String selectionStyle = preferences.getValue("selection-style", null);
+
+		if (Validator.isNotNull(selectionStyle) &&
+			!selectionStyle.equals("dynamic")) {
+
+			String[] manualEntries = preferences.getValues(
+				"manual-entries", new String[0]);
+
+			String[] assetEntryXmls = getAssetEntryXmls(manualEntries);
+
+			preferences.setValues("asset-entry-xml", assetEntryXmls);
 		}
 
 		return PortletPreferencesSerializer.toXML(preferences);
