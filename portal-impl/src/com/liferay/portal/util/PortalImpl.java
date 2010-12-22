@@ -1804,7 +1804,7 @@ public class PortalImpl implements Portal {
 
 		if (group.isLayout()) {
 			long parentGroupId = group.getParentGroupId();
-			
+
 			if (parentGroupId > 0) {
 				group = GroupLocalServiceUtil.getGroup(parentGroupId);
 			}
