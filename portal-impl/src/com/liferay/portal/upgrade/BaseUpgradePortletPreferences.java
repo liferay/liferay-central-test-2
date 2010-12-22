@@ -42,9 +42,7 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 		updatePortletPreferences();
 	}
 
-	protected Object[] getGroup(long groupId)
-		throws Exception {
-
+	protected Object[] getGroup(long groupId) throws Exception {
 		Object[] group = null;
 
 		Connection con = null;
@@ -206,19 +204,24 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 				String portletId = rs.getString("portletId");
 				String preferences = rs.getString("preferences");
 
-				Object[] context = null;
+				long companyId = 0;
 
 				if (ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP) {
-					context = getGroup(ownerId);
+					Object[] group = getGroup(ownerId);
+
+					if (group != null) {
+						companyId = group[1];
+					}
 				}
 				else {
-					context = getLayout(plid);
+					Object[] layout = getLayout(plid);
+
+					if (layout != null) {
+						companyId = layout[1];
+					}
 				}
 
-
-				if (context != null) {
-					long companyId = (Long)context[1];
-
+				if (companyId > 0) {
 					String newPreferences = upgradePreferences(
 						companyId, ownerId, ownerType, plid, portletId,
 						preferences);
