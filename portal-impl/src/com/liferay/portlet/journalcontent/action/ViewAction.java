@@ -54,7 +54,7 @@ public class ViewAction extends WebContentAction {
 
 		if (groupId <= 0) {
 			groupId = GetterUtil.getLong(
-				preferences.getValue("group-id", StringPool.BLANK));
+				preferences.getValue("groupId", StringPool.BLANK));
 		}
 
 		String articleId = ParamUtil.getString(renderRequest, "articleId");
@@ -62,9 +62,9 @@ public class ViewAction extends WebContentAction {
 
 		if (Validator.isNull(articleId)) {
 			articleId = GetterUtil.getString(
-				preferences.getValue("article-id", StringPool.BLANK));
+				preferences.getValue("articleId", StringPool.BLANK));
 			templateId = GetterUtil.getString(
-				preferences.getValue("template-id", StringPool.BLANK));
+				preferences.getValue("templateId", StringPool.BLANK));
 		}
 
 		String viewMode = ParamUtil.getString(renderRequest, "viewMode");

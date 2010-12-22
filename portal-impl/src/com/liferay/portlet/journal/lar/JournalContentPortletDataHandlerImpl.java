@@ -95,8 +95,8 @@ public class JournalContentPortletDataHandlerImpl
 			PortletPreferences portletPreferences)
 		throws Exception {
 
-		portletPreferences.setValue("group-id", StringPool.BLANK);
-		portletPreferences.setValue("article-id", StringPool.BLANK);
+		portletPreferences.setValue("groupId", StringPool.BLANK);
+		portletPreferences.setValue("articleId", StringPool.BLANK);
 
 		return portletPreferences;
 	}
@@ -110,7 +110,7 @@ public class JournalContentPortletDataHandlerImpl
 			"com.liferay.portlet.journal",
 			portletDataContext.getScopeGroupId());
 
-		String articleId = portletPreferences.getValue("article-id", null);
+		String articleId = portletPreferences.getValue("articleId", null);
 
 		if (articleId == null) {
 			if (_log.isWarnEnabled()) {
@@ -123,7 +123,7 @@ public class JournalContentPortletDataHandlerImpl
 		}
 
 		long articleGroupId = GetterUtil.getLong(
-			portletPreferences.getValue("group-id", StringPool.BLANK));
+			portletPreferences.getValue("groupId", StringPool.BLANK));
 
 		if (articleGroupId <= 0) {
 			if (_log.isWarnEnabled()) {
@@ -281,7 +281,7 @@ public class JournalContentPortletDataHandlerImpl
 				portletDataContext, articleElement);
 		}
 
-		String articleId = portletPreferences.getValue("article-id", null);
+		String articleId = portletPreferences.getValue("articleId", null);
 
 		if (Validator.isNotNull(articleId)) {
 			Map<String, String> articleIds =
@@ -291,9 +291,9 @@ public class JournalContentPortletDataHandlerImpl
 			articleId = MapUtil.getString(articleIds, articleId, articleId);
 
 			portletPreferences.setValue(
-				"group-id",
+				"groupId",
 				String.valueOf(portletDataContext.getScopeGroupId()));
-			portletPreferences.setValue("article-id", articleId);
+			portletPreferences.setValue("articleId", articleId);
 
 			Layout layout = LayoutLocalServiceUtil.getLayout(
 				portletDataContext.getPlid());
@@ -303,7 +303,7 @@ public class JournalContentPortletDataHandlerImpl
 				layout.getLayoutId(), portletId, articleId, true);
 		}
 
-		String templateId = portletPreferences.getValue("template-id", null);
+		String templateId = portletPreferences.getValue("templateId", null);
 
 		if (Validator.isNotNull(templateId)) {
 			Map<String, String> templateIds =
@@ -312,7 +312,7 @@ public class JournalContentPortletDataHandlerImpl
 
 			templateId = MapUtil.getString(templateIds, templateId, templateId);
 
-			portletPreferences.setValue("template-id", templateId);
+			portletPreferences.setValue("templateId", templateId);
 		}
 
 		return portletPreferences;

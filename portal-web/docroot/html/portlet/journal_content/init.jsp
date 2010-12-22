@@ -52,23 +52,23 @@ if (Validator.isNotNull(portletResource)) {
 long groupId = ParamUtil.getLong(renderRequest, "groupId");
 
 if (groupId <= 0) {
-	groupId = GetterUtil.getLong(preferences.getValue("group-id", scopeGroupId.toString()));
+	groupId = GetterUtil.getLong(preferences.getValue("groupId", scopeGroupId.toString()));
 }
 
 String articleId = ParamUtil.getString(renderRequest, "articleId");
 String templateId = ParamUtil.getString(renderRequest, "templateId");
 
 if (Validator.isNull(articleId)) {
-	articleId = GetterUtil.getString(preferences.getValue("article-id", StringPool.BLANK));
-	templateId = GetterUtil.getString(preferences.getValue("template-id", StringPool.BLANK));
+	articleId = GetterUtil.getString(preferences.getValue("articleId", StringPool.BLANK));
+	templateId = GetterUtil.getString(preferences.getValue("templateId", StringPool.BLANK));
 }
 
-boolean showAvailableLocales = GetterUtil.getBoolean(preferences.getValue("show-available-locales", StringPool.BLANK));
+boolean showAvailableLocales = GetterUtil.getBoolean(preferences.getValue("showAvailableLocales", StringPool.BLANK));
 String[] extensions = preferences.getValues("extensions", null);
-boolean enablePrint = GetterUtil.getBoolean(preferences.getValue("enable-print", null));
-boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enable-ratings", null));
-boolean enableComments = PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enable-comments", null));
-boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null));
+boolean enablePrint = GetterUtil.getBoolean(preferences.getValue("enablePrint", null));
+boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enableRatings", null));
+boolean enableComments = PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enableComments", null));
+boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enableCommentRatings", null));
 
 String[] conversions = DocumentConversionUtil.getConversions("html");
 

@@ -212,9 +212,9 @@ type = ParamUtil.getString(request, "type", type);
 <aui:form action="<%= configurationURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value='<%= portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur" + cur %>' />
-	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
-	<aui:input name="articleId" type="hidden" value="<%= articleId %>" />
-	<aui:input name="templateId" type="hidden" value="<%= templateId %>" />
+	<aui:input name="preferences--groupId--" type="hidden" value="<%= groupId %>" />
+	<aui:input name="preferences--articleId--" type="hidden" value="<%= articleId %>" />
+	<aui:input name="preferences--templateId--" type="hidden" value="<%= templateId %>" />
 
 	<aui:fieldset cssClass="aui-helper-hidden">
 		<aui:field-wrapper label="portlet-id">
@@ -225,7 +225,7 @@ type = ParamUtil.getString(request, "type", type);
 	<br />
 
 	<aui:fieldset>
-		<aui:input inlineLabel="left" name="showAvailableLocales" type="checkbox" value="<%= showAvailableLocales %>" />
+		<aui:input name="preferences--showAvailableLocales--" type="checkbox" value="<%= showAvailableLocales %>" />
 
 		<aui:field-wrapper helpMessage='<%= !openOfficeServerEnabled ? "enabling-openoffice-integration-provides-document-conversion-functionality" : StringPool.BLANK %>' label="enable-conversion-to">
 
@@ -243,14 +243,14 @@ type = ParamUtil.getString(request, "type", type);
 
 		</aui:field-wrapper>
 
-		<aui:input inlineLabel="left" name="enablePrint" type="checkbox" value="<%= enablePrint %>" />
+		<aui:input name="preferences--enablePrint--" type="checkbox" value="<%= enablePrint %>" />
 
-		<aui:input inlineLabel="left" name="enableRatings" type="checkbox" value="<%= enableRatings %>" />
+		<aui:input name="preferences--enableRatings--" type="checkbox" value="<%= enableRatings %>" />
 
 		<c:if test="<%= PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED %>">
-			<aui:input inlineLabel="left" name="enableComments" type="checkbox" value="<%= enableComments %>" />
+			<aui:input name="preferences--enableComments--" type="checkbox" value="<%= enableComments %>" />
 
-			<aui:input inlineLabel="left" name="enableCommentRatings" type="checkbox" value="<%= enableCommentRatings %>" />
+			<aui:input name="preferences--enableCommentRatings--" type="checkbox" value="<%= enableCommentRatings %>" />
 		</c:if>
 	</aui:fieldset>
 

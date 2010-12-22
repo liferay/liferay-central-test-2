@@ -57,7 +57,7 @@ public class WebContentAction extends PortletAction {
 
 		if (groupId < 1) {
 			groupId = GetterUtil.getLong(
-				preferences.getValue("group-id", StringPool.BLANK));
+				preferences.getValue("groupId", StringPool.BLANK));
 		}
 
 		String articleId = ParamUtil.getString(actionRequest, "articleId");
@@ -65,9 +65,9 @@ public class WebContentAction extends PortletAction {
 
 		if (Validator.isNull(articleId)) {
 			articleId = GetterUtil.getString(
-				preferences.getValue("article-id", StringPool.BLANK));
+				preferences.getValue("articleId", StringPool.BLANK));
 			templateId = GetterUtil.getString(
-				preferences.getValue("template-id", StringPool.BLANK));
+				preferences.getValue("templateId", StringPool.BLANK));
 		}
 
 		String viewMode = ParamUtil.getString(actionRequest, "viewMode");
@@ -112,7 +112,7 @@ public class WebContentAction extends PortletAction {
 
 			if (groupId < 1) {
 				groupId = GetterUtil.getLong(
-					preferences.getValue("group-id", StringPool.BLANK));
+					preferences.getValue("groupId", StringPool.BLANK));
 			}
 
 			String articleId = ParamUtil.getString(
@@ -122,9 +122,9 @@ public class WebContentAction extends PortletAction {
 
 			if (Validator.isNull(articleId)) {
 				articleId = GetterUtil.getString(
-					preferences.getValue("article-id", StringPool.BLANK));
+					preferences.getValue("articleId", StringPool.BLANK));
 				templateId = GetterUtil.getString(
-					preferences.getValue("template-id", StringPool.BLANK));
+					preferences.getValue("templateId", StringPool.BLANK));
 			}
 
 			String viewMode = ParamUtil.getString(resourceRequest, "viewMode");
