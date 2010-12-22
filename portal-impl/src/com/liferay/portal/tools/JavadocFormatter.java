@@ -250,12 +250,9 @@ public class JavadocFormatter {
 				else {
 					comment = _wrapText(comment, indent + nameIndent);
 
-					String extraSpace = _getSpacesIndent(
-						maxNameLength - name.length() - 1);
+					String firstLine = indent + "@" + name;
 
-					comment = comment.replaceFirst(
-						Pattern.quote(indent + nameIndent),
-						indent + "@" + name + extraSpace);
+					comment = firstLine + comment.substring(firstLine.length());
 
 					sb.append(comment);
 				}
@@ -442,6 +439,10 @@ public class JavadocFormatter {
 		while (matcher.find()) {
 			String trimmed = _trimMultilineText(matcher.group());
 
+			// Escape dollar signs so they aren't treated as replacement groups
+
+			trimmed = trimmed.replaceAll("\\$", "\\\\\\$");
+
 			matcher.appendReplacement(sb, trimmed);
 		}
 
@@ -482,6 +483,10 @@ public class JavadocFormatter {
 
 		if (pos == -1) {
 			pos = fileName.indexOf("test/");
+		}
+
+		if (pos == -1) {
+			pos = fileName.indexOf("service/");
 		}
 
 		if (pos == -1) {
@@ -853,8 +858,7 @@ public class JavadocFormatter {
 
 		// Capitalize ID
 
-		text = text.replaceAll("(?i)\\bid\\b", "ID");
-		text = text.replaceAll("(?i)\\bids\\b", "IDs");
+		text = text.replaceAll("(?i)\\bid(s)?\\b", "ID$1");
 
 		// Wrap special constants in code tags
 
