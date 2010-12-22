@@ -144,7 +144,7 @@
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
 
-		<action path="/admin_server/edit_document_library_extra_settings" type="com.liferay.portal.convert.action.EdittDocumentLibraryExtraSettingsAction">
+		<action path="/admin_server/edit_document_library_extra_settings" type="com.liferay.portal.convert.action.EditDocumentLibraryExtraSettingsAction">
 			<forward name="portlet.admin.edit_document_library_extra_settings" path="portlet.admin.edit_document_library_extra_settings" />
 			<forward name="portlet.admin.error" path="portlet.admin.error" />
 		</action>

@@ -59,8 +59,10 @@ import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.comparator.FileEntryModifiedDateComparator;
 import com.liferay.portlet.documentlibrary.util.comparator.FileVersionVersionComparator;
 import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 
 import java.io.InputStream;
+import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -1090,7 +1092,12 @@ public class DLRepositoryLocalServiceImpl
 			String value = extraSettingsProperties.remove(key);
 
 			if (Validator.isNotNull(value)) {
-				expandoBridge.setAttribute(key, value);
+				int type = expandoBridge.getAttributeType(key);
+
+				Serializable serializedValue =
+					ExpandoColumnConstants.getSerializable(type, value);
+
+				expandoBridge.setAttribute(key, serializedValue);
 			}
 		}
 	}

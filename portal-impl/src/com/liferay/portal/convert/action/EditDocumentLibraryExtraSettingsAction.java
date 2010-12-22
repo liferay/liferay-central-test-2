@@ -39,7 +39,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Alexander Chow
  */
-public class EdittDocumentLibraryExtraSettingsAction extends EditExpandoAction {
+public class EditDocumentLibraryExtraSettingsAction extends EditExpandoAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
@@ -61,7 +61,9 @@ public class EdittDocumentLibraryExtraSettingsAction extends EditExpandoAction {
 		throws Exception {
 
 		return mapping.findForward(
-			getForward(renderRequest, "portlet.admin.edit_extra_settings"));
+			getForward(
+				renderRequest,
+				"portlet.admin.edit_document_library_extra_settings"));
 	}
 
 	protected int addCustomField(long companyId, String name, String preset)

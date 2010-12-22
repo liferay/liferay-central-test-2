@@ -14,8 +14,12 @@
 
 package com.liferay.portlet.expando.model;
 
+import java.io.Serializable;
+import java.util.Date;
+
 /**
  * @author Raymond Augé
+ * @author Alexander Chow
  */
 public class ExpandoColumnConstants {
 
@@ -107,6 +111,57 @@ public class ExpandoColumnConstants {
 
 	public static final String UNKNOWN_LABEL = "Unknown";
 
+	public static final Serializable getSerializable(int type, String value) {
+		if (type == BOOLEAN) {
+			return Boolean.parseBoolean(value);
+		}
+		else if (type == BOOLEAN_ARRAY) {
+			return new Boolean[] {Boolean.parseBoolean(value)};
+		}
+		else if (type == DATE) {
+			return new Date(value);
+		}
+		else if (type == DATE_ARRAY) {
+			return new Date[] {new Date(value)};
+		}
+		else if (type == DOUBLE) {
+			return Double.parseDouble(value);
+		}
+		else if (type == DOUBLE_ARRAY) {
+			return new double[] {Double.parseDouble(value)};
+		}
+		else if (type == FLOAT) {
+			return Float.parseFloat(value);
+		}
+		else if (type == FLOAT_ARRAY) {
+			return new float[] {Float.parseFloat(value)};
+		}
+		else if (type == INTEGER) {
+			return Integer.parseInt(value);
+		}
+		else if (type == INTEGER_ARRAY) {
+			return new int[] {Integer.parseInt(value)};
+		}
+		else if (type == LONG) {
+			return Long.parseLong(value);
+		}
+		else if (type == LONG_ARRAY) {
+			return new long[] {Long.parseLong(value)};
+		}
+		else if (type == SHORT) {
+			return Short.parseShort(value);
+		}
+		else if (type == SHORT_ARRAY) {
+			return new short[] {Short.parseShort(value)};
+		}
+		else if (type == STRING_ARRAY) {
+			return new String[] {value};
+		}
+		else {
+			return value;
+		}
+	}
+	
 	public static final String getTypeLabel(int type) {
 		if (type == BOOLEAN) {
 			return BOOLEAN_LABEL;
