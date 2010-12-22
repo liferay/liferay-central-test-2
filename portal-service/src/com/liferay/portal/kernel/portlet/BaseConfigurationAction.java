@@ -59,12 +59,12 @@ public class BaseConfigurationAction
 		return ParamUtil.getString(portletRequest, param);
 	}
 
-	public void setPreference(String name, String[] value) {
+	public void setPreference(String name, String[] values) {
 		if (_customPreferences == null) {
 			_customPreferences = new HashMap<String, String[]>();
 		}
 
-		_customPreferences.put(name, value);
+		_customPreferences.put(name, values);
 	}
 
 	public void setPreference(String name, String value) {

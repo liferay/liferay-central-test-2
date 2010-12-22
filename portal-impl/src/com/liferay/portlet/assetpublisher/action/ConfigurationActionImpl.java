@@ -17,7 +17,6 @@ package com.liferay.portlet.assetpublisher.action;
 import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -48,58 +47,61 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		try {
-			String portletResource = ParamUtil.getString(
-				actionRequest, "portletResource");
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
 
-			PortletPreferences preferences =
-				PortletPreferencesFactoryUtil.getPortletSetup(
-					actionRequest, portletResource);
+		PortletPreferences preferences =
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
 
-			if (cmd.equals("add-selection")) {
-				AssetPublisherUtil.addSelection(actionRequest, preferences);
-			}
-			else if (cmd.equals("move-selection-down")) {
-				moveSelectionDown(actionRequest, preferences);
-			}
-			else if (cmd.equals("move-selection-up")) {
-				moveSelectionUp(actionRequest, preferences);
-			}
-			else if (cmd.equals("remove-selection")) {
-				removeSelection(actionRequest, preferences);
-			}
-			else if (cmd.equals("selection-style")) {
-				setSelectionStyle(actionRequest, preferences);
-			}
-			else if (cmd.equals(Constants.UPDATE)) {
-				String selectionStyle = preferences.getValue(
-					"selection-style", "dynamic");
+		if (cmd.equals(Constants.UPDATE)) {
+			updateDisplaySettings(actionRequest);
 
-				if (selectionStyle.equals("dynamic")) {
-					updateDynamicSettings(actionRequest, preferences);
-				}
-				else if (selectionStyle.equals("manual")) {
-					updateManualSettings(actionRequest, preferences);
-				}
+			String selectionStyle = getParameter(
+				actionRequest, "selectionStyle");
+
+			if (selectionStyle.equals("dynamic")) {
+				updateQueryLogic(actionRequest, preferences);
 			}
 
-			if (SessionErrors.isEmpty(actionRequest)) {
-				preferences.store();
-
-				SessionMessages.add(
-					actionRequest,
-					portletConfig.getPortletName() + ".doConfigure");
-			}
-
-			actionResponse.sendRedirect(
-				ParamUtil.getString(actionRequest, "redirect"));
+			super.processAction(portletConfig, actionRequest, actionResponse);
 		}
-		catch (Exception e) {
-			if (e instanceof AssetTagException) {
-				SessionErrors.add(actionRequest, e.getClass().getName(), e);
+		else {
+			try {
+				if (cmd.equals("add-selection")) {
+					AssetPublisherUtil.addSelection(actionRequest, preferences);
+				}
+				else if (cmd.equals("move-selection-down")) {
+					moveSelectionDown(actionRequest, preferences);
+				}
+				else if (cmd.equals("move-selection-up")) {
+					moveSelectionUp(actionRequest, preferences);
+				}
+				else if (cmd.equals("remove-selection")) {
+					removeSelection(actionRequest, preferences);
+				}
+				else if (cmd.equals("selection-style")) {
+					setSelectionStyle(actionRequest, preferences);
+				}
+
+				if (SessionErrors.isEmpty(actionRequest)) {
+					preferences.store();
+
+					SessionMessages.add(
+						actionRequest,
+						portletConfig.getPortletName() + ".doConfigure");
+				}
+
+				actionResponse.sendRedirect(
+					ParamUtil.getString(actionRequest, "redirect"));
 			}
-			else {
-				throw e;
+			catch (Exception e) {
+				if (e instanceof AssetTagException) {
+					SessionErrors.add(actionRequest, e.getClass().getName(), e);
+				}
+				else {
+					throw e;
+				}
 			}
 		}
 	}
@@ -120,7 +122,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			actionRequest, "assetEntryOrder");
 
 		String[] manualEntries = preferences.getValues(
-			"asset-entry-xml", new String[0]);
+			"assetEntryXml", new String[0]);
 
 		if ((assetEntryOrder >= (manualEntries.length - 1)) ||
 			(assetEntryOrder < 0)) {
@@ -133,7 +135,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		manualEntries[assetEntryOrder + 1] = manualEntries[assetEntryOrder];
 		manualEntries[assetEntryOrder] = temp;
 
-		preferences.setValues("asset-entry-xml", manualEntries);
+		preferences.setValues("assetEntryXml", manualEntries);
 	}
 
 	protected void moveSelectionUp(
@@ -144,7 +146,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			actionRequest, "assetEntryOrder");
 
 		String[] manualEntries = preferences.getValues(
-			"asset-entry-xml", new String[0]);
+			"assetEntryXml", new String[0]);
 
 		if ((assetEntryOrder >= manualEntries.length) ||
 			(assetEntryOrder <= 0)) {
@@ -157,7 +159,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		manualEntries[assetEntryOrder - 1] = manualEntries[assetEntryOrder];
 		manualEntries[assetEntryOrder] = temp;
 
-		preferences.setValues("asset-entry-xml", manualEntries);
+		preferences.setValues("assetEntryXml", manualEntries);
 	}
 
 	protected void removeSelection(
@@ -168,7 +170,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			actionRequest, "assetEntryOrder");
 
 		String[] manualEntries = preferences.getValues(
-			"asset-entry-xml", new String[0]);
+			"assetEntryXml", new String[0]);
 
 		if (assetEntryOrder >= manualEntries.length) {
 			return;
@@ -185,164 +187,45 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			}
 		}
 
-		preferences.setValues("asset-entry-xml", newEntries);
+		preferences.setValues("assetEntryXml", newEntries);
 	}
 
 	protected void setSelectionStyle(
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		String selectionStyle = ParamUtil.getString(
-			actionRequest, "selectionStyle");
-		String displayStyle = ParamUtil.getString(
-			actionRequest, "displayStyle");
+		String selectionStyle = getParameter(actionRequest, "selectionStyle");
+		String displayStyle = getParameter(actionRequest, "displayStyle");
 
-		preferences.setValue("selection-style", selectionStyle);
+		preferences.setValue("selectionStyle", selectionStyle);
 
 		if (selectionStyle.equals("manual") ||
 			selectionStyle.equals("view-count")) {
 
-			preferences.setValue("show-query-logic", String.valueOf(false));
+			preferences.setValue("showQueryLogic", String.valueOf(false));
 		}
 
 		if (!selectionStyle.equals("view-count") &&
 			displayStyle.equals("view-count-details")) {
 
-			preferences.setValue("display-style", "full-content");
+			preferences.setValue("displayStyle", "full-content");
 		}
 	}
 
-	protected void updateDynamicSettings(
-			ActionRequest actionRequest, PortletPreferences preferences)
+	protected void updateDisplaySettings(ActionRequest actionRequest)
 		throws Exception {
 
-		updateDisplaySettings(actionRequest, preferences);
-		updateQueryLogic(actionRequest, preferences);
-		updateRssSettings(actionRequest, preferences);
+		String[] classNameIds = StringUtil.split(
+			getParameter(actionRequest, "classNameIds"));
 
-		boolean mergeUrlTags = ParamUtil.getBoolean(
-			actionRequest, "mergeUrlTags");
-		boolean defaultScope = ParamUtil.getBoolean(
-			actionRequest, "defaultScope");
-		String[] scopeIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "scopeIds"));
-		long assetVocabularyId = ParamUtil.getLong(
-			actionRequest, "assetVocabularyId");
-		String orderByColumn1 = ParamUtil.getString(
-			actionRequest, "orderByColumn1");
-		String orderByColumn2 = ParamUtil.getString(
-			actionRequest, "orderByColumn2");
-		String orderByType1 = ParamUtil.getString(
-			actionRequest, "orderByType1");
-		String orderByType2 = ParamUtil.getString(
-			actionRequest, "orderByType2");
-		boolean excludeZeroViewCount = ParamUtil.getBoolean(
-			actionRequest, "excludeZeroViewCount");
-		boolean showQueryLogic = ParamUtil.getBoolean(
-			actionRequest, "showQueryLogic");
-		int delta = ParamUtil.getInteger(actionRequest, "delta");
-		String paginationType = ParamUtil.getString(
-			actionRequest, "paginationType");
 		String[] extensions = actionRequest.getParameterValues("extensions");
 
-		preferences.setValue("selection-style", "dynamic");
-		preferences.setValue("merge-url-tags", String.valueOf(mergeUrlTags));
-		preferences.setValue("default-scope", String.valueOf(defaultScope));
-		preferences.setValues("scope-ids", ArrayUtil.toStringArray(scopeIds));
-		preferences.setValue(
-			"asset-vocabulary-id", String.valueOf(assetVocabularyId));
-		preferences.setValue("order-by-column-1", orderByColumn1);
-		preferences.setValue("order-by-column-2", orderByColumn2);
-		preferences.setValue("order-by-type-1", orderByType1);
-		preferences.setValue("order-by-type-2", orderByType2);
-		preferences.setValue(
-			"exclude-zero-view-count", String.valueOf(excludeZeroViewCount));
-		preferences.setValue(
-			"show-query-logic", String.valueOf(showQueryLogic));
-		preferences.setValue("delta", String.valueOf(delta));
-		preferences.setValue("pagination-type", paginationType);
-		preferences.setValues("extensions", extensions);
-	}
-
-	protected void updateManualSettings(
-			ActionRequest actionRequest, PortletPreferences preferences)
-		throws Exception {
-
-		updateDisplaySettings(actionRequest, preferences);
-		updateRssSettings(actionRequest, preferences);
-
-		boolean defaultScope = ParamUtil.getBoolean(
-			actionRequest, "defaultScope");
 		String[] scopeIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "scopeIds"));
+			getParameter(actionRequest, "scopeIds"));
 
-		preferences.setValue("default-scope", String.valueOf(defaultScope));
-		preferences.setValues("scope-ids", ArrayUtil.toStringArray(scopeIds));
-	}
-
-	protected void updateDisplaySettings(
-			ActionRequest actionRequest, PortletPreferences preferences)
-		throws Exception {
-
-		String displayStyle = ParamUtil.getString(
-			actionRequest, "displayStyle");
-		boolean anyAssetType = ParamUtil.getBoolean(
-			actionRequest, "anyAssetType");
-		long[] classNameIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "classNameIds"), 0L);
-		String[] scopeIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "scopeIds"));
-		boolean showAssetTitle = ParamUtil.getBoolean(
-			actionRequest, "showAssetTitle");
-		boolean showContextLink = ParamUtil.getBoolean(
-			actionRequest, "showContextLink");
-		int abstractLength = ParamUtil.getInteger(
-			actionRequest, "abstractLength");
-		String assetLinkBehaviour = ParamUtil.getString(
-			actionRequest, "assetLinkBehaviour");
-		boolean showAvailableLocales = ParamUtil.getBoolean(
-			actionRequest, "showAvailableLocales");
-		String[] extensions = actionRequest.getParameterValues("extensions");
-		boolean enablePrint = ParamUtil.getBoolean(
-			actionRequest, "enablePrint");
-		boolean enableFlags = ParamUtil.getBoolean(
-			actionRequest, "enableFlags");
-		boolean enableRatings = ParamUtil.getBoolean(
-			actionRequest, "enableRatings");
-		boolean enableComments = ParamUtil.getBoolean(
-			actionRequest, "enableComments");
-		boolean enableCommentRatings = ParamUtil.getBoolean(
-			actionRequest, "enableCommentRatings");
-		boolean enableTagBasedNavigation = ParamUtil.getBoolean(
-			actionRequest, "enableTagBasedNavigation");
-		String medatadaFields = ParamUtil.getString(
-			actionRequest, "metadataFields");
-
-		preferences.setValue("selection-style", "manual");
-		preferences.setValue("display-style", displayStyle);
-		preferences.setValue("any-asset-type", String.valueOf(anyAssetType));
-		preferences.setValues(
-			"class-name-ids", ArrayUtil.toStringArray(classNameIds));
-		preferences.setValues("scope-ids", ArrayUtil.toStringArray(scopeIds));
-		preferences.setValue(
-			"show-asset-title", String.valueOf(showAssetTitle));
-		preferences.setValue(
-			"show-context-link", String.valueOf(showContextLink));
-		preferences.setValue("abstract-length", String.valueOf(abstractLength));
-		preferences.setValue("asset-link-behaviour", assetLinkBehaviour);
-		preferences.setValue(
-			"show-available-locales", String.valueOf(showAvailableLocales));
-		preferences.setValues("extensions", extensions);
-		preferences.setValue("enable-print", String.valueOf(enablePrint));
-		preferences.setValue("enable-flags", String.valueOf(enableFlags));
-		preferences.setValue("enable-ratings", String.valueOf(enableRatings));
-		preferences.setValue("enable-comments", String.valueOf(enableComments));
-		preferences.setValue(
-			"enable-comment-ratings", String.valueOf(enableCommentRatings));
-		preferences.setValue(
-			"enable-tag-based-navigation",
-			String.valueOf(enableTagBasedNavigation));
-		preferences.setValue("metadata-fields", medatadaFields);
+		setPreference("classNameIds", classNameIds);
+		setPreference("extensions", extensions);
+		setPreference("scopeIds", scopeIds);
 	}
 
 	protected void updateQueryLogic(
@@ -381,11 +264,11 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 					actionRequest, "queryCategoryIds" + queryRulesIndex));
 			}
 
-			preferences.setValue("queryContains" + i, String.valueOf(contains));
-			preferences.setValue(
+			setPreference("queryContains" + i, String.valueOf(contains));
+			setPreference(
 				"queryAndOperator" + i, String.valueOf(andOperator));
-			preferences.setValue("queryName" + i, name);
-			preferences.setValues("queryValues" + i, values);
+			setPreference("queryName" + i, name);
+			setPreference("queryValues" + i, values);
 
 			i++;
 		}
@@ -396,34 +279,15 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			"queryValues" + i, new String[0]);
 
 		while (values.length > 0) {
-			preferences.setValue("queryContains" + i, StringPool.BLANK);
-			preferences.setValue("queryAndOperator" + i, StringPool.BLANK);
-			preferences.setValue("queryName" + i, StringPool.BLANK);
-			preferences.setValues("queryValues" + i, new String[0]);
+			setPreference("queryContains" + i, StringPool.BLANK);
+			setPreference("queryAndOperator" + i, StringPool.BLANK);
+			setPreference("queryName" + i, StringPool.BLANK);
+			setPreference("queryValues" + i, new String[0]);
 
 			i++;
 
 			values = preferences.getValues("queryValues" + i, new String[0]);
 		}
-	}
-
-	protected void updateRssSettings(
-			ActionRequest actionRequest, PortletPreferences preferences)
-		throws Exception {
-
-		boolean enableRSS = ParamUtil.getBoolean(
-			actionRequest, "enableRSS");
-		int rssDelta = ParamUtil.getInteger(actionRequest, "rssDelta");
-		String rssDisplayStyle = ParamUtil.getString(
-			actionRequest, "rssDisplayStyle");
-		String rssFormat = ParamUtil.getString(actionRequest, "rssFormat");
-		String rssName = ParamUtil.getString(actionRequest, "rssName");
-
-		preferences.setValue("enable-rss", String.valueOf(enableRSS));
-		preferences.setValue("rss-delta", String.valueOf(rssDelta));
-		preferences.setValue("rss-display-style", rssDisplayStyle);
-		preferences.setValue("rss-format", rssFormat);
-		preferences.setValue("rss-name", rssName);
 	}
 
 }

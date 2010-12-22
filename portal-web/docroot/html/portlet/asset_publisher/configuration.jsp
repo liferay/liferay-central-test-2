@@ -39,22 +39,22 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 	<aui:input name="typeSelection" type="hidden" />
 	<aui:input name="assetEntryId" type="hidden" />
 	<aui:input name="assetParentId" type="hidden" />
-	<aui:input name="assetTitle" type="hidden" />
+	<aui:input name="preferences--assetTitle--" type="hidden" />
 	<aui:input name="assetEntryOrder" type="hidden" value="-1" />
 
 	<c:if test="<%= typeSelection.equals(StringPool.BLANK) %>">
-		<aui:select label="asset-selection" name="selectionStyle" onChange='<%= renderResponse.getNamespace() + "chooseSelectionStyle();" %>'>
+		<aui:select label="asset-selection" name="preferences--selectionStyle--" onChange='<%= renderResponse.getNamespace() + "chooseSelectionStyle();" %>'>
 			<aui:option label="dynamic" selected='<%= selectionStyle.equals("dynamic") %>'/>
 			<aui:option label="manual" selected='<%= selectionStyle.equals("manual") %>'/>
 		</aui:select>
 
 		<liferay-util:buffer var="selectAssetTypeInput">
-			<aui:select label='<%= selectionStyle.equals("manual") ? "asset-type" : StringPool.BLANK %>' name="anyAssetType">
+			<aui:select label='<%= selectionStyle.equals("manual") ? "asset-type" : StringPool.BLANK %>' name="preferences--anyAssetType--">
 				<aui:option label="any" selected="<%= anyAssetType %>" value="<%= true %>" />
 				<aui:option label='<%= LanguageUtil.get(pageContext, "filter[action]") + "..." %>' selected="<%= !anyAssetType %>" value="<%= false %>" />
 			</aui:select>
 
-			<aui:input name="classNameIds" type="hidden" />
+			<aui:input name="preferences--classNameIds--" type="hidden" />
 
 			<%
 			Set<Long> availableClassNameIdsSet = SetUtil.fromArray(availableClassNameIds);
@@ -100,12 +100,12 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 		</liferay-util:buffer>
 
 		<liferay-util:buffer var="selectScope">
-			<aui:select label="" name="defaultScope">
+			<aui:select label="" name="preferences--defaultScope--">
 				<aui:option label="<%= _getName(scopeGroup, pageContext) %>" selected="<%= defaultScope %>" value="<%= true %>" />
 				<aui:option label='<%= LanguageUtil.get(pageContext,"select") + "..." %>' selected="<%= !defaultScope %>" value="<%= false %>" />
 			</aui:select>
 
-			<aui:input name="scopeIds" type="hidden" />
+			<aui:input name="preferences--scopeIds--" type="hidden" />
 
 			<%
 			Set<Group> groups = new HashSet<Group>();
@@ -425,7 +425,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 							</aui:fieldset>
 						</div>
 
-						<aui:input inlineLabel="left" label="include-tags-specified-in-the-url" name="mergeUrlTags" type="checkbox" value="<%= mergeUrlTags %>" />
+						<aui:input label="include-tags-specified-in-the-url" name="preferences--mergeUrlTags--" type="checkbox" value="<%= mergeUrlTags %>" />
 
 						<aui:script use="liferay-auto-fields">
 							var autoFields = new Liferay.AutoFields(
@@ -442,7 +442,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="assetPublisherOrderingAndGroupingPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "ordering-and-grouping") %>'>
 						<aui:fieldset>
 							<span class="aui-field-row">
-								<aui:select inlineField="<%= true %>" inlineLabel="left" label="order-by" name="orderByColumn1">
+								<aui:select inlineField="<%= true %>" inlineLabel="left" label="order-by" name="preferences--orderByColumn1--">
 									<aui:option label="title" selected='<%= orderByColumn1.equals("title") %>' />
 									<aui:option label="create-date" selected='<%= orderByColumn1.equals("createDate") %>' value="createDate" />
 									<aui:option label="modified-date" selected='<%= orderByColumn1.equals("modifiedDate") %>' value="modifiedDate" />
@@ -452,14 +452,14 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 									<aui:option label="view-count" selected='<%= orderByColumn1.equals("viewCount") %>' value="viewCount" />
 								</aui:select>
 
-								<aui:select inlineField="<%= true %>" label="" name="orderByType1">
+								<aui:select inlineField="<%= true %>" label="" name="preferences--orderByType1--">
 									<aui:option label="ascending" selected='<%= orderByType1.equals("ASC") %>' value="ASC" />
 									<aui:option label="descending" selected='<%= orderByType1.equals("DESC") %>' value="DESC" />
 								</aui:select>
 							</span>
 
 							<span class="aui-field-row">
-								<aui:select inlineField="<%= true %>" inlineLabel="left" label="and-then-by" name="orderByColumn2">
+								<aui:select inlineField="<%= true %>" inlineLabel="left" label="and-then-by" name="preferences--orderByColumn2--">
 									<aui:option label="title" selected='<%= orderByColumn2.equals("title") %>' />
 									<aui:option label="create-date" selected='<%= orderByColumn2.equals("createDate") %>' value="createDate" />
 									<aui:option label="modified-date" selected='<%= orderByColumn2.equals("modifiedDate") %>' value="modifiedDate" />
@@ -469,14 +469,14 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 									<aui:option label="view-count" selected='<%= orderByColumn2.equals("viewCount") %>' value="viewCount" />
 								</aui:select>
 
-								<aui:select inlineField="<%= true %>" label="" name="orderByType2">
+								<aui:select inlineField="<%= true %>" label="" name="preferences--orderByType2--">
 									<aui:option label="ascending" selected='<%= orderByType2.equals("ASC") %>' value="ASC" />
 									<aui:option label="descending" selected='<%= orderByType2.equals("DESC") %>' value="DESC" />
 								</aui:select>
 							</span>
 
 							<span class="aui-field-row">
-								<aui:select inlineField="<%= true %>" inlineLabel="left" label="group-by" name="assetVocabularyId">
+								<aui:select inlineField="<%= true %>" inlineLabel="left" label="group-by" name="preferences--assetVocabularyId--">
 									<aui:option value="" />
 									<aui:option label="asset-types" selected="<%= assetVocabularyId == -1 %>" value="-1" />
 
@@ -513,12 +513,12 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 					</liferay-ui:panel>
 					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="assetPublisherRssPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "rss") %>'>
 						<aui:fieldset>
-							<aui:input label="enable-rss-subscription" name="enableRSS" type="checkbox" value="<%= enableRSS %>" />
+							<aui:input label="enable-rss-subscription" name="preferences--enableRss--" type="checkbox" value="<%= enableRSS %>" />
 
 							<div id="<portlet:namespace />rssOptions">
-								<aui:input label="rss-feed-name" name="rssName" type="text" value="<%= rssName %>" />
+								<aui:input label="rss-feed-name" name="preferences--rssName--" type="text" value="<%= rssName %>" />
 
-								<aui:select label="maximum-items-to-display" name="rssDelta">
+								<aui:select label="maximum-items-to-display" name="preferences--rssDelta--">
 									<aui:option label="1" selected="<%= rssDelta == 1 %>" />
 									<aui:option label="2" selected="<%= rssDelta == 2 %>" />
 									<aui:option label="3" selected="<%= rssDelta == 3 %>" />
@@ -538,12 +538,12 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 									<aui:option label="100" selected="<%= rssDelta == 100 %>" />
 								</aui:select>
 
-								<aui:select label="display-style" name="rssDisplayStyle">
+								<aui:select label="display-style" name="preferences--rssDisplayStyle--">
 									<aui:option label="<%= RSSUtil.DISPLAY_STYLE_ABSTRACT %>" selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT) %>" />
 									<aui:option label="<%= RSSUtil.DISPLAY_STYLE_TITLE %>" selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE) %>" />
 								</aui:select>
 
-								<aui:select label="format" name="rssFormat">
+								<aui:select label="format" name="preferences--rssFormat--">
 									<aui:option label="RSS 1.0" selected='<%= rssFormat.equals("rss10") %>' value="rss10" />
 									<aui:option label="RSS 2.0" selected='<%= rssFormat.equals("rss20") %>' value="rss20" />
 									<aui:option label="Atom 1.0" selected='<%= rssFormat.equals("atom10") %>' value="atom10" />
