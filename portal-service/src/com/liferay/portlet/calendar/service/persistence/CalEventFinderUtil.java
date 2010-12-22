@@ -21,6 +21,11 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * @author Brian Wing Shun Chan
  */
 public class CalEventFinderUtil {
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByFutureReminders()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().findByFutureReminders();
+	}
+
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByNoAssets()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByNoAssets();
@@ -33,11 +38,6 @@ public class CalEventFinderUtil {
 		return getFinder()
 				   .findByG_SD(groupId, startDateGT, startDateLT,
 			timeZoneSensitive);
-	}
-
-	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findFutureRemindByEvents()
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findFutureRemindByEvents();
 	}
 
 	public static CalEventFinder getFinder() {

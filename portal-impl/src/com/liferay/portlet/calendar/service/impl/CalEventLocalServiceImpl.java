@@ -298,7 +298,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	public void checkEvents() throws PortalException, SystemException {
-		List<CalEvent> events = calEventFinder.findFutureRemindByEvents();
+		List<CalEvent> events = calEventFinder.findByFutureReminders();
 
 		for (CalEvent event : events) {
 			User user = userPersistence.fetchByPrimaryKey(event.getUserId());

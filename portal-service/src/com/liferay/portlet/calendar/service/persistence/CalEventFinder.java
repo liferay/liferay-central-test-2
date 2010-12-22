@@ -18,14 +18,14 @@ package com.liferay.portlet.calendar.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public interface CalEventFinder {
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByFutureReminders()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByNoAssets()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_SD(
 		long groupId, java.util.Date startDateGT, java.util.Date startDateLT,
 		boolean timeZoneSensitive)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findFutureRemindByEvents()
 		throws com.liferay.portal.kernel.exception.SystemException;
 }
