@@ -14,9 +14,13 @@
 
 package com.liferay.portlet.expando.model;
 
+import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 
 import java.io.Serializable;
+
+import java.text.DateFormat;
 
 import java.util.Date;
 
@@ -123,14 +127,17 @@ public class ExpandoColumnConstants {
 		}
 		else if (type == DATE) {
 			try {
-				return new Date(value);
+				DateFormat dateFormat = DateFormatFactoryUtil.getDateTime(
+					LocaleUtil.getDefault());
+
+				return dateFormat.parse(value);
 			}
 			catch (Exception e) {
 			}
 		}
 		else if (type == DATE_ARRAY) {
 			try {
-				return new Date[] {new Date(value)};
+				return new Date[] {(Date)getSerializable(DATE, value)};
 			}
 			catch (Exception e) {
 			}
