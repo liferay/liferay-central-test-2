@@ -215,6 +215,7 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 					context = getLayout(plid);
 				}
 
+
 				if (context != null) {
 					long companyId = (Long)context[1];
 
