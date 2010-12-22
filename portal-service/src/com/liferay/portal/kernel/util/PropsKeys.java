@@ -173,12 +173,6 @@ public interface PropsKeys {
 
 	public static final String BASIC_AUTH_PASSWORD_REQUIRED = "basic.auth.password.required";
 
-	public static final String BLOGS_EMAIL_COMMENTS_ADDED_BODY = "blogs.email.comments.added.body";
-
-	public static final String BLOGS_EMAIL_COMMENTS_ADDED_ENABLED = "blogs.email.comments.added.enabled";
-
-	public static final String BLOGS_EMAIL_COMMENTS_ADDED_SUBJECT = "blogs.email.comments.added.subject";
-
 	public static final String BLOGS_EMAIL_ENTRY_ADDED_BODY = "blogs.email.entry.added.body";
 
 	public static final String BLOGS_EMAIL_ENTRY_ADDED_ENABLED = "blogs.email.entry.added.enabled";
@@ -482,6 +476,14 @@ public interface PropsKeys {
 	public static final String DIRECT_SERVLET_CONTEXT_RELOAD = "direct.servlet.context.reload";
 
 	public static final String DIRECT_SERVLET_CONTEXT_ENABLED = "direct.servlet.context.enabled";
+
+	public static final String DISCUSSION_EMAIL_BODY = "discussion.email.body";
+
+	public static final String DISCUSSION_EMAIL_COMMENTS_ADDED_ENABLED = "discussion.email.comments.added.enabled";
+
+	public static final String DISCUSSION_EMAIL_SUBJECT = "discussion.email.subject";
+
+	public static final String DISCUSSION_SUBSCRIBE_BY_DEFAULT = "discussion.subscribe.by.default";
 
 	public static final String DISCUSSION_THREAD_VIEW = "discussion.thread.view";
 
