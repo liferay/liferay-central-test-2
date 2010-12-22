@@ -35,7 +35,7 @@ List<PollsQuestion> questions = PollsQuestionLocalServiceUtil.getQuestions(scope
 	<c:choose>
 		<c:when test="<%= !questions.isEmpty() %>">
 			<aui:fieldset>
-				<aui:select label="question" name="preferences--questionId--">
+				<aui:select label="question" name="questionId">
 					<aui:option value="" />
 
 					<%

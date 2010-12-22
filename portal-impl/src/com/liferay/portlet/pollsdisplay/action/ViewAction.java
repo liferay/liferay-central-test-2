@@ -47,7 +47,7 @@ public class ViewAction extends PortletAction {
 			PortletPreferences preferences = renderRequest.getPreferences();
 
 			long questionId = GetterUtil.getLong(
-				preferences.getValue("questionId", StringPool.BLANK));
+				preferences.getValue("question-id", StringPool.BLANK));
 
 			PollsQuestion question =
 				PollsQuestionServiceUtil.getQuestion(questionId);

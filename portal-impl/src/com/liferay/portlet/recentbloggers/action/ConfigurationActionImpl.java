@@ -32,6 +32,43 @@ import javax.portlet.RenderResponse;
  */
 public class ConfigurationActionImpl extends BaseConfigurationAction {
 
+	public void processAction(
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
+		throws Exception {
+
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+
+		if (!cmd.equals(Constants.UPDATE)) {
+			return;
+		}
+
+		String selectionMethod = ParamUtil.getString(
+			actionRequest, "selectionMethod");
+		String organizationId = ParamUtil.getString(
+			actionRequest, "organizationId");
+		String displayStyle = ParamUtil.getString(
+			actionRequest, "displayStyle");
+		int max = ParamUtil.getInteger(actionRequest, "max");
+
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
+
+		PortletPreferences preferences =
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
+
+		preferences.setValue("selection-method", selectionMethod);
+		preferences.setValue("organization-id", organizationId);
+		preferences.setValue("display-style", displayStyle);
+		preferences.setValue("max", String.valueOf(max));
+
+		preferences.store();
+
+		SessionMessages.add(
+			actionRequest, portletConfig.getPortletName() + ".doConfigure");
+	}
+
 	public String render(
 			PortletConfig portletConfig, RenderRequest renderRequest,
 			RenderResponse renderResponse)

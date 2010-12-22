@@ -165,23 +165,16 @@ public class SelectTag extends IncludeTag {
 			bean = pageContext.getAttribute("aui:model-context:bean");
 		}
 
-		String name = _name;
-
-		if (name.startsWith(_PREFERENCES_SUFFIX)) {
-			name = name.substring(
-				_PREFERENCES_SUFFIX.length(), name.length() - 2);
-		}
-
 		String id = _id;
 
 		if (Validator.isNull(id)) {
-			id = name;
+			id = _name;
 		}
 
 		String label = _label;
 
 		if (label == null) {
-			label = TextFormatter.format(name, TextFormatter.K);
+			label = TextFormatter.format(_name, TextFormatter.K);
 		}
 
 		String listTypeFieldName = _listTypeFieldName;
@@ -225,8 +218,6 @@ public class SelectTag extends IncludeTag {
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
 	private static final String _END_PAGE = "/html/taglib/aui/select/end.jsp";
-
-	private static final String _PREFERENCES_SUFFIX = "preferences--";
 
 	private static final String _START_PAGE =
 		"/html/taglib/aui/select/start.jsp";

@@ -249,13 +249,6 @@ public class InputTag extends IncludeTag {
 			bean = pageContext.getAttribute("aui:model-context:bean");
 		}
 
-		String name = _name;
-
-		if (name.startsWith(_PREFERENCES_SUFFIX)) {
-			name = name.substring(
-				_PREFERENCES_SUFFIX.length(), name.length() - 2);
-		}
-
 		String field = _field;
 
 		if (Validator.isNull(field)) {
@@ -277,7 +270,7 @@ public class InputTag extends IncludeTag {
 
 		if (Validator.isNull(id)) {
 			if (!Validator.equals(_type, "radio")) {
-				id = name;
+				id = _name;
 			}
 			else {
 				id = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
@@ -287,7 +280,7 @@ public class InputTag extends IncludeTag {
 		String label = _label;
 
 		if (label == null) {
-			label = TextFormatter.format(name, TextFormatter.K);
+			label = TextFormatter.format(_name, TextFormatter.K);
 		}
 
 		Class<?> model = _model;
@@ -358,8 +351,6 @@ public class InputTag extends IncludeTag {
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
 	private static final String _PAGE = "/html/taglib/aui/input/page.jsp";
-
-	private static final String _PREFERENCES_SUFFIX = "preferences--";
 
 	private Object _bean;
 	private boolean _changesContext;

@@ -31,9 +31,9 @@ if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-String selectionMethod = preferences.getValue("selectionMethod", "users");
-long organizationId = GetterUtil.getLong(preferences.getValue("organizationId", "0"));
-String displayStyle = preferences.getValue("displayStyle", "user-name-and-image");
+String selectionMethod = preferences.getValue("selection-method", "users");
+long organizationId = GetterUtil.getLong(preferences.getValue("organization-id", "0"));
+String displayStyle = preferences.getValue("display-style", "user-name-and-image");
 int max = GetterUtil.getInteger(preferences.getValue("max", "10"));
 
 if (organizationId == 0) {

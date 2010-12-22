@@ -37,12 +37,12 @@ if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-String selectionMethod = preferences.getValue("selectionMethod", "users");
-long organizationId = GetterUtil.getLong(preferences.getValue("organizationId", "0"));
-String displayStyle = preferences.getValue("displayStyle", "abstract");
+String selectionMethod = preferences.getValue("selection-method", "users");
+long organizationId = GetterUtil.getLong(preferences.getValue("organization-id", "0"));
+String displayStyle = preferences.getValue("display-style", "abstract");
 int max = GetterUtil.getInteger(preferences.getValue("max", "20"));
-boolean enableRssSubscription = GetterUtil.getBoolean(preferences.getValue("enableRssSubscription", null), true);
-boolean showTags = GetterUtil.getBoolean(preferences.getValue("showTags", null), true);
+boolean enableRssSubscription = GetterUtil.getBoolean(preferences.getValue("enable-rss-subscription", null), true);
+boolean showTags = GetterUtil.getBoolean(preferences.getValue("show-tags", null), true);
 
 if (organizationId == 0) {
 	Group group = GroupLocalServiceUtil.getGroup(scopeGroupId);

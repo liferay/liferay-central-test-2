@@ -202,7 +202,7 @@ public class TrackbackAction extends PortletAction {
 		}
 
 		return GetterUtil.getBoolean(
-			preferences.getValue("enableComments", null), true);
+			preferences.getValue("enable-comments", null), true);
 	}
 
 	protected void sendError(

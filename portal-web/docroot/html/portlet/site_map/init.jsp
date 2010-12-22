@@ -28,12 +28,12 @@ if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-String rootLayoutUuid = GetterUtil.getString(preferences.getValue("rootLayoutUuid", StringPool.BLANK));
-int displayDepth = GetterUtil.getInteger(preferences.getValue("displayDepth", StringPool.BLANK));
-boolean includeRootInTree = GetterUtil.getBoolean(preferences.getValue("includeRootInTree", StringPool.BLANK));
-boolean showCurrentPage = GetterUtil.getBoolean(preferences.getValue("showCurrentPage", StringPool.BLANK));
-boolean useHtmlTitle = GetterUtil.getBoolean(preferences.getValue("useHtmlTitle", StringPool.BLANK));
-boolean showHiddenPages = GetterUtil.getBoolean(preferences.getValue("showHiddenPages", StringPool.BLANK));
+String rootLayoutUuid = GetterUtil.getString(preferences.getValue("root-layout-uuid", StringPool.BLANK));
+int displayDepth = GetterUtil.getInteger(preferences.getValue("display-depth", StringPool.BLANK));
+boolean includeRootInTree = GetterUtil.getBoolean(preferences.getValue("include-root-in-tree", StringPool.BLANK));
+boolean showCurrentPage = GetterUtil.getBoolean(preferences.getValue("show-current-page", StringPool.BLANK));
+boolean useHtmlTitle = GetterUtil.getBoolean(preferences.getValue("use-html-title", StringPool.BLANK));
+boolean showHiddenPages = GetterUtil.getBoolean(preferences.getValue("show-hidden-pages", StringPool.BLANK));
 
 Layout rootLayout = null;
 
@@ -45,9 +45,6 @@ if (Validator.isNotNull(rootLayoutUuid)) {
 	if (rootLayout != null) {
 		rootLayoutId = rootLayout.getLayoutId();
 	}
-}
-else {
-	includeRootInTree = false;
 }
 
 if (rootLayoutId == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {

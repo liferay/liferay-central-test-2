@@ -59,7 +59,7 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletPreferences portletPreferences)
 		throws Exception {
 
-		portletPreferences.setValue("questionId", StringPool.BLANK);
+		portletPreferences.setValue("question-id", StringPool.BLANK);
 
 		return portletPreferences;
 	}
@@ -70,7 +70,7 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws Exception {
 
 		long questionId = GetterUtil.getLong(
-			portletPreferences.getValue("questionId", StringPool.BLANK));
+			portletPreferences.getValue("question-id", StringPool.BLANK));
 
 		if (questionId <= 0) {
 			if (_log.isWarnEnabled()) {
@@ -184,7 +184,7 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		long questionId = GetterUtil.getLong(
-			portletPreferences.getValue("questionId", StringPool.BLANK));
+			portletPreferences.getValue("question-id", StringPool.BLANK));
 
 		if (questionId > 0) {
 			Map<Long, Long> questionPKs =
@@ -195,7 +195,7 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 				questionPKs, questionId, questionId);
 
 			portletPreferences.setValue(
-				"questionId", String.valueOf(questionId));
+				"question-id", String.valueOf(questionId));
 		}
 
 		return portletPreferences;

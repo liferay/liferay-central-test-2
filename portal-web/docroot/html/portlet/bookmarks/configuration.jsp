@@ -27,9 +27,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 <aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveConfiguration();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="preferences--rootFolderId--" type="hidden" value="<%= rootFolderId %>" />
-	<aui:input name="preferences--folderColumns--" type="hidden" />
-	<aui:input name="preferences--entryColumns--" type="hidden" />
+	<aui:input name="rootFolderId" type="hidden" value="<%= rootFolderId %>" />
+	<aui:input name="folderColumns" type="hidden" />
+	<aui:input name="entryColumns" type="hidden" />
 
 	<liferay-ui:error key="rootFolderId" message="please-enter-a-valid-root-folder" />
 
@@ -49,11 +49,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<aui:button disabled="<%= rootFolderId <= 0 %>" name="removeFolderButton" onClick='<%= renderResponse.getNamespace() + "removeFolder();" %>' value="remove" />
 				</aui:field-wrapper>
 
-				<aui:input label="show-search" name="preferences--showFoldersSearch--" type="checkbox" value="<%= showFoldersSearch %>" />
+				<aui:input inlineLabel="left" label="show-search" name="showFoldersSearch" type="checkbox" value="<%= showFoldersSearch %>" />
 
-				<aui:input name="preferences--showSubfolders--" type="checkbox" value="<%= showSubfolders %>" />
+				<aui:input inlineLabel="left" name="showSubfolders" type="checkbox" value="<%= showSubfolders %>" />
 
-				<aui:input name="preferences--foldersPerPage--" size="2" type="text" value="<%= foldersPerPage %>" />
+				<aui:input name="foldersPerPage" size="2" type="text" value="<%= foldersPerPage %>" />
 
 				<aui:field-wrapper label="show-columns">
 
@@ -104,7 +104,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="bookmarksListingPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "bookmarks-listing") %>'>
 			<aui:fieldset>
-				<aui:input label="documents-per-page" name="preferences--entriesPerPage--" size="2" type="text" value="<%= entriesPerPage %>" />
+				<aui:input label="documents-per-page" name="entriesPerPage" size="2" type="text" value="<%= entriesPerPage %>" />
 
 				<aui:field-wrapper label="show-columns">
 

@@ -16,7 +16,10 @@ package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
@@ -24,6 +27,7 @@ import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -37,24 +41,37 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
-		validateRootFolder(actionRequest);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		super.processAction(portletConfig, actionRequest, actionResponse);
-	}
+		if (!cmd.equals(Constants.UPDATE)) {
+			return;
+		}
 
-	public String render(
-			PortletConfig portletConfig, RenderRequest renderRequest,
-			RenderResponse renderResponse)
-		throws Exception {
+		long rootFolderId = ParamUtil.getLong(actionRequest, "rootFolderId");
 
-		return "/html/portlet/document_library/configuration.jsp";
-	}
+		boolean showFoldersSearch = ParamUtil.getBoolean(
+			actionRequest, "showFoldersSearch");
+		boolean showSubfolders = ParamUtil.getBoolean(
+			actionRequest, "showSubfolders");
+		int foldersPerPage = ParamUtil.getInteger(
+			actionRequest, "foldersPerPage");
+		String folderColumns = ParamUtil.getString(
+			actionRequest, "folderColumns");
 
-	protected void validateRootFolder(ActionRequest actionRequest)
-		throws Exception{
+		int fileEntriesPerPage = ParamUtil.getInteger(
+			actionRequest, "fileEntriesPerPage");
+		String fileEntryColumns = ParamUtil.getString(
+			actionRequest, "fileEntryColumns");
 
-		long rootFolderId = GetterUtil.getLong(
-				getParamProperty(actionRequest, "rootFolderId"));
+		boolean enableCommentRatings = ParamUtil.getBoolean(
+			actionRequest, "enableCommentRatings");
+
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
+
+		PortletPreferences preferences =
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
 
 		if (rootFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			try {
@@ -64,6 +81,36 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 				SessionErrors.add(actionRequest, "rootFolderIdInvalid");
 			}
 		}
+
+		preferences.setValue("rootFolderId", String.valueOf(rootFolderId));
+
+		preferences.setValue(
+			"showFoldersSearch", String.valueOf(showFoldersSearch));
+		preferences.setValue("showSubfolders", String.valueOf(showSubfolders));
+		preferences.setValue("foldersPerPage", String.valueOf(foldersPerPage));
+		preferences.setValue("folderColumns", folderColumns);
+
+		preferences.setValue(
+			"fileEntriesPerPage", String.valueOf(fileEntriesPerPage));
+		preferences.setValue("fileEntryColumns", fileEntryColumns);
+
+		preferences.setValue(
+			"enable-comment-ratings", String.valueOf(enableCommentRatings));
+
+		if (SessionErrors.isEmpty(actionRequest)) {
+			preferences.store();
+
+			SessionMessages.add(
+				actionRequest, portletConfig.getPortletName() + ".doConfigure");
+		}
+	}
+
+	public String render(
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
+		throws Exception {
+
+		return "/html/portlet/document_library/configuration.jsp";
 	}
 
 }

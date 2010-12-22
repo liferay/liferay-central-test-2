@@ -39,7 +39,7 @@ if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-long questionId = GetterUtil.getLong(preferences.getValue("questionId", StringPool.BLANK));
+long questionId = GetterUtil.getLong(preferences.getValue("question-id", StringPool.BLANK));
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>

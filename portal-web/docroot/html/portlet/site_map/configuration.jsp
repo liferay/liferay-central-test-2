@@ -34,7 +34,7 @@ List layoutList = layoutView.getList();
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
 	<aui:fieldset>
-		<aui:select label="root-layout" name="preferences--rootLayoutUuid--">
+		<aui:select label="root-layout" name="rootLayoutUuid">
 			<aui:option value="" />
 
 			<%
@@ -79,7 +79,7 @@ List layoutList = layoutView.getList();
 
 		</aui:select>
 
-		<aui:select name="preferences--displayDepth--">
+		<aui:select name="displayDepth">
 			<aui:option label="unlimited" value="0" />
 
 			<%
@@ -94,13 +94,13 @@ List layoutList = layoutView.getList();
 
 		</aui:select>
 
-		<aui:input name="preferences--includeRootInTree--" type="checkbox" value="<%= includeRootInTree %>" />
+		<aui:input inlineLabel="left" name="includeRootInTree" type="checkbox" value="<%= includeRootInTree %>" />
 
-		<aui:input name="preferences--showCurrentPage--" type="checkbox" value="<%= showCurrentPage %>" />
+		<aui:input inlineLabel="left" name="showCurrentPage" type="checkbox" value="<%= showCurrentPage %>" />
 
-		<aui:input name="preferences--useHtmlTitle--" type="checkbox" value="<%= useHtmlTitle %>" />
+		<aui:input inlineLabel="left" name="useHtmlTitle" type="checkbox" value="<%= useHtmlTitle %>" />
 
-		<aui:input name="preferences--showHiddenPages--" type="checkbox" value="<%= showHiddenPages %>" />
+		<aui:input inlineLabel="left" name="showHiddenPages" type="checkbox" value="<%= showHiddenPages %>" />
 	</aui:fieldset>
 
 	<aui:button-row>

@@ -142,7 +142,7 @@ if (!portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
 	fileEntryColumns = ArrayUtil.remove(fileEntryColumns, "action");
 }
 
-boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enableCommentRatings", null), true);
+boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null), true);
 
 boolean mergedView = false;
 

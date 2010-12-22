@@ -31,15 +31,15 @@ List<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistry
 	<aui:fieldset>
 		<ul class="lfr-tree lfr-component">
 			<li class="tree-item">
-				<aui:input label="show-tags-with-zero-assets" name="preferences--showZeroAssetCount--" type="checkbox" value="<%= showZeroAssetCount %>" />
+				<aui:input inlineLabel="left" label="show-tags-with-zero-assets" name="showZeroAssetCount" type="checkbox" value="<%= showZeroAssetCount %>" />
 			</li>
 
 			<li class="tree-item">
-				<aui:input name="preferences--showAssetCount--" type="checkbox" value="<%= showAssetCount %>" />
+				<aui:input inlineLabel="left" name="showAssetCount" type="checkbox" value="<%= showAssetCount %>" />
 
 				<ul class="lfr-tree lfr-component aui-helper-hidden" id="<portlet:namespace />assetCountOptions">
 					<li class="tree-item">
-						<aui:select helpMessage="asset-type-asset-count-help" label="asset-type" name="preferences--classNameId--">
+						<aui:select helpMessage="asset-type-asset-count-help" label="asset-type" name="classNameId">
 							<aui:option label="any" value="<%= classNameId == 0 %>" />
 
 							<%
@@ -56,7 +56,7 @@ List<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistry
 					</li>
 
 					<li class="tree-item">
-						<aui:select name="preferences--displayStyle--">
+						<aui:select name="displayStyle">
 							<aui:option label="number" selected='<%= displayStyle.equals("number") %>' />
 							<aui:option label="cloud" selected='<%= displayStyle.equals("cloud") %>' />
 						</aui:select>

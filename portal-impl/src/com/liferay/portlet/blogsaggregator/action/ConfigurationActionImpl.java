@@ -32,6 +32,50 @@ import javax.portlet.RenderResponse;
  */
 public class ConfigurationActionImpl extends BaseConfigurationAction {
 
+	public void processAction(
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
+		throws Exception {
+
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+
+		if (!cmd.equals(Constants.UPDATE)) {
+			return;
+		}
+
+		String selectionMethod = ParamUtil.getString(
+			actionRequest, "selectionMethod");
+		String organizationId = ParamUtil.getString(
+			actionRequest, "organizationId");
+		String displayStyle = ParamUtil.getString(
+			actionRequest, "displayStyle");
+		int max = ParamUtil.getInteger(actionRequest, "max");
+		boolean enableRssSubscription = ParamUtil.getBoolean(
+			actionRequest, "enableRssSubscription");
+		boolean showTags = ParamUtil.getBoolean(
+			actionRequest, "showTags");
+
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
+
+		PortletPreferences preferences =
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
+
+		preferences.setValue("selection-method", selectionMethod);
+		preferences.setValue("organization-id", organizationId);
+		preferences.setValue("display-style", displayStyle);
+		preferences.setValue("max", String.valueOf(max));
+		preferences.setValue(
+			"enable-rss-subscription", String.valueOf(enableRssSubscription));
+		preferences.setValue("show-tags", String.valueOf(showTags));
+
+		preferences.store();
+
+		SessionMessages.add(
+			actionRequest, portletConfig.getPortletName() + ".doConfigure");
+	}
+
 	public String render(
 			PortletConfig portletConfig, RenderRequest renderRequest,
 			RenderResponse renderResponse)
