@@ -22,34 +22,36 @@ DLFileEntry dlFileEntry = null;
 List<String> keys = null;
 List<String> expandoBridgeAttributeNames = null;
 
-try {
-	dlFileEntry = DLRepositoryLocalServiceUtil.getExtraSettingsFileEntries(0, 1).get(0);
+List<DLFileEntry> dlFileEntries = DLRepositoryLocalServiceUtil.getExtraSettingsFileEntries(0, 1);
+
+if (!dlFileEntries.isEmpty()) {
+	dlFileEntry = dlFileEntries.get(0);
 
 	List<DLFileVersion> dlFileVersions = dlFileEntry.getFileVersions(WorkflowConstants.STATUS_ANY);
 
 	for (DLFileVersion dlFileVersion : dlFileVersions) {
 		UnicodeProperties extraSettingsProperties = dlFileVersion.getExtraSettingsProperties();
 
-		if (!extraSettingsProperties.isEmpty()) {
-			keys = new ArrayList<String>(extraSettingsProperties.size());
-			expandoBridgeAttributeNames = new ArrayList<String>(extraSettingsProperties.size());
-
-			ExpandoBridge expandoBridge = dlFileEntry.getExpandoBridge();
-
-			for (String key : extraSettingsProperties.keySet()) {
-				if (expandoBridge.hasAttribute(key)) {
-					expandoBridgeAttributeNames.add(key);
-				}
-				else {
-					keys.add(key);
-				}
-			}
-
-			break;
+		if (extraSettingsProperties.isEmpty()) {
+			continue;
 		}
+
+		keys = new ArrayList<String>(extraSettingsProperties.size());
+		expandoBridgeAttributeNames = new ArrayList<String>(extraSettingsProperties.size());
+
+		ExpandoBridge expandoBridge = dlFileEntry.getExpandoBridge();
+
+		for (String key : extraSettingsProperties.keySet()) {
+			if (expandoBridge.hasAttribute(key)) {
+				expandoBridgeAttributeNames.add(key);
+			}
+			else {
+				keys.add(key);
+			}
+		}
+
+		break;
 	}
-}
-catch (Exception e) {
 }
 %>
 
