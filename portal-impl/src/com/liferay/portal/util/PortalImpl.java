@@ -1802,6 +1802,14 @@ public class PortalImpl implements Portal {
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
+		if (group.isLayout()) {
+			long parentGroupId = group.getParentGroupId();
+			
+			if (parentGroupId > 0) {
+				group = GroupLocalServiceUtil.getGroup(parentGroupId);
+			}
+		}
+
 		String virtualHostname = null;
 
 		LayoutSet layoutSet = layout.getLayoutSet();
