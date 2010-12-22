@@ -439,7 +439,7 @@ public class JavadocFormatter {
 		while (matcher.find()) {
 			String trimmed = _trimMultilineText(matcher.group());
 
-			// Escape dollar signs so they aren't treated as replacement groups
+			// Escape dollar signs so they are not treated as replacement groups
 
 			trimmed = trimmed.replaceAll("\\$", "\\\\\\$");
 
