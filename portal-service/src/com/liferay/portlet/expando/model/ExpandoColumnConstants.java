@@ -122,10 +122,18 @@ public class ExpandoColumnConstants {
 			return new Boolean[] {GetterUtil.getBoolean(value)};
 		}
 		else if (type == DATE) {
-			return new Date(GetterUtil.getLong(value));
+			try {
+				return new Date(value);
+			}
+			catch (Exception e) {
+			}
 		}
 		else if (type == DATE_ARRAY) {
-			return new Date[] {new Date(GetterUtil.getLong(value))};
+			try {
+				return new Date[] {new Date(value)};
+			}
+			catch (Exception e) {
+			}
 		}
 		else if (type == DOUBLE) {
 			return GetterUtil.getDouble(value);
@@ -160,9 +168,8 @@ public class ExpandoColumnConstants {
 		else if (type == STRING_ARRAY) {
 			return new String[] {value};
 		}
-		else {
-			return value;
-		}
+
+		return value;
 	}
 
 	public static final String getTypeLabel(int type) {
