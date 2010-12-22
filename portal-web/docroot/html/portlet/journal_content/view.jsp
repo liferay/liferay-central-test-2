@@ -29,7 +29,7 @@ boolean expired = true;
 
 try {
 	if (Validator.isNotNull(articleId)) {
-		article = JournalArticleLocalServiceUtil.getLatestArticle(scopeGroupId, articleId, WorkflowConstants.STATUS_ANY);
+		article = JournalArticleLocalServiceUtil.getLatestArticle(articleDisplay.getGroupId(), articleId, WorkflowConstants.STATUS_ANY);
 
 		expired = article.isExpired();
 
