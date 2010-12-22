@@ -192,14 +192,14 @@ public class LayoutRevisionLocalServiceImpl
 	public void deleteLayoutRevision(LayoutRevision layoutRevision)
 		throws PortalException, SystemException {
 
-		List<PortletPreferences> portletPreferences =
+		List<PortletPreferences> portletPreferencesList =
 			portletPreferencesLocalService.getPortletPreferencesByPlid(
 				layoutRevision.getLayoutRevisionId());
 
-		for (PortletPreferences portletPreference : portletPreferences) {
+		for (PortletPreferences portletPreferences : portletPreferencesList) {
 			try {
 				portletPreferencesLocalService.deletePortletPreferences(
-					portletPreference.getPortletPreferencesId());
+					portletPreferences.getPortletPreferencesId());
 			}
 			catch (NoSuchPortletPreferencesException nsppe) {
 			}
@@ -391,17 +391,17 @@ public class LayoutRevisionLocalServiceImpl
 			LayoutRevision layoutRevision, ServiceContext serviceContext)
 		throws SystemException {
 
-		List<PortletPreferences> portletPreferences =
+		List<PortletPreferences> portletPreferencesList =
 			portletPreferencesLocalService.getPortletPreferencesByPlid(
 				layoutRevision.getPlid());
 
-		for (PortletPreferences portletPreference : portletPreferences) {
+		for (PortletPreferences portletPreferences : portletPreferencesList) {
 			portletPreferencesLocalService.addPortletPreferences(
-				layoutRevision.getCompanyId(), portletPreference.getOwnerId(),
-				portletPreference.getOwnerType(),
+				layoutRevision.getCompanyId(), portletPreferences.getOwnerId(),
+				portletPreferences.getOwnerType(),
 				layoutRevision.getLayoutRevisionId(),
-				portletPreference.getPortletId(), null,
-				portletPreference.getPreferences());
+				portletPreferences.getPortletId(), null,
+				portletPreferences.getPreferences());
 		}
 	}
 

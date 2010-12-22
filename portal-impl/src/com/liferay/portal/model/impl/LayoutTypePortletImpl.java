@@ -989,12 +989,12 @@ public class LayoutTypePortletImpl
 
 	protected void deletePortletSetup(String portletId) {
 		try {
-			List<PortletPreferences> list =
+			List<PortletPreferences> portletPreferencesList =
 				PortletPreferencesLocalServiceUtil.getPortletPreferences(
 					getLayout().getPlid(), portletId);
 
-			for (int i = 0; i < list.size(); i++) {
-				PortletPreferences portletPreferences = list.get(i);
+			for (PortletPreferences portletPreferences :
+					portletPreferencesList) {
 
 				PortletPreferencesLocalServiceUtil.deletePortletPreferences(
 					portletPreferences.getPortletPreferencesId());
