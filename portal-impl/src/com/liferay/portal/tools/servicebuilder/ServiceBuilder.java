@@ -224,13 +224,21 @@ public class ServiceBuilder {
 
 		String humanName = TextFormatter.format(name, TextFormatter.H);
 
+		if (humanName.equals("id")) {
+			humanName = "ID";
+		}
+		else if (humanName.equals("ids")) {
+			humanName = "IDs";
+		}
+
 		if (humanName.endsWith(" id")) {
 			humanName = humanName.substring(0, humanName.length() - 3) + " ID";
 		}
 		else if (humanName.endsWith(" ids")) {
 			humanName = humanName.substring(0, humanName.length() - 4) + " IDs";
 		}
-		else if (humanName.contains(" id ")) {
+
+		if (humanName.contains(" id ")) {
 			humanName = StringUtil.replace(humanName, " id ", " ID ");
 		}
 		else if (humanName.contains(" ids ")) {
