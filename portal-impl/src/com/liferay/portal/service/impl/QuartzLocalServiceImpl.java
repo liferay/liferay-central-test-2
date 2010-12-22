@@ -44,7 +44,7 @@ import java.util.Map;
  */
 public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 
-	public void checkQuartzJobDetails() throws SystemException {
+	public void checkQuartzJobDetails() {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -61,20 +61,18 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 			while (rs.next()) {
 				Blob jobData = rs.getBlob("JOB_DATA");
 
-				boolean needUpdate = convertMessageToJSONString(jobData);
+				boolean update = convertMessageToJSON(jobData);
 
-				if (needUpdate) {
+				if (update) {
 					rs.updateBlob("JOB_DATA", jobData);
+
 					rs.updateRow();
 				}
-
 			}
 		}
 		catch (Exception e) {
-			System.out.println(e);
-			e.printStackTrace();
 			if (_log.isWarnEnabled()) {
-				_log.warn(e.getMessage());
+				_log.warn(e, e);
 			}
 		}
 		finally {
@@ -101,7 +99,7 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(e.getMessage());
+				_log.warn(e, e);
 			}
 		}
 		finally {
@@ -118,70 +116,82 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 		}
 	}
 
-	private boolean convertMessageToJSONString(Blob jobData) throws Exception {
-		ObjectInputStream ois = null;
-		ObjectOutputStream oos = null;
+	protected boolean convertMessageToJSON(Blob jobData) throws Exception {
+		ObjectInputStream objectInputStream = null;
+		ObjectOutputStream objectOutputStream = null;
+
 		try {
-			ois = new BackwardCompatibleObjectInputStream(
+			objectInputStream = new BackwardCompatibleObjectInputStream(
 				jobData.getBinaryStream());
 
-			Map jobDataMap = (Map)ois.readObject();
+			Map<Object, Object> jobDataMap =
+				(Map<Object, Object>)objectInputStream.readObject();
 
-			Object messageObject = jobDataMap.get(SchedulerEngine.MESSAGE);
+			Object object = jobDataMap.get(SchedulerEngine.MESSAGE);
 
-			if ((messageObject == null) || (messageObject instanceof String)) {
+			if ((object == null) || (object instanceof String)) {
 				return false;
 			}
 
 			Message message = null;
-			if (messageObject instanceof Message) {
-				message = (Message) messageObject;
+
+			if (object instanceof Message) {
+				message = (Message)object;
 			}
 			else {
 				message = new Message();
-				message.setPayload(messageObject);
+
+				message.setPayload(object);
 			}
 
-			String jsonMessage = JSONFactoryUtil.serialize(message);
-			jobDataMap.put(SchedulerEngine.MESSAGE, jsonMessage);
+			String messageJSON = JSONFactoryUtil.serialize(message);
 
-			oos = new ObjectOutputStream(jobData.setBinaryStream(1));
-			oos.writeObject(jobDataMap);
+			jobDataMap.put(SchedulerEngine.MESSAGE, messageJSON);
+
+			objectOutputStream = new ObjectOutputStream(
+				jobData.setBinaryStream(1));
+
+			objectOutputStream.writeObject(jobDataMap);
 
 			return true;
 		}
 		finally {
-			if (ois != null) {
-				ois.close();
+			if (objectInputStream != null) {
+				objectInputStream.close();
 			}
-			if (oos != null) {
-				oos.close();
-			}
-		}
-	}
 
-	private class BackwardCompatibleObjectInputStream
-		extends ObjectInputStream {
-
-		public BackwardCompatibleObjectInputStream(InputStream in)
-			throws IOException {
-			super(in);
-		}
-
-		protected ObjectStreamClass readClassDescriptor()
-			throws IOException, ClassNotFoundException {
-			ObjectStreamClass osc = super.readClassDescriptor();
-
-			if (osc.getName().equals(Message.class.getName())) {
-				return ObjectStreamClass.lookup(Message.class);
-			}
-			else {
-				return osc;
+			if (objectOutputStream != null) {
+				objectOutputStream.close();
 			}
 		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
 		QuartzLocalServiceImpl.class);
+
+	private class BackwardCompatibleObjectInputStream
+		extends ObjectInputStream {
+
+		public BackwardCompatibleObjectInputStream(InputStream inputStream)
+			throws IOException {
+
+			super(inputStream);
+		}
+
+		protected ObjectStreamClass readClassDescriptor()
+			throws ClassNotFoundException, IOException {
+
+			ObjectStreamClass objectStreamClass = super.readClassDescriptor();
+
+			String name = objectStreamClass.getName();
+
+			if (name.equals(Message.class.getName())) {
+				return ObjectStreamClass.lookup(Message.class);
+			}
+			else {
+				return objectStreamClass;
+			}
+		}
+	}
 
 }

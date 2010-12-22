@@ -56,15 +56,15 @@ public class MessageSenderJob implements Job {
 		String destinationName = jobDataMap.getString(
 			SchedulerEngine.DESTINATION_NAME);
 
-		String jsonMessage = (String)jobDataMap.get(SchedulerEngine.MESSAGE);
+		String messageJSON = (String)jobDataMap.get(SchedulerEngine.MESSAGE);
 
 		Message message = null;
 
-		if (jsonMessage == null) {
+		if (messageJSON == null) {
 			message = new Message();
 		}
 		else {
-			message = (Message)JSONFactoryUtil.deserialize(jsonMessage);
+			message = (Message)JSONFactoryUtil.deserialize(messageJSON);
 		}
 
 		message.put(SchedulerEngine.DESTINATION_NAME, destinationName);

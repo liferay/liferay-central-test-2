@@ -603,9 +603,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 	}
 
 	protected Message getMessage(JobDataMap jobDataMap) {
-		String jsonMessage = (String)jobDataMap.get(MESSAGE);
+		String messageJSON = (String)jobDataMap.get(MESSAGE);
 
-		return (Message)JSONFactoryUtil.deserialize(jsonMessage);
+		return (Message)JSONFactoryUtil.deserialize(messageJSON);
 	}
 
 	protected Trigger getQuartzTrigger(
