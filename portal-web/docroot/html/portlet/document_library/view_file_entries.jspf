@@ -58,7 +58,7 @@
 	</liferay-ui:search-container-results>
 
 	<liferay-ui:search-container-row
-		className="com.liferay.portal.kernel.repository.model.RepositoryModel"
+		className="java.lang.Object"
 		keyProperty="primaryKey"
 		modelVar="result"
 	>
