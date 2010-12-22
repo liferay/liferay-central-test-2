@@ -79,14 +79,9 @@ public interface Constants {
 
 	public static final String SUBSCRIBE = "subscribe";
 
-	public static final String SUBSCRIBE_TO_COMMENTS = "subscribe_to_comments";
-
 	public static final String UNLOCK = "unlock";
 
 	public static final String UNSUBSCRIBE = "unsubscribe";
-
-	public static final String UNSUBSCRIBE_FROM_COMMENTS =
-		"unsubscribe_from_comments";
 
 	public static final String UPDATE = "update";
 

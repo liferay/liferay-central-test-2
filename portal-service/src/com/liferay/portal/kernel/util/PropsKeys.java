@@ -325,8 +325,6 @@ public interface PropsKeys {
 
 	public static final String COMBO_CHECK_TIMESTAMP = "combo.check.timestamp";
 
-	public static final String DISCUSSION_SUBSCRIBE_BY_DEFAULT = "discussion.subscribe.by.default";
-
 	public static final String COMMUNITIES_CONTROL_PANEL_MEMBERS_VISIBLE = "communities.control.panel.members.visible";
 
 	public static final String COMMUNITIES_EMAIL_FROM_ADDRESS = "communities.email.from.address";
@@ -552,10 +550,6 @@ public interface PropsKeys {
 	public static final String EHCACHE_SINGLE_VM_CONFIG_LOCATION = "ehcache.single.vm.config.location";
 
 	public static final String EHCACHE_STATISTICS_ENABLED = "ehcache.statistics.enabled";
-
-	public static final String DISCUSSION_EMAIL_BODY = "discussion.email.body";
-
-	public static final String DISCUSSION_EMAIL_SUBJECT = "discussion.email.subject";
 
 	public static final String FACEBOOK_CONNECT_APP_ID = "facebook.connect.app.id";
 
@@ -1848,4 +1842,5 @@ public interface PropsKeys {
 	public static final String YM_LOGIN = "ym.login";
 
 	public static final String YM_PASSWORD = "ym.password";
+
 }

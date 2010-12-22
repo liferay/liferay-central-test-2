@@ -22,11 +22,8 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
-import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
@@ -72,12 +69,6 @@ public class EditDiscussionAction extends PortletAction {
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteMessage(actionRequest);
-			}
-			else if (cmd.equals(Constants.SUBSCRIBE_TO_COMMENTS)) {
-				subscribeToComments(actionRequest, true);
-			}
-			else if (cmd.equals(Constants.UNSUBSCRIBE_FROM_COMMENTS)) {
-				subscribeToComments(actionRequest, false);
 			}
 
 			sendRedirect(actionRequest, actionResponse, redirect);
@@ -131,27 +122,6 @@ public class EditDiscussionAction extends PortletAction {
 			renderRequest, "portlet.message_boards.edit_discussion"));
 	}
 
-	protected void subscribeToComments(
-		ActionRequest actionRequest, boolean subscribe)
-		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		String className = ParamUtil.getString(actionRequest, "className");
-		long classPK = ParamUtil.getLong(actionRequest, "classPK");
-
-		if (subscribe) {
-			SubscriptionLocalServiceUtil.addSubscription(
-				themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
-				className, classPK);
-		}
-		else {
-			SubscriptionLocalServiceUtil.deleteSubscription(
-				themeDisplay.getUserId(), className, classPK);
-		}
-	}
-
 	protected void deleteMessage(ActionRequest actionRequest) throws Exception {
 		long groupId = PortalUtil.getScopeGroupId(actionRequest);
 
@@ -177,8 +147,6 @@ public class EditDiscussionAction extends PortletAction {
 
 	protected MBMessage updateMessage(ActionRequest actionRequest)
 		throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
 
 		String className = ParamUtil.getString(actionRequest, "className");
 		long classPK = ParamUtil.getLong(actionRequest, "classPK");
@@ -196,7 +164,6 @@ public class EditDiscussionAction extends PortletAction {
 			actionRequest, "parentMessageId");
 		String subject = ParamUtil.getString(actionRequest, "subject");
 		String body = ParamUtil.getString(actionRequest, "body");
-		boolean subscribe = ParamUtil.getBoolean(actionRequest, "subscribe");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			MBMessage.class.getName(), actionRequest);
@@ -219,14 +186,6 @@ public class EditDiscussionAction extends PortletAction {
 			message = MBMessageServiceUtil.updateDiscussionMessage(
 				className, classPK, permissionClassName, permissionClassPK,
 				permissionOwnerId, messageId, subject, body, serviceContext);
-		}
-
-		// Subscription
-
-		if (subscribe) {
-			SubscriptionLocalServiceUtil.addSubscription(
-				themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
-				className, classPK);
 		}
 
 		return message;

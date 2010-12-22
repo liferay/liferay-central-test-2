@@ -72,7 +72,6 @@ else {
 }
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
-boolean isSubscribed = SubscriptionLocalServiceUtil.isSubscribed(company.getCompanyId(), user.getUserId(), className, classPK);
 %>
 
 <c:if test="<%= (messagesCount > 1) || MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.VIEW) %>">
@@ -82,7 +81,6 @@ boolean isSubscribed = SubscriptionLocalServiceUtil.isSubscribed(company.getComp
 			<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 			<aui:input name="className" type="hidden" value="<%= className %>" />
 			<aui:input name="classPK" type="hidden" value="<%= classPK %>" />
-			<aui:input name="currentURL" type="hidden" value="<%= currentURL %>" />
 			<aui:input name="permissionClassName" type="hidden" value="<%= permissionClassName %>" />
 			<aui:input name="permissionClassPK" type="hidden" value="<%= permissionClassPK %>" />
 			<aui:input name="permissionOwnerId" type="hidden" value="<%= String.valueOf(userId) %>" />
@@ -123,31 +121,6 @@ boolean isSubscribed = SubscriptionLocalServiceUtil.isSubscribed(company.getComp
 						</c:otherwise>
 					</c:choose>
 
-					<%
-					String subscriptionURL = "javascript:" + randomNamespace + "subscribeToComments(" + !isSubscribed + ");";
-					%>
-
-					<c:choose>
-						<c:when test="<%= isSubscribed %>">
-							<liferay-ui:icon
-								image="unsubscribe"
-								label="<%= true %>"
-								message = '<%= LanguageUtil.get(pageContext, "unsubscribe-from-comments") %>'
-								url="<%= subscriptionURL %>"
-								cssClass="subscribe-link"
-							/>
-						</c:when>
-						<c:otherwise>
-							<liferay-ui:icon
-								image="subscribe"
-								label="<%= true %>"
-								message = '<%= LanguageUtil.get(pageContext, "subscribe-to-comments") %>'
-								url="<%= subscriptionURL %>"
-								cssClass="subscribe-link"
-							/>
-						</c:otherwise>
-					</c:choose>
-
 					<div id="<%= randomNamespace %>postReplyForm<%= i %>" style="display: none;">
 						<aui:input type="textarea" id='<%= randomNamespace + "postReplyBody" + i %>' label="" name='<%= "postReplyBody" + i %>' style='<%= "height: " + ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT + "px; width: " + ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH + "px;" %>' wrap="soft" />
 
@@ -158,10 +131,6 @@ boolean isSubscribed = SubscriptionLocalServiceUtil.isSubscribed(company.getComp
 							postReplyButtonLabel = LanguageUtil.get(pageContext, "submit-for-publication");
 						}
 						%>
-
-						<c:if test="<%= !isSubscribed%>">
-							<aui:input helpMessage="comments-subscribe-me-help" label="subscribe-me" name="subscribe" type="checkbox" value="<%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DISCUSSION_SUBSCRIBE_BY_DEFAULT)) %>" />
-						</c:if>
 
 						<aui:button-row>
 							<aui:button disabled="<%= true %>" id='<%= namespace + randomNamespace + "postReplyButton" + i %>' onClick='<%= randomNamespace + "postReply(" + i + ");" %>' type="submit" value="<%= postReplyButtonLabel %>"  />
@@ -506,17 +475,6 @@ boolean isSubscribed = SubscriptionLocalServiceUtil.isSubscribed(company.getComp
 		function <%= randomNamespace %>showForm(rowId, textAreaId) {
 			document.getElementById(rowId).style.display = "";
 			document.getElementById(textAreaId).focus();
-		}
-
-		function <%= randomNamespace %>subscribeToComments(subscribe) {
-			if (subscribe) {
-				document.<%= namespace %><%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.SUBSCRIBE_TO_COMMENTS %>";
-			}
-			else {
-				document.<%= namespace %><%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.UNSUBSCRIBE_FROM_COMMENTS %>";
-			}
-
-			submitForm(document.<%= namespace %><%= formName %>);
 		}
 
 		function <%= randomNamespace %>updateMessage(i, pending) {
