@@ -29,7 +29,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
 			<aui:fieldset column="<%= true %>">
-				<aui:select name="displayStyle">
+				<aui:select name="preferences--displayStyle--">
 					<aui:option label="custom" selected='<%= displayStyle.equals("[custom]") %>' value="[custom]" />
 
 					<optgroup label="<liferay-ui:message key="predefined" />">
@@ -47,7 +47,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 					</optgroup>
 				</aui:select>
 
-				<aui:select name="bulletStyle">
+				<aui:select name="preferences--bulletStyle--">
 
 					<%
 					String[] bulletStyleOptions = StringUtil.split(theme.getSetting("bullet-style-options"));
@@ -69,19 +69,19 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 			<aui:fieldset column="<%= true %>">
 				<div id="<portlet:namespace />customDisplayOptions">
-					<aui:select label="header" name="headerType">
+					<aui:select label="header" name="preferences--headerType--">
 						<aui:option label="none" selected='<%= headerType.equals("none") %>' />
 						<aui:option label="portlet-title" selected='<%= headerType.equals("portlet-title") %>' />
 						<aui:option label="root-layout" selected='<%= headerType.equals("root-layout") %>' />
 						<aui:option label="breadcrumb" selected='<%= headerType.equals("breadcrumb") %>' />
 					</aui:select>
 
-					<aui:select label="root-layout" name="rootLayoutType">
+					<aui:select label="root-layout" name="preferences--rootLayoutType--">
 						<aui:option label="parent-at-level" selected='<%= rootLayoutType.equals("absolute") %>' value="absolute" />
 						<aui:option label="relative-parent-up-by" selected='<%= rootLayoutType.equals("relative") %>' value="relative" />
 					</aui:select>
 
-					<aui:select name="rootLayoutLevel">
+					<aui:select name="preferences--rootLayoutLevel--">
 
 						<%
 						for (int i = 0; i <= 4; i++) {
@@ -95,12 +95,12 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 					</aui:select>
 
-					<aui:select name="includedLayouts">
+					<aui:select name="preferences--includedLayouts--">
 						<aui:option label="auto" selected='<%= includedLayouts.equals("auto") %>' />
 						<aui:option label="all" selected='<%= includedLayouts.equals("all") %>' />
 					</aui:select>
 
-					<aui:select name="nestedChildren">
+					<aui:select name="preferences--nestedChildren--">
 						<aui:option label="yes" selected="<%= nestedChildren %>" value="1" />
 						<aui:option label="no" selected="<%= !nestedChildren %>" value="0" />
 					</aui:select>
@@ -146,17 +146,17 @@ String redirect = ParamUtil.getString(request, "redirect");
 			if (displayStyle == '[custom]') {
 				action = 'show';
 
-				data['_<%= portletResource %>_header-type'] = selectHeaderType.val();
-				data['_<%= portletResource %>_included-layouts'] = selectIncludedLayouts.val();
-				data['_<%= portletResource %>_nested-children'] = selectNestedChildren.val();
-				data['_<%= portletResource %>_root-layout-level'] = selectRootLayoutLevel.val();
-				data['_<%= portletResource %>_root-layout-type'] = selectRootLayoutType.val();
+				data['_<%= portletResource %>_headerType'] = selectHeaderType.val();
+				data['_<%= portletResource %>_includedLayouts'] = selectIncludedLayouts.val();
+				data['_<%= portletResource %>_nestedChildren'] = selectNestedChildren.val();
+				data['_<%= portletResource %>_rootLayoutLevel'] = selectRootLayoutLevel.val();
+				data['_<%= portletResource %>_rootLayoutType'] = selectRootLayoutType.val();
 			}
 
 			customDisplayOptions[action]();
 
-			data['_<%= portletResource %>_bullet-style'] = selectBulletStyle.val();
-			data['_<%= portletResource %>_display-style'] = selectDisplayStyle.val();
+			data['_<%= portletResource %>_bulletStyle'] = selectBulletStyle.val();
+			data['_<%= portletResource %>_displayStyle'] = selectDisplayStyle.val();
 
 			Liferay.Portlet.refresh(curPortletBoundaryId, data);
 		}

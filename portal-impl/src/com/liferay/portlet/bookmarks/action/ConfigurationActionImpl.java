@@ -16,10 +16,7 @@ package com.liferay.portlet.bookmarks.action;
 
 import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.servlet.SessionMessages;
-import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
@@ -27,7 +24,6 @@ import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -41,34 +37,24 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+		validateRootFolder(actionRequest);
 
-		if (!cmd.equals(Constants.UPDATE)) {
-			return;
-		}
+		super.processAction(portletConfig, actionRequest, actionResponse);
+	}
 
-		long rootFolderId = ParamUtil.getLong(actionRequest, "rootFolderId");
+	public String render(
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
+		throws Exception {
 
-		boolean showFoldersSearch = ParamUtil.getBoolean(
-			actionRequest, "showFoldersSearch");
-		boolean showSubfolders = ParamUtil.getBoolean(
-			actionRequest, "showSubfolders");
-		int foldersPerPage = ParamUtil.getInteger(
-			actionRequest, "foldersPerPage");
-		String folderColumns = ParamUtil.getString(
-			actionRequest, "folderColumns");
+		return "/html/portlet/bookmarks/configuration.jsp";
+	}
 
-		int entriesPerPage = ParamUtil.getInteger(
-			actionRequest, "entriesPerPage");
-		String entryColumns = ParamUtil.getString(
-			actionRequest, "entryColumns");
+	private void validateRootFolder(ActionRequest actionRequest)
+		throws Exception {
 
-		String portletResource = ParamUtil.getString(
-			actionRequest, "portletResource");
-
-		PortletPreferences preferences =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				actionRequest, portletResource);
+		long rootFolderId = GetterUtil.getLong(
+			getParamProperty(actionRequest, "rootFolderId"));
 
 		if (rootFolderId != BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			try {
@@ -78,33 +64,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 				SessionErrors.add(actionRequest, "rootFolderIdInvalid");
 			}
 		}
-
-		preferences.setValue("rootFolderId", String.valueOf(rootFolderId));
-
-		preferences.setValue(
-			"showFoldersSearch", String.valueOf(showFoldersSearch));
-		preferences.setValue("showSubfolders", String.valueOf(showSubfolders));
-		preferences.setValue("foldersPerPage", String.valueOf(foldersPerPage));
-		preferences.setValue("folderColumns", folderColumns);
-
-		preferences.setValue(
-			"entriesPerPage", String.valueOf(entriesPerPage));
-		preferences.setValue("entryColumns", entryColumns);
-
-		if (SessionErrors.isEmpty(actionRequest)) {
-			preferences.store();
-
-			SessionMessages.add(
-				actionRequest, portletConfig.getPortletName() + ".doConfigure");
-		}
-	}
-
-	public String render(
-			PortletConfig portletConfig, RenderRequest renderRequest,
-			RenderResponse renderResponse)
-		throws Exception {
-
-		return "/html/portlet/bookmarks/configuration.jsp";
 	}
 
 }

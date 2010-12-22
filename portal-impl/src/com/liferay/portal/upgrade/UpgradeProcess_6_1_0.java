@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v6_1_0.UpgradeAdminPortlets;
 import com.liferay.portal.upgrade.v6_1_0.UpgradeDocumentLibrary;
 import com.liferay.portal.upgrade.v6_1_0.UpgradeNavigation;
+import com.liferay.portal.upgrade.v6_1_0.UpgradePortletPreferences;
 import com.liferay.portal.upgrade.v6_1_0.UpgradeSchema;
 import com.liferay.portal.upgrade.v6_1_0.UpgradeVirtualHost;
 
@@ -37,6 +38,7 @@ public class UpgradeProcess_6_1_0 extends UpgradeProcess {
 		upgrade(UpgradeAdminPortlets.class);
 		upgrade(UpgradeDocumentLibrary.class);
 		upgrade(UpgradeNavigation.class);
+		upgrade(UpgradePortletPreferences.class);
 		upgrade(UpgradeVirtualHost.class);
 	}
 
