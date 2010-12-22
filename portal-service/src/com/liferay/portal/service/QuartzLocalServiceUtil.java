@@ -37,8 +37,7 @@ public class QuartzLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.QuartzLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static void checkQuartzJobDetails()
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static void checkQuartzJobDetails() {
 		getService().checkQuartzJobDetails();
 	}
 
