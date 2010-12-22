@@ -28,8 +28,9 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 
 	protected String[] getPortletIds() {
 		return new String[] {
-			"20", "15", "33", "56_INSTANCE_%", "59_INSTANCE_%", "71_INSTANCE_%", "73_INSTANCE_%",
-			"82_INSTANCE_%", "85_INSTANCE_%", "114", "115", "122_INSTANCE_%"
+			"20", "15", "33", "56_INSTANCE_%", "59_INSTANCE_%", "62_INSTANCE_%",
+			"71_INSTANCE_%", "73_INSTANCE_%", "82_INSTANCE_%", "85_INSTANCE_%",
+			"114", "115", "122_INSTANCE_%"
 		};
 	}
 

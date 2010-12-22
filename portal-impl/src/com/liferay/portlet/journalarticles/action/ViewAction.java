@@ -44,7 +44,7 @@ public class ViewAction extends WebContentAction {
 			PortletPreferences preferences = renderRequest.getPreferences();
 
 			long groupId = GetterUtil.getLong(
-				preferences.getValue("group-id", StringPool.BLANK));
+				preferences.getValue("groupId", StringPool.BLANK));
 
 			GroupLocalServiceUtil.getGroup(groupId);
 

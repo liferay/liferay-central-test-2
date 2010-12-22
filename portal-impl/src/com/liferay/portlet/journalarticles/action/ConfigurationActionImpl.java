@@ -33,51 +33,6 @@ import javax.portlet.RenderResponse;
  */
 public class ConfigurationActionImpl extends BaseConfigurationAction {
 
-	public void processAction(
-			PortletConfig portletConfig, ActionRequest actionRequest,
-			ActionResponse actionResponse)
-		throws Exception {
-
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-
-		if (!cmd.equals(Constants.UPDATE)) {
-			return;
-		}
-
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		String type = ParamUtil.getString(actionRequest, "type");
-		String structureId = ParamUtil.getString(actionRequest, "structureId");
-		String pageURL = ParamUtil.getString(actionRequest, "pageURL");
-		int pageDelta = ParamUtil.getInteger(actionRequest, "pageDelta");
-		String orderByCol = ParamUtil.getString(actionRequest, "orderByCol");
-		String orderByType = ParamUtil.getString(actionRequest, "orderByType");
-
-		String portletResource = ParamUtil.getString(
-			actionRequest, "portletResource");
-
-		PortletPreferences preferences =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				actionRequest, portletResource);
-
-		preferences.setValue("group-id", String.valueOf(groupId));
-		preferences.setValue("type", type);
-		preferences.setValue("structure-id", structureId);
-		preferences.setValue("page-url", pageURL);
-		preferences.setValue("page-delta", String.valueOf(pageDelta));
-		preferences.setValue("order-by-col", orderByCol);
-		preferences.setValue("order-by-type", orderByType);
-
-		if (SessionErrors.isEmpty(actionRequest)) {
-			preferences.store();
-
-			SessionMessages.add(
-				actionRequest, portletConfig.getPortletName() + ".doConfigure");
-		}
-
-		actionResponse.sendRedirect(
-			ParamUtil.getString(actionRequest, "redirect"));
-	}
-
 	public String render(
 			PortletConfig portletConfig, RenderRequest renderRequest,
 			RenderResponse renderResponse)

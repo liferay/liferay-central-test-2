@@ -51,12 +51,12 @@ if (Validator.isNotNull(structureId)) {
 <aui:form action="<%= configurationURL %>" method="post" name="fm1">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value='<%= portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur %>' />
-	<aui:input name="structureId" type="hidden" value="<%= structureId %>" />
+	<aui:input name="preferences--structureId--" type="hidden" value="<%= structureId %>" />
 
 	<liferay-ui:panel-container extended="<%= true %>" id="journalArticlesSettingsPanelContainer" persistState="<%= true %>">
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="journalArticlesFilterPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "filter") %>' >
 			<aui:fieldset>
-				<aui:select label="community" name="groupId">
+				<aui:select label="community" name="preferences--groupId--">
 					<aui:option label="global" selected="<%= groupId == themeDisplay.getCompanyGroupId() %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
 
 					<%
@@ -80,7 +80,7 @@ if (Validator.isNotNull(structureId)) {
 
 				</aui:select>
 
-				<aui:select label="web-content-type" name="type">
+				<aui:select label="web-content-type" name="preferences--type--">
 					<aui:option value="" />
 
 					<%
@@ -136,13 +136,13 @@ if (Validator.isNotNull(structureId)) {
 
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="journalArticlesDisplaySettings" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>' >
 			<aui:fieldset>
-				<aui:select label="display-url" name="pageURL">
+				<aui:select label="display-url" name="preferences--pageURL--">
 					<aui:option label="maximized" selected='<%= pageURL.equals("maximized") %>' />
 					<aui:option label="normal" selected='<%= pageURL.equals("normal") %>' />
 					<aui:option label="pop-up" selected='<%= pageURL.equals("popUp") %>' value="popUp" />
 				</aui:select>
 
-				<aui:select label="display-per-page" name="pageDelta">
+				<aui:select label="display-per-page" name="preferences--pageDelta--">
 
 					<%
 					String[] pageDeltaValues = PropsUtil.getArray(PropsKeys.JOURNAL_ARTICLES_PAGE_DELTA_VALUES);
@@ -159,7 +159,7 @@ if (Validator.isNotNull(structureId)) {
 				</aui:select>
 
 				<aui:field-wrapper label="order-by-column">
-					<aui:select inlineField="<%= true %>" label="" name="orderByCol">
+					<aui:select inlineField="<%= true %>" label="" name="preferences--orderByCol--">
 						<aui:option label="display-date" selected='<%= orderByCol.equals("display-date") %>' />
 						<aui:option label="create-date" selected='<%= orderByCol.equals("create-date") %>' />
 						<aui:option label="modified-date" selected='<%= orderByCol.equals("modified-date") %>' />
@@ -167,7 +167,7 @@ if (Validator.isNotNull(structureId)) {
 						<aui:option label="id" selected='<%= orderByCol.equals("id") %>' />
 					</aui:select>
 
-					<aui:select label="" name="orderByType">
+					<aui:select label="" name="preferences--orderByType--">
 						<aui:option label="ascending" selected='<%= orderByType.equals("asc") %>' value="asc" />
 						<aui:option label="descending" selected='<%= orderByType.equals("desc") %>' value="desc" />
 					</aui:select>

@@ -51,13 +51,13 @@ if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-long groupId = GetterUtil.getLong(preferences.getValue("group-id", String.valueOf(themeDisplay.getScopeGroupId())));
-String structureId = GetterUtil.getString(preferences.getValue("structure-id", StringPool.BLANK));
+long groupId = GetterUtil.getLong(preferences.getValue("groupId", String.valueOf(themeDisplay.getScopeGroupId())));
+String structureId = GetterUtil.getString(preferences.getValue("structureId", StringPool.BLANK));
 String type = preferences.getValue("type", StringPool.BLANK);
-String pageURL = preferences.getValue("page-url", "maximized");
-int pageDelta = GetterUtil.getInteger(preferences.getValue("page-delta", StringPool.BLANK));
-String orderByCol = preferences.getValue("order-by-col", StringPool.BLANK);
-String orderByType = preferences.getValue("order-by-type", StringPool.BLANK);
+String pageURL = preferences.getValue("pageUrl", "maximized");
+int pageDelta = GetterUtil.getInteger(preferences.getValue("pageDelta", StringPool.BLANK));
+String orderByCol = preferences.getValue("orderByCol", StringPool.BLANK);
+String orderByType = preferences.getValue("orderByType", StringPool.BLANK);
 
 OrderByComparator orderByComparator = JournalUtil.getArticleOrderByComparator(orderByCol, orderByType);
 
