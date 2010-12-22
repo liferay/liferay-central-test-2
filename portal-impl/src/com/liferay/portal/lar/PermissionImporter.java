@@ -32,6 +32,7 @@ import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
@@ -297,6 +298,8 @@ public class PermissionImporter {
 			ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey,
 			portletActions);
 
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
 		List<Element> roleEls = permissionsEl.elements("role");
 
 		for (Element roleEl : roleEls) {
@@ -307,6 +310,17 @@ public class PermissionImporter {
 			if (role == null) {
 				String description = roleEl.attributeValue("description");
 				int type = Integer.valueOf(roleEl.attributeValue("type"));
+
+				if ((type == RoleConstants.TYPE_COMMUNITY) &&
+					group.isOrganization()) {
+
+					type = RoleConstants.TYPE_ORGANIZATION;
+				}
+				else if ((type == RoleConstants.TYPE_ORGANIZATION) &&
+						 group.isCommunity()) {
+
+					type = RoleConstants.TYPE_COMMUNITY;
+				}
 
 				role = RoleLocalServiceUtil.addRole(
 					userId, companyId, name, null, description, type);
@@ -326,6 +340,8 @@ public class PermissionImporter {
 			boolean portletActions)
 		throws PortalException, SystemException {
 
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
 		List<Element> roleEls = permissionsEl.elements("role");
 
 		for (Element roleEl : roleEls) {
@@ -336,6 +352,17 @@ public class PermissionImporter {
 			if (role == null) {
 				String description = roleEl.attributeValue("description");
 				int type = Integer.valueOf(roleEl.attributeValue("type"));
+
+				if ((type == RoleConstants.TYPE_COMMUNITY) &&
+					group.isOrganization()) {
+
+					type = RoleConstants.TYPE_ORGANIZATION;
+				}
+				else if ((type == RoleConstants.TYPE_ORGANIZATION) &&
+						 group.isCommunity()) {
+
+					type = RoleConstants.TYPE_COMMUNITY;
+				}
 
 				role = RoleLocalServiceUtil.addRole(
 					userId, companyId, name, null, description, type);
