@@ -22,7 +22,7 @@ BookmarksEntry entry = (BookmarksEntry)request.getAttribute(WebKeys.BOOKMARKS_EN
 
 <aui:a href='<%= themeDisplay.getPathMain() + "/bookmarks/open_entry?entryId=" + entry.getEntryId() %>' target="_blank"><%= entry.getName() %> (<%= entry.getUrl() %>)</aui:a>
 
-<p class="asset-description"><%= entry.getComments() %></p>
+<p class="asset-description"><%= entry.getDescription() %></p>
 
 <liferay-ui:custom-attributes-available className="<%= BookmarksEntry.class.getName() %>">
 	<liferay-ui:custom-attribute-list

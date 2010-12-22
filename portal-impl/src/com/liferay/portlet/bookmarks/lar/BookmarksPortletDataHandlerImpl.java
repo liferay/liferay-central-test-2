@@ -377,21 +377,21 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				importedEntry = BookmarksEntryLocalServiceUtil.addEntry(
 					userId, portletDataContext.getScopeGroupId(), folderId,
-					entry.getName(), entry.getUrl(), entry.getComments(),
+					entry.getName(), entry.getUrl(), entry.getDescription(),
 					serviceContext);
 			}
 			else {
 				importedEntry = BookmarksEntryLocalServiceUtil.updateEntry(
 					userId, existingEntry.getEntryId(),
 					portletDataContext.getScopeGroupId(), folderId,
-					entry.getName(), entry.getUrl(), entry.getComments(),
+					entry.getName(), entry.getUrl(), entry.getDescription(),
 					serviceContext);
 			}
 		}
 		else {
 			importedEntry = BookmarksEntryLocalServiceUtil.addEntry(
 				userId, portletDataContext.getScopeGroupId(), folderId,
-				entry.getName(), entry.getUrl(), entry.getComments(),
+				entry.getName(), entry.getUrl(), entry.getDescription(),
 				serviceContext);
 		}
 

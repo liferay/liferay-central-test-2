@@ -618,7 +618,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 				bookmarksEntryPersistence.findByPrimaryKey(classPK);
 
 			bookmarksEntry.setName(title);
-			bookmarksEntry.setComments(description);
+			bookmarksEntry.setDescription(description);
 			bookmarksEntry.setUrl(url);
 
 			bookmarksEntryPersistence.update(bookmarksEntry, false);

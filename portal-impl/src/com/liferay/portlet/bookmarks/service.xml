@@ -25,7 +25,7 @@
 		<column name="folderId" type="long" />
 		<column name="name" type="String" />
 		<column name="url" type="String" />
-		<column name="comments" type="String" />
+		<column name="description" type="String" />
 		<column name="visits" type="int" />
 		<column name="priority" type="int" />
 

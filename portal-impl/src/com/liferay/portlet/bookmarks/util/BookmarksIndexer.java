@@ -107,7 +107,7 @@ public class BookmarksIndexer extends BaseIndexer {
 		long entryId = entry.getEntryId();
 		String name = entry.getName();
 		String url = entry.getUrl();
-		String comments = entry.getComments();
+		String description = entry.getDescription();
 		Date modifiedDate = entry.getModifiedDate();
 
 		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
@@ -142,7 +142,7 @@ public class BookmarksIndexer extends BaseIndexer {
 			Field.ENTRY_CLASS_NAME, BookmarksEntry.class.getName());
 		document.addKeyword(Field.ENTRY_CLASS_PK, entryId);
 		document.addText(Field.URL, url);
-		document.addText(Field.COMMENTS, comments);
+		document.addText(Field.DESCRIPTION, description);
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 

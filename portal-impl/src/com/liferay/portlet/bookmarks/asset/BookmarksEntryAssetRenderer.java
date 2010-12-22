@@ -49,7 +49,7 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public String getSummary() {
-		return HtmlUtil.stripHtml(_entry.getComments());
+		return HtmlUtil.stripHtml(_entry.getDescription());
 	}
 
 	public String getTitle() {

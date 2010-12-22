@@ -73,7 +73,7 @@ request.setAttribute("view_entry.jsp-entry", entry);
 		</div>
 
 		<div class="lfr-asset-description">
-			<%= entry.getComments() %>
+			<%= entry.getDescription() %>
 		</div>
 
 		<liferay-ui:custom-attributes-available className="<%= BookmarksEntry.class.getName() %>">

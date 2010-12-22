@@ -143,7 +143,7 @@ public class EditEntryAction extends PortletAction {
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 		String name = ParamUtil.getString(actionRequest, "name");
 		String url = ParamUtil.getString(actionRequest, "url");
-		String comments = ParamUtil.getString(actionRequest, "comments");
+		String description = ParamUtil.getString(actionRequest, "description");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			BookmarksEntry.class.getName(), actionRequest);
@@ -153,7 +153,7 @@ public class EditEntryAction extends PortletAction {
 			// Add entry
 
 			BookmarksEntry entry = BookmarksEntryServiceUtil.addEntry(
-				groupId, folderId, name, url, comments, serviceContext);
+				groupId, folderId, name, url, description, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, BookmarksEntry.class.getName(),
@@ -164,7 +164,7 @@ public class EditEntryAction extends PortletAction {
 			// Update entry
 
 			BookmarksEntryServiceUtil.updateEntry(
-				entryId, groupId, folderId, name, url, comments,
+				entryId, groupId, folderId, name, url, description,
 				serviceContext);
 		}
 

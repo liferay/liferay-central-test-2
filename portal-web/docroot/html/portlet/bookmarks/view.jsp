@@ -269,7 +269,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 						name="entry"
 						property="name"
 						target="_blank"
-						title="<%= entry.getComments() %>"
+						title="<%= entry.getDescription() %>"
 					/>
 
 					<liferay-ui:search-container-column-text
@@ -277,7 +277,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 						name="url"
 						property="url"
 						target="_blank"
-						title="<%= entry.getComments() %>"
+						title="<%= entry.getDescription() %>"
 					/>
 
 					<liferay-ui:search-container-column-text
@@ -285,7 +285,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 						name="visits"
 						property="visits"
 						target="_blank"
-						title="<%= entry.getComments() %>"
+						title="<%= entry.getDescription() %>"
 					/>
 
 					<liferay-ui:search-container-column-jsp

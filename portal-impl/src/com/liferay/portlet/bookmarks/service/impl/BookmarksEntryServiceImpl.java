@@ -30,14 +30,14 @@ public class BookmarksEntryServiceImpl extends BookmarksEntryServiceBaseImpl {
 
 	public BookmarksEntry addEntry(
 			long groupId, long folderId, String name, String url,
-			String comments, ServiceContext serviceContext)
+			String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		BookmarksFolderPermission.check(
 			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_ENTRY);
 
 		return bookmarksEntryLocalService.addEntry(
-			getUserId(), groupId, folderId, name, url, comments,
+			getUserId(), groupId, folderId, name, url, description,
 			serviceContext);
 	}
 
@@ -71,14 +71,14 @@ public class BookmarksEntryServiceImpl extends BookmarksEntryServiceBaseImpl {
 
 	public BookmarksEntry updateEntry(
 			long entryId, long groupId, long folderId, String name, String url,
-			String comments, ServiceContext serviceContext)
+			String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		BookmarksEntryPermission.check(
 			getPermissionChecker(), entryId, ActionKeys.UPDATE);
 
 		return bookmarksEntryLocalService.updateEntry(
-			getUserId(), entryId, groupId, folderId, name, url, comments,
+			getUserId(), entryId, groupId, folderId, name, url, description,
 			serviceContext);
 	}
 

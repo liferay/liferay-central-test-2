@@ -45,7 +45,7 @@ public class BookmarksEntryLocalServiceImpl
 
 	public BookmarksEntry addEntry(
 			long userId, long groupId, long folderId, String name, String url,
-			String comments, ServiceContext serviceContext)
+			String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -73,7 +73,7 @@ public class BookmarksEntryLocalServiceImpl
 		entry.setFolderId(folderId);
 		entry.setName(name);
 		entry.setUrl(url);
-		entry.setComments(comments);
+		entry.setDescription(description);
 		entry.setExpandoBridgeAttributes(serviceContext);
 
 		bookmarksEntryPersistence.update(entry, false);
@@ -311,13 +311,13 @@ public class BookmarksEntryLocalServiceImpl
 			userId, entry.getGroupId(), BookmarksEntry.class.getName(),
 			entry.getEntryId(), entry.getUuid(), assetCategoryIds,
 			assetTagNames, true, null, null, null, null,
-			ContentTypes.TEXT_PLAIN, entry.getName(), entry.getComments(), null,
-			entry.getUrl(), 0, 0, null, false);
+			ContentTypes.TEXT_PLAIN, entry.getName(), entry.getDescription(),
+			null, entry.getUrl(), 0, 0, null, false);
 	}
 
 	public BookmarksEntry updateEntry(
 			long userId, long entryId, long groupId, long folderId, String name,
-			String url, String comments, ServiceContext serviceContext)
+			String url, String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -335,7 +335,7 @@ public class BookmarksEntryLocalServiceImpl
 		entry.setFolderId(folderId);
 		entry.setName(name);
 		entry.setUrl(url);
-		entry.setComments(comments);
+		entry.setDescription(description);
 		entry.setExpandoBridgeAttributes(serviceContext);
 
 		bookmarksEntryPersistence.update(entry, false);
