@@ -293,12 +293,12 @@ public class PermissionImporter {
 			boolean portletActions)
 		throws PortalException, SystemException {
 
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
 		Resource resource = layoutCache.getResource(
 			companyId, groupId, resourceName,
 			ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey,
 			portletActions);
-
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 		List<Element> roleEls = permissionsEl.elements("role");
 
