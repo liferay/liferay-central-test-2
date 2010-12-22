@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PortletKeys;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,6 +40,37 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 		updatePortletPreferences();
+	}
+
+	protected Object[] getGroup(long groupId)
+		throws Exception {
+
+		Object[] group = null;
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(_GET_GROUP);
+
+			ps.setLong(1, groupId);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long companyId = rs.getLong("companyId");
+
+				group = new Object[] {groupId, companyId};
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return group;
 	}
 
 	protected Object[] getLayout(long plid) throws Exception {
@@ -174,10 +206,18 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 				String portletId = rs.getString("portletId");
 				String preferences = rs.getString("preferences");
 
-				Object[] layout = getLayout(plid);
+				Object[] context = null;
 
-				if (layout != null) {
-					long companyId = (Long)layout[1];
+				if (ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP) {
+					context = getGroup(ownerId);
+				}
+				else {
+					context = getLayout(plid);
+				}
+
+
+				if (context != null) {
+					long companyId = (Long)context[1];
 
 					String newPreferences = upgradePreferences(
 						companyId, ownerId, ownerType, plid, portletId,
@@ -223,6 +263,9 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId, String xml)
 		throws Exception;
+
+	private static final String _GET_GROUP =
+		"select * from Group_ where groupId = ?";
 
 	private static final String _GET_LAYOUT =
 		"select * from Layout where plid = ?";
