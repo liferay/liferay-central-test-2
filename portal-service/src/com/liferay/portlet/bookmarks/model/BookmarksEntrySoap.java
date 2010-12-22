@@ -44,7 +44,7 @@ public class BookmarksEntrySoap implements Serializable {
 		soapModel.setFolderId(model.getFolderId());
 		soapModel.setName(model.getName());
 		soapModel.setUrl(model.getUrl());
-		soapModel.setComments(model.getComments());
+		soapModel.setDescription(model.getDescription());
 		soapModel.setVisits(model.getVisits());
 		soapModel.setPriority(model.getPriority());
 
@@ -179,12 +179,12 @@ public class BookmarksEntrySoap implements Serializable {
 		_url = url;
 	}
 
-	public String getComments() {
-		return _comments;
+	public String getDescription() {
+		return _description;
 	}
 
-	public void setComments(String comments) {
-		_comments = comments;
+	public void setDescription(String description) {
+		_description = description;
 	}
 
 	public int getVisits() {
@@ -213,7 +213,7 @@ public class BookmarksEntrySoap implements Serializable {
 	private long _folderId;
 	private String _name;
 	private String _url;
-	private String _comments;
+	private String _description;
 	private int _visits;
 	private int _priority;
 }

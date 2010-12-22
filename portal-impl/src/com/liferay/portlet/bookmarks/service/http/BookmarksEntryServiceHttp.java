@@ -56,7 +56,8 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
 public class BookmarksEntryServiceHttp {
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		HttpPrincipal httpPrincipal, long groupId, long folderId,
-		java.lang.String name, java.lang.String url, java.lang.String comments,
+		java.lang.String name, java.lang.String url,
+		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -65,7 +66,7 @@ public class BookmarksEntryServiceHttp {
 					"addEntry", _addEntryParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					folderId, name, url, comments, serviceContext);
+					folderId, name, url, description, serviceContext);
 
 			Object returnObj = null;
 
@@ -198,7 +199,8 @@ public class BookmarksEntryServiceHttp {
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
 		HttpPrincipal httpPrincipal, long entryId, long groupId, long folderId,
-		java.lang.String name, java.lang.String url, java.lang.String comments,
+		java.lang.String name, java.lang.String url,
+		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -207,7 +209,7 @@ public class BookmarksEntryServiceHttp {
 					"updateEntry", _updateEntryParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId,
-					groupId, folderId, name, url, comments, serviceContext);
+					groupId, folderId, name, url, description, serviceContext);
 
 			Object returnObj = null;
 

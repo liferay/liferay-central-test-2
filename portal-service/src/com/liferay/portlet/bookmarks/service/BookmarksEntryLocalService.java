@@ -227,7 +227,7 @@ public interface BookmarksEntryLocalService {
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		long userId, long groupId, long folderId, java.lang.String name,
-		java.lang.String url, java.lang.String comments,
+		java.lang.String url, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -330,7 +330,8 @@ public interface BookmarksEntryLocalService {
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
 		long userId, long entryId, long groupId, long folderId,
-		java.lang.String name, java.lang.String url, java.lang.String comments,
+		java.lang.String name, java.lang.String url,
+		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

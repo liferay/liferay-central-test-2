@@ -252,7 +252,7 @@ create table BookmarksEntry (
 	folderId LONG,
 	name VARCHAR(255) null,
 	url STRING null,
-	comments STRING null,
+	description VARCHAR(75) null,
 	visits INTEGER,
 	priority INTEGER
 );

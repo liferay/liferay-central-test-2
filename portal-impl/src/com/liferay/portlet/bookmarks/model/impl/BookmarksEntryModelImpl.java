@@ -71,11 +71,11 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 			{ "folderId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "url", new Integer(Types.VARCHAR) },
-			{ "comments", new Integer(Types.VARCHAR) },
+			{ "description", new Integer(Types.VARCHAR) },
 			{ "visits", new Integer(Types.INTEGER) },
 			{ "priority", new Integer(Types.INTEGER) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table BookmarksEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,url STRING null,comments STRING null,visits INTEGER,priority INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table BookmarksEntry (uuid_ VARCHAR(75) null,entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(255) null,url STRING null,description VARCHAR(75) null,visits INTEGER,priority INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table BookmarksEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY bookmarksEntry.folderId ASC, bookmarksEntry.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY BookmarksEntry.folderId ASC, BookmarksEntry.name ASC";
@@ -108,7 +108,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		model.setFolderId(soapModel.getFolderId());
 		model.setName(soapModel.getName());
 		model.setUrl(soapModel.getUrl());
-		model.setComments(soapModel.getComments());
+		model.setDescription(soapModel.getDescription());
 		model.setVisits(soapModel.getVisits());
 		model.setPriority(soapModel.getPriority());
 
@@ -270,17 +270,17 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		_url = url;
 	}
 
-	public String getComments() {
-		if (_comments == null) {
+	public String getDescription() {
+		if (_description == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _comments;
+			return _description;
 		}
 	}
 
-	public void setComments(String comments) {
-		_comments = comments;
+	public void setDescription(String description) {
+		_description = description;
 	}
 
 	public int getVisits() {
@@ -336,7 +336,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		clone.setFolderId(getFolderId());
 		clone.setName(getName());
 		clone.setUrl(getUrl());
-		clone.setComments(getComments());
+		clone.setDescription(getDescription());
 		clone.setVisits(getVisits());
 		clone.setPriority(getPriority());
 
@@ -421,8 +421,8 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		sb.append(getName());
 		sb.append(", url=");
 		sb.append(getUrl());
-		sb.append(", comments=");
-		sb.append(getComments());
+		sb.append(", description=");
+		sb.append(getDescription());
 		sb.append(", visits=");
 		sb.append(getVisits());
 		sb.append(", priority=");
@@ -480,8 +480,8 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		sb.append(getUrl());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>comments</column-name><column-value><![CDATA[");
-		sb.append(getComments());
+			"<column><column-name>description</column-name><column-value><![CDATA[");
+		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>visits</column-name><column-value><![CDATA[");
@@ -511,7 +511,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 	private long _folderId;
 	private String _name;
 	private String _url;
-	private String _comments;
+	private String _description;
 	private int _visits;
 	private int _priority;
 	private transient ExpandoBridge _expandoBridge;

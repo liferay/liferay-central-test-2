@@ -218,19 +218,19 @@ public interface BookmarksEntryModel extends BaseModel<BookmarksEntry> {
 	public void setUrl(String url);
 
 	/**
-	 * Gets the comments of this bookmarks entry.
+	 * Gets the description of this bookmarks entry.
 	 *
-	 * @return the comments of this bookmarks entry
+	 * @return the description of this bookmarks entry
 	 */
 	@AutoEscape
-	public String getComments();
+	public String getDescription();
 
 	/**
-	 * Sets the comments of this bookmarks entry.
+	 * Sets the description of this bookmarks entry.
 	 *
-	 * @param comments the comments of this bookmarks entry
+	 * @param description the description of this bookmarks entry
 	 */
-	public void setComments(String comments);
+	public void setDescription(String description);
 
 	/**
 	 * Gets the visits of this bookmarks entry.

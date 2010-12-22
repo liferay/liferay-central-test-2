@@ -247,21 +247,21 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	}
 
 	/**
-	* Gets the comments of this bookmarks entry.
+	* Gets the description of this bookmarks entry.
 	*
-	* @return the comments of this bookmarks entry
+	* @return the description of this bookmarks entry
 	*/
-	public java.lang.String getComments() {
-		return _bookmarksEntry.getComments();
+	public java.lang.String getDescription() {
+		return _bookmarksEntry.getDescription();
 	}
 
 	/**
-	* Sets the comments of this bookmarks entry.
+	* Sets the description of this bookmarks entry.
 	*
-	* @param comments the comments of this bookmarks entry
+	* @param description the description of this bookmarks entry
 	*/
-	public void setComments(java.lang.String comments) {
-		_bookmarksEntry.setComments(comments);
+	public void setDescription(java.lang.String description) {
+		_bookmarksEntry.setDescription(description);
 	}
 
 	/**

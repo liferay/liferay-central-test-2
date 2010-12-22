@@ -39,12 +39,12 @@ public class BookmarksEntryServiceUtil {
 	 */
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		long groupId, long folderId, java.lang.String name,
-		java.lang.String url, java.lang.String comments,
+		java.lang.String url, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addEntry(groupId, folderId, name, url, comments,
+				   .addEntry(groupId, folderId, name, url, description,
 			serviceContext);
 	}
 
@@ -70,13 +70,13 @@ public class BookmarksEntryServiceUtil {
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
 		long entryId, long groupId, long folderId, java.lang.String name,
-		java.lang.String url, java.lang.String comments,
+		java.lang.String url, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateEntry(entryId, groupId, folderId, name, url,
-			comments, serviceContext);
+			description, serviceContext);
 	}
 
 	public static BookmarksEntryService getService() {

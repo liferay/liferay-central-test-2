@@ -74,7 +74,7 @@ public class BookmarksEntryPersistenceTest extends BasePersistenceTestCase {
 		newBookmarksEntry.setFolderId(nextLong());
 		newBookmarksEntry.setName(randomString());
 		newBookmarksEntry.setUrl(randomString());
-		newBookmarksEntry.setComments(randomString());
+		newBookmarksEntry.setDescription(randomString());
 		newBookmarksEntry.setVisits(nextInt());
 		newBookmarksEntry.setPriority(nextInt());
 
@@ -103,8 +103,8 @@ public class BookmarksEntryPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingBookmarksEntry.getName(),
 			newBookmarksEntry.getName());
 		assertEquals(existingBookmarksEntry.getUrl(), newBookmarksEntry.getUrl());
-		assertEquals(existingBookmarksEntry.getComments(),
-			newBookmarksEntry.getComments());
+		assertEquals(existingBookmarksEntry.getDescription(),
+			newBookmarksEntry.getDescription());
 		assertEquals(existingBookmarksEntry.getVisits(),
 			newBookmarksEntry.getVisits());
 		assertEquals(existingBookmarksEntry.getPriority(),
@@ -191,7 +191,7 @@ public class BookmarksEntryPersistenceTest extends BasePersistenceTestCase {
 		bookmarksEntry.setFolderId(nextLong());
 		bookmarksEntry.setName(randomString());
 		bookmarksEntry.setUrl(randomString());
-		bookmarksEntry.setComments(randomString());
+		bookmarksEntry.setDescription(randomString());
 		bookmarksEntry.setVisits(nextInt());
 		bookmarksEntry.setPriority(nextInt());
 

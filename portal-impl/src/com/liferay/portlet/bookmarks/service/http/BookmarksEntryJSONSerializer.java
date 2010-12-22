@@ -60,7 +60,7 @@ public class BookmarksEntryJSONSerializer {
 		jsonObject.put("folderId", model.getFolderId());
 		jsonObject.put("name", model.getName());
 		jsonObject.put("url", model.getUrl());
-		jsonObject.put("comments", model.getComments());
+		jsonObject.put("description", model.getDescription());
 		jsonObject.put("visits", model.getVisits());
 		jsonObject.put("priority", model.getPriority());
 

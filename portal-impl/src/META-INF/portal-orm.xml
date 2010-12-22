@@ -1395,7 +1395,7 @@
 			<basic name="folderId" />
 			<basic name="name" />
 			<basic name="url" />
-			<basic name="comments" />
+			<basic name="description" />
 			<basic name="visits" />
 			<basic name="priority" />
 			<transient name="primaryKey" />

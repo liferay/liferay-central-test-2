@@ -31,12 +31,12 @@ public class BookmarksEntryServiceWrapper implements BookmarksEntryService {
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		long groupId, long folderId, java.lang.String name,
-		java.lang.String url, java.lang.String comments,
+		java.lang.String url, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _bookmarksEntryService.addEntry(groupId, folderId, name, url,
-			comments, serviceContext);
+			description, serviceContext);
 	}
 
 	public void deleteEntry(long entryId)
@@ -61,12 +61,12 @@ public class BookmarksEntryServiceWrapper implements BookmarksEntryService {
 
 	public com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
 		long entryId, long groupId, long folderId, java.lang.String name,
-		java.lang.String url, java.lang.String comments,
+		java.lang.String url, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _bookmarksEntryService.updateEntry(entryId, groupId, folderId,
-			name, url, comments, serviceContext);
+			name, url, description, serviceContext);
 	}
 
 	public BookmarksEntryService getWrappedBookmarksEntryService() {
