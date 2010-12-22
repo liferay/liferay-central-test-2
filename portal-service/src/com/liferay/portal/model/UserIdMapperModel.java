@@ -57,16 +57,16 @@ public interface UserIdMapperModel extends BaseModel<UserIdMapper> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the user id mapper ID of this user ID mapper.
+	 * Gets the user ID mapper ID of this user ID mapper.
 	 *
-	 * @return the user id mapper ID of this user ID mapper
+	 * @return the user ID mapper ID of this user ID mapper
 	 */
 	public long getUserIdMapperId();
 
 	/**
-	 * Sets the user id mapper ID of this user ID mapper.
+	 * Sets the user ID mapper ID of this user ID mapper.
 	 *
-	 * @param userIdMapperId the user id mapper ID of this user ID mapper
+	 * @param userIdMapperId the user ID mapper ID of this user ID mapper
 	 */
 	public void setUserIdMapperId(long userIdMapperId);
 

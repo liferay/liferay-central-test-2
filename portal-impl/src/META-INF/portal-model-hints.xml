@@ -594,9 +594,7 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="name" type="String" />
-		<field name="description" type="String">
-			<hint-collection name="TEXTAREA" />
-		</field>
+		<field name="description" type="String" />
 		<field name="portletId" type="String" />
 		<field name="type" type="int" />
 		<field name="typeSettings" type="String" />

@@ -47,18 +47,18 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Gets the id of this portlet.
+	* Gets the ID of this portlet.
 	*
-	* @return the id of this portlet
+	* @return the ID of this portlet
 	*/
 	public long getId() {
 		return _portlet.getId();
 	}
 
 	/**
-	* Sets the id of this portlet.
+	* Sets the ID of this portlet.
 	*
-	* @param id the id of this portlet
+	* @param id the ID of this portlet
 	*/
 	public void setId(long id) {
 		_portlet.setId(id);
