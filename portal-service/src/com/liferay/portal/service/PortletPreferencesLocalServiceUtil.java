@@ -289,6 +289,12 @@ public class PortletPreferencesLocalServiceUtil {
 		return getService().getPortletPreferencesByPlid(plid);
 	}
 
+	public static java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferencesByPortletId(
+		java.lang.String portletId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getPortletPreferencesByPortletId(portletId);
+	}
+
 	public static javax.portlet.PortletPreferences getPreferences(
 		com.liferay.portal.model.PortletPreferencesIds portletPreferencesIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
