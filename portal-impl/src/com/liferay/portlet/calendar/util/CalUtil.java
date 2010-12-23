@@ -41,21 +41,21 @@ public class CalUtil {
 		String emailFromAddress = PropsUtil.get(
 			PropsKeys.CALENDAR_EMAIL_FROM_ADDRESS);
 
-		return preferences.getValue("email-from-address", emailFromAddress);
+		return preferences.getValue("emailFromAddress", emailFromAddress);
 	}
 
 	public static String getEmailFromName(PortletPreferences preferences) {
 		String emailFromName = PropsUtil.get(
 			PropsKeys.CALENDAR_EMAIL_FROM_NAME);
 
-		return preferences.getValue("email-from-name", emailFromName);
+		return preferences.getValue("emailFromName", emailFromName);
 	}
 
 	public static boolean getEmailEventReminderEnabled(
 		PortletPreferences preferences) {
 
 		String emailEventReminderEnabled = preferences.getValue(
-			"email-event-reminder-enabled", StringPool.BLANK);
+			"emailEventReminderEnabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailEventReminderEnabled)) {
 			return GetterUtil.getBoolean(emailEventReminderEnabled);
@@ -70,7 +70,7 @@ public class CalUtil {
 		PortletPreferences preferences) {
 
 		String emailEventReminderBody = preferences.getValue(
-			"email-event-reminder-body", StringPool.BLANK);
+			"emailEventReminderBody", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailEventReminderBody)) {
 			return emailEventReminderBody;
@@ -85,7 +85,7 @@ public class CalUtil {
 		PortletPreferences preferences) {
 
 		String emailEventReminderSubject = preferences.getValue(
-			"email-event-reminder-subject", StringPool.BLANK);
+			"emailEventReminderSubject", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailEventReminderSubject)) {
 			return emailEventReminderSubject;

@@ -57,21 +57,21 @@ String editorContent = emailEventReminderBody;
 	<c:choose>
 		<c:when test='<%= tabs2.equals("email-from") %>'>
 			<aui:fieldset>
-				<aui:input cssClass="lfr-input-text-container" label="name" name="emailFromName" type="text" value="<%= emailFromName %>" />
+				<aui:input cssClass="lfr-input-text-container" label="name" name="preferences--emailFromName--" type="text" value="<%= emailFromName %>" />
 
-				<aui:input cssClass="lfr-input-text-container" label="address" name="emailFromAddress" type="text" value="<%= emailFromAddress %>" />
+				<aui:input cssClass="lfr-input-text-container" label="address" name="preferences--emailFromAddress--" type="text" value="<%= emailFromAddress %>" />
 			</aui:fieldset>
 		</c:when>
 		<c:when test='<%= tabs2.equals("event-reminder-email") %>'>
 			<aui:fieldset>
-				<aui:input inlineLabel="left" label="enabled" name="emailEventReminderEnabled" type="checkbox" value="<%= CalUtil.getEmailEventReminderEnabled(preferences) %>" />
+				<aui:input label="enabled" name="preferences--emailEventReminderEnabled--" type="checkbox" value="<%= CalUtil.getEmailEventReminderEnabled(preferences) %>" />
 
-				<aui:input cssClass="lfr-input-text-container" label="subject" name="emailEventReminderSubject" type="text" value="<%= emailEventReminderSubject %>" />
+				<aui:input cssClass="lfr-input-text-container" label="subject" name="preferences--emailEventReminderSubject--" type="text" value="<%= emailEventReminderSubject %>" />
 
 				<aui:field-wrapper label="body">
 					<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-					<aui:input name="<%= editorParam %>" type="hidden" />
+					<aui:input name='<%= "preferences--" + editorParam + "--" %>' type="hidden" />
 				</aui:field-wrapper>
 			</aui:fieldset>
 
@@ -132,7 +132,7 @@ String editorContent = emailEventReminderBody;
 		</c:when>
 		<c:when test='<%= tabs2.equals("display-settings") %>'>
 			<aui:fieldset label="default-tab">
-				<aui:select label="default-tab" name="tabs1Default">
+				<aui:select label="default-tab" name="preferences--tabs1Default--">
 
 					<%
 					for (String tabs1Name : tabs1NamesArray) {
@@ -148,21 +148,21 @@ String editorContent = emailEventReminderBody;
 			</aui:fieldset>
 
 			<aui:fieldset label="summary-tab">
-				<aui:select label="summary-tab" name="summaryTabOrientation">
+				<aui:select label="summary-tab" name="preferences--summaryTabOrientation--">
 					<aui:option label="horizontal" selected='<%= summaryTabOrientation.equals("horizontal") %>' />
 					<aui:option label="vertical" selected='<%= summaryTabOrientation.equals("vertical") %>' />
 				</aui:select>
 
-				<aui:input inlineLabel="left" label="show-mini-month" name="summaryTabShowMiniMonth" type="checkbox" value="<%= summaryTabShowMiniMonth %>" />
+				<aui:input label="show-mini-month" name="preferences--summaryTabShowMiniMonth--" type="checkbox" value="<%= summaryTabShowMiniMonth %>" />
 
-				<aui:input inlineLabel="left" label="show-todays-events" name="summaryTabShowTodaysEvents" type="checkbox" value="<%= summaryTabShowTodaysEvents %>" />
+				<aui:input label="show-todays-events" name="preferences--summaryTabShowTodaysEvents--" type="checkbox" value="<%= summaryTabShowTodaysEvents %>" />
 
 				<c:if test="<%= PropsValues.CALENDAR_EVENT_RATINGS_ENABLED %>">
-					<aui:input inlineLabel="left" name="enableRatings" type="checkbox" value="<%= enableRatings %>" />
+					<aui:input name="preferences--enableRatings--" type="checkbox" value="<%= enableRatings %>" />
 				</c:if>
 
 				<c:if test="<%= PropsValues.CALENDAR_EVENT_COMMENTS_ENABLED %>">
-					<aui:input inlineLabel="left" name="enableComments" type="checkbox" value="<%= enableComments %>" />
+					<aui:input name="preferences--enableComments--" type="checkbox" value="<%= enableComments %>" />
 				</c:if>
 			</aui:fieldset>
 		</c:when>

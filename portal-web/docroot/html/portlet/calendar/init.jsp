@@ -48,13 +48,13 @@ if (CalendarPermission.contains(permissionChecker, scopeGroupId, ActionKeys.EXPO
 
 String[] tabs1NamesArray = StringUtil.split(tabs1Names);
 
-String tabs1Default = preferences.getValue("tabs1-default", tabs1NamesArray[0]);
+String tabs1Default = preferences.getValue("tabs1Default", tabs1NamesArray[0]);
 
-String summaryTabOrientation = preferences.getValue("summary-tab-orientation", "horizontal");
-boolean summaryTabShowMiniMonth = GetterUtil.getBoolean(preferences.getValue("summary-tab-show-mini-month", "true"));
-boolean summaryTabShowTodaysEvents = GetterUtil.getBoolean(preferences.getValue("summary-tab-show-todays-events", "true"));
-boolean enableRatings = PropsValues.CALENDAR_EVENT_RATINGS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enable-ratings", null), true);
-boolean enableComments = PropsValues.CALENDAR_EVENT_COMMENTS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enable-comments", null), true);
+String summaryTabOrientation = preferences.getValue("summaryTabOrientation", "horizontal");
+boolean summaryTabShowMiniMonth = GetterUtil.getBoolean(preferences.getValue("summaryTabShowMiniMonth", "true"));
+boolean summaryTabShowTodaysEvents = GetterUtil.getBoolean(preferences.getValue("summaryTabShowTodaysEvents", "true"));
+boolean enableRatings = PropsValues.CALENDAR_EVENT_RATINGS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enableRatings", null), true);
+boolean enableComments = PropsValues.CALENDAR_EVENT_COMMENTS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enableComments", null), true);
 
 String monthParam = request.getParameter("month");
 String dayParam = request.getParameter("day");
