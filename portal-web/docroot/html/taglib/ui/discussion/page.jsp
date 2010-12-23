@@ -72,7 +72,6 @@ else {
 }
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
-boolean isSubscribed = SubscriptionLocalServiceUtil.isSubscribed(company.getCompanyId(), user.getUserId(), className, classPK);
 %>
 
 <c:if test="<%= (messagesCount > 1) || MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.VIEW) %>">
@@ -82,7 +81,6 @@ boolean isSubscribed = SubscriptionLocalServiceUtil.isSubscribed(company.getComp
 			<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 			<aui:input name="className" type="hidden" value="<%= className %>" />
 			<aui:input name="classPK" type="hidden" value="<%= classPK %>" />
-			<aui:input name="currentURL" type="hidden" value="<%= currentURL %>" />
 			<aui:input name="permissionClassName" type="hidden" value="<%= permissionClassName %>" />
 			<aui:input name="permissionClassPK" type="hidden" value="<%= permissionClassPK %>" />
 			<aui:input name="permissionOwnerId" type="hidden" value="<%= String.valueOf(userId) %>" />
@@ -124,26 +122,28 @@ boolean isSubscribed = SubscriptionLocalServiceUtil.isSubscribed(company.getComp
 					</c:choose>
 
 					<%
-					String subscriptionURL = "javascript:" + randomNamespace + "subscribeToComments(" + !isSubscribed + ");";
+					boolean subscribed = SubscriptionLocalServiceUtil.isSubscribed(company.getCompanyId(), user.getUserId(), className, classPK);
+
+					String subscriptionURL = "javascript:" + randomNamespace + "subscribeToComments(" + !subscribed + ");";
 					%>
 
 					<c:choose>
-						<c:when test="<%= isSubscribed %>">
+						<c:when test="<%= subscribed %>">
 							<liferay-ui:icon
+								cssClass="subscribe-link"
 								image="unsubscribe"
 								label="<%= true %>"
 								message = '<%= LanguageUtil.get(pageContext, "unsubscribe-from-comments") %>'
 								url="<%= subscriptionURL %>"
-								cssClass="subscribe-link"
 							/>
 						</c:when>
 						<c:otherwise>
 							<liferay-ui:icon
+								cssClass="subscribe-link"
 								image="subscribe"
 								label="<%= true %>"
 								message = '<%= LanguageUtil.get(pageContext, "subscribe-to-comments") %>'
 								url="<%= subscriptionURL %>"
-								cssClass="subscribe-link"
 							/>
 						</c:otherwise>
 					</c:choose>
@@ -159,8 +159,8 @@ boolean isSubscribed = SubscriptionLocalServiceUtil.isSubscribed(company.getComp
 						}
 						%>
 
-						<c:if test="<%= !isSubscribed%>">
-							<aui:input helpMessage="comments-subscribe-me-help" label="subscribe-me" name="subscribe" type="checkbox" value="<%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DISCUSSION_SUBSCRIBE_BY_DEFAULT)) %>" />
+						<c:if test="<%= !subscribed %>">
+							<aui:input helpMessage="comments-subscribe-me-help" label="subscribe-me" name="subscribe" type="checkbox" value="<%= PropsValues.DISCUSSION_SUBSCRIBE_BY_DEFAULT %>" />
 						</c:if>
 
 						<aui:button-row>

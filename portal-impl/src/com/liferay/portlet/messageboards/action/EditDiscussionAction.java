@@ -131,27 +131,6 @@ public class EditDiscussionAction extends PortletAction {
 			renderRequest, "portlet.message_boards.edit_discussion"));
 	}
 
-	protected void subscribeToComments(
-		ActionRequest actionRequest, boolean subscribe)
-		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		String className = ParamUtil.getString(actionRequest, "className");
-		long classPK = ParamUtil.getLong(actionRequest, "classPK");
-
-		if (subscribe) {
-			SubscriptionLocalServiceUtil.addSubscription(
-				themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
-				className, classPK);
-		}
-		else {
-			SubscriptionLocalServiceUtil.deleteSubscription(
-				themeDisplay.getUserId(), className, classPK);
-		}
-	}
-
 	protected void deleteMessage(ActionRequest actionRequest) throws Exception {
 		long groupId = PortalUtil.getScopeGroupId(actionRequest);
 
@@ -177,6 +156,7 @@ public class EditDiscussionAction extends PortletAction {
 
 	protected MBMessage updateMessage(ActionRequest actionRequest)
 		throws Exception {
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -196,7 +176,6 @@ public class EditDiscussionAction extends PortletAction {
 			actionRequest, "parentMessageId");
 		String subject = ParamUtil.getString(actionRequest, "subject");
 		String body = ParamUtil.getString(actionRequest, "body");
-		boolean subscribe = ParamUtil.getBoolean(actionRequest, "subscribe");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			MBMessage.class.getName(), actionRequest);
@@ -223,6 +202,8 @@ public class EditDiscussionAction extends PortletAction {
 
 		// Subscription
 
+		boolean subscribe = ParamUtil.getBoolean(actionRequest, "subscribe");
+
 		if (subscribe) {
 			SubscriptionLocalServiceUtil.addSubscription(
 				themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
@@ -230,6 +211,27 @@ public class EditDiscussionAction extends PortletAction {
 		}
 
 		return message;
+	}
+
+	protected void subscribeToComments(
+			ActionRequest actionRequest, boolean subscribe)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String className = ParamUtil.getString(actionRequest, "className");
+		long classPK = ParamUtil.getLong(actionRequest, "classPK");
+
+		if (subscribe) {
+			SubscriptionLocalServiceUtil.addSubscription(
+				themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
+				className, classPK);
+		}
+		else {
+			SubscriptionLocalServiceUtil.deleteSubscription(
+				themeDisplay.getUserId(), className, classPK);
+		}
 	}
 
 	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;

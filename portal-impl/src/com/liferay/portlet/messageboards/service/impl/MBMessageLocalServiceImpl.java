@@ -56,7 +56,6 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
-import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -1655,7 +1654,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		String layoutFullURL = serviceContext.getLayoutFullURL();
 
 		if (message.getStatus() != WorkflowConstants.STATUS_APPROVED ||
-				Validator.isNull(layoutFullURL)) {
+			Validator.isNull(layoutFullURL)) {
+
 			return;
 		}
 
@@ -1666,6 +1666,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			catch (Exception e) {
 				_log.error(e, e);
 			}
+
 			return;
 		}
 
@@ -1998,14 +1999,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			return;
 		}
 
-		String className =
-			(String)serviceContext.getAttribute("className");
-		long classPK =
-			GetterUtil.getLong((String)serviceContext.getAttribute("classPK"));
-
-		String contentURL =
-			serviceContext.getPortalURL().concat(
-				serviceContext.getCurrentURL());
+		String contentURL = (String)serviceContext.getAttribute("redirect");
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
@@ -2059,43 +2053,59 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		Set<Long> sent = new HashSet<Long>();
 
+		String className = (String)serviceContext.getAttribute("className");
+		long classPK = GetterUtil.getLong(
+			(String)serviceContext.getAttribute("classPK"));
+
 		List<Subscription> subscriptions =
-			SubscriptionLocalServiceUtil.getSubscriptions(
+			subscriptionLocalService.getSubscriptions(
 				companyId, className, classPK);
 
 		for (Subscription subscription : subscriptions) {
-			long subscriptorUserId = subscription.getUserId();
+			long subscriptionUserId = subscription.getUserId();
 
-			if (subscriptorUserId == userId) {
+			if (subscriptionUserId == userId) {
 				continue;
 			}
 
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Add user " + subscriptorUserId +
-						" to the list of users who have received an email");
+			if (sent.contains(subscriptionUserId)) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Do not send a duplicate email to user " +
+							subscriptionUserId);
+				}
+
+				continue;
+			}
+			else {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Add user " + subscriptionUserId +
+							" to the list of users who have received an email");
+				}
+
+				sent.add(subscriptionUserId);
 			}
 
-			sent.add(subscriptorUserId);
-
-			User curMessageUser = null;
+			User subscriptionUser = null;
 
 			try {
-				curMessageUser =
-					userLocalService.getUserById(subscriptorUserId);
+				subscriptionUser = userLocalService.getUserById(
+					subscriptionUserId);
 			}
 			catch (NoSuchUserException nsue) {
 				continue;
 			}
 
-			if (!curMessageUser.isActive()) {
+			if (!subscriptionUser.isActive()) {
 				continue;
 			}
 
 			InternetAddress from = new InternetAddress(fromAddress, fromName);
 
 			InternetAddress to = new InternetAddress(
-				curMessageUser.getEmailAddress(), curMessageUser.getFullName());
+				subscriptionUser.getEmailAddress(),
+				subscriptionUser.getFullName());
 
 			String curSubject = StringUtil.replace(
 				subject,
@@ -2104,8 +2114,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					"[$TO_NAME$]"
 				},
 				new String[] {
-					curMessageUser.getFullName(),
-					curMessageUser.getEmailAddress()
+					subscriptionUser.getFullName(),
+					subscriptionUser.getEmailAddress()
 				});
 
 			String curBody = StringUtil.replace(
@@ -2115,8 +2125,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					"[$TO_NAME$]"
 				},
 				new String[] {
-					curMessageUser.getFullName(),
-					curMessageUser.getEmailAddress()
+					subscriptionUser.getFullName(),
+					subscriptionUser.getEmailAddress()
 				});
 
 			MailMessage mailMessage = new MailMessage(
