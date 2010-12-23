@@ -31,7 +31,7 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 			"8", "15", "20", "33", "36", "47_INSTANCE_%", "56_INSTANCE_%",
 			"54_INSTANCE_%", "59_INSTANCE_%", "62_INSTANCE_%", "71_INSTANCE_%",
 			"73_INSTANCE_%", "77", "82_INSTANCE_%", "85_INSTANCE_%", "100",
-			"102_INSTANCE_%", "114", "115", "122_INSTANCE_%"
+			"102_INSTANCE_%", "114", "115", "118_INSTANCE_%", "122_INSTANCE_%"
 		};
 	}
 

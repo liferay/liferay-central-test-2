@@ -23,6 +23,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
 <aui:form action="<%= configurationURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
 	<aui:fieldset label="layout-template">
@@ -31,7 +32,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<%
 		int CELLS_PER_ROW = 4;
 
-		String layoutTemplateId = preferences.getValue("layout-template-id", PropsValues.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
+		String layoutTemplateId = preferences.getValue("layoutTemplateId", PropsValues.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
 
 		List layoutTemplates = LayoutTemplateLocalServiceUtil.getLayoutTemplates(theme.getThemeId());
 
@@ -58,7 +59,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td align="center" width="<%= 100 / CELLS_PER_ROW %>%">
 				<img onclick="document.getElementById('<portlet:namespace />layoutTemplateId<%= i %>').checked = true;" src="<%= curLayoutTemplate.getStaticResourcePath() %><%= curLayoutTemplate.getThumbnailPath() %>" /><br />
 
-				<aui:input checked="<%= layoutTemplateId.equals(curLayoutTemplate.getLayoutTemplateId()) %>" id='<%= "layoutTemplateId" + i %>' label="<%= curLayoutTemplate.getName() %>" name="layoutTemplateId" type="radio" value="<%= curLayoutTemplate.getLayoutTemplateId() %>" />
+				<aui:input checked="<%= layoutTemplateId.equals(curLayoutTemplate.getLayoutTemplateId()) %>" id='<%= "layoutTemplateId" + i %>' label="<%= curLayoutTemplate.getName() %>" name="preferences--layoutTemplateId--" type="radio" value="<%= curLayoutTemplate.getLayoutTemplateId() %>" />
 			</td>
 
 			<c:if test="<%= (i % CELLS_PER_ROW) == (CELLS_PER_ROW - 1) %>">
@@ -79,7 +80,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	%>
 
 	<aui:fieldset label="display-settings">
-		<aui:input inlineLabel="left" label="show-borders" name="portletSetupShowBorders" type="checkbox" value="<%= portletSetupShowBorders %>" />
+		<aui:input label="show-borders" name="preferences--portletSetupShowBorders--" type="checkbox" value="<%= portletSetupShowBorders %>" />
 	</aui:fieldset>
 
 	<aui:button-row>

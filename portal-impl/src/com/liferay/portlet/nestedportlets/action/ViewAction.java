@@ -74,7 +74,7 @@ public class ViewAction extends PortletAction {
 				renderRequest, portlet.getPortletId());
 
 		String layoutTemplateId = preferences.getValue(
-			"layout-template-id",
+			"layoutTemplateId",
 			PropsValues.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
 
 		String velocityTemplateId = StringPool.BLANK;

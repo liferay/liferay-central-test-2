@@ -56,10 +56,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
-		String layoutTemplateId = ParamUtil.getString(
+		String layoutTemplateId = getParameter(
 			actionRequest, "layoutTemplateId");
-		String portletSetupShowBorders = ParamUtil.getString(
-			actionRequest, "portletSetupShowBorders");
 
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
@@ -69,7 +67,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 				actionRequest, portletResource);
 
 		String oldLayoutTemplateId = preferences.getValue(
-			"layout-template-id",
+			"layoutTemplateId",
 			PropsValues.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
 
 		if (!oldLayoutTemplateId.equals(layoutTemplateId)) {
@@ -78,14 +76,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 				oldLayoutTemplateId);
 		}
 
-		preferences.setValue("layout-template-id", layoutTemplateId);
-		preferences.setValue(
-			"portlet-setup-show-borders", portletSetupShowBorders);
-
-		preferences.store();
-
-		SessionMessages.add(
-			actionRequest, portletConfig.getPortletName() + ".doConfigure");
+		super.processAction(portletConfig, actionRequest, actionResponse);
 	}
 
 	public String render(
