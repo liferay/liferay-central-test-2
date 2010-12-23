@@ -37,9 +37,10 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		throws Exception {
 
 		String tabs1 = ParamUtil.getString(actionRequest, "tabs1");
+		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
 
-		if (tabs1.equals("email-notifications")) {
-			updateEmailNotifications(actionRequest);
+		if (tabs1.equals("email-notifications") && tabs2.equals("general")) {
+			validateEmailFrom(actionRequest);
 		}
 
 		super.processAction(portletConfig, actionRequest, actionResponse);
@@ -51,16 +52,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		throws Exception {
 
 		return "/html/portlet/login/configuration.jsp";
-	}
-
-	protected void updateEmailNotifications(ActionRequest actionRequest)
-		throws Exception {
-
-		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
-
-		if (tabs2.equals("general")) {
-			validateEmailFrom(actionRequest);
-		}
 	}
 
 	protected void validateEmailFrom(ActionRequest actionRequest)

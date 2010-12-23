@@ -16,16 +16,12 @@ package com.liferay.portlet.calendar.action;
 
 import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.servlet.SessionMessages;
-import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -59,7 +55,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		return "/html/portlet/calendar/configuration.jsp";
 	}
-
 
 	protected void validateEmailFrom(ActionRequest actionRequest)
 		throws Exception {
