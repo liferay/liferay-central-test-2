@@ -21,14 +21,14 @@ try {
 	String variablePropertyKey = StringPool.BLANK;
 	String variablePropertyValue = StringPool.BLANK;
 
-	xmlURL = StringUtil.replace(xmlURL,"@portal_url@", themeDisplay.getPortalURL());
-	xslURL = StringUtil.replace(xslURL,"@portal_url@", themeDisplay.getPortalURL());
+	xmlUrl = StringUtil.replace(xmlUrl,"@portal_url@", themeDisplay.getPortalURL());
+	xslUrl = StringUtil.replace(xslUrl,"@portal_url@", themeDisplay.getPortalURL());
 
-	int bracketBegin = xmlURL.indexOf("[");
+	int bracketBegin = xmlUrl.indexOf("[");
 	int bracketEnd = -1;
 
 	if (bracketBegin > -1) {
-		bracketEnd = xmlURL.indexOf("]", bracketBegin);
+		bracketEnd = xmlUrl.indexOf("]", bracketBegin);
 
 		if (bracketEnd > -1 && ((bracketEnd - bracketBegin) > 0)) {
 			String[] compilerTagNames = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
@@ -37,7 +37,7 @@ try {
 				String category = null;
 				String propertyName = null;
 
-				variablePropertyKey = xmlURL.substring(bracketBegin + 1, bracketEnd);
+				variablePropertyKey = xmlUrl.substring(bracketBegin + 1, bracketEnd);
 
 				category = variablePropertyKey;
 
@@ -66,7 +66,7 @@ try {
 								variablePropertyValue = assetTagProperty.getValue();
 							}
 
-							xmlURL = StringUtil.replace(xmlURL, "[" + variablePropertyKey + "]", variablePropertyValue.toUpperCase());
+							xmlUrl = StringUtil.replace(xmlUrl, "[" + variablePropertyKey + "]", variablePropertyValue.toUpperCase());
 
 							break;
 						}
@@ -82,7 +82,7 @@ try {
 		}
 	}
 
-	String content = XSLContentUtil.transform(new URL(xmlURL), new URL(xslURL));
+	String content = XSLContentUtil.transform(new URL(xmlUrl), new URL(xslUrl));
 %>
 
 	<%= content %>

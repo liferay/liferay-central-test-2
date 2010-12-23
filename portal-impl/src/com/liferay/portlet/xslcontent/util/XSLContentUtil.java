@@ -39,11 +39,11 @@ public class XSLContentUtil {
 	public static String DEFAULT_XSL_URL =
 		"@portal_url@/html/portlet/xsl_content/example.xsl";
 
-	public static String transform(URL xmlURL, URL xslURL)
+	public static String transform(URL xmlUrl, URL xslUrl)
 		throws IOException, TransformerException {
 
-		String xml = HttpUtil.URLtoString(xmlURL);
-		String xsl = HttpUtil.URLtoString(xslURL);
+		String xml = HttpUtil.URLtoString(xmlUrl);
+		String xsl = HttpUtil.URLtoString(xslUrl);
 
 		StreamSource xmlSource = new StreamSource(new UnsyncStringReader(xml));
 		StreamSource xslSource = new StreamSource(new UnsyncStringReader(xsl));

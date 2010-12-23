@@ -35,6 +35,6 @@ if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-String xmlURL = ParamUtil.getString(request, "xmlURL", preferences.getValue("xml-url", XSLContentUtil.DEFAULT_XML_URL));
-String xslURL = ParamUtil.getString(request, "xslURL", preferences.getValue("xsl-url", XSLContentUtil.DEFAULT_XSL_URL));
+String xmlUrl = preferences.getValue("xmlUrl", XSLContentUtil.DEFAULT_XML_URL);
+String xslUrl = preferences.getValue("xslUrl", XSLContentUtil.DEFAULT_XSL_URL);
 %>

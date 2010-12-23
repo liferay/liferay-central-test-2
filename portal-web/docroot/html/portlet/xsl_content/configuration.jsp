@@ -26,14 +26,14 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-	<liferay-ui:error key="xmlURL" message="please-enter-a-valid-xml-url" />
-	<liferay-ui:error key="xslURL" message="please-enter-a-valid-xsl-url" />
+	<liferay-ui:error key="xmlUrl" message="please-enter-a-valid-xml-url" />
+	<liferay-ui:error key="xslUrl" message="please-enter-a-valid-xsl-url" />
 	<liferay-ui:error key="transformation" message="an-error-occurred-while-processing-your-xml-and-xsl" />
 
 	<aui:fieldset>
-		<aui:input cssClass="lfr-input-text-container" label="xml-url" name="xmlURL" type="text" value="<%= xmlURL %>" />
+		<aui:input cssClass="lfr-input-text-container" name="preferences--xmlUrl--" type="text" value="<%= xmlUrl %>" />
 
-		<aui:input cssClass="lfr-input-text-container" label="xsl-url" name="xslURL" type="text" value="<%= xslURL %>" />
+		<aui:input cssClass="lfr-input-text-container" name="preferences--xslUrl--" type="text" value="<%= xslUrl %>" />
 	</aui:fieldset>
 
 	<aui:button-row>

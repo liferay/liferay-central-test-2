@@ -16,15 +16,10 @@ package com.liferay.portlet.xslcontent.action;
 
 import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.servlet.SessionMessages;
-import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -39,37 +34,9 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+		validateURLS(actionRequest);
 
-		if (!cmd.equals(Constants.UPDATE)) {
-			return;
-		}
-
-		String xmlURL = ParamUtil.getString(actionRequest, "xmlURL");
-		String xslURL = ParamUtil.getString(actionRequest, "xslURL");
-
-		if (xmlURL.startsWith("file:/")) {
-			SessionErrors.add(actionRequest, "xmlURL");
-		}
-		else if (xslURL.startsWith("file:/")) {
-			SessionErrors.add(actionRequest, "xslURL");
-		}
-		else {
-			String portletResource = ParamUtil.getString(
-				actionRequest, "portletResource");
-
-			PortletPreferences preferences =
-				PortletPreferencesFactoryUtil.getPortletSetup(
-					actionRequest, portletResource);
-
-			preferences.setValue("xml-url", xmlURL);
-			preferences.setValue("xsl-url", xslURL);
-
-			preferences.store();
-
-			SessionMessages.add(
-				actionRequest, portletConfig.getPortletName() + ".doConfigure");
-		}
+		super.processAction(portletConfig, actionRequest, actionResponse);
 	}
 
 	public String render(
@@ -78,6 +45,18 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		throws Exception {
 
 		return "/html/portlet/xsl_content/configuration.jsp";
+	}
+
+	protected void validateURLS(ActionRequest actionRequest) {
+		String xmlURL = getParameter(actionRequest, "xmlUrl");
+		String xslURL = getParameter(actionRequest, "xslUrl");
+
+		if (xmlURL.startsWith("file:/")) {
+			SessionErrors.add(actionRequest, "xmlUrl");
+		}
+		else if (xslURL.startsWith("file:/")) {
+			SessionErrors.add(actionRequest, "xslUrl");
+		}
 	}
 
 }
