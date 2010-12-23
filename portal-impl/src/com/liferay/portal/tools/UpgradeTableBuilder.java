@@ -253,10 +253,18 @@ public class UpgradeTableBuilder {
 
 		sb.append("\tpublic static final String[] TABLE_SQL_ADD_INDEXES = {\n");
 
-		for (String addIndex : addIndexes) {
+		for (int i = 0; i < addIndexes.length; i++) {
+			String addIndex = addIndexes[i];
+
 			sb.append("\t\t\"");
 			sb.append(addIndex);
-			sb.append("\",\n");
+			sb.append("\"");
+
+			if ((i + 1) < addIndexes.length) {
+				sb.append(",");
+			}
+
+			sb.append("\n");
 		}
 
 		sb.append("\t};\n\n");
