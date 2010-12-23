@@ -46,42 +46,48 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		String portletResource = ParamUtil.getString(
-			actionRequest, "portletResource");
+		if (cmd.equals(Constants.UPDATE)) {
+			updateSubscriptions(actionRequest);
 
-		PortletPreferences preferences =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				actionRequest, portletResource);
+			super.processAction(portletConfig, actionRequest, actionResponse);
+		}
+		else {
+			String portletResource = ParamUtil.getString(
+				actionRequest, "portletResource");
 
-		if (cmd.equals("remove-footer-article")) {
-			removeFooterArticle(actionRequest, preferences);
-		}
-		else if (cmd.equals("remove-header-article")) {
-			removeHeaderArticle(actionRequest, preferences);
-		}
-		else if (cmd.equals("set-footer-article")) {
-			setFooterArticle(actionRequest, preferences);
-		}
-		else if (cmd.equals("set-header-article")) {
-			setHeaderArticle(actionRequest, preferences);
-		}
-		else if (cmd.equals(Constants.UPDATE)) {
-			updateConfiguration(actionRequest, preferences);
-		}
+			PortletPreferences preferences =
+				PortletPreferencesFactoryUtil.getPortletSetup(
+					actionRequest, portletResource);
 
-		if (SessionErrors.isEmpty(actionRequest)) {
-			try {
-				preferences.store();
+			if (cmd.equals("remove-footer-article")) {
+				removeFooterArticle(actionRequest, preferences);
 			}
-			catch (ValidatorException ve) {
-				SessionErrors.add(
-					actionRequest, ValidatorException.class.getName(), ve);
-
-				return;
+			else if (cmd.equals("remove-header-article")) {
+				removeHeaderArticle(actionRequest, preferences);
+			}
+			else if (cmd.equals("set-footer-article")) {
+				setFooterArticle(actionRequest, preferences);
+			}
+			else if (cmd.equals("set-header-article")) {
+				setHeaderArticle(actionRequest, preferences);
 			}
 
-			SessionMessages.add(
-				actionRequest, portletConfig.getPortletName() + ".doConfigure");
+			if (SessionErrors.isEmpty(actionRequest)) {
+				try {
+					preferences.store();
+				}
+				catch (ValidatorException ve) {
+					SessionErrors.add(
+						actionRequest, ValidatorException.class.getName(), ve);
+
+					return;
+				}
+
+				SessionMessages.add(
+					actionRequest, portletConfig.getPortletName() +
+						".doConfigure");
+			}
+
 		}
 	}
 
@@ -97,14 +103,14 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		preferences.setValues("footer-article-values", new String[] {"0", ""});
+		preferences.setValues("footerArticleValues", new String[] {"0", ""});
 	}
 
 	protected void removeHeaderArticle(
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		preferences.setValues("header-article-values", new String[] {"0", ""});
+		preferences.setValues("headerArticleValues", new String[] {"0", ""});
 	}
 
 	protected void setFooterArticle(
@@ -116,7 +122,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		String articleId = ParamUtil.getString(actionRequest, "articleId");
 
 		preferences.setValues(
-			"footer-article-values",
+			"footerArticleValues",
 			new String[] {String.valueOf(articleGroupId), articleId});
 	}
 
@@ -129,12 +135,11 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		String articleId = ParamUtil.getString(actionRequest, "articleId");
 
 		preferences.setValues(
-			"header-article-values",
+			"headerArticleValues",
 			new String[] {String.valueOf(articleGroupId), articleId});
 	}
 
-	protected void updateConfiguration(
-			ActionRequest actionRequest, PortletPreferences preferences)
+	protected void updateSubscriptions(ActionRequest actionRequest)
 		throws Exception {
 
 		int[] subscriptionIndexes = StringUtil.split(
@@ -167,40 +172,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			i++;
 		}
 
-		int entriesPerFeed = ParamUtil.getInteger(
-			actionRequest, "entriesPerFeed", 4);
-		int expandedEntriesPerFeed = ParamUtil.getInteger(
-			actionRequest, "expandedEntriesPerFeed", 1);
-		boolean showFeedTitle = ParamUtil.getBoolean(
-			actionRequest, "showFeedTitle");
-		boolean showFeedPublishedDate = ParamUtil.getBoolean(
-			actionRequest, "showFeedPublishedDate");
-		boolean showFeedDescription = ParamUtil.getBoolean(
-			actionRequest, "showFeedDescription");
-		boolean showFeedImage = ParamUtil.getBoolean(
-			actionRequest, "showFeedImage");
-		String feedImageAlignment = ParamUtil.getString(
-			actionRequest, "feedImageAlignment");
-		boolean showFeedItemAuthor = ParamUtil.getBoolean(
-			actionRequest, "showFeedItemAuthor");
-
-		preferences.setValues("urls", urls);
-		preferences.setValues("titles", titles);
-		preferences.setValue(
-			"items-per-channel", String.valueOf(entriesPerFeed));
-		preferences.setValue(
-			"expanded-items-per-channel",
-			String.valueOf(expandedEntriesPerFeed));
-		preferences.setValue("show-feed-title", String.valueOf(showFeedTitle));
-		preferences.setValue(
-			"show-feed-published-date", String.valueOf(showFeedPublishedDate));
-		preferences.setValue(
-			"show-feed-description", String.valueOf(showFeedDescription));
-		preferences.setValue("show-feed-image", String.valueOf(showFeedImage));
-		preferences.setValue(
-			"feed-image-alignment", String.valueOf(feedImageAlignment));
-		preferences.setValue(
-			"show-feed-item-author", String.valueOf(showFeedItemAuthor));
+		setPreference(actionRequest, "urls", urls);
+		setPreference(actionRequest, "titles", titles);
 	}
 
 }

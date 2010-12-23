@@ -112,21 +112,21 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 
 				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="rssFeedsDisplaySettingsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>' >
 					<aui:fieldset>
-						<aui:input inlineLabel="left" name="showFeedTitle" type="checkbox" value="<%= showFeedTitle %>" />
+						<aui:input name="preferences--showFeedTitle--" type="checkbox" value="<%= showFeedTitle %>" />
 
-						<aui:input inlineLabel="left" name="showFeedPublishedDate" type="checkbox" value="<%= showFeedPublishedDate %>" />
+						<aui:input name="preferences--showFeedPublishedDate--" type="checkbox" value="<%= showFeedPublishedDate %>" />
 
-						<aui:input inlineLabel="left" name="showFeedDescription" type="checkbox" value="<%= showFeedDescription %>" />
+						<aui:input name="preferences--showFeedDescription--" type="checkbox" value="<%= showFeedDescription %>" />
 
 						<%
 						String taglibShowFeedImageOnClick = "if (this.checked) {document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "feedImageAlignment.disabled = '';} else {document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "feedImageAlignment.disabled = 'disabled';}";
 						%>
 
-						<aui:input inlineLabel="left" name="showFeedImage" onClick="<%= taglibShowFeedImageOnClick %>" type="checkbox" value="<%= showFeedImage %>" />
+						<aui:input name="preferences--showFeedImage--" onClick="<%= taglibShowFeedImageOnClick %>" type="checkbox" value="<%= showFeedImage %>" />
 
-						<aui:input inlineLabel="left" name="showFeedItemAuthor" type="checkbox" value="<%= showFeedItemAuthor %>" />
+						<aui:input name="preferences--showFeedItemAuthor--" type="checkbox" value="<%= showFeedItemAuthor %>" />
 
-						<aui:select label="num-of-entries-per-feed" name="entriesPerFeed">
+						<aui:select label="num-of-entries-per-feed" name="preferences--entriesPerFeed--">
 
 							<%
 							for (int i = 1; i < 10; i++) {
@@ -140,7 +140,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 
 						</aui:select>
 
-						<aui:select label="num-of-expanded-entries-per-feed" name="expandedEntriesPerFeed">
+						<aui:select label="num-of-expanded-entries-per-feed" name="preferences--expandedEntriesPerFeed--">
 
 							<%
 							for (int i = 0; i < 10; i++) {
@@ -154,7 +154,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 
 						</aui:select>
 
-						<aui:select disabled="<%= !showFeedImage %>" name="feedImageAlignment">
+						<aui:select disabled="<%= !showFeedImage %>" name="preferences--feedImageAlignment--">
 							<aui:option label="left" selected='<%= feedImageAlignment.equals("left") %>' />
 							<aui:option label="right" selected='<%= feedImageAlignment.equals("right") %>' />
 						</aui:select>

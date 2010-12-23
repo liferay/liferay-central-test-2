@@ -40,21 +40,21 @@ if (Validator.isNotNull(portletResource)) {
 
 String[] urls = preferences.getValues("urls", new String[0]);
 String[] titles = preferences.getValues("titles", new String[0]);
-int entriesPerFeed = GetterUtil.getInteger(preferences.getValue("items-per-channel", "8"));
-int expandedEntriesPerFeed = GetterUtil.getInteger(preferences.getValue("expanded-items-per-channel", "1"));
-boolean showFeedTitle = GetterUtil.getBoolean(preferences.getValue("show-feed-title", Boolean.TRUE.toString()));
-boolean showFeedPublishedDate = GetterUtil.getBoolean(preferences.getValue("show-feed-published-date", Boolean.TRUE.toString()));
-boolean showFeedDescription = GetterUtil.getBoolean(preferences.getValue("show-feed-description", Boolean.TRUE.toString()));
-boolean showFeedImage = GetterUtil.getBoolean(preferences.getValue("show-feed-image", Boolean.TRUE.toString()));
-String feedImageAlignment = preferences.getValue("feed-image-alignment", "right");
-boolean showFeedItemAuthor = GetterUtil.getBoolean(preferences.getValue("show-feed-item-author", Boolean.TRUE.toString()));
+int entriesPerFeed = GetterUtil.getInteger(preferences.getValue("itemsPerChannel", "8"));
+int expandedEntriesPerFeed = GetterUtil.getInteger(preferences.getValue("expandedItemsPerChannel", "1"));
+boolean showFeedTitle = GetterUtil.getBoolean(preferences.getValue("showFeedTitle", Boolean.TRUE.toString()));
+boolean showFeedPublishedDate = GetterUtil.getBoolean(preferences.getValue("showFeedPublishedDate", Boolean.TRUE.toString()));
+boolean showFeedDescription = GetterUtil.getBoolean(preferences.getValue("showFeedDescription", Boolean.TRUE.toString()));
+boolean showFeedImage = GetterUtil.getBoolean(preferences.getValue("showFeedImage", Boolean.TRUE.toString()));
+String feedImageAlignment = preferences.getValue("feedImageAlignment", "right");
+boolean showFeedItemAuthor = GetterUtil.getBoolean(preferences.getValue("showFeedItemAuthor", Boolean.TRUE.toString()));
 
-String[] headerArticleValues = preferences.getValues("header-article-values", new String[] {"0", ""});
+String[] headerArticleValues = preferences.getValues("headerArticleValues", new String[] {"0", ""});
 
 long headerArticleGroupId = GetterUtil.getLong(headerArticleValues[0]);
 String headerArticleId = headerArticleValues[1];
 
-String[] footerArticleValues = preferences.getValues("footer-article-values", new String[] {"0", ""});
+String[] footerArticleValues = preferences.getValues("footerArticleValues", new String[] {"0", ""});
 
 long footerArticleGroupId = GetterUtil.getLong(footerArticleValues[0]);
 String footerArticleId = footerArticleValues[1];

@@ -75,20 +75,20 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 			PortletPreferences portletPreferences)
 		throws Exception {
 
-		portletPreferences.setValue("footer-article-values", StringPool.BLANK);
-		portletPreferences.setValue("header-article-values", StringPool.BLANK);
+		portletPreferences.setValue("footerArticleValues", StringPool.BLANK);
+		portletPreferences.setValue("headerArticleValues", StringPool.BLANK);
 		portletPreferences.setValue("urls", StringPool.BLANK);
 		portletPreferences.setValue("titles", StringPool.BLANK);
-		portletPreferences.setValue("items-per-channel", StringPool.BLANK);
+		portletPreferences.setValue("itemsPerChannel", StringPool.BLANK);
 		portletPreferences.setValue(
-			"expanded-items-per-channel", StringPool.BLANK);
-		portletPreferences.setValue("show-feed-title", StringPool.BLANK);
+			"expandedItemsPerChannel", StringPool.BLANK);
+		portletPreferences.setValue("showFeedTitle", StringPool.BLANK);
 		portletPreferences.setValue(
-			"show-feed-published-date", StringPool.BLANK);
-		portletPreferences.setValue("show-feed-description", StringPool.BLANK);
-		portletPreferences.setValue("show-feed-image", StringPool.BLANK);
-		portletPreferences.setValue("feed-image-alignment", StringPool.BLANK);
-		portletPreferences.setValue("show-feed-item-author", StringPool.BLANK);
+			"showFeedPublishedDate", StringPool.BLANK);
+		portletPreferences.setValue("showFeedDescription", StringPool.BLANK);
+		portletPreferences.setValue("showFeedImage", StringPool.BLANK);
+		portletPreferences.setValue("feedImageAlignment", StringPool.BLANK);
+		portletPreferences.setValue("showFeedItemAuthor", StringPool.BLANK);
 
 		return portletPreferences;
 	}
@@ -99,9 +99,9 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 		throws Exception {
 
 		String[] footerArticleValues = portletPreferences.getValues(
-			"footer-article-values", new String[] {"0", ""});
+			"footerArticleValues", new String[] {"0", ""});
 		String[] headerArticleValues = portletPreferences.getValues(
-			"header-article-values", new String[] {"0", ""});
+			"headerArticleValues", new String[] {"0", ""});
 
 		String footerArticleId = footerArticleValues[1];
 		String headerArticleId = headerArticleValues[1];
@@ -314,7 +314,7 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 		}
 
 		String[] footerArticleValues = portletPreferences.getValues(
-			"footer-article-values", new String[] {"0", ""});
+			"footerArticleValues", new String[] {"0", ""});
 
 		String footerArticleId = footerArticleValues[1];
 
@@ -323,7 +323,7 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 				articleIds, footerArticleId, footerArticleId);
 
 			portletPreferences.setValues(
-				"footer-article-values",
+				"footerArticleValues",
 				new String[] {
 					String.valueOf(portletDataContext.getScopeGroupId()),
 					footerArticleId
@@ -342,7 +342,7 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 		}
 
 		String[] headerArticleValues = portletPreferences.getValues(
-			"header-article-values", new String[] {"0", ""});
+			"headerArticleValues", new String[] {"0", ""});
 
 		String headerArticleId = headerArticleValues[1];
 
@@ -351,7 +351,7 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 				articleIds, headerArticleId, headerArticleId);
 
 			portletPreferences.setValues(
-				"header-article-values",
+				"headerArticleValues",
 				new String[] {
 					String.valueOf(portletDataContext.getScopeGroupId()),
 					headerArticleId
