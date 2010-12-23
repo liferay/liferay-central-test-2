@@ -35,4 +35,8 @@ public class PasswordTrackerTable {
 
 	public static String TABLE_SQL_DROP = "drop table PasswordTracker";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_326F75BD on PasswordTracker (userId)",
+	};
+
 }

@@ -40,4 +40,8 @@ public class IGImageTable {
 
 	public static String TABLE_SQL_DROP = "drop table IGImage";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_4438CA80 on IGImage (folderId)",
+	};
+
 }

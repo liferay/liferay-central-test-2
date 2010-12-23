@@ -59,4 +59,14 @@ public class UserTable {
 
 	public static String TABLE_SQL_DROP = "drop table User_";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_3A1E834E on User_ (companyId)",
+		"create index IX_6EF03E4E on User_ (companyId, defaultUser)",
+		"create index IX_615E9F7A on User_ (companyId, emailAddress)",
+		"create index IX_765A87C6 on User_ (companyId, password_)",
+		"create index IX_C5806019 on User_ (companyId, screenName)",
+		"create index IX_9782AD88 on User_ (companyId, userId)",
+		"create index IX_5ADBE171 on User_ (contactId)",
+	};
+
 }

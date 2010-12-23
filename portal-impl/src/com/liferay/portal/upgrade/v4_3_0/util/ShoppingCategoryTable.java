@@ -41,4 +41,9 @@ public class ShoppingCategoryTable {
 
 	public static String TABLE_SQL_DROP = "drop table ShoppingCategory";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_5F615D3E on ShoppingCategory (groupId)",
+		"create index IX_1E6464F5 on ShoppingCategory (groupId, parentCategoryId)",
+	};
+
 }

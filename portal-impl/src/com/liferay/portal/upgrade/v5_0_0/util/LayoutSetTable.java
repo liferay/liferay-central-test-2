@@ -44,4 +44,10 @@ public class LayoutSetTable {
 
 	public static final String TABLE_SQL_DROP = "drop table LayoutSet";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_A40B8BEC on LayoutSet (groupId)",
+		"create index IX_48550691 on LayoutSet (groupId, privateLayout)",
+		"create index IX_5ABC2905 on LayoutSet (virtualHost)",
+	};
+
 }

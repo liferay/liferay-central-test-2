@@ -52,4 +52,10 @@ public class CalEventTable {
 
 	public static String TABLE_SQL_DROP = "drop table CalEvent";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_12EE4898 on CalEvent (groupId)",
+		"create index IX_4FDDD2BF on CalEvent (groupId, repeating)",
+		"create index IX_FCD7C63D on CalEvent (groupId, type_)",
+	};
+
 }

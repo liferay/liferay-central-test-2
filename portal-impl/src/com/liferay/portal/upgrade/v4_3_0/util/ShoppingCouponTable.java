@@ -49,4 +49,9 @@ public class ShoppingCouponTable {
 
 	public static String TABLE_SQL_DROP = "drop table ShoppingCoupon";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_DC60CFAE on ShoppingCoupon (code_)",
+		"create index IX_3251AF16 on ShoppingCoupon (groupId)",
+	};
+
 }

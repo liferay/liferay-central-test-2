@@ -35,4 +35,9 @@ public class PollsChoiceTable {
 
 	public static String TABLE_SQL_DROP = "drop table PollsChoice";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_EC370F10 on PollsChoice (questionId)",
+		"create index IX_D76DD2CF on PollsChoice (questionId, name)",
+	};
+
 }

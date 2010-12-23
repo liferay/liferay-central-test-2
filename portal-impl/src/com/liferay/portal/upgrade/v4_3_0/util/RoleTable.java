@@ -38,4 +38,10 @@ public class RoleTable {
 
 	public static String TABLE_SQL_DROP = "drop table Role_";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_449A10B9 on Role_ (companyId)",
+		"create index IX_A88E424E on Role_ (companyId, classNameId, classPK)",
+		"create index IX_EBC931B8 on Role_ (companyId, name)",
+	};
+
 }

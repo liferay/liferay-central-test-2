@@ -49,4 +49,13 @@ public class AddressTable {
 
 	public static String TABLE_SQL_DROP = "drop table Address";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_93D5AD4E on Address (companyId)",
+		"create index IX_ABD7DAC0 on Address (companyId, classNameId)",
+		"create index IX_71CB1123 on Address (companyId, classNameId, classPK)",
+		"create index IX_923BD178 on Address (companyId, classNameId, classPK, mailing)",
+		"create index IX_9226DBB4 on Address (companyId, classNameId, classPK, primary_)",
+		"create index IX_5BC8B0D4 on Address (userId)",
+	};
+
 }

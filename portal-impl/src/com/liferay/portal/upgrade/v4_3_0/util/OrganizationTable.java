@@ -40,4 +40,10 @@ public class OrganizationTable {
 
 	public static String TABLE_SQL_DROP = "drop table Organization_";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_834BCEB6 on Organization_ (companyId)",
+		"create index IX_E301BDF5 on Organization_ (companyId, name)",
+		"create index IX_418E4522 on Organization_ (companyId, parentOrganizationId)",
+	};
+
 }

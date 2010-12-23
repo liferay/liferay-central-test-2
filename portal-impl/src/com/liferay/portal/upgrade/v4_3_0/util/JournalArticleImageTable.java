@@ -38,4 +38,10 @@ public class JournalArticleImageTable {
 
 	public static String TABLE_SQL_DROP = "drop table JournalArticleImage";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_158B526F on JournalArticleImage (groupId, articleId, version)",
+		"create index IX_D67292FC on JournalArticleImage (groupId, articleId, version, elName, languageId)",
+		"create index IX_D4121315 on JournalArticleImage (tempImage)",
+	};
+
 }

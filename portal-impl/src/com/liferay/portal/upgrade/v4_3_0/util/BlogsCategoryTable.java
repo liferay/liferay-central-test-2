@@ -40,4 +40,8 @@ public class BlogsCategoryTable {
 
 	public static String TABLE_SQL_DROP = "drop table BlogsCategory";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_C49DD10C on BlogsCategory (parentCategoryId)",
+	};
+
 }

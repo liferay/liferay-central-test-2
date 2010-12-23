@@ -44,4 +44,11 @@ public class MBMessageTable {
 
 	public static String TABLE_SQL_DROP = "drop table MBMessage";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_3C865EE5 on MBMessage (categoryId)",
+		"create index IX_138C7F1E on MBMessage (categoryId, threadId)",
+		"create index IX_75B95071 on MBMessage (threadId)",
+		"create index IX_A7038CD7 on MBMessage (threadId, parentMessageId)",
+	};
+
 }

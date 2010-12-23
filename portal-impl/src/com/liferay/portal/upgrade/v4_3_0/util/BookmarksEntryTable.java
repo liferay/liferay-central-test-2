@@ -41,4 +41,8 @@ public class BookmarksEntryTable {
 
 	public static String TABLE_SQL_DROP = "drop table BookmarksEntry";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_443BDC38 on BookmarksEntry (folderId)",
+	};
+
 }

@@ -39,4 +39,11 @@ public class MBBanTable {
 
 	public static String TABLE_SQL_DROP = "drop table MBBan";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_69951A25 on MBBan (banUserId)",
+		"create index IX_5C3FF12A on MBBan (groupId)",
+		"create index IX_8ABC4E3B on MBBan (groupId, banUserId)",
+		"create index IX_48814BBA on MBBan (userId)",
+	};
+
 }

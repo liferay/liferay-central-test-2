@@ -36,4 +36,9 @@ public class PortletTable {
 
 	public static String TABLE_SQL_DROP = "drop table Portlet";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_80CC9508 on Portlet (companyId)",
+		"create index IX_12B5E51D on Portlet (companyId, portletId)",
+	};
+
 }

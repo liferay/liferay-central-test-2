@@ -43,4 +43,12 @@ public class WikiPageTable {
 
 	public static String TABLE_SQL_DROP = "drop table WikiPage";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_C8A9C476 on WikiPage (nodeId)",
+		"create index IX_E7F635CA on WikiPage (nodeId, head)",
+		"create index IX_997EEDD2 on WikiPage (nodeId, title)",
+		"create index IX_E745EA26 on WikiPage (nodeId, title, head)",
+		"create index IX_3D4AF476 on WikiPage (nodeId, title, version)",
+	};
+
 }

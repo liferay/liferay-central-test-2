@@ -37,4 +37,10 @@ public class PortletPreferencesTable {
 
 	public static String TABLE_SQL_DROP = "drop table PortletPreferences";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_E4F13E6E on PortletPreferences (ownerId, ownerType, plid)",
+		"create index IX_C7057FF7 on PortletPreferences (ownerId, ownerType, plid, portletId)",
+		"create index IX_F15C1C4F on PortletPreferences (plid)",
+	};
+
 }

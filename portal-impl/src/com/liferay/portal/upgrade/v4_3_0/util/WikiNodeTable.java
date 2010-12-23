@@ -41,4 +41,9 @@ public class WikiNodeTable {
 
 	public static String TABLE_SQL_DROP = "drop table WikiNode";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_5D6FE3F0 on WikiNode (companyId)",
+		"create index IX_B480A672 on WikiNode (groupId)",
+	};
+
 }

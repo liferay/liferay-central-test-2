@@ -53,4 +53,9 @@ public class TagsAssetTable {
 
 	public static final String TABLE_SQL_DROP = "drop table TagsAsset";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_1AB6D6D2 on TagsAsset (classNameId, classPK)",
+		"create index IX_AB3D8BCB on TagsAsset (companyId)",
+	};
+
 }

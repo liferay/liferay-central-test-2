@@ -38,4 +38,7 @@ public class ImageTable {
 
 	public static String TABLE_SQL_DROP = "drop table Image";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+	};
+
 }

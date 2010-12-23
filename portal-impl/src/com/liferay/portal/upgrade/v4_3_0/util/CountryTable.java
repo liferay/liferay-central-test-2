@@ -38,4 +38,8 @@ public class CountryTable {
 
 	public static String TABLE_SQL_DROP = "drop table Country";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_25D734CD on Country (active_)",
+	};
+
 }

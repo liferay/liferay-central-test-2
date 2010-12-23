@@ -35,4 +35,8 @@ public class MBDiscussionTable {
 
 	public static String TABLE_SQL_DROP = "drop table MBDiscussion";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_33A4DE38 on MBDiscussion (classNameId, classPK)",
+	};
+
 }

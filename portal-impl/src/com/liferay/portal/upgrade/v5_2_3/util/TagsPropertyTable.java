@@ -40,4 +40,11 @@ public class TagsPropertyTable {
 
 	public static final String TABLE_SQL_DROP = "drop table TagsProperty";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_C134234 on TagsProperty (companyId)",
+		"create index IX_EB974D08 on TagsProperty (companyId, key_)",
+		"create index IX_5200A629 on TagsProperty (entryId)",
+		"create unique index IX_F505253D on TagsProperty (entryId, key_)",
+	};
+
 }

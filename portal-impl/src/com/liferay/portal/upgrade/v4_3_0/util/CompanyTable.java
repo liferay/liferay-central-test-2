@@ -38,4 +38,10 @@ public class CompanyTable {
 
 	public static String TABLE_SQL_DROP = "drop table Company";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_12566EC2 on Company (mx)",
+		"create index IX_975996C0 on Company (virtualHost)",
+		"create index IX_EC00543C on Company (webId)",
+	};
+
 }

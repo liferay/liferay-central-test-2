@@ -40,4 +40,9 @@ public class IGFolderTable {
 
 	public static String TABLE_SQL_DROP = "drop table IGFolder";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_206498F8 on IGFolder (groupId)",
+		"create index IX_1A605E9F on IGFolder (groupId, parentFolderId)",
+	};
+
 }

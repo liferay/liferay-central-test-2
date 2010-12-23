@@ -51,4 +51,11 @@ public class LayoutTable {
 
 	public static String TABLE_SQL_DROP = "drop table Layout";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_705F5AA3 on Layout (groupId, privateLayout)",
+		"create index IX_BC2C4231 on Layout (groupId, privateLayout, friendlyURL)",
+		"create index IX_7162C27C on Layout (groupId, privateLayout, layoutId)",
+		"create index IX_6DE88B06 on Layout (groupId, privateLayout, parentLayoutId)",
+	};
+
 }

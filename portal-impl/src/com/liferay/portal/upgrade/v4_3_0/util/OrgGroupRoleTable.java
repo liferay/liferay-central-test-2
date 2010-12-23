@@ -34,4 +34,9 @@ public class OrgGroupRoleTable {
 
 	public static String TABLE_SQL_DROP = "drop table OrgGroupRole";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_4A527DD3 on OrgGroupRole (groupId)",
+		"create index IX_AB044D1C on OrgGroupRole (roleId)",
+	};
+
 }

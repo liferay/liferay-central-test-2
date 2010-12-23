@@ -46,4 +46,16 @@ public class BlogsEntryTable {
 
 	public static final String TABLE_SQL_DROP = "drop table BlogsEntry";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_72EF6041 on BlogsEntry (companyId)",
+		"create index IX_3D3D30B0 on BlogsEntry (companyId, draft)",
+		"create index IX_81A50303 on BlogsEntry (groupId)",
+		"create index IX_5FF14FAE on BlogsEntry (groupId, draft)",
+		"create index IX_DB780A20 on BlogsEntry (groupId, urlTitle)",
+		"create index IX_C07CA83D on BlogsEntry (groupId, userId)",
+		"create index IX_BC2A3534 on BlogsEntry (groupId, userId, draft)",
+		"create index IX_69157A4D on BlogsEntry (uuid_)",
+		"create index IX_1B1040FD on BlogsEntry (uuid_, groupId)",
+	};
+
 }

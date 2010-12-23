@@ -35,4 +35,10 @@ public class MBMessageFlagTable {
 
 	public static String TABLE_SQL_DROP = "drop table MBMessageFlag";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_D180D4AE on MBMessageFlag (messageId)",
+		"create index IX_7B2917BE on MBMessageFlag (userId)",
+		"create index IX_94A83834 on MBMessageFlag (userId, messageId)",
+	};
+
 }

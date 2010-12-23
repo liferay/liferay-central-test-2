@@ -47,4 +47,7 @@ public class AccountTable {
 
 	public static String TABLE_SQL_DROP = "drop table Account_";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+	};
+
 }

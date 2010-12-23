@@ -40,4 +40,9 @@ public class RatingsEntryTable {
 
 	public static String TABLE_SQL_DROP = "drop table RatingsEntry";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_16184D57 on RatingsEntry (classNameId, classPK)",
+		"create index IX_B47E3C11 on RatingsEntry (userId, classNameId, classPK)",
+	};
+
 }

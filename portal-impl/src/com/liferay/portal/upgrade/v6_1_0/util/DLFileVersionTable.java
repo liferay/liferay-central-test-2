@@ -49,4 +49,10 @@ public class DLFileVersionTable {
 
 	public static final String TABLE_SQL_DROP = "drop table DLFileVersion";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_C68DC967 on DLFileVersion (fileEntryId)",
+		"create index IX_D47BB14D on DLFileVersion (fileEntryId, status)",
+		"create unique index IX_E2815081 on DLFileVersion (fileEntryId, version)",
+	};
+
 }

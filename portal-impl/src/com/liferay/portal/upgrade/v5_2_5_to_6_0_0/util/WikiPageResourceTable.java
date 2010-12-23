@@ -34,4 +34,8 @@ public class WikiPageResourceTable {
 
 	public static final String TABLE_SQL_DROP = "drop table WikiPageResource";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create unique index IX_21277664 on WikiPageResource (nodeId, title)",
+	};
+
 }

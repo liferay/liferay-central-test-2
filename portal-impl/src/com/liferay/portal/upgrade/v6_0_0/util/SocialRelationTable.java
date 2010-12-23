@@ -38,4 +38,16 @@ public class SocialRelationTable {
 
 	public static final String TABLE_SQL_DROP = "drop table SocialRelation";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_61171E99 on SocialRelation (companyId)",
+		"create index IX_95135D1C on SocialRelation (companyId, type_)",
+		"create index IX_C31A64C6 on SocialRelation (type_)",
+		"create index IX_5A40CDCC on SocialRelation (userId1)",
+		"create index IX_4B52BE89 on SocialRelation (userId1, type_)",
+		"create unique index IX_12A92145 on SocialRelation (userId1, userId2, type_)",
+		"create index IX_5A40D18D on SocialRelation (userId2)",
+		"create index IX_3F9C2FA8 on SocialRelation (userId2, type_)",
+		"create index IX_F0CA24A5 on SocialRelation (uuid_)",
+	};
+
 }

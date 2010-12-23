@@ -37,4 +37,9 @@ public class SCLicenseTable {
 
 	public static String TABLE_SQL_DROP = "drop table SCLicense";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_1C841592 on SCLicense (active_)",
+		"create index IX_5327BB79 on SCLicense (active_, recommended)",
+	};
+
 }

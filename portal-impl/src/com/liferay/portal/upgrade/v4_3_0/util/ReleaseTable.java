@@ -37,4 +37,7 @@ public class ReleaseTable {
 
 	public static String TABLE_SQL_DROP = "drop table Release_";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+	};
+
 }

@@ -47,4 +47,10 @@ public class SCProductEntryTable {
 
 	public static String TABLE_SQL_DROP = "drop table SCProductEntry";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_5D25244F on SCProductEntry (companyId)",
+		"create index IX_72F87291 on SCProductEntry (groupId)",
+		"create index IX_98E6A9CB on SCProductEntry (groupId, userId)",
+	};
+
 }

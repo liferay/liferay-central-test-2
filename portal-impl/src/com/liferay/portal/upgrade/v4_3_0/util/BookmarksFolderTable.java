@@ -40,4 +40,9 @@ public class BookmarksFolderTable {
 
 	public static String TABLE_SQL_DROP = "drop table BookmarksFolder";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_7F703619 on BookmarksFolder (groupId)",
+		"create index IX_967799C0 on BookmarksFolder (groupId, parentFolderId)",
+	};
+
 }

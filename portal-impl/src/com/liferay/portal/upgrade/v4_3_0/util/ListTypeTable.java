@@ -34,4 +34,8 @@ public class ListTypeTable {
 
 	public static String TABLE_SQL_DROP = "drop table ListType";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_2932DD37 on ListType (type_)",
+	};
+
 }

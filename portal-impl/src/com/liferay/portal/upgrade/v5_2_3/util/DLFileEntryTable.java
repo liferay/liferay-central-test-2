@@ -49,4 +49,15 @@ public class DLFileEntryTable {
 
 	public static final String TABLE_SQL_DROP = "drop table DLFileEntry";
 
+	public static final String[] TABLE_SQL_ADD_INDEXES = {
+		"create index IX_4CB1B2B4 on DLFileEntry (companyId)",
+		"create index IX_24A846D1 on DLFileEntry (folderId)",
+		"create unique index IX_8F6C75D0 on DLFileEntry (folderId, name)",
+		"create index IX_A9951F17 on DLFileEntry (folderId, title)",
+		"create index IX_F4AF5636 on DLFileEntry (groupId)",
+		"create index IX_43261870 on DLFileEntry (groupId, userId)",
+		"create index IX_64F0FE40 on DLFileEntry (uuid_)",
+		"create unique index IX_BC2E7E6A on DLFileEntry (uuid_, groupId)",
+	};
+
 }
