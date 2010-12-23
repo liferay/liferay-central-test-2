@@ -54,7 +54,7 @@ if (Validator.isNotNull(portletResource)) {
 long groupId = GetterUtil.getLong(preferences.getValue("groupId", String.valueOf(themeDisplay.getScopeGroupId())));
 String structureId = GetterUtil.getString(preferences.getValue("structureId", StringPool.BLANK));
 String type = preferences.getValue("type", StringPool.BLANK);
-String pageURL = preferences.getValue("pageUrl", "maximized");
+String pageUrl = preferences.getValue("pageUrl", "maximized");
 int pageDelta = GetterUtil.getInteger(preferences.getValue("pageDelta", StringPool.BLANK));
 String orderByCol = preferences.getValue("orderByCol", StringPool.BLANK);
 String orderByType = preferences.getValue("orderByType", StringPool.BLANK);

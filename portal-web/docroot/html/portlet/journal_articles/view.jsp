@@ -33,7 +33,7 @@ double version = ParamUtil.getDouble(request, "version", -1);
 
 		PortletURL portletURL = renderResponse.createRenderURL();
 
-		if (pageURL.equals("normal")) {
+		if (pageUrl.equals("normal")) {
 			portletURL.setWindowState(WindowState.NORMAL);
 		}
 		else {
@@ -99,7 +99,7 @@ double version = ParamUtil.getDouble(request, "version", -1);
 
 			String rowHREF = null;
 
-			if (pageURL.equals("popUp")) {
+			if (pageUrl.equals("popUp")) {
 				StringBundler sb = new StringBundler(7);
 
 				sb.append(themeDisplay.getPathMain());
@@ -122,7 +122,7 @@ double version = ParamUtil.getDouble(request, "version", -1);
 
 			String target = null;
 
-			if (pageURL.equals("popUp")) {
+			if (pageUrl.equals("popUp")) {
 				target = "_blank";
 			}
 

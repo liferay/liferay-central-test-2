@@ -136,10 +136,10 @@ if (Validator.isNotNull(structureId)) {
 
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="journalArticlesDisplaySettings" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>' >
 			<aui:fieldset>
-				<aui:select label="display-url" name="preferences--pageURL--">
-					<aui:option label="maximized" selected='<%= pageURL.equals("maximized") %>' />
-					<aui:option label="normal" selected='<%= pageURL.equals("normal") %>' />
-					<aui:option label="pop-up" selected='<%= pageURL.equals("popUp") %>' value="popUp" />
+				<aui:select label="display-url" name="preferences--pageUrl--">
+					<aui:option label="maximized" selected='<%= pageUrl.equals("maximized") %>' />
+					<aui:option label="normal" selected='<%= pageUrl.equals("normal") %>' />
+					<aui:option label="pop-up" selected='<%= pageUrl.equals("popUp") %>' value="popUp" />
 				</aui:select>
 
 				<aui:select label="display-per-page" name="preferences--pageDelta--">

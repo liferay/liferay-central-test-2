@@ -38,7 +38,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
-		super.processAction(portletConfig, actionRequest, actionResponse );
+		super.processAction(portletConfig, actionRequest, actionResponse);
 
 		if (SessionErrors.isEmpty(actionRequest)) {
 			updateContentSearch(actionRequest);
