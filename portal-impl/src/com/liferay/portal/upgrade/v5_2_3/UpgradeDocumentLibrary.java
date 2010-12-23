@@ -45,7 +45,6 @@ public class UpgradeDocumentLibrary extends BaseUpgradePortletPreferences {
 			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 				DLFileEntryTable.TABLE_NAME, DLFileEntryTable.TABLE_COLUMNS);
 
-			upgradeTable.setAllowUniqueIndexes(false);
 			upgradeTable.setCreateSQL(DLFileEntryTable.TABLE_SQL_CREATE);
 			upgradeTable.setIndexesSQL(DLFileEntryTable.TABLE_SQL_ADD_INDEXES);
 
@@ -62,7 +61,6 @@ public class UpgradeDocumentLibrary extends BaseUpgradePortletPreferences {
 			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 				DLFileRankTable.TABLE_NAME, DLFileRankTable.TABLE_COLUMNS);
 
-			upgradeTable.setAllowUniqueIndexes(false);
 			upgradeTable.setCreateSQL(DLFileRankTable.TABLE_SQL_CREATE);
 			upgradeTable.setIndexesSQL(DLFileRankTable.TABLE_SQL_ADD_INDEXES);
 
@@ -80,7 +78,6 @@ public class UpgradeDocumentLibrary extends BaseUpgradePortletPreferences {
 				DLFileShortcutTable.TABLE_NAME,
 				DLFileShortcutTable.TABLE_COLUMNS);
 
-			upgradeTable.setAllowUniqueIndexes(false);
 			upgradeTable.setCreateSQL(DLFileShortcutTable.TABLE_SQL_CREATE);
 			upgradeTable.setIndexesSQL(
 				DLFileShortcutTable.TABLE_SQL_ADD_INDEXES);
@@ -99,7 +96,6 @@ public class UpgradeDocumentLibrary extends BaseUpgradePortletPreferences {
 				DLFileVersionTable.TABLE_NAME,
 				DLFileVersionTable.TABLE_COLUMNS);
 
-			upgradeTable.setAllowUniqueIndexes(false);
 			upgradeTable.setCreateSQL(DLFileVersionTable.TABLE_SQL_CREATE);
 			upgradeTable.setIndexesSQL(
 				DLFileVersionTable.TABLE_SQL_ADD_INDEXES);

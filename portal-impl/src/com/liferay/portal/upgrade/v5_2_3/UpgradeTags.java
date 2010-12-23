@@ -42,7 +42,6 @@ public class UpgradeTags extends UpgradeProcess {
 			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 				TagsAssetTable.TABLE_NAME, TagsAssetTable.TABLE_COLUMNS);
 
-			upgradeTable.setAllowUniqueIndexes(false);
 			upgradeTable.setCreateSQL(TagsAssetTable.TABLE_SQL_CREATE);
 			upgradeTable.setIndexesSQL(TagsAssetTable.TABLE_SQL_ADD_INDEXES);
 
@@ -57,7 +56,6 @@ public class UpgradeTags extends UpgradeProcess {
 			TagsPropertyTable.TABLE_NAME, TagsPropertyTable.TABLE_COLUMNS,
 			new TagsPropertyValueUpgradeColumnImpl("value"));
 
-		upgradeTable.setAllowUniqueIndexes(false);
 		upgradeTable.setCreateSQL(TagsPropertyTable.TABLE_SQL_CREATE);
 		upgradeTable.setIndexesSQL(TagsPropertyTable.TABLE_SQL_ADD_INDEXES);
 

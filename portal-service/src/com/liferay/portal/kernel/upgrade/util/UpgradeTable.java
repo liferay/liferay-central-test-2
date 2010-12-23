@@ -41,11 +41,6 @@ public interface UpgradeTable {
 
 	public String getSelectSQL() throws Exception;
 
-	public boolean isAllowUniqueIndexes() throws Exception;
-
-	public void setAllowUniqueIndexes(boolean allowUniqueIndexes)
-		throws Exception;
-
 	public void setColumn(
 			PreparedStatement ps, int index, Integer type, String value)
 		throws Exception;

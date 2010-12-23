@@ -36,7 +36,6 @@ public class UpgradeResourceAction extends UpgradeProcess {
 				ResourceActionTable.TABLE_NAME,
 				ResourceActionTable.TABLE_COLUMNS);
 
-			upgradeTable.setAllowUniqueIndexes(true);
 			upgradeTable.setCreateSQL(ResourceActionTable.TABLE_SQL_CREATE);
 			upgradeTable.setIndexesSQL(
 				ResourceActionTable.TABLE_SQL_ADD_INDEXES);

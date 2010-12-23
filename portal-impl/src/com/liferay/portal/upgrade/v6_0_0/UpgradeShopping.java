@@ -43,7 +43,6 @@ public class UpgradeShopping extends UpgradeProcess {
 			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 				ShoppingItemTable.TABLE_NAME, ShoppingItemTable.TABLE_COLUMNS);
 
-			upgradeTable.setAllowUniqueIndexes(true);
 			upgradeTable.setCreateSQL(ShoppingItemTable.TABLE_SQL_CREATE);
 			upgradeTable.setIndexesSQL(ShoppingItemTable.TABLE_SQL_ADD_INDEXES);
 

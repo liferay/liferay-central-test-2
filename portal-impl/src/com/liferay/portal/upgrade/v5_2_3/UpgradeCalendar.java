@@ -35,7 +35,6 @@ public class UpgradeCalendar extends UpgradeProcess {
 			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 				CalEventTable.TABLE_NAME, CalEventTable.TABLE_COLUMNS);
 
-			upgradeTable.setAllowUniqueIndexes(false);
 			upgradeTable.setCreateSQL(CalEventTable.TABLE_SQL_CREATE);
 			upgradeTable.setIndexesSQL(CalEventTable.TABLE_SQL_ADD_INDEXES);
 
