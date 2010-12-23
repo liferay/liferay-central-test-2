@@ -472,7 +472,7 @@ public abstract class BaseDB implements DB {
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(e.getMessage());
+					_log.warn(e.getMessage() + ": " + sql);
 				}
 			}
 		}

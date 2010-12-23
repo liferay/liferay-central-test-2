@@ -102,7 +102,7 @@ public abstract class BaseUpgradeTableImpl extends Table {
 					db.runSQL(indexSQL);
 				}
 				catch (Exception e) {
-					_log.warn(e.getMessage().concat(": ").concat(indexSQL));
+					_log.warn(e.getMessage() + ": " + indexSQL);
 				}
 			}
 		}
@@ -113,9 +113,10 @@ public abstract class BaseUpgradeTableImpl extends Table {
 		}
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(BaseUpgradeTableImpl.class);
+
 	private boolean _allowUniqueIndexes = true;
 	private boolean _calledUpdateTable;
 	private String[] _indexesSQL = new String[0];
 
-	private static Log _log = LogFactoryUtil.getLog(BaseUpgradeTableImpl.class);
 }
