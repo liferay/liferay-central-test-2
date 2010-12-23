@@ -259,18 +259,18 @@ public class MBUtil {
 	public static String getEmailFromAddress(PortletPreferences preferences) {
 		String emailFromAddress = PropsValues.MESSAGE_BOARDS_EMAIL_FROM_ADDRESS;
 
-		return preferences.getValue("email-from-address", emailFromAddress);
+		return preferences.getValue("emailFromAddress", emailFromAddress);
 	}
 
 	public static String getEmailFromName(PortletPreferences preferences) {
 		String emailFromName = PropsValues.MESSAGE_BOARDS_EMAIL_FROM_NAME;
 
-		return preferences.getValue("email-from-name", emailFromName);
+		return preferences.getValue("emailFromName", emailFromName);
 	}
 
 	public static boolean getEmailHtmlFormat(PortletPreferences preferences) {
 		String emailHtmlFormat = preferences.getValue(
-			"email-html-format", StringPool.BLANK);
+			"emailHtmlFormat", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailHtmlFormat)) {
 			return GetterUtil.getBoolean(emailHtmlFormat);
@@ -284,7 +284,7 @@ public class MBUtil {
 		PortletPreferences preferences) {
 
 		String emailMessageAddedBody = preferences.getValue(
-			"email-message-added-body", StringPool.BLANK);
+			"emailMessageAddedBody", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageAddedBody)) {
 			return emailMessageAddedBody;
@@ -299,7 +299,7 @@ public class MBUtil {
 		PortletPreferences preferences) {
 
 		String emailMessageAddedEnabled = preferences.getValue(
-			"email-message-added-enabled", StringPool.BLANK);
+			"emailMessageAddedEnabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageAddedEnabled)) {
 			return GetterUtil.getBoolean(emailMessageAddedEnabled);
@@ -313,7 +313,7 @@ public class MBUtil {
 		PortletPreferences preferences) {
 
 		String emailMessageAddedSignature = preferences.getValue(
-			"email-message-added-signature", StringPool.BLANK);
+			"emailMessageAddedSignature", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageAddedSignature)) {
 			return emailMessageAddedSignature;
@@ -328,7 +328,7 @@ public class MBUtil {
 		PortletPreferences preferences) {
 
 		String emailMessageAddedSubjectPrefix = preferences.getValue(
-			"email-message-added-subject-prefix", StringPool.BLANK);
+			"emailMessageAddedSubjectPrefix", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageAddedSubjectPrefix)) {
 			return emailMessageAddedSubjectPrefix;
@@ -343,7 +343,7 @@ public class MBUtil {
 		PortletPreferences preferences) {
 
 		String emailMessageUpdatedBody = preferences.getValue(
-			"email-message-updated-body", StringPool.BLANK);
+			"emailMessageUpdatedBody", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageUpdatedBody)) {
 			return emailMessageUpdatedBody;
@@ -358,7 +358,7 @@ public class MBUtil {
 		PortletPreferences preferences) {
 
 		String emailMessageUpdatedEnabled = preferences.getValue(
-			"email-message-updated-enabled", StringPool.BLANK);
+			"emailMessageUpdatedEnabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageUpdatedEnabled)) {
 			return GetterUtil.getBoolean(emailMessageUpdatedEnabled);
@@ -372,7 +372,7 @@ public class MBUtil {
 		PortletPreferences preferences) {
 
 		String emailMessageUpdatedSignature = preferences.getValue(
-			"email-message-updated-signature", StringPool.BLANK);
+			"emailMessageUpdatedSignature", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageUpdatedSignature)) {
 			return emailMessageUpdatedSignature;
@@ -387,7 +387,7 @@ public class MBUtil {
 		PortletPreferences preferences) {
 
 		String emailMessageUpdatedSubject = preferences.getValue(
-			"email-message-updated-subject-prefix", StringPool.BLANK);
+			"emailMessageUpdatedSubjectPrefix", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageUpdatedSubject)) {
 			return emailMessageUpdatedSubject;
@@ -699,7 +699,7 @@ public class MBUtil {
 		PortletPreferences preferences) {
 
 		String allowAnonymousPosting = preferences.getValue(
-			"allow-anonymous-posting", StringPool.BLANK);
+			"allowAnonymousPosting", StringPool.BLANK);
 
 		if (Validator.isNotNull(allowAnonymousPosting)) {
 			return GetterUtil.getBoolean(allowAnonymousPosting);

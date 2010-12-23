@@ -81,11 +81,11 @@ else if (tabs2.equals("message-updated-email")) {
 	<c:choose>
 		<c:when test='<%= tabs2.equals("general") %>'>
 			<aui:fieldset>
-				<aui:input inlineLabel="left" name="allowAnonymousPosting" type="checkbox" value="<%= MBUtil.isAllowAnonymousPosting(preferences) %>" />
+				<aui:input name="preferences--allowAnonymousPosting--" type="checkbox" value="<%= MBUtil.isAllowAnonymousPosting(preferences) %>" />
 
-				<aui:input helpMessage="message-boards-message-subscribe-by-default-help" inlineLabel="left" label="subscribe-by-default" name="subscribeByDefault" type="checkbox" value="<%= subscribeByDefault %>" />
+				<aui:input helpMessage="message-boards-message-subscribe-by-default-help" label="subscribe-by-default" name="preferences--subscribeByDefault--" type="checkbox" value="<%= subscribeByDefault %>" />
 
-				<aui:select name="messageFormat">
+				<aui:select name="preferences--messageFormat--">
 
 					<%
 					for (int i = 0; i < MBMessageConstants.FORMATS.length; i++) {
@@ -99,18 +99,18 @@ else if (tabs2.equals("message-updated-email")) {
 
 				</aui:select>
 
-				<aui:input inlineLabel="left" name="enableFlags" type="checkbox" value="<%= enableFlags %>" />
+				<aui:input name="preferences--enableFlags--" type="checkbox" value="<%= enableFlags %>" />
 
-				<aui:input inlineLabel="left" name="enableRatings" type="checkbox" value="<%= enableRatings %>" />
+				<aui:input name="preferences--enableRatings--" type="checkbox" value="<%= enableRatings %>" />
 			</aui:fieldset>
 		</c:when>
 		<c:when test='<%= tabs2.equals("email-from") %>'>
 			<aui:fieldset>
-				<aui:input cssClass="lfr-input-text-container" label="name" name="emailFromName" value="<%= emailFromName %>" />
+				<aui:input cssClass="lfr-input-text-container" label="name" name="preferences--emailFromName--" value="<%= emailFromName %>" />
 
-				<aui:input cssClass="lfr-input-text-container" label="address" name="emailFromAddress" value="<%= emailFromAddress %>" />
+				<aui:input cssClass="lfr-input-text-container" label="address" name="preferences--emailFromAddress--" value="<%= emailFromAddress %>" />
 
-				<aui:input inlineLabel="left" label="html-format" name="emailHtmlFormat" type="checkbox" value="<%= MBUtil.getEmailHtmlFormat(preferences) %>" />
+				<aui:input label="html-format" name="preferences--emailHtmlFormat--" type="checkbox" value="<%= MBUtil.getEmailHtmlFormat(preferences) %>" />
 			</aui:fieldset>
 
 			<div class="definition-of-terms">
@@ -172,25 +172,25 @@ else if (tabs2.equals("message-updated-email")) {
 			<aui:fieldset>
 				<c:choose>
 					<c:when test='<%= tabs2.equals("message-added-email") %>'>
-						<aui:input inlineLabel="left" label="enabled" name="emailMessageAddedEnabled" type="checkbox" value="<%= MBUtil.getEmailMessageAddedEnabled(preferences) %>" />
+						<aui:input label="enabled" name="preferences--emailMessageAddedEnabled--" type="checkbox" value="<%= MBUtil.getEmailMessageAddedEnabled(preferences) %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("message-updated-email") %>'>
-						<aui:input inlineLabel="left" label="enabled" name="emailMessageUpdatedEnabled" type="checkbox" value="<%= MBUtil.getEmailMessageUpdatedEnabled(preferences) %>" />
+						<aui:input label="enabled" name="preferences--emailMessageUpdatedEnabled--" type="checkbox" value="<%= MBUtil.getEmailMessageUpdatedEnabled(preferences) %>" />
 					</c:when>
 				</c:choose>
 
 				<c:choose>
 					<c:when test='<%= tabs2.equals("message-added-email") %>'>
-						<aui:input cssClass="lfr-input-text-container" label="subject-prefix" name="emailMessageAddedSubjectPrefix" value="<%= emailMessageAddedSubjectPrefix %>" />
+						<aui:input cssClass="lfr-input-text-container" label="subject-prefix" name="preferences--emailMessageAddedSubjectPrefix--" value="<%= emailMessageAddedSubjectPrefix %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("message-updated-email") %>'>
-						<aui:input cssClass="lfr-input-text-container" label="subject-prefix" name="emailMessageUpdatedSubjectPrefix" value="<%= emailMessageUpdatedSubjectPrefix %>" />
+						<aui:input cssClass="lfr-input-text-container" label="subject-prefix" name="preferences--emailMessageUpdatedSubjectPrefix--" value="<%= emailMessageUpdatedSubjectPrefix %>" />
 					</c:when>
 				</c:choose>
 
-				<aui:input cssClass="lfr-textarea-container" label="body" name="<%= bodyEditorParam %>" type="textarea" value="<%= bodyEditorContent %>" warp="soft" />
+				<aui:input cssClass="lfr-textarea-container" label="body" name='<%= "preferences--" + bodyEditorParam + "--" %>' type="textarea" value="<%= bodyEditorContent %>" warp="soft" />
 
-				<aui:input cssClass="lfr-textarea-container" label="signature" name="<%= signatureEditorParam %>" type="textarea" value="<%= signatureEditorContent %>" wrap="soft" />
+				<aui:input cssClass="lfr-textarea-container" label="signature" name='<%= "preferences--" + signatureEditorParam + "--" %>' type="textarea" value="<%= signatureEditorContent %>" wrap="soft" />
 			</aui:fieldset>
 
 			<div class="definition-of-terms">
@@ -686,7 +686,7 @@ else if (tabs2.equals("message-updated-email")) {
 		</c:when>
 		<c:when test='<%= tabs2.equals("rss") %>'>
 			<aui:fieldset>
-				<aui:select label="maximum-items-to-display" name="rssDelta">
+				<aui:select label="maximum-items-to-display" name="preferences--rssDelta--">
 					<aui:option label="1" selected="<%= rssDelta == 1 %>" />
 					<aui:option label="2" selected="<%= rssDelta == 2 %>" />
 					<aui:option label="3" selected="<%= rssDelta == 3 %>" />
@@ -706,13 +706,13 @@ else if (tabs2.equals("message-updated-email")) {
 					<aui:option label="100" selected="<%= rssDelta == 100 %>" />
 				</aui:select>
 
-				<aui:select label="display-style" name="rssDisplayStyle">
+				<aui:select label="display-style" name="preferences--rssDisplayStyle--">
 					<aui:option label="full-content" selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT) %>" value="<%= RSSUtil.DISPLAY_STYLE_FULL_CONTENT %>" />
 					<aui:option label="abstract" selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT) %>" value="<%= RSSUtil.DISPLAY_STYLE_ABSTRACT %>" />
 					<aui:option label="title" selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE) %>" value="<%= RSSUtil.DISPLAY_STYLE_TITLE %>" />
 				</aui:select>
 
-				<aui:select label="format" name="rssFormat">
+				<aui:select label="format" name="preferences--rssFormat--">
 					<aui:option label="RSS 1.0" selected='<%= rssFormat.equals("rss10") %>' value="rss10" />
 					<aui:option label="RSS 2.0" selected='<%= rssFormat.equals("rss20") %>' value="rss20" />
 					<aui:option label="Atom10" selected='<%= rssFormat.equals("atom10") %>' value="atom10" />

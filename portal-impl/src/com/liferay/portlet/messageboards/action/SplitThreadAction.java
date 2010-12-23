@@ -144,7 +144,7 @@ public class SplitThreadAction extends PortletAction {
 			String body = ParamUtil.getString(actionRequest, "body");
 
 			String format = GetterUtil.getString(
-				preferences.getValue("message-format", null),
+				preferences.getValue("messageFormat", null),
 				MBMessageConstants.DEFAULT_FORMAT);
 
 			String layoutFullURL = PortalUtil.getLayoutFullURL(themeDisplay);

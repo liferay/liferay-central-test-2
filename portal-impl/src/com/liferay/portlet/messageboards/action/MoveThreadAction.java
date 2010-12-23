@@ -135,7 +135,7 @@ public class MoveThreadAction extends PortletAction {
 			String body = ParamUtil.getString(actionRequest, "body");
 
 			String format = GetterUtil.getString(
-				preferences.getValue("message-format", null),
+				preferences.getValue("messageFormat", null),
 				MBMessageConstants.DEFAULT_FORMAT);
 
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(

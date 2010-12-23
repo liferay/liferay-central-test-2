@@ -268,7 +268,7 @@ public class EditMessageAction extends PortletAction {
 		String body = ParamUtil.getString(actionRequest, "body");
 
 		String format = GetterUtil.getString(
-			preferences.getValue("message-format", null),
+			preferences.getValue("messageFormat", null),
 			MBMessageConstants.DEFAULT_FORMAT);
 
 		boolean attachments = ParamUtil.getBoolean(
