@@ -29,6 +29,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.PortletConfigFactoryUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
@@ -45,6 +46,7 @@ import javax.servlet.ServletContext;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Julio Camarero
  */
 public class BaseConfigurationAction
 	implements ConfigurationAction, ResourceServingConfigurationAction {
@@ -55,6 +57,29 @@ public class BaseConfigurationAction
 		param = PREFERENCES_PREFIX.concat(param).concat(StringPool.DOUBLE_DASH);
 
 		return ParamUtil.getString(portletRequest, param);
+	}
+
+	public void setPreference(
+		PortletRequest portletRequest, String name, String[] values) {
+
+		Map<String, String[]> processedPreferences =
+			(Map<String, String[]>)portletRequest.getAttribute(
+				WebKeys.PROCESSED_PREFERENCES);
+
+		if (processedPreferences == null) {
+			processedPreferences = new HashMap<String, String[]>();
+
+			portletRequest.setAttribute(
+				WebKeys.PROCESSED_PREFERENCES, processedPreferences);
+		}
+
+		processedPreferences.put(name, values);
+	}
+
+	public void setPreference(
+		PortletRequest portletRequest, String name, String value) {
+
+		setPreference(portletRequest, name, new String[] {value});
 	}
 
 	public void processAction(
@@ -83,6 +108,21 @@ public class BaseConfigurationAction
 			String value = entry.getValue();
 
 			preferences.setValue(key, value);
+		}
+
+		Map<String, String[]> processedPreferences =
+			(Map<String, String[]>)actionRequest.getAttribute(
+				WebKeys.PROCESSED_PREFERENCES);
+
+		if (processedPreferences != null) {
+			for (Map.Entry<String, String[]> entry :
+					processedPreferences.entrySet()) {
+
+				String key = entry.getKey();
+				String[] values = entry.getValue();
+
+				preferences.setValues(key, values);
+			}
 		}
 
 		if (SessionErrors.isEmpty(actionRequest)) {
