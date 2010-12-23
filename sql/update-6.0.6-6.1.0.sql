@@ -5,7 +5,11 @@ alter table BlogsEntry add smallImage BOOLEAN null;
 alter table BlogsEntry add smallImageId VARCHAR(75) null;
 alter table BlogsEntry add smallImageURL STRING null;
 
-alter_column_name BookmarksEntry comments description VARCHAR(75) null;
+alter table BookmarksEntry add description VARCHAR(75) null;
+
+COMMIT_TRANSACTION;
+
+update BookmarksEntry set description = comments;
 
 drop index IX_CE705D48 on DLFileRank;
 drop index IX_40B56512 on DLFileRank;

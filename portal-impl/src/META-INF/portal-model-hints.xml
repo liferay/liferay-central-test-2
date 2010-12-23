@@ -1108,7 +1108,9 @@
 			<validator name="required" />
 			<validator name="url" />
 		</field>
-		<field name="description" type="String" />
+		<field name="description" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
 		<field name="visits" type="int" />
 		<field name="priority" type="int">
 			<hint name="display-width">20</hint>
