@@ -29,7 +29,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.PortletConfigFactoryUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
@@ -46,7 +45,6 @@ import javax.servlet.ServletContext;
 
 /**
  * @author Brian Wing Shun Chan
- * @author Julio Camarero
  */
 public class BaseConfigurationAction
 	implements ConfigurationAction, ResourceServingConfigurationAction {
@@ -57,18 +55,6 @@ public class BaseConfigurationAction
 		param = PREFERENCES_PREFIX.concat(param).concat(StringPool.DOUBLE_DASH);
 
 		return ParamUtil.getString(portletRequest, param);
-	}
-
-	public void setPreference(String name, String[] values) {
-		if (_customPreferences == null) {
-			_customPreferences = new HashMap<String, String[]>();
-		}
-
-		_customPreferences.put(name, values);
-	}
-
-	public void setPreference(String name, String value) {
-		setPreference(name, new String[] {value});
 	}
 
 	public void processAction(
@@ -97,17 +83,6 @@ public class BaseConfigurationAction
 			String value = entry.getValue();
 
 			preferences.setValue(key, value);
-		}
-
-		if (_customPreferences != null) {
-			for (Map.Entry<String, String[]> entry :
-					_customPreferences.entrySet()) {
-
-				String key = entry.getKey();
-				String[] values = entry.getValue();
-
-				preferences.setValues(key, values);
-			}
 		}
 
 		if (SessionErrors.isEmpty(actionRequest)) {
@@ -152,7 +127,5 @@ public class BaseConfigurationAction
 
 		return selPortletConfig;
 	}
-
-	private Map<String, String[]> _customPreferences;
 
 }

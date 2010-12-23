@@ -15,12 +15,17 @@
 package com.liferay.portlet.webproxy.action;
 
 import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
+import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -34,7 +39,13 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
-		String initUrl = getParameter(actionRequest, "initUrl");
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+
+		if (!cmd.equals(Constants.UPDATE)) {
+			return;
+		}
+
+		String initUrl = ParamUtil.getString(actionRequest, "initUrl");
 
 		if (!initUrl.startsWith("/") &&
 			!StringUtil.startsWith(initUrl, "http://") &&
@@ -44,9 +55,47 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			initUrl = HttpUtil.getProtocol(actionRequest) + "://" + initUrl;
 		}
 
-		setPreference("initUrl", initUrl);
+		String scope = ParamUtil.getString(actionRequest, "scope");
+		String proxyHost = ParamUtil.getString(actionRequest, "proxyHost");
+		String proxyPort = ParamUtil.getString(actionRequest, "proxyPort");
+		String proxyAuthentication = ParamUtil.getString(
+			actionRequest, "proxyAuthentication");
+		String proxyAuthenticationUsername = ParamUtil.getString(
+			actionRequest, "proxyAuthenticationUsername");
+		String proxyAuthenticationPassword = ParamUtil.getString(
+			actionRequest, "proxyAuthenticationPassword");
+		String proxyAuthenticationHost = ParamUtil.getString(
+			actionRequest, "proxyAuthenticationHost");
+		String proxyAuthenticationDomain = ParamUtil.getString(
+			actionRequest, "proxyAuthenticationDomain");
+		String stylesheet = ParamUtil.getString(actionRequest, "stylesheet");
 
-		super.processAction(portletConfig, actionRequest, actionResponse);
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
+
+		PortletPreferences preferences =
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				actionRequest, portletResource);
+
+		preferences.setValue("initUrl", initUrl);
+		preferences.setValue("scope", scope);
+		preferences.setValue("proxyHost", proxyHost);
+		preferences.setValue("proxyPort", proxyPort);
+		preferences.setValue("proxyAuthentication", proxyAuthentication);
+		preferences.setValue(
+			"proxyAuthenticationUsername", proxyAuthenticationUsername);
+		preferences.setValue(
+			"proxyAuthenticationPassword", proxyAuthenticationPassword);
+		preferences.setValue(
+			"proxyAuthenticationHost", proxyAuthenticationHost);
+		preferences.setValue(
+			"proxyAuthenticationDomain", proxyAuthenticationDomain);
+		preferences.setValue("stylesheet", stylesheet);
+
+		preferences.store();
+
+		SessionMessages.add(
+			actionRequest, portletConfig.getPortletName() + ".doConfigure");
 	}
 
 	public String render(

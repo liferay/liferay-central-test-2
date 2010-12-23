@@ -15,7 +15,7 @@
 --%>
 
 <aui:fieldset cssClass="general-display-settings">
-	<aui:select name="preferences--displayStyle--">
+	<aui:select name="displayStyle">
 
 		<%
 		for (String curDisplayStyle : PropsValues.ASSET_PUBLISHER_DISPLAY_STYLES) {
@@ -29,7 +29,7 @@
 
 	</aui:select>
 
-	<aui:select cssClass="hidden-field abstract-length" helpMessage="abstract-length-key-help" name="preferences--abstractLength--">
+	<aui:select cssClass="hidden-field abstract-length" helpMessage="abstract-length-key-help" name="abstractLength">
 		<aui:option label="100" selected="<%= abstractLength == 100 %>" />
 		<aui:option label="200" selected="<%= abstractLength == 200 %>" />
 		<aui:option label="300" selected="<%= abstractLength == 300 %>" />
@@ -37,17 +37,17 @@
 		<aui:option label="500" selected="<%= abstractLength == 500 %>" />
 	</aui:select>
 
-	<aui:input cssClass="hidden-field show-asset-title" name="preferences--showAssetTitle--" type="checkbox" value="<%= showAssetTitle %>" />
+	<aui:input cssClass="hidden-field show-asset-title" inlineLabel="left" name="showAssetTitle" type="checkbox" value="<%= showAssetTitle %>" />
 
-	<aui:input cssClass="hidden-field show-context-link" name="preferences--showContextLink--" type="checkbox" value="<%= showContextLink %>" />
+	<aui:input cssClass="hidden-field show-context-link" inlineLabel="left" name="showContextLink" type="checkbox" value="<%= showContextLink %>" />
 
-	<aui:select cssClass="hidden-field asset-link-behaviour" name="preferences--assetLinkBehaviour--">
+	<aui:select cssClass="hidden-field asset-link-behaviour" name="assetLinkBehaviour">
 		<aui:option label="show-full-content" selected='<%= assetLinkBehaviour.equals("showFullContent") %>' value="showFullContent" />
 		<aui:option label="view-in-a-specific-portlet" selected='<%= assetLinkBehaviour.equals("viewInPortlet") %>' value="viewInPortlet" />
 	</aui:select>
 
 	<c:if test='<%= selectionStyle.equals("dynamic") %>'>
-		<aui:select label="maximum-items-to-display" name="preferences--delta--">
+		<aui:select label="maximum-items-to-display" name="delta">
 
 			<%
 			int[] deltas = {1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100};
@@ -63,16 +63,16 @@
 
 		</aui:select>
 
-		<aui:select name="preferences--paginationType--">
+		<aui:select name="paginationType">
 			<aui:option label="none" selected='<%= paginationType.equals("none") %>' />
 			<aui:option label="simple" selected='<%= paginationType.equals("simple") %>' />
 			<aui:option label="regular" selected='<%= paginationType.equals("regular") %>' />
 		</aui:select>
 
-		<aui:input label="exclude-assets-with-0-views" name="preferences--excludeZeroViewCount--" type="checkbox" value="<%= excludeZeroViewCount %>" />
+		<aui:input inlineLabel="left" label="exclude-assets-with-0-views" name="excludeZeroViewCount" type="checkbox" value="<%= excludeZeroViewCount %>" />
 	</c:if>
 
-	<aui:input name="preferences--showAvailableLocales--" type="checkbox" value="<%= showAvailableLocales %>" />
+	<aui:input inlineLabel="left" name="showAvailableLocales" type="checkbox" value="<%= showAvailableLocales %>" />
 
 	<aui:field-wrapper helpMessage='<%= !openOfficeServerEnabled ? "enabling-openoffice-integration-provides-document-conversion-functionality" : StringPool.BLANK %>' label="enable-conversion-to">
 
@@ -94,23 +94,23 @@
 
 	</aui:field-wrapper>
 
-	<aui:input name="preferences--enablePrint--" type="checkbox" value="<%= enablePrint %>" />
+	<aui:input inlineLabel="left" name="enablePrint" type="checkbox" value="<%= enablePrint %>" />
 
-	<aui:input name="preferences--enableFlags--" type="checkbox" value="<%= enableFlags %>" />
+	<aui:input inlineLabel="left" name="enableFlags" type="checkbox" value="<%= enableFlags %>" />
 
-	<aui:input name="preferences--enableRatings--" type="checkbox" value="<%= enableRatings %>" />
+	<aui:input inlineLabel="left" name="enableRatings" type="checkbox" value="<%= enableRatings %>" />
 
-	<aui:input name="preferences--enableComments--" type="checkbox" value="<%= enableComments %>" />
+	<aui:input inlineLabel="left" name="enableComments" type="checkbox" value="<%= enableComments %>" />
 
-	<aui:input name="preferences--enableCommentRatings--" type="checkbox" value="<%= enableCommentRatings %>" />
+	<aui:input inlineLabel="left" name="enableCommentRatings" type="checkbox" value="<%= enableCommentRatings %>" />
 
 	<c:if test='<%= selectionStyle.equals("manual") %>'>
-		<aui:input helpMessage="enable-tag-based-navigation-help" label="enable-tag-based-navigation" name="preferences--enableTagBasedNavigation--" type="checkbox" value="<%= enableTagBasedNavigation %>" />
+		<aui:input helpMessage="enable-tag-based-navigation-help" inlineLabel="left" label="enable-tag-based-navigation" name="enableTagBasedNavigation" type="checkbox" value="<%= enableTagBasedNavigation %>" />
 	</c:if>
 </aui:fieldset>
 
 <aui:fieldset label="show-metadata">
-	<aui:input name="preferences--metadataFields--" type="hidden" />
+	<aui:input name="metadataFields" type="hidden" />
 
 	<%
 	Set availableMetadataFields = SetUtil.fromArray(StringUtil.split(allMetadataFields));
