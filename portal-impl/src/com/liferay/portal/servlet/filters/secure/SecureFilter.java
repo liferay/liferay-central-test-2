@@ -14,15 +14,6 @@
 
 package com.liferay.portal.servlet.filters.secure;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
@@ -47,6 +38,15 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Brian Wing Shun Chan
@@ -283,15 +283,15 @@ public class SecureFilter extends BasePortalFilter {
 		throws Exception {
 
 		User user = UserLocalServiceUtil.getUser(userId);
+
 		String userIdString = String.valueOf(userId);
 
-		request = new ProtectedServletRequest(
-			request, userIdString);
+		request = new ProtectedServletRequest(request, userIdString);
 
 		session.setAttribute(WebKeys.USER, user);
 		session.setAttribute(_AUTHENTICATED_USER, userIdString);
 
-		if (_requirePermissionChecker) {
+		if (_usePermissionChecker) {
 			PrincipalThreadLocal.setName(userId);
 
 			PermissionChecker permissionChecker =
@@ -303,8 +303,8 @@ public class SecureFilter extends BasePortalFilter {
 		return request;
 	}
 
-	protected void requirePermissionChecker(boolean require) {
-		_requirePermissionChecker = require;
+	protected void setUsePermissionChecker(boolean usePermissionChecker) {
+		_usePermissionChecker = usePermissionChecker;
 	}
 
 	public static final String _AUTHENTICATED_USER =
@@ -324,6 +324,6 @@ public class SecureFilter extends BasePortalFilter {
 	private boolean _digestAuthEnabled;
 	private Set<String> _hostsAllowed = new HashSet<String>();
 	private boolean _httpsRequired;
-	private boolean _requirePermissionChecker;
+	private boolean _usePermissionChecker;
 
 }

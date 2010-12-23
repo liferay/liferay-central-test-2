@@ -33,7 +33,7 @@ public class SharepointFilter extends SecureFilter {
 	public void init(FilterConfig filterConfig) {
 		super.init(filterConfig);
 
-		requirePermissionChecker(true);
+		setUsePermissionChecker(true);
 	}
 
 	protected boolean isSharepointRequest(String uri) {
