@@ -46,7 +46,7 @@ public class PollsQuestionTable {
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_9FF342EA on PollsQuestion (groupId)",
 		"create index IX_51F087F4 on PollsQuestion (uuid_)",
-		"create unique index IX_F3C9F36 on PollsQuestion (uuid_, groupId)",
+		"create unique index IX_F3C9F36 on PollsQuestion (uuid_, groupId)"
 	};
 
 }

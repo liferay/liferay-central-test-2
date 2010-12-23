@@ -45,7 +45,7 @@ public class SCFrameworkVersionTable {
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_C98C0D78 on SCFrameworkVersion (companyId)",
 		"create index IX_272991FA on SCFrameworkVersion (groupId)",
-		"create index IX_6E1764F on SCFrameworkVersion (groupId, active_)",
+		"create index IX_6E1764F on SCFrameworkVersion (groupId, active_)"
 	};
 
 }

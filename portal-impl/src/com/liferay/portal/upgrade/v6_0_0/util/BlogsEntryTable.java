@@ -66,7 +66,7 @@ public class BlogsEntryTable {
 		"create index IX_DA04F689 on BlogsEntry (groupId, userId, displayDate, status)",
 		"create index IX_49E15A23 on BlogsEntry (groupId, userId, status)",
 		"create index IX_69157A4D on BlogsEntry (uuid_)",
-		"create unique index IX_1B1040FD on BlogsEntry (uuid_, groupId)",
+		"create unique index IX_1B1040FD on BlogsEntry (uuid_, groupId)"
 	};
 
 }

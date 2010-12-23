@@ -60,7 +60,7 @@ public class CalEventTable {
 		"create index IX_FCD7C63D on CalEvent (groupId, type_)",
 		"create index IX_F6006202 on CalEvent (remindBy)",
 		"create index IX_C1AD2122 on CalEvent (uuid_)",
-		"create unique index IX_5CCE79C8 on CalEvent (uuid_, groupId)",
+		"create unique index IX_5CCE79C8 on CalEvent (uuid_, groupId)"
 	};
 
 }

@@ -42,7 +42,7 @@ public class DLFileRankTable {
 		"create unique index IX_CE705D48 on DLFileRank (companyId, userId, folderId, name)",
 		"create index IX_40B56512 on DLFileRank (folderId, name)",
 		"create index IX_BAFB116E on DLFileRank (groupId, userId)",
-		"create index IX_EED06670 on DLFileRank (userId)",
+		"create index IX_EED06670 on DLFileRank (userId)"
 	};
 
 }

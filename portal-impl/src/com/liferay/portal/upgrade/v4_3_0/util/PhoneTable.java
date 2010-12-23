@@ -48,7 +48,7 @@ public class PhoneTable {
 		"create index IX_A2E4AFBA on Phone (companyId, classNameId)",
 		"create index IX_9A53569 on Phone (companyId, classNameId, classPK)",
 		"create index IX_812CE07A on Phone (companyId, classNameId, classPK, primary_)",
-		"create index IX_F202B9CE on Phone (userId)",
+		"create index IX_F202B9CE on Phone (userId)"
 	};
 
 }

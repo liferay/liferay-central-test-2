@@ -77,7 +77,7 @@ public class UserTable {
 		"create index IX_762F63C6 on User_ (emailAddress)",
 		"create index IX_A9ED7DD3 on User_ (openId)",
 		"create index IX_A18034A4 on User_ (portraitId)",
-		"create index IX_E0422BDA on User_ (uuid_)",
+		"create index IX_E0422BDA on User_ (uuid_)"
 	};
 
 }

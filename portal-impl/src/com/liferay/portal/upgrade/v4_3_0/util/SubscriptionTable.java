@@ -43,7 +43,7 @@ public class SubscriptionTable {
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_786D171A on Subscription (companyId, classNameId, classPK)",
 		"create index IX_2E1A92D4 on Subscription (companyId, userId, classNameId, classPK)",
-		"create index IX_54243AFD on Subscription (userId)",
+		"create index IX_54243AFD on Subscription (userId)"
 	};
 
 }

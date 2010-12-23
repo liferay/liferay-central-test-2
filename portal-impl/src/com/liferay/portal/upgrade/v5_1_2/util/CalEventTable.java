@@ -58,7 +58,7 @@ public class CalEventTable {
 		"create index IX_4FDDD2BF on CalEvent (groupId, repeating)",
 		"create index IX_FCD7C63D on CalEvent (groupId, type_)",
 		"create index IX_C1AD2122 on CalEvent (uuid_)",
-		"create index IX_5CCE79C8 on CalEvent (uuid_, groupId)",
+		"create index IX_5CCE79C8 on CalEvent (uuid_, groupId)"
 	};
 
 }

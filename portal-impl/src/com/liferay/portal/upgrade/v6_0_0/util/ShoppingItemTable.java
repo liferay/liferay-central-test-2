@@ -70,7 +70,7 @@ public class ShoppingItemTable {
 		"create index IX_FEFE7D76 on ShoppingItem (groupId, categoryId)",
 		"create index IX_903DC750 on ShoppingItem (largeImageId)",
 		"create index IX_D217AB30 on ShoppingItem (mediumImageId)",
-		"create index IX_FF203304 on ShoppingItem (smallImageId)",
+		"create index IX_FF203304 on ShoppingItem (smallImageId)"
 	};
 
 }

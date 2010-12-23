@@ -74,7 +74,7 @@ public class JournalArticleTable {
 		"create index IX_3E2765FC on JournalArticle (resourcePrimKey, status)",
 		"create index IX_EF9B7028 on JournalArticle (smallImageId)",
 		"create index IX_F029602F on JournalArticle (uuid_)",
-		"create unique index IX_3463D95B on JournalArticle (uuid_, groupId)",
+		"create unique index IX_3463D95B on JournalArticle (uuid_, groupId)"
 	};
 
 }

@@ -54,7 +54,7 @@ public class SocialRequestTable {
 		"create index IX_CC86A444 on SocialRequest (userId, classNameId, classPK, type_, status)",
 		"create index IX_AB5906A8 on SocialRequest (userId, status)",
 		"create index IX_49D5872C on SocialRequest (uuid_)",
-		"create unique index IX_4F973EFE on SocialRequest (uuid_, groupId)",
+		"create unique index IX_4F973EFE on SocialRequest (uuid_, groupId)"
 	};
 
 }

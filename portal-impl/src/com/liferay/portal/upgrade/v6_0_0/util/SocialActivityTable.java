@@ -51,7 +51,7 @@ public class SocialActivityTable {
 		"create index IX_1271F25F on SocialActivity (mirrorActivityId)",
 		"create index IX_1F00C374 on SocialActivity (mirrorActivityId, classNameId, classPK)",
 		"create index IX_121CA3CB on SocialActivity (receiverUserId)",
-		"create index IX_3504B8BC on SocialActivity (userId)",
+		"create index IX_3504B8BC on SocialActivity (userId)"
 	};
 
 }

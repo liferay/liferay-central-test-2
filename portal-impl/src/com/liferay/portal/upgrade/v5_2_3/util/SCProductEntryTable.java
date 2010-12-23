@@ -51,7 +51,7 @@ public class SCProductEntryTable {
 		"create index IX_5D25244F on SCProductEntry (companyId)",
 		"create index IX_72F87291 on SCProductEntry (groupId)",
 		"create index IX_98E6A9CB on SCProductEntry (groupId, userId)",
-		"create index IX_7311E812 on SCProductEntry (repoGroupId, repoArtifactId)",
+		"create index IX_7311E812 on SCProductEntry (repoGroupId, repoArtifactId)"
 	};
 
 }

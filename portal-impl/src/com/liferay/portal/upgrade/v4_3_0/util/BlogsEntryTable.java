@@ -45,7 +45,7 @@ public class BlogsEntryTable {
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_B0608DF4 on BlogsEntry (categoryId)",
 		"create index IX_72EF6041 on BlogsEntry (companyId)",
-		"create index IX_81A50303 on BlogsEntry (groupId)",
+		"create index IX_81A50303 on BlogsEntry (groupId)"
 	};
 
 }

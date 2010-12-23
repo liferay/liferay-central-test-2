@@ -34,7 +34,7 @@ public class ClassNameTable {
 	public static String TABLE_SQL_DROP = "drop table ClassName_";
 
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
-		"create index IX_B27A301F on ClassName_ (value)",
+		"create index IX_B27A301F on ClassName_ (value)"
 	};
 
 }

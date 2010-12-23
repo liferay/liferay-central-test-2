@@ -84,7 +84,7 @@ public class ShoppingOrderTable {
 
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_119B5630 on ShoppingOrder (groupId, userId, ppPaymentStatus)",
-		"create index IX_D7D6E87A on ShoppingOrder (number_)",
+		"create index IX_D7D6E87A on ShoppingOrder (number_)"
 	};
 
 }

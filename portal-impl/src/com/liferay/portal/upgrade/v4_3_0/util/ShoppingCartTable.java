@@ -45,7 +45,7 @@ public class ShoppingCartTable {
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_C28B41DC on ShoppingCart (groupId)",
 		"create index IX_FC46FE16 on ShoppingCart (groupId, userId)",
-		"create index IX_54101CC8 on ShoppingCart (userId)",
+		"create index IX_54101CC8 on ShoppingCart (userId)"
 	};
 
 }

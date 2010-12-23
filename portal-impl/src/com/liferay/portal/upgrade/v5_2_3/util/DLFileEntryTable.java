@@ -57,7 +57,7 @@ public class DLFileEntryTable {
 		"create index IX_F4AF5636 on DLFileEntry (groupId)",
 		"create index IX_43261870 on DLFileEntry (groupId, userId)",
 		"create index IX_64F0FE40 on DLFileEntry (uuid_)",
-		"create unique index IX_BC2E7E6A on DLFileEntry (uuid_, groupId)",
+		"create unique index IX_BC2E7E6A on DLFileEntry (uuid_, groupId)"
 	};
 
 }

@@ -38,7 +38,7 @@ public class UserIdMapperTable {
 
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_E60EA987 on UserIdMapper (userId)",
-		"create index IX_D1C44A6E on UserIdMapper (userId, type_)",
+		"create index IX_D1C44A6E on UserIdMapper (userId, type_)"
 	};
 
 }

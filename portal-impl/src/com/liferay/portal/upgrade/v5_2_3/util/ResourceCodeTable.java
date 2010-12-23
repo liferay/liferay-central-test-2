@@ -38,7 +38,7 @@ public class ResourceCodeTable {
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_717FDD47 on ResourceCode (companyId)",
 		"create unique index IX_A32C097E on ResourceCode (companyId, name, scope)",
-		"create index IX_AACAFF40 on ResourceCode (name)",
+		"create index IX_AACAFF40 on ResourceCode (name)"
 	};
 
 }

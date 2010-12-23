@@ -37,7 +37,7 @@ public class PermissionTable {
 
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_4D19C2B8 on Permission_ (actionId, resourceId)",
-		"create index IX_F090C113 on Permission_ (resourceId)",
+		"create index IX_F090C113 on Permission_ (resourceId)"
 	};
 
 }

@@ -42,7 +42,7 @@ public class IGFolderTable {
 
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_206498F8 on IGFolder (groupId)",
-		"create index IX_1A605E9F on IGFolder (groupId, parentFolderId)",
+		"create index IX_1A605E9F on IGFolder (groupId, parentFolderId)"
 	};
 
 }

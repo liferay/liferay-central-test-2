@@ -37,7 +37,7 @@ public class ResourceActionTable {
 
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_81F2DB09 on ResourceAction (name)",
-		"create unique index IX_EDB9986E on ResourceAction (name, actionId)",
+		"create unique index IX_EDB9986E on ResourceAction (name, actionId)"
 	};
 
 }

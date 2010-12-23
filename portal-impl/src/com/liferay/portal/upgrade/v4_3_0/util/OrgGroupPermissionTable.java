@@ -36,7 +36,7 @@ public class OrgGroupPermissionTable {
 
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_A425F71A on OrgGroupPermission (groupId)",
-		"create index IX_6C53DA4E on OrgGroupPermission (permissionId)",
+		"create index IX_6C53DA4E on OrgGroupPermission (permissionId)"
 	};
 
 }

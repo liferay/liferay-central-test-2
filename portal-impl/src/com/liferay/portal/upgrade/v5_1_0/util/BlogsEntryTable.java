@@ -55,7 +55,7 @@ public class BlogsEntryTable {
 		"create index IX_C07CA83D on BlogsEntry (groupId, userId)",
 		"create index IX_BC2A3534 on BlogsEntry (groupId, userId, draft)",
 		"create index IX_69157A4D on BlogsEntry (uuid_)",
-		"create index IX_1B1040FD on BlogsEntry (uuid_, groupId)",
+		"create index IX_1B1040FD on BlogsEntry (uuid_, groupId)"
 	};
 
 }

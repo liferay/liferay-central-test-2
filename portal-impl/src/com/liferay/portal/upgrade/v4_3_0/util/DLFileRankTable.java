@@ -40,7 +40,7 @@ public class DLFileRankTable {
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_CE705D48 on DLFileRank (companyId, userId, folderId, name)",
 		"create index IX_40B56512 on DLFileRank (folderId, name)",
-		"create index IX_EED06670 on DLFileRank (userId)",
+		"create index IX_EED06670 on DLFileRank (userId)"
 	};
 
 }

@@ -40,7 +40,7 @@ public class MBThreadTable {
 	public static String TABLE_SQL_DROP = "drop table MBThread";
 
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
-		"create index IX_CB854772 on MBThread (categoryId)",
+		"create index IX_CB854772 on MBThread (categoryId)"
 	};
 
 }

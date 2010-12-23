@@ -39,7 +39,7 @@ public class PollsVoteTable {
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_D5DF7B54 on PollsVote (choiceId)",
 		"create index IX_12112599 on PollsVote (questionId)",
-		"create index IX_1BBFD4D3 on PollsVote (questionId, userId)",
+		"create index IX_1BBFD4D3 on PollsVote (questionId, userId)"
 	};
 
 }

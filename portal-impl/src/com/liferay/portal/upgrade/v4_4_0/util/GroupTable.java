@@ -48,7 +48,7 @@ public class GroupTable {
 		"create index IX_D0D5E397 on Group_ (companyId, classNameId, classPK)",
 		"create index IX_5BDDB872 on Group_ (companyId, friendlyURL)",
 		"create index IX_5AA68501 on Group_ (companyId, name)",
-		"create index IX_16218A38 on Group_ (liveGroupId)",
+		"create index IX_16218A38 on Group_ (liveGroupId)"
 	};
 
 }

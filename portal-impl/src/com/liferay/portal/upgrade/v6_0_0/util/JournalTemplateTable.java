@@ -56,7 +56,7 @@ public class JournalTemplateTable {
 		"create index IX_25FFB6FA on JournalTemplate (smallImageId)",
 		"create index IX_1B12CA20 on JournalTemplate (templateId)",
 		"create index IX_2857419D on JournalTemplate (uuid_)",
-		"create unique index IX_62D1B3AD on JournalTemplate (uuid_, groupId)",
+		"create unique index IX_62D1B3AD on JournalTemplate (uuid_, groupId)"
 	};
 
 }

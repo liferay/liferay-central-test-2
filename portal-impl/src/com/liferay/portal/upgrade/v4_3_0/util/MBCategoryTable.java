@@ -45,7 +45,7 @@ public class MBCategoryTable {
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_BC735DCF on MBCategory (companyId)",
 		"create index IX_BB870C11 on MBCategory (groupId)",
-		"create index IX_ED292508 on MBCategory (groupId, parentCategoryId)",
+		"create index IX_ED292508 on MBCategory (groupId, parentCategoryId)"
 	};
 
 }

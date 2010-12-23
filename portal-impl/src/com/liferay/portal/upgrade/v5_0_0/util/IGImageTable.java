@@ -51,7 +51,7 @@ public class IGImageTable {
 		"create index IX_BCB13A3F on IGImage (folderId, name)",
 		"create index IX_64F0B572 on IGImage (largeImageId)",
 		"create index IX_D3D32126 on IGImage (smallImageId)",
-		"create index IX_265BB0F1 on IGImage (uuid_)",
+		"create index IX_265BB0F1 on IGImage (uuid_)"
 	};
 
 }

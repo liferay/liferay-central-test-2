@@ -49,7 +49,7 @@ public class BookmarksEntryTable {
 		"create index IX_E52FF7EF on BookmarksEntry (groupId)",
 		"create index IX_E2E9F129 on BookmarksEntry (groupId, userId)",
 		"create index IX_B670BA39 on BookmarksEntry (uuid_)",
-		"create unique index IX_EAA02A91 on BookmarksEntry (uuid_, groupId)",
+		"create unique index IX_EAA02A91 on BookmarksEntry (uuid_, groupId)"
 	};
 
 }

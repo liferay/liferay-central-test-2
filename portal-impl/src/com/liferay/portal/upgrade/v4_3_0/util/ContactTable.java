@@ -59,7 +59,7 @@ public class ContactTable {
 	public static String TABLE_SQL_DROP = "drop table Contact_";
 
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
-		"create index IX_66D496A3 on Contact_ (companyId)",
+		"create index IX_66D496A3 on Contact_ (companyId)"
 	};
 
 }

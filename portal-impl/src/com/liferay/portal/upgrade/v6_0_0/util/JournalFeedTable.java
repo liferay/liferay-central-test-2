@@ -58,7 +58,7 @@ public class JournalFeedTable {
 		"create index IX_35A2DB2F on JournalFeed (groupId)",
 		"create unique index IX_65576CBC on JournalFeed (groupId, feedId)",
 		"create index IX_50C36D79 on JournalFeed (uuid_)",
-		"create unique index IX_39031F51 on JournalFeed (uuid_, groupId)",
+		"create unique index IX_39031F51 on JournalFeed (uuid_, groupId)"
 	};
 
 }

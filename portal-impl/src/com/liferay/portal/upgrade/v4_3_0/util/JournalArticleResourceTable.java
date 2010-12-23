@@ -35,7 +35,7 @@ public class JournalArticleResourceTable {
 	public static String TABLE_SQL_DROP = "drop table JournalArticleResource";
 
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
-		"create index IX_88DF994A on JournalArticleResource (groupId, articleId)",
+		"create index IX_88DF994A on JournalArticleResource (groupId, articleId)"
 	};
 
 }

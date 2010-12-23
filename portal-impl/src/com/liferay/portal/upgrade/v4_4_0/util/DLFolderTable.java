@@ -50,7 +50,7 @@ public class DLFolderTable {
 		"create index IX_902FD874 on DLFolder (groupId, parentFolderId, name)",
 		"create index IX_51556082 on DLFolder (parentFolderId, name)",
 		"create index IX_CBC408D8 on DLFolder (uuid_)",
-		"create index IX_3CC1DED2 on DLFolder (uuid_, groupId)",
+		"create index IX_3CC1DED2 on DLFolder (uuid_, groupId)"
 	};
 
 }

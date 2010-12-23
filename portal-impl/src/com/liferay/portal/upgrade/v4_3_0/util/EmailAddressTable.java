@@ -47,7 +47,7 @@ public class EmailAddressTable {
 		"create index IX_49D2DEC4 on EmailAddress (companyId, classNameId)",
 		"create index IX_551A519F on EmailAddress (companyId, classNameId, classPK)",
 		"create index IX_2A2CB130 on EmailAddress (companyId, classNameId, classPK, primary_)",
-		"create index IX_7B43CD8 on EmailAddress (userId)",
+		"create index IX_7B43CD8 on EmailAddress (userId)"
 	};
 
 }

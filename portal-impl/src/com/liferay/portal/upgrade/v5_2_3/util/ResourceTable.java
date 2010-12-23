@@ -36,7 +36,7 @@ public class ResourceTable {
 
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_2578FBD3 on Resource_ (codeId)",
-		"create unique index IX_67DE7856 on Resource_ (codeId, primKey)",
+		"create unique index IX_67DE7856 on Resource_ (codeId, primKey)"
 	};
 
 }

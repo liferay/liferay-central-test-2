@@ -45,7 +45,7 @@ public class JournalStructureTable {
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_B97F5608 on JournalStructure (groupId)",
 		"create index IX_AB6E9996 on JournalStructure (groupId, structureId)",
-		"create index IX_8831E4FC on JournalStructure (structureId)",
+		"create index IX_8831E4FC on JournalStructure (structureId)"
 	};
 
 }

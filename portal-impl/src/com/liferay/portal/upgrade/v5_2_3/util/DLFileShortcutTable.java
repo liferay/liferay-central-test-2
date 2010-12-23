@@ -46,7 +46,7 @@ public class DLFileShortcutTable {
 		"create index IX_E56EC6AD on DLFileShortcut (folderId)",
 		"create index IX_CA2708A2 on DLFileShortcut (toFolderId, toName)",
 		"create index IX_4831EBE4 on DLFileShortcut (uuid_)",
-		"create unique index IX_FDB4A946 on DLFileShortcut (uuid_, groupId)",
+		"create unique index IX_FDB4A946 on DLFileShortcut (uuid_, groupId)"
 	};
 
 }

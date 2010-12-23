@@ -39,7 +39,7 @@ public class RegionTable {
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_2D9A426F on Region (active_)",
 		"create index IX_16D87CA7 on Region (countryId)",
-		"create index IX_11FB3E42 on Region (countryId, active_)",
+		"create index IX_11FB3E42 on Region (countryId, active_)"
 	};
 
 }

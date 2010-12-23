@@ -44,7 +44,7 @@ public class SCProductVersionTable {
 	public static String TABLE_SQL_DROP = "drop table SCProductVersion";
 
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
-		"create index IX_8377A211 on SCProductVersion (productEntryId)",
+		"create index IX_8377A211 on SCProductVersion (productEntryId)"
 	};
 
 }

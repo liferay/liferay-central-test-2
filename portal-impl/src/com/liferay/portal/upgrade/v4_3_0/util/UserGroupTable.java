@@ -39,7 +39,7 @@ public class UserGroupTable {
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_524FEFCE on UserGroup (companyId)",
 		"create index IX_23EAD0D on UserGroup (companyId, name)",
-		"create index IX_69771487 on UserGroup (companyId, parentUserGroupId)",
+		"create index IX_69771487 on UserGroup (companyId, parentUserGroupId)"
 	};
 
 }

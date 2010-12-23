@@ -42,7 +42,7 @@ public class DLFileShortcutTable {
 
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_E56EC6AD on DLFileShortcut (folderId)",
-		"create index IX_CA2708A2 on DLFileShortcut (toFolderId, toName)",
+		"create index IX_CA2708A2 on DLFileShortcut (toFolderId, toName)"
 	};
 
 }

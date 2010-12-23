@@ -47,7 +47,7 @@ public class WebsiteTable {
 		"create index IX_4F0F0CA7 on Website (companyId, classNameId)",
 		"create index IX_F960131C on Website (companyId, classNameId, classPK)",
 		"create index IX_1AA07A6D on Website (companyId, classNameId, classPK, primary_)",
-		"create index IX_F75690BB on Website (userId)",
+		"create index IX_F75690BB on Website (userId)"
 	};
 
 }

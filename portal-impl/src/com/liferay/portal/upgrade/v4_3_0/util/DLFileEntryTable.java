@@ -49,7 +49,7 @@ public class DLFileEntryTable {
 
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
 		"create index IX_24A846D1 on DLFileEntry (folderId)",
-		"create index IX_8F6C75D0 on DLFileEntry (folderId, name)",
+		"create index IX_8F6C75D0 on DLFileEntry (folderId, name)"
 	};
 
 }

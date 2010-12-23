@@ -43,7 +43,7 @@ public class MBBanTable {
 		"create index IX_69951A25 on MBBan (banUserId)",
 		"create index IX_5C3FF12A on MBBan (groupId)",
 		"create index IX_8ABC4E3B on MBBan (groupId, banUserId)",
-		"create index IX_48814BBA on MBBan (userId)",
+		"create index IX_48814BBA on MBBan (userId)"
 	};
 
 }
