@@ -137,7 +137,7 @@ public class AssetPublisherUtil {
 			assetEntry.getClassPK(), AssetRendererFactory.TYPE_LATEST);
 
 		String[] assetEntryXmls = portletPreferences.getValues(
-			"asset-entry-xml", new String[0]);
+			"assetEntryXml", new String[0]);
 
 		String assetEntryXml = _getAssetEntryXml(
 			assetEntryType, assetRenderer.getUuid());
@@ -149,7 +149,7 @@ public class AssetPublisherUtil {
 			assetEntryXmls = ArrayUtil.append(assetEntryXmls, assetEntryXml);
 		}
 
-		portletPreferences.setValues("asset-entry-xml", assetEntryXmls);
+		portletPreferences.setValues("assetEntryXml", assetEntryXmls);
 	}
 
 	public static AssetEntryQuery getAssetEntryQuery(
@@ -279,15 +279,15 @@ public class AssetPublisherUtil {
 
 		boolean anyAssetType = GetterUtil.getBoolean(
 			portletPreferences.getValue(
-				"any-asset-type", Boolean.TRUE.toString()));
+				"anyAssetType", Boolean.TRUE.toString()));
 
 		long[] classNameIds = null;
 
 		if (!anyAssetType &&
-			(portletPreferences.getValues("class-name-ids", null) != null)) {
+			(portletPreferences.getValues("classNameIds", null) != null)) {
 
 			classNameIds = GetterUtil.getLongValues(
-				portletPreferences.getValues("class-name-ids", null));
+				portletPreferences.getValues("classNameIds", null));
 		}
 		else {
 			classNameIds = availableClassNameIds;
@@ -303,11 +303,11 @@ public class AssetPublisherUtil {
 		long[] groupIds = new long[] {scopeGroupId};
 
 		boolean defaultScope = GetterUtil.getBoolean(
-			portletPreferences.getValue("default-scope", null), true);
+			portletPreferences.getValue("defaultScope", null), true);
 
 		if (!defaultScope) {
 			String[] scopeIds = portletPreferences.getValues(
-				"scope-ids",
+				"scopeIds",
 				new String[] {"group" + StringPool.UNDERLINE + scopeGroupId});
 
 			groupIds = new long[scopeIds.length];
@@ -376,7 +376,7 @@ public class AssetPublisherUtil {
 		}
 
 		String[] assetEntryXmls = portletPreferences.getValues(
-			"asset-entry-xml", new String[0]);
+			"assetEntryXml", new String[0]);
 
 		List<String> assetEntryXmlsList = ListUtil.fromArray(assetEntryXmls);
 
@@ -397,7 +397,7 @@ public class AssetPublisherUtil {
 		}
 
 		portletPreferences.setValues(
-			"asset-entry-xml",
+			"assetEntryXml",
 			assetEntryXmlsList.toArray(new String[assetEntryXmlsList.size()]));
 
 		portletPreferences.store();
