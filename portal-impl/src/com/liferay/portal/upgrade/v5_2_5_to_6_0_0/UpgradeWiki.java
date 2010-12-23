@@ -38,7 +38,7 @@ public class UpgradeWiki extends UpgradeProcess {
 			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 				WikiPageTable.TABLE_NAME, WikiPageTable.TABLE_COLUMNS);
 
-			upgradeTable.setAllowUniqueIndexes(false);
+			upgradeTable.setAllowUniqueIndexes(true);
 			upgradeTable.setCreateSQL(WikiPageTable.TABLE_SQL_CREATE);
 			upgradeTable.setIndexesSQL(WikiPageTable.TABLE_SQL_ADD_INDEXES);
 
@@ -57,7 +57,7 @@ public class UpgradeWiki extends UpgradeProcess {
 				WikiPageResourceTable.TABLE_NAME,
 				WikiPageResourceTable.TABLE_COLUMNS);
 
-			upgradeTable.setAllowUniqueIndexes(false);
+			upgradeTable.setAllowUniqueIndexes(true);
 			upgradeTable.setCreateSQL(WikiPageResourceTable.TABLE_SQL_CREATE);
 			upgradeTable.setIndexesSQL(
 				WikiPageResourceTable.TABLE_SQL_ADD_INDEXES);

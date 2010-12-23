@@ -35,7 +35,7 @@ public class UpgradeLayout extends UpgradeProcess {
 			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 				LayoutTable.TABLE_NAME, LayoutTable.TABLE_COLUMNS);
 
-			upgradeTable.setAllowUniqueIndexes(false);
+			upgradeTable.setAllowUniqueIndexes(true);
 			upgradeTable.setCreateSQL(LayoutTable.TABLE_SQL_CREATE);
 			upgradeTable.setIndexesSQL(LayoutTable.TABLE_SQL_ADD_INDEXES);
 

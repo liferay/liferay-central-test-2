@@ -36,7 +36,7 @@ public class UpgradeJournal extends UpgradeProcess {
 				JournalArticleTable.TABLE_NAME,
 				JournalArticleTable.TABLE_COLUMNS);
 
-			upgradeTable.setAllowUniqueIndexes(false);
+			upgradeTable.setAllowUniqueIndexes(true);
 			upgradeTable.setCreateSQL(JournalArticleTable.TABLE_SQL_CREATE);
 			upgradeTable.setIndexesSQL(
 				JournalArticleTable.TABLE_SQL_ADD_INDEXES);
@@ -53,7 +53,7 @@ public class UpgradeJournal extends UpgradeProcess {
 			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 				JournalFeedTable.TABLE_NAME, JournalFeedTable.TABLE_COLUMNS);
 
-			upgradeTable.setAllowUniqueIndexes(false);
+			upgradeTable.setAllowUniqueIndexes(true);
 			upgradeTable.setCreateSQL(JournalFeedTable.TABLE_SQL_CREATE);
 			upgradeTable.setIndexesSQL(JournalFeedTable.TABLE_SQL_ADD_INDEXES);
 
@@ -69,7 +69,7 @@ public class UpgradeJournal extends UpgradeProcess {
 				JournalTemplateTable.TABLE_NAME,
 				JournalTemplateTable.TABLE_COLUMNS);
 
-			upgradeTable.setAllowUniqueIndexes(false);
+			upgradeTable.setAllowUniqueIndexes(true);
 			upgradeTable.setCreateSQL(JournalTemplateTable.TABLE_SQL_CREATE);
 			upgradeTable.setIndexesSQL(
 				JournalTemplateTable.TABLE_SQL_ADD_INDEXES);

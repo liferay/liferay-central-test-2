@@ -33,7 +33,7 @@ public class UpgradeJournal extends UpgradeProcess {
 				JournalArticleTable.TABLE_NAME,
 				JournalArticleTable.TABLE_COLUMNS);
 
-			upgradeTable.setAllowUniqueIndexes(false);
+			upgradeTable.setAllowUniqueIndexes(true);
 			upgradeTable.setCreateSQL(JournalArticleTable.TABLE_SQL_CREATE);
 			upgradeTable.setIndexesSQL(
 				JournalArticleTable.TABLE_SQL_ADD_INDEXES);

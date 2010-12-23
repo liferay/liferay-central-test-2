@@ -171,7 +171,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			DLFileRankTable.TABLE_NAME, DLFileRankTable.TABLE_COLUMNS,
 			nameColumn);
 
-		upgradeTable.setAllowUniqueIndexes(false);
+		upgradeTable.setAllowUniqueIndexes(true);
 		upgradeTable.setCreateSQL(DLFileRankTable.TABLE_SQL_CREATE);
 		upgradeTable.setIndexesSQL(DLFileRankTable.TABLE_SQL_ADD_INDEXES);
 
@@ -186,7 +186,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			DLFileShortcutTable.TABLE_NAME, DLFileShortcutTable.TABLE_COLUMNS,
 			toNameColumn);
 
-		upgradeTable.setAllowUniqueIndexes(false);
+		upgradeTable.setAllowUniqueIndexes(true);
 		upgradeTable.setCreateSQL(DLFileShortcutTable.TABLE_SQL_CREATE);
 		upgradeTable.setIndexesSQL(DLFileShortcutTable.TABLE_SQL_ADD_INDEXES);
 
