@@ -114,18 +114,18 @@ public class WikiUtil {
 		String emailFromAddress = PropsUtil.get(
 			PropsKeys.WIKI_EMAIL_FROM_ADDRESS);
 
-		return preferences.getValue("email-from-address", emailFromAddress);
+		return preferences.getValue("emailFromAddress", emailFromAddress);
 	}
 
 	public static String getEmailFromName(PortletPreferences preferences) {
 		String emailFromName = PropsUtil.get(PropsKeys.WIKI_EMAIL_FROM_NAME);
 
-		return preferences.getValue("email-from-name", emailFromName);
+		return preferences.getValue("emailFromName", emailFromName);
 	}
 
 	public static String getEmailPageAddedBody(PortletPreferences preferences) {
 		String emailPageAddedBody = preferences.getValue(
-			"email-page-added-body", StringPool.BLANK);
+			"emailPageAddedBody", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailPageAddedBody)) {
 			return emailPageAddedBody;
@@ -140,7 +140,7 @@ public class WikiUtil {
 		PortletPreferences preferences) {
 
 		String emailPageAddedEnabled = preferences.getValue(
-			"email-page-added-enabled", StringPool.BLANK);
+			"emailPageAddedEnabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailPageAddedEnabled)) {
 			return GetterUtil.getBoolean(emailPageAddedEnabled);
@@ -155,7 +155,7 @@ public class WikiUtil {
 		PortletPreferences preferences) {
 
 		String emailPageAddedSignature = preferences.getValue(
-			"email-page-added-signature", StringPool.BLANK);
+			"emailPageAddedSignature", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailPageAddedSignature)) {
 			return emailPageAddedSignature;
@@ -170,7 +170,7 @@ public class WikiUtil {
 		PortletPreferences preferences) {
 
 		String emailPageAddedSubjectPrefix = preferences.getValue(
-			"email-page-added-subject-prefix", StringPool.BLANK);
+			"emailPageAddedSubjectPrefix", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailPageAddedSubjectPrefix)) {
 			return emailPageAddedSubjectPrefix;
@@ -185,7 +185,7 @@ public class WikiUtil {
 		PortletPreferences preferences) {
 
 		String emailPageUpdatedBody = preferences.getValue(
-			"email-page-updated-body", StringPool.BLANK);
+			"emailPageUpdatedBody", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailPageUpdatedBody)) {
 			return emailPageUpdatedBody;
@@ -200,7 +200,7 @@ public class WikiUtil {
 		PortletPreferences preferences) {
 
 		String emailPageUpdatedEnabled = preferences.getValue(
-			"email-page-updated-enabled", StringPool.BLANK);
+			"emailPageUpdatedEnabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailPageUpdatedEnabled)) {
 			return GetterUtil.getBoolean(emailPageUpdatedEnabled);
@@ -215,7 +215,7 @@ public class WikiUtil {
 		PortletPreferences preferences) {
 
 		String emailPageUpdatedSignature = preferences.getValue(
-			"email-page-updated-signature", StringPool.BLANK);
+			"emailPageUpdatedSignature", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailPageUpdatedSignature)) {
 			return emailPageUpdatedSignature;
@@ -230,7 +230,7 @@ public class WikiUtil {
 		PortletPreferences preferences) {
 
 		String emailPageUpdatedSubject = preferences.getValue(
-			"email-page-updated-subject-prefix", StringPool.BLANK);
+			"emailPageUpdatedSubjectPrefix", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailPageUpdatedSubject)) {
 			return emailPageUpdatedSubject;
@@ -254,11 +254,11 @@ public class WikiUtil {
 
 		PortletPreferences preferences = portletRequest.getPreferences();
 		String[] visibleNodeNames =
-			StringUtil.split(preferences.getValue("visible-nodes", null));
+			StringUtil.split(preferences.getValue("visibleNodes", null));
 		nodes = orderNodes(nodes, visibleNodeNames);
 
 		String[] hiddenNodes = StringUtil.split(
-			preferences.getValue("hidden-nodes", StringPool.BLANK));
+			preferences.getValue("hiddenNodes", StringPool.BLANK));
 		Arrays.sort(hiddenNodes);
 
 		for (WikiNode node : nodes) {

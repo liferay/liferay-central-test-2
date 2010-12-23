@@ -87,16 +87,16 @@ if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-boolean enablePageRatings = PropsValues.WIKI_PAGE_RATINGS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enable-page-ratings", null), true);
-boolean enableComments = PropsValues.WIKI_PAGE_COMMENTS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enable-comments", null), true);
-boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enable-comment-ratings", null), true);
+boolean enablePageRatings = PropsValues.WIKI_PAGE_RATINGS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enablePageRatings", null), true);
+boolean enableComments = PropsValues.WIKI_PAGE_COMMENTS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enableComments", null), true);
+boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enableCommentRatings", null), true);
 
 List<WikiNode> allNodes = WikiNodeLocalServiceUtil.getNodes(scopeGroupId);
 List<String> allNodeNames = WikiUtil.getNodeNames(allNodes);
 
 String[] visibleNodes = null;
 
-String visibleNodesPreference = preferences.getValue("visible-nodes", null);
+String visibleNodesPreference = preferences.getValue("visibleNodes", null);
 
 if (visibleNodesPreference != null) {
 	visibleNodes = StringUtil.split(visibleNodesPreference);
@@ -107,10 +107,10 @@ else {
 	visibleNodes = allNodeNames.toArray(new String[allNodeNames.size()]);
 }
 
-String[] hiddenNodes = StringUtil.split(preferences.getValue("hidden-nodes", null));
+String[] hiddenNodes = StringUtil.split(preferences.getValue("hiddenNodes", null));
 
-int rssDelta = GetterUtil.getInteger(preferences.getValue("rss-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
-String rssDisplayStyle = preferences.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
+int rssDelta = GetterUtil.getInteger(preferences.getValue("rssDelta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
+String rssDisplayStyle = preferences.getValue("rssDisplayStyle", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 
 StringBundler rssURLParams = new StringBundler(4);
 

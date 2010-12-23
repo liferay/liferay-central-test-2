@@ -190,16 +190,16 @@ public class EditNodeAction extends PortletAction {
 		PortletPreferences preferences = actionRequest.getPreferences();
 
 		String hiddenNodes = preferences.getValue(
-			"hidden-nodes", StringPool.BLANK);
+			"hiddenNodes", StringPool.BLANK);
 		String visibleNodes = preferences.getValue(
-			"visible-nodes", StringPool.BLANK);
+			"visibleNodes", StringPool.BLANK);
 
 		String regex = oldName + ",?";
 
 		preferences.setValue(
-			"hidden-nodes", hiddenNodes.replaceFirst(regex, newName));
+			"hiddenNodes", hiddenNodes.replaceFirst(regex, newName));
 		preferences.setValue(
-			"visible-nodes",
+			"visibleNodes",
 			visibleNodes.replaceFirst(regex, newName));
 
 		preferences.store();

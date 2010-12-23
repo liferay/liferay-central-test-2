@@ -82,9 +82,9 @@ else if (tabs2.equals("page-updated-email")) {
 	<c:choose>
 		<c:when test='<%= tabs2.equals("email-from") %>'>
 			<aui:fieldset>
-				<aui:input cssClass="lfr-input-text-container" label="name" name="emailFromName" value="<%= emailFromName %>" />
+				<aui:input cssClass="lfr-input-text-container" label="name" name="preferences--emailFromName--" value="<%= emailFromName %>" />
 
-				<aui:input cssClass="lfr-input-text-container" label="address" name="emailFromAddress" value="<%= emailFromAddress %>" />
+				<aui:input cssClass="lfr-input-text-container" label="address" name="preferences--emailFromAddress--" value="<%= emailFromAddress %>" />
 			</aui:fieldset>
 
 			<div class="definition-of-terms">
@@ -140,25 +140,25 @@ else if (tabs2.equals("page-updated-email")) {
 			<aui:fieldset>
 				<c:choose>
 					<c:when test='<%= tabs2.equals("page-added-email") %>'>
-						<aui:input inlineLabel="left" label="enabled" name="emailPageAddedEnabled" type="checkbox" value="<%= WikiUtil.getEmailPageAddedEnabled(preferences) %>" />
+						<aui:input label="enabled" name="preferences--emailPageAddedEnabled--" type="checkbox" value="<%= WikiUtil.getEmailPageAddedEnabled(preferences) %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("page-updated-email") %>'>
-						<aui:input inlineLabel="left" label="enabled" name="emailPageUpdatedEnabled" type="checkbox" value="<%= WikiUtil.getEmailPageUpdatedEnabled(preferences) %>" />
+						<aui:input label="enabled" name="preferences--emailPageUpdatedEnabled--" type="checkbox" value="<%= WikiUtil.getEmailPageUpdatedEnabled(preferences) %>" />
 					</c:when>
 				</c:choose>
 
 				<c:choose>
 					<c:when test='<%= tabs2.equals("page-added-email") %>'>
-						<aui:input cssClass="lfr-input-text-container" label="subject-prefix" name="emailPageAddedSubjectPrefix" type="text" value="<%= emailPageAddedSubjectPrefix %>" />
+						<aui:input cssClass="lfr-input-text-container" label="subject-prefix" name="preferences--emailPageAddedSubjectPrefix--" type="text" value="<%= emailPageAddedSubjectPrefix %>" />
 					</c:when>
 					<c:when test='<%= tabs2.equals("page-updated-email") %>'>
-						<aui:input cssClass="lfr-input-text-container" label="subject-prefix" name="emailPageUpdatedSubjectPrefix" type="text" value="<%= emailPageUpdatedSubjectPrefix %>" />
+						<aui:input cssClass="lfr-input-text-container" label="subject-prefix" name="preferences--emailPageUpdatedSubjectPrefix--" type="text" value="<%= emailPageUpdatedSubjectPrefix %>" />
 					</c:when>
 				</c:choose>
 
-				<aui:input cssClass="lfr-textarea-container" label="body" name="<%= bodyEditorParam %>" type="textarea" value="<%= bodyEditorBody %>" />
+				<aui:input cssClass="lfr-textarea-container" label="body" name='<%= "preferences--" + bodyEditorParam + "--" %>' type="textarea" value="<%= bodyEditorBody %>" />
 
-				<aui:input cssClass="lfr-textarea-container" label="signature" name="<%= signatureEditorParam %>" type="textarea" value="<%= signatureEditorBody %>" wrap="soft" />
+				<aui:input cssClass="lfr-textarea-container" label="signature" name='<%= "preferences--" + signatureEditorParam + "--" %>' type="textarea" value="<%= signatureEditorBody %>" wrap="soft" />
 			</aui:fieldset>
 
 			<div class="definition-of-terms">
@@ -298,20 +298,20 @@ else if (tabs2.equals("page-updated-email")) {
 			<aui:fieldset>
 				<c:if test="<%= PropsValues.WIKI_PAGE_RATINGS_ENABLED || PropsValues.WIKI_PAGE_COMMENTS_ENABLED %>">
 					<c:if test="<%= PropsValues.WIKI_PAGE_RATINGS_ENABLED %>">
-						<aui:input inlineLabel="left" name="enablePageRatings" type="checkbox" value="<%= enablePageRatings %>" />
+						<aui:input name="preferences--enablePageRatings--" type="checkbox" value="<%= enablePageRatings %>" />
 					</c:if>
 
 					<c:if test="<%= PropsValues.WIKI_PAGE_COMMENTS_ENABLED %>">
-						<aui:input inlineLabel="left" name="enableComments" type="checkbox" value="<%= enableComments %>" />
+						<aui:input name="preferences--enableComments--" type="checkbox" value="<%= enableComments %>" />
 
-						<aui:input inlineLabel="left" name="enableCommentRatings" type="checkbox" value="<%= enableCommentRatings %>" />
+						<aui:input name="preferences--enableCommentRatings--" type="checkbox" value="<%= enableCommentRatings %>" />
 					</c:if>
 				</c:if>
 			</aui:fieldset>
 
 			<aui:fieldset label="visible-wikis">
-				<aui:input name="visibleNodes" type="hidden" />
-				<aui:input name="hiddenNodes" type="hidden" />
+				<aui:input name="preferences--visibleNodes--" type="hidden" />
+				<aui:input name="preferences--hiddenNodes--" type="hidden" />
 
 				<%
 				Set<String> currentVisibleNodes = new HashSet<String>(allNodeNames);
@@ -368,7 +368,7 @@ else if (tabs2.equals("page-updated-email")) {
 		</c:when>
 		<c:when test='<%= tabs2.equals("rss") %>'>
 			<aui:fieldset>
-				<aui:select label="maximum-items-to-display" name="rssDelta">
+				<aui:select label="maximum-items-to-display" name="preferences--rssDelta--">
 					<aui:option label="1" selected="<%= rssDelta == 1 %>" />
 					<aui:option label="2" selected="<%= rssDelta == 2 %>" />
 					<aui:option label="3" selected="<%= rssDelta == 3 %>" />
@@ -388,7 +388,7 @@ else if (tabs2.equals("page-updated-email")) {
 					<aui:option label="100" selected="<%= rssDelta == 100 %>" />
 				</aui:select>
 
-				<aui:select label="display-style" name="rssDisplayStyle">
+				<aui:select label="display-style" name="preferences--rssDisplayStyle--">
 					<aui:option label="<%= RSSUtil.DISPLAY_STYLE_FULL_CONTENT %>" selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT) %>" />
 					<aui:option label="<%= RSSUtil.DISPLAY_STYLE_ABSTRACT %>" selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT) %>" />
 					<aui:option label="<%= RSSUtil.DISPLAY_STYLE_TITLE %>" selected="<%= rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE) %>" />
