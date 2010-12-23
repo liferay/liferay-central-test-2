@@ -31,16 +31,16 @@ String src = preferences.getValue("src", StringPool.BLANK);
 boolean relative = GetterUtil.getBoolean(preferences.getValue("relative", StringPool.BLANK));
 
 boolean auth = GetterUtil.getBoolean(preferences.getValue("auth", StringPool.BLANK));
-String authType = preferences.getValue("auth-type", StringPool.BLANK);
-String formMethod = preferences.getValue("form-method", StringPool.BLANK);
-String userName = preferences.getValue("user-name", StringPool.BLANK);
-String userNameField = preferences.getValue("user-name-field", StringPool.BLANK);
+String authType = preferences.getValue("authType", StringPool.BLANK);
+String formMethod = preferences.getValue("formMethod", StringPool.BLANK);
+String userName = preferences.getValue("userName", StringPool.BLANK);
+String userNameField = preferences.getValue("userNameField", StringPool.BLANK);
 String password = preferences.getValue("password", StringPool.BLANK);
-String passwordField = preferences.getValue("password-field", StringPool.BLANK);
-String hiddenVariables = preferences.getValue("hidden-variables", StringPool.BLANK);
-boolean resizeAutomatically = GetterUtil.getBoolean(preferences.getValue("resize-automatically", StringPool.TRUE));
-String heightMaximized = GetterUtil.getString(preferences.getValue("height-maximized", "600"));
-String heightNormal = GetterUtil.getString(preferences.getValue("height-normal", "300"));
+String passwordField = preferences.getValue("passwordField", StringPool.BLANK);
+String hiddenVariables = preferences.getValue("hiddenVariables", StringPool.BLANK);
+boolean resizeAutomatically = GetterUtil.getBoolean(preferences.getValue("resizeAutomatically", StringPool.TRUE));
+String heightMaximized = GetterUtil.getString(preferences.getValue("heightMaximized", "600"));
+String heightNormal = GetterUtil.getString(preferences.getValue("heightNormal", "300"));
 String width = GetterUtil.getString(preferences.getValue("width", "100%"));
 
 String alt = preferences.getValue("alt", StringPool.BLANK);

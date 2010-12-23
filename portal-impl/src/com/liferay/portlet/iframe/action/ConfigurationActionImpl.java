@@ -15,19 +15,14 @@
 package com.liferay.portlet.iframe.action;
 
 import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
-import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.CharPool;
-import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -41,13 +36,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-
-		if (!cmd.equals(Constants.UPDATE)) {
-			return;
-		}
-
-		String src = ParamUtil.getString(actionRequest, "src");
+		String src = getParameter(actionRequest, "src");
 
 		if (!src.startsWith("/") &&
 			!StringUtil.startsWith(src, "http://") &&
@@ -55,57 +44,12 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			!StringUtil.startsWith(src, "mhtml://")) {
 
 			src = HttpUtil.getProtocol(actionRequest) + "://" + src;
+
+			setPreference(actionRequest, "src", src);
 		}
 
-		boolean relative = ParamUtil.getBoolean(actionRequest, "relative");
-
-		boolean auth = ParamUtil.getBoolean(actionRequest, "auth");
-		String authType = ParamUtil.getString(actionRequest, "authType");
-		String formMethod = ParamUtil.getString(actionRequest, "formMethod");
-		String userName = ParamUtil.getString(
-			actionRequest, authType + "UserName");
-		String userNameField = ParamUtil.getString(
-			actionRequest, "userNameField");
-		String password = ParamUtil.getString(
-			actionRequest, authType + "Password");
-		String passwordField = ParamUtil.getString(
-			actionRequest, "passwordField");
-		String hiddenVariables = ParamUtil.getString(
-			actionRequest, "hiddenVariables");
-		boolean resizeAutomatically = ParamUtil.getBoolean(
-			actionRequest, "resizeAutomatically");
-		String heightMaximized = ParamUtil.getString(
-			actionRequest, "heightMaximized");
-		String heightNormal = ParamUtil.getString(
-			actionRequest, "heightNormal");
-		String width = ParamUtil.getString(actionRequest, "width");
-
-		String[] htmlAttributes = StringUtil.split(ParamUtil.getString(
-			actionRequest, "htmlAttributes"), StringPool.NEW_LINE);
-
-		String portletResource = ParamUtil.getString(
-			actionRequest, "portletResource");
-
-		PortletPreferences preferences =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				actionRequest, portletResource);
-
-		preferences.setValue("src", src);
-		preferences.setValue("relative", String.valueOf(relative));
-
-		preferences.setValue("auth", String.valueOf(auth));
-		preferences.setValue("auth-type", authType);
-		preferences.setValue("form-method", formMethod);
-		preferences.setValue("user-name", userName);
-		preferences.setValue("user-name-field", userNameField);
-		preferences.setValue("password", password);
-		preferences.setValue("password-field", passwordField);
-		preferences.setValue("hidden-variables", hiddenVariables);
-		preferences.setValue(
-			"resize-automatically", String.valueOf(resizeAutomatically));
-		preferences.setValue("height-maximized", heightMaximized);
-		preferences.setValue("height-normal", heightNormal);
-		preferences.setValue("width", width);
+		String[] htmlAttributes = StringUtil.split(
+			getParameter(actionRequest, "htmlAttributes"), StringPool.NEW_LINE);
 
 		for (String htmlAttribute : htmlAttributes) {
 			int pos = htmlAttribute.indexOf(CharPool.EQUAL);
@@ -118,13 +62,10 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			String value = htmlAttribute.substring(
 				pos + 1, htmlAttribute.length());
 
-			preferences.setValue(key, value);
+			setPreference(actionRequest, key, value);
 		}
 
-		preferences.store();
-
-		SessionMessages.add(
-			actionRequest, portletConfig.getPortletName() + ".doConfigure");
+		super.processAction(portletConfig, actionRequest, actionResponse);
 	}
 
 	public String render(

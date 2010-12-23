@@ -61,8 +61,8 @@ if (Validator.isNull(userNameField)) {
 		userNameField = fieldValuePair.substring(0, pos);
 		userName = fieldValuePair.substring(pos + 1);
 
-		preferences.setValue("user-name", userName);
-		preferences.setValue("user-name-field", userNameField);
+		preferences.setValue("userName", userName);
+		preferences.setValue("userNameField", userNameField);
 
 		preferences.store();
 	}
@@ -86,7 +86,7 @@ if (Validator.isNull(passwordField)) {
 		password = fieldValuePair.substring(pos + 1);
 
 		preferences.setValue("password", password);
-		preferences.setValue("password-field", passwordField);
+		preferences.setValue("passwordField", passwordField);
 
 		preferences.store();
 	}
