@@ -180,10 +180,6 @@ public class Table {
 		return sb.toString();
 	}
 
-	public String[] getIndexesSQL() throws Exception {
-		return _indexesSQL;
-	}
-
 	public String getInsertSQL() throws Exception {
 		String sql = "INSERT INTO " + getInsertTableName() + " (";
 
@@ -646,10 +642,6 @@ public class Table {
 		_createSQL = createSQL;
 	}
 
-	public void setIndexesSQL(String[] indexesSQL) throws Exception {
-		_indexesSQL = indexesSQL;
-	}
-
 	public void setSelectSQL(String selectSQL) throws Exception {
 		_selectSQL = selectSQL;
 	}
@@ -658,7 +650,6 @@ public class Table {
 
 	private Object[][] _columns;
 	private String _createSQL;
-	private String[] _indexesSQL = new String[0];
 	private int[] _order;
 	private String _selectSQL;
 	private String _tableName;

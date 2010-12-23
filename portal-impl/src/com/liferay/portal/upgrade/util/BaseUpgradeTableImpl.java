@@ -16,10 +16,9 @@ package com.liferay.portal.upgrade.util;
 
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
@@ -36,6 +35,20 @@ public abstract class BaseUpgradeTableImpl extends Table {
 		super(tableName, columns);
 	}
 
+	public String[] getIndexesSQL() throws Exception {
+		return _indexesSQL;
+	}
+
+	public boolean isAllowUniqueIndexes() throws Exception {
+		return _allowUniqueIndexes;
+	}
+
+	public void setAllowUniqueIndexes(boolean allowUniqueIndexes)
+		throws Exception {
+
+		_allowUniqueIndexes = allowUniqueIndexes;
+	}
+
 	public void setCreateSQL(String createSQL) throws Exception {
 		if (_calledUpdateTable) {
 			throw new UpgradeException(
@@ -43,6 +56,10 @@ public abstract class BaseUpgradeTableImpl extends Table {
 		}
 
 		super.setCreateSQL(createSQL);
+	}
+
+	public void setIndexesSQL(String[] indexesSQL) throws Exception {
+		_indexesSQL = indexesSQL;
 	}
 
 	public void updateTable() throws Exception {
@@ -74,6 +91,11 @@ public abstract class BaseUpgradeTableImpl extends Table {
 			String[] indexesSQL = getIndexesSQL();
 
 			for (String indexSQL : indexesSQL) {
+				if (!isAllowUniqueIndexes()) {
+					indexSQL = StringUtil.replace(
+						indexSQL, "create unique index ", "create index ");
+				}
+
 				db.runSQL(indexSQL);
 			}
 		}
@@ -84,8 +106,8 @@ public abstract class BaseUpgradeTableImpl extends Table {
 		}
 	}
 
-	static Log _log = LogFactoryUtil.getLog(BaseUpgradeTableImpl.class);
-
+	private boolean _allowUniqueIndexes = true;
 	private boolean _calledUpdateTable;
+	private String[] _indexesSQL = new String[0];
 
 }
