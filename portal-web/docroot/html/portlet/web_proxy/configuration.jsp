@@ -27,29 +27,29 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
 	<aui:fieldset>
-		<aui:input cssClass="lfr-input-text-container" label="url" name="initUrl" value="<%= initUrl %>" />
+		<aui:input cssClass="lfr-input-text-container" label="url" name="preferences--initUrl--" value="<%= initUrl %>" />
 
-		<aui:input cssClass="lfr-input-text-container" label='<%= LanguageUtil.get(pageContext, "scope") + " (" + LanguageUtil.get(pageContext, "regex") + ")" %>' name="scope" value="<%= scope %>" />
+		<aui:input cssClass="lfr-input-text-container" label='<%= LanguageUtil.get(pageContext, "scope") + " (" + LanguageUtil.get(pageContext, "regex") + ")" %>' name="preferences--scope--" value="<%= scope %>" />
 
-		<aui:input cssClass="lfr-input-text-container" name="proxyHost" value="<%= proxyHost %>" />
+		<aui:input cssClass="lfr-input-text-container" name="preferences--proxyHost--" value="<%= proxyHost %>" />
 
-		<aui:input cssClass="lfr-input-text-container" name="proxyPort" value="<%= proxyPort %>" />
+		<aui:input cssClass="lfr-input-text-container" name="preferences--proxyPort--" value="<%= proxyPort %>" />
 
-		<aui:select name="proxyAuthentication">
+		<aui:select name="preferences--proxyAuthentication--">
 			<aui:option label="none" selected='<%= proxyAuthentication.equals("none") %>' />
 			<aui:option label="basic" selected='<%= proxyAuthentication.equals("basic") %>' />
 			<aui:option label="ntlm" selected='<%= proxyAuthentication.equals("ntlm") %>' />
 		</aui:select>
 
-		<aui:input cssClass="lfr-input-text-container" name="proxyAuthenticationUsername" value="<%= proxyAuthenticationUsername %>" />
+		<aui:input cssClass="lfr-input-text-container" name="preferences--proxyAuthenticationUsername--" value="<%= proxyAuthenticationUsername %>" />
 
-		<aui:input cssClass="lfr-input-text-container" name="proxyAuthenticationPassword" value="<%= proxyAuthenticationPassword %>" />
+		<aui:input cssClass="lfr-input-text-container" name="preferences--proxyAuthenticationPassword--" value="<%= proxyAuthenticationPassword %>" />
 
-		<aui:input cssClass="lfr-input-text-container" name="proxyAuthenticationHost" value="<%= proxyAuthenticationHost %>" />
+		<aui:input cssClass="lfr-input-text-container" name="preferences--proxyAuthenticationHost--" value="<%= proxyAuthenticationHost %>" />
 
-		<aui:input cssClass="lfr-input-text-container" name="proxyAuthenticationDomain" value="<%= proxyAuthenticationDomain %>" />
+		<aui:input cssClass="lfr-input-text-container" name="preferences--proxyAuthenticationDomain--" value="<%= proxyAuthenticationDomain %>" />
 
-		<aui:input cssClass="lfr-textarea-container" name="stylesheet" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();" type="textarea" value="<%= stylesheet %>" wrap="soft" />
+		<aui:input cssClass="lfr-textarea-container" name="preferences--stylesheet--" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();" type="textarea" value="<%= stylesheet %>" wrap="soft" />
 	</aui:fieldset>
 
 	<aui:button-row>
