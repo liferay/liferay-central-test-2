@@ -155,7 +155,6 @@ public interface Localization {
 	 */
 	public String getPreferencesKey(String key, String languageId);
 
-
 	/**
 	 * Gets the localized preferences value for the key. Uses the default
 	 * language if no localization exists for the requested language.
