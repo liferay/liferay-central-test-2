@@ -914,7 +914,10 @@ public class SourceFormatter {
 					line.contains("String TABLE_SQL_CREATE = ")) {
 				}
 				else if (fileName.endsWith("Table.java") &&
-					line.contains("String TABLE_SQL_DROP = ")) {
+						 line.contains("String TABLE_SQL_DROP = ")) {
+				}
+				else if (fileName.endsWith("Table.java") &&
+						 line.contains(" index IX_")) {
 				}
 				else {
 					_sourceFormatterHelper.printError(

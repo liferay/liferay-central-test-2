@@ -462,18 +462,24 @@
 						</antelope:stringutil>
 
 						<if>
-							<not>
-								<uptodate
-									srcfile="@{zip.file}"
-									targetfile="${upgrade.table.dir}/${zip.version}"
-								/>
-							</not>
+							<or>
+								<not>
+									<uptodate
+										srcfile="@{zip.file}"
+										targetfile="${upgrade.table.dir}/${zip.version}"
+									/>
+								</not>
+								<not>
+									<available file="${upgrade.table.dir}/${zip.version}/indexes.sql" />
+								</not>
+							</or>
 							<then>
 								<mkdir dir="${upgrade.table.dir}/${zip.version}" />
 
 								<unzip src="@{zip.file}" dest="${upgrade.table.dir}/${zip.version}">
 									<patternset>
 										<include name="**/*ModelImpl.java" />
+										<include name="**/sql/indexes.sql" />
 									</patternset>
 									<mapper type="flatten" />
 								</unzip>

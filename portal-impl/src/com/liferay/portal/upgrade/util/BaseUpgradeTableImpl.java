@@ -70,6 +70,12 @@ public abstract class BaseUpgradeTableImpl extends Table {
 			if (Validator.isNotNull(tempFileName)) {
 				populateTable(tempFileName);
 			}
+
+			String[] indexesSQL = getIndexesSQL();
+
+			for (String indexSQL : indexesSQL) {
+				db.runSQL(indexSQL);
+			}
 		}
 		finally {
 			if (Validator.isNotNull(tempFileName)) {

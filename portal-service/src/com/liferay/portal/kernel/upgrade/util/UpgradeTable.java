@@ -35,6 +35,8 @@ public interface UpgradeTable {
 
 	public String getDeleteSQL() throws Exception;
 
+	public String[] getIndexesSQL() throws Exception;
+
 	public String getInsertSQL() throws Exception;
 
 	public String getSelectSQL() throws Exception;
@@ -44,6 +46,8 @@ public interface UpgradeTable {
 		throws Exception;
 
 	public void setCreateSQL(String createSQL) throws Exception;
+
+	public void setIndexesSQL(String[] indexesSQL) throws Exception;
 
 	public void updateTable() throws Exception;
 

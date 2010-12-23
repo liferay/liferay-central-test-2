@@ -14,10 +14,18 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.tools.servicebuilder.ServiceBuilder;
 import com.liferay.portal.util.FileImpl;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.tools.ant.DirectoryScanner;
 
@@ -87,7 +95,12 @@ public class UpgradeTableBuilder {
 
 			String author = _getAuthor(fileName);
 
-			content = _getContent(packagePath, className, content, author);
+			String[] addIndexes = _getAddIndexes(
+				upgradeTableDir + "/" + upgradeFileVersion + "/indexes.sql",
+				fileName.substring(x + 1, y));
+
+			content = _getContent(
+				packagePath, className, content, author, addIndexes);
 
 			_fileUtil.write(fileName, content);
 		}
@@ -111,6 +124,41 @@ public class UpgradeTableBuilder {
 		}
 	}
 
+	private String[] _getAddIndexes(String indexesFileName, String tableName)
+		throws Exception {
+
+		List<String> addIndexes = new ArrayList<String>();
+
+		File indexesFile = new File(indexesFileName);
+
+		if (!indexesFile.exists()) {
+			indexesFile = new File("../sql/indexes.sql");
+		}
+
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new InputStreamReader(new FileInputStream(indexesFile)));
+
+		String line = null;
+
+		while ((line = unsyncBufferedReader.readLine()) != null) {
+			if (line.contains(" on " + tableName + " (") ||
+				line.contains(" on " + tableName + "_ (")) {
+
+				String sql = line.trim();
+
+				if (sql.endsWith(";")) {
+					sql = sql.substring(0, sql.length() - 1);
+				}
+
+				addIndexes.add(sql);
+			}
+		}
+
+		unsyncBufferedReader.close();
+
+		return addIndexes.toArray(new String[addIndexes.size()]);
+	}
+
 	private String _getAuthor(String fileName) throws Exception {
 		if (_fileUtil.exists(fileName)) {
 			String content = _fileUtil.read(fileName);
@@ -130,7 +178,8 @@ public class UpgradeTableBuilder {
 	}
 
 	private String _getContent(
-			String packagePath, String className, String content, String author)
+			String packagePath, String className, String content, String author,
+			String[] addIndexes)
 		throws Exception {
 
 		int x = content.indexOf("public static final String TABLE_NAME =");
@@ -201,6 +250,16 @@ public class UpgradeTableBuilder {
 				sb.append("\n");
 			}
 		}
+
+		sb.append("\tpublic static final String[] TABLE_SQL_ADD_INDEXES = {\n");
+
+		for (String addIndex : addIndexes) {
+			sb.append("\t\t\"");
+			sb.append(addIndex);
+			sb.append("\",\n");
+		}
+
+		sb.append("\t};\n\n");
 
 		sb.append("}");
 
