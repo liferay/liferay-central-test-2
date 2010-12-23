@@ -14,19 +14,14 @@
 
 package com.liferay.portlet.login.action;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.servlet.SessionMessages;
-import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -41,30 +36,13 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-
-		if (!cmd.equals(Constants.UPDATE)) {
-			return;
-		}
-
-		String portletResource = ParamUtil.getString(
-			actionRequest, "portletResource");
-
-		PortletPreferences preferences =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				actionRequest, portletResource);
-
 		String tabs1 = ParamUtil.getString(actionRequest, "tabs1");
 
-		if (tabs1.equals("general")) {
-			updateGeneral(actionRequest, preferences);
-		}
-		else if (tabs1.equals("email-notifications")) {
-			updateEmailNotifications(actionRequest, preferences);
+		if (tabs1.equals("email-notifications")) {
+			updateEmailNotifications(actionRequest);
 		}
 
-		SessionMessages.add(
-			actionRequest, portletConfig.getPortletName() + ".doConfigure");
+		super.processAction(portletConfig, actionRequest, actionResponse);
 	}
 
 	public String render(
@@ -75,65 +53,27 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		return "/html/portlet/login/configuration.jsp";
 	}
 
-	protected void updateEmailNotifications(
-			ActionRequest actionRequest, PortletPreferences preferences)
+	protected void updateEmailNotifications(ActionRequest actionRequest)
 		throws Exception {
 
 		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
 
-		if (tabs2.equals("password-changed-notification") ||
-			tabs2.equals("password-reset-notification")) {
-
-			String languageId = LanguageUtil.getLanguageId(actionRequest);
-
-			String emailParam = "emailPasswordSent";
-
-			if (tabs2.equals("password-reset-notification")) {
-				emailParam = "emailPasswordReset";
-			}
-
-			String emailSubject = ParamUtil.getString(
-				actionRequest, emailParam + "Subject_" + languageId);
-			String emailBody = ParamUtil.getString(
-				actionRequest, emailParam + "Body_" + languageId);
-
-			preferences.setValue(
-				emailParam + "Subject_" + languageId, emailSubject);
-			preferences.setValue(emailParam + "Body_" + languageId, emailBody);
-
-			preferences.store();
-		}
-		else {
-			String emailFromName = ParamUtil.getString(
-				actionRequest, "emailFromName");
-			String emailFromAddress = ParamUtil.getString(
-				actionRequest, "emailFromAddress");
-
-			preferences.setValue("emailFromName", emailFromName);
-
-			if (Validator.isNotNull(emailFromAddress) &&
-				!Validator.isEmailAddress(emailFromAddress)) {
-
-				SessionErrors.add(actionRequest, "emailFromAddress");
-			}
-			else {
-				preferences.setValue("emailFromName", emailFromName);
-				preferences.setValue("emailFromAddress", emailFromAddress);
-
-				preferences.store();
-			}
+		if (tabs2.equals("general")) {
+			validateEmailFrom(actionRequest);
 		}
 	}
 
-	protected void updateGeneral(
-			ActionRequest actionRequest, PortletPreferences preferences)
+	protected void validateEmailFrom(ActionRequest actionRequest)
 		throws Exception {
 
-		String authType = ParamUtil.getString(actionRequest, "authType");
+		String emailFromAddress = getParameter(
+			actionRequest, "emailFromAddress");
 
-		preferences.setValue("authType", authType);
+		if (Validator.isNotNull(emailFromAddress) &&
+			!Validator.isEmailAddress(emailFromAddress)) {
 
-		preferences.store();
+			SessionErrors.add(actionRequest, "emailFromAddress");
+		}
 	}
 
 }

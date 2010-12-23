@@ -109,12 +109,12 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 						</aui:select>
 
-						<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= emailParam + "Subject" + StringPool.UNDERLINE + currentLanguageId %>' value="<%= emailSubject %>" />
+						<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "preferences--" + emailParam + "Subject" + StringPool.UNDERLINE + currentLanguageId + "--" %>' value="<%= emailSubject %>" />
 
 						<aui:field-wrapper label="body">
 							<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-							<aui:input name="<%= editorParam %>" type="hidden" />
+							<aui:input name='<%= "preferences--" + editorParam + "--" %>' type="hidden" />
 						</aui:field-wrapper>
 					</aui:fieldset>
 
@@ -210,11 +210,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</c:when>
 				<c:otherwise>
 					<aui:fieldset>
-						<aui:input cssClass="lfr-input-text-container" label="name" name="emailFromName" value="<%= emailFromName %>" />
+						<aui:input cssClass="lfr-input-text-container" label="name" name="preferences--emailFromName--" value="<%= emailFromName %>" />
 
 						<liferay-ui:error key="emailFromAddress" message="please-enter-a-valid-email-address" />
 
-						<aui:input cssClass="lfr-input-text-container" label="address" name="emailFromAddress" value="<%= emailFromAddress %>" />
+						<aui:input cssClass="lfr-input-text-container" label="address" name="preferences--emailFromAddress--" value="<%= emailFromAddress %>" />
 					</aui:fieldset>
 				</c:otherwise>
 			</c:choose>
@@ -240,7 +240,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</c:when>
 		<c:otherwise>
 			<aui:fieldset>
-				<aui:select label="authentication-type" name="authType">
+				<aui:select label="authentication-type" name="preferences--authType--">
 					<aui:option label="default" value="" />
 					<aui:option label="by-email-address" selected="<%= authType.equals(CompanyConstants.AUTH_TYPE_EA) %>" value="<%= CompanyConstants.AUTH_TYPE_EA %>" />
 					<aui:option label="by-screen-name" selected="<%= authType.equals(CompanyConstants.AUTH_TYPE_SN) %>" value="<%= CompanyConstants.AUTH_TYPE_SN %>" />
