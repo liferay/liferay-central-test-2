@@ -41,6 +41,16 @@ public abstract class BaseUpgradeTableImpl extends Table {
 		return _indexesSQL;
 	}
 
+	public boolean isAllowUniqueIndexes() throws Exception {
+		return _allowUniqueIndexes;
+	}
+
+	public void setAllowUniqueIndexes(boolean allowUniqueIndexes)
+		throws Exception {
+
+		_allowUniqueIndexes = allowUniqueIndexes;
+	}
+
 	public void setCreateSQL(String createSQL) throws Exception {
 		if (_calledUpdateTable) {
 			throw new UpgradeException(
@@ -83,8 +93,10 @@ public abstract class BaseUpgradeTableImpl extends Table {
 			String[] indexesSQL = getIndexesSQL();
 
 			for (String indexSQL : indexesSQL) {
-				indexSQL = StringUtil.replace(
-					indexSQL, "create unique index ", "create index ");
+				if (!isAllowUniqueIndexes()) {
+					indexSQL = StringUtil.replace(
+						indexSQL, "create unique index ", "create index ");
+				}
 
 				try {
 					db.runSQL(indexSQL);
@@ -103,6 +115,7 @@ public abstract class BaseUpgradeTableImpl extends Table {
 
 	private static Log _log = LogFactoryUtil.getLog(BaseUpgradeTableImpl.class);
 
+	private boolean _allowUniqueIndexes;
 	private boolean _calledUpdateTable;
 	private String[] _indexesSQL = new String[0];
 
