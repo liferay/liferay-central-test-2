@@ -32,7 +32,6 @@ public class UpgradeGroup extends UpgradeProcess {
 			GroupTable.TABLE_NAME, GroupTable.TABLE_COLUMNS);
 
 		upgradeTable.setCreateSQL(GroupTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(GroupTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

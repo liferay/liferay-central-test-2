@@ -51,7 +51,6 @@ public class UpgradeBlogs extends UpgradeProcess {
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(BlogsEntryTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(BlogsEntryTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

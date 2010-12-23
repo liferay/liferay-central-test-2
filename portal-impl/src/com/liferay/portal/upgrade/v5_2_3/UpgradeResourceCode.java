@@ -35,11 +35,9 @@ public class UpgradeResourceCode extends UpgradeProcess {
 			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 				ResourceCodeTable.TABLE_NAME, ResourceCodeTable.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(ResourceCodeTable.TABLE_SQL_CREATE);
-
-			upgradeTable.setIndexesSQL(ResourceCodeTable.TABLE_SQL_ADD_INDEXES);
-
 			upgradeTable.setAllowUniqueIndexes(false);
+			upgradeTable.setCreateSQL(ResourceCodeTable.TABLE_SQL_CREATE);
+			upgradeTable.setIndexesSQL(ResourceCodeTable.TABLE_SQL_ADD_INDEXES);
 
 			upgradeTable.updateTable();
 		}

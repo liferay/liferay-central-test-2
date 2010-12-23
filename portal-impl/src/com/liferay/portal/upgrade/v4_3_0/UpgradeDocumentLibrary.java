@@ -61,7 +61,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(DLFolderTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(DLFolderTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
@@ -105,7 +104,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			fileEntryIdColumn, upgradeUserIdColumn, upgradeVersionUserIdColumn);
 
 		upgradeTable.setCreateSQL(DLFileEntryTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(DLFileEntryTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
@@ -122,7 +120,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			upgradeUserIdColumn, upgradeFolderIdColumn);
 
 		upgradeTable.setCreateSQL(DLFileRankTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(DLFileRankTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
@@ -137,7 +134,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			upgradeToFolderIdColumn);
 
 		upgradeTable.setCreateSQL(DLFileShortcutTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(DLFileShortcutTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
@@ -154,7 +150,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			upgradeUserIdColumn, upgradeFolderIdColumn);
 
 		upgradeTable.setCreateSQL(DLFileVersionTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(DLFileVersionTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

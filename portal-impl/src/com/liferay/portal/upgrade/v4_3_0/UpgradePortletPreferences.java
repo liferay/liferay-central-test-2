@@ -108,8 +108,8 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 				",layoutId VARCHAR(75) null)";
 
 		upgradeTable.setCreateSQL(createSQL);
-
-		upgradeTable.setIndexesSQL(PortletPreferencesTable.TABLE_SQL_ADD_INDEXES);
+		upgradeTable.setIndexesSQL(
+			PortletPreferencesTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 

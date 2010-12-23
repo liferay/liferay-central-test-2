@@ -77,7 +77,6 @@ public class UpgradeWebsite extends UpgradeProcess {
 			upgradeClassPKColumn);
 
 		upgradeTable.setCreateSQL(WebsiteTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(WebsiteTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

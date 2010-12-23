@@ -53,7 +53,6 @@ public class UpgradeBookmarks extends UpgradeProcess {
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(BookmarksFolderTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(BookmarksFolderTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
@@ -84,7 +83,6 @@ public class UpgradeBookmarks extends UpgradeProcess {
 			upgradePKColumn, upgradeFolderIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(BookmarksEntryTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(BookmarksEntryTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

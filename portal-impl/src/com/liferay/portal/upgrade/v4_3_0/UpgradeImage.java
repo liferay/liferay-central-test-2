@@ -78,7 +78,6 @@ public class UpgradeImage extends UpgradeProcess {
 			upgradeHeightColumn, upgradeWidthColumn, upgradeSizeColumn);
 
 		upgradeTable.setCreateSQL(ImageTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(ImageTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

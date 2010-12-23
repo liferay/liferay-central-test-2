@@ -37,8 +37,8 @@ public class UpgradeSoftwareCatalog extends UpgradeProcess {
 				SCProductEntryTable.TABLE_COLUMNS);
 
 			upgradeTable.setCreateSQL(SCProductEntryTable.TABLE_SQL_CREATE);
-
-			upgradeTable.setIndexesSQL(SCProductEntryTable.TABLE_SQL_ADD_INDEXES);
+			upgradeTable.setIndexesSQL(
+				SCProductEntryTable.TABLE_SQL_ADD_INDEXES);
 
 			upgradeTable.updateTable();
 		}

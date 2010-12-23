@@ -32,7 +32,6 @@ public class UpgradePermission extends UpgradeProcess {
 			PermissionTable.TABLE_NAME, PermissionTable.TABLE_COLUMNS);
 
 		upgradeTable.setCreateSQL(PermissionTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(PermissionTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

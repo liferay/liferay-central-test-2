@@ -44,7 +44,6 @@ public class UpgradeUserIdMapper extends UpgradeProcess {
 			upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(UserIdMapperTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(UserIdMapperTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

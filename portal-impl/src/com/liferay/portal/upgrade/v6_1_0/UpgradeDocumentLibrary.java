@@ -211,12 +211,10 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				DLFileVersionTable.TABLE_NAME,
 				DLFileVersionTable.TABLE_COLUMNS);
 
+			upgradeTable.setAllowUniqueIndexes(false);
 			upgradeTable.setCreateSQL(DLFileVersionTable.TABLE_SQL_CREATE);
-
 			upgradeTable.setIndexesSQL(
 				DLFileVersionTable.TABLE_SQL_ADD_INDEXES);
-
-			upgradeTable.setAllowUniqueIndexes(false);
 
 			upgradeTable.updateTable();
 		}

@@ -38,7 +38,6 @@ public class UpgradeRole extends UpgradeProcess {
 			RoleTable.TABLE_NAME, RoleTable.TABLE_COLUMNS, upgradePKColumn);
 
 		upgradeTable.setCreateSQL(RoleTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(RoleTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

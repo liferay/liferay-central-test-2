@@ -61,7 +61,6 @@ public class UpgradeShopping extends UpgradeProcess {
 			upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(ShoppingCategoryTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(ShoppingCategoryTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
@@ -109,7 +108,6 @@ public class UpgradeShopping extends UpgradeProcess {
 			new PKUpgradeColumnImpl("itemFieldId", false), upgradeItemIdColumn);
 
 		upgradeTable.setCreateSQL(ShoppingItemTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(ShoppingItemTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
@@ -122,8 +120,8 @@ public class UpgradeShopping extends UpgradeProcess {
 			new PKUpgradeColumnImpl("itemPriceId", false), upgradeItemIdColumn);
 
 		upgradeTable.setCreateSQL(ShoppingItemPriceTable.TABLE_SQL_CREATE);
-
-		upgradeTable.setIndexesSQL(ShoppingItemPriceTable.TABLE_SQL_ADD_INDEXES);
+		upgradeTable.setIndexesSQL(
+			ShoppingItemPriceTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 
@@ -137,7 +135,6 @@ public class UpgradeShopping extends UpgradeProcess {
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(ShoppingOrderTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(ShoppingOrderTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
@@ -159,8 +156,8 @@ public class UpgradeShopping extends UpgradeProcess {
 			upgradeOrderIdColumn, upgradeCartItemIdColumn);
 
 		upgradeTable.setCreateSQL(ShoppingOrderItemTable.TABLE_SQL_CREATE);
-
-		upgradeTable.setIndexesSQL(ShoppingOrderItemTable.TABLE_SQL_ADD_INDEXES);
+		upgradeTable.setIndexesSQL(
+			ShoppingOrderItemTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 
@@ -176,7 +173,6 @@ public class UpgradeShopping extends UpgradeProcess {
 			upgradeGroupIdColumn, upgradeUserIdColumn, upgradeItemIdsColumn);
 
 		upgradeTable.setCreateSQL(ShoppingCartTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(ShoppingCartTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
@@ -195,7 +191,6 @@ public class UpgradeShopping extends UpgradeProcess {
 			upgradeLimitCategoriesColumn);
 
 		upgradeTable.setCreateSQL(ShoppingCouponTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(ShoppingCouponTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

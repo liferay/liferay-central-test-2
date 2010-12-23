@@ -32,7 +32,6 @@ public class UpgradeClassName extends UpgradeProcess {
 			ClassNameTable.TABLE_NAME, ClassNameTable.TABLE_COLUMNS);
 
 		upgradeTable.setCreateSQL(ClassNameTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(ClassNameTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

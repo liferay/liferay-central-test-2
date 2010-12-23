@@ -77,7 +77,6 @@ public class UpgradeAddress extends UpgradeProcess {
 			upgradeClassPKColumn);
 
 		upgradeTable.setCreateSQL(AddressTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(AddressTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

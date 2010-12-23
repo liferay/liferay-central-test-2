@@ -32,7 +32,6 @@ public class UpgradeListType extends UpgradeProcess {
 			ListTypeTable.TABLE_NAME, ListTypeTable.TABLE_COLUMNS);
 
 		upgradeTable.setCreateSQL(ListTypeTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(ListTypeTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

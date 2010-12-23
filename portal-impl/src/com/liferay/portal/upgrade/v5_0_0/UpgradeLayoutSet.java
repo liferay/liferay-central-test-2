@@ -32,7 +32,6 @@ public class UpgradeLayoutSet extends UpgradeProcess {
 			LayoutSetTable.TABLE_NAME, LayoutSetTable.TABLE_COLUMNS);
 
 		upgradeTable.setCreateSQL(LayoutSetTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(LayoutSetTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

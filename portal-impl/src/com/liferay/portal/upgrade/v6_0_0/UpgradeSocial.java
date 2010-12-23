@@ -52,11 +52,9 @@ public class UpgradeSocial extends UpgradeProcess {
 			SocialActivityTable.TABLE_NAME, SocialActivityTable.TABLE_COLUMNS,
 			createDateColumn);
 
-		upgradeTable.setCreateSQL(SocialActivityTable.TABLE_SQL_CREATE);
-
-		upgradeTable.setIndexesSQL(SocialActivityTable.TABLE_SQL_ADD_INDEXES);
-
 		upgradeTable.setAllowUniqueIndexes(false);
+		upgradeTable.setCreateSQL(SocialActivityTable.TABLE_SQL_CREATE);
+		upgradeTable.setIndexesSQL(SocialActivityTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 
@@ -66,11 +64,9 @@ public class UpgradeSocial extends UpgradeProcess {
 			SocialRelationTable.TABLE_NAME, SocialRelationTable.TABLE_COLUMNS,
 			createDateColumn);
 
-		upgradeTable.setCreateSQL(SocialRelationTable.TABLE_SQL_CREATE);
-
-		upgradeTable.setIndexesSQL(SocialRelationTable.TABLE_SQL_ADD_INDEXES);
-
 		upgradeTable.setAllowUniqueIndexes(false);
+		upgradeTable.setCreateSQL(SocialRelationTable.TABLE_SQL_CREATE);
+		upgradeTable.setIndexesSQL(SocialRelationTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 
@@ -80,11 +76,9 @@ public class UpgradeSocial extends UpgradeProcess {
 			SocialRequestTable.TABLE_NAME, SocialRequestTable.TABLE_COLUMNS,
 			createDateColumn, modifiedDateColumn);
 
-		upgradeTable.setCreateSQL(SocialRequestTable.TABLE_SQL_CREATE);
-
-		upgradeTable.setIndexesSQL(SocialRequestTable.TABLE_SQL_ADD_INDEXES);
-
 		upgradeTable.setAllowUniqueIndexes(false);
+		upgradeTable.setCreateSQL(SocialRequestTable.TABLE_SQL_CREATE);
+		upgradeTable.setIndexesSQL(SocialRequestTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 	}

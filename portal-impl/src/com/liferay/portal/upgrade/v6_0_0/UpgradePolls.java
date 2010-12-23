@@ -36,11 +36,9 @@ public class UpgradePolls extends UpgradeProcess {
 			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 				PollsChoiceTable.TABLE_NAME, PollsChoiceTable.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(PollsChoiceTable.TABLE_SQL_CREATE);
-
-			upgradeTable.setIndexesSQL(PollsChoiceTable.TABLE_SQL_ADD_INDEXES);
-
 			upgradeTable.setAllowUniqueIndexes(false);
+			upgradeTable.setCreateSQL(PollsChoiceTable.TABLE_SQL_CREATE);
+			upgradeTable.setIndexesSQL(PollsChoiceTable.TABLE_SQL_ADD_INDEXES);
 
 			upgradeTable.updateTable();
 		}
@@ -56,12 +54,10 @@ public class UpgradePolls extends UpgradeProcess {
 				PollsQuestionTable.TABLE_NAME,
 				PollsQuestionTable.TABLE_COLUMNS);
 
+			upgradeTable.setAllowUniqueIndexes(false);
 			upgradeTable.setCreateSQL(PollsQuestionTable.TABLE_SQL_CREATE);
-
 			upgradeTable.setIndexesSQL(
 				PollsQuestionTable.TABLE_SQL_ADD_INDEXES);
-
-			upgradeTable.setAllowUniqueIndexes(false);
 
 			upgradeTable.updateTable();
 		}

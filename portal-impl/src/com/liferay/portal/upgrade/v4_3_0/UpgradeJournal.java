@@ -97,7 +97,6 @@ public class UpgradeJournal extends UpgradeProcess {
 			upgradeContentColumn);
 
 		upgradeTable.setCreateSQL(JournalArticleTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(JournalArticleTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
@@ -123,7 +122,6 @@ public class UpgradeJournal extends UpgradeProcess {
 			upgradeXSDColumn);
 
 		upgradeTable.setCreateSQL(JournalStructureTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(JournalStructureTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
@@ -159,7 +157,6 @@ public class UpgradeJournal extends UpgradeProcess {
 			upgradeSmallImageIdColumn);
 
 		upgradeTable.setCreateSQL(JournalTemplateTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(JournalTemplateTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

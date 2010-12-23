@@ -54,7 +54,6 @@ public class UpgradePolls extends UpgradeProcess {
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(PollsQuestionTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(PollsQuestionTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
@@ -76,7 +75,6 @@ public class UpgradePolls extends UpgradeProcess {
 			upgradeQuestionIdColumn, upgradeChoiceId);
 
 		upgradeTable.setCreateSQL(PollsChoiceTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(PollsChoiceTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
@@ -95,7 +93,6 @@ public class UpgradePolls extends UpgradeProcess {
 			upgradeQuestionIdColumn, upgradeVoteChoiceIdColumn);
 
 		upgradeTable.setCreateSQL(PollsVoteTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(PollsVoteTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

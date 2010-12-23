@@ -45,7 +45,6 @@ public class UpgradeOrganization extends UpgradeProcess {
 			upgradePKColumn);
 
 		upgradeTable.setCreateSQL(OrganizationTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(OrganizationTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
@@ -75,8 +74,8 @@ public class UpgradeOrganization extends UpgradeProcess {
 			OrgGroupPermissionTable.TABLE_COLUMNS, upgradeOrganizationIdColumn);
 
 		upgradeTable.setCreateSQL(OrgGroupPermissionTable.TABLE_SQL_CREATE);
-
-		upgradeTable.setIndexesSQL(OrgGroupPermissionTable.TABLE_SQL_ADD_INDEXES);
+		upgradeTable.setIndexesSQL(
+			OrgGroupPermissionTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 
@@ -89,7 +88,6 @@ public class UpgradeOrganization extends UpgradeProcess {
 			upgradePKColumn, upgradeOrganizationIdColumn);
 
 		upgradeTable.setCreateSQL(OrgLaborTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(OrgLaborTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

@@ -32,7 +32,6 @@ public class UpgradeRelease extends UpgradeProcess {
 			ReleaseTable.TABLE_NAME, ReleaseTable.TABLE_COLUMNS);
 
 		upgradeTable.setCreateSQL(ReleaseTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(ReleaseTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

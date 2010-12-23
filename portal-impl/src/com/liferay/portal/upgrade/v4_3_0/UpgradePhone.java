@@ -76,7 +76,6 @@ public class UpgradePhone extends UpgradeProcess {
 			upgradeUserIdColumn, classNameIdColumn, upgradeClassPKColumn);
 
 		upgradeTable.setCreateSQL(PhoneTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(PhoneTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

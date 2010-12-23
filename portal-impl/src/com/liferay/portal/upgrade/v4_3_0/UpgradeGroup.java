@@ -91,7 +91,6 @@ public class UpgradeGroup extends UpgradeProcess {
 			classNameIdColumn, upgradeClassPKColumn, upgradeNameColumn);
 
 		upgradeTable.setCreateSQL(GroupTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(GroupTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
@@ -144,7 +143,6 @@ public class UpgradeGroup extends UpgradeProcess {
 				",ownerId VARCHAR(75) null)";
 
 		upgradeTable.setCreateSQL(createSQL);
-
 		upgradeTable.setIndexesSQL(LayoutTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
@@ -174,7 +172,6 @@ public class UpgradeGroup extends UpgradeProcess {
 				",ownerId VARCHAR(75) null)";
 
 		upgradeTable.setCreateSQL(createSQL);
-
 		upgradeTable.setIndexesSQL(LayoutSetTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
@@ -186,8 +183,8 @@ public class UpgradeGroup extends UpgradeProcess {
 			OrgGroupPermissionTable.TABLE_COLUMNS, upgradeGroupIdColumn);
 
 		upgradeTable.setCreateSQL(OrgGroupPermissionTable.TABLE_SQL_CREATE);
-
-		upgradeTable.setIndexesSQL(OrgGroupPermissionTable.TABLE_SQL_ADD_INDEXES);
+		upgradeTable.setIndexesSQL(
+			OrgGroupPermissionTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 
@@ -198,7 +195,6 @@ public class UpgradeGroup extends UpgradeProcess {
 			upgradeGroupIdColumn);
 
 		upgradeTable.setCreateSQL(OrgGroupRoleTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(OrgGroupRoleTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

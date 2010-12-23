@@ -32,7 +32,6 @@ public class UpgradeCountry extends UpgradeProcess {
 			CountryTable.TABLE_NAME, CountryTable.TABLE_COLUMNS);
 
 		upgradeTable.setCreateSQL(CountryTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(CountryTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

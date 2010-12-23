@@ -159,11 +159,9 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			DLFileEntryTable.TABLE_NAME, DLFileEntryTable.TABLE_COLUMNS,
 			nameColumn, titleColumn, versionColumn);
 
-		upgradeTable.setCreateSQL(DLFileEntryTable.TABLE_SQL_CREATE);
-
-		upgradeTable.setIndexesSQL(DLFileEntryTable.TABLE_SQL_ADD_INDEXES);
-
 		upgradeTable.setAllowUniqueIndexes(false);
+		upgradeTable.setCreateSQL(DLFileEntryTable.TABLE_SQL_CREATE);
+		upgradeTable.setIndexesSQL(DLFileEntryTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 
@@ -173,11 +171,9 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			DLFileRankTable.TABLE_NAME, DLFileRankTable.TABLE_COLUMNS,
 			nameColumn);
 
-		upgradeTable.setCreateSQL(DLFileRankTable.TABLE_SQL_CREATE);
-
-		upgradeTable.setIndexesSQL(DLFileRankTable.TABLE_SQL_ADD_INDEXES);
-
 		upgradeTable.setAllowUniqueIndexes(false);
+		upgradeTable.setCreateSQL(DLFileRankTable.TABLE_SQL_CREATE);
+		upgradeTable.setIndexesSQL(DLFileRankTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 
@@ -190,11 +186,9 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			DLFileShortcutTable.TABLE_NAME, DLFileShortcutTable.TABLE_COLUMNS,
 			toNameColumn);
 
-		upgradeTable.setCreateSQL(DLFileShortcutTable.TABLE_SQL_CREATE);
-
-		upgradeTable.setIndexesSQL(DLFileShortcutTable.TABLE_SQL_ADD_INDEXES);
-
 		upgradeTable.setAllowUniqueIndexes(false);
+		upgradeTable.setCreateSQL(DLFileShortcutTable.TABLE_SQL_CREATE);
+		upgradeTable.setIndexesSQL(DLFileShortcutTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 
@@ -204,11 +198,9 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			DLFileVersionTable.TABLE_NAME, DLFileVersionTable.TABLE_COLUMNS,
 			nameColumn, versionColumn);
 
-		upgradeTable.setCreateSQL(DLFileVersionTable.TABLE_SQL_CREATE);
-
-		upgradeTable.setIndexesSQL(DLFileVersionTable.TABLE_SQL_ADD_INDEXES);
-
 		upgradeTable.setAllowUniqueIndexes(false);
+		upgradeTable.setCreateSQL(DLFileVersionTable.TABLE_SQL_CREATE);
+		upgradeTable.setIndexesSQL(DLFileVersionTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 	}

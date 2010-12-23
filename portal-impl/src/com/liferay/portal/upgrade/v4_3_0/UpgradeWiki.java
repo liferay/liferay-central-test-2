@@ -54,7 +54,6 @@ public class UpgradeWiki extends UpgradeProcess {
 			upgradePKColumn, upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(WikiNodeTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(WikiNodeTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
@@ -84,7 +83,6 @@ public class UpgradeWiki extends UpgradeProcess {
 			upgradePageResourcePrimKeyColumn, upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(WikiPageTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(WikiPageTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

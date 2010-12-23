@@ -47,7 +47,6 @@ public class UpgradeContact extends UpgradeProcess {
 			upgradePKColumn);
 
 		upgradeTable.setCreateSQL(ContactTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(ContactTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
@@ -70,7 +69,6 @@ public class UpgradeContact extends UpgradeProcess {
 			upgradeScreenNameColumn, upgradeContactIdColumn);
 
 		upgradeTable.setCreateSQL(UserTable.TABLE_SQL_CREATE);
-
 		upgradeTable.setIndexesSQL(UserTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

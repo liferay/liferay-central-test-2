@@ -36,11 +36,9 @@ public class UpgradeUser extends UpgradeProcess {
 			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
 				UserTable.TABLE_NAME, UserTable.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(UserTable.TABLE_SQL_CREATE);
-
-			upgradeTable.setIndexesSQL(UserTable.TABLE_SQL_ADD_INDEXES);
-
 			upgradeTable.setAllowUniqueIndexes(false);
+			upgradeTable.setCreateSQL(UserTable.TABLE_SQL_CREATE);
+			upgradeTable.setIndexesSQL(UserTable.TABLE_SQL_ADD_INDEXES);
 
 			upgradeTable.updateTable();
 		}
