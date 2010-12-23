@@ -56,7 +56,7 @@ public class ViewAction extends PortletAction {
 				(ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 			long nodeId = GetterUtil.getLong(
-				preferences.getValue("node-id", StringPool.BLANK));
+				preferences.getValue("nodeId", StringPool.BLANK));
 			String title = ParamUtil.getString(
 				renderRequest, "title",
 				preferences.getValue("title", WikiPageConstants.FRONT_PAGE));

@@ -37,7 +37,7 @@ boolean nodeInGroup = false;
 	<aui:fieldset>
 		<c:choose>
 			<c:when test="<%= !nodes.isEmpty() %>">
-				<aui:select label="node" name="nodeId">
+				<aui:select label="node" name="preferences--nodeId--">
 					<aui:option value="" />
 
 					<%
@@ -66,7 +66,7 @@ boolean nodeInGroup = false;
 
 		<c:choose>
 			<c:when test="<%= nodeInGroup %>">
-				<aui:select label="page" name="title">
+				<aui:select label="page" name="preferences--title--">
 
 					<%
 					int total = WikiPageLocalServiceUtil.getPagesCount(nodeId, true);
@@ -86,7 +86,7 @@ boolean nodeInGroup = false;
 				</aui:select>
 			</c:when>
 			<c:otherwise>
-				<aui:input name="title" type="hidden" value="<%= WikiPageConstants.FRONT_PAGE %>" />
+				<aui:input name="preferences--title--" type="hidden" value="<%= WikiPageConstants.FRONT_PAGE %>" />
 			</c:otherwise>
 		</c:choose>
 	</aui:fieldset>

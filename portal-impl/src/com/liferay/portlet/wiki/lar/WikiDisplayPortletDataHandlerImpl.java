@@ -78,7 +78,7 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws Exception {
 
 		portletPreferences.setValue("title", StringPool.BLANK);
-		portletPreferences.setValue("node-id", StringPool.BLANK);
+		portletPreferences.setValue("nodeId", StringPool.BLANK);
 
 		return portletPreferences;
 	}
@@ -89,7 +89,7 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws Exception {
 
 		long nodeId = GetterUtil.getLong(
-			portletPreferences.getValue("node-id", StringPool.BLANK));
+			portletPreferences.getValue("nodeId", StringPool.BLANK));
 
 		if (nodeId <= 0) {
 			if (_log.isWarnEnabled()) {
@@ -200,12 +200,12 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		long nodeId = GetterUtil.getLong(
-			portletPreferences.getValue("node-id", StringPool.BLANK));
+			portletPreferences.getValue("nodeId", StringPool.BLANK));
 
 		if (nodeId > 0) {
 			nodeId = MapUtil.getLong(nodePKs, nodeId, nodeId);
 
-			portletPreferences.setValue("node-id", String.valueOf(nodeId));
+			portletPreferences.setValue("nodeId", String.valueOf(nodeId));
 		}
 
 		return portletPreferences;

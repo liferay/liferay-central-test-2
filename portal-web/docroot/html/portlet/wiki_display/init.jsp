@@ -35,6 +35,6 @@ if (Validator.isNotNull(portletResource)) {
 	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-long nodeId = GetterUtil.getLong(preferences.getValue("node-id", StringPool.BLANK));
+long nodeId = GetterUtil.getLong(preferences.getValue("nodeId", StringPool.BLANK));
 String title = GetterUtil.getString(preferences.getValue("title", WikiPageConstants.FRONT_PAGE));
 %>
