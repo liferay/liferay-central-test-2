@@ -35,7 +35,7 @@ public class InvitationUtil {
 
 	public static String getEmailMessageBody(PortletPreferences preferences) {
 		String emailMessageBody = preferences.getValue(
-			"email-message-body", StringPool.BLANK);
+			"emailMessageBody", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageBody)) {
 			return emailMessageBody;
@@ -50,7 +50,7 @@ public class InvitationUtil {
 		PortletPreferences preferences) {
 
 		String emailMessageSubject = preferences.getValue(
-			"email-message-subject", StringPool.BLANK);
+			"emailMessageSubject", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageSubject)) {
 			return emailMessageSubject;

@@ -16,16 +16,11 @@ package com.liferay.portlet.invitation.action;
 
 import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.servlet.SessionMessages;
-import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -39,39 +34,9 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+		validateEmailMessage(actionRequest);
 
-		if (!cmd.equals(Constants.UPDATE)) {
-			return;
-		}
-
-		String emailMessageSubject = ParamUtil.getString(
-			actionRequest, "emailMessageSubject");
-		String emailMessageBody = ParamUtil.getString(
-			actionRequest, "emailMessageBody");
-
-		if (Validator.isNull(emailMessageSubject)) {
-			SessionErrors.add(actionRequest, "emailMessageSubject");
-		}
-		else if (Validator.isNull(emailMessageBody)) {
-			SessionErrors.add(actionRequest, "emailMessageBody");
-		}
-		else {
-			String portletResource = ParamUtil.getString(
-				actionRequest, "portletResource");
-
-			PortletPreferences preferences =
-				PortletPreferencesFactoryUtil.getPortletSetup(
-					actionRequest, portletResource);
-
-			preferences.setValue("email-message-subject", emailMessageSubject);
-			preferences.setValue("email-message-body", emailMessageBody);
-
-			preferences.store();
-
-			SessionMessages.add(
-				actionRequest, portletConfig.getPortletName() + ".doConfigure");
-		}
+		super.processAction(portletConfig, actionRequest, actionResponse);
 	}
 
 	public String render(
@@ -80,6 +45,20 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		throws Exception {
 
 		return "/html/portlet/invitation/configuration.jsp";
+	}
+
+	protected void validateEmailMessage(ActionRequest actionRequest) {
+		String emailMessageSubject = getParameter(
+			actionRequest, "emailMessageSubject");
+		String emailMessageBody = getParameter(
+			actionRequest, "emailMessageBody");
+
+		if (Validator.isNull(emailMessageSubject)) {
+			SessionErrors.add(actionRequest, "emailMessageSubject");
+		}
+		else if (Validator.isNull(emailMessageBody)) {
+			SessionErrors.add(actionRequest, "emailMessageBody");
+		}
 	}
 
 }

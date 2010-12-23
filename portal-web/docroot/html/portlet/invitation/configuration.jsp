@@ -38,12 +38,12 @@ String editorContent = emailMessageBody;
 	<liferay-ui:error key="emailMessageSubject" message="please-enter-a-valid-subject" />
 
 	<aui:fieldset>
-		<aui:input cssClass="lfr-input-text-container" label="subject" name="emailMessageSubject" type="text" value="<%= emailMessageSubject %>" />
+		<aui:input cssClass="lfr-input-text-container" label="subject" name="preferences--emailMessageSubject--" type="text" value="<%= emailMessageSubject %>" />
 
 		<aui:field-wrapper label="body">
 			<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-			<aui:input name="<%= editorParam %>" type="hidden" />
+			<aui:input name='<%= "preferences--" + editorParam + "--" %>' type="hidden" />
 		</aui:field-wrapper>
 	</aui:fieldset>
 
