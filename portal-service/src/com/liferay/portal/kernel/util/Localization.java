@@ -146,8 +146,8 @@ public interface Localization {
 		PortletRequest portletRequest, String parameter);
 
 	/**
-	 * Gets the localized name of the key. Uses the default
-	 * language if no localization exists for the requested language.
+	 * Gets the localized name of the key. Uses the default language if no
+	 * localization exists for the requested language.
 	 *
 	 * @param  key the preferences key to get the localized name for
 	 * @param  languageId the ID of the language to get the localization for

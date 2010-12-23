@@ -37,14 +37,14 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		throws Exception {
 
 		String[] isbns = StringUtil.split(
-			getParameter(
-				actionRequest, "isbns").toUpperCase(),StringPool.SPACE);
+			getParameter(actionRequest, "isbns").toUpperCase(),
+			StringPool.SPACE);
 
 		Arrays.sort(isbns);
 
 		setPreference(actionRequest, "isbns", isbns);
 
-		super.processAction(portletConfig,actionRequest, actionResponse);
+		super.processAction(portletConfig, actionRequest, actionResponse);
 	}
 
 	public String render(

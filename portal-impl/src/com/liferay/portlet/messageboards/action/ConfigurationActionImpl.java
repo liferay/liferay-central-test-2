@@ -158,8 +158,8 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 				"priorities", languageId);
 
 			setPreference(
-				actionRequest, preferenceName, priorities.toArray(
-					new String[priorities.size()]));
+				actionRequest, preferenceName,
+				priorities.toArray(new String[priorities.size()]));
 		}
 	}
 

@@ -53,33 +53,10 @@ public class BaseConfigurationAction
 
 	public final static String PREFERENCES_PREFIX = "preferences--";
 
-	public String getParameter(PortletRequest portletRequest, String param) {
-		param = PREFERENCES_PREFIX.concat(param).concat(StringPool.DOUBLE_DASH);
+	public String getParameter(PortletRequest portletRequest, String name) {
+		name = PREFERENCES_PREFIX.concat(name).concat(StringPool.DOUBLE_DASH);
 
-		return ParamUtil.getString(portletRequest, param);
-	}
-
-	public void setPreference(
-		PortletRequest portletRequest, String name, String[] values) {
-
-		Map<String, String[]> processedPreferences =
-			(Map<String, String[]>)portletRequest.getAttribute(
-				WebKeys.PROCESSED_PREFERENCES);
-
-		if (processedPreferences == null) {
-			processedPreferences = new HashMap<String, String[]>();
-
-			portletRequest.setAttribute(
-				WebKeys.PROCESSED_PREFERENCES, processedPreferences);
-		}
-
-		processedPreferences.put(name, values);
-	}
-
-	public void setPreference(
-		PortletRequest portletRequest, String name, String value) {
-
-		setPreference(portletRequest, name, new String[] {value});
+		return ParamUtil.getString(portletRequest, name);
 	}
 
 	public void processAction(
@@ -99,34 +76,34 @@ public class BaseConfigurationAction
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
-		PortletPreferences preferences =
+		PortletPreferences portletPreferences =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				actionRequest, portletResource);
 
 		for (Map.Entry<String, String> entry : properties.entrySet()) {
-			String key = entry.getKey();
+			String name = entry.getKey();
 			String value = entry.getValue();
 
-			preferences.setValue(key, value);
+			portletPreferences.setValue(name, value);
 		}
 
-		Map<String, String[]> processedPreferences =
+		Map<String, String[]> portletPreferencesMap =
 			(Map<String, String[]>)actionRequest.getAttribute(
-				WebKeys.PROCESSED_PREFERENCES);
+				WebKeys.PORTLET_PREFERENCES_MAP);
 
-		if (processedPreferences != null) {
+		if (portletPreferencesMap != null) {
 			for (Map.Entry<String, String[]> entry :
-					processedPreferences.entrySet()) {
+					portletPreferencesMap.entrySet()) {
 
-				String key = entry.getKey();
+				String name = entry.getKey();
 				String[] values = entry.getValue();
 
-				preferences.setValues(key, values);
+				portletPreferences.setValues(name, values);
 			}
 		}
 
 		if (SessionErrors.isEmpty(actionRequest)) {
-			preferences.store();
+			portletPreferences.store();
 
 			SessionMessages.add(
 				actionRequest, portletConfig.getPortletName() + ".doConfigure");
@@ -145,6 +122,29 @@ public class BaseConfigurationAction
 			PortletConfig portletConfig, ResourceRequest resourceRequest,
 			ResourceResponse resourceResponse)
 		throws Exception {
+	}
+
+	public void setPreference(
+		PortletRequest portletRequest, String name, String value) {
+
+		setPreference(portletRequest, name, new String[] {value});
+	}
+
+	public void setPreference(
+		PortletRequest portletRequest, String name, String[] values) {
+
+		Map<String, String[]> portletPreferencesMap =
+			(Map<String, String[]>)portletRequest.getAttribute(
+				WebKeys.PORTLET_PREFERENCES_MAP);
+
+		if (portletPreferencesMap == null) {
+			portletPreferencesMap = new HashMap<String, String[]>();
+
+			portletRequest.setAttribute(
+				WebKeys.PORTLET_PREFERENCES_MAP, portletPreferencesMap);
+		}
+
+		portletPreferencesMap.put(name, values);
 	}
 
 	protected PortletConfig getSelPortletConfig(PortletRequest portletRequest)

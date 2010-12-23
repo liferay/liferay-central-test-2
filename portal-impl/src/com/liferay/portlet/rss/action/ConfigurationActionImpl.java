@@ -84,10 +84,9 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 				}
 
 				SessionMessages.add(
-					actionRequest, portletConfig.getPortletName() +
-						".doConfigure");
+					actionRequest,
+					portletConfig.getPortletName() + ".doConfigure");
 			}
-
 		}
 	}
 

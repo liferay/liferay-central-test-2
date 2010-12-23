@@ -34,7 +34,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
-		validateURLS(actionRequest);
+		validateUrls(actionRequest);
 
 		super.processAction(portletConfig, actionRequest, actionResponse);
 	}
@@ -47,14 +47,14 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		return "/html/portlet/xsl_content/configuration.jsp";
 	}
 
-	protected void validateURLS(ActionRequest actionRequest) {
-		String xmlURL = getParameter(actionRequest, "xmlUrl");
-		String xslURL = getParameter(actionRequest, "xslUrl");
+	protected void validateUrls(ActionRequest actionRequest) {
+		String xmlUrl = getParameter(actionRequest, "xmlUrl");
+		String xslUrl = getParameter(actionRequest, "xslUrl");
 
-		if (xmlURL.startsWith("file:/")) {
+		if (xmlUrl.startsWith("file:/")) {
 			SessionErrors.add(actionRequest, "xmlUrl");
 		}
-		else if (xslURL.startsWith("file:/")) {
+		else if (xslUrl.startsWith("file:/")) {
 			SessionErrors.add(actionRequest, "xslUrl");
 		}
 	}

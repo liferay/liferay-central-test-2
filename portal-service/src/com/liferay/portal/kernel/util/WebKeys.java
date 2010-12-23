@@ -69,7 +69,7 @@ public interface WebKeys {
 
 	public static final String PORTLET_ID = "PORTLET_ID";
 
-	public static final String PROCESSED_PREFERENCES = "PROCESSED_PREFERENCES";
+	public static final String PORTLET_PREFERENCES_MAP = "PORTLET_PREFERENCES_MAP";
 
 	public static final String REDIRECT = "REDIRECT";
 
@@ -107,11 +107,11 @@ public interface WebKeys {
 
 	public static final String VELOCITY_TAGLIB = "VELOCITY_TAGLIB";
 
-	public static final String VM_VARIABLES = "VM_VARIABLES";
-
 	public static final String VISITED_GROUP_ID_PREVIOUS = "LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS";
 
 	public static final String VISITED_GROUP_ID_RECENT = "LIFERAY_SHARED_VISITED_GROUP_ID_RECENT";
+
+	public static final String VM_VARIABLES = "VM_VARIABLES";
 
 	public static final String WINDOW_STATE = "WINDOW_STATE";
 
