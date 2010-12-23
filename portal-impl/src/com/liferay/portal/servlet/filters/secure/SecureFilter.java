@@ -14,6 +14,15 @@
 
 package com.liferay.portal.servlet.filters.secure;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
@@ -25,21 +34,19 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import com.liferay.portal.util.WebKeys;
 
 /**
  * @author Brian Wing Shun Chan
@@ -179,14 +186,14 @@ public class SecureFilter extends BasePortalFilter {
 			}
 
 			if (request != null) {
-				processFilter(
-					SecureFilter.class, request, response, filterChain);
+				processFilter(getClass(), request, response, filterChain);
 			}
 		}
 	}
 
 	protected HttpServletRequest basicAuth(
-		HttpServletRequest request, HttpServletResponse response) {
+			HttpServletRequest request, HttpServletResponse response)
+		throws Exception {
 
 		HttpSession session = request.getSession();
 
@@ -206,11 +213,7 @@ public class SecureFilter extends BasePortalFilter {
 			}
 
 			if (userId > 0) {
-				String userIdString = String.valueOf(userId);
-
-				request = new ProtectedServletRequest(request, userIdString);
-
-				session.setAttribute(_AUTHENTICATED_USER, userIdString);
+				request = setCredentials(request, session, userId);
 			}
 			else {
 				response.setHeader(HttpHeaders.WWW_AUTHENTICATE, _BASIC_REALM);
@@ -224,7 +227,8 @@ public class SecureFilter extends BasePortalFilter {
 	}
 
 	protected HttpServletRequest digestAuth(
-		HttpServletRequest request, HttpServletResponse response) {
+			HttpServletRequest request, HttpServletResponse response)
+		throws Exception {
 
 		HttpSession session = request.getSession();
 
@@ -244,12 +248,7 @@ public class SecureFilter extends BasePortalFilter {
 			}
 
 			if (userId > 0) {
-				String userIdString = String.valueOf(userId);
-
-				request = new ProtectedServletRequest(
-					request, userIdString);
-
-				session.setAttribute(_AUTHENTICATED_USER, userIdString);
+				request = setCredentials(request, session, userId);
 			}
 			else {
 
@@ -279,6 +278,35 @@ public class SecureFilter extends BasePortalFilter {
 		return request;
 	}
 
+	protected HttpServletRequest setCredentials(
+			HttpServletRequest request, HttpSession session, long userId)
+		throws Exception {
+
+		User user = UserLocalServiceUtil.getUser(userId);
+		String userIdString = String.valueOf(userId);
+
+		request = new ProtectedServletRequest(
+			request, userIdString);
+
+		session.setAttribute(WebKeys.USER, user);
+		session.setAttribute(_AUTHENTICATED_USER, userIdString);
+
+		if (_requirePermissionChecker) {
+			PrincipalThreadLocal.setName(userId);
+
+			PermissionChecker permissionChecker =
+				PermissionCheckerFactoryUtil.create(user, false);
+
+			PermissionThreadLocal.setPermissionChecker(permissionChecker);
+		}
+
+		return request;
+	}
+
+	protected void requirePermissionChecker(boolean require) {
+		_requirePermissionChecker = require;
+	}
+
 	public static final String _AUTHENTICATED_USER =
 		SecureFilter.class + "_AUTHENTICATED_USER";
 
@@ -296,5 +324,6 @@ public class SecureFilter extends BasePortalFilter {
 	private boolean _digestAuthEnabled;
 	private Set<String> _hostsAllowed = new HashSet<String>();
 	private boolean _httpsRequired;
+	private boolean _requirePermissionChecker;
 
 }

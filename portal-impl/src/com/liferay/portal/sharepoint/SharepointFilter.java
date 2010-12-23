@@ -14,41 +14,27 @@
 
 package com.liferay.portal.sharepoint;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.HttpMethods;
-import com.liferay.portal.kernel.util.Base64;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.MapUtil;
-import com.liferay.portal.model.Company;
-import com.liferay.portal.model.CompanyConstants;
-import com.liferay.portal.model.User;
-import com.liferay.portal.security.auth.Authenticator;
-import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.auth.PrincipalThreadLocal;
-import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
-import com.liferay.portal.security.permission.PermissionThreadLocal;
-import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.servlet.filters.BasePortalFilter;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
+import com.liferay.portal.servlet.filters.secure.SecureFilter;
 
 import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * @author Bruno Farache
+ * @author Alexander Chow
  */
-public class SharepointFilter extends BasePortalFilter {
+public class SharepointFilter extends SecureFilter {
+
+	public void init(FilterConfig filterConfig) {
+		super.init(filterConfig);
+
+		requirePermissionChecker(true);
+	}
 
 	protected boolean isSharepointRequest(String uri) {
 		if (uri == null) {
@@ -66,95 +52,6 @@ public class SharepointFilter extends BasePortalFilter {
 		}
 
 		return false;
-	}
-
-	protected User login(
-			HttpServletRequest request, HttpServletResponse response)
-		throws Exception {
-
-		User user = null;
-
-		// Get the Authorization header, if one was supplied
-
-		String authorization = request.getHeader("Authorization");
-
-		if (authorization == null) {
-			return user;
-		}
-
-		StringTokenizer st = new StringTokenizer(authorization);
-
-		if (!st.hasMoreTokens()) {
-			return user;
-		}
-
-		String basic = st.nextToken();
-
-		// We only handle HTTP Basic authentication
-
-		if (!basic.equalsIgnoreCase(HttpServletRequest.BASIC_AUTH)) {
-			return user;
-		}
-
-		String encodedCredentials = st.nextToken();
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Encoded credentials are " + encodedCredentials);
-		}
-
-		String decodedCredentials = new String(
-			Base64.decode(encodedCredentials));
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Decoded credentials are " + decodedCredentials);
-		}
-
-		int pos = decodedCredentials.indexOf(CharPool.COLON);
-
-		if (pos == -1) {
-			return user;
-		}
-
-		Company company = PortalUtil.getCompany(request);
-
-		String login = GetterUtil.getString(
-			decodedCredentials.substring(0, pos));
-		long userId = GetterUtil.getLong(login);
-		String password = decodedCredentials.substring(pos + 1);
-
-		Map<String, String[]> headerMap = new HashMap<String, String[]>();
-		Map<String, String[]> parameterMap = new HashMap<String, String[]>();
-		Map<String, Object> resultsMap = new HashMap<String, Object>();
-
-		int authResult = Authenticator.FAILURE;
-
-		String authType = company.getAuthType();
-
-		if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
-			authResult = UserLocalServiceUtil.authenticateByEmailAddress(
-				company.getCompanyId(), login, password, headerMap,
-				parameterMap, resultsMap);
-
-			userId = MapUtil.getLong(resultsMap, "userId", userId);
-		}
-		else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
-			authResult = UserLocalServiceUtil.authenticateByScreenName(
-				company.getCompanyId(), login, password, headerMap,
-				parameterMap, resultsMap);
-
-			userId = MapUtil.getLong(resultsMap, "userId", userId);
-		}
-		else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
-			authResult = UserLocalServiceUtil.authenticateByUserId(
-				company.getCompanyId(), userId, password, headerMap,
-				parameterMap, resultsMap);
-		}
-
-		if (authResult == Authenticator.SUCCESS) {
-			user = UserLocalServiceUtil.getUser(userId);
-		}
-
-		return user;
 	}
 
 	protected void processFilter(
@@ -191,40 +88,7 @@ public class SharepointFilter extends BasePortalFilter {
 			setPostHeaders(response);
 		}
 
-		HttpSession session = request.getSession();
-
-		User user = (User)session.getAttribute(WebKeys.USER);
-
-		try {
-			if (user == null) {
-				user = login(request, response);
-
-				if (user == null) {
-					throw new PrincipalException("User is null");
-				}
-
-				session.setAttribute(WebKeys.USER, user);
-			}
-
-			PrincipalThreadLocal.setName(user.getUserId());
-
-			PermissionChecker permissionChecker =
-				PermissionCheckerFactoryUtil.create(user, false);
-
-			PermissionThreadLocal.setPermissionChecker(permissionChecker);
-
-			processFilter(
-				SharepointFilter.class, request, response, filterChain);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			response.setHeader("WWW-Authenticate", "BASIC realm=\"Liferay\"");
-
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-
-			response.flushBuffer();
-		}
+		super.processFilter(request, response, filterChain);
 	}
 
 	protected void setGetHeaders(HttpServletResponse response) {
@@ -264,7 +128,5 @@ public class SharepointFilter extends BasePortalFilter {
 		new String[] {
 			"/_vti_inf.html", "/_vti_bin", "/sharepoint", "/history",
 			"/resources"};
-
-	private static Log _log = LogFactoryUtil.getLog(SharepointFilter.class);
 
 }
