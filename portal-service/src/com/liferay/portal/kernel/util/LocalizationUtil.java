@@ -103,6 +103,10 @@ public class LocalizationUtil {
 			portletRequest, parameter);
 	}
 
+	public static String getPreferencesKey(String key, String languageId) {
+		return getLocalization().getPreferencesKey(key, languageId);
+	}
+
 	public static String getPreferencesValue(
 		PortletPreferences preferences, String key, String languageId) {
 

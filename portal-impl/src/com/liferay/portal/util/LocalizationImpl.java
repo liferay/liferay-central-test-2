@@ -334,6 +334,17 @@ public class LocalizationImpl implements Localization {
 		return getLocalizationMap(portletRequest, parameter);
 	}
 
+	public String getPreferencesKey(String key, String languageId) {
+		String defaultLanguageId = LocaleUtil.toLanguageId(
+			LocaleUtil.getDefault());
+
+		if (!languageId.equals(defaultLanguageId)) {
+			key += StringPool.UNDERLINE + languageId;
+		}
+
+		return key;
+	}
+
 	public String getPreferencesValue(
 		PortletPreferences preferences, String key, String languageId) {
 
@@ -344,7 +355,7 @@ public class LocalizationImpl implements Localization {
 		PortletPreferences preferences, String key, String languageId,
 		boolean useDefault) {
 
-		String localizedKey = _getPreferencesKey(key, languageId);
+		String localizedKey = getPreferencesKey(key, languageId);
 
 		String value = preferences.getValue(localizedKey, StringPool.BLANK);
 
@@ -365,7 +376,7 @@ public class LocalizationImpl implements Localization {
 		PortletPreferences preferences, String key, String languageId,
 		boolean useDefault) {
 
-		String localizedKey = _getPreferencesKey(key, languageId);
+		String localizedKey = getPreferencesKey(key, languageId);
 
 		String[] values = preferences.getValues(localizedKey, new String[0]);
 
@@ -517,7 +528,7 @@ public class LocalizationImpl implements Localization {
 			String value)
 		throws Exception {
 
-		preferences.setValue(_getPreferencesKey(key, languageId), value);
+		preferences.setValue(getPreferencesKey(key, languageId), value);
 	}
 
 	public void setPreferencesValues(
@@ -525,7 +536,7 @@ public class LocalizationImpl implements Localization {
 			String[] values)
 		throws Exception {
 
-		preferences.setValues(_getPreferencesKey(key, languageId), values);
+		preferences.setValues(getPreferencesKey(key, languageId), values);
 	}
 
 	public String updateLocalization(String xml, String key, String value) {
@@ -737,17 +748,6 @@ public class LocalizationImpl implements Localization {
 		}
 
 		return value;
-	}
-
-	private String _getPreferencesKey(String key, String languageId) {
-		String defaultLanguageId = LocaleUtil.toLanguageId(
-			LocaleUtil.getDefault());
-
-		if (!languageId.equals(defaultLanguageId)) {
-			key += StringPool.UNDERLINE + languageId;
-		}
-
-		return key;
 	}
 
 	private String _getRootAttribute(
