@@ -252,9 +252,12 @@ public class LayoutExporter {
 		headerElement.addAttribute("group-id", String.valueOf(groupId));
 		headerElement.addAttribute(
 			"private-layout", String.valueOf(privateLayout));
-		headerElement.addAttribute("theme-id", layoutSet.getThemeId());
-		headerElement.addAttribute(
-			"color-scheme-id", layoutSet.getColorSchemeId());
+
+		if (exportTheme) {
+			headerElement.addAttribute("theme-id", layoutSet.getThemeId());
+			headerElement.addAttribute(
+				"color-scheme-id", layoutSet.getColorSchemeId());
+		}
 
 		Element cssElement = headerElement.addElement("css");
 
