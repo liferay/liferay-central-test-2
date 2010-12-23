@@ -46,6 +46,8 @@ public class UpgradeOrganization extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(OrganizationTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(OrganizationTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		ValueMapper organizationIdMapper = new DefaultPKMapper(
@@ -74,6 +76,8 @@ public class UpgradeOrganization extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(OrgGroupPermissionTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(OrgGroupPermissionTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		// OrgLabor
@@ -85,6 +89,8 @@ public class UpgradeOrganization extends UpgradeProcess {
 			upgradePKColumn, upgradeOrganizationIdColumn);
 
 		upgradeTable.setCreateSQL(OrgLaborTable.TABLE_SQL_CREATE);
+
+		upgradeTable.setIndexesSQL(OrgLaborTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 

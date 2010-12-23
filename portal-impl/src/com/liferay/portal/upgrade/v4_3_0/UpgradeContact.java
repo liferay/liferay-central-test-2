@@ -48,6 +48,8 @@ public class UpgradeContact extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(ContactTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(ContactTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		ValueMapper contactIdMapper = new DefaultPKMapper(
@@ -68,6 +70,8 @@ public class UpgradeContact extends UpgradeProcess {
 			upgradeScreenNameColumn, upgradeContactIdColumn);
 
 		upgradeTable.setCreateSQL(UserTable.TABLE_SQL_CREATE);
+
+		upgradeTable.setIndexesSQL(UserTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 	}

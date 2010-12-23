@@ -35,6 +35,8 @@ public class UpgradePortlet extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(PortletTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(PortletTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 	}
 

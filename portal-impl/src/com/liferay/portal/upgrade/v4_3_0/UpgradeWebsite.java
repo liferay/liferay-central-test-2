@@ -78,6 +78,8 @@ public class UpgradeWebsite extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(WebsiteTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(WebsiteTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		ValueMapperUtil.persist(upgradePKColumn.getValueMapper(), "website-id");

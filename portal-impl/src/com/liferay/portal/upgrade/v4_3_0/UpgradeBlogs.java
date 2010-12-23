@@ -52,6 +52,8 @@ public class UpgradeBlogs extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(BlogsEntryTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(BlogsEntryTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		ValueMapper entryIdMapper = upgradePKColumn.getValueMapper();

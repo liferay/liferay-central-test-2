@@ -68,6 +68,8 @@ public class UpgradeSubscription extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(SubscriptionTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(SubscriptionTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 	}
 

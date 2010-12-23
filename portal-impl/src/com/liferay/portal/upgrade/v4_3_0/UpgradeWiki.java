@@ -55,6 +55,8 @@ public class UpgradeWiki extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(WikiNodeTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(WikiNodeTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		ValueMapper nodeIdMapper = upgradePKColumn.getValueMapper();
@@ -82,6 +84,8 @@ public class UpgradeWiki extends UpgradeProcess {
 			upgradePageResourcePrimKeyColumn, upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(WikiPageTable.TABLE_SQL_CREATE);
+
+		upgradeTable.setIndexesSQL(WikiPageTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 

@@ -38,6 +38,10 @@ public class UpgradeUser extends UpgradeProcess {
 
 			upgradeTable.setCreateSQL(UserTable.TABLE_SQL_CREATE);
 
+			upgradeTable.setIndexesSQL(UserTable.TABLE_SQL_ADD_INDEXES);
+
+			upgradeTable.setAllowUniqueIndexes(false);
+
 			upgradeTable.updateTable();
 		}
 

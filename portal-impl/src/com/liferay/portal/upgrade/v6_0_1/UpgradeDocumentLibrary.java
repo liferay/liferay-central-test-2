@@ -38,6 +38,10 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 			upgradeTable.setCreateSQL(DLFileEntryTable.TABLE_SQL_CREATE);
 
+			upgradeTable.setIndexesSQL(DLFileEntryTable.TABLE_SQL_ADD_INDEXES);
+
+			upgradeTable.setAllowUniqueIndexes(false);
+
 			upgradeTable.updateTable();
 		}
 
@@ -53,6 +57,11 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				DLFileVersionTable.TABLE_COLUMNS);
 
 			upgradeTable.setCreateSQL(DLFileVersionTable.TABLE_SQL_CREATE);
+
+			upgradeTable.setIndexesSQL(
+				DLFileVersionTable.TABLE_SQL_ADD_INDEXES);
+
+			upgradeTable.setAllowUniqueIndexes(false);
 
 			upgradeTable.updateTable();
 		}

@@ -72,6 +72,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(MBCategoryTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(MBCategoryTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		ValueMapper categoryIdMapper = new DefaultPKMapper(
@@ -111,6 +113,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(MBMessageTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(MBMessageTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		ValueMapper messageIdMapper = new DefaultPKMapper(
@@ -147,6 +151,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(MBMessageFlagTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(MBMessageFlagTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		// MBStatsUser
@@ -157,6 +163,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			upgradeGroupIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(MBStatsUserTable.TABLE_SQL_CREATE);
+
+		upgradeTable.setIndexesSQL(MBStatsUserTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 
@@ -175,6 +183,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			upgradeRootMessageIdColumn, upgradeLastPostByUserIdColumn);
 
 		upgradeTable.setCreateSQL(MBThreadTable.TABLE_SQL_CREATE);
+
+		upgradeTable.setIndexesSQL(MBThreadTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 
@@ -200,6 +210,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			classNameIdColumn, upgradeClassPKColumn, upgradeThreadIdColumn);
 
 		upgradeTable.setCreateSQL(MBDiscussionTable.TABLE_SQL_CREATE);
+
+		upgradeTable.setIndexesSQL(MBDiscussionTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 	}

@@ -37,6 +37,10 @@ public class UpgradeLayout extends UpgradeProcess {
 
 			upgradeTable.setCreateSQL(LayoutTable.TABLE_SQL_CREATE);
 
+			upgradeTable.setIndexesSQL(LayoutTable.TABLE_SQL_ADD_INDEXES);
+
+			upgradeTable.setAllowUniqueIndexes(false);
+
 			upgradeTable.updateTable();
 		}
 	}

@@ -33,6 +33,8 @@ public class UpgradeRegion extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(RegionTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(RegionTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 	}
 

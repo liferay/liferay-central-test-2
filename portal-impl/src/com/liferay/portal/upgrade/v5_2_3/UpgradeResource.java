@@ -37,6 +37,10 @@ public class UpgradeResource extends UpgradeProcess {
 
 			upgradeTable.setCreateSQL(ResourceTable.TABLE_SQL_CREATE);
 
+			upgradeTable.setIndexesSQL(ResourceTable.TABLE_SQL_ADD_INDEXES);
+
+			upgradeTable.setAllowUniqueIndexes(false);
+
 			upgradeTable.updateTable();
 		}
 	}

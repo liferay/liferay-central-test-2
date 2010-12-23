@@ -78,6 +78,8 @@ public class UpgradeAddress extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(AddressTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(AddressTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		ValueMapperUtil.persist(upgradePKColumn.getValueMapper(), "address-id");

@@ -60,6 +60,8 @@ public class UpgradeImageGallery extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(IGFolderTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(IGFolderTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		ValueMapper folderIdMapper = new DefaultPKMapper(
@@ -101,6 +103,8 @@ public class UpgradeImageGallery extends UpgradeProcess {
 			upgradeLargeImageIdColumn);
 
 		upgradeTable.setCreateSQL(IGImageTable.TABLE_SQL_CREATE);
+
+		upgradeTable.setIndexesSQL(IGImageTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 

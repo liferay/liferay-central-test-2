@@ -40,6 +40,8 @@ public class UpgradeUserGroup extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(UserGroupTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(UserGroupTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		ValueMapper userGroupIdMapper = upgradePKColumn.getValueMapper();

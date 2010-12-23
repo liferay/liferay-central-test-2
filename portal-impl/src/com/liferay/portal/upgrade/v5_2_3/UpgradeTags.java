@@ -44,6 +44,10 @@ public class UpgradeTags extends UpgradeProcess {
 
 			upgradeTable.setCreateSQL(TagsAssetTable.TABLE_SQL_CREATE);
 
+			upgradeTable.setIndexesSQL(TagsAssetTable.TABLE_SQL_ADD_INDEXES);
+
+			upgradeTable.setAllowUniqueIndexes(false);
+
 			upgradeTable.updateTable();
 		}
 
@@ -56,6 +60,10 @@ public class UpgradeTags extends UpgradeProcess {
 			new TagsPropertyValueUpgradeColumnImpl("value"));
 
 		upgradeTable.setCreateSQL(TagsPropertyTable.TABLE_SQL_CREATE);
+
+		upgradeTable.setIndexesSQL(TagsPropertyTable.TABLE_SQL_ADD_INDEXES);
+
+		upgradeTable.setAllowUniqueIndexes(false);
 
 		upgradeTable.updateTable();
 	}

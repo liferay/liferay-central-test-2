@@ -57,6 +57,8 @@ public class UpgradeCompany extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(CompanyTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(CompanyTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		runSQL(

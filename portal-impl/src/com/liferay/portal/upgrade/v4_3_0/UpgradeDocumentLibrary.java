@@ -62,6 +62,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(DLFolderTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(DLFolderTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		ValueMapper folderIdMapper = new DefaultPKMapper(
@@ -104,6 +106,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(DLFileEntryTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(DLFileEntryTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		ValueMapper fileEntryIdMapper = fileEntryIdColumn.getValueMapper();
@@ -119,6 +123,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(DLFileRankTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(DLFileRankTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		// DLFileShortcut
@@ -131,6 +137,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			upgradeToFolderIdColumn);
 
 		upgradeTable.setCreateSQL(DLFileShortcutTable.TABLE_SQL_CREATE);
+
+		upgradeTable.setIndexesSQL(DLFileShortcutTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 
@@ -146,6 +154,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			upgradeUserIdColumn, upgradeFolderIdColumn);
 
 		upgradeTable.setCreateSQL(DLFileVersionTable.TABLE_SQL_CREATE);
+
+		upgradeTable.setIndexesSQL(DLFileVersionTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 	}

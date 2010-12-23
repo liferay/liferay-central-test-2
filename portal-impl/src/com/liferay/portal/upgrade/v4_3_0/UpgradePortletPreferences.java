@@ -109,6 +109,8 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(createSQL);
 
+		upgradeTable.setIndexesSQL(PortletPreferencesTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		// Schema

@@ -301,6 +301,8 @@ public class UpgradeResource extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(createSQL);
 
+		upgradeTable.setIndexesSQL(ResourceTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		// Schema

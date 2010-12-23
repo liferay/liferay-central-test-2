@@ -78,6 +78,8 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(EmailAddressTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(EmailAddressTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		ValueMapperUtil.persist(

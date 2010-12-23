@@ -38,6 +38,10 @@ public class UpgradeWiki extends UpgradeProcess {
 
 			upgradeTable.setCreateSQL(WikiPageTable.TABLE_SQL_CREATE);
 
+			upgradeTable.setIndexesSQL(WikiPageTable.TABLE_SQL_ADD_INDEXES);
+
+			upgradeTable.setAllowUniqueIndexes(false);
+
 			upgradeTable.updateTable();
 		}
 

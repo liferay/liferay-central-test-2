@@ -39,6 +39,8 @@ public class UpgradeRole extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(RoleTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(RoleTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		ValueMapper roleIdMapper = upgradePKColumn.getValueMapper();

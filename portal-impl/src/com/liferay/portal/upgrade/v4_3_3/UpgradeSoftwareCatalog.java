@@ -37,6 +37,8 @@ public class UpgradeSoftwareCatalog extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(SCFrameworkVersionTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(SCFrameworkVersionTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		// SCLicense
@@ -45,6 +47,8 @@ public class UpgradeSoftwareCatalog extends UpgradeProcess {
 			SCLicenseTable.TABLE_NAME, SCLicenseTable.TABLE_COLUMNS);
 
 		upgradeTable.setCreateSQL(SCLicenseTable.TABLE_SQL_CREATE);
+
+		upgradeTable.setIndexesSQL(SCLicenseTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 
@@ -55,6 +59,8 @@ public class UpgradeSoftwareCatalog extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(SCProductEntryTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(SCProductEntryTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		// SCProductVersion
@@ -64,6 +70,8 @@ public class UpgradeSoftwareCatalog extends UpgradeProcess {
 			SCProductVersionTable.TABLE_COLUMNS);
 
 		upgradeTable.setCreateSQL(SCProductVersionTable.TABLE_SQL_CREATE);
+
+		upgradeTable.setIndexesSQL(SCProductVersionTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 	}

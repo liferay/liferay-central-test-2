@@ -68,6 +68,8 @@ public class UpgradeRatings extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(RatingsEntryTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(RatingsEntryTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		// RatingsStats
@@ -78,6 +80,8 @@ public class UpgradeRatings extends UpgradeProcess {
 			upgradeClassPKColumn);
 
 		upgradeTable.setCreateSQL(RatingsStatsTable.TABLE_SQL_CREATE);
+
+		upgradeTable.setIndexesSQL(RatingsStatsTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 	}

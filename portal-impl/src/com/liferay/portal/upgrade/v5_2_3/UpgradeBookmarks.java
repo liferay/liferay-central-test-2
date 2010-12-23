@@ -39,6 +39,10 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 			upgradeTable.setCreateSQL(BookmarksEntryTable.TABLE_SQL_CREATE);
 
+			upgradeTable.setIndexesSQL(BookmarksEntryTable.TABLE_SQL_ADD_INDEXES);
+
+			upgradeTable.setAllowUniqueIndexes(false);
+
 			upgradeTable.updateTable();
 		}
 

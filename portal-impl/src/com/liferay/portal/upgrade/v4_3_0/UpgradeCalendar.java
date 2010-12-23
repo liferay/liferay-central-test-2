@@ -52,6 +52,8 @@ public class UpgradeCalendar extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(CalEventTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(CalEventTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		ValueMapper eventIdMapper = upgradePKColumn.getValueMapper();

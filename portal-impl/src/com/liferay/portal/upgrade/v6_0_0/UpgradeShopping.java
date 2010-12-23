@@ -45,6 +45,10 @@ public class UpgradeShopping extends UpgradeProcess {
 
 			upgradeTable.setCreateSQL(ShoppingItemTable.TABLE_SQL_CREATE);
 
+			upgradeTable.setIndexesSQL(ShoppingItemTable.TABLE_SQL_ADD_INDEXES);
+
+			upgradeTable.setAllowUniqueIndexes(false);
+
 			upgradeTable.updateTable();
 		}
 	}

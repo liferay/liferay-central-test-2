@@ -55,6 +55,8 @@ public class UpgradePolls extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(PollsQuestionTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(PollsQuestionTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		ValueMapper questionIdMapper = upgradePKColumn.getValueMapper();
@@ -75,6 +77,8 @@ public class UpgradePolls extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(PollsChoiceTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(PollsChoiceTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		ValueMapper choiceIdMapper = upgradeChoiceId.getValueMapper();
@@ -91,6 +95,8 @@ public class UpgradePolls extends UpgradeProcess {
 			upgradeQuestionIdColumn, upgradeVoteChoiceIdColumn);
 
 		upgradeTable.setCreateSQL(PollsVoteTable.TABLE_SQL_CREATE);
+
+		upgradeTable.setIndexesSQL(PollsVoteTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 	}

@@ -81,6 +81,8 @@ public class UpgradeUser extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(AccountTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(AccountTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		// Contact
@@ -129,6 +131,8 @@ public class UpgradeUser extends UpgradeProcess {
 			upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(PasswordTrackerTable.TABLE_SQL_CREATE);
+
+		upgradeTable.setIndexesSQL(PasswordTrackerTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 	}

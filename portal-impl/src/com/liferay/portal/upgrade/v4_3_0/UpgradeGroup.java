@@ -92,6 +92,8 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(GroupTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(GroupTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		ValueMapper groupIdMapper = new DefaultPKMapper(
@@ -143,6 +145,8 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(createSQL);
 
+		upgradeTable.setIndexesSQL(LayoutTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		ValueMapper layoutPlidMapper = upgradeLayoutPlidColumn.getValueMapper();
@@ -171,6 +175,8 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(createSQL);
 
+		upgradeTable.setIndexesSQL(LayoutSetTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		// OrgGroupPermission
@@ -181,6 +187,8 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(OrgGroupPermissionTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(OrgGroupPermissionTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		// OrgGroupRole
@@ -190,6 +198,8 @@ public class UpgradeGroup extends UpgradeProcess {
 			upgradeGroupIdColumn);
 
 		upgradeTable.setCreateSQL(OrgGroupRoleTable.TABLE_SQL_CREATE);
+
+		upgradeTable.setIndexesSQL(OrgGroupRoleTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 

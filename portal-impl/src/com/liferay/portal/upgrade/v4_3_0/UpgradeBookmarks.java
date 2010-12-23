@@ -54,6 +54,8 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 		upgradeTable.setCreateSQL(BookmarksFolderTable.TABLE_SQL_CREATE);
 
+		upgradeTable.setIndexesSQL(BookmarksFolderTable.TABLE_SQL_ADD_INDEXES);
+
 		upgradeTable.updateTable();
 
 		ValueMapper folderIdMapper = new DefaultPKMapper(
@@ -82,6 +84,8 @@ public class UpgradeBookmarks extends UpgradeProcess {
 			upgradePKColumn, upgradeFolderIdColumn, upgradeUserIdColumn);
 
 		upgradeTable.setCreateSQL(BookmarksEntryTable.TABLE_SQL_CREATE);
+
+		upgradeTable.setIndexesSQL(BookmarksEntryTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();
 
