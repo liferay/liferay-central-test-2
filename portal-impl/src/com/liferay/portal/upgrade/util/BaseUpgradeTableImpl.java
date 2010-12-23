@@ -16,6 +16,8 @@ package com.liferay.portal.upgrade.util;
 
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -96,7 +98,12 @@ public abstract class BaseUpgradeTableImpl extends Table {
 						indexSQL, "create unique index ", "create index ");
 				}
 
-				db.runSQL(indexSQL);
+				try {
+					db.runSQL(indexSQL);
+				}
+				catch (Exception e) {
+					_log.warn(e.getMessage().concat(": ").concat(indexSQL));
+				}
 			}
 		}
 		finally {
@@ -110,4 +117,5 @@ public abstract class BaseUpgradeTableImpl extends Table {
 	private boolean _calledUpdateTable;
 	private String[] _indexesSQL = new String[0];
 
+	private static Log _log = LogFactoryUtil.getLog(BaseUpgradeTableImpl.class);
 }
