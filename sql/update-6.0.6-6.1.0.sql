@@ -10,6 +10,7 @@ alter table BookmarksEntry add description VARCHAR(75) null;
 COMMIT_TRANSACTION;
 
 update BookmarksEntry set description = comments;
+alter table BookmarksEntry drop column comments;
 
 drop index IX_CE705D48 on DLFileRank;
 drop index IX_40B56512 on DLFileRank;
