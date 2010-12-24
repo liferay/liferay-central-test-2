@@ -57,6 +57,7 @@ public class MBMessageListener extends BaseMessageListener {
 		throws Exception {
 
 		long companyId = message.getLong("companyId");
+		long userId = message.getLong("userId");
 		long groupId = message.getLong("groupId");
 		String categoryIds = message.getString("categoryIds");
 		long threadId = message.getLong("threadId");
@@ -89,8 +90,8 @@ public class MBMessageListener extends BaseMessageListener {
 				companyId, MBThread.class.getName(), threadId);
 
 		sendEmail(
-			groupId, fromName, fromAddress, subject, body, subscriptions, sent,
-			replyToAddress, mailId, inReplyTo, htmlFormat);
+			userId, groupId, fromName, fromAddress, subject, body,
+			subscriptions, sent, replyToAddress, mailId, inReplyTo, htmlFormat);
 
 		// Categories
 
@@ -105,8 +106,9 @@ public class MBMessageListener extends BaseMessageListener {
 				companyId, MBCategory.class.getName(), categoryId);
 
 			sendEmail(
-				groupId, fromName, fromAddress, subject, body, subscriptions,
-				sent, replyToAddress, mailId, inReplyTo, htmlFormat);
+				userId, groupId, fromName, fromAddress, subject, body,
+				subscriptions, sent, replyToAddress, mailId, inReplyTo,
+				htmlFormat);
 		}
 
 		// Mailing list
@@ -176,10 +178,10 @@ public class MBMessageListener extends BaseMessageListener {
 	}
 
 	protected void sendEmail(
-			long groupId, String fromName, String fromAddress, String subject,
-			String body, List<Subscription> subscriptions, Set<Long> sent,
-			String replyToAddress, String mailId, String inReplyTo,
-			boolean htmlFormat)
+			long userId, long groupId, String fromName, String fromAddress,
+			String subject, String body, List<Subscription> subscriptions,
+			Set<Long> sent, String replyToAddress, String mailId,
+			String inReplyTo, boolean htmlFormat)
 		throws Exception {
 
 		List<InternetAddress> addresses = new ArrayList<InternetAddress>();

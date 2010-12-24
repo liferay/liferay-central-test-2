@@ -45,6 +45,7 @@ public class WikiMessageListener extends BaseMessageListener {
 
 	protected void doReceive(Message message) throws Exception {
 		long companyId = message.getLong("companyId");
+		long userId = message.getLong("userId");
 		long groupId = message.getLong("groupId");
 		long nodeId = message.getLong("nodeId");
 		long pageResourcePrimKey = message.getLong("pageResourcePrimKey");
@@ -72,8 +73,8 @@ public class WikiMessageListener extends BaseMessageListener {
 				companyId, WikiPage.class.getName(), pageResourcePrimKey);
 
 		sendEmail(
-			groupId, fromName, fromAddress, subject, body, subscriptions, sent,
-			replyToAddress, mailId, htmlFormat);
+			userId, groupId, fromName, fromAddress, subject, body,
+			subscriptions, sent, replyToAddress, mailId, htmlFormat);
 
 		// Nodes
 
@@ -81,8 +82,8 @@ public class WikiMessageListener extends BaseMessageListener {
 			companyId, WikiNode.class.getName(), nodeId);
 
 		sendEmail(
-			groupId, fromName, fromAddress, subject, body, subscriptions, sent,
-			replyToAddress, mailId, htmlFormat);
+			userId, groupId, fromName, fromAddress, subject, body,
+			subscriptions, sent, replyToAddress, mailId, htmlFormat);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Finished sending notifications");
@@ -90,9 +91,10 @@ public class WikiMessageListener extends BaseMessageListener {
 	}
 
 	protected void sendEmail(
-			long groupId, String fromName, String fromAddress, String subject,
-			String body, List<Subscription> subscriptions, Set<Long> sent,
-			String replyToAddress, String mailId, boolean htmlFormat)
+			long userId, long groupId, String fromName, String fromAddress,
+			String subject, String body, List<Subscription> subscriptions,
+			Set<Long> sent, String replyToAddress, String mailId,
+			boolean htmlFormat)
 		throws Exception {
 
 		for (Subscription subscription : subscriptions) {

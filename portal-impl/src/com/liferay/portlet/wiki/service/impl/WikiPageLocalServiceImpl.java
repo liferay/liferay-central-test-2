@@ -1710,6 +1710,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		Message message = new Message();
 
 		message.put("companyId", node.getCompanyId());
+		message.put("userId", node.getUserId());
 		message.put("groupId", node.getGroupId());
 		message.put("nodeId", node.getNodeId());
 		message.put("pageResourcePrimKey", page.getResourcePrimKey());

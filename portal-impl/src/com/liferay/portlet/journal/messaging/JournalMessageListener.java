@@ -44,6 +44,7 @@ public class JournalMessageListener extends BaseMessageListener {
 
 	protected void doReceive(Message message) throws Exception {
 		long companyId = message.getLong("companyId");
+		long userId = message.getLong("userId");
 		long groupId = message.getLong("groupId");
 		String articleId = message.getString("articleId");
 		String fromName = message.getString("fromName");
@@ -69,8 +70,8 @@ public class JournalMessageListener extends BaseMessageListener {
 				companyId, JournalArticle.class.getName(), groupId);
 
 		sendEmail(
-			groupId, fromName, fromAddress, subject, body, subscriptions, sent,
-			replyToAddress, mailId, htmlFormat);
+			userId, groupId, fromName, fromAddress, subject, body,
+			subscriptions, sent, replyToAddress, mailId, htmlFormat);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Finished sending notifications");
@@ -78,9 +79,10 @@ public class JournalMessageListener extends BaseMessageListener {
 	}
 
 	protected void sendEmail(
-			long groupId, String fromName, String fromAddress, String subject,
-			String body, List<Subscription> subscriptions, Set<Long> sent,
-			String replyToAddress, String mailId, boolean htmlFormat)
+			long userId, long groupId, String fromName, String fromAddress,
+			String subject, String body, List<Subscription> subscriptions,
+			Set<Long> sent, String replyToAddress, String mailId,
+			boolean htmlFormat)
 		throws Exception {
 
 		for (Subscription subscription : subscriptions) {

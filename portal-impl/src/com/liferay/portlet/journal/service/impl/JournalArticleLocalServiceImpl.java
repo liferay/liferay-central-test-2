@@ -2683,6 +2683,7 @@ public class JournalArticleLocalServiceImpl
 		Message message = new Message();
 
 		message.put("companyId", article.getCompanyId());
+		message.put("userId", article.getUserId());
 		message.put("groupId", article.getGroupId());
 		message.put("articleId", article.getArticleId());
 		message.put("fromName", fromName);
