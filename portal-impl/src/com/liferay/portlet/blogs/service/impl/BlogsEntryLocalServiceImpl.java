@@ -927,7 +927,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		Message message = new Message();
 
 		message.put("companyId", entry.getCompanyId());
-		message.put("userId", entry.getUserId());
 		message.put("groupId", entry.getGroupId());
 		message.put("entryId", entry.getEntryId());
 		message.put("fromName", fromName);

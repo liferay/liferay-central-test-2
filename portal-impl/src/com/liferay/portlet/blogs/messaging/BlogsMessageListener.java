@@ -22,6 +22,8 @@ import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -42,7 +44,6 @@ public class BlogsMessageListener extends BaseMessageListener {
 
 	protected void doReceive(Message message) throws Exception {
 		long companyId = message.getLong("companyId");
-		long userId = message.getLong("userId");
 		long groupId = message.getLong("groupId");
 		long entryId = message.getLong("entryId");
 		String fromName = message.getString("fromName");
@@ -68,8 +69,8 @@ public class BlogsMessageListener extends BaseMessageListener {
 				companyId, BlogsEntry.class.getName(), groupId);
 
 		sendEmail(
-			userId, groupId, fromName, fromAddress, subject, body,
-			subscriptions, sent, replyToAddress, mailId, htmlFormat);
+			groupId, fromName, fromAddress, subject, body, subscriptions, sent,
+			replyToAddress, mailId, htmlFormat);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Finished sending notifications");
@@ -77,10 +78,9 @@ public class BlogsMessageListener extends BaseMessageListener {
 	}
 
 	protected void sendEmail(
-			long userId, long groupId, String fromName, String fromAddress,
-			String subject, String body, List<Subscription> subscriptions,
-			Set<Long> sent, String replyToAddress, String mailId,
-			boolean htmlFormat)
+			long groupId, String fromName, String fromAddress, String subject,
+			String body, List<Subscription> subscriptions, Set<Long> sent,
+			String replyToAddress, String mailId, boolean htmlFormat)
 		throws Exception {
 
 		for (Subscription subscription : subscriptions) {
@@ -127,8 +127,13 @@ public class BlogsMessageListener extends BaseMessageListener {
 				continue;
 			}
 
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			int type = group.getType();
+
 			if (!GroupLocalServiceUtil.hasUserGroup(
-					subscribedUserId, groupId)) {
+					subscribedUserId, groupId) &&
+				(type != GroupConstants.TYPE_COMMUNITY_OPEN)) {
 
 				if (_log.isInfoEnabled()) {
 					_log.info(

@@ -1930,7 +1930,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			new com.liferay.portal.kernel.messaging.Message();
 
 		messagingObj.put("companyId", message.getCompanyId());
-		messagingObj.put("userId", message.getUserId());
 		messagingObj.put("groupId", message.getGroupId());
 		messagingObj.put("categoryIds", StringUtil.merge(categoryIds));
 		messagingObj.put("threadId", message.getThreadId());

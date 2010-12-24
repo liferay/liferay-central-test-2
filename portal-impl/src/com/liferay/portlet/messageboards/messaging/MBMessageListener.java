@@ -24,6 +24,8 @@ import com.liferay.portal.kernel.mail.SMTPAccount;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -55,7 +57,6 @@ public class MBMessageListener extends BaseMessageListener {
 		throws Exception {
 
 		long companyId = message.getLong("companyId");
-		long userId = message.getLong("userId");
 		long groupId = message.getLong("groupId");
 		String categoryIds = message.getString("categoryIds");
 		long threadId = message.getLong("threadId");
@@ -88,8 +89,8 @@ public class MBMessageListener extends BaseMessageListener {
 				companyId, MBThread.class.getName(), threadId);
 
 		sendEmail(
-			userId, groupId, fromName, fromAddress, subject, body,
-			subscriptions, sent, replyToAddress, mailId, inReplyTo, htmlFormat);
+			groupId, fromName, fromAddress, subject, body, subscriptions, sent,
+			replyToAddress, mailId, inReplyTo, htmlFormat);
 
 		// Categories
 
@@ -104,9 +105,8 @@ public class MBMessageListener extends BaseMessageListener {
 				companyId, MBCategory.class.getName(), categoryId);
 
 			sendEmail(
-				userId, groupId, fromName, fromAddress, subject, body,
-				subscriptions, sent, replyToAddress, mailId, inReplyTo,
-				htmlFormat);
+				groupId, fromName, fromAddress, subject, body, subscriptions,
+				sent, replyToAddress, mailId, inReplyTo, htmlFormat);
 		}
 
 		// Mailing list
@@ -176,10 +176,10 @@ public class MBMessageListener extends BaseMessageListener {
 	}
 
 	protected void sendEmail(
-			long userId, long groupId, String fromName, String fromAddress,
-			String subject, String body, List<Subscription> subscriptions,
-			Set<Long> sent, String replyToAddress, String mailId,
-			String inReplyTo, boolean htmlFormat)
+			long groupId, String fromName, String fromAddress, String subject,
+			String body, List<Subscription> subscriptions, Set<Long> sent,
+			String replyToAddress, String mailId, String inReplyTo,
+			boolean htmlFormat)
 		throws Exception {
 
 		List<InternetAddress> addresses = new ArrayList<InternetAddress>();
@@ -228,8 +228,13 @@ public class MBMessageListener extends BaseMessageListener {
 				continue;
 			}
 
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			int type = group.getType();
+
 			if (!GroupLocalServiceUtil.hasUserGroup(
-					subscribedUserId, groupId)) {
+					subscribedUserId, groupId) &&
+				(type != GroupConstants.TYPE_COMMUNITY_OPEN)) {
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
