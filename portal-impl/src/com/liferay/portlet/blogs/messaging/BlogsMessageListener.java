@@ -14,28 +14,12 @@
 
 package com.liferay.portlet.blogs.messaging;
 
-import com.liferay.mail.service.MailServiceUtil;
-import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.GroupConstants;
-import com.liferay.portal.model.Subscription;
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.SubscriptionLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.SubscriptionSender;
 import com.liferay.portlet.blogs.model.BlogsEntry;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import javax.mail.internet.InternetAddress;
 
 /**
  * @author Thiago Moreira
@@ -55,143 +39,29 @@ public class BlogsMessageListener extends BaseMessageListener {
 		String mailId = message.getString("mailId");
 		boolean htmlFormat = message.getBoolean("htmlFormat");
 
-		Set<Long> sent = new HashSet<Long>();
-
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Sending notifications for {mailId=" + mailId + ", entryId=" +
 					entryId + "}");
 		}
 
-		// Entries
+		SubscriptionSender subscriptionSender = new SubscriptionSender();
 
-		List<Subscription> subscriptions =
-			SubscriptionLocalServiceUtil.getSubscriptions(
-				companyId, BlogsEntry.class.getName(), groupId);
+		subscriptionSender.setCompanyId(companyId);
+		subscriptionSender.setUserId(userId);
+		subscriptionSender.setGroupId(groupId);
+		subscriptionSender.setFrom(fromName, fromAddress);
+		subscriptionSender.setSubject(subject);
+		subscriptionSender.setBody(body);
+		subscriptionSender.setReplyToAddress(replyToAddress);
+		subscriptionSender.setMailId(mailId);
+		subscriptionSender.setHtmlFormat(htmlFormat);
 
-		sendEmail(
-			userId, groupId, fromName, fromAddress, subject, body,
-			subscriptions, sent, replyToAddress, mailId, htmlFormat);
+		subscriptionSender.notifyPersistedSubscribers(
+			BlogsEntry.class.getName(), groupId);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Finished sending notifications");
-		}
-	}
-
-	protected void sendEmail(
-			long userId, long groupId, String fromName, String fromAddress,
-			String subject, String body, List<Subscription> subscriptions,
-			Set<Long> sent, String replyToAddress, String mailId,
-			boolean htmlFormat)
-		throws Exception {
-
-		for (Subscription subscription : subscriptions) {
-			long subscribedUserId = subscription.getUserId();
-
-			if (sent.contains(subscribedUserId)) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Do not send a duplicate email to user " +
-							subscribedUserId);
-				}
-
-				continue;
-			}
-			else {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Add user " + subscribedUserId +
-							" to the list of users who have received an email");
-				}
-
-				sent.add(subscribedUserId);
-			}
-
-			User user = null;
-
-			try {
-				user = UserLocalServiceUtil.getUserById(subscribedUserId);
-			}
-			catch (NoSuchUserException nsue) {
-				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Subscription " + subscription.getSubscriptionId() +
-							" is stale and will be deleted");
-				}
-
-				SubscriptionLocalServiceUtil.deleteSubscription(
-					subscription.getSubscriptionId());
-
-				continue;
-			}
-
-			if (!user.isActive()) {
-				continue;
-			}
-
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-			int type = group.getType();
-
-			if (!GroupLocalServiceUtil.hasUserGroup(
-					subscribedUserId, groupId) &&
-				(type != GroupConstants.TYPE_COMMUNITY_OPEN)) {
-
-				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Subscription " + subscription.getSubscriptionId() +
-							" is stale and will be deleted");
-				}
-
-				SubscriptionLocalServiceUtil.deleteSubscription(
-					subscription.getSubscriptionId());
-
-				continue;
-			}
-
-			try {
-				InternetAddress from = new InternetAddress(
-					fromAddress, fromName);
-
-				InternetAddress to = new InternetAddress(
-					user.getEmailAddress(), user.getFullName());
-
-				String curSubject = StringUtil.replace(
-					subject,
-					new String[] {
-						"[$TO_ADDRESS$]",
-						"[$TO_NAME$]"
-					},
-					new String[] {
-						user.getFullName(),
-						user.getEmailAddress()
-					});
-
-				String curBody = StringUtil.replace(
-					body,
-					new String[] {
-						"[$TO_ADDRESS$]",
-						"[$TO_NAME$]"
-					},
-					new String[] {
-						user.getFullName(),
-						user.getEmailAddress()
-					});
-
-				InternetAddress replyTo = new InternetAddress(
-					replyToAddress, replyToAddress);
-
-				MailMessage message = new MailMessage(
-					from, to, curSubject, curBody, htmlFormat);
-
-				message.setReplyTo(new InternetAddress[] {replyTo});
-				message.setMessageId(mailId);
-
-				MailServiceUtil.sendEmail(message);
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
 		}
 	}
 
