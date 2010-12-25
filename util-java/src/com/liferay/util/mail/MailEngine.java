@@ -67,6 +67,20 @@ public class MailEngine {
 		return getSession(false);
 	}
 
+	public static Session getSession(Account account) {
+		Properties properties = _getProperties(account);
+
+		Session session = Session.getInstance(properties);
+
+		if (_log.isDebugEnabled()) {
+			session.setDebug(true);
+
+			session.getProperties().list(System.out);
+		}
+
+		return session;
+	}
+
 	public static Session getSession(boolean cache) {
 		Session session = null;
 
@@ -90,48 +104,23 @@ public class MailEngine {
 		return session;
 	}
 
-	public static Session getSession(Account account) {
-		Properties properties = _getProperties(account);
-
-		Session session = Session.getInstance(properties);
-
-		if (_log.isDebugEnabled()) {
-			session.setDebug(true);
-
-			session.getProperties().list(System.out);
-		}
-
-		return session;
-	}
-
-	public static void send(MailMessage mailMessage)
-		throws MailEngineException {
-
-		send(
-			mailMessage.getFrom(), mailMessage.getTo(), mailMessage.getCC(),
-			mailMessage.getBCC(), mailMessage.getBulkAddresses(),
-			mailMessage.getSubject(), mailMessage.getBody(),
-			mailMessage.isHTMLFormat(), mailMessage.getReplyTo(),
-			mailMessage.getMessageId(), mailMessage.getInReplyTo(),
-			mailMessage.getAttachments(), mailMessage.getSMTPAccount());
-	}
-
-	public static void send(String from, String to, String subject, String body)
-		throws MailEngineException {
-
+	public static void send(byte[] bytes) throws MailEngineException {
 		try {
-			send(
-				new InternetAddress(from), new InternetAddress(to), subject,
-				body);
+			Session session = getSession();
+
+			Message message = new MimeMessage(
+				session, new UnsyncByteArrayInputStream(bytes));
+
+			_send(session, message, null);
 		}
-		catch (AddressException ae) {
-			throw new MailEngineException(ae);
+		catch (Exception e) {
+			throw new MailEngineException(e);
 		}
 	}
 
 	public static void send(
-			InternetAddress from, InternetAddress to,
-			String subject, String body)
+			InternetAddress from, InternetAddress to, String subject,
+			String body)
 		throws MailEngineException {
 
 		send(
@@ -147,58 +136,6 @@ public class MailEngine {
 		send(
 			from, new InternetAddress[] {to}, null, null, subject, body,
 			htmlFormat, null, null, null);
-	}
-
-	public static void send(
-			InternetAddress from, InternetAddress[] to, String subject,
-			String body)
-		throws MailEngineException {
-
-		send(from, to, null, null, subject, body, false, null, null, null);
-	}
-
-	public static void send(
-			InternetAddress from, InternetAddress[] to, String subject,
-			String body, boolean htmlFormat)
-		throws MailEngineException {
-
-		send(from, to, null, null, subject, body, htmlFormat, null, null, null);
-	}
-
-	public static void send(
-			InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
-			String subject, String body)
-		throws MailEngineException {
-
-		send(from, to, cc, null, subject, body, false, null, null, null);
-	}
-
-	public static void send(
-			InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
-			String subject, String body, boolean htmlFormat)
-		throws MailEngineException {
-
-		send(from, to, cc, null, subject, body, htmlFormat, null, null, null);
-	}
-
-	public static void send(
-			InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
-			InternetAddress[] bcc, String subject, String body)
-		throws MailEngineException {
-
-		send(from, to, cc, bcc, subject, body, false, null, null, null);
-	}
-
-	public static void send(
-			InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
-			InternetAddress[] bcc, String subject, String body,
-			boolean htmlFormat, InternetAddress[] replyTo, String messageId,
-			String inReplyTo)
-		throws MailEngineException {
-
-		send(
-			from, to, cc, bcc, null, subject, body, htmlFormat, replyTo,
-			messageId, inReplyTo, null);
 	}
 
 	public static void send(
@@ -276,20 +213,20 @@ public class MailEngine {
 				session = getSession(smtpAccount);
 			}
 
-			Message msg = new LiferayMimeMessage(session);
+			Message message = new LiferayMimeMessage(session);
 
-			msg.setFrom(from);
-			msg.setRecipients(Message.RecipientType.TO, to);
+			message.setFrom(from);
+			message.setRecipients(Message.RecipientType.TO, to);
 
 			if (cc != null) {
-				msg.setRecipients(Message.RecipientType.CC, cc);
+				message.setRecipients(Message.RecipientType.CC, cc);
 			}
 
 			if (bcc != null) {
-				msg.setRecipients(Message.RecipientType.BCC, bcc);
+				message.setRecipients(Message.RecipientType.BCC, bcc);
 			}
 
-			msg.setSubject(subject);
+			message.setSubject(subject);
 
 			if ((attachments != null) && (attachments.length > 0)) {
 				MimeMultipart rootMultipart = new MimeMultipart(
@@ -335,35 +272,35 @@ public class MailEngine {
 					}
 				}
 
-				msg.setContent(rootMultipart);
+				message.setContent(rootMultipart);
 
-				msg.saveChanges();
+				message.saveChanges();
 			}
 			else {
 				if (htmlFormat) {
-					msg.setContent(body, _TEXT_HTML);
+					message.setContent(body, _TEXT_HTML);
 				}
 				else {
-					msg.setContent(body, _TEXT_PLAIN);
+					message.setContent(body, _TEXT_PLAIN);
 				}
 			}
 
-			msg.setSentDate(new Date());
+			message.setSentDate(new Date());
 
 			if (replyTo != null) {
-				msg.setReplyTo(replyTo);
+				message.setReplyTo(replyTo);
 			}
 
 			if (messageId != null) {
-				msg.setHeader("Message-ID", messageId);
+				message.setHeader("Message-ID", messageId);
 			}
 
 			if (inReplyTo != null) {
-				msg.setHeader("In-Reply-To", inReplyTo);
-				msg.setHeader("References", inReplyTo);
+				message.setHeader("In-Reply-To", inReplyTo);
+				message.setHeader("References", inReplyTo);
 			}
 
-			_send(session, msg, bulkAddresses);
+			_send(session, message, bulkAddresses);
 		}
 		catch (SendFailedException sfe) {
 			_log.error(sfe);
@@ -377,17 +314,80 @@ public class MailEngine {
 		}
 	}
 
-	public static void send(byte[] msgByteArray) throws MailEngineException {
+	public static void send(
+			InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
+			InternetAddress[] bcc, String subject, String body)
+		throws MailEngineException {
+
+		send(from, to, cc, bcc, subject, body, false, null, null, null);
+	}
+
+	public static void send(
+			InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
+			InternetAddress[] bcc, String subject, String body,
+			boolean htmlFormat, InternetAddress[] replyTo, String messageId,
+			String inReplyTo)
+		throws MailEngineException {
+
+		send(
+			from, to, cc, bcc, null, subject, body, htmlFormat, replyTo,
+			messageId, inReplyTo, null);
+	}
+
+	public static void send(
+			InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
+			String subject, String body)
+		throws MailEngineException {
+
+		send(from, to, cc, null, subject, body, false, null, null, null);
+	}
+
+	public static void send(
+			InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
+			String subject, String body, boolean htmlFormat)
+		throws MailEngineException {
+
+		send(from, to, cc, null, subject, body, htmlFormat, null, null, null);
+	}
+
+	public static void send(
+			InternetAddress from, InternetAddress[] to, String subject,
+			String body)
+		throws MailEngineException {
+
+		send(from, to, null, null, subject, body, false, null, null, null);
+	}
+
+	public static void send(
+			InternetAddress from, InternetAddress[] to, String subject,
+			String body, boolean htmlFormat)
+		throws MailEngineException {
+
+		send(from, to, null, null, subject, body, htmlFormat, null, null, null);
+	}
+
+	public static void send(MailMessage mailMessage)
+		throws MailEngineException {
+
+		send(
+			mailMessage.getFrom(), mailMessage.getTo(), mailMessage.getCC(),
+			mailMessage.getBCC(), mailMessage.getBulkAddresses(),
+			mailMessage.getSubject(), mailMessage.getBody(),
+			mailMessage.isHTMLFormat(), mailMessage.getReplyTo(),
+			mailMessage.getMessageId(), mailMessage.getInReplyTo(),
+			mailMessage.getAttachments(), mailMessage.getSMTPAccount());
+	}
+
+	public static void send(String from, String to, String subject, String body)
+		throws MailEngineException {
+
 		try {
-			Session session = getSession();
-
-			Message msg = new MimeMessage(
-				session, new UnsyncByteArrayInputStream(msgByteArray));
-
-			_send(session, msg, null);
+			send(
+				new InternetAddress(from), new InternetAddress(to), subject,
+				body);
 		}
-		catch (Exception e) {
-			throw new MailEngineException(e);
+		catch (AddressException ae) {
+			throw new MailEngineException(ae);
 		}
 	}
 
@@ -436,7 +436,7 @@ public class MailEngine {
 	}
 
 	private static void _send(
-		Session session, Message msg, InternetAddress[] bulkAddresses) {
+		Session session, Message message, InternetAddress[] bulkAddresses) {
 
 		try {
 			boolean smtpAuth = GetterUtil.getBoolean(
@@ -459,20 +459,20 @@ public class MailEngine {
 				transport.connect(smtpHost, smtpPort, user, password);
 
 				if ((bulkAddresses != null) && (bulkAddresses.length > 0)) {
-					transport.sendMessage(msg, bulkAddresses);
+					transport.sendMessage(message, bulkAddresses);
 				}
 				else {
-					transport.sendMessage(msg, msg.getAllRecipients());
+					transport.sendMessage(message, message.getAllRecipients());
 				}
 
 				transport.close();
 			}
 			else {
 				if ((bulkAddresses != null) && (bulkAddresses.length > 0)) {
-					Transport.send(msg, bulkAddresses);
+					Transport.send(message, bulkAddresses);
 				}
 				else {
-					Transport.send(msg);
+					Transport.send(message);
 				}
 			}
 		}
