@@ -50,7 +50,7 @@ public class BlogsMessageListener extends BaseMessageListener {
 		subscriptionSender.setCompanyId(companyId);
 		subscriptionSender.setUserId(userId);
 		subscriptionSender.setGroupId(groupId);
-		subscriptionSender.setFrom(fromName, fromAddress);
+		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setSubject(subject);
 		subscriptionSender.setBody(body);
 		subscriptionSender.setReplyToAddress(replyToAddress);
