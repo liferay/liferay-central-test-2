@@ -44,7 +44,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			List headerNames = searchContainer.getHeaderNames();
 
-			headerNames.add(3, "status");
+			headerNames.add(2, "status");
 			headerNames.add(StringPool.BLANK);
 
 			searchContainer.setRowChecker(new RowChecker(renderResponse));
@@ -83,7 +83,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				article = article.toEscapedModel();
 
-				ResultRow row = new ResultRow(article, article.getArticleId() + EditArticleAction.VERSION_SEPARATOR + article.getVersion(), i);
+				ResultRow row = new ResultRow(article, article.getArticleId(), i);
 
 				PortletURL rowURL = renderResponse.createRenderURL();
 
@@ -91,7 +91,6 @@ portletURL.setParameter("tabs1", tabs1);
 				rowURL.setParameter("redirect", currentURL);
 				rowURL.setParameter("groupId", String.valueOf(article.getGroupId()));
 				rowURL.setParameter("articleId", article.getArticleId());
-				rowURL.setParameter("version", String.valueOf(article.getVersion()));
 
 				// Article id
 
@@ -100,10 +99,6 @@ portletURL.setParameter("tabs1", tabs1);
 				// Title
 
 				row.addText(article.getTitle(), rowURL);
-
-				// Version
-
-				row.addText(String.valueOf(article.getVersion()), rowURL);
 
 				// Status
 

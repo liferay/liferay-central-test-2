@@ -47,14 +47,14 @@ public class ArticleSearch extends SearchContainer<JournalArticle> {
 	static {
 		headerNames.add("id");
 		headerNames.add("name");
-		headerNames.add("version");
+		//headerNames.add("version");
 		headerNames.add("modified-date");
 		headerNames.add("display-date");
 		headerNames.add("author");
 
 		orderableHeaders.put("id", "id");
 		orderableHeaders.put("name", "title");
-		orderableHeaders.put("version", "version");
+		//orderableHeaders.put("version", "version");
 		orderableHeaders.put("modified-date", "modified-date");
 		orderableHeaders.put("display-date", "display-date");
 	}
