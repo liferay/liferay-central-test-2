@@ -227,6 +227,10 @@ public class IncludeTag
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		if (Validator.isNull(themeDisplay)) {
+			return null;
+		}
+
 		Group group = themeDisplay.getScopeGroup();
 
 		UnicodeProperties typeSettingsProperties =
