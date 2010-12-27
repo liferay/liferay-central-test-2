@@ -89,6 +89,18 @@ JournalArticle article = (JournalArticle)row.getObject();
 		</c:if>
 	</c:if>
 
+	<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.EXPIRE) && (article.getStatus() == WorkflowConstants.STATUS_APPROVED)%>">
+		<portlet:actionURL var="expireURL">
+			<portlet:param name="struts_action" value="/journal/edit_article" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EXPIRE %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
+			<portlet:param name="expireArticleIds" value="<%= article.getArticleId() %>" />
+		</portlet:actionURL>
+
+		<liferay-ui:icon image="time" message="expire" url="<%= expireURL %>" />
+	</c:if>
+
 	<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">
 		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/journal/edit_article" />

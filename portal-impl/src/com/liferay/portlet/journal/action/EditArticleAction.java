@@ -283,16 +283,26 @@ public class EditArticleAction extends PortletAction {
 		for (int i = 0; i < expireArticleIds.length; i++) {
 			int pos = expireArticleIds[i].lastIndexOf(VERSION_SEPARATOR);
 
-			String articleId = expireArticleIds[i].substring(0, pos);
-			double version = GetterUtil.getDouble(
-				expireArticleIds[i].substring(
-					pos + VERSION_SEPARATOR.length()));
+			String articleId = expireArticleIds[i];
 
 			String articleURL = ParamUtil.getString(
 				actionRequest, "articleURL");
 
-			JournalArticleServiceUtil.expireArticle(
-				groupId, articleId, version, articleURL, serviceContext);
+			double version = 0;
+
+			if (pos == -1) {
+				JournalArticleServiceUtil.expireArticle(
+					groupId, articleId, articleURL, serviceContext);
+			}
+			else {
+				articleId = articleId.substring(0, pos);
+				version = GetterUtil.getDouble(
+					expireArticleIds[i].substring(
+						pos + VERSION_SEPARATOR.length()));
+
+				JournalArticleServiceUtil.expireArticle(
+					groupId, articleId, version, articleURL, serviceContext);
+			}
 		}
 	}
 

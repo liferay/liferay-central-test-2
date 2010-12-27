@@ -702,6 +702,22 @@ public class JournalArticleLocalServiceImpl
 			WorkflowConstants.STATUS_EXPIRED, articleURL, serviceContext);
 	}
 
+	public void expireArticle(
+			long userId, long groupId, String articleId, String articleURL,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		List<JournalArticle> articles = journalArticlePersistence.findByG_A(
+			groupId, articleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			new ArticleVersionComparator(true));
+
+		for (JournalArticle article : articles) {
+			expireArticle(
+				userId, groupId, article.getArticleId(), article.getVersion(),
+				articleURL, serviceContext);
+		}
+	}
+
 	public JournalArticle getArticle(long id)
 		throws PortalException, SystemException {
 

@@ -143,6 +143,19 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			serviceContext);
 	}
 
+	public void expireArticle(
+			long groupId, String articleId, String articleURL,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		JournalArticlePermission.check(
+			getPermissionChecker(), groupId, articleId, ActionKeys.EXPIRE);
+
+		journalArticleLocalService.expireArticle(
+			getUserId(), groupId, articleId, articleURL,
+			serviceContext);
+	}
+
 	public JournalArticle getArticle(long groupId, String articleId)
 		throws PortalException, SystemException {
 
