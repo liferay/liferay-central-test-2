@@ -993,7 +993,8 @@ public class JournalArticleLocalServiceImpl
 				langType);
 
 			if (!pageFlow) {
-				String[] pieces = StringUtil.split(content, _TOKEN_PAGE_BREAK);
+				String[] pieces = StringUtil.split(
+					content, PropsValues.JOURNAL_ARTICLE_TOKEN_PAGE_BREAK);
 
 				if (pieces.length > 1) {
 					if (page > pieces.length) {
@@ -3053,9 +3054,6 @@ public class JournalArticleLocalServiceImpl
 			throw new ArticleContentException();
 		}
 	}
-
-	private static final String _TOKEN_PAGE_BREAK = PropsUtil.get(
-		PropsKeys.JOURNAL_ARTICLE_TOKEN_PAGE_BREAK);
 
 	private long _journalArticleCheckInterval =
 		PropsValues.JOURNAL_ARTICLE_CHECK_INTERVAL * Time.MINUTE;
