@@ -132,6 +132,15 @@ public class JournalArticleServiceUtil {
 			serviceContext);
 	}
 
+	public static void expireArticle(long groupId, java.lang.String articleId,
+		java.lang.String articleURL,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.expireArticle(groupId, articleId, articleURL, serviceContext);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticle getArticle(
 		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.kernel.exception.PortalException,

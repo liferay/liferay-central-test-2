@@ -165,6 +165,21 @@ public class JournalArticleServiceSoap {
 		}
 	}
 
+	public static void expireArticle(long groupId, java.lang.String articleId,
+		java.lang.String articleURL,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			JournalArticleServiceUtil.expireArticle(groupId, articleId,
+				articleURL, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticleSoap getArticle(
 		long groupId, java.lang.String articleId) throws RemoteException {
 		try {

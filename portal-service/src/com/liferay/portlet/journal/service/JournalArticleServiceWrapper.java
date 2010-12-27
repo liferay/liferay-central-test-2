@@ -119,6 +119,15 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 			version, articleURL, serviceContext);
 	}
 
+	public void expireArticle(long groupId, java.lang.String articleId,
+		java.lang.String articleURL,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_journalArticleService.expireArticle(groupId, articleId, articleURL,
+			serviceContext);
+	}
+
 	public com.liferay.portlet.journal.model.JournalArticle getArticle(
 		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.kernel.exception.PortalException,

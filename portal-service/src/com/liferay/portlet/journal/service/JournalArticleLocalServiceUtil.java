@@ -396,6 +396,16 @@ public class JournalArticleLocalServiceUtil {
 			articleURL, serviceContext);
 	}
 
+	public static void expireArticle(long userId, long groupId,
+		java.lang.String articleId, java.lang.String articleURL,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.expireArticle(userId, groupId, articleId, articleURL,
+			serviceContext);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticle getArticle(
 		long id)
 		throws com.liferay.portal.kernel.exception.PortalException,
