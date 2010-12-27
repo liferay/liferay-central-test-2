@@ -28,11 +28,11 @@
 	<bean id="threadLocalCacheAdvice" class="com.liferay.portal.cache.ThreadLocalCacheAdvice">
 		<property name="nextMethodInterceptor" ref="transactionAdvice" />
 	</bean>
-	<bean id="annotationTransactionAttributeSource" class="com.liferay.portal.spring.transaction.AnnotationTransactionAttributeSource" />
 	<bean id="transactionAdvice" class="com.liferay.portal.spring.transaction.TransactionInterceptor">
+		<property name="transactionAttributeSource" ref="transactionAttributeSource" />
 		<property name="transactionManager" ref="liferayTransactionManager" />
-		<property name="transactionAttributeSource" ref="annotationTransactionAttributeSource" />
 	</bean>
+	<bean id="transactionAttributeSource" class="com.liferay.portal.spring.transaction.AnnotationTransactionAttributeSource" />
 	<aop:config proxy-target-class="false">
 		<aop:pointcut id="serviceOperation" expression="bean(*Service)" />
 		<aop:advisor advice-ref="serviceAdvice" pointcut-ref="serviceOperation" />
