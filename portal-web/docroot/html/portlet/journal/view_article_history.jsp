@@ -47,8 +47,12 @@ portletURL.setParameter("articleId", article.getArticleId());
 
 	List headerNames = searchContainer.getHeaderNames();
 
+	headerNames.add(2, "version");
 	headerNames.add(3, "status");
 	headerNames.add(StringPool.BLANK);
+
+	Map<String, String> orderableHeaders = searchContainer.getOrderableHeaders();
+	orderableHeaders.put("version", "version");
 
 	if (Validator.isNull(orderByCol)) {
 		searchContainer.setOrderByCol("version");
