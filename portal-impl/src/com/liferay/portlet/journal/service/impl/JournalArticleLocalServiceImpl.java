@@ -66,7 +66,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.NoSuchEntryException;
 import com.liferay.portlet.asset.model.AssetEntry;
@@ -364,7 +363,7 @@ public class JournalArticleLocalServiceImpl
 		List<JournalArticle> articles =
 			journalArticleFinder.findByExpirationDate(
 				WorkflowConstants.STATUS_APPROVED, now,
-				new Date(now.getTime() - _journalArticleCheckInterval));
+				new Date(now.getTime() - _JOURNAL_ARTICLE_CHECK_INTERVAL));
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Expiring " + articles.size() + " articles");
@@ -396,7 +395,7 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		articles = journalArticleFinder.findByReviewDate(
-			now, new Date(now.getTime() - _journalArticleCheckInterval));
+			now, new Date(now.getTime() - _JOURNAL_ARTICLE_CHECK_INTERVAL));
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -3055,7 +3054,7 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
-	private long _journalArticleCheckInterval =
+	private static long _JOURNAL_ARTICLE_CHECK_INTERVAL =
 		PropsValues.JOURNAL_ARTICLE_CHECK_INTERVAL * Time.MINUTE;
 
 	private static Log _log = LogFactoryUtil.getLog(

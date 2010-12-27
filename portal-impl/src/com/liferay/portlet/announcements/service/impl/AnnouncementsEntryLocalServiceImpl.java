@@ -126,7 +126,8 @@ public class AnnouncementsEntryLocalServiceImpl
 
 		List<AnnouncementsEntry> entries =
 			announcementsEntryFinder.findByDisplayDate(
-				now, new Date(now.getTime() - _entryCheckInterval));
+				now,
+				new Date(now.getTime() - _ANNOUNCEMENTS_ENTRY_CHECK_INTERVAL));
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Processing " + entries.size() + " entries");
@@ -543,10 +544,10 @@ public class AnnouncementsEntryLocalServiceImpl
 		}
 	}
 
+	private static long _ANNOUNCEMENTS_ENTRY_CHECK_INTERVAL =
+		PropsValues.ANNOUNCEMENTS_ENTRY_CHECK_INTERVAL * Time.MINUTE;
+
 	private static Log _log = LogFactoryUtil.getLog(
 		AnnouncementsEntryLocalServiceImpl.class);
-
-	private long _entryCheckInterval =
-		PropsValues.ANNOUNCEMENTS_ENTRY_CHECK_INTERVAL * Time.MINUTE;
 
 }

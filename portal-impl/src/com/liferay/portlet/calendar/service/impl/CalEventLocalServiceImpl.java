@@ -1200,10 +1200,12 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		long diff =
 			(startDate.getTime().getTime() - now.getTime().getTime()) /
-				_eventCheckInterval;
+				_CALENDAR_EVENT_CHECK_INTERVAL;
 
-		if ((diff == (event.getFirstReminder() / _eventCheckInterval)) ||
-			(diff == (event.getSecondReminder() / _eventCheckInterval))) {
+		if ((diff ==
+				(event.getFirstReminder() / _CALENDAR_EVENT_CHECK_INTERVAL)) ||
+			(diff ==
+				(event.getSecondReminder() / _CALENDAR_EVENT_CHECK_INTERVAL))) {
 
 			remindUser(event, user, startDate);
 		}
@@ -1639,10 +1641,10 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 	}
 
+	private long _CALENDAR_EVENT_CHECK_INTERVAL =
+		PropsValues.CALENDAR_EVENT_CHECK_INTERVAL * Time.MINUTE;
+
 	private static Log _log = LogFactoryUtil.getLog(
 		CalEventLocalServiceImpl.class);
-
-	private long _eventCheckInterval =
-		PropsValues.CALENDAR_EVENT_CHECK_INTERVAL * Time.MINUTE;
 
 }
