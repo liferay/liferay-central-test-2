@@ -227,7 +227,7 @@ public class IncludeTag
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		if (Validator.isNull(themeDisplay)) {
+		if (themeDisplay == null) {
 			return null;
 		}
 
