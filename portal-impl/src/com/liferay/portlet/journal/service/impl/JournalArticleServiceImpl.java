@@ -152,8 +152,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			getPermissionChecker(), groupId, articleId, ActionKeys.EXPIRE);
 
 		journalArticleLocalService.expireArticle(
-			getUserId(), groupId, articleId, articleURL,
-			serviceContext);
+			getUserId(), groupId, articleId, articleURL, serviceContext);
 	}
 
 	public JournalArticle getArticle(long groupId, String articleId)
