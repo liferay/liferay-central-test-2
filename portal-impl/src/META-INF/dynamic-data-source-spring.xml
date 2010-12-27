@@ -29,13 +29,7 @@
 	<bean id="transactionAdvice" class="com.liferay.portal.dao.jdbc.aop.DynamicDataSourceTransactionInterceptor">
 		<property name="dynamicDataSourceTargetSource" ref="dynamicDataSourceTargetSource" />
 		<property name="transactionManager" ref="liferayTransactionManager" />
-		<property name="transactionAttributeSource">
-			<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource">
-				<constructor-arg>
-					<bean class="com.liferay.portal.spring.annotation.PortalTransactionAnnotationParser" />
-				</constructor-arg>
-			</bean>
-		</property>
+		<property name="transactionAttributeSource" ref="annotationTransactionAttributeSource" />
 	</bean>
 	<bean id="com.liferay.portal.kernel.util.InfrastructureUtil" class="com.liferay.portal.kernel.util.InfrastructureUtil">
 		<property name="dataSource" ref="liferayDataSource" />

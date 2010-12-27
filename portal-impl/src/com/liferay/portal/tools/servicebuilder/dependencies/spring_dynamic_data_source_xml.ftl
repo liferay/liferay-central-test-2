@@ -9,12 +9,6 @@
 >
 	<bean id="transactionAdvice" class="com.liferay.portal.dao.jdbc.aop.DynamicDataSourceTransactionInterceptor">
 		<property name="transactionManager" ref="liferayTransactionManager" />
-		<property name="transactionAttributeSource">
-			<bean class="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource">
-				<constructor-arg>
-					<bean class="com.liferay.portal.spring.annotation.PortalTransactionAnnotationParser" />
-				</constructor-arg>
-			</bean>
-		</property>
+		<property name="transactionAttributeSource" ref="annotationTransactionAttributeSource" />
 	</bean>
 </beans>
