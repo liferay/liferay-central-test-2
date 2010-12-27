@@ -63,7 +63,10 @@ PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
 viewFullContentURL.setParameter("struts_action", "/workflow_tasks/view_content");
 viewFullContentURL.setParameter("redirect", currentURL);
-viewFullContentURL.setParameter("type", assetRendererFactory.getType());
+
+if (assetRendererFactory != null) {
+	viewFullContentURL.setParameter("type", assetRendererFactory.getType());
+}
 
 if (assetEntry != null) {
 	viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
