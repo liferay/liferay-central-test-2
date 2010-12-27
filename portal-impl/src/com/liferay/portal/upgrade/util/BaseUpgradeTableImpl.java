@@ -93,15 +93,15 @@ public abstract class BaseUpgradeTableImpl extends Table {
 
 			String[] indexesSQL = getIndexesSQL();
 
-			boolean setDropIndexes = false;
+			boolean dropIndexes = false;
 
 			for (String indexSQL : indexesSQL) {
 				if (!isAllowUniqueIndexes()) {
 					if (indexSQL.contains("create unique index")) {
-						setDropIndexes = true;
-
 						indexSQL = StringUtil.replace(
 							indexSQL, "create unique index ", "create index ");
+
+						dropIndexes = true;
 					}
 				}
 
@@ -113,7 +113,7 @@ public abstract class BaseUpgradeTableImpl extends Table {
 				}
 			}
 
-			if (setDropIndexes) {
+			if (dropIndexes) {
 				StartupHelperUtil.setDropIndexes(true);
 			}
 		}
