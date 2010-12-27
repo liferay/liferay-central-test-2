@@ -680,7 +680,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				</c:if>
 
 				<c:if test="<%= (article != null) && !article.isExpired() && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.EXPIRE) %>">
-					<aui:button disabled="<%= !article.isApproved() %>" onClick='<%= renderResponse.getNamespace() + "expireArticle();" %>' value="expire" />
+					<aui:button disabled="<%= !article.isApproved() %>" onClick='<%= renderResponse.getNamespace() + "expireArticle();" %>' value="expire-version" />
 				</c:if>
 
 				<c:if test="<%= (article != null) && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">
