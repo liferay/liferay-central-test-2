@@ -16,12 +16,17 @@ package com.liferay.portal.kernel.upgrade;
 
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.io.IOException;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import javax.naming.NamingException;
@@ -100,6 +105,68 @@ public abstract class UpgradeProcess {
 		DB db = DBFactoryUtil.getDB();
 
 		db.runSQLTemplate(path, failOnError);
+	}
+
+	public boolean tableHasColumn(String tableName, String columnName)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement("select * from " + tableName);
+
+			rs = ps.executeQuery();
+
+			ResultSetMetaData rsmd = rs.getMetaData();
+
+			for (int i = 0; i < rsmd.getColumnCount(); i++) {
+				String curColumnName = rsmd.getColumnName(i + 1);
+
+				if (curColumnName.equals(columnName)) {
+					return true;
+				}
+			}
+		}
+		catch (Exception e) {
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return false;
+	}
+
+	public boolean tableHasData(String tableName) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement("select count(*) from " + tableName);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long count = rs.getLong(1);
+
+				if (count > 0) {
+					return true;
+				}
+			}
+		}
+		catch (Exception e) {
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return false;
 	}
 
 	public void upgrade() throws UpgradeException {
