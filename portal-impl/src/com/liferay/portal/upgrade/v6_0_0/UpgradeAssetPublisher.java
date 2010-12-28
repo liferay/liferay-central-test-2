@@ -16,14 +16,45 @@ package com.liferay.portal.upgrade.v6_0_0;
 
 import com.liferay.portal.kernel.upgrade.BaseUpgradePortletPreferences;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.upgrade.util.UpgradeAssetPublisherManualEntries;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import javax.portlet.PortletPreferences;
 
 /**
  * @author Julio Camarero
+ * @author Douglas Wong
  */
 public class UpgradeAssetPublisher extends BaseUpgradePortletPreferences {
+
+	protected String[] getAssetEntryXmls(String[] manualEntries)
+		throws Exception {
+
+		String[] assetEntryXmls = new String[manualEntries.length];
+
+		for (int i = 0; i < manualEntries.length; i++) {
+			String manualEntry = manualEntries[i];
+
+			Document document = SAXReaderUtil.read(manualEntry);
+
+			Element rootElement = document.getRootElement();
+
+			UpgradeAssetPublisherManualEntries.upgradeToAssetEntryIdElement(
+				rootElement);
+
+			UpgradeAssetPublisherManualEntries.upgradeToAssetEntryTypeElement(
+				rootElement);
+
+			assetEntryXmls[i] = document.formattedString(StringPool.BLANK);
+		}
+
+		return assetEntryXmls;
+	}
 
 	protected String[] getPortletIds() {
 		return new String[] {"101_INSTANCE_%"};
@@ -99,6 +130,20 @@ public class UpgradeAssetPublisher extends BaseUpgradePortletPreferences {
 			portletPreferences.setValues("queryValues" + i, notAssetTagNames);
 
 			i++;
+		}
+
+		String selectionStyle = portletPreferences.getValue(
+			"selection-style", null);
+
+		if (Validator.isNotNull(selectionStyle) &&
+			!selectionStyle.equals("dynamic")) {
+
+			String[] manualEntries = portletPreferences.getValues(
+				"manual-entries", new String[0]);
+
+			String[] assetEntryXmls = getAssetEntryXmls(manualEntries);
+
+			portletPreferences.setValues("asset-entry-xml", assetEntryXmls);
 		}
 
 		return PortletPreferencesFactoryUtil.toXML(portletPreferences);
