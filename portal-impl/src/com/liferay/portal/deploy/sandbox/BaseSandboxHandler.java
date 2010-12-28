@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.TextFormatter;
+import com.liferay.portal.kernel.util.TextFormatter;
 
 import java.io.File;
 import java.io.IOException;

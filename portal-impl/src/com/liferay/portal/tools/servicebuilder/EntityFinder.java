@@ -15,7 +15,7 @@
 package com.liferay.portal.tools.servicebuilder;
 
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.util.TextFormatter;
+import com.liferay.portal.kernel.util.TextFormatter;
 
 import java.util.Iterator;
 import java.util.List;

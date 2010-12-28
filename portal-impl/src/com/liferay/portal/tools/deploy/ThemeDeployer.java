@@ -17,10 +17,10 @@ package com.liferay.portal.tools.deploy;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Plugin;
 import com.liferay.portal.util.InitUtil;
-import com.liferay.util.TextFormatter;
 
 import java.io.File;
 

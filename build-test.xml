@@ -2334,6 +2334,6 @@ file.
 
 		<ant dir="portal-service" target="test" inheritAll="false" />
 
-		<ant dir="util-java" target="test" inheritAll="false" />
+		<!--<ant dir="util-java" target="test" inheritAll="false" />-->
 	</target>
 </project>

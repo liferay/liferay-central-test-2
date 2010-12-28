@@ -15,8 +15,8 @@
 package com.liferay.portal.upgrade.v6_1_0;
 
 import com.liferay.portal.kernel.upgrade.BaseUpgradePortletPreferences;
+import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.util.TextFormatter;
 
 import java.util.Map;
 

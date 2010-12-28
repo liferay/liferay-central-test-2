@@ -16,9 +16,9 @@ package com.liferay.portal.tools.servicebuilder;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
-import com.liferay.util.TextFormatter;
 
 import java.util.Iterator;
 import java.util.List;

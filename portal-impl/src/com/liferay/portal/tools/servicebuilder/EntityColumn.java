@@ -15,8 +15,8 @@
 package com.liferay.portal.tools.servicebuilder;
 
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.util.TextFormatter;
 
 /**
  * @author Brian Wing Shun Chan

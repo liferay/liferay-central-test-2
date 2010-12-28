@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.StringUtil_IW;
+import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.Validator_IW;
@@ -41,7 +42,6 @@ import com.liferay.portal.tools.ArgumentsUtil;
 import com.liferay.portal.tools.SourceFormatter;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.TextFormatter;
 import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.qdox.JavaDocBuilder;
@@ -3971,8 +3971,7 @@ public class ServiceBuilder {
 		context.put("system", staticModels.get("java.lang.System"));
 		context.put("tempMap", wrapper.wrap(new HashMap<String, Object>()));
 		context.put(
-			"textFormatter",
-			staticModels.get("com.liferay.util.TextFormatter"));
+			"textFormatter", staticModels.get(TextFormatter.class.getName()));
 		context.put("validator", Validator_IW.getInstance());
 
 		return context;

@@ -16,12 +16,12 @@ package com.liferay.taglib.aui;
 
 import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.taglib.util.IncludeTag;
 import com.liferay.util.PwdGenerator;
-import com.liferay.util.TextFormatter;
 
 import java.util.HashMap;
 import java.util.List;

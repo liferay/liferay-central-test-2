@@ -14,8 +14,8 @@
 
 package com.liferay.taglib.aui;
 
+import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.taglib.util.IncludeTag;
-import com.liferay.util.TextFormatter;
 
 import javax.servlet.http.HttpServletRequest;
 
