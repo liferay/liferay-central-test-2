@@ -64,6 +64,8 @@ import org.apache.commons.lang.time.StopWatch;
  */
 public class PermissionExporter {
 
+	public static final String TEAM_ROLE = "[$TEAM_ROLE$]";
+
 	protected Element exportGroupPermissions(
 			long companyId, long groupId, String resourceName,
 			String resourcePrimKey, Element parentEl, String elName)

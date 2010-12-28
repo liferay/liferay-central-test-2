@@ -234,6 +234,13 @@ public class TeamLocalServiceWrapper implements TeamLocalService {
 		return _teamLocalService.getGroupTeams(groupId);
 	}
 
+	public com.liferay.portal.model.Team getTeam(long groupId,
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _teamLocalService.getTeam(groupId, name);
+	}
+
 	public java.util.List<com.liferay.portal.model.Team> getUserTeams(
 		long userId) throws com.liferay.portal.kernel.exception.SystemException {
 		return _teamLocalService.getUserTeams(userId);

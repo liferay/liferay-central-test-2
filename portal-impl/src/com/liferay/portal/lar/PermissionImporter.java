@@ -14,6 +14,7 @@
 
 package com.liferay.portal.lar;
 
+import com.liferay.portal.NoSuchTeamException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
@@ -33,12 +34,14 @@ import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.model.Team;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.TeamLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -303,12 +306,34 @@ public class PermissionImporter {
 		List<Element> roleEls = permissionsEl.elements("role");
 
 		for (Element roleEl : roleEls) {
+			String description = null;
 			String name = roleEl.attributeValue("name");
 
-			Role role = layoutCache.getRole(companyId, name);
+			Role role = null;
+
+			if (name.startsWith(PermissionExporter.TEAM_ROLE)) {
+				description = roleEl.attributeValue("description");
+				name = name.substring(PermissionExporter.TEAM_ROLE.length());
+
+				Team team = null;
+
+				try {
+					team = TeamLocalServiceUtil.getTeam(groupId, name);
+				}
+				catch (NoSuchTeamException nste) {
+					team = TeamLocalServiceUtil.addTeam(
+						userId, groupId, name, description);
+				}
+
+				role = RoleLocalServiceUtil.getTeamRole(
+					companyId, team.getTeamId());
+			}
+			else {
+				role = layoutCache.getRole(companyId, name);
+			}
 
 			if (role == null) {
-				String description = roleEl.attributeValue("description");
+				description = roleEl.attributeValue("description");
 				int type = Integer.valueOf(roleEl.attributeValue("type"));
 
 				if ((type == RoleConstants.TYPE_COMMUNITY) &&
@@ -345,12 +370,34 @@ public class PermissionImporter {
 		List<Element> roleEls = permissionsEl.elements("role");
 
 		for (Element roleEl : roleEls) {
+			String description = null;
 			String name = roleEl.attributeValue("name");
 
-			Role role = layoutCache.getRole(companyId, name);
+			Role role = null;
+
+			if (name.startsWith(PermissionExporter.TEAM_ROLE)) {
+				description = roleEl.attributeValue("description");
+				name = name.substring(PermissionExporter.TEAM_ROLE.length());
+
+				Team team = null;
+
+				try {
+					team = TeamLocalServiceUtil.getTeam(groupId, name);
+				}
+				catch (NoSuchTeamException nste) {
+					team = TeamLocalServiceUtil.addTeam(
+						userId, groupId, name, description);
+				}
+
+				role = RoleLocalServiceUtil.getTeamRole(
+					companyId, team.getTeamId());
+			}
+			else {
+				role = layoutCache.getRole(companyId, name);
+			}
 
 			if (role == null) {
-				String description = roleEl.attributeValue("description");
+				description = roleEl.attributeValue("description");
 				int type = Integer.valueOf(roleEl.attributeValue("type"));
 
 				if ((type == RoleConstants.TYPE_COMMUNITY) &&

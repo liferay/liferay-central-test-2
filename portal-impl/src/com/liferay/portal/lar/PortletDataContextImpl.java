@@ -16,6 +16,7 @@ package com.liferay.portal.lar;
 
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.NoSuchRoleException;
+import com.liferay.portal.NoSuchTeamException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
@@ -40,6 +41,7 @@ import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.model.Team;
 import com.liferay.portal.model.impl.LockImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -49,6 +51,7 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.TeamLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.model.AssetCategory;
@@ -302,6 +305,20 @@ public class PortletDataContextImpl implements PortletDataContext {
 				KeyValuePair permission = new KeyValuePair(name, actionIds);
 
 				permissions.add(permission);
+			}
+			else if (type == RoleConstants.TYPE_PROVIDER) {
+				if (importTeam(role)) {
+					Team team = TeamLocalServiceUtil.getTeam(role.getClassPK());
+
+					String name = PermissionExporter.TEAM_ROLE + team.getName();
+
+					String actionIds = getActionIds(
+						role, resourceName, String.valueOf(resourcePK));
+
+					KeyValuePair permission = new KeyValuePair(name, actionIds);
+
+					permissions.add(permission);
+				}
 			}
 		}
 
@@ -801,8 +818,32 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 			Role role = null;
 
+			Team team = null;
+
+			if (roleName.startsWith(PermissionExporter.TEAM_ROLE)) {
+				roleName = roleName.substring(
+					PermissionExporter.TEAM_ROLE.length());
+
+				try {
+					team = TeamLocalServiceUtil.getTeam(_groupId, roleName);
+				}
+				catch (NoSuchTeamException nste) {
+					if (_log.isWarnEnabled()) {
+						_log.warn("Team " + roleName + " does not exist");
+					}
+
+					continue;
+				}
+			}
+
 			try {
-				role = RoleLocalServiceUtil.getRole(_companyId, roleName);
+				if (team == null) {
+					role = RoleLocalServiceUtil.getRole(_companyId, roleName);
+				}
+				else {
+					role = RoleLocalServiceUtil.getTeamRole(
+						_companyId, team.getTeamId());
+				}
 			}
 			catch (NoSuchRoleException nsre) {
 				if (_log.isWarnEnabled()) {
@@ -1005,6 +1046,23 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	protected String getPrimaryKeyString(String className, String primaryKey) {
 		return className.concat(StringPool.POUND).concat(primaryKey);
+	}
+
+	protected boolean importTeam(Role role)
+		throws PortalException, SystemException {
+
+		if (!role.getClassName().equals(Team.class.getName())) {
+			return false;
+		}
+
+		Team team = TeamLocalServiceUtil.getTeam(role.getClassPK());
+
+		if (team.getGroupId() != _groupId) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 
 	protected void initXStream() {

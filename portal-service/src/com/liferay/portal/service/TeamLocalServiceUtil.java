@@ -245,6 +245,13 @@ public class TeamLocalServiceUtil {
 		return getService().getGroupTeams(groupId);
 	}
 
+	public static com.liferay.portal.model.Team getTeam(long groupId,
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getTeam(groupId, name);
+	}
+
 	public static java.util.List<com.liferay.portal.model.Team> getUserTeams(
 		long userId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getUserTeams(userId);

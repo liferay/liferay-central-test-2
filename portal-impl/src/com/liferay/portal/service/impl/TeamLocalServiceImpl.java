@@ -121,6 +121,12 @@ public class TeamLocalServiceImpl extends TeamLocalServiceBaseImpl {
 		return teamPersistence.findByPrimaryKey(teamId);
 	}
 
+	public Team getTeam(long groupId, String name)
+		throws PortalException, SystemException {
+
+		return teamPersistence.findByG_N(groupId, name);
+	}
+
 	public List<Team> getUserTeams(long userId) throws SystemException {
 		return userPersistence.getTeams(userId);
 	}

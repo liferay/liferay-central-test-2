@@ -27,6 +27,7 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.Team;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
@@ -34,6 +35,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.TeamLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
@@ -159,8 +161,24 @@ public class LayoutCache {
 		if (roles == null) {
 			Group group = GroupLocalServiceUtil.getGroup(groupId);
 
+			long companyId = group.getCompanyId();
+
 			roles = ResourceActionsUtil.getRoles(
-				group.getCompanyId(), group, resourceName, null);
+				companyId, group, resourceName, null);
+
+			List<Team> teams = TeamLocalServiceUtil.getGroupTeams(groupId);
+
+			for (Team team : teams) {
+				Role teamRole = RoleLocalServiceUtil.getTeamRole(
+					companyId, team.getTeamId());
+
+				teamRole.setDescription(team.getDescription());
+				teamRole.setName(PermissionExporter.TEAM_ROLE + team.getName());
+
+				if (!roles.contains(teamRole)) {
+					roles.add(teamRole);
+				}
+			}
 
 			groupRolesMap.put(groupId, roles);
 		}
