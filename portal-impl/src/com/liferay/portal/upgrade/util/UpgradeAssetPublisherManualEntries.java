@@ -127,8 +127,12 @@ public class UpgradeAssetPublisherManualEntries
 		return assetEntryXmls;
 	}
 
-	protected String[] getPortletIds() {
-		return new String[] {"101_INSTANCE_%"};
+	protected String getUpdatePortletPreferencesWhereClause() {
+		return "(portletId like '101_INSTANCE_%') AND " +
+			"((preferences like '%<preference><name>selection-style</name>" +
+				"<value>manual</value></preference>%') OR (preferences like " +
+					"'%<preference><name>selectionStyle</name>" +
+						"<value>manual</value></preference>%'))";
 	}
 
 	protected String upgradePreferences(
@@ -156,17 +160,7 @@ public class UpgradeAssetPublisherManualEntries
 				"manualEntries", new String[0]);
 		}
 
-		String selectionStyle = portletPreferences.getValue(
-			"selection-style", null);
-
-		if (Validator.isNull(selectionStyle)) {
-			selectionStyle = portletPreferences.getValue(
-				"selectionStyle", null);
-		}
-
-		if (Validator.isNotNull(selectionStyle) &&
-			!selectionStyle.equals("dynamic") &&
-			Validator.isNull(assetEntryXmls) &&
+		if (Validator.isNull(assetEntryXmls) &&
 			Validator.isNotNull(manualEntries)) {
 
 			assetEntryXmls = getAssetEntryXmls(manualEntries);
