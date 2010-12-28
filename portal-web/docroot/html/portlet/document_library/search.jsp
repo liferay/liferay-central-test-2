@@ -32,9 +32,9 @@ if (searchFolderId > 0) {
 else {
 	long folderId = DLFolderConstants.getFolderId(scopeGroupId, DLFolderConstants.getDataRepositoryId(scopeGroupId, searchFolderIds));
 
-	List folderIds = DLAppServiceUtil.getSubfolderIds(scopeGroupId, searchFolderIds);
+	List<Long> folderIds = DLAppServiceUtil.getSubfolderIds(scopeGroupId, searchFolderIds);
 
-	folderIds.add(0, new Long(folderId));
+	folderIds.add(0, folderId);
 
 	folderIdsArray = StringUtil.split(StringUtil.merge(folderIds), 0L);
 }
