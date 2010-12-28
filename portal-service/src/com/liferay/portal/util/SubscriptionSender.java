@@ -60,8 +60,8 @@ public class SubscriptionSender {
 		}
 
 		if (bulk) {
-			InternetAddress to = 
-				new InternetAddress(replyToAddress, replyToAddress);
+			InternetAddress to = new InternetAddress(
+				replyToAddress, replyToAddress);
 
 			sendEmail(to, LocaleUtil.getDefault());
 		}
@@ -224,6 +224,10 @@ public class SubscriptionSender {
 			InternetAddress bulkAddress = new InternetAddress(
 				user.getEmailAddress(), user.getFullName());
 
+			if (bulkAddresses == null) {
+				bulkAddresses = new ArrayList<InternetAddress>();
+			}
+
 			bulkAddresses.add(bulkAddress);
 		}
 		else {
@@ -307,8 +311,7 @@ public class SubscriptionSender {
 
 	protected String body;
 	protected boolean bulk;
-	protected List<InternetAddress> bulkAddresses = 
-		new ArrayList<InternetAddress>();
+	protected List<InternetAddress> bulkAddresses;
 	protected long companyId;
 	protected Map<String, Object> context = new HashMap<String, Object>();
 	protected InternetAddress from;
