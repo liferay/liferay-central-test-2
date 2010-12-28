@@ -15,6 +15,7 @@
 package com.liferay.taglib.security;
 
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -43,7 +44,7 @@ public class PermissionsURLTag extends TagSupport {
 	public static void doTag(
 			String redirect, String modelResource,
 			String modelResourceDescription, String resourcePrimKey, String var,
-			int[] roleTypes, PageContext pageContext)
+			int[] roleTypes, String windowState, PageContext pageContext)
 		throws Exception {
 
 		HttpServletRequest request =
@@ -56,7 +57,10 @@ public class PermissionsURLTag extends TagSupport {
 
 		Layout layout = themeDisplay.getLayout();
 
-		if (Validator.isNull(redirect)) {
+		if (Validator.isNull(redirect) &&
+			(Validator.isNull(windowState) ||
+				!windowState.equals(LiferayWindowState.POP_UP.toString()))) {
+
 			redirect = PortalUtil.getCurrentURL(request);
 		}
 
@@ -64,7 +68,11 @@ public class PermissionsURLTag extends TagSupport {
 			request, PortletKeys.PORTLET_CONFIGURATION, layout.getPlid(),
 			PortletRequest.RENDER_PHASE);
 
-		if (themeDisplay.isStatePopUp()) {
+		if (Validator.isNotNull(windowState)) {
+			portletURL.setWindowState(
+				WindowStateFactory.getWindowState(windowState));
+		}
+		else if (themeDisplay.isStatePopUp()) {
 			portletURL.setWindowState(LiferayWindowState.POP_UP);
 		}
 		else {
@@ -73,7 +81,10 @@ public class PermissionsURLTag extends TagSupport {
 
 		portletURL.setParameter(
 			"struts_action", "/portlet_configuration/edit_permissions");
-		portletURL.setParameter("redirect", redirect);
+
+		if (Validator.isNotNull(redirect)) {
+			portletURL.setParameter("redirect", redirect);
+		}
 
 		if (!themeDisplay.isStateMaximized()) {
 			portletURL.setParameter("returnToFullPageURL", redirect);
@@ -105,7 +116,7 @@ public class PermissionsURLTag extends TagSupport {
 		try {
 			doTag(
 				_redirect, _modelResource, _modelResourceDescription,
-				_resourcePrimKey, _var, _roleTypes, pageContext);
+				_resourcePrimKey, _var, _roleTypes, _windowState, pageContext);
 		}
 		catch (Exception e) {
 			throw new JspException(e);
@@ -138,11 +149,16 @@ public class PermissionsURLTag extends TagSupport {
 		_var = var;
 	}
 
+	public void setWindowState(String windowState) {
+		_windowState = windowState;
+	}
+
 	private String _redirect;
 	private String _modelResource;
 	private String _modelResourceDescription;
 	private String _resourcePrimKey;
 	private int[] _roleTypes;
 	private String _var;
+	private String _windowState;
 
 }

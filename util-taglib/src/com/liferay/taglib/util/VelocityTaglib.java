@@ -446,7 +446,7 @@ public class VelocityTaglib {
 
 		PermissionsURLTag.doTag(
 			redirect, modelResource, modelResourceDescription, resourcePrimKey,
-			null, roleTypes, _pageContext);
+			null, roleTypes, null, _pageContext);
 	}
 
 	public void renderURL(long plid, String portletName, String queryString)
