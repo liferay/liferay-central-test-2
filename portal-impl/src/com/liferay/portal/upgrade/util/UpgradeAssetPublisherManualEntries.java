@@ -41,8 +41,7 @@ public class UpgradeAssetPublisherManualEntries
 
 		Element assetEntryIdElement = rootElement.element("asset-entry-id");
 
-		long assetEntryId = GetterUtil.getLong(
-			assetEntryIdElement.getText());
+		long assetEntryId = GetterUtil.getLong(assetEntryIdElement.getText());
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -122,8 +121,7 @@ public class UpgradeAssetPublisherManualEntries
 
 			upgradeToAssetEntryTypeElement(rootElement);
 
-			assetEntryXmls[i] = document.formattedString(
-				StringPool.BLANK);
+			assetEntryXmls[i] = document.formattedString(StringPool.BLANK);
 		}
 
 		return assetEntryXmls;

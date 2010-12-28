@@ -45,8 +45,7 @@ public class UpgradeAssetPublisher extends BaseUpgradePortletPreferences {
 			UpgradeAssetPublisherManualEntries.upgradeToAssetEntryUuidElement(
 				rootElement);
 
-			newAssetEntryXmls[i] = document.formattedString(
-				StringPool.BLANK);
+			newAssetEntryXmls[i] = document.formattedString(StringPool.BLANK);
 		}
 
 		return newAssetEntryXmls;

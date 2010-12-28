@@ -14,8 +14,6 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.upgrade.util.UpgradeAssetPublisherManualEntries;
 
 /**
@@ -24,12 +22,10 @@ import com.liferay.portal.upgrade.util.UpgradeAssetPublisherManualEntries;
 public class VerifyAssetPublisher extends VerifyProcess {
 
 	protected void doVerify() throws Exception {
-		UpgradeAssetPublisherManualEntries upgrade =
+		UpgradeAssetPublisherManualEntries upgradeAssetPublisherManualEntries =
 			new UpgradeAssetPublisherManualEntries();
 
-		upgrade.upgrade();
+		upgradeAssetPublisherManualEntries.upgrade();
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(VerifyAssetPublisher.class);
 
 }
