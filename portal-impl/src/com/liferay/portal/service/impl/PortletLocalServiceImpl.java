@@ -1010,13 +1010,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			GetterUtil.getString(
 				portletElement.elementText("struts-path"),
 				portletModel.getStrutsPath()));
-
-		if (Validator.isNotNull(
-				portletElement.elementText("parent-struts-path"))) {
-
-			portletModel.setParentStrutsPath(
-				portletElement.elementText("parent-struts-path"));
-		}
+		portletModel.setParentStrutsPath(
+			GetterUtil.getString(
+				portletElement.elementText("parent-struts-path"),
+				portletModel.getParentStrutsPath()));
 
 		if (Validator.isNotNull(
 				portletElement.elementText("configuration-path"))) {

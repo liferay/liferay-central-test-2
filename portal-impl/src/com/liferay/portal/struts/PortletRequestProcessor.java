@@ -347,9 +347,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 	}
 
 	public ActionMapping processMapping(
-			HttpServletRequest request, HttpServletResponse response,
-			String path)
-		throws IOException {
+		HttpServletRequest request, HttpServletResponse response, String path) {
 
 		if (path == null) {
 			return null;
@@ -359,28 +357,27 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 
 		long companyId = PortalUtil.getCompanyId(request);
 
-		PortletConfigImpl portletConfig =
+		PortletConfigImpl portletConfigImpl =
 			(PortletConfigImpl)request.getAttribute(
 				JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		try {
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				companyId, portletConfig.getPortletId());
+				companyId, portletConfigImpl.getPortletId());
 
 			if (moduleConfig.findActionConfig(path) != null) {
 				mapping = super.processMapping(request, response, path);
 			}
 			else if (Validator.isNotNull(portlet.getParentStrutsPath())) {
 				int pos = path.indexOf(StringPool.SLASH, 1);
-				String relativePath = path.substring(pos, path.length());
 
 				String parentPath =
 					StringPool.SLASH + portlet.getParentStrutsPath() +
-						relativePath;
+						path.substring(pos, path.length());
 
 				if (moduleConfig.findActionConfig(parentPath) != null) {
-					mapping =
-						super.processMapping(request, response, parentPath);
+					mapping = super.processMapping(
+						request, response, parentPath);
 				}
 			}
 		}

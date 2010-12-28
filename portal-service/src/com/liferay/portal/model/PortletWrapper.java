@@ -353,20 +353,20 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Gets the path of the parent portlet.
+	* Gets the parent struts path of the portlet.
 	*
-	* @return the path of the parent portlet.
+	* @return the parent struts path of the portlet.
 	*/
-	public String getParentStrutsPath() {
+	public java.lang.String getParentStrutsPath() {
 		return _portlet.getParentStrutsPath();
 	}
 
 	/**
-	* Sets the parent struts path.
+	* Sets the parent struts path of the portlet.
 	*
-	* @param parentStrutsPath the parent struts path
+	* @param parentStrutsPath the parent struts path of the portlet
 	*/
-	public void setParentStrutsPath(String parentStrutsPath) {
+	public void setParentStrutsPath(java.lang.String parentStrutsPath) {
 		_portlet.setParentStrutsPath(parentStrutsPath);
 	}
 

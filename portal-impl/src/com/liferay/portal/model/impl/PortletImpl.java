@@ -410,9 +410,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	* Gets the parent struts path.
+	* Gets the parent struts path of the portlet.
 	*
-	* @return the parent struts path.
+	* @return the parent struts path of the portlet.
 	*/
 	public String getParentStrutsPath() {
 		return _parentStrutsPath;
@@ -3034,7 +3034,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getPortletId(), getPluginPackage(), getDefaultPluginSetting(),
 			getCompanyId(), getTimestamp(), getIcon(), getVirtualPath(),
 			getStrutsPath(), getParentStrutsPath(), getPortletName(),
-		    getDisplayName(), getPortletClass(), getConfigurationActionClass(),
+			getDisplayName(), getPortletClass(), getConfigurationActionClass(),
 			getIndexerClass(), getOpenSearchClass(), getSchedulerEntries(),
 			getPortletURLClass(), getFriendlyURLMapperClass(),
 			getFriendlyURLMapping(), getFriendlyURLRoutes(),
@@ -3138,6 +3138,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The struts path of the portlet.
 	 */
 	private String _strutsPath;
+
+	/**
+	 * The parent struts path of the portlet.
+	 */
+	private String _parentStrutsPath;
 
 	/**
 	 * The name of the portlet.
@@ -3526,11 +3531,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The resource bundle of the portlet.
 	 */
 	private String _resourceBundle;
-
-	/**
-	 * The parent struts path.
-	 */
-	private String _parentStrutsPath;
 
 	/**
 	 * The portlet info of the portlet.

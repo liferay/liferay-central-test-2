@@ -2945,6 +2945,7 @@
 			<transient name="maximizeEdit" />
 			<transient name="maximizeHelp" />
 			<transient name="openSearchClass" />
+			<transient name="parentStrutsPath" />
 			<transient name="pluginPackage" />
 			<transient name="pollerProcessorClass" />
 			<transient name="popMessageListenerClass" />
