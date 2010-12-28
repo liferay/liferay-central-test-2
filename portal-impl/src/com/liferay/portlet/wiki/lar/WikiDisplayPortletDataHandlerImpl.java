@@ -28,8 +28,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl;
-import com.liferay.portlet.imagegallery.lar.IGPortletDataHandlerImpl;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -37,7 +35,6 @@ import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
 import com.liferay.portlet.wiki.util.WikiCacheThreadLocal;
 import com.liferay.portlet.wiki.util.WikiCacheUtil;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
@@ -179,53 +176,6 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		Element pagesElement = rootElement.element("pages");
-
-		Element dlFoldersElement = pagesElement.element("dl-folders");
-
-		List<Element> dlFolderElements = dlFoldersElement.elements("folder");
-
-		for (Element dlFolderElement : dlFolderElements) {
-			DLPortletDataHandlerImpl.importFolder(
-				portletDataContext, dlFolderElement);
-		}
-
-		Element dlFileEntriesElement = pagesElement.element("dl-file-entries");
-
-		List<Element> dlFileEntryElements = dlFileEntriesElement.elements(
-			"file-entry");
-
-		for (Element dlFileEntryElement : dlFileEntryElements) {
-			DLPortletDataHandlerImpl.importFileEntry(
-				portletDataContext, dlFileEntryElement);
-		}
-
-		Element dlFileRanksElement = pagesElement.element("dl-file-ranks");
-
-		List<Element> dlFileRankElements = dlFileRanksElement.elements(
-			"file-rank");
-
-		for (Element dlFileRankElement : dlFileRankElements) {
-			DLPortletDataHandlerImpl.importFileRank(
-				portletDataContext, dlFileRankElement);
-		}
-
-		Element igFoldersElement = pagesElement.element("ig-folders");
-
-		List<Element> igFolderElements = igFoldersElement.elements("folder");
-
-		for (Element igFolderElement : igFolderElements) {
-			IGPortletDataHandlerImpl.importFolder(
-				portletDataContext, igFolderElement);
-		}
-
-		Element igImagesElement = pagesElement.element("ig-images");
-
-		List<Element> igImageElements = igImagesElement.elements("image");
-
-		for (Element igImageElement : igImageElements) {
-			IGPortletDataHandlerImpl.importImage(
-				portletDataContext, igImageElement);
-		}
 
 		for (Element pageElement : pagesElement.elements("page")) {
 			String path = pageElement.attributeValue("path");
