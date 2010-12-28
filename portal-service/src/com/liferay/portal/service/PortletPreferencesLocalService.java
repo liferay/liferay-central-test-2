@@ -271,7 +271,7 @@ public interface PortletPreferencesLocalService {
 
 	public com.liferay.portal.model.PortletPreferences updatePreferences(
 		long ownerId, int ownerType, long plid, java.lang.String portletId,
-		javax.portlet.PortletPreferences preferences)
+		javax.portlet.PortletPreferences portletPreferences)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.PortletPreferences updatePreferences(
