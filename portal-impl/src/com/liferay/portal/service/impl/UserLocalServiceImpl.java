@@ -1176,6 +1176,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public String encryptUserId(String name)
 		throws PortalException, SystemException {
 
