@@ -43,8 +43,9 @@ public class PermissionsURLTag extends TagSupport {
 
 	public static void doTag(
 			String redirect, String modelResource,
-			String modelResourceDescription, String resourcePrimKey, String var,
-			int[] roleTypes, String windowState, PageContext pageContext)
+			String modelResourceDescription, String resourcePrimKey,
+			String windowState, String var, int[] roleTypes,
+			PageContext pageContext)
 		throws Exception {
 
 		HttpServletRequest request =
@@ -59,7 +60,7 @@ public class PermissionsURLTag extends TagSupport {
 
 		if (Validator.isNull(redirect) &&
 			(Validator.isNull(windowState) ||
-				!windowState.equals(LiferayWindowState.POP_UP.toString()))) {
+			 !windowState.equals(LiferayWindowState.POP_UP.toString()))) {
 
 			redirect = PortalUtil.getCurrentURL(request);
 		}
@@ -116,7 +117,7 @@ public class PermissionsURLTag extends TagSupport {
 		try {
 			doTag(
 				_redirect, _modelResource, _modelResourceDescription,
-				_resourcePrimKey, _var, _roleTypes, _windowState, pageContext);
+				_resourcePrimKey, _windowState, _var, _roleTypes, pageContext);
 		}
 		catch (Exception e) {
 			throw new JspException(e);
