@@ -14,18 +14,13 @@
 
 package com.liferay.portal.upgrade.v6_1_0;
 
-import com.liferay.portal.kernel.upgrade.BaseUpgradePortletPreferences;
-import com.liferay.portal.kernel.util.TextFormatter;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
-
-import java.util.Map;
-
-import javax.portlet.PortletPreferences;
+import com.liferay.portal.kernel.upgrade.CamelCaseUpgradePortletPreferences;
 
 /**
  * @author Julio Camarero
  */
-public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
+public class UpgradePortletPreferences
+	extends CamelCaseUpgradePortletPreferences {
 
 	protected String[] getPortletIds() {
 		return new String[] {
@@ -35,30 +30,6 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 			"85_INSTANCE_%", "100", "101_INSTANCE_%", "102_INSTANCE_%", "114",
 			"115", "118_INSTANCE_%", "122_INSTANCE_%"
 		};
-	}
-
-	protected String upgradePreferences(
-			long companyId, long ownerId, int ownerType, long plid,
-			String portletId, String xml)
-		throws Exception {
-
-		PortletPreferences portletPreferences =
-			PortletPreferencesFactoryUtil.fromXML(
-				companyId, ownerId, ownerType, plid, portletId, xml);
-
-		Map<String, String[]> preferencesMap = portletPreferences.getMap();
-
-		for (String oldName : preferencesMap.keySet()) {
-			String[] values = preferencesMap.get(oldName);
-
-			String newName = TextFormatter.format(oldName, TextFormatter.M);
-
-			portletPreferences.reset(oldName);
-
-			portletPreferences.setValues(newName, values);
-		}
-
-		return PortletPreferencesFactoryUtil.toXML(portletPreferences);
 	}
 
 }
