@@ -379,19 +379,24 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		}
 	}
 
-	public void getSubfolderIds(
-			List<Long> folderIds, long groupId, long folderId, boolean recurse)
+	public List<Long> getSubfolderIds(
+			long groupId, long folderId, boolean recurse)
 		throws SystemException {
+
+		List<Long> folderIds = new ArrayList<Long>();
 
 		List<DLFolder> folders = dlFolderPersistence.filterFindByG_P(
 			groupId, folderId);
 
 		for (DLFolder folder : folders) {
-			folderIds.add(folder.getFolderId());
+			List<Long> subFolderIds = getSubfolderIds(
+				folder.getGroupId(), folder.getFolderId(), recurse);
 
-			getSubfolderIds(
-				folderIds, folder.getGroupId(), folder.getFolderId(), recurse);
+			folderIds.add(folder.getFolderId());
+			folderIds.addAll(subFolderIds);
 		}
+
+		return folderIds;
 	}
 
 	public boolean hasFileEntryLock(long fileEntryId)
@@ -872,11 +877,9 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	protected long[] getFolderIds(long groupId, long folderId)
 		throws SystemException {
 
-		List<Long> folderIds = new ArrayList<Long>();
+		List<Long> folderIds = getSubfolderIds(groupId, folderId, true);
 
-		folderIds.add(folderId);
-
-		getSubfolderIds(folderIds, groupId, folderId, true);
+		folderIds.add(0, folderId);
 
 		return ArrayUtil.toArray(
 			folderIds.toArray(new Long[folderIds.size()]));

@@ -229,11 +229,10 @@ public class DLRepositoryServiceUtil {
 				   .getGroupFileEntriesCount(groupId, userId, rootFolderId);
 	}
 
-	public static void getSubfolderIds(
-		java.util.List<java.lang.Long> folderIds, long groupId, long folderId,
-		boolean recurse)
+	public static java.util.List<java.lang.Long> getSubfolderIds(long groupId,
+		long folderId, boolean recurse)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().getSubfolderIds(folderIds, groupId, folderId, recurse);
+		return getService().getSubfolderIds(groupId, folderId, recurse);
 	}
 
 	public static boolean hasFileEntryLock(long fileEntryId)

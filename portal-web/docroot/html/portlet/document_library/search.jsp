@@ -30,13 +30,11 @@ if (searchFolderId > 0) {
 	folderIdsArray = new long[] {searchFolderId};
 }
 else {
-	List folderIds = new ArrayList();
-
 	long folderId = DLFolderConstants.getFolderId(scopeGroupId, DLFolderConstants.getDataRepositoryId(scopeGroupId, searchFolderIds));
 
-	folderIds.add(new Long(folderId));
+	List folderIds = DLAppServiceUtil.getSubfolderIds(scopeGroupId, searchFolderIds);
 
-	DLAppServiceUtil.getSubfolderIds(folderIds, scopeGroupId, searchFolderIds);
+	folderIds.add(0, new Long(folderId));
 
 	folderIdsArray = StringUtil.split(StringUtil.merge(folderIds), 0L);
 }

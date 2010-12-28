@@ -343,18 +343,16 @@ public class DLAppServiceUtil {
 				   .getGroupFileEntriesCount(repositoryId, userId, rootFolderId);
 	}
 
-	public static void getSubfolderIds(
-		java.util.List<java.lang.Long> folderIds, long repositoryId,
-		long folderId)
+	public static java.util.List<java.lang.Long> getSubfolderIds(
+		long repositoryId, long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().getSubfolderIds(folderIds, repositoryId, folderId);
+		return getService().getSubfolderIds(repositoryId, folderId);
 	}
 
-	public static void getSubfolderIds(
-		java.util.List<java.lang.Long> folderIds, long repositoryId,
-		long folderId, boolean recurse)
+	public static java.util.List<java.lang.Long> getSubfolderIds(
+		long repositoryId, long folderId, boolean recurse)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().getSubfolderIds(folderIds, repositoryId, folderId, recurse);
+		return getService().getSubfolderIds(repositoryId, folderId, recurse);
 	}
 
 	public static com.liferay.portal.model.Lock lockFileEntry(long fileEntryId)

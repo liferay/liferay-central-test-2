@@ -213,11 +213,10 @@ public class DLRepositoryServiceWrapper implements DLRepositoryService {
 			rootFolderId);
 	}
 
-	public void getSubfolderIds(java.util.List<java.lang.Long> folderIds,
-		long groupId, long folderId, boolean recurse)
+	public java.util.List<java.lang.Long> getSubfolderIds(long groupId,
+		long folderId, boolean recurse)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		_dlRepositoryService.getSubfolderIds(folderIds, groupId, folderId,
-			recurse);
+		return _dlRepositoryService.getSubfolderIds(groupId, folderId, recurse);
 	}
 
 	public boolean hasFileEntryLock(long fileEntryId)

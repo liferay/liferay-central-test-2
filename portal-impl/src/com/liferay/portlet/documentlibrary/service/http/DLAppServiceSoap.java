@@ -567,11 +567,13 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static void getSubfolderIds(Long[] folderIds, long repositoryId,
+	public static java.lang.Long[] getSubfolderIds(long repositoryId,
 		long folderId) throws RemoteException {
 		try {
-			DLAppServiceUtil.getSubfolderIds(ListUtil.toList(folderIds),
-				repositoryId, folderId);
+			java.util.List<java.lang.Long> returnValue = DLAppServiceUtil.getSubfolderIds(repositoryId,
+					folderId);
+
+			return returnValue.toArray(new java.lang.Long[returnValue.size()]);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -580,11 +582,13 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static void getSubfolderIds(Long[] folderIds, long repositoryId,
+	public static java.lang.Long[] getSubfolderIds(long repositoryId,
 		long folderId, boolean recurse) throws RemoteException {
 		try {
-			DLAppServiceUtil.getSubfolderIds(ListUtil.toList(folderIds),
-				repositoryId, folderId, recurse);
+			java.util.List<java.lang.Long> returnValue = DLAppServiceUtil.getSubfolderIds(repositoryId,
+					folderId, recurse);
+
+			return returnValue.toArray(new java.lang.Long[returnValue.size()]);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

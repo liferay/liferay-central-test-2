@@ -116,8 +116,7 @@ public interface Repository {
 
 	public long getRepositoryId();
 
-	public void getSubfolderIds(
-			List<Long> folderIds, long folderId, boolean recurse)
+	public List<Long> getSubfolderIds(long folderId, boolean recurse)
 		throws SystemException;
 
 	public Lock lockFileEntry(long fileEntryId)

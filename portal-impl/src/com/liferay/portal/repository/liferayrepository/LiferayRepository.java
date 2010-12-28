@@ -260,13 +260,11 @@ public class LiferayRepository
 			getGroupId(), userId, toFolderId(rootFolderId));
 	}
 
-	public void getSubfolderIds(
-			List<Long> folderIds, long folderId, boolean recurse)
+	public List<Long> getSubfolderIds(long folderId, boolean recurse)
 		throws SystemException {
 
-		DLRepositoryServiceUtil.getSubfolderIds(
-			toFolderIds(folderIds), getGroupId(), toFolderId(folderId),
-			recurse);
+		return DLRepositoryServiceUtil.getSubfolderIds(
+			getGroupId(), toFolderId(folderId), recurse);
 	}
 
 	public Lock lockFileEntry(long fileEntryId)

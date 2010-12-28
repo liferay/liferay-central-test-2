@@ -431,21 +431,19 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		return repository.getRepositoryFileEntriesCount(userId, rootFolderId);
 	}
 
-	public void getSubfolderIds(
-			List<Long> folderIds, long repositoryId, long folderId)
+	public List<Long> getSubfolderIds(long repositoryId, long folderId)
 		throws SystemException {
 
-		getSubfolderIds(folderIds, repositoryId, folderId, true);
+		return getSubfolderIds(repositoryId, folderId, true);
 	}
 
-	public void getSubfolderIds(
-			List<Long> folderIds, long repositoryId, long folderId,
-			boolean recurse)
+	public List<Long> getSubfolderIds(
+			long repositoryId, long folderId, boolean recurse)
 		throws SystemException {
 
 		Repository repository = getRepository(repositoryId);
 
-		repository.getSubfolderIds(folderIds, folderId, recurse);
+		return repository.getSubfolderIds(folderId, recurse);
 	}
 
 	public Lock lockFileEntry(long fileEntryId)

@@ -262,13 +262,13 @@ public interface DLAppService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void getSubfolderIds(java.util.List<java.lang.Long> folderIds,
-		long repositoryId, long folderId)
+	public java.util.List<java.lang.Long> getSubfolderIds(long repositoryId,
+		long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void getSubfolderIds(java.util.List<java.lang.Long> folderIds,
-		long repositoryId, long folderId, boolean recurse)
+	public java.util.List<java.lang.Long> getSubfolderIds(long repositoryId,
+		long folderId, boolean recurse)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Lock lockFileEntry(long fileEntryId)

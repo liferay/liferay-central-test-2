@@ -357,11 +357,13 @@ public class DLRepositoryServiceSoap {
 		}
 	}
 
-	public static void getSubfolderIds(Long[] folderIds, long groupId,
-		long folderId, boolean recurse) throws RemoteException {
+	public static java.lang.Long[] getSubfolderIds(long groupId, long folderId,
+		boolean recurse) throws RemoteException {
 		try {
-			DLRepositoryServiceUtil.getSubfolderIds(ListUtil.toList(folderIds),
-				groupId, folderId, recurse);
+			java.util.List<java.lang.Long> returnValue = DLRepositoryServiceUtil.getSubfolderIds(groupId,
+					folderId, recurse);
+
+			return returnValue.toArray(new java.lang.Long[returnValue.size()]);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

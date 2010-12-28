@@ -15,9 +15,7 @@
 --%>
 
 <%
-List<Long> subfolderIds = new ArrayList<Long>();
-
-DLAppServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId(), false);
+List<Long> subfolderIds = DLAppServiceUtil.getSubfolderIds(scopeGroupId, curFolder.getFolderId(), false);
 
 int curFoldersCount = subfolderIds.size();
 

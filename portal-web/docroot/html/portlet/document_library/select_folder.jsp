@@ -86,9 +86,7 @@ if (folder != null) {
 
 		// Statistics
 
-		List<Long> subfolderIds = new ArrayList<Long>();
-
-		DLAppServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId(), false);
+		List<Long> subfolderIds = DLAppServiceUtil.getSubfolderIds(scopeGroupId, curFolder.getFolderId(), false);
 
 		int foldersCount = subfolderIds.size();
 

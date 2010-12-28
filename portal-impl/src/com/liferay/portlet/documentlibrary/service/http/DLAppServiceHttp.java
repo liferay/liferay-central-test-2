@@ -1448,19 +1448,20 @@ public class DLAppServiceHttp {
 		}
 	}
 
-	public static void getSubfolderIds(HttpPrincipal httpPrincipal,
-		java.util.List<java.lang.Long> folderIds, long repositoryId,
-		long folderId)
+	public static java.util.List<java.lang.Long> getSubfolderIds(
+		HttpPrincipal httpPrincipal, long repositoryId, long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLAppServiceUtil.class.getName(),
 					"getSubfolderIds", _getSubfolderIdsParameterTypes39);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					folderIds, repositoryId, folderId);
+					repositoryId, folderId);
+
+			Object returnObj = null;
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -1469,6 +1470,8 @@ public class DLAppServiceHttp {
 
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
+
+			return (java.util.List<java.lang.Long>)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -1477,19 +1480,21 @@ public class DLAppServiceHttp {
 		}
 	}
 
-	public static void getSubfolderIds(HttpPrincipal httpPrincipal,
-		java.util.List<java.lang.Long> folderIds, long repositoryId,
-		long folderId, boolean recurse)
+	public static java.util.List<java.lang.Long> getSubfolderIds(
+		HttpPrincipal httpPrincipal, long repositoryId, long folderId,
+		boolean recurse)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLAppServiceUtil.class.getName(),
 					"getSubfolderIds", _getSubfolderIdsParameterTypes40);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					folderIds, repositoryId, folderId, recurse);
+					repositoryId, folderId, recurse);
+
+			Object returnObj = null;
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -1498,6 +1503,8 @@ public class DLAppServiceHttp {
 
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
 			}
+
+			return (java.util.List<java.lang.Long>)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -2356,10 +2363,10 @@ public class DLAppServiceHttp {
 			long.class, long.class, long.class
 		};
 	private static final Class<?>[] _getSubfolderIdsParameterTypes39 = new Class[] {
-			java.util.List.class, long.class, long.class
+			long.class, long.class
 		};
 	private static final Class<?>[] _getSubfolderIdsParameterTypes40 = new Class[] {
-			java.util.List.class, long.class, long.class, boolean.class
+			long.class, long.class, boolean.class
 		};
 	private static final Class<?>[] _lockFileEntryParameterTypes41 = new Class[] {
 			long.class
