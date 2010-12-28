@@ -23,6 +23,8 @@ import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
+import com.liferay.portal.messaging.LayoutsLocalPublisherRequest;
+import com.liferay.portal.messaging.LayoutsRemotePublisherRequest;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutReference;
@@ -34,8 +36,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.LayoutServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
-import com.liferay.portlet.communities.messaging.LayoutsLocalPublisherRequest;
-import com.liferay.portlet.communities.messaging.LayoutsRemotePublisherRequest;
 
 import java.io.File;
 import java.io.InputStream;

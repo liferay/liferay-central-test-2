@@ -45,6 +45,8 @@ import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lar.LayoutExporter;
+import com.liferay.portal.messaging.LayoutsLocalPublisherRequest;
+import com.liferay.portal.messaging.LayoutsRemotePublisherRequest;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
@@ -71,8 +73,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.communities.messaging.LayoutsLocalPublisherRequest;
-import com.liferay.portlet.communities.messaging.LayoutsRemotePublisherRequest;
 
 import java.io.File;
 

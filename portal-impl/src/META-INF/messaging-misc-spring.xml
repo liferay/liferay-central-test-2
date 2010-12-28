@@ -76,18 +76,18 @@
 	<bean id="messageListener.hot_deploy" class="com.liferay.portal.deploy.hot.messaging.HotDeployMessageListener" />
 	<bean id="messageListener.journal" class="com.liferay.portlet.journal.messaging.JournalMessageListener" />
 	<bean id="messageListener.layouts_local_publisher" class="com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper">
-		<property name="className" value="com.liferay.portlet.communities.messaging.LayoutsLocalPublisherMessageListener" />
+		<property name="className" value="com.liferay.portal.messaging.LayoutsLocalPublisherMessageListener" />
 		<property name="messageListener">
-			<bean class="com.liferay.portlet.communities.messaging.LayoutsLocalPublisherMessageListener">
+			<bean class="com.liferay.portal.messaging.LayoutsLocalPublisherMessageListener">
 				<property name="responseSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
 				<property name="statusSender" ref="messageSender.service_request_status" />
 			</bean>
 		</property>
 	</bean>
 	<bean id="messageListener.layouts_remote_publisher" class="com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper">
-		<property name="className" value="com.liferay.portlet.communities.messaging.LayoutsRemotePublisherMessageListener" />
+		<property name="className" value="com.liferay.portal.messaging.LayoutsRemotePublisherMessageListener" />
 		<property name="messageListener">
-			<bean class="com.liferay.portlet.communities.messaging.LayoutsRemotePublisherMessageListener">
+			<bean class="com.liferay.portal.messaging.LayoutsRemotePublisherMessageListener">
 				<property name="responseSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
 				<property name="statusSender" ref="messageSender.service_request_status" />
 			</bean>
