@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.xml.simple.Element;
 import com.liferay.portal.xml.StAXReaderUtil;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -46,13 +45,15 @@ public class PortletPreferencesSerializer {
 	public static PortletPreferences fromDefaultXML(String xml)
 		throws SystemException {
 
-		PortletPreferencesImpl preferences = new PortletPreferencesImpl();
+		PortletPreferencesImpl portletPreferencesImpl =
+			new PortletPreferencesImpl();
 
 		if (Validator.isNull(xml)) {
-			return preferences;
+			return portletPreferencesImpl;
 		}
 
-		Map<String, Preference> preferencesMap = preferences.getPreferences();
+		Map<String, Preference> preferencesMap =
+			portletPreferencesImpl.getPreferences();
 
 		XMLEventReader xmlEventReader = null;
 
@@ -79,7 +80,7 @@ public class PortletPreferencesSerializer {
 				}
 			}
 
-			return preferences;
+			return portletPreferencesImpl;
 		}
 		catch (XMLStreamException xse) {
 			throw new SystemException(xse);
@@ -101,32 +102,28 @@ public class PortletPreferencesSerializer {
 		throws SystemException {
 
 		try {
-			PortletPreferencesImpl preferences =
+			PortletPreferencesImpl portletPreferencesImpl =
 				(PortletPreferencesImpl)fromDefaultXML(xml);
 
-			preferences = new PortletPreferencesImpl(
+			portletPreferencesImpl = new PortletPreferencesImpl(
 				companyId, ownerId, ownerType, plid, portletId,
-				preferences.getPreferences());
+				portletPreferencesImpl.getPreferences());
 
-			return preferences;
+			return portletPreferencesImpl;
 		}
 		catch (SystemException se) {
 			throw se;
 		}
 	}
 
-	public static String toXML(PortletPreferencesImpl preferences) {
-		Map<String, Preference> preferencesMap = preferences.getPreferences();
+	public static String toXML(PortletPreferencesImpl portletPreferencesImpl) {
+		Map<String, Preference> preferencesMap =
+			portletPreferencesImpl.getPreferences();
 
 		Element portletPreferencesElement = new Element(
 			"portlet-preferences", false);
 
-		Iterator<Map.Entry<String, Preference>> itr =
-			preferencesMap.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry<String, Preference> entry = itr.next();
-
+		for (Map.Entry<String, Preference> entry : preferencesMap.entrySet()) {
 			Preference preference = entry.getValue();
 
 			Element preferenceElement = portletPreferencesElement.addElement(
