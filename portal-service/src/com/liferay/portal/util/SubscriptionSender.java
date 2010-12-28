@@ -33,6 +33,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.io.UnsupportedEncodingException;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -59,7 +60,8 @@ public class SubscriptionSender {
 		}
 
 		if (bulk) {
-			InternetAddress to = new InternetAddress(replyToAddress);
+			InternetAddress to = 
+				new InternetAddress(replyToAddress, replyToAddress);
 
 			sendEmail(to, LocaleUtil.getDefault());
 		}
@@ -305,7 +307,8 @@ public class SubscriptionSender {
 
 	protected String body;
 	protected boolean bulk;
-	protected List<InternetAddress> bulkAddresses;
+	protected List<InternetAddress> bulkAddresses = 
+		new ArrayList<InternetAddress>();
 	protected long companyId;
 	protected Map<String, Object> context = new HashMap<String, Object>();
 	protected InternetAddress from;
