@@ -2658,16 +2658,17 @@ public class PortalImpl implements Portal {
 		RenderRequest renderRequest = (RenderRequest)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
-		PortletPreferences preferences = null;
+		PortletPreferences portletPreferences = null;
 
 		if (renderRequest != null) {
-			PortletPreferencesWrapper preferencesWrapper =
+			PortletPreferencesWrapper portletPreferencesWrapper =
 				(PortletPreferencesWrapper)renderRequest.getPreferences();
 
-			preferences = preferencesWrapper.getPreferencesImpl();
+			portletPreferences =
+				portletPreferencesWrapper.getPortletPreferencesImpl();
 		}
 
-		return preferences;
+		return portletPreferences;
 	}
 
 	public PreferencesValidator getPreferencesValidator(Portlet portlet) {
@@ -4043,16 +4044,16 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	public void storePreferences(PortletPreferences preferences)
+	public void storePreferences(PortletPreferences portletPreferences)
 		throws IOException, ValidatorException {
 
-		PortletPreferencesWrapper preferencesWrapper =
-			(PortletPreferencesWrapper)preferences;
+		PortletPreferencesWrapper portletPreferencesWrapper =
+			(PortletPreferencesWrapper)portletPreferences;
 
-		PortletPreferencesImpl preferencesImpl =
-			preferencesWrapper.getPreferencesImpl();
+		PortletPreferencesImpl portletPreferencesImpl =
+			portletPreferencesWrapper.getPortletPreferencesImpl();
 
-		preferencesImpl.store();
+		portletPreferencesImpl.store();
 	}
 
 	public String transformCustomSQL(String sql) {

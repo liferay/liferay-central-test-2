@@ -17,8 +17,8 @@ package com.liferay.portal.velocity;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.PortletConstants;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
-import com.liferay.portlet.PortletPreferencesSerializer;
 
 import javax.portlet.ReadOnlyException;
 
@@ -28,26 +28,26 @@ import javax.portlet.ReadOnlyException;
 public class VelocityPortletPreferences {
 
 	public VelocityPortletPreferences() {
-		_preferencesImpl = new PortletPreferencesImpl();
+		_portletPreferencesImpl = new PortletPreferencesImpl();
 	}
 
 	public void reset() {
-		_preferencesImpl.reset();
+		_portletPreferencesImpl.reset();
 	}
 
 	public void setValue(String key, String value) throws ReadOnlyException {
-		_preferencesImpl.setValue(key, value);
+		_portletPreferencesImpl.setValue(key, value);
 	}
 
 	public void setValues(String key, String[] values)
 		throws ReadOnlyException {
 
-		_preferencesImpl.setValues(key, values);
+		_portletPreferencesImpl.setValues(key, values);
 	}
 
 	public String toString() {
 		try {
-			return PortletPreferencesSerializer.toXML(_preferencesImpl);
+			return PortletPreferencesFactoryUtil.toXML(_portletPreferencesImpl);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -59,6 +59,6 @@ public class VelocityPortletPreferences {
 	private static Log _log = LogFactoryUtil.getLog(
 		VelocityPortletPreferences.class);
 
-	private PortletPreferencesImpl _preferencesImpl;
+	private PortletPreferencesImpl _portletPreferencesImpl;
 
 }

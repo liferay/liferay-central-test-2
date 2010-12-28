@@ -24,8 +24,9 @@ import com.liferay.portal.upgrade.v5_2_3.util.DLFileEntryTable;
 import com.liferay.portal.upgrade.v5_2_3.util.DLFileRankTable;
 import com.liferay.portal.upgrade.v5_2_3.util.DLFileShortcutTable;
 import com.liferay.portal.upgrade.v5_2_3.util.DLFileVersionTable;
-import com.liferay.portlet.PortletPreferencesImpl;
-import com.liferay.portlet.PortletPreferencesSerializer;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
+
+import javax.portlet.PortletPreferences;
 
 /**
  * @author Samuel Kong
@@ -153,18 +154,18 @@ public class UpgradeDocumentLibrary extends BaseUpgradePortletPreferences {
 			String portletId, String xml)
 		throws Exception {
 
-		PortletPreferencesImpl preferences =
-			PortletPreferencesSerializer.fromXML(
+		PortletPreferences portletPreferences =
+			PortletPreferencesFactoryUtil.fromXML(
 				companyId, ownerId, ownerType, plid, portletId, xml);
 
-		String fileEntryColumns = preferences.getValue(
+		String fileEntryColumns = portletPreferences.getValue(
 			"fileEntryColumns", StringPool.BLANK);
 
 		if (Validator.isNull(fileEntryColumns)) {
-			preferences.reset("fileEntryColumns");
+			portletPreferences.reset("fileEntryColumns");
 		}
 
-		return PortletPreferencesSerializer.toXML(preferences);
+		return PortletPreferencesFactoryUtil.toXML(portletPreferences);
 	}
 
 }

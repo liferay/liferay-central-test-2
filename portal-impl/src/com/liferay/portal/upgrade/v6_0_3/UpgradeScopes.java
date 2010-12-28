@@ -18,8 +18,9 @@ import com.liferay.portal.kernel.upgrade.BaseUpgradePortletPreferences;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.verify.VerifyUUID;
-import com.liferay.portlet.PortletPreferencesImpl;
-import com.liferay.portlet.PortletPreferencesSerializer;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
+
+import javax.portlet.PortletPreferences;
 
 /**
  * @author Julio Camarero
@@ -47,24 +48,24 @@ public class UpgradeScopes extends BaseUpgradePortletPreferences {
 			String portletId, String xml)
 		throws Exception {
 
-		PortletPreferencesImpl preferences =
-			PortletPreferencesSerializer.fromXML(
+		PortletPreferences portletPreferences =
+			PortletPreferencesFactoryUtil.fromXML(
 				companyId, ownerId, ownerType, plid, portletId, xml);
 
 		long linkToLayoutId = GetterUtil.getLong(
-			preferences.getValue("lfr-scope-layout-id", null));
+			portletPreferences.getValue("lfr-scope-layout-id", null));
 
 		if (linkToLayoutId > 0) {
 			String uuid = getLayoutUuid(plid, linkToLayoutId);
 
 			if (uuid != null) {
-				preferences.setValue("lfr-scope-layout-uuid", uuid);
+				portletPreferences.setValue("lfr-scope-layout-uuid", uuid);
 			}
 
-			preferences.reset("lfr-scope-layout-id");
+			portletPreferences.reset("lfr-scope-layout-id");
 		}
 
-		return PortletPreferencesSerializer.toXML(preferences);
+		return PortletPreferencesFactoryUtil.toXML(portletPreferences);
 	}
 
 }

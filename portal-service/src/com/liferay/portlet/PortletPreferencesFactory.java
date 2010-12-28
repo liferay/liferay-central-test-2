@@ -31,6 +31,13 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface PortletPreferencesFactory {
 
+	public PortletPreferences fromDefaultXML(String xml) throws SystemException;
+
+	public PortletPreferences fromXML(
+			long companyId, long ownerId, int ownerType, long plid,
+			String portletId, String xml)
+		throws SystemException;
+
 	public PortletPreferences getLayoutPortletSetup(
 			Layout layout, String portletId)
 		throws SystemException;
@@ -81,5 +88,7 @@ public interface PortletPreferencesFactory {
 	public PortletPreferences getPreferences(HttpServletRequest request);
 
 	public PreferencesValidator getPreferencesValidator(Portlet portlet);
+
+	public String toXML(PortletPreferences portletPreferences);
 
 }

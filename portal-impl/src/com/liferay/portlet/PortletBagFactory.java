@@ -243,7 +243,7 @@ public class PortletBagFactory {
 			try {
 				if (PropsValues.PREFERENCE_VALIDATE_ON_STARTUP) {
 					preferencesValidatorInstance.validate(
-						PortletPreferencesSerializer.fromDefaultXML(
+						PortletPreferencesFactoryUtil.fromDefaultXML(
 							portlet.getDefaultPreferences()));
 				}
 			}

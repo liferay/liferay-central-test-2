@@ -16,9 +16,13 @@ package com.liferay.portlet;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.simple.Element;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -37,6 +41,11 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.xml.StAXReaderUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
@@ -45,11 +54,92 @@ import javax.portlet.PreferencesValidator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import javax.xml.stream.XMLEventReader;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.events.EndElement;
+import javax.xml.stream.events.StartElement;
+import javax.xml.stream.events.XMLEvent;
+
 /**
  * @author Brian Wing Shun Chan
  */
 public class PortletPreferencesFactoryImpl
 	implements PortletPreferencesFactory {
+
+	public PortletPreferences fromDefaultXML(String xml)
+		throws SystemException {
+
+		PortletPreferencesImpl portletPreferencesImpl =
+			new PortletPreferencesImpl();
+
+		if (Validator.isNull(xml)) {
+			return portletPreferencesImpl;
+		}
+
+		Map<String, Preference> preferencesMap =
+			portletPreferencesImpl.getPreferences();
+
+		XMLEventReader xmlEventReader = null;
+
+		try {
+			XMLInputFactory xmlInputFactory =
+				StAXReaderUtil.getXMLInputFactory();
+
+			xmlEventReader = xmlInputFactory.createXMLEventReader(
+				new UnsyncStringReader(xml));
+
+			while (xmlEventReader.hasNext()) {
+				XMLEvent xmlEvent = xmlEventReader.nextEvent();
+
+				if (xmlEvent.isStartElement()) {
+					StartElement startElement = xmlEvent.asStartElement();
+
+					String elementName = startElement.getName().getLocalPart();
+
+					if (elementName.equals("preference")) {
+						Preference preference = readPreference(xmlEventReader);
+
+						preferencesMap.put(preference.getName(), preference);
+					}
+				}
+			}
+
+			return portletPreferencesImpl;
+		}
+		catch (XMLStreamException xse) {
+			throw new SystemException(xse);
+		}
+		finally {
+			if (xmlEventReader != null) {
+				try {
+					xmlEventReader.close();
+				}
+				catch (XMLStreamException xse) {
+				}
+			}
+		}
+	}
+
+	public PortletPreferencesImpl fromXML(
+			long companyId, long ownerId, int ownerType, long plid,
+			String portletId, String xml)
+		throws SystemException {
+
+		try {
+			PortletPreferencesImpl portletPreferencesImpl =
+				(PortletPreferencesImpl)fromDefaultXML(xml);
+
+			portletPreferencesImpl = new PortletPreferencesImpl(
+				companyId, ownerId, ownerType, plid, portletId,
+				portletPreferencesImpl.getPreferences());
+
+			return portletPreferencesImpl;
+		}
+		catch (SystemException se) {
+			throw se;
+		}
+	}
 
 	public PortletPreferences getLayoutPortletSetup(
 			Layout layout, String portletId)
@@ -380,10 +470,11 @@ public class PortletPreferencesFactoryImpl
 		PortletPreferences portletPreferences = null;
 
 		if (portletRequest != null) {
-			PortletPreferencesWrapper preferencesWrapper =
+			PortletPreferencesWrapper portletPreferencesWrapper =
 				(PortletPreferencesWrapper)portletRequest.getPreferences();
 
-			portletPreferences = preferencesWrapper.getPreferencesImpl();
+			portletPreferences =
+				portletPreferencesWrapper.getPortletPreferencesImpl();
 		}
 
 		return portletPreferences;
@@ -391,6 +482,80 @@ public class PortletPreferencesFactoryImpl
 
 	public PreferencesValidator getPreferencesValidator(Portlet portlet) {
 		return PortalUtil.getPreferencesValidator(portlet);
+	}
+
+	public String toXML(PortletPreferences portletPreferences) {
+		PortletPreferencesImpl portletPreferencesImpl =
+			(PortletPreferencesImpl)portletPreferences;
+
+		Map<String, Preference> preferencesMap =
+			portletPreferencesImpl.getPreferences();
+
+		Element portletPreferencesElement = new Element(
+			"portlet-preferences", false);
+
+		for (Map.Entry<String, Preference> entry : preferencesMap.entrySet()) {
+			Preference preference = entry.getValue();
+
+			Element preferenceElement = portletPreferencesElement.addElement(
+				"preference");
+
+			preferenceElement.addElement("name", preference.getName());
+
+			for (String value : preference.getValues()) {
+				preferenceElement.addElement("value", value);
+			}
+
+			if (preference.isReadOnly()) {
+				preferenceElement.addElement("read-only", Boolean.TRUE);
+			}
+		}
+
+		return portletPreferencesElement.toXMLString();
+	}
+
+	protected Preference readPreference(XMLEventReader xmlEventReader)
+		throws XMLStreamException {
+
+		String name = null;
+		List<String> values = new ArrayList<String>();
+		boolean readOnly = false;
+
+		while (xmlEventReader.hasNext()) {
+			XMLEvent xmlEvent = xmlEventReader.nextEvent();
+
+			if (xmlEvent.isStartElement()) {
+				StartElement startElement = xmlEvent.asStartElement();
+
+				String elementName = startElement.getName().getLocalPart();
+
+				if (elementName.equals("name")) {
+					name = StAXReaderUtil.read(xmlEventReader);
+				}
+				else if (elementName.equals("value")) {
+					String value = StAXReaderUtil.read(xmlEventReader);
+
+					values.add(value);
+				}
+				else if (elementName.equals("read-only")) {
+					String value = StAXReaderUtil.read(xmlEventReader);
+
+					readOnly = GetterUtil.getBoolean(value);
+				}
+			}
+			else if (xmlEvent.isEndElement()){
+				EndElement endElement = xmlEvent.asEndElement();
+
+				String elementName = endElement.getName().getLocalPart();
+
+				if (elementName.equals("preference")) {
+					break;
+				}
+			}
+		}
+
+		return new Preference(
+			name, values.toArray(new String[values.size()]), readOnly);
 	}
 
 }

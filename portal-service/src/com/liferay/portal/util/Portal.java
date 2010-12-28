@@ -760,7 +760,7 @@ public interface Portal {
 	 */
 	public void setPortalPort(HttpServletRequest request);
 
-	public void storePreferences(PortletPreferences preferences)
+	public void storePreferences(PortletPreferences portletPreferences)
 		throws IOException, ValidatorException;
 
 	public String transformCustomSQL(String sql);

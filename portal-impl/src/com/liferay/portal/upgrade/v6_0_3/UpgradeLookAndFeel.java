@@ -16,8 +16,9 @@ package com.liferay.portal.upgrade.v6_0_3;
 
 import com.liferay.portal.kernel.upgrade.BaseUpgradePortletPreferences;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portlet.PortletPreferencesImpl;
-import com.liferay.portlet.PortletPreferencesSerializer;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
+
+import javax.portlet.PortletPreferences;
 
 /**
  * @author Julio Camarero
@@ -33,30 +34,33 @@ public class UpgradeLookAndFeel extends BaseUpgradePortletPreferences {
 			String portletId, String xml)
 		throws Exception {
 
-		PortletPreferencesImpl preferences =
-			PortletPreferencesSerializer.fromXML(
+		PortletPreferences portletPreferences =
+			PortletPreferencesFactoryUtil.fromXML(
 				companyId, ownerId, ownerType, plid, portletId, xml);
 
 		long linkToLayoutId = GetterUtil.getLong(
-			preferences.getValue("portlet-setup-link-to-layout-id", null));
+			portletPreferences.getValue(
+				"portlet-setup-link-to-layout-id", null));
 
 		if (linkToLayoutId <= 0) {
 			linkToLayoutId = GetterUtil.getLong(
-				preferences.getValue("portlet-setup-link-to-plid", null));
+				portletPreferences.getValue(
+					"portlet-setup-link-to-plid", null));
 		}
 
 		if (linkToLayoutId > 0) {
 			String uuid = getLayoutUuid(plid, linkToLayoutId);
 
 			if (uuid != null) {
-				preferences.setValue("portlet-setup-link-to-layout-uuid", uuid);
+				portletPreferences.setValue(
+					"portlet-setup-link-to-layout-uuid", uuid);
 			}
 
-			preferences.reset("portlet-setup-link-to-layout-id");
-			preferences.reset("portlet-setup-link-to-plid");
+			portletPreferences.reset("portlet-setup-link-to-layout-id");
+			portletPreferences.reset("portlet-setup-link-to-plid");
 		}
 
-		return PortletPreferencesSerializer.toXML(preferences);
+		return PortletPreferencesFactoryUtil.toXML(portletPreferences);
 	}
 
 }

@@ -17,8 +17,9 @@ package com.liferay.portal.upgrade.v5_1_0;
 import com.liferay.portal.kernel.upgrade.BaseUpgradePortletPreferences;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portlet.PortletPreferencesImpl;
-import com.liferay.portlet.PortletPreferencesSerializer;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
+
+import javax.portlet.PortletPreferences;
 
 /**
  * @author Jorge Ferrer
@@ -35,12 +36,12 @@ public class UpgradeSitemap extends BaseUpgradePortletPreferences {
 			String portletId, String xml)
 		throws Exception {
 
-		PortletPreferencesImpl preferences =
-			PortletPreferencesSerializer.fromXML(
+		PortletPreferences portletPreferences =
+			PortletPreferencesFactoryUtil.fromXML(
 				companyId, ownerId, ownerType, plid, portletId, xml);
 
 		long rootPlid = GetterUtil.getLong(
-			preferences.getValue("root-plid", StringPool.BLANK));
+			portletPreferences.getValue("root-plid", StringPool.BLANK));
 
 		if (rootPlid > 0) {
 			Object[] layout = getLayout(rootPlid);
@@ -48,14 +49,14 @@ public class UpgradeSitemap extends BaseUpgradePortletPreferences {
 			if (layout != null) {
 				long layoutId = (Long)layout[3];
 
-				preferences.setValue(
+				portletPreferences.setValue(
 					"root-layout-id", String.valueOf(layoutId));
 			}
 		}
 
-		preferences.setValue("root-plid", null);
+		portletPreferences.setValue("root-plid", null);
 
-		return PortletPreferencesSerializer.toXML(preferences);
+		return PortletPreferencesFactoryUtil.toXML(portletPreferences);
 	}
 
 }

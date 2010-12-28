@@ -17,8 +17,9 @@ package com.liferay.portal.upgrade.v6_1_0;
 import com.liferay.portal.kernel.upgrade.BaseUpgradePortletPreferences;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portlet.PortletPreferencesImpl;
-import com.liferay.portlet.PortletPreferencesSerializer;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
+
+import javax.portlet.PortletPreferences;
 
 /**
  * @author Julio Camarero
@@ -34,11 +35,12 @@ public class UpgradeNavigation extends BaseUpgradePortletPreferences {
 			String portletId, String xml)
 		throws Exception {
 
-		PortletPreferencesImpl preferences =
-			PortletPreferencesSerializer.fromXML(
+		PortletPreferences portletPreferences =
+			PortletPreferencesFactoryUtil.fromXML(
 				companyId, ownerId, ownerType, plid, portletId, xml);
 
-		String displayStyle = preferences.getValue("display-style", null);
+		String displayStyle = portletPreferences.getValue(
+			"display-style", null);
 
 		if (Validator.isNumber(displayStyle)) {
 			int index = GetterUtil.getInteger(displayStyle);
@@ -47,10 +49,11 @@ public class UpgradeNavigation extends BaseUpgradePortletPreferences {
 				index = 0;
 			}
 
-			preferences.setValue("display-style", _DISPLAY_STYLES[index]);
+			portletPreferences.setValue(
+				"display-style", _DISPLAY_STYLES[index]);
 		}
 
-		return PortletPreferencesSerializer.toXML(preferences);
+		return PortletPreferencesFactoryUtil.toXML(portletPreferences);
 	}
 
 	private static final String[] _DISPLAY_STYLES = {

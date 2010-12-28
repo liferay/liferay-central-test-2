@@ -15,11 +15,12 @@
 package com.liferay.portal.upgrade.v6_1_0;
 
 import com.liferay.portal.kernel.upgrade.BaseUpgradePortletPreferences;
-import com.liferay.portlet.PortletPreferencesImpl;
-import com.liferay.portlet.PortletPreferencesSerializer;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.TextFormatter;
 
 import java.util.Map;
+
+import javax.portlet.PortletPreferences;
 
 /**
  * @author Julio Camarero
@@ -41,23 +42,23 @@ public class UpgradePortletPreferences extends BaseUpgradePortletPreferences {
 			String portletId, String xml)
 		throws Exception {
 
-		PortletPreferencesImpl preferences =
-			PortletPreferencesSerializer.fromXML(
+		PortletPreferences portletPreferences =
+			PortletPreferencesFactoryUtil.fromXML(
 				companyId, ownerId, ownerType, plid, portletId, xml);
 
-		Map<String, String[]> preferencesMap = preferences.getMap();
+		Map<String, String[]> preferencesMap = portletPreferences.getMap();
 
 		for (String oldName : preferencesMap.keySet()) {
 			String[] values = preferencesMap.get(oldName);
 
 			String newName = TextFormatter.format(oldName, TextFormatter.M);
 
-			preferences.reset(oldName);
+			portletPreferences.reset(oldName);
 
-			preferences.setValues(newName, values);
+			portletPreferences.setValues(newName, values);
 		}
 
-		return PortletPreferencesSerializer.toXML(preferences);
+		return PortletPreferencesFactoryUtil.toXML(portletPreferences);
 	}
 
 }

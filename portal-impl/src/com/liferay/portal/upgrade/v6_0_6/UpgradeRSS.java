@@ -18,12 +18,13 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.BaseUpgradePortletPreferences;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portlet.PortletPreferencesImpl;
-import com.liferay.portlet.PortletPreferencesSerializer;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
+import javax.portlet.PortletPreferences;
 
 /**
  * @author Raymond Augé
@@ -67,10 +68,10 @@ public class UpgradeRSS extends BaseUpgradePortletPreferences {
 		return new String[] {"39_INSTANCE_%"};
 	}
 
-	protected void upgradeFooterValues(PortletPreferencesImpl preferences)
+	protected void upgradeFooterValues(PortletPreferences portletPreferences)
 		throws Exception {
 
-		String[] footerArticleResouceValues = preferences.getValues(
+		String[] footerArticleResouceValues = portletPreferences.getValues(
 			"footer-article-resource-values", new String[] {"0", ""});
 
 		long footerArticleResourcePrimKey = GetterUtil.getLong(
@@ -78,14 +79,14 @@ public class UpgradeRSS extends BaseUpgradePortletPreferences {
 
 		String[] values = getArticleValues(footerArticleResourcePrimKey);
 
-		preferences.setValues("footer-article-values", values);
-		preferences.reset("footer-article-resource-values");
+		portletPreferences.setValues("footer-article-values", values);
+		portletPreferences.reset("footer-article-resource-values");
 	}
 
-	protected void upgradeHeaderValues(PortletPreferencesImpl preferences)
+	protected void upgradeHeaderValues(PortletPreferences portletPreferences)
 		throws Exception {
 
-		String[] headerArticleResouceValues = preferences.getValues(
+		String[] headerArticleResouceValues = portletPreferences.getValues(
 			"header-article-resource-values", new String[] {"0", ""});
 
 		long headerArticleResourcePrimKey = GetterUtil.getLong(
@@ -93,8 +94,8 @@ public class UpgradeRSS extends BaseUpgradePortletPreferences {
 
 		String[] values = getArticleValues(headerArticleResourcePrimKey);
 
-		preferences.setValues("header-article-values", values);
-		preferences.reset("header-article-resource-values");
+		portletPreferences.setValues("header-article-values", values);
+		portletPreferences.reset("header-article-resource-values");
 	}
 
 	protected String upgradePreferences(
@@ -102,14 +103,14 @@ public class UpgradeRSS extends BaseUpgradePortletPreferences {
 			String portletId, String xml)
 		throws Exception {
 
-		PortletPreferencesImpl preferences =
-			PortletPreferencesSerializer.fromXML(
+		PortletPreferences portletPreferences =
+			PortletPreferencesFactoryUtil.fromXML(
 				companyId, ownerId, ownerType, plid, portletId, xml);
 
-		upgradeFooterValues(preferences);
-		upgradeHeaderValues(preferences);
+		upgradeFooterValues(portletPreferences);
+		upgradeHeaderValues(portletPreferences);
 
-		return PortletPreferencesSerializer.toXML(preferences);
+		return PortletPreferencesFactoryUtil.toXML(portletPreferences);
 	}
 
 }

@@ -19,8 +19,7 @@ import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.ValueMapper;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portlet.PortletPreferencesImpl;
-import com.liferay.portlet.PortletPreferencesSerializer;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import javax.portlet.PortletPreferences;
 
@@ -46,25 +45,25 @@ public class PrefsXMLUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 		String portletId = (String)_upgradePortletIdColumn.getOldValue();
 
-		PortletPreferences preferences =
-			PortletPreferencesSerializer.fromDefaultXML(xml);
+		PortletPreferences portletPreferences =
+			PortletPreferencesFactoryUtil.fromDefaultXML(xml);
 
-		processPreferences(portletId, preferences);
+		processPreferences(portletId, portletPreferences);
 
-		return PortletPreferencesSerializer.toXML(
-			(PortletPreferencesImpl)preferences);
+		return PortletPreferencesFactoryUtil.toXML(portletPreferences);
 	}
 
 	protected void processPreferences(
-			String portletId, PortletPreferences preferences)
+			String portletId, PortletPreferences portletPreferences)
 		throws Exception {
 
 		// Portlet Setup
 
-		String portletCSS = preferences.getValue("portlet-setup-css", null);
+		String portletCSS = portletPreferences.getValue(
+			"portlet-setup-css", null);
 
 		if (Validator.isNotNull(portletCSS)) {
-			preferences.reset("portlet-setup-css");
+			portletPreferences.reset("portlet-setup-css");
 		}
 
 		// Journal Articles and Journal Content
@@ -72,46 +71,47 @@ public class PrefsXMLUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		if (portletId.startsWith("62_INSTANCE_") ||
 			portletId.startsWith("56_INSTANCE_")) {
 
-			String groupId = preferences.getValue("group-id", null);
+			String groupId = portletPreferences.getValue("group-id", null);
 
 			if (Validator.isNotNull(groupId)) {
 				groupId = String.valueOf(_groupIdMapper.getNewValue(
 					new Long(GetterUtil.getLong(groupId))));
 
-				preferences.setValue("group-id", groupId);
+				portletPreferences.setValue("group-id", groupId);
 			}
 		}
 
 		// Polls Display
 
 		else if (portletId.startsWith("59_INSTANCE_")) {
-			String questionId = preferences.getValue("question-id", null);
+			String questionId = portletPreferences.getValue(
+				"question-id", null);
 
 			if (Validator.isNotNull(questionId)) {
 				questionId = String.valueOf(_pollsQuestionIdMapper.getNewValue(
 					new Long(GetterUtil.getLong(questionId))));
 
-				preferences.setValue("question-id", questionId);
+				portletPreferences.setValue("question-id", questionId);
 			}
 		}
 
 		// Wiki Display
 
 		else if (portletId.startsWith("54_INSTANCE_")) {
-			String nodeId = preferences.getValue("node-id", null);
+			String nodeId = portletPreferences.getValue("node-id", null);
 
 			if (Validator.isNotNull(nodeId)) {
 				nodeId = String.valueOf(_wikiNodeIdMapper.getNewValue(
 					new Long(GetterUtil.getLong(nodeId))));
 
-				preferences.setValue("node-id", nodeId);
+				portletPreferences.setValue("node-id", nodeId);
 			}
 		}
 	}
 
-	private UpgradeColumn _upgradePortletIdColumn;
 	private ValueMapper _groupIdMapper;
 	private ValueMapper _pollsQuestionIdMapper;
+	private UpgradeColumn _upgradePortletIdColumn;
 	private ValueMapper _wikiNodeIdMapper;
 
 }

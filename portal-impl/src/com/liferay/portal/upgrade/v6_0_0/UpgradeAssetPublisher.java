@@ -16,8 +16,9 @@ package com.liferay.portal.upgrade.v6_0_0;
 
 import com.liferay.portal.kernel.upgrade.BaseUpgradePortletPreferences;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portlet.PortletPreferencesImpl;
-import com.liferay.portlet.PortletPreferencesSerializer;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
+
+import javax.portlet.PortletPreferences;
 
 /**
  * @author Julio Camarero
@@ -33,69 +34,74 @@ public class UpgradeAssetPublisher extends BaseUpgradePortletPreferences {
 			String portletId, String xml)
 		throws Exception {
 
-		PortletPreferencesImpl preferences =
-			PortletPreferencesSerializer.fromXML(
+		PortletPreferences portletPreferences =
+			PortletPreferencesFactoryUtil.fromXML(
 				companyId, ownerId, ownerType, plid, portletId, xml);
 
 		long layoutId = GetterUtil.getLong(
-			preferences.getValue("lfr-scope-layout-id", null));
+			portletPreferences.getValue("lfr-scope-layout-id", null));
 
-		preferences.reset("lfr-scope-layout-id");
+		portletPreferences.reset("lfr-scope-layout-id");
 
 		if (layoutId != 0) {
-			preferences.setValues(
+			portletPreferences.setValues(
 				"scope-ids", new String[] {"Layout_" + layoutId});
 
-			preferences.setValue("default-scope", Boolean.FALSE.toString());
+			portletPreferences.setValue(
+				"default-scope", Boolean.FALSE.toString());
 		}
 
 		long classNameId = GetterUtil.getLong(
-			preferences.getValue("class-name-id", null));
+			portletPreferences.getValue("class-name-id", null));
 
-		preferences.reset("class-name-id");
+		portletPreferences.reset("class-name-id");
 
 		if (classNameId != 0) {
-			preferences.setValues(
+			portletPreferences.setValues(
 				"class-name-ids", new String[] {String.valueOf(classNameId)});
 
-			preferences.setValue("any-asset-type", Boolean.FALSE.toString());
+			portletPreferences.setValue(
+				"any-asset-type", Boolean.FALSE.toString());
 		}
 
 		boolean andOperator = GetterUtil.getBoolean(
-			preferences.getValue("and-operator", null));
+			portletPreferences.getValue("and-operator", null));
 
-		preferences.reset("and-operator");
+		portletPreferences.reset("and-operator");
 
-		String[] assetTagNames = preferences.getValues("entries", null);
-		String[] notAssetTagNames = preferences.getValues("not-entries", null);
+		String[] assetTagNames = portletPreferences.getValues("entries", null);
+		String[] notAssetTagNames = portletPreferences.getValues(
+			"not-entries", null);
 
 		int i = 0;
 
 		if (assetTagNames != null) {
-			preferences.reset("entries");
+			portletPreferences.reset("entries");
 
-			preferences.setValue("queryContains" + i, Boolean.TRUE.toString());
-			preferences.setValue(
+			portletPreferences.setValue(
+				"queryContains" + i, Boolean.TRUE.toString());
+			portletPreferences.setValue(
 				"queryAndOperator" + i, String.valueOf(andOperator));
-			preferences.setValue("queryName" + i, "assetTags");
-			preferences.setValues("queryValues" + i, assetTagNames);
+			portletPreferences.setValue("queryName" + i, "assetTags");
+			portletPreferences.setValues("queryValues" + i, assetTagNames);
 
 			i++;
 		}
 
 		if (notAssetTagNames != null) {
-			preferences.reset("not-entries");
+			portletPreferences.reset("not-entries");
 
-			preferences.setValue("queryContains" + i, Boolean.FALSE.toString());
-			preferences.setValue(
+			portletPreferences.setValue(
+				"queryContains" + i, Boolean.FALSE.toString());
+			portletPreferences.setValue(
 				"queryAndOperator" + i, String.valueOf(andOperator));
-			preferences.setValue("queryName" + i, "assetTags");
-			preferences.setValues("queryValues" + i, notAssetTagNames);
+			portletPreferences.setValue("queryName" + i, "assetTags");
+			portletPreferences.setValues("queryValues" + i, notAssetTagNames);
 
 			i++;
 		}
 
-		return PortletPreferencesSerializer.toXML(preferences);
+		return PortletPreferencesFactoryUtil.toXML(portletPreferences);
 	}
 
 }

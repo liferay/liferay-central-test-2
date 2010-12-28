@@ -63,7 +63,6 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
-import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.asset.NoSuchCategoryException;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetCategoryConstants;
@@ -338,14 +337,15 @@ public class PortletImporter {
 			_log.debug("Deleting data for " + portletId);
 		}
 
-		PortletPreferencesImpl preferencesImpl =
-			(PortletPreferencesImpl)PortletPreferencesSerializer.fromDefaultXML(
-				portletPreferences.getPreferences());
+		PortletPreferencesImpl portletPreferencesImpl =
+			(PortletPreferencesImpl)
+				PortletPreferencesFactoryUtil.fromDefaultXML(
+					portletPreferences.getPreferences());
 
 		try {
-			preferencesImpl =
+			portletPreferencesImpl =
 				(PortletPreferencesImpl)portletDataHandler.deleteData(
-					context, portletId, preferencesImpl);
+					context, portletId, portletPreferencesImpl);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -354,11 +354,11 @@ public class PortletImporter {
 			context.setGroupId(context.getScopeGroupId());
 		}
 
-		if (preferencesImpl == null) {
+		if (portletPreferencesImpl == null) {
 			return null;
 		}
 
-		return PortletPreferencesSerializer.toXML(preferencesImpl);
+		return PortletPreferencesFactoryUtil.toXML(portletPreferencesImpl);
 	}
 
 	protected String getCategoryPath(
@@ -647,12 +647,13 @@ public class PortletImporter {
 			}
 		}
 
-		PortletPreferencesImpl preferencesImpl = null;
+		PortletPreferencesImpl portletPreferencesImpl = null;
 
 		if (portletPreferences != null) {
-			preferencesImpl = (PortletPreferencesImpl)
-				PortletPreferencesSerializer.fromDefaultXML(
-					portletPreferences.getPreferences());
+			portletPreferencesImpl =
+				(PortletPreferencesImpl)
+					PortletPreferencesFactoryUtil.fromDefaultXML(
+						portletPreferences.getPreferences());
 		}
 
 		String portletData = context.getZipEntryAsString(
@@ -662,9 +663,9 @@ public class PortletImporter {
 			SocialActivityThreadLocal.setEnabled(false);
 			WorkflowThreadLocal.setEnabled(false);
 
-			preferencesImpl =
+			portletPreferencesImpl =
 				(PortletPreferencesImpl)portletDataHandler.importData(
-					context, portletId, preferencesImpl, portletData);
+					context, portletId, portletPreferencesImpl, portletData);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -678,11 +679,11 @@ public class PortletImporter {
 			WorkflowThreadLocal.setEnabled(true);
 		}
 
-		if (preferencesImpl == null) {
+		if (portletPreferencesImpl == null) {
 			return null;
 		}
 
-		return PortletPreferencesSerializer.toXML(preferencesImpl);
+		return PortletPreferencesFactoryUtil.toXML(portletPreferencesImpl);
 	}
 
 	protected void importPortletPreferences(

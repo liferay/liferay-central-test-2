@@ -1309,10 +1309,10 @@ public class PortalUtil {
 		getPortal().setPortalPort(request);
 	}
 
-	public static void storePreferences(PortletPreferences preferences)
+	public static void storePreferences(PortletPreferences portletPreferences)
 		throws IOException, ValidatorException {
 
-		getPortal().storePreferences(preferences);
+		getPortal().storePreferences(portletPreferences);
 	}
 
 	public static String transformCustomSQL(String sql) {

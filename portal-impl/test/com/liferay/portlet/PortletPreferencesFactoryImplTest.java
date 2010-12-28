@@ -16,6 +16,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.util.BaseTestCase;
+import com.liferay.portal.util.InitUtil;
 
 import java.util.Map;
 
@@ -23,7 +24,11 @@ import java.util.Map;
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */
-public class PortletPreferencesSerializerTest extends BaseTestCase {
+public class PortletPreferencesFactoryImplTest extends BaseTestCase {
+
+	public PortletPreferencesFactoryImplTest() {
+		InitUtil.initWithSpring();
+	}
 
 	public void testBlankPreference() throws Exception {
 		String expectedXML =
@@ -35,7 +40,7 @@ public class PortletPreferencesSerializerTest extends BaseTestCase {
 
 		portletPreferencesImpl.setValue("name", "");
 
-		String actualXML = PortletPreferencesSerializer.toXML(
+		String actualXML = PortletPreferencesFactoryUtil.toXML(
 			portletPreferencesImpl);
 
 		assertEquals(expectedXML, actualXML);
@@ -83,7 +88,7 @@ public class PortletPreferencesSerializerTest extends BaseTestCase {
 
 		preferencesMap.put("name3", preference);
 
-		String actualXML = PortletPreferencesSerializer.toXML(
+		String actualXML = PortletPreferencesFactoryUtil.toXML(
 			portletPreferencesImpl);
 
 		portletPreferencesImpl = deserialize(actualXML);
@@ -151,14 +156,14 @@ public class PortletPreferencesSerializerTest extends BaseTestCase {
 		PortletPreferencesImpl portletPreferencesImpl =
 			new PortletPreferencesImpl();
 
-		String actualXML = PortletPreferencesSerializer.toXML(
+		String actualXML = PortletPreferencesFactoryUtil.toXML(
 			portletPreferencesImpl);
 
 		assertEquals(expectedXML, actualXML);
 
 		portletPreferencesImpl =
-			(PortletPreferencesImpl)PortletPreferencesSerializer.fromDefaultXML(
-				expectedXML);
+			(PortletPreferencesImpl)
+				PortletPreferencesFactoryUtil.fromDefaultXML(expectedXML);
 
 		Map<String, Preference> preferencesMap =
 			portletPreferencesImpl.getPreferences();
@@ -176,7 +181,7 @@ public class PortletPreferencesSerializerTest extends BaseTestCase {
 
 		portletPreferencesImpl.setValues("name", new String[0]);
 
-		String actualXML = PortletPreferencesSerializer.toXML(
+		String actualXML = PortletPreferencesFactoryUtil.toXML(
 			portletPreferencesImpl);
 
 		assertEquals(expectedXML, actualXML);
@@ -208,7 +213,7 @@ public class PortletPreferencesSerializerTest extends BaseTestCase {
 
 		portletPreferencesImpl.setValues("name", values);
 
-		String actualXML = PortletPreferencesSerializer.toXML(
+		String actualXML = PortletPreferencesFactoryUtil.toXML(
 			portletPreferencesImpl);
 
 		assertEquals(expectedXML, actualXML);
@@ -241,7 +246,7 @@ public class PortletPreferencesSerializerTest extends BaseTestCase {
 
 		portletPreferencesImpl.setValue("name", "value");
 
-		String actualXML = PortletPreferencesSerializer.toXML(
+		String actualXML = PortletPreferencesFactoryUtil.toXML(
 			portletPreferencesImpl);
 
 		assertEquals(expectedXML, actualXML);
@@ -265,8 +270,8 @@ public class PortletPreferencesSerializerTest extends BaseTestCase {
 
 	protected PortletPreferencesImpl deserialize(String xml) throws Exception {
 		PortletPreferencesImpl portletPreferencesImpl =
-			(PortletPreferencesImpl)PortletPreferencesSerializer.fromDefaultXML(
-				xml);
+			(PortletPreferencesImpl)
+				PortletPreferencesFactoryUtil.fromDefaultXML(xml);
 
 		return portletPreferencesImpl;
 	}

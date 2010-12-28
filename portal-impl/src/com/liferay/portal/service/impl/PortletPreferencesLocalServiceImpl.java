@@ -30,8 +30,8 @@ import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.service.base.PortletPreferencesLocalServiceBaseImpl;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
-import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.PortletPreferencesThreadLocal;
 
 import java.util.List;
@@ -133,7 +133,7 @@ public class PortletPreferencesLocalServiceImpl
 		Portlet portlet = portletLocalService.getPortletById(
 			companyId, portletId);
 
-		return PortletPreferencesSerializer.fromDefaultXML(
+		return PortletPreferencesFactoryUtil.fromDefaultXML(
 			portlet.getDefaultPreferences());
 	}
 
@@ -237,13 +237,10 @@ public class PortletPreferencesLocalServiceImpl
 
 	public PortletPreferences updatePreferences(
 			long ownerId, int ownerType, long plid, String portletId,
-			javax.portlet.PortletPreferences preferences)
+			javax.portlet.PortletPreferences portletPreferences)
 		throws SystemException {
 
-		PortletPreferencesImpl preferencesImpl =
-			(PortletPreferencesImpl)preferences;
-
-		String xml = PortletPreferencesSerializer.toXML(preferencesImpl);
+		String xml = PortletPreferencesFactoryUtil.toXML(portletPreferences);
 
 		return updatePreferences(ownerId, ownerType, plid, portletId, xml);
 	}
@@ -289,9 +286,10 @@ public class PortletPreferencesLocalServiceImpl
 
 		String key = encodeKey(plid, portletId);
 
-		PortletPreferencesImpl preferences = preferencesPool.get(key);
+		PortletPreferencesImpl portletPreferencesImpl = preferencesPool.get(
+			key);
 
-		if (preferences == null) {
+		if (portletPreferencesImpl == null) {
 			Portlet portlet = portletLocalService.getPortletById(
 				companyId, portletId);
 
@@ -312,14 +310,15 @@ public class PortletPreferencesLocalServiceImpl
 						defaultPreferences);
 			}
 
-			preferences = PortletPreferencesSerializer.fromXML(
-				companyId, ownerId, ownerType, plid, portletId,
-				portletPreferences.getPreferences());
+			portletPreferencesImpl =
+				(PortletPreferencesImpl)PortletPreferencesFactoryUtil.fromXML(
+					companyId, ownerId, ownerType, plid, portletId,
+					portletPreferences.getPreferences());
 
-			preferencesPool.put(key, preferences);
+			preferencesPool.put(key, portletPreferencesImpl);
 		}
 
-		return (PortletPreferencesImpl)preferences.clone();
+		return (PortletPreferencesImpl)portletPreferencesImpl.clone();
 	}
 
 	protected String encodeKey(long plid, String portletId) {

@@ -34,44 +34,44 @@ public class PortletPreferencesWrapper
 	implements PortletPreferences, Serializable {
 
 	public PortletPreferencesWrapper(
-		PortletPreferences preferences, String lifecycle) {
+		PortletPreferences portletPreferences, String lifecycle) {
 
-		_preferences = preferences;
+		_portletPreferences = portletPreferences;
 		_lifecycle = lifecycle;
 	}
 
 	public Map<String, String[]> getMap() {
-		return _preferences.getMap();
+		return _portletPreferences.getMap();
 	}
 
 	public Enumeration<String> getNames() {
-		return _preferences.getNames();
+		return _portletPreferences.getNames();
 	}
 
 	public String getValue(String key, String def) {
-		return _preferences.getValue(key, def);
+		return _portletPreferences.getValue(key, def);
 	}
 
 	public void setValue(String key, String value) throws ReadOnlyException {
-		_preferences.setValue(key, value);
+		_portletPreferences.setValue(key, value);
 	}
 
 	public String[] getValues(String key, String[] def) {
-		return _preferences.getValues(key, def);
+		return _portletPreferences.getValues(key, def);
 	}
 
 	public void setValues(String key, String[] values)
 		throws ReadOnlyException {
 
-		_preferences.setValues(key, values);
+		_portletPreferences.setValues(key, values);
 	}
 
 	public boolean isReadOnly(String key) {
-		return _preferences.isReadOnly(key);
+		return _portletPreferences.isReadOnly(key);
 	}
 
 	public void reset(String key) throws ReadOnlyException {
-		_preferences.reset(key);
+		_portletPreferences.reset(key);
 	}
 
 	public void store() throws IOException, ValidatorException {
@@ -80,7 +80,7 @@ public class PortletPreferencesWrapper
 			// Be strict to pass the TCK
 
 			if (_lifecycle.equals(PortletRequest.ACTION_PHASE)) {
-				_preferences.store();
+				_portletPreferences.store();
 			}
 			else {
 				throw new IllegalStateException(
@@ -91,24 +91,31 @@ public class PortletPreferencesWrapper
 
 			// Relax so that poorly written portlets can still work
 
-			_preferences.store();
+			_portletPreferences.store();
 		}
 	}
 
+	public PortletPreferencesImpl getPortletPreferencesImpl() {
+		return (PortletPreferencesImpl)_portletPreferences;
+	}
+
+	/**
+	 * @deprecated {@link #getPortletPreferencesImpl}
+	 */
 	public PortletPreferencesImpl getPreferencesImpl() {
-		return (PortletPreferencesImpl)_preferences;
+		return getPortletPreferencesImpl();
 	}
 
 	public boolean equals(Object obj) {
-		PortletPreferencesWrapper portletPreferences =
+		PortletPreferencesWrapper portletPreferencesWrapper =
 			(PortletPreferencesWrapper)obj;
 
-		if (this == portletPreferences) {
+		if (this == portletPreferencesWrapper) {
 			return true;
 		}
 
-		if (getPreferencesImpl().equals(
-				portletPreferences.getPreferencesImpl())) {
+		if (getPortletPreferencesImpl().equals(
+				portletPreferencesWrapper.getPortletPreferencesImpl())) {
 
 			return true;
 		}
@@ -118,10 +125,10 @@ public class PortletPreferencesWrapper
 	}
 
 	public int hashCode() {
-		return _preferences.hashCode();
+		return _portletPreferences.hashCode();
 	}
 
-	private PortletPreferences _preferences;
 	private String _lifecycle;
+	private PortletPreferences _portletPreferences;
 
 }

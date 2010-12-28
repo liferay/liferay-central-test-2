@@ -72,7 +72,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigFactoryUtil;
 import com.liferay.portlet.PortletContextFactory;
 import com.liferay.portlet.PortletInstanceFactoryUtil;
-import com.liferay.portlet.PortletPreferencesSerializer;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletQNameUtil;
 import com.liferay.portlet.expando.model.CustomAttributesDisplay;
 import com.liferay.util.bridges.mvc.MVCPortlet;
@@ -1646,7 +1646,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 					PortalUtil.getPreferencesValidator(portletModel);
 
 				preferencesValidatorObj.validate(
-					PortletPreferencesSerializer.fromDefaultXML(
+					PortletPreferencesFactoryUtil.fromDefaultXML(
 						defaultPreferences));
 			}
 			catch (Exception e) {

@@ -22,12 +22,13 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portlet.PortletPreferencesImpl;
-import com.liferay.portlet.PortletPreferencesSerializer;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
+import javax.portlet.PortletPreferences;
 
 /**
  * @author Julio Camarero
@@ -97,24 +98,25 @@ public class UpgradeAssetPublisher extends BaseUpgradePortletPreferences {
 			String portletId, String xml)
 		throws Exception {
 
-		PortletPreferencesImpl preferences =
-			PortletPreferencesSerializer.fromXML(
+		PortletPreferences portletPreferences =
+			PortletPreferencesFactoryUtil.fromXML(
 				companyId, ownerId, ownerType, plid, portletId, xml);
 
-		String selectionStyle = preferences.getValue("selection-style", null);
+		String selectionStyle = portletPreferences.getValue(
+			"selection-style", null);
 
 		if (Validator.isNotNull(selectionStyle) &&
 			!selectionStyle.equals("dynamic")) {
 
-			String[] assetEntryXmls = preferences.getValues(
+			String[] assetEntryXmls = portletPreferences.getValues(
 				"asset-entry-xml", new String[0]);
 
 			String[] newAssetEntryXmls = getAssetEntryXmls(assetEntryXmls);
 
-			preferences.setValues("asset-entry-xml", newAssetEntryXmls);
+			portletPreferences.setValues("asset-entry-xml", newAssetEntryXmls);
 		}
 
-		return PortletPreferencesSerializer.toXML(preferences);
+		return PortletPreferencesFactoryUtil.toXML(portletPreferences);
 	}
 
 }
