@@ -63,7 +63,7 @@ public class UpgradeAssetPublisherManualEntries
 			String classUuid = rs.getString("classUuid");
 
 			Element assetEntryUuidElement = rootElement.addElement(
-				"asset-entry-uuid");
+				"assetEntryUuid");
 
 			assetEntryUuidElement.addText(classUuid);
 
@@ -81,7 +81,7 @@ public class UpgradeAssetPublisherManualEntries
 			String assetEntryId = assetIdElement.getText();
 
 			Element assetEntryIdElement = rootElement.addElement(
-				"asset-entry-id");
+				"assetEntryId");
 
 			assetEntryIdElement.addText(assetEntryId);
 
@@ -96,7 +96,7 @@ public class UpgradeAssetPublisherManualEntries
 			String assetEntryType = assetTypeElement.getText();
 
 			Element assetEntryTypeElement = rootElement.addElement(
-				"asset-entry-type");
+				"assetEntryType");
 
 			assetEntryTypeElement.addText(assetEntryType);
 
