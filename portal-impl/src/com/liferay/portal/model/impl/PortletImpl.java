@@ -126,15 +126,16 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	public PortletImpl(
 		String portletId, PluginPackage pluginPackage,
 		PluginSetting pluginSetting, long companyId, long timestamp,
-		String icon, String virtualPath, String strutsPath, String portletName,
-		String displayName, String portletClass,
-		String configurationActionClass, String indexerClass,
-		String openSearchClass, List<SchedulerEntry> schedulerEntries,
-		String portletURLClass, String friendlyURLMapperClass,
-		String friendlyURLMapping, String friendlyURLRoutes,
-		String urlEncoderClass, String portletDataHandlerClass,
-		String portletLayoutListenerClass, String pollerProcessorClass,
-		String popMessageListenerClass, String socialActivityInterpreterClass,
+		String icon, String virtualPath, String strutsPath,
+		String parentStrutsPath, String portletName, String displayName,
+		String portletClass, String configurationActionClass,
+		String indexerClass, String openSearchClass,
+		List<SchedulerEntry> schedulerEntries, String portletURLClass,
+		String friendlyURLMapperClass, String friendlyURLMapping,
+		String friendlyURLRoutes, String urlEncoderClass,
+		String portletDataHandlerClass, String portletLayoutListenerClass,
+		String pollerProcessorClass, String popMessageListenerClass,
+		String socialActivityInterpreterClass,
 		String socialRequestInterpreterClass, String webDAVStorageToken,
 		String webDAVStorageClass, String xmlRpcMethodClass,
 		String controlPanelEntryCategory, double controlPanelEntryWeight,
@@ -175,6 +176,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_virtualPath = virtualPath;
 		_strutsPath = strutsPath;
 		_portletName = portletName;
+		_parentStrutsPath = parentStrutsPath;
 		_displayName = displayName;
 		_portletClass = portletClass;
 		_configurationActionClass = configurationActionClass;
@@ -405,6 +407,24 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setStrutsPath(String strutsPath) {
 		_strutsPath = strutsPath;
+	}
+
+	/**
+	* Gets the parent struts path.
+	*
+	* @return the parent struts path.
+	*/
+	public String getParentStrutsPath() {
+		return _parentStrutsPath;
+	}
+
+	/**
+	 * Sets the parent struts path of the portlet.
+	 *
+	 * @param parentStrutsPath the parent struts path of the portlet
+	 */
+	public void setParentStrutsPath(String parentStrutsPath) {
+		_parentStrutsPath = parentStrutsPath;
 	}
 
 	/**
@@ -3013,14 +3033,14 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		Portlet portlet = new PortletImpl(
 			getPortletId(), getPluginPackage(), getDefaultPluginSetting(),
 			getCompanyId(), getTimestamp(), getIcon(), getVirtualPath(),
-			getStrutsPath(), getPortletName(), getDisplayName(),
-			getPortletClass(), getConfigurationActionClass(), getIndexerClass(),
-			getOpenSearchClass(), getSchedulerEntries(), getPortletURLClass(),
-			getFriendlyURLMapperClass(), getFriendlyURLMapping(),
-			getFriendlyURLRoutes(), getURLEncoderClass(),
-			getPortletDataHandlerClass(), getPortletLayoutListenerClass(),
-			getPollerProcessorClass(), getPopMessageListenerClass(),
-			getSocialActivityInterpreterClass(),
+			getStrutsPath(), getParentStrutsPath(), getPortletName(),
+		    getDisplayName(), getPortletClass(), getConfigurationActionClass(),
+			getIndexerClass(), getOpenSearchClass(), getSchedulerEntries(),
+			getPortletURLClass(), getFriendlyURLMapperClass(),
+			getFriendlyURLMapping(), getFriendlyURLRoutes(),
+			getURLEncoderClass(), getPortletDataHandlerClass(),
+			getPortletLayoutListenerClass(), getPollerProcessorClass(),
+			getPopMessageListenerClass(), getSocialActivityInterpreterClass(),
 			getSocialRequestInterpreterClass(), getWebDAVStorageToken(),
 			getWebDAVStorageClass(), getXmlRpcMethodClass(),
 			getControlPanelEntryCategory(), getControlPanelEntryWeight(),
@@ -3506,6 +3526,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The resource bundle of the portlet.
 	 */
 	private String _resourceBundle;
+
+	/**
+	 * The parent struts path.
+	 */
+	private String _parentStrutsPath;
 
 	/**
 	 * The portlet info of the portlet.

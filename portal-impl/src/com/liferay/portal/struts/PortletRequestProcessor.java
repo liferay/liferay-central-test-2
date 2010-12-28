@@ -355,7 +355,37 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			return null;
 		}
 
-		ActionMapping mapping = super.processMapping(request, response, path);
+		ActionMapping mapping = null;
+
+		long companyId = PortalUtil.getCompanyId(request);
+
+		PortletConfigImpl portletConfig =
+			(PortletConfigImpl)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_CONFIG);
+
+		try {
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				companyId, portletConfig.getPortletId());
+
+			if (moduleConfig.findActionConfig(path) != null) {
+				mapping = super.processMapping(request, response, path);
+			}
+			else if (Validator.isNotNull(portlet.getParentStrutsPath())) {
+				int pos = path.indexOf(StringPool.SLASH, 1);
+				String relativePath = path.substring(pos, path.length());
+
+				String parentPath =
+					StringPool.SLASH + portlet.getParentStrutsPath() +
+						relativePath;
+
+				if (moduleConfig.findActionConfig(parentPath) != null) {
+					mapping =
+						super.processMapping(request, response, parentPath);
+				}
+			}
+		}
+		catch (Exception e) {
+		}
 
 		if (mapping == null) {
 			String msg = getInternal().getMessage("processInvalid");
@@ -445,7 +475,8 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			String strutsPath = path.substring(
 				1, path.lastIndexOf(CharPool.SLASH));
 
-			if (!strutsPath.equals(portlet.getStrutsPath())) {
+			if (!strutsPath.equals(portlet.getStrutsPath()) &&
+				!strutsPath.equals(portlet.getParentStrutsPath())) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"The struts path " + strutsPath + " does not belong " +

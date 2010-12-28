@@ -1012,6 +1012,13 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletModel.getStrutsPath()));
 
 		if (Validator.isNotNull(
+				portletElement.elementText("parent-struts-path"))) {
+
+			portletModel.setParentStrutsPath(
+				portletElement.elementText("parent-struts-path"));
+		}
+
+		if (Validator.isNotNull(
 				portletElement.elementText("configuration-path"))) {
 
 			_log.error(

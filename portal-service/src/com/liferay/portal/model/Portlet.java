@@ -149,6 +149,20 @@ public interface Portlet extends PortletModel {
 	public void setStrutsPath(java.lang.String strutsPath);
 
 	/**
+	* Gets the parent struts path.
+	*
+	* @return the parent struts path.
+	*/
+	public java.lang.String getParentStrutsPath();
+
+	/**
+	* Sets the parent struts path
+	*
+	* @param parentStrutsPath the parent struts path
+	*/
+	public void setParentStrutsPath(java.lang.String parentStrutsPath);
+
+	/**
 	* Gets the name of the portlet.
 	*
 	* @return the display name of the portlet
