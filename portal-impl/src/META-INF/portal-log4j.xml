@@ -288,18 +288,6 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.lucene">
-		<priority value="INFO" />
-	</category>
-
-	<category name="com.liferay.portal.lucene.IndexWriterFactory">
-		<priority value="INFO" />
-	</category>
-
-	<category name="com.liferay.portal.lucene.LuceneFileExtractor">
-		<priority value="ERROR" />
-	</category>
-
 	<category name="com.liferay.portal.model.Image">
 		<priority value="ERROR" />
 	</category>
@@ -324,7 +312,19 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.search.lucene">
+		<priority value="INFO" />
+	</category>
+
+	<category name="com.liferay.portal.search.lucene.LuceneFileExtractor">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.search.lucene.LuceneIndexSearcherImpl">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.search.lucene.LuceneIndexWriterImpl">
 		<priority value="ERROR" />
 	</category>
 
