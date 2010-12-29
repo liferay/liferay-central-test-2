@@ -76,6 +76,7 @@ public class BaseDataSample implements DataSample, Serializable {
 		if (_stopWatch == null) {
 			_stopWatch = new StopWatch();
 		}
+
 		_stopWatch.start();
 	}
 
