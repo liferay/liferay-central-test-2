@@ -33,13 +33,13 @@
 	%>
 
 	<liferay-ui:search-container
-		rowChecker="<%= rowChecker %>"
 		curParam="cur2"
 		delta="<%= fileEntriesPerPage %>"
 		deltaConfigurable="<%= false %>"
 		emptyResultsMessage="there-are-no-documents-in-this-folder"
 		headerNames="<%= StringUtil.merge(fileEntryColumns) %>"
 		iteratorURL="<%= portletURL %>"
+		rowChecker="<%= rowChecker %>"
 	>
 		<liferay-ui:search-container-results>
 
@@ -125,7 +125,7 @@
 
 		</liferay-ui:search-container-row>
 
-		<c:if test="<%= total > 0 && showActions %>">
+		<c:if test="<%= (total > 0) && showActions %>">
 			<aui:button onClick='<%= renderResponse.getNamespace() + "deleteEntries();" %>' value="delete" />
 		</c:if>
 
