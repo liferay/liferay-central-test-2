@@ -17,6 +17,7 @@ package com.liferay.portal.upgrade.util;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.BaseUpgradePortletPreferences;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
@@ -128,11 +129,15 @@ public class UpgradeAssetPublisherManualEntries
 	}
 
 	protected String getUpdatePortletPreferencesWhereClause() {
-		return "(portletId like '101_INSTANCE_%') AND " +
-			"((preferences like '%<preference><name>selection-style</name>" +
-				"<value>manual</value></preference>%') OR (preferences like " +
-					"'%<preference><name>selectionStyle</name>" +
-						"<value>manual</value></preference>%'))";
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("(portletId like '101_INSTANCE_%') AND ((preferences like ");
+		sb.append("'%<preference><name>selection-style</name><value>manual");
+		sb.append("</value></preference>%') OR (preferences like ");
+		sb.append("'%<preference><name>selectionStyle</name><value>manual");
+		sb.append("</value></preference>%'))");
+
+		return sb.toString();
 	}
 
 	protected String upgradePreferences(
