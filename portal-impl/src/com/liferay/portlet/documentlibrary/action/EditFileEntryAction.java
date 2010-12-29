@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
@@ -75,7 +76,7 @@ public class EditFileEntryAction extends PortletAction {
 				updateFileEntry(actionRequest, actionResponse);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteFileEntry(actionRequest);
+				deleteFileEntries(actionRequest);
 			}
 			else if (cmd.equals(Constants.LOCK)) {
 				lockFileEntry(actionRequest);
@@ -175,12 +176,22 @@ public class EditFileEntryAction extends PortletAction {
 		return mapping.findForward(getForward(renderRequest, forward));
 	}
 
-	protected void deleteFileEntry(ActionRequest actionRequest)
+	protected void deleteFileEntries(ActionRequest actionRequest)
 		throws Exception {
 
 		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
 
-		DLAppServiceUtil.deleteFileEntry(fileEntryId);
+		if (fileEntryId > 0) {
+			DLAppServiceUtil.deleteFileEntry(fileEntryId);
+		}
+		else {
+			long[] deleteFileEntryIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "deleteEntryIds"), 0L);
+
+			for (int i = 0; i < deleteFileEntryIds.length; i++) {
+				DLAppServiceUtil.deleteFileEntry(deleteFileEntryIds[i]);
+			}
+		}
 	}
 
 	protected void lockFileEntry(ActionRequest actionRequest) throws Exception {
