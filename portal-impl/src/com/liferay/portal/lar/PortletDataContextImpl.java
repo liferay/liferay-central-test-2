@@ -306,12 +306,12 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 				permissions.add(permission);
 			}
-			else if (type == RoleConstants.TYPE_PROVIDER) {
-				if (importTeam(role)) {
-					Team team = TeamLocalServiceUtil.getTeam(role.getClassPK());
+			else if ((type == RoleConstants.TYPE_PROVIDER) && role.isTeam()) {
+				Team team = TeamLocalServiceUtil.getTeam(role.getClassPK());
 
-					String name = PermissionExporter.TEAM_ROLE + team.getName();
-
+				if (team.getGroupId() != _groupId) {
+					String name =
+						PermissionExporter.ROLE_TEAM_PREFIX + team.getName();
 					String actionIds = getActionIds(
 						role, resourceName, String.valueOf(resourcePK));
 
@@ -820,9 +820,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 			Team team = null;
 
-			if (roleName.startsWith(PermissionExporter.TEAM_ROLE)) {
+			if (roleName.startsWith(PermissionExporter.ROLE_TEAM_PREFIX)) {
 				roleName = roleName.substring(
-					PermissionExporter.TEAM_ROLE.length());
+					PermissionExporter.ROLE_TEAM_PREFIX.length());
 
 				try {
 					team = TeamLocalServiceUtil.getTeam(_groupId, roleName);
@@ -837,12 +837,12 @@ public class PortletDataContextImpl implements PortletDataContext {
 			}
 
 			try {
-				if (team == null) {
-					role = RoleLocalServiceUtil.getRole(_companyId, roleName);
-				}
-				else {
+				if (team != null) {
 					role = RoleLocalServiceUtil.getTeamRole(
 						_companyId, team.getTeamId());
+				}
+				else {
+					role = RoleLocalServiceUtil.getRole(_companyId, roleName);
 				}
 			}
 			catch (NoSuchRoleException nsre) {
@@ -1046,23 +1046,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	protected String getPrimaryKeyString(String className, String primaryKey) {
 		return className.concat(StringPool.POUND).concat(primaryKey);
-	}
-
-	protected boolean importTeam(Role role)
-		throws PortalException, SystemException {
-
-		if (!role.getClassName().equals(Team.class.getName())) {
-			return false;
-		}
-
-		Team team = TeamLocalServiceUtil.getTeam(role.getClassPK());
-
-		if (team.getGroupId() != _groupId) {
-			return false;
-		}
-		else {
-			return true;
-		}
 	}
 
 	protected void initXStream() {

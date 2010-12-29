@@ -306,14 +306,15 @@ public class PermissionImporter {
 		List<Element> roleEls = permissionsEl.elements("role");
 
 		for (Element roleEl : roleEls) {
-			String description = null;
 			String name = roleEl.attributeValue("name");
 
 			Role role = null;
 
-			if (name.startsWith(PermissionExporter.TEAM_ROLE)) {
-				description = roleEl.attributeValue("description");
-				name = name.substring(PermissionExporter.TEAM_ROLE.length());
+			if (name.startsWith(PermissionExporter.ROLE_TEAM_PREFIX)) {
+				name = name.substring(
+					PermissionExporter.ROLE_TEAM_PREFIX.length());
+
+				String description = roleEl.attributeValue("description");
 
 				Team team = null;
 
@@ -333,7 +334,7 @@ public class PermissionImporter {
 			}
 
 			if (role == null) {
-				description = roleEl.attributeValue("description");
+				String description = roleEl.attributeValue("description");
 				int type = Integer.valueOf(roleEl.attributeValue("type"));
 
 				if ((type == RoleConstants.TYPE_COMMUNITY) &&
@@ -370,14 +371,15 @@ public class PermissionImporter {
 		List<Element> roleEls = permissionsEl.elements("role");
 
 		for (Element roleEl : roleEls) {
-			String description = null;
 			String name = roleEl.attributeValue("name");
 
 			Role role = null;
 
-			if (name.startsWith(PermissionExporter.TEAM_ROLE)) {
-				description = roleEl.attributeValue("description");
-				name = name.substring(PermissionExporter.TEAM_ROLE.length());
+			if (name.startsWith(PermissionExporter.ROLE_TEAM_PREFIX)) {
+				name = name.substring(
+					PermissionExporter.ROLE_TEAM_PREFIX.length());
+
+				String description = roleEl.attributeValue("description");
 
 				Team team = null;
 
@@ -397,7 +399,7 @@ public class PermissionImporter {
 			}
 
 			if (role == null) {
-				description = roleEl.attributeValue("description");
+				String description = roleEl.attributeValue("description");
 				int type = Integer.valueOf(roleEl.attributeValue("type"));
 
 				if ((type == RoleConstants.TYPE_COMMUNITY) &&
