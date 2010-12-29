@@ -132,4 +132,33 @@
 			<param name="log" value="${sybase.log}" />
 		</antcall>
 	</target>
+
+	<target name="test-benchmark-database" >
+		<mkdir dir="${basedir}/temp" />
+		
+		<java
+			classname="com.liferay.portal.tools.samplesqlbuilder.TestSampleSQLBuilder"
+			classpathref="project.classpath"
+		>
+			<arg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+			<arg value="sql.dir=${basedir}" />
+			<arg value="sample.sql.base.dir=${basedir}/../benchmarks" />
+			<arg value="sample.sql.output.dir=${basedir}/temp"/>
+			<arg value="sample.sql.db.type=hypersonic" />
+			<arg value="sample.sql.blogs.entry.comment.count=1" />
+			<arg value="sample.sql.blogs.entry.count=1" />
+			<arg value="sample.sql.group.count=1" />
+			<arg value="sample.sql.mb.category.count=1" />
+			<arg value="sample.sql.mb.message.count=1" />
+			<arg value="sample.sql.mb.thread.count=1" />
+			<arg value="sample.sql.user.count=1" />
+			<arg value="sample.sql.user.to.group.count=1" />
+			<arg value="sample.sql.wiki.node.count=1" />
+			<arg value="sample.sql.wiki.page.comment.count=1" />
+			<arg value="sample.sql.wiki.page.count=1" />
+			<arg value="sample.sql.security.enabled=false" />
+		</java>
+
+		<delete dir="${basedir}/temp" />
+	</target>
 </project>

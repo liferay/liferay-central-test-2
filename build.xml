@@ -820,6 +820,7 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 
 		<ant dir="sql" target="build-db" inheritAll="false" />
 		<ant dir="sql" target="rebuild-hypersonic" inheritAll="false" />
+		<ant dir="sql" target="test-benchmark-database" inheritAll="false" />
 
 		<ant dir="portal-impl" target="build-themes" inheritAll="false" />
 
