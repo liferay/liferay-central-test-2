@@ -2051,6 +2051,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				fromName
 			});
 
+		Set<Long> sent = new HashSet<Long>();
+
 		String className = (String)serviceContext.getAttribute("className");
 		long classPK = GetterUtil.getLong(
 			(String)serviceContext.getAttribute("classPK"));
@@ -2064,6 +2066,25 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			if (subscriptionUserId == userId) {
 				continue;
+			}
+
+			if (sent.contains(subscriptionUserId)) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Do not send a duplicate email to user " +
+							subscriptionUserId);
+				}
+
+				continue;
+			}
+			else {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Add user " + subscriptionUserId +
+							" to the list of users who have received an email");
+				}
+
+				sent.add(subscriptionUserId);
 			}
 
 			User subscriptionUser = null;
