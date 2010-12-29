@@ -133,6 +133,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 			Folder folder = fileEntry.getFolder();
 
 			PortletURL rowURL = renderResponse.createRenderURL();
+
 			rowURL.setParameter("struts_action", "/document_library/view_file_entry");
 			rowURL.setParameter("redirect", currentURL);
 			rowURL.setParameter("fileEntryId", String.valueOf(fileEntry.getFileEntryId()));
