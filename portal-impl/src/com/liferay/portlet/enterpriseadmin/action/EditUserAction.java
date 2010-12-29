@@ -41,6 +41,7 @@ import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
 import com.liferay.portal.WebsiteURLException;
 import com.liferay.portal.kernel.bean.BeanParamUtil;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
@@ -82,6 +83,7 @@ import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -92,6 +94,7 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts.Globals;
@@ -132,7 +135,8 @@ public class EditUserAction extends PortletAction {
 				deleteRole(actionRequest);
 			}
 			else if (cmd.equals(Constants.UPDATE)) {
-				Object[] returnValue = updateUser(actionRequest);
+				Object[] returnValue = updateUser(
+					actionRequest, actionResponse);
 
 				user = (User)returnValue[0];
 				oldScreenName = ((String)returnValue[1]);
@@ -486,7 +490,8 @@ public class EditUserAction extends PortletAction {
 		return user;
 	}
 
-	protected Object[] updateUser(ActionRequest actionRequest)
+	protected Object[] updateUser(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -619,9 +624,15 @@ public class EditUserAction extends PortletAction {
 
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(
 				actionRequest);
+			HttpServletResponse response= PortalUtil.getHttpServletResponse(
+				actionResponse);
 			HttpSession session = request.getSession();
 
 			session.removeAttribute(Globals.LOCALE_KEY);
+
+			Locale locale = LanguageUtil.getLocale(languageId);
+
+			LanguageUtil.updateCookie(request, response, locale);
 
 			// Clear cached portlet responses
 

@@ -73,7 +73,8 @@ public class EditUserAction
 			mapping, form, portletConfig, renderRequest, renderResponse);
 	}
 
-	protected Object[] updateUser(ActionRequest actionRequest)
+	protected Object[] updateUser(
+			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
 		String newPassword = ParamUtil.getString(actionRequest, "password1");
@@ -109,7 +110,7 @@ public class EditUserAction
 			}
 		}
 
-		return super.updateUser(actionRequest);
+		return super.updateUser(actionRequest, actionResponse);
 	}
 
 }
