@@ -304,6 +304,9 @@ public class EditEntryAction extends PortletAction {
 			"groupId", String.valueOf(entry.getGroupId()), false);
 		portletURL.setParameter(
 			"entryId", String.valueOf(entry.getEntryId()), false);
+		portletURL.setParameter(
+			"preview", String.valueOf(
+			ParamUtil.getBoolean(actionRequest, "preview")), false);
 
 		return portletURL.toString();
 	}

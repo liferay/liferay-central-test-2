@@ -44,6 +44,7 @@
 <%@ page import="com.liferay.portlet.blogs.EntryTitleException" %>
 <%@ page import="com.liferay.portlet.blogs.NoSuchEntryException" %>
 <%@ page import="com.liferay.portlet.blogs.model.BlogsEntry" %>
+<%@ page import="com.liferay.portlet.blogs.model.impl.BlogsEntryImpl" %>
 <%@ page import="com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.blogs.service.BlogsEntryServiceUtil" %>
 <%@ page import="com.liferay.portlet.blogs.service.permission.BlogsEntryPermission" %>

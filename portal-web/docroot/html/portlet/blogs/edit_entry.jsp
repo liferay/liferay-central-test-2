@@ -19,6 +19,7 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL");
+boolean preview = ParamUtil.getBoolean(request, "preview", false);
 
 String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
@@ -56,6 +57,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 	<aui:input name="entryId" type="hidden" value="<%= entryId %>" />
 	<aui:input name="workflowAction" type="hidden" value="<%= WorkflowConstants.ACTION_PUBLISH %>" />
+	<aui:input name="preview" type="hidden" value="<%= false %>" />
 
 	<liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
 	<liferay-ui:asset-tags-error />
@@ -74,6 +76,24 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 		<aui:input name="title" />
 
 		<aui:input name="displayDate" value="<%= displayDate %>" />
+
+		<c:if test="<%= preview %>">
+
+			<%
+			if (entry == null) {
+				entry = new BlogsEntryImpl();
+			}
+
+			entry.setContent(content);
+			%>
+
+			<liferay-ui:message key="preview" />:
+
+			<div class="preview">
+				<%= entry.getContent() %>
+			</div>
+			<br />
+		</c:if>
 
 		<aui:field-wrapper label="content">
 			<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
@@ -197,6 +217,8 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 			<aui:button name="saveButton" onClick='<%= renderResponse.getNamespace() + "saveEntry(true, false);" %>' type="submit" value="<%= saveButtonLabel %>" />
 
+			<aui:button name="previewButton" onClick='<%= renderResponse.getNamespace() + "previewEntry();" %>' value="preview" />
+
 			<aui:button disabled="<%= pending %>" name="publishButton" onClick='<%= renderResponse.getNamespace() + "saveEntry(false, false);" %>' type="submit" value="<%= publishButtonLabel %>" />
 
 			<aui:button name="cancelButton" onClick="<%= redirect %>" type="cancel" />
@@ -228,6 +250,18 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 		return "<%= UnicodeFormatter.toString(content) %>";
 	}
 
+	function <portlet:namespace />previewEntry() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= (entry == null) ? Constants.ADD : Constants.UPDATE %>";
+		document.<portlet:namespace />fm.<portlet:namespace />preview.value = "true";
+		document.<portlet:namespace />fm.<portlet:namespace />workflowAction.value = "<%= WorkflowConstants.ACTION_SAVE_DRAFT %>";
+
+		if (window.<portlet:namespace />editor) {
+			document.<portlet:namespace />fm.<portlet:namespace />content.value = window.<portlet:namespace />editor.getHTML();
+		}
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
 	Liferay.provide(
 		window,
 		'<portlet:namespace />saveEntry',
@@ -257,7 +291,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 				<portlet:namespace />oldTitle = title;
 				<portlet:namespace />oldContent = content;
 
-				var url = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_entry" /><portlet:param name="ajax" value="true" /></portlet:actionURL>';
+				var url = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_entry" /><portlet:param name="ajax" value="true" /><portlet:param name="preview" value="false" /></portlet:actionURL>';
 
 				A.io.request(
 					url,

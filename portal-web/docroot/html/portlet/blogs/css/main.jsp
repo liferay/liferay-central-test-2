@@ -111,6 +111,12 @@
 	background-position: 100% 100%;
 }
 
+.portlet-blogs .preview {
+	background: #ffc;
+	border: 1px dotted gray;
+	padding: 3px;
+}
+
 .portlet-blogs .search-form {
 	float: right
 }
