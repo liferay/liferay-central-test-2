@@ -132,7 +132,12 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 			Folder folder = fileEntry.getFolder();
 
-			String rowHREF = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + scopeGroupId + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle()));
+			PortletURL rowURL = renderResponse.createRenderURL();
+			rowURL.setParameter("struts_action", "/document_library/view_file_entry");
+			rowURL.setParameter("redirect", currentURL);
+			rowURL.setParameter("fileEntryId", String.valueOf(fileEntry.getFileEntryId()));
+
+			String rowHREF = rowURL.toString();
 
 			row.addText(folder.getName(), rowHREF);
 			row.addText(fileEntry.getTitle(), rowHREF);
