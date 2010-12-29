@@ -85,6 +85,7 @@ public class PermissionsURLTag extends TagSupport {
 
 		if (Validator.isNotNull(redirect)) {
 			portletURL.setParameter("redirect", redirect);
+
 			if (!themeDisplay.isStateMaximized()) {
 				portletURL.setParameter("returnToFullPageURL", redirect);
 			}
