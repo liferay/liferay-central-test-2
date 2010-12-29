@@ -23,6 +23,9 @@ public interface DestinationNames {
 
 	public static final String AUDIT = "liferay/audit";
 
+	/**
+	 * @deprecated {@link #SUBSCRIPTION_SENDER}
+	 */
 	public static final String BLOGS = "liferay/blogs";
 
 	public static final String BUFFERED_INCREMENT_PARALLEL =
@@ -51,6 +54,9 @@ public interface DestinationNames {
 	public static final String IP_GEOCODER_RESPONSE =
 		"liferay/ip_geocoder/response";
 
+	/**
+	 * @deprecated {@link #SUBSCRIPTION_SENDER}
+	 */
 	public static final String JOURNAL = "liferay/journal";
 
 	public static final String LAYOUTS_LOCAL_PUBLISHER =
@@ -65,6 +71,9 @@ public interface DestinationNames {
 
 	public static final String MAIL_SYNCHRONIZER = "liferay/mail_synchronizer";
 
+	/**
+	 * @deprecated {@link #SUBSCRIPTION_SENDER}
+	 */
 	public static final String MESSAGE_BOARDS = "liferay/message_boards";
 
 	public static final String MESSAGE_BOARDS_MAILING_LIST =
@@ -108,6 +117,12 @@ public interface DestinationNames {
 
 	public static final String SEARCH_WRITER = "liferay/search_writer";
 
+	public static final String SUBSCRIPTION_SENDER =
+		"liferay/subscription_sender";
+
+	/**
+	 * @deprecated {@link #SUBSCRIPTION_SENDER}
+	 */
 	public static final String WIKI = "liferay/wiki";
 
 	public static final String WORKFLOW_DEFINITION =

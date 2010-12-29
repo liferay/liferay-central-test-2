@@ -19,9 +19,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -51,6 +48,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.SubscriptionSender;
 import com.liferay.portlet.blogs.EntryContentException;
 import com.liferay.portlet.blogs.EntryDisplayDateException;
 import com.liferay.portlet.blogs.EntrySmallImageNameException;
@@ -924,22 +922,23 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				portletName
 			});
 
-		Message message = new Message();
+		SubscriptionSender subscriptionSender = new SubscriptionSender();
 
-		message.put("companyId", entry.getCompanyId());
-		message.put("userId", entry.getUserId());
-		message.put("groupId", entry.getGroupId());
-		message.put("entryId", entry.getEntryId());
-		message.put("fromName", fromName);
-		message.put("fromAddress", fromAddress);
-		message.put("subject", subject);
-		message.put("body", body);
-		message.put("replyToAddress", fromAddress);
-		message.put(
-			"mailId", BlogsUtil.getMailId(company.getMx(), entry.getEntryId()));
-		message.put("htmlFormat", Boolean.TRUE);
+		subscriptionSender.setBody(body);
+		subscriptionSender.setCompanyId(entry.getCompanyId());
+		subscriptionSender.setFrom(fromAddress, fromName);
+		subscriptionSender.setGroupId(entry.getGroupId());
+		subscriptionSender.setHtmlFormat(true);
+		subscriptionSender.setMailId(
+			BlogsUtil.getMailId(company.getMx(), entry.getEntryId()));
+		subscriptionSender.setReplyToAddress(fromAddress);
+		subscriptionSender.setSubject(subject);
+		subscriptionSender.setUserId(entry.getUserId());
 
-		MessageBusUtil.sendMessage(DestinationNames.BLOGS, message);
+		subscriptionSender.addPersistedSubscribers(
+			BlogsEntry.class.getName(), entry.getGroupId());
+
+		subscriptionSender.flushNotificationsAsync();
 	}
 
 	protected void pingGoogle(BlogsEntry entry, ServiceContext serviceContext)

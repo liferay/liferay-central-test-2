@@ -20,9 +20,6 @@ import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
@@ -52,6 +49,7 @@ import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.SubscriptionSender;
 import com.liferay.portlet.asset.NoSuchEntryException;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -1554,10 +1552,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String fromName = WikiUtil.getEmailFromName(preferences);
 		String fromAddress = WikiUtil.getEmailFromAddress(preferences);
 
-		String replyToAddress = fromAddress;
-		String mailId = WikiUtil.getMailId(
-			company.getMx(), page.getNodeId(), page.getPageId());
-
 		fromName = StringUtil.replace(
 			fromName,
 			new String[] {
@@ -1707,22 +1701,26 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			subject = subjectPrefix + StringPool.SPACE + subject;
 		}
 
-		Message message = new Message();
+		SubscriptionSender subscriptionSender = new SubscriptionSender();
 
-		message.put("companyId", node.getCompanyId());
-		message.put("userId", node.getUserId());
-		message.put("groupId", node.getGroupId());
-		message.put("nodeId", node.getNodeId());
-		message.put("pageResourcePrimKey", page.getResourcePrimKey());
-		message.put("fromName", fromName);
-		message.put("fromAddress", fromAddress);
-		message.put("subject", subject);
-		message.put("body", body);
-		message.put("replyToAddress", replyToAddress);
-		message.put("mailId", mailId);
-		message.put("htmlFormat", Boolean.TRUE);
+		subscriptionSender.setBody(body);
+		subscriptionSender.setCompanyId(node.getCompanyId());
+		subscriptionSender.setFrom(fromAddress, fromName);
+		subscriptionSender.setGroupId(node.getGroupId());
+		subscriptionSender.setHtmlFormat(true);
+		subscriptionSender.setMailId(
+			WikiUtil.getMailId(
+				company.getMx(), page.getNodeId(), page.getPageId()));
+		subscriptionSender.setReplyToAddress(fromAddress);
+		subscriptionSender.setSubject(subject);
+		subscriptionSender.setUserId(node.getUserId());
 
-		MessageBusUtil.sendMessage(DestinationNames.WIKI, message);
+		subscriptionSender.addPersistedSubscribers(
+			WikiNode.class.getName(), node.getNodeId());
+		subscriptionSender.addPersistedSubscribers(
+			WikiPage.class.getName(), page.getResourcePrimKey());
+
+		subscriptionSender.flushNotificationsAsync();
 	}
 
 	protected String replaceStyles(String html) {

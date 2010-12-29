@@ -22,9 +22,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
@@ -67,6 +64,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.SubscriptionSender;
 import com.liferay.portlet.asset.NoSuchEntryException;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -2696,23 +2694,23 @@ public class JournalArticleLocalServiceImpl
 				portletName,
 			});
 
-		Message message = new Message();
+		SubscriptionSender subscriptionSender = new SubscriptionSender();
 
-		message.put("companyId", article.getCompanyId());
-		message.put("userId", article.getUserId());
-		message.put("groupId", article.getGroupId());
-		message.put("articleId", article.getArticleId());
-		message.put("fromName", fromName);
-		message.put("fromAddress", fromAddress);
-		message.put("subject", subject);
-		message.put("body", body);
-		message.put("replyToAddress", fromAddress);
-		message.put(
-			"mailId",
+		subscriptionSender.setBody(body);
+		subscriptionSender.setCompanyId(article.getCompanyId());
+		subscriptionSender.setFrom(fromAddress, fromName);
+		subscriptionSender.setGroupId(article.getGroupId());
+		subscriptionSender.setHtmlFormat(true);
+		subscriptionSender.setMailId(
 			JournalUtil.getMailId(company.getMx(), article.getArticleId()));
-		message.put("htmlFormat", Boolean.TRUE);
+		subscriptionSender.setReplyToAddress(fromAddress);
+		subscriptionSender.setSubject(subject);
+		subscriptionSender.setUserId(article.getUserId());
 
-		MessageBusUtil.sendMessage(DestinationNames.JOURNAL, message);
+		subscriptionSender.addPersistedSubscribers(
+			JournalArticle.class.getName(), article.getGroupId());
+
+		subscriptionSender.flushNotificationsAsync();
 	}
 
 	protected void saveImages(

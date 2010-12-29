@@ -16,12 +16,16 @@ package com.liferay.portal.util;
 
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.mail.SMTPAccount;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
@@ -48,31 +52,82 @@ import javax.mail.internet.InternetAddress;
  */
 public class SubscriptionSender {
 
-	public void notifyPersistedSubscribers(String className, long classPK)
-		throws Exception {
+	public void addPersistedSubscribers(String className, long classPK) {
+		ObjectValuePair<String, Long> ovp = new ObjectValuePair<String, Long>(
+			className, classPK);
 
-		List<Subscription> subscriptions =
-			SubscriptionLocalServiceUtil.getSubscriptions(
-				companyId, className, classPK);
+		persistestedSubscribersOVPs.add(ovp);
+	}
 
-		for (Subscription subscription : subscriptions) {
-			notifySubscriber(subscription);
+	public void addRuntimeSubscribers(String toAddress, String toName) {
+		ObjectValuePair<String, String> ovp =
+			new ObjectValuePair<String, String>(toAddress, toName);
+
+		runtimeSubscribersOVPs.add(ovp);
+	}
+
+	public void flushNotifications() throws Exception {
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			if ((classLoader != null) && (contextClassLoader != classLoader)) {
+				currentThread.setContextClassLoader(classLoader);
+			}
+
+			for (ObjectValuePair<String, Long> ovp :
+					persistestedSubscribersOVPs) {
+
+				String className = ovp.getKey();
+				long classPK = ovp.getValue();
+
+				List<Subscription> subscriptions =
+					SubscriptionLocalServiceUtil.getSubscriptions(
+						companyId, className, classPK);
+
+				for (Subscription subscription : subscriptions) {
+					notifySubscriber(subscription);
+				}
+
+				if (bulk) {
+					InternetAddress to = new InternetAddress(
+						replyToAddress, replyToAddress);
+
+					sendEmail(to, LocaleUtil.getDefault());
+				}
+			}
+
+			persistestedSubscribersOVPs.clear();
+
+			for (ObjectValuePair<String, String> ovp : runtimeSubscribersOVPs) {
+				String toAddress = ovp.getKey();
+				String toName = ovp.getValue();
+
+				InternetAddress to = new InternetAddress(toAddress, toName);
+
+				sendEmail(to, LocaleUtil.getDefault());
+			}
+
+			runtimeSubscribersOVPs.clear();
 		}
-
-		if (bulk) {
-			InternetAddress to = new InternetAddress(
-				replyToAddress, replyToAddress);
-
-			sendEmail(to, LocaleUtil.getDefault());
+		finally {
+			if ((classLoader != null) && (contextClassLoader != classLoader)) {
+				currentThread.setContextClassLoader(contextClassLoader);
+			}
 		}
 	}
 
-	public void notifyRuntimeSubscribers(String toAddress, String toName)
-		throws Exception {
+	public void flushNotificationsAsync() {
+		Thread currentThread = Thread.currentThread();
 
-		InternetAddress to = new InternetAddress(toAddress, toName);
+		classLoader = currentThread.getContextClassLoader();
 
-		sendEmail(to, LocaleUtil.getDefault());
+		MessageBusUtil.sendMessage(DestinationNames.SUBSCRIPTION_SENDER, this);
+	}
+
+	public String getMailId() {
+		return this.mailId;
 	}
 
 	public void setBody(String body) {
@@ -87,10 +142,13 @@ public class SubscriptionSender {
 		this.companyId = companyId;
 	}
 
-	public void setFrom(String address, String name)
-		throws UnsupportedEncodingException {
-
-		from = new InternetAddress(address, name);
+	public void setFrom(String address, String name) throws SystemException {
+		try {
+			from = new InternetAddress(address, name);
+		}
+		catch (UnsupportedEncodingException uee) {
+			throw new SystemException(uee);
+		}
 	}
 
 	public void setGroupId(long groupId) {
@@ -312,6 +370,7 @@ public class SubscriptionSender {
 	protected String body;
 	protected boolean bulk;
 	protected List<InternetAddress> bulkAddresses;
+	protected ClassLoader classLoader;
 	protected long companyId;
 	protected Map<String, Object> context = new HashMap<String, Object>();
 	protected InternetAddress from;
@@ -319,7 +378,11 @@ public class SubscriptionSender {
 	protected boolean htmlFormat;
 	protected String inReplyTo;
 	protected String mailId;
+	protected List<ObjectValuePair<String, Long>> persistestedSubscribersOVPs =
+		new ArrayList<ObjectValuePair<String, Long>>();
 	protected String replyToAddress;
+	protected List<ObjectValuePair<String, String>> runtimeSubscribersOVPs =
+		new ArrayList<ObjectValuePair<String, String>>();
 	protected Set<Long> sentUserIds = new HashSet<Long>();
 	protected SMTPAccount smtpAccount;
 	protected String subject;

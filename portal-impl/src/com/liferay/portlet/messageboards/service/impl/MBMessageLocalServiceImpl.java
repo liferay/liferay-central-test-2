@@ -27,8 +27,6 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -81,6 +79,7 @@ import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageDisplayImpl;
 import com.liferay.portlet.messageboards.service.base.MBMessageLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.social.MBActivityKeys;
+import com.liferay.portlet.messageboards.util.MBSubscriptionSender;
 import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.portlet.messageboards.util.MailingListThreadLocal;
 import com.liferay.portlet.messageboards.util.comparator.MessageThreadComparator;
@@ -1762,10 +1761,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				message.getMessageId(), company.getMx(), fromAddress);
 		}
 
-		String replyToAddress = mailingListAddress;
-		String mailId = MBUtil.getMailId(
-			company.getMx(), message.getCategoryId(), message.getMessageId());
-
 		fromName = StringUtil.replace(
 			fromName,
 			new String[] {
@@ -1815,7 +1810,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		String subjectPrefix = null;
 		String body = null;
 		String signature = null;
-		boolean htmlFormat = MBUtil.getEmailHtmlFormat(preferences);
 
 		if (update) {
 			subjectPrefix = MBUtil.getEmailMessageUpdatedSubjectPrefix(
@@ -1926,27 +1920,46 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				message.getParentMessageId());
 		}
 
-		com.liferay.portal.kernel.messaging.Message messagingObj =
-			new com.liferay.portal.kernel.messaging.Message();
+		MBSubscriptionSender mbSubscriptionSender = new MBSubscriptionSender();
 
-		messagingObj.put("companyId", message.getCompanyId());
-		messagingObj.put("userId", message.getUserId());
-		messagingObj.put("groupId", message.getGroupId());
-		messagingObj.put("categoryIds", StringUtil.merge(categoryIds));
-		messagingObj.put("threadId", message.getThreadId());
-		messagingObj.put("fromName", fromName);
-		messagingObj.put("fromAddress", fromAddress);
-		messagingObj.put("subject", subject);
-		messagingObj.put("body", body);
-		messagingObj.put("replyToAddress", replyToAddress);
-		messagingObj.put("mailId", mailId);
-		messagingObj.put("inReplyTo", inReplyTo);
-		messagingObj.put("htmlFormat", htmlFormat);
-		messagingObj.put(
-			"sourceMailingList", MailingListThreadLocal.isSourceMailingList());
+		mbSubscriptionSender.setBody(body);
+		mbSubscriptionSender.setBulk(true);
+		mbSubscriptionSender.setCompanyId(message.getCompanyId());
+		mbSubscriptionSender.setFrom(fromAddress, fromName);
+		mbSubscriptionSender.setGroupId(message.getGroupId());
+		mbSubscriptionSender.setHtmlFormat(
+			MBUtil.getEmailHtmlFormat(preferences));
+		mbSubscriptionSender.setInReplyTo(inReplyTo);
+		mbSubscriptionSender.setMailId(
+			MBUtil.getMailId(
+				company.getMx(), message.getCategoryId(),
+				message.getMessageId()));
+		mbSubscriptionSender.setReplyToAddress(mailingListAddress);
+		mbSubscriptionSender.setSubject(subject);
+		mbSubscriptionSender.setUserId(message.getUserId());
 
-		MessageBusUtil.sendMessage(
-			DestinationNames.MESSAGE_BOARDS, messagingObj);
+		for (long categoryId : categoryIds) {
+			if (categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+				categoryId = message.getGroupId();
+			}
+
+			mbSubscriptionSender.addPersistedSubscribers(
+				MBCategory.class.getName(), categoryId);
+		}
+
+		mbSubscriptionSender.addPersistedSubscribers(
+			MBThread.class.getName(), message.getThreadId());
+
+		if (!MailingListThreadLocal.isSourceMailingList()) {
+			mbSubscriptionSender.setBulk(false);
+
+			for (long categoryId : categoryIds) {
+				mbSubscriptionSender.addMailingListSubscriber(
+					message.getGroupId(), categoryId);
+			}
+		}
+
+		mbSubscriptionSender.flushNotificationsAsync();
 	}
 
 	protected void pingPingback(

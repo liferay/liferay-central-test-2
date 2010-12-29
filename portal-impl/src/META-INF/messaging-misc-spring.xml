@@ -14,9 +14,6 @@
 	<bean id="destination.async_service" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/async_service" />
 	</bean>
-	<bean id="destination.blogs" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<property name="name" value="liferay/blogs" />
-	</bean>
 	<bean id="destination.buffered_increment_parallel" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="maximumQueueSize">
 			<util:constant static-field="com.liferay.portal.util.PropsValues.BUFFERED_INCREMENT_PARALLEL_QUEUE_SIZE" />
@@ -44,9 +41,6 @@
 	<bean id="destination.hot_deploy" class="com.liferay.portal.kernel.messaging.SerialDestination">
 		<property name="name" value="liferay/hot_deploy" />
 	</bean>
-	<bean id="destination.journal" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<property name="name" value="liferay/journal" />
-	</bean>
 	<bean id="destination.layouts_local_publisher" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/layouts_local_publisher" />
 	</bean>
@@ -56,25 +50,20 @@
 	<bean id="destination.live_users" class="com.liferay.portal.kernel.messaging.SerialDestination">
 		<property name="name" value="liferay/live_users" />
 	</bean>
-	<bean id="destination.message_boards" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<property name="name" value="liferay/message_boards" />
-	</bean>
 	<bean id="destination.message_boards_mailing_list" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/message_boards_mailing_list" />
 	</bean>
-	<bean id="destination.wiki" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<property name="name" value="liferay/wiki" />
+	<bean id="destination.subscription_sender" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<property name="name" value="liferay/subscription_sender" />
 	</bean>
 
 	<!-- Listeners -->
 
 	<bean id="messageListener.async_service" class="com.liferay.portal.messaging.async.AsyncMessageListener" />
 	<bean id="messageListener.buffered_increment" class="com.liferay.portal.increment.BufferedIncrementMessageListener" />
-	<bean id="messageListener.blogs" class="com.liferay.portlet.blogs.messaging.BlogsMessageListener" />
 	<bean id="messageListener.convert_process" class="com.liferay.portal.convert.messaging.ConvertProcessMessageListener" />
 	<bean id="messageListener.flags" class="com.liferay.portlet.flags.messaging.FlagsRequestMessageListener" />
 	<bean id="messageListener.hot_deploy" class="com.liferay.portal.deploy.hot.messaging.HotDeployMessageListener" />
-	<bean id="messageListener.journal" class="com.liferay.portlet.journal.messaging.JournalMessageListener" />
 	<bean id="messageListener.layouts_local_publisher" class="com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper">
 		<property name="className" value="com.liferay.portal.messaging.LayoutsLocalPublisherMessageListener" />
 		<property name="messageListener">
@@ -99,14 +88,13 @@
 			<util:constant static-field="com.liferay.portal.kernel.cluster.Priority.LEVEL5" />
 		</property>
 	</bean>
-	<bean id="messageListener.message_boards" class="com.liferay.portlet.messageboards.messaging.MBMessageListener" />
 	<bean id="messageListener.message_boards_mailing_list" class="com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper">
 		<property name="className" value="com.liferay.portlet.messageboards.messaging.MailingListMessageListener" />
 		<property name="messageListener">
 			<bean class="com.liferay.portlet.messageboards.messaging.MailingListMessageListener" />
 		</property>
 	</bean>
-	<bean id="messageListener.wiki" class="com.liferay.portlet.wiki.messaging.WikiMessageListener" />
+	<bean id="messageListener.subscription_sender" class="com.liferay.portlet.journal.messaging.JournalMessageListener" />
 
 	<!-- Configurator -->
 
@@ -114,19 +102,16 @@
 		<property name="destinations">
 			<list>
 				<ref bean="destination.async_service" />
-				<ref bean="destination.blogs" />
 				<ref bean="destination.buffered_increment_parallel" />
 				<ref bean="destination.buffered_increment_serial" />
 				<ref bean="destination.convert_process" />
 				<ref bean="destination.flags" />
-				<ref bean="destination.journal" />
 				<ref bean="destination.hot_deploy" />
 				<ref bean="destination.layouts_local_publisher" />
 				<ref bean="destination.layouts_remote_publisher" />
 				<ref bean="destination.live_users" />
-				<ref bean="destination.message_boards" />
 				<ref bean="destination.message_boards_mailing_list" />
-				<ref bean="destination.wiki" />
+				<ref bean="destination.subscription_sender" />
 			</list>
 		</property>
 		<property name="messageBus">
@@ -137,11 +122,6 @@
 				<entry key="liferay/async_service">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
 						<ref bean="messageListener.async_service" />
-					</list>
-				</entry>
-				<entry key="liferay/blogs">
-					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-						<ref bean="messageListener.blogs" />
 					</list>
 				</entry>
 				<entry key="liferay/buffered_increment_parallel">
@@ -169,11 +149,6 @@
 						<ref bean="messageListener.hot_deploy" />
 					</list>
 				</entry>
-				<entry key="liferay/journal">
-					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-						<ref bean="messageListener.journal" />
-					</list>
-				</entry>
 				<entry key="liferay/layouts_local_publisher">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
 						<ref bean="messageListener.layouts_local_publisher" />
@@ -190,19 +165,14 @@
 						<ref bean="messageListener.live_users_cluster" />
 					</list>
 				</entry>
-				<entry key="liferay/message_boards">
-					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-						<ref bean="messageListener.message_boards" />
-					</list>
-				</entry>
 				<entry key="liferay/message_boards_mailing_list">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
 						<ref bean="messageListener.message_boards_mailing_list" />
 					</list>
 				</entry>
-				<entry key="liferay/wiki">
+				<entry key="liferay/subscription_sender">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
-						<ref bean="messageListener.wiki" />
+						<ref bean="messageListener.subscription_sender" />
 					</list>
 				</entry>
 			</map>
