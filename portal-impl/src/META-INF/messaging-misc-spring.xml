@@ -94,7 +94,7 @@
 			<bean class="com.liferay.portlet.messageboards.messaging.MailingListMessageListener" />
 		</property>
 	</bean>
-	<bean id="messageListener.subscription_sender" class="com.liferay.portlet.journal.messaging.JournalMessageListener" />
+	<bean id="messageListener.subscription_sender" class="com.liferay.portal.messaging.SubscriptionSenderMessageListener" />
 
 	<!-- Configurator -->
 
