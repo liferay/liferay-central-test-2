@@ -50,6 +50,10 @@ public class SybaseDB extends BaseDB {
 		return template;
 	}
 
+	public boolean isSupportsInlineDistinct() {
+		return _SUPPORTS_INLINE_DISTINCT;
+	}
+
 	protected SybaseDB() {
 		super(TYPE_SYBASE);
 	}
@@ -149,6 +153,8 @@ public class SybaseDB extends BaseDB {
 	}
 
 	protected static String DROP_COLUMN = "drop column";
+
+	private static final boolean _SUPPORTS_INLINE_DISTINCT = false;
 
 	private static String[] _SYBASE = {
 		"--", "1", "0",
