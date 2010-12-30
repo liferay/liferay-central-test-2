@@ -59,6 +59,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.SubscriptionSender;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.social.BlogsActivityKeys;
 import com.liferay.portlet.blogs.util.LinkbackProducerUtil;
@@ -102,6 +103,8 @@ import javax.portlet.PortletPreferences;
 
 import net.htmlparser.jericho.Source;
 import net.htmlparser.jericho.StartTag;
+
+import org.apache.commons.lang.SerializationUtils;
 
 /**
  * @author Brian Wing Shun Chan
@@ -1920,46 +1923,57 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				message.getParentMessageId());
 		}
 
-		MBSubscriptionSender mbSubscriptionSender = new MBSubscriptionSender();
+		SubscriptionSender subscriptionSenderPrototype =
+			new MBSubscriptionSender();
 
-		mbSubscriptionSender.setBody(body);
-		mbSubscriptionSender.setBulk(true);
-		mbSubscriptionSender.setCompanyId(message.getCompanyId());
-		mbSubscriptionSender.setFrom(fromAddress, fromName);
-		mbSubscriptionSender.setGroupId(message.getGroupId());
-		mbSubscriptionSender.setHtmlFormat(
+		subscriptionSenderPrototype.setBody(body);
+		subscriptionSenderPrototype.setBulk(true);
+		subscriptionSenderPrototype.setCompanyId(message.getCompanyId());
+		subscriptionSenderPrototype.setFrom(fromAddress, fromName);
+		subscriptionSenderPrototype.setGroupId(message.getGroupId());
+		subscriptionSenderPrototype.setHtmlFormat(
 			MBUtil.getEmailHtmlFormat(preferences));
-		mbSubscriptionSender.setInReplyTo(inReplyTo);
-		mbSubscriptionSender.setMailId(
+		subscriptionSenderPrototype.setInReplyTo(inReplyTo);
+		subscriptionSenderPrototype.setMailId(
 			MBUtil.getMailId(
 				company.getMx(), message.getCategoryId(),
 				message.getMessageId()));
-		mbSubscriptionSender.setReplyToAddress(mailingListAddress);
-		mbSubscriptionSender.setSubject(subject);
-		mbSubscriptionSender.setUserId(message.getUserId());
+		subscriptionSenderPrototype.setReplyToAddress(mailingListAddress);
+		subscriptionSenderPrototype.setSubject(subject);
+		subscriptionSenderPrototype.setUserId(message.getUserId());
+
+		SubscriptionSender subscriptionSender =
+			(SubscriptionSender)SerializationUtils.clone(
+				subscriptionSenderPrototype);
 
 		for (long categoryId : categoryIds) {
 			if (categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
 				categoryId = message.getGroupId();
 			}
 
-			mbSubscriptionSender.addPersistedSubscribers(
+			subscriptionSender.addPersistedSubscribers(
 				MBCategory.class.getName(), categoryId);
 		}
 
-		mbSubscriptionSender.addPersistedSubscribers(
+		subscriptionSender.addPersistedSubscribers(
 			MBThread.class.getName(), message.getThreadId());
 
-		if (!MailingListThreadLocal.isSourceMailingList()) {
-			mbSubscriptionSender.setBulk(false);
+		subscriptionSender.flushNotificationsAsync();
 
+		if (!MailingListThreadLocal.isSourceMailingList()) {
 			for (long categoryId : categoryIds) {
-				mbSubscriptionSender.addMailingListSubscriber(
+				MBSubscriptionSender sourceMailingListSubscriptionSender =
+					(MBSubscriptionSender)SerializationUtils.clone(
+						subscriptionSenderPrototype);
+
+				sourceMailingListSubscriptionSender.setBulk(false);
+
+				sourceMailingListSubscriptionSender.addMailingListSubscriber(
 					message.getGroupId(), categoryId);
+
+				sourceMailingListSubscriptionSender.flushNotificationsAsync();
 			}
 		}
-
-		mbSubscriptionSender.flushNotificationsAsync();
 	}
 
 	protected void pingPingback(

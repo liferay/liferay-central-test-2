@@ -35,6 +35,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 
 import java.util.ArrayList;
@@ -50,20 +51,20 @@ import javax.mail.internet.InternetAddress;
 /**
  * @author Brian Wing Shun Chan
  */
-public class SubscriptionSender {
+public class SubscriptionSender implements Serializable {
 
 	public void addPersistedSubscribers(String className, long classPK) {
 		ObjectValuePair<String, Long> ovp = new ObjectValuePair<String, Long>(
 			className, classPK);
 
-		persistestedSubscribersOVPs.add(ovp);
+		_persistestedSubscribersOVPs.add(ovp);
 	}
 
 	public void addRuntimeSubscribers(String toAddress, String toName) {
 		ObjectValuePair<String, String> ovp =
 			new ObjectValuePair<String, String>(toAddress, toName);
 
-		runtimeSubscribersOVPs.add(ovp);
+		_runtimeSubscribersOVPs.add(ovp);
 	}
 
 	public void flushNotifications() throws Exception {
@@ -72,12 +73,14 @@ public class SubscriptionSender {
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			if ((classLoader != null) && (contextClassLoader != classLoader)) {
-				currentThread.setContextClassLoader(classLoader);
+			if ((_classLoader != null) &&
+				(contextClassLoader != _classLoader)) {
+
+				currentThread.setContextClassLoader(_classLoader);
 			}
 
 			for (ObjectValuePair<String, Long> ovp :
-					persistestedSubscribersOVPs) {
+					_persistestedSubscribersOVPs) {
 
 				String className = ovp.getKey();
 				long classPK = ovp.getValue();
@@ -98,9 +101,11 @@ public class SubscriptionSender {
 				}
 			}
 
-			persistestedSubscribersOVPs.clear();
+			_persistestedSubscribersOVPs.clear();
 
-			for (ObjectValuePair<String, String> ovp : runtimeSubscribersOVPs) {
+			for (ObjectValuePair<String, String> ovp :
+					_runtimeSubscribersOVPs) {
+
 				String toAddress = ovp.getKey();
 				String toName = ovp.getValue();
 
@@ -109,10 +114,12 @@ public class SubscriptionSender {
 				sendEmail(to, LocaleUtil.getDefault());
 			}
 
-			runtimeSubscribersOVPs.clear();
+			_runtimeSubscribersOVPs.clear();
 		}
 		finally {
-			if ((classLoader != null) && (contextClassLoader != classLoader)) {
+			if ((_classLoader != null) &&
+				(contextClassLoader != _classLoader)) {
+
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
@@ -121,7 +128,7 @@ public class SubscriptionSender {
 	public void flushNotificationsAsync() {
 		Thread currentThread = Thread.currentThread();
 
-		classLoader = currentThread.getContextClassLoader();
+		_classLoader = currentThread.getContextClassLoader();
 
 		MessageBusUtil.sendMessage(DestinationNames.SUBSCRIPTION_SENDER, this);
 	}
@@ -201,7 +208,7 @@ public class SubscriptionSender {
 
 		long subscriptionUserId = subscription.getUserId();
 
-		if (sentUserIds.contains(subscriptionUserId)) {
+		if (_sentUserIds.contains(subscriptionUserId)) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Do not send a duplicate email to user " +
@@ -217,7 +224,7 @@ public class SubscriptionSender {
 						" to the list of users who have received an email");
 			}
 
-			sentUserIds.add(subscriptionUserId);
+			_sentUserIds.add(subscriptionUserId);
 		}
 
 		User user = null;
@@ -282,11 +289,11 @@ public class SubscriptionSender {
 			InternetAddress bulkAddress = new InternetAddress(
 				user.getEmailAddress(), user.getFullName());
 
-			if (bulkAddresses == null) {
-				bulkAddresses = new ArrayList<InternetAddress>();
+			if (_bulkAddresses == null) {
+				_bulkAddresses = new ArrayList<InternetAddress>();
 			}
 
-			bulkAddresses.add(bulkAddress);
+			_bulkAddresses.add(bulkAddress);
 		}
 		else {
 			try {
@@ -341,10 +348,10 @@ public class SubscriptionSender {
 
 		if (bulk) {
 			mailMessage.setBulkAddresses(
-				bulkAddresses.toArray(
-					new InternetAddress[bulkAddresses.size()]));
+				_bulkAddresses.toArray(
+					new InternetAddress[_bulkAddresses.size()]));
 
-			bulkAddresses.clear();
+			_bulkAddresses.clear();
 		}
 
 		if (inReplyTo != null) {
@@ -369,8 +376,6 @@ public class SubscriptionSender {
 
 	protected String body;
 	protected boolean bulk;
-	protected List<InternetAddress> bulkAddresses;
-	protected ClassLoader classLoader;
 	protected long companyId;
 	protected Map<String, Object> context = new HashMap<String, Object>();
 	protected InternetAddress from;
@@ -378,18 +383,21 @@ public class SubscriptionSender {
 	protected boolean htmlFormat;
 	protected String inReplyTo;
 	protected String mailId;
-	protected List<ObjectValuePair<String, Long>> persistestedSubscribersOVPs =
-		new ArrayList<ObjectValuePair<String, Long>>();
 	protected String replyToAddress;
-	protected List<ObjectValuePair<String, String>> runtimeSubscribersOVPs =
-		new ArrayList<ObjectValuePair<String, String>>();
-	protected Set<Long> sentUserIds = new HashSet<Long>();
 	protected SMTPAccount smtpAccount;
 	protected String subject;
 	protected long userId;
 
+	private static final boolean _PERMISSION = true;
+
 	private static Log _log = LogFactoryUtil.getLog(SubscriptionSender.class);
 
-	private static final boolean _PERMISSION = true;
+	private List<InternetAddress> _bulkAddresses;
+	private ClassLoader _classLoader;
+	private List<ObjectValuePair<String, Long>> _persistestedSubscribersOVPs =
+		new ArrayList<ObjectValuePair<String, Long>>();
+	private List<ObjectValuePair<String, String>> _runtimeSubscribersOVPs =
+		new ArrayList<ObjectValuePair<String, String>>();
+	private Set<Long> _sentUserIds = new HashSet<Long>();
 
 }
