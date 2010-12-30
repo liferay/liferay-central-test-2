@@ -1,3 +1,4 @@
+<%@ page import="com.liferay.portal.kernel.servlet.taglib.CustomAttributes" %>
 <%--
 /**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
@@ -26,6 +27,7 @@ String name = GetterUtil.getString((String)request.getAttribute("aui:button:name
 String onClick = GetterUtil.getString((String)request.getAttribute("aui:button:onClick"));
 String type = GetterUtil.getString((String)request.getAttribute("aui:button:type"));
 String value = (String)request.getAttribute("aui:button:value");
+CustomAttributes customAttributes = (CustomAttributes)request.getAttribute("aui:button:customAttributes");
 
 if (onClick.startsWith(Http.HTTP_WITH_SLASH) || onClick.startsWith(Http.HTTPS_WITH_SLASH) || onClick.startsWith(StringPool.SLASH)) {
 	onClick = "location.href = '" + HtmlUtil.escape(PortalUtil.escapeRedirect(onClick)) + "';";
@@ -37,6 +39,7 @@ else if (onClick.startsWith("wsrp_rewrite?")){
 
 <span class="<%= AUIUtil.buildCss(AUIUtil.BUTTON_PREFIX, type, false, disabled, false, false, false, cssClass) %>">
 	<span class="aui-button-content">
-		<input class="<%= AUIUtil.buildCss(AUIUtil.BUTTON_INPUT_PREFIX, type, false, false, false, false, false, inputCssClass) %>" <%= disabled ? "disabled" : StringPool.BLANK %> <%= Validator.isNotNull(name) ? "id=\"" + namespace + name + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> type='<%= type.equals("cancel") ? "button" : type %>' value="<%= LanguageUtil.get(pageContext, value) %>" <%= AUIUtil.buildData(data) %> <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %> />
+		<input class="<%= AUIUtil.buildCss(AUIUtil.BUTTON_INPUT_PREFIX, type, false, false, false, false, false, inputCssClass) %>" <%= disabled ? "disabled" : StringPool.BLANK %> <%= Validator.isNotNull(name) ? "id=\"" + namespace + name + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> type='<%= type.equals("cancel") ? "button" : type %>' value="<%= LanguageUtil.get(pageContext, value) %>" <%= AUIUtil.buildData(
+				data) %> <%= Validator.isNotNull(customAttributes) ? customAttributes : StringPool.BLANK %> <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %> />
 	</span>
 </span>
