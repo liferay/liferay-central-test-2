@@ -95,8 +95,6 @@ public class ButtonTag extends IncludeTag {
 		}
 
 		request.setAttribute("aui:button:cssClass", _cssClass);
-		request.setAttribute(
-			"aui:button:customAttributes", getCustomAttributes());
 		request.setAttribute("aui:button:data", _data);
 		request.setAttribute("aui:button:disabled", String.valueOf(_disabled));
 		request.setAttribute(
