@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.xml.Namespace;
 import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.kernel.xml.Text;
+import com.liferay.portal.kernel.xml.Visitor;
 
 import java.util.Iterator;
 import java.util.List;
@@ -37,6 +38,10 @@ public class ElementImpl extends BranchImpl implements Element {
 		super(element);
 
 		_element = element;
+	}
+
+	public <T, V extends Visitor<T>> T accept(V v) {
+		return v.visitElement(this);
 	}
 
 	public void add(Attribute attribute) {

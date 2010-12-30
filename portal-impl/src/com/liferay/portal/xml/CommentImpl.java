@@ -15,6 +15,7 @@
 package com.liferay.portal.xml;
 
 import com.liferay.portal.kernel.xml.Comment;
+import com.liferay.portal.kernel.xml.Visitor;
 
 /**
  * @author Brian Wing Shun Chan
@@ -25,6 +26,10 @@ public class CommentImpl extends NodeImpl implements Comment {
 		super(comment);
 
 		_comment = comment;
+	}
+
+	public <T, V extends Visitor<T>> T accept(V v) {
+		return v.visitComment(this);
 	}
 
 	public boolean equals(Object obj) {

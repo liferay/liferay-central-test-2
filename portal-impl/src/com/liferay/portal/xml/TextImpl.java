@@ -15,6 +15,7 @@
 package com.liferay.portal.xml;
 
 import com.liferay.portal.kernel.xml.Text;
+import com.liferay.portal.kernel.xml.Visitor;
 
 /**
  * @author Brian Wing Shun Chan
@@ -25,6 +26,10 @@ public class TextImpl extends NodeImpl implements Text {
 		super(text);
 
 		_text = text;
+	}
+
+	public <T, V extends Visitor<T>> T accept(V v) {
+		return v.visitText(this);
 	}
 
 	public boolean equals(Object obj) {

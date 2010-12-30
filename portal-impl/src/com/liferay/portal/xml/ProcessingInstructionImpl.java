@@ -15,6 +15,7 @@
 package com.liferay.portal.xml;
 
 import com.liferay.portal.kernel.xml.ProcessingInstruction;
+import com.liferay.portal.kernel.xml.Visitor;
 
 import java.util.Map;
 
@@ -30,6 +31,10 @@ public class ProcessingInstructionImpl
 		super(processingInstruction);
 
 		_processingInstruction = processingInstruction;
+	}
+
+	public <T, V extends Visitor<T>> T accept(V v) {
+		return v.visitProcessInstruction(this);
 	}
 
 	public boolean equals(Object obj) {

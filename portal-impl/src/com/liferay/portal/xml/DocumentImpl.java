@@ -16,6 +16,7 @@ package com.liferay.portal.xml;
 
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Visitor;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
@@ -29,6 +30,10 @@ public class DocumentImpl extends BranchImpl implements Document {
 		super(document);
 
 		_document = document;
+	}
+
+	public <T, V extends Visitor<T>> T accept(V v) {
+		return v.visitDocument(this);
 	}
 
 	public Document addComment(String comment) {

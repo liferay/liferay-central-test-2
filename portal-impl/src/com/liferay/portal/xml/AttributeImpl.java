@@ -17,6 +17,7 @@ package com.liferay.portal.xml;
 import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Namespace;
 import com.liferay.portal.kernel.xml.QName;
+import com.liferay.portal.kernel.xml.Visitor;
 
 /**
  * @author Brian Wing Shun Chan
@@ -27,6 +28,10 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 		super(attribute);
 
 		_attribute = attribute;
+	}
+
+	public <T, V extends Visitor<T>> T accept(V v) {
+		return v.visitAttribute(this);
 	}
 
 	public Object getData() {

@@ -15,6 +15,7 @@
 package com.liferay.portal.xml;
 
 import com.liferay.portal.kernel.xml.Entity;
+import com.liferay.portal.kernel.xml.Visitor;
 
 /**
  * @author Brian Wing Shun Chan
@@ -25,6 +26,10 @@ public class EntityImpl extends NodeImpl implements Entity {
 		super(entity);
 
 		_entity = entity;
+	}
+
+	public <T, V extends Visitor<T>> T accept(V v) {
+		return v.visitEntity(this);
 	}
 
 	public boolean equals(Object obj) {

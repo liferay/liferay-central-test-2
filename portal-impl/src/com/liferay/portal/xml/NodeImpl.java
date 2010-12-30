@@ -17,6 +17,7 @@ package com.liferay.portal.xml;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
+import com.liferay.portal.kernel.xml.Visitor;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -30,6 +31,10 @@ public class NodeImpl implements Node {
 
 	public NodeImpl(org.dom4j.Node node) {
 		_node = node;
+	}
+
+	public <T, V extends Visitor<T>> T accept(V v) {
+		return v.visitNode(this);
 	}
 
 	public String asXML() {

@@ -15,6 +15,7 @@
 package com.liferay.portal.xml;
 
 import com.liferay.portal.kernel.xml.Namespace;
+import com.liferay.portal.kernel.xml.Visitor;
 
 /**
  * @author Brian Wing Shun Chan
@@ -25,6 +26,10 @@ public class NamespaceImpl extends NodeImpl implements Namespace {
 		super(namespace);
 
 		_namespace = namespace;
+	}
+
+	public <T, V extends Visitor<T>> T accept(V v) {
+		return v.visitNamespace(this);
 	}
 
 	public boolean equals(Object obj) {

@@ -25,6 +25,8 @@ import java.util.List;
  */
 public interface Node extends Serializable {
 
+	public <T, V extends Visitor<T>> T accept(V v);
+
 	public String asXML();
 
 	public Node asXPathResult(Element parent);
