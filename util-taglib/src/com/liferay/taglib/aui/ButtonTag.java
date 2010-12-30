@@ -95,6 +95,8 @@ public class ButtonTag extends IncludeTag {
 		}
 
 		request.setAttribute("aui:button:cssClass", _cssClass);
+		request.setAttribute(
+			"aui:button:customAttributes", getCustomAttributes());
 		request.setAttribute("aui:button:data", _data);
 		request.setAttribute("aui:button:disabled", String.valueOf(_disabled));
 		request.setAttribute(
@@ -104,8 +106,6 @@ public class ButtonTag extends IncludeTag {
 		request.setAttribute("aui:button:onClick", _onClick);
 		request.setAttribute("aui:button:type", _type);
 		request.setAttribute("aui:button:value", value);
-		request.setAttribute(
-			"aui:button:customAttributes", getCustomAttributes());
 	}
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
