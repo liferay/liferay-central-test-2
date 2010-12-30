@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -48,7 +47,6 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ResourceConstants;
-import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -87,8 +85,6 @@ import com.liferay.portlet.messageboards.util.comparator.MessageThreadComparator
 import com.liferay.portlet.messageboards.util.comparator.ThreadLastPostDateComparator;
 import com.liferay.portlet.social.model.SocialActivity;
 
-import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -96,8 +92,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
-import javax.mail.internet.InternetAddress;
 
 import javax.portlet.PortletPreferences;
 
@@ -1649,6 +1643,87 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 	}
 
+	protected void notifyDiscussionSubscribers(
+			MBMessage message, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		if (!PrefsPropsUtil.getBoolean(
+				message.getCompanyId(),
+				PropsKeys.DISCUSSION_EMAIL_COMMENTS_ADDED_ENABLED)) {
+
+			return;
+		}
+
+		String contentURL = (String)serviceContext.getAttribute("redirect");
+
+		User user = userPersistence.findByPrimaryKey(message.getUserId());
+
+		String fromName = PrefsPropsUtil.getString(
+			message.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_NAME);
+		String fromAddress = PrefsPropsUtil.getString(
+			message.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
+
+		String subject = PrefsPropsUtil.getContent(
+			message.getCompanyId(), PropsKeys.DISCUSSION_EMAIL_SUBJECT);
+		String body = PrefsPropsUtil.getContent(
+			message.getCompanyId(), PropsKeys.DISCUSSION_EMAIL_BODY);
+
+		subject = StringUtil.replace(
+			subject,
+			new String[] {
+				"[$COMMENTS_BODY$]",
+				"[$COMMENTS_USER_ADDRESS$]",
+				"[$COMMENTS_USER_NAME$]",
+				"[$CONTENT_URL$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]"
+			},
+			new String[] {
+				message.getBody(),
+				user.getEmailAddress(),
+				user.getFullName(),
+				contentURL,
+				fromAddress,
+				fromName
+			});
+
+		body = StringUtil.replace(
+			body,
+			new String[] {
+				"[$COMMENTS_BODY$]",
+				"[$COMMENTS_USER_ADDRESS$]",
+				"[$COMMENTS_USER_NAME$]",
+				"[$CONTENT_URL$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]"
+			},
+			new String[] {
+				message.getBody(),
+				user.getEmailAddress(),
+				user.getFullName(),
+				contentURL,
+				fromAddress,
+				fromName
+			});
+
+		SubscriptionSender subscriptionSender = new SubscriptionSender();
+
+		subscriptionSender.setBody(body);
+		subscriptionSender.setCompanyId(message.getCompanyId());
+		subscriptionSender.setFrom(fromAddress, fromName);
+		subscriptionSender.setGroupId(message.getGroupId());
+		subscriptionSender.setSubject(subject);
+		subscriptionSender.setUserId(message.getUserId());
+
+		String className = (String)serviceContext.getAttribute("className");
+		long classPK = GetterUtil.getLong(
+			(String)serviceContext.getAttribute("classPK"));
+
+		subscriptionSender.addPersistedSubscribers(className, classPK);
+
+		subscriptionSender.flushNotificationsAsync();
+	}
+
 	protected void notifySubscribers(
 			MBMessage message, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -1663,7 +1738,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		if (message.isDiscussion()) {
 			try{
-				sendCommentsEmail(message.getUserId(), message, serviceContext);
+				notifyDiscussionSubscribers(message, serviceContext);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -2011,155 +2086,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					_log.error("Error while sending pingback " + targetUri, e);
 				}
 			}
-		}
-	}
-
-	protected void sendCommentsEmail(
-			long userId, MBMessage message, ServiceContext serviceContext)
-		throws IOException, PortalException, SystemException {
-
-		long companyId = message.getCompanyId();
-
-		if (!PrefsPropsUtil.getBoolean(
-				companyId, PropsKeys.DISCUSSION_EMAIL_COMMENTS_ADDED_ENABLED)) {
-
-			return;
-		}
-
-		String contentURL = (String)serviceContext.getAttribute("redirect");
-
-		User user = userPersistence.findByPrimaryKey(userId);
-
-		String fromName = PrefsPropsUtil.getString(
-			companyId, PropsKeys.ADMIN_EMAIL_FROM_NAME);
-		String fromAddress = PrefsPropsUtil.getString(
-			companyId, PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
-
-		String subject = PrefsPropsUtil.getContent(
-			companyId, PropsKeys.DISCUSSION_EMAIL_SUBJECT);
-		String body = PrefsPropsUtil.getContent(
-			companyId, PropsKeys.DISCUSSION_EMAIL_BODY);
-
-		subject = StringUtil.replace(
-			subject,
-			new String[] {
-				"[$COMMENTS_BODY$]",
-				"[$COMMENTS_USER_ADDRESS$]",
-				"[$COMMENTS_USER_NAME$]",
-				"[$CONTENT_URL$]",
-				"[$FROM_ADDRESS$]",
-				"[$FROM_NAME$]"
-			},
-			new String[] {
-				message.getBody(),
-				user.getEmailAddress(),
-				user.getFullName(),
-				contentURL,
-				fromAddress,
-				fromName
-			});
-
-		body = StringUtil.replace(
-			body,
-			new String[] {
-				"[$COMMENTS_BODY$]",
-				"[$COMMENTS_USER_ADDRESS$]",
-				"[$COMMENTS_USER_NAME$]",
-				"[$CONTENT_URL$]",
-				"[$FROM_ADDRESS$]",
-				"[$FROM_NAME$]"
-			},
-			new String[] {
-				message.getBody(),
-				user.getEmailAddress(),
-				user.getFullName(),
-				contentURL,
-				fromAddress,
-				fromName
-			});
-
-		Set<Long> sent = new HashSet<Long>();
-
-		String className = (String)serviceContext.getAttribute("className");
-		long classPK = GetterUtil.getLong(
-			(String)serviceContext.getAttribute("classPK"));
-
-		List<Subscription> subscriptions =
-			subscriptionLocalService.getSubscriptions(
-				companyId, className, classPK);
-
-		for (Subscription subscription : subscriptions) {
-			long subscriptionUserId = subscription.getUserId();
-
-			if (subscriptionUserId == userId) {
-				continue;
-			}
-
-			if (sent.contains(subscriptionUserId)) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Do not send a duplicate email to user " +
-							subscriptionUserId);
-				}
-
-				continue;
-			}
-			else {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Add user " + subscriptionUserId +
-							" to the list of users who have received an email");
-				}
-
-				sent.add(subscriptionUserId);
-			}
-
-			User subscriptionUser = null;
-
-			try {
-				subscriptionUser = userLocalService.getUserById(
-					subscriptionUserId);
-			}
-			catch (NoSuchUserException nsue) {
-				continue;
-			}
-
-			if (!subscriptionUser.isActive()) {
-				continue;
-			}
-
-			InternetAddress from = new InternetAddress(fromAddress, fromName);
-
-			InternetAddress to = new InternetAddress(
-				subscriptionUser.getEmailAddress(),
-				subscriptionUser.getFullName());
-
-			String curSubject = StringUtil.replace(
-				subject,
-				new String[] {
-					"[$TO_ADDRESS$]",
-					"[$TO_NAME$]"
-				},
-				new String[] {
-					subscriptionUser.getFullName(),
-					subscriptionUser.getEmailAddress()
-				});
-
-			String curBody = StringUtil.replace(
-				body,
-				new String[] {
-					"[$TO_ADDRESS$]",
-					"[$TO_NAME$]"
-				},
-				new String[] {
-					subscriptionUser.getFullName(),
-					subscriptionUser.getEmailAddress()
-				});
-
-			MailMessage mailMessage = new MailMessage(
-				from, to, curSubject, curBody, true);
-
-			mailService.sendEmail(mailMessage);
 		}
 	}
 
