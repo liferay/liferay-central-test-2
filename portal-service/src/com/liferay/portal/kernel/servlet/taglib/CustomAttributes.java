@@ -38,6 +38,14 @@ public class CustomAttributes {
 		return this;
 	}
 
+	public CustomAttributes add(Object... values) {
+		for (int i = 0; i < values.length; i++) {
+			add(String.valueOf(values[i]), values[i + 1]);
+		}
+
+		return this;
+	}
+
 	public CustomAttributes add(String key, boolean value) {
 		return add(key, String.valueOf(value));
 	}
