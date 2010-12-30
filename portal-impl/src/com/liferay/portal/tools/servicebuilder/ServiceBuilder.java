@@ -3463,9 +3463,8 @@ public class ServiceBuilder {
 
 					String indexSpec = sb.toString();
 
-					String indexHash =
-						StringUtil.toHexString(
-							indexSpec.hashCode()).toUpperCase();
+					String indexHash = StringUtil.toHexString(
+						indexSpec.hashCode()).toUpperCase();
 
 					String indexName = "IX_" + indexHash;
 

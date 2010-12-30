@@ -336,8 +336,8 @@ public class PortletRequestUtil {
 				return false;
 			}
 
-			String hashCode =
-				StringPool.AT + StringUtil.toHexString(obj.hashCode());
+			String hashCode = StringPool.AT.concat(
+				StringUtil.toHexString(obj.hashCode()));
 
 			if (objString.endsWith(hashCode)) {
 				return false;
