@@ -14,9 +14,13 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.hibernate.dialect.SQLServerDialect;
 
@@ -26,39 +30,79 @@ import org.hibernate.dialect.SQLServerDialect;
 public class SQLServer2008Dialect extends SQLServerDialect {
 
 	public String getLimitString(String sql, int offset, int limit) {
+
+		if (offset == 0 || sql.endsWith(StringPool.CLOSE_PARENTHESIS)) {
+			return super.getLimitString(sql, offset, limit);
+		}
+
 		String lowerCaseSql = sql.toLowerCase();
 
 		int lastOrderByPos = lowerCaseSql.lastIndexOf("order by");
 
-		if ((lastOrderByPos < 0) || (offset == 0) ||
-			StringUtil.endsWith(sql, StringPool.CLOSE_PARENTHESIS)) {
-
-			return super.getLimitString(sql, 0, limit);
+		if (lastOrderByPos < 0) {
+			return super.getLimitString(sql, offset, limit);
 		}
-		else {
-			int fromPos = lowerCaseSql.indexOf("from");
 
-			String orderBy = sql.substring(lastOrderByPos, sql.length());
+		String orderByString = sql.substring(lastOrderByPos + 9, sql.length());
 
-			String selectFrom = sql.substring(0, fromPos);
+		String[] orderByArray = StringUtil.split(
+			orderByString, StringPool.COMMA);
 
-			String selectFromWhere = sql.substring(fromPos, lastOrderByPos);
+		int orderByCount = orderByArray.length;
 
-			StringBundler sb = new StringBundler(10);
+		for (int i = 0; i < orderByCount; i++) {
+			String orderBy = orderByArray[i].trim();
 
-			sb.append("select * from (");
-			sb.append(selectFrom);
-			sb.append(", _page_row_num = row_number() over(");
-			sb.append(orderBy);
-			sb.append(")");
-			sb.append(selectFromWhere);
-			sb.append(" ) temp where _page_row_num between ");
-			sb.append(offset + 1);
-			sb.append(" and ");
-			sb.append(limit);
+			String orderByColumn;
+			String orderByType;
 
-			return sb.toString();
+			int columnPos = orderBy.indexOf(CharPool.SPACE);
+
+			if (columnPos == -1) {
+				orderByColumn = orderBy;
+
+				orderByType = "ASC";
+			}
+			else {
+				orderByColumn = orderBy.substring(0, columnPos);
+
+				orderByType = orderBy.substring(columnPos + 1);
+			}
+
+			Pattern aliasPattern = Pattern.compile(
+				"(\\S+) as \\Q".concat(orderByColumn).concat("\\E\\W"),
+					Pattern.CASE_INSENSITIVE);
+
+			Matcher aliasMatcher = aliasPattern.matcher(sql);
+
+			if (aliasMatcher.find()) {
+				orderByColumn = aliasMatcher.group(1);
+			}
+
+			orderByArray[i] = orderByColumn.concat(
+				StringPool.SPACE).concat(orderByType);
 		}
+
+		int fromPos = lowerCaseSql.indexOf("from");
+
+		String selectFrom = sql.substring(0, fromPos);
+
+		String selectFromWhere = sql.substring(fromPos, lastOrderByPos);
+
+		StringBundler sb = new StringBundler(10);
+
+		sb.append("select * from (");
+		sb.append(selectFrom);
+		sb.append(", row_number() over (order by ");
+		sb.append(StringUtil.merge(orderByArray, StringPool.COMMA));
+		sb.append(") as _page_row_num ");
+		sb.append(selectFromWhere);
+		sb.append(" ) temp where _page_row_num between ");
+		sb.append(offset + 1);
+		sb.append(" and ");
+		sb.append(limit);
+
+		return sb.toString();
 	}
 
 	public boolean supportsLimitOffset() {
