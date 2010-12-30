@@ -43,6 +43,7 @@ import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class GroupFinderImpl
 	extends BasePersistenceImpl<Group> implements GroupFinder {
@@ -169,21 +170,15 @@ public class GroupFinderImpl
 		LinkedHashMap<String, Object> params1 = params;
 
 		LinkedHashMap<String, Object> params2 =
-			new LinkedHashMap<String, Object>();
+			new LinkedHashMap<String, Object>(params1);
 
-		params2.putAll(params1);
+		LinkedHashMap<String, Object> params3 =
+			new LinkedHashMap<String, Object>(params1);
 
 		if (userId != null) {
 			params2.remove("usersGroups");
 			params2.put("groupsOrgs", userId);
-		}
 
-		LinkedHashMap<String, Object> params3 =
-			new LinkedHashMap<String, Object>();
-
-		params3.putAll(params1);
-
-		if (userId != null) {
 			params3.remove("usersGroups");
 			params3.put("groupsUserGroups", userId);
 		}
@@ -225,10 +220,10 @@ public class GroupFinderImpl
 	public List<Group> findByLiveGroups() throws SystemException {
 		Session session = null;
 
+		String sql = CustomSQLUtil.get(FIND_BY_LIVE_GROUPS);
+
 		try {
 			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_LIVE_GROUPS);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -248,12 +243,12 @@ public class GroupFinderImpl
 			long classNameId, boolean privateLayout, int start, int end)
 		throws SystemException {
 
+		String sql = CustomSQLUtil.get(FIND_BY_SYSTEM);
+
 		Session session = null;
 
 		try {
 			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_SYSTEM);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -275,12 +270,12 @@ public class GroupFinderImpl
 	}
 
 	public List<Group> findByNullFriendlyURL() throws SystemException {
+		String sql = CustomSQLUtil.get(FIND_BY_NULL_FRIENDLY_URL);
+
 		Session session = null;
 
 		try {
 			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_NULL_FRIENDLY_URL);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -297,12 +292,12 @@ public class GroupFinderImpl
 	}
 
 	public List<Group> findBySystem(long companyId) throws SystemException {
+		String sql = CustomSQLUtil.get(FIND_BY_SYSTEM);
+
 		Session session = null;
 
 		try {
 			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_SYSTEM);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -324,6 +319,7 @@ public class GroupFinderImpl
 
 	public Group findByC_N(long companyId, String name)
 		throws NoSuchGroupException, SystemException {
+		String sql = CustomSQLUtil.get(FIND_BY_C_N);
 
 		name = StringUtil.lowerCase(name);
 
@@ -331,8 +327,6 @@ public class GroupFinderImpl
 
 		try {
 			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_C_N);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -396,79 +390,49 @@ public class GroupFinderImpl
 		LinkedHashMap<String, Object> params1 = params;
 
 		LinkedHashMap<String, Object> params2 =
-			new LinkedHashMap<String, Object>();
+			new LinkedHashMap<String, Object>(params1);
 
-		params2.putAll(params1);
+		LinkedHashMap<String, Object> params3 =
+			new LinkedHashMap<String, Object>(params1);
 
 		if (userId != null) {
 			params2.remove("usersGroups");
 			params2.put("groupsOrgs", userId);
-		}
 
-		LinkedHashMap<String, Object> params3 =
-			new LinkedHashMap<String, Object>();
-
-		params3.putAll(params1);
-
-		if (userId != null) {
 			params3.remove("usersGroups");
 			params3.put("groupsUserGroups", userId);
 		}
+
+		String findByCND = CustomSQLUtil.get(FIND_BY_C_N_D);
+
+		findByCND = StringUtil.replace(
+			findByCND, "Group_.classNameId = ?",
+			"Group_.classNameId = ".concat(
+				StringUtil.merge(classNameIds, " OR Group_.classNameId = ")));
+
+		findByCND = CustomSQLUtil.replaceOrderBy(findByCND, obc);
 
 		StringBundler sb = new StringBundler();
 
 		sb.append("(");
 
-		sb.append(CustomSQLUtil.get(FIND_BY_C_N_D));
-
-		String sql = sb.toString();
-
-		sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params1));
-		sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params1));
-
-		sb.setIndex(0);
-
-		sb.append(sql);
+		sb.append(replaceJoinAndWhere(findByCND, params1));
 
 		sb.append(")");
 
 		if (Validator.isNotNull(userId)) {
 			sb.append(" UNION (");
 
-			sb.append(CustomSQLUtil.get(FIND_BY_C_N_D));
-
-			sql = sb.toString();
-
-			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params2));
-			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params2));
-
-			sb.setIndex(0);
-
-			sb.append(sql);
+			sb.append(replaceJoinAndWhere(findByCND, params2));
 
 			sb.append(") UNION (");
 
-			sb.append(CustomSQLUtil.get(FIND_BY_C_N_D));
-
-			sql = sb.toString();
-
-			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params3));
-			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params3));
-
-			sb.setIndex(0);
-
-			sb.append(sql);
+			sb.append(replaceJoinAndWhere(findByCND, params3));
 
 			sb.append(")");
 		}
 
-		sql = sb.toString();
-
-		sql = StringUtil.replace(
-			sql, "Group_.classNameId = ?",
-			"Group_.classNameId = ".concat(
-				StringUtil.merge(classNameIds, " OR Group_.classNameId = ")));
-		sql = CustomSQLUtil.replaceOrderBy(sql, obc);
+		String sql = sb.toString();
 
 		Session session = null;
 
@@ -507,14 +471,12 @@ public class GroupFinderImpl
 				qPos.add(description);
 			}
 
-			List<Group> groups = new ArrayList<Group>();
-
-			Iterator<Long> itr = (Iterator<Long>)QueryUtil.iterate(
+			List<Long> groupIds = (List<Long>) QueryUtil.list(
 				q, getDialect(), start, end);
 
-			while (itr.hasNext()) {
-				long groupId = itr.next();
+			List<Group> groups = new ArrayList<Group>(groupIds.size());
 
+			for (Long groupId : groupIds) {
 				Group group = GroupUtil.findByPrimaryKey(groupId);
 
 				groups.add(group);
@@ -756,6 +718,15 @@ public class GroupFinderImpl
 		}
 
 		return join;
+	}
+
+	protected String replaceJoinAndWhere(
+		String sql, LinkedHashMap<String, Object> params) {
+
+		sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
+		sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
+
+		return sql;
 	}
 
 	protected void setJoin(
