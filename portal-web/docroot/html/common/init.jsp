@@ -88,7 +88,6 @@
 <%@ page import="com.liferay.portal.kernel.servlet.SessionErrors" %>
 <%@ page import="com.liferay.portal.kernel.servlet.SessionMessages" %>
 <%@ page import="com.liferay.portal.kernel.servlet.StringServletResponse" %>
-<%@ page import="com.liferay.portal.kernel.servlet.taglib.CustomAttributes" %>
 <%@ page import="com.liferay.portal.kernel.util.ArrayUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.BooleanWrapper" %>
 <%@ page import="com.liferay.portal.kernel.util.BreadcrumbsUtil" %>
