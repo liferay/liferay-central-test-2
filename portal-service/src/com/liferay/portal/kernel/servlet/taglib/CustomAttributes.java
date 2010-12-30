@@ -100,6 +100,10 @@ public class CustomAttributes {
 		return this;
 	}
 
+	public void reset() {
+		_sb.setIndex(0);
+	}
+
 	public String toString() {
 		return _sb.toString();
 	}
