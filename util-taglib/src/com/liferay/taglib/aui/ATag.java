@@ -56,6 +56,10 @@ public class ATag extends IncludeTag {
 		_lang = lang;
 	}
 
+	public void setOnClick(String onClick) {
+		_onClick = onClick;
+	}
+
 	public void setTarget(String target) {
 		_target = target;
 	}
@@ -66,6 +70,7 @@ public class ATag extends IncludeTag {
 		_id = null;
 		_label = null;
 		_lang = null;
+		_onClick = null;
 		_target = null;
 	}
 
@@ -127,6 +132,12 @@ public class ATag extends IncludeTag {
 			if (Validator.isNotNull(_lang)) {
 				jspWriter.write("lang=\"");
 				jspWriter.write(_lang);
+				jspWriter.write("\" ");
+			}
+
+			if (Validator.isNotNull(_onClick)) {
+				jspWriter.write("onClick=\"");
+				jspWriter.write(_onClick);
 				jspWriter.write("\" ");
 			}
 
@@ -210,6 +221,7 @@ public class ATag extends IncludeTag {
 	private String _id;
 	private String _label;
 	private String _lang;
+	private String _onClick;
 	private String _target;
 
 }
