@@ -39,7 +39,7 @@ public class CustomAttributes {
 	}
 
 	public CustomAttributes add(Object... values) {
-		for (int i = 0; i < values.length; i++) {
+		for (int i = 0; i < values.length; i += 2) {
 			add(String.valueOf(values[i]), values[i + 1]);
 		}
 
