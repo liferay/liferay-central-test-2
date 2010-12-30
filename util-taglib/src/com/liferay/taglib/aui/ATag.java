@@ -15,6 +15,7 @@
 package com.liferay.taglib.aui;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.servlet.taglib.CustomAttributes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -133,6 +134,12 @@ public class ATag extends IncludeTag {
 				jspWriter.write("target=\"");
 				jspWriter.write(_target);
 				jspWriter.write("\" ");
+			}
+
+			CustomAttributes customAttributes = getCustomAttributes();
+
+			if (customAttributes != null) {
+				jspWriter.write(customAttributes.toString());
 			}
 
 			writeDynamicAttributes(jspWriter);

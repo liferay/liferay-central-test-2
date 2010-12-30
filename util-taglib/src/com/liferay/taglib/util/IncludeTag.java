@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.servlet.DirectServletContext;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.servlet.TrackedServletRequest;
+import com.liferay.portal.kernel.servlet.taglib.CustomAttributes;
 import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
@@ -62,6 +63,10 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
  */
 public class IncludeTag
 	extends ParamAndPropertyAncestorTagImpl implements DynamicAttributes {
+
+	public CustomAttributes getCustomAttributes() {
+		return _customAttributes;
+	}
 
 	public int doEndTag() throws JspException {
 		try {
@@ -158,6 +163,10 @@ public class IncludeTag
 		catch (SystemException se) {
 			return servletContext;
 		}
+	}
+
+	public void setCustomAttributes(CustomAttributes customAttributes) {
+		_customAttributes = customAttributes;
 	}
 
 	public void setDynamicAttribute(
@@ -406,6 +415,7 @@ public class IncludeTag
 	private static Log _log = LogFactoryUtil.getLog(IncludeTag.class);
 
 	private boolean _calledSetAttributes;
+	private CustomAttributes _customAttributes;
 	private Map<String, Object> _dynamicAttributes =
 		new HashMap<String, Object>();
 	private String _page;

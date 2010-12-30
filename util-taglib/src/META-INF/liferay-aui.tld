@@ -19,6 +19,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>customAttributes</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>href</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -51,6 +56,11 @@
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>cssClass</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>customAttributes</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
