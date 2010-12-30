@@ -128,25 +128,30 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 			Map<Object, Object> jobDataMap =
 				(Map<Object, Object>)objectInputStream.readObject();
 
-			Map<Object, Object> copyJobDataMap =
-				new HashMap<Object, Object>(jobDataMap);
+			Map<Object, Object> tempJobDataMap = new HashMap<Object, Object>(
+				jobDataMap);
 
 			jobDataMap.clear();
 
 			boolean modifiedKeys = false;
-			for (Map.Entry<Object, Object> entry : copyJobDataMap.entrySet()) {
-				Object keyObject = entry.getKey();
-				if (keyObject instanceof String) {
-					keyObject = ((String) keyObject).toUpperCase();
+
+			for (Map.Entry<Object, Object> entry : tempJobDataMap.entrySet()) {
+				Object key = entry.getKey();
+
+				if (key instanceof String) {
+					key = ((String)key).toUpperCase();
+
 					modifiedKeys = true;
 				}
-				jobDataMap.put(keyObject, entry.getValue());
+
+				jobDataMap.put(key, entry.getValue());
 			}
 
 			Object object = jobDataMap.get(SchedulerEngine.MESSAGE);
 
 			if ((object == null) || (object instanceof String) ||
 				!modifiedKeys) {
+
 				return false;
 			}
 
