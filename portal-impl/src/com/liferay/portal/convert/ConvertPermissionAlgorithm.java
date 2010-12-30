@@ -558,7 +558,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 					String roleName = StringUtil.upperCaseFirstLetter(
 						RoleConstants.getTypeLabel(type));
 
-					roleName += " " + Long.toHexString(roleId);
+					roleName += " " + StringUtil.toHexString(roleId);
 
 					String[] roleColumns = new String[] {
 						String.valueOf(roleId), String.valueOf(companyId),

@@ -3464,7 +3464,8 @@ public class ServiceBuilder {
 					String indexSpec = sb.toString();
 
 					String indexHash =
-						Integer.toHexString(indexSpec.hashCode()).toUpperCase();
+						StringUtil.toHexString(
+							indexSpec.hashCode()).toUpperCase();
 
 					String indexName = "IX_" + indexHash;
 
@@ -4004,7 +4005,7 @@ public class ServiceBuilder {
 					entityMapping.getTable() + " (" + colDBName + ");";
 
 				String indexHash =
-					Integer.toHexString(indexSpec.hashCode()).toUpperCase();
+					StringUtil.toHexString(indexSpec.hashCode()).toUpperCase();
 
 				String indexName = "IX_" + indexHash;
 

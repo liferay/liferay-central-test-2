@@ -150,7 +150,7 @@ public class HtmlImpl implements Html {
 			}
 			else {
 				sb.append(prefix);
-				sb.append(Integer.toHexString(c));
+				sb.append(StringUtil.toHexString(c));
 				sb.append(postfix);
 			}
 		}

@@ -17,6 +17,7 @@ package com.liferay.portal.servlet.filters.etag;
 import com.liferay.portal.kernel.servlet.ByteBufferServletResponse;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.nio.ByteBuffer;
 
@@ -84,7 +85,7 @@ public class ETagUtil {
 		int hashCode) {
 
 		String eTag = StringPool.QUOTE.concat(
-			Integer.toHexString(hashCode)).concat(StringPool.QUOTE);
+			StringUtil.toHexString(hashCode)).concat(StringPool.QUOTE);
 
 		response.setHeader(HttpHeaders.ETAG, eTag);
 

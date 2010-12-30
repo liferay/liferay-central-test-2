@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.xml.simple.Element;
@@ -336,7 +337,7 @@ public class PortletRequestUtil {
 			}
 
 			String hashCode =
-				StringPool.AT + Integer.toHexString(obj.hashCode());
+				StringPool.AT + StringUtil.toHexString(obj.hashCode());
 
 			if (objString.endsWith(hashCode)) {
 				return false;
