@@ -38,6 +38,12 @@ public class MBSubscriptionSender extends SubscriptionSender {
 	public void addMailingListSubscriber(long groupId, long categoryId)
 		throws PortalException, SystemException {
 
+		if (_calledAddMailingListSubscriber) {
+			throw new IllegalArgumentException();
+		}
+
+		_calledAddMailingListSubscriber = true;
+
 		MBMailingList mailingList = null;
 
 		try {
@@ -101,5 +107,7 @@ public class MBSubscriptionSender extends SubscriptionSender {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(MBSubscriptionSender.class);
+
+	private boolean _calledAddMailingListSubscriber;
 
 }
