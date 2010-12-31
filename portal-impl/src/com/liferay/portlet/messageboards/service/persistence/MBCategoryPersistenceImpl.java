@@ -390,6 +390,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		mbCategoryImpl.setParentCategoryId(mbCategory.getParentCategoryId());
 		mbCategoryImpl.setName(mbCategory.getName());
 		mbCategoryImpl.setDescription(mbCategory.getDescription());
+		mbCategoryImpl.setDisplayStyle(mbCategory.getDisplayStyle());
 		mbCategoryImpl.setThreadCount(mbCategory.getThreadCount());
 		mbCategoryImpl.setMessageCount(mbCategory.getMessageCount());
 		mbCategoryImpl.setLastPostDate(mbCategory.getLastPostDate());
