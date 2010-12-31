@@ -30,64 +30,59 @@ import org.hibernate.dialect.SQLServerDialect;
 public class SQLServer2008Dialect extends SQLServerDialect {
 
 	public String getLimitString(String sql, int offset, int limit) {
-
-		if (offset == 0 || sql.endsWith(StringPool.CLOSE_PARENTHESIS)) {
+		if ((offset == 0) || sql.endsWith(StringPool.CLOSE_PARENTHESIS)) {
 			return super.getLimitString(sql, offset, limit);
 		}
 
-		String lowerCaseSql = sql.toLowerCase();
+		String sqlLowerCase = sql.toLowerCase();
 
-		int lastOrderByPos = lowerCaseSql.lastIndexOf("order by");
+		int orderByPos = sqlLowerCase.lastIndexOf("order by");
 
-		if (lastOrderByPos < 0) {
+		if (orderByPos < 0) {
 			return super.getLimitString(sql, offset, limit);
 		}
 
-		String orderByString = sql.substring(lastOrderByPos + 9, sql.length());
+		String orderByString = sql.substring(orderByPos + 9, sql.length());
 
 		String[] orderByArray = StringUtil.split(
 			orderByString, StringPool.COMMA);
 
-		int orderByCount = orderByArray.length;
-
-		for (int i = 0; i < orderByCount; i++) {
+		for (int i = 0; i < orderByArray.length; i++) {
 			String orderBy = orderByArray[i].trim();
 
-			String orderByColumn;
-			String orderByType;
+			String orderByColumn = null;
+			String orderByType = null;
 
 			int columnPos = orderBy.indexOf(CharPool.SPACE);
 
 			if (columnPos == -1) {
 				orderByColumn = orderBy;
-
 				orderByType = "ASC";
 			}
 			else {
 				orderByColumn = orderBy.substring(0, columnPos);
-
 				orderByType = orderBy.substring(columnPos + 1);
 			}
 
-			Pattern aliasPattern = Pattern.compile(
+			Pattern pattern = Pattern.compile(
 				"(\\S+) as \\Q".concat(orderByColumn).concat("\\E\\W"),
-					Pattern.CASE_INSENSITIVE);
+				Pattern.CASE_INSENSITIVE);
 
-			Matcher aliasMatcher = aliasPattern.matcher(sql);
+			Matcher matcher = pattern.matcher(sql);
 
-			if (aliasMatcher.find()) {
-				orderByColumn = aliasMatcher.group(1);
+			if (matcher.find()) {
+				orderByColumn = matcher.group(1);
 			}
 
 			orderByArray[i] = orderByColumn.concat(
 				StringPool.SPACE).concat(orderByType);
 		}
 
-		int fromPos = lowerCaseSql.indexOf("from");
+		int fromPos = sqlLowerCase.indexOf("from");
 
 		String selectFrom = sql.substring(0, fromPos);
 
-		String selectFromWhere = sql.substring(fromPos, lastOrderByPos);
+		String selectFromWhere = sql.substring(fromPos, orderByPos);
 
 		StringBundler sb = new StringBundler(10);
 
