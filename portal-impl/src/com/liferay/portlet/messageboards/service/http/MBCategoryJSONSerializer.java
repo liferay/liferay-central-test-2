@@ -61,7 +61,6 @@ public class MBCategoryJSONSerializer {
 		jsonObject.put("parentCategoryId", model.getParentCategoryId());
 		jsonObject.put("name", model.getName());
 		jsonObject.put("description", model.getDescription());
-		jsonObject.put("displayStyle", model.getDisplayStyle());
 		jsonObject.put("threadCount", model.getThreadCount());
 		jsonObject.put("messageCount", model.getMessageCount());
 

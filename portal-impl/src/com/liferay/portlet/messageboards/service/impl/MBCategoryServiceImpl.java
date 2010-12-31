@@ -35,13 +35,12 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 
 	public MBCategory addCategory(
 			long parentCategoryId, String name, String description,
-			String displayStyle, String emailAddress, String inProtocol,
-			String inServerName, int inServerPort, boolean inUseSSL,
-			String inUserName, String inPassword, int inReadInterval,
-			String outEmailAddress, boolean outCustom, String outServerName,
-			int outServerPort, boolean outUseSSL, String outUserName,
-			String outPassword, boolean mailingListActive,
-			ServiceContext serviceContext)
+			String emailAddress, String inProtocol, String inServerName,
+			int inServerPort, boolean inUseSSL, String inUserName,
+			String inPassword, int inReadInterval, String outEmailAddress,
+			boolean outCustom, String outServerName, int outServerPort,
+			boolean outUseSSL, String outUserName, String outPassword,
+			boolean mailingListActive, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
@@ -49,7 +48,7 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 			parentCategoryId, ActionKeys.ADD_CATEGORY);
 
 		return mbCategoryLocalService.addCategory(
-			getUserId(), parentCategoryId, name, description, displayStyle,
+			getUserId(), parentCategoryId, name, description,
 			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
 			inUserName, inPassword, inReadInterval, outEmailAddress, outCustom,
 			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
@@ -189,12 +188,12 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 
 	public MBCategory updateCategory(
 			long categoryId, long parentCategoryId, String name,
-			String description, String displayStyle, String emailAddress,
-			String inProtocol, String inServerName, int inServerPort,
-			boolean inUseSSL, String inUserName, String inPassword,
-			int inReadInterval, String outEmailAddress, boolean outCustom,
-			String outServerName, int outServerPort, boolean outUseSSL,
-			String outUserName,	String outPassword, boolean mailingListActive,
+			String description, String emailAddress, String inProtocol,
+			String inServerName, int inServerPort, boolean inUseSSL,
+			String inUserName, String inPassword, int inReadInterval,
+			String outEmailAddress, boolean outCustom, String outServerName,
+			int outServerPort, boolean outUseSSL, String outUserName,
+			String outPassword, boolean mailingListActive,
 			boolean mergeWithParentCategory, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -204,9 +203,9 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 			getPermissionChecker(), category, ActionKeys.UPDATE);
 
 		return mbCategoryLocalService.updateCategory(
-			categoryId, parentCategoryId, name, description, displayStyle,
-			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
-			inUserName,	inPassword, inReadInterval, outEmailAddress, outCustom,
+			categoryId, parentCategoryId, name, description, emailAddress,
+			inProtocol, inServerName, inServerPort, inUseSSL, inUserName,
+			inPassword, inReadInterval, outEmailAddress, outCustom,
 			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
 			mailingListActive, mergeWithParentCategory, serviceContext);
 	}

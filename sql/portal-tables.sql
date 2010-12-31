@@ -865,7 +865,6 @@ create table MBCategory (
 	parentCategoryId LONG,
 	name VARCHAR(75) null,
 	description STRING null,
-	displayStyle VARCHAR(75) null,
 	threadCount INTEGER,
 	messageCount INTEGER,
 	lastPostDate DATE null

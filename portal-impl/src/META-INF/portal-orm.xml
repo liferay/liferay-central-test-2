@@ -1923,7 +1923,6 @@
 			<basic name="parentCategoryId" />
 			<basic name="name" />
 			<basic name="description" />
-			<basic name="displayStyle" />
 			<basic name="threadCount" />
 			<basic name="messageCount" />
 			<basic name="lastPostDate">
