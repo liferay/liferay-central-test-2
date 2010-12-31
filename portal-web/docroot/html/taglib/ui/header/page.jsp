@@ -20,12 +20,19 @@
 if (Validator.isNotNull(backURL) && !backURL.equals("javascript:history.go(-1);")) {
 	backURL = HtmlUtil.escape(HtmlUtil.escapeHREF(PortalUtil.escapeRedirect(backURL)));
 }
+
+if (Validator.isNotNull(backLabel)) {
+	backLabel = "&laquo; ".concat(LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(backLabel)));
+}
+else {
+	backLabel = "&laquo; ".concat(LanguageUtil.get(pageContext, "back"));
+}
 %>
 
 <div class="taglib-header <%= (cssClass != null) ? cssClass : "" %>">
 	<c:if test="<%= Validator.isNotNull(backURL) %>">
 		<span class="header-back-to">
-			<a href="<%= backURL %>" id="<%= namespace %>TabsBack"><%= Validator.isNotNull(backLabel) ? backLabel : "&laquo;" + LanguageUtil.get(pageContext, "back") %></a>
+			<a href="<%= backURL %>" id="<%= namespace %>TabsBack"><%= backLabel %></a>
 		</span>
 	</c:if>
 
