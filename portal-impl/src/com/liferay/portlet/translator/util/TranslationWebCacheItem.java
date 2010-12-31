@@ -17,6 +17,7 @@ package com.liferay.portlet.translator.util;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCacheException;
@@ -51,6 +52,12 @@ public class TranslationWebCacheItem implements WebCacheItem {
 			String text = HttpUtil.URLtoString(new URL(sb.toString()));
 
 			int x = text.indexOf("<div id=\"result\">");
+
+			if (x < 0) {
+				translation.setToText(StringPool.BLANK);
+
+				return translation;
+			}
 
 			x = text.indexOf(">", x) + 1;
 			x = text.indexOf(">", x) + 1;
