@@ -287,7 +287,7 @@
 			return !!(window.Array && object.constructor == window.Array);
 		},
 
-		openControlPanelPopUp: function(portlet, portletId, controlPanelURL, namespacedId, className) {
+		openControlPanelPopUp: function(portlet, portletId, controlPanelURL, namespacedId, title) {
 			var instance = this;
 
 			var parentUtil = Util;
@@ -301,7 +301,7 @@
 				portletId,
 				controlPanelURL,
 				namespacedId,
-				className,
+				title,
 				window
 			);
 		},
@@ -1437,10 +1437,8 @@
 	Liferay.provide(
 		Util,
 		'_controlPanelPopup',
-		function(portlet, portletId, controlPanelURL, namespacedId, className, openingWindow) {
+		function(portlet, portletId, controlPanelURL, namespacedId, title, openingWindow) {
 			if (controlPanelURL) {
-				var title = Liferay.Language.get('model.resource.' + className);
-
 				var iframeId = namespacedId + 'controlPanelIframe';
 
 				var dialog = new A.Dialog(
