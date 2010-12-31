@@ -64,6 +64,7 @@
 		<column name="parentCategoryId" type="long" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
+		<column name="displayStyle" type="String" />
 		<column name="threadCount" type="int" />
 		<column name="messageCount" type="int" />
 		<column name="lastPostDate" type="Date" />
