@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
-
 import java.text.DateFormat;
 import java.text.Format;
 
@@ -232,59 +230,6 @@ public class DateUtil {
 
 	public static Date newDate(long date) {
 		return new Date(date);
-	}
-
-	public static String relativeDate(Date date, Locale locale) {
-		int second = 1;
-		int minute = 60 * second;
-		int hour = 60 * minute;
-		int day = 24 * hour;
-		int month = 30 * day;
-		int year = 365 * day;
-
-		Date now = new Date();
-
-		if (date == null) {
-			return LanguageUtil.get(locale, "not-yet") ;
-		}
-
-		long delta = (now.getTime() - date.getTime())/1000;
-
-		if (delta <= 0) {
-			return LanguageUtil.get(locale, "not-yet") ;
-		}
-		else if (delta < 1 * minute) {
-			return LanguageUtil.format(
-				locale, delta == 1 ? "one-second-ago" : "x-seconds-ago", delta);
-		}
-		else if	(delta < 2 * minute) {
-			return LanguageUtil.get(locale, "a-minute-ago") ;
-		}
-		else if (delta < 45 * minute) {
-			return LanguageUtil.format(locale, "x-minutes-ago", delta/minute);
-		}
-		else if (delta < 90 * minute) {
-			return LanguageUtil.get(locale, "an-hour-ago") ;
-		}
-		else if (delta < 24 * hour) {
-			return LanguageUtil.format(locale, "x-hours-ago", delta/hour);
-		}
-		else if (delta < 48 * hour) {
-			return LanguageUtil.get(locale, "yesterday") ;
-		}
-		else if (delta < 30 * day) {
-			return LanguageUtil.format(locale, "x-days-ago", delta/day);
-		}
-		else if (delta < 12 * month) {
-			return LanguageUtil.format(
-				locale, delta <= 1 ? "one-month-ago" : "x-months-ago",
-				delta/month);
-		}
-		else {
-			return LanguageUtil.format(
-				locale, delta <= 1 ? "one-year-ago" : "x-years-ago",
-				delta/year);
-		}
 	}
 
 }
