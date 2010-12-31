@@ -232,8 +232,12 @@ public class LayoutAction extends Action {
 			ActionForward actionForward = processLayout(
 				mapping, request, headerCacheServletResponse, plid);
 
+			String contentType = response.getContentType();
+
 			CacheResponseUtil.setHeaders(
 				response, headerCacheServletResponse.getHeaders());
+
+			response.setContentType(contentType);
 
 			return actionForward;
 		}
@@ -361,7 +365,11 @@ public class LayoutAction extends Action {
 		PipingServletResponse pipingServletResponse = new PipingServletResponse(
 			response, unsyncStringWriter);
 
+		String contentType = pipingServletResponse.getContentType();
+
 		requestDispatcher.include(request, pipingServletResponse);
+
+		pipingServletResponse.setContentType(contentType);
 
 		request.setAttribute(
 			WebKeys.LAYOUT_CONTENT, unsyncStringWriter.getStringBundler());
