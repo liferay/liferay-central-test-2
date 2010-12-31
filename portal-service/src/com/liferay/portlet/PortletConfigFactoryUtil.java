@@ -39,13 +39,6 @@ public class PortletConfigFactoryUtil {
 		getPortletConfigFactory().destroy(portlet);
 	}
 
-	public static PortletConfig getPortletConfig(
-			long companyId, String portletId)
-		throws Exception {
-
-		return getPortletConfigFactory().getPortletConfig(companyId, portletId);
-	}
-
 	public static PortletConfig update(Portlet portlet) {
 		return getPortletConfigFactory().update(portlet);
 	}

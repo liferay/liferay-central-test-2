@@ -116,16 +116,9 @@ public class BaseConfigurationAction
 			RenderResponse renderResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		PortletConfig selPortletConfig = getSelPortletConfig(renderRequest);
 
-		String portletResource = ParamUtil.getString(
-			renderRequest, "portletResource");
-
-		portletConfig = PortletConfigFactoryUtil.getPortletConfig(
-			themeDisplay.getCompanyId(), portletResource);
-
-		String configJSP = portletConfig.getInitParameter("config-jsp");
+		String configJSP = selPortletConfig.getInitParameter("config-jsp");
 
 		if (Validator.isNotNull(configJSP)) {
 			return configJSP;
