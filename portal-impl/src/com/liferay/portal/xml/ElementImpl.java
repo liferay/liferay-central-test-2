@@ -40,8 +40,8 @@ public class ElementImpl extends BranchImpl implements Element {
 		_element = element;
 	}
 
-	public <T, V extends Visitor<T>> T accept(V v) {
-		return v.visitElement(this);
+	public <T, V extends Visitor<T>> T accept(V visitor) {
+		return visitor.visitElement(this);
 	}
 
 	public void add(Attribute attribute) {

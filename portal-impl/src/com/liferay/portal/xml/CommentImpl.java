@@ -28,8 +28,8 @@ public class CommentImpl extends NodeImpl implements Comment {
 		_comment = comment;
 	}
 
-	public <T, V extends Visitor<T>> T accept(V v) {
-		return v.visitComment(this);
+	public <T, V extends Visitor<T>> T accept(V visitor) {
+		return visitor.visitComment(this);
 	}
 
 	public boolean equals(Object obj) {

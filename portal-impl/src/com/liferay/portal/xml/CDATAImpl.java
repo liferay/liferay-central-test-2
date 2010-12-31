@@ -28,8 +28,8 @@ public class CDATAImpl extends NodeImpl implements CDATA {
 		_cdata = cdata;
 	}
 
-	public <T, V extends Visitor<T>> T accept(V v) {
-		return v.visitCDATA(this);
+	public <T, V extends Visitor<T>> T accept(V visitor) {
+		return visitor.visitCDATA(this);
 	}
 
 	public boolean equals(Object obj) {

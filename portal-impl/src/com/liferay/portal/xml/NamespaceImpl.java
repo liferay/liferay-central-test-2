@@ -28,8 +28,8 @@ public class NamespaceImpl extends NodeImpl implements Namespace {
 		_namespace = namespace;
 	}
 
-	public <T, V extends Visitor<T>> T accept(V v) {
-		return v.visitNamespace(this);
+	public <T, V extends Visitor<T>> T accept(V visitor) {
+		return visitor.visitNamespace(this);
 	}
 
 	public boolean equals(Object obj) {

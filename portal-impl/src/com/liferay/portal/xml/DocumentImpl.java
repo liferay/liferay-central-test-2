@@ -32,8 +32,8 @@ public class DocumentImpl extends BranchImpl implements Document {
 		_document = document;
 	}
 
-	public <T, V extends Visitor<T>> T accept(V v) {
-		return v.visitDocument(this);
+	public <T, V extends Visitor<T>> T accept(V visitor) {
+		return visitor.visitDocument(this);
 	}
 
 	public Document addComment(String comment) {

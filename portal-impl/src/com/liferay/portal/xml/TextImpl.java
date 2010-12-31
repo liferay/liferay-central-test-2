@@ -28,8 +28,8 @@ public class TextImpl extends NodeImpl implements Text {
 		_text = text;
 	}
 
-	public <T, V extends Visitor<T>> T accept(V v) {
-		return v.visitText(this);
+	public <T, V extends Visitor<T>> T accept(V visitor) {
+		return visitor.visitText(this);
 	}
 
 	public boolean equals(Object obj) {

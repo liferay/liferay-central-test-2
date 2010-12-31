@@ -33,8 +33,8 @@ public class NodeImpl implements Node {
 		_node = node;
 	}
 
-	public <T, V extends Visitor<T>> T accept(V v) {
-		return v.visitNode(this);
+	public <T, V extends Visitor<T>> T accept(V visitor) {
+		return visitor.visitNode(this);
 	}
 
 	public String asXML() {

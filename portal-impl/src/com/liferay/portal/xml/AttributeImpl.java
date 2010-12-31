@@ -30,8 +30,8 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 		_attribute = attribute;
 	}
 
-	public <T, V extends Visitor<T>> T accept(V v) {
-		return v.visitAttribute(this);
+	public <T, V extends Visitor<T>> T accept(V visitor) {
+		return visitor.visitAttribute(this);
 	}
 
 	public Object getData() {

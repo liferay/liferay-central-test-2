@@ -80,6 +80,10 @@ public abstract class BaseVisitor<T> implements Visitor<T> {
 		return handleEntity(entity);
 	}
 
+	public T visitNamespace(Namespace namespace) {
+		return handleNamespace(namespace);
+	}
+
 	public T visitNode(Node node) {
 		return handleNode(node);
 	}
@@ -90,19 +94,15 @@ public abstract class BaseVisitor<T> implements Visitor<T> {
 		return handleProcessInstruction(processingInstruction);
 	}
 
-	public T visitNamespace(Namespace namespace) {
-		return handleNamespace(namespace);
-	}
-
 	public T visitText(Text text) {
 		return handleText(text);
 	}
 
 	protected abstract T handleAttribute(Attribute attribute);
 
-	protected abstract T handleComment(Comment comment);
-
 	protected abstract T handleCDATA(CDATA cdata);
+
+	protected abstract T handleComment(Comment comment);
 
 	protected abstract T handleDocument(Document document, List<T> nodeResults);
 
@@ -111,9 +111,9 @@ public abstract class BaseVisitor<T> implements Visitor<T> {
 
 	protected abstract T handleEntity(Entity entity);
 
-	protected abstract T handleNode(Node node);
-
 	protected abstract T handleNamespace(Namespace namespace);
+
+	protected abstract T handleNode(Node node);
 
 	protected abstract T handleProcessInstruction(
 		ProcessingInstruction processingInstruction);

@@ -28,8 +28,8 @@ public class EntityImpl extends NodeImpl implements Entity {
 		_entity = entity;
 	}
 
-	public <T, V extends Visitor<T>> T accept(V v) {
-		return v.visitEntity(this);
+	public <T, V extends Visitor<T>> T accept(V visitor) {
+		return visitor.visitEntity(this);
 	}
 
 	public boolean equals(Object obj) {

@@ -33,8 +33,8 @@ public class ProcessingInstructionImpl
 		_processingInstruction = processingInstruction;
 	}
 
-	public <T, V extends Visitor<T>> T accept(V v) {
-		return v.visitProcessInstruction(this);
+	public <T, V extends Visitor<T>> T accept(V visitor) {
+		return visitor.visitProcessInstruction(this);
 	}
 
 	public boolean equals(Object obj) {
