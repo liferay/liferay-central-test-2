@@ -35,6 +35,7 @@ import javax.sql.DataSource;
 
 import org.hibernate.dialect.DB2400Dialect;
 import org.hibernate.dialect.Dialect;
+import org.hibernate.dialect.Oracle10gDialect;
 import org.hibernate.dialect.SybaseASE15Dialect;
 import org.hibernate.dialect.resolver.DialectFactory;
 
@@ -102,6 +103,9 @@ public class DialectDetector {
 			}
 			else if (dbName.startsWith("Microsoft") && (dbMajorVersion >= 9)) {
 				dialect = new SQLServer2008Dialect();
+			}
+			else if (dbName.startsWith("Oracle") && (dbMajorVersion >= 10)) {
+				dialect = new Oracle10gDialect();
 			}
 			else {
 				dialect = DialectFactory.buildDialect(
