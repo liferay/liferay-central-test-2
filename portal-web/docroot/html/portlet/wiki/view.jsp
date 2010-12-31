@@ -135,7 +135,7 @@ AssetUtil.addLayoutTags(request, AssetTagLocalServiceUtil.getTags(WikiPage.class
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
 <liferay-ui:header
-	backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", parentTitle) %>'
+	backLabel="<%= parentTitle %>"
 	backURL="<%= (viewParentPageURL != null) ? viewParentPageURL.toString() : null %>"
 	title="<%= title %>"
 />

@@ -115,9 +115,9 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	%>
 
 	<liferay-ui:header
-		backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", parentFolderName) %>'
+		backLabel="<%= parentFolderName %>"
 		backURL="<%= backURL.toString() %>"
-		title='<%= fileEntry.getTitle() %>'
+		title="<%= fileEntry.getTitle() %>"
 	/>
 </c:if>
 

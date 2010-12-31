@@ -138,7 +138,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 				</portlet:renderURL>
 
 				<liferay-ui:header
-					backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(parentFolderName)) %>'
+					backLabel="<%= parentFolderName %>"
 					backURL="<%= backURL.toString() %>"
 					title="<%= folder.getName() %>"
 				/>

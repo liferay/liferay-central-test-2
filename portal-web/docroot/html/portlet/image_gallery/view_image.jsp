@@ -70,7 +70,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 	</portlet:renderURL>
 
 	<liferay-ui:header
-		backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", parentFolderName) %>'
+		backLabel="<%= parentFolderName %>"
 		backURL="<%= backURL.toString() %>"
 		title="<%= image.getName() %>"
 	/>

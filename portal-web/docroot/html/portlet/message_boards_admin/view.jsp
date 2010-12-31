@@ -149,7 +149,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 			<liferay-ui:header
 				title="<%= category.getName() %>"
-				backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(parentCategoryName)) %>'
+				backLabel="<%= parentCategoryName %>"
 				backURL="<%= backURL.toString() %>"
 			/>
 		</c:if>

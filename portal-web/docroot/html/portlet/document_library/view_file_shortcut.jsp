@@ -90,7 +90,7 @@ if (Validator.isNotNull(folder.getName())) {
 </portlet:renderURL>
 
 <liferay-ui:header
-	backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", parentFolderName) %>'
+	backLabel="<%= parentFolderName %>"
 	backURL="<%= backURL.toString() %>"
 	title='<%= LanguageUtil.format(pageContext, "shortcut-to-x", toFileEntry.getTitle()) %>'
 />

@@ -45,7 +45,7 @@ request.setAttribute("view_entry.jsp-entry", entry);
 	%>
 
 	<liferay-ui:header
-		backLabel='<%= "&laquo; " + LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(folderName)) %>'
+		backLabel="<%= folderName %>"
 		backURL="<%= backURL.toString() %>"
 		title="<%= entry.getName() %>"
 	/>
