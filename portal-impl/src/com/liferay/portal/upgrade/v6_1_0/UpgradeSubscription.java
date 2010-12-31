@@ -16,50 +16,39 @@ package com.liferay.portal.upgrade.v6_1_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.util.PortalInstances;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
  * @author Juan Fernández
  */
-public class UpgradeDiscussionSubscriptions extends UpgradeProcess {
-
-	protected void doUpgrade() throws Exception {
-
-		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
-
-		if (companyIds.length == 0) {
-			return;
-		}
-
-		for (int i = 0; i < companyIds.length; i++) {
-			long companyId = companyIds[i];
-
-			subscribeToComments(companyId);
-		}
-	}
+public class UpgradeSubscription extends UpgradeProcess {
 
 	protected void addSubscription(
-			long companyId, long userId, String userName, Date createDate,
-			Date modifiedDate, long classNameId, long classPK)
+			long subscriptionId, long companyId, long userId, String userName,
+			Date createDate, Date modifiedDate, long classNameId, long classPK,
+			String frequency)
 		throws Exception {
 
 		Connection con = null;
 		PreparedStatement ps = null;
-		long subscriptionId = increment();
-		String frequecy = "instant";
 
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement(
-				"insert into Subscription(subscriptionId, companyId, userId, " +
-					"userName, createDate, modifiedDate, classNameId, " +
-					"classPK, frequency) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			StringBundler sb = new StringBundler(4);
+
+			sb.append("insert into Subscription (subscriptionId, companyId, ");
+			sb.append("userId, userName, createDate, modifiedDate, ");
+			sb.append("classNameId, classPK, frequency) values (?, ?, ?, ?, ");
+			sb.append("?, ?, ?, ?, ?)");
+
+			ps = con.prepareStatement(sb.toString());
 
 			ps.setLong(1, subscriptionId);
 			ps.setLong(2, companyId);
@@ -69,7 +58,7 @@ public class UpgradeDiscussionSubscriptions extends UpgradeProcess {
 			ps.setDate(6, modifiedDate);
 			ps.setLong(7, classNameId);
 			ps.setLong(8, classPK);
-			ps.setString(9, frequecy);
+			ps.setString(9, frequency);
 
 			ps.executeUpdate();
 		}
@@ -78,7 +67,15 @@ public class UpgradeDiscussionSubscriptions extends UpgradeProcess {
 		}
 	}
 
-	protected void subscribeToComments(long companyId) throws Exception {
+	protected void doUpgrade() throws Exception {
+		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
+
+		for (long companyId : companyIds) {
+			updateMBMessages(companyId);
+		}
+	}
+
+	protected void updateMBMessages(long companyId) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -86,11 +83,15 @@ public class UpgradeDiscussionSubscriptions extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement(
-				"select userId, userName, createDate, modifiedDate, " +
-				"classNameId, classPK from MBMessage where companyId = '" +
-				companyId +"' and classNameId != 0 and parentMessageId != 0  " +
-				"group by companyId, userId, classNameId, classPK");
+			StringBundler sb = new StringBundler(5);
+
+			sb.append("select userId, userName, createDate, modifiedDate, ");
+			sb.append("classNameId, classPK from MBMessage where ");
+			sb.append("(companyId = " + companyId + ") and (classNameId != ");
+			sb.append("0) and (parentMessageId != 0) group by userId, ");
+			sb.append("classNameId, classPK");
+
+			ps = con.prepareStatement(sb.toString());
 
 			rs = ps.executeQuery();
 
@@ -102,9 +103,12 @@ public class UpgradeDiscussionSubscriptions extends UpgradeProcess {
 				long classNameId = rs.getLong("classNameId");
 				long classPK = rs.getLong("classPK");
 
+				long subscriptionId = increment();
+				String frequency = "instant";
+
 				addSubscription(
-					companyId, userId, userName, createDate, modifiedDate,
-					classNameId, classPK);
+					subscriptionId, companyId, userId, userName, createDate,
+					modifiedDate, classNameId, classPK, frequency);
 			}
 		}
 		finally {

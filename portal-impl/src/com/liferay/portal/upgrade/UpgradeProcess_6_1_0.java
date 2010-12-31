@@ -17,11 +17,11 @@ package com.liferay.portal.upgrade;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v6_1_0.UpgradeAdminPortlets;
-import com.liferay.portal.upgrade.v6_1_0.UpgradeDiscussionSubscriptions;
 import com.liferay.portal.upgrade.v6_1_0.UpgradeDocumentLibrary;
 import com.liferay.portal.upgrade.v6_1_0.UpgradeNavigation;
 import com.liferay.portal.upgrade.v6_1_0.UpgradePortletPreferences;
 import com.liferay.portal.upgrade.v6_1_0.UpgradeSchema;
+import com.liferay.portal.upgrade.v6_1_0.UpgradeSubscription;
 import com.liferay.portal.upgrade.v6_1_0.UpgradeVirtualHost;
 
 /**
@@ -37,10 +37,10 @@ public class UpgradeProcess_6_1_0 extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		upgrade(UpgradeSchema.class);
 		upgrade(UpgradeAdminPortlets.class);
-		upgrade(UpgradeDiscussionSubscriptions.class);
 		upgrade(UpgradeDocumentLibrary.class);
 		upgrade(UpgradeNavigation.class);
 		upgrade(UpgradePortletPreferences.class);
+		upgrade(UpgradeSubscription.class);
 		upgrade(UpgradeVirtualHost.class);
 	}
 
