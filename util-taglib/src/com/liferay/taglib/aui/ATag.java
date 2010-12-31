@@ -64,6 +64,10 @@ public class ATag extends IncludeTag {
 		_target = target;
 	}
 
+	public void setTitle(String title) {
+		_title = title;
+	}
+
 	protected void cleanUp() {
 		_cssClass = null;
 		_href = null;
@@ -72,6 +76,7 @@ public class ATag extends IncludeTag {
 		_lang = null;
 		_onClick = null;
 		_target = null;
+		_title = null;
 	}
 
 	protected String getEndPage() {
@@ -183,6 +188,12 @@ public class ATag extends IncludeTag {
 				jspWriter.write("\" ");
 			}
 
+			if (Validator.isNotNull(_title)) {
+				jspWriter.write("title=\"");
+				jspWriter.write(LanguageUtil.get(pageContext, _title));
+				jspWriter.write("\" ");
+			}
+
 			writeDynamicAttributes(jspWriter);
 
 			jspWriter.write(">");
@@ -223,5 +234,6 @@ public class ATag extends IncludeTag {
 	private String _lang;
 	private String _onClick;
 	private String _target;
+	private String _title;
 
 }
