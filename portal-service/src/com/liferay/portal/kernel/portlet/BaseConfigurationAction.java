@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -114,6 +115,21 @@ public class BaseConfigurationAction
 			PortletConfig portletConfig, RenderRequest renderRequest,
 			RenderResponse renderResponse)
 		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String portletResource = ParamUtil.getString(
+			renderRequest, "portletResource");
+
+		portletConfig = PortletConfigFactoryUtil.getPortletConfig(
+			themeDisplay.getCompanyId(), portletResource);
+
+		String configJSP = portletConfig.getInitParameter("config-jsp");
+
+		if (Validator.isNotNull(configJSP)) {
+			return configJSP;
+		}
 
 		return "/configuration.jsp";
 	}

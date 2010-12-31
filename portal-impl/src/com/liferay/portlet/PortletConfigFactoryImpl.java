@@ -15,6 +15,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -62,6 +63,22 @@ public class PortletConfigFactoryImpl implements PortletConfigFactory {
 
 	public void destroy(Portlet portlet) {
 		_pool.remove(portlet.getRootPortletId());
+	}
+
+	public PortletConfig getPortletConfig (long companyId, String portletId)
+		throws Exception {
+
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+			companyId, portletId);
+
+		Map<String, PortletConfig> portletConfigs =
+			_pool.get(portlet.getRootPortletId());
+
+		if (portletConfigs == null) {
+			return null;
+		}
+
+		return portletConfigs.get(portlet.getPortletId());
 	}
 
 	public PortletConfig update(Portlet portlet) {
