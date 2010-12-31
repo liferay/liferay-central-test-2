@@ -148,9 +148,9 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 			</portlet:renderURL>
 
 			<liferay-ui:header
-				title="<%= category.getName() %>"
 				backLabel="<%= parentCategoryName %>"
 				backURL="<%= backURL.toString() %>"
+				title="<%= category.getName() %>"
 			/>
 		</c:if>
 

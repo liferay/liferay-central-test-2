@@ -71,9 +71,9 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 		</portlet:renderURL>
 
 		<liferay-ui:header
-			title="<%= organization.getName() %>"
 			backLabel="<%= parentOrganizationName %>"
 			backURL="<%= backURL.toString() %>"
+			title="<%= organization.getName() %>"
 		/>
 	</c:if>
 

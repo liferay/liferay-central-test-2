@@ -17,15 +17,15 @@
 <%@ include file="/html/taglib/ui/header/init.jsp" %>
 
 <%
-if (Validator.isNotNull(backURL) && !backURL.equals("javascript:history.go(-1);")) {
-	backURL = HtmlUtil.escape(HtmlUtil.escapeHREF(PortalUtil.escapeRedirect(backURL)));
-}
-
 if (Validator.isNotNull(backLabel)) {
 	backLabel = "&laquo; ".concat(LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(backLabel)));
 }
 else {
 	backLabel = "&laquo; ".concat(LanguageUtil.get(pageContext, "back"));
+}
+
+if (Validator.isNotNull(backURL) && !backURL.equals("javascript:history.go(-1);")) {
+	backURL = HtmlUtil.escape(HtmlUtil.escapeHREF(PortalUtil.escapeRedirect(backURL)));
 }
 %>
 
