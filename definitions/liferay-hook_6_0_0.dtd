@@ -96,6 +96,8 @@ value.object.listener.*
 
 <!ELEMENT custom-jsp-dir (#PCDATA)>
 
+<!ELEMENT custom-jsp-global (#PCDATA)>
+
 <!ELEMENT service (service-type, service-impl)>
 
 <!ELEMENT service-type (#PCDATA)>
