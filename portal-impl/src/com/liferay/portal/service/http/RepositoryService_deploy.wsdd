@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<service name="Portal_RepositoryService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.portal.liferay.com" />
+		<parameter name="wsdlServiceElement" value="RepositoryServiceSoapService" />
+		<parameter name="schemaUnqualified" value="http://model.portal.liferay.com" />
+		<parameter name="wsdlServicePort" value="Portal_RepositoryService" />
+		<parameter name="className" value="com.liferay.portal.service.http.RepositoryServiceSoap" />
+		<parameter name="wsdlPortType" value="RepositoryServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getRepository" qname="operNS:getRepository" returnQName="getRepositoryReturn" returnType="rtns:RepositorySoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="repositoryId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getTypeSettingsProperties" qname="operNS:getTypeSettingsProperties" returnQName="getTypeSettingsPropertiesReturn" returnType="rtns:anyType" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="repositoryId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="checkRepository" qname="operNS:checkRepository" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="repositoryId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteRepositories" qname="operNS:deleteRepositories" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="purge" type="tns:int"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteRepository" qname="operNS:deleteRepository" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="repositoryId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="purge" type="tns:boolean"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="deleteRepository deleteRepositories getRepository getTypeSettingsProperties checkRepository" />
+		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:RepositorySoap" type="java:com.liferay.portal.model.RepositorySoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+	</service>
+</deployment>

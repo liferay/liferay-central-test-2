@@ -65,18 +65,18 @@ public class JournalArticleWrapper implements JournalArticle {
 	}
 
 	/**
-	* Gets the id of this journal article.
+	* Gets the ID of this journal article.
 	*
-	* @return the id of this journal article
+	* @return the ID of this journal article
 	*/
 	public long getId() {
 		return _journalArticle.getId();
 	}
 
 	/**
-	* Sets the id of this journal article.
+	* Sets the ID of this journal article.
 	*
-	* @param id the id of this journal article
+	* @param id the ID of this journal article
 	*/
 	public void setId(long id) {
 		_journalArticle.setId(id);
