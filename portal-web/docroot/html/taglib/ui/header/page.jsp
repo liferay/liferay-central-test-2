@@ -18,7 +18,9 @@
 
 <%
 if (Validator.isNotNull(backLabel)) {
-	backLabel = "&laquo; ".concat(LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(backLabel)));
+	if (!backLabel.startsWith("&laquo; ")) {
+		backLabel = "&laquo; ".concat(LanguageUtil.format(pageContext, "back-to-x", HtmlUtil.escape(backLabel)));
+	}
 }
 else {
 	backLabel = "&laquo; ".concat(LanguageUtil.get(pageContext, "back"));
