@@ -220,10 +220,10 @@ public class GroupFinderImpl
 	public List<Group> findByLiveGroups() throws SystemException {
 		Session session = null;
 
-		String sql = CustomSQLUtil.get(FIND_BY_LIVE_GROUPS);
-
 		try {
 			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_LIVE_GROUPS);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -243,12 +243,12 @@ public class GroupFinderImpl
 			long classNameId, boolean privateLayout, int start, int end)
 		throws SystemException {
 
-		String sql = CustomSQLUtil.get(FIND_BY_SYSTEM);
-
 		Session session = null;
 
 		try {
 			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_SYSTEM);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -270,12 +270,12 @@ public class GroupFinderImpl
 	}
 
 	public List<Group> findByNullFriendlyURL() throws SystemException {
-		String sql = CustomSQLUtil.get(FIND_BY_NULL_FRIENDLY_URL);
-
 		Session session = null;
 
 		try {
 			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_NULL_FRIENDLY_URL);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -292,12 +292,12 @@ public class GroupFinderImpl
 	}
 
 	public List<Group> findBySystem(long companyId) throws SystemException {
-		String sql = CustomSQLUtil.get(FIND_BY_SYSTEM);
-
 		Session session = null;
 
 		try {
 			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_SYSTEM);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -319,7 +319,6 @@ public class GroupFinderImpl
 
 	public Group findByC_N(long companyId, String name)
 		throws NoSuchGroupException, SystemException {
-		String sql = CustomSQLUtil.get(FIND_BY_C_N);
 
 		name = StringUtil.lowerCase(name);
 
@@ -327,6 +326,8 @@ public class GroupFinderImpl
 
 		try {
 			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_C_N);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -403,32 +404,25 @@ public class GroupFinderImpl
 			params3.put("groupsUserGroups", userId);
 		}
 
-		String findByCND = CustomSQLUtil.get(FIND_BY_C_N_D);
+		String findByCND_SQL = CustomSQLUtil.get(FIND_BY_C_N_D);
 
-		findByCND = StringUtil.replace(
-			findByCND, "Group_.classNameId = ?",
+		findByCND_SQL = StringUtil.replace(
+			findByCND_SQL, "Group_.classNameId = ?",
 			"Group_.classNameId = ".concat(
 				StringUtil.merge(classNameIds, " OR Group_.classNameId = ")));
-
-		findByCND = CustomSQLUtil.replaceOrderBy(findByCND, obc);
+		findByCND_SQL = CustomSQLUtil.replaceOrderBy(findByCND_SQL, obc);
 
 		StringBundler sb = new StringBundler();
 
 		sb.append("(");
-
-		sb.append(replaceJoinAndWhere(findByCND, params1));
-
+		sb.append(replaceJoinAndWhere(findByCND_SQL, params1));
 		sb.append(")");
 
 		if (Validator.isNotNull(userId)) {
 			sb.append(" UNION (");
-
-			sb.append(replaceJoinAndWhere(findByCND, params2));
-
+			sb.append(replaceJoinAndWhere(findByCND_SQL, params2));
 			sb.append(") UNION (");
-
-			sb.append(replaceJoinAndWhere(findByCND, params3));
-
+			sb.append(replaceJoinAndWhere(findByCND_SQL, params3));
 			sb.append(")");
 		}
 
