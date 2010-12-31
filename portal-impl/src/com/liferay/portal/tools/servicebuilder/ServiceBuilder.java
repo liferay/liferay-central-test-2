@@ -1796,6 +1796,8 @@ public class ServiceBuilder {
 		String returnValueName = method.getReturns().getValue();
 
 		if (returnTypeGenericsName.equals("java.util.List<java.lang.Object>") ||
+			returnValueName.startsWith(
+				"com.liferay.portal.kernel.repository.model.") ||
 			returnValueName.equals("com.liferay.portal.model.Lock") ||
 			returnValueName.equals(
 				"com.liferay.portlet.messageboards.model.MBMessageDisplay") ||
