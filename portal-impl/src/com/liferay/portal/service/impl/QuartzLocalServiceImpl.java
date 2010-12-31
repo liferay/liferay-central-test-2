@@ -54,8 +54,8 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select JOB_NAME, JOB_GROUP, JOB_DATA from QUARTZ_JOB_DETAILS "
-				+ "for update",
+				"select JOB_NAME, JOB_GROUP, JOB_DATA from " +
+					"QUARTZ_JOB_DETAILS for update",
 				ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
 
 			rs = ps.executeQuery();
