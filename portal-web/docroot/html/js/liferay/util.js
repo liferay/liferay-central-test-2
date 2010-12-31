@@ -1439,7 +1439,7 @@
 		'_controlPanelPopup',
 		function(portlet, portletId, controlPanelURL, namespacedId, className, openingWindow) {
 			if (controlPanelURL) {
-				var title = Liferay.Language.get('add-new') + ' ' + Liferay.Language.get('model.resource.' + className);
+				var title = Liferay.Language.get('model.resource.' + className);
 
 				var iframeId = namespacedId + 'controlPanelIframe';
 
