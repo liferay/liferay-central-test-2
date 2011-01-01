@@ -36,6 +36,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
+import java.io.File;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 
@@ -53,6 +54,18 @@ import javax.mail.internet.InternetAddress;
  * @author Brian Wing Shun Chan
  */
 public class SubscriptionSender implements Serializable {
+
+	public void addAttachment(File attachment) {
+		if (attachment == null) {
+			return;
+		}
+
+		if (attachments == null) {
+			attachments = new ArrayList<File>();
+		}
+
+		attachments.add(attachment);
+	}
 
 	public void addPersistedSubscribers(String className, long classPK) {
 		ObjectValuePair<String, Long> ovp = new ObjectValuePair<String, Long>(
@@ -353,6 +366,12 @@ public class SubscriptionSender implements Serializable {
 		MailMessage mailMessage = new MailMessage(
 			from, to, subject, body, htmlFormat);
 
+		if (attachments != null) {
+			for (File attachment : attachments) {
+				mailMessage.addAttachment(attachment);
+			}
+		}
+
 		if (bulk && (_bulkAddresses != null)) {
 			mailMessage.setBulkAddresses(
 				_bulkAddresses.toArray(
@@ -383,6 +402,7 @@ public class SubscriptionSender implements Serializable {
 		MailServiceUtil.sendEmail(mailMessage);
 	}
 
+	protected List<File> attachments;
 	protected String body;
 	protected boolean bulk;
 	protected long companyId;
