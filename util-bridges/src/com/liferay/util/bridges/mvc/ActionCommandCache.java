@@ -17,6 +17,7 @@ package com.liferay.util.bridges.mvc;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -60,22 +61,24 @@ public class ActionCommandCache {
 			ActionCommand actionCommand = _actionCommandCache.get(
 				actionCommandName);
 
-			if (actionCommand == null) {
-				StringBundler sb = new StringBundler(4);
-
-				sb.append(_packagePrefix);
-				sb.append(Character.toUpperCase(actionCommandName.charAt(0)));
-				sb.append(
-					actionCommandName.substring(1, actionCommandName.length()));
-				sb.append(_ACTION_COMMAND_POSTFIX);
-
-				className = sb.toString();
-
-				actionCommand =
-					(ActionCommand)Class.forName(className).newInstance();
-
-				_actionCommandCache.put(actionCommandName, actionCommand);
+			if (actionCommand != null) {
+				return actionCommand;
 			}
+
+			StringBundler sb = new StringBundler(4);
+
+			sb.append(_packagePrefix);
+			sb.append(Character.toUpperCase(actionCommandName.charAt(0)));
+			sb.append(
+				actionCommandName.substring(1, actionCommandName.length()));
+			sb.append(_ACTION_COMMAND_POSTFIX);
+
+			className = sb.toString();
+
+			actionCommand = (ActionCommand)InstanceFactory.newInstance(
+				className);
+
+			_actionCommandCache.put(actionCommandName, actionCommand);
 
 			return actionCommand;
 		}
@@ -96,43 +99,43 @@ public class ActionCommandCache {
 		List<ActionCommand> actionCommands = _actionCommandChainCache.get(
 			actionCommandChain);
 
-		if (actionCommands == null) {
-			actionCommands = new ArrayList<ActionCommand>();
+		if (actionCommands != null) {
+			return actionCommands;
+		}
 
-			int nextSeparator = actionCommandChain.indexOf(CharPool.COMMA);
+		actionCommands = new ArrayList<ActionCommand>();
 
-			int currentIndex = 0;
+		int nextSeparator = actionCommandChain.indexOf(CharPool.COMMA);
 
-			while (currentIndex < actionCommandChain.length()) {
-				String parsedName = actionCommandChain.substring(
-					currentIndex, nextSeparator);
+		int currentIndex = 0;
 
-				ActionCommand actionCommand = getActionCommand(
-					parsedName);
+		while (currentIndex < actionCommandChain.length()) {
+			String actionCommandName = actionCommandChain.substring(
+				currentIndex, nextSeparator);
 
-				if (actionCommand != EMPTY) {
-					actionCommands.add(actionCommand);
-				}
-				else {
-					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Unable to find ActionCommand " +
-								actionCommandChain);
-					}
-				}
+			ActionCommand actionCommand = getActionCommand(actionCommandName);
 
-				currentIndex = nextSeparator + 1;
-
-				nextSeparator = actionCommandChain.indexOf(
-					CharPool.COMMA, currentIndex);
-
-				if (nextSeparator == -1) {
-					break;
+			if (actionCommand != EMPTY) {
+				actionCommands.add(actionCommand);
+			}
+			else {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Unable to find ActionCommand " + actionCommandChain);
 				}
 			}
 
-			_actionCommandChainCache.put(actionCommandChain, actionCommands);
+			currentIndex = nextSeparator + 1;
+
+			nextSeparator = actionCommandChain.indexOf(
+				CharPool.COMMA, currentIndex);
+
+			if (nextSeparator == -1) {
+				break;
+			}
 		}
+
+		_actionCommandChainCache.put(actionCommandChain, actionCommands);
 
 		return actionCommands;
 	}
