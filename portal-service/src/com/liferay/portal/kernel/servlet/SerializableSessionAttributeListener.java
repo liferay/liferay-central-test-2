@@ -73,7 +73,7 @@ public class SerializableSessionAttributeListener
 		attributeAdded(event);
 	}
 
-	private boolean _SESSION_VERIFY_SERIALIZABLE_ATTRIBUTE =
+	private static final boolean _SESSION_VERIFY_SERIALIZABLE_ATTRIBUTE =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.SESSION_VERIFY_SERIALIZABLE_ATTRIBUTE),
 			true);
