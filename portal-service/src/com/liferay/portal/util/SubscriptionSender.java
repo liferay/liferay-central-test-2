@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Subscription;
@@ -170,8 +171,14 @@ public class SubscriptionSender implements Serializable {
 		this.inReplyTo = inReplyTo;
 	}
 
-	public void setMailId(String mailId) {
-		this.mailId = mailId;
+	public void setMailId(
+		Company company, String popPortletPrefix, Object... ids) {
+
+		setMailId(company.getMx(), popPortletPrefix, ids);
+	}
+
+	public void setMailId(String mx, String popPortletPrefix, Object... ids) {
+		this.mailId = PortalUtil.getMailId(mx, popPortletPrefix, ids);
 	}
 
 	public void setReplyToAddress(String replyToAddress) {

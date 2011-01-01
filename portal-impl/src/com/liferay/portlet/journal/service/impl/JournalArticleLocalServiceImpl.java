@@ -2702,7 +2702,7 @@ public class JournalArticleLocalServiceImpl
 		subscriptionSender.setGroupId(article.getGroupId());
 		subscriptionSender.setHtmlFormat(true);
 		subscriptionSender.setMailId(
-			JournalUtil.getMailId(company.getMx(), article.getArticleId()));
+			company, "journal_article", article.getId());
 		subscriptionSender.setReplyToAddress(fromAddress);
 		subscriptionSender.setSubject(subject);
 		subscriptionSender.setUserId(article.getUserId());

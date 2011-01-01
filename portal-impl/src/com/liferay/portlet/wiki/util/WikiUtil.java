@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -37,7 +36,6 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.WikiFormatException;
@@ -71,8 +69,6 @@ import javax.portlet.PortletURL;
  * @author Jorge Ferrer
  */
 public class WikiUtil {
-
-	public static final String POP_PORTLET_PREFIX = "wiki.";
 
 	public static String convert(
 			WikiPage page, PortletURL viewPageURL, PortletURL editPageURL,
@@ -283,23 +279,6 @@ public class WikiUtil {
 		throws PageContentException {
 
 		return _instance._getLinks(page);
-	}
-
-	public static String getMailId(String mx, long nodeId, long pageId) {
-		StringBundler sb = new StringBundler(10);
-
-		sb.append(StringPool.LESS_THAN);
-		sb.append(POP_PORTLET_PREFIX);
-		sb.append(nodeId);
-		sb.append(StringPool.PERIOD);
-		sb.append(pageId);
-		sb.append(StringPool.AT);
-		sb.append(PropsValues.POP_SERVER_SUBDOMAIN);
-		sb.append(StringPool.PERIOD);
-		sb.append(mx);
-		sb.append(StringPool.GREATER_THAN);
-
-		return sb.toString();
 	}
 
 	public static long getNodeIdFromUri(String uri) {

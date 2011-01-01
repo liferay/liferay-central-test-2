@@ -16,13 +16,11 @@ package com.liferay.portlet.blogs.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.PropsValues;
 
 import javax.portlet.PortletPreferences;
 
@@ -31,8 +29,6 @@ import javax.portlet.PortletPreferences;
  * @author Thiago Moreira
  */
 public class BlogsUtil {
-
-	public static final String POP_PORTLET_PREFIX = "blogs.";
 
 	public static String getEmailEntryAddedBody(
 		PortletPreferences preferences) {
@@ -135,21 +131,6 @@ public class BlogsUtil {
 		String emailFromName = PropsUtil.get(PropsKeys.BLOGS_EMAIL_FROM_NAME);
 
 		return preferences.getValue("emailFromName", emailFromName);
-	}
-
-	public static String getMailId(String mx, long entryId) {
-		StringBundler sb = new StringBundler(8);
-
-		sb.append(StringPool.LESS_THAN);
-		sb.append(POP_PORTLET_PREFIX);
-		sb.append(entryId);
-		sb.append(StringPool.AT);
-		sb.append(PropsValues.POP_SERVER_SUBDOMAIN);
-		sb.append(StringPool.PERIOD);
-		sb.append(mx);
-		sb.append(StringPool.GREATER_THAN);
-
-		return sb.toString();
 	}
 
 	public static String getUrlTitle(long entryId, String title) {

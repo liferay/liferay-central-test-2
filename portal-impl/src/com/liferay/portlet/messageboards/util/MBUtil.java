@@ -76,10 +76,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class MBUtil {
 
-	public static final String POP_PORTLET_PREFIX = "mb.";
-
-	public static final int POP_SERVER_SUBDOMAIN_LENGTH =
-		PropsValues.POP_SERVER_SUBDOMAIN.length();
+	public static final String MESSAGE_POP_PORTLET_PREFIX = "mb_message.";
 
 	public static void addPortletBreadcrumbEntries(
 			long categoryId, HttpServletRequest request,
@@ -399,32 +396,11 @@ public class MBUtil {
 		}
 	}
 
-	public static String getMailId(String mx, long categoryId, long messageId) {
-		StringBundler sb = new StringBundler(10);
-
-		sb.append(StringPool.LESS_THAN);
-		sb.append(POP_PORTLET_PREFIX);
-		sb.append(categoryId);
-		sb.append(StringPool.PERIOD);
-		sb.append(messageId);
-		sb.append(StringPool.AT);
-
-		if (Validator.isNotNull(PropsValues.POP_SERVER_SUBDOMAIN)) {
-			sb.append(PropsValues.POP_SERVER_SUBDOMAIN);
-			sb.append(StringPool.PERIOD);
-		}
-
-		sb.append(mx);
-		sb.append(StringPool.GREATER_THAN);
-
-		return sb.toString();
-	}
-
 	public static String getMailingListAddress(
 		long groupId, long categoryId, long messageId, String mx,
 		String defaultMailingListAddress) {
 
-		if (POP_SERVER_SUBDOMAIN_LENGTH <= 0) {
+		if (PropsValues.POP_SERVER_SUBDOMAIN.length() <= 0) {
 			String mailingListAddress = defaultMailingListAddress;
 
 			try {
@@ -444,7 +420,7 @@ public class MBUtil {
 
 		StringBundler sb = new StringBundler(8);
 
-		sb.append(POP_PORTLET_PREFIX);
+		sb.append(MESSAGE_POP_PORTLET_PREFIX);
 		sb.append(categoryId);
 		sb.append(StringPool.PERIOD);
 		sb.append(messageId);
@@ -528,7 +504,7 @@ public class MBUtil {
 		}
 
 		if (Validator.isNull(parentHeader) ||
-			!parentHeader.startsWith(POP_PORTLET_PREFIX, 1)) {
+			!parentHeader.startsWith(MESSAGE_POP_PORTLET_PREFIX, 1)) {
 
 			parentHeader = _getParentMessageIdFromSubject(message);
 		}

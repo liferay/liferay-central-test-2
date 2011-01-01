@@ -930,7 +930,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		subscriptionSender.setGroupId(entry.getGroupId());
 		subscriptionSender.setHtmlFormat(true);
 		subscriptionSender.setMailId(
-			BlogsUtil.getMailId(company.getMx(), entry.getEntryId()));
+			company, "blogs_entry", entry.getEntryId());
 		subscriptionSender.setReplyToAddress(fromAddress);
 		subscriptionSender.setSubject(subject);
 		subscriptionSender.setUserId(entry.getUserId());

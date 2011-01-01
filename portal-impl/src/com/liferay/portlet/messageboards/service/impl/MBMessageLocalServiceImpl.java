@@ -1654,9 +1654,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			return;
 		}
 
-		String contentURL = (String)serviceContext.getAttribute("redirect");
+		Company company = companyPersistence.findByPrimaryKey(
+			message.getCompanyId());
 
 		User user = userPersistence.findByPrimaryKey(message.getUserId());
+
+		String contentURL = (String)serviceContext.getAttribute("redirect");
 
 		String fromName = PrefsPropsUtil.getString(
 			message.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_NAME);
@@ -1712,6 +1715,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		subscriptionSender.setCompanyId(message.getCompanyId());
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setGroupId(message.getGroupId());
+		subscriptionSender.setMailId(
+			company, "mb_discussion", message.getCategoryId(),
+			message.getMessageId());
 		subscriptionSender.setSubject(subject);
 		subscriptionSender.setUserId(message.getUserId());
 
@@ -1993,9 +1999,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (message.getParentMessageId() !=
 				MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) {
 
-			inReplyTo = MBUtil.getMailId(
-				company.getMx(), message.getCategoryId(),
-				message.getParentMessageId());
+			inReplyTo = PortalUtil.getMailId(
+				company.getMx(), MBUtil.MESSAGE_POP_PORTLET_PREFIX,
+				message.getCategoryId(), message.getParentMessageId());
 		}
 
 		SubscriptionSender subscriptionSenderPrototype =
@@ -2010,9 +2016,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			MBUtil.getEmailHtmlFormat(preferences));
 		subscriptionSenderPrototype.setInReplyTo(inReplyTo);
 		subscriptionSenderPrototype.setMailId(
-			MBUtil.getMailId(
-				company.getMx(), message.getCategoryId(),
-				message.getMessageId()));
+			company, MBUtil.MESSAGE_POP_PORTLET_PREFIX, message.getCategoryId(),
+			message.getMessageId());
 		subscriptionSenderPrototype.setReplyToAddress(mailingListAddress);
 		subscriptionSenderPrototype.setSubject(subject);
 		subscriptionSenderPrototype.setUserId(message.getUserId());

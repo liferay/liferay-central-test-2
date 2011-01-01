@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -93,8 +92,6 @@ import javax.portlet.PortletSession;
 public class JournalUtil {
 
 	public static final int MAX_STACK_SIZE = 20;
-
-	public static final String POP_PORTLET_PREFIX = "journal.";
 
 	public static final String XML_INDENT = "  ";
 
@@ -622,21 +619,6 @@ public class JournalUtil {
 			PropsKeys.JOURNAL_EMAIL_FROM_NAME);
 
 		return preferences.getValue("emailFromName", emailFromName);
-	}
-
-	public static String getMailId(String mx, String articleId) {
-		StringBundler sb = new StringBundler(8);
-
-		sb.append(StringPool.LESS_THAN);
-		sb.append(POP_PORTLET_PREFIX);
-		sb.append(articleId);
-		sb.append(StringPool.AT);
-		sb.append(PropsValues.POP_SERVER_SUBDOMAIN);
-		sb.append(StringPool.PERIOD);
-		sb.append(mx);
-		sb.append(StringPool.GREATER_THAN);
-
-		return sb.toString();
 	}
 
 	public static Stack<JournalArticle> getRecentArticles(

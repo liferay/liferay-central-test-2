@@ -587,6 +587,12 @@ public class PortalUtil {
 		return getPortal().getLocale(renderRequest);
 	}
 
+	public static String getMailId(
+		String mx, String popPortletPrefix, Object... ids) {
+
+		return getPortal().getMailId(mx, popPortletPrefix, ids);
+	}
+
 	/**
 	 * @deprecated {@link #getBaseModel(Resource)}
 	 */

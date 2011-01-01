@@ -31,6 +31,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBCategory;
@@ -60,7 +61,7 @@ public class MessageListenerImpl implements MessageListener {
 
 			if ((messageId == null) ||
 				(!messageId.startsWith(
-					MBUtil.POP_PORTLET_PREFIX, getOffset()))) {
+					MBUtil.MESSAGE_POP_PORTLET_PREFIX, getOffset()))) {
 
 				return false;
 			}
@@ -223,7 +224,7 @@ public class MessageListenerImpl implements MessageListener {
 		int pos = recipient.indexOf(CharPool.AT);
 
 		String target = recipient.substring(
-			MBUtil.POP_PORTLET_PREFIX.length() + getOffset(), pos);
+			MBUtil.MESSAGE_POP_PORTLET_PREFIX.length() + getOffset(), pos);
 
 		String[] parts = StringUtil.split(target, StringPool.PERIOD);
 
@@ -233,9 +234,9 @@ public class MessageListenerImpl implements MessageListener {
 	protected Company getCompany(String recipient) throws Exception {
 		int pos =
 			recipient.indexOf(CharPool.AT) +
-				MBUtil.POP_SERVER_SUBDOMAIN_LENGTH + 1;
+				PropsValues.POP_SERVER_SUBDOMAIN.length() + 1;
 
-		if (MBUtil.POP_SERVER_SUBDOMAIN_LENGTH > 0) {
+		if (PropsValues.POP_SERVER_SUBDOMAIN.length() > 0) {
 			pos++;
 		}
 
@@ -247,7 +248,7 @@ public class MessageListenerImpl implements MessageListener {
 	protected String getMessageId(String recipient, Message message)
 		throws Exception {
 
-		if (MBUtil.POP_SERVER_SUBDOMAIN_LENGTH > 0) {
+		if (PropsValues.POP_SERVER_SUBDOMAIN.length() > 0) {
 			return recipient;
 		}
 		else {
@@ -256,9 +257,10 @@ public class MessageListenerImpl implements MessageListener {
 	}
 
 	protected int getOffset() {
-		if (MBUtil.POP_SERVER_SUBDOMAIN_LENGTH == 0) {
+		if (PropsValues.POP_SERVER_SUBDOMAIN.length() == 0) {
 			return 1;
 		}
+
 		return 0;
 	}
 
@@ -270,7 +272,7 @@ public class MessageListenerImpl implements MessageListener {
 		int pos = recipient.indexOf(CharPool.AT);
 
 		String target = recipient.substring(
-			MBUtil.POP_PORTLET_PREFIX.length(), pos);
+			MBUtil.MESSAGE_POP_PORTLET_PREFIX.length(), pos);
 
 		String[] parts = StringUtil.split(target, StringPool.PERIOD);
 
