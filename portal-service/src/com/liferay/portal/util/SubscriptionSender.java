@@ -360,10 +360,12 @@ public class SubscriptionSender implements Serializable {
 
 		mailMessage.setMessageId(mailId);
 
-		InternetAddress replyTo = new InternetAddress(
-			replyToAddress, replyToAddress);
+		if (replyToAddress != null) {
+			InternetAddress replyTo = new InternetAddress(
+				replyToAddress, replyToAddress);
 
-		mailMessage.setReplyTo(new InternetAddress[] {replyTo});
+			mailMessage.setReplyTo(new InternetAddress[] {replyTo});
+		}
 
 		if (smtpAccount != null) {
 			mailMessage.setSMTPAccount(smtpAccount);
