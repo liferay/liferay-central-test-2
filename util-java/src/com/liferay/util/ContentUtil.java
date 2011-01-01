@@ -47,7 +47,7 @@ public class ContentUtil {
 		return _instance._get(classLoader, location, all);
 	}
 
-	protected ContentUtil() {
+	private ContentUtil() {
 		_contentPool = new HashMap<String, String>();
 	}
 
