@@ -72,7 +72,6 @@ import com.liferay.portal.servlet.filters.absoluteredirects.AbsoluteRedirectsRes
 import com.liferay.portal.servlet.filters.i18n.I18nFilter;
 import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
-import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.ExtRegistry;
 import com.liferay.portal.util.MaintenanceUtil;
 import com.liferay.portal.util.Portal;
@@ -88,6 +87,7 @@ import com.liferay.portlet.PortletFilterFactory;
 import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletURLListenerFactory;
 import com.liferay.portlet.social.messaging.CheckEquityLogMessageListener;
+import com.liferay.util.ContentUtil;
 import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.EncryptedServletRequest;
 

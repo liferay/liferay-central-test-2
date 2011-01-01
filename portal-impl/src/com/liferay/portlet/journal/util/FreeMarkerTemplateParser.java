@@ -30,9 +30,9 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.journal.TransformException;
+import com.liferay.util.ContentUtil;
 import com.liferay.util.PwdGenerator;
 
 import freemarker.core.ParseException;
