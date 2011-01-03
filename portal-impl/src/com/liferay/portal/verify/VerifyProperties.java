@@ -260,6 +260,36 @@ public class VerifyProperties extends VerifyProcess {
 			"default.user.public.layouts.lar"
 		},
 		new String[] {
+			"editor.wysiwyg.portal-web.docroot.html.portlet.calendar." +
+				"edit_configuration.jsp",
+			"editor.wysiwyg.portal-web.docroot.html.portlet.calendar." +
+				"configuration.jsp"
+		},
+		new String[] {
+			"editor.wysiwyg.portal-web.docroot.html.portlet.invitation." +
+				"edit_configuration.jsp",
+			"editor.wysiwyg.portal-web.docroot.html.portlet.invitation." +
+				"configuration.jsp"
+		},
+		new String[] {
+			"editor.wysiwyg.portal-web.docroot.html.portlet.journal." +
+				"edit_configuration.jsp",
+			"editor.wysiwyg.portal-web.docroot.html.portlet.journal." +
+				"configuration.jsp"
+		},
+		new String[] {
+			"editor.wysiwyg.portal-web.docroot.html.portlet.message_boards." +
+				"edit_configuration.jsp",
+			"editor.wysiwyg.portal-web.docroot.html.portlet.message_boards." +
+				"configuration.jsp"
+		},
+		new String[] {
+			"editor.wysiwyg.portal-web.docroot.html.portlet.shopping." +
+				"edit_configuration.jsp",
+			"editor.wysiwyg.portal-web.docroot.html.portlet.shopping." +
+				"configuration.jsp"
+		},
+		new String[] {
 			"lucene.store.jdbc.auto.clean.up",
 			"lucene.store.jdbc.auto.clean.up.enabled"
 		},
