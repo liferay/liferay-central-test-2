@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.util.Validator;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 
 /**
  * @author Bruno Farache
@@ -51,14 +49,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		}
 
 		super.processAction(portletConfig, actionRequest, actionResponse);
-	}
-
-	public String render(
-			PortletConfig portletConfig, RenderRequest renderRequest,
-			RenderResponse renderResponse)
-		throws Exception {
-
-		return "/html/portlet/wiki/configuration.jsp";
 	}
 
 	protected void validateDisplaySettings(ActionRequest actionRequest)

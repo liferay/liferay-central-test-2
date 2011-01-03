@@ -42,8 +42,6 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 
 /**
  * @author Jorge Ferrer
@@ -76,14 +74,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		}
 
 		super.processAction(portletConfig, actionRequest, actionResponse);
-	}
-
-	public String render(
-			PortletConfig portletConfig, RenderRequest renderRequest,
-			RenderResponse renderResponse)
-		throws Exception {
-
-		return "/html/portlet/nested_portlets/configuration.jsp";
 	}
 
 	protected List<String> getColumnNames(String content, String portletId) {

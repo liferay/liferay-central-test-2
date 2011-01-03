@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 
 /**
  * @author Brian Wing Shun Chan
@@ -37,14 +35,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		validateUrls(actionRequest);
 
 		super.processAction(portletConfig, actionRequest, actionResponse);
-	}
-
-	public String render(
-			PortletConfig portletConfig, RenderRequest renderRequest,
-			RenderResponse renderResponse)
-		throws Exception {
-
-		return "/html/portlet/xsl_content/configuration.jsp";
 	}
 
 	protected void validateUrls(ActionRequest actionRequest) {

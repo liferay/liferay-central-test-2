@@ -24,8 +24,6 @@ import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 
 /**
  * @author Sergio González
@@ -40,14 +38,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		validateRootFolder(actionRequest);
 
 		super.processAction(portletConfig, actionRequest, actionResponse);
-	}
-
-	public String render(
-			PortletConfig portletConfig, RenderRequest renderRequest,
-			RenderResponse renderResponse)
-		throws Exception {
-
-		return "/html/portlet/bookmarks/configuration.jsp";
 	}
 
 	protected void validateRootFolder(ActionRequest actionRequest)

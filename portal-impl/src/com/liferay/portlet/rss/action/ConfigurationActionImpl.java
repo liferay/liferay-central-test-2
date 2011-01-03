@@ -30,8 +30,6 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 import javax.portlet.ValidatorException;
 
 /**
@@ -88,14 +86,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 					portletConfig.getPortletName() + ".doConfigure");
 			}
 		}
-	}
-
-	public String render(
-			PortletConfig portletConfig, RenderRequest renderRequest,
-			RenderResponse renderResponse)
-		throws Exception {
-
-		return "/html/portlet/rss/configuration.jsp";
 	}
 
 	protected void removeFooterArticle(

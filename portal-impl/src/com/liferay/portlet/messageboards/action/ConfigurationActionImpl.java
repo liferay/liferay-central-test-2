@@ -34,8 +34,6 @@ import java.util.TreeMap;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 
 /**
  * @author Brian Wing Shun Chan
@@ -66,14 +64,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		}
 
 		super.processAction(portletConfig, actionRequest, actionResponse);
-	}
-
-	public String render(
-			PortletConfig portletConfig, RenderRequest renderRequest,
-			RenderResponse renderResponse)
-		throws Exception {
-
-		return "/html/portlet/message_boards/configuration.jsp";
 	}
 
 	protected void validateEmailFrom(ActionRequest actionRequest)

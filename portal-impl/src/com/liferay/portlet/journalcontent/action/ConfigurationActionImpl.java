@@ -25,8 +25,6 @@ import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 
 /**
  * @author Brian Wing Shun Chan
@@ -43,14 +41,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		if (SessionErrors.isEmpty(actionRequest)) {
 			updateContentSearch(actionRequest);
 		}
-	}
-
-	public String render(
-			PortletConfig portletConfig, RenderRequest renderRequest,
-			RenderResponse renderResponse)
-		throws Exception {
-
-		return "/html/portlet/journal_content/configuration.jsp";
 	}
 
 	protected void updateContentSearch(ActionRequest actionRequest)

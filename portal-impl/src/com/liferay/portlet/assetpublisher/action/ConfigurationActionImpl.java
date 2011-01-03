@@ -32,8 +32,6 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 
 /**
  * @author Brian Wing Shun Chan
@@ -104,14 +102,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 				}
 			}
 		}
-	}
-
-	public String render(
-			PortletConfig portletConfig, RenderRequest renderRequest,
-			RenderResponse renderResponse)
-		throws Exception {
-
-		return "/html/portlet/asset_publisher/configuration.jsp";
 	}
 
 	protected void moveSelectionDown(

@@ -28,8 +28,6 @@ import com.liferay.portlet.shopping.util.ShoppingPreferences;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 
 /**
  * @author Brian Wing Shun Chan
@@ -83,14 +81,6 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			SessionMessages.add(
 				actionRequest, portletConfig.getPortletName() + ".doConfigure");
 		}
-	}
-
-	public String render(
-			PortletConfig portletConfig, RenderRequest renderRequest,
-			RenderResponse renderResponse)
-		throws Exception {
-
-		return "/html/portlet/shopping/configuration.jsp";
 	}
 
 	protected void updateEmailFrom(
