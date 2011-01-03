@@ -1020,6 +1020,12 @@ public class PortalUtil {
 		return getPortal().getUser(portletRequest);
 	}
 
+	public static String getUserEmailAddress(long userId)
+		throws SystemException {
+
+		return getPortal().getUserEmailAddress(userId);
+	}
+
 	public static long getUserId(HttpServletRequest request) {
 		return getPortal().getUserId(request);
 	}

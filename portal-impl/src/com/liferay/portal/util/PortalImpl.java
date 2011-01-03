@@ -3232,6 +3232,17 @@ public class PortalImpl implements Portal {
 		return getUser(getHttpServletRequest(portletRequest));
 	}
 
+	public String getUserEmailAddress(long userId) throws SystemException {
+		try {
+			User user = UserLocalServiceUtil.getUserById(userId);
+
+			return user.getEmailAddress();
+		}
+		catch (PortalException pe) {
+			return StringPool.BLANK;
+		}
+	}
+
 	public long getUserId(HttpServletRequest request) {
 		Long userIdObj = (Long)request.getAttribute(WebKeys.USER_ID);
 

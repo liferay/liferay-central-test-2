@@ -607,6 +607,8 @@ public interface Portal {
 	public User getUser(PortletRequest portletRequest)
 		throws PortalException, SystemException;
 
+	public String getUserEmailAddress(long userId) throws SystemException;
+
 	public long getUserId(HttpServletRequest request);
 
 	public long getUserId(PortletRequest portletRequest);
