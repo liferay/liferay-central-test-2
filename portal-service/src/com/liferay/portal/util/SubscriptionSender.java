@@ -16,6 +16,7 @@ package com.liferay.portal.util;
 
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -26,6 +27,7 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
@@ -33,13 +35,13 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.io.File;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -83,6 +85,8 @@ public class SubscriptionSender implements Serializable {
 	}
 
 	public void flushNotifications() throws Exception {
+		initialize();
+
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
@@ -148,6 +152,42 @@ public class SubscriptionSender implements Serializable {
 		MessageBusUtil.sendMessage(DestinationNames.SUBSCRIPTION_SENDER, this);
 	}
 
+	public void initialize() throws PortalException, SystemException {
+		if (_initialized) {
+			return;
+		}
+
+		_initialized = true;
+
+		Company company = CompanyLocalServiceUtil.getCompany(companyId);
+
+		setContextAttribute("[$COMPANY_ID$]", company.getCompanyId());
+		setContextAttribute("[$COMPANY_MX$]", company.getMx());
+		setContextAttribute("[$COMPANY_NAME$]", company.getName());
+		setContextAttribute("[$PORTAL_URL$]", company.getVirtualHostname());
+
+		if (groupId > 0) {
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			setContextAttribute(
+				"[$COMMUNITY_NAME$]", group.getDescriptiveName());
+		}
+
+		if ((userId > 0) && Validator.isNotNull(_contextUserPrefix)) {
+			setContextAttribute(
+				"[$" + _contextUserPrefix + "_USER_ADDRESS$]",
+				PortalUtil.getUserEmailAddress(userId));
+			setContextAttribute(
+				"[$" + _contextUserPrefix + "_USER_NAME$]",
+				PortalUtil.getUserName(userId, StringPool.BLANK));
+		}
+
+		_sentUserIds.add(userId);
+
+		mailId = PortalUtil.getMailId(
+			company.getMx(), _mailIdPopPortletPrefix, _mailIdIds);
+	}
+
 	public String getMailId() {
 		return this.mailId;
 	}
@@ -164,13 +204,23 @@ public class SubscriptionSender implements Serializable {
 		this.companyId = companyId;
 	}
 
-	public void setFrom(String address, String name) throws SystemException {
-		try {
-			from = new InternetAddress(address, name);
+	public void setContextAttribute(String key, Object value) {
+		_context.put(key, value);
+	}
+
+	public void setContextAttributes(Object... values) {
+		for (int i = 0; i < values.length; i += 2) {
+			setContextAttribute(String.valueOf(values[i]), values[i + 1]);
 		}
-		catch (UnsupportedEncodingException uee) {
-			throw new SystemException(uee);
-		}
+	}
+
+	public void setContextUserPrefix(String contextUserPrefix) {
+		_contextUserPrefix = contextUserPrefix;
+	}
+
+	public void setFrom(String fromAddress, String fromName) {
+		this.fromAddress = fromAddress;
+		this.fromName = fromName;
 	}
 
 	public void setGroupId(long groupId) {
@@ -195,14 +245,13 @@ public class SubscriptionSender implements Serializable {
 		this.localizedSubjectMap = localizedSubjectMap;
 	}
 
-	public void setMailId(
-		Company company, String popPortletPrefix, Object... ids) {
-
-		setMailId(company.getMx(), popPortletPrefix, ids);
+	public void setMailId(String popPortletPrefix, Object... ids) {
+		_mailIdPopPortletPrefix = popPortletPrefix;
+		_mailIdIds = ids;
 	}
 
-	public void setMailId(String mx, String popPortletPrefix, Object... ids) {
-		this.mailId = PortalUtil.getMailId(mx, popPortletPrefix, ids);
+	public  void setPortletId(String portletId) {
+		this.portletId = portletId;
 	}
 
 	public void setReplyToAddress(String replyToAddress) {
@@ -342,60 +391,95 @@ public class SubscriptionSender implements Serializable {
 	protected void processMailMessage(MailMessage mailMessage, Locale locale)
 		throws Exception {
 
+		InternetAddress from = mailMessage.getFrom();
 		InternetAddress to = mailMessage.getTo()[0];
 
 		String processedSubject = StringUtil.replace(
 			mailMessage.getSubject(),
 			new String[] {
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
 				"[$TO_ADDRESS$]",
 				"[$TO_NAME$]"
 			},
 			new String[] {
+				from.getAddress(),
+				GetterUtil.getString(from.getPersonal(), from.getAddress()),
 				to.getAddress(),
 				GetterUtil.getString(to.getPersonal(), to.getAddress())
 			});
+
+		processedSubject = replaceContent(processedSubject, locale);
 
 		mailMessage.setSubject(processedSubject);
 
 		String processedBody = StringUtil.replace(
 			mailMessage.getBody(),
 			new String[] {
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
 				"[$TO_ADDRESS$]",
 				"[$TO_NAME$]"
 			},
 			new String[] {
+				from.getAddress(),
+				GetterUtil.getString(from.getPersonal(), from.getAddress()),
 				to.getAddress(),
 				GetterUtil.getString(to.getPersonal(), to.getAddress())
 			});
 
+		processedBody = replaceContent(processedBody, locale);
+
 		mailMessage.setBody(processedBody);
+	}
+
+	protected String replaceContent(String content, Locale locale) {
+		for (Map.Entry<String, Object> entry : _context.entrySet()) {
+			String key = entry.getKey();
+			Object value = entry.getValue();
+
+			content = StringUtil.replace(content, key, String.valueOf(value));
+		}
+
+		if (Validator.isNotNull(portletId)) {
+			String portletName = PortalUtil.getPortletTitle(portletId, locale);
+
+			content = StringUtil.replace(
+				content, "[$PORTLET_NAME$]", portletName);
+		}
+
+		return content;
 	}
 
 	protected void sendEmail(InternetAddress to, Locale locale)
 		throws Exception {
 
-		String subject = this.subject;
+		InternetAddress from = new InternetAddress(
+			replaceContent(fromAddress, locale),
+			replaceContent(fromName, locale));
+
+		String processedSubject = this.subject;
 
 		if (localizedSubjectMap != null) {
 			String localizedSubject = localizedSubjectMap.get(locale);
 
 			if (Validator.isNotNull(localizedSubject)) {
-				subject = localizedSubject;
+				processedSubject = localizedSubject;
 			}
 		}
 
-		String body = this.body;
+		String processedBody = this.body;
 
 		if (localizedBodyMap != null) {
 			String localizedBody = localizedBodyMap.get(locale);
 
 			if (Validator.isNotNull(localizedBody)) {
-				body = localizedBody;
+				processedBody = localizedBody;
 			}
 		}
 
 		MailMessage mailMessage = new MailMessage(
-			from, to, subject, body, htmlFormat);
+			from, to, processedSubject, processedBody, htmlFormat);
 
 		if (attachments != null) {
 			for (File attachment : attachments) {
@@ -437,14 +521,15 @@ public class SubscriptionSender implements Serializable {
 	protected String body;
 	protected boolean bulk;
 	protected long companyId;
-	protected Map<String, Object> context = new HashMap<String, Object>();
-	protected InternetAddress from;
+	protected String fromAddress;
+	protected String fromName;
 	protected long groupId;
 	protected boolean htmlFormat;
 	protected String inReplyTo;
 	protected Map<Locale, String> localizedBodyMap;
 	protected Map<Locale, String> localizedSubjectMap;
 	protected String mailId;
+	protected String portletId;
 	protected String replyToAddress;
 	protected SMTPAccount smtpAccount;
 	protected String subject;
@@ -456,6 +541,11 @@ public class SubscriptionSender implements Serializable {
 
 	private List<InternetAddress> _bulkAddresses;
 	private ClassLoader _classLoader;
+	private Map<String, Object> _context = new HashMap<String, Object>();
+	private String _contextUserPrefix;
+	private boolean _initialized;
+	private Object[] _mailIdIds;
+	private String _mailIdPopPortletPrefix;
 	private List<ObjectValuePair<String, Long>> _persistestedSubscribersOVPs =
 		new ArrayList<ObjectValuePair<String, Long>>();
 	private List<ObjectValuePair<String, String>> _runtimeSubscribersOVPs =

@@ -36,9 +36,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
@@ -46,7 +44,6 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.util.Portal;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.SubscriptionSender;
@@ -1476,13 +1473,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			return;
 		}
 
-		Company company = companyPersistence.findByPrimaryKey(
-			page.getCompanyId());
-
-		Group group = groupPersistence.findByPrimaryKey(node.getGroupId());
-
-		User user = userPersistence.findByPrimaryKey(page.getUserId());
-
 		String portalURL = serviceContext.getPortalURL();
 		String layoutFullURL = serviceContext.getLayoutFullURL();
 
@@ -1547,52 +1537,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			}
 		}
 
-		String portletName = PortalUtil.getPortletTitle(PortletKeys.WIKI, user);
-
 		String fromName = WikiUtil.getEmailFromName(preferences);
 		String fromAddress = WikiUtil.getEmailFromAddress(preferences);
-
-		fromName = StringUtil.replace(
-			fromName,
-			new String[] {
-				"[$COMPANY_ID$]",
-				"[$COMPANY_MX$]",
-				"[$COMPANY_NAME$]",
-				"[$COMMUNITY_NAME$]",
-				"[$PAGE_USER_ADDRESS$]",
-				"[$PAGE_USER_NAME$]",
-				"[$PORTLET_NAME$]"
-			},
-			new String[] {
-				String.valueOf(company.getCompanyId()),
-				company.getMx(),
-				company.getName(),
-				group.getName(),
-				user.getEmailAddress(),
-				user.getFullName(),
-				portletName
-			});
-
-		fromAddress = StringUtil.replace(
-			fromAddress,
-			new String[] {
-				"[$COMPANY_ID$]",
-				"[$COMPANY_MX$]",
-				"[$COMPANY_NAME$]",
-				"[$COMMUNITY_NAME$]",
-				"[$PAGE_USER_ADDRESS$]",
-				"[$PAGE_USER_NAME$]",
-				"[$PORTLET_NAME$]"
-			},
-			new String[] {
-				String.valueOf(company.getCompanyId()),
-				company.getMx(),
-				company.getName(),
-				group.getName(),
-				user.getEmailAddress(),
-				user.getFullName(),
-				portletName
-			});
 
 		String subjectPrefix = null;
 		String body = null;
@@ -1611,105 +1557,34 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			signature = WikiUtil.getEmailPageAddedSignature(preferences);
 		}
 
-		if (Validator.isNotNull(signature)) {
-			body += "\n" + signature;
-		}
-
-		subjectPrefix = StringUtil.replace(
-			subjectPrefix,
-			new String[] {
-				"[$COMPANY_ID$]",
-				"[$COMPANY_MX$]",
-				"[$COMPANY_NAME$]",
-				"[$COMMUNITY_NAME$]",
-				"[$FROM_ADDRESS$]",
-				"[$FROM_NAME$]",
-				"[$NODE_NAME$]",
-				"[$PAGE_CONTENT$]",
-				"[$PAGE_ID$]",
-				"[$PAGE_TITLE$]",
-				"[$PAGE_USER_ADDRESS$]",
-				"[$PAGE_USER_NAME$]",
-				"[$PORTAL_URL$]",
-				"[$PORTLET_NAME$]"
-			},
-			new String[] {
-				String.valueOf(company.getCompanyId()),
-				company.getMx(),
-				company.getName(),
-				group.getName(),
-				fromAddress,
-				fromName,
-				node.getName(),
-				pageContent,
-				String.valueOf(page.getPageId()),
-				page.getTitle(),
-				user.getEmailAddress(),
-				user.getFullName(),
-				company.getVirtualHostname(),
-				portletName
-			});
-
-		body = StringUtil.replace(
-			body,
-			new String[] {
-				"[$COMPANY_ID$]",
-				"[$COMPANY_MX$]",
-				"[$COMPANY_NAME$]",
-				"[$COMMUNITY_NAME$]",
-				"[$DIFFS_URL$]",
-				"[$FROM_ADDRESS$]",
-				"[$FROM_NAME$]",
-				"[$NODE_NAME$]",
-				"[$PAGE_CONTENT$]",
-				"[$PAGE_DATE_UPDATE$]",
-				"[$PAGE_DIFFS$]",
-				"[$PAGE_ID$]",
-				"[$PAGE_SUMMARY$]",
-				"[$PAGE_TITLE$]",
-				"[$PAGE_URL$]",
-				"[$PAGE_USER_ADDRESS$]",
-				"[$PAGE_USER_NAME$]",
-				"[$PORTAL_URL$]",
-				"[$PORTLET_NAME$]"
-			},
-			new String[] {
-				String.valueOf(company.getCompanyId()),
-				company.getMx(),
-				company.getName(),
-				group.getName(),
-				diffsURL,
-				fromAddress,
-				fromName,
-				node.getName(),
-				pageContent,
-				String.valueOf(page.getModifiedDate()),
-				replaceStyles(pageDiffs),
-				String.valueOf(page.getPageId()),
-				page.getSummary(),
-				page.getTitle(),
-				pageURL,
-				user.getEmailAddress(),
-				user.getFullName(),
-				company.getVirtualHostname(),
-				portletName
-			});
-
 		String subject = page.getTitle();
 
 		if (subject.indexOf(subjectPrefix) == -1) {
 			subject = subjectPrefix + StringPool.SPACE + subject;
 		}
 
+		if (Validator.isNotNull(signature)) {
+			body += "\n" + signature;
+		}
+
 		SubscriptionSender subscriptionSender = new SubscriptionSender();
 
 		subscriptionSender.setBody(body);
-		subscriptionSender.setCompanyId(node.getCompanyId());
+		subscriptionSender.setCompanyId(page.getCompanyId());
+		subscriptionSender.setContextAttributes(
+			"[$DIFFS_URL$]", diffsURL, "[$NODE_NAME$]", node.getName(),
+			"[$PAGE_CONTENT$]", pageContent, "[$PAGE_DATE_UPDATE$]",
+			page.getModifiedDate(), "[$PAGE_DIFFS$]", replaceStyles(pageDiffs),
+			"[$PAGE_ID$]", page.getPageId(), "[$PAGE_SUMMARY$]",
+			page.getSummary(), "[$PAGE_TITLE$]", page.getTitle(),
+			"[$PAGE_URL$]", pageURL);
+		subscriptionSender.setContextUserPrefix("PAGE");
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setGroupId(node.getGroupId());
 		subscriptionSender.setHtmlFormat(true);
 		subscriptionSender.setMailId(
-			company, "wiki_page", page.getNodeId(), page.getPageId());
+			"wiki_page", page.getNodeId(), page.getPageId());
+		subscriptionSender.setPortletId(PortletKeys.WIKI);
 		subscriptionSender.setReplyToAddress(fromAddress);
 		subscriptionSender.setSubject(subject);
 		subscriptionSender.setUserId(node.getUserId());

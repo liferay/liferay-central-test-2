@@ -17,7 +17,6 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.documentlibrary.DuplicateDirectoryException;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
-import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -31,12 +30,10 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
@@ -1653,7 +1650,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	protected void notifyDiscussionSubscribers(
 			MBMessage message, ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (!PrefsPropsUtil.getBoolean(
 				message.getCompanyId(),
@@ -1661,11 +1658,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			return;
 		}
-
-		Company company = companyPersistence.findByPrimaryKey(
-			message.getCompanyId());
-
-		User user = userPersistence.findByPrimaryKey(message.getUserId());
 
 		String contentURL = (String)serviceContext.getAttribute("redirect");
 
@@ -1679,53 +1671,18 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		String body = PrefsPropsUtil.getContent(
 			message.getCompanyId(), PropsKeys.DISCUSSION_EMAIL_BODY);
 
-		subject = StringUtil.replace(
-			subject,
-			new String[] {
-				"[$COMMENTS_BODY$]",
-				"[$COMMENTS_USER_ADDRESS$]",
-				"[$COMMENTS_USER_NAME$]",
-				"[$CONTENT_URL$]",
-				"[$FROM_ADDRESS$]",
-				"[$FROM_NAME$]"
-			},
-			new String[] {
-				message.getBody(),
-				user.getEmailAddress(),
-				user.getFullName(),
-				contentURL,
-				fromAddress,
-				fromName
-			});
-
-		body = StringUtil.replace(
-			body,
-			new String[] {
-				"[$COMMENTS_BODY$]",
-				"[$COMMENTS_USER_ADDRESS$]",
-				"[$COMMENTS_USER_NAME$]",
-				"[$CONTENT_URL$]",
-				"[$FROM_ADDRESS$]",
-				"[$FROM_NAME$]"
-			},
-			new String[] {
-				message.getBody(),
-				user.getEmailAddress(),
-				user.getFullName(),
-				contentURL,
-				fromAddress,
-				fromName
-			});
-
 		SubscriptionSender subscriptionSender = new SubscriptionSender();
 
 		subscriptionSender.setBody(body);
 		subscriptionSender.setCompanyId(message.getCompanyId());
+		subscriptionSender.setContextAttributes(
+			"[$COMMENTS_BODY$]", message.getBody(), "[$CONTENT_URL$]",
+			contentURL);
+		subscriptionSender.setContextUserPrefix("COMMENTS");
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setGroupId(message.getGroupId());
 		subscriptionSender.setMailId(
-			company, "mb_discussion", message.getCategoryId(),
-			message.getMessageId());
+			"mb_discussion", message.getCategoryId(), message.getMessageId());
 		subscriptionSender.setSubject(subject);
 		subscriptionSender.setUserId(message.getUserId());
 
@@ -1792,25 +1749,18 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		Group group = groupPersistence.findByPrimaryKey(message.getGroupId());
 
-		String emailAddress = StringPool.BLANK;
-		String fullName = message.getUserName();
-
-		try {
-			User user = userPersistence.findByPrimaryKey(message.getUserId());
-
-			emailAddress = user.getEmailAddress();
-			fullName = user.getFullName();
-		}
-		catch (NoSuchUserException nsue) {
-		}
-
-		MBCategory category = message.getCategory();
+		String emailAddress = PortalUtil.getUserEmailAddress(
+			message.getUserId());
+		String fullName = PortalUtil.getUserName(
+			message.getUserId(), message.getUserName());
 
 		if (message.isAnonymous()) {
 			emailAddress = StringPool.BLANK;
 			fullName = LanguageUtil.get(
 				ServiceContextUtil.getLocale(serviceContext), "anonymous");
 		}
+
+		MBCategory category = message.getCategory();
 
 		String categoryName = category.getName();
 
@@ -1820,7 +1770,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			categoryName = LanguageUtil.get(
 				ServiceContextUtil.getLocale(serviceContext),
 				"message-boards-home") + StringPool.SPACE + StringPool.DASH +
-				StringPool.SPACE + group.getName();
+				StringPool.SPACE + group.getDescriptiveName();
 		}
 
 		List<Long> categoryIds = new ArrayList<Long>();
@@ -1839,9 +1789,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR +
 				"message_boards/view_message/" + message.getMessageId();
 
-		String portletName = PortalUtil.getPortletTitle(
-			PortletKeys.MESSAGE_BOARDS, LocaleUtil.getDefault());
-
 		String fromName = MBUtil.getEmailFromName(preferences);
 		String fromAddress = MBUtil.getEmailFromAddress(preferences);
 
@@ -1852,52 +1799,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				message.getGroupId(), message.getCategoryId(),
 				message.getMessageId(), company.getMx(), fromAddress);
 		}
-
-		fromName = StringUtil.replace(
-			fromName,
-			new String[] {
-				"[$COMPANY_ID$]",
-				"[$COMPANY_MX$]",
-				"[$COMPANY_NAME$]",
-				"[$COMMUNITY_NAME$]",
-				"[$MAILING_LIST_ADDRESS$]",
-				"[$MESSAGE_USER_ADDRESS$]",
-				"[$MESSAGE_USER_NAME$]",
-				"[$PORTLET_NAME$]"
-			},
-			new String[] {
-				String.valueOf(company.getCompanyId()),
-				company.getMx(),
-				company.getName(),
-				group.getName(),
-				mailingListAddress,
-				emailAddress,
-				fullName,
-				portletName
-			});
-
-		fromAddress = StringUtil.replace(
-			fromAddress,
-			new String[] {
-				"[$COMPANY_ID$]",
-				"[$COMPANY_MX$]",
-				"[$COMPANY_NAME$]",
-				"[$COMMUNITY_NAME$]",
-				"[$MAILING_LIST_ADDRESS$]",
-				"[$MESSAGE_USER_ADDRESS$]",
-				"[$MESSAGE_USER_NAME$]",
-				"[$PORTLET_NAME$]"
-			},
-			new String[] {
-				String.valueOf(company.getCompanyId()),
-				company.getMx(),
-				company.getName(),
-				group.getName(),
-				mailingListAddress,
-				emailAddress,
-				fullName,
-				portletName
-			});
 
 		String subjectPrefix = null;
 		String body = null;
@@ -1916,90 +1817,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			signature = MBUtil.getEmailMessageAddedSignature(preferences);
 		}
 
-		if (Validator.isNotNull(signature)) {
-			body +=  "\n--\n" + signature;
-		}
-
-		subjectPrefix = StringUtil.replace(
-			subjectPrefix,
-			new String[] {
-				"[$CATEGORY_NAME$]",
-				"[$COMPANY_ID$]",
-				"[$COMPANY_MX$]",
-				"[$COMPANY_NAME$]",
-				"[$COMMUNITY_NAME$]",
-				"[$FROM_ADDRESS$]",
-				"[$FROM_NAME$]",
-				"[$MAILING_LIST_ADDRESS$]",
-				"[$MESSAGE_BODY$]",
-				"[$MESSAGE_ID$]",
-				"[$MESSAGE_SUBJECT$]",
-				"[$MESSAGE_USER_ADDRESS$]",
-				"[$MESSAGE_USER_NAME$]",
-				"[$PORTAL_URL$]",
-				"[$PORTLET_NAME$]"
-			},
-			new String[] {
-				categoryName,
-				String.valueOf(company.getCompanyId()),
-				company.getMx(),
-				company.getName(),
-				group.getName(),
-				fromAddress,
-				fromName,
-				mailingListAddress,
-				message.getBody(),
-				String.valueOf(message.getMessageId()),
-				message.getSubject(),
-				emailAddress,
-				fullName,
-				company.getVirtualHostname(),
-				portletName
-			});
-
-		body = StringUtil.replace(
-			body,
-			new String[] {
-				"[$CATEGORY_NAME$]",
-				"[$COMPANY_ID$]",
-				"[$COMPANY_MX$]",
-				"[$COMPANY_NAME$]",
-				"[$COMMUNITY_NAME$]",
-				"[$FROM_ADDRESS$]",
-				"[$FROM_NAME$]",
-				"[$MAILING_LIST_ADDRESS$]",
-				"[$MESSAGE_BODY$]",
-				"[$MESSAGE_ID$]",
-				"[$MESSAGE_SUBJECT$]",
-				"[$MESSAGE_URL$]",
-				"[$MESSAGE_USER_ADDRESS$]",
-				"[$MESSAGE_USER_NAME$]",
-				"[$PORTAL_URL$]",
-				"[$PORTLET_NAME$]"
-			},
-			new String[] {
-				categoryName,
-				String.valueOf(company.getCompanyId()),
-				company.getMx(),
-				company.getName(),
-				group.getName(),
-				fromAddress,
-				fromName,
-				mailingListAddress,
-				message.getBody(),
-				String.valueOf(message.getMessageId()),
-				message.getSubject(),
-				messageURL,
-				emailAddress,
-				fullName,
-				company.getVirtualHostname(),
-				portletName
-			});
-
 		String subject = message.getSubject();
 
 		if (subject.indexOf(subjectPrefix) == -1) {
 			subject = subjectPrefix.trim() + " " + subject.trim();
+		}
+
+		if (Validator.isNotNull(signature)) {
+			body +=  "\n--\n" + signature;
 		}
 
 		String inReplyTo = null;
@@ -2018,14 +1843,22 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		subscriptionSenderPrototype.setBody(body);
 		subscriptionSenderPrototype.setBulk(true);
 		subscriptionSenderPrototype.setCompanyId(message.getCompanyId());
+		subscriptionSenderPrototype.setContextAttributes(
+			"[$CATEGORY_NAME$]", categoryName, "[$MAILING_LIST_ADDRESS$]",
+			mailingListAddress, "[$MESSAGE_BODY$]", message.getBody(),
+			"[$MESSAGE_ID$]", message.getMessageId(), "[$MESSAGE_SUBJECT$]",
+			message.getSubject(), "[$MESSAGE_URL$]", messageURL,
+			"[$MESSAGE_USER_ADDRESS$]", emailAddress, "[$MESSAGE_USER_NAME$]",
+			fullName);
 		subscriptionSenderPrototype.setFrom(fromAddress, fromName);
 		subscriptionSenderPrototype.setGroupId(message.getGroupId());
 		subscriptionSenderPrototype.setHtmlFormat(
 			MBUtil.getEmailHtmlFormat(preferences));
 		subscriptionSenderPrototype.setInReplyTo(inReplyTo);
 		subscriptionSenderPrototype.setMailId(
-			company, MBUtil.MESSAGE_POP_PORTLET_PREFIX, message.getCategoryId(),
+			MBUtil.MESSAGE_POP_PORTLET_PREFIX, message.getCategoryId(),
 			message.getMessageId());
+		subscriptionSenderPrototype.setPortletId(PortletKeys.MESSAGE_BOARDS);
 		subscriptionSenderPrototype.setReplyToAddress(mailingListAddress);
 		subscriptionSenderPrototype.setSubject(subject);
 		subscriptionSenderPrototype.setUserId(message.getUserId());

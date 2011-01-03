@@ -15,7 +15,6 @@
 package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.NoSuchImageException;
-import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -2557,76 +2556,8 @@ public class JournalArticleLocalServiceImpl
 			return;
 		}
 
-		Company company = companyPersistence.findByPrimaryKey(
-			article.getCompanyId());
-
-		String emailAddress = StringPool.BLANK;
-		String fullName = article.getUserName();
-
-		try {
-			User user = userPersistence.findByPrimaryKey(article.getUserId());
-
-			emailAddress = user.getEmailAddress();
-			fullName = user.getFullName();
-		}
-		catch (NoSuchUserException nsue) {
-		}
-
-		String portletName = PortalUtil.getPortletTitle(
-			PortletKeys.JOURNAL, LocaleUtil.getDefault());
-
 		String fromName = JournalUtil.getEmailFromName(preferences);
 		String fromAddress = JournalUtil.getEmailFromAddress(preferences);
-
-		fromName = StringUtil.replace(
-			fromName,
-			new String[] {
-				"[$ARTICLE_ID$]",
-				"[$ARTICLE_TITLE$]",
-				"[$ARTICLE_USER_ADDRESS$]",
-				"[$ARTICLE_USER_NAME$]",
-				"[$ARTICLE_VERSION$]",
-				"[$FROM_ADDRESS$]",
-				"[$FROM_NAME$]",
-				"[$PORTAL_URL$]",
-				"[$PORTLET_NAME$]",
-			},
-			new String[] {
-				article.getArticleId(),
-				article.getTitle(),
-				emailAddress,
-				fullName,
-				String.valueOf(article.getVersion()),
-				fromAddress,
-				fromName,
-				company.getVirtualHostname(),
-				portletName,
-			});
-
-		fromAddress = StringUtil.replace(
-			fromAddress,
-			new String[] {
-				"[$ARTICLE_ID$]",
-				"[$ARTICLE_TITLE$]",
-				"[$ARTICLE_USER_ADDRESS$]",
-				"[$ARTICLE_USER_NAME$]",
-				"[$ARTICLE_VERSION$]",
-				"[$FROM_ADDRESS$]",
-				"[$FROM_NAME$]",
-				"[$PORTAL_URL$]",
-				"[$PORTLET_NAME$]",
-			},
-			new String[] {
-				article.getArticleId(),
-				article.getTitle(),
-				emailAddress,
-				fullName,
-				String.valueOf(article.getVersion()),
-				fromAddress,
-				fromName,
-				company.getVirtualHostname(),
-				portletName,
-			});
 
 		String subject = null;
 		String body = null;
@@ -2640,69 +2571,20 @@ public class JournalArticleLocalServiceImpl
 			body = JournalUtil.getEmailArticleUpdatedBody(preferences);
 		}
 
-		subject = StringUtil.replace(
-			subject,
-			new String[] {
-				"[$ARTICLE_ID$]",
-				"[$ARTICLE_TITLE$]",
-				"[$ARTICLE_URL$]",
-				"[$ARTICLE_USER_ADDRESS$]",
-				"[$ARTICLE_USER_NAME$]",
-				"[$ARTICLE_VERSION$]",
-				"[$FROM_ADDRESS$]",
-				"[$FROM_NAME$]",
-				"[$PORTAL_URL$]",
-				"[$PORTLET_NAME$]",
-			},
-			new String[] {
-				article.getArticleId(),
-				article.getTitle(),
-				articleURL,
-				emailAddress,
-				fullName,
-				String.valueOf(article.getVersion()),
-				fromAddress,
-				fromName,
-				company.getVirtualHostname(),
-				portletName,
-			});
-
-		body = StringUtil.replace(
-			body,
-			new String[] {
-				"[$ARTICLE_ID$]",
-				"[$ARTICLE_TITLE$]",
-				"[$ARTICLE_URL$]",
-				"[$ARTICLE_USER_ADDRESS$]",
-				"[$ARTICLE_USER_NAME$]",
-				"[$ARTICLE_VERSION$]",
-				"[$FROM_ADDRESS$]",
-				"[$FROM_NAME$]",
-				"[$PORTAL_URL$]",
-				"[$PORTLET_NAME$]",
-			},
-			new String[] {
-				article.getArticleId(),
-				article.getTitle(),
-				articleURL,
-				emailAddress,
-				fullName,
-				String.valueOf(article.getVersion()),
-				fromAddress,
-				fromName,
-				company.getVirtualHostname(),
-				portletName,
-			});
-
 		SubscriptionSender subscriptionSender = new SubscriptionSender();
 
 		subscriptionSender.setBody(body);
 		subscriptionSender.setCompanyId(article.getCompanyId());
+		subscriptionSender.setContextAttributes(
+			"[$ARTICLE_ID$]", article.getArticleId(), "[$ARTICLE_TITLE$]",
+			article.getTitle(), "[$ARTICLE_URL$]", articleURL,
+			"[$ARTICLE_VERSION$]", article.getVersion());
+		subscriptionSender.setContextUserPrefix("ARTICLE");
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setGroupId(article.getGroupId());
 		subscriptionSender.setHtmlFormat(true);
-		subscriptionSender.setMailId(
-			company, "journal_article", article.getId());
+		subscriptionSender.setMailId("journal_article", article.getId());
+		subscriptionSender.setPortletId(PortletKeys.JOURNAL);
 		subscriptionSender.setReplyToAddress(fromAddress);
 		subscriptionSender.setSubject(subject);
 		subscriptionSender.setUserId(article.getUserId());

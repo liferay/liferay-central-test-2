@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.blogs.service.impl;
 
-import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -26,7 +25,6 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.SetUtil;
@@ -36,7 +34,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
@@ -782,75 +779,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			return;
 		}
 
-		Company company = companyPersistence.findByPrimaryKey(
-			entry.getCompanyId());
-
-		Group group = groupPersistence.findByPrimaryKey(
-			serviceContext.getScopeGroupId());
-
-		String emailAddress = StringPool.BLANK;
-		String fullName = entry.getUserName();
-
-		try {
-			User user = userPersistence.findByPrimaryKey(entry.getUserId());
-
-			emailAddress = user.getEmailAddress();
-			fullName = user.getFullName();
-		}
-		catch (NoSuchUserException nsue) {
-		}
-
-		String portletName = PortalUtil.getPortletTitle(
-			PortletKeys.BLOGS, LocaleUtil.getDefault());
-
-		String fromName = BlogsUtil.getEmailFromName(preferences);
-		String fromAddress = BlogsUtil.getEmailFromAddress(preferences);
-
-		fromName = StringUtil.replace(
-			fromName,
-			new String[] {
-				"[$BLOGS_ENTRY_USER_ADDRESS$]",
-				"[$BLOGS_ENTRY_USER_NAME$]",
-				"[$COMPANY_ID$]",
-				"[$COMPANY_MX$]",
-				"[$COMPANY_NAME$]",
-				"[$COMMUNITY_NAME$]",
-				"[$PORTLET_NAME$]"
-			},
-			new String[] {
-				emailAddress,
-				fullName,
-				String.valueOf(company.getCompanyId()),
-				company.getMx(),
-				company.getName(),
-				group.getName(),
-				portletName
-			});
-
-		fromAddress = StringUtil.replace(
-			fromAddress,
-			new String[] {
-				"[$BLOGS_ENTRY_USER_ADDRESS$]",
-				"[$BLOGS_ENTRY_USER_NAME$]",
-				"[$COMPANY_ID$]",
-				"[$COMPANY_MX$]",
-				"[$COMPANY_NAME$]",
-				"[$COMMUNITY_NAME$]",
-				"[$PORTLET_NAME$]"
-			},
-			new String[] {
-				emailAddress,
-				fullName,
-				String.valueOf(company.getCompanyId()),
-				company.getMx(),
-				company.getName(),
-				group.getName(),
-				portletName
-			});
-
 		String entryURL =
 			layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR + "blogs" +
 				StringPool.SLASH + entry.getEntryId();
+
+		String fromName = BlogsUtil.getEmailFromName(preferences);
+		String fromAddress = BlogsUtil.getEmailFromAddress(preferences);
 
 		String subject = null;
 		String body = null;
@@ -864,73 +798,18 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			body = BlogsUtil.getEmailEntryAddedBody(preferences);
 		}
 
-		subject = StringUtil.replace(
-			subject,
-			new String[] {
-				"[$BLOGS_ENTRY_USER_ADDRESS$]",
-				"[$BLOGS_ENTRY_USER_NAME$]",
-				"[$BLOGS_ENTRY_URL$]",
-				"[$COMPANY_ID$]",
-				"[$COMPANY_MX$]",
-				"[$COMPANY_NAME$]",
-				"[$COMMUNITY_NAME$]",
-				"[$FROM_ADDRESS$]",
-				"[$FROM_NAME$]",
-				"[$PORTAL_URL$]",
-				"[$PORTLET_NAME$]"
-			},
-			new String[] {
-				emailAddress,
-				fullName,
-				entryURL,
-				String.valueOf(company.getCompanyId()),
-				company.getMx(),
-				company.getName(),
-				group.getName(),
-				fromAddress,
-				fromName,
-				company.getVirtualHostname(),
-				portletName
-			});
-
-		body = StringUtil.replace(
-			body,
-			new String[] {
-				"[$BLOGS_ENTRY_USER_ADDRESS$]",
-				"[$BLOGS_ENTRY_USER_NAME$]",
-				"[$BLOGS_ENTRY_URL$]",
-				"[$COMPANY_ID$]",
-				"[$COMPANY_MX$]",
-				"[$COMPANY_NAME$]",
-				"[$COMMUNITY_NAME$]",
-				"[$FROM_ADDRESS$]",
-				"[$FROM_NAME$]",
-				"[$PORTAL_URL$]",
-				"[$PORTLET_NAME$]"
-			},
-			new String[] {
-				emailAddress,
-				fullName,
-				entryURL,
-				String.valueOf(company.getCompanyId()),
-				company.getMx(),
-				company.getName(),
-				group.getName(),
-				fromAddress,
-				fromName,
-				company.getVirtualHostname(),
-				portletName
-			});
-
 		SubscriptionSender subscriptionSender = new SubscriptionSender();
 
 		subscriptionSender.setBody(body);
 		subscriptionSender.setCompanyId(entry.getCompanyId());
+		subscriptionSender.setContextAttributes(
+			"[$BLOGS_ENTRY_URL$]", entryURL);
+		subscriptionSender.setContextUserPrefix("BLOGS_ENTRY");
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setGroupId(entry.getGroupId());
 		subscriptionSender.setHtmlFormat(true);
-		subscriptionSender.setMailId(
-			company, "blogs_entry", entry.getEntryId());
+		subscriptionSender.setMailId("blogs_entry", entry.getEntryId());
+		subscriptionSender.setPortletId(PortletKeys.BLOGS);
 		subscriptionSender.setReplyToAddress(fromAddress);
 		subscriptionSender.setSubject(subject);
 		subscriptionSender.setUserId(entry.getUserId());
