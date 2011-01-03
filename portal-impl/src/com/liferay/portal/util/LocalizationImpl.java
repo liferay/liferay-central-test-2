@@ -259,6 +259,27 @@ public class LocalizationImpl implements Localization {
 	}
 
 	public Map<Locale, String> getLocalizationMap(
+		PortletPreferences preferences, String parameter) {
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		Map<Locale, String> map = new HashMap<Locale, String>();
+
+		for (Locale locale : locales) {
+			String languageId = LocaleUtil.toLanguageId(locale);
+
+			String localeParameter = parameter.concat(
+				StringPool.UNDERLINE).concat(languageId);
+
+			map.put(
+				locale,
+				preferences.getValue(localeParameter, StringPool.BLANK));
+		}
+
+		return map;
+	}
+
+	public Map<Locale, String> getLocalizationMap(
 		PortletRequest portletRequest, String parameter) {
 
 		Locale[] locales = LanguageUtil.getAvailableLocales();

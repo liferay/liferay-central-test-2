@@ -102,6 +102,20 @@ public interface Localization {
 	 * Gets a map of locales and localized strings for the parameter in the
 	 * portlet request.
 	 *
+	 * @param  preferences the preferences container to get the locales and
+	 *         localized strings from
+	 * @param  parameter the prefix of the parameters containing the localized
+	 *         strings. Each localization will be loaded from a parameter with
+	 *         this prefix, followed by an underscore, and the language ID.
+	 * @return the locales and localized strings
+	 */
+	public Map<Locale, String> getLocalizationMap(
+		PortletPreferences preferences, String parameter);
+
+	/**
+	 * Gets a map of locales and localized strings for the parameter in the
+	 * portlet request.
+	 *
 	 * @param  portletRequest the portlet request to get the locales and
 	 *         localized strings from
 	 * @param  parameter the prefix of the parameters containing the localized

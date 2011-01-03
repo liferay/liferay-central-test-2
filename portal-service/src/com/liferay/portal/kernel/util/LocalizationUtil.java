@@ -76,6 +76,12 @@ public class LocalizationUtil {
 	}
 
 	public static Map<Locale, String> getLocalizationMap(
+		PortletPreferences preferences, String parameter) {
+
+		return getLocalization().getLocalizationMap(preferences, parameter);
+	}
+
+	public static Map<Locale, String> getLocalizationMap(
 		PortletRequest portletRequest, String parameter) {
 
 		return getLocalization().getLocalizationMap(portletRequest, parameter);
