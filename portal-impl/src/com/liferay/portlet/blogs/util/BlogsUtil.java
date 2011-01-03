@@ -14,9 +14,7 @@
 
 package com.liferay.portlet.blogs.util;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -25,14 +23,10 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.ContentUtil;
 
 import javax.portlet.PortletPreferences;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
  * @author Thiago Moreira
- * @author Juan Fernández
  */
 public class BlogsUtil {
 
@@ -49,12 +43,6 @@ public class BlogsUtil {
 			return ContentUtil.get(PropsUtil.get(
 				PropsKeys.BLOGS_EMAIL_ENTRY_ADDED_BODY));
 		}
-	}
-
-	public static Map<Locale, String> getEmailEntryAddedBodyLocalized(
-		PortletPreferences preferences) {
-
-		return getLocalizedParameter("emailEntryAddedBody", preferences);
 	}
 
 	public static boolean getEmailEntryAddedEnabled(
@@ -85,18 +73,6 @@ public class BlogsUtil {
 			return ContentUtil.get(PropsUtil.get(
 				PropsKeys.BLOGS_EMAIL_ENTRY_ADDED_SUBJECT));
 		}
-	}
-
-	public static Map<Locale, String> getEmailEntryAddedSubjectLocalized(
-		PortletPreferences preferences) {
-
-		return getLocalizedParameter("emailEntryAddedSubject", preferences);
-	}
-
-	public static Map<Locale, String> getEmailEntryUpdatedBodyLocalized(
-		PortletPreferences preferences) {
-
-		return getLocalizedParameter("emailEntryUpdatedSubject", preferences);
 	}
 
 	public static String getEmailEntryUpdatedBody(
@@ -144,12 +120,6 @@ public class BlogsUtil {
 		}
 	}
 
-	public static Map<Locale, String> getEmailEntryUpdatedSubjectLocalized(
-		PortletPreferences preferences) {
-
-		return getLocalizedParameter("emailEntryUpdatedSubject", preferences);
-	}
-
 	public static String getEmailFromAddress(PortletPreferences preferences) {
 		String emailFromAddress = PropsUtil.get(
 			PropsKeys.BLOGS_EMAIL_FROM_ADDRESS);
@@ -161,27 +131,6 @@ public class BlogsUtil {
 		String emailFromName = PropsUtil.get(PropsKeys.BLOGS_EMAIL_FROM_NAME);
 
 		return preferences.getValue("emailFromName", emailFromName);
-	}
-
-	private static Map<Locale, String> getLocalizedParameter(
-		String parameter, PortletPreferences preferences) {
-
-		Locale[] locales = LanguageUtil.getAvailableLocales();
-
-		Map<Locale, String> map = new HashMap<Locale, String>();
-
-		for (Locale locale : locales) {
-			String languageId = LocaleUtil.toLanguageId(locale);
-
-			String localeParameter =
-				parameter + StringPool.UNDERLINE + languageId;
-
-			map.put(
-				locale, preferences.getValue(
-					localeParameter, StringPool.BLANK));
-		}
-
-		return map;
 	}
 
 	public static String getUrlTitle(long entryId, String title) {

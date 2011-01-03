@@ -67,9 +67,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -857,114 +855,16 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		String subject = null;
 		String body = null;
 
-		Map<Locale, String> localizedSubject = null;
-		Map<Locale, String> localizedBody = null;
-
 		if (serviceContext.isCommandUpdate()) {
 			subject = BlogsUtil.getEmailEntryUpdatedSubject(preferences);
 			body = BlogsUtil.getEmailEntryUpdatedBody(preferences);
-			localizedSubject =
-				BlogsUtil.getEmailEntryUpdatedSubjectLocalized(preferences);
-			localizedBody =
-				BlogsUtil.getEmailEntryUpdatedBodyLocalized(preferences);
 		}
 		else {
 			subject = BlogsUtil.getEmailEntryAddedSubject(preferences);
 			body = BlogsUtil.getEmailEntryAddedBody(preferences);
-			localizedSubject =
-				BlogsUtil.getEmailEntryAddedSubjectLocalized(preferences);
-			localizedBody =
-				BlogsUtil.getEmailEntryAddedBodyLocalized(preferences);
 		}
 
-		subject = formatSubject(
-			subject, emailAddress, fullName, entryURL, company, group,
-			fromAddress, fromName, portletName);
-
-		body = formatBody(
-			body, emailAddress, fullName, entryURL, company, group, fromAddress,
-			fromName, portletName);
-
-		localizedSubject =
-			formatLocalizedSubject(
-				localizedSubject, emailAddress, fullName, entryURL, company,
-				group, fromAddress, fromName, portletName);
-
-		localizedBody =
-			formatLocalizedBody(
-				localizedBody, emailAddress, fullName, entryURL, company, group,
-				fromAddress, fromName, portletName);
-
-		SubscriptionSender subscriptionSender = new SubscriptionSender();
-
-		subscriptionSender.setBody(body);
-		subscriptionSender.setCompanyId(entry.getCompanyId());
-		subscriptionSender.setFrom(fromAddress, fromName);
-		subscriptionSender.setGroupId(entry.getGroupId());
-		subscriptionSender.setHtmlFormat(true);
-		subscriptionSender.setLocalizedBody(localizedBody);
-		subscriptionSender.setLocalizedSubject(localizedSubject);		
-		subscriptionSender.setMailId(
-			company, "blogs_entry", entry.getEntryId());
-		subscriptionSender.setReplyToAddress(fromAddress);
-		subscriptionSender.setSubject(subject);
-		subscriptionSender.setUserId(entry.getUserId());
-
-		subscriptionSender.addPersistedSubscribers(
-			BlogsEntry.class.getName(), entry.getGroupId());
-
-		subscriptionSender.flushNotificationsAsync();
-	}
-
-	protected Map<Locale, String> formatLocalizedBody(
-			Map<Locale, String> localizedBody, String emailAddress,
-			String fullName, String entryURL, Company company, Group group,
-			String fromAddress, String fromName, String portletName)
-		throws SystemException, PortalException {
-
-		Iterator it = localizedBody.entrySet().iterator();
-
-		while (it.hasNext()) {
-			Map.Entry localizedEntry = (Map.Entry)it.next();
-
-			String body = formatBody(
-				(String) localizedEntry.getValue(), emailAddress, fullName,
-				entryURL, company, group, fromAddress, fromName, portletName);
-
-			localizedBody.put((Locale)localizedEntry.getKey(), body);
-		}
-
-		return localizedBody;
-	}
-
-	protected Map<Locale, String> formatLocalizedSubject(
-			Map<Locale, String> localizedSubject, String emailAddress,
-			String fullName, String entryURL, Company company, Group group,
-			String fromAddress, String fromName, String portletName)
-		throws SystemException, PortalException {
-
-		Iterator it = localizedSubject.entrySet().iterator();
-
-		while (it.hasNext()) {
-			Map.Entry localizedEntry = (Map.Entry)it.next();
-
-			String subject = formatSubject(
-				(String) localizedEntry.getValue(), emailAddress, fullName,
-				entryURL, company, group, fromAddress, fromName, portletName);
-
-			localizedSubject.put((Locale)localizedEntry.getKey(), subject);
-		}
-
-		return localizedSubject;
-	}
-
-	protected String formatSubject(
-			String subject, String emailAddress, String fullName,
-			String entryURL, Company company, Group group, String fromAddress,
-			String fromName, String portletName)
-		throws SystemException, PortalException {
-
-		return StringUtil.replace(
+		subject = StringUtil.replace(
 			subject,
 			new String[] {
 				"[$BLOGS_ENTRY_USER_ADDRESS$]",
@@ -992,15 +892,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				company.getVirtualHostname(),
 				portletName
 			});
-	}
 
-	protected String formatBody (
-			String body, String emailAddress, String fullName, String entryURL,
-			Company company, Group group, String fromAddress, String fromName,
-			String portletName)
-		throws SystemException, PortalException {
-
-		return StringUtil.replace(
+		body = StringUtil.replace(
 			body,
 			new String[] {
 				"[$BLOGS_ENTRY_USER_ADDRESS$]",
@@ -1028,6 +921,24 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				company.getVirtualHostname(),
 				portletName
 			});
+
+		SubscriptionSender subscriptionSender = new SubscriptionSender();
+
+		subscriptionSender.setBody(body);
+		subscriptionSender.setCompanyId(entry.getCompanyId());
+		subscriptionSender.setFrom(fromAddress, fromName);
+		subscriptionSender.setGroupId(entry.getGroupId());
+		subscriptionSender.setHtmlFormat(true);
+		subscriptionSender.setMailId(
+			company, "blogs_entry", entry.getEntryId());
+		subscriptionSender.setReplyToAddress(fromAddress);
+		subscriptionSender.setSubject(subject);
+		subscriptionSender.setUserId(entry.getUserId());
+
+		subscriptionSender.addPersistedSubscribers(
+			BlogsEntry.class.getName(), entry.getGroupId());
+
+		subscriptionSender.flushNotificationsAsync();
 	}
 
 	protected void pingGoogle(BlogsEntry entry, ServiceContext serviceContext)
