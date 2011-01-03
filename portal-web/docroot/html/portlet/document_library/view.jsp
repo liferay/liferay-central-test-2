@@ -19,6 +19,8 @@
 <%
 String topLink = ParamUtil.getString(request, "topLink", "documents-home");
 
+String redirect = ParamUtil.getString(request, "redirect");
+
 Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
 long defaultFolderId = GetterUtil.getLong(preferences.getValue("rootFolderId", StringPool.BLANK), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
@@ -107,31 +109,9 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 	<c:when test='<%= topLink.equals("documents-home") %>'>
 		<aui:layout>
 			<c:if test="<%= (folder != null) && (folder.getFolderId() != defaultFolderId) %>">
-
-				<%
-				long parentFolderId = defaultFolderId;
-				String parentFolderName = LanguageUtil.get(pageContext, "documents-home");
-
-				if (!folder.isRoot()) {
-					Folder parentFolder = folder.getParentFolder();
-
-					parentFolderId = parentFolder.getFolderId();
-
-					if (parentFolder.getFolderId() != defaultFolderId) {
-						parentFolderName = parentFolder.getName();
-					}
-				}
-				%>
-
-				<portlet:renderURL var="backURL">
-					<portlet:param name="struts_action" value="/document_library/view" />
-					<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
-				</portlet:renderURL>
-
 				<liferay-ui:header
-					backLabel="<%= parentFolderName %>"
-					backURL="<%= backURL.toString() %>"
 					title="<%= folder.getName() %>"
+					backURL="<%= redirect %>"
 				/>
 			</c:if>
 
@@ -190,6 +170,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 								>
 									<liferay-portlet:renderURL varImpl="rowURL">
 										<portlet:param name="struts_action" value="/document_library/view" />
+										<portlet:param name="redirect" value="<%= currentURL %>" />
 										<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
 									</liferay-portlet:renderURL>
 
@@ -253,6 +234,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 		<aui:layout>
 			<liferay-ui:header
 				title="<%= topLink %>"
+				backURL="<%= redirect %>"
 			/>
 
 			<liferay-ui:search-container

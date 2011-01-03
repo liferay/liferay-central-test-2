@@ -101,23 +101,9 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	}
 	%>
 
-	<portlet:renderURL var="backURL">
-		<portlet:param name="struts_action" value="/document_library/view" />
-		<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
-	</portlet:renderURL>
-
-	<%
-	String parentFolderName = LanguageUtil.get(pageContext, "documents-home");
-
-	if (Validator.isNotNull(folder.getName())) {
-		parentFolderName = folder.getName();
-	}
-	%>
-
 	<liferay-ui:header
-		backLabel="<%= parentFolderName %>"
-		backURL="<%= backURL.toString() %>"
-		title="<%= fileEntry.getTitle() %>"
+		backURL="<%= redirect %>"
+		title='<%= fileEntry.getTitle() %>'
 	/>
 </c:if>
 
