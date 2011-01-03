@@ -388,5 +388,5 @@ else if (tabs3.equals("shipping-email")) {
 </aui:script>
 
 <%!
-public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.shopping.edit_configuration.jsp";
+public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.shopping.configuration.jsp";
 %>
