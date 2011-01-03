@@ -24,23 +24,20 @@ String redirect = ParamUtil.getString(request, "redirect");
 String emailFromName = ParamUtil.getString(request, "emailFromName", BlogsUtil.getEmailFromName(preferences));
 String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", BlogsUtil.getEmailFromAddress(preferences));
 
-String emailEntryAddedSubject = ParamUtil.getString(request, "emailEntryAddedSubject", BlogsUtil.getEmailEntryAddedSubject(preferences));
-String emailEntryAddedBody = ParamUtil.getString(request, "emailEntryAddedBody", BlogsUtil.getEmailEntryAddedBody(preferences));
+String currentLanguageId = LanguageUtil.getLanguageId(request);
+Locale[] locales = LanguageUtil.getAvailableLocales();
 
-String emailEntryUpdatedSubject = ParamUtil.getString(request, "emailEntryUpdatedSubject", BlogsUtil.getEmailEntryUpdatedSubject(preferences));
-String emailEntryUpdatedBody = ParamUtil.getString(request, "emailEntryUpdatedBody", BlogsUtil.getEmailEntryUpdatedBody(preferences));
-
-String editorParam = StringPool.BLANK;
-String editorBody = StringPool.BLANK;
+String emailParam = StringPool.BLANK;
 
 if (tabs2.equals("entry-added-email")) {
-	editorParam = "emailEntryAddedBody";
-	editorBody = emailEntryAddedBody;
+	emailParam = "emailEntryAdded";
 }
 else if (tabs2.equals("entry-updated-email")) {
-	editorParam = "emailEntryUpdatedBody";
-	editorBody = emailEntryUpdatedBody;
+	emailParam = "emailEntryUpdated";
 }
+
+String emailBody = PrefsParamUtil.getString(preferences, request, emailParam + "Body_" + currentLanguageId, StringPool.BLANK);
+String emailSubject = PrefsParamUtil.getString(preferences, request, emailParam + "Subject_" + currentLanguageId, StringPool.BLANK);
 %>
 
 <liferay-portlet:renderURL var="portletURL" portletConfiguration="true">
@@ -138,16 +135,26 @@ else if (tabs2.equals("entry-updated-email")) {
 					</c:when>
 				</c:choose>
 
-				<c:choose>
-					<c:when test='<%= tabs2.equals("entry-added-email") %>'>
-						<aui:input cssClass="lfr-input-text-container" label="subject" name="preferences--emailEntryAddedSubject--" type="text" value="<%= emailEntryAddedSubject %>" />
-					</c:when>
-					<c:when test='<%= tabs2.equals("entry-updated-email") %>'>
-						<aui:input cssClass="lfr-input-text-container" label="subject" name="preferences--emailEntryUpdatedSubject--" type="text" value="<%= emailEntryUpdatedSubject %>" />
-					</c:when>
-				</c:choose>
+				<aui:select label="language" name="languageId" onChange='<%= renderResponse.getNamespace() + "updateLanguage(this);" %>'>
 
-				<aui:input cssClass="lfr-textarea-container" label="body" name='<%= "preferences--" + editorParam + "--" %>' type="textarea" value="<%= editorBody %>" />
+					<%
+					for (int i = 0; i < locales.length; i++) {
+						if (Validator.isNotNull(preferences.getValue(emailParam + "Subject_" + LocaleUtil.toLanguageId(locales[i]), StringPool.BLANK)) ||
+							Validator.isNotNull(preferences.getValue(emailParam + "Body_" + LocaleUtil.toLanguageId(locales[i]), StringPool.BLANK))) {
+						}
+					%>
+
+						<aui:option label="<%= locales[i].getDisplayName(locale) %>" selected="<%= currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i])) %>" value="<%= LocaleUtil.toLanguageId(locales[i]) %>" />
+
+					<%
+					}
+					%>
+
+				</aui:select>
+
+				<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "preferences--" + emailParam + "Subject" + StringPool.UNDERLINE + currentLanguageId + "--" %>' value="<%= emailSubject %>" />
+
+				<aui:input cssClass="lfr-textarea-container" label="body" name='<%= "preferences--" + emailParam + "Body" + StringPool.UNDERLINE + currentLanguageId + "--" %>' type="textarea" value="<%= emailBody %>" />
 			</aui:fieldset>
 
 			<div class="definition-of-terms">
@@ -336,4 +343,9 @@ else if (tabs2.equals("entry-updated-email")) {
 		},
 		['liferay-util-list-fields']
 	);
+
+	function <portlet:namespace />updateLanguage() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '';
+		submitForm(document.<portlet:namespace />fm);
+	}
 </aui:script>
