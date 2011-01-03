@@ -52,13 +52,13 @@ Map<Locale, String> reminderQueriesMap = LocalizationUtil.getLocalizedParameter(
 				continue;
 			}
 
-			String style = StringPool.BLANK;
-
 			String curReminderQueries = reminderQueriesMap.get(locales[i]);
 
 			if ((organization != null) && Validator.isNull(curReminderQueries)) {
 				curReminderQueries = StringUtil.merge(organization.getReminderQueryQuestions(locales[i]), StringPool.NEW_LINE);
 			}
+
+			String style = StringPool.BLANK;
 
 			if (Validator.isNotNull(curReminderQueries)) {
 				style = "font-weight: bold;";

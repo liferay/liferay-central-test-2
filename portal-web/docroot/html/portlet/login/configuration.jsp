@@ -92,16 +92,16 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 							<%
 							for (int i = 0; i < locales.length; i++) {
-								String optionStyle = StringPool.BLANK;
+								String style = StringPool.BLANK;
 
 								if (Validator.isNotNull(preferences.getValue(emailParam + "Subject_" + LocaleUtil.toLanguageId(locales[i]), StringPool.BLANK)) ||
 									Validator.isNotNull(preferences.getValue(emailParam + "Body_" + LocaleUtil.toLanguageId(locales[i]), StringPool.BLANK))) {
 
-									optionStyle = "style=\"font-weight: bold;\"";
+									style = "font-weight: bold;";
 								}
 							%>
 
-								<aui:option label="<%= locales[i].getDisplayName(locale) %>" selected="<%= currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i])) %>" value="<%= LocaleUtil.toLanguageId(locales[i]) %>" />
+								<aui:option label="<%= locales[i].getDisplayName(locale) %>" selected="<%= currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i])) %>" style="<%= style %>" value="<%= LocaleUtil.toLanguageId(locales[i]) %>" />
 
 							<%
 							}
@@ -109,7 +109,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 						</aui:select>
 
-						<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "preferences--" + emailParam + "Subject" + StringPool.UNDERLINE + currentLanguageId + "--" %>' value="<%= emailSubject %>" />
+						<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "preferences--" + emailParam + "Subject_" + currentLanguageId + "--" %>' value="<%= emailSubject %>" />
 
 						<aui:field-wrapper label="body">
 							<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
