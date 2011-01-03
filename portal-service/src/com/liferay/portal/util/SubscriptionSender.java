@@ -458,24 +458,34 @@ public class SubscriptionSender implements Serializable {
 			replaceContent(fromAddress, locale),
 			replaceContent(fromName, locale));
 
-		String processedSubject = this.subject;
+		String processedSubject = null;
 
 		if (localizedSubjectMap != null) {
 			String localizedSubject = localizedSubjectMap.get(locale);
 
-			if (Validator.isNotNull(localizedSubject)) {
-				processedSubject = localizedSubject;
+			if (Validator.isNull(localizedSubject)) {
+				Locale defaultLocale = LocaleUtil.getDefault();
+
+				processedSubject = localizedSubjectMap.get(defaultLocale);
 			}
 		}
+		else {
+			processedSubject = this.subject;
+		}
 
-		String processedBody = this.body;
+		String processedBody = null;
 
 		if (localizedBodyMap != null) {
 			String localizedBody = localizedBodyMap.get(locale);
 
-			if (Validator.isNotNull(localizedBody)) {
-				processedBody = localizedBody;
+			if (Validator.isNull(localizedBody)) {
+				Locale defaultLocale = LocaleUtil.getDefault();
+
+				processedBody = localizedBodyMap.get(defaultLocale);
 			}
+		}
+		else {
+			processedBody = this.body;
 		}
 
 		MailMessage mailMessage = new MailMessage(
