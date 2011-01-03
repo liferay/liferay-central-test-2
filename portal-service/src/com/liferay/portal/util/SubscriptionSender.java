@@ -185,12 +185,14 @@ public class SubscriptionSender implements Serializable {
 		this.inReplyTo = inReplyTo;
 	}
 
-	public void setLocalizedBody(Map<Locale, String> localizedBody) {
-		this.localizedBody = localizedBody;
+	public void setLocalizedBodyMap(Map<Locale, String> localizedBodyMap) {
+		this.localizedBodyMap = localizedBodyMap;
 	}
 
-	public void setLocalizedSubject(Map<Locale, String> localizedSubject) {
-		this.localizedSubject = localizedSubject;
+	public void setLocalizedSubjectMap(
+		Map<Locale, String> localizedSubjectMap) {
+
+		this.localizedSubjectMap = localizedSubjectMap;
 	}
 
 	public void setMailId(
@@ -372,17 +374,24 @@ public class SubscriptionSender implements Serializable {
 	protected void sendEmail(InternetAddress to, Locale locale)
 		throws Exception {
 
-		String body = this.body;
 		String subject = this.subject;
 
-		if (Validator.isNotNull(localizedBody) &&
-			Validator.isNotNull(localizedBody.get(locale))) {
-				body = localizedBody.get(locale);
+		if (localizedSubjectMap != null) {
+			String localizedSubject = localizedSubjectMap.get(locale);
+
+			if (Validator.isNotNull(localizedSubject)) {
+				subject = localizedSubject;
+			}
 		}
 
-		if (Validator.isNotNull(localizedSubject) &&
-			Validator.isNotNull(localizedSubject.get(locale))) {
-			subject = localizedSubject.get(locale);
+		String body = this.body;
+
+		if (localizedBodyMap != null) {
+			String localizedBody = localizedBodyMap.get(locale);
+
+			if (Validator.isNotNull(localizedBody)) {
+				body = localizedBody;
+			}
 		}
 
 		MailMessage mailMessage = new MailMessage(
@@ -433,8 +442,8 @@ public class SubscriptionSender implements Serializable {
 	protected long groupId;
 	protected boolean htmlFormat;
 	protected String inReplyTo;
-	protected Map<Locale, String> localizedBody;
-	protected Map<Locale, String> localizedSubject;
+	protected Map<Locale, String> localizedBodyMap;
+	protected Map<Locale, String> localizedSubjectMap;
 	protected String mailId;
 	protected String replyToAddress;
 	protected SMTPAccount smtpAccount;

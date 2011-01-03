@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
 import javax.portlet.ActionRequest;
@@ -36,19 +35,20 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
-		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		if (tabs2.equals("email-from") && Validator.isNotNull(cmd)) {
-			validateEmailFrom(actionRequest);
-		}
-		else if (tabs2.equals("entry-added-email") &&
-				Validator.isNotNull(cmd)) {
-			validateEmailEntryAdded(actionRequest);
-		}
-		else if (tabs2.equals("entry-updated-email") &&
-				Validator.isNotNull(cmd)) {
-			validateEmailEntryUpdated(actionRequest);
+		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
+
+		if (Validator.isNotNull(cmd)) {
+			if (tabs2.equals("email-from")) {
+				validateEmailFrom(actionRequest);
+			}
+			else if (tabs2.equals("entry-added-email")) {
+				validateEmailEntryAdded(actionRequest);
+			}
+			else if (tabs2.equals("entry-updated-email")) {
+				validateEmailEntryUpdated(actionRequest);
+			}
 		}
 
 		super.processAction(portletConfig, actionRequest, actionResponse);
@@ -74,13 +74,10 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 	protected void validateEmailEntryAdded(ActionRequest actionRequest)
 		throws Exception {
 
-		String languageId = ParamUtil.getString(actionRequest, "languageId");
-		String emailEntryAddedSubject = getParameter(
-			actionRequest, "emailEntryAddedSubject" + StringPool.UNDERLINE +
-				languageId);
-		String emailEntryAddedBody = getParameter(
-			actionRequest, "emailEntryAddedBody"  + StringPool.UNDERLINE +
-				languageId);
+		String emailEntryAddedSubject = getLocalizedParameter(
+			actionRequest, "emailEntryAddedSubject");
+		String emailEntryAddedBody = getLocalizedParameter(
+			actionRequest, "emailEntryAddedBody");
 
 		if (Validator.isNull(emailEntryAddedSubject)) {
 			SessionErrors.add(actionRequest, "emailEntryAddedSubject");
@@ -93,13 +90,10 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 	protected void validateEmailEntryUpdated(ActionRequest actionRequest)
 		throws Exception {
 
-		String languageId = ParamUtil.getString(actionRequest, "languageId");
-		String emailEntryUpdatedSubject = getParameter(
-			actionRequest, "emailEntryUpdatedSubject" + StringPool.UNDERLINE +
-				languageId);
-		String emailEntryUpdatedBody = getParameter(
-			actionRequest, "emailEntryUpdatedBody" + StringPool.UNDERLINE +
-				languageId);
+		String emailEntryUpdatedSubject = getLocalizedParameter(
+			actionRequest, "emailEntryUpdatedSubject");
+		String emailEntryUpdatedBody = getLocalizedParameter(
+			actionRequest, "emailEntryUpdatedBody");
 
 		if (Validator.isNull(emailEntryUpdatedSubject)) {
 			SessionErrors.add(actionRequest, "emailEntryUpdatedSubject");

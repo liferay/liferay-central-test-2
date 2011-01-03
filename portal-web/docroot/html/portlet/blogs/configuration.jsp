@@ -24,9 +24,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 String emailFromName = ParamUtil.getString(request, "emailFromName", BlogsUtil.getEmailFromName(preferences));
 String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", BlogsUtil.getEmailFromAddress(preferences));
 
-String currentLanguageId = LanguageUtil.getLanguageId(request);
-Locale[] locales = LanguageUtil.getAvailableLocales();
-
 String emailParam = StringPool.BLANK;
 
 if (tabs2.equals("entry-added-email")) {
@@ -36,8 +33,13 @@ else if (tabs2.equals("entry-updated-email")) {
 	emailParam = "emailEntryUpdated";
 }
 
-String emailBody = PrefsParamUtil.getString(preferences, request, emailParam + "Body_" + currentLanguageId, StringPool.BLANK);
+String currentLanguageId = LanguageUtil.getLanguageId(request);
+
 String emailSubject = PrefsParamUtil.getString(preferences, request, emailParam + "Subject_" + currentLanguageId, StringPool.BLANK);
+String emailBody = PrefsParamUtil.getString(preferences, request, emailParam + "Body_" + currentLanguageId, StringPool.BLANK);
+
+String editorParam = emailParam + "Body_" + currentLanguageId;
+String editorContent = emailBody;
 %>
 
 <liferay-portlet:renderURL var="portletURL" portletConfiguration="true">
@@ -138,13 +140,19 @@ String emailSubject = PrefsParamUtil.getString(preferences, request, emailParam 
 				<aui:select label="language" name="languageId" onChange='<%= renderResponse.getNamespace() + "updateLanguage(this);" %>'>
 
 					<%
+					Locale[] locales = LanguageUtil.getAvailableLocales();
+
 					for (int i = 0; i < locales.length; i++) {
+						String style = StringPool.BLANK;
+
 						if (Validator.isNotNull(preferences.getValue(emailParam + "Subject_" + LocaleUtil.toLanguageId(locales[i]), StringPool.BLANK)) ||
 							Validator.isNotNull(preferences.getValue(emailParam + "Body_" + LocaleUtil.toLanguageId(locales[i]), StringPool.BLANK))) {
+
+							style = "font-weight: bold;";
 						}
 					%>
 
-						<aui:option label="<%= locales[i].getDisplayName(locale) %>" selected="<%= currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i])) %>" value="<%= LocaleUtil.toLanguageId(locales[i]) %>" />
+						<aui:option label="<%= locales[i].getDisplayName(locale) %>" selected="<%= currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i])) %>" style="<%= style %>" value="<%= LocaleUtil.toLanguageId(locales[i]) %>" />
 
 					<%
 					}
@@ -152,9 +160,13 @@ String emailSubject = PrefsParamUtil.getString(preferences, request, emailParam 
 
 				</aui:select>
 
-				<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "preferences--" + emailParam + "Subject" + StringPool.UNDERLINE + currentLanguageId + "--" %>' value="<%= emailSubject %>" />
+				<aui:input cssClass="lfr-input-text-container" label="subject" name='<%= "preferences--" + emailParam + "Subject_" + currentLanguageId + "--" %>' value="<%= emailSubject %>" />
 
-				<aui:input cssClass="lfr-textarea-container" label="body" name='<%= "preferences--" + emailParam + "Body" + StringPool.UNDERLINE + currentLanguageId + "--" %>' type="textarea" value="<%= emailBody %>" />
+				<aui:field-wrapper label="body">
+					<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
+
+					<aui:input name='<%= "preferences--" + editorParam + "--" %>' type="hidden" />
+				</aui:field-wrapper>
 			</aui:fieldset>
 
 			<div class="definition-of-terms">
@@ -330,6 +342,11 @@ String emailSubject = PrefsParamUtil.getString(preferences, request, emailParam 
 </aui:form>
 
 <aui:script>
+	function <portlet:namespace />updateLanguage() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '';
+		submitForm(document.<portlet:namespace />fm);
+	}
+
 	Liferay.provide(
 		window,
 		'<portlet:namespace />saveConfiguration',
@@ -339,13 +356,16 @@ String emailSubject = PrefsParamUtil.getString(preferences, request, emailParam 
 				document.<portlet:namespace />fm.<portlet:namespace />hiddenNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />availableVisibleNodes);
 			</c:if>
 
+			<c:if test='<%= tabs2.startsWith("entry-") %>'>
+				document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
+			</c:if>
+
 			submitForm(document.<portlet:namespace />fm);
 		},
 		['liferay-util-list-fields']
 	);
-
-	function <portlet:namespace />updateLanguage() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '';
-		submitForm(document.<portlet:namespace />fm);
-	}
 </aui:script>
+
+<%!
+public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.blogs.configuration.jsp";
+%>

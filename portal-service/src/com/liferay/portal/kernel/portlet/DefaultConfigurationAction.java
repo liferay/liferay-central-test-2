@@ -54,6 +54,16 @@ public class DefaultConfigurationAction
 
 	public final static String PREFERENCES_PREFIX = "preferences--";
 
+	public String getLocalizedParameter(
+		PortletRequest portletRequest, String name) {
+
+		String languageId = ParamUtil.getString(portletRequest, "languageId");
+
+		return getParameter(
+			portletRequest,
+			name.concat(StringPool.UNDERLINE).concat(languageId));
+	}
+
 	public String getParameter(PortletRequest portletRequest, String name) {
 		name = PREFERENCES_PREFIX.concat(name).concat(StringPool.DOUBLE_DASH);
 
