@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
@@ -182,6 +183,14 @@ public class SubscriptionSender implements Serializable {
 
 	public void setInReplyTo(String inReplyTo) {
 		this.inReplyTo = inReplyTo;
+	}
+
+	public void setLocalizedBody(Map<Locale, String> localizedBody) {
+		this.localizedBody = localizedBody;
+	}
+
+	public void setLocalizedSubject(Map<Locale, String> localizedSubject) {
+		this.localizedSubject = localizedSubject;
 	}
 
 	public void setMailId(
@@ -363,6 +372,19 @@ public class SubscriptionSender implements Serializable {
 	protected void sendEmail(InternetAddress to, Locale locale)
 		throws Exception {
 
+		String body = this.body;
+		String subject = this.subject;
+
+		if (Validator.isNotNull(localizedBody) &&
+			Validator.isNotNull(localizedBody.get(locale))) {
+				body = localizedBody.get(locale);
+		}
+
+		if (Validator.isNotNull(localizedSubject) &&
+			Validator.isNotNull(localizedSubject.get(locale))) {
+			subject = localizedSubject.get(locale);
+		}
+
 		MailMessage mailMessage = new MailMessage(
 			from, to, subject, body, htmlFormat);
 
@@ -411,6 +433,8 @@ public class SubscriptionSender implements Serializable {
 	protected long groupId;
 	protected boolean htmlFormat;
 	protected String inReplyTo;
+	protected Map<Locale, String> localizedBody;
+	protected Map<Locale, String> localizedSubject;
 	protected String mailId;
 	protected String replyToAddress;
 	protected SMTPAccount smtpAccount;
