@@ -268,8 +268,8 @@ public class LocalizationImpl implements Localization {
 		for (Locale locale : locales) {
 			String languageId = LocaleUtil.toLanguageId(locale);
 
-			String localeParameter =
-				parameter + StringPool.UNDERLINE + languageId;
+			String localeParameter = parameter.concat(
+				StringPool.UNDERLINE).concat(languageId);
 
 			map.put(
 				locale, ParamUtil.getString(portletRequest, localeParameter));
