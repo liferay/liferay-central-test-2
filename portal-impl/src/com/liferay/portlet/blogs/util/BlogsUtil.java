@@ -15,12 +15,17 @@
 package com.liferay.portlet.blogs.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.ContentUtil;
+
+import java.util.Locale;
+import java.util.Map;
 
 import javax.portlet.PortletPreferences;
 
@@ -30,19 +35,26 @@ import javax.portlet.PortletPreferences;
  */
 public class BlogsUtil {
 
-	public static String getEmailEntryAddedBody(
+	public static Map<Locale, String> getEmailEntryAddedBodyMap(
 		PortletPreferences preferences) {
 
-		String emailEntryAddedBody = preferences.getValue(
-			"emailEntryAddedBody", StringPool.BLANK);
+		Map<Locale, String> map = LocalizationUtil.getLocalizationMap(
+			preferences, "emailEntryAddedBody");
 
-		if (Validator.isNotNull(emailEntryAddedBody)) {
-			return emailEntryAddedBody;
+		Locale defaultLocale = LocaleUtil.getDefault();
+
+		String defaultValue = map.get(defaultLocale);
+
+		if (Validator.isNotNull(defaultValue)) {
+			return map;
 		}
-		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.BLOGS_EMAIL_ENTRY_ADDED_BODY));
-		}
+
+		map.put(
+			defaultLocale,
+			ContentUtil.get(
+				PropsUtil.get(PropsKeys.BLOGS_EMAIL_ENTRY_ADDED_BODY)));
+
+		return map;
 	}
 
 	public static boolean getEmailEntryAddedEnabled(
@@ -60,34 +72,48 @@ public class BlogsUtil {
 		}
 	}
 
-	public static String getEmailEntryAddedSubject(
+	public static Map<Locale, String> getEmailEntryAddedSubjectMap(
 		PortletPreferences preferences) {
 
-		String emailEntryAddedSubject = preferences.getValue(
-			"emailEntryAddedSubject", StringPool.BLANK);
+		Map<Locale, String> map = LocalizationUtil.getLocalizationMap(
+			preferences, "emailEntryAddedSubject");
 
-		if (Validator.isNotNull(emailEntryAddedSubject)) {
-			return emailEntryAddedSubject;
+		Locale defaultLocale = LocaleUtil.getDefault();
+
+		String defaultValue = map.get(defaultLocale);
+
+		if (Validator.isNotNull(defaultValue)) {
+			return map;
 		}
-		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.BLOGS_EMAIL_ENTRY_ADDED_SUBJECT));
-		}
+
+		map.put(
+			defaultLocale,
+			ContentUtil.get(
+				PropsUtil.get(PropsKeys.BLOGS_EMAIL_ENTRY_ADDED_SUBJECT)));
+
+		return map;
 	}
 
-	public static String getEmailEntryUpdatedBody(
+	public static Map<Locale, String> getEmailEntryUpdatedBodyMap(
 		PortletPreferences preferences) {
 
-		String emailEntryUpdatedBody = preferences.getValue(
-			"emailEntryUpdatedBody", StringPool.BLANK);
+		Map<Locale, String> map = LocalizationUtil.getLocalizationMap(
+			preferences, "emailEntryUpdatedBody");
 
-		if (Validator.isNotNull(emailEntryUpdatedBody)) {
-			return emailEntryUpdatedBody;
+		Locale defaultLocale = LocaleUtil.getDefault();
+
+		String defaultValue = map.get(defaultLocale);
+
+		if (Validator.isNotNull(defaultValue)) {
+			return map;
 		}
-		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.BLOGS_EMAIL_ENTRY_UPDATED_BODY));
-		}
+
+		map.put(
+			defaultLocale,
+			ContentUtil.get(
+				PropsUtil.get(PropsKeys.BLOGS_EMAIL_ENTRY_UPDATED_BODY)));
+
+		return map;
 	}
 
 	public static boolean getEmailEntryUpdatedEnabled(
@@ -105,19 +131,26 @@ public class BlogsUtil {
 		}
 	}
 
-	public static String getEmailEntryUpdatedSubject(
+	public static Map<Locale, String> getEmailEntryUpdatedSubjectMap(
 		PortletPreferences preferences) {
 
-		String emailEntryUpdatedSubject = preferences.getValue(
-			"emailEntryUpdatedSubject", StringPool.BLANK);
+		Map<Locale, String> map = LocalizationUtil.getLocalizationMap(
+			preferences, "emailEntryUpdatedSubject");
 
-		if (Validator.isNotNull(emailEntryUpdatedSubject)) {
-			return emailEntryUpdatedSubject;
+		Locale defaultLocale = LocaleUtil.getDefault();
+
+		String defaultValue = map.get(defaultLocale);
+
+		if (Validator.isNotNull(defaultValue)) {
+			return map;
 		}
-		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.BLOGS_EMAIL_ENTRY_UPDATED_SUBJECT));
-		}
+
+		map.put(
+			defaultLocale,
+			ContentUtil.get(
+				PropsUtil.get(PropsKeys.BLOGS_EMAIL_ENTRY_UPDATED_SUBJECT)));
+
+		return map;
 	}
 
 	public static String getEmailFromAddress(PortletPreferences preferences) {

@@ -65,6 +65,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -786,21 +787,24 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		String fromName = BlogsUtil.getEmailFromName(preferences);
 		String fromAddress = BlogsUtil.getEmailFromAddress(preferences);
 
-		String subject = null;
-		String body = null;
+		Map<Locale, String> localizedSubjectMap = null;
+		Map<Locale, String> localizedBodyMap = null;
 
 		if (serviceContext.isCommandUpdate()) {
-			subject = BlogsUtil.getEmailEntryUpdatedSubject(preferences);
-			body = BlogsUtil.getEmailEntryUpdatedBody(preferences);
+			localizedSubjectMap = BlogsUtil.getEmailEntryUpdatedSubjectMap(
+				preferences);
+			localizedBodyMap = BlogsUtil.getEmailEntryUpdatedBodyMap(
+				preferences);
 		}
 		else {
-			subject = BlogsUtil.getEmailEntryAddedSubject(preferences);
-			body = BlogsUtil.getEmailEntryAddedBody(preferences);
+			localizedSubjectMap = BlogsUtil.getEmailEntryAddedSubjectMap(
+				preferences);
+			localizedBodyMap = BlogsUtil.getEmailEntryAddedBodyMap(
+				preferences);
 		}
 
 		SubscriptionSender subscriptionSender = new SubscriptionSender();
 
-		subscriptionSender.setBody(body);
 		subscriptionSender.setCompanyId(entry.getCompanyId());
 		subscriptionSender.setContextAttributes(
 			"[$BLOGS_ENTRY_URL$]", entryURL);
@@ -811,7 +815,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		subscriptionSender.setMailId("blogs_entry", entry.getEntryId());
 		subscriptionSender.setPortletId(PortletKeys.BLOGS);
 		subscriptionSender.setReplyToAddress(fromAddress);
-		subscriptionSender.setSubject(subject);
+		subscriptionSender.setLocalizedBodyMap(localizedBodyMap);
+		subscriptionSender.setLocalizedSubjectMap(localizedSubjectMap);
 		subscriptionSender.setUserId(entry.getUserId());
 
 		subscriptionSender.addPersistedSubscribers(
