@@ -47,12 +47,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<c:when test='<%= tabs1.equals("email-notifications") %>'>
 
 			<%
-			String currentLanguageId = LanguageUtil.getLanguageId(request);
-			Locale defaultLocale = LocaleUtil.getDefault();
-			String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
-
-			Locale[] locales = LanguageUtil.getAvailableLocales();
-
 			String emailFromName = PrefsParamUtil.getString(preferences, request, "emailFromName");
 			String emailFromAddress = PrefsParamUtil.getString(preferences, request, "emailFromAddress");
 
@@ -80,6 +74,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 						emailParam = "emailPasswordReset";
 					}
 
+					String currentLanguageId = LanguageUtil.getLanguageId(request);
+
 					String emailSubject = PrefsParamUtil.getString(preferences, request, emailParam + "Subject_" + currentLanguageId, StringPool.BLANK);
 					String emailBody = PrefsParamUtil.getString(preferences, request, emailParam + "Body_" + currentLanguageId, StringPool.BLANK);
 
@@ -91,6 +87,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 						<aui:select label="language" name="languageId" onChange='<%= renderResponse.getNamespace() + "updateLanguage(this);" %>'>
 
 							<%
+							Locale[] locales = LanguageUtil.getAvailableLocales();
+
 							for (int i = 0; i < locales.length; i++) {
 								String style = StringPool.BLANK;
 
