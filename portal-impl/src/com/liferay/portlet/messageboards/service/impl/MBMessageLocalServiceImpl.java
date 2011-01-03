@@ -649,6 +649,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 						mbMessagePersistence.update(childMessage, false);
 					}
 				}
+				else {
+					MBMessage parentMessage =
+						mbMessagePersistence.findByPrimaryKey(
+							message.getParentMessageId());
+
+					thread.setLastPostByUserId(parentMessage.getUserId());
+					thread.setLastPostDate(parentMessage.getModifiedDate());
+				}
 			}
 
 			// Thread
