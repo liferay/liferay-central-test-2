@@ -1769,8 +1769,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			categoryName = LanguageUtil.get(
 				ServiceContextUtil.getLocale(serviceContext),
-				"message-boards-home") + StringPool.SPACE + StringPool.DASH +
-				StringPool.SPACE + group.getDescriptiveName();
+					"message-boards-home");
+
+			categoryName += " - " + group.getDescriptiveName();
 		}
 
 		List<Long> categoryIds = new ArrayList<Long>();
