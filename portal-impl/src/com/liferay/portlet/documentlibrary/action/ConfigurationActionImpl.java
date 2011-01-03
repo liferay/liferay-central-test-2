@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.documentlibrary.action;
 
-import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
+import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
@@ -28,7 +28,7 @@ import javax.portlet.PortletConfig;
 /**
  * @author Jorge Ferrer
  */
-public class ConfigurationActionImpl extends BaseConfigurationAction {
+public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
 	public void processAction(
 			PortletConfig portletConfig, ActionRequest actionRequest,

@@ -14,7 +14,7 @@
 
 package com.liferay.taglib.aui;
 
-import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
+import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.kernel.util.Tuple;
@@ -252,9 +252,9 @@ public class InputTag extends IncludeTag {
 
 		String name = _name;
 
-		if (name.startsWith(BaseConfigurationAction.PREFERENCES_PREFIX)) {
+		if (name.startsWith(DefaultConfigurationAction.PREFERENCES_PREFIX)) {
 			name = name.substring(
-				BaseConfigurationAction.PREFERENCES_PREFIX.length(),
+				DefaultConfigurationAction.PREFERENCES_PREFIX.length(),
 				name.length() - 2);
 		}
 

@@ -16,7 +16,7 @@ package com.liferay.portlet.nestedportlets.action;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
+import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -46,7 +46,7 @@ import javax.portlet.PortletPreferences;
 /**
  * @author Jorge Ferrer
  */
-public class ConfigurationActionImpl extends BaseConfigurationAction {
+public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
 	public void processAction(
 			PortletConfig portletConfig, ActionRequest actionRequest,

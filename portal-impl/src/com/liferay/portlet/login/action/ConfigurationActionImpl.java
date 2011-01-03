@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.login.action;
 
-import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
+import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -27,7 +27,7 @@ import javax.portlet.PortletConfig;
  * @author Brian Wing Shun Chan
  * @author Julio Camarero
  */
-public class ConfigurationActionImpl extends BaseConfigurationAction {
+public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
 	public void processAction(
 			PortletConfig portletConfig, ActionRequest actionRequest,

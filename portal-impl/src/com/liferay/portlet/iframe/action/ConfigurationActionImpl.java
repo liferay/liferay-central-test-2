@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.iframe.action;
 
-import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
+import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -27,7 +27,7 @@ import javax.portlet.PortletConfig;
 /**
  * @author Brian Wing Shun Chan
  */
-public class ConfigurationActionImpl extends BaseConfigurationAction {
+public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
 	public void processAction(
 			PortletConfig portletConfig, ActionRequest actionRequest,
