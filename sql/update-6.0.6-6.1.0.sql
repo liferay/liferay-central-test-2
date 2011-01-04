@@ -71,6 +71,12 @@ create table LayoutSetBranch (
 	description STRING null
 );
 
+alter table MBCategory add displayStyle VARCHAR(75) null;
+
+COMMIT_TRANSACTION;
+
+update MBCategory set displayStyle = 'default';
+
 alter table MBMessage add format VARCHAR(75) null;
 
 COMMIT_TRANSACTION;
