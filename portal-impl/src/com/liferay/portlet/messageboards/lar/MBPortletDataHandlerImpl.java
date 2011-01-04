@@ -622,31 +622,32 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				importedCategory = MBCategoryLocalServiceUtil.addCategory(
 					userId, parentCategoryId, category.getName(),
-					category.getDescription(), emailAddress, inProtocol,
-					inServerName, inServerPort, inUseSSL, inUserName,
-					inPassword, inReadInterval, outEmailAddress, outCustom,
-					outServerName, outServerPort, outUseSSL, outUserName,
-					outPassword, mailingListActive, serviceContext);
+					category.getDescription(), category.getDisplayStyle(),
+					emailAddress, inProtocol, inServerName, inServerPort,
+					inUseSSL, inUserName, inPassword, inReadInterval,
+					outEmailAddress, outCustom, outServerName, outServerPort,
+					outUseSSL, outUserName, outPassword, mailingListActive,
+					serviceContext);
 			}
 			else {
 				importedCategory = MBCategoryLocalServiceUtil.updateCategory(
 					existingCategory.getCategoryId(), parentCategoryId,
-					category.getName(), category.getDescription(), emailAddress,
-					inProtocol, inServerName, inServerPort, inUseSSL,
-					inUserName, inPassword, inReadInterval, outEmailAddress,
-					outCustom, outServerName, outServerPort, outUseSSL,
-					outUserName, outPassword, mailingListActive, false,
-					serviceContext);
+					category.getName(), category.getDescription(),
+					category.getDisplayStyle(), emailAddress, inProtocol,
+					inServerName, inServerPort, inUseSSL, inUserName,
+					inPassword, inReadInterval, outEmailAddress, outCustom,
+					outServerName, outServerPort, outUseSSL, outUserName,
+					outPassword, mailingListActive, false, serviceContext);
 			}
 		}
 		else {
 			importedCategory = MBCategoryLocalServiceUtil.addCategory(
 				userId, parentCategoryId, category.getName(),
-				category.getDescription(), emailAddress, inProtocol,
-				inServerName, inServerPort, inUseSSL, inUserName, inPassword,
-				inReadInterval, outEmailAddress, outCustom, outServerName,
-				outServerPort, outUseSSL, outUserName, outPassword,
-				mailingListActive, serviceContext);
+				category.getDescription(), category.getDisplayStyle(),
+				emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
+				inUserName, inPassword, inReadInterval, outEmailAddress,
+				outCustom, outServerName, outServerPort, outUseSSL, outUserName,
+				outPassword, mailingListActive, serviceContext);
 		}
 
 		categoryPKs.put(
