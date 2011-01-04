@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.GroupConstants;
@@ -31,10 +32,12 @@ import com.liferay.portlet.messageboards.SplitThreadException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
 import com.liferay.portlet.messageboards.model.MBMessageFlagConstants;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.MBThreadConstants;
+import com.liferay.portlet.messageboards.model.MBTreeWalker;
 import com.liferay.portlet.messageboards.service.base.MBThreadLocalServiceBaseImpl;
 
 import java.util.ArrayList;
@@ -450,7 +453,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		return thread;
 	}
 
-	public MBThread splitThread(long messageId, ServiceContext serviceContext)
+	public MBThread splitThread(long messageId, String newSubject,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
@@ -481,6 +485,42 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			messageFlag.setFlag(MBMessageFlagConstants.QUESTION_FLAG);
 
 			mbMessageFlagPersistence.update(messageFlag, false);
+		}
+
+		if (Validator.isNotNull(newSubject)) {
+			MBMessageDisplay messageDisplay =
+				mbMessageService.getMessageDisplay(
+					messageId, WorkflowConstants.STATUS_ANY,
+					MBThreadConstants.THREAD_VIEW_TREE, false);
+
+			MBTreeWalker treeWalker = messageDisplay.getTreeWalker();
+
+			List messages = treeWalker.getMessages();
+
+			int[] range = treeWalker.getChildrenRange(message);
+
+			for (int i = range[0]; i < range[1]; i++) {
+				MBMessage curMessage = (MBMessage)messages.get(i);
+
+				String curSubject = null;
+
+				if (message.getSubject().startsWith("RE: ")) {
+					curSubject = StringUtil.replace(
+						curMessage.getSubject(), rootMessage.getSubject(),
+						newSubject);
+				}
+				else {
+					curSubject = StringUtil.replace(
+						curMessage.getSubject(), message.getSubject(),
+						newSubject);
+				}
+
+				curMessage.setSubject(curSubject);
+
+				mbMessagePersistence.update(curMessage, false);
+			}
+
+			message.setSubject(newSubject);
 		}
 
 		// Create new thread

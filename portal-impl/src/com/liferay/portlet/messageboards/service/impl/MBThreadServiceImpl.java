@@ -243,7 +243,8 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 			thread.getGroupId(), categoryId, threadId);
 	}
 
-	public MBThread splitThread(long messageId, ServiceContext serviceContext)
+	public MBThread splitThread(long messageId, String newSubject,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		MBMessage message = mbMessageLocalService.getMessage(messageId);
@@ -252,7 +253,8 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 			getPermissionChecker(), message.getGroupId(),
 			message.getCategoryId(), ActionKeys.MOVE_THREAD);
 
-		return mbThreadLocalService.splitThread(messageId, serviceContext);
+		return mbThreadLocalService.splitThread(messageId, newSubject,
+			serviceContext);
 	}
 
 	public void unlockThread(long threadId)
