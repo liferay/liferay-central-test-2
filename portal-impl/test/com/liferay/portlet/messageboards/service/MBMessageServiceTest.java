@@ -41,6 +41,7 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 
 		String name = "Test Category";
 		String description = "This is a test category.";
+		String displayStyle = "default";
 		String emailAddress = null;
 		String inProtocol = null;
 		String inServerName = null;
@@ -71,9 +72,10 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 
 		_category = MBCategoryServiceUtil.addCategory(
 			MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID, name, description,
-			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
-			inUserName, inPassword, inReadInterval, outEmailAddress, outCustom,
-			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
+			MBCategoryConstants.DEFAULT_DISPLAY_STYLE, emailAddress, inProtocol,
+			inServerName, inServerPort, inUseSSL, inUserName, inPassword,
+			inReadInterval, outEmailAddress, outCustom,	outServerName,
+			outServerPort, outUseSSL, outUserName, outPassword,
 			mailingListActive, serviceContext);
 
 		_userIds = UserLocalServiceUtil.getGroupUserIds(group.getGroupId());
