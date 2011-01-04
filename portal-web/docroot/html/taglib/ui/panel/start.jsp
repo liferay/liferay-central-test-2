@@ -20,7 +20,7 @@
 	<div class="lfr-panel-titlebar">
 		<div class="lfr-panel-title">
 			<span>
-				<%= title %>
+				<liferay-ui:message key="<%= title %>" />
 			</span>
 		</div>
 
