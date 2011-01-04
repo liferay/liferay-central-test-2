@@ -233,6 +233,21 @@ public interface MBCategoryModel extends BaseModel<MBCategory> {
 	public void setDescription(String description);
 
 	/**
+	 * Gets the display style of this message boards category.
+	 *
+	 * @return the display style of this message boards category
+	 */
+	@AutoEscape
+	public String getDisplayStyle();
+
+	/**
+	 * Sets the display style of this message boards category.
+	 *
+	 * @param displayStyle the display style of this message boards category
+	 */
+	public void setDisplayStyle(String displayStyle);
+
+	/**
 	 * Gets the thread count of this message boards category.
 	 *
 	 * @return the thread count of this message boards category

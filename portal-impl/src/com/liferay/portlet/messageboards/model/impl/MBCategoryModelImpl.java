@@ -72,11 +72,12 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 			{ "parentCategoryId", new Integer(Types.BIGINT) },
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
+			{ "displayStyle", new Integer(Types.VARCHAR) },
 			{ "threadCount", new Integer(Types.INTEGER) },
 			{ "messageCount", new Integer(Types.INTEGER) },
 			{ "lastPostDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table MBCategory (uuid_ VARCHAR(75) null,categoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentCategoryId LONG,name VARCHAR(75) null,description STRING null,threadCount INTEGER,messageCount INTEGER,lastPostDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table MBCategory (uuid_ VARCHAR(75) null,categoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentCategoryId LONG,name VARCHAR(75) null,description STRING null,displayStyle VARCHAR(75) null,threadCount INTEGER,messageCount INTEGER,lastPostDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table MBCategory";
 	public static final String ORDER_BY_JPQL = " ORDER BY mbCategory.parentCategoryId ASC, mbCategory.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY MBCategory.parentCategoryId ASC, MBCategory.name ASC";
@@ -110,6 +111,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		model.setParentCategoryId(soapModel.getParentCategoryId());
 		model.setName(soapModel.getName());
 		model.setDescription(soapModel.getDescription());
+		model.setDisplayStyle(soapModel.getDisplayStyle());
 		model.setThreadCount(soapModel.getThreadCount());
 		model.setMessageCount(soapModel.getMessageCount());
 		model.setLastPostDate(soapModel.getLastPostDate());
@@ -285,6 +287,19 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		_description = description;
 	}
 
+	public String getDisplayStyle() {
+		if (_displayStyle == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _displayStyle;
+		}
+	}
+
+	public void setDisplayStyle(String displayStyle) {
+		_displayStyle = displayStyle;
+	}
+
 	public int getThreadCount() {
 		return _threadCount;
 	}
@@ -347,6 +362,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		clone.setParentCategoryId(getParentCategoryId());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
+		clone.setDisplayStyle(getDisplayStyle());
 		clone.setThreadCount(getThreadCount());
 		clone.setMessageCount(getMessageCount());
 		clone.setLastPostDate(getLastPostDate());
@@ -410,7 +426,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -434,6 +450,8 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		sb.append(getName());
 		sb.append(", description=");
 		sb.append(getDescription());
+		sb.append(", displayStyle=");
+		sb.append(getDisplayStyle());
 		sb.append(", threadCount=");
 		sb.append(getThreadCount());
 		sb.append(", messageCount=");
@@ -446,7 +464,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(46);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.messageboards.model.MBCategory");
@@ -497,6 +515,10 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>displayStyle</column-name><column-value><![CDATA[");
+		sb.append(getDisplayStyle());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>threadCount</column-name><column-value><![CDATA[");
 		sb.append(getThreadCount());
 		sb.append("]]></column-value></column>");
@@ -529,6 +551,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 	private long _parentCategoryId;
 	private String _name;
 	private String _description;
+	private String _displayStyle;
 	private int _threadCount;
 	private int _messageCount;
 	private Date _lastPostDate;

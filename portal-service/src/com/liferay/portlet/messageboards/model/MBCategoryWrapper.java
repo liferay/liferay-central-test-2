@@ -265,6 +265,24 @@ public class MBCategoryWrapper implements MBCategory {
 	}
 
 	/**
+	* Gets the display style of this message boards category.
+	*
+	* @return the display style of this message boards category
+	*/
+	public java.lang.String getDisplayStyle() {
+		return _mbCategory.getDisplayStyle();
+	}
+
+	/**
+	* Sets the display style of this message boards category.
+	*
+	* @param displayStyle the display style of this message boards category
+	*/
+	public void setDisplayStyle(java.lang.String displayStyle) {
+		_mbCategory.setDisplayStyle(displayStyle);
+	}
+
+	/**
 	* Gets the thread count of this message boards category.
 	*
 	* @return the thread count of this message boards category
