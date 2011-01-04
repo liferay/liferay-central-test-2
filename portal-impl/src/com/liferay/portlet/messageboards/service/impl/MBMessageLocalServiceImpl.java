@@ -78,6 +78,7 @@ import com.liferay.portlet.messageboards.social.MBActivityKeys;
 import com.liferay.portlet.messageboards.util.MBSubscriptionSender;
 import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.portlet.messageboards.util.MailingListThreadLocal;
+import com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator;
 import com.liferay.portlet.messageboards.util.comparator.MessageThreadComparator;
 import com.liferay.portlet.messageboards.util.comparator.ThreadLastPostDateComparator;
 import com.liferay.portlet.social.model.SocialActivity;
@@ -647,12 +648,22 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					}
 				}
 				else {
-					MBMessage parentMessage =
-						mbMessagePersistence.findByPrimaryKey(
-							message.getParentMessageId());
+					MessageCreateDateComparator comparator =
+						new MessageCreateDateComparator(true);
 
-					thread.setLastPostByUserId(parentMessage.getUserId());
-					thread.setLastPostDate(parentMessage.getModifiedDate());
+					MBMessage lastMessage =
+						mbMessagePersistence.findByT_S_Last(
+							thread.getThreadId(),
+							WorkflowConstants.STATUS_APPROVED, comparator);
+
+					if (message.getMessageId() == lastMessage.getMessageId()) {
+						MBMessage parentMessage =
+							mbMessagePersistence.findByPrimaryKey(
+								message.getParentMessageId());
+
+						thread.setLastPostByUserId(parentMessage.getUserId());
+						thread.setLastPostDate(parentMessage.getModifiedDate());
+					}
 				}
 			}
 
