@@ -221,7 +221,7 @@ public class EditGroupAction extends PortletAction {
 			"customJspServletContextName", customJspServletContextName);
 
 		group = GroupServiceUtil.updateGroup(
-			groupId, typeSettingsProperties.toString());
+			group.getGroupId(), typeSettingsProperties.toString());
 
 		// Layout set prototypes
 
