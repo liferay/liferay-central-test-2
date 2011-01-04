@@ -49,7 +49,7 @@ String editorContent = emailBody;
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
 
-<aui:form action="<%= configurationURL %>" method="post" name="fm">
+<aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " +  renderResponse.getNamespace() + "saveConfiguration();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
@@ -342,6 +342,10 @@ String editorContent = emailBody;
 </aui:form>
 
 <aui:script>
+	function <portlet:namespace />initEditor() {
+		return "<%= UnicodeFormatter.toString(editorContent) %>";
+	}
+
 	function <portlet:namespace />updateLanguage() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '';
 		submitForm(document.<portlet:namespace />fm);

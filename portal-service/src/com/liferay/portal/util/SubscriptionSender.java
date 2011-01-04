@@ -468,6 +468,9 @@ public class SubscriptionSender implements Serializable {
 
 				processedSubject = localizedSubjectMap.get(defaultLocale);
 			}
+			else {
+				processedSubject = localizedSubject;
+			}
 		}
 		else {
 			processedSubject = this.subject;
@@ -482,6 +485,9 @@ public class SubscriptionSender implements Serializable {
 				Locale defaultLocale = LocaleUtil.getDefault();
 
 				processedBody = localizedBodyMap.get(defaultLocale);
+			}
+			else {
+				processedBody = localizedBody;
 			}
 		}
 		else {
