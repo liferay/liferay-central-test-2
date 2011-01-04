@@ -221,11 +221,12 @@ public class MBThreadServiceSoap {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThreadSoap splitThread(
-		long messageId, com.liferay.portal.service.ServiceContext serviceContext)
+		long messageId, java.lang.String newSubject,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBThread returnValue = MBThreadServiceUtil.splitThread(messageId,
-					serviceContext);
+					newSubject, serviceContext);
 
 			return com.liferay.portlet.messageboards.model.MBThreadSoap.toSoapModel(returnValue);
 		}

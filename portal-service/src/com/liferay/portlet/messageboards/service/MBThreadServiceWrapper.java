@@ -105,10 +105,12 @@ public class MBThreadServiceWrapper implements MBThreadService {
 	}
 
 	public com.liferay.portlet.messageboards.model.MBThread splitThread(
-		long messageId, com.liferay.portal.service.ServiceContext serviceContext)
+		long messageId, java.lang.String newSubject,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _mbThreadService.splitThread(messageId, serviceContext);
+		return _mbThreadService.splitThread(messageId, newSubject,
+			serviceContext);
 	}
 
 	public void unlockThread(long threadId)

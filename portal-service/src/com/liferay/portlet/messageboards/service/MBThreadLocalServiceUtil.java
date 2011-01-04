@@ -351,10 +351,11 @@ public class MBThreadLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread splitThread(
-		long messageId, com.liferay.portal.service.ServiceContext serviceContext)
+		long messageId, java.lang.String newSubject,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().splitThread(messageId, serviceContext);
+		return getService().splitThread(messageId, newSubject, serviceContext);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread updateThread(

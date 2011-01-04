@@ -344,10 +344,12 @@ public class MBThreadLocalServiceWrapper implements MBThreadLocalService {
 	}
 
 	public com.liferay.portlet.messageboards.model.MBThread splitThread(
-		long messageId, com.liferay.portal.service.ServiceContext serviceContext)
+		long messageId, java.lang.String newSubject,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _mbThreadLocalService.splitThread(messageId, serviceContext);
+		return _mbThreadLocalService.splitThread(messageId, newSubject,
+			serviceContext);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBThread updateThread(

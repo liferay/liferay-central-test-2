@@ -436,6 +436,7 @@ public class MBThreadServiceHttp {
 
 	public static com.liferay.portlet.messageboards.model.MBThread splitThread(
 		HttpPrincipal httpPrincipal, long messageId,
+		java.lang.String newSubject,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -444,7 +445,7 @@ public class MBThreadServiceHttp {
 					"splitThread", _splitThreadParameterTypes11);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					messageId, serviceContext);
+					messageId, newSubject, serviceContext);
 
 			Object returnObj = null;
 
@@ -540,7 +541,8 @@ public class MBThreadServiceHttp {
 			long.class, long.class
 		};
 	private static final Class<?>[] _splitThreadParameterTypes11 = new Class[] {
-			long.class, com.liferay.portal.service.ServiceContext.class
+			long.class, java.lang.String.class,
+			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _unlockThreadParameterTypes12 = new Class[] {
 			long.class
