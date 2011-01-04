@@ -2090,7 +2090,7 @@ file.
 		<copy file="${sql.dir}${sql.file}" tofile="${sql.file}" />
 
 		<replace file="${sql.file}">
-			<replacefilter token="use master" value="if exists (select * from master.dbo.sysdatabases where name = &quot;${db.sybase.schema}&quot;)${line.separator}begin${line.separator}drop database ${db.sybase.schema}${line.separator}end${line.separator}go${line.separator}create database ${db.sybase.schema} on ${db.sybase.device.name} = &quot;250m&quot;${line.separator}go" />
+			<replacefilter token="use master" value="use master${line.separator}dump transaction master with no_log${line.separator}go${line.separator}if exists (select * from master.dbo.sysdatabases where name = &quot;${db.sybase.schema}&quot;)${line.separator}begin${line.separator}drop database ${db.sybase.schema}${line.separator}end${line.separator}go${line.separator}create database ${db.sybase.schema} on ${db.sybase.device.name} = &quot;250m&quot;${line.separator}go" />
 			<replacefilter token="exec sp_dboption 'lportal', 'allow nulls by default' , true" value="exec sp_dboption '${db.sybase.schema}', 'allow nulls by default' , true"/>
 			<replacefilter token="exec sp_dboption 'lportal', 'select into/bulkcopy/pllsort' , true" value="exec sp_dboption '${db.sybase.schema}', 'select into/bulkcopy/pllsort' , true"/>
 			<replacefilter token="use lportal" value="use ${db.sybase.schema}${line.separator}go"/>
