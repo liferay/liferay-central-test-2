@@ -60,6 +60,7 @@ public class PanelTag extends IncludeTag {
 			}
 		}
 
+ 		request.setAttribute("liferay-ui:panel:helpMessage", _helpMessage);
  		request.setAttribute("liferay-ui:panel:id", _id);
  		request.setAttribute("liferay-ui:panel:parentId", parentId);
  		request.setAttribute("liferay-ui:panel:title", _title);
@@ -103,6 +104,10 @@ public class PanelTag extends IncludeTag {
 		_endPage = endPage;
 	}
 
+	public void setHelpMessage(String helpMessage) {
+		_helpMessage = helpMessage;
+	}
+
 	public void setId(String id) {
 		_id = id;
 	}
@@ -137,6 +142,7 @@ public class PanelTag extends IncludeTag {
 
 	private String _startPage;
 	private String _endPage;
+	private String _helpMessage;
  	private String _id;
  	private String _title;
 	private boolean _collapsible = true;

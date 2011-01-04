@@ -22,6 +22,10 @@
 			<span>
 				<liferay-ui:message key="<%= title %>" />
 			</span>
+
+			<c:if test="<%= Validator.isNotNull(helpMessage) %>">
+				<liferay-ui:icon-help message="<%= helpMessage %>" />
+			</c:if>
 		</div>
 
 		<c:if test="<%= collapsible && extended %>">
