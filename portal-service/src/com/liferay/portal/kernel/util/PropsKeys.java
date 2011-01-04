@@ -1555,6 +1555,8 @@ public interface PropsKeys {
 
 	public static final String SHOPPING_ORDER_COMMENTS_ENABLED = "shopping.order.comments.enabled";
 
+	public static final String SHUTDOWN_POLLING_TIME = "shutdown.polling.time";
+
 	public static final String SHUTDOWN_PROGRAMMATICALLY_EXIT = "shutdown.programmatically.exit";
 
 	public static final String SITEMINDER_AUTH_ENABLED = "siteminder.auth.enabled";
