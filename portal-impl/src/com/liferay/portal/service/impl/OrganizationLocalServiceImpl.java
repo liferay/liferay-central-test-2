@@ -313,8 +313,8 @@ public class OrganizationLocalServiceImpl
 	public void deleteOrganization(long organizationId)
 		throws PortalException, SystemException {
 
-		Organization organization =
-			organizationPersistence.findByPrimaryKey(organizationId);
+		Organization organization = organizationPersistence.findByPrimaryKey(
+			organizationId);
 
 		deleteOrganization(organization);
 	}
