@@ -202,7 +202,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	<br />
 
 	<liferay-ui:panel-container cssClass="calendar-event-details" extended="<%= true %>" id="calendarEventDetailsPanelContainer" persistState="<%= true %>">
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="calendarRepeatPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "repeat") %>'>
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="calendarRepeatPanel" persistState="<%= true %>" title="repeat">
 			<liferay-ui:error exception="<%= EventEndDateException.class %>" message="please-enter-a-valid-end-date" />
 
 			<liferay-ui:input-repeat event="<%= event %>" />
@@ -222,7 +222,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="calendarRemindersPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "reminders") %>'>
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="calendarRemindersPanel" persistState="<%= true %>" title="reminders">
 			<aui:fieldset>
 				<span class="aui-field-row">
 					<aui:select inlineField="<%= true %>" inlineLabel="left" label="remind-me" name="firstReminder">

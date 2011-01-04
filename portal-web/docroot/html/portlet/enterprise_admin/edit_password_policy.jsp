@@ -59,7 +59,7 @@ long resetTicketMaxAge = BeanParamUtil.getLong(passwordPolicy, request, "resetTi
 	<aui:model-context bean="<%= passwordPolicy %>" model="<%= PasswordPolicy.class %>" />
 
 	<liferay-ui:panel-container extended="<%= true %>" id="enterpriseAdminPasswordPolicyPanelContainer" persistState="<%= true %>">
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="enterpriseAdminPasswordPolicyGeneralPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "general") %>'>
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="enterpriseAdminPasswordPolicyGeneralPanel" persistState="<%= true %>" title="general">
 			<aui:fieldset>
 				<aui:input disabled="<%= defaultPolicy %>" name="name" />
 
@@ -103,7 +103,7 @@ long resetTicketMaxAge = BeanParamUtil.getLong(passwordPolicy, request, "resetTi
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="enterpriseAdminPasswordPolicySyntaxPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "password-syntax-checking") %>'>
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="enterpriseAdminPasswordPolicySyntaxPanel" persistState="<%= true %>" title="password-syntax-checking">
 			<aui:fieldset>
 
 				<aui:input helpMessage="syntax-checking-enabled-help" inlineLabel="left" label="syntax-checking-enabled" name="checkSyntax" />
@@ -126,7 +126,7 @@ long resetTicketMaxAge = BeanParamUtil.getLong(passwordPolicy, request, "resetTi
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="enterpriseAdminPasswordPolicyHistoryPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "password-history") %>'>
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="enterpriseAdminPasswordPolicyHistoryPanel" persistState="<%= true %>" title="password-history">
 			<aui:fieldset>
 
 				<aui:input helpMessage="history-enabled-help" inlineLabel="left" label="history-enabled" name="history" />
@@ -149,7 +149,7 @@ long resetTicketMaxAge = BeanParamUtil.getLong(passwordPolicy, request, "resetTi
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="enterpriseAdminPasswordPolicyExpirationPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "password-expiration") %>'>
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="enterpriseAdminPasswordPolicyExpirationPanel" persistState="<%= true %>" title="password-expiration">
 			<aui:fieldset>
 
 				<aui:input helpMessage="expiration-enabled-help" inlineLabel="left" label="expiration-enabled" name="expireable" />
@@ -188,7 +188,7 @@ long resetTicketMaxAge = BeanParamUtil.getLong(passwordPolicy, request, "resetTi
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="enterpriseAdminPasswordPolicyLockoutPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "lockout") %>'>
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="enterpriseAdminPasswordPolicyLockoutPanel" persistState="<%= true %>" title="lockout">
 			<aui:fieldset>
 				<aui:input helpMessage="lockout-enabled-help" inlineLabel="left" label="lockout-enabled" name="lockout" />
 

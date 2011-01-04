@@ -233,7 +233,7 @@ if (assetEntry != null) {
 				</liferay-ui:panel>
 			</c:if>
 
-			<liferay-ui:panel defaultState="closed" title='<%= LanguageUtil.get(pageContext, "activities") %>'>
+			<liferay-ui:panel defaultState="closed" title="activities">
 
 				<%
 				List<Integer> logTypes = new ArrayList<Integer>();
@@ -327,7 +327,7 @@ if (assetEntry != null) {
 
 			</liferay-ui:panel>
 
-			<liferay-ui:panel title='<%= LanguageUtil.get(pageContext, "comments") %>'>
+			<liferay-ui:panel title="comments">
 				<portlet:actionURL var="discussionURL">
 					<portlet:param name="struts_action" value="/workflow_tasks/edit_workflow_task_discussion" />
 				</portlet:actionURL>

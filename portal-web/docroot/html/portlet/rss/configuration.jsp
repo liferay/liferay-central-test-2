@@ -55,7 +55,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 	<c:choose>
 		<c:when test="<%= typeSelection.equals(StringPool.BLANK) %>">
 			<liferay-ui:panel-container extended="<%= true %>" id="rssFeedsSettingsPanelContainer" persistState="<%= true %>">
-				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="rssFeedsSettingsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "feeds") %>' >
+				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="rssFeedsSettingsPanel" persistState="<%= true %>" title="feeds">
 					<liferay-ui:error exception="<%= ValidatorException.class %>">
 
 					<%
@@ -110,7 +110,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 					</aui:fieldset>
 				</liferay-ui:panel>
 
-				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="rssFeedsDisplaySettingsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>' >
+				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="rssFeedsDisplaySettingsPanel" persistState="<%= true %>" title="display-settings">
 					<aui:fieldset>
 						<aui:input name="preferences--showFeedTitle--" type="checkbox" value="<%= showFeedTitle %>" />
 

@@ -148,7 +148,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 		<br />
 
-		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="blogsEntryAbstractPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "abstract") %>'>
+		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="blogsEntryAbstractPanel" persistState="<%= true %>" title="abstract">
 			<liferay-ui:error exception="<%= EntrySmallImageNameException.class %>">
 
 				<%
@@ -173,7 +173,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="blogsEntryCategorizationPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "categorization") %>'>
+		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="blogsEntryCategorizationPanel" persistState="<%= true %>" title="categorization">
 			<aui:fieldset>
 				<aui:input name="categories" type="assetCategories" />
 

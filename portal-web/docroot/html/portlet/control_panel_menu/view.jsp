@@ -110,7 +110,7 @@
 					%>
 
 					<c:if test="<%= !manageableGroups.isEmpty() %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="controlPanelMenuCommunitiesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "communities") %>'>
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="controlPanelMenuCommunitiesPanel" persistState="<%= true %>" title="communities">
 							<ul>
 
 								<%
@@ -136,7 +136,7 @@
 					</c:if>
 
 					<c:if test="<%= !manageableOrganizations.isEmpty() %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="controlPanelMenuOrganizationsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "organizations") %>'>
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="controlPanelMenuOrganizationsPanel" persistState="<%= true %>" title="organizations">
 							<ul>
 
 								<%
@@ -182,7 +182,7 @@
 					%>
 
 					<c:if test="<%= showGlobal || showMyCommunity %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="controlPanelMenuSharedCommunitiesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "other[plural]") %>'>
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="controlPanelMenuSharedCommunitiesPanel" persistState="<%= true %>" title="other[plural]">
 							<ul>
 								<c:if test="<%= showGlobal %>">
 									<li>

@@ -37,7 +37,7 @@ String htmlAttributes =
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
 	<liferay-ui:panel-container extended="<%= true %>" id="iframeSettingsPanelContainer" persistState="<%= true %>">
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="iframeGeneralPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "general") %>'>
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="iframeGeneralPanel" persistState="<%= true %>" title="general">
 			<aui:fieldset>
 				<aui:input cssClass="lfr-input-text-container" label="source-url" name="preferences--src--" prefix='<%= relative ? "..." : StringPool.BLANK %>' type="text" value="<%= src %>" />
 
@@ -45,7 +45,7 @@ String htmlAttributes =
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="iframeAuthenticationPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "authenticate") %>'>
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="iframeAuthenticationPanel" persistState="<%= true %>" title="authenticate">
 			<aui:fieldset>
 				<aui:input label="authenticate" name="preferences--auth--" type="checkbox" value="<%= auth %>" />
 
@@ -110,7 +110,7 @@ String htmlAttributes =
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="iframeDisplaySettingsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>'>
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="iframeDisplaySettingsPanel" persistState="<%= true %>" title="display-settings">
 			<aui:fieldset>
 				<aui:input label="resize-automatically" name="preferences--resizeAutomatically--" type="checkbox" value="<%= resizeAutomatically %>" />
 

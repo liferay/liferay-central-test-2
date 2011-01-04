@@ -280,7 +280,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 <div class="lfr-asset-panels">
 	<liferay-ui:panel-container extended="<%= false %>" persistState="<%= true %>">
-		<liferay-ui:panel collapsible="<%= true %>" cssClass="version-history" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "version-history") %>'>
+		<liferay-ui:panel collapsible="<%= true %>" cssClass="version-history" extended="<%= true %>" persistState="<%= true %>" title="version-history">
 
 			<%
 			boolean comparableFileEntry = DocumentConversionUtil.isComparableVersion(extension);
@@ -402,7 +402,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
 		</liferay-ui:panel>
 
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "comments") %>'>
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="comments">
 			<portlet:actionURL var="discussionURL">
 				<portlet:param name="struts_action" value="/document_library/edit_file_entry_discussion" />
 			</portlet:actionURL>

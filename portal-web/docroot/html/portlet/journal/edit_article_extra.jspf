@@ -21,7 +21,7 @@
 	align="right"
 >
 	<liferay-ui:panel-container cssClass="journal-extras" extended="<%= false %>" id="journalExtrasPanelContainer" persistState="<%= true %>">
-		<liferay-ui:panel defaultState="open" extended="<%= false %>" id="journalStructurePanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "structure") %>'>
+		<liferay-ui:panel defaultState="open" extended="<%= false %>" id="journalStructurePanel" persistState="<%= true %>" title="structure">
 			<aui:fieldset>
 				<div class="journal-form-presentation-label">
 					<aui:input name="structureId" type="hidden" value="<%= structureId %>" />
@@ -130,7 +130,7 @@
 			</div>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel defaultState="open" extended="<%= false %>" id="journalTemplatePanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "template") %>'>
+		<liferay-ui:panel defaultState="open" extended="<%= false %>" id="journalTemplatePanel" persistState="<%= true %>" title="template">
 			<aui:fieldset>
 				<div class="journal-form-presentation-label">
 					<c:choose>
@@ -191,7 +191,7 @@
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="journalSchedulePanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "schedule") %>'>
+		<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="journalSchedulePanel" persistState="<%= true %>" title="schedule">
 			<liferay-ui:error exception="<%= ArticleDisplayDateException.class %>" message="please-enter-a-valid-display-date" />
 			<liferay-ui:error exception="<%= ArticleExpirationDateException.class %>" message="please-enter-a-valid-expiration-date" />
 

@@ -176,7 +176,7 @@ int tabIndex = 1;
 	</aui:fieldset>
 
 	<liferay-ui:panel-container extended="<%= true %>" id="journalStructurePanelContainer" persistState="<%= true %>">
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="journalXSDPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "xsd") %>'>
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="journalXSDPanel" persistState="<%= true %>" title="xsd">
 			<aui:fieldset>
 				<liferay-ui:error exception="<%= StructureXsdException.class %>" message="please-enter-a-valid-xsd" />
 

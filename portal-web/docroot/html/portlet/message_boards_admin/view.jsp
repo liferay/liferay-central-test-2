@@ -161,7 +161,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 			%>
 
 			<c:if test="<%= categoriesCount > 0 %>">
-				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="messageBoardsCategoriesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, (category != null) ? "subcategories" : "categories") %>'>
+				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="messageBoardsCategoriesPanel" persistState="<%= true %>" title='<%= (category != null) ? "subcategories" : "categories" %>'>
 					<aui:form action="<%= portletURL.toString() %>" method="get" name="fm">
 						<aui:input name="<%= Constants.CMD %>" type="hidden" />
 						<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
@@ -205,7 +205,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 				</liferay-ui:panel>
 			</c:if>
 
-			<liferay-ui:panel collapsible="<%= true %>" cssClass="threads-panel" extended="<%= true %>" id="messageBoardsThreadsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "threads") %>'>
+			<liferay-ui:panel collapsible="<%= true %>" cssClass="threads-panel" extended="<%= true %>" id="messageBoardsThreadsPanel" persistState="<%= true %>" title="threads">
 				<aui:form action="<%= portletURL.toString() %>" method="get" name="fm1">
 					<aui:input name="<%= Constants.CMD %>" type="hidden" />
 					<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
@@ -553,7 +553,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 	</c:when>
 	<c:when test='<%= tabs1.equals("statistics") %>'>
 		<liferay-ui:panel-container cssClass="statistics-panel" extended="<%= false %>" id="messageBoardsStatisticsPanelContainer" persistState="<%= true %>">
-			<liferay-ui:panel collapsible="<%= true %>" cssClass="statistics-panel-content" extended="<%= true %>" id="messageBoardsGeneralStatisticsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "general") %>'>
+			<liferay-ui:panel collapsible="<%= true %>" cssClass="statistics-panel-content" extended="<%= true %>" id="messageBoardsGeneralStatisticsPanel" persistState="<%= true %>" title="general">
 				<dl>
 					<dt>
 						<liferay-ui:message key="num-of-categories" />:
@@ -576,7 +576,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 				</dl>
 			</liferay-ui:panel>
 
-			<liferay-ui:panel collapsible="<%= true %>" cssClass="statistics-panel-content" extended="<%= true %>" id="messageBoardsTopPostersPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "top-posters") %>'>
+			<liferay-ui:panel collapsible="<%= true %>" cssClass="statistics-panel-content" extended="<%= true %>" id="messageBoardsTopPostersPanel" persistState="<%= true %>" title="top-posters">
 				<liferay-ui:search-container
 					emptyResultsMessage="there-are-no-top-posters"
 					iteratorURL="<%= portletURL %>"

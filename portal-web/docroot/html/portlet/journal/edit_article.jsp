@@ -531,7 +531,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 			<br />
 
-			<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="journalAbstractPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "abstract") %>'>
+			<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="journalAbstractPanel" persistState="<%= true %>" title="abstract">
 				<liferay-ui:error exception="<%= ArticleSmallImageNameException.class %>">
 
 				<%
@@ -568,7 +568,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 			<br />
 
-			<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="journalCategorizationPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "categorization") %>'>
+			<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="journalCategorizationPanel" persistState="<%= true %>" title="categorization">
 				<liferay-ui:error exception="<%= ArticleTypeException.class %>" message="please-select-a-type" />
 
 				<aui:fieldset>

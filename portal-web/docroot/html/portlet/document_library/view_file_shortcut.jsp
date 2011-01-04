@@ -221,7 +221,7 @@ if (Validator.isNotNull(folder.getName())) {
 
 <div class="file-entry-panels">
 	<liferay-ui:panel-container extended="<%= false %>" id="documentLibraryDocumentPanelContainer" persistState="<%= true %>">
-		<liferay-ui:panel collapsible="<%= true %>" cssClass="version-history" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "version-history") %>'>
+		<liferay-ui:panel collapsible="<%= true %>" cssClass="version-history" extended="<%= true %>" persistState="<%= true %>" title="version-history">
 
 			<%
 			boolean showNonApprovedDocuments = false;
@@ -297,7 +297,7 @@ if (Validator.isNotNull(folder.getName())) {
 		</liferay-ui:panel>
 
 		<c:if test="<%= PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED && DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.ADD_DISCUSSION) %>">
-			<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "comments") %>'>
+			<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="comments">
 				<portlet:actionURL var="discussionURL">
 					<portlet:param name="struts_action" value="/document_library/edit_file_entry_discussion" />
 				</portlet:actionURL>

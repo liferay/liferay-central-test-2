@@ -331,7 +331,7 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 				<liferay-ui:panel-container extended="<%= false %>" persistState="<%= true %>">
 					<%= organizationInfo %>
 
-					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "suborganizations") %>'>
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="suborganizations">
 						<%= organizationsTree %>
 					</liferay-ui:panel>
 				</liferay-ui:panel-container>

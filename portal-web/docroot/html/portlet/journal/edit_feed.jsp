@@ -169,7 +169,7 @@ if (feed != null) {
 	</aui:fieldset>
 
 	<liferay-ui:panel-container extended="<%= true %>" id="journalFeedSettingsPanelContainer" persistState="<%= true %>">
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="journalFeedConstraintsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "web-content-contraints") %>' >
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="journalFeedConstraintsPanel" persistState="<%= true %>" title="web-content-contraints">
 			<aui:fieldset>
 				<aui:select label="web-content-type" name="type" showEmptyOption="<%= true %>">
 
@@ -248,7 +248,7 @@ if (feed != null) {
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="journalPresentationSettingsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "presentation-settings") %>' >
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="journalPresentationSettingsPanel" persistState="<%= true %>" title="presentation-settings">
 			<aui:fieldset>
 				<aui:select label="feed-item-content" name="contentField">
 

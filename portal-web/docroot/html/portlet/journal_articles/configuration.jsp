@@ -54,7 +54,7 @@ if (Validator.isNotNull(structureId)) {
 	<aui:input name="preferences--structureId--" type="hidden" value="<%= structureId %>" />
 
 	<liferay-ui:panel-container extended="<%= true %>" id="journalArticlesSettingsPanelContainer" persistState="<%= true %>">
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="journalArticlesFilterPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "filter") %>' >
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="journalArticlesFilterPanel" persistState="<%= true %>" title="filter">
 			<aui:fieldset>
 				<aui:select label="community" name="preferences--groupId--">
 					<aui:option label="global" selected="<%= groupId == themeDisplay.getCompanyGroupId() %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
@@ -134,7 +134,7 @@ if (Validator.isNotNull(structureId)) {
 			</aui:fieldset>
 		</liferay-ui:panel>
 
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="journalArticlesDisplaySettings" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "display-settings") %>' >
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="journalArticlesDisplaySettings" persistState="<%= true %>" title="display-settings">
 			<aui:fieldset>
 				<aui:select label="display-url" name="preferences--pageUrl--">
 					<aui:option label="maximized" selected='<%= pageUrl.equals("maximized") %>' />

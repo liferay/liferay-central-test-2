@@ -111,7 +111,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		%>
 
 		<liferay-ui:panel-container extended="<%= true %>" id="shoppingCategoriesPanelContainer" persistState="<%= true %>">
-			<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="shoppingCategoriesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "categories") %>'>
+			<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="shoppingCategoriesPanel" persistState="<%= true %>" title="categories">
 				<c:if test="<%= showAddCategoryButton || showPermissionsButton || showSearch %>">
 					<aui:fieldset>
 						<c:if test="<%= showSearch %>">
@@ -319,7 +319,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		%>
 
 		<liferay-ui:panel-container extended="<%= true %>" id="shoppingItemsPanelContainer" persistState="<%= true %>">
-			<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="shoppingItemsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "items") %>'>
+			<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="shoppingItemsPanel" persistState="<%= true %>" title="items">
 				<c:if test="<%= showAddItemButton || showSearch %>">
 					<aui:fieldset>
 						<c:if test="<%= showSearch %>">

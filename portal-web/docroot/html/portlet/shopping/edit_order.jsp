@@ -576,7 +576,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 
 <c:if test="<%= !windowState.equals(LiferayWindowState.POP_UP) %>">
 	<liferay-ui:panel-container extended="<%= true %>" persistState="<%= true %>">
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "comments") %>'>
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="comments">
 			<portlet:actionURL var="discussionURL">
 				<portlet:param name="struts_action" value="/shopping/edit_order_discussion" />
 			</portlet:actionURL>
