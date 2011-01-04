@@ -113,10 +113,13 @@ public class SubscriptionSender implements Serializable {
 				}
 
 				if (bulk) {
-					InternetAddress to = new InternetAddress(
-						replyToAddress, replyToAddress);
+					Locale locale = LocaleUtil.getDefault();
 
-					sendEmail(to, LocaleUtil.getDefault());
+					InternetAddress to = new InternetAddress(
+						replaceContent(replyToAddress, locale),
+						replaceContent(replyToAddress, locale));
+
+					sendEmail(to, locale);
 				}
 			}
 
@@ -519,7 +522,8 @@ public class SubscriptionSender implements Serializable {
 
 		if (replyToAddress != null) {
 			InternetAddress replyTo = new InternetAddress(
-				replyToAddress, replyToAddress);
+				replaceContent(replyToAddress, locale),
+				replaceContent(replyToAddress, locale));
 
 			mailMessage.setReplyTo(new InternetAddress[] {replyTo});
 		}
