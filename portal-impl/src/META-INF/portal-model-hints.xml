@@ -947,8 +947,12 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="categoryId" type="long" />
-		<field name="key" type="String" />
-		<field name="value" type="String" />
+		<field name="key" type="String">
+			<hint name="display-width">200</hint>
+		</field>
+		<field name="value" type="String">
+			<hint name="display-width">200</hint>
+		</field>
 	</model>
 	<model name="com.liferay.portlet.asset.model.AssetEntry">
 		<field name="entryId" type="long" />

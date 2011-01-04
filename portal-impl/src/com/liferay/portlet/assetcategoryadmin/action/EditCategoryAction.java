@@ -20,6 +20,9 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.ActionConstants;
@@ -99,6 +102,8 @@ public class EditCategoryAction extends PortletAction {
 		Map<Locale, String> descriptionMap =
 			LocalizationUtil.getLocalizationMap(actionRequest, "description");
 
+		String[] properties = getProperties(actionRequest);
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			AssetCategory.class.getName(), actionRequest);
 
@@ -109,8 +114,8 @@ public class EditCategoryAction extends PortletAction {
 			// Add category
 
 			category = AssetCategoryServiceUtil.addCategory(
-				parentCategoryId, titleMap, descriptionMap, vocabularyId, null,
-				serviceContext);
+				parentCategoryId, titleMap, descriptionMap, vocabularyId,
+				properties, serviceContext);
 		}
 		else {
 
@@ -118,7 +123,7 @@ public class EditCategoryAction extends PortletAction {
 
 			category = AssetCategoryServiceUtil.updateCategory(
 				categoryId, parentCategoryId, titleMap, descriptionMap,
-				vocabularyId, null, serviceContext );
+				vocabularyId, properties, serviceContext );
 		}
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
@@ -126,6 +131,33 @@ public class EditCategoryAction extends PortletAction {
 		jsonObject.put("categoryId", category.getCategoryId());
 
 		return jsonObject;
+	}
+
+	public String[] getProperties(ActionRequest actionRequest) {
+		int[] propertiesIndexes = StringUtil.split(
+			ParamUtil.getString(actionRequest, "propertiesIndexes"), 0);
+
+		String[] properties = new String[propertiesIndexes.length];
+
+		int i = 0;
+
+		for (int propertiesIndex : propertiesIndexes) {
+			String key = ParamUtil.getString(
+				actionRequest, "key" + propertiesIndex);
+
+			if (Validator.isNull(key)) {
+				continue;
+			}
+
+			String value = ParamUtil.getString(
+				actionRequest, "value" + propertiesIndex);
+
+			properties[i] = key + StringPool.COLON + value;
+
+			i++;
+		}
+
+		return properties;
 	}
 
 }
