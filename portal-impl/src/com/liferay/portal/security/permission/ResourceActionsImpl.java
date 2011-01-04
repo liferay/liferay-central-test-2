@@ -266,19 +266,30 @@ public class ResourceActionsImpl implements ResourceActions {
 	}
 
 	public List<String> getModelResourceActions(String name) {
-		return getActions(_modelResourceActions, name);
+		List<String> actions = getActions(_modelResourceActions, name);
+
+		return ListUtil.copy(actions);
 	}
 
 	public List<String> getModelResourceCommunityDefaultActions(String name) {
-		return getActions(_modelResourceCommunityDefaultActions, name);
+		List<String> actions = getActions(
+			_modelResourceCommunityDefaultActions, name);
+
+		return ListUtil.copy(actions);
 	}
 
 	public List<String> getModelResourceGuestDefaultActions(String name) {
-		return getActions(_modelResourceGuestDefaultActions, name);
+		List<String> actions = getActions(
+			_modelResourceGuestDefaultActions, name);
+
+		return ListUtil.copy(actions);
 	}
 
 	public List<String> getModelResourceGuestUnsupportedActions(String name) {
-		return getActions(_modelResourceGuestUnsupportedActions, name);
+		List<String> actions = getActions(
+			_modelResourceGuestUnsupportedActions, name);
+
+		return ListUtil.copy(actions);
 	}
 
 	public String getModelResourceNamePrefix() {
@@ -286,7 +297,10 @@ public class ResourceActionsImpl implements ResourceActions {
 	}
 
 	public List<String> getModelResourceOwnerDefaultActions(String name) {
-		return getActions(_modelResourceOwnerDefaultActions, name);
+		List<String> actions = getActions(
+			_modelResourceOwnerDefaultActions, name);
+
+		return ListUtil.copy(actions);
 	}
 
 	public String[] getOrganizationModelResources() {
@@ -378,7 +392,7 @@ public class ResourceActionsImpl implements ResourceActions {
 			}
 		}
 
-		return actions;
+		return ListUtil.copy(actions);
 	}
 
 	public List<String> getPortletResourceCommunityDefaultActions(String name) {
@@ -392,19 +406,28 @@ public class ResourceActionsImpl implements ResourceActions {
 
 		name = PortletConstants.getRootPortletId(name);
 
-		return getActions(_portletResourceCommunityDefaultActions, name);
+		List<String> actions = getActions(
+			_portletResourceCommunityDefaultActions, name);
+
+		return ListUtil.copy(actions);
 	}
 
 	public List<String> getPortletResourceGuestDefaultActions(String name) {
 		name = PortletConstants.getRootPortletId(name);
 
-		return getActions(_portletResourceGuestDefaultActions, name);
+		List<String> actions = getActions(
+			_portletResourceGuestDefaultActions, name);
+
+		return ListUtil.copy(actions);
 	}
 
 	public List<String> getPortletResourceGuestUnsupportedActions(String name) {
 		name = PortletConstants.getRootPortletId(name);
 
-		return getActions(_portletResourceGuestUnsupportedActions, name);
+		List<String> actions = getActions(
+			_portletResourceGuestUnsupportedActions, name);
+
+		return ListUtil.copy(actions);
 	}
 
 	public List<String> getPortletResourceLayoutManagerActions(String name) {
@@ -424,7 +447,7 @@ public class ResourceActionsImpl implements ResourceActions {
 			actions.add(ActionKeys.VIEW);
 		}
 
-		return actions;
+		return ListUtil.copy(actions);
 	}
 
 	public List<String> getResourceActions(String name) {
