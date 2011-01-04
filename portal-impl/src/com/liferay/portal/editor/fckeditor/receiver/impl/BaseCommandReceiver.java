@@ -289,6 +289,11 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 
 		long scopeGroupId = themeDisplay.getScopeGroupId();
 
+		Group companyGroup =
+			GroupLocalServiceUtil.getCompanyGroup(argument.getCompanyId());
+
+		groups.add(0, companyGroup);
+
 		HttpServletRequest request = argument.getHttpServletRequest();
 
 		String portletId = ParamUtil.getString(request, "p_p_id");
