@@ -182,6 +182,8 @@ public class EditCategoryAction extends PortletAction {
 			actionRequest, "parentCategoryId");
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
+		String displayStyle = ParamUtil.getString(
+			actionRequest, "displayStyle");
 
 		String emailAddress = ParamUtil.getString(
 			actionRequest, "emailAddress");
@@ -223,21 +225,21 @@ public class EditCategoryAction extends PortletAction {
 			// Add category
 
 			MBCategoryServiceUtil.addCategory(
-				parentCategoryId, name, description, emailAddress, inProtocol,
-				inServerName, inServerPort, inUseSSL, inUserName, inPassword,
-				inReadInterval, outEmailAddress, outCustom, outServerName,
-				outServerPort, outUseSSL, outUserName, outPassword,
-				mailingListActive, serviceContext);
+				parentCategoryId, name, description, displayStyle, emailAddress,
+				inProtocol, inServerName, inServerPort, inUseSSL, inUserName,
+				inPassword, inReadInterval, outEmailAddress, outCustom,
+				outServerName, outServerPort, outUseSSL, outUserName,
+				outPassword, mailingListActive, serviceContext);
 		}
 		else {
 
 			// Update category
 
 			MBCategoryServiceUtil.updateCategory(
-				categoryId, parentCategoryId, name, description, emailAddress,
-				inProtocol, inServerName, inServerPort, inUseSSL, inUserName,
-				inPassword, inReadInterval, outEmailAddress, outCustom,
-				outServerName, outServerPort, outUseSSL, outUserName,
+				categoryId, parentCategoryId, name, description, displayStyle,
+				emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
+				inUserName, inPassword, inReadInterval, outEmailAddress,
+				outCustom, outServerName, outServerPort, outUseSSL, outUserName,
 				outPassword, mailingListActive, mergeWithParentCategory,
 				serviceContext);
 		}

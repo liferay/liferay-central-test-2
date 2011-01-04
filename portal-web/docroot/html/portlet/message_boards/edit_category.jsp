@@ -106,6 +106,22 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 
 		<aui:input name="description" />
 
+		<aui:select name="displayStyle">
+
+			<%
+			String selectedDisplayStyle = (category != null) ? category.getDisplayStyle() : MBCategoryConstants.DEFAULT_DISPLAY_STYLE;
+
+			for (int i = 0; i < MBCategoryConstants.DISPLAY_STYLES.length; i++) {
+			%>
+
+				<aui:option label="<%= MBCategoryConstants.DISPLAY_STYLES[i] %>" selected="<%= MBCategoryConstants.DISPLAY_STYLES[i].equals(selectedDisplayStyle) %>" />
+
+			<%
+			}
+			%>
+
+		</aui:select>
+
 		<liferay-ui:custom-attributes-available className="<%= MBCategory.class.getName() %>">
 			<liferay-ui:custom-attribute-list
 				className="<%= MBCategory.class.getName() %>"
