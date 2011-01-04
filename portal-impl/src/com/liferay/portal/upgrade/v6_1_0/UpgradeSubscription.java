@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.util.PortalInstances;
+import com.liferay.portal.util.PropsValues;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -70,6 +71,10 @@ public class UpgradeSubscription extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
 
+		if (!PropsValues.DISCUSSION_SUBSCRIBE_BY_DEFAULT) {
+			return;
+		}
+		
 		for (long companyId : companyIds) {
 			updateMBMessages(companyId);
 		}
