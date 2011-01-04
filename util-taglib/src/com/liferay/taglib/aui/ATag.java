@@ -152,6 +152,12 @@ public class ATag extends IncludeTag {
 				jspWriter.write("\" ");
 			}
 
+			if (Validator.isNotNull(_title)) {
+				jspWriter.write("title=\"");
+				jspWriter.write(LanguageUtil.get(pageContext, _title));
+				jspWriter.write("\" ");
+			}
+
 			CustomAttributes customAttributes = getCustomAttributes();
 
 			if (customAttributes != null) {
@@ -185,12 +191,6 @@ public class ATag extends IncludeTag {
 			if (Validator.isNotNull(_lang)) {
 				jspWriter.write("lang=\"");
 				jspWriter.write(_lang);
-				jspWriter.write("\" ");
-			}
-
-			if (Validator.isNotNull(_title)) {
-				jspWriter.write("title=\"");
-				jspWriter.write(LanguageUtil.get(pageContext, _title));
 				jspWriter.write("\" ");
 			}
 
