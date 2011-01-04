@@ -226,11 +226,8 @@ public class OrganizationLocalServiceImpl
 		}
 	}
 
-	public void deleteOrganization(long organizationId)
-		throws PortalException, SystemException {
-
-		Organization organization = organizationPersistence.findByPrimaryKey(
-			organizationId);
+	public void deleteOrganization(Organization organization)
+			throws PortalException, SystemException {
 
 		if ((userLocalService.getOrganizationUsersCount(
 				organization.getOrganizationId(), true) > 0) ||
@@ -311,6 +308,15 @@ public class OrganizationLocalServiceImpl
 
 		indexer.reindex(
 			new String[] {String.valueOf(organization.getCompanyId())});
+	}
+
+	public void deleteOrganization(long organizationId)
+		throws PortalException, SystemException {
+
+		Organization organization =
+			organizationPersistence.findByPrimaryKey(organizationId);
+
+		deleteOrganization(organization);
 	}
 
 	public List<Organization> getGroupOrganizations(long groupId)

@@ -263,10 +263,11 @@ public abstract class OrganizationLocalServiceBaseImpl
 	 * Deletes the organization from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param organization the organization to delete
+	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteOrganization(Organization organization)
-		throws SystemException {
+		throws PortalException, SystemException {
 		organizationPersistence.remove(organization);
 	}
 
