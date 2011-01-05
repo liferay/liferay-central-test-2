@@ -27,6 +27,16 @@ public class UniqueList<E> extends ArrayList<E> {
 		super();
 	}
 
+	public UniqueList(Collection<E> c) {
+		super(c.size());
+
+		addAll(c);
+	}
+
+	public UniqueList(int initialCapacity) {
+		super(initialCapacity);
+	}
+
 	public boolean add(E e) {
 		if (!contains(e)) {
 			return super.add(e);
