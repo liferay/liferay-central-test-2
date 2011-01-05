@@ -53,7 +53,7 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		List<Object[]> updateList = new ArrayList<Object[]>();
+		List<Object[]> arrays = new ArrayList<Object[]>();
 
 		try {
 			con = DataAccess.getConnection();
@@ -64,66 +64,60 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				byte[] jobDataBytes = rs.getBytes("JOB_DATA");
+				String jobName = rs.getString("JOB_NAME");
+				String jobGroup = rs.getString("JOB_GROUP");
+				byte[] jobData = rs.getBytes("JOB_DATA");
 
-				jobDataBytes = convertMessageToJSON(jobDataBytes);
+				jobData = convertMessageToJSON(jobData);
 
-				if (jobDataBytes != null) {
-					String jobName = rs.getString("JOB_NAME");
-					String groupName = rs.getString("JOB_GROUP");
-
-					Object[] entry = new Object[3];
-
-					entry[0] = jobDataBytes;
-					entry[1] = jobName;
-					entry[2] = groupName;
-
-					updateList.add(entry);
+				if (jobData == null) {
+					continue;
 				}
+
+				Object[] array = new Object[3];
+
+				array[0] = jobName;
+				array[1] = jobGroup;
+				array[2] = jobData;
+
+				arrays.add(array);
 			}
 		}
 		catch (Exception e) {
-			if (_log.isErrorEnabled()) {
-				_log.error(e, e);
-			}
+			_log.error(e, e);
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 
-		if (!updateList.isEmpty()) {
-			try {
-				con = DataAccess.getConnection();
+		if (arrays.isEmpty()) {
+			return;
+		}
 
-				ps = con.prepareStatement(
-					"update QUARTZ_JOB_DETAILS set JOB_DATA = ? "
-					+ "where JOB_NAME = ? and JOB_GROUP = ?");
+		try {
+			con = DataAccess.getConnection();
 
-				for (Object[] entry : updateList) {
-					byte[] jobDataBytes = (byte[])entry[0];
-					String jobName = (String)entry[1];
-					String groupName = (String)entry[2];
+			ps = con.prepareStatement(
+				"update QUARTZ_JOB_DETAILS set JOB_DATA = ? where JOB_NAME = " +
+					"? and JOB_GROUP = ?");
 
-					ps.setBytes(1, jobDataBytes);
-					ps.setString(2, jobName);
-					ps.setString(3, groupName);
+			for (Object[] array : arrays) {
+				String jobName = (String)array[0];
+				String jobGroup = (String)array[1];
+				byte[] jobData = (byte[])array[2];
 
-					ps.executeUpdate();
+				ps.setBytes(1, jobData);
+				ps.setString(2, jobName);
+				ps.setString(3, jobGroup);
 
-					if (_log.isInfoEnabled()) {
-						_log.info("Updated JobDetail for " + jobName + " : " +
-							groupName);
-					}
-				}
+				ps.executeUpdate();
 			}
-			catch (Exception e) {
-				if (_log.isErrorEnabled()) {
-					_log.error(e, e);
-				}
-			}
-			finally {
-				DataAccess.cleanUp(con, ps, rs);
-			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 
@@ -163,11 +157,12 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 		}
 	}
 
-	protected byte[] convertMessageToJSON(byte[] jobDataBytes)
+	protected byte[] convertMessageToJSON(byte[] jobData)
 		throws Exception {
+
 		ObjectInputStream objectInputStream =
 			new BackwardCompatibleObjectInputStream(
-				new UnsyncByteArrayInputStream(jobDataBytes));
+				new UnsyncByteArrayInputStream(jobData));
 
 		Map<Object, Object> jobDataMap =
 			(Map<Object, Object>)objectInputStream.readObject();
@@ -195,9 +190,7 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 
 		Object object = jobDataMap.get(SchedulerEngine.MESSAGE);
 
-		if ((object == null) || (object instanceof String) ||
-			!modifiedKeys) {
-
+		if ((object == null) || (object instanceof String) || !modifiedKeys) {
 			return null;
 		}
 
