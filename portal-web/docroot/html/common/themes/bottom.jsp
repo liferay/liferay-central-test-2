@@ -120,8 +120,6 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 
 <%@ include file="/html/common/themes/session_timeout.jspf" %>
 
-<%@ include file="/html/common/themes/shutdown.jspf" %>
-
 <%
 ScriptTag.flushScriptData(pageContext);
 %>

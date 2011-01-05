@@ -31,8 +31,6 @@
 
 		<!-- Portal -->
 
-		<action path="/portal/check_shutdown" type="com.liferay.portal.action.ShutdownAction" />
-
 		<action path="/portal/emoticons" forward="/portal/emoticons.jsp" />
 
 		<action path="/portal/error" forward="portal.error" />
