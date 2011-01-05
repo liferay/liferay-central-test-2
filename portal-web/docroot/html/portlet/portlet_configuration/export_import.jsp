@@ -43,7 +43,7 @@ if (layout.isTypeControlPanel()) {
 	if (scopeGroup.isLayout()) {
 		layout = LayoutLocalServiceUtil.getLayout(scopeGroup.getClassPK());
 	}
-	else {
+	else if (!scopeGroup.isCompany()) {
 		layout = LayoutLocalServiceUtil.getLayout(LayoutLocalServiceUtil.getDefaultPlid(scopeGroupId));
 	}
 
