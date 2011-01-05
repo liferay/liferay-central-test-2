@@ -17,8 +17,6 @@
 <%@ include file="/html/portlet/blogs_aggregator/init.jsp" %>
 
 <%
-String redirect = currentURL;
-
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/blogs_aggregator/view");
