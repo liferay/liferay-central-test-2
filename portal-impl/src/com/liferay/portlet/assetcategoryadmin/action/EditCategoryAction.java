@@ -89,6 +89,32 @@ public class EditCategoryAction extends PortletAction {
 				renderRequest, "portlet.asset_category_admin.edit_category"));
 	}
 
+	protected String[] getCategoryProperties(ActionRequest actionRequest) {
+		int[] categoryPropertiesIndexes = StringUtil.split(
+			ParamUtil.getString(actionRequest, "categoryPropertiesIndexes"), 0);
+
+		String[] categoryProperties =
+			new String[categoryPropertiesIndexes.length];
+
+		for (int i = 0; i < categoryPropertiesIndexes.length; i++) {
+			String categoryPropertiesIndex = categoryPropertiesIndexes[i];
+
+			String key = ParamUtil.getString(
+				actionRequest, "key" + categoryPropertiesIndex);
+
+			if (Validator.isNull(key)) {
+				continue;
+			}
+
+			String value = ParamUtil.getString(
+				actionRequest, "value" + categoryPropertiesIndex);
+
+			categoryProperties[i] = key + StringPool.COLON + value;
+		}
+
+		return categoryProperties;
+	}
+
 	protected JSONObject updateCategory(ActionRequest actionRequest)
 		throws Exception {
 
@@ -96,13 +122,12 @@ public class EditCategoryAction extends PortletAction {
 
 		long parentCategoryId = ParamUtil.getLong(
 			actionRequest, "parentCategoryId");
-		long vocabularyId = ParamUtil.getLong(actionRequest, "vocabularyId");
 		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
 			actionRequest, "title");
 		Map<Locale, String> descriptionMap =
 			LocalizationUtil.getLocalizationMap(actionRequest, "description");
-
-		String[] properties = getProperties(actionRequest);
+		long vocabularyId = ParamUtil.getLong(actionRequest, "vocabularyId");
+		String[] categoryProperties = getCategoryProperties(actionRequest);
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			AssetCategory.class.getName(), actionRequest);
@@ -115,7 +140,7 @@ public class EditCategoryAction extends PortletAction {
 
 			category = AssetCategoryServiceUtil.addCategory(
 				parentCategoryId, titleMap, descriptionMap, vocabularyId,
-				properties, serviceContext);
+				categoryProperties, serviceContext);
 		}
 		else {
 
@@ -123,7 +148,7 @@ public class EditCategoryAction extends PortletAction {
 
 			category = AssetCategoryServiceUtil.updateCategory(
 				categoryId, parentCategoryId, titleMap, descriptionMap,
-				vocabularyId, properties, serviceContext );
+				vocabularyId, categoryProperties, serviceContext);
 		}
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
@@ -131,33 +156,6 @@ public class EditCategoryAction extends PortletAction {
 		jsonObject.put("categoryId", category.getCategoryId());
 
 		return jsonObject;
-	}
-
-	public String[] getProperties(ActionRequest actionRequest) {
-		int[] propertiesIndexes = StringUtil.split(
-			ParamUtil.getString(actionRequest, "propertiesIndexes"), 0);
-
-		String[] properties = new String[propertiesIndexes.length];
-
-		int i = 0;
-
-		for (int propertiesIndex : propertiesIndexes) {
-			String key = ParamUtil.getString(
-				actionRequest, "key" + propertiesIndex);
-
-			if (Validator.isNull(key)) {
-				continue;
-			}
-
-			String value = ParamUtil.getString(
-				actionRequest, "value" + propertiesIndex);
-
-			properties[i] = key + StringPool.COLON + value;
-
-			i++;
-		}
-
-		return properties;
 	}
 
 }
