@@ -50,37 +50,6 @@
 		<copy file="${jar.file}.jar" todir="${deploy.dir}" />
 	</target>
 
-	<target name="manifest">
-		<if>
-			<not>
-				<available file="classes/META-INF/MANIFEST.MF" />
-			</not>
-			<then>
-				<script classpathref="project.classpath" language="beanshell">
-					import com.liferay.portal.kernel.util.ReleaseInfo;
-
-					project.setProperty("release.info.code.name", ReleaseInfo.getCodeName());
-					project.setProperty("release.info.build.date", String.valueOf(ReleaseInfo.getBuildDate()));
-					project.setProperty("release.info.build.number", String.valueOf(ReleaseInfo.getBuildNumber()));
-					project.setProperty("release.info.release.info", ReleaseInfo.getReleaseInfo());
-					project.setProperty("release.info.server.info", ReleaseInfo.getServerInfo());
-					project.setProperty("release.info.version", ReleaseInfo.getVersion());
-				</script>
-
-				<mkdir dir="classes/META-INF" />
-
-				<manifest file="classes/META-INF/MANIFEST.MF">
-					<attribute name="Liferay-Portal-Code-Name" value="${release.info.code.name}" />
-					<attribute name="Liferay-Portal-Build-Date" value="${release.info.build.date}" />
-					<attribute name="Liferay-Portal-Build-Number" value="${release.info.build.number}" />
-					<attribute name="Liferay-Portal-Release-Info" value="${release.info.release.info}" />
-					<attribute name="Liferay-Portal-Server-Info" value="${release.info.server.info}" />
-					<attribute name="Liferay-Portal-Version" value="${release.info.version}" />
-				</manifest>
-			</then>
-		</if>
-	</target>
-
 	<target name="jar" depends="compile">
 		<antcall target="manifest" />
 
@@ -119,5 +88,36 @@
 		>
 			<arg line="-quiet -tag generated" />
 		</javadoc>
+	</target>
+
+	<target name="manifest">
+		<if>
+			<not>
+				<available file="classes/META-INF/MANIFEST.MF" />
+			</not>
+			<then>
+				<script classpathref="project.classpath" language="beanshell">
+					import com.liferay.portal.kernel.util.ReleaseInfo;
+
+					project.setProperty("release.info.code.name", ReleaseInfo.getCodeName());
+					project.setProperty("release.info.build.date", String.valueOf(ReleaseInfo.getBuildDate()));
+					project.setProperty("release.info.build.number", String.valueOf(ReleaseInfo.getBuildNumber()));
+					project.setProperty("release.info.release.info", ReleaseInfo.getReleaseInfo());
+					project.setProperty("release.info.server.info", ReleaseInfo.getServerInfo());
+					project.setProperty("release.info.version", ReleaseInfo.getVersion());
+				</script>
+
+				<mkdir dir="classes/META-INF" />
+
+				<manifest file="classes/META-INF/MANIFEST.MF">
+					<attribute name="Liferay-Portal-Code-Name" value="${release.info.code.name}" />
+					<attribute name="Liferay-Portal-Build-Date" value="${release.info.build.date}" />
+					<attribute name="Liferay-Portal-Build-Number" value="${release.info.build.number}" />
+					<attribute name="Liferay-Portal-Release-Info" value="${release.info.release.info}" />
+					<attribute name="Liferay-Portal-Server-Info" value="${release.info.server.info}" />
+					<attribute name="Liferay-Portal-Version" value="${release.info.version}" />
+				</manifest>
+			</then>
+		</if>
 	</target>
 </project>
