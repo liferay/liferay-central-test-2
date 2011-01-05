@@ -338,7 +338,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				throw new ${noSuchEntity}Exception(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + ${entity.PKVarName});
 			}
 
-			return remove(${entity.varName});
+			return ${entity.varName}Persistence.remove(${entity.varName});
 		}
 		catch (${noSuchEntity}Exception nsee) {
 			throw nsee;
@@ -2100,7 +2100,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				</#list>
 
 				)) {
-					remove(${entity.varName});
+					${entity.varName}Persistence.remove(${entity.varName});
 				}
 			}
 		<#else>
@@ -2135,7 +2135,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 				);
 
-				remove(${entity.varName});
+				${entity.varName}Persistence.remove(${entity.varName});
 			}
 		</#if>
 	</#list>
@@ -2147,7 +2147,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	 */
 	public void removeAll() throws SystemException {
 		for (${entity.name} ${entity.varName} : findAll()) {
-			remove(${entity.varName});
+			${entity.varName}Persistence.remove(${entity.varName});
 		}
 	}
 
