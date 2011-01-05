@@ -97,7 +97,7 @@ public class EditCategoryAction extends PortletAction {
 			new String[categoryPropertiesIndexes.length];
 
 		for (int i = 0; i < categoryPropertiesIndexes.length; i++) {
-			String categoryPropertiesIndex = categoryPropertiesIndexes[i];
+			int categoryPropertiesIndex = categoryPropertiesIndexes[i];
 
 			String key = ParamUtil.getString(
 				actionRequest, "key" + categoryPropertiesIndex);
