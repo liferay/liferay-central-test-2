@@ -285,14 +285,14 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			groups.add(0, userGroup);
 		}
 
+		Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
+			argument.getCompanyId());
+
+		groups.add(0, companyGroup);
+
 		ThemeDisplay themeDisplay = argument.getThemeDisplay();
 
 		long scopeGroupId = themeDisplay.getScopeGroupId();
-
-		Group companyGroup =
-			GroupLocalServiceUtil.getCompanyGroup(argument.getCompanyId());
-
-		groups.add(0, companyGroup);
 
 		HttpServletRequest request = argument.getHttpServletRequest();
 
