@@ -992,6 +992,7 @@ ${exception.message}
 					basedir="classes"
 					excludes="log4j.properties,logging.properties,portal-*.properties,system-*.properties,**/samplesqlbuilder/dependencies/*.txt"
 					jarfile="${jar.file}.jar"
+					manifest="classes/META-INF/MANIFEST.MF"
 				/>
 			</then>
 		</if>
