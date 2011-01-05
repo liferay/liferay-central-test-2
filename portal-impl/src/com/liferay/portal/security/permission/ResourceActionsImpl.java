@@ -179,17 +179,13 @@ public class ResourceActionsImpl implements ResourceActions {
 	public List<String> getActionsNames(
 		PageContext pageContext, List<String> actions) {
 
-		List<String> uniqueList = new UniqueList<String>();
+		List<String> actionNames = new UniqueList<String>();
 
 		for (String action : actions) {
-			uniqueList.add(getAction(pageContext, action));
+			actionNames.add(getAction(pageContext, action));
 		}
 
-		List<String> list = new ArrayList<String>();
-
-		list.addAll(uniqueList);
-
-		return list;
+		return actionNames;
 	}
 
 	public List<String> getActionsNames(

@@ -75,6 +75,20 @@ public class UniqueList<E> extends ArrayList<E> {
 	}
 
 	public E set(int index, E e) {
+		Thread currentThread = Thread.currentThread();
+
+		StackTraceElement[] stackTraceElements = currentThread.getStackTrace();
+
+		if (stackTraceElements.length >= 4) {
+			StackTraceElement stackTraceElement = stackTraceElements[3];
+
+			String stackTraceElementString = stackTraceElement.toString();
+
+			if (stackTraceElementString.contains(_STACK_TRACE_COLLECTIONS)) {
+				return super.set(index, e);
+			}
+		}
+
 		if (!contains(e)) {
 			return super.set(index, e);
 		}
@@ -82,5 +96,8 @@ public class UniqueList<E> extends ArrayList<E> {
 			return e;
 		}
 	}
+
+	private static final String _STACK_TRACE_COLLECTIONS =
+		"java.util.Collections.sort(Collections.java";
 
 }
