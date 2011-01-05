@@ -436,7 +436,9 @@ public class SubscriptionSender implements Serializable {
 		mailMessage.setBody(processedBody);
 	}
 
-	protected String replaceContent(String content, Locale locale) {
+	protected String replaceContent(String content, Locale locale)
+		throws Exception {
+
 		for (Map.Entry<String, Object> entry : _context.entrySet()) {
 			String key = entry.getKey();
 			Object value = entry.getValue();
