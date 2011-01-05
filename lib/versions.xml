@@ -867,6 +867,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/abdera.jar</file-name>
+		<version>0.4.0</version>
+		<project-name>Abdera</project-name>
+		<project-url>http://abdera.apache.org</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/ant.jar</file-name>
 		<version>1.8.0</version>
 		<project-name>Ant</project-name>
@@ -880,17 +891,6 @@
 				<bundled-project-name>&lt;sync&gt; task</bundled-project-name>
 				<license-name>Apache License 2.0</license-name>
 				<copyright-notice>Copyright (c) 2002, Landmark Graphics Corp</copyright-notice>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>portal/abdera.jar</file-name>
-		<version>0.4.0</version>
-		<project-name>Abdera</project-name>
-		<project-url>http://abdera.apache.org</project-url>
-		<licenses>
-			<license>
-				<license-name>Apache License 2.0</license-name>
 			</license>
 		</licenses>
 	</library>
