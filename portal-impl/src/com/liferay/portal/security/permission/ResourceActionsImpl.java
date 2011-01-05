@@ -327,50 +327,51 @@ public class ResourceActionsImpl implements ResourceActions {
 
 		List<String> actions = getActions(_portletResourceActions, name);
 
-		if (actions.size() == 0) {
-			synchronized (this) {
-				actions = getPortletMimeTypeActions(name);
+		if (!actions.isEmpty()) {
+			return actions;
+		}
 
-				if (!name.equals(PortletKeys.PORTAL)) {
-					checkPortletActions(actions);
-				}
+		synchronized (this) {
+			actions = getPortletMimeTypeActions(name);
 
-				List<String> communityDefaultActions =
-					_portletResourceCommunityDefaultActions.get(name);
+			if (!name.equals(PortletKeys.PORTAL)) {
+				checkPortletActions(actions);
+			}
 
-				if (communityDefaultActions == null) {
-					communityDefaultActions = new UniqueList<String>();
+			List<String> communityDefaultActions =
+				_portletResourceCommunityDefaultActions.get(name);
 
-					_portletResourceCommunityDefaultActions.put(
-						name, communityDefaultActions);
+			if (communityDefaultActions == null) {
+				communityDefaultActions = new UniqueList<String>();
 
-					checkPortletCommunityDefaultActions(
-						communityDefaultActions);
-				}
+				_portletResourceCommunityDefaultActions.put(
+					name, communityDefaultActions);
 
-				List<String> guestDefaultActions =
-					_portletResourceGuestDefaultActions.get(name);
+				checkPortletCommunityDefaultActions(communityDefaultActions);
+			}
 
-				if (guestDefaultActions == null) {
-					guestDefaultActions = new UniqueList<String>();
+			List<String> guestDefaultActions =
+				_portletResourceGuestDefaultActions.get(name);
 
-					_portletResourceGuestDefaultActions.put(
-						name, guestDefaultActions);
+			if (guestDefaultActions == null) {
+				guestDefaultActions = new UniqueList<String>();
 
-					checkPortletGuestDefaultActions(guestDefaultActions);
-				}
+				_portletResourceGuestDefaultActions.put(
+					name, guestDefaultActions);
 
-				List<String> layoutManagerActions =
-					_portletResourceLayoutManagerActions.get(name);
+				checkPortletGuestDefaultActions(guestDefaultActions);
+			}
 
-				if (layoutManagerActions == null) {
-					layoutManagerActions = new UniqueList<String>();
+			List<String> layoutManagerActions =
+				_portletResourceLayoutManagerActions.get(name);
 
-					_portletResourceLayoutManagerActions.put(
-						name, layoutManagerActions);
+			if (layoutManagerActions == null) {
+				layoutManagerActions = new UniqueList<String>();
 
-					checkPortletLayoutManagerActions(layoutManagerActions);
-				}
+				_portletResourceLayoutManagerActions.put(
+					name, layoutManagerActions);
+
+				checkPortletLayoutManagerActions(layoutManagerActions);
 			}
 		}
 
@@ -414,7 +415,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		// configuration file and should therefore be handled as if it has
 		// defaults of CONFIGURATION, PREFERENCES, and VIEW.
 
-		if (actions.size() < 1) {
+		if (actions.isEmpty()) {
 			actions.add(ActionKeys.CONFIGURATION);
 			actions.add(ActionKeys.PREFERENCES);
 			actions.add(ActionKeys.VIEW);
@@ -662,13 +663,13 @@ public class ResourceActionsImpl implements ResourceActions {
 	}
 
 	protected void checkPortletCommunityDefaultActions(List<String> actions) {
-		if (actions.size() == 0) {
+		if (actions.isEmpty()) {
 			actions.add(ActionKeys.VIEW);
 		}
 	}
 
 	protected void checkPortletGuestDefaultActions(List<String> actions) {
-		if (actions.size() == 0) {
+		if (actions.isEmpty()) {
 			actions.add(ActionKeys.VIEW);
 		}
 	}
