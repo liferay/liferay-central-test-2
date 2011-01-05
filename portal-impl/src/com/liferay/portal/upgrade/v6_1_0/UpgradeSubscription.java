@@ -69,12 +69,12 @@ public class UpgradeSubscription extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
-
 		if (!PropsValues.DISCUSSION_SUBSCRIBE_BY_DEFAULT) {
 			return;
 		}
-		
+
+		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
+
 		for (long companyId : companyIds) {
 			updateMBMessages(companyId);
 		}
