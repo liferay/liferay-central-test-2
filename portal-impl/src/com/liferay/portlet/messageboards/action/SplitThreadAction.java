@@ -125,18 +125,19 @@ public class SplitThreadAction extends PortletAction {
 
 		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
+		String splitThreadSubject = ParamUtil.getString(
+			actionRequest, "splitThreadSubject");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			MBThread.class.getName(), actionRequest);
+
 		MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
 
 		long oldThreadId = message.getThreadId();
 		long oldParentMessageId = message.getParentMessageId();
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			MBThread.class.getName(), actionRequest);
-
-		String newSubject = ParamUtil.getString(actionRequest, "newSubject");
-
 		MBThread newThread = MBThreadServiceUtil.splitThread(
-			messageId, newSubject, serviceContext);
+			messageId, splitThreadSubject, serviceContext);
 
 		boolean addExplanationPost = ParamUtil.getBoolean(
 			actionRequest, "addExplanationPost");

@@ -453,8 +453,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		return thread;
 	}
 
-	public MBThread splitThread(long messageId, String newSubject,
-			ServiceContext serviceContext)
+	public MBThread splitThread(
+			long messageId, String subject, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
@@ -487,7 +487,13 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			mbMessageFlagPersistence.update(messageFlag, false);
 		}
 
-		if (Validator.isNotNull(newSubject)) {
+		// Create new thread
+
+		MBThread thread = addThread(message.getCategoryId(), message);
+
+		// Update messages
+
+		if (Validator.isNotNull(subject)) {
 			MBMessageDisplay messageDisplay =
 				mbMessageService.getMessageDisplay(
 					messageId, WorkflowConstants.STATUS_ANY,
@@ -495,24 +501,23 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 			MBTreeWalker treeWalker = messageDisplay.getTreeWalker();
 
-			List messages = treeWalker.getMessages();
+			List<MBMessage> messages = treeWalker.getMessages();
 
 			int[] range = treeWalker.getChildrenRange(message);
 
 			for (int i = range[0]; i < range[1]; i++) {
-				MBMessage curMessage = (MBMessage)messages.get(i);
+				MBMessage curMessage = messages.get(i);
 
-				String curSubject = null;
+				String oldSubject = message.getSubject();
+				String curSubject = curMessage.getSubject();
 
-				if (message.getSubject().startsWith("RE: ")) {
+				if (oldSubject.startsWith("RE: ")) {
 					curSubject = StringUtil.replace(
-						curMessage.getSubject(), rootMessage.getSubject(),
-						newSubject);
+						curSubject, rootMessage.getSubject(), subject);
 				}
 				else {
 					curSubject = StringUtil.replace(
-						curMessage.getSubject(), message.getSubject(),
-						newSubject);
+						curSubject, oldSubject, subject);
 				}
 
 				curMessage.setSubject(curSubject);
@@ -520,14 +525,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 				mbMessagePersistence.update(curMessage, false);
 			}
 
-			message.setSubject(newSubject);
+			message.setSubject(subject);
 		}
-
-		// Create new thread
-
-		MBThread thread = addThread(message.getCategoryId(), message);
-
-		// Update message
 
 		message.setThreadId(thread.getThreadId());
 		message.setRootMessageId(thread.getRootMessageId());

@@ -115,11 +115,11 @@ public class MBThreadServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread splitThread(
-		long messageId, java.lang.String newSubject,
+		long messageId, java.lang.String subject,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().splitThread(messageId, newSubject, serviceContext);
+		return getService().splitThread(messageId, subject, serviceContext);
 	}
 
 	public static void unlockThread(long threadId)
