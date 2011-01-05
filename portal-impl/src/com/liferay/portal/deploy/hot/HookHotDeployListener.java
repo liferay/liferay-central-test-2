@@ -286,7 +286,7 @@ public class HookHotDeployListener
 			}
 		}
 
-		if (customJspGlobal) {
+		if (!customJspGlobal) {
 			CustomJspRegistryUtil.unregisterServletContextName(
 				servletContextName);
 		}
@@ -1025,7 +1025,7 @@ public class HookHotDeployListener
 			FileUtil.copyFile(customJsp, portalWebDir + portalJsp);
 		}
 
-		if (customJspGlobal) {
+		if (!customJspGlobal) {
 			CustomJspRegistryUtil.registerServletContextName(
 				servletContextName);
 		}

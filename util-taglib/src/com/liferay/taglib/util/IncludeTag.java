@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.servlet.TrackedServletRequest;
 import com.liferay.portal.kernel.servlet.taglib.CustomAttributes;
 import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -265,7 +266,7 @@ public class IncludeTag
 		String customPage = CustomJspRegistryUtil.getCustomJspFileName(
 			customJspServletContextName, page);
 
-		if (FileAvailabilityUtil.isAvailable(getServletContext(), customPage)) {
+		if (FileUtil.exists(PortalUtil.getPortalWebDir() + customPage)) {
 			return customPage;
 		}
 
