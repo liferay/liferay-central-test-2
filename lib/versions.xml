@@ -13,6 +13,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/ant-apache-bsf.jar</file-name>
+		<version>1.8.2</version>
+		<project-name>Ant</project-name>
+		<project-url>http://ant.apache.org</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>development/ant-contrib.jar</file-name>
 		<version>1.0 B3</version>
 		<project-name>Ant-Contrib Tasks</project-name>
@@ -879,18 +890,12 @@
 	</library>
 	<library>
 		<file-name>portal/ant.jar</file-name>
-		<version>1.8.0</version>
+		<version>1.8.2</version>
 		<project-name>Ant</project-name>
 		<project-url>http://ant.apache.org</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 1999-2006 The Apache Software Foundation</copyright-notice>
-			</license>
-			<license>
-				<bundled-project-name>&lt;sync&gt; task</bundled-project-name>
-				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2002, Landmark Graphics Corp</copyright-notice>
 			</license>
 		</licenses>
 	</library>
